@@ -14,12 +14,14 @@ def remove_emptycells(tagvalues):
         last_empty=last_empty-1
    return (tagvalues[1:last_empty])
 
-tagslist=["Fiscal Period Ending","Levered Free Cash Flow"]
+tagslist=["Period Ending","Levered Free Cash Flow"]
 
 csvfilepath=sys.argv[1]
 outfilepath=sys.argv[2]
 
 stripfunc = operator.methodcaller('strip')
+
+datadict=dict()
 
 
 with open(csvfilepath,'r') as csvfile:
@@ -32,11 +34,12 @@ with open(csvfilepath,'r') as csvfile:
                       tagname = line[0].strip()
                       tagvalues = map(replacefunc,map(stripfunc,map(str,line[1:len(line)])))
                       tagvalues=remove_emptycells(tagvalues);
-
+                      datadict[tagname]=tagvalues
 
 with open(outfilepath,'w') as csvout:
-                           cw = csv.writer(csvout,delimiter=',',quotechar='\'',quoting=csv.QUOTE_MINIMAL)
-                           outr=list()
-                           outr.append(tagname);
-                           outr=outr+tagvalues
-                           cw.writerow(outr)
+     cw = csv.writer(csvout,delimiter=',')
+     for key in datadict.keys():
+        outr=list()
+        outr.append(tagname);
+        outr=outr+datadict[key]
+        cw.writerow(outr)
