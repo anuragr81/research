@@ -21,11 +21,20 @@ class Field:
 
 def getFieldsDict():
    bsfieldsdict=dict();
+
    f=Field(name="Total Shares Out. on Balance Sheet Date",typename=int,alias='shares')
    bsfieldsdict[f.alias]=f;
    f=Field(name="Balance Sheet as of:",typename=str,alias='date')
    bsfieldsdict[f.alias]=f;
-   fieldsdict={'bs':bsfieldsdict}
+
+   icfieldsdict=dict();
+   f=Field(name="For the Fiscal Period Ending",typename=int,alias='date')
+   icfieldsdict[f.alias]=f;
+   f=Field(name="Earnings from Cont. Ops",typename=float,alias='ebit')
+   icfieldsdict[f.alias]=f;
+
+   fieldsdict={'bs':bsfieldsdict,'ic':icfieldsdict}
+
    return fieldsdict
 
 def createTSDict(keylist,listvallist):
@@ -44,15 +53,14 @@ def createTSDict(keylist,listvallist):
         count=count+1
    return tsdict
 
-def getBSTimeSeries(bfile,bsfieldsdict,tsfield):
-    #print bfile
-    with open(bfile,'r') as csvfile:
+def getTimeSeries(filename,spfieldsdict,tsfield):
+    with open(filename,'r') as csvfile:
        r  = csv.reader(csvfile)
        keylist=list()
        listvallist=list()
        for line in r:
-          for fieldkey in bsfieldsdict.keys():
-              bsfield = bsfieldsdict[fieldkey]
+          for fieldkey in spfieldsdict.keys():
+              bsfield = spfieldsdict[fieldkey]
               if line[0].strip() == bsfield.name : 
                   if bsfield.alias ==tsfield:
                     if len(keylist)>0:
@@ -84,7 +92,8 @@ fieldsdict=getFieldsDict()
 
 for root in dfiles:
     bfile=dfiles[root]['bs']
-    print getBSTimeSeries(bfile=bfile,bsfieldsdict=fieldsdict['bs'],tsfield='date')
-    sys.exit(1)
-
+    bstsdict = getTimeSeries(filename=bfile,spfieldsdict=fieldsdict['bs'],tsfield='date')
+    ifile=dfiles[root]['ic']
+    ictsdict = getTimeSeries(filename=ifile,spfieldsdict=fieldsdict['ic'],tsfield='date')
+    print ictsdict
 
