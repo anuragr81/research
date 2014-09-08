@@ -1,4 +1,3 @@
-
 import csv
 import os,re,sys,datetime
 
@@ -10,6 +9,9 @@ class NonUniqueTimeFieldException(Exception):
 class InvalidRowDataException(Exception):
   pass
 
+datePrint         = lambda x : x.strftime("%Y-%m-%d")
+
+displayTimeSeries = lambda x : str([map(datePrint,sorted(x.keys())),map(x.get,sorted(x))])
 
 def processDate(value):
     startDate=datetime.datetime.strptime("1900-01-01","%Y-%m-%d")
@@ -19,7 +21,7 @@ def processDate(value):
     except : 
        try: 
          dval = int(float(value));
-         return startDate+datetime.timedelta(days=dval)
+         return (startDate+datetime.timedelta(days=dval))
        except : 
          return "DATE{"+str(value)+"}"
 
@@ -28,7 +30,7 @@ def processFloat(value):
        fval=float(value)
        return fval
     except:
-       return value
+       return "FLOAT{"+str(value)+"}"
     #return "1.0"
 
 class Field: 
@@ -38,7 +40,6 @@ class Field:
     self.alias=alias
     self.processFunc=processFunc
 
-    
 
 def getFieldsDict():
    bsfieldsdict=dict();
@@ -61,7 +62,8 @@ def getFieldsDict():
 def createTSDict(keylist,listvallist):
    tsdict=dict()
    for key in keylist:
-     tsdict[key]=list()
+     if isinstance(key,datetime.datetime):
+        tsdict[key]=list()
 
    for vallist in listvallist:
      if (len(keylist)!= len(vallist)): 
@@ -70,8 +72,9 @@ def createTSDict(keylist,listvallist):
         raise InvalidRowDataException()
      count=0
      for key in keylist:
-        tsdict[key].append(vallist[count])
-        count=count+1
+        if isinstance(key,datetime.datetime):
+          tsdict[key].append(vallist[count])
+          count=count+1
    return tsdict
 
 def getTimeSeries(filename,spfieldsdict,tsfield):
@@ -114,7 +117,8 @@ fieldsdict=getFieldsDict()
 for root in dfiles:
     bfile=dfiles[root]['bs']
     bstsdict = getTimeSeries(filename=bfile,spfieldsdict=fieldsdict['bs'],tsfield='date')
-    print bstsdict
+    print "<------BS------>"+displayTimeSeries(bstsdict)+"<-----/BS----->"
     ifile=dfiles[root]['ic']
     ictsdict = getTimeSeries(filename=ifile,spfieldsdict=fieldsdict['ic'],tsfield='date')
-
+    print "<------IC------>"+displayTimeSeries(ictsdict)+"<-----/IC----->"
+    sys.exit(1)
