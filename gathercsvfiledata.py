@@ -1,8 +1,6 @@
 
 import csv
-import os
-import re
-import sys
+import os,re,sys,datetime
 
 
 class DuplicateFileException(Exception):
@@ -12,25 +10,48 @@ class NonUniqueTimeFieldException(Exception):
 class InvalidRowDataException(Exception):
   pass
 
+
+def processDate(value):
+    startDate=datetime.datetime.strptime("1900-01-01","%Y-%m-%d")
+    try : 
+       tval = datetime.datetime.strptime(value,"%b-%d-%Y")
+       return tval
+    except : 
+       try: 
+         dval = int(float(value));
+         return startDate+datetime.timedelta(days=dval)
+       except : 
+         return "DATE{"+str(value)+"}"
+
+def processFloat(value):
+    try : 
+       fval=float(value)
+       return fval
+    except:
+       return value
+    #return "1.0"
+
 class Field: 
-  def __init__(self,name,typename,alias):
+  def __init__(self,name,typename,alias,processFunc):
     self.name=name
     self.typename=typename
     self.alias=alias
+    self.processFunc=processFunc
 
+    
 
 def getFieldsDict():
    bsfieldsdict=dict();
 
-   f=Field(name="Total Shares Out. on Balance Sheet Date",typename=int,alias='shares')
+   f=Field(name="Total Shares Out. on Balance Sheet Date",typename=int,alias='shares',processFunc=processFloat)
    bsfieldsdict[f.alias]=f;
-   f=Field(name="Balance Sheet as of:",typename=str,alias='date')
+   f=Field(name="Balance Sheet as of:",typename=str,alias='date',processFunc=processDate)
    bsfieldsdict[f.alias]=f;
 
    icfieldsdict=dict();
-   f=Field(name="For the Fiscal Period Ending",typename=int,alias='date')
+   f=Field(name="For the Fiscal Period Ending",typename=int,alias='date',processFunc=processDate)
    icfieldsdict[f.alias]=f;
-   f=Field(name="Earnings from Cont. Ops",typename=float,alias='ebit')
+   f=Field(name="Earnings from Cont. Ops.",typename=float,alias='ebit',processFunc=processFloat)
    icfieldsdict[f.alias]=f;
 
    fieldsdict={'bs':bsfieldsdict,'ic':icfieldsdict}
@@ -60,15 +81,15 @@ def getTimeSeries(filename,spfieldsdict,tsfield):
        listvallist=list()
        for line in r:
           for fieldkey in spfieldsdict.keys():
-              bsfield = spfieldsdict[fieldkey]
-              if line[0].strip() == bsfield.name : 
-                  if bsfield.alias ==tsfield:
+              field = spfieldsdict[fieldkey]
+              if line[0].strip() == field.name : 
+                  if field.alias ==tsfield:
                     if len(keylist)>0:
                          raise NonUniqueTimeFieldException()
                     else:
-                         keylist=line[1:len(line)] 
+                         keylist=map(field.processFunc,line[1:len(line)])
                   else:
-                    listvallist.append(line[1:len(line)])
+                    listvallist.append(map(field.processFunc,line[1:len(line)]))
     return createTSDict(keylist,listvallist)
 
 dfdict={'bs':'_bs_filt.csv',
@@ -93,7 +114,7 @@ fieldsdict=getFieldsDict()
 for root in dfiles:
     bfile=dfiles[root]['bs']
     bstsdict = getTimeSeries(filename=bfile,spfieldsdict=fieldsdict['bs'],tsfield='date')
+    print bstsdict
     ifile=dfiles[root]['ic']
     ictsdict = getTimeSeries(filename=ifile,spfieldsdict=fieldsdict['ic'],tsfield='date')
-    print ictsdict
 
