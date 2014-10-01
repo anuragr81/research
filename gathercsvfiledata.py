@@ -1,3 +1,6 @@
+# TODO: 
+# calculate ROE and FCFF by linear-regression
+
 import csv
 import os,re,sys,datetime
 
@@ -16,15 +19,25 @@ class NonequalMergeInputsException(Exception):
 class UnknownDateFormatException(Exception):
   pass
 
-def writeCsvTimeSeries(outfilepath,datadict):
-  with open(outfilepath,'w') as csvout:
-     cw = csv.writer(csvout,delimiter=',')
-     for key in datadict.keys():
-        outr=list()
-        outr.append(key);
-        outr=outr+datadict[key]
-        cw.writerow(outr)
+class TimeSeries:
+  def __init__(self,keyname,listfieldalias,tsdict):
+         self.keyname=keyname
+         self.listfieldalias=listfieldalias
+         self.tsdict=tsdict
 
+def writeCsvTimeSeries(outfilepath,ts):
+    tsdatadict=ts.tsdict
+    with open(outfilepath,'w') as csvout:
+       cw = csv.writer(csvout,delimiter=',')
+       outr=list();
+       outr.append(ts.keyname);
+       outr=outr+ts.listfieldalias
+       cw.writerow(outr)
+       for key in sorted(tsdatadict.keys()):
+          outr=list()
+          outr.append(key);
+          outr=outr+tsdatadict[key]
+          cw.writerow(outr)
 
 datePrint         = lambda x : x.strftime("%Y-%m-%d")
 
@@ -99,7 +112,9 @@ def createTSDict(keylist,listvallist):
           count=count+1
    return tsdict
 
-def mergedTimeSeries(dicta,dictb,tol):
+def mergedTimeSeries(a,b,tol):
+    dicta=a.tsdict
+    dictb=b.tsdict
     if len(dicta.keys())!=len(dictb.keys()): 
       print "len(dicta)="+str(len(dicta))+" len(dictb)="+str(len(dictb))
       raise NonequalMergeInputsException()
@@ -118,26 +133,27 @@ def mergedTimeSeries(dicta,dictb,tol):
     keylist_b = sorted(dictb.keys())
 
     for key_a in keylist_a: 
- 
-        #print str(count)+":"+str(keylist_a [count])
-        #print str(count)+":"+str(keylist_b [count])
         key_b = keylist_b [ count ] 
 
         if ( ( key_b -key_a ) < tol  ) or ( ( key_a - key_b ) < tol  ) :
            mergeddict[key_a]=list()
-           mergeddict[key_a].append(dicta[key_a])
-           mergeddict[key_a].append(dictb[key_b])
+           mergeddict[key_a]=mergeddict[key_a]+(dicta[key_a])
+           mergeddict[key_a]=mergeddict[key_a]+(dictb[key_b])
         else: 
            raise NarrowMergeWindowException()
 
         count=count+1
-    return mergeddict;
+    listfieldalias=a.listfieldalias+b.listfieldalias
+    return TimeSeries(keyname=a.keyname,
+                      listfieldalias=listfieldalias,
+                      tsdict=mergeddict);
 
 def getTimeSeries(filename,spfieldsdict,tsfield):
     with open(filename,'r') as csvfile:
        r  = csv.reader(csvfile)
        keylist=list()
        listvallist=list()
+       listfieldalias=list()
        for line in r:
           for fieldkey in spfieldsdict.keys():
               field = spfieldsdict[fieldkey]
@@ -147,9 +163,13 @@ def getTimeSeries(filename,spfieldsdict,tsfield):
                          raise NonUniqueTimeFieldException()
                     else:
                          keylist=map(field.processFunc,line[1:len(line)])
+                         keyname=field.alias
                   else:
+                    listfieldalias.append(field.alias)
                     listvallist.append(map(field.processFunc,line[1:len(line)]))
-    return createTSDict(keylist,listvallist)
+    ts=TimeSeries(  keyname=keyname,listfieldalias=listfieldalias,tsdict=createTSDict(keylist,listvallist) )
+
+    return ts
 
 dfdict={'bs':'_bs_filt.csv',
         'ic':'_out_inc.csv'}
@@ -173,11 +193,12 @@ fieldsdict=getFieldsDict()
 for root in dfiles:
     bfile=dfiles[root]['bs']
     print "processing file:"+bfile
-    bstsdict = getTimeSeries(filename=bfile,spfieldsdict=fieldsdict['bs'],tsfield='date')
-    print "<------BS------>"+displayTimeSeries(bstsdict)+"<-----/BS----->"
+    bs= getTimeSeries(filename=bfile,spfieldsdict=fieldsdict['bs'],tsfield='date')
+    print "<------BS------>"+displayTimeSeries(bs.tsdict)+"<-----/BS----->"
 
     ifile=dfiles[root]['ic']
-    ictsdict = getTimeSeries(filename=ifile,spfieldsdict=fieldsdict['ic'],tsfield='date')
-    print "<------IC------>"+displayTimeSeries(ictsdict)+"<-----/IC----->"
-    print(mergedTimeSeries(bstsdict,ictsdict,datetime.timedelta(days=10)))
+    ic= getTimeSeries(filename=ifile,spfieldsdict=fieldsdict['ic'],tsfield='date')
+    print "<------IC------>"+displayTimeSeries(ic.tsdict)+"<-----/IC----->"
+    mts=mergedTimeSeries(bs,ic,datetime.timedelta(days=10))
+    writeCsvTimeSeries(outfilepath=root+".output.csv",ts=mts)
     sys.exit(1)
