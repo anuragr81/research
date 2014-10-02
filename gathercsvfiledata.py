@@ -1,5 +1,5 @@
 # TODO: 
-# calculate ROE and FCFF by linear-regression
+# Get Levered FCFF, long term debt
 
 import csv
 import os,re,sys,datetime
@@ -66,7 +66,10 @@ def processFloat(value):
        fval=float(value)
        return fval
     except:
-       return "FLOAT{"+str(value)+"}"
+       if str(value).strip() == "-":
+          return 0;
+       else:
+          return "FLOAT{"+str(value)+"}"
 
 class Field: 
   def __init__(self,name,typename,alias,processFunc):
@@ -83,6 +86,9 @@ def getFieldsDict():
    bsfieldsdict[f.alias]=f;
    f=Field(name="Balance Sheet as of:",typename=str,alias='date',processFunc=processDate)
    bsfieldsdict[f.alias]=f;
+   f=Field(name="Long-Term Debt",typename=str,alias='ltdebt',processFunc=processFloat)
+   bsfieldsdict[f.alias]=f;
+
 
    icfieldsdict=dict();
    f=Field(name="For the Fiscal Period Ending",typename=int,alias='date',processFunc=processDate)
@@ -201,4 +207,5 @@ for root in dfiles:
     print "<------IC------>"+displayTimeSeries(ic.tsdict)+"<-----/IC----->"
     mts=mergedTimeSeries(bs,ic,datetime.timedelta(days=10))
     writeCsvTimeSeries(outfilepath=root+".output.csv",ts=mts)
+
     sys.exit(1)
