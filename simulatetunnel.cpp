@@ -99,7 +99,8 @@ void printHeader (std::ostream & os){
 
 void calculate(float m,float v,float h, float L,float e){
     float alpha=m;
-    Path p(v,alpha,h,e);
+    Path p;
+    p.reset(v,alpha,h,e);
     printHeader(cout);
     float totalTime= L/v*cos(alpha);
     while (p.curTime() < totalTime ){
