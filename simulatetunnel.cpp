@@ -2,6 +2,8 @@
 #include <math.h>
 #include "SimpleRNG.h"
 
+const float tol = 1e-6;
+
 float abs(float x){
 
     if (x>=0) {
@@ -19,36 +21,50 @@ using namespace std;
 class Path{
 
     public:
-        Path() :m_numBounces(0),m_factor(1),m_time(0) {
+        Path(float v, float h,float L) :m_v(v),
+        m_h(h),
+        m_L(L),
+        m_numBounces(0),
+        m_factor(1),
+        m_time(0), 
+        m_alpha(0),
+        m_t0(0),
+        m_e(0),
+        m_bounceUnit(0) {
         }
 
-//MODIFIERS:
-        bool reset (float v, float alpha, float h ,float e){
-            m_v=v;
-            m_numBounces=0;
+        //MODIFIERS:
+        bool reset (float alpha, float e){
             m_alpha=alpha;
-            m_h=h;
             m_e=e;
-            m_factor=1;
             m_time=0;
-            if (abs(m_alpha) <1e-6) { 
-                m_alpha=1e-6; // avoids divide by zero
+            m_factor=1;
+            m_numBounces=0;
+            if (abs(m_alpha) <tol) { 
+                m_alpha=tol; // avoids divide by zero
             }
-            if (abs(m_e+1) < 1e-6) {
-                m_e=(1e-6) -1; // avoids divide by zero
+            if (abs(m_e+1) < tol) {
+                m_e=(tol) -1; // avoids divide by zero
             }
             m_t0=m_h/(m_v*sin(m_alpha));
+            m_bounceUnit=1;
         }
 
 
-        void bounce() {
+        void bounce() { // doesn't change the object-state if called before reset
             float curBounceTime = m_t0/m_factor;
             m_time += curBounceTime;
             m_factor *= (1-m_e/(1+m_e));
-            m_numBounces++;
+            m_numBounces+= m_bounceUnit;
         }
 
-//READERS:
+        //READERS:
+        float length() const { 
+           return m_L;
+        }
+        float velocity() const { 
+           return m_v;
+        }
 
         float curTime() const {
             return m_time;
@@ -58,7 +74,7 @@ class Path{
             return m_numBounces;
         }
 
-// utility functions not to be used in the critical path
+        // utility functions not to be used in the critical path
 
         float x() const { 
             return v_x()*curTime();
@@ -90,11 +106,11 @@ class Path{
         }
 
     private:
-// Attributes
-        float m_v, m_alpha,m_h,m_e;
-// Bounce-Tracking attributes
+        // Attributes
+        float m_v, m_alpha,m_h,m_L,m_e;
+        // Bounce-Tracking attributes
         float m_time,m_factor,m_t0;
-        int m_numBounces;
+        int m_numBounces,m_bounceUnit;
 };
 
 void operator << ( std::ostream & os , Path const & p)  {
@@ -106,36 +122,53 @@ void printHeader (std::ostream & os){
     os << "curTime,x,y,v_x,v_y,v"<<endl;
 }
 
-void calculate(float m,float v,float h, float L,float e){
-    float alpha=m;
-    Path p;
-    p.reset(v,alpha,h,e);
-    printHeader(cout);
-    float totalTime= L/(v*cos(alpha));
-    //cout << "cos(alpha)=" << cos(alpha) << " totaltime= " << totalTime << endl;
-    while (p.curTime() < totalTime ){
-        cout << p;
-        p.bounce();
-    }
-    cout << p;
-    cout << " num-bounces = " << p.numBounces() << endl;
-}
+class PathSim {
+
+
+    public:
+        PathSim(float v,float h, float L) : m_Path(v,h,L) {
+        }
+
+        void bounceUntilExit(float alpha,float e) {
+            m_Path.reset(alpha,e);
+            printHeader(cout);
+            float totalTime= m_Path.length()/(m_Path.velocity()*cos(alpha));
+            //cout << "cos(alpha)=" << cos(alpha) << " totaltime= " << totalTime << endl;
+
+            // we don't care about exact position of cannon-ball as we want to know
+            // the number of bounces
+
+            while (m_Path.curTime() < totalTime ){
+                cout << m_Path;
+                m_Path.bounce();
+            }
+            cout << m_Path;
+            cout << " num-bounces = " << m_Path.numBounces() -1 << endl;
+        }
+
+    private:
+        PathSim(const PathSim & );
+        void operator = (PathSim &);
+        Path m_Path;
+        float m_L;
+};
 
 int main(){
-/*
-    SimpleRNG r;
-    cout << "values" << endl;
-    for (int i = 0 ; i < 1e+6; ++i) {
+    /*
+       SimpleRNG r;
+       cout << "values" << endl;
+       for (int i = 0 ; i < 1e+6; ++i) {
        cout << r.GetExponential(1) << endl;
-    }
-*/
+       }
+     */
 
-    float m=3.14159/4;
+    float alpha=3.14159/4;
     float v=2;
     float h=4;
     float L=10;
     float e=0;
-    calculate(m,v,h,L,e);;
+    PathSim psim(v,h,L);
+    psim.bounceUntilExit(alpha,e);;
     return 0;
 }
 
