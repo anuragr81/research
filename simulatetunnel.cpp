@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include "SimpleRNG.h"
 
 float abs(float x){
 
@@ -21,6 +22,7 @@ class Path{
         Path() :m_numBounces(0),m_factor(1),m_time(0) {
         }
 
+//MODIFIERS:
         bool reset (float v, float alpha, float h ,float e){
             m_v=v;
             m_numBounces=0;
@@ -38,9 +40,6 @@ class Path{
             m_t0=m_h/(m_v*sin(m_alpha));
         }
 
-        float curTime() const {
-            return m_time;
-        }
 
         void bounce() {
             float curBounceTime = m_t0/m_factor;
@@ -49,7 +48,17 @@ class Path{
             m_numBounces++;
         }
 
-        // utility functions not to be used in the critical path
+//READERS:
+
+        float curTime() const {
+            return m_time;
+        }
+
+        int numBounces() const { 
+            return m_numBounces;
+        }
+
+// utility functions not to be used in the critical path
 
         float x() const { 
             return v_x()*curTime();
@@ -69,7 +78,6 @@ class Path{
         }
 
         float v_y() const { 
-            // int direction=(1-2*(m_numBounces%2)) ;// v_y positive after even number of bounces
             float v_y =m_v*sin(m_alpha);
             for (unsigned int i = 1 ; i <= m_numBounces;++i){
                 v_y*=-(1-(m_e/(1+m_e)));
@@ -82,12 +90,13 @@ class Path{
         }
 
     private:
+// Attributes
         float m_v, m_alpha,m_h,m_e;
+// Bounce-Tracking attributes
         float m_time,m_factor,m_t0;
         int m_numBounces;
 };
 
-//std::ostream & operator << ( std::ostream & os , Path const & obj ) 
 void operator << ( std::ostream & os , Path const & p)  {
     cout << p.curTime() << "," << p.x()   << "," << p.y() << ","
         << p.v_x()     << ", "<< p.v_y() << "," << p.v() << endl;
@@ -102,20 +111,30 @@ void calculate(float m,float v,float h, float L,float e){
     Path p;
     p.reset(v,alpha,h,e);
     printHeader(cout);
-    float totalTime= L/v*cos(alpha);
+    float totalTime= L/(v*cos(alpha));
+    //cout << "cos(alpha)=" << cos(alpha) << " totaltime= " << totalTime << endl;
     while (p.curTime() < totalTime ){
         cout << p;
         p.bounce();
     }
     cout << p;
+    cout << " num-bounces = " << p.numBounces() << endl;
 }
 
 int main(){
-    float m=1;
+/*
+    SimpleRNG r;
+    cout << "values" << endl;
+    for (int i = 0 ; i < 1e+6; ++i) {
+       cout << r.GetExponential(1) << endl;
+    }
+*/
+
+    float m=3.14159/4;
     float v=2;
-    float h=5;
-    float L=100;
-    float e=1;
+    float h=4;
+    float L=10;
+    float e=0;
     calculate(m,v,h,L,e);;
     return 0;
 }
