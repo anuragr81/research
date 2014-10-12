@@ -68,11 +68,11 @@
 \begin_body
 
 \begin_layout Section
-Tunnel 
+Simulating Bounces in a Tunnel
 \end_layout
 
 \begin_layout Subsection
-Random Generation
+Random Number Generator
 \end_layout
 
 \begin_layout Standard
@@ -84,11 +84,8 @@ For exponetially distributed
 \begin_inset Formula $F_{\eta}(x)=P(\eta\le x)=1-e^{-\lambda x}=1-e^{-\frac{{x}}{\bar{\eta}}}$
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Standard
-Using inverse-transform, 
+ .
+ Using inverse-transform, 
 \begin_inset Formula $f(x)=-\bar{\eta}\cdot ln(1-x)$
 \end_inset
 
@@ -96,7 +93,7 @@ Using inverse-transform,
 \begin_inset Formula $x\in U[0,1]$
 \end_inset
 
- would give us exponentially distributed 
+ gives exponentially distributed 
 \begin_inset Formula $\eta$
 \end_inset
 
@@ -118,7 +115,7 @@ The horizontal velocity
 \begin_inset Formula $vcos\alpha$
 \end_inset
 
-faces no decay so the time of exit must be 
+faces no decay so the time of exit must be exactly 
 \begin_inset Formula $t_{exit}=\frac{{L}}{vcos\alpha}$
 \end_inset
 
@@ -127,7 +124,12 @@ faces no decay so the time of exit must be
 \begin_inset Formula $\alpha$
 \end_inset
 
-.
+ and a one-dimensional integration (sampling) suffices the evaluation of
+ 
+\begin_inset Formula $E(t_{exit}).$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -135,14 +137,9 @@ Average Number of Bounces
 \end_layout
 
 \begin_layout Standard
-One could directly calculate the number of bounces until time 
-\begin_inset Formula $t_{exit}$
-\end_inset
-
-but as per the problem specification, a simulation of bounces was performed
- until the time the ball exits the tunnel.
- Time is incremented in units of bounces-times (i.e.
- time until ball covers the distance 
+A simulation of bounces is performed until the time the ball exits the tunnel.
+ Time is incremented in units of bounce-times (i.e.
+ time spent until ball covers the distance 
 \begin_inset Formula $h$
 \end_inset
 
@@ -151,7 +148,7 @@ but as per the problem specification, a simulation of bounces was performed
 \begin_inset Formula $i$
 \end_inset
 
- would be 
+ would thus be 
 \begin_inset Formula $\frac{{h}}{vsin\alpha}(1+(1+\eta_{1})+(1+\eta_{1})(1+\eta_{2})+...)$
 \end_inset
 
@@ -186,6 +183,18 @@ at every bounce.
 \begin_inset Formula $t_{exit}=\frac{{L}}{vcos\alpha}$
 \end_inset
 
+ to calculate 
+\begin_inset Formula $E(N)$
+\end_inset
+
+ across 
+\begin_inset Formula $\eta_{i}$
+\end_inset
+
+-space for every sampled
+\begin_inset Formula $\alpha\in[0,\frac{{\pi}}{4}]$
+\end_inset
+
 .
 \end_layout
 
@@ -211,10 +220,11 @@ and
 \end_inset
 
 .
+ No result-vectors are stored for optimization purposes.
 \end_layout
 
 \begin_layout Subsection
-Theoretical Values
+Theoretical Estimates
 \end_layout
 
 \begin_layout Subsubsection
@@ -247,10 +257,10 @@ where
 
 .
  Thus, 
-\begin_inset Formula $E(t_{exit})=\int_{0}^{\pi/4}\frac{{4L}}{\pi cos\alpha}d\alpha$
+\begin_inset Formula $E(t_{exit})=\int_{0}^{\pi/4}\frac{{4L}}{\pi cos\alpha}d\alpha\sim112.22$
 \end_inset
 
-.
+ (used for verification).
 \end_layout
 
 \begin_layout Subsubsection
@@ -272,7 +282,7 @@ The number of bounces
 
 .
  In other words, 
-\begin_inset Formula $N=inf\{i\in\mathbb{N}:\frac{{h}}{sin\alpha}\frac{{h}}{sin\alpha}(1+(1+\eta_{1})+(1+\eta_{1})(1+\eta_{2})+...+(1+\eta_{1})(1+\eta_{2})...(1+\eta_{i})>\frac{{L}}{cos\alpha}\}$
+\begin_inset Formula $N=inf\{i\in\mathbb{N}:\frac{{h}}{sin\alpha}(1+(1+\eta_{1})+(1+\eta_{1})(1+\eta_{2})+...+(1+\eta_{1})(1+\eta_{2})...(1+\eta_{i})>\frac{{L}}{cos\alpha}\}$
 \end_inset
 
 
@@ -295,7 +305,7 @@ N=inf\{i\in\mathbb{N}:S_{i}\ge\frac{{Ltan\alpha}}{h}\}
 \end_layout
 
 \begin_layout Standard
-We can formulate 
+Alternately, we can formulate 
 \begin_inset Formula $N$
 \end_inset
 
@@ -383,8 +393,7 @@ where,
 \end_layout
 
 \begin_layout Standard
-This is hardly a Markov-chain.
- Both 
+This is not a Markov-chain since 
 \begin_inset Formula $S_{i}$
 \end_inset
 
@@ -398,26 +407,43 @@ and
 \begin_inset Formula $n$
 \end_inset
 
-, the probability of whether the next bounce would occur or not depends
- on previous states (not just the current one).
+, the probability of whether the next bounce would occur in the tunnel or
+ not depends on previous states (not just the current number of bounces).
 \end_layout
 
 \begin_layout Standard
-However, we are sure that the vertical velocity only decreases in magnitude
- so the number of bounces is always bounded by the case when 
+Howevers, since we are sure that the vertical velocity only decreases in
+ magnitude, we can be assured that the number of bounces is always bounded
+ by the case when 
 \begin_inset Formula $\eta_{i}=0\forall i\in\mathbb{N}.$
 \end_inset
 
- It also turns out that
+ 
 \begin_inset Formula $S_{i}$
 \end_inset
 
-is a submartingale since, 
+ being a submartingale ( 
 \begin_inset Formula $E(S_{i+1}-S_{i}|\eta_{1},\eta_{2},\eta_{3}..)=(1+\eta_{1})(1+\eta_{2})...(1+\eta_{i})\cdot E(1+\eta_{i+1}|\eta_{1},\eta_{2},\eta_{3}..)=1+\bar{\eta}\ge0$
 \end_inset
 
+) also implies that the average 
+\begin_inset Formula $N$
+\end_inset
+
+ is bounded.
+ In the case when
+\begin_inset Formula $\eta_{i}=0\forall i\mathbb{\in N},$
+\end_inset
+
+ 
+\begin_inset Formula $E(N)$
+\end_inset
+
+ can be approximated with 
+\begin_inset Formula $floor(\frac{{Ltan\alpha}}{h})$
+\end_inset
+
 .
- So the average is indeed bounded.
 \end_layout
 
 \end_body
