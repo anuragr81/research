@@ -43,13 +43,13 @@
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 2.5cm
-\topmargin 2.5cm
-\rightmargin 2.5cm
-\bottommargin 2.5cm
-\headheight 2.5cm
-\headsep 2.5cm
-\footskip 2.5cm
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\headheight 2cm
+\headsep 2cm
+\footskip 2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -107,7 +107,7 @@ For exponetially distributed
 \end_layout
 
 \begin_layout Subsection
-Average Exit Time
+Computing Average Exit Time
 \end_layout
 
 \begin_layout Standard
@@ -133,7 +133,7 @@ faces no decay so the time of exit must be exactly
 \end_layout
 
 \begin_layout Subsection
-Average Number of Bounces
+Computing Average Number of Bounces
 \end_layout
 
 \begin_layout Standard
@@ -199,7 +199,7 @@ at every bounce.
 \end_layout
 
 \begin_layout Subsection
-Variance of results
+Computing Variance of results
 \end_layout
 
 \begin_layout Standard
@@ -224,7 +224,7 @@ and
 \end_layout
 
 \begin_layout Subsection
-Theoretical Estimates
+Theoretical Estimates and Simulation Results
 \end_layout
 
 \begin_layout Subsubsection
@@ -257,7 +257,7 @@ where
 
 .
  Thus, 
-\begin_inset Formula $E(t_{exit})=\int_{0}^{\pi/4}\frac{{4L}}{\pi cos\alpha}d\alpha\sim112.22$
+\begin_inset Formula $E(t_{exit})=\int_{0}^{\pi/4}\frac{{4L}}{\pi cos\alpha}d\alpha\sim\mathbf{112.22}$
 \end_inset
 
  (used for verification).
@@ -440,9 +440,22 @@ Howevers, since we are sure that the vertical velocity only decreases in
 \end_inset
 
  can be approximated with 
-\begin_inset Formula $floor(\frac{{Ltan\alpha}}{h})$
+\begin_inset Formula $\int_{0}^{\frac{{\pi}}{4}}\frac{{4}}{\pi}floor(\frac{{Ltan\alpha}}{h})d\alpha\sim8.8$
 \end_inset
 
+(verified with results).
+ The result with exponentially distributed 
+\begin_inset Formula $\eta_{i}$
+\end_inset
+
+is 
+\series bold
+
+\begin_inset Formula $\mathbf{5.1}$
+\end_inset
+
+
+\series default
 .
 \end_layout
 

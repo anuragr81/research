@@ -2,7 +2,7 @@
 #include <math.h>
 #include "SimpleRNG.h"
 
-#define LOGPRINT TRUE
+//#define LOGPRINT TRUE
 
 const float tol = 1e-6;
 const double PI= 3.141592654;
@@ -17,7 +17,7 @@ float abs(float x){
     }
 }
 
-/* No exceptions are thrown - for performance reasons */
+/* No exceptions are used - for performance reasons */
 
 using namespace std;
 
@@ -80,15 +80,14 @@ class Path{
             return m_numBounces;
         }
 
-        // utility functions not to be used in the critical path
-
         float x() const { 
             return v_x()*curTime();
         }
 
-        // displacement before a bounce is that of the last reflection-point
+        // utility functions: not to be used in the critical path
         float y() const { 
             float y =0;
+            // displacement before a bounce is that of the last reflection-point
             for (unsigned int i = 1 ; i <= m_numBounces;++i){
                 y+=((2*float(i%2)-1)*m_h);
             }
@@ -103,7 +102,10 @@ class Path{
 
         // Attributes
         float m_v, m_alpha,m_h,m_L,m_em;
+
+        // Associations
         SimpleRNG & m_pRand;
+
         // Bounce-Tracking attributes
         float m_time,m_factor,m_t0;
         int m_numBounces,m_bounceUnit,m_emul;
@@ -111,7 +113,7 @@ class Path{
 
 void operator << ( std::ostream & os , Path const & p)  {
     cout << p.curTime() << "," << p.x()   << "," << p.y() << ","
-         << p.v_x() << endl;
+        << p.v_x() << endl;
 }
 
 void printHeader (std::ostream & os){
@@ -135,6 +137,10 @@ class ExitResults {
             return m_exitTime;
         }
     private:
+        // prevent copy
+        ExitResults(ExitResults const &);
+        void operator = (ExitResults const &);
+        // Attributes 
         int m_numBounces;
         float m_exitTime;
 };
@@ -173,10 +179,14 @@ class PathSim {
         }
 
     private:
+        // Prevent copy 
+
         PathSim(const PathSim & );
         void operator = (PathSim &);
+
+        // Compositions
         Path m_Path;
-        float m_L;
+        // Associations 
         SimpleRNG & m_pRand;
 };
 
@@ -191,7 +201,7 @@ int main(){
 
     PathSim psim(v,h,L,e_m,r);
 
-    const long unsigned int numAlphaSamples=2;
+    const long unsigned int numAlphaSamples=1e+6;
 
     float bouncesAverage=0;
     float squaredBouncesAverage=0;
@@ -212,10 +222,10 @@ int main(){
         squaredExitTimeAverage=(res.exitTime()*res.exitTime()+squaredExitTimeAverage*(i-1))/i;
     }
 
-        cout << " average-num-bounces = " << bouncesAverage <<endl;
-        cout << " variance-num-bounces/n = " << (squaredBouncesAverage - bouncesAverage*bouncesAverage)/numAlphaSamples <<endl;
-        cout << " average-exitTime= " << exitTimeAverage <<endl;
-        cout << " variance-exitTime/n= " << (squaredExitTimeAverage-exitTimeAverage*exitTimeAverage)/numAlphaSamples <<endl;
+    cout << " average-num-bounces = " << bouncesAverage <<endl;
+    cout << " variance-num-bounces/n = " << (squaredBouncesAverage - bouncesAverage*bouncesAverage)/numAlphaSamples <<endl;
+    cout << " average-exitTime= " << exitTimeAverage <<endl;
+    cout << " variance-exitTime/n= " << (squaredExitTimeAverage-exitTimeAverage*exitTimeAverage)/numAlphaSamples <<endl;
 
     return 0;
 }
