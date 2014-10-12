@@ -81,14 +81,7 @@ For exponetially distributed
 \end_inset
 
 , the CDF is 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-F_{\eta}(x)=P(\eta\le x)=1-e^{-\lambda x}=1-e^{-\frac{{x}}{\bar{\eta}}}
-\]
-
+\begin_inset Formula $F_{\eta}(x)=P(\eta\le x)=1-e^{-\lambda x}=1-e^{-\frac{{x}}{\bar{\eta}}}$
 \end_inset
 
  
@@ -146,37 +139,50 @@ One could directly calculate the number of bounces until time
 \begin_inset Formula $t_{exit}$
 \end_inset
 
-but for the problem-specification, a simulation of bounce is done until
- the ball exits the tunnel.
- Time is incremented in units of bounces (i.e.
+but as per the problem specification, a simulation of bounces was performed
+ until the time the ball exits the tunnel.
+ Time is incremented in units of bounces-times (i.e.
  time until ball covers the distance 
 \begin_inset Formula $h$
 \end_inset
 
  with constant velocity).
- For bounce 
+ The total time elapsed until bounce 
 \begin_inset Formula $i$
 \end_inset
 
-, therefore, the total time elapsed would therefore be 
-\begin_inset Formula $\Sigma_{0}^{i}\frac{{h}}{vsin\alpha}\frac{{1}}{(1-\eta_{i}/(1+\eta_{i}))^{i}}=\frac{{h}}{sin\alpha}\Sigma_{0}^{i}(1+\eta_{i})^{i}$
+ would be 
+\begin_inset Formula $\frac{{h}}{vsin\alpha}(1+(1+\eta_{1})+(1+\eta_{1})(1+\eta_{2})+...)$
 \end_inset
 
 .
- Notice that the vertical velocity is multiplied by 
-\begin_inset Formula $1-\frac{{\eta_{i}}}{1+\eta_{i}}$
+ Here 
+\begin_inset Formula $\eta_{j}$
 \end_inset
 
-at every bounce where 
-\begin_inset Formula $\eta_{i}$
+is the 
+\begin_inset Formula $j^{th}$
 \end_inset
 
- denotes the exponentially distributed random-variable with mean 
+draw of the exponentially distributed 
+\begin_inset Formula $\eta$
+\end_inset
+
+ and the vertical velocity is multiplied by 
+\begin_inset Formula $1-\frac{{\eta_{j}}}{1+\eta_{j}}$
+\end_inset
+
+at every bounce.
+ 
+\begin_inset Formula $\eta_{j}$
+\end_inset
+
+ is modeled as an exponentially distributed random-variable with mean 
 \begin_inset Formula $\bar{\eta}$
 \end_inset
 
 .
- The program calculate the time at every bounce until it exceeds 
+ The program thus calculates the time at every bounce until it exceeds 
 \begin_inset Formula $t_{exit}=\frac{{L}}{vcos\alpha}$
 \end_inset
 
@@ -211,6 +217,26 @@ and
 Theoretical Values
 \end_layout
 
+\begin_layout Subsubsection
+Exit Time
+\end_layout
+
+\begin_layout Standard
+Since exit-time depends only on distribution of
+\begin_inset Formula $\alpha$
+\end_inset
+
+, it is simply the expectation of 
+\begin_inset Formula $t_{exit}$
+\end_inset
+
+over 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Formula $E(t_{exit})=\int_{0}^{\pi/4}\frac{{L}}{cos\alpha}f(\alpha)d\alpha$
 \end_inset
@@ -225,41 +251,42 @@ where
 \end_inset
 
 .
- 
+\end_layout
+
+\begin_layout Subsubsection
+Number of Bounces
 \end_layout
 
 \begin_layout Standard
-The number of bounces lowest 
+The number of bounces 
+\begin_inset Formula $N$
+\end_inset
+
+ is the lowest 
 \begin_inset Formula $i$
 \end_inset
 
  such that 
-\begin_inset Formula $\frac{{h}}{sin\alpha}\Sigma_{0}^{i}(1+\eta_{i})^{i}>\frac{{L}}{cos\alpha}$
+\begin_inset Formula $\frac{{h}}{sin\alpha}(1+(1+\eta_{1})+(1+\eta_{1})(1+\eta_{2})+...+(1+\eta_{1})(1+\eta_{2})...(1+\eta_{i})>\frac{{L}}{cos\alpha}$
 \end_inset
 
- i.e.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-N=inf\{i\in\mathbb{N}:\frac{{h}}{sin\alpha}\Sigma_{0}^{i}(1+\eta_{i})^{i}>\frac{{L}}{cos\alpha}\}
-\]
-
+.
+ In other words, 
+\begin_inset Formula $N=inf\{i\in\mathbb{N}:\frac{{h}}{sin\alpha}\frac{{h}}{sin\alpha}(1+(1+\eta_{1})+(1+\eta_{1})(1+\eta_{2})+...+(1+\eta_{1})(1+\eta_{2})...(1+\eta_{i})>\frac{{L}}{cos\alpha}\}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-If 
-\begin_inset Formula $Z_{i}=\Sigma_{0}^{i}(1+\eta_{i})^{i}$
+If we let 
+\begin_inset Formula $S_{i}=1+(1+\eta_{1})+(1+\eta_{1})(1+\eta_{2})+...+(1+\eta_{1})(1+\eta_{2})...(1+\eta_{i})$
 \end_inset
 
 , then 
 \begin_inset Formula 
 \[
-N=inf\{i\in\mathbb{N}:Z_{i}\le\frac{{Ltan\alpha}}{h}\}
+N=inf\{i\in\mathbb{N}:S_{i}\ge\frac{{Ltan\alpha}}{h}\}
 \]
 
 \end_inset
@@ -267,59 +294,130 @@ N=inf\{i\in\mathbb{N}:Z_{i}\le\frac{{Ltan\alpha}}{h}\}
 
 \end_layout
 
-\begin_layout Section
-WRONG
-\end_layout
-
 \begin_layout Standard
-Another way to view this would be to look at probability mass-function of
- 
+We can formulate 
 \begin_inset Formula $N$
 \end_inset
 
- i.e.
- 
-\begin_inset Formula $P(N=1)=P(Z_{1}\le\frac{{Ltan\alpha}}{h})=F_{Z_{1}}(\frac{{Ltan\alpha}}{h})$
+ as a state-model where
+\begin_inset Formula $n$
+\end_inset
+
+ denotes the number of bounces.
+ The expectation would be 
+\begin_inset Formula $\Sigma_{0}i\phi_{i}$
+\end_inset
+
+where,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\phi_{0}=P(N=0)=P(exit|n=0)\cdot P(n=0)=P(1\ge\frac{{Ltan\alpha}}{h})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\phi_{1}=P(N=1)=P(exit|n=1)P(n=1)$
+\end_inset
+
+=
+\begin_inset Formula $P(exit|n=1)\cdot P(n=1|n=0)=P(exit|n=1)(1-\phi_{0})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Rightarrow\phi_{1}=P(S_{2}\ge\frac{{Ltan\alpha}}{h}|S_{1}\le\frac{{Ltan\alpha}}{h})(1-\phi_{0})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\phi_{2}=P(N=2)=P(exit|n=2)P(n=2)=P(exit|n=2)P(n=2|n=1)P(n=1|n=0)$
+\end_inset
+
+= 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $P(S_{3}\ge\frac{{Ltan\alpha}}{h})\cdot P(S_{2}\le\frac{{Ltan\alpha}}{h}|S_{1}\le\frac{{Ltan\alpha}}{h})\cdot(1-\phi_{0})$
+\end_inset
+
+=
+\begin_inset Formula $P(S_{3}\ge\frac{{Ltan\alpha}}{h}|S_{1},S_{2}\le\frac{{Ltan\alpha}}{h})\cdot(1-\frac{{\phi_{1}}}{1-\phi_{0}})(1-\phi_{0}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $\Rightarrow\phi_{2}=P(S_{3}\ge\frac{{Ltan\alpha}}{h}|S_{1},S_{2}\le\frac{{Ltan\alpha}}{h})(1-\phi_{0}-\phi_{1})$
 \end_inset
 
 .
- .
- 
-\begin_inset Formula $P(N=2)=P(Z_{2}\le\frac{{Ltan\alpha}}{h})=F_{Z_{2}}(\frac{{Ltan\alpha}}{h})$
-\end_inset
-
-etc.
- and then calculate expectation of 
-\begin_inset Formula $N$
-\end_inset
-
-over the pmf.
- 
 \end_layout
 
 \begin_layout Standard
-Since 
-\begin_inset Formula $X>0,$
+This is hardly a Markov-chain.
+ Both 
+\begin_inset Formula $S_{i}$
 \end_inset
 
 and 
-\begin_inset Formula $Y=X^{n}.$
+\begin_inset Formula $\phi_{i}$
 \end_inset
 
-
-\begin_inset Formula $F_{Y}(y)=P(Y\le y)=P(X^{n}\le y)=P(X\le y^{1/n})$
+ depend on past values.
+ More intuitively, as there are multiple ways to reach a certain number
+ of bounces 
+\begin_inset Formula $n$
 \end_inset
 
- 
-\begin_inset Formula $=1-e^{-\lambda y^{1/n}}$
+, the probability of whether the next bounce would occur or not depends
+ on previous states (not just the current one).
+\end_layout
+
+\begin_layout Standard
+However, we are sure that the vertical velocity only decreases in magnitude
+ so the number of bounces is always bounded by the case when 
+\begin_inset Formula $\eta_{i}=0\forall i\in\mathbb{N}.$
+\end_inset
+
+ It also turns out that
+\begin_inset Formula $S_{i}$
+\end_inset
+
+is a submartingale since, 
+\begin_inset Formula $E(S_{i+1}-S_{i}|\eta_{1},\eta_{2},\eta_{3}..)=(1+\eta_{1})(1+\eta_{2})...(1+\eta_{i})\cdot E(1+\eta_{i+1}|\eta_{1},\eta_{2},\eta_{3}..)=1+\bar{\eta}\ge0$
 \end_inset
 
 .
- Therefore,
-\begin_inset Formula $f_{Y}(y)=\frac{{dF_{Y}(y)}}{dy}=\frac{{\lambda}}{n}e^{-\lambda y^{\frac{{1}}{n}}}y^{\frac{{1}}{n}-1}$
-\end_inset
-
-
+ So the average is indeed bounded.
 \end_layout
 
 \end_body
