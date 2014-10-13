@@ -28,3 +28,8 @@ double SimpleRNG::GetUniform()
     return GetUniform(m_u, m_v);
 }
 
+double SimpleRNG::GetExponential(double mean)
+{
+    return -mean*log( GetUniform() );
+}
+

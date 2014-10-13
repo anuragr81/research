@@ -12,6 +12,7 @@ public:
     double GetUniform(unsigned int& u, unsigned int& v);
 
     unsigned int GetUint(unsigned int& u, unsigned int& v);
+    double GetExponential(double mean);
         
 private:
     unsigned int m_u, m_v;
