@@ -7,7 +7,7 @@
 # WACC needs r_D,b_E,stockprice (r_D*D/(D+E)+r_E*E/(D+E))
 
 import csv
-import os,re,sys,datetime
+import os,re,sys,datetime,locale
 
 class DuplicateFileException(Exception):
   pass
@@ -68,13 +68,23 @@ def processDate(value):
 
 def processFloat(value):
     try : 
-       fval=float(value)
+       locale.setlocale( locale.LC_ALL, 'en_US.UTF-8' ) 
+       fval=locale.atof(value)
        return fval
     except:
        if str(value).strip() == "-":
           return 0;
        else:
-          return "FLOAT{"+str(value)+"}"
+          try : 
+             res=re.search("\((.*)\)",value);
+             fval = float(res.group(1))
+             if (fval<0): 
+                return "FLOAT{"+str(value)+"}" # can't have -ve inside
+                                               # parentheses
+             else:
+                return -fval;
+          except : 
+             return "FLOAT{"+str(value)+"}"
 
 class Field: 
   def __init__(self,name,typename,alias,processFunc):
@@ -102,7 +112,13 @@ def getFieldsDict():
    f=Field(name="Earnings from Cont. Ops.",typename=float,alias='ebit',processFunc=processFloat)
    icfieldsdict[f.alias]=f;
 
-   fieldsdict={'bs':bsfieldsdict,'ic':icfieldsdict}
+   csfieldsdict=dict();
+   f=Field(name="For the Fiscal Period Ending",typename=int,alias='date',processFunc=processDate)
+   csfieldsdict[f.alias]=f;
+   f=Field(name="Levered Free Cash Flow",typename=float,alias='fcff',processFunc=processFloat)
+   csfieldsdict[f.alias]=f;
+
+   fieldsdict={'bs':bsfieldsdict,'ic':icfieldsdict,'cs':csfieldsdict}
 
    return fieldsdict
 
@@ -184,7 +200,8 @@ def getTimeSeries(filename,spfieldsdict,tsfield):
     return ts
 
 dfdict={'bs':'_bs_filt.csv',
-        'ic':'_out_inc.csv'}
+        'ic':'_out_inc.csv',
+        'cs':'_cash.csv'}
 
 dfiles=dict()
 
@@ -203,15 +220,25 @@ for filename in (os.listdir(".")):
 fieldsdict=getFieldsDict()
 
 for root in dfiles:
+    print ("Active File:"+root)
     bfile=dfiles[root]['bs']
     print "processing file:"+bfile
     bs= getTimeSeries(filename=bfile,spfieldsdict=fieldsdict['bs'],tsfield='date')
-    print "<------BS------>"+displayTimeSeries(bs.tsdict)+"<-----/BS----->"
+    #print "<------BS------>"+displayTimeSeries(bs.tsdict)+"<-----/BS----->"
 
     ifile=dfiles[root]['ic']
     ic= getTimeSeries(filename=ifile,spfieldsdict=fieldsdict['ic'],tsfield='date')
-    print "<------IC------>"+displayTimeSeries(ic.tsdict)+"<-----/IC----->"
+    #print "<------IC------>"+displayTimeSeries(ic.tsdict)+"<-----/IC----->"
     mts=mergedTimeSeries(bs,ic,datetime.timedelta(days=10))
+
+
+    ifile =  dfiles[root]['cs']
+    cs    =  getTimeSeries(filename=ifile,spfieldsdict=fieldsdict['cs'],tsfield='date')
+
+    #print "<------CS------>"+displayTimeSeries(cs.tsdict)+"<-----/CS----->"
+    mts=mergedTimeSeries(mts,cs,datetime.timedelta(days=10))
+    #print "====\n",displayTimeSeries(mts.tsdict)
+
     writeCsvTimeSeries(outfilepath=root+".output.csv",ts=mts)
 
     #sys.exit(1)
