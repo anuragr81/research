@@ -1,5 +1,10 @@
 # TODO: 
-# Get Levered FCFF, long term debt
+# Get Levered FCFF
+# b_E needs ROE,r_M (average ROE)
+# r_M would be calculated by just averaging all ROEs (we're only interested in market of the chosen equities).
+# b_D needs r_D,r_M
+# 5 year horizon => 5-year betas, 5-year bonds
+# WACC needs r_D,b_E,stockprice (r_D*D/(D+E)+r_E*E/(D+E))
 
 import csv
 import os,re,sys,datetime
@@ -88,7 +93,8 @@ def getFieldsDict():
    bsfieldsdict[f.alias]=f;
    f=Field(name="Long-Term Debt",typename=str,alias='ltdebt',processFunc=processFloat)
    bsfieldsdict[f.alias]=f;
-
+   f=Field(name="Total Common Equity",typename=str,alias='bve',processFunc=processFloat)
+   bsfieldsdict[f.alias]=f;
 
    icfieldsdict=dict();
    f=Field(name="For the Fiscal Period Ending",typename=int,alias='date',processFunc=processDate)
@@ -208,4 +214,4 @@ for root in dfiles:
     mts=mergedTimeSeries(bs,ic,datetime.timedelta(days=10))
     writeCsvTimeSeries(outfilepath=root+".output.csv",ts=mts)
 
-    sys.exit(1)
+    #sys.exit(1)
