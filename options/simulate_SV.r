@@ -1,7 +1,7 @@
 
 set.seed(12345)
  
-n <- 3000
+simulate<-function (n) {
 phi <- 0.99 # AR(1) persistence parameter
 sigma <- 0.08 # standard deviation of AR(1) noise
 mu <- 0.01 # scalar factor in observation process 
@@ -15,5 +15,6 @@ for (k in 2:n){
 for (k in 1:n){
   obs[k] <- mu*exp(g[k]/2)*rt(1,nu)
 }
-
-plot(obs,xlab="time",ylab="simulated returns",type="l",ylim=c(-max(abs(obs)),max(abs(obs))))
+hist(obs)
+#plot(obs,xlab="time",ylab="simulated returns",type="l",ylim=c(-max(abs(obs)),max(abs(obs))))
+}
