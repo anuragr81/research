@@ -50,30 +50,38 @@ test <- function(snpopt) {
     if (length(S0)>0){
       print(paste("curDate:",curDate));
       c_atexdate=split(copt_atdate[[i]],copt_atdate[[i]]$exdate);
-      c_atexdate[[i]]$exdate=strptime(c_atexdate[[i]]$exdate,"%Y%m%d");
-      c_atexdate[[i]]=c_atexdate[[i]][with(
-        c_atexdate[[i]],
-        order(c_atexdate[[i]]$strike_price)),]; #ordering by strike_price
-      
-      print(paste("Price",S0));
-      ndays=as.numeric(c_atexdate[[i]]$exdate[1]-curDate,units="days");
-      print(paste("ndays:",ndays));
-      cpvec=(c_atexdate[[i]]$best_offer+c_atexdate[[i]]$best_bid)/2;
-      plot(c_atexdate[[i]]$strike_price,cpvec,type='l');
-      rnp=risk_neutral_probability(callprice_vec=cpvec,
-                                   strike_vec=1e-3*c_atexdate[[i]]$strike_price,
-                                   divyield=0,
-                                   r=.02,
-                                   n=ndays/250,
-                                   S_0=S0);
-      hist(rnp);
-      return(rnp);
-      return(1)
+      for (j in seq(length(c_atexdate))) {
+        c_atexdate[[j]]$exdate=strptime(c_atexdate[[j]]$exdate,"%Y%m%d");
+        c_atexdate[[j]]=c_atexdate[[j]][with(
+          c_atexdate[[j]],
+          order(c_atexdate[[j]]$strike_price)),]; #ordering by strike_price
+        
+        print(paste("Price",S0));
+        ndays=as.numeric(c_atexdate[[j]]$exdate[1]-curDate,units="days");
+        print(paste("ndays:",ndays));
+        cpvec=(c_atexdate[[j]]$best_offer+c_atexdate[[j]]$best_bid)/2;
+        plot(c_atexdate[[j]]$strike_price,cpvec,type='l');
+        rnp=risk_neutral_probability(callprice_vec=cpvec,
+                                     strike_vec=1e-3*c_atexdate[[j]]$strike_price,
+                                     divyield=0,
+                                     r=.02,
+                                     n=ndays/250,
+                                     S_0=S0);
+        hist(rnp);
+        print(paste("size(rnp)=",length(rnp)));
+        strike=1e-3*c_atexdate[[j]]$strike_price;
+        
+        ch=readline();
+        if (ch=="1"){
+          return(1);
+        }
+      }
+      #return(1)
     } else {
       print(paste("Ignoring Date:",curDate));
     }
   }
-  return(copt_atdate);
+  #return(copt_atdate);
   
   #print(copt);
   #copt=data.frame(date=strptime(copt$date,"%Y%m%d"),
