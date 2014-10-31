@@ -9,6 +9,10 @@ risk_neutral_probability <-function(callprice_vec,
                                     r,
                                     n){
   
+  if(length(callprice_vec)<=1){
+    print("ignoring vector");
+    return(NULL);
+  }
   p=array();
   rn<-(1+r)**n;
   divmul<-1/(1+divyield)**n;
@@ -28,7 +32,7 @@ risk_neutral_probability <-function(callprice_vec,
 test <- function(snpopt) {
   
   require(zoo);
-  par(mfrow=c(2,1));
+  par(mfrow=c(1,1));
   vix=read.csv("vix.csv");
   vix=data.frame(vix=vix$vix,date=strptime(vix$Date,"%d%b%Y"));
   #plot(vix$date,vix$vix,type='l',xlab='Time',ylab='VIX');
@@ -42,52 +46,53 @@ test <- function(snpopt) {
   opt=split(snpopt,snpopt$cp_flag);
   copt=opt[["C"]];
   copt_atdate=split(copt,copt$date);
-  
+  last_time=strptime("19700101","%Y%m%d");
   for (i in seq(length(copt_atdate))){
     copt_atdate[[i]]$date<-strptime(copt_atdate[[i]]$date,"%Y%m%d");  
     curDate=copt_atdate[[i]]$date[1];
     S0=spx[spx$date==curDate,]$spx;
+    if (as.double(curDate-last_time,units='days')>40){
+      scatter3D(main=curDate,copt_atdate[[i]]$strike_price/1e+3, as.integer(copt_atdate[[i]]$exdate), 
+                copt_atdate[[i]]$impl_volatility, phi =30,
+                theta=30, bty = "f",type='p',
+                col = gg.col(100), xlim=c(1,2000),zlim=c(0,1.5),
+                pch = 18, cex = 2, 
+                ticktype = "detailed")
+      #      Sys.sleep(.2);
+      last_time=curDate;
+    }
+    
     if (length(S0)>0){
-      print(paste("curDate:",curDate));
       c_atexdate=split(copt_atdate[[i]],copt_atdate[[i]]$exdate);
+      
       for (j in seq(length(c_atexdate))) {
         c_atexdate[[j]]$exdate=strptime(c_atexdate[[j]]$exdate,"%Y%m%d");
         c_atexdate[[j]]=c_atexdate[[j]][with(
           c_atexdate[[j]],
           order(c_atexdate[[j]]$strike_price)),]; #ordering by strike_price
         
-        print(paste("Price",S0));
         ndays=as.numeric(c_atexdate[[j]]$exdate[1]-curDate,units="days");
-        print(paste("ndays:",ndays));
         cpvec=(c_atexdate[[j]]$best_offer+c_atexdate[[j]]$best_bid)/2;
-        plot(c_atexdate[[j]]$strike_price,cpvec,type='l');
         rnp=risk_neutral_probability(callprice_vec=cpvec,
                                      strike_vec=1e-3*c_atexdate[[j]]$strike_price,
                                      divyield=0,
                                      r=.02,
                                      n=ndays/250,
                                      S_0=S0);
-        hist(rnp);
-        print(paste("size(rnp)=",length(rnp)));
-        strike=1e-3*c_atexdate[[j]]$strike_price;
+        breaks=seq(-1.5,1.5,.1)
+        #        print(hist(rnp,breaks=breaks)$counts);
+        #print(paste("size(rnp)=",length(rnp)));
         
-        ch=readline();
-        if (ch=="1"){
-          return(1);
-        }
+        
+        #        ch=readl#ine();
+        #        if (ch=="1"){
+        #          return(1);
+        #        }
       }
-      #return(1)
+      
     } else {
       print(paste("Ignoring Date:",curDate));
     }
   }
-  #return(copt_atdate);
-  
-  #print(copt);
-  #copt=data.frame(date=strptime(copt$date,"%Y%m%d"),
-  #               price=mean(c(copt$best_bid,copt$best_offer)),
-  #               implvol=copt$impl_volatility);
-  #plot(opt$date,opt$implvol,type='l',
-  #     xlab='Time',ylab='SPX Historical Vol');
   
 }
