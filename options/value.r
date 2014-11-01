@@ -26,12 +26,13 @@ risk_neutral_probability <-function(callprice_vec,
   }
   p[i+1]=1-sum_until_i;
   K_next=strike_vec[i]+2*rn*callprice_vec[i]/p[i+1];
-  return(p);
+  return(data.frame(rnp=p,strike_vec=c(strike_vec,K_next)));
 }
 
 test <- function(snpopt) {
   
   require(zoo);
+  require(plot3D);
   par(mfrow=c(1,1));
   vix=read.csv("vix.csv");
   vix=data.frame(vix=vix$vix,date=strptime(vix$Date,"%d%b%Y"));
@@ -51,21 +52,26 @@ test <- function(snpopt) {
     copt_atdate[[i]]$date<-strptime(copt_atdate[[i]]$date,"%Y%m%d");  
     curDate=copt_atdate[[i]]$date[1];
     S0=spx[spx$date==curDate,]$spx;
-    if (as.double(curDate-last_time,units='days')>40){
-      scatter3D(main=curDate,copt_atdate[[i]]$strike_price/1e+3, as.integer(copt_atdate[[i]]$exdate), 
-                copt_atdate[[i]]$impl_volatility, phi =30,
-                theta=30, bty = "f",type='p',
-                col = gg.col(100), xlim=c(1,2000),zlim=c(0,1.5),
-                pch = 18, cex = 2, 
-                ticktype = "detailed")
-      #      Sys.sleep(.2);
-      last_time=curDate;
-    }
+    #if (as.double(curDate-last_time,units='days')>40){
+    #  scatter3D(main=curDate,xlab="K",
+    #            ylab="T",
+    #            zlab="ImplVol",
+    #            copt_atdate[[i]]$strike_price/1e+3, as.integer(copt_atdate[[i]]$exdate), 
+    #            copt_atdate[[i]]$impl_volatility, phi =20,
+    #            theta=58, bty = "f",type='h',
+    #            col = gg.col(100), xlim=c(1,3000),zlim=c(0,1.5),
+    #            pch = 18, cex = 2, 
+    #            ticktype = "detailed")
+    #      Sys.sleep(.2);
+    #  last_time=curDate;
+    #}
     
     if (length(S0)>0){
       c_atexdate=split(copt_atdate[[i]],copt_atdate[[i]]$exdate);
+      arr=c(0,0,0)
+      p=matrix(arr,1,3);
       
-      for (j in seq(length(c_atexdate))) {
+      for (j in seq(length(c_atexdate))) {  
         c_atexdate[[j]]$exdate=strptime(c_atexdate[[j]]$exdate,"%Y%m%d");
         c_atexdate[[j]]=c_atexdate[[j]][with(
           c_atexdate[[j]],
@@ -73,23 +79,38 @@ test <- function(snpopt) {
         
         ndays=as.numeric(c_atexdate[[j]]$exdate[1]-curDate,units="days");
         cpvec=(c_atexdate[[j]]$best_offer+c_atexdate[[j]]$best_bid)/2;
+        strike_vec=1e-3*c_atexdate[[j]]$strike_price
         rnp=risk_neutral_probability(callprice_vec=cpvec,
-                                     strike_vec=1e-3*c_atexdate[[j]]$strike_price,
+                                     strike_vec=strike_vec,
                                      divyield=0,
                                      r=.02,
                                      n=ndays/250,
                                      S_0=S0);
-        breaks=seq(-1.5,1.5,.1)
+        dx=rep(ndays,length(rnp$strike_vec));
+        for (i in seq(length(length(rnp$strike_vec)))){
+          p=rbind(p,c(dx[i],rnp$strike_vec[i],rnp$rnp[i]));
+        }
+        #print(rep(ndays,length(rnp$strike_vec)));
+        breaks=seq(-1.5,1.5,.1);        
+        
         #        print(hist(rnp,breaks=breaks)$counts);
         #print(paste("size(rnp)=",length(rnp)));
         
-        
-        #        ch=readl#ine();
-        #        if (ch=="1"){
-        #          return(1);
-        #        }
       }
+      scatter3D(main=curDate,xlab="T",
+                ylab="K",
+                zlab="p",
+                p[,1],p[,2] , 
+                p[,3], phi =20,
+                theta=58, bty = "f",type='p',
+                col = gg.col(100), xlim=c(1,3000),zlim=c(-2,2),
+                pch = 18, cex = 2, 
+                ticktype = "detailed");
       
+#      ch=readline();
+#      if (ch=="1"){
+#        return(1);
+#      }
     } else {
       print(paste("Ignoring Date:",curDate));
     }
