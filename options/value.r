@@ -1,3 +1,37 @@
+value_option<-function (S,K){
+  return (max(S-K,0));
+}
+
+evaluate_pair<-function(S){
+  return(paste("Calculated{",toString(S),"}"))
+}
+binval<-function(S_0,sg,np,T,K){
+  require(zoo);
+  Dt=T/np;
+  print(paste("Dt=",Dt))
+  u=exp(sg*sqrt(Dt));
+  d=1/u;
+  for (n in seq(np)){
+    print(paste("n=",n))
+    x=list(c(u,d));
+    paths=expand.grid(rep(x,n));
+    #path_arr=array();
+    for ( i in seq(dim(paths)[1]) ) {
+    #  curprod=S_0*prod(paths[i,]);
+    #  path_arr[i]=curprod;
+      print(paste("i=",i));
+      print(paste("path=",toString(paths[i,])));
+     # print(paste("curprod=",curprod));
+    }
+    #print(path_arr)
+    #print(rollapply(data=path_arr,FUN=evaluate_pair,width=2,by=2));
+    ch=readline();
+    if (ch=="1"){
+      return(1)
+    }
+  }
+  return(paths);
+}
 processWindow <- function(){
   
 }
@@ -97,20 +131,10 @@ test <- function(snpopt) {
         #print(paste("size(rnp)=",length(rnp)));
         
       }
-      scatter3D(main=curDate,xlab="T",
-                ylab="K",
-                zlab="p",
-                p[,1],p[,2] , 
-                p[,3], phi =20,
-                theta=58, bty = "f",type='p',
-                col = gg.col(100), xlim=c(1,3000),zlim=c(-2,2),
-                pch = 18, cex = 2, 
-                ticktype = "detailed");
-      
-#      ch=readline();
-#      if (ch=="1"){
-#        return(1);
-#      }
+      #      ch=readline();
+      #      if (ch=="1"){
+      #        return(1);
+      #      }
     } else {
       print(paste("Ignoring Date:",curDate));
     }
