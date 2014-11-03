@@ -1,39 +1,112 @@
-value_option<-function (S,K){
-  return (max(S-K,0));
+stringsort<-function(s){
+  return(paste(sort(unlist(strsplit(s, ""))), collapse = "",sep=""));
 }
 
-evaluate_pair<-function(S){
-  return(paste("Calculated{",toString(S),"}"))
+generate_paths<-function(np){
+  paths=list();
+  paths[[1]]=c("u","d");
+  if (np>=2){
+    for (n in seq(2,np)){
+      newpath=NULL;
+      for (path in paths[[n-1]]){
+        for(state in path){
+          newpath=c(newpath,
+                    stringsort(paste("u",state,sep="",collapse="")));         
+          newpath=c(newpath,
+                    stringsort(paste("d",state,sep="",collapse="")));
+        }
+      }
+      paths[[n]]=sort(unique(newpath));
+    } # end period-loop
+  }
+  return(paths);
 }
-binval<-function(S_0,sg,np,T,K){
+
+value_state<-function(state,u,d){
+  i=1;
+  prod=1;
+  state=unlist(strsplit(state, ""));
+  for (letter in state){
+    if (letter == "u"){
+      prod=prod*u;
+    }else if (letter=="d"){
+      prod=prod*d;
+    }else{
+      stop(paste("invalid letter",letter));
+    }
+  }
+  return(prod);
+}
+
+payoff<-function(S,payoffparams){
+  if(payoffparams$K>0){
+    K<-payoffparams$K;
+    return(max(S-K,0));
+  }else{
+    stop("Invalid Params to payoff");
+  }
+}
+
+evaluate_pair<-function(Dstate,Ustate,S_0,p,u,d,r_f,Dt,payoffparams){
+  S_u=S_0*value_state(state=Ustate,u=u,d=d);
+  S_d=S_0*value_state(state=Dstate,u=u,d=d);
+  val=exp(-r_f*Dt)*(p*payoff(S=S_u,payoffparams=payoffparams)
+                   +(1-p)*payoff(S=S_d,payoffparams=payoffparams));
+  return(val);
+}
+
+mergevec<-function(valvec,curvec){
+  if (is.null(curvec)){
+    return (valvec);
+  }
+  
+  i=1;
+  resvec=array();
+  for (val in valvec){
+    if(val>curvec[i]){
+      resvec[i]=val;
+    }else{
+      resvec[i]=curvec[i];
+    }
+    i=i+1;
+  }
+  return (resvec);
+}
+
+evaluate_paths <- function(S_0,r_f,Dt,u,d,p,payoffparams,paths){
+  np=length(paths);
+  resvec=NULL;
+  for (n in seq(np)){
+    last_n=np-n+1;
+    curvec=paths[[last_n]];
+    valvec=array();
+    for (i in seq(2,length(curvec))){
+      valvec[i-1]=evaluate_pair(Dstate=curvec[i],
+                           Ustate=curvec[i-1],
+                           S_0=S_0,
+                           p=p,
+                           u=u,
+                           d=d,
+                           r_f=r_f,
+                           Dt=Dt,
+                           payoffparams=payoffparams);
+    }
+    resvec=mergevec(valvec=valvec,curvec=resvec);
+  } # loop over path
+  print(resvec);
+}
+
+binval<-function(S_0,r_f,sg,np,T,K){
   require(zoo);
   Dt=T/np;
   print(paste("Dt=",Dt))
   u=exp(sg*sqrt(Dt));
   d=1/u;
-  for (n in seq(np)){
-    print(paste("n=",n))
-    x=list(c(u,d));
-    paths=expand.grid(rep(x,n));
-    #path_arr=array();
-    for ( i in seq(dim(paths)[1]) ) {
-    #  curprod=S_0*prod(paths[i,]);
-    #  path_arr[i]=curprod;
-      print(paste("i=",i));
-      print(paste("path=",toString(paths[i,])));
-     # print(paste("curprod=",curprod));
-    }
-    #print(path_arr)
-    #print(rollapply(data=path_arr,FUN=evaluate_pair,width=2,by=2));
-    ch=readline();
-    if (ch=="1"){
-      return(1)
-    }
-  }
-  return(paths);
-}
-processWindow <- function(){
-  
+  p=(exp(r_f*Dt)-d)/(u-d);
+  paths=generate_paths(np=np);
+  payoffparams=data.frame("K"=K);
+  evaluate_paths(S_0=S_0,r_f=r_f,Dt=Dt,u=u,d=d,p=p,
+                 payoffparams=payoffparams,paths=paths);
 }
 
 risk_neutral_probability <-function(callprice_vec,
@@ -125,8 +198,7 @@ test <- function(snpopt) {
           p=rbind(p,c(dx[i],rnp$strike_vec[i],rnp$rnp[i]));
         }
         #print(rep(ndays,length(rnp$strike_vec)));
-        breaks=seq(-1.5,1.5,.1);        
-        
+        breaks=seq(-1.5,1.5,.1);
         #        print(hist(rnp,breaks=breaks)$counts);
         #print(paste("size(rnp)=",length(rnp)));
         
