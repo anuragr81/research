@@ -41,74 +41,103 @@ value_state<-function(state,u,d){
 payoff<-function(S,payoffparams){
   if(payoffparams$K>0){
     K<-payoffparams$K;
-    return(max(S-K,0));
+    pf<-max(S-K,0);
+    #    print(paste("payoff",pf));
+    return(pf);
   }else{
     stop("Invalid Params to payoff");
   }
 }
 
-evaluate_pair<-function(Dstate,Ustate,S_0,p,u,d,r_f,Dt,payoffparams){
-  S_u=S_0*value_state(state=Ustate,u=u,d=d);
-  S_d=S_0*value_state(state=Dstate,u=u,d=d);
-  val=exp(-r_f*Dt)*(p*payoff(S=S_u,payoffparams=payoffparams)
-                   +(1-p)*payoff(S=S_d,payoffparams=payoffparams));
+evaluate_pair<-function(pf_u,pf_d,p,r_f,Dt,payoffparams){
+  val=exp(-r_f*Dt)*(p*pf_u+(1-p)*pf_d);
   return(val);
 }
 
-mergevec<-function(valvec,curvec){
-  if (is.null(curvec)){
+mergevec<-function(valvec,resvec){
+  if (is.null(resvec)){
     return (valvec);
   }
   
   i=1;
-  resvec=array();
+  retvec=array();
   for (val in valvec){
-    if(val>curvec[i]){
-      resvec[i]=val;
+    if(val>resvec[i]){
+      retvec[i]=val;
     }else{
-      resvec[i]=curvec[i];
+      retvec[i]=resvec[i];
     }
     i=i+1;
   }
-  return (resvec);
+  return (retvec);
 }
 
 evaluate_paths <- function(S_0,r_f,Dt,u,d,p,payoffparams,paths){
   np=length(paths);
   resvec=NULL;
   for (n in seq(np)){
+    
+    #    print(paste("Before resvec:",toString(resvec)));
     last_n=np-n+1;
     curvec=paths[[last_n]];
-    valvec=array();
-    for (i in seq(2,length(curvec))){
-      valvec[i-1]=evaluate_pair(Dstate=curvec[i],
-                           Ustate=curvec[i-1],
-                           S_0=S_0,
-                           p=p,
-                           u=u,
-                           d=d,
-                           r_f=r_f,
-                           Dt=Dt,
-                           payoffparams=payoffparams);
+    #    print(paste("curvec:",toString(curvec)));
+    if (exercise_flag==TRUE || exercise_flag==FALSE && n==1){
+      # valuation on stock-path would be done every time if it's an American (or path dependent)
+      # otherwise only once at the nodes
+      exercise_payoffvec=array();
+      
+      for (i in seq(1,length(curvec))){
+        asset_val<-S_0*value_state(state=curvec[i],u=u,d=d);
+        exercise_payoffvec[i]=payoff(S=asset_val,payoffparams=payoffparams);        
+      }
+      
+      #      print(paste("exercise_payoffvec:",toString(exercise_payoffvec)));
+      payoffvec=mergevec(valvec=exercise_payoffvec,resvec=resvec)
+    } else {
+      payoffvec=resvec;
     }
-    resvec=mergevec(valvec=valvec,curvec=resvec);
-  } # loop over path
-  print(resvec);
+    #    print(paste("payoffvec:",toString(payoffvec)));
+    
+    #prepare resvec for next level (size reduces by 1 at every level)
+    next_resvec=array();
+    for (i in seq(2,length(curvec))){
+      next_resvec[i-1]=evaluate_pair(pf_d=payoffvec[i-1],
+                                     pf_u=payoffvec[i],
+                                     p=p,
+                                     r_f=r_f,
+                                     Dt=Dt);
+    }
+    resvec=next_resvec;
+    #    print(paste("After resvec:",toString(resvec)));
+  } # loop over levels
+  return(resvec);
 }
 
 binval<-function(S_0,r_f,sg,np,T,K){
   require(zoo);
   Dt=T/np;
-  print(paste("Dt=",Dt))
   u=exp(sg*sqrt(Dt));
   d=1/u;
   p=(exp(r_f*Dt)-d)/(u-d);
+  #  print(paste("Dt=",Dt,"p=",p,"d=",d,"u=",u))
   paths=generate_paths(np=np);
   payoffparams=data.frame("K"=K);
-  evaluate_paths(S_0=S_0,r_f=r_f,Dt=Dt,u=u,d=d,p=p,
-                 payoffparams=payoffparams,paths=paths);
+  resvec=evaluate_paths(S_0=S_0,r_f=r_f,Dt=Dt,u=u,d=d,p=p,
+                        payoffparams=payoffparams,paths=paths);
+  return(resvec);
 }
 
+simul<-function(){
+  tvec=seq(100,120);
+  p=array();
+  i=1;
+  for (iperiod in tvec){
+    p[i]=binval(S_0=30,r_f=.1,sg=.4,np=iperiod,T=1,K=35);
+    i=i+1;
+  }
+  plot(tvec,p,xlab="Number of Periods",ylab="Price of European Option",type='l')
+  print(p)
+}
 risk_neutral_probability <-function(callprice_vec,
                                     strike_vec,
                                     S_0,
