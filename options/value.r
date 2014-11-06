@@ -25,17 +25,21 @@ generate_paths<-function(np){
 value_state<-function(state,u,d){
   i=1;
   prod=1;
+  ucount=0;
+  dcount=0;
   state=unlist(strsplit(state, ""));
   for (letter in state){
     if (letter == "u"){
       prod=prod*u;
+      ucount=ucount+1;
     }else if (letter=="d"){
       prod=prod*d;
+      dcount=dcount+1
     }else{
       stop(paste("invalid letter",letter));
     }
   }
-  return(prod);
+  return(data.frame(prod=prod,ucount=ucount,dcount=dcount));
 }
 
 payoff<-function(S,payoffparams){
@@ -73,6 +77,7 @@ mergevec<-function(valvec,resvec){
 }
 
 evaluate_paths <- function(S_0,r_f,Dt,u,d,p,payoffparams,paths){
+  exercise_flag=FALSE;
   np=length(paths);
   resvec=NULL;
   for (n in seq(np)){
@@ -87,7 +92,7 @@ evaluate_paths <- function(S_0,r_f,Dt,u,d,p,payoffparams,paths){
       exercise_payoffvec=array();
       
       for (i in seq(1,length(curvec))){
-        asset_val<-S_0*value_state(state=curvec[i],u=u,d=d);
+        asset_val<-S_0*(value_state(state=curvec[i],u=u,d=d)$prod);
         exercise_payoffvec[i]=payoff(S=asset_val,payoffparams=payoffparams);        
       }
       
@@ -114,6 +119,7 @@ evaluate_paths <- function(S_0,r_f,Dt,u,d,p,payoffparams,paths){
 }
 
 binval<-function(S_0,r_f,sg,np,T,K){
+  #estimate P without caring about ud=1 - just p
   require(zoo);
   Dt=T/np;
   u=exp(sg*sqrt(Dt));
@@ -127,8 +133,54 @@ binval<-function(S_0,r_f,sg,np,T,K){
   return(resvec);
 }
 
+crrbinval<-function(S_0,r_f,sg,np,T,K){
+  require(zoo);
+  Dt=T/np;
+  u=exp(sg*sqrt(Dt));
+  d=1/u;
+  p=(exp(r_f*Dt)-d)/(u-d);
+  #  print(paste("Dt=",Dt,"p=",p,"d=",d,"u=",u))
+  paths=generate_paths(np=np);
+  payoffparams=data.frame("K"=K);
+  resvec=evaluate_paths(S_0=S_0,r_f=r_f,Dt=Dt,u=u,d=d,p=p,
+                        payoffparams=payoffparams,paths=paths);
+  return(resvec);
+}
+
+asset_distr<-function(np){
+  S_0=30;
+  T=1;
+  sg=.4;
+  r_f=.1;
+  K=35;
+  Dt=T/np;
+  u=exp(sg*sqrt(Dt));
+  d=1/u;
+  p=(exp(r_f*Dt)-d)/(u-d);
+  
+  payoffparams=data.frame("K"=K);
+  paths=generate_paths(np);
+  curvec=paths[[np]];
+  asset_val=array();
+  prob=array();
+  expsum=0;
+  for (i in seq(1,length(curvec))){
+    valres<-value_state(state=curvec[i],u=u,d=d)
+    asset_val[i]=S_0*(valres$prod);
+    ucount=valres$ucount;
+    dcount=valres$dcount;
+    n=ucount+dcount;
+    ncr=factorial(n)/(factorial(ucount)*factorial(dcount));
+    prob[i]=ncr*value_state(state=curvec[i],u=p,d=(1-p))$prod;
+    expsum=expsum+prob[i]*payoff(S=asset_val[i],payoffparams=payoffparams);
+  }
+  plot(asset_val,prob,type='l');
+  print(expsum);
+  return(prob);
+}
+
 simul<-function(){
-  tvec=seq(100,120);
+  tvec=seq(50);
   p=array();
   i=1;
   for (iperiod in tvec){
