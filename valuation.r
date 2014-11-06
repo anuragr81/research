@@ -12,11 +12,25 @@ rochange<-function(dvec){
   return(roch);
 }
 
+projections<-function(dvec,phase){
+  pjctns=array();
+  for (i in seq(phase,length(dvec))){
+    coefficients=coef(lm(dvec[(i-phase+1):i]~seq(phase)));
+    intercept=coefficients[1];
+    slope=coefficients[2];
+    roe_projection=as.double(slope*(phase+1)+intercept);
+    pjctns[i]=roe_projection;
+    #y=(c(coredata(dvec[(i-phase+1):i]),roe_projection));plot(seq(phase+1),y);readline();
+  }
+  return(pjctns)
+}
+
 calculateROE<- function(){
   
   # WACC needs 
   files=dir()[grep("Analog.*output.csv$",dir())];
   nfiles=length(files)
+  tax=.3;
   
   for ( file in files){
     print(file)
@@ -28,25 +42,14 @@ calculateROE<- function(){
     require(zoo);
     bve_average=average_data(data$bve);
     ltdebt_average=average_data(data$ltdebt);
-    roe=rochange(data$ebit);
-    
-    print(paste("bve_average:",toString(bve_average)));
-    print(paste("ltdebt:",toString(ltdebt_average)));
-    print(paste("roe:",toString(roe)));
-    
+    noplat=data$ebit*(1-tax);
+    roe=rochange(data$ebit);    
     
     dates=(coredata(lag(zoo(data$date),1)));
     phase=3;
-    roes=array();
-    for (i in seq(phase,length(roe))){
-      coefficients=coef(lm(roe[(i-phase+1):i]~seq(phase)));
-      intercept=coefficients[1];
-      slope=coefficients[2];
-      roe_projection=as.double(slope*(phase+1)+intercept);
-      roes[i]=roe_projection;
-      #y=(c(coredata(roe[(i-phase+1):i]),roe_projection));plot(seq(phase+1),y);readline();
-    }
+    roes=projections(dvec=roe,phase=phase)
     # evaluate WACC at every stage
+    print(paste("roes:",toString(roes)));
     
   }
 }
