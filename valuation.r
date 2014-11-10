@@ -1,17 +1,3 @@
-average_data<-function(dvec){
-  d_next=lag(zoo(dvec),1);
-  d_cur=lag(zoo(dvec),0);
-  davg=(d_next+d_cur)/2;
-  return(davg);
-}
-
-rochange<-function(dvec){
-  d_next=lag(zoo(dvec),1);
-  d_cur=lag(zoo(dvec),0);
-  roch=d_next/d_cur-1;
-  return(roch);
-}
-
 projections<-function(dvec,phase){
   pjctns=array();
   for (i in seq(phase,length(dvec))){
@@ -29,27 +15,47 @@ calculateROE<- function(){
   
   # WACC needs 
   files=dir()[grep("Analog.*output.csv$",dir())];
-  nfiles=length(files)
+  nfiles=length(files);
   tax=.3;
+  # TODO: use timeseries dictionaries for storing roes, roic etc.
   
   for ( file in files){
     print(file)
     data=read.csv(file);
-    data=data.frame(date=strptime(data$date,"%Y-%m-%d"),
-                    shares=data$shares,
-                    bve=data$bve,
-                    ebit=data$ebit,ltdebt=data$ltdebt);
-    require(zoo);
-    bve_average=average_data(data$bve);
-    ltdebt_average=average_data(data$ltdebt);
-    noplat=data$ebit*(1-tax);
-    roe=rochange(data$ebit);    
+    dvec=as.integer(strftime(strptime(data$date,"%Y-%m-%d"),"%Y"));
     
-    dates=(coredata(lag(zoo(data$date),1)));
+    tsshares=ts(data=data.frame(shares=data$shares),
+                start=c(dvec[1],1),end=c(dvec[length(dvec)]));
+    tsbve=ts(data=data.frame(bve=data$bve),
+             start=c(dvec[1],1),end=c(dvec[length(dvec)]));
+    tsebit=ts(data=data.frame(ebit=data$ebit),
+              start=c(dvec[1],1),end=c(dvec[length(dvec)]));
+    tsltdebt=ts(data=data.frame(ltdebt=data$ltdebt),
+                start=c(dvec[1],1),end=c(dvec[length(dvec)]));
+    
+    require(zoo);
+    tsbve_avg=(lag(tsbve,-1)+(tsbve))/2;
+    tsltdebt_average=(lag(tsltdebt,-1)+(tsltdebt))/2;
+    den=tsltdebt_average+tsbve_avg;
+    den=ts.intersect(den,tsebit);
+    roic=ts(data=data.frame(roic=as.data.frame(den)$tsebit)/as.data.frame(den)$den,
+            start=start(den),end=end(den),
+            frequency=frequency(den));
+    
+    roe=tsebit/lag(tsebit,-1)-1;
+    
     phase=3;
-    roes=projections(dvec=roe,phase=phase)
+    tsroec=roe
+    for (lindex in seq(phase-1)) {
+      tsroec=ts.intersect(tsroec,lag(roe,-lindex));
+    }
+    
+    return(tsroec)
+    roes=projections(dvec=roe,phase=phase);
     # evaluate WACC at every stage
-    print(paste("roes:",toString(roes)));
+    print(paste("(g):",toString(roes)));
+    print(paste("(roic):",toString(roic)));
+    #print(paste("g/roic:",toString(roes/roic)));
     
   }
 }
