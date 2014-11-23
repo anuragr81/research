@@ -44,8 +44,10 @@ for sym in syms:
     pos=searchline(sym=sym,line=headline);
     startpos=pos;
     posmap[startpos]={'start':pos,'sym':sym};
-    while(line[pos]!=""):
+    print "sym:",sym,"pos:",pos,"len(nl):",len(nextline)
+    while(pos < len(nextline) and nextline[pos]!=""):
         pos = pos + 1
+        print "at pos:",pos
     posmap[startpos]['end']=pos;
 
 symmap={}
@@ -71,4 +73,4 @@ for sym in symmap.keys():
     with open(outdir.strip()+"/"+symfname+".out.csv",'w') as csvout:
        cw = csv.writer(csvout,delimiter=",")
        for entry in symmap[sym]:
-            print entry
+            cw.writerow(entry)
