@@ -1,0 +1,766 @@
+1. What I intuitively do is to see what the values are over a week, month, 3m, 6m, 1y. 5y is used only to make sure that the curves have indeed come back or in other words, there is some sort of (mean) reversion. 
+   So given that, if we have 1d,1m,3m,6m,1y values. We need to look at variation for each of these intervals. We can observe how variation varies. 
+
+2. Betting on day seems to risky. It probably does make sense to benefit from daiy trading but I think that the probability to have the prediction of daily values being correct would be smaller for a shorter period of time. If prediction is that p rises by dp in 1 day, then the probability of going down cannot be predicted so accurately because of the news etc. The prediction that we're doing would be on a curve basis and the smoothness of a curve seems lower for small intervals. Graphs are highly volatile for a day and in my experience trades don't even go through a lot of time if one wishes to benefit from short term movement i.e. selling and buying quickly - on small ups and downs. Of course paying commissions makes it even worse. Predictions for week, on the other hand, give the ability to predict a larger window of a value. 
+
+2. One factor indepdendent of daily/weekly predictions is the cooling off. Cooling off may always take a week or more. One thing that I have noticed is that a downward value may mean immediate loss (if stocks were shorted) but the correct prediction of a downward trend can actually offset the losses. Of course, one needs to have lot more money to be able to trade like this.
+
+3. Some general rules  : 
+   i) If a stock that went up is just volatile. Then it may be possible to benefit from the daily ups and downs: A stock that went up and down a lot in 3 day of the week would likely go up again if bought on the low tide. One must watch out for the bad news in the market though.
+   ii) sudden drops of good curves are always worth looking at (Toyota). Drops over a month need to be taken more seriously than a drops over a day.
+   iii) basic idea seems to be that a long-term rise followed by a sharp dip (a trench in uphill) should always be caught (Home Depot).
+   iv) Baxter's drop is a classic case where varitonal check could have caught the drop. Baxter won't go down immediately.
+
+4. There should be a way to evaulate a portfolio's market value at a certain time. This can be calculate only if price is available for all instruments at the particular time instant. Looking at historical data this wouldn't always be the case - so a tolerance can be specified. The binary search would return the closest match the evaluator can then just see if the closest time falls within the tolerance. No evaluation would be done.
+
+
+5. Here is how to receive TCP:
+   size_t read_start = 0;
+            while (true) { // reads forever
+
+                //ACE_Time_Value acets(0, 0);
+                int sz_read = (int)_socket.recv(buffer+read_start, MAX_READ_SIZE);
+
+                if (sz_read > 0) {
+
+                    if (sz_read + read_start > MAX_BUF_SIZE ) {
+                        printf("[::svc] Buffer not enough for the packet size \n");
+
+                        exit(1);
+                    }
+
+                    int nbytes_processed = process_data(buffer , read_start + sz_read );
+
+                    if (nbytes_processed>0) {
+                        memmove (buffer,buffer+nbytes_processed,sz_read + read_start- nbytes_processed);
+                    }
+
+                    read_start = sz_read + read_start  -nbytes_processed ;
+                }
+                else if (sz_read == -1)
+                {
+                    printf("[::svc] recv read=(%d) errno=(%d)\n", sz_read, errno);
+
+                    exit(-1);
+                }
+                else if (sz_read == 0)
+                {
+                    printf("[::svc] EOF - Remote Host closed socket\n");
+
+                    exit(1);
+                }
+            }
+
+
+6. Parse Double and Integer :
+
+
+const uint32_t ascii_to_dec[] = {
+     // 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22 23
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+     //24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+     //(48=(int)'0') ....
+     //48,49,50,51,52,53,54,55,56,57,58,59
+     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0
+};
+
+
+
+bool parseDouble(int64_t  & msdec, const char *str_dig, int& dig_after_dot)
+{
+     msdec=0;
+     uint32_t dot_true = 0x00;
+     dig_after_dot = 0;
+     while(str_dig) {
+          uint32_t i = *str_dig;
+          while (isdigit(i) ) {
+               msdec = msdec * 10 + ascii_to_dec[i];
+               dig_after_dot = (dot_true & ++dig_after_dot);
+               str_dig++;
+               i = *str_dig;
+          }
+          if (i == '.') {
+               dot_true = 0xFFFFFFFF;
+               str_dig++;
+          } else  if ( i == '\0' || i == ' ' ) {
+               break;
+          } else {
+               msdec=0;
+               break;
+          }
+     }
+
+     return true ;
+
+}
+
+
+bool parseInteger(int & result, char * ptr, const size_t sz)
+{
+     char * p_cur = ptr;
+     result = 0;
+     for (size_t i = 0; i < sz; ++i, p_cur++) {
+          char ch = *p_cur;
+          if (isdigit(ch)) {
+               result = 10 * result + ascii_to_dec[(int)ch];
+          }
+          else if (ch == '.')
+          {
+              break;
+          }
+     }
+     return (result >= 0);
+}
+
+
+7. Handy hexdump in python :
+
+FILTER=''.join([(len(repr(chr(x)))==3) and chr(x) or '.' for x in range(256)])
+
+def dump(src, length=8):
+    N=0; result=''
+    while src:
+       s,src = src[:length],src[length:]
+       hexa = ' '.join(["%02X"%ord(x) for x in s])
+       s = s.translate(FILTER)
+       result += "%04X   %-*s   %s\n" % (N, length*3, hexa, s)
+       N+=length
+    return result
+
+
+8.  Useful logger :
+
+import logging;
+
+loglevel=logging.DEBUG
+
+loglevelmap = { 'megabook':logging.DEBUG,
+                'server':logging.DEBUG} ;
+
+class Logger :
+  def __init__(self,LOGGER_NAME):
+      FORMAT='%(asctime)-15s %(message)s'
+      logging.basicConfig(format=FORMAT);
+      self.logger = logging.getLogger(LOGGER_NAME);
+      global loglevel
+      if LOGGER_NAME in loglevelmap :
+          self.logger.setLevel(loglevelmap[LOGGER_NAME])
+          #self.attachFile("/home/fxdev/lq2mlog",logging.INFO)
+      else:
+          self.logger.setLevel(loglevel)
+
+  def attachFile(self,fname,loglevel):
+      fh = logging.FileHandler(fname)
+      fh.setLevel(loglevel)
+      self.logger.addHandler(fh)
+
+To instantiate the logger : 
+
+logger= locallog.Logger("megabook").logger;
+
+
+9. backtrace : 
+
+#include <execinfo.h>
+#include <cxxabi.h>
+#include <dlfcn.h>
+
+void backTraceDump(void)
+{
+
+     using namespace abi;
+
+     enum {
+          MAX_DEPTH = 10
+     };
+
+     void *trace[MAX_DEPTH];
+
+     Dl_info dlinfo;
+
+     int status;
+     const char *symname;
+     char *demangled;
+
+     int trace_size = backtrace(trace, MAX_DEPTH);
+
+     printf("Call stack: \n");
+
+     for (int i = 0; i < trace_size; ++i) {
+          if (!dladdr(trace[i], &dlinfo))
+               continue;
+
+          symname = dlinfo.dli_sname;
+
+          demangled = __cxa_demangle(symname, NULL, 0, &status);
+          if (status == 0 && demangled)
+               symname = demangled;
+
+          printf("object: %s, function: %s\n", dlinfo.dli_fname, symname);
+
+          if (demangled)
+               free(demangled);
+     }
+
+}
+
+
+6. Utility to get self IP :
+
+static int getInterfaceInfo(const char* interface, uint32_t& interfaceIP, char* interfaceIPStr)
+{
+    // NOTE: interfaceIP will be returned in NETWORK byte order
+
+    int rc = 0;
+    interfaceIP = INADDR_ANY;
+
+    if (interface != 0)
+    {
+        int fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
+
+        if (fd != -1)
+        {
+            struct ifreq ifr;
+            strncpy(ifr.ifr_name, interface, IFNAMSIZ);
+
+            if ((rc = ioctl(fd, SIOCGIFADDR, (caddr_t)&ifr, sizeof(ifr))) != -1)
+            {
+                struct sockaddr_in* sin = (struct sockaddr_in *)&ifr.ifr_addr;
+                interfaceIP = sin->sin_addr.s_addr;
+            }
+        }
+
+
+        if (fd == -1 || rc == -1)
+        {
+            ACE_DEBUG((MY_WARNING "[getInterfaceIPAddr] error finding interface IP address for '%s' (%s: %m);"
+                       " using INADDR_ANY\n", (interface == 0) ? "DEFAULT" : interface,
+                       (fd == -1) ? "socket" : "ioctl"));
+        }
+
+        close(fd); // ignore error
+    }
+
+
+    if (interfaceIPStr != 0)
+    {
+        struct in_addr ina;
+        ina.s_addr = interfaceIP;
+
+        strcpy(interfaceIPStr, inet_ntoa(ina));
+    }
+
+    return rc;
+}
+
+
+///// USAGE ///////////////
+    ACE_INET_Addr serverAddr;
+    if (serverAddr.set(port, ntohl(interfaceIP)) == -1)
+    {
+        return -1;
+    }
+
+
+7. Github:
+class HTTPHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+    """Handling all HTTP Requests here."""
+    mb = None  # persisted data
+
+    def do_GET(self):
+        (sendReply,mimetype,path)=reply_type(self.path)
+        if sendReply :
+          resp=open("./"+path).read();
+          self.send_response(200)
+          self.send_header("Content-type",mimetype)
+          self.send_header("Content-length", len(resp))
+          self.end_headers()
+          self.wfile.write(resp)
+
+
+    def do_POST(self):
+        if self.mb == None : # do nothing if data is not initialized.
+            logger.error("Please initialized the Handler::mb")
+            return ;
+
+        length = int(self.headers.getheader('content-length'))
+        json_request_data = self.rfile.read(length)
+        logger.debug("Received Call from server: \""+str(json_request_data)+"\"")
+        try:
+            logger.debug("Parsed json:"+str(json.loads(json_request_data)))
+            result = handleRequest(json.loads(json_request_data),self.mb,self.client_address[0])
+            self.send_response(200)
+            self.send_header("Content-type","application/json")
+            self.send_header("Content-length", len(result))
+            self.end_headers()
+
+        except:
+            traceback.print_exc(file=sys.stdout)
+            result = 'error'
+        self.wfile.write(result)
+
+
+def reply_type(path) :
+   #Check the file extension required and
+   #set the right mime type
+   if path == "/":
+     retpath = FILE
+   else :
+     retpath = path
+
+   logger.debug("path = " +retpath)
+
+   sendReply = False
+   mimetype = None
+
+   if retpath.endswith(".html"):
+    mimetype='text/html'
+    sendReply = True
+   if retpath.endswith(".jpg"):
+    mimetype='image/jpg'
+    sendReply = True
+   if retpath.endswith(".gif"):
+    mimetype='image/gif'
+    sendReply = True
+   if retpath.endswith(".js"):
+    mimetype='application/javascript'
+    sendReply = True
+   if retpath.endswith(".css"):
+    mimetype='text/css'
+    sendReply = True
+
+   return [sendReply,mimetype,retpath]
+
+
+8. StringComparator
+
+class StringComparator{
+ public:
+ bool operator () (std::string const  & lhs , std::string const & rhs )
+ {
+    int shorter_length=0;
+    bool lhs_shorter;
+
+    if (lhs.size() < rhs.size() ){
+    shorter_length=lhs.size();
+    lhs_shorter = true;
+    }
+    else{
+    shorter_length=rhs.size();
+    lhs_shorter = false;
+    }
+
+    std::string::const_iterator lhs_ptr=lhs.begin();
+    std::string::const_iterator rhs_ptr=rhs.begin();
+
+    for (int i = 0 ; i < shorter_length ; i++,lhs_ptr++,rhs_ptr++){
+           if (*lhs_ptr >  *rhs_ptr)
+            {
+              return false;
+            }
+           else if (*lhs_ptr < *rhs_ptr )
+           {
+             return true;
+           }
+    }
+   // if control is here then one string is prefix of another
+   // the shorter string is lesser!
+   return lhs_shorter;
+ }
+};
+
+
+9. Unlikely definitions: 
+
+#ifndef unlikely
+#ifdef __GCC__
+#define unlikely(x)   _  _builtin_expect (!!(x), 0)
+#else
+#define unlikely(x)  (x)
+#endif
+#endif
+
+
+
+10. Simple server : 
+#ifndef __GUI_REQUEST_MANAGER_HPP__
+#define __GUI_REQUEST_MANAGER_HPP__
+
+#include <iostream>
+#include <map>
+
+#include <boost/lexical_cast.hpp>
+
+#include "GUIRequestXMLParser.hpp"
+#include "GUIResponse.hpp"
+
+using namespace std;
+
+const int HEADER_SIZE = 10;
+const int RECV_TIMEOUT = 3;
+const int READBUF_SIZE = 20000;
+
+class Client {
+
+public:
+   ACE_SOCK_Stream peer;
+	ACE_INET_Addr remote;
+
+	Client(const ACE_SOCK_Stream& p) :
+		peer(p) {
+		peer.get_remote_addr(remote);
+	}
+
+	~Client() {
+		peer.close();
+	}
+
+};
+
+class GUIRequestManager {
+
+public:
+	GUIRequestManager(ACE_INET_Addr const & address) {
+		cout << "opening acceptor " << endl;
+		if (_acceptor.open(address, 1) != 0) {
+			cout << "Error in opening address." << endl;
+		} else {
+			cout << "opened acceptor " << endl;
+			_masterHandleSet.set_bit(_acceptor.get_handle());
+			_acceptor.enable(ACE_NONBLOCK);
+		}
+	}
+
+	int serve_forever() {
+		while (1) {
+			_activeReadHandleSet = _masterHandleSet;
+			int width = (int) _activeReadHandleSet.max_set() + 1;
+			if (ACE::select(width, _activeReadHandleSet) == -1) {
+				cout << "Connection could not be handled." << endl;
+				continue;
+			}
+			int rh = handleConnections();
+
+			if (rh == -1) {
+				cout << "Error while handling connections." << endl;
+			}
+
+			int rd = handleData();
+			if (rd == -1) {
+				cout << "Error while handling data." << endl;
+			}
+		}
+		return 0;
+	}
+
+private:
+
+	int handleConnections() {
+		ACE_SOCK_Stream peer;
+
+		// wait for connection
+
+		if (_activeReadHandleSet.is_set(_acceptor.get_handle())) {
+			while (_acceptor.accept(peer) != -1) {
+				// create a client
+				// peer.get_handle() Handle peer
+				cout << "Creating a client" << endl;
+				_clients[peer.get_handle()] = new Client(peer);
+
+				// add the new handle to the map and to the set of handles
+				// we <select> for input
+
+				_masterHandleSet.set_bit(peer.get_handle());
+			}
+
+			// acknowledge
+			_activeReadHandleSet.clr_bit(_acceptor.get_handle());
+		}
+
+		// success
+		return 0;
+	}
+
+	void prepareResponse(GUI::Request const & request,
+			GUI::Response * pResponse) const {
+		pResponse->setFeedMap(request.getFeedMap());
+	}
+
+	void handleRequestData(char * buf, size_t message_size,
+			GUI::Response * pResp) const {
+		//ACE_DEBUG (( MY_DEBUG, "(%P|%t) Handling Data [ %s ] ", std::string(buf,message_size).c_str()));
+		cout << " Handling data : " << std::string(buf, message_size) << endl;
+		try {
+
+			GUI::Request request = GUI::XMLRequestParser::parse(buf);
+			prepareResponse(request, pResp);
+
+			ACE_DEBUG((MY_DEBUG, "(%P|%t)  Request = %d", request.type()));
+		} catch (std::exception & e) {
+			ACE_ERROR((MY_ERROR, "(%P|%t)  Error [%s]", e.what()));
+			cout << " Error while parsing : " << e.what() << endl;
+		} catch (...) {
+			ACE_ERROR((MY_ERROR, "(%P|%t)  Non-standard Execption."));
+			cout << " Error while parsing : " << endl;
+		}
+	}
+
+	int serveGUIRequest(Client * clientPtr) {
+
+		cout << " Serving GUIRequest " << endl;
+		ACE_Time_Value timeout(RECV_TIMEOUT, 0);
+		char buf[READBUF_SIZE];
+		int bytesRead = clientPtr->peer.recv_n(buf, HEADER_SIZE, &timeout);
+
+		if (bytesRead != HEADER_SIZE) {
+			if (bytesRead == 0) {
+				cout << "Connection closed" << endl;
+			}
+			if (bytesRead == -1) {
+				cout << "Error in communication" << endl;
+			}
+			return -1;
+		}
+
+		try {
+			int szMessage = boost::lexical_cast<int>(
+					std::string(buf, HEADER_SIZE));
+			cout << " Message of size " << szMessage << " received" << endl;
+			int bytesRead = (int) clientPtr->peer.recv_n(buf, szMessage,
+					&timeout);
+
+			if (bytesRead != szMessage) {
+				if (bytesRead == 0) {
+					cout << "Connection closed" << endl;
+				}
+				if (bytesRead == -1) {
+					cout << "Error in communication" << endl;
+				}
+				return -1;
+			}
+			cout << " Message : " << std::string(buf, szMessage) << endl;
+
+			GUI::Response response;
+
+			handleRequestData(buf, szMessage, &response);
+
+			int szResponse = (int) response.xmldump(buf, READBUF_SIZE);
+			if (clientPtr->peer.send_n(&buf, szResponse, &timeout)
+					!= szResponse) {
+				cout << "Could not send data to requester" << endl;
+				return -1;
+			} else {
+				cout << "Sent data \"" << std::string(buf, szResponse) << "\""
+						<< endl;
+			}
+
+		} catch (boost::bad_lexical_cast & e) {
+			cout << " Could not parse size " << endl;
+			return -1;
+		}
+
+		return 0;
+	}
+
+	int handleData() {
+		// iterate over all the socket having pending data
+		ACE_Handle_Set_Iterator peer_iterator(_activeReadHandleSet);
+
+		ACE_HANDLE handle;
+
+		while ((handle = peer_iterator()) != ACE_INVALID_HANDLE) {
+			// find our client for this handle
+			std::map<ACE_HANDLE, Client*>::iterator clientIterator =
+					_clients.find(handle);
+
+			if (clientIterator == _clients.end()) {
+				continue;
+			}
+
+			Client* clientPtr = (*clientIterator).second;
+
+			if (serveGUIRequest(clientPtr) == -1) {
+				_masterHandleSet.clr_bit(handle);
+
+				cout << "delete client " << clientPtr->remote.get_host_addr()
+						<< ":" << clientPtr->remote.get_port_number() << endl;
+
+				_clients.erase(clientIterator);
+
+				delete clientPtr;
+			}
+		}
+
+		// client has shutdown the connection
+		return 0;
+	}
+
+private:
+	ACE_SOCK_Acceptor _acceptor;
+	ACE_Handle_Set _masterHandleSet;
+	ACE_Handle_Set _activeReadHandleSet;
+
+	std::map<ACE_HANDLE, Client*> _clients;
+
+};
+
+#endif
+
+
+10. Adding Locks, Conditions:
+
+class FeedMap :
+
+  def __init__(self,host,port):
+     self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+     self.host_port=  ( host , port )
+     self.sock.connect(self.host_port)
+     self.feed_dict=dict()
+     self.lock=threading.RLock()
+     self.cond=threading.Condition(self.lock)
+
+
+  def send_data(self,data_):
+        header = str(len(data_)+1).rjust(HEADER_SIZE,'0')
+        data_to_send = header + data_ + struct.pack('!b',1)
+        logger.debug("Sending Packet (sz="+str(len(data_to_send))+"):\n"+dump(data_to_send))
+        self.sock.sendall(data_to_send)
+        return self.sock.recv(MAX_READ_SIZE)
+
+     #except socket.error, e:
+     #except IOError, e:
+     #if e.errno == errno.EPIPE:
+
+
+
+  def update(self,list_feeds,user) :
+     new_candidate_dict=list2feed_dict(list_feeds);
+
+     self.lock.acquire()
+     self.cond.acquire();
+     # check should be inside Critical Section
+     if (new_candidate_dict==self.feed_dict) :
+         logger.info("No Update necessary.");
+     else:
+        try :
+           data = prepareMBServerRequest(new_candidate_dict);
+           # send data to Megabook Server
+           response = self.send_data(data)
+           logger.debug("Received Response from MB:" + response );
+           (response_type,parsed_feed_dict ) = parseResponse(response);
+           if int(response_type) == VALID_RESPONSE_TYPE :
+              self.feed_dict=parsed_feed_dict
+              logger.info("FeedMap Changed.");
+        except :
+           traceback.print_exc(file=sys.stdout)
+           logger.error("Could not retrieve status from Megabook.");
+
+        self.cond.notifyAll(); # wake up the blocking asyncs
+
+     self.user = user
+
+     self.cond.release();
+     self.lock.release()
+
+  def getdata(self):
+     self.lock.acquire();
+     user =""
+     feeds=[]
+     for key in self.feed_dict.keys():
+         feeds.append((self.feed_dict[key])); # returning a copy
+     user=self.user
+     self.lock.release();
+     return [feeds,user];
+
+11. Simple javascript Code for async data: 
+
+<script type="text/javascript">
+                function sync_xml_http_post(url, data) {
+                        var req = false;
+                        try {
+                                // Firefox, Opera 8.0+, Safari
+                                req = new XMLHttpRequest();
+                        } catch (e) {
+                                // Internet Explorer
+                                try {
+                                        req = new ActiveXObject("Msxml2.XMLHTTP");
+                                } catch (e) {
+                                        try {
+                                                req = new ActiveXObject("Microsoft.XMLHTTP");
+                                        } catch (e) {
+                                                alert("Your browser does not support AJAX!");
+                                                return "";
+                                        }
+                                }
+                        }
+
+                        try {
+                                req.open("POST", url, false /*true: asynchronous*/);
+                                req.send(data);
+                        } catch (e) {
+                                alert("Exception in receiving data from Server:" + e);
+                                return "";
+                        }
+
+                        return req.responseText;
+                }
+
+                function async_xml_http_post(url, data, callback) {
+                        var req = false;
+                        try {
+                                // Firefox, Opera 8.0+, Safari
+                                req = new XMLHttpRequest();
+                        } catch (e) {
+                                // Internet Explorer
+                                try {
+                                        req = new ActiveXObject("Msxml2.XMLHTTP");
+                                } catch (e) {
+                                        try {
+                                                req = new ActiveXObject("Microsoft.XMLHTTP");
+                                        } catch (e) {
+                                                alert("Your browser does not support AJAX!");
+                                                return "";
+                                        }
+                                }
+                        }
+
+                        req.open("POST", url, true /* false: synchronous */);
+                        req.onreadystatechange = function() {
+                                if(req.readyState == 4) {
+                                        callback(req);
+                                }
+                        }
+                        req.send(data);
+                }
+
+                function localTimeFromSeconds(totalSec) {
+                        hours = parseInt(totalSec / 3600) % 24;
+                        minutes = parseInt(totalSec / 60) % 60;
+                        seconds = ~~(totalSec % 60);
+                        return (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                }
+
+                function async_call(request, callback) {
+                        async_xml_http_post("index.html", request, callback);
+                }
+
+
+12. URL based authentication 
+
+function getURLParameter(name) {
+    return decodeURI(
+        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+}
+
+
+if ( getURLParameter("sid") == "null") {
+  alert("Session to be initialized.");
+  window.location = window.location +  "?sid=420";
+} else {
+  Y.log("Using Session: "+getURLParameter("sid"));
+}
+
+
+
