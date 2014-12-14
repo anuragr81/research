@@ -30,8 +30,8 @@
                                 res = strategy.onData() { 
                                      for c in SocketInitiator::m_connections : 
                                             SocketConnection::read(SocketConnector&)                                    {
-                                                   SocketConnection::readMessages(){
-             Session->next(msg);  
+                                                   SocketConnection::readMessages(SocketConnector::getMonitor()){
+             Session->next(msg,isQueued=false);  
        }
                                             }
  
@@ -46,6 +46,91 @@
     } // end startThread
   } // end block, end start
 
-3. The key function is next() - which maintains the states. The main logic is here.
+3. The key function is next() - which maintains the states. The main variant is next(msg) the but the other variant is next() (which handles logon/logout related operations).
+   Session::next(){
+      if ( isLogonTime(timeStamp) ) { 
+              if (loggedOn){ SessionState::sentLogout() }
+      } else {
+              if (!SessionState::receivedLogon()){
+               generateLogon();
+              }
+              else if (m_state.alreadySentLogon && m_state.logonTimeOut){
+               disconnect();
+              } else { return ;} // do nothing 
+      } 
+      if (m_state.logoutTimedOut) { disconnect() } 
+      if (m_state.timedOut) { disconnect() } 
+      else {
+          if (m_state.needTestRequest){ m_state.testRequest() }
+          else if (m_state.needHeartbeat() ) { generateHeartbeat() }
+      }
+ 
+   }
+
+   Session::next(msg){
+     if (msg == Logon) {
+         nextLogon() {
+             if (isTargetTooHigh) { 
+                 doTargetTooHigh() { 
+                 }
+             } else { 
+                 m_state.increaseTargetMsgSeqNum();
+                 nextQueued(timeStamp);
+             }
+         }
+     } else if ( msg == HeartBeat )  { nextHeartbeat(msg) {
+                                         m_state.increaseTargetMsgSeqNum();
+                                         nextQueued() {
+                                            m_state.retrieve(expectedSeqNum);
+                                            if (type is logon or resendreq) {
+          m_state.increaseTargetMsgSeqNum();
+                                            } else {
+                                               next(msg,isQueued=true);
+                                            }
+                                         }
+                                       } 
+                                     } // end heartbeat
+     else if ( msg == TestRequest ) { nextTextRequest() ; } 
+     else if ( msg == SequenceReset ) { nextSequenceReset(); } 
+     else if ( msg == Logout ) { nextLogout() } 
+     else if ( msg == ResendRequest ) { nextResendRequest () ; } 
+     else if ( msg == Reject ) { nextReject(); }
+     else { 
+          isVerified = verify(msg) { 
+              if (isTargetTooHigh()) { doTargetTooHigh()  {
+                                       }
+                                     } 
+              if (isTargetTooLow()) { doTargetTooLow() { 
+                                      }
+                                    }
+              if (m_state.resendRequested() and seqNum> current_range ) {
+                   // resendrequest satisfied
+                   m_state.resendRange(begin=0,end=0);
+              }
+              fromCallback(msg) { fromAdmin() or fromApp(); } 
+          }
+          if(isVerified) { 
+          m_state.increaseTargetMsgSeqNum();
+          }
+     }
+
+     this->next(); // if nothing to do then reset connection
+   }
 
 4. SocketConnection is a wrapper around socket operations.
+
+
+5. Session::send() {
+        sendRaw(string) {
+          m_state.onOutgoing(string){
+            // write to log
+          }
+          ((SocketConnection*)m_pResponder)->send(string){
+                m_sendQueue.push_back()
+                processQueue();
+                signal() {
+                 m_pMonitor.signal();
+                }
+          }
+        } 
+   }
