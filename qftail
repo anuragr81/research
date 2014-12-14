@@ -1,0 +1,141 @@
+#!/usr/bin/python
+import re,sys;
+from xml.sax import ContentHandler;
+import xml.sax;
+import os.path, time
+
+
+def removeNonAsciiEnd(str):
+    str=str.strip()
+    while ord(str[len(str)-1]) < 32 :
+         str = str[0:len(str)-1]
+    return str
+
+class Converter:
+   def __init__(self,type):
+     self.type=str(type).strip()
+
+   def convert(self,val):
+     if set([self.type]).issubset(set(["AMT","INT","SEQNUM"])): 
+            res = re.search("([0-9]+)",val)
+            if res : 
+               return int(res.group(1))
+            else:
+               return val;
+     else : 
+        if set([self.type]).issubset(set(["FLOAT","QTY","PRICE"])): 
+            res = re.search("([0-9]+\.[0-9]*)",val)
+            if res : 
+               return float(res.group(1));
+            else :
+               return str(val);
+        else: 
+            value = removeNonAsciiEnd(val)
+            res = re.search("([^\^]+)\^([^\^]*)",value) # to remove ^(...)
+            if res:
+               return res.group(1)
+            else :
+               return str(value)
+    
+
+class xmlSpecFileHandler (ContentHandler):
+     def __init__(self):
+        self.fieldnames={};
+     def startElement (self, name,attrs) :
+           if name.strip() == 'field' : 
+                res={}
+                for a in attrs.getNames():
+                   if a == "name" :
+                     res['name']=str(attrs.getValue(a))
+                   if a == "number":
+                     res['number']=int(attrs.getValue(a))
+                   if a == 'type' :
+                     res['typeconverter']=Converter(attrs.getValue(a))
+                if set(['name','number','typeconverter']).issubset(set(res.keys())): 
+                   self.fieldnames[res['number']]={ 'name':res['name'],'typeconverter':res['typeconverter'],'valuedict':{}}
+                   self.curfield=res['number']
+           else:
+                if name.strip()== "value" : 
+                   vd = {}
+                   for a in attrs.getNames(): 
+                      if a == 'enum' : 
+                        vd['enum']= str(attrs.getValue(a)).strip()
+                      if a == 'description' : 
+                        vd['description']=str(attrs.getValue(a)).strip()
+                   if set(['enum','description']).issubset(vd.keys()):
+                      self.fieldnames[self.curfield]['valuedict'][vd['enum']] = vd['description'] # adding to value dict
+
+     def translate(self,key,uval): 
+           if key in self.fieldnames.keys(): 
+             value = self.fieldnames[key]['typeconverter'].convert(uval)
+             if 'valuedict' in self.fieldnames[key].keys():
+                 valuedict = self.fieldnames[key]['valuedict']
+                 if str(value).strip() in valuedict.keys(): 
+                   valuename = str(valuedict[str(value)])
+                   return self.fieldnames[key]['name']+"("+str(key)+"):"+str(value)+"("+valuename+")"
+                 else: 
+                   return self.fieldnames[key]['name']+"("+str(key)+"):"+str(value)
+             else:
+                 return self.fieldnames[key]['name']+"("+str(key)+"):"+str(value)
+           else : 
+             return "("+str(key)+"):"+uval
+                 
+
+def get_messagedict(input):
+    retmap={}
+    res = re.search("(.*)=(.*)",input)
+    while res: 
+      left=res.group(1)
+      right=res.group(2)
+      res = re.search("(.*[^0-9])([0-9]+)",left) # left side is always a number
+      if res : 
+        retmap[int(res.group(2))]=right
+        left = res.group(1)
+        res = re.search("(.*)=(.*)",left);
+      else : 
+        retmap[int(left)]=right;
+        break;
+    return retmap
+
+parser=xml.sax.make_parser()
+handler=xmlSpecFileHandler()
+parser.setContentHandler(handler)
+parser.parse(os.path.abspath(os.path.dirname(sys.argv[0]))+"/"+"./FIX50.xml")
+
+input_file = sys.argv[1]
+
+'''
+ 1. Only consider last n lines from the end.
+ 2. Assumes lines are added at the end of the file.
+ 3. Starting line is only set at the beginning of the program (outside the loop).
+'''
+
+n = 20 
+
+f=open(input_file)
+lines = f.readlines()
+
+if len(lines) < n : 
+  start = 0
+else : 
+  start = len(lines)- n
+
+try : 
+ while True : 
+   for li in range(start,len(lines)):
+        line = lines[li].encode('ascii')
+        md = get_messagedict(line)
+        strout=""
+        for key in sorted(md.keys()): 
+            strout+= '\n' + handler.translate(key,md[key])
+        print strout
+        print "============"
+
+   # Set Start to end of lines when output is printed
+   start = len(lines)
+   time.sleep(1)
+   f=open(input_file)
+   lines = f.readlines()
+except KeyboardInterrupt : 
+   print ""
+
