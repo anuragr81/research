@@ -1,0 +1,51 @@
+1. Session is created when constructor is called (onCreate called in constructor).
+2.
+  start() or block() { 
+    Initiator::startThread() {
+
+      SocketInitiator::onStart() {
+        Initiator::connect() {
+          SocketInitiator::doConnect() {
+            ((SocketConnector*)m_connector)->connect() {
+              SocketMonitor::addConnect(){
+              }
+              socket.connect();
+            }
+            m_pendingConnections[] = new SocketConnection();
+          }
+        }
+        SocketConnector::block((Strategy)*this) { //strategy is initiator in this case
+          ConnectorWrapper wrapper(strategy); // strategy implements onEvent, onRead,onConnect etc. 
+          (SocketMonitor&)m_monitor.block(wrapper) {
+                     buildSet(writeSet);
+                     buildSet(readSet);
+                     select () ; 
+                     processWriteSet(writeSet) {
+                           m_connectedSockets.erase()
+                           m_readSockets.insert()
+                           strategy.onConnect()
+                     }
+                     processReadSet(readSet){
+                            strategy.onEvent(array) {
+                                res = strategy.onData() { 
+                                     for c in SocketInitiator::m_connections : 
+                                            SocketConnection::read(SocketConnector&)                                    {
+                                                   SocketConnection::readMessages(){
+             Session->next(msg);  
+       }
+                                            }
+ 
+                                }
+                                if (!res) { strategy.onDisconnect() } 
+                            }
+                     }
+          }
+        }
+      } // end onStart
+
+    } // end startThread
+  } // end block, end start
+
+3. The key function is next() - which maintains the states. The main logic is here.
+
+4. SocketConnection is a wrapper around socket operations.
