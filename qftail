@@ -9,6 +9,8 @@ def removeNonAsciiEnd(str):
     str=str.strip()
     while ord(str[len(str)-1]) < 32 :
          str = str[0:len(str)-1]
+         if len(str)==0:
+             break;
     return str
 
 class Converter:
