@@ -78,3 +78,10 @@ char * createMatrix(){
 char * addToMatrix(char* mat,char* row){
     return _alloc.addRowToMatrix(mat,row);
 }
+
+char * createArgumentsList(){
+    return _alloc.createArgumentsList();
+}
+char * addToArgumentsList(char*args,char*arg){
+    return _alloc.addToArgumentsList(args,arg);
+}

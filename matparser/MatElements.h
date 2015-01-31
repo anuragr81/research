@@ -17,11 +17,16 @@ extern "C" {
 
     char * createMatrix();
     char * addToMatrix(char* row, char* scalar);
+    
+    char * createArgumentsList();
+    char * addToArgumentsList(char*args,char*arg);
+
 }
 
 class Variable {
 public:
 
+    //TODO: strip the input
     Variable(std::string val) : _value(val) {
     }
 
@@ -59,6 +64,15 @@ public:
     char* addRowToMatrix(char* mat,char * row){
         return mat;
     }
+    
+    char* createArgumentsList(){
+        return "args";
+    }
+    
+    char* addToArgumentsList(char* args,char* arg){
+        return args;
+    }
+    
 private:
     std::list<Variable> _variables;
 

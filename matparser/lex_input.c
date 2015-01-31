@@ -10,14 +10,14 @@ void yyerror(char *);
 [ \t]*\([ \t]* { return BRACKET_OPEN; }
 [ \t]*\)[ \t]* { return BRACKET_CLOSE; }
 
-struct { return STRUCT ; }
+[ \t]*struct[ \t]* { return STRUCT ; }
 [A-Za-z]+ { yylval.sValue=(char*)malloc(sizeof(char)*strlen(yytext)); strcpy(yylval.sValue,yytext); return NAME; }
 
-\= { return EQ ; }
-[0-9]+ { return INTEGER ; }
-[0-9]+\.[0-9]+ { return DOUBLE ; }
+[ \t]*\=[ \t]* { return EQ ; }
+[ \t]*[0-9]+[ \t]* { return INTEGER ; }
+[ \t]*[0-9]+\.[0-9]+[ \t]* { return DOUBLE ; }
 
-[\,] { return COMMA; }
+[ \t]*[\,][ \t]* { return COMMA; }
 [ \t] { return BLANK; } /* skip whitespace */
 [\.] { return DOT; }
 

@@ -43,25 +43,43 @@ double dValue;
 %token SEMICOLON
 %token STRUCT
 %token<sValue> NAME
-%type<sValue> constant
+
+//%type<sValue> constant
+//%type<sValue> statement_decl
+%type<sValue> statement
+
 %type<sValue> matrix_decl
 %type<sValue> matrix
 %type<sValue> scalar
 %type<sValue> row
-%type<sValue> statement
+
+%type<sValue> function
+%type<sValue> arguments_list
+
 %type<sValue> variable
 
 %%
 
-statement : variable EQ variable {$$=$1;} | variable EQ constant {$$=$1;}
+//statement_decl : statement {$$=$1;} | statement SEMICOLON {$$=$1;}
+
+// TODO: function return value as variable
+
+statement : variable EQ variable {$$=$1;} 
+                            | variable EQ constant {$$=$1;} 
+                            | variable EQ function {$$=$1;} 
+                                          | function {$$=$1;}
+                                          
+function  : NAME BRACKET_OPEN arguments_list BRACKET_CLOSE {$$=$3;}
+                                          
+arguments_list : arguments_list COMMA variable { $$=addToArgumentsList($1,$3); } 
+                    | variable { $$=createArgumentsList(); }
 
 variable : NAME { $$ = addVariable($1); } 
                  | variable DOT NAME { char buf[100]; $$ = structElement(buf,$1,$3);}
                  | variable SQR_OPEN INTEGER SQR_CLOSE { char buf[100]; arrayElementConstIndex(buf,$1,atoi($3)); $$=buf; }
                  | variable SQR_OPEN variable SQR_CLOSE { char buf[100]; arrayElementVarIndex(buf,$1,$3); $$=buf; }
 
-// TODO: function return value as variable
-
+// TODO: for, if, while
 constant : scalar | matrix_decl
 
 matrix_decl : SQR_OPEN matrix SQR_CLOSE { $$=$2;}
