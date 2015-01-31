@@ -5,10 +5,10 @@ void yyerror(char *);
 
 %%
 
-\[ { return SQR_OPEN ; }
-\] { return SQR_CLOSE ;}
-\( { return BRACKET_OPEN; }
-\) { return BRACKET_CLOSE; }
+[ \t]*\[[ \t]* { return SQR_OPEN ; }
+[ \t]*\][ \t]* { return SQR_CLOSE ;}
+[ \t]*\([ \t]* { return BRACKET_OPEN; }
+[ \t]*\)[ \t]* { return BRACKET_CLOSE; }
 
 struct { return STRUCT ; }
 [A-Za-z]+ { yylval.sValue=(char*)malloc(sizeof(char)*strlen(yytext)); strcpy(yylval.sValue,yytext); return NAME; }
@@ -21,7 +21,7 @@ struct { return STRUCT ; }
 [ \t] { return BLANK; } /* skip whitespace */
 [\.] { return DOT; }
 
-[\;] { return SEMICOLON; }
+[ \t]*[\;][ \t]* { return SEMICOLON; }
 
 . yyerror("Unknown character");
 

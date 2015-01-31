@@ -8,12 +8,12 @@
 
 using namespace std;
 
-static list<Variable> _variables;
+static Allocator _alloc;
 
+//static list<Variable> _variables;
 
 char * addVariable(char* name) {
-_variables.push_back(Variable(name));
-return name;
+    return _alloc.createVariable(name);
 }
 
 void initalizeExpression() {
@@ -24,51 +24,57 @@ void cleanup() {
 
 }
 
-void printVariables() {
-for (list<Variable>::const_iterator it = _variables.begin();
-it != _variables.end(); ++it) {
-cout << it->name() << " ";
-}
-cout << endl;
-}
-
 char* arrayElementConstIndex(char* buf, char* name, int index) {
-verifyVariable(name);
-std::stringstream ss;
-ss << "ELEM{" << name << "[" << index << "]" << "}";
-strcpy(buf, ss.str().c_str());
-return buf;
+    verifyVariable(name);
+    std::stringstream ss;
+    ss << "ELEM{" << name << "[" << index << "]" << "}";
+    strcpy(buf, ss.str().c_str());
+    return buf;
 }
 
 char* arrayElementVarIndex(char* buf, char* name, char* index) {
-verifyVariable(name);
-std::stringstream ss;
-ss << "ELEM{" << name << "[" << index << "]" << "}";
-strcpy(buf, ss.str().c_str());
-return buf;
+    verifyVariable(name);
+    std::stringstream ss;
+    ss << "ELEM{" << name << "[" << index << "]" << "}";
+    strcpy(buf, ss.str().c_str());
+    return buf;
 }
 
 char* structElement(char* buf, char* sname, char* field) {
-verifyStructure(sname, field);
-std::stringstream ss;
-ss << "STRUCT{" << sname << "." << field << "}";
-strcpy(buf, ss.str().c_str());
-return buf;
+    verifyStructure(sname, field);
+    std::stringstream ss;
+    ss << "STRUCT{" << sname << "." << field << "}";
+    strcpy(buf, ss.str().c_str());
+    return buf;
 }
 
-char* createInteger(char* buf,char*data) {
-std::stringstream ss;
-ss << "CINT{" << data << "}";
-strcpy(buf, ss.str().c_str());
-return buf;
+char* createInteger(char* buf, char*data) {
+    std::stringstream ss;
+    ss << "CINT{" << data << "}";
+    strcpy(buf, ss.str().c_str());
+    return buf;
 }
 
-char* createDouble(char* buf,char*data) {
-std::stringstream ss;
-ss << "CDOUBLE{" << data << "}";
-strcpy(buf, ss.str().c_str());
-return buf;
+char* createDouble(char* buf, char*data) {
+    std::stringstream ss;
+    ss << "CDOUBLE{" << data << "}";
+    strcpy(buf, ss.str().c_str());
+    return buf;
 
 }
 
 
+char * createRow(){
+    return _alloc.createRow();
+}
+char * addToRow(char* row,char* scalar){
+    return _alloc.addToRow(row,scalar);
+}
+
+
+char * createMatrix(){
+    return _alloc.createMatrix();
+}
+char * addToMatrix(char* mat,char* row){
+    return _alloc.addRowToMatrix(mat,row);
+}
