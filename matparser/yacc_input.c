@@ -1,7 +1,10 @@
 %{
+#include <stdio.h>
 
+#include <stdlib.h>
+#include <string.h>
 #include "cstructures.h"
-
+    
 //void processAssignment(char * subject, struct TVerb * tverb, char* object){
 void processAssignment(char * subject, char* object){
 printf("Subject=\"%s\"",subject);
@@ -63,7 +66,7 @@ single_operand : function | variable { $$=checkVariable(); } // expression
 */
 void yyerror(char *s)
 {
-fprintf(stderr, "%s\n", s);
+printf( "%s\n", s);
 error = 1;
 }
 

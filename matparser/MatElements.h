@@ -1,12 +1,6 @@
 #ifndef __MAT_ELEMENTS_H__
 #define __MAT_ELEMENTS_H__
 
-#include
-#include
-
-#include
-#include
-
 extern "C"
 {
 char * addVariable(char* name);

@@ -1,11 +1,15 @@
-#include
-#include
+#include  <iostream>
+#include <string.h>
+#include <sstream>
+#include <string>
+#include <list>
+
 #include "MatElements.h"
 
 using namespace std;
 
-static list _variables;
-;
+static list<Variable> _variables;
+
 
 char * addVariable(char* name) {
 _variables.push_back(Variable(name));
@@ -21,9 +25,9 @@ void cleanup() {
 }
 
 void printVariables() {
-for (list::const_iterator it = _variables.begin();
+for (list<Variable>::const_iterator it = _variables.begin();
 it != _variables.end(); ++it) {
-cout <name() << " ";
+cout << it->name() << " ";
 }
 cout << endl;
 }
