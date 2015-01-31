@@ -186,7 +186,7 @@ class HTTPHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     sessions = {}
 
     def do_GET(self):
-
+        logger.debug("Processing DEBUG");
         pattern ="(.*)\?(.*)"
         params_dict=dict()
         res=re.search(pattern,self.path);
