@@ -44,19 +44,49 @@ double dValue;
 %token STRUCT
 %token<sValue> NAME
 %type<sValue> constant
+%type<sValue> matrix_decl
+%type<sValue> matrix
+%type<sValue> scalar
+%type<sValue> row
 %type<sValue> statement
 %type<sValue> variable
 
 %%
 
 statement : variable EQ variable {$$=$1;} | variable EQ constant {$$=$1;}
+
+variable : NAME { $$ = addVariable($1); } 
+                 | variable DOT NAME { char buf[100]; $$ = structElement(buf,$1,$3);}
+                 | variable SQR_OPEN INTEGER SQR_CLOSE { char buf[100]; arrayElementConstIndex(buf,$1,atoi($3)); $$=buf; }
+                 | variable SQR_OPEN variable SQR_CLOSE { char buf[100]; arrayElementVarIndex(buf,$1,$3); $$=buf; }
+
+// TODO: function return value as variable
+
+constant : scalar | matrix_decl
+
+matrix_decl : SQR_OPEN matrix SQR_CLOSE { $$=$2;}
+
+matrix: matrix SEMICOLON row {$$=addToMatrix($1,$3);} | row { $$=createMatrix();}
+
+row : scalar { $$=createRow(); }
+                          | row COMMA scalar { $$=addToRow($1,$3); }  
+                          | row BLANK scalar { $$=addToRow($1,$3); }
+                          
+scalar : INTEGER { char buf[100]; $$ = createInteger(buf,$1); } | DOUBLE { char buf[100]; $$ = createDouble(buf,$1); }
+
+%%
+/*
+statement : variable EQ variable {$$=$1;} | variable EQ constant {$$=$1;}
 variable : NAME { $$ = addVariable($1); } | variable DOT NAME { char buf[100]; $$ = structElement(buf,$1,$3);}
 | variable SQR_OPEN INTEGER SQR_CLOSE { char buf[100]; arrayElementConstIndex(buf,$1,atoi($3)); $$=buf; }
 | variable SQR_OPEN variable SQR_CLOSE { char buf[100]; arrayElementVarIndex(buf,$1,$3); $$=buf; }
-constant : INTEGER { char buf[100]; $$ = createInteger(buf,$1); } | DOUBLE { char buf[100]; $$ = createDouble(buf,$1); }
-%%
-/*
-* statement : variable predicate
+
+constant : scalar | matrix
+matrix : SQR_OPEN rows SQR_CLOSE
+rows : row SEMICOLON | row
+ 
+ ---------------------
+ statement : variable predicate
 structure : STRUCT BRACKET_OPEN NAME COMMA NAME BRACKET_CLOSE { $$ = $3 ; }
 statement : NAME BRACKET_OPEN operand BRACKET_CLOSE { $$=$1;}
 
@@ -106,7 +136,7 @@ yyparse();
 if (error){
 return 1;
 }
-printVariables();
+//printVariables();
 
 free(m.input);
 cleanup();
