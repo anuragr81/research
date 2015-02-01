@@ -47,10 +47,10 @@ double dValue;
 
 %type<sValue> constant
 
-%type<sValue> matrix_decl
-%type<sValue> matrix
+%type<iValue> matrix_decl
+%type<iValue> matrix
 %type<sValue> scalar
-%type<sValue> row
+%type<iValue> row
 
 %type<sValue> function
 %type<sValue> arguments_list
@@ -60,18 +60,17 @@ double dValue;
 %%
 
 // TODO: document mandatory comma separator between columns in the matrix
-// TODO: array indexing (including :)
-// TODO: character strings
 // TODO: for, if, while
 // TODO: seq-vectors as 1:num
+// TODO: character strings
 // TODO: matrix operators as - (+-/*^') and (.*/.^.') etc.
 
 statement_decl : statement | statement SEMICOLON
 
-statement : variable EQ variable {$1=$3;} 
+statement : variable EQ variable {$1=$3;}
                             | variable EQ constant {$1=$3;}
                             | variable EQ function {$1=$3;}
-                                          | function
+                            | function
                                           
 function  : NAME BRACKET_OPEN arguments_list BRACKET_CLOSE {$$=callFunctionOrMatrix($1,$3);}
                                           
@@ -89,15 +88,16 @@ variable : NAME { $$ = addVariable($1); }
                  
 constant : scalar | matrix_decl
 
-matrix_decl : SQR_OPEN matrix SQR_CLOSE { $$=$2;}
+matrix_decl : SQR_OPEN matrix SQR_CLOSE { $$=$2; printMatrix($2);}
 
-matrix: matrix SEMICOLON row {$$=addToMatrix($1,$3);} | row { $$=createMatrix();}
+matrix: matrix SEMICOLON row {$$=addRowToMatrix($1,$3);} | row { $$=createMatrix($1); }
 
-row : scalar { $$=createRow(); }
-                          | row COMMA scalar { $$=addToRow($1,$3); }  
-                          | row BLANK scalar { $$=addToRow($1,$3); }
+row : scalar { $$=createRow($1); }
+                          | row COMMA scalar { $$=addScalarToRow($1,$3); }
+                          | row BLANK scalar { $$=addScalarToRow($1,$3); }
                           
-scalar : INTEGER { char buf[100]; $$ = createInteger(buf,$1); } | DOUBLE { char buf[100]; $$ = createDouble(buf,$1); }
+scalar : INTEGER { char buf[100]; $$ = createInteger(buf,$1);} 
+            | DOUBLE { char buf[100]; $$ = createDouble(buf,$1);}
 
 %%
 

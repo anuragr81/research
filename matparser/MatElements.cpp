@@ -3,7 +3,9 @@
 #include <sstream>
 #include <string>
 #include <list>
+#include <map>
 
+       
 #include "MatElements.h"
 
 using namespace std;
@@ -34,42 +36,44 @@ char* structElement(char* buf, char* sname, char* field) {
 
 char* createInteger(char* buf, char*data) {
     std::stringstream ss;
-    ss << "CINT{" << data << "}";
+    ss << data;
     strcpy(buf, ss.str().c_str());
     return buf;
 }
 
 char* createDouble(char* buf, char*data) {
     std::stringstream ss;
-    ss << "CDOUBLE{" << data << "}";
+    ss << data;
     strcpy(buf, ss.str().c_str());
     return buf;
-
 }
 
-
-char * createRow(){
-    return _alloc.createRow();
-}
-char * addToRow(char* row,char* scalar){
-    return _alloc.addToRow(row,scalar);
+int createRow(char* scalar){
+    return _alloc.createRow(scalar);
 }
 
-
-char * createMatrix(){
-    return _alloc.createMatrix();
+int addRowToMatrix(int matrix, int row){
+    return _alloc.addRowToMatrix(matrix,row);
 }
-char * addToMatrix(char* mat,char* row){
-    return _alloc.addRowToMatrix(mat,row);
+int createMatrix(int row){
+    return _alloc.createMatrix(row);
 }
 
-char * createArgumentsList(){
+int addScalarToRow(int row, char* scalar) {
+    return _alloc.addScalarToRow(row,scalar);
+}
+
+void printMatrix(int i){
+    _alloc.matrix(i).print(cout);
+}
+char * createArgumentsList() {
     return _alloc.createArgumentsList();
 }
-char * addToArgumentsList(char*args,char*arg){
-    return _alloc.addToArgumentsList(args,arg);
+
+char * addToArgumentsList(char*args, char*arg) {
+    return _alloc.addToArgumentsList(args, arg);
 }
 
-char* callFunctionOrMatrix(char* name,char* args){
-    return _alloc.callFunctionOrMatrix(name,args);
+char* callFunctionOrMatrix(char* name, char* args) {
+    return _alloc.callFunctionOrMatrix(name, args);
 }

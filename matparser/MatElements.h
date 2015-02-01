@@ -6,21 +6,22 @@ extern "C" {
     void initalizeExpression();
     void cleanup();
     void printVariables();
-    
+    void printMatrix(int i);
+
     char* structElement(char* buf, char* sname, char* field);
     char* createInteger(char*buf, char*data);
     char* createDouble(char*buf, char*data);
-    
-    char * createRow();
-    char * addToRow(char* row, char* scalar);
 
-    char * createMatrix();
-    char * addToMatrix(char* row, char* scalar);
+    int createRow(char* scalar);
+    int addRowToMatrix(int matrix, int row);
+    int createMatrix(int row);
+    int addScalarToRow(int row, char* scalar);
+    
     
     char * createArgumentsList();
-    char * addToArgumentsList(char*args,char*arg);
-    
-    char* callFunctionOrMatrix(char* name,char* args);
+    char * addToArgumentsList(char*args, char*arg);
+
+    char* callFunctionOrMatrix(char* name, char* args);
 
 }
 
@@ -28,6 +29,7 @@ class Variable {
 public:
 
     //TODO: strip the input
+
     Variable(std::string val) : _value(val) {
     }
 
@@ -39,47 +41,121 @@ private:
     std::string _value;
 };
 
+class Row {
+public:
+
+    Row () {
+        
+    }
+    
+    Row ( const Row & row){
+        _cols = row._cols;
+    }
+    Row(char * scalar) {
+        _cols.push_back(std::string(scalar));
+    }
+
+    void addElement(std::string const & str) {
+        _cols.push_back(str);
+    }
+    void print(std::ostream & os) const {
+        std::string prefix = "";
+        for (std::list<std::string>::const_iterator it = _cols.begin();
+                it!=_cols.end();++it){
+            os << prefix << *it ;
+            prefix = ",";
+        }
+    }
+private:
+    std::list<std::string> _cols;
+};
+
+class Matrix {
+public:
+
+    Matrix (){
+    }
+    
+    Matrix(Row const & row) {
+        this->addRow(row);
+    }
+
+    void addRow(Row const & row) {
+        _rows.push_back(row);
+    }
+    
+    void print(std::ostream & os) const {
+        os << "[";
+        std::string prefix = "";
+        for (std::list<Row>::const_iterator it = _rows.begin();
+                it!=_rows.end();++it){
+            os << prefix;
+            it->print(os);
+            prefix = ";";
+        }
+        os << "]";
+    }
+private:
+    std::list<Row> _rows;
+};
+
+using namespace std;
 class Allocator {
 public:
+
+    Allocator() : _mcount(0) {
+    }
 
     char* createVariable(char* name) {
         // create new variable
         return name;
     }
 
-    /* should have mat arrays */
-    char* createRow() {
-        // create new matrix
-        return "row";
+    int createRow(char* scalar) {
+        Row r(scalar);
+        _rows[_rcount] = r;
+        cout << "added " << scalar << "to newly created row="<< _rcount<<endl;
+        return _rcount++;
     }
 
-    char * addToRow(char * name, char* scalar) {
-        // add
-        return name;
+    int addScalarToRow(int row, char* scalar) {
+        _rows[row].addElement(scalar);
+        cout << "added " << scalar << "to row="<< row<<endl;
+        return row;
     }
-    
-    char * createMatrix(){
-        return "matrix";
+
+    int createMatrix(int row) {
+        _matrices[_mcount] = _rows[row];
+        return _mcount++;
     }
-    
-    char* addRowToMatrix(char* mat,char * row){
-        return mat;
+
+    int addRowToMatrix(int matrix, int row) {
+        _matrices[matrix].addRow(_rows[row]);
+        return matrix;
     }
-    
-    char* createArgumentsList(){
+
+    char* createArgumentsList() {
         return "args";
     }
-    
-    char* addToArgumentsList(char* args,char* arg){
+
+    char* addToArgumentsList(char* args, char* arg) {
         return args;
     }
-    
-    char* callFunctionOrMatrix(char* name,char* args){
-        return "function";    
+
+    char* callFunctionOrMatrix(char* name, char* args) {
+        return "function";
+    }
+
+public:
+    Matrix const & matrix (int i) const {
+        return _matrices.at(i);
     }
     
 private:
     std::list<Variable> _variables;
+    std::map<int, Matrix> _matrices;
+    std::map<int, Row> _rows;
+    int _mcount, _rcount;
 
 };
 

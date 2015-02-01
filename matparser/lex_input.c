@@ -14,8 +14,8 @@ void yyerror(char *);
 [A-Za-z]+ { yylval.sValue=(char*)malloc(sizeof(char)*strlen(yytext)); strcpy(yylval.sValue,yytext); return NAME; }
 
 [ \t]*\=[ \t]* { return EQ ; }
-[ \t]*[0-9]+[ \t]* { return INTEGER ; }
-[ \t]*[0-9]+\.[0-9]+[ \t]* { return DOUBLE ; }
+[ \t]*[0-9]+[ \t]* { yylval.sValue=(char*)malloc(sizeof(char)*strlen(yytext)); strcpy(yylval.sValue,yytext); return INTEGER; }
+[ \t]*[0-9]+\.[0-9]+[ \t]* { yylval.sValue=(char*)malloc(sizeof(char)*strlen(yytext)); strcpy(yylval.sValue,yytext); return DOUBLE ; }
 
 [ \t]*[\,][ \t]* { return COMMA; }
 [ \t] { return BLANK; } /* skip whitespace */
