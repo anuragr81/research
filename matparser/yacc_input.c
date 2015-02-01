@@ -44,9 +44,7 @@ double dValue;
 %token STRUCT
 %token<sValue> NAME
 
-//%type<sValue> constant
-//%type<sValue> statement_decl
-%type<sValue> statement
+%type<sValue> constant
 
 %type<sValue> matrix_decl
 %type<sValue> matrix
@@ -60,26 +58,32 @@ double dValue;
 
 %%
 
-//statement_decl : statement {$$=$1;} | statement SEMICOLON {$$=$1;}
+// TODO: document mandatory comma separator between columns in the matrix
+// TODO: array indexing (including :)
+// TODO: character strings
+// TODO: for, if, while
+// TODO: seq-vectors as 1:num
+// TODO: matrix operators as - (+-/*^') and (.*/.^.') etc.
 
-// TODO: function return value as variable
+statement_decl : statement | statement SEMICOLON
 
-statement : variable EQ variable {$$=$1;} 
-                            | variable EQ constant {$$=$1;} 
-                            | variable EQ function {$$=$1;} 
-                                          | function {$$=$1;}
+statement : variable EQ variable {$1=$3;} 
+                            | variable EQ constant {$1=$3;}
+                            | variable EQ function {$1=$3;}
+                                          | function
                                           
-function  : NAME BRACKET_OPEN arguments_list BRACKET_CLOSE {$$=$3;}
+function  : NAME BRACKET_OPEN arguments_list BRACKET_CLOSE {$$=callFunction($1,$3);}
                                           
 arguments_list : arguments_list COMMA variable { $$=addToArgumentsList($1,$3); } 
                     | variable { $$=createArgumentsList(); }
+                    | arguments_list COMMA constant { $$=addToArgumentsList($1,$3); }
+                    | constant { $$=createArgumentsList(); }
 
 variable : NAME { $$ = addVariable($1); } 
                  | variable DOT NAME { char buf[100]; $$ = structElement(buf,$1,$3);}
                  | variable SQR_OPEN INTEGER SQR_CLOSE { char buf[100]; arrayElementConstIndex(buf,$1,atoi($3)); $$=buf; }
                  | variable SQR_OPEN variable SQR_CLOSE { char buf[100]; arrayElementVarIndex(buf,$1,$3); $$=buf; }
-
-// TODO: for, if, while
+                 
 constant : scalar | matrix_decl
 
 matrix_decl : SQR_OPEN matrix SQR_CLOSE { $$=$2;}
@@ -93,25 +97,7 @@ row : scalar { $$=createRow(); }
 scalar : INTEGER { char buf[100]; $$ = createInteger(buf,$1); } | DOUBLE { char buf[100]; $$ = createDouble(buf,$1); }
 
 %%
-/*
-statement : variable EQ variable {$$=$1;} | variable EQ constant {$$=$1;}
-variable : NAME { $$ = addVariable($1); } | variable DOT NAME { char buf[100]; $$ = structElement(buf,$1,$3);}
-| variable SQR_OPEN INTEGER SQR_CLOSE { char buf[100]; arrayElementConstIndex(buf,$1,atoi($3)); $$=buf; }
-| variable SQR_OPEN variable SQR_CLOSE { char buf[100]; arrayElementVarIndex(buf,$1,$3); $$=buf; }
 
-constant : scalar | matrix
-matrix : SQR_OPEN rows SQR_CLOSE
-rows : row SEMICOLON | row
- 
- ---------------------
- statement : variable predicate
-structure : STRUCT BRACKET_OPEN NAME COMMA NAME BRACKET_CLOSE { $$ = $3 ; }
-statement : NAME BRACKET_OPEN operand BRACKET_CLOSE { $$=$1;}
-
-operand : operand COMMA | single_operand
-
-single_operand : function | variable { $$=checkVariable(); } // expression
-*/
 void yyerror(char *s)
 {
 printf( "%s\n", s);

@@ -11,4 +11,4 @@ clean:
 	rm -f y.tab.c
 	rm -f y.tab.h
 	rm -f *.o
-	rm test
+	rm -f test

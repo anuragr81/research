@@ -28,4 +28,5 @@ char * addToMatrix(char* row,char* scalar);
 char * createArgumentsList();
 char * addToArgumentsList(char*args,char*arg);
 
+char* callFunction(char* name,char* args);
 #endif

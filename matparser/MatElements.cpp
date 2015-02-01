@@ -85,3 +85,7 @@ char * createArgumentsList(){
 char * addToArgumentsList(char*args,char*arg){
     return _alloc.addToArgumentsList(args,arg);
 }
+
+char* callFunction(char* name,char* args){
+    return _alloc.callFunction(name,args);
+}

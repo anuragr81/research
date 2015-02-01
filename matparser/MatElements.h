@@ -20,6 +20,8 @@ extern "C" {
     
     char * createArgumentsList();
     char * addToArgumentsList(char*args,char*arg);
+    
+    char* callFunction(char* name,char* args);
 
 }
 
@@ -71,6 +73,10 @@ public:
     
     char* addToArgumentsList(char* args,char* arg){
         return args;
+    }
+    
+    char* callFunction(char* name,char* args){
+        return "function";    
     }
     
 private:
