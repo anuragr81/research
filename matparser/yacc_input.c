@@ -38,6 +38,7 @@ double dValue;
 %token BRACKET_OPEN
 %token BRACKET_CLOSE
 %token COMMA
+%token<sValue> COLON
 %token BLANK
 %token DOT
 %token SEMICOLON
@@ -72,17 +73,19 @@ statement : variable EQ variable {$1=$3;}
                             | variable EQ function {$1=$3;}
                                           | function
                                           
-function  : NAME BRACKET_OPEN arguments_list BRACKET_CLOSE {$$=callFunction($1,$3);}
+function  : NAME BRACKET_OPEN arguments_list BRACKET_CLOSE {$$=callFunctionOrMatrix($1,$3);}
                                           
 arguments_list : arguments_list COMMA variable { $$=addToArgumentsList($1,$3); } 
                     | variable { $$=createArgumentsList(); }
                     | arguments_list COMMA constant { $$=addToArgumentsList($1,$3); }
                     | constant { $$=createArgumentsList(); }
+                    | arguments_list COMMA COLON { $$=addToArgumentsList($1,$3); }
+                    | COLON { $$=createArgumentsList(); }
+                    | arguments_list COMMA function {  $$=addToArgumentsList($1,$3); }
+                    | function { $$=createArgumentsList(); }
 
 variable : NAME { $$ = addVariable($1); } 
                  | variable DOT NAME { char buf[100]; $$ = structElement(buf,$1,$3);}
-                 | variable SQR_OPEN INTEGER SQR_CLOSE { char buf[100]; arrayElementConstIndex(buf,$1,atoi($3)); $$=buf; }
-                 | variable SQR_OPEN variable SQR_CLOSE { char buf[100]; arrayElementVarIndex(buf,$1,$3); $$=buf; }
                  
 constant : scalar | matrix_decl
 

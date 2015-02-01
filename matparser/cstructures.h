@@ -11,9 +11,6 @@ void printVariables();
 int verifyStructureName(char* name);
 int verifyVariable(char* name);
 
-char* arrayElementConstIndex(char* buf, char* name, int index);
-char* arrayElementVarIndex(char* buf, char* name, char* index);
-
 char* structElement(char* buf, char* sname, char* field);
 
 char* createInteger(char*buf, char*data);
@@ -28,5 +25,5 @@ char * addToMatrix(char* row,char* scalar);
 char * createArgumentsList();
 char * addToArgumentsList(char*args,char*arg);
 
-char* callFunction(char* name,char* args);
+char* callFunctionOrMatrix(char* name,char* args);
 #endif

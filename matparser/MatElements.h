@@ -6,8 +6,7 @@ extern "C" {
     void initalizeExpression();
     void cleanup();
     void printVariables();
-    char* arrayElementConstIndex(char* buf, char* name, int index);
-    char* arrayElementVarIndex(char* buf, char* name, char* index);
+    
     char* structElement(char* buf, char* sname, char* field);
     char* createInteger(char*buf, char*data);
     char* createDouble(char*buf, char*data);
@@ -21,7 +20,7 @@ extern "C" {
     char * createArgumentsList();
     char * addToArgumentsList(char*args,char*arg);
     
-    char* callFunction(char* name,char* args);
+    char* callFunctionOrMatrix(char* name,char* args);
 
 }
 
@@ -75,7 +74,7 @@ public:
         return args;
     }
     
-    char* callFunction(char* name,char* args){
+    char* callFunctionOrMatrix(char* name,char* args){
         return "function";    
     }
     

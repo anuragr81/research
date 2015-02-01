@@ -24,22 +24,6 @@ void cleanup() {
 
 }
 
-char* arrayElementConstIndex(char* buf, char* name, int index) {
-    verifyVariable(name);
-    std::stringstream ss;
-    ss << "ELEM{" << name << "[" << index << "]" << "}";
-    strcpy(buf, ss.str().c_str());
-    return buf;
-}
-
-char* arrayElementVarIndex(char* buf, char* name, char* index) {
-    verifyVariable(name);
-    std::stringstream ss;
-    ss << "ELEM{" << name << "[" << index << "]" << "}";
-    strcpy(buf, ss.str().c_str());
-    return buf;
-}
-
 char* structElement(char* buf, char* sname, char* field) {
     verifyStructure(sname, field);
     std::stringstream ss;
@@ -86,6 +70,6 @@ char * addToArgumentsList(char*args,char*arg){
     return _alloc.addToArgumentsList(args,arg);
 }
 
-char* callFunction(char* name,char* args){
-    return _alloc.callFunction(name,args);
+char* callFunctionOrMatrix(char* name,char* args){
+    return _alloc.callFunctionOrMatrix(name,args);
 }

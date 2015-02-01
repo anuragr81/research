@@ -23,6 +23,8 @@ void yyerror(char *);
 
 [ \t]*[\;][ \t]* { return SEMICOLON; }
 
+[ \t]*[\:][ \t]* { return COLON; }
+
 . yyerror("Unknown character");
 
 %%
