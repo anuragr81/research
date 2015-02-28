@@ -1,8 +1,6 @@
 
-filterTimeSeries<- function(roe,rd){
-  
-}
 
+# Calculates regression coefficients for a sequence of size(dm)
 projection<-function(dvec){
   dvec=as.numeric(dvec);
   phase=length(dvec);
@@ -16,6 +14,8 @@ projection<-function(dvec){
 }
 
 
+# searches Market Price for every date (in immediate proximity)
+# from a vector of market-prices
 searchMarketPrice<-function (mdates,pricedata){
   stringmdates=as.character(mdates);
   mdprices=NULL
@@ -65,8 +65,15 @@ calculateROE<- function(){
     #return(pricedata)
     mdates=strptime(data$date,"%Y-%m-%d")
     
+    # dev would be used as the time-vector for all data-timeseries
     dvec=as.integer(strftime(strptime(data$date,"%Y-%m-%d"),"%Y"));
     marketprices=searchMarketPrice(mdates=mdates,pricedata=pricedata)
+    myears=as.integer(strftime(marketprices$Date,"%Y"));
+    if (any(abs(myears-dvec)>0)){
+      stop("Invalid Years-array in marketprices")
+    }
+    marketprices=ts(data=marketprices$MidPrice,start=head(myears,1),end=tail(myears,1))
+
     tsshares=ts(data=data.frame(shares=data$shares),
                 start=c(dvec[1],1),end=c(dvec[length(dvec)]));
     tsbve=ts(data=data.frame(bve=data$bve),
@@ -75,13 +82,15 @@ calculateROE<- function(){
               start=c(dvec[1],1),end=c(dvec[length(dvec)]));
     tsltdebt=ts(data=data.frame(ltdebt=data$ltdebt),
                 start=c(dvec[1],1),end=c(dvec[length(dvec)]));
+    tsfcff=ts(data=data.frame(fcff=data$fcff),
+                start=c(dvec[1],1),end=c(dvec[length(dvec)]));
     
     require(zoo);
     tsbve_avg=(lag(tsbve,-1)+(tsbve))/2;
     tsltdebt_average=(lag(tsltdebt,-1)+(tsltdebt))/2;
     den=tsltdebt_average+tsbve_avg;
     den=ts.intersect(den,tsebit);
-    roic=ts(data=data.frame(roic=as.data.frame(den)$tsebit)/as.data.frame(den)$den,
+    tsroic=ts(data=data.frame(roic=as.data.frame(den)$tsebit)/as.data.frame(den)$den,
             start=start(den),end=end(den),
             frequency=frequency(den));
     
@@ -100,25 +109,24 @@ calculateROE<- function(){
     
     tsprojs=ts(data=projs,start=start(tsroec),end=end(tsroec),frequency=frequency(tsroec));
     rd = read.csv("debtcost/rd10.csv");
-    rd= ts(data=data.frame(rd),
+    # assumes the data column is "rd10"
+    rd = ts(data=rd$rd10,
            start=rd$Year[1],end=rd$Year[length(rd$Year)]);
     # MVE->WACC
-    #roe=filterTimeSeries(roe,rd$Year);
-    ts_mve_input = ts.intersect(tsshares,tsltdebt,marketprices,rd);
-    ts_final = ts.intersect(roe,ts_mve_input);
+    #roe=filterTimeSeries(roe,rd$Year);    
+    
+    ts_final = ts.intersect(shares=tsshares,ltdebt=tsltdebt,midprice=marketprices,
+                                rate=rd,fcff=tsfcff,roic=tsroic,roe=roe);
 
     findata =  as.data.frame(ts_final);
-    E = findata$ts_mve_input.tsshares* findata$ts_mve_input.marketprices.MidPrice;
-    D = findata$ts_mve_input.tsltdebt;
-    V = E+D;
-    r_D = findata$ts_mve_input.rd.rd10;
-    r_E = findata$roe
-    
-    #WACC = (1-tax)*(D/V)*r_D+(E/V)*r_E
-    print(r_E)
+    E     = findata$shares*findata$midprice;
+    D     = findata$ltdebt;
+    V     = E+D;
+    r_D   = findata$rate;
+    r_E   = findata$roe;
+    FCFF  = findata$fcff;
+    WACC = (1-tax)*(D/V)*r_D+(E/V)*r_E;
+    print(WACC);
     #V=(NOPLAT_{t+1}(1−gNOPLAT/RONIC))/(WACC−gNOPLAT)
-    
-    return(rd)
-    
   } # end for loop
 }
