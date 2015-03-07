@@ -14,30 +14,47 @@ projection<-function(dvec){
 }
 
 
+processBidAskRow<- function(res){
+        px_bid=as.double(as.character(res$PX_BID))
+        px_ask=as.double(as.character(res$PX_ASK))
+        return (mean(c(px_bid,px_ask)));
+}
+
+processOpenRow<-function(res) {
+        return (as.double(as.character(res$Open)));
+}
+
+loadSNPData <- function(dirname,filename){
+    pricedata =read.csv(paste(dirname,filename,sep=""));
+    pricedata=data.frame(Date=strptime(pricedata$Date,"%d/%m/%Y"),
+                         Open=pricedata$Open);
+    return (pricedata);
+}
+
 # searches Market Price for every date (in immediate proximity)
 # from a vector of market-prices
-searchMarketPrice<-function (mdates,pricedata){
+searchMarketPrice<-function (mdates,ndaysrange,pricedata,processorFunc){
   stringmdates=as.character(mdates);
   mdprices=NULL
   for (stringmdate in stringmdates){
     found_price=NA;
-    for (datediff in -seq(0,3)){
+    for (datediff in -seq(0,ndaysrange)){
       mdate=strptime(stringmdate,"%Y-%m-%d");
       search_date = mdate +as.difftime(datediff,units="days");
       #print(paste("Searching for",search_date," in mdprices"));
       res = pricedata[strftime(pricedata$Date,"%Y-%m-%d") == strftime(search_date,"%Y-%m-%d"),];
       nrows=dim(res)[1]
       if (nrows>0){
-        px_bid=as.double(as.character(res$PX_BID))
-        px_ask=as.double(as.character(res$PX_ASK))
-        found_price=mean(c(px_bid,px_ask));        
         #print (paste("found_price=",found_price))
+        #found_price=processBidAskRow(res);
+        found_price=processorFunc(res);
+        #found_price=processHighLowRow(res);
         break;
       }
     }
     mdprices=c(mdprices,found_price);
   }
-  return (data.frame("Date"=mdates,"MidPrice"=mdprices))
+  return (data.frame("Date"=mdates,price=mdprices))
 }
 
 calculateROE<- function(){
@@ -46,7 +63,8 @@ calculateROE<- function(){
   mapTickerToMDFile=read.csv("marketdatafilenames.csv");
   
   # WACC needs
-  files=dir()[grep("Analog.*output.csv$",dir())];
+  files=dir()[grep("*output.csv$",dir())];
+  
   nfiles=length(files);
   tax=.3;
   # TODO: use timeseries dictionaries for storing roes, roic etc.
@@ -61,18 +79,23 @@ calculateROE<- function(){
     pricedata=data.frame(Date=strptime(pricedata$Date,"%Y-%m-%d"),
                          PX_BID=pricedata$PX_BID,
                          PX_ASK=pricedata$PX_ASK);
-    
-    #return(pricedata)
+
+    snpprices = loadSNPData("snp/","snp.csv");
+
     mdates=strptime(data$date,"%Y-%m-%d")
     
     # dev would be used as the time-vector for all data-timeseries
     dvec=as.integer(strftime(strptime(data$date,"%Y-%m-%d"),"%Y"));
-    marketprices=searchMarketPrice(mdates=mdates,pricedata=pricedata)
+    #marketprices=searchMarketPrice(mdates=mdates,pricedata=pricedata)
+    marketprices=searchMarketPrice(mdates=mdates,ndaysrange=10,pricedata=pricedata,processorFunc=processBidAskRow);
+
+    snpprices=searchMarketPrice(mdates=mdates,ndaysrange=40,pricedata=snpprices,processorFunc=processOpenRow);
+
     myears=as.integer(strftime(marketprices$Date,"%Y"));
     if (any(abs(myears-dvec)>0)){
       stop("Invalid Years-array in marketprices")
     }
-    marketprices=ts(data=marketprices$MidPrice,start=head(myears,1),end=tail(myears,1))
+    marketprices=ts(data=marketprices$price,start=head(myears,1),end=tail(myears,1))
 
     tsshares=ts(data=data.frame(shares=data$shares),
                 start=c(dvec[1],1),end=c(dvec[length(dvec)]));
@@ -95,7 +118,7 @@ calculateROE<- function(){
             frequency=frequency(den));
     
     roe=tsebit/lag(tsebit,-1)-1;
-    phase=3;
+    phase=5;
     tsroec=roe
     for (lindex in seq(phase-1)) {
       tsroec=ts.intersect(tsroec,lag(roe,-lindex));
@@ -108,16 +131,16 @@ calculateROE<- function(){
     }
     
     tsprojs=ts(data=projs,start=start(tsroec),end=end(tsroec),frequency=frequency(tsroec));
-    rd = read.csv("debtcost/rd10.csv");
-    # assumes the data column is "rd10"
-    rd = ts(data=rd$rd10,
+    rd = read.csv("debtcost/rd1.csv");
+    # assumes the data column is "rd1"
+    rd = ts(data=rd$rd1,
            start=rd$Year[1],end=rd$Year[length(rd$Year)]);
     # MVE->WACC
-    #roe=filterTimeSeries(roe,rd$Year);    
+    #roe=filterTimeSeries(roe,rd$Year);
     
     ts_final = ts.intersect(shares=tsshares,ltdebt=tsltdebt,midprice=marketprices,
                                 rate=rd,fcff=tsfcff,roic=tsroic,roe=roe);
-
+    
     findata =  as.data.frame(ts_final);
     E     = findata$shares*findata$midprice;
     D     = findata$ltdebt;
@@ -126,7 +149,10 @@ calculateROE<- function(){
     r_E   = findata$roe;
     FCFF  = findata$fcff;
     WACC = (1-tax)*(D/V)*r_D+(E/V)*r_E;
-    print(WACC);
+    tswacc=ts(data=WACC,start=start(ts_final),end=end(ts_final));
+    tswf = ts.intersect(tswacc,ts_final);
+    plot(tswf);
+    tswf=1;
     #V=(NOPLAT_{t+1}(1−gNOPLAT/RONIC))/(WACC−gNOPLAT)
   } # end for loop
 }
