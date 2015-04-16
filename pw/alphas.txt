@@ -1,0 +1,195 @@
+
+
+double alphas::calculateCountImbalanceAlpha(boost::shared_ptr<ArmaOrderBook> const & ob,
+        generated_settings::c_settings const & settings) {
+    log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("alphas.CountImbalance"));
+
+    stringstream ss;
+    ob->print(ss);
+    LOG4CXX_DEBUG(logger, "ob:" << ss.str());
+
+    rowvec cpImb(ob->levels());
+    for (size_t iLevel = 0; iLevel < ob->levels(); ++iLevel) {
+
+        LOG4CXX_DEBUG(logger, "vecBidOrdCount(" << iLevel << ")=" << ob->vecBidOrdCount()(span(0, iLevel)))
+        LOG4CXX_DEBUG(logger, "sum(vecBidOrdCount)(" << iLevel << ")=" << sum(ob->vecBidOrdCount()(span(0, iLevel))));
+        LOG4CXX_DEBUG(logger, "vecAskOrdCount(" << iLevel << ")=" << ob->vecAskOrdCount()(span(0, iLevel)))
+        LOG4CXX_DEBUG(logger, "sum(vecAskOrdCount)(" << iLevel << ")=" << sum(ob->vecAskOrdCount()(span(0, iLevel))))
+        LOG4CXX_DEBUG(logger, "signedLogTransformArgument=" << sum(ob->vecBidOrdCount()(span(0, iLevel)) - ob->vecAskOrdCount()(span(0, iLevel))))
+        cpImb(iLevel) = arma_utils::signedLogTransform(
+                sum(ob->vecBidOrdCount()(span(0, iLevel)) - ob->vecAskOrdCount()(span(0, iLevel)))
+                );
+        LOG4CXX_DEBUG(logger, "signedLogTransform=(iLevel)" << cpImb(iLevel))
+    }
+
+    return (mean(cpImb));
+}
+
+
+double alphas::calculateOrderBookImalanaceAlpha(boost::shared_ptr<ArmaOrderBook> const & ob,
+        generated_settings::c_settings const & settings) {
+    static log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("alphas.OrderBookImbalance"));
+    rowvec obImb(ob->levels());
+    for (size_t iLevel = 0; iLevel < ob->levels(); ++iLevel) {
+        LOG4CXX_DEBUG(logger, "symbolSeqNum = " << ob->symbolSeqNum());
+        LOG4CXX_DEBUG(logger, "askSize(" << iLevel << ")=" << (ob->vecAskSize()(span(0, iLevel))));
+        LOG4CXX_DEBUG(logger, "bidSize(" << iLevel << ")=" << (ob->vecBidSize()(span(0, iLevel))));
+        rowvec log_ask_bid = log(cumsum(ob->vecAskSize()(span(0, iLevel))) / cumsum(ob->vecBidSize()(span(0, iLevel))));
+        rowvec vsizes = ob->vecAskSize()(span(0, iLevel)) + ob->vecBidSize()(span(0, iLevel));
+        obImb(iLevel) = sum(log_ask_bid % vsizes) / sum(vsizes);
+    }
+    return mean(obImb);
+}
+
+
+
+double alphas::calculateSynMidAlpha(boost::shared_ptr<ArmaOrderBook> const & ob,
+        generated_settings::c_settings const & settings) {
+
+    static log4cxx::LoggerPtr _logger(log4cxx::Logger::getLogger("alphas.SyntheticMid"));
+    using namespace arma;
+    rowvec vals(ob->levels());
+
+    double rho = settings.get_Alpha().get_MidDecay().get_double().get_value();
+
+    using namespace arma;
+
+    LOG4CXX_DEBUG(_logger, "sequence Number: " << ob->symbolSeqNum());
+    LOG4CXX_DEBUG(_logger, "Using rho=" << rho);
+    double mid = .5 * (ob->vecBid()(0) + ob->vecAsk()(0));
+
+    LOG4CXX_DEBUG(_logger, "Mid=" << mid);
+    LOG4CXX_DEBUG(_logger, "vecbids(1)=" << ob->vecBid())
+
+    rowvec const & vecbids = fliplr(ob->vecBid());
+    LOG4CXX_DEBUG(_logger, "vecbids(2)=" << vecbids);
+
+    rowvec const & vecasks = ob->vecAsk();
+    LOG4CXX_DEBUG(_logger, "vecasks=" << vecasks);
+    rowvec const & vecbidszs = fliplr(ob->vecBidSize());
+
+    LOG4CXX_DEBUG(_logger, "vecbidszs=" << vecbidszs);
+    rowvec const & vecaskszs = ob->vecAskSize();
+    LOG4CXX_DEBUG(_logger, "vecaskszs=" << vecaskszs);
+
+    size_t nlevels = ob->levels();
+    for (size_t iLevel = 1; iLevel <= ob->levels(); ++iLevel) {
+
+        rowvec P = join_horiz(vecbids(span(nlevels - iLevel, nlevels - 1)), vecasks(span(0, iLevel - 1)));
+        rowvec Q = join_horiz(vecbidszs(span(nlevels - iLevel, nlevels - 1)), vecaskszs(span(0, iLevel - 1)));
+
+        LOG4CXX_DEBUG(_logger, "P:" << P);
+        LOG4CXX_DEBUG(_logger, "Q:" << Q);
+
+        if (arma_utils::isLessThan(rho, 1)) { // difference smaller than tol ignored
+            mat matLevels = linspace<mat>(1, iLevel + 1, iLevel + 1);
+            LOG4CXX_DEBUG(_logger, "matLevels:" << matLevels)
+            mat matRho_W;
+            matRho_W = rho * matRho_W.ones(iLevel + 1, 1); // generates a column of rhos
+            LOG4CXX_DEBUG(_logger, "rhos:" << matRho_W);
+            matRho_W = exp(log(matRho_W) % matLevels); // evaluates rho.^[1:levels]
+            LOG4CXX_DEBUG(_logger, "rho.^[1:levels]:" << matRho_W);
+            matRho_W.insert_rows(0, flipud(matRho_W));
+            LOG4CXX_DEBUG(_logger, "W_1:" << matRho_W);
+            matRho_W = matRho_W / as_scalar(sum(matRho_W)); // normalization - nx1 matrix with n=2*nlevels
+            LOG4CXX_DEBUG(_logger, "W_2:" << matRho_W);
+            inplace_trans(matRho_W); // converts 2*n size column into a row
+            LOG4CXX_DEBUG(_logger, "W_2:'" << matRho_W);
+            Q = matRho_W % Q; //Q_{1x2n} .* W'_{1x2n}
+            LOG4CXX_DEBUG(_logger, "Q:" << Q);
+        }
+
+        vals(iLevel - 1) = mid - as_scalar(sum(P % Q) / sum(Q, 1));
+        LOG4CXX_DEBUG(_logger, "Alpha(" << iLevel - 1 << ")=" << vals(iLevel - 1));
+    }
+
+    return (mean(vals));
+}
+
+
+alphas::PaidGivenResult alphas::tickRule(int instrument,
+        processor::TickRuleFilter const & trp,
+        boost::shared_ptr<ArmaTradeBook> const & tb,
+        generated_settings::c_settings const & settings) {
+
+    static log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("alphas.TradeSizeImbalance"));
+
+    if (tb->pagi() == 0) {
+
+        std::pair<bool, ArmaTradeBook> lastCompleteBook = trp.getZeroPagiTick(instrument);
+        if (lastCompleteBook.first) {
+            // the queue already has added the last packet with mid1<>tb->price
+            // hence use pagi value from the last completed tick
+            if (lastCompleteBook.second.pagi() == 1) {
+                //return PaidGivenResult(tradeimbalance::PAID, tb->size());
+                return PaidGivenResult(tradeimbalance::PAID, tb->aggsize());
+            } else if (lastCompleteBook.second.pagi() == -1) {
+                return PaidGivenResult(tradeimbalance::GIVEN, tb->aggsize());
+            }
+        } else {
+            LOG4CXX_ERROR(logger, "No TR tick found for trade seqnum" << tb->symbolSequenceNumber())
+        }
+    } else if (tb->pagi() == 1) {
+        //return PaidGivenResult(tradeimbalance::PAID, tb->size());
+        return PaidGivenResult(tradeimbalance::PAID, tb->aggsize());
+    } else if (tb->pagi() == -1) {
+        //return PaidGivenResult(tradeimbalance::GIVEN, tb->size());
+        return PaidGivenResult(tradeimbalance::GIVEN, tb->aggsize());
+    } else {
+        LOG4CXX_ERROR(logger, "Invalid Pagi for trade seqnum" << tb->symbolSequenceNumber())
+    }
+
+    return PaidGivenResult(tradeimbalance::NONE, 0);
+}
+
+double alphas::calculateAlphaForPaid(double paid, boost::shared_ptr<ArmaTradeBook> const & tb,
+        generated_settings::c_settings const & settings) {
+    static log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("alphas.TradeSizeImbalance"));
+
+    double sizes = paid;
+    // treat small sizes as unitary
+    if (arma_utils::isLessThan(std::abs(sizes), 1)) {
+        sizes = 1;
+    }
+
+    sizes = arma_utils::signum(sizes) * log(std::abs(sizes));
+
+    LOG4CXX_DEBUG(logger, "seqnum:" << tb->symbolSequenceNumber() << "," << tb->aggsize() << "," << sizes)
+    return sizes;
+}
+
+double alphas::calculateAlphaForGiven(double given, boost::shared_ptr<ArmaTradeBook> const & tb,
+        generated_settings::c_settings const & settings) {
+    static log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("alphas.TradeSizeImbalance"));
+
+    double sizes = -given;
+    // treat small sizes as unitary
+    if (arma_utils::isLessThan(std::abs(sizes), 1)) {
+        sizes = 1;
+    }
+
+    sizes = arma_utils::signum(sizes) * log(std::abs(sizes));
+
+    LOG4CXX_DEBUG(logger, "seqnum:" << tb->symbolSequenceNumber() << "," << tb->aggsize() << "," << sizes)
+    return sizes;
+}
+
+double alphas::calculateTradeImbalanceAlpha(int instrument,
+        processor::TickRuleFilter const & trp,
+        boost::shared_ptr<ArmaTradeBook> const & tb,
+        generated_settings::c_settings const & settings) {
+
+    static log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("alphas.TradeSizeImbalance"));
+
+    alphas::PaidGivenResult pgData = tickRule(instrument, trp, tb, settings);
+
+    // paid and given are mutually exclusive
+
+    if (pgData.value().first == tradeimbalance::GIVEN) {
+        return calculateAlphaForGiven(pgData.value().second, tb, settings);
+    } else if (pgData.value().first == tradeimbalance::PAID) {
+        return calculateAlphaForPaid(pgData.value().second, tb, settings);
+    }
+
+    return 0;
+}
