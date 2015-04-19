@@ -73,17 +73,36 @@ getDateVecTimeSeries<- function(dvec,prices,dates)
 # ' @return      - a window of time points
 # '
 
-getAvailableData <- function(curdate,pricedata,range){
+getDataWithinRange <- function(curdate,pricedata,range){
 
-    print (paste("searching prices for curdate=",curdate));
+    # print (paste("searching prices for curdate=",curdate));
     wstart = curdate - as.difftime(range,units="days");
     wend = curdate;
    
-    print (pricedata$Date)
     available_data = pricedata[as.numeric(pricedata$Date-wstart)>0 & as.numeric(pricedata$Date-wend)<0,];
     
     return (available_data);
 }
+
+
+generateDatesForPeriod <- function(current_date,first_date,nperiods){
+    if (nperiods < 1 ) { 
+       stop("nperiods should be >= 1")
+    }
+    if (current_date - first_date <= 0 ) { 
+        stop("first_date must be before current_date");
+    }
+    # calculate interval
+    period = (current_date-first_date)/(nperiods)
+    return (first_date + period*(seq(nperiods+1)-1));
+}
+
+# TODO: Seek a function that combines time-series based on the range and time-vector
+#       provided. If datevector is 20110123, 20110124,20110201 for sets of data- A, B and C
+#       then the said function would seek values in A,B,C and corresponding to dates 
+#       in datevector deviating no more than a specified range. If the range was 2, then
+#       20110122, 20110123. The search to be performed could be in the 
+#       past or the present (there could be a preference to 20110125 or 20110124 in B).
 
 calculateROE<- function(){
   
@@ -116,7 +135,6 @@ calculateROE<- function(){
     # dev would be used as the time-vector for all data-timeseries
     dvec=as.integer(strftime(strptime(data$date,"%Y-%m-%d"),"%Y"));
    
-    
     # marketprices gets searched market price based on days range
     marketprices=searchMarketPrice(mdates=mdates,ndaysrange=10,pricedata=pricedata,processorFunc=processBidAskRow);
     
@@ -130,39 +148,14 @@ calculateROE<- function(){
         stop ('market prices for certain dates not available for beta calculations');
     }
     
-    
-    # strftime is done only because for iteration over the time denudes
-    # the type of its object
-    
-    curstrdates = strftime(marketprices$searchedDate,"%Y-%m-%d");
-    count = 1;
-    stockReturns = list()
-    for (curstrdate in curstrdates) {
-        reconvertedCurdate = strptime(curstrdate,"%Y-%m-%d");
-        retStockData = getAvailableData(curdate=reconvertedCurdate,pricedata=pricedata,range=60);
-        if (dim(retStockData)[1]>0){ 
-           stockReturns[[count]]=lag(ts(lag(retStockData$PX_BID)),0)/lag(ts(retStockData$PX_BID),-1)-1;
-        }
-        count = count + 1
-    }
 
-    curstrdates = strftime(snpprices$searchedDate,"%Y-%m-%d");
+   # calculate the date vector for betas by - to calculate beta on 2014-10-02, we generate a monthly
+   # sequence of date and then search for every market date in the sequence
+   return(marketprices$searchedDate)
 
-    count = 1;
-    marketReturns = list();
-    for (curstrdate in curstrdates) {
-        reconvertedCurdate = strptime(curstrdate,"%Y-%m-%d");
-        retMarketData = getAvailableData(curdate=reconvertedCurdate,pricedata=allsnpprices,range=60);
-        
-        if (dim(retMarketData )[1]>0){ 
-           return (retMarketData);
-           marketReturns [[count]]=lag(ts(lag(retMarketData $PX_BID)),0)/lag(ts(retMarketData $PX_BID),-1)-1;
-        }
-        count = count + 1
-    }
-    
-    return(marketReturns)
-    
+
+    # returns are used to calculate betas
+
     marketprices=getDateVecTimeSeries(dvec=dvec,prices=marketprices$price,dates=marketprices$Date);
     snpprices=getDateVecTimeSeries(dvec=dvec,prices=snpprices$price,dates=snpprices$Date);
     
@@ -188,10 +181,11 @@ calculateROE<- function(){
     
     roe=tsebit/lag(tsebit,-1)-1;
     phase=5;
-    tsroec=roe
+    tsroec=roe;
     for (lindex in seq(phase-1)) {
       tsroec=ts.intersect(tsroec,lag(roe,-lindex));
     }
+
     tsroec_data=as.matrix(as.data.frame(tsroec));
     projs=array();
     
@@ -200,7 +194,9 @@ calculateROE<- function(){
     }
     
     tsprojs=ts(data=projs,start=start(tsroec),end=end(tsroec),frequency=frequency(tsroec));
+
     rd = read.csv("debtcost/rd1.csv");
+
     # assumes the data column is "rd1"
     rd = ts(data=rd$rd1,
             start=rd$Year[1],end=rd$Year[length(rd$Year)]);
@@ -213,7 +209,7 @@ calculateROE<- function(){
     D     = findata$ltdebt;
     V     = E+D;
     r_D   = findata$rate; # rd1 is just r_f 
-    r_E   = findata$roe;  # rE should be calculated as r_E=r_f+(r_m-r_f)*(b_E)
+    r_E   = findata$roe;  # rE should instead be calculated as r_E=r_f+(r_m-r_f)*(b_E)
     FCFF  = findata$fcff;
     WACC = (1-tax)*(D/V)*r_D+(E/V)*r_E;
     tswacc=ts(data=WACC,start=start(ts_final),end=end(ts_final));
