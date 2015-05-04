@@ -151,8 +151,11 @@ calculateROE<- function(){
 
    # calculate the date vector for betas by - to calculate beta on 2014-10-02, we generate a monthly
    # sequence of date and then search for every market date in the sequence
-   return(marketprices$searchedDate)
-
+   #return (marketprices$searchedDate[1])
+   # return (pricedata)
+   gen_dates = (generateDatesForPeriod(marketprices$searchedDate[6],marketprices$searchedDate[6]-as.difftime(360,units='days'), 2))
+   gen_mp = searchMarketPrice( mdates = gen_dates , ndaysrange = 10 , pricedata = pricedata, processorFunc=processBidAskRow )
+   return(gen_mp)
 
     # returns are used to calculate betas
 
