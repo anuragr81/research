@@ -34,11 +34,16 @@ if nrows * ncols != iar.size:
 
 # normalize the image
 max_data_reciprocal = 1/float(int(max(iar.data).encode('hex'),16))
+
+print "max_data_reciprocal=",max_data_reciprocal
 iar = np.multiply(iar,max_data_reciprocal)
 
-# if the median is higher than
-print np.median(iar)
-sys.exit(1)
+# if the median is higher than brightness_median_threshold
+# (i.e. most of the pixels are bright), then invert
+if np.median(iar)> brightness_median_threshold:
+    iar = 1-iar; # data is already normalized
+    print " Inverted:",iar
+
 rowdata = iar.tolist()
 
 # normalize the horizontal bar filter
@@ -52,8 +57,8 @@ for i in range(0, nrows):
     row = rowdata[i];
     if not isinstance(row, list):
         TypeError("row not a list")
-    #print i, ",", np.mean(np.convolve(row, average_horizbar))
-    print row
+    print i, ",", np.mean(np.convolve(row, average_horizbar))
+    #print row
 
 #plt.imshow(iar)
 
