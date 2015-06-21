@@ -16,6 +16,10 @@ class SmallImageException(Exception):
     pass
 
 
+def show_row_histogram(row_res):
+    (n, bins, patches) = pylab.hist(row_res, len(row_res) / 5, histtype='step', stacked=True, fill=True)
+    pylab.show()
+
 # the average size of the horizontal bar for detection
 bar_ratio = .05;
 brightness_median_threshold = .5
@@ -34,15 +38,15 @@ if nrows * ncols != iar.size:
     raise InvalidLoadException()
 
 # normalize the image
-max_data_reciprocal = 1/float(int(max(iar.data).encode('hex'),16))
+max_data_reciprocal = 1 / float(int(max(iar.data).encode('hex'), 16))
 
-#print "max_data_reciprocal=",max_data_reciprocal
-iar = np.multiply(iar,max_data_reciprocal)
+# print "max_data_reciprocal=",max_data_reciprocal
+iar = np.multiply(iar, max_data_reciprocal)
 
 # if the median is higher than brightness_median_threshold
 # (i.e. most of the pixels are bright), then invert
-if np.median(iar)> brightness_median_threshold:
-    iar = 1-iar; # data is already normalized
+if np.median(iar) > brightness_median_threshold:
+    iar = 1 - iar;  # data is already normalized
 
 rowdata = iar.tolist()
 
@@ -56,22 +60,32 @@ if len(average_horizbar) < 2:
 # np.convolve(x,average_horizbar)
 
 
-row_res=[]
+enhanced_rows = []
+row_res = []
 for i in range(0, nrows):
     row = rowdata[i];
     if not isinstance(row, list):
         TypeError("row not a list")
     row_res.append(np.mean(row))
+    enhanced_row = []
+    if np.mean(row) > .3 :
+        enhanced_row = enhanced_row+ [200]*100
+    else:
+        enhanced_row = enhanced_row + [0]*100
+    enhanced_row = enhanced_row + row
+    enhanced_rows.append(enhanced_row)
 
+#print enhanced_rows
+img2 = Image.fromarray(np.multiply(np.array(enhanced_rows),200))
+img2.save("/tmp/test.gif",'GIF')
+sys.exit(1)
 print "index,sum"
-for i in range(0,len(row_res)):
-    print i,",",row_res[i]
+for i in range(0, len(row_res)):
+    print i, ",", row_res[i]
 
 # The number of bins in the histogram cannot be fixed. We rely on the idea of a
 # typical bangla text.
 
-(n, bins, patches)= pylab.hist(row_res, len(row_res)/5, histtype='step', stacked=True, fill=True)
-pylab.show()
 #plt.imshow(iar)
 
 #print(iar)
