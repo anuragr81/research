@@ -20,6 +20,13 @@ def show_row_histogram(row_res):
     (n, bins, patches) = pylab.hist(row_res, len(row_res) / 5, histtype='step', stacked=True, fill=True)
     pylab.show()
 
+
+x=[1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1]
+f=[0,0,0,0,10,0,0,0,0]
+#f= [1]*9
+print x
+print np.convolve(x,f,'same')
+sys.exit(2)
 # the average size of the horizontal bar for detection
 bar_ratio = .05;
 brightness_median_threshold = .5
