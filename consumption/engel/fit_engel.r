@@ -6,24 +6,46 @@
 # deselecting retired and unoccupied
 # dat[as.numeric(dat$V4)<20,]
 
+calculateSuperCategory <-function (category){
+  return (floor(as.numeric(as.character(category))*1e-4));
+}
+
 load_expenditure_files<-function (set3_filename, set114_filename){
   winc = read.table(set3_filename);
   wdiary = read.table(set114_filename);
   winc_cases= as.character(winc$V1);
   wdiary_cases = as.character(wdiary$V1);
   cases = intersect(winc_cases,wdiary_cases);
+  
+  print(wdiary[1,])
+  
   for (caseno in cases){
+    
+    
     income = as.numeric(as.character(
       winc[as.character(winc$V1)==as.character(caseno),]$V8)
     );
-    print(paste("Weekly income for caseno",caseno," = ",income));
     
-    # gathering data for week 1
-    case_entries=wdiary[as.character(wdiary$V1)==as.character(caseno) & as.character(wdiary$V3)=="1",];
-    print(case_entries)
-    # from case_entries, sum data for every category (use plyr -ddply)
-    # 
-    print(as.numeric(as.character(case_entries$V7)));
+    if (!is.na(income)){
+      print(paste("Weekly income for caseno",caseno," = ",income));
+      
+      # gathering data for week 1
+      case_entries=wdiary[as.character(wdiary$V1)==as.character(caseno) & as.character(wdiary$V3)=="1",];
+      
+      # from case_entries, sum data for every category (use plyr -ddply)
+      # the idea would be to i) append the super-category to the frame case_entries 
+      
+      case_entries$category = calculateSuperCategory(case_entries$V4);
+      print(case_entries);
+      
+      # and then ii) use ddply to aggregate
+      dat = ddply(.data=case_entries,.variables=.(V1,V2,V3,category),summarize,
+                  expenditure=sum(as.numeric(as.character(V7)))
+                  );
+      print(dat)
+      stop("DONE")
+      print(as.numeric(as.character(case_entries$V7)));
+    } #endif na check on income 
   }
   
 }
