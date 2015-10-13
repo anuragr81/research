@@ -40,13 +40,15 @@ load_expenditure_files<-function (set3_filename, set114_filename){
       # the idea would be to i) append the super-category to the frame case_entries 
       
       case_entries$category = calculateSuperCategory(case_entries$V4);
-      #print(case_entries);
+      case_entries$income = rep(income,length(case_entries$V1));
       
       # and then ii) use ddply to aggregate
       dat = ddply(.data=case_entries,.variables=.(V1,V2,V3,category),summarize,
-                  expenditure=sum(as.numeric(as.character(V7)))
+                  expenditure=sum(as.numeric(as.character(V7))),
+                  income=unique(income) # guarantees that multiple income values would fail
       );
       results= rbind(results,dat);
+      #print(results)
       #stop("DONE");
       #print(as.numeric(as.character(case_entries$V7)));
     } #endif na check on income 
