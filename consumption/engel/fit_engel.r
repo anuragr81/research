@@ -12,7 +12,7 @@ calculateSuperCategory <-function (category){
   return (floor(as.numeric(as.character(category))*1e-4));
 }
 
-load_expenditure_files<-function (set3_filename, set114_filename){
+load_expenditure_files<-function (set3_filename, set114_filename,outfile){
   winc = read.table(set3_filename);
   wdiary = read.table(set114_filename);
   winc_cases= as.character(winc$V1);
@@ -50,20 +50,28 @@ load_expenditure_files<-function (set3_filename, set114_filename){
       results= rbind(results,dat);
       #print(results)
       #stop("DONE");
-      #print(as.numeric(as.character(case_entries$V7)));
     } #endif na check on income 
   }#end for
-  write.csv(results,file='/tmp/results.csv')
+  write.csv(results,outfile)
 }
-run_regression<-function(x,w_i){
+run_regression<-function(filename,category){
   # for every caseno i, we have a vector of w_i's (i being a commodity) and outlay x
-  # if we have n casenos and k commodities
-  # then w_i is a [nxk] vector
-  #      x   is a [nx1] vector
   # The equation w_i = a_i + b_i log(x)
   # would imply running k regressions such that
   # w_1[] = a_1 + b_1 log(x)
   
+  # t-values are OK for 1,2,3,4,10,11,12 (but R-sq etc. are far from OK)
+  
+  dat_all = read.csv(filename);
+  dat = dat_all[as.integer(dat_all$category) == as.integer(category),];
+  print(paste("Viewed Category:",unique(dat$category)));
+  logx = log(dat[dat$income!=0,]$income);
+  w_i = dat[dat$income!=0,]$expenditure;
+  res = lm(w_i~logx);
+  plot(logx,w_i);
+  abline(res);
+  print(summary(res));
+  return(dat);  
 }
 #
 #require(plyr)
