@@ -6,7 +6,10 @@
 # deselecting retired and unoccupied
 # dat[as.numeric(dat$V4)<20,]
 
-require(plyr)
+require(plyr)#for ddply
+library(foreign)# for spss
+
+# dat=read.spss('HH_SEC_O2.SAV',to.data.frame=TRUE)
 
 calculateSuperCategory <-function (category){
   return (floor(as.numeric(as.character(category))*1e-4));
@@ -33,6 +36,8 @@ load_expenditure_files<-function (set3_filename, set114_filename,outfile){
     if (!is.na(income)){
       print(paste("Weekly income for caseno",caseno," = ",income));
       
+      # SKIP: 8074031
+      
       # gathering data for week 1
       case_entries=wdiary[as.character(wdiary$V1)==as.character(caseno) & as.character(wdiary$V3)=="1",];
       
@@ -41,11 +46,12 @@ load_expenditure_files<-function (set3_filename, set114_filename,outfile){
       
       case_entries$category = calculateSuperCategory(case_entries$V4);
       case_entries$income = rep(income,length(case_entries$V1));
-      
+      case_entries$total_expenditure = sum(as.numeric(as.character(case_entries$V7)));
       # and then ii) use ddply to aggregate
       dat = ddply(.data=case_entries,.variables=.(V1,V2,V3,category),summarize,
                   expenditure=sum(as.numeric(as.character(V7))),
-                  income=unique(income) # guarantees that multiple income values would fail
+                  income=unique(income), # guarantees that multiple income values would fail
+                  total_expenditure = unique(total_expenditure) # guarantees that multiple income values would fail
       );
       results= rbind(results,dat);
       #print(results)
@@ -97,3 +103,11 @@ fit_engel <- function(filename){
   } 
   #print (output);
 }
+
+read_tnz <- function(filename) {
+    dat1 = read.spss(filename);
+    dat2 = as.data.frame(dat1);
+    dat3 = dat2[as.numeric(dat2$y2_hhid)>0,]
+    return(dat3[!is.na(as.numeric(dat3$hh_k04)),]);
+}
+
