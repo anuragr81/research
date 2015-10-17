@@ -15,6 +15,48 @@ calculateSuperCategory <-function (category){
   return (floor(as.numeric(as.character(category))*1e-4));
 }
 
+load_expenditure_files2<-function (set3_filename, set114_filename,outfile){
+  winc = read.table(set3_filename);
+  wdiary = read.table(set114_filename);
+  winc_cases= as.character(winc$V1);
+  wdiary_cases = as.character(wdiary$V1);
+  cases = intersect(winc_cases,wdiary_cases);
+  
+  print(wdiary[1,])
+  
+  #incomes = as.numeric(as.character(
+  #  winc[as.character(winc$V1)==as.character(caseno),]$V8)
+  #);   
+  
+  # gathering data for week 1
+  dat=wdiary[is.element(as.character(wdiary$V1),as.character(cases)) & as.character(wdiary$V3)=="1",];
+  
+  # from dat, sum data for every category (use plyr -ddply)
+  # the idea would be to i) append the super-category to the frame dat 
+  
+  dat$category = calculateSuperCategory(dat$V4);
+  results = ddply(.data=dat,.variables=.(V1,V2,V3,V5,V6,category),summarize,
+                  expenditure=sum(as.numeric(as.character(V7))));  
+  return(results);
+  #results = ddply(.data=dat,.variables=.(V1,V2,V3,category),summarize,
+  #                expenditure=sum(as.numeric(as.character(V7))),
+  #               income=unique(income), # guarantees that multiple income values would fail
+  #                total_expenditure = unique(total_expenditure) # guarantees that multiple income values would fail
+  
+  #dat$income = rep(income,length(dat$V1));
+  #dat$total_expenditure = sum(as.numeric(as.character(dat$V7)));
+  # and then ii) use ddply to aggregate
+  #results = ddply(.data=dat,.variables=.(V1,V2,V3,category),summarize,
+  #                expenditure=sum(as.numeric(as.character(V7))),
+   #               income=unique(income), # guarantees that multiple income values would fail
+  #                total_expenditure = unique(total_expenditure) # guarantees that multiple income values would fail
+  #);
+  #print(results)
+  #stop("DONE"); 
+  write.csv(results,outfile)
+}
+
+
 load_expenditure_files<-function (set3_filename, set114_filename,outfile){
   winc = read.table(set3_filename);
   wdiary = read.table(set114_filename);
@@ -26,7 +68,7 @@ load_expenditure_files<-function (set3_filename, set114_filename,outfile){
   
   results=data.frame();
   count = 1;
-  for (caseno in cases){  
+  for (caseno in cases){
     
     income = as.numeric(as.character(
       winc[as.character(winc$V1)==as.character(caseno),]$V8)
@@ -60,6 +102,7 @@ load_expenditure_files<-function (set3_filename, set114_filename,outfile){
   }#end for
   write.csv(results,outfile)
 }
+
 run_regression<-function(filename,category){
   # for every caseno i, we have a vector of w_i's (i being a commodity) and outlay x
   # The equation w_i = a_i + b_i log(x)
@@ -105,9 +148,9 @@ fit_engel <- function(filename){
 }
 
 read_tnz <- function(filename) {
-    dat1 = read.spss(filename);
-    dat2 = as.data.frame(dat1);
-    dat3 = dat2[as.numeric(dat2$y2_hhid)>0,]
-    return(dat3[!is.na(as.numeric(dat3$hh_k04)),]);
+  dat1 = read.spss(filename);
+  dat2 = as.data.frame(dat1);
+  dat3 = dat2[as.numeric(dat2$y2_hhid)>0,]
+  return(dat3[!is.na(as.numeric(dat3$hh_k04)),]);
 }
 
