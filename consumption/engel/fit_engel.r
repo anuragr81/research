@@ -142,13 +142,11 @@ fit_engel <- function(filename){
   #print (output);
 }
 
-read_tnz <- function(E_filename) {
-  dat1 = read.spss(E_filename);
+read_tnz <- function(filename) {
+  dat1 = read.spss(filename);
   dat2 = as.data.frame(dat1);
   dat3 = dat2[as.numeric(dat2$y2_hhid)>0,]
-  
   return(dat3);
-  #return(dat3[!is.na(as.numeric(dat3$hh_k04)),]);
 }
 
 farm_workers <-function (E_filename){
@@ -156,4 +154,28 @@ farm_workers <-function (E_filename){
   x=dat[as.character(dat$hh_e06)=='On your own farm or shamba',];
   x=x[!is.na(x$y2_hhid),]
   return(x);
+}
+
+consumption<-function(K_filename){
+  dat = read_tnz (filename=K_filename);
+  dat = dat[!is.na(as.numeric(dat$hh_k04)),];
+  # selecting fewer fields
+  dat = data.frame(y2_hhid=dat$y2_hhid,itemcode=dat$itemcode,hh_k04=dat$hh_k04);
+  # calculate total expenditure for every family with ddply
+  cdat = ddply(.data=dat,.variables=.(y2_hhid),summarize,
+               total_expenditure=sum(as.numeric(as.character(hh_k04))));
+  res = merge(cdat,dat);
+  
+  
+  boozy_families = dat[is.element(as.character(dat$itemcode),
+                                  c('Wine and spirits','Bottled beer','Local brews')),];
+  boozy_families$category=rep("booze",length(boozy_families$y2_hhid));
+  
+  
+  boozy = merge(res,boozy_families)
+  
+  booze_expenditure = ddply(.data=boozy,.variables=.(y2_hhid,category),summarize,
+                            booze_expenditure=sum(as.numeric(as.character(hh_k04))));
+  
+  return(merge(booze_expenditure,boozy));
 }
