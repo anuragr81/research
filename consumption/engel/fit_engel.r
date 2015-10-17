@@ -27,33 +27,25 @@ load_expenditure_files2<-function (set3_filename, set114_filename,outfile){
   #incomes = as.numeric(as.character(
   #  winc[as.character(winc$V1)==as.character(caseno),]$V8)
   #);   
+  winc= winc[is.element(as.character(winc$V1),as.character(cases)) & as.character(winc$V1)!="caseno",];
   
+  # saving income for later appends
+  incs = ddply(.data=winc,.variables=.(V1),summarize,
+               income=as.numeric(as.character(V8)));
   # gathering data for week 1
   dat=wdiary[is.element(as.character(wdiary$V1),as.character(cases)) & as.character(wdiary$V3)=="1",];
   
   # from dat, sum data for every category (use plyr -ddply)
-  # the idea would be to i) append the super-category to the frame dat 
   
   dat$category = calculateSuperCategory(dat$V4);
-  results = ddply(.data=dat,.variables=.(V1,V2,V3,V5,V6,category),summarize,
-                  expenditure=sum(as.numeric(as.character(V7))));  
-  return(results);
-  #results = ddply(.data=dat,.variables=.(V1,V2,V3,category),summarize,
-  #                expenditure=sum(as.numeric(as.character(V7))),
-  #               income=unique(income), # guarantees that multiple income values would fail
-  #                total_expenditure = unique(total_expenditure) # guarantees that multiple income values would fail
+  dat2 = ddply(.data=dat,.variables=.(V1,V2,V3,V5,V6,category),summarize,
+               expenditure=sum(as.numeric(as.character(V7))));
   
-  #dat$income = rep(income,length(dat$V1));
-  #dat$total_expenditure = sum(as.numeric(as.character(dat$V7)));
-  # and then ii) use ddply to aggregate
-  #results = ddply(.data=dat,.variables=.(V1,V2,V3,category),summarize,
-  #                expenditure=sum(as.numeric(as.character(V7))),
-   #               income=unique(income), # guarantees that multiple income values would fail
-  #                total_expenditure = unique(total_expenditure) # guarantees that multiple income values would fail
-  #);
-  #print(results)
-  #stop("DONE"); 
-  write.csv(results,outfile)
+  tot_exp = ddply(.data=dat2,.variables=.(V1,V2,V3,V5,V6),summarize,total_expenditure=sum(as.numeric(as.character(expenditure))))
+  dat3 = merge(dat2,tot_exp)
+  results = merge(dat3,incs);
+  write.csv(results,outfile);
+  return(results);
 }
 
 
@@ -114,10 +106,13 @@ run_regression<-function(filename,category){
   dat_all = read.csv(filename);
   dat = dat_all[as.integer(dat_all$category) == as.integer(category),];
   print(paste("Viewed Category:",unique(dat$category)));
-  logx = log(dat[dat$income!=0,]$income);
-  w_i = dat[dat$income!=0,]$expenditure;
+  logx = log(dat[dat$income!=0,]$total_expenditure);
+  expenditure = dat[dat$income!=0,]$expenditure;
+  total_expenditure = dat[dat$income!=0,]$total_expenditure;
+  w_i = expenditure/total_expenditure;
   res = lm(w_i~logx);
   plot(logx,w_i);
+  title(main=paste("Category=",toString(category)));
   abline(res);
   print(summary(res));
   return(dat);  
@@ -147,10 +142,18 @@ fit_engel <- function(filename){
   #print (output);
 }
 
-read_tnz <- function(filename) {
-  dat1 = read.spss(filename);
+read_tnz <- function(E_filename) {
+  dat1 = read.spss(E_filename);
   dat2 = as.data.frame(dat1);
   dat3 = dat2[as.numeric(dat2$y2_hhid)>0,]
-  return(dat3[!is.na(as.numeric(dat3$hh_k04)),]);
+  
+  return(dat3);
+  #return(dat3[!is.na(as.numeric(dat3$hh_k04)),]);
 }
 
+farm_workers <-function (E_filename){
+  dat = read_tnz (E_filename);
+  x=dat[as.character(dat$hh_e06)=='On your own farm or shamba',];
+  x=x[!is.na(x$y2_hhid),]
+  return(x);
+}

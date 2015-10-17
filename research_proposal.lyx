@@ -644,8 +644,17 @@ The key task has been that of standardizing consumption and income data.
 \begin_layout Standard
 The dependence on agrarian income is also evident from a preliminary analysis
  of the panel data.
- About - depend on income derived from farms.
- The number of households who run own their business.
+ About 45% of surveyed households depend on income derived from farms.
+ ~100 households seem to have secondary jobs.
+ The number of individuals who run own their business is close to 10%.
+ 
+\end_layout
+
+\begin_layout Standard
+The consumption outside household is not significant.
+ The survey records that only 5% individuals had eaten food outside in the
+ past week.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -665,15 +674,30 @@ A key learning from literature survey so far has been the difference in
 \end_layout
 
 \begin_layout Standard
-This is how the the plot of 
+When using the data on UK, a simple regression of 
+\begin_inset Formula $w_{i}=\beta\cdot logx+\alpha$
+\end_inset
+
+ typically has significant t-values for total expenditure (outlay 
+\begin_inset Formula $x=\sum p_{i}q_{i}$
+\end_inset
+
+ and budget share 
+\begin_inset Formula $w_{i}=\frac{{p_{i}q_{i}}}{x}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-The comparison of consumption.
-\end_layout
+\begin_inset Graphics
+	filename category_5.png
+	scale 60
 
-\begin_layout Standard
-The comparison of incomes.
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -712,7 +736,131 @@ options "ieeetr"
 \end_layout
 
 \begin_layout Part*
-Appendix 
+Appendix
+\end_layout
+
+\begin_layout Section*
+Variables in UK Expenditure Survey
+\end_layout
+
+\begin_layout Standard
+Set 3 in the UK expenditure survey provides the income related data.
+ Variable p344 (labeled 
+\begin_inset Quotes eld
+\end_inset
+
+Gross normal weekly household income
+\begin_inset Quotes erd
+\end_inset
+
+) was considered as income for the analysis.
+\end_layout
+
+\begin_layout Standard
+The consumption data is based on diary entries collected in the survey.
+ The household is identified by 
+\begin_inset Quotes eld
+\end_inset
+
+caseno
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Variables 
+\begin_inset Quotes eld
+\end_inset
+
+ditemcod
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+dcodecnt
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+ditemamt
+\begin_inset Quotes erd
+\end_inset
+
+ are aggregated for amount expended for every commodity (over 
+\begin_inset Quotes erd
+\end_inset
+
+persno
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+expwk114
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+dqualif 
+\begin_inset Quotes eld
+\end_inset
+
+).
+ The expenditure thus provides budget share.
+\end_layout
+
+\begin_layout Standard
+The data is joined (merged) over 
+\begin_inset Quotes eld
+\end_inset
+
+caseno
+\begin_inset Quotes erd
+\end_inset
+
+ (household identification number).
+\end_layout
+
+\begin_layout Section*
+Variables in Tanzania National Panel Survey
+\end_layout
+
+\begin_layout Standard
+The Section E of the questionnaire describes income related data.
+ The variable 
+\begin_inset Quotes eld
+\end_inset
+
+hh_e06
+\begin_inset Quotes erd
+\end_inset
+
+ identifies the type of occupation.
+ hh_e35 (Yes/No) and hh_e38 (amount) are concerned with secondary jobs.
+\end_layout
+
+\begin_layout Standard
+The Section F records food consumed out of the households.
+ The variable 
+\begin_inset Quotes eld
+\end_inset
+
+hh_f03
+\begin_inset Quotes erd
+\end_inset
+
+ records the value of the consumption outside the household in the past
+ week.
 \end_layout
 
 \end_body
