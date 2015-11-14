@@ -134,11 +134,11 @@ fit_engel <- function(filename){
   dat = read.csv(filename);
   categories = as.vector(unique(dat$category));
   output = list ();
-  for ( category in categories ) { 
+  for ( category in categories ) {
     output[[category]] = 1
     category_cost = sum(dat[ dat$category == category ,]$Cost)
     print (paste("Cost of category - ",category," = ",category_cost))
-  } 
+  }
   #print (output);
 }
 
@@ -156,7 +156,9 @@ farm_workers <-function (E_filename){
   return(x);
 }
 
-consumption<-function(K_filename){
+
+# Uses file:K1
+tnz_consumption<-function(K_filename){
   dat = read_tnz (filename=K_filename);
   dat = dat[!is.na(as.numeric(dat$hh_k04)),];
   # selecting fewer fields
@@ -165,7 +167,6 @@ consumption<-function(K_filename){
   cdat = ddply(.data=dat,.variables=.(y2_hhid),summarize,
                total_expenditure=sum(as.numeric(as.character(hh_k04))));
   res = merge(cdat,dat);
-  
   
   boozy_families = dat[is.element(as.character(dat$itemcode),
                                   c('Wine and spirits','Bottled beer','Local brews')),];
