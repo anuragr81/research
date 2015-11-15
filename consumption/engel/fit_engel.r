@@ -8,7 +8,7 @@
 
 require(plyr)#for ddply
 library(foreign)# for spss
-
+library(micEconAids) # AIDS
 # dat=read.spss('HH_SEC_O2.SAV',to.data.frame=TRUE)
 
 calculateSuperCategory <-function (category){
@@ -179,4 +179,16 @@ tnz_consumption<-function(K_filename){
                             booze_expenditure=sum(as.numeric(as.character(hh_k04))));
   
   return(merge(booze_expenditure,boozy));
+}
+
+
+micEconTest<-function (){
+  data( Blanciforti86 );
+  dat <- Blanciforti86[ 1:32,];
+  estResult <- aidsEst( c( "pFood1", "pFood2", "pFood3", "pFood4" ),
+                        c( "wFood1", "wFood2", "wFood3", "wFood4" ), "xFood",
+                        data = dat );
+  return(dat);
+  #return(estResult);
+  
 }
