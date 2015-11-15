@@ -15,7 +15,7 @@ calculateSuperCategory <-function (category){
   return (floor(as.numeric(as.character(category))*1e-4));
 }
 
-load_expenditure_files2<-function (set3_filename, set114_filename,outfile){
+load_expenditure_files<-function (set3_filename, set114_filename,outfile){
   winc = read.table(set3_filename);
   wdiary = read.table(set114_filename);
   winc_cases= as.character(winc$V1);
@@ -46,53 +46,6 @@ load_expenditure_files2<-function (set3_filename, set114_filename,outfile){
   results = merge(dat3,incs);
   write.csv(results,outfile);
   return(results);
-}
-
-
-load_expenditure_files<-function (set3_filename, set114_filename,outfile){
-  winc = read.table(set3_filename);
-  wdiary = read.table(set114_filename);
-  winc_cases= as.character(winc$V1);
-  wdiary_cases = as.character(wdiary$V1);
-  cases = intersect(winc_cases,wdiary_cases);
-  
-  print(wdiary[1,])
-  
-  results=data.frame();
-  count = 1;
-  for (caseno in cases){
-    
-    income = as.numeric(as.character(
-      winc[as.character(winc$V1)==as.character(caseno),]$V8)
-    );
-    
-    
-    if (!is.na(income)){
-      #print(paste("Weekly income for caseno",caseno," = ",income));
-      
-      # SKIP: 8074031
-      
-      # gathering data for week 1
-      case_entries=wdiary[as.character(wdiary$V1)==as.character(caseno) & as.character(wdiary$V3)=="1",];
-      
-      # from case_entries, sum data for every category (use plyr -ddply)
-      # the idea would be to i) append the super-category to the frame case_entries 
-      
-      case_entries$category = calculateSuperCategory(case_entries$V4);
-      case_entries$income = rep(income,length(case_entries$V1));
-      case_entries$total_expenditure = sum(as.numeric(as.character(case_entries$V7)));
-      # and then ii) use ddply to aggregate
-      dat = ddply(.data=case_entries,.variables=.(V1,V2,V3,category),summarize,
-                  expenditure=sum(as.numeric(as.character(V7))),
-                  income=unique(income), # guarantees that multiple income values would fail
-                  total_expenditure = unique(total_expenditure) # guarantees that multiple income values would fail
-      );
-      results= rbind(results,dat);
-      #print(results)
-      #stop("DONE");
-    } #endif na check on income 
-  }#end for
-  write.csv(results,outfile)
 }
 
 run_regression<-function(filename,category){
