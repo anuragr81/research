@@ -11,10 +11,29 @@ library(foreign)# for spss
 library(micEconAids) # AIDS
 # dat=read.spss('HH_SEC_O2.SAV',to.data.frame=TRUE)
 
+# remember that we may be passed levels as input:category
+assignCategory <-function (category_vector,price_vector){
+  
+  out_array=floor(as.numeric(as.character(category_vector))*1e-4);
+  i=1;
+  for (i in seq(length(out_array))){
+    
+    if (!is.na(out_array[i]) && out_array[i] == 4) {
+      #print(paste("out_array[",i,"]=",out_array[i]));
+      if (as.numeric(as.character(price_vector[i]))>=10) {
+        out_array[i]=401;
+      } else {
+        out_array[i]=402;
+      }
+    }
+  }
+  print("Completed Calculation of Category")
+  return(out_array);
+}
+
 calculateSuperCategory <-function (category){
   return (floor(as.numeric(as.character(category))*1e-4));
 }
-
 load_expenditure_files<-function (set3_filename, set114_filename,outfile){
   winc = read.table(set3_filename);
   wdiary = read.table(set114_filename);
@@ -37,14 +56,27 @@ load_expenditure_files<-function (set3_filename, set114_filename,outfile){
   
   # from dat, sum data for every category (use plyr -ddply)
   
-  dat$category = calculateSuperCategory(dat$V4);
+  #dat$category = calculateSuperCategory(dat$V4);
+  
+  dat$category = assignCategory(category_vector=dat$V4,price_vector=dat$V7);
+  
   dat2 = ddply(.data=dat,.variables=.(V1,V2,V3,V5,V6,category),summarize,
                expenditure=sum(as.numeric(as.character(V7))));
   
+  
+  print("Aggregated expenditure data")
   tot_exp = ddply(.data=dat2,.variables=.(V1,V2,V3,V5,V6),summarize,total_expenditure=sum(as.numeric(as.character(expenditure))))
+  print("Aggregated total_expenditure data")
+  
   dat3 = merge(dat2,tot_exp)
+  print("Merged total expenditure data")
+  
   results = merge(dat3,incs);
+  print("Merged income data")
+  
   write.csv(results,outfile);
+  print("Completed Writing File")
+  
   return(results);
 }
 
@@ -59,7 +91,9 @@ run_regression<-function(filename,category){
   dat_all = read.csv(filename);
   dat = dat_all[as.integer(dat_all$category) == as.integer(category),];
   print(paste("Viewed Category:",unique(dat$category)));
-  logx = log(dat[dat$income!=0,]$total_expenditure);
+  x = dat[dat$income!=0,]$total_expenditure;
+  #logx = log(x);
+  logx=log(x);
   expenditure = dat[dat$income!=0,]$expenditure;
   total_expenditure = dat[dat$income!=0,]$total_expenditure;
   w_i = expenditure/total_expenditure;
@@ -78,8 +112,7 @@ run_regression<-function(filename,category){
 #  age = runif(n = 29, min = 18, max = 54)
 #)
 
-
-fit_simple_engel<-function (){
+fit_simple_engel<-function () {
   
 }
 
@@ -134,7 +167,16 @@ tnz_consumption<-function(K_filename){
   return(merge(booze_expenditure,boozy));
 }
 
+testA<-function(){
 
+  
+  #"food=3", "utility2=", "alcohol=4", "housing=1","smoking=5","clothes=6","gadgets=8","equipment=7","health=9","car=10","travel=11","TV=12","entertainment=13","finance=14"
+  estResult <- aidsEst( c( "food", "utility", "alcohol", "housing","smoking","clothes","gadgets","equipment","services","car","travel","TV","entertainment","finance"),
+                        c( "wFood1", "wFood2", "wFood3", "wFood4" ), "xFood",
+                        data = dat );
+  
+}
+ 
 micEconTest<-function (){
   
   data( Blanciforti86 );
