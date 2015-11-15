@@ -68,7 +68,7 @@ load_expenditure_files<-function (set3_filename, set114_filename,outfile){
     
     
     if (!is.na(income)){
-      print(paste("Weekly income for caseno",caseno," = ",income));
+      #print(paste("Weekly income for caseno",caseno," = ",income));
       
       # SKIP: 8074031
       
@@ -183,6 +183,7 @@ tnz_consumption<-function(K_filename){
 
 
 micEconTest<-function (){
+  
   data( Blanciforti86 );
   dat <- Blanciforti86[ 1:32,];
   estResult <- aidsEst( c( "pFood1", "pFood2", "pFood3", "pFood4" ),
@@ -190,5 +191,5 @@ micEconTest<-function (){
                         data = dat );
   return(dat);
   #return(estResult);
-  
 }
+
