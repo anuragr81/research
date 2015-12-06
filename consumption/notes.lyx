@@ -1,0 +1,287 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+I do need to revisit marketing concerns.
+ The current step is demand analysis - not production analysis.
+ 
+\end_layout
+
+\begin_layout Standard
+Time Series Analysis
+\end_layout
+
+\begin_layout Section
+Cross Section Model
+\end_layout
+
+\begin_layout Standard
+If a population is observed for a sufficiently long time, then we get to
+ understand the effects of changing incomes, price variations on their choices.
+ A significant degree of demand analysis (more particularly Slutsky equation)
+ - derives from this data.
+ The well-known AIDS model also depends on this analysis.
+\end_layout
+
+\begin_layout Standard
+Relying on Engel's curves in the absence of panel data, makes us prone to
+ becoming pragmatic.
+ Cross-price-sensitivities become less relevant in the cross-section analysis.
+ The simple form that is currently used is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+ln\ q_{i}^{h} & =\alpha_{i}+\beta\ ln\ x^{h}+\gamma_{i}\ ln\ n^{h}+u_{i}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A further attempt was made to improve the regression itself (since the prices
+ can be assumed to be constant during the snapshot of the week).
+\end_layout
+
+\begin_layout Subsection
+Handling Spatial Variation
+\end_layout
+
+\begin_layout Standard
+An analysis of expensive vs non-expensive food items was done by Prais and
+ Prais and Houthakker (1955)
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerFamilySurvey"
+
+\end_inset
+
+.
+ Deaton use the following model for a cluster-based analysis:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+ln\ q_{Gic} & =\alpha_{G}^{0}+\beta_{G}^{0}ln\ x_{ic}+\gamma_{G}^{0}\cdot z_{ic}+\sum_{H=1}^{5}\theta_{GH}ln\ p_{Hc}+(f_{Gc}+u_{Gic}^{0})
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+ln\ v_{Gic} & =\alpha_{G}^{1}+\beta_{G}^{1}\ ln\ x_{ic}+\gamma_{G}^{1}\cdot z_{ic}+\sum_{H=1}^{5}\psi_{GH}ln\ p_{Hc}+u_{Gic}^{1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, quantity of good 
+\begin_inset Formula $G$
+\end_inset
+
+ consumed by cluster 
+\begin_inset Formula $c$
+\end_inset
+
+ is 
+\begin_inset Formula $q_{Gic}$
+\end_inset
+
+, the associated unit-value is 
+\begin_inset Formula $v_{Gic}$
+\end_inset
+
+, total expenditure is 
+\begin_inset Formula $x_{Gic}$
+\end_inset
+
+, a vector of household demographic characteristics is 
+\begin_inset Formula $z_{Gic}$
+\end_inset
+
+.
+ Two error terms used consist of i) a cluster-specific random effect 
+\begin_inset Formula $f_{Gc}$
+\end_inset
+
+along with the error 
+\begin_inset Formula $u_{Gic}^{0}$
+\end_inset
+
+and ii) idiosyncratic error
+\begin_inset Formula $u_{Gic}^{1}$
+\end_inset
+
+.
+ The computation of variance-covariance vectors
+\begin_inset Formula $u^{0}$
+\end_inset
+
+and
+\begin_inset Formula $u^{1}$
+\end_inset
+
+is used to derive cluster effects e.g.
+ inter-cluster variances and covariances for the separable goods.
+\end_layout
+
+\begin_layout Standard
+A key idea is to apply a quality-adjustment to the quantity (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChungCrossSec"
+
+\end_inset
+
+,
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonSurveyElasticities"
+
+\end_inset
+
+).
+ The assumption of separability and additivity is a key one as well
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BartenPreferences"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+The weak-separability
+\end_layout
+
+\begin_layout Standard
+Instead of assuming weak-separability, we intend to develop methods to test
+ separability in the context of conspicuous consumption.
+ Separability groups allow for index prices (which are unavailable if we
+ group conspicuous items together).
+\end_layout
+
+\begin_layout Standard
+In several seminal contributions to the literature, Afriat (1969), Varian
+ (1983) and Diewert and Parkan (1985) developed revealed preference conditions
+ that characterize the collection of data sets that are rationalizable by
+ a (weakly) separable utility function
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CherchyeSeparabilityTests"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Frank Model
+\end_layout
+
+\begin_layout Standard
+The plots of 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $w$
+\end_inset
+
+ are calculated:
+\end_layout
+
+\begin_layout Standard
+existence of separating equilibria
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MaliathSignaling"
+
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "/home/anuragr/research.git/africa_attitudes"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

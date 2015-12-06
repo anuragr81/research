@@ -34,6 +34,11 @@ assignCategory <-function (category_vector,price_vector){
 calculateSuperCategory <-function (category){
   return (floor(as.numeric(as.character(category))*1e-4));
 }
+
+#      V1     V2       V3       V4      V5       V6       V7
+#1 caseno persno expwk114 ditemcod dqualif dcodecnt ditemamt
+
+#wdiary entry sells 6 yoghurts for 2.72 - 96080  624041	1	2	30203	0	6	2.72
 load_expenditure_files<-function (set3_filename, set114_filename,outfile){
   winc = read.table(set3_filename);
   wdiary = read.table(set114_filename);
@@ -51,6 +56,7 @@ load_expenditure_files<-function (set3_filename, set114_filename,outfile){
   # saving income for later appends
   incs = ddply(.data=winc,.variables=.(V1),summarize,
                income=as.numeric(as.character(V8)));
+  print("created income vector")
   # gathering data for week 1
   dat=wdiary[is.element(as.character(wdiary$V1),as.character(cases)) & as.character(wdiary$V3)=="1",];
   
@@ -79,6 +85,51 @@ load_expenditure_files<-function (set3_filename, set114_filename,outfile){
   
   return(results);
 }
+
+load_expenditure_files_agg<-function (set3_filename, set114_filename,outfile){
+  winc = read.table(set3_filename);
+  wdiary = read.table(set114_filename);
+  winc_cases= as.character(winc$V1);
+  wdiary_cases = as.character(wdiary$V1);
+  cases = intersect(winc_cases,wdiary_cases);
+  
+  print(wdiary[1,])
+ 
+  winc= winc[is.element(as.character(winc$V1),as.character(cases)) & as.character(winc$V1)!="caseno",];
+  
+  # saving income for later appends
+  incs = ddply(.data=winc,.variables=.(V1),summarize,
+               income=as.numeric(as.character(V8)));
+  print("created income vector")
+  # gathering data for week 1
+  dat=wdiary[is.element(as.character(wdiary$V1),as.character(cases)) & as.character(wdiary$V3)=="1",];
+  
+  # from dat, sum data for every category (use plyr -ddply)
+  
+  #dat$category = calculateSuperCategory(dat$V4);
+  
+  dat$category = assignCategory(category_vector=dat$V4,price_vector=dat$V7);
+  
+  dat2 = ddply(.data=dat,.variables=.(V1,V3,category),summarize,
+               expenditure=sum(as.numeric(as.character(V7))));
+  
+  
+  print("Aggregated expenditure data")
+  tot_exp = ddply(.data=dat2,.variables=.(V1,V3),summarize,total_expenditure=sum(as.numeric(as.character(expenditure))))
+  print("Aggregated total_expenditure data")
+  
+  dat3 = merge(dat2,tot_exp)
+  print("Merged total expenditure data")
+  
+  results = merge(dat3,incs);
+  print("Merged income data")
+  
+  write.csv(results,outfile);
+  print("Completed Writing File")
+  
+  return(results);
+}
+
 
 run_regression<-function(filename,category){
   # for every caseno i, we have a vector of w_i's (i being a commodity) and outlay x
