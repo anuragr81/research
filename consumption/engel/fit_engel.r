@@ -94,7 +94,7 @@ load_expenditure_files_agg<-function (set3_filename, set114_filename,outfile){
   cases = intersect(winc_cases,wdiary_cases);
   
   print(wdiary[1,])
- 
+  
   winc= winc[is.element(as.character(winc$V1),as.character(cases)) & as.character(winc$V1)!="caseno",];
   
   # saving income for later appends
@@ -186,6 +186,69 @@ read_tnz <- function(filename) {
   return(dat3);
 }
 
+si_factor<-function(units){
+  if (!is.character(units)){
+    stop("units must be of character type")
+  }
+  factors = array();
+  i <- 1; 
+  for (str in units){
+    factors[i]<-1
+    if (!is.na(str)) {
+      if (tolower(str)=="gram" ||
+            tolower(str)=="grams" ||
+            tolower(str)=="g"){
+        factors[i]<-1e-3;
+      }
+      
+      if (tolower(str)=="millilitre" ||
+            tolower(str)=="milliliter" ||
+            tolower(str)=="ml"){
+        factors[i]<-1e-6;
+      }
+      
+      if (tolower(str)=="litre" ||
+            tolower(str)=="liter" ||
+            tolower(str)=="l"){
+        factors[i]<-1e-3;
+      }
+    }
+    i <- i + 1;
+  }
+  return(factors);
+}
+
+paramnh_regression<-function(K1_filename)
+{
+  K1 = read_tnz(K1_filename);
+  K1 = K1[!is.na(K1$hh_k02_2),];
+  dat=data.frame(y2_hhid=K1$y2_hhid,
+                 itemcode=K1$itemcode,
+                 lwp_unit=K1$hh_k03_1,
+                 lwp=K1$hh_k03_2,
+                 expense=K1$hh_k04,
+                 own_unit=K1$hh_k05_1,
+                 own=K1$hh_k05_2,
+                 gift_unit=K1$hh_k06_1,
+                 gift=K1$hh_k06_2
+  );
+  if (!is.numeric(dat$lwp)){
+    stop("lwp must be numeric")
+  }
+  
+  if (!is.numeric(dat$expense)){
+    stop("expense must be numeric")
+  }
+  
+  nz_lwp = dat[as.double(dat$lwp)>0,];
+  lwp_units = si_factor(as.character(nz_lwp$lwp_unit));
+  nz_lwp$lwp_si <- nz_lwp$lwp * lwp_units;
+  nz_lwp$price <- nz_lwp$expense/nz_lwp$lwp_si;
+  #x = ddply(.data=nz_lwp,.variables=.(y2_hhid),summarize,
+  #             total_expenditure=sum(as.numeric(as.character(lwp))));
+  
+  return(nz_lwp);
+}
 farm_workers <-function (E_filename){
   dat = read_tnz (E_filename);
   x=dat[as.character(dat$hh_e06)=='On your own farm or shamba',];
@@ -219,7 +282,7 @@ tnz_consumption<-function(K_filename){
 }
 
 testA<-function(){
-
+  
   
   #"food=3", "utility2=", "alcohol=4", "housing=1","smoking=5","clothes=6","gadgets=8","equipment=7","health=9","car=10","travel=11","TV=12","entertainment=13","finance=14"
   estResult <- aidsEst( c( "food", "utility", "alcohol", "housing","smoking","clothes","gadgets","equipment","services","car","travel","TV","entertainment","finance"),
@@ -227,7 +290,7 @@ testA<-function(){
                         data = dat );
   
 }
- 
+
 micEconTest<-function (){
   
   data( Blanciforti86 );
