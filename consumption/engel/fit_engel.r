@@ -218,7 +218,28 @@ si_factor<-function(units){
   return(factors);
 }
 
-paramnh_regression<-function(K1_filename,B1_filename)
+#source('engel/fit_engel.r');
+# d1=paramnh_regression(
+#  B1_filename='./lsms//data/TZNPS2HH1SAV/HH_SEC_B.SAV',
+#  K1_filename = './lsms/data/TZNPS2HH3SAV/HH_SEC_K1.SAV',
+#  item_name="sugar")
+
+paramnh_regression<-function(K1_filename,B1_filename,item_name){
+  
+  # nz_lwp <- non_zero_family_data(K1_filename=K1_filename,B1_filename=B1_filename);
+  nz_lwp= read.csv('africa_data.csv');
+  nz_lwp = nz_lwp[tolower(nz_lwp$itemcode)==item_name,];
+  ln_qi <- log(nz_lwp$lwp_si); 
+  ln_x <- log(nz_lwp$totexp);
+  ln_n <- log(nz_lwp$num);
+  #plot(ln_x,ln_qi,xlab='expenditure',ylab=paste('quantity of ',item_name))
+  #plot(ln_n,ln_qi,xlab='size of family',ylab=paste('quantity of ',item_name));
+  res = lm(ln_qi ~ ln_x + ln_n);
+  print(summary(res));
+  return(nz_lwp);
+}
+
+non_zero_family_data<-function(K1_filename,B1_filename,outfile)
 {
   B1 = read_tnz(B1_filename);  
   
@@ -247,12 +268,14 @@ paramnh_regression<-function(K1_filename,B1_filename)
   lwp_units = si_factor(as.character(nz_lwp$lwp_unit));
   nz_lwp$lwp_si <- nz_lwp$lwp * lwp_units;
   nz_lwp$price <- nz_lwp$expense/nz_lwp$lwp_si;
-  #x = ddply(.data=nz_lwp,.variables=.(y2_hhid),summarize,
-  #             total_expenditure=sum(as.numeric(as.character(lwp))));
   
-  b1_num=ddply(.data=B1,.variables=.(y2_hhid),summarize,num=length(y2_hhid))
-  nz_lwp=merge(b1_num,nz_lwp)
+  nz_lwp_totexp=ddply(.data=nz_lwp,.variables=.(y2_hhid),summarize,totexp=sum(expense));
   
+  b1_num=ddply(.data=B1,.variables=.(y2_hhid),summarize,num=length(y2_hhid));
+  
+  nz_lwp=merge(b1_num,nz_lwp);
+  nz_lwp=merge(nz_lwp,nz_lwp_totexp);
+  write.csv(nz_lwp,outfile);
   return(nz_lwp);
 }
 
