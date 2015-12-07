@@ -218,8 +218,11 @@ si_factor<-function(units){
   return(factors);
 }
 
-paramnh_regression<-function(K1_filename)
+paramnh_regression<-function(K1_filename,B1_filename)
 {
+  B1 = read_tnz(B1_filename);  
+  
+  #### K1 ####
   K1 = read_tnz(K1_filename);
   K1 = K1[!is.na(K1$hh_k02_2),];
   dat=data.frame(y2_hhid=K1$y2_hhid,
@@ -237,7 +240,7 @@ paramnh_regression<-function(K1_filename)
   }
   
   if (!is.numeric(dat$expense)){
-    stop("expense must be numeric")
+    stop("expense must be numeric");
   }
   
   nz_lwp = dat[as.double(dat$lwp)>0,];
@@ -247,8 +250,12 @@ paramnh_regression<-function(K1_filename)
   #x = ddply(.data=nz_lwp,.variables=.(y2_hhid),summarize,
   #             total_expenditure=sum(as.numeric(as.character(lwp))));
   
+  b1_num=ddply(.data=B1,.variables=.(y2_hhid),summarize,num=length(y2_hhid))
+  nz_lwp=merge(b1_num,nz_lwp)
+  
   return(nz_lwp);
 }
+
 farm_workers <-function (E_filename){
   dat = read_tnz (E_filename);
   x=dat[as.character(dat$hh_e06)=='On your own farm or shamba',];
