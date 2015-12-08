@@ -25,9 +25,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_amsmath 1
 \use_esint 1
 \use_mhchem 1
@@ -42,6 +43,13 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\headheight 3cm
+\headsep 3cm
+\footskip 3cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -59,39 +67,255 @@
 
 \begin_body
 
+\begin_layout Title
+Notes on Expenditure Elasticities in Africa
+\end_layout
+
+\begin_layout Section
+Demand Analysis - Summary
+\end_layout
+
 \begin_layout Standard
-I do need to revisit marketing concerns.
- The current step is demand analysis - not production analysis.
+The marketing and supply concerns have been ignored for the current stage
+ of the study.
+ The study of demand encompasses the household surveys in Tanzania and UK
+ - inspecting the income elasticities of chosen commodities.
+ The analysis focuses on Engel curves for the commodities and temporarily
+ avoids the time-series analysis of incomes and prices.
+\end_layout
+
+\begin_layout Section
+Cross Section Analysis
+\end_layout
+
+\begin_layout Standard
+If a population is observed for a sufficiently long time, then we can understand
+ the effects of changing incomes, price variations on their choices.
+ A significant degree of demand analysis from panel data comes out of the
+ Slutsky equation approach (e.g.
+ the well-known AIDS model - a particular version of the Rotterdam model).
+ With no time-series data, on the other hand, one relies on price-variations
+ within the cross-section and interpretations of commodity-elasticities
+ (instead of effects of changing income on a monitored household).
+\end_layout
+
+\begin_layout Standard
+By adding more parameters to the semi-logarithmic model, one runs the risk
+ of overfitting.
+ It is easy, in other words, to stress on transient parameters in a given
+ cross-sectional snapshot.
+ The calibration of a cost-function and imposition of general conditions
+ on the demand equations can get around some of these problems.
+\end_layout
+
+\begin_layout Section
+A brief survey of household consumption models
+\end_layout
+
+\begin_layout Subsection
+Analysis by Prais-Houthakker
+\end_layout
+
+\begin_layout Standard
+Houthakker attributes the popularity of Engel curves to the idea of equivalence
+ scales (i.e.
+ how different households achieve same level of living standard).
+ Although Houthakker's Engel fitting would now be considered unashamedly
+ pragmatic 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonHandbook"
+
+\end_inset
+
+, his research was influential in popularising the use of income and expenditure
+ elasticities in cross-sectional analyses 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerFamilySurvey"
+
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-Time Series Analysis
-\end_layout
-
-\begin_layout Section
-Cross Section Model
+The simplest Engel curves are set up with the Woking-Leser model hitherto
+ used in the study:
 \end_layout
 
 \begin_layout Standard
-If a population is observed for a sufficiently long time, then we get to
- understand the effects of changing incomes, price variations on their choices.
- A significant degree of demand analysis (more particularly Slutsky equation)
- - derives from this data.
- The well-known AIDS model also depends on this analysis.
+\begin_inset Formula 
+\begin{equation}
+w_{i}=\beta\cdot log\ x_{i}+\alpha
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Relying on Engel's curves in the absence of panel data, makes us prone to
- becoming pragmatic.
- Cross-price-sensitivities become less relevant in the cross-section analysis.
- The simple form that is currently used is:
+Here, budget share total expenditure 
+\begin_inset Formula $x=\sum p_{i}q_{i}$
+\end_inset
+
+, budget share
+\begin_inset Formula $w_{i}=p_{i}q_{i}/x$
+\end_inset
+
+ while 
+\begin_inset Formula $\alpha,\beta$
+\end_inset
+
+ are regression coefficients.
+\end_layout
+
+\begin_layout Standard
+A noticeable shortcoming with the Woking-Leser model is that no commodity
+ specific information is used in the semi-logarithmic equation.
+ The current study attempts to enhance this model with household and geographic
+ parameters.
+\end_layout
+
+\begin_layout Subsection
+Cost Function and the Gorman Model 
+\end_layout
+
+\begin_layout Standard
+The Gorman approach considers a more general Engel curve: 
+\begin_inset Formula $w_{i}=\sum_{r\epsilon R}a_{ir}(p)\Phi_{r}(ln(x))$
+\end_inset
+
+ (
+\begin_inset Formula $R$
+\end_inset
+
+ is a finite set and 
+\begin_inset Formula $\Phi_{r}(\cdot)$
+\end_inset
+
+ are general functions).
+ For these to be consistent, one arrives at the cost function: 
+\begin_inset Formula $\frac{\partial\ ln\ c(u,p)}{\partial\ ln\ p_{i}}=\sum_{r\epsilon R}a_{ir}(p)\Phi_{r}\{ln\ c(u,p)\}$
+\end_inset
+
+ (where 
+\begin_inset Formula $u=$
+\end_inset
+
+utility, 
+\begin_inset Formula $p=$
+\end_inset
+
+price).
+ Gorman derives following restrictions on 
+\begin_inset Formula $\Phi_{n}(\cdot)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+w_{i} & =a_{i}(p)+b_{i}(p)ln\ x+d_{i}(p)\sum_{m=1}^{M}\gamma_{m}(p)(ln\ x)^{m}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+w_{i} & =a_{i}(p)+b_{i}(p)\sum_{\sigma_{m}\epsilon S_{-}}\mu_{m}(p)x^{\sigma_{m}}+d_{i}(p)\sum_{\sigma_{m}\epsilon S_{+}}^{M}\theta_{m}(p)x^{\sigma_{m}}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $S$
+\end_inset
+
+ is a finite set of elements 
+\begin_inset Formula $\sigma_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $S_{-}$
+\end_inset
+
+ its negative elements and 
+\begin_inset Formula $S_{+}$
+\end_inset
+
+positive (
+\begin_inset Formula $m=1$
+\end_inset
+
+ leads us back to Working-Leser form).
+ 
+\begin_inset Formula $\sum a_{i}(p)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum b_{i}(p)=0$
+\end_inset
+
+.
+ Gorman model combines 
+\begin_inset Quotes eld
+\end_inset
+
+demographic scaling
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+demographic translating
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "PollockWalesDemand"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A significant amount of research has been done in scaling of the individual
+ model (through the analysis of the so-called cost-of-children problem).
+ Muellbauer has enhanced the model by considering every household a multiple
+ of unit 
+\begin_inset Formula $a^{h}$
+\end_inset
+
+ (individual).
+ One considers a multiplicative index 
+\begin_inset Formula $m(a^{h},u^{h})$
+\end_inset
+
+such that:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-ln\ q_{i}^{h} & =\alpha_{i}+\beta\ ln\ x^{h}+\gamma_{i}\ ln\ n^{h}+u_{i}
+c^{h}(u^{h},p,a^{h}) & =m(a^{h},u^{h})\cdot c(u^{h},p)
 \end{alignat}
 
 \end_inset
@@ -100,32 +324,68 @@ ln\ q_{i}^{h} & =\alpha_{i}+\beta\ ln\ x^{h}+\gamma_{i}\ ln\ n^{h}+u_{i}
 \end_layout
 
 \begin_layout Standard
-A further attempt was made to improve the regression itself (since the prices
- can be assumed to be constant during the snapshot of the week).
- This is the model with scaling (to be pursued further).
- A Gorman form is to be compared with weak separable form.
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Here, 
+\begin_inset Formula $c(u^{h},p)$
+\end_inset
+
+ is the cost-function for every household.
+ The budget share 
+\begin_inset Formula $w_{i}^{h}$
+\end_inset
+
+is independent of 
+\begin_inset Formula $a^{h}$
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Standard
-Overfitting a likely problem - hence an expenditure model needs to be argued
- for before a model can be fitted.
+\begin_inset Formula 
+\begin{equation}
+w_{i}^{h}=\frac{ln\ c(u^{h},p)}{\partial\ ln\ p_{i}}
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Inferred prices do vary quite a bit amidst quantities (sugar or beans don't
- vary as much as meat does).
- The clusters need to be checked against geography (whether clusters are
- affected).
- As expected, size effect matters more for sugar than for fruits.
+With derivatives with respect to 
+\begin_inset Formula $a^{h}$
+\end_inset
+
+, Muellbauer further uses the above equation (and PIGLOG functions) to study
+ the Barten's model for cost-of-having-children 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MuellbauerBartenModel"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
-Handling Spatial Variation
+Testing Spatial Variation
 \end_layout
 
 \begin_layout Standard
 An analysis of expensive vs non-expensive food items was done by Prais and
- Prais and Houthakker (1955)
+ Houthakker (1955)
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HouthakkerFamilySurvey"
@@ -133,7 +393,9 @@ key "HouthakkerFamilySurvey"
 \end_inset
 
 .
- Deaton use the following model for a cluster-based analysis:
+ This has been employed for LSMS data in the current study.
+ To address spatial variations, Deaton use the following model for a cluster-bas
+ed analysis:
 \end_layout
 
 \begin_layout Standard
@@ -209,8 +471,122 @@ is used to derive cluster effects e.g.
  inter-cluster variances and covariances for the separable goods.
 \end_layout
 
+\begin_layout Section
+Current Analysis
+\end_layout
+
+\begin_layout Subsection
+Current Model
+\end_layout
+
 \begin_layout Standard
-A key idea is to apply a quality-adjustment to the quantity (
+The form 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonHandbook"
+
+\end_inset
+
+currently used in the study is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+ln\ q_{i}^{h} & =\alpha_{i}+\beta\ ln\ x^{h}+\gamma_{i}\ ln\ n^{h}+u_{i}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Attempts to improve the regression were made by considering asset-ownership
+ and number of young members in addition to total size of the household
+ 
+\begin_inset Formula $n^{h}$
+\end_inset
+
+(note that the prices are assumed constant during the snapshot of the recorded
+ week).
+ The clustering effect was not found significant for cheaper commodities.
+ Also, as expected, the size of the household (i.e.
+ number of family members) is a more significant indicator of consumption
+ of commodities like sugar than for fruits or meat.
+ 
+\end_layout
+
+\begin_layout Standard
+Further enhancements, with a Gorman form and weak separable tests are yet
+ to follow.
+\end_layout
+
+\begin_layout Subsection
+Measuring Price
+\end_layout
+
+\begin_layout Standard
+From LSMS data, prices are calculated by dividing expense by the quantity
+ (this is the method used by Prais and Houthakker - which ignores price-indices)
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerFamilySurvey"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It is found inferred prices do vary quite a bit amongst different commodities.
+ However, this variation is significantly lower for subsistence sugar (or
+ beans) - the price for which don't vary as much as they do for meat.
+ In a fashion similar to Prais - Houthakker 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerFamilySurvey"
+
+\end_inset
+
+(who visit the price variation of Tea to find that for a given income households
+ of smaller size buy more expensive varieties of tea in the UK), the quality
+ and quantity elasticities were derived based on classification of commodities
+ according to price (inferred).
+ 
+\end_layout
+
+\begin_layout Subsection
+Income Elasticities of commodities
+\end_layout
+
+\begin_layout Standard
+Prais-Houthakker model the combination of quantity vs quality as : 
+\begin_inset Formula $dq_{i}=p_{i}\delta p_{i}+k_{i}\delta k_{i}$
+\end_inset
+
+ (change in quality - indicated by price and change in quantity indicated
+ by quantity).
+ This leads to :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+\frac{{x}}{q_{i}}\frac{\partial q_{i}}{\partial x} & =\frac{{x}}{k_{i}}\frac{\partial k_{i}}{\partial x}+\frac{{x}}{p_{i}}\frac{\partial p_{i}}{\partial x}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Prais-Houthakker derive quantity elasticity as difference between expenditure
+ elasticity and the quality elasticity.
+ The quality-adjustment to the quantity can provide more insight in the
+ factors affecting expensive consumption (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ChungCrossSec"
@@ -225,66 +601,131 @@ key "DeatonSurveyElasticities"
 \end_inset
 
 ).
- The assumption of separability and additivity is a key one as well
-\begin_inset CommandInset citation
-LatexCommand cite
-key "BartenPreferences"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection
-The weak-separability
-\end_layout
-
-\begin_layout Standard
-Instead of assuming weak-separability, we intend to develop methods to test
- separability in the context of conspicuous consumption.
- Separability groups allow for index prices (which are unavailable if we
- group conspicuous items together).
-\end_layout
-
-\begin_layout Standard
-In several seminal contributions to the literature, Afriat (1969), Varian
- (1983) and Diewert and Parkan (1985) developed revealed preference conditions
- that characterize the collection of data sets that are rationalizable by
- a (weakly) separable utility function
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CherchyeSeparabilityTests"
-
-\end_inset
-
-.
+ Analyzing the tea-consumption in the UK, for example, Prais-Houthakker
+ find small-size families spending proportionately higher on expensive tea
+ varieties.
+ The quality elasticities obtained in a similar fashion for alcohol, fruits
+ and meat in Tanzania, show significant differences in quality elasticities
+ across income groups.
 \end_layout
 
 \begin_layout Section
-Frank Model
+Future Work
 \end_layout
 
 \begin_layout Standard
-The plots of 
-\begin_inset Formula $v$
-\end_inset
-
- and 
-\begin_inset Formula $w$
-\end_inset
-
- are calculated:
-\end_layout
-
-\begin_layout Standard
-existence of separating equilibria
+The current study notes elasticity differences between expensive and less-expens
+ive varieties - leaving us with quality-elasticities.
+ However, at this point, a correlation of these elasticities with perceived
+ conspicuous consumption, although methodical, is a rather subjective exercise.
+ This is intended to be improved with a more robust utility-theory based
+ approach (research by Ireland
 \begin_inset CommandInset citation
 LatexCommand cite
-key "MaliathSignaling"
+key "ireland_signals"
 
 \end_inset
 
-?
+).
+\end_layout
+
+\begin_layout Standard
+Towards that goal, I intend to develop methods to test separability in the
+ context of conspicuous consumption - instead of assuming weak-separability
+ of different commodity groups.
+ The index prices obtained for these commodity groups are planned to be
+ used for better estimates on expenditure elasticities.
+\end_layout
+
+\begin_layout Section
+Poor Economics - a discussion of development economics issues 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BanerjeeDufloPoorEcon"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There is evidence for 
+\begin_inset Quotes eld
+\end_inset
+
+flight to quality
+\begin_inset Quotes erd
+\end_inset
+
+ amongst poor
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JensenMillerFood"
+
+\end_inset
+
+.
+ Deaton notes a characteristic drop in consumption of food in developing
+ countries (relative to other commodities)
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonDrezeIndiaFood"
+
+\end_inset
+
+.
+ There are local factors that tend to stand out in developing countries
+ - e.g.
+ funeral expenditures in Swaziland.
+ There is ample evidence to show that other commodities compete with welfare-rel
+ated commodities (e.g.
+ healthy food or financial investments).
+ Banerjee et al.
+ do not attribute this to temptation - but to lack of health insurance and
+ sufficient cash (letting medicines and maintenance of work become more
+ important than children's education or healthy food).
+\end_layout
+
+\begin_layout Standard
+It is also worth noting that often times consumption on products/services
+ that provide welfare could be less just because the quality of these services
+ is extremely low in developing countries (e.g.
+ education provided by the public sector).
+\end_layout
+
+\begin_layout Standard
+In observed social changes, clustering based on religion or social groups
+ is found significant in consumer behaviour (e.g.
+ In India, muslims are influenced more by other muslims and hindus in the
+ same locality [p118]).
+\end_layout
+
+\begin_layout Standard
+The theory of impatience, despite its appeal, makes less sense for the poor
+ and is considered irrelevant for the current study - since the evidence
+ shows that poor tend to make choices as rational as their richer counterparts.
+ Moderate success of microfinance (despite concerns with credit monitoring
+ and administration) offers one such instance.
+ Against the intuition, the poor seem to have sufficient hunger for saving
+ methods and go the extra mile to save for future (even though saving is
+ far more stressful for them).
+\end_layout
+
+\begin_layout Standard
+However, one cannot get carried away with the opportunities that poverty
+ can create.
+ Banjerjee et al.
+ also note that it is the lack of regular employment that makes the poor
+ more likely entrepreneurs (even though their success rate is much lower)
+ - not the psychological 
+\begin_inset Quotes eld
+\end_inset
+
+drive
+\begin_inset Quotes erd
+\end_inset
+
+ as many would perceive.
 \end_layout
 
 \begin_layout Standard
