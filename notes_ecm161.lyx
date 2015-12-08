@@ -415,15 +415,74 @@ Only borrower views it highly (this can be ensured by keeping information
 \end_layout
 
 \begin_layout Standard
+If values are viewed differently 
+\begin_inset Formula $V_{B}=$
+\end_inset
+
+big landowner perception, 
+\begin_inset Formula $V_{S}=$
+\end_inset
+
+small farmer perception, 
+\begin_inset Formula $F=$
+\end_inset
+
+loss from default in addition to the lost land (
+\begin_inset Formula $=V_{S}$
+\end_inset
+
+with land as collateral) , then borrower would repay only if 
+\begin_inset Formula 
+\begin{alignat}{1}
+V_{S}+F & >L(1+i)
+\end{alignat}
+
+\end_inset
+
+ i.e.
+ loss through default is lower than the money he has.
+ From lender's perspective, borrower's default is desirable if 
+\begin_inset Formula $V_{B}>L(1+i)$
+\end_inset
+
+ - thus payment condition is - 
+\begin_inset Formula 
+\begin{alignat}{1}
+V_{B} & <L(1+i)
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus, for payment to occur : 
+\begin_inset Formula $V_{B}<V_{S}+F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 Collateral and Interlinking can help the lender.
  The problem with land or labour as collateral is both land and labour could
  be illiquid for the institutions.
+ Another requirement to address is exclusivity - i.e.
+ lender ensures that borrower doesn't borrow from multiple lenders (lender
+ wouldn't want to end up cross with another lender - who the borrower may
+ have borrowed from to pay the loan).
+\end_layout
+
+\begin_layout Standard
+--
 \end_layout
 
 \begin_layout Standard
 Smaller institutions exist to address this liquidity since they have access
  to unofficial routes and local knowledge.
  They thus help with screening as well.
+ The cost of screening itself is lower for informal sector.
  
 \end_layout
 
@@ -439,10 +498,224 @@ Traders might just lend to their consumers (who buy grain) while landlords
 \begin_layout Enumerate
 Interest rates would vary depending on geography, source of funds and borrower-r
 eputation (not an arbitrage).
+ However, these rates are lower in informal markets (why?)
 \end_layout
 
 \begin_layout Subsection
 Credit Rationing
+\end_layout
+
+\begin_layout Standard
+There is limit on the amount you can borrow - primarily because the incentive
+ to default is higher for high loans.
+ Lender Monopoly theory is bogus (since monopolies exist locally at best
+ and interest is hardly available as profit because of lack of the arbitrage).
+\end_layout
+
+\begin_layout Standard
+To model credit rationing, we consider opportunity cost 
+\begin_inset Formula $=A$
+\end_inset
+
+ (i.e.
+ the per-period income that farmer may get elsewhere).
+ For every period, 
+\begin_inset Formula 
+\begin{alignat}{1}
+f(L)-L(1+i) & \ge A
+\end{alignat}
+
+\end_inset
+
+If farmer defaults now (with 
+\begin_inset Formula $N-1$
+\end_inset
+
+ periods ahead), then he gets 
+\begin_inset Formula $f(L)+(N-1)\cdot A$
+\end_inset
+
+.
+ If he doesn't default, then he gets to pocket 
+\begin_inset Formula $N[f(L)-L(1+i)]$
+\end_inset
+
+.
+ For him to not default, he should have more profit from paying the loan
+ than from defaulting.
+ So condition of payment is : 
+\begin_inset Formula $N[f(L)-L(1+i)]>f(L)+(N-1)\cdot A$
+\end_inset
+
+.
+ This leads to additional factor (
+\begin_inset Formula $\frac{{N}}{N-1})$
+\end_inset
+
+ in the one-period equation : 
+\begin_inset Formula 
+\begin{alignat}{1}
+f(L)-\frac{{N}}{N-1}(1+i) & \ge A
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is easy to see that with all else the same, small 
+\begin_inset Formula $N$
+\end_inset
+
+ or increased 
+\begin_inset Formula $i$
+\end_inset
+
+ (or larger 
+\begin_inset Formula $L$
+\end_inset
+
+), would encourage default.
+\end_layout
+
+\begin_layout Standard
+The equilibrium is at the maximum value of production
+\begin_inset Formula $f(L)$
+\end_inset
+
+ subtracted by the modified cost line 
+\begin_inset Formula $\frac{{N}}{N-1}L(1+i)$
+\end_inset
+
+ i.e.
+ Marg.
+ Product 
+\begin_inset Formula $=\frac{N}{N-1}(1+i)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Information Asymmetry
+\end_layout
+
+\begin_layout Standard
+If there are safe borrowers (pays back 
+\begin_inset Formula $R$
+\end_inset
+
+ for loan 
+\begin_inset Formula $L$
+\end_inset
+
+ with 
+\begin_inset Formula $p=1$
+\end_inset
+
+) and risky borrowers (pays 
+\begin_inset Formula $R'$
+\end_inset
+
+ with probability
+\begin_inset Formula $p$
+\end_inset
+
+), then the expected return safe borrower is 
+\begin_inset Formula $R-(1+i_{1})L$
+\end_inset
+
+ and expected return for risky borrower is : 
+\begin_inset Formula $p(R'-(1+i_{2})L)$
+\end_inset
+
+.
+ Clearly, 
+\begin_inset Formula $i_{1}\le\frac{{R}}{L}-1$
+\end_inset
+
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $i_{2}\le\frac{{R'}}{L}-1$
+\end_inset
+
+.
+ 
+\begin_inset Formula $R'>R\Rightarrow i_{1}<i_{2}$
+\end_inset
+
+ (i.e.
+ risky borrowers compensates for risk).
+\end_layout
+
+\begin_layout Standard
+If we assume that by choosing
+\begin_inset Formula $i_{1}$
+\end_inset
+
+, the lender attracts both safe and unsafe borrowers with 50-50 chance and
+ since we know that 
+\begin_inset Formula $i_{2}$
+\end_inset
+
+would prevent safe borrowers, we can compare the two returns to obtain the
+ condition: 
+\begin_inset Formula $p<\frac{{R}}{2R'-R}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Kochar - Informal Credit in India - Notes
+\end_layout
+
+\begin_layout Standard
+Informal credit is lower (and is in demand).
+ Only 13% of rural cultivator households relied on formal loans.
+ Screening costs are lower in informal sector.
+ Informal credit is more popular.
+\end_layout
+
+\begin_layout Subsection
+Zeballos, Cassar, Wydick - Microfinance in Bolivia - Notes
+\end_layout
+
+\begin_layout Standard
+Microfinance does enhance personal responsibility.
+ In the conducted experiment, each subject had to choose between allocating
+ her experimental loan either into a zero-risk project (consumption) or
+ investment in the safer project.
+ Results contradict the hypothesis that delinquent group borrowers risk
+ too much.
+ When the choice is between the zero-risk alternative (consumption - not
+ risky enough) and investment in a modestly risky project, borrowers from
+ delinquent groups chose the first option at nearly twice the rate (they
+ care more for consumption than for risk).
+ Defaulting microfinance borrowers are more likely to take little investment
+ risk.
+\end_layout
+
+\begin_layout Subsection
+Morduch - Microfinance promise
+\end_layout
+
+\begin_layout Standard
+While many hope that weak financial performances will improve over time,
+ even established poverty-focused programs like the Grameen Bank would have
+ trouble making.
 \end_layout
 
 \end_body
