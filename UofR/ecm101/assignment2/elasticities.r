@@ -1,5 +1,5 @@
 require(plyr)#for ddply
-
+require(foreign)#spss
 
 #source('elasticities.r');
 #dat=read_diary('../../../consumption/UKDA-4071-tab/tab/view114.tab')
@@ -74,18 +74,30 @@ analyze<-function(age_expenditure_csv_filename){
   return(m);
 }
 
-write_diary <- function(set114_filename,csv_filename){
+write_diary <- function(set114_filename,csv_filename,has_xdeamt){
   
   wdiary = read.table(set114_filename);
+  # remove the row with names
   dat = wdiary[as.character(wdiary$V1)!="caseno",];
-  wdiary = data.frame(caseno=dat$V1,
-                      persno=dat$V2,
-                      expwk114=dat$V3,
-                      ditemcod=dat$V4,
-                      dqualif=dat$V5,
-                      dcodecnt=dat$V6,
-                      diteamt=dat$V7);
-  
+  # choose mapping according to the flag: has_xdeamt
+  if (has_xdeamt) {
+    wdiary = data.frame(caseno=dat$V1,
+                        persno=dat$V2,
+                        expwk114=dat$V7,
+                        ditemcod=dat$V5,
+                        dqualif=dat$V6,
+                        dcodecnt=dat$V3,
+                        diteamt=dat$V4);
+  } 
+  else {
+    wdiary = data.frame(caseno=dat$V1,
+                        persno=dat$V2,
+                        expwk114=dat$V3,
+                        ditemcod=dat$V4,
+                        dqualif=dat$V5,
+                        dcodecnt=dat$V6,
+                        diteamt=dat$V7);
+  }
   # taking week 1 data
   wdiary_wk1=wdiary[as.character(wdiary$expwk114)=="1",];
   
@@ -93,7 +105,7 @@ write_diary <- function(set114_filename,csv_filename){
                               expenditure=sum(as.numeric(as.character(diteamt))));
   wdiary = merge(wdiary_wk1,wdiary_expenditures);
   
-  write.csv(x=wdiary,file=csv_filename);
+   write.csv(x=wdiary,file=csv_filename);
   return(wdiary);
   
 }
