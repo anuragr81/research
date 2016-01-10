@@ -51,6 +51,22 @@ write_age_expenditure <- function(diary_csv_filename,
   return(m);
 }
 
+show_data<-function(m){
+  lb = c(300,400);
+  ub = c(400,500);
+  par(mfrow=c(1,length(lb)));
+  for ( i in seq(length(lb))){
+    x=m[m$age<35 & m$age>30 & m$total_expenditure<ub[i] & m$total_expenditure>lb[i] & m$is_fat==TRUE,];
+    plot(x$expenditure,
+         xlab='HighCal Expenditure',
+         xlim=c(0,50),
+         x$total_expenditure-x$expenditure,
+         ylab='Other Expenditure',
+         ylim=c(250,500));
+    title(paste(lb[i],"< Income <",ub[i]));
+  }
+}
+
 analyze<-function(age_expenditure_csv_filename){
   
   dat = read.csv(age_expenditure_csv_filename);
@@ -69,8 +85,7 @@ analyze<-function(age_expenditure_csv_filename){
                            expenditure=sum(as.numeric(as.character(diteamt))));
   
   m=merge(total_expenditure,fat_expenditures);
-  x=m[m$age<35 & m$age>30 & m$total_expenditure<500 & m$total_expenditure>400 & m$is_fat==TRUE,];
-  plot(x$expenditure,xlab='Fat Expenditure',x$total_expenditure-x$expenditure,ylab='Other Expenditure');
+  show_data(m);
   return(m);
 }
 
@@ -105,7 +120,7 @@ write_diary <- function(set114_filename,csv_filename,has_xdeamt){
                               expenditure=sum(as.numeric(as.character(diteamt))));
   wdiary = merge(wdiary_wk1,wdiary_expenditures);
   
-   write.csv(x=wdiary,file=csv_filename);
+  write.csv(x=wdiary,file=csv_filename);
   return(wdiary);
   
 }
