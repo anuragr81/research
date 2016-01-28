@@ -1,4 +1,23 @@
 require(tuneR)
+threshold_trim <- function (x,threshold){
+  # the concern is that of cumulative values
+  
+}
+
+intellitrim <-function (wave){
+  threshold<-.9;
+  x<- attributes(wave)$left;
+  # make it positive for cumsum to result in a non-decreasing sequence
+  if (min(x)<0){ x = x-min(x); }; 
+  cx <- cumsum(x);
+  last_indices = which(cx > max(cx)*threshold);
+  if (length(last_indices) == 0 ){
+    stop('invalid wave');
+  } else {
+    x[last_indices[1]:length(x)]<-0;
+  }
+  return(Wave(x,samp.rate=attributes(wave)$samp.rate,bit=attributes(wave)$bit));
+}
 
 play_sounds <- function (characters,sdir){
   waves = c();
@@ -16,15 +35,17 @@ play_sounds <- function (characters,sdir){
   res = NULL
   count = 1;
   for (wave in waves) {
-      if (is.null(res)) {
-         print(paste("Adding",count));
-         res = prepComb(normalize(wave,unit=c('16')),zero=255);
-         count = count + 1;
-      } else {
-         print(paste("Adding",count));
-         res = bind(res,prepComb(normalize(wave,unit=c('16')),zero=255));
-         count = count + 1;
-      }
+    if (is.null(res)) {
+      print(paste("Adding",count));
+      #res = prepComb(normalize(wave,unit=c('16')),zero=0);
+      res = intellitrim(normalize(wave,unit=c('16')));
+      count = count + 1;
+    } else {
+      print(paste("Adding",count));
+      res = bind(res,intellitrim(normalize(wave,unit=c('16'))));
+      #res = bind(res,prepComb(normalize(wave,unit=c('16')),zero=0));
+      count = count + 1;
+    }
   }
   return(res);
 }
@@ -32,23 +53,23 @@ play_sounds <- function (characters,sdir){
 # source('sounds_analysis.r');waves=play_sounds(characters=c('b','a'),sdir="."); play(waves,'vlc')
 
 create_sound <-function (freq) {
-    sr=10000; 
-    t = seq(0,2,1/sr);  
-    #y = (2^15-1)*( (sin(2*pi*300*t)+sin(2*pi*200*t)+sin(2*pi*100*t)))/3
-    #y = (2^15-1)*(sin(2*pi*100*t)+sin(2*pi*1000*t))/2
-    # freq = 300 ; 
-    A = 2^15
-    # t= exp(-t); // added fade
-    y = (
-          (A-1)*sin(2*pi*freq*t)
-         +(A/4-1)*sin(2*pi*freq*.5*t)
-         +(A/16-1)*sin(2*pi*freq*.3*t)
-         +(A/32-1)*sin(2*pi*freq*.1*t)
-        )/3
-    print(paste("max(y)=",max(y)));
-    w = Wave(y, samp.rate = sr, bit = 16) ; 
-    plot(w);
-    return (w);
+  sr=10000; 
+  t = seq(0,2,1/sr);  
+  #y = (2^15-1)*( (sin(2*pi*300*t)+sin(2*pi*200*t)+sin(2*pi*100*t)))/3
+  #y = (2^15-1)*(sin(2*pi*100*t)+sin(2*pi*1000*t))/2
+  # freq = 300 ; 
+  A = 2^15
+  # t= exp(-t); // added fade
+  y = (
+    (A-1)*sin(2*pi*freq*t)
+    +(A/4-1)*sin(2*pi*freq*.5*t)
+    +(A/16-1)*sin(2*pi*freq*.3*t)
+    +(A/32-1)*sin(2*pi*freq*.1*t)
+  )/3
+  print(paste("max(y)=",max(y)));
+  w = Wave(y, samp.rate = sr, bit = 16) ; 
+  plot(w);
+  return (w);
 }
 
 # telephone: y = (2^15-1)*( (sin(2*pi*300*t)+sin(2*pi*320*t)))/2
