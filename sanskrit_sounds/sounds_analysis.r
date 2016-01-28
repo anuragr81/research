@@ -5,16 +5,20 @@ threshold_trim <- function (x,threshold){
 }
 
 intellitrim <-function (wave){
-  threshold<-.9;
+  threshold<-.75;
   x<- attributes(wave)$left;
+  reset_min= FALSE
   # make it positive for cumsum to result in a non-decreasing sequence
-  if (min(x)<0){ x = x-min(x); }; 
+  if (min(x)<0){ minx = min(x); x = x-minx; reset_min= TRUE}; 
   cx <- cumsum(x);
   last_indices = which(cx > max(cx)*threshold);
   if (length(last_indices) == 0 ){
     stop('invalid wave');
   } else {
     x[last_indices[1]:length(x)]<-0;
+    if(reset_min){
+      x=x+minx;
+    }
   }
   return(Wave(x,samp.rate=attributes(wave)$samp.rate,bit=attributes(wave)$bit));
 }
@@ -38,11 +42,11 @@ play_sounds <- function (characters,sdir){
     if (is.null(res)) {
       print(paste("Adding",count));
       #res = prepComb(normalize(wave,unit=c('16')),zero=0);
-      res = intellitrim(normalize(wave,unit=c('16')));
+      res = prepComb(intellitrim(normalize(wave,unit=c('16'))));
       count = count + 1;
     } else {
       print(paste("Adding",count));
-      res = bind(res,intellitrim(normalize(wave,unit=c('16'))));
+      res = bind(res,prepComb(intellitrim(normalize(wave,unit=c('16')))));
       #res = bind(res,prepComb(normalize(wave,unit=c('16')),zero=0));
       count = count + 1;
     }
