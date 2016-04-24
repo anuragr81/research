@@ -6,6 +6,24 @@
 # deselecting retired and unoccupied
 # dat[as.numeric(dat$V4)<20,]
 
+# in LSMS:
+# A - Region
+# B - Family Parameters
+# C - Education
+# D - Health/Illness
+# E - Employment
+# F - OutsideFood
+# G - SubjectiveWelfare
+# H - Governance
+# I - Food Security
+# J - Water
+# K - Food Consumption
+# L,M - Non-Food Consumption
+# N - Item ownership
+# O - Microfinance
+# P - Other Credit
+# Q - Deaths
+
 require(plyr)#for ddply
 library(foreign)# for spss
 library(micEconAids) # AIDS
@@ -182,7 +200,7 @@ fit_engel <- function(filename){
 read_tnz <- function(filename) {
   dat1 = read.spss(filename);
   dat2 = as.data.frame(dat1);
-  dat3 = dat2[as.numeric(dat2$y2_hhid)>0,]
+  dat3 = dat2[as.numeric(dat2$y2_hhid)>0,] # only take data with hhid>0
   return(dat3);
 }
 
@@ -223,6 +241,7 @@ si_factor<-function(units){
 #  B1_filename='./lsms//data/TZNPS2HH1SAV/HH_SEC_B.SAV',
 #  K1_filename = './lsms/data/TZNPS2HH3SAV/HH_SEC_K1.SAV',
 #  item_name="sugar")
+# Remember that read.spss returns list (can be converted -  as.data.frame)!!!
 
 paramnh_regression<-function(K1_filename,B1_filename,item_name){
   
@@ -332,3 +351,41 @@ micEconTest<-function (){
   #return(estResult);
 }
 
+test_persp<-function(){
+  library(grDevices) # for trans3d
+  x <- seq(-10,10,.1)
+  y <- x
+  f <- function(x,y){return(x+y+3)}
+  z <- outer(x,y,f)
+  res <- persp(x,y,z)
+  #xE <- c(-10,10); xy <- expand.grid(xE, xE)
+  #points(trans3d(xy[,1], xy[,2], 6, pmat = res), col = 2, pch = 16)
+  #lines (trans3d(x, y = 10, z = 6 + sin(x), pmat = res), col = 3)
+  lines (trans3d(x, y, z = 6 + sin(x), pmat = res), col = 3)  
+}
+
+test_optim<-function(){
+  fr_sq <- function(v){
+    return(-(v[1]*v[1]+v[2]*v[2]));
+  }
+  # theta can be any value as long as ui*theta >=ci i.e. theta >= inv(ui)*ci - this
+  # is merely the restatement of constraint itself
+  
+  x <- seq(-10,10,.1)
+  y <- x
+  # the constraint could be an area above the plane : x+y -2 
+  plf <- function(x,y){return(x+y-2)}
+  persp(x,y,outer(x,y,plf))
+  # In matrix form, x+y>= 2 implies 1*x + 1*y >= -2 i.e. [1,1]*[x y] >= 2
+  # theta must be a value that satisfied theta%*%ui>= ci 
+  # i.e. x+y>=2 one can choose c(1.2,1.2).
+  
+  # If we have to minimize (x*x+y*y-2) # a parabolic cone
+  pcf <- function(x,y){return(x*x+y*y)}
+  #persp(x,y,outer(x,y,pcf))
+  #The function must take a parameter vector (not multiple parameters)
+  pcf_m <- function(v) { return (v[1]*v[1]+v[2]*v[2]); }
+  constrOptim(theta=c(1.2,1.2),f=pcf_m,ui=c(1,1),grad=NULL,ci=c(2))
+  # The solution is x=1,y=1 (which is expected) 
+  
+}
