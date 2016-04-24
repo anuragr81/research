@@ -1,4 +1,5 @@
 library(foreign)
+require(plyr)
 
 setwd('c:/local_files/research/consumption/sa/')
 
@@ -856,7 +857,22 @@ mapping <-function(){
 }
 
 
-# Usage: get_sub_frame(dat,c("hhid","age_member2","age_member3"))
+descriptive_statistics<-function(year){
+  
+  #1-black
+  #2-coloured
+  #3-asian
+  #4-white
+  
+  dat = load_file(year)
+  hh = get_sub_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
+  r=ddply(hh,.(race_household_head),summarize,
+          mean_income=mean(total_income_of_household_head),
+          n=length(total_income_of_household_head))
+  r$percentage = 100*r$n/sum(r$n);
+  return(r)
+}
+# Usage: get_sub_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
 get_sub_frame<-function(dat,names){
   if (!is.vector(names)){
     stop("names must be a vector")
