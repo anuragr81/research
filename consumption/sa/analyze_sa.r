@@ -857,6 +857,21 @@ mapping <-function(){
 }
 
 
+count_higher_than<-function(a,m1,m2,m3,m4,m5,m6,m7,m8,m9,m10) 
+{ 
+  return (sum(as.integer(c(m1>a,
+                           m2>a,
+                           m3>a,
+                           m4>a,
+                           m5>a,
+                           m6>a,
+                           m7>a,
+                           m8>a,
+                           m9>a,
+                           m10>a)
+  )));
+}
+
 descriptive_statistics<-function(year){
   
   #1-black
@@ -864,11 +879,42 @@ descriptive_statistics<-function(year){
   #3-asian
   #4-white
   
+  #Note: Found duplicates with x=ddply(hh,.(hhid),summarize,n=length(hhid));x[x$n>1,]
+  
   dat = load_file(year)
-  hh = get_sub_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
+  dat = unique(dat)
+  hh = get_sub_frame(dat,c("hhid",
+                           "age_household_head",
+                           "age_member2",
+                           "age_member3",
+                           "age_member4",
+                           "age_member5",
+                           "age_member6",
+                           "age_member7",
+                           "age_member8",
+                           "age_member9",
+                           "age_member10",
+                           "total_income_of_household_head",
+                           "race_household_head"))
+  
+  n_members = ddply(hh,.(hhid),summarize,n_members=count_higher_than(a=0,
+                                                                     m1=age_household_head,
+                                                                     m2=age_member2,
+                                                                     m3=age_member3,
+                                                                     m4=age_member4,
+                                                                     m5=age_member5,
+                                                                     m6=age_member6,
+                                                                     m7=age_member7,
+                                                                     m8=age_member8,
+                                                                     m9=age_member9,
+                                                                     m10=age_member10))
+
+  hh$n_members = n_members$n_members;
   r=ddply(hh,.(race_household_head),summarize,
           mean_income=mean(total_income_of_household_head),
-          n=length(total_income_of_household_head))
+          n=length(total_income_of_household_head),
+          mean_age_head=mean(age_household_head),
+          n_members=mean(n_members));
   r$percentage = 100*r$n/sum(r$n);
   return(r)
 }
@@ -882,7 +928,7 @@ get_sub_frame<-function(dat,names){
   mapped<-m[is.element(m$name,names),]
   array_names <- as.character(mapped$iesname)
   res=data.frame(dat[,array_names])
-# print(mapped)
+  # print(mapped)
   colnames(res)<-mapped$name
   return(res)
 }
