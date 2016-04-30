@@ -513,7 +513,7 @@ mapping <-function(){
   s=rbind(s,data.frame(iesname="b65f010",name="fees_recreational_lessons"))
   s=rbind(s,data.frame(iesname="b65f011",name="other_recreational_expenses"))
   s=rbind(s,data.frame(iesname="b65f100",name="total_recreational_expenses"))
-  s=rbind(s,data.frame(iesname="b66f001",name="jewellery"))
+  s=rbind(s,data.frame(iesname="b66f001",name="jewelry"))
   s=rbind(s,data.frame(iesname="b66f002",name="handbags"))
   s=rbind(s,data.frame(iesname="b66f003",name="pram"))
   s=rbind(s,data.frame(iesname="b66f004",name="other_items"))
@@ -894,6 +894,7 @@ check_data_matching<-function(hh,ohs){
                   total_income_of_household_head=hh$total_income_of_household_head,
                   total_expenditure=hh$total_expenditure,
                   race_household_head=hh$race_household_head,
+                  visible_consumption = hh$visible_consumption,
                   n_members=hh$n_members);
   
   ohs11=data.frame(hhid=ohs$hhid,age=ohs$AGE,gender=ohs$GENDER,education=ohs$Q216)
@@ -915,6 +916,7 @@ check_data_matching<-function(hh,ohs){
 }
 
 descriptive_statistics<-function(ds){
+  
   # dummy would count every member with valid value as 1 
   ds$less_than_12 = as.integer(ds$education<12);
   r=ddply(ds,.(race_household_head),summarize,
@@ -922,13 +924,27 @@ descriptive_statistics<-function(ds){
           n=length(total_income_of_household_head),
           mean_tot_expenditure= mean(total_expenditure),
           mean_age_head=mean(age),
+          mean_visible_consumption=mean(visible_consumption),
           n_members=mean(n_members),
           n_less_than_12=mean(less_than_12));
+  r$mean_visible_consumption_fraction<-r$mean_visible_consumption/r$mean_tot_expenditure
   
   r$percentage = 100*r$n/sum(r$n);
   return(r);
   
 }
+
+visible_categories<-function(){
+  # personal care, clothing and apparel (including footwear),jewelry, cars
+  return (c("motor_cars_new","bakkies_new","caravantrailers_new",
+            "motor_cars_used","bakkies_used","caravantrailers_new","hire_of_clothing",
+            "jewelry","handbags","total_boys_footwear",
+            "total_mens_footwear","total_girls_footwear","total_infants_footwear",
+            "total_womens_footwear","total_infants_clothing",
+            "total_boys_clothing","total_mens_clothing","total_girls_clothing",
+            "total_womens_clothing","total_personal_care"))
+}
+
 combined_data_set<-function(year){
   
   #1-black
@@ -940,23 +956,26 @@ combined_data_set<-function(year){
   
   #Note: Found duplicates with x=ddply(hh,.(hhid),summarize,n=length(hhid));x[x$n>1,]
   dat = unique(dat);
+  info_columns <-c("hhid",
+                   "gender_household_head",
+                   "age_household_head",
+                   "age_member2",
+                   "age_member3",
+                   "age_member4",
+                   "age_member5",
+                   "age_member6",
+                   "age_member7",
+                   "age_member8",
+                   "age_member9",
+                   "age_member10",
+                   "total_income_of_household_head",
+                   "total_income",
+                   "total_expenditure",
+                   "race_household_head")
+  info_columns <- c(info_columns,visible_categories())
   
-  hh = get_sub_frame(dat,c("hhid",
-                           "gender_household_head",
-                           "age_household_head",
-                           "age_member2",
-                           "age_member3",
-                           "age_member4",
-                           "age_member5",
-                           "age_member6",
-                           "age_member7",
-                           "age_member8",
-                           "age_member9",
-                           "age_member10",
-                           "total_income_of_household_head",
-                           "total_income",
-                           "total_expenditure",
-                           "race_household_head"))
+  hh = get_sub_frame(dat=dat,names=info_columns);
+  
   print("Loaded subframe")
   print("Running ddply on diary")
   n_members = ddply(hh,.(hhid),summarize,n_members=count_higher_than(a=0,
@@ -974,11 +993,17 @@ combined_data_set<-function(year){
   
   hh$n_members = n_members$n_members;
   
+  # Summing up visibel categories into column: visible_consumption
+  hh$visible_consumption <- 0
+  for ( col in visible_categories()){
+    print(paste("Adding ",col," to visible_consumption"))
+    hh$visible_consumption <- hh$visible_consumption+hh[,col]
+  }
+  
   opers = load_ohs_file(year)
   
   ohs_filtering = FALSE
   
-  #  return(opers)
   # TODO: the dependent variable is education_household_head (instead of the  highest level
   # of education in the household). This requires that the merge matches and gender in the
   # in the OHS data)
