@@ -897,7 +897,11 @@ check_data_matching<-function(hh,ohs){
                   visible_consumption = hh$visible_consumption,
                   n_members=hh$n_members);
   
-  ohs11=data.frame(hhid=ohs$hhid,age=ohs$AGE,gender=ohs$GENDER,education=ohs$Q216)
+  ohs11=data.frame(hhid=ohs$hhid,
+                   age=ohs$AGE,
+                   gender=ohs$GENDER,
+                   education=ohs$Q216,
+                   area_type=ohs$TYPE)
   # select ohs data for members with age and gender of the household head
   x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
   y=ddply(x,.(hhid),summarize,n_mem=length(hhid))
@@ -913,6 +917,38 @@ check_data_matching<-function(hh,ohs){
     # having unique (gender,age)
     return(x[is.element(x$hhid,valid_hhids),]);
   }
+}
+
+run_regression<-function(ds,year){
+  if (year==1995){
+    # ln(visible_consumption) ~ black_dummy + coloured_dummy + ln(pInc) 
+    #     + area_type + age + age*age + n_members + year_dummy
+    if (class(ds$race_household_head)!="integer"){
+      stop("race variable must be of integer type")
+    }
+    
+    # Do NOT consider hhds with zero income heads
+    n_all_income<-length(ds$hhid);
+    ds <- ds[ds$total_income_of_household_head>0,]
+    n_cur<-length(ds$hhid)
+    print (paste("Ignoring ",round(100*(1- n_cur/n_all_income),3),
+                 " % households(hhids having heads with zero income) at sample size=",n_cur))
+    ds<-ds[ds$visible_consumption>0,]
+    n_vis<-length(ds$hhid)
+    print (paste("Ignoring altogether",round(100*(1- n_vis/n_all_income),3),
+                 " % households(hhids with zero visible income) at sample size=",n_vis))
+    
+    ds$lnvis<-log(ds$visible_consumption)
+    ds$black_dummy <-as.integer(ds$race_household_head==1)
+    ds$coloured_dummy<-as.integer(ds$race_household_head==2)
+    ds$lnpinc <- log(ds$total_expenditure)
+    ds$agesq <- ds$age*ds$age
+    ds$year_dummy <-year-1995
+    res=lm(lnvis~black_dummy+coloured_dummy+lnpinc+
+             area_type+age+agesq+n_members + year_dummy,data=ds)
+    return(res)
+  }
+  stop(paste("Year",year,"not supported"));
 }
 
 descriptive_statistics<-function(ds){
