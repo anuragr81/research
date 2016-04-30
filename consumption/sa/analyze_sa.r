@@ -1,10 +1,11 @@
 library(foreign)
 require(plyr)
+source('datanormalizer.R')
 
 setwd('c:/local_files/research/consumption/sa/')
 
 load_data_file_list <- function(){
-  s = data.frame(year=NULL,filename=NULL,type=NULL)
+  s = data.frame(year=NULL,filename=NULL,type=NULL,ohs_filename=NULL,ohs_type=NULL)
   s = rbind(s,data.frame(year=1990,
                          filename="1990/SPSS/IES 1990 hhroster_v1.1.sav",
                          type="sav",
@@ -122,19 +123,22 @@ descriptive_statistics<-function(ds){
   
 }
 
-visible_categories<-function(){
-  # personal care, clothing and apparel (including footwear),jewelry, cars
-  return (c("motor_cars_new","bakkies_new","caravantrailers_new",
-            "motor_cars_used","bakkies_used","caravantrailers_new","hire_of_clothing",
-            "jewelry","handbags","total_boys_footwear",
-            "total_mens_footwear","total_girls_footwear","total_infants_footwear",
-            "total_womens_footwear","total_infants_clothing",
-            "total_boys_clothing","total_mens_clothing","total_girls_clothing",
-            "total_womens_clothing","total_personal_care"))
+
+load_diary_fields_mapping<-function(year){
+  
+  if( year == 1995 ){
+    return (mapping_1995());
+  }
+  stop(paste('No entry found for',year));
+  
 }
 
-load_diary_mapping<-function(year){
-configlist<-load_file_  
+load_visible_categories<-function(year){
+  if (year == 1995){
+    return(visible_categories_1995());
+  }
+  stop(paste('No entry found for',year));
+  
 }
 combined_data_set<-function(year){
   
@@ -144,8 +148,8 @@ combined_data_set<-function(year){
   #4-white
   
   dat <- load_diary_file(year);
-  diary_mapping <- load_diary_mapping(year);
-  visible_categories<-load_visible_categories_diary(year);
+  diary_mapping <- load_diary_fields_mapping(year);
+  visible_categories<-load_visible_categories(year);
   #Note: Found duplicates with x=ddply(hh,.(hhid),summarize,n=length(hhid));x[x$n>1,]
   #      ensuring there are no duplicates with unique call
   dat = unique(dat);
@@ -187,7 +191,7 @@ combined_data_set<-function(year){
   
   hh$n_members = n_members$n_members;
   
-  # Summing up visibel categories into column: visible_consumption
+  # Summing up visible categories into column: visible_consumption
   hh$visible_consumption <- 0
   for ( col in visible_categories){
     print(paste("Adding ",col," to visible_consumption"))
@@ -237,7 +241,6 @@ get_sub_frame<-function(dat,names,m){
 load_diary_file<-function (year){
   s = load_data_file_list();
   ds= s[s$year==year,]
-  print(length(ds$year))
   
   if( length(ds$year)==0 ){
     stop("No entry found")

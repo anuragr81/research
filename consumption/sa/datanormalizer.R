@@ -1,5 +1,15 @@
+visible_categories_1995<-function(){
+  # personal care, clothing and apparel (including footwear),jewelry, cars
+  return (c("motor_cars_new","bakkies_new","caravantrailers_new",
+            "motor_cars_used","bakkies_used","caravantrailers_new","hire_of_clothing",
+            "jewelry","handbags","total_boys_footwear",
+            "total_mens_footwear","total_girls_footwear","total_infants_footwear",
+            "total_womens_footwear","total_infants_clothing",
+            "total_boys_clothing","total_mens_clothing","total_girls_clothing",
+            "total_womens_clothing","total_personal_care"))
+}
 
-mapping1995 <-function(){
+mapping_1995 <-function(){
   s = data.frame(iesname=NULL,name=NULL)
   s= rbind(s,data.frame(iesname="hhid",name="hhid"))
   s= rbind(s,data.frame(iesname="b01f001",name="gender_household_head"))
