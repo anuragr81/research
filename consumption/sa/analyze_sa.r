@@ -5,14 +5,23 @@ setwd('c:/local_files/research/consumption/sa/')
 
 load_data_file_list <- function(){
   s = data.frame(year=NULL,filename=NULL,type=NULL)
-  s = rbind(s,data.frame(year=1990,filename="1990/SPSS/IES 1990 hhroster_v1.1.sav",type="sav"))
-  s = rbind(s,data.frame(year=1995,filename="1995/STATA/IES 1995.dta",type="dta"))
+  s = rbind(s,data.frame(year=1990,
+                         filename="1990/SPSS/IES 1990 hhroster_v1.1.sav",
+                         type="sav",
+                         ohs_filename='',
+                         ohs_type=""))
+  s = rbind(s,data.frame(year=1995,
+                         filename="1995/STATA/IES 1995.dta",
+                         type="dta",
+                         ohs_filename='1995/ohs/ohs_1995_v1.2_stata10/OHS 1995 Person_nw_v1.2.dta',
+                         ohs_type="dta"))
   return (s)
 }
 
 mapping <-function(){
   s = data.frame(iesname=NULL,name=NULL)
   s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+  s= rbind(s,data.frame(iesname="b01f001",name="gender_household_head"))
   s= rbind(s,data.frame(iesname="b02f001",name="age_household_head"))
   s= rbind(s,data.frame(iesname="b03f001",name="race_household_head"))
   s=rbind(s,data.frame(iesname="b02f002",name="age_member2"))
@@ -66,7 +75,6 @@ mapping <-function(){
   s= rbind(s,data.frame(iesname="b18f004" ,name="fish_other"))
   s= rbind(s,data.frame(iesname="b18f005" ,name="seafood"))
   s= rbind(s,data.frame(iesname="b18f100" ,name="total_seafood"))
-  s= rbind(s,data.frame(iesname="b19f001" ,name="butter"))
   s= rbind(s,data.frame(iesname="b19f002" ,name="margarine"))
   s= rbind(s,data.frame(iesname="b19f003" ,name="oil_cooking"))
   s= rbind(s,data.frame(iesname="b19f004" ,name="peanut_butter"))
@@ -99,6 +107,7 @@ mapping <-function(){
   s=rbind(s,data.frame(iesname="b21f013",name="other_fresh_vegetables"))
   s=rbind(s,data.frame(iesname="b21f014",name="frozen_beans"))
   s=rbind(s,data.frame(iesname="b21f015",name="frozen_peas"))
+  s= rbind(s,data.frame(iesname="b19f001" ,name="butter"))
   s=rbind(s,data.frame(iesname="b21f016",name="frozen_carrots"))
   s=rbind(s,data.frame(iesname="b21f017",name="other_frozen_vegetables"))
   s=rbind(s,data.frame(iesname="b21f018",name="canned_vegetables"))
@@ -783,7 +792,7 @@ mapping <-function(){
   s=rbind(s,data.frame(iesname="b88f026",name="lobola_dowry_received"))
   s=rbind(s,data.frame(iesname="b88f027",name="all_other_income"))
   s=rbind(s,data.frame(iesname="b88f028",name="all_other_income_not_elsewhere_shown"))
-  s=rbind(s,data.frame(iesname="b88f100",name="total_income"))
+  s=rbind(s,data.frame(iesname="b88f100",name="total_income2"))
   s=rbind(s,data.frame(iesname="b89f001",name="cost_housing_monthly"))
   s=rbind(s,data.frame(iesname="b89f002",name="cost_housing_annual"))
   s=rbind(s,data.frame(iesname="b89f003",name="domestic_workers_wages"))
@@ -872,18 +881,68 @@ count_higher_than<-function(a,m1,m2,m3,m4,m5,m6,m7,m8,m9,m10)
   )));
 }
 
-descriptive_statistics<-function(year){
+check_data_matching<-function(hh,ohs){
+  rejection_threshold<-0.01
+  # persno doesn't work for some 860 households
+  # a merge on (hhid,age,gender) doesn't work for 50/29,750 data because same age,gender persons
+  # exist in some households
+  # regardless of params one needs to make sure the merged array does not have duplicates
+  
+  hh11=data.frame(hhid=hh$hhid,
+                  age=hh$age_household_head,
+                  gender=hh$gender_household_head,
+                  total_income_of_household_head=hh$total_income_of_household_head,
+                  total_expenditure=hh$total_expenditure,
+                  race_household_head=hh$race_household_head,
+                  n_members=hh$n_members);
+  
+  ohs11=data.frame(hhid=ohs$hhid,age=ohs$AGE,gender=ohs$GENDER,education=ohs$Q216)
+  # select ohs data for members with age and gender of the household head
+  x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
+  y=ddply(x,.(hhid),summarize,n_mem=length(hhid))
+  n_nonuniq=length(y[y$n_mem>1,]$hhid)
+  n_tot= length(unique(hh$hhid));
+  # if this happens for more than 1% (or threshold) of the data, then reject analysis
+  if (n_nonuniq/n_tot>rejection_threshold){
+    stop ("Could not match ohs data with hh data ")
+  }else{
+    print(paste("Percentage of hhids with non-uniq (gender,age) for household-heads:",100*n_nonuniq/n_tot))
+    valid_hhids<-y[y$n_mem<=1,]$hhid
+    # return data for household with heads 
+    # having unique (gender,age)
+    return(x[is.element(x$hhid,valid_hhids),]);
+  }
+}
+
+descriptive_statistics<-function(ds){
+  # dummy would count every member with valid value as 1 
+  ds$less_than_12 = as.integer(ds$education<12);
+  r=ddply(ds,.(race_household_head),summarize,
+          mean_income=mean(total_income_of_household_head),
+          n=length(total_income_of_household_head),
+          mean_tot_expenditure= mean(total_expenditure),
+          mean_age_head=mean(age),
+          n_members=mean(n_members),
+          n_less_than_12=mean(less_than_12));
+  
+  r$percentage = 100*r$n/sum(r$n);
+  return(r);
+  
+}
+combined_data_set<-function(year){
   
   #1-black
   #2-coloured
   #3-asian
   #4-white
   
-  #Note: Found duplicates with x=ddply(hh,.(hhid),summarize,n=length(hhid));x[x$n>1,]
+  dat = load_diary_file(year);
   
-  dat = load_file(year)
-  dat = unique(dat)
+  #Note: Found duplicates with x=ddply(hh,.(hhid),summarize,n=length(hhid));x[x$n>1,]
+  dat = unique(dat);
+  
   hh = get_sub_frame(dat,c("hhid",
+                           "gender_household_head",
                            "age_household_head",
                            "age_member2",
                            "age_member3",
@@ -895,8 +954,11 @@ descriptive_statistics<-function(year){
                            "age_member9",
                            "age_member10",
                            "total_income_of_household_head",
+                           "total_income",
+                           "total_expenditure",
                            "race_household_head"))
-  
+  print("Loaded subframe")
+  print("Running ddply on diary")
   n_members = ddply(hh,.(hhid),summarize,n_members=count_higher_than(a=0,
                                                                      m1=age_household_head,
                                                                      m2=age_member2,
@@ -908,16 +970,32 @@ descriptive_statistics<-function(year){
                                                                      m8=age_member8,
                                                                      m9=age_member9,
                                                                      m10=age_member10))
-
+  
+  
   hh$n_members = n_members$n_members;
-  r=ddply(hh,.(race_household_head),summarize,
-          mean_income=mean(total_income_of_household_head),
-          n=length(total_income_of_household_head),
-          mean_age_head=mean(age_household_head),
-          n_members=mean(n_members));
-  r$percentage = 100*r$n/sum(r$n);
-  return(r)
+  
+  opers = load_ohs_file(year)
+  
+  ohs_filtering = FALSE
+  
+  #  return(opers)
+  # TODO: the dependent variable is education_household_head (instead of the  highest level
+  # of education in the household). This requires that the merge matches and gender in the
+  # in the OHS data)
+  
+  if (ohs_filtering){
+    print("Running ddply on OHS")
+    opers_n=ddply(opers,.(hhid),n_mempers=length(PERSNO))
+    print("Merging OHS and Diary data")
+    nh=merge(hh,opers_n);
+    # the ones in the diary would be included but those not in the diary would be excluded
+    result = (nh[nh$n_members-nh$n_mempers!=0,])# differences between member numbers (to be discarded/corrected)
+  }
+  
+  dstruct<-check_data_matching(hh=hh,ohs=opers);
+  return(dstruct);
 }
+
 # Usage: get_sub_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
 get_sub_frame<-function(dat,names){
   if (!is.vector(names)){
@@ -929,11 +1007,14 @@ get_sub_frame<-function(dat,names){
   array_names <- as.character(mapped$iesname)
   res=data.frame(dat[,array_names])
   # print(mapped)
+  if (length(mapped$name)!=length(colnames(res))){
+    stop('Error in mapping of columns')
+  }
   colnames(res)<-mapped$name
   return(res)
 }
 
-load_file<-function (year){
+load_diary_file<-function (year){
   s = load_data_file_list();
   ds= s[s$year==year,]
   print(length(ds$year))
@@ -943,11 +1024,39 @@ load_file<-function (year){
   }
   
   if (ds$type=="sav"){
-    return(read.spss(as.character(ds$filename)));
+    ff<-ds$filename
+    print(paste("Loading File:",ff))
+    return(read.spss(as.character(ff)));
   }
   
   if (ds$type =="dta"){
-    return(read.dta(as.character(ds$filename)));    
+    ff<-ds$filename
+    print(paste("Loading File:",ff))
+    return(read.dta(as.character(ff)));    
+  }
+  
+  return(ds)
+}
+
+load_ohs_file<-function (year){
+  s = load_data_file_list();
+  ds= s[s$year==year,];
+  print(length(ds$year));
+  
+  if( length(ds$year)==0 ){
+    stop("No entry found")
+  }
+  
+  if (ds$ohs_type=="sav"){
+    ff<-ds$ohs_filename
+    print(paste("Loading file:",ff));
+    return(read.spss(as.character(ff)));
+  }
+  
+  if (ds$ohs_type =="dta"){
+    ff<-ds$ohs_filename
+    print(paste("Loading file:",ff))
+    return(read.dta(file=as.character(ff),convert.factors=FALSE));    
   }
   
   return(ds)
