@@ -12,5 +12,5 @@ if [ ! -f $INPUT ] ;then
  exit 1
 fi
 
-sed -e 's/\ /,/' $INPUT | sed -e 's/\ /,/'| sed -e 's/\ $//' | sed -e 's/\ /_/g' | sed -e 's/[_]*contin_numeric//' | sed -e 's/[_]*discrete_numeric//' | sed -e 's/\-//g' | tr '[:upper:]' '[:lower:]'
+sed -e 's/\ /,/' $INPUT | sed -e 's/\ /,/'| sed -e 's/\ $//' | sed -e 's/\ /_/g' | sed -e 's/[_]*contin_numeric//' | sed -e 's/[_]*discrete_numeric//' | sed -e 's/\-//g' | tr '[:upper:]' '[:lower:]' | sed -e 's/[_][_]*/_/g'
 
