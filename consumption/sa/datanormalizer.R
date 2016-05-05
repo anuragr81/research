@@ -1,3 +1,50 @@
+# attempted matching artifical hhid, age(increasing order), gender, popgroup, total income
+
+setwd('c:/local_files/research/consumption/sa/')
+
+# There is no point matching based on age signature of family
+# since two families of same age signature and race can exist in a very small area
+age_signature<-function(age,gender,popgroup){
+  return(toString(sort(age)));
+}
+
+
+
+
+mapping_2010 <-function () {
+  
+  
+}
+
+info_columns_2010<-function(){
+  
+}
+
+info_columns_1995 <-function () {
+  icols1995 <- c("hhid",
+                      "gender_household_head",
+                      "age_household_head",
+                      "age_member2",
+                      "age_member3",
+                      "age_member4",
+                      "age_member5",
+                      "age_member6",
+                      "age_member7",
+                      "age_member8",
+                      "age_member9",
+                      "age_member10",
+                      "total_income_of_household_head",
+                      "total_income",
+                      "total_expenditure",
+                      "race_household_head")
+  return(icols1995);
+}
+
+visible_categories_2010<-function(){
+  
+}
+
+# Notice that these are defined in terms of mapping fields
 visible_categories_1995<-function(){
   # personal care, clothing and apparel (including footwear),jewelry, cars
   return (c("motor_cars_new","bakkies_new","caravantrailers_new",
@@ -808,6 +855,7 @@ mapping_1995 <-function(){
   s=rbind(s,data.frame(iesname="b89f022",name="household_consumer_goods"))
   s=rbind(s,data.frame(iesname="b89f023",name="household_services"))
   s=rbind(s,data.frame(iesname="b89f024",name="subtotal_expenditure"))
+  s=rbind(s,data.frame(iesname="b89f033",name="girls_footwear"))
   s=rbind(s,data.frame(iesname="b89f025",name="subtotal_annual"))
   s=rbind(s,data.frame(iesname="b89f026",name="household_fuel"))
   s=rbind(s,data.frame(iesname="b89f027",name="womens_clothing"))
@@ -816,7 +864,6 @@ mapping_1995 <-function(){
   s=rbind(s,data.frame(iesname="b89f030",name="boys_clothing"))
   s=rbind(s,data.frame(iesname="b89f031",name="infants_clothing"))
   s=rbind(s,data.frame(iesname="b89f032",name="womens_footwear"))
-  s=rbind(s,data.frame(iesname="b89f033",name="girls_footwear"))
   s=rbind(s,data.frame(iesname="b89f034",name="mens_footwear"))
   s=rbind(s,data.frame(iesname="b89f035",name="boys_footwear"))
   s=rbind(s,data.frame(iesname="b89f036",name="infants_footwear"))

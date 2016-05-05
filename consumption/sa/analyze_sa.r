@@ -124,6 +124,7 @@ descriptive_statistics<-function(ds){
 }
 
 
+#TODO: wrap up into an object
 load_diary_fields_mapping<-function(year){
   
   if( year == 1995 ){
@@ -133,6 +134,8 @@ load_diary_fields_mapping<-function(year){
   
 }
 
+
+#TODO: wrap up into an object
 load_visible_categories<-function(year){
   if (year == 1995){
     return(visible_categories_1995());
@@ -140,6 +143,37 @@ load_visible_categories<-function(year){
   stop(paste('No entry found for',year));
   
 }
+
+#TODO: wrap up into an object
+get_info_columns<-function(year){
+  if (year == 1995){
+    return(info_columns_1995());
+  }
+  if (year == 2010){
+    return(info_columns_2010())
+  }
+  stop(paste("Could not find info columns for year:",year))
+}
+
+infer_n_members<-function(hh,year)
+{
+  if (year == 1995){
+    n_members = ddply(hh,.(hhid),summarize,n_members=count_higher_than(a=0,
+                                                                       m1=age_household_head,
+                                                                       m2=age_member2,
+                                                                       m3=age_member3,
+                                                                       m4=age_member4,
+                                                                       m5=age_member5,
+                                                                       m6=age_member6,
+                                                                       m7=age_member7,
+                                                                       m8=age_member8,
+                                                                       m9=age_member9,
+                                                                       m10=age_member10))
+    return(n_members$n_members)
+  }
+  stop(paste("infer_n_members not available for year",year))
+}
+
 combined_data_set<-function(year){
   
   #1-black
@@ -153,43 +187,18 @@ combined_data_set<-function(year){
   #Note: Found duplicates with x=ddply(hh,.(hhid),summarize,n=length(hhid));x[x$n>1,]
   #      ensuring there are no duplicates with unique call
   dat = unique(dat);
-  info_columns <-c("hhid",
-                   "gender_household_head",
-                   "age_household_head",
-                   "age_member2",
-                   "age_member3",
-                   "age_member4",
-                   "age_member5",
-                   "age_member6",
-                   "age_member7",
-                   "age_member8",
-                   "age_member9",
-                   "age_member10",
-                   "total_income_of_household_head",
-                   "total_income",
-                   "total_expenditure",
-                   "race_household_head")
+  # these vary according to year as well TODO: add another layer of normalization
   
+  info_columns <- get_info_columns(year)
   info_columns <- c(info_columns,visible_categories)
   
   hh = get_sub_frame(dat=dat,names=info_columns,m=diary_mapping);
   
   print("Loaded subframe")
   print("Running ddply on diary")
-  n_members = ddply(hh,.(hhid),summarize,n_members=count_higher_than(a=0,
-                                                                     m1=age_household_head,
-                                                                     m2=age_member2,
-                                                                     m3=age_member3,
-                                                                     m4=age_member4,
-                                                                     m5=age_member5,
-                                                                     m6=age_member6,
-                                                                     m7=age_member7,
-                                                                     m8=age_member8,
-                                                                     m9=age_member9,
-                                                                     m10=age_member10))
   
   
-  hh$n_members = n_members$n_members;
+  hh$n_members = infer_n_members(hh=hh,year=year);
   
   # Summing up visible categories into column: visible_consumption
   hh$visible_consumption <- 0
@@ -198,6 +207,7 @@ combined_data_set<-function(year){
     hh$visible_consumption <- hh$visible_consumption+hh[,col]
   }
   
+  # OHS file is not necessary for 2005 and later
   opers = load_ohs_file(year)
   
   ohs_filtering = FALSE
