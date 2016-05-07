@@ -35,6 +35,7 @@ info_columns_2010<-function(){
                 "n_members",
                 "highest_education",
                 "area_type")
+  # must also include visible categories
   return(icols2010)
 }
 
@@ -55,6 +56,8 @@ info_columns_1995 <-function () {
                  "total_income",
                  "total_expenditure",
                  "race_household_head")
+  visible_categories<-visible_categories_1995();
+  icols1995<-c(icols1995,visible_categories)
   return(icols1995);
 }
 

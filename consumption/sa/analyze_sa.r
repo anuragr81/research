@@ -45,19 +45,8 @@ count_higher_than<-function(a,m1,m2,m3,m4,m5,m6,m7,m8,m9,m10)
   )));
 }
 
-merge_hh_ohs_income_data<-function(year,hh,ohs){
-  
-  if (year == 1995){
-    return(merge_hh_ohs_data_1995(hh=hh,ohs=ohs))
-  }
-  if (year == 2010){
-    return(merge_hh_ohs_income_data_2010(hh=hh,ohs=ohs))
-  }
-  
-  stop(paste("Method to merge data for year:",year," not found"))
-}
-
-choose_max_age_head<-function(hh,ohs){
+# choose ohs entries with max age amongst hhs with more than on head
+choose_max_ohs_age_head_2010<-function(hh,ohs){
   ohs11=ohs[ohs$Q15RELATIONSHIP==1,]; 
   if (dim(ohs11)[1]==0){
     stop("No household head data found in ohs file")
@@ -67,8 +56,28 @@ choose_max_age_head<-function(hh,ohs){
   return(merge(x,ohs11));
 }
 
-merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
+#@desc - merges translated data into one big data frame. There are
+#        two phases of normalization. The first is merely a translation
+#        into well-known names (age,gender etc.). The second phase is 
+#        translation into dependent variables (each of which can correspond to
+#        one function). The merging function here encapsulates the extraction from
+#        all tables and merging into a combined frame.
+merge_hh_ohs_income_data<-function(year,hh,ohs,income){
   
+  if (year == 1995){
+    return(merge_hh_ohs_data_1995(hh=hh,ohs=ohs))
+  }
+  if (year == 2010){
+    return(merge_hh_ohs_income_data_2010(hh=hh,ohs=ohs,income=income))
+  }
+  
+  stop(paste("Method to merge data for year:",year," not found"))
+}
+
+# extract data from hh,ohs,income and merge into one combined frame
+merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
+
+    
   hh11=data.frame(UQNO = hh$UQNO,
                   gender = hh$gender_household_head,
                   total_expenditure = hh$total_expenditure,
@@ -76,7 +85,7 @@ merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
                   visible_consumption = hh$visible_consumption,
                   n_members = hh$n_members);
   
-  age_table <- choose_max_age_head(hh,ohs)
+  age_table <- choose_max_ohs_age_head_2010(hh,ohs)
   
   income_table <- data.frame(UQNO=income$UQNO,PERSNO=income$Personno,
                              total_income_of_household_head=income$Value);
@@ -92,7 +101,14 @@ merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
   return(x);
 }
 
+# merge data from hh,ohs files into one common big frame
 merge_hh_ohs_data_1995<-function(hh,ohs){
+  
+  #infer should come from processing of hh,ohs,income..etc. (should not be here)
+  hh$n_members = infer_n_members_1995(hh=hh,year=year);
+  
+  # compute visible consumption
+  
   rejection_threshold<-0.01
   # persno doesn't work for some 860 households
   # a merge on (hhid,age,gender) doesn't work for 50/29,750 data because same age,gender persons
@@ -114,6 +130,7 @@ merge_hh_ohs_data_1995<-function(hh,ohs){
                    gender=ohs$GENDER,
                    education=ohs$Q216,
                    area_type=ohs$TYPE)
+  
   # select ohs data for members with age and gender of the household head
   x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
   y=ddply(x,.(hhid),summarize,n_mem=length(hhid))
@@ -196,17 +213,9 @@ load_diary_fields_mapping<-function(year){
   
 }
 
-
-#TODO: wrap up into an object
-load_visible_categories<-function(year){
-  if (year == 1995){
-    return(visible_categories_1995());
-  }
-  stop(paste('No entry found for',year));
-  
-}
-
-#TODO: wrap up into an object
+# Info Columns are names in a commonly-understood nomenclature
+# all merging/aggregation rules are specified in terms of these
+# trasnlated names
 get_info_columns<-function(year){
   if (year == 1995){
     return(info_columns_1995());
@@ -217,9 +226,11 @@ get_info_columns<-function(year){
   stop(paste("Could not find info columns for year:",year))
 }
 
-infer_n_members<-function(hh,year)
+# utility to infer number of members from 1995 sa diary 
+infer_n_members_1995<-function(hh)
 {
-  if (year == 1995){
+  
+  print("infer_n_members_1995 - Running ddply on diary ")
     n_members = ddply(hh,.(hhid),summarize,n_members=count_higher_than(a=0,
                                                                        m1=age_household_head,
                                                                        m2=age_member2,
@@ -232,70 +243,58 @@ infer_n_members<-function(hh,year)
                                                                        m9=age_member9,
                                                                        m10=age_member10))
     return(n_members$n_members)
-  }
-  stop(paste("infer_n_members not available for year",year))
 }
-
+#@desc - 
+sum_visible_categories<-function(hh,visible_categories){
+  hh$visible_consumption <- 0
+  for ( col in visible_categories){
+    print(paste("Adding ",col," to visible_consumption"))
+    hh$visible_consumption <- hh$visible_consumption+hh[,col]
+  }
+}
+#@desc prepares the normalized data-set with all
+#      information for regression analysis
 combined_data_set<-function(year){
   
   #1-black
   #2-coloured
   #3-asian
   #4-white
-  
+  ############ PHASE 0 ########################
   dat <- load_diary_file(year);
-  # the following mapping must have the fields required in merge_hh_ohs_data/filter_hh_data
   
+  # duplicates in diary data are not uncommon
+  print("Ensuring duplicates do NOT exist in the diary data")
+  dat = unique(dat)
+  
+  ############ PHASE 1 - Translation ########################
+  # info_columns must contain all data-fields referred to in merging/aggregation phase
+  info_columns <- get_info_columns(year)
   diary_mapping <- load_diary_fields_mapping(year);
   
-  visible_categories<-load_visible_categories(year);
-  #Note: Found duplicates with x=ddply(hh,.(hhid),summarize,n=length(hhid));x[x$n>1,]
-  #      ensuring there are no duplicates with unique call
-  dat = unique(dat);
-  # these vary according to year as well TODO: add another layer of normalization
-  
-  info_columns <- get_info_columns(year)
-  info_columns <- c(info_columns,visible_categories)
-  
-  hh = get_sub_frame(dat=dat,names=info_columns,m=diary_mapping);
-  
-  print("Loaded subframe")
-  print("Running ddply on diary")
-  
-  
-  hh$n_members = infer_n_members(hh=hh,year=year);
-  
+  # translated frame makes the data available in a universal dictionary (age, gender etc.)
+  hh = get_translated_frame(dat=dat,names=info_columns,m=diary_mapping)
+  # ohs,income and other files also need to be translated (they would have their own)
+  return(hh)
+  print("Loaded translated frame")
+  ############ PHASE 2 - Aggregation and Merge ########################
+  # this is also a y-mapping function that should not be here 
   # Summing up visible categories into column: visible_consumption
-  hh$visible_consumption <- 0
-  for ( col in visible_categories){
-    print(paste("Adding ",col," to visible_consumption"))
-    hh$visible_consumption <- hh$visible_consumption+hh[,col]
-  }
+
   
   # OHS file is not necessary for 2005 and later
   opers = load_ohs_file(year)
-  ohs_filtering = FALSE
   
-  # TODO: the dependent variable is education_household_head (instead of the  highest level
-  # of education in the household). This requires that the merge matches and gender in the
-  # in the OHS data)
-  
-  if (ohs_filtering){
-    print("Running ddply on OHS")
-    opers_n=ddply(opers,.(hhid),n_mempers=length(PERSNO)) # doesn't apply to all OHS values
-    print("Merging OHS and Diary data")
-    nh=merge(hh,opers_n);
-    # the ones in the diary would be included but those not in the diary would be excluded
-    result = (nh[nh$n_members-nh$n_mempers!=0,])# differences between member numbers (to be discarded/corrected)
-  }
-  
-  dstruct<-merge_hh_ohs_income_data(hh=hh,ohs=opers);
+  # ideally merge logic should arise out of every final column
+  # i.e. merge criteria should be defined by every final columns (and this extra merging would 
+  # comprise only of massaging the data)
+  dstruct<-merge_hh_ohs_income_data(hh=hh,ohs=opers,income=income);
   return(dstruct);
   
 }
 
-# Usage: get_sub_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
-get_sub_frame<-function(dat,names,m){
+# Usage: get_translated_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
+get_translated_frame<-function(dat,names,m){
   if (!is.vector(names)){
     stop("names must be a vector")
   }
