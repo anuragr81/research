@@ -76,8 +76,8 @@ merge_hh_ohs_income_data<-function(year,hh,ohs,income){
 
 # extract data from hh,ohs,income and merge into one combined frame
 merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
-
-    
+  
+  
   hh11=data.frame(UQNO = hh$UQNO,
                   gender = hh$gender_household_head,
                   total_expenditure = hh$total_expenditure,
@@ -105,9 +105,10 @@ merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
 merge_hh_ohs_data_1995<-function(hh,ohs){
   
   #infer should come from processing of hh,ohs,income..etc. (should not be here)
-  hh$n_members = infer_n_members_1995(hh=hh,year=year);
+  hh$n_members = infer_n_members_1995(hh=hh);
   
   # compute visible consumption
+  hh<-sum_visible_categories(hh=hh,visible_categories=visible_categories_1995())
   
   rejection_threshold<-0.01
   # persno doesn't work for some 860 households
@@ -115,7 +116,6 @@ merge_hh_ohs_data_1995<-function(hh,ohs){
   # exist in some households
   # regardless of params one needs to make sure the merged array does not have duplicates
   
-  # TODO: All 
   hh11=data.frame(hhid=hh$hhid,
                   age=hh$age_household_head,
                   gender=hh$gender_household_head,
@@ -126,10 +126,10 @@ merge_hh_ohs_data_1995<-function(hh,ohs){
                   n_members=hh$n_members);
   
   ohs11=data.frame(hhid=ohs$hhid,
-                   age=ohs$AGE,
-                   gender=ohs$GENDER,
-                   education=ohs$Q216,
-                   area_type=ohs$TYPE)
+                   age=ohs$age,
+                   gender=ohs$gender,
+                   education=ohs$highest_education,
+                   area_type=ohs$area_type)
   
   # select ohs data for members with age and gender of the household head
   x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
@@ -204,10 +204,21 @@ descriptive_statistics<-function(ds){
 load_diary_fields_mapping<-function(year){
   
   if( year == 1995 ){
-    return (mapping_1995());
+    return (hh_mapping_1995());
   }
-  if (year ==2010){
-    return(mapping_2010());
+  if (year == 2010){
+    return(hh_mapping_2010());
+  }
+  stop(paste('No entry found for',year));
+  
+}
+load_ohs_mapping<-function(year){
+  
+  if( year == 1995 ){
+    return (ohs_mapping_1995());
+  }
+  if (year == 2010){
+    return(ohs_mapping_2010());
   }
   stop(paste('No entry found for',year));
   
@@ -216,33 +227,52 @@ load_diary_fields_mapping<-function(year){
 # Info Columns are names in a commonly-understood nomenclature
 # all merging/aggregation rules are specified in terms of these
 # trasnlated names
-get_info_columns<-function(year){
+get_diary_info_columns<-function(year){
   if (year == 1995){
-    return(info_columns_1995());
+    return(diary_info_columns_1995());
   }
   if (year == 2010){
-    return(info_columns_2010())
+    return(diary_info_columns_2010())
   }
-  stop(paste("Could not find info columns for year:",year))
+  stop(paste("Could not find diary info columns for year:",year))
 }
 
+get_ohs_info_columns<-function(year){
+  if (year == 1995){
+    return(ohs_info_columns_1995());
+  }
+  if (year == 2010){
+    return(ohs_info_columns_2010())
+  }
+  stop(paste("Could not find ohs info columns for year:",year))
+}
+
+get_income_info_columns<-function(year){
+  if (year == 1995){
+    return(income_info_columns_1995());
+  }
+  if (year == 2010){
+    return(income_info_columns_2010())
+  }
+  stop(paste("Could not find ohs info columns for year:",year))
+}
 # utility to infer number of members from 1995 sa diary 
 infer_n_members_1995<-function(hh)
 {
   
   print("infer_n_members_1995 - Running ddply on diary ")
-    n_members = ddply(hh,.(hhid),summarize,n_members=count_higher_than(a=0,
-                                                                       m1=age_household_head,
-                                                                       m2=age_member2,
-                                                                       m3=age_member3,
-                                                                       m4=age_member4,
-                                                                       m5=age_member5,
-                                                                       m6=age_member6,
-                                                                       m7=age_member7,
-                                                                       m8=age_member8,
-                                                                       m9=age_member9,
-                                                                       m10=age_member10))
-    return(n_members$n_members)
+  n_members = ddply(hh,.(hhid),summarize,n_members=count_higher_than(a=0,
+                                                                     m1=age_household_head,
+                                                                     m2=age_member2,
+                                                                     m3=age_member3,
+                                                                     m4=age_member4,
+                                                                     m5=age_member5,
+                                                                     m6=age_member6,
+                                                                     m7=age_member7,
+                                                                     m8=age_member8,
+                                                                     m9=age_member9,
+                                                                     m10=age_member10))
+  return(n_members$n_members)
 }
 #@desc - 
 sum_visible_categories<-function(hh,visible_categories){
@@ -251,6 +281,7 @@ sum_visible_categories<-function(hh,visible_categories){
     print(paste("Adding ",col," to visible_consumption"))
     hh$visible_consumption <- hh$visible_consumption+hh[,col]
   }
+  return(hh)
 }
 #@desc prepares the normalized data-set with all
 #      information for regression analysis
@@ -260,37 +291,49 @@ combined_data_set<-function(year){
   #2-coloured
   #3-asian
   #4-white
-  ############ PHASE 0 ########################
-  dat <- load_diary_file(year);
   
-  # duplicates in diary data are not uncommon
-  print("Ensuring duplicates do NOT exist in the diary data")
-  dat = unique(dat)
+  ############ PHASE 0 ########################
+  
+  hhdat <- load_diary_file(year)
+  ohsdat <-load_ohs_file(year)
+  incomedat <-load_income_file(year)
+  
+  if (is.null(hhdat)){
+    stop("Could not load diary hhdata")
+  }
+  
+  # duplicates in diary hhdata are not uncommon
+  print("Ensuring duplicates do NOT exist in the diary hhdata")
+  hhdat = unique(hhdat)
   
   ############ PHASE 1 - Translation ########################
-  # info_columns must contain all data-fields referred to in merging/aggregation phase
-  info_columns <- get_info_columns(year)
-  diary_mapping <- load_diary_fields_mapping(year);
-  
+  # info_columns must contain all hhdata-fields referred to in merging/aggregation phase (one per file)
   # translated frame makes the data available in a universal dictionary (age, gender etc.)
-  hh = get_translated_frame(dat=dat,names=info_columns,m=diary_mapping)
-  # ohs,income and other files also need to be translated (they would have their own)
-  return(hh)
-  print("Loaded translated frame")
+  
+  hh = get_translated_frame(dat=hhdat,
+                            names=get_diary_info_columns(year),
+                            m=load_diary_fields_mapping(year))
+  print("Translated hh data")
+  # optional data files
+  if (!is.null(ohsdat)){
+    ohs = get_translated_frame(dat=ohsdat,
+                               names=get_ohs_info_columns(year),
+                               m=load_ohs_mapping(year))
+    print("Translated ohs data")
+  }
+  
+  if (!is.null(incomedat)){
+    income = get_translated_frame(dat=incomedat,
+                                     names=get_income_info_columns(year),
+                                     m=load_income_mapping(year))
+    print("Translated income data")
+    }
+  
+  print("Loaded translated frame(s)")
   ############ PHASE 2 - Aggregation and Merge ########################
-  # this is also a y-mapping function that should not be here 
-  # Summing up visible categories into column: visible_consumption
-
-  
-  # OHS file is not necessary for 2005 and later
-  opers = load_ohs_file(year)
-  
-  # ideally merge logic should arise out of every final column
-  # i.e. merge criteria should be defined by every final columns (and this extra merging would 
-  # comprise only of massaging the data)
-  dstruct<-merge_hh_ohs_income_data(hh=hh,ohs=opers,income=income);
+  # merge criteria is defined for every dependent variable
+  dstruct<-merge_hh_ohs_income_data(hh=hh,ohs=ohs,income=income,year=year);
   return(dstruct);
-  
 }
 
 # Usage: get_translated_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
@@ -312,6 +355,7 @@ get_translated_frame<-function(dat,names,m){
   return(res)
 }
 
+# returns NULL when the filenames are ''
 load_diary_file<-function (year){
   s = load_data_file_list();
   ds= s[s$year==year,]
@@ -332,7 +376,10 @@ load_diary_file<-function (year){
     return(read.dta(as.character(ff)));    
   }
   
-  return(ds)
+  if (ds$type=='' && ds$filename==''){
+    return(NULL)
+  }
+  stop("No valid entry found");
 }
 
 load_ohs_file<-function (year){
@@ -384,4 +431,9 @@ load_income_file<-function (year){
     print(paste("Loading file:",ff))
     return(read.dta(file=as.character(ff),convert.factors=FALSE));    
   }
+  
+  if (ds$income_file_type=='' && ds$income_filename==''){
+    return(NULL)
+  }
+  stop("No valid entry found")
 }

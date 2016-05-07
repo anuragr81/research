@@ -9,7 +9,7 @@ age_signature<-function(age,gender,popgroup){
 }
 
 
-mapping_2010 <-function () {
+hh_mapping_2010 <-function () {
   # in 2010 survey, the OHS is equivalent to person-info and hh (this function) is equivalent to house-info 
   s = data.frame(iesname=NULL,name=NULL)
   s= rbind(s,data.frame(iesname="UQNO",name="hhid"))
@@ -18,17 +18,23 @@ mapping_2010 <-function () {
   s= rbind(s,data.frame(iesname="Consumptions",name="total_expenditure"))
   s= rbind(s,data.frame(iesname="Hsize",name="n_members"))
   s= rbind(s,data.frame(iesname="Settlement_type",name="area_type"))
-  
-  
+  s= rbind(s,data.frame(iesname="Q21HIGHESTLEVEL",name="highest_education"))
   return(s)
 }
 
-info_columns_2010<-function(){
+ohs_mapping_1995 <-function(){
+  s = data.frame(iesname="hhid",name="hhid")
+  s= rbind(s,data.frame(iesname="AGE",name="age"))
+  s= rbind(s,data.frame(iesname="GENDER",name="gender"))
+  s= rbind(s,data.frame(iesname="Q216",name="highest_education"))
+  s= rbind(s,data.frame(iesname="TYPE",name="area_type"))
+  return(s)
+}
+
+diary_info_columns_2010<-function(){
   #each of these are relative to the household head
-  icols2010 <-c("hhid",
-                "age_household_head",
+  icols2010 <-c("hhid", # unique ID
                 "gender_household_head",
-                "total_income_of_household_head",
                 "total_expenditure",
                 "race_household_head",
                 "visible_consumption",
@@ -39,7 +45,25 @@ info_columns_2010<-function(){
   return(icols2010)
 }
 
-info_columns_1995 <-function () {
+ohs_info_columns_2010<-function(){
+  #each of these are relative to the household head
+  icols2010 <-c("hhid",
+                "age_household_head"
+                )
+  # must also include visible categories
+  return(icols2010)
+}
+
+income_info_columns_2010<-function(){
+  #each of these are relative to the household head
+  icols2010 <-c("hhid",
+                "total_income_of_household_head"
+                )
+  # must also include visible categories
+  return(icols2010)
+}
+
+diary_info_columns_1995 <-function () {
   icols1995 <- c("hhid",
                  "gender_household_head",
                  "age_household_head",
@@ -61,6 +85,10 @@ info_columns_1995 <-function () {
   return(icols1995);
 }
 
+ohs_info_columns_1995<-function(){
+  return(c("hhid","age","gender","highest_education","area_type"));
+}
+
 visible_categories_2010<-function(){
   
 }
@@ -77,7 +105,7 @@ visible_categories_1995<-function(){
             "total_womens_clothing","total_personal_care"))
 }
 
-mapping_1995 <-function(){
+hh_mapping_1995 <-function(){
   s = data.frame(iesname=NULL,name=NULL)
   s= rbind(s,data.frame(iesname="hhid",name="hhid"))
   s= rbind(s,data.frame(iesname="b01f001",name="gender_household_head"))
