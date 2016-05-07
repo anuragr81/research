@@ -10,12 +10,23 @@ load_data_file_list <- function(){
                          filename="1990/SPSS/IES 1990 hhroster_v1.1.sav",
                          type="sav",
                          ohs_filename='',
-                         ohs_type=""))
+                         ohs_type="",
+                         income_filename="",
+                         income_file_type=""))
   s = rbind(s,data.frame(year=1995,
                          filename="1995/STATA/IES 1995.dta",
                          type="dta",
                          ohs_filename='1995/ohs/ohs_1995_v1.2_stata10/OHS 1995 Person_nw_v1.2.dta',
-                         ohs_type="dta"))
+                         ohs_type="dta",
+                         income_filename="",
+                         income_file_type=""))
+  s = rbind(s,data.frame(year=2010,
+                         filename='2010/stata10/ies_2010_2011_house_info_v1.dta',
+                         type="dta",
+                         ohs_filename='2010/stata10/ies_2010_2011_person_info_v1.dta',
+                         ohs_type="dta",
+                         income_filename="2010/stata10/ies_2010_2011_person_income_v1.dta",
+                         income_file_type="dta"))
   return (s)
 }
 
@@ -34,13 +45,61 @@ count_higher_than<-function(a,m1,m2,m3,m4,m5,m6,m7,m8,m9,m10)
   )));
 }
 
-check_data_matching<-function(hh,ohs){
+merge_hh_ohs_income_data<-function(year,hh,ohs){
+  
+  if (year == 1995){
+    return(merge_hh_ohs_data_1995(hh=hh,ohs=ohs))
+  }
+  if (year == 2010){
+    return(merge_hh_ohs_income_data_2010(hh=hh,ohs=ohs))
+  }
+  
+  stop(paste("Method to merge data for year:",year," not found"))
+}
+
+choose_max_age_head<-function(hh,ohs){
+  ohs11=ohs[ohs$Q15RELATIONSHIP==1,]; 
+  if (dim(ohs11)[1]==0){
+    stop("No household head data found in ohs file")
+  }
+  ohs11<-data.frame(UQNO=ohs11$UQNO,AGE=ohs11$Q14AGE,PERSNO=ohs11$PERSONNO)
+  x=ddply(ohs11,.(UQNO),summarize,AGE=max(AGE)) # select max age
+  return(merge(x,ohs11));
+}
+
+merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
+  
+  hh11=data.frame(UQNO = hh$UQNO,
+                  gender = hh$gender_household_head,
+                  total_expenditure = hh$total_expenditure,
+                  race_household_head = hh$race_household_head,
+                  visible_consumption = hh$visible_consumption,
+                  n_members = hh$n_members);
+  
+  age_table <- choose_max_age_head(hh,ohs)
+  
+  income_table <- data.frame(UQNO=income$UQNO,PERSNO=income$Personno,
+                             total_income_of_household_head=income$Value);
+  age_income_table <- merge(age_table,income_table)
+  
+  ohs11=data.frame(hhid=ohs$UQNO,
+                   persno=ohs$PERSONNO,
+                   AGE=ohs$Q14AGE,
+                   education=ohs$Q21HIGHESTLEVEL)
+  
+  # select ohs data for members with age and gender of the household head
+  x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
+  return(x);
+}
+
+merge_hh_ohs_data_1995<-function(hh,ohs){
   rejection_threshold<-0.01
   # persno doesn't work for some 860 households
   # a merge on (hhid,age,gender) doesn't work for 50/29,750 data because same age,gender persons
   # exist in some households
   # regardless of params one needs to make sure the merged array does not have duplicates
   
+  # TODO: All 
   hh11=data.frame(hhid=hh$hhid,
                   age=hh$age_household_head,
                   gender=hh$gender_household_head,
@@ -130,6 +189,9 @@ load_diary_fields_mapping<-function(year){
   if( year == 1995 ){
     return (mapping_1995());
   }
+  if (year ==2010){
+    return(mapping_2010());
+  }
   stop(paste('No entry found for',year));
   
 }
@@ -182,7 +244,10 @@ combined_data_set<-function(year){
   #4-white
   
   dat <- load_diary_file(year);
+  # the following mapping must have the fields required in merge_hh_ohs_data/filter_hh_data
+  
   diary_mapping <- load_diary_fields_mapping(year);
+  
   visible_categories<-load_visible_categories(year);
   #Note: Found duplicates with x=ddply(hh,.(hhid),summarize,n=length(hhid));x[x$n>1,]
   #      ensuring there are no duplicates with unique call
@@ -209,7 +274,6 @@ combined_data_set<-function(year){
   
   # OHS file is not necessary for 2005 and later
   opers = load_ohs_file(year)
-  
   ohs_filtering = FALSE
   
   # TODO: the dependent variable is education_household_head (instead of the  highest level
@@ -218,15 +282,16 @@ combined_data_set<-function(year){
   
   if (ohs_filtering){
     print("Running ddply on OHS")
-    opers_n=ddply(opers,.(hhid),n_mempers=length(PERSNO))
+    opers_n=ddply(opers,.(hhid),n_mempers=length(PERSNO)) # doesn't apply to all OHS values
     print("Merging OHS and Diary data")
     nh=merge(hh,opers_n);
     # the ones in the diary would be included but those not in the diary would be excluded
     result = (nh[nh$n_members-nh$n_mempers!=0,])# differences between member numbers (to be discarded/corrected)
   }
   
-  dstruct<-check_data_matching(hh=hh,ohs=opers);
+  dstruct<-merge_hh_ohs_income_data(hh=hh,ohs=opers);
   return(dstruct);
+  
 }
 
 # Usage: get_sub_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
@@ -292,5 +357,32 @@ load_ohs_file<-function (year){
     return(read.dta(file=as.character(ff),convert.factors=FALSE));    
   }
   
+  if (ds$ohs_type=='' && ds$ohs_filename==''){
+    return(NULL)
+  }
+  
   return(ds)
+}
+
+
+load_income_file<-function (year){
+  s = load_data_file_list();
+  ds= s[s$year==year,];
+  print(length(ds$year));
+  
+  if( length(ds$year)==0 ){
+    stop("No entry found")
+  }
+  
+  if (ds$income_file_type=="sav"){
+    ff<-ds$income_filename
+    print(paste("Loading file:",ff));
+    return(read.spss(as.character(ff)));
+  }
+  
+  if (ds$income_file_type =="dta"){
+    ff<-ds$income_filename
+    print(paste("Loading file:",ff))
+    return(read.dta(file=as.character(ff),convert.factors=FALSE));    
+  }
 }

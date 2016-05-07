@@ -9,34 +9,52 @@ age_signature<-function(age,gender,popgroup){
 }
 
 
-
-
 mapping_2010 <-function () {
+  # in 2010 survey, the OHS is equivalent to person-info and hh (this function) is equivalent to house-info 
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="UQNO",name="hhid"))
+  s= rbind(s,data.frame(iesname="GenderOfHead",name="gender_household_head"))
+  s= rbind(s,data.frame(iesname="PopGrpOfHead",name="race_household_head"))
+  s= rbind(s,data.frame(iesname="Consumptions",name="total_expenditure"))
+  s= rbind(s,data.frame(iesname="Hsize",name="n_members"))
+  s= rbind(s,data.frame(iesname="Settlement_type",name="area_type"))
   
   
+  return(s)
 }
 
 info_columns_2010<-function(){
-  
+  #each of these are relative to the household head
+  icols2010 <-c("hhid",
+                "age_household_head",
+                "gender_household_head",
+                "total_income_of_household_head",
+                "total_expenditure",
+                "race_household_head",
+                "visible_consumption",
+                "n_members",
+                "highest_education",
+                "area_type")
+  return(icols2010)
 }
 
 info_columns_1995 <-function () {
   icols1995 <- c("hhid",
-                      "gender_household_head",
-                      "age_household_head",
-                      "age_member2",
-                      "age_member3",
-                      "age_member4",
-                      "age_member5",
-                      "age_member6",
-                      "age_member7",
-                      "age_member8",
-                      "age_member9",
-                      "age_member10",
-                      "total_income_of_household_head",
-                      "total_income",
-                      "total_expenditure",
-                      "race_household_head")
+                 "gender_household_head",
+                 "age_household_head",
+                 "age_member2",
+                 "age_member3",
+                 "age_member4",
+                 "age_member5",
+                 "age_member6",
+                 "age_member7",
+                 "age_member8",
+                 "age_member9",
+                 "age_member10",
+                 "total_income_of_household_head",
+                 "total_income",
+                 "total_expenditure",
+                 "race_household_head")
   return(icols1995);
 }
 
