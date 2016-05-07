@@ -47,12 +47,12 @@ count_higher_than<-function(a,m1,m2,m3,m4,m5,m6,m7,m8,m9,m10)
 
 # choose ohs entries with max age amongst hhs with more than on head
 choose_max_ohs_age_head_2010<-function(hh,ohs){
-  ohs11=ohs[ohs$Q15RELATIONSHIP==1,]; 
+  ohs11=ohs[ohs$relationship_to_head==1,]; 
   if (dim(ohs11)[1]==0){
     stop("No household head data found in ohs file")
   }
-  ohs11<-data.frame(UQNO=ohs11$UQNO,AGE=ohs11$Q14AGE,PERSNO=ohs11$PERSONNO)
-  x=ddply(ohs11,.(UQNO),summarize,AGE=max(AGE)) # select max age
+  ohs11<-data.frame(hhid=ohs11$hhid,age=ohs11$age,persno=ohs11$persno)
+  x=ddply(ohs11,.(hhid),summarize,AGE=max(age)) # select max age
   return(merge(x,ohs11));
 }
 
@@ -77,24 +77,25 @@ merge_hh_ohs_income_data<-function(year,hh,ohs,income){
 # extract data from hh,ohs,income and merge into one combined frame
 merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
   
-  
-  hh11=data.frame(UQNO = hh$UQNO,
+  hh<-sum_visible_categories(hh=hh,visible_categories = visible_categories_2010())
+  hh11=data.frame(hhid = hh$hhid,
                   gender = hh$gender_household_head,
                   total_expenditure = hh$total_expenditure,
                   race_household_head = hh$race_household_head,
                   visible_consumption = hh$visible_consumption,
                   n_members = hh$n_members);
-  
+
   age_table <- choose_max_ohs_age_head_2010(hh,ohs)
   
-  income_table <- data.frame(UQNO=income$UQNO,PERSNO=income$Personno,
-                             total_income_of_household_head=income$Value);
+  
+  income_table <- data.frame(hhid=income$hhid,persno=income$persno,
+                             total_income_of_household_head=income$total_income);
   age_income_table <- merge(age_table,income_table)
   
-  ohs11=data.frame(hhid=ohs$UQNO,
-                   persno=ohs$PERSONNO,
-                   AGE=ohs$Q14AGE,
-                   education=ohs$Q21HIGHESTLEVEL)
+  ohs11=data.frame(hhid=ohs$hhid,
+                   persno=ohs$persno,
+                   AGE=ohs$age,
+                   education=ohs$highest_education)
   
   # select ohs data for members with age and gender of the household head
   x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
@@ -224,9 +225,21 @@ load_ohs_mapping<-function(year){
   
 }
 
+load_income_mapping<-function(year){
+  
+  if( year == 1995 ){
+    stop("No income file for 1995")
+  }
+  if (year == 2010){
+    return(income_mapping_2010());
+  }
+  stop(paste('No entry found for',year));
+  
+}
+
 # Info Columns are names in a commonly-understood nomenclature
 # all merging/aggregation rules are specified in terms of these
-# trasnlated names
+# translated names
 get_diary_info_columns<-function(year){
   if (year == 1995){
     return(diary_info_columns_1995());
@@ -324,20 +337,23 @@ combined_data_set<-function(year){
   
   if (!is.null(incomedat)){
     income = get_translated_frame(dat=incomedat,
-                                     names=get_income_info_columns(year),
-                                     m=load_income_mapping(year))
+                                  names=get_income_info_columns(year),
+                                  m=load_income_mapping(year))
     print("Translated income data")
-    }
+  }
   
   print("Loaded translated frame(s)")
   ############ PHASE 2 - Aggregation and Merge ########################
   # merge criteria is defined for every dependent variable
+
   dstruct<-merge_hh_ohs_income_data(hh=hh,ohs=ohs,income=income,year=year);
   return(dstruct);
 }
 
 # Usage: get_translated_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
 get_translated_frame<-function(dat,names,m){
+  isDebug<-FALSE
+  
   if (!is.vector(names)){
     stop("names must be a vector")
   }
@@ -346,6 +362,12 @@ get_translated_frame<-function(dat,names,m){
   
   mapped<-m[is.element(m$name,names),]
   array_names <- as.character(mapped$iesname)
+  
+  
+  if (isDebug==TRUE){
+    print(paste("colnames(dat)=",toString(colnames(dat))))
+    print(paste("array_names=",toString(array_names)))
+  }
   res=data.frame(dat[,array_names])
   # print(mapped)
   if (length(mapped$name)!=length(colnames(res))){

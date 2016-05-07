@@ -8,61 +8,7 @@ age_signature<-function(age,gender,popgroup){
   return(toString(sort(age)));
 }
 
-
-hh_mapping_2010 <-function () {
-  # in 2010 survey, the OHS is equivalent to person-info and hh (this function) is equivalent to house-info 
-  s = data.frame(iesname=NULL,name=NULL)
-  s= rbind(s,data.frame(iesname="UQNO",name="hhid"))
-  s= rbind(s,data.frame(iesname="GenderOfHead",name="gender_household_head"))
-  s= rbind(s,data.frame(iesname="PopGrpOfHead",name="race_household_head"))
-  s= rbind(s,data.frame(iesname="Consumptions",name="total_expenditure"))
-  s= rbind(s,data.frame(iesname="Hsize",name="n_members"))
-  s= rbind(s,data.frame(iesname="Settlement_type",name="area_type"))
-  s= rbind(s,data.frame(iesname="Q21HIGHESTLEVEL",name="highest_education"))
-  return(s)
-}
-
-ohs_mapping_1995 <-function(){
-  s = data.frame(iesname="hhid",name="hhid")
-  s= rbind(s,data.frame(iesname="AGE",name="age"))
-  s= rbind(s,data.frame(iesname="GENDER",name="gender"))
-  s= rbind(s,data.frame(iesname="Q216",name="highest_education"))
-  s= rbind(s,data.frame(iesname="TYPE",name="area_type"))
-  return(s)
-}
-
-diary_info_columns_2010<-function(){
-  #each of these are relative to the household head
-  icols2010 <-c("hhid", # unique ID
-                "gender_household_head",
-                "total_expenditure",
-                "race_household_head",
-                "visible_consumption",
-                "n_members",
-                "highest_education",
-                "area_type")
-  # must also include visible categories
-  return(icols2010)
-}
-
-ohs_info_columns_2010<-function(){
-  #each of these are relative to the household head
-  icols2010 <-c("hhid",
-                "age_household_head"
-                )
-  # must also include visible categories
-  return(icols2010)
-}
-
-income_info_columns_2010<-function(){
-  #each of these are relative to the household head
-  icols2010 <-c("hhid",
-                "total_income_of_household_head"
-                )
-  # must also include visible categories
-  return(icols2010)
-}
-
+############# hh columns ###############
 diary_info_columns_1995 <-function () {
   icols1995 <- c("hhid",
                  "gender_household_head",
@@ -85,24 +31,32 @@ diary_info_columns_1995 <-function () {
   return(icols1995);
 }
 
-ohs_info_columns_1995<-function(){
-  return(c("hhid","age","gender","highest_education","area_type"));
+diary_info_columns_2010<-function(){
+  #each of these are relative to the household head
+  icols2010 <-c("hhid", # unique ID
+                "gender_household_head",
+                "total_expenditure",
+                "race_household_head",
+                "n_members",
+                "area_type")
+  # must also include visible categories
+  return(icols2010)
 }
 
-visible_categories_2010<-function(){
-  
-}
+##############<end hh columns>############
 
-# Notice that these are defined in terms of mapping fields
-visible_categories_1995<-function(){
-  # personal care, clothing and apparel (including footwear),jewelry, cars
-  return (c("motor_cars_new","bakkies_new","caravantrailers_new",
-            "motor_cars_used","bakkies_used","caravantrailers_new","hire_of_clothing",
-            "jewelry","handbags","total_boys_footwear",
-            "total_mens_footwear","total_girls_footwear","total_infants_footwear",
-            "total_womens_footwear","total_infants_clothing",
-            "total_boys_clothing","total_mens_clothing","total_girls_clothing",
-            "total_womens_clothing","total_personal_care"))
+########### hh columns mapping ##########
+hh_mapping_2010 <-function () {
+  # in 2010 survey, the OHS is equivalent to person-info and hh (this function) is equivalent to house-info 
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="UQNO",name="hhid"))
+  s= rbind(s,data.frame(iesname="GenderOfHead",name="gender_household_head"))
+  s= rbind(s,data.frame(iesname="PopGrpOfHead",name="race_household_head"))
+  s= rbind(s,data.frame(iesname="Consumptions",name="total_expenditure"))
+  s= rbind(s,data.frame(iesname="Hsize",name="n_members"))
+  s= rbind(s,data.frame(iesname="Settlement_type",name="area_type"))
+  s= rbind(s,data.frame(iesname="Q21HIGHESTLEVEL",name="highest_education"))
+  return(s)
 }
 
 hh_mapping_1995 <-function(){
@@ -952,3 +906,87 @@ hh_mapping_1995 <-function(){
   return(s)
 }
 
+########### <end hh columns mapping> ##########
+
+######### ohs info columns ##############
+ohs_info_columns_2010<-function(){
+  #each of these are relative to the household head
+  icols2010 <-c("hhid",
+                "age",
+                "highest_education",
+                "relationship_to_head"
+  )
+  # must also include visible categories
+  return(icols2010)
+}
+
+ohs_info_columns_1995<-function(){
+  return(c("hhid","age","gender","highest_education","area_type"));
+}
+
+######### <end ohs info columns> ##############
+
+############# ohs mapping #################
+ohs_mapping_1995 <-function(){
+  s = data.frame(iesname="hhid",name="hhid")
+  s= rbind(s,data.frame(iesname="AGE",name="age"))
+  s= rbind(s,data.frame(iesname="GENDER",name="gender"))
+  s= rbind(s,data.frame(iesname="Q216",name="highest_education"))
+  s= rbind(s,data.frame(iesname="TYPE",name="area_type"))
+  return(s)
+}
+ohs_mapping_2010 <-function(){
+  s = data.frame(iesname="UQNO",name="hhid")
+  s= rbind(s,data.frame(iesname="PERSONNO",name="persno"))
+  s= rbind(s,data.frame(iesname="Q21HIGHESTLEVEL",name="highest_education"))
+  s= rbind(s,data.frame(iesname="Q15RELATIONSHIP",name="relationship_to_head"))
+  s= rbind(s,data.frame(iesname="Q14AGE",name="age"))
+  return(s)
+}
+
+
+############# <end ohs mapping> #################
+
+########### income info columns ############
+income_info_columns_2010<-function(){
+  #each of these are relative to the household head
+  icols2010 <-c("hhid",
+                "total_income"
+                )
+  # must also include visible categories
+  return(icols2010)
+}
+
+
+###########<end income info columns > ############
+
+########### income mapping############
+
+income_mapping_2010<-function(){
+  s = data.frame(iesname="UQNO",name="hhid")
+  s= rbind(s,data.frame(iesname="Personno",name="persno"))
+  s= rbind(s,data.frame(iesname="Value",name="total_income"))
+  return(s)
+}
+
+###########<end income mapping ############
+
+######## visible categories ############
+
+# Notice that these are defined in terms of mapping fields
+visible_categories_1995<-function(){
+  # personal care, clothing and apparel (including footwear),jewelry, cars
+  return (c("motor_cars_new","bakkies_new","caravantrailers_new",
+            "motor_cars_used","bakkies_used","caravantrailers_new","hire_of_clothing",
+            "jewelry","handbags","total_boys_footwear",
+            "total_mens_footwear","total_girls_footwear","total_infants_footwear",
+            "total_womens_footwear","total_infants_clothing",
+            "total_boys_clothing","total_mens_clothing","total_girls_clothing",
+            "total_womens_clothing","total_personal_care"))
+}
+
+visible_categories_2010<-function(){
+ stop("Unimplemented")  
+}
+
+#####<end visible categories>##############
