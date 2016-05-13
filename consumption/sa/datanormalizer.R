@@ -43,6 +43,17 @@ diary_info_columns_2010<-function(){
   return(icols2010)
 }
 
+diary_info_columns_2005<-function(){
+  #each of these are relative to the household head
+  icols2005 <-c("hhid", # unique ID
+                "gender_household_head",
+                "total_expenditure",
+                "race_household_head",
+                "n_members",
+                "area_type")
+  # must also include visible categories
+  return(icols2005)
+}
 ##############<end hh columns>############
 
 ########### hh columns mapping ##########
@@ -56,6 +67,17 @@ hh_mapping_2010 <-function () {
   s= rbind(s,data.frame(iesname="Hsize",name="n_members"))
   s= rbind(s,data.frame(iesname="Settlement_type",name="area_type"))
   s= rbind(s,data.frame(iesname="Q21HIGHESTLEVEL",name="highest_education"))
+  return(s)
+}
+
+hh_mapping_2005<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s=rbind(s,data.frame(iesname="uqno",name="hhid"))
+  s=rbind(s,data.frame(iesname="genderofhead",name="gender_household_head"))
+  s=rbind(s,data.frame(iesname="consumptions",name="total_expenditure"))
+  s=rbind(s,data.frame(iesname="popgrpofhead",name="race_household_head"))
+  s=rbind(s,data.frame(iesname="n_members",name="hsize"))
+  s=rbind(s,data.frame(iesname="settlement",name="area_type"))
   return(s)
 }
 
@@ -920,6 +942,17 @@ ohs_info_columns_2010<-function(){
   return(icols2010)
 }
 
+ohs_info_columns_2005<-function(){
+  #each of these are relative to the household head
+  icols2005 <-c("hhid",
+                "age",
+                "highest_education",
+                "relationship_to_head"
+  )
+  # must also include visible categories
+  return(icols2005)
+}
+
 ohs_info_columns_1995<-function(){
   return(c("hhid","age","gender","highest_education","area_type"));
 }
@@ -935,6 +968,15 @@ ohs_mapping_1995 <-function(){
   s= rbind(s,data.frame(iesname="TYPE",name="area_type"))
   return(s)
 }
+
+ohs_mapping_2005 <-function(){
+  s = data.frame(iesname="uqno",name="hhid")
+  s= rbind(s,data.frame(iesname="personno",name="persno"))
+  s= rbind(s,data.frame(iesname="q15higheduc",name="highest_education"))
+  s= rbind(s,data.frame(iesname="agegrp",name="age_group"))
+  return(s)
+}
+
 ohs_mapping_2010 <-function(){
   s = data.frame(iesname="UQNO",name="hhid")
   s= rbind(s,data.frame(iesname="PERSONNO",name="persno"))
@@ -952,9 +994,18 @@ income_info_columns_2010<-function(){
   #each of these are relative to the household head
   icols2010 <-c("hhid",
                 "total_income"
-                )
+  )
   # must also include visible categories
   return(icols2010)
+}
+
+income_info_columns_2005<-function(){
+  #each of these are relative to the household head
+  icols2005 <-c("hhid",
+                "total_income"
+  )
+  # must also include visible categories
+  return(icols2005)
 }
 
 
@@ -966,6 +1017,14 @@ income_mapping_2010<-function(){
   s = data.frame(iesname="UQNO",name="hhid")
   s= rbind(s,data.frame(iesname="Personno",name="persno"))
   s= rbind(s,data.frame(iesname="Value",name="total_income"))
+  return(s)
+}
+
+
+income_mapping_2005<-function(){
+  s = data.frame(iesname="uqno",name="hhid")
+  s= rbind(s,data.frame(iesname="personno",name="persno"))
+  s= rbind(s,data.frame(iesname="value",name="total_income"))
   return(s)
 }
 
@@ -986,7 +1045,11 @@ visible_categories_1995<-function(){
 }
 
 visible_categories_2010<-function(){
- stop("Unimplemented")  
+  stop("Unimplemented")  
 }
 
+
+visible_categories_2005<-function(){
+  stop("Unimplemented")  
+}
 #####<end visible categories>##############

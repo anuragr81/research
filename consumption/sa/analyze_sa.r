@@ -20,6 +20,13 @@ load_data_file_list <- function(){
                          ohs_type="dta",
                          income_filename="",
                          income_file_type=""))
+  s = rbind(s,data.frame(year=2005,
+                         filename="2005/Stata10/ies 2005-2006 house_info_v2.1.dta",
+                         type="dta",
+                         ohs_filename='2005/Stata10/ies 2005-2006 person_info_v2.1.dta',
+                         ohs_type="dta",
+                         income_filename="2005/Stata10/ies 2005-2006 person_income_v2.1.dta",
+                         income_file_type="dta"))
   s = rbind(s,data.frame(year=2010,
                          filename='2010/stata10/ies_2010_2011_house_info_v1.dta',
                          type="dta",
@@ -84,9 +91,8 @@ merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
                   race_household_head = hh$race_household_head,
                   visible_consumption = hh$visible_consumption,
                   n_members = hh$n_members);
-
-  age_table <- choose_max_ohs_age_head_2010(hh,ohs)
   
+  age_table <- choose_max_ohs_age_head_2010(hh,ohs)
   
   income_table <- data.frame(hhid=income$hhid,persno=income$persno,
                              total_income_of_household_head=income$total_income);
@@ -95,6 +101,35 @@ merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
   ohs11=data.frame(hhid=ohs$hhid,
                    persno=ohs$persno,
                    AGE=ohs$age,
+                   education=ohs$highest_education)
+  
+  # select ohs data for members with age and gender of the household head
+  x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
+  return(x);
+}
+
+
+# extract data from hh,ohs,income and merge into one combined frame
+merge_hh_ohs_income_data_2005<-function(hh,ohs,income){
+  
+  hh<-sum_visible_categories(hh=hh,visible_categories = visible_categories_2005())
+  
+  hh11=data.frame(hhid = hh$hhid,
+                  gender = hh$gender_household_head,
+                  total_expenditure = hh$total_expenditure,
+                  race_household_head = hh$race_household_head,
+                  visible_consumption = hh$visible_consumption,
+                  n_members = hh$n_members);
+  
+  age_table <- choose_max_ohs_age_head_2005(hh,ohs)
+  
+  income_table <- data.frame(hhid=income$hhid,persno=income$persno,
+                             total_income_of_household_head=income$total_income);
+  age_income_table <- merge(age_table,income_table)
+  
+  ohs11=data.frame(hhid=ohs$hhid,
+                   persno=ohs$persno,
+                   AGEGRP=ohs$agegrp,
                    education=ohs$highest_education)
   
   # select ohs data for members with age and gender of the household head
@@ -147,6 +182,22 @@ merge_hh_ohs_data_1995<-function(hh,ohs){
     # having unique (gender,age)
     return(x[is.element(x$hhid,valid_hhids),]);
   }
+}
+
+run_regression_multiple_years<-function(years){
+  
+  if (!is.vector(years) || !is.numeric(years)){
+    stop("years must of a vector numbers")
+  }
+  
+  resds = NULL
+  
+  for (year in years){
+    ds=combined_data_set(year)
+    resds = rbind(resds,ds)
+  }
+  
+  # run regression on the combined data set
 }
 
 run_regression<-function(ds,year){
@@ -210,6 +261,10 @@ load_diary_fields_mapping<-function(year){
   if (year == 2010){
     return(hh_mapping_2010());
   }
+  
+  if (year == 2005){
+    return(hh_mapping_2005());
+  }
   stop(paste('No entry found for',year));
   
 }
@@ -220,6 +275,9 @@ load_ohs_mapping<-function(year){
   }
   if (year == 2010){
     return(ohs_mapping_2010());
+  }
+  if (year ==2005){
+    return(ohs_mapping_2005());
   }
   stop(paste('No entry found for',year));
   
@@ -232,6 +290,10 @@ load_income_mapping<-function(year){
   }
   if (year == 2010){
     return(income_mapping_2010());
+  }
+  
+  if (year == 2005){
+    return(income_mapping_2005());
   }
   stop(paste('No entry found for',year));
   
@@ -247,6 +309,10 @@ get_diary_info_columns<-function(year){
   if (year == 2010){
     return(diary_info_columns_2010())
   }
+  if (year == 2005){
+    
+    return(diary_info_columns_2005())
+  }
   stop(paste("Could not find diary info columns for year:",year))
 }
 
@@ -257,6 +323,10 @@ get_ohs_info_columns<-function(year){
   if (year == 2010){
     return(ohs_info_columns_2010())
   }
+  if (year ==2005){
+    return(ohs_info_columns_2005());
+  }
+  
   stop(paste("Could not find ohs info columns for year:",year))
 }
 
@@ -267,7 +337,11 @@ get_income_info_columns<-function(year){
   if (year == 2010){
     return(income_info_columns_2010())
   }
-  stop(paste("Could not find ohs info columns for year:",year))
+  
+  if (year == 2005){
+    return(income_info_columns_2005())
+  }
+  stop(paste("Could not find income info columns for year:",year))
 }
 # utility to infer number of members from 1995 sa diary 
 infer_n_members_1995<-function(hh)
@@ -345,17 +419,17 @@ combined_data_set<-function(year){
   print("Loaded translated frame(s)")
   ############ PHASE 2 - Aggregation and Merge ########################
   # merge criteria is defined for every dependent variable
-
+  
   dstruct<-merge_hh_ohs_income_data(hh=hh,ohs=ohs,income=income,year=year);
   return(dstruct);
 }
 
 # Usage: get_translated_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
 get_translated_frame<-function(dat,names,m){
-  isDebug<-FALSE
-  
+  isDebug<-TRUE
+  print(names)
   if (!is.vector(names)){
-    stop("names must be a vector")
+    stop(paste("names of type(",toString(class(names)),") must be a vector"))
   }
   
   #m= mapping();
@@ -369,7 +443,7 @@ get_translated_frame<-function(dat,names,m){
     print(paste("array_names=",toString(array_names)))
   }
   res=data.frame(dat[,array_names])
-  # print(mapped)
+
   if (length(mapped$name)!=length(colnames(res))){
     stop('Error in mapping of columns')
   }
