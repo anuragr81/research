@@ -1045,7 +1045,7 @@ visible_categories_1995<-function(){
 }
 
 visible_categories_2010<-function(){
-  stop("Unimplemented")  
+  stop("Unimplemented")
 }
 
 
