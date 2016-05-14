@@ -40,6 +40,7 @@ diary_info_columns_2010<-function(){
                 "n_members",
                 "area_type")
   # must also include visible categories
+  icols2010<-c(icols2010,visible_categories_2010())
   return(icols2010)
 }
 
@@ -67,6 +68,7 @@ hh_mapping_2010 <-function () {
   s= rbind(s,data.frame(iesname="Hsize",name="n_members"))
   s= rbind(s,data.frame(iesname="Settlement_type",name="area_type"))
   s= rbind(s,data.frame(iesname="Q21HIGHESTLEVEL",name="highest_education"))
+  s= rbind(s,data.frame(iesname="Q552NOCARS",name="num_cars"))
   return(s)
 }
 
@@ -935,6 +937,7 @@ ohs_info_columns_2010<-function(){
   #each of these are relative to the household head
   icols2010 <-c("hhid",
                 "age",
+                "persno",
                 "highest_education",
                 "relationship_to_head"
   )
@@ -946,6 +949,7 @@ ohs_info_columns_2005<-function(){
   #each of these are relative to the household head
   icols2005 <-c("hhid",
                 "age",
+                "persno",
                 "highest_education",
                 "relationship_to_head"
   )
@@ -993,6 +997,7 @@ ohs_mapping_2010 <-function(){
 income_info_columns_2010<-function(){
   #each of these are relative to the household head
   icols2010 <-c("hhid",
+                "persno",
                 "total_income"
   )
   # must also include visible categories
@@ -1002,6 +1007,7 @@ income_info_columns_2010<-function(){
 income_info_columns_2005<-function(){
   #each of these are relative to the household head
   icols2005 <-c("hhid",
+                "persno",
                 "total_income"
   )
   # must also include visible categories
@@ -1045,11 +1051,11 @@ visible_categories_1995<-function(){
 }
 
 visible_categories_2010<-function(){
-  stop("Unimplemented")
+  return(c("num_cars"))
 }
-
 
 visible_categories_2005<-function(){
-  stop("Unimplemented")  
+  return(c("q42nocars"))
 }
+
 #####<end visible categories>##############

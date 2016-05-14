@@ -59,6 +59,7 @@ choose_max_ohs_age_head_2010<-function(hh,ohs){
     stop("No household head data found in ohs file")
   }
   ohs11<-data.frame(hhid=ohs11$hhid,age=ohs11$age,persno=ohs11$persno)
+
   x=ddply(ohs11,.(hhid),summarize,AGE=max(age)) # select max age
   return(merge(x,ohs11));
 }
@@ -83,8 +84,9 @@ merge_hh_ohs_income_data<-function(year,hh,ohs,income){
 
 # extract data from hh,ohs,income and merge into one combined frame
 merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
-  
+
   hh<-sum_visible_categories(hh=hh,visible_categories = visible_categories_2010())
+
   hh11=data.frame(hhid = hh$hhid,
                   gender = hh$gender_household_head,
                   total_expenditure = hh$total_expenditure,
@@ -93,6 +95,7 @@ merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
                   n_members = hh$n_members);
   
   age_table <- choose_max_ohs_age_head_2010(hh,ohs)
+
   
   income_table <- data.frame(hhid=income$hhid,persno=income$persno,
                              total_income_of_household_head=income$total_income);
