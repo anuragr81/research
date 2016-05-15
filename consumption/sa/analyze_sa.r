@@ -64,6 +64,7 @@ choose_max_ohs_age_head_2010<-function(hh,ohs){
   return(merge(x,ohs11));
 }
 
+
 #@desc - merges translated data into one big data frame. There are
 #        two phases of normalization. The first is merely a translation
 #        into well-known names (age,gender etc.). The second phase is 
@@ -77,6 +78,9 @@ merge_hh_ohs_income_data<-function(year,hh,ohs,income){
   }
   if (year == 2010){
     return(merge_hh_ohs_income_data_2010(hh=hh,ohs=ohs,income=income))
+  }
+  if (year == 2005){
+    return(merge_hh_ohs_income_data_2005(hh=hh,ohs=ohs,income=income))
   }
   
   stop(paste("Method to merge data for year:",year," not found"))
@@ -115,25 +119,33 @@ merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
 # extract data from hh,ohs,income and merge into one combined frame
 merge_hh_ohs_income_data_2005<-function(hh,ohs,income){
   
+  isDebug<-FALSE
+  
   hh<-sum_visible_categories(hh=hh,visible_categories = visible_categories_2005())
   
+  if (isDebug){
+    print(paste("columns of hh:",toString(colnames(hh))));
+    print(paste("size of hh:",toString(dim(hh))));
+  }
+  # reducing the data to work on
   hh11=data.frame(hhid = hh$hhid,
                   gender = hh$gender_household_head,
                   total_expenditure = hh$total_expenditure,
                   race_household_head = hh$race_household_head,
                   visible_consumption = hh$visible_consumption,
                   n_members = hh$n_members);
-  
-  age_table <- choose_max_ohs_age_head_2005(hh,ohs)
-  
-  income_table <- data.frame(hhid=income$hhid,persno=income$persno,
-                             total_income_of_household_head=income$total_income);
-  age_income_table <- merge(age_table,income_table)
-  
+#  print(head(ohs))
   ohs11=data.frame(hhid=ohs$hhid,
                    persno=ohs$persno,
                    AGEGRP=ohs$agegrp,
                    education=ohs$highest_education)
+  
+  income_table <- data.frame(hhid=income$hhid,persno=income$persno,
+                             total_income_of_household_head=income$total_income);
+  
+  ohs11 <- merge(ohs11,income_table)
+  
+  ohs11=ohs11[ohs11$persno==1,] # heads have persno = 1
   
   # select ohs data for members with age and gender of the household head
   x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
@@ -366,6 +378,11 @@ infer_n_members_1995<-function(hh)
 }
 #@desc - 
 sum_visible_categories<-function(hh,visible_categories){
+  isDebug=FALSE
+  
+  if (isDebug==TRUE){
+    print(paste("visible:",colnames(hh)))
+  }
   hh$visible_consumption <- 0
   for ( col in visible_categories){
     print(paste("Adding ",col," to visible_consumption"))
@@ -409,6 +426,7 @@ combined_data_set<-function(year){
     ohs = get_translated_frame(dat=ohsdat,
                                names=get_ohs_info_columns(year),
                                m=load_ohs_mapping(year))
+
     print("Translated ohs data")
   }
   
@@ -429,8 +447,10 @@ combined_data_set<-function(year){
 
 # Usage: get_translated_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
 get_translated_frame<-function(dat,names,m){
-  isDebug<-TRUE
-  print(names)
+  isDebug<-FALSE
+  if (isDebug){
+    print(names)
+  }
   if (!is.vector(names)){
     stop(paste("names of type(",toString(class(names)),") must be a vector"))
   }
