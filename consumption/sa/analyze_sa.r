@@ -1,5 +1,6 @@
 library(foreign)
 require(plyr)
+require(AER)
 source('datanormalizer.R')
 
 setwd('c:/local_files/research/consumption/sa/')
@@ -59,8 +60,8 @@ choose_max_ohs_age_head_2010<-function(hh,ohs){
     stop("No household head data found in ohs file")
   }
   ohs11<-data.frame(hhid=ohs11$hhid,age=ohs11$age,persno=ohs11$persno)
-
-  x=ddply(ohs11,.(hhid),summarize,AGE=max(age)) # select max age
+  
+  x=ddply(ohs11,.(hhid),summarize,age=max(age)) # select max age
   return(merge(x,ohs11));
 }
 
@@ -88,28 +89,30 @@ merge_hh_ohs_income_data<-function(year,hh,ohs,income){
 
 # extract data from hh,ohs,income and merge into one combined frame
 merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
-
+  
   hh<-sum_visible_categories(hh=hh,visible_categories = visible_categories_2010())
-
+  
   hh11=data.frame(hhid = hh$hhid,
                   gender = hh$gender_household_head,
                   total_expenditure = hh$total_expenditure,
                   race_household_head = hh$race_household_head,
                   visible_consumption = hh$visible_consumption,
+                  area_type=hh$area_type,
                   n_members = hh$n_members);
   
   age_table <- choose_max_ohs_age_head_2010(hh,ohs)
-
   
   income_table <- data.frame(hhid=income$hhid,persno=income$persno,
-                             total_income_of_household_head=income$total_income);
+                             total_income_of_household_head=income$total_income)
+  
   age_income_table <- merge(age_table,income_table)
   
   ohs11=data.frame(hhid=ohs$hhid,
                    persno=ohs$persno,
-                   AGE=ohs$age,
+                   age=ohs$age,
                    education=ohs$highest_education)
   
+  ohs11<-merge(ohs11,age_income_table)
   # select ohs data for members with age and gender of the household head
   x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
   return(x);
@@ -127,18 +130,24 @@ merge_hh_ohs_income_data_2005<-function(hh,ohs,income){
     print(paste("columns of hh:",toString(colnames(hh))));
     print(paste("size of hh:",toString(dim(hh))));
   }
+  
   # reducing the data to work on
   hh11=data.frame(hhid = hh$hhid,
                   gender = hh$gender_household_head,
                   total_expenditure = hh$total_expenditure,
                   race_household_head = hh$race_household_head,
                   visible_consumption = hh$visible_consumption,
+                  area_type=hh$area_type,
                   n_members = hh$n_members);
-#  print(head(ohs))
+  
+  print(colnames(ohs))
+  
   ohs11=data.frame(hhid=ohs$hhid,
                    persno=ohs$persno,
-                   AGEGRP=ohs$agegrp,
+                   age=ohs$agegrp,
                    education=ohs$highest_education)
+  
+  print("agegrp has been converted to age")
   
   income_table <- data.frame(hhid=income$hhid,persno=income$persno,
                              total_income_of_household_head=income$total_income);
@@ -150,6 +159,7 @@ merge_hh_ohs_income_data_2005<-function(hh,ohs,income){
   # select ohs data for members with age and gender of the household head
   x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
   return(x);
+  
 }
 
 # merge data from hh,ohs files into one common big frame
@@ -200,6 +210,7 @@ merge_hh_ohs_data_1995<-function(hh,ohs){
 }
 
 run_regression_multiple_years<-function(years){
+  years <-c (2005,2010)
   
   if (!is.vector(years) || !is.numeric(years)){
     stop("years must of a vector numbers")
@@ -212,11 +223,21 @@ run_regression_multiple_years<-function(years){
     resds = rbind(resds,ds)
   }
   
+  ds$inc <-ds$total_income_of_household_head
+  ds$incpsv <- as.integer(ds$inc>0)
+  ds$lninc <-log(ds$inc)
+  ds$cbinc <- ds$inc*ds$inc*ds$inc
+  ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
+  ds$degree <-as.integer(ds$education==13)
+  ds$year_2005 <- 0 || 1 
+  # no secondary education is the dropped dummy
+  res= ivreg(lnvis~black_dummy+coloured_dummy+ lnpinc+area_type+age+agesq+n_members+year_dummy | . - lnpinc + inc + incpsv + lninc + cbinc + secd + degree )
+  return(res)
   # run regression on the combined data set
 }
 
-run_regression<-function(ds,year){
-  if (year==1995){
+run_regression<-function(ds,year,type){
+  if (year==1995 || year =="2005_2010"){
     # ln(visible_consumption) ~ black_dummy + coloured_dummy + ln(pInc) 
     #     + area_type + age + age*age + n_members + year_dummy
     if (class(ds$race_household_head)!="integer"){
@@ -237,13 +258,163 @@ run_regression<-function(ds,year){
     ds$lnvis<-log(ds$visible_consumption)
     ds$black_dummy <-as.integer(ds$race_household_head==1)
     ds$coloured_dummy<-as.integer(ds$race_household_head==2)
-    ds$lnpinc <- log(ds$total_expenditure)
-    ds$agesq <- ds$age*ds$age
-    ds$year_dummy <-year-1995
-    res=lm(lnvis~black_dummy+coloured_dummy+lnpinc+
-             area_type+age+agesq+n_members + year_dummy,data=ds)
-    return(res)
+    print("Regression using only 1995 data")
+    
+    if (type=="no_controls"){
+      res = lm(lnvis~black_dummy+coloured_dummy,data=ds)
+      # the dummies themselves black_dummy + coloured_dummy show negative coefficients for lnvsi as dependent variable
+      return(res)
+    }
+    if (type=="income_controls"){
+      ds$inc <-ds$total_income_of_household_head # income control
+      #ds$incpsv <- as.integer(ds$inc>0) # income control - ignored because we only consider positive income households
+      ds$lninc <-log(ds$inc)# income control
+      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
+      # only lninc is significant
+      res=lm(lnvis~black_dummy+coloured_dummy+ lninc ,data=ds)
+      #TODO: compare with ivreg (and perform the Hausman test)
+      return(res)
+    }
+    if (type == "incpinc_controls"){
+      ds$inc <-ds$total_income_of_household_head # income control
+      ds$lninc <-log(ds$inc)# income control
+      ds$lnpinc <- log(ds$total_expenditure)
+      
+      res=lm(lnvis~black_dummy+coloured_dummy+
+               lninc+lnpinc,data=ds)
+      return(res)
+    }
+    if (type == "iv1") {
+      ds$agesq <- ds$age*ds$age
+      #ds$year_dummy <-year-1995
+      
+      ds$inc <-ds$total_income_of_household_head
+      ds$incpsv <- as.integer(ds$inc>0) # income control
+      ds$lninc <-log(ds$inc)# income control
+      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
+      ds$lsecd <-as.integer(ds$education<8) 
+      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
+      ds$degree <-as.integer(ds$education==13)
+      
+      ds$lnvis <-log(ds$visible_consumption)
+    
+      ds$lnpinc <- log(ds$total_expenditure)
+      
+      res= ivreg(lnvis~black_dummy+coloured_dummy+ lninc+ lnpinc |
+                   . - lnpinc + cbinc + lsecd + secd + degree ,data=ds)
+      return(res)
+      
+    }
+    
+    if (type == "iv2") {
+      ds$agesq <- ds$age*ds$age
+      #ds$year_dummy <-year-1995
+      
+      ds$inc <-ds$total_income_of_household_head
+      ds$incpsv <- as.integer(ds$inc>0) # income control
+      ds$lninc <-log(ds$inc)# income control
+      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
+      ds$lsecd <-as.integer(ds$education<8) 
+      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
+      ds$degree <-as.integer(ds$education==13)
+      
+      ds$lnvis <-log(ds$visible_consumption)
+      
+      ds$lnpinc <- log(ds$total_expenditure)
+      
+      res= ivreg(lnvis~black_dummy+coloured_dummy+ lnpinc  +lsecd |
+                   . - lnpinc + cbinc+lninc +incpsv,data=ds)
+      return(res)
+      
+    }
+    
+    if (type == "ivt1"){
+      ds$agesq <- ds$age*ds$age
+      #ds$year_dummy <-year-1995
+      
+      ds$inc <-ds$total_income_of_household_head
+      ds$incpsv <- as.integer(ds$inc>0) # income control
+      ds$lninc <-log(ds$inc)# income control
+      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
+      ds$lsecd <-as.integer(ds$education<8) 
+      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
+      ds$degree <-as.integer(ds$education==13)
+      ds$year2005 <- as.integer(ds$year==2005)
+      ds$lnvis <-log(ds$visible_consumption)
+      
+      ds$lnpinc <- log(ds$total_expenditure)
+      #res=lm(lnvis~black_dummy+coloured_dummy+ lninc+ lnpinc + year2005,data=ds)
+        
+      res= ivreg(lnvis~black_dummy+coloured_dummy+ lninc+ lnpinc + year2005 |
+                   . - lnpinc + cbinc + lsecd + secd + degree ,data=ds)
+      return(res)
+      
+    }
+    if (type == "ivt2"){
+      ds$agesq <- ds$age*ds$age
+      ds$year2005 <- as.integer(ds$year==2005)
+      
+      ds$inc <-ds$total_income_of_household_head
+      ds$incpsv <- as.integer(ds$inc>0) # income control
+      ds$lninc <-log(ds$inc)# income control
+      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
+      ds$lsecd <-as.integer(ds$education<8) 
+      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
+      ds$degree <-as.integer(ds$education==13)
+      
+      ds$lnvis <-log(ds$visible_consumption)
+      
+      ds$lnpinc <- log(ds$total_expenditure)
+      
+      res= ivreg(lnvis~black_dummy+coloured_dummy+ lnpinc  +lsecd+year2005 |
+                   . - lnpinc + cbinc+lninc +incpsv,data=ds)
+      return(res)
+      
+    }
+    if (type == "ivd1") {
+      ds$agesq <- ds$age*ds$age
+      #ds$year_dummy <-year-1995
+      
+      ds$inc <-ds$total_income_of_household_head
+      ds$incpsv <- as.integer(ds$inc>0) # income control
+      ds$lninc <-log(ds$inc)# income control
+      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
+      ds$lsecd <-as.integer(ds$education<8) 
+      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
+      ds$degree <-as.integer(ds$education==13)
+      
+      ds$lnvis <-log(ds$visible_consumption)
+      
+      ds$lnpinc <- log(ds$total_expenditure)
+      
+      res= ivreg(lnvis~black_dummy+coloured_dummy+ lninc+ lnpinc + age+ n_members + area_type|
+                   . - lnpinc + cbinc + lsecd + secd + degree ,data=ds)
+      return(res)
+      
+    }
+    if (type == "ivd2") {
+      ds$agesq <- ds$age*ds$age
+      #ds$year_dummy <-year-1995
+      
+      ds$inc <-ds$total_income_of_household_head
+      ds$incpsv <- as.integer(ds$inc>0) # income control
+      ds$lninc <-log(ds$inc)# income control
+      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
+      ds$lsecd <-as.integer(ds$education<8) 
+      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
+      ds$degree <-as.integer(ds$education==13)
+      
+      ds$lnvis <-log(ds$visible_consumption)
+      
+      ds$lnpinc <- log(ds$total_expenditure)
+      
+      res= ivreg(lnvis~black_dummy+coloured_dummy+ lnpinc  +lsecd  + age + n_members + area_type |
+                   . - lnpinc + cbinc+lninc +incpsv,data=ds)
+      return(res)
+      
+    }
   }
+  
   stop(paste("Year",year,"not supported"));
 }
 
@@ -426,7 +597,7 @@ combined_data_set<-function(year){
     ohs = get_translated_frame(dat=ohsdat,
                                names=get_ohs_info_columns(year),
                                m=load_ohs_mapping(year))
-
+    
     print("Translated ohs data")
   }
   
@@ -466,7 +637,7 @@ get_translated_frame<-function(dat,names,m){
     print(paste("array_names=",toString(array_names)))
   }
   res=data.frame(dat[,array_names])
-
+  
   if (length(mapped$name)!=length(colnames(res))){
     stop('Error in mapping of columns')
   }
@@ -476,6 +647,7 @@ get_translated_frame<-function(dat,names,m){
 
 # returns NULL when the filenames are ''
 load_diary_file<-function (year){
+  
   s = load_data_file_list();
   ds= s[s$year==year,]
   
@@ -492,12 +664,13 @@ load_diary_file<-function (year){
   if (ds$type =="dta"){
     ff<-ds$filename
     print(paste("Loading File:",ff))
-    return(read.dta(as.character(ff)));    
+    return(read.dta(as.character(ff),convert.factors=FALSE));    
   }
   
   if (ds$type=='' && ds$filename==''){
     return(NULL)
   }
+  
   stop("No valid entry found");
 }
 
