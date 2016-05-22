@@ -375,7 +375,10 @@ Regressions on Income and Expenditure Survey
 \end_layout
 
 \begin_layout Standard
-With no controls(I)
+Kaus considers a black-dummy and coloured-dummy in regression of visible
+ consumption against demographic, time, permanent income and household character
+isitcs.
+ Starting with no controls(I)
 \begin_inset Foot
 status open
 
@@ -387,8 +390,11 @@ lm(lnvis~black_dummy+coloured_dummy)
 
 \end_inset
 
-, the coefficients for coloured and black are negative, but these coefficients
- flip signs after adding income controls(II)
+ (with black-dummy and coloured-dummy), the coefficients for coloured and
+ black are negative (i.e.
+ black and coloured social groups spend less on visible consumption than
+ the white population).
+ However, these coefficients flip signs after adding income controls(II)
 \begin_inset Foot
 status open
 
@@ -408,8 +414,8 @@ lm(lnvis~black_dummy+coloured_dummy+ lninc)
 \end_layout
 
 \begin_layout Standard
-These coefficients for black and coloured groups are even higher when expenditur
-e is added(III)
+The coefficients for black and coloured groups are even higher when expenditure
+ is added(III)
 \begin_inset Foot
 status open
 
@@ -425,13 +431,12 @@ lm(lnvis~black_dummy+coloured_dummy+ lninc+lnpinc)
 \end_inset
 
 .
- The endogeneity of total expenditure is a valid concern and requires instrument
-ation.
- Kaus uses instruments suggested by Charles, Roussanov and Hurst - including
- positive-income-dummy, cube-of-income-level, dummies for under-secondary-educat
-ion, secondary-eduation and degree-education.
- Kaus performs two 2SLS regression - one with income controls and total-expendit
-ure as control variables 
+ The endogeneity of total expenditure requires instrumentation - Kaus uses
+ instruments suggested by Charles, Roussanov and Hurst - including positive-inco
+me-dummy, cube-of-income-level, dummies for under-secondary-education, secondary
+-eduation and degree-education.
+ Kaus then performs two 2SLS regressions - one with income controls and
+ total-expenditure as control variables
 \begin_inset Foot
 status open
 
@@ -447,8 +452,8 @@ ubic.
 
 \end_inset
 
-and the other with education-dummies as control variables (while still using
- instruments) 
+ and the other with education-dummies as control variables (while still
+ using instruments)
 \begin_inset Foot
 status open
 
@@ -456,7 +461,7 @@ status open
 
 \family typewriter
 ivreg(lnvis~black_dummy+coloured_dummy+ lnpinc +lsecd | .
- - lnpinc + cbinc+lninc +in cpsv
+ - lnpinc + cbinc+lninc +incpsv
 \family default
 ) 
 \end_layout
@@ -464,8 +469,15 @@ ivreg(lnvis~black_dummy+coloured_dummy+ lnpinc +lsecd | .
 \end_inset
 
 .
- The instrumentation thus performed (IV) results in lower coefficients for
- the black and coloured dummies for both regressions.
+ The instrumentation thus performed (Specification IV in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "resresults-1"
+
+\end_inset
+
+) results in lower coefficients for the black and coloured dummies for both
+ regressions.
 \end_layout
 
 \begin_layout Standard
@@ -502,23 +514,32 @@ ivreg(lnvis~black_dummy+coloured_dummy+ lnpinc +lsecd + age + n_members
 \end_layout
 
 \begin_layout Standard
-The regression V from the paper is ommitted because the data on visible
- consumption for 2005/2010 wasn't available from datafirst.
+All of the above interpretations match with those reported in Kaus's paper.
+ The regression V from the paper is ommitted for 1995 - as the data on visible
+ consumption from 2005/2010 wasn't available from datafirst to be included
+ in the regression with year-dummies.
  The data from 2000 - is of poor quality (as explained by Kaus) and does
- not have enough houshold characteristics for a detailed analysis.
- For 2005/2010, the field we have information for amongst all fields in
- the visible categories- is the number-of-cars-owned by the household (
- rather than cars purchased in the surveyed period).
- If owned cars were still to be considered the proxy for visible consumption,
- a reversal of signs after adding of income-controls is not observed.
- Other results equivalent to 1995 are summarized in Table 
+ not have enough household characteristic fields for applying an analysis
+ in the Kaus's paper - and was thus discarded altogether.
+ For 2005/2010, the only field amongst all in the visible category available
+ to us - is the number-of-cars-owned by the household ( rather than cars
+ purchased in the surveyed period).
+ Hardly meant to conclusive on visible consumption, if owned cars were still
+ to be considered the proxy for visible consumption, a reversal of signs
+ after adding of income-controls is not observed.
+ Other results equivalent to 1995 result-set are summarized in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "resresults-2"
 
 \end_inset
 
-.
+ (Notice that specification V is possible when more than an year is available
+ for analysis).
+ What the results suggest is only that unlike visible consumption, the ownership
+ of cars is very much influenced by permanent income (and other wealth character
+istics accounting for lower ownership of cars for the black and coloured
+ groups).
 \end_layout
 
 \begin_layout Standard
@@ -865,18 +886,20 @@ Analysis
 The first-change of sign when income controls are added implies that after
  accounting for income of household head, the coloured and black groups
  spend more on visible consumption.
- This is partly because of permanent income - which results in lowered coefficie
-nts as total-expenditure is introduced.
- After resolving the endogeneity concerns (i.e.
- in a regression of visible expenditure as dependent variable and total-expendit
-ure as one of the control variables), the signs are revised - although 
+ Total expenditure is not a perfect proxy of permanent income - which justifies
+ instrumentation.
+ After resolving these endogeneity concerns - with a regression of visible
+ expenditure as dependent variable and total-expenditure as one of the control
+ variables - the signs are revised - although 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- doesn't change a lot.
+ does not change a lot.
  Adding demographic controls to the 2SLS regression - shows significance
  of age, urban/rural area and family size - but coefficients are still not
  lowered significantly.
+ This confirms that coloured and black social groups spend a rather disprportion
+ate amount on visible consumption.
 \end_layout
 
 \begin_layout Standard
@@ -887,6 +910,38 @@ The second claim that the paper is interested in is testing whether the
  This regression shows the effect more on black-social-group than the white-soci
 al-group - a difference that author argues points out alternate ways of
  signaling for white-social-group relative to black-social-group.
+\end_layout
+
+\begin_layout Section*
+AER toolbox ivreg notation
+\end_layout
+
+\begin_layout Standard
+Regressors and instruments in implementaiton of ivreg in R-toolbox AER are
+ specified in a formula with two parts on the right-hand side.
+ The specification - used in this note - can be either of the form - 
+\family typewriter
+y ~ ex + en | ex + in 
+\family default
+or as 
+\family typewriter
+y ~ ex + en | .
+ - en +in 
+\family default
+(where 
+\family typewriter
+ex
+\family default
+ is the set of exogenous variables, 
+\family typewriter
+en
+\family default
+ is the set of endogenous variables and 
+\family typewriter
+in 
+\family default
+the set of instruments) .
+ The latter is the notation used throughout in this note.
 \end_layout
 
 \end_body
