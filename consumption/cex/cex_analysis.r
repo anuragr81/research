@@ -1,11 +1,10 @@
+# duplicates in diary hhdata are not uncommon
 library(foreign)
 require(plyr)
 require(AER)
 
 setwd('c:/local_files/research/consumption/cex/')
-ucc_name<-function(ucc_code){
-  
-}
+
 process_expd<-function(hh)
 {
   hhk=ddply(hh,.(alloc),summarize,n=length(newid))
@@ -14,9 +13,57 @@ process_expd<-function(hh)
   return(hhk)
 }
 
+combine_subfiles<-function (filenames,unsharedkey){
+  res=NULL
+  # perform an rbind over the vector filenames
+  
+  for (filename in filenames){
+    df<-read.dta(filename)
+    if (!is.data.frame(df)){
+      stop(paste("Must be a data frame object:",filename))
+    }
+    if (is.null(res)){
+      columns <-colnames(df)
+      if (!is.null(unsharedkey)){
+        unsharedkeys <- df[,unsharedkey]
+      }
+    } else {
+      if (length(colnames(df))!=length(columns)){
+        stop("Columns of all subfiles must have same size")
+      } else {
+        
+        if (any(colnames(df)!=columns)){
+          print(paste("columns:",toString(columns)))
+          print(paste("columns:",toString(colnames(df))))
+          stop("Columns of all subfiles must match")
+        }
+      }
+      if (!is.null(unsharedkey)){
+        unsharedkeys<-intersect(unsharedkeys,df[,unsharedkey])
+      }
+    }
+    print(paste("size read:",dim(df)))
+    res = rbind(res,df)
+  }
+  if (!is.null(unsharedkey) && length(filenames)>1){
+    if (length(unsharedkeys)>0){
+      stop(paste("column:",unsharedkey," must not be shared across files"));
+    }
+  }
+  
+  print(paste("size returned:",dim(res)))
+  return(res)
+}
+
 load_diary_file <-function(dataset,year){
   if (dataset=="us_cex"){
     # consider gifts in the expd file
+    if (year == 2004){
+      return (combine_subfiles(filenames=c("2004/diary04/diary04/expd041.dta",
+                                           "2004/diary04/diary04/expd042.dta",
+                                           "2004/diary04/diary04/expd043.dta",
+                                           "2004/diary04/diary04/expd044.dta"),unsharedkey="newid"))
+    }
   }
   if (dataset =="sa_ies"){
     
@@ -33,17 +80,15 @@ cex_combined_data_set<-function(year){
   
   ############ PHASE 0 ########################
   
-  hhdat <- load_diary_file("us_cex",year)
+  hhdat <- load_diary_file("us_cex",year) # must provide total and visible expenditure
   
-  
-  ohsdat <-load_ohs_file("us_cex",year)
-  incomedat <-load_income_file("us_cex",year)
+  ohsdat <-load_ohs_file("us_cex",year) # must provide age, gender, highest_educ, ishead, race,family size, area_type
+  incomedat <-load_income_file("us_cex",year) # must provide total income
   
   if (is.null(hhdat)){
     stop("Could not load diary hhdata")
   }
   
-  # duplicates in diary hhdata are not uncommon
   print("Ensuring duplicates do NOT exist in the diary hhdata")
   hhdat = unique(hhdat)
   
