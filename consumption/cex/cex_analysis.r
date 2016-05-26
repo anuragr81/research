@@ -100,8 +100,6 @@ ohs_info_columns_us_cex_2004<-function(){
   return(c("hhid","age","gender","educ","race","hsize","urban_rural","popsize","highest_education"))
 }
 
-
-
 get_ohs_info_columns<-function(dataset,year){
   
   if (dataset == "us_cex"){
@@ -239,29 +237,7 @@ merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
   vis<-get_visible_categories_cex_2004(hh=hh,visible_categories = visible_categories_us_cex_2004())
   hh_total_exp <-ddply(hh,.(hhid),summarize,total_expediture=sum(cost))
   hh11<-merge(vis,hh_total_exp)
-  #hh11=data.frame(hhid = hh$hhid,
-  #                gender = hh$gender_household_head,
-  #                total_expenditure = hh$total_expenditure);
-  #                race_household_head = hh$race_household_head,
-  #                visible_consumption = hh$visible_consumption,
-  #                area_type=hh$area_type,
-  #                n_members = hh$n_members);
-  
-  
-  #income_table <- data.frame(hhid=income$hhid,persno=income$persno,
-  #                           total_income_of_household_head=income$total_income)
-  
-  #age_income_table <- merge(age_table,income_table)
-  
-  return(ohs)
-  ohs11=data.frame(hhid=ohs$hhid,
-                   persno=ohs$persno,
-                   age=ohs$age,
-                   education=ohs$highest_education)
-  
-  ohs11<-merge(ohs11,age_income_table)
-  # select ohs data for members with age and gender of the household head
-  x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
+  x<-merge(hh11,ohs)
   return(x);
 }
 
