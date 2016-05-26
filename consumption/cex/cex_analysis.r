@@ -2,6 +2,7 @@
 library(foreign)
 require(plyr)
 require(AER)
+source('../panelfunc.R')
 
 setwd('c:/local_files/research/consumption/cex/')
 
@@ -63,6 +64,7 @@ load_diary_file <-function(dataset,year){
                                            "2004/diary04/diary04/expd042.dta",
                                            "2004/diary04/diary04/expd043.dta",
                                            "2004/diary04/diary04/expd044.dta"),unsharedkey="newid"))
+      
     }
   }
   if (dataset =="sa_ies"){
@@ -71,6 +73,216 @@ load_diary_file <-function(dataset,year){
   
   stop(paste("Unknown dataset:",dataset))
 }
+
+load_ohs_file <-function(dataset,year){
+  if (dataset=="us_cex"){
+    # consider gifts in the expd file
+    if (year == 2004){
+      return (combine_subfiles(filenames=c("2004/diary04/diary04/fmld041.dta",
+                                           "2004/diary04/diary04/fmld042.dta",
+                                           "2004/diary04/diary04/fmld043.dta",
+                                           "2004/diary04/diary04/fmld044.dta"),unsharedkey="newid"))
+    }
+  }
+  if (dataset =="sa_ies"){
+    
+  }
+  
+  stop(paste("Unknown dataset:",dataset))
+}
+
+
+diary_info_columns_us_cex_2004<-function(){
+  return(c("hhid","cost","ucc","qredate","alloc"));
+}
+
+ohs_info_columns_us_cex_2004<-function(){
+  return(c("hhid","age","gender","educ","race","hsize","urban_rural","popsize"))
+}
+
+
+
+get_ohs_info_columns<-function(dataset,year){
+  
+  if (dataset == "us_cex"){
+    if (year ==2004){
+      return(ohs_info_columns_us_cex_2004());
+    }
+    stop(paste("Year not found for us_cex:",year))
+  }
+  stop(paste("Could not find ohs info columns for dataset:",dataset))
+}
+
+
+get_diary_info_columns<-function(dataset,year){
+  
+  if(dataset== "us_cex"){
+    if (year == 2004 ){
+      return(diary_info_columns_us_cex_2004())
+    }
+    stop(paste("Could not find diary info columns for year:",year))
+  }
+  stop(paste("Unknown dataset:",dataset))
+}
+
+get_ignored_hhids<-function(hh,ohs,income){
+  non_topcoded_hhids=unique(hh[hh$alloc>=2,]$newid);
+  print(paste("Percentage of topcoded households ignored:",100*length(non_topcoded_hhids)/dim(hh)[1]));
+  return(non_topcoded_hhids);
+}
+
+load_ohs_mapping<-function(dataset,year){
+  
+  if (dataset == "us_cex") {
+    if (year ==2004){
+      return(ohs_mapping_us_cex_2004());
+    }
+    stop(paste("Year not found:",year))
+  }
+  stop(paste('No dataset for:',dataset));
+  
+}
+
+hh_us_cex_mapping_2004<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="newid",name="hhid"))
+  s= rbind(s,data.frame(iesname="cost",name="cost"))
+  s= rbind(s,data.frame(iesname="qredate",name="qredate"))
+  s= rbind(s,data.frame(iesname="alloc",name="alloc"))
+  s= rbind(s,data.frame(iesname="ucc",name="ucc"))
+  return(s)
+  
+}
+
+ohs_mapping_us_cex_2004<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="newid",name="hhid"))
+  s= rbind(s,data.frame(iesname="age_ref",name="age"))
+  s= rbind(s,data.frame(iesname="sex_ref",name="gender"))
+  s= rbind(s,data.frame(iesname="educ_ref",name="educ"))
+  s= rbind(s,data.frame(iesname="ref_race",name="race"))
+  s= rbind(s,data.frame(iesname="fam_size",name="hsize"))
+  s= rbind(s,data.frame(iesname="popsize",name="popsize"))
+  s= rbind(s,data.frame(iesname="urban_rural",name="bls_urbn"))
+  return(s)
+}
+
+load_diary_fields_mapping<-function(dataset,year){
+  if (dataset=="us_cex"){
+    
+    if (year == 2004){
+      return(hh_us_cex_mapping_2004());
+    }
+    stop(paste('No entry found for',year));
+  }
+}
+
+
+load_income_file<-function (dataset,year){
+  
+  if (dataset== "us_cex"){
+    if (year == 2004){
+      return(NULL)
+    }
+    stop(paste("No us_cex data for:",year))
+  }
+  
+  stop(paste("Unknown dataset: ",dataset))
+}
+
+visible_categories_us_cex_2004<-function(){
+  
+  # personal care, clothing and apparel (including footwear),jewelry, cars
+  return(c('miscpersonalcare', 'haircareproducts', 'nonelectrichairequipment', 'wigshairpieces',
+           'oralhygieneproducts', 'shavingneeds', 'cosmetics', 'miscpersonalcare',
+           'electricalpersonalcareequipment', 'femalepersonalcareservices', 
+           'malepersonalcareservices', 'personalcareappliancesrentalrepair', 'menssuits', 
+           'menssportjackets', 'mensformaljackets', 'mensunderwear', 'menshosiery',
+           'menssleepwear', 'mensaccessories', 'menssweater', 'mensactivesportswear', 
+           'mensshirts', 'menspants', 'mensshorts_exathletic', 'mensuniforms', 
+           'boyscoatsjackets', 'boyssweaters', 'boysshirts', 'boysunderwear',
+           'boyssleepwear', 'boyshosiery', 'boysaccessories', 
+           'boyssuitssportcoats', 'boyspants', 'boysshortsexcathletic', 'boysuniformsactivesportswear',
+           'womenscoats', 'womensdresses', 'womenssportcoats', 
+           'womenssweaters', 'womensshirts', 'womensskirts', 'womenspants',
+           'womensshorts_exathletic', 'womensactivesportswear', 'womenssleepwear', 
+           'womensundergarments', 'womenshosiery', 'womenssuits', 'womensaccessories',
+           'womensuniforms', 'girlscoatsjackets', 'girlsdressessuits', 'girlssportcoats',
+           'girlsskirtspants', 'girlsshortsexathletic', 'girlsactivesportswear', 
+           'girlsundergarments', 'girlshosiery', 'girlsaccessories', 'girlsuniforms',
+           'mensfootwear', 'boysfootwear', 'girlsfootwear', 'womensfootwear', 'infantscoats',
+           'infantsdresses', 'infantsundergarments', 'infantssleepingwear', 'infantsaccessories', 
+           'sewingmaterial_clothes', 'watches', 'jewelry', 'shoerepair', 'apparelcleaning_coinoperated',
+           'clothes_repair', 'clothing_rental', 'watchjewelryrepair', 'apparell_notcoinoperated', 
+           'newcars', 'newtrucks', 'newmotorcycles', 'carlease', 'trucklease', 'usedcars', 
+           'usedtrucks', 'usedmotorcycles', 'usedaircraft'))
+}
+
+
+get_ucc_mapping_2004<-function(){
+  mfile<-read.csv('2004/ucc_mapping.csv')
+  return(mfile)
+}
+
+get_visible_categories_cex_2004<-function(hh,visible_categories){
+  vis<-hh[is.element(hh$uccname,visible_categories),] # get only visible categories
+  vis<-ddply(vis,.(hhid),summarize,visible_consumption=sum(cost))
+  return(vis)
+}
+merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
+  
+  # hh's ucc should be merged first
+  ucc_mapping<-get_ucc_mapping_2004()
+  print (paste("The columns of ucc_mapping: ",colnames(ucc_mapping)));
+  hh<-merge(hh,ucc_mapping)
+
+  vis<-get_visible_categories_cex_2004(hh=hh,visible_categories = visible_categories_us_cex_2004())
+  hh_total_exp <-ddply(hh,.(hhid),summarize,total_expediture=sum(cost))
+  return(merge(vis,hh_total_exp))
+  hh11=data.frame(hhid = hh$hhid,
+  #                gender = hh$gender_household_head,
+                  total_expenditure = hh$total_expenditure);
+  #                race_household_head = hh$race_household_head,
+  #                visible_consumption = hh$visible_consumption,
+  #                area_type=hh$area_type,
+  #                n_members = hh$n_members);
+  
+  
+  #income_table <- data.frame(hhid=income$hhid,persno=income$persno,
+  #                           total_income_of_household_head=income$total_income)
+  
+  #age_income_table <- merge(age_table,income_table)
+  
+  ohs11=data.frame(hhid=ohs$hhid,
+                   persno=ohs$persno,
+                   age=ohs$age,
+                   education=ohs$highest_education)
+  
+  ohs11<-merge(ohs11,age_income_table)
+  # select ohs data for members with age and gender of the household head
+  x=merge(hh11,ohs11)# merges on common columns in h11,ohs11
+  return(x);
+}
+
+#@desc - merges translated data into one big data frame. There are
+#        two phases of normalization. The first is merely a translation
+#        into well-known names (age,gender etc.). The second phase is 
+#        translation into dependent variables (each of which can correspond to
+#        one function). The merging function here encapsulates the extraction from
+#        all tables and merging into a combined frame.
+merge_hh_ohs_income_data<-function(dataset,year,hh,ohs,income){
+  
+  if (dataset == "us_cex"){
+  if (year == 2004){
+    return(merge_hh_ohs_income_data_us_cex_2004(hh=hh,ohs=ohs,income=income))
+  }
+    
+    stop(paste("Method to merge data for year:",year," not found"))
+  }
+  stop(paste("Method to merge data for dataset:",dataset," not found"))
+}
+
+
 cex_combined_data_set<-function(year){
   
   #1-black
@@ -82,8 +294,11 @@ cex_combined_data_set<-function(year){
   
   hhdat <- load_diary_file("us_cex",year) # must provide total and visible expenditure
   
-  ohsdat <-load_ohs_file("us_cex",year) # must provide age, gender, highest_educ, ishead, race,family size, area_type
-  incomedat <-load_income_file("us_cex",year) # must provide total income
+  ohsdat <-load_ohs_file("us_cex",year) # (using fmld) must provide age (age_ref), gender(sex_ref), 
+  # highest_educ(educ_ref), ishead(no_earnr,earncomp - all reference person data),
+  # race(ref_race),family size (fam_size),
+  # area_type (popsize,bls_urbn)
+  incomedat <-load_income_file("us_cex",year) # must provide total income (fincaftm)
   
   if (is.null(hhdat)){
     stop("Could not load diary hhdata")
@@ -97,22 +312,22 @@ cex_combined_data_set<-function(year){
   # translated frame makes the data available in a universal dictionary (age, gender etc.)
   
   hh = get_translated_frame(dat=hhdat,
-                            names=get_diary_info_columns(year),
-                            m=load_diary_fields_mapping(year))
+                            names=get_diary_info_columns("us_cex",year),
+                            m=load_diary_fields_mapping("us_cex",year))
   print("Translated hh data")
   # optional data files
   if (!is.null(ohsdat)){
     ohs = get_translated_frame(dat=ohsdat,
-                               names=get_ohs_info_columns(year),
-                               m=load_ohs_mapping(year))
+                               names=get_ohs_info_columns("us_cex",year),
+                               m=load_ohs_mapping("us_cex",year))
     
     print("Translated ohs data")
   }
   
   if (!is.null(incomedat)){
     income = get_translated_frame(dat=incomedat,
-                                  names=get_income_info_columns(year),
-                                  m=load_income_mapping(year))
+                                  names=get_income_info_columns("us_cex",year),
+                                  m=load_income_mapping("us_cex",year))
     print("Translated income data")
   }
   
@@ -120,6 +335,10 @@ cex_combined_data_set<-function(year){
   ############ PHASE 2 - Aggregation and Merge ########################
   # merge criteria is defined for every dependent variable
   
-  dstruct<-merge_hh_ohs_income_data(hh=hh,ohs=ohs,income=income,year=year);
+  ignored_hhids <- get_ignored_hhids(hhdat,ohsdat,incomedat);
+  
+  print("Pending ignoring of hhids")
+  
+  dstruct<-merge_hh_ohs_income_data(dataset="us_cex",hh=hh,ohs=ohs,income=income,year=year);
   return(dstruct);
 }

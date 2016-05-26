@@ -2,6 +2,7 @@ library(foreign)
 require(plyr)
 require(AER)
 source('datanormalizer.R')
+source('../panelfunc.R')
 
 setwd('c:/local_files/research/consumption/sa/')
 
@@ -567,6 +568,7 @@ combined_data_set<-function(year){
   
   #1-black
   #2-coloured
+  print("Translated hh data")
   #3-asian
   #4-white
   
@@ -591,7 +593,6 @@ combined_data_set<-function(year){
   hh = get_translated_frame(dat=hhdat,
                             names=get_diary_info_columns(year),
                             m=load_diary_fields_mapping(year))
-  print("Translated hh data")
   # optional data files
   if (!is.null(ohsdat)){
     ohs = get_translated_frame(dat=ohsdat,
@@ -617,33 +618,6 @@ combined_data_set<-function(year){
 }
 
 # Usage: get_translated_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
-get_translated_frame<-function(dat,names,m){
-  isDebug<-FALSE
-  if (isDebug){
-    print(names)
-  }
-  if (!is.vector(names)){
-    stop(paste("names of type(",toString(class(names)),") must be a vector"))
-  }
-  
-  #m= mapping();
-  
-  mapped<-m[is.element(m$name,names),]
-  array_names <- as.character(mapped$iesname)
-  
-  
-  if (isDebug==TRUE){
-    print(paste("colnames(dat)=",toString(colnames(dat))))
-    print(paste("array_names=",toString(array_names)))
-  }
-  res=data.frame(dat[,array_names])
-  
-  if (length(mapped$name)!=length(colnames(res))){
-    stop('Error in mapping of columns')
-  }
-  colnames(res)<-mapped$name
-  return(res)
-}
 
 # returns NULL when the filenames are ''
 load_diary_file<-function (year){
