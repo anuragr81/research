@@ -97,7 +97,7 @@ diary_info_columns_us_cex_2004<-function(){
 }
 
 ohs_info_columns_us_cex_2004<-function(){
-  return(c("hhid","age","gender","educ","race","hsize","urban_rural","popsize"))
+  return(c("hhid","age","gender","educ","race","hsize","urban_rural","popsize","highest_education"))
 }
 
 
@@ -159,11 +159,11 @@ ohs_mapping_us_cex_2004<-function(){
   s= rbind(s,data.frame(iesname="newid",name="hhid"))
   s= rbind(s,data.frame(iesname="age_ref",name="age"))
   s= rbind(s,data.frame(iesname="sex_ref",name="gender"))
-  s= rbind(s,data.frame(iesname="educ_ref",name="educ"))
+  s= rbind(s,data.frame(iesname="educ_ref",name="highest_education"))
   s= rbind(s,data.frame(iesname="ref_race",name="race"))
   s= rbind(s,data.frame(iesname="fam_size",name="hsize"))
   s= rbind(s,data.frame(iesname="popsize",name="popsize"))
-  s= rbind(s,data.frame(iesname="urban_rural",name="bls_urbn"))
+  s= rbind(s,data.frame(iesname="bls_urbn",name="urban_rural"))
   return(s)
 }
 
@@ -238,10 +238,10 @@ merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
 
   vis<-get_visible_categories_cex_2004(hh=hh,visible_categories = visible_categories_us_cex_2004())
   hh_total_exp <-ddply(hh,.(hhid),summarize,total_expediture=sum(cost))
-  return(merge(vis,hh_total_exp))
-  hh11=data.frame(hhid = hh$hhid,
+  hh11<-merge(vis,hh_total_exp)
+  #hh11=data.frame(hhid = hh$hhid,
   #                gender = hh$gender_household_head,
-                  total_expenditure = hh$total_expenditure);
+  #                total_expenditure = hh$total_expenditure);
   #                race_household_head = hh$race_household_head,
   #                visible_consumption = hh$visible_consumption,
   #                area_type=hh$area_type,
@@ -253,6 +253,7 @@ merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
   
   #age_income_table <- merge(age_table,income_table)
   
+  return(ohs)
   ohs11=data.frame(hhid=ohs$hhid,
                    persno=ohs$persno,
                    age=ohs$age,
