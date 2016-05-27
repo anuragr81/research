@@ -20,7 +20,7 @@ run_regression_cex<-function(ds,year,type){
     
     ds$lnvis<-log(ds$visible_consumption)
     ds$black_dummy <-as.integer(ds$race==2)
-    ds$hispanic_dummy<-length(as.character(ds$horref1))>0
+    ds$hispanic_dummy<-length(as.character(ds$horref1))>0 & as.integer(ds$race)!=1 & as.integer(ds$race)!=2 # neither black nor white
     print("Regression using only 2004 data")
     
     if (type=="no_controls"){
