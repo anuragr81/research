@@ -1,8 +1,10 @@
+
 # duplicates in diary hhdata are not uncommon
 library(foreign)
 require(plyr)
 require(AER)
 source('../panelfunc.R')
+source('../regressions.R')
 
 setwd('c:/local_files/research/consumption/cex/')
 
@@ -43,7 +45,7 @@ combine_subfiles<-function (filenames,unsharedkey){
         unsharedkeys<-intersect(unsharedkeys,df[,unsharedkey])
       }
     }
-    print(paste("size read:",dim(df)))
+    print(paste("For file:",filename ," read data-frame of size :",dim(df)[1],"x",dim(df)[2]))
     res = rbind(res,df)
   }
   if (!is.null(unsharedkey) && length(filenames)>1){
@@ -52,7 +54,7 @@ combine_subfiles<-function (filenames,unsharedkey){
     }
   }
   
-  print(paste("size returned:",dim(res)))
+  print(paste("Total size from files:",dim(res)[1],"x",dim(res)[2]))
   return(res)
 }
 
@@ -97,7 +99,7 @@ diary_info_columns_us_cex_2004<-function(){
 }
 
 ohs_info_columns_us_cex_2004<-function(){
-  return(c("hhid","age","gender","educ","race","hsize","urban_rural","popsize","highest_education"))
+  return(c("hhid","age","gender","educ","race","hsize","income","urban_rural","popsize","highest_education"))
 }
 
 get_ohs_info_columns<-function(dataset,year){
@@ -160,6 +162,7 @@ ohs_mapping_us_cex_2004<-function(){
   s= rbind(s,data.frame(iesname="educ_ref",name="highest_education"))
   s= rbind(s,data.frame(iesname="ref_race",name="race"))
   s= rbind(s,data.frame(iesname="fam_size",name="hsize"))
+  s= rbind(s,data.frame(iesname="fincaftm",name="income"))
   s= rbind(s,data.frame(iesname="popsize",name="popsize"))
   s= rbind(s,data.frame(iesname="bls_urbn",name="urban_rural"))
   return(s)
@@ -237,8 +240,10 @@ merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
   vis<-get_visible_categories_cex_2004(hh=hh,visible_categories = visible_categories_us_cex_2004())
   hh_total_exp <-ddply(hh,.(hhid),summarize,total_expediture=sum(cost))
   hh11<-merge(vis,hh_total_exp)
-  x<-merge(hh11,ohs)
-  return(x);
+  ds<-merge(hh11,ohs)
+  # post-processing
+  ds$race <-as.integer(ds$race)
+  return(ds);
 }
 
 #@desc - merges translated data into one big data frame. There are
