@@ -236,11 +236,11 @@ merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
   
   # hh's ucc should be merged first
   ucc_mapping<-get_ucc_mapping_2004()
-  print (paste("The columns of ucc_mapping: ",colnames(ucc_mapping)));
+  print (paste("The columns of ucc_mapping: ",toString(colnames(ucc_mapping))))
   hh<-merge(hh,ucc_mapping)
 
   vis<-get_visible_categories_cex_2004(hh=hh,visible_categories = visible_categories_us_cex_2004())
-  hh_total_exp <-ddply(hh,.(hhid),summarize,total_expediture=sum(cost))
+  hh_total_exp <-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
   hh11<-merge(vis,hh_total_exp)
   ds<-merge(hh11,ohs)
   # post-processing
