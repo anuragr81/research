@@ -75,6 +75,13 @@ load_diary_file <-function(dataset,year){
                                            "2009/diary09/diary09/expd094.dta"),unsharedkey="newid"))
       
     }
+    if (year == 2014){
+      return (combine_subfiles(filenames=c("2014/diary14/expd141.dta",
+                                           "2014/diary14/expd142.dta",
+                                           "2014/diary14/expd143.dta",
+                                           "2014/diary14/expd144.dta"),unsharedkey="newid"))
+      
+    }
     stop("paste- year :", year," not supported")
   }
   if (dataset =="sa_ies"){
@@ -87,7 +94,7 @@ load_diary_file <-function(dataset,year){
 load_ohs_file <-function(dataset,year){
   if (dataset=="us_cex"){
     # consider gifts in the expd file
-    if (year == 2004){
+        if (year == 2004){
       return (combine_subfiles(filenames=c("2004/diary04/diary04/fmld041.dta",
                                            "2004/diary04/diary04/fmld042.dta",
                                            "2004/diary04/diary04/fmld043.dta",
@@ -98,6 +105,14 @@ load_ohs_file <-function(dataset,year){
                                            "2009/diary09/diary09/fmld092.dta",
                                            "2009/diary09/diary09/fmld093.dta",
                                            "2009/diary09/diary09/fmld094.dta"),unsharedkey="newid"))
+      
+    }
+    
+    if (year ==2014){
+      return (combine_subfiles(filenames=c("2014/diary14/fmld141.dta",
+                                           "2014/diary14/fmld142.dta",
+                                           "2014/diary14/fmld143.dta",
+                                           "2014/diary14/fmld144.dta"),unsharedkey="newid"))
       
     }
     stop(paste("year: ",year," not supported"))
@@ -112,7 +127,7 @@ load_ohs_file <-function(dataset,year){
 
 
 diary_info_columns_us_cex_2004<-function(){
-  return(c("hhid","cost","ucc","qredate","alloc"));
+  return(c("hhid","cost","ucc","alloc"));
 }
 
 ohs_info_columns_us_cex_2004<-function(){
@@ -122,7 +137,7 @@ ohs_info_columns_us_cex_2004<-function(){
 get_ohs_info_columns<-function(dataset,year){
   
   if (dataset == "us_cex"){
-    if (year ==2004 || year ==2009){
+    if (year ==2004 || year ==2009|| year == 2014){
       return(ohs_info_columns_us_cex_2004());
     }
     stop(paste("Year not found for us_cex:",year))
@@ -134,7 +149,7 @@ get_ohs_info_columns<-function(dataset,year){
 get_diary_info_columns<-function(dataset,year){
   
   if(dataset== "us_cex"){
-    if (year == 2004 || year == 2009){
+    if (year == 2004 || year == 2009|| year == 2014){
       return(diary_info_columns_us_cex_2004())
     }
     stop(paste("Could not find diary info columns for year:",year))
@@ -152,7 +167,7 @@ get_ignored_hhids<-function(hh,ohs,income){
 load_ohs_mapping<-function(dataset,year){
   
   if (dataset == "us_cex") {
-    if (year ==2004 || year == 2009){
+    if (year ==2004 || year == 2009 || year == 2014){
       return(ohs_mapping_us_cex_2004());
     }
     stop(paste("Year not found:",year))
@@ -165,7 +180,6 @@ hh_us_cex_mapping_2004<-function(){
   s = data.frame(iesname=NULL,name=NULL)
   s= rbind(s,data.frame(iesname="newid",name="hhid"))
   s= rbind(s,data.frame(iesname="cost",name="cost"))
-  s= rbind(s,data.frame(iesname="qredate",name="qredate"))
   s= rbind(s,data.frame(iesname="alloc",name="alloc"))
   s= rbind(s,data.frame(iesname="ucc",name="ucc"))
   return(s)
@@ -190,7 +204,7 @@ ohs_mapping_us_cex_2004<-function(){
 load_diary_fields_mapping<-function(dataset,year){
   if (dataset=="us_cex"){
     
-    if (year == 2004 || year == 2009){
+    if (year == 2004 || year == 2009|| year == 2014){
       return(hh_us_cex_mapping_2004());
     }
     stop(paste('No entry found for',year));
@@ -276,7 +290,7 @@ merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
 merge_hh_ohs_income_data<-function(dataset,year,hh,ohs,income){
   
   if (dataset == "us_cex"){
-    if (year == 2004 || year == 2009){
+    if (year == 2004 || year == 2009|| year == 2014){
       ds <-merge_hh_ohs_income_data_us_cex_2004(hh=hh,ohs=ohs,income=income)
       ds$year <- rep(year,dim(ds)[1])
       return(ds)
