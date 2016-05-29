@@ -1,4 +1,12 @@
 
+inc_control<-function(inc){
+  if (inc<=0){
+    return(0)
+  } else {
+    return(log(inc));
+  }
+}
+
 run_regression_cex<-function(ds,type){
 
   
@@ -10,10 +18,10 @@ run_regression_cex<-function(ds,type){
     
     # Do NOT consider hhds with zero income heads
     n_all_income<-length(ds$hhid);
-    ds <- ds[ds$income>0,]
-    n_cur<-length(ds$hhid)
-    print (paste("Ignoring ",round(100*(1- n_cur/n_all_income),3),
-                 " % households(hhids having heads with zero income) at sample size=",n_cur))
+    #ds <- ds[ds$income>0,]
+    #n_cur<-length(ds$hhid)
+    #print (paste("Ignoring ",round(100*(1- n_cur/n_all_income),3),
+    #             " % households(hhids having heads with zero income) at sample size=",n_cur))
     ds<-ds[ds$visible_consumption>0,]
     n_vis<-length(ds$hhid)
     print (paste("Ignoring altogether",round(100*(1- n_vis/n_all_income),3),
@@ -36,25 +44,25 @@ run_regression_cex<-function(ds,type){
       return(res)
     }
     if (type=="income_controls"){
-      ds$inc <-ds$income # income control
-      #ds$incpsv <- as.integer(ds$inc>0) # income control - ignored because we only consider positive income households
-      ds$lninc <-log(ds$inc)# income control
-      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
+      print("Pending addition of industry and occupation codes ")
+      ds$incpsv <- as.integer(ds$income>0)
+      ds$lninc <-sapply(ds$income,inc_control) # income control
+      ds$cbinc <- ds$income*ds$income*ds$income # income control
       # only lninc is significant
-      res=lm(lnvis~black_dummy+hispanic_dummy+ lninc ,data=ds)
+      res=lm(lnvis~black_dummy+hispanic_dummy+ lninc+cbinc + incpsv ,data=ds)
       #TODO: compare with ivreg (and perform the Hausman test)
       return(res)
     }
     if (type == "incpinc_controls"){
-      ds$inc <-ds$income # income control
-      ds$lninc <-log(ds$inc)# income control
+      print("No income controls in incpinc")
       ds$lnpinc <- log(ds$total_expenditure)
       
       res=lm(lnvis~black_dummy+hispanic_dummy+
-               lninc+lnpinc,data=ds)
+               lnpinc,data=ds)
       return(res)
     }
     if (type == "iv1") {
+      print("Pending addition of industry and occupation codes ")
       ds$agesq <- ds$age*ds$age
       #ds$year_dummy <-year-1995
       
