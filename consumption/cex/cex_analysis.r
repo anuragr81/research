@@ -68,6 +68,14 @@ load_diary_file <-function(dataset,year){
                                            "2004/diary04/diary04/expd044.dta"),unsharedkey="newid"))
       
     }
+    if (year == 2009){
+      return (combine_subfiles(filenames=c("2009/diary09/diary09/expd091.dta",
+                                           "2009/diary09/diary09/expd092.dta",
+                                           "2009/diary09/diary09/expd093.dta",
+                                           "2009/diary09/diary09/expd094.dta"),unsharedkey="newid"))
+      
+    }
+    stop("paste- year :", year," not supported")
   }
   if (dataset =="sa_ies"){
     
@@ -85,6 +93,15 @@ load_ohs_file <-function(dataset,year){
                                            "2004/diary04/diary04/fmld043.dta",
                                            "2004/diary04/diary04/fmld044.dta"),unsharedkey="newid"))
     }
+    if (year ==2009){
+      return (combine_subfiles(filenames=c("2009/diary09/diary09/fmld091.dta",
+                                           "2009/diary09/diary09/fmld092.dta",
+                                           "2009/diary09/diary09/fmld093.dta",
+                                           "2009/diary09/diary09/fmld094.dta"),unsharedkey="newid"))
+      
+    }
+    stop(paste("year: ",year," not supported"))
+    
   }
   if (dataset =="sa_ies"){
     
@@ -105,7 +122,7 @@ ohs_info_columns_us_cex_2004<-function(){
 get_ohs_info_columns<-function(dataset,year){
   
   if (dataset == "us_cex"){
-    if (year ==2004){
+    if (year ==2004 || year ==2009){
       return(ohs_info_columns_us_cex_2004());
     }
     stop(paste("Year not found for us_cex:",year))
@@ -117,7 +134,7 @@ get_ohs_info_columns<-function(dataset,year){
 get_diary_info_columns<-function(dataset,year){
   
   if(dataset== "us_cex"){
-    if (year == 2004 ){
+    if (year == 2004 || year == 2009){
       return(diary_info_columns_us_cex_2004())
     }
     stop(paste("Could not find diary info columns for year:",year))
@@ -135,7 +152,7 @@ get_ignored_hhids<-function(hh,ohs,income){
 load_ohs_mapping<-function(dataset,year){
   
   if (dataset == "us_cex") {
-    if (year ==2004){
+    if (year ==2004 || year == 2009){
       return(ohs_mapping_us_cex_2004());
     }
     stop(paste("Year not found:",year))
@@ -173,7 +190,7 @@ ohs_mapping_us_cex_2004<-function(){
 load_diary_fields_mapping<-function(dataset,year){
   if (dataset=="us_cex"){
     
-    if (year == 2004){
+    if (year == 2004 || year == 2009){
       return(hh_us_cex_mapping_2004());
     }
     stop(paste('No entry found for',year));
@@ -184,10 +201,8 @@ load_diary_fields_mapping<-function(dataset,year){
 load_income_file<-function (dataset,year){
   
   if (dataset== "us_cex"){
-    if (year == 2004){
-      return(NULL)
-    }
-    stop(paste("No us_cex data for:",year))
+    return(NULL)
+    #stop(paste("No us_cex data for:",year))
   }
   
   stop(paste("Unknown dataset: ",dataset))
@@ -235,13 +250,17 @@ get_visible_categories_cex_2004<-function(hh,visible_categories){
 merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
   
   # hh's ucc should be merged first
+  print("Reading ucc mapping file")
   ucc_mapping<-get_ucc_mapping_2004()
-  print (paste("The columns of ucc_mapping: ",toString(colnames(ucc_mapping))))
+  print (paste("Merging with ucc_mapping (columns: ",toString(colnames(ucc_mapping)),")"))
   hh<-merge(hh,ucc_mapping)
-
+  print ("Obtaining visible categories")
   vis<-get_visible_categories_cex_2004(hh=hh,visible_categories = visible_categories_us_cex_2004())
+  print ("Running ddply for total expenditures")
   hh_total_exp <-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
+  print("Merging visual expenditures")
   hh11<-merge(vis,hh_total_exp)
+  print("Merging personal ohs file")
   ds<-merge(hh11,ohs)
   # post-processing
   ds$race <-as.integer(ds$race)
@@ -257,9 +276,11 @@ merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
 merge_hh_ohs_income_data<-function(dataset,year,hh,ohs,income){
   
   if (dataset == "us_cex"){
-  if (year == 2004){
-    return(merge_hh_ohs_income_data_us_cex_2004(hh=hh,ohs=ohs,income=income))
-  }
+    if (year == 2004 || year == 2009){
+      ds <-merge_hh_ohs_income_data_us_cex_2004(hh=hh,ohs=ohs,income=income)
+      ds$year <- rep(year,dim(ds)[1])
+      return(ds)
+    }
     
     stop(paste("Method to merge data for year:",year," not found"))
   }

@@ -57,12 +57,12 @@ run_regression_cex<-function(ds,year,type){
       ds$agesq <- ds$age*ds$age
       #ds$year_dummy <-year-1995
       
-      ds$inc <-ds$total_income_of_household_head
+      ds$inc <-ds$income
       ds$incpsv <- as.integer(ds$inc>0) # income control
       ds$lninc <-log(ds$inc)# income control
       ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
-      ds$lsecd <-as.integer(ds$education<8) 
-      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
+      ds$lsecd <-as.integer(ds$education<12) 
+      ds$secd <- as.integer(ds$education==12)
       ds$degree <-as.integer(ds$education==13)
       
       ds$lnvis <-log(ds$visible_consumption)
