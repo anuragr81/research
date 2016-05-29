@@ -94,7 +94,7 @@ load_diary_file <-function(dataset,year){
 load_ohs_file <-function(dataset,year){
   if (dataset=="us_cex"){
     # consider gifts in the expd file
-        if (year == 2004){
+    if (year == 2004){
       return (combine_subfiles(filenames=c("2004/diary04/diary04/fmld041.dta",
                                            "2004/diary04/diary04/fmld042.dta",
                                            "2004/diary04/diary04/fmld043.dta",
@@ -301,6 +301,18 @@ merge_hh_ohs_income_data<-function(dataset,year,hh,ohs,income){
   stop(paste("Method to merge data for dataset:",dataset," not found"))
 }
 
+combined_years_ds<-function(years)
+{
+  if (!is.vector(years)){
+    stop("years must be a vector")
+  }
+  resds <-NULL
+  for (year in years){
+    ds=cex_combined_data_set(year)
+    resds = rbind(resds,ds)
+  }
+  return(resds)
+}
 
 cex_combined_data_set<-function(year){
   

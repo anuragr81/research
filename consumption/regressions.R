@@ -1,6 +1,7 @@
 
-run_regression_cex<-function(ds,year,type){
-  if (year==2004){
+run_regression_cex<-function(ds,type){
+
+  
     # ln(visible_consumption) ~ black_dummy + hispanic_dummy + ln(pInc) 
     #     + area_type + age + age*age + n_members + year_dummy
     if (class(ds$race)!="integer"){
@@ -61,16 +62,16 @@ run_regression_cex<-function(ds,year,type){
       ds$incpsv <- as.integer(ds$inc>0) # income control
       ds$lninc <-log(ds$inc)# income control
       ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
-      ds$lsecd <-as.integer(ds$education<12) 
-      ds$secd <- as.integer(ds$education==12)
-      ds$degree <-as.integer(ds$education==13)
-      
+      ds$lsecd <-as.integer(ds$highest_education<12) 
+      ds$secd <- as.integer(ds$highest_education==12)
+      ds$college <-as.integer(ds$highest_education==13)
+      ds$degree <-as.integer(ds$highest_education>=14)
       ds$lnvis <-log(ds$visible_consumption)
       
       ds$lnpinc <- log(ds$total_expenditure)
       
       res= ivreg(lnvis~black_dummy+hispanic_dummy+ lninc+ lnpinc |
-                   . - lnpinc + cbinc + lsecd + secd + degree ,data=ds)
+                   . - lnpinc + cbinc + lsecd + secd + college + degree ,data=ds)
       return(res)
       
     }
@@ -182,7 +183,5 @@ run_regression_cex<-function(ds,year,type){
       return(res)
       
     }
-  }
-  
-  stop(paste("Year",year,"not supported"));
+    stop(paste("Unknown regression type:",type))
 }
