@@ -35,7 +35,10 @@ run_regression_cex<-function(ds,type){
     
     ds$lnvis<-log(ds$visible_consumption)
     ds$black_dummy <-as.integer(ds$race==2)
-    ds$hispanic_dummy<-as.integer(length(as.character(ds$horref1))>0 & as.integer(ds$race)!=1 & as.integer(ds$race)!=2) # neither black nor white
+    if (!is.logical(ds$hispanic)){
+      stop("hispanic column must be a logical variable")
+    }
+    ds$hispanic_dummy<-as.integer(ds$hispanic) # use a translated non-overlapping value
     print("Regression using only 2004 data")
     
     if (type=="no_controls"){

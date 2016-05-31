@@ -8,7 +8,6 @@ get_translated_frame<-function(dat,names,m){
     stop(paste("names of type(",toString(class(names)),") must be a vector"))
   }
   
-  #m= mapping();
   
   mapped<-m[is.element(m$name,names),]
   array_names <- as.character(mapped$iesname)

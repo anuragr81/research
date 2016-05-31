@@ -58,6 +58,20 @@ combine_subfiles<-function (filenames,unsharedkey){
   return(res)
 }
 
+
+check_ds<-function(df){
+  if (!is.data.frame(df)){
+    stop("df must be a dataframe")
+  }
+  for (c in colnames(df)) {
+    
+    if (any(as.character(ds[,c])=="")){
+      stop(paste("column ",c," in df has empty "))
+    }
+  }
+  return(TRUE)
+}
+
 load_diary_file <-function(dataset,year){
   if (dataset=="us_cex"){
     # consider gifts in the expd file
@@ -158,10 +172,14 @@ get_diary_info_columns<-function(dataset,year){
 }
 
 get_ignored_hhids<-function(hh,ohs,income){
-  non_topcoded_hhids=unique(hh[hh$alloc>=2,]$newid);
-  hh$alloc<-as.integer(hh$alloc);
-  print(paste("Percentage of topcoded households ignored:",100*length(non_topcoded_hhids)/dim(hh)[1]));
-  return(non_topcoded_hhids);
+  non_topcoded_hhids=as.integer(unique(hh[hh$alloc>=2,]$newid));
+  n_total_hhids <- length(unique(hh$newid))
+  print(paste("Percentage of topcoded households ignored:",100*length(non_topcoded_hhids)/n_total_hhids));
+  nullpopsize_hhids<-unique(as.integer(ohs[as.character(ohs$popsize)== "",]$newid))
+  combined_ignored_hhids <-union(nullpopsize_hhids,non_topcoded_hhids)
+  print(paste("Percentage of households with non-null popsize and not-topcoded ignored:",
+              100*length(combined_ignored_hhids)/n_total_hhids));
+  return(combined_ignored_hhids);
 }
 
 load_ohs_mapping<-function(dataset,year){
@@ -278,6 +296,10 @@ merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
   ds<-merge(hh11,ohs)
   # post-processing
   ds$race <-as.integer(ds$race)
+  # convert translate horref into hispanic field and remove horref1 from dataframe since it has NULLs
+  
+  ds$hispanic<-length(as.character(ds$horref1))>0 & as.integer(ds$race)!=1 & as.integer(ds$race)!=2 # neither black nor white 
+  ds$horref1<-NULL
   return(ds);
 }
 
@@ -301,7 +323,7 @@ merge_hh_ohs_income_data<-function(dataset,year,hh,ohs,income){
   stop(paste("Method to merge data for dataset:",dataset," not found"))
 }
 
-combined_years_ds<-function(years)
+cex_combined_years_ds<-function(years)
 {
   if (!is.vector(years)){
     stop("years must be a vector")
@@ -368,7 +390,15 @@ cex_combined_data_set<-function(year){
   
   ignored_hhids <- get_ignored_hhids(hhdat,ohsdat,incomedat);
   
-  print("Pending ignoring of hhids")
+  if (!is.null(hhdat)){
+  hh<-hh[!is.element(hh$hhid,ignored_hhids),]
+  }
+  if (!is.null(ohsdat)){
+  ohs<-ohs[!is.element(ohs$hhid,ignored_hhids),]
+  }
+  if (!is.null(incomedat)){
+    income<-income[!is.element(income$hhid,ignored_hhids),]
+  }
   
   dstruct<-merge_hh_ohs_income_data(dataset="us_cex",hh=hh,ohs=ohs,income=income,year=year);
   return(dstruct);
