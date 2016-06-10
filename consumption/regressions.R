@@ -39,8 +39,7 @@ run_regression_cex<-function(ds,type){
       stop("hispanic column must be a logical variable")
     }
     ds$hispanic_dummy<-as.integer(ds$hispanic) # use a translated non-overlapping value
-    print("Regression using only 2004 data")
-    
+
     if (type=="no_controls"){
       res = lm(lnvis~black_dummy+hispanic_dummy,data=ds)
       # the dummies themselves black_dummy + hispanic_dummy show negative coefficients for lnvsi as dependent variable
@@ -51,9 +50,7 @@ run_regression_cex<-function(ds,type){
       ds$incpsv <- as.integer(ds$income>0)
       ds$lninc <-sapply(ds$income,inc_control) # income control
       ds$cbinc <- ds$income*ds$income*ds$income # income control
-      # only lninc is significant
       res=lm(lnvis~black_dummy+hispanic_dummy+ lninc+cbinc + incpsv ,data=ds)
-      #TODO: compare with ivreg (and perform the Hausman test)
       return(res)
     }
     if (type == "incpinc_controls"){
@@ -64,133 +61,66 @@ run_regression_cex<-function(ds,type){
                lnpinc,data=ds)
       return(res)
     }
-    if (type == "iv1") {
+    if (type == "v") {
       print("Pending addition of industry and occupation codes ")
-      ds$agesq <- ds$age*ds$age
-      #ds$year_dummy <-year-1995
+      ds$incpsv <- as.integer(ds$income>0)
+      ds$lninc <-sapply(ds$income,inc_control) # income control
+      ds$cbinc <- ds$income*ds$income*ds$income # income control
+      #ds$lsecd <-as.integer(ds$highest_education<12) 
+      #ds$secd <- as.integer(ds$highest_education==12)
+      #ds$college <-as.integer(ds$highest_education==13)
+      #ds$degree <-as.integer(ds$highest_education>=14)
+      ds$lnvis <-log(ds$visible_consumption)
       
-      ds$inc <-ds$income
-      ds$incpsv <- as.integer(ds$inc>0) # income control
-      ds$lninc <-log(ds$inc)# income control
-      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
+      ds$lnpinc <- log(ds$total_expenditure)
+      
+      res= ivreg(lnvis~black_dummy+hispanic_dummy+ lnpinc |
+                   . - lnpinc + incpsv+ lninc+ cbinc ,data=ds)
+      return(res)
+      
+    }
+    
+    if (type == "vi") {
+      print("Pending addition of industry and occupation codes ")
+      ds$incpsv <- as.integer(ds$income>0)
+      ds$lninc <-sapply(ds$income,inc_control) # income control
+      ds$cbinc <- ds$income*ds$income*ds$income # income control
+      #ds$lsecd <-as.integer(ds$highest_education<12) 
+      #ds$secd <- as.integer(ds$highest_education==12)
+      #ds$college <-as.integer(ds$highest_education==13)
+      #ds$degree <-as.integer(ds$highest_education>=14)
+      ds$lnvis <-log(ds$visible_consumption)
+      
+      ds$lnpinc <- log(ds$total_expenditure)
+      
+      res= ivreg(lnvis~black_dummy+hispanic_dummy+ lnpinc+year |
+                   . - lnpinc + incpsv+ lninc+ cbinc ,data=ds)
+      return(res)
+      
+      
+    }
+    
+    if (type == "vii"){
+      #stop("pending wealth/liquid assets control")
+      ds$incpsv <- as.integer(ds$income>0)
+      ds$lninc <-sapply(ds$income,inc_control) # income control
+      ds$cbinc <- ds$income*ds$income*ds$income # income control
+      
+      ds$agesq <- ds$age*ds$age
       ds$lsecd <-as.integer(ds$highest_education<12) 
       ds$secd <- as.integer(ds$highest_education==12)
       ds$college <-as.integer(ds$highest_education==13)
       ds$degree <-as.integer(ds$highest_education>=14)
-      ds$lnvis <-log(ds$visible_consumption)
-      
-      ds$lnpinc <- log(ds$total_expenditure)
-      
-      res= ivreg(lnvis~black_dummy+hispanic_dummy+ lninc+ lnpinc |
-                   . - lnpinc + cbinc + lsecd + secd + college + degree ,data=ds)
-      return(res)
-      
-    }
-    
-    if (type == "iv2") {
-      ds$agesq <- ds$age*ds$age
-      #ds$year_dummy <-year-1995
-      
-      ds$inc <-ds$total_income_of_household_head
-      ds$incpsv <- as.integer(ds$inc>0) # income control
-      ds$lninc <-log(ds$inc)# income control
-      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
-      ds$lsecd <-as.integer(ds$education<8) 
-      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
-      ds$degree <-as.integer(ds$education==13)
       
       ds$lnvis <-log(ds$visible_consumption)
       
       ds$lnpinc <- log(ds$total_expenditure)
       
-      res= ivreg(lnvis~black_dummy+hispanic_dummy+ lnpinc  +lsecd |
-                   . - lnpinc + cbinc+lninc +incpsv,data=ds)
-      return(res)
+      # lsecd,college,secd removed as they were not significant
+      res= ivreg(lnvis~black_dummy+hispanic_dummy+ lnpinc+year+age+agesq+degree|#+lsecd+secd+degree+college |
+                   . - lnpinc + incpsv+ lninc+ cbinc ,data=ds)
       
-    }
-    
-    if (type == "ivt1"){
-      ds$agesq <- ds$age*ds$age
-      #ds$year_dummy <-year-1995
       
-      ds$inc <-ds$total_income_of_household_head
-      ds$incpsv <- as.integer(ds$inc>0) # income control
-      ds$lninc <-log(ds$inc)# income control
-      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
-      ds$lsecd <-as.integer(ds$education<8) 
-      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
-      ds$degree <-as.integer(ds$education==13)
-      ds$year2005 <- as.integer(ds$year==2005)
-      ds$lnvis <-log(ds$visible_consumption)
-      
-      ds$lnpinc <- log(ds$total_expenditure)
-      #res=lm(lnvis~black_dummy+hispanic_dummy+ lninc+ lnpinc + year2005,data=ds)
-      
-      res= ivreg(lnvis~black_dummy+hispanic_dummy+ lninc+ lnpinc + year2005 |
-                   . - lnpinc + cbinc + lsecd + secd + degree ,data=ds)
-      return(res)
-      
-    }
-    if (type == "ivt2"){
-      ds$agesq <- ds$age*ds$age
-      ds$year2005 <- as.integer(ds$year==2005)
-      
-      ds$inc <-ds$total_income_of_household_head
-      ds$incpsv <- as.integer(ds$inc>0) # income control
-      ds$lninc <-log(ds$inc)# income control
-      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
-      ds$lsecd <-as.integer(ds$education<8) 
-      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
-      ds$degree <-as.integer(ds$education==13)
-      
-      ds$lnvis <-log(ds$visible_consumption)
-      
-      ds$lnpinc <- log(ds$total_expenditure)
-      
-      res= ivreg(lnvis~black_dummy+hispanic_dummy+ lnpinc  +lsecd+year2005 |
-                   . - lnpinc + cbinc+lninc +incpsv,data=ds)
-      return(res)
-      
-    }
-    if (type == "ivd1") {
-      ds$agesq <- ds$age*ds$age
-      #ds$year_dummy <-year-1995
-      
-      ds$inc <-ds$total_income_of_household_head
-      ds$incpsv <- as.integer(ds$inc>0) # income control
-      ds$lninc <-log(ds$inc)# income control
-      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
-      ds$lsecd <-as.integer(ds$education<8) 
-      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
-      ds$degree <-as.integer(ds$education==13)
-      
-      ds$lnvis <-log(ds$visible_consumption)
-      
-      ds$lnpinc <- log(ds$total_expenditure)
-      
-      res= ivreg(lnvis~black_dummy+hispanic_dummy+ lninc+ lnpinc + age+ n_members + area_type|
-                   . - lnpinc + cbinc + lsecd + secd + degree ,data=ds)
-      return(res)
-      
-    }
-    if (type == "ivd2") {
-      ds$agesq <- ds$age*ds$age
-      #ds$year_dummy <-year-1995
-      
-      ds$inc <-ds$total_income_of_household_head
-      ds$incpsv <- as.integer(ds$inc>0) # income control
-      ds$lninc <-log(ds$inc)# income control
-      ds$cbinc <- ds$inc*ds$inc*ds$inc # income control
-      ds$lsecd <-as.integer(ds$education<8) 
-      ds$secd <- as.integer(ds$education>=8 && ds$education <=12)
-      ds$degree <-as.integer(ds$education==13)
-      
-      ds$lnvis <-log(ds$visible_consumption)
-      
-      ds$lnpinc <- log(ds$total_expenditure)
-      
-      res= ivreg(lnvis~black_dummy+hispanic_dummy+ lnpinc  +lsecd  + age + n_members + area_type |
-                   . - lnpinc + cbinc+lninc +incpsv,data=ds)
       return(res)
       
     }

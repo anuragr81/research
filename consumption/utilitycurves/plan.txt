@@ -1,7 +1,59 @@
 
 1. Every user has a utility function which she wishes to maximise u(Q) - u is a function only of quantity. Q is a vector of commodities q_1,q_2 ...
-Notice that q_k can be zero for more than one ks. u can be of a certain type.
+Notice that q_k can be zero for more than one ks. u can be of a certain standard type. Ireland talk about cobb-douglas (x^a*y^(1-a)) (a homothetic utility function) and quasi-linear. 
 
-2. consumption of certain quantities gives visual pleasure. One can evaluate what a higher visible satisfaction looks like.
+What one can do is to look at V and W quantities. We already have V and V+W in ds,
+
+ds$nonvis<-ds$total_expenditure-ds$visible_consumption
+
+Let's take hhid=582881,
+
+r<- ds[ds$hhid==582881,]
+For alpha = 1, following is the value every hhid ought to optimize:
+
+alpha=.1;
+res=(r$nonvis)^(alpha)*(r$visible_consumption)^(1-alpha)
 
 
+2. consumption of certain quantities gives visual pleasure. One can evaluate what a higher visible satisfaction looks like. This idea is a bit stronger. 
+
+3. Justification of basket and that of the need to look at conspicuous consumption in developing countries.
+
+
+4. Looking at different utility curves for black, white, rich or educated populations is equivalent to evaluating regression coefficients. Still, this a useful exercise. In fact, it is probably with regression that we can evaluate the best fitting utility curves.
+
+The best-fitting set of params (e.g. alpha in cobb-douglas function x^alpha*y^(alpha-1) ) then describes the shape of utility curves. It doesn't offer a more serious is merely the statement (or function) for elasticities (interpreted as slopes of curves). A statement on elasticities itself would give a better judgment.
+
+ln(u) = alpha*v+(alpha-1)*(e-v) = av + (a-1)(e-v) = av + ae -av -e +v = e(a-1)+v 
+where e = sum(q_i)
+
+Our problem is to choose a such that e_i(a-1)+v_i - simple bisection would provide a solution - although it begs the question - what is such fitting really worth.
+
+The judgment that I am looking for is the better allocation of resources. A regression variable needs to be welfare itself.
+
+Should we compare a welfare basket vs the visibility basket.
+
+Should we looking at how baskets are aggregated - the question one can ask is this - what are we trying to maximize - what is the welfare elasticities vs the visible elasticities. 
+
+Can comparing US and South Africa provide any insights?
+
+=============
+6. On Congestion
+=============
+I had talk about visible consumption vs positional consumption. Instead of visible goods, one could just see positional goods i.e. goods where there is congestion (the mechanism through which position is allocated). This congestion needs to be detected through other data. I think advertisements could be a good indicator. I believe that advertisements themselves exist for . In a developing country, the media might differ but status differences might be indicated through more permanent institutions. This too varies across cultures - but one may focus on a cross-section of media. In a small village in India, this could be the pundit himself who goes from place to place, family to family and tells what others are doing. The dresses and houses show status. The congestion matters - but the rural setting limits signaling - the scope for advertisement is limited.
+
+In an industrial society, houses too are visible but the avenues for signaling elsewhere are far abound. According to Hirsch, this happened because other differences were minimal. Hirsch considered a society more homogenous that of the post-cold-war Western economies. The visible consumption had many reasons to increase. Showing status became more important than education (not for mobility but for an intellectual pursuit). Personal care, cars, clothing, jewelry, wine selection and access to more expensive clubs/restaurants in the city made more sense. Stronger yet must be the group of people an individual "hangs out" with. Such herds can be detected with clustering effects as well. This leaves me with two data-patterns to look for: i) clusters of consumption based on race, locality (clubs, pubs, levels of income etc.) and ii) budget share of visibile products.
+
+In a rural setting, the availability of products can be a good indicator. If prices for the same product vary a lot, it means there are luxury and regular items available.
+
+7. The basis of utility function is only the idea of convexity. If v, w are both convex, insatiable choices, a utility curve does make sense. However, fitting them involves a cross-section over demographic and time parameters.
+
+Equilibrium conditions are always derived for a general u(q,x). Afriat's theory depends on prices.
+============
+
+1. The measure of conspicuous consumption is suspect.
+2. Rationalize the use of conspicuous consumption.
+Todo:
+
+1. Tanzania - measuring the signaling- create a table of how signaling is measured. 
+2. 2 pages - why conspiuous consumption is relevant in developing countries. 

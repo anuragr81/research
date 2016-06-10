@@ -7,6 +7,7 @@ source('../panelfunc.R')
 setwd('c:/local_files/research/consumption/sa/')
 
 load_data_file_list <- function(){
+
   s = data.frame(year=NULL,filename=NULL,type=NULL,ohs_filename=NULL,ohs_type=NULL)
   s = rbind(s,data.frame(year=1990,
                          filename="1990/SPSS/IES 1990 hhroster_v1.1.sav",
