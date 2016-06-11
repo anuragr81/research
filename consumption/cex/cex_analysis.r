@@ -170,20 +170,37 @@ diary_info_columns_us_cex_2004<-function(){
 }
 
 diary_info_columns_lsms_2010<-function(){
-  return(c("lwp_unit", "lwp", "expense", "own_unit", "own", "lwp", "gift_unit", "gift"))
+  return(c("item","lwp_unit", "lwp", "expense", "own_unit", "own", "lwp", "gift_unit", "gift"))
 }
 
 ohs_info_columns_us_cex_2004<-function(){
   return(c("hhid","age","gender","educ","race","hsize","income","horref1","urban_rural","popsize","highest_education"))
 }
 
+ohs_info_columns_lsms_2010<-function(){
+  # hhid, age, gender, educ, race, hsize, areatype, 
+  # income file: income
+  return(c("hhid", "gender", "YOB", "head_of_household", "inhouse_consumer",
+           "inhouse_days_in_month", "inhouse_resident", "outhouse_days_in_year", 
+           "occupation", "fathers_educ", "mothers_educ", "married", "spouse_resident",
+           "outhouse_spouses", "source_migration_name", "source_migration_code", 
+           "reason_migration", "birthdistrict_name", "birthdistrict_code"))
+}
+
 get_ohs_info_columns<-function(dataset,year){
+  if (dataset == "lsms"){
+    if (year ==2010){
+      return(ohs_info_columns_lsms_2010())
+    }
+    stop(paste("Year : ",year," not found for lsms"))
+  }
   
   if (dataset == "us_cex"){
     if (year ==2004 || year ==2009|| year == 2014){
       return(ohs_info_columns_us_cex_2004());
     }
-    stop(paste("Year not found for us_cex:",year))
+    
+    stop(paste("Year : ",year," not found for us_cex"))
   }
   stop(paste("Could not find ohs info columns for dataset:",dataset))
 }
@@ -205,18 +222,31 @@ get_diary_info_columns<-function(dataset,year){
   stop(paste("Unknown dataset:",dataset))
 }
 
-get_ignored_hhids<-function(hh,ohs,income){
-  non_topcoded_hhids=as.integer(unique(hh[hh$alloc>=2,]$newid));
-  n_total_hhids <- length(unique(hh$newid))
-  print(paste("Percentage of topcoded households ignored:",100*length(non_topcoded_hhids)/n_total_hhids));
-  nullpopsize_hhids<-unique(as.integer(ohs[as.character(ohs$popsize)== "",]$newid))
-  combined_ignored_hhids <-union(nullpopsize_hhids,non_topcoded_hhids)
-  print(paste("Percentage of households with non-null popsize and not-topcoded ignored:",
-              100*length(combined_ignored_hhids)/n_total_hhids));
-  return(combined_ignored_hhids);
+get_ignored_hhids<-function(dataset,hh,ohs,income){
+  if (dataset == "us_cex"){
+    non_topcoded_hhids=as.integer(unique(hh[hh$alloc>=2,]$newid));
+    n_total_hhids <- length(unique(hh$newid))
+    print(paste("Percentage of topcoded households ignored:",100*length(non_topcoded_hhids)/n_total_hhids));
+    nullpopsize_hhids<-unique(as.integer(ohs[as.character(ohs$popsize)== "",]$newid))
+    combined_ignored_hhids <-union(nullpopsize_hhids,non_topcoded_hhids)
+    print(paste("Percentage of households with non-null popsize and not-topcoded ignored:",
+                100*length(combined_ignored_hhids)/n_total_hhids));
+    return(combined_ignored_hhids);
+  } 
+  if (dataset == "lsms"){
+    return(NULL)
+  }
+  stop(paste("No ignored hhids rationale for dataset:",dataset));
 }
 
 load_ohs_mapping<-function(dataset,year){
+  
+  if (dataset == "lsms") {
+    if (year ==2010){
+      return(ohs_mapping_lsms_2010());
+    }
+    stop(paste("Year not found:",year))
+  }
   
   if (dataset == "us_cex") {
     if (year ==2004 || year == 2009 || year == 2014){
@@ -228,7 +258,7 @@ load_ohs_mapping<-function(dataset,year){
   
 }
 
-lsms_mapping_2010 <-function(){
+hh_mapping_lsms_2010 <-function(){
   s = data.frame(iesname=NULL,name=NULL)
   s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
   s= rbind(s,data.frame(iesname="itemcode",name="item"))
@@ -252,6 +282,29 @@ hh_us_cex_mapping_2004<-function(){
   return(s)
   
 }
+ohs_mapping_lsms_2010<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
+  s= rbind(s,data.frame(iesname="hh_b02",name="gender"))
+  s= rbind(s,data.frame(iesname="hh_b03_1",name="YOB"))
+  s= rbind(s,data.frame(iesname="hh_b05",name="head_of_household"))
+  s= rbind(s,data.frame(iesname="hh_b07",name="inhouse_consumer"))
+  s= rbind(s,data.frame(iesname="hh_b08",name="inhouse_days_in_month"))
+  s= rbind(s,data.frame(iesname="hh_b09_1",name="inhouse_resident"))
+  s= rbind(s,data.frame(iesname="hh_b10",name="outhouse_days_in_year"))
+  s= rbind(s,data.frame(iesname="hh_b11",name="occupation"))
+  s= rbind(s,data.frame(iesname="hh_b14",name="fathers_educ"))
+  s= rbind(s,data.frame(iesname="hh_b17",name="mothers_educ"))
+  s= rbind(s,data.frame(iesname="hh_b19",name="married"))
+  s= rbind(s,data.frame(iesname="hh_b21",name="spouse_resident"))
+  s= rbind(s,data.frame(iesname="hh_b24",name="outhouse_spouses"))
+  s= rbind(s,data.frame(iesname="hh_b26_2",name="source_migration_name"))
+  s= rbind(s,data.frame(iesname="hh_b26_3",name="source_migration_code"))
+  s= rbind(s,data.frame(iesname="hh_b27",name="reason_migration"))
+  s= rbind(s,data.frame(iesname="hh_b28_2",name="birthdistrict_name"))
+  s= rbind(s,data.frame(iesname="hh_b28_3",name="birthdistrict_code"))
+  return(s)
+}
 
 ohs_mapping_us_cex_2004<-function(){
   s = data.frame(iesname=NULL,name=NULL)
@@ -274,10 +327,13 @@ load_diary_fields_mapping<-function(dataset,year){
     if (year == 2004 || year == 2009|| year == 2014){
       return(hh_us_cex_mapping_2004());
     }
-    stop(paste('No entry found for',year));
+    stop(paste('No hh data found for',year));
   }
   if (dataset == "lsms"){
-    return (lsms_mapping_2010());
+    if (year == 2010){
+      return (hh_mapping_lsms_2010());
+      stop(paste('No hh data found for',year));
+    }
   }
 }
 
@@ -334,6 +390,12 @@ get_visible_categories_cex_2004<-function(hh,visible_categories){
   vis<-ddply(vis,.(hhid),summarize,visible_consumption=sum(cost))
   return(vis)
 }
+
+merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
+  print(colnames(hh))
+  return(NULL)
+}
+  
 merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
   
   # hh's ucc should be merged first
@@ -377,6 +439,10 @@ merge_hh_ohs_income_data<-function(dataset,year,hh,ohs,income){
     
     stop(paste("Method to merge data for year:",year," not found"))
   }
+  if (dataset == "lsms"){
+    ds <-merge_hh_ohs_income_data_lsms_2010(hh=hh,ohs=ohs,income=income)
+    return(ds)
+  }
   stop(paste("Method to merge data for dataset:",dataset," not found"))
 }
 
@@ -393,8 +459,7 @@ cex_combined_years_ds<-function(years)
   return(resds)
 }
 
-
-lsms_combined_data_set<-function(year){
+combined_data_set<-function(dataset,year){
   
   #1-black
   #2-coloured
@@ -403,78 +468,13 @@ lsms_combined_data_set<-function(year){
   
   ############ PHASE 0 ########################
   
-  hhdat <- load_diary_file("lsms",year) # must provide total and visible expenditure
+  hhdat <- load_diary_file(dataset,year) # must provide total and visible expenditure
   
-  ohsdat <-load_ohs_file("lsms",year)
-  
-  incomedat <-load_income_file("lsms",year)
-  
-  if (is.null(hhdat)){
-    stop("Could not load diary hhdata")
-  }
-  
-  print("Ensuring duplicates do NOT exist in the diary hhdata")
-  hhdat = unique(hhdat)
-  
-  ############ PHASE 1 - Translation ########################
-  # info_columns must contain all hhdata-fields referred to in merging/aggregation phase (one per file)
-  # translated frame makes the data available in a universal dictionary (age, gender etc.)
-
-  hh = get_translated_frame(dat=hhdat,
-                            names=get_diary_info_columns("lsms",year),
-                            m=load_diary_fields_mapping("lsms",year))
-  print("Translated hh data")
-  # optional data files
-  if (!is.null(ohsdat)){
-    ohs = get_translated_frame(dat=ohsdat,
-                               names=get_ohs_info_columns("lsms",year),
-                               m=load_ohs_mapping("lsms",year))
-    
-    print("Translated ohs data")
-  }
-  
-  if (!is.null(incomedat)){
-    income = get_translated_frame(dat=incomedat,
-                                  names=get_income_info_columns("lsms",year),
-                                  m=load_income_mapping("lsms",year))
-    print("Translated income data")
-  }
-  
-  print("Loaded translated frame(s)")
-  ############ PHASE 2 - Aggregation and Merge ########################
-  # merge criteria is defined for every dependent variable
-  
-  ignored_hhids <- get_ignored_hhids(hhdat,ohsdat,incomedat);
-  
-  if (!is.null(hhdat)){
-    hh<-hh[!is.element(hh$hhid,ignored_hhids),]
-  }
-  if (!is.null(ohsdat)){
-    ohs<-ohs[!is.element(ohs$hhid,ignored_hhids),]
-  }
-  if (!is.null(incomedat)){
-    income<-income[!is.element(income$hhid,ignored_hhids),]
-  }
-  
-  dstruct<-merge_hh_ohs_income_data(dataset="lsms",hh=hh,ohs=ohs,income=income,year=year);
-  return(dstruct);
-}
-cex_combined_data_set<-function(year){
-  
-  #1-black
-  #2-coloured
-  #3-asian
-  #4-white
-  
-  ############ PHASE 0 ########################
-  
-  hhdat <- load_diary_file("us_cex",year) # must provide total and visible expenditure
-  
-  ohsdat <-load_ohs_file("us_cex",year) # (using fmld) must provide age (age_ref), gender(sex_ref), 
+  ohsdat <-load_ohs_file(dataset,year) # (using fmld) must provide age (age_ref), gender(sex_ref), 
   # highest_educ(educ_ref), ishead(no_earnr,earncomp - all reference person data),
   # race(ref_race),family size (fam_size),
   # area_type (popsize,bls_urbn)
-  incomedat <-load_income_file("us_cex",year) # must provide total income (fincaftm)
+  incomedat <-load_income_file(dataset,year) # must provide total income (fincaftm)
   
   if (is.null(hhdat)){
     stop("Could not load diary hhdata")
@@ -488,22 +488,22 @@ cex_combined_data_set<-function(year){
   # translated frame makes the data available in a universal dictionary (age, gender etc.)
   
   hh = get_translated_frame(dat=hhdat,
-                            names=get_diary_info_columns("us_cex",year),
-                            m=load_diary_fields_mapping("us_cex",year))
+                            names=get_diary_info_columns(dataset,year),
+                            m=load_diary_fields_mapping(dataset,year))
   print("Translated hh data")
   # optional data files
   if (!is.null(ohsdat)){
     ohs = get_translated_frame(dat=ohsdat,
-                               names=get_ohs_info_columns("us_cex",year),
-                               m=load_ohs_mapping("us_cex",year))
+                               names=get_ohs_info_columns(dataset,year),
+                               m=load_ohs_mapping(dataset,year))
     
     print("Translated ohs data")
   }
   
   if (!is.null(incomedat)){
     income = get_translated_frame(dat=incomedat,
-                                  names=get_income_info_columns("us_cex",year),
-                                  m=load_income_mapping("us_cex",year))
+                                  names=get_income_info_columns(dataset,year),
+                                  m=load_income_mapping(dataset,year))
     print("Translated income data")
   }
   
@@ -511,19 +511,20 @@ cex_combined_data_set<-function(year){
   ############ PHASE 2 - Aggregation and Merge ########################
   # merge criteria is defined for every dependent variable
   
-  ignored_hhids <- get_ignored_hhids(hhdat,ohsdat,incomedat);
+  ignored_hhids <- get_ignored_hhids(dataset,hhdat,ohsdat,incomedat);
   
-  if (!is.null(hhdat)){
-    hh<-hh[!is.element(hh$hhid,ignored_hhids),]
+  if (!is.null(ignored_hhids)){  
+    if (!is.null(hhdat)){
+      hh<-hh[!is.element(hh$hhid,ignored_hhids),]
+    }
+    if (!is.null(ohsdat)){
+      ohs<-ohs[!is.element(ohs$hhid,ignored_hhids),]
+    }
+    if (!is.null(incomedat)){
+      income<-income[!is.element(income$hhid,ignored_hhids),]
+    }
   }
-  if (!is.null(ohsdat)){
-    ohs<-ohs[!is.element(ohs$hhid,ignored_hhids),]
-  }
-  if (!is.null(incomedat)){
-    income<-income[!is.element(income$hhid,ignored_hhids),]
-  }
-  
-  dstruct<-merge_hh_ohs_income_data(dataset="us_cex",hh=hh,ohs=ohs,income=income,year=year);
+  dstruct<-merge_hh_ohs_income_data(dataset=dataset,hh=hh,ohs=ohs,income=income,year=year);
   return(dstruct);
 }
 
