@@ -70,7 +70,6 @@ combine_subfiles<-function (filenames,unsharedkey){
   return(res)
 }
 
-
 check_ds<-function(df){
   if (!is.data.frame(df)){
     stop("df must be a dataframe")
@@ -84,10 +83,57 @@ check_ds<-function(df){
   return(TRUE)
 }
 
+get_lsms_secm_info_columns<-function(year){
+  if (year == 2010){
+    return(c("hhid","is_consumed","cost","price"))
+  }
+  stop(paste("Not secm info columns for year: ",year))
+}
+
+get_lsms_secm_fields_mapping<-function(year){
+  if (year == 2010){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="hh_m01_2",name="is_consumed"))
+    s= rbind(s,data.frame(iesname="hh_m02",name="cost"))
+    s= rbind(s,data.frame(iesname="hh_m03",name="price"))
+    return(s)
+  }
+  stop(paste("Not secm info columns for year: ",year))
+}
+
+get_lsms_secl_info_columns_2010<-function(){
+  return(c("hhid","is_consumed","cost"))
+}
+
+get_lsms_secl_fields_mapping_2010<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
+  s= rbind(s,data.frame(iesname="hh_l01_2",name="is_consumed"))
+  s= rbind(s,data.frame(iesname="hh_l02",name="cost"))
+  return(s)
+}
+
 load_diary_file <-function(dataset,year){
   if (dataset == "lsms"){
     if (year == 2010){
-      return(read_tnz("../lsms/TZNPS2HH3DTA/HH_SEC_K1.dta"))
+      # combine sections ( k , l, m )
+      kdat <- read_tnz("../lsms/TZNPS2HH3DTA/HH_SEC_K1.dta")
+      k = get_translated_frame(dat=kdat,
+                               names=diary_info_columns_lsms_2010(),
+                               m=hh_mapping_lsms_2010())
+      ###
+      ldat <- read_tnz("../lsms/TZNPS2HH2DTA/HH_SEC_L.dta")
+      l = get_translated_frame(dat=ldat,
+                               names=get_lsms_secl_info_columns_2010(),
+                               m=get_lsms_secl_fields_mapping_2010())
+      ###
+      mdat <-read_tnz( '../lsms/TZNPS2HH2DTA/HH_SEC_M.dta')
+      m = get_translated_frame(dat=mdat,
+                               names=get_lsms_secm_info_columns(year),
+                               m=get_lsms_secm_fields_mapping(year))
+      
+      return(k)
     }
     stop(paste("Year:",year, " not supported"))
   }
@@ -164,7 +210,6 @@ load_ohs_file <-function(dataset,year){
   stop(paste("Unknown dataset:",dataset))
 }
 
-
 diary_info_columns_us_cex_2004<-function(){
   return(c("hhid","cost","ucc","alloc"));
 }
@@ -205,7 +250,6 @@ get_ohs_info_columns<-function(dataset,year){
   stop(paste("Could not find ohs info columns for dataset:",dataset))
 }
 
-
 get_diary_info_columns<-function(dataset,year){
   
   if(dataset== "us_cex"){
@@ -213,11 +257,6 @@ get_diary_info_columns<-function(dataset,year){
       return(diary_info_columns_us_cex_2004())
     }
     stop(paste("Could not find diary info columns for year:",year))
-  }
-  if (dataset == "lsms"){
-    if (year == 2010){
-      return (diary_info_columns_lsms_2010())
-    }
   }
   stop(paste("Unknown dataset:",dataset))
 }
@@ -329,12 +368,7 @@ load_diary_fields_mapping<-function(dataset,year){
     }
     stop(paste('No hh data found for',year));
   }
-  if (dataset == "lsms"){
-    if (year == 2010){
-      return (hh_mapping_lsms_2010());
-      stop(paste('No hh data found for',year));
-    }
-  }
+  stop(paste("Not supported dataset:",dataset))
 }
 
 
@@ -395,7 +429,7 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   print(colnames(hh))
   return(NULL)
 }
-  
+
 merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
   
   # hh's ucc should be merged first
@@ -459,7 +493,7 @@ cex_combined_years_ds<-function(years)
   return(resds)
 }
 
-combined_data_set<-function(dataset,year){
+combined_data_set<-function(dataset,year,isTranslated){
   
   #1-black
   #2-coloured
@@ -468,7 +502,7 @@ combined_data_set<-function(dataset,year){
   
   ############ PHASE 0 ########################
   
-  hhdat <- load_diary_file(dataset,year) # must provide total and visible expenditure
+  hhdat <- load_diary_file(dataset,year) # must provide total and visible expenditure (must be already translated)
   
   ohsdat <-load_ohs_file(dataset,year) # (using fmld) must provide age (age_ref), gender(sex_ref), 
   # highest_educ(educ_ref), ishead(no_earnr,earncomp - all reference person data),
@@ -486,27 +520,31 @@ combined_data_set<-function(dataset,year){
   ############ PHASE 1 - Translation ########################
   # info_columns must contain all hhdata-fields referred to in merging/aggregation phase (one per file)
   # translated frame makes the data available in a universal dictionary (age, gender etc.)
-  
-  hh = get_translated_frame(dat=hhdat,
-                            names=get_diary_info_columns(dataset,year),
-                            m=load_diary_fields_mapping(dataset,year))
-  print("Translated hh data")
-  # optional data files
-  if (!is.null(ohsdat)){
-    ohs = get_translated_frame(dat=ohsdat,
-                               names=get_ohs_info_columns(dataset,year),
-                               m=load_ohs_mapping(dataset,year))
+  if (missing(isTranslated)) {
+    hh = get_translated_frame(dat=hhdat,
+                              names=get_diary_info_columns(dataset,year),
+                              m=load_diary_fields_mapping(dataset,year))
+    print("Translated hh data")
+    # optional data files
+    if (!is.null(ohsdat)){
+      ohs = get_translated_frame(dat=ohsdat,
+                                 names=get_ohs_info_columns(dataset,year),
+                                 m=load_ohs_mapping(dataset,year))
+      
+      print("Translated ohs data")
+    }
     
-    print("Translated ohs data")
+    if (!is.null(incomedat)){
+      income = get_translated_frame(dat=incomedat,
+                                    names=get_income_info_columns(dataset,year),
+                                    m=load_income_mapping(dataset,year))
+      print("Translated income data")
+    }
+  } else {
+    hh<-hhdat
+    ohs <-ohsdat
+    income<-incomedat
   }
-  
-  if (!is.null(incomedat)){
-    income = get_translated_frame(dat=incomedat,
-                                  names=get_income_info_columns(dataset,year),
-                                  m=load_income_mapping(dataset,year))
-    print("Translated income data")
-  }
-  
   print("Loaded translated frame(s)")
   ############ PHASE 2 - Aggregation and Merge ########################
   # merge criteria is defined for every dependent variable
