@@ -257,7 +257,7 @@ load_ohs_file <-function(dataset,year){
                                 names=ohs_info_columns_lsms_2010(),
                                 m=ohs_mapping_lsms_2010())
       
-      c<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_C.dta',TRUE)
+      cdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_C.dta',TRUE)
       c <- get_translated_frame(dat=cdat,
                                 names=get_ohs_secc_columns_lsms_2010(),
                                 m=get_ohs_secc_fields_mapping_lsms_2010())
