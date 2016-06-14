@@ -1,4 +1,37 @@
 
+si_factor<-function(units){
+  if (!is.character(units)){
+    stop("units must be of character type")
+  }
+  factors = array();
+  i <- 1; 
+  for (str in units){
+    factors[i]<-1
+    if (!is.na(str)) {
+      if (tolower(str)=="gram" ||
+          tolower(str)=="grams" ||
+          tolower(str)=="g"){
+        factors[i]<-1e-3;
+      }
+      
+      if (tolower(str)=="millilitre" ||
+          tolower(str)=="milliliter" ||
+          tolower(str)=="ml"){
+        factors[i]<-1e-6;
+      }
+      
+      if (tolower(str)=="litre" ||
+          tolower(str)=="liter" ||
+          tolower(str)=="l"){
+        factors[i]<-1e-3;
+      }
+    }
+    i <- i + 1;
+  }
+  return(factors);
+}
+
+
 get_translated_frame<-function(dat,names,m){
   isDebug<-TRUE
   if (isDebug){

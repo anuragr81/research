@@ -10,8 +10,11 @@ setwd('c:/local_files/research/consumption/cex/')
 
 #########################
 
-read_tnz <- function(filename) {
-  dat1 = read.dta(filename);
+read_tnz <- function(filename,convert_factors) {
+  if (!is.logical(convert_factors) || !is.atomic(convert_factors)){
+    stop("convert_factors must be ")
+  }
+  dat1 = read.dta(filename,convert.factors = convert_factors);
   dat2 = as.data.frame(dat1);
   dat3 = dat2[as.numeric(dat2$y2_hhid)>0,] # only take data with hhid>0
   return(dat3);
@@ -103,35 +106,89 @@ get_lsms_secm_fields_mapping<-function(year){
 }
 
 get_lsms_secl_info_columns_2010<-function(){
-  return(c("hhid","is_consumed","cost"))
+  return(c("hhid","item","is_consumed","cost"))
 }
 
 get_lsms_secl_fields_mapping_2010<-function(){
   s = data.frame(iesname=NULL,name=NULL)
   s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
   s= rbind(s,data.frame(iesname="hh_l01_2",name="is_consumed"))
+  s= rbind(s,data.frame(iesname="itemcode",name="item"))
   s= rbind(s,data.frame(iesname="hh_l02",name="cost"))
   return(s)
+}
+
+multiplyLsmsQuantities <-function(dat,quantity_field_name,item_field_name,factor,items_list){
+  
+  if (is.factor(dat[,item_field_name])){
+    stop(item_field_name," must be converted to integers")
+  }
+  if (!is.atomic(factor) || !is.numeric(factor) || factor<1){
+    stop("factor must be a numeric greater than or equal to 1")
+  }
+  
+  if (!is.vector(items_list)){
+    stop("multiplyLsmsQuantities: itemslist must be a vector")
+  }
+  # if not a character or has length>0
+  
+  if (!(length(quantity_field_name) ==1  && is.character(quantity_field_name))){
+    stop(paste("Invalid quantity field name",quantity_field_name))
+  }
+  
+  if (!(length(item_field_name) ==1  && is.character(item_field_name))){
+    stop(paste("Invalid item field name",item_field_name))
+  }
+  
+  if (!is.data.frame(dat)){
+    stop("data must be a data.frame")
+  }
+#  if (is.element("mulfactor__",colnames(dat))){
+#    stop("input data already has a column named mulfactor__")
+#  }
+  
+  mulfactor_1 =  (factor-1)*as.integer(is.element(as.integer(dat[,item_field_name]),as.integer(items_list)))
+  dat[,quantity_field_name]<-mulfactor_1*dat[,quantity_field_name]+dat[,quantity_field_name]
+  return(dat)
 }
 
 load_diary_file <-function(dataset,year){
   if (dataset == "lsms"){
     if (year == 2010){
       # combine sections ( k , l, m )
-      kdat <- read_tnz("../lsms/TZNPS2HH3DTA/HH_SEC_K1.dta")
+      kdat <- read_tnz("../lsms/TZNPS2HH3DTA/HH_SEC_K1.dta",TRUE)
       k = get_translated_frame(dat=kdat,
                                names=diary_info_columns_lsms_2010(),
                                m=hh_mapping_lsms_2010())
+      
+      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
       ###
-      ldat <- read_tnz("../lsms/TZNPS2HH2DTA/HH_SEC_L.dta")
+      ldat <- read_tnz("../lsms/TZNPS2HH2DTA/HH_SEC_L.dta",FALSE)
       l = get_translated_frame(dat=ldat,
                                names=get_lsms_secl_info_columns_2010(),
                                m=get_lsms_secl_fields_mapping_2010())
+      
       ###
-      mdat <-read_tnz( '../lsms/TZNPS2HH2DTA/HH_SEC_M.dta')
+      mdat <-read_tnz( '../lsms/TZNPS2HH2DTA/HH_SEC_M.dta',TRUE)
       m = get_translated_frame(dat=mdat,
                                names=get_lsms_secm_info_columns(year),
                                m=get_lsms_secm_fields_mapping(year))
+      
+      yearly_recall_items <- c("301", "302", "303", "304", "305", "306", "307", "308", "309", 
+                               "310", "311", "312", "313", "314", "315", "316", "317", "318", "319")
+      
+      # nothing to be multiplied for yearly-recall (since we're looking at annual consumption)
+      
+      # m, l are month or year basis
+      monthly_recall_items <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
+        "210", "211", "212", "213", "214", "215", "216", "217", "218", "219",
+        "220", "221", "222", "223", "224")  
+      
+      l <- multiplyLsmsQuantities(dat = l , 
+                                  quantity_field_name="cost", 
+                                  item_field_name="item", 
+                                  factor=12,
+                                  items_list = monthly_recall_items)
       
       return(k)
     }
@@ -169,11 +226,43 @@ load_diary_file <-function(dataset,year){
   stop(paste("Unknown dataset:",dataset))
 }
 
+get_ohs_secc_columns_lsms_2010<-function(){
+  return(c("hhid","personid","is_ge5y","litlang","is_literate","highest_educ","schoolowner",
+           "schoolconveyance","has_missedschool","educexpense","has_adulteduc","adulteducmonths"))
+}
+
+get_ohs_secc_fields_mapping_lsms_2010<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
+  s= rbind(s,data.frame(iesname="indidy2",name="personid"))
+  s= rbind(s,data.frame(iesname="hh_c01",name="is_ge5y"))
+  s= rbind(s,data.frame(iesname="hh_c02",name="litlang"))
+  s= rbind(s,data.frame(iesname="hh_c01",name="is_literate"))
+  s= rbind(s,data.frame(iesname="hh_c07",name="highest_educ"))
+  s= rbind(s,data.frame(iesname="hh_c12",name="schoolowner"))
+  s= rbind(s,data.frame(iesname="hh_c14",name="schoolconveyance"))
+  s= rbind(s,data.frame(iesname="hh_c17",name="has_missedschool"))
+  s= rbind(s,data.frame(iesname="hh_c28_8",name="educexpense"))
+  s= rbind(s,data.frame(iesname="hh_c29",name="has_adulteduc"))
+  s= rbind(s,data.frame(iesname="hh_c30",name="adulteducmonths"))
+  return(s)
+}
+
 load_ohs_file <-function(dataset,year){
   
   if (dataset == "lsms"){
     if (year == 2010){
-      return(read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_B.dta'))
+      bdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_B.dta',TRUE)
+      b <- get_translated_frame(dat=bdat,
+                                names=ohs_info_columns_lsms_2010(),
+                                m=ohs_mapping_lsms_2010())
+      
+      c<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_C.dta',TRUE)
+      c <- get_translated_frame(dat=cdat,
+                                names=get_ohs_secc_columns_lsms_2010(),
+                                m=get_ohs_secc_fields_mapping_lsms_2010())
+      
+      return(b)
     }
     stop(paste("Year:",year," not supported"))
   }
@@ -215,7 +304,7 @@ diary_info_columns_us_cex_2004<-function(){
 }
 
 diary_info_columns_lsms_2010<-function(){
-  return(c("item","lwp_unit", "lwp", "expense", "own_unit", "own", "lwp", "gift_unit", "gift"))
+  return(c("hhid","item","lwp_unit", "lwp", "cost", "own_unit", "own", "gift_unit", "gift"))
 }
 
 ohs_info_columns_us_cex_2004<-function(){
@@ -225,7 +314,7 @@ ohs_info_columns_us_cex_2004<-function(){
 ohs_info_columns_lsms_2010<-function(){
   # hhid, age, gender, educ, race, hsize, areatype, 
   # income file: income
-  return(c("hhid", "gender", "YOB", "head_of_household", "inhouse_consumer",
+  return(c("hhid", "gender", "personid","YOB", "head_of_household", "inhouse_consumer",
            "inhouse_days_in_month", "inhouse_resident", "outhouse_days_in_year", 
            "occupation", "fathers_educ", "mothers_educ", "married", "spouse_resident",
            "outhouse_spouses", "source_migration_name", "source_migration_code", 
@@ -233,12 +322,6 @@ ohs_info_columns_lsms_2010<-function(){
 }
 
 get_ohs_info_columns<-function(dataset,year){
-  if (dataset == "lsms"){
-    if (year ==2010){
-      return(ohs_info_columns_lsms_2010())
-    }
-    stop(paste("Year : ",year," not found for lsms"))
-  }
   
   if (dataset == "us_cex"){
     if (year ==2004 || year ==2009|| year == 2014){
@@ -280,13 +363,6 @@ get_ignored_hhids<-function(dataset,hh,ohs,income){
 
 load_ohs_mapping<-function(dataset,year){
   
-  if (dataset == "lsms") {
-    if (year ==2010){
-      return(ohs_mapping_lsms_2010());
-    }
-    stop(paste("Year not found:",year))
-  }
-  
   if (dataset == "us_cex") {
     if (year ==2004 || year == 2009 || year == 2014){
       return(ohs_mapping_us_cex_2004());
@@ -303,10 +379,9 @@ hh_mapping_lsms_2010 <-function(){
   s= rbind(s,data.frame(iesname="itemcode",name="item"))
   s= rbind(s,data.frame(iesname="hh_k03_1",name="lwp_unit"))
   s= rbind(s,data.frame(iesname="hh_k03_2",name="lwp"))
-  s= rbind(s,data.frame(iesname="hh_k04",name="expense"))
+  s= rbind(s,data.frame(iesname="hh_k04",name="cost"))
   s= rbind(s,data.frame(iesname="hh_k05_1",name="own_unit"))
   s= rbind(s,data.frame(iesname="hh_k05_2",name="own"))
-  s= rbind(s,data.frame(iesname="hh_k03_2",name="lwp"))
   s= rbind(s,data.frame(iesname="hh_k06_1",name="gift_unit"))
   s= rbind(s,data.frame(iesname="hh_k06_2",name="gift"))
   return(s)
@@ -324,6 +399,7 @@ hh_us_cex_mapping_2004<-function(){
 ohs_mapping_lsms_2010<-function(){
   s = data.frame(iesname=NULL,name=NULL)
   s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
+  s= rbind(s,data.frame(iesname="indidy2",name="personid"))
   s= rbind(s,data.frame(iesname="hh_b02",name="gender"))
   s= rbind(s,data.frame(iesname="hh_b03_1",name="YOB"))
   s= rbind(s,data.frame(iesname="hh_b05",name="head_of_household"))
