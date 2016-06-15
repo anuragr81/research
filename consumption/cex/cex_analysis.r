@@ -88,7 +88,7 @@ check_ds<-function(df){
 
 get_lsms_secm_info_columns<-function(year){
   if (year == 2010){
-    return(c("hhid","item","is_consumed","cost","price"))
+    return(c("hhid","item","is_consumed","cost"))
   }
   stop(paste("Not secm info columns for year: ",year))
 }
@@ -207,9 +207,9 @@ load_diary_file <-function(dataset,year){
       #yearly_recall_items <- c("301", "302", "303", "304", "305", "306", "307", "308", "309", 
       #                         "310", "311", "312", "313", "314", "315", "316", "317", "318", "319")
       
-      
-      ml <-merge(m,l)
-      mlk <-merge(ml,k)
+      # Either outer-join or an rbind must be used
+      ml <-merge(m,l,all=TRUE)
+      mlk <-merge(ml,k,all=TRUE)
       return(mlk)
     }
     stop(paste("Year:",year, " not supported"))
