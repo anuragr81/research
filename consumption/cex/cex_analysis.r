@@ -88,7 +88,7 @@ check_ds<-function(df){
 
 get_lsms_secm_info_columns<-function(year){
   if (year == 2010){
-    return(c("hhid","is_consumed","cost","price"))
+    return(c("hhid","item","is_consumed","cost","price"))
   }
   stop(paste("Not secm info columns for year: ",year))
 }
@@ -98,6 +98,7 @@ get_lsms_secm_fields_mapping<-function(year){
     s = data.frame(iesname=NULL,name=NULL)
     s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
     s= rbind(s,data.frame(iesname="hh_m01_2",name="is_consumed"))
+    s= rbind(s,data.frame(iesname="itemcode",name="item"))
     s= rbind(s,data.frame(iesname="hh_m02",name="cost"))
     s= rbind(s,data.frame(iesname="hh_m03",name="price"))
     return(s)
@@ -156,33 +157,38 @@ load_diary_file <-function(dataset,year){
   if (dataset == "lsms"){
     if (year == 2010){
       # combine sections ( k , l, m )
-      kdat <- read_tnz("../lsms/TZNPS2HH3DTA/HH_SEC_K1.dta",TRUE)
-      k = get_translated_frame(dat=kdat,
+      kdat <- read_tnz("../lsms/TZNPS2HH3DTA/HH_SEC_K1.dta",FALSE)
+      k <- get_translated_frame(dat=kdat,
                                names=diary_info_columns_lsms_2010(),
                                m=hh_mapping_lsms_2010())
       
       k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      factor <- 52
+      # quantities are normalized to annual values
+      k$cost <- k$cost*factor
+      k$lwp <- k$lwp *factor
+      k$own <-k$own*factor
+      k$gift <-k$gift*factor
+      
       ###
       ldat <- read_tnz("../lsms/TZNPS2HH2DTA/HH_SEC_L.dta",FALSE)
-      l = get_translated_frame(dat=ldat,
+      l <- get_translated_frame(dat=ldat,
                                names=get_lsms_secl_info_columns_2010(),
                                m=get_lsms_secl_fields_mapping_2010())
+      l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
+      weekly_recall_items <-c(101,102,103)
       
-      ###
-      mdat <-read_tnz( '../lsms/TZNPS2HH2DTA/HH_SEC_M.dta',TRUE)
-      m = get_translated_frame(dat=mdat,
-                               names=get_lsms_secm_info_columns(year),
-                               m=get_lsms_secm_fields_mapping(year))
+      # l is weekly and  monthly data
       
-      yearly_recall_items <- c("301", "302", "303", "304", "305", "306", "307", "308", "309", 
-                               "310", "311", "312", "313", "314", "315", "316", "317", "318", "319")
+      l <- multiplyLsmsQuantities(dat = l , 
+                                  quantity_field_name="cost", 
+                                  item_field_name="item", 
+                                  factor=52,
+                                  items_list = weekly_recall_items)
       
-      # nothing to be multiplied for yearly-recall (since we're looking at annual consumption)
-      
-      # m, l are month or year basis
       monthly_recall_items <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
-        "210", "211", "212", "213", "214", "215", "216", "217", "218", "219",
-        "220", "221", "222", "223", "224")  
+                                "210", "211", "212", "213", "214", "215", "216", "217", "218", "219",
+                                "220", "221", "222", "223", "224")  
       
       l <- multiplyLsmsQuantities(dat = l , 
                                   quantity_field_name="cost", 
@@ -190,7 +196,21 @@ load_diary_file <-function(dataset,year){
                                   factor=12,
                                   items_list = monthly_recall_items)
       
-      return(k)
+      # m is yearly data
+      mdat <-read_tnz( '../lsms/TZNPS2HH2DTA/HH_SEC_M.dta',FALSE)
+      m <- get_translated_frame(dat=mdat,
+                               names=get_lsms_secm_info_columns(2010),
+                               m=get_lsms_secm_fields_mapping(2010))
+      m<- m[!is.na(m$hhid) & !is.na(m$cost) & m$cost>0,]
+      # nothing to be multiplied for yearly-recall (since we're looking at annual consumption)
+      
+      #yearly_recall_items <- c("301", "302", "303", "304", "305", "306", "307", "308", "309", 
+      #                         "310", "311", "312", "313", "314", "315", "316", "317", "318", "319")
+      
+      
+      ml <-merge(m,l)
+      mlk <-merge(ml,k)
+      return(mlk)
     }
     stop(paste("Year:",year, " not supported"))
   }
@@ -261,8 +281,9 @@ load_ohs_file <-function(dataset,year){
       c <- get_translated_frame(dat=cdat,
                                 names=get_ohs_secc_columns_lsms_2010(),
                                 m=get_ohs_secc_fields_mapping_lsms_2010())
-      
-      return(b)
+      ohs<-merge(b,c)
+      ohs$age <-2010-ohs$YOB
+      return(ohs)
     }
     stop(paste("Year:",year," not supported"))
   }
@@ -503,6 +524,7 @@ get_visible_categories_cex_2004<-function(hh,visible_categories){
 
 merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   print(colnames(hh))
+  # 
   return(NULL)
 }
 
