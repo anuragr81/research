@@ -469,6 +469,97 @@ load_diary_fields_mapping<-function(dataset,year){
 }
 
 
+get_lsms_sece1_columns_2010<-function(){
+  return(c("hhid", "personid", "is_ge5", "mainoccup", "is_wageworker", "employertype", "num_colleagues", 
+           "lastpayment_unit", "lastpayment", "workweekhour","workyearmonths", "workyearmonthweeks",
+           "workyearweekhours","has_lastpayment_other", "lastpayment_other_unit", 
+           "lastpayment_other", "has_secjob", "employertype_secjob", "num_colleagues_secjob", "has_secjobwages",
+           "lastpayment_secjobwage_unit", "lastpayment_secjobwage", "has_secjobwages_other", "lastpayment_secjobwage_other_unit",
+           "lastpayment_secjobwage_other", "has_selfemployment_week", "has_selfemployment_year", "selfemploymenttype",
+           "selfemploymentstockvalue", "selfemploymentincome_unit", "selfemploymentincome"))
+}
+
+get_lsms_sece2_columns_2010<-function(){
+  return(c("hhid", "personid","selfemploymenttype",
+           "selfemploymentstockvalue", "selfemploymentincome_unit", "selfemploymentincome"))
+}
+
+get_lsms_sece_fields_mapping_2010<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
+  s= rbind(s,data.frame(iesname="indidy2",name="personid"))
+  s= rbind(s,data.frame(iesname="hh_e01",name="is_ge5"))
+  s= rbind(s,data.frame(iesname="hh_e06",name="mainoccup"))
+  s= rbind(s,data.frame(iesname="hh_e13",name="is_wageworker"))
+  s= rbind(s,data.frame(iesname="hh_e15",name="employertype"))
+  s= rbind(s,data.frame(iesname="hh_e18",name="num_colleagues"))
+  s= rbind(s,data.frame(iesname="hh_e22_2",name="lastpayment_unit"))
+  s= rbind(s,data.frame(iesname="hh_e22_1",name="lastpayment"))
+  s= rbind(s,data.frame(iesname="hh_e23",name="has_lastpayment_other"))
+  s= rbind(s,data.frame(iesname="hh_e24_2",name="lastpayment_other_unit"))
+  s= rbind(s,data.frame(iesname="hh_e24_1",name="lastpayment_other"))
+  s= rbind(s,data.frame(iesname="hh_e25",name="workweekhours"))
+  s= rbind(s,data.frame(iesname="hh_e26",name="workyearmonths"))
+  s= rbind(s,data.frame(iesname="hh_e27",name="workyearmonthweeks"))
+  s= rbind(s,data.frame(iesname="hh_e28",name="workyearweekhours"))
+  s= rbind(s,data.frame(iesname="hh_e29",name="has_secjob"))
+  s= rbind(s,data.frame(iesname="hh_e30",name="employertype_secjob"))
+  s= rbind(s,data.frame(iesname="hh_e33",name="num_colleagues_secjob"))
+  s= rbind(s,data.frame(iesname="hh_e35",name="has_secjobwages"))
+  s= rbind(s,data.frame(iesname="hh_e37_1",name="lastpayment_secjobwage_unit"))
+  s= rbind(s,data.frame(iesname="hh_e37_2",name="lastpayment_secjobwage"))
+  s= rbind(s,data.frame(iesname="hh_e38",name="has_secjobwages_other"))
+  s= rbind(s,data.frame(iesname="hh_e39_1",name="lastpayment_secjobwage_other_unit"))
+  s= rbind(s,data.frame(iesname="hh_e39_2",name="lastpayment_secjobwage_other"))
+  s= rbind(s,data.frame(iesname="hh_e51",name="has_selfemployment_week"))
+  s= rbind(s,data.frame(iesname="hh_e52",name="has_selfemployment_year"))
+  s= rbind(s,data.frame(iesname="hh_e53_2",name="selfemploymenttype"))
+  s= rbind(s,data.frame(iesname="hh_e61",name="selfemploymentstockvalue"))
+  s= rbind(s,data.frame(iesname="hh_e65_1",name="selfemploymentincome_unit"))
+  s= rbind(s,data.frame(iesname="hh_e65_2",name="selfemploymentincome"))
+  return(s)
+}
+
+infer_lsms_sece_total_income<-function(i1,i2){
+  i1 <- i1[as.integer(i1$is_ge5)==1,]
+  i1_wageworker <- i1[as.integer(i1$is_wageworker)==1,]
+  # last_payment_unit HOUR(1) DAY(2)  WEEK(3) FORTNIGHT(4) MONTH(5) QUATOR(6) HALF YEAR(7) YEAR(8)
+  #if (pay is per hours)
+  h<-i1[i1$lastpayment_unit==1 & !is.na(i1$lastpayment_unit),]
+  factor_hour = h$workyearweekhours * h$workyearmonthweeks* h$workyearmonths 
+  h$yearlypay <-factor_hour*h$lastpayment
+  
+  #if (pay is per day )
+  # assuming a 10 hour work day
+  d<-i1[i1$lastpayment_unit==2 & !is.na(i1$lastpayment_unit),]
+  total_day_workers<- dim(d)[1]
+  
+  d<-d[!is.na(d$workyearweekhours) & !is.na(d$workyearmonthweeks) & !is.na(d$workyearmonths),]
+  total_day_workers_considered<- dim(d)[1]
+  print(paste("Number of day-wage-workers ignored because of incomplete data:",total_day_workers-total_day_workers_considered))
+  factor_day = (d$workyearweekhours/10)*d$workyearmonthweeks*d$workyearmonths
+  d$yearlypay <-factor_day*d$lastpayment
+  #if (pay is per week ){
+    # filter out missing fields
+  #  factor = workyearmonthweeks * workyearmonths
+  #}
+  
+  #if (pay is per fortnight ){
+    # filter out missing fields
+  #  factor = workyearmonths*24
+  #}
+  #if (pay is per month ){
+    # filter out missing fields
+  #  factor = workyearmonths
+  #}
+  #if (pay i quartor){
+    # filter out missing fields
+  #  factor=  (workyearmonths/3)
+  #}
+  #
+  #multiplyLsmsQuantities(dat=i1,quantity_field_name="last_payment",item_field_name="lastpayment_unit",factor=,items_list=c(""));
+}
+
 load_income_file<-function (dataset,year){
   
   if (dataset== "us_cex"){
@@ -476,6 +567,20 @@ load_income_file<-function (dataset,year){
     #stop(paste("No us_cex data for:",year))
   }
   if (dataset == "lsms"){
+    
+    # 
+    idat1 <-read_tnz('../lsms/./TZNPS2HH1DTA/HH_SEC_E1.dta',FALSE)
+    idat2 <-read_tnz('../lsms/./TZNPS2HH1DTA/HH_SEC_E2.dta',FALSE)
+    i1 <- get_translated_frame(dat=idat1,
+                              names=get_lsms_sece1_columns_2010(),
+                              m=get_lsms_sece_fields_mapping_2010())
+    i2 <- get_translated_frame(dat=idat1,
+                               names=get_lsms_sece2_columns_2010(),
+                               m=get_lsms_sece_fields_mapping_2010())
+    ti <- infer_lsms_sece_total_income(i1,i2);
+    
+    # idat2 has only got self-employment details
+    
     return(NULL)
   }
   
