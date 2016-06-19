@@ -477,7 +477,8 @@ get_lsms_sece1_columns_2010<-function(){
            "workweekhour_secjob","workyearmonths_secjob", "workyearmonthweeks_secjob","workyearweekhours_secjob",
            "lastpayment_secjobwage_unit", "lastpayment_secjobwage", "has_secjobwages_other", "lastpayment_secjobwage_other_unit",
            "lastpayment_secjobwage_other", "has_selfemployment_week", "has_selfemployment_year", "selfemploymenttype",
-           "selfemploymentstockvalue", "selfemploymentincome_unit", "selfemploymentincome"))
+           "selfemploymentstockvalue", "selfemploymentincome_unit", "selfemploymentincome","selfemploymentyearmonths",
+           "selfemploymentyearmonthincome"))
 }
 
 get_lsms_sece2_columns_2010<-function(){
@@ -524,6 +525,9 @@ get_lsms_sece_fields_mapping_2010<-function(){
   s= rbind(s,data.frame(iesname="hh_e61",name="selfemploymentstockvalue"))
   s= rbind(s,data.frame(iesname="hh_e65_1",name="selfemploymentincome_unit"))
   s= rbind(s,data.frame(iesname="hh_e65_2",name="selfemploymentincome"))
+  
+  s= rbind(s,data.frame(iesname="hh_e70",name="selfemploymentyearmonths"))
+  s= rbind(s,data.frame(iesname="hh_e71",name="selfemploymentyearmonthincome"))
   return(s)
 }
 
@@ -707,14 +711,12 @@ infer_lsms_sece_total_income<-function(i1,i2){
                                    workyearmonthweeks_field="workyearmonthweeks_secjob",
                                    workyearmonths_field="workyearmonths_secjob",
                                    output_field="yearly_pay");
+  #rbind for the yearly-pay data-frame
+  #ddply to sum up yearly-income from all sources
   
-  
-  
-  
+  i1_selfemployed<-i1[!is.na(i1$),]
+  print ("PENDING CONTROL VARS: employment_type, self_owned_business_type")
   return(i1_secjob_other_y)
-  
-  # other form of income
-  # secondary job income
   
   # self-employed income
   
