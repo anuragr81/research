@@ -144,9 +144,9 @@ multiplyLsmsQuantities <-function(dat,quantity_field_name,item_field_name,factor
   if (!is.data.frame(dat)){
     stop("data must be a data.frame")
   }
-#  if (is.element("mulfactor__",colnames(dat))){
-#    stop("input data already has a column named mulfactor__")
-#  }
+  #  if (is.element("mulfactor__",colnames(dat))){
+  #    stop("input data already has a column named mulfactor__")
+  #  }
   
   mulfactor_1 =  (factor-1)*as.integer(is.element(as.integer(dat[,item_field_name]),as.integer(items_list)))
   dat[,quantity_field_name]<-mulfactor_1*dat[,quantity_field_name]+dat[,quantity_field_name]
@@ -159,8 +159,8 @@ load_diary_file <-function(dataset,year){
       # combine sections ( k , l, m )
       kdat <- read_tnz("../lsms/TZNPS2HH3DTA/HH_SEC_K1.dta",FALSE)
       k <- get_translated_frame(dat=kdat,
-                               names=diary_info_columns_lsms_2010(),
-                               m=hh_mapping_lsms_2010())
+                                names=diary_info_columns_lsms_2010(),
+                                m=hh_mapping_lsms_2010())
       
       k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
       factor <- 52
@@ -173,8 +173,8 @@ load_diary_file <-function(dataset,year){
       ###
       ldat <- read_tnz("../lsms/TZNPS2HH2DTA/HH_SEC_L.dta",FALSE)
       l <- get_translated_frame(dat=ldat,
-                               names=get_lsms_secl_info_columns_2010(),
-                               m=get_lsms_secl_fields_mapping_2010())
+                                names=get_lsms_secl_info_columns_2010(),
+                                m=get_lsms_secl_fields_mapping_2010())
       l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
       weekly_recall_items <-c(101,102,103)
       
@@ -199,8 +199,8 @@ load_diary_file <-function(dataset,year){
       # m is yearly data
       mdat <-read_tnz( '../lsms/TZNPS2HH2DTA/HH_SEC_M.dta',FALSE)
       m <- get_translated_frame(dat=mdat,
-                               names=get_lsms_secm_info_columns(2010),
-                               m=get_lsms_secm_fields_mapping(2010))
+                                names=get_lsms_secm_info_columns(2010),
+                                m=get_lsms_secm_fields_mapping(2010))
       m<- m[!is.na(m$hhid) & !is.na(m$cost) & m$cost>0,]
       # nothing to be multiplied for yearly-recall (since we're looking at annual consumption)
       
@@ -474,6 +474,7 @@ get_lsms_sece1_columns_2010<-function(){
            "lastpayment_unit", "lastpayment", "workweekhour","workyearmonths", "workyearmonthweeks",
            "workyearweekhours","has_lastpayment_other", "lastpayment_other_unit", 
            "lastpayment_other", "has_secjob", "employertype_secjob", "num_colleagues_secjob", "has_secjobwages",
+           "workweekhour_secjob","workyearmonths_secjob", "workyearmonthweeks_secjob","workyearweekhours_secjob",
            "lastpayment_secjobwage_unit", "lastpayment_secjobwage", "has_secjobwages_other", "lastpayment_secjobwage_other_unit",
            "lastpayment_secjobwage_other", "has_selfemployment_week", "has_selfemployment_year", "selfemploymenttype",
            "selfemploymentstockvalue", "selfemploymentincome_unit", "selfemploymentincome"))
@@ -506,11 +507,17 @@ get_lsms_sece_fields_mapping_2010<-function(){
   s= rbind(s,data.frame(iesname="hh_e30",name="employertype_secjob"))
   s= rbind(s,data.frame(iesname="hh_e33",name="num_colleagues_secjob"))
   s= rbind(s,data.frame(iesname="hh_e35",name="has_secjobwages"))
-  s= rbind(s,data.frame(iesname="hh_e37_1",name="lastpayment_secjobwage_unit"))
-  s= rbind(s,data.frame(iesname="hh_e37_2",name="lastpayment_secjobwage"))
+  s= rbind(s,data.frame(iesname="hh_e37_2",name="lastpayment_secjobwage_unit"))
+  s= rbind(s,data.frame(iesname="hh_e37_1",name="lastpayment_secjobwage"))
   s= rbind(s,data.frame(iesname="hh_e38",name="has_secjobwages_other"))
-  s= rbind(s,data.frame(iesname="hh_e39_1",name="lastpayment_secjobwage_other_unit"))
-  s= rbind(s,data.frame(iesname="hh_e39_2",name="lastpayment_secjobwage_other"))
+  s= rbind(s,data.frame(iesname="hh_e39_2",name="lastpayment_secjobwage_other_unit"))
+  s= rbind(s,data.frame(iesname="hh_e39_1",name="lastpayment_secjobwage_other"))
+  
+  s= rbind(s,data.frame(iesname="hh_e40",name="workweekhours_secjob"))
+  s= rbind(s,data.frame(iesname="hh_e41",name="workyearmonths_secjob"))
+  s= rbind(s,data.frame(iesname="hh_e42",name="workyearmonthweeks_secjob"))
+  s= rbind(s,data.frame(iesname="hh_e43",name="workyearweekhours_secjob"))
+
   s= rbind(s,data.frame(iesname="hh_e51",name="has_selfemployment_week"))
   s= rbind(s,data.frame(iesname="hh_e52",name="has_selfemployment_year"))
   s= rbind(s,data.frame(iesname="hh_e53_2",name="selfemploymenttype"))
@@ -520,64 +527,196 @@ get_lsms_sece_fields_mapping_2010<-function(){
   return(s)
 }
 
-infer_lsms_sece_total_income<-function(i1,i2){
-  i1 <- i1[as.integer(i1$is_ge5)==1,]
-  i1_wageworker <- i1[as.integer(i1$is_wageworker)==1,]
+computeYearValues<-function(dat,
+                            unit_field,
+                            quantity_field,
+                            workyearweekhours_field,
+                            workyearmonthweeks_field,
+                            workyearmonths_field,
+                            output_field)
+  {
+  ufr <- range(dat[!is.na(dat[,unit_field]),][,unit_field])
+  if (ufr[1]<1 || ufr[2]>8){
+    stop("unit_field range not supported")
+  }
+  if (length(grep(output_field,colnames(dat),fixed=TRUE))>0){
+    stop("column yearly_pay already present in data-frame")
+  }
   # last_payment_unit HOUR(1) DAY(2)  WEEK(3) FORTNIGHT(4) MONTH(5) QUATOR(6) HALF YEAR(7) YEAR(8)
   #if (pay is per hours)
-  h<-i1[i1$lastpayment_unit==1 & !is.na(i1$lastpayment_unit),]
-  factor_hour = h$workyearweekhours * h$workyearmonthweeks* h$workyearmonths 
-  h$yearlypay <-factor_hour*h$lastpayment
-  
+  h<-dat[!is.na(dat[,unit_field]),]
+  h<-h[h[,unit_field]==1 ,]
+  total_hour_workers<- dim(h)[1]
+  if (total_hour_workers>0){
+    print(paste("Total number of hour-wage-workers:",total_hour_workers))
+    h<-h[!is.na(h[,workyearweekhours_field]),]
+    h<-h[!is.na(h[,workyearmonthweeks_field]),] 
+    h<-h[!is.na(h[,workyearmonths_field]),]
+    total_hour_workers_considered<- dim(h)[1]
+    print(paste("Number of hour-wage-workers ignored because of incomplete data:",total_hour_workers-total_hour_workers_considered))
+    factor_hour = h[,workyearweekhours_field] * h[,workyearmonthweeks_field]* h[,workyearmonths_field] 
+    h[,output_field] <-factor_hour*h[,quantity_field]
+  } else {
+    h<-NULL
+  }
   #if (pay is per day )
   # assuming a 10 hour work day
-  d<-i1[i1$lastpayment_unit==2 & !is.na(i1$lastpayment_unit),]
+  d<-dat[!is.na(dat[,unit_field]),]
+  d<-d[d[,unit_field]==2 ,]
   total_day_workers<- dim(d)[1]
-  d<-d[!is.na(d$workyearweekhours) & !is.na(d$workyearmonthweeks) & !is.na(d$workyearmonths),]
-  total_day_workers_considered<- dim(d)[1]
-  print(paste("Number of day-wage-workers ignored because of incomplete data:",total_day_workers-total_day_workers_considered))
-  factor_day = (d$workyearweekhours/10)*d$workyearmonthweeks*d$workyearmonths
-  d$yearlypay <-factor_day*d$lastpayment
-  
+  if (total_day_workers>0){
+    print(paste("Total number of day-wage-workers:",total_day_workers))
+    d<-d[!is.na(d[,workyearweekhours_field]),]
+    d<-d[!is.na(d[,workyearmonthweeks_field]),]
+    d<-d[!is.na(d[,workyearmonths_field]),]
+    
+    total_day_workers_considered<- dim(d)[1]
+    print(paste("Number of day-wage-workers ignored because of incomplete data:",total_day_workers-total_day_workers_considered))
+    factor_day = (d[,workyearweekhours_field]/10)*d[,workyearmonthweeks_field]*d[,workyearmonths_field]
+    d[,output_field] <-factor_day*d[,quantity_field]
+  } else {
+    d<-NULL
+  }
   #if (pay is per week )
-  w<-i1[i1$lastpayment_unit==3 & !is.na(i1$lastpayment_unit),]
+  w<-dat[!is.na(dat[,unit_field]),]
+  w<-w[w[,unit_field]==3,]
   total_week_workers<- dim(w)[1]
-  w<-w[!is.na(w$workyearmonths) & !is.na(w$workyearmonthweeks),]
-  total_week_workers_considered<- dim(w)[1]
-  print(paste("Number of week-wage-workers ignored because of incomplete data:",total_week_workers-total_week_workers_considered))
-  factor_week = w$workyearmonthweeks * w$workyearmonths
-  w$yearlypay <-factor_week*w$lastpayment
-  
+  if(total_week_workers>0){
+    print(paste("Total number of week-wage-workers:",total_week_workers))
+    w<-w[!is.na(w[,workyearmonths_field]) & !is.na(w[,workyearmonthweeks_field]),]
+    total_week_workers_considered<- dim(w)[1]
+    print(paste("Number of week-wage-workers ignored because of incomplete data:",total_week_workers-total_week_workers_considered))
+    factor_week = w[,workyearmonthweeks_field] * w[,workyearmonths_field]
+    w[,output_field] <-factor_week*w[,quantity_field]
+  } else {
+    w<-NULL
+  }
   #if (pay is per fortnight )
-  f<-i1[i1$lastpayment_unit==4 & !is.na(i1$lastpayment_unit),]
+  f<-dat[!is.na(dat[,unit_field]),]
+  f<-f[f[,unit_field]==4,]
   total_fortnight_workers<- dim(f)[1]
-  f<-f[!is.na(f$workyearmonths),]
-  total_fortnight_workers_considered<- dim(f)[1]
-  print(paste("Number of fortnight-wage-workers ignored because of incomplete data:",total_fortnight_workers-total_fortnight_workers_considered))
-  factor_fortnight = f$workyearmonths*2
-  f$yearlypay <-factor_fortnight*f$lastpayment
+  if (total_fortnight_workers>0){
+    print(paste("Total number of fortnight-wage-workers:",total_fortnight_workers))
+    f<-f[!is.na(f[,workyearmonths_field]),]
+    total_fortnight_workers_considered<- dim(f)[1]
+    print(paste("Number of fortnight-wage-workers ignored because of incomplete data:",total_fortnight_workers-total_fortnight_workers_considered))
+    factor_fortnight = f[,workyearmonths_field]*2
+    f[,output_field] <-factor_fortnight*f[,quantity_field]
+  } else {
+    f<-NULL
+  }
   #if (pay is per month )
-  m<-i1[i1$lastpayment_unit==5 & !is.na(i1$lastpayment_unit),]
+  m<-dat[!is.na(dat[,unit_field]),]
+  m<-m[m[,unit_field]==5 ,]
   total_month_workers<- dim(m)[1]
-  m<-m[!is.na(m$workyearmonths),]
-  total_month_workers_considered<- dim(m)[1]
-  print(paste("Number of month-wage-workers ignored because of incomplete data:",total_month_workers-total_month_workers_considered))
-  factor_month = m$workyearmonths
-  m$yearlypay <-factor_month*m$lastpayment
-  
+  if(total_month_workers>0){
+    print(paste("Total number of month-wage-workers:",total_month_workers))
+    m<-m[!is.na(m[,workyearmonths_field]),]
+    total_month_workers_considered<- dim(m)[1]
+    print(paste("Number of month-wage-workers ignored because of incomplete data:",total_month_workers-total_month_workers_considered))
+    factor_month = m[,workyearmonths_field]
+    m[,output_field] <-factor_month*m[,quantity_field]
+  }else{
+    m<-NULL
+  }
   #if (pay i quartor)
-  q<-i1[i1$lastpayment_unit==5 & !is.na(i1$lastpayment_unit),]
+  q<-dat[!is.na(dat[,unit_field]),]
+  q<-q[q[,unit_field]==5,]
   total_quarter_workers<- dim(q)[1]
-  q<-q[!is.na(m$workyearmonths),]
-  total_quarter_workers_considered<- dim(q)[1]
-  print(paste("Number of quarter-wage-workers ignored because of incomplete data:",total_quarter_workers-total_quarter_workers_considered))
-  factor_quarter = q$workyearmonths/3
-  q$yearlypay <-factor_quarter*q$lastpayment
-  
+  if(total_quarter_workers>0){
+    print(paste("Total number of quarter-wage-workers:",total_quarter_workers))
+    q<-q[!is.na(m[,workyearmonths_field]),]
+    total_quarter_workers_considered<- dim(q)[1]
+    print(paste("Number of quarter-wage-workers ignored because of incomplete data:",total_quarter_workers-total_quarter_workers_considered))
+    factor_quarter = q[,workyearmonths_field]/3
+    q[,output_field] <-factor_quarter*q[,quantity_field]
+  }else{
+    q<-NULL
+  }
   # if pay is year 
   # factor = 1
-  y<-i1[i1$lastpayment_unit==6 & !is.na(i1$lastpayment_unit),]
-  y$yearlypay <-y$lastpayment
+  y<-dat[!is.na(dat[,unit_field]),]
+  y<-y[y[,unit_field]==6,]
+  total_year_workers<-dim(y)[1]
+  if(total_year_workers>0){
+    print(paste("Total number of yearly-wage-workers:",total_year_workers))
+    y[,output_field] <-y[,quantity_field]
+  } else {
+    y<-NULL
+  }
+  
+  hd<-rbind(h,d)
+  hdw<-rbind(hd,w)
+  hdwf<-rbind(hdw,f)
+  hdwfm<-rbind(hdwf,m)
+  hdwfmq<-rbind(hdwfm,q)
+  hdwfmqy<-rbind(hdwfmq,y)
+  return(hdwfmqy)
+}
+
+infer_lsms_sece_total_income<-function(i1,i2){
+  i1 <- i1[!is.na(i1$is_ge5),]
+  i1 <- i1[as.integer(i1$is_ge5)==1,]
+  i1_w<-i1[!is.na(i1$is_wageworker),]
+  i1_w <- i1_w[as.integer(i1_w$is_wageworker)==1,]
+  # sum up wages into column yearly pay
+  i1_w_y <- computeYearValues(dat=i1_w,
+                              unit_field="lastpayment_unit",
+                              quantity_field="lastpayment",
+                              workyearweekhours_field="workyearweekhours",
+                              workyearmonthweeks_field="workyearmonthweeks",
+                              workyearmonths_field="workyearmonths",
+                              output_field="yearly_pay");
+  #other forms of payment
+  
+  i1_w_other<- i1_w[!is.na(i1_w$has_lastpayment_other),]
+  i1_w_other <- i1_w_other[as.integer(i1_w_other$has_lastpayment_other)==1 ,]
+  
+  i1_w_other_y <- computeYearValues(dat=i1_w_other,
+                              unit_field="lastpayment_other_unit",
+                              quantity_field="lastpayment_other",
+                              workyearweekhours_field="workyearweekhours",
+                              workyearmonthweeks_field="workyearmonthweeks",
+                              workyearmonths_field="workyearmonths",
+                              output_field="yearly_pay");
+  
+  #secondary job wages
+  
+  i1_secjob<-i1[!is.na(i1$has_secjobwages),]
+  i1_secjob<-i1_secjob[!is.na(i1_secjob$has_secjob),]
+  i1_secjob <- i1_secjob[as.integer(i1_secjob$has_secjobwages)==1,]
+  i1_secjob <-i1_secjob[as.integer(i1_secjob$has_secjob)==1,]
+  
+  i1_secjob_y <- computeYearValues(dat=i1_secjob,
+                                   unit_field="lastpayment_secjobwage_unit",
+                                   quantity_field="lastpayment_secjobwage",
+                                   workyearweekhours_field="workyearweekhours_secjob",
+                                   workyearmonthweeks_field="workyearmonthweeks_secjob",
+                                   workyearmonths_field="workyearmonths_secjob",
+                                   output_field="yearly_pay");
+  #other wages from secondary job
+  i1_secjob_other<-i1[!is.na(i1$has_secjobwages_other),]
+  i1_secjob_other<-i1_secjob_other[!is.na(i1_secjob_other$has_secjob),]
+  i1_secjob_other <-i1_secjob_other[as.integer(i1_secjob_other$has_secjob)==1,]
+  i1_secjob_other <- i1_secjob_other[as.integer(i1_secjob_other$has_secjobwages_other)==1,]
+  
+  i1_secjob_other_y <- computeYearValues(dat=i1_secjob_other,
+                                   unit_field="lastpayment_secjobwage_other_unit",
+                                   quantity_field="lastpayment_secjobwage_other",
+                                   workyearweekhours_field="workyearweekhours_secjob",
+                                   workyearmonthweeks_field="workyearmonthweeks_secjob",
+                                   workyearmonths_field="workyearmonths_secjob",
+                                   output_field="yearly_pay");
+  
+  
+  
+  
+  return(i1_secjob_other_y)
+  
+  # other form of income
+  # secondary job income
+  
+  # self-employed income
   
 }
 
@@ -593,8 +732,8 @@ load_income_file<-function (dataset,year){
     idat1 <-read_tnz('../lsms/./TZNPS2HH1DTA/HH_SEC_E1.dta',FALSE)
     idat2 <-read_tnz('../lsms/./TZNPS2HH1DTA/HH_SEC_E2.dta',FALSE)
     i1 <- get_translated_frame(dat=idat1,
-                              names=get_lsms_sece1_columns_2010(),
-                              m=get_lsms_sece_fields_mapping_2010())
+                               names=get_lsms_sece1_columns_2010(),
+                               m=get_lsms_sece_fields_mapping_2010())
     i2 <- get_translated_frame(dat=idat1,
                                names=get_lsms_sece2_columns_2010(),
                                m=get_lsms_sece_fields_mapping_2010())
@@ -602,7 +741,7 @@ load_income_file<-function (dataset,year){
     
     # idat2 has only got self-employment details
     
-    return(NULL)
+    return(ti)
   }
   
   stop(paste("Unknown dataset: ",dataset))
