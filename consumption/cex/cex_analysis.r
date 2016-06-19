@@ -533,31 +533,52 @@ infer_lsms_sece_total_income<-function(i1,i2){
   # assuming a 10 hour work day
   d<-i1[i1$lastpayment_unit==2 & !is.na(i1$lastpayment_unit),]
   total_day_workers<- dim(d)[1]
-  
   d<-d[!is.na(d$workyearweekhours) & !is.na(d$workyearmonthweeks) & !is.na(d$workyearmonths),]
   total_day_workers_considered<- dim(d)[1]
   print(paste("Number of day-wage-workers ignored because of incomplete data:",total_day_workers-total_day_workers_considered))
   factor_day = (d$workyearweekhours/10)*d$workyearmonthweeks*d$workyearmonths
   d$yearlypay <-factor_day*d$lastpayment
-  #if (pay is per week ){
-    # filter out missing fields
-  #  factor = workyearmonthweeks * workyearmonths
-  #}
   
-  #if (pay is per fortnight ){
-    # filter out missing fields
-  #  factor = workyearmonths*24
-  #}
-  #if (pay is per month ){
-    # filter out missing fields
-  #  factor = workyearmonths
-  #}
-  #if (pay i quartor){
-    # filter out missing fields
-  #  factor=  (workyearmonths/3)
-  #}
-  #
-  #multiplyLsmsQuantities(dat=i1,quantity_field_name="last_payment",item_field_name="lastpayment_unit",factor=,items_list=c(""));
+  #if (pay is per week )
+  w<-i1[i1$lastpayment_unit==3 & !is.na(i1$lastpayment_unit),]
+  total_week_workers<- dim(w)[1]
+  w<-w[!is.na(w$workyearmonths) & !is.na(w$workyearmonthweeks),]
+  total_week_workers_considered<- dim(w)[1]
+  print(paste("Number of week-wage-workers ignored because of incomplete data:",total_week_workers-total_week_workers_considered))
+  factor_week = w$workyearmonthweeks * w$workyearmonths
+  w$yearlypay <-factor_week*w$lastpayment
+  
+  #if (pay is per fortnight )
+  f<-i1[i1$lastpayment_unit==4 & !is.na(i1$lastpayment_unit),]
+  total_fortnight_workers<- dim(f)[1]
+  f<-f[!is.na(f$workyearmonths),]
+  total_fortnight_workers_considered<- dim(f)[1]
+  print(paste("Number of fortnight-wage-workers ignored because of incomplete data:",total_fortnight_workers-total_fortnight_workers_considered))
+  factor_fortnight = f$workyearmonths*2
+  f$yearlypay <-factor_fortnight*f$lastpayment
+  #if (pay is per month )
+  m<-i1[i1$lastpayment_unit==5 & !is.na(i1$lastpayment_unit),]
+  total_month_workers<- dim(m)[1]
+  m<-m[!is.na(m$workyearmonths),]
+  total_month_workers_considered<- dim(m)[1]
+  print(paste("Number of month-wage-workers ignored because of incomplete data:",total_month_workers-total_month_workers_considered))
+  factor_month = m$workyearmonths
+  m$yearlypay <-factor_month*m$lastpayment
+  
+  #if (pay i quartor)
+  q<-i1[i1$lastpayment_unit==5 & !is.na(i1$lastpayment_unit),]
+  total_quarter_workers<- dim(q)[1]
+  q<-q[!is.na(m$workyearmonths),]
+  total_quarter_workers_considered<- dim(q)[1]
+  print(paste("Number of quarter-wage-workers ignored because of incomplete data:",total_quarter_workers-total_quarter_workers_considered))
+  factor_quarter = q$workyearmonths/3
+  q$yearlypay <-factor_quarter*q$lastpayment
+  
+  # if pay is year 
+  # factor = 1
+  y<-i1[i1$lastpayment_unit==6 & !is.na(i1$lastpayment_unit),]
+  y$yearlypay <-y$lastpayment
+  
 }
 
 load_income_file<-function (dataset,year){
