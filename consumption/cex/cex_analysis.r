@@ -483,7 +483,9 @@ get_lsms_sece1_columns_2010<-function(){
 
 get_lsms_sece2_columns_2010<-function(){
   return(c("hhid", "personid","selfemploymenttype",
-           "selfemploymentstockvalue", "selfemploymentincome_unit", "selfemploymentincome"))
+           "selfemploymentstockvalue", "selfemploymentincome_unit", "selfemploymentincome",
+           "selfemploymentyearmonths",
+           "selfemploymentyearmonthincome"))
 }
 
 get_lsms_sece_fields_mapping_2010<-function(){
@@ -659,6 +661,7 @@ computeYearValues<-function(dat,
 }
 
 infer_lsms_sece_total_income<-function(i1,i2){
+  ydata<-NULL
   i1 <- i1[!is.na(i1$is_ge5),]
   i1 <- i1[as.integer(i1$is_ge5)==1,]
   i1_w<-i1[!is.na(i1$is_wageworker),]
@@ -671,6 +674,7 @@ infer_lsms_sece_total_income<-function(i1,i2){
                               workyearmonthweeks_field="workyearmonthweeks",
                               workyearmonths_field="workyearmonths",
                               output_field="yearly_pay");
+  ydata<-rbind(ydata,data.frame(hhid=i1_w_y$hhid,personid=i1_w_y$personid,yearly_pay=i1_w_y$yearly_pay))
   #other forms of payment
   
   i1_w_other<- i1_w[!is.na(i1_w$has_lastpayment_other),]
@@ -684,6 +688,7 @@ infer_lsms_sece_total_income<-function(i1,i2){
                               workyearmonths_field="workyearmonths",
                               output_field="yearly_pay");
   
+  ydata<-rbind(ydata,data.frame(hhid=i1_w_other_y$hhid,personid=i1_w_other_y$personid,yearly_pay=i1_w_other_y$yearly_pay))
   #secondary job wages
   
   i1_secjob<-i1[!is.na(i1$has_secjobwages),]
@@ -698,6 +703,8 @@ infer_lsms_sece_total_income<-function(i1,i2){
                                    workyearmonthweeks_field="workyearmonthweeks_secjob",
                                    workyearmonths_field="workyearmonths_secjob",
                                    output_field="yearly_pay");
+  
+  ydata<-rbind(ydata,data.frame(hhid=i1_secjob_y$hhid,personid=i1_secjob_y$personid,yearly_pay=i1_secjob_y$yearly_pay))
   #other wages from secondary job
   i1_secjob_other<-i1[!is.na(i1$has_secjobwages_other),]
   i1_secjob_other<-i1_secjob_other[!is.na(i1_secjob_other$has_secjob),]
@@ -711,12 +718,28 @@ infer_lsms_sece_total_income<-function(i1,i2){
                                    workyearmonthweeks_field="workyearmonthweeks_secjob",
                                    workyearmonths_field="workyearmonths_secjob",
                                    output_field="yearly_pay");
+  ydata<-rbind(ydata,data.frame(hhid=i1_secjob_other_y$hhid,personid=i1_secjob_other_y$personid,yearly_pay=i1_secjob_other_y$yearly_pay))
   #rbind for the yearly-pay data-frame
-  #ddply to sum up yearly-income from all sources
   
-  i1_selfemployed<-i1[!is.na(i1$),]
+  i1_selfemployed<-i1[!is.na(i1$has_selfemployment_year),]
+  i1_selfemployed<-i1_selfemployed[as.integer(i1_selfemployed$has_selfemployment_year)==1,]
+  total_self_employed<-dim(i1_selfemployed)[1]
+  print(paste("Number of self-employed-workers:",total_self_employed))
+  i1_selfemployed<-i1_selfemployed[!is.na(i1_selfemployed$selfemploymentyearmonths),]
+  i1_selfemployed<-i1_selfemployed[!is.na(i1_selfemployed$selfemploymentyearmonthincome),]
+  total_self_employed_considered<-dim(i1_selfemployed)[1]
+  print(paste("Number of self-employed-workers ignored because of incomplete data:",total_self_employed-total_self_employed_considered));
+  i1_selfemployed_y <-i1_selfemployed
+  i1_selfemployed_y$yearly_pay<-i1_selfemployed$selfemploymentyearmonths*i1_selfemployed$selfemploymentyearmonthincome
+  
+  ydata<-rbind(ydata,data.frame(hhid=i1_selfemployed_y$hhid,personid=i1_selfemployed_y$personid,yearly_pay=i1_selfemployed_y$yearly_pay))
+  
   print ("PENDING CONTROL VARS: employment_type, self_owned_business_type")
-  return(i1_secjob_other_y)
+  
+  #ddply to sum up yearly-income from all sources
+  ydata <-ddply(ydata,.(hhid,personid),total_income=sum(yearly_pay))
+  
+  return(ydata)
   
   # self-employed income
   
