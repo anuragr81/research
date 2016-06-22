@@ -209,6 +209,7 @@ load_diary_file <-function(dataset,year){
       
       # Either outer-join or an rbind must be used
       ml <-merge(m,l,all=TRUE)
+      #return(ml)
       mlk <-merge(ml,k,all=TRUE)
       return(mlk)
     }
@@ -272,12 +273,12 @@ load_ohs_file <-function(dataset,year){
   
   if (dataset == "lsms"){
     if (year == 2010){
-      bdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_B.dta',TRUE)
+      bdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_B.dta',FALSE)
       b <- get_translated_frame(dat=bdat,
                                 names=ohs_info_columns_lsms_2010(),
                                 m=ohs_mapping_lsms_2010())
       
-      cdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_C.dta',TRUE)
+      cdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_C.dta',FALSE)
       c <- get_translated_frame(dat=cdat,
                                 names=get_ohs_secc_columns_lsms_2010(),
                                 m=get_ohs_secc_fields_mapping_lsms_2010())
@@ -335,9 +336,9 @@ ohs_info_columns_us_cex_2004<-function(){
 ohs_info_columns_lsms_2010<-function(){
   # hhid, age, gender, educ, race, hsize, areatype, 
   # income file: income
-  return(c("hhid", "gender", "personid","YOB", "head_of_household", "inhouse_consumer",
+  return(c("hhid", "gender", "personid","YOB", "household_status", "inhouse_consumer",
            "inhouse_days_in_month", "inhouse_resident", "outhouse_days_in_year", 
-           "occupation", "fathers_educ", "mothers_educ", "married", "spouse_resident",
+           "occupation", "fathers_educ", "mothers_educ", "married", "spouse_resident","years_community",
            "outhouse_spouses", "source_migration_name", "source_migration_code", 
            "reason_migration", "birthdistrict_name", "birthdistrict_code"))
 }
@@ -423,7 +424,7 @@ ohs_mapping_lsms_2010<-function(){
   s= rbind(s,data.frame(iesname="indidy2",name="personid"))
   s= rbind(s,data.frame(iesname="hh_b02",name="gender"))
   s= rbind(s,data.frame(iesname="hh_b03_1",name="YOB"))
-  s= rbind(s,data.frame(iesname="hh_b05",name="head_of_household"))
+  s= rbind(s,data.frame(iesname="hh_b05",name="household_status"))
   s= rbind(s,data.frame(iesname="hh_b07",name="inhouse_consumer"))
   s= rbind(s,data.frame(iesname="hh_b08",name="inhouse_days_in_month"))
   s= rbind(s,data.frame(iesname="hh_b09_1",name="inhouse_resident"))
@@ -434,6 +435,9 @@ ohs_mapping_lsms_2010<-function(){
   s= rbind(s,data.frame(iesname="hh_b19",name="married"))
   s= rbind(s,data.frame(iesname="hh_b21",name="spouse_resident"))
   s= rbind(s,data.frame(iesname="hh_b24",name="outhouse_spouses"))
+  
+  s= rbind(s,data.frame(iesname="hh_b25",name="years_community"))
+  
   s= rbind(s,data.frame(iesname="hh_b26_2",name="source_migration_name"))
   s= rbind(s,data.frame(iesname="hh_b26_3",name="source_migration_code"))
   s= rbind(s,data.frame(iesname="hh_b27",name="reason_migration"))
@@ -483,7 +487,7 @@ get_lsms_sece1_columns_2010<-function(){
 
 get_lsms_sece2_columns_2010<-function(){
   return(c("hhid", "personid","selfemploymenttype",
-           "selfemploymentstockvalue", "selfemploymentincome_unit", "selfemploymentincome",
+           "selfemploymentstockvalue", "selfemploymentincome_unit", "selfemploymentincome","has_selfemployment_year",
            "selfemploymentyearmonths",
            "selfemploymentyearmonthincome"))
 }
@@ -520,7 +524,7 @@ get_lsms_sece_fields_mapping_2010<-function(){
   s= rbind(s,data.frame(iesname="hh_e41",name="workyearmonths_secjob"))
   s= rbind(s,data.frame(iesname="hh_e42",name="workyearmonthweeks_secjob"))
   s= rbind(s,data.frame(iesname="hh_e43",name="workyearweekhours_secjob"))
-
+  
   s= rbind(s,data.frame(iesname="hh_e51",name="has_selfemployment_week"))
   s= rbind(s,data.frame(iesname="hh_e52",name="has_selfemployment_year"))
   s= rbind(s,data.frame(iesname="hh_e53_2",name="selfemploymenttype"))
@@ -540,7 +544,7 @@ computeYearValues<-function(dat,
                             workyearmonthweeks_field,
                             workyearmonths_field,
                             output_field)
-  {
+{
   ufr <- range(dat[!is.na(dat[,unit_field]),][,unit_field])
   if (ufr[1]<1 || ufr[2]>8){
     stop("unit_field range not supported")
@@ -646,7 +650,8 @@ computeYearValues<-function(dat,
   total_year_workers<-dim(y)[1]
   if(total_year_workers>0){
     print(paste("Total number of yearly-wage-workers:",total_year_workers))
-    y[,output_field] <-y[,quantity_field]
+    qy <-y[,quantity_field]
+    y[,output_field] <-qy
   } else {
     y<-NULL
   }
@@ -658,6 +663,21 @@ computeYearValues<-function(dat,
   hdwfmq<-rbind(hdwfm,q)
   hdwfmqy<-rbind(hdwfmq,y)
   return(hdwfmqy)
+}
+
+computeLsmsSelfemployedValues<-function(dat,has_selfemployment_year_field,selfemploymentyearmonths_field,selfemploymentyearmonthincome_field)
+{
+  i11<-dat[!is.na(dat[,has_selfemployment_year_field]),]
+  i1_selfemployed<-i11[as.integer(i11[,has_selfemployment_year_field])==1,]
+  total_self_employed<-dim(i1_selfemployed)[1]
+  print(paste("Number of self-employed-workers:",total_self_employed))
+  i1_selfemployed<-i1_selfemployed[!is.na(i1_selfemployed[,selfemploymentyearmonths_field]),]
+  i1_selfemployed<-i1_selfemployed[!is.na(i1_selfemployed[,selfemploymentyearmonthincome_field]),]
+  total_self_employed_considered<-dim(i1_selfemployed)[1]
+  print(paste("Number of self-employed-workers ignored because of incomplete data:",total_self_employed-total_self_employed_considered));
+  x <-i1_selfemployed
+  x$yearly_pay<-x[,selfemploymentyearmonths_field]*x[,selfemploymentyearmonthincome_field]
+  return(x)
 }
 
 infer_lsms_sece_total_income<-function(i1,i2){
@@ -681,12 +701,12 @@ infer_lsms_sece_total_income<-function(i1,i2){
   i1_w_other <- i1_w_other[as.integer(i1_w_other$has_lastpayment_other)==1 ,]
   
   i1_w_other_y <- computeYearValues(dat=i1_w_other,
-                              unit_field="lastpayment_other_unit",
-                              quantity_field="lastpayment_other",
-                              workyearweekhours_field="workyearweekhours",
-                              workyearmonthweeks_field="workyearmonthweeks",
-                              workyearmonths_field="workyearmonths",
-                              output_field="yearly_pay");
+                                    unit_field="lastpayment_other_unit",
+                                    quantity_field="lastpayment_other",
+                                    workyearweekhours_field="workyearweekhours",
+                                    workyearmonthweeks_field="workyearmonthweeks",
+                                    workyearmonths_field="workyearmonths",
+                                    output_field="yearly_pay");
   
   ydata<-rbind(ydata,data.frame(hhid=i1_w_other_y$hhid,personid=i1_w_other_y$personid,yearly_pay=i1_w_other_y$yearly_pay))
   #secondary job wages
@@ -712,33 +732,40 @@ infer_lsms_sece_total_income<-function(i1,i2){
   i1_secjob_other <- i1_secjob_other[as.integer(i1_secjob_other$has_secjobwages_other)==1,]
   
   i1_secjob_other_y <- computeYearValues(dat=i1_secjob_other,
-                                   unit_field="lastpayment_secjobwage_other_unit",
-                                   quantity_field="lastpayment_secjobwage_other",
-                                   workyearweekhours_field="workyearweekhours_secjob",
-                                   workyearmonthweeks_field="workyearmonthweeks_secjob",
-                                   workyearmonths_field="workyearmonths_secjob",
-                                   output_field="yearly_pay");
+                                         unit_field="lastpayment_secjobwage_other_unit",
+                                         quantity_field="lastpayment_secjobwage_other",
+                                         workyearweekhours_field="workyearweekhours_secjob",
+                                         workyearmonthweeks_field="workyearmonthweeks_secjob",
+                                         workyearmonths_field="workyearmonths_secjob",
+                                         output_field="yearly_pay");
   ydata<-rbind(ydata,data.frame(hhid=i1_secjob_other_y$hhid,personid=i1_secjob_other_y$personid,yearly_pay=i1_secjob_other_y$yearly_pay))
   #rbind for the yearly-pay data-frame
-  
-  i1_selfemployed<-i1[!is.na(i1$has_selfemployment_year),]
-  i1_selfemployed<-i1_selfemployed[as.integer(i1_selfemployed$has_selfemployment_year)==1,]
-  total_self_employed<-dim(i1_selfemployed)[1]
-  print(paste("Number of self-employed-workers:",total_self_employed))
-  i1_selfemployed<-i1_selfemployed[!is.na(i1_selfemployed$selfemploymentyearmonths),]
-  i1_selfemployed<-i1_selfemployed[!is.na(i1_selfemployed$selfemploymentyearmonthincome),]
-  total_self_employed_considered<-dim(i1_selfemployed)[1]
-  print(paste("Number of self-employed-workers ignored because of incomplete data:",total_self_employed-total_self_employed_considered));
-  i1_selfemployed_y <-i1_selfemployed
-  i1_selfemployed_y$yearly_pay<-i1_selfemployed$selfemploymentyearmonths*i1_selfemployed$selfemploymentyearmonthincome
-  
-  ydata<-rbind(ydata,data.frame(hhid=i1_selfemployed_y$hhid,personid=i1_selfemployed_y$personid,yearly_pay=i1_selfemployed_y$yearly_pay))
+  i1_selfemployed_y<-computeLsmsSelfemployedValues(dat=i1,
+                                                   has_selfemployment_year_field="has_selfemployment_year",
+                                                   selfemploymentyearmonths_field="selfemploymentyearmonths",
+                                                   selfemploymentyearmonthincome_field="selfemploymentyearmonthincome");
+  a1=data.frame(hhid=i1_selfemployed_y$hhid,
+               personid=i1_selfemployed_y$personid,
+               yearly_pay=i1_selfemployed_y$yearly_pay)
+
+  i1_selfemployed_y2<-computeLsmsSelfemployedValues(dat=i2,
+                                                   has_selfemployment_year_field="has_selfemployment_year",
+                                                   selfemploymentyearmonths_field="selfemploymentyearmonths",
+                                                   selfemploymentyearmonthincome_field="selfemploymentyearmonthincome");
+  a2=data.frame(hhid=i1_selfemployed_y2$hhid,
+               personid=i1_selfemployed_y2$personid,
+               yearly_pay=i1_selfemployed_y2$yearly_pay)
+
+  print("Running outer-join (all-merge) for data from files 1 and 2");
+  a=merge(a1,a2,all=TRUE)
+
+  ydata<-rbind(ydata,a)
   
   print ("PENDING CONTROL VARS: employment_type, self_owned_business_type")
   
   #ddply to sum up yearly-income from all sources
+  print ("Running ddply to sum up yearly-pay from all sources")
   ydata <-ddply(ydata,.(hhid,personid),total_income=sum(yearly_pay))
-  
   return(ydata)
   
   # self-employed income
@@ -806,16 +833,61 @@ get_ucc_mapping_2004<-function(){
   return(mfile)
 }
 
-get_visible_categories_cex_2004<-function(hh,visible_categories){
-  vis<-hh[is.element(hh$uccname,visible_categories),] # get only visible categories
+get_visible_categories<-function(hh,visible_categories,item_field){
+  vis<-hh[is.element(hh[,item_field],visible_categories),] # get only visible categories
   vis<-ddply(vis,.(hhid),summarize,visible_consumption=sum(cost))
   return(vis)
 }
 
+#PP.........1 ADULT......2
+#PRIMARY  SECONDARY
+#D1........11 F1........21
+#D2........12 F2........22
+#D3........13 F3........23
+#D4........14 F4........24
+#D5........15 'O' +COURSE .25
+#D6........16 F5........31
+#D7........17 F6........32
+#D8........18 'A'+COURSE .33
+#OSC.......19 DIPLOMA...34
+#MS+COURSE.20
+#UNIVERSITY
+#U1........41 U2........42
+#U3........43 U4........44
+#U5&+......45
+
 merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
-  print(colnames(hh))
-  # 
-  return(NULL)
+  if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
+    stop("factors must be converted an integer")
+  }
+  
+  print ("Calculating visible expenditures")
+  vis<-get_visible_categories(hh=hh,visible_categories = visible_categories_lsms_2010(), item_field = "item")
+  print("Calculating total expenditures") 
+  totexp<-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
+  heads<-ohs[as.integer(ohs$household_status)==1,]
+  heads<-data.frame(hhid=heads$hhid,highest_educ=heads$highest_educ,age=heads$age,years_community=heads$years_community);
+  print("Treating highest_educ=NA as uneducated");
+  heads$highest_educ[is.na(heads$highest_educ)]<-1
+  print("Setting members with years_community=99 as their age");
+  heads$is_resident<-as.integer(as.integer(heads$years_community)==99)
+  heads$years_community<-heads$years_community+heads$is_resident*(heads$age-99);
+  
+  print ("Calculating hsize")
+  hhid_personid<-data.frame(hhid=ohs$hhid,personid=ohs$personid);
+  hhid_personid<- ddply(hhid_personid,.(hhid),summarize,hsize=length(personid));
+  print(paste("Merging visual expenditure : ",dim(ds)[1]))
+  ds <-merge(totexp,vis);
+  print(paste("Merging hsize",dim(ds)[1]))
+  ds <-merge(ds,hhid_personid);
+  ds<-merge(ds,heads)
+  print(paste("Merging income",dim(ds)[1]))
+  ds<-merge(ds,income)
+  return(ds)
+}
+
+visible_categories_lsms_2010<-function(){
+  return(c("219","214","301","313","314"));
 }
 
 merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
@@ -826,7 +898,7 @@ merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
   print (paste("Merging with ucc_mapping (columns: ",toString(colnames(ucc_mapping)),")"))
   hh<-merge(hh,ucc_mapping)
   print ("Obtaining visible categories")
-  vis<-get_visible_categories_cex_2004(hh=hh,visible_categories = visible_categories_us_cex_2004())
+  vis<-get_visible_categories(hh=hh,visible_categories = visible_categories_us_cex_2004(),item_field = "uccname")
   print ("====Food categories to be modified =====")
   #food<-get_food_categories_cex(hh=hh,food_categories = food_categories_cex());
   print ("Running ddply for total expenditures")
@@ -875,7 +947,7 @@ cex_combined_years_ds<-function(years)
   }
   resds <-NULL
   for (year in years){
-    ds=cex_combined_data_set(year)
+    ds=combined_data_set("us_cex",year,FALSE)
     resds = rbind(resds,ds)
   }
   return(resds)
@@ -908,7 +980,7 @@ combined_data_set<-function(dataset,year,isTranslated){
   ############ PHASE 1 - Translation ########################
   # info_columns must contain all hhdata-fields referred to in merging/aggregation phase (one per file)
   # translated frame makes the data available in a universal dictionary (age, gender etc.)
-  if (missing(isTranslated)) {
+  if (missing(isTranslated) || isTranslated==FALSE) {
     hh = get_translated_frame(dat=hhdat,
                               names=get_diary_info_columns(dataset,year),
                               m=load_diary_fields_mapping(dataset,year))
