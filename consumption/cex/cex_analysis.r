@@ -378,7 +378,7 @@ get_ignored_hhids<-function(dataset,hh,ohs,income){
     return(combined_ignored_hhids);
   } 
   if (dataset == "lsms"){
-    ignoredhhids_adhoc<- c("0701006104006701","0702006012004001")
+    ignoredhhids_adhoc<- c("0701006104006701","0702006012004001","0701021174002601","0702001125000103")
     ignoredhhids_zero_income <- unique(income[as.integer(income$yearly_pay)==0,]$hhid)
     ignored_threshold<-.025
     if( length(ignoredhhids_zero_income)/length(unique(income$hhid))>ignored_threshold){
@@ -386,8 +386,8 @@ get_ignored_hhids<-function(dataset,hh,ohs,income){
     }
     print(paste("Ignored ",length(ignoredhhids_zero_income),"/",length(unique(income$hhid)),"(=",
                 length(ignoredhhids_zero_income)/length(unique(income$hhid)),") households with zero income" ))
-    
-    return(c(ignoredhhids_zero_income,ignoredhhids_adhoc))
+    ignored<-union(ignoredhhids_zero_income,ignoredhhids_adhoc)
+    return(ignored)
   }
   
   stop(paste("No ignored hhids rationale for dataset:",dataset));
@@ -898,7 +898,8 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
 }
 
 visible_categories_lsms_2010<-function(){
-  return(c("214","301","313","314"));
+return(c("214","219","301","313","314"));
+ # return(c("314"))
   # 219 - Motor vehicle service, repair, or parts
   # 214 - Other personal products (shampoo, razor blades, cosmetics, hair products, etc.)
   # 301 - Carpets, rugs
@@ -1027,16 +1028,28 @@ combined_data_set<-function(dataset,year,isTranslated){
   # merge criteria is defined for every dependent variable
   
   ignored_hhids <- get_ignored_hhids(dataset,hhdat,ohsdat,incomedat);
-  
+  print(paste("Ids to be ignored(",length(ignored_hhids),"):{",ignored_hhids,"}"))
   if (!is.null(ignored_hhids)){  
     if (!is.null(hhdat)){
-      hh<-hh[!is.element(hh$hhid,ignored_hhids),]
+      n1<-length(unique(hh$hhid))
+      hh<-hh[!is.element(as.character(hh$hhid),as.character(ignored_hhids)),]
+      
+      n2<-length(unique(hh$hhid))
+      print(paste("ignored",n1-n2,"/",n1," hhids"))
     }
     if (!is.null(ohsdat)){
-      ohs<-ohs[!is.element(ohs$hhid,ignored_hhids),]
+      
+      n1<-length(unique(ohs$hhid))
+      ohs<-ohs[!is.element(as.character(ohs$hhid),as.character(ignored_hhids)),]
+      
+      n2<-length(unique(ohs$hhid))
+      print(paste("ignored",n1-n2,"/",n1," hhids"))
     }
     if (!is.null(incomedat)){
-      income<-income[!is.element(income$hhid,ignored_hhids),]
+      n1<-length(unique(income$hhid))
+      income<-income[!is.element(as.character(income$hhid),as.character(ignored_hhids)),]
+      n2<-length(unique(income$hhid))
+      print(paste("ignored",n1-n2,"/",n1," hhids"))
     }
   }
   dstruct<-merge_hh_ohs_income_data(dataset=dataset,hh=hh,ohs=ohs,income=income,year=year);
