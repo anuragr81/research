@@ -378,8 +378,18 @@ get_ignored_hhids<-function(dataset,hh,ohs,income){
     return(combined_ignored_hhids);
   } 
   if (dataset == "lsms"){
-    return(NULL)
+    ignoredhhids_adhoc<- c("0701006104006701","0702006012004001")
+    ignoredhhids_zero_income <- unique(income[as.integer(income$yearly_pay)==0,]$hhid)
+    ignored_threshold<-.025
+    if( length(ignoredhhids_zero_income)/length(unique(income$hhid))>ignored_threshold){
+      stop (paste("More than",ignored_threshold*100, "% hhids with zero income"))
+    }
+    print(paste("Ignored ",length(ignoredhhids_zero_income),"/",length(unique(income$hhid)),"(=",
+                length(ignoredhhids_zero_income)/length(unique(income$hhid)),") households with zero income" ))
+    
+    return(c(ignoredhhids_zero_income,ignoredhhids_adhoc))
   }
+  
   stop(paste("No ignored hhids rationale for dataset:",dataset));
 }
 
@@ -800,11 +810,12 @@ load_income_file<-function (dataset,year){
 }
 
 visible_categories_us_cex_2004<-function(){
-  
+  #return(c('miscpersonalcare', 'haircareproducts', 'nonelectrichairequipment', 'wigshairpieces',
+  #         'oralhygieneproducts', 'shavingneeds', 'cosmetics', 'miscpersonalcare'))
   # personal care, clothing and apparel (including footwear),jewelry, cars
   return(c('miscpersonalcare', 'haircareproducts', 'nonelectrichairequipment', 'wigshairpieces',
            'oralhygieneproducts', 'shavingneeds', 'cosmetics', 'miscpersonalcare',
-           'electricalpersonalcareequipment', 'femalepersonalcareservices', 
+         'electricalpersonalcareequipment', 'femalepersonalcareservices', 
            'malepersonalcareservices', 'personalcareappliancesrentalrepair', 'menssuits', 
            'menssportjackets', 'mensformaljackets', 'mensunderwear', 'menshosiery',
            'menssleepwear', 'mensaccessories', 'menssweater', 'mensactivesportswear', 
@@ -876,7 +887,7 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   print ("Calculating hsize")
   hhid_personid<-data.frame(hhid=ohs$hhid,personid=ohs$personid);
   hhid_personid<- ddply(hhid_personid,.(hhid),summarize,hsize=length(personid));
-  print(paste("Merging visual expenditure : ",dim(ds)[1]))
+  print(paste("Merging visual expenditure : ",dim(hhid_personid)[1]))
   ds <-merge(totexp,vis);
   print(paste("Merging hsize",dim(ds)[1]))
   ds <-merge(ds,hhid_personid);
@@ -887,7 +898,13 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
 }
 
 visible_categories_lsms_2010<-function(){
-  return(c("219","214","301","313","314"));
+  return(c("214","301","313","314"));
+  # 219 - Motor vehicle service, repair, or parts
+  # 214 - Other personal products (shampoo, razor blades, cosmetics, hair products, etc.)
+  # 301 - Carpets, rugs
+  # 313 - Bride price
+  # 314 - Funeral costs
+ 
 }
 
 merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){

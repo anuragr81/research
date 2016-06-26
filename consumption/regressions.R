@@ -17,7 +17,13 @@ run_regression_lsms<-function(ds,type){
   
   if (type=="simple"){
     # highest_educ, age, company-at-work, highest_eduation, years_in_community(=age when 99), total_expenditure, is_migrant, family_size  
-    res=lm(data=ds,visible_consumption~total_expenditure+hsize+highest_educ+age+years_community+is_resident+yearly_pay)
+    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+highest_educ+age+years_community+is_resident+yearly_pay)
+    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+highest_educ+age+years_community+is_resident)
+    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+years_community+is_resident)
+    # could is_resident be multicollinear?
+#    res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+years_community)
+    res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+is_resident)
+    
     print(summary(res))
     return(res)
     }
