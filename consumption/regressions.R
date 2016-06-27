@@ -32,7 +32,7 @@ run_regression_lsms<-function(ds,type){
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+years_community)
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+is_resident)
     
-    (religious_education, locality_dummies)
+    (religious_education, locality_dummies,self_reported_happiness,housing_expenditure,education,price_based_class,urban_rural)
     
     res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community+is_resident)
     print(summary(res))
