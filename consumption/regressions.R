@@ -32,13 +32,14 @@ run_regression_lsms<-function(ds,type){
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+years_community)
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+is_resident)
     
-    (religious_education, locality_dummies,self_reported_happiness,housing_expenditure,education,price_based_class,urban_rural)
+    #(religious_education, locality_dummies,self_reported_happiness,housing_expenditure,education,price_based_class,urban_rural)
+    print ("RELIGIOUS_EDUCATION,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS,AREA_TYPE, VISIBLE_SERVICES IGNORED")
     
     res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community+is_resident)
     print(summary(res))
     return(res)
     }
-  if (type="totexp"){
+  if (type=="totexp"){
     return(lm(data=ds,total_expenditure~yearly_pay+is_resident+highest_educ+age+hsize))
   }
   if (type=="2sls"){

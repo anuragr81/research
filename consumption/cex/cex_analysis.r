@@ -152,6 +152,19 @@ multiplyLsmsQuantities <-function(dat,quantity_field_name,item_field_name,factor
   dat[,quantity_field_name]<-mulfactor_1*dat[,quantity_field_name]+dat[,quantity_field_name]
   return(dat)
 }
+get_lsms_secj_info_columns_2010<-function(){
+  return(c("hhid","housingstatus","houserent","roomsnum_primary","roomsnum_secondary"))
+}
+
+get_lsms_secj_fields_mapping_2010<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
+  s= rbind(s,data.frame(iesname="hh_j01",name="housingstatus")) # 1- owner occupied, 2- EMPLOYER PROVIDED - SUBSIDIZED, 3-EMPLOYER PROVIDED - FREE, 4- RENTED, 5- FREE, 6-NOMADS 
+  s= rbind(s,data.frame(iesname="hh_j03",name="houserent"))
+  s= rbind(s,data.frame(iesname="hh_j04_1",name="roomsnum_primary"))
+  s= rbind(s,data.frame(iesname="hh_j04_2",name="roomsnum_secondary"))
+  return(s)
+}
 
 load_diary_file <-function(dataset,year){
   if (dataset == "lsms"){
@@ -208,6 +221,7 @@ load_diary_file <-function(dataset,year){
       #                         "310", "311", "312", "313", "314", "315", "316", "317", "318", "319")
       
       # Either outer-join or an rbind must be used
+      
       ml <-merge(m,l,all=TRUE)
       #return(ml)
       mlk <-merge(ml,k,all=TRUE)
@@ -284,7 +298,16 @@ load_ohs_file <-function(dataset,year){
                                 m=get_ohs_secc_fields_mapping_lsms_2010())
       ohs<-merge(b,c)
       ohs$age <-2010-ohs$YOB
-      return(ohs)
+      
+      jdat <- read.dta('../lsms/TZNPS2HH1DTA/HH_SEC_J1.dta',convert.factors=FALSE)
+      j <- get_translated_frame(dat=jdat,
+                                names=get_lsms_secj_info_columns_2010(),
+                                m=get_lsms_secj_fields_mapping_2010())
+      j$roomsnum_secondary[is.na(j$roomsnum_secondary)]<-0
+      j$houserent[is.na(j$houserent)]<-0
+      j$roomsnum<-j$roomsnum_primary+j$roomsnum_secondary
+      ohsj<-merge(ohs,j,all=TRUE)
+      return(ohsj)
     }
     stop(paste("Year:",year," not supported"))
   }
@@ -876,6 +899,19 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   vis<-get_visible_categories(hh=hh,visible_categories = visible_categories_lsms_2010(), item_field = "item")
   print("Calculating total expenditures") 
   totexp<-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
+  # obtain map (hhid->housing) with ddply
+  tothouserent<-ddply(ohs,.(hhid),summarize,tothouserent=sum(houserent))
+  # obtain map (hhid->educexpen) with ddply 
+  
+  print ("Appending educexpense and houserent to total expenditure");
+  ohs$educexpense[is.na(ohs$educexpense)]<-0
+  toteducexpense<-ddply(ohs,.(hhid),summarize,toteducexpense=sum(educexpense))
+  totexp<-merge(totexp,toteducexpense)
+  totexp<-merge(totexp,tothouserent)
+  totexp$total_expenditure=totexp$total_expenditure+totexp$tothouserent+totexp$toteducexpense
+  totexp$tothouserent<-NULL
+  totexp$toteducexpense<-NULL
+  
   heads<-ohs[as.integer(ohs$household_status)==1,]
   heads<-data.frame(hhid=heads$hhid,highest_educ=heads$highest_educ,age=heads$age,years_community=heads$years_community);
   print("Treating highest_educ=NA as uneducated");

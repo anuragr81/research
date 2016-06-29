@@ -32,8 +32,12 @@ si_factor<-function(units){
 }
 
 
-get_translated_frame<-function(dat,names,m){
-  isDebug<-FALSE
+get_translated_frame<-function(dat,names,m,isDebug){
+  if (missing(isDebug)||isDebug==FALSE){
+    isDebug=FALSE
+  } else{
+    isDebug=TRUE
+  }
   if (isDebug){
     print(names)
   }
