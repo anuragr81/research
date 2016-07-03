@@ -18,12 +18,14 @@ run_regression_lsms<-function(ds,type){
   
   if (type=="simple"){
     # highest_educ, age, company-at-work, highest_eduation, years_in_community(=age when 99), total_expenditure, is_migrant, family_size  
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+highest_educ+age+years_community+is_resident+yearly_pay)# (yearly pay least significant)
+    res=lm(data=ds,visible_consumption~total_expenditure+hsize+highest_educ+age+years_community+is_resident+yearly_pay)# (yearly pay least significant)
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+highest_educ+age+years_community+is_resident)# (highest_educ least significant)
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+years_community+is_resident) # (is_resident least significant)
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+years_community) # age least significant
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community) #  years_community least significant
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize)
+    
+    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community+age)# (highest_educ least significant)
     
     
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize)
@@ -33,17 +35,15 @@ run_regression_lsms<-function(ds,type){
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+is_resident)
     
     #(religious_education, locality_dummies,self_reported_happiness,housing_expenditure,education,price_based_class,urban_rural)
-    print ("RELIGIOUS_EDUCATION,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS,AREA_TYPE, VISIBLE_SERVICES IGNORED")
+    print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,HOUSING_STATUS,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS,AREA_TYPE, VISIBLE_SERVICES IGNORED")
     
-    res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community+is_resident)
+    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community+is_resident)
     print(summary(res))
     return(res)
     }
-  if (type=="totexp"){
-    return(lm(data=ds,total_expenditure~yearly_pay+is_resident+highest_educ+age+hsize))
-  }
   if (type=="2sls"){
-
+    print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,HOUSING_STATUS,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS,AREA_TYPE, VISIBLE_SERVICES IGNORED")
+    
     ds <-ds[ds$yearly_pay>0,]
     
     ds$lnvis <- log(ds$visible_consumption) 
@@ -52,8 +52,12 @@ run_regression_lsms<-function(ds,type){
     ds$incpsv <- as.integer(ds$yearly_pay>0)
     ds$cbinc <- ds$yearly_pay*ds$yearly_pay*ds$yearly_pay
     res<-NULL
-    res<- ivreg(data=ds,lnvis~lnpinc+age|
+    #res<- ivreg(data=ds,lnvis~lnpinc+age|
+    #             . - lnpinc + incpsv+ lninc+ cbinc)
+
+    res<- ivreg(data=ds,lnvis~lnpinc+highest_educ+years_community|
                  . - lnpinc + incpsv+ lninc+ cbinc)
+    
     print(summary(res))
     return(res)    
   }

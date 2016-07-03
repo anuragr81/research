@@ -727,7 +727,7 @@ infer_lsms_sece_total_income<-function(i1,i2){
                               workyearmonthweeks_field="workyearmonthweeks",
                               workyearmonths_field="workyearmonths",
                               output_field="yearly_pay");
-  ydata<-rbind(ydata,data.frame(hhid=i1_w_y$hhid,personid=i1_w_y$personid,yearly_pay=i1_w_y$yearly_pay))
+  ydata<-rbind(ydata,data.frame(hhid=i1_w_y$hhid,personid=i1_w_y$personid,yearly_pay=i1_w_y$yearly_pay,employertype=i1_w_y$employertype))
   #other forms of payment
   
   i1_w_other<- i1_w[!is.na(i1_w$has_lastpayment_other),]
@@ -741,7 +741,7 @@ infer_lsms_sece_total_income<-function(i1,i2){
                                     workyearmonths_field="workyearmonths",
                                     output_field="yearly_pay");
   
-  ydata<-rbind(ydata,data.frame(hhid=i1_w_other_y$hhid,personid=i1_w_other_y$personid,yearly_pay=i1_w_other_y$yearly_pay))
+  ydata<-rbind(ydata,data.frame(hhid=i1_w_other_y$hhid,personid=i1_w_other_y$personid,yearly_pay=i1_w_other_y$yearly_pay,employertype=i1_w_other_y$employertype))
   #secondary job wages
   
   i1_secjob<-i1[!is.na(i1$has_secjobwages),]
@@ -757,7 +757,10 @@ infer_lsms_sece_total_income<-function(i1,i2){
                                    workyearmonths_field="workyearmonths_secjob",
                                    output_field="yearly_pay");
   
-  ydata<-rbind(ydata,data.frame(hhid=i1_secjob_y$hhid,personid=i1_secjob_y$personid,yearly_pay=i1_secjob_y$yearly_pay))
+  # secondary job must have employertype invalidated (set to -1 in the current convention)
+  
+  print (paste("Setting employertype as -1 (for ",dim(i1_secjob_y)[1],") wage-workers with secondary jobs"))
+  ydata<-rbind(ydata,data.frame(hhid=i1_secjob_y$hhid,personid=i1_secjob_y$personid,yearly_pay=i1_secjob_y$yearly_pay,employertype=rep(-1,dim(i1_secjob_y)[1])))
   #other wages from secondary job
   i1_secjob_other<-i1[!is.na(i1$has_secjobwages_other),]
   i1_secjob_other<-i1_secjob_other[!is.na(i1_secjob_other$has_secjob),]
@@ -771,15 +774,28 @@ infer_lsms_sece_total_income<-function(i1,i2){
                                          workyearmonthweeks_field="workyearmonthweeks_secjob",
                                          workyearmonths_field="workyearmonths_secjob",
                                          output_field="yearly_pay");
-  ydata<-rbind(ydata,data.frame(hhid=i1_secjob_other_y$hhid,personid=i1_secjob_other_y$personid,yearly_pay=i1_secjob_other_y$yearly_pay))
+  print(paste("Setting employertype=-1 for ",dim(i1_secjob_other_y)[1]," wage workers with other payments in their secondary jobs")) 
+  ydata<-rbind(ydata,data.frame(hhid=i1_secjob_other_y$hhid,
+                                personid=i1_secjob_other_y$personid,
+                                yearly_pay=i1_secjob_other_y$yearly_pay,
+                                employertype=rep(-1,dim(i1_secjob_other_y)[1])
+                                )
+               )
   #rbind for the yearly-pay data-frame
+  selfemployment_offset<-1000
+  if (max(ydata$employertype)>=selfemployment_offset){
+    stop(paste("max(employertype)=",max(ydata$employertype)," in income data(ydata) is less than the selected offset (",selfemployment_offset,")"))
+  }
+  print (paste("Adding ",selfemployment_offset," to selfemployment_type code and setting those values as employertype"))
   i1_selfemployed_y<-computeLsmsSelfemployedValues(dat=i1,
                                                    has_selfemployment_year_field="has_selfemployment_year",
                                                    selfemploymentyearmonths_field="selfemploymentyearmonths",
                                                    selfemploymentyearmonthincome_field="selfemploymentyearmonthincome");
   a1=data.frame(hhid=i1_selfemployed_y$hhid,
                personid=i1_selfemployed_y$personid,
-               yearly_pay=i1_selfemployed_y$yearly_pay)
+               yearly_pay=i1_selfemployed_y$yearly_pay,
+               employertype=selfemployment_offset+i1_selfemployed_y$selfemploymenttype
+  )
 
   i1_selfemployed_y2<-computeLsmsSelfemployedValues(dat=i2,
                                                    has_selfemployment_year_field="has_selfemployment_year",
@@ -787,7 +803,8 @@ infer_lsms_sece_total_income<-function(i1,i2){
                                                    selfemploymentyearmonthincome_field="selfemploymentyearmonthincome");
   a2=data.frame(hhid=i1_selfemployed_y2$hhid,
                personid=i1_selfemployed_y2$personid,
-               yearly_pay=i1_selfemployed_y2$yearly_pay)
+               yearly_pay=i1_selfemployed_y2$yearly_pay,
+               employertype=i1_selfemployed_y2$selfemploymenttype)
 
   print("Running outer-join (all-merge) for data from files 1 and 2");
   a=merge(a1,a2,all=TRUE)
@@ -897,7 +914,7 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   
   print ("Calculating visible expenditures")
   vis<-get_visible_categories(hh=hh,visible_categories = visible_categories_lsms_2010(), item_field = "item")
-  print("Calculating total expenditures") 
+  print("Calculating total expenditures")
   totexp<-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
   # obtain map (hhid->housing) with ddply
   tothouserent<-ddply(ohs,.(hhid),summarize,tothouserent=sum(houserent))
@@ -913,7 +930,13 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   totexp$toteducexpense<-NULL
   
   heads<-ohs[as.integer(ohs$household_status)==1,]
-  heads<-data.frame(hhid=heads$hhid,highest_educ=heads$highest_educ,age=heads$age,years_community=heads$years_community);
+  heads<-data.frame(hhid=heads$hhid,
+                    highest_educ=heads$highest_educ,
+                    age=heads$age,
+                    personid=heads$personid,
+                    years_community=heads$years_community,
+                    housingstatus=heads$housingstatus,
+                    roomsnum=heads$roomsnum);
   print("Treating highest_educ=NA as uneducated");
   heads$highest_educ[is.na(heads$highest_educ)]<-1
   print("Setting members with years_community=99 as their age");
@@ -930,11 +953,14 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   ds<-merge(ds,heads)
   print(paste("Merging income",dim(ds)[1]))
   ds<-merge(ds,income)
+  print(paste("personid range:",toString(unique(ds$personid))))
+  ds$personid<-NULL
   return(ds)
 }
 
 visible_categories_lsms_2010<-function(){
-return(c("214","219","301","313","314"));
+#return(c("214","219","301","313","314"));
+  return(c("313","314"))
  # return(c("314"))
   # 219 - Motor vehicle service, repair, or parts
   # 214 - Other personal products (shampoo, razor blades, cosmetics, hair products, etc.)
@@ -1007,7 +1033,7 @@ cex_combined_years_ds<-function(years)
   return(resds)
 }
 
-combined_data_set<-function(dataset,year,isTranslated){
+combined_data_set<-function(dataset,year,isTranslated,isDebug){
   
   #1-black
   #2-coloured
@@ -1064,7 +1090,9 @@ combined_data_set<-function(dataset,year,isTranslated){
   # merge criteria is defined for every dependent variable
   
   ignored_hhids <- get_ignored_hhids(dataset,hhdat,ohsdat,incomedat);
-  print(paste("Ids to be ignored(",length(ignored_hhids),"):{",ignored_hhids,"}"))
+  if (!missing(isDebug) && isDebug==TRUE){
+    print(paste("Ids to be ignored(",length(ignored_hhids),"):{",toString(ignored_hhids),"}"))
+  }
   if (!is.null(ignored_hhids)){  
     if (!is.null(hhdat)){
       n1<-length(unique(hh$hhid))
