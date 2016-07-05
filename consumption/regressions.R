@@ -58,9 +58,11 @@ run_regression_lsms<-function(ds,type){
     res<- ivreg(data=ds,lnvis~lnpinc+highest_educ+years_community|
                  . - lnpinc + incpsv+ lninc+ cbinc)
     
-    print(summary(res))
+    print(summary(res,diagnostics=TRUE))
     return(res)    
   }
+  
+# help(summary.ivreg)  
   
   stop(paste("type:",type," not recognized"));
 }
