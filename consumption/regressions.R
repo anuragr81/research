@@ -9,6 +9,21 @@ inc_control<-function(inc){
 
 run_regression_lsms<-function(ds,type){
   
+  if (type=="plot"){
+    prev_nrows = dim(ds)[1]
+    ds <-ds[!is.na(ds$occupation),];
+    print(paste("Ignored:",prev_nrows-dim(ds)[1],"entries with null occupation codes"))
+    plot(ds$occupation,ds$total_expenditure/1e+6,main="Total Expenditure vs Occupations",xlab="Occupation Codes",ylab="Total Expenditure (in millions)")
+    mean_totexp = data.frame(occupation=NULL,mean_totexp=NULL,sd_income=NULL);
+    for (occup in unique(ds$occupation)){
+      totexp= ds[ds$occupation==occup,]$total_expenditure/1e+6;
+      mean_totexp<-rbind(mean_totexp,data.frame(occupation=occup,
+                                                mean_totexp=mean(totexp),
+                                    sd_income = sd(totexp) 
+                                    ))
+    }
+    return(mean_totexp)
+    }
   if (type=="totexp"){
     res=lm(visible_consumption~total_expenditure,data=ds)
     plot(ds$total_expenditure,ds$visible_consumption,xlab = "total expenditure",ylab="visible expenditure")
@@ -18,7 +33,7 @@ run_regression_lsms<-function(ds,type){
   
   if (type=="simple"){
     # highest_educ, age, company-at-work, highest_eduation, years_in_community(=age when 99), total_expenditure, is_migrant, family_size  
-    res=lm(data=ds,visible_consumption~total_expenditure+hsize+highest_educ+age+years_community+is_resident+yearly_pay)# (yearly pay least significant)
+    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+highest_educ+age+years_community+is_resident+yearly_pay)# (yearly pay least significant)
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+highest_educ+age+years_community+is_resident)# (highest_educ least significant)
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+years_community+is_resident) # (is_resident least significant)
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+years_community) # age least significant
@@ -27,7 +42,7 @@ run_regression_lsms<-function(ds,type){
     
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community+age)# (highest_educ least significant)
     
-    
+    res=lm(data=ds,visible_consumption~total_expenditure+hsize+is_resident)
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize)
     
     # could is_resident be multicollinear?
@@ -35,18 +50,31 @@ run_regression_lsms<-function(ds,type){
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+is_resident)
     
     #(religious_education, locality_dummies,self_reported_happiness,housing_expenditure,education,price_based_class,urban_rural)
-    print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,HOUSING_STATUS,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS,AREA_TYPE, VISIBLE_SERVICES IGNORED")
+    print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,HOUSING_STATUS,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS, VISIBLE_SERVICES IGNORED")
     
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community+is_resident)
     print(summary(res))
     return(res)
-    }
-  if (type=="2sls"){
+  }
+  if (type == "simple2"){
+    ds$lnvis <- log(ds$visible_consumption) 
+    ds$lnvis[ds$lnvis==-Inf]<-0 # zeroing out -Inf from log
+    ds$lnpinc <- log(ds$total_expenditure)
+    #ds$nonenglish <- as.integer(ds$litlang==1 | ds$litlang==4)
+    ds$english <- as.integer(ds$litlang==2 | ds$litlang==3)
+    #res=lm(data=ds,lnvis~lnpinc+hsize+english+highest_educ)# both hsize and highest_educ are significant for all categories (except motorcycle repairs)
+    res=lm(data=ds,lnvis~lnpinc+hsize+english+occupation)
+    print(summary(res))
+    return(res)
+  }
+  if (type=="2sls_income"){
     print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,HOUSING_STATUS,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS,AREA_TYPE, VISIBLE_SERVICES IGNORED")
     
     ds <-ds[ds$yearly_pay>0,]
     
-    ds$lnvis <- log(ds$visible_consumption) 
+    ds$lnvis <- log(ds$visible_consumption)
+    ds$lnvis[ds$lnvis==-Inf]<-0 # zeroing out -Inf from log
+    
     ds$lnpinc <- log(ds$total_expenditure)
     ds$lninc <- log(ds$yearly_pay)
     ds$incpsv <- as.integer(ds$yearly_pay>0)
@@ -61,14 +89,55 @@ run_regression_lsms<-function(ds,type){
     print(summary(res,diagnostics=TRUE))
     return(res)    
   }
-  
-# help(summary.ivreg)  
+  if (type=="2sls"){
+    print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,HOUSING_STATUS,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS,AREA_TYPE, VISIBLE_SERVICES IGNORED")
+    ds$lnvis <- log(ds$visible_consumption) 
+    ds$lnvis[ds$lnvis==-Inf]<-0 # zeroing out -Inf from log
+    ds$lnpinc <- log(ds$total_expenditure)
+    
+    ds$cubic_highest_educ<-with(ds,highest_educ*highest_educ*highest_educ)
+    ln_highest_educ<-log(ds$highest_educ)
+    ln_highest_educ[ln_highest_educ==-Inf]<-0
+    ds$ln_highest_educ<-ln_highest_educ
+    
+    ds$cubic_age<-with(ds,age*age*age)
+    ln_age<-log(ds$age)
+    ln_age[ln_age==-Inf]<-0
+    ds$ln_age<-ln_age
+    ds$english <- as.integer(ds$litlang==2 | ds$litlang==3)
+    
+    res<-NULL
+    #res<- ivreg(data=ds,lnvis~lnpinc+age|
+    #             . - lnpinc + incpsv+ lninc+ cbinc)
+
+    if (FALSE){
+    res<- ivreg(data=ds,lnvis~lnpinc+age|
+                  . - lnpinc + highest_educ + ln_highest_educ+cubic_highest_educ)
+    #               . - lnpinc + age + ln_age+cubic_age)
+    }
+    # highest_educ is near signficant (1.7) and instrumentation by age, age-cubics seems 
+    # fine (subject to verification of diagnostics), endogeneity is not significant when
+    # when adding years_community (instead of highest_educ)
+    # in this analysis education is the second most important component the most (subject to verification of age as
+    # valid instrument) housingstatus is also nearly significant
+    if (FALSE){
+    res<- ivreg(data=ds,lnvis~lnpinc+highest_educ|
+              . - lnpinc + age + ln_age+cubic_age)
+    }
+    if (TRUE){
+      res<- ivreg(data=ds,lnvis~lnpinc+english+isrural|
+                    . - lnpinc + age + ln_age+cubic_age+occupation+highest_educ)
+      print("Pending better instrument than age");
+    }
+    print(summary(res,diagnostics=TRUE))
+    return(res)    
+  }
+  #help(summary.ivreg)
   
   stop(paste("type:",type," not recognized"));
 }
 
 run_regression_cex<-function(ds,type){
-  
   
   # ln(visible_consumption) ~ black_dummy + hispanic_dummy + ln(pInc) 
   #     + area_type + age + age*age + n_members + year_dummy

@@ -285,10 +285,65 @@ get_ohs_secc_fields_mapping_lsms_2010<-function(){
   return(s)
 }
 
+ohs_seccb_columns_lsms_2010<-function(){
+  return(c("facilitycode","accessibility","distance","region","district","ward"))
+}
+
+ohs_seccb_mapping_lsms_2010<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="id_01",name="region"))
+  s= rbind(s,data.frame(iesname="id_02",name="district"))
+  s= rbind(s,data.frame(iesname="id_03",name="ward"))
+  s= rbind(s,data.frame(iesname="id_04",name="ea"))
+  s= rbind(s,data.frame(iesname="cboa",name="facilitycode"))
+  s= rbind(s,data.frame(iesname="cm_b01",name="accessibility"))
+  s= rbind(s,data.frame(iesname="cm_b03",name="distance"))
+  return(s)
+}
+
+ohs_seca_columns_lsms_2010<-function(){
+  return(c("hhid","region","district","ward","ea","isrural"))
+}
+
+ohs_seca_mapping_lsms_2010<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
+  s= rbind(s,data.frame(iesname="region",name="region"))
+  s= rbind(s,data.frame(iesname="district",name="district"))
+  s= rbind(s,data.frame(iesname="ward",name="ward"))
+  s= rbind(s,data.frame(iesname="ea",name="ea"))
+  s= rbind(s,data.frame(iesname="y2_rural",name="isrural"))
+  return(s)
+}
+
 load_ohs_file <-function(dataset,year){
   
   if (dataset == "lsms"){
     if (year == 2010){
+      
+      cbdat<-read.dta('../lsms/TZNPS2COMDTA/COMSEC_CB.dta',convert.factors = FALSE)
+      
+      cb <- get_translated_frame(dat=cbdat,
+                                names=ohs_seccb_columns_lsms_2010(),
+                                m=ohs_seccb_mapping_lsms_2010())
+      
+      l<-(cb[is.element(tolower(as.character(cb$facilitycode)),c("l")),])
+      # extract those with 1
+      l$accessiblemarket<-as.integer(l$accessibility==1)
+      # extract those with 2 (and assign them the same status as 1's)
+      l$accessiblemarket<-l$accessiblemarket+as.integer(l$accessibility==2 & l$distance<10)
+      l=l[!is.na(l$accessiblemarket),]
+      l=ddply(l,.(region,district,ward),summarize,accessiblemarket=max(accessiblemarket))
+      #l = data.frame(region=l$region,district=l$district,ward=l$ward,ea=l$ea,accessiblemarket=l$accessiblemarket)
+      ##
+      adat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_A.dta',FALSE)
+      
+      a <- get_translated_frame(dat=adat,
+                                 names=ohs_seca_columns_lsms_2010(),
+                                 m=ohs_seca_mapping_lsms_2010())
+      
+      a<-merge(a,l)
+      ##
       bdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_B.dta',FALSE)
       b <- get_translated_frame(dat=bdat,
                                 names=ohs_info_columns_lsms_2010(),
@@ -299,7 +354,8 @@ load_ohs_file <-function(dataset,year){
                                 names=get_ohs_secc_columns_lsms_2010(),
                                 m=get_ohs_secc_fields_mapping_lsms_2010())
       c$hhid<-as.character(c$hhid)
-      ohs<-merge(b,c)
+      ab <- merge(a,b)
+      ohs<-merge(ab,c)
       ohs$age <-2010-ohs$YOB
       
       jdat <- read.dta('../lsms/TZNPS2HH1DTA/HH_SEC_J1.dta',convert.factors=FALSE)
@@ -918,6 +974,9 @@ get_ucc_mapping_2004<-function(){
 get_visible_categories<-function(hh,visible_categories,item_field){
   vis<-hh[is.element(hh[,item_field],visible_categories),] # get only visible categories
   vis<-ddply(vis,.(hhid),summarize,visible_consumption=sum(cost))
+  no_vis_hhid<-setdiff(unique(hh$hhid),unique(vis$hhid))
+  no_vis<-data.frame(hhid=no_vis_hhid,visible_consumption=rep(0,length(no_vis_hhid)))
+  vis <- rbind(vis,no_vis)
   return(vis)
 }
 
@@ -944,27 +1003,46 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   }
   
   print ("Calculating visible expenditures")
+  print(paste("Total number of households to search for visible consumption=",length(unique(hh$hhid))))
   vis<-get_visible_categories(hh=hh,visible_categories = visible_categories_lsms_2010(), item_field = "item")
+  print(paste("Number of households with visible expenditure = ",length(unique(vis$hhid))))
   print("Calculating total expenditures")
   totexp<-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
+  print(paste("Number of households with total expenditure data minus housing = ",length(unique(totexp$hhid))))
+  
   # obtain map (hhid->housing) with ddply
   tothouserent<-ddply(ohs,.(hhid),summarize,tothouserent=sum(houserent))
   # obtain map (hhid->educexpen) with ddply 
+  print(paste("Number of households with houserent data = ",length(unique(tothouserent$hhid))))
   
   print ("Appending educexpense and houserent to total expenditure");
   ohs$educexpense[is.na(ohs$educexpense)]<-0
   toteducexpense<-ddply(ohs,.(hhid),summarize,toteducexpense=sum(educexpense))
+  print(paste("Number of households with educexpense data = ",length(unique(toteducexpense$hhid))))
+  
   totexp<-merge(totexp,toteducexpense)
+  print(paste("Number of households after merging total_expenditure and total_educexpense = ",length(unique(totexp$hhid))))
+  
   totexp<-merge(totexp,tothouserent)
+  print(paste("Number of households after merging total_expenditure with houserent = ",length(unique(totexp$hhid))))
+  
   totexp$total_expenditure=totexp$total_expenditure+totexp$tothouserent+totexp$toteducexpense
   totexp$tothouserent<-NULL
   totexp$toteducexpense<-NULL
+  print(paste("Number of households with total expenditure data = ",length(unique(totexp$hhid))))
   
   heads<-ohs[as.integer(ohs$household_status)==1,]
+  print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
+  
   heads<-data.frame(hhid=heads$hhid,
                     highest_educ=heads$highest_educ,
                     age=heads$age,
                     personid=heads$personid,
+                    litlang=heads$litlang,
+                    isrural=heads$isrural,
+                    accessiblemarket=heads$accessiblemarket,
+                    schoolowner=heads$schoolowner,
+                    occupation = heads$occupation,
                     years_community=heads$years_community,
                     housingstatus=heads$housingstatus,
                     roomsnum=heads$roomsnum,
@@ -978,21 +1056,30 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   print ("Calculating hsize")
   hhid_personid<-data.frame(hhid=ohs$hhid,personid=ohs$personid,stringsAsFactors=FALSE);
   hhid_personid<- ddply(hhid_personid,.(hhid),summarize,hsize=length(personid));
-  print(paste("Merging visual expenditure : ",dim(hhid_personid)[1]))
+  print(paste("Number of households with hsize data = ",length(unique(hhid_personid$hhid))))
+  
+  print("Merging visual expenditure")
   ds <-merge(totexp,vis);
+  print(paste("Number of households after merging total expenditure with visible expenditure= ",length(unique(ds$hhid))))
   print(paste("Merging hsize",dim(ds)[1]))
+  
   ds <-merge(ds,hhid_personid);
+  print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
+  
   ds<-merge(ds,heads)
-  print(paste("Merging income",dim(ds)[1]))
-  ds<-merge(ds,income)
+  print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
+  
+  #print(paste("Merging income",dim(ds)[1]))
+  #ds<-merge(ds,income)
   print(paste("personid range:",toString(unique(ds$personid))))
   ds$personid<-NULL
   return(ds)
 }
 
 visible_categories_lsms_2010<-function(){
-#return(c("214","219","301","313","314"));
-  return(c("313","314"))
+ #return(c("214","219","301","313","314"));
+  return(c("214","301","313","314"));
+ # return(c("313","314"))
  # return(c("314"))
   # 219 - Motor vehicle service, repair, or parts
   # 214 - Other personal products (shampoo, razor blades, cosmetics, hair products, etc.)
