@@ -63,7 +63,7 @@ run_regression_lsms<-function(ds,type){
     #ds$nonenglish <- as.integer(ds$litlang==1 | ds$litlang==4)
     ds$english <- as.integer(ds$litlang==2 | ds$litlang==3)
     #res=lm(data=ds,lnvis~lnpinc+hsize+english+highest_educ)# both hsize and highest_educ are significant for all categories (except motorcycle repairs)
-    res=lm(data=ds,lnvis~lnpinc+hsize+english+occupation)
+    res=lm(data=ds,lnvis~lnpinc+hsize+english+occupation+accessiblemarket)
     print(summary(res))
     return(res)
   }
@@ -125,7 +125,7 @@ run_regression_lsms<-function(ds,type){
               . - lnpinc + age + ln_age+cubic_age)
     }
     if (TRUE){
-      res<- ivreg(data=ds,lnvis~lnpinc+english+isrural|
+      res<- ivreg(data=ds,lnvis~lnpinc+english+accessiblemarket|
                     . - lnpinc + age + ln_age+cubic_age+occupation+highest_educ)
       print("Pending better instrument than age");
     }
