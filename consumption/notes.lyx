@@ -738,7 +738,7 @@ drive
 \end_layout
 
 \begin_layout Part
-Summary of studies on conspicuous consumption
+A summary of studies on conspicuous consumption
 \end_layout
 
 \begin_layout Section
@@ -788,6 +788,15 @@ reference "tab:ConspConsCriteria"
  The studies have been based on a visible basket classified first by Heffetz
  - where the consumer basket constituents were sorted by a visibility measure
  based on a survey of 480 respondents.
+ 
+\shape italic
+The problem at here was whether the visible aspsect of a commodity in one's
+ own basket mattered for the consumption elasticities for the particular
+ commodity.
+ In other words, the survey was used to track the visibility mechanism that
+ is expected to work behind the scenes in the consumption of goods.
+
+\shape default
  Conducted in US, the respondents were asked how long it took them to notice
  the consumption for commodities in the US CEX categories (listed in Table
  
@@ -800,6 +809,15 @@ reference "tab:cexcategories"
 ).
  The visibility index computed from survey responses was found to have a
  significant predictive power for total expenditure elasticity.
+ 
+\shape italic
+The core idea here was the game theoretic visibility mechanism that transforms
+ the utility function - modeled by a private consumption function and an
+ observable consumption function.
+ The equation we get for the equilibrium can be used to estimated expenditure
+ elasticities
+\shape default
+.
  Robustness tests (regressions for different quantiles and across multiple
  demographic categories) reported an all through significance of the Vindex
  regressor.
@@ -1753,21 +1771,62 @@ Critieria of Conspicuous Consumption in surveyed literature
 
 \begin_layout Standard
 A similar survey of visibility of commodities was not conducted by many
- other studies in the developed world
+ other studies conducted on the developed world works
 \begin_inset CommandInset citation
 LatexCommand cite
 key "heffetz_visibility"
 
 \end_inset
 
- - often using context-specific judgments to adjust the definition of visible
- consumption.
- Charles at al, for example, had ignored housing (despite its clear visibility)
+ .
+ Most studies have relied on the basket defined by Charles et al
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Charles et al themselves ignore housing expenses - despite its clear visibility-
  because of the known housing differences in the US between black and white
  social groups
 \begin_inset CommandInset citation
 LatexCommand cite
 key "CharlesHurstRace"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CharlesHurstRace"
+
+\end_inset
+
+ (See Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:charles_visible_categories"
+
+\end_inset
+
+ for visible categories and Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:cexcategories"
+
+\end_inset
+
+ for the full consumer basket in the US CEX survey).
+ The definition of visible consumption is often adjusted in these studies
+ depending on the socio-cultural context.
+ Omori-Smith ignore all visible consumption categories from the Charles
+ et al study except that of clothing (including shoes)
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OmoriSmithVisRace"
 
 \end_inset
 
@@ -1790,13 +1849,44 @@ key "KausSA"
 \end_inset
 
 .
- Omori-Smith ignore all visible consumption categories from the Charles
- et al study except that of clothing (including shoes).
+ 
 \end_layout
 
 \begin_layout Standard
 The need for a survey to measure visibility of items in the basket is however
- necessary when conducting similar studies in developing world countries.
+ necessary when conducting similar studies in developing world countries
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Khamis et al
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZahraIndia"
+
+\end_inset
+
+ ask two key questions to respondents in an online survey conducted in India.
+ First asked them how closely they needed to interact with their neighbour
+ (with similar demographic characteristics) in order to observe above average
+ spending for a list of items (Options were -‘1: No Interaction’, ‘2: Occasional
+ Interaction’, ‘3: Friend’, ‘4: Close Friend’ or ‘5: No matter how much
+ one Interacts’).
+ An item where >20% respondents report 1 or 2 was considered a visible item.
+ A second question asked them what they'll expect of the consumption of
+ an item after a sudden 20 percent rise in their neighbor's income ‘1: Fall’,
+ ‘2: Stay the same’, ‘3: Increase by less than 20 percent’, ‘4: Increase
+ by 20 percent’ or ‘5: Increase by more than 20 percent’.
+ The list of items in these questions attempted to match the consumption
+ categories in the IHDS.
+ An item is associated with higher income if more than 20% of respondents
+ reported 2,3,4 or 5.
+ 
+\end_layout
+
+\end_inset
+
+.
  Visibility is a socio-cultural judgment - and the visibility basket from
  the developed world cannot be translated as such into disparate geographies
  and cultural environments of the developing world.
@@ -2189,14 +2279,17 @@ The visibility elasticities may not be compared across countries without
  into the effect of certain demographic factors on visible consumption.
  This has been the central theme for most of the studies surveyed in this
  note.
+ More than to improve the mesurement of visibility, the studies are interested
+ in identifying the demographic parameters that explain the log-expenditure
+ of visibilty basket as is.
  The general regression equation for such a study is the following:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{alignat*}{1}
-ln(vis_{i}) & =\beta_{0}+\beta_{1}\cdot Dem_{i}+\beta_{2}\cdot ln(pInc_{i})+\epsilon
-\end{alignat*}
+\begin{equation}
+ln(vis_{i})=\beta_{0}+\beta_{1}\cdot Dem_{i}+\beta_{2}\cdot ln(pInc_{i})+\epsilon\label{eq:lnvis_regression}
+\end{equation}
 
 \end_inset
 
@@ -2221,6 +2314,20 @@ Here
 \end_inset
 
  is the permanent income - proxied by total expenditure.
+ Households with higher total expenditure are far more likely to be those
+ with higher visible expenditure.
+ Thus, total expenditure (on the right side of the equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:lnvis_regression"
+
+\end_inset
+
+) makes it an endogenous variable for the dependent varaible : 
+\begin_inset Formula $ln(vis_{i})$
+\end_inset
+
+.
  A different approach is taken by Jaikumar et al who use weights in the
  basket rather than visible expenditure levels - so that visible expenditure
  is not subject to the endogeneity problem that arises due to total expenditure
@@ -2232,14 +2339,16 @@ key "JaikumarConspConIneq"
 
 \end_inset
 
-.
+ (The proportion of visible expenditure with respect to the total expenditure
+ could be the same for those with higher total expenditure and lower total
+ expenditure).
  However, since data on income is often poor or sparse in the developing
  countries, total expenditure turns out to be the most frequent choice for
  a proxy of permanent income (
 \begin_inset Formula $pInc_{i}$
 \end_inset
 
- itself being a key control parameter for the analysis of visible consumption).
+ is a key control parameter for the analysis of visible consumption).
  In most of the studies, the said endogeneity of total expenditure is resolved
  by a choice of appropriate instruments - e.g.
  income, cubic-income, postive-income dummies or occupation codes.
@@ -2251,7 +2360,8 @@ key "CharlesHurstRace"
 \end_inset
 
  are reported to be quite strong in the studies surveyed as part of this
- note.
+ note (Sargan and Wu-Hausman tests confirm endogeneity and the effectiveness
+ of chosen instruments).
 \end_layout
 
 \begin_layout Section
@@ -2276,7 +2386,22 @@ reference "tab:Visible-commodities"
 
 \end_inset
 
-.
+ - these are meant to include the categories identified by Khamis et al
+ as far as possible
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZahraIndia"
+
+\end_inset
+
+(Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:khamis_visible_categories"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -2446,10 +2571,41 @@ Preparing the Data
 \begin_layout Standard
 The preparation of the data involved normalizing the data for total expenditures
  by combining expenditure on items collected through recall and diary methods.
- Obtainig visible consumption elasticities from recall method while computing
- total expenditure (food etc.) based on diary method can result in measurement
- errors discussed in the previous section (it is argued that larger families
- are more likely to underestimate their purchases when recalling).
+ 
+\shape italic
+The summary statistics shown point out at the distribution of visible consumptio
+n in South Africa and Charles et al study.
+
+\shape default
+ 
+\shape italic
+A comparison with age is also shown here.
+
+\shape default
+ We do the following here:
+\end_layout
+
+\begin_layout Standard
+ds$p<-with(ds,visible_consumption/total_expenditure)
+\end_layout
+
+\begin_layout Standard
+hist(ds$p,xlab = "visible expenditure/total expenditure",main = "histogram
+ of visible expenditure / total expenditure")
+\end_layout
+
+\begin_layout Standard
+Obtaining visible consumption elasticities (using equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:lnvis_regression"
+
+\end_inset
+
+) from recall method while computing total expenditure (food etc.) based
+ on diary method can result in measurement errors discussed in the previous
+ section (it is argued that larger families are more likely to underestimate
+ their purchases when recalling).
  When the weekly data is mixed with yearly data - the extrapolation of past
  week's consumption can further overestimate food costs
 \begin_inset Foot
@@ -2500,6 +2656,12 @@ If there are
 .
  Given the sparsity of available income data, however, instruments for age
  and occupation codes were chosen for the current study.
+\end_layout
+
+\begin_layout Standard
+
+\shape italic
+The following entries were omitted from the dataset.
 \end_layout
 
 \begin_layout Subsection
@@ -2574,6 +2736,20 @@ The next step in the study is using area dummies to detect any regional
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Population density
+\end_layout
+
+\begin_layout Standard
+Population density is a crude measure for crowding in the cities.
+ A urban/rural dummy can be created by classifying districts based on their
+ population densities.
+ This dummy does have significance - which may imply that those in urban
+ areas spend more on visible consumption (possibly because rural areas don't
+ have the means) - but this needs to be instrumented better.
  
 \end_layout
 
@@ -2692,9 +2868,12 @@ There are differences between considering only head of household and the
  whole household - what's the argument here?
 \end_layout
 
+\begin_layout Enumerate
+There is no survey - any way to get around that?
+\end_layout
+
 \begin_layout Standard
 A- Threshold.
- 
 \end_layout
 
 \begin_layout Standard

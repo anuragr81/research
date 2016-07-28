@@ -8,7 +8,16 @@ inc_control<-function(inc){
 }
 
 run_regression_lsms<-function(ds,type){
-  
+  if (type=="engel"){
+#    ds$p<-with(ds,log(visible_consumption)/log(total_expenditure))
+#    hist(ds$p,xlab = "ln(visible expenditure)/ln(total expenditure)",main = "Engel  / total expenditure")
+     #plot(log(ds$total_expenditure),log(ds$visible_consumption),xlab="ln(Total Expenditure)", 
+     #    ylab="ln(Visible Expenditure)",main="Engel Curves for Visible Expenditure")
+     plot((ds$total_expenditure),(ds$visible_consumption),xlab="(Total Expenditure)", 
+         ylab="(Visible Expenditure)",main="Engel Curves for Visible Expenditure")
+    
+        return(NULL)
+  }
   if (type=="plot"){
     prev_nrows = dim(ds)[1]
     ds <-ds[!is.na(ds$occupation),];
@@ -63,7 +72,9 @@ run_regression_lsms<-function(ds,type){
     #ds$nonenglish <- as.integer(ds$litlang==1 | ds$litlang==4)
     ds$english <- as.integer(ds$litlang==2 | ds$litlang==3)
     #res=lm(data=ds,lnvis~lnpinc+hsize+english+highest_educ)# both hsize and highest_educ are significant for all categories (except motorcycle repairs)
-    res=lm(data=ds,lnvis~lnpinc+hsize+english+occupation+accessiblemarket)
+    print("PENDING region dummies")
+    length_region_dummy=unique(ds$region)[-1]
+    res=lm(data=ds,lnvis~lnpinc+hsize+english+occupation+isurbanp)
     print(summary(res))
     return(res)
   }
@@ -124,8 +135,9 @@ run_regression_lsms<-function(ds,type){
     res<- ivreg(data=ds,lnvis~lnpinc+highest_educ|
               . - lnpinc + age + ln_age+cubic_age)
     }
+    
     if (TRUE){
-      res<- ivreg(data=ds,lnvis~lnpinc+english+accessiblemarket|
+      res<- ivreg(data=ds,lnvis~lnpinc+english+isurbanp|
                     . - lnpinc + age + ln_age+cubic_age+occupation+highest_educ)
       print("Pending better instrument than age");
     }

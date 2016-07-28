@@ -336,12 +336,16 @@ load_ohs_file <-function(dataset,year){
       l=ddply(l,.(region,district,ward),summarize,accessiblemarket=max(accessiblemarket))
       #l = data.frame(region=l$region,district=l$district,ward=l$ward,ea=l$ea,accessiblemarket=l$accessiblemarket)
       ##
+      
+      u <-read.csv('../lsms/district_code.csv')
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban);
+      
       adat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_A.dta',FALSE)
       
       a <- get_translated_frame(dat=adat,
                                  names=ohs_seca_columns_lsms_2010(),
                                  m=ohs_seca_mapping_lsms_2010())
-      
+      a<-merge(a,u)
       a<-merge(a,l)
       ##
       bdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_B.dta',FALSE)
@@ -1037,9 +1041,14 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   heads<-data.frame(hhid=heads$hhid,
                     highest_educ=heads$highest_educ,
                     age=heads$age,
+                    region=heads$region,
+                    district=heads$district,
+                    ward=heads$ward,
+                    ea=heads$ea,
                     personid=heads$personid,
                     litlang=heads$litlang,
                     isrural=heads$isrural,
+                    isurbanp=heads$isurbanp,
                     accessiblemarket=heads$accessiblemarket,
                     schoolowner=heads$schoolowner,
                     occupation = heads$occupation,
