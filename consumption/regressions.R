@@ -9,14 +9,57 @@ inc_control<-function(inc){
 
 run_regression_lsms<-function(ds,type){
   if (type=="engel"){
-#    ds$p<-with(ds,log(visible_consumption)/log(total_expenditure))
-#    hist(ds$p,xlab = "ln(visible expenditure)/ln(total expenditure)",main = "Engel  / total expenditure")
-     #plot(log(ds$total_expenditure),log(ds$visible_consumption),xlab="ln(Total Expenditure)", 
-     #    ylab="ln(Visible Expenditure)",main="Engel Curves for Visible Expenditure")
-     plot((ds$total_expenditure),(ds$visible_consumption),xlab="(Total Expenditure)", 
-         ylab="(Visible Expenditure)",main="Engel Curves for Visible Expenditure")
+    #    ds$p<-with(ds,log(visible_consumption)/log(total_expenditure))
+    #    hist(ds$p,xlab = "ln(visible expenditure)/ln(total expenditure)",main = "Engel  / total expenditure")
+    #plot(log(ds$total_expenditure),log(ds$visible_consumption),xlab="ln(Total Expenditure)", 
+    #    ylab="ln(Visible Expenditure)",main="Engel Curves for Visible Expenditure")
     
-        return(NULL)
+    thresholds= c(.07,.1,.15,.2)
+    tot<-length(thresholds)+1
+    n<-as.integer(sqrt(tot))
+    # n*n <= tot
+    nrows=n
+    ncols=n
+    prod=nrows*ncols
+    if (prod < tot){
+      # add rows
+      rows_inc=FALSE
+      while (prod < tot) {
+        if (rows_inc == FALSE){
+          nrows=nrows+1
+          rows_inc=TRUE
+        } else {
+          ncols=ncols+1
+          rows_inc=FALSE
+        }
+        print (paste("nrows=",nrows,"ncols=",ncols))
+        prod=nrows*ncols
+      } # end while
+    }
+    
+    
+    par(mfrow=c(nrows,ncols)) 
+    plot(log(ds$total_expenditure),log(ds$visible_consumption),xlab="log(Total Expenditure)", 
+         ylab="log(Visible Expenditure)",main="log-log curve for Visible consumption")
+    
+    #Dr uma suggested 10% - as a quantile 
+    
+    # calculate percentile
+    for (t in thresholds){
+      ds_new=ds
+      threshold <- as.double(quantile(ds$visible_consumption,t)) # threshold calculated on the original dataset ds
+      if (threshold<=0){
+        stop("Lowest quantile must have non-zero visible consumption (please raise threshold)")
+      }
+      print(threshold)
+      ds_new [ ds_new$visible_consumption<threshold,]$visible_consumption <-0
+      plot(log(ds_new$total_expenditure),log(ds_new$visible_consumption),xlab="log(Total Expenditure)", 
+           ylab="log(Visible Expenditure)",main="log-log curve for Visible consumption")
+    }
+    
+    #threshold_level<-f(ps)
+    #hvs<-ds[ds$visible_consumption<threshold_level,]
+    return(NULL)
   }
   if (type=="plot"){
     prev_nrows = dim(ds)[1]
@@ -28,11 +71,11 @@ run_regression_lsms<-function(ds,type){
       totexp= ds[ds$occupation==occup,]$total_expenditure/1e+6;
       mean_totexp<-rbind(mean_totexp,data.frame(occupation=occup,
                                                 mean_totexp=mean(totexp),
-                                    sd_income = sd(totexp) 
-                                    ))
+                                                sd_income = sd(totexp) 
+      ))
     }
     return(mean_totexp)
-    }
+  }
   if (type=="totexp"){
     res=lm(visible_consumption~total_expenditure,data=ds)
     plot(ds$total_expenditure,ds$visible_consumption,xlab = "total expenditure",ylab="visible expenditure")
@@ -93,9 +136,9 @@ run_regression_lsms<-function(ds,type){
     res<-NULL
     #res<- ivreg(data=ds,lnvis~lnpinc+age|
     #             . - lnpinc + incpsv+ lninc+ cbinc)
-
+    
     res<- ivreg(data=ds,lnvis~lnpinc+highest_educ+years_community|
-                 . - lnpinc + incpsv+ lninc+ cbinc)
+                  . - lnpinc + incpsv+ lninc+ cbinc)
     
     print(summary(res,diagnostics=TRUE))
     return(res)    
@@ -120,11 +163,11 @@ run_regression_lsms<-function(ds,type){
     res<-NULL
     #res<- ivreg(data=ds,lnvis~lnpinc+age|
     #             . - lnpinc + incpsv+ lninc+ cbinc)
-
+    
     if (FALSE){
-    res<- ivreg(data=ds,lnvis~lnpinc+age|
-                  . - lnpinc + highest_educ + ln_highest_educ+cubic_highest_educ)
-    #               . - lnpinc + age + ln_age+cubic_age)
+      res<- ivreg(data=ds,lnvis~lnpinc+age|
+                    . - lnpinc + highest_educ + ln_highest_educ+cubic_highest_educ)
+      #               . - lnpinc + age + ln_age+cubic_age)
     }
     # highest_educ is near signficant (1.7) and instrumentation by age, age-cubics seems 
     # fine (subject to verification of diagnostics), endogeneity is not significant when
@@ -132,8 +175,8 @@ run_regression_lsms<-function(ds,type){
     # in this analysis education is the second most important component the most (subject to verification of age as
     # valid instrument) housingstatus is also nearly significant
     if (FALSE){
-    res<- ivreg(data=ds,lnvis~lnpinc+highest_educ|
-              . - lnpinc + age + ln_age+cubic_age)
+      res<- ivreg(data=ds,lnvis~lnpinc+highest_educ|
+                    . - lnpinc + age + ln_age+cubic_age)
     }
     
     if (TRUE){
