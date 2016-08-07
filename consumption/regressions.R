@@ -14,7 +14,19 @@ run_regression_lsms<-function(ds,type){
     #plot(log(ds$total_expenditure),log(ds$visible_consumption),xlab="ln(Total Expenditure)", 
     #    ylab="ln(Visible Expenditure)",main="Engel Curves for Visible Expenditure")
     
-    thresholds= c(.07,.1,.15,.2)
+    # electricity is spent by only top 20%
+    # rice is spent by top 45%
+    # donation to charity, soap bar, top 35%
+    # personal items repair by top 4%
+    t=.01
+    while (quantile(ds$visible_consumption,t)<=0){
+      t=t+.01
+    }
+  
+    num_frames<-5
+    stepsize<-(1-t)/num_frames
+    thresholds= seq(t,1-stepsize,stepsize)
+
     tot<-length(thresholds)+1
     n<-as.integer(sqrt(tot))
     # n*n <= tot
@@ -37,12 +49,16 @@ run_regression_lsms<-function(ds,type){
       } # end while
     }
     
+    ymax=20
+    
+    commodity_type="Chosen"
     
     par(mfrow=c(nrows,ncols)) 
     plot(log(ds$total_expenditure),log(ds$visible_consumption),xlab="log(Total Expenditure)", 
-         ylab="log(Visible Expenditure)",main="log-log curve for Visible consumption")
-    
-    #Dr uma suggested 10% - as a quantile 
+         ylim=c(0,ymax),
+         ylab=paste("log(",commodity_type,"Expenditure)"),
+         main=paste("log-log curve for",commodity_type,"consumption")
+    )
     
     # calculate percentile
     for (t in thresholds){
@@ -51,10 +67,16 @@ run_regression_lsms<-function(ds,type){
       if (threshold<=0){
         stop("Lowest quantile must have non-zero visible consumption (please raise threshold)")
       }
-      print(threshold)
       ds_new [ ds_new$visible_consumption<threshold,]$visible_consumption <-0
+      print(paste("range of consumption for threshold=",threshold, " is:", 
+                  toString(range(ds_new$visible_consumption))))
+      
       plot(log(ds_new$total_expenditure),log(ds_new$visible_consumption),xlab="log(Total Expenditure)", 
-           ylab="log(Visible Expenditure)",main="log-log curve for Visible consumption")
+           ylim=c(0,ymax),
+           ylab=paste("log(",commodity_type,"Expenditure)"), 
+           main=paste("log-log curve for",
+                      commodity_type,
+                      "consumption (bottom",toString(round(t*100,1)),"% excluded)"))
     }
     
     #threshold_level<-f(ps)

@@ -22,7 +22,6 @@ read_tnz <- function(filename,convert_factors) {
 
 #########################
 
-
 process_expd<-function(hh)
 {
   hhk=ddply(hh,.(alloc),summarize,n=length(newid))
@@ -176,6 +175,7 @@ load_diary_file <-function(dataset,year){
                                 m=hh_mapping_lsms_2010())
       k$hhid <-as.character(k$hhid)
       k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      k$item<-k$item+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
       factor <- 52
       # quantities are normalized to annual values
       k$cost <- k$cost*factor
@@ -1085,9 +1085,24 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   return(ds)
 }
 
+food_categories_lsms_2010<-function(){
+  return(c("10101", "10102", "10103", "10104", "10105", "10106", "10107", "10108", "10109", "10110", 
+           "10111", "10112", "10201", "10202", "10203", "10204", "10205", "10206", "10207", "10301", 
+           "10302", "10303", "10401", "10501", "10502", "10503", "10504", "10601", "10602", "10603", 
+           "10701", "10702", "10703", "10704", "10801", "10802", "10803", "10804", "10805", "10806", 
+           "10807", "10808", "10809", "10810", "10901", "10902", "10903", "11001", "11002", "11003", 
+           "11004", "11101", "11102", "11103", "11104", "11105", "11106", "11107", "11108"))
+}
 visible_categories_lsms_2010<-function(){
- #return(c("214","219","301","313","314"));
-  return(c("214","301","313","314"));
+ #return(c("214","219","224","301","313","314"));
+  #return(c("214","301","313","314"));
+  #return(c("10101","10102"))
+  #return(c("218")) #bar soap 
+  return(c("224")) # radio/watch personal items repairs
+  
+  #return(c("218")) # donations
+  #return(c("202"))# electricity
+  #return(food_categories_lsms_2010());
  # return(c("313","314"))
  # return(c("314"))
   # 219 - Motor vehicle service, repair, or parts
@@ -1095,6 +1110,7 @@ visible_categories_lsms_2010<-function(){
   # 301 - Carpets, rugs
   # 313 - Bride price
   # 314 - Funeral costs
+  # 224 - repairs to personal items
  
 }
 
