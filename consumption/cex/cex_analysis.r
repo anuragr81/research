@@ -1094,12 +1094,15 @@ food_categories_lsms_2010<-function(){
            "11004", "11101", "11102", "11103", "11104", "11105", "11106", "11107", "11108"))
 }
 visible_categories_lsms_2010<-function(){
- #return(c("214","219","224","301","313","314"));
-  #return(c("214","301","313","314"));
-  #return(c("10101","10102"))
+ #return(c("213","214","219","224","301","313","314"));
+  #return(c("10101","10102"))#rice
   #return(c("218")) #bar soap 
-  return(c("224")) # radio/watch personal items repairs
-  
+  #return(c("224")) # radio/watch personal items repairs
+  #return(c("211")) # toothbrush
+  #return(c("10801","10802","10803","10804","10805","10806","10807","10808","10809","10810")) # meat
+  #return(c("10701","10702","10703","10704"))
+  return(c("101")) # cigarettes/tobacco
+  #return(c("11106","11107","11108")) # alcohol
   #return(c("218")) # donations
   #return(c("202"))# electricity
   #return(food_categories_lsms_2010());

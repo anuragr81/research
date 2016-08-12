@@ -7,17 +7,20 @@ inc_control<-function(inc){
   }
 }
 
-run_regression_lsms<-function(ds,type){
+run_regression_lsms<-function(ds,type,commodity_type){
   if (type=="engel"){
     #    ds$p<-with(ds,log(visible_consumption)/log(total_expenditure))
     #    hist(ds$p,xlab = "ln(visible expenditure)/ln(total expenditure)",main = "Engel  / total expenditure")
     #plot(log(ds$total_expenditure),log(ds$visible_consumption),xlab="ln(Total Expenditure)", 
     #    ylab="ln(Visible Expenditure)",main="Engel Curves for Visible Expenditure")
-    
-    # electricity is spent by only top 20%
+    # aggregate visible 
+    # electricity is spent by only top 22%
     # rice is spent by top 45%
     # donation to charity, soap bar, top 35%
     # personal items repair by top 4%
+    # alcoholic beverages top 8%
+    # meat top 78%
+    # fruits top 38%
     t=.01
     while (quantile(ds$visible_consumption,t)<=0){
       t=t+.01
@@ -51,7 +54,7 @@ run_regression_lsms<-function(ds,type){
     
     ymax=20
     
-    commodity_type="Chosen"
+    #commodity_type="Chosen"
     
     par(mfrow=c(nrows,ncols)) 
     plot(log(ds$total_expenditure),log(ds$visible_consumption),xlab="log(Total Expenditure)", 
