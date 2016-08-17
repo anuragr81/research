@@ -12,3 +12,12 @@ class DateCache:
 
    def nearestDate(self,dt):
        raise Exception()
+
+
+"""
+What we need now is just 
+i) rewriting of the formula
+ii) removal of creating of new dictionaries in positions, nosh (let python garbage collect its own dictionaries as necessary)
+iii) 
+
+"""

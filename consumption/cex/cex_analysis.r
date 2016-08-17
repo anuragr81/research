@@ -1101,13 +1101,13 @@ visible_categories_lsms_2010<-function(){
   #return(c("211")) # toothbrush
   #return(c("10801","10802","10803","10804","10805","10806","10807","10808","10809","10810")) # meat
   #return(c("10701","10702","10703","10704"))
-  return(c("101")) # cigarettes/tobacco
+  #return(c("101")) # cigarettes/tobacco
   #return(c("11106","11107","11108")) # alcohol
   #return(c("218")) # donations
   #return(c("202"))# electricity
   #return(food_categories_lsms_2010());
  # return(c("313","314"))
- # return(c("314"))
+  return(c("313"))
   # 219 - Motor vehicle service, repair, or parts
   # 214 - Other personal products (shampoo, razor blades, cosmetics, hair products, etc.)
   # 301 - Carpets, rugs
