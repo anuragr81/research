@@ -1056,8 +1056,12 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
                     housingstatus=heads$housingstatus,
                     roomsnum=heads$roomsnum,
                     stringsAsFactors=FALSE);
-  print("Treating highest_educ=NA as uneducated");
-  heads$highest_educ[is.na(heads$highest_educ)]<-1
+  print(
+    paste("Total number of households with head_highest_education=NA : ",
+          dim(heads[is.na(heads$highest_educ),])[1]
+          )
+    );
+  #heads$highest_educ[is.na(heads$highest_educ)]<-1
   print("Setting members with years_community=99 as their age");
   heads$is_resident<-as.integer(as.integer(heads$years_community)==99)
   heads$years_community<-heads$years_community+heads$is_resident*(heads$age-99);
