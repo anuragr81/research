@@ -15,13 +15,12 @@ read_tnz <- function(filename,convert_factors) {
     stop("convert_factors must be ")
   }
   dat1 = read.dta(filename,convert.factors = convert_factors);
-  dat2 = as.data.frame(dat1);
+  dat2 = as.data.frame(dat1,stringsAsFactors=FALSE);
   dat3 = dat2[as.numeric(dat2$y2_hhid)>0,] # only take data with hhid>0
   return(dat3);
 }
 
 #########################
-
 
 process_expd<-function(hh)
 {
@@ -61,7 +60,7 @@ combine_subfiles<-function (filenames,unsharedkey){
       }
     }
     print(paste("For file:",filename ," read data-frame of size :",dim(df)[1],"x",dim(df)[2]))
-    res = rbind(res,df)
+    res = rbind(res,df,stringsAsFactors=FALSE)
   }
   if (!is.null(unsharedkey) && length(filenames)>1){
     if (length(unsharedkeys)>0){
@@ -174,8 +173,9 @@ load_diary_file <-function(dataset,year){
       k <- get_translated_frame(dat=kdat,
                                 names=diary_info_columns_lsms_2010(),
                                 m=hh_mapping_lsms_2010())
-      
+      k$hhid <-as.character(k$hhid)
       k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      k$item<-k$item+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
       factor <- 52
       # quantities are normalized to annual values
       k$cost <- k$cost*factor
@@ -188,6 +188,7 @@ load_diary_file <-function(dataset,year){
       l <- get_translated_frame(dat=ldat,
                                 names=get_lsms_secl_info_columns_2010(),
                                 m=get_lsms_secl_fields_mapping_2010())
+      l$hhid <-as.character(l$hhid)
       l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
       weekly_recall_items <-c(101,102,103)
       
@@ -214,6 +215,7 @@ load_diary_file <-function(dataset,year){
       m <- get_translated_frame(dat=mdat,
                                 names=get_lsms_secm_info_columns(2010),
                                 m=get_lsms_secm_fields_mapping(2010))
+      m$hhid <-as.character(m$hhid)
       m<- m[!is.na(m$hhid) & !is.na(m$cost) & m$cost>0,]
       # nothing to be multiplied for yearly-recall (since we're looking at annual consumption)
       
@@ -283,26 +285,88 @@ get_ohs_secc_fields_mapping_lsms_2010<-function(){
   return(s)
 }
 
+ohs_seccb_columns_lsms_2010<-function(){
+  return(c("facilitycode","accessibility","distance","region","district","ward"))
+}
+
+ohs_seccb_mapping_lsms_2010<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="id_01",name="region"))
+  s= rbind(s,data.frame(iesname="id_02",name="district"))
+  s= rbind(s,data.frame(iesname="id_03",name="ward"))
+  s= rbind(s,data.frame(iesname="id_04",name="ea"))
+  s= rbind(s,data.frame(iesname="cboa",name="facilitycode"))
+  s= rbind(s,data.frame(iesname="cm_b01",name="accessibility"))
+  s= rbind(s,data.frame(iesname="cm_b03",name="distance"))
+  return(s)
+}
+
+ohs_seca_columns_lsms_2010<-function(){
+  return(c("hhid","region","district","ward","ea","isrural"))
+}
+
+ohs_seca_mapping_lsms_2010<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
+  s= rbind(s,data.frame(iesname="region",name="region"))
+  s= rbind(s,data.frame(iesname="district",name="district"))
+  s= rbind(s,data.frame(iesname="ward",name="ward"))
+  s= rbind(s,data.frame(iesname="ea",name="ea"))
+  s= rbind(s,data.frame(iesname="y2_rural",name="isrural"))
+  return(s)
+}
+
 load_ohs_file <-function(dataset,year){
   
   if (dataset == "lsms"){
     if (year == 2010){
+      
+      cbdat<-read.dta('../lsms/TZNPS2COMDTA/COMSEC_CB.dta',convert.factors = FALSE)
+      
+      cb <- get_translated_frame(dat=cbdat,
+                                names=ohs_seccb_columns_lsms_2010(),
+                                m=ohs_seccb_mapping_lsms_2010())
+      
+      l<-(cb[is.element(tolower(as.character(cb$facilitycode)),c("l")),])
+      # extract those with 1
+      l$accessiblemarket<-as.integer(l$accessibility==1)
+      # extract those with 2 (and assign them the same status as 1's)
+      l$accessiblemarket<-l$accessiblemarket+as.integer(l$accessibility==2 & l$distance<10)
+      l=l[!is.na(l$accessiblemarket),]
+      l=ddply(l,.(region,district,ward),summarize,accessiblemarket=max(accessiblemarket))
+      #l = data.frame(region=l$region,district=l$district,ward=l$ward,ea=l$ea,accessiblemarket=l$accessiblemarket)
+      ##
+      
+      u <-read.csv('../lsms/district_code.csv')
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban);
+      
+      adat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_A.dta',FALSE)
+      
+      a <- get_translated_frame(dat=adat,
+                                 names=ohs_seca_columns_lsms_2010(),
+                                 m=ohs_seca_mapping_lsms_2010())
+      a<-merge(a,u)
+      a<-merge(a,l)
+      ##
       bdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_B.dta',FALSE)
       b <- get_translated_frame(dat=bdat,
                                 names=ohs_info_columns_lsms_2010(),
                                 m=ohs_mapping_lsms_2010())
-      
+      b$hhid<-as.character(b$hhid)
       cdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_C.dta',FALSE)
       c <- get_translated_frame(dat=cdat,
                                 names=get_ohs_secc_columns_lsms_2010(),
                                 m=get_ohs_secc_fields_mapping_lsms_2010())
-      ohs<-merge(b,c)
+      c$hhid<-as.character(c$hhid)
+      ab <- merge(a,b)
+      ohs<-merge(ab,c)
       ohs$age <-2010-ohs$YOB
       
       jdat <- read.dta('../lsms/TZNPS2HH1DTA/HH_SEC_J1.dta',convert.factors=FALSE)
       j <- get_translated_frame(dat=jdat,
                                 names=get_lsms_secj_info_columns_2010(),
                                 m=get_lsms_secj_fields_mapping_2010())
+      j$hhid <-as.character(j$hhid)
       j$roomsnum_secondary[is.na(j$roomsnum_secondary)]<-0
       j$houserent[is.na(j$houserent)]<-0
       j$roomsnum<-j$roomsnum_primary+j$roomsnum_secondary
@@ -689,12 +753,12 @@ computeYearValues<-function(dat,
     y<-NULL
   }
   
-  hd<-rbind(h,d)
-  hdw<-rbind(hd,w)
-  hdwf<-rbind(hdw,f)
-  hdwfm<-rbind(hdwf,m)
-  hdwfmq<-rbind(hdwfm,q)
-  hdwfmqy<-rbind(hdwfmq,y)
+  hd<-rbind(h,d,stringsAsFactors=FALSE)
+  hdw<-rbind(hd,w,stringsAsFactors=FALSE)
+  hdwf<-rbind(hdw,f,stringsAsFactors=FALSE)
+  hdwfm<-rbind(hdwf,m,stringsAsFactors=FALSE)
+  hdwfmq<-rbind(hdwfm,q,stringsAsFactors=FALSE)
+  hdwfmqy<-rbind(hdwfmq,y,stringsAsFactors=FALSE)
   return(hdwfmqy)
 }
 
@@ -727,7 +791,11 @@ infer_lsms_sece_total_income<-function(i1,i2){
                               workyearmonthweeks_field="workyearmonthweeks",
                               workyearmonths_field="workyearmonths",
                               output_field="yearly_pay");
-  ydata<-rbind(ydata,data.frame(hhid=i1_w_y$hhid,personid=i1_w_y$personid,yearly_pay=i1_w_y$yearly_pay,employertype=i1_w_y$employertype))
+  ydata<-rbind(ydata,
+               data.frame(hhid=i1_w_y$hhid,personid=i1_w_y$personid,
+                          yearly_pay=i1_w_y$yearly_pay,
+                          employertype=i1_w_y$employertype,stringsAsFactors=FALSE),
+               stringsAsFactors=FALSE)
   #other forms of payment
   
   i1_w_other<- i1_w[!is.na(i1_w$has_lastpayment_other),]
@@ -741,7 +809,14 @@ infer_lsms_sece_total_income<-function(i1,i2){
                                     workyearmonths_field="workyearmonths",
                                     output_field="yearly_pay");
   
-  ydata<-rbind(ydata,data.frame(hhid=i1_w_other_y$hhid,personid=i1_w_other_y$personid,yearly_pay=i1_w_other_y$yearly_pay,employertype=i1_w_other_y$employertype))
+  ydata<-rbind(ydata,
+               data.frame(hhid=i1_w_other_y$hhid,
+                          personid=i1_w_other_y$personid,
+                          yearly_pay=i1_w_other_y$yearly_pay,
+                          employertype=i1_w_other_y$employertype,
+                          stringsAsFactors=FALSE
+                          ),
+               stringsAsFactors=FALSE)
   #secondary job wages
   
   i1_secjob<-i1[!is.na(i1$has_secjobwages),]
@@ -760,7 +835,14 @@ infer_lsms_sece_total_income<-function(i1,i2){
   # secondary job must have employertype invalidated (set to -1 in the current convention)
   
   print (paste("Setting employertype as -1 (for ",dim(i1_secjob_y)[1],") wage-workers with secondary jobs"))
-  ydata<-rbind(ydata,data.frame(hhid=i1_secjob_y$hhid,personid=i1_secjob_y$personid,yearly_pay=i1_secjob_y$yearly_pay,employertype=rep(-1,dim(i1_secjob_y)[1])))
+  ydata<-rbind(ydata,
+               data.frame(hhid=i1_secjob_y$hhid,
+                          personid=i1_secjob_y$personid,
+                          yearly_pay=i1_secjob_y$yearly_pay,
+                          employertype=rep(-1,dim(i1_secjob_y)[1]),
+                          stringsAsFactors=FALSE
+                          ),
+               stringsAsFactors=FALSE)
   #other wages from secondary job
   i1_secjob_other<-i1[!is.na(i1$has_secjobwages_other),]
   i1_secjob_other<-i1_secjob_other[!is.na(i1_secjob_other$has_secjob),]
@@ -778,8 +860,10 @@ infer_lsms_sece_total_income<-function(i1,i2){
   ydata<-rbind(ydata,data.frame(hhid=i1_secjob_other_y$hhid,
                                 personid=i1_secjob_other_y$personid,
                                 yearly_pay=i1_secjob_other_y$yearly_pay,
-                                employertype=rep(-1,dim(i1_secjob_other_y)[1])
-                                )
+                                employertype=rep(-1,dim(i1_secjob_other_y)[1]),
+                                stringsAsFactors=FALSE
+                                ),
+               stringsAsFactors=FALSE
                )
   #rbind for the yearly-pay data-frame
   selfemployment_offset<-1000
@@ -794,7 +878,8 @@ infer_lsms_sece_total_income<-function(i1,i2){
   a1=data.frame(hhid=i1_selfemployed_y$hhid,
                personid=i1_selfemployed_y$personid,
                yearly_pay=i1_selfemployed_y$yearly_pay,
-               employertype=selfemployment_offset+i1_selfemployed_y$selfemploymenttype
+               employertype=selfemployment_offset+i1_selfemployed_y$selfemploymenttype,
+               stringsAsFactors=FALSE
   )
 
   i1_selfemployed_y2<-computeLsmsSelfemployedValues(dat=i2,
@@ -804,12 +889,13 @@ infer_lsms_sece_total_income<-function(i1,i2){
   a2=data.frame(hhid=i1_selfemployed_y2$hhid,
                personid=i1_selfemployed_y2$personid,
                yearly_pay=i1_selfemployed_y2$yearly_pay,
-               employertype=i1_selfemployed_y2$selfemploymenttype)
+               employertype=i1_selfemployed_y2$selfemploymenttype,
+               stringsAsFactors=FALSE)
 
   print("Running outer-join (all-merge) for data from files 1 and 2");
   a=merge(a1,a2,all=TRUE)
 
-  ydata<-rbind(ydata,a)
+  ydata<-rbind(ydata,a,stringsAsFactors=FALSE)
   
   print ("PENDING CONTROL VARS: employment_type, self_owned_business_type")
   
@@ -836,9 +922,14 @@ load_income_file<-function (dataset,year){
     i1 <- get_translated_frame(dat=idat1,
                                names=get_lsms_sece1_columns_2010(),
                                m=get_lsms_sece_fields_mapping_2010())
+    #TODO: add the conversion into get_translated_frame functionality
+    i1$hhid<-as.character(i1$hhid)
     i2 <- get_translated_frame(dat=idat1,
                                names=get_lsms_sece2_columns_2010(),
                                m=get_lsms_sece_fields_mapping_2010())
+    i2$hhid<as.character(i2$hhid)
+    #TODO: add the conversion into get_translated_frame functionality
+    
     ti <- infer_lsms_sece_total_income(i1,i2);
     
     # idat2 has only got self-employment details
@@ -887,6 +978,9 @@ get_ucc_mapping_2004<-function(){
 get_visible_categories<-function(hh,visible_categories,item_field){
   vis<-hh[is.element(hh[,item_field],visible_categories),] # get only visible categories
   vis<-ddply(vis,.(hhid),summarize,visible_consumption=sum(cost))
+  no_vis_hhid<-setdiff(unique(hh$hhid),unique(vis$hhid))
+  no_vis<-data.frame(hhid=no_vis_hhid,visible_consumption=rep(0,length(no_vis_hhid)))
+  vis <- rbind(vis,no_vis)
   return(vis)
 }
 
@@ -913,60 +1007,117 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
   }
   
   print ("Calculating visible expenditures")
+  print(paste("Total number of households to search for visible consumption=",length(unique(hh$hhid))))
   vis<-get_visible_categories(hh=hh,visible_categories = visible_categories_lsms_2010(), item_field = "item")
+  print(paste("Number of households with visible expenditure = ",length(unique(vis$hhid))))
   print("Calculating total expenditures")
   totexp<-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
+  print(paste("Number of households with total expenditure data minus housing = ",length(unique(totexp$hhid))))
+  
   # obtain map (hhid->housing) with ddply
   tothouserent<-ddply(ohs,.(hhid),summarize,tothouserent=sum(houserent))
   # obtain map (hhid->educexpen) with ddply 
+  print(paste("Number of households with houserent data = ",length(unique(tothouserent$hhid))))
   
   print ("Appending educexpense and houserent to total expenditure");
   ohs$educexpense[is.na(ohs$educexpense)]<-0
   toteducexpense<-ddply(ohs,.(hhid),summarize,toteducexpense=sum(educexpense))
+  print(paste("Number of households with educexpense data = ",length(unique(toteducexpense$hhid))))
+  
   totexp<-merge(totexp,toteducexpense)
+  print(paste("Number of households after merging total_expenditure and total_educexpense = ",length(unique(totexp$hhid))))
+  
   totexp<-merge(totexp,tothouserent)
+  print(paste("Number of households after merging total_expenditure with houserent = ",length(unique(totexp$hhid))))
+  
   totexp$total_expenditure=totexp$total_expenditure+totexp$tothouserent+totexp$toteducexpense
   totexp$tothouserent<-NULL
   totexp$toteducexpense<-NULL
+  print(paste("Number of households with total expenditure data = ",length(unique(totexp$hhid))))
   
   heads<-ohs[as.integer(ohs$household_status)==1,]
+  print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
+  
   heads<-data.frame(hhid=heads$hhid,
                     highest_educ=heads$highest_educ,
                     age=heads$age,
+                    region=heads$region,
+                    district=heads$district,
+                    ward=heads$ward,
+                    ea=heads$ea,
                     personid=heads$personid,
+                    litlang=heads$litlang,
+                    isrural=heads$isrural,
+                    isurbanp=heads$isurbanp,
+                    accessiblemarket=heads$accessiblemarket,
+                    schoolowner=heads$schoolowner,
+                    occupation = heads$occupation,
                     years_community=heads$years_community,
                     housingstatus=heads$housingstatus,
-                    roomsnum=heads$roomsnum);
-  print("Treating highest_educ=NA as uneducated");
-  heads$highest_educ[is.na(heads$highest_educ)]<-1
+                    roomsnum=heads$roomsnum,
+                    stringsAsFactors=FALSE);
+  print(
+    paste("Total number of households with head_highest_education=NA : ",
+          dim(heads[is.na(heads$highest_educ),])[1]
+          )
+    );
+  #heads$highest_educ[is.na(heads$highest_educ)]<-1
   print("Setting members with years_community=99 as their age");
   heads$is_resident<-as.integer(as.integer(heads$years_community)==99)
   heads$years_community<-heads$years_community+heads$is_resident*(heads$age-99);
   
   print ("Calculating hsize")
-  hhid_personid<-data.frame(hhid=ohs$hhid,personid=ohs$personid);
+  hhid_personid<-data.frame(hhid=ohs$hhid,personid=ohs$personid,stringsAsFactors=FALSE);
   hhid_personid<- ddply(hhid_personid,.(hhid),summarize,hsize=length(personid));
-  print(paste("Merging visual expenditure : ",dim(hhid_personid)[1]))
+  print(paste("Number of households with hsize data = ",length(unique(hhid_personid$hhid))))
+  
+  print("Merging visual expenditure")
   ds <-merge(totexp,vis);
+  print(paste("Number of households after merging total expenditure with visible expenditure= ",length(unique(ds$hhid))))
   print(paste("Merging hsize",dim(ds)[1]))
+  
   ds <-merge(ds,hhid_personid);
+  print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
+  
   ds<-merge(ds,heads)
-  print(paste("Merging income",dim(ds)[1]))
-  ds<-merge(ds,income)
+  print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
+  
+  #print(paste("Merging income",dim(ds)[1]))
+  #ds<-merge(ds,income)
   print(paste("personid range:",toString(unique(ds$personid))))
   ds$personid<-NULL
   return(ds)
 }
 
+food_categories_lsms_2010<-function(){
+  return(c("10101", "10102", "10103", "10104", "10105", "10106", "10107", "10108", "10109", "10110", 
+           "10111", "10112", "10201", "10202", "10203", "10204", "10205", "10206", "10207", "10301", 
+           "10302", "10303", "10401", "10501", "10502", "10503", "10504", "10601", "10602", "10603", 
+           "10701", "10702", "10703", "10704", "10801", "10802", "10803", "10804", "10805", "10806", 
+           "10807", "10808", "10809", "10810", "10901", "10902", "10903", "11001", "11002", "11003", 
+           "11004", "11101", "11102", "11103", "11104", "11105", "11106", "11107", "11108"))
+}
 visible_categories_lsms_2010<-function(){
-#return(c("214","219","301","313","314"));
-  return(c("313","314"))
- # return(c("314"))
+ #return(c("213","214","219","224","301","313","314"));
+  #return(c("10101","10102"))#rice
+  #return(c("218")) #bar soap 
+  #return(c("224")) # radio/watch personal items repairs
+  #return(c("211")) # toothbrush
+  #return(c("10801","10802","10803","10804","10805","10806","10807","10808","10809","10810")) # meat
+  #return(c("10701","10702","10703","10704"))
+  #return(c("101")) # cigarettes/tobacco
+  #return(c("11106","11107","11108")) # alcohol
+  #return(c("218")) # donations
+  #return(c("202"))# electricity
+  #return(food_categories_lsms_2010());
+ # return(c("313","314"))
+  return(c("313"))
   # 219 - Motor vehicle service, repair, or parts
   # 214 - Other personal products (shampoo, razor blades, cosmetics, hair products, etc.)
   # 301 - Carpets, rugs
   # 313 - Bride price
   # 314 - Funeral costs
+  # 224 - repairs to personal items
  
 }
 
@@ -1028,7 +1179,7 @@ cex_combined_years_ds<-function(years)
   resds <-NULL
   for (year in years){
     ds=combined_data_set("us_cex",year,FALSE)
-    resds = rbind(resds,ds)
+    resds = rbind(resds,ds,stringsAsFactors=FALSE)
   }
   return(resds)
 }
@@ -1122,7 +1273,7 @@ combined_data_set<-function(dataset,year,isTranslated,isDebug){
 
 cpi_adjust<-function(ds,mfile,refyear){
   m=read.csv(mfile)
-  m<-data.frame(year=as.integer(m$Year),cpi=m$Jun)
+  m<-data.frame(year=as.integer(m$Year),cpi=m$Jun,stringsAsFactors=FALSE)
   refcpi = m[m$year==as.integer(refyear),]$cpi
   if (length(refcpi)>1){
     stop(paste("More than one values for year:",year))
