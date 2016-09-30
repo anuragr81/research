@@ -7,11 +7,67 @@ inc_control<-function(inc){
   }
 }
 
-run_regression_lsms<-function(ds,type,commodity_type){
+write_variables_as_sum<-function(vars){
+  prefix=""
+  strout=""
+  for ( i in vars){
+    strout= paste(strout,prefix,i,sep='') 
+    prefix="+"
+  }
+  return(strout)
+}
+
+find_highinc_occupations_lsms<-function(){
+  inc<-load_income_file("lsms",2010)
+  ohs<-load_ohs_file("lsms",2010)
+  highinc_occupations(inc=inc,ohs=ohs)
+}
+highinc_occupations<-function(inc,ohs){
+  
+  k<-ohs[!is.na(ohs$occupation),]
+  k<-data.frame(hhid=k$hhid,personid=k$personid,occupation=k$occupation)
+  i<-inc[!is.na(inc$yearly_pay),]
+  m<-merge(i,k)
+  #res=ddply(m,.(occupation),summarise,mpay=mean(yearly_pay),sdpay=sd(yearly_pay),n=length(hhid))
+  res=ddply(m,.(occupation),summarise,mpay=median(yearly_pay),sdpay=sd(yearly_pay),n=length(hhid))
+  #inc[is.element(inc$hhid,intersect(ohs[ohs$occupation==6,]$hhid,inc$hhid)),]
+  #ds<-ds[!is.na(ds$occupation),]
+  #r<-data.frame(occupation=res$occupation,mpay=res$mpay)
+  #rds<-merge(r,ds)
+  #x<-ddply(rds,.(mpay),summarise,totexp=median(total_expenditure))
+  return(res);
+}
+lsms_vars_init<-function(){
+  return(c("total_expenditure","age","hsize","housingstatus","occupation","isrural","region",
+           "english","roomsnum","years_community","is_resident"))
+}
+
+lsms_ln_vars_init<-function(){
+  return(c("lnpinc","age","hsize","housingstatus","occupation","isrural","highest_educ","region",
+           "english","roomsnum","years_community","is_resident"))
+}
+
+significant_lmvars<-function(ds,depvar,vars_init){
+  while(TRUE){
+    res = lm(data=ds,paste(depvar,"~",write_variables_as_sum(vars_init),sep=""))
+    resdf<-as.data.frame(summary(res)$coefficients)
+    resdf<-resdf[rownames(resdf)!="(Intercept)",] # suppress ignoring of (Intercept)
+    min_tval <- min(abs(resdf[,"t value"]))
+    if (min_tval > 1.9){
+      print(paste("signficant variables - ",toString (vars_init)));
+      return(res)
+    } else {
+      min_tval_var<-rownames(resdf[abs(resdf[,"t value"])==min_tval,])
+      vars_init<-setdiff(vars_init,min_tval_var)
+    }
+  }
+}
+
+run_regression_lsms<-function(ds,type,commodity_type,fname){
   if (type=="engel"){
     #    ds$p<-with(ds,log(visible_consumption)/log(total_expenditure))
     #    hist(ds$p,xlab = "ln(visible expenditure)/ln(total expenditure)",main = "Engel  / total expenditure")
-    #plot(log(ds$total_expenditure),log(ds$visible_consumption),xlab="ln(Total Expenditure)", 
+    #plot(log(ds$total_expenditure),log(ds[,fname]),xlab="ln(Total Expenditure)", 
     #    ylab="ln(Visible Expenditure)",main="Engel Curves for Visible Expenditure")
     # aggregate visible 
     # electricity is spent by only top 22%
@@ -21,15 +77,21 @@ run_regression_lsms<-function(ds,type,commodity_type){
     # alcoholic beverages top 8%
     # meat top 78%
     # fruits top 38%
+    if (missing(fname)){
+      fname="visible_consumption";
+    }
+    
+    print(paste("Using data in field:",fname));
+    
     t=.01
-    while (quantile(ds$visible_consumption,t)<=0){
+    while (quantile(ds[,fname],t)<=0){
       t=t+.01
     }
-  
+    
     num_frames<-5
     stepsize<-(1-t)/num_frames
     thresholds= seq(t,1-stepsize,stepsize)
-
+    
     tot<-length(thresholds)+1
     n<-as.integer(sqrt(tot))
     # n*n <= tot
@@ -57,7 +119,7 @@ run_regression_lsms<-function(ds,type,commodity_type){
     #commodity_type="Chosen"
     
     par(mfrow=c(nrows,ncols)) 
-    plot(log(ds$total_expenditure),log(ds$visible_consumption),xlab="log(Total Expenditure)", 
+    plot(log(ds$total_expenditure),log(ds[,fname]),xlab="log(Total Expenditure)", 
          ylim=c(0,ymax),
          ylab=paste("log(",commodity_type,"Expenditure)"),
          main=paste("log-log curve for",commodity_type,"consumption")
@@ -66,7 +128,7 @@ run_regression_lsms<-function(ds,type,commodity_type){
     # calculate percentile
     for (t in thresholds){
       ds_new=ds
-      threshold <- as.double(quantile(ds$visible_consumption,t)) # threshold calculated on the original dataset ds
+      threshold <- as.double(quantile(ds[,fname],t)) # threshold calculated on the original dataset ds
       if (threshold<=0){
         stop("Lowest quantile must have non-zero visible consumption (please raise threshold)")
       }
@@ -83,7 +145,7 @@ run_regression_lsms<-function(ds,type,commodity_type){
     }
     
     #threshold_level<-f(ps)
-    #hvs<-ds[ds$visible_consumption<threshold_level,]
+    #hvs<-ds[ds[,fname]<threshold_level,]
     return(NULL)
   }
   if (type=="plot"){
@@ -103,75 +165,76 @@ run_regression_lsms<-function(ds,type,commodity_type){
   }
   if (type=="totexp"){
     res=lm(visible_consumption~total_expenditure,data=ds)
-    plot(ds$total_expenditure,ds$visible_consumption,xlab = "total expenditure",ylab="visible expenditure")
+    plot(ds$total_expenditure,ds[,fname],xlab = "total expenditure",ylab="visible expenditure")
     abline(res)
     return(res)
   }
   
   if (type=="simple"){
+    ds$english <- as.integer(ds$litlang==2 | ds$litlang==3)
+    
+    vars_init <-c("total_expenditure","age","hsize","housingstatus","occupation",
+                  "isrural","region","english","roomsnum","years_community",
+                  "is_resident","toteducexpense","tothouserent")
+    res <- significant_lmvars(ds=ds,depvar="visible_consumption",vars_init=lm_vars_init());
+    print(res)
+    return("DONE")
     # highest_educ, age, company-at-work, highest_eduation, years_in_community(=age when 99), total_expenditure, is_migrant, family_size  
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+highest_educ+age+years_community+is_resident+yearly_pay)# (yearly pay least significant)
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+highest_educ+age+years_community+is_resident)# (highest_educ least significant)
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+years_community+is_resident) # (is_resident least significant)
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+years_community) # age least significant
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community) #  years_community least significant
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize)
+    #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+roomsnum+years_community+is_resident+toteducexpense+tothouserent)
+    #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+roomsnum+years_community+is_resident+toteducexpense)
+    #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+years_community+is_resident+toteducexpense)
+    #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+years_community+toteducexpense)
+    #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+toteducexpense)
+    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+housingstatus+occupation+isrural+region+english+toteducexpense)
+    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+housingstatus+isrural+region+english+toteducexpense)
+    res=lm(data=ds,visible_consumption~total_expenditure+housingstatus+isrural+region+english+toteducexpense)
     
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community+age)# (highest_educ least significant)
-    
-    res=lm(data=ds,visible_consumption~total_expenditure+hsize+is_resident)
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize)
-    
-    # could is_resident be multicollinear?
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+years_community)
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+age+is_resident)
     
     #(religious_education, locality_dummies,self_reported_happiness,housing_expenditure,education,price_based_class,urban_rural)
     print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,HOUSING_STATUS,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS, VISIBLE_SERVICES IGNORED")
     
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community+is_resident)
     print(summary(res))
+    min_tval <- min(abs(summary(res)$coefficients[,"t value"]))
+    print(paste("min(t-values)=",min_tval))
+    resdf<-as.data.frame(summary(res)$coefficients)
+    print(resdf[abs(resdf[,"t value"])==min_tval,])
+    print("======ANALYSIS is of educationexpense as visible expenditure ===========");
     return(res)
   }
   if (type == "simple2"){
-    ds$lnvis <- log(ds$visible_consumption) 
-    ds$lnvis[ds$lnvis==-Inf]<-0 # zeroing out -Inf from log
+    
+    if (missing(fname)){
+      fname="visible_consumption";
+    }
+    ds[,fname]<-ds[,fname]+1e-10 # adding a small quantity to ensure log transformation is not -Inf
+    ds$lnvis <- log(ds[,fname]) 
+    
+    #ds$lnvis[ds$lnvis==-Inf]<-0 # zeroing out -Inf from log
     ds$lnpinc <- log(ds$total_expenditure)
     #ds$nonenglish <- as.integer(ds$litlang==1 | ds$litlang==4)
     ds$english <- as.integer(ds$litlang==2 | ds$litlang==3)
-    #res=lm(data=ds,lnvis~lnpinc+hsize+english+highest_educ)# both hsize and highest_educ are significant for all categories (except motorcycle repairs)
     print("PENDING region dummies")
     length_region_dummy=unique(ds$region)[-1]
-    res=lm(data=ds,lnvis~lnpinc+hsize+english+occupation+isurbanp)
+    res=lm(data=ds,lnvis~lnpinc+age+hsize+housingstatus+occupation+isrural+highest_educ+region+english+roomsnum+years_community+is_resident+toteducexpense+tothouserent)
+    
     print(summary(res))
+    
+    min_tval <- min(abs(summary(res)$coefficients[,"t value"]))
+    print(paste("min(t-values)=",min_tval))
+    resdf<-as.data.frame(summary(res)$coefficients)
+    print(resdf[abs(resdf[,"t value"])==min_tval,])
     return(res)
   }
-  if (type=="2sls_income"){
-    print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,HOUSING_STATUS,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS,AREA_TYPE, VISIBLE_SERVICES IGNORED")
-    
-    ds <-ds[ds$yearly_pay>0,]
-    
-    ds$lnvis <- log(ds$visible_consumption)
-    ds$lnvis[ds$lnvis==-Inf]<-0 # zeroing out -Inf from log
-    
-    ds$lnpinc <- log(ds$total_expenditure)
-    ds$lninc <- log(ds$yearly_pay)
-    ds$incpsv <- as.integer(ds$yearly_pay>0)
-    ds$cbinc <- ds$yearly_pay*ds$yearly_pay*ds$yearly_pay
-    res<-NULL
-    #res<- ivreg(data=ds,lnvis~lnpinc+age|
-    #             . - lnpinc + incpsv+ lninc+ cbinc)
-    
-    res<- ivreg(data=ds,lnvis~lnpinc+highest_educ+years_community|
-                  . - lnpinc + incpsv+ lninc+ cbinc)
-    
-    print(summary(res,diagnostics=TRUE))
-    return(res)    
-  }
   if (type=="2sls"){
-    print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,HOUSING_STATUS,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS,AREA_TYPE, VISIBLE_SERVICES IGNORED")
-    ds$lnvis <- log(ds$visible_consumption) 
-    ds$lnvis[ds$lnvis==-Inf]<-0 # zeroing out -Inf from log
+    print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS,AREA_TYPE, VISIBLE_SERVICES IGNORED")
+    if (missing(fname)){
+      fname="visible_consumption";
+    }
+    ds[,fname]<-ds[,fname]+1e-10 # adding a small quantity to ensure log transformation is not -Inf
+    ds$lnvis <- log(ds[,fname])
+    #ds$lnvis <- log(ds$visible_consumption) 
+    #ds$lnvis[ds$lnvis==-Inf]<-0 # zeroing out -Inf from log
     ds$lnpinc <- log(ds$total_expenditure)
     
     ds$cubic_highest_educ<-with(ds,highest_educ*highest_educ*highest_educ)
@@ -185,28 +248,13 @@ run_regression_lsms<-function(ds,type,commodity_type){
     ds$ln_age<-ln_age
     ds$english <- as.integer(ds$litlang==2 | ds$litlang==3)
     
-    res<-NULL
-    #res<- ivreg(data=ds,lnvis~lnpinc+age|
-    #             . - lnpinc + incpsv+ lninc+ cbinc)
-    
-    if (FALSE){
-      res<- ivreg(data=ds,lnvis~lnpinc+age|
-                    . - lnpinc + highest_educ + ln_highest_educ+cubic_highest_educ)
-      #               . - lnpinc + age + ln_age+cubic_age)
-    }
-    # highest_educ is near signficant (1.7) and instrumentation by age, age-cubics seems 
-    # fine (subject to verification of diagnostics), endogeneity is not significant when
-    # when adding years_community (instead of highest_educ)
-    # in this analysis education is the second most important component the most (subject to verification of age as
-    # valid instrument) housingstatus is also nearly significant
-    if (FALSE){
-      res<- ivreg(data=ds,lnvis~lnpinc+highest_educ|
-                    . - lnpinc + age + ln_age+cubic_age)
-    }
-    
     if (TRUE){
-      res<- ivreg(data=ds,lnvis~lnpinc+english+isurbanp|
-                    . - lnpinc + age + ln_age+cubic_age+occupation+highest_educ)
+      #data("WeakInstrument"); r<-ivreg(data=WeakInstrument,x~y|. - y+z)
+      # high hausman p-value (not rejecting null) means the instruments are valid
+      res<- ivreg(data=ds,lnvis~lnpinc+region+english+roomsnum+years_community|
+                    . - lnpinc+ occupation +  toteducexpense + hsize + tothouserent )
+      # +highest_educ+cubic_highest_educ+ln_highest_educ+roomsnum
+      #occupation + tothouserent+ toteducexpense 
       print("Pending better instrument than age");
     }
     print(summary(res,diagnostics=TRUE))
