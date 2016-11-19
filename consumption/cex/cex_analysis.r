@@ -2,13 +2,27 @@
 # duplicates in diary hhdata are not uncommon
 library(foreign)
 require(plyr)
-require(AER)
+#require(AER)
 source('../panelfunc.R')
 source('../regressions.R')
 
-setwd('c:/local_files/research/consumption/cex/')
-runTest<-function(itemname,regtype,commodity_type){
-  
+setwd('c:/local_files/research/consumption/cex/');
+
+
+runTest<-function(outfile){
+  items<-c('carpetsrugs', 'dseducexpense', 'dselectricity', 'dsfood',
+           'dshouserent', 'dspersonalitemsrepair', 'dspersonalprods', 
+           'dsskincream', 'funeralcosts', 'marriagecosts', 'sportshobbyequipment')
+  results<-""
+  for (item in items){
+    res<-item_analysis(item,"simple2")
+    resdf<-as.data.frame(summary(res)$coefficients)
+    results<-paste(results,"\n",item,":",toString(rownames(resdf)))
+    
+  }
+  write(results,outfile)
+}
+item_analysis<-function(itemname,regtype,commodity_type){
   
   #itemname<-"dspersonalprods";
   ds<-read.dta(paste('../lsms/results/',itemname,'/',itemname,'.dta',sep=""));
@@ -18,6 +32,8 @@ runTest<-function(itemname,regtype,commodity_type){
   } else {
     res<-run_regression_lsms(ds,regtype)
   }
+  
+  return(res)
 }
 #########################
 
@@ -309,6 +325,7 @@ ohs_seccb_columns_lsms_2010<-function(){
   return(c("facilitycode","accessibility","distance","region","district","ward"))
 }
 
+
 ohs_seccb_mapping_lsms_2010<-function(){
   s = data.frame(iesname=NULL,name=NULL)
   s= rbind(s,data.frame(iesname="id_01",name="region"))
@@ -320,6 +337,24 @@ ohs_seccb_mapping_lsms_2010<-function(){
   s= rbind(s,data.frame(iesname="cm_b03",name="distance"))
   return(s)
 }
+
+ohs_seccj_columns_lsms_2010<-function(){
+  return(c("item","lwp","lwp_unit","price","region","district","ward","ea"))
+}
+
+ohs_seccj_mapping_lsms_2010<-function(){
+  s = data.frame(iesname=NULL,name=NULL)
+  s= rbind(s,data.frame(iesname="id_01",name="region"))
+  s= rbind(s,data.frame(iesname="id_02",name="district"))
+  s= rbind(s,data.frame(iesname="id_03",name="ward"))
+  s= rbind(s,data.frame(iesname="id_04",name="ea"))
+  s= rbind(s,data.frame(iesname="itemid",name="item"))
+  s= rbind(s,data.frame(iesname="cm_j01a",name="lwp_unit"))
+  s= rbind(s,data.frame(iesname="cm_j01b",name="lwp"))
+  s= rbind(s,data.frame(iesname="cm_j01c",name="price"))
+  return(s)
+}
+
 
 ohs_seca_columns_lsms_2010<-function(){
   return(c("hhid","region","district","ward","ea","isrural"))
@@ -335,6 +370,23 @@ ohs_seca_mapping_lsms_2010<-function(){
   s= rbind(s,data.frame(iesname="y2_rural",name="isrural"))
   return(s)
 }
+
+area_code<-function(df,field_array)
+{
+  areacode=NULL
+  for (field in field_array){
+    if (class(df[,field])!="integer" && class(df[,field])!="numeric"){
+      stop("field(",field,") is not integer")
+    }
+    #areacode<-paste(areacode,as.character(10^ceiling(log10(max(df[,field])))+df[,field]),sep="")
+    fmt<-paste("%",ceiling(log10(max(3))),"s",sep="")
+    areacode<-paste(areacode,sprintf(fmt,df[,field]),sep="")
+    
+  }
+  #return(as.integer(areacode))
+  return(areacode)
+}
+
 
 load_ohs_file <-function(dataset,year){
   
@@ -1289,6 +1341,8 @@ food_categories_lsms_2010<-function(){
            "10807", "10808", "10809", "10810", "10901", "10902", "10903", "11001", "11002", "11003", 
            "11004", "11101", "11102", "11103", "11104", "11105", "11106", "11107", "11108"))
 }
+
+
 visible_categories_lsms_2010<-function(){
   # is it worthwhile to select commodities only if they're 
   # used only by a large section? - probably not - while this is a way 

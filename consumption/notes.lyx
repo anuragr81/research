@@ -998,7 +998,7 @@ key "VeblenLeisureClass"
 
 .
  The research on conspicuous consumption in the developing world has often
- found that the consumption of visible items (for whatever criterion selected)
+ found that the consumption of visible items (for a certain selected criterion)
  differs significantly between social classes 
 \begin_inset Foot
 status open
@@ -3509,11 +3509,17 @@ Visible Expenditure vs Total Expenditure for LSMS 2010
 \end_layout
 
 \begin_layout Section
-Current Work
+Analysis of LSMS Data
 \end_layout
 
 \begin_layout Subsection
-Steps in preparing LSMS data
+Steps in preparing LSMS data (2010)
+\end_layout
+
+\begin_layout Standard
+Following steps were performed before running the regressions on the household
+ consumption data from LSMS 2010\SpecialChar \@.
+
 \end_layout
 
 \begin_layout Enumerate
@@ -3523,7 +3529,7 @@ Read weekly diary data from Section K (a table of items with the quantities
 
 \begin_deeper
 \begin_layout Enumerate
-All items that had cost assciated with them were 
+All items that had no cost assciated with them were 
 \bar under
 ignored
 \bar default
@@ -3558,7 +3564,7 @@ estimate
 
 \end_deeper
 \begin_layout Enumerate
-Monthly recall items are multiplied by 12 (to 
+Monthly recall items were multiplied by 12 (to 
 \bar under
 estimate
 \bar default
@@ -3580,22 +3586,31 @@ Section C_CB was read to obtain market-facilitycode and gauge the accessibility
  of a market in every district.
  The closest accessible market could be either within the district or outside
  the district at a given distance.
- If a market is within the the district or less than 
+ If a market was within the the district or less than 
 \bar under
-10 km away
+10 kms away
 \bar default
- it is deemed accessible.
- Urban/rural classifications based on population density were also obtained
- at this stage (population density was not available in LSMS).
+ it was deemed 
+\begin_inset Quotes eld
+\end_inset
+
+accessible
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Urban/rural classifications based on population density could be inserted
+ at this stage (population density in not available in LSMS).
  
 \end_layout
 
 \begin_layout Enumerate
-Read section B and C
+Read section B and C files
 \end_layout
 
 \begin_layout Enumerate
-Calculated age by subtracting YOB from 2010 (survey year) 
+Calculated age of member by subtracting YOB (year-of-birth) from 2010 (survey
+ year) 
 \end_layout
 
 \begin_layout Enumerate
@@ -3730,7 +3745,8 @@ Set education expense of houses with education expenses= NA as zero
 \end_layout
 
 \begin_layout Enumerate
-Summed up educational expense and total house rent from personal data
+Summed up educational expense and total house rent from personal data into
+ total expenditure (both weren't a part of diary data)
 \end_layout
 
 \begin_layout Enumerate
@@ -3752,106 +3768,1448 @@ Analysis and Discussion
 \end_layout
 
 \begin_layout Standard
-Without a survey (which validates both the visibility of the item and its
- association with high-income), our criterion involves looking at the income
- elasticity.
+Food is a significant portion of total spending overall 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+50% of those surveyed spend 60% or higher of their total expenditure on
+ food.
+\end_layout
+
+\end_inset
+
+ - those in the non-agrarian professions spend about as much of their total
+ on food as those in agrarian occupations 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The median ratio of food-expenditure to total expenditure for agrarian occupatio
+n households is 60% while for non-agrarian occupations the median is 57%.
+ Around 54% of the total surveyed households were in agrarian occupations.
+\end_layout
+
+\end_inset
+
+.
+ The other half of the expenditure is spent on housing, education and energy
+ requirements as well as various household products.
+ 
 \end_layout
 
 \begin_layout Standard
-The critieria for inclusion is the extent to which a commodity is used is
- important.
+While a commodity for private consumption (e.g.
+ skincream or hobby-equipment in the LSMS data) might have an appeal for
+ everyone - whether it is associated with high-income or not is a social
+ psychological concern and cannot be assessed from the household survey
+ by itself.
+ In the absence of a visibility survey (asking the respondents how much
+ they notice a product and whether they associate the product with high-income
+ or not), one may still continue the discussion of the potential conspicuous
+ value of items by looking at how scarce the item is (based on the percentile
+ of consumers of the commodity).
+ This is akin to repeating the analysis of visible expenditure with a given
+ commodity as the only constituent of the visibility basket.
+ The percentile of consumers using a given commodity and the slope of 
+\begin_inset Formula $log(commodity-expenditure)$
+\end_inset
+
+ vs 
+\begin_inset Formula $log(total-expenditure)$
+\end_inset
+
+ can tell us if richer sections of society spend higher on a certain commodity
+ and if the poorer sections of society consume the chosen commodity at all
+ (the commodities chosen in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:regression_results"
+
+\end_inset
+
+ are those where this slope is significant).
+ The effects (elasticities) of income and other individual household variables
+ on the consumption of individual commodities can thus be studied until
+ a visibility survey is available.
+ The regression based on data prepared from the last step attempts to calculate
+ the coefficients of the following equation:
 \end_layout
 
 \begin_layout Standard
-If a commodity is only used by richer sections of society, then it should
- be ignored for our analysis - since we're interested only in congestion.
+\begin_inset Formula 
+\begin{equation}
+ln(vis_{i})=\beta_{0}+\beta_{1}\cdot Dem_{i}+\beta_{2}\cdot ln(pInc_{i})+\epsilon\label{eq:lnvis_regression-2}
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Any product used by everybody can potentially cause congestion.
- How a commodity is classified (as something widely consumed) can drive
- the notion of congestion.
- A wider (loose) category can be considered a case for congestion.
+Here 
+\begin_inset Formula $vis_{i}$
+\end_inset
+
+ is the total visible consumption of the household 
+\begin_inset Formula $i$
+\end_inset
+
+ (consumption of the a chosen commodity such as electricity, sports equipment),
+ 
+\begin_inset Formula $Dem_{i}$
+\end_inset
+
+ is a vector of demographic indicators under consideration and 
+\begin_inset Formula $pInc_{i}$
+\end_inset
+
+ is the permanent income - proxied by total expenditure - which has been
+ instrumented using 
+\begin_inset Formula $age$
+\end_inset
+
+, 
+\begin_inset Formula $cubic(age)$
+\end_inset
+
+, 
+\begin_inset Formula $occupation$
+\end_inset
+
+, 
+\begin_inset Formula $highest\_education$
+\end_inset
+
+ level , 
+\begin_inset Formula $ln(highest\_education)$
+\end_inset
+
+, 
+\begin_inset Formula $cubic(highest\_education)$
+\end_inset
+
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+All 2sls regressions involved involved performing three diagnostic tests
+ provided by the function ivreg of package AER in R.
+ These tests are - i) a weak instrument test ii) a Wu-Hausman test for endogenei
+ty and iii) a Sargan test for validity of instruments.
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Congestion is psychological because it represents a need felt.
- The degree of how widely a commodity is used - loosely represents the competiti
-on (thus the congestion) for it.
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:regression_results"
+
+\end_inset
+
+ summarizes the results obtained by running regressions on several commodity-cat
+egories.
+ The coefficients for variables - household-size and english-literacy -
+ are significant and increase after instrumentation while age, region are
+ both low and unaffected by instrumentation.
+ Since it is difficult to draw conclusions on the effects of particular
+ social conditions on consumption of a commodity that is used by 10% or
+ less of the total consumers, a column in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:regression_results"
+
+\end_inset
+
+ also suggests the percentile of consumers using the commodity (electricity
+ for example is used amongst those having top 93% of total expenditure).
+ The usage of commodities such as skincream and other-personal-products
+ (shampoos, razors etc.) are widespread compared with sports or hobby equipments
+ and electricity.
+ For commodities that are rare and consumed only amongst the rich (those
+ with higher total expenditure) the effect of English literacy is significant
+ (even thought it is low in coefficient value).
+ Similarly, hsize has a significant effect on educational expense and personal
+ products.
 \end_layout
 
 \begin_layout Standard
-The competition or congestion is always for a product - a product that is
- used sufficiently widely.
- Housing is used throughout but nicer houses could be congested (neighborhoods
- and other status drivers would represent both drive status and consumotion).
- Just recording the housing expense doesn't capture congestion for nicer
- houses.
- If the data was available for a region where housing is known to be limited,
- then one can say that there is a congestion.
- If two groups A and B with same level of disparity in income amidst them
- (
+Whether variables like possession of sports/hobby equipment or potentially
+ some other determinants of status (e.g.
+ English language) are explained by permanent income or whether permanent
+ income is explained by the status determinants remains to be inspected
+ in further analysis.
+\end_layout
+
+\begin_layout Subsection
+Further Adjustments
+\end_layout
+
+\begin_layout Standard
+Certain variables - occupation, region and educational background (expenses)
+ are to be grouped to represent clusters that can explain the regional and
+ social concerns better.
+ Data on population density can be used to i) identify urban settlements
+ better and ii) explore the combined effect of population density and region
+ dummies.
+\end_layout
+
+\begin_layout Subsubsection
+Occupation rank
+\end_layout
+
+\begin_layout Standard
+Other than the sparsity of available income data, the motivation behind
+ grouping occupations is the predominance of the informal sector in Tanzania.
+ A few occupations in the survey are neither well defined nor are truly
+ an indicator of total income.
+ The presence of categories like unpaid-family-work and of individuals with
+ no-primary-job getting a significant income from their secondary occupations
+ makes the task of associating the primary occupation of the household head
+ with her income rather difficult (i.e.
+ occupation - which is available for all household heads cannot be used
+ as a proxy of household income - which is not available for all households).
+ Grouping the occupations into fewer categories than in the survey (by putting
+ paid/unpaid family work and agriculture under the same category for example)
+ may allow for the smoothening of the effect of individual occupations and
+ possibly serve as a proxy of socio-economic classes in the country.
+\end_layout
+
+\begin_layout Subsubsection
+Region, Population Density and Price bands
+\end_layout
+
+\begin_layout Standard
+Identification of regions/district as industrial or with high population
+ density can help test the argument that if two groups A and B with same
+ level of disparity in income amidst them (
 \begin_inset Formula $income_{A}>income_{B})$
 \end_inset
 
-, then they would have different choices in areas where there is congestion
- for a commodity available.
- The analysis in regions might show this phenomenon in more detail.
+ would exhibit differences in their visible consumption if they lived in
+ areas of different levels of population density ( effect of congestion
+ on a specific commodity while keeping income constant).
+ 
 \end_layout
 
 \begin_layout Standard
-The essential feature is that of feedback.
- Both consumption and status drive each other.
- If we measure status (by looking at a range of product classifications
- e.g.
- the range of nicer to worse neighborhoods) and then measure the widespread
- consumption on them, it must be noted that the higher consumption is what
- people are opting for.
- It's not as if people spend more on nicer housing for higher status alone
- - it's them being able to spend higher that becomes higher status.
+Effect of price changes do not matter in a cross-sectional study - but disparity
+ in prices of commodities is sure to affect consumption across commodities.
+ A price band can be used to see if low price bands (places where food and
+ basic amenities are cheap) enourage or discourage expenditure on positional
+ goods.
 \end_layout
 
 \begin_layout Standard
-Social barriers need to be seen characteristics of the utility function.
- Congestion is faced differently by differenct social classes (a particular
- class may not feel the need to have conspicuous consumption or the social
- barriers can limit the need for conspicuous consumption)\SpecialChar \@.
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="11" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="4cm">
+<column alignment="left" valignment="top" width="4cm">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="4cm">
+<row>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Commodity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Significant Variables
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NonConsumer Percentile 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variables significant after lnpinc instrumentation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+carpetsrugs
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc (4.72), age(-.11), hsize(-.45), housingstatus(.6), highest_educ(-.3),
+ english(3.14)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+78
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(4.9), age(-.12),hsize(-.56),
+\end_layout
+
+\begin_layout Plain Layout
+highest_educ(-.30),
+\end_layout
+
+\begin_layout Plain Layout
+english(3.15)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+educexpense
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(3.84), age(.09), hsize(2.1), housingstatus(-.92), occupation(-.18)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+35
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(4.5),age(.1),
+\end_layout
+
+\begin_layout Plain Layout
+hsize(2.01),
+\end_layout
+
+\begin_layout Plain Layout
+housingstatus(-.95),
+\end_layout
+
+\begin_layout Plain Layout
+occupation(-.24)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electricity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(4.27), age(0.06), hsize(-.49), housingstatus(.87), occupation(.37), isrural(-5.
+8), highest_educ(.47), region(.17), english(3.06), is_resident (-1.72)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+78
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Chosen instruments (occupation, ln_highest_educ ) 
+\end_layout
+
+\begin_layout Plain Layout
+did not demonstrate endogeneity of lnpinc
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+houserent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(2.03), age(-0.04), housingstatus(.23), roomsnum(.27)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+84
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(1.83),
+\end_layout
+
+\begin_layout Plain Layout
+housingstatus(.2)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+personal items repair
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(.84), highest_educ(.07), region(-.05)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+96
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(.82), highest_educ(.08), region(-.05)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+personal products
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(3.45), hsize(-.52), roomsnum(.45), years_community(-.07)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+37
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(3.42), hsize(-.55), roomsnum(.59), years_community(-.07)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+skin cream
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(2.15), age(-.04), hsize(.21), isrural(1.48), region(-.12), years_community(-.03
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(1.29), age(-.04), hsize(.4), region(-.1), years_community(-.03)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+funeral costs
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(2.74), region(-.14), roomsnum(.61)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+54
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(2.89), region(-.14), roomsnum(.62)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+marriage costs
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(3.29), region(-.03), english(1.98), roomsnum(.66), years_community(-.05)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+75
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(3.0), region(-.03), english(2.2), roomsnum(.68), years_community(-.06)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sports and hobby equipment
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(1.22), age(-.04), housingstatus(.45), region(-.06), english(1.6)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+93
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lnpinc(1.44), age(-.06), housingstatus(.50), region(-.08), english(1.7)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:regression_results"
+
+\end_inset
+
+Results from regression over selected variables
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Behavioral Model for visible consumption and Status
+\end_layout
+
+\begin_layout Section
+Utility and Status
+\end_layout
+
+\begin_layout Standard
+The method proposes by Ireland models visible consumption as a parameter
+ that measures how much the visible consumption matters for the society.
+ The separation between visible and non-visible consumption is only possible
+ throgh a survey.
+ If this method of fitting was to be applied to various countries we would
+ get different values for this parameter.
+ The way this is approached is by modeling products that 
+\begin_inset Quotes eld
+\end_inset
+
+signal
+\begin_inset Quotes erd
+\end_inset
+
+ status.
+ Since the social status is yielded through social barriers in most developing
+ countries, the social barriers becomes an additional commodity in the model.
+\end_layout
+
+\begin_layout Standard
+This different values of this parameter for social groups can be often explained.
+ In South Africa, that may turn out to be social group.
+ In India, that could be of being higher caste.
+ Nationalistic movements in many developing countries are a result.
+ In developing economies.
+ Status is acheived slowly and is more permanent.
+ 
+\end_layout
+
+\begin_layout Standard
+The recent and ongoing industrialization - that happened largely with Western
+ assistance - was as helpless in addressing inequalities in the developing
+ world as the institutions before.
+ The discussion on liberalization always points out the improvement in absolute
+ terms - which is a fact that nobody can deny.
+ One cannot deny that the development of basic needs is of supreme importance
+ - but the need for efficient allocation cannot be denied either.
+ The paper Pareto optimality that could have been achieved if a just system
+ with less social problems would have been in place is by no means undesirable.
+\end_layout
+
+\begin_layout Standard
+In this model, casteism and racism are not encouraged but understood as
+ (however fierce and unjust) ways to reach security for the progenies.
+ In poor and non-pecuniary societies, the desire to become rich or the benefit
+ of inheriting money and education is often less reachable.
+ Status and money translate into social securities in unstructured societies.
+ The discussion on this topic is mentioned in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:status_consumption_need"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Status Value through Experiments
+\end_layout
+
+\begin_layout Subsection
+Status and Consumption as games
+\end_layout
+
+\begin_layout Standard
+Games have been used in the literature in the developing countries to gauge
+ motivations of the participating consumers.
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A study by Sophie Clot studies the effect high and low effort work on consumptio
+n by conducting an experiment at the payment office where some amount of
+ pay is distirbuted for low-effort work and some for high-effort work.
+\end_layout
+
+\end_inset
+
+.
+ While the visibility surveys (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZahraIndia,heffetz_visibility"
+
+\end_inset
+
+) attempt to study how consumption on certain commodities may signal status,
+ the goal of the proposed game is to characterise environments under which
+ the perceptions of a higher-status may develop.
+ The game attempts to emulate i) the consumer market and ii) the mechanism
+ through which status may be assigned within a group of consumers.
+ It therefore relies on participants playing the dual role of a consumer
+ and status-observer.
+\end_layout
+
+\begin_layout Standard
+The activities of purchasing and assigning status are separate in the game.
+ Since a simulated purchase performed by the participants in the game (given
+ a list of commodities, prices and outlay) is quite likely to deviate from
+ their real world purchases and their real needs, the participants are instead
+ asked what additional items they would purchase for a given a basket of
+ commodities that they already possess (using a cumulative voting scheme
+ that emulates selection of commodities in a market - see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Purchasing_Mechanism"
+
+\end_inset
+
+ for details).
+ The second part of the game emulates status assignment - where participants
+ assign a score of status and effectiveness each to 3 (or more) other participan
+ts in the game by looking at the quantities of the item categories purchased
+ by the latter.
+ The judgment of status in the real world does not involve direct observance
+ of prices and thus it is only the quantity of the identified items consumed
+ or already possessed that matters in the status-assignment part of the
+ game.
+ The end-goal of the game is to purchase a basket most desired by others
+ - the winner achieves this goal by purchasing commodities of her choice
+ that are most desirable by everyone and are indicative of a rank higher
+ than everyone else in the game.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Purchasing_Mechanism"
+
+\end_inset
+
+Purchasing Mechanism
+\end_layout
+
+\begin_layout Standard
+It is difficult for players to conduct a 
+\begin_inset Quotes eld
+\end_inset
+
+simulated shopping
+\begin_inset Quotes erd
+\end_inset
+
+ in a way that truly represents their needs.
+ Hence, instead of asking the respondent how they'll spend the given outlay
+ of a 1000 dollars over a set of commodities, they are asked how they would
+ spend the additional 100 dollars for a given 1000 dollars of outlay (or
+ more) value of items that they already have stocked up.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+stock
+\begin_inset Quotes erd
+\end_inset
+
+ items can be chosen by the players as a first step in the game and is intended
+ to match their own consumption pattern.
+ While the 
+\begin_inset Quotes eld
+\end_inset
+
+stock
+\begin_inset Quotes erd
+\end_inset
+
+ is made of non-positional items, the particpants choose 3 items from a
+ mix of non-positional items and positional items - given the 10% extra
+ outlay.
+ Since all participants cannot be assumed to be equally numerate, the game
+ uses a scheme similar to cumulative voting - where 10 virtual coins are
+ provided to the participant and the participant is asked to distribute
+ the coins amongst a set of available items (both positional and non-positional).
+ The provided outlay in the game (number of coincs) may vary for participants
+ - in proportion to the income distribution that is observed in the relevant
+ consumption surveys (e.g.
+ LSMS for Tanzania).
+\end_layout
+
+\begin_layout Standard
+In summary the following steps are taken in the game:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:step_stock"
+
+\end_inset
+
+Choose a stock basket that is closest to one's own consumption pattern (no
+ more than 5 basket classifications are provided to choose from)
+\end_layout
+
+\begin_layout Enumerate
+Acknowledge the real-life constraint (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:constraints"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Enumerate
+Use the given additional outlay (10 or less virtual coins) to purchase and
+ add (positional and well as non-positional items) to the strictly non-positiona
+l stock baskset that was selected in the step 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:step_stock"
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+It is necessary to estimate the price of products and services for the purchasin
+g game to emulate the market.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Provide a score (1..5) on effectiveness and status to 3 other participants
+ whose total outlay and the choice of items purchased (along with number
+ of coins used for every item) is also known
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:basket_mixes"
+
+\end_inset
+
+Mixes in the Consumer Basket
+\end_layout
+
+\begin_layout Standard
+While the basket for every consumer can be varied to model urban/rural differenc
+es or the distance /accessibility of the particular commodity classes, the
+ game ensures that all participants have reasonably similar consumer universe.
+ Consequently, no category is intended to be completely removed from the
+ basket (i.e.
+ all baskets have the same set of categories).
+ Following are the categories for which the positional/non-positional variants
+ are sought:
+\end_layout
+
+\begin_layout Enumerate
+Food - Fruits, Meat, Baked Goods or Nuts/Cereals and Pulses, Milk (minor
+ items such as salt and spices are not included), Tea, Soda/ Beer and Wine
+\end_layout
+
+\begin_layout Enumerate
+Household products (Detergent, Electronics)
+\end_layout
+
+\begin_layout Enumerate
+Personal Products (Clothes, Shoes, Makeup)
+\end_layout
+
+\begin_layout Enumerate
+Housheold services (House refurbishments) and Energy (electrcity/kerosene)
+\end_layout
+
+\begin_layout Enumerate
+Savings for future Asset purchase
+\end_layout
+
+\begin_layout Enumerate
+Entertainment/Dining Out/Travel/Travel Abroad
+\end_layout
+
+\begin_layout Enumerate
+Health
+\end_layout
+
+\begin_layout Enumerate
+Education (School/University)
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:constraints"
+
+\end_inset
+
+Constraints and Assets
+\end_layout
+
+\begin_layout Standard
+The game attempts to meaure status and consumption with respect to high
+ asset ownership, social class or familial responsibility.
+ Since players choose between physical needs and positional needs in the
+ game, a different circumstance is likely to affect their choice and hence
+ their perceived status.
+ The game presents a precondition to the player - indicating high asset
+ ownership, a chosen social class or a familial liability.
+ For example, to test a participant's choice between food and electricity,
+ the game can present a large family as a constraint, and record the choice
+ between spending more on food vs installing electricity.
+ The game thus measures indirect effects of reward or constraints on status
+ by allowing participants to gauge the suitability of a participants's choice
+ in the status game in the presence of constraints (familial) or rewards
+ (asset-related).
+\end_layout
+
+\begin_layout Standard
+Notice that the constraint variable is only planned to be binary in the
+ current scheme i.e.
+ it is either a reward or a liability (when present).
+ The two values are expected to have an opposite affect on the purchase
+ of new items.
+ Admittedly, the binary values of constraints vs rewards circumvent the
+ difficulty in comparisons between disparate needs of the consumers - e.g.
+ a large family, senior member or a social event (e.g.
+ marriage/funelal).
+ While a multivalued variable (if adopted) can potentially provide better
+ insights into the relative effects of these several types constraints,
+ the goal of the current exercise is to test for a direct effect of constraints
+ on status (rather than relative effect of the constraints).
+\end_layout
+
+\begin_layout Subsection
+Status ranking
+\end_layout
+
+\begin_layout Standard
+The status-ranking activity involves a student assigning a status score
+ by looking at i) what the other participant with a given income level does
+ with the extra outlay and ii) what the participant already possesses.
+ In the ranking scheme, the participants provide a score on effectiveness
+ as well as status to all the other (3 or more) participants observed.
+ Notice that in presence of constraints specified in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:constraints"
+
+\end_inset
+
+, regardless of whether one is selfish or not, a participant would tend
+ to penalise someone else who she thinks is going to be more selfish than
+ herself.
+ Since the game provides a way to penalize selfishness by status ranks,
+ the participants are discouraged from indicating status through overspending
+ on positional items.
+ The penalty for not caring for a sick parent may be huge in the society
+ but so can be the penalty for being stingy.
+ Similarly, while some may want to indicate wealth by buying a watch they
+ may also fear disrespect for not taking care of a sick family member.
+ The scores on effectiveness and status are thus not only a way to discourage
+ the consumer from limiting the unrealistic purchases in the simulated purchasin
+g part of the game, they also track the effect of the externalities such
+ as sickness or age (measured through the binary variable discussed in section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:constraints"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+While consumers try to maximise their utility by purchasing more items for
+ a given limited outlay - they also manage their prestige by letting others
+ have a better opinion of themselves.
+ The status game can thus be seen as an enhanced version of the survey that
+ asks people to imagine a neighbour who spends more than them on a chosen
+ commodity (used in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZahraIndia,heffetz_visibility"
+
+\end_inset
+
+).
+ The proposed game attempts to measure how consumers might act given a certain
+ circumstances while both status and welfare (effectiveness score can be
+ seen as a proxy of concern for others) become part of the payoff function
+ in the game.
+ 
+\end_layout
+
+\begin_layout Subsection
+Welfare and Status competitions
+\end_layout
+
+\begin_layout Standard
+The solution of this game for a set of rational players remains a pending
+ exercise in this study.
+ The key motivation for the analysis at this point is that fundamentally
+ all social welfare concerns are concerns of Pareto optimality.
+ Moreover, the payoff function for effectiveness in the game is meant to
+ be a proxy for welfare.
+ 
+\end_layout
+
+\begin_layout Standard
+With Pareto optimality in mind, more spending on education, health seems
+ desirable - but it may be become distant for consumers due to their immediate
+ needs - whether positional or non-positional.
+ A comparison with what is observed in consumption data versus what is observed
+ about positional consumption in games can provide some insight into the
+ social status that can influence the desired welfare equilibrium.
+\end_layout
+
+\begin_layout Subsection
+Survey Questionnaire
+\end_layout
+
+\begin_layout Standard
+You have 10,000 (or 100) to spend today.
+ What are the objects that you would purchase if you were to enter the market
+ today? Please take a look at the constraints that might affect your consumption.
+ Try choosing the smartest way possible - the prices.
+ You would also need to compare 2 other candidates as part of this game
+ (as others would rate you).
+ Try being close to your real circumstances.
+ Unrealistic values may disqualify you from the game.
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:status_consumption_need"
+
+\end_inset
+
+Testing the need for status competitions
+\end_layout
+
+\begin_layout Standard
+Ireland also recommend taxation of these products as a way to limit the
+ consumption.
+ A point that Robert H Frank raises in his book, however, talks about using
+ a non-monetary market of stauses so that the status games (which are a
+ necessity) don't overlap with the market for money.
+\end_layout
+
+\begin_layout Standard
+Advertising makes social scarcity a physical scarcity (we have needs as
+ we feel them so intensely) leave us in (in an environment where basic necessiti
+es have been met) would Since competition doesn't have a lot to compete
+ on - it both tries to ensure that physical scrarcities are distributed
+ with the same status-games and tries to turn what it encircles into a physical
+ scarcity.
+ This occurs to the point where physical scarcity and social scarcity become
+ one.
+\end_layout
+
+\begin_layout Standard
+We would want to attach glamour to some of these items - arguing that if
+ glamour is attached to education, healthcare and food items (forcefully
+ throught policy) the consumers might end up speing more on food and health
+ themselves.
+ Glamour is an ill-defined concept but controlling it is necessary to avoid
+ social waste.
+\end_layout
+
+\begin_layout Part
+Food vs non-Food consumption and status competitions under different price
+ bands
+\end_layout
+
+\begin_layout Standard
+The following command indicates that quantities are available only for food
+ items.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+itemsWithPrice=unique(hh[!is.na(hh$lwp) & hh$lwp>0,]$item)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+hhWithPrices=hh[is.element(hh$item,itemsWithPrice),]
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+hhWithPrices$factor<-as.integer(hhWithPrices$lwp_unit==1)+as.integer(hhWithPrices$
+lwp_unit==2)/1000.0+as.integer(hhWithPrices$lwp_unit==3)+as.integer(hhWithPrices$lw
+p_unit==4)/1000.0+as.integer(hhWithPrices$lwp_unit==5)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+hhWithPrices$q<-hhWithPrices$factor*hhWithPrices$lwp
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+hhWithPrices$price<-hhWithPrices$cost/hhWithPrices$q
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+hhWithPrices=hhWithPrices[!is.na(hhWithPrices$price),]
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+plot(hhWithPrices[hhWithPrices$item==10110,]$price) # example
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+nPrices<-ddply(hhWithPrices,.(item),summarize,n=length(price),mean_price=mean(pri
+ce),sd_price=sd(price))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+nPrices<-nPrices[nPrices$n>100,]
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+ohs<-ohs[!is.na(ohs$region),]
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+hhReducedWithPrices<-data.frame(hhid=hhWithPrices$hhid,item=hhWithPrices$item,q=h
+hWithPrices$q,price=hhWithPrices$price)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+ohs$areacode<-paste(as.character(10^ceiling(log10(max(ohs$region)))+ohs$region),a
+s.character(10^ceiling(log10(max(ohs$district)))+ohs$district),as.character(10^cei
+ling(log10(max(ohs$ward)))+ohs$ward),sep="")
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+ohs$areacode<-as.integer(ohs$areacode)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+m<-merge(ohs,hhReducedWithPrices)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+v<-m[m$item==10601,];plot(v$areacode,v$price) # example
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
 \begin_layout Standard
-Income data includes categories like unpaid family work.
- The predominance of informal sector means that occupations are neither
- well defined nor an indicator of total income.
- Even people with no-job have income from secondary work.
- Paid family work and agriculture are under same categories.
+--
 \end_layout
 
 \begin_layout Standard
-While joining results, two products can be combined only when the extent
- of their usage is similar.
- The aggregate of all categories could be looked at without this restriction
- of joining.
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+cjdat<-read.dta('../lsms/TZNPS2COMDTA/COMSEC_CJ.dta',convert.factors = FALSE)
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+cj <- get_translated_frame(dat=cjdat, names=ohs_seccj_columns_lsms_2010(),
+ m=ohs_seccj_mapping_lsms_2010())
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+cj$areacode<-area_code(cj,c("region","district","ward","ea"))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+d<-(ddply(cj,.(areacode,item),summarize,mprice=mean(price)))
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-A core of the current theory is crowding - therefore the effect of population
- density on visible / industrial consumption needs to be inspected.
+We do realize that in some areas - prices for food vary a lot more than
+ they do in others.
+ However, this is a phenomenon that varies for every commodity(10601 - onions,
+ sugar etc.
+ don't vary so much by area code as do nuts, fruits and meat).
 \end_layout
 
 \begin_layout Standard
-English speaking doesn't affect results for most part.
- Speaking English doesn't mean being progressive.
- Region is endogenous for housing - for which only the housing status drives
- expenditure.
+Effect of price differences on status competitions.
+ The policy question is whether price differences affect the status perception
+ or not.
 \end_layout
 
 \begin_layout Standard
-Skincream might have an appeal for - but it is by no means associated with
- high-income.
- Some analysis includes it while other doesn't.
- Only a survey can tell whether people associate an item with a survey or
- not.
+Glamour in food products might actually be beneficial - since it allows
+ status competitions in more important things.
+ The question that one needs to ask is whether the expenditure (as Priais
+ Houthakker performed for expensive and cheap tea for class) - is actually
+ more desirable from than higher classes spending on housing and education.
+ The difference between private and public consumption has been a reminiscence
+ of this wide disparities in physical possessions (education, housing, food
+ and health) of the past era.
+ Post-war industrial developments were far better at improving private consumpti
+on than they were about public consumption.
+ This created the space for the development of welfare state - the overall
+ success of these has been limited.
+\end_layout
+
+\begin_layout Standard
+The post-war environment of the developing countries was largely driven
+ by nationalism - and the adoption of the 
+\begin_inset Quotes eld
+\end_inset
+
+Western
+\begin_inset Quotes erd
+\end_inset
+
+ model.
+ This had varied results in terms of economic output but it certain reassigned
+ the status relationships.
+ The colonial institutions followed a slow decay than destruction retaining
+ a lot of their character and becoming part of the status games of society.
+ 
+\end_layout
+
+\begin_layout Standard
+The other question I am interested in is whether a massive scarcity turns
+ out to be overlooked.
+ Jean Dreze and Deaton discuss their case in India - where rising income
+ hasn't increased the share on food as much.
+ There may be several reasons for this - but it certainly doesn't indicate
+ that scarcity is felt by every consumer.
+ Other factors in the market could be affecting the demand for food.
+ A widespread scarcity - I believe - can obscure it as a problem.
 \end_layout
 
 \begin_layout Part
@@ -3868,6 +5226,18 @@ How to account for combination of recall + diary?
 
 \begin_layout Enumerate
 Why are homeowners so low (84% spend on houserent)?
+\end_layout
+
+\begin_layout Enumerate
+Would it worthwhile to run this analysis on a few more developed countries?
+\end_layout
+
+\begin_layout Enumerate
+How would one fit a utility curve without price data?
+\end_layout
+
+\begin_layout Enumerate
+Does endogeneity mean anything in absence of instruments?
 \end_layout
 
 \begin_layout Standard

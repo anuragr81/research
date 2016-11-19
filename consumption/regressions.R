@@ -7,15 +7,6 @@ inc_control<-function(inc){
   }
 }
 
-write_variables_as_sum<-function(vars){
-  prefix=""
-  strout=""
-  for ( i in vars){
-    strout= paste(strout,prefix,i,sep='') 
-    prefix="+"
-  }
-  return(strout)
-}
 
 find_highinc_occupations_lsms<-function(){
   inc<-load_income_file("lsms",2010)
@@ -37,6 +28,17 @@ highinc_occupations<-function(inc,ohs){
   #x<-ddply(rds,.(mpay),summarise,totexp=median(total_expenditure))
   return(res);
 }
+
+write_variables_as_sum<-function(vars){
+  prefix=""
+  strout=""
+  for ( i in vars){
+    strout= paste(strout,prefix,i,sep='') 
+    prefix="+"
+  }
+  return(strout)
+}
+
 lsms_vars_init<-function(){
   return(c("total_expenditure","age","hsize","housingstatus","occupation","isrural","region",
            "english","roomsnum","years_community","is_resident"))
@@ -176,9 +178,7 @@ run_regression_lsms<-function(ds,type,commodity_type,fname){
     vars_init <-c("total_expenditure","age","hsize","housingstatus","occupation",
                   "isrural","region","english","roomsnum","years_community",
                   "is_resident","toteducexpense","tothouserent")
-    res <- significant_lmvars(ds=ds,depvar="visible_consumption",vars_init=lm_vars_init());
-    print(res)
-    return("DONE")
+    res <- significant_lmvars(ds=ds,depvar="visible_consumption",vars_init=lsms_vars_init());
     # highest_educ, age, company-at-work, highest_eduation, years_in_community(=age when 99), total_expenditure, is_migrant, family_size  
     #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+roomsnum+years_community+is_resident+toteducexpense+tothouserent)
     #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+roomsnum+years_community+is_resident+toteducexpense)
@@ -187,14 +187,14 @@ run_regression_lsms<-function(ds,type,commodity_type,fname){
     #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+toteducexpense)
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+housingstatus+occupation+isrural+region+english+toteducexpense)
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+housingstatus+isrural+region+english+toteducexpense)
-    res=lm(data=ds,visible_consumption~total_expenditure+housingstatus+isrural+region+english+toteducexpense)
+    #res=lm(data=ds,visible_consumption~total_expenditure+housingstatus+isrural+region+english+toteducexpense)
     
     
     #(religious_education, locality_dummies,self_reported_happiness,housing_expenditure,education,price_based_class,urban_rural)
     print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,HOUSING_STATUS,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS, VISIBLE_SERVICES IGNORED")
     
     #res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community+is_resident)
-    print(summary(res))
+    #print(summary(res))
     min_tval <- min(abs(summary(res)$coefficients[,"t value"]))
     print(paste("min(t-values)=",min_tval))
     resdf<-as.data.frame(summary(res)$coefficients)
@@ -216,9 +216,10 @@ run_regression_lsms<-function(ds,type,commodity_type,fname){
     ds$english <- as.integer(ds$litlang==2 | ds$litlang==3)
     print("PENDING region dummies")
     length_region_dummy=unique(ds$region)[-1]
-    res=lm(data=ds,lnvis~lnpinc+age+hsize+housingstatus+occupation+isrural+highest_educ+region+english+roomsnum+years_community+is_resident+toteducexpense+tothouserent)
+    #res=lm(data=ds,lnvis~lnpinc+age+hsize+housingstatus+occupation+isrural+highest_educ+region+english+roomsnum+years_community+is_resident+toteducexpense+tothouserent)
+    res <- significant_lmvars(ds=ds,depvar="lnvis",vars_init=lsms_ln_vars_init());
     
-    print(summary(res))
+    #print(summary(res))
     
     min_tval <- min(abs(summary(res)$coefficients[,"t value"]))
     print(paste("min(t-values)=",min_tval))
