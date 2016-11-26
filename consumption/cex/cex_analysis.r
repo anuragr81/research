@@ -2,7 +2,7 @@
 # duplicates in diary hhdata are not uncommon
 library(foreign)
 require(plyr)
-#require(AER)
+require(AER)
 source('../panelfunc.R')
 source('../regressions.R')
 
@@ -378,15 +378,46 @@ area_code<-function(df,field_array)
     if (class(df[,field])!="integer" && class(df[,field])!="numeric"){
       stop("field(",field,") is not integer")
     }
-    #areacode<-paste(areacode,as.character(10^ceiling(log10(max(df[,field])))+df[,field]),sep="")
-    fmt<-paste("%",ceiling(log10(max(3))),"s",sep="")
-    areacode<-paste(areacode,sprintf(fmt,df[,field]),sep="")
+    a<-formatC(format="d",flag="0",x=df[,field],width=ceiling(log10(max(df[,field]))))
+    areacode<-paste(areacode,a,sep="")
     
   }
-  #return(as.integer(areacode))
-  return(areacode)
+  return(as.integer(areacode))
+  #return(areacode)
 }
 
+analyse_cj<-function(sl){
+  cjdat<-read.dta('../lsms/TZNPS2COMDTA/COMSEC_CJ.dta',convert.factors = FALSE) 
+  
+  cj <- get_translated_frame(dat=cjdat, names=ohs_seccj_columns_lsms_2010(), m=ohs_seccj_mapping_lsms_2010())
+  cj$factor<-as.integer(cj$lwp_unit==1)+as.integer(cj$lwp_unit==2)/1000.0+as.integer(cj$lwp_unit==3)+as.integer(cj$lwp_unit==4)/1000.0+as.integer(cj$lwp_unit==5)
+  cj$lwp <-cj$lwp*cj$factor
+  cj$price <cj$price/cj$lwp
+  
+  if (missing(sl)){
+    sl<-sort(unique(cj$item));
+  }
+  
+  print (paste("sl=",sl))
+  for (i in sl) {
+    print(i);
+    cjt<-cj[cj$item==i,]; 
+    cjt<-cjt[!is.na(cjt$price) & cjt$price>0,];
+    if(dim(cjt)[1]>0)
+    {
+      plot(cjt$r,cjt$price,xlab="region",ylab=paste("price for item=",i));
+      View(cjt); 
+      print(paste("Enter threshold for item=",i)); 
+      m<-as.numeric(readline());
+      if (m <= 0 || is.na(m)){
+        stop ("Done")
+      }
+      print (paste("Using",m,"as threshold")); 
+      x<-cjt[cjt$price<=max(cjt$price) & cjt$price > m,]; 
+      print(paste(unique(x$item),unique(x$region),sep=","));
+    } # end if
+  } # end for
+}
 
 load_ohs_file <-function(dataset,year){
   
@@ -591,7 +622,7 @@ TOO YOUNG .........17"
   r=rbind(r,data.frame(occupation=8,rank=3))
   r=rbind(r,data.frame(occupation=5,rank=3))
   r=rbind(r,data.frame(occupation=6,rank=3))
-
+  
   return(r)
   
   #2(fishing)~9
