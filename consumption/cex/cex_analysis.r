@@ -10,9 +10,7 @@ setwd('c:/local_files/research/consumption/cex/');
 
 
 # Tasks
-# 1. Use instruments from list to re-run 2sls and ensure results are the same
-# 2. Incorporate high-price regions (dummy) and high-population-density (dummy) and re-run simple2 as well as 2sls again
-# 3. Use stargazer to present the results
+# 1. Incorporate high-price regions (dummy) and high-population-density (dummy) and re-run simple2 as well as 2sls again
 
 
 get_instruments_for_item<-function(item){
@@ -22,6 +20,7 @@ get_instruments_for_item<-function(item){
   instrument_table=list();
   instrument_table[['carpetsrugs']]=1
   instrument_table[['dseducexpense']]=2
+  instrument_table[['dselectricity']]=c("ln_highest_educ","cubic_highest_educ","ln_age","occupation","years_community","roomsnum","tothouserent","toteducexpense","accessiblemarket","litlang");
   
   instruments_list<-instrument_table[[item]]
   if (is.null(instruments_list)){
@@ -47,18 +46,67 @@ runTest<-function(outfile){
 }
 
 item_analysis<-function(itemname,regtype,commodity_type){
+  varsInfo = list()
   
-  #itemname<-"dspersonalprods";
-  ds<-read.dta(paste('../lsms/results/',itemname,'/',itemname,'.dta',sep=""));
-  source(paste('../lsms/results/',itemname,'/regressions.R',sep=""));
+  varsInfo [["vars_list"]]=lsms_ln_vars_init();
+  varsInfo[["endogenous_vars"]] = "lnpinc"
+  
+  if (is.element(commodity_type, c("dseducexpense","dshouserent"))){
+    # these items are not populated from diary file
+    varsInfo [["depvar"]]=paste("ln",commodity_type,sep="");
+    # food category is only a dummy - vis would not be used
+    ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = food_categories_lsms_2010() ,isTranslated = TRUE)
+    
+  } else {
+    diaryCode = get_diary_code(commodity_type)
+    ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = diaryCode ,isTranslated = TRUE)
+    varsInfo [["depvar"]]="lnvis"
+  }
+  
+  source('../regressions.R')
+  
   if (regtype=="engel") {
     res<-run_regression_lsms(ds,regtype,commodity_type)
   } else {
-    res<-run_regression_lsms(ds,regtype)
+    
+    if (regtype == "2sls"){
+      varsInfo[["instrument_list"]]=get_instruments_for_item(commodity_type);
+      
+      if (is.null(varsInfo[["instrument_list"]])){
+        stop("Cannot have null instrument_list")
+      }
+      
+      res<-run_regression_lsms(ds,"2sls",commodity_type,varsInfo)
+      return(res)
+    }
+    
+    if (regtype == "simple2"){
+      varsInfo = list()
+      
+      varsInfo [["depvar"]]="lnvis"
+      varsInfo [["vars_list"]]=lsms_ln_vars_init();
+      varsInfo[["endogenous_vars"]] = "lnpinc"
+      res<-run_regression_lsms(ds,"simple2",commodity_type,varsInfo)
+      return(res)
+    }
+    
+    stop(paste("analysis of type",regtype, "not supported"))
+    
   }
   
-  return(res)
+  stop("Failure in item_analysis")
 }
+
+lsms_vars_init<-function(){
+  return(c("total_expenditure","age","hsize","housingstatus","occupation_rank","isrural","region",
+           "english","roomsnum","years_community","is_resident"))
+}
+
+lsms_ln_vars_init<-function(){
+  return(c("lnpinc","age","hsize","housingstatus","occupation_rank","isrural","highest_educ","region",
+           "english","roomsnum","years_community","is_resident"))
+}
+
 #########################
 
 read_tnz <- function(filename,convert_factors) {
