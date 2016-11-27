@@ -8,6 +8,12 @@ source('../regressions.R')
 
 setwd('c:/local_files/research/consumption/cex/');
 
+# Tasks
+# 1. Use instruments from table to re-run 2sls and ensure results are the same
+# 2. Create table for generating ds for a particular commodity and re-run to make sure the results are the same
+# 3. Incorporate high-price regions (dummy) and high-population-density (dummy) and re-run simple2 as well as 2sls again
+# 4. Use stargazer to present the results
+
 
 runTest<-function(outfile){
   items<-c('carpetsrugs', 'dseducexpense', 'dselectricity', 'dsfood',
@@ -1243,8 +1249,8 @@ get_ucc_mapping_2004<-function(){
   return(mfile)
 }
 
-get_visible_categories<-function(hh,visible_categories,item_field){
-  vis<-hh[is.element(hh[,item_field],visible_categories),] # get only visible categories
+filter_categories_data<-function(hh,selected_category,item_field){
+  vis<-hh[is.element(hh[,item_field],selected_category),] # get only visible categories
   vis<-ddply(vis,.(hhid),summarize,visible_consumption=sum(cost))
   no_vis_hhid<-setdiff(unique(hh$hhid),unique(vis$hhid))
   no_vis<-data.frame(hhid=no_vis_hhid,visible_consumption=rep(0,length(no_vis_hhid)))
@@ -1269,14 +1275,14 @@ get_visible_categories<-function(hh,visible_categories,item_field){
 #U3........43 U4........44
 #U5&+......45
 
-merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income){
+merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income,selected_category){
   if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
     stop("factors must be converted an integer")
   }
   #* merge_hh_ohs_income_data_lsms_2010 ((
   print ("Calculating visible expenditures")
   print(paste("Total number of households to search for visible consumption=",length(unique(hh$hhid))))
-  vis<-get_visible_categories(hh=hh,visible_categories = visible_categories_lsms_2010(), item_field = "item")
+  vis<-filter_categories_data(hh=hh,selected_category = selected_category, item_field = "item")
   print(paste("Number of households with visible expenditure = ",length(unique(vis$hhid))))
   print("Calculating total expenditures")
   totexp<-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
@@ -1373,6 +1379,22 @@ food_categories_lsms_2010<-function(){
            "11004", "11101", "11102", "11103", "11104", "11105", "11106", "11107", "11108"))
 }
 
+visible_categories<-function(dataset,year){
+  if (dataset == "us_cex"){
+    if (year == 2004 || year == 2009|| year == 2014){
+      return(visible_categories_us_cex_2004())
+    }
+    stop(paste("visible categories list for year:",year," not found"))
+  }
+  if (dataset == "lsms"){
+    if (year == 2010){
+    return(visible_categories_lsms_2010())
+    }
+    stop(paste("visible categories list for year:",year," not found"))
+    
+  }
+  stop(paste("visible categories list for dataset:",dataset," not found"))
+}
 
 visible_categories_lsms_2010<-function(){
   # is it worthwhile to select commodities only if they're 
@@ -1415,7 +1437,7 @@ visible_categories_lsms_2010<-function(){
   # 224 - repairs to personal items
 }
 
-merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
+merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income,selected_category){
   
   # hh's ucc should be merged first
   print("Reading ucc mapping file")
@@ -1423,7 +1445,7 @@ merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
   print (paste("Merging with ucc_mapping (columns: ",toString(colnames(ucc_mapping)),")"))
   hh<-merge(hh,ucc_mapping)
   print ("Obtaining visible categories")
-  vis<-get_visible_categories(hh=hh,visible_categories = visible_categories_us_cex_2004(),item_field = "uccname")
+  vis<-filter_categories_data(hh=hh,selected_category = selected_category,item_field = "uccname")
   print ("====Food categories to be modified =====")
   #food<-get_food_categories_cex(hh=hh,food_categories = food_categories_cex());
   print ("Running ddply for total expenditures")
@@ -1447,11 +1469,11 @@ merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income){
 #        translation into dependent variables (each of which can correspond to
 #        one function). The merging function here encapsulates the extraction from
 #        all tables and merging into a combined frame.
-merge_hh_ohs_income_data<-function(dataset,year,hh,ohs,income){
+merge_hh_ohs_income_data<-function(dataset,year,hh,ohs,income,selected_category){
   #* merge_hh_ohs_income_data((
   if (dataset == "us_cex"){
     if (year == 2004 || year == 2009|| year == 2014){
-      ds <-merge_hh_ohs_income_data_us_cex_2004(hh=hh,ohs=ohs,income=income)
+      ds <-merge_hh_ohs_income_data_us_cex_2004(hh=hh,ohs=ohs,income=income,selected_category=selected_category)
       ds$year <- rep(year,dim(ds)[1])
       return(ds)
     }
@@ -1459,7 +1481,7 @@ merge_hh_ohs_income_data<-function(dataset,year,hh,ohs,income){
     stop(paste("Method to merge data for year:",year," not found"))
   }
   if (dataset == "lsms"){
-    ds <-merge_hh_ohs_income_data_lsms_2010(hh=hh,ohs=ohs,income=income)
+    ds <-merge_hh_ohs_income_data_lsms_2010(hh=hh,ohs=ohs,income=income,selected_category=selected_category)
     return(ds)
   }
   stop(paste("Method to merge data for dataset:",dataset," not found"))
@@ -1479,14 +1501,15 @@ cex_combined_years_ds<-function(years)
   return(resds)
 }
 
-combined_data_set<-function(dataset,year,isTranslated,isDebug){
-  
-  #1-black
-  #2-coloured
-  #3-asian
-  #4-white
+combined_data_set<-function(dataset,year,selected_category,isTranslated,isDebug){
+
   
   ############ PHASE 0 ########################
+  
+  if (missing(selected_category)){
+    print("setting selected_category to the default value")
+    selected_category= visible_categories(dataset=dataset,year=year)
+  }
   
   #*  (( Loading diary file
   hhdat <- load_diary_file(dataset,year) # must provide total and visible expenditure (must be already translated)
@@ -1565,7 +1588,7 @@ combined_data_set<-function(dataset,year,isTranslated,isDebug){
       print(paste("ignored",n1-n2,"/",n1," hhids"))
     }
   }
-  dstruct<-merge_hh_ohs_income_data(dataset=dataset,hh=hh,ohs=ohs,income=income,year=year);
+  dstruct<-merge_hh_ohs_income_data(dataset=dataset,hh=hh,ohs=ohs,income=income,year=year,selected_category=selected_category);
   return(dstruct);
   #* ))
 }
