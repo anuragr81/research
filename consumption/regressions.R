@@ -80,7 +80,8 @@ run_regression_lsms<-function(ds,type,commodity_type,fname){
     # meat top 78%
     # fruits top 38%
     if (missing(fname)){
-      fname="visible_consumption";
+      stop("must provide dependent variable")
+      #fname="visible_consumption";
     }
     
     print(paste("Using data in field:",fname));
@@ -179,22 +180,11 @@ run_regression_lsms<-function(ds,type,commodity_type,fname){
                   "isrural","region","english","roomsnum","years_community",
                   "is_resident","toteducexpense","tothouserent")
     res <- significant_lmvars(ds=ds,depvar="visible_consumption",vars_init=lsms_vars_init());
-    # highest_educ, age, company-at-work, highest_eduation, years_in_community(=age when 99), total_expenditure, is_migrant, family_size  
-    #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+roomsnum+years_community+is_resident+toteducexpense+tothouserent)
-    #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+roomsnum+years_community+is_resident+toteducexpense)
-    #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+years_community+is_resident+toteducexpense)
-    #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+years_community+toteducexpense)
-    #res=lm(data=ds,visible_consumption~total_expenditure+age+hsize+housingstatus+occupation+isrural+region+english+toteducexpense)
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+housingstatus+occupation+isrural+region+english+toteducexpense)
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+housingstatus+isrural+region+english+toteducexpense)
-    #res=lm(data=ds,visible_consumption~total_expenditure+housingstatus+isrural+region+english+toteducexpense)
-    
     
     #(religious_education, locality_dummies,self_reported_happiness,housing_expenditure,education,price_based_class,urban_rural)
     print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,HOUSING_STATUS,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS, VISIBLE_SERVICES IGNORED")
     
-    #res=lm(data=ds,visible_consumption~total_expenditure+hsize+years_community+is_resident)
-    #print(summary(res))
+    print(summary(res))
     min_tval <- min(abs(summary(res)$coefficients[,"t value"]))
     print(paste("min(t-values)=",min_tval))
     resdf<-as.data.frame(summary(res)$coefficients)
@@ -205,21 +195,20 @@ run_regression_lsms<-function(ds,type,commodity_type,fname){
   if (type == "simple2"){
     
     if (missing(fname)){
-      fname="visible_consumption";
+      stop("must provide dependent variable")
+      #fname="visible_consumption";
     }
     ds[,fname]<-ds[,fname]+1e-10 # adding a small quantity to ensure log transformation is not -Inf
     ds$lnvis <- log(ds[,fname]) 
     
-    #ds$lnvis[ds$lnvis==-Inf]<-0 # zeroing out -Inf from log
     ds$lnpinc <- log(ds$total_expenditure)
     #ds$nonenglish <- as.integer(ds$litlang==1 | ds$litlang==4)
     ds$english <- as.integer(ds$litlang==2 | ds$litlang==3)
     print("PENDING region dummies")
     length_region_dummy=unique(ds$region)[-1]
-    #res=lm(data=ds,lnvis~lnpinc+age+hsize+housingstatus+occupation+isrural+highest_educ+region+english+roomsnum+years_community+is_resident+toteducexpense+tothouserent)
     res <- significant_lmvars(ds=ds,depvar="lnvis",vars_init=lsms_ln_vars_init());
     
-    #print(summary(res))
+    print(summary(res))
     
     min_tval <- min(abs(summary(res)$coefficients[,"t value"]))
     print(paste("min(t-values)=",min_tval))
@@ -228,14 +217,13 @@ run_regression_lsms<-function(ds,type,commodity_type,fname){
     return(res)
   }
   if (type=="2sls"){
-    print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,LOCALITY_DUMMIES,SELF_REPORTED_HAPPINESS,AREA_TYPE, VISIBLE_SERVICES IGNORED")
+    print ("RELIGIOUS_EDUCATION,INDUSTRY_CODE,SELF_REPORTED_HAPPINESS,AREA_TYPE IGNORED")
     if (missing(fname)){
-      fname="visible_consumption";
+      stop("must provide dependent variable")
+      #fname="visible_consumption";
     }
     ds[,fname]<-ds[,fname]+1e-10 # adding a small quantity to ensure log transformation is not -Inf
     ds$lnvis <- log(ds[,fname])
-    #ds$lnvis <- log(ds$visible_consumption) 
-    #ds$lnvis[ds$lnvis==-Inf]<-0 # zeroing out -Inf from log
     ds$lnpinc <- log(ds$total_expenditure)
     
     ds$cubic_highest_educ<-with(ds,highest_educ*highest_educ*highest_educ)
@@ -250,13 +238,9 @@ run_regression_lsms<-function(ds,type,commodity_type,fname){
     ds$english <- as.integer(ds$litlang==2 | ds$litlang==3)
     
     if (TRUE){
-      #data("WeakInstrument"); r<-ivreg(data=WeakInstrument,x~y|. - y+z)
       # high hausman p-value (not rejecting null) means the instruments are valid
       res<- ivreg(data=ds,lnvis~lnpinc+region+english+roomsnum+years_community|
                     . - lnpinc+ occupation +  toteducexpense + hsize + tothouserent )
-      # +highest_educ+cubic_highest_educ+ln_highest_educ+roomsnum
-      #occupation + tothouserent+ toteducexpense 
-      print("Pending better instrument than age");
     }
     print(summary(res,diagnostics=TRUE))
     return(res)    

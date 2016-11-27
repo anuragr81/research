@@ -8,11 +8,28 @@ source('../regressions.R')
 
 setwd('c:/local_files/research/consumption/cex/');
 
+
 # Tasks
-# 1. Use instruments from table to re-run 2sls and ensure results are the same
-# 2. Create table for generating ds for a particular commodity and re-run to make sure the results are the same
-# 3. Incorporate high-price regions (dummy) and high-population-density (dummy) and re-run simple2 as well as 2sls again
-# 4. Use stargazer to present the results
+# 1. Use instruments from list to re-run 2sls and ensure results are the same
+# 2. Incorporate high-price regions (dummy) and high-population-density (dummy) and re-run simple2 as well as 2sls again
+# 3. Use stargazer to present the results
+
+
+get_instruments_for_item<-function(item){
+  if (!is.character(item)){
+    stop("item must be a character type")
+  }
+  instrument_table=list();
+  instrument_table[['carpetsrugs']]=1
+  instrument_table[['dseducexpense']]=2
+  
+  instruments_list<-instrument_table[[item]]
+  if (is.null(instruments_list)){
+    stop(paste("No instrument found for item:",toString(item)))
+  }
+  return (instruments_list)
+  
+}
 
 
 runTest<-function(outfile){
@@ -28,6 +45,7 @@ runTest<-function(outfile){
   }
   write(results,outfile)
 }
+
 item_analysis<-function(itemname,regtype,commodity_type){
   
   #itemname<-"dspersonalprods";
@@ -464,7 +482,12 @@ load_ohs_file <-function(dataset,year){
       b <- get_translated_frame(dat=bdat,
                                 names=ohs_info_columns_lsms_2010(),
                                 m=ohs_mapping_lsms_2010())
+      
+      
       b$hhid<-as.character(b$hhid)
+      #* inferring occupation rank with occupation_mapping
+      b<-merge(b,occupation_mapping())
+      
       cdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_C.dta',FALSE)
       #*    Read section C
       c <- get_translated_frame(dat=cdat,
@@ -610,24 +633,24 @@ TOO YOUNG .........17"
   # the following doesn't work well for the mean pay
   # rank doesn't have a predictive power for total expenditure
   r=NULL;
-  r=rbind(r,data.frame(occupation=14,rank=0))
-  r=rbind(r,data.frame(occupation=13,rank=0))
-  r=rbind(r,data.frame(occupation=12,rank=0))
-  r=rbind(r,data.frame(occupation=16,rank=0))
-  r=rbind(r,data.frame(occupation=11,rank=0))
-  r=rbind(r,data.frame(occupation=1,rank=0))
-  r=rbind(r,data.frame(occupation=17,rank=1))
-  r=rbind(r,data.frame(occupation=2,rank=1))
-  r=rbind(r,data.frame(occupation=3,rank=1))
-  r=rbind(r,data.frame(occupation=4,rank=1))
-  r=rbind(r,data.frame(occupation=7,rank=2))
-  r=rbind(r,data.frame(occupation=9,rank=2))
-  r=rbind(r,data.frame(occupation=10,rank=2))
-  r=rbind(r,data.frame(occupation=15,rank=2))
+  r=rbind(r,data.frame(occupation=14,occupation_rank=0))
+  r=rbind(r,data.frame(occupation=13,occupation_rank=0))
+  r=rbind(r,data.frame(occupation=12,occupation_rank=0))
+  r=rbind(r,data.frame(occupation=16,occupation_rank=0))
+  r=rbind(r,data.frame(occupation=11,occupation_rank=0))
+  r=rbind(r,data.frame(occupation=1,occupation_rank=0))
+  r=rbind(r,data.frame(occupation=17,occupation_rank=1))
+  r=rbind(r,data.frame(occupation=2,occupation_rank=1))
+  r=rbind(r,data.frame(occupation=3,occupation_rank=1))
+  r=rbind(r,data.frame(occupation=4,occupation_rank=1))
+  r=rbind(r,data.frame(occupation=7,occupation_rank=2))
+  r=rbind(r,data.frame(occupation=9,occupation_rank=2))
+  r=rbind(r,data.frame(occupation=10,occupation_rank=2))
+  r=rbind(r,data.frame(occupation=15,occupation_rank=2))
   
-  r=rbind(r,data.frame(occupation=8,rank=3))
-  r=rbind(r,data.frame(occupation=5,rank=3))
-  r=rbind(r,data.frame(occupation=6,rank=3))
+  r=rbind(r,data.frame(occupation=8,occupation_rank=3))
+  r=rbind(r,data.frame(occupation=5,occupation_rank=3))
+  r=rbind(r,data.frame(occupation=6,occupation_rank=3))
   
   return(r)
   
@@ -1250,7 +1273,10 @@ get_ucc_mapping_2004<-function(){
 }
 
 filter_categories_data<-function(hh,selected_category,item_field){
-  vis<-hh[is.element(hh[,item_field],selected_category),] # get only visible categories
+  vis<-hh[is.element(hh[,item_field],selected_category),]
+  if (dim(vis)[1] <=0){
+    stop(paste("No entries found in category: ",toString(selected_category)))
+  }
   vis<-ddply(vis,.(hhid),summarize,visible_consumption=sum(cost))
   no_vis_hhid<-setdiff(unique(hh$hhid),unique(vis$hhid))
   no_vis<-data.frame(hhid=no_vis_hhid,visible_consumption=rep(0,length(no_vis_hhid)))
@@ -1332,6 +1358,7 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income,selected_category){
                     accessiblemarket=heads$accessiblemarket,
                     schoolowner=heads$schoolowner,
                     occupation = heads$occupation,
+                    occupation_rank = heads$occupation_rank,
                     years_community=heads$years_community,
                     housingstatus=heads$housingstatus,
                     roomsnum=heads$roomsnum,
