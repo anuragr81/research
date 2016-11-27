@@ -40,61 +40,77 @@ runTest<-function(outfile){
     res<-item_analysis(item,"simple2")
     resdf<-as.data.frame(summary(res)$coefficients)
     results<-paste(results,"\n",item,":",toString(rownames(resdf)))
-    
   }
   write(results,outfile)
 }
 
+get_item_diary_code <- function (item) {
+  if (!is.character(item)){
+    stop(paste(item,"must be a string"))
+  }
+  item_codes = list()
+  item_codes[["dselectricity"]] = c(202)
+  item_codes[["carpetsrugs"]]=c(301)
+  code <- item_codes[[item]]
+  if (is.null(code)){
+    stop(paste("Could not find itemcode for",item))
+    
+  }
+  return(code)
+}
 item_analysis<-function(itemname,regtype,commodity_type){
-  varsInfo = list()
   
-  varsInfo [["vars_list"]]=lsms_ln_vars_init();
-  varsInfo[["endogenous_vars"]] = "lnpinc"
   
-  if (is.element(commodity_type, c("dseducexpense","dshouserent"))){
+  
+  if (is.element(itemname, c("dseducexpense","dshouserent"))){
     # these items are not populated from diary file
     varsInfo [["depvar"]]=paste("ln",commodity_type,sep="");
     # food category is only a dummy - vis would not be used
     ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = food_categories_lsms_2010() ,isTranslated = TRUE)
     
   } else {
-    diaryCode = get_diary_code(commodity_type)
+    diaryCode = get_item_diary_code(itemname)
     ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = diaryCode ,isTranslated = TRUE)
-    varsInfo [["depvar"]]="lnvis"
   }
   
   source('../regressions.R')
   
   if (regtype=="engel") {
-    res<-run_regression_lsms(ds,regtype,commodity_type)
-  } else {
-    
-    if (regtype == "2sls"){
-      varsInfo[["instrument_list"]]=get_instruments_for_item(commodity_type);
-      
-      if (is.null(varsInfo[["instrument_list"]])){
-        stop("Cannot have null instrument_list")
-      }
-      
-      res<-run_regression_lsms(ds,"2sls",commodity_type,varsInfo)
-      return(res)
-    }
-    
-    if (regtype == "simple2"){
-      varsInfo = list()
-      
-      varsInfo [["depvar"]]="lnvis"
-      varsInfo [["vars_list"]]=lsms_ln_vars_init();
-      varsInfo[["endogenous_vars"]] = "lnpinc"
-      res<-run_regression_lsms(ds,"simple2",commodity_type,varsInfo)
-      return(res)
-    }
-    
-    stop(paste("analysis of type",regtype, "not supported"))
-    
+    varsInfo = list()
+    varsInfo[["depvar"]]="visible_consumption"
+    res<-run_regression_lsms(ds,regtype,commodity_type,varsInfo)
+    return(res)
   }
   
-  stop("Failure in item_analysis")
+  if (regtype == "2sls"){
+    varsInfo = list()
+    varsInfo [["depvar"]]="lnvis"
+    varsInfo[["instrument_list"]]=get_instruments_for_item(itemname);
+    varsInfo [["vars_list"]]=lsms_ln_vars_init();
+    varsInfo[["endogenous_vars"]] = "lnpinc"
+    
+    
+    if (is.null(varsInfo[["instrument_list"]])){
+      stop("Cannot have null instrument_list")
+    }
+    
+    res<-run_regression_lsms(ds,"2sls",commodity_type,varsInfo)
+    return(res)
+  }
+  
+  if (regtype == "simple2"){
+    
+    varsInfo = list()
+    
+    varsInfo [["depvar"]]="lnvis"
+    varsInfo [["vars_list"]]=lsms_ln_vars_init();
+    varsInfo[["endogenous_vars"]] = "lnpinc"
+    res<-run_regression_lsms(ds,"simple2",commodity_type,varsInfo)
+    return(res)
+  }
+  
+  stop(paste("analysis of type",regtype, "not supported"))
+  
 }
 
 lsms_vars_init<-function(){
@@ -1463,7 +1479,7 @@ visible_categories<-function(dataset,year){
   }
   if (dataset == "lsms"){
     if (year == 2010){
-    return(visible_categories_lsms_2010())
+      return(visible_categories_lsms_2010())
     }
     stop(paste("visible categories list for year:",year," not found"))
     
@@ -1577,7 +1593,7 @@ cex_combined_years_ds<-function(years)
 }
 
 combined_data_set<-function(dataset,year,selected_category,isTranslated,isDebug){
-
+  
   
   ############ PHASE 0 ########################
   
