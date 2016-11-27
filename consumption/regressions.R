@@ -282,7 +282,7 @@ run_regression_lsms<-function(ds,type,commodity_type,varsInfo){
     
     searchres <- significant_lmvars(ds=ds,depvar=depvar,vars_init=varsList);
     sigvars = searchres[["vars"]]
-    ivreg_string <- paste(depvar,"~",write_variables_as_sum(sigvars), "| ",write_variables_as_negative_sum(endogenousVars),"+",write_variables_as_sum(instrumentList))
+    ivreg_string <- paste(depvar,"~",write_variables_as_sum(sigvars), "| .",write_variables_as_negative_sum(endogenousVars),"+",write_variables_as_sum(instrumentList))
     print(paste("ivreg_string=",ivreg_string))
     res <- ivreg(ivreg_string,data=ds)
     print(summary(res,diagnostics=TRUE))

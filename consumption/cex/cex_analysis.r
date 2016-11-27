@@ -13,13 +13,23 @@ setwd('c:/local_files/research/consumption/cex/');
 # 1. Incorporate high-price regions (dummy) and high-population-density (dummy) and re-run simple2 as well as 2sls again
 
 
+lsms_vars_init<-function(){
+  return(c("total_expenditure","age","hsize","housingstatus","occupation_rank","isrural","region",
+           "english","roomsnum","years_community","is_resident"))
+}
+
+lsms_ln_vars_init<-function(){
+  return(c("lnpinc","age","hsize","housingstatus","occupation_rank","isrural","highest_educ","region",
+           "english","roomsnum","years_community","is_resident"))
+}
+
 get_instruments_for_item<-function(item){
   if (!is.character(item)){
     stop("item must be a character type")
   }
   instrument_table=list();
-  instrument_table[['carpetsrugs']]=1
-  instrument_table[['dseducexpense']]=2
+  instrument_table[['carpetsrugs']]=c("occupation","years_community","roomsnum","is_resident","region","isrural")
+  instrument_table[['dseducexpense']]=c("occupation","years_community","roomsnum","tothouserent")
   instrument_table[['dselectricity']]=c("ln_highest_educ","cubic_highest_educ","ln_age","occupation","years_community","roomsnum","tothouserent","toteducexpense","accessiblemarket","litlang");
   
   instruments_list<-instrument_table[[item]]
@@ -58,19 +68,20 @@ get_item_diary_code <- function (item) {
   }
   return(code)
 }
-item_analysis<-function(itemname,regtype,commodity_type){
+item_analysis<-function(itemname,regtype,commodity_type,ds){
   
-  
-  
-  if (is.element(itemname, c("dseducexpense","dshouserent"))){
-    # these items are not populated from diary file
-    varsInfo [["depvar"]]=paste("ln",commodity_type,sep="");
-    # food category is only a dummy - vis would not be used
-    ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = food_categories_lsms_2010() ,isTranslated = TRUE)
+  if (missing(ds)){
     
-  } else {
-    diaryCode = get_item_diary_code(itemname)
-    ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = diaryCode ,isTranslated = TRUE)
+    if (is.element(itemname, c("dseducexpense","dshouserent"))){
+      # these items are not populated from diary file
+      varsInfo [["depvar"]]=paste("ln",commodity_type,sep="");
+      # food category is only a dummy - vis would not be used
+      ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = food_categories_lsms_2010() ,isTranslated = TRUE)
+      
+    } else {
+      diaryCode = get_item_diary_code(itemname)
+      ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = diaryCode ,isTranslated = TRUE)
+    }
   }
   
   source('../regressions.R')
@@ -111,16 +122,6 @@ item_analysis<-function(itemname,regtype,commodity_type){
   
   stop(paste("analysis of type",regtype, "not supported"))
   
-}
-
-lsms_vars_init<-function(){
-  return(c("total_expenditure","age","hsize","housingstatus","occupation_rank","isrural","region",
-           "english","roomsnum","years_community","is_resident"))
-}
-
-lsms_ln_vars_init<-function(){
-  return(c("lnpinc","age","hsize","housingstatus","occupation_rank","isrural","highest_educ","region",
-           "english","roomsnum","years_community","is_resident"))
 }
 
 #########################
