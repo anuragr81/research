@@ -73,6 +73,7 @@ item_analysis<-function(itemname,regtype,commodity_type,ds){
   if (missing(ds)){
     
     if (is.element(itemname, c("dseducexpense","dshouserent"))){
+      varsInfo=list()
       # these items are not populated from diary file
       varsInfo [["depvar"]]=paste("ln",commodity_type,sep="");
       # food category is only a dummy - vis would not be used
