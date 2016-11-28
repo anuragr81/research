@@ -29,7 +29,7 @@ get_instruments_for_item<-function(item){
   }
   instrument_table=list();
   instrument_table[['carpetsrugs']]=c("occupation","years_community","roomsnum","is_resident","region","isrural")
-  instrument_table[['dseducexpense']]=c("occupation","years_community","roomsnum","tothouserent")
+  instrument_table[['dseducexpense']]=c("years_community","roomsnum","tothouserent","region")
   instrument_table[['dselectricity']]=c("ln_highest_educ","cubic_highest_educ","ln_age","occupation","years_community","roomsnum","tothouserent","toteducexpense","accessiblemarket","litlang");
   
   instruments_list<-instrument_table[[item]]
@@ -73,10 +73,7 @@ item_analysis<-function(itemname,regtype,commodity_type,ds){
   if (missing(ds)){
     
     if (is.element(itemname, c("dseducexpense","dshouserent"))){
-      varsInfo=list()
-      # these items are not populated from diary file
-      varsInfo [["depvar"]]=paste("ln",commodity_type,sep="");
-      # food category is only a dummy - vis would not be used
+      # vis is not needed for these categories
       ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = NULL ,isTranslated = TRUE, set_depvar=FALSE)
       
     } else {
@@ -89,14 +86,23 @@ item_analysis<-function(itemname,regtype,commodity_type,ds){
   
   if (regtype=="engel") {
     varsInfo = list()
-    varsInfo[["depvar"]]="visible_consumption"
+    if (is.element(itemname, c("dseducexpense","dshouserent"))){
+      varsInfo[["depvar"]]=paste("ln",itemname,sep="");
+    }
+    else {  
+      varsInfo[["depvar"]]="visible_consumption"
+    }
     res<-run_regression_lsms(ds,regtype,commodity_type,varsInfo)
     return(res)
   }
   
   if (regtype == "2sls"){
     varsInfo = list()
-    varsInfo [["depvar"]]="lnvis"
+    if (is.element(itemname, c("dseducexpense","dshouserent"))){
+      varsInfo[["depvar"]]=paste("ln",itemname,sep="");
+    }else{
+      varsInfo [["depvar"]]="lnvis"
+    }
     varsInfo[["instrument_list"]]=get_instruments_for_item(itemname);
     varsInfo [["vars_list"]]=lsms_ln_vars_init();
     varsInfo[["endogenous_vars"]] = "lnpinc"
@@ -113,8 +119,12 @@ item_analysis<-function(itemname,regtype,commodity_type,ds){
   if (regtype == "simple2"){
     
     varsInfo = list()
+    if (is.element(itemname, c("dseducexpense","dshouserent"))){
+      varsInfo [["depvar"]]=paste("ln",commodity_type,sep="");
+    }else {
+      varsInfo [["depvar"]]="lnvis"
+    }
     
-    varsInfo [["depvar"]]="lnvis"
     varsInfo [["vars_list"]]=lsms_ln_vars_init();
     varsInfo[["endogenous_vars"]] = "lnpinc"
     res<-run_regression_lsms(ds,"simple2",commodity_type,varsInfo)

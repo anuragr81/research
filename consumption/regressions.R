@@ -209,10 +209,10 @@ run_regression_lsms<-function(ds,type,commodity_type,varsInfo){
     if (is.null(varsList)){
       stop("vars_list not provided")
     }
-    ds$toteducexpense = ds$toteducexpense+1e-10# adding a small quantity to ensure log transformation is not -Inf
-    ds$lntoteducexpense = log(ds$toteducexpense)
-    ds$tothouserent =ds$tothouserent+1e-10 # adding a small quantity to ensure log transformation is not -Inf
-    ds$lntothouserent = log(ds$tothouserent)
+    ds$dseducexpense = ds$toteducexpense+1e-10# adding a small quantity to ensure log transformation is not -Inf
+    ds$lndseducexpense = log(ds$dseducexpense)
+    ds$dshouserent =ds$tothouserent+1e-10 # adding a small quantity to ensure log transformation is not -Inf
+    ds$lndshouserent = log(ds$dshouserent)
     ds$visible_consumption<-ds$visible_consumption+1e-10 # adding a small quantity to ensure log transformation is not -Inf
     ds$lnvis <- log(ds$visible_consumption) 
     
@@ -273,10 +273,10 @@ run_regression_lsms<-function(ds,type,commodity_type,varsInfo){
     ds$ln_age<-ln_age
     ds$english <- as.integer(ds$litlang==2 | ds$litlang==3)
     
-    ds$toteducexpense = ds$toteducexpense+1e-10# adding a small quantity to ensure log transformation is not -Inf
-    ds$lntoteducexpense = log(ds$toteducexpense)
-    ds$tothouserent =ds$tothouserent+1e-10 # adding a small quantity to ensure log transformation is not -Inf
-    ds$lntothouserent = log(ds$tothouserent)
+    ds$dseducexpense = ds$toteducexpense+1e-10# adding a small quantity to ensure log transformation is not -Inf
+    ds$lndseducexpense = log(ds$dseducexpense)
+    ds$dshouserent =  ds$tothouserent+1e-10 # adding a small quantity to ensure log transformation is not -Inf
+    ds$lndshouserent = log(ds$dshouserent)
     ds$visible_consumption<-ds$visible_consumption+1e-10 # adding a small quantity to ensure log transformation is not -Inf
     ds$lnvis <- log(ds$visible_consumption)
     
