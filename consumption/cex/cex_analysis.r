@@ -31,7 +31,9 @@ get_instruments_for_item<-function(item){
   instrument_table[['carpetsrugs']]=c("occupation","years_community","roomsnum","is_resident","region","isrural")
   instrument_table[['dseducexpense']]=c("years_community","roomsnum","tothouserent","region")
   instrument_table[['dselectricity']]=c("ln_highest_educ","cubic_highest_educ","ln_age","occupation","years_community","roomsnum","tothouserent","toteducexpense","accessiblemarket","litlang");
-  
+  instrument_table[['dspersonalitemsrepair']]=c("ln_highest_educ","cubic_highest_educ","ln_age","occupation","years_community","roomsnum","tothouserent","toteducexpense");
+  instrument_table[['sportshobbyequipment']]=c("ln_highest_educ","occupation","years_community","roomsnum","toteducexpense")
+  instrument_table[['dshouserent']]=c("ln_highest_educ","cubic_highest_educ","ln_age","occupation","years_community","roomsnum","tothouserent","toteducexpense","accessiblemarket","litlang");
   instruments_list<-instrument_table[[item]]
   if (is.null(instruments_list)){
     stop(paste("No instrument found for item:",toString(item)))
@@ -61,10 +63,11 @@ get_item_diary_code <- function (item) {
   item_codes = list()
   item_codes[["dselectricity"]] = c(202)
   item_codes[["carpetsrugs"]]=c(301)
+  item_codes[["dspersonalitemsrepair"]]=c(224)
+  item_codes[["sportshobbyequipment"]]=c(306)
   code <- item_codes[[item]]
   if (is.null(code)){
     stop(paste("Could not find itemcode for",item))
-    
   }
   return(code)
 }
