@@ -37,7 +37,7 @@ get_instruments_for_item<-function(item){
   instrument_table[['funeralcosts']]=c("ln_highest_educ","hsize","cubic_highest_educ","occupation","toteducexpense","tothouserent");
   instrument_table[['marriagecosts']]=c("ln_highest_educ","cubic_highest_educ","occupation","toteducexpense","tothouserent");
   instrument_table[['dspersonalprods']]=c("ln_highest_educ","cubic_highest_educ","occupation","toteducexpense","tothouserent");
-  
+  instrument_table[['dsskincream']] =c("ln_highest_educ","cubic_highest_educ","occupation","toteducexpense","tothouserent");
   instruments_list<-instrument_table[[item]]
   if (is.null(instruments_list)){
     stop(paste("No instrument found for item:",toString(item)))
@@ -46,18 +46,45 @@ get_instruments_for_item<-function(item){
   
 }
 
+get_presentation_name<-function(item){
+  
+  presnames=list();
+  presnames[['carpetsrugs']]='carpetsrugs';
+  presnames[['dseducexpense']]='education' 
+  presnames[['dselectricity']]='electricity'
+  presnames[['dshouserent']]='houserent'
+  presnames[['dspersonalitemsrepair']]= 'personalitemsrepair'
+  presnames[['dspersonalprods']]='personalproducts'
+  presnames[['dsskincream']]= 'cosmetics'
+  presnames[['funeralcosts']]='funeral'
+  presnames[['marriagecosts']]='marriage'
+  presnames[['sportshobbyequipment']]='hobbyequipment'
+  itemname=presnames[[item]]
+  if (is.null(itemname)){
+    stop(paste("presentation name not found for:",toString(item)))
+  }
+  return(itemname)
+}
 
-runTest<-function(outfile){
-  items<-c('carpetsrugs', 'dseducexpense', 'dselectricity', 'dsfood',
+runTest<-function(outfile,regtype){
+  
+  items<-c('carpetsrugs', 'dseducexpense', 'dselectricity',
            'dshouserent', 'dspersonalitemsrepair', 'dspersonalprods', 
            'dsskincream', 'funeralcosts', 'marriagecosts', 'sportshobbyequipment')
-  results<-""
+  library(stargazer)
+  resList = list()
+  columnLabels = array()
+  count=1
   for (item in items){
-    res<-item_analysis(item,"simple2")
-    resdf<-as.data.frame(summary(res)$coefficients)
-    results<-paste(results,"\n",item,":",toString(rownames(resdf)))
+    resList[[count]]<-item_analysis(item,regtype,item);
+    columnLabels[count]<-get_presentation_name(item);
+    count=count+1
+    #resdf<-as.data.frame(summary(res)$coefficients)
+    #results<-paste(results,"\n",item,":",toString(rownames(resdf)))
   }
-  write(results,outfile)
+  write(do.call(stargazer,resList),outfile)
+  #write(stargazer(res,column.labels = c("testerchamp1","testerchamp2"),label="visibilitycheck"),"c:/temp/1.tex")
+  #write(results,outfile)
 }
 
 get_item_diary_code <- function (item) {
@@ -72,6 +99,9 @@ get_item_diary_code <- function (item) {
   item_codes[["funeralcosts"]]=c(314)
   item_codes[['marriagecosts']]=c(313)
   item_codes[['dspersonalprods']]=c(214)
+  item_codes[['dsskincream']]=c(213)
+  
+  
   code <- item_codes[[item]]
   if (is.null(code)){
     stop(paste("Could not find itemcode for",item))
