@@ -60,6 +60,29 @@ get_instruments_for_item<-function(item){
   
 }
 
+get_latest_instruments_for_item<-function(item){
+  if (!is.character(item)){
+    stop("item must be a character type")
+  }
+  instrument_table=list();
+  instrument_table[['carpetsrugs']]=c("occupation","years_community","roomsnum","is_resident","region","isrural")
+  instrument_table[['dseducexpense']]=c("years_community","roomsnum","tothouserent")
+  instrument_table[['dselectricity']]=c("ln_highest_educ","cubic_highest_educ","occupation","years_community","roomsnum","tothouserent","toteducexpense","accessiblemarket","litlang");
+  instrument_table[['dspersonalitemsrepair']]=c("ln_highest_educ","cubic_highest_educ","occupation","years_community","roomsnum","tothouserent","toteducexpense");
+  instrument_table[['sportshobbyequipment']]=c("years_community","roomsnum","is_resident")
+  instrument_table[['dshouserent']]=c("ln_highest_educ","cubic_highest_educ","occupation","years_community","toteducexpense","accessiblemarket","litlang");
+  instrument_table[['funeralcosts']]=c("ln_highest_educ","hsize","tothouserent");
+  instrument_table[['marriagecosts']]=c("ln_highest_educ","cubic_highest_educ","occupation","toteducexpense","tothouserent");
+  instrument_table[['dspersonalprods']]=c("ln_highest_educ","cubic_highest_educ","occupation","toteducexpense","tothouserent");
+  instrument_table[['dsskincream']] =c("occupation","toteducexpense","tothouserent");
+  instruments_list<-instrument_table[[item]]
+  if (is.null(instruments_list)){
+    stop(paste("No instrument found for item:",toString(item)))
+  }
+  return (instruments_list)
+  
+}
+
 get_presentation_name<-function(item){
   
   presnames=list();
@@ -122,20 +145,30 @@ get_item_diary_code <- function (item) {
   }
   return(code)
 }
-item_analysis<-function(itemname,regtype,commodity_type,ds,parameters_func){
+
+get_ds_for_item<-function(itemname){
+  if (is.element(itemname, c("dseducexpense","dshouserent"))){
+    # vis is not needed for these categories
+    ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = NULL ,isTranslated = TRUE, set_depvar=FALSE)
+    
+  } else {
+    diaryCode = get_item_diary_code(itemname)
+    ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = diaryCode ,isTranslated = TRUE)
+  }
+}
+
+item_analysis<-function(itemname,regtype,commodity_type,ds,parameters_func,instruments_func){
+  
   if (missing(parameters_func)){
     parameters_func<-lsms_default_ln_vars_init
   }
+  
+  if (missing(instruments_func)){
+    instruments_func<-get_instruments_for_item;
+  }
+  
   if (missing(ds)){
-    
-    if (is.element(itemname, c("dseducexpense","dshouserent"))){
-      # vis is not needed for these categories
-      ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = NULL ,isTranslated = TRUE, set_depvar=FALSE)
-      
-    } else {
-      diaryCode = get_item_diary_code(itemname)
-      ds<-combined_data_set(dataset = "lsms",year = 2010,selected_category = diaryCode ,isTranslated = TRUE)
-    }
+    ds<-get_ds_for_item(itemname)
   }
   
   #return(ds)
@@ -160,7 +193,7 @@ item_analysis<-function(itemname,regtype,commodity_type,ds,parameters_func){
     }else{
       varsInfo [["depvar"]]="lnvis"
     }
-    varsInfo[["instrument_list"]]=get_instruments_for_item(itemname);
+    varsInfo[["instrument_list"]]=instruments_func(itemname);
     varsInfo [["vars_list"]]=parameters_func();
     varsInfo[["endogenous_vars"]] = "lnpinc"
     
