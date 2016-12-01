@@ -23,10 +23,13 @@ lsms_ln_vars_init<-function(){
            "english","roomsnum","years_community","is_resident"))
 }
 
-get_expensive_region_codes<-function(){
+get_expensiveregion_codes<-function(){
   return (c(7,12,19,53)) 
 }
 
+get_region_popdensity_map<-function(){
+  return(read.csv('../tnzpopdensity.csv'))
+}
 get_instruments_for_item<-function(item){
   if (!is.character(item)){
     stop("item must be a character type")
@@ -598,7 +601,9 @@ load_ohs_file <-function(dataset,year){
                                 m=ohs_seca_mapping_lsms_2010())
       a<-merge(a,u)
       a<-merge(a,l)
-      a$expensive_region<-as.integer(is.element(a$region,get_expensive_region_codes()))
+      a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
+      popDensity <- get_region_popdensity_map()
+      a<-merge(a,popDensity)
       
       #*    Read section B
       bdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_B.dta',FALSE)
@@ -1478,6 +1483,8 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income,selected_category,set
                     highest_educ=heads$highest_educ,
                     age=heads$age,
                     region=heads$region,
+                    expensiveregion=heads$expensiveregion,
+                    popdensity =heads$popdensity,
                     district=heads$district,
                     ward=heads$ward,
                     ea=heads$ea,
