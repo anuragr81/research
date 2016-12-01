@@ -13,15 +13,22 @@ setwd('c:/local_files/research/consumption/cex/');
 # 1. Incorporate high-price regions (dummy) and high-population-density (dummy) and re-run simple2 as well as 2sls again
 
 
-lsms_vars_init<-function(){
+lsms_default_vars_init<-function(){
   return(c("total_expenditure","age","hsize","housingstatus","occupation_rank","isrural","region",
            "english","roomsnum","years_community","is_resident"))
 }
 
-lsms_ln_vars_init<-function(){
+lsms_default_ln_vars_init<-function(){
   return(c("lnpinc","age","hsize","housingstatus","occupation_rank","isrural","highest_educ","region",
            "english","roomsnum","years_community","is_resident"))
 }
+
+
+lsms_latest_ln_vars_init<-function(){
+  return(c("lnpinc","age","hsize","housingstatus","occupation_rank","isrural","highest_educ","expensiveregion","popdensity",
+           "english","roomsnum","years_community","is_resident"))
+}
+
 
 get_expensiveregion_codes<-function(){
   return (c(7,12,19,53)) 
@@ -115,8 +122,10 @@ get_item_diary_code <- function (item) {
   }
   return(code)
 }
-item_analysis<-function(itemname,regtype,commodity_type,ds){
-  
+item_analysis<-function(itemname,regtype,commodity_type,ds,parameters_func){
+  if (missing(parameters_func)){
+    parameters_func<-lsms_default_ln_vars_init
+  }
   if (missing(ds)){
     
     if (is.element(itemname, c("dseducexpense","dshouserent"))){
@@ -152,7 +161,7 @@ item_analysis<-function(itemname,regtype,commodity_type,ds){
       varsInfo [["depvar"]]="lnvis"
     }
     varsInfo[["instrument_list"]]=get_instruments_for_item(itemname);
-    varsInfo [["vars_list"]]=lsms_ln_vars_init();
+    varsInfo [["vars_list"]]=parameters_func();
     varsInfo[["endogenous_vars"]] = "lnpinc"
     
     
@@ -173,8 +182,7 @@ item_analysis<-function(itemname,regtype,commodity_type,ds){
       varsInfo [["depvar"]]="lnvis"
     }
     
-    varsInfo [["vars_list"]]=lsms_ln_vars_init();
-    varsInfo[["endogenous_vars"]] = "lnpinc"
+    varsInfo [["vars_list"]]=parameters_func();
     res<-run_regression_lsms(ds,"simple2",commodity_type,varsInfo)
     return(res)
   }
