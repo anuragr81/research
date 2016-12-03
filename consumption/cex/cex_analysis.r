@@ -103,7 +103,7 @@ get_presentation_name<-function(item){
   return(itemname)
 }
 
-runTest<-function(outfile,regtype){
+runTest<-function(outfile,regtype,parametersFunc,instrumentsFunc){
   
   items<-c('carpetsrugs', 'dseducexpense', 'dselectricity',
            'dshouserent', 'dspersonalitemsrepair', 'dspersonalprods', 
@@ -113,8 +113,11 @@ runTest<-function(outfile,regtype){
   columnLabels = array()
   count=1
   for (item in items){
-    resList[[count]]<-item_analysis(item,regtype,item);
-    columnLabels[count]<-get_presentation_name(item);
+    resList[[count]]<-item_analysis(itemname = item,
+                                    regtype = regtype,
+                                    commodity_type = item,
+                                    parameters_func = parametersFunc,
+                                    instruments_func = instrumentsFunc)
     count=count+1
     #resdf<-as.data.frame(summary(res)$coefficients)
     #results<-paste(results,"\n",item,":",toString(rownames(resdf)))
