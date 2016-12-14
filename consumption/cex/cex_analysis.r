@@ -5,14 +5,15 @@ require(plyr)
 require(AER)
 source('../panelfunc.R')
 source('../regressions.R')
-source('lsmsloader.R')
 
 setwd('c:/local_files/research/consumption/cex/');
 
-
+#
 # Tasks
 # 1. Incorporate high-price regions (dummy) and high-population-density (dummy) and re-run simple2 as well as 2sls again
-
+# 2. prepare maps of scarcity for other countries - inspecting whether scarcity maps overlaps with items sorted on visibility 
+# 3. load India data and perform zahra's analysis without visibility survey
+#
 
 lsms_default_vars_init<-function(){
   return(c("total_expenditure","age","hsize","housingstatus","occupation_rank","isrural","region",
@@ -688,23 +689,6 @@ merge_hh_ohs_income_data_lsms_2010<-function(hh,ohs,income,selected_category,set
   #* ))
 }
 
-visible_categories<-function(dataset,year){
-  if (dataset == "us_cex"){
-    if (year == 2004 || year == 2009|| year == 2014){
-      return(visible_categories_us_cex_2004())
-    }
-    stop(paste("visible categories list for year:",year," not found"))
-  }
-  if (dataset == "lsms"){
-    if (year == 2010){
-      return(visible_categories_lsms_2010())
-    }
-    stop(paste("visible categories list for year:",year," not found"))
-    
-  }
-  stop(paste("visible categories list for dataset:",dataset," not found"))
-}
-
 
 merge_hh_ohs_income_data_us_cex_2004<-function(hh,ohs,income,selected_category,set_depvar){
   
@@ -757,99 +741,6 @@ merge_hh_ohs_income_data<-function(dataset,year,hh,ohs,income,selected_category,
   #*))
 }
 
-combined_data_set<-function(dataset,year,selected_category,isTranslated,isDebug, set_depvar){
-  
-  
-  ############ PHASE 0 ########################
-  if (missing(set_depvar)){
-    set_depvar = TRUE 
-  }
-  if (missing(selected_category)){
-    print("setting selected_category to the default value")
-    selected_category= visible_categories(dataset=dataset,year=year)
-  }
-  
-  #*  (( Loading diary file
-  hhdat <- load_diary_file(dataset,year) # must provide total and visible expenditure (must be already translated)
-  
-  #* Loading the person/family data fie
-  ohsdat <-load_ohs_file(dataset,year) # (using fmld) must provide age (age_ref), gender(sex_ref), 
-  # highest_educ(educ_ref), ishead(no_earnr,earncomp - all reference person data),
-  # race(ref_race),family size (fam_size),
-  # area_type (popsize,bls_urbn)
-  #* Loading income file
-  incomedat <-load_income_file(dataset,year) # must provide total income (fincaftm)
-  
-  if (is.null(hhdat)){
-    stop("Could not load diary hhdata")
-  }
-  
-  print("Ensuring duplicates do NOT exist in the diary hhdata")
-  hhdat = unique(hhdat)
-  
-  ############ PHASE 1 - Translation ########################
-  # info_columns must contain all hhdata-fields referred to in merging/aggregation phase (one per file)
-  # translated frame makes the data available in a universal dictionary (age, gender etc.)
-  if (missing(isTranslated) || isTranslated==FALSE) {
-    hh = get_translated_frame(dat=hhdat,
-                              names=get_diary_info_columns(dataset,year),
-                              m=load_diary_fields_mapping(dataset,year))
-    print("Translated hh data")
-    # optional data files
-    if (!is.null(ohsdat)){
-      ohs = get_translated_frame(dat=ohsdat,
-                                 names=get_ohs_info_columns(dataset,year),
-                                 m=load_ohs_mapping(dataset,year))
-      
-      print("Translated ohs data")
-    }
-    
-    if (!is.null(incomedat)){
-      income = get_translated_frame(dat=incomedat,
-                                    names=get_income_info_columns(dataset,year),
-                                    m=load_income_mapping(dataset,year))
-      print("Translated income data")
-    }
-  } else {
-    hh<-hhdat
-    ohs <-ohsdat
-    income<-incomedat
-  }
-  print("Loaded translated frame(s)")
-  ############ PHASE 2 - Aggregation and Merge ########################
-  # merge criteria is defined for every dependent variable
-  
-  ignored_hhids <- get_ignored_hhids(dataset,hhdat,ohsdat,incomedat);
-  if (!missing(isDebug) && isDebug==TRUE){
-    print(paste("Ids to be ignored(",length(ignored_hhids),"):{",toString(ignored_hhids),"}"))
-  }
-  if (!is.null(ignored_hhids)){  
-    if (!is.null(hhdat)){
-      n1<-length(unique(hh$hhid))
-      hh<-hh[!is.element(as.character(hh$hhid),as.character(ignored_hhids)),]
-      
-      n2<-length(unique(hh$hhid))
-      print(paste("ignored",n1-n2,"/",n1," hhids"))
-    }
-    if (!is.null(ohsdat)){
-      
-      n1<-length(unique(ohs$hhid))
-      ohs<-ohs[!is.element(as.character(ohs$hhid),as.character(ignored_hhids)),]
-      
-      n2<-length(unique(ohs$hhid))
-      print(paste("ignored",n1-n2,"/",n1," hhids"))
-    }
-    if (!is.null(incomedat)){
-      n1<-length(unique(income$hhid))
-      income<-income[!is.element(as.character(income$hhid),as.character(ignored_hhids)),]
-      n2<-length(unique(income$hhid))
-      print(paste("ignored",n1-n2,"/",n1," hhids"))
-    }
-  }
-  dstruct<-merge_hh_ohs_income_data(dataset=dataset,hh=hh,ohs=ohs,income=income,year=year,selected_category=selected_category,set_depvar=set_depvar);
-  return(dstruct);
-  #* ))
-}
 
 cpi_adjust<-function(ds,mfile,refyear){
   m=read.csv(mfile)

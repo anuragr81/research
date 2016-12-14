@@ -9,7 +9,7 @@ age_signature<-function(age,gender,popgroup){
 }
 
 ############# hh columns ###############
-diary_info_columns_1995 <-function () {
+diary_sa_info_columns_1995 <-function () {
   icols1995 <- c("hhid",
                  "gender_household_head",
                  "age_household_head",
@@ -26,12 +26,12 @@ diary_info_columns_1995 <-function () {
                  "total_income",
                  "total_expenditure",
                  "race_household_head")
-  visible_categories<-visible_categories_1995();
+  visible_categories<-sa_visible_categories_1995();
   icols1995<-c(icols1995,visible_categories)
   return(icols1995);
 }
 
-diary_info_columns_2010<-function(){
+diary_sa_info_columns_2010<-function(){
   #each of these are relative to the household head
   icols2010 <-c("hhid", # unique ID
                 "gender_household_head",
@@ -40,20 +40,20 @@ diary_info_columns_2010<-function(){
                 "n_members",
                 "area_type")
   # must also include visible categories
-  icols2010<-c(icols2010,visible_categories_2010())
+  icols2010<-c(icols2010,sa_visible_categories_2010())
   return(icols2010)
 }
 
-diary_info_columns_2005<-function(){
+diary_sa_info_columns_2005<-function(){
   #each of these are relative to the household head
-  icols2005 <-c("hhid", # unique ID
+  icols2005 <-c("hhid", # unique IDsa_visible_categories_2005
                 "gender_household_head",
                 "total_expenditure",
                 "race_household_head",
                 "n_members",
                 "area_type")
   # must also include visible categories
-  icols2005<-c(icols2005,visible_categories_2005())
+  icols2005<-c(icols2005,sa_visible_categories_2005())
   return(icols2005)
 }
 ##############<end hh columns>############
@@ -965,7 +965,7 @@ ohs_info_columns_1995<-function(){
 ######### <end ohs info columns> ##############
 
 ############# ohs mapping #################
-ohs_mapping_1995 <-function(){
+sa_ohs_mapping_1995 <-function(){
   s = data.frame(iesname="hhid",name="hhid")
   s= rbind(s,data.frame(iesname="AGE",name="age"))
   s= rbind(s,data.frame(iesname="GENDER",name="gender"))
@@ -974,7 +974,7 @@ ohs_mapping_1995 <-function(){
   return(s)
 }
 
-ohs_mapping_2005 <-function(){
+sa_ohs_mapping_2005 <-function(){
   s = data.frame(iesname="uqno",name="hhid")
   s= rbind(s,data.frame(iesname="personno",name="persno"))
   s= rbind(s,data.frame(iesname="q15higheduc",name="highest_education"))
@@ -982,7 +982,7 @@ ohs_mapping_2005 <-function(){
   return(s)
 }
 
-ohs_mapping_2010 <-function(){
+sa_ohs_mapping_2010 <-function(){
   s = data.frame(iesname="UQNO",name="hhid")
   s= rbind(s,data.frame(iesname="PERSONNO",name="persno"))
   s= rbind(s,data.frame(iesname="Q21HIGHESTLEVEL",name="highest_education"))
@@ -995,7 +995,7 @@ ohs_mapping_2010 <-function(){
 ############# <end ohs mapping> #################
 
 ########### income info columns ############
-income_info_columns_2010<-function(){
+sa_income_info_columns_2010<-function(){
   #each of these are relative to the household head
   icols2010 <-c("hhid",
                 "persno",
@@ -1005,7 +1005,7 @@ income_info_columns_2010<-function(){
   return(icols2010)
 }
 
-income_info_columns_2005<-function(){
+sa_income_info_columns_2005<-function(){
   #each of these are relative to the household head
   icols2005 <-c("hhid",
                 "persno",
@@ -1019,7 +1019,7 @@ income_info_columns_2005<-function(){
 
 ########### income mapping############
 
-income_mapping_2010<-function(){
+sa_income_mapping_2010<-function(){
   s = data.frame(iesname="UQNO",name="hhid")
   s= rbind(s,data.frame(iesname="Personno",name="persno"))
   s= rbind(s,data.frame(iesname="Value",name="total_income"))
@@ -1027,7 +1027,7 @@ income_mapping_2010<-function(){
 }
 
 
-income_mapping_2005<-function(){
+sa_income_mapping_2005<-function(){
   s = data.frame(iesname="uqno",name="hhid")
   s= rbind(s,data.frame(iesname="personno",name="persno"))
   s= rbind(s,data.frame(iesname="value",name="total_income"))
@@ -1039,7 +1039,7 @@ income_mapping_2005<-function(){
 ######## visible categories ############
 
 # Notice that these are defined in terms of mapping fields
-visible_categories_1995<-function(){
+sa_visible_categories_1995<-function(){
   # personal care, clothing and apparel (including footwear),jewelry, cars
   return (c("motor_cars_new","bakkies_new","caravantrailers_new",
             "motor_cars_used","bakkies_used","caravantrailers_new","hire_of_clothing",
@@ -1050,11 +1050,11 @@ visible_categories_1995<-function(){
             "total_womens_clothing","total_personal_care"))
 }
 
-visible_categories_2010<-function(){
+sa_visible_categories_2010<-function(){
   return(c("num_cars"))
 }
 
-visible_categories_2005<-function(){
+sa_visible_categories_2005<-function(){
   return(c("num_cars"))
 }
 
