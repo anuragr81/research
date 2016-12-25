@@ -82,7 +82,7 @@ get_lsms_secm_info_columns<-function(year){
 
 
 get_region_popdensity_map<-function(){
-  return(read.csv('../tnzpopdensity.csv'))
+  return(read.csv('./lsms/tnzpopdensity.csv'))
 }
 
 #########################
