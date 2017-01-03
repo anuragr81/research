@@ -6,7 +6,7 @@ source('../panelfunc.R')
 
 setwd('c:/local_files/research/consumption/sa/')
 
-load_data_file_list <- function(){
+load_sa_data_file_list <- function(){
 
   s = data.frame(year=NULL,filename=NULL,type=NULL,ohs_filename=NULL,ohs_type=NULL)
   s = rbind(s,data.frame(year=1990,
@@ -74,25 +74,25 @@ choose_max_ohs_age_head_2010<-function(hh,ohs){
 #        translation into dependent variables (each of which can correspond to
 #        one function). The merging function here encapsulates the extraction from
 #        all tables and merging into a combined frame.
-merge_hh_ohs_income_data<-function(year,hh,ohs,income){
+merge_sa_hh_ohs_income_data<-function(year,hh,ohs,income){
   
   if (year == 1995){
-    return(merge_hh_ohs_data_1995(hh=hh,ohs=ohs))
+    return(merge_sa_hh_ohs_data_1995(hh=hh,ohs=ohs))
   }
   if (year == 2010){
-    return(merge_hh_ohs_income_data_2010(hh=hh,ohs=ohs,income=income))
+    return(merge_sa_hh_ohs_income_data_2010(hh=hh,ohs=ohs,income=income))
   }
   if (year == 2005){
-    return(merge_hh_ohs_income_data_2005(hh=hh,ohs=ohs,income=income))
+    return(merge_sa_hh_ohs_income_data_2005(hh=hh,ohs=ohs,income=income))
   }
   
   stop(paste("Method to merge data for year:",year," not found"))
 }
 
 # extract data from hh,ohs,income and merge into one combined frame
-merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
+merge_sa_hh_ohs_income_data_2010<-function(hh,ohs,income){
   
-  hh<-sum_visible_categories(hh=hh,visible_categories = visible_categories_2010())
+  hh<-sum_visible_categories(hh=hh,visible_categories = sa_visible_categories_2010())
   
   hh11=data.frame(hhid = hh$hhid,
                   gender = hh$gender_household_head,
@@ -122,11 +122,11 @@ merge_hh_ohs_income_data_2010<-function(hh,ohs,income){
 
 
 # extract data from hh,ohs,income and merge into one combined frame
-merge_hh_ohs_income_data_2005<-function(hh,ohs,income){
+merge_sa_hh_ohs_income_data_2005<-function(hh,ohs,income){
   
   isDebug<-FALSE
   
-  hh<-sum_visible_categories(hh=hh,visible_categories = visible_categories_2005())
+  hh<-sum_visible_categories(hh=hh,visible_categories = sa_visible_categories_2005())
   
   if (isDebug){
     print(paste("columns of hh:",toString(colnames(hh))));
@@ -165,13 +165,13 @@ merge_hh_ohs_income_data_2005<-function(hh,ohs,income){
 }
 
 # merge data from hh,ohs files into one common big frame
-merge_hh_ohs_data_1995<-function(hh,ohs){
+merge_sa_hh_ohs_data_1995<-function(hh,ohs){
   
   #infer should come from processing of hh,ohs,income..etc. (should not be here)
   hh$n_members = infer_n_members_1995(hh=hh);
   
   # compute visible consumption
-  hh<-sum_visible_categories(hh=hh,visible_categories=visible_categories_1995())
+  hh<-sum_visible_categories(hh=hh,visible_categories=sa_visible_categories_1995())
   
   rejection_threshold<-0.01
   # persno doesn't work for some 860 households
@@ -211,7 +211,7 @@ merge_hh_ohs_data_1995<-function(hh,ohs){
   }
 }
 
-run_regression_multiple_years<-function(years){
+run_sa_regression_multiple_years<-function(years){
   years <-c (2005,2010)
   
   if (!is.vector(years) || !is.numeric(years)){
@@ -441,7 +441,7 @@ descriptive_statistics<-function(ds){
 
 
 #TODO: wrap up into an object
-load_diary_fields_mapping<-function(year){
+load_sa_diary_fields_mapping<-function(year){
   
   if( year == 1995 ){
     return (hh_mapping_1995());
@@ -456,32 +456,32 @@ load_diary_fields_mapping<-function(year){
   stop(paste('No entry found for',year));
   
 }
-load_ohs_mapping<-function(year){
+load_sa_ohs_mapping<-function(year){
   
-  if( year == 1995 ){
-    return (ohs_mapping_1995());
+  if( year == 1995 ){sa_ohs_mapping_2005
+    return (sa_ohs_mapping_1995());
   }
   if (year == 2010){
-    return(ohs_mapping_2010());
+    return(sa_ohs_mapping_2010());
   }
   if (year ==2005){
-    return(ohs_mapping_2005());
+    return(sa_ohs_mapping_2005());
   }
   stop(paste('No entry found for',year));
   
 }
 
-load_income_mapping<-function(year){
+load_sa_income_mapping<-function(year){
   
   if( year == 1995 ){
     stop("No income file for 1995")
   }
   if (year == 2010){
-    return(income_mapping_2010());
+    return(sa_income_mapping_2010());
   }
   
   if (year == 2005){
-    return(income_mapping_2005());
+    return(sa_income_mapping_2005());
   }
   stop(paste('No entry found for',year));
   
@@ -490,21 +490,21 @@ load_income_mapping<-function(year){
 # Info Columns are names in a commonly-understood nomenclature
 # all merging/aggregation rules are specified in terms of these
 # translated names
-get_diary_info_columns<-function(year){
+get_sa_diary_info_columns<-function(year){
   if (year == 1995){
-    return(diary_info_columns_1995());
+    return(diary_sa_info_columns_1995());
   }
   if (year == 2010){
-    return(diary_info_columns_2010())
+    return(diary_sa_info_columns_2010())
   }
   if (year == 2005){
     
-    return(diary_info_columns_2005())
+    return(diary_sa_info_columns_2005())
   }
   stop(paste("Could not find diary info columns for year:",year))
 }
 
-get_ohs_info_columns<-function(year){
+get_sa_ohs_info_columns<-function(year){
   if (year == 1995){
     return(ohs_info_columns_1995());
   }
@@ -518,16 +518,16 @@ get_ohs_info_columns<-function(year){
   stop(paste("Could not find ohs info columns for year:",year))
 }
 
-get_income_info_columns<-function(year){
+get_sa_income_info_columns<-function(year){
   if (year == 1995){
     return(income_info_columns_1995());
   }
   if (year == 2010){
-    return(income_info_columns_2010())
+    return(sa_income_info_columns_2010())
   }
   
   if (year == 2005){
-    return(income_info_columns_2005())
+    return(sa_income_info_columns_2005())
   }
   stop(paste("Could not find income info columns for year:",year))
 }
@@ -575,9 +575,9 @@ combined_data_set<-function(year){
   
   ############ PHASE 0 ########################
   
-  hhdat <- load_diary_file(year)
-  ohsdat <-load_ohs_file(year)
-  incomedat <-load_income_file(year)
+  hhdat <- load_sa_diary_file(year)
+  ohsdat <-load_sa_ohs_file(year)
+  incomedat <-load_sa_income_file(year)
   
   if (is.null(hhdat)){
     stop("Could not load diary hhdata")
@@ -592,21 +592,21 @@ combined_data_set<-function(year){
   # translated frame makes the data available in a universal dictionary (age, gender etc.)
   
   hh = get_translated_frame(dat=hhdat,
-                            names=get_diary_info_columns(year),
-                            m=load_diary_fields_mapping(year))
+                            names=get_sa_diary_info_columns(year),
+                            m=load_sa_diary_fields_mapping(year))
   # optional data files
   if (!is.null(ohsdat)){
     ohs = get_translated_frame(dat=ohsdat,
-                               names=get_ohs_info_columns(year),
-                               m=load_ohs_mapping(year))
+                               names=get_sa_ohs_info_columns(year),
+                               m=load_sa_ohs_mapping(year))
     
     print("Translated ohs data")
   }
   
   if (!is.null(incomedat)){
     income = get_translated_frame(dat=incomedat,
-                                  names=get_income_info_columns(year),
-                                  m=load_income_mapping(year))
+                                  names=get_sa_income_info_columns(year),
+                                  m=load_sa_income_mapping(year))
     print("Translated income data")
   }
   
@@ -614,16 +614,16 @@ combined_data_set<-function(year){
   ############ PHASE 2 - Aggregation and Merge ########################
   # merge criteria is defined for every dependent variable
   
-  dstruct<-merge_hh_ohs_income_data(hh=hh,ohs=ohs,income=income,year=year);
+  dstruct<-merge_sa_hh_ohs_income_data(hh=hh,ohs=ohs,income=income,year=year);
   return(dstruct);
 }
 
 # Usage: get_translated_frame(dat,c("hhid","age_member2","age_member3","total_income_of_household_head","age_household_head","race_household_head"))
 
 # returns NULL when the filenames are ''
-load_diary_file<-function (year){
+load_sa_diary_file<-function (year){
   
-  s = load_data_file_list();
+  s = load_sa_data_file_list();
   ds= s[s$year==year,]
   
   if( length(ds$year)==0 ){
@@ -649,8 +649,8 @@ load_diary_file<-function (year){
   stop("No valid entry found");
 }
 
-load_ohs_file<-function (year){
-  s = load_data_file_list();
+load_sa_ohs_file<-function (year){
+  s = load_sa_data_file_list();
   ds= s[s$year==year,];
   print(length(ds$year));
   
@@ -678,8 +678,8 @@ load_ohs_file<-function (year){
 }
 
 
-load_income_file<-function (year){
-  s = load_data_file_list();
+load_sa_income_file<-function (year){
+  s = load_sa_data_file_list();
   ds= s[s$year==year,];
   print(length(ds$year));
   
