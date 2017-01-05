@@ -174,7 +174,7 @@ read_ohs<-function(ohsfilename){
   return(dat)
 }
 
-merge_ohs <- function(ohs,hh){
+merge_ohs <- function(ohs,hh){ 
   print(paste("merging",ohs,hh,sep=";"))
   return(1)
 }
@@ -216,13 +216,41 @@ test_function_tree<-function(){
   hhOutput<- do.call(elementHh@evaluate,elementHh@params) # this call can be made from inside the tree evaluation method
   
   mergeInput= list()
-  mergeInput[["hh"]] = hhOutput;
-  mergeInput[["ohs"]] = ohsOutput;
+  #mergeInput[["hh"]] = hhOutput; # should point to elementHh
+  #mergeInput[["ohs"]] = ohsOutput; # should point to elementOhs
   
-  print(paste(toString(mergeInput)))
+  mergeInput[["hh"]] = elementHh
+  mergeInput[["ohs"]] = elementOhs
+  
+  print(paste(toString(mergeInput)));
+  
   elementMerge <-new("Caller",name="merge",params=mergeInput,evaluate=merge_ohs) # elementOhs has output stored (it doesn't need to remember the output )
+  return(elementMerge)
+  run_caller(elementMerge)
   #TODO: get inside every function of dynamic caller (as well as dynamic caller to provide output to the code) 
   
-  return(do.call(elementMerge@evaluate,elementMerge@params))
+  #return(do.call(elementMerge@evaluate,elementMerge@params))
 }
 
+run_caller<-function(elem){
+  print("run_caller")
+  outputList = list()
+  for (paramName in names(elem@params)){
+    # if param is of type Caller then make do.callif
+    # otherwise, just call the function
+    paramValue = elem@params[[paramName]]
+    if (isS4(paramValue) && class(paramValue)[[1]]=="Caller"){
+      #TODO: run_caller is the recursive call
+      result<-do.call(paramValue@evaluate,paramValue@params)
+       if (class(result)=="list"){
+         stop("list output not supported")
+       }
+       outputList[[paramValue@name]]=result
+    } else {
+      outputList[[paramName]]=paramValue
+    }
+    
+  } # end for
+  return(do.call(elem@evaluate,outputList))
+
+}
