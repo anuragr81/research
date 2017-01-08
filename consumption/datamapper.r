@@ -153,104 +153,26 @@ test_tree<-function(){
   return(root)
 }
 
-load_ohs_file<-function(f){
-  print(f)
-  return(f)
+if (isClass("Major")){
+  print ("Major alread defined")
+} else {
+setClass("Major", representation(read_ohs = "function", read_hh="function", merge="function"))
 }
 
-merge_all<-function(ohs,hh,income){
-  print(paste("ohs=",ohs,"hh=",hh,"income=",income))
-  return(0)
-}
-
-init_classes <-function(){
-  setClass("Caller", representation(name = "character", params = "list", evaluate="function"))
-}
-# TODO: remove or move
-
-read_ohs<-function(ohsfilename){
-  print(paste("Reading f=",ohsfilename))
-  dat<-data.frame(x=c(1,2),y=c(2,3))
-  return(dat)
-}
-
-merge_ohs <- function(ohs,hh){ 
-  print(paste("merging",ohs,hh,sep=";"))
-  return(1)
-}
-
-read_hh <- function(hhfilename){
-  print(paste("reading",hhfilename))
-  dat<-data.frame(x=c(1,2),y=c(22,32))
-  return(dat)
-}
-
-test_function_tree<-function(){
-  init_classes()
+sa<-function(){
   
-  l = list()
-  # merge is the root of the tree 
-  # it's children are params that are themselves caller objects. merge takes data frames provided by ohs, hh and income extractor;
-  # the node for merge must have ohs, hh and income extractor functions as children. It would call these functions recursively
-  # i.e. ohs, hh and income data-frames (or whatever else format they returned e.g. numeric arrays or character strings) would be
-  # returned by extractor children. The output there must also be a list.
-  # Here is the final format: 
-  # 1. merge list of functors { ohs_extractor, hh_extractor, income_extractor}
-  # 2. call the functions 
-  # With above scheme, the functors should have input variables stored in them - this requires setting up the ohs_extractor.
-  # ohs_extractor may take a set of input filenames as input. Thus it's own format would be the following:
-  # ohs_extractor (function=code,params=list())
+  sub1<-function(){
+    return("sub1-sir!!")
+  }
   
-  # It appears that instead of an explicit tree - what we need is just the ability to maintain functions as objects - maintaining the 
-  # output of a function pluggable to the input params list of another. This would maintain an implicit tree whose leaves would be those
-  # with static inputs - while all other nodes would know which functions to call
-  l[["ohsfilename"]]="ohsfile.txt"
+  sub2<-function(){
+    print(sub1())
+    return("sub2-sir!!")
+  }
   
-  elementOhs <-new("Caller",name="ohs",params=l,evaluate=read_ohs) # elementOhs has output stored (it doesn't need to remember the output )
-  #every node would evaluate as - elementOhs@evaluate(elementOhs@params)
-  ohsOutput <- do.call(elementOhs@evaluate,elementOhs@params)
+  sub3<-function(){
+    return("sub3-sir!!")
+  }
   
-  j=list()
-  j[["hhfilename"]]="hhfile.txt"
-  elementHh <-new("Caller",name="hh",params=j,evaluate=read_hh) # elementOhs has output stored (it doesn't need to remember the output )
-  hhOutput<- do.call(elementHh@evaluate,elementHh@params) # this call can be made from inside the tree evaluation method
-  
-  mergeInput= list()
-  #mergeInput[["hh"]] = hhOutput; # should point to elementHh
-  #mergeInput[["ohs"]] = ohsOutput; # should point to elementOhs
-  
-  mergeInput[["hh"]] = elementHh
-  mergeInput[["ohs"]] = elementOhs
-  
-  print(paste(toString(mergeInput)));
-  
-  elementMerge <-new("Caller",name="merge",params=mergeInput,evaluate=merge_ohs) # elementOhs has output stored (it doesn't need to remember the output )
-  return(elementMerge)
-  run_caller(elementMerge)
-  #TODO: get inside every function of dynamic caller (as well as dynamic caller to provide output to the code) 
-  
-  #return(do.call(elementMerge@evaluate,elementMerge@params))
-}
-
-run_caller<-function(elem){
-  print("run_caller")
-  outputList = list()
-  for (paramName in names(elem@params)){
-    # if param is of type Caller then make do.callif
-    # otherwise, just call the function
-    paramValue = elem@params[[paramName]]
-    if (isS4(paramValue) && class(paramValue)[[1]]=="Caller"){
-      #TODO: run_caller is the recursive call
-      result<-do.call(paramValue@evaluate,paramValue@params)
-       if (class(result)=="list"){
-         stop("list output not supported")
-       }
-       outputList[[paramValue@name]]=result
-    } else {
-      outputList[[paramName]]=paramValue
-    }
-    
-  } # end for
-  return(do.call(elem@evaluate,outputList))
-
+  return(new("Major",read_ohs = sub1 , read_hh = sub2, merge = sub3 ))
 }
