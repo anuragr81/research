@@ -131,9 +131,6 @@ class LogReader:
             #dfDict['value'].append(json.dumps(value))
             dfDict['value'].append(value)
         rawDf=pd.DataFrame(dfDict)
-
-        #TODO: aggregate the rawDf based on storeKey - using aggregate method or by creating a new df by
-        #      iterating over the group
         return rawDf.groupby(storeKey.types.keys()).aggregate(merge_array)
         #return rawDf
         # plot can be shown with the following:
