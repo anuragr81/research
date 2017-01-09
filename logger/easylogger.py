@@ -69,11 +69,23 @@ class LogWriter:
                 print "writing entry:\"",entry,"\""
                 fh.write(entry+"\n")
 
+
+def merge_array(arr):
+    if isinstance(arr,list) or isinstance(arr,tuple):
+        return tuple(reduce(merge_data, arr))
+    else:
+        return tuple(arr)
+
+def test_merge_array():
+    print merge_array([{3: 4}, {4: 4}, {4: 5}])
+
+
 class LogReader:
     def __init__(self,fname,formatter=None):
         with open(fname) as fh:
             self.lines = [line.strip() for line in fh.readlines()]
         self.formatter = formatter if formatter is not None else DefaultFormatter()
+
 
     def load(self,storeKey):
         if not isinstance(storeKey,StoreKey):
@@ -104,15 +116,67 @@ class LogReader:
 
         #TODO: aggregate the rawDf based on storeKey - using aggregate method or by creating a new df by
         #      iterating over the group
-        #rawDf.groupby(storeKey)
+        return rawDf.groupby(storeKey.types.keys()).aggregate(merge_array)
+        #return rawDf
         # plot can be shown with the following:
         #import matplotlib.pyplot as plt
         #plt.plot(pd.DataFrame({'one': [1, 2, 3, 4]}))
         #plt.show()
 
-        return rawDf
+
+
+def merge_data(a,b):
+    if isinstance(a,list):
+        if isinstance(b,list) :
+            return a+b
+        else:
+            return a+ [b]
+    elif isinstance(a,dict):
+        if isinstance(b,list):
+            return b + [a]
+        elif isinstance(b,dict):
+            aKeys = set(a.keys())
+            bKeys= set(b.keys())
+            resDict = dict((k,merge_data(a[k],b[k])) for k in aKeys.intersection(bKeys))
+            #print "Created - ", resDict
+            #print "Updating with - ", dict((k,a[k]) for k in aKeys.difference(bKeys))
+            resDict.update(dict((k,a[k]) for k in aKeys.difference(bKeys)))
+            #print "Updating with - ", dict((k,b[k]) for k in bKeys.difference(aKeys))
+            resDict.update(dict((k,b[k]) for k in bKeys.difference(aKeys)))
+            return resDict
+        else:
+            raise ValueError("Cannot merge atomic value with a dictionary")
+    else:
+        if isinstance(b,list):
+            return [a]+b
+        elif isinstance(b,dict):
+            raise ValueError("Cannot merge atomic value with a dictionary")
+        else:
+            return [a,b]
+
+def test_merge_data():
+    print (merge_data([1], 2) == [1, 2])
+    print (merge_data([1], [2]) == [1, 2])
+    print (merge_data(1, [2]) == [1, 2])
+    print (merge_data(1, 2) == [1, 2])
+    try:
+        print (merge_data({1: 2}, 2))
+    except ValueError as e:
+        print e
+    try:
+        print (merge_data({1: 2}, 2))
+    except ValueError as e:
+        print e
+    print (merge_data({1: 2}, {1: 2}))
+    print (merge_data({1: 3}, {1: [3, 4], 2: 3}))
+    print (merge_data({1: [3, 4], 2: 3}, {1: 3}))
+    print (merge_data({1: 3, 3: 5}, {1: [3, 4], 2: 3}))
+    print (merge_data({1: 3, 3: 5}, [1]))
+    print (merge_data([1],{1: 3, 3: 5}))
+
 
 if __name__=="__main__":
+    #sys.exit(0)
     k=StoreKey(date=datetime.date(2015,1,5),tag="as")
 
     sampleStruct = {'a':[1,2,3],'b':3,
@@ -130,3 +194,5 @@ if __name__=="__main__":
         l = LogReader(fname)
         df = l.load(StoreKey(tag="CAMP",date=datetime.date(2015,3,4)))
         print df
+
+
