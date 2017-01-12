@@ -397,8 +397,8 @@ load_ohs_file <-function(dataset,year){
       cbdat<-read.dta('./lsms/TZNPS2COMDTA/COMSEC_CB.dta',convert.factors = FALSE)
       
       cb <- get_translated_frame(dat=cbdat,
-                                 names=ohs_seccb_columns_lsms_2010(),
-                                 m=ohs_seccb_mapping_lsms_2010())
+                                 names=ln()@ohs_seccb_columns_lsms_2010(),
+                                 m=ln()@ohs_seccb_mapping_lsms_2010())
       #* chose facilitycode l and collected accessibility 1 and 2(<10) (in the centre or less than 10 km away)
       l<-(cb[is.element(tolower(as.character(cb$facilitycode)),c("l")),])
       #* extract those with 1
@@ -417,8 +417,8 @@ load_ohs_file <-function(dataset,year){
       adat<-read_tnz('./lsms/TZNPS2HH1DTA/HH_SEC_A.dta',FALSE)
       
       a <- get_translated_frame(dat=adat,
-                                names=ohs_seca_columns_lsms_2010(),
-                                m=ohs_seca_mapping_lsms_2010())
+                                names=ln()@ohs_seca_columns_lsms_2010(),
+                                m=ln()@ohs_seca_mapping_lsms_2010())
       a<-merge(a,u)
       a<-merge(a,l)
       a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))

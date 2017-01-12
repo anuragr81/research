@@ -5,9 +5,29 @@ if (isClass("FrameUtils")){
 }
 
 ## all exported functions are declared here
-setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function") )
+setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function",filter_categories_data="function") )
 
 fu<-function(){
+  
+  filter_categories_data<-function(hh,selected_category,item_field,set_depvar){
+    
+    vis<-hh[is.element(hh[,item_field],selected_category),]
+    if (dim(vis)[1] <=0){
+      if (set_depvar){
+        stop(paste("No entries found in category: ",toString(selected_category)))
+      }
+    }
+    vis<-ddply(vis,.(hhid),summarize,visible_consumption=sum(cost))
+    no_vis_hhid<-setdiff(unique(hh$hhid),unique(vis$hhid))
+    
+    # set all values to zero for the hhids where the data isn't found in the
+    # selected_category
+    
+    no_vis<-data.frame(hhid=no_vis_hhid,visible_consumption=rep(0,length(no_vis_hhid)))
+    vis <- rbind(vis,no_vis)
+    return(vis)
+  }
+  
   
   count_higher_than<-function(a,m1,m2,m3,m4,m5,m6,m7,m8,m9,m10) 
   {
@@ -94,6 +114,10 @@ fu<-function(){
     colnames(res)<-mapped$name
     return(res)
   }
-  return(new("FrameUtils",si_factor= si_factor, get_translated_frame = get_translated_frame ,count_higher_than=count_higher_than) );
+  
+  return(new("FrameUtils",si_factor= si_factor, 
+             get_translated_frame = get_translated_frame ,
+             count_higher_than=count_higher_than,
+             filter_categories_data=filter_categories_data) );
   
 }
