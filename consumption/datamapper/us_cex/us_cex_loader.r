@@ -12,7 +12,7 @@ setClass("USCEXLoader", representation(load_cex_diary="function",load_cex_ohs="f
 
 # the parameter passes any external classes that this class may need 
 
-uscex<-function(fu) {
+uscex<-function(fu,ufl) {
   load_cex_diary<-function(year,dirprefix){
     # consider gifts in the expd file
     if (year == 2004){
@@ -177,10 +177,10 @@ uscex<-function(fu) {
   }
   
   
-  combined_data_set<-function(year,dirprefix,ucc_mapping_file,selected_category,isDebug, set_depvar){
+  combined_data_set<-function(year,dirprefix,selected_category,isDebug, set_depvar){
     
     
-    ucc_mapping=read.csv(ucc_mapping_file)
+    ucc_mapping=ufl()@get_ucc_file_mapping(dirprefix)
     
     ############ PHASE 0 ########################
     if (missing(set_depvar)){
@@ -272,7 +272,6 @@ uscex<-function(fu) {
     stop(paste("Method to merge data for year:",year," not found"))
   }
   
-  
   ### TODO: move into normalizer
   
   ohs_info_columns_us_cex_2004<-function(){
@@ -342,6 +341,18 @@ uscex<-function(fu) {
   }
   
   
+  
+  visible_categories<-function(year){
+    
+    if (year == 2004 || year == 2009|| year == 2014){
+      return(visible_categories_us_cex_2004())
+    }
+    stop(paste("visible categories list for year:",year," not found"))
+    
+    
+  }
+  
+  
   merge_hh_ohs_income_data_us_cex_2004<-function(ucc_mapping,hh,ohs,selected_category,set_depvar){
     
     # hh's ucc should be merged first
@@ -350,7 +361,7 @@ uscex<-function(fu) {
     print (paste("Merging with ucc_mapping (columns: ",toString(colnames(ucc_mapping)),")"))
     hh<-merge(hh,ucc_mapping)
     print ("Obtaining visible categories")
-    vis<-filter_categories_data(hh=hh,selected_category = selected_category,item_field = "uccname",set_depvar)
+    vis<-fu()@filter_categories_data(hh=hh,selected_category = selected_category,item_field = "uccname",set_depvar)
     print ("====Food categories to be modified =====")
     #food<-get_food_categories_cex(hh=hh,food_categories = food_categories_cex());
     print ("Running ddply for total expenditures")
