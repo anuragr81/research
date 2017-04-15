@@ -190,14 +190,14 @@ lsms_loader<-function(fu,ln) {
     #return(c("202"))# electricity
     #return(food_categories_lsms_2010());
     # return(c("313","314"))
-    return(c("313"))
+    #return(c("313"))
     # 219 - Motor vehicle service, repair, or parts
     # 214 - Other personal products (shampoo, razor blades, cosmetics, hair products, etc.)
     # 301 - Carpets, rugs
     # 313 - Bride price
     # 314 - Funeral costs
     # 224 - repairs to personal items
-    
+    return (-1)
   }
   
   
