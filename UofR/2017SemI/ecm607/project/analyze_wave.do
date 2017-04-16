@@ -4,7 +4,8 @@ cd C:\Users\anuragr\Documents\UofR\2017SemI\ecm607\project
 clear
 use US_data6W
 drop if wave !=3
-* drop if big5o are invalid
+* drop if big5o etc. are missing (1116 entries out of 15533)
+drop if big5o_dv<0 | big5c_dv<0| big5e_dv<0| big5a_dv<0| big5n_dv<0
 
 * generation of dummies etc. for analysis
 decode jbterm1, generate (job_status)
@@ -12,70 +13,8 @@ decode jbsoc00_cc, generate (job_type)
 decode racel_dv, generate (racel_dvd)
 
 gen ln_paygu_dv = log(paygu_dv)
-
-
-// regressions
-/*
-regress paygu_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.hiqual_dv if hiqual_dv >-1 & job_status != "a permanent job"
-
-regress paygu_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.hiqual_dv if hiqual_dv >-1 & age_cr>20 & age_cr<35 & job_status != "a permanent job"
-
-regress paygu_dv i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.jbsoc00_cc i.hiqual_dv if hiqual_dv >-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0
-
-
-regress ln_paygu_dv i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.jbsoc00_cc i.hiqual_dv if hiqual_dv >-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0
-
-regress ln_paygu_dv i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr b711.jbsoc00_cc i.hiqual_dv i.jbnssec_dv if hiqual_dv >-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0 & jbnssec_dv>0
-
-regress ln_paygu_dv i.livesp_dv nchild_dv maju paju i.pasoc10_cc scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv i.sex_cr i.jbsoc00_cc i.hiqual_dv i.jbnssec_dv if hiqual_dv >-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0 & jbnssec_dv>0
-// production doesn't have maju, paju as significant
-// mixed-race people seemingly are rewarded in production sector jobs - but that factor becomes less significant when father's occupation is added (indicating that people of mixed race usually have fathers in middle paying jobs)
-*/
-// production
-
-generate byte chosen_job_type=1 if( job_type == "Production managers"||  job_type =="Metal forming, welding and related trades"||  job_type =="Metal machining, fitting and instrument making trades"||  job_type =="Vehicle trades"||  job_type =="Electrical trades"||  job_type =="Textiles and garments trades"||  job_type =="Printing trades"||  job_type =="Food preparation trades"||  job_type =="Skilled trades nec"||  job_type =="Process operatives"||  job_type =="Plant and machine operatives"||  job_type =="Assemblers and routine operatives"||  job_type =="Elementary process plant occupations"||  job_type =="Elementary goods storage occupations" )  
-replace chosen_job_type=0 if chosen_job_type!=1
-quietly regress ln_paygu_dv i.livesp_dv scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv i.sex_cr i.hiqual_dv i.jbnssec_dv if hiqual_dv >-1 &  racel_dv>-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0 & jbnssec_dv>0 & chosen_job_type==1, robust
-
-
-drop chosen_job_type
-generate byte chosen_job_type=1 if( job_type == "Health and social services managers"||  job_type =="Health professionals"||  job_type =="Health associate professionals"||  job_type =="Therapists"||  job_type =="Social welfare associate professionals"||  job_type =="Healthcare and related personal services"||  job_type =="Childcare and related personal services"||  job_type =="Animal care services" )  
-replace chosen_job_type=0 if chosen_job_type!=1
-// quietly regress ln_paygu_dv i.livesp_dv scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv i.sex_cr i.hiqual_dv i.jbnssec_dv if hiqual_dv >-1 &  racel_dv>-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0 & jbnssec_dv>0 & chosen_job_type==1, robust
-// we need multinomial/ordered for jbnssec_dv against (personality, age, educ, scend)
-
-drop chosen_job_type
-generate byte chosen_job_type=1 if( job_type == "Artistic and literary occupations"||  job_type =="Design associate professionals" )
-replace chosen_job_type=0 if chosen_job_type!=1
-
-regress ln_paygu_dv i.livesp_dv scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv i.sex_cr i.hiqual_dv i.jbnssec_dv if hiqual_dv >-1 &  racel_dv>-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0 & jbnssec_dv>0 & chosen_job_type==1, robust
-
-drop chosen_job_type
-generate byte chosen_job_type=1 if( job_type == "Public service professionals"||  job_type =="Librarians and related professionals"||  job_type =="Public service and other associate professionals"||  job_type =="Administrative occupations: government and related organisat" ) 
-replace chosen_job_type=0 if chosen_job_type!=1
-regress ln_paygu_dv i.livesp_dv scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv i.sex_cr i.hiqual_dv i.jbnssec_dv if hiqual_dv >-1 &  racel_dv>-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0 & jbnssec_dv>0 & chosen_job_type==1, robust
-
-drop chosen_job_type
-generate byte chosen_job_type=1 if( job_type == "Financial institution and office managers"||  job_type =="Administrative occupations: finance" ) 
-replace chosen_job_type=0 if chosen_job_type!=1
-regress ln_paygu_dv i.livesp_dv scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv i.sex_cr i.hiqual_dv i.jbnssec_dv if hiqual_dv >-1 &  racel_dv>-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0 & jbnssec_dv>0 & chosen_job_type==1, robust
-
-drop chosen_job_type
-generate byte chosen_job_type=1 if( job_type == "Engineering professionals"||  job_type =="Information and communication technology professionals" ) 
-replace chosen_job_type=0 if chosen_job_type!=1
-regress ln_paygu_dv i.livesp_dv scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv i.sex_cr i.hiqual_dv i.jbnssec_dv if hiqual_dv >-1 &  racel_dv>-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0 & jbnssec_dv>0 & chosen_job_type==1, robust
-
-drop chosen_job_type
-generate byte chosen_job_type=1 if( job_type == "Science professionals"||  job_type =="Research professionals"||  job_type =="Science and engineering technicians" ) 
-replace chosen_job_type=0 if chosen_job_type!=1
-regress ln_paygu_dv i.livesp_dv scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv i.sex_cr i.hiqual_dv i.jbnssec_dv if hiqual_dv >-1 &  racel_dv>-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0 & jbnssec_dv>0 & chosen_job_type==1, robust
-
-drop chosen_job_type
-generate byte chosen_job_type=1 if( job_type == "Sales and related associate professionals"||  job_type =="Sales assistants and retail cashiers"||  job_type =="Sales related occupations"||  job_type =="Elementary sales occupations" )
-replace chosen_job_type=0 if chosen_job_type!=1
-regress ln_paygu_dv i.livesp_dv scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv i.sex_cr i.hiqual_dv i.jbnssec_dv if hiqual_dv >-1 &  racel_dv>-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0 & jbnssec_dv>0 & chosen_job_type==1, robust
-
-
+gen exper = age_cr - scend
+gen exper_sq = exper * exper
 
 generate chosen_job_type = 0
 replace chosen_job_type= 1  if( job_type == "Administrative occupations: finance"||  job_type =="Administrative occupations: records"||  job_type =="Administrative occupations: communications"||  job_type =="Administrative occupations: general"||  job_type =="Secretarial and related occupations"||  job_type =="Elementary administration occupations" )
@@ -97,17 +36,6 @@ replace chosen_job_type= 16  if( job_type == "Transport associate professionals"
 
 drop if chosen_job_type == 0
 drop if hiqual_dv <=-1 |  racel_dv<=-1 | job_status != "a permanent job" | gor_dv <=0 | jbsoc00_cc<=0 
-
-* the mprobit on personalities alone
-* mprobit chosen_job_type big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv if hiqual_dv >-1 &  racel_dv>-1 & job_status == "a permanent job" & gor_dv >0 & jbsoc00_cc>0 & jbnssec_dv>0
-
-* mprobit chosen_job_type livesp_dv scend gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv racel_dv sex_cr hiqual_dv
-* margins, dydx(hiqual_dv)
-
-* mprobit with factor variables does not converge
-** mprobit chosen_job_type scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv i.racel_dv i.sex_cr i.hiqual_dv
-mprobit chosen_job_type scend gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv race_rank sex_cr educ_level
-
 
 generate gor_rank = 0
 replace gor_rank= 1 if gor_dv== 10
@@ -153,3 +81,37 @@ replace race_rank=16 if racel_dvd=="mixed: white and black african"
 replace race_rank=17 if racel_dvd=="other ethnic group: arab"
 replace race_rank=18 if racel_dvd=="black/african/caribbean/black british: any other black backg"
 replace race_rank=19 if racel_dvd=="white: gypsy or irish traveller"
+
+
+// regressions
+
+* the mprobit on personalities alone
+
+* mprobit with factor variables does not converge
+** mprobit chosen_job_type scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv i.racel_dv i.sex_cr i.hiqual_dv
+mprobit chosen_job_type scend gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv race_rank sex_cr educ_level
+* eststo: quietly margins, dydx(educ_level)
+
+* esttab using margins_educ_level.tex, p numbers star nogaps compress title(Margins for Education \label{margins_educ})
+
+
+* Part II
+* considering only 1,4,5,6,7,8,11,12,13,14,15,16
+eststo clear
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==1,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==4,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==5,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==6,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==7,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==8,robust
+esttab using results_plainreg1.tex, r2 nomtitles no p numbers star nogaps compress title(Wage Regression\label{tabplainreg1})
+
+eststo clear
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==11,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==12,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==13,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==14,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==15,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_type ==16,robust
+
+esttab using results_plainreg2.tex, r2 nomtitles no p numbers star nogaps compress title(Wage Regression\label{tabplainreg2})

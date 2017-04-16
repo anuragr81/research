@@ -61,6 +61,8 @@
 \topmargin 2cm
 \rightmargin 2cm
 \bottommargin 2cm
+\headsep 2cm
+\columnsep 1cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -84,16 +86,25 @@ Effects of personality on income in the Understanding Society Survey
 
 \begin_layout Section
 Introduction
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Introduction"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-There is ample evidence to show that personalities - in addition to education
- and economic stratum - has a strong effect on .
- The current project is more interested in finding out what sort of traits
- might employers be interested in while hiring their workforce.
- While this exercise doesn't follow the employment history databases as
- are often maintained at a company, an attempt is made to see how different
- industrial sectors both shape and select personalities.
+There is ample evidence in literature to show personalities - in addition
+ to education and economic strata - have a strong effect on career choices
+ and growth.
+ The current project is interested in finding the OCEAN traits that employers
+ might lean towards while hiring their workforce.
+ While the current exercise doesn't use the employment history databases
+ often maintained at a company, it uses the Understanding Society database
+ to obtain a general set of economic data to see how different industrial
+ sectors both shape and select personalities.
  Personalities are not intended to be innate static types in this approach.
  The reported significance of attitude and motivational attributes is attempted
  to be explored in this exercise
@@ -112,25 +123,27 @@ The goal of the the exercise is to check if
 
 \begin_layout Standard
 1.
- employment is selected based on personality.
+ personality is a strong factor in determining the selection of sectors
+ of industry.
  
 \end_layout
 
 \begin_layout Standard
 2.
- if pay within the job sectors favor a certain type of personality
+ if pay grade within the job sectors favor or cultivate certain personality
+ characteristics
 \end_layout
 
 \begin_layout Standard
-The general theory that is aimed to be accepted or rejected by the data
- is whether any sort of barriers based on personality exist in the employment
- rather than the more easily justifiable characteristics such as education
- and age.
- We expect that the personality based discrmination is more subtle and less
- measurable (publicly known).
+The theory that is intended to be accepted or rejected by the data is whether
+ any sort of barriers based on personality exist in the employment rather
+ than the more easily justifiable and directly observable characteristics
+ such as education, age and experience.
+ We expect that the personality based discrimination is more subtle and
+ less measurable (publicly known).
  Whether the less observability of personality and standards in employment
  guidelines within companies is a significant factor or not is left as a
- question for further anlaysis from employment histories of companies.
+ question for further analysis from employment histories of companies.
 \end_layout
 
 \begin_layout Section
@@ -138,43 +151,48 @@ Data and Methodology
 \end_layout
 
 \begin_layout Standard
-Understanding society.
-\end_layout
-
-\begin_layout Standard
-Job data was reaggregated - certain categories have been ommitted.
- Legal occuapations have very meagre representation.
-\end_layout
-
-\begin_layout Standard
-Aggregation presents problems because engineering professions consist primarily
- of low end jobs.
- In other words, managers in engineering firms are considered managers -
- making it difficult to use jbsoc00_cc as the basis for aggregation.
-\end_layout
-
-\begin_layout Standard
-For the first part, multinomial method showed the significance of personalities.
-\end_layout
-
-\begin_layout Standard
-The variables we intend to study are subjective-wellbeing, job-satisfaction,
- the OCEAN characteristics of the individual, current job, sector, social
- class and the income of the individual.
- The usual proxy of permanent income (total expenditure) is not present
- in the data - hence other indicators of income - e.g.
- house ownership are included in the analysis (along with the data on salary)
- as well to smoothen the effect of income volatility because of unemployment
- etc.
-\end_layout
-
-\begin_layout Subsection
-Employment type on the left side
-\end_layout
-
-\begin_layout Standard
-Perosnality type Myer-Briggs and OCEAN.
+Understanding society data has five personality traits widely used by psychologi
+sts.
+ The values range from 0 to 5 and are already normalized by the survey.
+ The job-related data was reaggregated.
+ Certain categories have been ommitted from the discussion due to limited
+ number number.
+ (for example, legal occupations have a very meagre representation in the
+ data).
  
+\end_layout
+
+\begin_layout Standard
+The field jbsoc00_cc in data marks the employment category.
+ However, these classifications are based on daily activities rather than
+ the industrial sector and thus managers at engineering firms are not classified
+ under the same category as those in low end jobs in the same firm.
+ This makes jbsoc00_cc inappropriate for understanding what sort of characterist
+ics distinguish performing candidates within a firm or are used by the employees
+ in choosing (or get selected by) different sectors in the economy (see
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Introduction"
+
+\end_inset
+
+).
+ The categories of sector in table are chosen based on the type of firms.
+ A typical firm exercises an HR policy applicable throughout the companies
+ and might have its own criteria of selecting candidates.
+ It aggregation of jbsoc00_cc may seem arbitrary (a classification based
+ on firm data would be more appropriate) but jbsoc00_cc classes are well-defined
+ and leave very little chance for boundary cases.
+ Except for managers (where general business managers or consulting firms
+ may be utilized) this classification may fall apart - but since the identificat
+ion is based on the individual respinsibilities, this is less likely to
+ be a problem.
+ Other than that objection, it's not possible for jbsoc00_cc to be amongst
+ multiple sectors or multiple sectors ).
+ If we find that a type A firm (let's say in mining) differs significantly
+ from type B (firm) then we know that the type of personalities are different
+ in the sector.
 \end_layout
 
 \begin_layout Standard
@@ -189,23 +207,47 @@ What we're trying to claim is that personality has a definite role to play
  This is why the question 2 is raised.
 \end_layout
 
-\begin_layout Subsubsection
-A case for clustering
+\begin_layout Subsection
+Personality Types
 \end_layout
 
 \begin_layout Standard
-To homogenise the data, we look for clusters of control variables.
- The measurement error can be significant in variables like self-reported
- happiness or personality and it makes sense to look at clusters of OCEAN
- as well as other control parameters so as to smoothen the data.
- The OCEAN variables ranges from -9 to 7 and are sparsely populated on the
- negative side.
+The conventional literature on personality types used by career-services
+ for students entering the workforce is based loosely of Myer-Brigs Personality
+ type.
+ These are the 16 personality types that are easy to identify but are too
+ broad to infer discover any correlation with economic variables (which
+ are available in much finer granularity).
+ To homogenise the data and more importantly to view the distribution of
+ 5 variables (varied far more than the four binary parameters of Myers Briggs)
+ we look for clusters of control variables - to see what type of personalities
+ really exist.
+ The measurement error can be significant in variables like personality
+ and.
+ The OCEAN variables ranges from 0 to 7.
  The density varies for the different parameters as well.The clusters that
- we need to perform are for OCEAN - this is a rudimentay clustering on quantiles
- of data.
- For clustering one needs to think of distance/metric (possibly multi-dimensiona
-l) between personalities - a typically Euclidean distance on the quantile-adjust
-ed metric could serve the purpose of clustering.
+ we need to perform are for OCEAN - this is a rudimentary clustering on
+ quantiles of data.
+ For clustering one needs to think of distance/metric between personalities
+ - a typically Euclidean distance on the quantile-adjusted metric serves
+ the purpose in a kmeans clustering.
+ The goals is not to prefer a Myer-Briggs type of 
+\begin_inset Quotes eld
+\end_inset
+
+broad
+\begin_inset Quotes erd
+\end_inset
+
+ classification over OCEAN parameters that have much higher granularity
+ (and have more psychological).
+  There is a clear difference in how education and gender measured (all
+ with <10 categories) and how is already clustered enough and we might need
+ to just cluster age and OCEAN characteristics.
+ The study of marginal effect of OCEAN parameters therefore might need to
+ be categorized as well.
+ One can generate dummies as the closest cluster to understand which clusters
+ are dominant in jobs.
  
 \end_layout
 
@@ -280,19 +322,26 @@ Less neurotic people tend have high concentiousness.
 \end_layout
 
 \begin_layout Standard
-While above observations provide a view on personalities without association
- with any other variable, we must admit that these clusters themselves are
- formed in response to social institutions (employment, education or even
- race).
- While one may identify cluster dummies and achieve significance (an exercise
+The goal of the clustering is only to obtain some qualitative trends in
+ the data and map OCEAN with the a conventional Myer-Briggs framework.
+ While above observations provide a view on personalities without association
+ with any other variable, we should also observe that these clusters themselves
+ are formed in response to social institutions (employment, education or
+ even race).
+ One may identify cluster dummies and achieve significance (an exercise
  not included in the part of this writeup), the goal of the current exercise
- is not to associate clusters of personality with employment but to explain
- how clusters themselves are formed - whether race, education or employment
- plays a stronger role selection of employment.
+ is not to associate clusters of personality with employment (the way Myer-Brigg
+s based classifiers perform) but to explain how clusters themselves are
+ formed in the narrow context of wage differences and career selection -
+ by checking if personality is more or less significant than race, education
+ or employment plays a stronger role selection of employment.
+ While personality types is a more popular way of describing personlities,
+ the significance of the characteristics as well as their granularity of
+ interview makes a stronger case for OCEAN types.
 \end_layout
 
-\begin_layout Subsubsection
-Multinomial
+\begin_layout Subsection
+A multinomial model for Employment types
 \end_layout
 
 \begin_layout Standard
@@ -321,13 +370,6 @@ To run the mbprobit, a limitation that tempts us to impose strange constraints
  Female  0 and Male 1 is trivial.
  gor_dv (regions) are sorted based on their median income to see how if
  higher income areas have an effect on the selection of jobs.
- 
-\end_layout
-
-\begin_layout Standard
-The interpretation of results studies the effect of each of the personality
- type.
- 
 \end_layout
 
 \begin_layout Subsection
@@ -343,7 +385,7 @@ If we assume a simple model where the market assigns job
 \begin_inset Formula $i$
 \end_inset
 
- to the individual based on his readiness for the job (attitude - which
+ to the individual based on his readiness for the job - attitude (which
  is shaped by personality), education, experience, age, gender and social
  class 
 \begin_inset Formula $[J;I]=f(OCEAN,age,educ,gender,age-scen)$
@@ -351,15 +393,10 @@ If we assume a simple model where the market assigns job
 
  then we wish to assess the impact of OCEAN parameters, age and education
  on income and job-satisfaction.
- There is a clear difference in how education and gender measured (all with
- <10 categories) and how is already clustered enough and we might need to
- just cluster age and OCEAN characteristics.
- The study of marginal effect of OCEAN parameters therefore might need to
- be categorized as well.
- One can generate dummies as the closest cluster to understand which clusters
- are dominant in jobs.
- The theory that we need to test is whether popular traits tend to use self-sele
-ction.
+\end_layout
+
+\begin_layout Subsubsection
+Personality and Happiness
 \end_layout
 
 \begin_layout Standard
@@ -389,6 +426,7 @@ class
  might still be low- making us conclude that the lower class is happier).
  Regardless, the conclusion that lower classes are happier could still be
  valid (even though associations of class with happiness is wrong).
+ For wage growth, happiness or subjective well-being is largely immaterial.
 \end_layout
 
 \begin_layout Subsubsection
@@ -396,73 +434,1664 @@ Effect of personality on income within the same occupations
 \end_layout
 
 \begin_layout Standard
-This would be a regression of income on OCEAN characteristics, highest level
- of education.
+This is a regression of income on OCEAN characteristics, highest level of
+ education.
  Particular occupations can be considered separately.
  Hairdressers have a clear effect of age compared to scientists.
  Education has a clear effect on pay for scientists (not so much variation
- for hairdressers).
+ for sales and consumer).
+ Interesting race seems to have a stronger economic effect than personality
+ for the most part.
+ This could just race is so little populated.
  A simple regression does express significance of personality but we also
  need to see that income is already inducing personalities (self selection).
- Is there endogeneity in any of the control variables?
-\end_layout
-
-\begin_layout Subsubsection
-Effect of race (are people ghettoized)
 \end_layout
 
 \begin_layout Standard
-The significance of clusters is the only effect that justifies this.
- In terms of education and age the division of labour may be applicable
- but no such clearcut boundaries are applicable for race or personality.
- Effect can be a fixed and random effects study.
- However rank is endogenous.
- Are personalities heavily correlated with ethnicities i.e.
- is the effect of ethnicity strong through personality?
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-In all professions, the number of asians is quite little it only implies
- that minority effects dominate.
- Aggregating into broader categories (at the risk of sense) may provide
- better results.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[p]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{lnwage Regression
+\backslash
+label{tabplainreg1}} 
+\backslash
+resizebox*{!}{
+\backslash
+textheight}{
+\backslash
+begin{tabular}{l*{6}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}         &
+\backslash
+multicolumn{1}{c}{(4)}         &
+\backslash
+multicolumn{1}{c}{(5)}         &
+\backslash
+multicolumn{1}{c}{(6)}         &
+\backslash
+multicolumn{1}{c}{(7)}         &
+\backslash
+multicolumn{1}{c}{(8)}         
+\backslash
+
+\backslash
+ 
+\backslash
+hline exper     &  0.00247         &   0.0196         &   0.0107         &
+  0.00110         &  0.00615         & -0.00290         
+\backslash
+
+\backslash
+           &  (0.862)         &  (0.175)         &  (0.702)         &  (0.947)
+         &  (0.338)         &  (0.833)         
+\backslash
+
+\backslash
+ exper
+\backslash
+_sq  &-0.000785
+\backslash
+sym{***}& -0.00111
+\backslash
+sym{***}&-0.000752
+\backslash
+sym{***}&-0.000802
+\backslash
+sym{***}&-0.000944
+\backslash
+sym{***}&-0.000645
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ gor
+\backslash
+_rank  &   0.0197
+\backslash
+sym{***}&   0.0187
+\backslash
+sym{***}&   0.0279
+\backslash
+sym{***}&  0.00155         &   0.0106         &  0.00418         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.001)         &  (0.000)         &  (0.856)
+         &  (0.091)         &  (0.282)         
+\backslash
+
+\backslash
+ big5o
+\backslash
+_dv  &  -0.0120         &  -0.0144         & -0.00475         &  0.00579   
+      & -0.00978         &  0.00395         
+\backslash
+
+\backslash
+           &  (0.408)         &  (0.328)         &  (0.817)         &  (0.815)
+         &  (0.599)         &  (0.734)         
+\backslash
+
+\backslash
+ big5c
+\backslash
+_dv  &   0.0244         &   0.0261         &   0.0133         &   0.0235   
+      &   0.0295         &   0.0360
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.180)         &  (0.221)         &  (0.619)         &  (0.457)
+         &  (0.151)         &  (0.018)         
+\backslash
+
+\backslash
+ big5e
+\backslash
+_dv  &  -0.0159         &   0.0201         &  0.00522         &   0.0190   
+      &   0.0133         &  0.00585         
+\backslash
+
+\backslash
+           &  (0.267)         &  (0.186)         &  (0.819)         &  (0.388)
+         &  (0.448)         &  (0.590)         
+\backslash
+
+\backslash
+ big5a
+\backslash
+_dv  &  -0.0436
+\backslash
+sym{*}  &  -0.0239         &   0.0173         &  -0.0491         & -0.00353
+         &  -0.0293         
+\backslash
+
+\backslash
+           &  (0.014)         &  (0.201)         &  (0.579)         &  (0.133)
+         &  (0.871)         &  (0.051)         
+\backslash
+
+\backslash
+ big5n
+\backslash
+_dv  &  -0.0183         &  -0.0578
+\backslash
+sym{***}&  -0.0146         &   0.0219         &  -0.0213         &  -0.0348
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.136)         &  (0.000)         &  (0.368)         &  (0.301)
+         &  (0.158)         &  (0.001)         
+\backslash
+
+\backslash
+ age
+\backslash
+_cr    &   0.0377
+\backslash
+sym{**} &   0.0451
+\backslash
+sym{***}&   0.0381         &   0.0488
+\backslash
+sym{***}&   0.0493
+\backslash
+sym{***}&   0.0420
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.003)         &  (0.001)         &  (0.154)         &  (0.001)
+         &  (0.000)         &  (0.001)         
+\backslash
+
+\backslash
+ 1.racel
+\backslash
+_dv&        0         &        0         &        0         &        0 
+        &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.racel
+\backslash
+_dv&  -0.0851         &   -0.129         &  -0.0337         &    0.360
+\backslash
+sym{*}  &  0.00132         &    0.111         
+\backslash
+
+\backslash
+           &  (0.545)         &  (0.126)         &  (0.695)         &  (0.041)
+         &  (0.993)         &  (0.148)         
+\backslash
+
+\backslash
+ 4.racel
+\backslash
+_dv&   0.0116         &    0.129         &  -0.0567         &   -0.166     
+    &  -0.0783         &   -0.188
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.912)         &  (0.082)         &  (0.691)         &  (0.464)
+         &  (0.508)         &  (0.025)         
+\backslash
+
+\backslash
+ 5.racel
+\backslash
+_dv&   -0.377         &   -0.115         &  0.00934         &    1.056     
+    &    0.414
+\backslash
+sym{*}  &   0.0524         
+\backslash
+
+\backslash
+           &  (0.265)         &  (0.523)         &  (0.947)         &  (0.070)
+         &  (0.046)         &  (0.680)         
+\backslash
+
+\backslash
+ 6.racel
+\backslash
+_dv&   -0.310         &   0.0593         &    0.457
+\backslash
+sym{***}&                  &   -0.749         &    0.308         
+\backslash
+
+\backslash
+           &  (0.172)         &  (0.661)         &  (0.000)         &     
+             &  (0.104)         &  (0.093)         
+\backslash
+
+\backslash
+ 7.racel
+\backslash
+_dv&   -0.134         &   -0.163         &   -0.247
+\backslash
+sym{***}&                  &   -0.387         &    0.352         
+\backslash
+
+\backslash
+           &  (0.558)         &  (0.394)         &  (0.000)         &     
+             &  (0.217)         &  (0.142)         
+\backslash
+
+\backslash
+ 8.racel
+\backslash
+_dv&   0.0404         &    0.139
+\backslash
+sym{*}  &    0.378
+\backslash
+sym{***}&                  &   0.0758         &   -0.190         
+\backslash
+
+\backslash
+           &  (0.905)         &  (0.011)         &  (0.000)         &     
+             &  (0.769)         &  (0.348)         
+\backslash
+
+\backslash
+ 9.racel
+\backslash
+_dv&   -0.189
+\backslash
+sym{*}  &  -0.0241         &  -0.0602         &   -0.524         &   -0.132
+         &    0.194
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.024)         &  (0.777)         &  (0.590)         &  (0.232)
+         &  (0.430)         &  (0.027)         
+\backslash
+
+\backslash
+ 10.racel
+\backslash
+_dv&   -0.284         &   -0.266         &   -0.301
+\backslash
+sym{***}&                  &   0.0326         &   -0.232         
+\backslash
+
+\backslash
+           &  (0.387)         &  (0.121)         &  (0.000)         &     
+             &  (0.818)         &  (0.414)         
+\backslash
+
+\backslash
+ 11.racel
+\backslash
+_dv&    0.118         &   -0.293         &   -0.376
+\backslash
+sym{***}&                  &   -0.163         &   0.0869         
+\backslash
+
+\backslash
+           &  (0.397)         &  (0.270)         &  (0.000)         &     
+             &  (0.588)         &  (0.196)         
+\backslash
+
+\backslash
+ 12.racel
+\backslash
+_dv&   0.0553         &    0.311
+\backslash
+sym{*}  &    0.154         &                  &   -0.512
+\backslash
+sym{***}&    0.103
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.916)         &  (0.041)         &  (0.349)         &     
+             &  (0.000)         &  (0.044)         
+\backslash
+
+\backslash
+ 13.racel
+\backslash
+_dv&   -0.516         &   -0.103         &    0.301
+\backslash
+sym{**} &   -0.151         &   -0.134         &   0.0631         
+\backslash
+
+\backslash
+           &  (0.116)         &  (0.074)         &  (0.004)         &  (0.201)
+         &  (0.284)         &  (0.469)         
+\backslash
+
+\backslash
+ 14.racel
+\backslash
+_dv&   0.0359         &    0.211         &   -0.487
+\backslash
+sym{**} &    0.234
+\backslash
+sym{*}  &   -0.236         &    0.219
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.641)         &  (0.160)         &  (0.007)         &  (0.022)
+         &  (0.296)         &  (0.012)         
+\backslash
+
+\backslash
+ 15.racel
+\backslash
+_dv&    0.308         &  -0.0511         &    0.777
+\backslash
+sym{***}&   -0.471
+\backslash
+sym{**} &   -0.535
+\backslash
+sym{**} &   0.0843         
+\backslash
+
+\backslash
+           &  (0.135)         &  (0.687)         &  (0.000)         &  (0.002)
+         &  (0.004)         &  (0.411)         
+\backslash
+
+\backslash
+ 16.racel
+\backslash
+_dv&  -0.0273         &   -0.319         &                  &            
+      &    0.974
+\backslash
+sym{***}&    0.248
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.640)         &  (0.278)         &                  &    
+              &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 17.racel
+\backslash
+_dv&    0.804
+\backslash
+sym{***}&    0.477
+\backslash
+sym{***}&  -0.0124         &                  &   -0.294
+\backslash
+sym{**} &    0.473
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.001)         &  (0.835)         &     
+             &  (0.001)         &  (0.008)         
+\backslash
+
+\backslash
+ 97.racel
+\backslash
+_dv&    0.440
+\backslash
+sym{***}&    0.155         &                  &                  &   -0.305
+         &   -0.167         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.531)         &                  &    
+              &  (0.322)         &  (0.195)         
+\backslash
+
+\backslash
+ sex
+\backslash
+_cr    &   -0.369
+\backslash
+sym{***}&   -0.354
+\backslash
+sym{***}&   -0.344
+\backslash
+sym{***}&   -0.520
+\backslash
+sym{***}&   -0.491
+\backslash
+sym{***}&   -0.340
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.001)         &  (0.001)
+         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 1.hiqual
+\backslash
+_dv&    0.124
+\backslash
+sym{*}  &    0.336
+\backslash
+sym{***}&    0.203
+\backslash
+sym{*}  &    0.238
+\backslash
+sym{**} &    0.395
+\backslash
+sym{***}&    0.596
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.015)         &  (0.000)         &  (0.023)         &  (0.006)
+         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 2.hiqual
+\backslash
+_dv&   0.0335         &   0.0607         &   0.0832         &  -0.0156     
+    &   0.0490         &    0.382
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.534)         &  (0.358)         &  (0.376)         &  (0.888)
+         &  (0.534)         &  (0.000)         
+\backslash
+
+\backslash
+ 3.hiqual
+\backslash
+_dv&        0         &        0         &        0         &        0 
+        &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 4.hiqual
+\backslash
+_dv& -0.00724         &  -0.0924         &    0.111         &   -0.123     
+    &   -0.102         &  -0.0399         
+\backslash
+
+\backslash
+           &  (0.868)         &  (0.106)         &  (0.290)         &  (0.092)
+         &  (0.059)         &  (0.356)         
+\backslash
+
+\backslash
+ 5.hiqual
+\backslash
+_dv&   0.0128         &  -0.0471         &   -0.203
+\backslash
+sym{*}  &   -0.142         &   -0.223
+\backslash
+sym{**} &  -0.0129         
+\backslash
+
+\backslash
+           &  (0.864)         &  (0.568)         &  (0.036)         &  (0.199)
+         &  (0.003)         &  (0.871)         
+\backslash
+
+\backslash
+ 9.hiqual
+\backslash
+_dv&   0.0414         &   -0.460         &  -0.0169         &   -0.143     
+    &   -0.289
+\backslash
+sym{***}&   -0.260
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.657)         &  (0.150)         &  (0.813)         &  (0.272)
+         &  (0.000)         &  (0.013)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    6.868
+\backslash
+sym{***}&    6.644
+\backslash
+sym{***}&    6.603
+\backslash
+sym{***}&    6.657
+\backslash
+sym{***}&    6.024
+\backslash
+sym{***}&    6.385
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     1482         &     1629         &      309         &      364
+         &     1410         &     2132         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.167         &    0.219         &    0.296         &    0.232      
+   &    0.272         &    0.304         
+\backslash
+
+\backslash
+ adj.
+ 
+\backslash
+(R^{2}
+\backslash
+)&    0.149         &    0.203         &    0.223         &    0.183       
+  &    0.256         &    0.293         
+\backslash
+
+\backslash
+ pseudo 
+\backslash
+(R^{2}
+\backslash
+)&                  &                  &                  &            
+      &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} }
+\backslash
+end{table}  
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Race is not to be considered as a static factor as is commonly assumed.
- The claim of inductive effect on personalities - where similar type of
- personalities group in a profession should be applied across social group
- as well.
- Personality 
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{lnwage Regression
+\backslash
+label{tabplainreg2}} 
+\backslash
+resizebox*{!}{
+\backslash
+textheight}{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular}{l*{6}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(11)}         &
+\backslash
+multicolumn{1}{c}{(12)}         &
+\backslash
+multicolumn{1}{c}{(13)}         &
+\backslash
+multicolumn{1}{c}{(14)}         &
+\backslash
+multicolumn{1}{c}{(15)}         &
+\backslash
+multicolumn{1}{c}{(16)}         
+\backslash
+
+\backslash
+ 
+\backslash
+hline exper     &  0.00850         & -0.00299         &   0.0127
+\backslash
+sym{*}  &   0.0278
+\backslash
+sym{*}  &  -0.0886
+\backslash
+sym{*}  &    0.105
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.262)         &  (0.923)         &  (0.021)         &  (0.035)
+         &  (0.025)         &  (0.037)         
+\backslash
+
+\backslash
+ exper
+\backslash
+_sq  &-0.000859
+\backslash
+sym{***}& -0.00104
+\backslash
+sym{***}& -0.00119
+\backslash
+sym{***}& -0.00115
+\backslash
+sym{***}& -0.00109
+\backslash
+sym{***}& -0.00130
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ gor
+\backslash
+_rank  &   0.0216
+\backslash
+sym{***}&   0.0130
+\backslash
+sym{**} &   0.0178
+\backslash
+sym{**} &   0.0220
+\backslash
+sym{*}  &   0.0497
+\backslash
+sym{***}&   0.0212
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.006)         &  (0.002)         &  (0.044)
+         &  (0.000)         &  (0.031)         
+\backslash
+
+\backslash
+ big5o
+\backslash
+_dv  &   0.0121         &  0.00398         &  -0.0109         &   0.0195   
+      &  -0.0760         &  0.00828         
+\backslash
+
+\backslash
+           &  (0.362)         &  (0.790)         &  (0.497)         &  (0.551)
+         &  (0.060)         &  (0.785)         
+\backslash
+
+\backslash
+ big5c
+\backslash
+_dv  &   0.0462
+\backslash
+sym{**} &   0.0109         &   0.0448
+\backslash
+sym{*}  &    0.113
+\backslash
+sym{*}  &   0.0588         &  -0.0130         
+\backslash
+
+\backslash
+           &  (0.004)         &  (0.482)         &  (0.020)         &  (0.011)
+         &  (0.166)         &  (0.700)         
+\backslash
+
+\backslash
+ big5e
+\backslash
+_dv  & -0.00273         &   0.0174         &   0.0149         &  -0.0185   
+      &   0.0671         &   0.0601
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.831)         &  (0.172)         &  (0.353)         &  (0.514)
+         &  (0.077)         &  (0.024)         
+\backslash
+
+\backslash
+ big5a
+\backslash
+_dv  &  -0.0355
+\backslash
+sym{*}  &  -0.0124         &  -0.0885
+\backslash
+sym{***}&  -0.0684         &  -0.0517         & -0.00773         
+\backslash
+
+\backslash
+           &  (0.015)         &  (0.480)         &  (0.000)         &  (0.086)
+         &  (0.219)         &  (0.819)         
+\backslash
+
+\backslash
+ big5n
+\backslash
+_dv  &  -0.0330
+\backslash
+sym{**} & -0.00282         &  -0.0235         &  -0.0202         &  -0.0841
+\backslash
+sym{**} &  -0.0468         
+\backslash
+
+\backslash
+           &  (0.003)         &  (0.822)         &  (0.091)         &  (0.498)
+         &  (0.007)         &  (0.085)         
+\backslash
+
+\backslash
+ age
+\backslash
+_cr    &   0.0454
+\backslash
+sym{***}&   0.0591         &   0.0538
+\backslash
+sym{***}&   0.0314
+\backslash
+sym{***}&    0.146
+\backslash
+sym{***}&  -0.0390         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.050)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.394)         
+\backslash
+
+\backslash
+ 1.racel
+\backslash
+_dv&        0         &        0         &        0         &        0 
+        &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.racel
+\backslash
+_dv&   -0.137         &    0.195
+\backslash
+sym{**} &  -0.0235         &   -0.100         &   -0.502         &   0.0130
+         
+\backslash
+
+\backslash
+           &  (0.364)         &  (0.003)         &  (0.860)         &  (0.268)
+         &  (0.248)         &  (0.970)         
+\backslash
+
+\backslash
+ 4.racel
+\backslash
+_dv&   -0.201
+\backslash
+sym{**} &   0.0125         &   -0.193         &   -0.242         &    0.134
+         &    0.214         
+\backslash
+
+\backslash
+           &  (0.005)         &  (0.879)         &  (0.153)         &  (0.053)
+         &  (0.637)         &  (0.401)         
+\backslash
+
+\backslash
+ 5.racel
+\backslash
+_dv&   -0.295         &   -0.318         &   -0.711
+\backslash
+sym{*}  &                  &                  &                  
+\backslash
+
+\backslash
+           &  (0.187)         &  (0.531)         &  (0.016)         &     
+             &                  &                  
+\backslash
+
+\backslash
+ 6.racel
+\backslash
+_dv&   -0.271
+\backslash
+sym{*}  &   -0.399         &    0.219         &                  &    1.459
+\backslash
+sym{***}&                  
+\backslash
+
+\backslash
+           &  (0.035)         &  (0.674)         &  (0.462)         &     
+             &  (0.000)         &                  
+\backslash
+
+\backslash
+ 7.racel
+\backslash
+_dv&    0.106         &  -0.0378         &   -0.414         &   -1.158
+\backslash
+sym{***}&   -0.168         &   -1.583
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.482)         &  (0.927)         &  (0.300)         &  (0.000)
+         &  (0.285)         &  (0.000)         
+\backslash
+
+\backslash
+ 8.racel
+\backslash
+_dv&  -0.0476         &   -0.282
+\backslash
+sym{***}&   -0.131         &                  &    0.770         &       
+           
+\backslash
+
+\backslash
+           &  (0.906)         &  (0.000)         &  (0.817)         &     
+             &  (0.128)         &                  
+\backslash
+
+\backslash
+ 9.racel
+\backslash
+_dv&   -0.252
+\backslash
+sym{**} & -0.00331         &   -0.237
+\backslash
+sym{*}  &   -0.328         &   -0.714
+\backslash
+sym{***}&    0.131         
+\backslash
+
+\backslash
+           &  (0.003)         &  (0.977)         &  (0.036)         &  (0.053)
+         &  (0.000)         &  (0.509)         
+\backslash
+
+\backslash
+ 10.racel
+\backslash
+_dv&   -0.493         &   -0.107         &   -0.407
+\backslash
+sym{*}  &   -0.204
+\backslash
+sym{*}  &   -0.400         &    0.124         
+\backslash
+
+\backslash
+           &  (0.050)         &  (0.300)         &  (0.020)         &  (0.018)
+         &  (0.109)         &  (0.270)         
+\backslash
+
+\backslash
+ 11.racel
+\backslash
+_dv&   -0.654         &  0.00468         &   -0.610         &  -0.0241     
+    &    0.444
+\backslash
+sym{***}&    0.161         
+\backslash
+
+\backslash
+           &  (0.102)         &  (0.965)         &  (0.146)         &  (0.840)
+         &  (0.000)         &  (0.113)         
+\backslash
+
+\backslash
+ 12.racel
+\backslash
+_dv&   -0.390
+\backslash
+sym{**} &   -0.280
+\backslash
+sym{*}  &   -1.255
+\backslash
+sym{*}  &    0.565
+\backslash
+sym{*}  &    0.998
+\backslash
+sym{***}&   0.0481         
+\backslash
+
+\backslash
+           &  (0.004)         &  (0.035)         &  (0.017)         &  (0.013)
+         &  (0.000)         &  (0.877)         
+\backslash
+
+\backslash
+ 13.racel
+\backslash
+_dv&   -0.852
+\backslash
+sym{*}  &   -0.513         &   -0.762
+\backslash
+sym{**} &    0.284         &   -0.414
+\backslash
+sym{*}  &   -1.304
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.033)         &  (0.065)         &  (0.005)         &  (0.065)
+         &  (0.023)         &  (0.001)         
+\backslash
+
+\backslash
+ 14.racel
+\backslash
+_dv&    0.242
+\backslash
+sym{***}&   0.0462         &    0.130         &   -0.143         & 0.000960
+         &   -0.310         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.705)         &  (0.574)         &  (0.196)
+         &  (0.998)         &  (0.345)         
+\backslash
+
+\backslash
+ 15.racel
+\backslash
+_dv&   -0.477
+\backslash
+sym{**} &   -0.475         &   0.0387         &   -0.207         &  -0.0939
+         &   -1.699
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.009)         &  (0.081)         &  (0.798)         &  (0.122)
+         &  (0.587)         &  (0.000)         
+\backslash
+
+\backslash
+ 16.racel
+\backslash
+_dv&   -0.368
+\backslash
+sym{***}&                  &                  &                  &     
+             &   0.0392         
+\backslash
+
+\backslash
+           &  (0.000)         &                  &                  &   
+               &                  &  (0.790)         
+\backslash
+
+\backslash
+ 17.racel
+\backslash
+_dv&    0.306
+\backslash
+sym{***}&    0.284         &   -0.272
+\backslash
+sym{**} &                  &                  &   -1.314
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.164)         &  (0.003)         &     
+             &                  &  (0.007)         
+\backslash
+
+\backslash
+ 97.racel
+\backslash
+_dv&   -0.429
+\backslash
+sym{***}&   0.0979         &   -0.762
+\backslash
+sym{***}&                  &   -0.340         &                  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.589)         &  (0.000)         &     
+             &  (0.571)         &                  
+\backslash
+
+\backslash
+ sex
+\backslash
+_cr    &   -0.523
+\backslash
+sym{***}&   -0.280
+\backslash
+sym{***}&   -0.485
+\backslash
+sym{***}&   -0.251
+\backslash
+sym{**} &   -0.924
+\backslash
+sym{***}&   -0.669
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.001)
+         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 1.hiqual
+\backslash
+_dv&    0.324
+\backslash
+sym{***}&    0.365
+\backslash
+sym{***}&    0.369
+\backslash
+sym{***}&    0.212
+\backslash
+sym{*}  &    0.319
+\backslash
+sym{**} &    0.265         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.028)
+         &  (0.003)         &  (0.126)         
+\backslash
+
+\backslash
+ 2.hiqual
+\backslash
+_dv&   0.0747         &    0.109         &   0.0530         &    0.129     
+    &    0.179         &  -0.0118         
+\backslash
+
+\backslash
+           &  (0.136)         &  (0.083)         &  (0.467)         &  (0.216)
+         &  (0.145)         &  (0.932)         
+\backslash
+
+\backslash
+ 3.hiqual
+\backslash
+_dv&        0         &        0         &        0         &        0 
+        &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 4.hiqual
+\backslash
+_dv&   -0.172
+\backslash
+sym{***}&   -0.115         &   -0.217
+\backslash
+sym{***}&   -0.332
+\backslash
+sym{*}  &   -0.314
+\backslash
+sym{**} &   -0.115         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.077)         &  (0.000)         &  (0.013)
+         &  (0.005)         &  (0.198)         
+\backslash
+
+\backslash
+ 5.hiqual
+\backslash
+_dv&   -0.135
+\backslash
+sym{**} &   0.0551         &   -0.195
+\backslash
+sym{**} &   0.0900         &   -0.571
+\backslash
+sym{***}&   -0.120         
+\backslash
+
+\backslash
+           &  (0.003)         &  (0.536)         &  (0.007)         &  (0.547)
+         &  (0.000)         &  (0.247)         
+\backslash
+
+\backslash
+ 9.hiqual
+\backslash
+_dv&   -0.242
+\backslash
+sym{***}&    0.127         &   -0.375
+\backslash
+sym{***}&   -0.278         &   -0.640
+\backslash
+sym{*}  &   -0.201         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.426)         &  (0.000)         &  (0.101)
+         &  (0.014)         &  (0.157)         
+\backslash
+
+\backslash
+ 3.racel
+\backslash
+_dv&                  &   -0.892
+\backslash
+sym{***}&                  &  -0.0336         &                  &      
+            
+\backslash
+
+\backslash
+           &                  &  (0.000)         &                  &  (0.871)
+         &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    6.585
+\backslash
+sym{***}&    6.035
+\backslash
+sym{***}&    6.345
+\backslash
+sym{***}&    6.480
+\backslash
+sym{***}&    5.566
+\backslash
+sym{***}&    7.991
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     1529         &     1361         &     1207         &      211
+         &      382         &      346         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.315         &    0.236         &    0.404         &    0.375      
+   &    0.534         &    0.315         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} }
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}  
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We also know that wage can be higher because of class effects - status is
+ 
 \begin_inset Quotes eld
 \end_inset
 
-types
+sticky
 \begin_inset Quotes erd
 \end_inset
 
- are no different from racial types in that sense.
- Therefore race is considered side-by-side with the size of the race.
- Interactions of the race size (number of people of the particular race)
- and the race dummies can be considered as well.
- The question asked here is whether races are penalized for characteristics
- other than them being a minority in the UK.
- Is this penalty through personality types.
- If neither explain this, then what is the reason behind disparities.
+ - parents with higher income jobs are better equipped to maximise the chances
+ of economic success of their progeny.
+ Hence, introducing the father's occupation would make sense.
+ However, a problem with endogeneity would also appear.
 \end_layout
 
 \begin_layout Standard
-The analysis of size is simply viewed by evaluating coefficients against
- the number of people.
- The regression dummy variables gives us the size (coefficients) of various
- racial categories - this significance becomes clear in the size.
+The obvious objection is that education is endogenous since those with higher
+ wages and high education do so because of their parents.
+ This is valid objection and to instrument education we need a variable
+ that effects education but not wage.
+ We can argue that parent's education (because of the very objection) influences
+ education of a child - but parent's don't affect a child's progress after
+ the job begins therefore the effect of parent's education on
 \end_layout
 
-\begin_layout Section
-Employment and conscientiousness
+\begin_layout Standard
+highly correlated with the difference between (thus use housing as an instrument
+ variable).
+ House and assets don't affect wage but they do affect the standing that
+ we try to measure by the parent's occupation.
+ 
 \end_layout
 
 \begin_layout Subsection
+Unemployment and Personality
+\end_layout
+
+\begin_layout Standard
+A lot of entries are of people un- fimngrs_dv paygu_dv is set to missing
+ for retired persons.
+ Ideally we should consider the retired since their economic success can
+ be gauged by fimngrs_dv (which is higher than paygu_dv).
+ However, since jbsoc00_cc is recorded as 
+\begin_inset Quotes eld
+\end_inset
+
+inapplicable
+\begin_inset Quotes erd
+\end_inset
+
+ for retirees, they cannot be included in our analysis of industry.
+\end_layout
+
+\begin_layout Standard
+are employed cannot be compared with the those who are not unemployed.
+ There care must be taken while talking about employee preferences.
+ Unemployment is a lot more difficult problem and involves a lot of other
+ structural factors such as economic development in the region - the data
+ on which isn't available (except the rank based on median income) - where
+ a simple model of personalities is difficult.
+ What one may still do is see if certain personalities are heckman selection
+ (this is not truncation - since we know that people (see Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{educpasoc10cc}
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{education vs father's occupation 
+\backslash
+label{educpasoc10cc}} 
+\backslash
+begin{tabular}{l*{1}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}         
+\backslash
+
+\backslash
+ 
+\backslash
+hline pasoc10
+\backslash
+_cc&-0.000524
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    3.254
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &    15533         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.014         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Employment and conscientiousness
+\end_layout
+
+\begin_layout Subsubsection
 Conscientiousness over time
 \end_layout
 
@@ -474,7 +2103,7 @@ Overall variation in conscientiousness within time period can be viewed.
  (as well as other characteristics) may be significant.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Discrimination against those having less conscientiousness
 \end_layout
 
@@ -524,8 +2153,64 @@ tabstat lnwage educ exper tenure if lfp==1, by(female) stats(n mean sd max
 
 \end_layout
 
+\begin_layout Subsection
+Clusters of personal characteristics and change in personality over time
+\end_layout
+
+\begin_layout Standard
+The significance of clusters is the only effect that justifies this.
+ In terms of education and age the division of labour may be applicable
+ but no such clearcut boundaries are applicable for race or personality.
+ Effect can be a fixed and random effects study.
+ However rank is endogenous.
+ Are personalities heavily correlated with ethnicities i.e.
+ is the effect of ethnicity strong through personality?
+\end_layout
+
+\begin_layout Standard
+In all professions, the number of asians is quite little it only implies
+ that minority effects dominate.
+ Aggregating into broader categories (at the risk of sense) may provide
+ better results.
+\end_layout
+
+\begin_layout Standard
+Race is not to be considered as a static factor as is commonly assumed.
+ The claim of inductive effect on personalities - where similar type of
+ personalities group in a profession should be applied across social group
+ as well.
+ Personality 
+\begin_inset Quotes eld
+\end_inset
+
+types
+\begin_inset Quotes erd
+\end_inset
+
+ are no different from racial types in that sense.
+ Therefore race is considered side-by-side with the size of the race.
+ Interactions of the race size (number of people of the particular race)
+ and the race dummies can be considered as well.
+ The question asked here is whether races are penalized for characteristics
+ other than them being a minority in the UK.
+ Is this penalty through personality types.
+ If neither explain this, then what is the reason behind disparities.
+\end_layout
+
+\begin_layout Standard
+The analysis of size is simply viewed by evaluating coefficients against
+ the number of people.
+ The regression dummy variables gives us the size (coefficients) of various
+ racial categories - this significance becomes clear in the size.
+\end_layout
+
+\begin_layout Standard
+We can regress peronsanility over time as well.
+ The pooled regression might 
+\end_layout
+
 \begin_layout Section
-Results
+Results and Conclusions
 \end_layout
 
 \begin_layout Standard
@@ -542,6 +2227,600 @@ Personalities matter more for higher ranks within the industry rather the
 \end_layout
 
 \begin_layout Standard
+The theory that we need to test is whether popular traits tend to use self-selec
+tion.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement tp
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="17" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="left" valignment="top" width="5in">
+<column alignment="left" valignment="top" width="1.5cm">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+job sector id
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\align center
+
+\series bold
+aggregated jbsoc00_cc entries
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+abbr.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Administrative occupations: finance, Administrative occupations: records,
+ Administrative occupations: communications, Administrative occupations:
+ general, Secretarial and related occupations, Elementary administration
+ occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+admin
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Managers in farming, horticulture, forestry and services, Agricultural trades,
+ Elementary agricultural occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+agri
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Artistic and literary occupations, Design associate professionals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+art
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Corporate managers and senior officials, Functional managers, Financial
+ institution and office managers, Managers in distribution, storage and
+ retailing, Business and statistical professionals, Business and finance
+ associate professionals, Managers and proprietors in other service industries
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+biz
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Engineering professionals, Information and communication technology professional
+s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+engg
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Architects, town planners, surveyors, Draughtspersons and building inspectors,
+ Conservation associate professionals, Construction trades, Building trades,
+ Construction operatives, Elementary construction occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+arch
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quality and customer care managers, Leisure and travel service occupations,
+ Hairdressers and related occupations, Housekeeping occupations, Personal
+ services occupations nec, Customer service occupations, Mobile machine
+ drivers and operatives, Elementary personal services occupations, Elementary
+ cleaning occupations, Managers and proprietors in hospitality and leisure
+ services, Sports and fitness occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+consume
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Health and social services managers, Health professionals, Health associate
+ professionals, Therapists, Social welfare associate professionals, Healthcare
+ and related personal services, Childcare and related personal services,
+ Animal care services
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+health
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Legal professionals, Legal associate professionals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+legal
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Media associate professionals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+media
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Production managers, Metal forming, welding and related trades, Metal machining,
+ fitting and instrument making trades, Vehicle trades, Electrical trades,
+ Textiles and garments trades, Printing trades, Food preparation trades,
+ Skilled trades nec, Process operatives, Plant and machine operatives, Assembler
+s and routine operatives, Elementary process plant occupations, Elementary
+ goods storage occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+prod
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Public service professionals, Librarians and related professionals, Public
+ service and other associate professionals, Administrative occupations:
+ government and related organisat, Teaching professionals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pubsvc
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+It service delivery occupations, Sales and related associate professionals,
+ Sales assistants and retail cashiers, Sales related occupations, Elementary
+ sales occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+it
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Science professionals, Research professionals, Science and engineering technicia
+ns
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sci
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Protective service officers, Protective service occupations, Elementary
+ security occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+secur
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Transport associate professionals, Transport drivers and operatives
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+transpt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:job_sectors"
+
+\end_inset
+
+Categories used in identified sectors
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float table
 placement p
 wide true
@@ -551,8 +2830,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="18" columns="3">
+<lyxtabular version="3" rows="18" columns="4">
 <features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
 <column alignment="left" valignment="top" width="0pt">
 <column alignment="left" valignment="top" width="0pt">
 <column alignment="left" valignment="top" width="0pt">
@@ -590,6 +2870,17 @@ median_income
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+job-type code
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
@@ -615,6 +2906,15 @@ admin
 
 \begin_layout Plain Layout
 1333.33
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
 \end_layout
 
 \end_inset
@@ -648,6 +2948,15 @@ agriculture
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
@@ -673,6 +2982,15 @@ art and design
 
 \begin_layout Plain Layout
 1999.72
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
 \end_layout
 
 \end_inset
@@ -706,6 +3024,15 @@ business
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
@@ -731,6 +3058,15 @@ computer and engineering
 
 \begin_layout Plain Layout
 2916.67
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
 \end_layout
 
 \end_inset
@@ -764,6 +3100,15 @@ construction
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
@@ -789,6 +3134,15 @@ consumer care
 
 \begin_layout Plain Layout
 866.67
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
 \end_layout
 
 \end_inset
@@ -822,6 +3176,15 @@ health and social services
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
@@ -847,6 +3210,15 @@ legal
 
 \begin_layout Plain Layout
 2958.335
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
 \end_layout
 
 \end_inset
@@ -880,6 +3252,15 @@ media
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
@@ -905,6 +3286,15 @@ production
 
 \begin_layout Plain Layout
 1900
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
 \end_layout
 
 \end_inset
@@ -938,6 +3328,15 @@ public service
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
@@ -963,6 +3362,15 @@ sales
 
 \begin_layout Plain Layout
 866.905
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13
 \end_layout
 
 \end_inset
@@ -996,6 +3404,15 @@ science and research
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
@@ -1021,6 +3438,15 @@ security
 
 \begin_layout Plain Layout
 2078.665
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
 \end_layout
 
 \end_inset
@@ -1054,6 +3480,15 @@ transport
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
@@ -1083,6 +3518,15 @@ NA
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
 </row>
 </lyxtabular>
 
@@ -1095,7 +3539,7 @@ NA
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Sectors and median incomes
+Sectors identified in the study with median incomes
 \end_layout
 
 \end_inset
@@ -3300,8 +5744,19 @@ sorting racel_dv variable based on the respective populations
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \begin_layout Plain Layout
 
@@ -3325,6 +5780,10 @@ else
 \backslash
 fi} 
 \backslash
+caption{Multinomial Regression Table (1) 
+\backslash
+label{tab_multinomial_1}} 
+\backslash
 resizebox*{
 \backslash
 textwidth}{!}{ 
@@ -3334,7 +5793,8 @@ textwidth}{!}{
 
 
 \backslash
-begin{tabular}{l*{8}{c}}  & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8)
+begin{tabular}{l*{8}{c}}  & admin(1) & agri(2) & art(3) & biz(4) & engg(5)
+ & arch(6) & consum(7) & health(8)
 \backslash
 
 \backslash
@@ -3491,6 +5951,10 @@ status open
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 
 \backslash
 begin{table} [p] 
@@ -3511,6 +5975,10 @@ else
 \backslash
 fi} 
 \backslash
+caption{Multinomial Regression Table (2) 
+\backslash
+label{tab_multinomial_2}} 
+\backslash
 resizebox*{
 \backslash
 textwidth}{!}{
@@ -3525,7 +5993,8 @@ begin{tabular}{l*{9}{c}}
 
 \begin_layout Plain Layout
 
-& (8)  & (9)  & (10)  & (11)  & (12)  & (13)  & (14)  & (15)  & (16)
+& health(8)  & legal(9)  & media(10)  & prod(11)  & pubsvc(12)  & it(13)
+  & sci(14)  & secur(15)  & transpt(16)
 \backslash
 
 \backslash
@@ -3690,58 +6159,12 @@ end{table}
 
 \end_layout
 
-\begin_layout Section
-Conclusions
-\end_layout
-
 \begin_layout Subsection
 Job satisfaction and fit
 \end_layout
 
 \begin_layout Standard
-Happiness shouldn't affect personality - but it can affect the wage (success).
-\end_layout
-
-\begin_layout Standard
-Job satisfaction can come not just out of the personality being fit with
- the job - but also out of compensation from the job and the status it offers.
- Self-reported happiness is always susceptible to such distortions (one
- cannot assume that being fit in the job is the most important determinant
- of happiness).
- If happiness is taken out of question and only job satisfaction is reported,
- we're back to the same problem - does job status affect satisfaction or
- satisfaction affect job status (measured through SEC).
- Tentatively this can be verified by looking at the effect of changes in
- job-status (all other things being equal) on changes in satisfaction as
- well as the other way around.
- If job-statuses change a lot then because of personality then personality
- has a larger effect.
- Would this be difference in difference approach.
- An alternative way is to model with a dynamical system - 
-\begin_inset Formula $x'=f(x,u)$
-\end_inset
-
- and 
-\begin_inset Formula $y=g(x,u)$
-\end_inset
-
-.
- In discrete form this can be written as 
-\begin_inset Formula $x_{k+1}=F(x_{k},u_{k})$
-\end_inset
-
- and 
-\begin_inset Formula $y_{k}=G(x_{k},u_{k}$
-\end_inset
-
-).
- However, without time-series microdata the dynamical systems approach cannot
- be employed.
- Correlation is all we can infer (and possibly remove the multicollinear
- variable in the regression).
- The authors use two regression to measure the effect of fitness.
- In our example for status vs satisfaction, we would only look at one of
- them to analyse job-fit (if we find status and satisfaction correlated).
+For the first part, multinomial method showed the significance of personalities.
 \end_layout
 
 \begin_layout Standard
