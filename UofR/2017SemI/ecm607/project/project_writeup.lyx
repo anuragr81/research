@@ -213,7 +213,7 @@ Personality Types
 
 \begin_layout Standard
 The conventional literature on personality types used by career-services
- for students entering the workforce is based loosely of Myer-Brigs Personality
+ for students entering the workforce is based loosely of Myer-Briggs Personality
  type.
  These are the 16 personality types that are easy to identify but are too
  broad to infer discover any correlation with economic variables (which
@@ -262,7 +262,7 @@ I find it rather perturbing that my own personality types seems quite rare.
 \begin_inset Formula $\cdot$
 \end_inset
 
- least comonmon C 
+ least common C 
 \begin_inset Formula $\cdot$
 \end_inset
 
@@ -341,6 +341,1352 @@ s based classifiers perform) but to explain how clusters themselves are
 \end_layout
 
 \begin_layout Subsection
+Unemployment and Personality
+\end_layout
+
+\begin_layout Standard
+Notice the self-employed are not excluded if we include only those with
+ jbtem1 == permanent.
+\end_layout
+
+\begin_layout Standard
+A lot of entries are of people un- fimngrs_dv paygu_dv is set to missing
+ for retired persons.
+ Ideally we should consider the retired since their economic success can
+ be gauged by fimngrs_dv (which is higher than paygu_dv).
+ However, since jbsoc00_cc is recorded as 
+\begin_inset Quotes eld
+\end_inset
+
+inapplicable
+\begin_inset Quotes erd
+\end_inset
+
+ for retirees, they cannot be included in our analysis of industry.
+\end_layout
+
+\begin_layout Standard
+are employed cannot be compared with the those who are not unemployed.
+ There care must be taken while talking about employee preferences.
+ Unemployment is a lot more difficult problem and involves a lot of other
+ structural factors such as economic development in the region - the data
+ on which isn't available (except the rank based on median income) - where
+ a simple model of personalities is difficult.
+ What one may still do is see if certain personalities are heckman selection
+ (this is neither censoring nor truncation - since we know that people aren't
+ unemployed because they lack on well-defined metric excluding the disabled
+ categories - which are classified separately).
+ Unemployment should also be determined from the the parent's occupation
+ (see Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{educpasoc10cc}
+\end_layout
+
+\end_inset
+
+).
+ Heckman selection model can use this in the select command.
+ We evaluate parent's occupation as the extra parameter in the selection
+ equation (because that seems to have a stronger influence on unemployment
+ than many given).
+ The subjective well-being related variables - although used as attitude
+ in literature weren't used since the effect unemployment could be affecting
+ subjective well-being.
+ With parent's occupation (which is assumed to effect unemployment through
+ ).
+\end_layout
+
+\begin_layout Standard
+However, unemployment seems to be strongly related to the satisfaction with
+ health.
+ A probit in table
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabunempprobit}
+\end_layout
+
+\end_inset
+
+ shows this - and hence health is used in the selection.
+ There does seem to be an evidence of selection bias - in the heckman selection
+ results.
+ The effect of personality is still valid for the most part (even though
+ coefficients have reduced) - although the effect of conscientiousness seems
+ reduced.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Unemployment - Health and Personality
+\backslash
+label{tabunempprobit}} 
+\backslash
+resizebox*{!}{
+\backslash
+textheight}{ 
+\backslash
+begin{tabular}{l*{1}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}         
+\backslash
+
+\backslash
+ 
+\backslash
+hline employed  &                  
+\backslash
+
+\backslash
+ 0.educ
+\backslash
+_level&        0         
+\backslash
+
+\backslash
+           &      (.)         
+\backslash
+
+\backslash
+ 1.educ
+\backslash
+_level&    0.367
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ 2.educ
+\backslash
+_level&    0.392
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ 3.educ
+\backslash
+_level&    0.627
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ 4.educ
+\backslash
+_level&    0.844
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ 5.educ
+\backslash
+_level&    0.814
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ 1.big5o
+\backslash
+_dv&        0         
+\backslash
+
+\backslash
+           &      (.)         
+\backslash
+
+\backslash
+ 2.big5o
+\backslash
+_dv&   -0.107         
+\backslash
+
+\backslash
+           &  (0.541)         
+\backslash
+
+\backslash
+ 3.big5o
+\backslash
+_dv&  -0.0249         
+\backslash
+
+\backslash
+           &  (0.879)         
+\backslash
+
+\backslash
+ 4.big5o
+\backslash
+_dv&   0.0157         
+\backslash
+
+\backslash
+           &  (0.923)         
+\backslash
+
+\backslash
+ 5.big5o
+\backslash
+_dv&  -0.0102         
+\backslash
+
+\backslash
+           &  (0.950)         
+\backslash
+
+\backslash
+ 6.big5o
+\backslash
+_dv&   -0.169         
+\backslash
+
+\backslash
+           &  (0.305)         
+\backslash
+
+\backslash
+ 7.big5o
+\backslash
+_dv&   -0.353
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.042)         
+\backslash
+
+\backslash
+ 1.big5c
+\backslash
+_dv&        0         
+\backslash
+
+\backslash
+           &      (.)         
+\backslash
+
+\backslash
+ 2.big5c
+\backslash
+_dv&    0.948         
+\backslash
+
+\backslash
+           &  (0.222)         
+\backslash
+
+\backslash
+ 3.big5c
+\backslash
+_dv&    1.281         
+\backslash
+
+\backslash
+           &  (0.083)         
+\backslash
+
+\backslash
+ 4.big5c
+\backslash
+_dv&    1.308         
+\backslash
+
+\backslash
+           &  (0.075)         
+\backslash
+
+\backslash
+ 5.big5c
+\backslash
+_dv&    1.544
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.035)         
+\backslash
+
+\backslash
+ 6.big5c
+\backslash
+_dv&    1.743
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.018)         
+\backslash
+
+\backslash
+ 7.big5c
+\backslash
+_dv&    1.803
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.014)         
+\backslash
+
+\backslash
+ 1.big5e
+\backslash
+_dv&        0         
+\backslash
+
+\backslash
+           &      (.)         
+\backslash
+
+\backslash
+ 2.big5e
+\backslash
+_dv&    0.164         
+\backslash
+
+\backslash
+           &  (0.388)         
+\backslash
+
+\backslash
+ 3.big5e
+\backslash
+_dv&    0.190         
+\backslash
+
+\backslash
+           &  (0.281)         
+\backslash
+
+\backslash
+ 4.big5e
+\backslash
+_dv&    0.250         
+\backslash
+
+\backslash
+           &  (0.152)         
+\backslash
+
+\backslash
+ 5.big5e
+\backslash
+_dv&    0.206         
+\backslash
+
+\backslash
+           &  (0.237)         
+\backslash
+
+\backslash
+ 6.big5e
+\backslash
+_dv&    0.336         
+\backslash
+
+\backslash
+           &  (0.059)         
+\backslash
+
+\backslash
+ 7.big5e
+\backslash
+_dv&    0.337         
+\backslash
+
+\backslash
+           &  (0.070)         
+\backslash
+
+\backslash
+ 1.big5a
+\backslash
+_dv&        0         
+\backslash
+
+\backslash
+           &      (.)         
+\backslash
+
+\backslash
+ 2.big5a
+\backslash
+_dv&    0.513         
+\backslash
+
+\backslash
+           &  (0.450)         
+\backslash
+
+\backslash
+ 3.big5a
+\backslash
+_dv&    0.833         
+\backslash
+
+\backslash
+           &  (0.198)         
+\backslash
+
+\backslash
+ 4.big5a
+\backslash
+_dv&    0.687         
+\backslash
+
+\backslash
+           &  (0.284)         
+\backslash
+
+\backslash
+ 5.big5a
+\backslash
+_dv&    0.813         
+\backslash
+
+\backslash
+           &  (0.204)         
+\backslash
+
+\backslash
+ 6.big5a
+\backslash
+_dv&    0.815         
+\backslash
+
+\backslash
+           &  (0.203)         
+\backslash
+
+\backslash
+ 7.big5a
+\backslash
+_dv&    0.665         
+\backslash
+
+\backslash
+           &  (0.299)         
+\backslash
+
+\backslash
+ 1.big5n
+\backslash
+_dv&        0         
+\backslash
+
+\backslash
+           &      (.)         
+\backslash
+
+\backslash
+ 2.big5n
+\backslash
+_dv&   0.0770         
+\backslash
+
+\backslash
+           &  (0.412)         
+\backslash
+
+\backslash
+ 3.big5n
+\backslash
+_dv&  -0.0264         
+\backslash
+
+\backslash
+           &  (0.766)         
+\backslash
+
+\backslash
+ 4.big5n
+\backslash
+_dv&   0.0519         
+\backslash
+
+\backslash
+           &  (0.567)         
+\backslash
+
+\backslash
+ 5.big5n
+\backslash
+_dv&   -0.106         
+\backslash
+
+\backslash
+           &  (0.252)         
+\backslash
+
+\backslash
+ 6.big5n
+\backslash
+_dv&   -0.205
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.048)         
+\backslash
+
+\backslash
+ 7.big5n
+\backslash
+_dv&   -0.286
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.025)         
+\backslash
+
+\backslash
+ 1.sclfsat1&        0         
+\backslash
+
+\backslash
+           &      (.)         
+\backslash
+
+\backslash
+ 2.sclfsat1&   0.0980         
+\backslash
+
+\backslash
+           &  (0.294)         
+\backslash
+
+\backslash
+ 3.sclfsat1&  -0.0162         
+\backslash
+
+\backslash
+           &  (0.859)         
+\backslash
+
+\backslash
+ 4.sclfsat1&   -0.151         
+\backslash
+
+\backslash
+           &  (0.125)         
+\backslash
+
+\backslash
+ 5.sclfsat1&    0.127         
+\backslash
+
+\backslash
+           &  (0.175)         
+\backslash
+
+\backslash
+ 6.sclfsat1&    0.220
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.010)         
+\backslash
+
+\backslash
+ 7.sclfsat1&    0.235
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.021)         
+\backslash
+
+\backslash
+ scend     &   0.0138
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.013)         
+\backslash
+
+\backslash
+ race
+\backslash
+_rank &  -0.0206
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.015)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -1.909         
+\backslash
+
+\backslash
+           &  (0.054)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &    12069         
+\backslash
+
+\backslash
+ pseudo 
+\backslash
+(R^{2}
+\backslash
+)&    0.088         
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular}} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{education vs father's occupation 
+\backslash
+label{educpasoc10cc}} 
+\backslash
+begin{tabular}{l*{1}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}         
+\backslash
+
+\backslash
+ 
+\backslash
+hline pasoc10
+\backslash
+_cc&-0.000524
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    3.254
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &    15533         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.014         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+caption{Heckman selection for Unemployment 
+\backslash
+label{heckman}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox*{!}{
+\backslash
+textheight}{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular}{lll}  & (1) & (2)
+\backslash
+
+\backslash
+ main &  & 
+\backslash
+
+\backslash
+ 0.educ
+\backslash
+_level & 0 & 0
+\backslash
+
+\backslash
+  & (.) & (.)
+\backslash
+
+\backslash
+ 1.educ
+\backslash
+_level & 0.179{*}{*}{*} & 0.112{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.024)
+\backslash
+
+\backslash
+ 2.educ
+\backslash
+_level & 0.206{*}{*}{*} & 0.123{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.012)
+\backslash
+
+\backslash
+ 3.educ
+\backslash
+_level & 0.367{*}{*}{*} & 0.249{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.000)
+\backslash
+
+\backslash
+ 4.educ
+\backslash
+_level & 0.800{*}{*}{*} & 0.666{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.000)
+\backslash
+
+\backslash
+ 5.educ
+\backslash
+_level & 0.506{*}{*}{*} & 0.382{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.000)
+\backslash
+
+\backslash
+ exper & 0.00983{*}{*} & 0.00945{*}{*}
+\backslash
+
+\backslash
+  & (0.010) & (0.006)
+\backslash
+
+\backslash
+ exper
+\backslash
+_sq & -0.00110{*}{*}{*} & -0.00106{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.000)
+\backslash
+
+\backslash
+ 1.gor
+\backslash
+_dv & 0 & 0
+\backslash
+
+\backslash
+  & (.) & (.)
+\backslash
+
+\backslash
+ 2.gor
+\backslash
+_dv & 0.0349 & 0.0182
+\backslash
+
+\backslash
+  & (0.274) & (0.646)
+\backslash
+
+\backslash
+ 3.gor
+\backslash
+_dv & -0.0356 & -0.0549
+\backslash
+
+\backslash
+  & (0.294) & (0.191)
+\backslash
+
+\backslash
+ 4.gor
+\backslash
+_dv & -0.00841 & -0.0383
+\backslash
+
+\backslash
+  & (0.810) & (0.376)
+\backslash
+
+\backslash
+ 5.gor
+\backslash
+_dv & 0.0409 & 0.00981
+\backslash
+
+\backslash
+  & (0.237) & (0.820)
+\backslash
+
+\backslash
+ 6.gor
+\backslash
+_dv & 0.0578 & 0.0317
+\backslash
+
+\backslash
+  & (0.102) & (0.440)
+\backslash
+
+\backslash
+ 7.gor
+\backslash
+_dv & 0.238{*}{*}{*} & 0.239{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.000)
+\backslash
+
+\backslash
+ 8.gor
+\backslash
+_dv & 0.0999{*}{*} & 0.0728
+\backslash
+
+\backslash
+  & (0.002) & (0.066)
+\backslash
+
+\backslash
+ 9.gor
+\backslash
+_dv & -0.0568 & -0.0838{*}
+\backslash
+
+\backslash
+  & (0.094) & (0.044)
+\backslash
+
+\backslash
+ 10.gor
+\backslash
+_dv & -0.0812 & -0.0973{*}
+\backslash
+
+\backslash
+  & (0.062) & (0.038)
+\backslash
+
+\backslash
+ 11.gor
+\backslash
+_dv & 0.0283 & 0.0113
+\backslash
+
+\backslash
+  & (0.399) & (0.790)
+\backslash
+
+\backslash
+ 12.gor
+\backslash
+_dv & -0.0327 & -0.0796
+\backslash
+
+\backslash
+  & (0.411) & (0.117)
+\backslash
+
+\backslash
+ big5o
+\backslash
+_dv & -0.00180 & 0.00397
+\backslash
+
+\backslash
+  & (0.768) & (0.541)
+\backslash
+
+\backslash
+ big5c
+\backslash
+_dv & 0.0389{*}{*}{*} & 0.0239{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.012)
+\backslash
+
+\backslash
+ big5e
+\backslash
+_dv & 0.0119{*} & 0.00814
+\backslash
+
+\backslash
+  & (0.041) & (0.178)
+\backslash
+
+\backslash
+ big5a
+\backslash
+_dv & -0.0440{*}{*}{*} & -0.0419{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.000)
+\backslash
+
+\backslash
+ big5n
+\backslash
+_dv & -0.0369{*}{*}{*} & -0.0300{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.000)
+\backslash
+
+\backslash
+ age
+\backslash
+_cr & 0.0525{*}{*}{*} & 0.0496{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.000)
+\backslash
+
+\backslash
+ 1.racel
+\backslash
+_dv & 0 & 0
+\backslash
+
+\backslash
+  & (.) & (.)
+\backslash
+
+\backslash
+ 2.racel
+\backslash
+_dv & -0.0290 & -0.00612
+\backslash
+
+\backslash
+  & (0.634) & (0.926)
+\backslash
+
+\backslash
+ 3.racel
+\backslash
+_dv & -0.451 & -0.307
+\backslash
+
+\backslash
+  & (0.147) & (0.522)
+\backslash
+
+\backslash
+ 4.racel
+\backslash
+_dv & -0.101{*} & -0.100{*}
+\backslash
+
+\backslash
+  & (0.016) & (0.014)
+\backslash
+
+\backslash
+ 5.racel
+\backslash
+_dv & 0.0336 & 0.0121
+\backslash
+
+\backslash
+  & (0.823) & (0.924)
+\backslash
+
+\backslash
+ 6.racel
+\backslash
+_dv & -0.193 & -0.150
+\backslash
+
+\backslash
+  & (0.394) & (0.346)
+\backslash
+
+\backslash
+ 7.racel
+\backslash
+_dv & -0.210 & -0.190
+\backslash
+
+\backslash
+  & (0.126) & (0.159)
+\backslash
+
+\backslash
+ 8.racel
+\backslash
+_dv & -0.189 & -0.174
+\backslash
+
+\backslash
+  & (0.095) & (0.197)
+\backslash
+
+\backslash
+ 9.racel
+\backslash
+_dv & -0.206{*}{*}{*} & -0.193{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.001)
+\backslash
+
+\backslash
+ 10.racel
+\backslash
+_dv & -0.270{*}{*} & -0.297{*}{*}
+\backslash
+
+\backslash
+  & (0.001) & (0.002)
+\backslash
+
+\backslash
+ 11.racel
+\backslash
+_dv & -0.219 & -0.320
+\backslash
+
+\backslash
+  & (0.270) & (0.061)
+\backslash
+
+\backslash
+ 12.racel
+\backslash
+_dv & -0.224 & -0.251
+\backslash
+
+\backslash
+  & (0.204) & (0.109)
+\backslash
+
+\backslash
+ 13.racel
+\backslash
+_dv & -0.252{*}{*} & -0.217{*}
+\backslash
+
+\backslash
+  & (0.007) & (0.022)
+\backslash
+
+\backslash
+ 14.racel
+\backslash
+_dv & -0.0692 & -0.0230
+\backslash
+
+\backslash
+  & (0.359) & (0.796)
+\backslash
+
+\backslash
+ 15.racel
+\backslash
+_dv & -0.329{*}{*}{*} & -0.294{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.000)
+\backslash
+
+\backslash
+ 16.racel
+\backslash
+_dv & 0.0352 & 0.0716
+\backslash
+
+\backslash
+  & (0.826) & (0.771)
+\backslash
+
+\backslash
+ 17.racel
+\backslash
+_dv & 0.0845 & 0.110
+\backslash
+
+\backslash
+  & (0.609) & (0.568)
+\backslash
+
+\backslash
+ 97.racel
+\backslash
+_dv & -0.349 & -0.329{*}
+\backslash
+
+\backslash
+  & (0.069) & (0.044)
+\backslash
+
+\backslash
+ sex & -0.523{*}{*}{*} & -0.542{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.000)
+\backslash
+
+\backslash
+ 
+\backslash
+_cons & 6.197{*}{*}{*} & 6.559{*}{*}{*}
+\backslash
+
+\backslash
+  & (0.000) & (0.000)
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 A multinomial model for Employment types
 \end_layout
 
@@ -358,7 +1704,7 @@ The left-side of the equation are types of employments.
 \end_layout
 
 \begin_layout Standard
-To run the mbprobit, a limitation that tempts us to impose strange constraints
+To run the mprobit, a limitation that tempts us to impose strange constraints
  is the use of continuous variables.
  mprobit fails to converge - the matrix size needs to be increased.
  If this is to be enforced new variables control variables are sorted based
@@ -396,40 +1742,6 @@ If we assume a simple model where the market assigns job
 \end_layout
 
 \begin_layout Subsubsection
-Personality and Happiness
-\end_layout
-
-\begin_layout Standard
-The level of career in the job is clearly dependent on age meant to be different
- from the job vector (that includes sector and personality concerns rather
- than seniority of promotion).
- SEC can be used to combine occupation and class
-\begin_inset CommandInset citation
-LatexCommand cite
-key "NS_SEC"
-
-\end_inset
-
-.
- SEC encapsulates a lot of judgment about strata - these classifications
- might as well reflect the reality that class exists - but there is slow
- mobility - and for something like subjective well-being this could obfuscate
- causality (people could be happy if they believe in mobility- while their
- 
-\begin_inset Quotes eld
-\end_inset
-
-class
-\begin_inset Quotes erd
-\end_inset
-
- might still be low- making us conclude that the lower class is happier).
- Regardless, the conclusion that lower classes are happier could still be
- valid (even though associations of class with happiness is wrong).
- For wage growth, happiness or subjective well-being is largely immaterial.
-\end_layout
-
-\begin_layout Subsubsection
 Effect of personality on income within the same occupations
 \end_layout
 
@@ -445,6 +1757,8 @@ This is a regression of income on OCEAN characteristics, highest level of
  This could just race is so little populated.
  A simple regression does express significance of personality but we also
  need to see that income is already inducing personalities (self selection).
+ hiqual_dv =1 implies degree.
+ The effect of race seems important.
 \end_layout
 
 \begin_layout Standard
@@ -1062,25 +2376,6 @@ hline
 \backslash
 
 \backslash
- adj.
- 
-\backslash
-(R^{2}
-\backslash
-)&    0.149         &    0.203         &    0.223         &    0.183       
-  &    0.256         &    0.293         
-\backslash
-
-\backslash
- pseudo 
-\backslash
-(R^{2}
-\backslash
-)&                  &                  &                  &            
-      &                  &                  
-\backslash
-
-\backslash
  
 \backslash
 hline
@@ -1379,6 +2674,20 @@ sym{**} &  -0.0235         &   -0.100         &   -0.502         &   0.0130
 \backslash
            &  (0.364)         &  (0.003)         &  (0.860)         &  (0.268)
          &  (0.248)         &  (0.970)         
+\backslash
+
+\backslash
+ 3.racel
+\backslash
+_dv&                  &   -0.892
+\backslash
+sym{***}&                  &  -0.0336         &                  &      
+            
+\backslash
+
+\backslash
+           &                  &  (0.000)         &                  &  (0.871)
+         &                  &                  
 \backslash
 
 \backslash
@@ -1736,20 +3045,6 @@ sym{*}  &   -0.201
 \backslash
 
 \backslash
- 3.racel
-\backslash
-_dv&                  &   -0.892
-\backslash
-sym{***}&                  &  -0.0336         &                  &      
-            
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.871)
-         &                  &                  
-\backslash
-
-\backslash
  
 \backslash
 _cons    &    6.585
@@ -1887,11 +3182,8 @@ sticky
  of economic success of their progeny.
  Hence, introducing the father's occupation would make sense.
  However, a problem with endogeneity would also appear.
-\end_layout
-
-\begin_layout Standard
-The obvious objection is that education is endogenous since those with higher
- wages and high education do so because of their parents.
+ The obvious objection is that education is endogenous since those with
+ higher wages and high education do so because of their parents.
  This is valid objection and to instrument education we need a variable
  that effects education but not wage.
  We can argue that parent's education (because of the very objection) influences
@@ -1907,314 +3199,34 @@ highly correlated with the difference between (thus use housing as an instrument
  
 \end_layout
 
-\begin_layout Subsection
-Unemployment and Personality
-\end_layout
-
-\begin_layout Standard
-A lot of entries are of people un- fimngrs_dv paygu_dv is set to missing
- for retired persons.
- Ideally we should consider the retired since their economic success can
- be gauged by fimngrs_dv (which is higher than paygu_dv).
- However, since jbsoc00_cc is recorded as 
-\begin_inset Quotes eld
-\end_inset
-
-inapplicable
-\begin_inset Quotes erd
-\end_inset
-
- for retirees, they cannot be included in our analysis of industry.
-\end_layout
-
-\begin_layout Standard
-are employed cannot be compared with the those who are not unemployed.
- There care must be taken while talking about employee preferences.
- Unemployment is a lot more difficult problem and involves a lot of other
- structural factors such as economic development in the region - the data
- on which isn't available (except the rank based on median income) - where
- a simple model of personalities is difficult.
- What one may still do is see if certain personalities are heckman selection
- (this is not truncation - since we know that people (see Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{educpasoc10cc}
-\end_layout
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{education vs father's occupation 
-\backslash
-label{educpasoc10cc}} 
-\backslash
-begin{tabular}{l*{1}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}         
-\backslash
-
-\backslash
- 
-\backslash
-hline pasoc10
-\backslash
-_cc&-0.000524
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    3.254
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &    15533         
-\backslash
-
-\backslash
- 
-\backslash
-(R^{2}
-\backslash
-) &    0.014         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Employment and conscientiousness
-\end_layout
-
-\begin_layout Subsubsection
-Conscientiousness over time
-\end_layout
-
-\begin_layout Standard
-Overall variation in conscientiousness within time period can be viewed.
- Pooled regression ought to be utilized because only wave 3 data is present.
- But the data for a particular sector is somewhat sparse.
- This can be done only for sales individuals to show that conscientiousness
- (as well as other characteristics) may be significant.
-\end_layout
-
-\begin_layout Subsubsection
-Discrimination against those having less conscientiousness
-\end_layout
-
-\begin_layout Standard
-Oaxaca, 
-\end_layout
-
-\begin_layout Standard
-Stata - Journal - It divides the wage differential between two groups into
- a part that is “explained” by group differences in productivity characteristics
-, such as education or work experience, and a residual part that cannot
- be accounted for by such differences in wage determinants.
- This “unexplained” part is often used as a measure for discrimination,
- but it also subsumes the effects of group differences in unobserved predictors.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Box Frameless
-position "t"
-hor_pos "c"
-has_inner_box 1
-inner_pos "t"
-use_parbox 0
-use_makebox 0
-width "100col%"
-special "none"
-height "1in"
-height_special "totalheight"
-thickness "0.4pt"
-separation "3pt"
-shadowsize "4pt"
-framecolor "black"
-backgroundcolor "none"
-status open
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-tabstat lnwage educ exper tenure if lfp==1, by(female) stats(n mean sd max
- min) nototal longstub col(stat) 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Clusters of personal characteristics and change in personality over time
-\end_layout
-
-\begin_layout Standard
-The significance of clusters is the only effect that justifies this.
- In terms of education and age the division of labour may be applicable
- but no such clearcut boundaries are applicable for race or personality.
- Effect can be a fixed and random effects study.
- However rank is endogenous.
- Are personalities heavily correlated with ethnicities i.e.
- is the effect of ethnicity strong through personality?
-\end_layout
-
-\begin_layout Standard
-In all professions, the number of asians is quite little it only implies
- that minority effects dominate.
- Aggregating into broader categories (at the risk of sense) may provide
- better results.
-\end_layout
-
-\begin_layout Standard
-Race is not to be considered as a static factor as is commonly assumed.
- The claim of inductive effect on personalities - where similar type of
- personalities group in a profession should be applied across social group
- as well.
- Personality 
-\begin_inset Quotes eld
-\end_inset
-
-types
-\begin_inset Quotes erd
-\end_inset
-
- are no different from racial types in that sense.
- Therefore race is considered side-by-side with the size of the race.
- Interactions of the race size (number of people of the particular race)
- and the race dummies can be considered as well.
- The question asked here is whether races are penalized for characteristics
- other than them being a minority in the UK.
- Is this penalty through personality types.
- If neither explain this, then what is the reason behind disparities.
-\end_layout
-
-\begin_layout Standard
-The analysis of size is simply viewed by evaluating coefficients against
- the number of people.
- The regression dummy variables gives us the size (coefficients) of various
- racial categories - this significance becomes clear in the size.
-\end_layout
-
-\begin_layout Standard
-We can regress peronsanility over time as well.
- The pooled regression might 
-\end_layout
-
 \begin_layout Section
 Results and Conclusions
 \end_layout
 
+\begin_layout Subsection
+Multinomial Job selection model
+\end_layout
+
 \begin_layout Standard
-Personalities matter less in engineering professions.
+For the first part, multinomial method showed the significance of personalities.
+\end_layout
+
+\begin_layout Subsection
+Wage Equation Results
+\end_layout
+
+\begin_layout Standard
+Without instrumentation of education, the effect of a degree appears strong.
+ Expersq has a strong but weak effect on lnwage.
+ We can see that race also seems to have an impact on some jobs - implying
+ crowding.
+ Education (degree) has the strongest influence on wage - implying that
+ barriers exist for those without a degree education in wage growth.
+ Overall neuroticism affects wage growth more than anything else.
+\end_layout
+
+\begin_layout Standard
+Personalities matter less overall in engineering professions.
  It remains to be tested whether this is because of low paid profession
  categories.
  We must realized that there is endogeneity with jbnsec_dv (which itself
@@ -6157,43 +7169,6 @@ end{table}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-Job satisfaction and fit
-\end_layout
-
-\begin_layout Standard
-For the first part, multinomial method showed the significance of personalities.
-\end_layout
-
-\begin_layout Standard
-The method of classification is based on the education one gets to get into
- these professions.
- It is unlikely that a degree student ends up working in construction repairman.
- The idea of sector is to measure what degree of competition amongst employees
- is rewarded as promotion (or if it is rewarded at all).
- The regressions within the sector can provide the interplay.
- is 
-\end_layout
-
-\begin_layout Standard
-The study doesn't consider the unemployed - since its goal is narrowed down
- to how employers promote experienced workforce.
- Studying inexperienced workforce and recruitment of young  people would
- involve studying factors of unemployment and is not part of this study.
- Hence only employed people are considered as part of this study.
-\end_layout
-
-\begin_layout Standard
-The effect of race is interesting that it seems to disappear when the numbers
- are significant.
- This would suggest that outliers in personality may be penalized in the
- same way.
- We can look for evidence of how much a computer scientist penalized (in
- terms of pay) when she ends up being in sales.
- Quantifying this loss is the goal of this study.
- 
 \end_layout
 
 \begin_layout Standard
