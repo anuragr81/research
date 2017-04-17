@@ -83,13 +83,14 @@ replace educ_level= 4 if hiqual_dv== 1
 replace educ_level= 5 if hiqual_dv== 2
 
 * replace ln_paygu_dv =0 if jbstat==3
-* run tobit, heckman
+* run tobit (discarded), heckman
 tobit ln_paygu_dv i.educ_level exper exper_sq i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex, ll(0)
 eststo clear
 eststo : quietly regress ln_paygu_dv i.educ_level exper exper_sq i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex, robust
 eststo : quietly heckman ln_paygu_dv i.educ_level exper exper_sq i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex, select(employed = i.educ_level exper exper_sq i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex i.sclfsat1) twostep
 esttab using results_heckman.csv, r2 ar2 pr2 nomtitles no p numbers star nogaps compress title(Heckman Regression\label{tabheckman})
-* discard unemployment related entries 
+
+* discard unemployment related entries for further analysis
 drop if job_term != "a permanent job" 
 drop if jbsoc00_cc<=0
 * remove non specified job types for further analysis
@@ -118,47 +119,54 @@ replace gor_rank= 12 if gor_dv== 7
 * mprobit with factor variables does not converge
 ** mprobit chosen_job_category scend i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv i.racel_dv i.sex_cr i.hiqual_dv
 mprobit chosen_job_category scend gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv race_rank sex_cr educ_level
-* eststo: quietly margins, dydx(educ_level)
-
-* esttab using margins_educ_level.tex, p numbers star nogaps compress title(Margins for Education \label{margins_educ})
-
+* eststo: quietly margins, dydx(educ_level) etc.
 
 * Part II
 * considering only 1,4,5,6,7,8,11,12,13,14,15,16
+
 eststo clear
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==1,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==4,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==5,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==6,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==7,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==8,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==1,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==4,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==5,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==6,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==7,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==8,robust
 esttab using results_plainreg1.tex, r2 nomtitles no p numbers star nogaps compress title(Wage Regression\label{tabplainreg1})
 
 eststo clear
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==11,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==12,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==13,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==14,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==15,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==16,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==11,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==12,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==13,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==14,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==15,robust
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_category ==16,robust
 
 esttab using results_plainreg2.tex, r2 nomtitles no p numbers star nogaps compress title(Wage Regression\label{tabplainreg2})
 
+* identification tests
+ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==1,robust
+estat overid, forcenonrobust
+estat firststage, all forcenonrobust
+ivreg2 ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==1
 
+* running for all job categories(sectors)
+eststo clear
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==1,robust
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==4,robust
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==5,robust
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==6,robust
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==7,robust
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==8,robust
+esttab using results_ivreg1.tex, r2 nomtitles no p numbers star nogaps compress title(Wage ivregress 2slsion\label{tabivreg1})
+esttab using results_ivreg1.csv, r2 nomtitles no p numbers star nogaps compress title(Wage ivregress 2slsion\label{tabivreg1})
 
 eststo clear
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==1,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==4,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==5,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==6,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==7,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==8,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==11,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==12,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==13,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==14,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==15,robust
-eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex_cr ib3.hiqual_dv if chosen_job_category ==16,robust
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==11,robust
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==12,robust
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==13,robust
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==14,robust
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==15,robust
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job_category ==16,robust
 
-esttab using results_plainreg.csv, r2 nomtitles no p numbers star nogaps compress title(Wage Regression\label{tabplainreg2})
-
+esttab using results_ivreg2.tex, r2 nomtitles no p numbers star nogaps compress title(Wage ivregress 2slsion\label{tabivreg2})
+esttab using results_ivreg2.csv, r2 nomtitles no p numbers star nogaps compress title(Wage ivregress 2slsion\label{tabivreg2})
