@@ -96,18 +96,19 @@ name "sec:Introduction"
 \end_layout
 
 \begin_layout Standard
-There is ample evidence in literature to show personalities - in addition
- to education and economic strata - have a strong effect on career choices
- and growth.
+There is ample evidence in literature showing that personalities - in addition
+ to education and economic strata - have a strong influence on career choices
+ and growth within the career.
  The current project is interested in finding the OCEAN traits that employers
  might lean towards while hiring their workforce.
  While the current exercise doesn't use the employment history databases
- often maintained at a company, it uses the Understanding Society database
- to obtain a general set of economic data to see how different industrial
- sectors both shape and select personalities.
- Personalities are not intended to be innate static types in this approach.
- The reported significance of attitude and motivational attributes is attempted
- to be explored in this exercise
+ often maintained at a corporation, it uses the Understanding Society database
+ to obtain a an overview of personality, education and income data across
+ a cross-section of careers from different industrial sectors.
+ The study assumes that employers may both select and shape personalities
+ and maintains that personalities are not intended to be innate static types.
+ The significance of attitude and motivational attributes in the literature
+ is attempted to be viewed in within this framework 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "GintisDeterminants"
@@ -118,20 +119,16 @@ key "GintisDeterminants"
 \end_layout
 
 \begin_layout Standard
-The goal of the the exercise is to check if 
-\end_layout
-
-\begin_layout Standard
-1.
- personality is a strong factor in determining the selection of sectors
- of industry.
- 
-\end_layout
-
-\begin_layout Standard
-2.
- if pay grade within the job sectors favor or cultivate certain personality
- characteristics
+The goal of the the exercise is twofold - first, it tests whether personality
+ is a strong factor in determining the selection of sectors of industry
+ and second, pay grade within the job sectors favor or cultivate certain
+ personality characteristics.
+ The second goal is important since suitability of professions for a certain
+ personality ultimately has to do with best performers within that industry
+ or sector.
+ While there may be no suitable profession for the extremely introverted
+ or the extremely undisciplined, the monetary rewards to the best performers
+ in the industry may speak of suitability of the personality to a career.
 \end_layout
 
 \begin_layout Standard
@@ -139,11 +136,9 @@ The theory that is intended to be accepted or rejected by the data is whether
  any sort of barriers based on personality exist in the employment rather
  than the more easily justifiable and directly observable characteristics
  such as education, age and experience.
- We expect that the personality based discrimination is more subtle and
- less measurable (publicly known).
- Whether the less observability of personality and standards in employment
- guidelines within companies is a significant factor or not is left as a
- question for further analysis from employment histories of companies.
+ While a personality based discrimination (if any) may be subtle, irregular
+ and less measurable, its predominance may provide insights into the relationshi
+p between career development and personality types.
 \end_layout
 
 \begin_layout Section
@@ -151,60 +146,663 @@ Data and Methodology
 \end_layout
 
 \begin_layout Standard
-Understanding society data has five personality traits widely used by psychologi
-sts.
- The values range from 0 to 5 and are already normalized by the survey.
- The job-related data was reaggregated.
- Certain categories have been ommitted from the discussion due to limited
- number number.
- (for example, legal occupations have a very meagre representation in the
- data).
+Understanding society data has five personality traits that are widely used
+ by psychologists.
+ The values of these traits range from 0 to 7 and are already normalized
+ by the survey.
  
 \end_layout
 
 \begin_layout Standard
-The field jbsoc00_cc in data marks the employment category.
- However, these classifications are based on daily activities rather than
- the industrial sector and thus managers at engineering firms are not classified
- under the same category as those in low end jobs in the same firm.
+The field 
+\family typewriter
+jbsoc00_cc
+\family default
+ in data marks the employment category.
+ These are based on day-to-day activities rather than the industrial sector
+ in which a firm operates.
+ Managers at engineering firms are not classified under the same category
+ as those in low end jobs in the same firm.
  This makes jbsoc00_cc inappropriate for understanding what sort of characterist
 ics distinguish performing candidates within a firm or are used by the employees
- in choosing (or get selected by) different sectors in the economy (see
- Section 
+ in hiring new talent (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Introduction"
 
 \end_inset
 
-).
- The categories of sector in table are chosen based on the type of firms.
- A typical firm exercises an HR policy applicable throughout the companies
- and might have its own criteria of selecting candidates.
- It aggregation of jbsoc00_cc may seem arbitrary (a classification based
- on firm data would be more appropriate) but jbsoc00_cc classes are well-defined
- and leave very little chance for boundary cases.
- Except for managers (where general business managers or consulting firms
- may be utilized) this classification may fall apart - but since the identificat
-ion is based on the individual respinsibilities, this is less likely to
- be a problem.
- Other than that objection, it's not possible for jbsoc00_cc to be amongst
- multiple sectors or multiple sectors ).
- If we find that a type A firm (let's say in mining) differs significantly
- from type B (firm) then we know that the type of personalities are different
- in the sector.
+ for goals of the study).
+ The job-related data was thus reaggregated into industrial sectors based
+ on the similarity between occupations.
+ This is shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:job_sectors"
+
+\end_inset
+
+.
+ The categories of sector in the table are chosen based on the type of firms.
+ While this cannot be as informative as the employment histories within
+ a company which maintains its own criteria of selecting candidates, the
+ categories of 
+\family typewriter
+jbsoc00_cc
+\family default
+ are non-overlapping and rich our analysis.
+ Except for the category of managers (where general business managers or
+ consulting firms may both be under the same 
+\family typewriter
+jbsoc00_cc
+\family default
+ category) the semantics of 
+\family typewriter
+jbsoc00_cc
+\family default
+ is less likely to be a problem i.e.
+ it is unlikely for a 
+\family typewriter
+jbsoc00_cc
+\family default
+ category to be among multiple industrial sectors.
 \end_layout
 
 \begin_layout Standard
-What we're trying to claim is that personality has a definite role to play
- in selection.
- That said, there is no profession for the extremely introvert and the less
- disciplined.
- The suitability of professions for a certain personality can be based on
- the best performers within the industry.
- There it may be worthwhile to look into the best performers within the
- categories to understand personality.
- This is why the question 2 is raised.
+It was observed that the certain 
+\begin_inset Quotes eld
+\end_inset
+
+sectors
+\begin_inset Quotes erd
+\end_inset
+
+ were under-represented in the data or not recorded correctly (for example,
+ legal occupations have a very meagre representation in the data).
+ The under-represented categories 2(agri), 3(art), 9(legal), 10(media) were
+ not considered for wage-related analyses (except in overall regressions).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement tp
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="17" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="left" valignment="top" width="5in">
+<column alignment="left" valignment="top" width="1.5cm">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+job sector id
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\align center
+
+\series bold
+aggregated jbsoc00_cc entries
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+abbr.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Administrative occupations: finance, Administrative occupations: records,
+ Administrative occupations: communications, Administrative occupations:
+ general, Secretarial and related occupations, Elementary administration
+ occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+admin
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Managers in farming, horticulture, forestry and services, Agricultural trades,
+ Elementary agricultural occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+agri
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Artistic and literary occupations, Design associate professionals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+art
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Corporate managers and senior officials, Functional managers, Financial
+ institution and office managers, Managers in distribution, storage and
+ retailing, Business and statistical professionals, Business and finance
+ associate professionals, Managers and proprietors in other service industries
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+biz
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Engineering professionals, Information and communication technology professional
+s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+engg
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Architects, town planners, surveyors, Draughtspersons and building inspectors,
+ Conservation associate professionals, Construction trades, Building trades,
+ Construction operatives, Elementary construction occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+arch
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quality and customer care managers, Leisure and travel service occupations,
+ Hairdressers and related occupations, Housekeeping occupations, Personal
+ services occupations nec, Customer service occupations, Mobile machine
+ drivers and operatives, Elementary personal services occupations, Elementary
+ cleaning occupations, Managers and proprietors in hospitality and leisure
+ services, Sports and fitness occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+consume
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Health and social services managers, Health professionals, Health associate
+ professionals, Therapists, Social welfare associate professionals, Healthcare
+ and related personal services, Childcare and related personal services,
+ Animal care services
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+health
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Legal professionals, Legal associate professionals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+legal
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Media associate professionals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+media
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Production managers, Metal forming, welding and related trades, Metal machining,
+ fitting and instrument making trades, Vehicle trades, Electrical trades,
+ Textiles and garments trades, Printing trades, Food preparation trades,
+ Skilled trades nec, Process operatives, Plant and machine operatives, Assembler
+s and routine operatives, Elementary process plant occupations, Elementary
+ goods storage occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+prod
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Public service professionals, Librarians and related professionals, Public
+ service and other associate professionals, Administrative occupations:
+ government and related organisat, Teaching professionals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pubsvc
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+It service delivery occupations, Sales and related associate professionals,
+ Sales assistants and retail cashiers, Sales related occupations, Elementary
+ sales occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+it
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Science professionals, Research professionals, Science and engineering technicia
+ns
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sci
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Protective service officers, Protective service occupations, Elementary
+ security occupations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+secur
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Transport associate professionals, Transport drivers and operatives
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+transpt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:job_sectors"
+
+\end_inset
+
+Categories used in identified sectors
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1801,7 +2399,7 @@ else
 \backslash
 fi} 
 \backslash
-caption{lnwage Regression
+caption{lnwage Regression (1)
 \backslash
 label{tabplainreg1}} 
 \backslash
@@ -1815,17 +2413,17 @@ hline
 \backslash
 hline           &
 \backslash
-multicolumn{1}{c}{(1)}         &
+multicolumn{1}{c}{admin(1)}         &
 \backslash
-multicolumn{1}{c}{(4)}         &
+multicolumn{1}{c}{biz(4)}         &
 \backslash
-multicolumn{1}{c}{(5)}         &
+multicolumn{1}{c}{engg(5)}         &
 \backslash
-multicolumn{1}{c}{(6)}         &
+multicolumn{1}{c}{arch(6)}         &
 \backslash
-multicolumn{1}{c}{(7)}         &
+multicolumn{1}{c}{consume(7)}         &
 \backslash
-multicolumn{1}{c}{(8)}         
+multicolumn{1}{c}{health(8)}         
 \backslash
 
 \backslash
@@ -2461,7 +3059,7 @@ else
 \backslash
 fi} 
 \backslash
-caption{lnwage Regression
+caption{lnwage Regression (2) 
 \backslash
 label{tabplainreg2}} 
 \backslash
@@ -2480,17 +3078,17 @@ hline
 \backslash
 hline           &
 \backslash
-multicolumn{1}{c}{(11)}         &
+multicolumn{1}{c}{prod(11)}         &
 \backslash
-multicolumn{1}{c}{(12)}         &
+multicolumn{1}{c}{pubsvc(12)}         &
 \backslash
-multicolumn{1}{c}{(13)}         &
+multicolumn{1}{c}{it(13)}         &
 \backslash
-multicolumn{1}{c}{(14)}         &
+multicolumn{1}{c}{sci(14)}         &
 \backslash
-multicolumn{1}{c}{(15)}         &
+multicolumn{1}{c}{secur(15)}         &
 \backslash
-multicolumn{1}{c}{(16)}         
+multicolumn{1}{c}{transpt(16)}         
 \backslash
 
 \backslash
@@ -3188,15 +3786,14 @@ sticky
  that effects education but not wage.
  We can argue that parent's education (because of the very objection) influences
  education of a child - but parent's don't affect a child's progress after
- the job begins therefore the effect of parent's education on
-\end_layout
-
-\begin_layout Standard
-highly correlated with the difference between (thus use housing as an instrument
- variable).
+ the job begins therefore the effect of parent's education on.
+ highly correlated with the difference between (thus use housing as an instrumen
+t variable).
  House and assets don't affect wage but they do affect the standing that
  we try to measure by the parent's occupation.
- 
+ The results from ivregress (ivreg2 also converged with expected results)
+ is shown in Table.
+ It seems that after instrument the personalities effects have become sharper.
 \end_layout
 
 \begin_layout Section
@@ -3241,588 +3838,6 @@ Personalities matter more for higher ranks within the industry rather the
 \begin_layout Standard
 The theory that we need to test is whether popular traits tend to use self-selec
 tion.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement tp
-wide true
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="17" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="left" valignment="top" width="5in">
-<column alignment="left" valignment="top" width="1.5cm">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-job sector id
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\align center
-
-\series bold
-aggregated jbsoc00_cc entries
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-abbr.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Administrative occupations: finance, Administrative occupations: records,
- Administrative occupations: communications, Administrative occupations:
- general, Secretarial and related occupations, Elementary administration
- occupations
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-admin
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Managers in farming, horticulture, forestry and services, Agricultural trades,
- Elementary agricultural occupations
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-agri
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Artistic and literary occupations, Design associate professionals
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-art
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Corporate managers and senior officials, Functional managers, Financial
- institution and office managers, Managers in distribution, storage and
- retailing, Business and statistical professionals, Business and finance
- associate professionals, Managers and proprietors in other service industries
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-biz
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Engineering professionals, Information and communication technology professional
-s
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-engg
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Architects, town planners, surveyors, Draughtspersons and building inspectors,
- Conservation associate professionals, Construction trades, Building trades,
- Construction operatives, Elementary construction occupations
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-arch
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-7
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Quality and customer care managers, Leisure and travel service occupations,
- Hairdressers and related occupations, Housekeeping occupations, Personal
- services occupations nec, Customer service occupations, Mobile machine
- drivers and operatives, Elementary personal services occupations, Elementary
- cleaning occupations, Managers and proprietors in hospitality and leisure
- services, Sports and fitness occupations
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-consume
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-8
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Health and social services managers, Health professionals, Health associate
- professionals, Therapists, Social welfare associate professionals, Healthcare
- and related personal services, Childcare and related personal services,
- Animal care services
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-health
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-9
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Legal professionals, Legal associate professionals
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-legal
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-10
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Media associate professionals
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-media
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-11
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Production managers, Metal forming, welding and related trades, Metal machining,
- fitting and instrument making trades, Vehicle trades, Electrical trades,
- Textiles and garments trades, Printing trades, Food preparation trades,
- Skilled trades nec, Process operatives, Plant and machine operatives, Assembler
-s and routine operatives, Elementary process plant occupations, Elementary
- goods storage occupations
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-prod
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-12
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Public service professionals, Librarians and related professionals, Public
- service and other associate professionals, Administrative occupations:
- government and related organisat, Teaching professionals
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-pubsvc
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-13
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-It service delivery occupations, Sales and related associate professionals,
- Sales assistants and retail cashiers, Sales related occupations, Elementary
- sales occupations
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-it
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-14
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Science professionals, Research professionals, Science and engineering technicia
-ns
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-sci
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-15
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Protective service officers, Protective service occupations, Elementary
- security occupations
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-secur
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-16
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Transport associate professionals, Transport drivers and operatives
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-transpt
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:job_sectors"
-
-\end_inset
-
-Categories used in identified sectors
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -6768,6 +6783,22 @@ status open
 
 \begin_layout Plain Layout
 
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -7172,6 +7203,725 @@ end{table}
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[p]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{lnwage ivregress (1)
+\backslash
+label{tabivreg1}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox*{
+\backslash
+textwidth}{!}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+begin{tabular}{l*{6}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{admin(1)}         &
+\backslash
+multicolumn{1}{c}{biz(4)}         &
+\backslash
+multicolumn{1}{c}{engg(5)}         &
+\backslash
+multicolumn{1}{c}{arch(6)}         &
+\backslash
+multicolumn{1}{c}{consume(7)}         &
+\backslash
+multicolumn{1}{c}{health(8)}         
+\backslash
+
+\backslash
+ 
+\backslash
+hline educ
+\backslash
+_level&   0.0903         &    0.432
+\backslash
+sym{***}&   0.0237         &    0.141         &    0.213         &    0.243
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.319)         &  (0.000)         &  (0.930)         &  (0.167)
+         &  (0.054)         &  (0.008)         
+\backslash
+
+\backslash
+ exper     &   0.0131         &   0.0270         &   0.0159         &  0.00722
+         &   0.0137         & -0.00849         
+\backslash
+
+\backslash
+           &  (0.289)         &  (0.191)         &  (0.612)         &  (0.806)
+         &  (0.095)         &  (0.605)         
+\backslash
+
+\backslash
+ exper
+\backslash
+_sq  &-0.000661
+\backslash
+sym{***}&-0.000888
+\backslash
+sym{***}&-0.000820
+\backslash
+sym{**} &-0.000696
+\backslash
+sym{**} &-0.000946
+\backslash
+sym{***}&-0.000604
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.003)         &  (0.001)
+         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ gor
+\backslash
+_rank  &   0.0214
+\backslash
+sym{***}&   0.0159
+\backslash
+sym{*}  &   0.0284
+\backslash
+sym{**} &   0.0120         &  0.00968         &  0.00681         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.020)         &  (0.003)         &  (0.227)
+         &  (0.217)         &  (0.140)         
+\backslash
+
+\backslash
+ big5o
+\backslash
+_dv  &  -0.0135         &  -0.0299         &   0.0131         &  -0.0170   
+      &  -0.0300         &  0.00505         
+\backslash
+
+\backslash
+           &  (0.438)         &  (0.181)         &  (0.555)         &  (0.667)
+         &  (0.362)         &  (0.753)         
+\backslash
+
+\backslash
+ big5c
+\backslash
+_dv  &   0.0227         &   0.0398         &  0.00734         &   0.0241   
+      &   0.0448         &   0.0341         
+\backslash
+
+\backslash
+           &  (0.231)         &  (0.147)         &  (0.784)         &  (0.577)
+         &  (0.102)         &  (0.052)         
+\backslash
+
+\backslash
+ big5e
+\backslash
+_dv  & -0.00720         &   0.0189         & -0.00691         &   0.0437   
+      &   0.0224         & -0.00603         
+\backslash
+
+\backslash
+           &  (0.649)         &  (0.342)         &  (0.770)         &  (0.097)
+         &  (0.280)         &  (0.630)         
+\backslash
+
+\backslash
+ big5a
+\backslash
+_dv  &  -0.0400
+\backslash
+sym{*}  &  -0.0272         & -0.00380         &  -0.0643         &  -0.0143
+         &  -0.0267         
+\backslash
+
+\backslash
+           &  (0.044)         &  (0.315)         &  (0.918)         &  (0.119)
+         &  (0.608)         &  (0.204)         
+\backslash
+
+\backslash
+ big5n
+\backslash
+_dv  &  -0.0116         &  -0.0594
+\backslash
+sym{***}&  -0.0295         &   0.0264         &  0.00311         &  -0.0374
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.372)         &  (0.001)         &  (0.105)         &  (0.325)
+         &  (0.871)         &  (0.005)         
+\backslash
+
+\backslash
+ age
+\backslash
+_cr    &   0.0210
+\backslash
+sym{*}  &   0.0268         &   0.0348         &   0.0371         &   0.0430
+\backslash
+sym{***}&   0.0432
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.039)         &  (0.188)         &  (0.232)         &  (0.180)
+         &  (0.000)         &  (0.016)         
+\backslash
+
+\backslash
+ race
+\backslash
+_rank & -0.00641         & -0.00106         &  0.00544         &   0.0691  
+       &  -0.0209         &   0.0109         
+\backslash
+
+\backslash
+           &  (0.570)         &  (0.904)         &  (0.485)         &  (0.130)
+         &  (0.117)         &  (0.149)         
+\backslash
+
+\backslash
+ sex       &   -0.412
+\backslash
+sym{***}&   -0.353
+\backslash
+sym{***}&   -0.310
+\backslash
+sym{**} &   -0.513
+\backslash
+sym{**} &   -0.535
+\backslash
+sym{***}&   -0.442
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.002)         &  (0.006)
+         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    6.964
+\backslash
+sym{***}&    5.731
+\backslash
+sym{***}&    6.827
+\backslash
+sym{***}&    6.420
+\backslash
+sym{***}&    5.558
+\backslash
+sym{***}&    6.066
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     1206         &     1306         &      264         &      269
+         &      976         &     1644         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.123         &        .
+         &    0.210         &    0.120         &    0.210         &    0.204
+         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{lnwage ivregress (2)
+\backslash
+label{tabivreg2}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox*{
+\backslash
+textwidth}{!}
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+begin{tabular}{l*{6}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{prod(11)}         &
+\backslash
+multicolumn{1}{c}{pubsvc(12)}         &
+\backslash
+multicolumn{1}{c}{it(13)}         &
+\backslash
+multicolumn{1}{c}{sci(14)}         &
+\backslash
+multicolumn{1}{c}{secur(15)}         &
+\backslash
+multicolumn{1}{c}{transpt(16)}         
+\backslash
+
+\backslash
+ 
+\backslash
+hline educ
+\backslash
+_level&    0.176
+\backslash
+sym{**} &    0.277         &    0.215
+\backslash
+sym{**} &  -0.0434         &    0.643
+\backslash
+sym{*}  &   -0.641         
+\backslash
+
+\backslash
+           &  (0.002)         &  (0.506)         &  (0.007)         &  (0.955)
+         &  (0.048)         &  (0.198)         
+\backslash
+
+\backslash
+ exper     &   0.0107         &   0.0109         &   0.0154
+\backslash
+sym{*}  &  -0.0311         &   0.0118         &   -0.186         
+\backslash
+
+\backslash
+           &  (0.218)         &  (0.901)         &  (0.024)         &  (0.895)
+         &  (0.910)         &  (0.387)         
+\backslash
+
+\backslash
+ exper
+\backslash
+_sq  &-0.000794
+\backslash
+sym{***}& -0.00103
+\backslash
+sym{***}& -0.00117
+\backslash
+sym{***}& -0.00110         &-0.000824
+\backslash
+sym{*}  &-0.000917
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.169)
+         &  (0.045)         &  (0.038)         
+\backslash
+
+\backslash
+ gor
+\backslash
+_rank  &   0.0225
+\backslash
+sym{***}&  0.00869         &   0.0213
+\backslash
+sym{**} &   0.0194         &   0.0513
+\backslash
+sym{***}&   0.0284         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.304)         &  (0.001)         &  (0.411)
+         &  (0.001)         &  (0.108)         
+\backslash
+
+\backslash
+ big5o
+\backslash
+_dv  & 0.000688         & -0.00230         &  -0.0231         &   0.0238   
+      &   -0.134         & -0.00249         
+\backslash
+
+\backslash
+           &  (0.971)         &  (0.941)         &  (0.351)         &  (0.569)
+         &  (0.100)         &  (0.964)         
+\backslash
+
+\backslash
+ big5c
+\backslash
+_dv  &   0.0434
+\backslash
+sym{*}  &   0.0213         &   0.0478
+\backslash
+sym{*}  &   0.0969         &   0.0815         &    0.114         
+\backslash
+
+\backslash
+           &  (0.032)         &  (0.245)         &  (0.047)         &  (0.071)
+         &  (0.190)         &  (0.295)         
+\backslash
+
+\backslash
+ big5e
+\backslash
+_dv  &-0.000789         &   0.0185         & -0.00683         &  -0.0180   
+      &   0.0465         &   0.0452         
+\backslash
+
+\backslash
+           &  (0.962)         &  (0.261)         &  (0.724)         &  (0.640)
+         &  (0.415)         &  (0.368)         
+\backslash
+
+\backslash
+ big5a
+\backslash
+_dv  &  -0.0223         &  -0.0346         &  -0.0875
+\backslash
+sym{***}&  -0.0966         &   0.0374         &   -0.131         
+\backslash
+
+\backslash
+           &  (0.190)         &  (0.074)         &  (0.000)         &  (0.351)
+         &  (0.697)         &  (0.218)         
+\backslash
+
+\backslash
+ big5n
+\backslash
+_dv  &  -0.0253         & -0.00399         &  -0.0442
+\backslash
+sym{**} &  -0.0484         &   -0.106
+\backslash
+sym{*}  &  0.00320         
+\backslash
+
+\backslash
+           &  (0.063)         &  (0.793)         &  (0.008)         &  (0.358)
+         &  (0.035)         &  (0.961)         
+\backslash
+
+\backslash
+ age
+\backslash
+_cr    &   0.0418
+\backslash
+sym{***}&   0.0429         &   0.0516
+\backslash
+sym{***}&   0.0821         &   0.0398         &    0.223         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.632)         &  (0.000)         &  (0.750)
+         &  (0.695)         &  (0.252)         
+\backslash
+
+\backslash
+ race
+\backslash
+_rank &  -0.0350
+\backslash
+sym{**} &  -0.0137         &  -0.0372
+\backslash
+sym{**} & -0.00771         &  -0.0275         &  -0.0364         
+\backslash
+
+\backslash
+           &  (0.003)         &  (0.383)         &  (0.009)         &  (0.751)
+         &  (0.455)         &  (0.282)         
+\backslash
+
+\backslash
+ sex       &   -0.540
+\backslash
+sym{***}&   -0.279
+\backslash
+sym{***}&   -0.421
+\backslash
+sym{***}&   -0.332
+\backslash
+sym{**} &   -0.875
+\backslash
+sym{***}&   -0.414         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.002)
+         &  (0.000)         &  (0.253)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    6.133
+\backslash
+sym{***}&    5.733
+\backslash
+sym{***}&    5.832
+\backslash
+sym{***}&    6.519
+\backslash
+sym{***}&    5.100
+\backslash
+sym{***}&    5.394
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.016)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     1145         &     1118         &      894         &      168
+         &      295         &      265         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.253         &    0.110         &    0.337         &    0.231      
+   &    0.277         &        .
+         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
 \begin_inset Newpage newpage
 \end_inset
 
