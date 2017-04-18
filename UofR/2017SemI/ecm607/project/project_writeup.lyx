@@ -84,6 +84,19 @@
 Effects of personality on income in the Understanding Society Survey
 \end_layout
 
+\begin_layout Abstract
+Trends in personality traits tend to match with sectors in the industry
+ identified with a multinomial model.
+ The wage equation enhanced with personality data suggests an equilibrium
+ of personalities with sectors in the industry - with high neuroticism and
+ low conscientiousness acting as a barrier for certain occupations and growth
+ opportunities.
+ Evidence suggests that certain personality traits are rewarded more in
+ certain sectors.
+ In some cases the traits rewarded financially within the industrial sector
+ may be different from those that are used to select a newcomer in the industry.
+\end_layout
+
 \begin_layout Section
 Introduction
 \begin_inset CommandInset label
@@ -101,12 +114,19 @@ There is ample evidence in literature showing that personalities - in addition
  and growth within the career.
  The current project is interested in finding the OCEAN traits that employers
  might lean towards while hiring their workforce.
- While the current exercise doesn't use the employment history databases
- often maintained at a corporation, it uses the Understanding Society database
- to obtain a an overview of personality, education and income data across
- a cross-section of careers from different industrial sectors.
- The study assumes that employers may both select and shape personalities
- and maintains that personalities are not intended to be innate static types.
+ Instead of using the employment history databases often maintained at a
+ corporation, the current exercise uses the Understanding Society database
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NS_SEC"
+
+\end_inset
+
+ to obtain a a homogenised overview of personality, education and income
+ data within a cross-section of careers from different industrial sectors.
+ The study attempts to test whether employers may both select and shape
+ personalities - and views personalities as a dynamic equilibrium rather
+ a set of innate static types.
  The significance of attitude and motivational attributes in the literature
  is attempted to be viewed in within this framework 
 \begin_inset CommandInset citation
@@ -119,16 +139,16 @@ key "GintisDeterminants"
 \end_layout
 
 \begin_layout Standard
-The goal of the the exercise is twofold - first, it tests whether personality
+The goal of the the project is twofold - first, it tests whether personality
  is a strong factor in determining the selection of sectors of industry
- and second, pay grade within the job sectors favor or cultivate certain
- personality characteristics.
+ and second, it tests if pay grade within the job sectors favor or cultivate
+ certain personality characteristics.
  The second goal is important since suitability of professions for a certain
- personality ultimately has to do with best performers within that industry
- or sector.
+ personality has often to do with best performers within that industry or
+ sector.
  While there may be no suitable profession for the extremely introverted
  or the extremely undisciplined, the monetary rewards to the best performers
- in the industry may speak of suitability of the personality to a career.
+ in the industry may also speak of suitability of the personality to a career.
 \end_layout
 
 \begin_layout Standard
@@ -137,8 +157,9 @@ The theory that is intended to be accepted or rejected by the data is whether
  than the more easily justifiable and directly observable characteristics
  such as education, age and experience.
  While a personality based discrimination (if any) may be subtle, irregular
- and less measurable, its predominance may provide insights into the relationshi
-p between career development and personality types.
+ and less measurable, the predominance of barriers for personality may provide
+ some insights into the relationship between career development and personality
+ types.
 \end_layout
 
 \begin_layout Section
@@ -165,14 +186,7 @@ jbsoc00_cc
  as those in low end jobs in the same firm.
  This makes jbsoc00_cc inappropriate for understanding what sort of characterist
 ics distinguish performing candidates within a firm or are used by the employees
- in hiring new talent (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Introduction"
-
-\end_inset
-
- for goals of the study).
+ in hiring new talent.
  The job-related data was thus reaggregated into industrial sectors based
  on the similarity between occupations.
  This is shown in Table 
@@ -184,13 +198,13 @@ reference "tab:job_sectors"
 
 .
  The categories of sector in the table are chosen based on the type of firms.
- While this cannot be as informative as the employment histories within
- a company which maintains its own criteria of selecting candidates, the
- categories of 
+ While this is no substitute for the employment histories available within
+ a company (that the company may use to select candidates), the categories
+ of 
 \family typewriter
 jbsoc00_cc
 \family default
- are non-overlapping and rich our analysis.
+ are non-overlapping and fairly dense for our analysis.
  Except for the category of managers (where general business managers or
  consulting firms may both be under the same 
 \family typewriter
@@ -799,23 +813,21 @@ Personality Types
 
 \begin_layout Standard
 The conventional literature on personality types often used to advise students
- entering workforce is often a version of Myer-Briggs Personalities.
+ entering workforce is typically a version of Myer-Briggs Personalities.
  These are the 16 personality types that are easy to identify but are too
  broad to infer any correlation with economic variables (which are more
  diverse and are available in much finer granularity).
- To homogenise the data and to view the distribution of the 5 variables
- available in the Understanding Society survey (which vary far more than
- the four binary parameters of Myers Briggs) we look for clusters of th-
- to see what type of personalities may exist.
+ To view the distribution of the 5 variables available in the Understanding
+ Society survey (which vary far more than the four binary parameters of
+ Myers Briggs) we look for clusters of OCEAN to understand what type of
+ personalities may be dominant.
  The goal of clustering is only to bridge the conventional Myer-Briggs view
  on to the OCEAN variables which range from 0 to 7 (if available).
- While it is tempting to use the dummies from the identified clusters in
- personalities, the study chooses to use the finer granularity in personality
- data available in the survey.
+ 
 \end_layout
 
 \begin_layout Standard
-The clustering can be rudimentary and based on the distance(Euclidean) between
+The rudimentary k-means clustering is based on the distance(Euclidean) between
  two OCEAN vectors.
  A k-means clustering with 5 and 10 centers gives the results shown in Table
  
@@ -867,20 +879,21 @@ The goal of the clustering is only to obtain some qualitative trends in
  with any other variable, we should also observe that these clusters themselves
  are formed in response to social institutions (employment, education or
  even race).
- One may identify cluster dummies and achieve significance (an exercise
- not included in the study), the goal of the current exercise is not to
- associate clusters of personality with employment (the way Myer-Briggs
- based classifiers perform) but to explain how clusters themselves are formed
- in the narrow context of wage differences and career selection - by checking
- if personality is more or less significant than race, education or employment
- - which may play a stronger role in employment selection.
+ While it is tempting to use the dummies from the identified clusters in
+ personalities, the study chooses to use the finer granularity in personality
+ data available in the survey - the goal of the current exercise is not
+ to associate clusters of personality with employment (as performed by Myer-Brig
+gs classifiers) but to explain how clusters themselves are formed in the
+ narrow context of wage differences and career selection - by checking if
+ personality is more or less significant than race, education or employment.
 \end_layout
 
 \begin_layout Standard
-Since OCEAN variable are individually normally distributed, the questions
- on the most common and least common personality types can be easily answered
- - least common personality types would for example, simply be the intersection
- of least the common personality vectors (least common O 
+Since OCEAN variable are normally normally distributed in the data, the
+ questions on the most common and least common personality types can be
+ easily answered - least common personality types would for example, simply
+ be the intersection of least the common personality vectors (least common
+ O 
 \begin_inset Formula $\cdot$
 \end_inset
 
@@ -1952,8 +1965,6 @@ N
 \end_inset
 
 
-\backslash
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -1980,30 +1991,31 @@ Results from a k-means clustering (10 centres)
 \end_layout
 
 \begin_layout Subsection
-Unemployment and Personality
+Unemployment, Health and Personality
 \end_layout
 
 \begin_layout Standard
-Notice the self-employed are not excluded if we include only those with
- 
+Notice that the self-employed are not excluded if we include only those
+ with 
 \family typewriter
 jbterm1 == permanent
 \family default
  (i.e.
  self-employed professionals are recorded as having permanent jobs).
- A more serious issue arises with the including retirees, disabled and unemploye
-d.
- Retirees may not have 
+ While we included the self-employed in our analysis, more serious concerns
+ of homogenisation of data may arise with the inclusion of the retirees,
+ disabled and unemployed.
+ While retirees may not have 
 \family typewriter
 paygu_dv
 \family default
- populated (due to no income from job)but the 
+ populated (due to no income from job) the 
 \family typewriter
 fimngrs_dv
 \family default
- records the income from other sources (pension etc.).
- Ideally one should consider the retired as part of the current analysis
- since their economic success can be gauged by 
+ variable in the survey records the income from other sources (pension etc.).
+ Ideally one should consider the retirees as part of the current analysis
+ since their economic success may be gauged by 
 \family typewriter
 fimngrs_dv
 \family default
@@ -2020,32 +2032,33 @@ inapplicable
 \begin_inset Quotes erd
 \end_inset
 
- for the retirees, the respective sectors cannot be identified in the analysis
- of industry.
- However, as we limit ourselves to the discussion of early careers - excluding
- retirees cannot have a significant impact on the core arguments of the
- study.
+ for the retirees, the respective sectors cannot be identified for the retired
+ in the analysis of industry.
+ As we limit ourselves to the discussion of early careers - excluding retirees
+ is less likely to have an impact on the conclusion of the study.
 \end_layout
 
 \begin_layout Standard
-Still the employed cannot be compared with the unemployed (which are 5%
- of the eligible population in the data from wave 3).
- Hence, we test for the likely selection bias with a Heckman selection model
- for log-wage.
+A study on the effect of personality may not exclude the unemployed - who
+ seem to form nearly 5% of the eligible population in the data from wave
+ 3.
+ A test for a likely selection bias in our wage equation is sought with
+ a Heckman selection model for log-wage.
  Note that strictly speaking the case of unemployment is neither censoring
  (tobit) nor truncation (heckman etc.) - since we know that often people
  are unemployed not because of any unobservable characteristics but simply
  because of lack of opportunities in the region or social segment.
  Unemployment involves a lot of other structural factors and is a problem
- far more complex than the 5% of corner cases considered in the heckman
- model.
+ far more complex than can be explained with personality.
  
 \end_layout
 
 \begin_layout Standard
-For the selection variables in the heckman model (variable which the select
- command uses in the heckman regression), the parent's occupation (see Table
- 
+Since unemployment affects only 5% of the date, a heckman selection model
+ may give us an idea to what extent must our coefficients for personality
+ may need to be revised.
+ Given the effect the parent's occupation on the highest education of an
+ individual (see Table 
 \begin_inset ERT
 status open
 
@@ -2058,30 +2071,14 @@ ref{educpasoc10cc}
 
 \end_inset
 
-) may seem promising as unemployment may be influence by education which
- has a high correlation with parent's occupation.
+), it may seem likely that parent's occupation serves as a reasonable selection
+ variable in the heckman model (variable which the select command uses in
+ the heckman regression).
  However, performing a probit with 
 \family typewriter
 is_employed
 \family default
- as the dependent variable doesn't report any significant correlation of
- parent's occupation with unemployment as such.
- While subjective well-being related variables may provide statistical significa
-nt, they do not satisfy the requirement of causal direction (well-being
- is subject to employment conditions).
- However, perceived attitude is known to have significance in literature
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "GintisDeterminants"
-
-\end_inset
-
-, and proxies of attitude may serve as the selection variable.
- It can be observed - for example - that unemployment is strongly related
- to the satisfaction with health (which itself doesn't have a direct effect
- on employment).
- A probit in table
+ as the dependent variable (see Table 
 \begin_inset ERT
 status open
 
@@ -2094,12 +2091,42 @@ ref{tabunempprobit}
 
 \end_inset
 
- shows the results.
+) doesn't report any significant correlation of parent's occupation with
+ unemployment as such.
+ While subjective well-being related variables may provide statistical significa
+nt, they do not satisfy the requirement of causal direction (well-being
+ is subject to employment conditions).
+ Observing that perceived attitude often has significance towards unemployment
+ in literature 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GintisDeterminants,ArulaUnemp"
+
+\end_inset
+
+ and noting that unemployment is strongly related to the satisfaction with
+ health in the data (which itself doesn't have a direct effect on employment),
+ we look for satisfaction with health as a proxy of attitude and use it
+ as the selection variable.
  When using satisfaction with health as the selection variable, we do find
- an evidence of selection bias in the heckman selection results.
- However, the effect of personality is still valid for the most part (even
- though coefficients have reduced).
- 
+ an evidence of selection bias in the heckman selection results (lambda
+ is significant).
+ The effect of personality is still valid for the most part (even though
+ coefficients have reduced).
+ See Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{heckman}
+\end_layout
+
+\end_inset
+
+ for results.
 \end_layout
 
 \begin_layout Standard
@@ -3384,17 +3411,27 @@ reference "tab:job_sectors"
 
 \end_inset
 
-.
- Note that multinomial logit cannot be run in this case since the IIA is
- sure to be violated (the existence of multiple industry options and their
- effects on individual choice is at the core of the study's argument).
+ (see the do-file in the Appendix).
+ Note that multinomial logit cannot be run in this formulation since the
+ IIA is sure to be violated (the existence of multiple industry options
+ and their effects on individual choice is at the core of the study's arguments).
  The stata command for multinomial probit (mprobit) only supports 30 outcomes
  so using 
 \family typewriter
 jbsoc00_cc
 \family default
- as the dependent variable was ruled out (even if it made sense).
- The mprobit command was thus run with sectors in 
+ as the dependent variable or 
+\family typewriter
+jbsoc00_cc
+\family default
+ aggregated into more than 30 categories was ruled out.
+ The 
+\family typewriter
+\size small
+mprobit
+\family default
+\size default
+ command was thus run with sectors in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:job_sectors"
@@ -3410,8 +3447,8 @@ reference "tab:job_sectors"
 mprobit 
 \family default
 is not known for speedy convergence and it failing to converge with factor
- variables (even with an increased matrix size), it poses a constraint of
- using only continuous variables.
+ variables (even with an increased matrix size) - it posed the constraint
+ of using only continuous variables.
  The new variables were mapped from existing unsorted variable based on
  a order relevant to the study.
  
@@ -3419,17 +3456,30 @@ is not known for speedy convergence and it failing to converge with factor
 racel_dv
 \family default
  is sorted based on the population of every identified race in the survey
- (white British are assigned a high number based on their majority while
- minorities are assigned a lower value).
- gor_dv values (regions) are similarly sorted based on their median income
- to view if higher income areas have an effect on the selection of jobs.
+ (The White British group is assigned a high number based on their majority
+ while minorities are assigned a lower value).
+ 
+\family typewriter
+\size small
+gor_dv
+\family default
+\size default
+ values (regions) are similarly sorted based on their median income to view
+ if higher income areas have an effect on the selection of jobs.
 \end_layout
 
 \begin_layout Standard
 The coefficients from this regression cannot be interpreted as such - one
  can instead infer the probabilities of belonging to a category from the
  reported margins.
- The margins from this regression are presented in Figures.
+ The margins from this regression are discussed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:multinomial_job_selection_discussion"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -3455,13 +3505,19 @@ If we assume a simple model where the market assigns job
  on income and job-satisfaction.
  Ignoring the 5% cases of unemployment, the multinomial model gives us a
  picture of how personalities might play a role in selecting sectors.
- A wage equation is formulated to understand the wage distribution within
- each sectors.
- It is assumed that regressions within each sector better show the (
-\end_layout
+ A wage equation is then formulated to understand the wage distribution
+ within each sectors.
+ Since we wish to interpret regression coefficients as the economic power
+ of each of the personality characteristics relative to characteristics
+ such education and experience, we run regressions for every sector identified
+ in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:job_sectors"
 
-\begin_layout Subsubsection
-Effect of personality on income within the same occupations
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -3474,15 +3530,15 @@ age - scend
 ), experience-squared, race, sex and personality.
  log of wage is chosen primarily to normalize the wage data.
  
-\begin_inset Formula $lnwage=a_{1}educ+a_{2}exper+a_{3}exper^{2}+a_{4}sex+a_{5}o+a_{5}c+a_{5}e+a_{5}a+a_{5}n+a_{6}race+\epsilon$
+\begin_inset Formula $lnwage=a_{1}educ+a_{2}exper+a_{3}exper^{2}+a_{4}sex+a_{5}o+a_{5}c+a_{5}e+a_{5}a+a_{5}n+a_{6}race+a_{7}age+\epsilon$
 \end_inset
 
 .
  An alternative formulation of the wage equation would be to include the
  sector in a regression spanning all sectors.
- The separate regressions approach is chosen primarily because we're not
- interested in the wage growth within a sector rather than the relative
- advantage of one sector over the other.
+ The separate regressions approach is chosen primarily because we're interested
+ in the wage growth within a sector rather than the relative advantage of
+ one sector over the other.
  The results from these regression are presented in Tables 
 \begin_inset ERT
 status open
@@ -4921,7 +4977,7 @@ twocolumn
 
 \begin_layout Standard
 An obvious case of endogeneity would appear for education.
- We know that wage can be higher because of class effects.
+ Both wage and education can be higher due to class effects.
  Status and class are 
 \begin_inset Quotes eld
 \end_inset
@@ -4930,9 +4986,9 @@ sticky
 \begin_inset Quotes erd
 \end_inset
 
- - in the sense that parents with higher income are better equipped to maximise
+ in the sense that parents with higher income are better equipped to maximise
  the chances of economic success of their progeny.
- Education seems to the only measurable variable for class.
+ In the give data, education seems to the only measurable variable for class.
  While house ownership appears to be a measure of economic standing, high
  instances of young people living with parents and predominance of mortgages
  in the housing market makes housing a weak indicator of class.
@@ -4946,7 +5002,8 @@ status open
 
 \begin_layout Plain Layout
 It can still be argued that class effects may exist outside of education.
- The regression model doesn't account for effects of class outside of education
+ The regression model doesn't account for effects of class other than of
+ education.
 \end_layout
 
 \end_inset
@@ -4955,23 +5012,29 @@ It can still be argued that class effects may exist outside of education.
  Those with higher wages and high education do so because of their parents
  (this is verified independently with a multinomial model).
  With that in mind, introducing the father's and mother's occupation as
- instruments seems to address the endoeneity problem (the specification
+ instruments seems to address the endogeneity problem (the specification
  tests run with 
 \family typewriter
 estat
 \family default
- and regressions are repeated with 
+ regressions repeated with 
 \family typewriter
 ivreg2
 \family default
-).
- Our instruments (parents' education) does not influence wage offer but
- it certainly influences education.
- The argument for using parent's education as instrument is that it influences
- education of a child but it does not affect a child's progress after the
- job begins therefore the effect of parent's education on child's wage-level
- (instead of class or financial strength) may not exist after education.
- The results from ivregress are shown in Tables 
+ both gives satisfactory results).
+ The instruments do not influence wage offer but certainly influence education.
+ The core argument for using parent's education as instrument is that parents'
+ standing does influence the education of a child but it does not affect
+ a child's progress after s/he enters the job market - from which point
+ on, the effect of parent's education on child's wage-level should drop
+ sharply.
+ The results from 
+\family typewriter
+\size small
+ivregress 
+\family default
+\size default
+are shown in Tables 
 \begin_inset ERT
 status open
 
@@ -5005,12 +5068,50 @@ Results and Conclusions
 \end_layout
 
 \begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:multinomial_job_selection_discussion"
+
+\end_inset
+
 Multinomial Job selection model
 \end_layout
 
 \begin_layout Standard
-For the first part, multinomial method showed the significance of personalities.
- The margsin
+The multinomial selection method showed the significance of personalities
+ (the coefficients cannot be interpreted).
+ Region matters for business, admin and art-design roles (these occupations
+ are better available in crowded places).
+ Region seems to matter less for consumer-services or health related occupations.
+ The personality trait that appears most significant in separating occupations
+ is neuroticism.
+ Education on the other hand separates business management related occupations.
+ 
+\end_layout
+
+\begin_layout Standard
+The margins present a better picture of the effect of these control variables.
+ Education matters in business management, health and public service occupations.
+ It matters quite less in consumer or production related occupations.
+ 
+\end_layout
+
+\begin_layout Standard
+Neuroticism seems high amongst IT professions.
+ Whether those with high neuroticism end up in IT occupations or IT makes
+ workers more neurotic is difficult to answer from this analysis.
+ What's clear is the neuroticism is low amongst business managers.
+ This may imply that neuroticism is penalized (or is pushed down) for someone
+ taking up a management role.
+\end_layout
+
+\begin_layout Standard
+Quite unsurprisingly, aggreableness is high for health related occupations
+ and openness high for public service occupations.
+ Extraversion seems to be high in both business management and consumer
+ care occupations.
+ Conscientiousness seems to be higher in management and production sectors
+ but low in IT and public-service sectors.
 \end_layout
 
 \begin_layout Standard
@@ -5224,59 +5325,37 @@ Wage Equation Results
 \begin_layout Standard
 When using satisfaction with health as the selection variable, we do find
  an evidence of selection bias in the heckman selection results.
- However, the effect of personality is still valid for the most part (even
- though coefficients have reduced).
+ While personalities are still significant, there coefficients are lower.
+ Interpreting the results from wage-regression per sector, education seems
+ to have strong and significant positive effect for business, health, security
+ and technical occupations - while weak insignificant effect on administration
+ or consumer care job (In tables presenting the lnwage regression 
+\family typewriter
+hiqual_dv =1
+\family default
+ implies a degree level).
+ Barriers might exist for those without a degree education in wage growth
+ in certain sectors.
+ expersq has a significant but weak effect on lnwage.
+ Age seems to matter less for buiness management occupations but more for
+ consumer care and production related jobs - suggesting work experience
+ (learning on the job) may be more valuable in these sectors.
+\end_layout
+
+\begin_layout Standard
+After instrumentaion the personalities effects seem become sharper (higher
+ coefficients).
+ Still, personality traits offer a less serious wage gap problem than gender
+ or race - neuroticism seems to be the only trait that is penalized (most
+ strongly penalized in security related occupations but less seriously penalized
+ in business management and IT occupations).
+ An interesting reversal seems evident in IT occupations which seem to cultivate
+ (or attract) neuroticism traits but penalize (of discourage) it in wage
+ growth.
+ It is also evident that gender (and to some extent race) have stronger
+ and more significant effects on lnwage - which points to structural inequalitie
+s not studied in the current poject.
  
-\end_layout
-
-\begin_layout Standard
-Without instrumentation of education, the effect of a degree appears strong.
- Expersq has a strong but weak effect on lnwage.
- We can see that race also seems to have an impact on some jobs - implying
- crowding.
- Education (degree) has the strongest influence on wage - implying that
- barriers exist for those without a degree education in wage growth.
- Overall neuroticism affects wage growth more than anything else.
-\end_layout
-
-\begin_layout Standard
-Personalities matter less overall in engineering professions.
- It remains to be tested whether this is because of low paid profession
- categories.
- We must realized that there is endogeneity with jbnsec_dv (which itself
- is derived from pay gaps).
-\end_layout
-
-\begin_layout Standard
-Hairdressers have a clear effect of age compared to scientists.
- Education has a clear effect on pay for scientists (not so much variation
- for sales and consumer).
- Interesting race seems to have a stronger economic effect than personality
- for the most part.
- This could just race is so little populated.
- A simple regression does express significance of personality but we also
- need to see that income is already inducing personalities(self selection).
- hiqual_dv =1 implies degree.
- The effect of race seems important.
-\end_layout
-
-\begin_layout Standard
-Personalities matter more for higher ranks within the industry rather the
- longitudinally.
-\end_layout
-
-\begin_layout Standard
-The theory that we need to test is whether popular traits tend to use self-selec
-tion.
-\end_layout
-
-\begin_layout Standard
-It seems that after instrumentaion the personalities effects have become
- sharper.
-\end_layout
-
-\begin_layout Subsection
-Summary
 \end_layout
 
 \begin_layout Standard
@@ -7963,7 +8042,7 @@ status open
 
 
 \backslash
-begin{table}[htbp]
+begin{table}[p]
 \backslash
 centering 
 \backslash
@@ -8338,6 +8417,1156 @@ options "plain"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+APPENDIX
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+clear
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+use US_data6W
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+drop if wave !=3
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* drop if big5o etc.
+ are missing (1116 entries out of 15533)
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+drop if big5o_dv<0 | big5c_dv<0| big5e_dv<0| big5a_dv<0| big5n_dv<0
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* generation of dummies etc.
+ for analysis
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+decode jbterm1, generate (job_term)
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+decode jbsoc00_cc, generate (job_category)
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+decode racel_dv, generate (racel_dvd)
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+gen ln_paygu_dv = log(paygu_dv)
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+gen exper = age_cr - scend
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+gen exper_sq = exper * exper
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+decode jbstat, generate (job_status)
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+generate chosen_job_category= 1 if( job_category == "Administrative occupations:
+ finance"|| job_category =="Administrative occupations: records"|| job_category
+ =="Administrative occupations: communications"|| job_category =="Administrative
+ occupations: general"|| job_category =="Secretarial and related occupations"||
+ job_category =="Elementary administration occupations" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 2 if( job_category == "Managers in farming,
+ horticulture, forestry and services"|| job_category =="Agricultural trades"||
+ job_category =="Elementary agricultural occupations" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 3 if( job_category == "Artistic and literary
+ occupations"|| job_category =="Design associate professionals" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 4 if( job_category == "Corporate managers and
+ senior officials"|| job_category =="Functional managers"|| job_category
+ =="Financial institution and office managers"|| job_category =="Managers
+ in distribution, storage and retailing"|| job_category =="Business and
+ statistical professionals"|| job_category =="Business and finance associate
+ professionals"|| job_category =="Managers and proprietors in other service
+ industries" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 5 if( job_category == "Engineering professionals"||
+ job_category =="Information and communication technology professionals"
+ )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 6 if( job_category == "Architects, town planners,
+ surveyors"|| job_category =="Draughtspersons and building inspectors"||
+ job_category =="Conservation associate professionals"|| job_category =="Constru
+ction trades"|| job_category =="Building trades"|| job_category =="Construction
+ operatives"|| job_category =="Elementary construction occupations" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 7 if( job_category == "Quality and customer
+ care managers"|| job_category =="Leisure and travel service occupations"||
+ job_category =="Hairdressers and related occupations"|| job_category =="Houseke
+eping occupations"|| job_category =="Personal services occupations nec"||
+ job_category =="Customer service occupations"|| job_category =="Mobile
+ machine drivers and operatives"|| job_category =="Elementary personal services
+ occupations"|| job_category =="Elementary cleaning occupations"|| job_category
+ =="Managers and proprietors in hospitality and leisure services"|| job_category
+ =="Sports and fitness occupations" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 8 if( job_category == "Health and social services
+ managers"|| job_category =="Health professionals"|| job_category =="Health
+ associate professionals"|| job_category =="Therapists"|| job_category =="Social
+ welfare associate professionals"|| job_category =="Healthcare and related
+ personal services"|| job_category =="Childcare and related personal services"||
+ job_category =="Animal care services" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 9 if( job_category == "Legal professionals"||
+ job_category =="Legal associate professionals" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 10 if( job_category == "Media associate professiona
+ls" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 11 if( job_category == "Production managers"||
+ job_category =="Metal forming, welding and related trades"|| job_category
+ =="Metal machining, fitting and instrument making trades"|| job_category
+ =="Vehicle trades"|| job_category =="Electrical trades"|| job_category
+ =="Textiles and garments trades"|| job_category =="Printing trades"|| job_categ
+ory =="Food preparation trades"|| job_category =="Skilled trades nec"||
+ job_category =="Process operatives"|| job_category =="Plant and machine
+ operatives"|| job_category =="Assemblers and routine operatives"|| job_category
+ =="Elementary process plant occupations"|| job_category =="Elementary goods
+ storage occupations" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 12 if( job_category == "Public service professional
+s"|| job_category =="Librarians and related professionals"|| job_category
+ =="Public service and other associate professionals"|| job_category =="Administ
+rative occupations: government and related organisat"|| job_category =="Teaching
+ professionals" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 13 if( job_category == "It service delivery
+ occupations"|| job_category =="Sales and related associate professionals"||
+ job_category =="Sales assistants and retail cashiers"|| job_category =="Sales
+ related occupations"|| job_category =="Elementary sales occupations" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 14 if( job_category == "Science professionals"||
+ job_category =="Research professionals"|| job_category =="Science and engineeri
+ng technicians" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 15 if( job_category == "Protective service
+ officers"|| job_category =="Protective service occupations"|| job_category
+ =="Elementary security occupations" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace chosen_job_category= 16 if( job_category == "Transport associate
+ professionals"|| job_category =="Transport drivers and operatives" )
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+generate race_rank=1 if racel_dvd=="white: british/english/scottish/welsh/northe
+rn irish"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=2 if racel_dvd=="white: any other white background"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=3 if racel_dvd=="asian/asian british: indian"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=4 if racel_dvd=="white: irish"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=5 if racel_dvd=="black/african/caribbean/black british:
+ african"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=6 if racel_dvd=="black/african/caribbean/black british:
+ caribbean"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=7 if racel_dvd=="asian/asian british: pakistani"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=8 if racel_dvd=="missing"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=9 if racel_dvd=="asian/asian british: any other asian
+ background"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=10 if racel_dvd=="mixed: white and black caribbean"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=11 if racel_dvd=="asian/asian british: bangladeshi"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=12 if racel_dvd=="mixed: white and asian"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=13 if racel_dvd=="mixed: any other mixed background"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=14 if racel_dvd=="asian/asian british: chinese"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=15 if racel_dvd=="other ethnic group: any other ethnic
+ group"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=16 if racel_dvd=="mixed: white and black african"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=17 if racel_dvd=="other ethnic group: arab"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=18 if racel_dvd=="black/african/caribbean/black british:
+ any other black backg"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace race_rank=19 if racel_dvd=="white: gypsy or irish traveller"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* remove missing/invalid entries
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+drop if hiqual_dv <=-1 | racel_dv<=-1 | gor_dv <=0
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* discard if neither a permanent job nor unemployed (students, retirees
+ and disabled)
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+drop if job_term != "a permanent job" 
+\backslash
+& jbstat != 3
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+drop if pasoc10_cc <0 | sclfsat1<0
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* perform unemployment related regressions
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+gen unemployed = jbstat==3
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+gen employed = !unemployed
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+count if unemployed == 1
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* probit for employment
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo clear
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo : quietly probit employed i.educ_level i.big5o_dv i.big5c_dv i.big5e_dv
+ i.big5a_dv i.big5n_dv i.sclfsat1 scend race_rank
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+esttab using results_unemp_probit.tex, r2 ar2 pr2 nomtitles no p numbers
+ star nogaps compress title(Heckman Regression
+\backslash
+label{tabheckman})
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* generate educ_level from hiqual_dv
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+generate educ_level= 0 if hiqual_dv== 9
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace educ_level= 1 if hiqual_dv== 5
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace educ_level= 2 if hiqual_dv== 4
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace educ_level= 3 if hiqual_dv== 3
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace educ_level= 4 if hiqual_dv== 1
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace educ_level= 5 if hiqual_dv== 2
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* replace ln_paygu_dv =0 if jbstat==3
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* run tobit (discarded), heckman
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+tobit ln_paygu_dv i.educ_level exper exper_sq i.gor_dv big5o_dv big5c_dv big5e_dv
+ big5a_dv big5n_dv age_cr i.racel_dv sex, ll(0)
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo clear
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo : quietly regress ln_paygu_dv i.educ_level exper exper_sq i.gor_dv
+ big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex, robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo : quietly heckman ln_paygu_dv i.educ_level exper exper_sq i.gor_dv
+ big5o_dv big5c_dv big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex, select(emplo
+yed = i.educ_level exper exper_sq i.gor_dv big5o_dv big5c_dv big5e_dv big5a_dv
+ big5n_dv age_cr i.racel_dv sex i.sclfsat1) twostep
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+esttab using results_heckman.csv, r2 ar2 pr2 nomtitles no p numbers star
+ nogaps compress title(Heckman Regression 
+\backslash
+label{tabheckman})
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* discard unemployment related entries for further analysis
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+drop if job_term != "a permanent job"
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+drop if jbsoc00_cc<=0
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* remove non specified job types for further analysis
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+drop if chosen_job_category < 0
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+generate gor_rank= 1 if gor_dv== 10
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace gor_rank= 2 if gor_dv== 3
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace gor_rank= 3 if gor_dv== 9
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace gor_rank= 4 if gor_dv== 4
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace gor_rank= 5 if gor_dv== 5
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace gor_rank= 6 if gor_dv== 12
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace gor_rank= 7 if gor_dv== 1
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace gor_rank= 8 if gor_dv== 2
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace gor_rank= 9 if gor_dv== 11
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace gor_rank= 10 if gor_dv== 6
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace gor_rank= 11 if gor_dv== 8
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+replace gor_rank= 12 if gor_dv== 7
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+// regressions
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* the mprobit on personalities alone
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* mprobit with factor variables does not converge
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+** mprobit chosen_job_category scend i.gor_dv big5o_dv big5c_dv big5e_dv
+ big5a_dv big5n_dv i.racel_dv i.sex_cr i.hiqual_dv
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+mprobit chosen_job_category scend gor_rank big5o_dv big5c_dv big5e_dv big5a_dv
+ big5n_dv race_rank sex_cr educ_level
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* eststo: quietly margins, dydx(educ_level) etc.
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* Part II
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* considering only 1,4,5,6,7,8,11,12,13,14,15,16
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo clear
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==1,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==4,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==5,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==6,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==7,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==8,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+esttab using results_plainreg1.tex, r2 nomtitles no p numbers star nogaps
+ compress title(Wage Regression 
+\backslash
+label{tabplainreg1})
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo clear
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==11,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==12,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==13,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==14,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==15,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly regress ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv
+ big5e_dv big5a_dv big5n_dv age_cr i.racel_dv sex ib3.hiqual_dv if chosen_job_cate
+gory ==16,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+esttab using results_plainreg2.tex, r2 nomtitles no p numbers star nogaps
+ compress title(Wage Regression 
+\backslash
+label{tabplainreg2})
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* identification tests
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv
+ big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc)
+ if chosen_job_category ==1,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+estat overid, forcenonrobust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+estat firststage, all forcenonrobust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+ivreg2 ln_paygu_dv exper exper_sq gor_rank big5o_dv big5c_dv big5e_dv big5a_dv
+ big5n_dv age_cr race_rank sex (educ_level =pasoc10_cc masoc10_cc) if chosen_job
+_category ==1
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+* running for all job categories(sectors)
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo clear
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==1,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==4,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==5,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==6,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==7,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==8,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+esttab using results_ivreg1.tex, r2 nomtitles no p numbers star nogaps compress
+ title(Wage ivregress 2
+\backslash
+label{tabivreg1})
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+esttab using results_ivreg1.csv, r2 nomtitles no p numbers star nogaps compress
+ title(Wage ivregress 2
+\backslash
+label{tabivreg1})
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo clear
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==11,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==12,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==13,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==14,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==15,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+eststo: quietly ivregress 2sls ln_paygu_dv exper exper_sq gor_rank big5o_dv
+ big5c_dv big5e_dv big5a_dv big5n_dv age_cr race_rank sex (educ_level =pasoc10_c
+c masoc10_cc) if chosen_job_category ==16,robust
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+esttab using results_ivreg2.tex, r2 nomtitles no p numbers star nogaps compress
+ title(Wage ivregress 2 
+\backslash
+label{tabivreg2})
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\size small
+esttab using results_ivreg2.csv, r2 nomtitles no p numbers star nogaps compress
+ title(Wage ivregress 2 
+\backslash
+label{tabivreg2}) 
 \end_layout
 
 \end_body
