@@ -200,7 +200,7 @@ jbsoc00_cc
 \family typewriter
 jbsoc00_cc
 \family default
- is less likely to be a problem i.e.
+ doesn't pose problems i.e.
  it is unlikely for a 
 \family typewriter
 jbsoc00_cc
@@ -209,25 +209,13 @@ jbsoc00_cc
 \end_layout
 
 \begin_layout Standard
-It was observed that the certain 
-\begin_inset Quotes eld
-\end_inset
-
-sectors
-\begin_inset Quotes erd
-\end_inset
-
- were under-represented in the data or not recorded correctly (for example,
- legal occupations have a very meagre representation in the data).
+It was observed that the certain sectors this identified were under-represented
+ in the data or not recorded correctly (for example, legal occupations have
+ a very meagre representation in the data).
  The under-represented categories 2(agri), 3(art), 9(legal), 10(media) were
  not considered for wage-related analyses (except in overall regressions).
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
+ Also, since the personality types are recorded only for wave 3, we have
+ limited our analysis to the data from wave 3.
 \end_layout
 
 \begin_layout Standard
@@ -810,53 +798,89 @@ Personality Types
 \end_layout
 
 \begin_layout Standard
-The conventional literature on personality types used by career-services
- for students entering the workforce is based loosely of Myer-Briggs Personality
- type.
+The conventional literature on personality types often used to advise students
+ entering workforce is often a version of Myer-Briggs Personalities.
  These are the 16 personality types that are easy to identify but are too
- broad to infer discover any correlation with economic variables (which
- are available in much finer granularity).
- To homogenise the data and more importantly to view the distribution of
- 5 variables (varied far more than the four binary parameters of Myers Briggs)
- we look for clusters of control variables - to see what type of personalities
- really exist.
- The measurement error can be significant in variables like personality
- and.
- The OCEAN variables ranges from 0 to 7.
- The density varies for the different parameters as well.The clusters that
- we need to perform are for OCEAN - this is a rudimentary clustering on
- quantiles of data.
- For clustering one needs to think of distance/metric between personalities
- - a typically Euclidean distance on the quantile-adjusted metric serves
- the purpose in a kmeans clustering.
- The goals is not to prefer a Myer-Briggs type of 
-\begin_inset Quotes eld
-\end_inset
-
-broad
-\begin_inset Quotes erd
-\end_inset
-
- classification over OCEAN parameters that have much higher granularity
- (and have more psychological).
-  There is a clear difference in how education and gender measured (all
- with <10 categories) and how is already clustered enough and we might need
- to just cluster age and OCEAN characteristics.
- The study of marginal effect of OCEAN parameters therefore might need to
- be categorized as well.
- One can generate dummies as the closest cluster to understand which clusters
- are dominant in jobs.
- 
+ broad to infer any correlation with economic variables (which are more
+ diverse and are available in much finer granularity).
+ To homogenise the data and to view the distribution of the 5 variables
+ available in the Understanding Society survey (which vary far more than
+ the four binary parameters of Myers Briggs) we look for clusters of th-
+ to see what type of personalities may exist.
+ The goal of clustering is only to bridge the conventional Myer-Briggs view
+ on to the OCEAN variables which range from 0 to 7 (if available).
+ While it is tempting to use the dummies from the identified clusters in
+ personalities, the study chooses to use the finer granularity in personality
+ data available in the survey.
 \end_layout
 
 \begin_layout Standard
-I find it rather perturbing that my own personality types seems quite rare.
- It then appears natural to ask the frequency of personality types.
- If the personality types are not uniformly distributed, then what is the
- most common personality type and what is the least common.
- From the data itself, it is easy to see that least common personality types
- would be the intersection of least the common personality vectors (least
- common O 
+The clustering can be rudimentary and based on the distance(Euclidean) between
+ two OCEAN vectors.
+ A k-means clustering with 5 and 10 centers gives the results shown in Table
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:kmeans_5"
+
+\end_inset
+
+ and Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:kmeans_10"
+
+\end_inset
+
+.
+  The k-means clustering is only used to facilitate a discussion of personality
+ types (e.g.
+ Myer-Briggs).
+ A couple of observations can be made from clustering results:
+\end_layout
+
+\begin_layout Enumerate
+High scorers in O,C,E,A have significantly low N score.
+\end_layout
+
+\begin_layout Enumerate
+The scores on A are relatively higher than the rest (O,C,E,N)
+\end_layout
+
+\begin_layout Enumerate
+Highly neurotic people tend to be less open (particularly if they are less
+ extrovert) - conversely - open extroverts are less neurotic
+\end_layout
+
+\begin_layout Enumerate
+Conscentiousness is low either with all others parameters or with neuroticism
+\end_layout
+
+\begin_layout Enumerate
+Less neurotic people tend have high conscientiousness
+\end_layout
+
+\begin_layout Standard
+The goal of the clustering is only to obtain some qualitative trends in
+ the data and map OCEAN with the a conventional Myer-Briggs framework.
+ While above observations provide a view on personalities without association
+ with any other variable, we should also observe that these clusters themselves
+ are formed in response to social institutions (employment, education or
+ even race).
+ One may identify cluster dummies and achieve significance (an exercise
+ not included in the study), the goal of the current exercise is not to
+ associate clusters of personality with employment (the way Myer-Briggs
+ based classifiers perform) but to explain how clusters themselves are formed
+ in the narrow context of wage differences and career selection - by checking
+ if personality is more or less significant than race, education or employment
+ - which may play a stronger role in employment selection.
+\end_layout
+
+\begin_layout Standard
+Since OCEAN variable are individually normally distributed, the questions
+ on the most common and least common personality types can be easily answered
+ - least common personality types would for example, simply be the intersection
+ of least the common personality vectors (least common O 
 \begin_inset Formula $\cdot$
 \end_inset
 
@@ -873,69 +897,1086 @@ least common A
 \end_inset
 
 least common N).
- The most common personality type can be calculated similarly.
- In fact, since vectors are discrete, the probability of all personality
- types can be calculated.
- If certain personality types fit into a role, then it's not just because
- of the suitability to skills but also because lower managerial positions
- might require personalities similar to the workers (this effect ought to
- be less dominant at the entry levels).
- Again a matching of personalities with job sectors is the best way to achieve
- this.
+ The conventional question that of whether a personality type fits into
+ a role or not can be answered in terms of the coefficients of the O,C,E,A
+ and N parameters.
+ A matching of these vectors with job sectors attempts to achieve this (see
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:multinomial_model"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
-An analysis of which cluster matches best with the job type may be performed
- with using dummies from the centers of a k-means clustering.
- However, the k-means clustering is only used to facilitate a discussion
- of personality types (e.g.
- one in Myer-Briggs frequently used in psychological literature).
- the results after setting the number of clusters to 5 are shown.
- A couple of observations can be made from clustering results:
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="6">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
-\begin_layout Enumerate
-High scorers in O,C,E,A have significantly low N score.
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+O
 \end_layout
 
-\begin_layout Enumerate
-Most people tend to score high on A
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+C
 \end_layout
 
-\begin_layout Enumerate
-A significant number of people would score high on all parameters
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+E
 \end_layout
 
-\begin_layout Enumerate
-Highly neurotic people tend to be less open (particularly if they are less
- extrovert) - conversely - open extroverts are less neurotic
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+A
 \end_layout
 
-\begin_layout Enumerate
-Conscentiousness is low either with all others params or with neuroticism
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+N
 \end_layout
 
-\begin_layout Enumerate
-Less neurotic people tend have high concentiousness.
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.083
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.463
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.251
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.3866
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.563
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.897
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.964
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.093
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.8832
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.563
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.153
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.791
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.292
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.9112
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.661
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.456
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.030
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.656
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.9638
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.269
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.850
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.498
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.298
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.6372
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.025
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:kmeans_5"
+
+\end_inset
+
+Results from a k-means clustering (5 centres) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The goal of the clustering is only to obtain some qualitative trends in
- the data and map OCEAN with the a conventional Myer-Briggs framework.
- While above observations provide a view on personalities without association
- with any other variable, we should also observe that these clusters themselves
- are formed in response to social institutions (employment, education or
- even race).
- One may identify cluster dummies and achieve significance (an exercise
- not included in the part of this writeup), the goal of the current exercise
- is not to associate clusters of personality with employment (the way Myer-Brigg
-s based classifiers perform) but to explain how clusters themselves are
- formed in the narrow context of wage differences and career selection -
- by checking if personality is more or less significant than race, education
- or employment plays a stronger role selection of employment.
- While personality types is a more popular way of describing personlities,
- the significance of the characteristics as well as their granularity of
- interview makes a stronger case for OCEAN types.
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="11" columns="6">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+O
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+C
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+E
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+A
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+N
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.5648
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.554
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.292
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.297
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.475
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.4405
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.722
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.325
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.729
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.791
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.3348
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.586
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.917
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.721
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.595
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.4993
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.901
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.540
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.999
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.139
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.6121
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.803
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.410
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.805
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.068
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.4327
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.057
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.684
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.953
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.836
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.5553
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.220
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.418
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.115
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.247
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.5679
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.243
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.593
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.221
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.891
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.6396
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.211
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.375
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.211
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.126
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.2158
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.409
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.909
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.488
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.735
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:kmeans_10"
+
+\end_inset
+
+Results from a k-means clustering (10 centres)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -944,15 +1985,34 @@ Unemployment and Personality
 
 \begin_layout Standard
 Notice the self-employed are not excluded if we include only those with
- jbtem1 == permanent.
-\end_layout
-
-\begin_layout Standard
-A lot of entries are of people un- fimngrs_dv paygu_dv is set to missing
- for retired persons.
- Ideally we should consider the retired since their economic success can
- be gauged by fimngrs_dv (which is higher than paygu_dv).
- However, since jbsoc00_cc is recorded as 
+ 
+\family typewriter
+jbterm1 == permanent
+\family default
+ (i.e.
+ self-employed professionals are recorded as having permanent jobs).
+ A more serious issue arises with the including retirees, disabled and unemploye
+d.
+ Retirees may not have 
+\family typewriter
+paygu_dv
+\family default
+ populated (due to no income from job)but the 
+\family typewriter
+fimngrs_dv
+\family default
+ records the income from other sources (pension etc.).
+ Ideally one should consider the retired as part of the current analysis
+ since their economic success can be gauged by 
+\family typewriter
+fimngrs_dv
+\family default
+ variable.
+ However, since 
+\family typewriter
+jbsoc00_cc
+\family default
+ is recorded as 
 \begin_inset Quotes eld
 \end_inset
 
@@ -960,22 +2020,32 @@ inapplicable
 \begin_inset Quotes erd
 \end_inset
 
- for retirees, they cannot be included in our analysis of industry.
+ for the retirees, the respective sectors cannot be identified in the analysis
+ of industry.
+ However, as we limit ourselves to the discussion of early careers - excluding
+ retirees cannot have a significant impact on the core arguments of the
+ study.
 \end_layout
 
 \begin_layout Standard
-are employed cannot be compared with the those who are not unemployed.
- There care must be taken while talking about employee preferences.
- Unemployment is a lot more difficult problem and involves a lot of other
- structural factors such as economic development in the region - the data
- on which isn't available (except the rank based on median income) - where
- a simple model of personalities is difficult.
- What one may still do is see if certain personalities are heckman selection
- (this is neither censoring nor truncation - since we know that people aren't
- unemployed because they lack on well-defined metric excluding the disabled
- categories - which are classified separately).
- Unemployment should also be determined from the the parent's occupation
- (see Table 
+Still the employed cannot be compared with the unemployed (which are 5%
+ of the eligible population in the data from wave 3).
+ Hence, we test for the likely selection bias with a Heckman selection model
+ for log-wage.
+ Note that strictly speaking the case of unemployment is neither censoring
+ (tobit) nor truncation (heckman etc.) - since we know that often people
+ are unemployed not because of any unobservable characteristics but simply
+ because of lack of opportunities in the region or social segment.
+ Unemployment involves a lot of other structural factors and is a problem
+ far more complex than the 5% of corner cases considered in the heckman
+ model.
+ 
+\end_layout
+
+\begin_layout Standard
+For the selection variables in the heckman model (variable which the select
+ command uses in the heckman regression), the parent's occupation (see Table
+ 
 \begin_inset ERT
 status open
 
@@ -988,21 +2058,29 @@ ref{educpasoc10cc}
 
 \end_inset
 
-).
- Heckman selection model can use this in the select command.
- We evaluate parent's occupation as the extra parameter in the selection
- equation (because that seems to have a stronger influence on unemployment
- than many given).
- The subjective well-being related variables - although used as attitude
- in literature weren't used since the effect unemployment could be affecting
- subjective well-being.
- With parent's occupation (which is assumed to effect unemployment through
- ).
-\end_layout
+) may seem promising as unemployment may be influence by education which
+ has a high correlation with parent's occupation.
+ However, performing a probit with 
+\family typewriter
+is_employed
+\family default
+ as the dependent variable doesn't report any significant correlation of
+ parent's occupation with unemployment as such.
+ While subjective well-being related variables may provide statistical significa
+nt, they do not satisfy the requirement of causal direction (well-being
+ is subject to employment conditions).
+ However, perceived attitude is known to have significance in literature
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GintisDeterminants"
 
-\begin_layout Standard
-However, unemployment seems to be strongly related to the satisfaction with
- health.
+\end_inset
+
+, and proxies of attitude may serve as the selection variable.
+ It can be observed - for example - that unemployment is strongly related
+ to the satisfaction with health (which itself doesn't have a direct effect
+ on employment).
  A probit in table
 \begin_inset ERT
 status open
@@ -1016,12 +2094,12 @@ ref{tabunempprobit}
 
 \end_inset
 
- shows this - and hence health is used in the selection.
- There does seem to be an evidence of selection bias - in the heckman selection
- results.
- The effect of personality is still valid for the most part (even though
- coefficients have reduced) - although the effect of conscientiousness seems
- reduced.
+ shows the results.
+ When using satisfaction with health as the selection variable, we do find
+ an evidence of selection bias in the heckman selection results.
+ However, the effect of personality is still valid for the most part (even
+ though coefficients have reduced).
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2285,35 +3363,73 @@ end{table}
 \end_layout
 
 \begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:multinomial_model"
+
+\end_inset
+
 A multinomial model for Employment types
 \end_layout
 
 \begin_layout Standard
-The left-side of the equation are types of employments.
- We know that we won't be able to run multinomial logit - since the IIA
- iso be violated.
- multinomial probit - on the other hand can be run.
- mprobit only supports 30 outcomes so using jbsoc00_cc as the dependent
- variable is ruled out (even if it made sense).
- The classification of sector is based only on the industries inferred -
- this aggregation is based only on the industry sectors - combining for
- example - all healthcare professions in the survey into one category.
- Using the mprobit command with personalities alone as the control variables.
+A multinomial model was run to evaluate how the chosen control variables
+ - education level, experience, region, personalities, race and sex - affect
+ the selection of industrial sector.
+ The left-side of the equation are types of sectors identified in Table
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:job_sectors"
+
+\end_inset
+
+.
+ Note that multinomial logit cannot be run in this case since the IIA is
+ sure to be violated (the existence of multiple industry options and their
+ effects on individual choice is at the core of the study's argument).
+ The stata command for multinomial probit (mprobit) only supports 30 outcomes
+ so using 
+\family typewriter
+jbsoc00_cc
+\family default
+ as the dependent variable was ruled out (even if it made sense).
+ The mprobit command was thus run with sectors in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:job_sectors"
+
+\end_inset
+
+ as the dependent multinomial variable.
 \end_layout
 
 \begin_layout Standard
-To run the mprobit, a limitation that tempts us to impose strange constraints
- is the use of continuous variables.
- mprobit fails to converge - the matrix size needs to be increased.
- If this is to be enforced new variables control variables are sorted based
- on a chosen criterion.
- racel_dv is sorted based on the population of every identified race in
- the survey.
- White British are assigned a high number based on their majority while
- minorities are assigned a lower value.
- Female  0 and Male 1 is trivial.
- gor_dv (regions) are sorted based on their median income to see how if
- higher income areas have an effect on the selection of jobs.
+
+\family typewriter
+mprobit 
+\family default
+is not known for speedy convergence and it failing to converge with factor
+ variables (even with an increased matrix size), it poses a constraint of
+ using only continuous variables.
+ The new variables were mapped from existing unsorted variable based on
+ a order relevant to the study.
+ 
+\family typewriter
+racel_dv
+\family default
+ is sorted based on the population of every identified race in the survey
+ (white British are assigned a high number based on their majority while
+ minorities are assigned a lower value).
+ gor_dv values (regions) are similarly sorted based on their median income
+ to view if higher income areas have an effect on the selection of jobs.
+\end_layout
+
+\begin_layout Standard
+The coefficients from this regression cannot be interpreted as such - one
+ can instead infer the probabilities of belonging to a category from the
+ reported margins.
+ The margins from this regression are presented in Figures.
 \end_layout
 
 \begin_layout Subsection
@@ -2337,6 +3453,11 @@ If we assume a simple model where the market assigns job
 
  then we wish to assess the impact of OCEAN parameters, age and education
  on income and job-satisfaction.
+ Ignoring the 5% cases of unemployment, the multinomial model gives us a
+ picture of how personalities might play a role in selecting sectors.
+ A wage equation is formulated to understand the wage distribution within
+ each sectors.
+ It is assumed that regressions within each sector better show the (
 \end_layout
 
 \begin_layout Subsubsection
@@ -2344,19 +3465,51 @@ Effect of personality on income within the same occupations
 \end_layout
 
 \begin_layout Standard
-This is a regression of income on OCEAN characteristics, highest level of
- education.
- Particular occupations can be considered separately.
- Hairdressers have a clear effect of age compared to scientists.
- Education has a clear effect on pay for scientists (not so much variation
- for sales and consumer).
- Interesting race seems to have a stronger economic effect than personality
- for the most part.
- This could just race is so little populated.
- A simple regression does express significance of personality but we also
- need to see that income is already inducing personalities (self selection).
- hiqual_dv =1 implies degree.
- The effect of race seems important.
+The following wage equation is run for every sector and to determine the
+ significance of personality in comparison to education, experience (derived
+ as 
+\family typewriter
+age - scend
+\family default
+), experience-squared, race, sex and personality.
+ log of wage is chosen primarily to normalize the wage data.
+ 
+\begin_inset Formula $lnwage=a_{1}educ+a_{2}exper+a_{3}exper^{2}+a_{4}sex+a_{5}o+a_{5}c+a_{5}e+a_{5}a+a_{5}n+a_{6}race+\epsilon$
+\end_inset
+
+.
+ An alternative formulation of the wage equation would be to include the
+ sector in a regression spanning all sectors.
+ The separate regressions approach is chosen primarily because we're not
+ interested in the wage growth within a sector rather than the relative
+ advantage of one sector over the other.
+ The results from these regression are presented in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabplainreg1}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabplainreg2}
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -3767,8 +4920,9 @@ twocolumn
 \end_layout
 
 \begin_layout Standard
-We also know that wage can be higher because of class effects - status is
- 
+An obvious case of endogeneity would appear for education.
+ We know that wage can be higher because of class effects.
+ Status and class are 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3776,24 +4930,74 @@ sticky
 \begin_inset Quotes erd
 \end_inset
 
- - parents with higher income jobs are better equipped to maximise the chances
- of economic success of their progeny.
- Hence, introducing the father's occupation would make sense.
- However, a problem with endogeneity would also appear.
- The obvious objection is that education is endogenous since those with
- higher wages and high education do so because of their parents.
- This is valid objection and to instrument education we need a variable
- that effects education but not wage.
- We can argue that parent's education (because of the very objection) influences
- education of a child - but parent's don't affect a child's progress after
- the job begins therefore the effect of parent's education on.
- highly correlated with the difference between (thus use housing as an instrumen
-t variable).
- House and assets don't affect wage but they do affect the standing that
- we try to measure by the parent's occupation.
- The results from ivregress (ivreg2 also converged with expected results)
- is shown in Table.
- It seems that after instrument the personalities effects have become sharper.
+ - in the sense that parents with higher income are better equipped to maximise
+ the chances of economic success of their progeny.
+ Education seems to the only measurable variable for class.
+ While house ownership appears to be a measure of economic standing, high
+ instances of young people living with parents and predominance of mortgages
+ in the housing market makes housing a weak indicator of class.
+\end_layout
+
+\begin_layout Standard
+We thus limit ourselves to measuring the economic standing through education
+ alone (which has a strong influence on wages throughout)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+It can still be argued that class effects may exist outside of education.
+ The regression model doesn't account for effects of class outside of education
+\end_layout
+
+\end_inset
+
+.
+ Those with higher wages and high education do so because of their parents
+ (this is verified independently with a multinomial model).
+ With that in mind, introducing the father's and mother's occupation as
+ instruments seems to address the endoeneity problem (the specification
+ tests run with 
+\family typewriter
+estat
+\family default
+ and regressions are repeated with 
+\family typewriter
+ivreg2
+\family default
+).
+ Our instruments (parents' education) does not influence wage offer but
+ it certainly influences education.
+ The argument for using parent's education as instrument is that it influences
+ education of a child but it does not affect a child's progress after the
+ job begins therefore the effect of parent's education on child's wage-level
+ (instead of class or financial strength) may not exist after education.
+ The results from ivregress are shown in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabivreg1}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabivreg2}
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -3806,10 +5010,223 @@ Multinomial Job selection model
 
 \begin_layout Standard
 For the first part, multinomial method showed the significance of personalities.
+ The margsin
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename effect_educ.png
+	width 3.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+education margins
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename margins_openness.png
+	width 3.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+openness margins
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename margins_conscientiouness.png
+	width 3.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+conscientiousness margins
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename margins_extroversion.png
+	width 3.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+extroversion margins
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename margins_aggreableness.png
+	width 3.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+agreeableness margins
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename neuroticism.png
+	width 3.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+neuroticism margins
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
 Wage Equation Results
+\end_layout
+
+\begin_layout Standard
+When using satisfaction with health as the selection variable, we do find
+ an evidence of selection bias in the heckman selection results.
+ However, the effect of personality is still valid for the most part (even
+ though coefficients have reduced).
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3831,6 +5248,19 @@ Personalities matter less overall in engineering professions.
 \end_layout
 
 \begin_layout Standard
+Hairdressers have a clear effect of age compared to scientists.
+ Education has a clear effect on pay for scientists (not so much variation
+ for sales and consumer).
+ Interesting race seems to have a stronger economic effect than personality
+ for the most part.
+ This could just race is so little populated.
+ A simple regression does express significance of personality but we also
+ need to see that income is already inducing personalities(self selection).
+ hiqual_dv =1 implies degree.
+ The effect of race seems important.
+\end_layout
+
+\begin_layout Standard
 Personalities matter more for higher ranks within the industry rather the
  longitudinally.
 \end_layout
@@ -3838,6 +5268,15 @@ Personalities matter more for higher ranks within the industry rather the
 \begin_layout Standard
 The theory that we need to test is whether popular traits tend to use self-selec
 tion.
+\end_layout
+
+\begin_layout Standard
+It seems that after instrumentaion the personalities effects have become
+ sharper.
+\end_layout
+
+\begin_layout Subsection
+Summary
 \end_layout
 
 \begin_layout Standard
@@ -4567,1044 +6006,6 @@ NA
 
 \begin_layout Plain Layout
 Sectors identified in the study with median incomes
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement p
-wide true
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="6">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-o
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-c
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-e
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-a
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-n
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.08314087759815
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.46374133949192
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.25173210161663
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.38660508083141
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.5635103926097
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.89710205795884
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.96430071398572
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.0932381352373
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.8832423351533
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2.56320873582528
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.15317357512953
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.79112694300518
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.29274611398964
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.91126943005181
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.6619170984456
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.4560546875
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6.0302734375
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.65625
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.9638671875
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2.26985677083333
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.85034965034965
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.4983682983683
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.2983682983683
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.63729603729604
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.02517482517483
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Results from a k-means clustering algorithm ran with 5 centres 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement p
-wide true
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="11" columns="6">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-o
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-c
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-e
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-a
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-n
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.56485355648536
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.55439330543933
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.2928870292887
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.29707112970711
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2.47594142259414
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.44058976582827
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.72246313963573
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.32523850823938
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.72940156114484
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.7918473547268
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.33481745325022
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.58682101513802
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.91718610863758
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.72128227960819
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.59572573463936
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.4993006993007
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.9013986013986
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.54055944055944
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.9993006993007
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.13916083916084
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.61216481360366
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.80379332897319
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.41007194244604
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.80575539568345
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.06867233485939
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.4327485380117
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6.05717998700455
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.68421052631579
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.95321637426901
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.83625730994152
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-7
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.55533596837945
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6.22068511198946
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.41897233201581
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6.11594202898551
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2.24769433465086
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-8
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.5679117147708
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.24363327674024
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.59337860780985
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.22156196943973
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.89134125636672
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-9
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.6396933560477
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6.21124361158433
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6.37563884156729
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6.21124361158433
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2.12691652470187
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-10
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.2158273381295
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.40927258193445
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.90967226219025
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-5.48840927258193
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.73541167066347
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Results from a k-means clustering algorithm ran with 10 centres 
 \end_layout
 
 \end_inset
