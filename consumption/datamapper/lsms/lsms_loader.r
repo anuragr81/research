@@ -7,7 +7,9 @@ if (isClass("LSMSLoader")){
 }
 
 ## all exported functions are declared here
-setClass("LSMSLoader", representation(combined_data_set="function"))
+setClass("LSMSLoader", representation(combined_data_set="function",load_diary_file="function",
+                                      analyse_cj="function",load_ohs_file="function"))
+
 
 lsms_loader<-function(fu,ln) {
   
@@ -319,6 +321,41 @@ lsms_loader<-function(fu,ln) {
     #                           2.37 <(6) < 2.38 (parastatal - business worker)
   }
   
+  
+  analyse_cj<-function(dirprefix,sl){
+    cjdat<-read.dta(paste(dirprefix,'/./lsms/TZNPS2COMDTA/COMSEC_CJ.dta',sep=''),convert.factors = FALSE) 
+    
+    cj <- fu()@get_translated_frame(dat=cjdat, names=ohs_seccj_columns_lsms_2010(), m=ohs_seccj_mapping_lsms_2010())
+    cj$factor<-as.integer(cj$lwp_unit==1)+as.integer(cj$lwp_unit==2)/1000.0+as.integer(cj$lwp_unit==3)+as.integer(cj$lwp_unit==4)/1000.0+as.integer(cj$lwp_unit==5)
+    cj$lwp <-cj$lwp*cj$factor
+    cj$price <cj$price/cj$lwp
+    
+    if (missing(sl)){
+      sl<-sort(unique(cj$item));
+    }
+    
+    print (paste("sl=",sl))
+    for (i in sl) {
+      print(i);
+      cjt<-cj[cj$item==i,]; 
+      cjt<-cjt[!is.na(cjt$price) & cjt$price>0,];
+      if(dim(cjt)[1]>0)
+      {
+        plot(cjt$r,cjt$price,xlab="region",ylab=paste("price for item=",i));
+        View(cjt); 
+        print(paste("Enter threshold for item=",i)); 
+        m<-as.numeric(readline());
+        if (m <= 0 || is.na(m)){
+          stop ("Done")
+        }
+        print (paste("Using",m,"as threshold")); 
+        x<-cjt[cjt$price<=max(cjt$price) & cjt$price > m,]; 
+        print(paste(unique(x$item),unique(x$region),sep=","));
+      } # end if
+    } # end for
+  }
+  
+  
   load_income_file<-function (year,dirprefix){
     
     #* read section E
@@ -418,9 +455,14 @@ lsms_loader<-function(fu,ln) {
       heads$is_resident<-as.integer(as.integer(heads$years_community)==99)
       heads$years_community<-heads$years_community+heads$is_resident*(heads$age-99);
       
+      
+      
       print ("Calculating hsize")
-      hhid_personid<-data.frame(hhid=ohs$hhid,personid=ohs$personid,stringsAsFactors=FALSE);
-      hhid_personid<- ddply(hhid_personid,.(hhid),summarize,hsize=length(personid));
+      hhid_personid_consu<-data.frame(hhid=ohs$hhid,personid=ohs$personid,age=ohs$age,stringsAsFactors=FALSE);
+      #calculating the consumption_factor
+      hhid_personid_consu$consumption_factor<-as.integer(hhid_personid_consu$age<=5)*.2+as.integer(hhid_personid_consu$age>5 & hhid_personid_consu$age<=10)*.3+as.integer(hhid_personid_consu$age>10 & hhid_personid_consu$age<=15)*.4+as.integer(hhid_personid_consu$age>15 & hhid_personid_consu$age<=45)+as.integer(hhid_personid_consu$age>45 & hhid_personid_consu$age<=65)*.7+as.integer(hhid_personid_consu$age>65)*.6
+      
+      hhid_personid<- ddply(hhid_personid_consu,.(hhid),summarize,hsize=length(personid), consu=sum(consumption_factor));
       print(paste("Number of households with hsize data = ",length(unique(hhid_personid$hhid))))
       
       print("Merging visual expenditure")
@@ -515,6 +557,7 @@ lsms_loader<-function(fu,ln) {
     #* ))
   }
   
-  return(new("LSMSLoader",combined_data_set=combined_data_set))
+  return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
+             analyse_cj=analyse_cj,load_ohs_file=load_ohs_file))
   
 }
