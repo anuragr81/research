@@ -121,7 +121,11 @@ lsms_loader<-function(fu,ln) {
       l$accessiblemarket<-l$accessiblemarket+as.integer(l$accessibility==2 & l$distance<10)
       l=l[!is.na(l$accessiblemarket),]
       #* chose accessible market value using (if both in the centre and closer then ambiguous)
-      l=ddply(l,.(region,district,ward),summarize,accessiblemarket=max(accessiblemarket))
+      l_i=ddply(l,.(region,district,ward),summarize,accessiblemarket=max(accessiblemarket))
+      l = merge(l,l_i)
+      fu()@removeall_cols_except(l,c("region","district","ward","accessiblemarket","travelcost"))
+      #l[,setdiff(names(l),)]<-NULL
+      
       #l = data.frame(region=l$region,district=l$district,ward=l$ward,ea=l$ea,accessiblemarket=l$accessiblemarket)
       ##
       #* Also considered urban/rural based on population density 
@@ -438,6 +442,7 @@ lsms_loader<-function(fu,ln) {
                         isrural=heads$isrural,
                         isurbanp=heads$isurbanp,
                         accessiblemarket=heads$accessiblemarket,
+                        travelcost=heads$travelcost,
                         schoolowner=heads$schoolowner,
                         occupation = heads$occupation,
                         occupation_rank = heads$occupation_rank,
@@ -494,6 +499,8 @@ lsms_loader<-function(fu,ln) {
     if (missing(selected_category)){
       print("setting selected_category to the default value")
       selected_category= visible_categories(year=year)
+    } else {
+      print(paste("using selected_category:",toString(selected_category)));
     }
     
     #*  (( Loading diary file

@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \use_default_options true
 \maintain_unincluded_children false
@@ -9,16 +11,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman default
-\font_sans default
-\font_typewriter default
-\font_math auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -1261,7 +1263,7 @@ status open
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="32" columns="1">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top" width="14cm">
 <row>
 <cell alignment="left" valignment="top" usebox="none">
@@ -1720,7 +1722,7 @@ status open
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="8" columns="4">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="middle" width="2cm">
 <column alignment="left" valignment="middle" width="4cm">
 <column alignment="left" valignment="top" width="4cm">
@@ -2512,7 +2514,7 @@ status open
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="9" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top" width="0pt">
 <row>
@@ -2753,7 +2755,7 @@ status open
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="7" columns="2">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top" width="0pt">
 <column alignment="left" valignment="top" width="0pt">
 <row>
@@ -3115,7 +3117,7 @@ With that admission, we decide on the three degrees of scarcity that we
 The method with percentile thresholds briefly described in the section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:precentile_threshold_method"
+reference "subsec:precentile_threshold_method"
 
 \end_inset
 
@@ -3148,7 +3150,7 @@ The direct way of measuring visibility is to find an evidence of visibility
 \begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:precentile_threshold_method"
+name "subsec:precentile_threshold_method"
 
 \end_inset
 
@@ -3473,13 +3475,23 @@ Steps in preparing LSMS data (2010)
 
 \begin_layout Standard
 Following steps were performed before running the regressions on the household
- consumption data from LSMS 2010\SpecialChar \@.
+ consumption data from LSMS 2010\SpecialChar endofsentence
 
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:diary_scaling"
+
+\end_inset
+
 Read weekly diary data from Section K (a table of items with the quantities
  consumed and cost associated with the item for every household).
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -3506,6 +3518,10 @@ Weekly diary data was multiplied by 52 (to
 estimate
 \bar default
  annual consumption)
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -3533,6 +3549,10 @@ All expenditure from (c)-(e) above were summed up as total expenditure
 \end_deeper
 \begin_layout Enumerate
 Obtained Personal Data from Section A,B,C and J files
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -3581,6 +3601,10 @@ Obtained income data from Section E (currently ignored for analysis for
  months, quarter, half year or year - while the mandatory fields corresponding
  to all of these units were i) number of hours worked per week ii) number
  of weeks worked per month and iii) number of months worked in an year .
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -3640,6 +3664,10 @@ ignored
 
 \begin_layout Enumerate
 For wage workers:
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -3676,6 +3704,10 @@ added other wages from secondary job by summing up yearly-income from all
 \end_deeper
 \begin_layout Enumerate
 Ignored bad data (outliers)
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -3692,6 +3724,10 @@ s with income data thus ignored were under 2%)
 \end_deeper
 \begin_layout Enumerate
 Merged all data
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -3719,6 +3755,540 @@ Merged all data into one table
 
 \end_deeper
 \begin_layout Subsection
+Possible sources of Error
+\end_layout
+
+\begin_layout Standard
+We extrapolate weekly diary to annual expense in Step 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:diary_scaling"
+
+\end_inset
+
+.
+ With large size of families (40% of housesholds have sze 5 or higher),
+ it may be common to stock items for consumption.
+ Items such as soap, skin creams are likely to be purchased in bulk in large
+ families.
+ Further, the frequency of purchases gets lower as the quantity of bulk
+ purchases increase.
+ We can probably estimate the number of rooms as a proxy of storage space
+ - but store and consume is itself a consumption pattern.
+ This may happen more when the closest market is distant from the household.
+ The data for distance from market (or the cost from( public transport)
+ is quite sparse (a lot of NAs).
+ The NAs could be because the market as described in the survey is never
+ visited (or it doesn't exist in the immediate region).
+ We would assume that the habit of stocking is uniform throughout the country
+ - which might be sweeping assumption - but since we do take region into
+ account - we should be able to account regional differences or household
+ factors (such as household size) in this habit.
+\end_layout
+
+\begin_layout Standard
+To perform this analysis, we have the expenditure on the item 
+\begin_inset Formula $q$
+\end_inset
+
+, the total expenditure 
+\begin_inset Formula $x$
+\end_inset
+
+ and the distance from the market 
+\begin_inset Formula $d$
+\end_inset
+
+.
+ We have assumed that anybody recalling the purchase in the last month would
+ be repeating that purchase every month.
+ This ignores that those who are stockpiling might not need to purchase
+ the item again for another few months.
+ This can overestimate the purchases for stockpilers - whose habit is unobservab
+le in the model 
+\begin_inset Formula $ln(q)\sim ln(x)+d+region$
+\end_inset
+
+.
+ 
+\begin_inset Formula $q$
+\end_inset
+
+ is endogenous in the model stockpiling behavior may influence 
+\begin_inset Formula $q,x$
+\end_inset
+
+.
+ We don't know if distance is a parameter of significance - if it is then
+ we can look for proxies.
+ A reasonable assumption is that the percentage of stockpilers to the regional
+ population is constant i.e.
+ there are no reasons why this percentage would change within a region within
+ a period of a few years.
+ Assuming this we can assume that stockpilers in any two regions A, B with
+ populations 
+\begin_inset Formula $p_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{B}$
+\end_inset
+
+ respectively would have 
+\begin_inset Formula $\eta p_{A}$
+\end_inset
+
+and 
+\begin_inset Formula $\eta p_{B}$
+\end_inset
+
+stockpilers respectively (where 
+\begin_inset Formula $\eta$
+\end_inset
+
+ is the fixed frequency of stockpilers).
+ These stockpilers would buy less frequently but there is no reasons to
+ believe that they would consume more than the non-stockpilers (another
+ assumption).
+ Thus if stockpilers and non-stockpilers live within a region (and are not
+ captured by region dummies) then we should observe fixed difference in
+ all regions (since 
+\begin_inset Formula $\eta$
+\end_inset
+
+ is fixed).
+ We perform this analysis at the region level (the data on district level
+ is limited - at times only 7 consumers in the district).
+ Some regions do seem to have clusters - but these clusters could arise
+ out of many household factors.
+ We need to study the combined effect of the imaginary stockpiler dummy
+ to test whether such a difference exists.
+ Given the low effect of the travelcosts on ratio 
+\begin_inset Formula $log(\frac{q}{x})$
+\end_inset
+
+ (as shown in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{skincreamconsu}
+\end_layout
+
+\end_inset
+
+) and the lack of different means in the region, we can be assured that
+ stockpiling is not significant.
+ It is more likely that larger families buy more of such quantities.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Skin Cream Consumption
+\backslash
+label{skincreamconsu}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox*{!}{
+\backslash
+textheight}{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular}{l*{1}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}         
+\backslash
+
+\backslash
+ 
+\backslash
+hline consu     &    0.494
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ popdensity&  -0.0343
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.011)         
+\backslash
+
+\backslash
+ travelcost&-0.000270         
+\backslash
+
+\backslash
+           &  (0.291)         
+\backslash
+
+\backslash
+ 1.region  &        0         
+\backslash
+
+\backslash
+           &      (.)         
+\backslash
+
+\backslash
+ 2.region  &   -10.56
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.029)         
+\backslash
+
+\backslash
+ 3.region  &   -7.382         
+\backslash
+
+\backslash
+           &  (0.076)         
+\backslash
+
+\backslash
+ 4.region  &   -7.445         
+\backslash
+
+\backslash
+           &  (0.100)         
+\backslash
+
+\backslash
+ 5.region  &   -2.778         
+\backslash
+
+\backslash
+           &  (0.612)         
+\backslash
+
+\backslash
+ 6.region  &   -3.269         
+\backslash
+
+\backslash
+           &  (0.602)         
+\backslash
+
+\backslash
+ 7.region  &    97.56
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.009)         
+\backslash
+
+\backslash
+ 8.region  &   -5.601         
+\backslash
+
+\backslash
+           &  (0.274)         
+\backslash
+
+\backslash
+ 9.region  &   -6.144         
+\backslash
+
+\backslash
+           &  (0.163)         
+\backslash
+
+\backslash
+ 10.region &   -10.00
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.049)         
+\backslash
+
+\backslash
+ 11.region &   -8.248         
+\backslash
+
+\backslash
+           &  (0.134)         
+\backslash
+
+\backslash
+ 12.region &   -3.888         
+\backslash
+
+\backslash
+           &  (0.477)         
+\backslash
+
+\backslash
+ 13.region &   -1.114         
+\backslash
+
+\backslash
+           &  (0.839)         
+\backslash
+
+\backslash
+ 14.region &   -1.302         
+\backslash
+
+\backslash
+           &  (0.810)         
+\backslash
+
+\backslash
+ 15.region &   -2.881         
+\backslash
+
+\backslash
+           &  (0.625)         
+\backslash
+
+\backslash
+ 16.region &   -0.508         
+\backslash
+
+\backslash
+           &  (0.927)         
+\backslash
+
+\backslash
+ 17.region &   -0.996         
+\backslash
+
+\backslash
+           &  (0.822)         
+\backslash
+
+\backslash
+ 18.region &   -4.266         
+\backslash
+
+\backslash
+           &  (0.351)         
+\backslash
+
+\backslash
+ 19.region &    4.314         
+\backslash
+
+\backslash
+           &  (0.191)         
+\backslash
+
+\backslash
+ 20.region &   -14.04
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.004)         
+\backslash
+
+\backslash
+ 51.region &   -5.924         
+\backslash
+
+\backslash
+           &  (0.297)         
+\backslash
+
+\backslash
+ 52.region &    10.02         
+\backslash
+
+\backslash
+           &  (0.057)         
+\backslash
+
+\backslash
+ 53.region &    3.437         
+\backslash
+
+\backslash
+           &  (0.302)         
+\backslash
+
+\backslash
+ 54.region &   -1.093         
+\backslash
+
+\backslash
+           &  (0.702)         
+\backslash
+
+\backslash
+ 55.region &        0         
+\backslash
+
+\backslash
+           &      (.)         
+\backslash
+
+\backslash
+ 0.accessiblemarket&        0         
+\backslash
+
+\backslash
+           &      (.)         
+\backslash
+
+\backslash
+ 1.accessiblemarket&    1.172         
+\backslash
+
+\backslash
+           &  (0.367)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -4.661         
+\backslash
+
+\backslash
+           &  (0.368)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     1746         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.063         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabular} 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 Claims Tested
 \end_layout
 
@@ -3741,7 +4311,7 @@ Income data in LSMS is not available for all the surveyed households.
  Grouping the occupations into fewer categories than in the survey (by putting
  paid/unpaid family work and agriculture under the same category for example)
  allows for the smoothening of the effect of individual occupations and
- may serve as a proxy of socioeconomic classes in the country.
+ may serve as a proxy of socioeconomic classesTHez in the country.
  Without or without this grouping, the effect of occupation has been found
  significant on the consumption of scarce commodities.
  The results are shown in Table 
@@ -4124,7 +4694,7 @@ status open
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="11" columns="4">
-<features rotate="0" tabularvalignment="middle">
+<features tabularvalignment="middle">
 <column alignment="left" valignment="top" width="4cm">
 <column alignment="left" valignment="top" width="4cm">
 <column alignment="left" valignment="top" width="2cm">
@@ -4886,7 +5456,7 @@ The activities of purchasing and assigning status are separate in the game.
  that emulates selection of commodities in a market - see section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:Purchasing_Mechanism"
+reference "subsec:Purchasing_Mechanism"
 
 \end_inset
 
@@ -4908,7 +5478,7 @@ ts in the game by looking at the quantities of the item categories possessed
 \begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:Purchasing_Mechanism"
+name "subsec:Purchasing_Mechanism"
 
 \end_inset
 
@@ -4979,7 +5549,7 @@ Choose a stock basket that is closest to one's own consumption pattern (no
 Acknowledge the real-life constraint (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:constraints"
+reference "subsec:constraints"
 
 \end_inset
 
@@ -5019,7 +5589,7 @@ Provide a score (1..5) on effectiveness and status to 3 other participants
 \begin_layout Subsubsection
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:basket_mixes"
+name "subsec:basket_mixes"
 
 \end_inset
 
@@ -5073,7 +5643,7 @@ Education (School/University)
 \begin_layout Subsubsection
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:constraints"
+name "subsec:constraints"
 
 \end_inset
 
@@ -5126,7 +5696,7 @@ The status-ranking activity involves a student assigning a status score
  Notice that in presence of constraints specified in section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:constraints"
+reference "subsec:constraints"
 
 \end_inset
 
@@ -5147,7 +5717,7 @@ g part of the game, they also track the effect of the externalities such
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:constraints"
+reference "subsec:constraints"
 
 \end_inset
 
@@ -5531,6 +6101,11 @@ width "100col%"
 special "none"
 height "1in"
 height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
 status open
 
 \begin_layout Plain Layout
@@ -5635,7 +6210,7 @@ v<-m[m$item==10601,];plot(v$areacode,v$price) # example
 \end_layout
 
 \begin_layout Standard
---
+–
 \end_layout
 
 \begin_layout Standard
@@ -5650,6 +6225,11 @@ width "100col%"
 special "none"
 height "1in"
 height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
 status open
 
 \begin_layout Plain Layout

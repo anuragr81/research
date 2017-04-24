@@ -5,7 +5,15 @@ if (isClass("FrameUtils")){
 }
 
 ## all exported functions are declared here
-setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function",filter_categories_data="function") )
+setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function",filter_categories_data="function",removeall_cols_except="function") )
+
+removeall_cols_except<-function(dat,listColumnNames){
+  #c("region","district","ward","accessiblemarket","travelcost"))
+  for (colName in setdiff(names(dat),listColumnNames)){
+    dat[,colName]<-NULL
+  }
+  
+}
 
 fu<-function(){
   
@@ -118,6 +126,7 @@ fu<-function(){
   return(new("FrameUtils",si_factor= si_factor, 
              get_translated_frame = get_translated_frame ,
              count_higher_than=count_higher_than,
-             filter_categories_data=filter_categories_data) );
+             filter_categories_data=filter_categories_data,
+             removeall_cols_except=removeall_cols_except) );
   
 }

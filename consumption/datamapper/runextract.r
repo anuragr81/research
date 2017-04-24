@@ -18,7 +18,8 @@ print("DONE")
 
 runtest<-function(){
   ll=lsms_loader(fu=fu,ln=lsms_normalizer)  
-  ds<-ll@combined_data_set(year=2010,selected_category=lsms_normalizer()@food_categories_lsms_2010(), dirprefix='c:/local_files/research/consumption/')
+  #ds<-ll@combined_data_set(year=2010,selected_category=lsms_normalizer()@food_categories_lsms_2010(), dirprefix='c:/local_files/research/consumption/')
+  ds<-ll@combined_data_set(year=2010,selected_category=213, dirprefix='c:/local_files/research/consumption/')
   return(ds)
 }
 
