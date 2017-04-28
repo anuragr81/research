@@ -5,7 +5,8 @@ if (isClass("FrameUtils")){
 }
 
 ## all exported functions are declared here
-setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function",filter_categories_data="function",removeall_cols_except="function") )
+setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function",filter_categories_data="function",
+                                      removeall_cols_except="function",find_nonzero_percentile="function") )
 
 removeall_cols_except<-function(dat,listColumnNames){
   #c("region","district","ward","accessiblemarket","travelcost"))
@@ -123,10 +124,23 @@ fu<-function(){
     return(res)
   }
   
+  find_nonzero_percentile<-function (ds,depvar, tol) { 
+    if (missing(tol)){
+      t=.01
+    } else {
+      t= tol;
+    }
+    while (quantile(ds[,depvar],t)<=0){
+      t=t+tol
+    }
+    return(1-t)
+  }
+  
   return(new("FrameUtils",si_factor= si_factor, 
              get_translated_frame = get_translated_frame ,
              count_higher_than=count_higher_than,
              filter_categories_data=filter_categories_data,
-             removeall_cols_except=removeall_cols_except) );
+             removeall_cols_except=removeall_cols_except,
+             find_nonzero_percentile=find_nonzero_percentile) );
   
 }

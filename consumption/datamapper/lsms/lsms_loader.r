@@ -464,7 +464,14 @@ lsms_loader<-function(fu,ln) {
       
       print ("Calculating hsize")
       hhid_personid_consu<-data.frame(hhid=ohs$hhid,personid=ohs$personid,age=ohs$age,stringsAsFactors=FALSE);
+      szNonIgnoredAgeWithNAs<- dim(hhid_personid_consu)[1]
+      szIgnoredAgeWithNAs<-dim(hhid_personid_consu[is.na(hhid_personid_consu$age),])[1]
+      hhid_personid_consu<-hhid_personid_consu[!is.na(hhid_personid_consu$age),]
+      print (paste("Ignored ", szIgnoredAgeWithNAs ," (out of ",szNonIgnoredAgeWithNAs ,") ohs entries with no age (cursz=",
+                   dim(hhid_personid_consu)[1],")"))
+      
       #calculating the consumption_factor
+      
       hhid_personid_consu$consumption_factor<-as.integer(hhid_personid_consu$age<=5)*.2+as.integer(hhid_personid_consu$age>5 & hhid_personid_consu$age<=10)*.3+as.integer(hhid_personid_consu$age>10 & hhid_personid_consu$age<=15)*.4+as.integer(hhid_personid_consu$age>15 & hhid_personid_consu$age<=45)+as.integer(hhid_personid_consu$age>45 & hhid_personid_consu$age<=65)*.7+as.integer(hhid_personid_consu$age>65)*.6
       
       hhid_personid<- ddply(hhid_personid_consu,.(hhid),summarize,hsize=length(personid), consu=sum(consumption_factor));
@@ -564,6 +571,7 @@ lsms_loader<-function(fu,ln) {
     #* ))
   }
   
+
   return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
              analyse_cj=analyse_cj,load_ohs_file=load_ohs_file))
   
