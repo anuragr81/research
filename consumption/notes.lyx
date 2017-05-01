@@ -5,6 +5,9 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage{lscape}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -54,13 +57,9 @@
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 2.5cm
-\topmargin 2.5cm
-\rightmargin 2.5cm
-\bottommargin 2.5cm
-\headheight 2.5cm
-\headsep 2.5cm
-\footskip 2.5cm
+\leftmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -78,6 +77,10 @@
 
 \begin_body
 
+\begin_layout Title
+Conspicuous consumption in the sub-Saharan Africa
+\end_layout
+
 \begin_layout Abstract
 Status competitions amongst workers often explain the income distribution
  better than the permanent income or productivity models.
@@ -94,21 +97,28 @@ on of industrial products, changing family characteristics, regional effects
  developed world - arguing that the socio-political environment of the developin
 g world has done little to curtail or encourage status competitions at local
  levels.
- The study uses the framework and terminology of Fred Hirsch who had discussed
- the increasing effect of advertising and 
+ The extends the framework provided by Fred Hirsch who had discussed the
+ increasing effect of advertising and 
 \begin_inset Quotes eld
 \end_inset
 
-congestions
+congestion
 \begin_inset Quotes erd
 \end_inset
 
- related to positional consumption in the post-war distribution of resources.
+ related to positional consumption in the post-war redistribution.
  The contention of the study is that physical scarcity in the developing
  countries does not rule out social scarcity and that the status competitions
  and positional consumption - which are identified by observed differences
  in prices and availability in the study - must be considered for a better
  understanding of urban migration patterns and consumption pressures.
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Part
@@ -913,20 +923,23 @@ key "WicksteedCommonSense"
 \begin_layout Section
 \paragraph_spacing onehalf
 
-\size normal
-Measuring Status Competition
+\size large
+Measuring Status Competition in a Developing Economy
 \end_layout
 
 \begin_layout Standard
 \paragraph_spacing onehalf
-A measurement of positional consumption isn't possible without the classificatio
-n of positional items - as it rests on an entirely socio-cultural judgment.
- The criterion of classification chosen in this study is inspired by the
- Hirsch's notion of congestion - which causes physical or social scarcities.
- For the current study, the difference between physical and social scarcities
- is ignored.
- One simple criterion employed in classificaton of items is the difference
- in prices (wherever available).
+To measure positional consumption one can either split the consumer basket
+ into positional and non-positional items or assign a positional parameter
+ (visibility etc.) to every commodity in the basket.
+ In this study, the criterion of classification (or assignment of such a
+ parameter to every item) is inspired by the Hirsch's notion of congestion
+ - which causes physical or social scarcities.
+ The difference between physical and social scarcities is not considered
+ relevant (a clarification on the notion of scarcity is provided in a later
+ section).
+ The simplest criterion employed in classification of items is the difference
+ in prices (wherever available) of the same item.
  For items that are physical scarce, the price differences between commodities
  is less likely (although still possible due to distribution and storage
  costs involved).
@@ -940,11 +953,11 @@ n of positional items - as it rests on an entirely socio-cultural judgment.
 \begin_layout Standard
 \paragraph_spacing onehalf
 A comparison of a spatially or economically excluded area with with denser
- urban areas can provide insights on status competitions.
- We can also test whether the proxies of social interaction (family members
- etc.) have an impact on status competitions (there are many products that
- have a relily to have signaling effects but for which number of family
- members is not significant).
+ urban areas provides further insights on status competitions.
+ We test whether the proxies of social interaction (family members etc.)
+ have an impact on status competitions (there are many products that have
+ a likely to have signaling effects but for which number of family members
+ is not statistically significant).
  
 \end_layout
 
@@ -963,7 +976,14 @@ key "FieldsHT"
 
 , addressing consumption pressures for industrial goods can have a positive
  impact on migration pressures and reduction of informal sectors.
- More details on measures of scarcity are provided later in the study.
+ More details on measures of scarcity are provided in a later section.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Part
@@ -2717,7 +2737,19 @@ key "CharlesHurstRace"
 
 \begin_layout Section
 \paragraph_spacing onehalf
-South Africa 
+Comparing conspicuous consumption in developing and developed economies
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing onehalf
+South Africa - Income and Expenditure Survey
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KausSA"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3015,16 +3047,17 @@ Results from regressing ln(visible_consumption) against respective set of
 
 \end_layout
 
-\begin_layout Section*
-\paragraph_spacing onehalf
-Regressions on Income and Expenditure Survey
-\end_layout
-
 \begin_layout Standard
 \paragraph_spacing onehalf
-Kaus considers a black-dummy and coloured-dummy in regression of visible
- consumption against demographic, time, permanent income and household character
-isitcs.
+A study by Kaus(
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KausSA"
+
+\end_inset
+
+) considers a black-dummy and coloured-dummy in regression of visible consumptio
+n against demographic, time, permanent income and household characterisitcs.
  Starting with no controls(I)
 \begin_inset Foot
 status open
@@ -3033,6 +3066,41 @@ status open
 
 \family typewriter
 lm(lnvis~black_dummy+coloured_dummy)
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing onehalf
+Regressors and instruments in implementaiton of ivreg in R-toolbox AER are
+ specified in a formula with two parts on the right-hand side.
+ The specification - used in this note - can be either of the form - 
+\family typewriter
+y ~ ex + en | ex + in 
+\family default
+or as 
+\family typewriter
+y ~ ex + en | .
+ - en +in 
+\family default
+(where 
+\family typewriter
+ex
+\family default
+ is the set of exogenous variables, 
+\family typewriter
+en
+\family default
+ is the set of endogenous variables and 
+\family typewriter
+in 
+\family default
+the set of instruments) .
+ The latter is the notation used throughout in this section.
 \end_layout
 
 \end_inset
@@ -3160,36 +3228,6 @@ ivreg(lnvis~black_dummy+coloured_dummy+ lnpinc +lsecd + age + n_members
 
 .
  
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-All of the above interpretations match with those reported in Kaus's paper.
- The regression V from the paper is ommitted for 1995 - as the data on visible
- consumption from 2005/2010 wasn't available from datafirst to be included
- in the regression with year-dummies.
- The data from 2000 - is of poor quality (as explained by Kaus) and does
- not have enough household characteristic fields for applying an analysis
- in the Kaus's paper - and was thus discarded altogether.
- For 2005/2010, the only field amongst all in the visible category available
- to us - is the number-of-cars-owned by the household ( rather than cars
- purchased in the surveyed period).
- Hardly meant to conclusive on visible consumption, if owned cars were still
- to be considered the proxy for visible consumption, a reversal of signs
- after adding of income-controls is not observed.
- Other results equivalent to 1995 result-set are summarized in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "resresults-2"
-
-\end_inset
-
- (Notice that specification V is possible when more than an year is available
- for analysis).
- What the results suggest is only that unlike visible consumption, the ownership
- of cars is very much influenced by permanent income (and other wealth character
-istics accounting for lower ownership of cars for the black and coloured
- groups).
 \end_layout
 
 \begin_layout Standard
@@ -3529,11 +3567,6 @@ Results from regressing ln(visible_consumption) against respective set of
 
 \end_layout
 
-\begin_layout Section*
-\paragraph_spacing onehalf
-Analysis
-\end_layout
-
 \begin_layout Standard
 \paragraph_spacing onehalf
 The first-change of sign when income controls are added implies that after
@@ -3553,12 +3586,8 @@ The first-change of sign when income controls are added implies that after
  lowered significantly.
  This confirms that coloured and black social groups spend a rather disprportion
 ate amount on visible consumption.
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-The second claim that the paper is interested in is testing whether the
- rise in average group income reduces the visible consumption.
+ Kaus paper is interested in testing whether the rise in average group income
+ reduces the visible consumption.
  The regression considers average-incomes of particular provinces for every
  group (black/white/coloured).
  This regression shows the effect more on black-social-group than the white-soci
@@ -3566,8 +3595,15 @@ al-group - a difference that author argues points out alternate ways of
  signaling for white-social-group relative to black-social-group.
 \end_layout
 
-\begin_layout Section
-United States
+\begin_layout Subsection
+United States - Consumer Expenditure Survey
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CharlesHurstRace"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3906,14 +3942,17 @@ Results from regressing ln(visible_consumption) against respective set of
 
 \end_layout
 
-\begin_layout Section*
-Regressions on Consumer Expenditure Survey
-\end_layout
-
 \begin_layout Standard
-The authors consider a black-dummy and hispanic-dummy in regression of visible
- consumption against demographic, time, permanent income and household character
-isitcs.
+Charles et al.
+ (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CharlesHurstRace"
+
+\end_inset
+
+) consider a black-dummy and hispanic-dummy in regression of visible consumption
+ against demographic, time, permanent income and household characterisitcs.
  The hispanic dummy is inferred by the 
 \begin_inset Quotes eld
 \end_inset
@@ -3923,12 +3962,12 @@ horref1
 \end_inset
 
  variable in CEX data - which is recorded side-by-side with the race variable.
- This means that housholds/individuals can associate with either white or
- black while recording their ethnicity.
+ This means that households/individuals can associate with either white
+ or black while recording their ethnicity.
  Only about 1489 out of 22980 households surveyed in years 2004, 2009 and
  2014, for example, associate with neither white nor black.
  If that criterion is relaxed (i.e.
- if anyhone reporting the horref1 variable is considered hispanic for the
+ if anyone reporting the horref1 variable is considered hispanic for the
  study) the number of hispanics in the survey almost doubles.
  Starting with no controls(I)
 \begin_inset Foot
@@ -3986,7 +4025,7 @@ lm(lnvis~black_dummy+coloured_dummy+ lnpinc)
  The endogeneity of total expenditure requires instrumentation - these are
  positive-income-dummy, cube-of-income-level, dummies for under-secondary-educat
 ion, secondary-eduation and degree-education.
- The 2SLS regressions variables
+ The 2SLS regression is performed with education as instrument variables
 \begin_inset Foot
 status open
 
@@ -4002,8 +4041,8 @@ ubic.
 
 \end_inset
 
- and the other with education-dummies as control variables (while still
- using instruments)
+ and then with education-dummies as control variables (while still using
+ instruments)
 \begin_inset Foot
 status open
 
@@ -4031,37 +4070,15 @@ reference "resresults-1-1"
  more for the hispanic_dummy than for the black_dummy.
 \end_layout
 
-\begin_layout Section*
-AER toolbox ivreg notation
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
-\begin_layout Standard
-\paragraph_spacing onehalf
-Regressors and instruments in implementaiton of ivreg in R-toolbox AER are
- specified in a formula with two parts on the right-hand side.
- The specification - used in this note - can be either of the form - 
-\family typewriter
-y ~ ex + en | ex + in 
-\family default
-or as 
-\family typewriter
-y ~ ex + en | .
- - en +in 
-\family default
-(where 
-\family typewriter
-ex
-\family default
- is the set of exogenous variables, 
-\family typewriter
-en
-\family default
- is the set of endogenous variables and 
-\family typewriter
-in 
-\family default
-the set of instruments) .
- The latter is the notation used throughout in this note.
+\begin_layout Part
+Analysis of LSMS 2010 Data for Tanzania
 \end_layout
 
 \begin_layout Section
@@ -4111,8 +4128,8 @@ status open
 \begin_inset Tabular
 <lyxtabular version="3" rows="9" columns="2">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="4cm">
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -4283,7 +4300,7 @@ Marriage Ceremony
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4594,504 +4611,7 @@ If there are
 \end_layout
 
 \begin_layout Section
-\paragraph_spacing onehalf
-Detecting and measuring positional consumption
-\end_layout
-
-\begin_layout Subsection
-\paragraph_spacing onehalf
-Measures for Scarcity 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HirschSocialLimits"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-Heffetz finds that the degree to which people notice items explains the
- corresponding (permanent) income elasticities better.
- This observation has provided the basis for inspection of visible consumption
- in many studies thereforth.
- In an environment of inequalities, however, it is likely that the indvidiuals
- with perceived higher status notice items differently from how the lower
- status individuals might notice them.
- The social factors thus relevant for the difference in visible preferences
- are sought in the studies on visible consumption in the developing countries.
- In India, this is found to be religion and caste - while in South Africa
- and United States, race seems to have a dominant significance.
- It is also worth noting that the developing countries may offer a less
- consumerist agrarian environment overall where expenditure is more visible
- than in a relatively individualistic and industrialized society.
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-For visibility to bear significance in an environment of severe inequalities
- and scarcities, an association with higher income becomes relevant.
- Khamis et al 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ZahraIndia"
-
-\end_inset
-
- perform a slightly more detailed survey by asking what an individual whose
- consumption is noticed would do when her income rises (by 20%).
- This quantifies the expectations from others associates the total expenditure
- with higher-income.
- The items where consumers expect the consumption to rise with increased
- income are those that associate with higher income and are declared 
-\begin_inset Quotes eld
-\end_inset
-
-conspicuous
-\begin_inset Quotes erd
-\end_inset
-
- in the study.
- 
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-In a developing economy, the criterion for conspicuous consumption is clearly
- not just noticeability any more.
- Visible consumption may detail the mechanics of status competitions in
- a narrow sense where consumers participate in a market to increase their
- perceived status - but it does not provide an adequate picture of conspicuous
- consumption.
- One reason is that markets are underdeveloped in the developing world and
- social status is largely yielded through economic classes and social conditions.
- The second - probably more significant - reason is that status signaling
- does not exist in a society as an inherent need for visible appeal amongst
- humans.
- Instead visible consumption matters because of an item being associated
- with a higher status (at least in the sense which Veblen had talked about
- in his 19th century treatise
-\begin_inset CommandInset citation
-LatexCommand cite
-key "VeblenLeisureClass"
-
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-A study of status and scarcity of items therefore goes hand in hand with
- the study of conspicuous consumption.
- Instead of limiting ourselves to visible consumption as the particular
- mechanics of status signaling - where consumers buy items in a common market
- and (presumably) over-weigh on items that are more noticeable - we attempt
- to understand the reasons behind status-signaling by looking at the differences
- in patterns between the richer and poorer sections of society and attempt
- to understand how unavailability of items (scarcity) as well as disparities
- of services across regions and classes in a society are reflected in both
- price and consumption of commodities.
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-This is not to discount a study of visible consumption or the importance
- of a visiblity survey in any way.
- In fact, visible consumption is ever more relevant with recent trends in
- advertisement and consumerism in the developing world.
- Even though scarcity is fundamentally more important than noticeability,
- we argue that scarcity merely allows status competitions to develop.
- The factors that affect status competitions are indeed beyond scarcity.
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-With that admission, we decide on the three degrees of scarcity that we
- can associate to an item - and define a fundamental assumption to justify
- the existence of status competitions arising out of the scarcity of a commodity.
- We assume that the richer half of the society invariably indicates higher
- status (than lower) and has access to more facilities (than less).
- In other words, when individuals are ranked by permanent income, scarcity
- is always faced by the lower half of the society.
- With this assumption, status competitions would occur when people with
- lower income would want to achieve higher status.
- The conspicuous items in this view are objects that indicate achieving
- what's scarce.
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-The method with percentile thresholds briefly described in the section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:precentile_threshold_method"
-
-\end_inset
-
- measures scarcity on grounds of i) availability (electricity, food, education
- etc.) and ii) affordability.
- If the item is affordable and not available, it would be classified as
- scarce.
- Severe(1) scarcities - which would be a physical scarcities in a Hirschian
- sense - would create minimal status competitions while under medium scarcity(2)
-, status competition would thrive.
- For items that are not scarce(3) at all (i.e.
- affordable by all and available to all) would not allow status competitions
- to develop.
-\end_layout
-
-\begin_layout Subsection
-\paragraph_spacing onehalf
-Methods to measure Visibility 
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-The direct way of measuring visibility is to find an evidence of visibility
- in the comomdities.
- Most studies have relied on their own visibility surveys.
- In absence of such a survey, one can verify commodities from public media
- - e.g.
- advertisements or social media traffic.
- These methods have not been pursued at this stage in the study.
-\end_layout
-
-\begin_layout Subsection
-\paragraph_spacing onehalf
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:precentile_threshold_method"
-
-\end_inset
-
-Consumption percentiles
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-The differences between amounts spent by the lowest and higher percentile
- of spenders of a particular commodity are expected to be higher when a
- commodity is a status-good than when it is of common utility.
- The illustrations show non-zero log-level expenditure on a few commodities
- when the lower (let's say 
-\begin_inset Formula $\theta$
-\end_inset
-
-) percentile of the consumption of the commodity is ignored.
- Ignoring the bottom 
-\begin_inset Formula $\theta$
-\end_inset
-
- percentile of the consumption of a visible commodity is equivalent to treating
- the bottom 
-\begin_inset Formula $\theta$
-\end_inset
-
- percentile expenditure as non-visible consumption (If we consider 
-\begin_inset Formula $\theta=10\%$
-\end_inset
-
- for electricity, then bottom 10% percentile of the consumption on electricity
- would be consider non-visible and anything above that level would be considered
- visible).
- The plots of log-expenditures are shown with rising 
-\begin_inset Formula $\theta$
-\end_inset
-
- (starting with the lowest percentile 
-\begin_inset Formula $\theta$
-\end_inset
-
- that corresponds to lowest non-zero log-level of consumption of the commodity).
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-For a good that is not positional, one expects that the consumers from lower
- and higher quantiles of total expenditure (x-axis) would consume similar
- amounts of the good (y-axis).
- For a positional good, the consumers spending higher expenditure on the
- good would lean towards consumers with higher total expenditure.
- This does not indicate signaling in any way - but tests only whether a
- commodity is consumed uniformly amongst those with lower and higher total
- expenditure outlays (this is rather a measure of sarcity of the item than
- of its visibility).
- Choosing different thresholds (
-\begin_inset Formula $\theta)$
-\end_inset
-
- provides a a control on the degree to which a certain commodity can be
- included in our conspicuous consumption basket.
- Instead of asking whether marriage spending is visible or not - for example
- - the test asks if only the richer consumers can afford a significant expenditu
-re on marriage (while varying the degree of visibility attached to spending
- on marriage).
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-In the data from Tanzania, while top 56% of consumers show spending on rice,
- electricity appears to be a luxury when only top 22 % of consumers spend
- on it.
- This does not necessitate that a higher consumption of electricity indicates
- higher status but a higher threshold for electricity certainly indicates
- its physical scarcity which may permit status competitions.
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-Not all scarce objects can be indicative of status - we often need some
- judgment to decide which products may indicate status signaling.
- A survey accomplishes this by ranking all products as viewed by its respondents.
- It must also be noted that visibility or positional signaling of a commodity
- is hardly orthogonal to major expenditure categories.
- The usual arguments of additive utilities cannot hold for conspicuous consumpti
-on.
- In other words, if walnut turns out to be of visible significance (ranked
- high in the consumers' perception of visibility in the survey) then one
- can no longer talk about the combined utility of food and visible items
- (walnut is both a food item and a visible good)
-\shape italic
-.
- 
-\shape default
-Detailed microdata thus becomes a necessity for discussing income elasticities
- of visible items (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ArrowDasgupta,heffetz_visibility"
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-A similar analysis of Consumer Expenditury Survey (CEX) data from years
- 2004,2010 and 2014 similarly shows clear differences between expenditure
- on jewelry and fruits.
- It is evident that jewelry is not popular amidst the relatively poor and
- that richer consumers spend a higher portion of their total expenditure
- on jewelry than on fruits (curve being steeper for jewelry).
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename lsms/loglogrice.png
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-LSMS Tazanania 2010: Percentiles of nonzero consumption of rice
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename lsms/loglogelectricity.png
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-LSMS Tazanania 2010: Percentiles of nonzero consumption of electricity
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename lsms/loglogfruit.png
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-LSMS Tazanania 2010: Percentiles of nonzero consumption of fruits 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename lsms/loglogmarriage.png
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-LSMS Tazanania 2010: Percentiles of non-zero expenditure on marriage
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename cex/us_cex_fruits.png
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-US CEX (2004,2010,2014): Percentiles of non-zero consumption of fruits
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename cex/us_cex_jewelry.png
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-US CEX (2004,2010,2014): Percentiles of non-zero consumption of jewelry
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-\paragraph_spacing onehalf
-Techniques for analysis of consumption data 
+A review of relevant techniques for analysis of consumption data
 \end_layout
 
 \begin_layout Standard
@@ -5598,7 +5118,3334 @@ key "DeatonSurveyElasticities"
 \end_layout
 
 \begin_layout Section
-Analysis of LSMS Data
+Detecting and measuring positional consumption
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing onehalf
+Measures for Scarcity 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HirschSocialLimits"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Heffetz finds that the degree to which people notice items explains the
+ corresponding (permanent) income elasticities better.
+ This observation has provided the basis for inspection of visible consumption
+ in many studies thereforth.
+ In an environment of inequalities, however, it is likely that the indvidiuals
+ with perceived higher status notice items differently from how the lower
+ status individuals might notice them.
+ The social factors thus relevant for the difference in visible preferences
+ are sought in the studies on visible consumption in the developing countries.
+ In India, this is found to be religion and caste - while in South Africa
+ and United States, race seems to have a dominant significance.
+ It is also worth noting that the developing countries may offer a less
+ consumerist agrarian environment overall where expenditure is more visible
+ than in a relatively individualistic and industrialized society.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+For visibility to bear significance in an environment of severe inequalities
+ and scarcities, an association with higher income becomes relevant.
+ Khamis et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZahraIndia"
+
+\end_inset
+
+ perform a slightly more detailed survey by asking what an individual whose
+ consumption is noticed would do when her income rises (by 20%).
+ This quantifies the expectations from others associates the total expenditure
+ with higher-income.
+ The items where consumers expect the consumption to rise with increased
+ income are those that associate with higher income and are declared 
+\begin_inset Quotes eld
+\end_inset
+
+conspicuous
+\begin_inset Quotes erd
+\end_inset
+
+ in the study.
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+In a developing economy, the criterion for conspicuous consumption is clearly
+ not just noticeability any more.
+ Visible consumption may detail the mechanics of status competitions in
+ a narrow sense where consumers participate in a market to increase their
+ perceived status - but it does not provide an adequate picture of conspicuous
+ consumption.
+ One reason is that markets are underdeveloped in the developing world and
+ social status is largely yielded through economic classes and social conditions.
+ The second - probably more significant - reason is that status signaling
+ does not exist in a society as an inherent need for visible appeal amongst
+ humans.
+ Instead visible consumption matters because of an item being associated
+ with a higher status (at least in the sense which Veblen had talked about
+ in his 19th century treatise
+\begin_inset CommandInset citation
+LatexCommand cite
+key "VeblenLeisureClass"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+A study of status and scarcity of items therefore goes hand in hand with
+ the study of conspicuous consumption.
+ Instead of limiting ourselves to visible consumption as the particular
+ mechanics of status signaling - where consumers buy items in a common market
+ and (presumably) over-weigh on items that are more noticeable - we attempt
+ to understand the reasons behind status-signaling by looking at the differences
+ in patterns between the richer and poorer sections of society and attempt
+ to understand how unavailability of items (scarcity) as well as disparities
+ of services across regions and classes in a society are reflected in both
+ price and consumption of commodities.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+This is not to discount a study of visible consumption or the importance
+ of a visiblity survey in any way.
+ In fact, visible consumptioyhe factors that affect status competitions
+ are indeed beyond scarcity.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+With that admission, we determine the degrees to which an item may be desirable
+ based on its scarcity.
+ The term scarcity can be confusing because it often involves what is physically
+ unavailable and what is felt as unavailable (despite closer alternatives
+ being available).
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+The method with percentile thresholds briefly described in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:precentile_threshold_method"
+
+\end_inset
+
+ is used to measure the degrees of scarcity on grounds of availability (electric
+ity, food, education etc.) and affordability.
+ If the item is affordable and not available, it should be considered as
+ scarce.
+ Severe scarcities would create minimal status competitions while under
+ medium scarcity, status competition may thrive.
+ For items that are not scarce(3) at all (i.e.
+ affordable by all and available to all) would not permit status competitions
+ to develop.
+ This expanded upon in the next section.
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing onehalf
+Methods to measure Visibility
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+The direct way of measuring visibility is to find an evidence of visibility
+ in the comomdities.
+ Most studies have relied on their own visibility surveys.
+ In absence of such a survey, one can verify commodities from public media
+ - e.g.
+ advertisements or social media traffic.
+ These methods have not been pursued at this stage in the study.
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing onehalf
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:precentile_threshold_method"
+
+\end_inset
+
+Consumption percentiles
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+The differences between amounts spent by the lowest and higher percentile
+ of spenders of a particular commodity are expected to be higher when a
+ commodity is a status-good than when it is of common utility.
+ The illustrations show non-zero log-level expenditure on a few commodities
+ when the lower (let's say 
+\begin_inset Formula $\theta$
+\end_inset
+
+) percentile of the consumption of the commodity is ignored.
+ Ignoring the bottom 
+\begin_inset Formula $\theta$
+\end_inset
+
+ percentile of the consumption of a visible commodity is equivalent to treating
+ the bottom 
+\begin_inset Formula $\theta$
+\end_inset
+
+ percentile expenditure as non-visible consumption (If we consider 
+\begin_inset Formula $\theta=10\%$
+\end_inset
+
+ for electricity, then bottom 10% percentile of the consumption on electricity
+ would be consider non-visible and anything above that level would be considered
+ visible).
+ The plots of log-expenditures are shown with rising 
+\begin_inset Formula $\theta$
+\end_inset
+
+ (starting with the lowest percentile 
+\begin_inset Formula $\theta$
+\end_inset
+
+ that corresponds to lowest non-zero log-level of consumption of the commodity).
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+For a good that is not positional, one expects that the consumers from lower
+ and higher quantiles of total expenditure (x-axis) would consume similar
+ amounts of the good (y-axis).
+ For a positional good, the consumers spending higher expenditure on the
+ good would lean towards consumers with higher total expenditure.
+ This does not indicate signaling in any way - but tests only whether a
+ commodity is consumed uniformly amongst those with lower and higher total
+ expenditure outlays (this is rather a measure of sarcity of the item than
+ of its visibility).
+ Choosing different thresholds (
+\begin_inset Formula $\theta)$
+\end_inset
+
+ provides a a control on the degree to which a certain commodity can be
+ included in our conspicuous consumption basket.
+ Instead of asking whether marriage spending is visible or not - for example
+ - the test asks if only the richer consumers can afford a significant expenditu
+re on marriage (while varying the degree of visibility attached to spending
+ on marriage).
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+In the data from Tanzania, while top 56% of consumers show spending on rice,
+ electricity appears to be a luxury when only top 22 % of consumers spend
+ on it.
+ This does not necessitate that a higher consumption of electricity indicates
+ higher status but a higher threshold for electricity certainly indicates
+ its physical scarcity which may permit status competitions.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Not all scarce objects can be indicative of status - we often need some
+ judgment to decide which products may indicate status signaling.
+ A survey accomplishes this by ranking all products as viewed by its respondents.
+ It must also be noted that visibility or positional signaling of a commodity
+ is hardly orthogonal to major expenditure categories.
+ The usual arguments of additive utilities cannot hold for conspicuous consumpti
+on.
+ In other words, if walnut turns out to be of visible significance (ranked
+ high in the consumers' perception of visibility in the survey) then one
+ can no longer talk about the combined utility of food and visible items
+ (walnut is both a food item and a visible good)
+\shape italic
+.
+ 
+\shape default
+Detailed microdata thus becomes a necessity for discussing income elasticities
+ of visible items (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ArrowDasgupta,heffetz_visibility"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+A similar analysis of Consumer Expenditury Survey (CEX) data from years
+ 2004,2010 and 2014 similarly shows clear differences between expenditure
+ on jewelry and fruits.
+ It is evident that jewelry is not popular amidst the relatively poor and
+ that richer consumers spend a higher portion of their total expenditure
+ on jewelry than on fruits (curve being steeper for jewelry).
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename lsms/loglogrice.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+LSMS Tazanania 2010: Percentiles of nonzero consumption of rice
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename lsms/loglogelectricity.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+LSMS Tazanania 2010: Percentiles of nonzero consumption of electricity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename lsms/loglogfruit.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+LSMS Tazanania 2010: Percentiles of nonzero consumption of fruits 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename lsms/loglogmarriage.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+LSMS Tazanania 2010: Percentiles of non-zero expenditure on marriage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename cex/us_cex_fruits.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+US CEX (2004,2010,2014): Percentiles of non-zero consumption of fruits
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename cex/us_cex_jewelry.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+US CEX (2004,2010,2014): Percentiles of non-zero consumption of jewelry
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Ranking the Appeal of items
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing onehalf
+Consumer Appeal and Utility
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+In an 
+\begin_inset Formula $n-$
+\end_inset
+
+commodity world, the elasticities of demand can explain the relative preference
+ of items.
+ If a utility function for every individual is given by 
+\begin_inset Formula $u=f(q_{1},q_{2}...q_{n};p_{1},p_{2}...p_{n})$
+\end_inset
+
+ for 
+\begin_inset Formula $n$
+\end_inset
+
+ commodities in the consumer universe where quantities consumed are denoted
+ by 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+ and prices as 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+, then every consumer is said maximize her utility by choosing quantities
+ 
+\begin_inset Formula $q_{1},q_{2}...q_{n}$
+\end_inset
+
+.
+ With the assumption that every consumer is rational and adjusts the quantities
+ 
+\begin_inset Formula $q_{1},q_{2},q_{3}...q_{n}$
+\end_inset
+
+ to optimize the utility function, we fit the utility function given fixed
+ 
+\begin_inset Formula $q_{1i},q_{2i}...$
+\end_inset
+
+ values for every consumer 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ The parameters of the function 
+\begin_inset Formula $f$
+\end_inset
+
+ that optimize the set of data are thus inferred from the consumption data.
+ A model that considers the visual and positional appeal of every item,
+ would require the utility function to include the parameters related to
+ positional and visual appeal of the item.
+ The interpretation of Slutsky equation which is derived 
+\begin_inset Formula $dq=\frac{\partial q}{\partial p}dp+\frac{\partial q}{\partial x}dx$
+\end_inset
+
+ (where 
+\begin_inset Formula $\Sigma_{n}q=x)$
+\end_inset
+
+ would also need to change in consideration of the parameters related to
+ positional consumption.
+ Some of these parameters are considered in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:AppealsRanking"
+
+\end_inset
+
+.
+ To separate the price and budget concerns in the conventional utility function
+ from these suggested parameters related to positional consumption, we delineate
+ all the price and budget concerns under affordability.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+To demonstrate how price and budget concerns are addressed in a discussion
+ of utility curves, we can consider a two-good world comprising of food
+ and education.
+ If we choose a Cobb-Douglas function 
+\begin_inset Formula $u(x,y)=Ax^{\alpha}y^{1-\alpha}$
+\end_inset
+
+(where 
+\begin_inset Formula $x,y$
+\end_inset
+
+ are food and education quantities respectively)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A utility curve can be visualized as 
+\begin_inset Formula $y=e^{\frac{(lnu-lnA)-\alpha lnx}{1-\alpha}}$
+\end_inset
+
+or 
+\family typewriter
+\size footnotesize
+a=.8;plot(x,exp(-(a/(1-a))*log(x)),xlim=c(0,100),ylim=c(0,1))
+\family default
+\size default
+ 
+\end_layout
+
+\end_inset
+
+, then we can calibrate 
+\begin_inset Formula $\alpha=\alpha_{0}$
+\end_inset
+
+ for a vector of observations 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ In the Cobb-Douglas utility, 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ measures whether consumption is complementary (high 
+\begin_inset Formula $\alpha$
+\end_inset
+
+) or  necessary (low 
+\begin_inset Formula $\alpha)$
+\end_inset
+
+.
+ The shape of the curve (marginal propensity to consume) can tell us which
+ product is preferred more over the other.
+ The total expenditure elasticities of demand similarly provide an estimate
+ of the preference between education and food
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Strictly speaking we cannot use total expense elasticity since we should
+ consider the cost of education in the area to calculate education unit
+ consumed and calculate food units consumed based on the food price in the
+ survey.
+ A multiple regression approach - which can easily include region, education
+ or other factors affecting consumer preferences - is often preferred over
+ an analysis based on utility curves.
+\end_layout
+
+\end_inset
+
+.
+ It is easy to see from Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:EducationvsFood"
+
+\end_inset
+
+ for the LSMS data from Tanzania, that most consumers would rather spend
+ on food than on education.
+ For multiple items, we would rely on the elasticities of demand to understand
+ the relative preferences of the consumer.
+ A model for positional consumption needs to be be developed to enhance
+ the utility function so that elasticities of demand with respect to parameters
+ pertinent to positional consumption can be interpreted similarly.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/lsms/lsms_food_vs_education.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:EducationvsFood"
+
+\end_inset
+
+Education vs Food expense in LSMS data
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+The non-parametric methods specified by Afriat and Varian take a different
+ path by not assuming the nature of the utility function (Cobb-Douglas,
+ CES etc.)
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AfriatUtil,VarianNonparametric1982"
+
+\end_inset
+
+.
+ These may be more relevant for the fitting of utility function.
+ Afriat's utilities consider prices and quantities that sum up to the total
+ expenditure.
+ Even though we don't have the price-data available from the survey, an
+ approach similar to Afriat equations has the advantage that it provides
+ a utility function that is consistent with data (unlike a parametric method).
+ This is planned to be explored later in the study.
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing onehalf
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:AppealsRanking"
+
+\end_inset
+
+ Availability, Affordability, Popularity and the Bandwagon effect
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+The challenge to a theory for conspicuous consumption is the difference
+ between what people can buy (with the available options for a given price
+ and budget in the market locally) and what they wish to buy instead (options
+ that could change the current consumption when they become available).
+ While the income elasticity for every item in the consumption category
+ indicates how the consumption changes with response to increase in income
+ or prices, the degree to which consumption on existing items would change
+ by introduction of a new item or category (e.g.
+ a new technology) is not explained by elasticities of demand of existing
+ categories.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+In analysis of a typical consumption survey, the substitution effect of
+ the item explains whether consumers like an item more than the other while
+ whether consumers buy more of the same item as they become richer and the
+ price goes lower is captured by the income effect.
+ While the analysis is typically based on the utility derived from products
+ in the consumer basket, the research on conspicuous consumption has pointed
+ out to relevance of visibility and scarcity of items in the utility function.
+ To explore some such factors into the model for utility, the current study
+ introduces four parameters to measure the consumer appeal of the item.
+ The conventional price and budget concerns are encompassed by 
+\series bold
+affordability
+\series default
+ of the item (which is simply a statement of price of the item).
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Since the elasticities of products interpreted from the consumption data
+ cannot measure how consumption might be transformed if new items were introduce
+d, we introduce a parameter to measure the availability of the item.
+ This is based on the observation that consumption on the same item varies
+ between regions that have another item available vs places where the item
+ is completely unavailable.
+ In developing countries, the issue of availability is particularly relevant
+ since rural areas are faced with unavailability of services and goods that
+ are available (although limited) in the urban areas
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The unavailability can spiral into severe demand pressures through pressures
+ on urban migration.
+\end_layout
+
+\end_inset
+
+.
+ In the data from Tanzania, not only are region dummies significant in consumpti
+on of items in the survey (particularly with respect to such as electricity
+ which is completely unavailable in large parts of the country), but the
+ availability of electricity seems to transform the income elasticities
+ of demand for other expenditures as well (e.g.
+ marriage).
+ A model that we wish to develop for appeal of an item attempts to include
+ this difference in availability between regions.
+ This is why 
+\series bold
+availability
+\series default
+ is introduced as a concern different from affordability.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Given the unavailability of items like electricity in the developing world,
+ the number of non-users of the item (those with zero quantity of consumption)
+ can be quite high.
+ To measure the appeal of an item, therefore we also consider how popular
+ the item is among the consumers.
+ The 
+\series bold
+popularity
+\series default
+ of item is derived from the percentiles of consumers.
+ Higher popularity of the item (i.e.
+ higher number of purchasers of the item in the population of consumers)
+ can drive the appeal of the item down or up.
+ Items like jewelry and luxury cars are those that cannot become extremely
+ popular by definition.
+ If such items were to become popular, then the richer consumers would rush
+ to something else that indicates their higher status.
+ Such items are known as snob items.
+ Items which people rush to purchase - on the other hand - are called bandwagon
+ items.
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+It is worth emphasizing that in a market where product differentiation exists,
+ items can change from snob type to bandwagon type (or vice versa) over
+ time.
+ It is therefore important to have a dynamic model for bandwagon characteristics
+ of an item.
+ Items like new electronics are snob items when they're not affordable -
+ but as they become more affordable with time they become bandwagon items.
+ As consumers rush to them, they get replaced by a new snob item in the
+ market.
+  The effect of popularity of an item on to its demand can thus be in either
+ direction i.e.
+ low popularity canr be associated with high demand (for a snob item) or
+ high popularity can be associated with high demand (for a bandwagon item).
+ In other words, for snob items, limited supply would mean a higher appeal
+ but the high supply would mean less appeal.
+ A time-series of expenditures can help us understand the trend in rushing
+ towards certain items.
+ The degree to which consumers rush to an item is termed as the 
+\series bold
+bandwagon effect 
+\series default
+in the study.
+ The snob or bandwagon effects must be seen in combination with affordability
+ and availability.
+ If the item is available and not affordable - then the price and budget
+ constraints dominate the bandwagon characteristics of the item.
+ The snob or bandwagon nature of the item can reflect in demand only when
+ it is affordable (thus potentially popular) as well as available - if the
+ item is not affordable or not available then its appeal cannot be measured
+ in the consumption surveys.
+ This is in accordance with the discussion in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:FS"
+
+\end_inset
+
+ i.e.
+ all direct physical scarcities are perceived scarcities.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+In summary, the appeal of a certain commodity is provided by its availability,
+ affordability, popularity and bandwagon effect.
+ Availability encompasses all issues that put an item in the market.
+ Regional and supply-side issues thus affect availability.
+ In absence of the data on supply of the items, we assign availability as
+ a binary variable which is set to true in a region when the item appears
+ in the consumption data for the region.
+ Affordability, on the other hand, sums up price-related concerns on the
+ demand-side.
+ An item is affordable solely based on the price of the average consumption
+ unit.
+ Further, the popularity of an item is measured as percentile of users of
+ item i.e.
+ the percentile which consumes the quantity.
+ Popularity of an item may increase or decrease the consumption of an item
+ based on whether the item is a snob or bandwagon type.
+ An individual is likely to lose interest in a particular jewelry product
+ if it the latter is available and affordable to everybody.
+ The effect of popularity on the appeal of the item is thus measured by
+ another parameter called the bandwagon effect.
+ Snob items are considered those with negative bandwagon effect in the study.
+ In the Hirschian terminology
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HirschSocialLimits"
+
+\end_inset
+
+, a physical scarcity is only realized by the availability of an item while
+ social scarcities are realised through the rest of the three parameters.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+The table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:AppealRanking"
+
+\end_inset
+
+ summarizes the essential claims from the the model using the four parameters
+ and is discussed in more detail in Section.
+\end_layout
+
+\begin_layout Subsubsection
+\paragraph_spacing onehalf
+Measuring Availability
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+In the absence of supply data, availability is simply a binary variable
+ - indicating whether an item is either available or not in the local consumer.
+\end_layout
+
+\begin_layout Subsubsection
+\paragraph_spacing onehalf
+Measuring Affordability
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+For every individual an item is more affordable if its cost is within the
+ threshold percentage of the (permanent) income.
+ If consumers spend a high portion of their income on rice than on vegetables,
+ then for the purposes of this study, rice is less affordable than fruits.
+ One reason for choosing this simple method (instead of a regression of
+ demand against household characteristics such as size and age of the consumers)
+ is the unavailability of quantities of consumption in the diary recall
+ section - where only total costs of the item have been collected (rather
+ than prices or quantities).
+ Semantically, affordability is a statement of price in the market should
+ be calculated from the average price of the item.
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+For example, to answer whether AC is more affordable than electricity, we
+ decide only based on average cost of AC in the population of 
+\begin_inset Formula $N$
+\end_inset
+
+ consumers for item 
+\begin_inset Formula $i$
+\end_inset
+
+ amongst total  number of items 
+\begin_inset Formula $K$
+\end_inset
+
+ (
+\begin_inset Formula $\frac{1}{N}\Sigma_{n=1}^{N}(\frac{q_{i}}{\Sigma^{K}q_{k}})$
+\end_inset
+
+ ).
+ If average expenditure on AC amongst those who buy AC (i.e.
+ the cost of AC) is higher than than the respective mean for electricity,
+ then AC would be considered less affordable than electricity.
+ That electricity is a service and consumed immediately (as opposed to AC
+ which is an asset) is currently ignored in the model.
+ The dependency amongst items is also ignored in the model.
+ For example, one cannot have A.C.
+ without having electricity - so even if A.C.
+ is cheaper (more affordable) than electricity, a rational consumer wouldn't
+ run to AC without having purchased electricity.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+We also note that prices can be significantly different between regions.
+ As discussed there are categories for which difference prices may exists
+ within the same region.
+ The way to incorporate this in the model would be to split the item category
+ into multiple price band categories and treat each of the bands as different
+ items - thus assigning them respective affordability values.
+\end_layout
+
+\begin_layout Subsubsection
+\paragraph_spacing onehalf
+Measuring Reference Popularity
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Appeal of items within the social-psychological communication is based on
+ perceived differences between life standards and is thus relative to a
+ reference area.
+ At local levels this could be due to disparate neighborhoods while at national
+ levels, reference areas could be metropolitan cities.
+ The choice of reference area cannot be arbitrary - reference area is decided
+ only between regions that are socially and economically inter-connected
+ and thus where sufficient flow of information and people is possible.
+ For the current analysis, Dar-es-salaam (region =7) is chosen as the reference
+ area.
+ The measure of popularity of an item is thus the reference area - i.e.
+ the percentile of consumers using the product in the reference area.
+ For example, only about 25% of the surveyed population uses electricity.
+ Thus the popularity metric is set to .25 for electricity.
+\end_layout
+
+\begin_layout Subsubsection
+\paragraph_spacing onehalf
+Measuring the Bandwagon effect
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Bandwagon effect is the measure of increase in appeal if the popularity
+ in reference area were to increase (through increase in local availability).
+ If we denote the popularity of an item in the reference area by 
+\begin_inset Formula $\rho_{ref}$
+\end_inset
+
+, then the measure of the bandwagon effect is 
+\begin_inset Formula $\frac{\partial A}{\partial\rho_{ref}}$
+\end_inset
+
+ i.e.
+ the change in appeal of the item in the reference area with respect to
+ the change in the popularity of the item.
+ Since appeal is represented by the demand of the item in the consumption
+ survey, we can set 
+\begin_inset Formula $\frac{\partial\gamma}{\partial\rho_{ref}}=\frac{\partial A}{\partial\rho_{ref}}$
+\end_inset
+
+ where 
+\begin_inset Formula $\gamma=\frac{q}{x}$
+\end_inset
+
+, 
+\begin_inset Formula $q$
+\end_inset
+
+ is the quantity purchased, 
+\begin_inset Formula $x$
+\end_inset
+
+ is the total expenditure, 
+\begin_inset Formula $A$
+\end_inset
+
+ is the appeal and 
+\begin_inset Formula $\rho_{ref}$
+\end_inset
+
+ is the item's popularity in the reference area.
+ If items have become more popular over time and if consumers are on average
+ spending a higher portion of their income on the item, then the bandwagon
+ effect of the item would be considered strong.
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Notice that the bandwagon effect is only calculated in the reference area.
+ In the local area, the bandwagon effect must be calculated even if the
+ item were not available i.e.
+ the bandwagon effect 
+\begin_inset Formula $b$
+\end_inset
+
+ is calculated even when the item is the item is not locally available.
+ In other words, we compute 
+\begin_inset Formula $b$
+\end_inset
+
+ for when the item is to become available.
+ 
+\begin_inset Formula $b$
+\end_inset
+
+ is interpreted as the tendency to flock i.e.
+ changes in quantity demanded as the popularity of the item grows.
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+A better measure of the bandwagon effect would be providing by observing
+ the effect of popularity on demand over time (a term series).
+ As a first-cut analysis, we may approximate the change in quantity demanded
+ in two randomly selected sub-samples with respect to the change in observed
+ popularity (percentile of non-zero consumption).
+ If slightly different quantiles of the society are spending more or less
+ on the item then it may allow us to compute the 
+\begin_inset Formula $\Delta\gamma/\Delta\rho$
+\end_inset
+
+.
+ More specifically, for two samples M and N, we look for 
+\begin_inset Formula $(\gamma_{M}-\gamma_{N})/(\rho_{M}-\rho_{N})$
+\end_inset
+
+.
+ The quantity 
+\begin_inset Formula $\gamma_{M}-\gamma_{N}$
+\end_inset
+
+ represents the combined effect of differences in income, education level
+ etc.
+ between the two samples.
+ A regression on the in-sampled data - 
+\family typewriter
+lm(expenditure/total_expenditure ~ consu + highest_educ + age + occupation_rank+
+housingstatus
+\family default
+ - can thus provide a rough estimate of 
+\begin_inset Formula $\frac{\partial\gamma}{\partial\rho}$
+\end_inset
+
+(notice that region - which cannot be ranked easily - is excluded from this
+ equation - since we only consider the reference region)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+To consider differences in categorical (dummy) variables - we use a transformati
+on of every categorical variable into an ordered variable (education becomes
+ education level, region becomes an order of uranbization etc.).
+ The transformations are considered only as long as the sorting criteria
+ is significant (using regions sorted based on popdensity for example would
+ treat two regions with same popdensity as equivalent - this may or may
+ not be desirable).
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Notice also that services and products don't follow a different treatment
+ in the above analysis.
+ The average analysis considers the average cost spent on the item - regardless
+ of the quantity consumed.
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing onehalf
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:FS"
+
+\end_inset
+
+The notion of Scarcity
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Scarcity can be a confusing term since it encompasses both a so-called physical
+ scarcity (unavailability) and the perceived scarcity (what we feel as scarce).
+ We'll assume that all physical scarcities are indeed felt as scarce.
+ In other words, 
+\begin_inset Formula $F\subset S$
+\end_inset
+
+.
+ Unfortunately, the perceptions of quality of life are entities that cannot
+ be measured easily but still may qualify as felt scarcities.
+ This makes the claims on scarcity as a driver of demand particularly difficult.
+ Wherever used, the term scarcity implies the notion of perceived scarcity-
+ factors affecting which are the goal of this study (i.e.
+ effects beyond unavailability).
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+Further, the nature of item matters for perceived scarcity since the direction
+ of the effect of popularity on perceived scarcity can reverse depending
+ on the 
+\begin_inset Quotes eld
+\end_inset
+
+appeal
+\begin_inset Quotes erd
+\end_inset
+
+ of the item (visual or status-related).
+ If everybody has a certain item, then consumers may not consider it so
+ important to acquire the item (since everyone else already has it) whereas
+ for other types of item, consumers may rush to the item solely because
+ there is a trend amongst everybody else to acquire.
+ These are the snob and bandwagon types of item considered in the literature
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "corneo_snobbism"
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Researchers have used an extended social-means model to measure these in
+ experiments
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gierl_scarcity"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+If 
+\begin_inset Formula $F$
+\end_inset
+
+ is the set of items that one feels are scarce and 
+\begin_inset Formula $S$
+\end_inset
+
+ is the set that is physically or socially difficult to achieve (unavailable
+ and/or unaffordable) then we can safely say that 
+\begin_inset Formula $F\subset S$
+\end_inset
+
+ i.e.
+ there can be items that are scarce (not available and/or not not affordable)
+ but their scarcity is not felt.
+ On the other hand, all items that are felt as scarce must be scarce - either
+ physically or socially (otherwise consumers would purchase it).
+ Thus tems that are not scarce (i.e.
+ both affordable and available) cannot be felt as scarce.
+ Conditions for physical scarcity - when included with snob and bandwagon
+ effects must capture all conditions for scarcity.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+The goal of sorting the commodities by their appeal (or perceived scarcity)
+ is to see how closely list of top appeals matches with the list of visible
+ items.
+ Within the items that are scarce, the visible commodities (i.e.
+ those that are talked about often in society) might have higher income
+ elasticities and exhibit variations across social clusters.
+ The analysis attempts to view an overall alignment of visible ranking with
+ that of scarcity ranking.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="17" columns="5">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="3cm">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+local availability
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+affordability
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bandwagon effect
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+popularity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+appeal rank (low to high)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:AppealRanking"
+
+\end_inset
+
+The list of binary parameters sorted by appeal
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\paragraph_spacing onehalf
+Combining the parameters into a ranking of Items
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+If the four parameters where strictly binary (i.e.
+ if an item was available or not, affordable or not, popular or not and
+ was bandwagon or snob), then order of appeals would be as shown in the
+ table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:AppealRanking"
+
+\end_inset
+
+ - with appeals ranked from low to high for every tuple of the 4 four parameters
+ (16 in total).
+ An available, affordable and popular bandwagon would have a higher appeal
+ than an unavailable, unaffordable and and unpopular bandwagon item and
+ so on.
+ Notice that popular bandwagon and unpopular snob type items are given the
+ same rank if availability and affordability is the same for them.
+ Another key feature of the ranking is that availability and affordability
+ make a snob item less interesting while they both increase the appeal of
+ the bandwagon item.
+ If we were to map the appeal from these four parameters in a linear function
+ it may look something like that following:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Formula 
+\begin{align*}
+\pi & =k_{\alpha}\alpha+k_{\aleph}\aleph+k_{b}b+k_{\rho}\rho+k_{b\rho}b\rho+\nu
+\end{align*}
+
+\end_inset
+
+ where
+\begin_inset Formula $\alpha\epsilon\{0,1\}$
+\end_inset
+
+, 
+\begin_inset Formula $0\le\aleph\le1$
+\end_inset
+
+,
+\begin_inset Formula $0\le b\le1$
+\end_inset
+
+ and 
+\begin_inset Formula $0\le\rho\le1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Formula $\alpha=availability$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Formula $\aleph=affordability$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Formula $b=bandwagon\ propensity$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Formula $\rho=popularity$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Formula $\pi=appeal$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+An easier formulation of the function would be of the form 
+\begin_inset Formula $-(1-b)\rho(\alpha+mb\aleph)+b(1-\rho)(\alpha+mb\aleph)+b\rho(\alpha+mb\aleph+\kappa)+(1-b)(1-\rho)(\alpha+mb\aleph+\kappa)=K_{1}+\kappa K_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+In the decomposition 
+\begin_inset Formula $K_{1}+\kappa K_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $K_{1}$
+\end_inset
+
+ represents the appeal for misaligned items (unpopular bandwagon and popular
+ snob) while 
+\begin_inset Formula $K_{2}$
+\end_inset
+
+ represents the aligned items (popular bandwagon and unpopular snob).
+ Appeal of a bandwagon item is only affected by a constant factor 
+\begin_inset Formula $\kappa b\rho$
+\end_inset
+
+ in addition to the purchase concern 
+\begin_inset Formula $\alpha+mb\aleph$
+\end_inset
+
+.
+ If an item is a snob item then popularity switches the sign of appeal from
+ negative 
+\begin_inset Formula $(\rho=1)$
+\end_inset
+
+ to positive 
+\begin_inset Formula $(\rho=0)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+A simpler form of the above equation can be written as follows:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Formula 
+\begin{align*}
+B & =\frac{(1-b)(1-\rho)}{(1+\delta-\alpha)(1+2\delta-\aleph)}+\frac{(1-b)\rho}{(1-2\delta+\alpha)(1-\delta+\aleph)}+\frac{b(1-\rho)}{(1+2\delta-\alpha)(1+\delta-\aleph)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Formula 
+\begin{align*}
+\sigma & =(1-b)\rho+2b(1-\rho)+\kappa(b\rho+2(1-b)(1-\rho))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Formula 
+\begin{align*}
+A & =\sigma B
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+where 
+\begin_inset Formula $\delta,\kappa$
+\end_inset
+
+ are constants to control the scale.
+ The sorting of items identified of potential positional value is shown
+ in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:appeal_sort"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="17" columns="6">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+category
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+affordability
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+availability
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+popularity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bandwagon effect
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+appeal
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+vehicle service
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0002
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.032
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.590
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+skincream
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0306
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.885
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.012
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.886
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+meat
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0013
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.796
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.391
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+toothbrush
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0223
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.69
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.004
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.582
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cosmetics
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0242
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.654
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.012
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.672
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rice
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.583
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.08
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.822
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+marriage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0125
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.542
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.889
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruits
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0077
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.399
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.095
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+barsoap
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0131
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.349
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.171
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+donations
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0131
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.349
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.171
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electricity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0028
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.258
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.259
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+carpetsrugs
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0231
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.234
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.008
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.305
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+alcohol
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0379
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.075
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.398
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+personal items
+\end_layout
+
+\begin_layout Plain Layout
+repair
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0238
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.049
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.08
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.440
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+funeral
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0254
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.089
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.02
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.442
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+tobacco
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.18
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.08
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.105
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:appeal_sort"
+
+\end_inset
+
+Items with the four parameters and predicted appeal
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Analysis of LSMS 2010 Data
 \end_layout
 
 \begin_layout Subsection
@@ -6832,21 +9679,33 @@ reference "tab:regression_results"
 \end_inset
 
 ,
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:no_instruments_reg1"
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{noinstrumentsreg1}
+\end_layout
 
 \end_inset
 
  and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:instrumented_reg1"
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{instrumentedreg1}
+\end_layout
 
 \end_inset
 
-summarize the results obtained by running regressions on several commodity-categ
-ories.
+ summarize the results obtained by running regressions on several commodity-cate
+gories.
  A column in the Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7380,27 +10239,664 @@ Results from regression over selected variables
 \end_layout
 
 \begin_layout Standard
-\paragraph_spacing onehalf
-\begin_inset Float table
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
 
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:no_instruments_reg1"
 
-\end_inset
+\backslash
+begin{landscape} 
+\backslash
+begin{table} [!htbp] 
+\backslash
+centering  
+\backslash
+caption{
+\backslash
+label{noinstrumentsreg1} Regression for scarce commodities with no instrumentati
+on} 
+\backslash
+resizebox{
+\backslash
+columnwidth}{!}{ 
+\backslash
+begin{tabular}{@{
+\backslash
+extracolsep{5pt}}lcccccccccc}  
+\backslash
 
-No Instruments Regression for scarce commodities
+\backslash
+[-1.8ex]
+\backslash
+hline  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]   & 
+\backslash
+multicolumn{10}{c}{
+\backslash
+textit{Dependent variable: consumption}} 
+\backslash
+
+\backslash
+  
+\backslash
+cline{2-11}  
+\backslash
+
+\backslash
+[-1.8ex] & 
+\backslash
+multicolumn{10}{c}{depvar} 
+\backslash
+
+\backslash
+  
+\backslash
+
+\backslash
+[-1.8ex] & carpetsrugs(1) & education(2) & electricity(3) & houserent(4)
+ & personalitemsrepair(5) & personalprods(6) & skincream(7) & funeral(8)
+ & marriage(9) & hobbyequipment(10)
+\backslash
+
+\backslash
+  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]   lnpinc & 4.708$^{***}$ & 3.574$^{***}$ & 4.391$^{***}$ & 1.154$^{***}$
+ & 0.843$^{***}$ & 3.439$^{***}$ & 2.145$^{***}$ & 2.759$^{***}$ & 3.296$^{***}$
+ & 1.214$^{***}$ 
+\backslash
+
+\backslash
+    & (0.328) & (0.239) & (0.332) & (0.173) & (0.170) & (0.281) & (0.207) & (0.260)
+ & (0.261) & (0.142) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   age & $-$0.106$^{***}$ & 0.086$^{***}$ & 0.067$^{***}$ & $-$0.067$^{***}$
+ &  &  & $-$0.042$^{***}$ &  &  & $-$0.038$^{***}$ 
+\backslash
+
+\backslash
+    & (0.023) & (0.017) & (0.020) & (0.011) &  &  & (0.015) &  &  & (0.010) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   hsize & $-$0.459$^{***}$ & 2.160$^{***}$ & $-$0.529$^{***}$ &  &  & $-$0.506$^{**
+*}$ & 0.217$^{***}$ &  &  &  
+\backslash
+
+\backslash
+    & (0.115) & (0.089) & (0.102) &  &  & (0.104) & (0.067) &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   housingstatus & 0.600$^{***}$ & $-$1.049$^{***}$ & 0.924$^{***}$ & 4.280$^{***}$
+ &  &  &  &  &  & 0.452$^{***}$ 
+\backslash
+
+\backslash
+    & (0.208) & (0.187) & (0.191) & (0.131) &  &  &  &  &  & (0.106) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   occupation
+\backslash
+_rank &  &  & 0.782$^{***}$ &  &  &  &  &  &  &  
+\backslash
+
+\backslash
+    &  &  & (0.295) &  &  &  &  &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   isrural &  &  & $-$6.468$^{***}$ & $-$3.501$^{***}$ &  &  & 1.469$^{***}$
+ &  &  &  
+\backslash
+
+\backslash
+    &  &  & (0.642) & (0.419) &  &  & (0.465) &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   highest
+\backslash
+_educ & $-$0.295$^{***}$ &  & 0.421$^{***}$ &  & 0.075$^{**}$ &  &  &  &  &
+  
+\backslash
+
+\backslash
+    & (0.076) &  & (0.066) &  & (0.035) &  &  &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   region &  &  & 0.186$^{***}$ & $-$0.051$^{***}$ & $-$0.049$^{***}$ &  &
+ $-$0.121$^{***}$ & $-$0.142$^{***}$ & $-$0.034$^{**}$ & $-$0.066$^{***}$ 
+\backslash
+
+\backslash
+    &  &  & (0.017) & (0.011) & (0.010) &  & (0.012) & (0.018) & (0.016) & (0.009)
+ 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   english & 3.146$^{***}$ &  & 2.949$^{***}$ &  &  &  &  &  & 1.976$^{**}$
+ & 1.633$^{***}$ 
+\backslash
+
+\backslash
+    & (0.953) &  & (0.840) &  &  &  &  &  & (0.794) & (0.455) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   roomsnum &  &  &  & $-$0.919$^{***}$ &  & 0.442$^{***}$ &  & 0.625$^{***}$
+ & 0.654$^{***}$ &  
+\backslash
+
+\backslash
+    &  &  &  & (0.100) &  & (0.169) &  & (0.157) & (0.146) &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   is
+\backslash
+_resident &  &  & $-$1.956$^{***}$ & $-$1.977$^{***}$ &  &  &  &  &  &  
+\backslash
+
+\backslash
+    &  &  & (0.558) & (0.366) &  &  &  &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   years
+\backslash
+_community &  &  &  &  &  & $-$0.073$^{***}$ & $-$0.026$^{**}$ &  & $-$0.054$^{***}
+$ &  
+\backslash
+
+\backslash
+    &  &  &  &  &  & (0.015) & (0.013) &  & (0.014) &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   Constant & $-$71.251$^{***}$ & $-$64.314$^{***}$ & $-$85.424$^{***}$ & $-$31.269$
+^{***}$ & $-$33.945$^{***}$ & $-$47.620$^{***}$ & $-$21.851$^{***}$ & $-$46.797$^{**
+*}$ & $-$61.169$^{***}$ & $-$36.167$^{***}$ 
+\backslash
+
+\backslash
+    & (4.287) & (3.438) & (4.610) & (2.689) & (2.214) & (4.026) & (3.020) & (3.654)
+ & (3.767) & (2.098) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]  Observations & 2,240 & 2,965 & 2,240 & 2,965 & 2,240 & 2,965 &
+ 2,965 & 2,965 & 2,963 & 2,963 
+\backslash
+
+\backslash
+  R$^{2}$ & 0.126 & 0.322 & 0.437 & 0.502 & 0.029 & 0.084 & 0.094 & 0.059 & 0.101
+ & 0.073 
+\backslash
+
+\backslash
+  Adjusted R$^{2}$ & 0.124 & 0.321 & 0.435 & 0.501 & 0.027 & 0.082 & 0.092 & 0.058
+ & 0.100 & 0.071 
+\backslash
+
+\backslash
+  Residual Std.
+ Error & 13.394 (df = 2233) & 13.463 (df = 2960) & 11.595 (df = 2229) & 8.929
+ (df = 2957) & 7.386 (df = 2236) & 14.919 (df = 2960) & 10.078 (df = 2958)
+ & 15.518 (df = 2961) & 13.840 (df = 2957) & 7.963 (df = 2957) 
+\backslash
+
+\backslash
+  F Statistic & 53.824$^{***}$ (df = 6; 2233) & 351.136$^{***}$ (df = 4; 2960)
+ & 173.281$^{***}$ (df = 10; 2229) & 426.503$^{***}$ (df = 7; 2957) & 21.953$^{***}
+$ (df = 3; 2236) & 67.429$^{***}$ (df = 4; 2960) & 51.003$^{***}$ (df = 6;
+ 2958) & 61.522$^{***}$ (df = 3; 2961) & 66.629$^{***}$ (df = 5; 2957) & 46.343$^{*
+**}$ (df = 5; 2957) 
+\backslash
+
+\backslash
+  
+\backslash
+hline  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]  
+\backslash
+textit{Note:}  & 
+\backslash
+multicolumn{10}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} 
+\backslash
+
+\backslash
+  
+\backslash
+end{tabular}  } 
+\backslash
+end{table} 
+\backslash
+end{landscape} 
 \end_layout
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{landscape} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table} 
+\end_layout
+
+\begin_layout Plain Layout
+
+[p] 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{
+\backslash
+label{instrumentedreg1}Instrumented Regression for scarce commodities} 
+\backslash
+resizebox{
+\backslash
+columnwidth}{!}{ 
+\backslash
+begin{tabular}{@{
+\backslash
+extracolsep{5pt}}lcccccccccc}  
+\backslash
+
+\backslash
+[-1.8ex]
+\backslash
+hline  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]   & 
+\backslash
+multicolumn{10}{c}{
+\backslash
+textit{Dependent variable:}} 
+\backslash
+
+\backslash
+  
+\backslash
+cline{2-11}  
+\backslash
+
+\backslash
+[-1.8ex] & lnvis & lndseducexpense & lnvis & lndshouserent & 
+\backslash
+multicolumn{6}{c}{lnvis} 
+\backslash
+
+\backslash
+  
+\backslash
+
+\backslash
+[-1.8ex] & carpetsrugs(1) & education(2) & electricity(3) & houserent(4)
+ & personalitemsrepair(5) & personalprods(6) & skincream(7) & funeral(8)
+ & marriage(9) & hobbyequipment(10)
+\backslash
+
+\backslash
+  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]   lnpinc & 4.665$^{***}$ & 3.033$^{***}$ & 9.941$^{***}$ & 0.982$^{**}$
+ & 0.747$^{**}$ & 3.216$^{***}$ & 1.661$^{***}$ & 2.770$^{***}$ & 3.446$^{***}$
+ & 1.593$^{***}$ 
+\backslash
+
+\backslash
+    & (0.657) & (0.597) & (1.247) & (0.432) & (0.321) & (0.565) & (0.502) & (0.484)
+ & (0.627) & (0.318) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   age & $-$0.106$^{***}$ & 0.081$^{***}$ & 0.055$^{***}$ & $-$0.074$^{***}$
+ &  &  & $-$0.040$^{**}$ &  &  & $-$0.060$^{***}$ 
+\backslash
+
+\backslash
+    & (0.023) & (0.017) & (0.021) & (0.016) &  &  & (0.020) &  &  & (0.014) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   hsize & $-$0.454$^{***}$ & 2.227$^{***}$ & $-$1.182$^{***}$ &  &  & $-$0.518$^{**
+*}$ & 0.346$^{***}$ &  &  &  
+\backslash
+
+\backslash
+    & (0.131) & (0.112) & (0.178) &  &  & (0.140) & (0.099) &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   housingstatus & 0.605$^{***}$ & $-$0.979$^{***}$ & 1.028$^{***}$ & 4.402$^{***}$
+ &  &  &  &  &  & 0.491$^{***}$ 
+\backslash
+
+\backslash
+    & (0.217) & (0.200) & (0.203) & (0.157) &  &  &  &  &  & (0.127) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   occupation
+\backslash
+_rank &  &  & $-$0.723 &  &  &  &  &  &  &  
+\backslash
+
+\backslash
+    &  &  & (0.451) &  &  &  &  &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   isrural &  &  & $-$3.861$^{***}$ & $-$3.618$^{***}$ &  &  & 0.951 &  & 
+ &  
+\backslash
+
+\backslash
+    &  &  & (0.883) & (0.585) &  &  & (0.626) &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   highest
+\backslash
+_educ & $-$0.292$^{***}$ &  & 0.132 &  & 0.084$^{*}$ &  &  &  &  &  
+\backslash
+
+\backslash
+    & (0.089) &  & (0.094) &  & (0.044) &  &  &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   region &  &  & 0.187$^{***}$ & $-$0.057$^{***}$ & $-$0.049$^{***}$ &  &
+ $-$0.106$^{***}$ & $-$0.138$^{***}$ & $-$0.054$^{***}$ & $-$0.076$^{***}$ 
+\backslash
+
+\backslash
+    &  &  & (0.018) & (0.014) & (0.010) &  & (0.014) & (0.021) & (0.020) & (0.012)
+ 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   english & 3.155$^{***}$ &  & 2.263$^{**}$ &  &  &  &  &  & 2.253$^{**}$
+ & 1.574$^{***}$ 
+\backslash
+
+\backslash
+    & (0.962) &  & (0.903) &  &  &  &  &  & (0.984) & (0.577) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   roomsnum &  &  &  & $-$1.020$^{***}$ &  & 0.589$^{***}$ &  & 0.412$^{**}$
+ & 0.518$^{***}$ &  
+\backslash
+
+\backslash
+    &  &  &  & (0.132) &  & (0.197) &  & (0.186) & (0.183) &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   is
+\backslash
+_resident &  &  & $-$0.369 & $-$2.191$^{***}$ &  &  &  &  &  &  
+\backslash
+
+\backslash
+    &  &  & (0.684) & (0.494) &  &  &  &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   years
+\backslash
+_community &  &  &  &  &  & $-$0.077$^{***}$ & $-$0.033$^{*}$ &  & $-$0.065$^{***}$
+ &  
+\backslash
+
+\backslash
+    &  &  &  &  &  & (0.020) & (0.017) &  & (0.020) &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   Constant & $-$70.746$^{***}$ & $-$56.921$^{***}$ & $-$156.675$^{***}$ &
+ $-$28.337$^{***}$ & $-$32.733$^{***}$ & $-$44.482$^{***}$ & $-$15.511$^{**}$
+ & $-$46.113$^{***}$ & $-$62.420$^{***}$ & $-$40.656$^{***}$ 
+\backslash
+
+\backslash
+    & (7.971) & (8.229) & (16.113) & (6.362) & (4.088) & (8.068) & (7.060) & (6.874)
+ & (9.036) & (4.486) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]  Observations & 2,240 & 2,965 & 2,240 & 2,240 & 2,240 & 2,240 &
+ 2,240 & 2,240 & 2,240 & 2,240 
+\backslash
+
+\backslash
+  R$^{2}$ & 0.126 & 0.321 & 0.367 & 0.502 & 0.028 & 0.069 & 0.080 & 0.043 & 0.090
+ & 0.078 
+\backslash
+
+\backslash
+  Adjusted R$^{2}$ & 0.124 & 0.320 & 0.364 & 0.500 & 0.027 & 0.067 & 0.077 & 0.042
+ & 0.088 & 0.076 
+\backslash
+
+\backslash
+  Residual Std.
+ Error & 13.394 (df = 2233) & 13.474 (df = 2960) & 12.299 (df = 2229) & 9.500
+ (df = 2232) & 7.386 (df = 2236) & 14.768 (df = 2235) & 9.766 (df = 2233) &
+ 15.740 (df = 2236) & 14.286 (df = 2234) & 8.484 (df = 2234) 
+\backslash
+
+\backslash
+  
+\backslash
+hline  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]  
+\backslash
+textit{Note:}  & 
+\backslash
+multicolumn{10}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} 
+\backslash
+
+\backslash
+  
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabular} } 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{landscape}
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -7410,37 +10906,13 @@ No Instruments Regression for scarce commodities
 \end_layout
 
 \begin_layout Standard
-\paragraph_spacing onehalf
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:instrumented_reg1"
-
-\end_inset
-
-Instrumented Regression for scarce commodities
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
+\begin_inset Newpage newpage
 \end_inset
 
 
 \end_layout
 
 \begin_layout Part
-\paragraph_spacing onehalf
 A Behavioural Model for Status Utility
 \end_layout
 
@@ -7626,8 +11098,14 @@ tus, electricty and hobby equipments, etc.) .
  income of society.
 \end_layout
 
-\begin_layout Section
-\paragraph_spacing onehalf
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
 A Behavioural Experiment for Status Competitions
 \end_layout
 
@@ -8108,6 +11586,13 @@ key "HouthakkerFamilySurvey"
  prioritize their needs.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Part
 \paragraph_spacing onehalf
 Effect of Price on food vs non-food items
@@ -8222,9 +11707,15 @@ It is noted that in certain areas in Tanzania - prices for food vary a lot
  significant - but it is also noted that these areas are urban settlements
  where electricity is available and population is significantly high (See
  Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:popreg-reg2-simple2"
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{popregreg2simple2}
+\end_layout
 
 \end_inset
 
@@ -8243,68 +11734,737 @@ s(shelled), goat meat, chicken and canned milk correspond to numerous (>4)
  of the commodity expenditure in the threshold method) as well as the preference
  for the item amongst the rich (measured by higher expenditure with income)
  for the item to be considered a status-signaling item.
+ See Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabpopregexpensive}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{landscape} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table} [p] 
+\backslash
+centering  
+\backslash
+caption{
+\backslash
+label{popregreg2simple2}No instruments regression with population density
+ and expensive-food dummy included} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox{
+\backslash
+columnwidth}{!}{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular}{@{
+\backslash
+extracolsep{5pt}}lcccccccccc}  
+\backslash
+
+\backslash
+[-1.8ex]
+\backslash
+hline  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]   & 
+\backslash
+multicolumn{10}{c}{
+\backslash
+textit{Dependent variable:}} 
+\backslash
+
+\backslash
+  
+\backslash
+cline{2-11}  
+\backslash
+
+\backslash
+[-1.8ex] & 
+\backslash
+multicolumn{10}{c}{depvar} 
+\backslash
+
+\backslash
+  
+\backslash
+
+\backslash
+[-1.8ex] & carpetsrugs(1) & education(2) & electricity(3) & houserent(4)
+ & personalitemsrepair(5) & personalprods(6) & skincream(7) & funeral(8)
+ & marriage(9) & hobbyequipment(10)
+\backslash
+
+\backslash
+  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]   lnpinc & 5.095$^{***}$ & 3.979$^{***}$ & 3.940$^{***}$ & 0.991$^{***}$
+ & 0.667$^{***}$ & 3.439$^{***}$ & 1.894$^{***}$ & 1.644$^{***}$ & 2.494$^{***}$
+ & 1.017$^{***}$ 
+\backslash
+
+\backslash
+    & (0.365) & (0.269) & (0.342) & (0.171) & (0.128) & (0.281) & (0.253) & (0.322)
+ & (0.275) & (0.159) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   age & $-$0.114$^{***}$ & 0.086$^{***}$ &  & $-$0.070$^{***}$ &  &  & $-$0.042$^{*
+*}$ &  & $-$0.036$^{**}$ & $-$0.043$^{***}$ 
+\backslash
+
+\backslash
+    & (0.023) & (0.017) &  & (0.011) &  &  & (0.019) &  & (0.017) & (0.010) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   hsize & $-$0.522$^{***}$ & 2.109$^{***}$ & $-$0.404$^{***}$ &  &  & $-$0.506$^{**
+*}$ & 0.285$^{***}$ &  &  &  
+\backslash
+
+\backslash
+    & (0.116) & (0.090) & (0.104) &  &  & (0.104) & (0.082) &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   housingstatus & 0.675$^{***}$ & $-$0.923$^{***}$ & 0.871$^{***}$ & 4.250$^{***}$
+ & 0.191$^{**}$ &  &  &  &  & 0.413$^{***}$ 
+\backslash
+
+\backslash
+    & (0.213) & (0.190) & (0.192) & (0.131) & (0.091) &  &  &  &  & (0.111) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   occupation
+\backslash
+_rank &  &  & 1.012$^{***}$ &  &  &  &  & $-$0.681$^{**}$ &  &  
+\backslash
+
+\backslash
+    &  &  & (0.296) &  &  &  &  & (0.320) &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   isrural &  &  & $-$3.120$^{***}$ & $-$3.952$^{***}$ &  &  &  &  &  &  
+\backslash
+
+\backslash
+    &  &  & (0.660) & (0.410) &  &  &  &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   highest
+\backslash
+_educ & $-$0.284$^{***}$ &  & 0.472$^{***}$ &  &  &  & $-$0.120$^{**}$ &  &
+  &  
+\backslash
+
+\backslash
+    & (0.075) &  & (0.067) &  &  &  & (0.047) &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   expensiveregion &  &  & 3.354$^{***}$ &  &  &  &  &  & $-$1.517$^{**}$
+ & $-$1.331$^{***}$ 
+\backslash
+
+\backslash
+    &  &  & (0.751) &  &  &  &  &  & (0.764) & (0.449) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   popdensity & $-$0.001$^{***}$ & $-$0.001$^{***}$ & 0.001$^{***}$ &  & 0.0002$^{*}
+$ &  &  & 0.003$^{***}$ & 0.003$^{***}$ & 0.001$^{***}$ 
+\backslash
+
+\backslash
+    & (0.0003) & (0.0002) & (0.0003) &  & (0.0001) &  &  & (0.0003) & (0.0003)
+ & (0.0002) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   english & 2.822$^{***}$ &  & 4.425$^{***}$ &  &  &  &  &  & 1.913$^{**}$
+ & 1.132$^{**}$ 
+\backslash
+
+\backslash
+    & (0.951) &  & (0.840) &  &  &  &  &  & (0.774) & (0.453) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   years
+\backslash
+_community &  &  & 0.094$^{***}$ &  &  & $-$0.073$^{***}$ & $-$0.036$^{**}$
+ &  &  &  
+\backslash
+
+\backslash
+    &  &  & (0.020) &  &  & (0.015) & (0.015) &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   roomsnum &  &  &  & $-$0.915$^{***}$ &  & 0.442$^{***}$ &  & 0.923$^{***}$
+ & 0.936$^{***}$ &  
+\backslash
+
+\backslash
+    &  &  &  & (0.101) &  & (0.169) &  & (0.166) & (0.150) &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   is
+\backslash
+_resident & $-$1.873$^{***}$ &  & $-$2.607$^{***}$ & $-$2.113$^{***}$ &  &
+  &  &  &  & $-$0.683$^{**}$ 
+\backslash
+
+\backslash
+    & (0.650) &  & (0.732) & (0.366) &  &  &  &  &  & (0.335) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   Constant & $-$74.486$^{***}$ & $-$69.443$^{***}$ & $-$81.732$^{***}$ & $-$29.257$
+^{***}$ & $-$31.468$^{***}$ & $-$47.620$^{***}$ & $-$17.262$^{***}$ & $-$35.574$^{**
+*}$ & $-$52.757$^{***}$ & $-$33.680$^{***}$ 
+\backslash
+
+\backslash
+    & (4.891) & (3.771) & (4.640) & (2.666) & (1.794) & (4.026) & (3.271) & (4.281)
+ & (3.857) & (2.368) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]  Observations & 2,240 & 2,965 & 2,240 & 2,965 & 2,965 & 2,965 &
+ 2,240 & 2,965 & 2,963 & 2,963 
+\backslash
+
+\backslash
+  R$^{2}$ & 0.135 & 0.324 & 0.427 & 0.499 & 0.020 & 0.084 & 0.056 & 0.063 & 0.120
+ & 0.062 
+\backslash
+
+\backslash
+  Adjusted R$^{2}$ & 0.132 & 0.323 & 0.424 & 0.498 & 0.019 & 0.082 & 0.054 & 0.062
+ & 0.118 & 0.060 
+\backslash
+
+\backslash
+  Residual Std.
+ Error & 13.331 (df = 2231) & 13.441 (df = 2959) & 11.705 (df = 2228) & 8.962
+ (df = 2958) & 6.939 (df = 2961) & 14.919 (df = 2960) & 9.888 (df = 2234) &
+ 15.481 (df = 2960) & 13.698 (df = 2956) & 8.010 (df = 2955) 
+\backslash
+
+\backslash
+  F Statistic & 43.602$^{***}$ (df = 8; 2231) & 283.994$^{***}$ (df = 5; 2959)
+ & 150.867$^{***}$ (df = 11; 2228) & 490.157$^{***}$ (df = 6; 2958) & 20.278$^{***}
+$ (df = 3; 2961) & 67.429$^{***}$ (df = 4; 2960) & 26.536$^{***}$ (df = 5;
+ 2234) & 50.102$^{***}$ (df = 4; 2960) & 67.163$^{***}$ (df = 6; 2956) & 27.977$^{*
+**}$ (df = 7; 2955) 
+\backslash
+
+\backslash
+  
+\backslash
+hline  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]  
+\backslash
+textit{Note:}  & 
+\backslash
+multicolumn{10}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} 
+\backslash
+
+\backslash
+  
+\backslash
+end{tabular} }
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{landscape} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{landscape} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table} [p] 
+\backslash
+centering  
+\backslash
+caption{Instrumented regression with population density and expensive-food
  
+\backslash
+label{tabpopregexpensive}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox{
+\backslash
+columnwidth}{!}
+\end_layout
+
+\begin_layout Plain Layout
+
+{ 
+\backslash
+begin{tabular}{@{
+\backslash
+extracolsep{5pt}}lcccccccccc}  
+\backslash
+
+\backslash
+[-1.8ex]
+\backslash
+hline  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]   & 
+\backslash
+multicolumn{10}{c}{} 
+\backslash
+
+\backslash
+  
+\backslash
+cline{2-11}  
+\backslash
+
+\backslash
+[-1.8ex] & lnvis & lndseducexpense & lnvis & lndshouserent & 
+\backslash
+multicolumn{6}{c}{lnvis} 
+\backslash
+
+\backslash
+ 
+\backslash
+
+\backslash
+[-1.8ex] & carpetsrugs(1) & education(2) & electricity(3) & houserent(4)
+ & personalitemsrepair(5) & personalprods(6) & skincream(7) & funeral(8)
+ & marriage(9) & hobbyequipment(10)
+\backslash
+
+\backslash
+  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]   lnpinc & 5.814$^{***}$ & 4.758$^{***}$ & 10.958$^{***}$ & 0.635 &
+ 0.988$^{***}$ & 3.216$^{***}$ & 0.982 & 1.828$^{**}$ & 1.465$^{*}$ & 2.074$^{***}$
+ 
+\backslash
+
+\backslash
+    & (1.149) & (1.010) & (1.512) & (0.425) & (0.302) & (0.565) & (0.612) & (0.902)
+ & (0.781) & (0.705) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   age & $-$0.115$^{***}$ & 0.092$^{***}$ &  & $-$0.077$^{***}$ &  &  & $-$0.029
+ &  & $-$0.044$^{*}$ & $-$0.037$^{***}$ 
+\backslash
+
+\backslash
+    & (0.023) & (0.018) &  & (0.016) &  &  & (0.021) &  & (0.023) & (0.011) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   hsize & $-$0.607$^{***}$ & 2.011$^{***}$ & $-$1.248$^{***}$ &  &  & $-$0.518$^{**
+*}$ & 0.383$^{***}$ &  &  &  
+\backslash
+
+\backslash
+    & (0.173) & (0.152) & (0.209) &  &  & (0.140) & (0.102) &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   housingstatus & 0.657$^{***}$ & $-$0.951$^{***}$ & 1.091$^{***}$ & 4.363$^{***}$
+ & 0.163 &  &  &  &  & 0.471$^{***}$ 
+\backslash
+
+\backslash
+    & (0.215) & (0.194) & (0.214) & (0.157) & (0.109) &  &  &  &  & (0.118) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   occupation
+\backslash
+_rank &  &  & $-$0.660 &  &  &  &  & $-$1.030$^{**}$ &  &  
+\backslash
+
+\backslash
+    &  &  & (0.475) &  &  &  &  & (0.485) &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   isrural &  &  & $-$0.763 & $-$4.273$^{***}$ &  &  &  &  &  &  
+\backslash
+
+\backslash
+    &  &  & (0.872) & (0.557) &  &  &  &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   highest
+\backslash
+_educ & $-$0.330$^{***}$ &  & 0.134 &  &  &  & $-$0.045 &  &  &  
+\backslash
+
+\backslash
+    & (0.102) &  & (0.101) &  &  &  & (0.066) &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   expensiveregion &  &  & 3.131$^{***}$ &  &  &  &  &  & $-$1.465 & $-$1.433$^{***
+}$ 
+\backslash
+
+\backslash
+    &  &  & (0.820) &  &  &  &  &  & (0.908) & (0.457) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   popdensity & $-$0.001$^{***}$ & $-$0.001$^{**}$ & 0.0002 &  & 0.0002 &  &
+  & 0.003$^{***}$ & 0.003$^{***}$ & 0.0003 
+\backslash
+
+\backslash
+    & (0.0004) & (0.0005) & (0.0004) &  & (0.0002) &  &  & (0.0004) & (0.0004)
+ & (0.0003) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   english & 2.659$^{***}$ &  & 3.306$^{***}$ &  &  &  &  &  & 2.879$^{***}$
+ & 0.243 
+\backslash
+
+\backslash
+    & (0.983) &  & (0.945) &  &  &  &  &  & (0.996) & (0.736) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   years
+\backslash
+_community &  &  & 0.094$^{***}$ &  &  & $-$0.077$^{***}$ & $-$0.054$^{***}$
+ &  &  &  
+\backslash
+
+\backslash
+    &  &  & (0.022) &  &  & (0.020) & (0.018) &  &  &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   roomsnum &  &  &  & $-$1.001$^{***}$ &  & 0.589$^{***}$ &  & 0.729$^{***}$
+ & 0.962$^{***}$ &  
+\backslash
+
+\backslash
+    &  &  &  & (0.133) &  & (0.197) &  & (0.227) & (0.196) &  
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   is
+\backslash
+_resident & $-$1.655$^{**}$ &  & $-$1.151 & $-$2.425$^{***}$ &  &  &  &  &
+  & $-$0.324 
+\backslash
+
+\backslash
+    & (0.730) &  & (0.854) & (0.492) &  &  &  &  &  & (0.410) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+   Constant & $-$83.338$^{***}$ & $-$79.925$^{***}$ & $-$171.528$^{***}$ &
+ $-$23.645$^{***}$ & $-$35.904$^{***}$ & $-$44.482$^{***}$ & $-$6.160 & $-$36.943$^{*
+**}$ & $-$38.454$^{***}$ & $-$48.819$^{***}$ 
+\backslash
+
+\backslash
+    & (14.297) & (13.633) & (19.424) & (6.290) & (4.260) & (8.068) & (7.528) &
+ (11.996) & (10.595) & (10.115) 
+\backslash
+
+\backslash
+    & & & & & & & & & & 
+\backslash
+
+\backslash
+  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]  Observations & 2,240 & 2,965 & 2,240 & 2,240 & 2,240 & 2,240 &
+ 2,240 & 2,240 & 2,240 & 2,963 
+\backslash
+
+\backslash
+  R$^{2}$ & 0.134 & 0.322 & 0.318 & 0.496 & 0.020 & 0.069 & 0.051 & 0.054 & 0.106
+ & 0.048 
+\backslash
+
+\backslash
+  Adjusted R$^{2}$ & 0.131 & 0.321 & 0.315 & 0.495 & 0.019 & 0.067 & 0.048 & 0.053
+ & 0.104 & 0.046 
+\backslash
+
+\backslash
+  Residual Std.
+ Error & 13.343 (df = 2231) & 13.460 (df = 2959) & 12.765 (df = 2228) & 9.550
+ (df = 2233) & 7.418 (df = 2236) & 14.768 (df = 2235) & 9.917 (df = 2234) &
+ 15.652 (df = 2235) & 14.160 (df = 2233) & 8.070 (df = 2955) 
+\backslash
+
+\backslash
+  
+\backslash
+hline  
+\backslash
+hline 
+\backslash
+
+\backslash
+[-1.8ex]    & 
+\backslash
+multicolumn{10}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} 
+\backslash
+
+\backslash
+  
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabular} } 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{landscape}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-\paragraph_spacing onehalf
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:popreg-reg2-simple2"
-
-\end_inset
-
-No instruments regression with population density and expensive-food dummy
- included
-\end_layout
-
+\begin_inset Newpage newpage
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Instrumented regression with population density and expensive-food dummy
- included
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Part
-\paragraph_spacing onehalf
-APPENDIX
 \end_layout
 
 \begin_layout Standard

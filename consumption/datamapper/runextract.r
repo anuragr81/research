@@ -194,7 +194,32 @@ runtest<-function(m,nTimes){
   return(results)
 }
 
+calculate_affordability_popularity<-function(m,fu){
+  results<-data.frame(category=NULL,lnslope=NULL,usermean=NULL,popularity=NULL)
+  for (strcategory in as.character(unique(m$item)))
+  {
+    category<-as.character(m[m$item==strcategory,]$code)
+    
+    ll=lsms_loader(fu=fu,ln=lsms_normalizer)
+    ds<-ll@combined_data_set(year=2010,selected_category=category, dirprefix='c:/local_files/research/consumption/')
+    lmres<-lm(log(ds$visible_consumption+1e-17)~log(ds$total_expenditure+1e-17))
+    userDat <-ds[ds$visible_consumption>0,]
+    popularity<-fu@find_nonzero_percentile(ds,"visible_consumption",.001)
+    results=rbind(results,data.frame(category=strcategory,
+                                     lnslope=coef(lmres)[2],
+                                     usermean=mean(userDat$visible_consumption),
+                                     popularity=popularity))
+    print(results)
+  }
+  write.csv(file='c:/temp/results.csv',results)
+  return(results)
+}
+temporary_calculations<-function(m,fu){
+aff<-calculate_affordability_popularity(m,fu)
 
+a<-merge(merge(aff,popularity),bw)
+a$drh_scaled<-(a$drh-min(a$drh))/diff(range(a$drh))
+}
 get_region <- function(regions,districts) {
   region<-(ds[is.element(ds$district,c(1,2,3)) & is.element(ds$region,c(7)),]$region)
   
