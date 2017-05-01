@@ -22,10 +22,22 @@ sample_vec<-function(vec,n){
   return(vec[floor((dim(vec)[1])*runif(n)+1),])
 }
 
-#run as : estimate_dq_drho(ds=ds,fu=fu())
+
+write_variables_as_sum<-function(vars){
+  prefix=""
+  strout=""
+  for ( i in vars){
+    strout= paste(strout,prefix,i,sep='') 
+    prefix="+"
+  }
+  return(strout)
+}
 
 significant_lmvars<-function(ds,depvar,vars_init){
   while(TRUE){
+    if (length(vars_init)==0){
+      return(NULL)
+    }
     res = lm(data=ds,paste(depvar,"~",write_variables_as_sum(vars_init),sep=""))
     resdf<-as.data.frame(summary(res)$coefficients)
     resdf<-resdf[rownames(resdf)!="(Intercept)",] # suppress ignoring of (Intercept)
@@ -45,24 +57,31 @@ significant_lmvars<-function(ds,depvar,vars_init){
 
 estimate_dq_drho<-function(ds,fu,N,nTimes){
   
-  r<-data.frame(dvis=NULL,dx=NULL,dconsu=NULL,deduc=NULL,dage=NULL,docc=NULL,dhous=NULL,drh=NULL)
-  
-  for (i in seq(nTimes)){
-    s1 <- sample_vec(ds,N)
-    s2 <- sample_vec(ds,N)
+  r<-data.frame(dgamma=NULL,dconsu=NULL,deduc=NULL,dage=NULL,docc=NULL,dhous=NULL,drh=NULL)
+  validResult= FALSE
+  while (validResult==FALSE){
+    for (i in seq(nTimes)){
+      s1 <- sample_vec(ds,N)
+      s2 <- sample_vec(ds,N)
+      
+      dgamma= mean(s1$visible_consumption)/mean(s1$total_expenditure)-mean(s2$visible_consumption)/mean(s2$total_expenditure) 
+      deduc = mean(s1$highest_educ[!is.na(s1$highest_educ)]) -mean(s2$highest_educ[!is.na(s2$highest_educ)])
+      dage = mean(s1$age) - mean(s2$age)
+      docc = mean(s1$occupation_rank)-mean(s2$occupation_rank)
+      dhous = mean(s1$housingstatus) - mean(s2$housingstatus)
+      dconsu = mean(s1$consu) - mean(s2$consu)
+      drho = fu@find_nonzero_percentile(s1,"visible_consumption",.001)-fu@find_nonzero_percentile(s2,"visible_consumption",.001)
+      r<-rbind(r,data.frame(dgamma=dgamma,dconsu=dconsu,deduc=deduc,dage=dage,docc=docc,dhous=dhous,drh=drho))
+    } # end for
     
-    dvis= mean(s1$visible_consumption)-mean(s2$visible_consumption) 
-    dx = mean(s1$total_expenditure)-mean(s2$total_expenditure)
-    deduc = mean(s1$highest_educ[!is.na(s1$highest_educ)]) -mean(s2$highest_educ[!is.na(s2$highest_educ)])
-    dage = mean(s1$age) - mean(s2$age)
-    docc = mean(s1$occupation_rank)-mean(s2$occupation_rank)
-    dhous = mean(s1$housingstatus) - mean(s2$housingstatus)
-    dconsu = mean(s1$consu) - mean(s2$consu)
-    drho = fu@find_nonzero_percentile(s1,"visible_consumption",.001)-fu@find_nonzero_percentile(s2,"visible_consumption",.001)
-    r<-rbind(r,data.frame(dvis=dvis,dx=dx,dconsu=dconsu,deduc=deduc,dage=dage,docc=docc,dhous=dhous,drh=drho))
-  }
-  print(summary(lm(data=r,dvis~dx+drh)))
-  return(r)
+    resReg=significant_lmvars(ds=r,depvar="dgamma",vars_init=all_vars())
+    if (!is.null(resReg)){
+      validResult<-TRUE
+    } else {
+      print ("Invalid result (no var significant) found. Skipping the sample.");
+    }
+  } # end while
+  return(resReg)
 }
 
 print("DONE")
@@ -102,18 +121,55 @@ items_map<-function(categories){
   r=rbind(r,data.frame(code="301",item="carpetsrugs"))
   r=rbind(r,data.frame(code="315",item="funeral"))
   if (missing(categories)){
-  return(r)
+    return(r)
   }else{
     return(r[is.element(r$item,categories),])
   }
 }
 
 
+all_vars<-function(){
+  return(c("drh","dage","deduc","docc","dhous","dconsu","drh"))
+}
 
-runtest<-function(m){
-  #m=items_map()
-  results <- data.frame(category=NULL,dx=NULL, drh=NULL)
+create_results_frame<-function(allColNames,fillWith){
+  if (missing(fillWith)){
+    initVal=NA
+  } else {
+    initVal=fillWith
+  }
+  argsList=list()
+  argsList[["category"]]=initVal
   
+  for (var in allColNames) {
+    argsList[[var]]=initVal;
+    print
+  }
+  df<-do.call(data.frame,argsList)
+  
+  if (missing(fillWith)){
+    df<-df[0,] # sets empty data-frame
+  }
+  return (df)
+}
+
+update_results_frame<-function(category,results,coefficients,variables){
+  newData <- create_results_frame(allColNames = all_vars(),fillWith = NA)
+  
+  for (variable in variables){
+    newData[,variable]<-coefficients[[variable]]  
+  }
+  newData$category<-category
+  
+  return(rbind(results,newData));
+}
+
+runtest<-function(m,nTimes){
+  #m=items_map()
+  if (missing(nTimes)){
+    nTimes=400
+  }
+  results<-create_results_frame(allColNames = c("category",all_vars()));
   for (strcategory in as.character(unique(m$item)))
   {
     category<-as.character(m[m$item==strcategory,]$code)
@@ -121,14 +177,15 @@ runtest<-function(m){
     ll=lsms_loader(fu=fu,ln=lsms_normalizer)
     #ds<-ll@combined_data_set(year=2010,selected_category=lsms_normalizer()@food_categories_lsms_2010(), dirprefix='c:/local_files/research/consumption/')
     ds<-ll@combined_data_set(year=2010,selected_category=category, dirprefix='c:/local_files/research/consumption/')
-
+    
     for (i in seq(10)){
       print (paste("Running iteration ",i))
-      r=estimate_dq_drho(ds=ds[ds$region==7,],fu=fu(),N=400,nTimes=400);
+      res=estimate_dq_drho(ds=ds[ds$region==7,],fu=fu(),N=400,nTimes=nTimes);
       # TODO: use significant selection here
-      res <- (lm(data=r,dvis~dx+drh))
       
-      results <- rbind(results,data.frame(category=strcategory,dx=coef(res)["dx"], drh=coef(res)["drh"]))
+      results<-update_results_frame(category=strcategory,results=results,coefficients=coef(res[["result"]]),variables=res[["vars"]])
+      
+      #      results <- rbind(results,data.frame(category=strcategory,dx=coef(res)["dx"], drh=coef(res)["drh"]))
     }
     print(paste("results for", strcategory))
     print (results[results$category==strcategory,])
