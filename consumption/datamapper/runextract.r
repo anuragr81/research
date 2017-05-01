@@ -24,6 +24,25 @@ sample_vec<-function(vec,n){
 
 #run as : estimate_dq_drho(ds=ds,fu=fu())
 
+significant_lmvars<-function(ds,depvar,vars_init){
+  while(TRUE){
+    res = lm(data=ds,paste(depvar,"~",write_variables_as_sum(vars_init),sep=""))
+    resdf<-as.data.frame(summary(res)$coefficients)
+    resdf<-resdf[rownames(resdf)!="(Intercept)",] # suppress ignoring of (Intercept)
+    min_tval <- min(abs(resdf[,"t value"]))
+    if (min_tval > 1.9){
+      print(paste("significant variables - ",toString (vars_init)));
+      retlst = list()
+      retlst[["vars"]]=vars_init
+      retlst[["result"]]=res
+      return(retlst)
+    } else {
+      min_tval_var<-rownames(resdf[abs(resdf[,"t value"])==min_tval,])
+      vars_init<-setdiff(vars_init,min_tval_var)
+    }
+  }
+}
+
 estimate_dq_drho<-function(ds,fu,N,nTimes){
   
   r<-data.frame(dvis=NULL,dx=NULL,dconsu=NULL,deduc=NULL,dage=NULL,docc=NULL,dhous=NULL,drh=NULL)
@@ -48,7 +67,7 @@ estimate_dq_drho<-function(ds,fu,N,nTimes){
 
 print("DONE")
 
-items_map<-function(){
+items_map<-function(categories){
   r=data.frame(item=NULL,code=NULL)
   r=rbind(r,data.frame(item="rice",code="10101"))
   r=rbind(r,data.frame(item="rice",code="10102"))
@@ -71,7 +90,7 @@ items_map<-function(){
   r=rbind(r,data.frame(code="10703",item="fruits"))
   r=rbind(r,data.frame(code="10704",item="fruits"))
   r=rbind(r,data.frame(code="101",item="tobacco"))
-  r=rbind(r,data.frame(code="11106",item="alcohol"))
+  r=rbind(r,data.frame(code="11106",item="alcohol"))# dx not significant for alcohol
   r=rbind(r,data.frame(code="11107",item="alcohol"))
   r=rbind(r,data.frame(code="11108",item="alcohol"))
   r=rbind(r,data.frame(code="218",item="donations"))
@@ -82,13 +101,17 @@ items_map<-function(){
   r=rbind(r,data.frame(code="214",item="cosmeticspersonalproducts"))
   r=rbind(r,data.frame(code="301",item="carpetsrugs"))
   r=rbind(r,data.frame(code="315",item="funeral"))
+  if (missing(categories)){
   return(r)
+  }else{
+    return(r[is.element(r$item,categories),])
+  }
 }
 
 
 
-runtest<-function(){
-  m=items_map()
+runtest<-function(m){
+  #m=items_map()
   results <- data.frame(category=NULL,dx=NULL, drh=NULL)
   
   for (strcategory in as.character(unique(m$item)))
@@ -102,7 +125,7 @@ runtest<-function(){
     for (i in seq(10)){
       print (paste("Running iteration ",i))
       r=estimate_dq_drho(ds=ds[ds$region==7,],fu=fu(),N=400,nTimes=400);
-      
+      # TODO: use significant selection here
       res <- (lm(data=r,dvis~dx+drh))
       
       results <- rbind(results,data.frame(category=strcategory,dx=coef(res)["dx"], drh=coef(res)["drh"]))
@@ -110,8 +133,8 @@ runtest<-function(){
     print(paste("results for", strcategory))
     print (results[results$category==strcategory,])
   }
-  write.csv(file='c:/temp/results.csv',results)
-  
+  #write.csv(file='c:/temp/results.csv',results)
+  return(results)
 }
 
 
