@@ -837,11 +837,11 @@ status open
 \begin_inset Tabular
 <lyxtabular version="3" rows="17" columns="5">
 <features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="3cm">
 <row>
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
@@ -1666,10 +1666,6 @@ The list of binary parameters sorted by appeal
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -1693,10 +1689,161 @@ reference "tab:AppealRanking"
  (16 in total).
  Notice that popular bandwagon and unpopular snob type items are given the
  same rank if availability and affordability is the same for them.
+ Availability and affordability make a snob item less interesting while
+ they both increase the appeal of the bandwagon item.
+ If we were to map the appeal from these four parameters in a linear function.
+ 
 \end_layout
 
-\begin_layout Section*
-References
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\pi & =k_{\alpha}\alpha+k_{\aleph}\aleph+k_{b}b+k_{\rho}\rho+k_{b\rho}b\rho+\nu
+\end{align*}
+
+\end_inset
+
+ where
+\begin_inset Formula $\alpha\epsilon\{0,1\}$
+\end_inset
+
+, 
+\begin_inset Formula $0\le\aleph\le1$
+\end_inset
+
+,
+\begin_inset Formula $-1\le b\le1$
+\end_inset
+
+ and 
+\begin_inset Formula $0\le\rho\le1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\alpha=availability$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\aleph=affordability$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $b=bandwagon\ propensity$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\rho=popularity$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\pi=appeal$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A linear function can be written in the form 
+\begin_inset Formula $-(1-b)\rho(\alpha+mb\aleph)+b(1-\rho)(\alpha+mb\aleph)+b\rho(\alpha+mb\aleph+\kappa)+(1-b)(1-\rho)(\alpha+mb\aleph+\kappa)=K_{1}+\kappa K_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the decomposition 
+\begin_inset Formula $K_{1}+\kappa K_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $K_{1}$
+\end_inset
+
+ represents the appeal for misaligned items (unpopular bandwagon and popular
+ snob) while 
+\begin_inset Formula $K_{2}$
+\end_inset
+
+ represents the aligned items (popular bandwagon and unpopular snob).
+ Appeal of a bandwagon item is only affected by a constant factor 
+\begin_inset Formula $\kappa b\rho$
+\end_inset
+
+ in addition to the purchase concern 
+\begin_inset Formula $\alpha+mb\aleph$
+\end_inset
+
+.
+ If an item is a snob item then popularity switches the sign of appeal from
+ negative 
+\begin_inset Formula $(\rho=1)$
+\end_inset
+
+ to positive 
+\begin_inset Formula $(\rho=0)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A simple scaling on the parameters currently used is of the form:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+B & =\frac{(1-b)(1-\rho)}{(1+\delta-\alpha)(1+2\delta-\aleph)}+\frac{(1-b)\rho}{(1-2\delta+\alpha)(1-\delta+\aleph)}+\frac{b(1-\rho)}{(1+2\delta-\alpha)(1+\delta-\aleph)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\sigma & =(1-b)\rho+2b(1-\rho)+\kappa(b\rho+2(1-b)(1-\rho))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+A & =\sigma B
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\delta,\kappa$
+\end_inset
+
+are constants to control the scale.
 \end_layout
 
 \begin_layout Standard
