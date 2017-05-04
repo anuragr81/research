@@ -3,10 +3,10 @@
 library(foreign)
 require(plyr)
 require(AER)
-source('../panelfunc.R')
-source('../regressions.R')
+source('./panelfunc.R')
+source('./regressions.R')
 
-setwd('c:/local_files/research/consumption/cex/');
+setwd('c:/local_files/research/consumption/');
 
 #
 # Tasks
@@ -277,25 +277,13 @@ combine_subfiles<-function (filenames,unsharedkey){
   return(res)
 }
 
-check_ds<-function(df){
-  if (!is.data.frame(df)){
-    stop("df must be a dataframe")
-  }
-  for (c in colnames(df)) {
-    
-    if (any(as.character(ds[,c])=="")){
-      stop(paste("column ",c," in df has empty "))
-    }
-  }
-  return(TRUE)
-}
 
 load_diary_file <-function(dataset,year){
   #* ((
   if (dataset == "lsms"){
     if (year == 2010){
       # combine sections ( k , l, m )
-      kdat <- read_tnz("../lsms/TZNPS2HH3DTA/HH_SEC_K1.dta",FALSE)
+      kdat <- read_tnz("./lsms/TZNPS2HH3DTA/HH_SEC_K1.dta",FALSE)
       #*    Reading weekly Diary data in Section K data and retrieving item as well as the quantity as well as cost 
       
       k <- get_translated_frame(dat=kdat,
@@ -317,7 +305,7 @@ load_diary_file <-function(dataset,year){
       #*    gift quantities are ignored (total quantity ignored is to be presented)
       #*    weekly recall items are also multiplied by 52
       
-      ldat <- read_tnz("../lsms/TZNPS2HH2DTA/HH_SEC_L.dta",FALSE)
+      ldat <- read_tnz("./lsms/TZNPS2HH2DTA/HH_SEC_L.dta",FALSE)
       l <- get_translated_frame(dat=ldat,
                                 names=get_lsms_secl_info_columns_2010(),
                                 m=get_lsms_secl_fields_mapping_2010())
@@ -344,7 +332,7 @@ load_diary_file <-function(dataset,year){
                                   items_list = monthly_recall_items)
       
       # m is yearly data
-      mdat <-read_tnz( '../lsms/TZNPS2HH2DTA/HH_SEC_M.dta',FALSE)
+      mdat <-read_tnz( './lsms/TZNPS2HH2DTA/HH_SEC_M.dta',FALSE)
       m <- get_translated_frame(dat=mdat,
                                 names=get_lsms_secm_info_columns(2010),
                                 m=get_lsms_secm_fields_mapping(2010))
@@ -406,11 +394,11 @@ load_ohs_file <-function(dataset,year){
     if (year == 2010){
       
       #* Read section c_cb file
-      cbdat<-read.dta('../lsms/TZNPS2COMDTA/COMSEC_CB.dta',convert.factors = FALSE)
+      cbdat<-read.dta('./lsms/TZNPS2COMDTA/COMSEC_CB.dta',convert.factors = FALSE)
       
       cb <- get_translated_frame(dat=cbdat,
-                                 names=ohs_seccb_columns_lsms_2010(),
-                                 m=ohs_seccb_mapping_lsms_2010())
+                                 names=ln()@ohs_seccb_columns_lsms_2010(),
+                                 m=ln()@ohs_seccb_mapping_lsms_2010())
       #* chose facilitycode l and collected accessibility 1 and 2(<10) (in the centre or less than 10 km away)
       l<-(cb[is.element(tolower(as.character(cb$facilitycode)),c("l")),])
       #* extract those with 1
@@ -423,14 +411,14 @@ load_ohs_file <-function(dataset,year){
       #l = data.frame(region=l$region,district=l$district,ward=l$ward,ea=l$ea,accessiblemarket=l$accessiblemarket)
       ##
       #* Also considered urban/rural based on population density 
-      u <-read.csv('../lsms/district_code.csv')
+      u <-read.csv('./lsms/district_code.csv')
       u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban);
       
-      adat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_A.dta',FALSE)
+      adat<-read_tnz('./lsms/TZNPS2HH1DTA/HH_SEC_A.dta',FALSE)
       
       a <- get_translated_frame(dat=adat,
-                                names=ohs_seca_columns_lsms_2010(),
-                                m=ohs_seca_mapping_lsms_2010())
+                                names=ln()@ohs_seca_columns_lsms_2010(),
+                                m=ln()@ohs_seca_mapping_lsms_2010())
       a<-merge(a,u)
       a<-merge(a,l)
       a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
@@ -438,7 +426,7 @@ load_ohs_file <-function(dataset,year){
       a<-merge(a,popDensity)
       
       #*    Read section B
-      bdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_B.dta',FALSE)
+      bdat<-read_tnz('./lsms/TZNPS2HH1DTA/HH_SEC_B.dta',FALSE)
       b <- get_translated_frame(dat=bdat,
                                 names=ohs_info_columns_lsms_2010(),
                                 m=ohs_mapping_lsms_2010())
@@ -448,7 +436,7 @@ load_ohs_file <-function(dataset,year){
       #* inferring occupation rank with occupation_mapping
       b<-merge(b,occupation_mapping())
       
-      cdat<-read_tnz('../lsms/TZNPS2HH1DTA/HH_SEC_C.dta',FALSE)
+      cdat<-read_tnz('./lsms/TZNPS2HH1DTA/HH_SEC_C.dta',FALSE)
       #*    Read section C
       c <- get_translated_frame(dat=cdat,
                                 names=get_ohs_secc_columns_lsms_2010(),
@@ -460,7 +448,7 @@ load_ohs_file <-function(dataset,year){
       #*    calculated age by subtracting YOB from 2010 (survey year)
       #*    read section J for housing data (rent, number of primary/secondary rooms)
       
-      jdat <- read.dta('../lsms/TZNPS2HH1DTA/HH_SEC_J1.dta',convert.factors=FALSE)
+      jdat <- read.dta('./lsms/TZNPS2HH1DTA/HH_SEC_J1.dta',convert.factors=FALSE)
       j <- get_translated_frame(dat=jdat,
                                 names=get_lsms_secj_info_columns_2010(),
                                 m=get_lsms_secj_fields_mapping_2010())
@@ -542,8 +530,8 @@ load_income_file<-function (dataset,year){
   if (dataset == "lsms"){
     #* ((
     #* read section E
-    idat1 <-read_tnz('../lsms/./TZNPS2HH1DTA/HH_SEC_E1.dta',FALSE)
-    idat2 <-read_tnz('../lsms/./TZNPS2HH1DTA/HH_SEC_E2.dta',FALSE)
+    idat1 <-read_tnz('./lsms/./TZNPS2HH1DTA/HH_SEC_E1.dta',FALSE)
+    idat2 <-read_tnz('./lsms/./TZNPS2HH1DTA/HH_SEC_E2.dta',FALSE)
     i1 <- get_translated_frame(dat=idat1,
                                names=get_lsms_sece1_columns_2010(),
                                m=get_lsms_sece_fields_mapping_2010())

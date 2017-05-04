@@ -68,6 +68,8 @@ significant_lmvars<-function(ds,depvar,vars_init){
   }
 }
 
+
+
 run_regression_lsms<-function(ds,type,commodity_type,varsInfo){
   depvar <- varsInfo[["depvar"]]
   if (is.null(depvar)){

@@ -66,6 +66,18 @@ visible_categories_us_cex_2004<-function(){
            'usedtrucks', 'usedmotorcycles', 'usedaircraft'))
 }
 
+get_diary_info_columns<-function(dataset,year){
+  
+  if(dataset== "us_cex"){
+    if (year == 2004 || year == 2009|| year == 2014){
+      return(diary_info_columns_us_cex_2004())
+    }
+    stop(paste("Could not find diary info columns for year:",year))
+  }
+  stop(paste("Unknown dataset:",dataset))
+}
+
+
 cex_combined_years_ds<-function(years)
 {
   if (!is.vector(years)){
