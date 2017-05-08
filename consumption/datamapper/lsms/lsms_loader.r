@@ -13,14 +13,22 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
 
 lsms_loader<-function(fu,ln) {
   
-  read_tnz <- function(filename,convert_factors) {
+  read_tnz <- function(filename,convert_factors,hhidColName) {
+    
     if (!is.logical(convert_factors) || !is.atomic(convert_factors)){
-      stop("convert_factords must be ")
+      stop("convert_factors must be ")
     }
     print(paste("Reading file:",filename))
     dat1 = read.dta(filename,convert.factors = convert_factors);
     dat2 = as.data.frame(dat1,stringsAsFactors=FALSE);
-    dat3 = dat2[as.numeric(dat2$y2_hhid)>0,] # only take data with hhid>0
+    if (missing(hhidColName)){
+      hhidColName<-"y2_hhid";
+      dat3 = dat2[as.numeric(dat2[,hhidColName])>0,] # only take data with hhid>0
+    } else {
+      dat3 = dat2[!is.na(dat2[,hhidColName]),] # only take data with hhid>0
+      dat3[,hhidColName]<-as.character(dat3[,hhidColName])
+    }
+    
     return(dat3);
   }
   
@@ -29,6 +37,48 @@ lsms_loader<-function(fu,ln) {
   }
   
   load_diary_file <-function(dirprefix,year){
+    if (year == 2012){
+      jdat <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_J1.dta",sep=""),
+                       convert_factors = FALSE,hhidColName = "y3_hhid")
+      k <- fu()@get_translated_frame(dat=jdat,
+                                     names=ln()@diary_info_columns_lsms_2012(),
+                                     m=ln()@hh_mapping_lsms_2012())
+      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      #*    Ignored items where there is no associated cost
+      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      k$item<-k$item+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
+      factor <- 52
+      
+      #*    Multiplied weekly diary data by 52 (to look at annual data)
+      # quantities are normalized to annual values
+      k$cost <- k$cost*factor
+      k$lwp <- k$lwp *factor
+      k$own <-k$own*factor
+      k$gift <-k$gift*factor
+      
+      #*    gift quantities are ignored (total quantity ignored is to be presented)
+      #*    weekly recall items are also multiplied by 52
+      kdat <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_K.dta",sep=""),
+                       convert_factors = FALSE,hhidColName = "y3_hhid")
+      
+      l <- fu()@get_translated_frame(dat=kdat,
+                                     names=ln()@get_lsms_seck_info_columns_2012(),
+                                     m=ln()@get_lsms_seck_fields_mapping_2012());
+      
+      l$hhid <-as.character(l$hhid)
+      l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
+      weekly_recall_items <-c(101,102,103)
+      
+      # l is weekly and  monthly data
+      
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=52,
+                                       items_list = weekly_recall_items)
+      
+      return(l)
+    }
     if (year == 2010){
       # combine sections ( k , l, m )
       kdat <- read_tnz(paste(dirprefix,"./lsms/TZNPS2HH3DTA/HH_SEC_K1.dta",sep=""),FALSE)
