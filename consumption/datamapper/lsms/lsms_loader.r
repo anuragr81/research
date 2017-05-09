@@ -77,7 +77,31 @@ lsms_loader<-function(fu,ln) {
                                        factor=52,
                                        items_list = weekly_recall_items)
       
-      return(l)
+      
+      monthly_recall_items <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
+                                "210", "211", "212", "213", "214", "215", "216", "217", "218", "219",
+                                "220", "221", "222", "223", "224")
+      
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=12,
+                                       items_list = monthly_recall_items)
+
+      
+      # m is yearly data
+      ldat <-read_tnz( filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_L.dta',sep=""),
+                       convert_factors = FALSE,
+                       hhidColName = "y3_hhid")
+      m <- fu()@get_translated_frame(dat=ldat,
+                                     names=ln()@get_lsms_secm_info_columns(2012),
+                                     m=ln()@get_lsms_secm_fields_mapping(2012))
+      m$hhid <-as.character(m$hhid)
+      m<- m[!is.na(m$hhid) & !is.na(m$cost) & m$cost>0,]
+      # nothing to be multiplied for yearly-recall (since we're looking at annual consumption)
+      
+            
+      return(m)
     }
     if (year == 2010){
       # combine sections ( k , l, m )
