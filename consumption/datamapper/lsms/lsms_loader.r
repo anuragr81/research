@@ -99,9 +99,12 @@ lsms_loader<-function(fu,ln) {
       m$hhid <-as.character(m$hhid)
       m<- m[!is.na(m$hhid) & !is.na(m$cost) & m$cost>0,]
       # nothing to be multiplied for yearly-recall (since we're looking at annual consumption)
+      #*    zero-cost items are ignored for all these 
+      ml <-merge(m,l,all=TRUE)
+      #*    merging all the 4 categories results in the expenditure file
       
-            
-      return(m)
+      mlk <-merge(ml,k,all=TRUE)
+      return(mlk)
     }
     if (year == 2010){
       # combine sections ( k , l, m )
@@ -178,15 +181,56 @@ lsms_loader<-function(fu,ln) {
   
   
   load_ohs_file <-function(year,dirprefix){
+    if (year ==2012){
+      cbFileName <- paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/COM_SEC_CB.dta',sep="")
+      cbdat<-read.dta(cbFileName,convert.factors = FALSE)
+      
+      cb <- fu()@get_translated_frame(dat=cbdat,
+                                      names=ln()@ohs_seccb_columns_lsms(2012),
+                                      m=ln()@ohs_seccb_mapping_lsms(2012))
+      print(paste("Reading file:",cbFileName))
+      #* chose facilitycode l and collected accessibility 1 and 2(<10) (in the centre or less than 10 km away)
+      l<-(cb[is.element(tolower(as.character(cb$facilitycode)),c("l")),])
+      #* extract those with 1
+      l$accessiblemarket<-as.integer(l$accessibility==1)
+      #* extract those with 2 (and assign them the same status as 1's)
+      l$accessiblemarket<-l$accessiblemarket+as.integer(l$accessibility==2 & l$distance<10)
+      l=l[!is.na(l$accessiblemarket),]
+      #* chose accessible market value using (if both in the centre and closer then ambiguous)
+      l_i=ddply(l,.(region,district,ward),summarize,accessiblemarket=max(accessiblemarket))
+      l = merge(l,l_i)
+      fu()@removeall_cols_except(l,c("region","district","ward","accessiblemarket","travelcost"))
+      #* Also considered urban/rural based on population density 
+      u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban);
+      
+      
+      adat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_A.dta',sep=""),
+                     convert_factors = FALSE,
+                     hhidColName = "y3_hhid")
+      
+      a <- fu()@get_translated_frame(dat=adat,
+                                     names=ln()@ohs_seca_columns_lsms(),
+                                     m=ln()@ohs_seca_mapping_lsms_2012())
+      #a<-merge(a,u)
+      #a<-merge(a,l)
+      #a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
+      #popDensity <- read.csv(paste(dirprefix,"./lsms/tnzpopdensity.csv",sep=""))
+      #a<-merge(a,popDensity)
+      
+      return(a)
+    }
     
     if (year == 2010){
       
       #* Read section c_cb file
-      cbdat<-read.dta(paste(dirprefix,'./lsms/TZNPS2COMDTA/COMSEC_CB.dta',sep=""),convert.factors = FALSE)
-      
+      cbFileName = paste(dirprefix,'./lsms/TZNPS2COMDTA/COMSEC_CB.dta',sep="")
+      cbdat<-read.dta(cbFileName,convert.factors = FALSE)
+      print(paste("Reading file ",cbFileName))
+  
       cb <- fu()@get_translated_frame(dat=cbdat,
-                                      names=ln()@ohs_seccb_columns_lsms_2010(),
-                                      m=ln()@ohs_seccb_mapping_lsms_2010())
+                                      names=ln()@ohs_seccb_columns_lsms(2010),
+                                      m=ln()@ohs_seccb_mapping_lsms(2010))
       #* chose facilitycode l and collected accessibility 1 and 2(<10) (in the centre or less than 10 km away)
       l<-(cb[is.element(tolower(as.character(cb$facilitycode)),c("l")),])
       #* extract those with 1
@@ -209,7 +253,7 @@ lsms_loader<-function(fu,ln) {
       adat<-read_tnz(paste(dirprefix,'./lsms/TZNPS2HH1DTA/HH_SEC_A.dta',sep=""),FALSE)
       
       a <- fu()@get_translated_frame(dat=adat,
-                                     names=ln()@ohs_seca_columns_lsms_2010(),
+                                     names=ln()@ohs_seca_columns_lsms(),
                                      m=ln()@ohs_seca_mapping_lsms_2010())
       a<-merge(a,u)
       a<-merge(a,l)
