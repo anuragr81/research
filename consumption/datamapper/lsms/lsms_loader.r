@@ -599,8 +599,12 @@ lsms_loader<-function(fu,ln) {
       
       heads<-ohs[as.integer(ohs$household_status)==1,]
       print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
+      if (!is.element("y2_hhid",colnames(heads)) ){
+        heads$y2_hhid<-rep(NA,dim(heads)[1])
+      }
       
       heads<-data.frame(hhid=heads$hhid,
+                        y2_hhid = heads$y2_hhid,
                         highest_educ=heads$highest_educ,
                         age=heads$age,
                         region=heads$region,
