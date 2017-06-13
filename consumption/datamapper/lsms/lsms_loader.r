@@ -87,7 +87,7 @@ lsms_loader<-function(fu,ln) {
                                        item_field_name="item", 
                                        factor=12,
                                        items_list = monthly_recall_items)
-
+      
       
       # m is yearly data
       ldat <-read_tnz( filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_L.dta',sep=""),
@@ -210,15 +210,58 @@ lsms_loader<-function(fu,ln) {
                      hhidColName = "y3_hhid")
       
       a <- fu()@get_translated_frame(dat=adat,
-                                     names=ln()@ohs_seca_columns_lsms(),
+                                     names=ln()@ohs_seca_columns_lsms(2012),
                                      m=ln()@ohs_seca_mapping_lsms_2012())
-      #a<-merge(a,u)
-      #a<-merge(a,l)
-      #a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
-      #popDensity <- read.csv(paste(dirprefix,"./lsms/tnzpopdensity.csv",sep=""))
-      #a<-merge(a,popDensity)
+      a<-merge(a,u)
+      a<-merge(a,l)
+      a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
+      popDensity <- read.csv(paste(dirprefix,"./lsms/tnzpopdensity.csv",sep=""))
+      a<-merge(a,popDensity)
       
-      return(a)
+      #*    Read section B
+      bdat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_B.dta',sep=""),
+                     convert_factors = FALSE,
+                     hhidColName = "y3_hhid")
+      
+      b <- fu()@get_translated_frame(dat=bdat,
+                                     names=ln()@ohs_info_columns_lsms_2012(),
+                                     m=ln()@ohs_mapping_lsms_2012())
+      
+      
+      b$hhid<-as.character(b$hhid)
+      #* inferring occupation rank with occupation_mapping
+      b<-merge(b,occupation_mapping())
+      
+      
+      cdat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_C.dta',sep=""),
+                     convert_factors = FALSE,
+                     hhidColName = "y3_hhid")
+
+      #*    Read section C
+      c <- fu()@get_translated_frame(dat=cdat,
+                                     names=ln()@get_ohs_secc_columns_lsms_2012(),
+                                     m=ln()@get_ohs_secc_fields_mapping_lsms_2012())
+      c$hhid<-as.character(c$hhid)
+      ab <- merge(a,b)
+      ohs<-merge(ab,c)
+      ohs$age <-2012-ohs$YOB
+      
+      #*    calculated age by subtracting YOB from 2012 (survey year)
+      #*    read section J for housing data (rent, number of primary/secondary rooms)
+
+      jdat <- read.dta(paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_I.dta',sep=""),convert.factors=FALSE)
+      
+      j <- fu()@get_translated_frame(dat=jdat,
+                                     names=ln()@get_lsms_secj_info_columns_2012(),
+                                     m=ln()@get_lsms_secj_fields_mapping_2012())
+      j$hhid <-as.character(j$hhid)
+      j$roomsnum_secondary[is.na(j$roomsnum_secondary)]<-0
+      j$houserent[is.na(j$houserent)]<-0
+      print(head(j))
+      j$roomsnum<-j$roomsnum_primary+j$roomsnum_secondary
+      ohsj<-merge(ohs,j,all=TRUE)
+      return(ohsj)
+      
     }
     
     if (year == 2010){
@@ -227,7 +270,7 @@ lsms_loader<-function(fu,ln) {
       cbFileName = paste(dirprefix,'./lsms/TZNPS2COMDTA/COMSEC_CB.dta',sep="")
       cbdat<-read.dta(cbFileName,convert.factors = FALSE)
       print(paste("Reading file ",cbFileName))
-  
+      
       cb <- fu()@get_translated_frame(dat=cbdat,
                                       names=ln()@ohs_seccb_columns_lsms(2010),
                                       m=ln()@ohs_seccb_mapping_lsms(2010))
@@ -253,7 +296,7 @@ lsms_loader<-function(fu,ln) {
       adat<-read_tnz(paste(dirprefix,'./lsms/TZNPS2HH1DTA/HH_SEC_A.dta',sep=""),FALSE)
       
       a <- fu()@get_translated_frame(dat=adat,
-                                     names=ln()@ohs_seca_columns_lsms(),
+                                     names=ln()@ohs_seca_columns_lsms(2010),
                                      m=ln()@ohs_seca_mapping_lsms_2010())
       a<-merge(a,u)
       a<-merge(a,l)
@@ -329,13 +372,19 @@ lsms_loader<-function(fu,ln) {
     #* ignored 5 households with really high expenditure on marriage (more than reported annual income)
     ignoredhhids_adhoc<- c("0701006104006701","0702006012004001","0701021174002601","0702001125000103")
     #* ignored households with zero income (ensuring that not more than 2.5% number of households are ignored)
-    ignoredhhids_zero_income <- unique(income[as.integer(income$yearly_pay)==0,]$hhid)
-    ignored_threshold<-.025
-    if( length(ignoredhhids_zero_income)/length(unique(income$hhid))>ignored_threshold){
-      stop (paste("More than",ignored_threshold*100, "% hhids with zero income"))
+    if (is.null(income)) {
+      ignoredhhids_zero_income<-NULL
     }
-    print(paste("Ignored ",length(ignoredhhids_zero_income),"/",length(unique(income$hhid)),"(=",
-                length(ignoredhhids_zero_income)/length(unique(income$hhid)),") households with zero income" ))
+    else {
+      ignoredhhids_zero_income <- unique(income[as.integer(income$yearly_pay)==0,]$hhid)
+      ignored_threshold<-.025
+      if( length(ignoredhhids_zero_income)/length(unique(income$hhid))>ignored_threshold){
+        stop (paste("More than",ignored_threshold*100, "% hhids with zero income"))
+      }
+      print(paste("Ignored ",length(ignoredhhids_zero_income),"/",length(unique(income$hhid)),"(=",
+                  length(ignoredhhids_zero_income)/length(unique(income$hhid)),") households with zero income" ))
+    }
+    
     ignored<-union(ignoredhhids_zero_income,ignoredhhids_adhoc)
     return(ignored)
   }
@@ -479,32 +528,37 @@ lsms_loader<-function(fu,ln) {
   
   
   load_income_file<-function (year,dirprefix){
-    
-    #* read section E
-    idat1 <-read_tnz(paste(dirprefix,'./lsms/./TZNPS2HH1DTA/HH_SEC_E1.dta',sep=""),FALSE)
-    idat2 <-read_tnz(paste(dirprefix,'./lsms/./TZNPS2HH1DTA/HH_SEC_E2.dta',sep=""),FALSE)
-    i1 <- fu()@get_translated_frame(dat=idat1,
-                                    names=ln()@get_lsms_sece1_columns_2010(),
-                                    m=ln()@get_lsms_sece_fields_mapping_2010())
-    #TODO: add the conversion into get_translated_frame functionality
-    i1$hhid<-as.character(i1$hhid)
-    i2 <- fu()@get_translated_frame(dat=idat1,
-                                    names=ln()@get_lsms_sece2_columns_2010(),
-                                    m=ln()@get_lsms_sece_fields_mapping_2010())
-    i2$hhid<as.character(i2$hhid)
-    #TODO: add the conversion into get_translated_frame functionality
-    
-    ti <- ln()@infer_lsms_sece_total_income(i1,i2);
-    #* inferred section e data
-    #* ))
-    # idat2 has only got self-employment details
-    
-    return(ti)
+    if (year == 2010){
+      #* read section E
+      idat1 <-read_tnz(paste(dirprefix,'./lsms/./TZNPS2HH1DTA/HH_SEC_E1.dta',sep=""),FALSE)
+      idat2 <-read_tnz(paste(dirprefix,'./lsms/./TZNPS2HH1DTA/HH_SEC_E2.dta',sep=""),FALSE)
+      i1 <- fu()@get_translated_frame(dat=idat1,
+                                      names=ln()@get_lsms_sece1_columns_2010(),
+                                      m=ln()@get_lsms_sece_fields_mapping_2010())
+      #TODO: add the conversion into get_translated_frame functionality
+      i1$hhid<-as.character(i1$hhid)
+      i2 <- fu()@get_translated_frame(dat=idat1,
+                                      names=ln()@get_lsms_sece2_columns_2010(),
+                                      m=ln()@get_lsms_sece_fields_mapping_2010())
+      i2$hhid<as.character(i2$hhid)
+      #TODO: add the conversion into get_translated_frame functionality
+      
+      ti <- ln()@infer_lsms_sece_total_income(i1,i2);
+      #* inferred section e data
+      #* ))
+      # idat2 has only got self-employment details
+      
+      return(ti)
+    } 
+    if (year == 2012){
+      return(NULL)
+    }
+    stop(paste("Year ",year," not supported"))
   }
   
   
   merge_hh_ohs_income_data<-function(hh,ohs,income,year,selected_category,set_depvar){
-    if (year == 2010) {
+    if (year == 2010 || year == 2012) {
       if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
         stop("factors must be converted an integer")
       }
@@ -689,7 +743,7 @@ lsms_loader<-function(fu,ln) {
     #* ))
   }
   
-
+  
   return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
              analyse_cj=analyse_cj,load_ohs_file=load_ohs_file))
   

@@ -214,12 +214,14 @@ calculate_affordability_popularity<-function(m,fu){
   write.csv(file='c:/temp/results.csv',results)
   return(results)
 }
+
 temporary_calculations<-function(m,fu){
 aff<-calculate_affordability_popularity(m,fu)
 
 a<-merge(merge(aff,popularity),bw)
 a$drh_scaled<-(a$drh-min(a$drh))/diff(range(a$drh))
 }
+
 get_region <- function(regions,districts) {
   region<-(ds[is.element(ds$district,c(1,2,3)) & is.element(ds$region,c(7)),]$region)
   
@@ -230,8 +232,5 @@ compute_appeal<-function(ln,hh,item,availability){
   
   #affordability is calculated on whether the expenditure on the item 
   
-  
-  #
-  #bandwagon<-
   
 }
