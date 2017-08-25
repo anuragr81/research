@@ -1,4 +1,4 @@
-
+library(haven)  # write_dta
 setwd('c:/local_files/research/consumption/datamapper/')
 
 debugSource('callertree.r')
@@ -7,10 +7,23 @@ debugSource('./sa/sa.r')
 debugSource('us_cex/us_cex_loader.r')
 debugSource('translation/frameutils.R')
 
-#debugSource('us_cex/us_cex_loader.r');ds<-uscex(fcdu=fu)@combined_data_set(2004,"C:/local_files/research/consumption/cex/cex_data/",201,FALSE)
+#debugSource('us_cex/us_cex_loader.r');ds<-uscex(fcdu=fu)@combined_data_set(2un004,"C:/local_files/research/consumption/cex/cex_data/",201,FALSE)
 
 debugSource('lsms/lsms_normalizer.r');debugSource('lsms/lsms_loader.r');
 #ln@food_categories_lsms_2010()
+
+merge2010_2012<-function(category){
+  ll=lsms_loader(fu=fu,ln=lsms_normalizer);
+  ds2010<-ll@combined_data_set(year=2010,selected_category=category, dirprefix='c:/local_files/research/consumption/')
+  ds2012<-ll@combined_data_set(year=2012,selected_category=category, dirprefix='c:/local_files/research/consumption/')
+  ds2010$y2_hhid<- ds2010$hhid
+  ds2010$hhid <-NULL
+  ds2010$year <- rep(2010,dim(ds2010)[1])
+  ds2012$hhid <-NULL
+  ds2012$year <- rep(2012,dim(ds2012)[1])
+  
+  return(rbind(ds2010,ds2012))
+}
 
 sample_vec<-function(vec,n){
   if (length(n)>1){
@@ -216,10 +229,10 @@ calculate_affordability_popularity<-function(m,fu){
 }
 
 temporary_calculations<-function(m,fu){
-aff<-calculate_affordability_popularity(m,fu)
-
-a<-merge(merge(aff,popularity),bw)
-a$drh_scaled<-(a$drh-min(a$drh))/diff(range(a$drh))
+  aff<-calculate_affordability_popularity(m,fu)
+  
+  a<-merge(merge(aff,popularity),bw)
+  a$drh_scaled<-(a$drh-min(a$drh))/diff(range(a$drh))
 }
 
 get_region <- function(regions,districts) {
