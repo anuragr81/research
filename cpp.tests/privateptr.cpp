@@ -1,35 +1,71 @@
 #include <iostream>
+#include <exception> 
+#include <map>
+
+using namespace std;
 
 class A {
+public:
+    virtual int get_a() const = 0 ;
+    virtual void set_a(int x)  = 0 ;
+} ; 
+
+class A1: public A{
     public:
-        A(): _a(0) {}
-        int get_a() const { return _a ; } 
-        void set_a(int x) { _a = x; } 
+        A1(): _a(0) {}
+        virtual int get_a() const { cout << "A1::get_a" << endl; return _a ; } 
+        virtual void set_a(int x) { _a = x; } 
     private:
         int _a ; 
 };
 
+
+class A2 : public A{
+     public:
+     A2 (int x): _n(x){}
+     virtual int get_a() const { cout << "A2::get_a" << endl; return _n ; } 
+     virtual void set_a(int x) { }
+     private:
+     int _n;
+  
+};
+
 class B{
     public:
-        B() {
-            a = new A();
+        explicit B() : _count(0) { 
         }
-        ~B(){ 
-            delete a;
-        } 
-        A * get_A() // try adding a const to the function and see why the compiler doesn't permit it
-        { 
-            return a; 
+        void addA(A *a) {
+            _la[_count++]=a;
         }
 
+        A const & get_A(size_t i) const
+        { 
+            return *_la.at(i);
+        }
+        size_t size() const { return _count ; }
+
+        ~B() { 
+            for (size_t i = 0 ; i < _count ; ++i) {
+                cout << "cleaning up item:" << i << endl;
+                delete _la[i];
+            }
+        } 
     private:
-        A * a ; 
+        // disallow copying on the container
+        B (const B &) ; 
+        void operator = (B const &);
+        std::map<int,A*> _la;
+        size_t _count ; 
+
 } ; 
+
 int main(){
     B b ; 
-    using namespace std;
-    cout << "A::a = " << b.get_A()->get_a() << endl;
-    b.get_A()->set_a(-1);
-    cout << "A::a = " << b.get_A()->get_a() << endl;
+    b.addA(new A1() );
+    b.addA(new A2(100) );
+    for (int  i = 0 ; i < b.size() ; ++i){
+            cout <<  b.get_A(i).get_a() << endl;
+    } 
+    // b.get_A(0).set_a(-1);// won't compile
     return 0;
 }
