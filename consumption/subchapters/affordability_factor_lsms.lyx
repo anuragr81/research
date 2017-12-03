@@ -1,0 +1,485 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+The LSMS survey records neither price nor the quantity consumed for any
+ non-food quantities.
+ To find the closest approximation to our notion of the affordability factor,
+ we consider the 90% quantile of the per-head consumption values of every
+ item.
+ Instead of differences in prices (which are unavailable), we test whether
+ differences in perhead consumption could be due to variants of different
+ prices.
+ 
+\end_layout
+
+\begin_layout Standard
+This exercise is neither trivial nor fully reliable - but is only an effort
+ to detect the variants of the same item or group of items in market (i..e.
+ the quantity 
+\begin_inset Formula $p_{i}-max(p_{k})$
+\end_inset
+
+).
+ We begin with identifying any clustering in the per head consumption after
+ accounting for control variables related to usage of the item e.g.
+ more per-head electricity should be scaled with number of appliances the
+ household may have (available in data).
+ In absence of prices, this test is performed on a case-by-case basis.
+ Once clusters of prices are confirmed, then we may further verify the factors
+ that may influence the choice of a higher price item - e.g.
+ with a probit on the dummy of cluster's average-consumption as the dependent
+ variable and the total expenditure, housingstatus, education, relevant
+ asset etc.
+ as control variables.
+ The significance of control variables related to a related asset owned
+ by the consumer may would imply that the status could be indicated by the
+ asset ownership (and doesn't need to be counted twice for the average consumpti
+on on the related quantity).
+ For example, per-head electricity consumption is higher for those with
+ electronic equipment - we would conclude that consumer raises her ranking
+ by owning assets (ignore the consumption of electricity for testing of
+ signaling quantities).
+\end_layout
+
+\begin_layout Standard
+It is possible that the asset itself - related to the consumed good whose
+ average consumption we test for price-differentiation - has more variants
+ of different prices than those of consumed good.
+ For example, detergent that serves clothes may not be varied but the washing
+ machine where detergents are used could be more nuanced.
+ Unfortunately we do not have even the cost estimate on assets owned by
+ the household - so we are left with ignoring this possibility at the moment.
+ 
+\end_layout
+
+\begin_layout Standard
+Taking an example where this methodology might work, we consider the consumption
+-per-head for kerosene which varies a lot in dar-es-salaam (region 7)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+We have assumed there are no secondary markets or hoarding for items in
+ consideration
+\end_layout
+
+\end_inset
+
+.
+ We clearly cannot claim that the differences in consumption per head imply
+ a price differentiation for kerosene - simply because availability of electrici
+ty in dar-es-salaam can change the usage of kerosene in the household.
+ What makes more sense is to consider electricity and kerosene in the same
+ basket and simply treat electricity as a higher price variant of the item
+ energy-source (an assumption that makes sense given the disparity of electricit
+y distribution in Tanzania).
+ The tree attached in figures represented how this impact are planned to
+ be aggregated.
+ Not all problems can be circumvented with such an aggregation either.
+ One cannot for example, use per-head consumption to detect price differentiatio
+n for cigarettes - where the most significant factor affecting high consumption
+ is simply be the addiction of the consumer - the data on which is not available
+ in the survey.
+ We are compelled to ignore smoking for our analysis.
+ 
+\end_layout
+
+\begin_layout Standard
+For most other non-food commodities, either aggregation and/or cluster-detection
+ could help identify the price-differentiation.
+ For example, if we look at the per-head consumption on bar soap, there
+ seem to be two cost clusters in region dar-es-salaam - the dummy of per-head-co
+nsumption<6000 (i.e.
+ the cluster dummy) finds roomsnum, language and occupation all significant
+ (total expenditure is not) i.e.
+ those with a better-paying occupations and English-speaking abilities tend
+ to spend disproportionately on bar-soap - this difference in consumption-per
+ head could be used as the price-difference in our original sense.
+ The similar cluster dummy for detergent is not found significant (except
+ for roomsnum in dar-es-salaam ) - hence we ignore detergents for price-differen
+tiation.
+ It can't be denied that such inferences are ad-hoc and dependent on whether
+ there are any assets that may justify higher per-head consumption or not.
+\end_layout
+
+\begin_layout Standard
+Our end-goal is to differentiate the status-impact of consumption from the
+ status-impact of assets and then consider a combined status impact form
+ assets and consumption - so we can finally fit in the consumption status
+ goods in the intertemporal substitution problem.
+ The relative assets-ownership ranking of consumers cannot be ignored.
+ Despite, having no cost information for assets owned, we consider the number
+ of items owned assets for ranking of consumes i.e.
+ if someone has more assets than another person who has less or none of
+ the same asset, then all else being equal the former is invariably of higher
+ status than the latter.
+ Since our goal is to finally combine the asset-ranking and consumption
+ ranking, we also avoid double-counting the role of assets - since a lot
+ of items are not consumed simply because the asset related to it is not
+ owned by the consumer.
+ Further, since the differences in per-head consumption are often due to
+ the number of related asset owned by the consumer, we count for status-impact
+ from the assets alone (not from the per-head consumption difference).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename kerosene_electricity.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ElectricityvsKeroseneCosts"
+
+\end_inset
+
+Electricity vs Kerosene costs per head in Dar-es-salaam
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ll=lsms_loader(fu=fu,ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ddply(dsv,.(region),summarise,mean(perheadvis),n=length(hhid))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dat2010=ll@load_diary_file(dirprefix = '.',year = 2010
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+af_item<-function (currentItem,year,loadFile){
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+fileName<-paste('c:/local_files/research/consumption/lsms/individual_consumption
+_files/',year,'/',year,toString(currentItem),'.dta',sep='')
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+if (missing(loadFile)){
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ds<-ll@combined_data_set(year=year,selected_category=currentItem, dirprefix='c:/
+local_files/research/consumption/')
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+write.dta(ds,fileName)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+} else {
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+print(paste('Reading file:',fileName))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ds<-read.dta(fileName)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dsv<-ds[ds$visible_consumption>0,]
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ds<-NULL
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dsv$perheadvis<-dsv$visible_consumption/dsv$consu
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dsv$af<-dsv$perheadvis-quantile(dsv$perheadvis,.9)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+return(dsv)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+summary(lm(data=dsv,visible_consumption~consu))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+plot(dsvkerosene7[is.element(dsvkerosene7$hhid,hhids),]$perheadvis,dsvelec7[is.ele
+ment(dsvelec7$hhid,hhids),]$perheadvis,xlab = "Kerosene per head cost",
+ ylab= "Electricity per head cost",type='p')
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+kmeans(dsvbarsoap7$perheadvis,centers=2)[["centers"]]
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+###
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dsv<-af_item(currentItem = "210",year = 2010)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dsvdetergent7<-dsv[dsv$region==7,]
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+hist(dsvdetergent7$perheadvis,breaks=1000)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#merging asset ownership data
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ndat<-read.dta('../lsms/TZNPS2HH2DTA/HH_SEC_N.dta',convert.factors = FALSE)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+c <- fu()@get_translated_frame(dat=ndat, names=lsms_normalizer()@get_diary_secn_
+columns_lsms_2010(), m=lsms_normalizer()@get_diary_secn_fields_mapping_lsms_2010
+())
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+k<-subset(c,is.element(itemcode,c("407")))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+k<-data.frame(hhid=k$hhid,num_items=k$number)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+x<-merge(x=k,y=dsv,by="hhid",all.y=TRUE)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

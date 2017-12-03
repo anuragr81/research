@@ -496,7 +496,7 @@ lsms_loader<-function(fu,ln) {
   analyse_cj<-function(dirprefix,sl){
     cjdat<-read.dta(paste(dirprefix,'/./lsms/TZNPS2COMDTA/COMSEC_CJ.dta',sep=''),convert.factors = FALSE) 
     
-    cj <- fu()@get_translated_frame(dat=cjdat, names=ohs_seccj_columns_lsms_2010(), m=ohs_seccj_mapping_lsms_2010())
+    cj <- fu()@get_translated_frame(dat=cjdat, names=ln@ohs_seccj_columns_lsms_2010(), m=ln@ohs_seccj_mapping_lsms_2010())
     cj$factor<-as.integer(cj$lwp_unit==1)+as.integer(cj$lwp_unit==2)/1000.0+as.integer(cj$lwp_unit==3)+as.integer(cj$lwp_unit==4)/1000.0+as.integer(cj$lwp_unit==5)
     cj$lwp <-cj$lwp*cj$factor
     cj$price <cj$price/cj$lwp
