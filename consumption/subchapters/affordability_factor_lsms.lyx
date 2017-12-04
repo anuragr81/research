@@ -27,9 +27,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -53,12 +54,20 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\headheight 2cm
+\headsep 2cm
+\footskip 2cm
+\columnsep 1.2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
 \quotes_language english
-\papercolumns 1
+\papercolumns 2
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
@@ -70,62 +79,95 @@
 
 \begin_body
 
-\begin_layout Standard
-\paragraph_spacing onehalf
-The LSMS survey records neither price nor the quantity consumed for any
- non-food quantities.
- To find the closest approximation to our notion of the affordability factor,
- we consider the 90% quantile of the per-head consumption values of every
- item.
- Instead of differences in prices (which are unavailable), we test whether
- differences in perhead consumption could be due to variants of different
- prices.
- 
+\begin_layout Section
+
+\size normal
+Determining Status ranking from the LSMS data in Tanzania
 \end_layout
 
 \begin_layout Standard
-This exercise is neither trivial nor fully reliable - but is only an effort
- to detect the variants of the same item or group of items in market (i..e.
+The LSMS survey records neither the price nor the quantity consumed for
+ any non-food quantities.
+ Instead of differences in prices (which are unavailable), we test whether
+ differences in per-head consumption in the population within a region could
+ represent the variants of different prices which can be used to calculated
+ the affordability factor (i.e.
  the quantity 
 \begin_inset Formula $p_{i}-max(p_{k})$
 \end_inset
 
 ).
- We begin with identifying any clustering in the per head consumption after
- accounting for control variables related to usage of the item e.g.
- more per-head electricity should be scaled with number of appliances the
- household may have (available in data).
- In absence of prices, this test is performed on a case-by-case basis.
- Once clusters of prices are confirmed, then we may further verify the factors
- that may influence the choice of a higher price item - e.g.
- with a probit on the dummy of cluster's average-consumption as the dependent
- variable and the total expenditure, housingstatus, education, relevant
- asset etc.
- as control variables.
- The significance of control variables related to a related asset owned
- by the consumer may would imply that the status could be indicated by the
- asset ownership (and doesn't need to be counted twice for the average consumpti
-on on the related quantity).
- For example, per-head electricity consumption is higher for those with
- electronic equipment - we would conclude that consumer raises her ranking
- by owning assets (ignore the consumption of electricity for testing of
- signaling quantities).
 \end_layout
 
 \begin_layout Standard
-It is possible that the asset itself - related to the consumed good whose
- average consumption we test for price-differentiation - has more variants
- of different prices than those of consumed good.
- For example, detergent that serves clothes may not be varied but the washing
- machine where detergents are used could be more nuanced.
- Unfortunately we do not have even the cost estimate on assets owned by
- the household - so we are left with ignoring this possibility at the moment.
+This exercise is neither trivial and not fully reliable at this point -
+ but an effort to detect the variants of the same item or group of items
+ with different prices in the market.
+ In the absence of price data, we hope to use some knowledge of the supply
+ side to improve our interpretation of price from average cost data.
+ We begin with identifying clusters in the per head consumption cost after
+ accounting for control variables related to usage of the item e.g.
+ more per-head electricity costs should be scaled with number of appliances
+ the household may have (which is available in data).
+ In absence of prices, this ad-hoc test needs to be performed on a case-by-case
+ basis.
  
 \end_layout
 
 \begin_layout Standard
-Taking an example where this methodology might work, we consider the consumption
--per-head for kerosene which varies a lot in dar-es-salaam (region 7)
+The significance of control variables denoting the usage of related assets
+ owned by the consumer and the lack of any clustering (in average consumption
+ scaled by usage) would imply that the status is indicated by the asset
+ ownership instead (and thus the average consumption consumption doesn't
+ need to be counted for the status impact).
+ For example, since per-head electricity cost is higher for those with electroni
+c equipment - we would conclude that consumer raises her ranking by owning
+ electronic equipment and having electricity - rather than by choosing a
+ higher price option for electricity.
+ We thus ignore the consumption of electricity for testing of signaling
+ quantities.
+\end_layout
+
+\begin_layout Standard
+If clusters of prices are observed after scaling (regression) with the usage
+ variable, we use the cluster prices as input to our affordability factor
+ calculation.
+ As a sanity check, we may also verify the factors that may influence the
+ choice of a higher price item - e.g.
+ with a probit on the dummy of cluster's average-consumption being above
+ or below the cluster price threshold as the dependent variable and the
+ total expenditure, housingstatus, education, relevant asset etc.
+ as control variables.
+ This however, is not the part of the methodology to detect price difference
+ through average consumption.
+\end_layout
+
+\begin_layout Standard
+Our eventual goal is to identify the price differences which the consumer
+ observes to build her utility tree.
+ These trees are are shown for Tanzania LSMS data in the Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:tree1"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:tree2"
+
+\end_inset
+
+.
+ The overall status from consumption of an individual consumer is simply
+ the aggregation of affordability factor (or a similar metric) at the root
+ of the tree.
+\end_layout
+
+\begin_layout Standard
+Taking an example where this methodology might work, we consider the cost-per-he
+ad for kerosene which varies a lot in dar-es-salaam (region 7)
 \begin_inset Foot
 status open
 
@@ -137,60 +179,176 @@ We have assumed there are no secondary markets or hoarding for items in
 \end_inset
 
 .
- We clearly cannot claim that the differences in consumption per head imply
- a price differentiation for kerosene - simply because availability of electrici
-ty in dar-es-salaam can change the usage of kerosene in the household.
- What makes more sense is to consider electricity and kerosene in the same
- basket and simply treat electricity as a higher price variant of the item
- energy-source (an assumption that makes sense given the disparity of electricit
-y distribution in Tanzania).
- The tree attached in figures represented how this impact are planned to
- be aggregated.
- Not all problems can be circumvented with such an aggregation either.
- One cannot for example, use per-head consumption to detect price differentiatio
-n for cigarettes - where the most significant factor affecting high consumption
- is simply be the addiction of the consumer - the data on which is not available
- in the survey.
+ We clearly cannot claim that the differences in consumption cost per head
+ imply a price differentiation for kerosene - simply because availability
+ of electricity in dar-es-salaam can change the usage of kerosene in the
+ household (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ElectricityvsKeroseneCosts"
+
+\end_inset
+
+).
+ What we can do for dar-es-salaam (or any region where electricity is also
+ available) is to consider electricity and kerosene as the variants of energy
+ level in tree and treat electricity as a higher price variant of the energy-sou
+rce.
+\end_layout
+
+\begin_layout Standard
+Not all problems can be circumvented with such an aggregation either.
+ One cannot for example, use per-head consumption costs to detect price
+ differentiation for cigarettes - where the most significant factor affecting
+ high consumption is simply be the addiction of the consumer - the data
+ on which is not available in the survey.
  We are compelled to ignore smoking for our analysis.
+ 
+\end_layout
+
+\begin_layout Standard
+It is also possible that the asset itself - related to the consumed good
+ whose average consumption we test for price-differentiation - has more
+ variants of different prices than those of consumed good.
+ For example, detergent that serves clothes may not be varied but the washing
+ machine where detergents are used could be more nuanced.
+ Unfortunately we do not have even the cost estimate on assets owned by
+ the household - so we are left with ignoring this possibility at the moment.
  
 \end_layout
 
 \begin_layout Standard
 For most other non-food commodities, either aggregation and/or cluster-detection
  could help identify the price-differentiation.
- For example, if we look at the per-head consumption on bar soap, there
- seem to be two cost clusters in region dar-es-salaam - the dummy of per-head-co
-nsumption<6000 (i.e.
+ If we look at the per-head consumption cost on bar soap, there seem to
+ be two cost clusters in region dar-es-salaam - the dummy of per-head-consumptio
+n-cost <6000 (i.e.
  the cluster dummy) finds roomsnum, language and occupation all significant
  (total expenditure is not) i.e.
  those with a better-paying occupations and English-speaking abilities tend
- to spend disproportionately on bar-soap - this difference in consumption-per
- head could be used as the price-difference in our original sense.
+ to spend disproportionately on bar-soap - this difference in consumption
+ per-head costs could be used as the price-difference in our original sense.
  The similar cluster dummy for detergent is not found significant (except
  for roomsnum in dar-es-salaam ) - hence we ignore detergents for price-differen
 tiation.
  It can't be denied that such inferences are ad-hoc and dependent on whether
- there are any assets that may justify higher per-head consumption or not.
+ there are any assets that may justify higher per-head consumption cost
+ or not.
 \end_layout
 
 \begin_layout Standard
 Our end-goal is to differentiate the status-impact of consumption from the
  status-impact of assets and then consider a combined status impact form
- assets and consumption - so we can finally fit in the consumption status
- goods in the intertemporal substitution problem.
- The relative assets-ownership ranking of consumers cannot be ignored.
- Despite, having no cost information for assets owned, we consider the number
- of items owned assets for ranking of consumes i.e.
+ assets and consumption - so we may fit the function for consumption from
+ status goods into the intertemporal substitution problem.
+ The relative assets-ownership ranking of consumers is an important part
+ of this exercise.
+ The LSMS data does not have even the cost information for assets owned,
+ so we only consider the number of items owned for asset-ownership ranking
+ of consumes i.e.
  if someone has more assets than another person who has less or none of
  the same asset, then all else being equal the former is invariably of higher
  status than the latter.
  Since our goal is to finally combine the asset-ranking and consumption
- ranking, we also avoid double-counting the role of assets - since a lot
- of items are not consumed simply because the asset related to it is not
- owned by the consumer.
- Further, since the differences in per-head consumption are often due to
- the number of related asset owned by the consumer, we count for status-impact
- from the assets alone (not from the per-head consumption difference).
+ ranking, we avoid double-counting the role of assets - since a lot of items
+ are not consumed simply because the asset related to it is not owned by
+ the consumer.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/tree1.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:tree1"
+
+\end_inset
+
+Utility tree for Tanzania LSMS items (1) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/tree2.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:tree2"
+
+\end_inset
+
+Utility tree for Tanzania LSMS items (2) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -234,7 +392,6 @@ Electricity vs Kerosene costs per head in Dar-es-salaam
 \end_layout
 
 \begin_layout Standard
-\paragraph_spacing onehalf
 \begin_inset Box Boxed
 position "t"
 hor_pos "c"
@@ -474,6 +631,22 @@ k<-data.frame(hhid=k$hhid,num_items=k$number)
 \family typewriter
 \size small
 x<-merge(x=k,y=dsv,by="hhid",all.y=TRUE)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
 \end_layout
 
 \end_inset
