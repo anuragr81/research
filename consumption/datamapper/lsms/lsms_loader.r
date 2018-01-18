@@ -8,7 +8,8 @@ if (isClass("LSMSLoader")){
 
 ## all exported functions are declared here
 setClass("LSMSLoader", representation(combined_data_set="function",load_diary_file="function",
-                                      analyse_cj="function",load_ohs_file="function"))
+                                      analyse_cj="function",load_ohs_file="function",
+                                      match_recorded_prices="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -36,7 +37,7 @@ lsms_loader<-function(fu,ln) {
     return (c(7,12,19,53)) 
   }
   
-  load_diary_file <-function(dirprefix,year){
+  load_diary_file <-function(dirprefix,year,fu,ln){
     if (year == 2012){
       jdat <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_J1.dta",sep=""),
                        convert_factors = FALSE,hhidColName = "y3_hhid")
@@ -179,8 +180,68 @@ lsms_loader<-function(fu,ln) {
     stop(paste("Year:",year, " not supported"))
   }
   
+  convert_cj_item <- function(x){ 
+    
+    if (regexpr('^L',x)[[1]]==1)
+      
+    { return(as.integer(substring(x,2))) } 
+    
+    else { return (10000+as.integer(x)) }
+    
+  }
   
-  load_ohs_file <-function(year,dirprefix){
+  
+  match_recorded_prices <-function(year,dirprefix,fu,ln){
+    # loading ohs data
+    ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
+    print ("Loaded OHS file")
+    # loading diary data
+    dat2010<-load_diary_file(dirprefix = '.',year = 2010, fu=fu, ln=ln )
+    
+    dat2010$factor<-as.integer(dat2010$lwp_unit==1)+as.integer(dat2010$lwp_unit==2)/1000.0+as.integer(dat2010$lwp_unit==3)+as.integer(dat2010$lwp_unit==4)/1000.0+as.integer(dat2010$lwp_unit==5) 
+    dat2010$quantity<-dat2010$factor*dat2010$lwp
+    dat2010$price<-dat2010$cost/dat2010$quantity
+    print ("Loaded Diary file")
+    ## preparing market data
+    cjdat<-read.dta(paste(dirprefix,'/./lsms/TZNPS2COMDTA/COMSEC_CJ.dta',sep=''),convert.factors = FALSE) 
+    
+    cj <- fu()@get_translated_frame(dat=cjdat, names=ln()@ohs_seccj_columns_lsms_2010(), m=ln()@ohs_seccj_mapping_lsms_2010()) # recorded market prices
+    
+    cj$factor<-as.integer(cj$lwp_unit==1)+as.integer(cj$lwp_unit==2)/1000.0+as.integer(cj$lwp_unit==3)+as.integer(cj$lwp_unit==4)/1000.0+as.integer(cj$lwp_unit==5) # command label list (from labutil package) tells us the numeric values of factors
+    
+    cj<-subset(cj,!is.na(price) & !is.na(lwp) & lwp!=0 &price!=0)
+    
+    cj$recorded_quantity<-cj$lwp*cj$factor
+    
+    cj$recorded_price <-cj$price/cj$recorded_quantity
+    
+    k<-cj[,c("region","district","ward","ea","item","recorded_quantity","recorded_price")]
+    k$item<-as.numeric(lapply(X = k$item,FUN = convert_cj_item))
+    
+    k<-k[!is.na(k$recorded_price),]
+    
+    print ("Loaded market prices file")
+    
+    hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
+    
+    hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs in hhidsRegion
+    
+    householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")], dat2010[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
+    
+    print ("Merging market prices with ohs household ids")
+    hhidsRegionRecPrices<-merge(k[,c("item","region","district","ward","ea","recorded_price","recorded_quantity")],householdLocation,by = c("item","region","district","ward","ea"),all.y = TRUE)
+    
+    hhidsRegionRecPrices$pricediff<-abs(1-hhidsRegionRecPrices$price/hhidsRegionRecPrices$recorded_price)
+    
+    print ("Matching market prices with inferred prices")
+    minPriceDiffs<-ddply(hhidsRegionRecPrices,.(item,region,district,ward,ea,hhid),summarise,pricediff=min(pricediff))
+    
+    hhidsRegionRecClosestPrices<-merge(minPriceDiffs,hhidsRegionRecPrices,by=c("hhid","item","region","district","ward","ea","pricediff"))
+    print ("Returning")
+    return(hhidsRegionRecClosestPrices)
+  }
+  
+  load_ohs_file <-function(year,dirprefix,fu,ln){
     if (year ==2012){
       cbFileName <- paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/COM_SEC_CB.dta',sep="")
       cbdat<-read.dta(cbFileName,convert.factors = FALSE)
@@ -499,7 +560,7 @@ lsms_loader<-function(fu,ln) {
     cj <- fu()@get_translated_frame(dat=cjdat, names=ln@ohs_seccj_columns_lsms_2010(), m=ln@ohs_seccj_mapping_lsms_2010())
     cj$factor<-as.integer(cj$lwp_unit==1)+as.integer(cj$lwp_unit==2)/1000.0+as.integer(cj$lwp_unit==3)+as.integer(cj$lwp_unit==4)/1000.0+as.integer(cj$lwp_unit==5)
     cj$lwp <-cj$lwp*cj$factor
-    cj$price <cj$price/cj$lwp
+    #cj$price <-cj$price/cj$lwp
     
     if (missing(sl)){
       sl<-sort(unique(cj$item));
@@ -673,7 +734,7 @@ lsms_loader<-function(fu,ln) {
     stop(paste("merge not available for year:",year))
   }
   
-  combined_data_set<-function(year,dirprefix,selected_category,isDebug, set_depvar){
+  combined_data_set<-function(year,dirprefix,selected_category,isDebug, set_depvar, fu, ln){
     
     ############ PHASE 0 ########################
     if (missing(set_depvar)){
@@ -687,7 +748,7 @@ lsms_loader<-function(fu,ln) {
     }
     
     #*  (( Loading diary file
-    hhdat <- load_diary_file(dirprefix=dirprefix,year=year) # must provide total and visible expenditure (must be already translated)
+    hhdat <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
     
     #* Loading the person/family data fie
     ohsdat <-load_ohs_file(dirprefix=dirprefix,year=year) # (using fmld) must provide age (age_ref), gender(sex_ref), 
@@ -749,6 +810,6 @@ lsms_loader<-function(fu,ln) {
   
   
   return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
-             analyse_cj=analyse_cj,load_ohs_file=load_ohs_file))
+             analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices))
   
 }

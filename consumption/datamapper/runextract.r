@@ -5,12 +5,25 @@ debugSource('callertree.r')
 debugSource('./sa/sa.r')
 
 debugSource('us_cex/us_cex_loader.r')
-debugSource('translation/frameutils.R')
+
 
 #debugSource('us_cex/us_cex_loader.r');ds<-uscex(fcdu=fu)@combined_data_set(2un004,"C:/local_files/research/consumption/cex/cex_data/",201,FALSE)
 
-debugSource('lsms/lsms_normalizer.r');debugSource('lsms/lsms_loader.r');
+debugSource('lsms/lsms_normalizer.r');debugSource('lsms/lsms_loader.r');debugSource('translation/frameutils.R')
 #ln@food_categories_lsms_2010()
+
+convert_cj_item <- function(x){
+  
+  if (regexpr('^L',x)[[1]]==1){
+    return(as.integer(substring(x,2)))
+    
+  } else {
+    
+    return (10000+as.integer(x))
+    
+  }
+
+}
 
 merge2010_2012<-function(category){
   ll=lsms_loader(fu=fu,ln=lsms_normalizer);
