@@ -295,6 +295,37 @@ t errors in our technique and an double-evidence for clustering in prices.
  Following prices for cassava/dry flour indicate the difference between
  cassava and its dry flour in the market.
  The disparity in prices justifies the price-matching.
+ Unfortunately, there are quite some errors in recorded market price - such
+ as prices being far lower by a magnitude (e.g.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+region:7,district:3,ward:212,ea: 31 for item:203
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ has less than 10th of the price).
+ The evidence of items with multiples prices aggregated in one category
+ (e.g.
+ in cassava dry/flour or onions/tomatoes category) necessitates that we
+ view the different items as of same conspicuous value.
 \end_layout
 
 \begin_layout Standard
@@ -671,6 +702,15 @@ The use of market-recorded prices are to adjust the effective of region
  Lowest kurtosis is found husked rice (102), MaizeGrain (104), Millet-Flour(107)
 , Cassava-dryflour (202), Yams/cocoyams(204) (two varieties), Peas/lentils(401),
  Goat meat (801).
+\end_layout
+
+\begin_layout Standard
+If we were to back out the prices from expenditure, then we must ensure
+ that the expenditure recorded is accurate.
+ Unfortunately, there are many outliers in the data.
+ Sometimes, only one person in a district is recorded.
+ This magnifies the effect of the outlier observation on the price.
+ The aggregation of prices can only be done at region level for that purpose.
 \end_layout
 
 \begin_layout Standard
@@ -1075,118 +1115,6 @@ x<-merge(x=k,y=dsv,by="hhid",all.y=TRUE)
 \end_layout
 
 \begin_layout Plain Layout
-#Food data can be handled as follows
-\end_layout
-
-\begin_layout Plain Layout
-dat2010<-lsms_loader()@load_diary_file(dirprefix = ".",year = 2010,fu=fu,ln=lsms_
-normalizer)
-\end_layout
-
-\begin_layout Plain Layout
-#toString(unique(dat2010[dat2010$lwp>0,]$item)) - returns - "NA, 10110,
- 10301, 10401, 10601, 10602, 10801, 10809, 11001, 11003, 11101, 10102, 10203,
- 10205, 10501, 10701, 10703, 10807, 10901, 10902, 11004, 11104, 10108, 10802,
- 10804, 10105, 10109, 10502, 10104, 10808, 10201, 10704, 11106, 11107, 10303,
- 10702, 10803, 10107, 10603, 10112, 10302, 10806, 10206, 10903, 10106, 10103,
- 11002, 10101, 11105, 10202, 10204, 10111, 10207, 11102, 11103, 11108, 10503,
- 10810, 10504, 10805"
-\end_layout
-
-\begin_layout Plain Layout
-dat2010$factor<-as.integer(dat2010$lwp_unit==1)+as.integer(dat2010$lwp_unit==2)/10
-00.0+as.integer(dat2010$lwp_unit==3)+as.integer(dat2010$lwp_unit==4)/1000.0+as.intege
-r(dat2010$lwp_unit==5) 
-\end_layout
-
-\begin_layout Plain Layout
-dat2010$quantity<-dat2010$factor*dat2010$lwp
-\end_layout
-
-\begin_layout Plain Layout
-dat2010$price<-dat2010$cost/dat2010$quantity
-\end_layout
-
-\begin_layout Plain Layout
-di<-subset(dat2010,item == 10110)
-\end_layout
-
-\begin_layout Plain Layout
-res=kmeans(x = di$price,centers = 3) ; res[[c("betweenss")]]/res[[("tot.withinss"
-)]]
-\end_layout
-
-\begin_layout Plain Layout
-#prices from market
-\end_layout
-
-\begin_layout Plain Layout
-cjdat<-read.dta('../lsms/TZNPS2COMDTA/COMSEC_CJ.dta',convert.factors = FALSE)
-\end_layout
-
-\begin_layout Plain Layout
-cj <- fu()@get_translated_frame(dat=cjdat, names=lsms_normalizer()@ohs_seccj_col
-umns_lsms_2010(), m=lsms_normalizer()@ohs_seccj_mapping_lsms_2010()) # recorded
- market prices
-\end_layout
-
-\begin_layout Plain Layout
-cj$factor<-as.integer(cj$lwp_unit==1)+as.integer(cj$lwp_unit==2)/1000.0+as.integer(c
-j$lwp_unit==3)+as.integer(cj$lwp_unit==4)/1000.0+as.integer(cj$lwp_unit==5)
- # command label list (from labutil package) tells us the numeric values
- of factors
-\end_layout
-
-\begin_layout Plain Layout
-cj<-subset(cj,!is.na(price) & !is.na(lwp) & lwp!=0 &price!=0)
-\end_layout
-
-\begin_layout Plain Layout
-cj$recorded_quantity<-cj$lwp*cj$factor
-\end_layout
-
-\begin_layout Plain Layout
-cj$recorded_price <-cj$price/cj$recorded_quantity
-\end_layout
-
-\begin_layout Plain Layout
-k<-cj[,c("region","district","ward","ea","item","recorded_quantity","recorded_pr
-ice")]
-\end_layout
-
-\begin_layout Plain Layout
-convert_cj_item <- function(x){ 
-\end_layout
-
-\begin_layout Plain Layout
-if (regexpr('^L',x)[[1]]==1)
-\end_layout
-
-\begin_layout Plain Layout
-{ return(as.integer(substring(x,2))) } 
-\end_layout
-
-\begin_layout Plain Layout
-else { return (10000+as.integer(x)) }
-\end_layout
-
-\begin_layout Plain Layout
-}
-\end_layout
-
-\begin_layout Plain Layout
-# test - as.numeric(lapply(X = c("1","L203"),FUN = convert_cj_item))
-\end_layout
-
-\begin_layout Plain Layout
-k$item<-as.numeric(lapply(X = k$item,FUN = convert_cj_item))
-\end_layout
-
-\begin_layout Plain Layout
-k<-k[!is.na(k$recorded_price),]
-\end_layout
-
-\begin_layout Plain Layout
 ## item plot <start>
 \end_layout
 
@@ -1211,36 +1139,6 @@ plot3d(b$region,b$lwp*b$factor, b$recorded_price)
 \end_layout
 
 \begin_layout Plain Layout
-#see item prices
-\end_layout
-
-\begin_layout Plain Layout
-ohs<-ll@load_ohs_file(year = 2010, dirprefix = '.',fu = fu,ln = lsms_normalizer)
-\end_layout
-
-\begin_layout Plain Layout
-hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique
- ignores person id
-\end_layout
-
-\begin_layout Plain Layout
-hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs
- in hhidsRegion
-\end_layout
-
-\begin_layout Plain Layout
-#cjCodes=['101', '102', '103', '104', '105', '106', '106', '107', '107',
- '109', '109', '201', '202', '202', '203', '204', '204', '205', '206', '301',
- '401', '401', '501', '502', '601', '602', '602', '701', '702', '703', '703',
- '801', '802', '804', '807', '808', '808', '901', '903', '1001', '1003',
- '1101', '1107', 'L201', 'L207', 'L208', '999']
-\end_layout
-
-\begin_layout Plain Layout
-#f= lambda x : int(x) + 10000 if x[0]!='L' else x[1:]
-\end_layout
-
-\begin_layout Plain Layout
 #ddply(k,.(item),summarise,s=skewness(recorded_price),k=kurtosis(recorded_price),
 n=length(recorded_price)) #gives how prices vary
 \end_layout
@@ -1252,35 +1150,76 @@ n=length(recorded_price)) #gives how prices vary
 \end_layout
 
 \begin_layout Plain Layout
-householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")],
- dat2010[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
+#loading closest prices
 \end_layout
 
 \begin_layout Plain Layout
-hhidsRegionRecPrices<-merge(k[,c("item","region","district","ward","ea","recorde
-d_price","recorded_quantity")],householdLocation,by = c("item","region","distric
-t","ward","ea"),all.y = TRUE)
+ll=lsms_loader(fu,ln);cp<-ll@match_recorded_prices(year = 2010,dirprefix
+ = '../', fu = fu , ln = ln)
 \end_layout
 
 \begin_layout Plain Layout
-hhidsRegionRecPrices$pricediff<-abs(1-hhidsRegionRecPrices$price/hhidsRegionRecP
-rices$recorded_price)
+cp<-subset(cp,!is.na(price) & item>10000)
 \end_layout
 
 \begin_layout Plain Layout
-minPriceDiffs<-ddply(hhidsRegionRecPrices,.(item,region,district,ward,ea,hhid),su
-mmarise,pricediff=min(pricediff))
+prices<-merge(ddply(cp,.(item,region),summarise,localmedianprice=mean(quantile(pr
+ice,c(.4,.6)))),ddply(cp,.(item),summarise,natmedianprice=mean(quantile(price,c(.4,.6
+)))))
 \end_layout
 
 \begin_layout Plain Layout
-hhidsRegionRecClosestPrices<-merge(minPriceDiffs,hhidsRegionRecPrices,by=c("hhid
-","item","region","district","ward","ea","pricediff"))
+cpTemp<-merge(prices,cp)
 \end_layout
 
 \begin_layout Plain Layout
-pricesTooFar<-hhidsRegionRecClosestPrices[hhidsRegionRecClosestPrices$pricediff>
-2.
- & !is.na(hhidsRegionRecClosestPrices$pricediff),]
+print (paste("Number of households ignored:",length(unique(subset(cpTemp,abs(1-l
+ocalmedianprice/natmedianprice)>=1.)$hhid))))
+\end_layout
+
+\begin_layout Plain Layout
+cpTemp<-(subset(cpTemp,abs(1-localmedianprice/natmedianprice)<1.))
+\end_layout
+
+\begin_layout Plain Layout
+prices<-merge(ddply(cpTemp,.(item,region),summarise,localmedianprice=mean(quantil
+e(price,c(.4,.6)))),ddply(cpTemp,.(item),summarise,natmedianprice=mean(quantile(pri
+ce,c(.4,.6)))))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-merge(prices,cpTemp)
+\end_layout
+
+\begin_layout Plain Layout
+####
+\end_layout
+
+\begin_layout Plain Layout
+cpp<-subset(cp,!is.na(price) & item>10000)
+\end_layout
+
+\begin_layout Plain Layout
+cpp<-subset(cp,!is.na(price))[,c("hhid","item","region","district","ward","ea","q
+uantity","price")]
+\end_layout
+
+\begin_layout Plain Layout
+cpp$cost <- cpp$price* cpp$quantity
+\end_layout
+
+\begin_layout Plain Layout
+cppe<-merge(cpp,ddply(cpp,.(hhid),summarise,totexp=sum(cost)),by="hhid")
+\end_layout
+
+\begin_layout Plain Layout
+cppe$fraction<-cppe$cost/cppe$totexp
+\end_layout
+
+\begin_layout Plain Layout
+ddply(subset(cppe,region==1 & district == 2),.(item,region,district),summarise,hh
+id=hhid,rank=rank(cost)/length(cost),cost) # gives the sorting order of
+ a household for a given item within district
 \end_layout
 
 \end_inset
@@ -1302,6 +1241,404 @@ twocolumn
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+
+\size normal
+The tree of commodities
+\end_layout
+
+\begin_layout Standard
+Once prices are cleaned (outlying priced purchases removed), then we can
+ aggregate the relative prices at every state of purchase in the tree.
+ The relative price was supposed to be distribution of items.
+ One particular house 0102003003016101 for example, spends on sugar (301),
+ Onions/tomatoes(601), Fruits(703), Beef(802) and salt (1003).
+ Nearly 74% of the sum is spent on beef.
+ Another house 0102003003000401 spends on 18% on beef while 19% on cooking
+ oil (1001) and about 14% on buns cakes(110).
+ We think about ranking in every district to see (however the data is quite
+ sparse for some districts - only expenditure for 10 households is available
+ for region 1 and district 2 for example).
+ Top-spender of everything would automatically have the highest status.
+ Notice that rank is determined by cost not by quantity - the difference
+ of prices doesn't matter as long as rank in with a region.
+\end_layout
+
+\begin_layout Subsection
+Rank vs Quantity
+\end_layout
+
+\begin_layout Standard
+A person consuming higher automatically is ranked higher in consumption.
+ Why should be then introduce rank when quantity already measures it (and
+ is easier to represent).
+ The reason we choose rank is because of its easier to determine within
+ a context.
+ A view on distribution of q within an area would provide the same ideas
+ - ranking after all is also a function of q.
+ If we keep the function of q as the generic representation of rank - then
+ we can see this function as a mapping onto clusters.
+ Let's take a world of three commodities A, B, C where n households buy
+ what they need and can afford.
+ A consumer 
+\begin_inset Formula $i$
+\end_inset
+
+ buys 
+\begin_inset Formula $q_{i,A},q_{i,B}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{i,C}$
+\end_inset
+
+ where all of them can be 0.
+ 
+\begin_inset Formula $f(\boldsymbol{q_{A}})$
+\end_inset
+
+ tells us which status cluster the consumer would belong to.
+ One could consider the group function 
+\begin_inset Formula $f(\boldsymbol{q_{A}},\boldsymbol{q_{B},q_{C}})$
+\end_inset
+
+ that finds the status.
+ This mapping could be utility itself.
+\end_layout
+
+\begin_layout Standard
+We haven't actually addressed how a tree develops in this mapping.
+ For any tree, we see what's at the top (root) of the tree.
+ By considering a tree (which we could in just three commodity world just
+ the same), we look what a consumer gets at the top.
+ A tree is different from the sense it is seen in the regular theory - where
+ food, entertainment, energy etc.
+ are at the first level of the tree and each sub-tree contains others elements.
+ In our case, we wish to combine utilities the same way - our claim being
+ status aggregated from amongst components the same way.
+ We also claim that status is not constituted in any other subtree i.e.
+ nobody buys a status good for the sake of buying a status good - status
+ is constituted in buying everything.
+ Status is thus always implicitly from the sum-total of all items - except
+ for jewelry and snob items that actually matter less and we care less about
+ them when we observe the masses (particularly food items).
+\end_layout
+
+\begin_layout Standard
+So in our three commodity world, if the goods are all separable and additive
+ - which means utilities other than status simply add up.
+ However, the status utility is not separable and can be obtained from all
+ items A, B and C (to varied levels).
+ A correlation with the richer (higher permanent income) cluster can be
+ a measure of how conspicuous the item is.
+ But the degree of separation between ranking (distance between clusters)
+ matters for status.
+ We don't find anything else to matter at this point.
+ From a general point of view, only the supply side concerns can tell us
+ whether clustering has significance or not.
+ It may be that the rich don't eat potatoes so a class X eating more potatoes
+ than Y obviously does not mean that potatoes are a conspicuous good.
+ Notice that we don't use the fact that rich don't buy potatoes while the
+ poor do (using income elasticity to decide).
+ Instead we only make the decision based on availability and price (
+\begin_inset Formula $p-max(p_{i})$
+\end_inset
+
+ would actually measure the price).
+ The distribution of prices doesn't tell about the availability- except
+ if we infer availability from variation of observed market prices with
+ respect to region.
+ For commodities A,B and C, if our tree had the root being food with the
+ only first level nodes being starch, protein 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+These are less of an instance of nutritional categories than one where categorie
+s are based on food habits i.e.
+ food items with both protein and carbs in them don't pose a classification
+ problem as long as the consumers are able to classify them either as protein
+ or carbohydrates.
+ 
+\end_layout
+
+\end_inset
+
+.
+ Except when buying snob items, a consumer doesn't 
+\begin_inset Quotes eld
+\end_inset
+
+need
+\begin_inset Quotes erd
+\end_inset
+
+ conspicuous consumption except through the relative differences with respect
+ to other consumers.
+ Let's assume that 
+\begin_inset Formula $A,B\epsilon protein$
+\end_inset
+
+ and 
+\begin_inset Formula $C\epsilon starch$
+\end_inset
+
+.
+ Then there is no scope for conspicuous consumption within C.
+ Since we assume protein and carb utilities to be separable and we also
+ assume that no consumer goes to purchase anything conspicuous - status
+ is inferred from the availability of other options.
+ Now one of A or B would be pricier than the other.
+ A crude measure of our status criterion is the dispersion in price (
+\begin_inset Formula $p-max(p)$
+\end_inset
+
+) - where max is taken over all the products in the category.
+ While this could be improved - it marks a higher priced commodity of with
+ a higher status measure.
+ If we were to infer the status of consumers based on the quantities they
+ choose for A,B,C, then there are a few questions to be answered:
+\end_layout
+
+\begin_layout Enumerate
+Does spending more on item C(which has no differentiation) have any influence
+ on status? Yes, because more spending should still mean a statement of
+ excess.
+ However, if for two consumers 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+, the quantities consumed for A,B, are lower for 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ with respective to 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+ and higher for C, then we would think that the status must be higher for
+ 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+ (because the unidirectional nature of high price consumption
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A consumer who can buy more of an expensive item can definitely buy more
+ of the cheaper item - but not the other way.
+\end_layout
+
+\end_inset
+
+).
+ Having already counted for the effect of price and the substitution through
+ slutsky equation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+We already know that i) if A,B are more expensive than C, then the consumer
+ can't buy A,B as easily as she can C (income effect) and ii) A, B can be
+ substituted with each other based on their price or preference ( we assume
+ that very few consumers would be substituting A with C or B with C).
+\end_layout
+
+\end_inset
+
+ , we must add the status utility to the the final utility - in order to
+ have a fuller interpretation of quantities consumed.
+ Notice that the smoothening of status differences (i.e.mapping of consumed
+ quantities onto observed status classes) is a property of the status utility
+ function and does not interfere with the regular utility.
+ Obviously, you can choose to show much rice you have at the party - but
+ it won't be the same as having 5 different meats (or alcohols) at the party.
+ Variety and price differences between them is more crucial to status utility
+ than quantity alone.
+\end_layout
+
+\begin_layout Enumerate
+Does it matter whether C is publicly viewed or not? No, it is hard to be
+ imagine that different items in the same functional category have different
+ visibility except what is expressed through price.
+ In other words, the market prices the visibility so the price variation
+ category is sufficient.
+\end_layout
+
+\begin_layout Enumerate
+Where does availability fit in? Availability actually matters throughout.
+ It is not trivial to talk about status advantages of an item that is available
+ in an area compared to where it isn't.
+\end_layout
+
+\begin_layout Subsection
+Utility function
+\end_layout
+
+\begin_layout Standard
+We're given quantities 
+\begin_inset Formula $\boldsymbol{q_{i}}$
+\end_inset
+
+ for every consumer, which is a vector of quantities for items 
+\begin_inset Formula $\boldsymbol{i}=\{i_{1},i_{2}..i_{m}\}$
+\end_inset
+
+.
+ We can back out or insert the recorded prices wherever possible - but as
+ such we don't need to use the price anywhere at all.
+ If our utility function depends on quantities of items consumed and we
+ don't want to study the change in preference of items as prices change,
+ then it is sufficient to use commodity types as the only proxy of prices.
+ For example, if we're not interested in the question whether more expensive
+ food items would cause a decline in the spending on a wedding then our
+ analysis doesn't need to have the price of foods and the whole analysis
+ can depend on the expenditures and quantities alone.
+ Expenditure allows us to understand income effects and quantities allow
+ us to talk about felicity.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $u=\Pi(q-\gamma_{i})^{\beta_{i}}$
+\end_inset
+
+ is the linear expenditure utility function.
+ We can use a more PIGLOG models for cost function (and estimate simply
+ using a regression).
+ We need grouping only for the sake of aggregation of conspicuous goods.
+ We have therefore two claims for our convenience i) there is a two-state
+ budgeting ii) consumers get rewarded more by choosing higher priced items.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $u_{food}=f(g_{protein}(x,p),g_{carbs}(x,p),g_{fat}(x,p),g_{vegetables}(x,p),g_{fruits}(x,p))$
+\end_inset
+
+.
+ We have been warned that luxuries and necessities can't go together in
+ this setting.
+\end_layout
+
+\begin_layout Standard
+The fundamental question is - do we really need to group the tree.
+ The rationale we had was just that conspicuous items are possible to be
+ had in every category.
+ In the complete utility function, we'll have new categories that are more
+ directly conspicuous (e.g.
+ electronics), but looking at food alone, we can only observe conspicuous
+ consumption in food
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If individuals spend proportionately less on expensive food items when they
+ have electricity that should be evident from analysis.
+ 
+\end_layout
+
+\end_inset
+
+.
+ Groups let us understand the group elasticity but other than that they
+ have no particular use.
+ If we're only interested in measuring total conspicuous utility, we can
+ as well do it while keeping all elements separate and setting up a utility
+ function just so that expensive items reward more to the consumer (i.e.
+ she gets higher utility with the expensive item).
+ The group elasticity may help us explain how are the groups affected because
+ of conspicuous consumption - for example - if we split all groups into
+ of status and non-status value: 
+\begin_inset Formula $u_{food}=f(g_{protein\_status}(x,p),g_{protein\_non\_status}(x,p),g_{carbs\_status}(x,p),g_{carbs\_nonstatus}(x,p),g_{fat\_status}(x,p),g_{fat\_nonstatus}(x,p),g_{vegetables\_status}(x,p),g_{vegetables\_nonstatus}(x,p),g_{fruits\_status}(x,p),g_{fruits\_nonstatus}(x,p))$
+\end_inset
+
+.
+ In absence of groups, our utility function would just look like as.
+ 
+\begin_inset Formula $u=f(q_{beef})f(q_{rice})...\times s(protein)\times s(carb)\times s(fat)\times s(fruits)\times s(vegetables)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $s(c)=f(p_{i}-p_{c})$
+\end_inset
+
+.
+ Let's observe this with a three-good example.
+ The utility function can be of the form 
+\begin_inset Formula $u_{food}=f_{1}(q_{A},q_{B})f_{2}(q_{C})f_{1,s}(q_{A},q_{B})f_{2,s}(q_{C})$
+\end_inset
+
+ or of the form 
+\begin_inset Formula $u_{food}=h(q_{A})h(q_{B})h(q_{C})s(q_{A})s(q_{B})s(q_{C})$
+\end_inset
+
+.
+ The former method utility function allows us to talk about elasticity of
+ a category whereas the latter only tells us about the elasticity of a good.
+ The criteria of fit is the only way to ensure that price differences actually
+ explain the expenditure better.
+ For starting out, we could just have 
+\begin_inset Formula $u=U(f(x_{AB}),g(x_{C}))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A more thorough comparison of utility functions may be possible once a linear
+ expenditure system is fitted on to the consumption data.
+ Using the Marshallian demand function for utility 
+\begin_inset Formula $u=\Pi(q_{k}-\gamma_{k})^{\beta_{k}}$
+\end_inset
+
+(where 
+\begin_inset Formula $\sum\beta_{k}=1)$
+\end_inset
+
+.
+ the Marshallian demand function is 
+\begin_inset Formula $q_{k}=\gamma_{k}+\frac{\beta_{k}}{p_{k}}(x-\sum p_{j}\gamma_{j})$
+\end_inset
+
+ where 
+\begin_inset Formula $x=\sum p_{j}q_{j}$
+\end_inset
+
+.
+ Since we observe expenditures (instead of prices) in the data, we could
+ use 
+\begin_inset Formula $p_{i}=\frac{e_{i}}{q_{i}}$
+\end_inset
+
+ in the demand function.
+ Linear expenditure system would not provide a reasonable estimate of substitute
+s vs complements - but it may still be worthwhile to repeat Stone's analysis.
+ I would like to .
+ Using a price index in the time series that has been used by Deaton et
+ al.
+ can help ignore the regional variations in prices.
+\end_layout
+
+\begin_layout Standard
+A numerical approach may be to optimise utility programmatically (instead
+ of through first-order conditions).
+ 
+\end_layout
+
+\begin_layout Subsection
+Questions to the advisors
+\end_layout
+
+\begin_layout Enumerate
+Are there any suggestions to ignore price variations? Any conventional literatur
+e on price indices that I should be aware of?
 \end_layout
 
 \end_body

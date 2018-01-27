@@ -9,7 +9,7 @@ if (isClass("LSMSLoader")){
 ## all exported functions are declared here
 setClass("LSMSLoader", representation(combined_data_set="function",load_diary_file="function",
                                       analyse_cj="function",load_ohs_file="function",
-                                      match_recorded_prices="function"))
+                                      match_recorded_prices="function",get_inferred_prices="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -239,6 +239,27 @@ lsms_loader<-function(fu,ln) {
     hhidsRegionRecClosestPrices<-merge(minPriceDiffs,hhidsRegionRecPrices,by=c("hhid","item","region","district","ward","ea","pricediff"))
     print ("Returning")
     return(hhidsRegionRecClosestPrices)
+  }
+
+  get_inferred_prices <-function(year,dirprefix,fu,ln){
+    # loading ohs data
+    ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
+    print ("Loaded OHS file")
+    # loading diary data
+    dat2010<-load_diary_file(dirprefix = '.',year = 2010, fu=fu, ln=ln )
+    
+    dat2010$factor<-as.integer(dat2010$lwp_unit==1)+as.integer(dat2010$lwp_unit==2)/1000.0+as.integer(dat2010$lwp_unit==3)+as.integer(dat2010$lwp_unit==4)/1000.0+as.integer(dat2010$lwp_unit==5) 
+    dat2010$quantity<-dat2010$factor*dat2010$lwp
+    dat2010$price<-dat2010$cost/dat2010$quantity
+    print ("Loaded Diary file")
+    
+    hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
+    
+    hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs in hhidsRegion
+    
+    householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")], dat2010[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
+    print ("Returning prices with household location")
+    return(householdLocation)
   }
   
   load_ohs_file <-function(year,dirprefix,fu,ln){
@@ -810,6 +831,7 @@ lsms_loader<-function(fu,ln) {
   
   
   return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
-             analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices))
+             analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, 
+             get_inferred_prices=get_inferred_prices))
   
 }
