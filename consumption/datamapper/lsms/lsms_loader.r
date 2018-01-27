@@ -9,7 +9,8 @@ if (isClass("LSMSLoader")){
 ## all exported functions are declared here
 setClass("LSMSLoader", representation(combined_data_set="function",load_diary_file="function",
                                       analyse_cj="function",load_ohs_file="function",
-                                      match_recorded_prices="function",get_inferred_prices="function"))
+                                      match_recorded_prices="function",get_inferred_prices="function",
+                                      aggregate_local_prices="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -260,6 +261,27 @@ lsms_loader<-function(fu,ln) {
     householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")], dat2010[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
     print ("Returning prices with household location")
     return(householdLocation)
+    
+    
+  }
+  
+  aggregate_local_prices<-function (cp){
+    
+    cp<-subset(cp,!is.na(price) & item >10000 & !is.na(region))
+    
+    prices<-merge(ddply(cp,.(item,region),summarise,localmedianprice=mean(quantile(price,c(.4,.6)))),ddply(cp,.(item),summarise,natmedianprice=mean(quantile(price,c(.4,.6)))))
+    
+    cpTemp<-merge(prices,cp)
+    
+    print (paste("Number of households ignored due to distant expenditure/price reporting:",length(unique(subset(cpTemp,abs(1-localmedianprice/natmedianprice)>=1.)$hhid))))
+    
+    cpTemp<-(subset(cpTemp,abs(1-localmedianprice/natmedianprice)<1.))
+    
+    prices<-merge(ddply(cpTemp,.(item,region),summarise,localmedianprice=mean(quantile(price,c(.4,.6)))),ddply(cpTemp,.(item),summarise,natmedianprice=mean(quantile(price,c(.4,.6)))))
+    
+    cp<-merge(prices,cpTemp)
+    
+    return(cp)
   }
   
   load_ohs_file <-function(year,dirprefix,fu,ln){
@@ -832,6 +854,6 @@ lsms_loader<-function(fu,ln) {
   
   return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
              analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, 
-             get_inferred_prices=get_inferred_prices))
+             get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices))
   
 }
