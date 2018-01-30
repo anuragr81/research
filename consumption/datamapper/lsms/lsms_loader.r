@@ -10,7 +10,7 @@ if (isClass("LSMSLoader")){
 setClass("LSMSLoader", representation(combined_data_set="function",load_diary_file="function",
                                       analyse_cj="function",load_ohs_file="function",
                                       match_recorded_prices="function",get_inferred_prices="function",
-                                      aggregate_local_prices="function"))
+                                      aggregate_local_prices="function",add_localmedian_price_columns="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -241,7 +241,7 @@ lsms_loader<-function(fu,ln) {
     print ("Returning")
     return(hhidsRegionRecClosestPrices)
   }
-
+  
   get_inferred_prices <-function(year,dirprefix,fu,ln){
     # loading ohs data
     ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
@@ -282,6 +282,21 @@ lsms_loader<-function(fu,ln) {
     cp<-merge(prices,cpTemp)
     
     return(cp)
+  }
+  
+  add_localmedian_price_columns<-function(cp)
+  {
+    p<-cp;
+    
+    for (i in unique(p$item)){
+      
+      print(paste('Appending item',i))
+      
+      p<- merge(p,rename(x = unique(subset(p,item==i)[c("region","localmedianprice")]), c("localmedianprice"=paste("localmedianprice_",i,sep=""))),by=c("region"),all=TRUE)
+      
+    }
+    
+    return(p)
   }
   
   load_ohs_file <-function(year,dirprefix,fu,ln){
@@ -340,7 +355,7 @@ lsms_loader<-function(fu,ln) {
       cdat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_C.dta',sep=""),
                      convert_factors = FALSE,
                      hhidColName = "y3_hhid")
-
+      
       #*    Read section C
       c <- fu()@get_translated_frame(dat=cdat,
                                      names=ln()@get_ohs_secc_columns_lsms_2012(),
@@ -352,7 +367,7 @@ lsms_loader<-function(fu,ln) {
       
       #*    calculated age by subtracting YOB from 2012 (survey year)
       #*    read section J for housing data (rent, number of primary/secondary rooms)
-
+      
       jdat <- read.dta(paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_I.dta',sep=""),convert.factors=FALSE)
       
       j <- fu()@get_translated_frame(dat=jdat,
@@ -854,6 +869,7 @@ lsms_loader<-function(fu,ln) {
   
   return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
              analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, 
-             get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices))
+             get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices,
+             add_localmedian_price_columns=add_localmedian_price_columns))
   
 }

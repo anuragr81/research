@@ -12,18 +12,15 @@ debugSource('us_cex/us_cex_loader.r')
 debugSource('lsms/lsms_normalizer.r');debugSource('lsms/lsms_loader.r');debugSource('translation/frameutils.R')
 #ln@food_categories_lsms_2010()
 
-convert_cj_item <- function(x){
-  
-  if (regexpr('^L',x)[[1]]==1){
-    return(as.integer(substring(x,2)))
-    
-  } else {
-    
-    return (10000+as.integer(x))
-    
-  }
 
-}
+pq_regress_x_intercept<-function(pq,x){ return((lm(pq~x))$coeff[["(Intercept)"]]) }
+pq_regress_x_coeff<-function(pq,x){ return((lm(pq~x))$coeff[["x"]]) }
+
+pq_regress_logx_coeff<-function(w,logx){ return((lm(w~logx))$coeff[["logx"]]) }
+pq_regress_logx_intercept<-function(w,logx){ return((lm(w~logx))$coeff[["(Intercept)"]]) }
+
+#ddply(cp,.(item),summarise,x_coeff=pq_regress_x_coeff(pq=pq,x=x),intercept=pq_regress_x_intercept(pq=pq,x=x))
+#ddply(cp,.(item),summarise,x_coeff=pq_regress_logx(w=pq/x,logx=log(x)),intercept=pq_regress_logx_intercept(w=pq/x,logx=log(x)))
 
 merge2010_2012<-function(category){
   ll=lsms_loader(fu=fu,ln=lsms_normalizer);
