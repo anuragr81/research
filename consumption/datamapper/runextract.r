@@ -12,6 +12,24 @@ debugSource('us_cex/us_cex_loader.r')
 debugSource('lsms/lsms_normalizer.r');debugSource('lsms/lsms_loader.r');debugSource('translation/frameutils.R')
 #ln@food_categories_lsms_2010()
 
+run_price_regress<-function(p){
+  priceColumns <- NULL
+  
+  for (column in colnames(p)){
+    if (regexpr("^localmedianprice_",column)[[1]]==1)
+    { 
+      
+      lenNAPrices<-dim(p[!is.na(p[,column]),])[1]
+      print(paste(column,":",lenNAPrices))
+      if (lenNAPrices <= 0){
+        stop("Prices not available")
+      }
+      priceColumns<-c(priceColumns,column);
+    }
+  }
+}
+
+
 
 pq_regress_x_intercept<-function(pq,x){ return((lm(pq~x))$coeff[["(Intercept)"]]) }
 pq_regress_x_coeff<-function(pq,x){ return((lm(pq~x))$coeff[["x"]]) }

@@ -39,7 +39,8 @@ def parse_tree(start,t):
 		return (start,t)
 	raise ValueError("Invalid type: %s" % type(t) )
 
+graph = pydot.Dot(graph_type='graph')
 res= parse_tree("ET",{'ET':expenseTree})
 
 #print parse_tree("ET",{"one":"One"})
-#graph.write_png('c:/temp/test.png')
+graph.write_png('c:/temp/test.png')
