@@ -21,8 +21,23 @@ expenseTree= {
          'fat':['peanuts','coconut','cashew_almonds','nut_products','cooking_oil','butter_margarine',],
          'vegetables':['onion','greens','dried_canned_veg',] ,
          'fruits':['banana_ripe','citrus','mangoes','sugarcane'],
-         'protein':['goat','beef','pork','chicken','wild_birds','wild_meat','fish_seafood','dried_canned_fish','packaged_fish','milk','milk_products','canned_mik'], 
+         'protein':['goat','beef','pork','chicken','wild_birds','wild_meat','fish_seafood','dried_canned_fish','packaged_fish','fresh_milk','milk_products','canned_mik'], 
          'condiments': ['spices','salt'] },
+}
+
+foodGroups = {
+         'alcohol' :['beer','brews','winespirits'],
+         'beverages':['tea','coffee','miscdrinkpowder','canned_drink','readymade_tea','readymade_coffee',],
+         'starch': ['rice_husked','rice_paddy','maize_green','maize_grain','maize_flour','millet_grain','millet_flour','wheat','bread','bunscakes','pasta','othercereal','pulses',] ,
+         'vegstarch' : ['cassava_fresh','cassava_flour','sweet_potato','yam','potatoes','banana_green','othervegstarch'], 
+         'sugars':['sugar','sweet','honey'], 
+         'fat':['peanuts','coconut','cashew_almonds','nut_products','milk_products'],
+	     'oil':['cooking_oil','butter_margarine',],
+         'vegetables':['onion','greens','dried_canned_veg',] ,
+         'fruits':['banana_ripe','citrus','mangoes','sugarcane'],
+         'meat':['goat','beef','pork','chicken','wild_birds','wild_meat','fish_seafood','dried_canned_fish','packaged_fish',],
+     	 'milk': ['fresh_milk','canned_milk'], 
+         'condiments': ['spices','salt'] ,
 }
 
 caloriesDict =  { 'rice_paddy': { 'calories': 360.*.8 },
@@ -62,14 +77,14 @@ caloriesDict =  { 'rice_paddy': { 'calories': 360.*.8 },
 		  'mangoes'             : {'calories': 60. },
 		  'sugarcane'           : {'calories': 180. },
 		  'goat'                : {'calories': 109. },
-		  'beef'                : {'calories': 250 . },
+		  'beef'                : {'calories': 250. },
 		  'pork'                : {'calories': 300. },
 		  'chicken'             : {'calories': 160. },
 		  'wild_birds'          : {'calories': 160. },
 		  'fish_seafood'        : {'calories': 100. },
 		  'dried_canned_fish'   : {'calories': 150. },
 		  'packaged_fish'       : {'calories': 100. },
-		  'milk'                : {'calories': 40. },
+		  'fresh_milk'                : {'calories': 40. },
 		  'milk_products'       : {'calories': 100. },
 		  'canned_milk'         : {'calories': 40. },
 	        }
@@ -77,18 +92,19 @@ caloriesDict =  { 'rice_paddy': { 'calories': 360.*.8 },
 	#graph.write_png('c:/temp/'+str(i)+".png")
 	#graph.write_png('file'+str(i)+".png")
 
-def parse_tree(start,t):
+def parse_tree(graph,start,t):
 	if isinstance(t,dict):
-		return [ parse_tree(key,t[key]) for key in t]
+		return [ parse_tree(graph,key,t[key]) for key in t]
 	if isinstance(t,list):
-		return [parse_tree(start,x) for x in t ]
+		return [parse_tree(graph,start,x) for x in t ]
 	if isinstance(t,str):
 		graph.add_edge(pydot.Edge(start,t))
 		return (start,t)
 	raise ValueError("Invalid type: %s" % type(t) )
 
-graph = pydot.Dot(graph_type='graph')
-res= parse_tree("ET",{'ET':expenseTree})
 
-#print parse_tree("ET",{"one":"One"})
-#graph.write_png('c:/temp/test.png')
+for i in foodGroups:
+    graph = pydot.Dot(graph_type='graph')
+    res= parse_tree(graph,"ET",{'ET':{i:foodGroups[i]}})
+    graph.write_png('c:/temp/file'+str(i)+".png")
+    print( {i:foodGroups[i]} )
