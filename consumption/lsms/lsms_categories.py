@@ -1,11 +1,11 @@
-import pydot
+
 
 expenseTree= {
 'intoxication' :['cigarettes','beer','brews','winespirits'],
 'home_energy':['charcoal','electricity','gas','kerosene','matches'],
 'transport':['petrol','public_transport',],
 'communications':['cellphone_voucher','phone',],
-'personal_products':['bar_soap','toothpaste','shampoo'],
+'personal_products':['bar_soap','toothpaste','shampoo','skin_cream','other_personal'],
 'household_products':['clothes_soap','toilet_paper','bulbs','misc_cleaning','carpet','linen','mat','mosquito_net','mattress',],
 'household_repair':['household_products_repair','house_repair','motor_repair','bicycle_repair','consumer_durables_repair',],
 'appliances':['light_bulbs','sports_hobby','camera',],
@@ -14,20 +14,20 @@ expenseTree= {
 'housing':['mortgage','council_rates','building_material','bamboo','grass'],
 'legalfinance':['insurance','legal'],
 'social_events':['marriage','bride_price','funeral'],
-'food': {'beverages':['water','tea','coffee','miscdrinkpowder','canned_drink','readymade_tea','readymade_coffee',],
+'food': {'beverages':['water','tea','coffee','miscdrinkpowder','canned_drink','readymade_tea_coffee'],
          'starch': ['rice_husked','rice_paddy','maize_green','maize_grain','maize_flour','millet_grain','millet_flour','wheat','bread','bunscakes','pasta','othercereal','pulses',] ,  # milling
          'vegstarch' : ['cassava_fresh','cassava_flour','sweet_potato','yam','potatoes','banana_green','othervegstarch'], 
          'sugars':['sugar','sweet','honey'], 
          'fat':['peanuts','coconut','cashew_almonds','nut_products','cooking_oil','butter_margarine',],
          'vegetables':['onion','greens','dried_canned_veg',] ,
          'fruits':['banana_ripe','citrus','mangoes','sugarcane'],
-         'protein':['goat','beef','pork','chicken','wild_birds','wild_meat','fish_seafood','dried_canned_fish','packaged_fish','fresh_milk','milk_products','canned_mik'], 
+         'protein':['goat','beef','pork','chicken','wild_birds','wild_meat','fish_seafood','dried_canned_fish','packaged_fish','fresh_milk','milk_products','canned_mik','eggs'], 
          'condiments': ['spices','salt'] },
 }
 
 foodGroups = {
          'alcohol' :['beer','brews','winespirits'],
-         'beverages':['tea','coffee','miscdrinkpowder','canned_drink','readymade_tea','readymade_coffee',],
+         'beverages':['tea','coffee','miscdrinkpowder','canned_drink','readymade_tea_coffee'],
          'starch': ['rice_husked','rice_paddy','maize_green','maize_grain','maize_flour','millet_grain','millet_flour','wheat','bread','bunscakes','pasta','othercereal','pulses',] ,
          'vegstarch' : ['cassava_fresh','cassava_flour','sweet_potato','yam','potatoes','banana_green','othervegstarch'], 
          'sugars':['sugar','sweet','honey'], 
@@ -35,7 +35,7 @@ foodGroups = {
 	     'oil':['cooking_oil','butter_margarine',],
          'vegetables':['onion','greens','dried_canned_veg',] ,
          'fruits':['banana_ripe','citrus','mangoes','sugarcane'],
-         'meat':['goat','beef','pork','chicken','wild_birds','wild_meat','fish_seafood','dried_canned_fish','packaged_fish',],
+         'meat':['goat','beef','pork','chicken','wild_birds','wild_meat','fish_seafood','dried_canned_fish','packaged_fish','eggs'],
      	 'milk': ['fresh_milk','canned_milk'], 
          'condiments': ['spices','salt'] ,
 }
@@ -88,6 +88,7 @@ caloriesDict =  { 'rice_paddy': { 'calories': 360.*.8 },
 		  'fresh_milk'                : {'calories': 40. },
 		  'milk_products'       : {'calories': 100. },
 		  'canned_milk'         : {'calories': 40. },
+		  'eggs'                : {'calories':150 },
 	        }
 
 	#graph.write_png('c:/temp/'+str(i)+".png")
@@ -104,8 +105,8 @@ def parse_tree(graph,start,t):
 	raise ValueError("Invalid type: %s" % type(t) )
 
 
-
 def generate_graphs():
+    import pydot
     for i in foodGroups:
         graph = pydot.Dot(graph_type='graph')
         res= parse_tree(graph,"ET",{'ET':{i:foodGroups[i]}})
@@ -113,12 +114,22 @@ def generate_graphs():
         print( {i:foodGroups[i]} )
 
 
-
-if __name__ == '__main__':
-	for f in foodGroups:
+def check_calories_data(foodGroups,caloriesDict):
+    for f in foodGroups:
 		if f in ['alcohol','beverages','condiments']:
 			continue
-		foodNames = [ i for i in foodGroups[f] ]
-		for k in foodNames:
-		    print caloriesDict[k]
+		for k in foodGroups[f]:
+		    if k not in caloriesDict or 'calories' not in caloriesDict[k] or caloriesDict[k]['calories']<=0:
+		        raise ValueError("Calories data not found for %s" % k) 
+	
+
+if __name__ == '__main__':
+	check_calories_data(foodGroups,caloriesDict)
+	
+	import pandas as pd
+	import pprint
+	print 
+	pd.DataFrame ( {'shortname': reduce( lambda x,y: x+y, foodGroups.values(), [])}).to_csv('c:/temp/shortnames.csv')
 	print "Done"
+
+# many categories are bad - dried_canned_veg, onions (includes tomatoes, carrots), mangoes (incluldes avocadoes), 
