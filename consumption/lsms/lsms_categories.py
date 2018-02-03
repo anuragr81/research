@@ -78,6 +78,7 @@ caloriesDict =  { 'rice_paddy': { 'calories': 360.*.8 },
 		  'sugarcane'           : {'calories': 180. },
 		  'goat'                : {'calories': 109. },
 		  'beef'                : {'calories': 250. },
+		  'wild_meat'           : {'calories': 250. },
 		  'pork'                : {'calories': 300. },
 		  'chicken'             : {'calories': 160. },
 		  'wild_birds'          : {'calories': 160. },
@@ -103,8 +104,21 @@ def parse_tree(graph,start,t):
 	raise ValueError("Invalid type: %s" % type(t) )
 
 
-for i in foodGroups:
-    graph = pydot.Dot(graph_type='graph')
-    res= parse_tree(graph,"ET",{'ET':{i:foodGroups[i]}})
-    graph.write_png('c:/temp/file'+str(i)+".png")
-    print( {i:foodGroups[i]} )
+
+def generate_graphs():
+    for i in foodGroups:
+        graph = pydot.Dot(graph_type='graph')
+        res= parse_tree(graph,"ET",{'ET':{i:foodGroups[i]}})
+        graph.write_png('c:/temp/file'+str(i)+".png")
+        print( {i:foodGroups[i]} )
+
+
+
+if __name__ == '__main__':
+	for f in foodGroups:
+		if f in ['alcohol','beverages','condiments']:
+			continue
+		foodNames = [ i for i in foodGroups[f] ]
+		for k in foodNames:
+		    print caloriesDict[k]
+	print "Done"
