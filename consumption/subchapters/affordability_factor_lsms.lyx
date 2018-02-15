@@ -714,6 +714,18 @@ If we were to back out the prices from expenditure, then we must ensure
 \end_layout
 
 \begin_layout Subsection
+Filtering data further
+\end_layout
+
+\begin_layout Standard
+We check for skewness of prices in order to filter out bad households with
+ bad prices.
+ We excluded that households with report expenditure of these ~20 households.
+ One option is to smoothen the price data - but Deaton simply removes the
+ cluster means from prices in the regression (with the fixed effects model).
+\end_layout
+
+\begin_layout Subsection
 Measuring quality in food products
 \end_layout
 
@@ -960,8 +972,19 @@ key "DeatonSurveyElasticities"
 
 \begin_layout Standard
 \begin_inset Formula 
+\begin{multline}
+ln\ q_{kic}=\alpha_{k}^{0}+\beta_{k}^{0}ln\ x_{ic}+\gamma_{k}^{0}\cdot z_{ic}+\sum_{G\in\mathscr{G}}\theta_{G}ln\ p_{Gc}+(f_{kc}+u_{kic}^{0})\label{eq:deatonmodel_lnq}
+\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
 \begin{alignat}{1}
-ln\ q_{Gic} & =\alpha_{G}^{0}+\beta_{G}^{0}ln\ x_{ic}+\gamma_{G}^{0}\cdot z_{ic}+\sum_{G\in\mathscr{G}}\theta_{G}ln\ p_{Gc}+(f_{Gc}+u_{Gic}^{0})\label{eq:deatonmodel_lnq}
+ln\ V_{kic} & =\alpha_{k}^{1}+\beta_{k}^{1}ln\ x_{ic}+\gamma_{k}^{1}\cdot z_{ic}+\sum_{G\in\mathscr{G}}\psi_{G}ln\ p_{Gc}+u_{kic}^{1}\label{eq:deatonmodel_lnv}
 \end{alignat}
 
 \end_inset
@@ -971,18 +994,26 @@ ln\ q_{Gic} & =\alpha_{G}^{0}+\beta_{G}^{0}ln\ x_{ic}+\gamma_{G}^{0}\cdot z_{ic}
 
 \begin_layout Standard
 Here, 
-\begin_inset Formula $q_{Gic}$
+\begin_inset Formula $i$
 \end_inset
 
- is the quantity consumed of the group 
-\begin_inset Formula $G$
+ is a household 
+\begin_inset Formula $q_{kic}$
 \end_inset
 
- of commodities in a cluster 
+ is the quantity consumed of the commodity 
+\begin_inset Formula $k$
+\end_inset
+
+ in a cluster 
 \begin_inset Formula $c$
 \end_inset
 
 , 
+\begin_inset Formula $V_{kic}$
+\end_inset
+
+ is the unit-value (as defined in Equation  ) 
 \begin_inset Formula $x_{ic}$
 \end_inset
 
@@ -1008,24 +1039,35 @@ Here,
 \end_inset
 
 , 
-\begin_inset Formula $f_{Gc}$
+\begin_inset Formula $f_{kc}$
 \end_inset
 
  is a cluster specified fixed effect and 
-\begin_inset Formula $u_{Gic}^{0}$
+\begin_inset Formula $u_{kic}^{0}$
 \end_inset
 
  is the error component.
  Notice that the equation does not fulfill the criteria of a demand equation
  (the constraints of homogeneity, adding up are not necessarily satisfied).
  Deaton removes cluster effects by subtraction of within-cluster means to
- obtain the following equation:
+ obtain the following equations:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
 (ln\ q_{Gic}-ln\ q_{G\cdot c}) & =\beta_{G}^{0}(ln\ x_{ic}-ln\ x_{\cdot c})+\gamma_{G}^{0}\cdot(z_{ic}-z_{\cdot c})+(u_{Gic}^{0}-u_{G\cdot c}^{0})\label{eq:Deatonmodel_diffq}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+(ln\ V_{kic}-ln\ V_{k\cdot c}) & =\beta_{k}^{1}(ln\ x_{ic}-ln\ x_{\cdot c})+\gamma_{k}^{1}(z_{ic}-z_{\cdot c})+(u_{kic}^{1}-u_{k\cdot c}^{1})\label{eq:deatonmodel_diffv}
 \end{alignat}
 
 \end_inset
@@ -1055,7 +1097,8 @@ To explain the quantities
 \begin_inset Formula $G$
 \end_inset
 
-, it is simply 100 (cheapest commodity price) while the vector 
+, it is simply 100 (cheapest commodity price) while the quality-indicator/base-p
+rice vector 
 \begin_inset Formula $p^{*}$
 \end_inset
 
@@ -1084,7 +1127,7 @@ reference "eq:P_Gdefinition"
 \begin_inset Formula $\{.5,.7\}$
 \end_inset
 
-.
+ respectively.
  We can easily calculate 
 \begin_inset Formula $q_{G}=\sum_{i\in G}q_{i}$
 \end_inset
@@ -1159,8 +1202,38 @@ key "USDA"
 \end_inset
 
  for the weighted sum of quantities (to).
- Some food purchases may be for cattle or pets as well - but this can be
- adjusted with the personal characteristics.
+ The calorific values are incorporated by adjusting the observed quantities
+ - using the assumption that a consumer demand for food is limited by calorific
+ intake.
+ Indeed some food purchases could be stored for a long time and may be for
+ cattle or pets as well - but it a verification with the household characteristi
+cs would be a part of robustness check for our interpretation.
+ Further, we keep alcohol consumption separate from other beverages and
+ do not adjust alcohol quantities based on calorific - leaving the alcohol
+ consumption to be budgeted simply by volume.
+ We group the food categories imagining a scenario where substitution is
+ possible on grounds of quality compromises.
+ The classical butter vs oil substitution for example leaves butter and
+ margarine in the same group.
+\end_layout
+
+\begin_layout Standard
+Assigning prices is subject to a lot of problems.
+ While we do have market prices available, they either deviate far too much
+ from consumed quantities.
+ There is a dilemma in choosing the backed-out prices as 
+\begin_inset Formula $(e/q)$
+\end_inset
+
+ - which indicates the quality - replacing the value with market prices
+ may suppress that information.
+ On the other hand, the recorded expenditure may be subject to variation
+ in supply prices themselves (which are not recorded in the market prices
+ with the same granularity as that of expenditure).
+ There are advantages and disadvantages with either approach.
+ If we were to rely only on choices between two items (instead of choice
+ of sub-items with price differences within the item), then choosing the
+ market price seems the right approach.
 \end_layout
 
 \begin_layout Standard
@@ -1355,7 +1428,7 @@ ddply(dsv,.(region),summarise,mean(perheadvis),n=length(hhid))
 
 \family typewriter
 \size small
-dat2010=ll@load_diary_file(dirprefix = '.',year = 2010,fu=fu,ln=ln)
+dat2010=ll@load_diary_file(dirprefix = '.',year = 2010,fu=fu,ln=lsms_normalizer)
 \end_layout
 
 \begin_layout Plain Layout
@@ -1604,8 +1677,8 @@ n=length(recorded_price)) #gives how prices vary
 \end_layout
 
 \begin_layout Plain Layout
-ll=lsms_loader(fu,ln);cp<-ll@get_inferred_prices(year = 2010,dirprefix =
- '../', fu = fu , ln = ln);
+ll=lsms_loader(fu,lsms_normalizer);cp<-ll@get_inferred_prices(year = 2010,dirpre
+fix = '../', fu = fu , ln = lsms_normalizer);
 \end_layout
 
 \begin_layout Plain Layout
@@ -1630,7 +1703,109 @@ cp<-subset(cp,!is.element(hhid,c("0903002007033501","0902018005042304","54020130
 \end_layout
 
 \begin_layout Plain Layout
-cp<-subset(cp,!is.element(hhid,c("0202012001018501","0701009004000101")))
+cp<-subset(cp,!is.element(hhid,c("0202012001018501","0701009004000101","140200400
+3013305", "1703002007004401","0203010357003901" )))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0804003003029001","0901011004021701", "19030070
+58010601","1908006003201001")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0701009004005701", "1401010022004506",
+ "5301002304007501","5401017008007201"))) # 10102
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("1902027012002401")))#10108
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0602005001023201","5102001012005002","070200601
+2002801")))#10109,10301
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0301012002040403","0701004024003001","090300101
+6006201","5101006016008801","5102001012008901","5102016012004801","5302002004000
+803")))#10502
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("1107006009038901","5301019011003501","530101901
+1003506","5501002031000601")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0406019002054701","0701007052009101","070102306
+7002901","0701027063001501","0902001360000901","5102022012003401")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0301014002033601","0304031003027001","060301300
+1028201","0701016454001901","0801016007014703","0804004002011001","0901011004029
+701", "0902015007032101","0902018005022501","0903011002012601","1403001004002901
+","1501022005030801","1501030004004202","1703002007011501","1706015002048503","1
+707013001010601","2004020001027801","5102001012005001","5102001012005009","52020
+09012004401","5501013009001301")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0701006104000601","0701021174007104","070102306
+4001301","0703012048012801","0903002007024102","0701023064006501")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0603013001002901","0604010006016009","080101600
+7020501","0903012005005505","0804001003006801","1101002005009201","0203010357000
+301","0605012302006801","0902001360000301","1003018003011401","0202012001005901"
+,"0602005001018801","2005011003000601")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("1105019301005201","1201018004041101","020301301
+9006801","0701009004003301","0701023067006707","1003018003015803","1106002331007
+501")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("1501030004006501","1708008305005201","530200200
+4004201","0805001311004301","1603008306013705")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("1102028005007801")))#seafood in liters
+\end_layout
+
+\begin_layout Plain Layout
+##merging groups
+\end_layout
+
+\begin_layout Plain Layout
+ii<-merge(lsms_normalizer()@items_codes_2010(),read.csv('c:/temp/shortnames.csv')[
+c("calories","shortname","group")])
+\end_layout
+
+\begin_layout Plain Layout
+cpp<-merge(cp,rename(ii,c("code"="item","item"="longname")))
+\end_layout
+
+\begin_layout Plain Layout
+#check units for every group
+\end_layout
+
+\begin_layout Plain Layout
+unique(subset(dat2010,is.element(item,subset(ii,group=="starch")$code))$lwp_unit)
+\end_layout
+
+\begin_layout Plain Layout
+#check the distribution of units for a particular item
+\end_layout
+
+\begin_layout Plain Layout
+ddply(subset(dat2010,item==as.character(subset(ii,shortname=="canned_drink")$code
+)),.(lwp_unit),summarise,n=length(hhid))
 \end_layout
 
 \begin_layout Plain Layout
@@ -1652,12 +1827,24 @@ p<-ll@add_localmedian_price_columns(cp)
 \end_layout
 
 \begin_layout Plain Layout
-lm(data=subset(p,item==10110),paste("pq~",write_variables_as_sum(c(priceColumns,
-"x"))))
+lm(data=subset(p,item==10110),paste("pq~"
 \end_layout
 
 \begin_layout Plain Layout
-####
+,write_variables_as_sum(c(priceColumns,"x"))))
+\end_layout
+
+\begin_layout Plain Layout
+#### filter out bad prices ###
+\end_layout
+
+\begin_layout Plain Layout
+merge(subset(ddply(cp,.(item),summarise,s=skewness(price)),abs(s)>10),rename(ii,c
+("code"="item","item"="fullname")))
+\end_layout
+
+\begin_layout Plain Layout
+###
 \end_layout
 
 \begin_layout Plain Layout

@@ -1,4 +1,4 @@
-
+from itertools import ifilter
 
 expenseTree= {
 'intoxication' :['cigarettes','beer','brews','winespirits'],
@@ -91,6 +91,7 @@ caloriesDict =  { 'rice_paddy': { 'calories': 360.*.8 },
 		  'eggs'                : {'calories':150 },
 	        }
 
+noCaloriesFoodGroups=['alcohol','beverages','condiments']
 	#graph.write_png('c:/temp/'+str(i)+".png")
 	#graph.write_png('file'+str(i)+".png")
 
@@ -114,9 +115,11 @@ def generate_graphs():
         print( {i:foodGroups[i]} )
 
 
+
+
 def check_calories_data(foodGroups,caloriesDict):
     for f in foodGroups:
-		if f in ['alcohol','beverages','condiments']:
+		if f in noCaloriesFoodGroups:
 			continue
 		for k in foodGroups[f]:
 		    if k not in caloriesDict or 'calories' not in caloriesDict[k] or caloriesDict[k]['calories']<=0:
@@ -125,11 +128,13 @@ def check_calories_data(foodGroups,caloriesDict):
 
 if __name__ == '__main__':
 	check_calories_data(foodGroups,caloriesDict)
-	
 	import pandas as pd
-	import pprint
-	print 
-	pd.DataFrame ( {'shortname': reduce( lambda x,y: x+y, foodGroups.values(), [])}).to_csv('c:/temp/shortnames.csv')
+	
+	shortNames = reduce( lambda x,y: x+y, foodGroups.values() , [])
+	nonCaloriesFoods = [ foodGroups[fg] for fg in foodGroups if fg not in noCaloriesFoodGroups ]
+	get_calories = lambda foodName : caloriesDict[foodName]['calories']*10. if foodName in caloriesDict else None 
+	group_name = lambda fname : [y[0] for y in ifilter(lambda x:fname in x[1],  foodGroups.iteritems())][0]
+	pd.DataFrame ( {'shortname': shortNames, 'calories':[get_calories(i) for i in shortNames] , 'group' : [group_name(f) for f in shortNames] }).to_csv('c:/temp/shortnames.csv')
 	print "Done"
 
 # many categories are bad - dried_canned_veg, onions (includes tomatoes, carrots), mangoes (incluldes avocadoes), 

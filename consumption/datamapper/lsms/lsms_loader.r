@@ -242,23 +242,86 @@ lsms_loader<-function(fu,ln) {
     return(hhidsRegionRecClosestPrices)
   }
   
-  get_inferred_prices <-function(year,dirprefix,fu,ln){
-    # loading ohs data
-    ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
-    print ("Loaded OHS file")
-    # loading diary data
-    dat2010<-load_diary_file(dirprefix = '.',year = 2010, fu=fu, ln=ln )
+  get_inferred_prices <-function(year,dirprefix,fu,ln,datConsum){
+    if (missing(datConsum)){
+      
+      # loading ohs data
+      ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
+      print ("Loaded OHS file")
+      # loading diary data
+      datConsum<-load_diary_file(dirprefix = '.',year = year, fu=fu, ln=ln )
+    }
     
-    dat2010$factor<-as.integer(dat2010$lwp_unit==1)+as.integer(dat2010$lwp_unit==2)/1000.0+as.integer(dat2010$lwp_unit==3)+as.integer(dat2010$lwp_unit==4)/1000.0+as.integer(dat2010$lwp_unit==5) 
-    dat2010$quantity<-dat2010$factor*dat2010$lwp
-    dat2010$price<-dat2010$cost/dat2010$quantity
+    datConsum$factor<-as.integer(datConsum$lwp_unit==1)+as.integer(datConsum$lwp_unit==2)/1000.0+as.integer(datConsum$lwp_unit==3)+as.integer(datConsum$lwp_unit==4)/1000.0
+    
+    # convert "piece" to units of volume (l/ml) or weight (g/kg)
+    pieceMeasureMapping                      <-ln()@get_piece_measures(year=year)
+    datConsum                                <-merge(datConsum,pieceMeasureMapping,all.x=TRUE)
+    
+    datConsum[ is.na(datConsum$piece_unit) & datConsum$lwp_unit!=5 & !is.na(datConsum$lwp_unit) ,]$piece_unit<-0
+    
+    
+    datConsum$converted_unit                 <- datConsum$piece_unit + as.integer(datConsum$lwp_unit==2 | datConsum$lwp_unit==1) + 3*as.integer(datConsum$lwp_unit==3 | datConsum$lwp_unit==4)
+    
+    pieceData                                <-subset(datConsum,lwp_unit==5 & is.na(piecefactor))
+    if (dim(pieceData)[1]>0){
+      stop(paste("The items: ",toString(unique(pieceData$item))," do not have piece conversions available."))
+    }
+    
+    datConsum[is.na(datConsum$piecefactor),]$piecefactor <- 0. # deactivate piecefactor for lwp_unit ==5 i.e. when unit is not in pieces
+    
+    if (length(setdiff(unique(datConsum$converted_unit),c(1,3,NA)))>0){
+      print(unique(datConsum$converted_unit))
+      stop("converted_unit must be either kg(1) or liter(3)")
+    }
+    datConsum$factor     <-datConsum$factor+ as.integer(datConsum$lwp_unit==5)*datConsum$piecefactor # datConsum$factor is zero when lwp_unit is not 5
+    
+    datConsum$quantity   <-datConsum$factor*datConsum$lwp # quantity is now in liters or kilograms
+    
+    # quantity thus computed has been unified into kilograms or liters (pieces are converted to respective kg/l as well)
+    # quantity is now made uniform across a whole group using another field group_quantity which expresses the quantity in the 
+    # group's standard unit
+    
+    # For example, 130 mls of coffee needs 15 grams of coffee or tea or miscpowder. So, to express quantity in multiplying with unif_factor 
+    # for g->mls for coffee as 130/15 (available in a map :coffee-> 130/15 )
+    
+    datConsum$group_quantity <- datConsum$quantity
+    
+    groupMap          <- rename(ln()@get_group_qconv_factor(year=year),c("lwp_unit"="converted_unit"));
+    
+    ## ddply(subset(datConsum,item==11104),.(lwp_unit),summarize,length(hhid)) # we can also complain that appropriate conversions don't exist 
+    ## (we can ignore improper conversions automatically)
+    
+    datConsum <- merge(datConsum,groupMap,by = c("item","converted_unit")  , all.x=TRUE);
+    
+    datConsum[is.na(datConsum$unif_factor),]$unif_factor           <-1
+    datConsum$group_quantity  <- with(datConsum,group_quantity*unif_factor)
+    print("Prepare(1.1)")
+    return(datConsum)
+    
+    # For 2010 - ignore: 
+    # 1. coconut in l/ml
+    # 2. onion with lwp_unit == NA ( subset(datConsum,is.na(lwp_unit) & item>10000 & is.na(own_unit)) )
+    # 3. fish_seafood (10808) in l/ml
+    # 4. canned_milk (10903) in l/ml
+    # 5. salt in l/ml
+    
+    # make sure there are no multiple quantities after grouping
+    return(groupQuantities)
+    unitsForItems    <- ddply(datConsum,.(item),summarise,n=length(unique(group_unit)))
+    
+    if (dim(subset(unitsForItems, n>1)[1])>0){
+      stop(paste("Number of units >1 for items:",subset(unitsForItems, n>1)$item))
+    }
+    
+    datConsum$price  <-datConsum$cost/datConsum$quantity
     print ("Loaded Diary file")
     
     hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
     
     hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs in hhidsRegion
     
-    householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")], dat2010[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
+    householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")], datConsum[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
     print ("Returning prices with household location")
     return(householdLocation)
     
