@@ -242,6 +242,8 @@ lsms_loader<-function(fu,ln) {
     return(hhidsRegionRecClosestPrices)
   }
   
+  
+  
   get_inferred_prices <-function(year,dirprefix,fu,ln,datConsum){
     if (missing(datConsum)){
       
@@ -294,25 +296,26 @@ lsms_loader<-function(fu,ln) {
     
     datConsum <- merge(datConsum,groupMap,by = c("item","converted_unit")  , all.x=TRUE);
     
-    datConsum[is.na(datConsum$unif_factor),]$unif_factor           <-1
-    datConsum$group_quantity  <- with(datConsum,group_quantity*unif_factor)
-    print("Prepare(1.1)")
-    return(datConsum)
+    datConsum[ is.na(datConsum$group_unit),]$group_unit <- datConsum[ is.na(datConsum$group_unit),]$converted_unit
     
-    # For 2010 - ignore: 
-    # 1. coconut in l/ml
-    # 2. onion with lwp_unit == NA ( subset(datConsum,is.na(lwp_unit) & item>10000 & is.na(own_unit)) )
-    # 3. fish_seafood (10808) in l/ml
-    # 4. canned_milk (10903) in l/ml
-    # 5. salt in l/ml
+    datConsum[is.na(datConsum$unif_factor),]$unif_factor           <-1
+    
+    datConsum$group_quantity  <- with(datConsum,group_quantity*unif_factor)
+  
+    badUnithhids    <-ln()@ignored_bad_units(year=year,datConsum=datConsum)
+
+    datConsum       <-subset(datConsum,!is.element(hhid,badUnithhids ) )
+    
     
     # make sure there are no multiple quantities after grouping
-    return(groupQuantities)
     unitsForItems    <- ddply(datConsum,.(item),summarise,n=length(unique(group_unit)))
+    return(datConsum)
     
     if (dim(subset(unitsForItems, n>1)[1])>0){
       stop(paste("Number of units >1 for items:",subset(unitsForItems, n>1)$item))
     }
+    
+    
     
     datConsum$price  <-datConsum$cost/datConsum$quantity
     print ("Loaded Diary file")
