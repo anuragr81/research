@@ -10,7 +10,8 @@ if (isClass("LSMSLoader")){
 setClass("LSMSLoader", representation(combined_data_set="function",load_diary_file="function",
                                       analyse_cj="function",load_ohs_file="function",
                                       match_recorded_prices="function",get_inferred_prices="function",
-                                      aggregate_local_prices="function",add_localmedian_price_columns="function"))
+                                      aggregate_local_prices="function",add_localmedian_price_columns="function",
+                                      food_expenditure_data="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -301,23 +302,24 @@ lsms_loader<-function(fu,ln) {
     datConsum[is.na(datConsum$unif_factor),]$unif_factor           <-1
     
     datConsum$group_quantity  <- with(datConsum,group_quantity*unif_factor)
-  
+    
     badUnithhids    <-ln()@ignored_bad_units(year=year,datConsum=datConsum)
-
+    
     datConsum       <-subset(datConsum,!is.element(hhid,badUnithhids ) )
     
     
     # make sure there are no multiple quantities after grouping
     unitsForItems    <- ddply(datConsum,.(item),summarise,n=length(unique(group_unit)))
-    return(datConsum)
     
-    if (dim(subset(unitsForItems, n>1)[1])>0){
+    if (  dim(subset(unitsForItems, n>1))[1]>0){
       stop(paste("Number of units >1 for items:",subset(unitsForItems, n>1)$item))
     }
     
     
-    
     datConsum$price  <-datConsum$cost/datConsum$quantity
+    datConsum        <- subset(datConsum,item>10000)
+    datConsum        <-merge(datConsum,ddply(datConsum,.(hhid),summarise,x=sum(cost)))
+    return(datConsum)
     print ("Loaded Diary file")
     
     hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
@@ -858,6 +860,67 @@ lsms_loader<-function(fu,ln) {
     stop(paste("merge not available for year:",year))
   }
   
+  food_expenditure_data<-function(dirprefix,year,fu,ln,foodDiary){
+    if (is.element(year,c(2010,2012))){
+      if (missing(foodDiary)){
+        foodDiary    <-get_inferred_prices(year = year,dirprefix = dirprefix , fu = fu , ln = ln);
+      }
+      
+      ohs          <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln)
+      
+      heads<-ohs[as.integer(ohs$household_status)==1,]
+      print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
+      if (!is.element("y2_hhid",colnames(heads)) ){
+        heads$y2_hhid<-rep(NA,dim(heads)[1])
+      }
+      
+      heads<-data.frame(hhid=heads$hhid,
+                        y2_hhid = heads$y2_hhid,
+                        highest_educ=heads$highest_educ,
+                        age=heads$age,
+                        region=heads$region,
+                        expensiveregion=heads$expensiveregion,
+                        popdensity =heads$popdensity,
+                        district=heads$district,
+                        ward=heads$ward,
+                        ea=heads$ea,
+                        personid=heads$personid,
+                        litlang=heads$litlang,
+                        occupation = heads$occupation,
+                        occupation_rank = heads$occupation_rank,
+                        years_community=heads$years_community,
+                        housingstatus=heads$housingstatus,
+                        roomsnum=heads$roomsnum,
+                        stringsAsFactors=FALSE);
+      
+      print ("Calculating hsize")
+      hhid_personid_consu<-data.frame(hhid=ohs$hhid,personid=ohs$personid,age=ohs$age,stringsAsFactors=FALSE);
+      szNonIgnoredAgeWithNAs<- dim(hhid_personid_consu)[1]
+      szIgnoredAgeWithNAs<-dim(hhid_personid_consu[is.na(hhid_personid_consu$age),])[1]
+      hhid_personid_consu<-hhid_personid_consu[!is.na(hhid_personid_consu$age),]
+      print (paste("Ignored ", szIgnoredAgeWithNAs ," (out of ",szNonIgnoredAgeWithNAs ,") ohs entries with no age (cursz=",
+                   dim(hhid_personid_consu)[1],")"))
+      
+      #calculating the consumption_factor
+      
+      hhid_personid_consu$consumption_factor<-as.integer(hhid_personid_consu$age<=5)*.2+as.integer(hhid_personid_consu$age>5 & hhid_personid_consu$age<=10)*.3+as.integer(hhid_personid_consu$age>10 & hhid_personid_consu$age<=15)*.4+as.integer(hhid_personid_consu$age>15 & hhid_personid_consu$age<=45)+as.integer(hhid_personid_consu$age>45 & hhid_personid_consu$age<=65)*.7+as.integer(hhid_personid_consu$age>65)*.6
+      
+      hhid_personid<- ddply(hhid_personid_consu,.(hhid),summarize,hsize=length(personid), consu=sum(consumption_factor));
+      print(paste("Number of households with hsize data = ",length(unique(hhid_personid$hhid))))
+      
+      ds <-merge(foodDiary,hhid_personid,by=c("hhid"));
+      print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
+      
+      ds<-merge(ds,heads)
+      print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
+      
+      return(ds)
+    }
+    
+    stop(paste("food_expenditure_data : year",year, " not supported"))
+    
+  }
+  
   combined_data_set<-function(year,dirprefix,selected_category,isDebug, set_depvar, fu, ln){
     
     ############ PHASE 0 ########################
@@ -875,7 +938,7 @@ lsms_loader<-function(fu,ln) {
     hhdat <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
     
     #* Loading the person/family data fie
-    ohsdat <-load_ohs_file(dirprefix=dirprefix,year=year) # (using fmld) must provide age (age_ref), gender(sex_ref), 
+    ohsdat <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # (using fmld) must provide age (age_ref), gender(sex_ref), 
     # highest_educ(educ_ref), ishead(no_earnr,earncomp - all reference person data),
     # race(ref_race),family size (fam_size),
     # area_type (popsize,bls_urbn)
@@ -936,6 +999,6 @@ lsms_loader<-function(fu,ln) {
   return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
              analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, 
              get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices,
-             add_localmedian_price_columns=add_localmedian_price_columns))
+             add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data))
   
 }

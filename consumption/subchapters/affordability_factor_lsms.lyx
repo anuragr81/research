@@ -1049,8 +1049,8 @@ Here,
  is the error component.
  Notice that the equation does not fulfill the criteria of a demand equation
  (the constraints of homogeneity, adding up are not necessarily satisfied).
- Deaton removes cluster effects by subtraction of within-cluster means to
- obtain the following equations:
+ Deaton removes cluster and price effects by subtraction of within-cluster
+ means to obtain the following equations:
 \end_layout
 
 \begin_layout Standard
@@ -1162,6 +1162,64 @@ key "NelsonQualityQuantity"
 \end_inset
 
  (244 and 134 respectively).
+ If we were to convert all consumed food quantities to calories, for example,
+ then we can measure 
+\begin_inset Formula $q_{G}$
+\end_inset
+
+ in calories and measure 
+\begin_inset Formula $p^{*}$
+\end_inset
+
+as the per calorie quality factor.
+ 
+\end_layout
+
+\begin_layout Standard
+We have selected household characteristics 
+\begin_inset Formula $z_{ic}$
+\end_inset
+
+ as 
+\bar under
+occupation rank
+\bar default
+, 
+\bar under
+highest education level
+\bar default
+ and 
+\bar under
+number of family members
+\bar default
+.
+ Alternatively, we use average prices that are closed to market prices (not
+ all market prices are available in the data) and avoid measurement errors
+ in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deatonmodel_lnq"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deatonmodel_lnv"
+
+\end_inset
+
+.
+ Still another method we could use is the MLE specification of the model
+ formulated by Dong et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DongShonkwierCappsQualityQuantity"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1788,10 +1846,6 @@ c("calories","shortname","group")])
 \end_layout
 
 \begin_layout Plain Layout
-cpp<-merge(cp,rename(ii,c("code"="item","item"="longname")))
-\end_layout
-
-\begin_layout Plain Layout
 #check units for every group
 \end_layout
 
@@ -1806,6 +1860,15 @@ unique(subset(dat2010,is.element(item,subset(ii,group=="starch")$code))$lwp_unit
 \begin_layout Plain Layout
 ddply(subset(dat2010,item==as.character(subset(ii,shortname=="canned_drink")$code
 )),.(lwp_unit),summarise,n=length(hhid))
+\end_layout
+
+\begin_layout Plain Layout
+# for alcohol
+\end_layout
+
+\begin_layout Plain Layout
+hist(with(subset(cp,is.element(item,as.character(subset(ii,group=="alcohol")$code)
+)),cost/group_quantity),breaks=100)
 \end_layout
 
 \begin_layout Plain Layout
