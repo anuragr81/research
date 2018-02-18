@@ -12,6 +12,15 @@ debugSource('us_cex/us_cex_loader.r')
 debugSource('lsms/lsms_normalizer.r');debugSource('lsms/lsms_loader.r');debugSource('translation/frameutils.R')
 #ln@food_categories_lsms_2010()
 
+run_food_group_regress<-function(year,groupName,dirprefix,fu,ln)
+{
+  ds<-ll@food_expenditure_data(dirprefix = dirprefix, year = year,fu = fu, ln = ln)
+  # select only relevant
+  ds<-ds[,c("hhid","cost","group","group_quantity","hsize","highest_educ","age","region","occupation_rank","roomsnum","x")]
+  ds<-subset(ds,group==groupName)
+  
+}
+
 run_price_regress<-function(p){
   priceColumns <- NULL
   

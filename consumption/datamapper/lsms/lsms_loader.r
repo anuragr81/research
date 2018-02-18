@@ -307,7 +307,6 @@ lsms_loader<-function(fu,ln) {
     
     datConsum       <-subset(datConsum,!is.element(hhid,badUnithhids ) )
     
-    
     # make sure there are no multiple quantities after grouping
     unitsForItems    <- ddply(datConsum,.(item),summarise,n=length(unique(group_unit)))
     
@@ -320,16 +319,15 @@ lsms_loader<-function(fu,ln) {
     datConsum        <- subset(datConsum,item>10000)
     datConsum        <-merge(datConsum,ddply(datConsum,.(hhid),summarise,x=sum(cost)))
     return(datConsum)
-    print ("Loaded Diary file")
+#    print ("Loaded Diary file")
+#    
+#    hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
     
-    hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
+#    hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs in hhidsRegion
     
-    hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs in hhidsRegion
-    
-    householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")], datConsum[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
-    print ("Returning prices with household location")
-    return(householdLocation)
-    
+#    householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")], datConsum[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
+#    print ("Returning prices with household location")
+#    return(householdLocation)
     
   }
   
@@ -913,6 +911,9 @@ lsms_loader<-function(fu,ln) {
       
       ds<-merge(ds,heads)
       print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
+
+      ii<-merge(ln()@items_codes_2010(),read.csv(shortNamesFile)[c("calories","shortname","group")])
+      ds<-merge(ds,rename(ii,c("code"="item","item"="longname")))
       
       return(ds)
     }

@@ -1162,17 +1162,16 @@ key "NelsonQualityQuantity"
 \end_inset
 
  (244 and 134 respectively).
- If we were to convert all consumed food quantities to calories, for example,
- then we can measure 
+ If we were to convert all consumed quantities of fruits consumed to calories,
+ for example, then we can measure 
 \begin_inset Formula $q_{G}$
 \end_inset
 
- in calories and measure 
+ in calories and 
 \begin_inset Formula $p^{*}$
 \end_inset
 
 as the per calorie quality factor.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1211,8 +1210,7 @@ reference "eq:deatonmodel_lnv"
 
 .
  Still another method we could use is the MLE specification of the model
- formulated by Dong et al.
- 
+ formulated by Dong et al 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DongShonkwierCappsQualityQuantity"
@@ -1220,6 +1218,44 @@ key "DongShonkwierCappsQualityQuantity"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Our goal to use a demand equation is not achieved in the above equation.
+ All we can ascertain is that quality is compromised or not for poorer household
+s.
+ The effect of clusters is important because it indicates the availability
+ issue.
+ A relative price structure 
+\begin_inset Formula $p_{i}^{*}$
+\end_inset
+
+is the measure of affordability we were looking for - a justified quality
+ measure is all one can see with the food data.
+ The methods used for elasticity are not associated with a utility function
+ as such.
+ This is an analysis we have to do ourselves.
+ The goal of personal characteristics in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Deatonmodel_diffq"
+
+\end_inset
+
+and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deatonmodel_diffv"
+
+\end_inset
+
+ is to simple net out.
+ The literature that we have explored tends to use the effect of personal
+ characteristics as evidence of social differences.
+ A corresponding analysis doesn't find anything special other than supply
+ side issues.
+ We also find that the expenditure on marriage is lower in areas where there
+ is electricity - marking the industrial developments.
 \end_layout
 
 \begin_layout Standard
@@ -1756,6 +1792,10 @@ cp<-merge(cp,ddply(cp,.(hhid),summarise,x=sum(pq)))
 \end_layout
 
 \begin_layout Plain Layout
+#
+\end_layout
+
+\begin_layout Plain Layout
 cp<-subset(cp,!is.element(hhid,c("0903002007033501","0902018005042304","540201301
 6004201")))
 \end_layout
@@ -2039,10 +2079,23 @@ We haven't actually addressed how a tree develops in this mapping.
  Status is thus always implicitly from the sum-total of all items - except
  for jewelry and snob items that actually matter less and we care less about
  them when we observe the masses (particularly food items).
+ In econometric work, the effect of rank should be limited to the cluster
+ where the consumer resides i.e.
+ the person at the top in the cluster 
+\begin_inset Formula $c$
+\end_inset
+
+ might not worry about the consumer less in any cluster 
+\begin_inset Formula $c'\ne c$
+\end_inset
+
+.
+ This can change with communication (globalisation etc.
+ and may require another model).
 \end_layout
 
 \begin_layout Standard
-So in our three commodity world, if the goods are all separable and additive
+In our three commodity world, if the goods are all separable and additive
  - which means utilities other than status simply add up.
  However, the status utility is not separable and can be obtained from all
  items A, B and C (to varied levels).
@@ -2055,13 +2108,14 @@ So in our three commodity world, if the goods are all separable and additive
  whether clustering has significance or not.
  It may be that the rich don't eat potatoes so a class X eating more potatoes
  than Y obviously does not mean that potatoes are a conspicuous good.
- Notice that we don't use the fact that rich don't buy potatoes while the
- poor do (using income elasticity to decide).
+ We are careful not to use the fact that rich don't buy potatoes while the
+ poor do (i.e.
+ comment on conspicuous consumption using income elasticity to decide).
  Instead we only make the decision based on availability and price (
 \begin_inset Formula $p-max(p_{i})$
 \end_inset
 
- would actually measure the price).
+ or a similar criteria that measures the price).
  The distribution of prices doesn't tell about the availability- except
  if we infer availability from variation of observed market prices with
  respect to region.
@@ -2133,7 +2187,7 @@ Does spending more on item C(which has no differentiation) have any influence
 \begin_inset Formula $u_{1}$
 \end_inset
 
- with respective to 
+ with respect to 
 \begin_inset Formula $u_{2}$
 \end_inset
 
