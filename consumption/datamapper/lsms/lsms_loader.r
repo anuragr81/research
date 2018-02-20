@@ -277,6 +277,7 @@ lsms_loader<-function(fu,ln) {
       print(unique(datConsum$converted_unit))
       stop("converted_unit must be either kg(1) or liter(3)")
     }
+
     datConsum$factor     <-datConsum$factor+ as.integer(datConsum$lwp_unit==5)*datConsum$piecefactor # datConsum$factor is zero when lwp_unit is not 5
     
     datConsum$quantity   <-datConsum$factor*datConsum$lwp # quantity is now in liters or kilograms
@@ -292,10 +293,16 @@ lsms_loader<-function(fu,ln) {
     
     groupMap          <- rename(ln()@get_group_qconv_factor(year=year),c("lwp_unit"="converted_unit"));
     
+    
     ## ddply(subset(datConsum,item==11104),.(lwp_unit),summarize,length(hhid)) # we can also complain that appropriate conversions don't exist 
     ## (we can ignore improper conversions automatically)
     
+    
+    
     datConsum <- merge(datConsum,groupMap,by = c("item","converted_unit")  , all.x=TRUE);
+    
+    
+    
     
     datConsum[ is.na(datConsum$group_unit),]$group_unit <- datConsum[ is.na(datConsum$group_unit),]$converted_unit
     
@@ -304,6 +311,7 @@ lsms_loader<-function(fu,ln) {
     datConsum$group_quantity  <- with(datConsum,group_quantity*unif_factor)
     
     badUnithhids    <-ln()@ignored_bad_units(year=year,datConsum=datConsum)
+    
     
     datConsum       <-subset(datConsum,!is.element(hhid,badUnithhids ) )
     
@@ -858,7 +866,7 @@ lsms_loader<-function(fu,ln) {
     stop(paste("merge not available for year:",year))
   }
   
-  food_expenditure_data<-function(dirprefix,year,fu,ln,foodDiary){
+  food_expenditure_data<-function(dirprefix,year,fu,ln,foodDiary,shortNamesFile){
     if (is.element(year,c(2010,2012))){
       if (missing(foodDiary)){
         foodDiary    <-get_inferred_prices(year = year,dirprefix = dirprefix , fu = fu , ln = ln);
@@ -905,16 +913,15 @@ lsms_loader<-function(fu,ln) {
       
       hhid_personid<- ddply(hhid_personid_consu,.(hhid),summarize,hsize=length(personid), consu=sum(consumption_factor));
       print(paste("Number of households with hsize data = ",length(unique(hhid_personid$hhid))))
-      
       ds <-merge(foodDiary,hhid_personid,by=c("hhid"));
       print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
-      
       ds<-merge(ds,heads)
       print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
 
       ii<-merge(ln()@items_codes_2010(),read.csv(shortNamesFile)[c("calories","shortname","group")])
-      ds<-merge(ds,rename(ii,c("code"="item","item"="longname")))
       
+      ds<-merge(ds,rename(ii,c("code"="item","item"="longname")),all.x=TRUE)
+
       return(ds)
     }
     

@@ -12,13 +12,58 @@ debugSource('us_cex/us_cex_loader.r')
 debugSource('lsms/lsms_normalizer.r');debugSource('lsms/lsms_loader.r');debugSource('translation/frameutils.R')
 #ln@food_categories_lsms_2010()
 
-run_food_group_regress<-function(year,groupName,dirprefix,fu,ln)
+run_food_group_regress<-function(year,groupName,dirprefix,fu,ln,shortNamesFile,foodExpenditureData,printResults)
 {
-  ds<-ll@food_expenditure_data(dirprefix = dirprefix, year = year,fu = fu, ln = ln)
+  ll=lsms_loader(fu=fu,ln=ln)
+  if (missing(foodExpenditureData)){
+    ds<-ll@food_expenditure_data(dirprefix = dirprefix, year = year,fu = fu, ln = ln, shortNamesFile=shortNamesFile)
+  } else {
+    ds<-foodExpenditureData 
+  }
+  
   # select only relevant
   ds<-ds[,c("hhid","cost","group","group_quantity","hsize","highest_educ","age","region","occupation_rank","roomsnum","x")]
-  ds<-subset(ds,group==groupName)
-  
+  if (is.element(groupName,as.character(unique(ds$group))) ){
+    
+    ds<-subset(ds,group==groupName)
+    if (length(unique(ds$hhid))<50 )
+    {
+      stop("Number of households (=",length(unique(ds$hhid)),") is too small.")
+    }
+    ds$lnx               <- with( ds,log(x))
+    ds$lnunitvalue       <- with( ds, log(cost/group_quantity))
+    ds$lngroup_quantity  <- with( ds, log(group_quantity)) 
+    
+    clusterMeans         <-ddply(ds,.(region),summarise,cost_c=mean(cost),lngroup_quantity_c=mean(lngroup_quantity),hsize_c=mean(hsize),
+                                 age_c=mean(age),roomsnum_c=mean(roomsnum),
+                                 occupation_rank_c = mean(occupation_rank),lnx_c=mean(lnx),
+                                 lnunitvalue_c =mean(lnunitvalue))
+    if (any(is.na( clusterMeans [ , setdiff(colnames(clusterMeans),"region") ] )) )
+    {
+      stop("Cluster means cannot have NAs")
+    }
+    
+    ds <- merge(ds,clusterMeans,by=c("region"))
+    print("Merged with cluster means")
+    
+    
+    ds$lnunitvalue_a       <- with (ds, lnunitvalue-lnunitvalue_c)
+    
+    ds$lnx_a               <- with (ds, lnx-lnx_c)
+    ds$lngroup_quantity_a  <- with (ds, lngroup_quantity-lngroup_quantity_c )
+    ds$occupation_rank_a   <- with (ds, occupation_rank - occupation_rank_c )
+    ds$hsize_a             <- with (ds, hsize - hsize_c )
+    ds$age_a               <- with (ds, age - age_c )
+    ds$roomsnum_a          <- with (ds, roomsnum - roomsnum_c)
+    print ("Completed adjsuting quantities and personal characteristics")
+    if (!missing(printResults)){
+      print (summary( lm (data=ds,lngroup_quantity_a~lnx_a+occupation_rank_a+hsize_a+age_a+roomsnum_a  )))
+      print (summary( lm (data=ds,lnunitvalue_a~lnx_a+occupation_rank_a+hsize_a+age_a+roomsnum_a  ))   )
+    }
+    return(ds)
+  } else {
+    stop(paste("Group",groupName,"not found in data"))
+  }
 }
 
 run_price_regress<-function(p){
