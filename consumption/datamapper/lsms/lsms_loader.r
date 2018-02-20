@@ -245,7 +245,7 @@ lsms_loader<-function(fu,ln) {
   
   
   
-  get_inferred_prices <-function(year,dirprefix,fu,ln,datConsum){
+  get_inferred_prices <-function(year,dirprefix,fu,ln,shortNamesFile,datConsum){
     if (missing(datConsum)){
       
       # loading ohs data
@@ -298,11 +298,7 @@ lsms_loader<-function(fu,ln) {
     ## (we can ignore improper conversions automatically)
     
     
-    
     datConsum <- merge(datConsum,groupMap,by = c("item","converted_unit")  , all.x=TRUE);
-    
-    
-    
     
     datConsum[ is.na(datConsum$group_unit),]$group_unit <- datConsum[ is.na(datConsum$group_unit),]$converted_unit
     
@@ -324,8 +320,28 @@ lsms_loader<-function(fu,ln) {
     
     
     datConsum$price  <-datConsum$cost/datConsum$quantity
-    datConsum        <- subset(datConsum,item>10000)
+    datConsum        <-subset(datConsum,item>10000)
     datConsum        <-merge(datConsum,ddply(datConsum,.(hhid),summarise,x=sum(cost)))
+    ii               <-merge(ln()@items_codes_2010(),read.csv(shortNamesFile)[c("calories","shortname","group")],by=c("shortname"))
+    ii               <-rename(ii,c("code"="item","item"="longname"))
+    
+    print (paste("Assuming the groups in the file:",shortNamesFile ,"are in sync with the groups in the conversion function"))
+    
+    
+    datConsum$group                                      <-NULL # group would be overwritten by the merge
+    datConsum                                            <-merge(datConsum,ii,all.x=TRUE,by=c("item"))
+    
+    datConsum$merge_quantity                             <- datConsum$group_quantity
+    datConsum$merge_unit                                 <- datConsum$group_unit
+    
+    # merge_unit
+    datConsum[!is.na(datConsum$calories),]$merge_quantity       <- datConsum[!is.na(datConsum$calories),]$calories  * datConsum[!is.na(datConsum$calories),]$group_quantity 
+    datConsum[!is.na(datConsum$calories),]$merge_unit           <- 10
+    print ("merge_unit = 10 => calories used as merge_unit")
+    
+    datConsum$group_quantity              <- NULL
+    datConsum$group_unit                  <- NULL
+    
     return(datConsum)
 #    print ("Loaded Diary file")
 #    
@@ -869,7 +885,7 @@ lsms_loader<-function(fu,ln) {
   food_expenditure_data<-function(dirprefix,year,fu,ln,foodDiary,shortNamesFile){
     if (is.element(year,c(2010,2012))){
       if (missing(foodDiary)){
-        foodDiary    <-get_inferred_prices(year = year,dirprefix = dirprefix , fu = fu , ln = ln);
+        foodDiary    <-get_inferred_prices(year = year,dirprefix = dirprefix , fu = fu , ln = ln, shortNamesFile=shortNamesFile);
       }
       
       ohs          <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln)
@@ -917,10 +933,6 @@ lsms_loader<-function(fu,ln) {
       print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
       ds<-merge(ds,heads)
       print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
-
-      ii<-merge(ln()@items_codes_2010(),read.csv(shortNamesFile)[c("calories","shortname","group")])
-      
-      ds<-merge(ds,rename(ii,c("code"="item","item"="longname")),all.x=TRUE)
 
       return(ds)
     }

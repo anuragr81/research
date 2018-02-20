@@ -22,7 +22,23 @@ run_food_group_regress<-function(year,groupName,dirprefix,fu,ln,shortNamesFile,f
   }
   
   # select only relevant
-  ds<-ds[,c("hhid","cost","group","group_quantity","hsize","highest_educ","age","region","occupation_rank","roomsnum","x")]
+  print("Aggregating group quantities")
+  
+  
+  
+  summedUpQuantities    <- ddply(ds[,c("hhid","cost","group","merge_quantity")],.(hhid,group),summarise,cost=sum(cost),merge_quantity=sum(merge_quantity))
+  
+  ds                    <- merge(ds[,c("hhid","group","merge_unit","x","hsize","consu","y2_hhid","highest_educ","age","region",
+                                       "litlang","occupation_rank","roomsnum")],summedUpQuantities,by=c("hhid","group"))
+  
+  ds                    <-ddply(ds,.(hhid,group),summarise,cost=sum(cost),merge_quantity=sum(merge_quantity),merge_unit=unique(merge_unit),x=unique(x),
+                                hsize=unique(hsize),highest_educ=unique(highest_educ),age=unique(age),region=unique(region),
+                                     litlang=unique(litlang),occupation_rank=unique(occupation_rank),roomsnum=unique(roomsnum))
+  
+  if (dim(unique(ds))[1]!=dim(ds)[1]){
+    stop("run_food_group_regress - Non-unique data for hhid")
+  }
+  # check if hhids are duplicated
   if (is.element(groupName,as.character(unique(ds$group))) ){
     
     ds<-subset(ds,group==groupName)
@@ -31,10 +47,10 @@ run_food_group_regress<-function(year,groupName,dirprefix,fu,ln,shortNamesFile,f
       stop("Number of households (=",length(unique(ds$hhid)),") is too small.")
     }
     ds$lnx               <- with( ds,log(x))
-    ds$lnunitvalue       <- with( ds, log(cost/group_quantity))
-    ds$lngroup_quantity  <- with( ds, log(group_quantity)) 
+    ds$lnunitvalue       <- with( ds, log(cost/merge_quantity))
+    ds$lnmerge_quantity  <- with( ds, log(merge_quantity)) 
     
-    clusterMeans         <-ddply(ds,.(region),summarise,cost_c=mean(cost),lngroup_quantity_c=mean(lngroup_quantity),hsize_c=mean(hsize),
+    clusterMeans         <-ddply(ds,.(region),summarise,cost_c=mean(cost),lnmerge_quantity_c=mean(lnmerge_quantity),hsize_c=mean(hsize),
                                  age_c=mean(age),roomsnum_c=mean(roomsnum),
                                  occupation_rank_c = mean(occupation_rank),lnx_c=mean(lnx),
                                  lnunitvalue_c =mean(lnunitvalue))
@@ -50,14 +66,14 @@ run_food_group_regress<-function(year,groupName,dirprefix,fu,ln,shortNamesFile,f
     ds$lnunitvalue_a       <- with (ds, lnunitvalue-lnunitvalue_c)
     
     ds$lnx_a               <- with (ds, lnx-lnx_c)
-    ds$lngroup_quantity_a  <- with (ds, lngroup_quantity-lngroup_quantity_c )
+    ds$lnmerge_quantity_a  <- with (ds, lnmerge_quantity-lnmerge_quantity_c )
     ds$occupation_rank_a   <- with (ds, occupation_rank - occupation_rank_c )
     ds$hsize_a             <- with (ds, hsize - hsize_c )
     ds$age_a               <- with (ds, age - age_c )
     ds$roomsnum_a          <- with (ds, roomsnum - roomsnum_c)
     print ("Completed adjsuting quantities and personal characteristics")
     if (!missing(printResults)){
-      print (summary( lm (data=ds,lngroup_quantity_a~lnx_a+occupation_rank_a+hsize_a+age_a+roomsnum_a  )))
+      print (summary( lm (data=ds,lnmerge_quantity_a~lnx_a+occupation_rank_a+hsize_a+age_a+roomsnum_a  )))
       print (summary( lm (data=ds,lnunitvalue_a~lnx_a+occupation_rank_a+hsize_a+age_a+roomsnum_a  ))   )
     }
     return(ds)
