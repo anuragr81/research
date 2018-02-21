@@ -12,6 +12,14 @@ debugSource('us_cex/us_cex_loader.r')
 debugSource('lsms/lsms_normalizer.r');debugSource('lsms/lsms_loader.r');debugSource('translation/frameutils.R')
 #ln@food_categories_lsms_2010()
 
+get_allgrp_food_data_frame<-function(year,dirprefix,fu,ln,shortNamesFile){
+  r   <-data.frame();
+  ii  <-merge(ln()@items_codes_2010(),read.csv(shortNamesFile)[c("calories","shortname","group")],by=c("shortname"))
+  for ( group in unique(as.character(ii$group))) {
+    r<- rbind(r,run_food_group_regress(year=year,dirprefix=dirprefix,fu=fu,ln=ln, groupName = group, shortNamesFile = shortNamesFile ))
+  }
+  return(r)
+}
 run_food_group_regress<-function(year,groupName,dirprefix,fu,ln,shortNamesFile,foodExpenditureData,printResults)
 {
   ll=lsms_loader(fu=fu,ln=ln)
@@ -24,7 +32,7 @@ run_food_group_regress<-function(year,groupName,dirprefix,fu,ln,shortNamesFile,f
   if (!is.element(groupName,as.character(unique(ds$group))) ){
     stop(paste("Group",groupName,"not found in data"))
   }
-
+  
   ds<-subset(ds,group==groupName)
   
   print("Aggregating group quantities")
@@ -44,6 +52,7 @@ run_food_group_regress<-function(year,groupName,dirprefix,fu,ln,shortNamesFile,f
   {
     stop("Number of households (=",length(unique(ds$hhid)),") is too small.")
   }
+  
   ds$lnx               <- with( ds,log(x))
   ds$lnunitvalue       <- with( ds, log(cost/merge_quantity))
   ds$lnmerge_quantity  <- with( ds, log(merge_quantity)) 
