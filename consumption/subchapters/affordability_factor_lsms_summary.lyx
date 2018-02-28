@@ -91,19 +91,17 @@ Determining Status ranking from the LSMS data in Tanzania
 \begin_layout Subsection
 
 \size normal
-Analysis of Food items
+Prices and quantities in the LSMS data
 \end_layout
 
 \begin_layout Standard
-In the LSMS data for Tanzania, only food items have recorded quantities
+In the LSMS data for Tanzania, only food items have quantities recorded
  for every household.
  The non-food items are based on recall and only have cost of the item recorded.
- 
-\end_layout
-
-\begin_layout Standard
-Our goal is to identify the price differences which the consumer observes
- and build the utility tree representing the two-state budgeting
+ Inferring price to some accuracy is key to our model as we aim to identify
+ the price differences which the consumer observes in the market.
+ With this information, we wish to view status as an aggregation of sub-utilitie
+s in a utility tree that represents the two-state budgeting
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonEconConsumer"
@@ -111,13 +109,15 @@ key "DeatonEconConsumer"
 \end_inset
 
 .
- The tree for food in Tanzania LSMS diary is shown in the Figure 
+ The tree for food that we use form the Tanzania LSMS diary items is shown
+ in the Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:tree1"
 
 \end_inset
 
+.
  The overall status from consumption of an individual consumer is simply
  the aggregation of the affordability factor (which we interpret as quality
  for food items) at the root of the tree.
@@ -125,28 +125,24 @@ reference "fig:tree1"
 
 \begin_layout Standard
 Eventually, we wish to combine the status utility derived from the monthly
- consumption of food as well as non-food items with the status utility derived
- from ownership of assets is - so as to compare the total status utility
- with the observed social mobility (visiting the intertemporal substitution
- problem in the panel data on consumption).
-\end_layout
-
-\begin_layout Subsubsection
-
-\size normal
-Market Recorded Prices and Inferred Prices in the survey
+ consumption of food with that from the non-food items as well as ownership
+ of assets - so as to match the total status utility with the observed social
+ mobility (visiting the intertemporal substitution problem in the panel
+ data on consumption).
+ However, at this point, our goal is to focus on status derived from monthly
+ consumption items alone.
+ 
 \end_layout
 
 \begin_layout Standard
 The LSMS survey also records the market prices observed in many regions
  for a significant number of items.
  However, there are many problems with this data.
- First, the market prices for many items are not recorded in every region/distri
-ct.
+ First, the market prices for many items are not recorded in every district.
  This limits the use of market recorded prices (referred to as recorded-price
  from here on).
- Second, the recorded prices are often the same for the same quantity in
- the same region for a certain mixed categories.
+ Second, the recorded prices are often different for the same quantity consumed
+ in the same region - at least for a few mixed categories.
  Across all regions for the Tanzania LSMS data, the items - Peas/Lentils
  - 401, Onions-tomatoes - 601, Millet-grain - 106, Spinach - 602 , Seafood
  - 808, Bread - 109, Local brews - 107, Yams - 204, Cassava-flour - 202
@@ -161,8 +157,9 @@ ct.
 \end_layout
 
 \begin_layout Standard
-Out of the three issues above, the absence of recorded prices in all regions
- is particularly restrictive.
+While the second and third issues can be circumvented with cleaning of data,
+ the absence of recorded prices in many regions for many commodities is
+ particularly restrictive.
  In fact if we were to filter out of all the items where price is not recorded,
  we would be only left with about 500 households (for the 2010 data).
  For most of the times, we are therefore compelled to infer the prices from
@@ -179,7 +176,7 @@ Out of the three issues above, the absence of recorded prices in all regions
 \end_layout
 
 \begin_layout Standard
-The inferred prices (from expenditure 
+The inferred prices (calculated from expenditure 
 \begin_inset Formula $E$
 \end_inset
 
@@ -187,11 +184,11 @@ The inferred prices (from expenditure
 \begin_inset Formula $q$
 \end_inset
 
-) are calculated at region levels - since the not all districts are represented
+) are calculated at region levels - since not all districts are represented
  in significant numbers in the survey.
  To be able to use the recorded price as the guide value, we find the closest
  recorded price for the median price calculated at every region (the latter
- referred to as inferred price from now on).
+ are referred to as inferred price from now on).
  The matching of inferred prices and recorded prices is relevant particularly
  because there are instances when multiple prices are recorded for the same
  or different quantity of the item 
@@ -199,15 +196,16 @@ The inferred prices (from expenditure
 status open
 
 \begin_layout Plain Layout
-If different quantities of the same item were sold at different prices,
+The quantities are nearly the same for (mls, litres, g, kgs, pieces) for
+ both recorded prices and consumed quantities.
+ If different quantities of the same item were sold at different prices,
  the matching of inferred price with recorded price would find the respective
  price.
  However, the recorded market prices are not available at a level fine enough
  for such matching to be of a material concern.
- These quantities are nearly the same for (mls, litres, g, kgs, pieces)
- for both recorded prices and consumed quantities.
- Staying close to the recorded price ensures that we only have slight measuremen
-t errors in our technique and an double-evidence for clustering in prices.
+ Letting the inferred price stay close to the recorded price however ensures
+ that we only have slight measurement errors in our technique as well as
+ a double-evidence for clustering in prices.
 \end_layout
 
 \end_inset
@@ -222,17 +220,16 @@ t errors in our technique and an double-evidence for clustering in prices.
 \end_layout
 
 \begin_layout Standard
-To ensure we go through a cleanup of the data, we observe the skewness and
- kurtosis of the inferred prices data (local brews 107).
+We clean up the data using the skewness and kurtosis of the inferred prices.
  Some data is evidently of poor quality (e.g.
  eggs, canned milk).
- The prices for chicken seem quite skewed overall.
+ The prices for chicken in particular are quite skewed overall.
  Taken over all regions, the highest kurtosis (not much difference in prices)
  is observed for charcoal (207), milling-grain fees(208), Maize-flour(105),
  Sugar(301), Salt(1003), Fruits (703) , Beef(802), Eggs(807).
- Less kurtosis (diffusion of prices) is observed in Millet-grain(106), Bread(109
-), Irish potatoes(205), Coconuts (502), Onions-tomatoes (601), Spinach(602),
- Dry-tea(1101).
+ Less kurtosis (less diffusion of prices) is observed in Millet-grain(106),
+ Bread(109), Irish potatoes(205), Coconuts (502), Onions-tomatoes (601),
+ Spinach(602), Dry-tea(1101).
  Slightly lesser kurtosis is observed for Kerosene (201), Maize cob (103),
  Cassava (201), Plantains (206), Groundnuts (501), Chicken (804), Local
  Brews (1107).
@@ -249,8 +246,8 @@ A cleanup of data is essential since there are many regions that are under-repre
 sented in the consumption data (for some commodities - only one person in
  a district is observed).
  This magnifies the effect of the outlier observation on the region- price.
- The skewness of prices in the region is used to exclude (~20) households
- with outlier inferred prices.
+ The skewness of prices calculated for every household was used to exclude
+ nearly 20 households with outlier values.
 \end_layout
 
 \begin_layout Subsection
@@ -266,7 +263,14 @@ Utility function
 \begin_layout Standard
 Using the local median prices, we show the results from the linear expenditure
  function - a utility function that was used in an early panel data analysis
- of consumption Stone and was detailed further by Deaton 
+ of consumption Stone
+\begin_inset CommandInset citation
+LatexCommand cite
+key "StoneAnalysis"
+
+\end_inset
+
+ and was detailed further by Deaton 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonPostWarBritain"
@@ -275,10 +279,10 @@ key "DeatonPostWarBritain"
 
  (before introducing the PIGLOG series of models which are more similar
  to the Rotterdam model).
- Our goal to present the linear expenditure model is not to interpret the
- elasticities from the results, but to delineate the inadequacies that the
- use of the model entails in the context of quality differences and income
- elasticities.
+ Our goal in presenting the linear expenditure model is not to interpret
+ the elasticities from the results, but to delineate the inadequacies that
+ the use of the model entails in the context of quality differences and
+ income elasticities.
 \end_layout
 
 \begin_layout Standard
@@ -315,18 +319,11 @@ For a model of demand, we're given quantities
 \end_inset
 
 .
- Since we observe expenditures (instead of prices) in the data, we could
- use 
-\begin_inset Formula $p_{i}=\frac{e_{i}}{q_{i}}$
-\end_inset
-
- in the demand function.
- Notice that, 
+ Notice that, since 
 \begin_inset Formula $q_{k}=\gamma_{k}+\frac{\beta_{k}}{p_{k}}(x-\sum p_{j}\gamma_{j})\Rightarrow p_{k}q_{k}=p_{k}\gamma_{k}+\beta_{k}(x-\sum p_{j}\gamma_{j})\Rightarrow w_{k}=\frac{p_{k}\gamma_{k}-\sum p_{j}\gamma_{j}}{x}+\beta_{k}$
 \end_inset
 
-.
- So the adding up restriction is implied by 
+, the adding up restriction is implied by 
 \begin_inset Formula $\sum w_{k}=1\Rightarrow\sum\beta_{k}=1$
 \end_inset
 
@@ -334,8 +331,6 @@ For a model of demand, we're given quantities
 \end_layout
 
 \begin_layout Subsubsection
-
-\size normal
 Estimating Linear Expenditure Utility Model with OLS
 \end_layout
 
@@ -392,6 +387,7 @@ x
 \begin_inset Formula $\beta_{k},\gamma_{k}$
 \end_inset
 
+.
  Since the cost function 
 \begin_inset Formula $c(u,p)=\sum p_{k}\gamma_{k}+u\Pi p_{k}^{\beta_{k}}$
 \end_inset
@@ -451,7 +447,7 @@ reference "eq:regression_linexp"
 \begin_inset Formula $\beta_{k}<0)$
 \end_inset
 
- for concavity of the cost function.
+ due to concavity of the cost function.
 \end_layout
 
 \begin_layout Standard
@@ -2306,11 +2302,11 @@ Measuring quality in food products
 \begin_layout Standard
 In the LSMS data, we have broadly classified all items of consumption as
  food, alcohol, housing, transport, social events, energy, communications,
- appliances, finance.
- Based on an earlier argument that status utility should not be viewed as
- yet another commodity group that is separable from these groups, we view
- status utility as an aggregate of status utilities that are in turn derived
- from each commodity group.
+ appliances and finance.
+ As previously argued, the status utility ought not to be viewed as yet
+ another commodity group that is separable from these groups, but instead
+ as an aggregate of status sub-utilities that are in turn derived from each
+ commodity group.
  We further assume that status utility is separable, additive and is aggregated
  from across all the commodity groups we consider (more details are presented
  in Section 
@@ -2351,7 +2347,14 @@ key "NelsonQualityQuantity"
 
 \begin_layout Standard
 An analysis of quality based on price differences of the commodities used
- was first done by Houthakker.
+ was first done by Houthakker
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerFamilySurvey"
+
+\end_inset
+
+.
  Deaton
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2361,8 +2364,21 @@ key "DeatonQualityQuantityVariation,DeatonSurveyElasticities"
 
  repeated this analysis for estimates of cross-sectional elasticities -
  extracting quality elasticities to study the effect of price on consumption.
- In the framework he provides, a set of items can be grouped let's say in
- group 
+ Like in the Tanzanian example, price 
+\begin_inset Formula $p_{c}$
+\end_inset
+
+ varies based on region in the data set on Cote d'Ivoire that Deaton uses
+ as well (remember that we aggregate prices on region level - since reliable
+ data on prices is not available at district level).
+ In the framework provided by Deaton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation,DeatonSurveyElasticities"
+
+\end_inset
+
+, a set of items are grouped in group 
 \begin_inset Formula $G$
 \end_inset
 
@@ -2373,19 +2389,15 @@ reference "fig:tree1"
 
 \end_inset
 
-).
- Like in the Tanzanian example, price 
-\begin_inset Formula $p_{c}$
-\end_inset
-
- varies based on region in the data set on Cote d'Ivoire that Deaton uses
- as well (remember that we aggregate prices on region level - since reliable
- data on prices is not available at district level).
- Then commodities can all be aggregated in a set of groups 
+) - so that all commodities are aggregated in a set of groups 
 \begin_inset Formula $\mathscr{G}$
 \end_inset
 
- so that 
+ (
+\begin_inset Formula $G\in\mathscr{G}$
+\end_inset
+
+ ) and
 \begin_inset Formula $\sum$
 \end_inset
 
@@ -2494,7 +2506,7 @@ P_{G}Q_{G} & =\sum_{i\in G}p_{i}q_{i}\label{eq:pxqxPGQG}
 
 \begin_layout Standard
 All commodities in the groups are expressed in terms of a common unit (e.g.
- weight, volume or calorific value as explain in Deaton 
+ weight, volume or calorific value as explained in Deaton 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonSurveyElasticities"
@@ -2559,7 +2571,6 @@ ln\ V_{G} & =ln\ P_{G}+ln\ \nu_{G}\label{eq:lnVG}
 \end_layout
 
 \begin_layout Standard
-Here, 
 \begin_inset Formula $ln\ \nu_{G}$
 \end_inset
 
@@ -2573,6 +2584,39 @@ Here,
 \end_inset
 
 gives us an estimate of the quality elasticities.
+ The weak separability assumption means that we can Marshallian demand function
+ as 
+\begin_inset Formula $\boldsymbol{q}=g(E,\boldsymbol{p})=g(E/P_{G},\boldsymbol{p^{*}})$
+\end_inset
+
+ where 
+\series bold
+
+\begin_inset Formula $\boldsymbol{q}$
+\end_inset
+
+
+\series default
+ is the quantity vector and 
+\begin_inset Formula $\boldsymbol{p^{*}}$
+\end_inset
+
+is the price vector (see Gorman
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GormanPreference"
+
+\end_inset
+
+, Muellbauer
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MuellbauerAggConsum"
+
+\end_inset
+
+ for details).
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2685,7 +2729,7 @@ key "NelsonQualityQuantity"
 
 \end_inset
 
- for a discussion of summing quantities based on nutritional values
+ for a discussion on summing quantities based on nutritional values
 \begin_inset Foot
 status open
 
@@ -2710,12 +2754,15 @@ key "USDA"
  for calorific value of food items).
  Whether we use weight, calories or volume as the aggregation unit is determined
  by consumer habits.
- While we assume that most food is limited by calorific intake, we choose
- volume units for both alcohol consumption and other beverages - arguing
- that unlike for starch or protein, the consumers adjust alcohol or coffee
- intake based on volume rather than the calorific value.
- They key focus on categorization of food items is the possibility of a
- substitution by the consumer where she can compromise on quality as prices
+ While combining tea quantities recorded in grams with cold drinks recorded
+ in mls, for example, we use a conversion factor for tea as the average
+ weight of dried tea leaves used to prepare a litre of tea.
+ Notice that while we assume that most food is limited by calorific intake,
+ we choose volume units for both alcohol consumption and other beverages
+ - arguing that unlike for starch or protein, the consumers adjust alcohol
+ or coffee intake based on volume rather than the calorific value.
+ The key focus in categorization of food items is the possibility of a substitut
+ion by the consumer within where she can compromise on quality as prices
  rise (together).
  The classical butter vs oil substitution for example would leave both butter
  and margarine in the same group - with butter having a higher quality (price)
@@ -2733,7 +2780,7 @@ Now, the separable utility function across the groups
 \end_inset
 
  .
- As extension of double logarithmic model used by Deaton
+ An extension of double logarithmic model used by Deaton
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonSurveyElasticities"
@@ -2770,7 +2817,7 @@ Here,
 \begin_inset Formula $i$
 \end_inset
 
- is a household 
+ is a household, 
 \begin_inset Formula $q_{kic}$
 \end_inset
 
@@ -2786,7 +2833,14 @@ Here,
 \begin_inset Formula $V_{kic}$
 \end_inset
 
- is the unit-value (as defined in Equation  ) 
+ is the unit-value (as defined in Equation  
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deatonmodel_lnv"
+
+\end_inset
+
+), 
 \begin_inset Formula $x_{ic}$
 \end_inset
 
@@ -2823,7 +2877,7 @@ Here,
  Notice that the equation does not fulfill the criteria of a demand equation
  (the constraints of homogeneity, adding up are not necessarily satisfied).
  To get around the problem of price variation across regions, Deaton removes
- cluster and price effects by subtraction the within-cluster means and obtains
+ cluster and price effects by subtracting the within-cluster means and obtains
  the following equations as a preliminary estimate of the coefficients (which
  are later adjusted to handle measurement error problems):
 \end_layout
@@ -2879,7 +2933,21 @@ key "DongShonkwierCappsQualityQuantity"
 \end_layout
 
 \begin_layout Standard
-In the results presented in Tables 
+In the results of estimation of Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Deatonmodel_diffq"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deatonmodel_diffv"
+
+\end_inset
+
+ presented in Tables 
 \begin_inset ERT
 status open
 
@@ -2900,7 +2968,7 @@ status open
 
 
 \backslash
-ref{tabunitvalue} 
+ref{tabunitvalue}
 \end_layout
 
 \end_inset
@@ -3758,9 +3826,9 @@ Methods to include non-food items
 \end_layout
 
 \begin_layout Standard
-While we focus on food items, it may be possible detect price differences
- in the market for the non-food items and thus measure status utility from
- their consumption.
+While our focus has only been on food items so far, it may be possible to
+ detect price differences in the market for the non-food items and arrive
+ at an approximate measure of the status utility from consumption as well.
  The variation in per-head consumption of an item over populations in different
  regions can provide some idea of price differences within an item category.
  A rudimentary way of finding such differences is detecting the presence
@@ -3777,14 +3845,10 @@ While we focus on food items, it may be possible detect price differences
 
 \begin_layout Standard
 Such an effort to detect the variants of the same item with different prices
- in the markets neither trivial nor reliable.
- but combined with some information from the supply side, we could infer
- the differences in 
-\series bold
-quality
-\series default
- in the market where the consumer may signal status with higher quality
- of items for a particular item.
+ in the markets neither is neither trivial nor reliable - but combined with
+ some information from the supply side, we could infer the differences in
+ quality in the market so that the consumer may signal status with purchase
+ of higher quality item in a particular category.
  We attempt to identify the peaks in the distribution of per head consumption
  cost after accounting for control variables related to usage of the item
  e.g.
@@ -3832,17 +3896,13 @@ es in detergents to be significant.
 
 \begin_layout Standard
 It can't be denied that such inferences are ad-hoc and depend on our knowledge
- of the factors that may influence the higher per-head consumption cost
- for a particular item category.
- Further, not all 
-\series bold
-problems
-\series default
- can be circumvented with such an aggregation.
+ of the factors that influence the higher per-head consumption cost for
+ a particular item category.
+ Further, not all problems can be circumvented with such an aggregation.
  One cannot for example, use per-head consumption costs to detect price
  differentiation for cigarettes - where the most significant factor affecting
- high consumption (the usage control variable) is simply be the addiction
- of the consumer - the data on which is not available in the survey.
+ high consumption (the usage control variable) is simply the addiction of
+ the consumer - the data on which is not available in the survey.
  We are compelled therefore to ignore smoking for our analysis of quality
  differences.
 \end_layout
@@ -3855,15 +3915,16 @@ A note of caution while using of assets as usage control variables (e.g.
  status difference from (higher) consumption of the item (e.g.
  electricity).
  The separability condition of status utility - which we assume - hinges
- upon this assumption.
- Indeed, the item whose average consumption we test for difference in quality
- in the market - may have less variants of different prices than that of
- the associated asset.
- For example, variants of the washing detergent may not be many in the market
- but the washing machines where detergents are used could be more nuanced.
+ upon the assumption that utility from an item for monthly consumption is
+ independent of that from the asset where that item may be used.
+ It is unlikely that such a double counting would be a major concern because
+ an item of monthly consumption often has less variants of different prices
+ than that of the associated asset.
+ For example, variants of the washing detergent may not be as many in the
+ market as those for washing machines (or vice versa).
  Since we do not have the cost estimate on the assets owned by the household
  - we are compelled to either use the knowledge of asset's market in the
- region or ignore the price differences in asset altogether
+ region or ignore the price differences in the asset altogether
 \begin_inset Foot
 status open
 
@@ -3902,13 +3963,13 @@ Food
 \end_layout
 
 \begin_layout Standard
-Once the two-stage budgeting model of status has been specified, we need
- to particularly careful about aggregation of commodities.
+With the two-stage budgeting model of status, we need to be particularly
+ careful about aggregation of commodities.
  The assignment of food items into groups needs to accomplish two goals.
  First is to ensure the separability of utility.
- The classification into sugars, condiments, starch, fish-seafood, meat,
+ Our classification into sugars, condiments, starch, fish-seafood, meat,
  vegetables, fruits and beverages is based on the calorific density of food
- items and the food habits of the population.
+ items as well as the food habits of the population.
  It is not difficult to see that a representative consumer would not overspend
  on sugars to cut down expenditure on bread for example.
  The second goal is to ensure that the group constituent prices move together.
@@ -3921,88 +3982,64 @@ s data - but one way to ensure co-movement of price would be to create groups
 \end_layout
 
 \begin_layout Standard
-Notice that certain household with characteristics like higher education,
- income or class may have a better access to quality because of supply side
- asymmetries i.e.
+While households with characteristics like higher education, income or class
+ may have a better access to quality because of supply side asymmetries
+ i.e.
  better quality food may be available in areas where there is electricity
- and where high income earners reside.
- The current model of quality would still record the purchase of higher
- quality (price) commodities as a measure of quality.
+ and where high income earners reside, the current model of quality would
+ still record the purchase of higher quality (price) commodities as a measure
+ of quality (thus factoring in the supply side concerns as well).
  Notice also that our categories are generic enough for us not to have to
  worry about the zero-consumption on the group of commodities by the consumers.
 \end_layout
 
 \begin_layout Standard
-Deaton's AIDS formlation used the generalised PIGL functions.
- we need to provide a utility function that budgets for status as well.
-\end_layout
-
-\begin_layout Standard
-Let's assume a community that consumes just fruits and meat.
+While the generalised PIGL functions presented by Deaton satisfy the demand
+ equation restrictions, we do need to have a special case of a utility function
+ that represents the budgeting of status.
+ For current purposes, a linear model of status sub-utility aggregation
+ is used.
+ To elaborate this, let's assume a community that consumes just fruits and
+ meat.
  If the food utility function (combining status and non-status utility)
  for an individual in the community is of the form 
 \begin_inset Formula $u(\boldsymbol{q})=f(u_{meat}(q_{meat}),u_{fruits}(q_{fruits}))$
 \end_inset
 
-, - it is likely that a consumer buying a better steak could imply buying
- cheaper fruits.
- For simplicity, we assume that quality utility can be expressed a linear
- sum i.e.
+ - it is likely that a consumer buying a better steak may buy cheaper quality
+ fruits.
+ The linear model of quality utility implies the status utility as simply
+ 
 \begin_inset Formula $\alpha_{meat}\nu_{meat}+\alpha_{fruits}\nu_{fruits}$
 \end_inset
 
 .
  This doesn't change the form of the utility function and keeps the utility
  separable.
- This assumption also implies that a consumer has a bias that is insensitive
- to price i.e.
- a person who pays more attention to meat quality would continue to buy
- better quality meats even though the price have gone up (driven bu the
- constant 
+ 
+\end_layout
+
+\begin_layout Standard
+In our model, a representative consumer does reduce quality in response
+ to price rise - but she may compensate for this compromise by raising quality
+ (price) in a more affordable commodity group.
+ The linear model however can also imply a certain consumer bias that may
+ be insensitive to price i.e.
+ a person who pays more attention to meat quality is more likely to buy
+ better quality meats even though the price have gone up (if the quality-elastic
+ity being driven by the higher 
 \begin_inset Formula $\alpha_{meat}$
 \end_inset
 
 ).
- The weak separability assumption offers 
-\begin_inset Formula $\boldsymbol{q}=g(E,\boldsymbol{p})=g(E/\lambda,\boldsymbol{p^{*}})$
-\end_inset
-
- where 
-\series bold
-
-\begin_inset Formula $\boldsymbol{q}$
-\end_inset
-
-
-\series default
- is the quantity vector and 
-\begin_inset Formula $\boldsymbol{p^{*}}$
-\end_inset
-
-is the price vector (see Gorman
-\begin_inset CommandInset citation
-LatexCommand cite
-key "GormanPreference"
-
-\end_inset
-
-, Muellbauer
-\begin_inset CommandInset citation
-LatexCommand cite
-key "MuellbauerAggConsum"
-
-\end_inset
-
-).
- In our model, consumer does reduce quality in response to price rise -
- but may compensate for this compromise by raising quality (price) in a
- more affordable commodity group.
  If individuals spend proportionately less on expensive food items when
- they have electricity that should be evident from analysis.
+ they have electricity that also should be evident from this analysis.
  
 \end_layout
 
 \begin_layout Subsection
+
+\size normal
 NonFood
 \end_layout
 
@@ -4031,6 +4068,8 @@ reference "subsec:Methods-to-include-nonfood"
 status open
 
 \begin_layout Plain Layout
+
+\size normal
 We have assumed there are no secondary markets or hoarding for items in
  consideration
 \end_layout
@@ -4060,7 +4099,7 @@ reference "fig:ElectricityvsKeroseneCosts"
 \begin_layout Subsection
 
 \size normal
-Status rank and quality measure
+A note on Status rank and quality measure
 \end_layout
 
 \begin_layout Standard
@@ -4092,7 +4131,7 @@ For food as well as non-food items, our notion of status ranking is determined
 
 \begin_layout Standard
 This interpretation of status from a utility tree is fundamentally different
- from how Ireland model
+ from Ireland model
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ireland_signals"
@@ -4100,10 +4139,10 @@ key "ireland_signals"
 \end_inset
 
 , as it doesn't rely on a status (or visible) good that doesn't have any
- utility.
- On contrary, we claim that except for jewelry and snob items, nobody buys
- a status good for the sake of buying a status good - instead status is
- constituted in buying higher quality (or rare) items.
+ other utility.
+ On the contrary, our claim is that except for jewelry and snob items, nobody
+ buys a status good for the sake of buying a status good - instead status
+ is constituted in buying higher quality (or rare) items.
  Except when buying snob items, a consumer doesn't 
 \begin_inset Quotes eld
 \end_inset
@@ -4115,11 +4154,11 @@ need
  conspicuous consumption except through the relative differences with respect
  to other consumers.
  In our three-commodity world, lets assume that 
-\begin_inset Formula $A,B\epsilon protein$
+\begin_inset Formula $A,B\in protein$
 \end_inset
 
  and 
-\begin_inset Formula $C\epsilon starch$
+\begin_inset Formula $C\in starch$
 \end_inset
 
 .
@@ -4131,8 +4170,7 @@ need
 .
  Since we assume protein and carb utilities to be separable and we also
  assume that no consumer goes to purchase anything conspicuous - status
- is inferred from the availability of options.
- If one of 
+ is inferred from the availability of options and thus if one of 
 \begin_inset Formula $A$
 \end_inset
 
@@ -4141,7 +4179,7 @@ need
 \end_inset
 
  is pricier than the other, then that is the only way in which status is
- signal in this world.
+ signalled in this three-commodity world.
  A crude measure of our status criterion is the dispersion in price (
 \begin_inset Formula $p-max(p)$
 \end_inset
@@ -4181,22 +4219,38 @@ Next steps
 \end_layout
 
 \begin_layout Standard
-We would need to test the assumption of price - and explore MLE techniques
- for estimation of .
+We would need to test the assumption of constant price structure on the
+ time series data - and explore MLE techniques for estimation of Equations
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deatonmodel_lnq"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deatonmodel_lnv"
+
+\end_inset
+
+.
  This may allow us to estimate cross-price elasticities in a time-series
- spanning a decade.All we can ascertain is that quality is compromised or
- not for poorer households.
- A more special case of the utility function and the correpsonding demand
- equation may help us answer this question.
+ spanning a decaA more special case of the utility function and the correspondin
+g demand equation may help us answer the question of whether quality is
+ compromised or not for poorer households as more industrial goods arrive
+ in the market.
 \end_layout
 
 \begin_layout Standard
-Another approch that could be explore is the  numerical optimisation of
- utility (instead of through first-order conditions).
- If the problem could be formulated as Pareo-optimality problem - where
- consumers optimise the utility together subject to constraints, then we
- could explore the attempt finding the solutions through certain multi-objective
- optimisation algorithms.
+Instead of the classical utility approach, we could explore the  numerical
+ optimisation of utility functions (instead of optimising through first-order
+ conditions).
+ If the status utility optimisation problem could be formulated as a Pareto-opti
+mality problem - where consumers optimise the utility together subject to
+ constraints, then we could attempt finding the solutions through certain
+ multi-objective optimisation algorithms.
  Simply put, this is equivalent to adding the optimisation of the error
  term 
 \begin_inset Formula $\sum_{i}(g(x_{i},p)-q_{obs,i})^{2}$
@@ -4218,7 +4272,11 @@ Another approch that could be explore is the  numerical optimisation of
 \begin_inset Formula $u(x,p)$
 \end_inset
 
- by every consumer.
+ by every consumer in a population of 
+\begin_inset Formula $N$
+\end_inset
+
+ consumers.
  The optimisation of error term is to only ensure that 
 \begin_inset Formula $q_{i}$
 \end_inset
@@ -4230,6 +4288,10 @@ Another approch that could be explore is the  numerical optimisation of
 .
  If we look to maximise 
 \begin_inset Formula $F_{i}(X=[\boldsymbol{k},q_{i}])$
+\end_inset
+
+ with model parameters 
+\begin_inset Formula $\boldsymbol{k}$
 \end_inset
 
  subject to 
@@ -4247,7 +4309,7 @@ Another approch that could be explore is the  numerical optimisation of
  is the optimisation tolerance, the we could arrive at a numerical solution
  to our problem.
  The homogeneity constraint and the constraints arising out of preferences
- can be further imposed to the problem.
+ may be further imposed to the problem.
 \end_layout
 
 \begin_layout Section
