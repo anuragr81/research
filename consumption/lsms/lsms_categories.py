@@ -1,28 +1,19 @@
 from itertools import ifilter
+import sys
 
-expenseTree= {
-'intoxication' :['cigarettes','beer','brews','winespirits'],
+nonFoodGroups= {
 'home_energy':['charcoal','electricity','gas','kerosene','matches'],
 'transport':['petrol','public_transport',],
 'communications':['cellphone_voucher','phone',],
 'personal_products':['bar_soap','toothpaste','shampoo','skin_cream','other_personal'],
 'household_products':['clothes_soap','toilet_paper','bulbs','misc_cleaning','carpet','linen','mat','mosquito_net','mattress',],
-'household_repair':['household_products_repair','house_repair','motor_repair','bicycle_repair','consumer_durables_repair',],
+'household_services':['household_products_repair','house_repair','motor_repair','bicycle_repair','consumer_durables_repair','services'],
 'appliances':['light_bulbs','sports_hobby','camera',],
-'charity':['donation'],
-'services':['services'],
+#'charity':['donation'],
+#'services':['services'],
 'housing':['mortgage','council_rates','building_material','bamboo','grass'],
 'legalfinance':['insurance','legal'],
-'social_events':['marriage','bride_price','funeral'],
-'food': {'beverages':['water','tea','coffee','miscdrinkpowder','canned_drink','readymade_tea_coffee'],
-         'starch': ['rice_husked','rice_paddy','maize_green','maize_grain','maize_flour','millet_grain','millet_flour','wheat','bread','bunscakes','pasta','othercereal','pulses',] ,  # milling
-         'vegstarch' : ['cassava_fresh','cassava_flour','sweet_potato','yam','potatoes','banana_green','othervegstarch'], 
-         'sugars':['sugar','sweet','honey'], 
-         'fat':['peanuts','coconut','cashew_almonds','nut_products','cooking_oil','butter_margarine',],
-         'vegetables':['onion','greens','dried_canned_veg',] ,
-         'fruits':['banana_ripe','citrus','mangoes','sugarcane'],
-         'protein':['goat','beef','pork','chicken','wild_birds','wild_meat','fish_seafood','dried_canned_fish','packaged_fish','fresh_milk','milk_products','canned_mik','eggs'], 
-         'condiments': ['spices','salt'] },
+'social_functions':['marriage','bride_price','funeral','donation'],
 }
 
 foodGroups = {
@@ -106,13 +97,13 @@ def parse_tree(graph,start,t):
 	raise ValueError("Invalid type: %s" % type(t) )
 
 
-def generate_graphs():
-    import pydot
-    for i in foodGroups:
+def generate_graphs(directory,groupsToDraw):
+    
+    for i in groupsToDraw:
         graph = pydot.Dot(graph_type='graph')
-        res= parse_tree(graph,"ET",{'ET':{i:foodGroups[i]}})
-        graph.write_png('c:/temp/file'+str(i)+".png")
-        print( {i:foodGroups[i]} )
+        res= parse_tree(graph,"ET",{'ET':{i:groupsToDraw[i]}})
+        graph.write_png(directory+'/file'+str(i)+".png")
+        print( {i:groupsToDraw[i]} )
 
 
 
@@ -127,6 +118,16 @@ def check_calories_data(foodGroups,caloriesDict):
 	
 
 if __name__ == '__main__':
+	#import pydot
+	#generate_graphs(directory='c:/temp/draw',groupsToDraw=nonFoodGroups)
+
+	import pandas as pd
+	shortNames = reduce( lambda x,y: x+y, nonFoodGroups.values() , [])
+	group_name = lambda fname : [y[0] for y in ifilter(lambda x:fname in x[1],  nonFoodGroups.iteritems())][0]
+	pd.DataFrame ( {'shortname': shortNames,'group' : [group_name(f) for f in shortNames] }).to_csv('c:/temp/nonfoodshortnames.csv')
+
+	sys.exit(0)
+	
 	check_calories_data(foodGroups,caloriesDict)
 	import pandas as pd
 	

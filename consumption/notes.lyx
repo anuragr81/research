@@ -6565,7 +6565,13 @@ If consumption pressures are explained by the level of urbanization, population
 Status ranking from the consumption and asset data
 \end_layout
 
+\begin_layout Subsubsection
+Recovering price information from cost
+\end_layout
+
 \begin_layout Standard
+
+\bar under
 The LSMS survey records neither the price nor the quantity consumed for
  any non-food quantities.
  Instead of differences in prices (which are unavailable), we test whether
@@ -6580,6 +6586,8 @@ The LSMS survey records neither the price nor the quantity consumed for
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 This exercise is neither trivial and not fully reliable at this point -
  but an effort to detect the variants of the same item or group of items
  with different prices in the market.
@@ -6595,6 +6603,8 @@ This exercise is neither trivial and not fully reliable at this point -
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 The significance of control variables denoting the usage of related assets
  owned by the consumer and the lack of any clustering (in average consumption
  scaled by usage) would imply that the status is indicated by the asset
@@ -6609,6 +6619,8 @@ c equipment - we would conclude that consumer raises her ranking by owning
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 If clusters of prices are observed after scaling (regression) with the usage
  variable, we use the cluster prices as input to our affordability factor
  calculation.
@@ -6623,6 +6635,8 @@ If clusters of prices are observed after scaling (regression) with the usage
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 Our eventual goal is to identify the price differences which the consumer
  observes to build her utility tree.
  These trees are are shown for Tanzania LSMS data in the Figures 
@@ -6646,12 +6660,16 @@ reference "fig:tree2"
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 Taking an example where this methodology might work, we consider the cost-per-he
 ad for kerosene which varies a lot in dar-es-salaam (region 7)
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
+
+\bar under
 We have assumed there are no secondary markets or hoarding for items in
  consideration
 \end_layout
@@ -6677,6 +6695,8 @@ rce.
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 Not all problems can be circumvented with such an aggregation either.
  One cannot for example, use per-head consumption costs to detect price
  differentiation for cigarettes - where the most significant factor affecting
@@ -6687,6 +6707,8 @@ Not all problems can be circumvented with such an aggregation either.
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 It is also possible that the asset itself - related to the consumed good
  whose average consumption we test for price-differentiation - has more
  variants of different prices than those of consumed good.
@@ -6698,6 +6720,8 @@ It is also possible that the asset itself - related to the consumed good
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 For most other non-food commodities, either aggregation and/or cluster-detection
  could help identify the price-differentiation.
  If we look at the per-head consumption cost on bar soap, there seem to
@@ -6714,6 +6738,10 @@ tiation.
  It can't be denied that such inferences are ad-hoc and dependent on whether
  there are any assets that may justify higher per-head consumption cost
  or not.
+\end_layout
+
+\begin_layout Subsubsection
+Ranking from assets and consumption
 \end_layout
 
 \begin_layout Standard
@@ -6733,6 +6761,369 @@ Our end-goal is to differentiate the status-impact of consumption from the
  ranking, we avoid double-counting the role of assets - since a lot of items
  are not consumed simply because the asset related to it is not owned by
  the consumer.
+\end_layout
+
+\begin_layout Standard
+The assumption that status utilities from assets and monthly consumption
+ are orthogonal with respect to one another - i.e.
+ status from an item owned and that from an item consumed are completely
+ independent - easily runs into problems with the items for monthly consumption
+ that are related to owned assets.
+ With electricity, for example, the status utility is derived by merely
+ having access to electricity - and also from other consumers inferring
+ status of someone having access to electricity by observing the ownership
+ of assets that run on electricity.
+ In case of mortgages, a higher mortgage would correspond to a better house
+ - while the monthly mortgage itself is not purely expendable.
+ Whether the status utility from an item for monthly consumption is strictly
+ expendable (as in electricity) or not (as in a mortgage), one must make
+ sure the effect of assets is counted.
+ In the case of electricity, both merely having access to electricity and
+ owning more assets that run on electricity determine the status utility
+ while in case of mortgages, it's only the asset (house) that signals status.
+\end_layout
+
+\begin_layout Standard
+With the above clarification, we can look for items with status potential
+ in every functional group.
+ When we consider the status derived from energy choices and the substitution
+ within the group, we consider the absence of electricity a penalty.
+ The penalty is not simply due to price but also due to availability - which
+ can be written roughly as 
+\begin_inset Formula $(p_{i}-max_{i}(p))\times\kappa$
+\end_inset
+
+ (where 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ is the regional-availability-factor).
+ Whether an item is a bandwagon or not is a time-series concern -we assume
+ for now that the bandwagon nature of the item would be reflected in price
+ and the current popularity of the item.
+ When we do observe the time-series, we look how item's ownership (and price)
+ has historically changed over time.
+ Having no electricity where there is no electricity in the region is less
+ damaging to status than having no electricity where electricity is available
+ - therefore penalty is higher when the 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ is high.
+ 
+\end_layout
+
+\begin_layout Standard
+Since criterion 
+\begin_inset Formula $p_{i}-max_{i}(p)$
+\end_inset
+
+ is meant to measure the distribution of an item, we must also factor in
+ the rare usage of an item.
+ carpetsrugs, for example, can be measured in a way so that 
+\begin_inset Formula $max_{i}$
+\end_inset
+
+ (or median value) is taken over a wider category and factors in its less
+ usage of the item i.e.
+ if carpetsrugs are not used by a lot of people and it's highest in the
+ category then it must be conspicuous.
+ However, it's highest in the category and is still used by a lot of people
+ then it is slightly less conspicuous.
+ The popularity of the item must matter.
+ The change in popularity of the item counts the bandwagon effect.
+ Since we use availability to denote the supply issues we cannot factor
+ the rare usage in availability and another factor accounting for popularity
+ of the item is needed.
+ We could also modify the measure 
+\begin_inset Formula $max_{i}(p)$
+\end_inset
+
+ so that it factors in the popularity (e.g.
+ by using the top quantile expenditure instead of max-price).
+\end_layout
+
+\begin_layout Standard
+The major trouble we are going to get into is in estimating the price.
+ We use peaks and usage-control-variable methods to obtain prices of all
+ monthly consumption.
+ We ignore categories like services.
+ If prices are available, all items within their group can be sorted based
+ on their metric and then the items can be evaluated based on that criteria.
+ We then compare monthly consumption ranking of these items against the
+ asset ownership of items ranked with the same criteria.
+\end_layout
+
+\begin_layout Standard
+An interesting observation is that those who rent the house are more likely
+ to buy carpets.
+ We check that this is true even when the owner and non-owners both have
+ the same floor type (households with earth - as floor type are less likely
+ to buy carpets).
+ We may consider carpets conspicuous as it appears that those who don't
+ own a house would want to spend on carpets and feel like having a better
+ lifestyle.
+ It's less obvious how our model factors this in? Carpet is definitely more
+ affordable than a house - but we don't calculate 
+\begin_inset Formula $p_{i}-max_{i}(p)$
+\end_inset
+
+ with 
+\begin_inset Formula $max_{i}(p)$
+\end_inset
+
+ over the housing and carpets - so 
+\begin_inset Formula $p_{i}-max_{i}(p)$
+\end_inset
+
+ only sees an item in relation to other variants - whereas in this particular
+ case for carpets, the consumption compensates for assets.
+ 
+\begin_inset Formula $p_{i}-max_{i}(p)$
+\end_inset
+
+ criteria quite simply does not measure this as the conspicuous consumption
+ is realised not through consumption on carpets in relation to other household
+ appliances but in the wider context of housing.
+ Considering a house as an asset, carpets matter as they transform 
+\begin_inset Formula $r_{C}$
+\end_inset
+
+ to that adds to 
+\begin_inset Formula $r_{A}$
+\end_inset
+
+ .
+ This clarification also implies that we cannot separate assets from consumption
+ - i.e.
+ if we were to argue that individuals don't just take rented housing instead
+ of owned housing - but they also overspend on carpets and electric appliances
+ then we'll have to show that house and carpets belong in the same group.
+ Our functional group (of housing in this case) would involve both asset
+ and consumption - simply because the substitution is happening between
+ assets and consumption within every functional group.
+ While this does have an economic story to tell - one where individuals
+ compensating for not having assets or a certain personal characteristic
+ by overspending on monthly consumption items - we must also find evidence
+ of the ranking of items changing as they switch between assets and consumption
+ (e.g.
+ by showing that homeowners stop buying as many carpets).
+\end_layout
+
+\begin_layout Standard
+The argument of 
+\begin_inset Formula $r_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{C}$
+\end_inset
+
+ for a group such as housing can work only if we know how they're measured
+ and combined.
+ The utility function argument is simply of distribution of utility between
+ consumption and assets and - it could be of the form 
+\begin_inset Formula $\alpha_{A}u_{A}(A)+(1-\alpha_{A})u_{C}(q)$
+\end_inset
+
+ where 
+\begin_inset Formula $\alpha_{A}$
+\end_inset
+
+ is the parameter of asset preference.
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Since it is difficult to combine personal characteristics with a particular
+ functional group - we may keep utility from personal characteristics as
+ a constant in the near term.
+\end_layout
+
+\end_inset
+
+ Depending on assets (endowments) 
+\begin_inset Formula $A$
+\end_inset
+
+, the consumer may want to overload on 
+\begin_inset Formula $q$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+rm(list=ls())
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');source('translation/
+frameutils.R')
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ll=lsms_loader(fu=fu,ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+d<-ll@load_diary_file(dirprefix = '../',year = 2010,fu = fu, ln = lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+d<-merge(d,rename(lsms_normalizer()@items_codes_2010()[,c("shortname","code")],c
+("code"="item")),by=c("item"),all.x=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+d<-subset(d,item<10000)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ohs<-ll@load_ohs_file(year=2010, dirprefix = '../',fu = fu,ln = lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique
+ ignores person id 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs
+ in hhidsRegion
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+item_usage<-function(itemName,dat,hhidsRegion)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+k<-(subset(dat,shortname==itemName)[,c("item","hhid","cost","shortname")])
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+kk<-merge(k[,c("hhid","item","shortname","cost")],hhidsRegion[c("hhid","region",
+"district","ward","ea")],by=c("hhid"),all.x=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+return(kk)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#looking at cost per household variations
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ru<-ddply(kk,.(region),summarise,n=length(unique(hhid)),cost=mean(quantile(cost,.4
+),quantile(cost,.6)))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ck<-ll@combined_data_set(year = 2010, dirprefix = '../',selected_category
+ = as.character(subset(lsms_normalizer()@items_codes_2010(),shortname=="carpet")$
+code),fu = fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+summary(significant_lmvars(ds = ck,depvar = "visible_consumption",vars_init
+ = c("total_expenditure","tothouserent","toteducexpense","consu","highest_educ",
+"age","region","popdensity","years_community","housingstatus","roomsnum","is_res
+ident"))[["result"]])
+\end_layout
+
+\begin_layout Plain Layout
+#in stata, label list presents the list of values of a code
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

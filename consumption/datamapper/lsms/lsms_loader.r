@@ -11,7 +11,7 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       analyse_cj="function",load_ohs_file="function",
                                       match_recorded_prices="function",get_inferred_prices="function",
                                       aggregate_local_prices="function",add_localmedian_price_columns="function",
-                                      food_expenditure_data="function"))
+                                      food_expenditure_data="function",read_assets_file="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -322,7 +322,14 @@ lsms_loader<-function(fu,ln) {
     datConsum$price  <-datConsum$cost/datConsum$quantity
     datConsum        <-subset(datConsum,item>10000)
     datConsum        <-merge(datConsum,ddply(datConsum,.(hhid),summarise,x=sum(cost)))
+    if (year == 2010){
     ii               <-merge(ln()@items_codes_2010(),read.csv(shortNamesFile)[c("calories","shortname","group")],by=c("shortname"))
+    }
+    else
+    {
+      stop(paste("get_inferred_prices - year",year,"not supported"))
+    }
+    
     ii               <-rename(ii,c("code"="item","item"="longname"))
     
     print (paste("Assuming the groups in the file:",shortNamesFile ,"are in sync with the groups in the conversion function"))
@@ -387,6 +394,23 @@ lsms_loader<-function(fu,ln) {
     }
     
     return(p)
+  }
+  
+  read_assets_file<-function(year,dirprefix,fu,ln){
+    
+    if (year == 2010){
+    secnFileName <- paste(dirprefix,'./lsms/TZNPS2HH2DTA/HH_SEC_N.dta',sep="")
+    print(paste("read_assets_file - opening file:",secnFileName))
+    secndat<-read.dta(secnFileName,convert.factors = FALSE)
+    
+    assetsData <- fu()@get_translated_frame(dat=secndat,
+                                    names=ln()@get_diary_secn_columns_lsms_2010(),
+                                    m=ln()@get_diary_secn_fields_mapping_lsms_2010())
+    
+    return(assetsData)
+    }
+    stop("read_assets_file - year", year, "not supported")
+    
   }
   
   load_ohs_file <-function(year,dirprefix,fu,ln){
@@ -736,7 +760,7 @@ lsms_loader<-function(fu,ln) {
   }
   
   
-  load_income_file<-function (year,dirprefix){
+  load_income_file<-function (year,dirprefix,fu,ln){
     if (year == 2010){
       #* read section E
       idat1 <-read_tnz(paste(dirprefix,'./lsms/./TZNPS2HH1DTA/HH_SEC_E1.dta',sep=""),FALSE)
@@ -766,7 +790,7 @@ lsms_loader<-function(fu,ln) {
   }
   
   
-  merge_hh_ohs_income_data<-function(hh,ohs,income,year,selected_category,set_depvar){
+  merge_hh_ohs_income_data<-function(hh,ohs,income,year,selected_category,fu,set_depvar){
     if (year == 2010 || year == 2012) {
       if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
         stop("factors must be converted an integer")
@@ -834,6 +858,13 @@ lsms_loader<-function(fu,ln) {
                         years_community=heads$years_community,
                         housingstatus=heads$housingstatus,
                         roomsnum=heads$roomsnum,
+                        roofmaterial=heads$roofmaterial,
+                        floormaterial=heads$floormaterial,
+                        wallsmaterial=heads$wallsmaterial,
+                        toilet=heads$toilet,
+                        cookingfuel=heads$cookingfuel,
+                        dryseasonwatersource=heads$dryseasonwatersource,
+                        
                         stringsAsFactors=FALSE);
       print(
         paste("Total number of households with head_highest_education=NA : ",
@@ -913,6 +944,12 @@ lsms_loader<-function(fu,ln) {
                         years_community=heads$years_community,
                         housingstatus=heads$housingstatus,
                         roomsnum=heads$roomsnum,
+                        roofmaterial=heads$roofmaterial,
+                        floormaterial=heads$floormaterial,
+                        wallsmaterial=heads$wallsmaterial,
+                        toilet=heads$toilet,
+                        cookingfuel=heads$cookingfuel,
+                        dryseasonwatersource=heads$dryseasonwatersource,
                         stringsAsFactors=FALSE);
       
       print ("Calculating hsize")
@@ -963,7 +1000,7 @@ lsms_loader<-function(fu,ln) {
     # race(ref_race),family size (fam_size),
     # area_type (popsize,bls_urbn)
     #* Loading income file
-    incomedat <-load_income_file(dirprefix=dirprefix,year=year) # must provide total income (fincaftm)
+    incomedat <-load_income_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # must provide total income (fincaftm)
     
     if (is.null(hhdat)){
       stop("Could not load diary hhdata")
@@ -1010,7 +1047,7 @@ lsms_loader<-function(fu,ln) {
         print(paste("ignored",n1-n2,"/",n1," hhids"))
       }
     }
-    dstruct<-merge_hh_ohs_income_data(hh=hh,ohs=ohs,income=income,year=year,selected_category=selected_category,set_depvar=set_depvar);
+    dstruct<-merge_hh_ohs_income_data(hh=hh,ohs=ohs,income=income,year=year,fu=fu,selected_category=selected_category,set_depvar=set_depvar);
     return(dstruct);
     #* ))
   }
@@ -1019,6 +1056,7 @@ lsms_loader<-function(fu,ln) {
   return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
              analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, 
              get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices,
-             add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data))
+             add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
+             read_assets_file=read_assets_file))
   
 }

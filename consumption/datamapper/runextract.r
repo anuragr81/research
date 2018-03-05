@@ -9,8 +9,7 @@ debugSource('us_cex/us_cex_loader.r')
 
 #debugSource('us_cex/us_cex_loader.r');ds<-uscex(fcdu=fu)@combined_data_set(2un004,"C:/local_files/research/consumption/cex/cex_data/",201,FALSE)
 
-debugSource('lsms/lsms_normalizer.r');debugSource('lsms/lsms_loader.r');debugSource('translation/frameutils.R')
-#ln@food_categories_lsms_2010()
+source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');source('translation/frameutils.R')
 
 get_allgrp_food_data_frame<-function(year,dirprefix,fu,ln,shortNamesFile){
   r   <-data.frame();
