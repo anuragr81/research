@@ -1,0 +1,5313 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{lscape}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\headheight 2cm
+\headsep 2cm
+\footskip 2cm
+\columnsep 1.2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 2
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+
+\size normal
+Determining Status ranking from the LSMS data in Tanzania
+\end_layout
+
+\begin_layout Standard
+The LSMS survey records neither the price nor the quantity consumed for
+ any non-food quantities.
+ Instead of differences in prices (which are unavailable), we test whether
+ differences in per-head consumption in the population within a region could
+ represent the variants of different prices which can be used to calculated
+ the affordability factor (i.e.
+ the quantity 
+\begin_inset Formula $p_{i}-max(p_{k})$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+This exercise is neither trivial and not fully reliable at this point -
+ but an effort to detect the variants of the same item or group of items
+ with different prices in the market.
+ In the absence of price data, we hope to use some knowledge of the supply
+ side to improve our interpretation of price from average cost data.
+ We begin with identifying clusters in the per head consumption cost after
+ accounting for control variables related to usage of the item e.g.
+ more per-head electricity costs should be scaled with number of appliances
+ the household may have (which is available in data).
+ In absence of prices, this ad-hoc test needs to be performed on a case-by-case
+ basis.
+ 
+\end_layout
+
+\begin_layout Standard
+The significance of control variables denoting the usage of related assets
+ owned by the consumer and the lack of any clustering (in average consumption
+ scaled by usage) would imply that the status is indicated by the asset
+ ownership instead (and thus the average consumption consumption doesn't
+ need to be counted for the status impact).
+ For example, since per-head electricity cost is higher for those with electroni
+c equipment - we would conclude that consumer raises her ranking by owning
+ electronic equipment and having electricity - rather than by choosing a
+ higher price option for electricity.
+ We thus ignore the consumption of electricity for testing of signaling
+ quantities.
+\end_layout
+
+\begin_layout Standard
+If clusters of prices are observed after scaling (regression) with the usage
+ variable, we use the cluster prices as input to our affordability factor
+ calculation.
+ As a sanity check, we may also verify the factors that may influence the
+ choice of a higher price item - e.g.
+ with a probit on the dummy of cluster's average-consumption being above
+ or below the cluster price threshold as the dependent variable and the
+ total expenditure, housingstatus, education, relevant asset etc.
+ as control variables.
+ This however, is not the part of the methodology to detect price difference
+ through average consumption.
+\end_layout
+
+\begin_layout Standard
+Our eventual goal is to identify the price differences which the consumer
+ observes to build her utility tree.
+ These trees are are shown for Tanzania LSMS data in the Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:tree1"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:tree2"
+
+\end_inset
+
+.
+ The overall status from consumption of an individual consumer is simply
+ the aggregation of affordability factor (or a similar metric) at the root
+ of the tree.
+\end_layout
+
+\begin_layout Standard
+Taking an example where this methodology might work, we consider the cost-per-he
+ad for kerosene which varies a lot in dar-es-salaam (region 7)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+We have assumed there are no secondary markets or hoarding for items in
+ consideration
+\end_layout
+
+\end_inset
+
+.
+ We clearly cannot claim that the differences in consumption cost per head
+ imply a price differentiation for kerosene - simply because availability
+ of electricity in Dar-es-salaam can change the usage of kerosene in the
+ household (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ElectricityvsKeroseneCosts"
+
+\end_inset
+
+).
+ What we can do for dar-es-salaam (or any region where electricity is also
+ available) is to consider electricity and kerosene as the variants of energy
+ level in tree and treat electricity as a higher price variant of the energy-sou
+rce.
+\end_layout
+
+\begin_layout Standard
+Not all problems can be circumvented with such an aggregation either.
+ One cannot for example, use per-head consumption costs to detect price
+ differentiation for cigarettes - where the most significant factor affecting
+ high consumption is simply be the addiction of the consumer - the data
+ on which is not available in the survey.
+ We are compelled to ignore smoking for our analysis.
+ 
+\end_layout
+
+\begin_layout Standard
+It is also possible that the asset itself - related to the consumed good
+ whose average consumption we test for price-differentiation - has more
+ variants of different prices than those of consumed good.
+ For example, detergent that serves clothes may not be varied but the washing
+ machine where detergents are used could be more nuanced.
+ Unfortunately we do not have even the cost estimate on assets owned by
+ the household - so we are left with ignoring this possibility at the moment.
+\end_layout
+
+\begin_layout Standard
+For most other non-food commodities, either aggregation and/or cluster-detection
+ could help identify the price-differentiation.
+ If we look at the per-head consumption cost on bar soap, there seem to
+ be two cost clusters in region dar-es-salaam - the dummy of per-head-consumptio
+n-cost <6000 (i.e.
+ the cluster dummy) finds roomsnum, language and occupation all significant
+ (total expenditure is not) i.e.
+ those with a better-paying occupations and English-speaking abilities tend
+ to spend disproportionately on bar-soap - this difference in consumption
+ per-head costs could be used as the price-difference in our original sense.
+ The similar cluster dummy for detergent is not found significant (except
+ for roomsnum in dar-es-salaam ) - hence we ignore detergents for price-differen
+tiation.
+ It can't be denied that such inferences are ad-hoc and dependent on whether
+ there are any assets that may justify higher per-head consumption cost
+ or not.
+\end_layout
+
+\begin_layout Standard
+Our end-goal is to differentiate the status-impact of consumption from the
+ status-impact of assets and then consider a combined status impact form
+ assets and consumption - so we may fit the function for consumption from
+ status goods into the intertemporal substitution problem.
+ The relative assets-ownership ranking of consumers is an important part
+ of this exercise.
+ The LSMS data does not have even the cost information for assets owned,
+ so we only consider the number of items owned for asset-ownership ranking
+ of consumes i.e.
+ if someone has more assets than another person who has less or none of
+ the same asset, then all else being equal the former is invariably of higher
+ status than the latter.
+ Since our goal is to finally combine the asset-ranking and consumption
+ ranking, we avoid double-counting the role of assets - since a lot of items
+ are not consumed simply because the asset related to it is not owned by
+ the consumer.
+\end_layout
+
+\begin_layout Section
+
+\size normal
+Comparing consumption across commodities
+\end_layout
+
+\begin_layout Standard
+The prices are recorded for a set of quantities.
+ These quantities are nearly the same for (mls, litres, g, kgs, pieces)
+ for both recorded prices and consumed quantities.
+ However, not all food items are recorded - so we must rely on the inferred
+ prices for the most part.
+ In fact, if we were to filter out of all the items where price is not recorded
+ (NA), we would be only left with about 500 households (for 2010).
+ Such a filter is a very restrictive one and we choose to depend on recorded_pri
+ce alone for premium - we use it for guided value wherever it is available.
+ When multiple prices are recorded for the same quantity (or for a different
+ quantity) - we choose the recorded_price that is closest to the inferred
+ price.
+ The matching is never done on quantities - only on prices.
+ Across all regions only the following items have multiple prices recorded
+ - Peas/Lentils - 401 , Onions-tomatoes 601, Millet-grain 106, Spinach 602
+ , Seafood 808, Bread 109, Local brews 107, Yams 204, Cassava-flour 202
+ Fruits 703.
+ Staying close to the recorded price ensures that we only have slight measuremen
+t errors in our technique and an double-evidence for clustering in prices.
+ Unfortunately market prices are not recorded for all region codes in the
+ survey.
+ Even if prices were recorded on a ward or district level (ignoring the
+ ea level) prices recorded are still quite rare.
+ Only about 30% of the total purchases can be matched up with recorded -
+ prices.
+ Of those where prices can be matched, about 15% of the inferred-prices
+ deviate more than 50% from the closest recorded price.
+ We could think of matching with the price-quantity relatonship but the
+ market prices are not rich enough for that.
+ Where multiple prices are recorded they indicate the variety of items rather
+ than the different quantities.
+ Following prices for cassava/dry flour indicate the difference between
+ cassava and its dry flour in the market.
+ The disparity in prices justifies the price-matching.
+ Unfortunately, there are quite some errors in recorded market price - such
+ as prices being far lower by a magnitude (e.g.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+region:7,district:3,ward:212,ea: 31 for item:203
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ has less than 10th of the price).
+ The evidence of items with multiples prices aggregated in one category
+ (e.g.
+ in cassava dry/flour or onions/tomatoes category) necessitates that we
+ view the different items as of same conspicuous value.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="12">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+region
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+district
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ward
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ea
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+item
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lwp_unit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lwp
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+price
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+factor
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+recorded_quantity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+recorded_price
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3545
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+202
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3546
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+202
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+750
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.001
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.75
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+666.666666666667
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The use of market-recorded prices are to adjust the effective of region
+ on prices.
+ We observe that a some prices can be very skewed (local brews 107).
+ Some data is clearly bad (e.g.
+ for eggs, canned milk).
+ Chicken seems highly skewed.
+ Taken over all regions, the highest kurtosis (not much difference in prices)
+ is observed for charcoal (207), milling-grain fees(208), Maize-flour(105),
+ Sugar(301), Salt(1003), Fruits (703) , Beef(802), Eggs(807).
+ Less kurtosis (diffusion) is in Millet-grain(106), Bread(109), Irish potatoes(2
+05), Coconuts (502), Onions-tomatoes (601) - different items, Spinach(602),
+ Dry-tea(1101).
+ Next are Kerosene (201), Maize cob (103), Cassava (201), Plantains (206),
+ Groundnuts (501), Chicken (804), Local Brews (1107).
+ Still lower kurtosis (higher differences) are in Sweet potatoes (203),
+ Bananas (701), Citric Fruits (702), Fish-Seafood (808), Milk(901), Cooking
+ oil (1001).
+ Lowest kurtosis is found husked rice (102), MaizeGrain (104), Millet-Flour(107)
+, Cassava-dryflour (202), Yams/cocoyams(204) (two varieties), Peas/lentils(401),
+ Goat meat (801).
+\end_layout
+
+\begin_layout Standard
+If we were to back out the prices from expenditure, then we must ensure
+ that the expenditure recorded is accurate.
+ Unfortunately, there are many outliers in the data.
+ Sometimes, only one person in a district is recorded.
+ This magnifies the effect of the outlier observation on the price.
+ The aggregation of prices can only be done at region level for that purpose.
+\end_layout
+
+\begin_layout Subsection
+Filtering data further
+\end_layout
+
+\begin_layout Standard
+We check for skewness of prices in order to filter out bad households with
+ bad prices.
+ We excluded that households with report expenditure of these ~20 households.
+ One option is to smoothen the price data - but Deaton simply removes the
+ cluster means from prices in the regression (with the fixed effects model).
+\end_layout
+
+\begin_layout Subsection
+Measuring quality in food products
+\end_layout
+
+\begin_layout Standard
+An analysis of quality based on price differences of the commodities used
+ was done by Houthakker.
+ Deaton has repeated this analysis with for estimates of cross-sectional
+ elasticities - extracting quality elasticities to study the effect of price
+ on consumption.
+ A group of identified items can be grouped let's say in group 
+\begin_inset Formula $G$
+\end_inset
+
+ (see Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:tree1"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:tree2"
+
+\end_inset
+
+).
+ The price 
+\begin_inset Formula $p_{c}$
+\end_inset
+
+ varies based on region (we aggregate prices on region level - since reliable
+ data on prices is not available at district level).
+ We group commodities in set of groups 
+\begin_inset Formula $\mathscr{G}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\sum$
+\end_inset
+
+
+\begin_inset Formula $p_{i}q_{i}=x=\sum_{G\in\mathbb{\mathscr{G}}}P_{G}Q_{G}$
+\end_inset
+
+.
+ We defined 
+\begin_inset Formula $q_{G}=\sum_{i\in G}q_{i}$
+\end_inset
+
+.
+ To keep the structure of prices the same (by assuming that the prices in
+ every group 
+\begin_inset Formula $G$
+\end_inset
+
+ move together), we can think of a base price (see Nelson
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+) a quality indicator (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DongShonkwierCappsQualityQuantity"
+
+\end_inset
+
+) so that 
+\begin_inset Formula $Q_{G}=\sum_{i\in G}p_{i}^{*}q_{i}$
+\end_inset
+
+.
+ The quality factor 
+\begin_inset Formula $p_{i}^{*}$
+\end_inset
+
+attempts to explain the higher expenditure on a commodity 
+\begin_inset Formula $i$
+\end_inset
+
+ (which can be referred to as elementary commodity).
+ Writing prices of elementary commodity in terms of this factor, we have
+ 
+\begin_inset Formula 
+\begin{alignat}{1}
+p_{i} & =P_{G}p_{i}^{*}\label{eq:P_Gdefinition}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The definition of 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:P_Gdefinition"
+
+\end_inset
+
+ assumes that the prices 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ move proportionally - so that 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ is simply the constant proportionality factor of prices (see Nelson 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+).
+ We can finally write:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+P_{G}Q_{G} & =\sum_{i\in G}p_{i}q_{i}\label{eq:pxqxPGQG}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+All commodities in the groups are expressed in terms of a common unit (e.g.
+ weight, volume or calorific value as explain in Deaton 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonSurveyElasticities"
+
+\end_inset
+
+) which can be associated with a unit price 
+\begin_inset Formula $V_{G}$
+\end_inset
+
+ after combining the quantities in the group 
+\begin_inset Formula $G$
+\end_inset
+
+ as 
+\begin_inset Formula $q_{G}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+V_{G} & =\frac{E_{G}}{q_{G}}=P_{G}\frac{Q_{G}}{q_{G}}=P_{G}\nu_{G}\label{eq:UnitPrice}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that we denote expenditure in the group 
+\begin_inset Formula $G$
+\end_inset
+
+ as 
+\begin_inset Formula $E_{G}(=P_{G}Q_{G})$
+\end_inset
+
+.
+ Taking logarithms of Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:UnitPrice"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+ln\ V_{G} & =ln\ P_{G}+ln\ \nu_{G}\label{eq:lnVG}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $ln\ \nu_{G}$
+\end_inset
+
+ gives us the measure of quality that we're interested in for status purposes.
+ We can justify group based on status benefits the consumer may derive from
+ products in every group (rare items or items with barriers).
+ Differentiating the above equation with 
+\begin_inset Formula $ln\ x$
+\end_inset
+
+ and 
+\begin_inset Formula $ln\ P_{G}$
+\end_inset
+
+can give us an estimate of the quality elasticities.
+\end_layout
+
+\begin_layout Standard
+The separable utility function across the groups 
+\begin_inset Formula $\mathscr{G}$
+\end_inset
+
+ can be expressed as 
+\begin_inset Formula $u(u_{1}(q_{1}),...,u_{G}(q_{G}),...u_{n_{G}}(q_{n_{G}}))$
+\end_inset
+
+ .
+ As extension of double logarithmic model used by Deaton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonSurveyElasticities"
+
+\end_inset
+
+ is specified as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline}
+ln\ q_{kic}=\alpha_{k}^{0}+\beta_{k}^{0}ln\ x_{ic}+\gamma_{k}^{0}\cdot z_{ic}+\sum_{G\in\mathscr{G}}\theta_{G}ln\ p_{Gc}+(f_{kc}+u_{kic}^{0})\label{eq:deatonmodel_lnq}
+\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+ln\ V_{kic} & =\alpha_{k}^{1}+\beta_{k}^{1}ln\ x_{ic}+\gamma_{k}^{1}\cdot z_{ic}+\sum_{G\in\mathscr{G}}\psi_{G}ln\ p_{Gc}+u_{kic}^{1}\label{eq:deatonmodel_lnv}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $i$
+\end_inset
+
+ is a household 
+\begin_inset Formula $q_{kic}$
+\end_inset
+
+ is the quantity consumed of the commodity 
+\begin_inset Formula $k$
+\end_inset
+
+ in a cluster 
+\begin_inset Formula $c$
+\end_inset
+
+, 
+\begin_inset Formula $V_{kic}$
+\end_inset
+
+ is the unit-value (as defined in Equation  ) 
+\begin_inset Formula $x_{ic}$
+\end_inset
+
+ is the total expenditure, 
+\begin_inset Formula $z_{ic}$
+\end_inset
+
+ is vector of personal characteristics (e.g.
+ number of family members), 
+\begin_inset Formula $p_{Gc}$
+\end_inset
+
+ are the prices in the cluster 
+\begin_inset Formula $c$
+\end_inset
+
+ for each group 
+\begin_inset Formula $G$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathscr{G}$
+\end_inset
+
+, 
+\begin_inset Formula $f_{kc}$
+\end_inset
+
+ is a cluster specified fixed effect and 
+\begin_inset Formula $u_{kic}^{0}$
+\end_inset
+
+ is the error component.
+ Notice that the equation does not fulfill the criteria of a demand equation
+ (the constraints of homogeneity, adding up are not necessarily satisfied).
+ Deaton removes cluster and price effects by subtraction of within-cluster
+ means to obtain the following equations:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+(ln\ q_{Gic}-ln\ q_{G\cdot c}) & =\beta_{G}^{0}(ln\ x_{ic}-ln\ x_{\cdot c})+\gamma_{G}^{0}\cdot(z_{ic}-z_{\cdot c})+(u_{Gic}^{0}-u_{G\cdot c}^{0})\label{eq:Deatonmodel_diffq}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+(ln\ V_{kic}-ln\ V_{k\cdot c}) & =\beta_{k}^{1}(ln\ x_{ic}-ln\ x_{\cdot c})+\gamma_{k}^{1}(z_{ic}-z_{\cdot c})+(u_{kic}^{1}-u_{k\cdot c}^{1})\label{eq:deatonmodel_diffv}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To explain the quantities 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+, 
+\begin_inset Formula $Q_{G}$
+\end_inset
+
+ with an example,let's assume we have 
+\begin_inset Formula $G={beef,lamb}$
+\end_inset
+
+ .
+ If prices for beef and lamb are 100/kg and 120/kg respectively, 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ being a constant in the group 
+\begin_inset Formula $G$
+\end_inset
+
+, it is simply 100 (cheapest commodity price) while the quality-indicator/base-p
+rice vector 
+\begin_inset Formula $p^{*}$
+\end_inset
+
+ is 
+\begin_inset Formula $\{1,1.2\}$
+\end_inset
+
+ (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:P_Gdefinition"
+
+\end_inset
+
+).
+ Now let's assume there are two consumers whose consumption vectors for
+ beef and lamb
+\begin_inset Formula $\{q_{beef},q_{lamb}\}$
+\end_inset
+
+ are 
+\begin_inset Formula $\{1,1.2\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\{.5,.7\}$
+\end_inset
+
+ respectively.
+ We can easily calculate 
+\begin_inset Formula $q_{G}=\sum_{i\in G}q_{i}$
+\end_inset
+
+ as 2.2 and 1.2 respectively (see Nelson 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+ for a criticism of this unweighted adding of quantities).
+ Similarly 
+\begin_inset Formula $Q_{G}=\sum_{i\in G}p_{i}^{*}q_{i}$
+\end_inset
+
+ turns out to be
+\begin_inset Formula $1\cdot1+1.2\cdot1.2=2.44$
+\end_inset
+
+ and 
+\begin_inset Formula $1\cdot.5+1.2\cdot.7=1.34$
+\end_inset
+
+ respectively.
+ We can thus verify that 
+\begin_inset Formula $P_{G}Q_{G}$
+\end_inset
+
+ is the same as 
+\begin_inset Formula $\sum_{i\in G}p_{i}q_{i}$
+\end_inset
+
+ (244 and 134 respectively).
+ If we were to convert all consumed quantities of fruits consumed to calories,
+ for example, then we can measure 
+\begin_inset Formula $q_{G}$
+\end_inset
+
+ in calories and 
+\begin_inset Formula $p^{*}$
+\end_inset
+
+as the per calorie quality factor.
+\end_layout
+
+\begin_layout Standard
+We have selected household characteristics 
+\begin_inset Formula $z_{ic}$
+\end_inset
+
+ as 
+\bar under
+occupation rank
+\bar default
+, 
+\bar under
+highest education level
+\bar default
+ and 
+\bar under
+number of family members
+\bar default
+.
+ Alternatively, we use average prices that are closed to market prices (not
+ all market prices are available in the data) and avoid measurement errors
+ in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deatonmodel_lnq"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deatonmodel_lnv"
+
+\end_inset
+
+.
+ Still another method we could use is the MLE specification of the model
+ formulated by Dong et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DongShonkwierCappsQualityQuantity"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Our goal to use a demand equation is not achieved in the above equation.
+ All we can ascertain is that quality is compromised or not for poorer household
+s.
+ The effect of clusters is important because it indicates the availability
+ issue.
+ A relative price structure 
+\begin_inset Formula $p_{i}^{*}$
+\end_inset
+
+is the measure of affordability we were looking for - a justified quality
+ measure is all one can see with the food data.
+ The methods used for elasticity are not associated with a utility function
+ as such.
+ This is an analysis we have to do ourselves.
+ The goal of personal characteristics in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Deatonmodel_diffq"
+
+\end_inset
+
+and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deatonmodel_diffv"
+
+\end_inset
+
+ is to simple net out.
+ The literature that we have explored tends to use the effect of personal
+ characteristics as evidence of social differences.
+ A corresponding analysis doesn't find anything special other than supply
+ side issues.
+ We also find that the expenditure on marriage is lower in areas where there
+ is electricity - marking the industrial developments.
+\end_layout
+
+\begin_layout Standard
+The assignment of food items into groups needs to accomplish two goals.
+ First is to ensure the separability of utility.
+ The classification into sugars, condiments, starch, fish-seafood, meat,
+ vegetables, fruits and beverages is based on the calorific density of food
+ items and the food habits of the population.
+ It is not difficult to see that a representative consumer would not overspend
+ on sugars to cut down expenditure on bread for example.
+ The second goal is to ensure that the group constituent prices move together.
+ We are yet to verify this claim for every group using a long enough time-series
+ data of prices on the supply side but we have tried to create more groups
+ based on the source of supply (avoiding putting meat and fish in the same
+ protein category for example).
+ Although we look for status relevance of quality, it is worth emphasizing
+ again that status utility is aggregated from across different commodities.
+ When looking at differences in quality of food consumed, we're only interested
+ in status indicated through food quality.
+ While certain household characteristics like education, income, class,
+ second language may have more significance for consumption certain commodities
+ but that may simply be because of supply side asymmetries i.e.
+ better quality food may be available in areas where there is electricity
+ and where higher income, English speaking people reside.
+\end_layout
+
+\begin_layout Standard
+Grouping many foods into one is hardly trivial.
+ Nelson describes the use of nutritional values in categorization (use of
+ calorific value rather than weight).
+ This would simply mean that our quantity consumed must be multiplied by
+ the calorific value per weight before a quality factor can be calculated.
+ We use the USDA database 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "USDA"
+
+\end_inset
+
+ for the weighted sum of quantities (to).
+ The calorific values are incorporated by adjusting the observed quantities
+ - using the assumption that a consumer demand for food is limited by calorific
+ intake.
+ Indeed some food purchases could be stored for a long time and may be for
+ cattle or pets as well - but it a verification with the household characteristi
+cs would be a part of robustness check for our interpretation.
+ Further, we keep alcohol consumption separate from other beverages and
+ do not adjust alcohol quantities based on calorific - leaving the alcohol
+ consumption to be budgeted simply by volume.
+ We group the food categories imagining a scenario where substitution is
+ possible on grounds of quality compromises.
+ The classical butter vs oil substitution for example leaves butter and
+ margarine in the same group.
+\end_layout
+
+\begin_layout Standard
+Assigning prices is subject to a lot of problems.
+ While we do have market prices available, they either deviate far too much
+ from consumed quantities.
+ There is a dilemma in choosing the backed-out prices as 
+\begin_inset Formula $(e/q)$
+\end_inset
+
+ - which indicates the quality - replacing the value with market prices
+ may suppress that information.
+ On the other hand, the recorded expenditure may be subject to variation
+ in supply prices themselves (which are not recorded in the market prices
+ with the same granularity as that of expenditure).
+ There are advantages and disadvantages with either approach.
+ If we were to rely only on choices between two items (instead of choice
+ of sub-items with price differences within the item), then choosing the
+ market price seems the right approach.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{landscape}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Quantity consumed Regression for food groups
+\backslash
+label{tabmergedq}} 
+\backslash
+resizebox{
+\backslash
+columnwidth}{!} 
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular}{l*{12}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}&
+\backslash
+multicolumn{1}{c}{(3)}&
+\backslash
+multicolumn{1}{c}{(4)}&
+\backslash
+multicolumn{1}{c}{(5)}&
+\backslash
+multicolumn{1}{c}{(6)}&
+\backslash
+multicolumn{1}{c}{(7)}&
+\backslash
+multicolumn{1}{c}{(8)}&
+\backslash
+multicolumn{1}{c}{(9)}&
+\backslash
+multicolumn{1}{c}{(10)}&
+\backslash
+multicolumn{1}{c}{(11)}&
+\backslash
+multicolumn{1}{c}{(12)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{starch}&
+\backslash
+multicolumn{1}{c}{vegstarch}&
+\backslash
+multicolumn{1}{c}{fruits}&
+\backslash
+multicolumn{1}{c}{meat}&
+\backslash
+multicolumn{1}{c}{alcohol}&
+\backslash
+multicolumn{1}{c}{oil}&
+\backslash
+multicolumn{1}{c}{beverages}&
+\backslash
+multicolumn{1}{c}{milk}&
+\backslash
+multicolumn{1}{c}{fat}&
+\backslash
+multicolumn{1}{c}{vegetables}&
+\backslash
+multicolumn{1}{c}{sugars}&
+\backslash
+multicolumn{1}{c}{condiments}
+\backslash
+
+\backslash
+ 
+\backslash
+hline lnx
+\backslash
+_a     &    0.854
+\backslash
+sym{***}&    0.434
+\backslash
+sym{***}&    0.325
+\backslash
+sym{***}&    0.868
+\backslash
+sym{***}&    0.268
+\backslash
+sym{***}&    0.432
+\backslash
+sym{***}&    0.444
+\backslash
+sym{***}&    0.339
+\backslash
+sym{***}&    0.426
+\backslash
+sym{***}&    0.507
+\backslash
+sym{***}&    0.444
+\backslash
+sym{***}&    0.102
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         
+\backslash
+
+\backslash
+ occupation
+\backslash
+_rank
+\backslash
+_a&   0.0269         &  -0.0627
+\backslash
+sym{*}  &  -0.0250         &   0.0114         &  -0.0469         &   0.0323
+\backslash
+sym{*}  &   0.0699
+\backslash
+sym{**} &   0.0583         &   0.0193         &   0.0378
+\backslash
+sym{*}  &  -0.0136         &  -0.0182         
+\backslash
+
+\backslash
+           &  (0.126)         &  (0.030)         &  (0.454)         &  (0.539)
+         &  (0.503)         &  (0.031)         &  (0.003)         &  (0.137)
+         &  (0.412)         &  (0.016)         &  (0.365)         &  (0.120)
+         
+\backslash
+
+\backslash
+ hsize
+\backslash
+_a   &   0.0637
+\backslash
+sym{***}&   0.0541
+\backslash
+sym{***}&   0.0596
+\backslash
+sym{***}&   0.0183
+\backslash
+sym{***}&   0.0534
+\backslash
+sym{**} &   0.0477
+\backslash
+sym{***}&   0.0300
+\backslash
+sym{***}&   0.0720
+\backslash
+sym{***}&   0.0597
+\backslash
+sym{***}&   0.0378
+\backslash
+sym{***}&   0.0695
+\backslash
+sym{***}&   0.0657
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.004)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         
+\backslash
+
+\backslash
+ age
+\backslash
+_a     &  0.00358
+\backslash
+sym{**} &  0.00341         & -0.00270         & 0.000959         &   0.0104
+\backslash
+sym{**} & -0.00145         & -0.00450
+\backslash
+sym{**} & -0.00489         &  0.00239         &  0.00156         &  0.00178
+         & 0.000474         
+\backslash
+
+\backslash
+           &  (0.002)         &  (0.095)         &  (0.259)         &  (0.424)
+         &  (0.008)         &  (0.130)         &  (0.006)         &  (0.085)
+         &  (0.151)         &  (0.119)         &  (0.070)         &  (0.505)
+         
+\backslash
+
+\backslash
+ roomsnum
+\backslash
+_a&  -0.0686
+\backslash
+sym{***}&  -0.0315         &   0.0318         &  0.00534         &  -0.0378
+         &   0.0151         &   0.0137         &  -0.0245         &  -0.0192
+         & -0.00481         &   0.0185
+\backslash
+sym{*}  &  0.00202         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.071)         &  (0.100)         &  (0.627)
+         &  (0.312)         &  (0.074)         &  (0.346)         &  (0.302)
+         &  (0.192)         &  (0.606)         &  (0.037)         &  (0.757)
+         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    & 2.25e-16         & 3.53e-16         &-5.91e-17         &-2.17e-16
+         & 1.17e-16         &-1.21e-17         &-1.26e-17         & 9.09e-17
+         &-2.51e-16         & 4.78e-17         &-6.65e-17         &-5.04e-17
+         
+\backslash
+
+\backslash
+           &  (1.000)         &  (1.000)         &  (1.000)         &  (1.000)
+         &  (1.000)         &  (1.000)         &  (1.000)         &  (1.000)
+         &  (1.000)         &  (1.000)         &  (1.000)         &  (1.000)
+         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     2379         &     1433         &     1142         &     2338
+         &      250         &     2325         &     2015         &    
+  544         &     1222         &     2407         &     2268         &
+     2773         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.465         &    0.133         &    0.144         &    0.434      
+   &    0.130         &    0.328         &    0.146         &    0.190     
+    &    0.242         &    0.321         &    0.385         &    0.255    
+     
+\backslash
+
+\backslash
+ adj.
+ 
+\backslash
+(R^{2}
+\backslash
+)&    0.463         &    0.130         &    0.140         &    0.432       
+  &    0.112         &    0.327         &    0.143         &    0.183      
+   &    0.239         &    0.320         &    0.384         &    0.253     
+    
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{13}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{13}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{landscape}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{landscape}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Unit Value Regression for food groups
+\backslash
+label{tabunitvalue}} 
+\backslash
+resizebox{
+\backslash
+columnwidth}{!} {
+\backslash
+begin{tabular}{l*{12}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}&
+\backslash
+multicolumn{1}{c}{(3)}&
+\backslash
+multicolumn{1}{c}{(4)}&
+\backslash
+multicolumn{1}{c}{(5)}&
+\backslash
+multicolumn{1}{c}{(6)}&
+\backslash
+multicolumn{1}{c}{(7)}&
+\backslash
+multicolumn{1}{c}{(8)}&
+\backslash
+multicolumn{1}{c}{(9)}&
+\backslash
+multicolumn{1}{c}{(10)}&
+\backslash
+multicolumn{1}{c}{(11)}&
+\backslash
+multicolumn{1}{c}{(12)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{starch}&
+\backslash
+multicolumn{1}{c}{vegstarch}&
+\backslash
+multicolumn{1}{c}{fruits}&
+\backslash
+multicolumn{1}{c}{meat}&
+\backslash
+multicolumn{1}{c}{alcohol}&
+\backslash
+multicolumn{1}{c}{oil}&
+\backslash
+multicolumn{1}{c}{beverages}&
+\backslash
+multicolumn{1}{c}{milk}&
+\backslash
+multicolumn{1}{c}{fat}&
+\backslash
+multicolumn{1}{c}{vegetables}&
+\backslash
+multicolumn{1}{c}{sugars}&
+\backslash
+multicolumn{1}{c}{condiments}
+\backslash
+
+\backslash
+ 
+\backslash
+hline lnx
+\backslash
+_a     &   0.0446
+\backslash
+sym{***}&    0.158
+\backslash
+sym{***}&    0.194
+\backslash
+sym{***}&   0.0543
+\backslash
+sym{***}&    0.487
+\backslash
+sym{***}&   0.0401
+\backslash
+sym{***}&   0.0544
+\backslash
+sym{**} &    0.157
+\backslash
+sym{***}&   0.0486
+\backslash
+sym{*}  &   0.0494
+\backslash
+sym{***}&   0.0144         &   0.0390
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.001)         &  (0.001)         &  (0.001)
+         &  (0.026)         &  (0.000)         &  (0.097)         &  (0.000)
+         
+\backslash
+
+\backslash
+ occupation
+\backslash
+_rank
+\backslash
+_a& -0.00244         &   0.0478
+\backslash
+sym{**} &    0.129
+\backslash
+sym{***}&   0.0142         &   0.0609         &  -0.0155         & -0.00391
+         &  -0.0141         &   0.0129         & -0.00331         & -0.00189
+         &  0.00139         
+\backslash
+
+\backslash
+           &  (0.770)         &  (0.003)         &  (0.000)         &  (0.155)
+         &  (0.267)         &  (0.109)         &  (0.737)         &  (0.607)
+         &  (0.333)         &  (0.735)         &  (0.770)         &  (0.898)
+         
+\backslash
+
+\backslash
+ hsize
+\backslash
+_a   & -0.00527
+\backslash
+sym{*}  &  -0.0106
+\backslash
+sym{**} &  -0.0123
+\backslash
+sym{*}  &  0.00588
+\backslash
+sym{*}  &  -0.0582
+\backslash
+sym{***}&  0.00183         & -0.00747
+\backslash
+sym{**} &  -0.0154
+\backslash
+sym{*}  & -0.00363         & -0.00114         &  0.00160         & -0.00758
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.011)         &  (0.006)         &  (0.046)         &  (0.011)
+         &  (0.000)         &  (0.417)         &  (0.006)         &  (0.037)
+         &  (0.258)         &  (0.650)         &  (0.278)         &  (0.002)
+         
+\backslash
+
+\backslash
+ age
+\backslash
+_a     & -0.00183
+\backslash
+sym{***}& -0.00192         &-0.000526         &-0.000218         & -0.00226
+         &-0.000757         & -0.00160
+\backslash
+sym{*}  &  0.00123         &-0.000350         & -0.00113         & 0.000348
+         & 0.000857         
+\backslash
+
+\backslash
+           &  (0.001)         &  (0.087)         &  (0.781)         &  (0.734)
+         &  (0.456)         &  (0.221)         &  (0.048)         &  (0.534)
+         &  (0.710)         &  (0.068)         &  (0.412)         &  (0.192)
+         
+\backslash
+
+\backslash
+ roomsnum
+\backslash
+_a&   0.0154
+\backslash
+sym{**} & -0.00268         &  -0.0297         & -0.00964         &   0.0301
+         &-0.000109         & -0.00529         &   0.0232         &  0.00710
+         &-0.000723         & -0.00683         &-0.000216         
+\backslash
+
+\backslash
+           &  (0.002)         &  (0.779)         &  (0.052)         &  (0.102)
+         &  (0.304)         &  (0.984)         &  (0.462)         &  (0.161)
+         &  (0.394)         &  (0.901)         &  (0.073)         &  (0.971)
+         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    & 2.73e-17         &-2.77e-17         & 2.61e-17         & 5.90e-18
+         & 5.31e-17         &-1.78e-17         &-9.51e-17         &-7.69e-17
+         &-4.80e-17         &-1.47e-17         &-3.92e-18         & 4.19e-18
+         
+\backslash
+
+\backslash
+           &  (1.000)         &  (1.000)         &  (1.000)         &  (1.000)
+         &  (1.000)         &  (1.000)         &  (1.000)         &  (1.000)
+         &  (1.000)         &  (1.000)         &  (1.000)         &  (1.000)
+         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     2379         &     1433         &     1142         &     2338
+         &      250         &     2325         &     2015         &    
+  544         &     1222         &     2407         &     2268         &
+     2773         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.017         &    0.051         &    0.077         &    0.017      
+   &    0.309         &    0.007         &    0.012         &    0.032     
+    &    0.008         &    0.010         &    0.003         &    0.008    
+     
+\backslash
+
+\backslash
+ adj.
+ 
+\backslash
+(R^{2}
+\backslash
+)&    0.015         &    0.048         &    0.073         &    0.015       
+  &    0.295         &    0.005         &    0.009         &    0.023      
+   &    0.004         &    0.008         &    0.001         &    0.006     
+    
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{13}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{13}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\backslash
+end{table} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{landscape}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/tree1.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:tree1"
+
+\end_inset
+
+Utility tree for Tanzania LSMS items (1) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/tree2.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:tree2"
+
+\end_inset
+
+Utility tree for Tanzania LSMS items (2) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename kerosene_electricity.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ElectricityvsKeroseneCosts"
+
+\end_inset
+
+Electricity vs Kerosene costs per head in Dar-es-salaam
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+### declarations
+\end_layout
+
+\begin_layout Plain Layout
+source('translation/frameutils.R') # populates fu
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ll=lsms_loader(fu=fu,ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+###
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ddply(dsv,.(region),summarise,mean(perheadvis),n=length(hhid))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dat2010=ll@load_diary_file(dirprefix = '.',year = 2010,fu=fu,ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+af_item<-function (currentItem,year,loadFile){
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+fileName<-paste('c:/local_files/research/consumption/lsms/individual_consumption
+_files/',year,'/',year,toString(currentItem),'.dta',sep='')
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+if (missing(loadFile)){
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ds<-ll@combined_data_set(year=year,selected_category=currentItem, dirprefix='c:/
+local_files/research/consumption/',fu=fu,ln=ln)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+write.dta(ds,fileName)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+} else {
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+print(paste('Reading file:',fileName))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ds<-read.dta(fileName)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dsv<-ds[ds$visible_consumption>0,]
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ds<-NULL
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dsv$perheadvis<-dsv$visible_consumption/dsv$consu
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dsv$af<-dsv$perheadvis-quantile(dsv$perheadvis,.9)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+return(dsv)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+summary(lm(data=dsv,visible_consumption~consu))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+plot(dsvkerosene7[is.element(dsvkerosene7$hhid,hhids),]$perheadvis,dsvelec7[is.ele
+ment(dsvelec7$hhid,hhids),]$perheadvis,xlab = "Kerosene per head cost",
+ ylab= "Electricity per head cost",type='p')
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+kmeans(dsvbarsoap7$perheadvis,centers=2)[["centers"]]
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+###
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dsv<-af_item(currentItem = "210",year = 2010)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dsvdetergent7<-dsv[dsv$region==7,]
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+hist(dsvdetergent7$perheadvis,breaks=1000)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#merging asset ownership data
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ndat<-read.dta('../lsms/TZNPS2HH2DTA/HH_SEC_N.dta',convert.factors = FALSE)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+c <- fu()@get_translated_frame(dat=ndat, names=lsms_normalizer()@get_diary_secn_
+columns_lsms_2010(), m=lsms_normalizer()@get_diary_secn_fields_mapping_lsms_2010
+())
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+k<-subset(c,is.element(itemcode,c("407")))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+k<-data.frame(hhid=k$hhid,num_items=k$number)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+x<-merge(x=k,y=dsv,by="hhid",all.y=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+####
+\end_layout
+
+\begin_layout Plain Layout
+## item plot <start>
+\end_layout
+
+\begin_layout Plain Layout
+q<-1001
+\end_layout
+
+\begin_layout Plain Layout
+b<-subset(cj,item==q& !is.na(price) & !is.na(lwp) & lwp!=0 &price!=0)
+\end_layout
+
+\begin_layout Plain Layout
+library(rgl)
+\end_layout
+
+\begin_layout Plain Layout
+plot3d(b$region,b$lwp*b$factor, b$recorded_price)
+\end_layout
+
+\begin_layout Plain Layout
+###<end>
+\end_layout
+
+\begin_layout Plain Layout
+#ddply(k,.(item),summarise,s=skewness(recorded_price),k=kurtosis(recorded_price),
+n=length(recorded_price)) #gives how prices vary
+\end_layout
+
+\begin_layout Plain Layout
+#ddply(k,.(region,district,ward,ea,item,quantity),summarise,n=length(quantity),sd
+=sd(recorded_price)) # gives us how multiple recorded prices for same quantity
+ exist for many items
+\end_layout
+
+\begin_layout Plain Layout
+#loading closest prices
+\end_layout
+
+\begin_layout Plain Layout
+ll=lsms_loader(fu,lsms_normalizer);cp<-ll@get_inferred_prices(year = 2010,dirpre
+fix = '../', fu = fu , ln = lsms_normalizer);
+\end_layout
+
+\begin_layout Plain Layout
+cp<-ll@aggregate_local_prices(cp)
+\end_layout
+
+\begin_layout Plain Layout
+##regression##
+\end_layout
+
+\begin_layout Plain Layout
+cp$pq<-cp$localmedianprice*cp$quantity
+\end_layout
+
+\begin_layout Plain Layout
+cp<-merge(cp,ddply(cp,.(hhid),summarise,x=sum(pq)))
+\end_layout
+
+\begin_layout Plain Layout
+#
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0903002007033501","0902018005042304","540201301
+6004201")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0202012001018501","0701009004000101","140200400
+3013305", "1703002007004401","0203010357003901" )))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0804003003029001","0901011004021701", "19030070
+58010601","1908006003201001")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0701009004005701", "1401010022004506",
+ "5301002304007501","5401017008007201"))) # 10102
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("1902027012002401")))#10108
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0602005001023201","5102001012005002","070200601
+2002801")))#10109,10301
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0301012002040403","0701004024003001","090300101
+6006201","5101006016008801","5102001012008901","5102016012004801","5302002004000
+803")))#10502
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("1107006009038901","5301019011003501","530101901
+1003506","5501002031000601")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0406019002054701","0701007052009101","070102306
+7002901","0701027063001501","0902001360000901","5102022012003401")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0301014002033601","0304031003027001","060301300
+1028201","0701016454001901","0801016007014703","0804004002011001","0901011004029
+701", "0902015007032101","0902018005022501","0903011002012601","1403001004002901
+","1501022005030801","1501030004004202","1703002007011501","1706015002048503","1
+707013001010601","2004020001027801","5102001012005001","5102001012005009","52020
+09012004401","5501013009001301")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0701006104000601","0701021174007104","070102306
+4001301","0703012048012801","0903002007024102","0701023064006501")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("0603013001002901","0604010006016009","080101600
+7020501","0903012005005505","0804001003006801","1101002005009201","0203010357000
+301","0605012302006801","0902001360000301","1003018003011401","0202012001005901"
+,"0602005001018801","2005011003000601")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("1105019301005201","1201018004041101","020301301
+9006801","0701009004003301","0701023067006707","1003018003015803","1106002331007
+501")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("1501030004006501","1708008305005201","530200200
+4004201","0805001311004301","1603008306013705")))
+\end_layout
+
+\begin_layout Plain Layout
+cp<-subset(cp,!is.element(hhid,c("1102028005007801")))#seafood in liters
+\end_layout
+
+\begin_layout Plain Layout
+##merging groups
+\end_layout
+
+\begin_layout Plain Layout
+ii<-merge(lsms_normalizer()@items_codes_2010(),read.csv('c:/temp/shortnames.csv')[
+c("calories","shortname","group")])
+\end_layout
+
+\begin_layout Plain Layout
+#check units for every group
+\end_layout
+
+\begin_layout Plain Layout
+unique(subset(dat2010,is.element(item,subset(ii,group=="starch")$code))$lwp_unit)
+\end_layout
+
+\begin_layout Plain Layout
+#check the distribution of units for a particular item
+\end_layout
+
+\begin_layout Plain Layout
+ddply(subset(dat2010,item==as.character(subset(ii,shortname=="canned_drink")$code
+)),.(lwp_unit),summarise,n=length(hhid))
+\end_layout
+
+\begin_layout Plain Layout
+# for alcohol
+\end_layout
+
+\begin_layout Plain Layout
+hist(with(subset(cp,is.element(item,as.character(subset(ii,group=="alcohol")$code)
+)),cost/group_quantity),breaks=100)
+\end_layout
+
+\begin_layout Plain Layout
+#summary(lm(data=subset(cp,item==11003),pq~x))
+\end_layout
+
+\begin_layout Plain Layout
+#showdata: ii<-10205; dat<-subset(cp,item==ii); res<-lm(data=dat,pq~x) ;
+ plot(dat$x,dat$pq); abline(res);
+\end_layout
+
+\begin_layout Plain Layout
+ddply(cp,.(item),summarise,x_coeff=pq_regress_x_coeff(pq=pq,x=x),intercept=pq_reg
+ress_x_intercept(pq=pq,x=x))
+\end_layout
+
+\begin_layout Plain Layout
+p<-ll@add_localmedian_price_columns(cp)
+\end_layout
+
+\begin_layout Plain Layout
+lm(data=subset(p,item==10110),paste("pq~"
+\end_layout
+
+\begin_layout Plain Layout
+,write_variables_as_sum(c(priceColumns,"x"))))
+\end_layout
+
+\begin_layout Plain Layout
+#### filter out bad prices ###
+\end_layout
+
+\begin_layout Plain Layout
+merge(subset(ddply(cp,.(item),summarise,s=skewness(price)),abs(s)>10),rename(ii,c
+("code"="item","item"="fullname")))
+\end_layout
+
+\begin_layout Plain Layout
+###
+\end_layout
+
+\begin_layout Plain Layout
+cpp<-subset(cp,!is.na(price) & item>10000)
+\end_layout
+
+\begin_layout Plain Layout
+cpp<-subset(cp,!is.na(price))[,c("hhid","item","region","district","ward","ea","q
+uantity","price")]
+\end_layout
+
+\begin_layout Plain Layout
+cpp$cost <- cpp$price* cpp$quantity
+\end_layout
+
+\begin_layout Plain Layout
+cppe<-merge(cpp,ddply(cpp,.(hhid),summarise,totexp=sum(cost)),by="hhid")
+\end_layout
+
+\begin_layout Plain Layout
+cppe$fraction<-cppe$cost/cppe$totexp
+\end_layout
+
+\begin_layout Plain Layout
+ddply(subset(cppe,region==1 & district == 2),.(item,region,district),summarise,hh
+id=hhid,rank=rank(cost)/length(cost),cost) # gives the sorting order of
+ a household for a given item within district
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\size normal
+The tree of commodities
+\end_layout
+
+\begin_layout Standard
+Once prices are cleaned (outlying priced purchases removed), then we can
+ aggregate the relative prices at every state of purchase in the tree.
+ The relative price was supposed to be distribution of items.
+ One particular house 0102003003016101 for example, spends on sugar (301),
+ Onions/tomatoes(601), Fruits(703), Beef(802) and salt (1003).
+ Nearly 74% of the sum is spent on beef.
+ Another house 0102003003000401 spends on 18% on beef while 19% on cooking
+ oil (1001) and about 14% on buns cakes(110).
+ We think about ranking in every district to see (however the data is quite
+ sparse for some districts - only expenditure for 10 households is available
+ for region 1 and district 2 for example).
+ Top-spender of everything would automatically have the highest status.
+ Notice that rank is determined by cost not by quantity - the difference
+ of prices doesn't matter as long as rank in with a region.
+\end_layout
+
+\begin_layout Standard
+There is a need to aggregate quality.
+ This needs to happen in the function.
+ Right now what we're saying is that the consumer also improves quality
+ - we don't really have a demand equation for it - nor have we written a
+ utility function that has the quality aggregate in it.
+ First, we must be sure about the utility function that is obtained in Deaton's
+ example.
+ He writes demand equation but there is no clear way to obtain the parameters
+ of aggregation of quality.
+ We may say that the quality for the group itself indicates status - but
+ that doesn't help provide a utility function that budgets for status as
+ well.
+ What we're looking for is a utility function that depends on quantity as
+ well as quality of the goods consumed.
+ Let's assume a hunter (Atkinson) community that consumes just fruits and
+ meat.
+ If the utility function for an individual in the community is of the form
+ 
+\begin_inset Formula $u(\boldsymbol{q})=f(u_{meat,quantity+quality}(q_{meat}),u_{fruits,quantity+quality}(q_{fruits}))$
+\end_inset
+
+, then we are claiming that the consumer doesn't have an aggregate quality
+ amount allocated but instead has preallocated quality budgets for fruits
+ and meat.
+ The model we propose for quality is slightly different.
+ We don't believe that quality concerns are separable.
+ Since we consider that the difference in prices could indicate status as
+ well as quality, it is likely that a consumer buying a better steak could
+ imply buying cheaper fruits.
+ For simplicity, we assume that quality utility can be expressed a linear
+ sum i.e.
+\begin_inset Formula $\alpha_{meat}\nu_{meat}+\alpha_{fruits}\nu_{fruits}$
+\end_inset
+
+.
+ This doesn't change the form of the utility function and keeps the utility
+ separable.
+ This assumption also implies that a consumer has a bias that is insensitive
+ to price i.e.
+ a person who pays more attention to meat quality would continue to buy
+ better quality meats even though the price have gone up.
+ He models quality vector and claims that the keeping the price structure
+ the same would allow us to give quality factor.
+ The weak separability assumption offers 
+\begin_inset Formula $\boldsymbol{q}=g(E,\boldsymbol{p})=g(E/\lambda,\boldsymbol{p^{*}})$
+\end_inset
+
+ where 
+\series bold
+
+\begin_inset Formula $\boldsymbol{q}$
+\end_inset
+
+
+\series default
+ is the quantity vector and 
+\begin_inset Formula $\boldsymbol{p^{*}}$
+\end_inset
+
+is the price vector (how exactly does this follow? Would there be additional
+ terms for aggregate quality).
+ What we're claiming is that status overall is aggregated - and it's not
+ separable i.e.
+ status from meat is not separate from status from alcohol.
+ In our model, consumer does reduce quality in response to price rise -
+ but might keep the relative difference in prices also the same, so I would
+ argue that consumer may switch to another process where there is some price
+ difference.
+ In this sense, the difference in prices (or the price structure) is always
+ a factor for the consumer..
+ 
+\end_layout
+
+\begin_layout Subsection
+Rank vs Quantity
+\end_layout
+
+\begin_layout Standard
+A person consuming higher automatically is ranked higher in consumption.
+ Why should be then introduce rank when quantity already measures it (and
+ is easier to represent).
+ The reason we choose rank is because of its easier to determine within
+ a context.
+ A view on distribution of q within an area would provide the same ideas
+ - ranking after all is also a function of q.
+ If we keep the function of q as the generic representation of rank - then
+ we can see this function as a mapping onto clusters.
+ Let's take a world of three commodities A, B, C where n households buy
+ what they need and can afford.
+ A consumer 
+\begin_inset Formula $i$
+\end_inset
+
+ buys 
+\begin_inset Formula $q_{i,A},q_{i,B}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{i,C}$
+\end_inset
+
+ where all of them can be 0.
+ 
+\begin_inset Formula $f(\boldsymbol{q_{A}})$
+\end_inset
+
+ tells us which status cluster the consumer would belong to.
+ One could consider the group function 
+\begin_inset Formula $f(\boldsymbol{q_{A}},\boldsymbol{q_{B},q_{C}})$
+\end_inset
+
+ that finds the status.
+ This mapping could be utility itself.
+\end_layout
+
+\begin_layout Standard
+We haven't actually addressed how a tree develops in this mapping.
+ For any tree, we see what's at the top (root) of the tree.
+ By considering a tree (which we could in just three commodity world just
+ the same), we look what a consumer gets at the top.
+ A tree is different from the sense it is seen in the regular theory - where
+ food, entertainment, energy etc.
+ are at the first level of the tree and each sub-tree contains others elements.
+ In our case, we wish to combine utilities the same way - our claim being
+ status aggregated from amongst components the same way.
+ We also claim that status is not constituted in any other subtree i.e.
+ nobody buys a status good for the sake of buying a status good - status
+ is constituted in buying everything.
+ Status is thus always implicitly from the sum-total of all items - except
+ for jewelry and snob items that actually matter less and we care less about
+ them when we observe the masses (particularly food items).
+ In econometric work, the effect of rank should be limited to the cluster
+ where the consumer resides i.e.
+ the person at the top in the cluster 
+\begin_inset Formula $c$
+\end_inset
+
+ might not worry about the consumer less in any cluster 
+\begin_inset Formula $c'\ne c$
+\end_inset
+
+.
+ This can change with communication (globalisation etc.
+ and may require another model).
+\end_layout
+
+\begin_layout Standard
+In our three commodity world, if the goods are all separable and additive
+ - which means utilities other than status simply add up.
+ However, the status utility is not separable and can be obtained from all
+ items A, B and C (to varied levels).
+ A correlation with the richer (higher permanent income) cluster can be
+ a measure of how conspicuous the item is.
+ But the degree of separation between ranking (distance between clusters)
+ matters for status.
+ We don't find anything else to matter at this point.
+ From a general point of view, only the supply side concerns can tell us
+ whether clustering has significance or not.
+ It may be that the rich don't eat potatoes so a class X eating more potatoes
+ than Y obviously does not mean that potatoes are a conspicuous good.
+ We are careful not to use the fact that rich don't buy potatoes while the
+ poor do (i.e.
+ comment on conspicuous consumption using income elasticity to decide).
+ Instead we only make the decision based on availability and price (
+\begin_inset Formula $p-max(p_{i})$
+\end_inset
+
+ or a similar criteria that measures the price).
+ The distribution of prices doesn't tell about the availability- except
+ if we infer availability from variation of observed market prices with
+ respect to region.
+ For commodities A,B and C, if our tree had the root being food with the
+ only first level nodes being starch, protein 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+These are less of an instance of nutritional categories than one where categorie
+s are based on food habits i.e.
+ food items with both protein and carbs in them don't pose a classification
+ problem as long as the consumers are able to classify them either as protein
+ or carbohydrates.
+ 
+\end_layout
+
+\end_inset
+
+.
+ Except when buying snob items, a consumer doesn't 
+\begin_inset Quotes eld
+\end_inset
+
+need
+\begin_inset Quotes erd
+\end_inset
+
+ conspicuous consumption except through the relative differences with respect
+ to other consumers.
+ Let's assume that 
+\begin_inset Formula $A,B\epsilon protein$
+\end_inset
+
+ and 
+\begin_inset Formula $C\epsilon starch$
+\end_inset
+
+.
+ Then there is no scope for conspicuous consumption within C.
+ Since we assume protein and carb utilities to be separable and we also
+ assume that no consumer goes to purchase anything conspicuous - status
+ is inferred from the availability of other options.
+ Now one of A or B would be pricier than the other.
+ A crude measure of our status criterion is the dispersion in price (
+\begin_inset Formula $p-max(p)$
+\end_inset
+
+) - where max is taken over all the products in the category.
+ While this could be improved - it marks a higher priced commodity of with
+ a higher status measure.
+ If we were to infer the status of consumers based on the quantities they
+ choose for A,B,C, then there are a few questions to be answered:
+\end_layout
+
+\begin_layout Enumerate
+Does spending more on item C(which has no differentiation) have any influence
+ on status? Yes, because more spending should still mean a statement of
+ excess.
+ However, if for two consumers 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+, the quantities consumed for A,B, are lower for 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+ and higher for C, then we would think that the status must be higher for
+ 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+ (because the unidirectional nature of high price consumption
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A consumer who can buy more of an expensive item can definitely buy more
+ of the cheaper item - but not the other way.
+\end_layout
+
+\end_inset
+
+).
+ Having already counted for the effect of price and the substitution through
+ slutsky equation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+We already know that i) if A,B are more expensive than C, then the consumer
+ can't buy A,B as easily as she can C (income effect) and ii) A, B can be
+ substituted with each other based on their price or preference ( we assume
+ that very few consumers would be substituting A with C or B with C).
+\end_layout
+
+\end_inset
+
+ , we must add the status utility to the the final utility - in order to
+ have a fuller interpretation of quantities consumed.
+ Notice that the smoothening of status differences (i.e.mapping of consumed
+ quantities onto observed status classes) is a property of the status utility
+ function and does not interfere with the regular utility.
+ Obviously, you can choose to show much rice you have at the party - but
+ it won't be the same as having 5 different meats (or alcohols) at the party.
+ Variety and price differences between them is more crucial to status utility
+ than quantity alone.
+\end_layout
+
+\begin_layout Enumerate
+Does it matter whether C is publicly viewed or not? No, it is hard to be
+ imagine that different items in the same functional category have different
+ visibility except what is expressed through price.
+ In other words, the market prices the visibility so the price variation
+ category is sufficient.
+\end_layout
+
+\begin_layout Enumerate
+Where does availability fit in? Availability actually matters throughout.
+ It is not trivial to talk about status advantages of an item that is available
+ in an area compared to where it isn't.
+\end_layout
+
+\begin_layout Subsection
+Utility function
+\end_layout
+
+\begin_layout Standard
+We're given quantities 
+\begin_inset Formula $\boldsymbol{q_{i}}$
+\end_inset
+
+ for every consumer, which is a vector of quantities for items 
+\begin_inset Formula $\boldsymbol{i}=\{i_{1},i_{2}..i_{m}\}$
+\end_inset
+
+.
+ We can back out or insert the recorded prices wherever possible - but as
+ such we don't need to use the price anywhere at all.
+ If our utility function depends on quantities of items consumed and we
+ don't want to study the change in preference of items as prices change,
+ then it is sufficient to use commodity types as the only proxy of prices.
+ For example, if we're not interested in the question whether more expensive
+ food items would cause a decline in the spending on a wedding then our
+ analysis doesn't need to have the price of foods and the whole analysis
+ can depend on the expenditures and quantities alone.
+ Expenditure allows us to understand income effects and quantities allow
+ us to talk about felicity.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $u=\Pi(q-\gamma_{i})^{\beta_{i}}$
+\end_inset
+
+ is the linear expenditure utility function.
+ We can use a more PIGLOG models for cost function (and estimate simply
+ using a regression).
+ We need grouping only for the sake of aggregation of conspicuous goods.
+ We have therefore two claims for our convenience i) there is a two-state
+ budgeting ii) consumers get rewarded more by choosing higher priced items.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $u_{food}=f(g_{protein}(x,p),g_{carbs}(x,p),g_{fat}(x,p),g_{vegetables}(x,p),g_{fruits}(x,p))$
+\end_inset
+
+.
+ We have been warned that luxuries and necessities can't go together in
+ this setting.
+\end_layout
+
+\begin_layout Standard
+The fundamental question is - do we really need to group the tree.
+ The rationale we had was just that conspicuous items are possible to be
+ had in every category.
+ In the complete utility function, we'll have new categories that are more
+ directly conspicuous (e.g.
+ electronics), but looking at food alone, we can only observe conspicuous
+ consumption in food
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If individuals spend proportionately less on expensive food items when they
+ have electricity that should be evident from analysis.
+ 
+\end_layout
+
+\end_inset
+
+.
+ Groups let us understand the group elasticity but other than that they
+ have no particular use.
+ If we're only interested in measuring total conspicuous utility, we can
+ as well do it while keeping all elements separate and setting up a utility
+ function just so that expensive items reward more to the consumer (i.e.
+ she gets higher utility with the expensive item).
+ The group elasticity may help us explain how are the groups affected because
+ of conspicuous consumption - for example - if we split all groups into
+ of status and non-status value: 
+\begin_inset Formula $u_{food}=f(g_{protein\_status}(x,p),g_{protein\_non\_status}(x,p),g_{carbs\_status}(x,p),g_{carbs\_nonstatus}(x,p),g_{fat\_status}(x,p),g_{fat\_nonstatus}(x,p),g_{vegetables\_status}(x,p),g_{vegetables\_nonstatus}(x,p),g_{fruits\_status}(x,p),g_{fruits\_nonstatus}(x,p))$
+\end_inset
+
+.
+ In absence of groups, our utility function would just look like as.
+ 
+\begin_inset Formula $u=f(q_{beef})f(q_{rice})...\times s(protein)\times s(carb)\times s(fat)\times s(fruits)\times s(vegetables)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $s(c)=f(p_{i}-p_{c})$
+\end_inset
+
+.
+ Let's observe this with a three-good example.
+ The utility function can be of the form 
+\begin_inset Formula $u_{food}=f_{1}(q_{A},q_{B})f_{2}(q_{C})f_{1,s}(q_{A},q_{B})f_{2,s}(q_{C})$
+\end_inset
+
+ or of the form 
+\begin_inset Formula $u_{food}=h(q_{A})h(q_{B})h(q_{C})s(q_{A})s(q_{B})s(q_{C})$
+\end_inset
+
+.
+ The former method utility function allows us to talk about elasticity of
+ a category whereas the latter only tells us about the elasticity of a good.
+ The criteria of fit is the only way to ensure that price differences actually
+ explain the expenditure better.
+ For starting out, we could just have 
+\begin_inset Formula $u=U(f(x_{AB}),g(x_{C}))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A more thorough comparison of utility functions may be possible once a linear
+ expenditure system is fitted on to the consumption data.
+ Using the Marshallian demand function for utility 
+\begin_inset Formula $u=\Pi(q_{k}-\gamma_{k})^{\beta_{k}}$
+\end_inset
+
+(where 
+\begin_inset Formula $\sum\beta_{k}=1)$
+\end_inset
+
+.
+ the Marshallian demand function is 
+\begin_inset Formula $q_{k}=\gamma_{k}+\frac{\beta_{k}}{p_{k}}(x-\sum p_{j}\gamma_{j})$
+\end_inset
+
+ where 
+\begin_inset Formula $x=\sum p_{j}q_{j}$
+\end_inset
+
+.
+ Since we observe expenditures (instead of prices) in the data, we could
+ use 
+\begin_inset Formula $p_{i}=\frac{e_{i}}{q_{i}}$
+\end_inset
+
+ in the demand function.
+ Linear expenditure system would not provide a reasonable estimate of substitute
+s vs complements - but it may still be worthwhile to repeat Stone's analysis.
+ Using a price index in the time series that has been used by Deaton et
+ al.
+ can help ignore the regional variations in prices - but we do use price
+ as a function of region for now (particularly because of the sparsity of
+ data).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $q_{k}=\gamma_{k}+\frac{\beta_{k}}{p_{k}}(x-\sum p_{j}\gamma_{j})\Rightarrow p_{k}q_{k}=p_{k}\gamma_{k}+\beta_{k}(x-\sum p_{j}\gamma_{j})\Rightarrow w_{k}=\frac{p_{k}\gamma_{k}-\sum p_{j}\gamma_{j}}{x}+\beta_{k}$
+\end_inset
+
+.
+ So for adding up: 
+\begin_inset Formula $\sum w_{k}=1\Rightarrow\sum\beta_{k}=1$
+\end_inset
+
+.
+ Concavity means 
+\begin_inset Formula $c(u,\theta p_{A}+(1-\theta)p_{B})\ge\theta c(u,p_{A})+(1-\theta)c(u,p_{B})$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $p_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{B}$
+\end_inset
+
+ are 
+\begin_inset Formula $n\times1$
+\end_inset
+
+ vectors, then the cost function 
+\begin_inset Formula $c(u,p)$
+\end_inset
+
+ for linear budget constraint can be written as 
+\begin_inset Formula $c(u,p)=\sum p_{k}\gamma_{k}+u\Pi p_{k}^{\beta_{k}}=p'\gamma+ue^{\beta'ln\ p}$
+\end_inset
+
+.
+ So the condition implies 
+\begin_inset Formula $\theta p_{A}'\cdot\gamma+(1-\theta)p'_{B}\cdot\gamma+ue^{\beta ln(\theta p_{A}'+(1-\theta)p'_{B})}\ge\theta p'_{A}\cdot\gamma+\theta ue^{\beta'\ lnp_{A}}+(1-\theta)p'_{B}\cdot\gamma+(1-\theta)ue^{\beta'lnp_{B}}\Rightarrow e^{\beta ln(\theta p_{A}'+(1-\theta)p'_{B})}\ge\theta e^{\beta'\ lnp_{A}}+(1-\theta)e^{\beta'lnp_{B}}\Rightarrow\Pi(\theta p_{A,k}+(1-\theta)p_{B,k})^{\beta_{k}}\ge\theta\Pi p_{A,k}^{\beta_{k}}+(1-\theta)\Pi p_{B,k}^{\beta_{k}}$
+\end_inset
+
+ .
+ If 
+\begin_inset Formula $\theta=.5$
+\end_inset
+
+ then, 
+\begin_inset Formula $\Pi(p_{A,k}+p_{B,k})^{\beta_{k}}\ge\Pi p_{A,k}^{\beta_{k}}+\Pi p_{B,k}^{\beta_{k}}$
+\end_inset
+
+.
+ With two goods, this would simplify to 
+\begin_inset Formula $(p_{A,1}+p_{B,1})^{a}(p_{A,2}+p_{B,2})^{1-a}\ge p_{A,1}^{a}p_{A,2}^{1-a}+p_{B,1}^{a}p_{B,2}^{1-a}$
+\end_inset
+
+ (if 
+\begin_inset Formula $a=.5$
+\end_inset
+
+, then 
+\begin_inset Formula $(a_{1}+b_{1})^{1/2}(a_{2}+b_{2})^{1/2}\ge(a_{1}a_{2})^{1/2}+(b_{1}b_{2})^{1/2}\Rightarrow(a_{1}+b_{1})(a_{2}+b_{2})=a_{1}a_{2}+a_{1}b_{2}+a_{2}b_{1}+b_{1}b_{2}\ge a_{1}a_{2}+b_{1}b_{2}+2\sqrt{a_{1}a_{2}b_{1}b_{2}}\Rightarrow(a_{1}b_{2}+a_{2}b_{1})^{2}\ge4a_{1}a_{2}b_{1}b_{2}\Rightarrow(a_{1}b_{2}-a_{2}b_{1})^{2}\ge0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Another check is that the Hessian of the cost function is negative semi-definite.
+ This is not as straightforward - the gradient being :
+\begin_inset Formula 
+\begin{alignat*}{1}
+\begin{array}{ccc}
+[p_{1}\gamma_{1}+u\beta_{1}p_{1}^{\beta_{1}-1}\Pi_{j}^{j\ne1}p_{j}^{\beta_{j}} & p_{2}\gamma_{2}+u\beta_{2}p_{2}^{\beta_{2}-1}\Pi_{j}^{j\ne2}p_{j}^{\beta_{j}} & ...\end{array} & ]
+\end{alignat*}
+
+\end_inset
+
+ The second derivative is:
+\begin_inset Formula 
+\begin{alignat*}{1}
+[\begin{array}{ccc}
+\gamma_{1}+u\beta_{1}(\beta_{1}-1)p_{1}^{\beta_{1}-2}\Pi_{j}^{j\ne1}p_{j}^{\beta_{j}} & ... & ...\\
+u\beta_{2}\beta_{1}p_{1}^{\beta_{1}-1}p_{2}^{\beta_{2}-1}\Pi_{j}^{j\ne1,2}p_{j}^{\beta_{j}} & ... & ...\\
+.. & ... & ...
+\end{array} & ]
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A numerical approach may be to optimise utility programmatically (instead
+ of through first-order conditions).
+ This can be explored with multi-objective optimisation packages.
+ As such the problem is to optimise the error term 
+\begin_inset Formula $\sum_{i}(g(x_{i},p)-q_{obs,i})^{2}$
+\end_inset
+
+ where 
+\begin_inset Formula $g(x_{i},p)$
+\end_inset
+
+ is the Marshallian demand function and 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+ is the observed quantity consumed for consumer 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ The steps are maximise 
+\begin_inset Formula $u(x,p)$
+\end_inset
+
+ by varying 
+\begin_inset Formula $\boldsymbol{k,q_{i}}$
+\end_inset
+
+
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+make sure 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+ is not too far from observed 
+\begin_inset Formula $q_{obs}$
+\end_inset
+
+.
+ This can be formulated as maximising 
+\begin_inset Formula $F_{i}(X=[\boldsymbol{k},q_{i}])$
+\end_inset
+
+ subject to 
+\begin_inset Formula $g_{i}(X=[\boldsymbol{k},q_{i}])=|[0,0,..,n_{k}\ times,1,1,1..i\ times]\times[\boldsymbol{k},q_{i}]\cdot[0_{k},p_{i}]-p_{i}\cdot q_{obs}|=0$
+\end_inset
+
+ and 
+\begin_inset Formula $|q_{i}-q_{obs,i}|<\delta$
+\end_inset
+
+ where 
+\begin_inset Formula $\delta$
+\end_inset
+
+ is optimisation tolerance.
+ Notice that there are no constraints on 
+\begin_inset Formula $\boldsymbol{k}$
+\end_inset
+
+ as such.
+ The homogeneity constraint and the constraints arising out of preferences
+ can be further imposed.
+\end_layout
+
+\begin_layout Subsection
+Estimating Linear Expenditure Utility Model with OLS
+\end_layout
+
+\begin_layout Standard
+The regression equation is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+p_{k}q_{k} & =p_{k}\gamma_{k}+\beta_{k}(x-\sum p_{j}\gamma_{j})\label{eq:regression_linexp_gamma}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:regression_linexp_gamma"
+
+\end_inset
+
+ can also be written as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+p_{k}q_{k} & =p_{k}(\gamma_{k}-\beta_{k})+\beta_{k}x-\beta_{k}\sum_{j\ne k}p_{j}\gamma_{j}=\begin{array}{cccccc}
+[(-\beta_{k}\gamma_{1}) & ... & (\gamma_{k}-\beta_{k}) & ... & (-\beta_{k}\gamma_{m}) & \beta_{k}]\times\end{array}[\begin{array}{c}
+p_{1}\\
+...\\
+p_{k}\\
+...\\
+p_{m}\\
+x
+\end{array}]
+\end{alignat*}
+
+\end_inset
+
+ If we were to imposed no restriction on 
+\begin_inset Formula $\beta_{k},\gamma_{k}$
+\end_inset
+
+, then the regional prices turn out to multicollinear.
+ Also, since the cost function 
+\begin_inset Formula $c(u,p)=\sum p_{k}\gamma_{k}+u\Pi p_{k}^{\beta_{k}}$
+\end_inset
+
+is concave only when when 
+\begin_inset Formula $q_{i}\ge\gamma_{i}\forall i$
+\end_inset
+
+, 
+\begin_inset Formula $\beta_{i}\ge0\forall i$
+\end_inset
+
+.
+ We can only guarantee 
+\begin_inset Formula $q_{i}\ge0\forall i$
+\end_inset
+
+.
+ Hence, we impose the further constraint 
+\begin_inset Formula $\gamma_{i}=0\forall i$
+\end_inset
+
+.
+ The equation we can estimate would thus become 
+\begin_inset Formula 
+\begin{alignat}{1}
+p_{k}q_{k} & =\alpha_{k}+\beta_{k}x+\epsilon\label{eq:regression_linexp}
+\end{alignat}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+This corresponds to the simplified utility function 
+\begin_inset Formula $u=\Pi q_{k}^{\beta_{k}}:\sum_{k}\beta_{k}=1$
+\end_inset
+
+ (which takes care of the adding up constraint).
+ The OLS estimation of Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:regression_linexp"
+
+\end_inset
+
+ in the table has not met the adding up constraint.
+ The idea of luxuries and inferior goods also don't make sense in the linear
+ expenditure model because there can be no inferior goods (
+\begin_inset Formula $\beta_{k}<0)$
+\end_inset
+
+ for concavity of the cost function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="47" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+item
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+itemname
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta_{k}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\alpha_{k}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10101
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rice (paddy)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1499
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+55176.15
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10102
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rice (husked)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1383
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+87285.65
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10104
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Maize (grain)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.0218
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+184993.62
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10105
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Maize (flour)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0217
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+173531.77
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10106
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Millet and sorghum (grain)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.0008
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+101059.63
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10107
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Millet and sorghum (flour)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.0042
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+107886.94
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10108
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wheat, barley etc.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0337
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+41678.08
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10109
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Bread
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0449
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+37632.41
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10110
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Buns, cakes and biscuts
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0505
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30025.71
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10111
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Macaroini, spaghetti
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0264
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+45781.87
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10112
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Other cereal products
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0381
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25474.01
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10201
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cassava fresh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0176
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+36011.38
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10203
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sweet potatoes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0103
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+46836.21
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10204
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yams/cocoyams
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0202
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+45335.93
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10205
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Irish potatoes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0257
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15818.06
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10206
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cooking bananas, plantains
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0215
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+59695.93
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10301
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sugar
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0320
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+49363.38
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10401
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Peas, beans
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0307
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+48671.65
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10501
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Groundnuts in shell/shelled
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0065
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+36182.32
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10502
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Coconuts (mature/immature)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0429
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+70341.66
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10503
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cashew, almonds, nuts
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0153
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+31995.98
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10601
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Onions, tomatoes, carrots and green pepper, other viungo
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0494
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+37768.26
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10602
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Spinach, cabbage and other green vegetables
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0169
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+26243.71
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10701
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ripe bananas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0224
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15821.22
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10702
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Citrus fruits (oranges, lemon, tangarines, etc.)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0200
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16659.59
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10703
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mangoes, avocadoes and other fruits
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0262
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16522.75
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10704
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sugarcane
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0060
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19132.98
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10801
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Goat meat
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0898
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+95500.99
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10802
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Beef including minced sausage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1097
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+58513.20
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10803
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pork including sauages and bacon
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0454
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+93261.34
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10804
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Chicken and other poultry
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0706
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+130985.74
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10805
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wild birds and insects
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.0073
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+116988.67
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10807
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Eggs
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0238
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32351.48
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10808
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fresh fish and seafood (including dagaa)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0745
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+63044.84
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10809
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dried/salted/canned fish and seafood
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0324
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+46903.26
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10810
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Package fish
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0194
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29120.90
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10901
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fresh milk
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0454
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30231.71
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10902
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Milk products (like cream, cheese, yoghurt etc)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0137
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+45998.52
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10903
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Canned milk/milk powder
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1744
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-181407.02
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11001
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cooking oil
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0353
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+38241.96
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11003
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Salt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0007
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8133.73
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11101
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tea dry
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0051
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13585.18
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11103
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Other raw materals for drinks
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0279
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-1783.41
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11104
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Bottled/canned soft drinks (soda, juice, water)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0454
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+41057.00
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11106
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Bottled beer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1730
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-55842.62
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11108
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wine and spirits
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.0189
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+326792.90
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Results from linear expenditure estimation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Questions to the Adviser
+\end_layout
+
+\begin_layout Enumerate
+Are there any suggestions to ignore price variations? Any conventional literatur
+e on price indices that I should be aware of?
+\end_layout
+
+\begin_layout Enumerate
+Is multiple objective optimisation used for direct utility fitting?
+\end_layout
+
+\begin_layout Enumerate
+Why are elasticities not estimated from demand equations?
+\end_layout
+
+\begin_layout Section
+Bibliography
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "IEEEfull,C:/local_files/research/africa_attitudes"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

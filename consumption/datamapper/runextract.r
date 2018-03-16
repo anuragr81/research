@@ -1,16 +1,132 @@
-
+library(haven)  # write_dta
 setwd('c:/local_files/research/consumption/datamapper/')
 
 debugSource('callertree.r')
 debugSource('./sa/sa.r')
 
 debugSource('us_cex/us_cex_loader.r')
-debugSource('translation/frameutils.R')
 
-#debugSource('us_cex/us_cex_loader.r');ds<-uscex(fcdu=fu)@combined_data_set(2004,"C:/local_files/research/consumption/cex/cex_data/",201,FALSE)
 
-debugSource('lsms/lsms_normalizer.r');debugSource('lsms/lsms_loader.r');
+#debugSource('us_cex/us_cex_loader.r');ds<-uscex(fcdu=fu)@combined_data_set(2un004,"C:/local_files/research/consumption/cex/cex_data/",201,FALSE)
+
+debugSource('lsms/lsms_normalizer.r');debugSource('lsms/lsms_loader.r');debugSource('translation/frameutils.R')
 #ln@food_categories_lsms_2010()
+
+get_allgrp_food_data_frame<-function(year,dirprefix,fu,ln,shortNamesFile){
+  r   <-data.frame();
+  ii  <-merge(ln()@items_codes_2010(),read.csv(shortNamesFile)[c("calories","shortname","group")],by=c("shortname"))
+  for ( group in unique(as.character(ii$group))) {
+    r<- rbind(r,run_food_group_regress(year=year,dirprefix=dirprefix,fu=fu,ln=ln, groupName = group, shortNamesFile = shortNamesFile ))
+  }
+  return(r)
+}
+run_food_group_regress<-function(year,groupName,dirprefix,fu,ln,shortNamesFile,foodExpenditureData,printResults)
+{
+  ll=lsms_loader(fu=fu,ln=ln)
+  if (missing(foodExpenditureData)){
+    ds<-ll@food_expenditure_data(dirprefix = dirprefix, year = year,fu = fu, ln = ln, shortNamesFile=shortNamesFile)
+  } else {
+    ds<-foodExpenditureData 
+  }
+  
+  if (!is.element(groupName,as.character(unique(ds$group))) ){
+    stop(paste("Group",groupName,"not found in data"))
+  }
+  
+  ds<-subset(ds,group==groupName)
+  
+  print("Aggregating group quantities")
+  
+  ds                    <-ddply(ds,.(hhid,group),summarise,cost=sum(cost),merge_quantity=sum(merge_quantity),merge_unit=unique(merge_unit),x=unique(x),
+                                hsize=unique(hsize),highest_educ=unique(highest_educ),age=unique(age),region=unique(region),
+                                litlang=unique(litlang),occupation_rank=unique(occupation_rank),roomsnum=unique(roomsnum))
+  
+  if (dim(unique(ds))[1]!=dim(ds)[1]){
+    stop("run_food_group_regress - Non-unique data for hhid")
+  }
+  
+  
+  
+  
+  if (length(unique(ds$hhid))<50 )
+  {
+    stop("Number of households (=",length(unique(ds$hhid)),") is too small.")
+  }
+  
+  ds$lnx               <- with( ds,log(x))
+  ds$lnunitvalue       <- with( ds, log(cost/merge_quantity))
+  ds$lnmerge_quantity  <- with( ds, log(merge_quantity)) 
+  
+  clusterMeans         <-ddply(ds,.(region),summarise,cost_c=mean(cost),lnmerge_quantity_c=mean(lnmerge_quantity),hsize_c=mean(hsize),
+                               age_c=mean(age),roomsnum_c=mean(roomsnum),
+                               occupation_rank_c = mean(occupation_rank),lnx_c=mean(lnx),
+                               lnunitvalue_c =mean(lnunitvalue))
+  if (any(is.na( clusterMeans [ , setdiff(colnames(clusterMeans),"region") ] )) )
+  {
+    stop("Cluster means cannot have NAs")
+  }
+  
+  ds <- merge(ds,clusterMeans,by=c("region"))
+  print("Merged with cluster means")
+  
+  
+  ds$lnunitvalue_a       <- with (ds, lnunitvalue-lnunitvalue_c)
+  
+  ds$lnx_a               <- with (ds, lnx-lnx_c)
+  ds$lnmerge_quantity_a  <- with (ds, lnmerge_quantity-lnmerge_quantity_c )
+  ds$occupation_rank_a   <- with (ds, occupation_rank - occupation_rank_c )
+  ds$hsize_a             <- with (ds, hsize - hsize_c )
+  ds$age_a               <- with (ds, age - age_c )
+  ds$roomsnum_a          <- with (ds, roomsnum - roomsnum_c)
+  print ("Completed adjsuting quantities and personal characteristics")
+  if (!missing(printResults)){
+    print (summary( lm (data=ds,lnmerge_quantity_a~lnx_a+occupation_rank_a+hsize_a+age_a+roomsnum_a  )))
+    print (summary( lm (data=ds,lnunitvalue_a~lnx_a+occupation_rank_a+hsize_a+age_a+roomsnum_a  ))   )
+  }
+  return(ds)
+  
+}
+
+run_price_regress<-function(p){
+  priceColumns <- NULL
+  
+  for (column in colnames(p)){
+    if (regexpr("^localmedianprice_",column)[[1]]==1)
+    { 
+      
+      lenNAPrices<-dim(p[!is.na(p[,column]),])[1]
+      print(paste(column,":",lenNAPrices))
+      if (lenNAPrices <= 0){
+        stop("Prices not available")
+      }
+      priceColumns<-c(priceColumns,column);
+    }
+  }
+}
+
+
+
+pq_regress_x_intercept<-function(pq,x){ return((lm(pq~x))$coeff[["(Intercept)"]]) }
+pq_regress_x_coeff<-function(pq,x){ return((lm(pq~x))$coeff[["x"]]) }
+
+pq_regress_logx_coeff<-function(w,logx){ return((lm(w~logx))$coeff[["logx"]]) }
+pq_regress_logx_intercept<-function(w,logx){ return((lm(w~logx))$coeff[["(Intercept)"]]) }
+
+#ddply(cp,.(item),summarise,x_coeff=pq_regress_x_coeff(pq=pq,x=x),intercept=pq_regress_x_intercept(pq=pq,x=x))
+#ddply(cp,.(item),summarise,x_coeff=pq_regress_logx(w=pq/x,logx=log(x)),intercept=pq_regress_logx_intercept(w=pq/x,logx=log(x)))
+
+merge2010_2012<-function(category){
+  ll=lsms_loader(fu=fu,ln=lsms_normalizer);
+  ds2010<-ll@combined_data_set(year=2010,selected_category=category, dirprefix='c:/local_files/research/consumption/')
+  ds2012<-ll@combined_data_set(year=2012,selected_category=category, dirprefix='c:/local_files/research/consumption/')
+  ds2010$y2_hhid<- ds2010$hhid
+  ds2010$hhid <-NULL
+  ds2010$year <- rep(2010,dim(ds2010)[1])
+  ds2012$hhid <-NULL
+  ds2012$year <- rep(2012,dim(ds2012)[1])
+  
+  return(rbind(ds2010,ds2012))
+}
 
 sample_vec<-function(vec,n){
   if (length(n)>1){
@@ -214,12 +330,14 @@ calculate_affordability_popularity<-function(m,fu){
   write.csv(file='c:/temp/results.csv',results)
   return(results)
 }
-temporary_calculations<-function(m,fu){
-aff<-calculate_affordability_popularity(m,fu)
 
-a<-merge(merge(aff,popularity),bw)
-a$drh_scaled<-(a$drh-min(a$drh))/diff(range(a$drh))
+temporary_calculations<-function(m,fu){
+  aff<-calculate_affordability_popularity(m,fu)
+  
+  a<-merge(merge(aff,popularity),bw)
+  a$drh_scaled<-(a$drh-min(a$drh))/diff(range(a$drh))
 }
+
 get_region <- function(regions,districts) {
   region<-(ds[is.element(ds$district,c(1,2,3)) & is.element(ds$region,c(7)),]$region)
   
@@ -230,8 +348,5 @@ compute_appeal<-function(ln,hh,item,availability){
   
   #affordability is calculated on whether the expenditure on the item 
   
-  
-  #
-  #bandwagon<-
   
 }

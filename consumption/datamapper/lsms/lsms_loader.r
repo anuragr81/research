@@ -8,19 +8,30 @@ if (isClass("LSMSLoader")){
 
 ## all exported functions are declared here
 setClass("LSMSLoader", representation(combined_data_set="function",load_diary_file="function",
-                                      analyse_cj="function",load_ohs_file="function"))
+                                      analyse_cj="function",load_ohs_file="function",
+                                      match_recorded_prices="function",get_inferred_prices="function",
+                                      aggregate_local_prices="function",add_localmedian_price_columns="function",
+                                      food_expenditure_data="function"))
 
 
 lsms_loader<-function(fu,ln) {
   
-  read_tnz <- function(filename,convert_factors) {
+  read_tnz <- function(filename,convert_factors,hhidColName) {
+    
     if (!is.logical(convert_factors) || !is.atomic(convert_factors)){
-      stop("convert_factords must be ")
+      stop("convert_factors must be ")
     }
     print(paste("Reading file:",filename))
     dat1 = read.dta(filename,convert.factors = convert_factors);
     dat2 = as.data.frame(dat1,stringsAsFactors=FALSE);
-    dat3 = dat2[as.numeric(dat2$y2_hhid)>0,] # only take data with hhid>0
+    if (missing(hhidColName)){
+      hhidColName<-"y2_hhid";
+      dat3 = dat2[as.numeric(dat2[,hhidColName])>0,] # only take data with hhid>0
+    } else {
+      dat3 = dat2[!is.na(dat2[,hhidColName]),] # only take data with hhid>0
+      dat3[,hhidColName]<-as.character(dat3[,hhidColName])
+    }
+    
     return(dat3);
   }
   
@@ -28,7 +39,76 @@ lsms_loader<-function(fu,ln) {
     return (c(7,12,19,53)) 
   }
   
-  load_diary_file <-function(dirprefix,year){
+  load_diary_file <-function(dirprefix,year,fu,ln){
+    if (year == 2012){
+      jdat <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_J1.dta",sep=""),
+                       convert_factors = FALSE,hhidColName = "y3_hhid")
+      k <- fu()@get_translated_frame(dat=jdat,
+                                     names=ln()@diary_info_columns_lsms_2012(),
+                                     m=ln()@hh_mapping_lsms_2012())
+      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      #*    Ignored items where there is no associated cost
+      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      k$item<-k$item+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
+      factor <- 52
+      
+      #*    Multiplied weekly diary data by 52 (to look at annual data)
+      # quantities are normalized to annual values
+      k$cost <- k$cost*factor
+      k$lwp <- k$lwp *factor
+      k$own <-k$own*factor
+      k$gift <-k$gift*factor
+      
+      #*    gift quantities are ignored (total quantity ignored is to be presented)
+      #*    weekly recall items are also multiplied by 52
+      kdat <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_K.dta",sep=""),
+                       convert_factors = FALSE,hhidColName = "y3_hhid")
+      
+      l <- fu()@get_translated_frame(dat=kdat,
+                                     names=ln()@get_lsms_seck_info_columns_2012(),
+                                     m=ln()@get_lsms_seck_fields_mapping_2012());
+      
+      l$hhid <-as.character(l$hhid)
+      l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
+      weekly_recall_items <-c(101,102,103)
+      
+      # l is weekly and  monthly data
+      
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=52,
+                                       items_list = weekly_recall_items)
+      
+      
+      monthly_recall_items <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
+                                "210", "211", "212", "213", "214", "215", "216", "217", "218", "219",
+                                "220", "221", "222", "223", "224")
+      
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=12,
+                                       items_list = monthly_recall_items)
+      
+      
+      # m is yearly data
+      ldat <-read_tnz( filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_L.dta',sep=""),
+                       convert_factors = FALSE,
+                       hhidColName = "y3_hhid")
+      m <- fu()@get_translated_frame(dat=ldat,
+                                     names=ln()@get_lsms_secm_info_columns(2012),
+                                     m=ln()@get_lsms_secm_fields_mapping(2012))
+      m$hhid <-as.character(m$hhid)
+      m<- m[!is.na(m$hhid) & !is.na(m$cost) & m$cost>0,]
+      # nothing to be multiplied for yearly-recall (since we're looking at annual consumption)
+      #*    zero-cost items are ignored for all these 
+      ml <-merge(m,l,all=TRUE)
+      #*    merging all the 4 categories results in the expenditure file
+      
+      mlk <-merge(ml,k,all=TRUE)
+      return(mlk)
+    }
     if (year == 2010){
       # combine sections ( k , l, m )
       kdat <- read_tnz(paste(dirprefix,"./lsms/TZNPS2HH3DTA/HH_SEC_K1.dta",sep=""),FALSE)
@@ -102,17 +182,307 @@ lsms_loader<-function(fu,ln) {
     stop(paste("Year:",year, " not supported"))
   }
   
+  convert_cj_item <- function(x){ 
+    
+    if (regexpr('^L',x)[[1]]==1)
+      
+    { return(as.integer(substring(x,2))) } 
+    
+    else { return (10000+as.integer(x)) }
+    
+  }
   
-  load_ohs_file <-function(year,dirprefix){
+  
+  match_recorded_prices <-function(year,dirprefix,fu,ln){
+    # loading ohs data
+    ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
+    print ("Loaded OHS file")
+    # loading diary data
+    dat2010<-load_diary_file(dirprefix = '.',year = 2010, fu=fu, ln=ln )
+    
+    dat2010$factor<-as.integer(dat2010$lwp_unit==1)+as.integer(dat2010$lwp_unit==2)/1000.0+as.integer(dat2010$lwp_unit==3)+as.integer(dat2010$lwp_unit==4)/1000.0+as.integer(dat2010$lwp_unit==5) 
+    dat2010$quantity<-dat2010$factor*dat2010$lwp
+    dat2010$price<-dat2010$cost/dat2010$quantity
+    print ("Loaded Diary file")
+    ## preparing market data
+    cjdat<-read.dta(paste(dirprefix,'/./lsms/TZNPS2COMDTA/COMSEC_CJ.dta',sep=''),convert.factors = FALSE) 
+    
+    cj <- fu()@get_translated_frame(dat=cjdat, names=ln()@ohs_seccj_columns_lsms_2010(), m=ln()@ohs_seccj_mapping_lsms_2010()) # recorded market prices
+    
+    cj$factor<-as.integer(cj$lwp_unit==1)+as.integer(cj$lwp_unit==2)/1000.0+as.integer(cj$lwp_unit==3)+as.integer(cj$lwp_unit==4)/1000.0+as.integer(cj$lwp_unit==5) # command label list (from labutil package) tells us the numeric values of factors
+    
+    cj<-subset(cj,!is.na(price) & !is.na(lwp) & lwp!=0 &price!=0)
+    
+    cj$recorded_quantity<-cj$lwp*cj$factor
+    
+    cj$recorded_price <-cj$price/cj$recorded_quantity
+    
+    k<-cj[,c("region","district","ward","ea","item","recorded_quantity","recorded_price")]
+    k$item<-as.numeric(lapply(X = k$item,FUN = convert_cj_item))
+    
+    k<-k[!is.na(k$recorded_price),]
+    
+    print ("Loaded market prices file")
+    
+    hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
+    
+    hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs in hhidsRegion
+    
+    householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")], dat2010[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
+    
+    print ("Merging market prices with ohs household ids")
+    hhidsRegionRecPrices<-merge(k[,c("item","region","district","ward","ea","recorded_price","recorded_quantity")],householdLocation,by = c("item","region","district","ward","ea"),all.y = TRUE)
+    
+    hhidsRegionRecPrices$pricediff<-abs(1-hhidsRegionRecPrices$price/hhidsRegionRecPrices$recorded_price)
+    
+    print ("Matching market prices with inferred prices")
+    minPriceDiffs<-ddply(hhidsRegionRecPrices,.(item,region,district,ward,ea,hhid),summarise,pricediff=min(pricediff))
+    
+    hhidsRegionRecClosestPrices<-merge(minPriceDiffs,hhidsRegionRecPrices,by=c("hhid","item","region","district","ward","ea","pricediff"))
+    print ("Returning")
+    return(hhidsRegionRecClosestPrices)
+  }
+  
+  
+  
+  get_inferred_prices <-function(year,dirprefix,fu,ln,shortNamesFile,datConsum){
+    if (missing(datConsum)){
+      
+      # loading ohs data
+      ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
+      print ("Loaded OHS file")
+      # loading diary data
+      datConsum<-load_diary_file(dirprefix = '.',year = year, fu=fu, ln=ln )
+    }
+    
+    datConsum$factor<-as.integer(datConsum$lwp_unit==1)+as.integer(datConsum$lwp_unit==2)/1000.0+as.integer(datConsum$lwp_unit==3)+as.integer(datConsum$lwp_unit==4)/1000.0
+    
+    # convert "piece" to units of volume (l/ml) or weight (g/kg)
+    pieceMeasureMapping                      <-ln()@get_piece_measures(year=year)
+    datConsum                                <-merge(datConsum,pieceMeasureMapping,all.x=TRUE)
+    
+    datConsum[ is.na(datConsum$piece_unit) & datConsum$lwp_unit!=5 & !is.na(datConsum$lwp_unit) ,]$piece_unit<-0
+    
+    
+    datConsum$converted_unit                 <- datConsum$piece_unit + as.integer(datConsum$lwp_unit==2 | datConsum$lwp_unit==1) + 3*as.integer(datConsum$lwp_unit==3 | datConsum$lwp_unit==4)
+    
+    pieceData                                <-subset(datConsum,lwp_unit==5 & is.na(piecefactor))
+    if (dim(pieceData)[1]>0){
+      stop(paste("The items: ",toString(unique(pieceData$item))," do not have piece conversions available."))
+    }
+    
+    datConsum[is.na(datConsum$piecefactor),]$piecefactor <- 0. # deactivate piecefactor for lwp_unit ==5 i.e. when unit is not in pieces
+    
+    if (length(setdiff(unique(datConsum$converted_unit),c(1,3,NA)))>0){
+      print(unique(datConsum$converted_unit))
+      stop("converted_unit must be either kg(1) or liter(3)")
+    }
+
+    datConsum$factor     <-datConsum$factor+ as.integer(datConsum$lwp_unit==5)*datConsum$piecefactor # datConsum$factor is zero when lwp_unit is not 5
+    
+    datConsum$quantity   <-datConsum$factor*datConsum$lwp # quantity is now in liters or kilograms
+    
+    # quantity thus computed has been unified into kilograms or liters (pieces are converted to respective kg/l as well)
+    # quantity is now made uniform across a whole group using another field group_quantity which expresses the quantity in the 
+    # group's standard unit
+    
+    # For example, 130 mls of coffee needs 15 grams of coffee or tea or miscpowder. So, to express quantity in multiplying with unif_factor 
+    # for g->mls for coffee as 130/15 (available in a map :coffee-> 130/15 )
+    
+    datConsum$group_quantity <- datConsum$quantity
+    
+    groupMap          <- rename(ln()@get_group_qconv_factor(year=year),c("lwp_unit"="converted_unit"));
+    
+    
+    ## ddply(subset(datConsum,item==11104),.(lwp_unit),summarize,length(hhid)) # we can also complain that appropriate conversions don't exist 
+    ## (we can ignore improper conversions automatically)
+    
+    
+    datConsum <- merge(datConsum,groupMap,by = c("item","converted_unit")  , all.x=TRUE);
+    
+    datConsum[ is.na(datConsum$group_unit),]$group_unit <- datConsum[ is.na(datConsum$group_unit),]$converted_unit
+    
+    datConsum[is.na(datConsum$unif_factor),]$unif_factor           <-1
+    
+    datConsum$group_quantity  <- with(datConsum,group_quantity*unif_factor)
+    
+    badUnithhids    <-ln()@ignored_bad_units(year=year,datConsum=datConsum)
+    
+    
+    datConsum       <-subset(datConsum,!is.element(hhid,badUnithhids ) )
+    
+    # make sure there are no multiple quantities after grouping
+    unitsForItems    <- ddply(datConsum,.(item),summarise,n=length(unique(group_unit)))
+    
+    if (  dim(subset(unitsForItems, n>1))[1]>0){
+      stop(paste("Number of units >1 for items:",subset(unitsForItems, n>1)$item))
+    }
+    
+    
+    datConsum$price  <-datConsum$cost/datConsum$quantity
+    datConsum        <-subset(datConsum,item>10000)
+    datConsum        <-merge(datConsum,ddply(datConsum,.(hhid),summarise,x=sum(cost)))
+    ii               <-merge(ln()@items_codes_2010(),read.csv(shortNamesFile)[c("calories","shortname","group")],by=c("shortname"))
+    ii               <-rename(ii,c("code"="item","item"="longname"))
+    
+    print (paste("Assuming the groups in the file:",shortNamesFile ,"are in sync with the groups in the conversion function"))
+    
+    
+    datConsum$group                                      <-NULL # group would be overwritten by the merge
+    datConsum                                            <-merge(datConsum,ii,all.x=TRUE,by=c("item"))
+    
+    datConsum$merge_quantity                             <- datConsum$group_quantity
+    datConsum$merge_unit                                 <- datConsum$group_unit
+    
+    # merge_unit
+    datConsum[!is.na(datConsum$calories),]$merge_quantity       <- datConsum[!is.na(datConsum$calories),]$calories  * datConsum[!is.na(datConsum$calories),]$group_quantity 
+    datConsum[!is.na(datConsum$calories),]$merge_unit           <- 10
+    print ("merge_unit = 10 => calories used as merge_unit")
+    
+    datConsum$group_quantity              <- NULL
+    datConsum$group_unit                  <- NULL
+    
+    return(datConsum)
+#    print ("Loaded Diary file")
+#    
+#    hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
+    
+#    hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs in hhidsRegion
+    
+#    householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")], datConsum[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
+#    print ("Returning prices with household location")
+#    return(householdLocation)
+    
+  }
+  
+  aggregate_local_prices<-function (cp){
+    
+    cp<-subset(cp,!is.na(price) & item >10000 & !is.na(region))
+    
+    prices<-merge(ddply(cp,.(item,region),summarise,localmedianprice=mean(quantile(price,c(.4,.6)))),ddply(cp,.(item),summarise,natmedianprice=mean(quantile(price,c(.4,.6)))))
+    
+    cpTemp<-merge(prices,cp)
+    
+    print (paste("Number of households ignored due to distant expenditure/price reporting:",length(unique(subset(cpTemp,abs(1-localmedianprice/natmedianprice)>=1.)$hhid))))
+    
+    cpTemp<-(subset(cpTemp,abs(1-localmedianprice/natmedianprice)<1.))
+    
+    prices<-merge(ddply(cpTemp,.(item,region),summarise,localmedianprice=mean(quantile(price,c(.4,.6)))),ddply(cpTemp,.(item),summarise,natmedianprice=mean(quantile(price,c(.4,.6)))))
+    
+    cp<-merge(prices,cpTemp)
+    
+    return(cp)
+  }
+  
+  add_localmedian_price_columns<-function(cp)
+  {
+    p<-cp;
+    
+    for (i in unique(p$item)){
+      
+      print(paste('Appending item',i))
+      
+      p<- merge(p,rename(x = unique(subset(p,item==i)[c("region","localmedianprice")]), c("localmedianprice"=paste("localmedianprice_",i,sep=""))),by=c("region"),all=TRUE)
+      
+    }
+    
+    return(p)
+  }
+  
+  load_ohs_file <-function(year,dirprefix,fu,ln){
+    if (year ==2012){
+      cbFileName <- paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/COM_SEC_CB.dta',sep="")
+      cbdat<-read.dta(cbFileName,convert.factors = FALSE)
+      
+      cb <- fu()@get_translated_frame(dat=cbdat,
+                                      names=ln()@ohs_seccb_columns_lsms(2012),
+                                      m=ln()@ohs_seccb_mapping_lsms(2012))
+      print(paste("Reading file:",cbFileName))
+      #* chose facilitycode l and collected accessibility 1 and 2(<10) (in the centre or less than 10 km away)
+      l<-(cb[is.element(tolower(as.character(cb$facilitycode)),c("l")),])
+      #* extract those with 1
+      l$accessiblemarket<-as.integer(l$accessibility==1)
+      #* extract those with 2 (and assign them the same status as 1's)
+      l$accessiblemarket<-l$accessiblemarket+as.integer(l$accessibility==2 & l$distance<10)
+      l=l[!is.na(l$accessiblemarket),]
+      #* chose accessible market value using (if both in the centre and closer then ambiguous)
+      l_i=ddply(l,.(region,district,ward),summarize,accessiblemarket=max(accessiblemarket))
+      l = merge(l,l_i)
+      fu()@removeall_cols_except(l,c("region","district","ward","accessiblemarket","travelcost"))
+      #* Also considered urban/rural based on population density 
+      u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban);
+      
+      
+      adat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_A.dta',sep=""),
+                     convert_factors = FALSE,
+                     hhidColName = "y3_hhid")
+      
+      a <- fu()@get_translated_frame(dat=adat,
+                                     names=ln()@ohs_seca_columns_lsms(2012),
+                                     m=ln()@ohs_seca_mapping_lsms_2012())
+      a<-merge(a,u)
+      a<-merge(a,l)
+      a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
+      popDensity <- read.csv(paste(dirprefix,"./lsms/tnzpopdensity.csv",sep=""))
+      a<-merge(a,popDensity)
+      
+      #*    Read section B
+      bdat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_B.dta',sep=""),
+                     convert_factors = FALSE,
+                     hhidColName = "y3_hhid")
+      
+      b <- fu()@get_translated_frame(dat=bdat,
+                                     names=ln()@ohs_info_columns_lsms_2012(),
+                                     m=ln()@ohs_mapping_lsms_2012())
+      
+      
+      b$hhid<-as.character(b$hhid)
+      #* inferring occupation rank with occupation_mapping
+      b<-merge(b,occupation_mapping())
+      
+      
+      cdat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_C.dta',sep=""),
+                     convert_factors = FALSE,
+                     hhidColName = "y3_hhid")
+      
+      #*    Read section C
+      c <- fu()@get_translated_frame(dat=cdat,
+                                     names=ln()@get_ohs_secc_columns_lsms_2012(),
+                                     m=ln()@get_ohs_secc_fields_mapping_lsms_2012())
+      c$hhid<-as.character(c$hhid)
+      ab <- merge(a,b)
+      ohs<-merge(ab,c)
+      ohs$age <-2012-ohs$YOB
+      
+      #*    calculated age by subtracting YOB from 2012 (survey year)
+      #*    read section J for housing data (rent, number of primary/secondary rooms)
+      
+      jdat <- read.dta(paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_I.dta',sep=""),convert.factors=FALSE)
+      
+      j <- fu()@get_translated_frame(dat=jdat,
+                                     names=ln()@get_lsms_secj_info_columns_2012(),
+                                     m=ln()@get_lsms_secj_fields_mapping_2012())
+      j$hhid <-as.character(j$hhid)
+      j$roomsnum_secondary[is.na(j$roomsnum_secondary)]<-0
+      j$houserent[is.na(j$houserent)]<-0
+      print(head(j))
+      j$roomsnum<-j$roomsnum_primary+j$roomsnum_secondary
+      ohsj<-merge(ohs,j,all=TRUE)
+      return(ohsj)
+      
+    }
     
     if (year == 2010){
       
       #* Read section c_cb file
-      cbdat<-read.dta(paste(dirprefix,'./lsms/TZNPS2COMDTA/COMSEC_CB.dta',sep=""),convert.factors = FALSE)
+      cbFileName = paste(dirprefix,'./lsms/TZNPS2COMDTA/COMSEC_CB.dta',sep="")
+      cbdat<-read.dta(cbFileName,convert.factors = FALSE)
+      print(paste("Reading file ",cbFileName))
       
       cb <- fu()@get_translated_frame(dat=cbdat,
-                                      names=ln()@ohs_seccb_columns_lsms_2010(),
-                                      m=ln()@ohs_seccb_mapping_lsms_2010())
+                                      names=ln()@ohs_seccb_columns_lsms(2010),
+                                      m=ln()@ohs_seccb_mapping_lsms(2010))
       #* chose facilitycode l and collected accessibility 1 and 2(<10) (in the centre or less than 10 km away)
       l<-(cb[is.element(tolower(as.character(cb$facilitycode)),c("l")),])
       #* extract those with 1
@@ -135,7 +505,7 @@ lsms_loader<-function(fu,ln) {
       adat<-read_tnz(paste(dirprefix,'./lsms/TZNPS2HH1DTA/HH_SEC_A.dta',sep=""),FALSE)
       
       a <- fu()@get_translated_frame(dat=adat,
-                                     names=ln()@ohs_seca_columns_lsms_2010(),
+                                     names=ln()@ohs_seca_columns_lsms(2010),
                                      m=ln()@ohs_seca_mapping_lsms_2010())
       a<-merge(a,u)
       a<-merge(a,l)
@@ -211,13 +581,19 @@ lsms_loader<-function(fu,ln) {
     #* ignored 5 households with really high expenditure on marriage (more than reported annual income)
     ignoredhhids_adhoc<- c("0701006104006701","0702006012004001","0701021174002601","0702001125000103")
     #* ignored households with zero income (ensuring that not more than 2.5% number of households are ignored)
-    ignoredhhids_zero_income <- unique(income[as.integer(income$yearly_pay)==0,]$hhid)
-    ignored_threshold<-.025
-    if( length(ignoredhhids_zero_income)/length(unique(income$hhid))>ignored_threshold){
-      stop (paste("More than",ignored_threshold*100, "% hhids with zero income"))
+    if (is.null(income)) {
+      ignoredhhids_zero_income<-NULL
     }
-    print(paste("Ignored ",length(ignoredhhids_zero_income),"/",length(unique(income$hhid)),"(=",
-                length(ignoredhhids_zero_income)/length(unique(income$hhid)),") households with zero income" ))
+    else {
+      ignoredhhids_zero_income <- unique(income[as.integer(income$yearly_pay)==0,]$hhid)
+      ignored_threshold<-.025
+      if( length(ignoredhhids_zero_income)/length(unique(income$hhid))>ignored_threshold){
+        stop (paste("More than",ignored_threshold*100, "% hhids with zero income"))
+      }
+      print(paste("Ignored ",length(ignoredhhids_zero_income),"/",length(unique(income$hhid)),"(=",
+                  length(ignoredhhids_zero_income)/length(unique(income$hhid)),") households with zero income" ))
+    }
+    
     ignored<-union(ignoredhhids_zero_income,ignoredhhids_adhoc)
     return(ignored)
   }
@@ -329,10 +705,10 @@ lsms_loader<-function(fu,ln) {
   analyse_cj<-function(dirprefix,sl){
     cjdat<-read.dta(paste(dirprefix,'/./lsms/TZNPS2COMDTA/COMSEC_CJ.dta',sep=''),convert.factors = FALSE) 
     
-    cj <- fu()@get_translated_frame(dat=cjdat, names=ohs_seccj_columns_lsms_2010(), m=ohs_seccj_mapping_lsms_2010())
+    cj <- fu()@get_translated_frame(dat=cjdat, names=ln@ohs_seccj_columns_lsms_2010(), m=ln@ohs_seccj_mapping_lsms_2010())
     cj$factor<-as.integer(cj$lwp_unit==1)+as.integer(cj$lwp_unit==2)/1000.0+as.integer(cj$lwp_unit==3)+as.integer(cj$lwp_unit==4)/1000.0+as.integer(cj$lwp_unit==5)
     cj$lwp <-cj$lwp*cj$factor
-    cj$price <cj$price/cj$lwp
+    #cj$price <-cj$price/cj$lwp
     
     if (missing(sl)){
       sl<-sort(unique(cj$item));
@@ -361,32 +737,37 @@ lsms_loader<-function(fu,ln) {
   
   
   load_income_file<-function (year,dirprefix){
-    
-    #* read section E
-    idat1 <-read_tnz(paste(dirprefix,'./lsms/./TZNPS2HH1DTA/HH_SEC_E1.dta',sep=""),FALSE)
-    idat2 <-read_tnz(paste(dirprefix,'./lsms/./TZNPS2HH1DTA/HH_SEC_E2.dta',sep=""),FALSE)
-    i1 <- fu()@get_translated_frame(dat=idat1,
-                                    names=ln()@get_lsms_sece1_columns_2010(),
-                                    m=ln()@get_lsms_sece_fields_mapping_2010())
-    #TODO: add the conversion into get_translated_frame functionality
-    i1$hhid<-as.character(i1$hhid)
-    i2 <- fu()@get_translated_frame(dat=idat1,
-                                    names=ln()@get_lsms_sece2_columns_2010(),
-                                    m=ln()@get_lsms_sece_fields_mapping_2010())
-    i2$hhid<as.character(i2$hhid)
-    #TODO: add the conversion into get_translated_frame functionality
-    
-    ti <- ln()@infer_lsms_sece_total_income(i1,i2);
-    #* inferred section e data
-    #* ))
-    # idat2 has only got self-employment details
-    
-    return(ti)
+    if (year == 2010){
+      #* read section E
+      idat1 <-read_tnz(paste(dirprefix,'./lsms/./TZNPS2HH1DTA/HH_SEC_E1.dta',sep=""),FALSE)
+      idat2 <-read_tnz(paste(dirprefix,'./lsms/./TZNPS2HH1DTA/HH_SEC_E2.dta',sep=""),FALSE)
+      i1 <- fu()@get_translated_frame(dat=idat1,
+                                      names=ln()@get_lsms_sece1_columns_2010(),
+                                      m=ln()@get_lsms_sece_fields_mapping_2010())
+      #TODO: add the conversion into get_translated_frame functionality
+      i1$hhid<-as.character(i1$hhid)
+      i2 <- fu()@get_translated_frame(dat=idat1,
+                                      names=ln()@get_lsms_sece2_columns_2010(),
+                                      m=ln()@get_lsms_sece_fields_mapping_2010())
+      i2$hhid<as.character(i2$hhid)
+      #TODO: add the conversion into get_translated_frame functionality
+      
+      ti <- ln()@infer_lsms_sece_total_income(i1,i2);
+      #* inferred section e data
+      #* ))
+      # idat2 has only got self-employment details
+      
+      return(ti)
+    } 
+    if (year == 2012){
+      return(NULL)
+    }
+    stop(paste("Year ",year," not supported"))
   }
   
   
   merge_hh_ohs_income_data<-function(hh,ohs,income,year,selected_category,set_depvar){
-    if (year == 2010) {
+    if (year == 2010 || year == 2012) {
       if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
         stop("factors must be converted an integer")
       }
@@ -427,8 +808,12 @@ lsms_loader<-function(fu,ln) {
       
       heads<-ohs[as.integer(ohs$household_status)==1,]
       print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
+      if (!is.element("y2_hhid",colnames(heads)) ){
+        heads$y2_hhid<-rep(NA,dim(heads)[1])
+      }
       
       heads<-data.frame(hhid=heads$hhid,
+                        y2_hhid = heads$y2_hhid,
                         highest_educ=heads$highest_educ,
                         age=heads$age,
                         region=heads$region,
@@ -497,7 +882,66 @@ lsms_loader<-function(fu,ln) {
     stop(paste("merge not available for year:",year))
   }
   
-  combined_data_set<-function(year,dirprefix,selected_category,isDebug, set_depvar){
+  food_expenditure_data<-function(dirprefix,year,fu,ln,foodDiary,shortNamesFile){
+    if (is.element(year,c(2010,2012))){
+      if (missing(foodDiary)){
+        foodDiary    <-get_inferred_prices(year = year,dirprefix = dirprefix , fu = fu , ln = ln, shortNamesFile=shortNamesFile);
+      }
+      
+      ohs          <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln)
+      
+      heads<-ohs[as.integer(ohs$household_status)==1,]
+      print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
+      if (!is.element("y2_hhid",colnames(heads)) ){
+        heads$y2_hhid<-rep(NA,dim(heads)[1])
+      }
+      
+      heads<-data.frame(hhid=heads$hhid,
+                        y2_hhid = heads$y2_hhid,
+                        highest_educ=heads$highest_educ,
+                        age=heads$age,
+                        region=heads$region,
+                        expensiveregion=heads$expensiveregion,
+                        popdensity =heads$popdensity,
+                        district=heads$district,
+                        ward=heads$ward,
+                        ea=heads$ea,
+                        personid=heads$personid,
+                        litlang=heads$litlang,
+                        occupation = heads$occupation,
+                        occupation_rank = heads$occupation_rank,
+                        years_community=heads$years_community,
+                        housingstatus=heads$housingstatus,
+                        roomsnum=heads$roomsnum,
+                        stringsAsFactors=FALSE);
+      
+      print ("Calculating hsize")
+      hhid_personid_consu<-data.frame(hhid=ohs$hhid,personid=ohs$personid,age=ohs$age,stringsAsFactors=FALSE);
+      szNonIgnoredAgeWithNAs<- dim(hhid_personid_consu)[1]
+      szIgnoredAgeWithNAs<-dim(hhid_personid_consu[is.na(hhid_personid_consu$age),])[1]
+      hhid_personid_consu<-hhid_personid_consu[!is.na(hhid_personid_consu$age),]
+      print (paste("Ignored ", szIgnoredAgeWithNAs ," (out of ",szNonIgnoredAgeWithNAs ,") ohs entries with no age (cursz=",
+                   dim(hhid_personid_consu)[1],")"))
+      
+      #calculating the consumption_factor
+      
+      hhid_personid_consu$consumption_factor<-as.integer(hhid_personid_consu$age<=5)*.2+as.integer(hhid_personid_consu$age>5 & hhid_personid_consu$age<=10)*.3+as.integer(hhid_personid_consu$age>10 & hhid_personid_consu$age<=15)*.4+as.integer(hhid_personid_consu$age>15 & hhid_personid_consu$age<=45)+as.integer(hhid_personid_consu$age>45 & hhid_personid_consu$age<=65)*.7+as.integer(hhid_personid_consu$age>65)*.6
+      
+      hhid_personid<- ddply(hhid_personid_consu,.(hhid),summarize,hsize=length(personid), consu=sum(consumption_factor));
+      print(paste("Number of households with hsize data = ",length(unique(hhid_personid$hhid))))
+      ds <-merge(foodDiary,hhid_personid,by=c("hhid"));
+      print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
+      ds<-merge(ds,heads)
+      print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
+
+      return(ds)
+    }
+    
+    stop(paste("food_expenditure_data : year",year, " not supported"))
+    
+  }
+  
+  combined_data_set<-function(year,dirprefix,selected_category,isDebug, set_depvar, fu, ln){
     
     ############ PHASE 0 ########################
     if (missing(set_depvar)){
@@ -511,10 +955,10 @@ lsms_loader<-function(fu,ln) {
     }
     
     #*  (( Loading diary file
-    hhdat <- load_diary_file(dirprefix=dirprefix,year=year) # must provide total and visible expenditure (must be already translated)
+    hhdat <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
     
     #* Loading the person/family data fie
-    ohsdat <-load_ohs_file(dirprefix=dirprefix,year=year) # (using fmld) must provide age (age_ref), gender(sex_ref), 
+    ohsdat <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # (using fmld) must provide age (age_ref), gender(sex_ref), 
     # highest_educ(educ_ref), ishead(no_earnr,earncomp - all reference person data),
     # race(ref_race),family size (fam_size),
     # area_type (popsize,bls_urbn)
@@ -571,8 +1015,10 @@ lsms_loader<-function(fu,ln) {
     #* ))
   }
   
-
+  
   return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
-             analyse_cj=analyse_cj,load_ohs_file=load_ohs_file))
+             analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, 
+             get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices,
+             add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data))
   
 }
