@@ -7,6 +7,15 @@ debugSource('./sa/sa.r')
 debugSource('us_cex/us_cex_loader.r')
 
 
+log_scale <-function(x){
+  y=NULL;
+  for (i in seq(1,x)){
+    #print(paste("i=",i))
+    print(combn(2^seq(0,x-1),i))
+    y<-c(y,(colSums(combn(2^seq(0,x-1),i))))
+  }
+  return(y)
+}
 #debugSource('us_cex/us_cex_loader.r');ds<-uscex(fcdu=fu)@combined_data_set(2un004,"C:/local_files/research/consumption/cex/cex_data/",201,FALSE)
 
 source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');source('translation/frameutils.R')

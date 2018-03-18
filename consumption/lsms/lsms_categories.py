@@ -2,19 +2,59 @@ from itertools import ifilter
 import sys
 
 nonFoodGroups= {
-'home_energy':['charcoal','electricity','gas','kerosene','matches'],
-'transport':['petrol','public_transport',],
-'communications':['cellphone_voucher','phone',],
-'personal_products':['bar_soap','toothpaste','shampoo','skin_cream','other_personal'],
-'household_products':['clothes_soap','toilet_paper','bulbs','misc_cleaning','carpet','linen','mat','mosquito_net','mattress',],
-'household_services':['household_products_repair','house_repair','motor_repair','bicycle_repair','consumer_durables_repair','services'],
-'appliances':['light_bulbs','sports_hobby','camera',],
+'home_energy':['charcoal','electricity','gas','kerosene','matches'], # vis score .1
+'transport':['petrol','public_transport',],  # vis score .7
+'communications':['cellphone_voucher','phone',], # vis score .85
+'personal_products':['bar_soap','toothpaste','shampoo','skin_cream','other_personal'], # vis score .9
+'household_products':['clothes_soap','toilet_paper','bulbs','misc_cleaning','carpet','linen','mat','mosquito_net','mattress',], # vi score # .6
+'household_services':['household_products_repair','house_repair','motor_repair','bicycle_repair','consumer_durables_repair','services'], # repair to be ignored for due to lack of life-and-quality measures 
+'appliances':['light_bulbs','sports_hobby','camera',], # vis score. 95
 #'charity':['donation'],
 #'services':['services'],
-'housing':['mortgage','council_rates','building_material','bamboo','grass'],
-'legalfinance':['insurance','legal'],
-'social_functions':['marriage','bride_price','funeral','donation'],
+'housing':['mortgage','council_rates','building_material','bamboo','grass'], # .99
+'legalfinance':['insurance','legal'], # .01
+'social_functions':['marriage','bride_price','funeral','donation'], # .98
 }
+
+associationsDict = {'appliances':'appliances',
+                    'transport':'transport',
+                    'communications':'communications',
+                    'personal_products':'personal_products',
+                    'household_products':'household_products',
+                    ''
+                    }
+
+assetsGroups={
+ 'appliances':['radio','iron','waterpump','waterheater','stove_electricgas','stove_other','sewingmachine','ac_fan','dishtv','musicplayer','tv','musicsystem','refrigerator','videoplayer','computer' ], 
+ 'communications':['mobile','landline', ],
+ 'personal_products':['watch',],
+ 'household_products': [ 'mosquitonet','bookexschool','lantern','cookingpot','chair', 'sofa', 'cupboard','table', 'bed',],
+ 'transport':['bike', 'cart', 'animalcart', 'motorbike','boat','engine_outboard','car',],
+ 'agricultural_equipment': ['harrow','hoe','wheelbarrow','plough', 'reaper', 'tractor', 'trailer', 'harvester', 'fertiliserdistributor', 'spraymachine', ],
+ 'agricultural_property' : ['poultry','livestock','donkey','land',],
+ 'agricultural_production' : ['handmill','milkingmachine','coffeepulpingmachine'],
+}
+
+#harrow                - 1            1 - 2^0
+#hoe                   - 2           10 - 2^1
+#wheelbarrow           - 3          100 - 2^2
+#plough                - 4         1000 - 2^3
+#reaper                - 5        10000 - 2^4
+#tractor               - 6       100000 - 2^5
+#trailer               - 7      1000000 - 2^6
+#harvester             - 8     10000000 - 2^7
+#fertiliserdistributor - 9    100000000 - 2^8
+#spraymachine          - 10  1000000000 - 2^9
+
+#poultry               - 101          1 - 2^0
+#livestock             - 102         10 - 2^1
+#donkey                - 103        100 - 2^2
+#land                  - 104       1000 - 2^3
+
+#handmill              - 1001         1 - 2^0
+#milkingmachine        - 1002        10 - 2^1
+#coffeepulpingmachine  - 1003       100 - 2^2
+
 
 foodGroups = {
          'alcohol' :['beer','brews','winespirits'],
