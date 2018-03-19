@@ -11,7 +11,8 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       analyse_cj="function",load_ohs_file="function",
                                       match_recorded_prices="function",get_inferred_prices="function",
                                       aggregate_local_prices="function",add_localmedian_price_columns="function",
-                                      food_expenditure_data="function",read_assets_file="function"))
+                                      food_expenditure_data="function",read_assets_file="function",
+                                      group_expenditure="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -277,7 +278,7 @@ lsms_loader<-function(fu,ln) {
       print(unique(datConsum$converted_unit))
       stop("converted_unit must be either kg(1) or liter(3)")
     }
-
+    
     datConsum$factor     <-datConsum$factor+ as.integer(datConsum$lwp_unit==5)*datConsum$piecefactor # datConsum$factor is zero when lwp_unit is not 5
     
     datConsum$quantity   <-datConsum$factor*datConsum$lwp # quantity is now in liters or kilograms
@@ -323,7 +324,7 @@ lsms_loader<-function(fu,ln) {
     datConsum        <-subset(datConsum,item>10000)
     datConsum        <-merge(datConsum,ddply(datConsum,.(hhid),summarise,x=sum(cost)))
     if (year == 2010){
-    ii               <-merge(ln()@items_codes_2010(),read.csv(shortNamesFile)[c("calories","shortname","group")],by=c("shortname"))
+      ii               <-merge(ln()@items_codes_2010(),read.csv(shortNamesFile)[c("calories","shortname","group")],by=c("shortname"))
     }
     else
     {
@@ -350,15 +351,15 @@ lsms_loader<-function(fu,ln) {
     datConsum$group_unit                  <- NULL
     
     return(datConsum)
-#    print ("Loaded Diary file")
-#    
-#    hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
+    #    print ("Loaded Diary file")
+    #    
+    #    hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
     
-#    hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs in hhidsRegion
+    #    hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs in hhidsRegion
     
-#    householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")], datConsum[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
-#    print ("Returning prices with household location")
-#    return(householdLocation)
+    #    householdLocation<-merge(hhidsRegion[c("hhid","region","district","ward","ea")], datConsum[,c("hhid","item","quantity","price")],by=c("hhid"),all=TRUE)
+    #    print ("Returning prices with household location")
+    #    return(householdLocation)
     
   }
   
@@ -399,15 +400,15 @@ lsms_loader<-function(fu,ln) {
   read_assets_file<-function(year,dirprefix,fu,ln){
     
     if (year == 2010){
-    secnFileName <- paste(dirprefix,'./lsms/TZNPS2HH2DTA/HH_SEC_N.dta',sep="")
-    print(paste("read_assets_file - opening file:",secnFileName))
-    secndat<-read.dta(secnFileName,convert.factors = FALSE)
-    
-    assetsData <- fu()@get_translated_frame(dat=secndat,
-                                    names=ln()@get_diary_secn_columns_lsms_2010(),
-                                    m=ln()@get_diary_secn_fields_mapping_lsms_2010())
-    
-    return(assetsData)
+      secnFileName <- paste(dirprefix,'./lsms/TZNPS2HH2DTA/HH_SEC_N.dta',sep="")
+      print(paste("read_assets_file - opening file:",secnFileName))
+      secndat<-read.dta(secnFileName,convert.factors = FALSE)
+      
+      assetsData <- fu()@get_translated_frame(dat=secndat,
+                                              names=ln()@get_diary_secn_columns_lsms_2010(),
+                                              m=ln()@get_diary_secn_fields_mapping_lsms_2010())
+      
+      return(assetsData)
     }
     stop("read_assets_file - year", year, "not supported")
     
@@ -789,6 +790,109 @@ lsms_loader<-function(fu,ln) {
     stop(paste("Year ",year," not supported"))
   }
   
+  get_total_expenditures <- function (hh,ohs) {
+    print("Calculating total expenditures")
+    totexp<-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
+    print(paste("Number of households with total expenditure data minus housing = ",length(unique(totexp$hhid))))
+    
+    # obtain map (hhid->housing) with ddply
+    tothouserent<-ddply(ohs,.(hhid),summarize,tothouserent=sum(houserent))
+    # obtain map (hhid->educexpen) with ddply 
+    print(paste("Number of households with houserent data = ",length(unique(tothouserent$hhid))))
+    
+    print ("Appending educexpense and houserent to total expenditure");
+    #* setting houses with education exenses= NA as zero
+    ohs$educexpense[is.na(ohs$educexpense)]<-0
+    toteducexpense<-ddply(ohs,.(hhid),summarize,toteducexpense=sum(educexpense))
+    print(paste("Number of households with educexpense data = ",length(unique(toteducexpense$hhid))))
+    
+    totexp<-merge(totexp,toteducexpense)
+    print(paste("Number of households after merging total_expenditure and total_educexpense = ",length(unique(totexp$hhid))))
+    
+    totexp<-merge(totexp,tothouserent)
+    print(paste("Number of households after merging total_expenditure with houserent = ",length(unique(totexp$hhid))))
+    
+    totexp$total_expenditure=totexp$total_expenditure+totexp$tothouserent+totexp$toteducexpense
+    
+    #* calculating educational expense and total houserent
+    print(paste("Number of households with total expenditure data = ",length(unique(totexp$hhid))))
+    #* finding personids of the house-heads and their education-level, age, years in community, 
+    #* language, occupation and 
+    #* other household characteristics
+    return(totexp)
+  }
+  
+  get_household_head_info <- function (ohs) {
+    
+    heads<-ohs[as.integer(ohs$household_status)==1,]
+    print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
+    if (!is.element("y2_hhid",colnames(heads)) ){
+      heads$y2_hhid<-rep(NA,dim(heads)[1])
+    }
+    
+    heads<-data.frame(hhid=heads$hhid,
+                      y2_hhid = heads$y2_hhid,
+                      highest_educ=heads$highest_educ,
+                      age=heads$age,
+                      region=heads$region,
+                      expensiveregion=heads$expensiveregion,
+                      popdensity =heads$popdensity,
+                      district=heads$district,
+                      ward=heads$ward,
+                      ea=heads$ea,
+                      personid=heads$personid,
+                      litlang=heads$litlang,
+                      isrural=heads$isrural,
+                      isurbanp=heads$isurbanp,
+                      accessiblemarket=heads$accessiblemarket,
+                      travelcost=heads$travelcost,
+                      schoolowner=heads$schoolowner,
+                      occupation = heads$occupation,
+                      occupation_rank = heads$occupation_rank,
+                      years_community=heads$years_community,
+                      housingstatus=heads$housingstatus,
+                      roomsnum=heads$roomsnum,
+                      roofmaterial=heads$roofmaterial,
+                      floormaterial=heads$floormaterial,
+                      wallsmaterial=heads$wallsmaterial,
+                      toilet=heads$toilet,
+                      cookingfuel=heads$cookingfuel,
+                      dryseasonwatersource=heads$dryseasonwatersource,
+                      
+                      stringsAsFactors=FALSE);
+    print(
+      paste("Total number of households with head_highest_education=NA : ",
+            dim(heads[is.na(heads$highest_educ),])[1]
+      )
+    );
+    #heads$highest_educ[is.na(heads$highest_educ)]<-1
+    print("Setting members with years_community=99 as their age");
+    heads$is_resident<-as.integer(as.integer(heads$years_community)==99)
+    heads$years_community<-heads$years_community+heads$is_resident*(heads$age-99);
+    
+    return(heads)
+  }
+  
+  get_hsize<-function (ohs)
+  {
+    
+    print ("Calculating hsize")
+    hhid_personid_consu<-data.frame(hhid=ohs$hhid,personid=ohs$personid,age=ohs$age,stringsAsFactors=FALSE);
+    szNonIgnoredAgeWithNAs<- dim(hhid_personid_consu)[1]
+    szIgnoredAgeWithNAs<-dim(hhid_personid_consu[is.na(hhid_personid_consu$age),])[1]
+    hhid_personid_consu<-hhid_personid_consu[!is.na(hhid_personid_consu$age),]
+    print (paste("Ignored ", szIgnoredAgeWithNAs ," (out of ",szNonIgnoredAgeWithNAs ,") ohs entries with no age (cursz=",
+                 dim(hhid_personid_consu)[1],")"))
+    
+    #calculating the consumption_factor
+    
+    hhid_personid_consu$consumption_factor<-as.integer(hhid_personid_consu$age<=5)*.2+as.integer(hhid_personid_consu$age>5 & hhid_personid_consu$age<=10)*.3+as.integer(hhid_personid_consu$age>10 & hhid_personid_consu$age<=15)*.4+as.integer(hhid_personid_consu$age>15 & hhid_personid_consu$age<=45)+as.integer(hhid_personid_consu$age>45 & hhid_personid_consu$age<=65)*.7+as.integer(hhid_personid_consu$age>65)*.6
+    
+    hhid_personid<- ddply(hhid_personid_consu,.(hhid),summarize,hsize=length(personid), consu=sum(consumption_factor));
+    print(paste("Number of households with hsize data = ",length(unique(hhid_personid$hhid))))
+    
+    return(hhid_personid)
+  }
   
   merge_hh_ohs_income_data<-function(hh,ohs,income,year,selected_category,fu,set_depvar){
     if (year == 2010 || year == 2012) {
@@ -797,121 +901,97 @@ lsms_loader<-function(fu,ln) {
       }
       print ("Calculating visible expenditures")
       print(paste("Total number of households to search for visible consumption=",length(unique(hh$hhid))))
-      vis<-fu()@filter_categories_data(hh=hh,selected_category = selected_category, item_field = "item", set_depvar=set_depvar)
+      vis             <- fu()@filter_categories_data(hh=hh,selected_category = selected_category, item_field = "item", set_depvar=set_depvar)
       print(paste("Number of households with visible expenditure = ",length(unique(vis$hhid))))
-      print("Calculating total expenditures")
-      totexp<-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
-      print(paste("Number of households with total expenditure data minus housing = ",length(unique(totexp$hhid))))
       
-      # obtain map (hhid->housing) with ddply
-      tothouserent<-ddply(ohs,.(hhid),summarize,tothouserent=sum(houserent))
-      # obtain map (hhid->educexpen) with ddply 
-      print(paste("Number of households with houserent data = ",length(unique(tothouserent$hhid))))
+      totexp          <- get_total_expenditures(hh=hh,ohs=ohs)
       
-      print ("Appending educexpense and houserent to total expenditure");
-      #* setting houses with education exenses= NA as zero
-      ohs$educexpense[is.na(ohs$educexpense)]<-0
-      toteducexpense<-ddply(ohs,.(hhid),summarize,toteducexpense=sum(educexpense))
-      print(paste("Number of households with educexpense data = ",length(unique(toteducexpense$hhid))))
+      heads           <- get_household_head_info(ohs=ohs)
       
-      totexp<-merge(totexp,toteducexpense)
-      print(paste("Number of households after merging total_expenditure and total_educexpense = ",length(unique(totexp$hhid))))
-      
-      totexp<-merge(totexp,tothouserent)
-      print(paste("Number of households after merging total_expenditure with houserent = ",length(unique(totexp$hhid))))
-      
-      totexp$total_expenditure=totexp$total_expenditure+totexp$tothouserent+totexp$toteducexpense
-      #totexp$tothouserent<-NULL
-      #totexp$toteducexpense<-NULL
-      
-      #* calculating educational expense and total houserent
-      print(paste("Number of households with total expenditure data = ",length(unique(totexp$hhid))))
-      #* finding personids of the house-heads and their education-level, age, years in community, 
-      #* language, occupation and 
-      #* other household characteristics
-      
-      heads<-ohs[as.integer(ohs$household_status)==1,]
-      print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
-      if (!is.element("y2_hhid",colnames(heads)) ){
-        heads$y2_hhid<-rep(NA,dim(heads)[1])
-      }
-      
-      heads<-data.frame(hhid=heads$hhid,
-                        y2_hhid = heads$y2_hhid,
-                        highest_educ=heads$highest_educ,
-                        age=heads$age,
-                        region=heads$region,
-                        expensiveregion=heads$expensiveregion,
-                        popdensity =heads$popdensity,
-                        district=heads$district,
-                        ward=heads$ward,
-                        ea=heads$ea,
-                        personid=heads$personid,
-                        litlang=heads$litlang,
-                        isrural=heads$isrural,
-                        isurbanp=heads$isurbanp,
-                        accessiblemarket=heads$accessiblemarket,
-                        travelcost=heads$travelcost,
-                        schoolowner=heads$schoolowner,
-                        occupation = heads$occupation,
-                        occupation_rank = heads$occupation_rank,
-                        years_community=heads$years_community,
-                        housingstatus=heads$housingstatus,
-                        roomsnum=heads$roomsnum,
-                        roofmaterial=heads$roofmaterial,
-                        floormaterial=heads$floormaterial,
-                        wallsmaterial=heads$wallsmaterial,
-                        toilet=heads$toilet,
-                        cookingfuel=heads$cookingfuel,
-                        dryseasonwatersource=heads$dryseasonwatersource,
-                        
-                        stringsAsFactors=FALSE);
-      print(
-        paste("Total number of households with head_highest_education=NA : ",
-              dim(heads[is.na(heads$highest_educ),])[1]
-        )
-      );
-      #heads$highest_educ[is.na(heads$highest_educ)]<-1
-      print("Setting members with years_community=99 as their age");
-      heads$is_resident<-as.integer(as.integer(heads$years_community)==99)
-      heads$years_community<-heads$years_community+heads$is_resident*(heads$age-99);
-      
-      
-      
-      print ("Calculating hsize")
-      hhid_personid_consu<-data.frame(hhid=ohs$hhid,personid=ohs$personid,age=ohs$age,stringsAsFactors=FALSE);
-      szNonIgnoredAgeWithNAs<- dim(hhid_personid_consu)[1]
-      szIgnoredAgeWithNAs<-dim(hhid_personid_consu[is.na(hhid_personid_consu$age),])[1]
-      hhid_personid_consu<-hhid_personid_consu[!is.na(hhid_personid_consu$age),]
-      print (paste("Ignored ", szIgnoredAgeWithNAs ," (out of ",szNonIgnoredAgeWithNAs ,") ohs entries with no age (cursz=",
-                   dim(hhid_personid_consu)[1],")"))
-      
-      #calculating the consumption_factor
-      
-      hhid_personid_consu$consumption_factor<-as.integer(hhid_personid_consu$age<=5)*.2+as.integer(hhid_personid_consu$age>5 & hhid_personid_consu$age<=10)*.3+as.integer(hhid_personid_consu$age>10 & hhid_personid_consu$age<=15)*.4+as.integer(hhid_personid_consu$age>15 & hhid_personid_consu$age<=45)+as.integer(hhid_personid_consu$age>45 & hhid_personid_consu$age<=65)*.7+as.integer(hhid_personid_consu$age>65)*.6
-      
-      hhid_personid<- ddply(hhid_personid_consu,.(hhid),summarize,hsize=length(personid), consu=sum(consumption_factor));
-      print(paste("Number of households with hsize data = ",length(unique(hhid_personid$hhid))))
+      hhid_personid   <- get_hsize(ohs)
       
       print("Merging visual expenditure")
-      ds <-merge(totexp,vis);
+      ds              <- merge(totexp,vis);
+      
       print(paste("Number of households after merging total expenditure with visible expenditure= ",length(unique(ds$hhid))))
       print(paste("Merging hsize",dim(ds)[1]))
       
-      ds <-merge(ds,hhid_personid);
+      ds              <- merge(ds,hhid_personid);
       print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
       
-      ds<-merge(ds,heads)
+      ds              <- merge(ds,heads)
       print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
       
       #print(paste("Merging income",dim(ds)[1]))
       #ds<-merge(ds,income)
       print(paste("personid range:",toString(unique(ds$personid))))
-      ds$personid<-NULL
+      ds$personid     <- NULL
       return(ds)
     }
     stop(paste("merge not available for year:",year))
   }
+  
+  
+  group_expenditure <- function(year,dirprefix,groups,fu,ln){
+    
+    if (year == 2010 || year == 2012) {
+      
+      
+      hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
+      
+      #* Loading the person/family data fie
+      ohs           <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # (using fmld) must provide age (age_ref), gender(sex_ref), 
+      
+      if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
+        stop("factors must be converted an integer")
+      }
+      
+      print("Ensuring duplicates do NOT exist in the diary hhdata")
+      hh = unique(hh)
+      
+      ignored_hhids <- get_ignored_hhids(hh,ohs,NULL);
+      
+      if (!is.null(ignored_hhids)){  
+        if (!is.null(hh)){
+          n1<-length(unique(hh$hhid))
+          hh<-hh[!is.element(as.character(hh$hhid),as.character(ignored_hhids)),]
+          
+          n2<-length(unique(hh$hhid))
+          print(paste("ignored",n1-n2,"/",n1," hhids"))
+        }
+        if (!is.null(ohs)){
+          
+          n1<-length(unique(ohs$hhid))
+          ohs<-ohs[!is.element(as.character(ohs$hhid),as.character(ignored_hhids)),]
+          
+          n2<-length(unique(ohs$hhid))
+          print(paste("ignored",n1-n2,"/",n1," hhids"))
+        }
+      }
+      
+      totexp          <- get_total_expenditures(hh=hh,ohs=ohs)
+      
+      heads           <- get_household_head_info(ohs=ohs)
+      
+      hhid_personid   <- get_hsize(ohs)
+      
+      ds              <- totexp;
+      
+      print(paste("Merging hsize",dim(ds)[1]))
+      
+      ds              <- merge(ds,hhid_personid);
+      print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
+      
+      ds              <- merge(ds,heads)
+      print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
+      
+      print(paste("personid range:",toString(unique(ds$personid))))
+      ds$personid     <- NULL
+      return(ds)
+    }
+    stop(paste("merge not available for year:",year))
+  }
+  
   
   food_expenditure_data<-function(dirprefix,year,fu,ln,foodDiary,shortNamesFile){
     if (is.element(year,c(2010,2012))){
@@ -970,7 +1050,7 @@ lsms_loader<-function(fu,ln) {
       print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
       ds<-merge(ds,heads)
       print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
-
+      
       return(ds)
     }
     
@@ -1057,6 +1137,6 @@ lsms_loader<-function(fu,ln) {
              analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, 
              get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices,
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
-             read_assets_file=read_assets_file))
+             read_assets_file=read_assets_file, group_expenditure=group_expenditure))
   
 }

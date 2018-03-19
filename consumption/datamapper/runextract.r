@@ -18,6 +18,19 @@ log_scale <-function(x){
 }
 #debugSource('us_cex/us_cex_loader.r');ds<-uscex(fcdu=fu)@combined_data_set(2un004,"C:/local_files/research/consumption/cex/cex_data/",201,FALSE)
 
+
+item_usage<-function(itemNames,dat,hhidsRegion)
+  
+{
+  
+  k<-(subset(dat,is.element(shortname,itemNames))[,c("item","hhid","cost","shortname")])
+  
+  kk<-merge(k[,c("hhid","item","shortname","cost")],hhidsRegion[c("hhid","region","district","ward","ea")],by=c("hhid"),all.x=TRUE)
+  
+  return(kk)
+  
+}
+
 source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');source('translation/frameutils.R')
 
 get_allgrp_food_data_frame<-function(year,dirprefix,fu,ln,shortNamesFile){
