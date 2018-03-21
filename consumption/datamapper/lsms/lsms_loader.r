@@ -949,13 +949,10 @@ lsms_loader<-function(fu,ln) {
         stop(paste("item code not available for year",year))
       }
 
-      if (!setequal(colnames(groups),c("shortname","group"))){
-        stop("groups must have shortname, group columns")
-      } else {
-        if (!setequal(groups$group,c("high","low"))){
-          stop("groups must only have high and low row elements")
-        }
-      }
+      # check if group columns are known
+      if (!setequal(colnames(groups),c("shortname","group","category"))){
+        stop("groups must strictly have shortname, group, category columns")
+      } 
       
       
       #* Loading the person/family data fie
@@ -993,7 +990,9 @@ lsms_loader<-function(fu,ln) {
       heads           <- get_household_head_info(ohs=ohs)
       
       hhid_personid   <- get_hsize(ohs)
+
       
+      if (setequal(groups$group,c("high","low"))){
       
       vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
       vis                                  <- subset(vis,!is.na(group_cost))
@@ -1004,10 +1003,16 @@ lsms_loader<-function(fu,ln) {
       vis$group       <- NULL
       vis$low_cost    <- NULL
       vis$high_cost   <- NULL
+      } else if (setequal(groups$group,c("asset","expenditure"))){
+        assets          <- merge(rename(ln@items_codes_2010(),c("item"="longname","code"="item")), 
+                                 rename(ll@read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln), c("itemcode"="item")), 
+                                 by = c("item"), all.y=TRUE)
+        
+      } else {
+        stop( paste ( "Unknown row elements in groups frame for year", year))
+      }
       
-      assets          <- merge(rename(ln@items_codes_2010(),c("item"="longname","code"="item")), 
-                               rename(ll@read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln), c("itemcode"="item")), 
-                               by = c("item"), all.y=TRUE)
+      
       
       if (dim(subset(assets,is.na(shortname) ))[1]) {
         stop(paste("Missing itemcode->shortname mapping for year",year))
