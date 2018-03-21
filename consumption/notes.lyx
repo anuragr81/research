@@ -7324,6 +7324,83 @@ return(kk)
 \begin_layout Plain Layout
 
 \family typewriter
+#regional variation
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+ddply(item_usage("electricity",d,hhidsRegion),.(item,region),summarise,m=mean(cos
+t),sd=sd(cost),n=length(hhid))
+\end_layout
+
+\begin_layout Plain Layout
+#commodities grouped
+\end_layout
+
+\begin_layout Plain Layout
+x<-NULL
+\end_layout
+
+\begin_layout Plain Layout
+x<-rbind(x,data.frame(category = "energy", group="low",shortname="kerosene"))
+\end_layout
+
+\begin_layout Plain Layout
+x<-rbind(x,data.frame(category = "energy", group="high",shortname="charcoal"))
+\end_layout
+
+\begin_layout Plain Layout
+x<-rbind(x,data.frame(category = "energy", group="high",shortname="gas"))
+\end_layout
+
+\begin_layout Plain Layout
+x<-rbind(x,data.frame(category = "energy", group="high",shortname="electricity"))
+\end_layout
+
+\begin_layout Plain Layout
+x<-rbind(x,data.frame(category = "personal_care", group="expenditure",shortname="
+bar_soap"))
+\end_layout
+
+\begin_layout Plain Layout
+x<-rbind(x,data.frame(category = "personal_care", group="expenditure",shortname="
+toothpaste"))
+\end_layout
+
+\begin_layout Plain Layout
+x<-rbind(x,data.frame(category = "personal_care", group="expenditure",shortname="
+shampoo"))
+\end_layout
+
+\begin_layout Plain Layout
+x<-rbind(x,data.frame(category = "personal_care", group="expenditure",shortname="
+skin_cream"))
+\end_layout
+
+\begin_layout Plain Layout
+x<-rbind(x,data.frame(category = "personal_care", group="expenditure",shortname="
+other_personal"))
+\end_layout
+
+\begin_layout Plain Layout
+x<-rbind(x,data.frame(category = "personal_care", group="asset",shortname="watch"
+))
+\end_layout
+
+\begin_layout Plain Layout
+# highratio regression
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = ds,depvar = "highratio",vars_init = c("lntot","t
+othouserent","toteducexpense","consu","highest_educ","age","region","popdensity"
+,"years_community","housingstatus","roomsnum","is_resident"))[["result"]])
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
 \size small
 #looking at cost per household variations
 \end_layout

@@ -932,12 +932,31 @@ lsms_loader<-function(fu,ln) {
   }
   
   
-  group_expenditure <- function(year,dirprefix,groups,fu,ln){
+  group_expenditure <- function(year,dirprefix,categoryName,fu,ln){
+    
     
     if (year == 2010 || year == 2012) {
       
       
+      
       hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
+      
+      if (year == 2010){
+        hh          <- merge(  hh,rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+        groups      <- subset( ln@lsms_groups_2010(), category == categoryName )
+      
+      } else{
+        stop(paste("item code not available for year",year))
+      }
+
+      if (!setequal(colnames(groups),c("shortname","group"))){
+        stop("groups must have shortname, group columns")
+      } else {
+        if (!setequal(groups$group,c("high","low"))){
+          stop("groups must only have high and low row elements")
+        }
+      }
+      
       
       #* Loading the person/family data fie
       ohs           <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # (using fmld) must provide age (age_ref), gender(sex_ref), 
@@ -975,7 +994,27 @@ lsms_loader<-function(fu,ln) {
       
       hhid_personid   <- get_hsize(ohs)
       
-      ds              <- totexp;
+      
+      vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
+      vis                                  <- subset(vis,!is.na(group_cost))
+      vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
+      vis[is.na(vis$high_cost),]$high_cost <- 0
+      vis[is.na(vis$low_cost),]$low_cost   <- 0
+      vis$highratio   <- with(vis,high_cost/(low_cost+high_cost)) + 1e-16
+      vis$group       <- NULL
+      vis$low_cost    <- NULL
+      vis$high_cost   <- NULL
+      
+      assets          <- merge(rename(ln@items_codes_2010(),c("item"="longname","code"="item")), 
+                               rename(ll@read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln), c("itemcode"="item")), 
+                               by = c("item"), all.y=TRUE)
+      
+      if (dim(subset(assets,is.na(shortname) ))[1]) {
+        stop(paste("Missing itemcode->shortname mapping for year",year))
+      }
+      
+      
+      ds              <- merge(totexp,vis);
       
       print(paste("Merging hsize",dim(ds)[1]))
       
