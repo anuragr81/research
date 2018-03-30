@@ -943,7 +943,7 @@ lsms_loader<-function(fu,ln) {
       
       if (year == 2010){
         hh          <- merge(  hh,rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
-        groups      <- subset( ln@lsms_groups_2010(), category == categoryName )
+        groups      <- subset( ln()@lsms_groups_2010(), category == categoryName )
       
       } else{
         stop(paste("item code not available for year",year))
@@ -1004,19 +1004,20 @@ lsms_loader<-function(fu,ln) {
       vis$low_cost    <- NULL
       vis$high_cost   <- NULL
       } else if (setequal(groups$group,c("asset","expenditure"))){
-        assets          <- merge(rename(ln@items_codes_2010(),c("item"="longname","code"="item")), 
-                                 rename(ll@read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln), c("itemcode"="item")), 
+        assets          <- merge(rename(ln()@items_codes_2010(),c("item"="longname","code"="item")), 
+                                 rename(read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln), c("itemcode"="item")), 
                                  by = c("item"), all.y=TRUE)
+        if (dim(subset(assets,is.na(shortname) ))[1]) {
+          stop(paste("Missing itemcode->shortname mapping for year",year))
+        }
+        
+        print(dim(assets))
+        stop("Not implemented")
         
       } else {
         stop( paste ( "Unknown row elements in groups frame for year", year))
       }
       
-      
-      
-      if (dim(subset(assets,is.na(shortname) ))[1]) {
-        stop(paste("Missing itemcode->shortname mapping for year",year))
-      }
       
       
       ds              <- merge(totexp,vis);

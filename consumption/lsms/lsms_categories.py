@@ -30,9 +30,8 @@ assetsGroups={
  'personal_products':['watch',],
  'household_products': [ 'mosquitonet','bookexschool','lantern','cookingpot','chair', 'sofa', 'cupboard','table', 'bed',],
  'transport':['bike', 'cart', 'animalcart', 'motorbike','boat','engine_outboard','car',],
- 'agricultural_equipment': ['harrow','hoe','wheelbarrow','plough', 'reaper', 'tractor', 'trailer', 'harvester', 'fertiliserdistributor', 'spraymachine', ],
- 'agricultural_property' : ['poultry','livestock','donkey','land',],
- 'agricultural_production' : ['handmill','milkingmachine','coffeepulpingmachine'],
+ 'agricultural_auto': [ 'reaper', 'spraymachine', 'coffeepulpingmachine', 'milkingmachine', 'tractor', 'trailer', 'harvester', 'fertiliserdistributor'  ],
+ 'agricultural_manual' : ['handmill','harrow','hoe','wheelbarrow','plough','poultry','livestock','donkey','land',],
 }
 
 #harrow                - 1            1 - 2^0

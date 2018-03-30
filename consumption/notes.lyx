@@ -878,20 +878,31 @@ key "KausSA,JaikumarConspConIneq,ZahraIndia"
  developing countries (and probably as similar to those in the 18th century
  Europe), but the presence of status related competitions is still relevant
  (and in accordance with Veblen's claim).
- Indeed the scarcity through 
+ Conspicuous consumption is a side-effect of rising incomes and preliminary
+ model which we outline considers both the expected and current rise in
+ income a driver of conspicuous consumption.
+ We find that Hirsch's 
 \begin_inset Quotes eld
 \end_inset
 
-overuse
+scarcity through overuse
 \begin_inset Quotes erd
 \end_inset
 
- (which Hirsch stresses as the engine of social scarcity in the modern Western
+ (which is emphasized as the engine of social scarcity in the modern Western
  society) may be less relevant in the developing world where there simply
  aren't enough status items to be consumed.
- While the recent processes of industralisation may have changed the environment
- of consumption significantly, it is rather difficult to see if the recent
- trends of commercialisation (
+ Also, while the recent processes of industralisation may have changed the
+ environment of consumption significantly, it is remains to be seen if the
+ recent trends of 
+\begin_inset Quotes eld
+\end_inset
+
+commercialisation
+\begin_inset Quotes erd
+\end_inset
+
+ (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HirschSocialLimits"
@@ -899,9 +910,7 @@ key "HirschSocialLimits"
 \end_inset
 
 ) in the developing world would bear similarities with the changes in the
- post-war Europe - due to vast cultural dissimilarities within the developing
- world and lack of high quality microdata on social identities in many developin
-g countries.
+ post-war Europe.
 \end_layout
 
 \begin_layout Standard
@@ -7322,6 +7331,25 @@ return(kk)
 \end_layout
 
 \begin_layout Plain Layout
+#assets usage
+\end_layout
+
+\begin_layout Plain Layout
+assets <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ln=lsms_norm
+alizer)
+\end_layout
+
+\begin_layout Plain Layout
+assets<-merge(assets, rename(lsms_normalizer()@items_codes_2010(),c("code"="item
+code","item"="longname")), all.x=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+if (dim(subset(assets,is.na(shortname)))[1] >0 ) { stop ("assets codes are
+ not known") ; }
+\end_layout
+
+\begin_layout Plain Layout
 
 \family typewriter
 #regional variation
@@ -7332,60 +7360,6 @@ return(kk)
 \family typewriter
 ddply(item_usage("electricity",d,hhidsRegion),.(item,region),summarise,m=mean(cos
 t),sd=sd(cost),n=length(hhid))
-\end_layout
-
-\begin_layout Plain Layout
-#commodities grouped
-\end_layout
-
-\begin_layout Plain Layout
-x<-NULL
-\end_layout
-
-\begin_layout Plain Layout
-x<-rbind(x,data.frame(category = "energy", group="low",shortname="kerosene"))
-\end_layout
-
-\begin_layout Plain Layout
-x<-rbind(x,data.frame(category = "energy", group="high",shortname="charcoal"))
-\end_layout
-
-\begin_layout Plain Layout
-x<-rbind(x,data.frame(category = "energy", group="high",shortname="gas"))
-\end_layout
-
-\begin_layout Plain Layout
-x<-rbind(x,data.frame(category = "energy", group="high",shortname="electricity"))
-\end_layout
-
-\begin_layout Plain Layout
-x<-rbind(x,data.frame(category = "personal_care", group="expenditure",shortname="
-bar_soap"))
-\end_layout
-
-\begin_layout Plain Layout
-x<-rbind(x,data.frame(category = "personal_care", group="expenditure",shortname="
-toothpaste"))
-\end_layout
-
-\begin_layout Plain Layout
-x<-rbind(x,data.frame(category = "personal_care", group="expenditure",shortname="
-shampoo"))
-\end_layout
-
-\begin_layout Plain Layout
-x<-rbind(x,data.frame(category = "personal_care", group="expenditure",shortname="
-skin_cream"))
-\end_layout
-
-\begin_layout Plain Layout
-x<-rbind(x,data.frame(category = "personal_care", group="expenditure",shortname="
-other_personal"))
-\end_layout
-
-\begin_layout Plain Layout
-x<-rbind(x,data.frame(category = "personal_care", group="asset",shortname="watch"
-))
 \end_layout
 
 \begin_layout Plain Layout

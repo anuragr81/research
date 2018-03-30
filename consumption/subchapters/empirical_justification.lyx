@@ -75,11 +75,11 @@ Identification of items for status consumption
 \end_layout
 
 \begin_layout Standard
-The simplest regression model to understand the consumption on status items
- is the following:
+A simple regression model to understand the consumption on status items
+ can be formulated as the following:
 \begin_inset Formula 
 \begin{align}
-s & =\beta_{1}\sum_{i\in B}q_{i}+\beta_{2}z+\epsilon\label{eq:main_regression}
+s & =\beta_{1}\phi(\sum_{i\in B}q_{i},\boldsymbol{q})+\beta_{2}z+\epsilon\label{eq:main_regression}
 \end{align}
 
 \end_inset
@@ -88,8 +88,28 @@ Here,
 \begin_inset Formula $s$
 \end_inset
 
- is the relevant consumption measure for the identified status categories,
+ is the relevant consumption measure for the identified status categories
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The equation does not relax the earlier assertion of there not being any
  
+\begin_inset Quotes eld
+\end_inset
+
+status
+\begin_inset Quotes erd
+\end_inset
+
+ category of commodoties.
+ The equation is only used to seek the parameters associated with an item
+ that contribute to the status it carries.
+\end_layout
+
+\end_inset
+
+, 
 \begin_inset Formula $q_{i}$
 \end_inset
 
@@ -97,11 +117,27 @@ Here,
 \begin_inset Formula $i$
 \end_inset
 
- in the basket 
+ (
+\series bold
+ 
+\begin_inset Formula $\boldsymbol{q}$
+\end_inset
+
+
+\series default
+ being the vector of quantities 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+ ) in the basket 
 \begin_inset Formula $B$
 \end_inset
 
- and 
+, 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is a function and 
 \begin_inset Formula $z$
 \end_inset
 
@@ -119,19 +155,20 @@ reference "eq:main_regression"
 \end_inset
 
 .
- As we don't have the cost for assets (nor the quantities of any non-food
- item) we cannot understand the relative expenditure between assets and
- consumption using the above model.
- Still, to use asset-ownership as a control variable in Equation 
+ As we don't have the cost for assets (nor their quantities or the quantities
+ of any non-food item) the relative expenditure between assets and consumption
+ cannot be explained using the above model.
+ Our attempt to use asset-ownership as a control variable in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:main_regression"
 
 \end_inset
 
-, we calculate a total ownership score by summing up the different assets
- owned within a category of assets - in order to test whether asset ownership
- changes consumption on items in 
+ involves using a total ownership score - which is obtained by summing up
+ the different assets owned within a category of assets.
+ The asset control variable thus obtained can help determine whether asset
+ ownership changes consumption on items in 
 \begin_inset Formula $s$
 \end_inset
 
@@ -156,7 +193,7 @@ reference "eq:main_regression"
  needs to be viewed as 
 \begin_inset Formula 
 \begin{alignat}{1}
-s_{c\in\mathscr{C}} & =\beta_{1}\sum_{i\in B}q_{i}+\beta_{2}z+\epsilon
+s_{c\in\mathscr{C}} & =\beta_{1,c\in\mathscr{C}}\phi_{c}(\sum_{i\in B}q_{i},\boldsymbol{q})+\beta_{2,c\in\mathscr{C}}z+\epsilon
 \end{alignat}
 
 \end_inset
@@ -165,7 +202,7 @@ s_{c\in\mathscr{C}} & =\beta_{1}\sum_{i\in B}q_{i}+\beta_{2}z+\epsilon
 \begin_inset Formula $\mathscr{C}$
 \end_inset
 
- is the set of categories that contain 
+ is the set of categories encompassing a category 
 \begin_inset Formula $c$
 \end_inset
 
@@ -186,7 +223,7 @@ reference "eq:main_regression"
 \end_inset
 
  because of our claim that amongst available items to buy, a consumer does
- not look for a status item per se (even less so in the developing countries
+ not look for a status item per se (much less so in the developing countries
  where status is derived mostly from assets owned and quality of consumption).
  Even in the developed countries, a survey cannot unequivocally rank high
  quality food consumption lower or higher than the ownership of a sports-watch
@@ -236,7 +273,7 @@ Notice that education - which is acquired over long-term - is viewed as
  by buying more newer, higher priced items as well as overspending on consumptio
 n categories that help them remain in the asset ownership club (the latter
  being the justification of consumption remaining in the same functional
- group).
+ category).
 \end_layout
 
 \begin_layout Standard
@@ -296,7 +333,7 @@ Energy
 \begin_inset Text
 
 \begin_layout Plain Layout
-Electricity vs kerosene
+Electricity, gas vs kerosene
 \end_layout
 
 \end_inset
@@ -504,7 +541,7 @@ ty of categories of consumpation does not permit so, a consumer may overspend
  of separability of these categories.
  However, as we do assume separability of categories in our current context,
  a one-to-one relation between the category of assets and the corresponding
- consumption group - which the consumer may overspend on - does follows
+ consumption category - which the consumer may overspend on - does follow
  as a consequence.
 \end_layout
 
@@ -522,6 +559,8 @@ The dependent variable is the proportion of the group to the total expenditure.
 \end_inset
 
  .
+ This ratio can also be seen as a the budget ratio for expensive options
+ calculated with respect to the total expenditure in the energy category.
  The control variables for Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -532,8 +571,34 @@ reference "eq:main_regression"
  are assets owned, total expenditure, occupation, education and the household
  size.
  Since the households using just kerosene (and no higher priced options)
- is quite high, one may use a Heckman selection to correct the insufficient
- data effects.
+ is quite high, one may use a Heckman selection to correct the bias imposed
+ due to lack of electricity.
+\end_layout
+
+\begin_layout Standard
+The categorisation of all items is presented in the Table.
+ Relying on the separability assumption, the two-state budgeting approach
+ can make the categorisation of some items appear less justified.
+ Categorising mosquito net as housing related product is but a stretch that
+ is made worse by the usage on such items being driven by differences in
+ climate across the population being surveyed.
+ Since a model of demand only attempts to understand the consumer choice
+ against the given options, it seems apt to consider items that are driven
+ by random incidents (e.g.
+ theft, ) in a misc category.
+ Extreme supply side expenses (e.g.
+ water, electricity) present a similar problem with demand analysis - requiring
+ us to ensure that the lack of availability of electricity is not viewed
+ as the consumer's lack of preference towards it.
+\end_layout
+
+\begin_layout Standard
+For the analysis of cost, we must revisit the discussion on wholesale purchases
+ - which might skew our analysis.
+ Since consumers buy wholesale of more than one items together - we look
+ for instances where group of items bought with extremely high costs.
+ Whenever the group is not found, the data can be ignored.
+ This is necessary before an analysis is performed.
 \end_layout
 
 \begin_layout Section
