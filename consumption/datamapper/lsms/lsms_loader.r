@@ -407,7 +407,7 @@ lsms_loader<-function(fu,ln) {
       assetsData <- fu()@get_translated_frame(dat=secndat,
                                               names=ln()@get_diary_secn_columns_lsms_2010(),
                                               m=ln()@get_diary_secn_fields_mapping_lsms_2010())
-      
+      assetsData <-merge(assetsData, rename(ln()@items_codes_2010(),c("code"="itemcode","item"="longname")), all.x=TRUE)
       return(assetsData)
     }
     stop("read_assets_file - year", year, "not supported")
