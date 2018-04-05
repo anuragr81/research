@@ -417,15 +417,21 @@ lsms_loader<-function(fu,ln) {
     
   }
   
-  get_asset_score<-function(diaryData, assetsData,assetsList,ln){
-    relevantAssets<-ln()@assets_order_2010(shortnames = assetsList)
-    
+  get_asset_score<-function(year, diaryData, assetsData,assetsList,ln){
+    unavailable = TRUE
+    if (year == 2010 ) {
+      relevantAssets<-ln()@assets_order_2010(shortnames = assetsList)
+      unavailable = FALSE
+    } 
+    if (unavailable == TRUE) {
+      stop( paste ( "No assets data available for year:" , year ) ) 
+    }
     #getting masks from diary data
     dy<-merge(diaryData,(subset(relevantAssets,has_expenditure==TRUE)[c("shortname","mask")]),all.x=TRUE, by=c("shortname"))
     dy<-subset(subset(dy,!is.na(mask)), cost>0 )
     
     #getting masks from assets data
-    ay<-merge(assets,(subset(relevantAssets,has_expenditure==FALSE)[c("shortname","mask")]),all.x=TRUE, by=c("shortname"))
+    ay<-merge(assetsData,(subset(relevantAssets,has_expenditure==FALSE)[c("shortname","mask")]),all.x=TRUE, by=c("shortname"))
     ay<-subset(subset(ay,!is.na(mask)), number>0 )
     
     #merging ay and dy (cannot overlap since has_expenditure is either TRUE or FALSE)
@@ -964,13 +970,11 @@ lsms_loader<-function(fu,ln) {
       hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
       
       if (year == 2010){
-        hh          <- merge(  hh,rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
         groups      <- subset( ln()@lsms_groups_2010(), category == categoryName )
-      
       } else{
         stop(paste("item code not available for year",year))
       }
-
+      
       # check if group columns are known
       if (!setequal(colnames(groups),c("shortname","group","category"))){
         stop("groups must strictly have shortname, group, category columns")
@@ -1012,42 +1016,36 @@ lsms_loader<-function(fu,ln) {
       heads           <- get_household_head_info(ohs=ohs)
       
       hhid_personid   <- get_hsize(ohs)
-
+      
       
       if (setequal(groups$group,c("high","low"))){
-      
-      vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
-      vis                                  <- subset(vis,!is.na(group_cost))
-      vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
-      vis[is.na(vis$high_cost),]$high_cost <- 0
-      vis[is.na(vis$low_cost),]$low_cost   <- 0
-      vis$highratio   <- with(vis,high_cost/(low_cost+high_cost)) + 1e-16
-      vis$group       <- NULL
-      vis$low_cost    <- NULL
-      vis$high_cost   <- NULL
+        
+        vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
+        vis                                  <- subset(vis,!is.na(group_cost))
+        vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
+        vis[is.na(vis$high_cost),]$high_cost <- 0
+        vis[is.na(vis$low_cost),]$low_cost   <- 0
+        vis$highratio   <- with(vis,high_cost/(low_cost+high_cost)) + 1e-16
+        vis$group       <- NULL
+        vis$low_cost    <- NULL
+        vis$high_cost   <- NULL
       } else if (setequal(groups$group,c("asset","expenditure"))){
-        #assets          <- merge(rename(ln()@items_codes_2010(),c("item"="longname","code"="item")), 
-        #                         rename(read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln), c("itemcode"="item")), 
-        #                         by = c("item"), all.y=TRUE)
         
         assets        <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
         if (dim(subset(assets,is.na(shortname) ))[1]) {
           stop(paste("Missing itemcode->shortname mapping for year",year))
         }
-        
+        print("Running ddply on groups and hhid")
         vis           <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
-        vis           <- merge(rename(subset(vis,group=="expenditure"),replace = c("group_cost"="expenditure_cost")),rename(subset(vis,group=="asset")[,c("hhid","group_cost")],replace = c("group_cost"="asset_cost")),all=TRUE)
+        vis           <- rename(subset(vis,group=="expenditure"),c("group_cost"="expenditure_cost"))
+        vis           <- subset(vis, !is.na(expenditure_cost))
+        relevantAssets<- as.character(subset(groups, group== "asset")$shortname)
         
-        if (dim(vis[is.na(vis$expenditure_cost),])[1] >0 ){
-          vis[is.na(vis$expenditure_cost),]$expenditure_cost <- 0
-        }
-        if (dim(vis[is.na(vis$asset_cost),])[1]>0){
-          vis[is.na(vis$asset_cost),]$asset_cost   <- 0
-        }
-        vis$group       <- NULL
-        #use assets
-
-        #ln@assets_order_2010(shortnames = c("phone","bookexschool","watch","cellphone_voucher"))
+        ady           <- get_asset_score(diaryData = hh,assetsData = assets,assetsList = relevantAssets , 
+                                         ln=ln, year = year);
+        vis$group     <- NULL
+        vis           <- merge(vis,ady,by=c("hhid"))
+        
       } else {
         stop( paste ( "Unknown row elements in groups frame for year", year))
       }

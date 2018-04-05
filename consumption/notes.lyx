@@ -7331,55 +7331,6 @@ return(kk)
 \end_layout
 
 \begin_layout Plain Layout
-#assets usage
-\end_layout
-
-\begin_layout Plain Layout
-assets <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ln=lsms_norm
-alizer)
-\end_layout
-
-\begin_layout Plain Layout
-#expenditure items as assets
-\end_layout
-
-\begin_layout Plain Layout
-relevantAssets<-ln@assets_order_2010(shortnames = c("phone","bookexschool","watc
-h"))
-\end_layout
-
-\begin_layout Plain Layout
-dy<-merge(d,(subset(relevantAssets,has_expenditure==TRUE)[c("shortname","mask")]
-),all.x=TRUE, by=c("shortname"))
-\end_layout
-
-\begin_layout Plain Layout
-dy<-subset(subset(dy,!is.na(mask)), cost>0 )
-\end_layout
-
-\begin_layout Plain Layout
-ay<-merge(assets,(subset(relevantAssets,has_expenditure==FALSE)[c("shortname","m
-ask")]),all.x=TRUE, by=c("shortname"))
-\end_layout
-
-\begin_layout Plain Layout
-ay<-subset(subset(ay,!is.na(mask)), number>0 )
-\end_layout
-
-\begin_layout Plain Layout
-#merging ay and dy
-\end_layout
-
-\begin_layout Plain Layout
-ady<-rbind(rename(dy[,c("hhid","shortname","mask","item") ], c("item"="itemcode"
-)),ay[,c("hhid","shortname","mask","itemcode")])
-\end_layout
-
-\begin_layout Plain Layout
-adys<-ddply(ady,.(hhid),summarise,asset_score=sum(mask))
-\end_layout
-
-\begin_layout Plain Layout
 
 \family typewriter
 #regional variation
