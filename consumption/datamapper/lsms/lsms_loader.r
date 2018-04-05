@@ -12,7 +12,7 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       match_recorded_prices="function",get_inferred_prices="function",
                                       aggregate_local_prices="function",add_localmedian_price_columns="function",
                                       food_expenditure_data="function",read_assets_file="function",
-                                      group_expenditure="function"))
+                                      group_expenditure="function",get_asset_score="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -177,6 +177,8 @@ lsms_loader<-function(fu,ln) {
       ml <-merge(m,l,all=TRUE)
       #return(ml)
       mlk <-merge(ml,k,all=TRUE)
+      mlk <-merge(mlk,rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+      if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
       return(mlk)
       #*    merging all the 4 categories results in the expenditure file
     }
@@ -408,10 +410,30 @@ lsms_loader<-function(fu,ln) {
                                               names=ln()@get_diary_secn_columns_lsms_2010(),
                                               m=ln()@get_diary_secn_fields_mapping_lsms_2010())
       assetsData <-merge(assetsData, rename(ln()@items_codes_2010(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
       return(assetsData)
     }
     stop("read_assets_file - year", year, "not supported")
     
+  }
+  
+  get_asset_score<-function(diaryData, assetsData,assetsList,ln){
+    relevantAssets<-ln()@assets_order_2010(shortnames = assetsList)
+    
+    #getting masks from diary data
+    dy<-merge(diaryData,(subset(relevantAssets,has_expenditure==TRUE)[c("shortname","mask")]),all.x=TRUE, by=c("shortname"))
+    dy<-subset(subset(dy,!is.na(mask)), cost>0 )
+    
+    #getting masks from assets data
+    ay<-merge(assets,(subset(relevantAssets,has_expenditure==FALSE)[c("shortname","mask")]),all.x=TRUE, by=c("shortname"))
+    ay<-subset(subset(ay,!is.na(mask)), number>0 )
+    
+    #merging ay and dy (cannot overlap since has_expenditure is either TRUE or FALSE)
+    ady<-rbind(rename(dy[,c("hhid","shortname","mask","item") ], c("item"="itemcode")),ay[,c("hhid","shortname","mask","itemcode")])
+    
+    adys<-ddply(ady,.(hhid),summarise,asset_score=sum(mask))
+    
+    return(adys)
   }
   
   load_ohs_file <-function(year,dirprefix,fu,ln){
@@ -1004,21 +1026,31 @@ lsms_loader<-function(fu,ln) {
       vis$low_cost    <- NULL
       vis$high_cost   <- NULL
       } else if (setequal(groups$group,c("asset","expenditure"))){
-        assets          <- merge(rename(ln()@items_codes_2010(),c("item"="longname","code"="item")), 
-                                 rename(read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln), c("itemcode"="item")), 
-                                 by = c("item"), all.y=TRUE)
+        #assets          <- merge(rename(ln()@items_codes_2010(),c("item"="longname","code"="item")), 
+        #                         rename(read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln), c("itemcode"="item")), 
+        #                         by = c("item"), all.y=TRUE)
+        
+        assets        <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
         if (dim(subset(assets,is.na(shortname) ))[1]) {
           stop(paste("Missing itemcode->shortname mapping for year",year))
         }
         
-        print(dim(assets))
-        stop("Not implemented")
+        vis           <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
+        vis           <- merge(rename(subset(vis,group=="expenditure"),replace = c("group_cost"="expenditure_cost")),rename(subset(vis,group=="asset")[,c("hhid","group_cost")],replace = c("group_cost"="asset_cost")),all=TRUE)
         
+        if (dim(vis[is.na(vis$expenditure_cost),])[1] >0 ){
+          vis[is.na(vis$expenditure_cost),]$expenditure_cost <- 0
+        }
+        if (dim(vis[is.na(vis$asset_cost),])[1]>0){
+          vis[is.na(vis$asset_cost),]$asset_cost   <- 0
+        }
+        vis$group       <- NULL
+        #use assets
+
+        #ln@assets_order_2010(shortnames = c("phone","bookexschool","watch","cellphone_voucher"))
       } else {
         stop( paste ( "Unknown row elements in groups frame for year", year))
       }
-      
-      
       
       ds              <- merge(totexp,vis);
       
@@ -1182,6 +1214,7 @@ lsms_loader<-function(fu,ln) {
              analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, 
              get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices,
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
-             read_assets_file=read_assets_file, group_expenditure=group_expenditure))
+             read_assets_file=read_assets_file, group_expenditure=group_expenditure,
+             get_asset_score=get_asset_score))
   
 }

@@ -2,33 +2,21 @@ from itertools import ifilter
 import sys
 
 nonFoodGroups= {
-'home_energy':['charcoal','electricity','gas','kerosene','matches'], # vis score .1
-'transport':['petrol','public_transport',],  # vis score .7
-'communications':['cellphone_voucher','phone',], # vis score .85
-'personal_products':['bar_soap','toothpaste','shampoo','skin_cream','other_personal'], # vis score .9
-'household_products':['clothes_soap','toilet_paper','bulbs','misc_cleaning','carpet','linen','mat','mosquito_net','mattress',], # vi score # .6
-'household_services':['household_products_repair','house_repair','motor_repair','bicycle_repair','consumer_durables_repair','services'], # repair to be ignored for due to lack of life-and-quality measures 
-'appliances':['light_bulbs','sports_hobby','camera',], # vis score. 95
+'energy':['charcoal','electricity','gas','kerosene','matches'], # vis score .1
+'personal_products':['bar_soap','clothes_soap','toilet_paper','toothpaste','shampoo','skin_cream','other_personal','cellphone_voucher','phone'], # vis score .9
+'transport':['petrol','public_transport','motor_repair','bicycle_repair'],  # vis score .7
 #'charity':['donation'],
 #'services':['services'],
-'housing':['mortgage','council_rates','building_material','bamboo','grass'], # .99
+'social_functions':['marriage','bride_price','funeral','donation''services'], # .98
+'housing':['light_bulbs','misc_cleaning','carpet','linen','mat','mosquito_net','mattress','sports_hobby','camera','consumer_durables_repair','household_products_repair','house_repair','mortgage','council_rates','building_material','bamboo','grass'], # vi score # .6
 'legalfinance':['insurance','legal'], # .01
-'social_functions':['marriage','bride_price','funeral','donation'], # .98
-}
 
-associationsDict = {'appliances':'appliances',
-                    'transport':'transport',
-                    'communications':'communications',
-                    'personal_products':'personal_products',
-                    'household_products':'household_products',
-                    ''
-                    }
+}
 
 assetsGroups={
  'appliances':['radio','iron','waterpump','waterheater','stove_electricgas','stove_other','sewingmachine','ac_fan','dishtv','musicplayer','tv','musicsystem','refrigerator','videoplayer','computer' ], 
- 'communications':['mobile','landline', ],
- 'personal_products':['watch',],
- 'household_products': [ 'mosquitonet','bookexschool','lantern','cookingpot','chair', 'sofa', 'cupboard','table', 'bed',],
+ 'personal_products':['watch','bookexschool','mobile','landline',],
+ 'housing': [ 'mosquitonet','lantern','cookingpot','chair', 'sofa', 'cupboard','table', 'bed',],
  'transport':['bike', 'cart', 'animalcart', 'motorbike','boat','engine_outboard','car',],
  'agricultural_auto': [ 'reaper', 'spraymachine', 'coffeepulpingmachine', 'milkingmachine', 'tractor', 'trailer', 'harvester', 'fertiliserdistributor'  ],
  'agricultural_manual' : ['handmill','harrow','hoe','wheelbarrow','plough','poultry','livestock','donkey','land',],

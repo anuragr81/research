@@ -7340,13 +7340,43 @@ alizer)
 \end_layout
 
 \begin_layout Plain Layout
-assets<-merge(assets, rename(lsms_normalizer()@items_codes_2010(),c("code"="item
-code","item"="longname")), all.x=TRUE)
+#expenditure items as assets
 \end_layout
 
 \begin_layout Plain Layout
-if (dim(subset(assets,is.na(shortname)))[1] >0 ) { stop ("assets codes are
- not known") ; }
+relevantAssets<-ln@assets_order_2010(shortnames = c("phone","bookexschool","watc
+h"))
+\end_layout
+
+\begin_layout Plain Layout
+dy<-merge(d,(subset(relevantAssets,has_expenditure==TRUE)[c("shortname","mask")]
+),all.x=TRUE, by=c("shortname"))
+\end_layout
+
+\begin_layout Plain Layout
+dy<-subset(subset(dy,!is.na(mask)), cost>0 )
+\end_layout
+
+\begin_layout Plain Layout
+ay<-merge(assets,(subset(relevantAssets,has_expenditure==FALSE)[c("shortname","m
+ask")]),all.x=TRUE, by=c("shortname"))
+\end_layout
+
+\begin_layout Plain Layout
+ay<-subset(subset(ay,!is.na(mask)), number>0 )
+\end_layout
+
+\begin_layout Plain Layout
+#merging ay and dy
+\end_layout
+
+\begin_layout Plain Layout
+ady<-rbind(rename(dy[,c("hhid","shortname","mask","item") ], c("item"="itemcode"
+)),ay[,c("hhid","shortname","mask","itemcode")])
+\end_layout
+
+\begin_layout Plain Layout
+adys<-ddply(ady,.(hhid),summarise,asset_score=sum(mask))
 \end_layout
 
 \begin_layout Plain Layout
@@ -7370,6 +7400,24 @@ t),sd=sd(cost),n=length(hhid))
 summary(significant_lmvars(ds = ds,depvar = "highratio",vars_init = c("lntot","t
 othouserent","toteducexpense","consu","highest_educ","age","region","popdensity"
 ,"years_community","housingstatus","roomsnum","is_resident"))[["result"]])
+\end_layout
+
+\begin_layout Plain Layout
+#asset-expenditure regression
+\end_layout
+
+\begin_layout Plain Layout
+dse$budget<-(dse$expenditure_cost/dse$total_expenditure)
+\end_layout
+
+\begin_layout Plain Layout
+dse$lntot<-with(dse,log(total_expenditure+1e-16))
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = dse,depvar = "budget",vars_init = c("lntot","tot
+houserent","toteducexpense","consu","highest_educ","age","region","popdensity","
+years_community","housingstatus","roomsnum","is_resident"))[["result"]])
 \end_layout
 
 \begin_layout Plain Layout
