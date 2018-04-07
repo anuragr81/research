@@ -7253,14 +7253,6 @@ d<-ll@load_diary_file(dirprefix = '../',year = 2010,fu = fu, ln = lsms_normalize
 
 \family typewriter
 \size small
-d<-merge(d,rename(lsms_normalizer()@items_codes_2010()[,c("shortname","code")],c
-("code"="item")),by=c("item"),all.x=TRUE)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
 d<-subset(d,item<10000)
 \end_layout
 
@@ -7333,6 +7325,50 @@ return(kk)
 \begin_layout Plain Layout
 
 \family typewriter
+\size small
+item_ownership<-function(itemName,assets,hhidsRegion)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+k<-subset(subset(assets,shortname==itemName)[,c("itemcode","hhid","number","shor
+tname")], number>0)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+kk<-merge(k[,c("hhid","itemcode","shortname","number")],hhidsRegion[c("hhid","re
+gion","district","ward","ea")],by=c("hhid"),all.x=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+return(subset(kk, !is.na(region)))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
 #regional variation
 \end_layout
 
@@ -7345,6 +7381,10 @@ t),sd=sd(cost),n=length(hhid))
 
 \begin_layout Plain Layout
 # highratio regression
+\end_layout
+
+\begin_layout Plain Layout
+ds$lntot<-with(ds,log(total_expenditure+1e-16))
 \end_layout
 
 \begin_layout Plain Layout
@@ -7368,7 +7408,22 @@ dse$lntot<-with(dse,log(total_expenditure+1e-16))
 \begin_layout Plain Layout
 summary(significant_lmvars(ds = dse,depvar = "budget",vars_init = c("lntot","tot
 houserent","toteducexpense","consu","highest_educ","age","region","popdensity","
-years_community","housingstatus","roomsnum","is_resident"))[["result"]])
+years_community","housingstatus","roomsnum","is_resident","asset_score"))[["resu
+lt"]])
+\end_layout
+
+\begin_layout Plain Layout
+#assetsonly regression
+\end_layout
+
+\begin_layout Plain Layout
+ds$lntot<-with(ds,log(total_expenditure+1e-16))
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = ds,depvar = "asset_score",vars_init = c("lntot",
+"tothouserent","toteducexpense","consu","highest_educ","age","region","popdensit
+y","years_community","housingstatus","roomsnum","is_resident"))[["result"]])
 \end_layout
 
 \begin_layout Plain Layout

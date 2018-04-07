@@ -427,12 +427,16 @@ lsms_loader<-function(fu,ln) {
       stop( paste ( "No assets data available for year:" , year ) ) 
     }
     #getting masks from diary data
-    dy<-merge(diaryData,(subset(relevantAssets,has_expenditure==TRUE)[c("shortname","mask")]),all.x=TRUE, by=c("shortname"))
-    dy<-subset(subset(dy,!is.na(mask)), cost>0 )
+    expenditure    <- subset(relevantAssets,has_expenditure==TRUE)[c("shortname","mask")]
+    dy             <- merge(diaryData,expenditure,all.x=TRUE, by=c("shortname"))
+    dy             <- subset(subset(dy,!is.na(mask)), cost>0 )
+    print(paste("Households(",dim(dy)[1],") with expenditure data on item(s) - ", toString(expenditure)))
     
     #getting masks from assets data
-    ay<-merge(assetsData,(subset(relevantAssets,has_expenditure==FALSE)[c("shortname","mask")]),all.x=TRUE, by=c("shortname"))
-    ay<-subset(subset(ay,!is.na(mask)), number>0 )
+    nonExpenditure <- subset(relevantAssets,has_expenditure==FALSE)[c("shortname","mask")]
+    ay             <- merge(assetsData,nonExpenditure,all.x=TRUE, by=c("shortname"))
+    ay             <- subset(subset(ay,!is.na(mask)), number>0 )
+    print(paste("Housholds(",dim(ay)[1],")  with no expenditure data on item(s) - ", toString(nonExpenditure)))
     
     #merging ay and dy (cannot overlap since has_expenditure is either TRUE or FALSE)
     ady<-rbind(rename(dy[,c("hhid","shortname","mask","item") ], c("item"="itemcode")),ay[,c("hhid","shortname","mask","itemcode")])
@@ -1031,37 +1035,62 @@ lsms_loader<-function(fu,ln) {
         vis$high_cost   <- NULL
       } else if (setequal(groups$group,c("asset","expenditure"))){
         
-        assets        <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
+        assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
         if (dim(subset(assets,is.na(shortname) ))[1]) {
           stop(paste("Missing itemcode->shortname mapping for year",year))
         }
         print("Running ddply on groups and hhid")
-        vis           <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
-        vis           <- rename(subset(vis,group=="expenditure"),c("group_cost"="expenditure_cost"))
-        vis           <- subset(vis, !is.na(expenditure_cost))
-        relevantAssets<- as.character(subset(groups, group== "asset")$shortname)
         
-        ady           <- get_asset_score(diaryData = hh,assetsData = assets,assetsList = relevantAssets , 
-                                         ln=ln, year = year);
-        vis$group     <- NULL
-        vis           <- merge(vis,ady,by=c("hhid"))
+        vis               <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost))
+        vis               <- rename(subset(vis,group=="expenditure"),c("group_cost"="expenditure_cost"))
+        vis               <- subset(vis, !is.na(expenditure_cost))
+        relevantAssets    <- as.character(subset(groups, group== "asset")$shortname)
+        
+        ady               <- get_asset_score(diaryData = hh,assetsData = assets,assetsList = relevantAssets , 
+                                             ln=ln, year = year);
+        vis$group         <- NULL
+        vis               <- merge(vis,ady,by=c("hhid"))
+        
+      } else if (setequal(groups$group,c("assetsonly"))) {
+        print("Only assets to be used as dependent variable")
+        assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
+        if (dim(subset(assets,is.na(shortname) ))[1]) {
+          stop(paste("Missing itemcode->shortname mapping for year",year))
+        }
+        
+        vis               <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost))
+        
+        relevantAssets    <- as.character(subset(groups, group== "assetsonly")$shortname)
+        
+        print(paste("relevantAssets=",toString(relevantAssets)))
+        
+        ady               <- get_asset_score(diaryData = hh,assetsData = assets,assetsList = relevantAssets , 
+                                             ln=ln, year = year);
+        vis$group         <- NULL
+        vis               <- merge(vis,ady,by=c("hhid"),all=TRUE)
+        if (dim (vis[is.na(vis$asset_score),])[1]>0){
+          vis[is.na(vis$asset_score),]$asset_score<-0
+        }
+        if (dim (vis[is.na(vis$group_cost),])[1]>0){
+          vis[is.na(vis$group_cost),]$group_cost<-0
+        }
         
       } else {
         stop( paste ( "Unknown row elements in groups frame for year", year))
       }
       
-      ds              <- merge(totexp,vis);
+      ds                  <- merge(totexp,vis);
       
       print(paste("Merging hsize",dim(ds)[1]))
       
-      ds              <- merge(ds,hhid_personid);
+      ds                  <- merge(ds,hhid_personid);
       print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
       
-      ds              <- merge(ds,heads)
+      ds                  <- merge(ds,heads)
       print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
       
       print(paste("personid range:",toString(unique(ds$personid))))
-      ds$personid     <- NULL
+      ds$personid         <- NULL
       return(ds)
     }
     stop(paste("merge not available for year:",year))
