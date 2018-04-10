@@ -439,10 +439,14 @@ lsms_loader<-function(fu,ln) {
     print(paste("Housholds(",dim(ay)[1],")  with no expenditure data on item(s) - ", toString(nonExpenditure)))
     
     #merging ay and dy (cannot overlap since has_expenditure is either TRUE or FALSE)
-    ady<-rbind(rename(dy[,c("hhid","shortname","mask","item") ], c("item"="itemcode")),ay[,c("hhid","shortname","mask","itemcode")])
+    ady            <-rbind(rename(dy[,c("hhid","shortname","mask","item") ], c("item"="itemcode")),ay[,c("hhid","shortname","mask","itemcode")])
     
-    adys<-ddply(ady,.(hhid),summarise,asset_score=sum(mask))
+    adys           <-ddply(ady,.(hhid),summarise,asset_score=sum(mask))
     
+    noAssetHhids   <-setdiff(unique(diaryData$hhid),unique(adys$hhid))
+    noAssetScore   <-data.frame(hhid=noAssetHhids,asset_score=rep(0,length(noAssetHhids)))
+    
+    adys           <-rbind(adys,noAssetScore)
     return(adys)
   }
   
@@ -963,6 +967,27 @@ lsms_loader<-function(fu,ln) {
     stop(paste("merge not available for year:",year))
   }
   
+  filter_extremes <-function(ds,fieldName,highMultiple,threshold){
+    if (missing(highMultiple)){
+      highMultiple <- 20
+    } 
+    if (missing(threshold)){
+      threshold    <- .95
+    }
+    
+    dat            <-ds[ds[,c(fieldName)]>0,][,c(fieldName)]
+    dat            <-dat[!is.na(dat)]
+    
+    stepSize       <-.01
+    x              <-1
+    while (quantile(dat,x)/quantile(dat,.5)>highMultiple && x > threshold ) {
+      x            <- x - stepSize
+    }
+    res                = list()
+    res[["quantile"]]  = x
+    res[["value"]]     = quantile(dat,x)
+    return(res)
+  }
   
   group_expenditure <- function(year,dirprefix,categoryName,fu,ln){
     
@@ -1025,6 +1050,15 @@ lsms_loader<-function(fu,ln) {
       if (setequal(groups$group,c("high","low"))){
         
         vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
+        noGroupCostHhids                     <- setdiff(unique(hh$hhid),unique(vis$hhid))
+        
+        noGroupCostHigh                      <- data.frame(hhid=noGroupCostHhids,group="high",group_cost=rep(0,length(noGroupCostHhids)))
+        noGroupCostLow                       <- data.frame(hhid=noGroupCostHhids,group="low" ,group_cost=rep(0,length(noGroupCostHhids)))
+        
+        vis                                  <- rbind(vis,noGroupCostHigh)
+        vis                                  <- rbind(vis,noGroupCostLow)
+        
+        
         vis                                  <- subset(vis,!is.na(group_cost))
         vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
         vis[is.na(vis$high_cost),]$high_cost <- 0
@@ -1042,6 +1076,14 @@ lsms_loader<-function(fu,ln) {
         print("Running ddply on groups and hhid")
         
         vis               <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost))
+        no_vis_hhid      <- setdiff(unique(hh$hhid),unique(vis$hhid))
+        print("Assigning zero cost to hhids with missing expenditure")
+        no_vis           <- data.frame(hhid=no_vis_hhid,group="expenditure",group_cost=rep(0,length(no_vis_hhid)))
+        print(paste("vis=",toString(colnames(vis))))
+        print(paste("no_vis=",toString(colnames(no_vis))))
+        vis              <- rbind(vis,no_vis)
+        print("Filtering NA expenditure out")
+        
         vis               <- rename(subset(vis,group=="expenditure"),c("group_cost"="expenditure_cost"))
         vis               <- subset(vis, !is.na(expenditure_cost))
         relevantAssets    <- as.character(subset(groups, group== "asset")$shortname)
@@ -1051,6 +1093,8 @@ lsms_loader<-function(fu,ln) {
         vis$group         <- NULL
         vis               <- merge(vis,ady,by=c("hhid"))
         
+        return(vis)
+        
       } else if (setequal(groups$group,c("assetsonly"))) {
         print("Only assets to be used as dependent variable")
         assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
@@ -1059,6 +1103,9 @@ lsms_loader<-function(fu,ln) {
         }
         
         vis               <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost))
+        no_vis_hhid       <- setdiff(unique(hh$hhid),unique(vis$hhid))
+        no_vis            <- data.frame(hhid=no_vis_hhid,group="assetsonly",group_cost=rep(0,length(no_vis_hhid)))
+        vis               <- rbind(vis,no_vis)
         
         relevantAssets    <- as.character(subset(groups, group== "assetsonly")$shortname)
         
@@ -1074,6 +1121,17 @@ lsms_loader<-function(fu,ln) {
         if (dim (vis[is.na(vis$group_cost),])[1]>0){
           vis[is.na(vis$group_cost),]$group_cost<-0
         }
+        
+        
+      } else if (setequal(groups$group,c("expenditureonly") )){
+        print("Only expenditure to be used as the dependent variable");
+        relevantItems    <- as.character(subset(groups, group== "expenditureonly")$shortname)
+        print(paste("Expenditures being added up for items:",toString(relevantItems)))
+        
+        vis              <- ddply(subset( merge(hh,groups), is.element(shortname, relevantItems) ),.(hhid),summarize,group_cost=sum(cost))
+        no_vis_hhid      <- setdiff(unique(hh$hhid),unique(vis$hhid))
+        no_vis           <- data.frame(hhid=no_vis_hhid,group_cost=rep(0,length(no_vis_hhid)))
+        vis <- rbind(vis,no_vis)
         
       } else {
         stop( paste ( "Unknown row elements in groups frame for year", year))

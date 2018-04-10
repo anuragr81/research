@@ -7427,6 +7427,20 @@ y","years_community","housingstatus","roomsnum","is_resident"))[["result"]])
 \end_layout
 
 \begin_layout Plain Layout
+#expenditure only regression
+\end_layout
+
+\begin_layout Plain Layout
+ds$lntot<-with(ds,log(total_expenditure+1e-16))
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = ds,depvar = "group_cost",vars_init = c("lntot","
+tothouserent","toteducexpense","consu","highest_educ","age","region","popdensity
+","years_community","housingstatus","roomsnum","is_resident"))[["result"]])
+\end_layout
+
+\begin_layout Plain Layout
 
 \family typewriter
 \size small
