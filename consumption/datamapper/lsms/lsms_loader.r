@@ -1056,8 +1056,7 @@ lsms_loader<-function(fu,ln) {
       
       
       if (setequal(groups$group,c("high","low"))){
-        stop("extreme filter pending")
-        
+
         vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
         noGroupCostHhids                     <- setdiff(unique(hh$hhid),unique(vis$hhid))
         
@@ -1077,7 +1076,7 @@ lsms_loader<-function(fu,ln) {
         vis$low_cost    <- NULL
         vis$high_cost   <- NULL
       } else if (setequal(groups$group,c("asset","expenditure"))){
-        stop("extreme filter pending")
+
         
         assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
         if (dim(subset(assets,is.na(shortname) ))[1]) {
@@ -1106,7 +1105,6 @@ lsms_loader<-function(fu,ln) {
         return(vis)
         
       } else if (setequal(groups$group,c("assetsonly"))) {
-        stop("extreme filter pending")
         
         print("Only assets to be used as dependent variable")
         assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
@@ -1136,7 +1134,6 @@ lsms_loader<-function(fu,ln) {
         
         
       } else if (setequal(groups$group,c("expenditureonly") )){
-        stop("extreme filter pending")
         
         print("Only expenditure to be used as the dependent variable");
         relevantItems    <- as.character(subset(groups, group== "expenditureonly")$shortname)

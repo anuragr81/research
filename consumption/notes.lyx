@@ -7367,27 +7367,6 @@ return(subset(kk, !is.na(region)))
 \end_layout
 
 \begin_layout Plain Layout
-# the threshold must be lowered for motor_repair and house_repair (fv,fq
- must take two columns - first, the data and second, the threshold merged
- with every shortname)
-\end_layout
-
-\begin_layout Plain Layout
-fv<-function (x) { return(as.double(filter_extremes(dat=x,highMultiple =
- 30, threshold = .95)[["value"]])) }
-\end_layout
-
-\begin_layout Plain Layout
-fq<-function (x) { return(as.double(filter_extremes(dat=x,highMultiple =
- 30, threshold = .95)[["quantile"]])) }
-\end_layout
-
-\begin_layout Plain Layout
-extremeDataHhids<-unique ( filter( merge(d,ddply(d,.(shortname),summarise,v=fv(co
-st),q=fq(cost)),all.x=TRUE) , cost > v)$hhid ) )
-\end_layout
-
-\begin_layout Plain Layout
 
 \family typewriter
 #regional variation
