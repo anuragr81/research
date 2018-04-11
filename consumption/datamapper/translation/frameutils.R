@@ -6,7 +6,8 @@ if (isClass("FrameUtils")){
 
 ## all exported functions are declared here
 setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function",filter_categories_data="function",
-                                      removeall_cols_except="function",find_nonzero_percentile="function") )
+                                      removeall_cols_except="function",find_nonzero_percentile="function",
+                                      fv="function") )
 
 removeall_cols_except<-function(dat,listColumnNames){
   #c("region","district","ward","accessiblemarket","travelcost"))
@@ -17,6 +18,29 @@ removeall_cols_except<-function(dat,listColumnNames){
 }
 
 fu<-function(){
+  
+  filter_extremes <-function(dat,highMultiple,threshold){
+    
+    dat            <-dat[dat>0]
+    dat            <-dat[!is.na(dat)]
+    
+    stepSize       <-.01
+    x              <-1
+    while (quantile(dat,x)/quantile(dat,.5)>highMultiple && x > threshold ) {
+      x            <- x - stepSize
+    }
+    res                = list()
+    res[["quantile"]]  = x
+    res[["value"]]     = quantile(dat,x)
+    return(res)
+  }
+  
+  
+  fv<-function (x) { 
+    return(as.double(filter_extremes(dat=x,highMultiple = 30, threshold = .95)[["value"]])) 
+  }
+  
+  #fq<-function (x) { return(as.double(filter_extremes(dat=x,highMultiple = highMultiple, threshold = .95)[["quantile"]])) }
   
   filter_categories_data<-function(hh,selected_category,item_field,set_depvar){
     
@@ -141,6 +165,7 @@ fu<-function(){
              count_higher_than=count_higher_than,
              filter_categories_data=filter_categories_data,
              removeall_cols_except=removeall_cols_except,
-             find_nonzero_percentile=find_nonzero_percentile) );
+             find_nonzero_percentile=find_nonzero_percentile,
+             fv=fv) );
   
 }

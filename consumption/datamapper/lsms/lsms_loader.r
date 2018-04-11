@@ -82,15 +82,22 @@ lsms_loader<-function(fu,ln) {
                                        items_list = weekly_recall_items)
       
       
-      monthly_recall_items <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
-                                "210", "211", "212", "213", "214", "215", "216", "217", "218", "219",
-                                "220", "221", "222", "223", "224")
+      monthly_recall_items_non_repair <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
+                                "210", "211", "212", "213", "214", "215", "216", "217", "218", "221", "222")
+      
       
       l <- ln()@multiplyLsmsQuantities(dat = l , 
                                        quantity_field_name="cost", 
                                        item_field_name="item", 
                                        factor=12,
-                                       items_list = monthly_recall_items)
+                                       items_list = monthly_recall_items_non_repair)
+      
+      monthly_recall_items_repair     <- c("219", "220", "223")
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=6,
+                                       items_list = monthly_recall_items_repair)
       
       
       # m is yearly data
@@ -108,6 +115,12 @@ lsms_loader<-function(fu,ln) {
       #*    merging all the 4 categories results in the expenditure file
       
       mlk <-merge(ml,k,all=TRUE)
+      mlk <-merge(mlk,rename(ln()@items_codes_2012()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+      if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
+      
+      extremeDataHhids <- unique ( filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
+      print (paste("Households with extreme data (many times the median) - purged from the diary file:",length(extremeDataHhids)))
+      mlk              <- filter(mlk,!is.element(hhid,extremeDataHhids))
       return(mlk)
     }
     if (year == 2010){
@@ -149,16 +162,25 @@ lsms_loader<-function(fu,ln) {
                                        item_field_name="item", 
                                        factor=52,
                                        items_list = weekly_recall_items)
-      
-      monthly_recall_items <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
-                                "210", "211", "212", "213", "214", "215", "216", "217", "218", "219",
-                                "220", "221", "222", "223", "224")  
       #*    Monthly recall items are multiplied by 12
+      
+      monthly_recall_items_non_repair <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
+                                "210", "211", "212", "213", "214", "215", "216", "217", "218", "221", "222")  
+      
       l <- ln()@multiplyLsmsQuantities(dat = l , 
                                        quantity_field_name="cost", 
                                        item_field_name="item", 
                                        factor=12,
-                                       items_list = monthly_recall_items)
+                                       items_list = monthly_recall_items_non_repair)
+      
+      monthly_recall_items_repair     <- c("219", "220", "223", "224")
+      
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=6,
+                                       items_list = monthly_recall_items_repair)
+      
       
       # m is yearly data
       mdat <-read_tnz( paste(dirprefix,'./lsms/TZNPS2HH2DTA/HH_SEC_M.dta',sep=""),FALSE)
@@ -175,10 +197,17 @@ lsms_loader<-function(fu,ln) {
       # Either outer-join or an rbind must be used
       #*    zero-cost items are ignored for all these 
       ml <-merge(m,l,all=TRUE)
-      #return(ml)
+
       mlk <-merge(ml,k,all=TRUE)
+      ## mapping name codes
       mlk <-merge(mlk,rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
       if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
+      
+      # filtering out extreme values
+      extremeDataHhids <- unique ( filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid ) 
+      print (paste("Households with extreme data (with many times the median) - purged from the diary file:",length(extremeDataHhids)))
+      mlk              <- filter(mlk,!is.element(hhid,extremeDataHhids))
+      
       return(mlk)
       #*    merging all the 4 categories results in the expenditure file
     }
@@ -967,27 +996,6 @@ lsms_loader<-function(fu,ln) {
     stop(paste("merge not available for year:",year))
   }
   
-  filter_extremes <-function(ds,fieldName,highMultiple,threshold){
-    if (missing(highMultiple)){
-      highMultiple <- 20
-    } 
-    if (missing(threshold)){
-      threshold    <- .95
-    }
-    
-    dat            <-ds[ds[,c(fieldName)]>0,][,c(fieldName)]
-    dat            <-dat[!is.na(dat)]
-    
-    stepSize       <-.01
-    x              <-1
-    while (quantile(dat,x)/quantile(dat,.5)>highMultiple && x > threshold ) {
-      x            <- x - stepSize
-    }
-    res                = list()
-    res[["quantile"]]  = x
-    res[["value"]]     = quantile(dat,x)
-    return(res)
-  }
   
   group_expenditure <- function(year,dirprefix,categoryName,fu,ln){
     
@@ -1048,6 +1056,7 @@ lsms_loader<-function(fu,ln) {
       
       
       if (setequal(groups$group,c("high","low"))){
+        stop("extreme filter pending")
         
         vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
         noGroupCostHhids                     <- setdiff(unique(hh$hhid),unique(vis$hhid))
@@ -1068,6 +1077,7 @@ lsms_loader<-function(fu,ln) {
         vis$low_cost    <- NULL
         vis$high_cost   <- NULL
       } else if (setequal(groups$group,c("asset","expenditure"))){
+        stop("extreme filter pending")
         
         assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
         if (dim(subset(assets,is.na(shortname) ))[1]) {
@@ -1076,12 +1086,12 @@ lsms_loader<-function(fu,ln) {
         print("Running ddply on groups and hhid")
         
         vis               <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost))
-        no_vis_hhid      <- setdiff(unique(hh$hhid),unique(vis$hhid))
+        no_vis_hhid       <- setdiff(unique(hh$hhid),unique(vis$hhid))
         print("Assigning zero cost to hhids with missing expenditure")
-        no_vis           <- data.frame(hhid=no_vis_hhid,group="expenditure",group_cost=rep(0,length(no_vis_hhid)))
+        no_vis            <- data.frame(hhid=no_vis_hhid,group="expenditure",group_cost=rep(0,length(no_vis_hhid)))
         print(paste("vis=",toString(colnames(vis))))
         print(paste("no_vis=",toString(colnames(no_vis))))
-        vis              <- rbind(vis,no_vis)
+        vis               <- rbind(vis,no_vis)
         print("Filtering NA expenditure out")
         
         vis               <- rename(subset(vis,group=="expenditure"),c("group_cost"="expenditure_cost"))
@@ -1096,6 +1106,8 @@ lsms_loader<-function(fu,ln) {
         return(vis)
         
       } else if (setequal(groups$group,c("assetsonly"))) {
+        stop("extreme filter pending")
+        
         print("Only assets to be used as dependent variable")
         assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
         if (dim(subset(assets,is.na(shortname) ))[1]) {
@@ -1124,6 +1136,8 @@ lsms_loader<-function(fu,ln) {
         
         
       } else if (setequal(groups$group,c("expenditureonly") )){
+        stop("extreme filter pending")
+        
         print("Only expenditure to be used as the dependent variable");
         relevantItems    <- as.character(subset(groups, group== "expenditureonly")$shortname)
         print(paste("Expenditures being added up for items:",toString(relevantItems)))
