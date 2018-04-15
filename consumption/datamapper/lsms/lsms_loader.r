@@ -459,23 +459,23 @@ lsms_loader<-function(fu,ln) {
     expenditure    <- subset(relevantAssets,has_expenditure==TRUE)[c("shortname","mask")]
     dy             <- merge(diaryData,expenditure,all.x=TRUE, by=c("shortname"))
     dy             <- subset(subset(dy,!is.na(mask)), cost>0 )
-    print(paste("Households(",dim(dy)[1],") with expenditure data on item(s) - ", toString(expenditure)))
+    print(paste("Households(",length(unique(dy$hhid)),") with expenditure data on item(s) - ", toString(expenditure)))
     
     #getting masks from assets data
-    nonExpenditure <- subset(relevantAssets,has_expenditure==FALSE)[c("shortname","mask")]
-    ay             <- merge(assetsData,nonExpenditure,all.x=TRUE, by=c("shortname"))
-    ay             <- subset(subset(ay,!is.na(mask)), number>0 )
-    print(paste("Housholds(",dim(ay)[1],")  with no expenditure data on item(s) - ", toString(nonExpenditure)))
+    nonExpenditure   <- subset(relevantAssets,has_expenditure==FALSE)[c("shortname","mask")]
+    ay               <- merge(assetsData,nonExpenditure,all.x=TRUE, by=c("shortname"))
+    ay               <- subset(subset(ay,!is.na(mask)), number>0 )
+    print(paste("Households(",length(unique(ay$hhid)),")  with no expenditure data on item(s) - ", toString(nonExpenditure)))
     
     #merging ay and dy (cannot overlap since has_expenditure is either TRUE or FALSE)
-    ady            <-rbind(rename(dy[,c("hhid","shortname","mask","item") ], c("item"="itemcode")),ay[,c("hhid","shortname","mask","itemcode")])
+    ady              <-rbind(rename(dy[,c("hhid","shortname","mask","item") ], c("item"="itemcode")),ay[,c("hhid","shortname","mask","itemcode")])
     
-    adys           <-ddply(ady,.(hhid),summarise,asset_score=sum(mask))
+    adys             <-ddply(ady,.(hhid),summarise,asset_score=sum(mask))
     
-    noAssetHhids   <-setdiff(unique(diaryData$hhid),unique(adys$hhid))
-    noAssetScore   <-data.frame(hhid=noAssetHhids,asset_score=rep(0,length(noAssetHhids)))
-    
-    adys           <-rbind(adys,noAssetScore)
+    noAssetHhids     <-setdiff(unique(diaryData$hhid),unique(adys$hhid))
+    noAssetScore     <-data.frame(hhid=noAssetHhids,asset_score=rep(0,length(noAssetHhids)))
+    #adys$asset_score <-adys$asset_score/max(adys$asset_score)
+    adys             <- rbind(adys,noAssetScore)
     return(adys)
   }
   
@@ -1071,10 +1071,10 @@ lsms_loader<-function(fu,ln) {
         vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
         vis[is.na(vis$high_cost),]$high_cost <- 0
         vis[is.na(vis$low_cost),]$low_cost   <- 0
-        vis$highratio   <- with(vis,high_cost/(low_cost+high_cost)) + 1e-16
-        vis$group       <- NULL
-        vis$low_cost    <- NULL
-        vis$high_cost   <- NULL
+        vis$highratio                        <- with(vis,high_cost/(low_cost+high_cost)) + 1e-16
+        vis$group                            <- NULL
+        vis$low_cost                         <- NULL
+        vis$high_cost                        <- NULL
       } else if (setequal(groups$group,c("asset","expenditure"))){
 
         
@@ -1082,14 +1082,14 @@ lsms_loader<-function(fu,ln) {
         if (dim(subset(assets,is.na(shortname) ))[1]) {
           stop(paste("Missing itemcode->shortname mapping for year",year))
         }
-        print("Running ddply on groups and hhid")
+        expenditureData   <- merge(hh,groups)
+        print(paste("Items relevant for expenditure:", toString(unique(as.character(expenditureData$shortname)))))
         
-        vis               <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost))
+        print("Running ddply on groups and hhid")
+        vis               <- ddply(expenditureData ,.(hhid,group),summarise,group_cost = sum(cost))
         no_vis_hhid       <- setdiff(unique(hh$hhid),unique(vis$hhid))
         print("Assigning zero cost to hhids with missing expenditure")
         no_vis            <- data.frame(hhid=no_vis_hhid,group="expenditure",group_cost=rep(0,length(no_vis_hhid)))
-        print(paste("vis=",toString(colnames(vis))))
-        print(paste("no_vis=",toString(colnames(no_vis))))
         vis               <- rbind(vis,no_vis)
         print("Filtering NA expenditure out")
         
@@ -1102,7 +1102,6 @@ lsms_loader<-function(fu,ln) {
         vis$group         <- NULL
         vis               <- merge(vis,ady,by=c("hhid"))
         
-        return(vis)
         
       } else if (setequal(groups$group,c("assetsonly"))) {
         
@@ -1124,7 +1123,7 @@ lsms_loader<-function(fu,ln) {
         ady               <- get_asset_score(diaryData = hh,assetsData = assets,assetsList = relevantAssets , 
                                              ln=ln, year = year);
         vis$group         <- NULL
-        vis               <- merge(vis,ady,by=c("hhid"),all=TRUE)
+        vis               <- merge(vis,ady,by=c("hhid"),all.y=TRUE)
         if (dim (vis[is.na(vis$asset_score),])[1]>0){
           vis[is.na(vis$asset_score),]$asset_score<-0
         }
@@ -1142,7 +1141,7 @@ lsms_loader<-function(fu,ln) {
         vis              <- ddply(subset( merge(hh,groups), is.element(shortname, relevantItems) ),.(hhid),summarize,group_cost=sum(cost))
         no_vis_hhid      <- setdiff(unique(hh$hhid),unique(vis$hhid))
         no_vis           <- data.frame(hhid=no_vis_hhid,group_cost=rep(0,length(no_vis_hhid)))
-        vis <- rbind(vis,no_vis)
+        vis              <- rbind(vis,no_vis)
         
       } else {
         stop( paste ( "Unknown row elements in groups frame for year", year))

@@ -7427,7 +7427,8 @@ y","years_community","housingstatus","roomsnum","is_resident"))[["result"]])
 \end_layout
 
 \begin_layout Plain Layout
-#expenditure only regression
+#expenditure only regression - e.g.
+ for social_functions
 \end_layout
 
 \begin_layout Plain Layout
@@ -7435,9 +7436,24 @@ ds$lntot<-with(ds,log(total_expenditure+1e-16))
 \end_layout
 
 \begin_layout Plain Layout
-summary(significant_lmvars(ds = ds,depvar = "group_cost",vars_init = c("lntot","
-tothouserent","toteducexpense","consu","highest_educ","age","region","popdensity
-","years_community","housingstatus","roomsnum","is_resident"))[["result"]])
+ds$budget<-with(ds,group_cost/total_expenditure)
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = ds,depvar = "budget",vars_init = c("lntot","toth
+ouserent","toteducexpense","consu","highest_educ","age","region","popdensity","y
+ears_community","housingstatus","roomsnum","is_resident","occupation_rank"))[["r
+esult"]])
+\end_layout
+
+\begin_layout Plain Layout
+#reg budget consu i.highest_educ ib7.region roomsnum i.occupation_rank lntot
+ i.is_resident (social_functions)
+\end_layout
+
+\begin_layout Plain Layout
+#reg budget lntot asset_score popdensity age consu years_community i.housingstatu
+s roomsnum occupation_rank (housing)
 \end_layout
 
 \begin_layout Plain Layout
