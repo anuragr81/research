@@ -75,8 +75,8 @@ Identification of items for status consumption
 \end_layout
 
 \begin_layout Standard
-A simple regression model to understand the consumption on status items
- can be formulated as the following:
+A general regression model to understand the consumption on status items
+ can be written as the following:
 \begin_inset Formula 
 \begin{align}
 s & =\beta_{1}\phi(\sum_{i\in B}q_{i},\boldsymbol{q})+\beta_{2}z+\epsilon\label{eq:main_regression}
@@ -88,13 +88,14 @@ Here,
 \begin_inset Formula $s$
 \end_inset
 
- is the relevant consumption measure for the identified status categories
+ is the relevant consumption measure for the identified consumption categories
+ where status consumption is possible
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-The equation does not relax the earlier assertion of there not being any
- 
+We differentiate between a category where status consumption is possible
+ (through higher expenditure) from a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -102,9 +103,7 @@ status
 \begin_inset Quotes erd
 \end_inset
 
- category of commodoties.
- The equation is only used to seek the parameters associated with an item
- that contribute to the status it carries.
+ category of commodities whose purchase indicates status.
 \end_layout
 
 \end_inset
@@ -142,7 +141,11 @@ status
 \end_inset
 
  denotes the household characteristics.
- Equation 
+ 
+\end_layout
+
+\begin_layout Standard
+Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:main_regression"
@@ -155,18 +158,37 @@ reference "eq:main_regression"
 \end_inset
 
 .
- As we don't have the cost for assets (nor their quantities or the quantities
- of any non-food item) the relative expenditure between assets and consumption
- cannot be explained using the above model.
- Our attempt to use asset-ownership as a control variable in Equation 
+ As we neither have the cost for assets owned nor the quantities of any
+ non-food expenditure item, the ratio of how much a consumer buys as assets
+ to how much she expends on non-durable items cannot be measured for the
+ above model.
+ LSMS does however record the total number of assets owned by a household.
+ Thus we use an asset-ownership score as a control variable in the Equation
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:main_regression"
 
 \end_inset
 
- involves using a total ownership score - which is obtained by summing up
- the different assets owned within a category of assets.
+ - calculated using by binary flags of different assets owned.
+ For example, if we were to measure asset scores for items 
+\begin_inset Formula $\{Land,TV,Iron\}$
+\end_inset
+
+, then a consumer who owns just an iron has a score 1(
+\begin_inset Formula $1\times2^{0}=1$
+\end_inset
+
+), one who owns just a TV has 
+\begin_inset Formula $2(0\times2^{0}+1\times2^{1})$
+\end_inset
+
+ and one who owns all the assets has the score 7 
+\begin_inset Formula $(1\times2^{0}+1\times2^{1}+1\times2^{2})$
+\end_inset
+
+ .
  The asset control variable thus obtained can help determine whether asset
  ownership changes consumption on items in 
 \begin_inset Formula $s$
@@ -177,20 +199,15 @@ reference "eq:main_regression"
 \end_layout
 
 \begin_layout Standard
-Our assumption that a consumer doesn't compromise tastes amongst the functional
- categories requires that 
-\begin_inset Formula $s$
-\end_inset
-
- be split between functional categories.
- This means that the Equation 
+We assume separability of utility into categories energy, food, personal
+ care, social functions and land-ownership - hence the Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:main_regression"
 
 \end_inset
 
- needs to be viewed as 
+ must be viewed as 
 \begin_inset Formula 
 \begin{alignat}{1}
 s_{c\in\mathscr{C}} & =\beta_{1,c\in\mathscr{C}}\phi_{c}(\sum_{i\in B}q_{i},\boldsymbol{q})+\beta_{2,c\in\mathscr{C}}z+\epsilon
@@ -215,7 +232,7 @@ status category
 \begin_inset Quotes erd
 \end_inset
 
- as in Equation 
+ in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:main_regression"
@@ -224,17 +241,28 @@ reference "eq:main_regression"
 
  because of our claim that amongst available items to buy, a consumer does
  not look for a status item per se (much less so in the developing countries
- where status is derived mostly from assets owned and quality of consumption).
- Even in the developed countries, a survey cannot unequivocally rank high
- quality food consumption lower or higher than the ownership of a sports-watch
- on a visibility or status scale.
+ where status is derived mostly from assets owned and quality of consumption)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In fact even in the developed countries, a survey can hardly rank high-quality
+ food-consumption lower or higher than ownership of a sports-watch on a
+ visibility or status scale.
+ 
+\end_layout
+
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-In the model we adopt for measurement of status consumption, we don't consider
- visibility to matter at a level finer than the broad consumption categories
- of food, energy, transport, personal care, social functions and housing.
+Another simplification of the above model is through the assumption that
+ visibility does not to matter at a level finer than the broad consumption
+ categories of food, energy, transport, personal care, social functions
+ and housing.
  Therefore, while a consumer may find food consumption less visible overall
  than energy, we don't recognise a difference in visibility between mangoes
  and spam as relevant for status utility to the consumer.
@@ -549,6 +577,17 @@ ty of categories of consumpation does not permit so, a consumer may overspend
 
 \begin_layout Section
 Data Results
+\end_layout
+
+\begin_layout Standard
+An interesting observation is that those who rent the house are more likely
+ to buy carpets (this is prominent in both level and log levels of consumption).
+ We check that this is true even when the owner and non-owners both have
+ the same floor type (households with earth - as floor type are less likely
+ to buy carpets).
+ We may consider carpets conspicuous as it appears that those who don't
+ own a house would want to spend on carpets and feel like having a better
+ lifestyle.
 \end_layout
 
 \begin_layout Standard

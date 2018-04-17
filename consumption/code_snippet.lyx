@@ -1,0 +1,394 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+rm(list=ls())
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');source('translation/
+frameutils.R')
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ll=lsms_loader(fu=fu,ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+d<-ll@load_diary_file(dirprefix = '../',year = 2010,fu = fu, ln = lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+d<-subset(d,item<10000)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ohs<-ll@load_ohs_file(year=2010, dirprefix = '../',fu = fu,ln = lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique
+ ignores person id 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs
+ in hhidsRegion
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+item_usage<-function(itemName,dat,hhidsRegion)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+k<-(subset(dat,shortname==itemName)[,c("item","hhid","cost","shortname")])
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+kk<-merge(k[,c("hhid","item","shortname","cost")],hhidsRegion[c("hhid","region",
+"district","ward","ea")],by=c("hhid"),all.x=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+return(kk)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+item_ownership<-function(itemName,assets,hhidsRegion)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+k<-subset(subset(assets,shortname==itemName)[,c("itemcode","hhid","number","shor
+tname")], number>0)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+kk<-merge(k[,c("hhid","itemcode","shortname","number")],hhidsRegion[c("hhid","re
+gion","district","ward","ea")],by=c("hhid"),all.x=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+return(subset(kk, !is.na(region)))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+#regional variation
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+ddply(item_usage("electricity",d,hhidsRegion),.(item,region),summarise,m=mean(cos
+t),sd=sd(cost),n=length(hhid))
+\end_layout
+
+\begin_layout Plain Layout
+# highratio regression
+\end_layout
+
+\begin_layout Plain Layout
+ds$lntot<-with(ds,log(total_expenditure+1e-16))
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = ds,depvar = "highratio",vars_init = c("lntot","t
+othouserent","toteducexpense","consu","highest_educ","age","region","popdensity"
+,"years_community","housingstatus","roomsnum","is_resident"))[["result"]])
+\end_layout
+
+\begin_layout Plain Layout
+#asset-expenditure regression
+\end_layout
+
+\begin_layout Plain Layout
+dse$budget<-(dse$expenditure_cost/dse$total_expenditure)
+\end_layout
+
+\begin_layout Plain Layout
+dse$lntot<-with(dse,log(total_expenditure+1e-16))
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = dse,depvar = "budget",vars_init = c("lntot","tot
+houserent","toteducexpense","consu","highest_educ","age","region","popdensity","
+years_community","housingstatus","roomsnum","is_resident","asset_score"))[["resu
+lt"]])
+\end_layout
+
+\begin_layout Plain Layout
+#assetsonly regression
+\end_layout
+
+\begin_layout Plain Layout
+ds$lntot<-with(ds,log(total_expenditure+1e-16))
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = ds,depvar = "asset_score",vars_init = c("lntot",
+"tothouserent","toteducexpense","consu","highest_educ","age","region","popdensit
+y","years_community","housingstatus","roomsnum","is_resident"))[["result"]])
+\end_layout
+
+\begin_layout Plain Layout
+#expenditure only regression - e.g.
+ for social_functions
+\end_layout
+
+\begin_layout Plain Layout
+ds$lntot<-with(ds,log(total_expenditure+1e-16))
+\end_layout
+
+\begin_layout Plain Layout
+ds$budget<-with(ds,group_cost/total_expenditure)
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = ds,depvar = "budget",vars_init = c("lntot","toth
+ouserent","toteducexpense","consu","highest_educ","age","region","popdensity","y
+ears_community","housingstatus","roomsnum","is_resident","occupation_rank"))[["r
+esult"]])
+\end_layout
+
+\begin_layout Plain Layout
+#reg budget consu i.highest_educ ib7.region roomsnum i.occupation_rank lntot
+ i.is_resident (social_functions)
+\end_layout
+
+\begin_layout Plain Layout
+#reg budget lntot asset_score popdensity age consu years_community i.housingstatu
+s roomsnum occupation_rank (housing)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#looking at cost per household variations
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ru<-ddply(kk,.(region),summarise,n=length(unique(hhid)),cost=mean(quantile(cost,.4
+),quantile(cost,.6)))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ck<-ll@combined_data_set(year = 2010, dirprefix = '../',selected_category
+ = as.character(subset(lsms_normalizer()@items_codes_2010(),shortname=="carpet")$
+code),fu = fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+summary(significant_lmvars(ds = ck,depvar = "visible_consumption",vars_init
+ = c("total_expenditure","tothouserent","toteducexpense","consu","highest_educ",
+"age","region","popdensity","years_community","housingstatus","roomsnum","is_res
+ident"))[["result"]])
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = ckk,depvar = "lnvis",vars_init = c("lntotexp","t
+othouserent","toteducexpense","consu","highest_educ","age","region","popdensity"
+,"years_community","housingstatus","roomsnum","is_resident"))[["result"]])
+\end_layout
+
+\begin_layout Plain Layout
+#in stata, label list presents the list of values of a code
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
