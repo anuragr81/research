@@ -580,30 +580,105 @@ Data Results
 \end_layout
 
 \begin_layout Standard
-The classification of an item into wide categories is not always obvious.
- An evident ambiguity arises when the item in consideration performs two
- functions e.g.
+The equation from the literature should be :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w=ln(x)+\sum p_{i}+z+\epsilon$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have to use the price of the high low groups to in the equation.
+\end_layout
+
+\begin_layout Standard
+When the lack of availability of costs makes use use an oprobit formulation
+ of the model for the asset-ownership as dependent variable, then too price
+ is important.
+ Higher budget share means higher order (in the oprobit model).
+ If the oprobit formulation is not used then budget ratio itself would need
+ to be calculated with cost-of-living prices - a method that is problematic
+ as it flattens the differences in prices of cars etc.
+ and variation in quality of assets etc.
+ In case, where we have a mixture of expenditure and assets for asset-expenditur
+e compensation, then too we might need to avoid the calculation of budget
+ equivalents using average prices of commodities.
+ Instead, an oprobit model may need to be used again.
+\end_layout
+
+\begin_layout Standard
+The first step for performing a regression within every category is to classify
+ all items of consumption and all assets into the categories we have identified.
+ Having chosen a budgeting model of only two states ensures that these categorie
+s are wide enough to accommodate most items.
+ Still, an evident ambiguity arises when the item in consideration performs
+ two functions e.g.
  a musical instrument can be classified either as an appliance or a personal
  product.
- As the latter category is a more visible category than the former, the
- classification of the item into either of the categories would require
- an understanding of the social context of the item's usage.
+ We use the social context of the item's usage to perform such a classification.
+ 
 \end_layout
 
 \begin_layout Standard
-An interesting observation is that those who rent the house are more likely
- to buy carpets (this is prominent in both level and log levels of consumption).
- We check that this is true even when the owner and non-owners both have
- the same floor type (households with earth - as floor type are less likely
- to buy carpets).
- We may consider carpets conspicuous as it appears that those who don't
- own a house would want to spend on carpets and feel like having a better
- lifestyle.
+Classifying mosquito net as a housing-land related product may appear to
+ be a stretch - but no so much if its need is considered in the region's
+ climate.
+ As we consider supply side issues to be exogenous in our model and focus
+ only on the consumer choice, many expenditures driven by random incidents
+ (e.g.
+ theft) are put under a misc category (and excluded from any identified
+ functional categories)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The extrapolation of monthly expenditures on house-repair or motor-repair
+ as a simple multiplication of 12 is also deemed unjustified since no consumer
+ means to repair house or items every month.
+\end_layout
+
+\end_inset
+
+.
+ We are careful also that the lack of availability of electricity (or a
+ similar commodity) in a locality is not viewed as the consumer's lack of
+ preference towards it in the locality.
 \end_layout
 
 \begin_layout Standard
-The dependent variable is the proportion of the group to the total expenditure.
- Comparing proportion of energy expenditures for example, the dependent
+For categories where price differences (affordability factor) is relevant
+ we consider the budget ratio with respect to the expenditure in the category
+ and use the total items within the category for log (expenditure) as the
+ control variable (the expenditure on basket 
+\begin_inset Formula $B$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:empirical_category_equation"
+
+\end_inset
+
+).
+ This is in accordance with the separability assumption.
+ For items where the choice between expenses on nondurable items and asset
+ ownership is relevant, the budget ratio must still be calculated against
+ expenditure in the category.
+ Since there is no expensive-items ratio relevant in the latter case, we
+ wish to use a measure for comparison with asset ownership i.e.
+ we must add the running cost for the assets to the expenditure that is
+ available to us.
+ This would provide us the budget ratio for the category.
+ A similar treatment would follow for items where we only have expenditures
+ available.
+\end_layout
+
+\begin_layout Standard
+Comparing the proportion of energy expenditures for example, the dependent
  variable is ratio of the expenditure on kerosene to the expenditure on
  gas and electricity i.e.
  
@@ -620,67 +695,50 @@ reference "eq:main_regression"
 
 \end_inset
 
- are assets owned, total expenditure, occupation, education and the household
- size.
+ are assets owned, log(total expenditure on energy), occupation, education
+ and the household size.
+ The number of cars and other items need to be added - as does the price
+ of commodities from the cost of living index (or otherwise).
  Since the households using just kerosene (and no higher priced options)
- is quite high, one may use a Heckman selection to correct the bias imposed
- due to lack of electricity.
+ is quite high, one may further use a Heckman selection to correct the bias
+ imposed due to lack of electricity.
+ A similar analysis of food also follows a similar regression.
 \end_layout
 
 \begin_layout Standard
-The categorisation of all items is presented in the Table.
- Relying on the separability assumption, the two-state budgeting approach
- can make the categorisation of some items appear less justified.
- Categorising mosquito net as housing related product does appear to be
- a stretch and it is made worse by the usage on such items being driven
- by differences in climate across the population being surveyed.
- Since a model of demand only attempts to understand the consumer choice
- against the given options, it seems apt to consider items that are driven
- by random incidents (e.g.
- theft, ) in a misc category.
- Extreme supply side expenses (e.g.
- water, electricity) present a similar problem with demand analysis - requiring
- us to ensure that the lack of availability of electricity (or a similar
- commodity) in a locality is not viewed as the consumer's lack of preference
- towards it in the locality.
+In the personal products category, we don't find that the assets matter
+ so much for expenditure on personal products i.e.
+ those with higher number of assets also spend proportionally higher on
+ personal products.
+ The choice between public transport and car is relevant in densely populated
+ areas - particularly in regions codes 53, 7 - but transport is cannot be
+ offered the same treatment for our analysis - because i) of the absence
+ of the cost of purchase for owned cars and bikes and ii) the available
+ expenditure on car repairs and bicycle repairs being dependent on the frequency
+ of problems with cars/bikes (whose qualities are not available to us).
+ There is a clear lack of substitution in the transport category - because
+ not having a car can never be compensated with having more bicycles or
+ motorbikes.
+ It is instructive on how certain categories make it somewhat impossible
+ for status competitions to develop and lead only the snob option available
+ to the consumer.
+ What we can do is to study the asset score itself - and inspect how the
+ choice between owning cars and bikes is influenced by factors (we don't
+ use the asset score - but the mod of asset-score).
+ Housing is different - renting or taxi rides can make transport similar
+ to housing.
 \end_layout
 
 \begin_layout Standard
-For items where compensation with expenditure is relevant, the budget ratio
- is calculated against total expenditure while for items where we wish to
- inspect the preference of expensive varieties of the item, the budget ratio
- is calculated with expenditure in the category as the total expenditure
- (in accordance with the separability assumption).
- 
-\end_layout
-
-\begin_layout Standard
-For a proper interpretation of costs, we must revisit the discussion on
- wholesale purchases and of infrequent expenses - the presence of which
- might might skew our analyses.
- The extrapolation of monthly expenditures such as house-repair or motor-repair
- as a simple multiplication of 12 is unjustified since no consumer means
- to repair every month.
- Also since consumers may buy wholesale of more than one items together
- - we look for instances where group of items bought with extremely high
- costs.
- Whenever such a grouping is not found, the extreme data can be ignored
- as incorrect recall.
- This step is necessary before any analysis of budgets takes place.
-\end_layout
-
-\begin_layout Standard
-For personal products, we need to exclude extreme values.
- Since extrapolation of monthly expenditures such as house-repair is unjustified
-, we introduce an expected frequency instead of the 12 multiplier.
- We don't find that the assets matter so much for personal products.
- Assets move together with expenditure on personal products (or that the
- so-called assets are no different from the expenditure items).
- The effect of income is strong for transport (we need to use a logit formulatio
-n since the dependent variable is a discrete).
- Densely populated regions have lower asset scores (implying more reliance
- on public transport).
- 
+An interesting observation is that those who rent the house are more likely
+ to buy carpets (this is prominent in both level and log levels of consumption).
+ We check that this is true even when the owner and non-owners both have
+ the same floor type (households with earth - as floor type are less likely
+ to buy carpets).
+ Our separability assumption must be relaxed and model expanded to explain
+ this observation.
+ Other than that, we also find that the effects of asset ownership and occupatio
+nal rank are strong (and positive) in the housing category.
 \end_layout
 
 \begin_layout Section

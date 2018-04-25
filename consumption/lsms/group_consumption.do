@@ -33,3 +33,12 @@ eststo, title(condiments): quietly regress lnmerge_quantity_a lnx_a occupation_r
 esttab using c:/temp/mergedq_results.tex, r2 ar2 mtitle no p numbers star nogaps compress title(Quantity consumed Regression for food groups\label{tabmergedq})
 
 * For fitting in the landscape view, use {landscape} (after inserting usepackage lscape in preamble) and encapsulate within \resizebox{\columnwidth}{!} { \begin{tabular} ... \end{tabular} }
+
+
+use c:\temp\dsenergy.dta,clear
+
+eststo clear
+eststo, title(energy): quietly reg highratio ln_tot_categ_exp highest_educ popdensity i.housingstatus roomsnum i.is_resident electronics_asset_score if group == "energy", robust
+eststo, title(transport): quietly mlogit highest_asset lntot consu i.isurbanp popdensity highest_educ roomsnum i.has_english i.expensiveregion, base(0) if group == "transport", robust
+
+esttab using c:/temp/group_expenditure_results.tex, r2 ar2 mtitle no p numbers star nogaps compress title(Status measure regression for separable categories\label{tabgroups})

@@ -115,124 +115,9 @@ ll=lsms_loader(fu=fu,ln=lsms_normalizer)
 
 \family typewriter
 \size small
-d<-ll@load_diary_file(dirprefix = '../',year = 2010,fu = fu, ln = lsms_normalizer)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-d<-subset(d,item<10000)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-ohs<-ll@load_ohs_file(year=2010, dirprefix = '../',fu = fu,ln = lsms_normalizer)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique
- ignores person id 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs
- in hhidsRegion
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-item_usage<-function(itemName,dat,hhidsRegion)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-{
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-k<-(subset(dat,shortname==itemName)[,c("item","hhid","cost","shortname")])
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-kk<-merge(k[,c("hhid","item","shortname","cost")],hhidsRegion[c("hhid","region",
-"district","ward","ea")],by=c("hhid"),all.x=TRUE)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-return(kk)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-item_ownership<-function(itemName,assets,hhidsRegion)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-{
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-k<-subset(subset(assets,shortname==itemName)[,c("itemcode","hhid","number","shor
-tname")], number>0)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-kk<-merge(k[,c("hhid","itemcode","shortname","number")],hhidsRegion[c("hhid","re
-gion","district","ward","ea")],by=c("hhid"),all.x=TRUE)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-return(subset(kk, !is.na(region)))
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-}
+ll@item_usage(itemName = "petrol",dat = ll@load_diary_file(dirprefix = "../",year
+ = 2010, fu = fu , ln = lsms_normalizer), ohs = ll@load_ohs_file(year =
+ 2010, dirprefix = "../",fu = fu , ln = lsms_normalizer))
 \end_layout
 
 \begin_layout Plain Layout
@@ -249,17 +134,46 @@ t),sd=sd(cost),n=length(hhid))
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 # highratio regression
 \end_layout
 
 \begin_layout Plain Layout
-ds$lntot<-with(ds,log(total_expenditure+1e-16))
+
+\family typewriter
+\size small
+ds<-ll@group_expenditure(year = 2010, dirprefix = "../",categoryName = "energy",fu
+ = fu , ln=lsms_normalizer)
 \end_layout
 
 \begin_layout Plain Layout
-summary(significant_lmvars(ds = ds,depvar = "highratio",vars_init = c("lntot","t
-othouserent","toteducexpense","consu","highest_educ","age","region","popdensity"
-,"years_community","housingstatus","roomsnum","is_resident"))[["result"]])
+
+\family typewriter
+\size small
+as <- ll@get_asset_score(year = 2010 , diaryData = ll@load_diary_file(dirprefix
+ = "../",year = 2010, fu = fu , ln = lsms_normalizer), assetsData = ll@read_assets
+_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer), assetsList
+ = c("refrigerator","tv","videoplayer","computer","iron","musicplayer","musicsys
+tem","ac_fan"), ln = lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ds<-rename(merge(as,ds,by=c("hhid")),c("asset_score"="electronics_asset_score"))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+summary(significant_lmvars(ds = ds,depvar = "highratio",vars_init = c("ln_tot_ca
+teg_exp","tothouserent","toteducexpense","consu","highest_educ","age","region","
+popdensity","years_community","housingstatus","roomsnum","is_resident"))[["resul
+t"]])
 \end_layout
 
 \begin_layout Plain Layout
@@ -282,14 +196,44 @@ lt"]])
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
 #assetsonly regression
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
 ds$lntot<-with(ds,log(total_expenditure+1e-16))
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+neg_zeroed<-function(x) { if (x<0) { return (0); } else {return(x);}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+ds$highest_asset<-as.integer(log((ds$asset_score+1e-16),2))+1
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+ds$highest_asset<-sapply(ds$highest_asset,neg_zeroed)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
 summary(significant_lmvars(ds = ds,depvar = "asset_score",vars_init = c("lntot",
 "tothouserent","toteducexpense","consu","highest_educ","age","region","popdensit
 y","years_community","housingstatus","roomsnum","is_resident"))[["result"]])
@@ -323,6 +267,11 @@ esult"]])
 \begin_layout Plain Layout
 #reg budget lntot asset_score popdensity age consu years_community i.housingstatu
 s roomsnum occupation_rank (housing)
+\end_layout
+
+\begin_layout Plain Layout
+#mlogit highest_asset lntot consu isurbanp popdensity highest_educ roomsnum
+ i.has_english i.expensiveregion, base(0) # (transport)
 \end_layout
 
 \begin_layout Plain Layout

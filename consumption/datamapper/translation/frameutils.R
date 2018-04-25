@@ -36,6 +36,14 @@ fu<-function(){
   }
   
   
+  rbind_xy<-function(x,y,tagx,tagy) {
+    for ( i in setdiff(colnames(x),colnames(y)) ) { y[,c(i)]<-rep(NA,dim(y)[1]) }
+    for ( i in setdiff(colnames(y),colnames(x)) ) { x[,c(i)]<-rep(NA,dim(x)[1]) }
+    x$tag <- tagx
+    y$tag <- tagy
+    return(rbind(x,y))
+  }
+  
   fv<-function (x) { 
     return(as.double(filter_extremes(dat=x,highMultiple = 30, threshold = .95)[["value"]])) 
   }

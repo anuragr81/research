@@ -12,7 +12,8 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       match_recorded_prices="function",get_inferred_prices="function",
                                       aggregate_local_prices="function",add_localmedian_price_columns="function",
                                       food_expenditure_data="function",read_assets_file="function",
-                                      group_expenditure="function",get_asset_score="function"))
+                                      group_expenditure="function",get_asset_score="function",
+                                      item_usage="function", item_ownership="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -118,9 +119,9 @@ lsms_loader<-function(fu,ln) {
       mlk <-merge(mlk,rename(ln()@items_codes_2012()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
       if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
       
-      extremeDataHhids <- unique ( filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
+      extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
       print (paste("Households with extreme data (many times the median) - purged from the diary file:",length(extremeDataHhids)))
-      mlk              <- filter(mlk,!is.element(hhid,extremeDataHhids))
+      mlk              <- dplyr::filter(mlk,!is.element(hhid,extremeDataHhids))
       return(mlk)
     }
     if (year == 2010){
@@ -204,9 +205,9 @@ lsms_loader<-function(fu,ln) {
       if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
       
       # filtering out extreme values
-      extremeDataHhids <- unique ( filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid ) 
+      extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid ) 
       print (paste("Households with extreme data (with many times the median) - purged from the diary file:",length(extremeDataHhids)))
-      mlk              <- filter(mlk,!is.element(hhid,extremeDataHhids))
+      mlk              <- dplyr::filter(mlk,!is.element(hhid,extremeDataHhids))
       
       return(mlk)
       #*    merging all the 4 categories results in the expenditure file
@@ -997,6 +998,38 @@ lsms_loader<-function(fu,ln) {
   }
   
   
+  
+  
+  ####
+
+
+  item_usage<-function(itemName,dat,ohs)
+  {
+    hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id 
+    hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs in hhidsRegion
+    
+    
+    k<-(subset(dat,shortname==itemName)[,c("item","hhid","cost","shortname")])
+    
+    kk<-merge(k[,c("hhid","item","shortname","cost")],hhidsRegion[c("hhid","region","district","ward","ea")],by=c("hhid"),all.x=TRUE)
+    
+    return(kk)
+    
+  }
+  
+  item_ownership<-function(itemName,assets,ohs)
+  {
+    hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id 
+    hhidsRegion<-subset(hhidsRegion,!is.na(hhid) & !is.na(region))# too many NAs in hhidsRegion
+    
+    k<-subset(subset(assets,shortname==itemName)[,c("itemcode","hhid","number","shortname")], number>0)
+    
+    kk<-merge(k[,c("hhid","itemcode","shortname","number")],hhidsRegion[c("hhid","region","district","ward","ea")],by=c("hhid"),all.x=TRUE)
+    
+    return(subset(kk, !is.na(region)))
+    
+  }
+  ####
   group_expenditure <- function(year,dirprefix,categoryName,fu,ln){
     
     
@@ -1056,6 +1089,10 @@ lsms_loader<-function(fu,ln) {
       
       
       if (setequal(groups$group,c("high","low"))){
+        
+        ##Note: cost would not be avalable from the diary if the type of commodity in the group is an asset.
+        # if we can get the asset costs populated, then the data-frame can be rbind-ed to vis data-frame.
+        #
 
         vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
         noGroupCostHhids                     <- setdiff(unique(hh$hhid),unique(vis$hhid))
@@ -1072,9 +1109,11 @@ lsms_loader<-function(fu,ln) {
         vis[is.na(vis$high_cost),]$high_cost <- 0
         vis[is.na(vis$low_cost),]$low_cost   <- 0
         vis$highratio                        <- with(vis,high_cost/(low_cost+high_cost)) + 1e-16
+        vis$ln_tot_categ_exp                 <- log(with(vis,high_cost+low_cost+1e-16))
         vis$group                            <- NULL
         vis$low_cost                         <- NULL
         vis$high_cost                        <- NULL
+         
       } else if (setequal(groups$group,c("asset","expenditure"))){
 
         
@@ -1130,7 +1169,6 @@ lsms_loader<-function(fu,ln) {
         if (dim (vis[is.na(vis$group_cost),])[1]>0){
           vis[is.na(vis$group_cost),]$group_cost<-0
         }
-        
         
       } else if (setequal(groups$group,c("expenditureonly") )){
         
@@ -1310,6 +1348,6 @@ lsms_loader<-function(fu,ln) {
              get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices,
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
              read_assets_file=read_assets_file, group_expenditure=group_expenditure,
-             get_asset_score=get_asset_score))
+             get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership ))
   
 }
