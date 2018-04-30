@@ -19,11 +19,8 @@ generate_tree_num <-function (u,d,S0,n){
   
 } 
 
-generate_tree <-function (u,d,S0,n){
-  
-  if (abs( u*d-1) >1e-7){
-    stop("Invalid u,d")
-  }
+generate_tree <-function (n){
+
   ret = list();
   prevGrid <- ""
   for ( i in seq(1,n)){
