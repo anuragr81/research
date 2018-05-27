@@ -318,6 +318,47 @@ othouserent","toteducexpense","consu","highest_educ","age","region","popdensity"
 #in stata, label list presents the list of values of a code
 \end_layout
 
+\begin_layout Plain Layout
+####
+\end_layout
+
+\begin_layout Plain Layout
+##for only w with I_high
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = ds,depvar = "w",vars_init = c("ln_tot_exp","toth
+ouserent","toteducexpense","consu","highest_educ","age","expensiveregion","popde
+nsity","years_community","housingstatus","roomsnum","is_resident","has_high"))[[
+"result"]])
+\end_layout
+
+\begin_layout Plain Layout
+#### second-stage (wherever possible)
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = ds,depvar = "highratio",vars_init = c("ln_tot_ca
+teg_exp","tothouserent","toteducexpense","consu","highest_educ","age","expensive
+region","popdensity","years_community","housingstatus","roomsnum","is_resident")
+)[["result"]])
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+#for only w with asset
+\end_layout
+
+\begin_layout Plain Layout
+summary(significant_lmvars(ds = ds,depvar = "w",vars_init = c("ln_tot_exp","toth
+ouserent","toteducexpense","consu","highest_educ","age","expensiveregion","popde
+nsity","years_community","housingstatus","roomsnum","is_resident","ln_asset_scor
+e"))[["result"]])
+\end_layout
+
 \end_inset
 
 

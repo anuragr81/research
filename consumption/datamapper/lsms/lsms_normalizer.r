@@ -485,14 +485,15 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="musicsystem"))
     x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="bookexschool"))
     
-    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="bike"))
-    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="public_transport"))
-    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="motorbike"))
-    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="car"))
+#    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="bike"))
+#    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="public_transport"))
+#    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="motorbike"))
+#    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="car"))
     
-    #x<-rbind(x,data.frame(category = "transport", group="low",          shortname="public_transport"))
-    #x<-rbind(x,data.frame(category = "transport", group="high",         shortname="motor_repair"))
-    #x<-rbind(x,data.frame(category = "transport", group="low",          shortname="bicycle_repair"))
+    x<-rbind(x,data.frame(category = "transport", group="low",          shortname="public_transport"))
+    x<-rbind(x,data.frame(category = "transport", group="high",         shortname="motor_repair"))
+    x<-rbind(x,data.frame(category = "transport", group="high",         shortname="petrol"))
+    x<-rbind(x,data.frame(category = "transport", group="low",          shortname="bicycle_repair"))
     
     x<-rbind(x,data.frame(category = "social_functions", group="expenditureonly",shortname="services"))
     x<-rbind(x,data.frame(category = "social_functions", group="expenditureonly",shortname="bride_price"))

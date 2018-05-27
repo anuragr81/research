@@ -84,7 +84,7 @@ lsms_loader<-function(fu,ln) {
       
       
       monthly_recall_items_non_repair <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
-                                "210", "211", "212", "213", "214", "215", "216", "217", "218", "221", "222")
+                                           "210", "211", "212", "213", "214", "215", "216", "217", "218", "221", "222")
       
       
       l <- ln()@multiplyLsmsQuantities(dat = l , 
@@ -166,7 +166,7 @@ lsms_loader<-function(fu,ln) {
       #*    Monthly recall items are multiplied by 12
       
       monthly_recall_items_non_repair <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
-                                "210", "211", "212", "213", "214", "215", "216", "217", "218", "221", "222")  
+                                           "210", "211", "212", "213", "214", "215", "216", "217", "218", "221", "222")  
       
       l <- ln()@multiplyLsmsQuantities(dat = l , 
                                        quantity_field_name="cost", 
@@ -198,7 +198,7 @@ lsms_loader<-function(fu,ln) {
       # Either outer-join or an rbind must be used
       #*    zero-cost items are ignored for all these 
       ml <-merge(m,l,all=TRUE)
-
+      
       mlk <-merge(ml,k,all=TRUE)
       ## mapping name codes
       mlk <-merge(mlk,rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
@@ -1001,8 +1001,8 @@ lsms_loader<-function(fu,ln) {
   
   
   ####
-
-
+  
+  
   item_usage<-function(itemName,dat,ohs)
   {
     hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id 
@@ -1093,7 +1093,7 @@ lsms_loader<-function(fu,ln) {
         ##Note: cost would not be avalable from the diary if the type of commodity in the group is an asset.
         # if we can get the asset costs populated, then the data-frame can be rbind-ed to vis data-frame.
         #
-
+        
         vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
         noGroupCostHhids                     <- setdiff(unique(hh$hhid),unique(vis$hhid))
         
@@ -1106,16 +1106,22 @@ lsms_loader<-function(fu,ln) {
         
         vis                                  <- subset(vis,!is.na(group_cost))
         vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
+        vis$has_high                         <- !is.na(vis$high_cost) & vis$high_cost>0
+        
+        
         vis[is.na(vis$high_cost),]$high_cost <- 0
         vis[is.na(vis$low_cost),]$low_cost   <- 0
         vis$highratio                        <- with(vis,high_cost/(low_cost+high_cost)) + 1e-16
         vis$ln_tot_categ_exp                 <- log(with(vis,high_cost+low_cost+1e-16))
+        vis$tot_categ_exp                    <- with(vis,high_cost+low_cost)
+        
         vis$group                            <- NULL
         vis$low_cost                         <- NULL
         vis$high_cost                        <- NULL
-         
+        
+        
       } else if (setequal(groups$group,c("asset","expenditure"))){
-
+        
         
         assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
         if (dim(subset(assets,is.na(shortname) ))[1]) {
@@ -1132,14 +1138,15 @@ lsms_loader<-function(fu,ln) {
         vis               <- rbind(vis,no_vis)
         print("Filtering NA expenditure out")
         
-        vis               <- rename(subset(vis,group=="expenditure"),c("group_cost"="expenditure_cost"))
-        vis               <- subset(vis, !is.na(expenditure_cost))
+        vis               <- rename(subset(vis,group=="expenditure"),c("group_cost"="tot_categ_exp"))
+        vis               <- subset(vis, !is.na(tot_categ_exp))
         relevantAssets    <- as.character(subset(groups, group== "asset")$shortname)
         
         ady               <- get_asset_score(diaryData = hh,assetsData = assets,assetsList = relevantAssets , 
                                              ln=ln, year = year);
         vis$group         <- NULL
         vis               <- merge(vis,ady,by=c("hhid"))
+
         
         
       } else if (setequal(groups$group,c("assetsonly"))) {
@@ -1196,6 +1203,15 @@ lsms_loader<-function(fu,ln) {
       print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
       
       print(paste("personid range:",toString(unique(ds$personid))))
+      
+      if (is.element("tot_categ_exp",colnames(ds))){
+        ds$w                <- with(ds,tot_categ_exp/total_expenditure)
+      }
+      if (is.element("asset_score",colnames(ds))) {
+        ds$ln_asset_score   <- log(ds$asset_score+1e-7)
+      }
+      
+      ds$ln_tot_exp       <- with(ds,log(total_expenditure+1e-16))
       ds$personid         <- NULL
       return(ds)
     }
