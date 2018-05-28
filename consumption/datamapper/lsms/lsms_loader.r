@@ -1146,6 +1146,8 @@ lsms_loader<-function(fu,ln) {
                                              ln=ln, year = year);
         vis$group         <- NULL
         vis               <- merge(vis,ady,by=c("hhid"))
+        
+        vis$pe  <- with(vis,tot_categ_exp/asset_score)
 
         
         

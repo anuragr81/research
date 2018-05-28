@@ -495,10 +495,29 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category = "transport", group="high",         shortname="petrol"))
     x<-rbind(x,data.frame(category = "transport", group="low",          shortname="bicycle_repair"))
     
-    x<-rbind(x,data.frame(category = "social_functions", group="expenditureonly",shortname="services"))
-    x<-rbind(x,data.frame(category = "social_functions", group="expenditureonly",shortname="bride_price"))
-    x<-rbind(x,data.frame(category = "social_functions", group="expenditureonly",shortname="marriage"))
-    x<-rbind(x,data.frame(category = "social_functions", group="expenditureonly",shortname="funeral"))
+    x<-rbind(x,data.frame(category = "social_functions", group="expenditure",shortname="services"))
+    x<-rbind(x,data.frame(category = "social_functions", group="expenditure",shortname="bride_price"))
+    x<-rbind(x,data.frame(category = "social_functions", group="expenditure",shortname="marriage"))
+    x<-rbind(x,data.frame(category = "social_functions", group="expenditure",shortname="funeral"))
+    
+    #x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="chair"))
+    #x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="sofa"))
+    #x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="table"))
+    #x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="bed"))
+    #x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="cupboard"))
+    
+    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="refrigerator"))
+    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="tv"))
+    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="ac_fan"))
+    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="dishtv"))
+    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="videoplayer"))
+    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="computer"))
+    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="waterheater"))
+    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="musicplayer"))
+    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="musicsystem"))
+    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="land"))
+    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="house"))
+    
     
     x<-rbind(x,data.frame(category = "housing", group="expenditure",shortname="light_bulbs"))
     x<-rbind(x,data.frame(category = "housing", group="expenditure",shortname="carpet"))
