@@ -355,6 +355,41 @@ nsity","years_community","housingstatus","roomsnum","is_resident","ln_asset_scor
 e"))[["result"]])
 \end_layout
 
+\begin_layout Plain Layout
+#for food data
+\end_layout
+
+\begin_layout Plain Layout
+items<-c('cooking_oil', 'butter_margarine', 'rice_husked', 'rice_paddy',
+ 'maize_green', 'maize_grain', 'maize_flour', 'millet_grain', 'millet_flour',
+ 'wheat', 'bread', 'bunscakes', 'pasta', 'othercereal', 'pulses', 'sugar',
+ 'sweet', 'honey', 'peanuts', 'coconut', 'cashew_almonds', 'nut_products',
+ 'milk_products', 'fresh_milk', 'canned_milk', 'goat', 'beef', 'pork', 'chicken'
+, 'wild_birds', 'wild_meat', 'fish_seafood', 'dried_canned_fish', 'packaged_fish
+', 'eggs', 'beer', 'brews', 'winespirits', 'spices', 'salt', 'onion', 'greens',
+ 'dried_canned_veg', 'cassava_fresh', 'cassava_flour', 'sweet_potato', 'yam',
+ 'potatoes', 'banana_green', 'othervegstarch', 'tea', 'coffee', 'miscdrinkpowder
+', 'canned_drink', 'readymade_tea_coffee', 'banana_ripe', 'citrus', 'mangoes',
+ 'sugarcane')
+\end_layout
+
+\begin_layout Plain Layout
+res=NULL
+\end_layout
+
+\begin_layout Plain Layout
+for ( i in seq(1,length(items))) {
+\end_layout
+
+\begin_layout Plain Layout
+res<-rbind(res,data.frame(item=items[i],mean_cost=mean(ll@item_usage(itemName
+ = items[i],dat = hh,ohs=ohs)$cost))) 
+\end_layout
+
+\begin_layout Plain Layout
+}
+\end_layout
+
 \end_inset
 
 
