@@ -7,6 +7,7 @@
 \textclass article
 \begin_preamble
 \usepackage{lscape}
+\usepackage{longtable}
 \tolerance=1
 \emergencystretch=\maxdimen
 \hyphenpenalty=10000
@@ -4462,9 +4463,9 @@ A quantile regression of consumption of a particular item's budget ration
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-w_{i}=\beta_{1}log(x)+\beta_{z}z+\beta_{p}\sum_{j}log(p_{j})+\epsilon
-\]
+\begin{equation}
+w_{i}=\beta_{1}log(x)+\beta_{z}z+\beta_{p}\sum_{j}log(p_{j})+\epsilon\label{eq:aids_equation_without_cost_of_living_index}
+\end{equation}
 
 \end_inset
 
@@ -6429,7 +6430,6 @@ reference "subsec:empirical_method_results"
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
@@ -8597,6 +8597,54 @@ With above,
 \end_layout
 
 \begin_layout Standard
+Looking at the first-stage regression results in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabgroupsfirststage}
+\end_layout
+
+\end_inset
+
+ (for Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:categ_with_high"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:categ_with_assets"
+
+\end_inset
+
+), we find that permanent income seems significant more for food, energy
+ and transport.
+ Predictably, the budget share on transport and housing is negatively correlated
+ with population density (i.e.
+ more populous regions cost the consumer less on average on these categories).
+ We use housing status (1=owned house, 2=employer subsidized housing, 3=employed
+ provided housing 4=rented housing 5=free housing) as an 
+\begin_inset Quotes eld
+\end_inset
+
+asset
+\begin_inset Quotes erd
+\end_inset
+
+ in the status sense, and find that those with rented housing spend proportionat
+ely higher on the monthly expenditures related to social functions and housing
+ (excluding the rent itself).
+ 
+\end_layout
+
+\begin_layout Standard
 We see no evidence of pecuniary emulation (the way we measure it).
 \end_layout
 
@@ -8672,6 +8720,662 @@ Group of food items to infer high and low price consumption
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}{|c|c|c|c|} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Classification of items for asset-based model of status}
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+textbf{Category} & 
+\backslash
+textbf{Group} & 
+\backslash
+textbf{Item shortname} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+endfirsthead 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+multicolumn{3}{c}% 
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+tablename
+\backslash
+ 
+\backslash
+thetable
+\backslash
+ -- 
+\backslash
+textit{Continued from previous page}} 
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+textbf{Category} & 
+\backslash
+textbf{Group} & 
+\backslash
+textbf{Item shortname} 
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+endhead 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+multicolumn{3}{r}{
+\backslash
+textit{Continued on next page}} 
+\backslash
+
+\backslash
+ 
+\backslash
+endfoot 
+\backslash
+hline 
+\backslash
+endlastfoot 
+\end_layout
+
+\begin_layout Plain Layout
+
+food & low & cooking
+\backslash
+_oil
+\backslash
+tabularnewline food & high & butter
+\backslash
+_margarine
+\backslash
+tabularnewline food & high & rice
+\backslash
+_husked
+\backslash
+tabularnewline food & low & rice
+\backslash
+_paddy
+\backslash
+tabularnewline food & low & maize
+\backslash
+_green
+\backslash
+tabularnewline food & low & maize
+\backslash
+_grain
+\backslash
+tabularnewline food & low & maize
+\backslash
+_flour
+\backslash
+tabularnewline food & high & millet
+\backslash
+_grain
+\backslash
+tabularnewline food & high & millet
+\backslash
+_flour
+\backslash
+tabularnewline food & high & wheat
+\backslash
+tabularnewline food & high & bread
+\backslash
+tabularnewline food & high & bunscakes
+\backslash
+tabularnewline food & high & pasta
+\backslash
+tabularnewline food & high & othercereal
+\backslash
+tabularnewline food & high & pulses
+\backslash
+tabularnewline food & low & sugar
+\backslash
+tabularnewline food & high & sweet
+\backslash
+tabularnewline food & high & honey
+\backslash
+tabularnewline food & low & peanuts
+\backslash
+tabularnewline food & low & coconut
+\backslash
+tabularnewline food & high & cashew
+\backslash
+_almonds
+\backslash
+tabularnewline food & high & nut
+\backslash
+_products
+\backslash
+tabularnewline food & high & milk
+\backslash
+_products
+\backslash
+tabularnewline food & low & fresh
+\backslash
+_milk
+\backslash
+tabularnewline food & high & canned
+\backslash
+_milk
+\backslash
+tabularnewline food & high & goat
+\backslash
+tabularnewline food & high & beef
+\backslash
+tabularnewline food & low & pork
+\backslash
+tabularnewline food & high & chicken
+\backslash
+tabularnewline food & low & wild
+\backslash
+_birds
+\backslash
+tabularnewline food & low & wild
+\backslash
+_meat
+\backslash
+tabularnewline food & low & fish
+\backslash
+_seafood
+\backslash
+tabularnewline food & high & dried
+\backslash
+_canned
+\backslash
+_fish
+\backslash
+tabularnewline food & high & packaged
+\backslash
+_fish
+\backslash
+tabularnewline food & low & eggs
+\backslash
+tabularnewline food & low & beer
+\backslash
+tabularnewline food & low & brews
+\backslash
+tabularnewline food & high & winespirits
+\backslash
+tabularnewline food & high & spices
+\backslash
+tabularnewline food & low & salt
+\backslash
+tabularnewline food & low & onion
+\backslash
+tabularnewline food & low & greens
+\backslash
+tabularnewline food & low & dried
+\backslash
+_canned
+\backslash
+_veg
+\backslash
+tabularnewline food & low & cassava
+\backslash
+_fresh
+\backslash
+tabularnewline food & low & cassava
+\backslash
+_flour
+\backslash
+tabularnewline food & low & sweet
+\backslash
+_potato
+\backslash
+tabularnewline food & high & yam
+\backslash
+tabularnewline food & high & potatoes
+\backslash
+tabularnewline food & high & banana
+\backslash
+_green
+\backslash
+tabularnewline food & low & othervegstarch
+\backslash
+tabularnewline food & high & tea
+\backslash
+tabularnewline food & high & coffee
+\backslash
+tabularnewline food & low & miscdrinkpowder
+\backslash
+tabularnewline food & low & canned
+\backslash
+_drink
+\backslash
+tabularnewline food & high & readymade
+\backslash
+_tea
+\backslash
+_coffee
+\backslash
+tabularnewline food & high & banana
+\backslash
+_ripe
+\backslash
+tabularnewline food & high & citrus
+\backslash
+tabularnewline food & high & mangoes
+\backslash
+tabularnewline food & low & sugarcane
+\backslash
+tabularnewline energy & low & kerosene
+\backslash
+tabularnewline energy & high & charcoal
+\backslash
+tabularnewline energy & high & gas
+\backslash
+tabularnewline energy & high & electricity
+\backslash
+tabularnewline energy & high & petrol
+\backslash
+tabularnewline personal
+\backslash
+_products & expenditure & cellphone
+\backslash
+_voucher
+\backslash
+tabularnewline personal
+\backslash
+_products & expenditure & bar
+\backslash
+_soap
+\backslash
+tabularnewline personal
+\backslash
+_products & expenditure & clothes
+\backslash
+_soap
+\backslash
+tabularnewline personal
+\backslash
+_products & expenditure & toothpaste
+\backslash
+tabularnewline personal
+\backslash
+_products & expenditure & toilet
+\backslash
+_paper
+\backslash
+tabularnewline personal
+\backslash
+_products & expenditure & skin
+\backslash
+_cream
+\backslash
+tabularnewline personal
+\backslash
+_products & expenditure & other
+\backslash
+_personal
+\backslash
+tabularnewline personal
+\backslash
+_products & expenditure & misc
+\backslash
+_cleaning
+\backslash
+tabularnewline personal
+\backslash
+_products & expenditure & household
+\backslash
+_products
+\backslash
+_repair
+\backslash
+tabularnewline personal
+\backslash
+_products & expenditure & consumer
+\backslash
+_durables
+\backslash
+_repair
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & sports
+\backslash
+_hobby
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & camera
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & watch
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & phone
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & radio
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & landline
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & mobile
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & videoplayer
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & computer
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & iron
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & stove
+\backslash
+_electricgas
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & stove
+\backslash
+_other
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & waterheater
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & musicplayer
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & musicsystem
+\backslash
+tabularnewline personal
+\backslash
+_products & asset & bookexschool
+\backslash
+tabularnewline transport & low & public
+\backslash
+_transport
+\backslash
+tabularnewline transport & high & motor
+\backslash
+_repair
+\backslash
+tabularnewline transport & high & petrol
+\backslash
+tabularnewline transport & low & bicycle
+\backslash
+_repair
+\backslash
+tabularnewline social
+\backslash
+_functions & expenditure & services
+\backslash
+tabularnewline social
+\backslash
+_functions & expenditure & bride
+\backslash
+_price
+\backslash
+tabularnewline social
+\backslash
+_functions & expenditure & marriage
+\backslash
+tabularnewline social
+\backslash
+_functions & expenditure & funeral
+\backslash
+tabularnewline social
+\backslash
+_functions & asset & refrigerator
+\backslash
+tabularnewline social
+\backslash
+_functions & asset & tv
+\backslash
+tabularnewline social
+\backslash
+_functions & asset & ac
+\backslash
+_fan
+\backslash
+tabularnewline social
+\backslash
+_functions & asset & dishtv
+\backslash
+tabularnewline social
+\backslash
+_functions & asset & videoplayer
+\backslash
+tabularnewline social
+\backslash
+_functions & asset & computer
+\backslash
+tabularnewline social
+\backslash
+_functions & asset & waterheater
+\backslash
+tabularnewline social
+\backslash
+_functions & asset & musicplayer
+\backslash
+tabularnewline social
+\backslash
+_functions & asset & musicsystem
+\backslash
+tabularnewline social
+\backslash
+_functions & asset & land
+\backslash
+tabularnewline housing & expenditure & light
+\backslash
+_bulbs
+\backslash
+tabularnewline housing & expenditure & carpet
+\backslash
+tabularnewline housing & expenditure & linen
+\backslash
+tabularnewline housing & expenditure & mat
+\backslash
+tabularnewline housing & expenditure & mosquito
+\backslash
+_net
+\backslash
+tabularnewline housing & expenditure & mattress
+\backslash
+tabularnewline housing & expenditure & building
+\backslash
+_material
+\backslash
+tabularnewline housing & expenditure & insurance
+\backslash
+tabularnewline housing & expenditure & bamboo
+\backslash
+tabularnewline housing & expenditure & grass
+\backslash
+tabularnewline housing & asset & refrigerator
+\backslash
+tabularnewline housing & asset & sewingmachine
+\backslash
+tabularnewline housing & asset & tv
+\backslash
+tabularnewline housing & asset & chair
+\backslash
+tabularnewline housing & asset & sofa
+\backslash
+tabularnewline housing & asset & table
+\backslash
+tabularnewline housing & asset & bed
+\backslash
+tabularnewline housing & asset & cupboard
+\backslash
+tabularnewline housing & asset & lantern
+\backslash
+tabularnewline housing & asset & mosquitonet
+\backslash
+tabularnewline housing & asset & wheelbarrow
+\backslash
+tabularnewline housing & asset & livestock
+\backslash
+tabularnewline housing & asset & poultry
+\backslash
+tabularnewline housing & asset & engine
+\backslash
+_outboard
+\backslash
+tabularnewline housing & asset & donkey
+\backslash
+tabularnewline housing & asset & land
+\backslash
+tabularnewline housing & asset & house
+\backslash
+tabularnewline housing & asset & ac
+\backslash
+_fan
+\backslash
+tabularnewline housing & asset & dishtv
+\backslash
+tabularnewline housing & asset & hoe
+\backslash
+tabularnewline housing & asset & spraymachine
+\backslash
+tabularnewline housing & asset & waterpump
+\backslash
+tabularnewline housing & asset & reaper
+\backslash
+tabularnewline housing & asset & tractor
+\backslash
+tabularnewline housing & asset & trailer
+\backslash
+tabularnewline housing & asset & plough
+\backslash
+tabularnewline housing & asset & harrow
+\backslash
+tabularnewline housing & asset & milkingmachine
+\backslash
+tabularnewline housing & asset & harvester
+\backslash
+tabularnewline housing & asset & handmill
+\backslash
+tabularnewline housing & asset & coffeepulpingmachine
+\backslash
+tabularnewline housing & asset & fertiliserdistributor
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{longtable} 
 \end_layout
 
 \end_inset
