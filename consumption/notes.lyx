@@ -8361,8 +8361,27 @@ reference "tab:status_dimensions"
 
 \begin_layout Standard
 The data on food is more detailed than the others.
- To split the consumption in high-price and low-price categories, we're
- guided by the  
+ Unlike for non-food categories, we're guided by both the cost incurred
+ and quantity purchased for every item associated with every household in
+ order to split the consumption in high-price and low-price categories.
+ Given the detailed categories of food items, we mark the higher priced
+ categories in the every sub-category (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:tree_food"
+
+\end_inset
+
+) within the food category.
+ A purely utilitarian consumer could simply choose the cheaper option for
+ every tree in the Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:tree_food"
+
+\end_inset
+
+ if she were to compromise on quality.
 \end_layout
 
 \begin_layout Standard
@@ -8578,6 +8597,10 @@ With above,
 \end_layout
 
 \begin_layout Standard
+We see no evidence of pecuniary emulation (the way we measure it).
+\end_layout
+
+\begin_layout Standard
 In the personal products category, we don't find that the assets matter
  so much for expenditure on personal products i.e.
  those with higher number of assets also spend proportionally higher on
@@ -8598,6 +8621,933 @@ An interesting observation is that those who rent the house are more likely
  this observation.
  Other than that, we also find that the effects of asset ownership and occupatio
 nal rank are strong (and positive) in the housing category.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename foodtree.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:tree_food"
+
+\end_inset
+
+Group of food items to infer high and low price consumption
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{First-stage regression for separable categories with $w$ as dependent
+ variable 
+\backslash
+label{tabgroupsfirststage}} 
+\backslash
+begin{tabular}{l*{6}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}&
+\backslash
+multicolumn{1}{c}{(3)}&
+\backslash
+multicolumn{1}{c}{(4)}&
+\backslash
+multicolumn{1}{c}{(5)}&
+\backslash
+multicolumn{1}{c}{(6)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{food}&
+\backslash
+multicolumn{1}{c}{energy}&
+\backslash
+multicolumn{1}{c}{transport}&
+\backslash
+multicolumn{1}{c}{personal
+\backslash
+_products}&
+\backslash
+multicolumn{1}{c}{social
+\backslash
+_functions}&
+\backslash
+multicolumn{1}{c}{housing}
+\backslash
+
+\backslash
+ 
+\backslash
+hline ln
+\backslash
+_tot
+\backslash
+_categ
+\backslash
+_exp&   0.0798
+\backslash
+sym{***}&    0.223
+\backslash
+sym{***}&   0.0499
+\backslash
+sym{***}&                  &                  &                  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &     
+             &                  &                  
+\backslash
+
+\backslash
+ highest
+\backslash
+_educ&  0.00315
+\backslash
+sym{***}&  0.00359
+\backslash
+sym{**} &   0.0129
+\backslash
+sym{***}&   -72.15
+\backslash
+sym{**} &                  &                  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.003)         &  (0.000)         &  (0.002)
+         &                  &                  
+\backslash
+
+\backslash
+ consu     & -0.00364
+\backslash
+sym{***}&                  &                  &    95.15
+\backslash
+sym{*}  &                  &   -4.400
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.000)         &                  &                  &  (0.046)
+         &                  &  (0.003)         
+\backslash
+
+\backslash
+ popdensity&0.00000594
+\backslash
+sym{*}  &                  &-0.0000307
+\backslash
+sym{***}&                  &   0.0695
+\backslash
+sym{*}  &  -0.0383
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.041)         &                  &  (0.000)         &    
+              &  (0.015)         &  (0.020)         
+\backslash
+
+\backslash
+ 1.housingstatus&        0         &        0         &        0        
+ &        0         &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.housingstatus&    0.116
+\backslash
+sym{***}&  0.00831         &  -0.0767
+\backslash
+sym{***}&   1692.5         &    846.6         &    125.8
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.730)         &  (0.000)         &  (0.682)
+         &  (0.090)         &  (0.012)         
+\backslash
+
+\backslash
+ 3.housingstatus&   0.0160         &   0.0770
+\backslash
+sym{*}  & -0.00171         &  -2427.4
+\backslash
+sym{***}&    19.60         &    118.0
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.463)         &  (0.047)         &  (0.964)         &  (0.000)
+         &  (0.621)         &  (0.040)         
+\backslash
+
+\backslash
+ 4.housingstatus&   0.0205
+\backslash
+sym{*}  &    0.119
+\backslash
+sym{***}&  -0.0523
+\backslash
+sym{***}&  -1473.3
+\backslash
+sym{***}&    380.4
+\backslash
+sym{***}&    418.8
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.024)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.001)         &  (0.000)         
+\backslash
+
+\backslash
+ 5.housingstatus&   0.0224         &    0.107
+\backslash
+sym{***}&  -0.0288         &  -1038.4         &    291.2
+\backslash
+sym{*}  &    133.5
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.109)         &  (0.000)         &  (0.152)         &  (0.076)
+         &  (0.045)         &  (0.006)         
+\backslash
+
+\backslash
+ age       &                  &-0.000938
+\backslash
+sym{*}  &                  &   -41.62
+\backslash
+sym{**} &                  &   -1.584         
+\backslash
+
+\backslash
+           &                  &  (0.022)         &                  &  (0.004)
+         &                  &  (0.058)         
+\backslash
+
+\backslash
+ 0.expensiveregion&                  &        0         &        0      
+   &                  &                  &                  
+\backslash
+
+\backslash
+           &                  &      (.)         &      (.)         &    
+              &                  &                  
+\backslash
+
+\backslash
+ 1.expensiveregion&                  &   0.0362
+\backslash
+sym{**} &   0.0423
+\backslash
+sym{*}  &                  &                  &                  
+\backslash
+
+\backslash
+           &                  &  (0.007)         &  (0.046)         &    
+              &                  &                  
+\backslash
+
+\backslash
+ roomsnum  &                  &   0.0114
+\backslash
+sym{***}&                  &   -228.9
+\backslash
+sym{**} &                  &   -9.524         
+\backslash
+
+\backslash
+           &                  &  (0.001)         &                  &  (0.005)
+         &                  &  (0.065)         
+\backslash
+
+\backslash
+ 0.is
+\backslash
+_resident&                  &        0         &                  &    
+              &                  &                  
+\backslash
+
+\backslash
+           &                  &      (.)         &                  &   
+               &                  &                  
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_resident&                  &  -0.0180         &                  &     
+             &                  &                  
+\backslash
+
+\backslash
+           &                  &  (0.138)         &                  &   
+               &                  &                  
+\backslash
+
+\backslash
+ years
+\backslash
+_community&                  &                  & 0.000873         &    
+              &                  &                  
+\backslash
+
+\backslash
+           &                  &                  &  (0.058)         &   
+               &                  &                  
+\backslash
+
+\backslash
+ ln
+\backslash
+_tot
+\backslash
+_exp&                  &                  &                  &  -1273.9
+\backslash
+sym{***}&    42.61
+\backslash
+sym{***}&   -13.01         
+\backslash
+
+\backslash
+           &                  &                  &                  &  (0.000)
+         &  (0.000)         &  (0.463)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -0.711
+\backslash
+sym{***}&   -2.215
+\backslash
+sym{***}&   -0.754
+\backslash
+sym{***}&  24575.1
+\backslash
+sym{***}&   -604.5
+\backslash
+sym{***}&    357.5         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.153)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     2419         &     2317         &     1381         &     2283
+         &     2933         &     3239         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.219         &    0.678         &    0.197         &    0.038      
+   &    0.045         &    0.051         
+\backslash
+
+\backslash
+ adj.
+ 
+\backslash
+(R^{2}
+\backslash
+)&    0.216         &    0.676         &    0.191         &    0.034       
+  &    0.043         &    0.048         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Second-stage regression for separable categories with $
+\backslash
+lambda/
+\backslash
+zeta$ as dependent variable 
+\backslash
+label{tabgroupssecondstage}} 
+\backslash
+begin{tabular}{l*{6}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}&
+\backslash
+multicolumn{1}{c}{(3)}&
+\backslash
+multicolumn{1}{c}{(4)}&
+\backslash
+multicolumn{1}{c}{(5)}&
+\backslash
+multicolumn{1}{c}{(6)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{food}&
+\backslash
+multicolumn{1}{c}{energy}&
+\backslash
+multicolumn{1}{c}{transport}&
+\backslash
+multicolumn{1}{c}{personal
+\backslash
+_products}&
+\backslash
+multicolumn{1}{c}{social
+\backslash
+_functions}&
+\backslash
+multicolumn{1}{c}{housing}
+\backslash
+
+\backslash
+ 
+\backslash
+hline ln
+\backslash
+_tot
+\backslash
+_categ
+\backslash
+_exp&   0.0798
+\backslash
+sym{***}&    0.223
+\backslash
+sym{***}&   0.0499
+\backslash
+sym{***}&                  &                  &                  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &     
+             &                  &                  
+\backslash
+
+\backslash
+ highest
+\backslash
+_educ&  0.00315
+\backslash
+sym{***}&  0.00359
+\backslash
+sym{**} &   0.0129
+\backslash
+sym{***}&   -72.15
+\backslash
+sym{**} &                  &                  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.003)         &  (0.000)         &  (0.002)
+         &                  &                  
+\backslash
+
+\backslash
+ consu     & -0.00364
+\backslash
+sym{***}&                  &                  &    95.15
+\backslash
+sym{*}  &                  &   -4.400
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.000)         &                  &                  &  (0.046)
+         &                  &  (0.003)         
+\backslash
+
+\backslash
+ popdensity&0.00000594
+\backslash
+sym{*}  &                  &-0.0000307
+\backslash
+sym{***}&                  &   0.0695
+\backslash
+sym{*}  &  -0.0383
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.041)         &                  &  (0.000)         &    
+              &  (0.015)         &  (0.020)         
+\backslash
+
+\backslash
+ 1.housingstatus&        0         &        0         &        0        
+ &        0         &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.housingstatus&    0.116
+\backslash
+sym{***}&  0.00831         &  -0.0767
+\backslash
+sym{***}&   1692.5         &    846.6         &    125.8
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.730)         &  (0.000)         &  (0.682)
+         &  (0.090)         &  (0.012)         
+\backslash
+
+\backslash
+ 3.housingstatus&   0.0160         &   0.0770
+\backslash
+sym{*}  & -0.00171         &  -2427.4
+\backslash
+sym{***}&    19.60         &    118.0
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.463)         &  (0.047)         &  (0.964)         &  (0.000)
+         &  (0.621)         &  (0.040)         
+\backslash
+
+\backslash
+ 4.housingstatus&   0.0205
+\backslash
+sym{*}  &    0.119
+\backslash
+sym{***}&  -0.0523
+\backslash
+sym{***}&  -1473.3
+\backslash
+sym{***}&    380.4
+\backslash
+sym{***}&    418.8
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.024)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.001)         &  (0.000)         
+\backslash
+
+\backslash
+ 5.housingstatus&   0.0224         &    0.107
+\backslash
+sym{***}&  -0.0288         &  -1038.4         &    291.2
+\backslash
+sym{*}  &    133.5
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.109)         &  (0.000)         &  (0.152)         &  (0.076)
+         &  (0.045)         &  (0.006)         
+\backslash
+
+\backslash
+ age       &                  &-0.000938
+\backslash
+sym{*}  &                  &   -41.62
+\backslash
+sym{**} &                  &   -1.584         
+\backslash
+
+\backslash
+           &                  &  (0.022)         &                  &  (0.004)
+         &                  &  (0.058)         
+\backslash
+
+\backslash
+ 0.expensiveregion&                  &        0         &        0      
+   &                  &                  &                  
+\backslash
+
+\backslash
+           &                  &      (.)         &      (.)         &    
+              &                  &                  
+\backslash
+
+\backslash
+ 1.expensiveregion&                  &   0.0362
+\backslash
+sym{**} &   0.0423
+\backslash
+sym{*}  &                  &                  &                  
+\backslash
+
+\backslash
+           &                  &  (0.007)         &  (0.046)         &    
+              &                  &                  
+\backslash
+
+\backslash
+ roomsnum  &                  &   0.0114
+\backslash
+sym{***}&                  &   -228.9
+\backslash
+sym{**} &                  &   -9.524         
+\backslash
+
+\backslash
+           &                  &  (0.001)         &                  &  (0.005)
+         &                  &  (0.065)         
+\backslash
+
+\backslash
+ 0.is
+\backslash
+_resident&                  &        0         &                  &    
+              &                  &                  
+\backslash
+
+\backslash
+           &                  &      (.)         &                  &   
+               &                  &                  
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_resident&                  &  -0.0180         &                  &     
+             &                  &                  
+\backslash
+
+\backslash
+           &                  &  (0.138)         &                  &   
+               &                  &                  
+\backslash
+
+\backslash
+ years
+\backslash
+_community&                  &                  & 0.000873         &    
+              &                  &                  
+\backslash
+
+\backslash
+           &                  &                  &  (0.058)         &   
+               &                  &                  
+\backslash
+
+\backslash
+ ln
+\backslash
+_tot
+\backslash
+_exp&                  &                  &                  &  -1273.9
+\backslash
+sym{***}&    42.61
+\backslash
+sym{***}&   -13.01         
+\backslash
+
+\backslash
+           &                  &                  &                  &  (0.000)
+         &  (0.000)         &  (0.463)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -0.711
+\backslash
+sym{***}&   -2.215
+\backslash
+sym{***}&   -0.754
+\backslash
+sym{***}&  24575.1
+\backslash
+sym{***}&   -604.5
+\backslash
+sym{***}&    357.5         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.153)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     2419         &     2317         &     1381         &     2283
+         &     2933         &     3239         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.219         &    0.678         &    0.197         &    0.038      
+   &    0.045         &    0.051         
+\backslash
+
+\backslash
+ adj.
+ 
+\backslash
+(R^{2}
+\backslash
+)&    0.216         &    0.676         &    0.191         &    0.034       
+  &    0.043         &    0.048         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{7}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

@@ -7,7 +7,7 @@ if (isClass("FrameUtils")){
 ## all exported functions are declared here
 setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function",filter_categories_data="function",
                                       removeall_cols_except="function",find_nonzero_percentile="function",
-                                      fv="function") )
+                                      fv="function",rbind_xy="function") )
 
 removeall_cols_except<-function(dat,listColumnNames){
   #c("region","district","ward","accessiblemarket","travelcost"))
@@ -39,7 +39,13 @@ fu<-function(){
   rbind_xy<-function(x,y,tagx,tagy) {
     for ( i in setdiff(colnames(x),colnames(y)) ) { y[,c(i)]<-rep(NA,dim(y)[1]) }
     for ( i in setdiff(colnames(y),colnames(x)) ) { x[,c(i)]<-rep(NA,dim(x)[1]) }
-    x$tag <- tagx
+    if (missing(tagx)){
+      if (!is.element("tag",colnames(x)) ){
+        stop("Must have a column tag in x to differentiate added y from x")
+      }
+    } else {
+      x$tag <- tagx
+    }
     y$tag <- tagy
     return(rbind(x,y))
   }
@@ -174,6 +180,7 @@ fu<-function(){
              filter_categories_data=filter_categories_data,
              removeall_cols_except=removeall_cols_except,
              find_nonzero_percentile=find_nonzero_percentile,
-             fv=fv) );
+             fv=fv,
+             rbind_xy=rbind_xy) );
   
 }

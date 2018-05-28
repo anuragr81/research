@@ -285,7 +285,7 @@ lsms_loader<-function(fu,ln) {
       ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
       print ("Loaded OHS file")
       # loading diary data
-      datConsum<-load_diary_file(dirprefix = '.',year = year, fu=fu, ln=ln )
+      datConsum<-load_diary_file(dirprefix = dirprefix,year = year, fu=fu, ln=ln )
     }
     
     datConsum$factor<-as.integer(datConsum$lwp_unit==1)+as.integer(datConsum$lwp_unit==2)/1000.0+as.integer(datConsum$lwp_unit==3)+as.integer(datConsum$lwp_unit==4)/1000.0
@@ -1147,8 +1147,7 @@ lsms_loader<-function(fu,ln) {
         vis$group         <- NULL
         vis               <- merge(vis,ady,by=c("hhid"))
         
-        vis$pe  <- with(vis,tot_categ_exp/asset_score)
-
+        vis$pe  <- with(vis,tot_categ_exp/log(asset_score+1e-7))
         
         
       } else if (setequal(groups$group,c("assetsonly"))) {
