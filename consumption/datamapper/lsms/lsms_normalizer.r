@@ -6,8 +6,9 @@ if (isClass("LSMSNormalizer")){
 ## all exported functions are declared here
 setClass("LSMSNormalizer", representation(food_categories_lsms_2010="function",
                                           items_codes_2010="function",
-                                          lsms_groups_2010="function",
-                                          assets_order_2010="function",
+                                          lsms_groups_2010_2012="function",
+                                          assets_order_2010_2012="function",
+                                          items_codes_2012="function",
                                           get_piece_measures="function",
                                           ignored_bad_units="function",
                                           get_group_qconv_factor="function",
@@ -53,7 +54,9 @@ setClass("LSMSNormalizer", representation(food_categories_lsms_2010="function",
                                           get_lsms_secj_info_columns_2012="function", 
                                           get_lsms_secj_fields_mapping_2012="function", 
                                           get_diary_secn_columns_lsms_2010="function",
+                                          get_diary_secn_columns_lsms_2012="function",
                                           get_diary_secn_fields_mapping_lsms_2010="function",
+                                          get_diary_secn_fields_mapping_lsms_2012="function",
                                           computeYearValues="function",
                                           computeLsmsSelfemployedValues="function",
                                           infer_lsms_sece_total_income="function"))
@@ -315,13 +318,191 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='Wine and spirits',shortname='winespirits',code='11108',category="food"))
     return(r)
   }
+
+  items_codes_2012<-function() { 
+    r=data.frame(item=NULL,code=NULL)
+    r=rbind(r,data.frame(item='Cigarettes',shortname='cigarettes',code='101', category = "misc"))
+    r=rbind(r,data.frame(item='Matches',shortname='matches',code='102', category = "energy"))
+    r=rbind(r,data.frame(item='Public Transport',shortname='public_transport',code='103',category="transport"))
+    
+    r=rbind(r,data.frame(item='Kerosene',shortname='kerosene',code='201',category="energy"))
+    r=rbind(r,data.frame(item='Electricity',shortname='electricity',code='202',category="energy"))
+    r=rbind(r,data.frame(item='Gas',shortname='gas', code='203',category="energy"))
+    r=rbind(r,data.frame(item='Water',shortname='water',code='204',category="food"))
+    r=rbind(r,data.frame(item='Petrol',shortname='petrol',code='205',category="energy"))
+    r=rbind(r,data.frame(item='Cellphone voucher',shortname='cellphone_voucher', code='206',category="personal_products"))
+    r=rbind(r,data.frame(item='Charcoal',shortname='charcoal',code='207',category="energy"))
+    r=rbind(r,data.frame(item='Milling fees grain',shortname='milling',code='208',category="food"))
+    r=rbind(r,data.frame(item='Bar soap',shortname='bar_soap',code='209',category="personal_products"))
+    r=rbind(r,data.frame(item='Clothes soap',shortname='clothes_soap',code='210',category="personal_products"))
+    r=rbind(r,data.frame(item='Toothpaste',shortname='toothpaste',code='211',category="personal_products"))
+    r=rbind(r,data.frame(item='Toilet Paper',shortname='toilet_paper',code='212',category="personal_products"))
+    r=rbind(r,data.frame(item='Skin Cream',shortname='skin_cream',code='213',category="personal_products"))
+    r=rbind(r,data.frame(item='Others Personal Products',shortname='other_personal',code='214',category="personal_products"))
+    r=rbind(r,data.frame(item='Household cleaning Products',shortname='misc_cleaning',code='215',category="personal_products"))
+    r=rbind(r,data.frame(item='Light bulbs',shortname='light_bulbs',code='216',category="housing"))
+    r=rbind(r,data.frame(item='Phone, internet fees',shortname='phone',code='217',category="personal_products"))
+    r=rbind(r,data.frame(item='Donations',shortname='donation',code='218',category="misc"))
+    r=rbind(r,data.frame(item='Motor vehicle repairs',shortname='motor_repair',code='219',category="transport"))
+    r=rbind(r,data.frame(item='Bicycle service',shortname='bicycle_repair',code='220',category="transport"))
+    r=rbind(r,data.frame(item='Servant Wages',shortname='services',code='221',category="social_functions"))
+    r=rbind(r,data.frame(item='Mortgage payment',shortname='mortgage',code='222',category="ignored"))
+    r=rbind(r,data.frame(item='House repair',shortname='house_repair',code='223',category="ignored"))
+####
+    r=rbind(r,data.frame(item='CarpetsRugs',shortname='carpet',code='301',category="housing"))
+    r=rbind(r,data.frame(item='Linen',shortname='linen',code='302',category="housing"))
+    r=rbind(r,data.frame(item='Mats',shortname='mat',code='303',category="housing"))
+    r=rbind(r,data.frame(item='MosquitoNet',shortname='mosquito_net',code='304',category="housing"))
+    r=rbind(r,data.frame(item='Mattress',shortname='mattress',code='305',category="housing"))
+    r=rbind(r,data.frame(item='SportsHobbyEquipment',shortname='sports_hobby',code='306',category="personal_products"))
+    r=rbind(r,data.frame(item='FilmCamera',shortname='camera',code='307',category="personal_products"))
+    r=rbind(r,data.frame(item='BuidingMaterial',shortname='building_material',code='308',category="housing"))
+    r=rbind(r,data.frame(item='CouncilRates',shortname='council_rates',code='309',category="ignored"))
+    r=rbind(r,data.frame(item='Insurance',shortname='insurance',code='310',category="housing"))
+    r=rbind(r,data.frame(item='TheftLosses',shortname='theft_losses',code='311',category="misc"))
+    r=rbind(r,data.frame(item='LegalFeesFines',shortname='legalfines',code='312',category="misc"))
+    r=rbind(r,data.frame(item='BrideMarriageCeremonyCosts',shortname='marriage',code='313',category="social_functions"))
+    r=rbind(r,data.frame(item='FuneralCosts',shortname='funeral',code='314',category="social_functions"))
+    r=rbind(r,data.frame(item='OherCosts',shortname='other_costs',code='315',category="social_functions"))
+    
+    r=rbind(r,data.frame(item='ConsumerDurableRepairs',shortname='consumer_durables_repair',code='316',category="personal_products"))
+    r=rbind(r,data.frame(item='PropertyIncomeTax',shortname='taxes',code='317',category="misc"))
+    
+    r=rbind(r,data.frame(item='Dwelling Repairs-maintenance',shortname='houserepair',code='318',category="housing"))
+    
+    r=rbind(r,data.frame(item='mensclothes',shortname='mensclothes',code='319',category="personal_products"))
+    r=rbind(r,data.frame(item='womensclothes',shortname='womensclothes',code='320',category="personal_products"))
+    r=rbind(r,data.frame(item='childrensclothes',shortname='childrensclothes',code='321',category="personal_products"))
+    r=rbind(r,data.frame(item='mensshoes',shortname='mensshoes',code='322',category="personal_products"))
+    r=rbind(r,data.frame(item='womensshoes',shortname='womensshoes',code='323',category="personal_products"))
+    r=rbind(r,data.frame(item='childrensshoes',shortname='childrensshoes',code='324',category="personal_products"))
+    
+    r=rbind(r,data.frame(item='Woodpoles',shortname='bamboo',code='325',category="personal_products"))
+    r=rbind(r,data.frame(item='ThatchingGrass',shortname='grass',code='326',category="housing"))
+    
+    
+    r=rbind(r,data.frame(item='Radio and Radio Cassette',shortname='radio',code='401',category="personal_products"))                                  
+    r=rbind(r,data.frame(item='Telephone(landline)',shortname='landline',code='402',category="personal_products"))                                    
+    r=rbind(r,data.frame(item='Telephone(mobile)',shortname='mobile',code='403',category="personal_products"))                                        
+    r=rbind(r,data.frame(item='Refridgerator or freezer',shortname='refrigerator',code='404',category="housing"))                           
+    r=rbind(r,data.frame(item='Sewing Machine',shortname='sewingmachine',code='405',category="housing"))                                    
+    r=rbind(r,data.frame(item='Television',shortname='tv',code='406',category="housing"))                                                   
+    r=rbind(r,data.frame(item='Video / DVD',shortname='videoplayer',code='407',category="personal_products"))                                         
+    r=rbind(r,data.frame(item='Chairs',shortname='chair',code='408',category="housing"))                                                    
+    r=rbind(r,data.frame(item='Sofas',shortname='sofa',code='409',category="housing"))                                                      
+    r=rbind(r,data.frame(item='Tables',shortname='table',code='410',category="housing"))                                                    
+    r=rbind(r,data.frame(item='Watches',shortname='watch',code='411',category="personal_products"))                                                   
+    r=rbind(r,data.frame(item='Beds',shortname='bed',code='412',category="housing"))                                                        
+    r=rbind(r,data.frame(item='Cupboards, chest-of-drawers, boxes, wardrobes,bookcases',shortname='cupboard',code='413',category="housing"))
+    r=rbind(r,data.frame(item='Lanterns',shortname='lantern',code='414',category="housing"))                                                
+    r=rbind(r,data.frame(item='Computer',shortname='computer',code='415',category="personal_products"))                                               
+    r=rbind(r,data.frame(item='Cooking pots, Cups, other kitchen utencils',shortname='cookingpot',code='416',category="food"))           
+    r=rbind(r,data.frame(item='Mosquito net',shortname='mosquitonet',code='417',category="housing"))                                        
+    r=rbind(r,data.frame(item='Iron (Charcoal or electric)',shortname='iron',code='418',category="personal_products"))                                
+    r=rbind(r,data.frame(item='Electric/gas stove',shortname='stove_electricgas',code='419',category="housing"))
+    r=rbind(r,data.frame(item='Other stove',shortname='stove_other',code='420',category="housing"))
+    r=rbind(r,data.frame(item='Water-heater',shortname='waterheater',code='421',category="personal_products"))
+    r=rbind(r,data.frame(item='Record/cassette player, tape recorder',shortname='musicplayer',code='422',category="personal_products"))               
+    r=rbind(r,data.frame(item='Complete music system',shortname='musicsystem',code='423',category="personal_products"))                               
+    r=rbind(r,data.frame(item='Books (not school books)',shortname='bookexschool',code='424',category="personal_products"))                           
+    r=rbind(r,data.frame(item='Motor Vehicles',shortname='car',code='425',category="transport"))                                              
+    r=rbind(r,data.frame(item='Motor cycle',shortname='motorbike',code='426',category="transport"))                                           
+    r=rbind(r,data.frame(item='Bicycle',shortname='bike',code='427',category="transport"))                                                    
+    r=rbind(r,data.frame(item='Carts',shortname='cart',code='428',category="transport"))                                                      
+    r=rbind(r,data.frame(item='Animal Cart',shortname='animalcart',code='429',category="transport"))                                          
+    r=rbind(r,data.frame(item='Boat/canoe',shortname='boat',code='430',category="transport"))                                               
+    r=rbind(r,data.frame(item='Wheel barrow',shortname='wheelbarrow',code='431',category="housing"))                                        
+    r=rbind(r,data.frame(item='Livestock',shortname='livestock',code='432',category="housing"))                                             
+    r=rbind(r,data.frame(item='Poultry',shortname='poultry',code='433',category="housing"))                                                 
+    r=rbind(r,data.frame(item='Outboard engine',shortname='engine_outboard',code='434',category="housing"))                                 
+    r=rbind(r,data.frame(item='Donkeys',shortname='donkey',code='435',category="housing"))                                                  
+    r=rbind(r,data.frame(item='Fields/Land',shortname='land',code='436',category="housing"))                                                
+    r=rbind(r,data.frame(item='House(s)',shortname='house',code='437',category="housing"))                                                  
+    r=rbind(r,data.frame(item='Airconditioner/Fans',shortname='ac_fan',code='438',category="housing"))                                      
+    r=rbind(r,data.frame(item='Dish antena/decoder',shortname='dishtv',code='439',category="housing"))                                     
+    r=rbind(r,data.frame(item='Hoes',shortname='hoe',code='440',category="housing"))                                                        
+    r=rbind(r,data.frame(item='Spraying machine',shortname='spraymachine',code='441',category="housing"))                                   
+    r=rbind(r,data.frame(item='Water pumping set',shortname='waterpump',code='442',category="housing"))                                     
+    r=rbind(r,data.frame(item='Reapers',shortname='reaper',code='443',category="housing"))                                                  
+    r=rbind(r,data.frame(item='Tractor',shortname='tractor',code='444',category="housing"))                                                 
+    r=rbind(r,data.frame(item='Trailer for tractors etc.',shortname='trailer',code='445',category="housing"))                               
+    r=rbind(r,data.frame(item='Plough etc.',shortname='plough',code='446',category="housing"))                                              
+    r=rbind(r,data.frame(item='Harrow',shortname='harrow',code='447',category="housing"))                                                   
+    r=rbind(r,data.frame(item='Milking machine',shortname='milkingmachine',code='448',category="housing"))                                  
+    r=rbind(r,data.frame(item='Harvesting and threshing machine',shortname='harvester',code='449',category="housing"))                      
+    r=rbind(r,data.frame(item='Hand milling machine',shortname='handmill',code='450',category="housing"))                                   
+    r=rbind(r,data.frame(item='Coffee pulping machine',shortname='coffeepulpingmachine',code='451',category="housing"))                     
+    r=rbind(r,data.frame(item='Fertilizer distributor',shortname='fertiliserdistributor',code='452',category="housing"))                    
+    r=rbind(r,data.frame(item='Power tiller',shortname='powertiller',code='453',category="housing"))                    
+    
+    r=rbind(r,data.frame(item='Rice (paddy)',shortname='rice_paddy',code='10101',category="food"))
+    r=rbind(r,data.frame(item='Rice (husked)',shortname='rice_husked',code='10102',category="food"))
+    r=rbind(r,data.frame(item='Maize (green, cob)',shortname='maize_green',code='10103',category="food"))
+    r=rbind(r,data.frame(item='Maize (grain)',shortname='maize_grain',code='10104',category="food"))
+    r=rbind(r,data.frame(item='Maize (flour)',shortname='maize_flour',code='10105',category="food"))
+    r=rbind(r,data.frame(item='Millet and sorghum (grain)',shortname='millet_grain',code='10106',category="food"))
+    r=rbind(r,data.frame(item='Millet and sorghum (flour)',shortname='millet_flour',code='10107',category="food"))
+    r=rbind(r,data.frame(item='Wheat, barley etc.',shortname='wheat',code='10108',category="food"))
+    r=rbind(r,data.frame(item='Bread',shortname='bread',code='10109',category="food"))
+    r=rbind(r,data.frame(item='Buns, cakes and biscuts',shortname='bunscakes',code='10110',category="food"))
+    r=rbind(r,data.frame(item='Macaroini, spaghetti',shortname='pasta',code='10111',category="food"))
+    r=rbind(r,data.frame(item='Other cereal products',shortname='othercereal',code='10112',category="food"))
+    r=rbind(r,data.frame(item='Cassava fresh',shortname='cassava_fresh',code='10201',category="food"))
+    r=rbind(r,data.frame(item='Cassava dry/flour',shortname='cassava_flour',code='10202',category="food"))
+    r=rbind(r,data.frame(item='Sweet potatoes',shortname='sweet_potato',code='10203',category="food"))
+    r=rbind(r,data.frame(item='Yams/cocoyams',shortname='yam',code='10204',category="food"))
+    r=rbind(r,data.frame(item='Irish potatoes',shortname='potatoes',code='10205',category="food"))
+    r=rbind(r,data.frame(item='Cooking bananas, plantains',shortname='banana_green', code='10206',category="food"))
+    r=rbind(r,data.frame(item='Other starches',shortname='othervegstarch',code='10207',category="food"))
+    r=rbind(r,data.frame(item='Sugar',shortname='sugar',code='10301',category="food"))
+    r=rbind(r,data.frame(item='Sweets',shortname='sweet',code='10302',category="food"))
+    r=rbind(r,data.frame(item='Honey, jams etc.',shortname='honey',code='10303',category="food"))
+    r=rbind(r,data.frame(item='Peas, beans',shortname='pulses',code='10401',category="food"))
+    r=rbind(r,data.frame(item='Groundnuts in shell/shelled',shortname='peanuts',code='10501',category="food"))
+    r=rbind(r,data.frame(item='Coconuts (mature/immature)',shortname='coconut',code='10502',category="food"))
+    r=rbind(r,data.frame(item='Cashew, almonds, nuts',shortname='cashew_almonds', code='10503',category="food"))
+    r=rbind(r,data.frame(item='Seeds from nuts',shortname='nut_products', code='10504',category="food"))
+    r=rbind(r,data.frame(item='Onions, tomatoes, carrots and green pepper, other viungo',shortname='onion',code='10601',category="food"))
+    r=rbind(r,data.frame(item='Spinach, cabbage and other green vegetables',shortname='greens',code='10602',category="food"))
+    r=rbind(r,data.frame(item='Canned, dried and wild vegetables',shortname='dried_canned_veg',code='10603',category="food"))
+    r=rbind(r,data.frame(item='Ripe bananas',shortname='banana_ripe',code='10701',category="food"))
+    r=rbind(r,data.frame(item='Citrus fruits (oranges, lemon, tangarines, etc.)',shortname='citrus',code='10702',category="food"))
+    r=rbind(r,data.frame(item='Mangoes, avocadoes and other fruits',shortname='mangoes',code='10703',category="food"))
+    r=rbind(r,data.frame(item='Sugarcane',shortname='sugarcane',code='10704',category="food"))
+    r=rbind(r,data.frame(item='Goat meat',shortname='goat',code='10801',category="food"))
+    r=rbind(r,data.frame(item='Beef including minced sausage',shortname='beef', code='10802',category="food"))
+    r=rbind(r,data.frame(item='Pork including sauages and bacon',shortname='pork',code='10803',category="food"))
+    r=rbind(r,data.frame(item='Chicken and other poultry',shortname='chicken',code='10804',category="food"))
+    r=rbind(r,data.frame(item='Wild birds and insects',shortname='wild_birds',code='10805',category="food"))
+    r=rbind(r,data.frame(item='Other domestic/wild meat products',shortname='wild_meat',code='10806',category="food"))
+    r=rbind(r,data.frame(item='Eggs',shortname='eggs',code='10807',category="food"))
+    r=rbind(r,data.frame(item='Fresh fish and seafood (including dagaa)',shortname='fish_seafood',code='10808',category="food"))
+    r=rbind(r,data.frame(item='Dried/salted/canned fish and seafood',shortname='dried_canned_fish', code='10809',category="food"))
+    r=rbind(r,data.frame(item='Package fish',shortname='packaged_fish', code='10810',category="food"))
+    r=rbind(r,data.frame(item='Fresh milk',shortname='fresh_milk', code='10901',category="food"))
+    r=rbind(r,data.frame(item='Milk products (like cream, cheese, yoghurt etc)',shortname='milk_products',code='10902',category="food"))
+    r=rbind(r,data.frame(item='Canned milk/milk powder',shortname='canned_milk', code='10903',category="food"))
+    r=rbind(r,data.frame(item='Cooking oil',shortname='cooking_oil', code='11001',category="food"))
+    r=rbind(r,data.frame(item='Butter, margarine, ghee and other fat products',shortname='butter_margarine', code='11002',category="food"))
+    r=rbind(r,data.frame(item='Salt',shortname='salt',code='11003',category="food"))
+    r=rbind(r,data.frame(item='Other spices',shortname='spices', code='11004',category="food"))
+    r=rbind(r,data.frame(item='Tea dry',shortname='tea', code='11101',category="food"))
+    r=rbind(r,data.frame(item='Coffee and cocoa',shortname='coffee',code='11102',category="food"))
+    r=rbind(r,data.frame(item='Other raw materals for drinks',shortname='miscdrinkpowder',code='11103',category="food"))
+    r=rbind(r,data.frame(item='Bottled/canned soft drinks (soda, juice, water)',shortname='canned_drink',code='11104',category="food"))
+    r=rbind(r,data.frame(item='Prepared tea, coffee',shortname='readymade_tea_coffee',code='11105',category="food"))
+    r=rbind(r,data.frame(item='Bottled beer',shortname='beer',code='11106',category="food"))
+    r=rbind(r,data.frame(item='Local brews',shortname='brews',code='11107',category="food"))
+    r=rbind(r,data.frame(item='Wine and spirits',shortname='winespirits',code='11108',category="food"))
+    return(r)
+  }
   
   ########################################################################
   # The relative order of assets - and assets alone - is used to generate
   # bit masks for ownership score 
   ########################################################################
   
-  assets_order_2010 <- function(shortnames) {
+  assets_order_2010_2012 <- function(shortnames) {
     
     if (!is.character(shortnames)){
       stop("shortnames must be a character array")
@@ -446,7 +627,7 @@ lsms_normalizer<-function() {
     return(y)
   }
   
-  lsms_groups_2010<- function(){
+  lsms_groups_2010_2012<- function(){
     
     x<-NULL
     
@@ -683,10 +864,10 @@ lsms_normalizer<-function() {
   }
   
   get_lsms_secj_info_columns_2012<-function(){
-    return(c("hhid","housingstatus","houserent","roomsnum_primary","roomsnum_secondary","wall_material","roof_material",
-             "floor_material","trash_type","toilet_type","is_toilet_share","num_toilet_share","youngest_child_stool_disposal",
-             "cooking_fuel","lighting_fuel","electricity_source","rainy_season_water_source","rainy_season_water_source_time",
-             "dry_season_water_source","dry_season_water_source_time"))
+    return(c("hhid","housingstatus","houserent","roomsnum_primary","roomsnum_secondary","wallsmaterial","roofmaterial",
+             "floormaterial","trash_type","toilet","is_toilet_share","num_toilet_share","youngest_child_stool_disposal",
+             "cookingfuel","lightingfuel","electricity_source","rainyseasonwatersource","rainyseasonwatersourcetime",
+             "dryseasonwatersource","dryseasonwatersourcetime"))
   }
   
   
@@ -697,22 +878,22 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_i03",name="houserent"))
     s= rbind(s,data.frame(iesname="hh_i07_1",name="roomsnum_primary"))
     s= rbind(s,data.frame(iesname="hh_i07_2",name="roomsnum_secondary"))
-    s= rbind(s,data.frame(iesname="hh_i08",name="wall_material"))
-    s= rbind(s,data.frame(iesname="hh_i09",name="roof_material"))
-    s= rbind(s,data.frame(iesname="hh_i10",name="floor_material"))
+    s= rbind(s,data.frame(iesname="hh_i08",name="wallsmaterial"))
+    s= rbind(s,data.frame(iesname="hh_i09",name="roofmaterial"))
+    s= rbind(s,data.frame(iesname="hh_i10",name="floormaterial"))
     s= rbind(s,data.frame(iesname="hh_i11",name="trash_type"))
-    s= rbind(s,data.frame(iesname="hh_i12",name="toilet_type"))
+    s= rbind(s,data.frame(iesname="hh_i12",name="toilet"))
     s= rbind(s,data.frame(iesname="hh_i13",name="is_toilet_share"))
     s= rbind(s,data.frame(iesname="hh_i14",name="num_toilet_share"))
     
     s= rbind(s,data.frame(iesname="hh_i15",name="youngest_child_stool_disposal"))
-    s= rbind(s,data.frame(iesname="hh_i16",name="cooking_fuel"))
-    s= rbind(s,data.frame(iesname="hh_i17",name="lighting_fuel"))
+    s= rbind(s,data.frame(iesname="hh_i16",name="cookingfuel"))
+    s= rbind(s,data.frame(iesname="hh_i17",name="lightingfuel"))
     s= rbind(s,data.frame(iesname="hh_i18",name="electricity_source"))
-    s= rbind(s,data.frame(iesname="hh_i19",name="rainy_season_water_source"))
-    s= rbind(s,data.frame(iesname="hh_i20",name="rainy_season_water_source_time"))
-    s= rbind(s,data.frame(iesname="hh_i22",name="dry_season_water_source"))
-    s= rbind(s,data.frame(iesname="hh_i23",name="dry_season_water_source_time"))
+    s= rbind(s,data.frame(iesname="hh_i19",name="rainyseasonwatersource"))
+    s= rbind(s,data.frame(iesname="hh_i20",name="rainyseasonwatersourcetime"))
+    s= rbind(s,data.frame(iesname="hh_i22",name="dryseasonwatersource"))
+    s= rbind(s,data.frame(iesname="hh_i23",name="dryseasonwatersourcetime"))
     
     return(s)
   }
@@ -951,6 +1132,23 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_n01_2",name="number"))
     return(s)
   }
+  # file corresponds to secn of 2010
+  get_diary_secn_columns_lsms_2012<-function(){
+    return(c("hhid","itemcode","number","age","cost","mtm"))
+  }
+  
+  # file corresponds to secn of 2010
+  get_diary_secn_fields_mapping_lsms_2012<-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="y3_hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="itemcode",name="itemcode"))
+    s= rbind(s,data.frame(iesname="hh_m01",name="number"))
+    s= rbind(s,data.frame(iesname="hh_m02",name="age"))
+    s= rbind(s,data.frame(iesname="hh_m03",name="cost"))
+    s= rbind(s,data.frame(iesname="hh_m04",name="mtm"))
+    return(s)
+  }
+  
   
   area_code<-function(df,field_array)
   {
@@ -1611,8 +1809,9 @@ lsms_normalizer<-function() {
   
   return(new("LSMSNormalizer",food_categories_lsms_2010=food_categories_lsms_2010, 
              items_codes_2010=items_codes_2010,
-             lsms_groups_2010=lsms_groups_2010,
-             assets_order_2010=assets_order_2010,
+             lsms_groups_2010_2012=lsms_groups_2010_2012,
+             assets_order_2010_2012=assets_order_2010_2012,
+             items_codes_2012=items_codes_2012,
              get_piece_measures=get_piece_measures,
              ignored_bad_units=ignored_bad_units,
              get_group_qconv_factor=get_group_qconv_factor,
@@ -1650,7 +1849,9 @@ lsms_normalizer<-function() {
              get_lsms_seck_info_columns_2012=get_lsms_seck_info_columns_2012, 
              get_lsms_seck_fields_mapping_2012=get_lsms_seck_fields_mapping_2012, 
              get_diary_secn_columns_lsms_2010=get_diary_secn_columns_lsms_2010,
+             get_diary_secn_columns_lsms_2012=get_diary_secn_columns_lsms_2012,
              get_diary_secn_fields_mapping_lsms_2010=get_diary_secn_fields_mapping_lsms_2010,
+             get_diary_secn_fields_mapping_lsms_2012=get_diary_secn_fields_mapping_lsms_2012,
              ohs_seca_mapping_lsms_2012=ohs_seca_mapping_lsms_2012,
              ohs_info_columns_lsms_2012=ohs_info_columns_lsms_2012,
              get_ohs_secc_columns_lsms_2012=get_ohs_secc_columns_lsms_2012, 

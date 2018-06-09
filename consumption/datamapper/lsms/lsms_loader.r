@@ -442,6 +442,20 @@ lsms_loader<-function(fu,ln) {
       assetsData <-merge(assetsData, rename(ln()@items_codes_2010(),c("code"="itemcode","item"="longname")), all.x=TRUE)
       if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
       return(assetsData)
+    } 
+    if (year == 2012 ) {
+      
+      #secn of 2010 maps to secm of 2012
+      secnFileName <- paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_M.dta',sep="")
+      print(paste("read_assets_file - opening file:",secnFileName))
+      secndat<-read.dta(secnFileName,convert.factors = FALSE)
+      
+      assetsData <- fu()@get_translated_frame(dat=secndat,
+                                              names=ln()@get_diary_secn_columns_lsms_2012(),
+                                              m=ln()@get_diary_secn_fields_mapping_lsms_2012())
+      assetsData <-merge(assetsData, rename(ln()@items_codes_2012(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
+      return(assetsData)
     }
     stop("read_assets_file - year", year, "not supported")
     
@@ -449,8 +463,8 @@ lsms_loader<-function(fu,ln) {
   
   get_asset_score<-function(year, diaryData, assetsData,assetsList,ln){
     unavailable = TRUE
-    if (year == 2010 ) {
-      relevantAssets<-ln()@assets_order_2010(shortnames = assetsList)
+    if (year == 2010 || year == 2012) {
+      relevantAssets<-ln()@assets_order_2010_2012(shortnames = assetsList)
       unavailable = FALSE
     } 
     if (unavailable == TRUE) {
@@ -1039,9 +1053,11 @@ lsms_loader<-function(fu,ln) {
       
       hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
       
-      if (year == 2010){
-        groups      <- subset( ln()@lsms_groups_2010(), category == categoryName )
-      } else{
+      if (year == 2010 || year == 2012 ){
+        groups      <- subset( ln()@lsms_groups_2010_2012(), category == categoryName )
+    #  } else if ( year == 2012 ) {
+    #    groups      <- subset( ln()@lsms_groups_2012(), category == categoryName )
+      } else {
         stop(paste("item code not available for year",year))
       }
       
