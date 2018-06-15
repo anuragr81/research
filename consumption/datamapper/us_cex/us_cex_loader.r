@@ -38,8 +38,12 @@ uscex<-function(fu,un) {
       stop("paste- year :", year," not supported")
     }
      
-    
-    return(merge(dat,mappingItems,all.x=TRUE))
+    datMapped   <- merge(dat,mappingItems,all.x=TRUE)
+    uccNotFound <- unique(subset(datMapped,is.na(shortname))$ucc)
+    if (length(uccNotFound)>0){
+      stop("The following ucc codes were not recognised: ",toString(uccNotFound ) ," (Check normaliser)")
+    }
+    return(datMapped)
     
   }
   

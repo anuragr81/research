@@ -536,6 +536,7 @@ us_cex_normalize<-function () {
     r=rbind(r,data.frame(longname='ELECTRICAL SYSTEM REPAIR',shortname='electricalsystemrepair',ucc='490412'))
     r=rbind(r,data.frame(longname='MOTOR REPAIR/REPLACEMENT',shortname='motorrepair',ucc='490413'))
     r=rbind(r,data.frame(longname='VEHICLE INSURANCE',shortname='vehicleinsurance',ucc='500110'))
+    r=rbind(r,data.frame(longname='VEHICLE REGISTRATION STATE/LOCAL',shortname='vehicleregistration_statelocal',ucc='520110'))
     r=rbind(r,data.frame(longname='VEHICLE REGISTRATION STATE',shortname='vehicleregistration_state',ucc='520111'))
     r=rbind(r,data.frame(longname='VEHICLE REGISTRATION LOCAL',shortname='vehicleregistration_local',ucc='520112'))
     r=rbind(r,data.frame(longname='DRIVERS LICENSE',shortname='driverslicense',ucc='520310'))

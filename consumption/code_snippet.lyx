@@ -447,40 +447,67 @@ res<-fu()@rbind_xy(x=res,y=ll@group_expenditure(year = year, dirprefix =
 \end_layout
 
 \begin_layout Plain Layout
-setwd('c:/local_files/research/consumption/datamapper/') 
+
+\family typewriter
+\size small
+setwd('c:/local_files/research/consumption/datamapper/')
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 source('translation/frameutils.R')
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 source('us_cex/us_cex_filelist.r')
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 source('us_cex/us_cex_normalize.r')
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 source('us_cex/us_cex_loader.r')
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 uc<-uscex(fu,us_cex_normalize)
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 uc2009<-uc@load_cex_diary(2009,dirprefix = "D:/cexdata",un =us_cex_normalize
  )
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 #generate mapping from survey file as follows (if shortname has been written
  into variable m2009)
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 paste("r=rbind(r,data.frame(longname=
 \backslash
 '",m2009$longname,"
