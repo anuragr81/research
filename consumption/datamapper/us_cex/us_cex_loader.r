@@ -8,7 +8,9 @@ if (isClass("USCEXLoader")){
 }
 
 ## all exported functions are declared here
-setClass("USCEXLoader", representation(load_cex_diary="function",load_cex_ohs="function",combined_data_set="function"))
+setClass("USCEXLoader", representation(load_cex_diary="function",load_ohs_file="function",
+                                       combined_data_set="function",group_expenditure="function",
+                                       load_cex_fmli="function"))
 
 # the parameter passes any external classes that this class may need 
 
@@ -47,6 +49,24 @@ uscex<-function(fu,un) {
     
   }
   
+  
+  load_cex_fmli<-function(year,dirprefix,un){
+    # consider gifts in the expd file
+    if (year == 2004){
+
+    } else if (year == 2009){
+      dat<- (combine_subfiles(filenames=c(paste(dirprefix,"/2009/intrvw09/fmli091x.dta",sep=""),
+                                          paste(dirprefix,"/2009/intrvw09/fmli092.dta",sep=""),
+                                          paste(dirprefix,"/2009/intrvw09/fmli093.dta",sep=""),
+                                          paste(dirprefix,"/2009/intrvw09/fmli094.dta",sep=""),
+                                          paste(dirprefix,"/2009/intrvw09/fmli101.dta",sep="")),unsharedkey="newid"))
+      
+    } else {
+      stop(paste("No files for year:",year, " in ", dirprefix))
+    }
+    
+    return(dat)
+  }
   combine_subfiles<-function (filenames,unsharedkey){
     res=NULL
     # perform an rbind over the vector filenames
@@ -90,33 +110,6 @@ uscex<-function(fu,un) {
     return(res)
   }
   
-  
-  load_cex_ohs <-function(year,dirprefix) {
-    # consider gifts in the expd file
-    if (year == 2004){
-      return (combine_subfiles(filenames=c(paste(dirprefix,"2004/diary04/diary04/fmld041.dta",sep=""),
-                                           paste(dirprefix,"2004/diary04/diary04/fmld042.dta",sep=""),
-                                           paste(dirprefix,"2004/diary04/diary04/fmld043.dta",sep=""),
-                                           paste(dirprefix,"2004/diary04/diary04/fmld044.dta",sep="")),unsharedkey="newid"))
-    }
-    if (year ==2009){
-      return (combine_subfiles(filenames=c(paste(dirprefix,"2009/diary09/diary09/fmld091.dta",sep=""),
-                                           paste(dirprefix,"2009/diary09/diary09/fmld092.dta",sep=""),
-                                           paste(dirprefix,"2009/diary09/diary09/fmld093.dta",sep=""),
-                                           paste(dirprefix,"2009/diary09/diary09/fmld094.dta",sep="")),unsharedkey="newid"))
-      
-    }
-    
-    if (year ==2014){
-      return (combine_subfiles(filenames=c(paste(dirprefix,"2014/diary14/fmld141.dta",sep=""),
-                                           paste(dirprefix,"2014/diary14/fmld142.dta",sep=""),
-                                           paste(dirprefix,"2014/diary14/fmld143.dta",sep=""),
-                                           paste(dirprefix,"2014/diary14/fmld144.dta",sep="")),unsharedkey="newid"))
-      
-    }
-    stop(paste("year: ",year," not supported"))
-    
-  }
   load_diary_file <-function(year,dirprefix){
     
     if (year == 2004){
@@ -387,14 +380,14 @@ uscex<-function(fu,un) {
   }
   
   
-  group_expenditure <- function(year,dirprefix,categoryName,fu,cn){
+  group_expenditure <- function(year,dirprefix,categoryName,fu,un){
     
     
     if (year ==2009) {
       
-      hh            <- load_cex_diary(dirprefix=dirprefix,year=year, ufl=ufl) # must provide total and visible expenditure (must be already translated)
+      hh            <- load_cex_diary(dirprefix=dirprefix,year=year, un=un) # must provide total and visible expenditure (must be already translated)
       
-      groups      <- subset( cn()@cex_groups(year), category == categoryName )
+      groups      <- subset( un()@cex_groups(year), category == categoryName )
 
       # check if group columns are known
       if (!setequal(colnames(groups),c("shortname","group","category"))){
@@ -403,7 +396,7 @@ uscex<-function(fu,un) {
       
       
       #* Loading the person/family data fie
-      ohs           <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # (using fmld) must provide age (age_ref), gender(sex_ref), 
+      ohs           <-load_ohs_file(dirprefix=dirprefix,year=year) # (using fmld) must provide age (age_ref), gender(sex_ref), 
       
       if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
         stop("factors must be converted an integer")
@@ -572,5 +565,7 @@ uscex<-function(fu,un) {
   
   
   
-  return(new("USCEXLoader",load_cex_diary=load_cex_diary,load_cex_ohs=load_cex_ohs,combined_data_set=combined_data_set))
+  return(new("USCEXLoader",load_cex_diary=load_cex_diary,
+             combined_data_set=combined_data_set,load_ohs_file=load_ohs_file,
+             group_expenditure=group_expenditure,load_cex_fmli=load_cex_fmli))
 }
