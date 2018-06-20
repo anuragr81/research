@@ -7,7 +7,7 @@ if (isClass("FrameUtils")){
 ## all exported functions are declared here
 setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function",filter_categories_data="function",
                                       removeall_cols_except="function",find_nonzero_percentile="function",
-                                      fv="function",rbind_xy="function") )
+                                      fv="function",rbind_xy="function",max_non_na="function") )
 
 removeall_cols_except<-function(dat,listColumnNames){
   #c("region","district","ward","accessiblemarket","travelcost"))
@@ -35,6 +35,16 @@ fu<-function(){
     return(res)
   }
   
+  max_non_na<-function(arr){
+    isNotNA   <- !is.na(arr)
+    arrNonNA  <- arr[isNotNA]
+    if (any(isNotNA)){
+      return(max(arrNonNA))
+    } else {
+      return(NA)
+    }
+    
+  }
   
   rbind_xy<-function(x,y,tagx,tagy) {
     for ( i in setdiff(colnames(x),colnames(y)) ) { y[,c(i)]<-rep(NA,dim(y)[1]) }
@@ -181,6 +191,6 @@ fu<-function(){
              removeall_cols_except=removeall_cols_except,
              find_nonzero_percentile=find_nonzero_percentile,
              fv=fv,
-             rbind_xy=rbind_xy) );
+             rbind_xy=rbind_xy,max_non_na=max_non_na) );
   
 }
