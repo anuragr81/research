@@ -146,11 +146,18 @@ uscex<-function(fu,un) {
                                            paste(dirprefix,"2004/diary04/diary04/fmld044.dta",sep="")),unsharedkey="newid"))
     }
     if (year ==2009){
-      return (combine_subfiles(filenames=c(paste(dirprefix,"2009/diary09/diary09/fmld091.dta",sep=""),
+      fmld             <- combine_subfiles(filenames=c(paste(dirprefix,"2009/diary09/diary09/fmld091.dta",sep=""),
                                            paste(dirprefix,"2009/diary09/diary09/fmld092.dta",sep=""),
                                            paste(dirprefix,"2009/diary09/diary09/fmld093.dta",sep=""),
-                                           paste(dirprefix,"2009/diary09/diary09/fmld094.dta",sep="")),unsharedkey="newid"))
+                                           paste(dirprefix,"2009/diary09/diary09/fmld094.dta",sep="")),unsharedkey="newid")
       
+      
+      memd             <- combine_subfiles(filenames=c(paste(dirprefix,"2009/diary09/diary09/memd091.dta",sep=""),
+                                   paste(dirprefix,"2009/diary09/diary09/memd092.dta",sep=""),
+                                   paste(dirprefix,"2009/diary09/diary09/memd093.dta",sep=""),
+                                   paste(dirprefix,"2009/diary09/diary09/memd094.dta",sep="")),unsharedkey="newid")
+
+      return(fmld)
     }
     
     if (year ==2014){
@@ -215,14 +222,14 @@ uscex<-function(fu,un) {
     
     if (translateEnabled) {
       hh = fu()@get_translated_frame(dat=hhdat,
-                                     names=get_diary_info_columns(year),
-                                     m=load_diary_fields_mapping(year))
+                                     names=un()@get_diary_info_columns(year),
+                                     m=un()@load_diary_fields_mapping(year))
       print("Translated hh data")
       # optional data files
       if (!is.null(ohsdat)){
         ohs = fu()@get_translated_frame(dat=ohsdat,
-                                        names=get_ohs_info_columns(year),
-                                        m=load_ohs_mapping(year))
+                                        names=un()@ohs_info_columns_us_cex_2004(),
+                                        m=un()@load_ohs_mapping(year))
         
         print("Translated ohs data")
       }
@@ -274,72 +281,6 @@ uscex<-function(fu,un) {
   
   ### TODO: move into normalizer
   
-  ohs_info_columns_us_cex_2004<-function(){
-    return(c("hhid","age","gender","educ","race","hsize","income","horref1","urban_rural","popsize","highest_education"))
-  }
-  
-  get_ohs_info_columns<-function(year){
-    if (year ==2004 || year ==2009|| year == 2014){
-      return(ohs_info_columns_us_cex_2004());
-    }
-    stop(paste("Year : ",year," not found for us_cex"))
-  }
-  
-  ohs_mapping_us_cex_2004<-function(){
-    s = data.frame(iesname=NULL,name=NULL)
-    s= rbind(s,data.frame(iesname="newid",name="hhid"))
-    s= rbind(s,data.frame(iesname="age_ref",name="age"))
-    s= rbind(s,data.frame(iesname="sex_ref",name="gender"))
-    s= rbind(s,data.frame(iesname="educ_ref",name="highest_education"))
-    s= rbind(s,data.frame(iesname="ref_race",name="race"))
-    s= rbind(s,data.frame(iesname="horref1",name="horref1"))
-    s= rbind(s,data.frame(iesname="fam_size",name="hsize"))
-    s= rbind(s,data.frame(iesname="fincaftm",name="income"))
-    s= rbind(s,data.frame(iesname="popsize",name="popsize"))
-    s= rbind(s,data.frame(iesname="bls_urbn",name="urban_rural"))
-    return(s)
-  }
-  
-  load_ohs_mapping<-function(year){
-    if (year ==2004 || year == 2009 || year == 2014){
-      return(ohs_mapping_us_cex_2004());
-    }
-    stop(paste("Year not found:",year))
-    
-  }
-  
-  diary_info_columns_us_cex_2004<-function(){
-    return(c("hhid","cost","ucc","alloc"));
-  }
-  
-  
-  get_diary_info_columns<-function(year){
-    
-    if (year == 2004 || year == 2009|| year == 2014){
-      return(diary_info_columns_us_cex_2004())
-    }
-    stop(paste("Could not find diary info columns for year:",year))
-    
-  }
-  
-  hh_us_cex_mapping_2004<-function(){
-    s = data.frame(iesname=NULL,name=NULL)
-    s= rbind(s,data.frame(iesname="newid",name="hhid"))
-    s= rbind(s,data.frame(iesname="cost",name="cost"))
-    s= rbind(s,data.frame(iesname="alloc",name="alloc"))
-    s= rbind(s,data.frame(iesname="ucc",name="ucc"))
-    return(s)
-    
-  }
-  
-  
-  load_diary_fields_mapping<-function(year){
-    if (year == 2004 || year == 2009|| year == 2014){
-      return(hh_us_cex_mapping_2004());
-    }
-    stop(paste('No hh data found for',year));
-  }
-  
   
   
   visible_categories<-function(year){
@@ -380,6 +321,77 @@ uscex<-function(fu,un) {
   }
   
   
+  get_us_cex_total_expenditures <- function (hh,ohs) {
+    print("Calculating total expenditures")
+    totexp<-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
+
+    # obtain map (hhid->housing) with ddply
+    #tothouserent<-ddply(ohs,.(hhid),summarize,tothouserent=sum(houserent))
+    # obtain map (hhid->educexpen) with ddply 
+    #print(paste("Number of households with houserent data = ",length(unique(tothouserent$hhid))))
+    
+    #print ("Appending educexpense and houserent to total expenditure");
+    #* setting houses with education exenses= NA as zero
+    print("Education expense included in diary")
+    print(paste("Number of households with total expenditure data = ",length(unique(totexp$hhid))))
+    return(totexp)
+  }
+  
+  
+  get_us_cex_household_head_info <- function (ohs) {
+    
+    #infer household status from WAGEX
+    
+    heads<-ohs[as.integer(ohs$housing_type)==1,]
+    print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
+    if (!is.element("y2_hhid",colnames(heads)) ){
+      heads$y2_hhid<-rep(NA,dim(heads)[1])
+    }
+    
+    heads<-data.frame(hhid=heads$hhid,
+                      y2_hhid = heads$y2_hhid,
+                      highest_educ=heads$highest_educ,
+                      age=heads$age,
+                      region=heads$region,
+                      expensiveregion=heads$expensiveregion,
+                      popdensity =heads$popdensity,
+                      district=heads$district,
+                      ward=heads$ward,
+                      ea=heads$ea,
+                      personid=heads$personid,
+                      litlang=heads$litlang,
+                      isrural=heads$isrural,
+                      isurbanp=heads$isurbanp,
+                      accessiblemarket=heads$accessiblemarket,
+                      travelcost=heads$travelcost,
+                      schoolowner=heads$schoolowner,
+                      occupation = heads$occupation,
+                      occupation_rank = heads$occupation_rank,
+                      years_community=heads$years_community,
+                      housingstatus=heads$housingstatus,
+                      roomsnum=heads$roomsnum,
+                      roofmaterial=heads$roofmaterial,
+                      floormaterial=heads$floormaterial,
+                      wallsmaterial=heads$wallsmaterial,
+                      toilet=heads$toilet,
+                      cookingfuel=heads$cookingfuel,
+                      dryseasonwatersource=heads$dryseasonwatersource,
+                      
+                      stringsAsFactors=FALSE);
+    print(
+      paste("Total number of households with head_highest_education=NA : ",
+            dim(heads[is.na(heads$highest_educ),])[1]
+      )
+    );
+    #heads$highest_educ[is.na(heads$highest_educ)]<-1
+    print("Setting members with years_community=99 as their age");
+    heads$is_resident<-as.integer(as.integer(heads$years_community)==99)
+    heads$years_community<-heads$years_community+heads$is_resident*(heads$age-99);
+    
+    return(heads)
+  }
+  
+  
   group_expenditure <- function(year,dirprefix,categoryName,fu,un){
     
     
@@ -396,7 +408,20 @@ uscex<-function(fu,un) {
       
       
       #* Loading the person/family data fie
-      ohs           <-load_ohs_file(dirprefix=dirprefix,year=year) # (using fmld) must provide age (age_ref), gender(sex_ref), 
+      ohsdat           <-load_ohs_file(dirprefix=dirprefix,year=year) # (using fmld) must provide age (age_ref), gender(sex_ref), 
+      
+      if (is.null(ohsdat) || !is.element("descrip",colnames(ohsdat))){
+        stop(paste("No OHS data found in directory",dirprefix,"for year",year))
+      }
+      
+      ohs = fu()@get_translated_frame(dat=ohsdat,
+                                        names=un()@ohs_info_columns_us_cex_2004(),
+                                        m=un()@ohs_mapping_us_cex_2004())
+        
+      print("Translated ohs data")
+        
+      ohs$household_status    <- as.integer(ohs$household_status)
+      ohs$highest_educ        <- as.integer(ohs$highest_educ)
       
       if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
         stop("factors must be converted an integer")
@@ -405,7 +430,7 @@ uscex<-function(fu,un) {
       print("Ensuring duplicates do NOT exist in the diary hhdata")
       hh = unique(hh)
       
-      ignored_hhids <- get_ignored_hhids(hh,ohs,NULL);
+      ignored_hhids <- get_ignored_hhids(hh,ohs);
       
       if (!is.null(ignored_hhids)){  
         if (!is.null(hh)){

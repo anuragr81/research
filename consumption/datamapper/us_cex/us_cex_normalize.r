@@ -23,7 +23,7 @@ us_cex_normalize<-function () {
   
   
   ohs_info_columns_us_cex_2004<-function(){
-    return(c("hhid","age","gender","educ","race","hsize","income","horref1","urban_rural","popsize","highest_education"))
+    return(c("hhid","age","gender","educ","race","hsize","income","horref1","urban_rural","popsize","highest_educ","housing_type"))
   }
   
   
@@ -42,13 +42,15 @@ us_cex_normalize<-function () {
     s= rbind(s,data.frame(iesname="newid",name="hhid"))
     s= rbind(s,data.frame(iesname="age_ref",name="age"))
     s= rbind(s,data.frame(iesname="sex_ref",name="gender"))
-    s= rbind(s,data.frame(iesname="educ_ref",name="highest_education"))
+    s= rbind(s,data.frame(iesname="educ_ref",name="highest_educ"))
     s= rbind(s,data.frame(iesname="ref_race",name="race"))
     s= rbind(s,data.frame(iesname="horref1",name="horref1"))
     s= rbind(s,data.frame(iesname="fam_size",name="hsize"))
     s= rbind(s,data.frame(iesname="fincaftm",name="income"))
     s= rbind(s,data.frame(iesname="popsize",name="popsize"))
     s= rbind(s,data.frame(iesname="bls_urbn",name="urban_rural"))
+    s= rbind(s,data.frame(iesname="descrip",name="housing_type"))
+    
     return(s)
   }
   
