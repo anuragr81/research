@@ -156,8 +156,11 @@ uscex<-function(fu,un) {
                                    paste(dirprefix,"2009/diary09/diary09/memd092.dta",sep=""),
                                    paste(dirprefix,"2009/diary09/diary09/memd093.dta",sep=""),
                                    paste(dirprefix,"2009/diary09/diary09/memd094.dta",sep="")),unsharedkey="newid")
-
-      return(fmld)
+      mf               <- merge(fmld,memd[,c("newid","wagex")],all.left=TRUE)
+      hhwagex          <- ddply(mf[,c("newid","cuid","wagex")],.(cuid),summarise,maxwagex=fu()@max_non_na(wagex))
+      
+      mf               <- merge(mf,hhwagex)
+      return(mf)
     }
     
     if (year ==2014){
