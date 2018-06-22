@@ -355,6 +355,10 @@ uscex<-function(fu,un) {
             stop("sex must be recorded for the member")
           } 
           if (length(sex[sex==max(sex)])>1){
+            print(paste("age=",toString(age)))
+            print(paste("educ=",toString(educ)))
+            print(paste("wagex=",toString(wagex)))
+            print(paste("sex=",toString(sex)))
             stop("No criteria for identifying head of the family")
           }
           else {
@@ -378,9 +382,19 @@ uscex<-function(fu,un) {
     #get criteria for max selection in a new field
     #combine the data filtered 
     
-    hhwagex          <- ddply(mf[,c("newid","cuid","wagex")],.(cuid),summarise,maxwagex=fu()@max_non_na(wagex))
+    mf                     <- unique(mf)
+    mf$week                <- mf$newid-mf$cuid*10
+    print("Inferring criteria for selection of the head of household (used for personal characteristics of the family)")
+    selectionCriteria      <- ddply(mf,.(cuid,week),summarise,sf=max_age_educ_wage_sex(age_ref,educ_ref,wagex,sex_ref))
+    selectionCriteria$week <- NULL
+    selectionCriteria      <- unique(selectionCriteria )
     
-    mf               <- merge(mf,hhwagex)
+    #Extend to other variables
+    ddply(subset(merge(ohs1[,c("cuid","age_ref")],selectionCriteria), sf=="age") ,.(cuid),summarise,age_ref=fu()@max_non_na(age_ref),m=1)
+    
+    
+    #hhwagex          <- ddply(mf[,c("newid","cuid","wagex")],.(cuid),summarise,maxwagex=fu()@max_non_na(wagex))
+    #mf               <- merge(mf,hhwagex)
     
     print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
 
