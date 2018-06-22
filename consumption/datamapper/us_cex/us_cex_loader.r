@@ -157,9 +157,7 @@ uscex<-function(fu,un) {
                                    paste(dirprefix,"2009/diary09/diary09/memd093.dta",sep=""),
                                    paste(dirprefix,"2009/diary09/diary09/memd094.dta",sep="")),unsharedkey="newid")
       mf               <- merge(fmld,memd[,c("newid","wagex")],all.left=TRUE)
-      hhwagex          <- ddply(mf[,c("newid","cuid","wagex")],.(cuid),summarise,maxwagex=fu()@max_non_na(wagex))
       
-      mf               <- merge(mf,hhwagex)
       return(mf)
     }
     
@@ -340,46 +338,60 @@ uscex<-function(fu,un) {
     return(totexp)
   }
   
-  
-  get_us_cex_household_head_info <- function (ohs) {
-    
-    #infer household status from WAGEX
-    
-    heads<-ohs[as.integer(ohs$housing_type)==1,]
-    print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
-    if (!is.element("y2_hhid",colnames(heads)) ){
-      heads$y2_hhid<-rep(NA,dim(heads)[1])
+  max_age_educ_wage_sex<-function(age,educ,wagex,sex){
+    if (any(is.na(age))){
+      stop("age must be exist for all members")
     }
+    if (length(age[age==max(age)])>1){
+      # look at educ
+      notNAEduc <- educ[!is.na(educ)]
+      if (length(notNAEduc)<1 || length(notNAEduc[notNAEduc==max(notNAEduc)])>1)
+      {
+        # look at wagex
+        notNAWage<- wagex[!is.na(wagex)]
+        if(length(notNAWage)<1 || length(notNAWage[notNAWage==max(notNAWage)])>1){
+          #look at sex
+          if (any(is.na(sex))){
+            stop("sex must be recorded for the member")
+          } 
+          if (length(sex[sex==max(sex)])>1){
+            stop("No criteria for identifying head of the family")
+          }
+          else {
+            return("sex")
+          }
+        } else {
+          return("wagex")
+        }
+      } else {
+        return("educ")
+      }
+    } else {
+      return("age")
+    }
+    stop("Invalid state of the head identifiation function")
+  }
+  
+  get_us_cex_household_head_info <- function (mf) {
     
-    heads<-data.frame(hhid=heads$hhid,
-                      y2_hhid = heads$y2_hhid,
+    #infer household status from educ, age, WAGEX, sex
+    #get criteria for max selection in a new field
+    #combine the data filtered 
+    
+    hhwagex          <- ddply(mf[,c("newid","cuid","wagex")],.(cuid),summarise,maxwagex=fu()@max_non_na(wagex))
+    
+    mf               <- merge(mf,hhwagex)
+    
+    print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
+
+    heads<-data.frame(newid = heads$newid,
                       highest_educ=heads$highest_educ,
                       age=heads$age,
-                      region=heads$region,
-                      expensiveregion=heads$expensiveregion,
-                      popdensity =heads$popdensity,
-                      district=heads$district,
-                      ward=heads$ward,
-                      ea=heads$ea,
-                      personid=heads$personid,
-                      litlang=heads$litlang,
-                      isrural=heads$isrural,
-                      isurbanp=heads$isurbanp,
-                      accessiblemarket=heads$accessiblemarket,
-                      travelcost=heads$travelcost,
-                      schoolowner=heads$schoolowner,
-                      occupation = heads$occupation,
-                      occupation_rank = heads$occupation_rank,
-                      years_community=heads$years_community,
-                      housingstatus=heads$housingstatus,
-                      roomsnum=heads$roomsnum,
-                      roofmaterial=heads$roofmaterial,
-                      floormaterial=heads$floormaterial,
-                      wallsmaterial=heads$wallsmaterial,
-                      toilet=heads$toilet,
-                      cookingfuel=heads$cookingfuel,
-                      dryseasonwatersource=heads$dryseasonwatersource,
-                      
+                      ismetro=heads$smsastat,#
+                      isurban=heads$bls_urbn,#
+                      race=heads$race2,
+                      occulist = heads$occulist,
+                      #occupation_rank = heads$occupation_rank,
                       stringsAsFactors=FALSE);
     print(
       paste("Total number of households with head_highest_education=NA : ",
