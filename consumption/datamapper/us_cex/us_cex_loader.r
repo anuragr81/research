@@ -156,6 +156,8 @@ uscex<-function(fu,un) {
                                    paste(dirprefix,"2009/diary09/diary09/memd092.dta",sep=""),
                                    paste(dirprefix,"2009/diary09/diary09/memd093.dta",sep=""),
                                    paste(dirprefix,"2009/diary09/diary09/memd094.dta",sep="")),unsharedkey="newid")
+      
+      print("Merging member data (memd) with family data(fmld)")
       mf               <- merge(fmld,memd[,c("newid","wagex")],all.left=TRUE)
       
       return(mf)
@@ -381,42 +383,45 @@ uscex<-function(fu,un) {
     #infer household status from educ, age, WAGEX, sex
     #get criteria for max selection in a new field
     #combine the data filtered 
-    
+    print("Filtering out non-unique entries in data")
     mf                     <- unique(mf)
     mf$week                <- mf$newid-mf$cuid*10
+    
     print("Inferring criteria for selection of the head of household (used for personal characteristics of the family)")
     selectionCriteria      <- ddply(mf,.(cuid,week),summarise,sf=max_age_educ_wage_sex(age_ref,educ_ref,wagex,sex_ref))
     selectionCriteria$week <- NULL
     selectionCriteria      <- unique(selectionCriteria )
     
+    mf                     <- merge(mf,ddply(mf,.(cuid),summarise,week=min(week))) # choose only one week's data
+    
     #Extend to other variables
-    ddply(subset(merge(ohs1[,c("cuid","age_ref")],selectionCriteria), sf=="age") ,.(cuid),summarise,age_ref=fu()@max_non_na(age_ref),m=1)
+    agemax                 <- ddply(subset(merge(mf[,c("cuid","age_ref")],selectionCriteria), sf=="age") ,.(cuid),summarise,age_ref=fu()@max_non_na(age_ref))
+    educmax                <- ddply(subset(merge(mf[,c("cuid","educ_ref")],selectionCriteria), sf=="educ") ,.(cuid),summarise,educ_ref=fu()@max_non_na(educ_ref))
+    wagexmax               <- ddply(subset(merge(mf[,c("cuid","wagex")],selectionCriteria), sf=="wagex") ,.(cuid),summarise,wagex=fu()@max_non_na(wagex))
+    sexmax                 <- ddply(subset(merge(mf[,c("cuid","sex_ref")],selectionCriteria), sf=="sex") ,.(cuid),summarise,sex_ref=fu()@max_non_na(sex_ref))
     
+    heads                    <- NULL
+    heads                    <- rbind(rec,merge(agemax,mf))
+    heads                    <- rbind(rec,merge(educmax,mf))
+    heads                    <- rbind(rec,merge(wagexmax,mf))
+    heads                    <- rbind(rec,merge(sexmax,mf))
     
-    #hhwagex          <- ddply(mf[,c("newid","cuid","wagex")],.(cuid),summarise,maxwagex=fu()@max_non_na(wagex))
-    #mf               <- merge(mf,hhwagex)
+    if (length(setdiff(heads$cuid,mf$cuid))>0 || length(setdiff(mf$cuid,heads$cuid))>0 ){
+      stop("Not all consumer units (cuid) were accounted for in household-head identification")
+    }
     
-    print(paste("Number of houesehold heads = ",length(unique(heads$hhid))))
+    print(paste("Number of houesehold heads = ",length(unique(heads$newid))))
 
     heads<-data.frame(newid = heads$newid,
-                      highest_educ=heads$highest_educ,
-                      age=heads$age,
+                      highest_educ=heads$educ_ref,
+                      age=heads$age_ref,
                       ismetro=heads$smsastat,#
                       isurban=heads$bls_urbn,#
                       race=heads$race2,
                       occulist = heads$occulist,
                       #occupation_rank = heads$occupation_rank,
                       stringsAsFactors=FALSE);
-    print(
-      paste("Total number of households with head_highest_education=NA : ",
-            dim(heads[is.na(heads$highest_educ),])[1]
-      )
-    );
-    #heads$highest_educ[is.na(heads$highest_educ)]<-1
-    print("Setting members with years_community=99 as their age");
-    heads$is_resident<-as.integer(as.integer(heads$years_community)==99)
-    heads$years_community<-heads$years_community+heads$is_resident*(heads$age-99);
-    
+
     return(heads)
   }
   
