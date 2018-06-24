@@ -30,6 +30,7 @@ uscex<-function(fu,un) {
                                            paste(dirprefix,"/2009/diary09/diary09/expd094.dta",sep="")),unsharedkey="newid"))
       mappingItems <- un()@ucc_codes_2009()
       dat$ucc      <- as.integer(as.character(dat$ucc))
+      
     } else if (year == 2014){
       dat<- (combine_subfiles(filenames=c(paste(dirprefix,"/2014/diary14/expd141.dta",sep=""),
                                            paste(dirprefix,"/2014/diary14/expd142.dta",sep=""),
@@ -39,14 +40,16 @@ uscex<-function(fu,un) {
     } else {
       stop("paste- year :", year," not supported")
     }
-     
+    dat$hhid     <- as.integer(substr(as.character(dat$newid),1,nchar(as.character(dat$newid))-1))
+    dat$week     <- as.integer(dat$newid)-dat$hhid*10
+    
     datMapped   <- merge(dat,mappingItems,all.x=TRUE)
     uccNotFound <- unique(subset(datMapped,is.na(shortname))$ucc)
     if (length(uccNotFound)>0){
       stop("The following ucc codes were not recognised: ",toString(uccNotFound ) ," (Check normaliser)")
     }
-    return(datMapped)
     
+    return(datMapped)
   }
   
   
@@ -177,11 +180,11 @@ uscex<-function(fu,un) {
   }
   
   
-  get_ignored_hhids<-function(hh,ohs){
-    non_topcoded_hhids=as.integer(unique(hh[hh$alloc>=2,]$newid));
-    n_total_hhids <- length(unique(hh$newid))
+get_ignored_hhids<-function(hh,ohs){
+    non_topcoded_hhids=as.integer(unique(hh[hh$alloc>=2,]$hhid));
+    n_total_hhids <- length(unique(hh$hhid))
     print(paste("Percentage of topcoded households ignored:",100*length(non_topcoded_hhids)/n_total_hhids));
-    nullpopsize_hhids<-unique(as.integer(ohs[as.character(ohs$popsize)== "",]$newid))
+    nullpopsize_hhids<-unique(as.integer(ohs[as.character(ohs$popsize)== "",]$hhid))
     combined_ignored_hhids <-union(nullpopsize_hhids,non_topcoded_hhids)
     print(paste("Percentage of households with non-null popsize and not-topcoded ignored:",
                 100*length(combined_ignored_hhids)/n_total_hhids));
@@ -326,17 +329,11 @@ uscex<-function(fu,un) {
   }
   
   
-  get_us_cex_total_expenditures <- function (hh,ohs) {
+  get_us_cex_total_expenditures <- function (hh) {
+    hh                    <- merge(hh,ddply(hh,.(hhid),summarise,week=min(week))) # choose only first available week's data
+    
     print("Calculating total expenditures")
     totexp<-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
-
-    # obtain map (hhid->housing) with ddply
-    #tothouserent<-ddply(ohs,.(hhid),summarize,tothouserent=sum(houserent))
-    # obtain map (hhid->educexpen) with ddply 
-    #print(paste("Number of households with houserent data = ",length(unique(tothouserent$hhid))))
-    
-    #print ("Appending educexpense and houserent to total expenditure");
-    #* setting houses with education exenses= NA as zero
     print("Education expense included in diary")
     print(paste("Number of households with total expenditure data = ",length(unique(totexp$hhid))))
     return(totexp)
@@ -380,50 +377,63 @@ uscex<-function(fu,un) {
     stop("Invalid state of the head identifiation function")
   }
   
-  get_us_cex_household_head_info <- function (mf) {
+  get_us_cex_household_head_info <- function (ohs) {
     
     #infer household status from educ, age, WAGEX, sex
     #get criteria for max selection in a new field
     #combine the data filtered 
-    mf$week                <- mf$newid-mf$cuid*10
+    ohs$week               <- as.integer(ohs$newid)-as.integer(ohs$hhid)*10
     
     print("Inferring criteria for selection of heads of the households (used for personal characteristics of the family)")
-    selectionCriteria      <- ddply(mf,.(cuid,week),summarise,sf=max_age_educ_wage_sex(age_ref,educ_ref,wagex,sex_ref))
+    selectionCriteria      <- ddply(ohs,.(hhid,week),summarise,sf=max_age_educ_wage_sex(age,highest_educ,wagex,gender))
     selectionCriteria$week <- NULL
     selectionCriteria      <- unique(selectionCriteria )
     
-    mf                     <- merge(mf,ddply(mf,.(cuid),summarise,week=min(week))) # choose only one week's data
+    ohs                    <- merge(ohs,ddply(ohs,.(hhid),summarise,week=min(week))) # choose only one week's data
     
     print("Selecting household members with the head-criteria")
-    agemax                 <- ddply(subset(merge(mf[,c("cuid","age_ref")],selectionCriteria), sf=="age") ,.(cuid),summarise,age_ref=fu()@max_non_na(age_ref))
-    educmax                <- ddply(subset(merge(mf[,c("cuid","educ_ref")],selectionCriteria), sf=="educ") ,.(cuid),summarise,educ_ref=fu()@max_non_na(educ_ref))
-    wagexmax               <- ddply(subset(merge(mf[,c("cuid","wagex")],selectionCriteria), sf=="wagex") ,.(cuid),summarise,wagex=fu()@max_non_na(wagex))
-    sexmax                 <- ddply(subset(merge(mf[,c("cuid","sex_ref")],selectionCriteria), sf=="sex") ,.(cuid),summarise,sex_ref=fu()@max_non_na(sex_ref))
+    agemax                 <- ddply(subset(merge(ohs[,c("hhid","age")],selectionCriteria), sf=="age") ,.(hhid),summarise,age=fu()@max_non_na(age))
+    educmax                <- ddply(subset(merge(ohs[,c("hhid","highest_educ")],selectionCriteria), sf=="educ") ,.(hhid),summarise,highest_educ=fu()@max_non_na(highest_educ))
+    wagexmax               <- ddply(subset(merge(ohs[,c("hhid","wagex")],selectionCriteria), sf=="wagex") ,.(hhid),summarise,wagex=fu()@max_non_na(wagex))
+    sexmax                 <- ddply(subset(merge(ohs[,c("hhid","gender")],selectionCriteria), sf=="sex") ,.(hhid),summarise,gender=fu()@max_non_na(gender))
     
     print("Merging data from all criteria")
     heads                    <- NULL
-    heads                    <- rbind(heads,merge(agemax,mf))
-    heads                    <- rbind(heads,merge(educmax,mf))
-    heads                    <- rbind(heads,merge(wagexmax,mf))
-    heads                    <- rbind(heads,merge(sexmax,mf))
+    heads                    <- rbind(heads,merge(agemax,ohs))
+    heads                    <- rbind(heads,merge(educmax,ohs))
+    heads                    <- rbind(heads,merge(wagexmax,ohs))
+    heads                    <- rbind(heads,merge(sexmax,ohs))
     
-    if (length(setdiff(heads$cuid,mf$cuid))>0 || length(setdiff(mf$cuid,heads$cuid))>0 ){
-      stop("Not all consumer units (cuid) were accounted for in the household-head identification")
+    if (length(setdiff(heads$hhid,ohs$hhid))>0 || length(setdiff(ohs$hhid,heads$hhid))>0 ){
+      stop("Not all consumer units (hhid) were accounted for in the household-head identification")
     }
     
     print(paste("Number of houesehold heads = ",length(unique(heads$newid))))
+    print(paste("Columns of heads df:",toString(colnames(heads))))
 
     heads<-data.frame(newid = heads$newid,
-                      highest_educ=heads$educ_ref,
-                      age=heads$age_ref,
+                      hhid = heads$hhid,
+                      highest_educ=heads$highest_educ,
+                      age=heads$age,
                       ismetro=heads$smsastat,#
                       isurban=heads$bls_urbn,#
-                      race=heads$ref_race,
-                      occulist = heads$occulis1,
-                      #occupation_rank = heads$occupation_rank,
+                      race=heads$race,
+                      occupation = heads$occulis1,
                       stringsAsFactors=FALSE);
 
     return(heads)
+  }
+  
+  get_hsize<-function (ohs)
+  {
+    print ("Selecting first available week's data for hsize")
+    ohs$week                <- ohs$newid-ohs$hhid*10
+    ohs                     <- merge(ohs,ddply(ohs,.(hhid),summarise,week=min(week))) # choose only one week's data
+#    mf$consumption_factor <-as.integer(mf$age_ref<=5)*.2+as.integer(mf$age_ref>5 & mf$age_ref<=10)*.3+as.integer(mf$age_ref>10 & mf$age_ref<=15)*.4+as.integer(mf$age_ref>15 & mf$age_ref<=45)+as.integer(mf$age_ref>45 & mf$age_ref<=65)*.7+as.integer(mf$age_ref>65)*.6
+#    hsize                 <- ddply(mf[,c("hhid","age_ref","educ_ref","consumption_factor")],.(hhid),summarise,hsize=length(age_ref),consu=sum(consumption_factor))
+    # use fam_type and child_num to infer consu
+    hsize                  <- unique(ohs[,c("hhid","hsize")])
+    return(hsize)
   }
   
   
@@ -455,22 +465,21 @@ uscex<-function(fu,un) {
         
       print("Translated ohs data")
         
-      ohs$household_status    <- as.integer(ohs$household_status)
       ohs$highest_educ        <- as.integer(ohs$highest_educ)
       
-      if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
+      if (!(is.integer(ohs$highest_educ))){
         stop("factors must be converted an integer")
       }
       
       print("Ensuring duplicates do NOT exist in the diary hhdata")
       hh = unique(hh)
       
-      ignored_hhids <- get_ignored_hhids(hh,ohs);
-      
-      if (!is.null(ignored_hhids)){  
+
+      ignored_hhids <- as.character(get_ignored_hhids(hh,ohs));
+      if (!is.null(ignored_hhids)){
         if (!is.null(hh)){
           n1<-length(unique(hh$hhid))
-          hh<-hh[!is.element(as.character(hh$hhid),as.character(ignored_hhids)),]
+          hh<-hh[!is.element(as.character(hh$hhid),ignored_hhids),]
           
           n2<-length(unique(hh$hhid))
           print(paste("ignored",n1-n2,"/",n1," hhids"))
@@ -478,17 +487,17 @@ uscex<-function(fu,un) {
         if (!is.null(ohs)){
           
           n1<-length(unique(ohs$hhid))
-          ohs<-ohs[!is.element(as.character(ohs$hhid),as.character(ignored_hhids)),]
+          ohs<-ohs[!is.element(as.character(ohs$hhid),ignored_hhids),]
           
           n2<-length(unique(ohs$hhid))
           print(paste("ignored",n1-n2,"/",n1," hhids"))
         }
       }
       
-      totexp          <- get_us_cex_total_expenditures(hh=hh,ohs=ohs)
-      
+      totexp          <- get_us_cex_total_expenditures(hh=hh)
+      print("Calculated total expenditures")
       heads           <- get_us_cex_household_head_info(ohs=ohs)
-      
+      print("Calculated head info")
       hhid_personid   <- get_hsize(ohs)
       
       
@@ -512,9 +521,12 @@ uscex<-function(fu,un) {
         vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
         vis$has_high                         <- !is.na(vis$high_cost) & vis$high_cost>0
         
-        
+        if (dim(vis[is.na(vis$high_cost),])[1]>0){
         vis[is.na(vis$high_cost),]$high_cost <- 0
+        }
+        if(dim(vis[is.na(vis$low_cost),])[1]>0){
         vis[is.na(vis$low_cost),]$low_cost   <- 0
+        }
         vis$highratio                        <- with(vis,high_cost/(low_cost+high_cost)) + 1e-16
         vis$ln_tot_categ_exp                 <- log(with(vis,high_cost+low_cost+1e-16))
         vis$tot_categ_exp                    <- with(vis,high_cost+low_cost)
@@ -606,8 +618,6 @@ uscex<-function(fu,un) {
       
       ds                  <- merge(ds,heads)
       print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
-      
-      print(paste("personid range:",toString(unique(ds$personid))))
       
       if (is.element("tot_categ_exp",colnames(ds))){
         ds$w                <- with(ds,tot_categ_exp/total_expenditure)
