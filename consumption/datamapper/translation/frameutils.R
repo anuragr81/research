@@ -85,6 +85,22 @@ fu<-function(){
     return(vis)
   }
   
+  add_pivot <-function (data,idCol,pivotCol,valCol)
+  {
+    idArray <- data[,c(idCol)]
+    res <- data.frame(idCol=unique(idArray))
+    names(res) <- c(idCol)
+
+    for (pval in unique(data[,c(pivotCol)])) {
+      pres <- dplyr::filter_(data[,c(idCol,pivotCol,valCol)],paste(pivotCol,"=='",pval,"'",sep=""))[,c(idCol,valCol)]
+      names(pres) <- c(idCol,paste(pval,".",valCol,sep=""))
+
+      res <- merge(res,pres,all.x=TRUE,by=idCol)
+
+    }
+    return(res)
+
+  }
   
   count_higher_than<-function(a,m1,m2,m3,m4,m5,m6,m7,m8,m9,m10) 
   {
