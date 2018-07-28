@@ -442,9 +442,12 @@ get_ignored_hhids<-function(hh,ohs){
     
     if (year ==2009) {
       
-      hh            <- load_cex_diary(dirprefix=dirprefix,year=year, un=un) # must provide total and visible expenditure (must be already translated)
+      hh               <- load_cex_diary(dirprefix=dirprefix,year=year, un=un) # must provide total and visible expenditure (must be already translated)
+      extremeDataHhids <- unique ( dplyr::filter( merge(hh,ddply(hh,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
+      print (paste("Households with extreme data (many times the median) - purged from the diary file:",length(extremeDataHhids)))
+      hh              <- dplyr::filter(hh,!is.element(hhid,extremeDataHhids))
       
-      groups      <- subset( un()@cex_groups(year), category == categoryName )
+      groups           <- subset( un()@cex_groups(year), category == categoryName )
 
       # check if group columns are known
       if (!setequal(colnames(groups),c("shortname","group","category"))){

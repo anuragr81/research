@@ -713,8 +713,6 @@ us_cex_normalize<-function () {
       
       #expenditure
       x<-rbind(x,data.frame(category='housing', group='expenditure', shortname='employmentcounseling'))
-      x<-rbind(x,data.frame(category='housing', group='expenditure', shortname='employmentcounseling'))
-      x<-rbind(x,data.frame(category='housing', group='expenditure', shortname='employmentcounseling'))
       x<-rbind(x,data.frame(category='housing', group='asset', shortname='insurance'))
       
       x<-rbind(x,data.frame(category='food', group='low', shortname='flour'))
@@ -730,36 +728,35 @@ us_cex_normalize<-function () {
       
       x<-rbind(x,data.frame(category='food', group='low', shortname='crackers'))
       x<-rbind(x,data.frame(category='food', group='low', shortname='breadcracker'))
-      x<-rbind(x,data.frame(category='food', group='low', shortname='bakery_excake')) #?
+      x<-rbind(x,data.frame(category='food', group='low', shortname='bakery_excake')) 
       x<-rbind(x,data.frame(category='food', group='low', shortname='bakery_frozen'))
-      x<-rbind(x,data.frame(category='food', group='low', shortname='piestarts')) #?
+      x<-rbind(x,data.frame(category='food', group='low', shortname='piestarts')) 
       
-      x<-rbind(x,data.frame(category='food', group='low', shortname='groundbeef_noncanned')) #?
-      
-      x<-rbind(x,data.frame(category='food', group='low', shortname='chuckroast_noncanned')) #?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='roundroast_noncanned')) #?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='otherbeefroast_noncanned')) #?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='roundsteak_noncanned'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='groundbeef_noncanned'))
+      x<-rbind(x,data.frame(category='food', group='high', shortname='chuckroast_noncanned')) #?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='roundroast_noncanned')) #?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='otherbeefroast_noncanned')) #?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='roundsteak_noncanned'))#?
       x<-rbind(x,data.frame(category='food', group='high', shortname='sirloinsteak_noncanned'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='steak_other_noncanned'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='beef_other_noncanned'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='steak_other_noncanned'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='beef_other_noncanned'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='bacon')) #?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='porkchops'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='ham_noncanned'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='otherpork_noncanned'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='porkchops'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='ham_noncanned'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='otherpork_noncanned'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='porksausage_noncanned'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='ham_canned'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='frankfurters_noncanned'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='salami_noncanned'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='otherlunchmeat'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='lamb_noncanned'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='mutton_goat_game'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='lamb_noncanned'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='mutton_goat_game'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='chicken'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='chicken_parts'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='poultry_other'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='chicken_parts'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='poultry_other'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='seafood_canned'))#?
       x<-rbind(x,data.frame(category='food', group='high', shortname='fish_fresh'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='fish_frozen'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='fish_frozen'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='eggs'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='milk_fresh'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='cream'))#?
@@ -822,80 +819,82 @@ us_cex_normalize<-function () {
       x<-rbind(x,data.frame(category='food', group='low', shortname='prepareddesserts'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='babyfood'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='miscpreparedfoods'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='vitaminsupplements'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='lunch_atfastfood'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='lunch_atfullservice'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='vitaminsupplements'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='lunch_atfastfood'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='lunch_atfullservice'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='lunch_atvendingmachine'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='lunch_atemployer'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='lunch_atboard'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='lunch_atcatered'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='dinner_atfastfood'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='dinner_atfullservice'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='lunch_atcatered'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='dinner_atfastfood'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='dinner_atfullservice'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='dinner_atvendingmachine'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='dinner_atemployer'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='dinner_atboard'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='dinner_atcatered'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='dinner_atcatered'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='snacks_atfastfood'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='snacks_atfullservice'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='snacks_atvendmachine'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='snacks_atemployer'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='snacks_atboard'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='snacks_atcatered'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='snacks_atcatered'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='breakfast_atfastfood'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='breakfast_atfullservice'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='breakfast_atfullservice'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='breakfast_atvendingmachine'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='breakfast_atemployer'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='breakfast_atboard'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='breakfast_atcatered'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='breakfast_atcatered'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='board_atfastfood'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='board_atfullservice'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='boarda_tvendingmachine'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='board_atemployer'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='board'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='board_atcatered'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='catered_atfastfood'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='catered_atfullservice'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='catered_atvendingmachine'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='board_atcatered'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='catered_atfastfood'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='catered_atfullservice'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='catered_atvendingmachine'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='catered_atemployer'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='catered_atboard'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='catered'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='beer_athome'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='catered_atboard'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='catered'))#?
+      
+      x<-rbind(x,data.frame(category='food', group='high', shortname='beer_athome'))#?
       x<-rbind(x,data.frame(category='food', group='low', shortname='nonalcoholicbeer'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='whiskey_athome'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='wine_athome'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='alcohol_other_athome'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='beer_atfastfood'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='beer_atfullservice'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='beer_atvendingmachine'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='beer_atemployer'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='beer_atboard'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='beer_atcatered'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='wine_atfastfood'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='wine_atfullservice'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='wine_atvendingmachine'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='wine_atemployer'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='wine_atboard'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='wine_atcatered'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='alcoholex_atfastfood'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='alcoholexfullservice'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='alcoholexvendingmachine'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='alcoholex_atemployer'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='alcoholex_atboard'))#?
-      x<-rbind(x,data.frame(category='food', group='low', shortname='alcoholex_caterer'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='whiskey_athome'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='wine_athome'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='alcohol_other_athome'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='beer_atfastfood'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='beer_atfullservice'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='beer_atvendingmachine'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='beer_atemployer'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='beer_atboard'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='beer_atcatered'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='wine_atfastfood'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='wine_atfullservice'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='wine_atvendingmachine'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='wine_atemployer'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='wine_atboard'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='wine_atcatered'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='alcoholex_atfastfood'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='alcoholexfullservice'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='alcoholexvendingmachine'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='alcoholex_atemployer'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='alcoholex_atboard'))#?
+      x<-rbind(x,data.frame(category='food', group='high', shortname='alcoholex_caterer'))#?
       
-      x<-rbind(x,data.frame(category='energy', group='high', shortname='bottledortankgas'))
-      x<-rbind(x,data.frame(category='energy', group='low', shortname='coal'))
-      x<-rbind(x,data.frame(category='energy', group='high', shortname='miscfuels'))#?
+      x<-rbind(x,data.frame(category='energy', group='low', shortname='bottledortankgas'))
+      x<-rbind(x,data.frame(category='energy', group='high', shortname='coal'))
+      x<-rbind(x,data.frame(category='energy', group='low', shortname='miscfuels'))#?
       x<-rbind(x,data.frame(category='energy', group='low', shortname='electricity'))#?
-      x<-rbind(x,data.frame(category='energy', group='high', shortname='utility_naturalgas'))
+      x<-rbind(x,data.frame(category='energy', group='low', shortname='utility_naturalgas'))
       
+      # In housing, asset vs expenditure is decided based on emulation (only expenditure on emulation counts as expenditure) 
       #x<-rbind(x,data.frame(category='housing', group='expenditure', shortname='homerent'))
       #x<-rbind(x,data.frame(category='housing', group='expenditure', shortname='lodgingawayfromhome'))
       #x<-rbind(x,data.frame(category='housing', group='expenditure', shortname='housing_schoolkid'))
       #x<-rbind(x,data.frame(category='housing', group='expenditure', shortname='landrent'))
       
       x<-rbind(x,data.frame(category='housing', group='asset', shortname='capitalimprovements_notspecified'))
-      x<-rbind(x,data.frame(category='housing', group='asset', shortname='purchaseofproperty'))
+      #x<-rbind(x,data.frame(category='housing', group='asset', shortname='purchaseofproperty'))
       x<-rbind(x,data.frame(category='housing', group='asset', shortname='capitalimprovements_commodities'))
       x<-rbind(x,data.frame(category='housing', group='asset', shortname='capitalimprovements_services'))
       x<-rbind(x,data.frame(category='housing', group='asset', shortname='installedhardsurfaceflooring'))

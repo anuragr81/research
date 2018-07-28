@@ -528,8 +528,21 @@ paste("r=rbind(r,data.frame(longname=
 \end_layout
 
 \begin_layout Plain Layout
-#fmld cutenure describes the type of housing, EDUC_REF describes the education
- of the reference person, MEMD has member data
+#check mean,sd kurtosis
+\end_layout
+
+\begin_layout Plain Layout
+ddply(subset(hh,is.element(shortname,subset(un()@cex_groups(2009),category=="food
+")$shortname)),.(shortname),summarise,mean_cost=mean(cost),k_cost=kurtosis(cost),
+s_cost=skewness(cost))
+\end_layout
+
+\begin_layout Plain Layout
+#price
+\end_layout
+
+\begin_layout Plain Layout
+hist(subset(hh,shortname=="mutton_goat_game")$cost,breaks=1000)
 \end_layout
 
 \end_inset
