@@ -81,53 +81,67 @@
 \begin_body
 
 \begin_layout Section*
-Limited Variables
+Models for Rationed Demand
 \end_layout
 
 \begin_layout Standard
-A common way to model limited variables is stated in Deaton (Essays) and
- Lee-Pitt.
- Deaton's show a modified cost-function that considers 
-\begin_inset Quotes eld
+A general approach to constrained demand is provided by Deaton 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonEssaysDemand1981"
+
 \end_inset
 
-rationed
-\begin_inset Quotes erd
+ and Lee-Pitt 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LeePittMicro1986"
+
 \end_inset
 
- demand - i.e.
- the values of 
+.
+ With the quantities consumed (
 \begin_inset Formula $q_{i}$
 \end_inset
 
- that are constrained due to factors outside the consumer's choice.
- This revisits the idea of virtual price (see Rothbarth)
+) constrained due to factors outside the consumer's choice, the associated
+ cost function for the rationed (or constrained) demand is matched with
+ the unconstrained demand.
+ The modeling of demand in such a manner uses the idea of a virtual price
+ (see Rothbarth
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RothbarthVirtulPrices1941"
+
+\end_inset
+
+)
 \begin_inset space ~
 \end_inset
 
-and models the selection equation so that a consumer consumes an item only
- when the price is lower than the virtual price.
- 
+where consumer not consuming an item is due to its virtual price being higher
+ than what she can afford.
 \end_layout
 
 \begin_layout Standard
-Let 
+To summarise the approach used by Deaton, let 
 \begin_inset Formula $q_{i}$
 \end_inset
 
- be the quantity demanded of the constrained good 
+ be the quantity demanded of goods so that 
 \begin_inset Formula $i\in\{1,2,3,...\}$
 \end_inset
 
-, 
+ and 
 \begin_inset Formula $q_{0}$
 \end_inset
 
- the quantity of the rationed good that is constrained to 
+ be the quantity of the rationed good that is constrained to 
 \begin_inset Formula $z$
 \end_inset
 
- and 
+.
+ As usual, 
 \begin_inset Formula $x$
 \end_inset
 
@@ -135,16 +149,14 @@ Let
 \begin_inset Formula $x=p_{0}q_{0}+pq)$
 \end_inset
 
- .
- Further, utility 
+ and 
 \begin_inset Formula $u$
 \end_inset
 
- can be written as 
+ is the utility which can be written as 
 \begin_inset Formula $u=\nu(q_{0},q)$
 \end_inset
 
-.
  
 \begin_inset Foot
 status open
@@ -157,7 +169,7 @@ If we assume separability of utility between the rationed and non-rationed
 
 .
  However, separability assumption is unrealistic in most situations e.g.
- with unemployment being treated as a rationed consumption of leisure.
+ if unemployment is treated as a rationed consumption of leisure.
  Status utility cannot be considered separable from non-status utility in
  a similar manner.
 \end_layout
@@ -165,19 +177,33 @@ If we assume separability of utility between the rationed and non-rationed
 \end_inset
 
 .
- The rationed and unrationed problems are 
-\begin_inset Formula $max\ u=\nu(q_{0},q)\ s.t.\ p_{0}q_{0}+pq=x$
+ The unrationed and rationed problems which we intend to match are 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+max\ u=\nu(q_{0},q)\ s.t.\ p_{0}q_{0}+pq=x
+\]
+
 \end_inset
 
- and 
-\begin_inset Formula $max\ u=\nu(q_{0},q)\ s.t.\ p_{0}q_{0}+pq=x$
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+max\ u=\nu(q_{0},q)\ s.t.\ p_{0}q_{0}+pq=x,\ q_{0}=z
+\]
+
 \end_inset
 
-, 
-\begin_inset Formula $q_{0}=z$
-\end_inset
 
- whose solutions can be represented as 
+\end_layout
+
+\begin_layout Standard
+The solutions of the above equations can be represented as 
 \begin_inset Formula $g(x,p_{0},p)$
 \end_inset
 
@@ -186,7 +212,7 @@ If we assume separability of utility between the rationed and non-rationed
 \end_inset
 
  respectively.
- In the dual problem the unrationed and rationed cost-functions are 
+ In the dual problem, the unrationed and rationed cost-functions are 
 \begin_inset Formula $c(u,p_{0},p)=min_{q_{0},q}\ p_{0}q_{0}+pq=x\ s.t.\ \nu(q_{0},q)\ge u$
 \end_inset
 
@@ -200,15 +226,16 @@ If we assume separability of utility between the rationed and non-rationed
 \end_inset
 
 .
- Further, a virtual price 
+ A virtual price 
 \begin_inset Formula $p_{0}^{*}=\xi_{0}(u,z,p)$
 \end_inset
 
- is a price at which the consumer would buy the quantity 
+ can be interpreted as a price at which the consumer would buy the quantity
+ 
 \begin_inset Formula $z$
 \end_inset
 
- of the rationed good (as if the ration weren't imposed
+ of the rationed good (as if the ration weren't imposed)
 \begin_inset Foot
 status open
 
@@ -218,123 +245,666 @@ Such a price must exist due to convex preferences.
 
 \end_inset
 
-).
- Thus we have 
-\begin_inset Formula $z=\frac{\partial c(u,p_{0}^{*},p)}{\partial p_{0}}$
-\end_inset
-
 .
- These can be used to derive regression equations relating 
-\begin_inset Formula $w$
-\end_inset
-
- with the ration 
-\begin_inset Formula $z$
-\end_inset
-
- and price.
- Since we don't have prices available, we limit ourselves to the cross-sectional
- analysis.
- A more relevant approach is the selection model proposed by Heckman.
- What we take away from the analysis is that ration does appear on the RHS
- of the regression equation.
+ Thus we have
 \end_layout
 
 \begin_layout Standard
-The Heckman approach uses a selection equation to adjust the non-normal
- truncation of the control variables.
- In the demand equation, 
+\begin_inset Formula 
+\[
+z=\frac{\partial c(u,p_{0}^{*},p)}{\partial p_{0}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the above matching with a selected cost minimisation function, Deaton
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonEssaysDemand1981"
+
+\end_inset
+
+ arrives at econometric methods to measure elasticities in a time series
+ of consumption data (relating budget shares 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ with the ration 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ , prices 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ and the total expenditure 
+\begin_inset Formula $x$
+\end_inset
+
+).
+ As we limit ourselves to the cross-sectional analysis, the effects of price
+ and the cost of living index don't apply.
+ However, it must be noted that the ration 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ in Deaton's treatment appears not only through the income effect (
+\begin_inset Formula $x-p_{0}z)$
+\end_inset
+
+ but also linearly as a control variable for budget shares (subject to the
+ adding up and homogeneity constraints).
+\end_layout
+
+\begin_layout Standard
+Given that the inequalities of wealth and resources in the developing countries,
+ we focus on the selection that occurs through lack of services - following
+ the virtual price treatment above.
+ In the case of energy, for example, the consumers fulfill their energy
+ needs with electricity only if electricity is available in the region.
+ In the case of food, a consumer would chooses expensive items only if they
+ are available in the local market.
+ In a model of consumer choice, a buyer's inability to purchase higher-priced
+ items could simply be because of severe inequalities in income in the populatio
+n (a constraint that is relevant in addition to the budget constraint -
+ 
+\begin_inset Formula $p\cdot q=x$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Using two equation approach outlined by Cox-Wohlgenant 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CoxWohlgenant1986"
+
+\end_inset
+
+ (who study the price-quality relations using regional mean prices as the
+ dependent variable), Dong et al.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DongShonkwierCappsQualityQuantity"
+
+\end_inset
+
+ use the following demand equations with unit value 
+\begin_inset Formula $V_{i}$
+\end_inset
+
+ as a selection variable as well as the control variable in the main regression:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+q_{i} & =\alpha_{0}+\alpha_{1}ln\ V_{i}+\alpha_{2}'W_{i}+\mu_{1i}\nonumber \\
+ & if\!\ \alpha_{0}+\alpha_{1}ln\ V_{i}+\alpha_{2}'W_{i}+\mu_{1i}>0\label{eq:dong_main}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+q_{i}=0\\
+if\!\ \alpha_{0}+\alpha_{1}ln\ V_{i}+\alpha_{2}'W_{i}+\mu_{1i} & \le0
+\end{alignat*}
+
+\end_inset
+
+and
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+ln\ V_{i} & =\beta_{0}+\beta_{1}'Z_{i}+\mu_{2i}\nonumber \\
+if\  & \alpha_{0}+\alpha_{1}ln\ V_{i}+\alpha_{2}'W_{i}+\mu_{1i}>0\label{eq:dong_selection}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+ is the quantity consumed, 
+\begin_inset Formula $V_{i}$
+\end_inset
+
+ is the unit value
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For group 
+\begin_inset Formula $G$
+\end_inset
+
+ of commodities (e.g.
+ {beef, mutton, fish} in the meat group), the unit value is calculated as
+ 
+\begin_inset Formula $V_{G}=\frac{p\cdot q}{\sum_{j\in G}q_{j}}$
+\end_inset
+
+(see Dong et al.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DongShonkwierCappsQualityQuantity"
+
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Formula $W_{i},Z_{i}$
+\end_inset
+
+ are the household variables so that 
+\begin_inset Formula $W_{i}$
+\end_inset
+
+ includes the household income.
+ For the consumers who don't have access to electricity, the model would
+ let second equation govern the zero consumption on electricity.
+ We use the other respective measures of status for every category (electricity
+ availability for energy, available cars for transport etc.
+ - see Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:statusvariables"
+
+\end_inset
+
+) in the second equation for the cross-sectional analyses.
+ 
+\end_layout
+
+\begin_layout Standard
+As it is possible to use MLE for the two-equation model above (Equations
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dong_main"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dong_selection"
+
+\end_inset
+
+) and since we have a case of selection, we use the Heckman model for our
+ cross section analysis.
+ The selection equation in the Heckman model accounts for non-normal limiting
+ of the control variables in the regression (as the OLS would be invalid
+ when the dependent variable is limited) .
+ Considering the case of electricity - which is available predominantly
+ in the urban areas in Tanzania - we treat the access to electricity as
+ the status measure as well as the selection variable (households with no
+ electricity are considered to not have been 
+\begin_inset Quotes eld
+\end_inset
+
+selected
+\begin_inset Quotes erd
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Based on the arguments for rationed demand, we must have the electricity
+ consumption as a control variable for us to consider the effect of not
+ having electricity in the estimation of the cross-sectional demand equation
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+w_{i} & =\beta_{1}log(x)+\beta_{2}W_{i}+u_{i}\ if\ s_{i}>0
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $W_{i}$
+\end_inset
+
+ is a vector of household characteristics and 
+\begin_inset Formula $x$
+\end_inset
+
+ is the total expenditure.
+ The response to price changes being an essential part of demand analysis,
+ the demand equation in the time-series i.e.
+ 
 \begin_inset Formula $w_{i}=ln(x_{i})+\sum_{j}P_{j}+ln(x_{i}/P)$
 \end_inset
 
-, the measure 
+ involves both the cost-of-living index and prices.
+ However, both the effects disappear in the cross-section.
+ Further, if the two-state budgeting assumption apply, then the rationed
+ quantity 
+\begin_inset Formula $z$
+\end_inset
+
+ (e.g.
+ with electricity being rationed to zero) is independent of group (energy)
+ budget share 
+\begin_inset Formula $w$
+\end_inset
+
+ even if the rations were not 
+\begin_inset Quotes eld
+\end_inset
+
+imposed
+\begin_inset Quotes erd
+\end_inset
+
+ on the consumer.
+ A direct result of this independence is that 
+\begin_inset Formula $z$
+\end_inset
+
+ cannot be collinear with 
+\begin_inset Formula $w$
+\end_inset
+
+ in the equation.
+\end_layout
+
+\begin_layout Standard
+Even though we use a model similar to the unit value as derived by Dong-Shonkwil
+er, we must clarify that it's not quality that we intend to use for the
+ selection criteria.
+ The motivation for selection is the restriction on demand because of issues
+ related to supply.
+ In fact,  the quality issues are already accounted in the budget share
+ 
 \begin_inset Formula $w_{i}$
 \end_inset
 
- already accounts for quality (see Nelson's clarification and comment on
- the methods adopted by Deaton and Cox-Wohlgenant) i.e.
- an item with a higher price but consumed in the same quantity would exhibit
- a higher 
+ - since an item with a higher price but consumed in the same quantity would
+ exhibit a higher 
 \begin_inset Formula $w_{i}$
 \end_inset
 
-.
- To address the quality concerns, we need a two equation model so that the
- status parameters are introduced in the estimation.
- This is assisted with a long literature on quality (since Houthakker).
- The limited variables enter into the equation not through 
+ (see the clarification by Nelson 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+ and the comment from Dong et al.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DongShonkwierCappsQualityQuantity"
+
+\end_inset
+
+ on the methods adopted by Deaton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation"
+
+\end_inset
+
+ and Cox-Wohlgenant
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CoxWohlgenant1986"
+
+\end_inset
+
+).
+ In the econometric method adopted, the variables that measure the restriction
+ of demand (as a factor of status) enter into the demand equation not through
+ 
 \begin_inset Formula $w$
 \end_inset
 
  (which is always positive as long as there is some consumption in the category)
- but through quality or status measures - as there would be many consumers
- who completely forgo a certain parameter (e.g.
- meat in food, car in transport etc.).
+ but through measures of availability - as there would be many consumers
+ who completely forgo a certain parameter because of supply issue (e.g.
+ meat in food, car in transport, electricity in energy etc.).
 \end_layout
 
 \begin_layout Standard
-Dong et al.
- use a selection approach (hence a two-equation model) with the unit value
- as a control variable.
- They use the the Cox and Wohlegant (which explores RDMP as the dependent
- variable to study the price-quality relations).
+We use the Heckmann selection in STATA to achieve the solution to the simultaneo
+us equations.
+ The selection equation includes the factors that make restrict the dependent
+ variable (consumption of the restricted commodity in our case).
+ In the case of energy, we use the consumption on electricity (
+\begin_inset Formula $w_{electricity}$
+\end_inset
+
+ for energy etc.).
+ The consumption on electricity could be missing because of several reasons
+ (e.g.
+ region, income).
+ A list of variables whose lack we inspect is provided in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:statusvariables"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $x_{i}=\alpha_{0}+\alpha_{1}ln\ V_{i}+\alpha_{2}'z_{i}+\mu_{1i}$
-\end_inset
-
- if 
-\begin_inset Formula $\alpha_{0}+\alpha_{1}ln\ V_{i}+\alpha_{2}'z_{i}+\mu_{1i}>0$
-\end_inset
-
- else 
-\begin_inset Formula $x_{i}=0$
-\end_inset
-
- and
+As argued earlier, the availability of a certain item would provide a snob
+ advantage to the consumer if others are not expected to achieve the same
+ status in the long term.
+ Thus asset ownership is the strongly tied with snob status whereas a bandwagon
+ status is tied with items that are availalble in the near run.
+ Availability of an item can contribute to both snob and bandwagon factors.
+ It's the long-term expectation of the relative possession that differentiates
+ snob from bandwagon items.
+ Therefore a snob and bandwagon classification does not make sense without
+ time series observation of consumption.
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $ln\ V_{i}=\beta_{0}+\beta_{1}'Z_{i}+\mu_{2i}$
-\end_inset
-
- if 
-\begin_inset Formula $\alpha_{0}+\alpha_{1}ln\ V_{i}+\alpha_{2}'z_{i}+\mu_{1i}>0$
-\end_inset
-
-
+In a time series model, the use of assets and restricted demand models can
+ give us an idea of how a consumer balances her status needs between assets
+ (snob) and bandwagon items (that are achieved through high-priced purchases).
+ This is based on the idea that those who have assets in the category can
+ compromise on quality.
+ We would initially assume the independence of categories - to see if consumers
+ tend to switch to higher quality when they cannot achieve assets.
+ Later, this assumption would also be relieved.
 \end_layout
 
-\begin_layout Standard
-Our goal is to put status measure as the second equation in a similar manner.
- We use the Heckmann selection in STATA to achieve the solution to simultaneous
- equations (notice ours is a not a a case of censoring of the quality variable).
- The choice of a selection equation depends on the limited variable - which
- in our case is the quality.
- Looking at energy for example, the quality variable can be modeled as a
- dummy variable for electricity.
- Most people won't have any electricity.
- The STATA version of Heckman selection (heckman command) deals with the
- dependent variable being non-normal i.e.
- truncated or limited so that the rule of truncation is known and thus the
- effect of truncation on estimation can be measured.
- Thus the has_electricity variable would be the dependent variable in both
- the selection and the regression equation.
- The consumption on electricity may be missing because of neighbourhood
- - just the way the meat consumption could be missing because of being in
- a low income band and/or region (which is a proxy of availability).
+\begin_layout Section*
+Categories 
 \end_layout
 
 \begin_layout Standard
 For categories other than energy, quality of food, number of rooms, a dummy
  representing possession of a car etc.
  can represent the selection.
+ For energy, our two equation model is
 \end_layout
 
 \begin_layout Standard
-We need to consider housing, personal care, food, energy, transportation,
- social functions
+\begin_inset Formula $w_{e}=log(x)+has\_electricity$
+\end_inset
+
+ (this is the variable that ought to be truncated / unobserved)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $has\_electricity=log(x)+region$
+\end_inset
+
+ ?
+\end_layout
+
+\begin_layout Standard
+If depvar_s is used in the heckman selection, we must encode the variable
+ as 0/1 - Thus - heckman w ln_tot_exp, select( has_electricity = region
+ ) - completely OK.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+setwd("C:/local_files/research/consumption/datamapper")
+\end_layout
+
+\begin_layout Plain Layout
+source('lsms/lsms_normalizer.r')
+\end_layout
+
+\begin_layout Plain Layout
+source('lsms/lsms_loader.r')
+\end_layout
+
+\begin_layout Plain Layout
+source('translation/frameutils.R')
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+ll=lsms_loader(fu=fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+g<-ll@group_expenditure(year = 2010, dirprefix = "../",categoryName = "energy",fu
+ = fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+g2<-ll@group_expenditure(year = 2010, dirprefix = "../",categoryName = "energy",fu
+ = fu, ln=lsms_normalizer, returnBeforeGrouping = TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+allrds<-unique(g2[c("region","district")])
+\end_layout
+
+\begin_layout Plain Layout
+shortNamesNonAsset <- subset(lsms_normalizer()@items_codes_2010(), !( as.integer(
+as.character(code))>=400 & as.integer(as.character(code))<=500) )$shortname
+\end_layout
+
+\begin_layout Plain Layout
+allrdsShortNames <- merge(allrds,data.frame("shortname"=shortNamesNonAsset))
+\end_layout
+
+\begin_layout Plain Layout
+regExpenses <- ddply(g, .(region,district,shortname), summarise,n=mean(cost))
+\end_layout
+
+\begin_layout Plain Layout
+f<-merge(allrdsShortNames,regExpenses,by=c("region","district","shortname"),all.x
+=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+##
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+hh<-ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+hhe<-subset(hh,shortname=="electricity")
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+ge<-merge(g,hhe,all.x=TRUE,by="hhid")
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+ge$has_electricity<-ge$cost>0
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+ge[is.na(ge$has_electricity),]$has_electricity<-0
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+ge$region_district<-(ge$region*100+ge$district)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+write.dta(ge,'c:/temp/ge.dta')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have a bit of a problem here.
+\end_layout
+
+\begin_layout Standard
+For housing,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w_{h}=log(x)+q_{h}$
+\end_inset
+
+ (where 
+\begin_inset Formula $q_{h}=D(number\ of\ rooms+building\_material)$
+\end_inset
+
+) (can we use a ranking order?)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $q_{h}=log(x)+region+occupation$
+\end_inset
+
+ (quality limited by occupation?)
+\end_layout
+
+\begin_layout Standard
+For personal care,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w_{pc}=log(x)+high\_priced\_and\_elec\_items$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $high\_priced\_and\_elec\_items=log(x)+educ+occupation+has\_electricity$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For transport,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w_{t}=log(x)+has\_car$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $has\_car=log(x)+occupation+educ+region$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For social functions,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w_{sc}=log(x)+marriage$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $marriage=log(x)+education+occupation+region+has\_electricity$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To interpret the quality measures, the quality elasticities would need to
+ be used.
+ 
+\end_layout
+
+\begin_layout Standard
+To support our theory of substitution between assets and invidious consumption
+ (snob and bandwagon types).
 \end_layout
 
 \begin_layout Standard
@@ -501,6 +1071,12 @@ number of rooms
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:statusvariables"
+
+\end_inset
+
 Variables that indicate status within every category
 \end_layout
 
@@ -515,14 +1091,6 @@ Variables that indicate status within every category
 \end_layout
 
 \begin_layout Standard
-The virtual price may be the control variable of the selection equation.
-\end_layout
-
-\begin_layout Standard
-If used in the second-stage of the two budgeting model, our selection.
-\end_layout
-
-\begin_layout Standard
 The consistent tendency to choose status consumption is effectively measured
  by whether those who give up on higher needs still look for status amidst
  what they can afford.
@@ -533,6 +1101,17 @@ The consistent tendency to choose status consumption is effectively measured
  When comparing developed and developing countries, we can compare this
  substitution after considering that the consumer's basket of commodities
  are entirely different between the developed and developing countries.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "C:/local_files/research/africa_attitudes"
+options "ieeetr"
+
+\end_inset
+
+
 \end_layout
 
 \end_body

@@ -13,7 +13,8 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       aggregate_local_prices="function",add_localmedian_price_columns="function",
                                       food_expenditure_data="function",read_assets_file="function",
                                       group_expenditure="function",get_asset_score="function",
-                                      item_usage="function", item_ownership="function"))
+                                      item_usage="function", item_ownership="function",
+                                      check_diary_nullity="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -1044,8 +1045,12 @@ lsms_loader<-function(fu,ln) {
     
   }
   ####
-  group_expenditure <- function(year,dirprefix,categoryName,fu,ln){
-    
+  group_expenditure <- function(year,dirprefix,fu,ln,categoryName,returnBeforeGrouping){
+    if (missing(returnBeforeGrouping) && returnBeforeGrouping==TRUE){
+      returnBeforeGrouping <- FALSE
+    } else {
+      returnBeforeGrouping <- TRUE
+    }
     
     if (year == 2010 || year == 2012) {
       
@@ -1053,21 +1058,9 @@ lsms_loader<-function(fu,ln) {
       
       hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
       
-      if (year == 2010 || year == 2012 ){
-        groups      <- subset( ln()@lsms_groups_2010_2012(), category == categoryName )
-    #  } else if ( year == 2012 ) {
-    #    groups      <- subset( ln()@lsms_groups_2012(), category == categoryName )
-      } else {
-        stop(paste("item code not available for year",year))
-      }
-      
-      # check if group columns are known
-      if (!setequal(colnames(groups),c("shortname","group","category"))){
-        stop("groups must strictly have shortname, group, category columns")
-      } 
       
       
-      #* Loading the person/family data fie
+      #* Loading the person/family data file
       ohs           <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # (using fmld) must provide age (age_ref), gender(sex_ref), 
       
       if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
@@ -1103,112 +1096,131 @@ lsms_loader<-function(fu,ln) {
       
       hhid_personid   <- get_hsize(ohs)
       
-      
-      if (setequal(groups$group,c("high","low"))){
-        
-        ##Note: cost would not be avalable from the diary if the type of commodity in the group is an asset.
-        # if we can get the asset costs populated, then the data-frame can be rbind-ed to vis data-frame.
-        #
-        
-        vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
-        noGroupCostHhids                     <- setdiff(unique(hh$hhid),unique(vis$hhid))
-        
-        noGroupCostHigh                      <- data.frame(hhid=noGroupCostHhids,group="high",group_cost=rep(0,length(noGroupCostHhids)))
-        noGroupCostLow                       <- data.frame(hhid=noGroupCostHhids,group="low" ,group_cost=rep(0,length(noGroupCostHhids)))
-        
-        vis                                  <- rbind(vis,noGroupCostHigh)
-        vis                                  <- rbind(vis,noGroupCostLow)
+      if (!returnBeforeGrouping){
         
         
-        vis                                  <- subset(vis,!is.na(group_cost))
-        vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
-        vis$has_high                         <- !is.na(vis$high_cost) & vis$high_cost>0
         
-        
-        vis[is.na(vis$high_cost),]$high_cost <- 0
-        vis[is.na(vis$low_cost),]$low_cost   <- 0
-        vis$highratio                        <- with(vis,high_cost/(low_cost+high_cost)) + 1e-16
-        vis$ln_tot_categ_exp                 <- log(with(vis,high_cost+low_cost+1e-16))
-        vis$tot_categ_exp                    <- with(vis,high_cost+low_cost)
-        
-        vis$group                            <- NULL
-        vis$low_cost                         <- NULL
-        vis$high_cost                        <- NULL
-        
-        
-      } else if (setequal(groups$group,c("asset","expenditure"))){
-        
-        
-        assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
-        if (dim(subset(assets,is.na(shortname) ))[1]) {
-          stop(paste("Missing itemcode->shortname mapping for year",year))
+        if (year == 2010 || year == 2012 ){
+          groups      <- subset( ln()@lsms_groups_2010_2012(), category == categoryName )
+          #  } else if ( year == 2012 ) {
+          #    groups      <- subset( ln()@lsms_groups_2012(), category == categoryName )
+        } else {
+          stop(paste("item code not available for year",year))
         }
-        expenditureData   <- merge(hh,groups)
-        print(paste("Items relevant for expenditure:", toString(unique(as.character(expenditureData$shortname)))))
-        
-        print("Running ddply on groups and hhid")
-        vis               <- ddply(expenditureData ,.(hhid,group),summarise,group_cost = sum(cost))
-        no_vis_hhid       <- setdiff(unique(hh$hhid),unique(vis$hhid))
-        print("Assigning zero cost to hhids with missing expenditure")
-        no_vis            <- data.frame(hhid=no_vis_hhid,group="expenditure",group_cost=rep(0,length(no_vis_hhid)))
-        vis               <- rbind(vis,no_vis)
-        print("Filtering NA expenditure out")
-        
-        vis               <- rename(subset(vis,group=="expenditure"),c("group_cost"="tot_categ_exp"))
-        vis               <- subset(vis, !is.na(tot_categ_exp))
-        relevantAssets    <- as.character(subset(groups, group== "asset")$shortname)
-        
-        ady               <- get_asset_score(diaryData = hh,assetsData = assets,assetsList = relevantAssets , 
-                                             ln=ln, year = year);
-        vis$group         <- NULL
-        vis               <- merge(vis,ady,by=c("hhid"))
-        
-        vis$pe  <- with(vis,tot_categ_exp/log(asset_score+1e-7))
+        # check if group columns are known
+        if (!setequal(colnames(groups),c("shortname","group","category"))){
+          stop("groups must strictly have shortname, group, category columns")
+        } 
         
         
-      } else if (setequal(groups$group,c("assetsonly"))) {
-        
-        print("Only assets to be used as dependent variable")
-        assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
-        if (dim(subset(assets,is.na(shortname) ))[1]) {
-          stop(paste("Missing itemcode->shortname mapping for year",year))
+        if (setequal(groups$group,c("high","low"))){
+          
+          ##Note: cost would not be avalable from the diary if the type of commodity in the group is an asset.
+          # if we can get the asset costs populated, then the data-frame can be rbind-ed to vis data-frame.
+          #
+          
+          vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
+          noGroupCostHhids                     <- setdiff(unique(hh$hhid),unique(vis$hhid))
+          
+          noGroupCostHigh                      <- data.frame(hhid=noGroupCostHhids,group="high",group_cost=rep(0,length(noGroupCostHhids)))
+          noGroupCostLow                       <- data.frame(hhid=noGroupCostHhids,group="low" ,group_cost=rep(0,length(noGroupCostHhids)))
+          
+          vis                                  <- rbind(vis,noGroupCostHigh)
+          vis                                  <- rbind(vis,noGroupCostLow)
+          
+          
+          vis                                  <- subset(vis,!is.na(group_cost))
+          vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
+          vis$has_high                         <- !is.na(vis$high_cost) & vis$high_cost>0
+          
+          
+          vis[is.na(vis$high_cost),]$high_cost <- 0
+          vis[is.na(vis$low_cost),]$low_cost   <- 0
+          vis$highratio                        <- with(vis,high_cost/(low_cost+high_cost)) + 1e-16
+          vis$ln_tot_categ_exp                 <- log(with(vis,high_cost+low_cost+1e-16))
+          vis$tot_categ_exp                    <- with(vis,high_cost+low_cost)
+          
+          vis$group                            <- NULL
+          vis$low_cost                         <- NULL
+          vis$high_cost                        <- NULL
+          
+          
+        } else if (setequal(groups$group,c("asset","expenditure"))){
+          
+          
+          assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
+          if (dim(subset(assets,is.na(shortname) ))[1]) {
+            stop(paste("Missing itemcode->shortname mapping for year",year))
+          }
+          expenditureData   <- merge(hh,groups)
+          print(paste("Items relevant for expenditure:", toString(unique(as.character(expenditureData$shortname)))))
+          
+          print("Running ddply on groups and hhid")
+          vis               <- ddply(expenditureData ,.(hhid,group),summarise,group_cost = sum(cost))
+          no_vis_hhid       <- setdiff(unique(hh$hhid),unique(vis$hhid))
+          print("Assigning zero cost to hhids with missing expenditure")
+          no_vis            <- data.frame(hhid=no_vis_hhid,group="expenditure",group_cost=rep(0,length(no_vis_hhid)))
+          vis               <- rbind(vis,no_vis)
+          print("Filtering NA expenditure out")
+          
+          vis               <- rename(subset(vis,group=="expenditure"),c("group_cost"="tot_categ_exp"))
+          vis               <- subset(vis, !is.na(tot_categ_exp))
+          relevantAssets    <- as.character(subset(groups, group== "asset")$shortname)
+          
+          ady               <- get_asset_score(diaryData = hh,assetsData = assets,assetsList = relevantAssets , 
+                                               ln=ln, year = year);
+          vis$group         <- NULL
+          vis               <- merge(vis,ady,by=c("hhid"))
+          
+          vis$pe  <- with(vis,tot_categ_exp/log(asset_score+1e-7))
+          
+          
+        } else if (setequal(groups$group,c("assetsonly"))) {
+          
+          print("Only assets to be used as dependent variable")
+          assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
+          if (dim(subset(assets,is.na(shortname) ))[1]) {
+            stop(paste("Missing itemcode->shortname mapping for year",year))
+          }
+          
+          vis               <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost))
+          no_vis_hhid       <- setdiff(unique(hh$hhid),unique(vis$hhid))
+          no_vis            <- data.frame(hhid=no_vis_hhid,group="assetsonly",group_cost=rep(0,length(no_vis_hhid)))
+          vis               <- rbind(vis,no_vis)
+          
+          relevantAssets    <- as.character(subset(groups, group== "assetsonly")$shortname)
+          
+          print(paste("relevantAssets=",toString(relevantAssets)))
+          
+          ady               <- get_asset_score(diaryData = hh,assetsData = assets,assetsList = relevantAssets , 
+                                               ln=ln, year = year);
+          vis$group         <- NULL
+          vis               <- merge(vis,ady,by=c("hhid"),all.y=TRUE)
+          if (dim (vis[is.na(vis$asset_score),])[1]>0){
+            vis[is.na(vis$asset_score),]$asset_score<-0
+          }
+          if (dim (vis[is.na(vis$group_cost),])[1]>0){
+            vis[is.na(vis$group_cost),]$group_cost<-0
+          }
+          
+        } else if (setequal(groups$group,c("expenditureonly") )){
+          
+          print("Only expenditure to be used as the dependent variable");
+          relevantItems    <- as.character(subset(groups, group== "expenditureonly")$shortname)
+          print(paste("Expenditures being added up for items:",toString(relevantItems)))
+          
+          vis              <- ddply(subset( merge(hh,groups), is.element(shortname, relevantItems) ),.(hhid),summarize,group_cost=sum(cost))
+          no_vis_hhid      <- setdiff(unique(hh$hhid),unique(vis$hhid))
+          no_vis           <- data.frame(hhid=no_vis_hhid,group_cost=rep(0,length(no_vis_hhid)))
+          vis              <- rbind(vis,no_vis)
+          
+        } else {
+          stop( paste ( "Unknown row elements in groups frame for year", year))
         }
-        
-        vis               <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost))
-        no_vis_hhid       <- setdiff(unique(hh$hhid),unique(vis$hhid))
-        no_vis            <- data.frame(hhid=no_vis_hhid,group="assetsonly",group_cost=rep(0,length(no_vis_hhid)))
-        vis               <- rbind(vis,no_vis)
-        
-        relevantAssets    <- as.character(subset(groups, group== "assetsonly")$shortname)
-        
-        print(paste("relevantAssets=",toString(relevantAssets)))
-        
-        ady               <- get_asset_score(diaryData = hh,assetsData = assets,assetsList = relevantAssets , 
-                                             ln=ln, year = year);
-        vis$group         <- NULL
-        vis               <- merge(vis,ady,by=c("hhid"),all.y=TRUE)
-        if (dim (vis[is.na(vis$asset_score),])[1]>0){
-          vis[is.na(vis$asset_score),]$asset_score<-0
-        }
-        if (dim (vis[is.na(vis$group_cost),])[1]>0){
-          vis[is.na(vis$group_cost),]$group_cost<-0
-        }
-        
-      } else if (setequal(groups$group,c("expenditureonly") )){
-        
-        print("Only expenditure to be used as the dependent variable");
-        relevantItems    <- as.character(subset(groups, group== "expenditureonly")$shortname)
-        print(paste("Expenditures being added up for items:",toString(relevantItems)))
-        
-        vis              <- ddply(subset( merge(hh,groups), is.element(shortname, relevantItems) ),.(hhid),summarize,group_cost=sum(cost))
-        no_vis_hhid      <- setdiff(unique(hh$hhid),unique(vis$hhid))
-        no_vis           <- data.frame(hhid=no_vis_hhid,group_cost=rep(0,length(no_vis_hhid)))
-        vis              <- rbind(vis,no_vis)
         
       } else {
-        stop( paste ( "Unknown row elements in groups frame for year", year))
+        vis <- hh
       }
-      
       ds                  <- merge(totexp,vis);
       
       print(paste("Merging hsize",dim(ds)[1]))
@@ -1233,6 +1245,40 @@ lsms_loader<-function(fu,ln) {
       return(ds)
     }
     stop(paste("merge not available for year:",year))
+  }
+  
+  
+  check_diary_nullity<-function(criteria, year,dirprefix,fu,ln){
+    
+    
+    if (year == 2010){
+      itemsfunc <- ln()@items_codes_2010
+      bounds <- c(400,500)
+    } else if (year == 2012){
+      itemsfunc <- ln()@items_codes_2012
+      bounds<- c(400,500)
+    } else {
+      stop(paste("Year",year,"not supported"))
+    }
+    if (missing(criteria)){
+      criteria <- c("region","district")
+    }
+    g2<-group_expenditure(year = year, dirprefix = dirprefix,fu = fu, ln=lsms_normalizer, returnBeforeGrouping = TRUE)
+    
+    allrds<-unique(subset(g2,select=criteria))
+    
+    shortNamesNonAsset <- subset(itemsfunc(), !( as.integer(as.character(code))>=bounds[1] & as.integer(as.character(code))<bounds[2]) )$shortname
+    
+    allrdsShortNames <- merge(allrds,data.frame("shortname"=shortNamesNonAsset))
+    mergeCriteriaArray <- c(criteria,"shortname")
+    print(paste("Merge criteria - ",toString(mergeCriteriaArray)))
+    print("Obtaining costs for criteria")
+    regExpenses <- ddply(g2, mergeCriteriaArray, summarise,n=mean(cost))
+    print("Merging expenditure with criteria")
+    #return(allrdsShortNames)
+    f<-merge(allrdsShortNames,regExpenses,by=mergeCriteriaArray,all.x=TRUE)
+    print("Merged")
+    return(f)
   }
   
   
@@ -1381,6 +1427,7 @@ lsms_loader<-function(fu,ln) {
              get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices,
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
              read_assets_file=read_assets_file, group_expenditure=group_expenditure,
-             get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership ))
+             get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership,
+             check_diary_nullity=check_diary_nullity))
   
 }
