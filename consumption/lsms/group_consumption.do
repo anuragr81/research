@@ -104,3 +104,24 @@ esttab using c:/temp/group_expenditure_results_2ndstage.tex, r2 ar2 mtitle no p 
 
 
 * housingstatus - 1 owned 2,3 employer provided 4 rented 5 free 6 nomad 
+
+
+************* simple w reg *******************
+
+use "C:\temp\allg.dta", clear
+eststo clear
+
+eststo, title(food): quietly reg w ln_tot_exp ln_tot_asset_cost if tag == "food", robust 
+
+eststo, title(energy): quietly reg w ln_tot_exp ln_tot_asset_cost if tag == "energy", robust
+
+eststo, title(transport): quietly reg w ln_tot_exp ln_tot_asset_cost if tag == "transport", robust
+
+eststo, title(personal_products): quietly reg w ln_tot_exp ln_tot_asset_cost if tag == "personal_products", robust
+
+eststo, title(social_functions): quietly reg w ln_tot_exp  ln_tot_asset_cost if tag == "social_functions", robust
+
+eststo, title(housing): quietly reg w ln_tot_exp  ln_tot_asset_cost if tag == "housing", robust
+
+esttab using c:/temp/allw.tex, r2 ar2 mtitle no p numbers star nogaps compress title(OLS results for separable categories with \$w\$ as dependent variable \label{tabwlogx})
+

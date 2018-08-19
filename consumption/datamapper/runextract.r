@@ -1,4 +1,4 @@
-library(haven)  # write_dta
+library(haven)  # write_dta (instead of write.dta)
 setwd('c:/local_files/research/consumption/datamapper/')
 
 debugSource('callertree.r')

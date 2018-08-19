@@ -893,7 +893,7 @@ lsms_loader<-function(fu,ln) {
     totexp<-merge(totexp,tothouserent)
     print(paste("Number of households after merging total_expenditure with houserent = ",length(unique(totexp$hhid))))
     
-    totexp$total_expenditure=totexp$total_expenditure+totexp$tothouserent+totexp$toteducexpense
+    totexp$total_expenditure=totexp$total_expenditure+totexp$toteducexpense#totexp$tothouserent
     
     #* calculating educational expense and total houserent
     print(paste("Number of households with total expenditure data = ",length(unique(totexp$hhid))))
@@ -1046,11 +1046,9 @@ lsms_loader<-function(fu,ln) {
   }
   ####
   group_expenditure <- function(year,dirprefix,fu,ln,categoryName,returnBeforeGrouping){
-    if (missing(returnBeforeGrouping) && returnBeforeGrouping==TRUE){
+    if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
-    } else {
-      returnBeforeGrouping <- TRUE
-    }
+    } 
     
     if (year == 2010 || year == 2012) {
       
@@ -1114,7 +1112,7 @@ lsms_loader<-function(fu,ln) {
         
         
         if (setequal(groups$group,c("high","low"))){
-          
+          print("Using high-low groups")
           ##Note: cost would not be avalable from the diary if the type of commodity in the group is an asset.
           # if we can get the asset costs populated, then the data-frame can be rbind-ed to vis data-frame.
           #
@@ -1146,7 +1144,7 @@ lsms_loader<-function(fu,ln) {
           
           
         } else if (setequal(groups$group,c("asset","expenditure"))){
-          
+          print("Using asset-expenditure groups")
           
           assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
           if (dim(subset(assets,is.na(shortname) ))[1]) {
@@ -1176,7 +1174,7 @@ lsms_loader<-function(fu,ln) {
           
           
         } else if (setequal(groups$group,c("assetsonly"))) {
-          
+          print("Using assets-only groups")
           print("Only assets to be used as dependent variable")
           assets            <- read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln = ln)
           if (dim(subset(assets,is.na(shortname) ))[1]) {
@@ -1204,7 +1202,7 @@ lsms_loader<-function(fu,ln) {
           }
           
         } else if (setequal(groups$group,c("expenditureonly") )){
-          
+          print("Using expenditure-only groups")
           print("Only expenditure to be used as the dependent variable");
           relevantItems    <- as.character(subset(groups, group== "expenditureonly")$shortname)
           print(paste("Expenditures being added up for items:",toString(relevantItems)))
@@ -1242,10 +1240,27 @@ lsms_loader<-function(fu,ln) {
       
       ds$ln_tot_exp       <- with(ds,log(total_expenditure+1e-16))
       ds$personid         <- NULL
+      
+      if (year == 2012)
+      {
+        a<-read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln=lsms_normalizer)
+        a<-subset(subset(a,!is.na(cost)),number>0)
+        ac<-ddply(a,.(hhid),summarise,tot_asset_cost=sum(cost))
+        ds<-merge(ds,ac,by=c("hhid"),all.x=TRUE)
+        
+        ds$ln_tot_asset_cost<-log(ds$tot_asset_cost+1e-7)
+        
+        missingAssets<-subset(ds,is.na(tot_asset_cost))
+        print(paste("The number of families with no assets-recorded",length(unique(missingAssets$hhid)),"/",length(unique(ds$hhid)),"(setting asset_cost to 0)"))
+        ds[is.na(ds$tot_asset_cost),]$tot_asset_cost<-0
+        
+      }    
+      
       return(ds)
     }
     stop(paste("merge not available for year:",year))
   }
+  
   
   
   check_diary_nullity<-function(criteria, year,dirprefix,fu,ln){

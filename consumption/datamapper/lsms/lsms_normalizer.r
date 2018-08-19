@@ -692,10 +692,10 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category='food', group='low', shortname='sugarcane'))
       
     x<-rbind(x,data.frame(category = "energy", group="low", shortname="kerosene"))
-    x<-rbind(x,data.frame(category = "energy", group="high",shortname="charcoal"))
-    x<-rbind(x,data.frame(category = "energy", group="high",shortname="gas"))
+    x<-rbind(x,data.frame(category = "energy", group="low", shortname="charcoal"))
+    x<-rbind(x,data.frame(category = "energy", group="low", shortname="gas"))
     x<-rbind(x,data.frame(category = "energy", group="high",shortname="electricity"))
-    x<-rbind(x,data.frame(category = "energy", group="high",shortname="petrol"))
+    x<-rbind(x,data.frame(category = "energy", group="low", shortname="petrol"))
     
     #x<-rbind(x,data.frame(category = "personal_products", group="expenditure",shortname="cigarettes"))
     x<-rbind(x,data.frame(category = "personal_products", group="expenditure",shortname="cellphone_voucher"))
@@ -726,6 +726,16 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="musicplayer"))
     x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="musicsystem"))
     x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="bookexschool"))
+    
+    
+    x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="mensclothes"))
+    x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="womensclothes"))
+    x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="childrensclothes"))
+    
+    x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="mensshoes"))
+    x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="womensshoes"))
+    x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="childrensshoes"))
+    
     
 #    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="bike"))
 #    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="public_transport"))
