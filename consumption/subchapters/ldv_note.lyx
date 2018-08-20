@@ -800,7 +800,26 @@ What we do need to indicate is still that there are no status goods per
 
 \begin_layout Standard
 The first-regression we should use would be a set category regressions.
- 
+ Here, we observe the income elasticities of demand for different categories.
+ For us to incorporate the role of availability we separate the categories
+ into rare and non-rare items a consumer would obviously have no consumption
+ on items that are rare (and expensive by definition).
+ Items that we deem as rare (cashew_almonds, coffee, yam, beer, honey, brews,
+ pasta, pork and butter_margarine) are so only in the rural areas.
+ The rare items are more expensive in the urban areas than their substitutes.
+ The literature on analysis of the demand for food often uses a two-state
+ budgeting model to divide demand for food into protein, carbohydrates etc.
+ (or more simply meat, fruits etc.).
+ In the cross-sectional analysis, this is simply decomposition into rare
+ and non-rare items - so that the demand for rare items for rural areas
+ is zero (it is worth reiterating that the decomposition relies only on
+ the budget equation 
+\begin_inset Formula $\sum p_{i}q_{i}=x$
+\end_inset
+
+ and not on any additional assumptions such as separability across groups).
+ The splitting into rare items allows us to understand the role of supply
+ issues better than what would be available.
 \end_layout
 
 \begin_layout Section*
@@ -1147,7 +1166,7 @@ write.dta(ge,'c:/temp/ge.dta')
 \end_layout
 
 \begin_layout Plain Layout
-#
+#Checking null consumptions
 \end_layout
 
 \begin_layout Plain Layout
@@ -1163,6 +1182,43 @@ e")],by=c("shortname"),all.x=TRUE)
 \begin_layout Plain Layout
 print(paste('to be ignored:',toString(unique(as.character(subset(ncr,is.na(categor
 y))$shortname)))))
+\end_layout
+
+\begin_layout Plain Layout
+ncr<-subset(ncr,!is.na(category))
+\end_layout
+
+\begin_layout Plain Layout
+#for food
+\end_layout
+
+\begin_layout Plain Layout
+subset(ncr,is.na(n) & category=="food")
+\end_layout
+
+\begin_layout Plain Layout
+# ignore { chicken, spices, maize_green, cassava_flour, maize_grain, mangoes,
+ sweet, sugarcane, milk_products, bread, coconut} (not rare enough), {nut_produc
+ts, wild_birds, packaged_fish, dried_canned_veg, wild_meat, miscdrinkpowder,
+ millet_grain, othervegstarch, readymade_tea_coffee, goat, canned_milk,
+ winesprits} (too rare), include cashew_almonds, coffee, yam, beer, honey,
+ brews, pasta, pork, butter_margarine, (based on how rare these items are)
+\end_layout
+
+\begin_layout Plain Layout
+# run the following to find out candidates for a category
+\end_layout
+
+\begin_layout Plain Layout
+unique(as.character(subset(ncr,is.na(n) & category=="food")$shortname))
+\end_layout
+
+\begin_layout Plain Layout
+#run the following to inspect the distribution
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
