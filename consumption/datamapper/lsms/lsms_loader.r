@@ -1046,7 +1046,20 @@ lsms_loader<-function(fu,ln) {
   }
   
   
-  group_collect <- function(year,dirprefix,fu,ln,hh,groups) {
+  group_collect <- function(year,dirprefix,categoryName,fu,ln,hh) {
+    
+    
+    if (year == 2010 || year == 2012) {
+      groups      <- subset( ln()@lsms_groups_2010_2012(), category == categoryName )
+      
+      # check if group columns are known
+      if (!setequal(colnames(groups),c("shortname","group","category"))){
+        stop("groups must strictly have shortname, group, category columns")
+      }
+      
+    } else {
+      stop(paste("Year",year,"not supported for group_collect"))
+    } 
     
     print(paste("Collecting from groups:",toString(unique(groups$group))))
     
@@ -1165,13 +1178,6 @@ lsms_loader<-function(fu,ln) {
     } 
     
     
-    if (year == 2010 || year == 2012) {
-      
-      groups      <- subset( ln()@lsms_groups_2010_2012(), category == categoryName )
-      # check if group columns are known
-      if (!setequal(colnames(groups),c("shortname","group","category"))){
-        stop("groups must strictly have shortname, group, category columns")
-      } 
       
       hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
       
@@ -1216,7 +1222,7 @@ lsms_loader<-function(fu,ln) {
       if (returnBeforeGrouping){
         vis <- hh
       } else {
-        vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,hh=hh,groups=groups)
+        vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryName,hh=hh)
       }
       
       ds                  <- merge(totexp,vis);
@@ -1254,11 +1260,10 @@ lsms_loader<-function(fu,ln) {
         print(paste("The number of families with no assets-recorded",length(unique(missingAssets$hhid)),"/",length(unique(ds$hhid)),"(setting asset_cost to 0)"))
         ds[is.na(ds$tot_asset_cost),]$tot_asset_cost<-0
         
-      }    
+      }  
       
       return(ds)
-    }
-    stop(paste("merge not available for year:",year))
+
   }
   
   
