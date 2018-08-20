@@ -6,7 +6,7 @@ if (isClass("LSMSNormalizer")){
 ## all exported functions are declared here
 setClass("LSMSNormalizer", representation(food_categories_lsms_2010="function",
                                           items_codes_2010="function",
-                                          lsms_groups_2010_2012="function",
+                                          lsms_groups_pricebased_2010_2012="function",
                                           assets_order_2010_2012="function",
                                           items_codes_2012="function",
                                           get_piece_measures="function",
@@ -627,7 +627,7 @@ lsms_normalizer<-function() {
     return(y)
   }
   
-  lsms_groups_2010_2012<- function(){
+  lsms_groups_pricebased_2010_2012<- function(){
     
     x<-NULL
     
@@ -1819,7 +1819,7 @@ lsms_normalizer<-function() {
   
   return(new("LSMSNormalizer",food_categories_lsms_2010=food_categories_lsms_2010, 
              items_codes_2010=items_codes_2010,
-             lsms_groups_2010_2012=lsms_groups_2010_2012,
+             lsms_groups_pricebased_2010_2012=lsms_groups_pricebased_2010_2012,
              assets_order_2010_2012=assets_order_2010_2012,
              items_codes_2012=items_codes_2012,
              get_piece_measures=get_piece_measures,

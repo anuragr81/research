@@ -1050,7 +1050,7 @@ lsms_loader<-function(fu,ln) {
     
     
     if (year == 2010 || year == 2012) {
-      groups      <- subset( ln()@lsms_groups_2010_2012(), category == categoryName )
+      groups      <- subset( ln()@lsms_groups_pricebased_2010_2012(), category == categoryName )
       
       # check if group columns are known
       if (!setequal(colnames(groups),c("shortname","group","category"))){
