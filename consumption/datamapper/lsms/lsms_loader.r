@@ -1052,7 +1052,7 @@ lsms_loader<-function(fu,ln) {
     if (year == 2010 || year == 2012) {
       if (basis=="price"){
         print("Price based groups")
-      groups      <- subset( ln()@lsms_groups_pricebased_2010_2012(), category == categoryName )
+        groups      <- subset( ln()@lsms_groups_pricebased_2010_2012(), category == categoryName )
       } else if (basis == "rareness"){
         print("Rareness based groups")
         groups      <- subset( ln()@lsms_groups_rarenessbased_2010_2012(), category == categoryName )
@@ -1189,91 +1189,92 @@ lsms_loader<-function(fu,ln) {
     } 
     
     
-      
-      hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
-      
-      
-      
-      #* Loading the person/family data file
-      ohs           <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # (using fmld) must provide age (age_ref), gender(sex_ref), 
-      
-      if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
-        stop("factors must be converted an integer")
-      }
-      
-      print("Ensuring duplicates do NOT exist in the diary hhdata")
-      hh = unique(hh)
-      
-      ignored_hhids <- get_ignored_hhids(hh,ohs,NULL);
-      
-      if (!is.null(ignored_hhids)){  
-        if (!is.null(hh)){
-          n1<-length(unique(hh$hhid))
-          hh<-hh[!is.element(as.character(hh$hhid),as.character(ignored_hhids)),]
-          
-          n2<-length(unique(hh$hhid))
-          print(paste("ignored",n1-n2,"/",n1," hhids"))
-        }
-        if (!is.null(ohs)){
-          
-          n1<-length(unique(ohs$hhid))
-          ohs<-ohs[!is.element(as.character(ohs$hhid),as.character(ignored_hhids)),]
-          
-          n2<-length(unique(ohs$hhid))
-          print(paste("ignored",n1-n2,"/",n1," hhids"))
-        }
-      }
-      
-      totexp          <- get_total_expenditures(hh=hh,ohs=ohs)
-      
-      heads           <- get_household_head_info(ohs=ohs)
-      
-      hhid_personid   <- get_hsize(ohs)
-      
-      if (returnBeforeGrouping){
-        vis <- hh
-      } else {
-        vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryName,hh=hh,basis=basis)
-      }
-      
-      ds                  <- merge(totexp,vis);
-      print(paste("Merging hsize",dim(ds)[1]))
-      
-      ds                  <- merge(ds,hhid_personid);
-      print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
-      
-      ds                  <- merge(ds,heads)
-      print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
-      
-      print(paste("personid range:",toString(unique(ds$personid))))
-      
-      if (is.element("tot_categ_exp",colnames(ds))){
-        ds$w                <- with(ds,tot_categ_exp/total_expenditure)
-      }
-      if (is.element("asset_score",colnames(ds))) {
-        ds$ln_asset_score   <- log(ds$asset_score+1e-7)
-      }
-      
-      ds$ln_tot_exp       <- with(ds,log(total_expenditure+1e-16))
-      ds$personid         <- NULL
-      
-      if (year == 2012)
-      {
-        a<-read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln=lsms_normalizer)
-        a<-subset(subset(a,!is.na(cost)),number>0)
-        ac<-ddply(a,.(hhid),summarise,tot_asset_cost=sum(cost))
-        ds<-merge(ds,ac,by=c("hhid"),all.x=TRUE)
+    
+    hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
+    
+    
+    
+    #* Loading the person/family data file
+    ohs           <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # (using fmld) must provide age (age_ref), gender(sex_ref), 
+    
+    if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
+      stop("factors must be converted an integer")
+    }
+    
+    print("Ensuring duplicates do NOT exist in the diary hhdata")
+    hh = unique(hh)
+    
+    ignored_hhids <- get_ignored_hhids(hh,ohs,NULL);
+    
+    if (!is.null(ignored_hhids)){  
+      if (!is.null(hh)){
+        n1<-length(unique(hh$hhid))
+        hh<-hh[!is.element(as.character(hh$hhid),as.character(ignored_hhids)),]
         
-        ds$ln_tot_asset_cost<-log(ds$tot_asset_cost+1e-7)
+        n2<-length(unique(hh$hhid))
+        print(paste("ignored",n1-n2,"/",n1," hhids"))
+      }
+      if (!is.null(ohs)){
         
-        missingAssets<-subset(ds,is.na(tot_asset_cost))
-        print(paste("The number of families with no assets-recorded",length(unique(missingAssets$hhid)),"/",length(unique(ds$hhid)),"(setting asset_cost to 0)"))
-        ds[is.na(ds$tot_asset_cost),]$tot_asset_cost<-0
+        n1<-length(unique(ohs$hhid))
+        ohs<-ohs[!is.element(as.character(ohs$hhid),as.character(ignored_hhids)),]
         
-      }  
+        n2<-length(unique(ohs$hhid))
+        print(paste("ignored",n1-n2,"/",n1," hhids"))
+      }
+    }
+    
+    totexp          <- get_total_expenditures(hh=hh,ohs=ohs)
+    
+    heads           <- get_household_head_info(ohs=ohs)
+    
+    hhid_personid   <- get_hsize(ohs)
+    
+    if (returnBeforeGrouping){
+      vis <- hh
+    } else {
+      vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryName,hh=hh,basis=basis)
+    }
+    
+    ds                  <- merge(totexp,vis);
+    print(paste("Merging hsize",dim(ds)[1]))
+    
+    ds                  <- merge(ds,hhid_personid);
+    print(paste("Number of households after merging resultant with hsize data= ",length(unique(ds$hhid))))
+    
+    ds                  <- merge(ds,heads)
+    print(paste("Number of households after merging resultant with household head data = ",length(unique(ds$hhid))))
+    
+    print(paste("personid range:",toString(unique(ds$personid))))
+    
+    if (is.element("tot_categ_exp",colnames(ds))){
+      ds$w                <- with(ds,tot_categ_exp/total_expenditure)
+    }
+    if (is.element("asset_score",colnames(ds))) {
+      ds$ln_asset_score   <- log(ds$asset_score+1e-7)
+    }
+    
+    ds$ln_tot_exp       <- with(ds,log(total_expenditure+1e-16))
+    ds$personid         <- NULL
+    
+    if (year == 2012)
+    {
+      a<-read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln=lsms_normalizer)
+      a<-subset(subset(a,!is.na(cost)),number>0)
+      ac<-ddply(a,.(hhid),summarise,tot_asset_cost=sum(cost))
+      ds<-merge(ds,ac,by=c("hhid"),all.x=TRUE)
       
-      return(ds)
-
+      ds$ln_tot_asset_cost<-log(ds$tot_asset_cost+1e-7)
+      
+      missingAssets<-subset(ds,is.na(tot_asset_cost))
+      print(paste("The number of families with no assets-recorded",length(unique(missingAssets$hhid)),"/",length(unique(ds$hhid)),"(setting asset_cost to 0)"))
+      ds[is.na(ds$tot_asset_cost),]$tot_asset_cost<-0
+      
+    }  
+    
+    ds <- add_high_low_exp_ratios(ds)
+    return(ds)
+    
   }
   
   
@@ -1375,6 +1376,15 @@ lsms_loader<-function(fu,ln) {
     
     stop(paste("food_expenditure_data : year",year, " not supported"))
     
+  }
+  
+  add_high_low_exp_ratios<- function(ds) {
+    if (all(is.element(c("high_expenditure","total_expenditure","highratio","tot_categ_exp"), colnames(ds)))) {
+      print("Adding high-low expenditures to total expenditure")
+      ds$w_rare<-with(ds,high_expenditure/total_expenditure)
+      ds$w_nonrare<-with(ds,(tot_categ_exp*(1-highratio)/total_expenditure))
+    }
+    return(ds)
   }
   
   combined_data_set<-function(year,dirprefix,selected_category,isDebug, set_depvar, fu, ln){

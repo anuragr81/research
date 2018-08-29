@@ -694,9 +694,9 @@ lsms_normalizer<-function() {
     
     x<-rbind(x,data.frame(category = "energy", group="low", shortname="kerosene"))
     x<-rbind(x,data.frame(category = "energy", group="low", shortname="charcoal"))
-    x<-rbind(x,data.frame(category = "energy", group="low", shortname="gas"))
+    x<-rbind(x,data.frame(category = "energy", group="high", shortname="gas"))
     x<-rbind(x,data.frame(category = "energy", group="high",shortname="electricity"))
-    x<-rbind(x,data.frame(category = "energy", group="low", shortname="petrol"))
+    #x<-rbind(x,data.frame(category = "energy", group="low", shortname="petrol"))
     
     #x<-rbind(x,data.frame(category = "personal_products", group="expenditure",shortname="cigarettes"))
     x<-rbind(x,data.frame(category = "personal_products", group="expenditure",shortname="cellphone_voucher"))

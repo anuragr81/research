@@ -1308,7 +1308,7 @@ Energy
 \begin_inset Text
 
 \begin_layout Plain Layout
-electricity dummy
+electricity gas
 \end_layout
 
 \end_inset
@@ -1448,6 +1448,47 @@ status open
 
 \backslash
 onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/not_rare_food.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figures/rare_food.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Rare and non rare food items
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1616,21 +1657,7 @@ summary(lm(data=g,w~ln_tot_exp+ln_tot_asset_cost))
 \family typewriter
 \size footnotesize
 gf<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "food", returnBeforgfeGrouping = FALSE)
-\end_layout
-
-\begin_layout Plain Layout
-gf$w_rare<-with(gf,high_expenditure/total_expenditure)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size footnotesize
-g
-\family default
-\size default
-f$w_nonrare<-with(gf,(tot_categ_exp*(1-highratio)/total_expenditure))
+r,categoryName = "food", returnBeforgfeGrouping = FALSE,basis='rareness')
 \end_layout
 
 \begin_layout Plain Layout
@@ -1638,21 +1665,7 @@ f$w_nonrare<-with(gf,(tot_categ_exp*(1-highratio)/total_expenditure))
 \family typewriter
 \size footnotesize
 ge<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "energy", returnBeforeGrouping = FALSE)
-\end_layout
-
-\begin_layout Plain Layout
-ge$w_rare<-with(ge,high_expenditure/total_expenditure)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size footnotesize
-g
-\family default
-\size default
-e$w_nonrare<-with(ge,(tot_categ_exp*(1-highratio)/total_expenditure))
+r,categoryName = "energy", returnBeforeGrouping = FALSE,basis="rareness")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1660,7 +1673,8 @@ e$w_nonrare<-with(ge,(tot_categ_exp*(1-highratio)/total_expenditure))
 \family typewriter
 \size footnotesize
 gp<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "personal_products", returnBeforeGrouping = FALSE)
+r,categoryName = "personal_products", returnBeforeGrouping = FALSE,basis="rarene
+ss")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1668,27 +1682,7 @@ r,categoryName = "personal_products", returnBeforeGrouping = FALSE)
 \family typewriter
 \size footnotesize
 gt<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "transport", returnBeforeGrouping = FALSE)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size footnotesize
-gt
-\family default
-\size default
-$w_rare<-with(gt,high_expenditure/total_expenditure)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size footnotesize
-gt
-\family default
-\size default
-$w_nonrare<-with(gt,(tot_categ_exp*(1-highratio)/total_expenditure))
+r,categoryName = "transport", returnBeforeGrouping = FALSE,basis="rareness")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1696,7 +1690,7 @@ $w_nonrare<-with(gt,(tot_categ_exp*(1-highratio)/total_expenditure))
 \family typewriter
 \size footnotesize
 gh<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "housing", returnBeforeGrouping = FALSE)
+r,categoryName = "housing", returnBeforeGrouping = FALSE,basis="rareness")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1704,7 +1698,8 @@ r,categoryName = "housing", returnBeforeGrouping = FALSE)
 \family typewriter
 \size footnotesize
 gs<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "social_functions", returnBeforeGrouping = FALSE)
+r,categoryName = "social_functions", returnBeforeGrouping = FALSE,basis="rarenes
+s")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1796,6 +1791,33 @@ res<-fu()@rbind_xy(res,gd,tagy="education")
 \family typewriter
 \size footnotesize
 write_dta(res,'c:/temp/allg.dta')
+\end_layout
+
+\begin_layout Plain Layout
+#one can view the nonnormality of rare products as follows
+\end_layout
+
+\begin_layout Plain Layout
+gff<-subset(gf,abs(tot_categ_exp)>1e-1)
+\end_layout
+
+\begin_layout Plain Layout
+hist(gff$w_nonrare,breaks=100,xlab="not rare products weight",main="Not
+ Rare Food Products")
+\end_layout
+
+\begin_layout Plain Layout
+gee<-subset(ge,abs(tot_categ_exp)>1e-1)
+\end_layout
+
+\begin_layout Plain Layout
+hist(gee$w_rare,breaks=100,xlab="rare product weight",main="Rare Energy
+ Sources")
+\end_layout
+
+\begin_layout Plain Layout
+hist(gee$w_nonrare,breaks=100,xlab="not rare product weight",main="Not Rare
+ Energy Sources")
 \end_layout
 
 \begin_layout Plain Layout
@@ -1922,8 +1944,8 @@ ncr<-ll@check_diary_nullity(criteria = c("region"),year = 2012, dirprefix
 
 \family typewriter
 \size footnotesize
-ncr<-merge(ncr,lsms_normalizer()@lsms_groups_2010_2012()[,c("category","shortnam
-e")],by=c("shortname"),all.x=TRUE)
+ncr<-merge(ncr,lsms_normalizer()@lsms_groups_rarenessbased_2010_2012()[,c("categ
+ory","shortname")],by=c("shortname"),all.x=TRUE)
 \end_layout
 
 \begin_layout Plain Layout
@@ -2048,8 +2070,9 @@ a<-ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
 
 \family typewriter
 \size footnotesize
-ah<-ddply(subset(a,!is.na(number) & number>0 & !is.na(cost) & shortname!="house"),.
-(hhid),summarise,total_asset_cost=sum(cost))
+ah<-ddply(subset(a,!is.na(number) & number>0 & !is.na(cost) & shor
+\backslash
+tname!="house"),.(hhid),summarise,total_asset_cost=sum(cost))
 \end_layout
 
 \begin_layout Plain Layout
