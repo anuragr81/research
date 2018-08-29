@@ -1046,11 +1046,19 @@ lsms_loader<-function(fu,ln) {
   }
   
   
-  group_collect <- function(year,dirprefix,categoryName,fu,ln,hh) {
+  group_collect <- function(year,dirprefix,categoryName,fu,ln,hh,basis) {
     
     
     if (year == 2010 || year == 2012) {
+      if (basis=="price"){
+        print("Price based groups")
       groups      <- subset( ln()@lsms_groups_pricebased_2010_2012(), category == categoryName )
+      } else if (basis == "rareness"){
+        print("Rareness based groups")
+        groups      <- subset( ln()@lsms_groups_rarenessbased_2010_2012(), category == categoryName )
+      } else {
+        stop("Invalid basis")
+      }
       
       # check if group columns are known
       if (!setequal(colnames(groups),c("shortname","group","category"))){
@@ -1086,10 +1094,13 @@ lsms_loader<-function(fu,ln) {
       
       vis[is.na(vis$high_cost),]$high_cost <- 0
       vis[is.na(vis$low_cost),]$low_cost   <- 0
-      vis$highratio                        <- with(vis,high_cost/(low_cost+high_cost)) + 1e-16
-      vis$ln_tot_categ_exp                 <- log(with(vis,high_cost+low_cost+1e-16))
-      vis$tot_categ_exp                    <- with(vis,high_cost+low_cost)
+      vis$low_cost                         <- vis$low_cost  + 1e-16 # to avoid divide by zero error in the ratio
+      vis$high_cost                        <- vis$high_cost + 1e-16
       
+      vis$highratio                        <- with(vis,high_cost/(low_cost+high_cost))
+      vis$ln_tot_categ_exp                 <- log(with(vis,high_cost+low_cost))
+      vis$tot_categ_exp                    <- with(vis,high_cost+low_cost)
+      vis$high_expenditure                 <- vis$high_cost
       vis$group                            <- NULL
       vis$low_cost                         <- NULL
       vis$high_cost                        <- NULL
@@ -1172,7 +1183,7 @@ lsms_loader<-function(fu,ln) {
   }
   
   ####
-  group_expenditure <- function(year,dirprefix,fu,ln,categoryName,returnBeforeGrouping){
+  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryName,returnBeforeGrouping){
     if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
     } 
@@ -1222,11 +1233,10 @@ lsms_loader<-function(fu,ln) {
       if (returnBeforeGrouping){
         vis <- hh
       } else {
-        vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryName,hh=hh)
+        vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryName,hh=hh,basis=basis)
       }
       
       ds                  <- merge(totexp,vis);
-      
       print(paste("Merging hsize",dim(ds)[1]))
       
       ds                  <- merge(ds,hhid_personid);

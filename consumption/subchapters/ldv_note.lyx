@@ -695,10 +695,10 @@ As argued in the previous section, if we are to test the effect of ownership
  of assets and introduction of new commodities on consumption in two different
  economies, then we must understand their role in the context of consumer
  response to the changes in prices over a sufficiently long period of time.
- While a cross-sectional analysis prevents us from seeing how consumers
- may cut down on or raise status consumption when faced with changes in
- relative prices, it helps us to understand whether status-related consumption
- exists within the economy or not.
+ While a cross-sectional analysis may prevent us from seeing how consumers
+ cut down on or raise status consumption when faced with changes in relative
+ prices of commodities in the category, it does measure the extent of status
+ consumption that may exist in the population.
 \end_layout
 
 \begin_layout Standard
@@ -815,11 +815,8 @@ reference "sec:restricted_demand_models"
 
 \begin_layout Standard
 \paragraph_spacing onehalf
-For food, the items that we deem as rare are 
-\begin_inset Formula $\{cashew\_almonds,\ coffee,\ yam,\ beer,\ honey,\ brews,\ pasta,\ pork,\ butter\_margarine\}$
-\end_inset
-
-.
+For food, the items that we deem as rare are {cashew_almonds, coffee, yam,
+ beer, honey, brews, pasta, pork, butter_margarine}.
  Rare items in other categories are shown in the table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -917,10 +914,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -946,6 +939,167 @@ name "tab:rare_items"
 
 \begin_layout Section*
 \paragraph_spacing onehalf
+A model for assets
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+The age that assets are owned for vary.
+ With the data that we have we can see that the items that are new didn't
+ exist earlier at all.
+ There is nobody who kept is TV for more than 40 years - things like agricultura
+l equipment were kept for long.
+ There seem to be a rareness in age factor in the sense that some consumers
+ are more likely to not own any assets for a long time i.e.
+ rural areas that don't have access to electricity may never have the assets
+ related to electricity.
+ Asset score or cost would themselves be a function of availability.
+ To look at the combined effect we use dummies of different types of assets
+ owned - instead of the total cost of assets.
+ The status consumption exerted by asset types is ignored for now - instead
+ the effect of assets on non-durable consumption in commented on.
+ Assets bought in less than in the last year are not added in monthly consumptio
+n.
+ The asset categories (finer than the transport, housing categories) are
+ used as dummies in the weights regression.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+If the expenditure on assets were to be included in the consumption (i.e.
+ on the left hand side of the equation), then we would have to consider
+ the age of assets owned as well.
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+What the models often calibrate is the probability of having bought the
+ asset.
+ Having had an asset would reduce the probability that one buys the asset
+ in the last year.
+ Asset cost should therefore adjusted with both inflation and length of
+ the time of ownership.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+
+\shape italic
+The combined effect of asset substitution and high price purchases can be
+ ignored in some categories (energy, food, social functions, personal care
+ - don't have any assets) - but in categories such as housing or transport
+ the role of assets is prime even though the role of high-price substitute
+ is may also be present.
+ In such cases (where both IC and PE are possible), both the role of assets
+ and availability would have to used in the analysis.
+ For asset ownership, the dummies are all we have.
+ Since it's merely the cross-section we would just a dummy for hand-selected
+ assets.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+
+\shape italic
+The probability of ownership calibration seems a little more involved but
+ seems worth exploring.
+ We know the 
+\begin_inset Formula $\sum w_{i}=1$
+\end_inset
+
+ is no longer the equation.
+ The modified equation would be 
+\begin_inset Formula $\sum p_{i}q_{i}+sA=x$
+\end_inset
+
+ where 
+\begin_inset Formula $s\in\{0,1\}$
+\end_inset
+
+.
+ If we assume an annual rent 
+\begin_inset Formula $v$
+\end_inset
+
+ then a consumer has 
+\begin_inset Formula $x-v$
+\end_inset
+
+ or 
+\begin_inset Formula $x$
+\end_inset
+
+ consumption depending on whether she buys the asset or not.
+ Two utility functions can be assumed 
+\begin_inset Formula $u_{A}(\frac{x-v}{p},\epsilon)$
+\end_inset
+
+ for asset owners and 
+\begin_inset Formula $u_{NA}(\frac{x}{p},\epsilon)$
+\end_inset
+
+ for non asset owners so that 
+\begin_inset Formula $u_{A}>u_{NA}$
+\end_inset
+
+ makes the consumers buy the asset (of course 
+\begin_inset Formula $v$
+\end_inset
+
+ needs to be parametrised)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A threshold expenditure 
+\begin_inset Formula $x$
+\end_inset
+
+ can be calculated.
+ For example, if 
+\begin_inset Formula $u=(S+a+\epsilon)^{\alpha}q^{1-\alpha}$
+\end_inset
+
+ and the budget constraint is 
+\begin_inset Formula $x=pq+vS$
+\end_inset
+
+, then 
+\begin_inset Formula $u_{NA}(x/p,0,\epsilon)=u_{A}((x-v)/p,1,\epsilon)\Rightarrow(a+\epsilon)^{\alpha}x^{1-\alpha}=(1+a+\epsilon)^{\alpha}(x-v)^{1-\alpha}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ (it may be possible to solve a Bayesian Nash Equilibrium with a consumer
+ having two types).
+ The econometric equivalent for the regression would then come from an MLE
+ specification.
+ This is trickier.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+
+\shape italic
+The Bonus method attempts to put the logit of ownership (
+\begin_inset Formula $\frac{f}{1-f}$
+\end_inset
+
+) on the left-hand-side the log of income - log(x) - on the right side.
+ The regression is run over different income bands and coefficients tested
+ for the different income bands.
+ Let's say we choose an asset dummy (for a significance is all what we care
+ about for now).
+ To use a hack, we can figure out the dummy so that it was significant.
+\end_layout
+
+\begin_layout Section*
+\paragraph_spacing onehalf
 Categories
 \end_layout
 
@@ -954,7 +1108,7 @@ Categories
 For categories other than energy, quality of food, number of rooms, a dummy
  representing possession of a car etc.
  can represent the selection.
- For energy, our two equation model is
+ For energy, our two eqofuation model is
 \end_layout
 
 \begin_layout Standard
@@ -1462,7 +1616,21 @@ summary(lm(data=g,w~ln_tot_exp+ln_tot_asset_cost))
 \family typewriter
 \size footnotesize
 gf<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "food", returnBeforeGrouping = FALSE)
+r,categoryName = "food", returnBeforgfeGrouping = FALSE)
+\end_layout
+
+\begin_layout Plain Layout
+gf$w_rare<-with(gf,high_expenditure/total_expenditure)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+g
+\family default
+\size default
+f$w_nonrare<-with(gf,(tot_categ_exp*(1-highratio)/total_expenditure))
 \end_layout
 
 \begin_layout Plain Layout
@@ -1471,6 +1639,20 @@ r,categoryName = "food", returnBeforeGrouping = FALSE)
 \size footnotesize
 ge<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
 r,categoryName = "energy", returnBeforeGrouping = FALSE)
+\end_layout
+
+\begin_layout Plain Layout
+ge$w_rare<-with(ge,high_expenditure/total_expenditure)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+g
+\family default
+\size default
+e$w_nonrare<-with(ge,(tot_categ_exp*(1-highratio)/total_expenditure))
 \end_layout
 
 \begin_layout Plain Layout
@@ -1487,6 +1669,26 @@ r,categoryName = "personal_products", returnBeforeGrouping = FALSE)
 \size footnotesize
 gt<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
 r,categoryName = "transport", returnBeforeGrouping = FALSE)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+gt
+\family default
+\size default
+$w_rare<-with(gt,high_expenditure/total_expenditure)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+gt
+\family default
+\size default
+$w_nonrare<-with(gt,(tot_categ_exp*(1-highratio)/total_expenditure))
 \end_layout
 
 \begin_layout Plain Layout
@@ -1783,13 +1985,6 @@ unique(as.character(subset(ncr,is.na(n) & category=="food")$shortname))
 
 \family typewriter
 \size footnotesize
-#run the following to inspect the distribution
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size footnotesize
 #
 \end_layout
 
@@ -1833,6 +2028,43 @@ summary(lm(ws~lnx))
 \family typewriter
 \size footnotesize
 summary(lm(w~lnx))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+#Looking at the assets distribution
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+a<-ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+ah<-ddply(subset(a,!is.na(number) & number>0 & !is.na(cost) & shortname!="house"),.
+(hhid),summarise,total_asset_cost=sum(cost))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+ahr<-subset(ah,total_asset_cost<quantile(ah$total_asset_cost,.95))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+hist(ahr$total_asset_cost,breaks=1000, xlab="total asset cost", ylab=paste("numb
+er of owners(N=",length(unique(ahr$hhid)),")"),main="Assets held")
 \end_layout
 
 \end_inset
