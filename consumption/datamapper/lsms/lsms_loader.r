@@ -1071,7 +1071,7 @@ lsms_loader<-function(fu,ln) {
     
     print(paste("Collecting from groups:",toString(unique(groups$group))))
     
-    if (setequal(groups$group,c("high","low"))){
+    if (setequal(groups$group,c("high","low")) || setequal(groups$group,c("low")) || setequal(groups$group,c("high"))) {
       print("Using high-low groups")
       ##Note: cost would not be avalable from the diary if the type of commodity in the group is an asset.
       # if we can get the asset costs populated, then the data-frame can be rbind-ed to vis data-frame.
@@ -1079,25 +1079,26 @@ lsms_loader<-function(fu,ln) {
       
       vis                                  <- ddply(merge(hh,groups) ,.(hhid,group),summarise,group_cost = sum(cost)) 
       noGroupCostHhids                     <- setdiff(unique(hh$hhid),unique(vis$hhid))
-      
       noGroupCostHigh                      <- data.frame(hhid=noGroupCostHhids,group="high",group_cost=rep(0,length(noGroupCostHhids)))
       noGroupCostLow                       <- data.frame(hhid=noGroupCostHhids,group="low" ,group_cost=rep(0,length(noGroupCostHhids)))
-      
       vis                                  <- rbind(vis,noGroupCostHigh)
       vis                                  <- rbind(vis,noGroupCostLow)
-      
-      
+
       vis                                  <- subset(vis,!is.na(group_cost))
       vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
       vis$has_high                         <- !is.na(vis$high_cost) & vis$high_cost>0
+      if (dim(vis[is.na(vis$high_cost),])[1]>0){
+        vis[is.na(vis$high_cost),]$high_cost <- 0
+      }
+      if (dim(vis[is.na(vis$low_cost),])[1]>0){
+        vis[is.na(vis$low_cost),]$low_cost   <- 0
+      }
       
-      
-      vis[is.na(vis$high_cost),]$high_cost <- 0
-      vis[is.na(vis$low_cost),]$low_cost   <- 0
       vis$low_cost                         <- vis$low_cost  + 1e-16 # to avoid divide by zero error in the ratio
       vis$high_cost                        <- vis$high_cost + 1e-16
       
       vis$highratio                        <- with(vis,high_cost/(low_cost+high_cost))
+      
       vis$ln_tot_categ_exp                 <- log(with(vis,high_cost+low_cost))
       vis$tot_categ_exp                    <- with(vis,high_cost+low_cost)
       vis$high_expenditure                 <- vis$high_cost
@@ -1178,7 +1179,7 @@ lsms_loader<-function(fu,ln) {
     } else {
       stop( paste ( "Unknown row elements in groups frame"))
     }
-    
+    print("Collected group expenditures")
     return(vis)
   }
   
