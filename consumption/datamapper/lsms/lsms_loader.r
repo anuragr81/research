@@ -1,7 +1,7 @@
 library(foreign)
 library(haven)
 require(plyr)
-
+require(tidyr)
 
 if (isClass("LSMSLoader")){
   print ("Warning !!! previous definition of LSMSLoader would be overwritten.")
@@ -456,6 +456,10 @@ lsms_loader<-function(fu,ln) {
                                               names=ln()@get_diary_secn_columns_lsms_2012(),
                                               m=ln()@get_diary_secn_fields_mapping_lsms_2012())
       assetsData <-merge(assetsData, rename(ln()@items_codes_2012(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      
+      ignored_hhids_adoc <- c("0743-001") # high mtm of house
+      assetsData <- subset(assetsData,!is.element(hhid,ignored_hhids_adoc))
+      print (paste("Ignored hhids:",toString(ignored_hhids_adoc)))
       if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
       return(assetsData)
     }
@@ -1261,15 +1265,31 @@ lsms_loader<-function(fu,ln) {
     
     if (year == 2012)
     {
-      a<-read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln=lsms_normalizer)
+      a<-read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln=ln)
       a<-subset(subset(a,!is.na(cost)),number>0)
+      missingTypes <- setdiff(unique(as.character(a$shortname)), as.character(ln()@asset_types_2010_2012()$shortname))
+      if ( length ( missingTypes )>0 ){
+        stop(paste("Asset types not known for:",toString(missingTypes)))
+      }
+      a <-merge(a,ln()@asset_types_2010_2012())
+      
       ac<-ddply(a,.(hhid),summarise,tot_asset_cost=sum(cost))
+      at<-ddply(a,.(hhid,assettype),summarise,type_cost=sum(cost))
+      at<-spread(data=at, key = assettype,value = type_cost)
+      ac<-merge(ac,at,by=c("hhid"),all=TRUE)
+      ac[is.na(ac)]<-0
+      if (abs(sum(rowSums(subset(ac,select=setdiff(colnames(ac),c("hhid","tot_asset_cost"))))-ac$tot_asset_cost))>1e-7){
+        stop("Asset-types costs-splitting error!")
+      }
       ds<-merge(ds,ac,by=c("hhid"),all.x=TRUE)
       
       ds$ln_tot_asset_cost<-log(ds$tot_asset_cost+1e-7)
       
       missingAssets<-subset(ds,is.na(tot_asset_cost))
       print(paste("The number of families with no assets-recorded",length(unique(missingAssets$hhid)),"/",length(unique(ds$hhid)),"(setting asset_cost to 0)"))
+      
+      ##TODO:
+      
       ds[is.na(ds$tot_asset_cost),]$tot_asset_cost<-0
       
     }  

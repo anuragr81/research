@@ -10,6 +10,7 @@ setClass("LSMSNormalizer", representation(food_categories_lsms_2010="function",
                                           lsms_groups_rarenessbased_2010_2012="function",
                                           assets_order_2010_2012="function",
                                           items_codes_2012="function",
+                                          asset_types_2010_2012="function",
                                           get_piece_measures="function",
                                           ignored_bad_units="function",
                                           get_group_qconv_factor="function",
@@ -628,6 +629,55 @@ lsms_normalizer<-function() {
     return(y)
   }
 
+  asset_types_2010_2012 <-function()
+  {
+    x<-NULL
+    x<-rbind(x,data.frame(shortname="radio",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="landline",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="mobile",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="computer",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="refrigerator",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="sewingmachine",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="tv",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="videoplayer",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="waterheater",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="musicplayer",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="musicsystem",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="dishtv",assettype="electric"))
+    x<-rbind(x,data.frame(shortname="chair",assettype="equipment"))
+    x<-rbind(x,data.frame(shortname="sofa",assettype="equipment"))
+    x<-rbind(x,data.frame(shortname="table",assettype="equipment"))
+    x<-rbind(x,data.frame(shortname="watch",assettype="equipment"))
+    x<-rbind(x,data.frame(shortname="bed",assettype="equipment"))
+    x<-rbind(x,data.frame(shortname="mosquitonet",assettype="equipment"))
+    x<-rbind(x,data.frame(shortname="iron",assettype="equipment"))
+    x<-rbind(x,data.frame(shortname="stove_other",assettype="equipment"))
+    x<-rbind(x,data.frame(shortname="stove_electricgas",assettype="equipment"))
+    x<-rbind(x,data.frame(shortname="car",assettype="transport"))
+    x<-rbind(x,data.frame(shortname="motorbike",assettype="transport"))
+    x<-rbind(x,data.frame(shortname="bike",assettype="transport"))
+    x<-rbind(x,data.frame(shortname="cart",assettype="transport"))
+    x<-rbind(x,data.frame(shortname="animalcart",assettype="transport"))
+    x<-rbind(x,data.frame(shortname="boat",assettype="transport"))
+    x<-rbind(x,data.frame(shortname="wheelbarrow",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="livestock",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="poultry",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="engine_outboard",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="donkey",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="ac_fan",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="spraymachine",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="waterpump",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="tractor",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="trailer",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="plough",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="harrow",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="handmill",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="coffeepulpingmachine",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="powertiller",assettype="agricultural"))
+    x<-rbind(x,data.frame(shortname="house",assettype="housing"))
+    return(x)
+  }
+  
   lsms_groups_rarenessbased_2010_2012<- function(){
     
     x<-NULL
@@ -2009,6 +2059,7 @@ lsms_normalizer<-function() {
              lsms_groups_rarenessbased_2010_2012=lsms_groups_rarenessbased_2010_2012,
              assets_order_2010_2012=assets_order_2010_2012,
              items_codes_2012=items_codes_2012,
+             asset_types_2010_2012=asset_types_2010_2012,
              get_piece_measures=get_piece_measures,
              ignored_bad_units=ignored_bad_units,
              get_group_qconv_factor=get_group_qconv_factor,

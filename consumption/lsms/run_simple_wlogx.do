@@ -1,4 +1,4 @@
-*rm c:\temp\allw.tex
+rm c:\temp\allw.tex
 
 use "C:\temp\allg.dta", clear
 eststo clear
