@@ -667,7 +667,7 @@ reference "tab:statusvariables"
 
 \begin_layout Standard
 \paragraph_spacing onehalf
-As argued earlier, the availability of a certain item provides a snob advtantage
+As argued earlier, the availability of a certain item provides a snob advantage
  to the consumer if others are not expected to achieve the same status in
  the long run.
  In the model of status we propose, the asset ownership is strongly tied
@@ -1657,7 +1657,7 @@ summary(lm(data=g,w~ln_tot_exp+ln_tot_asset_cost))
 \family typewriter
 \size footnotesize
 gf<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "food", returnBeforgfeGrouping = FALSE,basis='rareness')
+r,categoryName = "food", returnBeforeGrouping = FALSE,basis='rareness')
 \end_layout
 
 \begin_layout Plain Layout
@@ -1700,6 +1700,34 @@ r,categoryName = "housing", returnBeforeGrouping = FALSE,basis="rareness")
 gs<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
 r,categoryName = "social_functions", returnBeforeGrouping = FALSE,basis="rarenes
 s")
+\end_layout
+
+\begin_layout Plain Layout
+# if adding education to social functions
+\end_layout
+
+\begin_layout Plain Layout
+gs$tot_categ_exp<-gs$toteducexpense+gs$tot_categ_exp
+\end_layout
+
+\begin_layout Plain Layout
+gs$ln_tot_categ_exp<-log(gs$tot_categ_exp)
+\end_layout
+
+\begin_layout Plain Layout
+gs$w_nonrare<-NULL
+\end_layout
+
+\begin_layout Plain Layout
+gs$w_rare<-NULL
+\end_layout
+
+\begin_layout Plain Layout
+gs$w<-with(gs,tot_categ_exp/total_expenditure)
+\end_layout
+
+\begin_layout Plain Layout
+#if treating education separately
 \end_layout
 
 \begin_layout Plain Layout
@@ -2016,6 +2044,11 @@ repair}
 # not rare : {cellphone_voucher bar_soap clothes_soap toothpaste skin_cream
  other_personal mensclothes womensclothes childrensclothes mensshoes womensshoes
  childrensshoes}
+\end_layout
+
+\begin_layout Plain Layout
+# in housing, only light_builds and mosquito_net seemed rare - we have ignored
+ rareness factor for housing too therefore
 \end_layout
 
 \begin_layout Plain Layout
