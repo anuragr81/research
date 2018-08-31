@@ -1815,6 +1815,15 @@ res<-fu()@rbind_xy(res,gd,tagy="education")
 \end_layout
 
 \begin_layout Plain Layout
+res$has_english<-is.element(res$litlang,c(2,3))
+\end_layout
+
+\begin_layout Plain Layout
+res<-merge(res,data.frame(housingstatus=c(1,2,3,4,5,6),housing_type=c(1,2,3,2,3,3
+)),by=c("housingstatus"))
+\end_layout
+
+\begin_layout Plain Layout
 
 \family typewriter
 \size footnotesize

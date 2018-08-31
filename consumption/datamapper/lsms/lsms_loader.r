@@ -1281,6 +1281,10 @@ lsms_loader<-function(fu,ln) {
       if (abs(sum(rowSums(subset(ac,select=setdiff(colnames(ac),c("hhid","tot_asset_cost"))))-ac$tot_asset_cost))>1e-7){
         stop("Asset-types costs-splitting error!")
       }
+      
+      for (logCol in setdiff(colnames(ac),c("hhid","tot_asset_cost"))){
+        ac[paste("ln_",logCol,sep="")] = log(subset(ac,select=logCol)+1e-7)
+      }
       ds<-merge(ds,ac,by=c("hhid"),all.x=TRUE)
       
       ds$ln_tot_asset_cost<-log(ds$tot_asset_cost+1e-7)
