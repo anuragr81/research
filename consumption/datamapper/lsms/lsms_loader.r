@@ -1321,13 +1321,13 @@ lsms_loader<-function(fu,ln) {
         print(paste("logColName=",logColName))
         ds[bandColName] <- NA
         print(paste("bandColName=",bandColName))
-        ds[ds[,c(logColName)] >= b1_start & ds [,c(logColName)] <= b1_end ,][,c(bandColName)] <- 1
+        ds[ds[,c(logColName)] >= b1_start & ds [,c(logColName)] <= b1_end ,][,c(bandColName)] <- 4
         print("Assigned 1")
-        ds[ds[,c(logColName)] >= b2_start & ds [,c(logColName)] <= b2_end ,][,c(bandColName)] <- 2
+        ds[ds[,c(logColName)] >= b2_start & ds [,c(logColName)] <= b2_end ,][,c(bandColName)] <- 3
         print("Assigned 2")
-        ds[ds[,c(logColName)] >= b3_start & ds [,c(logColName)] <= b3_end ,][,c(bandColName)] <- 3
+        ds[ds[,c(logColName)] >= b3_start & ds [,c(logColName)] <= b3_end ,][,c(bandColName)] <- 2
         print("Assigned 3")
-        ds[ds[,c(logColName)] >= b4_start & ds [,c(logColName)] <= b4_end ,][,c(bandColName)] <- 4
+        ds[ds[,c(logColName)] >= b4_start & ds [,c(logColName)] <= b4_end ,][,c(bandColName)] <- 1
         print("Assigned 4")
       
         }
