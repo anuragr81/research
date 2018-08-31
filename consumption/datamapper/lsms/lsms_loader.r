@@ -1088,7 +1088,7 @@ lsms_loader<-function(fu,ln) {
       noGroupCostLow                       <- data.frame(hhid=noGroupCostHhids,group="low" ,group_cost=rep(0,length(noGroupCostHhids)))
       vis                                  <- rbind(vis,noGroupCostHigh)
       vis                                  <- rbind(vis,noGroupCostLow)
-
+      
       vis                                  <- subset(vis,!is.na(group_cost))
       vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
       vis$has_high                         <- !is.na(vis$high_cost) & vis$high_cost>0
@@ -1281,8 +1281,8 @@ lsms_loader<-function(fu,ln) {
       if (abs(sum(rowSums(subset(ac,select=setdiff(colnames(ac),c("hhid","tot_asset_cost"))))-ac$tot_asset_cost))>1e-7){
         stop("Asset-types costs-splitting error!")
       }
-      
-      for (logCol in setdiff(colnames(ac),c("hhid","tot_asset_cost"))){
+      assetCols <- setdiff(colnames(ac),c("hhid","tot_asset_cost"))
+      for (logCol in assetCols){
         ac[paste("ln_",logCol,sep="")] = log(subset(ac,select=logCol)+1e-7)
       }
       ds<-merge(ds,ac,by=c("hhid"),all.x=TRUE)
@@ -1292,10 +1292,45 @@ lsms_loader<-function(fu,ln) {
       missingAssets<-subset(ds,is.na(tot_asset_cost))
       print(paste("The number of families with no assets-recorded",length(unique(missingAssets$hhid)),"/",length(unique(ds$hhid)),"(setting asset_cost to 0)"))
       
-      ##TODO:
+      if(dim(missingAssets)[1]>0) {
+        
+        for (logCol in assetCols){
+          val=1e-7
+          ds[is.na(ds$tot_asset_cost),][logCol]<-val
+          ds[is.na(ds$tot_asset_cost),][paste("ln_",logCol,sep="")]<-log(val)
+          print(paste("zeroed",logCol,"(sz=",dim(ds[is.na(ds$tot_asset_cost),])[1],")"))
+        }
+        ds[is.na(ds$tot_asset_cost),]$ln_tot_asset_cost<-log(val)
+        ds[is.na(ds$tot_asset_cost),]$tot_asset_cost<-val # changing at last to invalidate
+      }
+      print("zeroed out missing assets asset costs")
+      # adding band dummies
+      for (logCol in assetCols){
+        bandColName <- paste("band_",logCol,sep="")
+        logColName  <- paste("ln_",logCol,sep="")
+        logData     <- ds[,c(logColName)]   
+        b1_start    <- quantile(logData,0)
+        b1_end      <- quantile(logData,0.25)
+        b2_start    <- quantile(logData,0.25)
+        b2_end    <- quantile(logData,0.5)
+        b3_start    <- quantile(logData,0.5)
+        b3_end    <- quantile(logData,0.75)
+        b4_start    <- quantile(logData,.75)
+        b4_end    <- quantile(logData,1.0)
+        print(paste("band start,end=",b1_start,",",b1_end))
+        print(paste("logColName=",logColName))
+        ds[bandColName] <- NA
+        print(paste("bandColName=",bandColName))
+        ds[ds[,c(logColName)] >= b1_start & ds [,c(logColName)] <= b1_end ,][,c(bandColName)] <- 1
+        print("Assigned 1")
+        ds[ds[,c(logColName)] >= b2_start & ds [,c(logColName)] <= b2_end ,][,c(bandColName)] <- 2
+        print("Assigned 2")
+        ds[ds[,c(logColName)] >= b3_start & ds [,c(logColName)] <= b3_end ,][,c(bandColName)] <- 3
+        print("Assigned 3")
+        ds[ds[,c(logColName)] >= b4_start & ds [,c(logColName)] <= b4_end ,][,c(bandColName)] <- 4
+        print("Assigned 4")
       
-      ds[is.na(ds$tot_asset_cost),]$tot_asset_cost<-0
-      
+        }
     }  
     
     ds <- add_high_low_exp_ratios(ds)

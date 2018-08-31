@@ -84,7 +84,7 @@
 
 \begin_body
 
-\begin_layout Section*
+\begin_layout Section
 \paragraph_spacing onehalf
 Models for Rationed Demand
 \begin_inset CommandInset label
@@ -239,7 +239,7 @@ Let the solutions of the above equations be represented as
 \end_inset
 
 .
- It is clear to see that 
+ It is clear that 
 \begin_inset Formula $c(u,p_{0},p)=min_{z}\ c^{*}(u,p_{0},p,z)$
 \end_inset
 
@@ -248,7 +248,8 @@ Let the solutions of the above equations be represented as
 \begin_inset Formula $p_{0}^{*}=\xi_{0}(u,z,p)$
 \end_inset
 
- is the price at which the consumer would buy the quantity 
+ can be defined as the price at which the consumer would buy the quantity
+ 
 \begin_inset Formula $z$
 \end_inset
 
@@ -263,7 +264,7 @@ Such a price must exist due to convex preferences.
 \end_inset
 
 .
- So we have
+ One can therefore write
 \end_layout
 
 \begin_layout Standard
@@ -308,7 +309,7 @@ key "DeatonEssaysDemand1981"
 ).
  As we limit ourselves to the cross-sectional analysis, the effects of price
  and the cost of living index don't apply.
- It is worth noting however that the ration 
+ However it is important to note that the ration 
 \begin_inset Formula $z_{i}$
 \end_inset
 
@@ -330,8 +331,8 @@ key "DeatonEssaysDemand1981"
 \begin_layout Standard
 \paragraph_spacing onehalf
 Given the inequalities of wealth and resources in the developing countries,
- we focus on the selection that occurs through lack unavailability of goods
- and services - following the virtual price analysis.
+ we look at the selection that occurs through lack of goods and services
+ - following the virtual price analysis.
  In the case of energy, for example, the consumers fulfill their energy
  needs with electricity only if electricity is available in the region.
  In the case of food, a consumer would choose expensive items (canned exotic
@@ -348,7 +349,14 @@ n (a constraint that is relevant in addition to the budget constraint -
 
 \begin_layout Standard
 \paragraph_spacing onehalf
-Using a two equation approach outlined by Cox-Wohlgenant 
+Exploring such restrictions, Dong et al.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DongShonkwierCappsQualityQuantity"
+
+\end_inset
+
+ use a two equation approach outlined by Cox-Wohlgenant 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "CoxWohlgenant1986"
@@ -356,14 +364,8 @@ key "CoxWohlgenant1986"
 \end_inset
 
  (who study the price-quality relations using regional mean prices as the
- dependent variable), Dong et al.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DongShonkwierCappsQualityQuantity"
-
-\end_inset
-
- use the following demand equations with unit value 
+ dependent variable).
+ The following demand equations are used with the unit value 
 \begin_inset Formula $V_{i}$
 \end_inset
 
@@ -446,7 +448,7 @@ key "DongShonkwierCappsQualityQuantity"
 
 \end_inset
 
-, 
+ and 
 \begin_inset Formula $W_{i},Z_{i}$
 \end_inset
 
@@ -641,94 +643,12 @@ key "CoxWohlgenant1986"
 \end_inset
 
 ).
- In the econometric method adopted, the availability is modeled as the restricti
-on of demand (as a factor of status) in that many consumers would completely
- forgo a items because of supply issues (e.g.
- meat in food, car in transport, electricity in energy etc.).
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-The Heckmann selection in STATA was used achieve the solution to the simultaneou
-s equations.
- The selection criterion includes the factors that restrict the dependent
- variable (consumption of the restricted commodity in our case).
- In the case of energy, we use the availability of electricity while in
- the case of food, we use the availability of a set of rare items etc..
- A list of variables whose lack we inspect is provided in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:statusvariables"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-As argued earlier, the availability of a certain item provides a snob advantage
- to the consumer if others are not expected to achieve the same status in
- the long run.
- In the model of status we propose, the asset ownership is strongly tied
- with snob status whereas a bandwagon status is tied with items that are
- available in the shot-run.
- Availability of an item can thus affect both the snob and bandwagon factors.
- The differentiation between snob and bandwagon items is brought about not
- through availability but the long-term expectation of the relative possession
- of an asset.
- This differentiation would be clearer in a time-series settings - which
- would allow us to model how a consumer balances her status needs between
- assets ownership and high-priced purchases.
- The goal of the time-series analysis would be test whether those with assets
- in the category (or of a difficrentt category) would compromise on quality.
-\end_layout
-
-\begin_layout Section*
-\paragraph_spacing onehalf
-Cross Sectional Analysis
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-As argued in the previous section, if we are to test the effect of ownership
- of assets and introduction of new commodities on consumption in two different
- economies, then we must understand their role in the context of consumer
- response to the changes in prices over a sufficiently long period of time.
- While a cross-sectional analysis may prevent us from seeing how consumers
- cut down on or raise status consumption when faced with changes in relative
- prices of commodities in the category, it does measure the extent of status
- consumption that may exist in the population.
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-The goal of an econometric technique for the cross-sectional analysis is
- to test whether the consumer balances gain of assets (durable items) with
- immediate needs of purchasing high-priced non-durable items.
- Since a demand equation must also fulfill the conditions of homogeneity
- and adding up - we focus on the dependence of budget shares on the log
- of total expenditure.
- Without violating the constraints of demand equations, other household
- factors dummy factors are added to understand the segmentation in demand
- (i.e.
- how consumers in different types of household may exhibit different weights).
- 
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-It is worth reiterating that the selection of high-priced product is easily
- measured through the budget-share 
-\begin_inset Formula $w$
-\end_inset
-
- and therefore the log-income (
+ The log-income (
 \begin_inset Formula $log(x)$
 \end_inset
 
  ) elasticity of 
-\begin_inset Formula $w$
+\begin_inset Formula $w_{c\in\mathscr{C}}$
 \end_inset
 
  gives us a good idea of whether those with higher outlay of income spend
@@ -774,6 +694,71 @@ key "NelsonQualityQuantity"
 \end_layout
 
 \begin_layout Standard
+In the econometric method adopted, the availability is modeled as the restrictio
+n of demand (as a factor of status) in that many consumers would completely
+ forgo a items because of supply issues (e.g.
+ meat in food, car in transport, electricity in energy etc.).
+\end_layout
+
+\begin_layout Section
+Connection with the Model
+\end_layout
+
+\begin_layout Subsection
+Asset model - PE and IC
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+The Heckmann selection in STATA was used achieve the solution to the simultaneou
+s equations.
+ The selection criterion includes the factors that restrict the dependent
+ variable (consumption of the restricted commodity in our case).
+ In the case of energy, we use the availability of electricity while in
+ the case of food, we use the availability of a set of rare items etc..
+ A list of variables whose lack we inspect is provided in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:statusvariables"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
+As argued earlier, the availability of a certain item provides a snob advantage
+ to the consumer if others are not expected to achieve the same status in
+ the long run.
+ In the model of status we propose, the asset ownership is strongly tied
+ with snob status whereas a bandwagon status is tied with items that are
+ available in the shot-run.
+ Availability of an item can thus affect both the snob and bandwagon factors.
+ The differentiation between snob and bandwagon items is brought about not
+ through availability but the long-term expectation of the relative possession
+ of an asset.
+ This differentiation would be clearer in a time-series settings - which
+ would allow us to model how a consumer balances her status needs between
+ assets ownership and high-priced purchases.
+ The goal of the time-series analysis would be test whether those with assets
+ in the category (or of a difficrentt category) would compromise on quality.
+\end_layout
+
+\begin_layout Standard
+Elephant and Peacock.
+\end_layout
+
+\begin_layout Standard
+We don't asset costs - only use the costs to determine the band the user
+ is in (for validity of the regression).
+\end_layout
+
+\begin_layout Subsection
+Further refinement of shiny items
+\end_layout
+
+\begin_layout Standard
 \paragraph_spacing onehalf
 Since status commodities would have higher price than their substitutes
  (if status is being priced in the market), consumers with more outlay should
@@ -813,22 +798,37 @@ reference "sec:restricted_demand_models"
  
 \end_layout
 
+\begin_layout Section
+\paragraph_spacing onehalf
+Results from the Cross Sectional Analysis - Loose results for pecuniary
+ emulation
+\end_layout
+
 \begin_layout Standard
 \paragraph_spacing onehalf
-For food, the items that we deem as rare are {cashew_almonds, coffee, yam,
- beer, honey, brews, pasta, pork, butter_margarine}.
- Rare items in other categories are shown in the table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:rare_items"
+While a cross-sectional analysis may prevent us from seeing how consumers
+ cut down on or raise status consumption when faced with changes in relative
+ prices of commodities in the category, it does measure the extent of status
+ consumption that may exist in the population.
+\end_layout
 
-\end_inset
+\begin_layout Standard
+\paragraph_spacing onehalf
+The goal of an econometric technique for the cross-sectional analysis is
+ to test whether the consumer balances gain of assets (durable items) with
+ immediate needs of purchasing high-priced non-durable items.
+ Since a demand equation must also fulfill the conditions of homogeneity
+ and adding up - we focus on the dependence of budget shares on the log
+ of total expenditure.
+ Without violating the constraints of demand equations, other household
+ factors dummy factors are added to understand the segmentation in demand
+ (i.e.
+ how consumers in different types of household may exhibit different weights).
+ 
+\end_layout
 
-.
- As is clear from the table, there are more severe inequalities that exist
- in rural areas for items in other categories than food - in the sense that
- no substitutes are available for the rare item.
- Notice also that collecting all the the items within a category into the
+\begin_layout Standard
+Notice also that collecting all the the items within a category into the
  two groups (rare, non-rare) requires the composite commodities theorem
  assumptions to hold for each of the groups i.e.
  the constant movement of a common price factor of the prices in a group.
@@ -908,6 +908,24 @@ s are not relevant either.
 
 \begin_layout Standard
 \paragraph_spacing onehalf
+For food, the items that we deem as rare are {cashew_almonds, coffee, yam,
+ beer, honey, brews, pasta, pork, butter_margarine}.
+ Rare items in other categories are shown in the table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:rare_items"
+
+\end_inset
+
+.
+ As is clear from the table, there are more severe inequalities that exist
+ in rural areas for items in other categories than food - in the sense that
+ no substitutes are available for the rare item.
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing onehalf
 \begin_inset Float table
 wide false
 sideways false
@@ -944,31 +962,13 @@ A model for assets
 
 \begin_layout Standard
 \paragraph_spacing onehalf
-The age that assets are owned for vary.
- With the data that we have we can see that the items that are new didn't
- exist earlier at all.
- There is nobody who kept is TV for more than 40 years - things like agricultura
-l equipment were kept for long.
+There is nobody who kept is TV for more than 40 years - things like agricultural
+ equipment were kept for long.
  There seem to be a rareness in age factor in the sense that some consumers
  are more likely to not own any assets for a long time i.e.
  rural areas that don't have access to electricity may never have the assets
  related to electricity.
- Asset score or cost would themselves be a function of availability.
- To look at the combined effect we use dummies of different types of assets
- owned - instead of the total cost of assets.
- The status consumption exerted by asset types is ignored for now - instead
- the effect of assets on non-durable consumption in commented on.
- Assets bought in less than in the last year are not added in monthly consumptio
-n.
- The asset categories (finer than the transport, housing categories) are
- used as dummies in the weights regression.
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-If the expenditure on assets were to be included in the consumption (i.e.
- on the left hand side of the equation), then we would have to consider
- the age of assets owned as well.
+ Asset score or cost would thus also be a function of availability.
  
 \end_layout
 
@@ -980,22 +980,6 @@ What the models often calibrate is the probability of having bought the
  in the last year.
  Asset cost should therefore adjusted with both inflation and length of
  the time of ownership.
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing onehalf
-
-\shape italic
-The combined effect of asset substitution and high price purchases can be
- ignored in some categories (energy, food, social functions, personal care
- - don't have any assets) - but in categories such as housing or transport
- the role of assets is prime even though the role of high-price substitute
- is may also be present.
- In such cases (where both IC and PE are possible), both the role of assets
- and availability would have to used in the analysis.
- For asset ownership, the dummies are all we have.
- Since it's merely the cross-section we would just a dummy for hand-selected
- assets.
 \end_layout
 
 \begin_layout Standard
@@ -1047,39 +1031,12 @@ The probability of ownership calibration seems a little more involved but
 \begin_inset Formula $v$
 \end_inset
 
- needs to be parametrised)
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-A threshold expenditure 
-\begin_inset Formula $x$
-\end_inset
-
- can be calculated.
- For example, if 
-\begin_inset Formula $u=(S+a+\epsilon)^{\alpha}q^{1-\alpha}$
-\end_inset
-
- and the budget constraint is 
-\begin_inset Formula $x=pq+vS$
-\end_inset
-
-, then 
-\begin_inset Formula $u_{NA}(x/p,0,\epsilon)=u_{A}((x-v)/p,1,\epsilon)\Rightarrow(a+\epsilon)^{\alpha}x^{1-\alpha}=(1+a+\epsilon)^{\alpha}(x-v)^{1-\alpha}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-.
- (it may be possible to solve a Bayesian Nash Equilibrium with a consumer
- having two types).
+ needs to be parametrised).
+ It may be possible to solve a Bayesian Nash Equilibrium with a consumer
+ having two types (the approach that Corneo et al.
+ have taken).
  The econometric equivalent for the regression would then come from an MLE
  specification.
- This is trickier.
 \end_layout
 
 \begin_layout Standard
@@ -1096,6 +1053,7 @@ The Bonus method attempts to put the logit of ownership (
  Let's say we choose an asset dummy (for a significance is all what we care
  about for now).
  To use a hack, we can figure out the dummy so that it was significant.
+ We use the log of total cost of the asset (which is wrong).
 \end_layout
 
 \begin_layout Section*
