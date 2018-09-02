@@ -719,7 +719,7 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category='food', group='low', shortname='eggs'))
     x<-rbind(x,data.frame(category='food', group='high', shortname='beer'))
     x<-rbind(x,data.frame(category='food', group='high', shortname='brews'))
-    x<-rbind(x,data.frame(category='food', group='high', shortname='winespirits'))
+    x<-rbind(x,data.frame(category='food', group='low', shortname='winespirits'))
     x<-rbind(x,data.frame(category='food', group='low', shortname='spices'))
     x<-rbind(x,data.frame(category='food', group='low', shortname='salt'))
     x<-rbind(x,data.frame(category='food', group='low', shortname='onion'))
@@ -744,7 +744,7 @@ lsms_normalizer<-function() {
     
     x<-rbind(x,data.frame(category = "energy", group="low", shortname="kerosene"))
     x<-rbind(x,data.frame(category = "energy", group="low", shortname="charcoal"))
-    x<-rbind(x,data.frame(category = "energy", group="high", shortname="gas"))
+    x<-rbind(x,data.frame(category = "energy", group="low", shortname="gas"))
     x<-rbind(x,data.frame(category = "energy", group="high",shortname="electricity"))
     
     #x<-rbind(x,data.frame(category = "personal_products", group="expenditure",shortname="cigarettes"))
