@@ -971,6 +971,21 @@ Pecuniary Emulation
 We use four types of assets in the regression - housing (house ownership),
  agricultural (ploughs,tractors etc.), electric (electricity driven appliances)
  and equipment (furniture etc.).
+ The results are presented in the Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabwlogx}
+\end_layout
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1015,8 +1030,1302 @@ In conclusion, the pecuniary emulations seems only to exist for housing.
  differences in income.
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{gobble}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{OLS results for separable categories with $w$ as dependent variable
+ 
+\backslash
+label{tabwlogx}} 
+\backslash
+resizebox{
+\backslash
+columnwidth}{!}{ 
+\backslash
+begin{tabular}{l*{7}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}&
+\backslash
+multicolumn{1}{c}{(3)}&
+\backslash
+multicolumn{1}{c}{(4)}&
+\backslash
+multicolumn{1}{c}{(5)}&
+\backslash
+multicolumn{1}{c}{(6)}&
+\backslash
+multicolumn{1}{c}{(7)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{food}&
+\backslash
+multicolumn{1}{c}{energy}&
+\backslash
+multicolumn{1}{c}{transport}&
+\backslash
+multicolumn{1}{c}{personal
+\backslash
+_products}&
+\backslash
+multicolumn{1}{c}{social
+\backslash
+_functions}&
+\backslash
+multicolumn{1}{c}{housing}&
+\backslash
+multicolumn{1}{c}{education}
+\backslash
+
+\backslash
+ 
+\backslash
+hline ln
+\backslash
+_tot
+\backslash
+_exp&    0.114
+\backslash
+sym{***}&  -0.0119
+\backslash
+sym{***}&   0.0149
+\backslash
+sym{***}&  -0.0991
+\backslash
+sym{***}&-0.000850         &  -0.0131
+\backslash
+sym{***}&   0.0170
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.634)         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ consu     & -0.00772
+\backslash
+sym{***}&-0.0000814         & -0.00333
+\backslash
+sym{***}&  0.00211
+\backslash
+sym{***}& -0.00111
+\backslash
+sym{**} & -0.00230
+\backslash
+sym{***}&   0.0139
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.821)         &  (0.000)         &  (0.001)
+         &  (0.002)         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ occupation
+\backslash
+_rank&  -0.0200
+\backslash
+sym{***}&  0.00570
+\backslash
+sym{***}&  0.00382         &   0.0117
+\backslash
+sym{***}& -0.00249
+\backslash
+sym{*}  & -0.00224         &  0.00150         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.105)         &  (0.000)
+         &  (0.011)         &  (0.219)         &  (0.523)         
+\backslash
+
+\backslash
+ highest
+\backslash
+_educ& -0.00461
+\backslash
+sym{***}&-0.000195         &-0.000777         & 0.000593         &  0.00118
+         & 0.000586         &  0.00328
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.524)         &  (0.239)         &  (0.261)
+         &  (0.102)         &  (0.185)         &  (0.001)         
+\backslash
+
+\backslash
+ 0.has
+\backslash
+_english&        0         &        0         &        0         &     
+   0         &        0         &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 1.has
+\backslash
+_english&   0.0245         &  0.00931
+\backslash
+sym{*}  &  0.00690         &  0.00364         & -0.00717         &  -0.0126
+\backslash
+sym{**} & -0.00802         
+\backslash
+
+\backslash
+           &  (0.069)         &  (0.014)         &  (0.332)         &  (0.585)
+         &  (0.146)         &  (0.002)         &  (0.294)         
+\backslash
+
+\backslash
+ years
+\backslash
+_community& 0.000701
+\backslash
+sym{**} & 0.000170
+\backslash
+sym{*}  &-0.000358
+\backslash
+sym{**} &-0.000512
+\backslash
+sym{***}&-0.0000218         &-0.000186         & 0.000296
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.005)         &  (0.012)         &  (0.003)         &  (0.000)
+         &  (0.790)         &  (0.121)         &  (0.014)         
+\backslash
+
+\backslash
+ roomsnum  &  -0.0112
+\backslash
+sym{***}&-0.000513         &-0.0000886         &  0.00122         &  0.00178
+\backslash
+sym{*}  &  0.00380
+\backslash
+sym{**} &  0.00343
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.392)         &  (0.953)         &  (0.316)
+         &  (0.046)         &  (0.003)         &  (0.010)         
+\backslash
+
+\backslash
+ 1.housing
+\backslash
+_type&        0         &        0         &        0         &        0
+         &        0         &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.housing
+\backslash
+_type&  -0.0340
+\backslash
+sym{**} &   0.0178
+\backslash
+sym{***}&   0.0125         &   0.0225
+\backslash
+sym{***}&  0.00217         &  -0.0152
+\backslash
+sym{**} &  -0.0132
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.007)         &  (0.000)         &  (0.068)         &  (0.000)
+         &  (0.485)         &  (0.006)         &  (0.026)         
+\backslash
+
+\backslash
+ 3.housing
+\backslash
+_type& -0.00251         &   0.0102
+\backslash
+sym{**} &  0.00451         &   0.0125         &0.00000130         &  -0.0172
+\backslash
+sym{**} & -0.00413         
+\backslash
+
+\backslash
+           &  (0.848)         &  (0.002)         &  (0.489)         &  (0.066)
+         &  (1.000)         &  (0.005)         &  (0.516)         
+\backslash
+
+\backslash
+ 1.band
+\backslash
+_electric&        0         &        0         &        0         &    
+    0         &        0         &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.band
+\backslash
+_electric&   0.0408
+\backslash
+sym{***}&  -0.0292
+\backslash
+sym{***}&   0.0146
+\backslash
+sym{*}  &  -0.0119
+\backslash
+sym{*}  &-0.000480         & -0.00696         &  -0.0128
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.025)         &  (0.034)
+         &  (0.835)         &  (0.083)         &  (0.030)         
+\backslash
+
+\backslash
+ 3.band
+\backslash
+_electric&   0.0593
+\backslash
+sym{***}&  -0.0323
+\backslash
+sym{***}&  0.00318         &  -0.0300
+\backslash
+sym{***}&  0.00631
+\backslash
+sym{*}  & -0.00239         & -0.00993         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.649)         &  (0.000)
+         &  (0.049)         &  (0.606)         &  (0.106)         
+\backslash
+
+\backslash
+ 4.band
+\backslash
+_electric&    0.118
+\backslash
+sym{***}&  -0.0378
+\backslash
+sym{***}&-0.000791         &   -0.116
+\backslash
+sym{***}& 0.000436         &   0.0165
+\backslash
+sym{*}  &  0.00809         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.927)         &  (0.000)
+         &  (0.891)         &  (0.011)         &  (0.261)         
+\backslash
+
+\backslash
+ 1.band
+\backslash
+_agricultural&        0         &        0         &        0         &
+        0         &        0         &        0         &        0     
+    
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.band
+\backslash
+_agricultural&   0.0466
+\backslash
+sym{***}&  0.00475
+\backslash
+sym{*}  &  0.00401         &  -0.0217
+\backslash
+sym{***}& -0.00345         &  -0.0118
+\backslash
+sym{**} & -0.00859         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.025)         &  (0.399)         &  (0.000)
+         &  (0.097)         &  (0.006)         &  (0.091)         
+\backslash
+
+\backslash
+ 1.band
+\backslash
+_transport&        0         &        0         &        0         &   
+     0         &        0         &        0         &        0        
+ 
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.band
+\backslash
+_transport&   0.0256
+\backslash
+sym{**} &   0.0145
+\backslash
+sym{***}&  -0.0214
+\backslash
+sym{***}&  -0.0191
+\backslash
+sym{***}& -0.00213         & -0.00324         &  0.00869         
+\backslash
+
+\backslash
+           &  (0.005)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.372)         &  (0.418)         &  (0.062)         
+\backslash
+
+\backslash
+ 1.band
+\backslash
+_equipment&        0         &        0         &        0         &   
+     0         &        0         &        0         &        0        
+ 
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.band
+\backslash
+_equipment&   0.0548
+\backslash
+sym{***}& -0.00531         &  -0.0109         &  -0.0135
+\backslash
+sym{**} & -0.00447         & -0.00607         & -0.00807         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.092)         &  (0.072)         &  (0.009)
+         &  (0.053)         &  (0.108)         &  (0.146)         
+\backslash
+
+\backslash
+ 3.band
+\backslash
+_equipment&   0.0686
+\backslash
+sym{***}&  -0.0157
+\backslash
+sym{***}& -0.00857         &  -0.0147
+\backslash
+sym{*}  & -0.00419         & -0.00618         & -0.00468         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.265)         &  (0.042)
+         &  (0.196)         &  (0.257)         &  (0.452)         
+\backslash
+
+\backslash
+ 4.band
+\backslash
+_equipment&   0.0711
+\backslash
+sym{***}&  -0.0182
+\backslash
+sym{***}& -0.00810         &  -0.0293
+\backslash
+sym{***}& -0.00220         &-0.0000167         &  -0.0110         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.381)         &  (0.001)
+         &  (0.518)         &  (0.998)         &  (0.098)         
+\backslash
+
+\backslash
+ 0.expensiveregion&        0         &        0         &        0      
+   &        0         &        0         &        0         &        0 
+        
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 1.expensiveregion&  -0.0424
+\backslash
+sym{***}&   0.0221
+\backslash
+sym{***}&   0.0156
+\backslash
+sym{**} &   0.0214
+\backslash
+sym{***}&  0.00536
+\backslash
+sym{*}  &  -0.0128
+\backslash
+sym{**} &  -0.0146
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.004)         &  (0.000)
+         &  (0.043)         &  (0.003)         &  (0.002)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -1.123
+\backslash
+sym{***}&    0.226
+\backslash
+sym{***}&   -0.113
+\backslash
+sym{*}  &    1.655
+\backslash
+sym{***}&   0.0126         &    0.261
+\backslash
+sym{***}&   -0.299
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.036)         &  (0.000)
+         &  (0.600)         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     2860         &     2860         &     2860         &     2860
+         &     2860         &     2860         &     2860         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &    0.164         &    0.269         &    0.067         &    0.329      
+   &    0.019         &    0.095         &    0.275         
+\backslash
+
+\backslash
+ adj.
+ 
+\backslash
+(R^{2}
+\backslash
+)&    0.159         &    0.264         &    0.061         &    0.325       
+  &    0.013         &    0.089         &    0.270         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{8}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{8}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Heckman results for rare categories with budget-share as dependent
+ variable 
+\backslash
+label{tabheckwlogx}} 
+\backslash
+scalebox{.75}{
+\backslash
+begin{tabular}{l*{4}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}&
+\backslash
+multicolumn{1}{c}{(3)}&
+\backslash
+multicolumn{1}{c}{(4)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{food rare}&
+\backslash
+multicolumn{1}{c}{energy rare}&
+\backslash
+multicolumn{1}{c}{pers prod rare}&
+\backslash
+multicolumn{1}{c}{trans rare}
+\backslash
+
+\backslash
+ 
+\backslash
+hline w
+\backslash
+_rare    &                  &                  &                  &    
+              
+\backslash
+
+\backslash
+ ln
+\backslash
+_tot
+\backslash
+_exp&  -0.0324
+\backslash
+sym{***}&  -0.0493
+\backslash
+sym{***}&  -0.0112
+\backslash
+sym{***}&  -0.0332
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.043)
+         
+\backslash
+
+\backslash
+ consu     & -0.00111         & 0.000627         &0.0000474         & -0.00313
+         
+\backslash
+
+\backslash
+           &  (0.256)         &  (0.149)         &  (0.928)         &  (0.308)
+         
+\backslash
+
+\backslash
+ occupation
+\backslash
+_rank& -0.00326         & -0.00505         &  0.00428         & -0.00473   
+      
+\backslash
+
+\backslash
+           &  (0.393)         &  (0.061)         &  (0.225)         &  (0.828)
+         
+\backslash
+
+\backslash
+ highest
+\backslash
+_educ&  0.00101         &-0.000161         & 0.000461         &  -0.0122   
+      
+\backslash
+
+\backslash
+           &  (0.289)         &  (0.692)         &  (0.422)         &  (0.165)
+         
+\backslash
+
+\backslash
+ 0.has
+\backslash
+_english&        0         &        0         &        0         &     
+   0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         
+\backslash
+
+\backslash
+ 1.has
+\backslash
+_english&  -0.0147         &   0.0108
+\backslash
+sym{**} &  0.00647         &  -0.0287         
+\backslash
+
+\backslash
+           &  (0.064)         &  (0.004)         &  (0.148)         &  (0.332)
+         
+\backslash
+
+\backslash
+ years
+\backslash
+_community& 0.000340
+\backslash
+sym{*}  & 0.000208
+\backslash
+sym{*}  &-0.00000792         &-0.0000589         
+\backslash
+
+\backslash
+           &  (0.043)         &  (0.040)         &  (0.943)         &  (0.930)
+         
+\backslash
+
+\backslash
+ roomsnum  &  0.00454
+\backslash
+sym{**} &  0.00213
+\backslash
+sym{*}  &-0.000866         &  -0.0114         
+\backslash
+
+\backslash
+           &  (0.009)         &  (0.047)         &  (0.380)         &  (0.051)
+         
+\backslash
+
+\backslash
+ 1.housing
+\backslash
+_type&        0         &        0         &        0         &        0
+         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         
+\backslash
+
+\backslash
+ 2.housing
+\backslash
+_type&  0.00838         &  -0.0109
+\backslash
+sym{*}  &  0.00632         &  -0.0598         
+\backslash
+
+\backslash
+           &  (0.291)         &  (0.015)         &  (0.158)         &  (0.103)
+         
+\backslash
+
+\backslash
+ 3.housing
+\backslash
+_type& -0.00702         & -0.00748         & -0.00552         &  -0.0830
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.407)         &  (0.118)         &  (0.323)         &  (0.009)
+         
+\backslash
+
+\backslash
+ 1.band
+\backslash
+_electric&        0         &        0         &        0         &    
+    0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         
+\backslash
+
+\backslash
+ 2.band
+\backslash
+_electric&  0.00300         & -0.00311         & -0.00136         &   0.0554
+         
+\backslash
+
+\backslash
+           &  (0.682)         &  (0.467)         &  (0.768)         &  (0.050)
+         
+\backslash
+
+\backslash
+ 3.band
+\backslash
+_electric&  0.00198         &  -0.0133
+\backslash
+sym{*}  &  0.00942         &  -0.0551         
+\backslash
+
+\backslash
+           &  (0.826)         &  (0.041)         &  (0.103)         &  (0.259)
+         
+\backslash
+
+\backslash
+ 4.band
+\backslash
+_electric&  0.00745         &  -0.0307
+\backslash
+sym{**} &  -0.0115         &   -0.105         
+\backslash
+
+\backslash
+           &  (0.510)         &  (0.007)         &  (0.163)         &  (0.196)
+         
+\backslash
+
+\backslash
+ 1.band
+\backslash
+_agricultural&        0         &        0         &        0         &
+        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         
+\backslash
+
+\backslash
+ 2.band
+\backslash
+_agricultural& -0.00837         & -0.00418         &  0.00181         &  -0.0423
+         
+\backslash
+
+\backslash
+           &  (0.132)         &  (0.162)         &  (0.601)         &  (0.059)
+         
+\backslash
+
+\backslash
+ 1.band
+\backslash
+_transport&        0         &        0         &        0         &   
+     0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         
+\backslash
+
+\backslash
+ 2.band
+\backslash
+_transport&  -0.0133
+\backslash
+sym{*}  & -0.00916
+\backslash
+sym{**} & -0.00459         &  -0.0274         
+\backslash
+
+\backslash
+           &  (0.033)         &  (0.008)         &  (0.199)         &  (0.422)
+         
+\backslash
+
+\backslash
+ 1.band
+\backslash
+_equipment&        0         &        0         &        0         &   
+     0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         
+\backslash
+
+\backslash
+ 2.band
+\backslash
+_equipment& -0.00405         &  -0.0111
+\backslash
+sym{***}&  0.00387         &  -0.0549
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.573)         &  (0.001)         &  (0.346)         &  (0.038)
+         
+\backslash
+
+\backslash
+ 3.band
+\backslash
+_equipment&  0.00487         &  -0.0132         & -0.00317         &  -0.0202
+         
+\backslash
+
+\backslash
+           &  (0.587)         &  (0.053)         &  (0.595)         &  (0.613)
+         
+\backslash
+
+\backslash
+ 4.band
+\backslash
+_equipment&   0.0394
+\backslash
+sym{***}&   0.0118         &   0.0187
+\backslash
+sym{*}  &   0.0830         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.147)         &  (0.011)         &  (0.077)
+         
+\backslash
+
+\backslash
+ 0.expensiveregion&        0         &        0         &        0      
+   &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         &     
+ (.)         
+\backslash
+
+\backslash
+ 1.expensiveregion& -0.00456         &   0.0157
+\backslash
+sym{***}&  0.00209         &   0.0138         
+\backslash
+
+\backslash
+           &  (0.535)         &  (0.000)         &  (0.606)         &  (0.581)
+         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    0.529
+\backslash
+sym{***}&    0.810
+\backslash
+sym{***}&    0.151
+\backslash
+sym{**} &    1.601
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.005)         &  (0.012)
+         
+\backslash
+
+\backslash
+ 
+\backslash
+hline has
+\backslash
+_sparse&                  &                  &                  &      
+            
+\backslash
+
+\backslash
+ nonrarefood
+\backslash
+_region&    0.249
+\backslash
+sym{***}&                  &                  &                  
+\backslash
+
+\backslash
+           &  (0.000)         &                  &                  &   
+               
+\backslash
+
+\backslash
+ occupation
+\backslash
+_rank&   0.0811
+\backslash
+sym{**} &    0.424
+\backslash
+sym{***}&    0.244
+\backslash
+sym{***}&   0.0817
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.002)         &  (0.000)         &  (0.000)         &  (0.025)
+         
+\backslash
+
+\backslash
+ highest
+\backslash
+_educ&   0.0264
+\backslash
+sym{***}&   0.0865
+\backslash
+sym{***}&   0.0431
+\backslash
+sym{***}&   0.0493
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         
+\backslash
+
+\backslash
+ nonrareenergy
+\backslash
+_region&                  &    0.938
+\backslash
+sym{***}&                  &                  
+\backslash
+
+\backslash
+           &                  &  (0.000)         &                  &   
+               
+\backslash
+
+\backslash
+ nonrarepersprd
+\backslash
+_region&                  &                  &    0.383
+\backslash
+sym{***}&                  
+\backslash
+
+\backslash
+           &                  &                  &  (0.000)         &   
+               
+\backslash
+
+\backslash
+ nonraretransport
+\backslash
+_region&                  &                  &                  &    0.298
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &                  &                  &                  &  (0.035)
+         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -1.485
+\backslash
+sym{***}&   -3.361
+\backslash
+sym{***}&   -2.110
+\backslash
+sym{***}&   -2.795
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         
+\backslash
+
+\backslash
+ 
+\backslash
+hline mills     &                  &                  &                
+  &                  
+\backslash
+
+\backslash
+ lambda    & -0.00288         &  -0.0118         &   0.0129         &   -0.307
+         
+\backslash
+
+\backslash
+           &  (0.940)         &  (0.104)         &  (0.424)         &  (0.153)
+         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     2861         &     2861         &     2861         &     2861
+         
+\backslash
+
+\backslash
+ 
+\backslash
+(R^{2}
+\backslash
+) &                  &                  &                  &           
+       
+\backslash
+
+\backslash
+ adj.
+ 
+\backslash
+(R^{2}
+\backslash
+)&                  &                  &                  &            
+      
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{5}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{5}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular}} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Demand for sparsely available goods
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1062,7 +2371,22 @@ Sparsely available and widely available food items
 \end_layout
 
 \begin_layout Standard
-\paragraph_spacing single
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The selection criterion includes the factors that restrict the dependent
  variable (consumption of the restricted commodity in our case).
  In the case of energy, we use the availability of electricity while in
@@ -1075,6 +2399,20 @@ reference "tab:rare_items"
 \end_inset
 
  .
+ The results are shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabheckwlogx}
+\end_layout
+
+\end_inset
+
+.
  For categories the {social functions, housing}, we do not find any particularly
  items that can deemed sparsely available .
  Such categories indicate that there may not be many ways to compensate
@@ -1354,14 +2692,13 @@ housing
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Table of items found only in some regions for every category
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:rare_items"
 
 \end_inset
 
-
+Table of items found only in some regions for every category
 \end_layout
 
 \end_inset
