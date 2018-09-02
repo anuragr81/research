@@ -827,8 +827,15 @@ The demand for sparsely available commodities
 As discussed earlier, the sparseness of the availability of items presents
  a clear case of a selection model since a consumer living in a region where
  the sparely available item does not exist would clearly have no consumption
- on the set of items that are sparsely available.
- This sparseness of availability can also act as a refinement of the use
+ on the set of items that are sparsely available (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:sparsefood"
+
+\end_inset
+
+ to compare the distribution of food products that we deem sparsely available).
+ The sparseness of availability can also act as a refinement of the use
  of 
 \begin_inset Formula $w_{c\in\mathscr{C}}$
 \end_inset
@@ -971,6 +978,8 @@ Pecuniary Emulation
 We use four types of assets in the regression - housing (house ownership),
  agricultural (ploughs,tractors etc.), electric (electricity driven appliances)
  and equipment (furniture etc.).
+ The housing types 1,2,3 represent owned, rented and free housing types
+ respectively.
  The results are presented in the Table 
 \begin_inset ERT
 status open
@@ -1690,12 +1699,12 @@ else
 \backslash
 fi} 
 \backslash
-caption{Heckman results for rare categories with budget-share as dependent
+caption{Heckman results for sparse categories with budget-share as dependent
  variable 
 \backslash
 label{tabheckwlogx}} 
 \backslash
-scalebox{.75}{
+scalebox{.75} { 
 \backslash
 begin{tabular}{l*{4}{c}} 
 \backslash
@@ -1715,13 +1724,13 @@ multicolumn{1}{c}{(4)}
 \backslash
            &
 \backslash
-multicolumn{1}{c}{food rare}&
+multicolumn{1}{c}{food sparse}&
 \backslash
-multicolumn{1}{c}{energy rare}&
+multicolumn{1}{c}{energy sparse}&
 \backslash
-multicolumn{1}{c}{pers prod rare}&
+multicolumn{1}{c}{pers prod sparse}&
 \backslash
-multicolumn{1}{c}{trans rare}
+multicolumn{1}{c}{trans sparse}
 \backslash
 
 \backslash
@@ -1729,7 +1738,7 @@ multicolumn{1}{c}{trans rare}
 \backslash
 hline w
 \backslash
-_rare    &                  &                  &                  &    
+_sparse  &                  &                  &                  &    
               
 \backslash
 
@@ -1738,7 +1747,7 @@ _rare    &                  &                  &                  &
 \backslash
 _tot
 \backslash
-_exp&  -0.0324
+_exp&  -0.0301
 \backslash
 sym{***}&  -0.0493
 \backslash
@@ -1755,36 +1764,36 @@ sym{*}
 \backslash
 
 \backslash
- consu     & -0.00111         & 0.000627         &0.0000474         & -0.00313
+ consu     & -0.00114         & 0.000627         &0.0000474         & -0.00313
          
 \backslash
 
 \backslash
-           &  (0.256)         &  (0.149)         &  (0.928)         &  (0.308)
+           &  (0.230)         &  (0.149)         &  (0.928)         &  (0.308)
          
 \backslash
 
 \backslash
  occupation
 \backslash
-_rank& -0.00326         & -0.00505         &  0.00428         & -0.00473   
+_rank& -0.00543         & -0.00505         &  0.00428         & -0.00473   
       
 \backslash
 
 \backslash
-           &  (0.393)         &  (0.061)         &  (0.225)         &  (0.828)
+           &  (0.139)         &  (0.061)         &  (0.225)         &  (0.828)
          
 \backslash
 
 \backslash
  highest
 \backslash
-_educ&  0.00101         &-0.000161         & 0.000461         &  -0.0122   
+_educ& 0.000673         &-0.000161         & 0.000461         &  -0.0122   
       
 \backslash
 
 \backslash
-           &  (0.289)         &  (0.692)         &  (0.422)         &  (0.165)
+           &  (0.465)         &  (0.692)         &  (0.422)         &  (0.165)
          
 \backslash
 
@@ -1803,20 +1812,20 @@ _english&        0         &        0         &        0         &
 \backslash
  1.has
 \backslash
-_english&  -0.0147         &   0.0108
+_english&  -0.0148         &   0.0108
 \backslash
 sym{**} &  0.00647         &  -0.0287         
 \backslash
 
 \backslash
-           &  (0.064)         &  (0.004)         &  (0.148)         &  (0.332)
+           &  (0.055)         &  (0.004)         &  (0.148)         &  (0.332)
          
 \backslash
 
 \backslash
  years
 \backslash
-_community& 0.000340
+_community& 0.000377
 \backslash
 sym{*}  & 0.000208
 \backslash
@@ -1824,20 +1833,20 @@ sym{*}  &-0.00000792         &-0.0000589
 \backslash
 
 \backslash
-           &  (0.043)         &  (0.040)         &  (0.943)         &  (0.930)
+           &  (0.021)         &  (0.040)         &  (0.943)         &  (0.930)
          
 \backslash
 
 \backslash
- roomsnum  &  0.00454
+ roomsnum  &  0.00419
 \backslash
-sym{**} &  0.00213
+sym{*}  &  0.00213
 \backslash
 sym{*}  &-0.000866         &  -0.0114         
 \backslash
 
 \backslash
-           &  (0.009)         &  (0.047)         &  (0.380)         &  (0.051)
+           &  (0.012)         &  (0.047)         &  (0.380)         &  (0.051)
          
 \backslash
 
@@ -1856,26 +1865,26 @@ _type&        0         &        0         &        0         &        0
 \backslash
  2.housing
 \backslash
-_type&  0.00838         &  -0.0109
+_type&  0.00549         &  -0.0109
 \backslash
 sym{*}  &  0.00632         &  -0.0598         
 \backslash
 
 \backslash
-           &  (0.291)         &  (0.015)         &  (0.158)         &  (0.103)
+           &  (0.476)         &  (0.015)         &  (0.158)         &  (0.103)
          
 \backslash
 
 \backslash
  3.housing
 \backslash
-_type& -0.00702         & -0.00748         & -0.00552         &  -0.0830
+_type& -0.00693         & -0.00748         & -0.00552         &  -0.0830
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &  (0.407)         &  (0.118)         &  (0.323)         &  (0.009)
+           &  (0.398)         &  (0.118)         &  (0.323)         &  (0.009)
          
 \backslash
 
@@ -1894,38 +1903,38 @@ _electric&        0         &        0         &        0         &
 \backslash
  2.band
 \backslash
-_electric&  0.00300         & -0.00311         & -0.00136         &   0.0554
+_electric&  0.00106         & -0.00311         & -0.00136         &   0.0554
          
 \backslash
 
 \backslash
-           &  (0.682)         &  (0.467)         &  (0.768)         &  (0.050)
+           &  (0.882)         &  (0.467)         &  (0.768)         &  (0.050)
          
 \backslash
 
 \backslash
  3.band
 \backslash
-_electric&  0.00198         &  -0.0133
+_electric&  0.00381         &  -0.0133
 \backslash
 sym{*}  &  0.00942         &  -0.0551         
 \backslash
 
 \backslash
-           &  (0.826)         &  (0.041)         &  (0.103)         &  (0.259)
+           &  (0.662)         &  (0.041)         &  (0.103)         &  (0.259)
          
 \backslash
 
 \backslash
  4.band
 \backslash
-_electric&  0.00745         &  -0.0307
+_electric&   0.0122         &  -0.0307
 \backslash
 sym{**} &  -0.0115         &   -0.105         
 \backslash
 
 \backslash
-           &  (0.510)         &  (0.007)         &  (0.163)         &  (0.196)
+           &  (0.266)         &  (0.007)         &  (0.163)         &  (0.196)
          
 \backslash
 
@@ -1944,12 +1953,12 @@ _agricultural&        0         &        0         &        0         &
 \backslash
  2.band
 \backslash
-_agricultural& -0.00837         & -0.00418         &  0.00181         &  -0.0423
+_agricultural& -0.00865         & -0.00418         &  0.00181         &  -0.0423
          
 \backslash
 
 \backslash
-           &  (0.132)         &  (0.162)         &  (0.601)         &  (0.059)
+           &  (0.108)         &  (0.162)         &  (0.601)         &  (0.059)
          
 \backslash
 
@@ -1968,7 +1977,7 @@ _transport&        0         &        0         &        0         &
 \backslash
  2.band
 \backslash
-_transport&  -0.0133
+_transport&  -0.0135
 \backslash
 sym{*}  & -0.00916
 \backslash
@@ -1976,7 +1985,7 @@ sym{**} & -0.00459         &  -0.0274
 \backslash
 
 \backslash
-           &  (0.033)         &  (0.008)         &  (0.199)         &  (0.422)
+           &  (0.025)         &  (0.008)         &  (0.199)         &  (0.422)
          
 \backslash
 
@@ -1995,7 +2004,7 @@ _equipment&        0         &        0         &        0         &
 \backslash
  2.band
 \backslash
-_equipment& -0.00405         &  -0.0111
+_equipment& -0.00333         &  -0.0111
 \backslash
 sym{***}&  0.00387         &  -0.0549
 \backslash
@@ -2003,34 +2012,34 @@ sym{*}
 \backslash
 
 \backslash
-           &  (0.573)         &  (0.001)         &  (0.346)         &  (0.038)
+           &  (0.632)         &  (0.001)         &  (0.346)         &  (0.038)
          
 \backslash
 
 \backslash
  3.band
 \backslash
-_equipment&  0.00487         &  -0.0132         & -0.00317         &  -0.0202
+_equipment&  0.00398         &  -0.0132         & -0.00317         &  -0.0202
          
 \backslash
 
 \backslash
-           &  (0.587)         &  (0.053)         &  (0.595)         &  (0.613)
+           &  (0.647)         &  (0.053)         &  (0.595)         &  (0.613)
          
 \backslash
 
 \backslash
  4.band
 \backslash
-_equipment&   0.0394
+_equipment&   0.0328
 \backslash
-sym{***}&   0.0118         &   0.0187
+sym{**} &   0.0118         &   0.0187
 \backslash
 sym{*}  &   0.0830         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.147)         &  (0.011)         &  (0.077)
+           &  (0.003)         &  (0.147)         &  (0.011)         &  (0.077)
          
 \backslash
 
@@ -2045,20 +2054,20 @@ sym{*}  &   0.0830
 \backslash
 
 \backslash
- 1.expensiveregion& -0.00456         &   0.0157
+ 1.expensiveregion& -0.00409         &   0.0157
 \backslash
 sym{***}&  0.00209         &   0.0138         
 \backslash
 
 \backslash
-           &  (0.535)         &  (0.000)         &  (0.606)         &  (0.581)
+           &  (0.566)         &  (0.000)         &  (0.606)         &  (0.581)
          
 \backslash
 
 \backslash
  
 \backslash
-_cons    &    0.529
+_cons    &    0.524
 \backslash
 sym{***}&    0.810
 \backslash
@@ -2084,9 +2093,9 @@ _sparse&                  &                  &                  &
 \backslash
 
 \backslash
- nonrarefood
+ nonsparsefood
 \backslash
-_region&    0.249
+_region&    0.254
 \backslash
 sym{***}&                  &                  &                  
 \backslash
@@ -2099,7 +2108,7 @@ sym{***}&                  &                  &
 \backslash
  occupation
 \backslash
-_rank&   0.0811
+_rank&   0.0781
 \backslash
 sym{**} &    0.424
 \backslash
@@ -2111,7 +2120,7 @@ sym{*}
 \backslash
 
 \backslash
-           &  (0.002)         &  (0.000)         &  (0.000)         &  (0.025)
+           &  (0.003)         &  (0.000)         &  (0.000)         &  (0.025)
          
 \backslash
 
@@ -2135,7 +2144,7 @@ sym{***}
 \backslash
 
 \backslash
- nonrareenergy
+ nonsparseenergy
 \backslash
 _region&                  &    0.938
 \backslash
@@ -2148,7 +2157,7 @@ sym{***}&                  &
 \backslash
 
 \backslash
- nonrarepersprd
+ nonsparsepersprd
 \backslash
 _region&                  &                  &    0.383
 \backslash
@@ -2161,7 +2170,7 @@ sym{***}&
 \backslash
 
 \backslash
- nonraretransport
+ nonsparsetransport
 \backslash
 _region&                  &                  &                  &    0.298
 \backslash
@@ -2176,7 +2185,7 @@ sym{*}
 \backslash
  
 \backslash
-_cons    &   -1.485
+_cons    &   -1.488
 \backslash
 sym{***}&   -3.361
 \backslash
@@ -2200,12 +2209,12 @@ hline mills     &                  &                  &
 \backslash
 
 \backslash
- lambda    & -0.00288         &  -0.0118         &   0.0129         &   -0.307
+ lambda    &  -0.0172         &  -0.0118         &   0.0129         &   -0.307
          
 \backslash
 
 \backslash
-           &  (0.940)         &  (0.104)         &  (0.424)         &  (0.153)
+           &  (0.637)         &  (0.104)         &  (0.424)         &  (0.153)
          
 \backslash
 
@@ -2282,7 +2291,7 @@ sym{***}
 \backslash
  
 \backslash
-end{tabular}} 
+end{tabular} } 
 \backslash
 end{table} 
 \end_layout
@@ -2313,22 +2322,6 @@ Demand for sparsely available goods
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \paragraph_spacing single
 \begin_inset Float figure
 wide false
@@ -2339,14 +2332,14 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/not_rare_food.png
-	scale 60
+	scale 35
 
 \end_inset
 
 
 \begin_inset Graphics
 	filename figures/rare_food.png
-	scale 60
+	scale 35
 
 \end_inset
 
@@ -2357,28 +2350,18 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:sparsefood"
+
+\end_inset
+
 Sparsely available and widely available food items
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-twocolumn
 \end_layout
 
 \end_inset
@@ -2414,9 +2397,11 @@ ref{tabheckwlogx}
 
 .
  For categories the {social functions, housing}, we do not find any particularly
- items that can deemed sparsely available .
- Such categories indicate that there may not be many ways to compensate
- for not having an asset.
+ items that can deemed sparsely available.
+ Since the mills ratio is significant only for energy and transport, we
+ conclude that the selection based on region is not significant for food
+ and personal products.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3005,7 +2990,7 @@ summary(lm(data=g,w~ln_tot_exp+ln_tot_asset_cost))
 \family typewriter
 \size footnotesize
 gf<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "food", returnBeforeGrouping = FALSE,basis='rareness')
+r,categoryName = "food", returnBeforeGrouping = FALSE,basis='sparseness')
 \end_layout
 
 \begin_layout Plain Layout
@@ -3013,7 +2998,7 @@ r,categoryName = "food", returnBeforeGrouping = FALSE,basis='rareness')
 \family typewriter
 \size footnotesize
 ge<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "energy", returnBeforeGrouping = FALSE,basis="rareness")
+r,categoryName = "energy", returnBeforeGrouping = FALSE,basis="sparseness")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3021,8 +3006,8 @@ r,categoryName = "energy", returnBeforeGrouping = FALSE,basis="rareness")
 \family typewriter
 \size footnotesize
 gp<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "personal_products", returnBeforeGrouping = FALSE,basis="rarene
-ss")
+r,categoryName = "personal_products", returnBeforeGrouping = FALSE,basis="sparse
+ness")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3030,7 +3015,7 @@ ss")
 \family typewriter
 \size footnotesize
 gt<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "transport", returnBeforeGrouping = FALSE,basis="rareness")
+r,categoryName = "transport", returnBeforeGrouping = FALSE,basis="sparseness")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3038,7 +3023,7 @@ r,categoryName = "transport", returnBeforeGrouping = FALSE,basis="rareness")
 \family typewriter
 \size footnotesize
 gh<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "housing", returnBeforeGrouping = FALSE,basis="rareness")
+r,categoryName = "housing", returnBeforeGrouping = FALSE,basis="sparseness")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3046,8 +3031,8 @@ r,categoryName = "housing", returnBeforeGrouping = FALSE,basis="rareness")
 \family typewriter
 \size footnotesize
 gs<-ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln=lsms_normalize
-r,categoryName = "social_functions", returnBeforeGrouping = FALSE,basis="rarenes
-s")
+r,categoryName = "social_functions", returnBeforeGrouping = FALSE,basis="sparsen
+ess")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3075,14 +3060,14 @@ gs$ln_tot_categ_exp<-log(gs$tot_categ_exp)
 
 \family typewriter
 \size footnotesize
-gs$w_nonrare<-NULL
+gs$w_nonsparse<-NULL
 \end_layout
 
 \begin_layout Plain Layout
 
 \family typewriter
 \size footnotesize
-gs$w_rare<-NULL
+gs$w_sparse<-NULL
 \end_layout
 
 \begin_layout Plain Layout
@@ -3191,26 +3176,41 @@ res$has_english<-is.element(res$litlang,c(2,3))
 \end_layout
 
 \begin_layout Plain Layout
-res$nonrarefood_region <- as.integer(!is.element(res$region,c(2, 13, 20, 51,
- 15, 16, 1, 6, 10, 54, 55)))
+
+\family typewriter
+\size footnotesize
+res$nonsparsefood_region <- as.integer(!is.element(res$region,c(2, 13, 20,
+ 51, 15, 16, 1, 6, 10, 54, 55)))
 \end_layout
 
 \begin_layout Plain Layout
-res$nonrareenergy_region <- as.integer(!is.element(res$region,c(1,4,12,8,17,16,9,1
-4,10 ))) 
+
+\family typewriter
+\size footnotesize
+res$nonsparseenergy_region <- as.integer(!is.element(res$region,c(1,4,12,8,17,16,9
+,14,10 ))) 
 \end_layout
 
 \begin_layout Plain Layout
-res$nonrarepersprd_region <- as.integer(!is.element(res$region,c(4, 13, 51,
- 54, 52, 6, 8, 12, 14, 55))) 
+
+\family typewriter
+\size footnotesize
+res$nonsparsepersprd_region <- as.integer(!is.element(res$region,c(4, 13,
+ 51, 54, 52, 6, 8, 12, 14, 55))) 
 \end_layout
 
 \begin_layout Plain Layout
-res$nonraretransport_region <- as.integer(!is.element(res$region,c( 20,51,17,19
+
+\family typewriter
+\size footnotesize
+res$nonsparsetransport_region <- as.integer(!is.element(res$region,c( 20,51,17,19
  )))
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
 res$has_sparse<-res$high_expenditure>1e-1
 \end_layout
 
@@ -3230,6 +3230,9 @@ write_dta(res,'c:/temp/allg.dta')
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
 write_dta(subset(res,tag=="food"),'c:/temp/gf.dta')
 \end_layout
 
@@ -3237,7 +3240,7 @@ write_dta(subset(res,tag=="food"),'c:/temp/gf.dta')
 
 \family typewriter
 \size footnotesize
-#one can view the nonnormality of rare products as follows
+#one can view the nonnormality of sparse products as follows
 \end_layout
 
 \begin_layout Plain Layout
@@ -3251,7 +3254,7 @@ gff<-subset(gf,abs(tot_categ_exp)>1e-1)
 
 \family typewriter
 \size footnotesize
-hist(gff$w_nonrare,breaks=100,xlab="not rare products weight",main="Not
+hist(gff$w_nonsparse,breaks=100,xlab="not sparse products weight",main="Not
  Rare Food Products")
 \end_layout
 
@@ -3266,7 +3269,7 @@ gee<-subset(ge,abs(tot_categ_exp)>1e-1)
 
 \family typewriter
 \size footnotesize
-hist(gee$w_rare,breaks=100,xlab="rare product weight",main="Rare Energy
+hist(gee$w_sparse,breaks=100,xlab="sparse product weight",main="Rare Energy
  Sources")
 \end_layout
 
@@ -3274,8 +3277,8 @@ hist(gee$w_rare,breaks=100,xlab="rare product weight",main="Rare Energy
 
 \family typewriter
 \size footnotesize
-hist(gee$w_nonrare,breaks=100,xlab="not rare product weight",main="Not Rare
- Energy Sources")
+hist(gee$w_nonsparse,breaks=100,xlab="not sparse product weight",main="Not
+ Rare Energy Sources")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3296,7 +3299,7 @@ gpp<-subset(gp,abs(tot_categ_exp)>1e-1)
 
 \family typewriter
 \size footnotesize
-hist(gpp$w_rare,breaks=100,xlab="rare product weight",main="Rare personal
+hist(gpp$w_sparse,breaks=100,xlab="sparse product weight",main="Rare personal
  products")
 \end_layout
 
@@ -3304,8 +3307,8 @@ hist(gpp$w_rare,breaks=100,xlab="rare product weight",main="Rare personal
 
 \family typewriter
 \size footnotesize
-hist(gpp$w_nonrare,breaks=100,xlab="not rare product weight",main="Not Rare
- personal products")
+hist(gpp$w_nonsparse,breaks=100,xlab="not sparse product weight",main="Not
+ Rare personal products")
 \end_layout
 
 \begin_layout Plain Layout
@@ -3432,8 +3435,8 @@ ncr<-ll@check_diary_nullity(criteria = c("region"),year = 2012, dirprefix
 
 \family typewriter
 \size footnotesize
-ncr<-merge(ncr,lsms_normalizer()@lsms_groups_rarenessbased_2010_2012()[,c("categ
-ory","shortname")],by=c("shortname"),all.x=TRUE)
+ncr<-merge(ncr,lsms_normalizer()@lsms_groups_sparsenessbased_2010_2012()[,c("cat
+egory","shortname")],by=c("shortname"),all.x=TRUE)
 \end_layout
 
 \begin_layout Plain Layout
@@ -3452,6 +3455,9 @@ ncr<-subset(ncr,!is.na(category))
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
 x<-mutate(merge(subset(ncr, category=="food" & shortname=="butter_margarine"),po
 p),np=n/p);x[order(x$np),]
 \end_layout
@@ -3475,26 +3481,27 @@ subset(ncr,is.na(n) & category=="food")
 \family typewriter
 \size footnotesize
 # ignore { chicken, spices, maize_green, cassava_flour, maize_grain, mangoes,
- sweet, sugarcane, milk_products, bread, coconut} (not rare enough), {nut_produc
-ts, wild_birds, packaged_fish, dried_canned_veg, wild_meat, miscdrinkpowder,
+ sweet, sugarcane, milk_products, bread, coconut} (not sparse enough), {nut_prod
+ucts, wild_birds, packaged_fish, dried_canned_veg, wild_meat, miscdrinkpowder,
  millet_grain, othervegstarch, readymade_tea_coffee, goat, canned_milk,
- winesprits} (too rare), include cashew_almonds, coffee, yam, beer, honey,
- brews, pasta, pork, butter_margarine, (based on how rare these items are)
+ winesprits} (too sparse), include cashew_almonds, coffee, yam, beer, honey,
+ brews, pasta, pork, butter_margarine, (based on how sparse these items
+ are)
 \end_layout
 
 \begin_layout Plain Layout
 
 \family typewriter
 \size footnotesize
-# rare: {camera toilet_paper misc_cleaning phone sports_hobby consumer_durables_
-repair}
+# sparse: {camera toilet_paper misc_cleaning phone sports_hobby consumer_durable
+s_repair}
 \end_layout
 
 \begin_layout Plain Layout
 
 \family typewriter
 \size footnotesize
-# not rare : {cellphone_voucher bar_soap clothes_soap toothpaste skin_cream
+# not sparse : {cellphone_voucher bar_soap clothes_soap toothpaste skin_cream
  other_personal mensclothes womensclothes childrensclothes mensshoes womensshoes
  childrensshoes}
 \end_layout
@@ -3503,8 +3510,8 @@ repair}
 
 \family typewriter
 \size footnotesize
-# in housing, only light_builds and mosquito_net seemed rare - we have ignored
- rareness factor for housing too therefore
+# in housing, only light_builds and mosquito_net seemed sparse - we have
+ ignored sparseness factor for housing too therefore
 \end_layout
 
 \begin_layout Plain Layout

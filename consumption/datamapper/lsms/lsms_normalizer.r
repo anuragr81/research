@@ -7,7 +7,7 @@ if (isClass("LSMSNormalizer")){
 setClass("LSMSNormalizer", representation(food_categories_lsms_2010="function",
                                           items_codes_2010="function",
                                           lsms_groups_pricebased_2010_2012="function",
-                                          lsms_groups_rarenessbased_2010_2012="function",
+                                          lsms_groups_sparsenessbased_2010_2012="function",
                                           assets_order_2010_2012="function",
                                           items_codes_2012="function",
                                           asset_types_2010_2012="function",
@@ -678,7 +678,7 @@ lsms_normalizer<-function() {
     return(x)
   }
   
-  lsms_groups_rarenessbased_2010_2012<- function(){
+  lsms_groups_sparsenessbased_2010_2012<- function(){
     
     x<-NULL
     
@@ -2056,7 +2056,7 @@ lsms_normalizer<-function() {
   return(new("LSMSNormalizer",food_categories_lsms_2010=food_categories_lsms_2010, 
              items_codes_2010=items_codes_2010,
              lsms_groups_pricebased_2010_2012=lsms_groups_pricebased_2010_2012,
-             lsms_groups_rarenessbased_2010_2012=lsms_groups_rarenessbased_2010_2012,
+             lsms_groups_sparsenessbased_2010_2012=lsms_groups_sparsenessbased_2010_2012,
              assets_order_2010_2012=assets_order_2010_2012,
              items_codes_2012=items_codes_2012,
              asset_types_2010_2012=asset_types_2010_2012,

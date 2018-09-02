@@ -1058,9 +1058,9 @@ lsms_loader<-function(fu,ln) {
       if (basis=="price"){
         print("Price based groups")
         groups      <- subset( ln()@lsms_groups_pricebased_2010_2012(), category == categoryName )
-      } else if (basis == "rareness"){
-        print("Rareness based groups")
-        groups      <- subset( ln()@lsms_groups_rarenessbased_2010_2012(), category == categoryName )
+      } else if (basis == "sparseness"){
+        print("sparseness based groups")
+        groups      <- subset( ln()@lsms_groups_sparsenessbased_2010_2012(), category == categoryName )
       } else {
         stop("Invalid basis")
       }
@@ -1442,8 +1442,8 @@ lsms_loader<-function(fu,ln) {
   add_high_low_exp_ratios<- function(ds) {
     if (all(is.element(c("high_expenditure","total_expenditure","highratio","tot_categ_exp"), colnames(ds)))) {
       print("Adding high-low expenditures to total expenditure")
-      ds$w_rare<-with(ds,high_expenditure/total_expenditure)
-      ds$w_nonrare<-with(ds,(tot_categ_exp*(1-highratio)/total_expenditure))
+      ds$w_sparse<-with(ds,high_expenditure/total_expenditure)
+      ds$w_nonsparse<-with(ds,(tot_categ_exp*(1-highratio)/total_expenditure))
     }
     return(ds)
   }
