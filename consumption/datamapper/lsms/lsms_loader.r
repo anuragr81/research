@@ -898,7 +898,7 @@ lsms_loader<-function(fu,ln) {
     totexp<-merge(totexp,tothouserent)
     print(paste("Number of households after merging total_expenditure with houserent = ",length(unique(totexp$hhid))))
     
-    totexp$total_expenditure=totexp$total_expenditure+totexp$toteducexpense#totexp$tothouserent
+    totexp$total_expenditure=totexp$total_expenditure+totexp$toteducexpense+totexp$tothouserent
     
     #* calculating educational expense and total houserent
     print(paste("Number of households with total expenditure data = ",length(unique(totexp$hhid))))
