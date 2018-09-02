@@ -508,9 +508,9 @@ reference "subsec:availability_as_restricted_demand"
  The selection equation in the Heckman model accounts for non-normal limiting
  of the control variables in the regression (as the OLS would be invalid
  when the dependent variable is limited).
- The rare items in every category are observed simply by aggregating the
- usage of every item at the region/district level.
- The selected rare items are shown in the Table 
+ The sparsely available items in every category are observed simply by aggregati
+ng the usage of every item at the region/district level.
+ The selected sparse items are shown in the Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:rare_items"
@@ -524,9 +524,9 @@ reference "tab:rare_items"
 \begin_layout Standard
 Considering the case of electricity as an example - a commodity that is
  available predominantly in the urban areas in Tanzania - we treat the access
- to electricity as the rare item for energy and the region dummy as the
- selection variable (households with no electricity are considered to not
- have been 
+ to electricity as the sparsely available item for energy and the region
+ dummy as the selection variable (households with no electricity are considered
+ to not have been 
 \begin_inset Quotes eld
 \end_inset
 
@@ -808,7 +808,7 @@ reference "sec:assets_model_status"
 \begin_inset Formula $w_{c\in\mathscr{C}}$
 \end_inset
 
- by looking at basket of rare items.
+ by looking at basket of sparsely available items.
 \end_layout
 
 \begin_layout Subsection
@@ -819,15 +819,17 @@ name "subsec:availability_as_restricted_demand"
 
 \end_inset
 
-The demand for rare commodities
+The demand for sparsely available commodities
 \end_layout
 
 \begin_layout Standard
 \paragraph_spacing single
-As discussed earlier, the rareness of items presents a clear case of a selection
- model since a consumer living in a region where the rare item does not
- exist would clearly have no consumption on the set of items that are rare.
- The rareness can also act as a refinement of the use of 
+As discussed earlier, the sparseness of the availability of items presents
+ a clear case of a selection model since a consumer living in a region where
+ the sparely available item does not exist would clearly have no consumption
+ on the set of items that are sparsely available.
+ This sparseness of availability can also act as a refinement of the use
+ of 
 \begin_inset Formula $w_{c\in\mathscr{C}}$
 \end_inset
 
@@ -838,9 +840,9 @@ As discussed earlier, the rareness of items presents a clear case of a selection
 \begin_layout Standard
 While the regional variations (urban, rural etc.) are also indicated with
  the significance of region dummy in the regression of budget shares against
- log of expenditure, the two sub-groups (rare, non-rare) help understand
- how the demand for rare and non-rate items in the urban areas may be influenced
- by the household characteristics.
+ log of expenditure, the two sub-groups (sparse, non-sparse) help understand
+ how the demand for sparsely available and densely available items in the
+ urban areas may be influenced by the household characteristics.
 \end_layout
 
 \begin_layout Subsection
@@ -866,8 +868,9 @@ Collecting all the the items within a category into one group and treat
  assumptions to hold for each of the groups i.e.
  the constant movement of a common price factor of the prices in a group.
  The separation of items in a category into two sub-groups partly addresses
- this concern - since the price of the rare items are more likely to move
- together than of the group that considers both rare and non-rare items.
+ this concern - since the price of the sparsely available items are more
+ likely to move together than of the group that considers both sparsely
+ available items and widely available items.
  Still, this can only be verified in a time-series of data - since prices
  are fixed in a cross-sectional analysis.
 \end_layout
@@ -988,10 +991,11 @@ We can see that the expenditure on personal products is higher for renters
 \end_layout
 
 \begin_layout Standard
-Within the categories, we can see the role of rare commodities.
+Within the categories, we can see the role of sparsely available commodities.
  Energy has clear segregation (difference in budget shares) due to electricity,
  education has one due to preference for the English language and so on.
- Rare items in other categories are shown in the table 
+ Items that are sparsely available in other categories are shown in the
+ table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:rare_items"
@@ -1001,7 +1005,8 @@ reference "tab:rare_items"
 .
  As is clear from the table, there are more severe inequalities that exist
  in rural areas for items in categories other than food (.e.
- no substitutes are available for the rare item in the rural areas).
+ no substitutes are available for the sparsely available item in the rural
+ areas).
 \end_layout
 
 \begin_layout Standard
@@ -1011,7 +1016,7 @@ In conclusion, the pecuniary emulations seems only to exist for housing.
 \end_layout
 
 \begin_layout Subsection
-Demand for rarer goods
+Demand for sparsely available goods
 \end_layout
 
 \begin_layout Standard
@@ -1043,7 +1048,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Rare and non rare food items
+Sparsely available and widely available food items
 \end_layout
 
 \end_inset
@@ -1061,8 +1066,8 @@ Rare and non rare food items
 The selection criterion includes the factors that restrict the dependent
  variable (consumption of the restricted commodity in our case).
  In the case of energy, we use the availability of electricity while in
- the case of food, we use the availability of a set of rare items listed
- in Table 
+ the case of food, we use the availability of a set of sparsely available
+ items listed in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:rare_items"
@@ -1071,7 +1076,7 @@ reference "tab:rare_items"
 
  .
  For categories the {social functions, housing}, we do not find any particularly
- items that can deemed rare.
+ items that can deemed sparsely available .
  Such categories indicate that there may not be many ways to compensate
  for not having an asset.
 \end_layout
@@ -1110,7 +1115,7 @@ category
 \align left
 
 \bar under
-rare commodities
+Sparsely available commodities
 \end_layout
 
 \end_inset
@@ -1245,7 +1250,7 @@ petrol
 \begin_inset Text
 
 \begin_layout Plain Layout
-20,51,17,19
+all except 20,51,17,19
 \end_layout
 
 \end_inset
@@ -1849,6 +1854,30 @@ res$has_english<-is.element(res$litlang,c(2,3))
 \end_layout
 
 \begin_layout Plain Layout
+res$nonrarefood_region <- as.integer(!is.element(res$region,c(2, 13, 20, 51,
+ 15, 16, 1, 6, 10, 54, 55)))
+\end_layout
+
+\begin_layout Plain Layout
+res$nonrareenergy_region <- as.integer(!is.element(res$region,c(1,4,12,8,17,16,9,1
+4,10 ))) 
+\end_layout
+
+\begin_layout Plain Layout
+res$nonrarepersprd_region <- as.integer(!is.element(res$region,c(4, 13, 51,
+ 54, 52, 6, 8, 12, 14, 55))) 
+\end_layout
+
+\begin_layout Plain Layout
+res$nonraretransport_region <- as.integer(!is.element(res$region,c( 20,51,17,19
+ )))
+\end_layout
+
+\begin_layout Plain Layout
+res$has_sparse<-res$high_expenditure>1e-1
+\end_layout
+
+\begin_layout Plain Layout
 
 \family typewriter
 \size footnotesize
@@ -1861,6 +1890,10 @@ res<-merge(res,data.frame(housingstatus=c(1,2,3,4,5,6),housing_type=c(1,2,3,2,3,
 \family typewriter
 \size footnotesize
 write_dta(res,'c:/temp/allg.dta')
+\end_layout
+
+\begin_layout Plain Layout
+write_dta(subset(res,tag=="food"),'c:/temp/gf.dta')
 \end_layout
 
 \begin_layout Plain Layout
