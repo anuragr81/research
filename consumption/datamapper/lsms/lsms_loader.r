@@ -214,6 +214,95 @@ lsms_loader<-function(fu,ln) {
       return(mlk)
       #*    merging all the 4 categories results in the expenditure file
     }
+    if (year == 2008) {
+      # combine sections ( k , l, m )
+      kdat <- read_tnz(paste(dirprefix,'./lsms/tnz2008/TZNPS1HHDTA_E/SEC_K1.dta',sep=""),FALSE,hhidColName="hhid")
+      
+      #*    Reading weekly Diary data in Section K data and retrieving item as well as the quantity as well as cost 
+      
+      k <- fu()@get_translated_frame(dat=kdat,
+                                     names=ln()@diary_info_columns_lsms_2008(),
+                                     m=ln()@hh_mapping_lsms_2008())
+      k$hhid <-as.character(k$hhid)
+      
+      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      k$item<-k$item+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
+      factor <- 52
+      
+      #*    Multiplied weekly diary data by 52 (to look at annual data)
+      # quantities are normalized to annual values
+      k$cost <- k$cost*factor
+      k$lwp <- k$lwp *factor
+      k$own <-k$own*factor
+      k$gift <-k$gift*factor
+      
+      #*    gift quantities are ignored (total quantity ignored is to be presented)
+      #*    weekly recall items are also multiplied by 52
+      
+      ldat <- read_tnz(paste(dirprefix,"/lsms/tnz2008/TZNPS1HHDTA_E/SEC_L.dta",sep=""),FALSE,hhidColName = "hhid")
+      l <- fu()@get_translated_frame(dat=ldat,
+                                     names=ln()@get_lsms_secl_info_columns_2008(),
+                                     m=ln()@get_lsms_secl_fields_mapping_2008())
+      l$hhid <-as.character(l$hhid)
+      l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
+      weekly_recall_items <-c(101,102,103)
+      
+      # l is weekly and  monthly data
+      
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=52,
+                                       items_list = weekly_recall_items)
+      #*    Monthly recall items are multiplied by 12
+      
+      monthly_recall_items_non_repair <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
+                                           "210", "211", "212", "213", "214", "215", "216", "217", "218", "221", "222")  
+      
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=12,
+                                       items_list = monthly_recall_items_non_repair)
+      
+      monthly_recall_items_repair     <- c("219", "220", "223", "224")
+      
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=6,
+                                       items_list = monthly_recall_items_repair)
+      
+      
+      # m is yearly data
+      mdat <-read_tnz( paste(dirprefix,'./lsms/tnz2008/TZNPS1HHDTA_E/SEC_M.dta',sep=""),FALSE,hhidColName = "hhid")
+      m <- fu()@get_translated_frame(dat=mdat,
+                                     names=ln()@get_lsms_secm_info_columns(2008),
+                                     m=ln()@get_lsms_secm_fields_mapping(2008))
+      m$hhid <-as.character(m$hhid)
+      m<- m[!is.na(m$hhid) & !is.na(m$cost) & m$cost>0,]
+      
+      
+      #########
+      ml <-merge(m,l,all=TRUE)
+      
+      mlk <-merge(ml,k,all=TRUE)
+      #print("RETURNING PREMATURELY")
+      #return(mlk)
+      
+      ## mapping name codes
+      mlk <-merge(mlk,plyr::rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+      if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
+      
+      # filtering out extreme values
+      extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid ) 
+      print (paste("Households with extreme data (with many times the median) - purged from the diary file:",length(extremeDataHhids)))
+      mlk              <- dplyr::filter(mlk,!is.element(hhid,extremeDataHhids))
+      
+      return(mlk)
+      
+      
+    }
     stop(paste("Year:",year, " not supported"))
   }
   
@@ -1192,8 +1281,7 @@ lsms_loader<-function(fu,ln) {
   group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryName,returnBeforeGrouping){
     if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
-    } 
-    
+    }
     
     
     hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)

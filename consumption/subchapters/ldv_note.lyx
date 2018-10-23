@@ -2816,6 +2816,150 @@ The Bonus method attempts to put the logit of ownership (
  We use the log of total cost of the asset (which is wrong).
 \end_layout
 
+\begin_layout Section*
+An advanced treatment of quality and status
+\end_layout
+
+\begin_layout Standard
+After some rethinking of the model, we intend to use a two-state model for
+ status related consumption.
+ The key idea is that status is that money is indeed allocated for status
+ - although not directly - since no product is actually bought for status
+ per se.
+ Status is only a first-stage concern i.e.
+ the consumer allocates money for status in the first-stage.
+ In the second stage, the consumer increases the quality based on the money
+ allocated.
+ More formally, 
+\begin_inset Formula 
+\begin{align}
+U & =u_{1}(\lambda_{food}u_{2,food}(q_{food}),\lambda_{energy}u_{2,energy}(q_{energy}),...)\label{eq:utility_formula}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $\lambda_{c\in\mathscr{C}}$
+\end_inset
+
+ denotes the money allocated status in the stage 1, 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ is the first-stage utility-aggregator, 
+\begin_inset Formula $q_{c\in\mathscr{C}}$
+\end_inset
+
+ is the quantity consumed.
+ An alternative formulation could take 
+\begin_inset Formula $\lambda_{c\in\mathscr{C}}$
+\end_inset
+
+ inside a second-stage utility function 
+\begin_inset Formula $u_{2,c\in\mathscr{C}}$
+\end_inset
+
+.
+ If status measure or quality can be seen as a commodity then 
+\begin_inset Formula $\lambda_{c\in\mathscr{C}}$
+\end_inset
+
+ is simply the Marshallian demand function (
+\begin_inset Formula $g(x,p)$
+\end_inset
+
+) of this status/quality commodity.
+ 
+\end_layout
+
+\begin_layout Standard
+We know that a lot of individuals would lose out on the status game because
+ of where they live or what occupation they have etc.
+ - so that 
+\begin_inset Formula $\lambda_{c\in\mathscr{C}}$
+\end_inset
+
+ is zero for them - i.e.
+ the first-stage status allocation is zero for them.
+ If we ignore the selection or truncation of 
+\begin_inset Formula $\lambda_{c\in\mathscr{C}}$
+\end_inset
+
+ for a while, we must be able to derive an econometric model corresponding
+ to Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:utility_formula"
+
+\end_inset
+
+.
+ 
+\begin_inset Formula $\lambda_{c\in\mathscr{C}}$
+\end_inset
+
+ is equivalent of the quantity of a commodity that a consumer would purchase.
+ It must therefore, also have a price associated with it - let's call it
+ 
+\begin_inset Formula $\pi_{c\in\mathscr{C}}$
+\end_inset
+
+.
+ A consumer's measure of status 
+\begin_inset Formula $\lambda_{c\in\mathscr{C}}$
+\end_inset
+
+ (which determines 
+\begin_inset Formula $U(...,\lambda_{c\in\mathscr{C}}\cdot u_{c\in\mathscr{C}}(q_{c\in\mathscr{C}}),...)$
+\end_inset
+
+) depends on this price.
+ It does seem, intuitively at least, that 
+\begin_inset Formula $\lambda_{c\in\mathscr{C}}$
+\end_inset
+
+ - the consumer's measure of status factor - should be written in terms
+ of the price for status factor 
+\begin_inset Formula $\pi_{c\in\mathscr{C}}$
+\end_inset
+
+.
+ Deaton proceeds with 
+\begin_inset Formula $c(u,p)$
+\end_inset
+
+ - using Gorman's conditions for separability.
+ We can use Muellbauer's conditions for 
+\begin_inset Formula $c(u,p)$
+\end_inset
+
+ and make sure we are able to model the status parameter in that function.
+ But even if we were to just imagine a status function alone for now, we
+ can forget about the constraints of the demand function and focus on the
+ expected status alone.
+ Ignoring the conditions of the homegeneity, adding-up, semi-definiteness
+ and non-negativity doesn't mean that we don't consider the non-status utility
+ - the relative preference to which is necessary to define what we consider
+ status-related consumption.
+\end_layout
+
+\begin_layout Standard
+For us to apply a selection on 
+\begin_inset Formula $\lambda_{c\in\mathscr{C}}$
+\end_inset
+
+, we must have a regression with 
+\begin_inset Formula $\lambda_{c\in\mathscr{C}}$
+\end_inset
+
+ as the dependent variable and the prices, income (or total expenditure)
+ as the dependent variable.
+\end_layout
+
 \begin_layout Standard
 \paragraph_spacing single
 \begin_inset ERT
@@ -2864,7 +3008,7 @@ setwd('C:/local_files/research/consumption/datamapper')
 
 \family typewriter
 \size footnotesize
-source('lsms/lsms_normalizer.r')
+source('lsms/lsms_normalizer.r')t
 \end_layout
 
 \begin_layout Plain Layout

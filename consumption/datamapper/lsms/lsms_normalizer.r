@@ -4,7 +4,10 @@ if (isClass("LSMSNormalizer")){
 }
 
 ## all exported functions are declared here
-setClass("LSMSNormalizer", representation(food_categories_lsms_2010="function",
+setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
+                                          get_lsms_secl_info_columns_2008="function",
+                                          get_lsms_secl_fields_mapping_2008="function",
+                                          food_categories_lsms_2010="function",
                                           items_codes_2010="function",
                                           lsms_groups_pricebased_2010_2012="function",
                                           lsms_groups_sparsenessbased_2010_2012="function",
@@ -39,6 +42,7 @@ setClass("LSMSNormalizer", representation(food_categories_lsms_2010="function",
                                           get_diary_info_columns="function",
                                           ohs_info_columns_lsms_2010="function",
                                           diary_info_columns_lsms_2010="function",
+                                          diary_info_columns_lsms_2008="function",
                                           hh_mapping_lsms_2010="function",
                                           ohs_mapping_lsms_2010="function",
                                           get_lsms_sece1_columns_2010="function",
@@ -320,7 +324,7 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='Wine and spirits',shortname='winespirits',code='11108',category="food"))
     return(r)
   }
-
+  
   items_codes_2012<-function() { 
     r=data.frame(item=NULL,code=NULL)
     r=rbind(r,data.frame(item='Cigarettes',shortname='cigarettes',code='101', category = "misc"))
@@ -350,7 +354,7 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='Servant Wages',shortname='services',code='221',category="social_functions"))
     r=rbind(r,data.frame(item='Mortgage payment',shortname='mortgage',code='222',category="ignored"))
     r=rbind(r,data.frame(item='House repair',shortname='house_repair',code='223',category="ignored"))
-####
+    ####
     r=rbind(r,data.frame(item='CarpetsRugs',shortname='carpet',code='301',category="housing"))
     r=rbind(r,data.frame(item='Linen',shortname='linen',code='302',category="housing"))
     r=rbind(r,data.frame(item='Mats',shortname='mat',code='303',category="housing"))
@@ -531,7 +535,7 @@ lsms_normalizer<-function() {
     #x<-rbind(x,data.frame(shortname='poultry',           has_expenditure=FALSE,stringsAsFactors=FALSE))
     
     #x<-rbind(x,data.frame(shortname='hoe',               has_expenditure=FALSE,stringsAsFactors=FALSE))
-     
+    
     #x<-rbind(x,data.frame(shortname='harrow',            has_expenditure=FALSE,stringsAsFactors=FALSE))
     
     #x<-rbind(x,data.frame(shortname='wheelbarrow',       has_expenditure=FALSE,stringsAsFactors=FALSE))
@@ -541,10 +545,10 @@ lsms_normalizer<-function() {
     
     
     x<-rbind(x,data.frame(shortname='iron',              has_expenditure=FALSE,stringsAsFactors=FALSE))
-
+    
     x<-rbind(x,data.frame(shortname='stove_other',       has_expenditure=FALSE,stringsAsFactors=FALSE))
     x<-rbind(x,data.frame(shortname='stove_electricgas', has_expenditure=FALSE,stringsAsFactors=FALSE))
-        
+    
     x<-rbind(x,data.frame(shortname='radio',             has_expenditure=FALSE,stringsAsFactors=FALSE))
     x<-rbind(x,data.frame(shortname='public_transport',  has_expenditure=TRUE,stringsAsFactors=FALSE))
     
@@ -582,7 +586,7 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(shortname="services",          has_expenditure=TRUE, stringsAsFactors=FALSE))
     
     x<-rbind(x,data.frame(shortname='ac_fan',            has_expenditure=FALSE,stringsAsFactors=FALSE))
-
+    
     x<-rbind(x,data.frame(shortname='waterpump',            has_expenditure=FALSE,stringsAsFactors=FALSE))
     
     x<-rbind(x,data.frame(shortname='tv',                has_expenditure=FALSE,stringsAsFactors=FALSE))
@@ -601,7 +605,7 @@ lsms_normalizer<-function() {
     
     #x<-rbind(x,data.frame(shortname='engine_outboard',        has_expenditure=FALSE,stringsAsFactors=FALSE))
     
-      
+    
     x<-rbind(x,data.frame(shortname='motorbike',              has_expenditure=FALSE,stringsAsFactors=FALSE))
     x<-rbind(x,data.frame(shortname='car',                    has_expenditure=FALSE,stringsAsFactors=FALSE))
     #x<-rbind(x,data.frame(shortname='reaper',                 has_expenditure=FALSE,stringsAsFactors=FALSE))
@@ -610,9 +614,9 @@ lsms_normalizer<-function() {
     #x<-rbind(x,data.frame(shortname='tractor',                has_expenditure=FALSE,stringsAsFactors=FALSE))
     #x<-rbind(x,data.frame(shortname='trailer',                has_expenditure=FALSE,stringsAsFactors=FALSE))
     #x<-rbind(x,data.frame(shortname='harvester',              has_expenditure=FALSE,stringsAsFactors=FALSE))
-     
+    
     x<-rbind(x,data.frame(shortname="funeral",                has_expenditure=TRUE, stringsAsFactors=FALSE))
-      
+    
     x<-rbind(x,data.frame(shortname="bride_price",      has_expenditure=TRUE, stringsAsFactors=FALSE))
     x<-rbind(x,data.frame(shortname="marriage",         has_expenditure=TRUE, stringsAsFactors=FALSE))
     
@@ -628,7 +632,7 @@ lsms_normalizer<-function() {
     y$mask  <-    2^seq(0,dim(y)[1]-1)
     return(y)
   }
-
+  
   asset_types_2010_2012 <-function()
   {
     x<-NULL
@@ -768,7 +772,7 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category = "personal_products", group="high",shortname="sports_hobby"))
     x<-rbind(x,data.frame(category = "personal_products", group="high",shortname="camera"))
     
-############
+    ############
     
     # x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="watch"))
     # x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="radio"))
@@ -785,7 +789,7 @@ lsms_normalizer<-function() {
     # x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="bookexschool"))
     # 
     
-
+    
     x<-rbind(x,data.frame(category = "transport", group="low",          shortname="public_transport"))
     x<-rbind(x,data.frame(category = "transport", group="high",         shortname="motor_repair"))
     x<-rbind(x,data.frame(category = "transport", group="high",         shortname="petrol"))
@@ -926,7 +930,7 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category='food', group='high', shortname='citrus'))
     x<-rbind(x,data.frame(category='food', group='high', shortname='mangoes'))
     x<-rbind(x,data.frame(category='food', group='low', shortname='sugarcane'))
-      
+    
     x<-rbind(x,data.frame(category = "energy", group="low", shortname="kerosene"))
     x<-rbind(x,data.frame(category = "energy", group="low", shortname="charcoal"))
     x<-rbind(x,data.frame(category = "energy", group="low", shortname="gas"))
@@ -973,10 +977,10 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category = "personal_products", group="asset",shortname="childrensshoes"))
     
     
-#    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="bike"))
-#    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="public_transport"))
-#    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="motorbike"))
-#    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="car"))
+    #    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="bike"))
+    #    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="public_transport"))
+    #    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="motorbike"))
+    #    x<-rbind(x,data.frame(category = "transport", group="assetsonly",shortname="car"))
     
     x<-rbind(x,data.frame(category = "transport", group="low",          shortname="public_transport"))
     x<-rbind(x,data.frame(category = "transport", group="high",         shortname="motor_repair"))
@@ -1144,7 +1148,7 @@ lsms_normalizer<-function() {
     return(s)
   }
   get_lsms_secm_info_columns<-function(year){
-    if (year == 2010 || year ==2012){
+    if (year == 2008 || year == 2010 || year ==2012 ){
       return(c("hhid","item","is_consumed","cost"))
     } 
     stop(paste("Not secm info columns for year: ",year))
@@ -1187,6 +1191,15 @@ lsms_normalizer<-function() {
       s= rbind(s,data.frame(iesname="itemcode",name="item"))
       s= rbind(s,data.frame(iesname="hh_l02",name="cost"))
       s= rbind(s,data.frame(iesname="hh_l03",name="price"))
+      return(s)
+    }
+    if (year == 2008){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="smq1",name="is_consumed"))
+      s= rbind(s,data.frame(iesname="smcode",name="item"))
+      s= rbind(s,data.frame(iesname="smq2",name="cost"))
+      s= rbind(s,data.frame(iesname="smq3",name="price"))
       return(s)
     }
     stop(paste("Not secm info columns for year: ",year))
@@ -1748,6 +1761,38 @@ lsms_normalizer<-function() {
     return(s)
   }
   
+  diary_info_columns_lsms_2008<-function(){
+    return(c("hhid","item","lwp_unit", "lwp", "cost", "own_unit", "own", "gift_unit", "gift"))
+  }
+  
+  hh_mapping_lsms_2008 <-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="skcode",name="item"))
+    s= rbind(s,data.frame(iesname="skq3_meas",name="lwp_unit"))
+    s= rbind(s,data.frame(iesname="skq3_amount",name="lwp"))
+    s= rbind(s,data.frame(iesname="skq4",name="cost"))
+    s= rbind(s,data.frame(iesname="skq5_meas",name="own_unit"))
+    s= rbind(s,data.frame(iesname="skq5_amount",name="own"))
+    s= rbind(s,data.frame(iesname="skq6_meas",name="gift_unit"))
+    s= rbind(s,data.frame(iesname="skq6_amount",name="gift"))
+    return(s)
+  }
+  
+  get_lsms_secl_info_columns_2008<-function(){
+    return(c("hhid","item","is_consumed","cost"))
+  }
+  
+  get_lsms_secl_fields_mapping_2008<-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="slq1",name="is_consumed"))
+    s= rbind(s,data.frame(iesname="slcode",name="item"))
+    s= rbind(s,data.frame(iesname="slq2",name="cost"))
+    return(s)
+  }
+  
+  
   computeYearValues<-function(dat,
                               unit_field,
                               quantity_field,
@@ -2053,7 +2098,11 @@ lsms_normalizer<-function() {
     
   }
   
-  return(new("LSMSNormalizer",food_categories_lsms_2010=food_categories_lsms_2010, 
+  return(new("LSMSNormalizer",diary_info_columns_lsms_2008=diary_info_columns_lsms_2008,
+             hh_mapping_lsms_2008=hh_mapping_lsms_2008,
+             get_lsms_secl_info_columns_2008=get_lsms_secl_info_columns_2008,
+             get_lsms_secl_fields_mapping_2008=get_lsms_secl_fields_mapping_2008,
+             food_categories_lsms_2010=food_categories_lsms_2010, 
              items_codes_2010=items_codes_2010,
              lsms_groups_pricebased_2010_2012=lsms_groups_pricebased_2010_2012,
              lsms_groups_sparsenessbased_2010_2012=lsms_groups_sparsenessbased_2010_2012,
