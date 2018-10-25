@@ -7,6 +7,13 @@ if (isClass("LSMSNormalizer")){
 setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           get_lsms_secl_info_columns_2008="function",
                                           get_lsms_secl_fields_mapping_2008="function",
+                                          ohs_seca_mapping_lsms_2008="function",
+                                          ohs_info_columns_lsms_2008="function",
+                                          ohs_mapping_lsms_2008="function",
+                                          get_ohs_secc_columns_lsms_2008="function",
+                                          get_ohs_secc_fields_mapping_lsms_2008="function",
+                                          get_lsms_secj_info_columns_2008="function",
+                                          get_lsms_secj_fields_mapping_2008="function",
                                           food_categories_lsms_2010="function",
                                           items_codes_2010="function",
                                           lsms_groups_pricebased_2010_2012="function",
@@ -1278,7 +1285,7 @@ lsms_normalizer<-function() {
   }
   
   ohs_seccb_columns_lsms<-function(year){
-    if (year==2010 || year == 2012)
+    if (year == 2008 || year==2010 || year == 2012)
     {
       return(c("facilitycode","accessibility","distance","region","district","ward","travelcost"))
     }
@@ -1286,6 +1293,18 @@ lsms_normalizer<-function() {
   }
   
   ohs_seccb_mapping_lsms<-function(year){
+    if (year == 2008){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="region",name="region"))
+      s= rbind(s,data.frame(iesname="district",name="district"))
+      s= rbind(s,data.frame(iesname="ward",name="ward"))
+      s= rbind(s,data.frame(iesname="ea",name="ea"))
+      s= rbind(s,data.frame(iesname="cb0",name="facilitycode"))
+      s= rbind(s,data.frame(iesname="cb1",name="accessibility"))
+      s= rbind(s,data.frame(iesname="cb2",name="distance"))
+      s= rbind(s,data.frame(iesname="cb3",name="travelcost"))
+      return(s)
+    }
     if (year == 2010){
       s = data.frame(iesname=NULL,name=NULL)
       s= rbind(s,data.frame(iesname="id_01",name="region"))
@@ -1333,7 +1352,7 @@ lsms_normalizer<-function() {
   
   
   ohs_seca_columns_lsms<-function(year){
-    if (year == 2010){
+    if (year == 2010 || year == 2008){
       return(c("hhid","region","district","ward","ea","isrural"))
     } 
     if (year == 2012) {
@@ -1362,6 +1381,60 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_a04_1",name="ea"))
     s= rbind(s,data.frame(iesname="y3_rural",name="isrural"))
     s= rbind(s,data.frame(iesname="hh_a09",name="hhid2010"))
+    return(s)
+  }
+  
+  ohs_seca_mapping_lsms_2008<-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="region",name="region"))
+    s= rbind(s,data.frame(iesname="district",name="district"))
+    s= rbind(s,data.frame(iesname="ward",name="ward"))
+    s= rbind(s,data.frame(iesname="ea",name="ea"))
+    s= rbind(s,data.frame(iesname="rural",name="isrural"))
+    return(s)
+  }
+  
+    get_ohs_secc_columns_lsms_2008<-function(){
+      return(c("hhid","personid","is_ge5y","highest_educ","schoolowner",
+               "has_missedschool","educexpense"))
+    }
+  
+  get_ohs_secc_fields_mapping_lsms_2008<-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="sbmemno",name="personid"))
+    s= rbind(s,data.frame(iesname="scq1",name="is_ge5y"))
+    #s= rbind(s,data.frame(iesname="hh_c02",name="litlang"))
+    #s= rbind(s,data.frame(iesname="hh_c01",name="is_literate"))
+    
+    s= rbind(s,data.frame(iesname="scq6",name="highest_educ"))
+    s= rbind(s,data.frame(iesname="scq10",name="schoolowner"))
+    #s= rbind(s,data.frame(iesname="",name="schoolconveyance"))
+    s= rbind(s,data.frame(iesname="scq12",name="has_missedschool"))
+    s= rbind(s,data.frame(iesname="scq14_tot",name="educexpense"))
+    return(s)
+  }
+  
+
+  get_lsms_secj_info_columns_2008<-function(){
+    return(c("hhid","housingstatus","houserent","roomsnum_primary","roomsnum_secondary","wallsmaterial","roofmaterial","floormaterial","toilet","cookingfuel","lightingfuel","dryseasonwatersource"))
+  }
+  
+  get_lsms_secj_fields_mapping_2008<-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="sjq1",name="housingstatus")) # 1- owner occupied, 2- EMPLOYER PROVIDED - SUBSIDIZED, 3-EMPLOYER PROVIDED - FREE, 4- RENTED, 5- FREE, 6-NOMADS 
+    s= rbind(s,data.frame(iesname="sjq2",name="houserent"))
+    s= rbind(s,data.frame(iesname="sjq3_1",name="roomsnum_primary"))
+    s= rbind(s,data.frame(iesname="sjq3_2",name="roomsnum_secondary"))
+    s= rbind(s,data.frame(iesname="sjq4",name="wallsmaterial"))
+    s= rbind(s,data.frame(iesname="sjq5",name="roofmaterial"))
+    s= rbind(s,data.frame(iesname="sjq6",name="floormaterial"))
+    s= rbind(s,data.frame(iesname="sjq16",name="toilet"))
+    s= rbind(s,data.frame(iesname="sjq17_1",name="cookingfuel"))
+    s= rbind(s,data.frame(iesname="sjq18",name="lightingfuel"))
+    s= rbind(s,data.frame(iesname="sjq8",name="dryseasonwatersource"))
     return(s)
   }
   
@@ -1791,6 +1864,44 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="slq2",name="cost"))
     return(s)
   }
+
+  ohs_info_columns_lsms_2008<-function(){
+    # hhid, age, gender, educ, race, hsize, areatype, 
+    # income file: income
+    return(c("hhid", "gender", "personid","YOB", "household_status", "inhouse_consumer",
+            "inhouse_resident", "outhouse_days_in_year", 
+             "occupation", "fathers_educ", "mothers_educ", "married", "spouse_resident","years_community",
+             "outhouse_spouses", "source_migration_code", 
+             "reason_migration", "birthdistrict"))
+  }
+  
+  ohs_mapping_lsms_2008<-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="sbmemno",name="personid"))
+    s= rbind(s,data.frame(iesname="sbq2",name="gender"))
+    s= rbind(s,data.frame(iesname="sbq3yr",name="YOB"))
+    s= rbind(s,data.frame(iesname="sbq5",name="household_status"))
+    s= rbind(s,data.frame(iesname="sbq7",name="inhouse_consumer"))
+    #s= rbind(s,data.frame(iesname="hh_b08",name="inhouse_days_in_month"))
+    s= rbind(s,data.frame(iesname="sbq8",name="inhouse_resident"))
+    s= rbind(s,data.frame(iesname="sbq9",name="outhouse_days_in_year"))
+    s= rbind(s,data.frame(iesname="sbq10",name="occupation"))
+    s= rbind(s,data.frame(iesname="sbq13",name="fathers_educ"))
+    s= rbind(s,data.frame(iesname="sbq16",name="mothers_educ"))
+    s= rbind(s,data.frame(iesname="sbq18",name="married"))
+    s= rbind(s,data.frame(iesname="sbq20",name="spouse_resident")) 
+    s= rbind(s,data.frame(iesname="sbq23",name="outhouse_spouses"))
+    
+    s= rbind(s,data.frame(iesname="sbq24",name="years_community"))
+    
+    #s= rbind(s,data.frame(iesname="",name="source_migration_name"))
+    s= rbind(s,data.frame(iesname="sbq25district",name="source_migration_code"))
+    s= rbind(s,data.frame(iesname="sbq26",name="reason_migration"))
+    #s= rbind(s,data.frame(iesname="",name="birthregion"))
+    s= rbind(s,data.frame(iesname="sbq27district",name="birthdistrict"))
+    return(s)
+  }
   
   
   computeYearValues<-function(dat,
@@ -2102,6 +2213,13 @@ lsms_normalizer<-function() {
              hh_mapping_lsms_2008=hh_mapping_lsms_2008,
              get_lsms_secl_info_columns_2008=get_lsms_secl_info_columns_2008,
              get_lsms_secl_fields_mapping_2008=get_lsms_secl_fields_mapping_2008,
+             ohs_seca_mapping_lsms_2008=ohs_seca_mapping_lsms_2008,
+             ohs_info_columns_lsms_2008=ohs_info_columns_lsms_2008,
+             ohs_mapping_lsms_2008=ohs_mapping_lsms_2008,
+             get_ohs_secc_columns_lsms_2008=get_ohs_secc_columns_lsms_2008,
+             get_ohs_secc_fields_mapping_lsms_2008=get_ohs_secc_fields_mapping_lsms_2008,
+             get_lsms_secj_info_columns_2008=get_lsms_secj_info_columns_2008,
+             get_lsms_secj_fields_mapping_2008=get_lsms_secj_fields_mapping_2008,
              food_categories_lsms_2010=food_categories_lsms_2010, 
              items_codes_2010=items_codes_2010,
              lsms_groups_pricebased_2010_2012=lsms_groups_pricebased_2010_2012,

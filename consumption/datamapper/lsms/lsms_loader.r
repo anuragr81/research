@@ -748,6 +748,89 @@ lsms_loader<-function(fu,ln) {
       return(ohsj)
       
     }
+    ##########################2008#########################
+    
+    if (year == 2008){
+      
+      #* Read section c_cb file
+      cbFileName = paste(dirprefix,'./lsms/tnz2008/TZNPS1CMDTA_E/SEC_B.dta',sep="")
+      cbdat<-read.dta(cbFileName,convert.factors = FALSE)
+      print(paste("Reading file ",cbFileName))
+      
+      cb <- fu()@get_translated_frame(dat=cbdat,
+                                      names=ln()@ohs_seccb_columns_lsms(2008),
+                                      m=ln()@ohs_seccb_mapping_lsms(2008))
+      
+      
+      #* chose facilitycode l and collected accessibility 1 and 2(<10) (in the centre or less than 10 km away)
+      l<-(cb[is.element(tolower(as.character(cb$facilitycode)),c(12)),])
+      #* extract those with 1
+      l$accessiblemarket<-as.integer(l$accessibility==1)
+      #* extract those with 2 (and assign them the same status as 1's)
+      l$accessiblemarket<-l$accessiblemarket+as.integer(l$accessibility==2 & l$distance<10)
+      l=l[!is.na(l$accessiblemarket),]
+      #* chose accessible market value using (if both in the centre and closer then ambiguous)
+      l_i=ddply(l,.(region,district,ward),summarize,accessiblemarket=max(accessiblemarket))
+      l = merge(l,l_i)
+      fu()@removeall_cols_except(l,c("region","district","ward","accessiblemarket","travelcost"))
+      #l[,setdiff(names(l),)]<-NULL
+      
+      #l = data.frame(region=l$region,district=l$district,ward=l$ward,ea=l$ea,accessiblemarket=l$accessiblemarket)
+      ##
+      #* Also considered urban/rural based on population density 
+      u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban);
+      
+      adat<-read_tnz(paste(dirprefix,'./lsms/tnz2008/TZNPS1HHDTA_E/SEC_A_T.dta',sep=""),FALSE,hhidColName = "hhid")
+      
+      a <- fu()@get_translated_frame(dat=adat,
+                                     names=ln()@ohs_seca_columns_lsms(2008),
+                                     m=ln()@ohs_seca_mapping_lsms_2008())
+      a<-merge(a,u)
+      a<-merge(a,l)
+      a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
+      popDensity <- read.csv(paste(dirprefix,"./lsms/tnzpopdensity.csv",sep=""))
+      a<-merge(a,popDensity)
+      
+      #*    Read section B
+      bcdat<-read_tnz(paste(dirprefix,'/lsms/tnz2008/TZNPS1HHDTA_E/SEC_B_C_D_E1_F_G1_U.dta',sep=""),FALSE,hhidColName = "hhid")
+      b <- fu()@get_translated_frame(dat=bcdat,
+                                     names=ln()@ohs_info_columns_lsms_2008(),
+                                     m=ln()@ohs_mapping_lsms_2008())
+      
+      
+      b$hhid<-as.character(b$hhid)
+      #* inferring occupation rank with occupation_mapping
+      b<-merge(b,occupation_mapping())
+      
+      #*    Read section C
+      c <- fu()@get_translated_frame(dat=bcdat,
+                                     names=ln()@get_ohs_secc_columns_lsms_2008(),
+                                     m=ln()@get_ohs_secc_fields_mapping_lsms_2008())
+      c$hhid<-as.character(c$hhid)
+      ab <- merge(a,b)
+      ohs<-merge(ab,c)
+      ohs$age <-2008-ohs$YOB
+
+      
+      #*    calculated age by subtracting YOB from 2010 (survey year)
+      #*    read section J for housing data (rent, number of primary/secondary rooms)
+      
+      #lsms/tnz2008/TZNPS1HHDTA_E/SEC_H1_J_K2_O2_P1_Q1_S1.dta
+      jdat <- read.dta(paste(dirprefix,'./lsms/tnz2008/TZNPS1HHDTA_E/SEC_H1_J_K2_O2_P1_Q1_S1.dta',sep=""),convert.factors=FALSE)
+      j <- fu()@get_translated_frame(dat=jdat,
+                                     names=ln()@get_lsms_secj_info_columns_2008(),
+                                     m=ln()@get_lsms_secj_fields_mapping_2008())
+      j$hhid <-as.character(j$hhid)
+      j$roomsnum_secondary[is.na(j$roomsnum_secondary)]<-0
+      j$houserent[is.na(j$houserent)]<-0
+      j$roomsnum<-j$roomsnum_primary+j$roomsnum_secondary
+      ohsj<-merge(ohs,j,all=TRUE)
+      return(ohsj)
+      
+    }
+    
+    #######################################################
     stop(paste("Year:",year," not supported"))
     
   }
