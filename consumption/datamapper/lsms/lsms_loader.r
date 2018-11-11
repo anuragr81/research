@@ -826,6 +826,8 @@ lsms_loader<-function(fu,ln) {
       j$houserent[is.na(j$houserent)]<-0
       j$roomsnum<-j$roomsnum_primary+j$roomsnum_secondary
       ohsj<-merge(ohs,j,all=TRUE)
+      ohsj$litlang <- rep(NA,dim(ohsj)[1])
+      ohsj$y2_hhid <- ohsj$hhid
       return(ohsj)
       
     }
