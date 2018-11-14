@@ -360,6 +360,27 @@ Discrete Simulation
 \end_layout
 
 \begin_layout Standard
+Intertemporal substitution is based on the idea that we are all aware that
+ the consumers are aware of having no assets to the end of the lifetime.
+ Status - which is imminently transmitted through generations - and is partly
+ the appeal for it does not fit well into this framework.
+ If education or societal levels are assets that are passed to the next
+ generation then they cannot be zeroed trivially at the end of the lifetime.
+ The assets in the intertemporal need to be strictly monetary hence even
+ the status assets should be associated with a price.
+ 
+\end_layout
+
+\begin_layout Standard
+Another approach is to consider final states of the individual who intends
+ to die in a higher status section of the society - a tendency that is equivalen
+t to giving assets away to children (as would be spending towards their
+ education).
+ The states are final in the sense that the probability of getting out of
+ the final state is quite low.
+\end_layout
+
+\begin_layout Standard
 One way to model the assets and age is to merge the life-cycle model in
  to the model for assets by considering the states 
 \begin_inset Formula $\{LN,HN,LA,HA\}$
@@ -1053,7 +1074,11 @@ Here,
 \end_inset
 
  gets increased accordingly.
- Let's see that with an example.
+ 
+\end_layout
+
+\begin_layout Standard
+Let's illustrate the above with an example.
  If our consumer has 
 \begin_inset Formula $50,000$
 \end_inset
@@ -1074,8 +1099,8 @@ $ worth of assets and she wants an item of
 \begin_inset Formula $\gamma(t)$
 \end_inset
 
- over 
-\begin_inset Formula $t\in[k,\delta+k]$
+ for 
+\begin_inset Formula $t\in[k,\delta+k-1]$
 \end_inset
 
  i.e.
@@ -1083,12 +1108,8 @@ $ worth of assets and she wants an item of
 \begin_inset Formula $\delta_{\kappa}$
 \end_inset
 
- 
-\series bold
-years so that 
-\series default
-
-\begin_inset Formula $\sum_{j=k}^{k+\delta_{\kappa}}\gamma(k)=c(k+\delta_{\kappa})-c(k)=10000$
+ years so that 
+\begin_inset Formula $\sum_{j=k}^{k+\delta_{\kappa}-1}\gamma(k)=\gamma(k)\sum_{j=0}^{\delta_{\kappa}-1}(1+\alpha)^{j}=c(k+\delta_{\kappa})-c(k)=10000$
 \end_inset
 
  (see Equation 
@@ -1099,32 +1120,39 @@ reference "eq:gamma_delta"
 \end_inset
 
 ).
- Let 
+ If
 \begin_inset Formula $\delta_{\kappa}(k)=3$
 \end_inset
 
-, then 
-\begin_inset Formula $\gamma\sim2290$
+, 
+\begin_inset Formula $\alpha=.06$
 \end_inset
 
- so the consumer must save that much this year to be able to be on track
- to afford the item in 3 years.
- If she could not save this much i.e.
+ then 
+\begin_inset Formula $\gamma^{*}(k)\sim3140$
+\end_inset
+
+ so the consumer must save 
+\begin_inset Formula $\gamma(k)$
+\end_inset
+
+ this year to be able to be on track to afford the item in 3 years.
+ If she could not save this much in the year i.e.
+ if 
+\begin_inset Formula $\gamma(k)<\gamma^{*}(k)=3140$
+\end_inset
+
+ (more than 
+\begin_inset Formula $I(k)-\gamma(k)$
+\end_inset
+
+ is spent in non-durable items), then the 
+\begin_inset Formula $\delta_{\kappa}(k+1)$
+\end_inset
+
+ for the next year would no longer be 2, but a new value that satisfies
  
-\begin_inset Formula $\gamma(t)<2290$
-\end_inset
-
- (i.e.
- than 
-\begin_inset Formula $I(t)-\gamma(t)\ge6710$
-\end_inset
-
- is spent in non-durable items) in the first year then the new 
-\begin_inset Formula $\delta(t+1)$
-\end_inset
-
- would no longer be 2, but a new value that satisfies 
-\begin_inset Formula $\sum_{k=0}^{\delta(t+1)}(1+\alpha)^{k}\gamma(t+1)=10000-\gamma(t)$
+\begin_inset Formula $\sum_{k=0}^{\delta_{\kappa}(t+1)}(1+\alpha)^{k}\gamma^{*}(k+1)=10000-\gamma(t)$
 \end_inset
 
 .
@@ -1132,130 +1160,330 @@ reference "eq:gamma_delta"
 \begin_inset Formula $\delta_{K}(t)$
 \end_inset
 
- would thus depends on past decisions on
-\begin_inset Formula $\gamma_{K}(t)$
+ would thus depend on past fixings of
+\begin_inset Formula $\gamma_{K}^{*}(t)$
 \end_inset
 
 .
- Let 
-\begin_inset Formula $\gamma(t)=2000$
+ Assuming that the consumer still wants the asset at the same even after
+ having missed the target for year 
+\begin_inset Formula $k$
 \end_inset
 
-.
- Then as far as the accounting goes, the year when our consumer missed the
- saving target, she has 50000 worth of assets, 
+ with
+\begin_inset Formula $\gamma(k)=2000$
+\end_inset
+
+, then as far as the accounting goes, she has 
+\begin_inset Formula $50000\$$
+\end_inset
+
+ worth of assets, 
 \begin_inset Formula $\gamma(t)=$
 \end_inset
 
-2000 saved for the future purchase of 
+2000$ saved for the future purchase of 
 \begin_inset Formula $K$
 \end_inset
 
 , 
-\begin_inset Formula $\delta(t+1)=2$
+\begin_inset Formula $\delta(k+1)=2$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma^{*}(k+1)=3880$
+\end_inset
+
+.
+ If she can postpone the asset purchase until another year then
+\begin_inset Formula $\delta(t+1)=3$
 \end_inset
 
  and 
 \begin_inset Formula $\gamma^{*}(t+1)=2514$
 \end_inset
 
- or 
-\begin_inset Formula $\delta(t+1)=3$
-\end_inset
-
- and 
-\begin_inset Formula $\gamma^{*}(t+1)=1830$
-\end_inset
-
 .
- It may happen that the consumer never achieves her goal to achie
-\end_layout
+ Notice that she does sell her owned assets to gain new because that would
+ still keep her net worth the same - an opportunity that has already been
+ considered by the asset company.
+ If the consumer doesn't keep up with her plans, then it is even possible
+ that she never acquires the asset she had set the target for
+\begin_inset Foot
+status open
 
-\begin_layout Standard
-The function that increases 
+\begin_layout Plain Layout
+The evolution of
 \begin_inset Formula $\delta_{\kappa}$
 \end_inset
 
  takes account of missed opportunities.
- There are some assets that can be acquired until a certain time failing
+ There are some assets (e.g.
+ the health facility) that can be acquired until a certain time failing
  which they can never be had.
  The order in 
 \begin_inset Formula $\mathscr{A}$
 \end_inset
 
- therefore changes depending on the age of every consumer (this models housing
- or family).
- 
-\begin_inset Formula $\gamma(t)$
+ therefore changes with time 
+\begin_inset Formula $t$
 \end_inset
 
- therefore depends on 
-\begin_inset Formula $\delta_{k}(t)$
-\end_inset
-
- - as described in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:gamma_delta"
+.
+\end_layout
 
 \end_inset
 
 .
- The issue is that we don't know 
-\begin_inset Formula $I(t)$
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\gamma^{*}(t)$
 \end_inset
 
- and therefore it's better to express 
-\begin_inset Formula $\gamma(t)$
+ is thus uniquely determined by 
+\begin_inset Formula $\delta_{K}(t)$
 \end_inset
 
- as an absolute quantity that grows at the same rate as 
-\begin_inset Formula $I(t)$
+.
+ In other words, fixing 
+\begin_inset Formula $\gamma^{*}(t)$
 \end_inset
 
- (i.e.
- 
-\begin_inset Formula $\alpha$
+ is the same as selecting an integer value for 
+\begin_inset Formula $\delta_{K}(t)$
 \end_inset
 
- - which we can estimate) if 
+.
+ If 
+\begin_inset Formula $\delta_{K}(t)=0$
+\end_inset
+
+, then the consumer has been able to purchase the desired and there are
+ no further assets planned.
+ To simplify notation let
+\begin_inset Formula 
+\begin{alignat}{1}
+\gamma^{*}(t) & =f(\delta_{K}(t),\alpha,c(t),P(K))=\iota(t,K)\label{eq:iotaFunction}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As long as we're able to relate the 
+\begin_inset Formula $\delta$
+\end_inset
+
+ adjustment with a utility function involving substitution between
+\begin_inset Formula $\Lambda_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{t}q_{t}$
+\end_inset
+
+, we can hope to find econometric methods for the model.
+ The substitution between categories should also be possible in the model
+ (so we can see whether education etc.
+ is being spent on).
+ For marginal utility to exist, we cannot set 
 \begin_inset Formula $\delta_{K}$
 \end_inset
 
- were constant.
+ - which represents the reluctance to saving for assets- a discrete random
+ variable.
+ Along with 
+\begin_inset Formula $\delta_{K}$
+\end_inset
+
+, the asset levels should also be continuous so that a consumer can get
+ a better asset of a higher price if she can spends on the assets
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The unit price of holding an asset which appears in the intertemporal substituti
+on problem is therefore relevant to the current model.
+ 
+\end_layout
+
+\end_inset
+
+.
+ For ease of notation let the price range of assets be 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ so that the direct utility can be written in form of 
+\begin_inset Formula $u=\nu(q,\frac{1}{\delta}_{K})$
+\end_inset
+
+or 
+\begin_inset Formula $\nu(q,\gamma)$
+\end_inset
+
+ and cost functions 
+\begin_inset Formula $c(x,W,p,\Phi)$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-The equations to estimate are therefore,
+The difference between successive asset levels arranged by their price must
+ be modeled as a continuous variable in the model as well.
+ If perfect markets exist (they should in the continuous model), then the
+ consumer can borrow some money and buy and asset if she needs and pay the
+ loan back.
+ This allows 
+\begin_inset Formula $\delta$
+\end_inset
+
+ to be a continuous variable.
+ Further, while higher priced assets provide a higher utility to our user,
+ the price sensitivity of the utility ought to be a decreasing function
+ of price.
+ This is because the same amount of money would not change the lifestyle
+ by as much when one is rich compared to when one is poor.
+ Following can thus be said about the direct utility function 
+\begin_inset Formula $\nu(x)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Enumerate
+It is differentiable everywhere with respect to 
+\begin_inset Formula $\delta$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+The marginal utility 
+\begin_inset Formula $\frac{\partial u}{\partial\Phi}>0$
+\end_inset
+
+ everywhere 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\frac{\partial u}{\partial\Phi}$
+\end_inset
+
+ strictly decreases with 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $\frac{\partial^{2}u}{\partial\Phi}<0$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\gamma_{K}(t+1)+P(\Lambda_{t+1})=P(\Lambda_{t})+c(t+1)=\gamma_{K}(t)+P(\Lambda_{t})+P(\Lambda_{t+1}\backslash\Lambda_{t})$
+The only parameter that remains discrete in the model now is the rebalancing
+ frequency (1 year).
+ The consumer can reset 
+\begin_inset Formula $\gamma(t)$
 \end_inset
 
- where 
-\begin_inset Formula $P(\text{\emptyset)=0}$
+ ( or 
+\begin_inset Formula $\delta_{K}(t))$
 \end_inset
 
- so that 
-\begin_inset Formula $\Lambda_{t+1}=\Lambda_{t}\Rightarrow P(\Lambda_{t+1}\backslash\Lambda_{t})=0$
+ at the start of every year 
+\begin_inset Formula $t$
 \end_inset
 
+ if her priorities change so that in equilibrium 
+\begin_inset Formula $\gamma(t)$
+\end_inset
 
+ (or 
+\begin_inset Formula $\delta_{K}(t)$
+\end_inset
+
+ )would simply be expected value of
+\begin_inset Formula $\gamma(t+1)$
+\end_inset
+
+ (or 
+\begin_inset Formula $\delta_{K}(t+1)$
+\end_inset
+
+ )over all possibilities of asset prices
+\begin_inset Formula $\Phi$
+\end_inset
+
+, personal characteristics 
+\begin_inset Formula $\rho$
+\end_inset
+
+ (such as family size, age, education, job-change etc.), prices of non-durable
+ consumption
+\begin_inset Formula $p$
+\end_inset
+
+, and windfall asset growth (or loss)
+\begin_inset Formula $\Delta W$
+\end_inset
+
+.
+ We assume that shocks to income are not permanent (hence 
+\begin_inset Formula $E(\Delta(\gamma_{t+1}))=0).$
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\gamma_{K}(t)=f(\delta_{K})$
+The real question is whether complementarity and substitution between 
+\begin_inset Formula $\gamma=\frac{1}{\delta}$
 \end_inset
 
+ and 
+\begin_inset Formula $q$
+\end_inset
 
+ possible.
+ Would consumer really just save for asset rather than spend immediately
+ or vice versa.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\delta_{K}(t+1)=g(\delta_{K}(t),\gamma_{K}(t))$
+The conditions of homogeneity, adding-up and non-negativeness of the Slutsky
+ equations (which look at the price sensitivities and total-expenditure
+ of demand - 
+\begin_inset Formula $g(x,p)$
 \end_inset
 
+).
+ 
+\end_layout
 
+\begin_layout Standard
+The Dominic-McFadden method of discrete choice offers a better way to approach
+ this - where a probability distribution can be sought and the variable
+ 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ is not continuous.
+ We wish to extend the quality analysis to asset levels, where the discrete
+ choice ought to be more relevant.
+ The threshold method used by models for durable goods (by Pyatt and others)
+ is the natural way to extend the model in order for it to be calibrated
+ with durable goods ownership.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -1263,8 +1491,8 @@ Observables
 \end_layout
 
 \begin_layout Standard
-The observables we have in the market are prices of the assets and their
- prices i.e.
+The observables we have in the market are prices of the assets and at least
+ their relative prices structure i.e.
 \begin_inset Formula $\mathscr{A}=\{A_{1},A_{2},...\}$
 \end_inset
 
@@ -1272,32 +1500,74 @@ The observables we have in the market are prices of the assets and their
 \begin_inset Formula $P(\mathscr{A})=\{P(A_{1}),P(A_{2}),...\}$
 \end_inset
 
- and nondurable expenditure details..
- So we know the total income 
-\begin_inset Formula $c(t)+x(t)=I(t)$
+.
+ We also have nondurable expenditure details (
+\begin_inset Formula $w_{c\in\mathscr{C}})$
 \end_inset
 
 .
- What we don't know is the lifetime of the asset - we don't know if the
- assets are kept life-long (this must be verified in the data).
- The income is not known either - however, the income stochastic process
- can be estimated.
- ve the asset 
-\begin_inset Formula $K$
+ We assume the lifetime of the assets to be infinite (unless a significant
+ sale is found in data).
+ The evolution of 
+\begin_inset Formula $\delta_{K}(t)$
+\end_inset
+
+ is also not known but the parameters of the 
+\begin_inset Formula $\iota(t,K)$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:iotaFunction"
+
+\end_inset
+
+ are what we wish to estimate econometrically.
+ Since all income not spent on assets is assumed to go towards 
+\begin_inset Formula $x=\sum_{c\in\mathscr{C}}p_{c}\cdot q_{c}$
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
-—
+Here are the equations to estimate:
+\end_layout
+
+\begin_layout Standard
+If asset is bought in the year 
+\begin_inset Formula $t+1$
+\end_inset
+
+, then 
+\begin_inset Formula $c(t+1)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta_{K}(t)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $P(K)=c(t)$
+\end_inset
+
+ whereas if the asset is not bought in the year 
+\begin_inset Formula $t+1$
+\end_inset
+
+, then
+\begin_inset Formula $c(t+1)=c(t)+\gamma(t)$
+\end_inset
+
+.
+ We can therefore write,
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-W & =\sum_{i}p_{i}\times q_{i}++\sum p_{A}\times q_{A}=\sum_{A\in\mathscr{A}}A(1+r_{A})^{T_{A}}
+c(t+1) & =(c(t)+\gamma(t))(1-\mathbb{I}_{K}(t))
 \end{alignat*}
 
 \end_inset
@@ -1306,12 +1576,153 @@ W & =\sum_{i}p_{i}\times q_{i}++\sum p_{A}\times q_{A}=\sum_{A\in\mathscr{A}}A(1
 \end_layout
 
 \begin_layout Standard
-The influence of assets over purchases is more likely to be conclusive.
+where 
+\begin_inset Formula $\mathbb{I}_{K}(t)=1$
+\end_inset
+
+ if the desired asset is purchased, 0 otherwise.
+ Notice that 
+\begin_inset Formula $c(t)$
+\end_inset
+
+ is not observed and is indicated only through an asset purchase.
+ The only control we have is on the form of 
+\begin_inset Formula $\delta_{K}(t)$
+\end_inset
+
+ which depends on 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ When an medium-priced assets are not available in a region, we expect 
+\begin_inset Formula $\delta_{K}$
+\end_inset
+
+to be stay high over the life times - as consumers can only focus on longer-term
+ goals.
 \end_layout
 
 \begin_layout Standard
-In the above equations, assets may grow at a constant rate but buying more
- assets does depend on having had more assets.
+Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:iotaFunction"
+
+\end_inset
+
+provides the other econometric equation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\gamma_{K}(t) & =f(\delta_{K}(t),\alpha,c(t),P(K)
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The key stochastic process is that of 
+\begin_inset Formula $\delta_{K}$
+\end_inset
+
+ which fluctuates depending on personal characteristics (needs), time and
+ the past values of 
+\begin_inset Formula $\delta_{K}$
+\end_inset
+
+, the current account 
+\begin_inset Formula $c(t)$
+\end_inset
+
+ and the price of the desired asset 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ The utility function depends on the total 
+\begin_inset Formula $x$
+\end_inset
+
+ and the assets - a function that is contstrained by the total wealth.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\delta_{K}(t+1) & =\Delta(t,K)=g(\delta_{K}(t),P(K)-c(t))
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We cannot say that a consumer sets 
+\begin_inset Formula $\delta_{K}(t+1)$
+\end_inset
+
+ and changes it.
+ What we can say is that the consumer may adjust it slightly - possibly
+ just randomly.
+\end_layout
+
+\begin_layout Section
+Observables in the intertemporal substitution
+\end_layout
+
+\begin_layout Standard
+If we were to apply the intertemporal substitution as is, we would use the
+ equation
+\begin_inset Formula 
+\begin{alignat*}{1}
+\sum_{t=0}^{L}\rho_{t}p_{t}\cdot q_{t} & =\sum_{t=0}^{L}\rho_{t}y_{t}+A_{0}(1+r_{1})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, we can find incomes and expenditures but the data on income is particularl
+y inaccurate because of a wide informal sector and second jobs.
+\end_layout
+
+\begin_layout Standard
+Assuming we had income, we revisit the static model for analogy, where we
+ minimise
+\begin_inset Formula $u=g(x,p)$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\sum p_{i}q_{i}=x$
+\end_inset
+
+ .
+ In the intertemporal case, we would be optimising 
+\begin_inset Formula $u=g(x,W_{1},p,u^{*})$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\sum_{t=0}^{L}\rho_{t}p_{t}\cdot q_{t}=W_{1}$
+\end_inset
+
+.
+ If we assume a loglinear utility function, we can estimate the the elasticities
+ of goods (including assets using) as long as we have prices in every period.
+\end_layout
+
+\begin_layout Standard
+Since we don't have prices for all categories, we can just compare food
+ with others.
+ As such we can't do much without price variations in all items.
 \end_layout
 
 \begin_layout Section
@@ -1655,7 +2066,7 @@ print(subset(a2008,hhid==valHHID))
 
 \family typewriter
 \size small
-total_savings <- function(d,g) { return(sum(sapply(seq(0,d),function(x){
+total_savings <- function(d,g) { return(sum(sapply(seq(0,d-1),function(x){
  (1+.06)**x } )*g)) }
 \end_layout
 
