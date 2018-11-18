@@ -15,7 +15,7 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       food_expenditure_data="function",read_assets_file="function",
                                       group_expenditure="function",get_asset_score="function",
                                       item_usage="function", item_ownership="function",
-                                      check_diary_nullity="function"))
+                                      check_diary_nullity="function",split_households="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -522,6 +522,20 @@ lsms_loader<-function(fu,ln) {
   
   read_assets_file<-function(year,dirprefix,fu,ln){
     
+    if (year == 2008){
+      
+      secnFileName <- paste(dirprefix,'/lsms/tnz2008/TZNPS1HHDTA_S/SEC_N.dta',sep="")
+      print(paste("read_assets_file - opening file:",secnFileName))
+      secndat<-read.dta(secnFileName,convert.factors = FALSE)
+      
+      assetsData <- fu()@get_translated_frame(dat=secndat,
+                                              names=ln()@get_diary_secn_columns_lsms_2008(),
+                                              m=ln()@get_diary_secn_fields_mapping_lsms_2008())
+      assetsData <-merge(assetsData, rename(ln()@items_codes_2010(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
+      return(assetsData)
+    }
+    
     if (year == 2010){
       secnFileName <- paste(dirprefix,'./lsms/TZNPS2HH2DTA/HH_SEC_N.dta',sep="")
       print(paste("read_assets_file - opening file:",secnFileName))
@@ -811,7 +825,7 @@ lsms_loader<-function(fu,ln) {
       ab <- merge(a,b)
       ohs<-merge(ab,c)
       ohs$age <-2008-ohs$YOB
-
+      
       
       #*    calculated age by subtracting YOB from 2010 (survey year)
       #*    read section J for housing data (rent, number of primary/secondary rooms)
@@ -1502,8 +1516,8 @@ lsms_loader<-function(fu,ln) {
         print("Assigned 3")
         ds[ds[,c(logColName)] >= b4_start & ds [,c(logColName)] <= b4_end ,][,c(bandColName)] <- 1
         print("Assigned 4")
-      
-        }
+        
+      }
     }  
     
     ds <- add_high_low_exp_ratios(ds)
@@ -1621,6 +1635,85 @@ lsms_loader<-function(fu,ln) {
     return(ds)
   }
   
+  split_households <- function(fromYear,toYear,dirprefix,fu,ln){
+    
+    if (toYear == 2008){
+      stop("Can't provide households for before the earliest available year ")
+    }
+    
+    if (fromYear == 2008 && toYear == 2010){
+      
+      a2008 <- read_assets_file(year = fromYear, dirprefix =dirprefix,fu = fu , ln=ln)
+      a2010 <- read_assets_file(year = toYear, dirprefix =dirprefix,fu = fu , ln=ln)
+      a2008<-subset(a2008,number>0)
+      a2010<-subset(a2010,number>0)
+      ## 2008 hhids are 2 characters shorter than 2010, the expanded digits are to record split 
+      #  households
+      a2010$hhid2008<-substr(as.character(a2010$hhid),1,nchar(as.character(a2010$hhid))-2) 
+      #c2010 <- (ddply(a2010[,c("hhid2008","itemcode")],.(hhid2008),summarise,a2010=toString(itemcode[order(itemcode)])))
+      #c2008 <- (ddply(a2008[,c("hid2008","itemcode")],.(hhid2008),summarise,a2008=toString(itemcode[order(itemcode)]))) 
+      print ("Finding splits in asset data")
+      ca <- merge(unique(a2010[,c("hhid2008","hhid")]),data.frame(hhid2008=unique(a2008[,c("hhid2008")])))
+      
+      
+      dat <- ddply(ca,.(hhid2008),summarise,n=length(unique(hhid))) 
+      print(paste("Found",length( unique (subset(dat,n>1)$hhid2008)), "splits"))
+      
+      ##
+      hh2008<-load_diary_file(year = fromYear, dirprefix =dirprefix,fu = fu , ln=ln)
+      
+      hh2008$hhid2008<-hh2008$hhid
+      
+      hh2010<-load_diary_file(year = toYear, dirprefix =dirprefix,fu = fu , ln=ln)
+      
+      hh2010$hhid2008<-substr(as.character(hh2010$hhid),1,nchar(as.character(hh2010$hhid))-2) 
+      print ("Finding splits in diary data")
+      ch <- merge(unique( hh2010[,c("hhid2008","hhid")] ) ,data.frame(hhid2008=unique(hh2008[,c("hhid2008")])))
+      
+      dath <- ddply(ch,.(hhid2008),summarise,n=length(unique(hhid))) 
+      print(paste("Found ",length( unique (subset(dath,n>1)$hhid2008)), "splits"))
+      ##
+      ohs2008<-load_ohs_file(year = fromYear, dirprefix =dirprefix,fu = fu , ln=ln)
+      
+      ohs2008$hhid2008 <- ohs2008$hhid
+      
+      ohs2010<-load_ohs_file(year = toYear, dirprefix =dirprefix,fu = fu , ln=ln)
+      
+      ohs2010$hhid2008<-substr(as.character(ohs2010$hhid),1,nchar(as.character(ohs2010$hhid))-2)
+      print ("Finding splits in ohs data")
+      
+      co <- merge(unique(hh2010[,c("hhid2008","hhid")]),unique(data.frame(hhid2008=hh2008[,c("hhid2008")])))
+      
+      dato <- ddply(co,.(hhid2008),summarise,n=length(unique(hhid)))
+      print(paste("Found ",length( unique (subset(dato,n>1)$hhid2008)), "splits"))
+      doubleHhids<- ( unique ( union( union( (subset(dato,n>1))$hhid2008, subset(dat,n>1)$hhid2008) , subset(dath,n>1)$hhid2008) ) )
+      return(doubleHhids)
+    }
+    
+    if (fromYear == 2010 && toYear == 2012){
+      #a2010 <- read_assets_file(year = fromYear, dirprefix =dirprefix,fu = fu , ln=ln)
+      #a2010 <- subset(a2010,number>0)
+      #a2012 <- read_assets_file(year = toYear, dirprefix =dirprefix,fu = fu , ln=ln)
+      #a2012 <- subset(a2012, number>0)
+      ohs2012 <- load_ohs_file(year = toYear, dirprefix = dirprefix,fu = fu , ln = ln)
+      ohs2012 <- subset(ohs2012,!is.na(y2_hhid) & y2_hhid!='')
+      #a2012 <- merge(ohs2012[,c("hhid","y2_hhid")], a2012)
+      
+      # 2012 hhids have a different hhid but more than two hhids can be associated with one y2_hhid
+      #aa2012 <- subset(a2012, !is.na(y2_hhid) & y2_hhid!='' & is.element(y2_hhid, aa2010$hhid))
+      print ("Finding splits in ohs data")
+      dat <- ddply(ohs2012[,c("hhid","y2_hhid")],.(y2_hhid),summarise,n=length(unique(hhid)))
+      return(unique(subset(dat,n>1)$y2_hhid))
+      
+    }
+    
+    stop(paste("No data for splits between",fromYear,"and", toYear))
+  }
+  
+  asset_differences <- function(fromYear,toYear,splitHouseholdHhids){
+    
+  }
+  
   combined_data_set<-function(year,dirprefix,selected_category,isDebug, set_depvar, fu, ln){
     
     ############ PHASE 0 ########################
@@ -1702,6 +1795,6 @@ lsms_loader<-function(fu,ln) {
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
              read_assets_file=read_assets_file, group_expenditure=group_expenditure,
              get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership,
-             check_diary_nullity=check_diary_nullity))
+             check_diary_nullity=check_diary_nullity,split_households=split_households))
   
 }

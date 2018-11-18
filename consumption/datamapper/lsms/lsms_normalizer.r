@@ -66,8 +66,10 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           get_ohs_secc_fields_mapping_lsms_2012="function",
                                           get_lsms_secj_info_columns_2012="function", 
                                           get_lsms_secj_fields_mapping_2012="function", 
+                                          get_diary_secn_columns_lsms_2008= "function",
                                           get_diary_secn_columns_lsms_2010="function",
                                           get_diary_secn_columns_lsms_2012="function",
+                                          get_diary_secn_fields_mapping_lsms_2008="function",
                                           get_diary_secn_fields_mapping_lsms_2010="function",
                                           get_diary_secn_fields_mapping_lsms_2012="function",
                                           computeYearValues="function",
@@ -1457,6 +1459,10 @@ lsms_normalizer<-function() {
     return(c("hhid","itemcode","number"))
   }
   
+  get_diary_secn_columns_lsms_2008<-function(){
+    return(c("hhid2008","itemcode","number"))
+  }
+  
   get_diary_secn_fields_mapping_lsms_2010<-function(){
     s = data.frame(iesname=NULL,name=NULL)
     s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
@@ -1481,7 +1487,14 @@ lsms_normalizer<-function() {
     return(s)
   }
   
-  
+  get_diary_secn_fields_mapping_lsms_2008<-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="hhid",name="hhid2008"))
+    s= rbind(s,data.frame(iesname="sncode",name="itemcode"))
+    s= rbind(s,data.frame(iesname="snq1",name="number"))
+    return(s)
+
+  }
   area_code<-function(df,field_array)
   {
     areacode=NULL
@@ -2263,8 +2276,10 @@ lsms_normalizer<-function() {
              hh_mapping_lsms_2012=hh_mapping_lsms_2012, 
              get_lsms_seck_info_columns_2012=get_lsms_seck_info_columns_2012, 
              get_lsms_seck_fields_mapping_2012=get_lsms_seck_fields_mapping_2012, 
+             get_diary_secn_columns_lsms_2008=get_diary_secn_columns_lsms_2008,
              get_diary_secn_columns_lsms_2010=get_diary_secn_columns_lsms_2010,
              get_diary_secn_columns_lsms_2012=get_diary_secn_columns_lsms_2012,
+             get_diary_secn_fields_mapping_lsms_2008=get_diary_secn_fields_mapping_lsms_2008,
              get_diary_secn_fields_mapping_lsms_2010=get_diary_secn_fields_mapping_lsms_2010,
              get_diary_secn_fields_mapping_lsms_2012=get_diary_secn_fields_mapping_lsms_2012,
              ohs_seca_mapping_lsms_2012=ohs_seca_mapping_lsms_2012,

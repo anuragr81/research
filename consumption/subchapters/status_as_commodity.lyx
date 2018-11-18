@@ -81,20 +81,30 @@
 \begin_body
 
 \begin_layout Section
-Status
+Asset levels and Intertemporal substitution
 \end_layout
 
 \begin_layout Standard
-Status is measured largely as a combination of occupation, education.
- These are things that a family or a social group may achieve.
- One can view status as the resort to permanence
+The intertemporal substitution problem measures the substitution between
+ assets (savings) and consumption.
+\end_layout
+
+\begin_layout Section
+Connection with Status
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:AssetArgument"
 
 \end_inset
 
-.
+
+\end_layout
+
+\begin_layout Standard
+Status is measured largely as a combination of occupation, education.
+ These are things that a family or a social group may achieve.
+ One can view status as the resort to permanence.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -108,6 +118,32 @@ With all else equal a person with more assets would have more status than
  weight as status.
 \end_layout
 
+\begin_layout Standard
+In the literature on status, the researchers use a combination of occupation
+ ranks, monetary wealt - status can indeed be proxied - but it isn't a measurabl
+e concept.
+ The best way to understand is through a ranking - which itself can be associate
+d with a utility function.
+ An econometric analysis of such a utility function is bound to be fraught
+ with problems since it takes centuries if not decades for the inputs of
+ the utility function change - occupational innovation, immigration are
+ not general enough phenomenon for us to understand a dynamic model of status
+ - which itself varies by person to person - the assumption that Ireland
+ base their analysis on is that every person judges others as they expect
+ others to judge them.
+ The idea of deference based on deeply formed beliefs of a population -
+ can seem not sensitive to this assumption.
+\end_layout
+
+\begin_layout Standard
+We prefer the Corneo approach of consider deference function where consumer
+ could use input - including education, occupation as assets - we can continue
+ with the econmetric analysis .
+ We consider the narrower sense of status vis-a-vis its dependence of education,
+ region, ethnicity - wherever observable - 2008, 2010, 2012.
+ 
+\end_layout
+
 \begin_layout Section
 Assets dilemma
 \end_layout
@@ -118,7 +154,7 @@ A problem we deal with that the presence of assets both may or may not influence
  Other than the need for an asset, the motivation for having an asset is
  the status.
  Therefore, if I have an asset then I may not need to consume the expensive
- non-durable items (due to the argument 
+ non-durable items (due to the argument in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:AssetArgument"
@@ -1289,7 +1325,7 @@ As long as we're able to relate the
  The substitution between categories should also be possible in the model
  (so we can see whether education etc.
  is being spent on).
- For marginal utility to exist, we cannot set 
+ For marginal utility to be smooth, we cannot set 
 \begin_inset Formula $\delta_{K}$
 \end_inset
 
@@ -1300,7 +1336,7 @@ As long as we're able to relate the
 \end_inset
 
 , the asset levels should also be continuous so that a consumer can get
- a better asset of a higher price if she can spends on the assets
+ a better asset of a higher price if she can spend on the assets
 \begin_inset Foot
 status open
 
@@ -1336,19 +1372,20 @@ or
 \begin_layout Standard
 The difference between successive asset levels arranged by their price must
  be modeled as a continuous variable in the model as well.
+ The continuous asset levels would be require us to introduce borrowing
+ in the model.
  If perfect markets exist (they should in the continuous model), then the
  consumer can borrow some money and buy and asset if she needs and pay the
  loan back.
- This allows 
+ This would in turn 
 \begin_inset Formula $\delta$
 \end_inset
 
  to be a continuous variable.
  Further, while higher priced assets provide a higher utility to our user,
  the price sensitivity of the utility ought to be a decreasing function
- of price.
- This is because the same amount of money would not change the lifestyle
- by as much when one is rich compared to when one is poor.
+ of price (the same amount of money would not change the lifestyle by as
+ much when one is rich compared to when one is poor).
  Following can thus be said about the direct utility function 
 \begin_inset Formula $\nu(x)$
 \end_inset
@@ -1438,25 +1475,37 @@ The only parameter that remains discrete in the model now is the rebalancing
 \end_inset
 
 .
- We assume that shocks to income are not permanent (hence 
-\begin_inset Formula $E(\Delta(\gamma_{t+1}))=0).$
+ We assume that shocks to income are not permanent so we can set 
+\begin_inset Formula $\frac{\gamma_{t+1}}{\gamma_{t}}=(1+\alpha+\omega dW)$
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Standard
-The real question is whether complementarity and substitution between 
-\begin_inset Formula $\gamma=\frac{1}{\delta}$
+ such that 
+\begin_inset Formula $E(dW)=0$
 \end_inset
 
  and 
-\begin_inset Formula $q$
+\begin_inset Formula $\omega$
 \end_inset
 
- possible.
- Would consumer really just save for asset rather than spend immediately
- or vice versa.
+ is the random component of the relative change in 
+\begin_inset Formula $\gamma_{t}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\delta_{K}(t)$
+\end_inset
+
+ too must have a related process.
+ In fact the uncertainty 
+\begin_inset Formula $\delta$
+\end_inset
+
+ represents the stochastic parameter 
+\begin_inset Formula $\omega$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1466,7 +1515,7 @@ The conditions of homogeneity, adding-up and non-negativeness of the Slutsky
 \begin_inset Formula $g(x,p)$
 \end_inset
 
-).
+) can thus be specified in the model.
  
 \end_layout
 
@@ -1726,6 +1775,37 @@ Since we don't have prices for all categories, we can just compare food
 \end_layout
 
 \begin_layout Section
+Econometrics methods
+\end_layout
+
+\begin_layout Standard
+The major concern with the data is the splitting of households.
+ Marriages lead to assets being distributed arbitrarily.
+ We use the assets criteria to decide the 
+\begin_inset Quotes eld
+\end_inset
+
+original household
+\begin_inset Quotes erd
+\end_inset
+
+ - i.e.
+ the asset that keeps most of the household before the split is considered
+ as the main household - while the other household is considered a new household.
+ It is assume that the surveyor has exercised correct judgment for items
+ where equity is shared.
+ The split in the household is seen as the decline in assets of the original
+ household.
+\end_layout
+
+\begin_layout Standard
+Except for new household where asset is completely inherited, we look at
+ differences between asset purchases and the occupation rank of the household
+ to decide the overall age of the consumer (so that we can assess the nearness
+ to the retirement or decline in the age of the household).
+\end_layout
+
+\begin_layout Section
 DGP experiment
 \end_layout
 
@@ -1851,7 +1931,7 @@ g2010<-ll@group_expenditure(2010,"../",fu,lsms_normalizer,NULL,"",TRUE)
 
 \family typewriter
 \size small
-g2012<-ll@groupw_expenditure(2012,"../",fu,lsms_normalizer,NULL,"",TRUE)
+g2012<-ll@group_expenditure(2012,"../",fu,lsms_normalizer,NULL,"",TRUE)
 \end_layout
 
 \begin_layout Plain Layout
@@ -2068,6 +2148,416 @@ print(subset(a2008,hhid==valHHID))
 \size small
 total_savings <- function(d,g) { return(sum(sapply(seq(0,d-1),function(x){
  (1+.06)**x } )*g)) }
+\end_layout
+
+\begin_layout Plain Layout
+####
+\end_layout
+
+\begin_layout Plain Layout
+####
+\end_layout
+
+\begin_layout Plain Layout
+#Performing match of 2008 hhids
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#Ignore households that have more than 1 match in hhid
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+a2008 <- ll@read_assets_file(year = 2008, dirprefix = "../",fu = fu , ln=lsms_norm
+alizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+a2010 <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu , ln=lsms_norm
+alizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+a2012 <- ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu , ln=lsms_norm
+alizer) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+a2012<-unique(a2012)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+a2008<-subset(a2008,number>0)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+a2010<-subset(a2010,number>0)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+a2012 <- subset(a2012, number>0)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+a2010$hhid2008<-substr(as.character(a2010$hhid),1,nchar(as.character(a2010$hhid))-
+2) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ohs2012 <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu = fu , ln =
+ lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+a2012 <- merge(ohs2012[,c("hhid","y2_hhid")], a2012)
+\end_layout
+
+\begin_layout Plain Layout
+##performing matching on asset files
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+c2010 <- (ddply(a2010[,c("hhid2008","itemcode")],.(hhid2008),summarise,a2010=toSt
+ring(itemcode[order(itemcode)])))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+c2008 <- (ddply(a2008[,c("hhid2008","itemcode")],.(hhid2008),summarise,a2008=toSt
+ring(itemcode[order(itemcode)]))) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ca <- merge(a2010[,c("hhid2008","hhid")],data.frame(hhid2008=a2008[,c("hhid2008")
+]))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ca <- unique(ca)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dat <- ddply(ca,.(hhid2008),summarise,n=length(unique(hhid))) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+# performing matching on hh files
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+hh2008<-ll@load_diary_file(dirprefix = "../",year = 2008,fu = fu, ln=lsms_normaliz
+er)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+hh2008$hhid2008<-hh2008$hhid
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+hh2010<-ll@load_diary_file(dirprefix = "../",year = 2010,fu = fu, ln=lsms_normaliz
+er)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+hh2010$hhid2008<-substr(as.character(hh2010$hhid),1,nchar(as.character(hh2010$hhid
+))-2) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ch <- merge(hh2010[,c("hhid2008","hhid")],data.frame(hhid2008=hh2008[,c("hhid2008
+")]))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ch <- unique(ch)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dath <- ddply(ch,.(hhid2008),summarise,n=length(unique(hhid))) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#performing matching on ohs data
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ohs2008<-ll@load_ohs_file(year = 2008, dirprefix = "../",fu = fu, ln=lsms_normaliz
+er)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ohs2008$hhid2008 <- ohs2008$hhid
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ohs2010<-ll@load_ohs_file(year = 2010, dirprefix = "../",fu = fu, ln=lsms_normaliz
+er)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ohs2010$hhid2008<-substr(as.character(ohs2010$hhid),1,nchar(as.character(ohs2010$h
+hid))-2)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+co <- merge(unique(hh2010[,c("hhid2008","hhid")]),unique(data.frame(hhid2008=hh20
+08[,c("hhid2008")])))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+dato <- ddply(co,.(hhid2008),summarise,n=length(unique(hhid)))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#Treat as if double hhids don't have data
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\series bold
+\size small
+doubleHhids
+\series default
+<- ( unique ( union( union( (subset(dato,n>1))$hhid2008, subset(dat,n>1)$hhid200
+8) , subset(dath,n>1)$hhid2008) ) )
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#Now compute the differences in assets purchased from 2008 to 2010
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+aa2008 <- subset(a2008, !is.element(hhid2008, doubleHhids))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\series bold
+\size small
+aa2010
+\series default
+ <- subset(a2010, !is.element(hhid2008, 
+\series bold
+doubleHhids
+\series default
+))
+\end_layout
+
+\begin_layout Plain Layout
+##
+\end_layout
+
+\begin_layout Plain Layout
+#Performing comparisons
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+cc2008 <- (ddply(aa2008[,c("hhid2008","itemcode")],.(hhid2008),summarise,aa2008=j
+sonlite::toJSON(itemcode[order(itemcode)]))) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+cc2010 <- (ddply(aa2010[,c("hhid2008","itemcode")],.(hhid2008),summarise,aa2010=j
+sonlite::toJSON(itemcode[order(itemcode)]))) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+compare2008_2010 <- merge(cc2008,cc2010)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+diff_lists <- function( x,y ) { jsonlite::toJSON( setdiff ( jsonlite::fromJSON(x
+), jsonlite::fromJSON(y) ) )}
+\end_layout
+
+\begin_layout Plain Layout
+combine_lists <- function (x) { res <- NULL ; for (i in x) { res <- c(res,jsonli
+te::fromJSON(i)) } ; return(jsonlite::toJSON(res)) }
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+assetsDiff <- ddply(compare2008_2010,.(hhid2008),summarise, newAssets = diff_list
+s (aa2010,aa2008), soldAssets = diff_lists (aa2008,aa2010 )) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#taking only households that are in 2008 and 2010
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+aa2012 <- subset(a2012, !is.na(y2_hhid) & y2_hhid!='' & is.element(y2_hhid,
+ 
+\series bold
+aa2010
+\series default
+$hhid))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+cc2010 <- (ddply(aa2010[,c("hhid","itemcode")],.(hhid),summarise,aa2010=jsonlite:
+:toJSON(itemcode[order(itemcode)]))) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+cc2012 <- ddply(aa2012[,c("y2_hhid","itemcode")],.(y2_hhid),summarise,aa2012=json
+lite::toJSON(itemcode[order(itemcode)]))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+cc2012 <- plyr::rename(cc2012 ,c('y2_hhid'='hhid'))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+compare2010_2012 <- merge(cc2010,cc2012)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+assetsDiff_2010_2012 <- ddply(compare2010_2012,.(hhid),summarise, newAssets
+ = diff_lists (aa2010,aa2012), soldAssets = diff_lists (aa2012,aa2010 ))
+ # double counted
+\end_layout
+
+\begin_layout Plain Layout
+hist(as.numeric(jsonlite::fromJSON(combine_lists(assetsDiff_2010_2012$newAssets))
+))
 \end_layout
 
 \end_inset
