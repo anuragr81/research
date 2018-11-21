@@ -1194,7 +1194,7 @@ lsms_normalizer<-function() {
     if (year == 2012){
       s = data.frame(iesname=NULL,name=NULL)
       s= rbind(s,data.frame(iesname="y3_hhid",name="hhid"))
-      s= rbind(s,data.frame(iesname="y2_hhid",name="y2_hhid"))
+      #s= rbind(s,data.frame(iesname="y2_hhid",name="y2_hhid"))
       
       s= rbind(s,data.frame(iesname="hh_l01",name="is_consumed"))
       s= rbind(s,data.frame(iesname="itemcode",name="item"))
@@ -1657,7 +1657,7 @@ lsms_normalizer<-function() {
   ohs_info_columns_lsms_2012<-function(){
     # hhid, age, gender, educ, race, hsize, areatype, 
     # income file: income
-    return(c("hhid", "y2_hhid","gender", "personid","YOB", "household_status", "inhouse_consumer",
+    return(c("hhid","gender", "personid","YOB", "household_status", "inhouse_consumer",
              "inhouse_days_in_month", "inhouse_resident", "outhouse_days_in_year", 
              "occupation", "fathers_educ", "mothers_educ", "married", "spouse_resident","years_community",
              "outhouse_spouses", "source_migration_name", "source_migration_code", 
@@ -1806,7 +1806,7 @@ lsms_normalizer<-function() {
   hh_mapping_lsms_2012 <-function(){
     s = data.frame(iesname=NULL,name=NULL)
     s= rbind(s,data.frame(iesname="y3_hhid",name="hhid"))
-    s= rbind(s,data.frame(iesname="y2_hhid",name="y2_hhid"))
+    #s= rbind(s,data.frame(iesname="y2_hhid",name="y2_hhid"))
     s= rbind(s,data.frame(iesname="itemcode",name="item"))
     s= rbind(s,data.frame(iesname="hh_j03_1",name="lwp_unit"))
     s= rbind(s,data.frame(iesname="hh_j03_2",name="lwp"))
@@ -1821,7 +1821,7 @@ lsms_normalizer<-function() {
   ohs_mapping_lsms_2012<-function(){
     s = data.frame(iesname=NULL,name=NULL)
     s= rbind(s,data.frame(iesname="y3_hhid",name="hhid"))
-    s= rbind(s,data.frame(iesname="y2_hhid",name="y2_hhid"))
+    #s= rbind(s,data.frame(iesname="y2_hhid",name="y2_hhid"))
     s= rbind(s,data.frame(iesname="indidy3",name="personid"))
     s= rbind(s,data.frame(iesname="hh_b02",name="gender"))
     s= rbind(s,data.frame(iesname="hh_b03_1",name="YOB"))
