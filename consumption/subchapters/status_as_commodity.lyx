@@ -1799,10 +1799,20 @@ original household
 \end_layout
 
 \begin_layout Standard
+Another approach would be to aggregate the assets and expenditure of the
+ split-household in the original household - as long as the split households
+ live in the same area.
+ If the assets and consumption are shared for the split-households, it would
+ make more sense to aggregate in such a manner.
+\end_layout
+
+\begin_layout Standard
 Except for new household where asset is completely inherited, we look at
  differences between asset purchases and the occupation rank of the household
  to decide the overall age of the consumer (so that we can assess the nearness
  to the retirement or decline in the age of the household).
+ The frequency of splits is more often than death -so it may be more relevant
+ to model the split itself.
 \end_layout
 
 \begin_layout Section
@@ -2552,12 +2562,88 @@ compare2010_2012 <- merge(cc2010,cc2012)
 \size small
 assetsDiff_2010_2012 <- ddply(compare2010_2012,.(hhid),summarise, newAssets
  = diff_lists (aa2010,aa2012), soldAssets = diff_lists (aa2012,aa2010 ))
- # double counted
+ # double counted 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#From these differences, watches are being sold it seems.
+ Take a look at 1207004001074601 - there seems to be a lot of assets sold
+ - which is probably due to miscounting.
+ It'll be useful to just count the asset once when it has been bought (and
+ exclude it from the model otherwise).
+ Further, only expensive assets are counted - cheaper assets - as pots and
+ utensils are ignored - even in a new household because the utensils might
+ be even shared.
+ Shared ownership might convince us that we should aggregate - but this
+ would be decided based on a discussion with the advisors.
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+count_occurrences <- function(naocc) { keys<-NULL; values<- array(); count
+ = 1; for (i in unique(naocc)) { keys[count]=i; values[count]=length(naocc[naocc
+==i]) ; count=count+1 } ; res<-(data.frame(key=keys, nocc=values)) ; return(res[o
+rder(res$nocc),])}
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+View(merge(plyr::rename(count_occurrences(oocc),c("key"="code")),lsms_normalizer
+()@items_codes_2010()))
+\end_layout
+
+\begin_layout Plain Layout
+#Looking at most bought assets
 \end_layout
 
 \begin_layout Plain Layout
 hist(as.numeric(jsonlite::fromJSON(combine_lists(assetsDiff_2010_2012$newAssets))
 ))
+\end_layout
+
+\begin_layout Plain Layout
+#Find cost of assets 
+\end_layout
+
+\begin_layout Plain Layout
+assetsValues2012 <- subset(a2012, !is.na(mtm) | !is.na(cost))
+\end_layout
+
+\begin_layout Plain Layout
+val2012 <- ddply(assetsValues2012 [,c('shortname','cost','mtm')],.(shortname),sum
+marise,mean_cost = mean(cost), mean_mtm = mean(mtm), sd_cost = sd(cost),
+ sd_mtm = sd(mtm))
+\end_layout
+
+\begin_layout Plain Layout
+#mosquitonet stove_other watch iron chair 
+\end_layout
+
+\begin_layout Plain Layout
+#waterheater table poultry coffeepulpingmachine ac_fan radio landline wheelbarro
+w mobile spraymachine cart videoplayer bike dishtv bed 
+\end_layout
+
+\begin_layout Plain Layout
+#donkey plough musicplayer sewingmachine livestock stove_electricgas sofa
+ tv waterpump refrigerator animalcart boat musicsystem engine_outboard harrow
+ computer trailer 
+\end_layout
+
+\begin_layout Plain Layout
+#house motorbike handmill powertiller car tractor
+\end_layout
+
+\begin_layout Plain Layout
+f = function (y,z) { b = data.frame(y=y,z=z); return(b[which.max(b$y),]$z)
+ } or f = function (y,z) { z[which.max(y)] } 
 \end_layout
 
 \end_inset

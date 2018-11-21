@@ -15,7 +15,8 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       food_expenditure_data="function",read_assets_file="function",
                                       group_expenditure="function",get_asset_score="function",
                                       item_usage="function", item_ownership="function",
-                                      check_diary_nullity="function",split_households="function"))
+                                      check_diary_nullity="function",split_households="function",
+                                      asset_differences="function"))
 
 
 lsms_loader<-function(fu,ln) {
@@ -1710,8 +1711,101 @@ lsms_loader<-function(fu,ln) {
     stop(paste("No data for splits between",fromYear,"and", toYear))
   }
   
-  asset_differences <- function(fromYear,toYear,splitHouseholdHhids){
+  asset_differences <- function(fromYear,toYear,assetsBaseYear, splitHouseholdHhids, dirprefix, fu, ln){
     
+    a2012 <- read_assets_file(year = assetsBaseYear, dirprefix = dirprefix,fu = fu , ln=ln) 
+    
+    assetsValues2012 <- subset(a2012, ( !is.na(mtm) & cost > 0 )  |  ( !is.na(cost) & cost >0 ) )
+    val2012 <- ddply(assetsValues2012 [,c('itemcode','cost','mtm')],.(itemcode),summarise,mean_cost = mean(cost), mean_mtm = mean(mtm), sd_cost = sd(cost), sd_mtm = sd(mtm))
+    ##
+    
+    diff_lists <- function( x,y ) { jsonlite::toJSON( setdiff ( jsonlite::fromJSON(x), jsonlite::fromJSON(y) ) )}
+    
+    combine_lists <- function (x) { res <- NULL ; for (i in x) { res <- c(res,jsonlite::fromJSON(i)) } ; return(jsonlite::toJSON(res)) }
+    
+    if (fromYear == 2008 && toYear == 2010){
+      a2008 <- read_assets_file(year = fromYear, dirprefix =dirprefix,fu = fu , ln=ln)
+      a2008<-subset(a2008,number>0)
+      
+      
+      a2010 <- read_assets_file(year = toYear, dirprefix =dirprefix,fu = fu , ln=ln)
+      a2010<-subset(a2010,number>0)
+      
+      a2010$hhid2008<-substr(as.character(a2010$hhid),1,nchar(as.character(a2010$hhid))-2)
+      # take not-split households
+      notSplit2008 <- subset(a2008,!is.element(hhid2008,splitHouseholdHhids))
+      notSplit2010 <- subset(a2010,!is.element(hhid2008,splitHouseholdHhids))
+      
+      # double check hhid2008 -> hhid mapping in a2010
+      countHhids2010 <- ddply(notSplit2010, .(hhid2008), summarise , n=length(unique(hhid)))
+      if (dim(subset(countHhids2010, n>1))[1]>0){
+        stop("Invalid list of splitHouseholdHhids provided")
+      }
+      
+      cc2008 <- (ddply(notSplit2008[,c("hhid2008","itemcode")],.(hhid2008),summarise,a2008=jsonlite::toJSON(itemcode[order(itemcode)])))
+      # add unique hhid2008->hhid mapping
+      cc2008 <- unique(merge(cc2008,a2010[,c("hhid","hhid2008")])[,c("hhid","a2008")])
+      cc2010 <- (ddply(unique(notSplit2010[,c("hhid","itemcode")]),.(hhid),summarise,a2010=jsonlite::toJSON(itemcode[order(itemcode)]))) 
+      
+      compare2008_2010 <- merge(cc2008,cc2010)
+      assetsDiffNonOverlapping <- ddply(compare2008_2010,.(hhid),summarise, newAssets = diff_lists (a2010,a2008), 
+                          soldAssets = diff_lists (a2008,a2010 )) 
+
+      # take split households and find the one with the largest asset
+      preSplit <- subset(a2008,is.element(hhid2008,splitHouseholdHhids))
+      postSplit <- subset(a2010,is.element(hhid2008,splitHouseholdHhids))
+      
+      #postSplit.is_main should be worked for the household with more assets - the other household(s) - should be treated as new  
+      #value of total assets is based on the mean price of assets
+      
+      assetValues <- merge(val2012[,c("itemcode","mean_cost")], postSplit[,c("hhid","itemcode")], all.x=TRUE)
+      if (dim(subset(assetValues, is.na(mean_cost)))[1]>0){
+        stop(paste("Cannot find cost(s)/price(s) for", unique(subset(assetValues, is.na(mean_cost))$itemcode)))
+      }
+      print("Calculating total asset values")
+      postSplitTotalAssetValues <- ddply(assetValues,.(hhid),summarise,total_asset_value=sum(mean_cost))
+      postSplitTotalAssetValues <- merge(unique(postSplit[,c("hhid","hhid2008")]),postSplitTotalAssetValues)
+      
+      maxHhids <- (ddply(postSplitTotalAssetValues,.(hhid2008),summarise,hhid=fu()@get_max_col(total_asset_value,hhid)))
+      maxHhids$has_max <- 1
+      allHhids <- (merge(maxHhids[,c("hhid","has_max")],postSplitTotalAssetValues[,c("hhid","hhid2008")],all.y=TRUE,by=c("hhid")))
+      if (dim(allHhids[is.na(allHhids$has_max),])[1]>0){
+        allHhids[is.na(allHhids$has_max),]$has_max <- 0
+      }
+      #cc2008 <- (ddply(preSplit[,c("hhid2008","itemcode")],.(hhid2008),summarise,a2008=jsonlite::toJSON(itemcode[order(itemcode)])))
+      #those with max assets)
+      maxAssetsHHsPreSplit <- merge(subset(allHhids,has_max==1),preSplit[,c("hhid2008","itemcode")] )[,c("hhid","itemcode")]
+      print("Gathering assets owned")
+      cc2008MaxAssets <- (ddply( maxAssetsHHsPreSplit[,c("hhid","itemcode")],.(hhid),summarise,a2008=jsonlite::toJSON(itemcode[order(itemcode)])))
+      
+      maxAssetsHHsPostSplit <- merge ( subset(allHhids,has_max==1), postSplit[,c("hhid","itemcode")], by=c("hhid"))[,c("hhid","itemcode")]
+      cc2010MaxAssets <- (ddply( maxAssetsHHsPostSplit[,c("hhid","itemcode")],.(hhid),summarise,a2010=jsonlite::toJSON(itemcode[order(itemcode)])))
+      compare2008_2010_maxassets <- merge(cc2008MaxAssets,cc2010MaxAssets)
+      assetsDiff_maxassets <- ddply(compare2008_2010_maxassets,.(hhid),summarise, newAssets = diff_lists (a2010,a2008), 
+                          soldAssets = diff_lists (a2008,a2010 )) 
+      
+      nonMaxHHsPostSplit = merge ( subset(allHhids,has_max==0), postSplit[,c("hhid","itemcode")], by=c("hhid"))[,c("hhid","itemcode")]
+      cc2010NonMaxAssets <- (ddply( nonMaxHHsPostSplit[,c("hhid","itemcode")],.(hhid),summarise,a2010=jsonlite::toJSON(itemcode[order(itemcode)])))
+      cc2010NonMaxAssets$a2008 <- "[]"
+      if (length(intersect(cc2010NonMaxAssets$hhid,assetsDiff_maxassets$hhid))){
+        stop("Max and not max cannot overlap")
+      }
+      assetsDiff_nonmaxassets <- ddply(cc2010NonMaxAssets,.(hhid),summarise, newAssets = diff_lists (a2010,a2008), 
+                                    soldAssets = diff_lists (a2008,a2010 )) 
+      print(paste("Num nonsplit:",dim(assetsDiffNonOverlapping)[1]))
+      print(paste("Num split (max assets):",dim(assetsDiff_maxassets)[1]))
+      print(paste("Num split (not max assets):",dim(assetsDiff_nonmaxassets)[1]))
+      print(colnames(assetsDiffNonOverlapping))
+      print(colnames(assetsDiff_maxassets))
+      print(colnames(assetsDiff_nonmaxassets))
+      splitHHAssetsDiff <- rbind(assetsDiff_nonmaxassets,assetsDiff_maxassets)
+      if (length(intersect(splitHHAssetsDiff$hhid,assetsDiffNonOverlapping$hhid))>0){
+        stop("Split and non-split assets must not overlap")
+      }
+      allAssets <- rbind(splitHHAssetsDiff,assetsDiffNonOverlapping)
+      return(allAssets)
+    }
+    stop(paste("Data not available for",fromYear,"->",toYear)) 
   }
   
   combined_data_set<-function(year,dirprefix,selected_category,isDebug, set_depvar, fu, ln){
@@ -1795,6 +1889,6 @@ lsms_loader<-function(fu,ln) {
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
              read_assets_file=read_assets_file, group_expenditure=group_expenditure,
              get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership,
-             check_diary_nullity=check_diary_nullity,split_households=split_households))
+             check_diary_nullity=check_diary_nullity,split_households=split_households,asset_differences=asset_differences))
   
 }
