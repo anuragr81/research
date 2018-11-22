@@ -1733,9 +1733,17 @@ lsms_loader<-function(fu,ln) {
       
       print(paste("Ignoring - ", length(unique(notSplitHHids_noy2hhid)),"/", length(unique(ohs2012$hhid)) , "households with no corresponding hhid2010"))
       
+      
       ohs2012 <- subset(ohs2012,!is.na(hhid2010) & hhid2010!='')
       a2012   <- merge(ohs2012[,c("hhid","hhid2010")],a2012)
       notSplitHHids2012_wy2hhid <-  subset( a2012, !is.na(hhid2010) & as.character(hhid2010)!="" & !is.element(hhid2010,splitHouseholdHhids) )
+      
+      # double check hhid2010 -> hhid mapping in a2012
+      countHhids2012 <- ddply(notSplitHHids2012_wy2hhid, .(hhid2010), summarise , n=length(unique(hhid)))
+      if (dim(subset(countHhids2012, n>1))[1]>0){
+        #return()
+        stop("Invalid list of splitHouseholdHhids provided")
+      }
       
       notSplitHHids2010 <-  subset( a2010,!is.element(hhid2010,splitHouseholdHhids) )
       notSplitHHids2010 <- merge(ohs2012[,c("hhid2010","hhid")],notSplitHHids2010,by=c("hhid2010"))

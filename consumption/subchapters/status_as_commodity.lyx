@@ -2600,6 +2600,13 @@ View(merge(plyr::rename(count_occurrences(oocc),c("key"="code")),lsms_normalizer
 \end_layout
 
 \begin_layout Plain Layout
+#New houses don't start with TVs as much they start with land, house, pots
+ and furniture 
+\series bold
+(overall difference doesn't seem much)
+\end_layout
+
+\begin_layout Plain Layout
 #Looking at most bought assets
 \end_layout
 
@@ -2609,17 +2616,13 @@ hist(as.numeric(jsonlite::fromJSON(combine_lists(assetsDiff_2010_2012$newAssets)
 \end_layout
 
 \begin_layout Plain Layout
+View(merge(plyr::rename(fu()@occurrences_df((as.numeric(jsonlite::fromJSON(combin
+e_lists(dat$newAssets))))),c("x"="code")),lsms_normalizer()@items_codes_2010(),a
+ll.x=TRUE))
+\end_layout
+
+\begin_layout Plain Layout
 #Find cost of assets 
-\end_layout
-
-\begin_layout Plain Layout
-assetsValues2012 <- subset(a2012, !is.na(mtm) | !is.na(cost))
-\end_layout
-
-\begin_layout Plain Layout
-val2012 <- ddply(assetsValues2012 [,c('shortname','cost','mtm')],.(shortname),sum
-marise,mean_cost = mean(cost), mean_mtm = mean(mtm), sd_cost = sd(cost),
- sd_mtm = sd(mtm))
 \end_layout
 
 \begin_layout Plain Layout
@@ -2628,17 +2631,46 @@ marise,mean_cost = mean(cost), mean_mtm = mean(mtm), sd_cost = sd(cost),
 
 \begin_layout Plain Layout
 #waterheater table poultry coffeepulpingmachine ac_fan radio landline wheelbarro
-w mobile spraymachine cart videoplayer bike dishtv bed 
+w mobile spraymachine cart 
+\series bold
+videoplayer
+\series default
+ 
+\series bold
+bike
+\series default
+ 
+\series bold
+\bar under
+dishtv
+\series default
+\bar default
+ 
+\series bold
+bed
+\series default
+ 
 \end_layout
 
 \begin_layout Plain Layout
 #donkey plough musicplayer sewingmachine livestock stove_electricgas sofa
- tv waterpump refrigerator animalcart boat musicsystem engine_outboard harrow
+ 
+\series bold
+tv
+\series default
+ waterpump refrigerator animalcart boat musicsystem engine_outboard harrow
  computer trailer 
 \end_layout
 
 \begin_layout Plain Layout
-#house motorbike handmill powertiller car tractor
+#
+\series bold
+house
+\series default
+ motorbike handmill powertiller car tractor 
+\series bold
+\bar under
+land
 \end_layout
 
 \begin_layout Plain Layout

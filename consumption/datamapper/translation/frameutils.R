@@ -7,7 +7,7 @@ if (isClass("FrameUtils")){
 ## all exported functions are declared here
 setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function",filter_categories_data="function",
                                       removeall_cols_except="function",find_nonzero_percentile="function",
-                                      fv="function",rbind_xy="function",max_non_na="function",get_max_col="function") )
+                                      fv="function",rbind_xy="function",max_non_na="function",get_max_col="function",occurrences_df="function") )
 
 removeall_cols_except<-function(dat,listColumnNames){
   #c("region","district","ward","accessiblemarket","travelcost"))
@@ -63,6 +63,18 @@ fu<-function(){
   
   fv<-function (x) { 
     return(as.double(filter_extremes(dat=x,highMultiple = 30, threshold = .95)[["value"]])) 
+  }
+  
+  occurrences_df <- function(x){
+    i = 1
+    arr = array()
+    narr = array()
+    for (y in unique(x)){
+      arr[i] <- y
+      narr[i] <- length(x[x==y])
+      i = i+1
+    }
+    return(data.frame(x=arr, n=narr))
   }
   
   #fq<-function (x) { return(as.double(filter_extremes(dat=x,highMultiple = highMultiple, threshold = .95)[["quantile"]])) }
@@ -209,6 +221,6 @@ fu<-function(){
              find_nonzero_percentile=find_nonzero_percentile,
              fv=fv,
              rbind_xy=rbind_xy,max_non_na=max_non_na,
-             get_max_col=get_max_col) );
+             get_max_col=get_max_col, occurrences_df=occurrences_df) );
   
 }
