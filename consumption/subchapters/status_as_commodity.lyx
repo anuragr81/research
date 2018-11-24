@@ -171,11 +171,7 @@ reference "sec:AssetArgument"
 \end_layout
 
 \begin_layout Standard
-The paradox is solved through maintaining income (in our case simply 
-\begin_inset Formula $x=p\cdot q$
-\end_inset
-
-).
+The paradox is solved through maintaining income (or occupation).
  The discussion of status consumption is not possible without a measure
  of income.
  A high income tells us whether a person has (relatively) the ability to
@@ -1509,6 +1505,50 @@ The only parameter that remains discrete in the model now is the rebalancing
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula $\gamma_{t+1}-\gamma_{t}=\Delta\gamma_{t+1}=\alpha\gamma_{t}+\omega\gamma_{t}dW$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $c_{t+1}=c_{t}+\gamma_{t+1}$
+\end_inset
+
+ matches the price 
+\begin_inset Formula $P(K)$
+\end_inset
+
+ where 
+\begin_inset Formula $K$
+\end_inset
+
+ is the next desired asset level, 
+\begin_inset Formula $ln(P(K))$
+\end_inset
+
+ should be proportional to 
+\begin_inset Formula $c_{t+1}$
+\end_inset
+
+.
+ Since, 
+\begin_inset Formula $c_{t+1}$
+\end_inset
+
+ is influenced most by age - according to the life-cycle model, we expect
+ 
+\begin_inset Formula $ln(P(K))$
+\end_inset
+
+ to be proportional to age.
+ Notice that we don't mean to observe the market prices of the assets -
+ which themselves are endogenous to the model ( consumer decide which stocks
+ they want to buy based on the assets they have accumulated possess).
+\end_layout
+
+\begin_layout Standard
 The conditions of homogeneity, adding-up and non-negativeness of the Slutsky
  equations (which look at the price sensitivities and total-expenditure
  of demand - 
@@ -1532,7 +1572,69 @@ The Dominic-McFadden method of discrete choice offers a better way to approach
  The threshold method used by models for durable goods (by Pyatt and others)
  is the natural way to extend the model in order for it to be calibrated
  with durable goods ownership.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+\begin_inset Formula $log(w)$
+\end_inset
+
+ would be proportional to prices and index the same way - but should we
+ just use 
+\begin_inset Formula $w\sim log(x)$
+\end_inset
+
+ to get any idea of the total expenditure? The approach equivalent to AIDS
+ would be conducting an SUR with 
+\begin_inset Formula $w_{c}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{A}$
+\end_inset
+
+ where 
+\begin_inset Formula $w_{A}$
+\end_inset
+
+ is calculated with the total assets purchased in the numerator and the
+ denominator is calculated with the total non-durable expenditure.
+ In the end, the econometric equation should be derived with the stochastic
+ model for utility minimisation.
+\end_layout
+
+\begin_layout Standard
+We have 
+\begin_inset Formula $x_{t}=\sum_{i}p_{it}q_{it}$
+\end_inset
+
+.
+ The consumer's total wealth should stay the same or one could assume that
  
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ grows but moves slowly and must drop towards the end (if life-cycle hypothesis
+ is true).
+ We should therefore look at the evolution of log x and log P over t.
+ The substitution would be with the SUR for budget share 
+\begin_inset Formula $w_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{x}$
+\end_inset
+
+.
+ The budget shares depend on calculating 
+\begin_inset Formula $x+P(K)$
+\end_inset
+
+ for the year.
+ The SUR can be justified with the budget equation (based on total wealth
+ calculated by discounting the assets over the life-time horizon).
+ Calculating the discounting rate - however - is also fraught with problems
 \end_layout
 
 \begin_layout Subsection
@@ -1541,7 +1643,7 @@ Observables
 
 \begin_layout Standard
 The observables we have in the market are prices of the assets and at least
- their relative prices structure i.e.
+ their relative prices structur e i.e.
 \begin_inset Formula $\mathscr{A}=\{A_{1},A_{2},...\}$
 \end_inset
 
@@ -1813,6 +1915,82 @@ Except for new household where asset is completely inherited, we look at
  to the retirement or decline in the age of the household).
  The frequency of splits is more often than death -so it may be more relevant
  to model the split itself.
+\end_layout
+
+\begin_layout Standard
+The more important issue is whether we should consider sale of assets as
+ addition to wealth.
+ The model of asset growth does not taken sale into account.
+ If bought assets related to age then sold assets should relate to age (negative
+ly) as well.
+ Bought assets should relate to age.
+ Consumer that are older would be more likely to sell off assets according
+ to the model - or may be selling because of change in age or other circumstance
+s.
+ The bought and sold assets ought to be understood separately.
+ For the analysis of the bought assets, we are tempted to exclude land and
+ housing - however they are purchased with a cost so they too must be included.
+ Agricultural assets are excluded - simply because they are not numerous
+ - data on rural households is far too little to draw region specific conclusion
+s.
+\end_layout
+
+\begin_layout Standard
+Using the sum of selected bought assets, we can infer the peak of the age
+ when these assets are bought.
+ The changes in assets bought from 2012 and 2010 can give us an idea of
+ how assets have moved.
+ In fact, ~3016 households from 2012 also appear in 2010.
+ There is enough data look at houses that appear in 2008, 2010 and 2012.
+ For the households in the panel, the year of purchase available in 2012
+ can be used to correct the errors in the recall.
+\end_layout
+
+\begin_layout Standard
+Four tasks:
+\end_layout
+
+\begin_layout Enumerate
+Get value of chosen assets in 2012.
+ We don't have mtm for 2010 or 2008.
+ One way to deal with the issue is to look at the age of the item and use
+ the cost as the price.
+ This OK - since the prices are endogenous, and we can calculate the total
+ value of 
+\begin_inset Quotes eld
+\end_inset
+
+new
+\begin_inset Quotes erd
+\end_inset
+
+ selected assets purchased in the years 2010 and 2012.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Calculate total cost of selected assets in 2012 - let's just focus on that
+ for now.
+\end_layout
+
+\begin_layout Enumerate
+percentage of the working population is higher in urban areas (self-selection)
+ - so they obviously spend more.
+ Expensive region dummy is as significant as age dummy, occupation is significan
+t but not education.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Compute age of the oldest employed person of the household (this way we
+ take away the cultural issue of the older person).
+ This is only used when there is no household head in the survey.
+\end_layout
+
+\begin_layout Enumerate
+Compute expenditure in every year for the household
 \end_layout
 
 \begin_layout Section
@@ -2169,407 +2347,10 @@ total_savings <- function(d,g) { return(sum(sapply(seq(0,d-1),function(x){
 \end_layout
 
 \begin_layout Plain Layout
-#Performing match of 2008 hhids
-\end_layout
-
-\begin_layout Plain Layout
 
 \family typewriter
 \size small
-#Ignore households that have more than 1 match in hhid
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-a2008 <- ll@read_assets_file(year = 2008, dirprefix = "../",fu = fu , ln=lsms_norm
-alizer)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-a2010 <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu , ln=lsms_norm
-alizer)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-a2012 <- ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu , ln=lsms_norm
-alizer) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-a2012<-unique(a2012)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-a2008<-subset(a2008,number>0)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-a2010<-subset(a2010,number>0)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-a2012 <- subset(a2012, number>0)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-a2010$hhid2008<-substr(as.character(a2010$hhid),1,nchar(as.character(a2010$hhid))-
-2) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-ohs2012 <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu = fu , ln =
- lsms_normalizer)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-a2012 <- merge(ohs2012[,c("hhid","y2_hhid")], a2012)
-\end_layout
-
-\begin_layout Plain Layout
-##performing matching on asset files
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-c2010 <- (ddply(a2010[,c("hhid2008","itemcode")],.(hhid2008),summarise,a2010=toSt
-ring(itemcode[order(itemcode)])))
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-c2008 <- (ddply(a2008[,c("hhid2008","itemcode")],.(hhid2008),summarise,a2008=toSt
-ring(itemcode[order(itemcode)]))) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-ca <- merge(a2010[,c("hhid2008","hhid")],data.frame(hhid2008=a2008[,c("hhid2008")
-]))
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-ca <- unique(ca)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-dat <- ddply(ca,.(hhid2008),summarise,n=length(unique(hhid))) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-# performing matching on hh files
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-hh2008<-ll@load_diary_file(dirprefix = "../",year = 2008,fu = fu, ln=lsms_normaliz
-er)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-hh2008$hhid2008<-hh2008$hhid
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-hh2010<-ll@load_diary_file(dirprefix = "../",year = 2010,fu = fu, ln=lsms_normaliz
-er)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-hh2010$hhid2008<-substr(as.character(hh2010$hhid),1,nchar(as.character(hh2010$hhid
-))-2) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-ch <- merge(hh2010[,c("hhid2008","hhid")],data.frame(hhid2008=hh2008[,c("hhid2008
-")]))
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-ch <- unique(ch)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-dath <- ddply(ch,.(hhid2008),summarise,n=length(unique(hhid))) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-#performing matching on ohs data
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-ohs2008<-ll@load_ohs_file(year = 2008, dirprefix = "../",fu = fu, ln=lsms_normaliz
-er)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-ohs2008$hhid2008 <- ohs2008$hhid
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-ohs2010<-ll@load_ohs_file(year = 2010, dirprefix = "../",fu = fu, ln=lsms_normaliz
-er)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-ohs2010$hhid2008<-substr(as.character(ohs2010$hhid),1,nchar(as.character(ohs2010$h
-hid))-2)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-co <- merge(unique(hh2010[,c("hhid2008","hhid")]),unique(data.frame(hhid2008=hh20
-08[,c("hhid2008")])))
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-dato <- ddply(co,.(hhid2008),summarise,n=length(unique(hhid)))
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-#Treat as if double hhids don't have data
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\series bold
-\size small
-doubleHhids
-\series default
-<- ( unique ( union( union( (subset(dato,n>1))$hhid2008, subset(dat,n>1)$hhid200
-8) , subset(dath,n>1)$hhid2008) ) )
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-#Now compute the differences in assets purchased from 2008 to 2010
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-aa2008 <- subset(a2008, !is.element(hhid2008, doubleHhids))
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\series bold
-\size small
-aa2010
-\series default
- <- subset(a2010, !is.element(hhid2008, 
-\series bold
-doubleHhids
-\series default
-))
-\end_layout
-
-\begin_layout Plain Layout
-##
-\end_layout
-
-\begin_layout Plain Layout
-#Performing comparisons
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-cc2008 <- (ddply(aa2008[,c("hhid2008","itemcode")],.(hhid2008),summarise,aa2008=j
-sonlite::toJSON(itemcode[order(itemcode)]))) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-cc2010 <- (ddply(aa2010[,c("hhid2008","itemcode")],.(hhid2008),summarise,aa2010=j
-sonlite::toJSON(itemcode[order(itemcode)]))) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-compare2008_2010 <- merge(cc2008,cc2010)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-diff_lists <- function( x,y ) { jsonlite::toJSON( setdiff ( jsonlite::fromJSON(x
-), jsonlite::fromJSON(y) ) )}
-\end_layout
-
-\begin_layout Plain Layout
-combine_lists <- function (x) { res <- NULL ; for (i in x) { res <- c(res,jsonli
-te::fromJSON(i)) } ; return(jsonlite::toJSON(res)) }
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-assetsDiff <- ddply(compare2008_2010,.(hhid2008),summarise, newAssets = diff_list
-s (aa2010,aa2008), soldAssets = diff_lists (aa2008,aa2010 )) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-#taking only households that are in 2008 and 2010
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-aa2012 <- subset(a2012, !is.na(y2_hhid) & y2_hhid!='' & is.element(y2_hhid,
- 
-\series bold
-aa2010
-\series default
-$hhid))
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-cc2010 <- (ddply(aa2010[,c("hhid","itemcode")],.(hhid),summarise,aa2010=jsonlite:
-:toJSON(itemcode[order(itemcode)]))) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-cc2012 <- ddply(aa2012[,c("y2_hhid","itemcode")],.(y2_hhid),summarise,aa2012=json
-lite::toJSON(itemcode[order(itemcode)]))
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-cc2012 <- plyr::rename(cc2012 ,c('y2_hhid'='hhid'))
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-compare2010_2012 <- merge(cc2010,cc2012)
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-assetsDiff_2010_2012 <- ddply(compare2010_2012,.(hhid),summarise, newAssets
- = diff_lists (aa2010,aa2012), soldAssets = diff_lists (aa2012,aa2010 ))
- # double counted 
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-#From these differences, watches are being sold it seems.
+#From asset differences, watches are being sold it seems.
  Take a look at 1207004001074601 - there seems to be a lot of assets sold
  - which is probably due to miscounting.
  It'll be useful to just count the asset once when it has been bought (and
@@ -2585,21 +2366,6 @@ assetsDiff_2010_2012 <- ddply(compare2010_2012,.(hhid),summarise, newAssets
 
 \family typewriter
 \size small
-count_occurrences <- function(naocc) { keys<-NULL; values<- array(); count
- = 1; for (i in unique(naocc)) { keys[count]=i; values[count]=length(naocc[naocc
-==i]) ; count=count+1 } ; res<-(data.frame(key=keys, nocc=values)) ; return(res[o
-rder(res$nocc),])}
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-View(merge(plyr::rename(count_occurrences(oocc),c("key"="code")),lsms_normalizer
-()@items_codes_2010()))
-\end_layout
-
-\begin_layout Plain Layout
 #New houses don't start with TVs as much they start with land, house, pots
  and furniture 
 \series bold
@@ -2607,31 +2373,61 @@ View(merge(plyr::rename(count_occurrences(oocc),c("key"="code")),lsms_normalizer
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 #Looking at most bought assets
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 hist(as.numeric(jsonlite::fromJSON(combine_lists(assetsDiff_2010_2012$newAssets))
 ))
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 View(merge(plyr::rename(fu()@occurrences_df((as.numeric(jsonlite::fromJSON(combin
 e_lists(dat$newAssets))))),c("x"="code")),lsms_normalizer()@items_codes_2010(),a
 ll.x=TRUE))
 \end_layout
 
 \begin_layout Plain Layout
-#Find cost of assets 
+
+\family typewriter
+\size small
+#inherited items are not be counted as purchase of stocks (they're to be
+ taken as starting wealth or agricultural investment)
 \end_layout
 
 \begin_layout Plain Layout
-#mosquitonet stove_other watch iron chair 
+
+\family typewriter
+\size small
+#mosquitonet stove_other watch iron 
+\shape italic
+chair
+\shape default
+ 
 \end_layout
 
 \begin_layout Plain Layout
-#waterheater table poultry coffeepulpingmachine ac_fan radio landline wheelbarro
-w mobile spraymachine cart 
+
+\family typewriter
+\size small
+#waterheater 
+\shape italic
+cupboard table
+\shape default
+ poultry coffeepulpingmachine 
+\series bold
+ac_fan 
+\series default
+radio landline wheelbarrow mobile spraymachine cart 
 \series bold
 videoplayer
 \series default
@@ -2653,29 +2449,342 @@ bed
 \end_layout
 
 \begin_layout Plain Layout
-#donkey plough musicplayer sewingmachine livestock stove_electricgas sofa
+
+\family typewriter
+\size small
+#donkey plough musicplayer 
+\series bold
+sewingmachine
+\series default
+ 
+\series bold
+livestock stove_electricgas sofa
+\series default
  
 \series bold
 tv
 \series default
- waterpump refrigerator animalcart boat musicsystem engine_outboard harrow
- computer trailer 
+ waterpump 
+\series bold
+refrigerator
+\series default
+ animalcart 
+\series bold
+boat musicsystem 
+\series default
+engine_outboard harrow 
+\series bold
+computer 
+\series default
+trailer
 \end_layout
 
 \begin_layout Plain Layout
+
+\family typewriter
+\size small
 #
 \series bold
+\bar under
 house
 \series default
- motorbike handmill powertiller car tractor 
+\bar default
+ 
+\series bold
+motorbike
+\series default
+ handmill powertiller 
+\series bold
+car 
+\series default
+tractor 
 \series bold
 \bar under
 land
 \end_layout
 
 \begin_layout Plain Layout
-f = function (y,z) { b = data.frame(y=y,z=z); return(b[which.max(b$y),]$z)
- } or f = function (y,z) { z[which.max(y)] } 
+
+\family typewriter
+\size small
+#List of items whose purchase should be checked
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+c('ac_fan', 'videoplayer', 'bike', 'dishtv', 'bed', 'sewingmachine', 'livestock'
+, 'stove_electrigas', 'sofa', 'tv', 'refrigerator', 'boat', 'musicsystem',
+ 'computer', 'house', 'motorbike', 'car', 'land') 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+stocks2012 <- ddply(subset(a2012, is.element(shortname, stocks) & (cost>0)
+ & age < 3 ) , .(hhid), summarise, PK= sum(cost))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+pkAgeDf<-merge ( subset(ohs2012,!is.na(age)),stocks2012 ) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#age etc.
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#
+\series bold
+get max age
+\series default
+ with occupation (when no occupation then just age)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#a<-data.frame(hhid=c("A","A","B","B"),personid=c(1,2,1,2), age=c(10,60,40,30),
+ occupation_rank=c(2,3,3,1))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+f<-function(personid,age,occupation_rank) { d = data.frame(age=age,personid=perso
+nid, occupation_rank=occupation_rank); d = d[order(d$occupation_rank,rev(d$age))
+,]; print(d); return(d[1,]$personid)} 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+ddply(a,.(hhid),summarise,n=f(personid,age,occupation_rank))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+pkAgeDf<-merge ( subset(ohs2012,!is.na(age) & household_status == 1),stocks2012
+ ) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+hhidsWithNoHead <- setdiff(unique(subset(ohs2012, !is.na(age))$hhid),subset(ohs20
+12,household_status==1)$hhid)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+pick_oldest_employed<-function(personid,age,occupation_rank) { d = data.frame(age
+=age,personid=personid, occupation_rank=occupation_rank); d = d[order(d$occupati
+on_rank,rev(d$age)),]; return(d[1,]$personid)} 
+\end_layout
+
+\begin_layout Plain Layout
+ohs2012H
+\family typewriter
+\size small
+hidsWithNoHead
+\family default
+\size default
+ <- merge ( ddply ( subset(ohs2012, is.element(hhid,hhidsWithNoHead))[,c("hhid","
+personid","occupation_rank","age")] , .(hhid),summarise, personid = pick_oldest_e
+mployed(personid = personid,age = age, occupation_rank = occupation_rank))
+ , subset(ohs2012, is.element(hhid,hhidsWithNoHead)), by = c("hhid","personid"))
+\end_layout
+
+\begin_layout Plain Layout
+pkAgeDfH
+\family typewriter
+\size small
+hidsWithNoHead
+\family default
+\size default
+ <- merge( ohs2012H
+\family typewriter
+\size small
+hidsWithNoHead
+\family default
+\size default
+ , stocks2012)
+\end_layout
+
+\begin_layout Plain Layout
+if (length(intersect(pkAgeDf$hhid,pkAgeDfHhidsWithNoHead$hhid)) >0 ){
+\end_layout
+
+\begin_layout Plain Layout
+stop('HHIDs should not repeat for households with no heads in survey and
+ those with reported heads in the survey')
+\end_layout
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\begin_layout Plain Layout
+pkAgeDfC <-rbind(pkAgeDfH
+\family typewriter
+\size small
+hidsWithNoHead
+\family default
+\size default
+ , pkAgeDf) 
+\end_layout
+
+\begin_layout Plain Layout
+pkAgeDfC$logPK <- log(pkAgeDfC$PK)
+\end_layout
+
+\begin_layout Plain Layout
+pkAgeDfC <- merge(pkAgeDfC,unique(g[,c("hhid","total_expenditure")]), by
+ = c("hhid"))
+\end_layout
+
+\begin_layout Plain Layout
+g <- ll@group_expenditure(year = 2012, dirprefix = "../",fu = fu, ln = lsms_normal
+izer, returnBeforeGrouping = TRUE )
+\end_layout
+
+\begin_layout Plain Layout
+pkAgeDfC <- merge(pkAgeDfC,unique(g[,c("hhid","total_expenditure")]), by
+ = c("hhid"))
+\end_layout
+
+\begin_layout Plain Layout
+pkAgeDfC$lntotexp <- log(pkAgeDfC$total_expenditure)
+\end_layout
+
+\begin_layout Plain Layout
+pkAgeDfC$age_band <- as.integer(pkAgeDfC$age > 15 & pkAgeDfC$age<=25)*25
+ + as.integer(pkAgeDfC$age>25 & pkAgeDfC$age <= 35)*35 + as.integer(pkAgeDfC$age>3
+5 & pkAgeDfC$age <= 45)*45+ as.integer(pkAgeDfC$age>45 & pkAgeDfC$age <=
+ 55)*55 + as.integer(pkAgeDfC$age>55 & pkAgeDfC$age <= 70)*70 + as.integer(pkAgeDf
+C$age>70)*90 
+\end_layout
+
+\begin_layout Plain Layout
+ddply(pkAgeDfC,.(expensiveregion,age_band),summarise,n=length(unique(hhid)))
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+#Finding hhids that bought a particular item:
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+item="426"; temp = dat ; temp$sold <- (sapply(temp$soldAssets, function(x)
+ { is.element(item, jsonlite::fromJSON (x)) } )) ; subset(temp,sold==TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+subset(ohs2012,is.element(hhid2010,l))$hhid # sold assets only a minority
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+##### The panel data of assets ###
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+split2010<-ll@split_households(fromYear = 2008, toYear = 2010, dirprefix
+ = "../",fu = fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+split2012<-ll@split_households(fromYear = 2010, toYear = 2012, dirprefix
+ = "../",fu = fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+boughtsold2010 <- ll@asset_differences(fromYear = 2008, toYear = 2010, assetsBas
+eYear = 2012, splitHouseholdHhids = split2010,dirprefix = "../", fu = fu ,
+ ln = lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+boughtsold2012 = ll@asset_differences(fromYear = 2010, toYear = 2012, assetsBase
+Year = 2012, splitHouseholdHhids = split2012,dirprefix = "../", fu = fu ,
+ ln = lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\series bold
+\size small
+assetsPanel
+\series default
+ <- merge ( plyr::rename(boughtsold2010,c("hhid"="hhid2010","newAssets"="newAsse
+ts2010", "soldAssets"="soldAssets2010")), plyr::rename( merge(boughtsold2012,uni
+que(ohs2012[,c("hhid","hhid2010")]),by=c("hhid"))[,c("hhid2010","newAssets","sol
+dAssets")] ,c ("soldAssets"="soldAssets2012", "newAssets"="newAssets2012")
+ ) )
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+# The asset differences may be limited to certain assets
 \end_layout
 
 \end_inset
