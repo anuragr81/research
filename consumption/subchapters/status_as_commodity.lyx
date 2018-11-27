@@ -1041,10 +1041,6 @@ c(t+\tau_{K}) & =\sum_{K\in\Lambda_{t+\tau_{K}}}P(K)\label{eq:savings_value}
  is always spent in the non-durable expenditure.
 \end_layout
 
-\begin_layout Subsection
-Yearly adjustment of savings
-\end_layout
-
 \begin_layout Standard
 If we assume that life events can change intertemporal priorites then we
  cannot assume that a consumer always follows through her plan to purchase
@@ -1345,7 +1341,15 @@ on problem is therefore relevant to the current model.
 \end_inset
 
 .
- For ease of notation let the price range of assets be 
+ For ease of notation let the price range 
+\begin_inset Formula $P(K)$
+\end_inset
+
+ of assets 
+\begin_inset Formula $\mathscr{A}$
+\end_inset
+
+ be denoted by 
 \begin_inset Formula $\Phi$
 \end_inset
 
@@ -1425,7 +1429,45 @@ The marginal utility
 \begin_layout Standard
 The only parameter that remains discrete in the model now is the rebalancing
  frequency (1 year).
- The consumer can reset 
+ 
+\begin_inset Formula $\delta_{K}$
+\end_inset
+
+ fluctuates depending on personal characteristics (needs), time and the
+ past values of 
+\begin_inset Formula $\delta_{K}$
+\end_inset
+
+, the current account 
+\begin_inset Formula $c(t)$
+\end_inset
+
+ and the price of the desired asset 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ The utility function depends on the total 
+\begin_inset Formula $x$
+\end_inset
+
+ and the assets - a function that is contstrained by the total wealth.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\delta_{K}(t+1) & =\Delta(t,K)=g(\delta_{K}(t),P(K)-c(t))
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The consumer can reset 
 \begin_inset Formula $\gamma(t)$
 \end_inset
 
@@ -1445,7 +1487,7 @@ The only parameter that remains discrete in the model now is the rebalancing
 \begin_inset Formula $\delta_{K}(t)$
 \end_inset
 
- )would simply be expected value of
+ ) would simply be the expected value of
 \begin_inset Formula $\gamma(t+1)$
 \end_inset
 
@@ -1453,7 +1495,7 @@ The only parameter that remains discrete in the model now is the rebalancing
 \begin_inset Formula $\delta_{K}(t+1)$
 \end_inset
 
- )over all possibilities of asset prices
+ ) over all possibilities of asset prices
 \begin_inset Formula $\Phi$
 \end_inset
 
@@ -1479,7 +1521,7 @@ The only parameter that remains discrete in the model now is the rebalancing
 \begin_inset Formula $E(dW)=0$
 \end_inset
 
- and 
+ where 
 \begin_inset Formula $\omega$
 \end_inset
 
@@ -1488,202 +1530,55 @@ The only parameter that remains discrete in the model now is the rebalancing
 \end_inset
 
 .
- 
-\begin_inset Formula $\delta_{K}(t)$
-\end_inset
-
- too must have a related process.
- In fact the uncertainty 
+ In fact the uncertainty of 
 \begin_inset Formula $\delta$
 \end_inset
 
- represents the stochastic parameter 
+ represents the parameter 
 \begin_inset Formula $\omega$
 \end_inset
 
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\gamma_{t+1}-\gamma_{t}=\Delta\gamma_{t+1}=\alpha\gamma_{t}+\omega\gamma_{t}dW$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Since 
-\begin_inset Formula $c_{t+1}=c_{t}+\gamma_{t+1}$
-\end_inset
-
- matches the price 
-\begin_inset Formula $P(K)$
-\end_inset
-
- where 
-\begin_inset Formula $K$
-\end_inset
-
- is the next desired asset level, 
-\begin_inset Formula $ln(P(K))$
-\end_inset
-
- should be proportional to 
-\begin_inset Formula $c_{t+1}$
+of the stochastic component of 
+\begin_inset Formula $\gamma(t)$
 \end_inset
 
 .
- Since, 
-\begin_inset Formula $c_{t+1}$
-\end_inset
-
- is influenced most by age - according to the life-cycle model, we expect
- 
-\begin_inset Formula $ln(P(K))$
-\end_inset
-
- to be proportional to age.
- Notice that we don't mean to observe the market prices of the assets -
- which themselves are endogenous to the model ( consumer decide which stocks
- they want to buy based on the assets they have accumulated possess).
+ We therefore write:
 \end_layout
 
 \begin_layout Standard
-The conditions of homogeneity, adding-up and non-negativeness of the Slutsky
- equations (which look at the price sensitivities and total-expenditure
- of demand - 
-\begin_inset Formula $g(x,p)$
+\begin_inset Formula 
+\begin{alignat*}{1}
+\gamma_{t+1}-\gamma_{t} & =\Delta\gamma_{t+1}=\alpha\gamma_{t}+\omega\gamma_{t}dW
+\end{alignat*}
+
 \end_inset
 
-) can thus be specified in the model.
- 
+
 \end_layout
 
 \begin_layout Standard
-The Dominic-McFadden method of discrete choice offers a better way to approach
- this - where a probability distribution can be sought and the variable
- 
-\begin_inset Formula $\Phi$
+If 
+\begin_inset Formula $\alpha=0$
 \end_inset
 
- is not continuous.
- We wish to extend the quality analysis to asset levels, where the discrete
- choice ought to be more relevant.
- The threshold method used by models for durable goods (by Pyatt and others)
- is the natural way to extend the model in order for it to be calibrated
- with durable goods ownership.
+, then 
+\begin_inset Formula $\gamma_{t}$
+\end_inset
+
+ would be a martingale.
+ Meaning, if there was no expectation of the salaries growing then all savings
+ would net out to zero on average.
+ If the incomes are expected to grow (as is always the case), the savings
+ rate 
+\begin_inset Formula $\gamma(t)$
+\end_inset
+
+ would have drift component as well.
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-\begin_inset Formula $log(w)$
-\end_inset
-
- would be proportional to prices and index the same way - but should we
- just use 
-\begin_inset Formula $w\sim log(x)$
-\end_inset
-
- to get any idea of the total expenditure? The approach equivalent to AIDS
- would be conducting an SUR with 
-\begin_inset Formula $w_{c}$
-\end_inset
-
- and 
-\begin_inset Formula $w_{A}$
-\end_inset
-
- where 
-\begin_inset Formula $w_{A}$
-\end_inset
-
- is calculated with the total assets purchased in the numerator and the
- denominator is calculated with the total non-durable expenditure.
- In the end, the econometric equation should be derived with the stochastic
- model for utility minimisation.
-\end_layout
-
-\begin_layout Standard
-We have 
-\begin_inset Formula $x_{t}=\sum_{i}p_{it}q_{it}$
-\end_inset
-
-.
- The consumer's total wealth should stay the same or one could assume that
- 
-\begin_inset Formula $x_{t}$
-\end_inset
-
- grows but moves slowly and must drop towards the end (if life-cycle hypothesis
- is true).
- We should therefore look at the evolution of log x and log P over t.
- The substitution would be with the SUR for budget share 
-\begin_inset Formula $w_{A}$
-\end_inset
-
- and 
-\begin_inset Formula $w_{x}$
-\end_inset
-
-.
- The budget shares depend on calculating 
-\begin_inset Formula $x+P(K)$
-\end_inset
-
- for the year.
- The SUR can be justified with the budget equation (based on total wealth
- calculated by discounting the assets over the life-time horizon).
- Calculating the discounting rate - however - is also fraught with problems
-\end_layout
-
-\begin_layout Subsection
-Observables
-\end_layout
-
-\begin_layout Standard
-The observables we have in the market are prices of the assets and at least
- their relative prices structur e i.e.
-\begin_inset Formula $\mathscr{A}=\{A_{1},A_{2},...\}$
-\end_inset
-
- and 
-\begin_inset Formula $P(\mathscr{A})=\{P(A_{1}),P(A_{2}),...\}$
-\end_inset
-
-.
- We also have nondurable expenditure details (
-\begin_inset Formula $w_{c\in\mathscr{C}})$
-\end_inset
-
-.
- We assume the lifetime of the assets to be infinite (unless a significant
- sale is found in data).
- The evolution of 
-\begin_inset Formula $\delta_{K}(t)$
-\end_inset
-
- is also not known but the parameters of the 
-\begin_inset Formula $\iota(t,K)$
-\end_inset
-
- in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:iotaFunction"
-
-\end_inset
-
- are what we wish to estimate econometrically.
- Since all income not spent on assets is assumed to go towards 
-\begin_inset Formula $x=\sum_{c\in\mathscr{C}}p_{c}\cdot q_{c}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Here are the equations to estimate:
+To arrive at the econoemtric methods for the model, observe that 
 \end_layout
 
 \begin_layout Standard
@@ -1755,73 +1650,128 @@ to be stay high over the life times - as consumers can only focus on longer-term
 \end_layout
 
 \begin_layout Standard
-Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:iotaFunction"
-
+Since use the same that 
+\begin_inset Formula $c_{t+1}=c_{t}+\gamma_{t+1}$
 \end_inset
 
-provides the other econometric equation:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\gamma_{K}(t) & =f(\delta_{K}(t),\alpha,c(t),P(K)
-\end{alignat*}
-
+ or 
+\begin_inset Formula $c_{t+\delta}=\int_{t}^{t+\delta}\gamma(\tau)d\tau$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-The key stochastic process is that of 
-\begin_inset Formula $\delta_{K}$
+ matches the price 
+\begin_inset Formula $P(K)$
 \end_inset
 
- which fluctuates depending on personal characteristics (needs), time and
- the past values of 
-\begin_inset Formula $\delta_{K}$
-\end_inset
-
-, the current account 
-\begin_inset Formula $c(t)$
-\end_inset
-
- and the price of the desired asset 
+ where 
 \begin_inset Formula $K$
 \end_inset
 
+ is the next desired asset level, 
+\begin_inset Formula $ln(P(K))$
+\end_inset
+
+ should be proportional to 
+\begin_inset Formula $c_{t+1}$
+\end_inset
+
 .
- The utility function depends on the total 
-\begin_inset Formula $x$
+ Since, 
+\begin_inset Formula $c_{t+1}$
 \end_inset
 
- and the assets - a function that is contstrained by the total wealth.
+ is influenced most by age - according to the life-cycle model, we expect
  
+\begin_inset Formula $ln(P(K))$
+\end_inset
+
+ to be proportional to age.
+ Notice that we don't to observe the market prices of the assets - only
+ the amount that the consumers spend on the item.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\delta_{K}(t+1) & =\Delta(t,K)=g(\delta_{K}(t),P(K)-c(t))
-\end{alignat*}
-
+The conditions of homogeneity, adding-up and non-negativeness of the Slutsky
+ equations (which look at the price sensitivities and total-expenditure
+ of demand - 
+\begin_inset Formula $g(x,p)$
 \end_inset
 
+) can then be addressed in the model.
+ 
+\bar under
 
+\begin_inset Formula $log(w)$
+\end_inset
+
+ would be proportional to prices and index the same way - but should we
+ just use 
+\begin_inset Formula $w\sim log(x)$
+\end_inset
+
+ to get any idea of the total expenditure? The approach equivalent to AIDS
+ would be conducting an SUR with 
+\begin_inset Formula $w_{c}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{A}$
+\end_inset
+
+ where 
+\begin_inset Formula $w_{A}$
+\end_inset
+
+ is calculated with the total assets purchased in the numerator and the
+ denominator is calculated with the total non-durable expenditure.
+ In the end, the econometric equation should be derived with the stochastic
+ model for utility minimisation.
+ 
+\bar default
+We have 
+\begin_inset Formula $x_{t}=\sum_{i}p_{it}q_{it}$
+\end_inset
+
+.
+ The consumer's total wealth should stay the same or one could assume that
+ 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ grows but moves slowly and must drop towards the end (if life-cycle hypothesis
+ is true).
+ We should therefore look at the evolution of log x and log P over t.
+ The substitution would be with the SUR for budget share 
+\begin_inset Formula $w_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{x}$
+\end_inset
+
+.
+ The budget shares depend on calculating 
+\begin_inset Formula $x+P(K)$
+\end_inset
+
+ for the year.
+ The SUR can be justified with the budget equation (based on total wealth
+ calculated by discounting the assets over the life-time horizon).
+ Calculating the discounting rate - however - is also fraught with problems
 \end_layout
 
 \begin_layout Standard
-We cannot say that a consumer sets 
-\begin_inset Formula $\delta_{K}(t+1)$
+The Dominic-McFadden method of discrete choice offers a better way to approach
+ this - where a probability distribution can be sought and the variable
+ 
+\begin_inset Formula $\Phi$
 \end_inset
 
- and changes it.
- What we can say is that the consumer may adjust it slightly - possibly
- just randomly.
+ is not continuous.
+ We wish to extend the quality analysis to asset levels, where the discrete
+ choice ought to be more relevant.
+ The threshold method used by models for durable goods (by Pyatt and others)
+ is the natural way to extend the model in order for it to be calibrated
+ with durable goods ownership.
 \end_layout
 
 \begin_layout Section
