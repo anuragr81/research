@@ -7,6 +7,11 @@
 \textclass article
 \begin_preamble
 \usepackage{lscape}
+\usepackage{longtable}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -140,12 +145,579 @@ twocolumn
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+setwd('C:/local_files/research/consumption/sa/sa_downloaded_zipped//2010/Stata12
+')
+\end_layout
+
+\begin_layout Plain Layout
+P0302Q01 (owned/rented) is in general
+\end_layout
+
+\begin_layout Plain Layout
+P2402Q0807 is the value of housing
+\end_layout
+
+\begin_layout Plain Layout
+P2402Q0807 is the value of clothing (not counted as assets)
+\end_layout
+
+\begin_layout Plain Layout
+P2001Q0201 is the expenditure on TV etc.
+\end_layout
+
+\begin_layout Plain Layout
+P1301total total expenditure on furniture
+\end_layout
+
+\begin_layout Plain Layout
+==
+\end_layout
+
+\begin_layout Plain Layout
+source('translation/frameutils.R');source('lsms/lsms_normalizer.r');source('lsms/l
+sms_loader.r');ll=lsms_loader(fu=fu,ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+gh2010<-ll@group_expenditure(year = 2010, dirprefix = "../",fu = fu, ln=lsms_norma
+lizer,basis = "price", returnBeforeGrouping = TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+gh2010$w <- with(gh2010, cost/total_expenditure)
+\end_layout
+
+\begin_layout Plain Layout
+## item by item hist
+\end_layout
+
+\begin_layout Plain Layout
+a <- subset(gh2010, shortname=="charcoal") ; hist(a$w,breaks=100)
+\end_layout
+
+\begin_layout Plain Layout
+###Fuller comparison with skewness
+\end_layout
+
+\begin_layout Plain Layout
+a <- subset(gh2010, shortname==itemname) ; par(mfrow=c(2,1)); hist(a$w,breaks=10
+0,main=paste(itemname,'Budget share (n=',length(unique(subset(a,!is.na(cost))$hhi
+d)),")"));hist(a$cost,breaks=100, main=paste(itemname,"cost skewness:",
+ sprintf("%.2f",skewness(a$cost))))
+\end_layout
+
+\begin_layout Plain Layout
+# sorting
+\end_layout
+
+\begin_layout Plain Layout
+a <- ddply(gh2010, .(shortname),summarise,m=mean(w),s=sd(w),r=mean(w)/sd(w),n=len
+gth(unique(hhid))); 
+\end_layout
+
+\begin_layout Plain Layout
+a<-a[order(a$m),]
+\end_layout
+
+\begin_layout Plain Layout
+barplot(a$m,names=a$shortname)
+\end_layout
+
+\begin_layout Plain Layout
+#looking at market prices
+\end_layout
+
+\begin_layout Plain Layout
+mp<-ll@match_recorded_prices(year = 2010, dirprefix = "../",fu = fu, ln=lsms_norma
+lizer,marketPricesOnly = TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+mp<-merge(plyr::rename(mp,c("item"="code")),ln@items_codes_2010())
+\end_layout
+
+\begin_layout Plain Layout
+mph<-ddply(mp[c("recorded_price","shortname")],.(shortname),summarise,max=max(rec
+orded_price))
+\end_layout
+
+\begin_layout Plain Layout
+mph<-(mph[order(mph$max),])
+\end_layout
+
+\begin_layout Plain Layout
+plot_segment <- function(start,end){
+\end_layout
+
+\begin_layout Plain Layout
+dat <- subset(mph, max>=quantile(mph$max,start) & max<=quantile(mph$max,end));
+ barplot(dat$max,names=dat$shortname)
+\end_layout
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\begin_layout Plain Layout
+#total expenditures for categories
+\end_layout
+
+\begin_layout Plain Layout
+categs<-ddply(gh2010,.(owned_housing,shortname), summarise,n=length(unique(hhid))
+,mean_x = mean(total_expenditure))
+\end_layout
+
+\begin_layout Plain Layout
+categs_split <- categs[,c("shortname","mean_x","owned_housing")] %>% spread(owne
+d_housing,mean_x)
+\end_layout
+
+\begin_layout Plain Layout
+colnames(categs_split)<-c("shortname","not_owned","owned")
+\end_layout
+
+\begin_layout Plain Layout
+#check houseownership significance for several commodities
+\end_layout
+
+\begin_layout Plain Layout
+reg w ln_tot_exp i.owned_housing hsize i.expensiveregion age
+\end_layout
+
+\begin_layout Plain Layout
+# check houseownership across regions
+\end_layout
+
+\begin_layout Plain Layout
+gh2010$owned_housing <- gh2010$housingstatus==1
+\end_layout
+
+\begin_layout Plain Layout
+ow<-ddply(gh2010,.(owned_housing,region), summarise,n=length(unique(hhid)))
+\end_layout
+
+\begin_layout Plain Layout
+oww <- ow %>% spread(owned_housing,n)
+\end_layout
+
+\begin_layout Plain Layout
+colnames(oww)<-c("region","not_owned","owned")
+\end_layout
+
+\begin_layout Plain Layout
+oww$owned_not_owned <- with(oww,owned/not_owned)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Summary
 \end_layout
 
+\begin_layout Standard
+We look at the consumption in Tanzania and compare it with i) less unequal
+ countries and ii) overall less poor countries.
+\end_layout
+
+\begin_layout Standard
+All rational consumers have a hope for their future and consume so as to
+ maximise the utility in their lifetime.
+ An analysis of demand could be possible by removing the macroeconomic factors.
+ If their life-savings, wealth levels and macroeconomic hopes for future
+ are controlled for, then different characteristics of demand could be observed.W
+e could see how demand is dependent on social circumstances - even though
+ a detailed analysis of social conditions is not possible with demand analysis.
+ 
+\end_layout
+
+\begin_layout Standard
+Before using econometric methods to characterise demand, we also investigate
+ whether demand is simply dictated by supply issues across countries (i.e.
+ the difference in baskets and distribution of price and income), or if
+ there is anything to be said about demand across geographies other than
+ supply issues.
+ To accomplish this, we must be extremely precise about supply issues.
+\end_layout
+
+\begin_layout Standard
+For one thing, we have to rely on some standardisation between categories.
+ We argue that the bias that is formed in a view of a standardised basket
+ is inherent in the comparison of demand.
+ In other words, standardisation of consumer basket cannot be perfect and
+ yet it is necessary for supply side issues to be separate from developing
+ and developed countries that perform demand analysis - particularly for
+ food.
+ We look at some literature on food that does this (find deaton who compares
+ food consumption across different countries).
+\end_layout
+
+\begin_layout Standard
+We revisit the literature to see the effect of asset purchases and investments
+ in education as signs of mobility.
+ We do believe that a society where everyone is equally educated with similar
+ occupation ranks (income-based) and owns similar assets would have less
+ status differences.
+ Measures of social mobility is intertwined with our analysis.
+ We wish to understand how social mobility (an upward movement in status
+ - where status is defined strictly in terms of occupation, education and
+ long-term assets including financial assets) is connected with nondurable
+ consumption.
+ We don't believe that non-durable consumption - lack of planning and connected
+ with changes in supply.
+ Changes in supply should be understood well - if we observe supply (introductio
+n of phones, internet) only through microdata, then we can't tell whether
+ people are flocking to the new items or just that supply has made them
+ cheaper.
+ Price information is necessary.
+ Unfortunately, we don't have reliable data on true value of assets.
+ All what we have are differences in assets.
+ So we connect it with fixed effects model or random effects model.
+ The argument that status differences would still exist in the society -
+ is not an economic one - as it goes into how identity would be changed
+ in a society with more equal distribution of assets.
+ It can't be denied that the status-differences are more in the developing
+ state of the economy than in the developed economy.
+ We test whether asset differences have a negative correlation with the
+ expensive non-durable expenditure.
+ The recording of assets is different amongst surveys - e.g.
+ SA IES records expenditure on furniture as a diary expenditure while Tanzanian
+ LSMS records assets purchases as recall.
+ We attempt to standardise the expenditure on categories by using dummy
+ variables.
+\end_layout
+
+\begin_layout Standard
+What we define as expensive is measured not by selecting a certain products
+ but the budget shares themselves.
+ More particularly, higher the budget shares for the same quantity, higher
+ is the quality.
+ We check to see if high budget shares is related with choice of higher
+ items.
+ While that is more or less true (we plot the results for food - which are
+ recorded in the survey) the highest prices don't always result in higher
+ budget shares.
+ Tea and coffee don't form the highest budget shares (even though they are
+ expensive).
+ It is clear that being of a high price and of low budget shares is the
+ key property of expensive non-durable consumption that is of any status
+ value.
+ The skewnesss of total expenditure on the item can also tell us whether
+ only a small proportion of population gets to spend more on the item.
+ Noticeably, the budget share on skin - cream etc.
+ - which we would assume to be for 
+\begin_inset Quotes eld
+\end_inset
+
+visible
+\begin_inset Quotes erd
+\end_inset
+
+ consumption - is quite low - the variance on the consumption of skin-cream
+ is lower than for bread or milk.
+ We also find that the budget shares for cigarettes is quite high (and quite
+ skewed).
+ 
+\end_layout
+
+\begin_layout Standard
+Our intention if not to be pick items for status consumption on such criteria
+ (skewness or mean-cost) - but mark these observations for later conclusions.
+ If amidst 2 or more substitutable items, the expensive varieties are likely
+ to be skewed by definition.
+ This can help us get around the lack of recorded prices in the survey.
+\end_layout
+
+\begin_layout Standard
+The state of developed economy is most influenced through the evolution
+ of markets (the legal system and political stability are different factors
+ and are less relevant for consumption).
+ Certain assets that are guaranteed in the developed markets (water, electricity
+ are services not controlled by market) are only available to the relatively
+ affluent in the developing countries.The status differences are still shaped
+ by the differences in asset ownership - except that the assets in the developin
+g and developed world are quite different.
+ A electricity generator or a car is an important asset in the developing
+ country - while it isn't in the developed world since electricity and rental
+ cars are both available as services.
+ If the occupation-rank, identity and educational level were to be the same,
+ social mobility would be best described by the asset ownership - in both
+ the developed economies and the developing economies.
+ There judgment involved in deciding what counts as an 
+\begin_inset Quotes eld
+\end_inset
+
+asset
+\begin_inset Quotes erd
+\end_inset
+
+ in the developed world vs what counts as an asset in the developing world
+ is inherent in the standardisation of assets in the surveys.
+ Thus there are no assumptions posed other than the asset that is bought
+ to be kept with the intention of long-term ownership.
+ 
+\end_layout
+
+\begin_layout Standard
+The literature on behavioural economics states that changes in wealth states
+ explain the risk better.
+ We look at changes in assets - which may be less frequent in - and that
+ may mean a better risk-management - it is possible to rely on .
+ The life-cycle model should tell us that.
+ 
+\end_layout
+
+\begin_layout Standard
+A rational consumer cannot spend on (see Thaler, Shefrin) - who argue that
+ there should be no overeating if the rational behaviour existed (how is
+ this related to econometrics).
+\end_layout
+
+\begin_layout Standard
+We consider South Africa as it falls somewhere in between the developed
+ world and the developing countries - matching the social inequalities but
+ with relative economic security.
+ A country like Tanzania is likely to have more economic inequality and
+ less development of common services.
+ By looking at how nondurable consumption is distributed across the region
+ for the three countries, we comment on the possibility of separating supply
+ issues out to understand the demand.
+\end_layout
+
+\begin_layout Standard
+A quantile regression is preformed with the measure of wealth as nondurable
+ consumption.
+ We point out that a discussion of visible consumption would be immature
+ in the environment of severe asset inequalities.
+ This is checked in the South African as well as the US data.
+ After controlling for assets, the coefficients may not be as strong.
+\end_layout
+
+\begin_layout Standard
+We don't have detailed ethnic data but litlang and religion gives some details.
+ Holiday expenses appear as a category not available in Tanzania.
+ Holidays count for status in the industrialised society.
+\end_layout
+
 \begin_layout Section
 Introduction
+\end_layout
+
+\begin_layout Standard
+The definition of status is hard to pin down when discussing status consumption.
+ If one believes that social mobility exists and that one economy could
+ have more social mobility than others, then it the issue of status consumption
+ (compare with Ireland model's simplicity of status being a symmetric inference
+ from visible consumption) becomes sensitive to how status is perceived
+ differently across countries.
+ 
+\end_layout
+
+\begin_layout Standard
+THe literature by Veblen seems to have made forays into the literature on
+ developing countries - but not without the limitations of a framework and
+ mindset that was developed for the upper middle class of Europe.
+ An analysis similar to that - which classifies high-cultural capial and
+ low-cultural -shaped by the role of Western culture is necessary.
+ We would see the effect of litlang.
+ I don't know if these are gated communities - like they have in other Asian
+ countries (Turkey, India
+\begin_inset CommandInset citation
+LatexCommand cite
+key "UstunerHolt2010"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Why assets?
+\end_layout
+
+\begin_layout Standard
+Veblen's literature itself dates from a time when rapid economic developments
+ took place in the United States - transitioning from a largely agrarian
+ society to an industrialised one.
+ The relevance of status through purchasing good is tied with industrial
+ development.
+ Less industrial development would mean less nondurable consumption - but
+ not necessarily perceived differences in society.
+ Any measure of how much status differences exist in the society - or if
+ one - is not possible with consumption alone.
+\end_layout
+
+\begin_layout Standard
+We argue that it's the relevance of identity to status that should address
+ such differences - as well as social status.
+ We argue that over the long-term it is the status.
+ Identity can matter but only as long as it has been associated with assets
+ in the past.
+ We cannot understand identity without a long-term effect.
+ However, a cross-section analysis can detect the influence of identity
+ on accumulation of assets.
+\end_layout
+
+\begin_layout Standard
+The visible consumption must also include visible assets too (if not education
+ and occupation) - i.e.
+ consumption that may be inherited or not consumed weekly (assets such as
+ housing or automobiles that are not bought as frequently).
+ 
+\end_layout
+
+\begin_layout Standard
+It is difficult to say explicitly that the status is influence by nonudrable
+ consumption.
+ It might actually make sense that nondurable consumption is used to compensate
+ for not having as much as assets as those who have have a perceived higher
+ status (determined by assets, occupation and education).
+ If non-durable consumption is correlated with social mobility (i.e.
+ purchase of assets or an upward movement in education and occupation for
+ a member of the household), the corresponding non-durable consumption matters
+ less to the household - whereas those who don't see any changes in long-term
+ possession of assets or changes in occupation-rank or education levels,
+ would have no other means achieve status other than through.
+ 
+\end_layout
+
+\begin_layout Standard
+This can be tested with data.
+ It is not difficult to see that asset purchases are fewer in the developed
+ countries where the markets are evolved enough to offer assets (electricity,
+ automobiles etc.) as services.
+ The non-durable consumption makes up for the lack of possession - still
+ it doesn't change that status in the long-term.
+\end_layout
+
+\begin_layout Standard
+.
+ If people are buying assets and their income is increasing, then we should
+ not call their consumption as status consumption.
+ To qualify that statement, we.
+ Status needs are inseparable from other needs.
+ A rational consumer doesn't spend on status consumption.
+\end_layout
+
+\begin_layout Standard
+On the other hand, if they are not purchasing assets in the sense that their
+ long-term status (determined by assets, occupation, education) is not changing,
+ then - then they choose not to buy assets but to improve their nondurable
+ assets instead - their nondurable consumption is for status - in fact,
+ status is constituted in the nondurable consumption.
+\end_layout
+
+\begin_layout Standard
+Comparing between a developed and developing economy is really that of evolution
+ of markets.
+ The perfect markets assumption is what makes the differences.
+ 
+\end_layout
+
+\begin_layout Standard
+The fundamental question is whether demand can be compared at all or not.
+ Individuals have different needs.
+ Why compare at all.
+ The motivation for us is only how basic needs are addressed.
+ Maslow hierarchy and the developing economy literature - would have us
+ think that basic needs are all that matter and that individuals don't spend
+ on anything but necessities when needs matter the most.
+ This is indeed true.
+ However, the local variation in demand may be insensitive to the global
+ state of economy.
+\end_layout
+
+\begin_layout Standard
+We test whether the global categories pose a different problem in the developed
+ countries.
+ Clearly, the state plays a stronger role in the developed world (by definition)
+ and the services are relied on more than they would be in the developing
+ world.
+ Still, overall spending on food, energy, transport, personal products and
+ housing should be tied with supply.
+ A comparison in demand between a developed and a developing country can
+ give us insights only as long as we can cancel out the effects of supply.
+\end_layout
+
+\begin_layout Standard
+Why not- would be the question? Isn't status consumption or conspicuous
+ consumption supposed to enhance consumption? If it is OK to measure status
+ as assets (and that is all there is in status) - except for identity -
+ which too is formed by long-term effects of asset ownership.
+ Then buying any asset enhances status.
+ All assets are status consumption.
+ All non-durable consumption isn't.
+ Some nondurable consumption is just needs.
+ However, if the consumer is consistently spending on higher priced options
+ of nondurable consumption, then the consumer is definitely engaging in
+ short term consumption.
+\end_layout
+
+\begin_layout Standard
+A cross country consumption is important here.
+ However, as we have already argued that the consumer basket is uniform
+ across the world and therefore what carries status in one region might
+ not carry much status in the other.
+ It would be unfortunate to shift this problem to the assets.
+ The disparity of the value an asset might carry (e.g.
+ a car) in Los Angeles vs Dar es salaam is different.
+ Here, we rely on what the surveyors themselves would call an asset.
+ A bicycle is not an asset in the US the way it is in rural Tanzania.
+ 
+\end_layout
+
+\begin_layout Standard
+h1.
+ Demand comparison
+\end_layout
+
+\begin_layout Standard
+h2.
+ Cancelling out supply
+\end_layout
+
+\begin_layout Standard
+We use the relative price structure to cancel out supply effects.
+ We assume that prices and availability are the controls that should affect
+ demand.
+ In the US, prices of energy are uniform and it is more costly to perform
+ .
+\end_layout
+
+\begin_layout Standard
+Since we need to cancel out the "needs2
+\end_layout
+
+\begin_layout Standard
+As for assets, our intention is to only see the effect of having assets
+ in the two countries.
+ In Chapter 1, we would like to see how change in ownership of assets relates
+ expensive non-durable consumption.
 \end_layout
 
 \begin_layout Section
@@ -978,6 +1550,294 @@ key "FrankPond"
 
 \begin_layout Section
 Model
+\end_layout
+
+\begin_layout Standard
+Let status be represented by a function 
+\begin_inset Formula $f$
+\end_inset
+
+ of education level 
+\begin_inset Formula $e$
+\end_inset
+
+ and income-occupation level 
+\begin_inset Formula $o$
+\end_inset
+
+.
+ These are all discrete variables -which should relate with consumption.
+ Investing in education would increase the probability of status promotion.
+ Those who invest in education would increase the likelihood of higher status
+ for their children.
+ Since our time-series is only for a few years, we assume that education
+ level and occupation levels don't change (education does not increase one's
+ own status in any case as we don't consider status of individuals who are
+ not at a working age i.e.
+ we ignore their status until they have exited the education system).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+s & =f(o,e,A)\sim f(A)
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Over a longer period of time, an individual spreads her expenditure across
+ future expectations for a status upgrade for her family and her more immediate
+ needs.
+ In the shorter-time period which we use the data for, we look for a substitutio
+n between medium-term assets (e.g.
+ furniture, housing, automobiles and financial assets) and more immediate
+ expensive non-durable expenditure (we exclude the expenditure on education
+ for children from the total expenditure; we also don't count items that
+ are only consumed by 10 or less houses - these are "mortgage, rice_paddy,
+ nut_products, wild_birds, packaged_fish, miscdrinkpowder, readymade_tea_coffee,
+ winespirits" ).
+ A consumer ought to be get some status advantage by simply believing that
+ there is a status advantage through a probability of promotion of self-evaluati
+on by expensive non-durable expenditure (denoted by 
+\begin_inset Formula $C$
+\end_inset
+
+)- even though there isn't any real advantage from the non-durable expenditure.
+ A consumer tries to optimise the utility function 
+\begin_inset Formula $u(C,A,q)$
+\end_inset
+
+ over this short-term period.
+ The intertemporal substitution for status is between 
+\begin_inset Formula $A$
+\end_inset
+
+,
+\begin_inset Formula $C$
+\end_inset
+
+ while all the needs are represented by 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ All consumers have needs - which are driven by age and number of children
+ or elderly non-working in the family - nothing else.
+ The needs require a certain q and a certain A, but not the expensive categories
+ - which are required for status competitions.
+ A consumer therefore doesn't choose q as much shes chooses C.
+ In developing countries, one doesn't have the option to substitute A with
+ q,C so the consumer has only the discrete choice of having A or forgoing
+ it completely.
+ Status is therefore quite discrete and savings dependent in the short-run.
+ The cost of purchase is steeper in the developing world for assets A (hence
+ consumption more discrete for A).
+ The cost-function cognisant of this discreteness can compare the consumption
+ in the two markets.
+ The short-run status function 
+\begin_inset Formula $s=\psi(A,C)$
+\end_inset
+
+ contributes to the utility.
+ The cost function therefore depends on the discreteness of prices of A
+ (to purchase an asset or not to purchase and asset).
+ The consumer chooses to go for quality instead of an asset if the price
+ of an asset is too high.
+ Developed markets provide less opportunities to save (and more credit).
+\end_layout
+
+\begin_layout Standard
+A solid measure of quality can 
+\end_layout
+
+\begin_layout Standard
+The prices of items should be the same in most regions.
+ We use price dummies to check if the consumer is in a high price region.
+ Within nondurable consumption, anything other than needs (controlled through
+ region, household size and income) is expensive consumption.
+ We consider the intertemporal problem as a two-good world (and draw an
+ analogy with the solved problem - as seen in Deaton's textbook).
+ Expensiveness of nondurable expenditure is only found my availability of
+ a cheaper substitute.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/food_observed_prices.png
+	width 7in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Items sorted according to maximum prices recorded in the survey
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/food_budget_shares.png
+	width 7in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The items sorted according to the mean budget shares
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The status-buying is proven by quality decision.
+\end_layout
+
+\begin_layout Standard
+One could argue that a rational consumer would have a consumption 
+\begin_inset Formula $C$
+\end_inset
+
+ only if there was a probability of status-upgrade.
+ We assume our consumer to be rational and hence a real probability of status
+ upgrade.
+\end_layout
+
+\begin_layout Standard
+For an AIDS-like econometric formulation (p313) we can specify a cost-function
+ for utility 
+\begin_inset Formula $u$
+\end_inset
+
+ and discounted prices for assets and 
+\begin_inset Formula $\rho_{i}p_{i}$
+\end_inset
+
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+With budget constraint being the total wealth, the cost-function is specified
+ in terms of discounted prices as 
+\begin_inset Formula $g(x,p)\sim g(W_{1},\rho_{1}p_{1})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ and ignoring the time-series effect have the following SUR formulations:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+w_{A}=\beta_{A1}log(x)+\beta_{A2}c+\epsilon_{A}\\
+w_{C}=\beta_{C1}log(x)+\beta_{C2}c+\epsilon_{C}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We ignore the time-series model only because we don't have prices available.
+ 
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $w_{A},w_{C}$
+\end_inset
+
+ are budget shares for asset and consumption respectively, 
+\begin_inset Formula $x$
+\end_inset
+
+ is the total expenditure and 
+\begin_inset Formula $c$
+\end_inset
+
+ is a vector of the household characteristics.
 \end_layout
 
 \begin_layout Section

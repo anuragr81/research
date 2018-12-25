@@ -318,12 +318,12 @@ lsms_loader<-function(fu,ln) {
   }
   
   
-  match_recorded_prices <-function(year,dirprefix,fu,ln){
+  match_recorded_prices <-function(year,dirprefix,fu,ln,marketPricesOnly){
     # loading ohs data
     ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
     print ("Loaded OHS file")
     # loading diary data
-    dat2010<-load_diary_file(dirprefix = '.',year = 2010, fu=fu, ln=ln )
+    dat2010<-load_diary_file(dirprefix = '.',year = year, fu=fu, ln=ln )
     
     dat2010$factor<-as.integer(dat2010$lwp_unit==1)+as.integer(dat2010$lwp_unit==2)/1000.0+as.integer(dat2010$lwp_unit==3)+as.integer(dat2010$lwp_unit==4)/1000.0+as.integer(dat2010$lwp_unit==5) 
     dat2010$quantity<-dat2010$factor*dat2010$lwp
@@ -347,6 +347,9 @@ lsms_loader<-function(fu,ln) {
     
     k<-k[!is.na(k$recorded_price),]
     
+    if (marketPricesOnly){
+      return(k)
+    }
     print ("Loaded market prices file")
     
     hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
@@ -1378,7 +1381,7 @@ lsms_loader<-function(fu,ln) {
   }
   
   ####
-  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryName,returnBeforeGrouping){
+  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryName,returnBeforeGrouping,minConsumerNumber){
     if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
     }
@@ -1430,6 +1433,14 @@ lsms_loader<-function(fu,ln) {
       vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryName,hh=hh,basis=basis)
     }
     
+    if (missing(minConsumerNumber)){
+      minConsumerNumber <- 10
+      
+    }
+    mcn <- ddply(vis, .(shortname),summarise,nc=length(unique(hhid)))
+    negligibleShortNames <- unique(as.character(subset(mcn,nc<=minConsumerNumber)$shortname))
+    print(paste("Removing", toString(negligibleShortNames), "from the analysis on grounds of low,",minConsumerNumber, "number of consumers "))
+    vis                 <- subset(vis,!is.element(shortname,negligibleShortNames))
     ds                  <- merge(totexp,vis);
     print(paste("Merging hsize",dim(ds)[1]))
     
