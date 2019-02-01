@@ -318,12 +318,12 @@ lsms_loader<-function(fu,ln) {
   }
   
   
-  match_recorded_prices <-function(year,dirprefix,fu,ln){
+  match_recorded_prices <-function(year,dirprefix,fu,ln,marketPricesOnly){
     # loading ohs data
     ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
     print ("Loaded OHS file")
     # loading diary data
-    dat2010<-load_diary_file(dirprefix = '.',year = 2010, fu=fu, ln=ln )
+    dat2010<-load_diary_file(dirprefix = '.',year = year, fu=fu, ln=ln )
     
     dat2010$factor<-as.integer(dat2010$lwp_unit==1)+as.integer(dat2010$lwp_unit==2)/1000.0+as.integer(dat2010$lwp_unit==3)+as.integer(dat2010$lwp_unit==4)/1000.0+as.integer(dat2010$lwp_unit==5) 
     dat2010$quantity<-dat2010$factor*dat2010$lwp
@@ -347,6 +347,9 @@ lsms_loader<-function(fu,ln) {
     
     k<-k[!is.na(k$recorded_price),]
     
+    if (marketPricesOnly){
+      return(k)
+    }
     print ("Loaded market prices file")
     
     hhidsRegion<-unique(ohs[,c("hhid","region","district","ward","ea")]) # unique ignores person id
@@ -765,7 +768,7 @@ lsms_loader<-function(fu,ln) {
     }
     ##########################2008#########################
     
-    if (year == 2008){
+    if (year == 2008){cen
       
       #* Read section c_cb file
       cbFileName = paste(dirprefix,'./lsms/tnz2008/TZNPS1CMDTA_E/SEC_B.dta',sep="")
@@ -1378,7 +1381,7 @@ lsms_loader<-function(fu,ln) {
   }
   
   ####
-  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryName,returnBeforeGrouping){
+  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryName,returnBeforeGrouping,minConsumerNumber){
     if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
     }
@@ -1426,10 +1429,19 @@ lsms_loader<-function(fu,ln) {
     
     if (returnBeforeGrouping){
       vis <- hh
+      mcn <- ddply(vis, .(shortname),summarise,nc=length(unique(hhid)))
+      negligibleShortNames <- unique(as.character(subset(mcn,nc<=minConsumerNumber)$shortname))
+      print(paste("Removing", toString(negligibleShortNames), "from the analysis on grounds of low,",minConsumerNumber, "number of consumers "))
+      vis                 <- subset(vis,!is.element(shortname,negligibleShortNames))
+      
     } else {
       vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryName,hh=hh,basis=basis)
     }
     
+    if (missing(minConsumerNumber)){
+      minConsumerNumber <- 10
+      
+    }
     ds                  <- merge(totexp,vis);
     print(paste("Merging hsize",dim(ds)[1]))
     
@@ -1704,6 +1716,8 @@ lsms_loader<-function(fu,ln) {
     
     stop(paste("No data for splits between",fromYear,"and", toYear))
   }
+
+  
   
   asset_differences <- function(fromYear,toYear,assetsBaseYear, splitHouseholdHhids, dirprefix, fu, ln){
     
@@ -1712,10 +1726,6 @@ lsms_loader<-function(fu,ln) {
     assetsValues2012 <- subset(a2012, ( !is.na(mtm) & cost > 0 )  |  ( !is.na(cost) & cost >0 ) )
     val2012 <- ddply(assetsValues2012 [,c('itemcode','cost','mtm')],.(itemcode),summarise,mean_cost = mean(cost), mean_mtm = mean(mtm), sd_cost = sd(cost), sd_mtm = sd(mtm))
     ##
-    
-    diff_lists <- function( x,y ) { jsonlite::toJSON( setdiff ( jsonlite::fromJSON(x), jsonlite::fromJSON(y) ) )}
-    
-    combine_lists <- function (x) { res <- NULL ; for (i in x) { res <- c(res,jsonlite::fromJSON(i)) } ; return(jsonlite::toJSON(res)) }
     
     if (fromYear == 2010 && toYear == 2012){
       a2010 <- read_assets_file(year = fromYear, dirprefix =dirprefix,fu = fu , ln=ln)
@@ -1754,8 +1764,8 @@ lsms_loader<-function(fu,ln) {
       
       
       compare2010_2012 <- merge(cc2010,cc2012)
-      assetsDiffNonSplit <- ddply(compare2010_2012,.(hhid),summarise, newAssets = diff_lists (a2012,a2010), 
-                                        soldAssets = diff_lists (a2010,a2012 )) 
+      assetsDiffNonSplit <- ddply(compare2010_2012,.(hhid),summarise, newAssets = fu()@diff_lists (a2012,a2010), 
+                                        soldAssets = fu()@diff_lists (a2010,a2012 )) 
       
       # those that have been split - always have hhid2010 (that's how we know of them splitting)
       
@@ -1790,17 +1800,17 @@ lsms_loader<-function(fu,ln) {
       maxAssetsHHsPostSplit <- merge ( subset(allHhids,has_max==1), postSplit[,c("hhid","itemcode")], by=c("hhid"))[,c("hhid","itemcode")]
       cc2012MaxAssets <- (ddply( maxAssetsHHsPostSplit[,c("hhid","itemcode")],.(hhid),summarise,a2012=jsonlite::toJSON(itemcode[order(itemcode)])))
       compare2010_2012_maxassets <- merge(cc2010MaxAssets,cc2012MaxAssets)
-      assetsDiff_maxassets <- ddply(compare2010_2012_maxassets,.(hhid),summarise, newAssets = diff_lists (a2012,a2010), 
-                                    soldAssets = diff_lists (a2010,a2012 )) 
+      assetsDiff_maxassets <- ddply(compare2010_2012_maxassets,.(hhid),summarise, newAssets = fu()@diff_lists (a2012,a2010), 
+                                    soldAssets = fu()@diff_lists (a2010,a2012 )) 
       
       nonMaxHHsPostSplit = merge ( subset(allHhids,has_max==0), postSplit[,c("hhid","itemcode")], by=c("hhid"))[,c("hhid","itemcode")]
       cc2012NonMaxAssets <- (ddply( nonMaxHHsPostSplit[,c("hhid","itemcode")],.(hhid),summarise,a2012=jsonlite::toJSON(itemcode[order(itemcode)])))
       cc2012NonMaxAssets$a2010 <- "[]"
-      if (length(intersect(cc2010NonMaxAssets$hhid,assetsDiff_maxassets$hhid))){
+      if (length(intersect(cc2012NonMaxAssets$hhid,assetsDiff_maxassets$hhid))){
         stop("Max and not max cannot overlap")
       }
-      assetsDiff_nonmaxassets <- ddply(cc2012NonMaxAssets,.(hhid),summarise, newAssets = diff_lists (a2012,a2010), 
-                                       soldAssets = diff_lists (a2010,a2012 )) 
+      assetsDiff_nonmaxassets <- ddply(cc2012NonMaxAssets,.(hhid),summarise, newAssets = fu()@diff_lists (a2012,a2010), 
+                                       soldAssets = fu()@diff_lists (a2010,a2012 )) 
       print(paste("Num nonsplit:",dim(assetsDiffNonSplit)[1]))
       print(paste("Num split (max assets):",dim(assetsDiff_maxassets)[1]))
       print(paste("Num split (not max assets):",dim(assetsDiff_nonmaxassets)[1]))
@@ -1841,8 +1851,8 @@ lsms_loader<-function(fu,ln) {
       cc2010 <- (ddply(unique(notSplit2010[,c("hhid","itemcode")]),.(hhid),summarise,a2010=jsonlite::toJSON(itemcode[order(itemcode)]))) 
       
       compare2008_2010 <- merge(cc2008,cc2010)
-      assetsDiffNonOverlapping <- ddply(compare2008_2010,.(hhid),summarise, newAssets = diff_lists (a2010,a2008), 
-                          soldAssets = diff_lists (a2008,a2010 )) 
+      assetsDiffNonOverlapping <- ddply(compare2008_2010,.(hhid),summarise, newAssets = fu()@diff_lists (a2010,a2008), 
+                          soldAssets = fu()@diff_lists (a2008,a2010 )) 
 
       # take split households and find the one with the largest asset
       preSplit <- subset(a2008,is.element(hhid2008,splitHouseholdHhids))
@@ -1874,8 +1884,8 @@ lsms_loader<-function(fu,ln) {
       maxAssetsHHsPostSplit <- merge ( subset(allHhids,has_max==1), postSplit[,c("hhid","itemcode")], by=c("hhid"))[,c("hhid","itemcode")]
       cc2010MaxAssets <- (ddply( maxAssetsHHsPostSplit[,c("hhid","itemcode")],.(hhid),summarise,a2010=jsonlite::toJSON(itemcode[order(itemcode)])))
       compare2008_2010_maxassets <- merge(cc2008MaxAssets,cc2010MaxAssets)
-      assetsDiff_maxassets <- ddply(compare2008_2010_maxassets,.(hhid),summarise, newAssets = diff_lists (a2010,a2008), 
-                          soldAssets = diff_lists (a2008,a2010 )) 
+      assetsDiff_maxassets <- ddply(compare2008_2010_maxassets,.(hhid),summarise, newAssets = fu()@diff_lists (a2010,a2008), 
+                          soldAssets = fu()@diff_lists (a2008,a2010 )) 
       
       nonMaxHHsPostSplit = merge ( subset(allHhids,has_max==0), postSplit[,c("hhid","itemcode")], by=c("hhid"))[,c("hhid","itemcode")]
       cc2010NonMaxAssets <- (ddply( nonMaxHHsPostSplit[,c("hhid","itemcode")],.(hhid),summarise,a2010=jsonlite::toJSON(itemcode[order(itemcode)])))
@@ -1883,8 +1893,8 @@ lsms_loader<-function(fu,ln) {
       if (length(intersect(cc2010NonMaxAssets$hhid,assetsDiff_maxassets$hhid))){
         stop("Max and not max cannot overlap")
       }
-      assetsDiff_nonmaxassets <- ddply(cc2010NonMaxAssets,.(hhid),summarise, newAssets = diff_lists (a2010,a2008), 
-                                    soldAssets = diff_lists (a2008,a2010 )) 
+      assetsDiff_nonmaxassets <- ddply(cc2010NonMaxAssets,.(hhid),summarise, newAssets = fu()@diff_lists (a2010,a2008), 
+                                    soldAssets = fu()@diff_lists (a2008,a2010 )) 
       print(paste("Num nonsplit:",dim(assetsDiffNonOverlapping)[1]))
       print(paste("Num split (max assets):",dim(assetsDiff_maxassets)[1]))
       print(paste("Num split (not max assets):",dim(assetsDiff_nonmaxassets)[1]))

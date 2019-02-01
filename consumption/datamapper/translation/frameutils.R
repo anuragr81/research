@@ -7,7 +7,9 @@ if (isClass("FrameUtils")){
 ## all exported functions are declared here
 setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function",filter_categories_data="function",
                                       removeall_cols_except="function",find_nonzero_percentile="function",
-                                      fv="function",rbind_xy="function",max_non_na="function",get_max_col="function",occurrences_df="function") )
+                                      fv="function",rbind_xy="function",max_non_na="function",get_max_col="function",
+                                      diff_lists = "function", combine_lists = "function",
+                                      occurrences_df="function"), )
 
 removeall_cols_except<-function(dat,listColumnNames){
   #c("region","district","ward","accessiblemarket","travelcost"))
@@ -18,6 +20,10 @@ removeall_cols_except<-function(dat,listColumnNames){
 }
 
 fu<-function(){
+ 
+  diff_lists <- function( x,y ) { jsonlite::toJSON( setdiff ( jsonlite::fromJSON(x), jsonlite::fromJSON(y) ) )}
+  
+  combine_lists <- function (x) { res <- NULL ; for (i in x) { res <- c(res,jsonlite::fromJSON(i)) } ; return(jsonlite::toJSON(res)) }
   
   filter_extremes <-function(dat,highMultiple,threshold){
     
@@ -221,6 +227,8 @@ fu<-function(){
              find_nonzero_percentile=find_nonzero_percentile,
              fv=fv,
              rbind_xy=rbind_xy,max_non_na=max_non_na,
-             get_max_col=get_max_col, occurrences_df=occurrences_df) );
+             get_max_col=get_max_col, occurrences_df=occurrences_df,
+             combine_lists=combine_lists,
+             diff_lists=diff_lists) );
   
 }
