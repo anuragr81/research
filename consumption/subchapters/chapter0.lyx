@@ -386,6 +386,24 @@ sapply(jsonlite::fromJSON(y) , function(x) { as.character(subset(lsms_normalizer
 )@items_codes_2012(),code==x)$shortname) } )
 \end_layout
 
+\begin_layout Plain Layout
+#price comparison
+\end_layout
+
+\begin_layout Plain Layout
+prices2010<-ll@load_market_prices(year = 2010,dirprefix = "../",fu = fu, ln=lsms_n
+ormalizer)
+\end_layout
+
+\begin_layout Plain Layout
+prices2012<-ll@load_market_prices(year = 2012,dirprefix = "../",fu = fu, ln=lsms_n
+ormalizer)
+\end_layout
+
+\begin_layout Plain Layout
+prices<-(fu()@rbind_xy(x=prices2010,y=prices2012,tagx="2010",tagy="2012"))
+\end_layout
+
 \end_inset
 
 
@@ -418,12 +436,13 @@ Quality of Consumption in the developing countries
 \begin_layout Standard
 Demand studies in the developing world often work with data that is much
  sparser and has overall less details on the individual households.
- Recent surveys have mitigated many of such problems - but the issues that
- arise out of non-uniform institutions themselves make the standardisation
- of collected data across the developing countries rather challenging.
- Studies of consumption of quality have therefore often limited themselves
- to food where the measurement of quality is independent of consumed brand
- or type - details that are often not recorded in consumer survey.
+ Current surveys mitigate many such issues - but the problems that arise
+ out of non-uniform institutions themselves make the standardisation of
+ data across the developing countries rather challenging.
+ Studies of consumption of quality in the developing countries have therefore
+ often limited themselves to food where the measurement of quality is independen
+t of consumed brand or type - details that are often not recorded in a typical
+ consumer survey.
  Since a significant chunk of income is spent on food for most of the population
  in the developing countries, the variation in quality in food gives us
  a good picture of quality substitution.
@@ -434,34 +453,37 @@ Demand studies in the developing world often work with data that is much
 \end_layout
 
 \begin_layout Standard
-We attempt to quantify the choice of quality which the consumer faces in
- the developing world.
- Instead of focusing on food quality alone, we observe the effect of vast
- differences in life-style that living in urban vs rural areas would bring
- to the consumer in a developing country.
+In the current study, we attempt to quantify the choice of quality in the
+ developing world.
+ Instead of focusing on food quality alone, we also observe the effect of
+ vast differences in life-style that living in urban vs rural areas would
+ bring to the consumer in a developing country.
  The sheer lack of availability of certain goods in the rural areas - we
  believe - should also be noted in the consumption of quality.
- We then look at how quality may vary with economic inequalities across
- multiple economies - a study that may be of interest both from a demand
- analysis perspective and from a more specific conspicuous consumption perspecti
-ve.
+ We comment on how overall quality may vary with economic inequalities across
+ multiple economies as the consumer spreads the expenditure on quality across
+ the commodity groups (food, energy etc.).
+ This may provide us a better understanding of how quality of consumption
+ changes in response to vast economic changes such as urban developments
+ or market centralisation.
+ This could be of interest both from a general demand analysis perspective
+ and from a more specific conspicuous consumption perspective.
 \end_layout
 
 \begin_layout Standard
 To observe quality of consumption with respect to income inequalities across
  the developing countries, we motivate a model for substitution between
- a consumer's long-term needs - which are fulfilled with ownership of assets
- or improvement of income and the consumer's short-term needs - which are
- fulfilled with improved quality of consumption.
- At any point, the socio-economic standing of the consumer is determined
- by an order of the parameters of status (income, education, occupation)
- and a history of quality of consumption - the parameters not all having
- the same effect on long-term socio-economic stnading.
- Measures of economic inequalities are effectively proxied with assets and
- standard measures of status (e.g.
- occupation, education) while the improvement in quality of expenditure
- is measured with the expensive non-durable consumption.
- We surmise that the distribution of quality across the consumption categories
+ a consumer's long-term needs that are fulfilled with ownership of assets
+ or improvement of the socio-economic standing and the consumer's short-term
+ needs that are fulfilled with improved quality of consumption.
+ The socio-economic standing of the consumer is determined by an order of
+ what we identify as the parameters for status (income, education, occupation)
+ as well as a history of quality of consumption.
+ These parameters do not all have the same effect on the long-term socio-economi
+c standing of the consumer.
+ The improvement in quality of expenditure is measured with the expensive
+ non-durable consumption (ENDC).
+ We surmise that the distribution of quality across the consumption groups
  (food, energy, housing etc.) should be affected by the long-term needs of
  (asset accumulation, educational needs etc.).
 \end_layout
@@ -475,36 +497,39 @@ It is worth emphasising that we differentiate between quality consumption
  consumption are in fact further limited to an even smaller part of the
  population.
  On the other hand, a comparison of high quality consumption in the different
- categories of a typical demand survey covers the quality concerns for a
- larger section of the population and views status needs of the consumer
- as part of her long-term utility.
+ groups of a typical demand survey covers the quality concerns for a larger
+ section of the population and views status needs of the consumer as part
+ of her long-term utility.
  Even for a study for status consumption alone, the extension of the sense
- of status-consumption to all categories and all consumers would be necessary
- to understand the underlying factors that contribute to status in the developin
-g world.
- In Tanzania for example - which we explore in the study - it may be tempting
+ of status-consumption to all commodity groups and all consumers would be
+ necessary to understand the underlying factors that contribute to status
+ in the developing world.
+ In Tanzania for example - which we explore in the study - one may be tempted
  to argue - based on the literature on conspicuous consumption - that buying
  clothes indicates higher status.
  But without observing the effect that getting electricity in the house
  or moving to a bigger house may have on a consumer's status, we cannot
- fully explain the household consumption on status - since the possibility
+ accurately explain the household consumption on status - since the possibility
  that those spending on electricity or housing may actually be cutting down
  on clothing expenditure while deriving status from electricity or house
  ownership cannot be ruled out.
 \end_layout
 
 \begin_layout Standard
-While the expenditure on categories is recorded with the standard diary
- and recall methods in a typical survey, there are not standard methods
- for the measurements of quality (short-term needs) and of the socio-economic
- standing of the consumer (long-term needs).
- Measuring and standardising the quality of consumption is relatively -
- as we compare the consumer baskets between the selected countries.
- Except for some items that would be missing in the developing country,
- this is a relatively easy task if we rely on the availability of price
- information (or average cost of items) by classifying high-quality (expensive)
- items apart from their cheaper substitutes.
- The measurement of the socio-economic standing of the consumer
+The standard diary and recall methods in a typical survey measure neither
+ the quality of consumption nor the socio-economic standing of the consumer
+ - the measurement of both of which is central to our goals in the study.
+ The measurement of quality is relatively easy - as we rely on the availability
+ of price information to classify high-quality (expensive) items apart from
+ their cheaper substitutes.
+ In the Tanzanian LSMS data therefore, eggs and milk are deemed of lower
+ quality than goat and beef for proteins.
+ For transport, similarly gasoline-for-car is deemed of lower quality than
+ public transport an so on.
+ Except for some items that would be missing in the developing country when
+ comparing the consumption between two countries, this is a relatively easy
+ task.
+ For measuring the socio-economic standing of a consumer
 \begin_inset Foot
 status open
 
@@ -522,41 +547,47 @@ key "UstunerHolt2010"
 
 \end_inset
 
- - is relatively difficult task.
- We bank on the measures of socio-economic-status (SES) - which is a standard
+, we rely on the measure of socio-economic-status (SES) - which is a standard
  measure of the socio-economic status often used in the sociological and
  health studies.
- In addition to the parameters used for SES we include the asset ownership
- and quality consumption in the measures for status.
- Thus the long-term utility of the consumer in the model consists of a vector
- of income, education, region/locality/neighborhood.
- In addition, the ownership of assets and a history of quality consumption
- also matter to the long-term utility.
+ The long-term utility of the consumer in the model thus consists of a vector
+ of income, education and region/locality/neighborhood.
+ In addition, we also include the ownership of durable goods (defined as
+ items to be purchased with an intent of long-term ownership) and a history
+ of ENDC in the measures for status.
  This is of key importance since income, education, occupation or residence
  are usually fixed in the short-run.
 \end_layout
 
 \begin_layout Standard
-The accumulation of assets serves as one of the indicators of stability
- of high income - as we expect individuals to purchase assets only if their
- expectation of stability of income is high (higher than it is compared
- to when they engage in higher quality non-durable consumption).
- To compare the asset accumulation in a developed and a developing economy,
- we order assets in the market based on the cost of acquisition.
- The differences in the costs of the two successive assets in this asset-cost-or
-der present the substitutability between asset acquisition and quality consumpti
-on.
- A higher difference between two successive asset costs would make the consumpti
-on of quality more tempting for a consumer.
- The absence of credit - as is often the case in developing countries -
- may make the difference between successive asset costs higher than in the
- developed countries (where markets are more developed and either credit
- to purchase assets or direct rental of assets is made available to consumer).
+The accumulation of durable goods serves as one of the indicators of stability
+ of high income - as we expect individuals to purchase these durable goods
+ (more expensive than quality consumption) only if their expectation of
+ stability of income is high (higher than it is compared to when they engage
+ in higher quality non-durable consumption).
+ To compare the accumulation of long-term durable goods (LTDG) in a developed
+ and a developing economy, we order the LTDG in the market based on their
+ cost of acquisition.
+ The differences in the costs of the two successive assets in this cost-order
+ for LTDG present the substitutability between asset acquisition and quality
+ consumption.
+ A higher difference between two successive LTDG costs would make the consumptio
+n of quality more tempting for a consumer.
+ 
+\end_layout
+
+\begin_layout Standard
+In the developing world, not only are the markets underdeveloped for making
+ rental options available for the the expensive durable goods (LTDG), there
+ is somewhat of an absence of credit facilities - both of which make the
+ difference between successive LTDG costs higher than in the developed countries
+ (where markets are more developed and either credit to purchase LTDG or
+ direct rental of LTDG is made available to consumer).
  To explain the effect of economic inequality on quality consumption in
  the developing vs the developed countries, we can thus compare the expensive
  non-durable consumption along with the differences between the current
- and next point of asset acquisition in the cost curve of assets for any
- two selected countries.
+ and next point of LTDG acquisition in the cost curve of LTDG for any two
+ selected countries.
 \end_layout
 
 \begin_layout Section
@@ -564,9 +595,9 @@ LITERATURE SURVEY
 \end_layout
 
 \begin_layout Standard
-A rudimentary model for quality and asset possession could be used to test
- whether prolonged measures of income equality (i.e.
- uniform albeit depressed asset ownership) can influence non-durable consumption
+It is possible to test - even with a simple model for quality and possession
+ of assets - whether prolonged measures of income equality (and therefore
+ stagnant ownership of durable goods) can influence non-durable consumption
  asymmetrically when there is a sudden rise in incomes (a problem that may
  be relevant for countries in Africa).
  In a study of conspicuous consumption, Friehe et al 
@@ -576,33 +607,31 @@ key "FrieheGermany"
 
 \end_inset
 
- perform a similar analysis by comparing the visible consumption in the
- regions of erstwhile East and West Germany and comment on effects of the
- past stagnant and well-performing states of their respective economies
- on status consumption after reunification.
+ compare the 
+\begin_inset Quotes eld
+\end_inset
+
+visible
+\begin_inset Quotes erd
+\end_inset
+
+ consumption in the regions of erstwhile East and West Germany and study
+ the effects of the respective stagnant and well-performing states of their
+ past economies on status consumption in the unified economy.
  If macroeconomic factors and issues of supply (e.g.
- income inequalities, distribution of resources etc.) can be controlled for,
- then a model for long-term status can explain the demand pressures induced
- by economic inequalities across countries.
+ income inequalities, distribution of resources etc.) can be controlled for
+ in the economies, then a model for long-term needs can explain the demand
+ pressures induced by economic inequalities across the different economies.
 \end_layout
 
 \begin_layout Standard
-The effect of inequalities on consumption has been explored more often by
- the studies in marketing research than in the conventional econometric
- demand analysis.
- The lack of data on quality in most consumer surveys is partly responsible
- for the dearth of econometric analysis for status consumption.
- The lack of data on quality variation would necessarily result in a selection
- of models where the rational consumer, knowing all about her future plans
- is in fact not expected to engage in any status related consumption at
- all.
- 
-\end_layout
-
-\begin_layout Standard
-As Thaler et al had argued in their influential paper on a behavioural life-cycl
-e hypothesis, there should be no overeating and overspending if the consumers
- were rational (see Shefrin-Thaler 
+The lack of data on quality in most consumer surveys however often results
+ in the selection of models where a rational consumer - knowing all about
+ her future plans - is in fact not expected to engage in any long-term status
+ related consumption at all.
+ As Thaler et al had argued in their influential paper on a behavioural
+ life-cycle hypothesis, there should be no overeating and overspending if
+ the consumers were rational (see Shefrin-Thaler 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ShefrinThaler1988"
@@ -610,12 +639,17 @@ key "ShefrinThaler1988"
 \end_inset
 
 ).
- If there is nothing to be gained by conspicuous consumption (i.e.
- Veblen's claim of futility of conspicuous consumption), then there is no
- way for the rational consumer to derive any utility from it.
+ If there is indeed nothing to be gained by status-related consumption (i.e.
+ conspicuous consumption is essentially futile - as argued by Veblen), then
+ there is no way for the rational consumer to derive any utility from status-rel
+ated consumption.
  However, the mere existence of conspicuous consumption proves that there
  is some utility to be derived by spending on status or quality.
- Ireland model 
+ 
+\end_layout
+
+\begin_layout Standard
+Ireland model 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ireland_signals,heffetz_visibility"
@@ -640,7 +674,7 @@ infer
 \end_layout
 
 \begin_layout Standard
-While a visibility factor based model has its merits, but we find the assumption
+While a visibility factor based model has its merits, we find the assumption
  of status being derived from 
 \begin_inset Quotes eld
 \end_inset
@@ -650,15 +684,16 @@ futile
 \end_inset
 
  items too strong for empirical purposes in a more general study of inequalities
- the developed and the developing world (see Ustuner et al 
+ and quality in the developed and the developing economies (see Ustuner
+ et al 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "UstunerHolt2010"
 
 \end_inset
 
- for difficulties in extending the literature on developed countries on
- conspicuous consumption to the developing world).
+ for difficulties in extending the literature on conspicuous consumption
+ in the developed countries on to the developing world).
  The futility assumption makes less sense in the developing world 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -666,35 +701,49 @@ key "UstunerHolt2010"
 
 \end_inset
 
- where there are far fewer exclusive conspicuous items.
- The empirical classification of status-items based on visibility is also
- fraught with problems (escaped only through a consumer survey of one's
- own) - as an item both provides advantages of visibility and through quality.
+ where there are far fewer exclusive conspicuous items and the expenditure
+ on conspicuous items is limited to a much smaller portion of the population.
+ The empirical classification of status-items in the developed world itself
+ based on visibility is also fraught with problems (escaped only through
+ a consumer survey of one's own) - as an item both provides advantages through
+ visibility and through quality.
  Instead of deciding on a crisp boundary between visible and non-visible
- utilities, therefore we focus on quality (which signals elitism) and asset
- ownership (which signals that it'll take longer for others to acquire a
- particular costly item) which both contribute to the long-term utility
- that the consumers optimise over time.
+ utilities, we focus on the quality defined as expensive non-durable consumption
+ (which prices status or visible benefits and signals elitism) and ownership
+ of durable goods (which signals that it'll take longer for others to acquire
+ a particular costly item).
+ Both ENDC and LTDG contribute to the long-term utility that the consumers
+ optimise over time.
 \end_layout
 
 \begin_layout Standard
-In our view, visibility does contribute to status and hence the long-term
- utility - but it doesn't necessarily identify the underlying factors for
- status (and the combined utility that the consumers may optimise over time)
- nor does it provide the full picture of the long-term utility.
+Our focus on quality criteria for long-term utility rather than on visibility
+ is not intended to diminish the role of 
+\begin_inset Quotes eld
+\end_inset
+
+visible
+\begin_inset Quotes erd
+\end_inset
+
+ consumption but only to include the latter in a wider model for status
+ and income.
+ Visibility does contribute to status and therefore the long-term utility
+ of the consumer - but one also needs to related it with the underlying
+ economic variables that may drive status (or utility) in the long-run.
  By means of an analogy, let's consider the market for cars where status
  is signalled through car ownership.
- The significance of visible consumption might tell us that consumers pay
- more attention to outward appearance of the car (the body work, paint,
+ The significance of visible consumption might tell us that the consumers
+ pay more attention to outward appearance of the car (the body work, paint,
  rims etc.) rather than the interior (engine cleaning, quality of tyres etc.).
- However, if we were to study the signaling through car ownership in the
- urban and rural areas, we would have to see primarily - i) the constraints
- on occupation and income that exist in the respective areas and ii)) the
- price differences in the cars being sold in the market.
+ But if we were to compare the signaling through car ownership in the urban
+ and rural areas, we would like to see primarily - i) the constraints on
+ occupation and income that exist in the respective areas and ii)) the price
+ differences in the cars being sold in the market.
  In our original problem of status consumption, while it is true that individual
 s spend more on their outward appearances (despite controlling for everything
  else like occupation, income), visible consumption is not all what status
- consumption comprises of (see the Figure and Eastman 
+ consumption may comprise of (see the Figure and Eastman 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Eastman1999"
@@ -702,28 +751,36 @@ key "Eastman1999"
 \end_inset
 
  for the terminology around status consumption).
- We model visibility only as the order of categories identified for consumption.
- Thus in the different categories of consumption items we identify, we assume
- that the consumption is weighted according to a preference order over categorie
-s - a consumer may consider quality for transport - as an example - more
- important than quality in food for example (or vice versa).
- The order of visibility matters for the identified categories but not for
- items within the category.
- In the Tanzanian LSMS data, for example, we identify six categories - Food,
- Energy, Transport, Personal Care, Social Functions and Housing/Land - where
- visibility doesn't have much of a role to play within each of the category
- even though the consumers may consider the quality in one category more
- important than the other.
  
 \end_layout
 
 \begin_layout Standard
-The model of the status-cognisant long-term utility considering assets and
- quality does not view status consumption as futile.
- Instead it connects the quality of non-durable consumption and the ownership
- of long-term assets with perceptions of social mobility.
- We claim that the only advantage status consumption may offer to a rational
- consumer would be through a promise (or a belief) of social mobility.
+As we detail in the later sections, visibility can be viewed in relation
+ to the consumer's preference order of commodity groups for quality.
+ In the different separable commodity groups we identify for consumption,
+ we assume that the consumer adjusts quality based on a preference order
+ over the commodity groups - e.g.
+ a consumer may consider quality for transport more important than quality
+ in food (or vice versa).
+ However, such an order in the model matters amidst two items only if they
+ are in different commodity groups.
+ For the items within the group, such a preference doesn't exist in the
+ model.
+ For example, in the Tanzanian LSMS data where we identify six categories
+ - Food, Energy, Transport, Personal Care, Social Functions and Housing/Land,
+ visibility may not have much of a role to play within each of the commodity
+ groups even though the consumers may consider the quality in one group
+ more important than in the other.
+\end_layout
+
+\begin_layout Standard
+In summary, the model of the status-cognisant long-term utility considering
+ LTDG and ENDC does not view status consumption as futile.
+ Instead it relates the quality of non-durable consumption and the ownership
+ of long-term durable goods with the perceptions of social mobility.
+ Unlike in many studies for status consumption, we assume that the only
+ advantage status consumption may offer to a rational consumer would be
+ through a promise (or a belief) of social mobility.
  This relationship between consumption and social mobility itself is an
  idea that dates back least as far back as Adam Smith 
 \begin_inset CommandInset citation
@@ -751,11 +808,12 @@ key "MuellbauerRationalityMyopia1988."
 
 \end_inset
 
-) also points out to an inertia of choices based on persistent habits.
- Assuming that the consumer forms expectations of status promotion through
- improvement of asset-accumulation and habits of sustained high-quality
- consumption, we compare the two types of consumption in two selected economies
- in the current chapter (see Corneo et al 
+) and behavioural economics also points out the inertia of choices or persistenc
+e of habits.
+ As the consumer forms expectations of status promotion through improvement
+ of accumulated goods and habits of sustained high-quality consumption,
+ we compare the two types of consumption in two selected economies (see
+ Corneo et al 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "corneo_snobbism"
@@ -770,20 +828,23 @@ key "ColemanSocialTheory1990"
 \end_inset
 
  - where the case for a ranking order of status is motivated).
- This would help us quantify which of the two economies has more reliance
- on short-term needs (quality or asset possession) and hence more avenues
- for status consumption.
- In a further substantiation of the model in an intertemporal substitution
- setting in a subsequent chapter, we include probabilities of asset ownership
- in the expectation of status promotion.
+ From the point of view of conspicuous consumption, such a comparison helps
+ us quantify which of the two economies has more reliance on short-term
+ needs vs long-term needs for status consumption.
+ From a more general demand analysis perspective, such a comparison tells
+ us about the effect of supply issues and inequalities on quality.
+ In a further substantiation of the model under an intertemporal substitution
+ setting in a subsequent chapter, we include the probabilities of ownership
+ of LTDG in the expectation of status promotion to arrive at a life-cycle
+ formulation of the model for long-term needs vs quality.
 \end_layout
 
 \begin_layout Standard
-An advantage of the assets-and-quality-based status model is that it can
- help deconstruct the role of social identity as a vehicle of status.
- While identities are considered extremely important for status in many
- studies in the developing as well as the developed countries (see Chao
- et al.
+Another advantage of the LTDG and ENDC based model for long-term utility
+ is that it can help deconstruct the role of social identity as a vehicle
+ of status.
+ While identities have been deemed quite important for status in the many
+ studies on conspicuous consumption we have surveyed (see Chao et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -814,41 +875,36 @@ key "ZahraIndia"
 
 \end_inset
 
-), we believe that the difference in assets owned by the identities over
- time might explain how identities carry status across different countries.
+), we believe that the difference in LTDG owned by the identities over time
+ should be factored in to explain how identities carry status across the
+ different countries.
  In terms of the model, an identity (religious, racial etc.) carries status
- only through a history of past asset ownership, incomes/occupations and
- persistent-high quality consumption - a criterion that allows us to quantify
- the role of identity in status.
- 
+ only thro gh a history of past LTDG ownership, incomes/occupations and
+ persistent-high quality consumption - a criterion that may allow us to
+ quantify the role of identity in status.
 \end_layout
 
 \begin_layout Section
 MODEL
 \end_layout
 
-\begin_layout Subsection
-Quality is Luxury
-\end_layout
-
 \begin_layout Standard
-The goal of the model is to measure the distribution of the quality of consumpti
-on and the ownership of assets throughout the population.
-\end_layout
+We start with demonstrating that a simple formulation such as that of Stone-Gear
+y utility for all commodity groups would be inadequate to discuss utility
+ through quality.
+ The optimisation of Stone-Geary direct utility function 
+\begin_inset Formula $u=\sum\beta_{i}log(q_{i}+\gamma_{i})$
+\end_inset
 
-\begin_layout Standard
-Quality: We rely on the price of an item relative to its cheaper substitutes
- for the same functional utility.
- Except for the order of categories (food, transport) and the quantities
- of items, the consumer's utility is constitutes both the quality of the
- items and the permanent assets within each category.
- 
-\end_layout
+ with 
+\begin_inset Formula $\sum\beta_{i}=1$
+\end_inset
 
-\begin_layout Standard
-As we show with a rudimentary Stone Geary model, the superior quality is
- enough for an item to become a luxury in the conventional sense.
- The optimisation of a Stone-Geary utility function
+ under the conditions 
+\begin_inset Formula $p\cdot q=\sum p_{i}q_{i}=x$
+\end_inset
+
+ gives us the indirect utility function
 \begin_inset Foot
 status open
 
@@ -858,7 +914,7 @@ The first-order conditions for the Lagrangean
 \end_inset
 
  lead to 
-\begin_inset Formula $\frac{\partial L}{\partial q_{1}}=0\Rightarrow\frac{\beta_{i}}{q_{i}}=\lambda p_{i}\forall i\in[1,n]$
+\begin_inset Formula $\frac{\partial L}{\partial q_{i}}=0\Rightarrow\frac{\beta_{i}}{q_{i}}=\lambda p_{i}\forall i\in[1,n]$
 \end_inset
 
  
@@ -881,18 +937,6 @@ The first-order conditions for the Lagrangean
 \end_inset
 
  
-\begin_inset Formula $u=\sum\beta_{i}log(q_{i}+\gamma_{i})$
-\end_inset
-
- with 
-\begin_inset Formula $\sum\beta_{i}=1$
-\end_inset
-
- under the conditions 
-\begin_inset Formula $\sum p_{i}q_{i}=x$
-\end_inset
-
- gives us the indirect utility function 
 \begin_inset Formula 
 \begin{alignat*}{1}
 u\equiv\psi(x,p) & =\sum\beta_{i}log(x\beta_{i}/p_{i}+\gamma_{i})
@@ -904,8 +948,37 @@ u\equiv\psi(x,p) & =\sum\beta_{i}log(x\beta_{i}/p_{i}+\gamma_{i})
 \end_layout
 
 \begin_layout Standard
-Thus, the cost-function would be of the PIGLOG form.
- 
+The econometric methods corresponding to the indirect utility can be easily
+ devised if one assumes that the consumer observes the price index of an
+ item whose many variants exist in the market.
+ However since a better quality item is set to be more expensive than the
+ less quality item, a switch to higher quality by the consumer is inseparable
+ in the model from an increase in the price-index of the item whose multiple
+ variants exist in the market.
+ The increase in the price-index of an item (regardless of whether it's
+ a 
+\begin_inset Quotes eld
+\end_inset
+
+parallel
+\begin_inset Quotes erd
+\end_inset
+
+ shift -so that the relative price structure of the variants remains the
+ same or not) only implies the consumer would reduce the quantity consumed
+ of the item.
+ We may still use the model if we assume that the individual's quality preferenc
+es are fixed - but a change in quality due to price cannot be studied with
+ the model as such.
+\end_layout
+
+\begin_layout Standard
+All of the usual limitations of an additive utility function such as Stone
+ Geary indeed also apply.
+ But our intention is only to point out that an explicit measure of quality
+ is necessary in the either the direct utility or the cost-function for
+ us to interpret meaningful results for quality using the corresponding
+ econometric method.
 \end_layout
 
 \begin_layout Subsection
@@ -913,10 +986,16 @@ Distribution of quality
 \end_layout
 
 \begin_layout Standard
-The items of high-quality can exist in every category and they are not assumed
- be equivalent or substitutable (kobe beef cannot be substituted with a
- luxury travel as is).
- However, we do not assume the a category of 
+The goal of the model is to measure the distribution of the quality of consumpti
+on and the ownership of assets throughout the population.
+ The items of high-quality can exist in every category and they are not
+ assumed be equivalent or substitutable (kobe beef cannot be substituted
+ with a luxury travel as is).
+ 
+\end_layout
+
+\begin_layout Standard
+, we do not assume the a category of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -929,7 +1008,11 @@ high-quality
  ( i.e.
  the portion of total expenditure spent on the expensive non-durable consumption
 ) based on her taste and prices of quality in every category.
- The expensive nondurable consumption (ENDC) weights contributes to status
+ 
+\end_layout
+
+\begin_layout Standard
+The expensive nondurable consumption (ENDC) weights contributes to status
  only if its is sustained at high level - except for which the long-term
  utility is influenced by asset purchases and the occupation-education-region
  vector.
@@ -940,7 +1023,7 @@ high-quality
 If we consider an environment of stable prices i.e.
  if the effect of price changes is ignored, the distribution of ENDC weights
  may change when the individuals acquire assets and spend on upkeep and
- maintenance costs for assets or as they give up on hopes on acquiring costlier
+ maintenance costs for assets or as they give up on hopes of acquiring costlier
  assets (possibly due to other needs).
  It is assumed that a consumer would not sacrifice needs to purchase quality
  (there is little evidence of that in the data) - therefore when prices
@@ -956,9 +1039,9 @@ If we consider an environment of stable prices i.e.
 \end_layout
 
 \begin_layout Standard
-In this environment of stable prices, the consumption is influenced by status
- - which is measured in the model as a vector of occupation, education,
- region (locality, neighborhood) and assets.
+In this environment of stable prices, the consumption is influenced by long-term
+ expectations - which is measured in the model as a vector of occupation,
+ education, region (locality, neighborhood) and assets.
  Since income, occupation and education are fixed in the short-run, what
  changes most often is the acquisition of assets that are available in the
  market if the needs of the consumer haven't changed.
@@ -1111,7 +1194,7 @@ Faced with reducing quality and reducing quantity - clearly one cannot be
  immediately.
  Needs of energy are more important than consuming electricity.
  Myopia means that electricity quantity and beef quantity would move slowly
- and the quantity of bread and kersosene is more likely to be adusted rather
+ and the quantity of bread and kerosene is more likely to be adusted rather
  than the quantity.
  Whether changed prices result in more burning of kerosene can only be verified
  with a discrete model.
@@ -1201,6 +1284,9 @@ For now, if quantities of beef stay the same prices increase - let's say
 \end_inset
 
  goes down proportionately.
+ The composite comomdity theorem writes the demand function for groups whose
+ prices move together.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1294,8 +1380,11 @@ In a cross-sectional analysis,
 There are two competing approaches used for quality in the literature that
  we find relevant to our work.
  First is the simple-repackaging approach, which views a high-quality item
- in terms of the extra units of the low-quality product for the same price.
- The other approach is the model of discrete choice for utility.
+ as extra units of the low-quality product for the same price - or equivalently
+ the same units for a lower quality-adjusted price.
+ The other approach is the model of discrete choice for utility - which
+ separates the stochastic and non-stochastic components of utility obtained
+ after choosing the different items.
  We focus on the first approach in the cross-sectional analysis in the current
  chapter.
  
@@ -1313,6 +1402,17 @@ A simple repackaging model does the above analysis with a quality function
 \end_inset
 
  is a function of quality.
+ For us to use this form, we must be sure of the quality of the item.
+ For food, we can just take the total quantity of the item in the group
+ - a simple addition - not one based on calories would suffice.
+ The quality measure is then the ratio of higher price quantities to the
+ total quantities.
+ It feels that the discrete model would represent the choice better - because
+ the quality characteristics are not known for most items.
+ The simple repackaging approach seems to compare characteristics such accelerat
+ion, roominess etc.
+ in the models for cars.
+ We'll have to classify our items based on such characteristics as well.
 \end_layout
 
 \begin_layout Standard
@@ -1320,7 +1420,7 @@ We see that quality is of significance only in food and energy.
  Personal care, housing doesn't have so much of quality consumption - as
  having a house is more important.
  We don't look for quality consumed in housing or personal care.
- We record only that a person owns a medium or a high-asset.
+ We record only that a person owns a medium or a high-asse.
  We do not observe the effect of price of assets.
  Still, it is possible to observe the discrete differences in quality based
  on the overall price of houses in 2012.
@@ -1345,6 +1445,27 @@ We use price dummies to check if the consumer is in a high price region.
  region, household size and income) is expensive consumption.
  Expensiveness of nondurable expenditure is only found by availability of
  a cheaper substitute.
+\end_layout
+
+\begin_layout Subsubsection
+Rosen Paper
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $p(z)=p(z_{1},z_{2},...,z_{n})$
+\end_inset
+
+ where 
+\begin_inset Formula $z_{1},z_{2},...,z_{n}$
+\end_inset
+
+ are characteristics.
+ It is inappropriate to put too many restrictions on 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ It doesn't need to be linear.
 \end_layout
 
 \begin_layout Section
