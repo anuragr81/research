@@ -528,8 +528,12 @@ lsms_loader<-function(fu,ln) {
       cj <- subset(cj,price!=Inf)
       
       prices<-ddply(cj,.(code),summarise,price=mean(price[!is.na(price)]),sd_price=sd(price[!is.na(price)]))
-      prices<-merge(prices,item_names,all.x=TRUE)
-      return(prices)
+      prices_merged<-merge(prices,item_names,all.x=TRUE)
+      missing_shortnames <- unique(subset(prices_merged,is.na(shortname))$code)
+      if (length(missing_shortnames)>0){
+      print(paste("Could not find itemnames for:",toString(missing_shortnames)))
+      }
+      return(prices_merged)
     }
     
   
