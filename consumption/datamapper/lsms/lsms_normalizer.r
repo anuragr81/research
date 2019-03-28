@@ -237,7 +237,7 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='womensshoes',shortname='womensshoes',code='323',category="personal_products"))
     r=rbind(r,data.frame(item='childrensshoes',shortname='childrensshoes',code='324',category="personal_products"))
     
-    r=rbind(r,data.frame(item='Woodpoles',shortname='bamboo',code='325',category="personal_products"))
+    r=rbind(r,data.frame(item='Woodpoles',shortname='bamboo',code='325',category="hosing"))
     r=rbind(r,data.frame(item='ThatchingGrass',shortname='grass',code='326',category="housing"))
     
     
