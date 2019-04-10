@@ -10,7 +10,7 @@ if (isClass("LSMSLoader")){
 ## all exported functions are declared here
 setClass("LSMSLoader", representation(combined_data_set="function",load_diary_file="function",
                                       analyse_cj="function",load_ohs_file="function",
-                                      match_recorded_prices="function",get_inferred_prices="function",
+                                      match_recorded_prices="function",get_inferred_prices="function",load_market_prices="function",
                                       aggregate_local_prices="function",add_localmedian_price_columns="function",
                                       food_expenditure_data="function",read_assets_file="function",
                                       group_expenditure="function",get_asset_score="function",
@@ -489,6 +489,59 @@ lsms_loader<-function(fu,ln) {
     #    return(householdLocation)
     
   }
+  
+  load_market_prices <-function(year,dirprefix,fu,ln,means_calc){
+    
+    if (year ==2010) {
+      a<-read.dta(paste(dirprefix,'/lsms/TZNPS2COMDTA/COMSEC_CJ.dta',sep=""),convert.factors = FALSE)
+      a<-(a[!is.na(a),])
+      cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccj_columns_lsms_2010(), m=ln()@ohs_seccj_mapping_lsms_2010())
+      item_names<- ln()@items_codes_2010()
+    } else if (year == 2012){
+      a <- read.dta(paste(dirprefix,'/lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/COM_SEC_CF.dta',sep=""),convert.factors = FALSE)
+      a<-(a[!is.na(a),])
+      cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccj_columns_lsms_2012(), m=ln()@ohs_seccj_mapping_lsms_2012())
+      item_names<- ln()@items_codes_2012()
+    } else if (year == 2008){
+      a <- read.dta(paste(dirprefix,'/lsms/tnz2008/TZNPS1CMDTA_E/SEC_J2.dta',sep=""),convert.factors = FALSE)
+      a<-(a[!is.na(a),])
+      cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccj_columns_lsms_2008(), m=ln()@ohs_seccj_mapping_lsms_2008())
+      item_names<- ln()@items_codes_2008()
+    } else {
+      stop(paste("year:",year,"not supported"))
+    }
+    
+    cj<-(cj[!is.na(cj$price),])
+    cj <- subset(cj,price>0)
+    cj$factor<-as.integer(cj$lwp_unit==1)+as.integer(cj$lwp_unit==2)/1000.0+as.integer(cj$lwp_unit==3)+as.integer(cj$lwp_unit==4)/1000.0+as.integer(cj$lwp_unit==5)
+    
+    cj$lwp <-cj$lwp*cj$factor 
+    
+    cj$price <-cj$price/cj$lwp
+    
+    cj$code <- sapply(cj$item,function(x) {if (is.na(as.integer(x))) x else as.integer(x)+10000 } )
+    
+    Lcodes<-unique(as.character(cj$code)[grep("^L",as.character(cj$code))])
+    
+    cj$code <- sapply(cj$code,function(x) { if (is.element(x,Lcodes)) as.integer(substr(x,2,nchar(x))) else x })
+    
+    cj <- subset(cj,price!=Inf)
+    
+    if (means_calc==TRUE){
+      prices<-ddply(cj,.(code),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(price[!is.na(price)],0.85))
+    } else {
+      prices <- cj
+    }
+    prices_merged<-merge(prices,item_names,all.x=TRUE,by=c("code"))
+    
+    missing_shortnames <- unique(subset(prices_merged,is.na(shortname))$code)
+    if (length(missing_shortnames)>0){
+      print(paste("Could not find itemnames for:",toString(missing_shortnames)))
+    }
+    return(prices_merged)
+  }
+  
+  
   
   aggregate_local_prices<-function (cp){
     
@@ -1716,7 +1769,7 @@ lsms_loader<-function(fu,ln) {
     
     stop(paste("No data for splits between",fromYear,"and", toYear))
   }
-
+  
   
   
   asset_differences <- function(fromYear,toYear,assetsBaseYear, splitHouseholdHhids, dirprefix, fu, ln){
@@ -1758,14 +1811,14 @@ lsms_loader<-function(fu,ln) {
       notSplitHHids2010 <-  subset( a2010,!is.element(hhid2010,splitHouseholdHhids) )
       notSplitHHids2010 <- merge(ohs2012[,c("hhid2010","hhid")],notSplitHHids2010,by=c("hhid2010"))
       
-
+      
       cc2010 <- (ddply(unique(notSplitHHids2010[,c("hhid","itemcode")]),.(hhid),summarise,a2010=jsonlite::toJSON(itemcode[order(itemcode)]))) 
       cc2012 <- (ddply(notSplitHHids2012_wy2hhid[,c("hhid","itemcode")],.(hhid),summarise,a2012=jsonlite::toJSON(itemcode[order(itemcode)])))
       
       
       compare2010_2012 <- merge(cc2010,cc2012)
       assetsDiffNonSplit <- ddply(compare2010_2012,.(hhid),summarise, newAssets = fu()@diff_lists (a2012,a2010), 
-                                        soldAssets = fu()@diff_lists (a2010,a2012 )) 
+                                  soldAssets = fu()@diff_lists (a2010,a2012 )) 
       
       # those that have been split - always have hhid2010 (that's how we know of them splitting)
       
@@ -1792,7 +1845,7 @@ lsms_loader<-function(fu,ln) {
       if (dim(allHhids[is.na(allHhids$has_max),])[1]>0){
         allHhids[is.na(allHhids$has_max),]$has_max <- 0
       }
-
+      
       maxAssetsHHsPreSplit <- merge(subset(allHhids,has_max==1),preSplit[,c("hhid2010","itemcode")] )[,c("hhid","itemcode")]
       print("Gathering assets owned")
       cc2010MaxAssets <- (ddply( maxAssetsHHsPreSplit[,c("hhid","itemcode")],.(hhid),summarise,a2010=jsonlite::toJSON(itemcode[order(itemcode)])))
@@ -1823,7 +1876,7 @@ lsms_loader<-function(fu,ln) {
       }
       allAssets <- rbind(splitHHAssetsDiff,assetsDiffNonSplit)
       
-
+      
       return(allAssets)
     }
     if (fromYear == 2008 && toYear == 2010){
@@ -1852,8 +1905,8 @@ lsms_loader<-function(fu,ln) {
       
       compare2008_2010 <- merge(cc2008,cc2010)
       assetsDiffNonOverlapping <- ddply(compare2008_2010,.(hhid),summarise, newAssets = fu()@diff_lists (a2010,a2008), 
-                          soldAssets = fu()@diff_lists (a2008,a2010 )) 
-
+                                        soldAssets = fu()@diff_lists (a2008,a2010 )) 
+      
       # take split households and find the one with the largest asset
       preSplit <- subset(a2008,is.element(hhid2008,splitHouseholdHhids))
       postSplit <- subset(a2010,is.element(hhid2008,splitHouseholdHhids))
@@ -1885,7 +1938,7 @@ lsms_loader<-function(fu,ln) {
       cc2010MaxAssets <- (ddply( maxAssetsHHsPostSplit[,c("hhid","itemcode")],.(hhid),summarise,a2010=jsonlite::toJSON(itemcode[order(itemcode)])))
       compare2008_2010_maxassets <- merge(cc2008MaxAssets,cc2010MaxAssets)
       assetsDiff_maxassets <- ddply(compare2008_2010_maxassets,.(hhid),summarise, newAssets = fu()@diff_lists (a2010,a2008), 
-                          soldAssets = fu()@diff_lists (a2008,a2010 )) 
+                                    soldAssets = fu()@diff_lists (a2008,a2010 )) 
       
       nonMaxHHsPostSplit = merge ( subset(allHhids,has_max==0), postSplit[,c("hhid","itemcode")], by=c("hhid"))[,c("hhid","itemcode")]
       cc2010NonMaxAssets <- (ddply( nonMaxHHsPostSplit[,c("hhid","itemcode")],.(hhid),summarise,a2010=jsonlite::toJSON(itemcode[order(itemcode)])))
@@ -1894,7 +1947,7 @@ lsms_loader<-function(fu,ln) {
         stop("Max and not max cannot overlap")
       }
       assetsDiff_nonmaxassets <- ddply(cc2010NonMaxAssets,.(hhid),summarise, newAssets = fu()@diff_lists (a2010,a2008), 
-                                    soldAssets = fu()@diff_lists (a2008,a2010 )) 
+                                       soldAssets = fu()@diff_lists (a2008,a2010 )) 
       print(paste("Num nonsplit:",dim(assetsDiffNonOverlapping)[1]))
       print(paste("Num split (max assets):",dim(assetsDiff_maxassets)[1]))
       print(paste("Num split (not max assets):",dim(assetsDiff_nonmaxassets)[1]))
@@ -1987,7 +2040,7 @@ lsms_loader<-function(fu,ln) {
   
   
   return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
-             analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, 
+             analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, load_market_prices=load_market_prices,
              get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices,
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
              read_assets_file=read_assets_file, group_expenditure=group_expenditure,

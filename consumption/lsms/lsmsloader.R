@@ -212,6 +212,7 @@ area_code<-function(df,field_array)
   #return(areacode)
 }
 
+
 analyse_cj<-function(sl){
   cjdat<-read.dta('../lsms/TZNPS2COMDTA/COMSEC_CJ.dta',convert.factors = FALSE) 
   
