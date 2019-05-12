@@ -747,9 +747,10 @@ lsms_loader<-function(fu,ln) {
     if (year == 2010){
       
       #* Read section c_cb file
-      cbFileName = paste(dirprefix,'./lsms/TZNPS2COMDTA/COMSEC_CB.dta',sep="")
-      cbdat<-read.dta(cbFileName,convert.factors = FALSE)
+      cbFileName = paste(dirprefix,'/lsms/TZNPS2COMDTA/COMSEC_CB.dta',sep="")
       print(paste("Reading file ",cbFileName))
+      cbdat<-read.dta(cbFileName,convert.factors = FALSE)
+      
       
       cb <- fu()@get_translated_frame(dat=cbdat,
                                       names=ln()@ohs_seccb_columns_lsms(2010),
@@ -1300,12 +1301,20 @@ lsms_loader<-function(fu,ln) {
     
     
     if (year == 2010 || year == 2012) {
+      if (year == 2010){
+        itemcodes <- ln()@items_codes_2010()
+      } else {
+        itemcodes <- ln()@items_codes_2012()
+      }
       if (basis=="price"){
         print("Price based groups")
         groups      <- subset( ln()@lsms_groups_pricebased_2010_2012(), category == categoryName )
       } else if (basis == "sparseness"){
         print("sparseness based groups")
         groups      <- subset( ln()@lsms_groups_sparsenessbased_2010_2012(), category == categoryName )
+      } else if (basis == "quality"){
+        print("quality based groups")
+        groups      <- subset( ln()@lsms_groups_qualitybased_2010_2012(), category == categoryName )
       } else {
         stop("Invalid basis")
       }
@@ -1319,9 +1328,32 @@ lsms_loader<-function(fu,ln) {
       stop(paste("Year",year,"not supported for group_collect"))
     } 
     
-    print(paste("Collecting from groups:",toString(unique(groups$group))))
     
-    if (setequal(groups$group,c("high","low")) || setequal(groups$group,c("low")) || setequal(groups$group,c("high"))) {
+    print(paste("Collecting from groups:",toString(unique(groups$group))))
+    if (setequal(groups$group,c("quality"))) {
+      # get prices for the year
+      print ("Loaded prices noted by the respondents (instead of the market recorded prices)")
+      mp<-match_recorded_prices(year = year, dirprefix = dirprefix,fu = fu, ln=ln,marketPricesOnly = TRUE)
+      mpp<-ddply(mp,.(item),summarise,mean_price=mean(recorded_price))
+      itemcodesmap <- plyr::rename(itemcodes[,c("shortname","code")],c("code"="item"))
+      mpp <- merge(mpp,itemcodesmap)
+      hhp <- merge(hh,mpp,by=c("shortname"))
+      hhpg <- merge(hhp,groups,by=c("shortname"))
+      print("Obtained prices for quality/expenditureonly group")
+      minprices <- ddply(hhpg[,c("shortname","mean_price","category")],.(category),summarise,min_price=min(mean_price))
+      hhpg$factor<-as.integer(hhpg$lwp_unit==1)+as.integer(hhpg$lwp_unit==2)/1000.0+as.integer(hhpg$lwp_unit==3)+as.integer(hhpg$lwp_unit==4)/1000.0+as.integer(hhpg$lwp_unit==5)
+      hhpg$quantity <-with (hhpg,lwp*factor)
+      
+      hhpg <- merge(minprices,hhpg)
+      # get price ratio for every group
+      hhpg$price_ratio <- with (hhpg,mean_price/min_price) 
+      # calculate sum of quantity consumed
+      totq <- ddply(unique(hhpg[,c("hhid","shortname","category","quantity","price_ratio")]),.(category,hhid),summarise,totq=sum(quantity), qsum = sum (price_ratio*quantity))[,c("hhid","category","qsum","totq")]
+      # calculate the quality ratio -  sum (price/min(price)*quantity) / sum (quantity)
+      totq$quality <- with(totq,qsum/totq)
+      return(totq[,c("hhid","category","quality")])
+      
+    } else if (setequal(groups$group,c("high","low")) || setequal(groups$group,c("low")) || setequal(groups$group,c("high"))) {
       print("Using high-low groups")
       ##Note: cost would not be avalable from the diary if the type of commodity in the group is an asset.
       # if we can get the asset costs populated, then the data-frame can be rbind-ed to vis data-frame.
@@ -1480,21 +1512,22 @@ lsms_loader<-function(fu,ln) {
     
     hhid_personid   <- get_hsize(ohs)
     
+    if (missing(minConsumerNumber)){
+      minConsumerNumber <- 10
+      
+    }
+    
     if (returnBeforeGrouping){
       vis <- hh
       mcn <- ddply(vis, .(shortname),summarise,nc=length(unique(hhid)))
       negligibleShortNames <- unique(as.character(subset(mcn,nc<=minConsumerNumber)$shortname))
-      print(paste("Removing", toString(negligibleShortNames), "from the analysis on grounds of low,",minConsumerNumber, "number of consumers "))
+      print(paste("Removing", toString(negligibleShortNames), "from the analysis on grounds of low(",minConsumerNumber, ") number of consumers "))
       vis                 <- subset(vis,!is.element(shortname,negligibleShortNames))
       
     } else {
       vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryName,hh=hh,basis=basis)
     }
     
-    if (missing(minConsumerNumber)){
-      minConsumerNumber <- 10
-      
-    }
     ds                  <- merge(totexp,vis);
     print(paste("Merging hsize",dim(ds)[1]))
     

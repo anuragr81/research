@@ -195,6 +195,10 @@ P1301total total expenditure on furniture
 \end_layout
 
 \begin_layout Plain Layout
+setwd('c:/local_files/research/consumption/datamapper/')
+\end_layout
+
+\begin_layout Plain Layout
 source('translation/frameutils.R');source('lsms/lsms_normalizer.r');source('lsms/l
 sms_loader.r');ll=lsms_loader(fu=fu,ln=lsms_normalizer)
 \end_layout
@@ -436,6 +440,20 @@ pset <- unique(prices[,c("shortname","tag","qprices")]) %>% spread(shortname,qpr
 ices)
 \end_layout
 
+\begin_layout Plain Layout
+# checking if food 
+\end_layout
+
+\begin_layout Plain Layout
+food2010<-ll@group_expenditure(year = 2010, dirprefix = "../",fu = fu, ln=lsms_nor
+malizer,basis = "price", returnBeforeGrouping = FALSE,categoryName = "food")
+\end_layout
+
+\begin_layout Plain Layout
+ddply(food2010[,c("hhid","has_high")],.(has_high),summarise,n=length(unique(hhid)
+))
+\end_layout
+
 \end_inset
 
 
@@ -463,92 +481,104 @@ Introduction
 
 \begin_layout Standard
 Demand studies in the developing world often work with much sparser data
- that has fewer information fields on the individual households than its
- counterparts in the developed countries.
+ which has less information on the individual households than the equivalent
+ surveys in the developed countries.
  Recent surveys have mitigated many such issues - but the problems that
  arise out of the non-uniformity of institutions themselves make the standardisa
 tion of data across the developing countries more challenging than in the
  developed world.
- The study of quality of consumption - for example - is likely to suffer
- if brand or type-related details are not recorded in a survey.
- Often we limit ourselves to measurement of quality in food where the measuremen
-t of quality is independent of consumed brand or type (details that are
- often not recorded in a typical consumer survey).
- The variation in quality in food may still provide an of quality-related
- substitution since a significant chunk of income for most of the population
- in the developing countries is spent on food.
- Still, problems like segmentation of price - due lack of a cheap transport
- infrastructure and sufficiently large firm sizes - can make the analysis
- of quality particularly challenging.
+ Studies on quality of consumption - therefore - often suffer due the absence
+ of brand or type-related details in the surveys.
+ It is possible nevertheless to limit oneself to observing quality in food
+ where the consumed brand or type is less relevant.
+ The variation in quality in food can still provide us an idea of the quality-re
+lated substitution for the consumers since a significant chunk of income
+ for most of the population in the developing countries is spent on food.
+ However, the problems like segmentation of price - due lack of a cheap
+ transport infrastructure and sufficiently large firm sizes - can make the
+ analysis of quality particularly challenging.
  
 \end_layout
 
 \begin_layout Standard
 In the current study, we attempt to quantify the choice of quality in the
- developing world.
- Instead of focusing on food quality alone, we also observe the effect of
- vast differences in life-style that living in urban vs rural areas would
- bring to the consumer in a developing country.
+ developing world and view it in relation to the life-style differences
+ in the population.
+ Instead of focusing on food quality alone, we observe the effect of vast
+ differences in life-style that living in urban vs rural areas would bring
+ to the consumer in a developing country.
  The sheer lack of availability of certain goods in the rural areas - we
  believe - should also be noted in the consumption of quality.
  We comment on how overall quality may vary with economic inequalities across
- multiple economies as the consumer spreads the expenditure on quality across
- the commodity groups (food, energy etc.).
- This may provide us a better understanding of how quality of consumption
+ multiple economies as the consumers are faced with the choice of distributing
+ their expenditure on quality across the various available commodity groups
+ (food, energy etc.).
+ This can provide us a better understanding of how quality of consumption
  changes in response to vast economic changes such as urban developments
- or market centralisation.
- This could be of interest both from a general demand analysis perspective
- and from a more specific conspicuous consumption perspective.
+ or market centralisation - observations that could be of interest both
+ from a general demand analysis perspective and from a more specific conspicuous
+ consumption perspective.
 \end_layout
 
 \begin_layout Standard
-To observe quality of consumption with respect to income inequalities across
- the developing countries, we motivate a model for substitution between
+To observe the quality of consumption with respect to income inequalities
+ across the developing countries, we motivate a model for substitution between
  a consumer's long-term needs that are fulfilled with ownership of assets
  or improvement of the socio-economic standing and the consumer's short-term
  needs that are fulfilled with an improved quality of consumption.
- The socio-economic standing of the consumer is determined by an order of
- what we identify as status determinants (income, education, occupation).
- These determinants do not all have the same effect on the long-term socio-econo
-mic standing of the consumer (i.e.
+ The socio-economic standing of the consumer is determined by a ranking
+ order of what we identify as status determinants (income, education, occupation
+)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+These determinants clearly do not all have the same effect on the long-term
+ socio-economic standing of the consumer (i.e.
  education may matter more than occupation etc.).
- We measure that the improvement in quality of expenditure as the expensive
- non-durable consumption (ENDC) by the consumer.
+ 
+\end_layout
+
+\end_inset
+
+ while the improvement in quality of expenditure is simply a measure of
+ the expensive non-durable consumption (ENDC) by the consumer.
 \end_layout
 
 \begin_layout Standard
-We attempt to view the distribution of quality (ENDC) across the consumption
- groups (food, energy, housing etc.) relative to the consumer's long-term
+We then attempt to view the distribution of quality (ENDC) across the consumptio
+n groups (food, energy, housing etc.) relative to the consumer's long-term
  possessions, identity and skills such as education.
  It is worth emphasising that we differentiate between quality consumption
- and conspicuous consumption.
+ and conspicuous consumption in the context of the developing countries.
  At least semantically speaking, the term conspicuous consumption encompasses
  only the exclusive consumption by the rich.
- There are similarities between the current developments in Africa and the
- the rapid economic developments took place in the United States in the
- late 19th century as the latter's economy transitioned from a vastly agrarian
- society to an industrialised one.
- However, there are also some issues with extending the concepts identified
- by Veblen
+ It is fair to say that there are similarities between the current developments
+ in Africa and the rapid economic developments which took place in the United
+ States in the late 19th century - when the latter's economy transitioned
+ from a vastly agrarian society to an industrialised one.
+ However, there are at the same time, also some issues with extending the
+ concepts identified by Veblen
 \begin_inset CommandInset citation
 LatexCommand cite
 key "VeblenLeisureClass"
 
 \end_inset
 
- into modern economic theory.
+ into the developing markets using the modern economic theory.
  In the environment of the nascent economic transition in sub-Saharan Africa
  where severe economic inequalities are still observed, the options for
- conspicuous consumption are limited to a very small part of the population.
+ conspicuous consumption are in fact limited to a very small part of the
+ population and don't offer the context of the transition that the developing
+ world has gone through.
  The quality consumption and possession of long-term assets - on the other
  hand - are concerns for a larger section of the population that contribute
- to a consumer's long-term utility.
- 
+ to a consumer's selection of items for consumption.
 \end_layout
 
 \begin_layout Standard
-Status , which motivates conspicuous consumption, is a complex social psychologi
-cal phenomenon and even if we view status as part of the long-term utility
+Status - which motivates conspicuous consumption - is a complex social psycholog
+ical phenomenon and even if one views it as part of the long-term utility
  of the consumer, deciding whether an item is a status good or not in the
  developing remains a difficult task.
  For example, if one were to rely only on whether an item can be afforded
@@ -556,52 +586,57 @@ cal phenomenon and even if we view status as part of the long-term utility
  the population in a sub-Saharan African country like Tanzania, may appear
  to be a status good - at par with weddings which are a clear way of indicating
  status.
- Whether the same amount of money spent on weddings enhances status more
- than when it's spent on electricity is however a much more difficult question
- to answer.
- Except through conducting a survey where we can ask the question to the
- participants, answering it would require an understanding of the complex
- interactions of supply, wealth and social identities in a society.
- One cannot therefore rely on the static assumption of a set of items being
- 
+ However, whether the same amount of money spent on weddings enhances status
+ more than when it's spent on electricity is however a much more difficult
+ question to answer and might require us to conduct a survey where we can
+ ask the question to the participants.
+ Without such a direct survey, determining whether the consumed item provides
+ status utility in the long-run would require modeling the complex interactions
+ of supply, wealth and social identities in a society.
+ Further, status goods themselves change over time - the demand for newly
+ introduced items - e.g.
+ a smart-phone or a TV- may change as the item of interest move from being
+ a snob type to bandwagon type as the consumer incomes increase over time.
+ A static assumption of a set of items being 
 \shape italic
 conspicuous
 \shape default
- if one were to consider the effects of fundamental changes such as industrialis
-ation on an economy.
+ thus cannot be relied upon if one wishes to understand the effects of drastic
+ changes in the consumer basket.
  In Tanzania, for example, we may be tempted to argue - based on the literature
  on conspicuous consumption - that buying clothes indicates higher status.
  But without observing the effect that getting electricity in the house
  or moving to a bigger house may have on a consumer's long-term utility,
- we cannot accurately explain the household consumption on status - since
- the possibility that those spending on electricity or housing may actually
- be cutting down on clothing expenditure while deriving status from electricity
- or house ownership cannot be ruled out.
+ we cannot assume a significant status-benefit to the consumer from expenditure
+ on clothing - since the possibility that those spending on recently installed
+ electricity or newly built housing may actually be cutting down on clothing
+ expenditure while deriving status from electricity or house ownership cannot
+ be ruled out.
+ A model for long term utility needs to be considered for any claims on
+ status consumption.
 \end_layout
 
 \begin_layout Standard
-The literature on conspicuous consumption is indeed more impassioned and
- wide-ranging in its conclusions than a discussion on elasticities of a
- typical demand survey.
- In an attempt to utilise the framework of decision making under risk for
- conspicuous consumption, we define a narrowed context for status-related
- consumption where we select the measurable criteria that may contribute
- to status.
+The literature on conspicuous consumption often appears more impassioned
+ and wide-ranging in its conclusions than a discussion on elasticities of
+ a typical demand survey may be.
+ We stick to familiar framework of decision making under risk and define
+ a narrowed context for status-related consumption in order to attempt explainin
+g some of the observations noted in the empirical literature on conspicuous
+ consumption.
+ In this narrowed context, only a certain measurable criteria that may contribut
+e to status are selected.
  Instead of attempting to find the criteria for separating status-items
- from bare-necessities, we focus on separating short-term needs i.e.
- quality from the long-term needs i.e.
- long-term durable goods and the socio-economic standing (including valuable
- skills or education) a consumer possesses.
- 
-\end_layout
-
-\begin_layout Standard
-The typical standard diary and recall methods in a survey measure neither
- the quality of consumption nor the socio-economic standing of the consumer
- - which we wish to embark upon in the study.
- However, quality can measured readily if one can rely on the availability
- of price information to classify high-quality (expensive) items apart from
- their cheaper substitutes.
+ from bare-necessities, we have focussed on separating a consumer's short-term
+ needs (i.e.
+ quality) from her long-term needs (inclusive of long-term durable goods
+ - referred to as LTDG in the study and the longer term socio-economic standing
+ formed with skills, occupation of the family etc.).
+ Neither the measurement of the quality nor of socio-economic standing of
+ the consumer seems trivial - since the typical diary and recall methods
+ in a survey measure neither one of them.
+ Assuming that quality would be priced in the market, we can determine quality
+ selected by the consumer by using the prices of the varieties of an item.
  In the Tanzanian LSMS data therefore, eggs and milk are deemed of lower
  quality than goat and beef for proteins.
  Similarly for transport, bicycle is deemed of lower quality than car and
@@ -633,16 +668,16 @@ key "UstunerHolt2010"
  health studies.
  The long-term utility of the consumer in the model thus consists of a vector
  of income, education and region/locality/neighborhood as well as the long-term
- durable goods possessed by the consumer.
+ durable goods (LTDG) possessed by the consumer.
  
 \end_layout
 
 \begin_layout Standard
-Our goal in the current chapter is to not as much to detail the nuances
- of status consumption in sub-Saharan Africa as it is to outline how status-rela
-ted consumption could be viewed in a conventional model for consumer demand.
- An interpretation on status consumption is possible, if we base ourselves
- on the assertion that for status-related consumption to exist, it must
+Our goal in the current chapter is not as much to detail the nuances of
+ status consumption in sub-Saharan Africa as it is to show how status-related
+ consumption could be viewed in a conventional model for consumer demand.
+ An interpretation of status consumption is possible, if we base ourselves
+ on the assertion that for status-related consumption to exist, status must
  appear in the long-term utility for the rational consumer in a model.
  In other words, for a rational consumer to spend on status consumption,
  she must see some status utility from consumption in the long-term or the
@@ -650,40 +685,40 @@ ted consumption could be viewed in a conventional model for consumer demand.
  We don't attempt to explain to what extent is status a long-term concern
  vs a short-term concern for the consumer.
  Nor do we intend to take an ideological stance on whether status consumption
- is wasteful or an indication of social mobility.
- Regardless of what items are counted towards a certain definition status
- consumption, we should be able to test from the data if expensive nondurable
- consumption (ENDC) increases with changes towards industrialisation (as
- seems to be the case when reading Veblen
+ is wasteful or a consequence of social mobility.
+ Regardless of what items are counted within a certain definition of status
+ consumption, we rely on the ability to test if expensive nondurable consumption
+ (ENDC) increases with changes towards industrialisation (as seems to be
+ the case when reading Veblen
 \begin_inset CommandInset citation
 LatexCommand cite
 key "VeblenLeisureClass"
 
 \end_inset
 
-) or if ENDC is always used to compensate for not having as much as status
- and durable goods as others.
- The change in ENDC with respect to price changes could provide a further
- details if we can measure the sensitivity of ENDC to price-rises, we can
- assess whether ENDC moves together with measures of social mobility in
- the economy (i.e.
+) or if ENDC is always used to compensate for not having as much status
+ and durable goods (LTDG) as others.
+ The change in ENDC with respect to price changes could provide further
+ details on the structure of quality demand.
+ More particularly, if we can measure the sensitivity of ENDC to price-rises,
+ we can better assess whether ENDC moves together with measures of social
+ mobility in the economy (i.e.
  purchase of assets or an upward movement in education and occupation for
  a member of the household) or if the different economic strata (classified
- in terms of occupation-rank or education levels) spend differently on ENDC
- in face of price changes.
+ in terms of occupation-rank or education levels) continue to spend differently
+ on ENDC in face of price changes.
 \end_layout
 
 \begin_layout Standard
-This basic framework can also be used to compare the developing and the
- developed economies.
- Since the durable goods have a higher upfront cost compared to the quality
- consumption, the accumulation of durable goods is a clear indicator of
- the consumer's high expectation of the stability of her income (if not
- a real stability of high income).
- We may thus compare the accumulation of long-term durable goods (LTDG)
- in a developed economy with that of in developing economy by ordering the
- LTDG in the markets based on their cost of acquisition.
- The differences in the costs of the two successive LTDG in this 
+This basic framework can also be used to compare the long-term demand in
+ developing and the developed economies.
+ Since the durable goods (LTDG) have a higher upfront cost compared to the
+ quality consumption, the accumulation of durable goods (LTDG) is a clearer
+ indicator of the consumer's high expectation of the stability of her income
+ (if not a real stability of high income).
+ To standardise the LTDG options available to the consumer, we can order
+ the LTDG in the respective markets based on their costs of acquisition.
+ The differences in the costs of two successive LTDG in this 
 \begin_inset Quotes eld
 \end_inset
 
@@ -692,29 +727,85 @@ cost-order
 \end_inset
 
  for LTDG present the substitutability between acquisition of durable goods
- and quality consumption.
+ and quality consumption to the consumer.
  A higher difference between two successive LTDG costs is likely to make
- the consumption of quality more tempting for a consumer.
- In the developing world, not only are the markets underdeveloped to make
- rental options available for an expensive durable good (LTDG), there is
- somewhat of an absence of credit facilities as well.
- Both of these make the difference between successive LTDG costs higher
- than in the developed countries (where markets are more developed and either
- some credit to purchase LTDG or a direct rental of LTDG is made available
- to consumer).
- The differences in cost-order can thus provide a way to compare the consumer
- markets between the two economies and provide a way to compare the demands
- relative to the differences in consumer markets.
+ the consumption of quality more tempting for the consumer - whereas low
+ differences would make the acquisition of LTDG easier.
+ The differences in successive LTDG costs are indeed a consequence of how
+ advanced the markets are in an economy.
+ In the developing world, we see that the markets are often too underdeveloped
+ to make rental options available for an expensive durable good (LTDG) to
+ the consumer, the attempts to develop new (cheaper) substitutes to reach
+ to the consumer are often inadequate and there is a near absence of credit
+ facilities.
+ Hence, the differences between successive LTDG costs relative to average
+ income is likely to be higher in the developing world than in the developed
+ countries (where markets are more developed and either some credit to purchase
+ LTDG or a direct rental of LTDG is made available to consumer)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This is of course - assuming that all products (at whatever cost) can be
+ purchased in the developing world.
+ The differences between successive LTDG costs would be significantly lower
+ if if the consumer baskets are limited in the developing world through
+ trade barriers etc..
+\end_layout
+
+\end_inset
+
+.
+ The differences in cost-order thus provide us a way to compare the consumer
+ markets between the two economies – and thus to compare the demands (EDNC
+ vs LTDG) with respect to the differences in the respective markets.
+\end_layout
+
+\begin_layout Standard
+In the sections that follow we explain how comparing quality in expensive
+ non-durable consumption with the long-term possessions can provide us a
+ way of understanding status-related consumption.
+ In Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:LiteratureReview"
+
+\end_inset
+
+, we survey the literature on status-related consumption and argue how a
+ separation between long-term and short-term needs can relate consumption
+ with observed social mobility.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+
+\end_inset
+
+ discusses a few popular models for demand and their relevance to an econometric
+ study of quality - before developing a measure for quality to be used across
+ all the commodity groups.
+ The subsequent sections discuss the Tanzanian consumption data and the
+ conclusions arrived at from a comparison of quality consumption across
+ the different economic strata in Tanzania.
 \end_layout
 
 \begin_layout Section
 Literature Review
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:LiteratureReview"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Since elasticities were first used in demand analysis, the change in needs
- for commodity groups over time has been of interest to econometricians.
- Here, both the behavioural and classical approaches seem to find an evidence
+Ever since elasticities were first used in demand analysis, the change in
+ needs for commodity groups over time has been of interest to econometricians
+ and policy makers.
+ Here, both the behavioural and classical approaches seem to find some evidence
  for habit formation in the consumer panel data.
  The measurement of the effect of change in habits and quality on the consumer
  price index has had a long tradition (see Fisher-Shell
@@ -731,24 +822,27 @@ key "MuellbauerRationalityMyopia1988."
 
 \end_inset
 
- observed that a model for myopia amongst consumers could explain their
+ has observed that a model for myopia amongst consumers could explain their
  preferences better.
- In later works where a general setting of the intertemporal substitution
- problem in a life-cycle context is used, a rational utility-optimising
+ In more recent studies where a general setting of the intertemporal substitutio
+n problem in a life-cycle context has been used, a rational utility-optimising
  consumer can balance between the non-durable and durable consumption based
  on her planned and actual savings over her life-time.
- This is the setting explored by a few recent behavioural approaches (see
- Shefrin-Thaler 
+ This is the setting explored by a few behavioural approaches (see Shefrin-Thale
+r 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ShefrinThaler1988"
 
 \end_inset
 
-) that have attempted to model the rules of mental accounting used by consumers.
- Such models can explain consumers' inertia of choices and allow the representat
+) that have attempted to model the rules of mental accounting used by consumers
+ - in order to better understand the conditions that lead to development
+ of habits.
+ Such models explain the consumers' inertia of choices and allow the representat
 ive consumer to be influenced by behavioural factors such as willpower rather
- than be subservient to an optimised plan for life-time savings and consumption.
+ than letting them become subservient to an optimised plan for life-time
+ savings and consumption.
  In what may be seen as a more accurate representation of real-life consumer
  behaviour, the representative consumer in such models is subject to accumulatin
 g items that she doesn't need and acquiring habits of consumption she could
@@ -756,9 +850,9 @@ g items that she doesn't need and acquiring habits of consumption she could
 \end_layout
 
 \begin_layout Standard
-Another thread of empirical literature observes how social identities may
- also play a role in the way assets are accumulated over generations and
- passed on as endowments.
+Another thread of empirical literature observes how social identities play
+ a role in status-signalling and the way assets are accumulated over generations
+ and passed on as endowments.
  Empirical studies in both the developed world and the developing countries
  have found social group identities relevant to consumption (see Chao et
  al.
@@ -794,26 +888,25 @@ key "ZahraIndia"
 
 ).
  We note that a behavioural model can incorporate such behaviour with the
- use reference points in the consumer's utility (see Markowitz
+ use of reference points (see Markowitz
 \begin_inset CommandInset citation
 LatexCommand cite
 key "MarkowitzUtil1952"
 
 \end_inset
 
-).
- The use of reference points after all isn't limited to the controlled settings
- of a behavioural experiment.
- For example, Robert Frank
+) - whose applicability clearly isn't limited to the controlled settings
+ of a behavioural experiment alone.
+ Robert Frank
 \begin_inset CommandInset citation
 LatexCommand cite
 key "FrankPond"
 
 \end_inset
 
- finds that signaling needs become more important amongst the lower economic
- strata when they are huddled in the overpopulated suburban areas of big
- cities in the US.
+, for example, finds that signaling needs become more important amongst
+ the lower economic strata when they are huddled in the overpopulated suburban
+ areas of big cities in the US.
  A more general approach to social order is proposed by Corneo et al 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -837,11 +930,12 @@ key "ColemanSocialTheory1990"
 A discussion of trends identified in the two threads of literature is possible
  in the context of rapidly-changing developing countries where urban industriali
 sation and overpopulation create vast differences in the life-styles between
- urban and rural areas.
+ urban and rural areas while the status competitions in the society continue
+ to thrive.
  Although a detailed time-series of consumption microdata matching the respectiv
 e quality in the developed world is hardly available in the developing countries
-, a similar framework for risk preferences can be used to understand the
- consumer demand in the developing countries.
+, a framework for risk preferences can be used to understand the consumer
+ demand in the developing countries.
  An important economic model for urban and rural interactions is the Lewis
  model 
 \begin_inset CommandInset citation
@@ -856,18 +950,18 @@ key "GollinLRF"
 re to industry).
  The worker/farmer is meant to maximise her income and reduce the risk associate
 d with it as she is faced with the choice of migration to the urban areas.
- In this study, we argue that the flight to urban areas is often not only
- an escape from despondent circumstances but also an access to expanded
- consumption basket and a chance for improbable social mobilities.
+ We argue that the flight to urban areas is often not only an escape from
+ despondent circumstances but also an access to expanded consumption basket
+ and a chance for improbable social mobilities.
  Therefore, a model that accounts for the competition amongst the individuals
- for status or a place in a perceived social order could provide a refinement
+ for status or a place in a perceived social order could provide some refinement
  by adding more incentives to the migration.
 \end_layout
 
 \begin_layout Standard
-The literature on development economics often associates finer trends in
- consumption with the interaction between introduction of industrial goods
- and status needs of the consumers.
+The literature on development economics has often attempted to associate
+ finer trends in consumption with the interaction between introduction of
+ industrial goods and status needs of the consumers.
  Deaton and Dreze
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -888,15 +982,14 @@ key "Sen2005Calories"
  of non-food items.
  From a behavioural economics perspective, this would amount to a change
  in the reference points for non-food consumption.
- An issue with the use of reference points, however, is its measurement
+ An issue with the use of reference points, however, is their measurement
  in the large-scale microdata.
  Unlike in the controlled settings of an experiment, where the reference
  points can be specified more clearly, they are more difficult to justify
  in the consumption microdata.
- But as long as a separation between the bare necessities and luxuries can
- be justified (i.e.
- a reference point for subsistence) a framework for measurement of consumption
- can be used to understand the change in needs of a society.
+ But as long as a separation between the bare necessities and luxuries (i.e.
+ a reference point for subsistence) can be justified a framework for measurement
+ of consumption can be used to understand the change in needs of a society.
  Studying 
 \begin_inset Quotes eld
 \end_inset
@@ -920,20 +1013,23 @@ key "FrieheGermany"
  income inequalities, distribution of resources etc.) can be controlled for
  in the data, then a general model for long-term (or more stable) needs
  against short-term (or more uncertain) needs could explain the demand pressures
- induced by the differences in both the developed and developing economies.
+ induced by the income differences in both the developed and developing
+ economies.
 \end_layout
 
 \begin_layout Standard
-Such a standardisation of factors would however rest upon a precise definition
- of status and the consumption associated with it.
- Unfortunately the definition for status consumption seems to vary across
- social contexts in the studies we have surveyed.
+Such a standardisation of demand-influencing factors across the developed
+ and the developing would however rests upon a precise definition of the
+ long-term utility (inclusive of status) and the consumption associated
+ with it.
+ Unfortunately the definition for status consumption in the studies we have
+ surveyed varies significantly across the social contexts.
  For example, some studies include long-term durable goods in the status-related
  items while others don't.
  Others have applied a consumer basket identified from a different economy
  onto the economy being studied.
- Our preference amongst the approaches taken towards status consumption
- leans most towards the utility model adopted by Corneo et al
+ Of all the approaches taken towards status consumption we have surveyed,
+ we prefer the utility model adopted by Corneo et al
 \begin_inset CommandInset citation
 LatexCommand cite
 key "corneo_snobbism"
@@ -941,27 +1037,48 @@ key "corneo_snobbism"
 \end_inset
 
  who view snob and bandwagon items as the fundamental types of status goods.
- It is possible - we believe - to link status-related consumption with the
- theory on consumer decision under risk.
+ It is possible - we believe - to link status-related consumption thus defined
+ with the consumer decision theory under risk.
  From a behavioural economics perspective, status could encompass the consumer's
- preference to long-term protection and hence as a perception of risk associated
+ preference to long-term protection and hence a perception of risk associated
  with the promotion to a state of higher income and assets (or any characteristi
 c that is perceived to have a higher stability of incomes).
- In the context of consumption-data, we fix a certain ontological sense
+ In the context of consumption-data, we thus fix a certain ontological sense
  of status as the risk-adjusted net worth of the individual i.e.
  the total net-worth combined with the risk or 
 \shape italic
 observed 
 \shape default
-probability associated with the transition to the highest band of net-worth.
+probability associated with the transition to the highest band of net-worth
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A better model for status would depend on a certain 
+\begin_inset Quotes eld
+\end_inset
+
+influence-area
+\begin_inset Quotes erd
+\end_inset
+
+ around the individual – since status is inferred from the local context
+ of the consumer.
+ Our attempt to use the risk in net-worth is by definition to standardise
+ the status perceptions at a larger scale (higher level).
+\end_layout
+
+\end_inset
+
+.
  A high-status individual is thus someone who has either or both of high
  income and a high (inter-generational) 
 \shape italic
 observed 
 \shape default
-probability to move to towards the high income group (stability).
- A low-status individual is someone who has either or both of low net worth
- and a low 
+probability to move towards the high income group (stability).
+ In the same ontological sense, a low-status individual is someone who has
+ either or both of low net worth and a low 
 \shape italic
 observed 
 \shape default
@@ -1015,15 +1132,15 @@ probability of status promotion in our model for status.
 \end_layout
 
 \begin_layout Standard
-Higher status individuals - that are more likely to own long-term durable
+Higher status individuals - who are more likely to own long-term durable
  goods (LTDG) and have a 
 \shape italic
 observed 
 \shape default
-probability of staying close to the high-income group are more likely to
- spend on the expensive non-durable consumption (ENDC) as well - but those
- with the lower status can indicate net-worth or participate in social-ranking
- only with ENDC.
+probability of staying close to the high-income group - are more likely
+ to spend on the expensive non-durable consumption (ENDC) as well.
+ On the other hand, those with the lower status can indicate net-worth or
+ participate in social-ranking only with ENDC.
  The sure way of achieving higher status (in its ontological sense) is to
  increase the chances of staying in the high income group but beliefs in
  the power of social ranking through consumption can transform the subjective
@@ -1056,9 +1173,9 @@ perceived
 \shape italic
 observed 
 \shape default
-probability of social mobility is a question that remains to be answered
- - but before we address that issue, it is worth emphasising just how often
- the distinction between the 
+probability of social mobility is an important question that still remains
+ to be answered - but before we address the issue, it is worth emphasising
+ just how often the distinction between the 
 \shape italic
 perceived 
 \shape default
@@ -1066,7 +1183,8 @@ and
 \shape italic
 observed 
 \shape default
-probabilities of social mobility is omitted in the popular economics discourse.
+probabilities of social mobility is omitted in the popular discourse on
+ normative economics.
  The idea that the differences in purchasing power between the sections
  of a society and the desire for mobility amongst them can drive consumption
  and economy dates back at least as far as Adam Smith who had proposed that
@@ -1081,8 +1199,8 @@ key "SmithMoralSentiments"
 .
  The stable net-worth model for status where individuals optimise expenditure
  based on future income expectations - may look promising in the sub-Saharan
- African economies if one considers that in any post-feudal society all
- over the world, a promise for social mobility has picked up some importance.
+ African economies too - if one considers that in any post-feudal society
+ all over the world, a promise for social mobility has been of some importance.
  In nearly all the developing countries, we see a new working class having
  replaced the feudal or colonial systems of the century before - developments
  that make one compare the status competitions in the post-war Africa and
@@ -1123,17 +1241,26 @@ Sanskritization
 \end_layout
 
 \begin_layout Standard
-One is tempted to assume that believing in social mobility could invariably
- lead to the development in economic institutions and a consequent rise
- in incomes but the historical data often shows relevance of other factors.
- For example, we observe that social identities still seem to matter for
- the net-worth of an individual in the developing world (arguably because
- Adam Smith's principles were never permitted to thrive).
+The similarities in contexts seem to offer a convincing evidence that believing
+ and acting in hopes of social mobility could invariably lead to the development
+ in economic institutions and a consequent rise in incomes.
+ It may seem therefore that the distinction between the 
+\shape italic
+perceived 
+\shape default
+and 
+\shape italic
+observed 
+\shape default
+mobilities is rather unnecessary.
+ However, most studies on social-mobility do point to a relevance of social
+ identities - particularly in the developing world (arguably where Adam
+ Smith's principles were never permitted to thrive).
  Since the changes in political landscape of Africa and Asia have been recent,
  the effects of past political conflicts still reflect themselves into the
  differences in occupational-classes and educational levels.
- In the developing countries, both social mobility and consumption are thus
- often influenced by social identities (see Khamis at al
+ In the developing countries, thus both social mobility and consumption
+ are influenced by social identities (see Khamis at al
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ZahraIndia"
@@ -1147,8 +1274,8 @@ key "KausSA"
 
 \end_inset
 
-) - whose evolution over time has been shaped by the factors outside the
- realms of consumption and income.
+) - whose evolution over time is shaped by factors well outside the realms
+ of consumption and income.
 \end_layout
 
 \begin_layout Standard
@@ -1168,18 +1295,32 @@ key "BlandenSocMobility2008"
 \shape default
 ) on the measurement of social mobility based on the life-cycle transition
  in the identified income and occupation groups).
- The dynamics of status are in fact far more complex and even if we view
- these dynamics as stochastic transition of the status determinants (i.e.
- education, income and identity etc.), their evolution over time remains
- dependent on unobservable parameters - preventing us from drawing meaningful
- conclusions from the model.
- For the model to make an empirical sense, there are two primary issues
- with the uncertainty of status determinants that must be addressed.
+ The dynamics of status - expressed as risk-adjusted net-worth - are in
+ fact far more complex and even if we view these dynamics as stochastic
+ transition of the status determinants (i.e.
+ education, income and identity etc.), the evolution of status (stable net-worth)
+ over time - whose expectation is gauged by the consumer's 
+\shape italic
+perceived 
+\shape default
+probability of promotion - remains dependent on unobservable parameters.
+ This prevents us from modeling the 
+\shape italic
+observed 
+\shape default
+vs 
+\shape italic
+perceived
+\shape default
+ probabilities.
  
 \end_layout
 
 \begin_layout Standard
-First is the uncertainty in income growth arising out of political risk.
+For such an analysis to make an empirical sense, there are two factors which
+ influence the uncertainty in status determinants that ought to be parametrised.
+ First is the set of political risks that influence the uncertainty in income
+ growth.
  Since both high and low social mobilities are associated with political
  changes, the uncertainty in incomes is less deterministic at high and low
  levels of social mobility.
@@ -1195,8 +1336,8 @@ First is the uncertainty in income growth arising out of political risk.
 Second is the role played by the state and welfare institutions in the transitio
 n of status determinants.
  The consumer's expected growth in the educational levels and other status
- determinants are likely to influence consumption - but are essentially
- public goods i.e.
+ determinants are likely to influence consumption - but these determinants
+ are essentially public goods i.e.
  the expectation for their growth depends on the strength of the state instituti
 ons.
  In the developed world, the state institutions often intervene when market
@@ -1240,7 +1381,7 @@ nts of status e.g.
  the state (as is the case in the developing world), a consumer would associate
  higher risk with the expected growth in education.
  Thus indirectly, education is more likely to matter for expected status
- (or even income growth).
+ (or even income growth) without the state-support.
  In a comparison between two economies with different degrees of state support,
  the strength of institutions determines the expectation of accumulation
  of public goods (such as family education level).
@@ -1267,12 +1408,13 @@ assumptions on the supply (e.g.
 priced
 \shape default
  in the market (e.g.
- by assuming that consumers pay fair taxes to sustain state institutions),
- we could study the relationship between consumption and long-term status
- with the observed-prices of the consumption items in the market.
+ by assuming that consumers pay fair taxes to sustain state institutions
+ etc.), the relationship between consumption and long-term status can still
+ be established with the observed-prices of the consumption items in the
+ market.
  However conclusions from such a model can only be as strong as the assumption
- of status (or status determinants) being priced in the market and the quality
- of data available on changes in status determinants.
+ of status (or status determinants) being accurately priced in the market
+ and the quality of data available on changes in status determinants.
  The approach of interpreting status in terms of tangible measures of status
  determinants such as education or occupation may solve the problem of non-obser
 vability of status perceptions, but it doesn't solve the problems of measuring
@@ -1280,9 +1422,9 @@ vability of status perceptions, but it doesn't solve the problems of measuring
  or how much trust exists in the government policies.
  Hence the parameters which govern the expectations of growth in education
  and income would remain intractable.
- If the available data to answer such questions is less reliable than the
- data available on consumption itself, one cannot establish a strong relationshi
-p between status and consumption.
+ Further, if the available data to answer such questions is less reliable
+ than the data available on consumption itself, one cannot establish a strong
+ relationship between status and consumption.
  The exercise to understand how status determinants influence consumption
  is hardly a futile one but how the micro-structure of consumption influences
  the longer-term development of status is a more complex phenomenon and
@@ -1302,8 +1444,8 @@ observed
 
 \begin_layout Standard
 Much of the literature on status consumption however seems to engage in
- some social commentary without a precise ontological sense of status and
- the distinction between people's beliefs and real social mobility (see
+ a sort of social commentary without a precise ontological sense of status
+ and the distinction between people's beliefs and real social mobility (see
  Manski
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1411,40 +1553,43 @@ observed
 \shape default
 probabilities (which influence social mobility) would require a reasonable
  model for socio-political changes.
- The other issues is the measurement of status perception - which cannot
- be made available except through through a direct survey of consumers.
- Fortunately still, the role of status on consumption in the long run is
- relatively easy to determine.
- With a rather dismal point of view, we can be sure that in the long-run
- there is little more than the net asset worth of the individual and a probabili
-ty determined by factors more tangible (and measurable) than perception
- (e.g.
+ The measurement of status perception itself is not possible except through
+ a direct survey for consumers.
+ For a longer-term view, however, it is still possible to differentiate
+ between items that are passed on to the next generation and those that
+ aren't.
+ With the dismal point of view which is characteristic of our discipline,
+ we can be sure that in the long-run there is little more than the net asset
+ worth of the individual and a probability determined by factors more tangible
+ (and measurable) than perception (e.g.
  skills, education, class, identity etc.) that are passed over as inheritance
  and contribute to 
 \shape italic
 observed 
 \shape default
 social mobility.
- Thus, over generations (i.e.
+ Therefore, over generations (i.e.
  in the sufficiently long-term), how individuals perceive themselves matters
  towards status only as long as believing so leads to an 
 \shape italic
 observed 
 \shape default
-growth through net asset worth or the probability associated with the status
- determinants (e.g.
+growth through net asset worth or the 
+\shape italic
+observed 
+\shape default
+probability associated with the status determinants (e.g.
  skills, education, social identity etc.).
- Therefore, status - defined in the long term as the propensity towards
- net asset worth - would completely ignore the habits towards the non-durable
- consumption of the past.
+ Status - defined in the long term as the propensity towards net asset worth
+ - would completely ignore the habits towards the non-durable consumption
+ of the past.
  
 \end_layout
 
 \begin_layout Standard
 This hinges the much needed separation between the long-term (more stable)
- needs of the consumer from the short-term (more volatile) needs of the
- consumer and establishes this comparison as the basis for the difference
- between 
+ needs of the consumer from her short-term (more volatile) needs.
+ We use this separation as the basis for the difference between 
 \shape italic
 perceived 
 \shape default
@@ -1453,9 +1598,21 @@ and
 observed 
 \shape default
 social mobility probabilities.
- This is particularly attractive from an empirical perspective since the
- average life-time of a product being consumed is a far more objective measure
- than its status-carrying potential.
+ Whatever can't be passed on isn't long-term and would not cause any observable
+ change in mobility.
+ Regardless of how 
+\shape italic
+perceived 
+\shape default
+probability evolves for an individual over a life-time, the 
+\shape italic
+real 
+\shape default
+probability is always reset at the start of a life-time.
+ The difference between the long-term and short-term needs is also attractive
+ from an empirical perspective since the average life-time of a product
+ being consumed is a far more objective measure than its status-carrying
+ potential.
  Indeed not all high-quality consumption is related to a possible social
  order- some commodity groups are more important for signaling than others
  (we consider these later in the discussion on visibility).
@@ -1509,7 +1666,7 @@ In the current chapter we therefore attempt to measure how consumers may
  The perceptions of consumers do not serve as an input to the current model
  - and hence no attempt is made to measure status or to model self-evaluation
  of the consumers in the study.
- Instead, we focus on how demand for quality and long-term durable goods
+ Instead, we focus on how the demand for quality and long-term durable goods
  evolves when subjected to changes in supply of items, their price and rise
  in consumer incomes.
  
@@ -1518,10 +1675,10 @@ In the current chapter we therefore attempt to measure how consumers may
 \begin_layout Standard
 As we've argued before, to say that the long-term dynamics of status determinant
 s are complex is not to say that consumption isn't shaped by status (stable
- net-asset-worth).
+ net-asset-worth in the ontological sense).
  Hence we argue against the use of the deterministic models of demand for
- status consumption - since the rational consumer has no reason to engage
- in any status related consumption (neither in short-term nor in long-term)
+ status consumption - as the rational consumer has no reason to engage in
+ any status related consumption (neither in short-term nor in long-term)
  when she knows all about her future plans.
  As Thaler et al
 \begin_inset CommandInset citation
@@ -1547,8 +1704,8 @@ key "VeblenLeisureClass"
  is some utility to be derived by spending on status.
  Whether the consumers do so due to habits, myopia or longer-term expectation
  of status is a difficult question that we don't attempt to answer by studying
- of consumer data (and is not needed by a revealed preference analysis).
- However, it is possible to measure how the consumer balances her short-term
+ of consumer data (and it is not needed for any revealed preference analysis).
+ It is nevertheless possible to measure how the consumer balances her short-term
  expectations vs long-term expectations in the presence of factors that
  may determine status in the long-term and this shall be attempted in the
  current chapter.
@@ -1639,8 +1796,8 @@ Instead of deciding on a crisp boundary between visible and non-visible
  ownership of long-term durable goods (LTDG - which signal that it'll take
  longer for others to acquire a particular costly item).
  Visibility is relevant to both ENDC and LTDG.
- Our focus on quality criteria rather than visibility is not intended to
- diminish the role of 
+ Our focus on quality criteria rather than visibility thus is not intended
+ to diminish the role of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1665,9 +1822,16 @@ visible
  In our original problem of status consumption, while it is true that individual
 s spend more on their outward appearances (despite controlling for everything
  else like occupation, income), visible consumption is not all what status
- consumption may comprise of (
+ consumption may comprise of (see the Figure 
 \bar under
-see the Figure
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:termsvenn"
+
+\end_inset
+
+
 \bar default
  and Eastman 
 \begin_inset CommandInset citation
@@ -1708,20 +1872,68 @@ In summary, the current model for long-term and short-term needs does not
  social mobility - which is influenced more with long-term possessions than
  non-durable consumption.
  In terms of the model, an identity (religious, racial etc.) may carry status
- only through a history of past LTDG ownership, incomes/occupations and
- persistent-high quality consumption (a criterion that may allow us to quantify
- the role of identity in status).
+ only through a history of past LTDG ownership, incomes/occupations (a criterion
+ that may allow us to quantify the role of identity in status).
  The model doesn't attempt to track evolution of status - but is only interested
  in how consumption can change under different strata of status - by focusing
  only on long-term utility through accumulation of durable goods and the
- short-term utility of quality apart from the general needs.
+ short-term utility of quality of quality in non-durable consumption apart
+ from the fulfillment of general needs.
  A comparison between two countries based on these criteria can tell us
  about the effect of supply issues and inequalities on consumption of quality.
  
 \end_layout
 
+\begin_layout Standard
+\paragraph_spacing single
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename conpicuous_cons_venn.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:termsvenn"
+
+\end_inset
+
+Terms associated with conspicuous consumption (drawn not to scale)
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Model
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Model"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1826,14 +2038,16 @@ Substitution between Quality and Needs
 \end_layout
 
 \begin_layout Standard
-The goal of our model for long-term and short-term needs is to measure the
- distribution of the quality of consumption and the ownership of assets
- throughout the population.
- The items of high-quality can exist in every category and they are not
- assumed be equivalent or substitutable (kobe beef cannot be substituted
- with a luxury travel as is).
- Due to assumptions of seperability and substitution within the group, we
- do not consider the consumption on a group of 
+The goal of the model for long-term and short-term needs in the current
+ chapter is to measure the distribution of the quality of consumption and
+ the ownership of assets throughout the population.
+ The items of high-quality can exist in every category and while they are
+ not assumed be equivalent there may be some substitution amongst them (kobe
+ beef cannot be substituted with a luxury travel as is - but a high standard
+ of life can be indicated by either or both of them).
+ Due to assumptions of seperability and substitution within the broad commodity
+ groups of food, energy, transport etc., we do not consider the consumption
+ on a group of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1842,9 +2056,10 @@ high-quality
 \end_inset
 
  items as a separate commodity group (which is indeed the route taken by
- the studies in conspicuous consumption ).
- Instead of purchasing an overall quality, we consider how consumers put
- some weight on higher-quality within each commodity group ( i.e.
+ the studies in conspicuous consumption for the simplicity it brings when
+ combined with the assumption of futility of conspicuous consumption).
+ Instead of purchasing overall quality, we consider how consumers put some
+ weight on higher-quality within each commodity group ( i.e.
  the portion of total expenditure spent on the expensive non-durable consumption
 ) based on their tastes and prices of higher quality in every category.
  
@@ -1908,11 +2123,11 @@ If we now turn to the effect of price changes, then we must consider the
  that the essential needs are independent of the wealth of the consumer.
  In the example, therefore, one could proxy the needs of the family with
  simply the number of family members and their age.
- In terms of the model, the difference between the status of a rich and
- a poor family is not through disparate educational needs of the rich and
- poor children but instead through a more general need for the family to
- maintain status across all categories - a task that is better afforded
- with higher income.
+ In terms of the model, notice that the difference between the status of
+ a rich and a poor family is not through disparate educational needs of
+ the rich and poor children but instead through a more general status-need
+ for the family to maintain quality across all categories - a task that
+ is better afforded with higher income.
  The aggregate sense of status through consumption is derived by expensive
  non-durable consumption and possession of LTDG in all commodity groups
  - driven by wealth and income of the consumer (rather than high-class or
@@ -1920,47 +2135,64 @@ If we now turn to the effect of price changes, then we must consider the
 \end_layout
 
 \begin_layout Standard
-While a time-series formulation of the model is postponed until a later
- chapter, is is worth clarifying that the expensive nondurable consumption
- (ENDC) weights contribute to status over a long-period of time - except
- for which the long-term utility is influenced by LTDG purchases and the
- occupation-education-region vector.
- We maintain the view status is not achieved with short-run purchases -
- but the planning for high-status over the life-time and the attempts to
- get into a rich-club can be indicated by a disproportionately high expenditure
- on high quality consumption.
+—The difference between needs and non-needs is critical and we take a view
+ only consider basic needs as needs –
 \end_layout
 
 \begin_layout Standard
-In other words, faced with a choice of fulfillment of essential needs and
- higher quality, one would reduce the quality immediately.
- Needs of a particular calorie-quote for energy are more important than
- consuming electricity.
- There is indeed both myopia and inertia in the choices - therefore a consumer
- is likely to switch to electricity or better meat when she receives a higher
- income and has propensity to stick to them when the prices increase.
- The consumption in the next cycle therefore depends on the current ownership
- of assets and the current quality.
+While a time-series formulation of the model is postponed until a later
+ chapter, it is worth reiterating that the expensive nondurable consumption
+ (ENDC) weights do not contribute to status over a long-period of time -
+ the long-term utility is influenced only inheritable LTDG purchases and
+ the occupation-education-region vector.
+ We maintain the view that status - in its ontological sense - is not changed
+ with short-run purchases - even though the planning for high-status over
+ the life-time and the attempts to get into a rich-club can be indicated
+ by a disproportionately high expenditure on high quality consumption.
+\end_layout
+
+\begin_layout Standard
+This view also supports the idea that faced with a choice of fulfillment
+ of essential needs and higher quality, one would reduce the quality immediately.
+ Needs to meet a particular calorie-quota for energy are indeed more important
+ than consuming electricity 
+\shape italic
+per se
+\shape default
+.
+ However, there is both myopia and inertia in the choices - therefore a
+ consumer is likely to switch to electricity or better meat when she receives
+ a higher income and has propensity to stick to these choices when the prices
+ increase.
+ In a times-series analysis, the consumption in the next cycle would thus
+ depend on the current ownership of assets and the current quality.
  In addition to the state of the consumer, such demands are shaped also
  by the introduction of LTDG and high-quality products.
- We explore in the analysis of the time-series of ownership in a later chapter.
+ The distribution of quality across commodity groups is the subject of the
+ next subsection.
 \end_layout
 
 \begin_layout Standard
-If we were to compare two countries in terms of the model, the supply issues
- do matter.
- While we identify the six categories in the data from consumption survey,
- we also recognise that quality variation doesn't always exist in the market
- for every category.
- For example, in Tanzania - the car rental market seems small and the variation
+While these issues are to be explored when formulating a time-series model
+ of ownership in a later chapter, at this point we 
+\bar under
+only highlight the relevance of supply issues (why supply issues and why
+ comparison)
+\bar default
+ in a comparison between any two countries.
+ While we can identify a fixed number of commodity groups in the consumption
+ data in a selected country, we should recognise that the quality variation
+ may not exist in the market for a certain commodity group in one country
+ while it does in the other.
+ For example, in Tanzania - the car rental market is small and the variation
  in the quality of cars being sold may be smaller than in a typical city
  in the developed world.
- When quality variation is not observed, only the relevant assets in a category
- can bring status.
- If status needs are fixed over short-term, then the unavailability of the
- quality variation in the category would either increase the savings for
- the next available asset in the category or increase the quality consumption
- in some other category (assuming status needs remain the same).
+ It is clear that when quality variation is not observed in a commodity
+ groups, only the relevant LTDG in the group can bring status.
+ Thus, the unavailability of the quality variation in the category would
+ either increase the savings for the next available LTDG in the commodity
+ group or increase the quality consumption in some other commodity group
+ (assuming status needs remain the same).
  These 
 \begin_inset Quotes eld
 \end_inset
@@ -1969,8 +2201,8 @@ jumps
 \begin_inset Quotes erd
 \end_inset
 
- in quality in fact are what make the distinction between the developed
- and the developing countries.
+ in quality - we argue - are what make for the differences in life-style
+ between the developed and the developing countries.
  
 \end_layout
 
@@ -1979,13 +2211,14 @@ Substitution in quality across commodity groups
 \end_layout
 
 \begin_layout Standard
-Before formulating our model, we explain why a model for quality-substitution
- depends on a measure for quality applicable across all commodity groups.
+Before formulating the specifics of our model, we explain why a model for
+ quality-substitution depends on a measure for quality applicable across
+ all commodity groups.
  We then explain the other level of substitution that associates the ownership
  of long-term durable goods (LTDG) with quality.
  Explaining why neither a two-state budgeting model nor a simple-repackaging
- model would be suitable for this substitution, we motivate a discrete model
- for utility for the substitution.
+ model would be suitable for this substitution, we then motivate a discrete
+ model for utility for the substitution.
 \end_layout
 
 \begin_layout Standard
@@ -2018,11 +2251,12 @@ It could be of further interest to see how such a preference order of commodity
 \end_layout
 
 \begin_layout Standard
-It is tempting to view this quality-substitution in a a two-state budgeting
+It is tempting to view this quality-substitution with a two-state budgeting
  model - which is based on a hierarchy of separable needs and is commonly
  used in the literature on household demand.
  To proceed with this model, one may consider the proportion of expenditure
  on high quality in every commodity group for every consumer (let's say
+ 
 \begin_inset Formula $\lambda=(\lambda_{1},\lambda_{2},...,\lambda_{c}...,)$
 \end_inset
 
@@ -2092,10 +2326,20 @@ key "PhilipsAppliedCons,DeatonEconConsumer"
 
 \begin_layout Standard
 This condition - however - falls apart if we introduce the substitution
- for quality across the commodity group.
+ for quality across the commodity groups.
  More particularly, if we assume that a consumer gets quality utility from
- using electricity and from eating beef interchangeably, then having decided
- on 
+ using electricity and from eating beef interchangeably
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+There may be indeed a preference to quality from electricity than quality
+ from beef for the same expenditure.
+\end_layout
+
+\end_inset
+
+, then having decided on 
 \begin_inset Formula $x_{F},x_{E}$
 \end_inset
 
@@ -2119,7 +2363,20 @@ key "PhilipsAppliedCons,DeatonEconConsumer"
 
 ) - and so even though a tree-structure could present a relevant view of
  the hierarchy of commodity groups, we cannot accept the model due to the
- weak separable condition on overall quality.
+ weak separable condition on overall quality
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+While quality is substitutable across multiple commodity groups, one can
+ also argue that quality consumption across categories must move together
+ - thus there is no perfect substiutability in quality from multiple commodity
+ groups 
+\end_layout
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -2170,7 +2427,7 @@ A strong distinction between the two types of commodity groups simplifies
  With this condition, there are only two ways a consumer can spend on short-term
  consumption - either by switching between the variants of an item (choosing
  higher or lower quality of a composite good) or spending more on an elementary
- good.
+ good (where quality variation doesn't exist).
  For example, since quality variation doesn't exist in transport and housing
  data in the Tanzanian survey, the consumer is assumed to spend on 
 \begin_inset Quotes eld
@@ -2186,24 +2443,7 @@ elementary
  the commodity groups where LTDG exist competes with the group where quality
  variation exists - for the consumer's money.
  The goal of the comparison of ENDC with LTDG is thus to compare the consumer's
- respective short-term needs and long-term needs
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Status can be seen as one of the long-term needs of the consumer.
- While we discuss status utility in a later current chapter, it is worth
- mentioning that since we view status as a ranking order amongst individuals,
- the purchase of long-term durable goods have an immediate impact on status
- (a long-term need) than a sudden increase in quality of non-durable consumption.
- This would be used later in the model of status based on quality and long-term
- durable consumption.
- 
-\end_layout
-
-\end_inset
-
-.
+ respective short-term needs and long-term needs.
 \end_layout
 
 \begin_layout Standard
@@ -2212,7 +2452,7 @@ Assuming that only either ENDC or LTDG can dominate in a category (i.e.
  have quality variation.
  For example, if several types of cars exist in the transport commodity
  group as do the limousine companies for a taxi-commute, then C.1 would ignore
- the quality variation in the either.
+ the quality variation in either one of them.
  To ensure that the quality differences amongst LTDG are not ignored when
  there are quality difference in the non-durable consumption within the
  same category where C.1 is assumed, we impose another relevant condition.
@@ -2234,19 +2474,21 @@ Empirically, this condition is not as problematic as it may at first appear.
  in limousine-companies as long as C.2 is satisfied.
  This is not to say that a model with quality variation amongst LTDG is
  not possible (a consumer can choose between types of housing for example)
- - only that for us to consider the quality differences in housing, we would
- need to relieve the assumption that only one of LTDG or ENDC can matter
- in commodity group (unless one views housing too as non-durable consumption).
+ - only that for us to consider the quality differences in a commodity group
+ (e.g.
+ housing), we would need to relieve the assumption that only one of LTDG
+ or ENDC can matter in commodity group (unless one views housing too as
+ non-durable consumption).
 \end_layout
 
 \begin_layout Standard
-On to the Tanzanian data, where we identify the commodity groups - food,
- energy, housing and transport, it's only food and energy where only quality
- matters (the saving for future is ruled out with non-durable consumption).
+In the Tanzanian data, where we identify the commodity groups - food, energy,
+ housing and transport, it's only food and energy where only quality matters
+ (the saving for future is ruled out with non-durable consumption).
  Further, food is the only group where we have quantity consumed recorded
  - and thus the quality of protein, carbohydrates, beverages etc.
  - each of which is treated as a composite good - is easy to determine.
- We treat Housing and transport, on the other hand, as elementary goods
+ We treat housing and transport, on the other hand, as elementary goods
  (i.e.
  no quality variation is assumed).
  Thus we can measure the overall quality (or other short-term consumption)
@@ -2381,10 +2623,10 @@ w_{c} & =\frac{\sum_{i\in M_{c}}p_{i,c}q_{i,c}}{\sum_{c\in\mathscr{C}}{\sum_{i\i
 So far we have discussed two levels of substitution - the first is between
  quantity and quality in every commodity group and the second between the
  short-term and long-term needs.
- These become easy to integrate due to condition C.1 and C.2.
- More particularly when commodity groups are by dominated either by LTDG
- or by ENDC, the substitution between long-term and short-term needs also
- contributes to the substitution between commodity groups.
+ These become easy to integrate due to the conditions C.1 and C.2.
+ Specifically when commodity groups are dominated either by LTDG or by ENDC,
+ the substitution between long-term and short-term becomes the quality substitut
+ion between the commodity groups.
 \end_layout
 
 \begin_layout Standard
@@ -2514,7 +2756,7 @@ Now let's see how our assumption changes the problem.
 \begin_inset Formula $p_{2}$
 \end_inset
 
- and a set of long-term durable goods whose price 
+ and a set of long-term durable goods whose price is 
 \begin_inset Formula $\Pi_{2}$
 \end_inset
 
@@ -2525,7 +2767,11 @@ Now let's see how our assumption changes the problem.
  (LTDG) .
  In that case, the first-level of substitution would be applicable only
  for group 1 and the second-level of substitution would be driven only by
- the savings for the long-term durable good in the group 2.
+ the savings for the long-term durable good in the group 2 (with price 
+\begin_inset Formula $\Pi_{2}$
+\end_inset
+
+).
  Thus under C.1 and C.2, certain commodity groups being dominated by LTDG
  and others by ENDC associate the second-level of substitution with the
  LTDG ownership in the model.
@@ -2535,11 +2781,11 @@ Now let's see how our assumption changes the problem.
 \end_inset
 
  do not change the substitution much differently from how change in prices
- would.c
+ would.
 \end_layout
 
 \begin_layout Standard
-A simple model to include income would be the 
+A simple model that can include income in the model could be the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2618,7 +2864,7 @@ The base-price should be such that we can view the demand for items with
 ).
  Here, an implicit assumption is that the variants in every category are
  perfect substitutes.
- In terms of a cost function, we can 
+ In terms of a cost function, we can write
 \end_layout
 
 \begin_layout Standard
@@ -2654,8 +2900,7 @@ energy
 \end_inset
 
  with base-price of kerosene and makes the expression of electricity consumption
- in terms of the quantity and price of kerosene consumed somewhat of a stretched
- justification.
+ in terms of the quantity and price of kerosene consumed somewhat of a stretch.
  To proceed, one must consider how using electricity would change the utility
  for food (with refrigerator), household consumption (hair-dryers) etc..
  The classical approach taken by Fisher and Shell 
@@ -2676,8 +2921,8 @@ s that improve the quality of other goods.
  With a tree-like structure, one needs to only look at the nodes of the
  trees i.e.
  adjust the price of all food items whose quality is improved.
- In that way, instead of adjusting the price for energy, one would adjust
- the price food as well.
+ In addition to adjusting the price for energy, therefore one would also
+ adjust the price for food.
  It is indeed possible to write separable utility functions for all such
  node items whose quality is enhanced.
  It is clear, however, that price-adjustment for electricity would need
@@ -2701,11 +2946,11 @@ Notice that we are concerned with the change in quality - rather than change
 \end_layout
 
 \begin_layout Standard
-The model most appropriate for our study is the discrete model for utility.
+The model most appropriate for our study is a discrete model for utility.
  The quality measures for food, energy may be combined relatively easily
  but for us to compare the jumps (changes) in quality for a household with
  the probabilities of ownership of LTDG, we need to view the stochastic
- model for utility that has been popularised by McFadden et al 
+ model for utility that was first used by McFadden et al 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "McFaddenDomencic1975"
@@ -2716,74 +2961,76 @@ key "McFaddenDomencic1975"
 \end_layout
 
 \begin_layout Standard
-We now comment on the status utility of the consumer.
- As we have mentioned before, we view status as the individual's place in
- a ranking order based on income, education and possession - apart from
- status derived through regional or social identities.
- The model purports that consumer gets some a status utility by simply believing
- that there is a probability of promotion of self-evaluation either by an
- expensive non-durable expenditure (denoted by 
+We now comment on the form of the utility function for the consumer.
+ As we have mentioned before, the individuals net-asset worth which tracks
+ status is proxied by income, education, occupations, regional/social identity
+ and the long-term possessions.
+ Believing that there is a probability of promotion of self-evaluation by
+ an expensive non-durable expenditure (denoted by 
 \begin_inset Formula $C$
 \end_inset
 
-) or through accumulation of durable goods (when not through income, education
- and regional or social association).
- In the short-term, a consumer thus tries to optimise the utility function
+) is modeled with a parameter 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ which controls the ENDC.
+ Hence the consumer optimises the utility function 
+\begin_inset Formula $u(\kappa,A,\eta)$
+\end_inset
+
+ in the short-term where 
+\begin_inset Formula $A$
+\end_inset
+
+ denotes the long-term possession, 
+\begin_inset Formula $\eta$
+\end_inset
+
+ is the quantity consumed driven by needs of the consumer and 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ denotes the quality of consumption associated with the stochastic function
+\begin_inset Formula $\sigma$
+\end_inset
+
+.
+ In terms of this probabilistic model, those investing in higher-education
+ for their children, for example, would accumulate possessions 
+\begin_inset Formula $A$
+\end_inset
+
+ to increase the likelihood of higher status for their children and have
+ a different value of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ from those who don't.
  
-\begin_inset Formula $u(\theta,A,q)$
-\end_inset
-
- over the short-term where 
-\begin_inset Formula $A$
-\end_inset
-
- are the long-term possession, 
-\begin_inset Formula $q$
-\end_inset
-
- is the quantity consumed driven by needs of the consumer, 
-\begin_inset Formula $\theta$
-\end_inset
-
- is the quality of consumption and 
-\begin_inset Formula $A$
-\end_inset
-
- are the possession owned by the consumer.
- In terms of a probabilistic model, those investing in higher-education
- etc.
- for their children are also accumulating possessions to increase the likelihood
- of higher status for their children.
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-That said, we assume that education levels and occupation levels don't change
- over the short-term which consider in the time-series data we have available.
- Thus we also don't consider the status of individuals who are not at a
- working age i.e.
- we ignore their status until they have exited the education system
-\end_layout
-
-\end_inset
-
- .
 \end_layout
 
 \begin_layout Standard
 As we are concerned primarily with a cross-sectional study in the current
- chapter, we postpone the probabilistic model until a later chapter and
- focus on how to compare of quality and status consumption in a developing
- country with that in a more developed country.
- Based on the model for long-term utility, such a comparison would involve
- two supply-side factors
+ chapter, we postpone the details of the probabilistic model until a later
+ chapter when a time-series formulation is developed.
+ In the current chapter, we focus on two sub-goals - first is to see how
+ ENDC varies across different strata of LTDG and income and the second is
+ to compare the quality consumption in a developing country with that in
+ a more developed country.
+ Based on the model for long-term utility, there are two supply-side factors
+ that should be observed for such a comparison
 \end_layout
 
 \begin_layout Enumerate
-Cost of LTDG purchase.
+
+\series bold
+Costs of LTDG purchase
+\series default
+s.
  Cost of successive LTDG are more likely to be steeper in the developing
  world.
- In the consumer demand, this would lead to a more discreteness for ownership
+ In the consumer demand, this would lead to more discreteness for ownership
  of 
 \begin_inset Formula $A$
 \end_inset
@@ -2792,7 +3039,11 @@ Cost of LTDG purchase.
 \end_layout
 
 \begin_layout Enumerate
-Saving opportunities.
+
+\series bold
+Savings opportunities
+\series default
+.
  As a purely supply side argument, credit is more accessible in the developed
  world.
  More advertising and a better integration through services would result
@@ -2800,9 +3051,391 @@ Saving opportunities.
 \end_layout
 
 \begin_layout Standard
-A cross-sectional analysis would thus observe how quality is varied amidst
- different commodity groups across different income sections of the economy
- based on the above two factors.
+A cross-sectional analysis of the two countries would thus observe how quality
+ is varied amidst different commodity groups across different income sections
+ of the economy with respect to the differences in the above two factors.
+\end_layout
+
+\begin_layout Subsection
+The Stochastic Utility
+\end_layout
+
+\begin_layout Standard
+We can take a general view of the the utility.
+ The Luce's methods used by McFadden 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McFaddenDomencic1975"
+
+\end_inset
+
+ uses a logit formulation.
+ In a traditonal model, the wealth constraint would discount projections
+ of the - and associate the errors with the consumers decisions.
+ But we take a more general approach where the utility itself has a stochastic
+ growth.
+ This extends the model used by McFadden where utility is decomposed into
+ a systematic component and a random component i.e.
+ a decision maker chooses and option 
+\begin_inset Formula $i$
+\end_inset
+
+ amongst 
+\begin_inset Formula $n$
+\end_inset
+
+ alternatives where
+\begin_inset Formula $U_{i}=V_{i}+\epsilon_{i}$
+\end_inset
+
+- 
+\begin_inset Formula $V_{i}$
+\end_inset
+
+ being the systematic utility - a deterministic function of observed variables
+ and 
+\begin_inset Formula $\epsilon_{i}$
+\end_inset
+
+ the random utility.
+ McFadden
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McFaddenDomencic1975"
+
+\end_inset
+
+ then goes on to seek probability distribution function of 
+\begin_inset Formula $P(U_{i}>U_{j})$
+\end_inset
+
+ and arrives at the conditions for the empirically solvable logit model.
+\end_layout
+
+\begin_layout Standard
+This is a technique to model the discrete choice of a consumer.
+ Whether the consumer saves for purchasing an asset or not is the discrete
+ choice - particularly so because the savings rate of the consumer is an
+ unobserved.
+ In a time-series formulation we can give a general stochastic form to this
+ process and associate it with the probability of acquiring assets
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In the general approach for evolution of the savings rate, the consumer
+ would have a certain expected savings process - whose expectation (or discounti
+ng) would determine the participation in quality while the evolution of
+ 
+\begin_inset Formula $s_{t}$
+\end_inset
+
+ itself would determine We assume that the utility of the consumer evolves
+ with a general stochastic process the
+\begin_inset Formula 
+\begin{alignat}{1}
+ds & =\mu(A_{t},\eta_{t})dt+\sigma(\kappa_{t})dW\label{eq:savings_stochastic_evolution}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Here, 
+\begin_inset Formula $\mu(A_{t},\eta_{t})$
+\end_inset
+
+ represent the surer (deterministic) evolution of utility with the .
+ The status of the individual is implied both with 
+\begin_inset Formula $\kappa_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+- but is immaterial for the evolution itself - which depends only on the
+ factors 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma$
+\end_inset
+
+.
+ 
+\begin_inset Formula $dW$
+\end_inset
+
+ represents the brownian motion such that 
+\begin_inset Formula $dW^{2}=dt$
+\end_inset
+
+.
+ The general differential equation for the process in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:savings_stochastic_evolution"
+
+\end_inset
+
+ can be obtained with Ito's lemma.
+ When an explicit solution is not possible, a numerical solution for such
+ processes can be obtained with Monte Carlo simulations.
+\end_layout
+
+\end_inset
+
+.
+ For now, however we see how the consumer may exercise the choice to purchase
+ and asset or not.
+ The asset states that the consumer enters in is the low medium high assets
+ - these are essentially asset order we have talked about in the previous
+ sections.
+\end_layout
+
+\begin_layout Standard
+Let the utility of the consumer be 
+\begin_inset Formula $U(A,\kappa,\eta)$
+\end_inset
+
+ where 
+\begin_inset Formula $\eta$
+\end_inset
+
+ represents the needs of the consumer.
+ The key argument here is that the tendency to expand one's needs also adds
+ to the felicity.
+ That the assets 
+\begin_inset Formula $A$
+\end_inset
+
+ and quality 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ should be parameters with respect to which the 
+\begin_inset Formula $U(A,\kappa,\eta)$
+\end_inset
+
+ is non-decreasing needs little explanation but the utility also increases
+ with respect to needs 
+\begin_inset Formula $\eta$
+\end_inset
+
+ relies on the life-cycle hypothesis - which considers how an individual
+ obtains a stable income before expanding her family and sheds off assets
+ acquired over the active years to enable the further generations to replicate
+ that same behaviour.
+ An individual who considers two choices 
+\begin_inset Formula $(A_{1},\kappa_{1},\eta_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $(A_{2},\kappa_{2},\eta_{2})$
+\end_inset
+
+ would choose 1 over 2 if :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+U(A_{1},\kappa_{1},\eta_{1}) & >U(A_{2},\kappa_{2},\eta_{2})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Following the McFadden 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McFaddenDomencic1975"
+
+\end_inset
+
+ approach, we denote the probability that option 
+\begin_inset Formula $i$
+\end_inset
+
+ would be chosen as 
+\begin_inset Formula $P_{i}$
+\end_inset
+
+ which can be written as the following if there are 
+\begin_inset Formula $m$
+\end_inset
+
+ options available to the consumer:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $P_{i}=P(U(A_{i},\kappa_{i},\eta_{i})-U(A_{j},\kappa_{j},\eta_{j})>0$
+\end_inset
+
+ for 
+\begin_inset Formula $j\in[1,m]$
+\end_inset
+
+ and 
+\begin_inset Formula $j\ne i)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Assuming that it is possible to decompose 
+\begin_inset Formula $U(A_{i},\kappa_{i},\eta_{i})$
+\end_inset
+
+ into non-stochastic and stochastic components, we can write
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+U(A_{i},\kappa_{i},\eta_{i}) & =V(\kappa_{i},\eta_{i},A_{i})+S(\kappa_{i},\eta_{i},A_{i})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If we denote 
+\begin_inset Formula $V(A_{i},\kappa_{i},\eta_{i})$
+\end_inset
+
+ as 
+\begin_inset Formula $V_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $S(A_{i},\kappa_{i},\eta_{i})$
+\end_inset
+
+ as 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ then 
+\begin_inset Formula $U(A_{i},k_{i},\eta_{i})=V_{i}+S_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{i}=P(U(A_{i},\kappa_{i},\eta_{i})-U(A_{j},\kappa_{j},\eta_{j})>0)=P(V_{i}+S_{i}-V_{j}-S_{j}>0)=P(S_{j}-S_{i}>V_{i}-V_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $j\ne i$
+\end_inset
+
+ and 
+\begin_inset Formula $j\in[1,m]$
+\end_inset
+
+).
+ Hence, if 
+\begin_inset Formula $\psi$
+\end_inset
+
+ denoted the cumulative joint distribution function of 
+\begin_inset Formula $(S_{1},S_{2},...S_{J})$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{i}$
+\end_inset
+
+ were the partial derivative of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ with respect to parameter 
+\begin_inset Formula $i$
+\end_inset
+
+, then one would write 
+\begin_inset Formula $P_{i}$
+\end_inset
+
+ as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+P_{i} & =\int_{-\infty}^{\infty}\psi_{i}(t+V_{i}-V_{1},t+V_{i}-V_{2},...,t+V_{i}-V_{J})dt\label{eq:convolution_multi}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+McFadden discusses the forms of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ that could be used to model the discrete choice stated as above.
+ As McFadden et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McFaddenDomencic1975"
+
+\end_inset
+
+, a probit formulation satisfies the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:convolution_multi"
+
+\end_inset
+
+ and can be estimated computationally.
+\end_layout
+
+\begin_layout Standard
+with 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta$
+\end_inset
+
+ as non-stochastic components and 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ as the stochastic components simply implies the model where consumer makes
+ the discrete choice of purchasing an asset while getting a non-stochastic
+ utility from quality of quality
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+An alternative model would be chosen if a discrete choice if available for
+ quality too.
+\end_layout
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2918,16 +3551,21 @@ Data
 \end_layout
 
 \begin_layout Standard
-We look at the consumption in Tanzania and compare it with South Africa
- - which may be more socially unequal but is an overall less poor country.
- A country like Tanzania is likely to have more economic inequality and
- less development of common services compared to South Africa.
+\paragraph_spacing single
+Tanzania is the first country to be analysed in the study.
+ With recent economic growth and a history of nationalization, the country
+ provides a much desired snapshot of the consumer world of developing sub-Sahara
+n Africa.
+ The data chosen for the preliminary analysis is from the Living Standard
+ Measurement Study (LSMS) conducted by the World Bank.
+ LSMS includes expenditure microdata from about 10,000 households - with
+ many of the expenditure categories of potential status significance.
+ 
 \end_layout
 
 \begin_layout Standard
-Descriptive statistics on the Tanzanian data are then presented.
- We focus on food expenditure - which is recorded with a greater level of
- detail than other expenditures.
+The Tanzanian LSMS data is richer for the food expenditure - which is recorded
+ with a greater level of detail than other expenditures.
  As market prices are recorded for food items, we check how the higher budget
  shares are associated with choice of higher price items.
  We find that the consumption of highest prices items doesn't always result
@@ -2962,56 +3600,19 @@ visible
 \end_layout
 
 \begin_layout Standard
-The simple repackaging model requires that the quality variants of an item
- are perfect substitutes.
- We therefore make sure that the variants of an item in a group are near-perfect
- substitutes.
- In food, we put goat and meat in the same group - but not tea and coffee
- - because there is little sense in substitution between tea/coffee and
- goat/meat.
+The substitution between items drives our classification of food item -
+ goat and meat are put under the same group - but not tea and coffee - because
+ there is little sense in substitution between tea/coffee and goat/meat.
  The food category is in fact divided into sub-categories so that demands
  within the category can be considered separable but still lump together
  the substitutes that are of value for quality.
  Instead of having to put tea,coffee with goat,beef in high-price food categorie
 s for quality, we consider put consider the high quality consumption in
  the sub-categories beverages and protein.
-\end_layout
-
-\begin_layout Standard
-Instead of classifying beef, pork and goat as varieties of meat, we group
- them together with milk products, lentils and eggs as sources of protein
- - since we view the latter as cheaper sources of protein.
- For similar reasons, when analysing holiday expenses in South African data
- (IES), we don't distinguish between expensive holidays and cheaper holidays
- - but count the expenditure on holidays as expensive non-durable consumption
- under entertainment/household-consumption.
- The grouping of items is intended to achieve both separability and substitution
- for the simple repackaging model in mind.
-\end_layout
-
-\begin_layout Standard
-In many instances, one would find that the consumption items in the developed
- world have no equivalent in the developing country.
- For example, while comparing the Tanzanian data with the South African
- survey (IES), we do not find holiday expenses and car rental in the Tanzanian
- LSMS survey.
- In such cases, there is not much to be gained by sub-dividing the categories.
- Absence of sub-categories of consumption seems to provide a limit on granularit
-y of the grouping of items.
- The absence of a sub-category counts as zero consumption in the parent
- category.
+ Similarly, instead of classifying beef, pork and goat as varieties of meat,
+ we group them together with milk products, lentils and eggs as sources
+ of protein - since we view the latter as cheaper sources of protein.
  
-\end_layout
-
-\begin_layout Standard
-We refrain from using detailed price of assets purchased (available in the
- Tanzanian data for 2012) - since recording of assets is different in SA
- IES and TNZ LSMS surveys.
- More particularly, the expenditure on furniture and other assets is a diary
- expenditure in the SA IES data while the assets are recorded separately
- as a recall in the Tanzanian LSMS.
- As far as possible, we avoid mixing results from recall and diary methods
- elsewhere as well.
 \end_layout
 
 \begin_layout Standard
@@ -3037,14 +3638,9 @@ main lighting fuel
  (time of the year) is also an important factor.
  To address the issue, therefore, we are careful not to draw any conclusions
  from a household's expenditure over the time-series (i.e.
- survey snapshots in 2008, 2010 and 2012) - but rely on the average expenditure
- by a collection of households (in a particular region etc.) over time.
-\end_layout
-
-\begin_layout Standard
-We don't make any comparison of ethnicity or social identity data between
- the two countries.
- 
+ survey snapshots in 2008, 2010 and 2012) - but rely only on the average
+ expenditure by a collection of households (in a particular region etc.)
+ over time.
 \end_layout
 
 \begin_layout Standard
@@ -3066,9 +3662,11 @@ The LSMS data is available to enumeration-area levels in the crowded regions
 \end_inset
 
  ).
- Still, the presence of a bulky informal sector (which may have expanded
- due to recent economic developments), expansions in the areas of micro-credit
- as well as mass education 
+ We only consider district level residence and primary spoken language as
+ the demographic factors that may affect consumption.
+ In a bulky informal sector (which may have expanded due to recent economic
+ developments) that has seen expansions in the areas of micro-credit as
+ well as mass education 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DolanBoP"
@@ -3082,15 +3680,16 @@ key "MeagherNigeria"
 
 \end_inset
 
- and the complicated changes in identities themselves (which are homogenising
- with the expansion of internal trade
+, the development of identities is complex and makes the conclusions on
+ social identities (which are homogenising with the expansion of internal
+ trade) particularly prone to error
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
 \paragraph_spacing single
-There are regional disparities in the foreign investment in sub-Saharan
- African countries.
+Notice that there are regional disparities in the foreign investment in
+ sub-Saharan African countries.
  In Tanzania, for example, the investments from South Africa and Western
  countries have expanded significantly.
  Not all countries in the region have seen a similar scale of investments.
@@ -3098,57 +3697,11 @@ There are regional disparities in the foreign investment in sub-Saharan
 
 \end_inset
 
-) make any conclusion on identiies particularly prone to measurement error.
- We only consider district level residence and primary spoken language as
- the demographic factors that may affect status consumption.
- Amongst all the factors that one may find relevant for status in a society,
- we find wealth, ownership of assets and the degree of crowding towards
- new items (loosely determining the barriers to status) of key importance.
-\end_layout
-
-\begin_layout Standard
-Given the different make-up of the two countries, the data for ethnicity
- is not comparable - SA IES records race while the Tanzania LSMS records
- religion and native-language.
- The social identity data is only used for studying segmentation of demand
- within each economy.
+.
+ 
 \end_layout
 
 \begin_layout Subsection
-
-\size large
-LSMS 2010 Tanzania Data 
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing single
-Tanzania is the first country to be analysed in the study.
- With recent economic growth and a history of nationalization, the country
- provides a much desired snapshot of the consumer world of developing sub-Sahara
-n Africa.
- The data chosen for the preliminary analysis is from the Living Standard
- Measurement Study (LSMS) conducted by the World Bank.
- LSMS includes expenditure microdata from about 10,000 households - with
- many of the expenditure categories of potential status significance.
- An attempt to include the categories identified by Khamis et al as far
- as possible
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ZahraIndia"
-
-\end_inset
-
- is presented in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Visible-commodities"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsubsection
 \paragraph_spacing single
 
 \size normal
@@ -3451,9 +4004,9 @@ If there are
  and occupation codes were chosen for the current study.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 \paragraph_spacing single
-Steps in preparing LSMS data (2010)
+Steps in preparing LSMS data
 \end_layout
 
 \begin_layout Standard
@@ -3784,7 +4337,7 @@ Merged all data into one table
 \end_layout
 
 \end_deeper
-\begin_layout Subsubsection
+\begin_layout Subsection
 \paragraph_spacing single
 Possible sources of Error
 \end_layout
@@ -3930,19 +4483,71 @@ Another source of error is the over-representation of the urban areas in
  analyses.
 \end_layout
 
-\begin_layout Subsection
-IES Data
-\end_layout
-
 \begin_layout Section
 Results
 \end_layout
 
 \begin_layout Standard
-The preliminary analysis is presented first without the simple repackaging
- formulation and then with the simple repackaging formulation.
- We use the constrained regression to ensure the conditions of adding-up
- are met.
+If constrained regression was to be formulated, we would need the price
+ of quality constraint.
+ What we are given are the quality measures for every category
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $q_{energy},q_{protein}.q_{starch},q_{fat},q_{beverages}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{household},x_{transport}$
+\end_inset
+
+ We don't calculate the price of quality and hence we don't consider quality
+ as another product - which would lead to the same problems that the simple-repa
+ckaging approach would.
+ Indeed the question is - what does the consumer optimise then? In our model,
+ consumer addresses needs - i.e.
+ she has some constraints that are standard - and she always has an eye
+ on quality.
+ She doesn't buy a virtual item - but discretely chooses item of higher
+ or lower prices in the category.
+ This requires a discrete model which also needs prices - i.e.
+ price of electricity, meat and all elementary goods.
+ In absence of prices we can only model the non-durable vs durable consumption
+ - absolute expenditures rather than quantities and prices.
+ A theory on these would need to be formulated.
+\end_layout
+
+\begin_layout Standard
+At this point we would just performed a quantile analysis of quality.
+ We only measure how quality varies in the different strata of society -
+ long-term assets are on RHS while short-term on LHS.
+ A model where total money is a constraint and can be allocated across categorie
+s is to be explored further.
+ Let's say we have 
+\begin_inset Formula $x=\sum_{i}x_{nd,i}+\sum_{j}x_{d,j}$
+\end_inset
+
+ where 
+\begin_inset Formula $x_{d,i},x_{nd,j}$
+\end_inset
+
+ are expenditure on durable item 
+\begin_inset Formula $j$
+\end_inset
+
+ and non-durable item 
+\begin_inset Formula $i$
+\end_inset
+
+ respectively.
+ For non-durable consumption, the consumer addresses her needs and overloads
+ on quality and for durable-categories, the consumer accumulates elementary
+ goods (due to conditions we have imposed).
+ 
+\end_layout
+
+\begin_layout Standard
+constrained regression to ensure the conditions of adding-up are met.
  The effect of assets is only modelled as a dummy variable (low-price, medium-pr
 ice and high-price assets).
  The results from a differences-model and quantile regression are also presented.
@@ -4016,770 +4621,6 @@ The results show that medium assets seem limited to the cities - and the
  Status is more likely to be derived from what is available as assets in
  the rural areas - compared to a more advanced economy such as that of South
  Africa.
-\end_layout
-
-\begin_layout Standard
-—
-\end_layout
-
-\begin_layout Subsection
-
-\size normal
-Comparing conspicuous consumption in developing and developed economies
-\end_layout
-
-\begin_layout Standard
-A random effects model could be used as the changes in education and occupation
- may be little.
-\end_layout
-
-\begin_layout Standard
-A recap of some studies in the survey is presented in the following subsections.
- This is intended to provide how conclusions from the research may fit into
- the framework provided by the above model.
-\end_layout
-
-\begin_layout Subsubsection
-
-\size normal
-South Africa - Income and Expenditure Survey
-\begin_inset CommandInset citation
-LatexCommand cite
-key "KausSA"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-A study by Kaus(
-\begin_inset CommandInset citation
-LatexCommand cite
-key "KausSA"
-
-\end_inset
-
-) considers a black-dummy and coloured-dummy in regression of visible consumptio
-n against demographic, time, permanent income and household characteristics.
- Starting with no controls(I) (with black-dummy and coloured-dummy), the
- coefficients for coloured and black are negative (i.e.
- black and coloured social groups spend less on visible consumption than
- the white population).
- However, these coefficients flip signs after adding income controls(II).
- The coefficients for black and coloured groups are even higher when expenditure
- is added(III).
- Kaus et al argue that the endogeneity of total expenditure requires instrumenta
-tion and use the instruments suggested by Charles, Roussanov and Hurst
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CharlesHurstRace"
-
-\end_inset
-
- - including positive-income-dummy, cube-of-income-level, dummies for under-seco
-ndary-education, secondary-education and degree-education.
- A set of two 2SLS regressions are then performed - one with income controls
- and total-expenditure as control variablesand the other with education-dummies
- as control variables (while still using instruments).
- The instrumentation thus performed (Specification IV in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "resresults-1"
-
-\end_inset
-
-) results in lower coefficients for the black and coloured dummies for both
- regressions.
- When demographic params are added(VI), the coefficients are further lowered
- - for both types of regressions.
- 
-\end_layout
-
-\begin_layout Standard
-The first-change of sign when income controls are added implies that after
- accounting for income of household head, the coloured and black groups
- spend more on visible consumption.
- Total expenditure is not a perfect proxy of permanent income - which justifies
- instrumentation.
- Adding demographic controls to the 2SLS regression - shows significance
- of age, urban/rural area and family size - but coefficients are still not
- lowered significantly.
- This confirms that coloured and black social groups spend a rather disproportio
-nate amount on visible consumption.
- To test whether the rise in average group income reduces the visible consumptio
-n, a regression with average-incomes of particular provinces for every group
- (black/white/coloured) shows a higher effect of income on black-social-group
- than the white-social-group - a difference that author argues points out
- alternate ways of signaling for white-social-group relative to black-social-gro
-up.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing single
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="4">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Controls
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Black
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Coloured
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-I
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-No Controls (
-\begin_inset Formula $R^{2}=.05)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--1.03
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--0.91
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-II
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Income Controls (
-\begin_inset Formula $R^{2}=.26)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.37
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.30
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-III
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Log Expenditure (
-\begin_inset Formula $R^{2}=0.41)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.74
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.46
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-IV
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2SLS Regression (
-\begin_inset Formula $R^{2}=\{0.41,0.41\})$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-{0.62,0.71}
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-{0.41,0.43}
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-VI
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2SLS Regression with Demographics (
-\begin_inset Formula $R^{2}=\{0.41,0.41\})$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-{0.36,0.47}
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-{0.19,0.24}
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "resresults-1"
-
-\end_inset
-
-Results from regressing ln(visible_consumption) against respective set of
- control variables
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="4">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Controls
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Black
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Coloured
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-I
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-No Controls (
-\begin_inset Formula $R^{2}=.07)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--0.22
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--0.16
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-II
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Income Controls (
-\begin_inset Formula $R^{2}=0.09)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--0.18
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--0.14
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-III
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Log Expenditure (
-\begin_inset Formula $R^{2}=0.16)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--0.10
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--0.10
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-IV
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2SLS Regression (
-\begin_inset Formula $R^{2}=\{0.14,0.16\})$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-{-0.15,-0.10}
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-{-0.12,-0.10}
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-V
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2SLS Regression with year-dummies 
-\begin_inset Formula $(R^{2}={0.14,0.16})$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-{-0.16,-0.10}
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-{-0.13,-0.10}
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-VI
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2SLS Regression with Demographics (
-\begin_inset Formula $R^{2}=\{0.17,0.17\})$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-{-0.16,-0.12}
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-{-0.11,-0.09}
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "resresults-2"
-
-\end_inset
-
-Results from regressing ln(visible_consumption) against respective set of
- control variables for years 2005 and 2010
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-twocolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-—
 \end_layout
 
 \begin_layout Standard
