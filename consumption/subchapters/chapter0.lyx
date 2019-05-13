@@ -454,6 +454,21 @@ ddply(food2010[,c("hhid","has_high")],.(has_high),summarise,n=length(unique(hhid
 ))
 \end_layout
 
+\begin_layout Plain Layout
+#computation of quality
+\end_layout
+
+\begin_layout Plain Layout
+categories <- as.character(unique(lsms_normalizer()@lsms_groups_qualitybased_2010
+_2012()$category))
+\end_layout
+
+\begin_layout Plain Layout
+h<-ll@group_expenditure(year = 2010, dirprefix = "../",fu = fu, ln=lsms_normalizer
+, basis = "quality", categoryNames = categories , returnBeforeGrouping =
+ FALSE,minConsumerNumber = 10)
+\end_layout
+
 \end_inset
 
 

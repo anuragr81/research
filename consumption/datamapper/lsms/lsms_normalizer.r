@@ -238,7 +238,7 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='womensshoes',shortname='womensshoes',code='323',category="personal_products"))
     r=rbind(r,data.frame(item='childrensshoes',shortname='childrensshoes',code='324',category="personal_products"))
     
-    r=rbind(r,data.frame(item='Woodpoles',shortname='bamboo',code='325',category="hosing"))
+    r=rbind(r,data.frame(item='Woodpoles',shortname='bamboo',code='325',category="housing"))
     r=rbind(r,data.frame(item='ThatchingGrass',shortname='grass',code='326',category="housing"))
     
     
@@ -1136,11 +1136,11 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='mangoes'))
     x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='sugarcane'))
     
-    x<-rbind(x,data.frame(category = "energy", group="quality", shortname="kerosene"))
-    x<-rbind(x,data.frame(category = "energy", group="quality", shortname="charcoal"))
-    x<-rbind(x,data.frame(category = "energy", group="quality", shortname="gas"))
-    x<-rbind(x,data.frame(category = "energy", group="quality",shortname="electricity"))
-    x<-rbind(x,data.frame(category = "energy", group="quality", shortname="petrol"))
+    x<-rbind(x,data.frame(category = "energy", group="low", shortname="kerosene"))
+    x<-rbind(x,data.frame(category = "energy", group="high", shortname="charcoal"))
+    x<-rbind(x,data.frame(category = "energy", group="high", shortname="gas"))
+    x<-rbind(x,data.frame(category = "energy", group="high",shortname="electricity"))
+    x<-rbind(x,data.frame(category = "energy", group="high", shortname="petrol"))
     
     x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="cigarettes"))
     x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="cellphone_voucher"))

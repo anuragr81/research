@@ -1380,14 +1380,18 @@ lsms_loader<-function(fu,ln) {
       vis$high_cost                        <- vis$high_cost + 1e-16
       
       vis$highratio                        <- with(vis,high_cost/(low_cost+high_cost))
-      
+      vis$quality                          <- vis$highratio
       vis$ln_tot_categ_exp                 <- log(with(vis,high_cost+low_cost))
       vis$tot_categ_exp                    <- with(vis,high_cost+low_cost)
       vis$high_expenditure                 <- vis$high_cost
       vis$group                            <- NULL
       vis$low_cost                         <- NULL
       vis$high_cost                        <- NULL
-      
+      if (length(unique(groups$category))>1){
+        stop("Cannot handle more than one category")
+      } else {
+        vis$category <- unique(groups$category)
+      }
       
     } else if (setequal(groups$group,c("asset","expenditure"))){
       print("Using asset-expenditure groups")
@@ -1457,7 +1461,12 @@ lsms_loader<-function(fu,ln) {
       no_vis_hhid      <- setdiff(unique(hh$hhid),unique(vis$hhid))
       no_vis           <- data.frame(hhid=no_vis_hhid,group_cost=rep(0,length(no_vis_hhid)))
       vis              <- rbind(vis,no_vis)
-      
+      vis$quality      <- log(vis$group_cost+1e-7)
+      if (length(unique(groups$category))>1){
+        stop("Cannot handle more than one category")
+      } else {
+        vis$category <- unique(groups$category)
+      }
     } else {
       stop( paste ( "Unknown row elements in groups frame"))
     }
@@ -1466,7 +1475,7 @@ lsms_loader<-function(fu,ln) {
   }
   
   ####
-  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryName,returnBeforeGrouping,minConsumerNumber){
+  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryNames,returnBeforeGrouping,minConsumerNumber){
     if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
     }
@@ -1525,7 +1534,21 @@ lsms_loader<-function(fu,ln) {
       vis                 <- subset(vis,!is.element(shortname,negligibleShortNames))
       
     } else {
-      vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryName,hh=hh,basis=basis)
+      # if there are multiple categorynames then - use (h %>% spread(category, quality))
+      
+      if (basis=="quality"){
+        dat <- NULL
+        for (categ in categoryNames){
+          to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categ,hh=hh,basis=basis)
+          print(paste("To be added: ", toString(colnames(to_be_added))))
+          dat <-   rbind(dat,to_be_added[,c("hhid","category","quality")])
+        }
+        vis <- dat %>% spread(category, quality)
+      } else if (basis == "price" || basis == "sparseness") {
+        vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryNames,hh=hh,basis=basis)
+      } else {
+        stop (paste("category names not handled for basis:",basis))
+      }
     }
     
     ds                  <- merge(totexp,vis);
