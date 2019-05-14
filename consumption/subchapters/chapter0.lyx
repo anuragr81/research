@@ -459,8 +459,8 @@ ddply(food2010[,c("hhid","has_high")],.(has_high),summarise,n=length(unique(hhid
 \end_layout
 
 \begin_layout Plain Layout
-categories <- as.character(unique(lsms_normalizer()@lsms_groups_qualitybased_2010
-_2012()$category))
+categories <- c("fat","starch","protein","beverages","fruitsveg","energy","house
+hold")
 \end_layout
 
 \begin_layout Plain Layout
@@ -2553,7 +2553,7 @@ key "NelsonQualityQuantity"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-\kappa & =\frac{\sum_{i}p_{i,c}^{*}q_{i,c}}{\sum q_{i,c}}\label{eq:quality_equation}
+\kappa_{c} & =\frac{\sum_{i}p_{i,c}^{*}q_{i,c}}{\sum q_{i,c}}\label{eq:quality_equation}
 \end{alignat}
 
 \end_inset
@@ -2617,20 +2617,15 @@ Elementary Goods
 \end_inset
 
 , the measure of short-term consumption equivalent of quality is is simply
- the proportion of expenditure (i.e.
- the budget share 
-\begin_inset Formula $w_{c}$
-\end_inset
-
-)
+ the logarithm of the total expenditure )
 \begin_inset Formula 
 \begin{alignat}{1}
-w_{c} & =\frac{\sum_{i\in M_{c}}p_{i,c}q_{i,c}}{\sum_{c\in\mathscr{C}}{\sum_{i\in M_{c}}p_{i,c}q_{i,c}}}\label{eq:short_term_consumption_budget_share}
+\kappa_{c} & =log(\sum_{i\in M_{c}}p_{i,c}q_{i,c})\label{eq:short_term_consumption_budget_share}
 \end{alignat}
 
 \end_inset
 
- As the goods are elementary, a higher proportion amounts to higher quality.
+ As the goods are elementary, a higher expenditure amounts to higher quality.
  
 \end_layout
 
@@ -3076,21 +3071,27 @@ The Stochastic Utility
 \end_layout
 
 \begin_layout Standard
-We can take a general view of the the utility.
- The Luce's methods used by McFadden 
+The current analysis uses the McFadden 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "McFaddenDomencic1975"
 
 \end_inset
 
- uses a logit formulation.
- In a traditonal model, the wealth constraint would discount projections
- of the - and associate the errors with the consumers decisions.
- But we take a more general approach where the utility itself has a stochastic
- growth.
- This extends the model used by McFadden where utility is decomposed into
- a systematic component and a random component i.e.
+ approach which arrives at a logit formulation using methods a stochastic
+ model provided by Luce 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Luce1959"
+
+\end_inset
+
+.
+ In a more traditional model, one would discount the projections of savings
+ and non-durable consumption subject to a wealth constraint - and associate
+ a stochastic component to the consumers decisions.
+ The model we use is based on McFadden's approach where utility is decomposed
+ into a systematic component and a random component i.e.
  a decision maker chooses and option 
 \begin_inset Formula $i$
 \end_inset
@@ -3103,11 +3104,12 @@ key "McFaddenDomencic1975"
 \begin_inset Formula $U_{i}=V_{i}+\epsilon_{i}$
 \end_inset
 
-- 
+.
+ Here
 \begin_inset Formula $V_{i}$
 \end_inset
 
- being the systematic utility - a deterministic function of observed variables
+ is the systematic utility - a deterministic function of observed variables
  and 
 \begin_inset Formula $\epsilon_{i}$
 \end_inset
@@ -3124,15 +3126,15 @@ key "McFaddenDomencic1975"
 \begin_inset Formula $P(U_{i}>U_{j})$
 \end_inset
 
- and arrives at the conditions for the empirically solvable logit model.
+ and arrives at the conditions for an empirically solvable logit model.
 \end_layout
 
 \begin_layout Standard
-This is a technique to model the discrete choice of a consumer.
- Whether the consumer saves for purchasing an asset or not is the discrete
- choice - particularly so because the savings rate of the consumer is an
- unobserved.
- In a time-series formulation we can give a general stochastic form to this
+This is a essentially a technique to model the discrete choice of a consumer.
+ In our case, whether the consumer saves for purchasing an asset or not
+ is the discrete choice - particularly so because the savings rate of the
+ consumer is an unobserved variable.
+ In a time-series formulation we may use a general stochastic form of this
  process and associate it with the probability of acquiring assets
 \begin_inset Foot
 status open
@@ -3162,8 +3164,9 @@ Here,
 \begin_inset Formula $\mu(A_{t},\eta_{t})$
 \end_inset
 
- represent the surer (deterministic) evolution of utility with the .
- The status of the individual is implied both with 
+ represent the surer (deterministic) evolution of utility with the asset
+ owned (LTDG, education, needs).
+ The status of the individual would be implied both with 
 \begin_inset Formula $\kappa_{t}$
 \end_inset
 
@@ -3181,7 +3184,7 @@ Here,
 \end_inset
 
 .
- 
+ (other than time) Here, 
 \begin_inset Formula $dW$
 \end_inset
 
@@ -3198,18 +3201,18 @@ reference "eq:savings_stochastic_evolution"
 \end_inset
 
  can be obtained with Ito's lemma.
- When an explicit solution is not possible, a numerical solution for such
- processes can be obtained with Monte Carlo simulations.
+ While an explicit solution is not always possible, a numerical solution
+ for such processes can be obtained with a Monte Carlo simulation.
 \end_layout
 
 \end_inset
 
-.
- For now, however we see how the consumer may exercise the choice to purchase
- and asset or not.
- The asset states that the consumer enters in is the low medium high assets
- - these are essentially asset order we have talked about in the previous
- sections.
+ - but for now, our goal is to view how the consumer may exercise the choice
+ to purchase and asset or not.
+ The asset states that the consumer enters in are - the low band, the medium-low
+ band, the medium-high band and the high band - these constitute the asset
+ order we have talked about in the previous sections.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3222,8 +3225,8 @@ Let the utility of the consumer be
 \end_inset
 
  represents the needs of the consumer.
- The key argument here is that the tendency to expand one's needs also adds
- to the felicity.
+ A key argument here is that the tendency to expand one's needs also adds
+ to the felicity (utility) of the consumer.
  That the assets 
 \begin_inset Formula $A$
 \end_inset
@@ -3236,15 +3239,41 @@ Let the utility of the consumer be
 \begin_inset Formula $U(A,\kappa,\eta)$
 \end_inset
 
- is non-decreasing needs little explanation but the utility also increases
- with respect to needs 
+ is non-decreasing, needs little explanation but the argument that utility
+ also increases with respect to needs 
 \begin_inset Formula $\eta$
 \end_inset
 
  relies on the life-cycle hypothesis - which considers how an individual
  obtains a stable income before expanding her family and sheds off assets
- acquired over the active years to enable the further generations to replicate
+ acquired over the active years - enabling the further generations to replicate
  that same behaviour.
+ 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta$
+\end_inset
+
+ as non-stochastic components and 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ as the stochastic components imply a model where consumer makes the discrete
+ choice of purchasing an asset while getting a non-stochastic utility from
+ quality of quality
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+An alternative model would be chosen if a discrete choice if available for
+ quality too.
+\end_layout
+
+\end_inset
+
+.
  An individual who considers two choices 
 \begin_inset Formula $(A_{1},\kappa_{1},\eta_{1})$
 \end_inset
@@ -3253,7 +3282,7 @@ Let the utility of the consumer be
 \begin_inset Formula $(A_{2},\kappa_{2},\eta_{2})$
 \end_inset
 
- would choose 1 over 2 if :
+ would thus choose 1 over 2 if :
 \end_layout
 
 \begin_layout Standard
@@ -3268,7 +3297,7 @@ U(A_{1},\kappa_{1},\eta_{1}) & >U(A_{2},\kappa_{2},\eta_{2})
 \end_layout
 
 \begin_layout Standard
-Following the McFadden 
+Following the McFadden
 \begin_inset CommandInset citation
 LatexCommand cite
 key "McFaddenDomencic1975"
@@ -3325,7 +3354,7 @@ U(A_{i},\kappa_{i},\eta_{i}) & =V(\kappa_{i},\eta_{i},A_{i})+S(\kappa_{i},\eta_{
 \end_layout
 
 \begin_layout Standard
-If we denote 
+Now if we denote 
 \begin_inset Formula $V(A_{i},\kappa_{i},\eta_{i})$
 \end_inset
 
@@ -3362,7 +3391,7 @@ If we denote
 \begin_inset Formula $\psi$
 \end_inset
 
- denoted the cumulative joint distribution function of 
+ is the cumulative joint distribution function of 
 \begin_inset Formula $(S_{1},S_{2},...S_{J})$
 \end_inset
 
@@ -3397,7 +3426,14 @@ P_{i} & =\int_{-\infty}^{\infty}\psi_{i}(t+V_{i}-V_{1},t+V_{i}-V_{2},...,t+V_{i}
 \end_layout
 
 \begin_layout Standard
-McFadden discusses the forms of 
+McFadden
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McFaddenDomencic1975"
+
+\end_inset
+
+ discusses the forms of 
 \begin_inset Formula $\psi$
 \end_inset
 
@@ -3406,14 +3442,7 @@ McFadden discusses the forms of
 \end_inset
 
  that could be used to model the discrete choice stated as above.
- As McFadden et al 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "McFaddenDomencic1975"
-
-\end_inset
-
-, a probit formulation satisfies the Equation 
+ A probit formulation also satisfies the Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:convolution_multi"
@@ -3421,36 +3450,6 @@ reference "eq:convolution_multi"
 \end_inset
 
  and can be estimated computationally.
-\end_layout
-
-\begin_layout Standard
-with 
-\begin_inset Formula $\kappa$
-\end_inset
-
- and 
-\begin_inset Formula $\eta$
-\end_inset
-
- as non-stochastic components and 
-\begin_inset Formula $A_{i}$
-\end_inset
-
- as the stochastic components simply implies the model where consumer makes
- the discrete choice of purchasing an asset while getting a non-stochastic
- utility from quality of quality
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-An alternative model would be chosen if a discrete choice if available for
- quality too.
-\end_layout
-
-\end_inset
-
-.
- 
 \end_layout
 
 \begin_layout Standard
@@ -4026,9 +4025,8 @@ Steps in preparing LSMS data
 
 \begin_layout Standard
 \paragraph_spacing single
-Following steps were performed before running the regressions on the household
- consumption data from LSMS 2010\SpecialChar endofsentence
-
+Following steps were performed towards the normalisation of LSMS data on
+ Tanzania:
 \end_layout
 
 \begin_layout Enumerate
@@ -4313,6 +4311,12 @@ Ignored data with more than 30 times the median cost (ensuring that no more
  than 3% of the data is ignored)
 \end_layout
 
+\begin_layout Enumerate
+Ignore items that are consumed by 10 or less households (items - mortgage,
+ rice_paddy, nut_products, wild_birds, packaged_fish, miscdrinkpowder, readymade
+_tea_coffee and winespirits were thus ignored in the analyses)
+\end_layout
+
 \end_deeper
 \begin_layout Enumerate
 \paragraph_spacing single
@@ -4352,37 +4356,32 @@ Merged all data into one table
 \end_layout
 
 \end_deeper
-\begin_layout Subsection
-\paragraph_spacing single
-Possible sources of Error
-\end_layout
-
 \begin_layout Standard
 \paragraph_spacing single
-We extrapolate weekly diary to annual expense in Step 
+While we extrapolate weekly diary to annual expense in Step 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "enu:diary_scaling"
 
 \end_inset
 
-.
- With large size of families (40% of households have size 5 or higher),
- it may be common to stock items for consumption.
+, we must also consider that with a large size of families (40% of households
+ have size 5 or higher), it may be common to stock items for consumption.
  Items such as soap, skin creams are likely to be purchased in bulk in large
  families.
- The frequency of purchases gets lower as the quantity of bulk purchases
- increase- this may cause us to overestimate consumption significantly.
- One way to adjust the quantity is by estimating the storage using the number
- of rooms as a proxy of storage space.
+ Since the frequency of purchases would be lower when the quantity of bulk
+ purchases increases- this may cause us to overestimate consumption significantl
+y.
+ One way to adjust the quantity consumed is by estimating the storage using
+ the number of rooms as a proxy of storage space.
  However, the store and consume consumption pattern does not require plenty
- of storage space and may not depend on the number of room.
- Another way to test for store-and-consume pattern is testing the closest
+ of storage space and may not depend on the number of rooms as such.
+ Another way to test for store-and-consumption pattern is testing the closest
  market from the household.
  The data for distance from market (or the cost of public transport) is
- quite sparse (a lot of NAs).
- The NAs in the data could be because the market as described in the survey
- is never visited or that it doesn't exist in the immediate region.
+ quite sparse (a lot of NAs - which could be because the market as described
+ in the survey is never visited or that it doesn't exist in the immediate
+ region).
  Assuming that the habit of stocking is uniform throughout the country (this
  may sound a sweeping assumption - but since we do take region into account
  - we should be able to account regional differences), we can find household
@@ -4392,7 +4391,7 @@ reference "enu:diary_scaling"
 
 \begin_layout Standard
 \paragraph_spacing single
-To test whether the store-and-consume habit is significant, we have the
+To test whether the store-and-consume habit is significant, we observe the
  expenditure on the item 
 \begin_inset Formula $q$
 \end_inset
@@ -4406,29 +4405,18 @@ To test whether the store-and-consume habit is significant, we have the
 \end_inset
 
 .
- We have assumed that anybody recalling the purchase in the last month would
- be repeating that purchase every month.
- This ignores that those who are stockpiling might not need to purchase
- the item again for another few months - which can overestimate the purchases
- for stockpilers - whose habit is unobservable in the model 
+ Since the store-and-consume habit is unobservable in the model 
 \begin_inset Formula $ln(q)\sim ln(x)+d+region$
 \end_inset
 
-.
- 
-\begin_inset Formula $q$
-\end_inset
-
- is endogenous in the model where stockpiling behavior may influence 
+, it influences both influence 
 \begin_inset Formula $q,x$
 \end_inset
 
-.
- A reasonable assumption is that the percentage of stockpilers to the regional
- population is constant i.e.
- there are no reasons why the percentage of stockpilers would change within
- a region within a period of a few years.
- We can thus assume in any two regions A, B with populations 
+ and is endogenous.
+ A reasonable assumption we make is that the percentage of stockpilers does
+ not change significantly with the regions.
+ In any two regions A and B with populations 
 \begin_inset Formula $p_{A}$
 \end_inset
 
@@ -4436,7 +4424,7 @@ To test whether the store-and-consume habit is significant, we have the
 \begin_inset Formula $p_{B}$
 \end_inset
 
- respectively would have 
+ respectively therefore, we would have
 \begin_inset Formula $\eta p_{A}$
 \end_inset
 
@@ -4449,8 +4437,8 @@ and
 \end_inset
 
  is the fixed frequency of stockpilers).
- These stockpilers would buy less frequently but there is no reasons to
- believe that they would consume more than the non-stockpilers.
+ These stockpilers would buy less frequently but there is no reason to believe
+ that they would consume more than the non-stockpilers.
  Thus if stockpilers and non-stockpilers live within a region in the same
  ratio 
 \begin_inset Formula $\eta$
@@ -4461,12 +4449,9 @@ and
 \end_inset
 
  is fixed).
- We perform this analysis at the region level (the data on district level
- is limited - at times only 7 consumers in the district).
- Some region dummies do appear significant - but only for more populous
- regions.
- Overall the effect of hsize dominates even if we resample the data in smaller
- samples.
+ In this analysis, region dummies only appear significant for more populous
+ regions and the effect of household-size dominates even if we resample
+ the data in smaller samples.
  In summary, given the low effect of the travelcosts on ratio 
 \begin_inset Formula $log(\frac{q}{x})$
 \end_inset
@@ -4486,16 +4471,18 @@ ref{skincreamconsu}
 
 ) and the lack of different means in the region, we can be assured that
  stockpiling is not significant.
- It is more likely that larger families buy more quantities of goods such
- as skincream.
+ It is more likely that larger families buy more quantities of goods.
 \end_layout
 
 \begin_layout Standard
-\paragraph_spacing single
-Another source of error is the over-representation of the urban areas in
- the survey.
- The weights provided in the survey would be included in the subsequent
- analyses.
+For non-food categories, where the data is less detailed, some further adjustmen
+ts were made for the classification of non-durable consumption into the
+ wider categories of food, energy, transport and household consumption.
+ For example, repairs and maintenance costs - which are provided in the
+ weekly diary - were not simply extrapolated to annual consumption (multiplicati
+on of a factor of 12) - but instead an assumption on the average life of
+ the item being repaired or maintained was considered to perform the extrapolati
+on to the annual expenditure.
 \end_layout
 
 \begin_layout Section
@@ -4503,88 +4490,22 @@ Results
 \end_layout
 
 \begin_layout Standard
-If constrained regression was to be formulated, we would need the price
- of quality constraint.
- What we are given are the quality measures for every category
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $q_{energy},q_{protein}.q_{starch},q_{fat},q_{beverages}$
-\end_inset
-
- and 
-\begin_inset Formula $x_{household},x_{transport}$
-\end_inset
-
- We don't calculate the price of quality and hence we don't consider quality
- as another product - which would lead to the same problems that the simple-repa
-ckaging approach would.
- Indeed the question is - what does the consumer optimise then? In our model,
- consumer addresses needs - i.e.
- she has some constraints that are standard - and she always has an eye
- on quality.
- She doesn't buy a virtual item - but discretely chooses item of higher
- or lower prices in the category.
- This requires a discrete model which also needs prices - i.e.
- price of electricity, meat and all elementary goods.
- In absence of prices we can only model the non-durable vs durable consumption
- - absolute expenditures rather than quantities and prices.
- A theory on these would need to be formulated.
-\end_layout
-
-\begin_layout Standard
-At this point we would just performed a quantile analysis of quality.
- We only measure how quality varies in the different strata of society -
- long-term assets are on RHS while short-term on LHS.
- A model where total money is a constraint and can be allocated across categorie
-s is to be explored further.
- Let's say we have 
-\begin_inset Formula $x=\sum_{i}x_{nd,i}+\sum_{j}x_{d,j}$
-\end_inset
-
- where 
-\begin_inset Formula $x_{d,i},x_{nd,j}$
-\end_inset
-
- are expenditure on durable item 
-\begin_inset Formula $j$
-\end_inset
-
- and non-durable item 
-\begin_inset Formula $i$
-\end_inset
-
- respectively.
- For non-durable consumption, the consumer addresses her needs and overloads
- on quality and for durable-categories, the consumer accumulates elementary
- goods (due to conditions we have imposed).
- 
-\end_layout
-
-\begin_layout Standard
-constrained regression to ensure the conditions of adding-up are met.
- The effect of assets is only modelled as a dummy variable (low-price, medium-pr
-ice and high-price assets).
- The results from a differences-model and quantile regression are also presented.
-\end_layout
-
-\begin_layout Standard
-The goal of the second part of econometric analysis is to see how long-term
- status needs of the consumers - fulfilled with purchase of assets (which
- translates into an upward movement in status in our model) relate with
- the short-term needs fulfilled with expensive non-durable consumption.
+The goal of our analysis is to see how long-term status needs of the consumers
+ - fulfilled with purchase of assets (which translates into an upward movement
+ in status in the model) - relate with the short-term needs that are fulfilled
+ with expensive non-durable consumption.
  Much the way we were wary of claiming that consumption on items indicates
  perception of status hierarchies, we don't claim that the observed social
  mobility - recorded in this way - serves as a measure of how status is
  perceived in society.
  The variation in the expensive non-durable consumption (ENDC) across occupation
  ranks, education, social identities and the assets owned across the two
- countries (see quantile regression results) only tells how quality consumption
- segmented in the two economies.
+ countries can only tell how quality consumption and asset ownership is
+ segmented across the economy.
 \end_layout
 
 \begin_layout Standard
-Notice that the model doesn't require that a consumer purchase a 
+Recall that our model doesn't require that a consumer purchase a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4599,29 +4520,42 @@ key "DeatonQualityQuantityVariation,DeatonSurveyElasticities"
 
 \end_inset
 
-).
- Instead, we believe that quality is a concern for the researcher and not
- for the consumer - who merely exercises her choice given the set of products
- available in the market for given prices (see the clarification from Nelson
- 
+ for details of the approach).
+ Instead, we believe that quality is a concern for the researcher - not
+ for the consumer (see the clarification from Nelson 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity"
 
 \end_inset
 
-).
- Since status would always be priced in the market, a status item would
- be always more expensive than the rest of the items which provide the same
- functionality (see Chao et al
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Chao1998"
-
+) who merely exercises her (discrete) choice given the set of products available
+ in the market for given prices.
+ With that caveat, we note that quality is of significance only in food
+ and energy.
+ The presence of assets in household (housing) and transport (car) makes
+ the consumption under household (carpets, building material etc.) elementary.
+ The measures for quality for elementary goods i.e.
+ groups where there is no quality differences are recognised (transport,
+ housing) - i.e.
+ the logarithm of the total expenditure - serve as the control variables
+ in the regression (note that we count housing rent towards household consumptio
+n as well).
+ The dependent variable in the regression is simply the bands of assets
+ in the cost order - i.e.
+ a discrete variable indicating whether the a person owns a low, medium-low,
+ ,medium-high or high-quality asset.
+ In summary, the observed quality differences are 
+\begin_inset Formula $q_{energy},q_{protein}.q_{starch},q_{fat},q_{beverages},q_{fruitsveg}$
 \end_inset
 
- for substantiation of this argument).
- 
+ and the 
+\begin_inset Formula $x_{household},x_{public-transport}$
+\end_inset
+
+ - expenditures on respective elementary goods which serve as control variables
+ in the regression - as do the variables: occupation, region and other household
+ characteristics - which are all non-stochastic components in the equation.
 \end_layout
 
 \begin_layout Standard
@@ -4636,68 +4570,9 @@ The results show that medium assets seem limited to the cities - and the
  Status is more likely to be derived from what is available as assets in
  the rural areas - compared to a more advanced economy such as that of South
  Africa.
-\end_layout
-
-\begin_layout Standard
-For non-food categories, where the data is less detailed, there were some
- necessary adjustments to be made for the classification of non-durable
- consumption into the wider categories of food, energy, transport, social
- functions, and household consumption.
- Some adjustments were made by extrapolation of costs 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Repairs and maintenance costs etc.
- are provided in the weekly diary - but they cannot be simply extrapolated
- to annual consumption without a consideration of the average life of the
- item being repaired or maintained.
-\end_layout
-
-\end_inset
-
- .
- The regional variation and supply-asymmetries related to the item can complicat
-e how an item is classified.
- Mosquito-nets (which available in the survey), for example, may seem relevant
- to land & housing - and therefore relevant for potential status value.
- Further, education is included in the total expenditure as is rental expenditur
-e.
- WE HAVE TO INCLUDE RENT IN THE HOUSING EXPENDITURE AND KEEP THE DUMMY 
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-We see that quality is of significance only in food and energy.
- We don't look for quality consumed in household consumption.
- We record only that a person owns a medium or a high-quality asset.
- In other economies, where purchase of a car is only a few multiples of
- monthly income, we have to talk about brand and make when we talk of quality
- in transport but in Tanzania we know that driving  a car itself causes
- a difference in long-term utility - there simply are fewer people trying
- to displace a top owner in the LTDG transport group.
- We do not observe the effect of price of assets for 2008 and 2012.
- The discrete differences in quality of LTDG can still be inferred based
- on the overall price of houses in 2012.
- A comparison with IES data - however isn't possible with respect to LTDG.
- 
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-Over a longer period of time, an individual spreads her expenditure across
- future expectations for a status upgrade for her family and her more immediate
- needs.
- In the shorter-time period which we use the data for, we look for a substitutio
-n between medium-term assets (e.g.
- furniture, housing, automobiles and financial assets) and more immediate
- expensive non-durable expenditure (we exclude the expenditure on education
- for children from the total expenditure; we also don't count items that
- are only consumed by 10 or less houses - these are "mortgage, rice_paddy,
- nut_products, wild_birds, packaged_fish, miscdrinkpowder, readymade_tea_coffee,
- winespirits").
+ A regression performed across multiple quantiles could provide further
+ insights into how the purchase of assets changes in different quantiles
+ of a society.
  
 \end_layout
 

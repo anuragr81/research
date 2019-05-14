@@ -1475,7 +1475,7 @@ lsms_loader<-function(fu,ln) {
   }
   
   ####
-  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryNames,returnBeforeGrouping,minConsumerNumber){
+  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryNames,returnBeforeGrouping,minConsumerNumber,assets_type){
     if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
     }
@@ -1574,13 +1574,21 @@ lsms_loader<-function(fu,ln) {
     
     if (year == 2012)
     {
+      if (missing(assets_type)){
+        assets_type <- "allassets"
+      }
+      if (assets_type == "groupwise"){
+        asset_order_func <- ln()@asset_types_2010_2012
+      } else if (assets_type == "allassets"){
+        asset_order_func <- ln()@inheritable_assets_2010_2012
+      }
       a<-read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln=ln)
       a<-subset(subset(a,!is.na(cost)),number>0)
-      missingTypes <- setdiff(unique(as.character(a$shortname)), as.character(ln()@asset_types_2010_2012()$shortname))
+      missingTypes <- setdiff(unique(as.character(a$shortname)), as.character(asset_order_func()$shortname))
       if ( length ( missingTypes )>0 ){
         stop(paste("Asset types not known for:",toString(missingTypes)))
       }
-      a <-merge(a,ln()@asset_types_2010_2012())
+      a <-merge(a,asset_order_func())
       
       ac<-ddply(a,.(hhid),summarise,tot_asset_cost=sum(cost))
       at<-ddply(a,.(hhid,assettype),summarise,type_cost=sum(cost))
@@ -1641,7 +1649,10 @@ lsms_loader<-function(fu,ln) {
         
       }
     }  
-    
+    if (is.element("household",colnames(ds)) && is.element("toteducexpense",colnames(ds)) && is.element("tothouserent",colnames(ds))) {
+      print ("Adding education expense and house rent into household expense")
+      ds$household <- with(ds,log(toteducexpense+tothouserent+exp(household)))
+    }
     ds <- add_high_low_exp_ratios(ds)
     return(ds)
     
