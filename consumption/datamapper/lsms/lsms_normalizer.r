@@ -1985,7 +1985,7 @@ lsms_normalizer<-function() {
       } # end if
     } # end for
   }
-  
+
   occupation_mapping<-function(){
     
     occupation<-"AGRICULTURE/LIVESTOCK.......1
