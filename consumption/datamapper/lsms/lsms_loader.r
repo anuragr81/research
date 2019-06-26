@@ -721,6 +721,9 @@ lsms_loader<-function(fu,ln) {
       c <- fu()@get_translated_frame(dat=cdat,
                                      names=ln()@get_ohs_secc_columns_lsms_2012(),
                                      m=ln()@get_ohs_secc_fields_mapping_lsms_2012())
+      
+      c$education_rank <-as.integer(c$highest_educ>=33)*4 + as.integer(c$highest_educ<33 & c$highest_educ>=25) *3 + as.integer(c$highest_educ>=19 & c$highest_educ<25)*2 + as.integer(c$highest_educ>=1 & c$highest_educ<19)
+      
       c$hhid<-as.character(c$hhid)
       ab <- merge(a,b)
       ohs<-merge(ab,c)
@@ -747,9 +750,10 @@ lsms_loader<-function(fu,ln) {
     if (year == 2010){
       
       #* Read section c_cb file
-      cbFileName = paste(dirprefix,'./lsms/TZNPS2COMDTA/COMSEC_CB.dta',sep="")
-      cbdat<-read.dta(cbFileName,convert.factors = FALSE)
+      cbFileName = paste(dirprefix,'/lsms/TZNPS2COMDTA/COMSEC_CB.dta',sep="")
       print(paste("Reading file ",cbFileName))
+      cbdat<-read.dta(cbFileName,convert.factors = FALSE)
+      
       
       cb <- fu()@get_translated_frame(dat=cbdat,
                                       names=ln()@ohs_seccb_columns_lsms(2010),
@@ -800,6 +804,8 @@ lsms_loader<-function(fu,ln) {
       c <- fu()@get_translated_frame(dat=cdat,
                                      names=ln()@get_ohs_secc_columns_lsms_2010(),
                                      m=ln()@get_ohs_secc_fields_mapping_lsms_2010())
+      c$education_rank <-as.integer(c$highest_educ>=33)*4 + as.integer(c$highest_educ<33 & c$highest_educ>=25) *3 + as.integer(c$highest_educ>=19 & c$highest_educ<25)*2 + as.integer(c$highest_educ>=1 & c$highest_educ<19)
+      
       c$hhid<-as.character(c$hhid)
       ab <- merge(a,b)
       ohs<-merge(ab,c)
@@ -878,6 +884,9 @@ lsms_loader<-function(fu,ln) {
       c <- fu()@get_translated_frame(dat=bcdat,
                                      names=ln()@get_ohs_secc_columns_lsms_2008(),
                                      m=ln()@get_ohs_secc_fields_mapping_lsms_2008())
+      
+      c$education_rank <-as.integer(c$highest_educ>=33)*4 + as.integer(c$highest_educ<33 & c$highest_educ>=25) *3 + as.integer(c$highest_educ>=19 & c$highest_educ<25)*2 + as.integer(c$highest_educ>=1 & c$highest_educ<19)
+      
       c$hhid<-as.character(c$hhid)
       ab <- merge(a,b)
       ohs<-merge(ab,c)
@@ -1300,12 +1309,20 @@ lsms_loader<-function(fu,ln) {
     
     
     if (year == 2010 || year == 2012) {
+      if (year == 2010){
+        itemcodes <- ln()@items_codes_2010()
+      } else {
+        itemcodes <- ln()@items_codes_2012()
+      }
       if (basis=="price"){
         print("Price based groups")
         groups      <- subset( ln()@lsms_groups_pricebased_2010_2012(), category == categoryName )
       } else if (basis == "sparseness"){
         print("sparseness based groups")
         groups      <- subset( ln()@lsms_groups_sparsenessbased_2010_2012(), category == categoryName )
+      } else if (basis == "quality"){
+        print("quality based groups")
+        groups      <- subset( ln()@lsms_groups_qualitybased_2010_2012(), category == categoryName )
       } else {
         stop("Invalid basis")
       }
@@ -1319,9 +1336,32 @@ lsms_loader<-function(fu,ln) {
       stop(paste("Year",year,"not supported for group_collect"))
     } 
     
-    print(paste("Collecting from groups:",toString(unique(groups$group))))
     
-    if (setequal(groups$group,c("high","low")) || setequal(groups$group,c("low")) || setequal(groups$group,c("high"))) {
+    print(paste("Collecting from groups:",toString(unique(groups$group))))
+    if (setequal(groups$group,c("quality"))) {
+      # get prices for the year
+      print ("Loaded prices noted by the respondents (instead of the market recorded prices)")
+      mp<-match_recorded_prices(year = year, dirprefix = dirprefix,fu = fu, ln=ln,marketPricesOnly = TRUE)
+      mpp<-ddply(mp,.(item),summarise,mean_price=mean(recorded_price))
+      itemcodesmap <- plyr::rename(itemcodes[,c("shortname","code")],c("code"="item"))
+      mpp <- merge(mpp,itemcodesmap)
+      hhp <- merge(hh,mpp,by=c("shortname"))
+      hhpg <- merge(hhp,groups,by=c("shortname"))
+      print("Obtained prices for quality/expenditureonly group")
+      minprices <- ddply(hhpg[,c("shortname","mean_price","category")],.(category),summarise,min_price=min(mean_price))
+      hhpg$factor<-as.integer(hhpg$lwp_unit==1)+as.integer(hhpg$lwp_unit==2)/1000.0+as.integer(hhpg$lwp_unit==3)+as.integer(hhpg$lwp_unit==4)/1000.0+as.integer(hhpg$lwp_unit==5)
+      hhpg$quantity <-with (hhpg,lwp*factor)
+      
+      hhpg <- merge(minprices,hhpg)
+      # get price ratio for every group
+      hhpg$price_ratio <- with (hhpg,mean_price/min_price) 
+      # calculate sum of quantity consumed
+      totq <- ddply(unique(hhpg[,c("hhid","shortname","category","quantity","price_ratio")]),.(category,hhid),summarise,totq=sum(quantity), qsum = sum (price_ratio*quantity))[,c("hhid","category","qsum","totq")]
+      # calculate the quality ratio -  sum (price/min(price)*quantity) / sum (quantity)
+      totq$quality <- with(totq,qsum/totq)
+      return(totq[,c("hhid","category","quality")])
+      
+    } else if (setequal(groups$group,c("high","low")) || setequal(groups$group,c("low")) || setequal(groups$group,c("high"))) {
       print("Using high-low groups")
       ##Note: cost would not be avalable from the diary if the type of commodity in the group is an asset.
       # if we can get the asset costs populated, then the data-frame can be rbind-ed to vis data-frame.
@@ -1348,14 +1388,18 @@ lsms_loader<-function(fu,ln) {
       vis$high_cost                        <- vis$high_cost + 1e-16
       
       vis$highratio                        <- with(vis,high_cost/(low_cost+high_cost))
-      
+      vis$quality                          <- vis$highratio
       vis$ln_tot_categ_exp                 <- log(with(vis,high_cost+low_cost))
       vis$tot_categ_exp                    <- with(vis,high_cost+low_cost)
       vis$high_expenditure                 <- vis$high_cost
       vis$group                            <- NULL
       vis$low_cost                         <- NULL
       vis$high_cost                        <- NULL
-      
+      if (length(unique(groups$category))>1){
+        stop("Cannot handle more than one category")
+      } else {
+        vis$category <- unique(groups$category)
+      }
       
     } else if (setequal(groups$group,c("asset","expenditure"))){
       print("Using asset-expenditure groups")
@@ -1425,7 +1469,12 @@ lsms_loader<-function(fu,ln) {
       no_vis_hhid      <- setdiff(unique(hh$hhid),unique(vis$hhid))
       no_vis           <- data.frame(hhid=no_vis_hhid,group_cost=rep(0,length(no_vis_hhid)))
       vis              <- rbind(vis,no_vis)
-      
+      vis$quality      <- log(vis$group_cost+1e-7)
+      if (length(unique(groups$category))>1){
+        stop("Cannot handle more than one category")
+      } else {
+        vis$category <- unique(groups$category)
+      }
     } else {
       stop( paste ( "Unknown row elements in groups frame"))
     }
@@ -1434,7 +1483,7 @@ lsms_loader<-function(fu,ln) {
   }
   
   ####
-  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryName,returnBeforeGrouping,minConsumerNumber){
+  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryNames,returnBeforeGrouping,minConsumerNumber,assets_type){
     if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
     }
@@ -1480,21 +1529,36 @@ lsms_loader<-function(fu,ln) {
     
     hhid_personid   <- get_hsize(ohs)
     
-    if (returnBeforeGrouping){
-      vis <- hh
-      mcn <- ddply(vis, .(shortname),summarise,nc=length(unique(hhid)))
-      negligibleShortNames <- unique(as.character(subset(mcn,nc<=minConsumerNumber)$shortname))
-      print(paste("Removing", toString(negligibleShortNames), "from the analysis on grounds of low,",minConsumerNumber, "number of consumers "))
-      vis                 <- subset(vis,!is.element(shortname,negligibleShortNames))
-      
-    } else {
-      vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryName,hh=hh,basis=basis)
-    }
-    
     if (missing(minConsumerNumber)){
       minConsumerNumber <- 10
       
     }
+    
+    if (returnBeforeGrouping){
+      vis <- hh
+      mcn <- ddply(vis, .(shortname),summarise,nc=length(unique(hhid)))
+      negligibleShortNames <- unique(as.character(subset(mcn,nc<=minConsumerNumber)$shortname))
+      print(paste("Removing", toString(negligibleShortNames), "from the analysis on grounds of low(",minConsumerNumber, ") number of consumers "))
+      vis                 <- subset(vis,!is.element(shortname,negligibleShortNames))
+      
+    } else {
+      # if there are multiple categorynames then - use (h %>% spread(category, quality))
+      
+      if (basis=="quality"){
+        dat <- NULL
+        for (categ in categoryNames){
+          to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categ,hh=hh,basis=basis)
+          print(paste("To be added: ", toString(colnames(to_be_added))))
+          dat <-   rbind(dat,to_be_added[,c("hhid","category","quality")])
+        }
+        vis <- dat %>% spread(category, quality)
+      } else if (basis == "price" || basis == "sparseness") {
+        vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryNames,hh=hh,basis=basis)
+      } else {
+        stop (paste("category names not handled for basis:",basis))
+      }
+    }
+    
     ds                  <- merge(totexp,vis);
     print(paste("Merging hsize",dim(ds)[1]))
     
@@ -1518,13 +1582,21 @@ lsms_loader<-function(fu,ln) {
     
     if (year == 2012)
     {
+      if (missing(assets_type)){
+        assets_type <- "allassets"
+      }
+      if (assets_type == "groupwise"){
+        asset_order_func <- ln()@asset_types_2010_2012
+      } else if (assets_type == "allassets"){
+        asset_order_func <- ln()@inheritable_assets_2010_2012
+      }
       a<-read_assets_file(year = year, dirprefix = dirprefix,fu = fu, ln=ln)
       a<-subset(subset(a,!is.na(cost)),number>0)
-      missingTypes <- setdiff(unique(as.character(a$shortname)), as.character(ln()@asset_types_2010_2012()$shortname))
+      missingTypes <- setdiff(unique(as.character(a$shortname)), as.character(asset_order_func()$shortname))
       if ( length ( missingTypes )>0 ){
         stop(paste("Asset types not known for:",toString(missingTypes)))
       }
-      a <-merge(a,ln()@asset_types_2010_2012())
+      a <-merge(a,asset_order_func())
       
       ac<-ddply(a,.(hhid),summarise,tot_asset_cost=sum(cost))
       at<-ddply(a,.(hhid,assettype),summarise,type_cost=sum(cost))
@@ -1574,18 +1646,21 @@ lsms_loader<-function(fu,ln) {
         print(paste("logColName=",logColName))
         ds[bandColName] <- NA
         print(paste("bandColName=",bandColName))
-        ds[ds[,c(logColName)] >= b1_start & ds [,c(logColName)] <= b1_end ,][,c(bandColName)] <- 4
+        ds[ds[,c(logColName)] >= b1_start & ds [,c(logColName)] <= b1_end ,][,c(bandColName)] <- 1
         print("Assigned 1")
-        ds[ds[,c(logColName)] >= b2_start & ds [,c(logColName)] <= b2_end ,][,c(bandColName)] <- 3
+        ds[ds[,c(logColName)] >= b2_start & ds [,c(logColName)] <= b2_end ,][,c(bandColName)] <- 2
         print("Assigned 2")
-        ds[ds[,c(logColName)] >= b3_start & ds [,c(logColName)] <= b3_end ,][,c(bandColName)] <- 2
+        ds[ds[,c(logColName)] >= b3_start & ds [,c(logColName)] <= b3_end ,][,c(bandColName)] <- 3
         print("Assigned 3")
-        ds[ds[,c(logColName)] >= b4_start & ds [,c(logColName)] <= b4_end ,][,c(bandColName)] <- 1
+        ds[ds[,c(logColName)] >= b4_start & ds [,c(logColName)] <= b4_end ,][,c(bandColName)] <- 4
         print("Assigned 4")
         
       }
     }  
-    
+    if (is.element("household",colnames(ds)) && is.element("toteducexpense",colnames(ds)) && is.element("tothouserent",colnames(ds))) {
+      print ("Adding education expense and house rent into household expense")
+      ds$household <- with(ds,log(toteducexpense+tothouserent+exp(household)))
+    }
     ds <- add_high_low_exp_ratios(ds)
     return(ds)
     

@@ -18,10 +18,12 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           items_codes_2008="function",
                                           items_codes_2010="function",
                                           lsms_groups_pricebased_2010_2012="function",
+                                          lsms_groups_qualitybased_2010_2012="function",
                                           lsms_groups_sparsenessbased_2010_2012="function",
                                           assets_order_2010_2012="function",
                                           items_codes_2012="function",
                                           asset_types_2010_2012="function",
+                                          inheritable_assets_2010_2012="function",
                                           get_piece_measures="function",
                                           ignored_bad_units="function",
                                           get_group_qconv_factor="function",
@@ -237,7 +239,7 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='womensshoes',shortname='womensshoes',code='323',category="personal_products"))
     r=rbind(r,data.frame(item='childrensshoes',shortname='childrensshoes',code='324',category="personal_products"))
     
-    r=rbind(r,data.frame(item='Woodpoles',shortname='bamboo',code='325',category="hosing"))
+    r=rbind(r,data.frame(item='Woodpoles',shortname='bamboo',code='325',category="housing"))
     r=rbind(r,data.frame(item='ThatchingGrass',shortname='grass',code='326',category="housing"))
     
     
@@ -836,6 +838,55 @@ lsms_normalizer<-function() {
     return(y)
   }
   
+  inheritable_assets_2010_2012 <- function(){
+    x<-NULL
+    x<-rbind(x,data.frame(shortname="radio",assettype="minor"))
+    x<-rbind(x,data.frame(shortname="landline",assettype="minor"))
+    x<-rbind(x,data.frame(shortname="mobile",assettype="minor"))
+    x<-rbind(x,data.frame(shortname="computer",assettype="general"))
+    x<-rbind(x,data.frame(shortname="refrigerator",assettype="general"))
+    x<-rbind(x,data.frame(shortname="sewingmachine",assettype="general"))
+    x<-rbind(x,data.frame(shortname="tv",assettype="general"))
+    x<-rbind(x,data.frame(shortname="videoplayer",assettype="general"))
+    x<-rbind(x,data.frame(shortname="waterheater",assettype="general"))
+    x<-rbind(x,data.frame(shortname="musicplayer",assettype="general"))
+    x<-rbind(x,data.frame(shortname="musicsystem",assettype="general"))
+    x<-rbind(x,data.frame(shortname="dishtv",assettype="general"))
+    x<-rbind(x,data.frame(shortname="chair",assettype="general"))
+    x<-rbind(x,data.frame(shortname="sofa",assettype="general"))
+    x<-rbind(x,data.frame(shortname="table",assettype="general"))
+    x<-rbind(x,data.frame(shortname="watch",assettype="general"))
+    x<-rbind(x,data.frame(shortname="bed",assettype="general"))
+    x<-rbind(x,data.frame(shortname="mosquitonet",assettype="minor"))
+    x<-rbind(x,data.frame(shortname="iron",assettype="general"))
+    x<-rbind(x,data.frame(shortname="stove_other",assettype="general"))
+    x<-rbind(x,data.frame(shortname="stove_electricgas",assettype="general"))
+    x<-rbind(x,data.frame(shortname="car",assettype="general"))
+    x<-rbind(x,data.frame(shortname="motorbike",assettype="general"))
+    x<-rbind(x,data.frame(shortname="bike",assettype="general"))
+    x<-rbind(x,data.frame(shortname="cart",assettype="general"))
+    x<-rbind(x,data.frame(shortname="animalcart",assettype="general"))
+    x<-rbind(x,data.frame(shortname="boat",assettype="general"))
+    x<-rbind(x,data.frame(shortname="wheelbarrow",assettype="general"))
+    x<-rbind(x,data.frame(shortname="livestock",assettype="general"))
+    x<-rbind(x,data.frame(shortname="poultry",assettype="general"))
+    x<-rbind(x,data.frame(shortname="engine_outboard",assettype="general"))
+    x<-rbind(x,data.frame(shortname="donkey",assettype="general"))
+    x<-rbind(x,data.frame(shortname="ac_fan",assettype="general"))
+    x<-rbind(x,data.frame(shortname="spraymachine",assettype="general"))
+    x<-rbind(x,data.frame(shortname="waterpump",assettype="general"))
+    x<-rbind(x,data.frame(shortname="tractor",assettype="general"))
+    x<-rbind(x,data.frame(shortname="trailer",assettype="general"))
+    x<-rbind(x,data.frame(shortname="plough",assettype="general"))
+    x<-rbind(x,data.frame(shortname="harrow",assettype="general"))
+    x<-rbind(x,data.frame(shortname="handmill",assettype="general"))
+    x<-rbind(x,data.frame(shortname="coffeepulpingmachine",assettype="general"))
+    x<-rbind(x,data.frame(shortname="powertiller",assettype="general"))
+    x<-rbind(x,data.frame(shortname="house",assettype="general"))
+    return(x)
+    
+  }
+  
   asset_types_2010_2012 <-function()
   {
     x<-NULL
@@ -1069,6 +1120,169 @@ lsms_normalizer<-function() {
     
     return(x)
   }
+  
+  
+  lsms_groups_qualitybased_2010_2012<- function(){
+    
+    x<-NULL
+    
+    x<-rbind(x,data.frame(category='fat', group='quality', shortname='cooking_oil'))
+    x<-rbind(x,data.frame(category='fat', group='quality', shortname='butter_margarine'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='rice_husked'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='rice_paddy'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='maize_green'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='maize_grain'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='maize_flour'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='millet_grain'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='millet_flour'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='wheat'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='bread'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='bunscakes'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='pasta'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='othercereal'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='pulses'))
+    x<-rbind(x,data.frame(category='sugars', group='quality', shortname='sugar'))
+    x<-rbind(x,data.frame(category='sugars', group='quality', shortname='sweet'))
+    x<-rbind(x,data.frame(category='sugars', group='quality', shortname='honey'))
+    x<-rbind(x,data.frame(category='fat', group='quality', shortname='peanuts'))
+    x<-rbind(x,data.frame(category='fat', group='quality', shortname='coconut'))
+    x<-rbind(x,data.frame(category='fat', group='quality', shortname='cashew_almonds'))
+    x<-rbind(x,data.frame(category='fat', group='quality', shortname='nut_products'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='milk_products'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='fresh_milk'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='canned_milk'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='goat'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='beef'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='pork'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='chicken'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='wild_birds'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='wild_meat'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='fish_seafood'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='dried_canned_fish'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='packaged_fish'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='eggs'))
+    x<-rbind(x,data.frame(category='beverages', group='quality', shortname='beer'))
+    x<-rbind(x,data.frame(category='beverages', group='quality', shortname='brews'))
+    x<-rbind(x,data.frame(category='beverages', group='quality', shortname='winespirits'))
+    x<-rbind(x,data.frame(category='condiments', group='quality', shortname='spices'))
+    x<-rbind(x,data.frame(category='condiments', group='quality', shortname='salt'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='onion'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='greens'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='dried_canned_veg'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='cassava_fresh'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='cassava_flour'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='sweet_potato'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='yam'))
+    x<-rbind(x,data.frame(category='starch', group='quality', shortname='potatoes'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='banana_green'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='othervegstarch'))
+    x<-rbind(x,data.frame(category='beverages', group='quality', shortname='tea'))
+    x<-rbind(x,data.frame(category='beverages', group='quality', shortname='coffee'))
+    x<-rbind(x,data.frame(category='beverages', group='quality', shortname='miscdrinkpowder'))
+    x<-rbind(x,data.frame(category='beverages', group='quality', shortname='canned_drink'))
+    x<-rbind(x,data.frame(category='beverages', group='quality', shortname='readymade_tea_coffee'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='banana_ripe'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='citrus'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='mangoes'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='sugarcane'))
+    
+    x<-rbind(x,data.frame(category = "energy", group="low", shortname="kerosene"))
+    x<-rbind(x,data.frame(category = "energy", group="high", shortname="charcoal"))
+    x<-rbind(x,data.frame(category = "energy", group="high", shortname="gas"))
+    x<-rbind(x,data.frame(category = "energy", group="high",shortname="electricity"))
+    x<-rbind(x,data.frame(category = "energy", group="high", shortname="petrol"))
+    
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="cigarettes"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="cellphone_voucher"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="bar_soap"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="clothes_soap"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="toothpaste"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="toilet_paper"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="skin_cream"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="other_personal"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="misc_cleaning"))
+    
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="household_products_repair"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="consumer_durables_repair"))
+    
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="mensclothes"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="womensclothes"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="childrensclothes"))
+    
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="mensshoes"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="womensshoes"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="childrensshoes"))
+    
+    #x<-rbind(x,data.frame(category = "transport", group="expenditureonly",          shortname="public_transport"))
+    #x<-rbind(x,data.frame(category = "transport", group="expenditureonly",         shortname="motor_repair"))
+    #x<-rbind(x,data.frame(category = "transport", group="expenditureonly",         shortname="petrol"))
+    #x<-rbind(x,data.frame(category = "transport", group="expenditureonly",          shortname="bicycle_repair"))
+    
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="services"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="bride_price"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="marriage"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="funeral"))
+    
+    #    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="refrigerator"))
+    #    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="tv"))
+    #    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="ac_fan"))
+    #    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="dishtv"))
+    #    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="videoplayer"))
+    #    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="computer"))
+    #    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="waterheater"))
+    #    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="musicplayer"))
+    #    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="musicsystem"))
+    #    x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="land"))
+    ##x<-rbind(x,data.frame(category = "social_functions", group="asset"      ,shortname="house")) # (excluded if housingstatus is used as a CV)
+    
+    
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="light_bulbs"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="carpet"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="linen"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="mat"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="mosquito_net"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="mattress"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="building_material"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="insurance"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="bamboo"))
+    x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="grass"))
+    
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="refrigerator"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="sewingmachine"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="tv"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="chair"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="sofa"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="table"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="bed"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="cupboard"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="lantern"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="mosquitonet"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="wheelbarrow"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="livestock"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="poultry"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="engine_outboard"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="donkey"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="land"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="house"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="ac_fan"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="dishtv"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="hoe"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="spraymachine"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="waterpump"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="reaper"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="tractor"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="trailer"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="plough"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="harrow"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="milkingmachine"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="harvester"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="handmill"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="coffeepulpingmachine"))
+    #x<-rbind(x,data.frame(category = "housing", group="asset"      ,shortname="fertiliserdistributor"))
+    
+    return(x)
+  }
+  
   
   lsms_groups_pricebased_2010_2012<- function(){
     
@@ -1626,10 +1840,10 @@ lsms_normalizer<-function() {
     return(s)
   }
   
-    get_ohs_secc_columns_lsms_2008<-function(){
-      return(c("hhid","personid","is_ge5y","highest_educ","schoolowner",
-               "has_missedschool","educexpense"))
-    }
+  get_ohs_secc_columns_lsms_2008<-function(){
+    return(c("hhid","personid","is_ge5y","highest_educ","schoolowner",
+             "has_missedschool","educexpense"))
+  }
   
   get_ohs_secc_fields_mapping_lsms_2008<-function(){
     s = data.frame(iesname=NULL,name=NULL)
@@ -1647,7 +1861,7 @@ lsms_normalizer<-function() {
     return(s)
   }
   
-
+  
   get_lsms_secj_info_columns_2008<-function(){
     return(c("hhid","housingstatus","houserent","roomsnum_primary","roomsnum_secondary","wallsmaterial","roofmaterial","floormaterial","toilet","cookingfuel","lightingfuel","dryseasonwatersource"))
   }
@@ -1722,7 +1936,7 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="sncode",name="itemcode"))
     s= rbind(s,data.frame(iesname="snq1",name="number"))
     return(s)
-
+    
   }
   area_code<-function(df,field_array)
   {
@@ -1771,7 +1985,7 @@ lsms_normalizer<-function() {
       } # end if
     } # end for
   }
-  
+
   occupation_mapping<-function(){
     
     occupation<-"AGRICULTURE/LIVESTOCK.......1
@@ -2106,12 +2320,12 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="slq2",name="cost"))
     return(s)
   }
-
+  
   ohs_info_columns_lsms_2008<-function(){
     # hhid, age, gender, educ, race, hsize, areatype, 
     # income file: income
     return(c("hhid", "gender", "personid","YOB", "household_status", "inhouse_consumer",
-            "inhouse_resident", "outhouse_days_in_year", 
+             "inhouse_resident", "outhouse_days_in_year", 
              "occupation", "fathers_educ", "mothers_educ", "married", "spouse_resident","years_community",
              "outhouse_spouses", "source_migration_code", 
              "reason_migration", "birthdistrict"))
@@ -2466,10 +2680,12 @@ lsms_normalizer<-function() {
              items_codes_2008=items_codes_2008,
              items_codes_2010=items_codes_2010,
              lsms_groups_pricebased_2010_2012=lsms_groups_pricebased_2010_2012,
+             lsms_groups_qualitybased_2010_2012=lsms_groups_qualitybased_2010_2012,
              lsms_groups_sparsenessbased_2010_2012=lsms_groups_sparsenessbased_2010_2012,
              assets_order_2010_2012=assets_order_2010_2012,
              items_codes_2012=items_codes_2012,
              asset_types_2010_2012=asset_types_2010_2012,
+             inheritable_assets_2010_2012=inheritable_assets_2010_2012,
              get_piece_measures=get_piece_measures,
              ignored_bad_units=ignored_bad_units,
              get_group_qconv_factor=get_group_qconv_factor,
