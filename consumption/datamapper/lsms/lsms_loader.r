@@ -490,7 +490,7 @@ lsms_loader<-function(fu,ln) {
     
   }
   
-  load_market_prices <-function(year,dirprefix,fu,ln,means_calc){
+  load_market_prices <-function(year,dirprefix,fu,ln,aggregation_code){
     
     if (year ==2010) {
       a<-read.dta(paste(dirprefix,'/lsms/TZNPS2COMDTA/COMSEC_CJ.dta',sep=""),convert.factors = FALSE)
@@ -527,10 +527,19 @@ lsms_loader<-function(fu,ln) {
     
     cj <- subset(cj,price!=Inf)
     
-    if (means_calc==TRUE){
-      prices<-ddply(cj,.(code),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(price[!is.na(price)],0.85))
-    } else {
+    if (missing(aggregation_code)) {
       prices <- cj
+    } else {
+      if (aggregation_code=="region"){
+        prices<-ddply(cj,.(code,region),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(names=FALSE, x=price[!is.na(price)],probs=0.5) , pricessd = sd(price[!is.na(price)]) ) 
+      } else if (aggregation_code=="district"){
+        prices<-ddply(cj,.(code,region,district),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(names=FALSE, x=price[!is.na(price)],probs=0.5), pricessd = sd(price[!is.na(price)]))
+      } else if (aggregation_code=="all") {
+        prices<-ddply(cj,.(code),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(names=FALSE, x=price[!is.na(price)],probs=0.5), pricessd = sd(price[!is.na(price)]))
+      } else {
+        stop(paste("Unrecognised value for",aggregation_code))
+      }
+      
     }
     prices_merged<-merge(prices,item_names,all.x=TRUE,by=c("code"))
     
