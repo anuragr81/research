@@ -490,8 +490,13 @@ lsms_loader<-function(fu,ln) {
     
   }
   
-  load_market_prices <-function(year,dirprefix,fu,ln,means_calc){
+  load_market_prices <-function(year,dirprefix,fu,ln,use_pieces,aggregation_code){
     
+    if (missing(use_pieces)){
+      use_pieces <- TRUE
+    } else {
+      use_pieces <- FALSE
+    }
     if (year ==2010) {
       a<-read.dta(paste(dirprefix,'/lsms/TZNPS2COMDTA/COMSEC_CJ.dta',sep=""),convert.factors = FALSE)
       a<-(a[!is.na(a),])
@@ -511,6 +516,11 @@ lsms_loader<-function(fu,ln) {
       stop(paste("year:",year,"not supported"))
     }
     
+    if (use_pieces==FALSE) {
+      cj_new <- subset(cj,lwp_unit!=5)
+      print(paste("Ignoring pieces from the market prices (", sprintf("%.2f",100*dim(cj_new)[1]/dim(cj)[1]),"% entries)"))
+      cj     <- cj_new
+    }
     cj<-(cj[!is.na(cj$price),])
     cj <- subset(cj,price>0)
     cj$factor<-as.integer(cj$lwp_unit==1)+as.integer(cj$lwp_unit==2)/1000.0+as.integer(cj$lwp_unit==3)+as.integer(cj$lwp_unit==4)/1000.0+as.integer(cj$lwp_unit==5)
@@ -527,10 +537,19 @@ lsms_loader<-function(fu,ln) {
     
     cj <- subset(cj,price!=Inf)
     
-    if (means_calc==TRUE){
-      prices<-ddply(cj,.(code),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(price[!is.na(price)],0.85))
-    } else {
+    if (missing(aggregation_code)) {
       prices <- cj
+    } else {
+      if (aggregation_code=="region"){
+        prices<-ddply(cj,.(code,region),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(names=FALSE, x=price[!is.na(price)],probs=0.5) , pricessd = sd(price[!is.na(price)]) ) 
+      } else if (aggregation_code=="district"){
+        prices<-ddply(cj,.(code,region,district),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(names=FALSE, x=price[!is.na(price)],probs=0.5), pricessd = sd(price[!is.na(price)]))
+      } else if (aggregation_code=="all") {
+        prices<-ddply(cj,.(code),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(names=FALSE, x=price[!is.na(price)],probs=0.5), pricessd = sd(price[!is.na(price)]))
+      } else {
+        stop(paste("Unrecognised value for",aggregation_code))
+      }
+      
     }
     prices_merged<-merge(prices,item_names,all.x=TRUE,by=c("code"))
     
@@ -538,7 +557,15 @@ lsms_loader<-function(fu,ln) {
     if (length(missing_shortnames)>0){
       print(paste("Could not find itemnames for:",toString(missing_shortnames)))
     }
-    return(prices_merged)
+    prices_merged <- merge(prices_merged, ddply(prices_merged, .(shortname),summarise,median_price = median(price)) , by = c("shortname"))
+    
+    n<-10
+    prices_merged_removed   <-(subset(prices_merged, abs(log(price/median_price,n))>=1))
+    prices_merged_remaining <-(subset(prices_merged, abs(log(price/median_price,n))<1))
+    print(paste("removing",dim(prices_merged_removed)[1],"/",dim(prices_merged)[1],"(",100*dim(prices_merged_removed)[1]/dim(prices_merged)[1]
+                ,"%) price entries for being ",n,"times away from the national median"))
+    
+    return(prices_merged_remaining)
   }
   
   
