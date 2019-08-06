@@ -1,0 +1,41 @@
+
+We need to be able to reduce an expression and collect terms in an equation. The first step is to have an equation. The next step is to have inequalties. In some sense,
+a equality and inequality can be seen as a boolean expressions that are evaluated. The key question
+is whether equations and boolean evaluations are the same x + y = z (as a condition) does not need to be a logical evaluation.
+x + y = z is an evaluation (you can check whether x + y == z or not) and a constraint. If we ever want to reduce a set of constraints, we should
+be able to store expressions and equations alike. Let's consider an example:
+
+vars: x, y, z
+expression: (x + y)*z
+equation:x + y = z
+
+In what appears, an equality is merely an equivalence of expressions - one that could lead to a finite set of expresson equivalences by rearrangement. x + y = z leads to x = z-y and y = z - x and so on.
+
+Just the way an expression is a relationship between variables, equalities/Inequalities are a relationship between expressions. Let's consider all logical equivalences (a is true => b is true)
+as cases of equality as well. If expressions (basically an evaluation order - i.e. an order of processing variables using a set of expressions) correspond to a tree, are expression
+equivalences mere tree equivalences?
+
+x + y = z => x  = z - y => y = z - x
+
+There is another set:
+x + y - z = 0
+
+Of course the order of variables could be reversed. So x + y = z => y + x = z and so on. The change in order comes out of commutability of + operation.
+Mathematicians take an alternative view of equations - by manipulating it (Differentiating it or integrating it). This can be interpreted as functions of expressions. An equivalence
+also implies the equivalence of mappings of either side of the equation. This applies to inequalities as well. But as is, this would lead to an infinite equivalences since the set of functions
+that can be applied are infinite.  We definitely don't want to store all possible equivalences - but simply those that can be generalised with a function. 
+
+
+
+Is rearranging terms different from applying a mapping on either sides? Why do we rearrange the terms in an equation anyways. Remember that our goal is to write proofs - not
+try to arrive at proofs ourselves - which in itself is a far more ambitious project - since it requires a lot of theorems, substitutions and formula matching.
+Before we come up with an automated way of establishing equivalences, we can leave equivalances as a pair of expressions that are manipulated together.
+
+set belonging should be considered. 
+
+Let's consider the proof sqrt(2) not being rational. Let's assume that it is rational and hence exist(p in I) & exist(q in I) | { q*sqrt(2) =p }. Now square on both sides, we have
+(q**2)*2 = p**2. exists(x in I) | {p**2/2 = x => p**2 = 2*x } i.e. p**2 is even (since q**2 in I). We rely on the assertion that p**2 is even => p is even. odd ** 2 => odd ,
+even** 2 = even.
+
+
+

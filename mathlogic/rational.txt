@@ -1,0 +1,47 @@
+
+Proof that sqrt(2) is irrational.
+
+Let's assume that it is rational and hence
+(exist(p in I) & exist(q in I) | { q*sqrt(2) = p }.
+Now square on both sides (the machine would not do it automatically)
+
+(exist(p in I) & exist(q in I) ) | { (q**2)*2 = p**2 }
+
+. exists(x in I) | {p**2/2 = x => p**2 = 2*x } i.e. p**2 is even (since q**2 in I).
+
+
+We rely on the assertion that p**2 is even => p is even. if p is even, then p=2k in 4k**2 = 2*q**2 => 2k**2 = q**2.
+No q is also even. That cannot happen (Contradiction).
+
+#######################
+Let's prove x**2 is even => x is even
+Assume what would happen if x is odd. Then x**2 is odd. We arrive at a contradiction. So, x is not odd.
+
+Similarly, x**2 is odd => x is odd
+If x was even, x**2 would be even.
+
+In our system, we should be able to write the sub-proofs as well.
+
+forall(k in I) | { 2*k in I }  ... (lemma1)
+
+even = k in I | { exist(m in I) | k = 2*m } ... (definition1)
+
+j in even =>  exist (m) in I | { j = 2*m } ... (generalisation)
+
+***For us to write proofs from topology or real analysis, we have to define set operations as well.
+
+Now,
+
+j in even =>  exist (m) in I | j = 2*m  => exist(m) in I | j**2 = 4*m**m = 2 * (2*m**2) ... (equation equivalence - mapping applied on both sides of the equation).
+
+It looks like j**2 would be even whenever j is even. Let's formalise this sub-proof i.e. test if k=j**2 is even:
+
+we know that " exist(m) in I | j = 2*m or k = 2*(m**2) "
+We also know the property on integers that :
+
+forall ( m in I )  | { n=m**2 in I } ... (lemma2)
+
+exist(n) in I | k = 2*n is the same as exist(m) in I | j = 2*m
+So we know that k = j**2 in even is the same
+
+
