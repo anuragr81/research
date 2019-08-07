@@ -1063,9 +1063,16 @@ reference "fig:markedprices"
  9 regions for 6 items have less than three marked-prices available).
  A simple median is used as the price for such cases.
  The price-inference is therefore a 2-stage process - we first obtain prices
- for every district.
- When there are no marked prices available in a district, we use the regional
- value.
+ for every district with the regression method.
+ If there are no marked prices available in a district, we use the regional
+ value of the price.
+ For some items, such as cigarettes, the region-prices are not available
+ at for all regions either.
+ Here, the price from obtained by the regressions over the country is used.
+ The prices for some items whose consumption is relatively rare in the diary
+ data e.g.
+ wild-birds, honey, beer are not available for any of the regions.
+ These items are ignored for the study.
 \end_layout
 
 \begin_layout Standard

@@ -1,7 +1,30 @@
 setwd('c:/local_files/research/consumption/datamapper/')
 source('translation/frameutils.R');source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');ll=lsms_loader(fu=fu,ln=lsms_normalizer)
 
-get_regressed_price <- function (lwp,price){
+
+
+get_regressed_market_prices <-function (marketpricesdata,ohsdata,diarydata) {
+  region_district_consumed_items <- unique(merge(unique(ohsdata[,c("region","district","hhid")]),
+                                                 unique(diarydata[,c("hhid","shortname","item")],by=c("hhid")))[,c("region","district","shortname","item")])
+  
+  print("Obtaining district level prices")
+  market_prices_district <- ddply(marketpricesdata,.(region,district,shortname,price),summarise,nprices=length(price[!is.na(price)]),
+                                  median_price=median(price[!is.na(price)]), 
+                                  reg_price_district=get_regressed_market_price(lwp=lwp,price=price) )[,c("region","district","shortname","median_price","nprices","reg_price_district")]
+  print("Marking the missing prices from districts") 
+  matched_district_prices <- merge(market_prices_district,region_district_consumed_items,by=c("region","district","shortname"),
+                                   all.y=TRUE)
+  print("Obtaining regional,national prices")
+  market_prices_regional <- ddply(marketpricesdata,.(region,shortname),summarise,reg_price_region=get_regressed_market_price(lwp=lwp,price=price))[,c("region","shortname","reg_price_region")]
+  market_prices_national <- ddply(marketpricesdata,.(shortname),summarise,reg_price_nat=get_regressed_market_price(lwp=lwp,price=price))[,c("shortname","reg_price_nat")]
+  print("Merging regional, rational prices")
+  k  <-merge(market_prices_regional,matched_district_prices,by=c("region","shortname"),all.y=TRUE)
+  kk <-merge(market_prices_national,k,by=c("shortname"),all.y=TRUE)
+  return(kk)
+}
+
+
+get_regressed_market_price <- function (lwp,price){
   if (length(unique(price))>=3 && any(abs(diff(price))>0) && any(abs(diff(lwp))>0)){
     invsqr         <- 1/lwp**2
     lmres          <- lm(price~ invsqr)
@@ -19,7 +42,7 @@ get_regressed_price <- function (lwp,price){
   } else {
     return(reg_price)
   }
-
+  
   
 }
 
@@ -57,9 +80,9 @@ plot_commodity <- function(sname,data,year)
 #for (x in regs) {g=plot_commodity(sname = iname,data=subset(m2010,shortname==iname & region==as.character(x)),year=paste(2010,"- region:",x)) }
 
 #region_district_consumed_items <- unique(merge(unique(o2010[,c("region","district","hhid")]),unique(c2010[,c("hhid","shortname","item")],by=c("hhid")))[,c("region","district","shortname","item")])
-#market_prices_district <- ddply(m2010,.(region,district,shortname,price),summarise,nprices=length(price[!is.na(price)]),median_price=median(price[!is.na(price)]))[,c("region","district","shortname","median_price","nprices")]
+#market_prices_district <- ddply(m2010,.(region,district,shortname,price),summarise,nprices=length(price[!is.na(price)]),median_price=median(price[!is.na(price)]), reg_price_district=get_regressed_price(lwp=lwp,price=price) )[,c("region","district","shortname","median_price","nprices","reg_price_district")]
 #matched_district_prices <- merge(market_prices_district,region_district_consumed_items,by=c("region","district","shortname"),all.y=TRUE)
 
-#market_prices_regional <- ddply(m2010,.(region,shortname),summarise,reg_price=get_regressed_price(lwp=lwp,price=price))[,c("region","shortname","reg_price")]
+#market_prices_regional <- ddply(m2010,.(region,shortname),summarise,reg_price_region=get_regressed_price(lwp=lwp,price=price))[,c("region","shortname","reg_price_region")]
 
 #k<-merge(market_prices_regional,matched_district_prices,by=c("region","shortname"),all.y=TRUE)
