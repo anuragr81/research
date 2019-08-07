@@ -996,6 +996,165 @@ The price entries were rejected when the price was more than 10 times the
  variation of price is too wide to be ignored.
  The district price is arrived at by using a regression.
  Most areas don't have electricity (only regions – report electricity usage).
+ The price is calculated a recorded price / recorded quantity for the quantities
+ in the survey.
+ To detail how we have assimilated the data from the survey, let's consider
+ an example of the marked prices of rice for 1 kg, 2kg, 5kg and 10kg - a
+ typical set of marked prices would be 4£, 7.5£, 18£ and 35£ respectively.
+ The plot looks like in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:markedprices"
+
+\end_inset
+
+.
+ A linear regression of mp vs q (where mp is the marked price and q the
+ quantity) is hardly appropriate.
+ The unit-prices are slightly less than linear as is shown in the plot of
+ the unit-price corresponding to the quantities in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:unitprice"
+
+\end_inset
+
+.
+ Since we assume that the consumers face the same prices, we do not attempt
+ to match the appropriate price with the quantity consumed by the consumer
+ but simply the price of the standard unit of that commodity e.g.
+ the price per kg for rice in the current example.
+ The regression we use is 
+\begin_inset Formula $\frac{mp}{q}=\beta\frac{1}{q^{2}}+c$
+\end_inset
+
+ (assuming that the marked price is lower than a linear increase - see Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:markedprices"
+
+\end_inset
+
+ - by a factor that itself decreases with increasing 
+\begin_inset Formula $q$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $mp=aq-b/q$
+\end_inset
+
+).
+ Since we use the price set 
+\begin_inset Formula $q=1$
+\end_inset
+
+, the price to be used is simply 
+\begin_inset Formula $\beta+c$
+\end_inset
+
+ for the regression: 
+\begin_inset Formula $\frac{mp}{q}=\beta/q^{2}+c$
+\end_inset
+
+.
+ The regression is run only when at least two prices are available (only
+ 9 regions for 6 items have less than three marked-prices available).
+ A simple median is used as the price for such cases.
+ The price-inference is therefore a 2-stage process - we first obtain prices
+ for every district.
+ When there are no marked prices available in a district, we use the regional
+ value.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/markedprice.png
+	width 3in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:markedprices"
+
+\end_inset
+
+Typical marked prices of a commodity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/unitprice.png
+	width 3in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:unitprice"
+
+\end_inset
+
+Typical Price per unit of the commodity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The price is calculated with a 3-step process.
+ 
 \end_layout
 
 \begin_layout Standard
