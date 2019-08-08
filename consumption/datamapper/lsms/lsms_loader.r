@@ -854,7 +854,7 @@ lsms_loader<-function(fu,ln) {
     }
     ##########################2008#########################
     
-    if (year == 2008){cen
+    if (year == 2008){
       
       #* Read section c_cb file
       cbFileName = paste(dirprefix,'./lsms/tnz2008/TZNPS1CMDTA_E/SEC_B.dta',sep="")

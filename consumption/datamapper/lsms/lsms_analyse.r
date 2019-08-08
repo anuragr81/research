@@ -3,12 +3,25 @@ source('translation/frameutils.R');source('lsms/lsms_normalizer.r');source('lsms
 
 
 
+select_market_price <- function (nat,reg,dstt) { 
+  if (!is.na(dstt)) {
+    return (dstt)
+  } else if (!is.na(reg)) {
+    return (reg)
+  } else if (!is.na(nat)) {
+    return(nat)
+  }
+  stop("Could not find valid price")
+}
+
+
 get_regressed_market_prices <-function (marketpricesdata,ohsdata,diarydata) {
   region_district_consumed_items <- unique(merge(unique(ohsdata[,c("region","district","hhid")]),
                                                  unique(diarydata[,c("hhid","shortname","item")],by=c("hhid")))[,c("region","district","shortname","item")])
   
   print("Obtaining district level prices")
-  market_prices_district <- ddply(marketpricesdata,.(region,district,shortname,price),summarise,nprices=length(price[!is.na(price)]),
+  market_prices_district <- ddply(unique(marketpricesdata[,c("region","district","code","shortname","lwp","price","factor")]),
+                                  .(region,district,shortname),summarise,nprices=length(price[!is.na(price)]),
                                   median_price=median(price[!is.na(price)]), 
                                   reg_price_district=get_regressed_market_price(lwp=lwp,price=price) )[,c("region","district","shortname","median_price","nprices","reg_price_district")]
   print("Marking the missing prices from districts") 
@@ -18,13 +31,98 @@ get_regressed_market_prices <-function (marketpricesdata,ohsdata,diarydata) {
   market_prices_regional <- ddply(marketpricesdata,.(region,shortname),summarise,reg_price_region=get_regressed_market_price(lwp=lwp,price=price))[,c("region","shortname","reg_price_region")]
   market_prices_national <- ddply(marketpricesdata,.(shortname),summarise,reg_price_nat=get_regressed_market_price(lwp=lwp,price=price))[,c("shortname","reg_price_nat")]
   print("Merging regional, rational prices")
-  k  <-merge(market_prices_regional,matched_district_prices,by=c("region","shortname"),all.y=TRUE)
-  kk <-merge(market_prices_national,k,by=c("shortname"),all.y=TRUE)
-  return(kk)
+  price_reg_dstt  <-merge(market_prices_regional,matched_district_prices,by=c("region","shortname"),all.y=TRUE)
+  price_nat_reg_dstt <-merge(market_prices_national,price_reg_dstt,by=c("shortname"),all.y=TRUE)
+  
+  price_nat_reg_dstt <- subset(price_nat_reg_dstt,item>10000);
+  
+  natprices <- subset(price_nat_reg_dstt,!is.na(reg_price_nat))
+  print(paste("Ignored entries:",(dim(price_nat_reg_dstt)[1]-dim(natprices)[1]),"/",dim(price_nat_reg_dstt)[1],"(", 
+              100*(dim(price_nat_reg_dstt)[1]-dim(natprices)[1])/dim(price_nat_reg_dstt)[1],"%)"))
+  prices = ddply(natprices,.(shortname,region,district),summarise,price=select_market_price(nat=reg_price_nat,
+                                                                                            reg=reg_price_region,
+                                                                                            dstt=reg_price_district))
+  #k<-merge(c2010,np2010,by=c("region","district","shortname"),all.x=TRUE)
+  return(prices)
+}
+
+add_market_price_to_diary <- function (marketpricesdata,ohsdata,diarydata){
+  ddata      <- subset(diarydata,item>10000)
+  prices     <-     get_regressed_market_prices (marketpricesdata,ohsdata,ddata)
+  #k<-merge(c2010,np2010,by=c("region","district","shortname"),all.x=TRUE)
+  #market_prices_national <- ddply(marketpricesdata,.(shortname),summarise,reg_price_nat=get_regressed_market_price(lwp=lwp,price=price))[,c("shortname","reg_price_nat")]
+  diarywithregiondistrict <- merge(ddata,unique(ohsdata[,c("hhid","region","district")]),all.x=TRUE)
+  k<-merge(diarywithregiondistrict,prices,all.x=TRUE)
+  noregionprice <- subset(k,is.na(region) & is.na(price))
+  ignored_items <- as.character(unique(noregionprice$shortname))
+  print(paste("Ignoring consumption on:", toString(ignored_items)))
+  diary                   <- subset(k,!is.element(shortname,ignored_items))
+  print(paste("Total number of entries ignored:",(dim(k)[1]-dim(diary)[1]),"/",dim(k)[1],"(",
+              100*(dim(k)[1]-dim(diary)[1])/dim(k)[1],")"))
+  
+  return(diary)
 }
 
 
+item_price_trends <- function() {
+  downwards = c ("banana_green",
+  "banana_ripe",
+  "cassava_flour",
+  "canned milk",
+  "citrus",
+  "coconut",
+  "cooking_oil",
+  "fish_seafood",
+  "peanuts",
+  "sugar",
+  "yam")
+  
+  upwards = c ("beef",
+  "bread",
+  "brews",
+  "cassava_fresh",
+  "chicken",
+  "fresh_milk",
+  "goat",
+  "maize_flour",
+  "maize_grain",
+  "maize_green",
+  "mangoes",
+  "millet_flour",
+  "millet_grain",
+  "onion",
+  "potatoes",
+  "pulses",
+  "rice_husked",
+  "rice_paddy",
+  "sweet_potato",
+  "tea")
+  
+  missing = c ("charcoal",
+  "bunscakes",
+  "kerosene",
+  "salt",
+  "wheat")
+  
+  straight_down = c("eggs",
+  "milling",
+  "othervegstarch")
+  
+  print(length(c(downwards,upwards,missing,straight_down)))
+}
+
+plot_price_tseries <-function(fu,market_prices_national2008,market_prices_national2010,market_prices_national2012) {
+  f1=fu()@rbind_xy(x = market_prices_national2008,y = market_prices_national2010, tagx=2008, tagy=2010)
+  f2=fu()@rbind_xy(x = f1,y = market_prices_national2012, tagy=2012)
+  dev.off(); par(mfrow=c(5,9)); 
+  for (x in sort(as.character(unique(f2$shortname))) ) {
+    g = subset(f2,shortname==x) ; 
+    if(dim(g)[1] == 0 ) {print(paste("bad data:",x))} else { plot(g$tag,g$reg_price,main=x) } 
+  }
+}
+
 get_regressed_market_price <- function (lwp,price){
+  isDebug <- FALSE
   if (length(unique(price))>=3 && any(abs(diff(price))>0) && any(abs(diff(lwp))>0)){
     invsqr         <- 1/lwp**2
     lmres          <- lm(price~ invsqr)
@@ -36,8 +134,10 @@ get_regressed_market_price <- function (lwp,price){
   } else {
     stop("Unhandled block")
   }
-  
-  if (reg_price <0 || abs(log(median(price)/reg_price,2))>1 ) {
+  if (isDebug){
+    print(paste("n=",length(price),"median_price=",median(price),"reg_price=",reg_price))
+  }
+  if (reg_price <0 || is.na(reg_price) || abs(log(median(price)/reg_price,2))>1 ) {
     return(median(price))
   } else {
     return(reg_price)
