@@ -104,7 +104,7 @@ load_market_prices_ <-function(year,dirprefix,fu,ln,use_pieces,aggregation_code)
     res <- rbind(res,plyr::rename(k2,c("lwp_unit2"="lwp_unit","lwp2"="lwp","price2"="price"))[,cols])[,cols]
     res <- rbind(res,plyr::rename(k3,c("lwp_unit1"="lwp_unit","lwp1"="lwp","price1"="price"))[,cols])[,cols]
     cj  <- unique(res)
-    item_names<- ln()@items_codes_2014()
+    item_names<- ln()@items_market_price_codes_2014()
   }
   
   else {

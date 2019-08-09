@@ -48,6 +48,7 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           ohs_seccj_mapping_lsms_2008="function",
                                           ohs_seccf_mapping_lsms_2014="function",
                                           ohs_seccf_columns_lsms_2014="function",
+                                          items_market_price_codes_2014="function",
                                           ohs_seca_columns_lsms="function",
                                           ohs_seca_mapping_lsms_2010="function",
                                           area_code="function",
@@ -484,6 +485,74 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='Cassava dry/flour',shortname='cassava_flour',code='10202',category="food"))
     r=rbind(r,data.frame(item='Sweet potatoes',shortname='sweet_potato',code='10203',category="food"))
     r=rbind(r,data.frame(item='Yams/cocoyams',shortname='yam',code='10204',category="food"))
+    r=rbind(r,data.frame(item='Irish potatoes',shortname='potatoes',code='10205',category="food"))
+    r=rbind(r,data.frame(item='Cooking bananas, plantains',shortname='banana_green', code='10206',category="food"))
+    r=rbind(r,data.frame(item='Other starches',shortname='othervegstarch',code='10207',category="food"))
+    r=rbind(r,data.frame(item='Sugar',shortname='sugar',code='10301',category="food"))
+    r=rbind(r,data.frame(item='Sweets',shortname='sweet',code='10302',category="food"))
+    r=rbind(r,data.frame(item='Honey, jams etc.',shortname='honey',code='10303',category="food"))
+    r=rbind(r,data.frame(item='Peas, beans',shortname='pulses',code='10401',category="food"))
+    r=rbind(r,data.frame(item='Groundnuts in shell/shelled',shortname='peanuts',code='10501',category="food"))
+    r=rbind(r,data.frame(item='Coconuts (mature/immature)',shortname='coconut',code='10502',category="food"))
+    r=rbind(r,data.frame(item='Cashew, almonds, nuts',shortname='cashew_almonds', code='10503',category="food"))
+    r=rbind(r,data.frame(item='Seeds from nuts',shortname='nut_products', code='10504',category="food"))
+    r=rbind(r,data.frame(item='Onions, tomatoes, carrots and green pepper, other viungo',shortname='onion',code='10601',category="food"))
+    r=rbind(r,data.frame(item='Spinach, cabbage and other green vegetables',shortname='greens',code='10602',category="food"))
+    r=rbind(r,data.frame(item='Canned, dried and wild vegetables',shortname='dried_canned_veg',code='10603',category="food"))
+    r=rbind(r,data.frame(item='Ripe bananas',shortname='banana_ripe',code='10701',category="food"))
+    r=rbind(r,data.frame(item='Citrus fruits (oranges, lemon, tangarines, etc.)',shortname='citrus',code='10702',category="food"))
+    r=rbind(r,data.frame(item='Mangoes, avocadoes and other fruits',shortname='mangoes',code='10703',category="food"))
+    r=rbind(r,data.frame(item='Sugarcane',shortname='sugarcane',code='10704',category="food"))
+    r=rbind(r,data.frame(item='Goat meat',shortname='goat',code='10801',category="food"))
+    r=rbind(r,data.frame(item='Beef including minced sausage',shortname='beef', code='10802',category="food"))
+    r=rbind(r,data.frame(item='Pork including sauages and bacon',shortname='pork',code='10803',category="food"))
+    r=rbind(r,data.frame(item='Chicken and other poultry',shortname='chicken',code='10804',category="food"))
+    r=rbind(r,data.frame(item='Wild birds and insects',shortname='wild_birds',code='10805',category="food"))
+    r=rbind(r,data.frame(item='Other domestic/wild meat products',shortname='wild_meat',code='10806',category="food"))
+    r=rbind(r,data.frame(item='Eggs',shortname='eggs',code='10807',category="food"))
+    r=rbind(r,data.frame(item='Fresh fish and seafood (including dagaa)',shortname='fish_seafood',code='10808',category="food"))
+    r=rbind(r,data.frame(item='Dried/salted/canned fish and seafood',shortname='dried_canned_fish', code='10809',category="food"))
+    r=rbind(r,data.frame(item='Package fish',shortname='packaged_fish', code='10810',category="food"))
+    r=rbind(r,data.frame(item='Fresh milk',shortname='fresh_milk', code='10901',category="food"))
+    r=rbind(r,data.frame(item='Milk products (like cream, cheese, yoghurt etc)',shortname='milk_products',code='10902',category="food"))
+    r=rbind(r,data.frame(item='Canned milk/milk powder',shortname='canned_milk', code='10903',category="food"))
+    r=rbind(r,data.frame(item='Cooking oil',shortname='cooking_oil', code='11001',category="food"))
+    r=rbind(r,data.frame(item='Butter, margarine, ghee and other fat products',shortname='butter_margarine', code='11002',category="food"))
+    r=rbind(r,data.frame(item='Salt',shortname='salt',code='11003',category="food"))
+    r=rbind(r,data.frame(item='Other spices',shortname='spices', code='11004',category="food"))
+    r=rbind(r,data.frame(item='Tea dry',shortname='tea', code='11101',category="food"))
+    r=rbind(r,data.frame(item='Coffee and cocoa',shortname='coffee',code='11102',category="food"))
+    r=rbind(r,data.frame(item='Other raw materals for drinks',shortname='miscdrinkpowder',code='11103',category="food"))
+    r=rbind(r,data.frame(item='Bottled/canned soft drinks (soda, juice, water)',shortname='canned_drink',code='11104',category="food"))
+    r=rbind(r,data.frame(item='Prepared tea, coffee',shortname='readymade_tea_coffee',code='11105',category="food"))
+    r=rbind(r,data.frame(item='Bottled beer',shortname='beer',code='11106',category="food"))
+    r=rbind(r,data.frame(item='Local brews',shortname='brews',code='11107',category="food"))
+    r=rbind(r,data.frame(item='Wine and spirits',shortname='winespirits',code='11108',category="food"))
+    return(r)
+  }
+  
+  
+  items_market_price_codes_2014 <- function(){
+    r=data.frame(item=NULL,code=NULL,stringsAsFactors = FALSE)
+    r=rbind(r,data.frame(item='Rice (paddy)',shortname='rice_paddy',code='10101',category="food"))
+    r=rbind(r,data.frame(item='Rice (husked)',shortname='rice_husked',code='10102',category="food"))
+    r=rbind(r,data.frame(item='Maize (green, cob)',shortname='maize_green',code='10103',category="food"))
+    r=rbind(r,data.frame(item='Maize (grain)',shortname='maize_grain',code='10104',category="food"))
+    r=rbind(r,data.frame(item='Maize (flour)',shortname='maize_flour',code='10105',category="food"))
+  
+    r=rbind(r,data.frame(item='Millet and sorghum (grain)',shortname='millet_grain',code='11061',category="food"))
+    r=rbind(r,data.frame(item='Millet and sorghum (grain)',shortname='millet_grain',code='11062',category="food"))
+    r=rbind(r,data.frame(item='Millet and sorghum (flour)',shortname='millet_flour',code='11071',category="food"))
+    r=rbind(r,data.frame(item='Millet and sorghum (flour)',shortname='millet_flour',code='11072',category="food"))
+    
+    r=rbind(r,data.frame(item='Bread',shortname='bread',code='10109',category="food"))
+    r=rbind(r,data.frame(item='Buns, cakes and biscuts',shortname='bunscakes',code='10110',category="food"))
+    r=rbind(r,data.frame(item='Cassava fresh',shortname='cassava_fresh',code='10201',category="food"))
+    r=rbind(r,data.frame(item='Cassava dry/flour',shortname='cassava_flour',code='12021',category="food"))
+    r=rbind(r,data.frame(item='Cassava dry/flour',shortname='cassava_flour',code='12022',category="food"))
+    r=rbind(r,data.frame(item='Sweet potatoes',shortname='sweet_potato',code='10203',category="food"))
+    r=rbind(r,data.frame(item='Yams/cocoyams',shortname='yam',code='12041',category="food"))
+    r=rbind(r,data.frame(item='Yams/cocoyams',shortname='yam',code='12042',category="food"))
     r=rbind(r,data.frame(item='Irish potatoes',shortname='potatoes',code='10205',category="food"))
     r=rbind(r,data.frame(item='Cooking bananas, plantains',shortname='banana_green', code='10206',category="food"))
     r=rbind(r,data.frame(item='Other starches',shortname='othervegstarch',code='10207',category="food"))
@@ -2725,6 +2794,7 @@ lsms_normalizer<-function() {
              ohs_seccj_mapping_lsms_2012=ohs_seccj_mapping_lsms_2012,
              ohs_seccf_columns_lsms_2014=ohs_seccf_columns_lsms_2014,
              ohs_seccf_mapping_lsms_2014=ohs_seccf_mapping_lsms_2014,
+             items_market_price_codes_2014=items_market_price_codes_2014,
              ohs_seccj_columns_lsms_2008=ohs_seccj_columns_lsms_2008, 
              ohs_seccj_mapping_lsms_2008=ohs_seccj_mapping_lsms_2008,
              ohs_seca_columns_lsms=ohs_seca_columns_lsms, 
