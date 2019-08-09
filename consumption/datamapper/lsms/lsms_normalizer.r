@@ -46,8 +46,8 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           ohs_seccj_mapping_lsms_2012="function",
                                           ohs_seccj_columns_lsms_2008="function",
                                           ohs_seccj_mapping_lsms_2008="function",
-                                          
-                                          
+                                          ohs_seccf_mapping_lsms_2014="function",
+                                          ohs_seccf_columns_lsms_2014="function",
                                           ohs_seca_columns_lsms="function",
                                           ohs_seca_mapping_lsms_2010="function",
                                           area_code="function",
@@ -1763,7 +1763,6 @@ lsms_normalizer<-function() {
   ohs_seccj_columns_lsms_2012<-function(){
     return(c("item","lwp","lwp_unit","price","region","district","ward","ea"))
   }
-  
   ohs_seccj_mapping_lsms_2012<-function(){
     s = data.frame(iesname=NULL,name=NULL,stringsAsFactors = FALSE)
     s= rbind(s,data.frame(iesname="id_01",name="region"))
@@ -1778,6 +1777,24 @@ lsms_normalizer<-function() {
   }
   
   
+  ohs_seccf_columns_lsms_2014 <-function(){
+    return(c("item","lwp1","lwp_unit1","lwp2","lwp_unit2","price1","price2","clusterid"))
+  }
+  
+  ohs_seccf_mapping_lsms_2014<-function(){
+    s = data.frame(iesname=NULL,name=NULL,stringsAsFactors = FALSE)
+    s= rbind(s,data.frame(iesname="y4_cluster",name="clusterid"))
+    s= rbind(s,data.frame(iesname="itemid",name="item"))
+    s= rbind(s,data.frame(iesname="cm_f061",name="lwp_unit1"))
+    s= rbind(s,data.frame(iesname="cm_f062",name="lwp1"))
+    s= rbind(s,data.frame(iesname="cm_f063",name="price1"))
+    s= rbind(s,data.frame(iesname="cm_f064",name="lwp2"))
+    s= rbind(s,data.frame(iesname="cm_f065",name="lwp_unit2"))
+    s= rbind(s,data.frame(iesname="cm_f066",name="price2"))
+    return(s)
+  }
+
+    
   ohs_seccj_columns_lsms_2008<-function(){
     return(c("item","lwp","lwp_unit","price","region","district","ward","ea"))
   }
@@ -2706,6 +2723,8 @@ lsms_normalizer<-function() {
              ohs_seccj_mapping_lsms_2010=ohs_seccj_mapping_lsms_2010, 
              ohs_seccj_columns_lsms_2012=ohs_seccj_columns_lsms_2012, 
              ohs_seccj_mapping_lsms_2012=ohs_seccj_mapping_lsms_2012,
+             ohs_seccf_columns_lsms_2014=ohs_seccf_columns_lsms_2014,
+             ohs_seccf_mapping_lsms_2014=ohs_seccf_mapping_lsms_2014,
              ohs_seccj_columns_lsms_2008=ohs_seccj_columns_lsms_2008, 
              ohs_seccj_mapping_lsms_2008=ohs_seccj_mapping_lsms_2008,
              ohs_seca_columns_lsms=ohs_seca_columns_lsms, 

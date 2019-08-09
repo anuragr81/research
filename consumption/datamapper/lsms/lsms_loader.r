@@ -512,7 +512,14 @@ lsms_loader<-function(fu,ln) {
       a<-(a[!is.na(a),])
       cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccj_columns_lsms_2008(), m=ln()@ohs_seccj_mapping_lsms_2008())
       item_names<- ln()@items_codes_2008()
-    } else {
+    } else if (year == 2014) {
+      a <- read.dta(paste(dirprefix,'/lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/com_sec_cf.dta',sep=""),convert.factors = FALSE)
+      a<-(a[!(is.na(a$cm_f062) & is.na(a$cm_f065)) ,])
+      cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccj_columns_lsms_2014(), m=ln()@ohs_seccj_mapping_lsms_2014())
+      item_names<- ln()@items_codes_2014()
+    }
+    
+    else {
       stop(paste("year:",year,"not supported"))
     }
     
@@ -567,8 +574,6 @@ lsms_loader<-function(fu,ln) {
     
     return(prices_merged_remaining)
   }
-  
-  
   
   aggregate_local_prices<-function (cp){
     
