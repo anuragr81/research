@@ -559,17 +559,25 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='Sugar',shortname='sugar',code='10301',category="food"))
     r=rbind(r,data.frame(item='Sweets',shortname='sweet',code='10302',category="food"))
     r=rbind(r,data.frame(item='Honey, jams etc.',shortname='honey',code='10303',category="food"))
-    r=rbind(r,data.frame(item='Peas, beans',shortname='pulses',code='10401',category="food"))
+    r=rbind(r,data.frame(item='Peas, beans',shortname='pulses',code='14011',category="food"))
+    r=rbind(r,data.frame(item='Peas, beans',shortname='pulses',code='14012',category="food"))
     r=rbind(r,data.frame(item='Groundnuts in shell/shelled',shortname='peanuts',code='10501',category="food"))
     r=rbind(r,data.frame(item='Coconuts (mature/immature)',shortname='coconut',code='10502',category="food"))
     r=rbind(r,data.frame(item='Cashew, almonds, nuts',shortname='cashew_almonds', code='10503',category="food"))
     r=rbind(r,data.frame(item='Seeds from nuts',shortname='nut_products', code='10504',category="food"))
-    r=rbind(r,data.frame(item='Onions, tomatoes, carrots and green pepper, other viungo',shortname='onion',code='10601',category="food"))
-    r=rbind(r,data.frame(item='Spinach, cabbage and other green vegetables',shortname='greens',code='10602',category="food"))
+    r=rbind(r,data.frame(item='Onions, tomatoes, carrots and green pepper, other viungo',shortname='onion',code='16011',category="food"))
+    r=rbind(r,data.frame(item='Onions, tomatoes, carrots and green pepper, other viungo',shortname='onion',code='16012',category="food"))
+    r=rbind(r,data.frame(item='Onions, tomatoes, carrots and green pepper, other viungo',shortname='onion',code='16013',category="food"))
+    
+    r=rbind(r,data.frame(item='Spinach, cabbage and other green vegetables',shortname='greens',code='16021',category="food"))
+    r=rbind(r,data.frame(item='Spinach, cabbage and other green vegetables',shortname='greens',code='16022',category="food"))
+
     r=rbind(r,data.frame(item='Canned, dried and wild vegetables',shortname='dried_canned_veg',code='10603',category="food"))
     r=rbind(r,data.frame(item='Ripe bananas',shortname='banana_ripe',code='10701',category="food"))
     r=rbind(r,data.frame(item='Citrus fruits (oranges, lemon, tangarines, etc.)',shortname='citrus',code='10702',category="food"))
-    r=rbind(r,data.frame(item='Mangoes, avocadoes and other fruits',shortname='mangoes',code='10703',category="food"))
+    r=rbind(r,data.frame(item='Mangoes, avocadoes and other fruits',shortname='mangoes',code='17031',category="food"))
+    r=rbind(r,data.frame(item='Mangoes, avocadoes and other fruits',shortname='mangoes',code='17032',category="food"))
+    
     r=rbind(r,data.frame(item='Sugarcane',shortname='sugarcane',code='10704',category="food"))
     r=rbind(r,data.frame(item='Goat meat',shortname='goat',code='10801',category="food"))
     r=rbind(r,data.frame(item='Beef including minced sausage',shortname='beef', code='10802',category="food"))
@@ -578,7 +586,9 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='Wild birds and insects',shortname='wild_birds',code='10805',category="food"))
     r=rbind(r,data.frame(item='Other domestic/wild meat products',shortname='wild_meat',code='10806',category="food"))
     r=rbind(r,data.frame(item='Eggs',shortname='eggs',code='10807',category="food"))
-    r=rbind(r,data.frame(item='Fresh fish and seafood (including dagaa)',shortname='fish_seafood',code='10808',category="food"))
+    r=rbind(r,data.frame(item='Fresh fish and seafood (including dagaa)',shortname='fish_seafood',code='18081',category="food"))
+    r=rbind(r,data.frame(item='Fresh fish and seafood (including dagaa)',shortname='fish_seafood',code='18082',category="food"))
+    
     r=rbind(r,data.frame(item='Dried/salted/canned fish and seafood',shortname='dried_canned_fish', code='10809',category="food"))
     r=rbind(r,data.frame(item='Package fish',shortname='packaged_fish', code='10810',category="food"))
     r=rbind(r,data.frame(item='Fresh milk',shortname='fresh_milk', code='10901',category="food"))
@@ -596,6 +606,17 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='Bottled beer',shortname='beer',code='11106',category="food"))
     r=rbind(r,data.frame(item='Local brews',shortname='brews',code='11107',category="food"))
     r=rbind(r,data.frame(item='Wine and spirits',shortname='winespirits',code='11108',category="food"))
+    
+    r=rbind(r,data.frame(item='Cigarettes',shortname='cigarettes',code='12101', category = "misc"))
+    r=rbind(r,data.frame(item='Matches',shortname='matches',code='12102', category = "energy"))
+    
+    r=rbind(r,data.frame(item='Kerosene',shortname='kerosene',code='12201',category="energy"))
+    r=rbind(r,data.frame(item='Charcoal',shortname='charcoal',code='12207',category="energy"))
+    r=rbind(r,data.frame(item='Milling fees grain',shortname='milling',code='12208',category="food"))
+    
+    r=rbind(r,data.frame(item='Firewood',shortname='firewood',code='19001',category="housing"))                    
+    r=rbind(r,data.frame(item='Batteries',shortname='batteries',code='19002',category="housing"))                    
+    
     return(r)
   }
   
