@@ -515,8 +515,23 @@ lsms_loader<-function(fu,ln) {
     } else if (year == 2014) {
       a <- read.dta(paste(dirprefix,'/lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/com_sec_cf.dta',sep=""),convert.factors = FALSE)
       a<-(a[!(is.na(a$cm_f062) & is.na(a$cm_f065)) ,])
-      cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccj_columns_lsms_2014(), m=ln()@ohs_seccj_mapping_lsms_2014())
-      item_names<- ln()@items_codes_2014()
+      cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccf_columns_lsms_2014(), m=ln()@ohs_seccf_mapping_lsms_2014())
+      cj$region <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][1] }))
+      cj$district <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][2] }))
+      cj$ward <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][3] }))
+      cj$village <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][4] }))
+      cj$ea <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][5] }))
+      
+      k1<-subset(cj,!is.na(price1) & is.na(price2))
+      k2<-subset(cj,is.na(price1) & !is.na(price2))
+      k3<-subset(cj,!is.na(price1) & !is.na(price2))
+      res <- NULL
+      cols <- c("region","district","ward","village","ea","item","lwp","lwp_unit","price")
+      res <- rbind(res,plyr::rename(k1,c("lwp_unit1"="lwp_unit","lwp1"="lwp","price1"="price"))[,cols])[,cols]
+      res <- rbind(res,plyr::rename(k2,c("lwp_unit2"="lwp_unit","lwp2"="lwp","price2"="price"))[,cols])[,cols]
+      res <- rbind(res,plyr::rename(k3,c("lwp_unit1"="lwp_unit","lwp1"="lwp","price1"="price"))[,cols])[,cols]
+      cj  <- unique(res)
+      item_names<- ln()@items_market_price_codes_2014()
     }
     
     else {
@@ -525,7 +540,7 @@ lsms_loader<-function(fu,ln) {
     
     if (use_pieces==FALSE) {
       cj_new <- subset(cj,lwp_unit!=5)
-      print(paste("Ignoring pieces from the market prices (", sprintf("%.2f",100*dim(cj_new)[1]/dim(cj)[1]),"% entries)"))
+      print(paste("Ignoring pieces from the market prices (", sprintf("%.2f",100*(1-dim(cj_new)[1]/dim(cj)[1])),"% entries)"))
       cj     <- cj_new
     }
     cj<-(cj[!is.na(cj$price),])

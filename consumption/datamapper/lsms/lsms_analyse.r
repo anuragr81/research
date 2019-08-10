@@ -63,128 +63,56 @@ add_market_price_to_diary <- function (marketpricesdata,ohsdata,diarydata){
   return(diary)
 }
 
-load_market_prices_ <-function(year,dirprefix,fu,ln,use_pieces,aggregation_code){
-  
-  if (missing(use_pieces)){
-    use_pieces <- TRUE
-  } else {
-    use_pieces <- FALSE
-  }
-  if (year ==2010) {
-    a<-read.dta(paste(dirprefix,'/lsms/TZNPS2COMDTA/COMSEC_CJ.dta',sep=""),convert.factors = FALSE)
-    a<-(a[!is.na(a),])
-    cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccj_columns_lsms_2010(), m=ln()@ohs_seccj_mapping_lsms_2010())
-    item_names<- ln()@items_codes_2010()
-  } else if (year == 2012){
-    a <- read.dta(paste(dirprefix,'/lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/COM_SEC_CF.dta',sep=""),convert.factors = FALSE)
-    a<-(a[!is.na(a),])
-    cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccj_columns_lsms_2012(), m=ln()@ohs_seccj_mapping_lsms_2012())
-    item_names<- ln()@items_codes_2012()
-  } else if (year == 2008){
-    a <- read.dta(paste(dirprefix,'/lsms/tnz2008/TZNPS1CMDTA_E/SEC_J2.dta',sep=""),convert.factors = FALSE)
-    a<-(a[!is.na(a),])
-    cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccj_columns_lsms_2008(), m=ln()@ohs_seccj_mapping_lsms_2008())
-    item_names<- ln()@items_codes_2008()
-  } else if (year == 2014) {
-    a <- read.dta(paste(dirprefix,'/lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/com_sec_cf.dta',sep=""),convert.factors = FALSE)
-    a<-(a[!(is.na(a$cm_f062) & is.na(a$cm_f065)) ,])
-    cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccf_columns_lsms_2014(), m=ln()@ohs_seccf_mapping_lsms_2014())
-    cj$region <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][1] }))
-    cj$district <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][2] }))
-    cj$ward <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][3] }))
-    cj$village <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][4] }))
-    cj$ea <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][5] }))
-    
-    k1<-subset(cj,!is.na(price1) & is.na(price2))
-    k2<-subset(cj,is.na(price1) & !is.na(price2))
-    k3<-subset(cj,!is.na(price1) & !is.na(price2))
-    res <- NULL
-    cols <- c("region","district","ward","village","ea","item","lwp","lwp_unit","price")
-    res <- rbind(res,plyr::rename(k1,c("lwp_unit1"="lwp_unit","lwp1"="lwp","price1"="price"))[,cols])[,cols]
-    res <- rbind(res,plyr::rename(k2,c("lwp_unit2"="lwp_unit","lwp2"="lwp","price2"="price"))[,cols])[,cols]
-    res <- rbind(res,plyr::rename(k3,c("lwp_unit1"="lwp_unit","lwp1"="lwp","price1"="price"))[,cols])[,cols]
-    cj  <- unique(res)
-    item_names<- ln()@items_market_price_codes_2014()
-  }
-  
-  else {
-    stop(paste("year:",year,"not supported"))
-  }
-  
-  if (use_pieces==FALSE) {
-    cj_new <- subset(cj,lwp_unit!=5)
-    print(paste("Ignoring pieces from the market prices (", sprintf("%.2f",100*(1-dim(cj_new)[1]/dim(cj)[1])),"% entries)"))
-    cj     <- cj_new
-  }
-  cj<-(cj[!is.na(cj$price),])
-  cj <- subset(cj,price>0)
-  cj$factor<-as.integer(cj$lwp_unit==1)+as.integer(cj$lwp_unit==2)/1000.0+as.integer(cj$lwp_unit==3)+as.integer(cj$lwp_unit==4)/1000.0+as.integer(cj$lwp_unit==5)
-  
-  cj$lwp <-cj$lwp*cj$factor 
-  
-  cj$price <-cj$price/cj$lwp
-  
-  cj$code <- sapply(cj$item,function(x) {if (is.na(as.integer(x))) x else as.integer(x)+10000 } )
-  
-  Lcodes<-unique(as.character(cj$code)[grep("^L",as.character(cj$code))])
-  
-  cj$code <- sapply(cj$code,function(x) { if (is.element(x,Lcodes)) as.integer(substr(x,2,nchar(x))) else x })
-  
-  cj <- subset(cj,price!=Inf)
-  
-  if (missing(aggregation_code)) {
-    prices <- cj
-  } else {
-    if (aggregation_code=="region"){
-      prices<-ddply(cj,.(code,region),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(names=FALSE, x=price[!is.na(price)],probs=0.5) , pricessd = sd(price[!is.na(price)]) ) 
-    } else if (aggregation_code=="district"){
-      prices<-ddply(cj,.(code,region,district),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(names=FALSE, x=price[!is.na(price)],probs=0.5), pricessd = sd(price[!is.na(price)]))
-    } else if (aggregation_code=="all") {
-      prices<-ddply(cj,.(code),summarise,mean_price=mean(price[!is.na(price)]),qprices = quantile(names=FALSE, x=price[!is.na(price)],probs=0.5), pricessd = sd(price[!is.na(price)]))
-    } else {
-      stop(paste("Unrecognised value for",aggregation_code))
-    }
-    
-  }
-  prices_merged<-merge(prices,item_names,all.x=TRUE,by=c("code"))
-  
-  missing_shortnames <- unique(subset(prices_merged,is.na(shortname))$code)
-  if (length(missing_shortnames)>0){
-    print(paste("Could not find itemnames for:",toString(missing_shortnames)))
-  }
-  prices_merged <- merge(prices_merged, ddply(prices_merged, .(shortname),summarise,median_price = median(price)) , by = c("shortname"))
-  
-  n<-10
-  prices_merged_removed   <-(subset(prices_merged, abs(log(price/median_price,n))>=1))
-  prices_merged_remaining <-(subset(prices_merged, abs(log(price/median_price,n))<1))
-  print(paste("removing",dim(prices_merged_removed)[1],"/",dim(prices_merged)[1],"(",100*dim(prices_merged_removed)[1]/dim(prices_merged)[1]
-              ,"%) price entries for being ",n,"times away from the national median"))
-  
-  return(prices_merged_remaining)
-}
-
-
 item_price_trends <- function() {
+  # national average is not the same as regional changes
+  # the grouping may in fact need to be different for regions
+  # the criteria of separability is more important
   
-  food_compliments <- c("fish_seafood","coconut","banana_ripe","")
+  #chicken, cooking oil and citrus are similar
+  #starch and fruitsveg are largely similar, except fruitsveg falls more sharply
+  #coconut stays up so it should not be in fruitsveg
   
-  vegetables <- c("cassava_fresh","greens","")
+  protein   <- c("beef","goat","fish_seafood","chicken",
+                 "fresh_milk","canned_milk") # simple upwards
+  
+  starch    <- c("bread","cassava_flour","maize_flour","maize_green",
+                 "maize_grain","millet_flour","millet_grain","pulses",
+                 "rice_husked","rice_paddy","sweet_potato","potatoes","wheat",
+                 "yam","othervegstarch",
+                 "cooking_oil") # convex
+
+  fruitsveg <- c("banana_green","banana_ripe","cassava_fresh","citrus",
+                 "greens","peanuts","bunscakes","coconut","eggs","mangoes","onion") # convex
+  
+  alcohol   <- c("brews") # no quality calculated
+  dried_products <- c("sugar","salt","tea") # no quality calculated
+
+
+  energy    <- c("kerosene","charcoal","firewood")
+  
+  combined_groups <- c(protein,starch,fruitsveg,alcohol,dried_products,energy)
+  
+  #######################################################################
   
   downwards = c ("banana_green",
                  "banana_ripe",
+                 "bread",
+                 "bunscakes",
                  "canned_milk",
                  "citrus",
                  "coconut",
                  "cooking_oil",
                  "peanuts",
                  "sugar",
-                 "yam")
+                 "yam",
+                 "kerosene")
   
   upwards = c ("beef",
                "bread",
                "brews",
                "cassava_flour",
                "cassava_fresh",
+               "charcoal",
                "chicken",
                "fish_seafood",
                "fresh_milk",
@@ -196,6 +124,7 @@ item_price_trends <- function() {
                "mangoes",
                "millet_flour",
                "millet_grain",
+               "milling",
                "onion",
                "potatoes",
                "pulses",
@@ -204,31 +133,34 @@ item_price_trends <- function() {
                "sweet_potato",
                "tea")
   
-  missing_rising =   c("bunscakes")
-  
-  missing_falling = c ("charcoal",
-                       "kerosene",
-                       "salt",
-                       "wheat")
+  straight_up = c("firewood")
   
   straight_down = c("eggs",
-                    "milling", #ignored
+                    "salt",
+                    "wheat",
                     "othervegstarch")
   
-  one_point = c("sugarcane",
+  onepoint = c("sugarcane",
                 "pasta",
                 "dried_canned_fish", #
-                "dried_canned_veg",
-                "firewood")
+                "dried_canned_veg"
+  )
   
-  print(length(c(downwards,upwards,missing_rising,missing_falling,straight_down,one_point)))
+  struct_groups <- c(downwards,upwards,straight_down,straight_up,onepoint)
+  A = combined_groups
+  B = struct_groups
+  print(paste("A:",toString(combined_groups)))
+  print(paste("B:",toString(struct_groups)))
+  
+  print(paste("A-B:",toString(setdiff(A,B))))
+  print(paste("B-A:",toString(setdiff(B,A))))
 }
 
 
 
 
 plot_price_tseries <-function(row_pair,ignore_items,fu,switch_off,market_prices_national2008,market_prices_national2010,market_prices_national2012,market_prices_national2014) {
-    
+  
   if (missing(ignore_items)){
     ignorelist <- c("batteries","cigarettes","matches","dried_canned_fish","dried_canned_veg","pasta","sugarcane","milling")
   }
