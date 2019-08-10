@@ -171,49 +171,49 @@ item_price_trends <- function() {
   vegetables <- c("cassava_fresh","greens","")
   
   downwards = c ("banana_green",
-  "banana_ripe",
-  "canned_milk",
-  "citrus",
-  "coconut",
-  "cooking_oil",
-  "peanuts",
-  "sugar",
-  "yam")
+                 "banana_ripe",
+                 "canned_milk",
+                 "citrus",
+                 "coconut",
+                 "cooking_oil",
+                 "peanuts",
+                 "sugar",
+                 "yam")
   
   upwards = c ("beef",
-  "bread",
-  "brews",
-  "cassava_flour",
-  "cassava_fresh",
-  "chicken",
-  "fish_seafood",
-  "fresh_milk",
-  "goat",
-  "greens",
-  "maize_flour",
-  "maize_grain",
-  "maize_green",
-  "mangoes",
-  "millet_flour",
-  "millet_grain",
-  "onion",
-  "potatoes",
-  "pulses",
-  "rice_husked",
-  "rice_paddy",
-  "sweet_potato",
-  "tea")
+               "bread",
+               "brews",
+               "cassava_flour",
+               "cassava_fresh",
+               "chicken",
+               "fish_seafood",
+               "fresh_milk",
+               "goat",
+               "greens",
+               "maize_flour",
+               "maize_grain",
+               "maize_green",
+               "mangoes",
+               "millet_flour",
+               "millet_grain",
+               "onion",
+               "potatoes",
+               "pulses",
+               "rice_husked",
+               "rice_paddy",
+               "sweet_potato",
+               "tea")
   
   missing_rising =   c("bunscakes")
   
   missing_falling = c ("charcoal",
-  "kerosene",
-  "salt",
-  "wheat")
+                       "kerosene",
+                       "salt",
+                       "wheat")
   
   straight_down = c("eggs",
-  "milling", #ignored
-  "othervegstarch")
+                    "milling", #ignored
+                    "othervegstarch")
   
   one_point = c("sugarcane",
                 "pasta",
@@ -227,13 +227,29 @@ item_price_trends <- function() {
 
 
 
-plot_price_tseries <-function(fu,market_prices_national2008,market_prices_national2010,market_prices_national2012) {
+plot_price_tseries <-function(row_pair,ignore_items,fu,switch_off,market_prices_national2008,market_prices_national2010,market_prices_national2012,market_prices_national2014) {
+    
+  if (missing(ignore_items)){
+    ignorelist <- c("batteries","cigarettes","matches","dried_canned_fish","dried_canned_veg","pasta","sugarcane","milling")
+  }
   f1=fu()@rbind_xy(x = market_prices_national2008,y = market_prices_national2010, tagx=2008, tagy=2010)
   f2=fu()@rbind_xy(x = f1,y = market_prices_national2012, tagy=2012)
-  dev.off(); par(mfrow=c(5,9)); 
-  for (x in sort(as.character(unique(f2$shortname))) ) {
-    g = subset(f2,shortname==x) ; 
-    if(dim(g)[1] == 0 ) {print(paste("bad data:",x))} else { plot(g$tag,g$reg_price,main=x) } 
+  f3=fu()@rbind_xy(x = f2,y = market_prices_national2014, tagy=2014)
+  res = f3
+  if (!missing(switch_off) && switch_off==TRUE){
+    dev.off(); 
+  }
+  
+  par(mfrow=row_pair); 
+  for (x in sort(as.character(unique(res$shortname))) ) {
+    if (! is.element(x,ignorelist)) {
+      g = subset(res,shortname==x) ; 
+      if(dim(g)[1] == 0 ) {print(paste("bad data:",x))} else { 
+        plot(g$tag,g$reg_price,main=x,xlab="year",ylab="price",xlim=c(2008,2014),type='o') 
+        #print(head(g))
+      }
+      
+    } 
   }
 }
 
