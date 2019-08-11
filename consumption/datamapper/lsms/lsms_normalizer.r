@@ -1210,11 +1210,9 @@ lsms_normalizer<-function() {
     
     return(x)
   }
+
   
-  
-  lsms_groups_qualitybased_2010_2012<- function(){
-    
-    x<-NULL
+  add_categories_simple <- function(x)  {
     
     x<-rbind(x,data.frame(category='fat', group='quality', shortname='cooking_oil'))
     x<-rbind(x,data.frame(category='fat', group='quality', shortname='butter_margarine'))
@@ -1281,6 +1279,87 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category = "energy", group="high", shortname="gas"))
     x<-rbind(x,data.frame(category = "energy", group="high",shortname="electricity"))
     x<-rbind(x,data.frame(category = "energy", group="high", shortname="petrol"))
+    
+    return(x)
+  }
+  
+  
+  
+  add_categories_price_structured_based <- function(x)  {
+    
+    x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='cooking_oil'))
+    #x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='butter_margarine'))
+    x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='rice_husked'))
+    x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='rice_paddy'))
+    x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='maize_green'))
+    x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='maize_grain'))
+    x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='maize_flour'))
+    x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='millet_grain'))
+    x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='millet_flour'))
+    x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='wheat'))
+    x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='bread'))
+    x<-rbind(x,data.frame(category='densefoods', group='quality', shortname='bunscakes'))
+    x<-rbind(x,data.frame(category='densefoods', group='quality', shortname='pasta'))
+    x<-rbind(x,data.frame(category='densefoods', group='quality', shortname='othercereal'))
+    x<-rbind(x,data.frame(category='densefoods', group='quality', shortname='pulses'))
+    x<-rbind(x,data.frame(category='compliments', group='quality', shortname='sugar'))
+    x<-rbind(x,data.frame(category='compliments', group='quality', shortname='sweet'))
+    x<-rbind(x,data.frame(category='compliments', group='quality', shortname='honey'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='peanuts'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='coconut'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='cashew_almonds'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='nut_products'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='milk_products'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='fresh_milk'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='canned_milk'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='goat'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='beef'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='pork'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='chicken'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='wild_birds'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='wild_meat'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='fish_seafood'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='dried_canned_fish'))
+    x<-rbind(x,data.frame(category='protein', group='quality', shortname='packaged_fish'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='eggs'))
+    x<-rbind(x,data.frame(category='alcohol', group='quality', shortname='beer'))
+    x<-rbind(x,data.frame(category='alcohol', group='quality', shortname='brews'))
+    x<-rbind(x,data.frame(category='alcohol', group='quality', shortname='winespirits'))
+    x<-rbind(x,data.frame(category='compliments', group='quality', shortname='spices'))
+    x<-rbind(x,data.frame(category='compliments', group='quality', shortname='salt'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='onion'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='greens'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='dried_canned_veg'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='cassava_fresh'))
+    x<-rbind(x,data.frame(category='densefoods', group='quality', shortname='cassava_flour'))
+    x<-rbind(x,data.frame(category='densefoods', group='quality', shortname='sweet_potato'))
+    x<-rbind(x,data.frame(category='densefoods', group='quality', shortname='yam'))
+    x<-rbind(x,data.frame(category='densefoods', group='quality', shortname='potatoes'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='banana_green'))
+    x<-rbind(x,data.frame(category='densefoods', group='quality', shortname='othervegstarch'))
+    x<-rbind(x,data.frame(category='compliments', group='quality', shortname='tea'))
+    x<-rbind(x,data.frame(category='compliments', group='quality', shortname='coffee'))
+    x<-rbind(x,data.frame(category='compliments', group='quality', shortname='miscdrinkpowder'))
+    x<-rbind(x,data.frame(category='compliments', group='quality', shortname='canned_drink'))
+    x<-rbind(x,data.frame(category='compliments', group='quality', shortname='readymade_tea_coffee'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='banana_ripe'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='citrus'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='mangoes'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='quality', shortname='sugarcane'))
+    
+    x<-rbind(x,data.frame(category = "energy", group="quality", shortname="kerosene"))
+    x<-rbind(x,data.frame(category = "energy", group="quality", shortname="charcoal"))
+    x<-rbind(x,data.frame(category = "energy", group="quality", shortname="gas"))
+    x<-rbind(x,data.frame(category = "energy", group="quality",shortname="electricity"))
+    x<-rbind(x,data.frame(category = "energy", group="quality", shortname="petrol"))
+    
+    return(x)
+  }
+  lsms_groups_qualitybased_2010_2012<- function(){
+    
+    x<-NULL
+    
+    x<- add_categories_price_structured_based(x)
     
     x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="cigarettes"))
     x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="cellphone_voucher"))

@@ -1352,7 +1352,7 @@ lsms_loader<-function(fu,ln) {
   }
   
   
-  group_collect <- function(year,dirprefix,categoryName,fu,ln,hh,basis) {
+  group_collect <- function(year,dirprefix,categoryName,fu,ln,hh,basis, use_market_prices) {
     
     
     if (year == 2010 || year == 2012) {
@@ -1388,6 +1388,9 @@ lsms_loader<-function(fu,ln) {
     if (setequal(groups$group,c("quality"))) {
       # get prices for the year
       print ("Loaded prices noted by the respondents (instead of the market recorded prices)")
+      
+      if ( use_market_prices == FALSE) {
+        print ("Using unit-value as prices")
       mp<-match_recorded_prices(year = year, dirprefix = dirprefix,fu = fu, ln=ln,marketPricesOnly = TRUE)
       mpp<-ddply(mp,.(item),summarise,mean_price=mean(recorded_price))
       itemcodesmap <- plyr::rename(itemcodes[,c("shortname","code")],c("code"="item"))
@@ -1398,6 +1401,9 @@ lsms_loader<-function(fu,ln) {
       minprices <- ddply(hhpg[,c("shortname","mean_price","category")],.(category),summarise,min_price=min(mean_price))
       hhpg$factor<-as.integer(hhpg$lwp_unit==1)+as.integer(hhpg$lwp_unit==2)/1000.0+as.integer(hhpg$lwp_unit==3)+as.integer(hhpg$lwp_unit==4)/1000.0+as.integer(hhpg$lwp_unit==5)
       hhpg$quantity <-with (hhpg,lwp*factor)
+      } else {
+        print ("Using survey's market prices")
+      }
       
       hhpg <- merge(minprices,hhpg)
       # get price ratio for every group
@@ -1406,6 +1412,7 @@ lsms_loader<-function(fu,ln) {
       totq <- ddply(unique(hhpg[,c("hhid","shortname","category","quantity","price_ratio")]),.(category,hhid),summarise,totq=sum(quantity), qsum = sum (price_ratio*quantity))[,c("hhid","category","qsum","totq")]
       # calculate the quality ratio -  sum (price/min(price)*quantity) / sum (quantity)
       totq$quality <- with(totq,qsum/totq)
+      print(head(totq))
       return(totq[,c("hhid","category","quality")])
       
     } else if (setequal(groups$group,c("high","low")) || setequal(groups$group,c("low")) || setequal(groups$group,c("high"))) {
@@ -1523,7 +1530,7 @@ lsms_loader<-function(fu,ln) {
         vis$category <- unique(groups$category)
       }
     } else {
-      stop( paste ( "Unknown row elements in groups frame"))
+      stop( paste ( "Unknown row elements in groups frame",toString(unique(groups$group))))
     }
     print("Collected group expenditures")
     return(vis)
@@ -1594,13 +1601,13 @@ lsms_loader<-function(fu,ln) {
       if (basis=="quality"){
         dat <- NULL
         for (categ in categoryNames){
-          to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categ,hh=hh,basis=basis)
+          to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categ,hh=hh,basis=basis, ohs=ohs)
           print(paste("To be added: ", toString(colnames(to_be_added))))
           dat <-   rbind(dat,to_be_added[,c("hhid","category","quality")])
         }
         vis <- dat %>% spread(category, quality)
       } else if (basis == "price" || basis == "sparseness") {
-        vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryNames,hh=hh,basis=basis)
+        vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryNames,hh=hh,basis=basis, ohs=ohs)
       } else {
         stop (paste("category names not handled for basis:",basis))
       }
