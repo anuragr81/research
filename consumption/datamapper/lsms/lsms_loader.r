@@ -1483,11 +1483,11 @@ lsms_loader<-function(fu,ln,lgc) {
       }
       
       # calculate sum of quantity consumed
-      totq <- ddply(unique(hhpg[,c("hhid","shortname","category","quantity","price_ratio")]),.(category,hhid),summarise,totq=sum(quantity), qsum = sum (price_ratio*quantity))[,c("hhid","category","qsum","totq")]
+      totq <- ddply(unique(hhpg[,c("hhid","shortname","category","quantity","price_ratio","min_price")]),.(category,hhid),summarise,totq=sum(quantity), qsum = sum (price_ratio*quantity), min_price=unique(min_price))[,c("hhid","category","qsum","totq","min_price")]
       # calculate the quality ratio -  sum (price/min(price)*quantity) / sum (quantity)
       totq$quality <- with(totq,qsum/totq)
       print(head(totq))
-      return(totq[,c("hhid","category","quality")])
+      return(totq[,c("hhid","category","quality","min_price")])
       
     } else if (setequal(groups$group,c("high","low")) || setequal(groups$group,c("low")) || setequal(groups$group,c("high"))) {
       print("Using high-low groups")
@@ -1675,14 +1675,26 @@ lsms_loader<-function(fu,ln,lgc) {
       # if there are multiple categorynames then - use (h %>% spread(category, quality))
       
       if (basis=="quality"){
-        dat <- NULL
+        pdat <- NULL 
+        qualitydat <- NULL
+        minpricedat <- NULL
+        
         for (categ in categoryNames){
           to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,categoryName=categ
                                        ,hh=hh,basis=basis, ohs=ohs,use_market_prices=use_market_prices)
           print(paste("To be added: ", toString(colnames(to_be_added))))
-          dat <-   rbind(dat,to_be_added[,c("hhid","category","quality")])
+          qualitydat     <-   rbind(qualitydat,to_be_added[,c("hhid","category","quality")])
+          minpricedat   <-   rbind(minpricedat,to_be_added[,c("hhid","category","min_price")]) # added
         }
-        vis <- dat %>% spread(category, quality)
+        
+        vis <- qualitydat %>% spread(category, quality)
+        colnames (vis) <- as.character(sapply(colnames(vis), function(x) { if(is.element(x,c("hhid"))) {x} else {paste(x,"_quality",sep="")} }))
+        
+        pdat <- minpricedat %>% spread(category, min_price)  # added
+        colnames (pdat) <- as.character(sapply(colnames(pdat), function(x) { if(is.element(x,c("hhid"))) {x} else {paste(x,"_min_price",sep="")}}))
+        
+        vis <- merge(pdat,vis,by=c("hhid"))
+        
       } else if (basis == "price" || basis == "sparseness") {
         vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,categoryName=categoryNames,
                                hh=hh,basis=basis, ohs=ohs, use_market_prices=use_market_prices)
