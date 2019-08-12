@@ -13,7 +13,7 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       match_recorded_prices="function",get_inferred_prices="function",load_market_prices="function",
                                       aggregate_local_prices="function",add_localmedian_price_columns="function",
                                       food_expenditure_data="function",read_assets_file="function",
-                                      group_expenditure="function",get_asset_score="function",
+                                      group_expenditure="function",group_collect="function",get_asset_score="function",
                                       item_usage="function", item_ownership="function",
                                       check_diary_nullity="function",split_households="function",
                                       asset_differences="function"))
@@ -1483,11 +1483,13 @@ lsms_loader<-function(fu,ln,lgc) {
       }
       
       # calculate sum of quantity consumed
-      totq <- ddply(unique(hhpg[,c("hhid","shortname","category","quantity","price_ratio","min_price")]),.(category,hhid),summarise,totq=sum(quantity), qsum = sum (price_ratio*quantity), min_price=unique(min_price))[,c("hhid","category","qsum","totq","min_price")]
+      totq <- ddply(unique(hhpg[,c("hhid","shortname","category","quantity","price_ratio","min_price","cost")]),.(category,hhid),summarise,totq=sum(quantity), 
+                    qsum = sum (price_ratio*quantity), min_price=unique(min_price),tot_categ_exp = sum(cost))[,c("hhid","category","qsum","totq","min_price","tot_categ_exp")]
       # calculate the quality ratio -  sum (price/min(price)*quantity) / sum (quantity)
       totq$quality <- with(totq,qsum/totq)
+      
       print(head(totq))
-      return(totq[,c("hhid","category","quality","min_price")])
+      return(totq[,c("hhid","category","quality","min_price","tot_categ_exp")])
       
     } else if (setequal(groups$group,c("high","low")) || setequal(groups$group,c("low")) || setequal(groups$group,c("high"))) {
       print("Using high-low groups")
@@ -1678,22 +1680,28 @@ lsms_loader<-function(fu,ln,lgc) {
         pdat <- NULL 
         qualitydat <- NULL
         minpricedat <- NULL
+        categexpdat <- NULL
         
         for (categ in categoryNames){
           to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,categoryName=categ
                                        ,hh=hh,basis=basis, ohs=ohs,use_market_prices=use_market_prices)
           print(paste("To be added: ", toString(colnames(to_be_added))))
           qualitydat     <-   rbind(qualitydat,to_be_added[,c("hhid","category","quality")])
-          minpricedat   <-   rbind(minpricedat,to_be_added[,c("hhid","category","min_price")]) # added
+          minpricedat   <-   rbind(minpricedat,to_be_added[,c("hhid","category","min_price")])
+          categexpdat    <- rbind(categexpdat,to_be_added[,c("hhid","category","tot_categ_exp")])
         }
         
         vis <- qualitydat %>% spread(category, quality)
         colnames (vis) <- as.character(sapply(colnames(vis), function(x) { if(is.element(x,c("hhid"))) {x} else {paste(x,"_quality",sep="")} }))
         
-        pdat <- minpricedat %>% spread(category, min_price)  # added
+        pdat <- minpricedat %>% spread(category, min_price)  
         colnames (pdat) <- as.character(sapply(colnames(pdat), function(x) { if(is.element(x,c("hhid"))) {x} else {paste(x,"_min_price",sep="")}}))
         
+        cedat <- categexpdat  %>% spread(category, tot_categ_exp)  
+        colnames (cedat) <- as.character(sapply(colnames(cedat), function(x) { if(is.element(x,c("hhid"))) {x} else {paste(x,"_tot_categ_exp",sep="")}}))
+        
         vis <- merge(pdat,vis,by=c("hhid"))
+        vis <- merge(cedat,vis,by=c("hhid"))
         
       } else if (basis == "price" || basis == "sparseness") {
         vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,categoryName=categoryNames,
@@ -2262,7 +2270,7 @@ lsms_loader<-function(fu,ln,lgc) {
              analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, load_market_prices=load_market_prices,
              get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices,
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
-             read_assets_file=read_assets_file, group_expenditure=group_expenditure,
+             read_assets_file=read_assets_file, group_expenditure=group_expenditure,group_collect=group_collect,
              get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership,
              check_diary_nullity=check_diary_nullity,split_households=split_households,asset_differences=asset_differences))
   

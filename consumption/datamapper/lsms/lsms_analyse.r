@@ -363,11 +363,12 @@ get_total_expenditures <- function (hh,ohs) {
 
 
 run_test <- function(){
+  categories <- c("densefoods","nonfresh","fruitsveg","protein","alcohol","compliments")
   g2010 <- ll@group_expenditure(year = 2010, dirprefix = "../",
-                                fu = fu , ln = lsms_normalizer, 
-                                basis = "quality", categoryNames = "densefoods",returnBeforeGrouping = FALSE,
-                                minConsumerNumber = 5,use_market_prices=TRUE)
-  return(g2012)
+                            fu = fu , ln = lsms_normalizer, lgc=lgc,
+                            basis = "quality", categoryNames = categories,returnBeforeGrouping = FALSE,
+                            minConsumerNumber = 5,use_market_prices=TRUE)
+  return(g2010)
 }
 item_price_trends <- function() {
   # national average is not the same as regional changes
