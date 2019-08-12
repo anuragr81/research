@@ -46,6 +46,8 @@ get_regressed_market_prices <-function (marketpricesdata,ohsdata,diarydata) {
   return(prices)
 }
 
+
+
 add_market_price_to_diary <- function (marketpricesdata,ohsdata,diarydata){
   ddata      <- subset(diarydata,item>10000)
   prices     <-     get_regressed_market_prices (marketpricesdata,ohsdata,ddata)
@@ -60,9 +62,11 @@ add_market_price_to_diary <- function (marketpricesdata,ohsdata,diarydata){
   print(paste("Total number of entries ignored:",(dim(k)[1]-dim(diary)[1]),"/",dim(k)[1],"(",
               100*(dim(k)[1]-dim(diary)[1])/dim(k)[1],"%)"))
   print("PENDING: Addition of prices for wheat, bunscakes, beer, othervegstarch and winespirits (marked as beer)")
-
+  
   return(diary)
 }
+
+
 
 group_collect_ <- function(year,dirprefix,categoryName,fu,ln,ohs, hh,basis, use_market_prices) {
   
@@ -279,14 +283,14 @@ item_price_trends <- function() {
                  "rice_husked","rice_paddy","sweet_potato","potatoes","wheat",
                  "yam","othervegstarch",
                  "cooking_oil") # convex
-
+  
   fruitsveg <- c("banana_green","banana_ripe","cassava_fresh","citrus",
                  "greens","peanuts","bunscakes","coconut","eggs","mangoes","onion") # convex
   
   alcohol   <- c("brews") # no quality calculated
   dried_products <- c("sugar","salt","tea") # no quality calculated
-
-
+  
+  
   energy    <- c("kerosene","charcoal","firewood")
   
   combined_groups <- c(protein,starch,fruitsveg,alcohol,dried_products,energy)
@@ -340,9 +344,9 @@ item_price_trends <- function() {
                     "othervegstarch")
   
   onepoint = c("sugarcane",
-                "pasta",
-                "dried_canned_fish", #
-                "dried_canned_veg"
+               "pasta",
+               "dried_canned_fish", #
+               "dried_canned_veg"
   )
   
   struct_groups <- c(downwards,upwards,straight_down,straight_up,onepoint)
@@ -436,6 +440,9 @@ plot_commodity <- function(sname,data,year)
   }
   
 }  
+
+
+
 #m2010<-ll@load_market_prices(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer,use_pieces = FALSE)
 #regs<-as.character(unique(m2010$region))
 #items<-as.character(unique(m2010$shortname))

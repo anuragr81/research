@@ -549,15 +549,22 @@ lsms_loader<-function(fu,ln) {
     
     cj$lwp <-cj$lwp*cj$factor 
     
-    cj$price <-cj$price/cj$lwp
+    cj$price      <-cj$price/cj$lwp
+
+    cj$has_number <- !grepl("[^0-9]+",cj$item) & !is.na(cj$item)
+    cj$code       <- mapply( function(has_number,item) { if(has_number) { as.integer(item)+10000 } else { item }}, 
+                             cj$has_number, 
+                             as.character(cj$item))
+    #cj$code       <- sapply(cj$item,function(x) {if (is.na(as.integer(x))) x else as.integer(x)+10000 } )
     
-    cj$code <- sapply(cj$item,function(x) {if (is.na(as.integer(x))) x else as.integer(x)+10000 } )
     
     Lcodes<-unique(as.character(cj$code)[grep("^L",as.character(cj$code))])
     
-    cj$code <- sapply(cj$code,function(x) { if (is.element(x,Lcodes)) as.integer(substr(x,2,nchar(x))) else x })
+    cj$code <- sapply(cj$code,function(x) { if (!is.na(x) && is.element(x,Lcodes)) as.integer(substr(x,2,nchar(x))) else x })
     
     cj <- subset(cj,price!=Inf)
+    
+    cj$has_number <- NULL
     
     if (missing(aggregation_code)) {
       prices <- cj
