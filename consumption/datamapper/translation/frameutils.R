@@ -9,7 +9,7 @@ setClass("FrameUtils", representation(si_factor= "function",get_translated_frame
                                       removeall_cols_except="function",find_nonzero_percentile="function",
                                       fv="function",rbind_xy="function",max_non_na="function",get_max_col="function",
                                       diff_lists = "function", combine_lists = "function",
-                                      occurrences_df="function"), )
+                                      occurrences_df="function") )
 
 removeall_cols_except<-function(dat,listColumnNames){
   #c("region","district","ward","accessiblemarket","travelcost"))
@@ -218,6 +218,9 @@ fu<-function(){
     }
     return(1-t)
   }
+  
+  
+  
   
   return(new("FrameUtils",si_factor= si_factor, 
              get_translated_frame = get_translated_frame ,

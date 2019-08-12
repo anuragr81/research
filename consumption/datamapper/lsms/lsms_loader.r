@@ -19,7 +19,7 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       asset_differences="function"))
 
 
-lsms_loader<-function(fu,ln) {
+lsms_loader<-function(fu,ln,lgc) {
   
   read_tnz <- function(filename,convert_factors,hhidColName) {
     
@@ -1359,7 +1359,64 @@ lsms_loader<-function(fu,ln) {
   }
   
   
-  group_collect <- function(year,dirprefix,categoryName,fu,ln,hh,basis, use_market_prices) {
+  
+  get_regressed_market_prices <-function (lgc,marketpricesdata,ohsdata,diarydata) {
+    
+    
+    
+    region_district_consumed_items <- unique(merge(unique(ohsdata[,c("region","district","hhid")]),
+                                                   unique(diarydata[,c("hhid","shortname","item")],by=c("hhid")))[,c("region","district","shortname","item")])
+    
+    print("Obtaining district level prices")
+    market_prices_district <- ddply(unique(marketpricesdata[,c("region","district","code","shortname","lwp","price","factor")]),
+                                    .(region,district,shortname),summarise,nprices=length(price[!is.na(price)]),
+                                    median_price=median(price[!is.na(price)]), 
+                                    reg_price_district=lgc()@get_regressed_market_price(lwp=lwp,price=price) )[,c("region","district","shortname","median_price","nprices","reg_price_district")]
+    print("Marking the missing prices from districts") 
+    matched_district_prices <- merge(market_prices_district,region_district_consumed_items,by=c("region","district","shortname"),
+                                     all.y=TRUE)
+    print("Obtaining regional,national prices")
+    market_prices_regional <- ddply(marketpricesdata,.(region,shortname),summarise,reg_price_region=lgc()@get_regressed_market_price(lwp=lwp,price=price))[,c("region","shortname","reg_price_region")]
+    market_prices_national <- ddply(marketpricesdata,.(shortname),summarise,reg_price_nat=lgc()@get_regressed_market_price(lwp=lwp,price=price))[,c("shortname","reg_price_nat")]
+    print("Merging regional, rational prices")
+    price_reg_dstt  <-merge(market_prices_regional,matched_district_prices,by=c("region","shortname"),all.y=TRUE)
+    price_nat_reg_dstt <-merge(market_prices_national,price_reg_dstt,by=c("shortname"),all.y=TRUE)
+    
+    price_nat_reg_dstt <- subset(price_nat_reg_dstt,item>10000);
+    
+    natprices <- subset(price_nat_reg_dstt,!is.na(reg_price_nat))
+    print(paste("Ignored price entries:",(dim(price_nat_reg_dstt)[1]-dim(natprices)[1]),"/",dim(price_nat_reg_dstt)[1],"(", 
+                100*(dim(price_nat_reg_dstt)[1]-dim(natprices)[1])/dim(price_nat_reg_dstt)[1],"%)"))
+    prices = ddply(natprices,.(shortname,region,district),summarise,price=lgc()@select_market_price(nat=reg_price_nat,
+                                                                                              reg=reg_price_region,
+                                                                                              dstt=reg_price_district))
+    #k<-merge(c2010,np2010,by=c("region","district","shortname"),all.x=TRUE)
+    return(prices)
+  }
+  
+  
+  
+  add_market_price_to_diary <- function (lgc,marketpricesdata,ohsdata,diarydata){
+    ddata      <- subset(diarydata,item>10000)
+    prices     <-     get_regressed_market_prices (lgc,marketpricesdata,ohsdata,ddata)
+    #k<-merge(c2010,np2010,by=c("region","district","shortname"),all.x=TRUE)
+    #market_prices_national <- ddply(marketpricesdata,.(shortname),summarise,reg_price_nat=get_regressed_market_price(lwp=lwp,price=price))[,c("shortname","reg_price_nat")]
+    diarywithregiondistrict <- merge(ddata,unique(ohsdata[,c("hhid","region","district")]),all.x=TRUE)
+    k<-merge(diarywithregiondistrict,prices,all.x=TRUE)
+    noregionprice <- subset(k,is.na(region) & is.na(price))
+    ignored_items <- as.character(unique(noregionprice$shortname))
+    print(paste("Ignoring consumption on:", toString(ignored_items)))
+    diary                   <- subset(k,!is.element(shortname,ignored_items))
+    print(paste("Total number of entries ignored:",(dim(k)[1]-dim(diary)[1]),"/",dim(k)[1],"(",
+                100*(dim(k)[1]-dim(diary)[1])/dim(k)[1],"%)"))
+    print("PENDING: Addition of prices for wheat, bunscakes, beer, othervegstarch and winespirits (marked as beer)")
+    
+    return(diary)
+  }
+  
+  
+  
+  group_collect <- function(year,dirprefix,categoryName,fu,ln,lgc,ohs, hh,basis, use_market_prices) {
     
     
     if (year == 2010 || year == 2012) {
@@ -1398,23 +1455,33 @@ lsms_loader<-function(fu,ln) {
       
       if ( use_market_prices == FALSE) {
         print ("Using unit-value as prices")
-      mp<-match_recorded_prices(year = year, dirprefix = dirprefix,fu = fu, ln=ln,marketPricesOnly = TRUE)
-      mpp<-ddply(mp,.(item),summarise,mean_price=mean(recorded_price))
-      itemcodesmap <- plyr::rename(itemcodes[,c("shortname","code")],c("code"="item"))
-      mpp <- merge(mpp,itemcodesmap)
-      hhp <- merge(hh,mpp,by=c("shortname"))
-      hhpg <- merge(hhp,groups,by=c("shortname"))
-      print("Obtained prices for quality/expenditureonly group")
-      minprices <- ddply(hhpg[,c("shortname","mean_price","category")],.(category),summarise,min_price=min(mean_price))
-      hhpg$factor<-as.integer(hhpg$lwp_unit==1)+as.integer(hhpg$lwp_unit==2)/1000.0+as.integer(hhpg$lwp_unit==3)+as.integer(hhpg$lwp_unit==4)/1000.0+as.integer(hhpg$lwp_unit==5)
-      hhpg$quantity <-with (hhpg,lwp*factor)
+        mp<-match_recorded_prices(year = year, dirprefix = dirprefix,fu = fu, ln=ln,marketPricesOnly = TRUE)
+        mpp<-ddply(mp,.(item),summarise,mean_price=mean(recorded_price))
+        itemcodesmap <- plyr::rename(itemcodes[,c("shortname","code")],c("code"="item"))
+        mpp <- merge(mpp,itemcodesmap)
+        hhp <- merge(hh,mpp,by=c("shortname"))
+        hhpg <- merge(hhp,groups,by=c("shortname"))
+        print("Obtained prices for quality/expenditureonly group")
+        minprices <- ddply(hhpg[,c("shortname","mean_price","category")],.(category),summarise,min_price=min(mean_price))
+        hhpg$factor<-as.integer(hhpg$lwp_unit==1)+as.integer(hhpg$lwp_unit==2)/1000.0+as.integer(hhpg$lwp_unit==3)+as.integer(hhpg$lwp_unit==4)/1000.0+as.integer(hhpg$lwp_unit==5)
+        hhpg$quantity <-with (hhpg,lwp*factor)
+        
+        hhpg <- merge(minprices,hhpg)
+        # get price ratio for every group
+        hhpg$price_ratio <- with (hhpg,mean_price/min_price) 
       } else {
         print ("Using survey's market prices")
+        mktprices <- ll@load_market_prices(year = year, dirprefix = dirprefix,fu = fu , ln = ln, use_pieces = FALSE)
+        hhp <- add_market_price_to_diary (lgc=lgc,marketpricesdata=mktprices,ohsdata=ohs,diarydata=hh)
+        hhpg <- merge(hhp,groups,by=c("shortname"))
+        minprices <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min(price))
+        
+        hhpg <- merge(minprices,hhpg)
+        # get price ratio for every group
+        hhpg$price_ratio <- with (hhpg,price/min_price) 
+        hhpg <- plyr::rename(hhpg,c("lwp"="quantity"))
       }
       
-      hhpg <- merge(minprices,hhpg)
-      # get price ratio for every group
-      hhpg$price_ratio <- with (hhpg,mean_price/min_price) 
       # calculate sum of quantity consumed
       totq <- ddply(unique(hhpg[,c("hhid","shortname","category","quantity","price_ratio")]),.(category,hhid),summarise,totq=sum(quantity), qsum = sum (price_ratio*quantity))[,c("hhid","category","qsum","totq")]
       # calculate the quality ratio -  sum (price/min(price)*quantity) / sum (quantity)
@@ -1543,8 +1610,10 @@ lsms_loader<-function(fu,ln) {
     return(vis)
   }
   
+  
   ####
-  group_expenditure <- function(year,dirprefix,fu,ln,basis,categoryNames,returnBeforeGrouping,minConsumerNumber,assets_type){
+  group_expenditure <- function(year,dirprefix,fu,ln,lgc,basis,categoryNames,returnBeforeGrouping,minConsumerNumber,
+                                assets_type,use_market_prices){
     if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
     }
@@ -1608,13 +1677,15 @@ lsms_loader<-function(fu,ln) {
       if (basis=="quality"){
         dat <- NULL
         for (categ in categoryNames){
-          to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categ,hh=hh,basis=basis, ohs=ohs)
+          to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,categoryName=categ
+                                       ,hh=hh,basis=basis, ohs=ohs,use_market_prices=use_market_prices)
           print(paste("To be added: ", toString(colnames(to_be_added))))
           dat <-   rbind(dat,to_be_added[,c("hhid","category","quality")])
         }
         vis <- dat %>% spread(category, quality)
       } else if (basis == "price" || basis == "sparseness") {
-        vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,categoryName=categoryNames,hh=hh,basis=basis, ohs=ohs)
+        vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,categoryName=categoryNames,
+                               hh=hh,basis=basis, ohs=ohs, use_market_prices=use_market_prices)
       } else {
         stop (paste("category names not handled for basis:",basis))
       }
