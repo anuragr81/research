@@ -7,10 +7,10 @@ source('lsms/lsms_group_collect.r')
 get_categories <- function(){
   return (c("densefoods","nonfresh","fruitsveg","protein","alcohol","complements"))
 }
-run_test <- function(dat){
+run_test <- function(dat,year){
   categories <- get_categories()
   if (missing(dat)){
-    dat <- ll@group_expenditure(year = 2010, dirprefix = "../",
+    dat <- ll@group_expenditure(year = year, dirprefix = "../",
                                 fu = fu , ln = lsms_normalizer, lgc=lgc,
                                 basis = "quality", categoryNames = categories,returnBeforeGrouping = FALSE,
                                 minConsumerNumber = 5,use_market_prices=TRUE)
@@ -20,6 +20,14 @@ run_test <- function(dat){
   }
   return(dat)
 }
+
+#w2010$lpnonfresh<-with(w2010,log(nonfresh_min_price))
+#w2010$lpdensefoods<-with(w2010,log(densefoods_min_price))
+#w2010$lpcomplements<-with(w2010,log(complements_min_price))
+#w2010$lpfruitsveg<-with(w2010,log(fruitsveg_min_price))
+#w2010$lpprotein<-with(w2010,log(protein_min_price))
+#w2010$lpalcohol<-with(w2010,log(alcohol_min_price))
+
 item_price_trends <- function() {
   # national average is not the same as regional changes
   # the grouping may in fact need to be different for regions
