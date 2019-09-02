@@ -1,6 +1,6 @@
 #from collections import Counter
 
-def generate_symmetry(categories):
+def generate_constraints(categories):
     results = []
     eqNames = [(c,"q"+c) for c in categories]
     logNames = [(c,"lp"+c.lower()) for c in categories ]
@@ -19,12 +19,22 @@ def generate_symmetry(categories):
         revres =[k for k in revres if k!=entry and k!=(entry[1],entry[0])]
         results=[k for k in results if k!=entry and k!=(entry[1],entry[0])]
         finres.append(entry)
-
+    constcount = 1 
     for r in finres:
-        print(r[0]+"="+r[1])
+        print("constraint define " + str(constcount) + " " + r[0]+"="+r[1])
+        constcount +=1 
+    for _,eqn in eqNames:
+        homgn=""
+        prefix = ""
+        for _,ln in logNames:
+            homgn+= (prefix + "["+eqn+"]"+ln)
+            prefix=" +"
+        homgn+= " = 0"
+        print("constraint define "+str(constcount) + " " + homgn)
+        constcount +=1 
 
 
-#categ= ["Beef","Pork","Chicken","Goat"]
-categ = ["densefoods","nonfresh"]
+categ= ["Beef","Pork","Chicken"]
+#categ = ["densefoods","nonfresh"]
 
-syms = generate_symmetry(categ)
+syms = generate_constraints(categ)
