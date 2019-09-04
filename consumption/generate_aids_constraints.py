@@ -32,9 +32,11 @@ def generate_constraints(categories):
         homgn+= " = 0"
         print("constraint define "+str(constcount) + " " + homgn)
         constcount +=1 
+    print ("("+' '.join([str(x) for x in range(1,constcount)]) +")")
 
 
-categ= ["Beef","Pork","Chicken"]
+#categ= ["Beef","Pork","Chicken"]
+
 #categ = ["densefoods","nonfresh"]
-
+categ=["nonfresh","densefoods","complements","fruitsveg","protein","alcohol"]
 syms = generate_constraints(categ)
