@@ -7,11 +7,18 @@ if (isClass("LSMSGroupCollect")){
 ## all exported functions are declared here
 setClass("LSMSGroupCollect", representation(get_regressed_market_price="function",
                                             select_market_price="function",
-                                            fill_missing_yearvals="function") )
+                                            fill_missing_yearvals="function",get_substitution_frame="function") )
 
 
 lgc<-function(){
   
+  get_substitution_frame <- function(){
+    x <- data.frame(source=NULL,target=NULL)
+    x <- rbind(x,data.frame(source="brews",target="beer"))
+    x <- rbind(x,data.frame(source="brews",target="winespirits"))
+    x <- rbind(x,data.frame(source="beef",target="pork"))
+    return(x)
+  }
   get_food_inflation <- function() {
     x <- data.frame(year=NULL, price=NULL)
     x<- rbind(x, data.frame( year= 2010 , price= 6.51666666666667 ))
@@ -31,7 +38,7 @@ lgc<-function(){
         if (length(categ)>1){
           stop("Cannot handle multiple categories")
         }
-        if (categ == "densefoods"){
+        if (is.element(categ, c("densefoods","fruitsveg","nonfresh","protein"))){
           
           datadf = get_food_inflation()
           
@@ -95,6 +102,7 @@ lgc<-function(){
   
   
   return(new("LSMSGroupCollect",get_regressed_market_price=get_regressed_market_price,
-             select_market_price=select_market_price,fill_missing_yearvals=fill_missing_yearvals) );
+             select_market_price=select_market_price,fill_missing_yearvals=fill_missing_yearvals,
+             get_substitution_frame=get_substitution_frame) );
   
 }
