@@ -6,18 +6,28 @@ if (isClass("LSMSDataStorage")){
 
 ## all exported functions are declared here
 setClass("LSMSDataStorage", representation(get_electricity_prices="function",get_household_cpi="function",
-                                           get_transportation_cpi="function", get_food_inflation = "function") )
+                                           get_transportation_cpi="function",get_exchange_rate_usd_tnz="function",
+                                           get_gasoline_prices="function") )
 
 
 ldat<-function(){
   
   
-  get_gasoline_prices <- function () { 
+  get_exchange_rate_usd_tnz <- function() {
+    x <- data.frame(source=NULL,target=NULL) 
+    x <- rbind(x,data.frame( year = 2010, usd_tnz = (1340+1485)/2))
+    x <- rbind(x,data.frame( year = 2012, usd_tnz = (1580+1598)/2))
+    x <- rbind(x,data.frame( year = 2014, usd_tnz = (1596+1715)/2))
+    return(x)
+  }
+  
+  get_gasoline_prices <- function () {
     x <- data.frame(year=NULL, price=NULL)
     x <- rbind(x, data.frame( year= 2010  , price= 1.22 ))
     x <- rbind(x, data.frame( year= 2012  , price= 1.31 ))
     x <- rbind(x, data.frame( year= 2014  , price= 1.3325 ))
-    return(x)
+    
+    return(merge(x, get_exchange_rate_usd_tnz()))
   }
   
   
@@ -33,7 +43,7 @@ ldat<-function(){
     x<- rbind(x, data.frame( year=2013, price=60))
     x<- rbind(x, data.frame( year=2014, price=100))
     x<- rbind(x, data.frame( year=2015, price=100))
-    return(x)
+    return(merge(x, get_exchange_rate_usd_tnz()))
   }
   
   get_household_cpi <- function()
@@ -43,6 +53,7 @@ ldat<-function(){
     x<- rbind(x, data.frame( year=2010, price=56.9275))
     x<- rbind(x, data.frame( year=2012, price=83.2383333333333))
     x<- rbind(x, data.frame( year=2014, price=99.2816666666667))
+    
     return(x)
   }
   
@@ -58,6 +69,7 @@ ldat<-function(){
   
   return(new("LSMSDataStorage",get_electricity_prices=get_electricity_prices,
              get_household_cpi=get_household_cpi,get_transportation_cpi=get_transportation_cpi,
-             get_food_inflation=get_food_inflation) );
+             get_gasoline_prices=get_gasoline_prices,
+             get_exchange_rate_usd_tnz=get_exchange_rate_usd_tnz) );
   
 }

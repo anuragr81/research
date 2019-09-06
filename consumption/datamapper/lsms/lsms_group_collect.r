@@ -8,19 +8,11 @@ if (isClass("LSMSGroupCollect")){
 setClass("LSMSGroupCollect", representation(get_regressed_market_price="function",
                                             select_market_price="function",
                                             fill_missing_yearvals="function",
-                                            get_substitution_frame="function",
-                                            get_exchange_rate_usd_tnz="function") )
+                                            get_substitution_frame="function") )
 
 
 lgc<-function(){
   
-  get_exchange_rate_usd_tnz () {
-    x <- data.frame(source=NULL,target=NULL) 
-    x <- rbind(x,data.frame( year = 2010, usd_tnz = (1340+1485)/2))
-    x <- rbind(x,data.frame( year = 2012, usd_tnz = (1580+1598)/2))
-    x <- rbind(x,data.frame( year = 2014, usd_tnz = (1596+1715)/2))
-    return(x)
-  }
   
   get_substitution_frame <- function(){
     x <- data.frame(source=NULL,target=NULL)
