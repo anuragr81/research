@@ -1,12 +1,13 @@
 setwd('c:/local_files/research/consumption/datamapper/')
 source('translation/frameutils.R');source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');ll=lsms_loader(fu=fu,ln=lsms_normalizer,lgc=lgc)
-source('lsms/lsms_group_collect.r')
+source('lsms/lsms_group_collect.r'); source('lsms/lsms_datastorage.R')
 #assign("last.warning", NULL, envir = baseenv())
 
 
 get_categories <- function(){
   return (c("densefoods","nonfresh","fruitsveg","protein","alcohol","complements"))
 }
+
 run_test <- function(dat,year){
   
   categories <- get_categories()

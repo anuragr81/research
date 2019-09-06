@@ -11,20 +11,40 @@ setClass("LSMSGroupCollect", representation(get_regressed_market_price="function
 
 
 lgc<-function(){
-
   
-  fill_missing_yearvals <- function(year,price,curyear){
-    df  <- data.frame(year = year, price = price, curyear = rep(curyear,length(year)))
+  #permitted_one_point_groups <- c("densefoods")
+  
+  fill_missing_yearvals <- function(ld,category,year,price,curyear){
+    df <- data.frame(year = year, price = price, curyear = rep(curyear,length(year)))
     if ( dim(df[!is.na(df$price),])[1] < 2){
-      print("Cannot use regression")
-      return(NA)
+      if (dim(df[!is.na(df$price),])[1] == 0){
+        stop("Must have one non-NA price")
+      } else {
+        #number of NA is exactly one
+        categ <- unique(category)
+        if (length(categ)>1){
+          stop("Cannot handle multiple categories")
+        }
+        if (categ == "densefoods"){
+          foodprices <- ld()@get_food_inflation()
+          lmres <- lm(data=foodprices,price~year)
+          df$scaled <- lmres$coefficients[2]*c(2008,2010,2012,2014) + lmres$coefficients[1]
+          x <- with(df,price/scaled)
+          x <- x[!is.na(x)]
+          df$price <- x*df$scaled
+          return(subset(df,curyear==year)$price)
+        } else {
+          stop(paste("Unknown category:",categ,"for extrapolation"))
+        }
+      }
+      
     } else {
       lmres <- lm(data=df,price~year)
       return(lmres$coeff[2]*curyear + lmres$coeff[1])
       
     }
     return(paste("fill_missing_yearvals - year (1):",curyear))
-  
+    
   }
   
   select_market_price <- function (nat,reg,dstt) { 
