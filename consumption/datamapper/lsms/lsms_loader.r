@@ -1497,20 +1497,40 @@ lsms_loader<-function(fu,ln,lgc) {
       
       if (length(intersect(unique(groups$category),c("energy")))>0 ) { # if groups have energy category then provide energy prices
         energy_shortnames_in_diary <- intersect(subset(groups,category=="energy")$shortname,unique(diarywithregiondistrict$shortname))
-        if (is.element("gas",energy_shortnames_in_diary)){
+        
+        if (is.element("gas",energy_shortnames_in_diary) && is.element("gas",unavailable_items)){
+           
           print("add_market_price_to_misc_diary - Adding gas prices")
+          gprice <- subset(ldat()@get_gasoline_prices(),year==curyear)$price
+          
+          if (length(gprice)>1){
+            stop(paste("add_market_price_to_misc_diary - Found multiple gas prices for the year",curyear))
+          } else if (length(gprice)==0) {
+            stop(paste("add_market_price_to_misc_diary - No gas price found for the year",curyear))
+          } else {
+            diary <- rbind(diary,subset(k,shortname=="gas") %>% mutate (price=gprice,year=curyear))
+          }
         }
-        if (is.element("electricity",energy_shortnames_in_diary)){
-          print("add_market_price_to_misc_diary - Adding eletricity prices")
+        if (is.element("electricity",energy_shortnames_in_diary) && is.element("electricity",unavailable_items)){
+          print("add_market_price_to_misc_diary - Adding electricity prices")
+          eprice <- subset(ldat()@get_electricity_prices(),year==curyear)$price
+          
+          if (length(eprice)>1){
+            stop(paste("add_market_price_to_misc_diary - Found multiple electricity prices for the year",curyear))
+          } else if (length(eprice)==0) {
+            stop(paste("add_market_price_to_misc_diary - No electricity price found for the year",curyear))
+          } else {
+            diary <- rbind(diary,subset(k,shortname=="electricity") %>% mutate (price=eprice,year=curyear))
+          }
+          
+        
         }
         
       }
       
-      
-      
-      
-      diary$ year <- NULL
+      diary$year <- NULL
       diary$category <- NULL
+      #print("RETURNING prematurely: k")
       return(diary)
     } else {
       return(NULL)
@@ -1587,6 +1607,8 @@ lsms_loader<-function(fu,ln,lgc) {
         
         hhpm <- add_market_price_to_misc_diary (curyear = year, dirprefix =dirprefix, fu=fu, ln=ln, groups = groups, lgc=lgc,
                                                 ld = ld, marketpricesdata=mktprices,ohsdata=ohs,ddata=miscdiarydata)
+        print("RETURNING PREMATURELY: hhpm")
+        return(hhpm)
         
         if (is.null(hhpm)) {
           print(paste("group_collect - FAILURE to use prices from interpolation/other-price sources for :",toString(relevant_names)))
@@ -1600,8 +1622,7 @@ lsms_loader<-function(fu,ln,lgc) {
         }
         
         hhpg <- merge(hhp,groups,by=c("shortname"))
-        print("RETURNING PREMATURELY")
-        return(hhpg)
+        
         minprices <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min(price))
         
         hhpg <- merge(minprices,hhpg)
