@@ -4,6 +4,8 @@ source('lsms/lsms_group_collect.r'); source('lsms/lsms_datastorage.R')
 #assign("last.warning", NULL, envir = baseenv())
 
 
+
+
 get_categories <- function(){
   return (c("densefoods","nonfresh","fruitsveg","protein","alcohol","complements"))
 }
@@ -12,16 +14,16 @@ run_test <- function(dat,year){
   
   categories <- get_categories()
   if (missing(dat)){
-  #  dat <- ll@group_expenditure(year = year, dirprefix = "../",
-  #                              fu = fu , ln = lsms_normalizer, lgc=lgc,
-  #                              basis = "quality", categoryNames = categories,returnBeforeGrouping = FALSE,
-  #                              minConsumerNumber = 5,use_market_prices=TRUE)
+    #  dat <- ll@group_expenditure(year = year, dirprefix = "../",
+    #                              fu = fu , ln = lsms_normalizer, lgc=lgc,
+    #                              basis = "quality", categoryNames = categories,returnBeforeGrouping = FALSE,
+    #                              minConsumerNumber = 5,use_market_prices=TRUE)
   }
   #for (categ in categories){
   #  dat[,paste("w_",categ,sep="")] <- dat[,paste(categ,"_tot_categ_exp",sep="")]/dat$total_expenditure
   #}
   c2010<- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln = lsms_normalizer)
-
+  
   o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu = fu, ln=lsms_normalizer )
   g <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "densefoods",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = TRUE)
   

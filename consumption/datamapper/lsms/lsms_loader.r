@@ -1359,7 +1359,7 @@ lsms_loader<-function(fu,ln,lgc) {
   
   
   
-  get_regressed_market_prices <-function (lgc,ld,marketpricesdata,ohsdata,diarydata) {
+  get_regressed_market_prices <-function (lgc,ld,marketpricesdata,ohsdata,diarydata,filter_out_nonfood) {
     
     
     
@@ -1380,9 +1380,11 @@ lsms_loader<-function(fu,ln,lgc) {
     print("Merging regional, national prices")
     price_reg_dstt  <-merge(market_prices_regional,matched_district_prices,by=c("region","shortname"),all.y=TRUE)
     price_nat_reg_dstt <-merge(market_prices_national,price_reg_dstt,by=c("shortname"),all.y=TRUE)
+    if (filter_out_nonfood == TRUE){
+      price_nat_reg_dstt <- subset(price_nat_reg_dstt,item>10000);
+    }
     
-    price_nat_reg_dstt <- subset(price_nat_reg_dstt,item>10000);
-    
+
     natprices <- subset(price_nat_reg_dstt,!is.na(reg_price_nat))
     print(paste("Ignored price entries:",(dim(price_nat_reg_dstt)[1]-dim(natprices)[1]),"/",dim(price_nat_reg_dstt)[1],"(", 
                 100*(dim(price_nat_reg_dstt)[1]-dim(natprices)[1])/dim(price_nat_reg_dstt)[1],"%)"))
@@ -1397,7 +1399,7 @@ lsms_loader<-function(fu,ln,lgc) {
   
   add_market_price_to_fooddiary <- function (lgc,ld,marketpricesdata,ohsdata,ddata){
     
-    prices     <-     get_regressed_market_prices (lgc,ld,marketpricesdata,ohsdata,ddata)
+    prices     <-     get_regressed_market_prices (lgc,ld,marketpricesdata,ohsdata,ddata,filter_out_nonfood=TRUE)
     subst      <- lgc()@get_substitution_frame()
     for (nrow in seq(1,dim(subst)[1])){
       efrom  <- as.character(subst[nrow,]$source)
@@ -1419,7 +1421,6 @@ lsms_loader<-function(fu,ln,lgc) {
     
     print(paste("add_market_price_to_fooddiary - Total number of price entries ignored:",(dim(k)[1]-dim(diary)[1]),"/",dim(k)[1],"(",
                 100*(dim(k)[1]-dim(diary)[1])/dim(k)[1],"%)"))
-    print("add_market_price_to_fooddiary- PENDING: Addition of prices for pork, winespirits (marked as beer)")
     
     return(diary)
   }
@@ -1432,7 +1433,8 @@ lsms_loader<-function(fu,ln,lgc) {
     interpolation_years <- c(2008,2010,2012,2014)
     years_to_use <- setdiff(interpolation_years,c(curyear))
     
-    alldat <- get_regressed_market_prices(lgc = lgc, ld = ld, marketpricesdata = marketpricesdata, ohsdata = ohsdata, diarydata = ddata)
+    alldat <- get_regressed_market_prices(lgc = lgc, ld = ld, marketpricesdata = marketpricesdata, ohsdata = ohsdata, diarydata = ddata,
+                                          filter_out_nonfood = FALSE)
     if (dim(alldat)[1]>0){
       stop(paste("market prices retrieval FAILURE for year: ",curyear))
     }
@@ -1441,7 +1443,7 @@ lsms_loader<-function(fu,ln,lgc) {
     for (yr in years_to_use) {
       print(paste("Interpolation: Getting market prices for year:",yr))
       mdata        <- load_market_prices(year = yr, dirprefix = dirprefix,fu = fu, ln = ln, use_pieces = FALSE)
-      mdat         <- get_regressed_market_prices(lgc = lgc, marketpricesdata = mdata, ohsdata = ohsdata, diarydata = ddata)
+      mdat         <- get_regressed_market_prices(lgc = lgc, marketpricesdata = mdata, ohsdata = ohsdata, diarydata = ddata, filter_out_nonfood = FALSE)
       if (dim(mdat)[1]>0) {
         print(paste("add_market_price_to_misc_diary - appending data for year:",yr))
         mdat$year    <- yr
