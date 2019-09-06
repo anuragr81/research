@@ -7,16 +7,27 @@ if (isClass("LSMSGroupCollect")){
 ## all exported functions are declared here
 setClass("LSMSGroupCollect", representation(get_regressed_market_price="function",
                                             select_market_price="function",
-                                            fill_missing_yearvals="function",get_substitution_frame="function") )
+                                            fill_missing_yearvals="function",
+                                            get_substitution_frame="function",
+                                            get_exchange_rate_usd_tnz="function") )
 
 
 lgc<-function(){
+  
+  get_exchange_rate_usd_tnz () {
+    x <- data.frame(source=NULL,target=NULL) 
+    x <- rbind(x,data.frame( year = 2010, usd_tnz = (1340+1485)/2))
+    x <- rbind(x,data.frame( year = 2012, usd_tnz = (1580+1598)/2))
+    x <- rbind(x,data.frame( year = 2014, usd_tnz = (1596+1715)/2))
+    return(x)
+  }
   
   get_substitution_frame <- function(){
     x <- data.frame(source=NULL,target=NULL)
     x <- rbind(x,data.frame(source="brews",target="beer"))
     x <- rbind(x,data.frame(source="brews",target="winespirits"))
     x <- rbind(x,data.frame(source="beef",target="pork"))
+    x <- rbind(x,data.frame(source="petrol",target="gas"))
     return(x)
   }
   get_food_inflation <- function() {
@@ -26,7 +37,7 @@ lgc<-function(){
     x<- rbind(x, data.frame( year= 2014 , price= 7.44166666666667 ))
     return(x)
   }
-
+  
   fill_missing_yearvals <- function(category,year,price,curyear){
     df <- data.frame(year = year, price = price, curyear = rep(curyear,length(year)))
     if ( dim(df[!is.na(df$price),])[1] < 2){
@@ -103,6 +114,6 @@ lgc<-function(){
   
   return(new("LSMSGroupCollect",get_regressed_market_price=get_regressed_market_price,
              select_market_price=select_market_price,fill_missing_yearvals=fill_missing_yearvals,
-             get_substitution_frame=get_substitution_frame) );
+             get_substitution_frame=get_substitution_frame,get_exchange_rate_usd_tnz=get_exchange_rate_usd_tnz) );
   
 }

@@ -12,6 +12,14 @@ setClass("LSMSDataStorage", representation(get_electricity_prices="function",get
 ldat<-function(){
   
   
+  get_gasoline_prices <- function () { 
+    x <- data.frame(year=NULL, price=NULL)
+    x <- rbind(x, data.frame( year= 2010  , price= 1.22 ))
+    x <- rbind(x, data.frame( year= 2012  , price= 1.31 ))
+    x <- rbind(x, data.frame( year= 2014  , price= 1.3325 ))
+    return(x)
+  }
+  
   
   get_electricity_prices <- function () { 
     x <- data.frame(year=NULL, price=NULL)
