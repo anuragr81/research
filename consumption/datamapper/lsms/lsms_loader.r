@@ -1384,7 +1384,7 @@ lsms_loader<-function(fu,ln,lgc) {
       price_nat_reg_dstt <- subset(price_nat_reg_dstt,item>10000);
     }
     
-
+    
     natprices <- subset(price_nat_reg_dstt,!is.na(reg_price_nat))
     print(paste("Ignored price entries:",(dim(price_nat_reg_dstt)[1]-dim(natprices)[1]),"/",dim(price_nat_reg_dstt)[1],"(", 
                 100*(dim(price_nat_reg_dstt)[1]-dim(natprices)[1])/dim(price_nat_reg_dstt)[1],"%)"))
@@ -1404,8 +1404,11 @@ lsms_loader<-function(fu,ln,lgc) {
     for (nrow in seq(1,dim(subst)[1])){
       efrom  <- as.character(subst[nrow,]$source)
       eto    <- as.character(subst[nrow,]$target)
-      print(paste("add_market_price_to_fooddiary -prices for", eto, "with prices from",efrom))
-      prices <- rbind(prices,subset(prices,shortname==efrom) %>% mutate(shortname=eto))
+      toadd  <- subset(prices,shortname==efrom)
+      if (dim(toadd)[1]>0){
+        print(paste("add_market_price_to_fooddiary -prices for", eto, "with prices from",efrom))
+        prices <- rbind(prices,toadd %>% mutate(shortname=eto))
+      }
     }
     
     #k<-merge(c2010,np2010,by=c("region","district","shortname"),all.x=TRUE)
@@ -1436,7 +1439,9 @@ lsms_loader<-function(fu,ln,lgc) {
     alldat <- get_regressed_market_prices(lgc = lgc, ld = ld, marketpricesdata = marketpricesdata, ohsdata = ohsdata, diarydata = ddata,
                                           filter_out_nonfood = FALSE)
     if (dim(alldat)[1]>0){
-      stop(paste("market prices retrieval FAILURE for year: ",curyear))
+      print(paste("add_market_price_to_misc_diary - Using data from year:",curyear, " for items", toString(unique(ddata$shortname))))
+      alldat$year <- curyear
+  
     }
     
     print(paste("Interpolation: Using market prices for year:",curyear))
@@ -1447,7 +1452,7 @@ lsms_loader<-function(fu,ln,lgc) {
       if (dim(mdat)[1]>0) {
         print(paste("add_market_price_to_misc_diary - appending data for year:",yr))
         mdat$year    <- yr
-        print("Ignoring the use of village column")
+        print("add_market_price_to_misc_diary - Ignoring the use of village column")
         mdat$village <- NULL
         alldat       <- rbind(alldat,mdat)
       }
@@ -1463,10 +1468,14 @@ lsms_loader<-function(fu,ln,lgc) {
     paddedalldat <- merge(paddedalldat,groups,all.x=TRUE)
     
     if (dim(paddedalldat)[1]>0){
-      curprices <- ddply(paddedalldat[,c("region","district","shortname","category","year","price")],
+      paddedalldat$curyear <- rep(curyear,dim(paddedalldat)[1])
+      print("test:")
+      print(head(paddedalldat))
+      curprices <- ddply(paddedalldat[,c("region","district","shortname","category","year","price","curyear")],
                          .(region,district,category,shortname),summarise, 
                          price=lgc()@fill_missing_yearvals(category,year,price,curyear))
-      curprices$ year <- curyear      
+      paddedalldat$cyr <- NULL
+      curprices$year <- curyear      
       
       
       # the price data should have the following columns
@@ -1476,14 +1485,30 @@ lsms_loader<-function(fu,ln,lgc) {
       # FIND MISSING 
       diarywithregiondistrict <- merge(ddata,unique(ohsdata[,c("hhid","region","district")]),all.x=TRUE)
       
+      
       k<-merge(diarywithregiondistrict,curprices,all.x=TRUE)
       noregionprice <- subset(k,is.na(region) & is.na(price))
-      ignored_items <- as.character(unique(noregionprice$shortname))
-      print(paste("Ignoring consumption on:", toString(ignored_items)))
-      diary                   <- subset(k,!is.element(shortname,ignored_items))
-      print(paste("Total number of entries ignored:",(dim(k)[1]-dim(diary)[1]),"/",dim(k)[1],"(",
+      unavailable_items <- as.character(unique(noregionprice$shortname))
+      print(paste("add_market_price_to_misc_diary - No price inference for items :", toString(unavailable_items)))
+      diary                   <- subset(k,!is.element(shortname,unavailable_items))
+      print(paste("add_market_price_to_misc_diary - No price inference for items :",(dim(k)[1]-dim(diary)[1]),"/",dim(k)[1],"(",
                   100*(dim(k)[1]-dim(diary)[1])/dim(k)[1],"%)"))
-      print("PENDING addition of electricity")
+      
+      
+      if (length(intersect(unique(groups$category),c("energy")))>0 ) { # if groups have energy category then provide energy prices
+        energy_shortnames_in_diary <- intersect(subset(groups,category=="energy")$shortname,unique(diarywithregiondistrict$shortname))
+        if (is.element("gas",energy_shortnames_in_diary)){
+          print("add_market_price_to_misc_diary - Adding gas prices")
+        }
+        if (is.element("electricity",energy_shortnames_in_diary)){
+          print("add_market_price_to_misc_diary - Adding eletricity prices")
+        }
+        
+      }
+      
+      
+      
+      
       diary$ year <- NULL
       diary$category <- NULL
       return(diary)
@@ -1573,7 +1598,7 @@ lsms_loader<-function(fu,ln,lgc) {
           print(paste("group_collect - Obtained interpolation/other-data for items:",toString(unique(hhpm$shortname))))
           hhp <- rbind(hhp,hhpm)
         }
-
+        
         hhpg <- merge(hhp,groups,by=c("shortname"))
         print("RETURNING PREMATURELY")
         return(hhpg)

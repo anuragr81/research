@@ -19,7 +19,7 @@ lgc<-function(){
     x <- rbind(x,data.frame(source="brews",target="beer"))
     x <- rbind(x,data.frame(source="brews",target="winespirits"))
     x <- rbind(x,data.frame(source="beef",target="pork"))
-    x <- rbind(x,data.frame(source="petrol",target="gas"))
+#    x <- rbind(x,data.frame(source="petrol",target="gas"))
     return(x)
   }
   get_food_inflation <- function() {
@@ -31,7 +31,8 @@ lgc<-function(){
   }
   
   fill_missing_yearvals <- function(category,year,price,curyear){
-    df <- data.frame(year = year, price = price, curyear = rep(curyear,length(year)))
+    
+    df <- data.frame(year = year, price = price, currentyear = curyear)
     if ( dim(df[!is.na(df$price),])[1] < 2){
       if (dim(df[!is.na(df$price),])[1] == 0){
         stop("Must have one non-NA price")
@@ -50,7 +51,7 @@ lgc<-function(){
           x <- with(df,price/scaled)
           x <- x[!is.na(x)]
           df$price <- x*df$scaled
-          return(subset(df,curyear==year)$price)
+          return(subset(df,currentyear==year)$price)
         } else {
           stop(paste("Unknown category:",categ,"for extrapolation"))
         }
@@ -58,11 +59,14 @@ lgc<-function(){
       
     } else {
       lmres <- lm(data=df,price~year)
-      return(lmres$coeff[2]*curyear + lmres$coeff[1])
+      if (length(unique(curyear))>1)
+      {
+        stop("fill_missing_yearvals - cannot compute for multiple years")
+      }
+      return(lmres$coeff[2]*unique(curyear) + lmres$coeff[1])
       
     }
-    return(paste("fill_missing_yearvals - year (1):",curyear))
-    
+
   }
   
   select_market_price <- function (nat,reg,dstt) { 
@@ -106,6 +110,6 @@ lgc<-function(){
   
   return(new("LSMSGroupCollect",get_regressed_market_price=get_regressed_market_price,
              select_market_price=select_market_price,fill_missing_yearvals=fill_missing_yearvals,
-             get_substitution_frame=get_substitution_frame,get_exchange_rate_usd_tnz=get_exchange_rate_usd_tnz) );
+             get_substitution_frame=get_substitution_frame) );
   
 }
