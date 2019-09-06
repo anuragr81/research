@@ -27,7 +27,8 @@ ldat<-function(){
     x <- rbind(x, data.frame( year= 2012  , price= 1.31 ))
     x <- rbind(x, data.frame( year= 2014  , price= 1.3325 ))
     
-    return(merge(x, get_exchange_rate_usd_tnz()))
+    x <- ( merge(x, get_exchange_rate_usd_tnz()) %>% mutate ( price = price*usd_tnz) ) [ ,c("year","price") ]
+    return(x)
   }
   
   
@@ -43,7 +44,8 @@ ldat<-function(){
     x<- rbind(x, data.frame( year=2013, price=60))
     x<- rbind(x, data.frame( year=2014, price=100))
     x<- rbind(x, data.frame( year=2015, price=100))
-    return(merge(x, get_exchange_rate_usd_tnz()))
+    x<- ( merge(x, get_exchange_rate_usd_tnz()) %>% mutate ( price = price*usd_tnz) ) [ ,c("year","price") ]
+    return(x)
   }
   
   get_household_cpi <- function()
