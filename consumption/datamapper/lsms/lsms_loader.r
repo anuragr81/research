@@ -289,9 +289,7 @@ lsms_loader<-function(fu,ln,lgc) {
       ml <-merge(m,l,all=TRUE)
       
       mlk <-merge(ml,k,all=TRUE)
-      #print("RETURNING PREMATURELY")
-      #return(mlk)
-      
+
       ## mapping name codes
       mlk <-merge(mlk,plyr::rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
       if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
@@ -1423,9 +1421,6 @@ lsms_loader<-function(fu,ln,lgc) {
     interpolation_years <- c(2008,2010,2012,2014)
     years_to_use <- setdiff(interpolation_years,c(curyear))
     
-    region_district_consumed_items <- unique(merge(unique(ohsdata[,c("region","district","hhid")]),
-                                                   unique(ddata[,c("hhid","shortname","item")],by=c("hhid")))[,c("region","district","shortname","item")])
-    
     alldat <- get_regressed_market_prices(lgc = lgc, ld = ld, marketpricesdata = marketpricesdata, ohsdata = ohsdata, diarydata = ddata)
     if (dim(alldat)[1]>0){
       stop(paste("market prices retrieval FAILURE for year: ",curyear))
@@ -1459,13 +1454,24 @@ lsms_loader<-function(fu,ln,lgc) {
                        price=lgc()@fill_missing_yearvals(category,year,price,curyear))
     curprices$ year <- curyear
     
-    return(merge(region_district_consumed_items,curprices,all.x=TRUE))
-    
     # the price data should have the following columns
     #shortname, region, district, hhid, item, cost, is_consumed, 
     #lwp_unit, lwp, own_unit, own, gift_unit, gift, price
     
     # FIND MISSING 
+    diarywithregiondistrict <- merge(ddata,unique(ohsdata[,c("hhid","region","district")]),all.x=TRUE)
+    
+    k<-merge(diarywithregiondistrict,curprices,all.x=TRUE)
+    noregionprice <- subset(k,is.na(region) & is.na(price))
+    ignored_items <- as.character(unique(noregionprice$shortname))
+    print(paste("Ignoring consumption on:", toString(ignored_items)))
+    diary                   <- subset(k,!is.element(shortname,ignored_items))
+    print(paste("Total number of entries ignored:",(dim(k)[1]-dim(diary)[1]),"/",dim(k)[1],"(",
+                100*(dim(k)[1]-dim(diary)[1])/dim(k)[1],"%)"))
+    print("PENDING addition of electricity")
+    diary$ year <- NULL
+    diary$category <- NULL
+    return(diary)
     
   }
   
@@ -1534,8 +1540,14 @@ lsms_loader<-function(fu,ln,lgc) {
         
         hhpm <- add_market_price_to_misc_diary (curyear = year, dirprefix =dirprefix, fu=fu, ln=ln, groups = groups, lgc=lgc,
                                                 ld = ld, marketpricesdata=mktprices,ohsdata=ohs,ddata=miscdiarydata)
-        print("group_collect: RETURNING PREMATURELY")
-        return(hhpm)
+        
+        if (length(intersect(unique(hhpm$shortname),unique(hhp$shortname))) > 0){
+          stop("Overlap found in food and misc items")
+        }
+        print(paste("Using interpolation/other-data for items:",toString(colnames(hhpm))))
+        hhp <- rbind(hhp,hhpm)
+        
+        
         hhpg <- merge(hhp,groups,by=c("shortname"))
         minprices <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min(price))
         
