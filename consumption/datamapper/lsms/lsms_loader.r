@@ -1544,7 +1544,7 @@ lsms_loader<-function(fu,ln,lgc) {
         if (length(intersect(unique(hhpm$shortname),unique(hhp$shortname))) > 0){
           stop("Overlap found in food and misc items")
         }
-        print(paste("Using interpolation/other-data for items:",toString(colnames(hhpm))))
+        print(paste("Using interpolation/other-data for items:",toString(unique(hhpm$shortname))))
         hhp <- rbind(hhp,hhpm)
         
         
