@@ -2,6 +2,7 @@ library(foreign)
 library(haven)
 require(plyr)
 require(tidyr)
+require(jsonlite)
 
 if (isClass("LSMSLoader")){
   print ("Warning !!! previous definition of LSMSLoader would be overwritten.")
@@ -1360,7 +1361,7 @@ lsms_loader<-function(fu,ln,lgc) {
   
   
   
-  get_regressed_market_prices <-function (lgc,marketpricesdata,ohsdata,diarydata) {
+  get_regressed_market_prices <-function (lgc,ld,marketpricesdata,ohsdata,diarydata) {
     
     
     
@@ -1396,9 +1397,9 @@ lsms_loader<-function(fu,ln,lgc) {
   
   
   
-  add_market_price_to_fooddiary <- function (lgc,marketpricesdata,ohsdata,ddata){
+  add_market_price_to_fooddiary <- function (lgc,ld,marketpricesdata,ohsdata,ddata){
     
-    prices     <-     get_regressed_market_prices (lgc,marketpricesdata,ohsdata,ddata)
+    prices     <-     get_regressed_market_prices (lgc,ld,marketpricesdata,ohsdata,ddata)
     #k<-merge(c2010,np2010,by=c("region","district","shortname"),all.x=TRUE)
     #market_prices_national <- ddply(marketpricesdata,.(shortname),summarise,reg_price_nat=get_regressed_market_price(lwp=lwp,price=price))[,c("shortname","reg_price_nat")]
     diarywithregiondistrict <- merge(ddata,unique(ohsdata[,c("hhid","region","district")]),all.x=TRUE)
@@ -1425,7 +1426,7 @@ lsms_loader<-function(fu,ln,lgc) {
     region_district_consumed_items <- unique(merge(unique(ohsdata[,c("region","district","hhid")]),
                                                    unique(ddata[,c("hhid","shortname","item")],by=c("hhid")))[,c("region","district","shortname","item")])
     
-    alldat <- get_regressed_market_prices(lgc = lgc, marketpricesdata = marketpricesdata, ohsdata = ohsdata, diarydata = ddata)
+    alldat <- get_regressed_market_prices(lgc = lgc, ld = ld, marketpricesdata = marketpricesdata, ohsdata = ohsdata, diarydata = ddata)
     if (dim(alldat)[1]>0){
       stop(paste("market prices retrieval FAILURE for year: ",curyear))
     }
@@ -1451,9 +1452,11 @@ lsms_loader<-function(fu,ln,lgc) {
     allyearsdf <-merge(unique(alldat[,c("shortname","region","district","id")]),expand.grid(id=unique(alldat$id), year=interpolation_years),by=c("id"))
     paddedalldat <- merge(allyearsdf,alldat,all.x=TRUE)
     paddedalldat <- merge(paddedalldat,groups,all.x=TRUE)
+    
+    
     curprices <- ddply(paddedalldat[,c("region","district","shortname","category","year","price")],
                        .(region,district,category,shortname),summarise, 
-                       price=lgc()@fill_missing_yearvals(ld,category,year,price,curyear))
+                       price=lgc()@fill_missing_yearvals(category,year,price,curyear))
     curprices$ year <- curyear
     
     return(merge(region_district_consumed_items,curprices,all.x=TRUE))
@@ -1523,7 +1526,7 @@ lsms_loader<-function(fu,ln,lgc) {
         print ("Using survey's market prices")
         mktprices <- load_market_prices(year = year, dirprefix = dirprefix,fu = fu , ln = ln, use_pieces = FALSE)
         fooddiarydata      <- subset(hh,item>10000)
-        hhp <- add_market_price_to_fooddiary (lgc=lgc,marketpricesdata=mktprices,ohsdata=ohs,ddata=fooddiarydata)
+        hhp <- add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices,ohsdata=ohs,ddata=fooddiarydata)
         #handle non-food and missing items here
         #notice that we don't worry about items which we don't have diary data for
         relevant_names <- intersect(unique(hh$shortname),groups$shortname)

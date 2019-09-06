@@ -12,13 +12,6 @@ setClass("LSMSDataStorage", representation(get_electricity_prices="function",get
 ldat<-function(){
   
   
-  get_food_inflation <- function() {
-    x <- data.frame(year=NULL, price=NULL)
-    x<- rbind(x, data.frame( year= 2010 , price= 6.51666666666667 ))
-    x<- rbind(x, data.frame( year= 2012 , price= 20.9158333333333 ))
-    x<- rbind(x, data.frame( year= 2014 , price= 7.44166666666667 ))
-    return(x)
-  }
   
   get_electricity_prices <- function () { 
     x <- data.frame(year=NULL, price=NULL)

@@ -12,9 +12,15 @@ setClass("LSMSGroupCollect", representation(get_regressed_market_price="function
 
 lgc<-function(){
   
-  #permitted_one_point_groups <- c("densefoods")
-  
-  fill_missing_yearvals <- function(ld,category,year,price,curyear){
+  get_food_inflation <- function() {
+    x <- data.frame(year=NULL, price=NULL)
+    x<- rbind(x, data.frame( year= 2010 , price= 6.51666666666667 ))
+    x<- rbind(x, data.frame( year= 2012 , price= 20.9158333333333 ))
+    x<- rbind(x, data.frame( year= 2014 , price= 7.44166666666667 ))
+    return(x)
+  }
+
+  fill_missing_yearvals <- function(category,year,price,curyear){
     df <- data.frame(year = year, price = price, curyear = rep(curyear,length(year)))
     if ( dim(df[!is.na(df$price),])[1] < 2){
       if (dim(df[!is.na(df$price),])[1] == 0){
@@ -26,8 +32,10 @@ lgc<-function(){
           stop("Cannot handle multiple categories")
         }
         if (categ == "densefoods"){
-          foodprices <- ld()@get_food_inflation()
-          lmres <- lm(data=foodprices,price~year)
+          
+          datadf = get_food_inflation()
+          
+          lmres <- lm(data=datadf,price~year)
           df$scaled <- lmres$coefficients[2]*c(2008,2010,2012,2014) + lmres$coefficients[1]
           x <- with(df,price/scaled)
           x <- x[!is.na(x)]
