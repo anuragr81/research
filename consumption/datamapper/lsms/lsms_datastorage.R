@@ -6,11 +6,19 @@ if (isClass("LSMSDataStorage")){
 
 ## all exported functions are declared here
 setClass("LSMSDataStorage", representation(get_electricity_prices="function",get_household_cpi="function",
-                                           get_transportation_cpi="function") )
+                                           get_transportation_cpi="function", get_food_inflation = "function") )
 
 
 ldat<-function(){
   
+  
+  get_food_inflation <- function() {
+    x <- data.frame(year=NULL, price=NULL)
+    x<- rbind(x, data.frame( year= 2010 , price= 6.51666666666667 ))
+    x<- rbind(x, data.frame( year= 2012 , price= 20.9158333333333 ))
+    x<- rbind(x, data.frame( year= 2014 , price= 7.44166666666667 ))
+    return(x)
+  }
   
   get_electricity_prices <- function () { 
     x <- data.frame(year=NULL, price=NULL)
@@ -26,6 +34,7 @@ ldat<-function(){
     x<- rbind(x, data.frame( year=2015, price=100))
     return(x)
   }
+  
   get_household_cpi <- function()
   {
     # obtained by averaging monthly values
@@ -45,7 +54,9 @@ ldat<-function(){
     x<- rbind(x, data.frame( year=2014, price=99.4466416666667))
     return(x)
   }
+  
   return(new("LSMSDataStorage",get_electricity_prices=get_electricity_prices,
-             get_household_cpi=get_household_cpi,get_transportation_cpi=get_transportation_cpi) );
+             get_household_cpi=get_household_cpi,get_transportation_cpi=get_transportation_cpi,
+             get_food_inflation=get_food_inflation) );
   
 }

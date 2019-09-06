@@ -6,11 +6,27 @@ if (isClass("LSMSGroupCollect")){
 
 ## all exported functions are declared here
 setClass("LSMSGroupCollect", representation(get_regressed_market_price="function",
-                                            select_market_price="function") )
+                                            select_market_price="function",
+                                            fill_missing_yearvals="function") )
 
 
 lgc<-function(){
 
+  
+  fill_missing_yearvals <- function(year,price,curyear){
+    df  <- data.frame(year = year, price = price, curyear = rep(curyear,length(year)))
+    if ( dim(df[!is.na(df$price),])[1] < 2){
+      print("Cannot use regression")
+      return(NA)
+    } else {
+      lmres <- lm(data=df,price~year)
+      return(lmres$coeff[2]*curyear + lmres$coeff[1])
+      
+    }
+    return(paste("fill_missing_yearvals - year (1):",curyear))
+  
+  }
+  
   select_market_price <- function (nat,reg,dstt) { 
     if (!is.na(dstt)) {
       return (dstt)
@@ -51,6 +67,6 @@ lgc<-function(){
   
   
   return(new("LSMSGroupCollect",get_regressed_market_price=get_regressed_market_price,
-             select_market_price=select_market_price) );
+             select_market_price=select_market_price,fill_missing_yearvals=fill_missing_yearvals) );
   
 }

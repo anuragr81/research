@@ -16,7 +16,7 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       group_expenditure="function",group_collect="function",get_asset_score="function",
                                       item_usage="function", item_ownership="function",
                                       check_diary_nullity="function",split_households="function",
-                                      asset_differences="function"))
+                                      asset_differences="function",get_regressed_market_prices="function"))
 
 
 lsms_loader<-function(fu,ln,lgc) {
@@ -490,7 +490,7 @@ lsms_loader<-function(fu,ln,lgc) {
     
   }
   
-  load_market_prices <-function(year,dirprefix,fu,ln,use_pieces,aggregation_code,interpolate){
+  load_market_prices <-function(year,dirprefix,fu,ln,use_pieces,aggregation_code){
     
     if (missing(use_pieces)){
       use_pieces <- TRUE
@@ -1378,7 +1378,7 @@ lsms_loader<-function(fu,ln,lgc) {
     print("Obtaining regional,national prices")
     market_prices_regional <- ddply(marketpricesdata,.(region,shortname),summarise,reg_price_region=lgc()@get_regressed_market_price(lwp=lwp,price=price))[,c("region","shortname","reg_price_region")]
     market_prices_national <- ddply(marketpricesdata,.(shortname),summarise,reg_price_nat=lgc()@get_regressed_market_price(lwp=lwp,price=price))[,c("shortname","reg_price_nat")]
-    print("Merging regional, rational prices")
+    print("Merging regional, national prices")
     price_reg_dstt  <-merge(market_prices_regional,matched_district_prices,by=c("region","shortname"),all.y=TRUE)
     price_nat_reg_dstt <-merge(market_prices_national,price_reg_dstt,by=c("shortname"),all.y=TRUE)
     
@@ -1414,36 +1414,84 @@ lsms_loader<-function(fu,ln,lgc) {
     return(diary)
   }
   
-  add_market_price_to_misc_diary <-function (year,lgc,marketpricesdata,ohsdata,ddata) {
+  add_market_price_to_misc_diary <-function (curyear,dirprefix,fu,ln, groups,lgc,marketpricesdata,ohsdata,ddata) {
+    
     # adding electricity and others 
     
+    permitted_one_point_groups <- c("densefoods")
     interpolation_years <- c(2008,2010,2012,2014)
-    years_to_use <- setdiff(interpolation_years,c(year))
-    alldat = marketpricesdata
-    alldat$year = year
-    print(paste("Interpolation: Using market prices for year:",year))
+    years_to_use <- setdiff(interpolation_years,c(curyear))
+    
+    region_district_consumed_items <- unique(merge(unique(ohsdata[,c("region","district","hhid")]),
+                                                   unique(ddata[,c("hhid","shortname","item")],by=c("hhid")))[,c("region","district","shortname","item")])
+    
+    alldat <- get_regressed_market_prices(lgc = lgc, marketpricesdata = marketpricesdata, ohsdata = ohsdata, diarydata = ddata)
+    if (dim(alldat)[1]>0){
+    alldat$year = curyear
+    }
+    
+    #allmdist <- ddply(marketpricesdata,.(region,shortname),summarise,reg_price_region=lgc()@get_regressed_market_price(lwp=lwp,price=price))[,c("region","shortname","reg_price_region")]
+    #market_prices_national <- ddply(marketpricesdata,.(shortname),summarise,reg_price_nat=lgc()@get_regressed_market_price(lwp=lwp,price=price))[,c("shortname","reg_price_nat")]
+    #allmdist$year = year
+    print(paste("Interpolation: Using market prices for year:",curyear))
     for (yr in years_to_use) {
       print(paste("Interpolation: Getting market prices for year:",yr))
-      mdat <- load_market_prices(year = yr, dirprefix = dirprefix,fu = fu, ln = ln, use_pieces = FALSE,interpolate=FALSE)
+      mdata <- load_market_prices(year = yr, dirprefix = dirprefix,fu = fu, ln = ln, use_pieces = FALSE)
+      mdat <- get_regressed_market_prices(lgc = lgc, marketpricesdata = mdata, ohsdata = ohsdata, diarydata = ddata)
       mdat$year <- yr
       print("Ignoring the use of village column")
       mdat$village <- NULL
       alldat<- rbind(alldat,mdat)
       yeardata<-ddply(alldat, .(shortname,year), summarise, n = length(price))
       yearmarkers <- expand.grid(shortname=unique(as.character(alldat$shortname)),year=interpolation_years)
+      #mdist <- ddply(marketpricesdata,.(region,shortname),summarise,reg_price_region=lgc()@get_regressed_market_price(lwp=lwp,price=price))[,c("region","shortname","reg_price_region")]
+      #mdist$year <- yr
+      #allmdist <- rbind(allmdist,mdist)
       k<-merge(yearmarkers,yeardata,all.x=TRUE)
       #try region, district level
       #try region level
       #try national level
-      #unique(subset(m2010,shortname=="firewood")[,c("year","region","district","shortname","price","median_price")])
-      #append electricity, transport and household indices (which are national averages)
-      #k<-merge(yearmarkers,yeardata,all.x=TRUE)
+      
       
     }
-    return(alldat)
+    
+    #alldat$id <- paste(alldat$shortname,alldat$region,alldat$district,sep=",")
+    #spread_prices <- alldat[,c("id","price","year")] %>% spread(-id,price)
+    #idcols        <- c("shortname","region","district","id")
+    #spread_prices <- merge(spread_prices, unique(alldat[,idcols]),by=c("id"),all.y=TRUE)
+    #spread_prices$id <- NULL
+    #year_cols     <- as.integer(setdiff(colnames(spread_prices),idcols))
+    #time_vals     <- year_cols - min(year_cols)
+    
+    #
+    #merge(allmdist,region_district_consumed_items,by=c("region","district","shortname"),
+    #      all.y=TRUE)
+    
+    #ignoring all that are not in allprices
+    relevant_names <- intersect(as.character(unique(ddata$shortname)), alldat$shortname)
+    npoints <- ddply(unique(subset(alldat, is.element(shortname,relevant_names))[,c("shortname","year")]),.(shortname),summarise,npoints = length(year))
+    one_point_entries <- subset(ddata,is.element(shortname,unique(subset(npoints,npoints==1)$shortname)))
+    multi_point_entries <- subset(ddata,is.element(shortname,unique(subset(npoints,npoints>1)$shortname)))
+    #filter shortname groups for which the one-point extrapolation is allowed
+    one_point_entries <- subset(merge(one_point_entries,groups[,c("shortname","category")],by=c("shortname")),is.element(category,permitted_one_point_groups))
+    #densefoods would be using food inflation values for extrapolation etc. 
+    
+    
+    #append electricity, transport and household indices (which are national averages)
+    
+    print("add_market_price_to_misc_diary : returning PREMATURELY")
+    
+    alldat$id <- paste(alldat$shortname,alldat$region,alldat$district,sep=",")
+    allyearsdf <-merge(unique(alldat[,c("shortname","region","district","id")]),expand.grid(id=unique(alldat$id), year=interpolation_years),by=c("id"))
+    paddedalldat <- merge(allyearsdf,alldat,all.x=TRUE)
+    
+    curprices <- ddply(paddedalldat[,c("region","district","shortname","year","price")],.(region,district,shortname),summarise, x=lgc()@fill_missing_yearvals(year,price,curyear))
+    return(paddedalldat)
     # the price data should have the following columns
     #shortname, region, district, hhid, item, cost, is_consumed, 
     #lwp_unit, lwp, own_unit, own, gift_unit, gift, price
+    
+    # FIND MISSING 
     
   }
   
@@ -1502,16 +1550,17 @@ lsms_loader<-function(fu,ln,lgc) {
         hhpg$price_ratio <- with (hhpg,mean_price/min_price) 
       } else {
         print ("Using survey's market prices")
-        mktprices <- ll@load_market_prices(year = year, dirprefix = dirprefix,fu = fu , ln = ln, use_pieces = FALSE)
+        mktprices <- load_market_prices(year = year, dirprefix = dirprefix,fu = fu , ln = ln, use_pieces = FALSE)
         fooddiarydata      <- subset(hh,item>10000)
         hhp <- add_market_price_to_fooddiary (lgc=lgc,marketpricesdata=mktprices,ohsdata=ohs,ddata=fooddiarydata)
         #handle non-food and missing items here
         #notice that we don't worry about items which we don't have diary data for
-        miscdiarydata  <- subset(hh,is.element(shortname,setdiff(unique(hh$shortname),unique(hhp$shortname))))
-        print("group_collect: RETURNING PREMATURELY")
-        return(hhp)
-        hhpm <- add_market_price_to_misc_diary (year = year, lgc=lgc,marketpricesdata=mktprices,ohsdata=ohs,ddata=miscdiarydata)
+        relevant_names <- intersect(unique(hh$shortname),groups$shortname)
+        miscdiarydata  <- subset(hh,is.element(shortname,setdiff(relevant_names,unique(hhp$shortname))))
         
+        hhpm <- add_market_price_to_misc_diary (curyear = year, dirprefix =dirprefix, fu=fu, ln=ln, groups = groups, lgc=lgc,marketpricesdata=mktprices,ohsdata=ohs,ddata=miscdiarydata)
+        print("group_collect: RETURNING PREMATURELY")
+        return(hhpm)
         hhpg <- merge(hhp,groups,by=c("shortname"))
         minprices <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min(price))
         
@@ -2311,6 +2360,7 @@ lsms_loader<-function(fu,ln,lgc) {
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
              read_assets_file=read_assets_file, group_expenditure=group_expenditure,group_collect=group_collect,
              get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership,
-             check_diary_nullity=check_diary_nullity,split_households=split_households,asset_differences=asset_differences))
+             check_diary_nullity=check_diary_nullity,split_households=split_households,asset_differences=asset_differences,
+             get_regressed_market_prices=get_regressed_market_prices))
   
 }
