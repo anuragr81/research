@@ -7,11 +7,19 @@ if (isClass("LSMSDataStorage")){
 ## all exported functions are declared here
 setClass("LSMSDataStorage", representation(get_electricity_prices="function",get_household_cpi="function",
                                            get_transportation_cpi="function",get_exchange_rate_usd_tnz="function",
-                                           get_gasoline_prices="function") )
+                                           get_gasoline_prices="function",get_price_for_category="function") )
 
 
 ldat<-function(){
-  
+  get_price_for_category <- function(category,yr){
+    if (category=="household"){
+      return(subset(get_household_cpi(),year==yr))
+    } 
+    if (category == "transport"){
+      return(subset(get_transportation_cpi(),year==yr))
+    }
+    return(data.frame())  
+  }
   
   get_exchange_rate_usd_tnz <- function() {
     x <- data.frame(source=NULL,target=NULL) 
@@ -72,6 +80,7 @@ ldat<-function(){
   return(new("LSMSDataStorage",get_electricity_prices=get_electricity_prices,
              get_household_cpi=get_household_cpi,get_transportation_cpi=get_transportation_cpi,
              get_gasoline_prices=get_gasoline_prices,
-             get_exchange_rate_usd_tnz=get_exchange_rate_usd_tnz) );
+             get_exchange_rate_usd_tnz=get_exchange_rate_usd_tnz,
+             get_price_for_category=get_price_for_category) );
   
 }

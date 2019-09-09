@@ -1590,9 +1590,9 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="womensshoes"))
     x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="childrensshoes"))
     
-    #x<-rbind(x,data.frame(category = "transport", group="expenditureonly",          shortname="public_transport"))
+    x<-rbind(x,data.frame(category = "transport", group="expenditureonly",          shortname="public_transport"))
     #x<-rbind(x,data.frame(category = "transport", group="expenditureonly",         shortname="motor_repair"))
-    #x<-rbind(x,data.frame(category = "transport", group="expenditureonly",         shortname="petrol"))
+    x<-rbind(x,data.frame(category = "transport", group="expenditureonly",         shortname="petrol"))
     #x<-rbind(x,data.frame(category = "transport", group="expenditureonly",          shortname="bicycle_repair"))
     
     x<-rbind(x,data.frame(category = "household", group="expenditureonly",shortname="services"))

@@ -873,7 +873,7 @@ lsms_loader<-function(fu,ln,lgc) {
       c$hhid<-as.character(c$hhid)
       ab <- merge(a,b)
       ohs<-merge(ab,c)
-
+      
       #*    calculated age by subtracting YOB from 2015 (survey year)
       #*    read section J for housing data (rent, number of primary/secondary rooms)
       
@@ -1619,7 +1619,7 @@ lsms_loader<-function(fu,ln,lgc) {
     if (dim(alldat)[1]>0){
       print(paste("add_market_price_to_misc_diary - Using data from year:",curyear, " for items", toString(unique(ddata$shortname))))
       alldat$year <- curyear
-  
+      
     }
     
     print(paste("Interpolation: Using market prices for year:",curyear))
@@ -1677,7 +1677,7 @@ lsms_loader<-function(fu,ln,lgc) {
         energy_shortnames_in_diary <- intersect(subset(groups,category=="energy")$shortname,unique(diarywithregiondistrict$shortname))
         
         if (is.element("gas",energy_shortnames_in_diary) && is.element("gas",unavailable_items)){
-           
+          
           print("add_market_price_to_misc_diary - Adding gas prices")
           gprice <- subset(ldat()@get_gasoline_prices(),year==curyear)$price
           
@@ -1714,7 +1714,7 @@ lsms_loader<-function(fu,ln,lgc) {
             }
           }
           
-        
+          
         }
         
       }
@@ -1741,7 +1741,7 @@ lsms_loader<-function(fu,ln,lgc) {
       } else if (year == 2014) {
         itemcodes <- ln()@items_market_price_codes_2014()
       }
-  
+      
       if (basis=="price"){
         print("Price based groups")
         groups      <- subset( ln()@lsms_groups_pricebased_2010_2012(), category == categoryName )
@@ -1801,8 +1801,8 @@ lsms_loader<-function(fu,ln,lgc) {
         
         hhpm <- add_market_price_to_misc_diary (curyear = year, dirprefix =dirprefix, fu=fu, ln=ln, groups = groups, lgc=lgc,
                                                 ld = ld, marketpricesdata=mktprices,ohsdata=ohs,ddata=miscdiarydata)
-        print("RETURNING PREMATURELY: hhpm")
-        return(hhpm)
+        #print("RETURNING PREMATURELY: hhpm")
+        #return(hhpm)
         
         if (is.null(hhpm)) {
           print(paste("group_collect - FAILURE to use prices from interpolation/other-price sources for :",toString(relevant_names)))
@@ -1943,12 +1943,26 @@ lsms_loader<-function(fu,ln,lgc) {
       no_vis           <- data.frame(hhid=no_vis_hhid,group_cost=rep(0,length(no_vis_hhid)))
       vis              <- rbind(vis,no_vis)
       vis$quality      <- log(vis$group_cost+1e-7)
+      prices <- ld()@get_price_for_category(categoryName,year)
+      if (dim(prices)[1]!=0){
+        if (dim(prices)[1]>1){
+          stop(paste("group_collect - found multiple prices for year:",year, "category:",categoryName))
+        }
+        print(paste("Adding price for category:",categoryName,"year:",year))
+        
+        if (is.element('price',colnames(vis))){
+          stop("Cannot overwrite price column")
+        } else {
+          vis$price <- prices$price[1]
+        }
+      }
       if (length(unique(groups$category))>1){
         stop("Cannot handle more than one category")
       } else {
         vis$category <- unique(groups$category)
       }
     } else {
+      print(groups)
       stop( paste ( "Unknown row elements in groups frame",toString(unique(groups$group))))
     }
     print("Collected group expenditures")
