@@ -46,6 +46,96 @@ lsms_loader<-function(fu,ln,lgc) {
   }
   
   load_diary_file <-function(dirprefix,year,fu,ln){
+    ##
+    if (year == 2014){
+      jdat <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_j1.DTA",sep=""),
+                       convert_factors = FALSE,hhidColName = "y4_hhid")
+      k <- fu()@get_translated_frame(dat=jdat,
+                                     names=ln()@diary_info_columns_lsms_2014(),
+                                     m=ln()@hh_mapping_lsms_2014())
+      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      #*    Ignored items where there is no associated cost
+      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      k$item<-k$item+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
+      factor <- 52
+      
+      #*    Multiplied weekly diary data by 52 (to look at annual data)
+      # quantities are normalized to annual values
+      k$cost <- k$cost*factor
+      k$lwp <- k$lwp *factor
+      k$own <-k$own*factor
+      k$gift <-k$gift*factor
+      
+      #*    gift quantities are ignored (total quantity ignored is to be presented)
+      #*    weekly recall items are also multiplied by 52
+      kdat <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_k.DTA",sep=""),
+                       convert_factors = FALSE,hhidColName = "y4_hhid")
+      
+      l <- fu()@get_translated_frame(dat=kdat,
+                                     names=ln()@get_lsms_seck_info_columns_2014(),
+                                     m=ln()@get_lsms_seck_fields_mapping_2014());
+      
+      l$hhid <-as.character(l$hhid)
+      l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
+      weekly_recall_items <-c(101,102,103)
+      
+      # l is weekly and  monthly data
+      
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=52,
+                                       items_list = weekly_recall_items)
+      
+      
+      monthly_recall_items_non_repair <- c("201", "202", "203", "204", "205", "206", "207", "208", "209",
+                                           "210", "211", "212", "213", "214", "215", "216", "217", "218", "221", "222")
+      
+      
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=12,
+                                       items_list = monthly_recall_items_non_repair)
+      
+      monthly_recall_items_repair     <- c("219", "220", "223")
+      l <- ln()@multiplyLsmsQuantities(dat = l , 
+                                       quantity_field_name="cost", 
+                                       item_field_name="item", 
+                                       factor=6,
+                                       items_list = monthly_recall_items_repair)
+      
+      
+      # m is yearly data
+      ldat <-read_tnz( filename = paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_l.DTA',sep=""),
+                       convert_factors = FALSE,
+                       hhidColName = "y4_hhid")
+      
+      m <- fu()@get_translated_frame(dat=ldat,
+                                     names=ln()@get_lsms_secm_info_columns(2014),
+                                     m=ln()@get_lsms_secm_fields_mapping(2014))
+      m$hhid <-as.character(m$hhid)
+      m<- m[!is.na(m$hhid) & !is.na(m$cost) & m$cost>0,]
+      # nothing to be multiplied for yearly-recall (since we're looking at annual consumption)
+      #*    zero-cost items are ignored for all these 
+      ml <-merge(m,l,all=TRUE)
+      #*    merging all the 4 categories results in the expenditure file
+      
+      mlk <-merge(ml,k,all=TRUE)
+      mlk <-merge(mlk,rename(ln()@items_codes_2014()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+      noshortnamedf  <- subset(mlk,is.na(shortname))
+      
+      if (dim(noshortnamedf)[1] > 0) { 
+        stop (paste("itemcodes are not known for some entries in the diary file - ", toString(as.character(unique(noshortnamedf$item))))) 
+      }
+      
+      extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
+      print (paste("Households with extreme data (many times the median) - purged from the diary file:",length(extremeDataHhids)))
+      mlk              <- dplyr::filter(mlk,!is.element(hhid,extremeDataHhids))
+      return(mlk)
+    }
+    
+    ##
     if (year == 2012){
       jdat <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_J1.dta",sep=""),
                        convert_factors = FALSE,hhidColName = "y3_hhid")
@@ -1522,6 +1612,19 @@ lsms_loader<-function(fu,ln,lgc) {
           } else {
             diary <- rbind(diary,subset(k,shortname=="electricity") %>% mutate (price=eprice,year=curyear))
           }
+          if (is.element("petrol",energy_shortnames_in_diary) && is.element("petrol",unavailable_items)){
+            
+            print("add_market_price_to_misc_diary - Adding petrol prices")
+            gprice <- subset(ldat()@get_gasoline_prices(),year==curyear)$price
+            
+            if (length(gprice)>1){
+              stop(paste("add_market_price_to_misc_diary - Found multiple petrol prices for the year",curyear))
+            } else if (length(gprice)==0) {
+              stop(paste("add_market_price_to_misc_diary - No petrol price found for the year",curyear))
+            } else {
+              diary <- rbind(diary,subset(k,shortname=="petrol") %>% mutate (price=gprice,year=curyear))
+            }
+          }
           
         
         }
@@ -1542,12 +1645,15 @@ lsms_loader<-function(fu,ln,lgc) {
     if (length(categoryName)>1){
       stop("group_collect: use one categoryname")
     }
-    if (year == 2010 || year == 2012) {
+    if (year == 2010 || year == 2012 || year == 2014) {
       if (year == 2010){
         itemcodes <- ln()@items_codes_2010()
-      } else {
+      } else if (year == 2012) {
         itemcodes <- ln()@items_codes_2012()
+      } else if (year == 2014) {
+        itemcodes <- ln()@items_market_price_codes_2014()
       }
+  
       if (basis=="price"){
         print("Price based groups")
         groups      <- subset( ln()@lsms_groups_pricebased_2010_2012(), category == categoryName )
