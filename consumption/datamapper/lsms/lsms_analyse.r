@@ -6,6 +6,7 @@ source('lsms/lsms_group_collect.r'); source('lsms/lsms_datastorage.R')
 
 
 
+
 get_categories <- function(){
   return (c("densefoods","nonfresh","fruitsveg","protein","alcohol","complements","energy","household","transport"))
 }

@@ -838,11 +838,11 @@ lsms_loader<-function(fu,ln,lgc) {
                                      m=ln()@ohs_seca_mapping_lsms_2014())
       
       
-      a<-merge(a,u)
-      a<-merge(a,l)
+      a<-merge(a,u,all.x=TRUE)
+      a<-merge(a,l,all.x=TRUE)
       a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
       popDensity <- read.csv(paste(dirprefix,"./lsms/tnzpopdensity.csv",sep=""))
-      a<-merge(a,popDensity)
+      a<-merge(a,popDensity,all.x=TRUE)
       
       #*    Read section B
       bdat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_b.DTA',sep=""),
@@ -871,9 +871,8 @@ lsms_loader<-function(fu,ln,lgc) {
       c$education_rank <-as.integer(c$highest_educ>=33)*4 + as.integer(c$highest_educ<33 & c$highest_educ>=25) *3 + as.integer(c$highest_educ>=19 & c$highest_educ<25)*2 + as.integer(c$highest_educ>=1 & c$highest_educ<19)
       
       c$hhid<-as.character(c$hhid)
-      ab <- merge(a,b)
-      ohs<-merge(ab,c)
-      
+      ab <- merge(a,b,all.x=TRUE)
+      ohs<-merge(ab,c,all.x=TRUE)
       #*    calculated age by subtracting YOB from 2015 (survey year)
       #*    read section J for housing data (rent, number of primary/secondary rooms)
       
@@ -887,7 +886,9 @@ lsms_loader<-function(fu,ln,lgc) {
       j$houserent[is.na(j$houserent)]<-0
       print(head(j))
       j$roomsnum<-j$roomsnum_primary+j$roomsnum_secondary
-      ohsj<-merge(ohs,j,all=TRUE)
+      
+      ohsj<-merge(ohs,j,all.x=TRUE)
+      
       return(ohsj)
       
     }
@@ -1428,8 +1429,7 @@ lsms_loader<-function(fu,ln,lgc) {
                       wallsmaterial=heads$wallsmaterial,
                       toilet=heads$toilet,
                       cookingfuel=heads$cookingfuel,
-                      dryseasonwatersource=heads$dryseasonwatersource,
-                      
+
                       stringsAsFactors=FALSE);
     print(
       paste("Total number of households with head_highest_education=NA : ",
@@ -2258,7 +2258,6 @@ lsms_loader<-function(fu,ln,lgc) {
                         wallsmaterial=heads$wallsmaterial,
                         toilet=heads$toilet,
                         cookingfuel=heads$cookingfuel,
-                        dryseasonwatersource=heads$dryseasonwatersource,
                         stringsAsFactors=FALSE);
       
       print ("Calculating hsize")
