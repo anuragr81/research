@@ -605,11 +605,7 @@ lsms_loader<-function(fu,ln,lgc) {
       a <- read.dta(paste(dirprefix,'/lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/com_sec_cf.dta',sep=""),convert.factors = FALSE)
       a<-(a[!(is.na(a$cm_f062) & is.na(a$cm_f065)) ,])
       cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccf_columns_lsms_2014(), m=ln()@ohs_seccf_mapping_lsms_2014())
-      cj$region <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][1] }))
-      cj$district <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][2] }))
-      cj$ward <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][3] }))
-      cj$village <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][4] }))
-      cj$ea <- as.integer(sapply(cj$clusterid,function(x) { strsplit(x,"-")[[1]][5] }))
+      cj <- ln()@decode_clusterid(cj)
       
       k1<-subset(cj,!is.na(price1) & is.na(price2))
       k2<-subset(cj,is.na(price1) & !is.na(price2))
@@ -804,6 +800,98 @@ lsms_loader<-function(fu,ln,lgc) {
   }
   
   load_ohs_file <-function(year,dirprefix,fu,ln){
+    #
+    if (year ==2014){
+      cbFileName <- paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/com_sec_cb.DTA',sep="")
+      cbdat<-read.dta(cbFileName,convert.factors = FALSE)
+      
+      cb <- fu()@get_translated_frame(dat=cbdat,
+                                      names=ln()@ohs_seccb_columns_lsms(2014),
+                                      m=ln()@ohs_seccb_mapping_lsms(2014))
+      
+      cb <- ln()@decode_clusterid(cb)
+      cb$clusterid <- NULL
+      
+      print(paste("Reading file:",cbFileName))
+      #* chose facilitycode l and collected accessibility 1 and 2(<10) (in the centre or less than 10 km away)
+      l<-(cb[is.element(tolower(as.character(cb$facilitycode)),c("l")),])
+      #* extract those with 1
+      l$accessiblemarket<-as.integer(l$accessibility==1)
+      #* extract those with 2 (and assign them the same status as 1's)
+      l$accessiblemarket<-l$accessiblemarket+as.integer(l$accessibility==2 & l$distance<10)
+      l=l[!is.na(l$accessiblemarket),]
+      #* chose accessible market value using (if both in the centre and closer then ambiguous)
+      l_i=ddply(l,.(region,district,ward),summarize,accessiblemarket=max(accessiblemarket))
+      l = merge(l,l_i)
+      fu()@removeall_cols_except(l,c("region","district","ward","accessiblemarket","travelcost"))
+      #* Also considered urban/rural based on population density 
+      u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban);
+      
+      
+      adat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_a.DTA',sep=""),
+                     convert_factors = FALSE,
+                     hhidColName = "y4_hhid")
+      
+      a <- fu()@get_translated_frame(dat=adat,
+                                     names=ln()@ohs_seca_columns_lsms(2014),
+                                     m=ln()@ohs_seca_mapping_lsms_2014())
+      
+      
+      a<-merge(a,u)
+      a<-merge(a,l)
+      a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
+      popDensity <- read.csv(paste(dirprefix,"./lsms/tnzpopdensity.csv",sep=""))
+      a<-merge(a,popDensity)
+      
+      #*    Read section B
+      bdat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_b.DTA',sep=""),
+                     convert_factors = FALSE,
+                     hhidColName = "y4_hhid")
+      
+      b <- fu()@get_translated_frame(dat=bdat,
+                                     names=ln()@ohs_info_columns_lsms_2014(),
+                                     m=ln()@ohs_mapping_lsms_2014())
+      
+      
+      b$hhid<-as.character(b$hhid)
+      #* inferring occupation rank with occupation_mapping
+      b<-merge(b,occupation_mapping())
+      
+      
+      cdat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_c.DTA',sep=""),
+                     convert_factors = FALSE,
+                     hhidColName = "y4_hhid")
+      
+      #*    Read section C
+      c <- fu()@get_translated_frame(dat=cdat,
+                                     names=ln()@get_ohs_secc_columns_lsms_2014(),
+                                     m=ln()@get_ohs_secc_fields_mapping_lsms_2014())
+      
+      c$education_rank <-as.integer(c$highest_educ>=33)*4 + as.integer(c$highest_educ<33 & c$highest_educ>=25) *3 + as.integer(c$highest_educ>=19 & c$highest_educ<25)*2 + as.integer(c$highest_educ>=1 & c$highest_educ<19)
+      
+      c$hhid<-as.character(c$hhid)
+      ab <- merge(a,b)
+      ohs<-merge(ab,c)
+
+      #*    calculated age by subtracting YOB from 2012 (survey year)
+      #*    read section J for housing data (rent, number of primary/secondary rooms)
+      
+      jdat <- read.dta(paste(dirprefix,'./lsms/tnz2014/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_I.dta',sep=""),convert.factors=FALSE)
+      
+      j <- fu()@get_translated_frame(dat=jdat,
+                                     names=ln()@get_lsms_secj_info_columns_2014(),
+                                     m=ln()@get_lsms_secj_fields_mapping_2014())
+      j$hhid <-as.character(j$hhid)
+      j$roomsnum_secondary[is.na(j$roomsnum_secondary)]<-0
+      j$houserent[is.na(j$houserent)]<-0
+      print(head(j))
+      j$roomsnum<-j$roomsnum_primary+j$roomsnum_secondary
+      ohsj<-merge(ohs,j,all=TRUE)
+      return(ohsj)
+      
+    }
+    #
     if (year ==2012){
       cbFileName <- paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/COM_SEC_CB.dta',sep="")
       cbdat<-read.dta(cbFileName,convert.factors = FALSE)
