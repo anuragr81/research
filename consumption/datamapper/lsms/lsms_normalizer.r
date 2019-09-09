@@ -84,8 +84,10 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           get_ohs_secc_columns_lsms_2014="function",
                                           get_ohs_secc_fields_mapping_lsms_2012="function",
                                           get_ohs_secc_fields_mapping_lsms_2014="function",
-                                          get_lsms_secj_info_columns_2012="function", 
-                                          get_lsms_secj_fields_mapping_2012="function", 
+                                          get_lsms_secj_info_columns_2012="function",
+                                          get_lsms_secj_info_columns_2014="function",
+                                          get_lsms_secj_fields_mapping_2012="function",
+                                          get_lsms_secj_fields_mapping_2014="function",
                                           get_diary_secn_columns_lsms_2008= "function",
                                           get_diary_secn_columns_lsms_2010="function",
                                           get_diary_secn_columns_lsms_2012="function",
@@ -1939,6 +1941,40 @@ lsms_normalizer<-function() {
     
     return(s)
   }
+  
+  get_lsms_secj_fields_mapping_2014<-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="y4_hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="hh_i01",name="housingstatus")) # 1- owner occupied, 2- EMPLOYER PROVIDED - SUBSIDIZED, 3-EMPLOYER PROVIDED - FREE, 4- RENTED, 5- FREE, 6-NOMADS 
+    s= rbind(s,data.frame(iesname="hh_i03",name="houserent"))
+    s= rbind(s,data.frame(iesname="hh_i07_1",name="roomsnum_primary"))
+    s= rbind(s,data.frame(iesname="hh_i07_2",name="roomsnum_secondary"))
+    s= rbind(s,data.frame(iesname="hh_i08",name="wallsmaterial"))
+    s= rbind(s,data.frame(iesname="hh_i09",name="roofmaterial"))
+    s= rbind(s,data.frame(iesname="hh_i10",name="floormaterial"))
+    s= rbind(s,data.frame(iesname="hh_i11",name="trash_type"))
+    s= rbind(s,data.frame(iesname="hh_i12",name="toilet"))
+    s= rbind(s,data.frame(iesname="hh_i13",name="is_toilet_share"))
+    s= rbind(s,data.frame(iesname="hh_i14",name="num_toilet_share"))
+    
+    s= rbind(s,data.frame(iesname="hh_i15",name="youngest_child_stool_disposal"))
+    s= rbind(s,data.frame(iesname="hh_i16",name="cookingfuel"))
+    s= rbind(s,data.frame(iesname="hh_i17",name="lightingfuel"))
+    s= rbind(s,data.frame(iesname="hh_i18",name="electricity_source"))
+    s= rbind(s,data.frame(iesname="hh_i19",name="rainyseasonwatersource"))
+    s= rbind(s,data.frame(iesname="hh_i22",name="rainyseasonwatersourcetime"))
+
+    return(s)
+  }
+  
+  get_lsms_secj_info_columns_2014<-function(){
+    return(c("hhid","housingstatus","houserent","roomsnum_primary","roomsnum_secondary","wallsmaterial","roofmaterial",
+             "floormaterial","trash_type","toilet","is_toilet_share","num_toilet_share","youngest_child_stool_disposal",
+             "cookingfuel","lightingfuel","electricity_source","rainyseasonwatersource","rainyseasonwatersourcetime"))
+  }
+  
+  
+  
   get_lsms_secm_info_columns<-function(year){
     if (year == 2008 || year == 2010 || year ==2012 || year == 2014){
       return(c("hhid","item","is_consumed","cost"))
@@ -3293,8 +3329,10 @@ lsms_normalizer<-function() {
              get_ohs_secc_fields_mapping_lsms_2014=get_ohs_secc_fields_mapping_lsms_2014,
              ohs_mapping_lsms_2012=ohs_mapping_lsms_2012,
              ohs_mapping_lsms_2014=ohs_mapping_lsms_2014,
-             get_lsms_secj_info_columns_2012=get_lsms_secj_info_columns_2012, 
-             get_lsms_secj_fields_mapping_2012=get_lsms_secj_fields_mapping_2012, 
+             get_lsms_secj_info_columns_2012=get_lsms_secj_info_columns_2012,
+             get_lsms_secj_info_columns_2014=get_lsms_secj_info_columns_2014,
+             get_lsms_secj_fields_mapping_2012=get_lsms_secj_fields_mapping_2012,
+             get_lsms_secj_fields_mapping_2014=get_lsms_secj_fields_mapping_2014,
              decode_clusterid=decode_clusterid,
              computeYearValues=computeYearValues, 
              computeLsmsSelfemployedValues=computeLsmsSelfemployedValues, 

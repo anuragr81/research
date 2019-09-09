@@ -874,10 +874,10 @@ lsms_loader<-function(fu,ln,lgc) {
       ab <- merge(a,b)
       ohs<-merge(ab,c)
 
-      #*    calculated age by subtracting YOB from 2012 (survey year)
+      #*    calculated age by subtracting YOB from 2015 (survey year)
       #*    read section J for housing data (rent, number of primary/secondary rooms)
       
-      jdat <- read.dta(paste(dirprefix,'./lsms/tnz2014/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_I.dta',sep=""),convert.factors=FALSE)
+      jdat <- read.dta(paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_i.DTA',sep=""),convert.factors=FALSE)
       
       j <- fu()@get_translated_frame(dat=jdat,
                                      names=ln()@get_lsms_secj_info_columns_2014(),
