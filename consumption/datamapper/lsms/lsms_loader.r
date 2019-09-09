@@ -1830,7 +1830,7 @@ lsms_loader<-function(fu,ln,lgc) {
                     qsum = sum (price_ratio*quantity), min_price=unique(min_price),tot_categ_exp = sum(cost))[,c("hhid","category","qsum","totq","min_price","tot_categ_exp")]
       # calculate the quality ratio -  sum (price/min(price)*quantity) / sum (quantity)
       totq$quality <- with(totq,qsum/totq)
-      
+      print(paste("group_collect: Returning the following for category:",categoryName," year:",year))
       print(head(totq))
       return(totq[,c("hhid","category","quality","min_price","tot_categ_exp")])
       
@@ -1942,7 +1942,7 @@ lsms_loader<-function(fu,ln,lgc) {
       no_vis_hhid      <- setdiff(unique(hh$hhid),unique(vis$hhid))
       no_vis           <- data.frame(hhid=no_vis_hhid,group_cost=rep(0,length(no_vis_hhid)))
       vis              <- rbind(vis,no_vis)
-      vis$quality      <- log(vis$group_cost+1e-7)
+      vis$quality      <- NA #log(vis$group_cost+1e-7)
       prices <- ld()@get_price_for_category(categoryName,year)
       if (dim(prices)[1]!=0){
         if (dim(prices)[1]>1){
@@ -1965,6 +1965,17 @@ lsms_loader<-function(fu,ln,lgc) {
       print(groups)
       stop( paste ( "Unknown row elements in groups frame",toString(unique(groups$group))))
     }
+    
+    if (is.element('price',colnames(vis))){
+      vis <- plyr::rename(vis,c('price'='min_price'))
+    }
+    vis <- plyr::rename(vis,c('group_cost'='tot_categ_exp'))
+    print(paste("group_collect: Returning the following for category:",categoryName," year:",year))
+    print(head(vis))
+    
+    return(vis[,c("hhid","category","quality","min_price","tot_categ_exp")])
+    
+    
     print("Collected group expenditures")
     return(vis)
   }
@@ -2067,7 +2078,7 @@ lsms_loader<-function(fu,ln,lgc) {
         stop (paste("category names not handled for basis:",basis))
       }
     }
-    
+    print("Merging total expenditure")
     ds                  <- merge(totexp,vis);
     print(paste("Merging hsize",dim(ds)[1]))
     
