@@ -80,23 +80,883 @@
 
 \begin_body
 
-\begin_layout Standard
-A conventional utility analysis depends on price information which we proxy
- with needs and quality.
- Needs - measured by age-adjusted number of members in the household - would
- be in the right hand side of the econometric equation.
+\begin_layout Abstract
+After contrasting market-recorded prices with unit value based methods,
+ an AIDS analysis is provided with limitations in the quality interpretations.
+ The discussion moves on to the intertemporal problem and the need for discrete
+ utility methods.
+ The inverse mills approach is surveyed and provided for the problem.
 \end_layout
 
 \begin_layout Standard
-The substitution exists between assets and quality - which due to condition
- C1 resorts to comparison of quality in a certain commodity groups with
- the durable goods in others (We rule out the use of a two-state budgeting
- model since such a substitution exists between commodity groups).
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Introduction
 \end_layout
 
 \begin_layout Standard
-A justification based on utility functions is in order.
- We are only concerned with the status view of consumption.
+A conventional utility analysis depends on price information.
+ The needs of the consumers and the quality of the commodity needed both
+ determine the price of the commodity in the market.
+ To study the effect of income, social structure on quality across multiple
+ commodity groups, we extend the typical utility analysis to include both
+ quality and needs faced by the consumer.
+ The needs of the consumers can be proxied with the number of members (age-adjus
+ted) in the household (and possibly other available scales) while quality
+ can be measured as the portion of budget spent on high vs low-price items.
+ With the AIDS model
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonMuellbauerAIDS"
+
+\end_inset
+
+, the measures of needs should appear as the control variables in budget
+ share equations while the quality-choices could appear as dependent variables
+ (along with budget share).
+ This is the approach taken by McKelvey 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ that we demonstrate in the current analysis.
+\end_layout
+
+\begin_layout Standard
+Only food and energy.
+\end_layout
+
+\begin_layout Standard
+We prefer to use weights nevertheless because the reasons OLS estimation
+ provides in AIDS.
+ Even if we used quantity it would have to the quality-adjusted quantity
+ - as Nelson suggests.
+\end_layout
+
+\begin_layout Standard
+While the unrestricted method provided by McKelvey does allow us to explain
+ differences in quality in consumer choice, it is not sufficient to demonstrate
+ the substitution between assets purchased and quality demanded.
+ As explained before, since we wish to understand conspicuous consumption
+ with an intertemporal substitution approach, the modeling of uncertainty
+ in choosing to save for future or to overspend is key to measurement of
+ quality.
+ It is possible to use the discrete choice models to model the uncertainty
+ and the gaps in quality that arise out of observed inequalities.
+ We compare the discrete model with a more conventional AIDS formulation
+ for food quality in the current chapter.
+\end_layout
+
+\begin_layout Section*
+Literature Survey
+\end_layout
+
+\begin_layout Standard
+While Deaton's AIDS methodology has been rightfully celebrated for its elegance
+ and clarity, its implementations have unfortunately allowed some critical
+ measurements errors - arising largely out of the lack of observed market
+ prices.
+ Even recently - when the unit value work has been done by work by Tafere
+ et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "TafereTaffesseEthiopia2010"
+
+\end_inset
+
+.
+ The effect of using price deflators (or the unit-value ) cause measurement
+ error in a regression where quantities consumed both in the dependent variable
+ (as budget share) and in the control variable (as prices).
+ McKelvey 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ preference for the market-observed prices rather than the unit values is
+ echoed by the current study.
+\end_layout
+
+\begin_layout Standard
+Several extension to the AIDS model have been made for panel data analysis.
+ For example, the demographic variables in the AIDS model are accommodated
+ by the so-called demographic translation where the intercept 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ in the equation 
+\begin_inset Formula $w=\alpha_{i}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{jh})+\beta_{i}ln(\frac{x_{h}}{P})$
+\end_inset
+
+ is expanded as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\alpha_{i} & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{k}
+\end{alignat*}
+
+\end_inset
+
+ Here, 
+\begin_inset Formula $i\in[1,n]$
+\end_inset
+
+ and 
+\begin_inset Formula $d_{k}$
+\end_inset
+
+ are the demographic variables (see Pollack and Wales 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "PollockWalesDemand"
+
+\end_inset
+
+).
+ The more common extension of AIDS is the dynamic AIDS model which often
+ is based on differencing the budget shares over the time-periods (see Anderson
+ Blundell 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AndersonBlundellAIDSTest1983,AndersonBlundellDynEqn1982"
+
+\end_inset
+
+ for a first-order dynamic model).
+ 
+\end_layout
+
+\begin_layout Standard
+An implementation of AIDS particularly relevant for the analysis of quality
+ is presented by Heien and Wessells 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+
+\end_inset
+
+ who estimated quality elasticities by incorporating an inverse Mills ratio
+ obtained by a first-stage probit with indicator dependent variables.
+ The inverse mills ratio is thus calculated for every household using the
+ regression equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_probit"
+
+\end_inset
+
+where the dependent variable is an indicator variable - denoting whether
+ the household 
+\begin_inset Formula $h$
+\end_inset
+
+ consumes the item 
+\begin_inset Formula $i$
+\end_inset
+
+ (given 
+\begin_inset Formula $s$
+\end_inset
+
+ demographic variables) or not.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+Y_{ih} & =f(p_{1h},p_{2h},...,p_{nh},m_{h},d_{1h},d_{2h},...d_{sh})\label{eq:wessells_probit}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The inverse mills from the probit regression in the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_probit"
+
+\end_inset
+
+ i.e.
+ the quantity 
+\begin_inset Formula $R_{ih}=\begin{cases}
+\frac{\phi(p_{h},m_{h},d_{h})}{\Phi(p_{h},m_{h},d_{h})} & q_{ih}>0\\
+\frac{\phi(p_{h},m_{h},d_{h})}{1-\Phi(p_{h},m_{h},d_{h})} & q_{ih}=0
+\end{cases}$
+\end_inset
+
+ is used as an instrument in following equation (second stage) to estimate
+ the item-elasticities.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+w & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{kh}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{jh})+\beta_{i}ln(\frac{x_{h}}{P})+\delta_{i}R_{ih}\label{eq:wessells_aids}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Typically we have 
+\begin_inset Formula $ln(P)=\alpha_{0}+\sum_{i=1}^{n}\alpha_{i}ln(p_{i})+\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\gamma_{ij}ln(p_{i})ln(p_{j})$
+\end_inset
+
+ - however, a simpler linear-AIDS formulation is often used so that
+\begin_inset Formula $P=\sum_{i=1}^{n}w_{i}ln(p_{ih})$
+\end_inset
+
+ is simply the Stone's index.
+ The inverse-mills instrument must also comply with the symmetry and homogeneity
+-restrictions and thus one must ensure that 
+\begin_inset Formula $\sum_{i=0}^{n}\delta_{i}R_{ih}=0$
+\end_inset
+
+ in addition to 
+\begin_inset Formula $\sum\alpha_{i}=0$
+\end_inset
+
+, 
+\begin_inset Formula $\sum_{i=1}^{n}\gamma_{ij}=0\forall j\in[1,n]$
+\end_inset
+
+ , 
+\begin_inset Formula $\sum_{j=1}^{n}\beta_{i}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{ij}=\gamma_{ji}$
+\end_inset
+
+.
+ Unfortunately, Heien-Wessells also use price deflators (i.e.
+ the unit-value method) - which can make the measurement errors worse complicate
+d as the price simply isn't available when the indicator variable is zero
+ i.e.
+ when the consumers don't consumer an item ( Heien-Wessells use a regression
+ with prices/unit-values obtained from users who do consume the item against
+ the region, income corresponding to the consumers who don't consume the
+ item).
+\end_layout
+
+\begin_layout Standard
+Similar issues would need to be dealt in the so-called RDMP (
+\begin_inset Quotes eld
+\end_inset
+
+real
+\begin_inset Quotes erd
+\end_inset
+
+ deviations from regional/quarterly mean prices) approach (see Cox-Wohlgenant
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CoxWohlgenant1986"
+
+\end_inset
+
+) - which has also been implemented for (see Gibson and Kim 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GibsonKimQualityBog2019"
+
+\end_inset
+
+ for details).
+ Deaton method
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation"
+
+\end_inset
+
+ gets around the price-deflator (unit-value) issues by using the cluster-average
+s fitted budget shares and unit-values (which are used instead of the unobserved
+ prices).
+ While Deaton uses these methods for a cross-sectional analysis, the intuition
+ can be easily extended to the panel data (see McKelvey 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ for details).
+\end_layout
+
+\begin_layout Section*
+Data 
+\end_layout
+
+\begin_layout Standard
+LSMS Tanzania surveys record the prices for the food and energy commodity
+ groups in the markets spread across the regions in the country.
+ Since we don't use price-deflators in our analysis (due the measurement
+ errors that arise with quantity being in both in the denominator of the
+ control variables and in the numerator of the dependent variable), these
+ observed prices are of a critical importance to the analysis of cross-price
+ effects.
+\end_layout
+
+\begin_layout Standard
+Before we delve further into how quality metrics are calculated, it is worthwhil
+e to compare the notions of quality used in empirical studies.
+ 
+\end_layout
+
+\begin_layout Standard
+As Deaton points out
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation,DeatonEconConsumer"
+
+\end_inset
+
+, the viewing high-quality and low-quality items as a composite commodity
+ has had a long tradition - reaching back at least as far as Houthakker's
+ formulation to view quality as a separate commodity i.e.
+ the quantities consumed for two (or more) items within a commodity e.g.
+ tea and carbonated drinks under beverages can be viewed as a quantity of
+ a composite good i.e.
+ beverages and a quality metric.
+ The quantity-price tuples 
+\begin_inset Formula $(q_{1},p_{1}),(q_{2},p_{2})...$
+\end_inset
+
+ could thus be expressed as a quantity and quality pair.
+ Hence for 
+\begin_inset Formula $(q_{1},p_{1}),(q_{2},p_{2})...$
+\end_inset
+
+ we should have 
+\begin_inset Formula $(Q_{G},P_{G}),(\nu_{G},p_{\nu_{G}})$
+\end_inset
+
+ where 
+\begin_inset Formula $P_{G},Q_{G}$
+\end_inset
+
+ are prices and quantity consumed for a composite good while 
+\begin_inset Formula $\nu_{G}$
+\end_inset
+
+ represents the quality of the good corresponding to the real quantities
+ consumed for several items.
+ Notice that such a formulation requires the rather stringent conditions
+ of the composite commodity theorem conditions to be met.
+ It may seem that if quality is really to be treated as a separate commodity,
+ then price of quality is required.
+ However, since we already have the real prices of the item - a valid composite
+ good price already determines the price - albeit implicitly - of the quality
+ amongst the items in the market.
+\end_layout
+
+\begin_layout Standard
+Let's consider an example to see how this quality metric really works (see
+ Nelson for a detailed discussion 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+).
+ Let's say we observe the consumption on lamb and chicken within a protein
+ commodity with prices observed as 20£, 10£ (resp.) and the quantities consumed
+ by the consumer are 1.5kg and 2kg (resp.).
+ One approach is to the treat the physical sum of quantities i.e.
+ 3.5 kg as the quantity of the composite good 
+\begin_inset Quotes eld
+\end_inset
+
+protein
+\begin_inset Quotes erd
+\end_inset
+
+.
+ However, it is difficult to argue that the consumers optimise the weight
+ of the composite good - rather than comparing the disparate quantities
+ of items (see Nelson 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+ for the technical details of this argument).
+ A quality-adjusted quantity is a more appropriate formulation for this
+ purpose.
+ Since quality is to be priced in the market, we can consider this price-structu
+red weighted quantity as the quality-adjusted quantity and express the pair
+\begin_inset Formula $\{(20,1.5).(10,2)\}$
+\end_inset
+
+ as 
+\begin_inset Formula $(10,4(=2\times1.5+1\times2))$
+\end_inset
+
+ and 
+\begin_inset Formula $(0,1.6=\frac{4}{1.5+2})$
+\end_inset
+
+ .
+  Notice that the price of the composite good is exactly zero since the
+ total expenditure is already accounted for in the composite good i.e.
+ 10
+\begin_inset Formula $\times4=40$
+\end_inset
+
+.
+ If the quantities consumed were slightly different for another consumer
+ e.g.
+ 
+\begin_inset Formula $\{(20,0.5),(10,3)\}$
+\end_inset
+
+ then too
+\begin_inset Formula $(E=40)$
+\end_inset
+
+ and we have 
+\begin_inset Formula $(10,4(=2\times0.5+1\times3))$
+\end_inset
+
+ and 
+\begin_inset Formula $(0,1.14=\frac{4}{3.5})$
+\end_inset
+
+.
+ It is easy to see that the quality is lower for the latter case even though
+ the physical quantity is the same.
+ Thus, empirically quality adjusted quantity provides the total expenditure
+ and there is no price needed for the quality value calculated in the above
+ fashion.
+ This is slightly different from the Deaton's approach - which is to view
+ quality as a separate good in this formulation.
+ 
+\end_layout
+
+\begin_layout Standard
+This quality metric works.
+ The substitution between the choice of energy between kerosene and electricity
+ is however not as straightforward as between qualities of protein
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For energy in the LSMS data, such a quality measure cannot be calculated
+ since quantity of energy consumed (kerosene litres or electricity kWhs)
+ is not recorded.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+One approach could be to calculate quality gradient as the price.
+ For energy, this would be the price one has to pay to get more of electricity.
+ In food, it would be the price one has to pay to get more of meat.
+ This is x then this may be possible.
+ For that the expenditure should be 
+\begin_inset Formula $P_{G}\nu_{G}q_{G}$
+\end_inset
+
+.
+ However, this formulation too is based on the average basket - and is equivalen
+t to the composite good method (and a composite price).
+ 
+\end_layout
+
+\begin_layout Standard
+The price groups are of importance and they are structured based on the
+ price trends (see McKelvey for the a similar analysis of rice varieties).
+\end_layout
+
+\begin_layout Standard
+The following are in 
+\begin_inset Quotes eld
+\end_inset
+
+pieces
+\begin_inset Quotes erd
+\end_inset
+
+ for 2008:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+maize_green, bread, bunscakes, pasta, cassava_fresh, cassava_flour, sweet_potato
+, yam, potatoes, banana_green, othervegstarch, NA, pulses, peanuts, coconut,
+ onion, greens, dried_canned_veg, banana_ripe, citrus, mangoes, sugarcane,
+ goat, beef, chicken, eggs, fish_seafood, dried_canned_fish, fresh_milk,
+ canned_milk, firewood, cooking_oil, salt, brews, kerosene, charcoal
+\begin_inset Quotes erd
+\end_inset
+
+ for 2008.About 588 observations would be ignored for 2008 prices because
+ they are 
+\begin_inset Quotes eld
+\end_inset
+
+pieces
+\begin_inset Quotes erd
+\end_inset
+
+ (idadi).
+\end_layout
+
+\begin_layout Standard
+Due to so many prices being effectively not measurable and other reasons
+ (e.g.
+ unavailability of household CPI and electricity prices for 2008 in Tanzania),
+ we use the 2008 prices only for price-structure purposes.
+\end_layout
+
+\begin_layout Standard
+"bread" "banana_ripe" "goat" "beef" "chicken" "eggs" "fresh_milk" for 2010
+\end_layout
+
+\begin_layout Standard
+"bunscakes" "goat" "chicken" "eggs" "fish_seafood" for 2012
+\end_layout
+
+\begin_layout Standard
+Few outliers prices are rejected.
+ The survey does not record prices for every ward and ea.
+ We have made no attempts to arrive at a price at a granularity lower than
+ that of a district.
+ We don't use the national averages / medians for the prices - as the regional
+ variation of price is too wide to be ignored.
+ The district price is arrived at by using a regression.
+ To detail how we have assimilated the data from the survey, let's consider
+ an example of the marked prices of rice for 1 kg, 2kg, 5kg and 10kg - a
+ typical set of marked prices would be 4£, 7.5£, 18£ and 35£ respectively.
+ The plot looks like in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:markedprices"
+
+\end_inset
+
+.
+ A linear regression of mp vs q (where mp is the marked price and q the
+ quantity) is hardly appropriate.
+ The unit-prices are slightly less than linear as is shown in the plot of
+ the unit-price corresponding to the quantities in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:unitprice"
+
+\end_inset
+
+.
+ Since we assume that the consumers face the same prices, we do not attempt
+ to match the appropriate price with the quantity consumed by the consumer
+ but simply the price of the standard unit of that commodity e.g.
+ the price per kg for rice in the current example.
+ The regression we use is 
+\begin_inset Formula $\frac{mp}{q}=\beta\frac{1}{q^{2}}+c$
+\end_inset
+
+ (assuming that the marked price is lower than a linear increase - see Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:markedprices"
+
+\end_inset
+
+ - by a factor that itself decreases with increasing 
+\begin_inset Formula $q$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $mp=aq-b/q$
+\end_inset
+
+).
+ Since we use the price set 
+\begin_inset Formula $q=1$
+\end_inset
+
+, the price to be used is simply 
+\begin_inset Formula $\beta+c$
+\end_inset
+
+ for the regression: 
+\begin_inset Formula $\frac{mp}{q}=\beta/q^{2}+c$
+\end_inset
+
+.
+ The regression is run only when at least two prices are available (only
+ 9 regions for 6 items have less than three marked-prices available).
+ A simple median is used as the price for such cases.
+ The price-inference is therefore a 2-stage process - we first obtain prices
+ for every district with the regression method.
+ If there are no marked prices available in a district, we use the regional
+ value of the price.
+ For some items, such as goat, the region-prices are not available at for
+ all the regions either.
+ Here, the price from obtained by the regressions over the country is used.
+ The prices for some items whose consumption is relatively rare in the diary
+ data e.g.
+ wild-birds, honey, beer are not available for any of the regions.
+ These items (~8% entries) are ignored for the study.
+\end_layout
+
+\begin_layout Standard
+With the above approach, it can argued that we're introducing some selection
+ bias by using the national-values wherever the prices are unavailable (it
+ could be that the unobserved prices were higher or lower).
+ However, since this occurs for ~4% of the price observations, the bias
+ introduced is not significant.
+ The finer substitution at the district level is for ~10% of the entries
+ that have region prices.
+ This too is not significant.
+ With all the prices thus aggregated, we can infer the price observed by
+ every customer.
+\end_layout
+
+\begin_layout Standard
+We use broad classification of food items for separability.
+ We protein, starch, fruits and vegetables.
+ It is assume that everyone would have a fixed proportion of these in their
+ diet.
+ Fat may need to be ignored.
+ The price stability is based on the survey - in reality the price of some
+ items may be more volatile than others and this would introduce some bias.
+ However, such a bias is beyond the scope of the current chapter.
+ The level of price details available are different for food vs the rest
+ - as we use national-level prices for all commodity groups except the food
+ categories.
+ Our conclusions are not specific to regions - to alleviate this issue.
+ Only a survey with a more detailed price information on non-food items
+ can alleviate this issue.
+ Another issue we have ignored is that of the time of the interview and
+ the quantity used by the household - the prices recorded should ideally
+ be matched with the time of the purchase as well as the quantity range
+ that the hhid uses.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement p
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/lsms/allnatprices.png
+	width 6.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Market Prices recorded in 2008, 2010, 2012 and 2014 surveys
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/markedprice.png
+	width 3in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:markedprices"
+
+\end_inset
+
+Typical marked prices of a commodity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/unitprice.png
+	width 3in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:unitprice"
+
+\end_inset
+
+Typical Price per unit of the commodity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Analysis
+\end_layout
+
+\begin_layout Standard
+An analysis of substitution between quality is not complete without establishing
+ what quality means in every category.
+ The discreteness is paramount.
+ The quality is continuous in food - but the difference between eletricity
+ and kerosene is far too qualititative to be an understanding of composite
+ good.
+ The Cox-Wohlgenant approach is unnecessary because we already have the
+ goods of various quality identified in the survey.
+ Quality can be aggregated only as long as the goods within the group can
+ be ordered on a certain criteria.
+ For meat, there is no reason to think that goat is of higher quality than
+ beef if the former is costlier.
+ It takes the right granularity of the price differences - for the quantity
+ aggregate to make sense.
+ Beef and goat may not be compared but the qualities of protein could.
+ Quality of protein can be calculated.
+ How quality changes with respect to changes in asset ownership, age etc.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Quality across multiple commodity groups
+\end_layout
+
+\begin_layout Standard
+Even though a conventional AIDS formulation does not model the intertemporal
+ substitution, the condition C1 allows us to compare the quality variation
+ in certain commodity groups with the durable good possession in others
+ (We rule out the use of a two-state budgeting model since such this substitutio
+n exists between commodity groups).
+\end_layout
+
+\begin_layout Standard
+We are only concerned with the status view of consumption.
  In the cost function, the expenditure for a certain utility depends on
  price of quality, minimum cost of having children (subsistence of family
  members) and the cost of long-term assets - 
@@ -137,444 +997,9 @@ n propounded by Deaton.
 \end_layout
 
 \begin_layout Standard
-In a direct utility function, we may write 
-\begin_inset Formula $u=f(\kappa,A,\eta)$
-\end_inset
-
-.
- The discontinuity in asset owership is a legitimate conern it is 
-\begin_inset Formula $\frac{\partial u}{\partial A}$
-\end_inset
-
- is continuous.
- 
-\begin_inset Formula $\frac{\partial u}{\partial A}$
-\end_inset
-
- is definitely non-decreasing but it may not be differentiable the same
- way 
-\begin_inset Formula $\frac{\partial u}{\partial\kappa}$
-\end_inset
-
- is.
- Establishing an equivalence between 
-\begin_inset Formula $ln(A)$
-\end_inset
-
- and 
-\begin_inset Formula $c_{\kappa}$
-\end_inset
-
- does simplify the problem.
- One needs to separate out 
-\begin_inset Formula $\eta$
-\end_inset
-
- completely to establish this equivalence.
- In the first simplification, needs are never compromised on, but quality
- is with savings.
- 
-\begin_inset Formula $ln(A)$
-\end_inset
-
- is influenced by 
-\begin_inset Formula $p_{A}$
-\end_inset
-
- and 
-\begin_inset Formula $c_{\kappa}$
-\end_inset
-
-.
- Here, 
-\begin_inset Formula $g(\kappa,A,\eta)=g(x,p_{\kappa},p_{A},p_{\eta})$
-\end_inset
-
-.
- However, the consumer may be indifferent between many triplets of 
-\begin_inset Formula $\kappa,A,\eta$
-\end_inset
-
- (somebody would drive a luxury car than pay for schools fees, would rather
- spend on designer clothes than save for a house).
-\end_layout
-
-\begin_layout Standard
-The understanding of quality should be done with the cost-function under
- risk.
- When consumer's maintain low quality they could be doing so to 
-\begin_inset Quotes eld
-\end_inset
-
-Invest
-\begin_inset Quotes erd
-\end_inset
-
- in items that they expect to provide returns later on.
- Quality in this sense is anything above subsistence level that is required
- for fulfillment of needs.
- 
-\end_layout
-
-\begin_layout Section*
-Literature Notes
-\end_layout
-
-\begin_layout Standard
-Anderson Blundell
-\begin_inset CommandInset citation
-LatexCommand cite
-key "AndersonBlundellAIDSTest1983,AndersonBlundellDynEqn1982"
-
-\end_inset
-
- test the applicability of AIDS.
- A more recent work has been done by - https://journals.plos.org/plosone/article?i
-d=10.1371/journal.pone.0075934#s2 and https://www.africaportal.org/publications/food-
-demand-elasticities-in-ethiopia-estimates-using-household-income-consumption-exp
-enditure-hice-survey-data/ .
-\end_layout
-
-\begin_layout Standard
-Demographic translation- used to accommodate demographic variables in the
- AIDS model specified by 
-\begin_inset Formula $ln(P)=\alpha_{0}+\sum_{i=1}^{n}\alpha_{i}ln(p_{i})+\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\gamma_{ij}ln(p_{i})ln(p_{j})$
-\end_inset
-
- - is to use 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\alpha_{i} & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{k}
-\end{alignat*}
-
-\end_inset
-
- Here, 
-\begin_inset Formula $i\in[1,n]$
-\end_inset
-
- and 
-\begin_inset Formula $d_{k}$
-\end_inset
-
- are the demographic variables (see Pollack and Wales 1981).
- Heien and Wessells estimated this instrumenting with the inverse Mills
- ratio 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HeienWessellsAIDSCensored1990"
-
-\end_inset
-
-.
- Heien Wessels calculate the inverse mills for every household using a regressio
-n of .
- The indicator variables are defined for a household 
-\begin_inset Formula $h$
-\end_inset
-
- for item 
-\begin_inset Formula $i$
-\end_inset
-
- (
-\begin_inset Formula $s$
-\end_inset
-
- demographic variables):
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-Y_{ih} & =f(p_{1h},p_{2h},...,p_{nh},m_{h},d_{1h},d_{2h},...d_{sh})\label{eq:wessells_probit}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The inverse mills from the probit regression on the Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_probit"
-
-\end_inset
-
- i.e.
- the quantity 
-\begin_inset Formula $R_{ih}=\begin{cases}
-\frac{\phi(p_{h},m_{h},d_{h})}{\Phi(p_{h},m_{h},d_{h})} & q_{ih}>0\\
-\frac{\phi(p_{h},m_{h},d_{h})}{1-\Phi(p_{h},m_{h},d_{h})} & q_{ih}=0
-\end{cases}$
-\end_inset
-
- is used as instruments in following equation (second stage) to estimate
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-w & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{kh}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{jh})+\beta_{i}ln(\frac{x_{h}}{P})+\delta_{i}R_{ih}\label{eq:wessells_aids}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Here, 
-\begin_inset Formula $P=\sum_{i=1}^{n}w_{i}ln(p_{ih})$
-\end_inset
-
- is the Stone's index.
- The estimation removes the 
-\begin_inset Formula $n^{th}$
-\end_inset
-
- term in 
-\begin_inset Formula $\sum_{j=1}^{n}\delta_{i}R_{ih}$
-\end_inset
-
- (i.e.
- 
-\begin_inset Formula $\delta_{i}R_{ih}\rightarrow-\sum_{j=1}^{n-1}\delta_{j}R_{jh}$
-\end_inset
-
-) to preserve additivity (from Pollock Wales 1969 - linear system) and imposes
- the restrictions  
-\begin_inset Formula $\sum\alpha_{i}=0$
-\end_inset
-
-, 
-\begin_inset Formula $\sum_{i=1}^{n}\gamma_{ij}=0\forall j\in[1,n]$
-\end_inset
-
- , 
-\begin_inset Formula $\sum_{j=1}^{n}\beta_{i}=0$
-\end_inset
-
- and 
-\begin_inset Formula $\gamma_{ij}=\gamma_{ji}$
-\end_inset
-
-.
- Interestingly, Heien-Wessells use price deflators from the consumers who
- have consumed onto those who have.
-\end_layout
-
-\begin_layout Standard
-The general approach mentioned in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ManskiMcFadden1978"
-
-\end_inset
-
- (chapter 9) is the simultaneous model:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-Y_{i} & =Y_{i}B+X_{i}\Gamma+\epsilon_{i}\label{eq:simult1}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Here, 
-\begin_inset Formula $Y_{i}$
-\end_inset
-
- is 
-\begin_inset Formula $1\times G$
-\end_inset
-
-, 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- is 
-\begin_inset Formula $1\times k$
-\end_inset
-
-, 
-\begin_inset Formula $I-B$
-\end_inset
-
- is 
-\begin_inset Formula $G\times G$
-\end_inset
-
-, 
-\begin_inset Formula $\Gamma$
-\end_inset
-
- is 
-\begin_inset Formula $k\times G$
-\end_inset
-
-.
- 
-\begin_inset Formula $Y_{i}$
-\end_inset
-
- includes latent and censored DVs as well.
- If 
-\begin_inset Formula $G$
-\end_inset
-
- is split such that
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $G_{1}$
-\end_inset
-
- are observed (continuous) variables
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $G_{2}-G_{1}$
-\end_inset
-
- are limited DV
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $G_{3}-G_{2}$
-\end_inset
-
- are unobservable latent variables (with observable 
-\begin_inset Formula $I_{ji}$
-\end_inset
-
- binary indicators that are determined by the latent variable 
-\begin_inset Formula $Y_{ji}$
-\end_inset
-
- with an indicator function as 
-\begin_inset Formula $I_{ji}=\mathbb{I}(Y_{ji}>0)$
-\end_inset
-
-, where 
-\begin_inset Formula $j\in[G_{2}+1,G_{3}]$
-\end_inset
-
- ) 
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $G-G_{3}$
-\end_inset
-
- are censored DVs - indexed by 
-\begin_inset Formula $\{G_{3}+1,...,G\}$
-\end_inset
-
- which are censored by a subset of 
-\begin_inset Formula $G_{3}-G_{2}$
-\end_inset
-
- latent variables - can be partitioned into mutually exclusive sets 
-\begin_inset Formula $S_{k\in[1,L]}$
-\end_inset
-
- (
-\begin_inset Formula $L\le G_{3}-G_{2}$
-\end_inset
-
-) such that each 
-\begin_inset Formula $S_{k}$
-\end_inset
-
- is activated by 
-\begin_inset Formula $Y_{ji}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-There are two stages in the ]estimation.
- The first stage estimation is through the simple manipulation of Equation
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:simult1"
-
-\end_inset
-
- - 
-\begin_inset Formula $Y_{i}=\Gamma(I-B)^{-1}+\epsilon_{i}(I-B)^{-1}=X_{i}\Pi+u_{i}$
-\end_inset
-
-.
- Here, a probit or tobit could be used.
- The second stage is the estimation of structural parameters:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $Y_{i}=R_{i}\delta_{0}+Y_{i}^{*}\delta_{1}+\epsilon_{i}$
-\end_inset
-
- where 
-\begin_inset Formula $Y_{i}^{*}$
-\end_inset
-
- is a subvector of endogenous variables other than 
-\begin_inset Formula $Y_{i}\in\mathscr{Y}_{i}$
-\end_inset
-
-.
- This can be modified for estimation ...
- 
-\end_layout
-
-\begin_layout Standard
-The RDMP approach (see Cox-Wohlgenant 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CoxWohlgenant1986"
-
-\end_inset
-
-) can be used for food - but we intend to use the price information instead.
- The goal would be to use asset ownership on the RHS.
- This could be extended to the time-series analysis where changes in assets
- and changes in quality could other household-characteristics would need
- to be considered.
- The Cox-Wohlgenant approach is unnecessary because we already have the
- goods of various quality identified in the survey.
- Quality can be aggregated only as long as the goods within the group can
- be ordered on a certain criteria.
- For meat, there is no reason to think that goat is of higher quality than
- beef if the former is costlier.
- It takes the right granularity of the price differences - for the quantity
- aggregate to make sense.
- Beef and goat may not be compared but the qualities of protein could.
- Quality of protein can be calculated.
- How quality changes with respect to changes in asset ownership, age etc.
- 
-\end_layout
-
-\begin_layout Standard
-An analysis of substitution between quality is not complete without establishing
- what quality means in every category.
- A discrete approach does offer an understanding of cross-substitutions
- between products but it doesn't provide a sense of substitution between
- quality and assets.
+A discrete approach does offer an understanding of cross-substitutions between
+ products but it doesn't provide a sense of substitution between quality
+ and assets.
  For this we do need some aggregation.
  Viewing protein as an aggregate commodity becomes important - this is simplifie
 d in an environment of growth such that the relative price structure remains
@@ -586,6 +1011,15 @@ d in an environment of growth such that the relative price structure remains
  If we consider status to be quality (and that as a good), we need to provide
  the price of status - which is not observed in the market - but can be
  understood from the substitution between the items.
+ We also consider that the consWumer may be saving for assets rather.
+ Since our goal is to understand how consumer get status (which they get
+ more immediately from assets).
+ This necessitates an intertemporal model and the asset ownership.
+ The goal would be to use asset ownership on the RHS.
+ This could be extended to the time-series analysis where changes in assets
+ and changes in quality could other household-characteristics would need
+ to be considered.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -603,83 +1037,8 @@ The point above is that price of quality is essential for one to consider
  elasticity of quality and the income elasticity of physical quantity.
  In the AIDS formula of this aggregation, we ought to use base prices throughout
  but use quality-adjusted quantities in the LHS.
- We don't quality elasticities as such but our quantity elasticities themselves
- are indicative of quality.
  Notice that the budget ratio does not change when we perform our analysis.
- Deaton extends Houthakker's formulation to suggest that quality can be
- treated as a separate commodity (given the composite commodity theorem
- conditions are met).
- The quantity-price tuples 
-\begin_inset Formula $(q_{1},p_{1}),(q_{2},p_{2})...$
-\end_inset
-
- should be always be expressed as a quantity and quality pair 
-\begin_inset Formula $(Q_{G},P_{G}),(\nu_{G},p_{\nu_{G}})$
-\end_inset
-
-.
- If quality is really to be treated as a separate commodity, then price
- of quality is required.
- Let's take an example to consider how this appears.
- Let's say we have lamb and chicken with prices 20, 10 (resp.) in protein
- group.
- If the quantities consumed as 1.5, 2 (resp.) then, we should be able to express
- the pair
-\begin_inset Formula $\{(20,1.5).(10,2)\}$
-\end_inset
-
- as 
-\begin_inset Formula $(10,4(=2\times1.5+1\times2))$
-\end_inset
-
- and 
-\begin_inset Formula $(0,1.6=\frac{4}{1.5+2})$
-\end_inset
-
- .
-  Consider the case 
-\begin_inset Formula $\{(20,0.5),(10,3)\}$
-\end_inset
-
  
-\begin_inset Formula $(E=40)$
-\end_inset
-
- then we have 
-\begin_inset Formula $(10,4(=2\times0.5+1\times3))$
-\end_inset
-
- and 
-\begin_inset Formula $(0,1.14=\frac{4}{3.5})$
-\end_inset
-
-.
- Clearly the quality is lower even though the quantity is the same.
- The quality adjusted quantity provides the total expenditure and there
- is no price for such quality value - we cannot think of quality as another
- good in this formulation.
- Deaton's original intent was to use quality-as a separate good.
- The substitution between the choice of energy between kerosene and electricity
- is however not as straightforward as between qualities of protein.
-\end_layout
-
-\begin_layout Standard
-One approach could be to calculate quality gradient as the price.
- For energy, this would be the price one has to pay to get more of electricity.
- In food, it would be the price one has to pay to get more of meat.
- This is x then this may be possible.
- For that the expenditure should be 
-\begin_inset Formula $P_{G}\nu_{G}q_{G}$
-\end_inset
-
-.
- The econometrics should be able to separate quality elasticities from this
- equation.
-\end_layout
-
-\begin_layout Standard
-For energy, we cannot even calculate the quality measure because the quantity
- of energy consumed is not recorded.
 \end_layout
 
 \begin_layout Standard
@@ -689,18 +1048,8 @@ A discrete analysis of demand - as we do in the AIDS analysis of individual
  The quality metric of protein, fat is one such way.
  This is the problematic aggregation of protein - quality, quantity - whose
  price are indirect (virtual prices).
- Deaton uses a clever method to remove price - which is not accessible.
- Which may allow us to write the cost-function in terms of quality.
  The price of quality would vary across regions - which brings further complicat
-ions.
-\end_layout
-
-\begin_layout Standard
-Deaton does mention that the effect of quality in policy is what drives
- the postulation - the usual way of preferences is difficult to interpret
- for policy purposes.
- What we might want to do is to extend this to asset.
- A probabilistic formulation can clear this up.
+ions - but still is a tractable problem.
 \end_layout
 
 \begin_layout Standard
@@ -709,25 +1058,15 @@ While we do assume a weak separability of commodity groups for quantity
  consumers may substitute between quality over commodity groups.
  For example, rise of prices of electricity could potentially affect food
  quality - even though the quantity consumed may be limited by needs.
- The econometric implication of the quality substitution is that we may
- relieve the cross-price effects for quantity - not for quality.
-\end_layout
-
-\begin_layout Standard
-The data we need is the price data.
- We don't use price-deflators due to the measurement errors that arise with
- quantity being in both in the denominator of the control variables and
- in the numerator of the dependent variable.
- We don't use fixed-effects (Deaton, Mckelvey) because our goal is not to
- study price effects but the overall effect on quality(?).
- We prefer to use weights nevertheless because the reasons OLS estimation
- provides in AIDS.
- Even if we used quantity it would have to the quality-adjusted quantity
- - as Nelson suggests.
-\end_layout
-
-\begin_layout Section*
-Analysis
+ This should be evident in the analysis of quality across multiple groups.
+ We compare two methods used for the task.
+ In the first, we use a continuous measure of quality - where electricity
+ consumed in a dummy variable (as are the assets).
+ In the second method, an instrument variable approach is used.
+ We argue for direct discrete method to be make more sense of applications
+ in status and conspiucous consumption - particularly due to the relevance
+ of asset ownership - while suggesting a third method.
+ 
 \end_layout
 
 \begin_layout Subsection*
@@ -873,6 +1212,18 @@ key "FisherShell1968"
 \end_layout
 
 \begin_layout Standard
+We thus have 
+\begin_inset Formula $n$
+\end_inset
+
+ equations:
+\end_layout
+
+\begin_layout Standard
+The inverse-mills is used as an instrument.
+\end_layout
+
+\begin_layout Standard
 This does not aggregate over all commodity groups.
  The substitution between food and energy cannot be studied with this approach
  - unless we aggregate food and energy as well.
@@ -904,210 +1255,105 @@ the concerning for food quality.
 \end_layout
 
 \begin_layout Section*
-Price extraction
+Future Work
 \end_layout
 
 \begin_layout Standard
-The following are in 
-\begin_inset Quotes eld
-\end_inset
-
-pieces
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-"bread" "banana_ripe" "goat" "beef" "chicken" "eggs" "fresh_milk" for 2010
-\end_layout
-
-\begin_layout Standard
-"bunscakes" "goat" "chicken" "eggs" "fish_seafood" for 2012
-\end_layout
-
-\begin_layout Standard
-\begin_inset Quotes eld
-\end_inset
-
-maize_green, bread, bunscakes, pasta, cassava_fresh, cassava_flour, sweet_potato
-, yam, potatoes, banana_green, othervegstarch, NA, pulses, peanuts, coconut,
- onion, greens, dried_canned_veg, banana_ripe, citrus, mangoes, sugarcane,
- goat, beef, chicken, eggs, fish_seafood, dried_canned_fish, fresh_milk,
- canned_milk, firewood, cooking_oil, salt, brews, kerosene, charcoal
-\begin_inset Quotes erd
-\end_inset
-
- for 2008.
-\end_layout
-
-\begin_layout Standard
-About 588 observations would be ignored for 2008 prices because they are
- 
-\begin_inset Quotes eld
-\end_inset
-
-pieces
-\begin_inset Quotes erd
-\end_inset
-
- (idadi).
-\end_layout
-
-\begin_layout Standard
-The price entries were rejected when the price was more than 10 times the
- 90th percentile.
- This is not a lot of data - only for all commodities in 2010 data were
- rejected.
- The survey does not record prices for every ward and ea.
- We have made no attempts to arrive at a price at a granularity lower than
- that of a district.
- We don't use the national averages / medians for the prices - as the regional
- variation of price is too wide to be ignored.
- The district price is arrived at by using a regression.
- Most areas don't have electricity (only regions – report electricity usage).
- The price is calculated a recorded price / recorded quantity for the quantities
- in the survey.
- To detail how we have assimilated the data from the survey, let's consider
- an example of the marked prices of rice for 1 kg, 2kg, 5kg and 10kg - a
- typical set of marked prices would be 4£, 7.5£, 18£ and 35£ respectively.
- The plot looks like in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:markedprices"
-
+In a direct utility function, we may write 
+\begin_inset Formula $u=f(\kappa,A,\eta)$
 \end_inset
 
 .
- A linear regression of mp vs q (where mp is the marked price and q the
- quantity) is hardly appropriate.
- The unit-prices are slightly less than linear as is shown in the plot of
- the unit-price corresponding to the quantities in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:unitprice"
+ The discontinuity in asset owership is a legitimate conern it is 
+\begin_inset Formula $\frac{\partial u}{\partial A}$
+\end_inset
 
+ is continuous.
+ 
+\begin_inset Formula $\frac{\partial u}{\partial A}$
+\end_inset
+
+ is definitely non-decreasing but it may not be differentiable the same
+ way 
+\begin_inset Formula $\frac{\partial u}{\partial\kappa}$
+\end_inset
+
+ is.
+ Establishing an equivalence between 
+\begin_inset Formula $ln(A)$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{\kappa}$
+\end_inset
+
+ does simplify the problem.
+ One needs to separate out 
+\begin_inset Formula $\eta$
+\end_inset
+
+ completely to establish this equivalence.
+ In the first simplification, needs are never compromised on, but quality
+ is with savings.
+ 
+\begin_inset Formula $ln(A)$
+\end_inset
+
+ is influenced by 
+\begin_inset Formula $p_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{\kappa}$
 \end_inset
 
 .
- Since we assume that the consumers face the same prices, we do not attempt
- to match the appropriate price with the quantity consumed by the consumer
- but simply the price of the standard unit of that commodity e.g.
- the price per kg for rice in the current example.
- The regression we use is 
-\begin_inset Formula $\frac{mp}{q}=\beta\frac{1}{q^{2}}+c$
-\end_inset
-
- (assuming that the marked price is lower than a linear increase - see Figure
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:markedprices"
-
-\end_inset
-
- - by a factor that itself decreases with increasing 
-\begin_inset Formula $q$
-\end_inset
-
- i.e.
- 
-\begin_inset Formula $mp=aq-b/q$
-\end_inset
-
-).
- Since we use the price set 
-\begin_inset Formula $q=1$
-\end_inset
-
-, the price to be used is simply 
-\begin_inset Formula $\beta+c$
-\end_inset
-
- for the regression: 
-\begin_inset Formula $\frac{mp}{q}=\beta/q^{2}+c$
+ Here, 
+\begin_inset Formula $g(\kappa,A,\eta)=g(x,p_{\kappa},p_{A},p_{\eta})$
 \end_inset
 
 .
- The regression is run only when at least two prices are available (only
- 9 regions for 6 items have less than three marked-prices available).
- A simple median is used as the price for such cases.
- The price-inference is therefore a 2-stage process - we first obtain prices
- for every district with the regression method.
- If there are no marked prices available in a district, we use the regional
- value of the price.
- For some items, such as goat, the region-prices are not available at for
- all the regions either.
- Here, the price from obtained by the regressions over the country is used.
- The prices for some items whose consumption is relatively rare in the diary
- data e.g.
- wild-birds, honey, beer are not available for any of the regions.
- These items (~8% entries) are ignored for the study.
+ However, the consumer may be indifferent between many triplets of 
+\begin_inset Formula $\kappa,A,\eta$
+\end_inset
+
+ (somebody would drive a luxury car than pay for schools fees, would rather
+ spend on designer clothes than save for a house).
 \end_layout
 
 \begin_layout Standard
-With the above approach, it can argued that we're introducing some selection
- bias by using the national-values wherever the prices are unavailable (it
- could be that the unobserved prices were higher or lower).
- However, since this occurs for ~4% of the price observations, the bias
- introduced is not significant.
- The finer substitution at the district level is for ~10% of the entries
- that have region prices.
- This too is not significant.
- With all the prices thus aggregated, we can infer the price observed by
- every customer.
+The understanding of quality should be done with the cost-function under
+ risk.
+ When consumer's maintain low quality they could be doing so to 
+\begin_inset Quotes eld
+\end_inset
+
+Invest
+\begin_inset Quotes erd
+\end_inset
+
+ in items that they expect to provide returns later on.
+ Quality in this sense is anything above subsistence level that is required
+ for fulfillment of needs.
+ 
 \end_layout
 
 \begin_layout Standard
-We use broad classification of food items for separability.
- We protein, starch, fruits and vegetables.
- It is assume that everyone would have a fixed proportion of these in their
- diet.
- Fat may need to be ignored.
- The price stability is based on the survey - in reality the price of some
- items may be more volatile than others and this would introduce some bias.
- However, such a bias is beyond the scope of the current chapter.
- The level of price details available are different for food vs the rest
- - as we use national-level prices for all commodity groups except the food
- categories.
- Our conclusions are not specific to regions - to alleviate this issue.
- Only a survey with a more detailed price information on non-food items
- can alleviate this issue.
- Another issue we have ignored is that of the time of the interview and
- the quantity used by the household - the prices recorded should ideally
- be matched with the time of the purchase as well as the quantity range
- that the hhid uses.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/lsms/allnatprices.png
-	width 6.5in
+The general approach mentioned in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ManskiMcFadden1978"
 
 \end_inset
 
-
+ (chapter 9) is the simultaneous model:
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Market Prices recorded in 2008, 2010, 2012 and 2014 surveys
-\end_layout
-
-\end_inset
-
-
-\end_layout
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+Y_{i} & =Y_{i}B+X_{i}\Gamma+\epsilon_{i}\label{eq:simult1}
+\end{alignat}
 
 \end_inset
 
@@ -1115,534 +1361,153 @@ Market Prices recorded in 2008, 2010, 2012 and 2014 surveys
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/markedprice.png
-	width 3in
-
+Here, 
+\begin_inset Formula $Y_{i}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:markedprices"
-
+ is 
+\begin_inset Formula $1\times G$
 \end_inset
 
-Typical marked prices of a commodity
-\end_layout
-
+, 
+\begin_inset Formula $X_{i}$
 \end_inset
 
-
-\end_layout
-
+ is 
+\begin_inset Formula $1\times k$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/unitprice.png
-	width 3in
-
+, 
+\begin_inset Formula $I-B$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:unitprice"
-
+ is 
+\begin_inset Formula $G\times G$
 \end_inset
 
-Typical Price per unit of the commodity
-\end_layout
-
+, 
+\begin_inset Formula $\Gamma$
 \end_inset
 
-
-\end_layout
-
+ is 
+\begin_inset Formula $k\times G$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-This doesn't need to be an AIDS formulation but simply the distribution
- of quality amidst those A better way would be to just look at quality in
- the following categories:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Tabular
-<lyxtabular version="3" rows="21" columns="2">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-groups
-\end_layout
-
+.
+ 
+\begin_inset Formula $Y_{i}$
 \end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
+ includes latent and censored DVs as well.
+ If 
+\begin_inset Formula $G$
+\end_inset
 
+ is split such that
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset Formula $G_{1}$
 \end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-starch
+ are observed (continuous) variables
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset Formula $G_{2}-G_{1}$
 \end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-wheat
+ are limited DV
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset Formula $G_{3}-G_{2}$
 \end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
+ are unobservable latent variables (with observable 
+\begin_inset Formula $I_{ji}$
+\end_inset
 
+ binary indicators that are determined by the latent variable 
+\begin_inset Formula $Y_{ji}$
+\end_inset
+
+ with an indicator function as 
+\begin_inset Formula $I_{ji}=\mathbb{I}(Y_{ji}>0)$
+\end_inset
+
+, where 
+\begin_inset Formula $j\in[G_{2}+1,G_{3}]$
+\end_inset
+
+ ) 
 \end_layout
 
+\begin_layout Enumerate
+\begin_inset Formula $G-G_{3}$
 \end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-cassava
-\end_layout
-
+ are censored DVs - indexed by 
+\begin_inset Formula $\{G_{3}+1,...,G\}$
 \end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-
-\end_layout
-
+ which are censored by a subset of 
+\begin_inset Formula $G_{3}-G_{2}$
 \end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-bread
-\end_layout
-
+ latent variables - can be partitioned into mutually exclusive sets 
+\begin_inset Formula $S_{k\in[1,L]}$
 \end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-protein
-\end_layout
-
+ (
+\begin_inset Formula $L\le G_{3}-G_{2}$
 \end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-chicken
-\end_layout
-
+) such that each 
+\begin_inset Formula $S_{k}$
 \end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-pulses
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-goat
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fat
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-butter
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-oil
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-beverages
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-tea
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-cold drinks
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-beer
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fruitsveg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-banana
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-carrots etc.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-mangoes
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-energy
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electricity
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-charcoal
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-kerosene
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-transport
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-public_transport
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-petrol (if car recorded)
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household expenses 
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
+ is activated by 
+\begin_inset Formula $Y_{ji}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-We thus have 
-\begin_inset Formula $n$
+There are two stages in the estimation.
+ The first stage estimation is through the simple manipulation of Equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:simult1"
+
 \end_inset
 
- equations:
+ - 
+\begin_inset Formula $Y_{i}=\Gamma(I-B)^{-1}+\epsilon_{i}(I-B)^{-1}=X_{i}\Pi+u_{i}$
+\end_inset
+
+.
+ Here, a probit or tobit could be used.
+ The second stage is the estimation of structural parameters:
 \end_layout
 
 \begin_layout Standard
-The inverse-mills is used as an instrument.
+\begin_inset Formula $Y_{i}=R_{i}\delta_{0}+Y_{i}^{*}\delta_{1}+\epsilon_{i}$
+\end_inset
+
+ where 
+\begin_inset Formula $Y_{i}^{*}$
+\end_inset
+
+ is a subvector of endogenous variables other than 
+\begin_inset Formula $Y_{i}\in\mathscr{Y}_{i}$
+\end_inset
+
+.
+ This can be modified for estimation ...
+ 
 \end_layout
 
 \begin_layout Standard

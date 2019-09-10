@@ -38,5 +38,5 @@ def generate_constraints(categories):
 #categ= ["Beef","Pork","Chicken"]
 
 #categ = ["densefoods","nonfresh"]
-categ=["nonfresh","densefoods","complements","fruitsveg","protein","alcohol"]
+categ=["nonfresh","densefoods","complements","fruitsveg","protein","alcohol","energy","household","transport"]
 syms = generate_constraints(categ)
