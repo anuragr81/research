@@ -7,6 +7,11 @@
 \textclass article
 \begin_preamble
 \usepackage{lscape}
+\usepackage{longtable}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -604,7 +609,20 @@ reference "fig:unitprice"
  Since we assume that the consumers face the same prices, we do not attempt
  to match the appropriate price with the quantity consumed by the consumer
  but simply the price of the standard unit of that commodity e.g.
- the price per kg for rice in the current example.
+ the price per kg for rice in the current example
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If we were to really look for a perfect match of prices, then not only the
+ quantities consumed but the month of the household interview would also
+ need to matched with that of the price recorded.
+ The prices are hardly available to such density in consumption surveys.
+\end_layout
+
+\end_inset
+
+.
  The regression we use therefore is 
 \begin_inset Formula $\frac{mp}{q}=\beta\frac{1}{q^{2}}+c$
 \end_inset
@@ -669,36 +687,32 @@ This does not happen as frequently as one may fear.
 \end_layout
 
 \begin_layout Standard
-It can argued that we're introducing some selection bias by using the national-v
-alues wherever the prices are unavailable.
- However, since the unavailability of regional averages ails only about
- ~4% of the total price observations, hence the bias introduced is likely
- not significant.
- With the prices we obtain after the regression, we match the price for
- every commodity consumed by the household based on the district it is located
+With the prices we obtain after the regression, we match the price for every
+ commodity consumed by the household based on the district it is located
  in.
- The next step is to define the groups based on price-structure.
+ The next step is to define the groups based on price-structure.We use broad
+ classification of food items for separability.
+ Within foods we observe protein, fruits, densefoods, freshveg and nonfresh.
+ Within energy, we put kerosene and electricity under the same category.
+ It is assume that everyone would have a fixed proportion of these in their
+ diet.
+ 
 \end_layout
 
 \begin_layout Standard
-We use broad classification of food items for separability.
- We protein, starch, fruits and vegetables.
- It is assume that everyone would have a fixed proportion of these in their
- diet.
- Fat may need to be ignored.
- The price stability is based on the survey - in reality the price of some
- items may be more volatile than others and this would introduce some bias.
- However, such a bias is beyond the scope of the current chapter.
- The level of price details available are different for food vs the rest
- - as we use national-level prices for all commodity groups except the food
- categories.
- Our conclusions are not specific to regions - to alleviate this issue.
- Only a survey with a more detailed price information on non-food items
- can alleviate this issue.
- Another issue we have ignored is that of the time of the interview and
- the quantity used by the household - the prices recorded should ideally
- be matched with the time of the purchase as well as the quantity range
- that the hhid uses.
+It can argued that we're introducing some selection bias by using the national-v
+alues wherever the prices are unavailable.
+ However, since the unavailability of regional averages ails only about
+ ~4% of the total price observations, the bias thus introduced is likely
+ not significant.
+ Another issue could be taken with our grouping of commodities - due to
+ the classification relying on an annual time-series.
+ It could be that the price of some items is more volatile or more detailed
+ than others and this too could introduce some bias.
+ Since such a bias can be alleviated only through price data sampled at
+ a higher than annual frequency, we choose to stay within realms of the
+ selected survey.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -861,26 +875,11 @@ Analysis
 \begin_layout Standard
 An analysis of substitution between quality is not complete without establishing
  what quality means in every category.
- The discreteness is paramount.
- The quality is continuous in food - but the difference between eletricity
- and kerosene is far too qualititative to be an understanding of composite
- good.
- The Cox-Wohlgenant approach is unnecessary because we already have the
- goods of various quality identified in the survey.
- Quality can be aggregated only as long as the goods within the group can
- be ordered on a certain criteria.
- For meat, there is no reason to think that goat is of higher quality than
- beef if the former is costlier.
- It takes the right granularity of the price differences - for the quantity
- aggregate to make sense.
- Beef and goat may not be compared but the qualities of protein could.
- Quality of protein can be calculated.
- How quality changes with respect to changes in asset ownership, age etc.
+ for a an analysis to conform to the conditions of homogeneity, adding up
+ and non-negativity of Slutsky matrix restrictions must be put.
+ Use of price-based quality allows us to use this framework to understand
+ quality.
  
-\end_layout
-
-\begin_layout Subsection*
-Continuous and discrete Quality
 \end_layout
 
 \begin_layout Standard
@@ -933,8 +932,54 @@ key "GrilichesIndex1971"
 
  represents the quality of the good corresponding to the real quantities
  consumed for several items.
- Such a formulation always requires the rather stringent conditions of the
- composite commodity theorem conditions to be met (see Nelson
+ Another variant of this formulation would look at a higher quality product
+ as more of the lower quality product
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If the sum of physical quantities is denoted as 
+\begin_inset Formula $q_{G}=\sum_{i\in G}q_{i}$
+\end_inset
+
+then 
+\begin_inset Formula $Q_{G}=\frac{E_{G}}{P_{G}}$
+\end_inset
+
+ where 
+\begin_inset Formula $E_{G}$
+\end_inset
+
+ is the expenditure and 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ is the price-index.
+ The core of Nelson's argument is that 
+\begin_inset Formula $Q_{G}=q_{G}$
+\end_inset
+
+ only if quality effects are absent since 
+\begin_inset Formula $Q_{G}=q_{G}\Rightarrow\frac{E_{G}}{P_{G}}=\frac{E_{G}}{V_{G}}$
+\end_inset
+
+
+\begin_inset Formula $\Rightarrow P_{G}=V_{G}=P_{G}\nu_{G}$
+\end_inset
+
+ (unit quantity is interpreted as 
+\begin_inset Formula $V_{G}=\frac{E_{G}}{q_{G}}$
+\end_inset
+
+ ).
+\end_layout
+
+\end_inset
+
+.
+ Regardless of how the items are aggregated, such formulations always requires
+ the rather stringent aggregation conditions of the composite commodity
+ theorem conditions to be met (see Nelson
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity"
@@ -949,11 +994,37 @@ key "DeatonEconConsumer"
 \end_inset
 
 ).
- Also, while it may seem at first that if quality is really to be treated
- as a separate commodity, then price of quality is also required.
- However, since we already have the real prices of the item - a valid composite
- good price implicitly determines the price of the quality amongst the items
- in the market.
+ 
+\end_layout
+
+\begin_layout Standard
+If we consider status to be quality (and that as a good), we need to provide
+ the price of status - which is not observed in the market - but can be
+ understood from the substitution between the items.
+ Notice however that when quality is treated as a separate commodity, one
+ does not need the price of quality in the cost-function (or the budget
+ share regression).
+ This is because we already have the real prices of the items - and a valid
+ composite good price (base-price) uniquely although implicitly determines
+ the price of the quality
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Even if one interprets the quality gradient as the price of quality, this
+ leads to a formulation equivalent to the aggregation.
+ Consider that for energy, such a gradient would be calculated with the
+ price one has to pay to get more of electricity.
+ In food, this would be the price one has to pay to get more of meat etc.
+ But this formulation effectively relies on the average basket - and is
+ thus equivalent to the composite good method (with a composite aggregate
+ price).
+\end_layout
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1041,10 +1112,45 @@ red weighted quantity as the quality-adjusted quantity and express the pair
 \end_layout
 
 \begin_layout Standard
-The quality metric is used the econometric analysis of food quality.
- While the quality metric The substitution between the choice of energy
- between kerosene and electricity is however not as straightforward as between
- qualities of protein
+Even though the quality metric used above is based on the rather stringent
+ condition of a constant relative price structure(the Hicks aggregation
+ commodity theorem).
+ Quality can be aggregated only as long as the goods within the group can
+ be ordered on a certain criteria.
+ For meat, there is no reason to think that goat is of higher quality than
+ beef if the former is costlier.
+ It takes the right granularity of the price differences - for the quantity
+ aggregate to make sense.
+ Beef and goat may not be compared but the qualities of protein could.
+ Quality of protein can be calculated.
+ How quality changes with respect to changes in asset ownership, age etc.
+ 
+\end_layout
+
+\begin_layout Standard
+We cannot talk about quality metric 
+\begin_inset Formula $\nu_{G}$
+\end_inset
+
+ without the quantity observed.
+ The more serious problem is idea of viewing a higher quality product in
+ terms of a lower quality product.
+ the demand of a better good in a commodity group as a multiple of the worse
+ good - e.g.
+ by considering electricity in terms of the coal used into one aggregate
+ is likely to be problematic (see the discussion on consumer indices in
+ Fisher-Shell 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FisherShell1968"
+
+\end_inset
+
+ ).
+ More generally while such a quality metric can be used to understand consumptio
+n of quality, it is limited by the aggregated view that makes it desirable.
+ substitution between the choice of energy between kerosene and electricity
+ is not as straightforward as between qualities of protein
 \begin_inset Foot
 status open
 
@@ -1057,91 +1163,26 @@ For energy in the LSMS data, such a quality measure cannot be calculated
 \end_inset
 
 .
+ The continuous measures make sense only in a Houthakker-like setting where
+ a mixture of high and low quality items are consumed.
+ In non-food categories, the quality differences are more discrete (more
+ so in the developing countries) i.e.
+ the consumers either consume a certain quantity of an item or they don't.
+ It may be often possible to proxy such differences as regional differences,
+ but the fact remains that a consumer faces a discrete choice more often
+ in non-food categories.
+ we thus prefer not to aggregate demand across such items and seek appropriate
+ selection approaches.
 \end_layout
 
 \begin_layout Standard
-One approach could be to calculate quality gradient as the price.
- For energy, this would be the price one has to pay to get more of electricity.
- In food, it would be the price one has to pay to get more of meat.
- This is x then this may be possible.
- For that the expenditure should be 
-\begin_inset Formula $P_{G}\nu_{G}q_{G}$
-\end_inset
-
-.
- However, this formulation too is based on the average basket - and is equivalen
-t to the composite good method (and a composite price).
-\end_layout
-
-\begin_layout Subsection*
-Quality across multiple commodity groups
-\end_layout
-
-\begin_layout Standard
-Even though a conventional AIDS formulation does not model the intertemporal
- substitution, the condition C1 allows us to compare the quality variation
- in certain commodity groups with the durable good possession in others
- (We rule out the use of a two-state budgeting model since such this substitutio
-n exists between commodity groups).
-\end_layout
-
-\begin_layout Standard
-We are only concerned with the status view of consumption.
- In the cost function, the expenditure for a certain utility depends on
- price of quality, minimum cost of having children (subsistence of family
- members) and the cost of long-term assets - 
-\begin_inset Formula $c(u,p_{\kappa},p_{A},p_{\eta})$
-\end_inset
-
-.
- For us to use anything close to the AIDS form, we must explain the cost
- function with 
-\begin_inset Formula $\eta$
-\end_inset
-
- and 
-\begin_inset Formula $\kappa$
-\end_inset
-
- .
- One way is to extend Gorman theory in terms of 
-\begin_inset Formula $\eta$
-\end_inset
-
- and 
-\begin_inset Formula $\kappa$
-\end_inset
-
- - which is equivalent to interpreting it in terms of 
-\begin_inset Formula $p_{A}$
-\end_inset
-
- and 
-\begin_inset Formula $p_{\kappa}$
-\end_inset
-
-.
- The hesitation there are the analysis needed for quality and quantity separatio
-n propounded by Deaton.
- 
-\end_layout
-
-\begin_layout Standard
-A discrete approach does offer an understanding of cross-substitutions between
- products but it doesn't provide a sense of substitution between quality
- and assets.
- For this we do need some aggregation.
- Viewing protein as an aggregate commodity becomes important - this is simplifie
-d in an environment of growth such that the relative price structure remains
- largely constant.
- for a an analysis to conform to the conditions of homogeneity, adding up
- and non-negativity of Slutsky matrix restrictions must be put.
- Use of price-based quality allows us to use this framework to understand
- quality.
- If we consider status to be quality (and that as a good), we need to provide
- the price of status - which is not observed in the market - but can be
- understood from the substitution between the items.
- We also consider that the consWumer may be saving for assets rather.
+Since we do wish to interpret status consumption using the conventional
+ techniques and the consumer's perception of risk we wish to view assets
+ vs quality.
+ We also consider that the consumer may be saving for assets rather.
+ A discrete approach does offer an understanding of cross-substitutions
+ between products but it doesn't provide a sense of substitution between
+ quality and assets.
  Since our goal is to understand how consumer get status (which they get
  more immediately from assets).
  This necessitates an intertemporal model and the asset ownership.
@@ -1153,43 +1194,16 @@ d in an environment of growth such that the relative price structure remains
 \end_layout
 
 \begin_layout Standard
-The point above is that price of quality is essential for one to consider
- quality elasticity.
- A price of quality units is easy to calculate when we have prices available
- but not otherwise.
- Base-price becomes the quantity price and the quality is implicit in the
- .
- Composite quantity in the Nelson sense a quality adjusted quantity measure.
- This adjusted quantity is what can be interpreted.
- Quantity elasticitities are related with quality elasticities with the
- relationship: .
- The income elasticity of is this composite quantity is the sum of income
- elasticity of quality and the income elasticity of physical quantity.
- In the AIDS formula of this aggregation, we ought to use base prices throughout
- but use quality-adjusted quantities in the LHS.
- Notice that the budget ratio does not change when we perform our analysis.
- 
-\end_layout
-
-\begin_layout Standard
-A discrete analysis of demand - as we do in the AIDS analysis of individual
- items gives us some idea how different items are distributed.
- But the quality-aggregate of protein would make more intuitive sense.
- The quality metric of protein, fat is one such way.
- This is the problematic aggregation of protein - quality, quantity - whose
- price are indirect (virtual prices).
- The price of quality would vary across regions - which brings further complicat
-ions - but still is a tractable problem.
-\end_layout
-
-\begin_layout Standard
 While we do assume a weak separability of commodity groups for quantity
  - we argue that despite there being a possible inertia in doing so, the
  consumers may substitute between quality over commodity groups.
  For example, rise of prices of electricity could potentially affect food
  quality - even though the quantity consumed may be limited by needs.
- This should be evident in the analysis of quality across multiple groups.
- We compare two methods used for the task.
+ The data from possession of assets can further indicate the differences
+ between asset ownership bands.
+ This should be evident in the analysis of cross-price effect of price on
+ quality across multiple commodity groups.
+ We compare two methods used for this task.
  In the first, we use a continuous measure of quality - where electricity
  consumed in a dummy variable (as are the assets).
  In the second method, an instrument variable approach is used.
@@ -1201,6 +1215,18 @@ While we do assume a weak separability of commodity groups for quantity
 
 \begin_layout Subsection*
 An AIDS analysis of consumption
+\end_layout
+
+\begin_layout Subsubsection*
+LA AIDS model
+\end_layout
+
+\begin_layout Standard
+Even though a conventional AIDS formulation does not model the intertemporal
+ substitution, the condition C1 allows us to compare the quality variation
+ in certain commodity groups with the durable good possession in others
+ (We rule out the use of a two-state budgeting model since such this substitutio
+n exists between commodity groups).
 \end_layout
 
 \begin_layout Standard
@@ -1245,7 +1271,57 @@ key "CoxWohlgenant1986"
 \end_layout
 
 \begin_layout Standard
-The demand across the following are intended to be separable.
+Base-price becomes the quantity price.
+ Composite quantity in the Nelson sense a quality adjusted quantity measure.
+ and thus the quality calculated as a price-ratio weighted measure
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Quantity elasticitities are related with quality elasticities with the relations
+hip: .
+ The income elasticity of is this composite quantity is the sum of income
+ elasticity of quality and the income elasticity of physical quantity.
+ 
+\end_layout
+
+\end_inset
+
+.
+ The quality becomes as additional equations in the AIDS formulation (see
+ McKelvey
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ and Gibson et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AndalonGibsonSoda2017,GibsonKimQualityBog2019"
+
+\end_inset
+
+ for implementations of this method).
+\end_layout
+
+\begin_layout Standard
+For transport as well as for household products, we ignore quality differences
+ in the expenditure.
+ The AIDS SUR thus uses CPI as prices for transport and household purchases.
+ Further, we keep the asset possession (and band identity) as demographic
+ characteristics in these equations.
+\end_layout
+
+\begin_layout Subsubsection*
+A selection equation approach
+\end_layout
+
+\begin_layout Standard
+The probit refinement is needed only as long as there is a possibility that
+ of no expenditure in a group.
+ The demand across the following are intended to be separable.
  The probit would be for all the items (not for starch) - but for all items
  in the survey (bananas, kassava, wheat, electricity, kerosene).
  The dependent variable for  the probit is the dummy indicating whether
@@ -1255,137 +1331,55 @@ The demand across the following are intended to be separable.
 \end_layout
 
 \begin_layout Subsection*
-Cross Sectional Analysis of quality
+A Cross Sectional Analysis of quality
 \end_layout
 
 \begin_layout Standard
-There is substitution between different qualities of starch, protein etc.
- It is worthwhile seeing quality varies within the categories.
- The theory for this is not as easy.
- Deaton's attempts to use quality as a separate good seems to be OK except
- - the objection raised by Nelson with the ambiguous aggregation of quantity.
- The idea of viewing a higher quality product in terms of a lower quality
- product has its limitations and it has been highlighted elsewhere (e.g.
- in consumer indices - see Fisher-Shell 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "FisherShell1968"
-
-\end_inset
-
- ).
- Instead of writing the demand of a better good in a commodity group as
- a multiple of the worse good - e.g.
- by considering electricity in terms of the coal used into one aggregate
- is likely to be problematic.
- The quality metric we can use for the group is thus based on the rather
- stringent condition of a constant relative price structure i.e.
- the Hicks aggregation commodity theorem and uses a price-structure weighted
- quantity (higher proportion of expensive items would increase the quality
- value) i.e.
- 
-\begin_inset Formula $\frac{Q_{G}}{q_{G}}=\frac{\sum p_{i}^{*}q_{i}}{\sum q_{i}}$
-\end_inset
-
-.
- 
-\begin_inset Formula $\beta_{Q}=\beta_{\nu}+\beta_{q}$
-\end_inset
-
- where 
-\begin_inset Formula $\beta_{y}=$
-\end_inset
-
-
-\begin_inset Formula $\frac{\partial ln(y)}{\partial ln(x)}$
-\end_inset
-
- instead of a simply quantity aggregate.
- In this sense, we cannot talk about quality metric 
-\begin_inset Formula $\nu_{G}$
-\end_inset
-
- without the quantity observed.
- For energy, we rely on the energy varieties for our inferences whereas
- a quality metric can be used for food.
- Here, 
-\begin_inset Formula $Q_{G}=\frac{E_{G}}{P_{G}}$
-\end_inset
-
- where 
-\begin_inset Formula $E_{G}$
-\end_inset
-
- is the expenditure and 
-\begin_inset Formula $P_{G}$
-\end_inset
-
- is the price-index.
- 
-\begin_inset Formula $Q_{G}=q_{G}$
-\end_inset
-
- only if quality effects are absent i.e.
- 
-\begin_inset Formula $Q_{G}=q_{G}\Rightarrow\frac{E_{G}}{P_{G}}=\frac{E_{G}}{V_{G}}$
-\end_inset
-
-
-\begin_inset Formula $\Rightarrow P_{G}=V_{G}=P_{G}\nu_{G}$
-\end_inset
-
- (By definition unit quantity
-\begin_inset Formula $V_{G}=\frac{E_{G}}{q_{G}}$
-\end_inset
-
- ).
-\end_layout
-
-\begin_layout Standard
-We thus have 
-\begin_inset Formula $n$
-\end_inset
-
- equations:
-\end_layout
-
-\begin_layout Standard
-The inverse-mills is used as an instrument.
-\end_layout
-
-\begin_layout Standard
-This does not aggregate over all commodity groups.
- The substitution between food and energy cannot be studied with this approach
- - unless we aggregate food and energy as well.
- 
-\end_layout
-
-\begin_layout Standard
-For transport as well as for household products, we ignore quality differences
- in the expenditure.
- The AIDS SUR thus uses transport indices.
- The probit refinement is needed only as long as there is a possibility
- that of no expenditure on transport.
- The only condition that must be met is that the transport group must have
- its prices move together.
- This can be verified with the price of cars and public transport expenditures
- over years - by observing the implicit deflators.
- In the final AIDS SUR, we do not use the inverse-mills provided by the
- probit - as such except when there is no expenditure on transportation.
- The expenditure therefore would use CPI as prices for transport and household
- purchases.
-\end_layout
-
-\begin_layout Standard
-the concerning for food quality.
- The constancy of relative price structure still allows one to consider
- quality metrics.
- What we are doing is to assume that the set of assets remain as demographic
- characteristics.
+To motivate the intertemporal problem, we present a cross-sectional analysis
+ of the quality and assets owned.
 \end_layout
 
 \begin_layout Section*
 Future Work
+\end_layout
+
+\begin_layout Standard
+We are only concerned with the status view of consumption.
+ In the cost function, the expenditure for a certain utility depends on
+ price of quality, minimum cost of having children (subsistence of family
+ members) and the cost of long-term assets - 
+\begin_inset Formula $c(u,p_{\kappa},p_{A},p_{\eta})$
+\end_inset
+
+.
+ For us to use anything close to the AIDS form, we must explain the cost
+ function with 
+\begin_inset Formula $\eta$
+\end_inset
+
+ and 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ .
+ One way is to extend Gorman theory in terms of 
+\begin_inset Formula $\eta$
+\end_inset
+
+ and 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ - which is equivalent to interpreting it in terms of 
+\begin_inset Formula $p_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{\kappa}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
