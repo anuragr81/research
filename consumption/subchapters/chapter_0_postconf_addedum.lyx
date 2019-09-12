@@ -85,14 +85,6 @@
 
 \begin_body
 
-\begin_layout Abstract
-After contrasting market-recorded prices with unit value based methods,
- an AIDS analysis is provided with limitations in the quality interpretations.
- The discussion moves on to the intertemporal problem and the need for discrete
- utility methods.
- The inverse mills approach is surveyed and provided for the problem.
-\end_layout
-
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -115,57 +107,70 @@ Introduction
 
 \begin_layout Standard
 A conventional utility analysis depends on price information.
- The needs of the consumers and the quality of the commodity needed both
- determine the price of the commodity in the market.
- To study the effect of income, social structure on quality across multiple
- commodity groups, we extend the typical utility analysis to include both
- quality and needs faced by the consumer.
- The needs of the consumers can be proxied with the number of members (age-adjus
-ted) in the household (and possibly other available scales) while quality
- can be measured as the portion of budget spent on high vs low-price items.
- With the AIDS model
+ When observed, the prices embody how the market evaluates the needs of
+ the consumers when subjected to supply pressures and how it makes available
+ several quality variants that may be substituted for the same purpose by
+ the consumer.
+ We enrich the typical utility analysis that is based on prices to include
+ the quality variation and the needs faced by the consumer in order to study
+ the effect of income and the position in social hierarchy on quality consumed
+ across multiple commodity groups.
+\end_layout
+
+\begin_layout Standard
+Here, the needs of the consumers can be proxied with the number of members
+ (age-adjusted) in the household (and possibly other available scales) while
+ quality can be measured as the portion of budget spent on high vs low-price
+ items.
+ Using the AIDS model
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonMuellbauerAIDS"
 
 \end_inset
 
-, the measures of needs should appear as the control variables in budget
- share equations while the quality-choices could appear as dependent variables
- (along with budget share).
- This is the approach taken by McKelvey 
+ with this simple formulation, the measures of needs can appear as the control
+ variables in the AIDS budget share equations while the quality-choices
+ could appear as dependent variables (along with budget share).
+ This is McKelvey's 
+\begin_inset Quotes eld
+\end_inset
+
+Unrestricted Method
+\begin_inset Quotes erd
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "McKelveyQuality2011"
 
 \end_inset
 
- that we demonstrate in the current analysis.
+ which we explore in the current chapter.
 \end_layout
 
 \begin_layout Standard
-Only food and energy.
+While the unrestricted method allows us to explain differences in quality
+ in consumer choice, it is neither sufficient to demonstrate the substitution
+ between assets purchased and quality demanded nor the discrete choices
+ that a consumer faces on less available items (such as electricity in Tanzania).
+ As our wider goal is to use the intertemporal substitution setting to understan
+d conspicuous consumption, we hope that the measurement of the extent to
+ which consumers may choose to save for future rather than overspend on
+ higher quality in the current time period subject to their needs could
+ help us employ the utility framework under uncertainty that has been explored
+ in great detail in the literature.
+ 
 \end_layout
 
 \begin_layout Standard
-We prefer to use weights nevertheless because the reasons OLS estimation
- provides in AIDS.
- Even if we used quantity it would have to the quality-adjusted quantity
- - as Nelson suggests.
-\end_layout
-
-\begin_layout Standard
-While the unrestricted method provided by McKelvey does allow us to explain
- differences in quality in consumer choice, it is not sufficient to demonstrate
- the substitution between assets purchased and quality demanded.
- As explained before, since we wish to understand conspicuous consumption
- with an intertemporal substitution approach, the modeling of uncertainty
- in choosing to save for future or to overspend is key to measurement of
- quality.
- It is possible to use the discrete choice models to model the uncertainty
+As a first step towards that purpose, we use a selection equation approach
+ to the conventional AIDS formulation to understanding quality for food
+ and non-food items in the current chapter.
+ We then motivate an exploration of the discrete choice models for uncertainty
  and the gaps in quality that arise out of observed inequalities.
- We compare the discrete model with a more conventional AIDS formulation
- for food quality in the current chapter.
+ 
 \end_layout
 
 \begin_layout Section*
@@ -173,37 +178,104 @@ Literature Survey
 \end_layout
 
 \begin_layout Standard
-While Deaton's AIDS methodology has been rightfully celebrated for its elegance
- and clarity, its implementations have unfortunately allowed some critical
- measurements errors - arising largely out of the lack of observed market
- prices.
- Even recently - when the unit value work has been done by work by Tafere
- et al 
+In the past decades, Deaton's AIDS methodology has been widely used for
+ its elegance and clarity.
+ Based on PIGL approaches originally popularised by Barten
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BartenPreferences"
+
+\end_inset
+
+, Gorman
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GormanPreference"
+
+\end_inset
+
+ and Muellbauer 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MuellbauerAggConsum"
+
+\end_inset
+
+), the method is simple to implement and yet readily conforms to the demand
+ function restrictions.
+ Still, an AIDS implementations - like any other demand studies - are often
+ ailed by the lack of observed market prices.
+ This is a limitation that can result in severe measurement errors (see
+ Gibson
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GibsonKimQualityBog2019"
+
+\end_inset
+
+ for a discussion).
+ The approach that is used quite often is to stick the implicit price-deflator
+ (or unit-values) as prices in the AIDS regressions (see Tafere et al 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "TafereTaffesseEthiopia2010"
 
 \end_inset
 
-.
- The effect of using price deflators (or the unit-value ) cause measurement
- error in a regression where quantities consumed both in the dependent variable
- (as budget share) and in the control variable (as prices).
- McKelvey 
+ for a recent example).
+ While this may be the best way to proceed when market price are not observed,
+ their use can result in a severe measurement error since the quantities
+ consumed by the consumer appear both in the dependent variable (as budget
+ share's numerator) in the AIDS regression (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_aids"
+
+\end_inset
+
+) and in the control variable (as the denominator for unit-value used as
+ price).
+ Since observing market prices prevents such measurements errors (see the
+ discussion by McKelvey 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "McKelveyQuality2011"
 
 \end_inset
 
- preference for the market-observed prices rather than the unit values is
- echoed by the current study.
+ and Gibson 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GibsonKimQualityBog2019"
+
+\end_inset
+
+), we prefer the methods for understanding quality that use market-observed
+ prices over those that use the unit values.
 \end_layout
 
 \begin_layout Standard
-Several extension to the AIDS model have been made for panel data analysis.
- For example, the demographic variables in the AIDS model are accommodated
- by the so-called demographic translation where the intercept 
+That is not to say that the lack of the market prices in the surveys makes
+ the AIDS methodology unusable - only that the correction of such measurement
+ errors may not be always trivial (see Deaton 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation,DeatonSurveyElasticities"
+
+\end_inset
+
+for one such approach and McKelvey
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ assessment of the Deaton method).
+ It would be fair to say that the extension of AIDS for other panel data
+ scenarios is relatively easier.
+ For example, the demographic variables in the AIDS model can be accommodated
+ with the so-called demographic translation where the intercept 
 \begin_inset Formula $\alpha_{i}$
 \end_inset
 
@@ -238,9 +310,9 @@ key "PollockWalesDemand"
 \end_inset
 
 ).
- The more common extension of AIDS is the dynamic AIDS model which often
- is based on differencing the budget shares over the time-periods (see Anderson
- Blundell 
+ Similarly, the structural changes in the parameters over time is addressed
+ with a dynamic AIDS formulation that is often based on differencing the
+ budget shares over the time-periods (see Anderson Blundell 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AndersonBlundellAIDSTest1983,AndersonBlundellDynEqn1982"
@@ -252,26 +324,27 @@ key "AndersonBlundellAIDSTest1983,AndersonBlundellDynEqn1982"
 \end_layout
 
 \begin_layout Standard
-An implementation of AIDS particularly relevant for the analysis of quality
- is presented by Heien and Wessells 
+Heien and Wessells 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HeienWessellsAIDSCensored1990"
 
 \end_inset
 
- who estimated quality elasticities by incorporating an inverse Mills ratio
- obtained by a first-stage probit with indicator dependent variables.
- The inverse mills ratio is thus calculated for every household using the
- regression equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_probit"
-
+ adjust AIDS to account for cases when there is no consumption on certain
+ items - by incorporating an inverse Mills ratio into the AIDS regressions.
+ This approach is particularly relevant for the analysis of quality since
+ the consumption on high quality goods is often 
+\begin_inset Quotes eld
 \end_inset
 
-where the dependent variable is an indicator variable - denoting whether
- the household 
+truncated
+\begin_inset Quotes erd
+\end_inset
+
+ for a significant part of the population.
+ This approach performs a first-stage probit where the dependent variable
+ is an indicator variable - denoting whether the household 
 \begin_inset Formula $h$
 \end_inset
 
@@ -284,6 +357,7 @@ where the dependent variable is an indicator variable - denoting whether
 \end_inset
 
  demographic variables) or not.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -298,14 +372,16 @@ Y_{ih} & =f(p_{1h},p_{2h},...,p_{nh},m_{h},d_{1h},d_{2h},...d_{sh})\label{eq:wes
 \end_layout
 
 \begin_layout Standard
-The inverse mills from the probit regression in the Equation 
+The inverse mills ratio is thus calculated for every household using the
+ probit regression equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:wessells_probit"
 
 \end_inset
 
- i.e.
+.
+ This ratio i.e.
  the quantity 
 \begin_inset Formula $R_{ih}=\begin{cases}
 \frac{\phi(p_{h},m_{h},d_{h})}{\Phi(p_{h},m_{h},d_{h})} & q_{ih}>0\\
@@ -314,7 +390,7 @@ reference "eq:wessells_probit"
 \end_inset
 
  is used as an instrument in following equation (second stage) to estimate
- the item-elasticities.
+ the item-elasticities as follows:
 \end_layout
 
 \begin_layout Standard
@@ -329,17 +405,18 @@ w & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{kh}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{jh})
 \end_layout
 
 \begin_layout Standard
-Typically we have 
+Here, we typically have 
 \begin_inset Formula $ln(P)=\alpha_{0}+\sum_{i=1}^{n}\alpha_{i}ln(p_{i})+\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\gamma_{ij}ln(p_{i})ln(p_{j})$
 \end_inset
 
- - however, a simpler linear-AIDS formulation is often used so that
+.
+ However, a simpler linear-AIDS formulation is often used so that 
 \begin_inset Formula $P=\sum_{i=1}^{n}w_{i}ln(p_{ih})$
 \end_inset
 
- is simply the Stone's index.
- The inverse-mills instrument must also comply with the symmetry and homogeneity
--restrictions and thus one must ensure that 
+ (the Stone's index).
+ Notice that the inverse-mills instrument must also comply with the symmetry
+ and homogeneity-restrictions and thus one must ensure that 
 \begin_inset Formula $\sum_{i=0}^{n}\delta_{i}R_{ih}=0$
 \end_inset
 
@@ -360,18 +437,61 @@ Typically we have
 \end_inset
 
 .
- Unfortunately, Heien-Wessells also use price deflators (i.e.
- the unit-value method) - which can make the measurement errors worse complicate
-d as the price simply isn't available when the indicator variable is zero
- i.e.
- when the consumers don't consumer an item ( Heien-Wessells use a regression
- with prices/unit-values obtained from users who do consume the item against
- the region, income corresponding to the consumers who don't consume the
- item).
+ Heien-Wessells implementation choose a more general approach for the instrument
+ variable by adding an equation to the system with term 
+\begin_inset Formula $\delta_{i}R_{ih}$
+\end_inset
+
+ is replaced by 
+\begin_inset Formula $-\sum_{i=0}^{n-1}\delta_{i}R_{ih}$
+\end_inset
+
+so that the additivity condition is always met.
+ Unfortunately, the implementation also suffers with the lack of market
+ prices - which is probably made worse by having to stick in unit-values
+ obtained consumers' using an item on to for those who don't consume the
+ item.
+ This is needed because the price simply isn't available when the indicator
+ variable is zero i.e.
+ when the consumers don't consumer an item
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In fact, Heien-Wessells use a regression with unit-values obtained from
+ users who do consume the item as the dependent variable and with control
+ variables as their region, income etc.
+ .
+ The values thus obtained are used as price for the consumers who don't
+ consume the item.
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Similar issues would need to be dealt in the so-called RDMP (
+Deaton method
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation"
+
+\end_inset
+
+ gets around the price-deflator (unit-value) issues by using the cluster-average
+s fitted budget shares and unit-values (which are used instead of the unobserved
+ prices).
+ Even though Deaton uses these methods for a cross-sectional analysis, the
+ intuition can be easily extended to panel data (see McKelvey 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ for this extension).
+ We note that the so-called RDMP (
 \begin_inset Quotes eld
 \end_inset
 
@@ -387,44 +507,34 @@ key "CoxWohlgenant1986"
 
 \end_inset
 
-) - which has also been implemented for (see Gibson and Kim 
+) - used for studying quality variation in commodities when market prices
+ are not available - would also suffer with this issue of measurement error
+ (see Gibson and Kim 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "GibsonKimQualityBog2019"
 
 \end_inset
 
- for details).
- Deaton method
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonQualityQuantityVariation"
-
-\end_inset
-
- gets around the price-deflator (unit-value) issues by using the cluster-average
-s fitted budget shares and unit-values (which are used instead of the unobserved
- prices).
- While Deaton uses these methods for a cross-sectional analysis, the intuition
- can be easily extended to the panel data (see McKelvey 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "McKelveyQuality2011"
-
-\end_inset
-
- for details).
+ for further details).
+ 
 \end_layout
 
 \begin_layout Section*
-Data 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:PriceData"
+
+\end_inset
+
+Data - Price Extraction 
 \end_layout
 
 \begin_layout Standard
 As noted before, out of the food, energy, transport and household commodity
  groups, we only consider quality differences in food and energy subgroups
  - whereas the other commodity groups are viewed as groups where asset possessio
-n (or ownership long-term durable goods) matters more than quality variation.
+n (or ownership of long-term durable goods) matters more than quality variation.
  As we further explain, prices observed in the market are of key importance
  to our measure of quality.
  Further, since we don't use price-deflators in our analysis (due the measuremen
@@ -437,8 +547,8 @@ t errors that arise with quantity being in both in the denominator of the
 LSMS Tanzania surveys records the prices observed in the markets spread
  across all regions in the country.
  These prices are available for both food and energy commodity groups.
- We groups the items within these commodities according to the relative
- structure of the price time-series observed from 2008 to 2014 (see McKelvey
+ We group the items within these commodities according to the relative structure
+ of the price time-series observed from 2008 to 2014 (see McKelvey
 \begin_inset CommandInset citation
 LatexCommand cite
 key "McKelveyQuality2011"
@@ -457,13 +567,12 @@ reference "fig:LSMSMarketPrices"
 \end_layout
 
 \begin_layout Standard
-Here is the list of issue that were observed in the available price data
- as well as the solutions adopted to address them.
+Here is a list issues that were observed in the available price data as
+ well as the solutions adopted to address them.
 \end_layout
 
-\begin_layout Standard
-1.
- A lot of items were recorded with the unit as pieces/
+\begin_layout Enumerate
+A lot of items were recorded with the unit as pieces/
 \begin_inset Quotes erd
 \end_inset
 
@@ -522,23 +631,20 @@ reference "fig:LSMSMarketPrices"
 .
 \end_layout
 
-\begin_layout Standard
-2.
- A few outliers price observations are also rejected.
+\begin_layout Enumerate
+A few outlier price observations are rejected.
  
 \end_layout
 
-\begin_layout Standard
-3.
- A household in the consumption data is identified down to the village and
- enumeration area level - but we do not expect the surveys to record market-pric
-es at every possible enumeration area and village.
- Thus we associate a district level price to a household's consumed item.
+\begin_layout Enumerate
+While a household in the LSMS consumption data is identified down to the
+ village and enumeration area level - we do not expect the surveys to record
+ market-prices at every possible enumeration area and village.
+ We instead associate a district level price to a household's consumed item.
  In other words, we link the price of an item consumed by a household to
  the household only as long as the price is observed in the same district
- where the household is located.
- It is worth clarifying that we make no attempts to arrive at a price granularit
-y lower than that of a district.
+ where the household is located and make no attempts to arrive at a price
+ granularity lower than that of a district.
  Whenever there are multiple price observations at the district level, we
  arrive a district-level price using a regression (discussed below).
  For items such as electricity and gas which are limited to a few urban
@@ -560,7 +666,7 @@ key "HeienWessellsAIDSCensored1990"
 .
  Further, there are instances when the prices are not available at the district
  levels either.
- For these cases, we use the regional averages are used (i.e.
+ For these cases, we use the regional averages (i.e.
  the next level of granularity available).
  
 \end_layout
@@ -571,7 +677,7 @@ We now describe the regression of marked-price against quantity that we
  To explain this regression, let's consider an example of the marked prices
  of rice (let's say) for 1 kg, 2kg, 5kg and 10kg in the market.
  A typical set of marked prices could be 4£, 7.5£, 18£ and 35£ respectively.
- The plot would look like the one in Figure 
+ The plot would thus look like the one in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:markedprices"
@@ -596,9 +702,9 @@ reference "fig:markedprices"
 \end_inset
 
  the quantity consumed) is hardly appropriate.
- As if often the case (not just in this example), the unit-prices are slightly
- less than linear as is shown in the plot of the unit-price corresponding
- to the quantities in Figure 
+ As if often the case, such unit-prices grow at a less than linear rate
+ as is shown in the plot of the unit-price corresponding to the quantities
+ in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:unitprice"
@@ -614,10 +720,11 @@ reference "fig:unitprice"
 status open
 
 \begin_layout Plain Layout
-If we were to really look for a perfect match of prices, then not only the
- quantities consumed but the month of the household interview would also
- need to matched with that of the price recorded.
- The prices are hardly available to such density in consumption surveys.
+If we were to really look for a perfect match for prices, then we should
+ not only match the quantities consumed but also the time of the household
+ interview with that of the price recorded.
+ The survey prices are hardly available at such levels of granularity in
+ the consumption surveys.
 \end_layout
 
 \end_inset
@@ -665,7 +772,7 @@ reference "fig:markedprices"
 status open
 
 \begin_layout Plain Layout
-This does not happen as frequently as one may fear.
+This does not happen as frequently as one may imagine.
  For 2010, only 9 identified regions for just 6 items have less than three
  marked-prices available.
 \end_layout
@@ -690,21 +797,20 @@ This does not happen as frequently as one may fear.
 With the prices we obtain after the regression, we match the price for every
  commodity consumed by the household based on the district it is located
  in.
- The next step is to define the groups based on price-structure.We use broad
- classification of food items for separability.
- Within foods we observe protein, fruits, densefoods, freshveg and nonfresh.
+ The next step is to define the groups based on price-structure.
+ We use broad classification of food items for separability.
+ Within foods we observe protein, fruits, dense-foods, alcohol, complements,
+ fresh and non-fresh groups.
  Within energy, we put kerosene and electricity under the same category.
- It is assume that everyone would have a fixed proportion of these in their
- diet.
  
 \end_layout
 
 \begin_layout Standard
-It can argued that we're introducing some selection bias by using the national-v
-alues wherever the prices are unavailable.
+One can argue that a selection bias is introduced while using the national-value
+s wherever the prices are unavailable.
  However, since the unavailability of regional averages ails only about
  ~4% of the total price observations, the bias thus introduced is likely
- not significant.
+ insignificant.
  Another issue could be taken with our grouping of commodities - due to
  the classification relying on an annual time-series.
  It could be that the price of some items is more volatile or more detailed
@@ -883,16 +989,54 @@ An analysis of substitution between quality is not complete without establishing
  conform to the usual demand restrictions i.e.
  the conditions of homogeneity, adding up and non-negativity of the Slutsky
  matrix.
- It could be tempting argue that a consumer also observes a price for quality.
+ It could be tempting argue that a consumer also observes a price for quality
+ and hence price of quality must appear in the econometric analysis - however,
+ as we explain price of quality uniquely corresponds to the price of the
+ commodity aggregate - which itself needs to satisfy a certain aggregation
+ conditions.
+\end_layout
+
+\begin_layout Standard
+In our discussion on quality, we use the nomenclature provided by Cramer
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CramerIncomePrice1973"
+
+\end_inset
+
+ so that 
+\begin_inset Quotes eld
+\end_inset
+
+goods
+\begin_inset Quotes erd
+\end_inset
+
+ are variants with different quality that all fall under a 
+\begin_inset Quotes eld
+\end_inset
+
+commodity
+\begin_inset Quotes erd
+\end_inset
+
+ (also see Cox
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CoxWohlgenant1986"
+
+\end_inset
+
+ for the notes on this nomenclature).
+ Before we delve further into how quality could be represented, we survey
+ the various approaches towards quality measurement that have been taken
+ in the literature whenever the quantity consumed is measured by the researcher.
  
 \end_layout
 
 \begin_layout Standard
-Before we delve further into how quality could be represented, we survey
- the various approaches towards quality measurement that have been taken
- in the literature whenever the quantity consumed is available to the researcher.
- The simplest of these approaches to is view the demand for a high-quality
- item as more of the low-cost item .
+The simplest of these approaches to is view the demand for a high-quality
+ item as more of the low-cost item.
  This approach strives to obtain an adjustment factor for the demand based
  on the consumption on items(see Griliches 
 \begin_inset CommandInset citation
@@ -969,30 +1113,33 @@ key "DeatonEconConsumer"
 \end_layout
 
 \begin_layout Standard
-In earlier an discussion on status consumption, we have explained how the
+In an earlier discussion on status consumption, we have explained how the
  demanded quality could be motivated by status needs.
- While an obvious first step may seem to infer the price of quality (or
- status) in the market., we choose to interpret quality from the substitution
- between the wider commodity groups.
+ It may seem apt to infer the price of quality (or status) in the market
+ to view how status needs are priced.
+ However our approach is to interpret quality from the substitution between
+ the wider commodity groups.
  In doing so, one does not really need the price of quality in the cost-function
  (or the budget share regression) - even though quality is treated as a
  separate commodity.
- This is because we already have the real prices of the items - and a valid
- composite good price (base-price) uniquely determines the price of the
- quality
+ This is because we already have a valid composite good price (base-price)
+ from the real prices of the items - an aggregate price that determines
+ the price of quality
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Alternately, one could interpret the quality in the market as the gradient
- of price of preferred items (sorted by price or otherwise).
- This too would lead to a formulation equivalent to the aggregation problem.
- Consider for example that for energy, such a gradient would be calculated
+One could indeed interpret the quality in the market as the gradient of
+ price of preferred items (sorted by price or otherwise).
+ This too would however lead to a formulation equivalent to the aggregation
+ problem.
+ Consider for example that with energy, such a gradient would be calculated
  with the price one has to pay to get more of electricity.
- In food, this would be the price one has to pay to get more of meat etc.
- The formulation effectively relies on the basket consumed - and is thus
- equivalent to the composite aggregated method (which in turn relies on
- a composite aggregate price).
+ Similarly, for food, this would be the price one has to pay to get more
+ of meat etc.
+ The formulation effectively relies on the basket aggregate consumed - and
+ is thus equivalent to the composite aggregated method (which in turn relies
+ on a composite aggregate price).
 \end_layout
 
 \end_inset
@@ -1125,38 +1272,54 @@ red weighted quantity as the quality-adjusted quantity and express the pair
  and there is no price needed for the quality value calculated in the above
  fashion.
  This is slightly different from the Deaton's approach - which is to view
- quality as a separate good in this formulation.
+ quality as a separate good.
 \end_layout
 
 \begin_layout Standard
-Even though the quality metric used above is based on the rather stringent
- condition of a constant relative price structure(the Hicks aggregation
- commodity theorem).
- Quality can be aggregated only as long as the goods within the group can
- be ordered on a certain criteria.
- For meat, there is no reason to think that goat is of higher quality than
- beef if the former is costlier.
- It takes the right granularity of the price differences - for the quantity
- aggregate to make sense.
- Beef and goat may not be compared but the qualities of protein could.
- Quality of protein can be calculated.
- How quality changes with respect to changes in asset ownership, age etc.
+It is worth emphasising that the quality metric used above is based on the
+ rather stringent condition of a constant relative price structure (i.e.
+ the Hicks aggregation commodity theorem).
+ At a more fundamental level, quality can be aggregated only as long as
+ the goods within the group can be ordered on a certain criteria.
+ This order is the judgment of the researcher - not the consumer.
+ For the meat commodity group, as an example, there may be no reason to
+ think that goat is of higher quality than beef if the former is slightly
+ costlier.
+ However, quality differences are easier to explain if the price differences
+ are larger - e.g.
+ with the choice of pulses over chicken under the protein category.
+ This judgment of quality should thus be interpreted by the researcher at
+ an appropriate level of granularity.
+ This is indeed a prerequisite for the quantity aggregate to make sense.
  
 \end_layout
 
 \begin_layout Standard
-We cannot talk about quality metric 
+It would appear that while such a quality metric can be used to understand
+ consumption of quality, it is limited by the aggregated view that makes
+ it desirable
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice also that we cannot talk about the quality metric 
 \begin_inset Formula $\nu_{G}$
 \end_inset
 
- without the quantity observed.
- The more serious problem is idea of viewing a higher quality product in
- terms of a lower quality product.
- the demand of a better good in a commodity group as a multiple of the worse
- good - e.g.
- by considering electricity in terms of the coal used into one aggregate
- is likely to be problematic (see the discussion on consumer indices in
- Fisher-Shell 
+ unless the quantity of consumption is observed (as if often the case with
+ food).
+ 
+\end_layout
+
+\end_inset
+
+.
+ The approaches that view a higher quality product in terms of a lower quality
+ product are somewhat problematic when the items vary widely.
+ The demand of a better good in a commodity group as a multiple of the worse
+ good may be plausible for meat/food but considering electricity in terms
+ of the coal used into one aggregate is likely to be problematic (see the
+ discussion on consumer indices in Fisher-Shell 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "FisherShell1968"
@@ -1164,10 +1327,9 @@ key "FisherShell1968"
 \end_inset
 
  ).
- More generally while such a quality metric can be used to understand consumptio
-n of quality, it is limited by the aggregated view that makes it desirable.
- substitution between the choice of energy between kerosene and electricity
- is not as straightforward as between qualities of protein
+ More fundamentally, the substitution between the choice of energy between
+ kerosene and electricity is not as straightforward as between qualities
+ of protein
 \begin_inset Foot
 status open
 
@@ -1180,54 +1342,73 @@ For energy in the LSMS data, such a quality measure cannot be calculated
 \end_inset
 
 .
- The continuous measures make sense only in a Houthakker-like setting where
- a mixture of high and low quality items are consumed.
- In non-food categories, the quality differences are more discrete (more
- so in the developing countries) i.e.
- the consumers either consume a certain quantity of an item or they don't.
- It may be often possible to proxy such differences as regional differences,
+ Thus the continuous measures make more sense in a Houthakker-like setting
+ where a mixture of high and low quality items are consumed.
+ In non-food categories (e.g.
+ transport) the quality differences are more discrete (more so in the developing
+ countries) and the consumers either consume a certain quantity of an item
+ or they don't at all.
+ While it is often possible to proxy such differences as regional differences,
  but the fact remains that a consumer faces a discrete choice more often
  in non-food categories.
- we thus prefer not to aggregate demand across such items and seek appropriate
- selection approaches.
+ One therefore seek appropriate selection approaches before aggregating
+ demand over such items.
 \end_layout
 
 \begin_layout Standard
-Since we do wish to interpret status consumption using the conventional
- techniques and the consumer's perception of risk we wish to view assets
- vs quality.
- We also consider that the consumer may be saving for assets rather.
- A discrete approach does offer an understanding of cross-substitutions
- between products but it doesn't provide a sense of substitution between
- quality and assets.
- Since our goal is to understand how consumer get status (which they get
- more immediately from assets).
- This necessitates an intertemporal model and the asset ownership.
- The goal would be to use asset ownership on the RHS.
- This could be extended to the time-series analysis where changes in assets
- and changes in quality could other household-characteristics would need
- to be considered.
- 
-\end_layout
-
-\begin_layout Standard
-While we do assume a weak separability of commodity groups for quantity
+With these caveats we can attempt to explain quality changes with respect
+ to changes in asset ownership, age etc.
+ in a population.
+ Since our wider goal is to explain status consumption using the intertemporal
+ substitution and the consumer's perception of risk, we compare asset ownership
+ and needs with the consumption of quality as well.
+ While we do assume a weak separability of commodity groups for quantity
  - we argue that despite there being a possible inertia in doing so, the
- consumers may substitute between quality over commodity groups.
+ consumers may substitute between quality over commodity groups and assets
+ owned.
  For example, rise of prices of electricity could potentially affect food
  quality - even though the quantity consumed may be limited by needs.
+ An analysis of the cross-price effects i.e.
+ the effect of prices of non-food items on food quality can test for this
+ substitution.
  The data from possession of assets can further indicate the differences
  between asset ownership bands.
- This should be evident in the analysis of cross-price effect of price on
- quality across multiple commodity groups.
- We compare two methods used for this task.
- In the first, we use a continuous measure of quality - where electricity
- consumed in a dummy variable (as are the assets).
- In the second method, an instrument variable approach is used.
- We argue for direct discrete method to be make more sense of applications
- in status and conspiucous consumption - particularly due to the relevance
- of asset ownership - while suggesting a third method.
+ However, in the current chapter, we have only used asset ownership as one
+ of the control variables.
+ A comparison of changes in asset ownership over time with changes in quality
+ across several household-characteristics is to be explored in the subsequent
+ chapters.
+\end_layout
+
+\begin_layout Standard
+We now provide a comparison of two variants of the AIDS model used for measuring
+ quality elasticities in the literature.
+ We assess their relevance, shortcomings before suggesting an adaption to
+ our goals.
+ The first AIDS variant (McKelvey 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+) uses a continuous measure of quality (as defined above) - except for electrici
+ty (which is simply an indicator variable).
+ Asset ownership also appears as indicator variables in this method.
+ In the second variant, an instrument variable approach is used (Heien-Wessells
  
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+
+\end_inset
+
+).
+ We argue in favour of a discrete method - which we believe would make more
+ sense in the conspicuous consumption contexts - particularly due to the
+ relevance of asset ownership.
+ A cross-section analysis of quality and assets purchased is then provided
+ to motivate the needs for discrete modeling of choice.
 \end_layout
 
 \begin_layout Subsection*
@@ -1239,74 +1420,62 @@ LA AIDS model
 \end_layout
 
 \begin_layout Standard
-Even though a conventional AIDS formulation does not model the intertemporal
- substitution, the condition C1 allows us to compare the quality variation
- in certain commodity groups with the durable good possession in others
- (We rule out the use of a two-state budgeting model since such this substitutio
-n exists between commodity groups).
-\end_layout
-
-\begin_layout Standard
-The commodity groups used for the analysis are food, energy, household and
- transportation
+While a typical AIDS formulation does not model the intertemporal substitution,
+ the condition C1 allows us to compare the quality variation in certain
+ commodity groups with the durable good possession in others
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-We use the nomenclature provided by Cramer
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CramerIncomePrice1973"
-
-\end_inset
-
- where goods are variants with different quality that all fall under a commodity
- (also see Cox
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CoxWohlgenant1986"
-
-\end_inset
-
- for the usage notes)
+Recall that we rule out the use of a two-state budgeting model since a substitut
+ion exists between commodity groups due to this very condition.
 \end_layout
 
 \end_inset
 
 .
- We use the indexes for CPI for housing and transportation as we consider
- the expenditure on them as elementary consumption.
- We do not observe quality differences in the consumption on household items
- (toilet rolls, clothing etc.) or transportation in the data..
+ The commodity groups used for the analysis are food, energy, household
+ and transportation.
+ The CPI for housing and transportation are used as we consider the expenditure
+ on them as elementary consumption.
+ In other words, we do not observe quality differences in the consumption
+ on household items (toilet rolls, clothing etc.) or transportation.
  The expenditure on housing and transportation are thus treated as they
  were one commodity whereas different variants of proteins and starches
  (i.e.
- goods) are considered.
- In other words, the quality differences are considered only for food and
- energy commodities while for both transportation and housing, assets are
- deemed more important.
+ goods) are considered - for both transportation and housing, assets/LTDG
+ are deemed more important.
 \end_layout
 
 \begin_layout Standard
-Base-price becomes the quantity price.
- Composite quantity in the Nelson sense a quality adjusted quantity measure.
- and thus the quality calculated as a price-ratio weighted measure
+The base-price in every group (obtained in the price analysis detailed in
+ Section ) is simply the minimum price of the goods within the commodity
+ group.
+ This serves as price of the commodity whose budget share is set as the
+ dependent variable in the AIDS equations.
+ The composite quality serves as the dependent variable in the additional
+ quality equations in the AIDS formulation
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Quantity elasticitities are related with quality elasticities with the relations
-hip: .
- The income elasticity of is this composite quantity is the sum of income
- elasticity of quality and the income elasticity of physical quantity.
+Quantity elasticitities are related with quality elasticities with the following
+ relationship: the income elasticity of composite quantity is the sum of
+ income elasticity of quality and the income elasticity of physical quantity
+ (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+).
  
 \end_layout
 
 \end_inset
 
-.
- The quality becomes as additional equations in the AIDS formulation (see
- McKelvey
+(see McKelvey
 \begin_inset CommandInset citation
 LatexCommand cite
 key "McKelveyQuality2011"
@@ -1320,15 +1489,24 @@ key "AndalonGibsonSoda2017,GibsonKimQualityBog2019"
 
 \end_inset
 
- for implementations of this method).
+ for implementations of McKelvey's 
+\begin_inset Quotes eld
+\end_inset
+
+Unrestricted method
+\begin_inset Quotes erd
+\end_inset
+
+).
+ 
 \end_layout
 
 \begin_layout Standard
-For transport as well as for household products, we ignore quality differences
- in the expenditure.
- The AIDS SUR thus uses CPI as prices for transport and household purchases.
- Further, we keep the asset possession (and band identity) as demographic
- characteristics in these equations.
+Since we ignore quality differences in the expenditure on transport as well
+ as for household categories, the AIDS SUR uses CPI as prices for these
+ groups.
+ The asset possessions (and band identity) are represented as demographic
+ characteristics (indicator variables) in these equations.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1336,15 +1514,10 @@ A selection equation approach
 \end_layout
 
 \begin_layout Standard
-The probit refinement is needed only as long as there is a possibility that
- of no expenditure in a group.
- The demand across the following are intended to be separable.
- The probit would be for all the items (not for starch) - but for all items
- in the survey (bananas, kassava, wheat, electricity, kerosene).
- The dependent variable for  the probit is the dummy indicating whether
- the quantity was consumed or not.
- The control variables are not just starch and protein - but.
- Assuming that prices exist, the inverse mill ratio can be obtained.
+The justification for a probit refinement is only that there is a possibility
+ that of no expenditure in a commodity group.
+ The dependent variable for  the probit is the dummy variable indicating
+ whether the quantity was consumed or not.
 \end_layout
 
 \begin_layout Subsection*
