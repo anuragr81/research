@@ -45,6 +45,10 @@ lsms_loader<-function(fu,ln,lgc) {
     return (c(7,12,19,53)) 
   }
   
+  atoi <- function(x) {
+    return(as.integer(as.character(x)))
+  }
+  
   load_diary_file <-function(dirprefix,year,fu,ln){
     ##
     if (year == 2014){
@@ -56,7 +60,7 @@ lsms_loader<-function(fu,ln,lgc) {
       k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
       #*    Ignored items where there is no associated cost
       k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
-      k$item<-k$item+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
+      k$item<-as.integer(as.character(k$item))+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
       factor <- 52
       
       #*    Multiplied weekly diary data by 52 (to look at annual data)
@@ -145,7 +149,7 @@ lsms_loader<-function(fu,ln,lgc) {
       k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
       #*    Ignored items where there is no associated cost
       k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
-      k$item<-k$item+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
+      k$item<-as.integer(as.character(k$item))+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
       factor <- 52
       
       #*    Multiplied weekly diary data by 52 (to look at annual data)
@@ -229,7 +233,7 @@ lsms_loader<-function(fu,ln,lgc) {
       k$hhid <-as.character(k$hhid)
       #*    Ignored items where there is no associated cost
       k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
-      k$item<-k$item+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
+      k$item<-atoi(k$item)+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
       factor <- 52
       
       #*    Multiplied weekly diary data by 52 (to look at annual data)
@@ -318,7 +322,7 @@ lsms_loader<-function(fu,ln,lgc) {
       k$hhid <-as.character(k$hhid)
       
       k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
-      k$item<-k$item+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
+      k$item<-atoi(k$item)+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
       factor <- 52
       
       #*    Multiplied weekly diary data by 52 (to look at annual data)
@@ -537,7 +541,7 @@ lsms_loader<-function(fu,ln,lgc) {
     
     
     datConsum$price  <-datConsum$cost/datConsum$quantity
-    datConsum        <-subset(datConsum,item>10000)
+    datConsum        <-datConsum[atoi(datConsum$item)>10000,]
     datConsum        <-merge(datConsum,ddply(datConsum,.(hhid),summarise,x=sum(cost)))
     if (year == 2010){
       ii               <-merge(ln()@items_codes_2010(),read.csv(shortNamesFile)[c("calories","shortname","group")],by=c("shortname"))
@@ -637,7 +641,7 @@ lsms_loader<-function(fu,ln,lgc) {
     cj$price      <-cj$price/cj$lwp
     
     cj$has_number <- !grepl("[^0-9]+",cj$item) & !is.na(cj$item)
-    cj$code       <- mapply( function(has_number,item) { if(has_number) { as.integer(item)+10000 } else { item }}, 
+    cj$code       <- mapply( function(has_number,item) { if(has_number) { as.integer(as.character(item))+10000 } else { item }}, 
                              cj$has_number, 
                              as.character(cj$item))
     #cj$code       <- sapply(cj$item,function(x) {if (is.na(as.integer(x))) x else as.integer(x)+10000 } )
@@ -684,7 +688,7 @@ lsms_loader<-function(fu,ln,lgc) {
   
   aggregate_local_prices<-function (cp){
     
-    cp<-subset(cp,!is.na(price) & item >10000 & !is.na(region))
+    cp<-subset(cp,!is.na(price) & as.integer(as.character(item)) >10000 & !is.na(region))
     
     prices<-merge(ddply(cp,.(item,region),summarise,localmedianprice=mean(quantile(price,c(.4,.6)))),ddply(cp,.(item),summarise,natmedianprice=mean(quantile(price,c(.4,.6)))))
     
@@ -1559,7 +1563,7 @@ lsms_loader<-function(fu,ln,lgc) {
     price_reg_dstt  <-merge(market_prices_regional,matched_district_prices,by=c("region","shortname"),all.y=TRUE)
     price_nat_reg_dstt <-merge(market_prices_national,price_reg_dstt,by=c("shortname"),all.y=TRUE)
     if (filter_out_nonfood == TRUE){
-      price_nat_reg_dstt <- subset(price_nat_reg_dstt,item>10000);
+      price_nat_reg_dstt <- subset(price_nat_reg_dstt,as.integer(as.character(item))>10000);
     }
     
     
@@ -1593,7 +1597,12 @@ lsms_loader<-function(fu,ln,lgc) {
     #market_prices_national <- ddply(marketpricesdata,.(shortname),summarise,reg_price_nat=get_regressed_market_price(lwp=lwp,price=price))[,c("shortname","reg_price_nat")]
     diarywithregiondistrict <- merge(ddata,unique(ohsdata[,c("hhid","region","district")]),all.x=TRUE)
     k<-merge(diarywithregiondistrict,prices,all.x=TRUE)
-    noregionprice <- subset(k,is.na(region) & is.na(price))
+    if (dim(k)[1]>0){
+      noregionprice <- subset(k,is.na(region) & is.na(price))      
+    } else {
+      noregionprice <- k
+    }
+
     ignored_items <- as.character(unique(noregionprice$shortname))
     print(paste("add_market_price_to_fooddiary - Could not find prices for:", toString(ignored_items)))
     diary                   <- subset(k,!is.element(shortname,ignored_items))
@@ -1728,7 +1737,7 @@ lsms_loader<-function(fu,ln,lgc) {
     }
   }
   
-  group_collect <- function(year,dirprefix,categoryName,fu,ln,lgc,ld, ohs, hh,basis, use_market_prices) {
+  group_collect <- function(year,dirprefix,categoryName,fu,ln,lgc,ld, ohs, hh,basis, use_market_prices, return_before_agg) {
     
     if (length(categoryName)>1){
       stop("group_collect: use one categoryname")
@@ -1789,7 +1798,7 @@ lsms_loader<-function(fu,ln,lgc) {
       } else {
         print ("Using survey's market prices")
         mktprices <- load_market_prices(year = year, dirprefix = dirprefix,fu = fu , ln = ln, use_pieces = FALSE)
-        fooddiarydata      <- subset(hh,item>10000)
+        fooddiarydata      <- subset(hh,as.integer(as.character(item))>10000)
         hhp <- add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices,ohsdata=ohs,ddata=fooddiarydata)
         #handle non-food and missing items here
         #notice that we don't worry about items which we don't have diary data for
@@ -1823,6 +1832,10 @@ lsms_loader<-function(fu,ln,lgc) {
         # get price ratio for every group
         hhpg$price_ratio <- with (hhpg,price/min_price) 
         hhpg <- plyr::rename(hhpg,c("lwp"="quantity"))
+      }
+      
+      if (return_before_agg){
+        return(hhpg)
       }
       
       # calculate sum of quantity consumed

@@ -144,6 +144,33 @@ plot_weights <- function(dat,categories,set_device_off,config_pair){
   }
 }
 
+inverse_mills <- function(item_codes_func,diarydata,ohsdata,year,groups){
+  categ        <- "energy"
+  filtereddiary <- subset(diarydata,is.element ( shortname , subset(groups,category==categ)$shortname) )
+  x<-merge(expand.grid(hhid=unique(filtereddiary$hhid),shortname=unique(filtereddiary$shortname)),filtereddiary,all.x=TRUE)[,c("shortname","hhid","cost")]
+  x <- merge(plyr::rename(item_codes_func()[,c("shortname","code")],c("code"="item") ),x,all.y=TRUE )
+  x[is.na(x$cost),]$cost <- 0
+  x$hasex                <- as.integer(with(x,cost>0))
+  x$cost                 <- NULL
+  extendeddata <- merge(x,filtereddiary[,c("hhid","shortname","cost","item","lwp_unit","lwp","own_unit","own","gift_unit","gift")], 
+                    by = c("shortname","hhid","item"),
+                    all.x=TRUE)
+  
+  
+  g <- ll@group_collect(year = year, dirprefix = "../",categoryName = categ,
+                        fu = fu, ln=lsms_normalizer,lgc = lgc, ld = ldat, ohs = ohsdata, hh = extendeddata, basis = "quality",
+                        use_market_prices = TRUE,
+                        return_before_agg = TRUE)
+  
+  
+  xr <- merge(x,unique(g[,c("hhid","region", "district")]),by=c("hhid"),all.x=TRUE)
+  prices                 <- unique(g[,c("shortname","region","district","price")])
+  xrp <- merge(xr, prices,by=c("region","shortname","district"),all.x=TRUE)
+  
+  xg                     <- merge(x[,c("hhid","shortname","price","hasex")],g,all.x=TRUE,by=c("hhid","shortname"))
+  return(xg)
+}
+
 plot_price_tseries <-function(row_pair,ignore_items,fu,switch_off,market_prices_national2008,market_prices_national2010,market_prices_national2012,market_prices_national2014) {
   
   if (missing(ignore_items)){
