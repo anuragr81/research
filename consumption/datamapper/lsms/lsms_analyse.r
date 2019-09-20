@@ -165,7 +165,7 @@ get_inverse_mills_data <- function(allgroupsdat,dirprefix){
   for (yr in c(2010, 2012, 2014)){
     cdat <- ll@load_diary_file(dirprefix = dirprefix, year = yr, fu = fu, ln = lsms_normalizer)
     odat <- ll@load_ohs_file(year = yr, dirprefix = dirprefix, fu = fu, ln= lsms_normalizer)
-    gat  <- subset(allgroupsdat, year == yr)
+    gdat  <- subset(allgroupsdat, year == yr)
     for (catg in get_categories()){
       
       
