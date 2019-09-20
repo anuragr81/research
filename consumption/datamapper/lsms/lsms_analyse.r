@@ -179,7 +179,7 @@ get_inverse_mills_data <- function(allgroupsdat,dirprefix){
       print("Unknown year")
     }
 
-    for (catg in setdiff(get_categories(), c("household","transport"))[1:2]){
+    for (catg in setdiff(get_categories(), c("household","transport"))){
 
       im <- inverse_mills(item_codes_func = icf, diarydata = cdat, ohsdata = odat, year = yr, 
                           groups = lsms_normalizer()@lsms_groups_qualitybased_2010_2012(),categ = catg)
@@ -201,7 +201,9 @@ get_inverse_mills_data <- function(allgroupsdat,dirprefix){
     }
     #imp_with_prices <- merge(imp,unique(im[,c("hhid","shortname","hasex","cost")]),all=TRUE,by="hhid")
     
-    k<- merge(gdat,imdat,by=c("hhid","year"),all.x=TRUE)
+    k<- merge(imdat,aggprices,by=c("hhid"),all.x=TRUE)
+    print(paste("1-2:",setdiff(colnames(outdat),colnames(k))))
+    print(paste("2-1:",setdiff(colnames(k),colnames(outdat))))
     outdat <- rbind(outdat,k)
   }
   
