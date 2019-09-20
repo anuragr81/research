@@ -11,14 +11,14 @@ get_categories <- function(){
   return (c("densefoods","nonfresh","fruitsveg","protein","alcohol","complements","energy","household","transport"))
 }
 
-run_test <- function(dat,year){
+load_group <- function(dat,year){
   
   categories <- get_categories()
   if (missing(dat)){
-      dat <- ll@group_expenditure(year = year, dirprefix = "../",
-                                  fu = fu , ln = lsms_normalizer, lgc=lgc,
-                                  basis = "quality", categoryNames = categories,returnBeforeGrouping = FALSE,
-                                  ld = ldat, minConsumerNumber = 5,use_market_prices=TRUE)
+    dat <- ll@group_expenditure(year = year, dirprefix = "../",
+                                fu = fu , ln = lsms_normalizer, lgc=lgc,
+                                basis = "quality", categoryNames = categories,returnBeforeGrouping = FALSE,
+                                ld = ldat, minConsumerNumber = 5,use_market_prices=TRUE)
   }
   for (categ in categories){
     dat[,paste("w_",categ,sep="")] <- dat[,paste(categ,"_tot_categ_exp",sep="")]/dat$total_expenditure
@@ -143,9 +143,44 @@ plot_weights <- function(dat,categories,set_device_off,config_pair){
     hist(dat[,c(colname)],breaks=100,main=categ,xlab=colname)
   }
 }
-
-inverse_mills <- function(item_codes_func,diarydata,ohsdata,year,groups){
-  categ        <- "energy"
+# EXAMPLE: 
+# im <- inverse_mills(item_codes_func = ln@items_codes_2010, diarydata = c2010, ohsdata = o2010 ,year = 2010,groups = ln@lsms_groups_qualitybased_2010_2012(),categ="energy") 
+get_inverse_mills_data <- function(allgroupsdat,dirprefix){
+  if (missing(allgroupsdat)){
+    g2010 <- load_group(year=2010)
+    
+    g2012 <- load_group(year=2012) 
+    
+    g2014 <- load_group(year=2014)
+    g2010$year <- 2010
+    g2012$year <- 2012
+    g2014$year <- 2014
+    commoncols <- intersect(intersect(colnames(g2010),colnames(g2012)),colnames(g2014))
+    allgroupsdat <- rbind(g2010[,commoncols],g2012[,commoncols])
+    allgroupsdat <- rbind(allgroupsdat,g2014[,commoncols])
+    
+  }
+  dat <- NULL
+  
+  for (yr in c(2010, 2012, 2014)){
+    cdat <- ll@load_diary_file(dirprefix = dirprefix, year = yr, fu = fu, ln = lsms_normalizer)
+    odat <- ll@load_ohs_file(year = yr, dirprefix = dirprefix, fu = fu, ln= lsms_normalizer)
+    gat  <- subset(allgroupsdat, year == yr)
+    for (catg in get_categories()){
+      
+      
+      im <- inverse_mills(item_codes_func = ln@items_codes_2010, diarydata = cdat, ohsdata = odat, year = yr, 
+                          groups = lsms_normalizer()@lsms_groups_qualitybased_2010_2012(),categ = catg, allg = gdat)
+      im$year <- yr
+      dat <- rbind(dat,im)
+    }
+  }
+  
+  return(dat)
+  
+}
+inverse_mills <- function(item_codes_func,diarydata,ohsdata,year,groups,categ,allg){
+  
   filtereddiary <- subset(diarydata,is.element ( shortname , subset(groups,category==categ)$shortname) )
   x<-merge(expand.grid(hhid=unique(filtereddiary$hhid),shortname=unique(filtereddiary$shortname)),filtereddiary,all.x=TRUE)[,c("shortname","hhid","cost")]
   x <- merge(plyr::rename(item_codes_func()[,c("shortname","code")],c("code"="item") ),x,all.y=TRUE )
@@ -153,22 +188,26 @@ inverse_mills <- function(item_codes_func,diarydata,ohsdata,year,groups){
   x$hasex                <- as.integer(with(x,cost>0))
   x$cost                 <- NULL
   extendeddata <- merge(x,filtereddiary[,c("hhid","shortname","cost","item","lwp_unit","lwp","own_unit","own","gift_unit","gift")], 
-                    by = c("shortname","hhid","item"),
-                    all.x=TRUE)
+                        by = c("shortname","hhid","item"),
+                        all.x=TRUE)
   
   
-  g <- ll@group_collect(year = year, dirprefix = "../",categoryName = categ,
-                        fu = fu, ln=lsms_normalizer,lgc = lgc, ld = ldat, ohs = ohsdata, hh = extendeddata, basis = "quality",
-                        use_market_prices = TRUE,
-                        return_before_agg = TRUE)
+  im <- ll@group_collect(year = year, dirprefix = "../",categoryName = categ,
+                         fu = fu, ln=lsms_normalizer,lgc = lgc, ld = ldat, ohs = ohsdata, hh = extendeddata, basis = "quality",
+                         use_market_prices = TRUE,
+                         return_before_agg = TRUE)
   
+  imp <- im[,c("shortname","price","hhid")] %>% spread(shortname,price)
+  colnames (imp) <- as.character(sapply(colnames(imp), function(x) { if(is.element(x,c("hhid"))) {x} else {paste("price_",x,sep="")} }))
+  k<- merge(allg,imp,by="hhid",all.x=TRUE)
   
-  xr <- merge(x,unique(g[,c("hhid","region", "district")]),by=c("hhid"),all.x=TRUE)
-  prices                 <- unique(g[,c("shortname","region","district","price")])
-  xrp <- merge(xr, prices,by=c("region","shortname","district"),all.x=TRUE)
+  #  xr <- merge(x,unique(g[,c("hhid","region", "district")]),by=c("hhid"),all.x=TRUE)
+  #  prices                 <- unique(g[,c("shortname","region","district","price")])
+  #  xrp <- merge(xr, prices,by=c("region","shortname","district"),all.x=TRUE)
+  #  xg                     <- merge(xrp[,c("hhid","shortname","price","hasex")],g,all.x=TRUE,by=c("hhid","shortname"))
   
-  xg                     <- merge(x[,c("hhid","shortname","price","hasex")],g,all.x=TRUE,by=c("hhid","shortname"))
-  return(xg)
+  return(k)
+  
 }
 
 plot_price_tseries <-function(row_pair,ignore_items,fu,switch_off,market_prices_national2008,market_prices_national2010,market_prices_national2012,market_prices_national2014) {

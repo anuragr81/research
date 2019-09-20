@@ -2065,7 +2065,7 @@ lsms_loader<-function(fu,ln,lgc) {
         
         for (categ in categoryNames){
           to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,ld=ld,categoryName=categ
-                                       ,hh=hh,basis=basis, ohs=ohs,use_market_prices=use_market_prices)
+                                       ,hh=hh,basis=basis, ohs=ohs,use_market_prices=use_market_prices, return_before_agg=FALSE)
           print(paste("To be added: ", toString(colnames(to_be_added))))
           qualitydat     <-   rbind(qualitydat,to_be_added[,c("hhid","category","quality")])
           minpricedat   <-   rbind(minpricedat,to_be_added[,c("hhid","category","min_price")])
@@ -2086,7 +2086,7 @@ lsms_loader<-function(fu,ln,lgc) {
         
       } else if (basis == "price" || basis == "sparseness") {
         vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,ld=ld,categoryName=categoryNames,
-                               hh=hh,basis=basis, ohs=ohs, use_market_prices=use_market_prices)
+                               hh=hh,basis=basis, ohs=ohs, use_market_prices=use_market_prices, return_before_agg=FALSE)
       } else {
         stop (paste("category names not handled for basis:",basis))
       }
