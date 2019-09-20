@@ -145,7 +145,7 @@ plot_weights <- function(dat,categories,set_device_off,config_pair){
 }
 # EXAMPLE: 
 # im <- inverse_mills(item_codes_func = ln@items_codes_2010, diarydata = c2010, ohsdata = o2010 ,year = 2010,groups = ln@lsms_groups_qualitybased_2010_2012(),categ="energy") 
-get_inverse_mills_data <- function(allgroupsdat,dirprefix){
+get_inverse_mills_data <- function(allgroupsdat,dirprefix,years){
   if (missing(allgroupsdat)){
     g2010 <- load_group(year=2010)
     
@@ -160,27 +160,27 @@ get_inverse_mills_data <- function(allgroupsdat,dirprefix){
     allgroupsdat <- rbind(allgroupsdat,g2014[,commoncols])
     
   }
-    
+  
   outdat<- NULL
   
-    for (yr in c(2010, 2012, 2014)){
+  for (yr in years){
     cdat <- ll@load_diary_file(dirprefix = dirprefix, year = yr, fu = fu, ln = lsms_normalizer)
     odat <- ll@load_ohs_file(year = yr, dirprefix = dirprefix, fu = fu, ln= lsms_normalizer)
-    gdat  <- subset(allgroupsdat, year == yr)
+    
     imdat <- NULL
     aggprices <- NULL
     if (yr == 2010){
       icf = lsms_normalizer()@items_codes_2010
     } else if (yr == 2012){
       icf = lsms_normalizer()@items_codes_2012
-    } else if (year == 2014){
+    } else if (yr == 2014){
       icf = lsms_normalizer()@items_codes_2014
     } else {
       print("Unknown year")
     }
-
+    
     for (catg in setdiff(get_categories(), c("household","transport"))){
-
+      
       im <- inverse_mills(item_codes_func = icf, diarydata = cdat, ohsdata = odat, year = yr, 
                           groups = lsms_normalizer()@lsms_groups_qualitybased_2010_2012(),categ = catg)
       
@@ -188,7 +188,11 @@ get_inverse_mills_data <- function(allgroupsdat,dirprefix){
       if (!is.element("category",colnames(im))){
         print("inverse mills are assumed to be grouped by category")
       }
-      prices <- im[,c("shortname","price","hhid")] %>% spread(shortname,price)
+      if (catg=="nonfresh"){
+        
+      }
+      print (paste("Spreading data for category - ",catg))
+      prices <- unique(im[,c("shortname","price","hhid")]) %>% spread(shortname,price)
       colnames (prices) <- as.character(sapply(colnames(prices), function(x) { if(is.element(x,c("hhid"))) {x} else {paste("price_",x,sep="")} }))
       
       if (is.null(aggprices) ) {
@@ -202,12 +206,28 @@ get_inverse_mills_data <- function(allgroupsdat,dirprefix){
     #imp_with_prices <- merge(imp,unique(im[,c("hhid","shortname","hasex","cost")]),all=TRUE,by="hhid")
     
     k<- merge(imdat,aggprices,by=c("hhid"),all.x=TRUE)
-    print(paste("1-2:",setdiff(colnames(outdat),colnames(k))))
-    print(paste("2-1:",setdiff(colnames(k),colnames(outdat))))
-    outdat <- rbind(outdat,k)
+    if (!is.null(outdat)) {
+      commoncols <- intersect(colnames(k),colnames(outdat))
+      
+      missing_in_k <- setdiff(colnames(outdat),colnames(k))
+      if (length(missing_in_k)>0) {
+        print(paste("Following columns were missing in year",yr,"-",toString(missing_in_k)))
+      }
+      
+      missing_in_outdat <- setdiff(colnames(k),colnames(outdat))
+      if (length(missing_in_outdat)>0) {
+        print(paste("Following columns were ignored for year",yr," due to them not being there in the past years - ",toString(missing_in_outdat)))
+      }
+      
+      outdat <- rbind(outdat[,commoncols],k[,commoncols])
+      
+    } else {
+      outdat <- k
+    }
+    
   }
   
-  return(dat)
+  return(outdat)
   
 }
 inverse_mills <- function(item_codes_func,diarydata,ohsdata,year,groups,categ){
