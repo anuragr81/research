@@ -3,9 +3,20 @@ source('translation/frameutils.R');source('lsms/lsms_normalizer.r');source('lsms
 source('lsms/lsms_group_collect.r'); source('lsms/lsms_datastorage.R')
 #assign("last.warning", NULL, envir = baseenv())
 
+run_test <- function(yr) {
+  # gcols obtained using: toString(paste("'",colnames(x),"'",sep=""))
+  gcols <- c('hhid', 'total_expenditure', 'toteducexpense', 'tothouserent',  'hsize', 'consu', 'highest_educ', 'age'
+             , 'expensiveregion', 'popdensity','region','district','litlang',
+             'isrural', 'isurbanp', 'occupation', 'occupation_rank', 'years_community', 
+             'housingstatus', 'roomsnum',  'floormaterial', 'cookingfuel', 'is_resident', 'ln_tot_exp', 'year')
+  
+  ag <- unique(allgroupsdat[,gcols])
+  agi <- merge(ag,i,all.x=TRUE,by=c("hhid","year","region", "district"))
+  ydat <- subset(agi,year==yr)
 
-
-
+  for (sn in as.character(unique(ydat$shortname))) { if (!is.na(sn)) { dat <- subset(ydat,shortname==sn); write_dta(dat,paste('c:/temp/dat',yr,'_',sn,'.dta',sep="")) } } 
+  return(agi)
+}
 
 get_categories <- function(){
   return (c("densefoods","nonfresh","fruitsveg","protein","alcohol","complements","energy","household","transport"))
@@ -144,7 +155,8 @@ plot_weights <- function(dat,categories,set_device_off,config_pair){
   }
 }
 # EXAMPLE: 
-# im <- inverse_mills(item_codes_func = ln@items_codes_2010, diarydata = c2010, ohsdata = o2010 ,year = 2010,groups = ln@lsms_groups_qualitybased_2010_2012(),categ="energy") 
+
+
 get_inverse_mills_data <- function(allgroupsdat,dirprefix,years){
   if (missing(allgroupsdat)){
     g2010 <- load_group(year=2010)
@@ -180,32 +192,34 @@ get_inverse_mills_data <- function(allgroupsdat,dirprefix,years){
     }
     
     for (catg in setdiff(get_categories(), c("household","transport"))){
+    #for (catg in c("fruitsveg","densefoods")){
       
       im <- inverse_mills(item_codes_func = icf, diarydata = cdat, ohsdata = odat, year = yr, 
                           groups = lsms_normalizer()@lsms_groups_qualitybased_2010_2012(),categ = catg)
       
       im$year <- yr
       if (!is.element("category",colnames(im))){
-        print("inverse mills are assumed to be grouped by category")
-      }
-      if (catg=="nonfresh"){
-        
+        stop("inverse mills are assumed to be grouped by category")
       }
       print (paste("Spreading data for category - ",catg))
-      prices <- unique(im[,c("shortname","price","hhid")]) %>% spread(shortname,price)
-      colnames (prices) <- as.character(sapply(colnames(prices), function(x) { if(is.element(x,c("hhid"))) {x} else {paste("price_",x,sep="")} }))
+      pricedat <- unique(im[,c("shortname","price","region","district")])  %>% mutate(id=paste(as.character(region),as.character(district),sep="-"))
+      #prices <- unique(im[,c("shortname","price","hhid")]) %>% spread(shortname,price)
       
+      prices   <- pricedat[,c("shortname","id","price")] %>% spread(shortname,price)
+      #colnames (prices) <- as.character(sapply(colnames(prices), function(x) { if(is.element(x,c("hhid"))) {x} else {paste("price_",x,sep="")} }))
+      colnames (prices) <- as.character(sapply(colnames(prices), function(x) { if(is.element(x,c("id"))) {x} else {paste("price_",x,sep="")} }))
+      prices <- merge(subset(unique(pricedat[,c("region","district","id")]),!is.na(region)),prices,by="id")
+      prices$id <- NULL
       if (is.null(aggprices) ) {
         aggprices <- prices
       } else {
-        aggprices <- merge(prices,aggprices,by="hhid",all=TRUE)
+        aggprices <- merge(prices,aggprices,by=c("region","district"),all=TRUE)
       }
       imdat <- rbind(imdat,im)
       
     }
-    #imp_with_prices <- merge(imp,unique(im[,c("hhid","shortname","hasex","cost")]),all=TRUE,by="hhid")
-    
-    k<- merge(imdat,aggprices,by=c("hhid"),all.x=TRUE)
+
+    k<- merge(imdat,aggprices,by=c("region","district"),all.x=TRUE)
     if (!is.null(outdat)) {
       commoncols <- intersect(colnames(k),colnames(outdat))
       
@@ -248,11 +262,6 @@ inverse_mills <- function(item_codes_func,diarydata,ohsdata,year,groups,categ){
                          use_market_prices = TRUE,
                          return_before_agg = TRUE)
   
-  
-  #  xr <- merge(x,unique(g[,c("hhid","region", "district")]),by=c("hhid"),all.x=TRUE)
-  #  prices                 <- unique(g[,c("shortname","region","district","price")])
-  #  xrp <- merge(xr, prices,by=c("region","shortname","district"),all.x=TRUE)
-  #  xg                     <- merge(xrp[,c("hhid","shortname","price","hasex")],g,all.x=TRUE,by=c("hhid","shortname"))
   
   return(im)
   
