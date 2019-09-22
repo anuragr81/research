@@ -3,23 +3,52 @@ source('translation/frameutils.R');source('lsms/lsms_normalizer.r');source('lsms
 source('lsms/lsms_group_collect.r'); source('lsms/lsms_datastorage.R')
 #assign("last.warning", NULL, envir = baseenv())
 
-run_test <- function(yr) {
+run_test <- function(yr,i) {
   # gcols obtained using: toString(paste("'",colnames(x),"'",sep=""))
   gcols <- c('hhid', 'total_expenditure', 'toteducexpense', 'tothouserent',  'hsize', 'consu', 'highest_educ', 'age'
              , 'expensiveregion', 'popdensity','region','district','litlang',
              'isrural', 'isurbanp', 'occupation', 'occupation_rank', 'years_community', 
              'housingstatus', 'roomsnum',  'floormaterial', 'cookingfuel', 'is_resident', 'ln_tot_exp', 'year')
+  #ag <- unique(allgroupsdat[,gcols])
+  #agi <- merge(ag,i,all.x=TRUE,by=c("hhid","year","region", "district"))
+  #ydat <- subset(agi,year==yr)
+  #for (sn in as.character(unique(ydat$shortname))) { if (!is.na(sn)) { dat <- subset(ydat,shortname==sn); write_dta(dat,paste('c:/temp/dat',yr,'_',sn,'.dta',sep="")) } } 
+  #return(agi)
   
-  ag <- unique(allgroupsdat[,gcols])
-  agi <- merge(ag,i,all.x=TRUE,by=c("hhid","year","region", "district"))
-  ydat <- subset(agi,year==yr)
-
-  for (sn in as.character(unique(ydat$shortname))) { if (!is.na(sn)) { dat <- subset(ydat,shortname==sn); write_dta(dat,paste('c:/temp/dat',yr,'_',sn,'.dta',sep="")) } } 
-  return(agi)
+  return(tot)
+  
 }
 
+
+sum_items <- function(millsdata){
+  
+  itemcosts <- millsdata[,c("hhid","shortname","cost","year")]
+  itemcosts[is.na(itemcosts$cost),]$cost <- 0
+  print("Checking for duplicates in household expenditure on items")
+  dupcheck    <- ddply(itemcosts,.(shortname,hhid,year),summarise, n = length(cost))
+  if (dim(subset(dupcheck,n>1))[1]>0){
+    stop("Duplicates found in the diary")
+  }
+  print("Summing up items expenditure")
+  totsn    <- ddply(itemcosts,.(shortname,hhid,year),summarise, item_exp = sum(cost))
+  print("Summing up diary expenditure")
+  totdiary <- ddply(itemcosts,.(hhid,year),summarise, totdiary = sum(cost))
+  print("Merging total and item expenditurecs")
+  tot      <- merge(totdiary,totsn,by=c("hhid","year"))
+  
+  tot$w       <- with(tot,item_exp/totdiary)
+  tottospread <- tot %>% mutate(id=paste(tot$hhid,tot$year,sep="-"))
+  mapping     <- unique(tottospread[,c("hhid","year","id")])
+  
+  stot  <- tottospread[,c("id","shortname","w")] %>% spread(shortname,w)
+  stot[is.na(stot)] <- 0
+  colnames (stot) <- as.character(sapply(colnames(stot), function(x) { if(is.element(x,c("id"))) {x} else {paste("w_",x,sep="")} }))
+  totm      <- merge(mapping,stot,by="id")
+  totm$id   <- NULL
+  return(totm)
+}
 get_categories <- function(){
-  return (c("densefoods","nonfresh","fruitsveg","protein","alcohol","complements","energy","household","transport"))
+  return (c("densefoods","nonfresh","fruitsv@eg","protein","alcohol","complements","energy","household","transport"))
 }
 
 load_group <- function(dat,year){

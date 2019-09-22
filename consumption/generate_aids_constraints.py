@@ -38,5 +38,8 @@ def generate_constraints(categories):
 #categ= ["Beef","Pork","Chicken"]
 
 #categ = ["densefoods","nonfresh"]
-categ=["nonfresh","densefoods","complements","fruitsveg","protein","alcohol","energy","household","transport"]
+#categ=["nonfresh","densefoods","complements","fruitsveg","protein","alcohol","energy","household","transport"]
+
+#categ=['banana_green', 'banana_ripe', 'beef', 'beer', 'bread', 'brews', 'bunscakes', 'canned_milk', 'cassava_flour', 'cassava_fresh', 'charcoal', 'chicken', 'citrus', 'coconut', 'cooking_oil', 'dried_canned_fish', 'dried_canned_veg', 'eggs', 'electricity', 'fish_seafood', 'fresh_milk', 'gas', 'goat', 'greens', 'kerosene', 'maize_flour', 'maize_grain', 'maize_green', 'mangoes', 'millet_flour', 'millet_grain', 'onion', 'othervegstarch', 'pasta', 'peanuts', 'petrol', 'pork', 'potatoes', 'pulses', 'rice_husked', 'rice_paddy', 'salt', 'sugar', 'sugarcane', 'sweet_potato', 'tea', 'wheat', 'winespirits', 'yam']
+categ=['banana_ripe', 'beef','beer']
 syms = generate_constraints(categ)
