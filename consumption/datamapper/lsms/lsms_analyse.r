@@ -19,7 +19,7 @@ run_test <- function(yr,i) {
   
 }
 
-prepare_mills_aids <-function (allgroupsdat, itemsw){
+prepare_mills_aids <-function (allgroupsdat, itemsw, pricesi){
   prepdat <- allgroupsdat[,c("hhid","year","total_expenditure","ln_tot_exp","consu", "highest_educ",
                              "age" , "expensiveregion" , "occupation_rank","is_resident","housingstatus")]
   nonna_highest_educ <-subset(allgroupsdat,!is.na(highest_educ))$highest_educ
@@ -29,7 +29,15 @@ prepare_mills_aids <-function (allgroupsdat, itemsw){
   prepdat$highest_educ <- NULL
   prepdat$housingstatus <- NULL
   mdat <- merge(prepdat,itemsw,by=c("hhid","year"))
-  return(mdat)
+  mdatp <- merge(mdat,pricesi,by=c("hhid","year"))
+  sz = grep("^price_",colnames(k))
+  if (length(sz)>0){
+    for (col in colnames(mdatp)[sz]){
+      lpcolname <- paste("lp",gsub("price_","",col),sep="")
+      mdatp[,lpcolname] <- log(mdatp[,col]+1e-7)
+    }
+  }
+  return(mdatp)
 }
 
 sum_items <- function(millsdata){
@@ -233,7 +241,7 @@ get_inverse_mills_data <- function(allgroupsdat,dirprefix,years){
     }
     
     for (catg in setdiff(get_categories(), c("household","transport"))){
-    #for (catg in c("fruitsveg","densefoods")){
+      #for (catg in c("fruitsveg","densefoods")){
       
       im <- inverse_mills(item_codes_func = icf, diarydata = cdat, ohsdata = odat, year = yr, 
                           groups = lsms_normalizer()@lsms_groups_qualitybased_2010_2012(),categ = catg)
@@ -259,7 +267,7 @@ get_inverse_mills_data <- function(allgroupsdat,dirprefix,years){
       imdat <- rbind(imdat,im)
       
     }
-
+    
     k<- merge(imdat,aggprices,by=c("region","district"),all.x=TRUE)
     if (!is.null(outdat)) {
       commoncols <- intersect(colnames(k),colnames(outdat))

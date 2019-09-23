@@ -46,7 +46,7 @@ def generate_equations(categslist, varlist):
     logNames = [x[1] for x in get_log_names(categslist)]
 
     for i,cat in enumerate(categslist):
-        print ('global demand' + str(i+1) + ' ("' + 'q'+cat+": " + ' '.join(varlist) + ' ' +  ' '.join(logNames) +'")')  
+        print ('global demand' + str(i+1) + ' "(' + 'q'+cat+": " + 'w_'+cat + ' ' +  ' '.join(varlist) + ' ' +  ' '.join(logNames) +')"')  
     return ("sureg " + ' '.join(['$demand'+str(j+1) for j in range(0,len(categslist))])) # $demand1 $demand2 $demand3 $demand4 $demand5 $demand6 , const(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21) isure
 
 
@@ -55,8 +55,8 @@ def generate_equations(categslist, varlist):
 #categ = ["densefoods","nonfresh"]
 #categ=["nonfresh","densefoods","complements","fruitsveg","protein","alcohol","energy","household","transport"]
 
-#categ=['banana_green', 'banana_ripe', 'beef', 'beer', 'bread', 'brews', 'bunscakes', 'canned_milk', 'cassava_flour', 'cassava_fresh', 'charcoal', 'chicken', 'citrus', 'coconut', 'cooking_oil', 'dried_canned_fish', 'dried_canned_veg', 'eggs', 'electricity', 'fish_seafood', 'fresh_milk', 'gas', 'goat', 'greens', 'kerosene', 'maize_flour', 'maize_grain', 'maize_green', 'mangoes', 'millet_flour', 'millet_grain', 'onion', 'othervegstarch', 'pasta', 'peanuts', 'petrol', 'pork', 'potatoes', 'pulses', 'rice_husked', 'rice_paddy', 'salt', 'sugar', 'sugarcane', 'sweet_potato', 'tea', 'wheat', 'winespirits', 'yam']
-categ=['banana_ripe', 'beef','beer']
+categ=['banana_green', 'banana_ripe', 'beef', 'beer', 'bread', 'brews', 'bunscakes', 'canned_milk', 'cassava_flour', 'cassava_fresh', 'charcoal', 'chicken', 'citrus', 'coconut', 'cooking_oil', 'dried_canned_fish', 'dried_canned_veg', 'eggs', 'electricity', 'fish_seafood', 'fresh_milk', 'gas', 'goat', 'greens', 'kerosene', 'maize_flour', 'maize_grain', 'maize_green', 'mangoes', 'millet_flour', 'millet_grain', 'onion', 'othervegstarch', 'pasta', 'peanuts', 'petrol', 'pork', 'potatoes', 'pulses', 'rice_husked', 'rice_paddy', 'salt', 'sugar', 'sugarcane', 'sweet_potato', 'tea', 'wheat', 'winespirits', 'yam']
+#categ=['banana_ripe', 'beef','beer']
 varlist = ["educ_rank", "age"]
 
 constraints = generate_constraints(categ,varlist)
