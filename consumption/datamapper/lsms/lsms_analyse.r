@@ -19,6 +19,18 @@ run_test <- function(yr,i) {
   
 }
 
+prepare_mills_aids <-function (allgroupsdat, itemsw){
+  prepdat <- allgroupsdat[,c("hhid","year","total_expenditure","ln_tot_exp","consu", "highest_educ",
+                             "age" , "expensiveregion" , "occupation_rank","is_resident","housingstatus")]
+  nonna_highest_educ <-subset(allgroupsdat,!is.na(highest_educ))$highest_educ
+  prepdat$educ_rank <- (allgroupsdat$highest_educ- min(nonna_highest_educ))/(max(nonna_highest_educ)-min(nonna_highest_educ))
+  prepdat$is_rented <- as.integer(as.integer(as.character(allgroupsdat$housingstatus))==4)
+  #consu + educ_rank + age + expensiveregion + occupation_rank + is_resident + is_rented
+  prepdat$highest_educ <- NULL
+  prepdat$housingstatus <- NULL
+  mdat <- merge(prepdat,itemsw,by=c("hhid","year"))
+  return(mdat)
+}
 
 sum_items <- function(millsdata){
   
