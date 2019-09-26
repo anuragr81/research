@@ -1719,14 +1719,14 @@ A selection equation approach
 \begin_layout Standard
 
 \size small
-We use a selection approach to account for the non-consumption of a certain
+A selection approach is used to account for the non-consumption of a certain
  items.
- A non-consumption corrected estimate of elasticities helps explain the
- effect of prices and household income on the demand for expensive items.
- The consumption microdata used for these estimates is from 2010, 2012 and
- 2014.
- The estimates are obtained with a pooled statis-AIDS analysis as described
- above (see Equations 
+ The non-consumption corrected estimates of demand elasticities are then
+ used to explain the effect of prices and household income on the demand
+ for every item.
+ The consumption microdata from 2010, 2012 and 2014 are used for these estimates
+ - which are obtained with a pooled statis-AIDS method as described above
+ (see Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:wessells_probit"
@@ -1741,12 +1741,11 @@ reference "eq:wessells_aids"
 \end_inset
 
 ).
- As discussed before, the first-stage probit is used as a refinement to
- an item-wise AIDS which would have been appropriate in a more homogeneous
- dataset.
- The probit - with the dependent variable being the indicator variable that
- is unity when the item is consumed and zero otherwise - calculates the
- inverse-imlls ratio (as indicated in the Equation 
+ The first-stage probit provides the refinement to the item-wise AIDS which
+ would have been appropriate in a more homogeneous dataset.
+ This probit - with the dependent variable being the indicator variable
+ that is unity when the item is consumed and zero otherwise - calculates
+ the inverse-imlls ratio (as indicated in the Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:invmills"
@@ -1770,56 +1769,41 @@ reference "eq:wessells_aids"
 
 ).
  Notice that the instrument is calculated for every household and every
- item.
+ item and is part of the additivity constraint that is used for estimation
+ (see Appendix).
+\end_layout
+
+\begin_layout Standard
+
+\size small
+The imposition of constraints of symmetry, additivity and homogeneity is
+ essential as it facilitates the discussion of the effect of cross-elasticities
+ on demand (measured as budget shares).
+ The results thus obtained with a seemingly-unrelated regression (SUR) after
+ imposing the constraints are presented in the Appendix.
+ The own-price and cross-price elasticities provide us an overview of the
+ demand across several commodities.
+ For example, mangoes and rice seem to be substitutes while fish seems to
+ be a complement to cassava-flour ([qfish_seafood]lpcassava_flour <0 etc.)
+ rice.
+ Similarly, fresh milk is a complement to beef, beer, cassava_flour ([qcassava_f
+lour]lpfresh_milk = -0.001), greens but a substitute to bread and mangoes.
  
 \end_layout
 
 \begin_layout Standard
 
 \size small
-For example, a discussion of cross-elasticities is facilitated if the conditions
- of symmetry and homogeneity have been imposed.
- The results obtained with seemingly-unrelated regression (SUR) after imposing
- the constraints are presented in the Appendix.
- The detailed cross-price elasticities provide us an overview of the demand
- across several commodities.
- Mangoes and rice seem to be substitutes while fish seems to be a complement
- to cassava-flour ([qfish_seafood]lpcassava_flour = -0.005 etc.) rice but
- substitute for greens.
- Similarly, fresh milk is complement to beef, beer, cassava_flour ([qcassava_flo
-ur]lpfresh_milk = -0.001), greens but a substitute to bread and mangoes.
- 
-\end_layout
-
-\begin_layout Standard
-
-\size small
-Such an item-wise analysis sufficiently demonstrates a differences in items
- that are consumed in rural households (where availability of greens and
- fruits seems more abundant) vs those in urban households (where beef, charcoal
- and beer are more easily available) .
- The elasticities against income and education show that the items available
- in the industrialised regions of the Tanzania seem to have positive elasticitie
-s for income and education rank whereas the items of agrarian production
- seem to matter less to the highly educated, middle-age populations huddled
- in the urban areas.
- A comparison of how consumers respond to changes in kerosene and electricity
- prices offers a similar view of concentration of industrial items.
- It isn't simply that the electricity consumers are more likely to consume
- the more expensive items.
- While kerosene-electricity are complements in the data,  it is evident
- that those who have electricity are likely to be supplementing it with
- kerosene whereas those with no electricity cannot substitute with the other.
- A contrast between the items that are influenced by electricity and kerosene
- confirms this claim - as items such as rice, beef are less sensitive to
- electricity than to kerosene.
- 
-\end_layout
-
-\begin_layout Standard
-
-\size small
-While many of such insights could be offered with a simpler cross-sectional
+The item-wise analysis points to a difference between items that are consumed
+ in rural households (where availability of greens and fruits seems more
+ abundant) vs those in urban households (where beef, charcoal and beer are
+ more easily available).
+ The elasticities against income and education also show that the items
+ available in the industrialised regions of the Tanzania seem to have positive
+ elasticities for income and education rank whereas the items of agrarian
+ production seem to matter less to the highly educated, middle-age populations
+ huddled in the urban areas.
+ While many of such insights could be offered with a simpler cross-sectional
  analysis using a regression of total expenditure on the item against the
  total expenditure by the household etc.
  (an approach that is followed in much of the literature on conspicuous
@@ -1833,36 +1817,63 @@ key "ZahraIndia,KausSA,CharlesHurstRace"
 ), the censored AIDS formulation was favoured as it allows us to both understand
  the cross-price effects in a more robust framework and account for the
  non-consumption of items.
- That said, there are limitations to the item-wise approach in general.
- A discussion of items such as above effectively way to a discussion of
- quality of items - i.e.
- the behaviour of consumers when faced with multiple varieties of different
- quality and price.
- The literature groups the items somewhat arbitrarily - often sorted them
- on the basis of a "visibility" criteria.
- Our approach is to use quality measures to to summarise the insights from
- the item-wise approach used for demand elasticities.
- Two further issues are dealt with simultaneously.
- First, the cross-elasticities could be due to indirect effects that are
- not evident in the analysis.
- For example, the cross-elasticities of kerosene with buns or cassava is
- not as informative unless one observes the consumption pattern more of
- the items more closely (more buns means less cooking in the household etc.).
+ 
+\end_layout
+
+\begin_layout Standard
+
+\size small
+A comparison of how consumers respond to changes in kerosene and electricity
+ prices further confirms the concentrated availability of industrial items.
+ That is to say, it isn't simply that the electricity consumers are more
+ likely to consume the more expensive items but that a certain items become
+ less relevant in the urban settings or are not available in the rural settings.
+ The contrast between the items that are influenced by electricity and those
+ by kerosene illustrates this split - as the demand for items such as rice,
+ beef is less e sensitive to electricity than it is to kerosene.
+\end_layout
+
+\begin_layout Standard
+
+\size small
+Despite the detailed view that cross-elasticities provide, there are limitations
+ to an item-wise approach.
+ The detailed cross-elasticities as above are more likely to fluctuate over
+ time and may require us to use a dynamic approach - where an inertia or
+ myopia in choices can be maintained.
+ However, since our concern is with the choice of quality exercised by the
+ consumer when faced with multiple varieties of several qualities and price,
+ we take an aggregated view of the basket that is sorted based on price.
+ The availability of price information across the years prevents the problems
+ that may be faced by other grouping criteria - such as the visibility criteria
+ use in the literature on conspicuous consumption - that are not easy to
+ observe over time.
+\end_layout
+
+\begin_layout Standard
+
+\size small
+The aggregated view takes care of two further issues simultaneously.
+ First, it adds a functional view to the consumer choice that is not available
+ in an item-wise approach.
+ For example, the cross-elasticities of kerosene with buns or cassava cannot
+ be interpreted unless one imposes other assumptions on the closely observed
+ consumption patterns (e.g.
+ more buns would means less cooking in the household etc.).
  Observing consumption at a higher level e.g.
- with separability assumptions facilitates the analysis of cross-price effects.
- This is indeed the goal for aggregation.
- While the literature has done it on visibility criteria - the insufficient
- justifications for these make it of limited for a panel data analysis.
- Whenever aggregation is possible, it provide a way to interpret the consumer
- basket based on quality - representing the substitution between broader
- categories and the price variants within the commodities.
- Second, the aggregation provide the intermediate step to merge the recall
+ with separability assumptions facilitates the interpretation of cross-price
+ effects.
+ Whenever aggregation is possible (subject to restrictions), it can provide
+ a way to interpret the consumer choice for quality - while representing
+ the substitution between broader categories and the price variants within
+ the commodities in the econometric model.
+ Second, the aggregation provides an intermediate step to merge the recall
  and diary methods.
- As such, the diary items are recorded with more details than the recall
- items (the types of phones, clothes purchased by the consumers are hardly
- recorded in the surveys).
- The aggregation represents the diary data at a coarser granularity - one
- that can be matched with that of the recall method.
+ We note that the items are often recorded with more details for the diary
+ items than for the recall items (the types of phones, clothes purchased
+ by the consumers are hardly recorded in the surveys for example).
+ An aggregation effectively represents the diary data at a coarser granularity
+ - one that can be matched with that of the recall method.
 \end_layout
 
 \begin_layout Subsection*
