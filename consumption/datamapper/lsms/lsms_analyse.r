@@ -15,8 +15,32 @@ write_mills_input <- function (allgroupsdat,millsi,yr){
   for (sn in as.character(unique(ydat$shortname))) { if (!is.na(sn)) { dat <- subset(ydat,shortname==sn); write_dta(dat,paste('c:/temp/dat',yr,'_',sn,'.dta',sep="")) } } 
   
 }
+read_stata_aids_results <- function(r,read_coeff){
+  #load results 
+  colnames(r) <- c("name","coeff","se","z","p","l","r" )
+  namesrow <- c(as.integer(rownames(subset(r,is.na(coeff)))),dim(r)[1]+1)
+  out <- NULL
+  for ( i in seq(length(namesrow)-1) ) { 
+    start = namesrow[i]
+    end = namesrow[i+1]-1
+    x = data.frame(r[(start+1):end,])
+    x$q <- r[start,]$name
+    out <- rbind(out,x)
+  }
+  if ( read_coeff == FALSE) { 
+  k  <- out[c("q","name","z")]
+  kk <- k %>% spread(name,z)
+  } else {
+    k  <- out[c("q","name","coeff")]
+    kk <- k %>% spread(name,coeff)
+  }
 
-run_test <- function(yr,i) {
+  return(kk)
+  
+}
+
+run_test <- function() {
+
   # gcols obtained using: toString(paste("'",colnames(x),"'",sep=""))
   gcols <- c('hhid', 'total_expenditure', 'toteducexpense', 'tothouserent',  'hsize', 'consu', 'highest_educ', 'age'
              , 'expensiveregion', 'popdensity','region','district','litlang',
@@ -28,7 +52,7 @@ run_test <- function(yr,i) {
   #for (sn in as.character(unique(ydat$shortname))) { if (!is.na(sn)) { dat <- subset(ydat,shortname==sn); write_dta(dat,paste('c:/temp/dat',yr,'_',sn,'.dta',sep="")) } } 
   #return(agi)
   
-  return(tot)
+  #return(tot)
   
 }
 
@@ -47,8 +71,8 @@ combine_mills_files <- function(years,dirprefix){
 }
 
 prepare_mills_aids <-function (allgroupsdat, itemsw, pricesi){
-  prepdat <- allgroupsdat[,c("hhid","year","total_expenditure","ln_tot_exp","consu", "highest_educ",
-                             "age" , "expensiveregion" , "occupation_rank","is_resident","housingstatus")]
+  #consu age is_resident expensiveregion, occupation_rank
+  prepdat <- allgroupsdat[,c("hhid","year", "highest_educ","housingstatus")]
   nonna_highest_educ <-subset(allgroupsdat,!is.na(highest_educ))$highest_educ
   prepdat$educ_rank <- (allgroupsdat$highest_educ- min(nonna_highest_educ))/(max(nonna_highest_educ)-min(nonna_highest_educ))
   prepdat$is_rented <- as.integer(as.integer(as.character(allgroupsdat$housingstatus))==4)
@@ -57,9 +81,10 @@ prepare_mills_aids <-function (allgroupsdat, itemsw, pricesi){
   prepdat$housingstatus <- NULL
   mdat <- merge(prepdat,itemsw,by=c("hhid","year"))
   mdatp <- merge(mdat,pricesi,by=c("hhid","year"))
-  sz = grep("^price_",colnames(k))
+  sz = grep("^price_",colnames(mdatp))
   if (length(sz)>0){
     for (col in colnames(mdatp)[sz]){
+      print(paste("Writing lp for column:",col))
       lpcolname <- paste("lp",gsub("price_","",col),sep="")
       mdatp[,lpcolname] <- log(mdatp[,col]+1e-7)
     }
@@ -67,20 +92,18 @@ prepare_mills_aids <-function (allgroupsdat, itemsw, pricesi){
   return(mdatp)
 }
 
+#Use the following with tot to get mean,median budget shares
+#an <- ddply(tot,.(year,shortname),summarise,mw = mean(w),medw=quantile(w[!is.na(w)],0.8))
 sum_items <- function(millsdata){
-  
-  itemcosts <- millsdata[,c("hhid","shortname","cost","year")]
-  itemcosts[is.na(itemcosts$cost),]$cost <- 0
   print("Checking for duplicates in household expenditure on items")
-  dupcheck    <- ddply(itemcosts,.(shortname,hhid,year),summarise, n = length(cost))
-  if (dim(subset(dupcheck,n>1))[1]>0){
-    stop("Duplicates found in the diary")
-  }
+  itemcosts <- unique(millsdata[,c("hhid","shortname","cost","year")])
+  itemcosts[is.na(itemcosts$cost),]$cost <- 0
+  
   print("Summing up items expenditure")
   totsn    <- ddply(itemcosts,.(shortname,hhid,year),summarise, item_exp = sum(cost))
   print("Summing up diary expenditure")
   totdiary <- ddply(itemcosts,.(hhid,year),summarise, totdiary = sum(cost))
-  print("Merging total and item expenditurecs")
+  print("Merging total and item expenditures")
   tot      <- merge(totdiary,totsn,by=c("hhid","year"))
   
   tot$w       <- with(tot,item_exp/totdiary)
