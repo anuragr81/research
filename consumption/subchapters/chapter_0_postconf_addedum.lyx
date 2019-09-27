@@ -67,6 +67,7 @@
 \bottommargin 2cm
 \headheight 2cm
 \headsep 2cm
+\footskip 2cm
 \columnsep 1.4cm
 \secnumdepth 3
 \tocdepth 3
@@ -86,8 +87,6 @@
 \begin_body
 
 \begin_layout Standard
-
-\size small
 \begin_inset ERT
 status open
 
@@ -95,7 +94,7 @@ status open
 
 
 \backslash
-twocolumn
+onecolumn
 \end_layout
 
 \end_inset
@@ -105,13 +104,11 @@ twocolumn
 
 \begin_layout Section*
 
-\size small
+\size normal
 Introduction
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Models for demand analysis rely on exogenous price observations for the
  consumer's basket.
  The prices observed in the market embody both i) how the market, subject
@@ -128,8 +125,6 @@ Models for demand analysis rely on exogenous price observations for the
 \end_layout
 
 \begin_layout Standard
-
-\size small
 In the analysis that follows, the needs of the consumers are proxied by
  the number of members (age-adjusted) in the household (and other available
  scales) while quality is measured as the portion of budget spent on high
@@ -164,8 +159,6 @@ key "AndalonGibsonSoda2017"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 As argued before, the status that a consumer derives from consumption must
  come out of either elite non-durable consumption or high-priced durable
  consumption.
@@ -190,8 +183,6 @@ As argued before, the status that a consumer derives from consumption must
 \end_layout
 
 \begin_layout Standard
-
-\size small
 As we present a selection equation approach for the conventional AIDS formulatio
 n in the current chapter, we discuss the distribution of quality for food
  and non-food items before motivating a discrete choice model for uncertainty
@@ -202,13 +193,11 @@ on.
 
 \begin_layout Section*
 
-\size small
+\size normal
 Literature Survey
 \end_layout
 
 \begin_layout Standard
-
-\size small
 In the past decades, Deaton's AIDS methodology has been employed widely
  for its robustness and simplicity.
  Based on PIGL approaches originally popularised by Barten
@@ -276,8 +265,6 @@ key "GibsonKimQualityBog2019"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 That is not to say that the lack of the market prices in the surveys makes
  the AIDS methodology unusable - only that the correction of such measurement
  errors may not be always trivial (see Deaton
@@ -299,8 +286,6 @@ key "McKelveyQuality2011"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Fortunately, AIDS lends itself easily to the extension for other panel data
  scenarios.
  For example, the demographic variables in the AIDS model can be accommodated
@@ -316,8 +301,6 @@ Fortunately, AIDS lends itself easily to the extension for other panel data
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Formula 
 \begin{alignat*}{1}
 \alpha_{i} & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{k}
@@ -355,8 +338,6 @@ key "AndersonBlundellAIDSTest1983,AndersonBlundellDynEqn1982"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Heien and Wessells 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -394,8 +375,6 @@ truncated
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Formula 
 \begin{alignat}{1}
 Y_{ih} & =f(p_{1h},p_{2h},...,p_{nh},m_{h},d_{1h},d_{2h},...d_{sh})\label{eq:wessells_probit}
@@ -407,8 +386,6 @@ Y_{ih} & =f(p_{1h},p_{2h},...,p_{nh},m_{h},d_{1h},d_{2h},...d_{sh})\label{eq:wes
 \end_layout
 
 \begin_layout Standard
-
-\size small
 The inverse mills ratio is thus calculated for every household using the
  probit regression equation 
 \begin_inset CommandInset ref
@@ -423,8 +400,6 @@ reference "eq:wessells_probit"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Formula 
 \begin{alignat}{1}
 R_{ih} & =\begin{cases}
@@ -439,15 +414,11 @@ R_{ih} & =\begin{cases}
 \end_layout
 
 \begin_layout Standard
-
-\size small
 is used as an instrument in following equation (second stage) to estimate
  the item-elasticities:
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Formula 
 \begin{alignat}{1}
 w_{i} & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{kh}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{jh})+\beta_{i}ln(\frac{x_{h}}{P})+\delta_{i}R_{ih}\label{eq:wessells_aids}
@@ -459,14 +430,10 @@ w_{i} & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{kh}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Here, we typically have 
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Formula 
 \begin{alignat*}{1}
 ln(P) & =\alpha_{0}+\sum_{i=1}^{n}\alpha_{i}ln(p_{i})+\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\gamma_{ij}ln(p_{i})ln(p_{j})
@@ -478,8 +445,6 @@ ln(P) & =\alpha_{0}+\sum_{i=1}^{n}\alpha_{i}ln(p_{i})+\frac{1}{2}\sum_{i=1}^{n}\
 \end_layout
 
 \begin_layout Standard
-
-\size small
 However, a simpler linear-AIDS formulation is often used so that 
 \begin_inset Formula $P=\sum_{i=1}^{n}w_{i}ln(p_{ih})$
 \end_inset
@@ -528,8 +493,6 @@ e) market prices - an issue probably made worse by having to stick in the
 status open
 
 \begin_layout Plain Layout
-
-\size small
 In fact, Heien-Wessells use a regression with unit-values obtained from
  users who do consume the item as the dependent variable and with control
  variables as their region, income etc.
@@ -544,8 +507,6 @@ In fact, Heien-Wessells use a regression with unit-values obtained from
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Deaton method
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -596,7 +557,7 @@ key "GibsonKimQualityBog2019"
 
 \begin_layout Section*
 
-\size small
+\size normal
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:PriceData"
@@ -607,8 +568,6 @@ Data - Price Extraction
 \end_layout
 
 \begin_layout Standard
-
-\size small
 As noted before, out of the food, energy, transport and household commodity
  groups, we only consider quality differences in food and energy subgroups
  - whereas the other commodity groups are viewed as groups where asset possessio
@@ -617,8 +576,6 @@ n (or ownership of long-term durable goods) matters more than quality variation.
 \end_layout
 
 \begin_layout Standard
-
-\size small
 The prices observed in the market are central to our measure of quality
  and to the later discussion of cross-price effects.
  As we don't use price-deflators in our analysis (due the measurement errors
@@ -630,8 +587,6 @@ The prices observed in the market are central to our measure of quality
 \end_layout
 
 \begin_layout Standard
-
-\size small
 LSMS Tanzania surveys record the prices observed in the markets spread across
  all regions in the country.
  These prices are available for ahll the region and for the food and energy
@@ -656,15 +611,11 @@ key "McKelveyQuality2011"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Here is a list issues that were observed in the available price data as
  well as the solutions adopted to address them.
 \end_layout
 
 \begin_layout Enumerate
-
-\size small
 A lot of items were recorded with the unit as pieces/
 \begin_inset Quotes erd
 \end_inset
@@ -683,8 +634,6 @@ idadi
 status open
 
 \begin_layout Plain Layout
-
-\size small
 These items were : maize_green, bread, bunscakes, pasta, cassava_fresh,
  cassava_flour, sweet_potato, yam, potatoes, banana_green, othervegstarch,
  pulses, peanuts, coconut, onion, greens, dried_canned_veg, banana_ripe,
@@ -727,15 +676,11 @@ reference "fig:LSMSMarketPrices"
 \end_layout
 
 \begin_layout Enumerate
-
-\size small
 A few outlier price observations (<5%) are rejected.
  
 \end_layout
 
 \begin_layout Enumerate
-
-\size small
 While a household in the LSMS consumption data is identified down to the
  village and enumeration area level - we do not expect the surveys to record
  market-prices at every possible enumeration area and village.
@@ -755,8 +700,6 @@ While a household in the LSMS consumption data is identified down to the
 status open
 
 \begin_layout Plain Layout
-
-\size small
 Prices for electricity were obtained from Peng at al.
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -774,8 +717,6 @@ key "PengElectricityTNZ2016"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 We now describe the regression of marked-price against quantity that we
  use to assimilate the price data from the survey.
  To explain this regression, let's consider an example of the marked prices
@@ -824,8 +765,6 @@ reference "fig:unitprice"
 status open
 
 \begin_layout Plain Layout
-
-\size small
 If we were to really look for a perfect match for prices, then we should
  not only match the quantities consumed by the consumer with the prices
  recorded in the market but also the time of the household interview with
@@ -881,8 +820,6 @@ reference "fig:markedprices"
 status open
 
 \begin_layout Plain Layout
-
-\size small
 This does not happen as frequently as one may imagine.
  For 2010, only 9 identified regions for just 6 items have less than three
  marked-prices available.
@@ -905,8 +842,6 @@ This does not happen as frequently as one may imagine.
 \end_layout
 
 \begin_layout Standard
-
-\size small
 With the prices we obtain after the regression, we match the price for every
  commodity consumed by the household based on the district it is located
  in.
@@ -919,8 +854,6 @@ With the prices we obtain after the regression, we match the price for every
 \end_layout
 
 \begin_layout Standard
-
-\size small
 One can argue that a selection bias is introduced when we the national-averages
  for some items and region averages for other.
  This could be a problem if the unavailability of regional averages occurred
@@ -947,8 +880,6 @@ finer as well as uniformly collected household consumption data.
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset ERT
 status open
 
@@ -965,8 +896,6 @@ onecolumn
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Float figure
 placement p
 wide false
@@ -975,8 +904,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\size small
 \begin_inset Graphics
 	filename C:/local_files/research/consumption/lsms/allnatprices.png
 	width 6.5in
@@ -987,8 +914,6 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
-\size small
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1012,8 +937,6 @@ Market Prices recorded in 2008, 2010, 2012 and 2014 surveys
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset ERT
 status open
 
@@ -1021,7 +944,7 @@ status open
 
 
 \backslash
-twocolumn
+onecolumn
 \end_layout
 
 \end_inset
@@ -1030,8 +953,6 @@ twocolumn
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Float figure
 wide false
 sideways false
@@ -1039,8 +960,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\size small
 \begin_inset Graphics
 	filename C:/local_files/research/consumption/markedprice.png
 	width 3in
@@ -1051,8 +970,6 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
-\size small
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1076,8 +993,6 @@ Typical marked prices of a commodity
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Float figure
 wide false
 sideways false
@@ -1085,8 +1000,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\size small
 \begin_inset Graphics
 	filename C:/local_files/research/consumption/unitprice.png
 	width 3in
@@ -1097,8 +1010,6 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
-\size small
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1123,7 +1034,7 @@ Typical Price per unit of the commodity
 
 \begin_layout Section*
 
-\size small
+\size normal
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Analysis"
@@ -1134,8 +1045,6 @@ Analysis
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Our view of quality is essentially price-based - a consumer who buys more
  of the high-priced item is seen as consuming higher quality.
  This view allows us to see how the demand for quality is distributed across
@@ -1144,8 +1053,6 @@ Our view of quality is essentially price-based - a consumer who buys more
 \end_layout
 
 \begin_layout Standard
-
-\size small
 A framework often used for analysis of quality treats quality as a regular
  item in the market.
  As for any other item, therefore, the demand for quality must conform to
@@ -1164,8 +1071,6 @@ A framework often used for analysis of quality treats quality as a regular
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Before we describe how quality is measured for our purposes in the current
  chapter, we survey a few approaches towards quality measurement that have
  been used in the literature.
@@ -1205,8 +1110,6 @@ key "CoxWohlgenant1986"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 The simplest of these approaches is to view the demand for a high-quality
  item as more of the low-cost item.
  This approach strives to obtain an adjustment factor for the demand based
@@ -1276,8 +1179,6 @@ key "DeatonQualityQuantityVariation,DeatonEconConsumer"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Formula 
 \begin{alignat}{1}
 \nu_{G} & =\sum_{i\in G}(\frac{q_{i}p_{i}^{*}}{q_{G}})\label{eq:quality_def}
@@ -1289,8 +1190,6 @@ key "DeatonQualityQuantityVariation,DeatonEconConsumer"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Here, 
 \begin_inset Formula $p_{i}^{*}$
 \end_inset
@@ -1325,8 +1224,6 @@ key "DeatonEconConsumer"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 As we wish to understand consumer behaviour under the price differentiation
  within a commodity, it may seem apt to talk about the price of quality
  in the market.
@@ -1349,8 +1246,6 @@ As we wish to understand consumer behaviour under the price differentiation
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Formula 
 \begin{alignat}{1}
 g(E_{G},p_{G}) & \equiv g(\frac{E_{G}}{P_{G}},p_{G}^{*})\label{eq:demand_function_quality}
@@ -1362,8 +1257,6 @@ g(E_{G},p_{G}) & \equiv g(\frac{E_{G}}{P_{G}},p_{G}^{*})\label{eq:demand_functio
 \end_layout
 
 \begin_layout Standard
-
-\size small
 So while we do treat quality as a separate commodity, the constant-relative
  price structure precludes the need of a price of quality in the cost-function
  (and thus in the budget share regression) 
@@ -1371,8 +1264,6 @@ So while we do treat quality as a separate commodity, the constant-relative
 status open
 
 \begin_layout Plain Layout
-
-\size small
 One way to establish this equivalence is to interpret the quality in the
  market as the gradient of price of preferred items (sorted by price or
  otherwise) - an approach that is more akin to the aggregation problem.
@@ -1392,8 +1283,6 @@ One way to establish this equivalence is to interpret the quality in the
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Let's consider an example to illustrate how this measure of quality relates
  with total expenditure 
 \begin_inset Formula $E_{G}$
@@ -1438,8 +1327,6 @@ key "NelsonQualityQuantity"
 status open
 
 \begin_layout Plain Layout
-
-\size small
 If the sum of physical quantities is denoted as 
 \begin_inset Formula $q_{G}=\sum_{i\in G}q_{i}$
 \end_inset
@@ -1533,8 +1420,6 @@ d quantity instead of the physical quantity gives us a clearer view of the
 status open
 
 \begin_layout Plain Layout
-
-\size small
 This measure of quality is slightly different from Deaton's approach 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1552,8 +1437,6 @@ key "DeatonQualityQuantityVariation"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 It is worth emphasising that the quality metric used above rests upon the
  rather stringent condition of a constant relative price structure (i.e.
  the Hicks aggregation commodity theorem).
@@ -1581,8 +1464,6 @@ key "NelsonQualityQuantity"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Due to the obvious limitations to the universality of such an aggregation
  criterion, the utility of the above metric in understanding consumption
  of quality is restricted by the very aggregated view that makes it desirable
@@ -1590,8 +1471,6 @@ Due to the obvious limitations to the universality of such an aggregation
 status open
 
 \begin_layout Plain Layout
-
-\size small
 Notice also that one cannot talk about the quality metric 
 \begin_inset Formula $\nu_{G}$
 \end_inset
@@ -1633,8 +1512,6 @@ key "HouthakkerFamilySurvey"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 In non-food categories (e.g.
  transport - which is the subject of a seminal work on discrete choice by
  Domencic-McFadden
@@ -1656,8 +1533,6 @@ key "McFaddenDomencic1975"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Since our wider goal has been to explain status consumption using the intertempo
 ral substitution and the consumer's perception of risk, we also intend to
  compare the asset ownership of consumers and their needs with the consumption
@@ -1678,8 +1553,6 @@ ral substitution and the consumer's perception of risk, we also intend to
 \end_layout
 
 \begin_layout Standard
-
-\size small
 We now provide a comparison of two variants of the AIDS model used for measuring
  quality elasticities in the literature.
  We assess their relevance, shortcomings before suggesting an adaption to
@@ -1707,8 +1580,6 @@ key "HeienWessellsAIDSCensored1990"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 We argue in favour of a discrete method - which we believe would make more
  sense in the status consumption contexts where the ownership of long-term
  durable goods needs to be considered.
@@ -1718,13 +1589,11 @@ We argue in favour of a discrete method - which we believe would make more
 
 \begin_layout Subsection*
 
-\size small
+\size normal
 A selection equation approach
 \end_layout
 
 \begin_layout Standard
-
-\size small
 The first AIDS variant uses non-consumption corrected estimates of demand
  elasticities to explain the effect of prices and household income on the
  demand for every item.
@@ -1750,8 +1619,6 @@ reference "eq:wessells_aids"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 The first-part i.e.
  selection is a probit that provides refinement to the second-part item-wise
  AIDS (which would have been appropriate in a more homogeneous dataset with
@@ -1788,8 +1655,6 @@ reference "eq:wessells_aids"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 The constraints of symmetry, additivity and homogeneity are essential in
  facilitating a discussion of the effect of cross-elasticities on demand
  (measured as budget shares).
@@ -1812,8 +1677,6 @@ ur]lpfresh_milk = -0.001) and greens but a substitute to bread and mangoes.
 \end_layout
 
 \begin_layout Standard
-
-\size small
 The item-wise analysis suggests a split between the items that are consumed
  in rural households (where the greens and fruits seem more abundant) against
  those consumed in urban households (where beef, charcoal and beer are more
@@ -1841,8 +1704,6 @@ key "ZahraIndia,KausSA,CharlesHurstRace"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Going further with the cross-elasticities analyses, a comparison of how
  consumers respond to changes in kerosene and electricity prices further
  confirms the concentrated availability of industrial items.
@@ -1859,8 +1720,6 @@ d consumption in the developing countries.
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Despite the detailed analyses that the cross-elasticities can provide, there
  are indeed limitations to an item-wise approach.
  First, the detailed cross-elasticities are more likely to fluctuate over
@@ -1887,8 +1746,6 @@ y (used in much of the literature on conspicuous consumption) - the changes
 \end_layout
 
 \begin_layout Standard
-
-\size small
 The aggregated view does add the functional view to the consumer choice
  that is not available in an item-wise approach.
  Observing consumption at a higher level e.g.
@@ -1902,8 +1759,6 @@ The aggregated view does add the functional view to the consumer choice
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Further, the aggregation provides an intermediate step to merging the data
  from recall and diary methods.
  As items are often recorded with more details for the diary items than
@@ -1916,13 +1771,11 @@ Further, the aggregation provides an intermediate step to merging the data
 
 \begin_layout Subsection*
 
-\size small
+\size normal
 LA AIDS model
 \end_layout
 
 \begin_layout Standard
-
-\size small
 In AIDS equations for the unrestricted method, quality is measured as described
  with the Equation 
 \begin_inset CommandInset ref
@@ -1950,8 +1803,6 @@ reference "sec:Analysis"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Notice that while such an AIDS formulation does not model the intertemporal
  substitution, the condition C1 allows us to compare the quality variation
  in certain commodity groups with the durable good possession in others
@@ -1972,8 +1823,6 @@ Notice that while such an AIDS formulation does not model the intertemporal
 \end_layout
 
 \begin_layout Standard
-
-\size small
 The base-price 
 \begin_inset Formula $P_{G}$
 \end_inset
@@ -1996,10 +1845,9 @@ reference "sec:PriceData"
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{multline}
-w_{G}=\rho_{1,G}+\sum_{k=1}^{s}\rho_{1,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{1,Gj}ln(P_{j})+\beta_{G,1}ln(x)+\epsilon_{G,1}\\
-ln\ V_{G}=\rho_{2,G}+\sum_{k=1}^{s}\rho_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{2,Gj}ln(P_{j})+\beta_{G,2}ln(x)+\epsilon_{G,2}\label{eq:w_aggregate_AIDS}
-\end{multline}
+\begin{alignat}{1}
+w_{G} & =\rho_{1,G}+\sum_{k=1}^{s}\rho_{1,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{1,Gj}ln(P_{j})+\beta_{G,1}ln(x)+\epsilon_{G,1}\label{eq:AIDS_quality_w}
+\end{alignat}
 
 \end_inset
 
@@ -2007,8 +1855,17 @@ ln\ V_{G}=\rho_{2,G}+\sum_{k=1}^{s}\rho_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{2,Gj}l
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+ln\ V_{G} & =\rho_{2,G}+\sum_{k=1}^{s}\rho_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{2,Gj}ln(P_{j})+\beta_{G,2}ln(x)+\epsilon_{G,2}\label{eq:AIDS_quality_lnV}
+\end{alignat}
 
-\size small
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 There are 
 \begin_inset Formula $s$
 \end_inset
@@ -2075,8 +1932,6 @@ additional
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Since we ignore quality differences in the expenditure on transport as well
  as for household categories, the AIDS SUR uses household-CPI and transport-CPI
  as prices for these respective groups and no 
@@ -2085,31 +1940,30 @@ Since we ignore quality differences in the expenditure on transport as well
 
  equations are required for transport and household commodities.
  With our functional groups being densefoods, non-fresh, fruits-veg, protein,
- complements, energy, household and transport - where quality is not used
- for energy, household and transport, the total number of equations to estimate
- is 
+ complements, energy, household and transport - where quality measure is
+ not used for energy, household and transport, the total number of equations
+ to estimate with sureg is 
 \begin_inset Formula $2\times5+3\times1=13$
 \end_inset
 
 .
+ For energy, a dummy variable for electricity usage is used - since the
+ contrast between electricity usage against the kerosene usage serves as
+ an indicator of energy quality for our estimation.
 \end_layout
 
 \begin_layout Subsection*
 
-\size small
+\size normal
 A Cross Sectional Analysis of quality
 \end_layout
 
 \begin_layout Standard
-
-\size small
 To motivate the intertemporal problem, we present a cross-sectional analysis
  of the quality and assets owned.
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "C:/local_files/research/africa_attitudes"
@@ -2137,16 +1991,18 @@ onecolumn
 \end_layout
 
 \begin_layout Section*
+
+\size normal
 Appendix
 \end_layout
 
 \begin_layout Subsection*
+
+\size normal
 Censored AIDS
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset External
 	template PDFPages
 	filename C:/local_files/research/consumption/addendum_censored_aids.pdf
@@ -2158,12 +2014,12 @@ Censored AIDS
 \end_layout
 
 \begin_layout Subsection*
+
+\size normal
 AIDS on quality aggregates
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset External
 	template PDFPages
 	filename C:/local_files/research/consumption/aidsqualityresults.pdf
@@ -2175,6 +2031,8 @@ AIDS on quality aggregates
 \end_layout
 
 \begin_layout Section*
+
+\size normal
 \begin_inset ERT
 status open
 
@@ -2192,13 +2050,11 @@ twocolumn
 
 \begin_layout Section*
 
-\size small
+\size normal
 Future Work
 \end_layout
 
 \begin_layout Standard
-
-\size small
 We are only concerned with the status view of consumption.
  In the cost function, the expenditure for a certain utility depends on
  price of quality, minimum cost of having children (subsistence of family
@@ -2238,14 +2094,12 @@ We are only concerned with the status view of consumption.
 \end_layout
 
 \begin_layout Standard
-
-\size small
 In a direct utility function, we may write 
 \begin_inset Formula $u=f(\kappa,A,\eta)$
 \end_inset
 
 .
- The discontinuity in asset owership is a legitimate conern it is 
+ The discontinuity in asset ownership is a legitimate concern it is 
 \begin_inset Formula $\frac{\partial u}{\partial A}$
 \end_inset
 
@@ -2303,8 +2157,6 @@ In a direct utility function, we may write
 \end_layout
 
 \begin_layout Standard
-
-\size small
 The understanding of quality should be done with the cost-function under
  risk.
  When consumer's maintain low quality they could be doing so to 
@@ -2322,8 +2174,6 @@ Invest
 \end_layout
 
 \begin_layout Standard
-
-\size small
 The general approach mentioned in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2335,8 +2185,6 @@ key "ManskiMcFadden1978"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Formula 
 \begin{alignat}{1}
 Y_{i} & =Y_{i}B+X_{i}\Gamma+\epsilon_{i}\label{eq:simult1}
@@ -2348,8 +2196,6 @@ Y_{i} & =Y_{i}B+X_{i}\Gamma+\epsilon_{i}\label{eq:simult1}
 \end_layout
 
 \begin_layout Standard
-
-\size small
 Here, 
 \begin_inset Formula $Y_{i}$
 \end_inset
@@ -2396,8 +2242,6 @@ Here,
 \end_layout
 
 \begin_layout Enumerate
-
-\size small
 \begin_inset Formula $G_{1}$
 \end_inset
 
@@ -2405,8 +2249,6 @@ Here,
 \end_layout
 
 \begin_layout Enumerate
-
-\size small
 \begin_inset Formula $G_{2}-G_{1}$
 \end_inset
 
@@ -2414,8 +2256,6 @@ Here,
 \end_layout
 
 \begin_layout Enumerate
-
-\size small
 \begin_inset Formula $G_{3}-G_{2}$
 \end_inset
 
@@ -2439,8 +2279,6 @@ Here,
 \end_layout
 
 \begin_layout Enumerate
-
-\size small
 \begin_inset Formula $G-G_{3}$
 \end_inset
 
@@ -2472,8 +2310,6 @@ Here,
 \end_layout
 
 \begin_layout Standard
-
-\size small
 There are two stages in the estimation.
  The first stage estimation is through the simple manipulation of Equation
  
@@ -2493,8 +2329,6 @@ reference "eq:simult1"
 \end_layout
 
 \begin_layout Standard
-
-\size small
 \begin_inset Formula $Y_{i}=R_{i}\delta_{0}+Y_{i}^{*}\delta_{1}+\epsilon_{i}$
 \end_inset
 

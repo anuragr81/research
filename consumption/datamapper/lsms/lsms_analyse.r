@@ -52,6 +52,7 @@ all_asset_scores <- function(years,dirprefix,fu,ln,ll){
   }
   out$ln_asset_score <- with(out,log(asset_score+1e-7))
   out$ln_asset_score <- (out$ln_asset_score - min(out$ln_asset_score)) / ( max(out$ln_asset_score) - min(out$ln_asset_score) )
+  out$norm_asset_score <- (out$asset_score - min(out$asset_score)) / ( max(out$asset_score) - min(out$asset_score) )
   return(out)
 }
 

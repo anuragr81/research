@@ -77,7 +77,7 @@ def generate_equations(categslist, varlist):
 
 #categ = [ "nonfresh"    "densefoods"  "complements" "fruitsveg"   "protein"   ]
 #categ = [ "nonfresh" , "Vnonfresh",  "densefoods", "Vdensefoods" , "complements", "Vcomplements", "fruitsveg", "Vfruitsveg",  "protein",  "Vprotein", "household", "transport"   ]
-#deleted with regexp: \+\[[^\[\]]*\]lpvprotein etc. \+\[[^\[\]]*\]lpvfruitsveg
+#deleted with regexp: \+\[[^\[\]]*\]lpvprotein etc. \+\[[^\[\]]*\]lpvprotein
 categ = [ "nonfresh" , "Vnonfresh",  "densefoods", "Vdensefoods" , "complements", "Vcomplements", "fruitsveg", "Vfruitsveg",  "protein",  "Vprotein", "energy", "household", "transport"   ]
 varlist = ["educ_rank", "age", "occupation_rank", "consu", "has_electricity"]
 
