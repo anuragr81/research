@@ -70,6 +70,38 @@ combine_mills_files <- function(years,dirprefix){
   return(o)
 }
 
+
+prepare_quality_aids <-function (prepdat){
+  #consu age is_resident expensiveregion, occupation_rank
+  nonna_highest_educ <-subset(prepdat,!is.na(highest_educ))$highest_educ
+  prepdat$educ_rank <- (prepdat$highest_educ- min(nonna_highest_educ))/(max(nonna_highest_educ)-min(nonna_highest_educ))
+  prepdat$is_rented <- as.integer(as.integer(as.character(prepdat$housingstatus))==4)
+  #consu + educ_rank + age + expensiveregion + occupation_rank + is_resident + is_rented
+  prepdat$highest_educ <- NULL
+  prepdat$housingstatus <- NULL
+  sz = grep("_min_price$",colnames(prepdat))
+  if (length(sz)>0){
+    for (col in colnames(prepdat)[sz]){
+      
+      lpcolname <- paste("lp",gsub("_min_price$","",col),sep="")
+      print(paste("Writing lp for column:",col, " as ", lpcolname))
+      prepdat[,lpcolname] <- log(prepdat[,col]+1e-7)
+    }
+  }
+  
+  sz = grep("_quality$",colnames(prepdat))
+  if (length(sz)>0){
+    for (col in colnames(prepdat)[sz]){
+      qcolname <- paste("lnV_",gsub("_quality$","",col),sep="")
+      print(paste("Writing unit-value for column:",col, " as ",qcolname))
+      pricecol <- gsub("_quality$","_min_price",col)
+      prepdat[,qcolname] <- log(prepdat[,pricecol] * prepdat[,col]+1e-7)
+      
+    }
+  }
+  return(prepdat)
+}
+
 prepare_mills_aids <-function (allgroupsdat, itemsw, pricesi){
   #consu age is_resident expensiveregion, occupation_rank
   prepdat <- allgroupsdat[,c("hhid","year", "highest_educ","housingstatus")]

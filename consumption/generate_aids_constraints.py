@@ -69,9 +69,19 @@ def generate_equations(categslist, varlist):
 """
 # used but cancelled: categ=[ 'banana_ripe', 'beef', 'beer', 'bread', 'bunscakes', 'cassava_flour', 'cassava_fresh', 'charcoal', 'chicken','eggs', 'electricity', 'fish_seafood', 'fresh_milk', 'greens', 'kerosene',  'mangoes', 'maize_green',  'rice_husked', 'sweet_potato', 'tea', 'peanuts', 'coconut','yam']
 #constraint error: categ=[ 'beef', 'beer', 'bread', 'bunscakes', 'cassava_flour', 'cassava_fresh', 'charcoal', 'coconut', 'cooking_oil', 'dried_canned_fish', 'electricity', 'fish_seafood', 'fresh_milk', 'greens', 'kerosene', 'mangoes', 'onion', 'peanuts', 'potatoes', 'pulses', 'rice_husked', 'salt', 'sugar', 'sweet_potato', 'tea']
-categ=[ 'beef', 'beer', 'bread', 'bunscakes', 'cassava_flour', 'cassava_fresh', 'charcoal', 'coconut', 'cooking_oil', 'dried_canned_fish', 'electricity', 'fish_seafood', 'fresh_milk', 'greens', 'kerosene', 'mangoes', 'onion', 'peanuts', 'potatoes', 'pulses', 'rice_husked', 'salt', 'sugar', 'sweet_potato']
+#categ=[ 'beef', 'beer', 'bread', 'bunscakes', 'cassava_flour', 'cassava_fresh', 'charcoal', 'coconut', 'cooking_oil', 'dried_canned_fish', 'electricity', 'fish_seafood', 'fresh_milk', 'greens', 'kerosene', 'mangoes', 'onion', 'peanuts', 'potatoes', 'pulses', 'rice_husked', 'salt', 'sugar', 'sweet_potato']
 #TODO: Add brews petrol, pork goat etc.
-varlist = ["educ_rank", "age", "occupation_rank", "consu", "invmills"]
+#varlist = ["educ_rank", "age", "occupation_rank", "consu", "invmills"]
+
+#################### AGGREGATED AIDS (UNRESTRICTED METHOD) ####################
+
+#categ = [ "nonfresh"    "densefoods"  "complements" "fruitsveg"   "protein"   ]
+#categ = [ "nonfresh" , "Vnonfresh",  "densefoods", "Vdensefoods" , "complements", "Vcomplements", "fruitsveg", "Vfruitsveg",  "protein",  "Vprotein", "household", "transport"   ]
+#deleted with regexp: \+\[[^\[\]]*\]lpvprotein etc. \+\[[^\[\]]*\]lpvfruitsveg
+categ = [ "nonfresh", "vnonfresh", "transport" ]
+varlist = ["educ_rank", "age", "occupation_rank", "consu"]
+
+
 
 constraints = generate_constraints(categ,varlist)
 eqns = generate_equations(categ,varlist)
