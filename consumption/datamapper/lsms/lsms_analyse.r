@@ -50,9 +50,11 @@ all_asset_scores <- function(years,dirprefix,fu,ln,ll){
     asset_scores$year <- yr
     out  <- rbind(out,asset_scores)
   }
+  out$ln_asset_score <- with(out,log(asset_score+1e-7))
+  out$ln_asset_score <- (out$ln_asset_score - min(out$ln_asset_score)) / ( max(out$ln_asset_score) - min(out$ln_asset_score) )
   return(out)
-  
 }
+
 run_test <- function() {
   # gcols obtained using: toString(paste("'",colnames(x),"'",sep=""))
   gcols <- c('hhid', 'total_expenditure', 'toteducexpense', 'tothouserent',  'hsize', 'consu', 'highest_educ', 'age'
