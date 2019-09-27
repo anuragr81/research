@@ -1906,12 +1906,12 @@ The aggregated view adds a functional view to the consumer choice that is
 \size small
 Further, the aggregation provides an intermediate step to merging the recall
  and diary methods.
- We note that the items are often recorded with more details for the diary
- items than for the recall items (the types of phones, clothes purchased
- by the consumers are hardly recorded in the surveys for example).
- This makes the merging or data from recall and diary methods inappropriate.
- An aggregation can represent the diary data at a coarser granularity -
- one that could be matched with that of the recall method.
+ As items are often recorded with more details for the diary items than
+ for the recall items (the types of phones, clothes purchased by the consumers
+ are hardly recorded in the surveys for example), the merging or data from
+ recall and diary methods is rendered inappropriate.
+ An aggregation represents the diary data at a coarser granularity - which
+ can be matched with that of the recall method.
 \end_layout
 
 \begin_layout Subsection*
@@ -1923,67 +1923,73 @@ LA AIDS model
 \begin_layout Standard
 
 \size small
-In AIDS equation for the unrestricted method (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Analysis"
-
-\end_inset
-
-), quality is measured as described in the Equation 
+In AIDS equations for the unrestricted method, quality is measured as described
+ with the Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:quality_def"
 
 \end_inset
 
-.
- The AIDS equations thus used are fewer than in the censored AIDS method
- used above (an equation is required only for the aggregate quantity/budget
- and the quality measure corresponding to the aggregate).
- There is no issue of non-consumption either - as it is much less likely
- for no items to be consumed within in a functional commodity group (fruits-veg,
- starch etc.) .
+ (Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Analysis"
+
+\end_inset
+
+).
+ These AIDS equations used are fewer than in the item-wise censored model
+ used in the first AIDS variant.
+ Every commodity aggregate - which consists of several items - corresponds
+ to one aggregate quantity/budget equation and a quality metric corresponding
+ to the commodity aggregate.
+ The aggregation also circumvents the issue of non-consumption since it
+ is much less likely for no items to be consumed within in a functional
+ commodity group (fruits-veg, starch etc.) .
 \end_layout
 
 \begin_layout Standard
 
 \size small
-Notice that while a typical AIDS formulation does not model the intertemporal
+Notice that while such an AIDS formulation does not model the intertemporal
  substitution, the condition C1 allows us to compare the quality variation
  in certain commodity groups with the durable good possession in others
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-
-\size small
-Recall that we rule out the use of a two-state budgeting model since a substitut
-ion exists between commodity groups due to this very condition.
-\end_layout
-
+ (Recall also that we rule out the use of a two-state budgeting model since
+ a substitution exists between commodity groups due to this very condition).
+ The commodity groups used for the our analyses are food, energy, household
+ and transportation.
+ We use the CPI for housing and transportation since the expenditure on
+ them is considered elementary consumption - where assets/LTDG are deemed
+ more important.
+ In other words, we do not observe quality differences in the consumption
+ on household items (toilet rolls, clothing etc.) or transportation.
+ The expenditure on housing and transportation are thus treated as if they
+ were just one commodity whereas different variants of proteins and starches
+ (i.e.
+ goods) are considered.
+ Since we consider densefoods, non-fresh, fruits-veg, protein, alcohol,
+ complements categories in food, the total number of equations to estimate
+ is 
+\begin_inset Formula $2\times6+2\times1+2\times2=18$
 \end_inset
 
 .
- The commodity groups used for the analysis are food, energy, household
- and transportation.
- The CPI for housing and transportation are used as we consider the expenditure
- on them as elementary consumption.
- In other words, we do not observe quality differences in the consumption
- on household items (toilet rolls, clothing etc.) or transportation.
- The expenditure on housing and transportation are thus treated as they
- were one commodity whereas different variants of proteins and starches
- (i.e.
- goods) are considered - for both transportation and housing, assets/LTDG
- are deemed more important.
+ 
 \end_layout
 
 \begin_layout Standard
 
 \size small
 The base-price in every group (obtained in the price analysis detailed in
- Section ) is simply the minimum price of the goods within the commodity
- group.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:PriceData"
+
+\end_inset
+
+) is simply the minimum price of the goods within the commodity group.
  This serves as price of the commodity whose budget share is set as the
  dependent variable in the AIDS equations.
  The composite quality serves as the dependent variable in the additional
@@ -2022,23 +2028,9 @@ key "AndalonGibsonSoda2017,GibsonKimQualityBog2019"
 
 \end_inset
 
- for implementations of McKelvey's 
-\begin_inset Quotes eld
-\end_inset
-
-Unrestricted method
-\begin_inset Quotes erd
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Standard
-
-\size small
-Since we ignore quality differences in the expenditure on transport as well
- as for household categories, the AIDS SUR uses CPI as prices for these
+ for the implementations of McKelvey's "Unrestricted method").
+ Since we ignore quality differences in the expenditure on transport as
+ well as for household categories, the AIDS SUR uses CPI as prices for these
  groups.
  The asset possessions (and band identity) are represented as demographic
  characteristics (indicator variables) in these equations.
