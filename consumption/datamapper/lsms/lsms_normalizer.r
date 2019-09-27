@@ -94,6 +94,7 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           get_diary_secn_fields_mapping_lsms_2008="function",
                                           get_diary_secn_fields_mapping_lsms_2010="function",
                                           get_diary_secn_fields_mapping_lsms_2012="function",
+                                          get_diary_secn_fields_mapping_lsms_2014="function",
                                           computeYearValues="function",
                                           decode_clusterid="function",
                                           computeLsmsSelfemployedValues="function",
@@ -2437,6 +2438,18 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_m04",name="mtm"))
     return(s)
   }
+
+  # file corresponds to secn of 2010
+  get_diary_secn_fields_mapping_lsms_2014<-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="y4_hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="itemcode",name="itemcode"))
+    s= rbind(s,data.frame(iesname="hh_m01",name="number"))
+    s= rbind(s,data.frame(iesname="hh_m02",name="age"))
+    s= rbind(s,data.frame(iesname="hh_m03",name="cost"))
+    s= rbind(s,data.frame(iesname="hh_m04",name="mtm"))
+    return(s)
+  }
   
   get_diary_secn_fields_mapping_lsms_2008<-function(){
     s = data.frame(iesname=NULL,name=NULL)
@@ -3319,6 +3332,7 @@ lsms_normalizer<-function() {
              get_diary_secn_fields_mapping_lsms_2008=get_diary_secn_fields_mapping_lsms_2008,
              get_diary_secn_fields_mapping_lsms_2010=get_diary_secn_fields_mapping_lsms_2010,
              get_diary_secn_fields_mapping_lsms_2012=get_diary_secn_fields_mapping_lsms_2012,
+             get_diary_secn_fields_mapping_lsms_2014=get_diary_secn_fields_mapping_lsms_2014,
              ohs_seca_mapping_lsms_2012=ohs_seca_mapping_lsms_2012,
              ohs_seca_mapping_lsms_2014=ohs_seca_mapping_lsms_2014,
              ohs_info_columns_lsms_2012=ohs_info_columns_lsms_2012,

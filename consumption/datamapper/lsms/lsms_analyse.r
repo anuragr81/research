@@ -39,8 +39,21 @@ read_stata_aids_results <- function(r,read_coeff){
   
 }
 
-run_test <- function() {
 
+all_asset_scores <- function(years,dirprefix,fu,ln,ll){
+  assetnames <- c('bike', 'mobile', 'waterheater', 'sewingmachine', 'bed', 'camera', 'watch', 'phone', 'musicplayer', 'videoplayer', 'musicsystem', 'chair', 'table', 'cupboard', 'sofa', 'ac_fan', 'waterpump', 'tv', 'dishtv', 'computer', 'sports_hobby', 'refrigerator', 'motorbike', 'car', 'land', 'house')
+  out <- NULL
+  for (yr in years){
+    cdat <- ll@load_diary_file(dirprefix = dirprefix, year = yr, fu = fu, ln = ln )
+    adat <- ll@read_assets_file(year = yr, dirprefix = dirprefix, fu = fu, ln = ln)
+    asset_scores <- ll@get_asset_score(year = yr, diaryData = cdat, assetsData = adat, assetsList = assetnames, ln = ln )
+    asset_scores$year <- yr
+    out  <- rbind(out,asset_scores)
+  }
+  return(out)
+  
+}
+run_test <- function() {
   # gcols obtained using: toString(paste("'",colnames(x),"'",sep=""))
   gcols <- c('hhid', 'total_expenditure', 'toteducexpense', 'tothouserent',  'hsize', 'consu', 'highest_educ', 'age'
              , 'expensiveregion', 'popdensity','region','district','litlang',

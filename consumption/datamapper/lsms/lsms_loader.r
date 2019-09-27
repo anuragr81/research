@@ -766,13 +766,32 @@ lsms_loader<-function(fu,ln,lgc) {
       if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
       return(assetsData)
     }
+    if (year == 2014 ) {
+      
+      #secn of 2010 maps to secm of 2012
+      secnFileName <- paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_m.DTA',sep="")
+      print(paste("read_assets_file - opening file:",secnFileName))
+      secndat<-read.dta(secnFileName,convert.factors = FALSE)
+      
+      assetsData <- fu()@get_translated_frame(dat=secndat,
+                                              names=ln()@get_diary_secn_columns_lsms_2012(),
+                                              m=ln()@get_diary_secn_fields_mapping_lsms_2014())
+      assetsData <-merge(assetsData, rename(ln()@items_codes_2012(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      
+      ignored_hhids_adoc <- c("0743-001") # high mtm of house
+      assetsData <- subset(assetsData,!is.element(hhid,ignored_hhids_adoc))
+      print (paste("Ignored hhids:",toString(ignored_hhids_adoc)))
+      if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
+      return(assetsData)
+    }
+    
     stop("read_assets_file - year", year, "not supported")
     
   }
   
   get_asset_score<-function(year, diaryData, assetsData,assetsList,ln){
     unavailable = TRUE
-    if (year == 2010 || year == 2012) {
+    if (year == 2010 || year == 2012 || year ==2014) {
       relevantAssets<-ln()@assets_order_2010_2012(shortnames = assetsList)
       unavailable = FALSE
     } 
