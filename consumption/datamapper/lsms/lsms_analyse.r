@@ -41,18 +41,22 @@ read_stata_aids_results <- function(r,read_coeff){
 
 
 all_asset_scores <- function(years,dirprefix,fu,ln,ll){
-  assetnames <- c('bike', 'mobile', 'waterheater', 'sewingmachine', 'bed', 'camera', 'watch', 'phone', 'musicplayer', 'videoplayer', 'musicsystem', 'chair', 'table', 'cupboard', 'sofa', 'ac_fan', 'waterpump', 'tv', 'dishtv', 'computer', 'sports_hobby', 'refrigerator', 'motorbike', 'car', 'land', 'house')
+  assetnames_transport <- c( 'mobile', 'waterheater', 'sewingmachine', 'bed', 'camera', 'watch', 'phone', 'musicplayer', 'videoplayer', 'musicsystem', 'chair', 'table', 'cupboard', 'sofa', 'ac_fan', 'waterpump', 'tv', 'dishtv', 'computer', 'sports_hobby', 'refrigerator', 'land', 'house')
+  assetnames_household <- c('bike', 'motorbike', 'car')
   out <- NULL
   for (yr in years){
     cdat <- ll@load_diary_file(dirprefix = dirprefix, year = yr, fu = fu, ln = ln )
     adat <- ll@read_assets_file(year = yr, dirprefix = dirprefix, fu = fu, ln = ln)
-    asset_scores <- ll@get_asset_score(year = yr, diaryData = cdat, assetsData = adat, assetsList = assetnames, ln = ln )
+    asset_scores_transport <- plyr::rename(ll@get_asset_score(year = yr, diaryData = cdat, assetsData = adat, assetsList = assetnames_transport, ln = ln ),
+                                           c("asset_score"="trans_asset_score"))
+    asset_scores_household <- plyr::rename(ll@get_asset_score(year = yr, diaryData = cdat, assetsData = adat, assetsList = assetnames_household, ln = ln ),
+                                           c("asset_score"="hh_asset_score"))
+    asset_scores <- merge(asset_scores_household,asset_scores_transport,by=c("hhid"))
     asset_scores$year <- yr
     out  <- rbind(out,asset_scores)
   }
-  out$ln_asset_score <- with(out,log(asset_score+1e-7))
-  out$ln_asset_score <- (out$ln_asset_score - min(out$ln_asset_score)) / ( max(out$ln_asset_score) - min(out$ln_asset_score) )
-  out$norm_asset_score <- (out$asset_score - min(out$asset_score)) / ( max(out$asset_score) - min(out$asset_score) )
+  out$norm_trans_asset_score <- (out$trans_asset_score - min(out$trans_asset_score)) / ( max(out$trans_asset_score) - min(out$trans_asset_score) )
+  out$norm_hh_asset_score <- (out$hh_asset_score - min(out$hh_asset_score)) / ( max(out$hh_asset_score) - min(out$hh_asset_score) )
   return(out)
 }
 

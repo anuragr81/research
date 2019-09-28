@@ -62,12 +62,12 @@
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 2cm
-\rightmargin 2cm
-\bottommargin 2cm
-\headheight 2cm
-\headsep 2cm
-\footskip 2cm
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\headheight 3cm
+\headsep 3cm
 \columnsep 1.4cm
 \secnumdepth 3
 \tocdepth 3
@@ -237,14 +237,14 @@ key "TafereTaffesseEthiopia2010"
  While this may be the best way to proceed when market price are not observed,
  their use can result in a severe measurement error since the quantities
  consumed by the consumer appear both in the dependent variable (as budget
- share's numerator) in the AIDS regression (see Equation 
+ share's numerator) of the AIDS equations (see Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:wessells_aids"
 
 \end_inset
 
-) and in the control variable (as the denominator for unit-value used as
+) and in the control variables (as the denominator for unit-value used as
  price).
  Since observing market prices prevents such measurements errors (see the
  discussion by McKelvey 
@@ -261,13 +261,13 @@ key "GibsonKimQualityBog2019"
 
 \end_inset
 
-), we prefer their use for understanding quality over the use of unit values.
+), we prefer their use for understanding the consumption of quality.
 \end_layout
 
 \begin_layout Standard
-That is not to say that the lack of the market prices in the surveys makes
- the AIDS methodology unusable - only that the correction of such measurement
- errors may not be always trivial (see Deaton
+The lack of market prices in consumer surveys hardly makes the AIDS methodology
+ less usable - only that the correction of such measurement errors is not
+ always trivial (see Deaton
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonQualityQuantityVariation,DeatonSurveyElasticities"
@@ -282,12 +282,7 @@ key "McKelveyQuality2011"
 \end_inset
 
  of the Deaton method).
- 
-\end_layout
-
-\begin_layout Standard
-Fortunately, AIDS lends itself easily to the extension for other panel data
- scenarios.
+ AIDS method can in fact be easily extended to other panel data scenarios.
  For example, the demographic variables in the AIDS model can be accommodated
  with the so-called demographic translation where the intercept 
 \begin_inset Formula $\alpha_{i}$
@@ -543,8 +538,8 @@ key "CoxWohlgenant1986"
 \end_inset
 
 ) - used for studying quality variation in commodities when market prices
- are not available - would also suffer with this issue of measurement error
- (see Gibson and Kim 
+ are not available - would also suffer with the issue of measurement error
+ that is introduced with the use of unit values (see Gibson and Kim 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "GibsonKimQualityBog2019"
@@ -589,9 +584,8 @@ The prices observed in the market are central to our measure of quality
 \begin_layout Standard
 LSMS Tanzania surveys record the prices observed in the markets spread across
  all regions in the country.
- These prices are available for ahll the region and for the food and energy
- commodity groups.
- We group the items within these commodity groups according to the relative
+ These prices are available for items in the food and energy commodity groups.
+ The items within these commodities are grouped according to the relative
  structure of the price time-series observed from 2008 to 2014 shown in
  Figure 
 \begin_inset CommandInset ref
@@ -611,19 +605,12 @@ key "McKelveyQuality2011"
 \end_layout
 
 \begin_layout Standard
-Here is a list issues that were observed in the available price data as
- well as the solutions adopted to address them.
+Here is a list of issues that were observed in the available price data
+ as well as the solutions adopted to address the issues.
 \end_layout
 
 \begin_layout Enumerate
-A lot of items were recorded with the unit as pieces/
-\begin_inset Quotes erd
-\end_inset
-
-idadi
-\begin_inset Quotes erd
-\end_inset
-
+A lot of items in the year 2008 were recorded with the unit as pieces/"idadi"
  (e.g.
  5 pieces of chicken or 4 pieces of banana etc.).
  For year 2008, there are 588 observations that record prices in terms of
@@ -651,9 +638,10 @@ ed_fish, fresh_milk, canned_milk, firewood, cooking_oil, salt, brews, kerosene
 \end_inset
 
 .
- Also, 2008 is just too far back for us to use the 2010 household and transport
- CPI baskets as well as the available electricity prices, thus the 2008
- data offers too little to be included in the analysis.
+ With the asset ownership details not being available for 2008, the year
+ being too far back to use the 2010 household and transport CPI baskets
+ and it being difficult to find prices of electricity for the year, the
+ year 2008 offers very little to be included in our analysis.
  That said, we do use the 2008 prices for when the units recorded are not
  
 \begin_inset Quotes eld
@@ -847,15 +835,15 @@ With the prices we obtain after the regression, we match the price for every
  in.
  The next step is to define the groups based on price-structure.
  We use a broad classification of items for separability assumption to hold.
- Within foods we observe protein, fruits, dense-foods, alcohol, complements,
- fresh and non-fresh groups and within energy, we put kerosene and electricity
- under the same group (energy).
+ Within foods we observe protein, fruits, dense-foods, complements and non-fresh
+ groups and within energy, we put kerosene and electricity under the same
+ group (energy).
  
 \end_layout
 
 \begin_layout Standard
-One can argue that a selection bias is introduced when we the national-averages
- for some items and region averages for other.
+One can argue that a selection bias is introduced when we use the national-avera
+ges for some items and region averages for other.
  This could be a problem if the unavailability of regional averages occurred
  for a significant portion of price entries.
  However, since only about 
@@ -903,10 +891,12 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\noindent
 \align center
 \begin_inset Graphics
 	filename C:/local_files/research/consumption/lsms/allnatprices.png
 	width 6.5in
+	rotateOrigin center
 
 \end_inset
 
@@ -1019,7 +1009,7 @@ name "fig:unitprice"
 
 \end_inset
 
-Typical Price per unit of the commodity
+Typical Price per unit of an item
 \end_layout
 
 \end_inset
@@ -1045,8 +1035,9 @@ Analysis
 \end_layout
 
 \begin_layout Standard
-Our view of quality is essentially price-based - a consumer who buys more
- of the high-priced item is seen as consuming higher quality.
+A price-based view of quality has been adopted for our current analysis.
+ Thus a consumer who buys more of the high-priced item is seen as consuming
+ higher quality.
  This view allows us to see how the demand for quality is distributed across
  the population and varies in response to prices.
  
@@ -1063,11 +1054,10 @@ A framework often used for analysis of quality treats quality as a regular
  if a consumer observes a price for quality and if so, should this price
  of quality appear in the econometric analysis.
  As we later explain, the price of quality can be represented as the price
- of a commodity aggregate and the relative-price structure within the aggregate.
+ of a commodity aggregate along with the relative-price structure within
+ the aggregate.
  The two implicitly determine what one may consider the price of quality.
- The step of preparing a composite however, comes at a cost - as the aggregation
- needs to satisfy a few conditions in addition to the usual restrictions
- to demand.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1917,7 +1907,8 @@ key "AndalonGibsonSoda2017,GibsonKimQualityBog2019"
 \end_inset
 
  for details on the implementation of McKelvey's "Unrestricted method").
- Notice we the coefficients of the 
+ Notice that since the price for quality is not needed, the price-coefficients
+ in the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1929,32 +1920,71 @@ additional
 \begin_inset Formula $ln\ V$
 \end_inset
 
- equations are not subject to symmetry restrictions 
-\begin_inset Formula $\gamma_{ij}=\gamma_{ji}$
-\end_inset
-
- (see Appendix for implementaton).
+ equations are not subject to any additional symmetry restrictions (see
+ Appendix for the details of the implementation).
 \end_layout
 
 \begin_layout Standard
-Since we ignore quality differences in the expenditure on transport as well
+The aggregation allows us to be more ambitious - as we include the recall
+ data on household and transport.
+ As we ignore quality differences in the expenditure on transport as well
  as for household categories, the AIDS SUR uses household-CPI and transport-CPI
  as prices for these respective groups and no 
 \begin_inset Formula $ln\ V$
 \end_inset
 
- equations are required for transport and household commodities.
- With our functional groups being densefoods, non-fresh, fruits-veg, protein,
- complements, energy, household and transport - where quality measure is
- not used for energy, household and transport, the total number of equations
- to estimate with sureg is 
+ equations are required for the two commodity groups.
+ Variables for transport and a household asset scores are in included as
+ household characteristics (asset scores are simply a normalised rank assigned
+ to the household based on the total assets it possesses).
+ 
+\end_layout
+
+\begin_layout Standard
+To observe the usage of electricity in the population, we can either use
+ an electricity-usage dummy variable or use a probit stage as we did in
+ the first variant.
+ The choice is really whether we're interested in the effect of distribution
+ of electricity on overall quality of x
+\backslash
+commodities or the consumer preference for electricity.
+ If we were to understand the preference for electricity, a probit analysis
+ would have been more appropriate.
+ However, it is clear from the item-wise AIDS that the consumers would prefer
+ electricity as their incomes rise.
+ Our goal is to understand how the choice for quality for other commodities
+ in the context of this preference.
+ Therefore dummy variable whether the electricity is available in the region
+ (and not whether the consumer herself uses electricity or not) is used
+ a dummy variable for the aggregated AIDS model.
+\end_layout
+
+\begin_layout Standard
+The functional groups chosen for the model being densefoods, non-fresh,
+ fruits-veg, protein, complements, energy, household and transport - where
+ quality measure is not used for energy, household and transport, the total
+ number of equations to estimate with seemingly unrelated regression is
+ 
 \begin_inset Formula $2\times5+3\times1=13$
 \end_inset
 
 .
- For energy, a dummy variable for electricity usage is used - since the
- contrast between electricity usage against the kerosene usage serves as
- an indicator of energy quality for our estimation.
+ The results confirm many of the findings from the itemwise-probit and seems
+ to suggest the relevance of asset ownership in the demand for non-durable
+ items - their quality in particular.
+\end_layout
+
+\begin_layout Standard
+It is clear to see that price-based aggregation of items allows a discussion
+ of quality that is only adhoc with the item-wise appraoch.
+ Further, the inclusion of assets is made possible with the expenditure
+ from recall methods on household and transportation.
+ The intertemporal model can further enhance our understanding of changes
+ in asset ownership over time (using their values - which are available
+ for 2012 and 2014).
+ While this would be considered in later chapters, we provide a multinomial
+ logit analysis of quality to motivate discrete model for quality and asset
+ ownership.
 \end_layout
 
 \begin_layout Subsection
@@ -1964,8 +1994,8 @@ Cross Sectional Analysis of quality and asset scores
 \end_layout
 
 \begin_layout Standard
-To motivate the intertemporal problem, we present a cross-sectional analysis
- of the quality and assets owned.
+To motivate the intertemporal problem, a cross-sectional analysis of the
+ quality and assets owned is presented in the chapter.
 \end_layout
 
 \begin_layout Standard
