@@ -1585,6 +1585,12 @@ We argue in favour of a discrete method - which we believe would make more
 \begin_layout Subsection
 
 \size normal
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:HeienWesselsAIDS"
+
+\end_inset
+
 A selection equation approach
 \end_layout
 
@@ -1945,31 +1951,65 @@ The aggregation allows us to be more ambitious - as we include the recall
  The variables for transport and household asset scores are also included
  as household characteristics (asset scores are simply a normalised rank
  assigned to the household based on the total assets it possesses).
+ Other household characteristics, are the family size (
+\family typewriter
+consu
+\family default
+), age of the household-head (
+\family typewriter
+age
+\family default
+), occupation-rank (
+\family typewriter
+occupation_rank
+\family default
+), education-rank (
+\family typewriter
+educ_rank
+\family default
+), household-asset-score (
+\family typewriter
+norm_hh_asset_score
+\family default
+), transport-asset-score (
+\family typewriter
+norm_trans_asset_score
+\family default
+) and electrical-assets-score (
+\family typewriter
+norm_elec_asset_score
+\family default
+).
  
 \end_layout
 
 \begin_layout Standard
 There are two choices for how to observe the usage of electricity in the
- data - first, is to use an electricity-usage dummy variable and second,
- to use a probit stage as we have in the first variant.
- If we're interested in the effect of distribution of electricity on overall
- quality of commodities or the consumer preference for electricity.
+ data - first, is to use an electricity-usage related dummy variable and
+ second, is to use a probit stage as we have in the first variant.
  If we were to understand the consumer preference for electricity, a probit
  stage would be more appropriate.
- But since we have already seen from the item-wise AIDS that consumers prefer
- electricity as their incomes rise, we're more interested in understanding
- how the choice for quality for other commodities can changes in the context
- of preference for electricity.
- Hence, a dummy variable indicating whether the electricity is available
- in the region (not whether the consumer herself uses electricity or not)
- is used in the aggregated model.
- We have used this variable as one of the household characteristics
+ But since we have already seen from the item-wise AIDS above (Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:HeienWesselsAIDS"
+
+\end_inset
+
+) that consumers prefer electricity as their incomes rise, we're more interested
+ in understanding how the choice for quality for other commodities can change
+ in the context of preference for electricity.
+ Hence, a variable indicating the consumer's possession of electric items
+ is used in the aggregated model as one of the household characteristics
+ 
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-It may be possible to use this indicator variable a dependent variable of
- one of the additional 
+It may be possible to use an indicator variable for whether the consumer
+ uses electricity or not (available in the data through the "lighting source"
+ used by the household) as the dependent variable in one of the additional
+ 
 \begin_inset Formula $ln\ V$
 \end_inset
 
@@ -1979,10 +2019,11 @@ It may be possible to use this indicator variable a dependent variable of
 \end_inset
 
 .
+ 
 \end_layout
 
 \begin_layout Standard
-The functional groups chosen for the model therefore - densefoods, non-fresh,
+The functional groups chosen for the model are - densefoods, non-fresh,
  fruits-veg, protein, complements, energy, household and transport (see
  Table 
 \begin_inset CommandInset ref
@@ -2008,18 +2049,19 @@ The results obtained from the SUR confirm many of the findings from the
  demand for non-durable items - their quality in particular.
  We notice that having electricity (and assets running on electricity) has
  an influence on quality elasticities of freshfoods and protein - whereas
- other food types are not influenced so much by having electricity.
+ other food types are either not influenced so much (negatively influenced)
+ by having electricity.
  This is likely due to the improvement of household equipment with electricity
  such as refrigerator or ovens.
  It appears that those with other household-assets (furniture etc.) do not
  seem to spend so differently on quality (except for the household related
- expenditure) but the owners of electricity assets do.
+ expenditure) the way the owners of electricity assets do.
  The improved quality in food is therefore not just experienced through
  income - but through availability of assets.
- Also, the expenditure on household category seems to be higher for consumers
- that are in rural areas compared to those in the urban areas - implying
- once again, that a certain items (non-electric household items in this
- case) become less relevant in the urban setting.
+ Another observation is that the expenditure on household category seems
+ to be higher for consumers that are in rural areas compared to those in
+ the urban areas - implying once again, that a certain items (non-electric
+ household items in this case) become less relevant in the urban setting.
 \end_layout
 
 \begin_layout Standard
@@ -2028,11 +2070,11 @@ In conclusion, the price-based aggregation of the second variant allows
  approach.
  The inclusion of assets and the expenditure data from recall methods on
  household-transportation helps us explain how the expenditure on quality
- varies across populations.
- If it is possible to model the acquisition of assets over time, then the
+ varies across the population.
+ If it is possible to model the acquisition of assets over time, then an
  intertemporal setting could further enhance our understanding of how quality
- of expenditure is maintained over time - allowing us to comment on how
- status is indicated through consumption.
+ of expenditure is maintained over time - allowing us to provide more robust
+ insights on how status could be indicated through consumption.
  To motivate a discrete model for consumer choice, we thus provide a multinomial
  logit analysis of quality against assets in the current chapter.
 \end_layout
