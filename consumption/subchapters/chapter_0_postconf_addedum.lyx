@@ -140,7 +140,15 @@ key "DeatonMuellbauerAIDS"
  as a control variable in the AIDS budget share equations whereas the quality-ch
 oices appear as dependent variables in the equations (along with the budget
  shares for every commodity).
- This is the "Unrestricted Method" used by McKelvey 
+ This is the 
+\begin_inset Quotes eld
+\end_inset
+
+Unrestricted Method
+\begin_inset Quotes erd
+\end_inset
+
+ used by McKelvey 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "McKelveyQuality2011"
@@ -221,20 +229,21 @@ key "MuellbauerAggConsum"
 
 \end_inset
 
-), the method is simple to implement and yet readily conforms to the demand
+, the method is simple to implement and yet readily conforms to the demand
  function restrictions.
  Still, AIDS implementations - like any other - are often ailed by the lack
  of observed market prices.
- The approach that is used quite often is to stick the implicit price-deflator
- (or unit-values) as prices in the AIDS regressions (see Tafere et al 
+ An approach used quite often in empirical studies is to stick the implicit
+ price-deflator (or unit-values) as prices in the AIDS regressions (see
+ Tafere et al 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "TafereTaffesseEthiopia2010"
 
 \end_inset
 
- for a recent example).
- While this may be the best way to proceed when market price are not observed,
+ for a recent implementation).
+ While this may be the best way to proceed when market prices are not observed,
  their use can result in a severe measurement error since the quantities
  consumed by the consumer appear both in the dependent variable (as budget
  share's numerator) of the AIDS equations (see Equation 
@@ -244,8 +253,8 @@ reference "eq:wessells_aids"
 
 \end_inset
 
-) and in the control variables (as the denominator for unit-value used as
- price).
+) and in their control variables (as the denominator for unit-value used
+ as price).
  Since observing market prices prevents such measurements errors (see the
  discussion by McKelvey 
 \begin_inset CommandInset citation
@@ -261,12 +270,12 @@ key "GibsonKimQualityBog2019"
 
 \end_inset
 
-), we prefer their use for understanding the consumption of quality.
+), we prefer their use for measuring the consumption of quality.
 \end_layout
 
 \begin_layout Standard
 The lack of market prices in consumer surveys hardly makes the AIDS methodology
- less usable - only that the correction of such measurement errors is not
+ less usable - just that the correction of such measurement errors is not
  always trivial (see Deaton
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -282,7 +291,7 @@ key "McKelveyQuality2011"
 \end_inset
 
  of the Deaton method).
- AIDS method can in fact be easily extended to other panel data scenarios.
+ AIDS method can be readily extended to other panel data scenarios.
  For example, the demographic variables in the AIDS model can be accommodated
  with the so-called demographic translation where the intercept 
 \begin_inset Formula $\alpha_{i}$
@@ -392,6 +401,10 @@ reference "eq:wessells_probit"
 .
  This ratio i.e.
  the quantity 
+\begin_inset Formula $R_{ih}$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -409,7 +422,7 @@ R_{ih} & =\begin{cases}
 \end_layout
 
 \begin_layout Standard
-is used as an instrument in following equation (second stage) to estimate
+is used as an instrument in the following equation (second stage) to estimate
  the item-elasticities:
 \end_layout
 
@@ -467,8 +480,15 @@ However, a simpler linear-AIDS formulation is often used so that
 \end_inset
 
 .
- Heien-Wessells implementation choose a more general approach for the instrument
- variable by adding an equation to the system with term 
+ Heien-Wessells
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+
+\end_inset
+
+ choose a more general approach for the instrument variable by adding an
+ equation to the system with term 
 \begin_inset Formula $\delta_{i}R_{ih}$
 \end_inset
 
@@ -571,14 +591,14 @@ n (or ownership of long-term durable goods) matters more than quality variation.
 \end_layout
 
 \begin_layout Standard
-The prices observed in the market are central to our measure of quality
- and to the later discussion of cross-price effects.
- As we don't use price-deflators in our analysis (due the measurement errors
- that arise with quantity being in both in the denominator of the control
- variables and in the numerator of the dependent variable), a matching of
- prices of the items observed in the market (identified by region and district)
- to those of the items purchased by the consumer (with known region and
- district) is of key importance to our analysis.
+The prices observed in the market drive our measure of quality and the later
+ discussion of cross-price effects.
+ Since we don't use price-deflators in our analysis (due the measurement
+ errors that arise with quantity being in both in the denominator of the
+ control variables and in the numerator of the dependent variable), a matching
+ of prices of the items observed in the market (identified by region and
+ district) with the prices of the items purchased by the consumer (with
+ known region and district) is of key importance to our analysis.
 \end_layout
 
 \begin_layout Standard
@@ -718,7 +738,7 @@ reference "fig:markedprices"
 \end_inset
 
  for the plot of these example prices.
- As if often the case, such unit-prices grow at a less than linear rate
+ As is often the case, such unit-prices grow at a less than linear rate
  as is shown in the plot of the unit-price corresponding to the quantities
  in Figure 
 \begin_inset CommandInset ref
@@ -833,7 +853,8 @@ This does not happen as frequently as one may imagine.
 With the prices we obtain after the regression, we match the price for every
  commodity consumed by the household based on the district it is located
  in.
- The next step is to define the groups based on price-structure.
+ The next step is to define commodity groups based on the observed price-structu
+re.
  We use a broad classification of items for separability assumption to hold.
  Within foods we observe protein, fruits, dense-foods, complements and non-fresh
  groups and within energy, we put kerosene and electricity under the same
@@ -864,7 +885,7 @@ ges for some items and region averages for other.
 \shape italic
 and 
 \shape default
-finer as well as uniformly collected household consumption data.
+a uniformly collected household consumption dataset.
 \end_layout
 
 \begin_layout Standard
@@ -1035,8 +1056,8 @@ Analysis
 \end_layout
 
 \begin_layout Standard
-A price-based view of quality has been adopted for our current analysis.
- Thus a consumer who buys more of the high-priced item is seen as consuming
+The current analysis adopts a price-based view of quality.
+ Thus a consumer who buys more of the high-priced item is viewed as consuming
  higher quality.
  This view allows us to see how the demand for quality is distributed across
  the population and varies in response to prices.
@@ -1044,8 +1065,8 @@ A price-based view of quality has been adopted for our current analysis.
 \end_layout
 
 \begin_layout Standard
-A framework often used for analysis of quality treats quality as a regular
- item in the market.
+A framework often used for analysis of quality treats quality as if it were
+ a regular item to be purchased in the market.
  As for any other item, therefore, the demand for quality must conform to
  the usual demand restrictions i.e.
  the conditions of homogeneity, adding up and non-negativity of the Slutsky
@@ -1088,14 +1109,14 @@ commodity
 \begin_inset Quotes erd
 \end_inset
 
- (also see Cox
+ (see Cox
 \begin_inset CommandInset citation
 LatexCommand cite
 key "CoxWohlgenant1986"
 
 \end_inset
 
- for the notes on this nomenclature).
+ for further notes on this nomenclature).
  
 \end_layout
 
@@ -1110,8 +1131,8 @@ key "GrilichesIndex1971"
 
 \end_inset
 
- for the theoretical underpinnings with the approach and with measurement
- of quality change).
+ for the theoretical underpinnings with the approach and for an account
+ of measurement of quality change).
  A formulation more relevant to our approach is provided by Houthakker 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1279,11 +1300,15 @@ One way to establish this equivalence is to interpret the quality in the
 
 \begin_layout Standard
 Let's consider an example to illustrate how this measure of quality relates
- with total expenditure 
+ with the total expenditure 
 \begin_inset Formula $E_{G}$
 \end_inset
 
- in the group, the group aggregate price 
+ in the group 
+\begin_inset Formula $G$
+\end_inset
+
+ and the group aggregate price 
 \begin_inset Formula $P_{G}$
 \end_inset
 
@@ -1377,8 +1402,9 @@ red weighted quantity as the quality-adjusted quantity and express the pair
 \end_inset
 
  .
-  Notice that the price of composite quality is exactly zero since the total
- expenditure is already accounted for in the composite good i.e.
+  In a certain way, the price of composite quality can be viewed as exactly
+ zero since the total expenditure is already accounted for in the composite
+ good's consumption i.e.
  10
 \begin_inset Formula $\times4=40$
 \end_inset
@@ -1432,13 +1458,15 @@ key "DeatonQualityQuantityVariation"
 \end_layout
 
 \begin_layout Standard
-It is worth emphasising that the quality metric used above rests upon the
+It is worth reiterating that the quality metric used above rests upon the
  rather stringent condition of a constant relative price structure (i.e.
  the Hicks aggregation commodity theorem).
- Further, we can aggregate quality in the commodity only as long as the
- goods within the commodity group can be ordered based on a certain criteria
- - an order that is the judgment of the researcher - not the consumer (see
- Nelson
+ This is why our classification of items into commodity groups is driven
+ by the price-structure.
+ Moreover, the quality within a commodity group can be aggregated only as
+ long as the goods that the group comprises of can be ordered based on a
+ certain criteria - an order that is the judgment of the researcher - not
+ the consumer (see Nelson
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity"
@@ -1471,8 +1499,7 @@ Notice also that one cannot talk about the quality metric
 \end_inset
 
  defined above unless the quantity of consumption is observed in data.
- This is often the case for food, but not necessarily for other goods such
- as energy.
+ This is often the case for food, but not necessarily for other goods.
 \end_layout
 
 \end_inset
@@ -1481,9 +1508,9 @@ Notice also that one cannot talk about the quality metric
  The approaches that view a higher quality product in terms of a lower quality
  product are problematic when the items vary widely.
  As an example, the demand of a better good in a commodity group as a multiple
- of the worse good may be plausible for meat/food whereas considering electricit
-y in terms of the coal used into one aggregate is far less plausible (see
- the discussion on consumer indices in Fisher-Shell 
+ of the worse good may be plausible for meat/food - but considering electricity
+ in terms of coal into one aggregate is far less plausible (see the discussion
+ on consumer indices in Fisher-Shell 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "FisherShell1968"
@@ -1492,7 +1519,7 @@ key "FisherShell1968"
 
  on how this issue could be remedied).
  At the consumer's level, the substitution between kerosene and electricity
- is not as straightforward as amongst qualities of protein.
+ is not as straightforward as amongst the quality variants of protein.
  A continuous measure of quality does make more sense in a setting where
  a mixture of high and low quality items are consumed (see Houthakker 
 \begin_inset CommandInset citation
@@ -1507,7 +1534,7 @@ key "HouthakkerFamilySurvey"
 \end_layout
 
 \begin_layout Standard
-In non-food categories (e.g.
+In the non-food categories (e.g.
  transport - which is the subject of a seminal work on discrete choice by
  Domencic-McFadden
 \begin_inset CommandInset citation
@@ -1531,8 +1558,9 @@ key "McFaddenDomencic1975"
 As our wider goal has been to explain status consumption using the intertemporal
  substitution and the consumer's perception of risk, we intend to use the
  asset ownership of consumers, their needs and the consumption of quality
- in the intertemporal setting to explain how they may substitute between
- quality over commodity groups and the assets owned (see condition C1).
+ in the intertemporal setting to explain how the consumers may substitute
+ between quality spread across commodity groups and the assets owned (see
+ condition C1).
  Thus, a rise in prices of electricity could affect food quality - even
  though the quantity consumed is limited by needs.
  An analysis of the cross-price effects i.e.
@@ -1540,11 +1568,11 @@ As our wider goal has been to explain status consumption using the intertemporal
  help us understand this substitution.
  The data on possession of assets can also indicate the differences in the
  quality tastes in the different asset ownership bands.
- A comparison of changes in asset ownership over time and across several
- household-characteristics can comment on whether the consumers sustain
+ With a comparison of changes in asset ownership over time and across several
+ household-characteristics, one can comment on whether the consumers sustain
  the quality consumption patterns relative to stock purchases (LTDG) or
  not.
- This is the topic to discussed in the subsequent chapters.
+ This would be explored in the subsequent chapters.
 \end_layout
 
 \begin_layout Standard
@@ -1570,14 +1598,15 @@ key "McKelveyQuality2011"
 
 ) uses the measure of quality (as defined above) - except for electricity
  (which is simply an indicator variable).
- Asset ownership also appear as indicator variables in the latter variant.
+ Asset ownership metrics also appear as indicator variables in the latter
+ variant.
  
 \end_layout
 
 \begin_layout Standard
-We argue in favour of a discrete method - which we believe would make more
- sense in the status consumption contexts where the ownership of long-term
- durable goods needs to be considered.
+In the end we argue in favour of discrete methods - which we believe would
+ make more sense in the status consumption contexts where the ownership
+ of long-term durable goods needs to be considered.
  A cross-section analysis of quality and assets purchased is thus provided
  to motivate the need for a discrete modeling of choice.
 \end_layout
@@ -1591,7 +1620,7 @@ name "subsec:HeienWesselsAIDS"
 
 \end_inset
 
-An item-wise selection approach
+A selection approach to item-wise AIDS
 \end_layout
 
 \begin_layout Standard
@@ -1663,8 +1692,8 @@ The constraints of symmetry, additivity and homogeneity are essential in
  imposing the constraints are presented in the Appendix.
  The own-price and cross-price elasticities in the results provide us an
  overview of the demand across rare and commonly consumed items.
- Our interpretation is based solely on the statistical significance (value
- of 
+ We base on interpretation on both the statistical significance (value of
+ 
 \begin_inset Formula $z$
 \end_inset
 
@@ -1698,8 +1727,8 @@ key "ZahraIndia,KausSA,CharlesHurstRace"
 
 \end_inset
 
-), the censored AIDS formulation was favoured due to reasons - first it
- allows us to understand the cross-price effects in a more robust framework
+), the censored AIDS formulation was favoured due to two reasons - first
+ it allows us to understand the cross-price effects in a more robust framework
  and second, it accounts for the non-consumption of items.
  
 \end_layout
@@ -1722,7 +1751,7 @@ d consumption in the developing countries.
 
 \begin_layout Standard
 Despite the detailed analyses that the cross-elasticities can provide, there
- are indeed limitations to an item-wise approach.
+ are limitations to an item-wise approach.
  First, the detailed cross-elasticities are more likely to fluctuate over
  time and would require us to use a dynamic approach to ascertain model
  stability (an inertia or myopia in choices can be maintained to address
@@ -1730,16 +1759,23 @@ Despite the detailed analyses that the cross-elasticities can provide, there
  Second, and more importantly, the cross-price elasticities fail to model
  the functional separation in consumption e.g.
  the lack of substitutability between energy and food items.
- For example, the cross-elasticities of kerosene with buns or cassava cannot
- be interpreted unless one imposes other assumptions on the closely observed
- consumption patterns (e.g.
- more buns would means less cooking in the household etc.) or even stricter
- separability assumptions.
+ For example, the cross-elasticities of kerosene with respect to buns or
+ cassava cannot be interpreted unless one imposes other assumptions on the
+ closely observed consumption patterns (e.g.
+ more buns would means less cooking in the household etc.) or stricter separabili
+ty assumptions (see Deaton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonUnderstandingConsumption"
+
+\end_inset
+
+ for a discussion on the need to impose such structures).
  Since we are concerned with the choice of quality exercised by the consumer
  when faced with multiple varieties of several qualities and price, an aggregate
 d view of the basket seems more appropriate.
- Such an aggregation is based on a measurable criteria - which for the current
- approach is the price of the items.
+ Such an aggregation ought to be based on a well-defined criteria - which
+ for our current approach is the price of the items.
  The availability of price information between the years 2008 and 2014 prevents
  the problems that could be faced by other grouping criteria - such as visibilit
 y (used in much of the literature on conspicuous consumption) - the changes
@@ -1752,10 +1788,10 @@ The aggregated view does add the functional view to the consumer choice
  Observing consumption at a higher level e.g.
  with separability assumptions facilitates the interpretation of cross-price
  effects.
- Whenever aggregation is possible (subject to restrictions), it can provide
- a way to interpret the consumer choice for quality - while representing
- the substitution between broader categories and the price variants within
- the commodities in the econometric model.
+ Whenever aggregation is possible (subject to restrictions), it allows us
+ to interpret the consumer choice for quality - while representing the substitut
+ion between broader categories and the price variants within the commodities
+ in the econometric model.
  
 \end_layout
 
@@ -1773,12 +1809,19 @@ Further, the aggregation provides an intermediate step to merging the data
 \begin_layout Subsection
 
 \size normal
-LA AIDS model for Aggregate Quality 
+An LA-AIDS model for Aggregate Quality 
 \end_layout
 
 \begin_layout Standard
-In AIDS equations for the unrestricted method, quality is measured as described
- with the Equation 
+In the AIDS equations used for the 
+\begin_inset Quotes eld
+\end_inset
+
+Unrestricted method
+\begin_inset Quotes erd
+\end_inset
+
+, we measure quality as described with the Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:quality_def"
@@ -1793,14 +1836,14 @@ reference "sec:Analysis"
 \end_inset
 
 ).
- These AIDS equations used are fewer than in the item-wise censored model
- of the first AIDS variant.
- Every commodity aggregate - which consists of several items - corresponds
- to one aggregate quantity/budget equation and a quality metric corresponding
- to the commodity aggregate.
+ These AIDS equations used are evidently fewer than those in the item-wise
+ censored model of the first AIDS variant.
+ This is because every commodity aggregate - comprising of several items
+ - corresponds to one aggregate quantity/budget equation and a quality metric
+ corresponding to the commodity aggregate.
  The aggregation also circumvents the issue of non-consumption since it
  is much less likely for no items to be consumed within a functional commodity
- group (fruits-veg, starch, protein etc.) .
+ group (fruits-veg, starch, protein etc.).
 \end_layout
 
 \begin_layout Standard
@@ -1809,11 +1852,11 @@ Notice that while such an AIDS formulation does not model the intertemporal
  in certain commodity groups with the durable good possession in others
  (Recall also that we rule out the use of a two-state budgeting model since
  a substitution exists between commodity groups due to this very condition).
- The commodity groups used for the our analyses are food, energy, household
+ The commodity groups used for our analyses are food, energy, household
  and transportation.
  We use the CPI for housing and transportation since the expenditure on
- them is considered elementary consumption - categories where assets/LTDG
- are deemed more important.
+ them is considered elementary consumption (these are categories where assets/LT
+DG are deemed more important).
  In other words, no quality differences are observed in consumption on household
  items (toilet rolls, clothing etc.) or transportation.
  The expenditure on housing and transportation are treated as if they were
@@ -1921,8 +1964,8 @@ Unrestricted method
 \end_inset
 
 ).
- Notice that since the price for quality is not needed, the price-coefficients
- in the 
+ Since the price for quality is not required, the price-coefficients in
+ the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2048,13 +2091,12 @@ The results obtained from the SUR confirm many of the findings from the
  itemwise-probit but also suggest the relevance of asset ownership in the
  demand for non-durable items - their quality in particular.
  We notice that having electricity (and assets running on electricity) is
- associated with quality elasticities of freshfoods and protein - whereas
- other food types such as dense-foods are either not influenced much by
- having electricity or are negatively influenced.
+ associated with higher quality for freshfoods and protein - whereas other
+ food types such as dense-foods are either not influenced much by having
+ electricity or are negatively influenced.
  This may be due to the improvement of household equipment with electricity
- such as refrigerator or ovens.
- Other household-assets (furniture etc.) are not related to different consumption
- on quality the way electrical assets are 
+ such as refrigerator or ovens - as other household-assets (furniture etc.)
+ are not associated with different consumption on quality 
 \begin_inset Foot
 status open
 
@@ -2071,49 +2113,53 @@ Higher transport asset score is in fact associated with less expenditure
 \end_layout
 
 \begin_layout Standard
-It seems that the improved quality in food is experienced not just with
- increased income - but through ownership of assets.
- Notice also that the higher income seems to improve the quality of densefoods
- and of transport - but not necessarily for other commodities.
- The dense-foods and and non-fresh commodities are also those which are
- more sensitive than others to the increased number of household members.
+It seems that the improved quality in certain food categories is experienced
+ with ownership of assets - more than it is with increased income.
+ Indeed the higher income seems to improve the quality for densefoods and
+ of transport - but not necessarily for other commodities.
+ The dense-foods and and non-fresh commodities are also those that are sensitive
+ (more so than others) to the increased number of household members.
  The expenditure in the household commodity group - being higher for consumers
- that are in rural areas compared to those in the urban areas - also hints
- at certain life-style differences in the densely populated urban areas
- brought about by - amongst other things - the availability of electricity.
+ that are in rural areas compared to those in the urban areas - hints at
+ certain life-style differences in the densely populated urban areas brought
+ about by - amongst other things - the availability of electricity.
  
 \end_layout
 
+\begin_layout Subsection
+Discussion
+\end_layout
+
 \begin_layout Standard
-The price-based aggregation of this second variant thus allows us to have
- a discussion on quality that was somewhat adhoc with an item-wise approach
- of the first variant.
+The price-based aggregation of this second variant allows us to have a discussio
+n on quality that was somewhat adhoc with an item-wise approach of the first
+ variant.
  The inclusion of assets and the expenditure data from recall methods on
  household-transportation helps us explain how the expenditure on quality
  may change within the population.
  As would be amenable to a permanent income approach, the consumer habits
- do seem to influenced by the long-term financial standing of the consumer
- that we have attempted to gauge with the assets owned by consumers.
+ do seem to influenced by the financial standing of the consumer that we
+ have attempted to gauge with the assets owned by consumers.
 \end_layout
 
 \begin_layout Standard
-One may not infer more general trends on savings and expenditure from the
- possession of electrical assets alone - whose distribution is non-uniform
+It is difficult to infer general trends on savings and expenditure from
+ the possession of electrical assets - whose distribution is non-uniform
  in Tanzania.
  Given the dependency of several industrial assets on electricity, it is
- hardly surprising that those in the urban areas spend differently.
- However, the observation of quality differences for meat and fresh items
- indicates a peculiar environment that the distribution of electricity is
- associated with.
+ hardly surprising that those in the urban areas spend differently on items.
+ Nevertheless, the observation of quality differences for meat and fresh
+ goods indicates a peculiar environment that the distribution of electricity
+ is associated with.
  It isn't simply that those with electric assets tend to buy more (due to
  higher conservation offered by refrigerators and other equipment) - but
- it is that the quality purchased appears higher for the consumers owning
- electrical items.
- The users of electricity seem to be choosing a slightly different life-style
- where exotic meats and fresh products are made available.
+ the quality purchased appears higher for the consumers who own electrical
+ items.
+ The users of electricity may be choosing a slightly different environment
+ where exotic and pricier meats and fresh products are made available.
  This segregation of quality (in food or in other non-durable commodities)
- may indicate more of the environment where the items are consumed than
- the habits of consumers per se.
+ speaks more of the environment where the items are consumed than of the
+ consumer habits.
  
 \end_layout
 
@@ -2130,17 +2176,18 @@ quality of life
  The differences in quality of assets can also exist for the consumer but
  we recognise that owned assets are of less importance within certain commodity
  groups (see condition C1).
- To clarify some of these notions, we now outline a model for intertemporal
- choice that would be developed further in later sections.
+ To quantify some of these notions of life-style choices through quality
+ and assets, we now outline a model for intertemporal choice that would
+ be developed further in later sections.
  
 \end_layout
 
 \begin_layout Standard
-We assume that consumer optimises her long-term direct direct utility that
- is a function of the needs, the assets she possesses and the quality of
- non-durable consumption.
- If we compare two consumers in the urban and rural area - denoting their
- assets, quality and needs as 
+We consider a long-term direct utility that the consumer optimises such
+ that it is a function of the needs, the assets she possesses and the quality
+ of her non-durable consumption.
+ Considering two consumers in the urban and rural areas with the assets,
+ quality and needs being 
 \begin_inset Formula $(A_{u},\rho_{u},\eta)$
 \end_inset
 
@@ -2148,16 +2195,16 @@ We assume that consumer optimises her long-term direct direct utility that
 \begin_inset Formula $(A_{r},\rho_{r},\eta)$
 \end_inset
 
- respectively (we set 
+ respectively (for simplicity, we have set 
 \begin_inset Formula $\eta_{u}=\eta_{r}=\eta$
 \end_inset
 
- for simplicity), a non-decreasing utility would mean 
+), a non-decreasing utility would mean that 
 \begin_inset Formula $A_{u}>A_{r}\Rightarrow u(A_{u},\rho_{u})>u(A_{r},\rho_{u})$
 \end_inset
 
 .
- It is quite possible that 
+ It is also possible that 
 \begin_inset Formula $u(A_{u},\rho_{r})$
 \end_inset
 
@@ -2170,13 +2217,11 @@ We assume that consumer optimises her long-term direct direct utility that
 \end_inset
 
  may not be available to the rural consumer.
- Notice that we don't consider income in this long-term utility purposes
- because the effect of income isn't realised and is not visible to other
- consumers without purchases of assets and quality.
- For example, having a refrigerator would be more noticeable than the income
- of the consumer and might improve the consumer's ranking in terms of owned
- assets and self-image.
- 
+ Notice that we don't consider income as an input to the long-term utility.
+ This is because we assume that the utility of income is realised with the
+ purchases of assets and quality.
+ For the urban and the rural consumer, as an example, having a refrigerator
+ or a car would be more noticeable than the income itself.
 \end_layout
 
 \begin_layout Standard
@@ -2196,87 +2241,114 @@ A non-decreasing utility also implies that for a rural consumer who does
 \end_inset
 
 .
- While can assume a form of this social function 
+ While a particular form of this social function 
 \begin_inset Formula $u$
 \end_inset
 
- in order to understand how consumer may compensate for not having an asset,
- one also needs to answer specific questions for an empirical analysis -
- such as whether more furniture for a rural resident would ever make her
- indifferent to owning electrical assets and less furniture in an urban
- area or whether higher priced assets would always provide higher long-term
- utility to a consumer.
+ may help us understand how a consumer compensates for not having an asset,
+ it is the relevance of such choices to the observed consumption data that
+ concerns us more in an empirical analysis.
+ A utility function that we desire should help us quantitatively explain
+ for example - how much more furniture for a rural consumer would make her
+ indifferent to owning electrical assets (and less furniture) in an urban
+ area.
+ It should also explain whether higher priced assets always provide a higher
+ long-term utility to a consumer etc.
+ With vast differences in income and wealth that exist in many of the developing
+ countries, such questions need to be considered in a discussion on consumption
+ of quality.
 \end_layout
 
 \begin_layout Standard
-To account for the differences in life-style choices and assets owned as
- well as the unobservable factors that influence the choices, we introduce
- an uncertainty in the utility - so that our representative consumer with
- a higher value of owned assets has only a probabilistic higher long-term
- utility.
+To model the sharp (discrete) differences in life-style choices and the
+ unobservable factors that create them, we introduce an uncertainty in the
+ long-term utility - so that our representative consumer who has a higher
+ value of owned assets has only a probabilistic higher long-term utility.
  The long-term utility in the model is incremented in a deterministic fashion
- with the assets that can be transferred over generations (including education,
- language spoken and occupational ranks) while the immediate enhancements
- to felicity, improvement in self-image contribute as less deterministic
- factors to the long-term utility.
- The consumer may not gain any long-term benefits from immediate felicity
- and stochastic factors other than a better self-image and social environment
- that would in turn help her acquire assets in long-run.
- So long as a distinction between quality, needs and assets can be made,
- the consumption in quality is to reflect the self-image of the consumer
- - i.e.
- her expectation of a future improvement of the long-term standing.
+ only with the assets that can be transferred over generations (including
+ education, language spoken and occupational ranks) while the immediate
+ enhancements to felicity, improvement in self-image - all contribute as
+ less deterministic factors to the long-term utility.
+ Thus our representative consumer may not gain any long-term benefits from
+ an immediate felicity and the stochastic factors other than a better self-image
+ and social environment which would in turn help her in acquiring assets
+ in the longer run.
+ We claim that as long as an empirical distinction between quality, needs
+ and assets can be made, the consumption of quality would reflect the self-image
+ of the consumer - i.e.
+ her expectations of a future improvement of the long-term standing.
 \end_layout
 
 \begin_layout Standard
-There is an important empirical advantage to differentiating assets form
- quality in the above fashion if one were to extend the notion of long-term
- utility to status-related consumption.
- While the literature often relies on Veblen's futility assumption for conspicuo
-us items - treating status goods as ones that offer no true utility - our
- approach would allow all items to contribute to status.
- Thus every purchase of any kind can improve one's relative position in
- the society by offering an immediate benefit, an expectation of self-improvemen
-t and a definite long-term improvement in wealth and security.
- The researcher can associate certain items to the group for these functions
- while the consumers in the model can either attain higher wealth (income)
- through long-term assets or increase the felicity and the expectation of
- stable high-income through higher non-durable consumption.
- In an equilibrium, the consumers would stay at a quality level just equal
- to the perceived probability of promotion - as the deterministic part of
- their long-term growth is provided by owned transferable assets.
+There is an important advantage in the empirical work with the differentiation
+ of assets from quality in the above fashion - particularly so if one were
+ to extend the notion of long-term utility to status-related consumption.
+ While the literature on conspicuous consumption often relies on Veblen's
+ futility assumption for conspicuous items - treating status goods as those
+ that offer no true utility - our approach may allow all items to contribute
+ to status by letting every purchase of any kind improve one's relative
+ position in the society.
+ A good would contribute to utility by offering i) an immediate benefit
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $(\eta)$
+\end_inset
+
+ ii) an expectation of self-improvement 
+\begin_inset Formula $(\rho)$
+\end_inset
+
+ and iii) a definite long-term improvement in wealth or security 
+\begin_inset Formula $(A)$
+\end_inset
+
+.
+ The researcher can associate certain items to the respective groups for
+ each of these functions while the model's representative consumers ought
+ to either attain higher wealth (income) through long-term assets or increase
+ the felicity and the expectation of stable high-income through higher non-durab
+le consumption.
+ In an equilibrium, the consumers would stay at a quality consumption level
+ just equivalent to the perceived probability of promotion - as the deterministi
+c part of their long-term utility is provided by owned transferable assets.
 \end_layout
 
 \begin_layout Standard
-The model above is indeed a simplistic one as it treats a population with
- more focus on quality as participating in more conspicuous consumption.
- However, we must emphasise the reliance of this model on the notions of
- quality, need and assets - which may vary across geographies and require
- a subjective judgment.
- Indeed, the ability of market to differentiate items within a commodity
- also influences this separation of utility (more quality is on offer in
+The model above is indeed a simplistic one since it treats a population
+ with more focus on quality as the one participating in more conspicuous
+ consumption.
+ However, we must emphasise that the above approach relies on the notions
+ of quality, need and assets - ideas that vary across geographies and require
+ some subjective judgment.
+ It would be hardly appropriate - for example - to consider sundry electrical
+ items as assets in a developed economy.
+ The ability of a market to differentiate items within a commodity also
+ influences the particular view of utility (more quality is on offer in
  some markets than others).
  
 \end_layout
 
 \begin_layout Standard
 With a model for a risky long-term utility, we can now return to comparing
- rural and urban consumers.
+ the rural and the urban consumers.
  It is possible that the rural consumer not having the refrigerator believes
  that she isn't far away from having one by enhancing her social network
- and obtain higher ranking within her own locality.
+ and obtaining higher ranking within her own locality.
  Urban life does not need to imply a necessarily better life-style but it
  does provide an increased possibility of access to industrial goods - such
  as electrical items.
  Further, if the consumer is amongst the poor in a rural area (lower ranking
- due to assets) and consumes less quality, she may have little to lose by
- moving to the urban area - where the assets may be lower, but the perceived
+ due to assets) and consumes less quality, then she may have little to lose
+ by moving to the urban area - where the assets may be lower, but the perceived
  probabilities of transition are higher due to higher population and increased
  qualities (availability of new assets).
- There is an upfront cost to pay - possibly with loss of assets or quality
+ There is an upfront cost to pay - possibly with a loss of assets or quality
  in other areas - but it isn't reflected in the differences in cost of assets
- possessions but in an increased perceived probability which we gauge with
- quality.
+ alone.
+ Instead, an increased perceived probability (quality) also has a role to
+ play in the long-term utility.
 \end_layout
 
 \begin_layout Standard
@@ -4372,324 +4444,6 @@ twocolumn
 \end_inset
 
 
-\end_layout
-
-\begin_layout Section*
-
-\size normal
-Future Work
-\end_layout
-
-\begin_layout Standard
-We are only concerned with the status view of consumption.
- Rather than assuming the status consumption exists through conspicuous
- goods - we set to find out what status competitions look like.
- In the cost function, the expenditure for a certain utility depends on
- price of quality, minimum cost of having children (subsistence of family
- members) and the cost of long-term assets - 
-\begin_inset Formula $c(u,p_{\kappa},p_{A},p_{\eta})$
-\end_inset
-
-.
- For us to use anything close to the AIDS form, we must explain the cost
- function with 
-\begin_inset Formula $\eta$
-\end_inset
-
- and 
-\begin_inset Formula $\kappa$
-\end_inset
-
- .
- One way is to extend Gorman theory in terms of 
-\begin_inset Formula $\eta$
-\end_inset
-
- and 
-\begin_inset Formula $\kappa$
-\end_inset
-
- - which is equivalent to interpreting it in terms of 
-\begin_inset Formula $p_{A}$
-\end_inset
-
- and 
-\begin_inset Formula $p_{\kappa}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-In a direct utility function, we may write 
-\begin_inset Formula $u=f(\kappa,A,\eta)$
-\end_inset
-
-.
- The discontinuity in asset ownership is a legitimate concern it is 
-\begin_inset Formula $\frac{\partial u}{\partial A}$
-\end_inset
-
- is continuous.
- 
-\begin_inset Formula $\frac{\partial u}{\partial A}$
-\end_inset
-
- is definitely non-decreasing but it may not be differentiable the same
- way 
-\begin_inset Formula $\frac{\partial u}{\partial\kappa}$
-\end_inset
-
- is.
- Establishing an equivalence between 
-\begin_inset Formula $ln(A)$
-\end_inset
-
- and 
-\begin_inset Formula $c_{\kappa}$
-\end_inset
-
- does simplify the problem.
- One needs to separate out 
-\begin_inset Formula $\eta$
-\end_inset
-
- completely to establish this equivalence.
- In the first simplification, needs are never compromised on, but quality
- is with savings.
- 
-\begin_inset Formula $ln(A)$
-\end_inset
-
- is influenced by 
-\begin_inset Formula $p_{A}$
-\end_inset
-
- and 
-\begin_inset Formula $c_{\kappa}$
-\end_inset
-
-.
- Here, 
-\begin_inset Formula $g(\kappa,A,\eta)=g(x,p_{\kappa},p_{A},p_{\eta})$
-\end_inset
-
-.
- However, the consumer may be indifferent between many triplets of 
-\begin_inset Formula $\kappa,A,\eta$
-\end_inset
-
- (somebody would drive a luxury car than pay for schools fees, would rather
- spend on designer clothes than save for a house).
-\end_layout
-
-\begin_layout Standard
-The understanding of quality should be done with the cost-function under
- risk.
- When consumer's maintain low quality they could be doing so to 
-\begin_inset Quotes eld
-\end_inset
-
-Invest
-\begin_inset Quotes erd
-\end_inset
-
- in items that they expect to provide returns later on.
- Quality in this sense is anything above subsistence level that is required
- for fulfillment of needs.
- 
-\end_layout
-
-\begin_layout Standard
-Now, let's assume that this function exists 
-\begin_inset Formula $u(\rho_{protein},\rho_{fruits},\rho_{energy},A_{hh},A_{trans})$
-\end_inset
-
- , the consumer optimise the utility function so that there is an uncertainty
- associated with the utility.
- The properties of the function is the key.
- Going with the Cobb-Douglas utility, we would have 
-\begin_inset Formula $u(\rho_{protein},\rho_{fruits},\rho_{energy},A_{hh},A_{trans})=M\rho_{protein}^{prot\_\alpha}\rho_{fruits}^{fruits\_\alpha}\rho_{energy}^{energy\_\alpha}A_{hh}^{hh\_\alpha}A_{trans}^{trans\_\alpha}$
-\end_inset
-
- where 
-\begin_inset Formula $prot\_\alpha+fruits\_\alpha+energe\_\alpha+hh\_\alpha+trans\_\alpha=1$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The general approach mentioned in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ManskiMcFadden1978"
-
-\end_inset
-
- (chapter 9) is the simultaneous model:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-Y_{i} & =Y_{i}B+X_{i}\Gamma+\epsilon_{i}\label{eq:simult1}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Here, 
-\begin_inset Formula $Y_{i}$
-\end_inset
-
- is 
-\begin_inset Formula $1\times G$
-\end_inset
-
-, 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- is 
-\begin_inset Formula $1\times k$
-\end_inset
-
-, 
-\begin_inset Formula $I-B$
-\end_inset
-
- is 
-\begin_inset Formula $G\times G$
-\end_inset
-
-, 
-\begin_inset Formula $\Gamma$
-\end_inset
-
- is 
-\begin_inset Formula $k\times G$
-\end_inset
-
-.
- 
-\begin_inset Formula $Y_{i}$
-\end_inset
-
- includes latent and censored DVs as well.
- If 
-\begin_inset Formula $G$
-\end_inset
-
- is split such that
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $G_{1}$
-\end_inset
-
- are observed (continuous) variables
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $G_{2}-G_{1}$
-\end_inset
-
- are limited DV
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $G_{3}-G_{2}$
-\end_inset
-
- are unobservable latent variables (with observable 
-\begin_inset Formula $I_{ji}$
-\end_inset
-
- binary indicators that are determined by the latent variable 
-\begin_inset Formula $Y_{ji}$
-\end_inset
-
- with an indicator function as 
-\begin_inset Formula $I_{ji}=\mathbb{I}(Y_{ji}>0)$
-\end_inset
-
-, where 
-\begin_inset Formula $j\in[G_{2}+1,G_{3}]$
-\end_inset
-
- ) 
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $G-G_{3}$
-\end_inset
-
- are censored DVs - indexed by 
-\begin_inset Formula $\{G_{3}+1,...,G\}$
-\end_inset
-
- which are censored by a subset of 
-\begin_inset Formula $G_{3}-G_{2}$
-\end_inset
-
- latent variables - can be partitioned into mutually exclusive sets 
-\begin_inset Formula $S_{k\in[1,L]}$
-\end_inset
-
- (
-\begin_inset Formula $L\le G_{3}-G_{2}$
-\end_inset
-
-) such that each 
-\begin_inset Formula $S_{k}$
-\end_inset
-
- is activated by 
-\begin_inset Formula $Y_{ji}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-There are two stages in the estimation.
- The first stage estimation is through the simple manipulation of Equation
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:simult1"
-
-\end_inset
-
- - 
-\begin_inset Formula $Y_{i}=\Gamma(I-B)^{-1}+\epsilon_{i}(I-B)^{-1}=X_{i}\Pi+u_{i}$
-\end_inset
-
-.
- Here, a probit or tobit could be used.
- The second stage is the estimation of structural parameters:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $Y_{i}=R_{i}\delta_{0}+Y_{i}^{*}\delta_{1}+\epsilon_{i}$
-\end_inset
-
- where 
-\begin_inset Formula $Y_{i}^{*}$
-\end_inset
-
- is a subvector of endogenous variables other than 
-\begin_inset Formula $Y_{i}\in\mathscr{Y}_{i}$
-\end_inset
-
-.
- This can be modified for estimation ...
- 
 \end_layout
 
 \end_body
