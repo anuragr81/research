@@ -1,0 +1,4458 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{lscape}
+\usepackage{longtable}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 1
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 4cm
+\topmargin 3cm
+\rightmargin 4cm
+\bottommargin 3cm
+\headheight 3cm
+\headsep 3cm
+\columnsep 1.4cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\size normal
+Introduction
+\end_layout
+
+\begin_layout Standard
+Models for demand analysis rely on exogenous price observations for the
+ consumer's basket.
+ The prices observed in the market embody both i) how the market, subject
+ to supply pressures, evaluates the needs of the consumers and ii) how it
+ prices the differences in quality variants of the same commodity to the
+ consumer.
+ Despite market-observed prices being of a central importance to the demand
+ analysis, it is only recently that the detailed prices observed in the
+ market are made available in micro-data surveys.
+ Arguing that market prices are key to an understanding of quality, we enhance
+ a typical demand analysis to include the quality variation within commodities,
+ the needs faced by the consumer and other household characteristics such
+ as income and social hierarchy.
+\end_layout
+
+\begin_layout Standard
+In the analysis that follows, the needs of the consumers are proxied by
+ the number of members (age-adjusted) in the household (and other available
+ scales) while quality is measured as the portion of budget spent on high
+ vs low-price items.
+ With the AIDS formulation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonMuellbauerAIDS"
+
+\end_inset
+
+ for this simple model for quality, the scale of consumer needs appears
+ as a control variable in the AIDS budget share equations whereas the quality-ch
+oices appear as dependent variables in the equations (along with the budget
+ shares for every commodity).
+ This is the 
+\begin_inset Quotes eld
+\end_inset
+
+Unrestricted Method
+\begin_inset Quotes erd
+\end_inset
+
+ used by McKelvey 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ and Gibson et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AndalonGibsonSoda2017"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+As argued before, the status that a consumer derives from consumption must
+ come out of either elite non-durable consumption or high-priced durable
+ consumption.
+ Thus, tracking the two over time (i.e.
+ high-quality consumption and the assets owned by the consumers observed
+ over time) can help us explain status consumption with the help of a model
+ for intertemporal choice under uncertainty over time.
+ We therefore intend to measure i) the extent to which the consumers change
+ their long-term purchase habits (i.e.
+ by making some discrete choices) and ii) the extent to which they choose
+ to save for future stocks rather than to overspend on higher quality in
+ the current time period.
+ While the unrestricted method we choose allows us to explain differences
+ in quality in consumer choice, it parametrises neither the discrete choices
+ that a consumer faces on less available items (such as electricity in Tanzania)
+ nor the substitution between assets purchased and quality demanded .
+ In the current chapter, we have attempted to address the former by enhancing
+ the AIDS formulation with a selection approach.
+ A model for the latter - which requires a dynamic model for asset ownership
+ and habit changes/inertia is explored in a later chapter.
+ 
+\end_layout
+
+\begin_layout Standard
+As we present a selection equation approach for the conventional AIDS formulatio
+n in the current chapter, we discuss the distribution of quality for food
+ and non-food items before motivating a discrete choice model for uncertainty
+ to model the gaps in quality and asset ownership that may arise out of
+ long-standing inequalities in income, social inequalities or regional deprivati
+on.
+\end_layout
+
+\begin_layout Section
+
+\size normal
+Literature Survey
+\end_layout
+
+\begin_layout Standard
+In the past decades, Deaton's AIDS methodology has been employed widely
+ for its robustness and simplicity.
+ Based on PIGL approaches originally popularised by Barten
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BartenPreferences"
+
+\end_inset
+
+, Gorman
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GormanPreference"
+
+\end_inset
+
+ and Muellbauer 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MuellbauerAggConsum"
+
+\end_inset
+
+, the method is simple to implement and yet readily conforms to the demand
+ function restrictions.
+ Still, AIDS implementations - like any other - are often ailed by the lack
+ of observed market prices.
+ An approach used quite often in empirical studies is to stick the implicit
+ price-deflator (or unit-values) as prices in the AIDS regressions (see
+ Tafere et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "TafereTaffesseEthiopia2010"
+
+\end_inset
+
+ for a recent implementation).
+ While this may be the best way to proceed when market prices are not observed,
+ their use can result in a severe measurement error since the quantities
+ consumed by the consumer appear both in the dependent variable (as budget
+ share's numerator) of the AIDS equations (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_aids"
+
+\end_inset
+
+) and in their control variables (as the denominator for unit-value used
+ as price).
+ Since observing market prices prevents such measurements errors (see the
+ discussion by McKelvey 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ and Gibson 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GibsonKimQualityBog2019"
+
+\end_inset
+
+), we prefer their use for measuring the consumption of quality.
+\end_layout
+
+\begin_layout Standard
+The lack of market prices in consumer surveys hardly makes the AIDS methodology
+ less usable - just that the correction of such measurement errors is not
+ always trivial (see Deaton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation,DeatonSurveyElasticities"
+
+\end_inset
+
+ for one such approach and McKelvey's assessment 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ of the Deaton method).
+ AIDS method can be readily extended to other panel data scenarios.
+ For example, the demographic variables in the AIDS model can be accommodated
+ with the so-called demographic translation where the intercept 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ in the equation 
+\begin_inset Formula $w=\alpha_{i}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{jh})+\beta_{i}ln(\frac{x_{h}}{P})$
+\end_inset
+
+ is expanded as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\alpha_{i} & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{k}
+\end{alignat*}
+
+\end_inset
+
+ Here, 
+\begin_inset Formula $i\in[1,n]$
+\end_inset
+
+ and 
+\begin_inset Formula $d_{k}$
+\end_inset
+
+ are the demographic variables (see Pollack and Wales 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "PollockWalesDemand"
+
+\end_inset
+
+).
+ Similarly, the structural changes in the parameters over time is addressed
+ with a dynamic AIDS formulation that is often based on differencing the
+ budget shares over the time-periods (see Anderson and Blundell 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AndersonBlundellAIDSTest1983,AndersonBlundellDynEqn1982"
+
+\end_inset
+
+ for a first-order dynamic model).
+ 
+\end_layout
+
+\begin_layout Standard
+Heien and Wessells 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+
+\end_inset
+
+ adjust AIDS to account for cases when there is no consumption on certain
+ items - by incorporating an inverse Mills ratio into the AIDS regressions.
+ This approach is particularly relevant for the analysis of quality since
+ the consumption on high quality goods is often 
+\begin_inset Quotes eld
+\end_inset
+
+truncated
+\begin_inset Quotes erd
+\end_inset
+
+ for a significant part of the population.
+ This approach performs a first-stage probit where the dependent variable
+ is an indicator variable - denoting whether the household 
+\begin_inset Formula $h$
+\end_inset
+
+ consumes the item 
+\begin_inset Formula $i$
+\end_inset
+
+ (given 
+\begin_inset Formula $s$
+\end_inset
+
+ demographic variables) or not.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+Y_{ih} & =f(p_{1h},p_{2h},...,p_{nh},m_{h},d_{1h},d_{2h},...d_{sh})\label{eq:wessells_probit}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The inverse mills ratio is thus calculated for every household using the
+ probit regression equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_probit"
+
+\end_inset
+
+.
+ This ratio i.e.
+ the quantity 
+\begin_inset Formula $R_{ih}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+R_{ih} & =\begin{cases}
+\frac{\phi(p_{h},m_{h},d_{h})}{\Phi(p_{h},m_{h},d_{h})} & q_{ih}>0\\
+\frac{\phi(p_{h},m_{h},d_{h})}{1-\Phi(p_{h},m_{h},d_{h})} & q_{ih}=0
+\end{cases}\label{eq:invmills}
+\end{alignat}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+is used as an instrument in the following equation (second stage) to estimate
+ the item-elasticities:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+w_{i} & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{kh}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{jh})+\beta_{i}ln(\frac{x_{h}}{P})+\delta_{i}R_{ih}\label{eq:wessells_aids}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, we typically have 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+ln(P) & =\alpha_{0}+\sum_{i=1}^{n}\alpha_{i}ln(p_{i})+\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\gamma_{ij}ln(p_{i})ln(p_{j})
+\end{alignat*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+However, a simpler linear-AIDS formulation is often used so that 
+\begin_inset Formula $P=\sum_{i=1}^{n}w_{i}ln(p_{ih})$
+\end_inset
+
+ (the Stone's index).
+ Notice that the inverse-mills instrument must also comply with the symmetry
+ and homogeneity-restrictions and thus one must ensure that 
+\begin_inset Formula $\sum_{i=0}^{n}\delta_{i}R_{ih}=0$
+\end_inset
+
+ in addition to 
+\begin_inset Formula $\sum\alpha_{i}=0$
+\end_inset
+
+, 
+\begin_inset Formula $\sum_{i=1}^{n}\gamma_{ij}=0\forall j\in[1,n]$
+\end_inset
+
+ , 
+\begin_inset Formula $\sum_{j=1}^{n}\beta_{i}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{ij}=\gamma_{ji}$
+\end_inset
+
+.
+ Heien-Wessells
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+
+\end_inset
+
+ choose a more general approach for the instrument variable by adding an
+ equation to the system with term 
+\begin_inset Formula $\delta_{i}R_{ih}$
+\end_inset
+
+ replaced by 
+\begin_inset Formula $-\sum_{i=0}^{n-1}\delta_{i}R_{ih}$
+\end_inset
+
+so that the additivity condition is always met.
+ Unfortunately, they are compelled to use the unit-values instead of (unavailabl
+e) market prices - an issue probably made worse by having to stick in the
+ unit-values (obtained from the consumers' using an item) as prices on to
+ those who don't consume the item.
+ This is needed because the price isn't available when the indicator variable
+ is zero i.e.
+ when the consumers don't consumer an item
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In fact, Heien-Wessells use a regression with unit-values obtained from
+ users who do consume the item as the dependent variable and with control
+ variables as their region, income etc.
+ .
+ The values thus obtained are used as price for the consumers who don't
+ consume the item.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Deaton method
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation"
+
+\end_inset
+
+ gets around the price-deflator (unit-value) issues by using the cluster-average
+s fitted budget shares and unit-values (which are used instead of the unobserved
+ prices).
+ Even though Deaton uses these methods for a cross-sectional analysis, the
+ intuition can be easily extended to panel data (see McKelvey 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ for this extension).
+ We reckon that the so-called RDMP (
+\begin_inset Quotes eld
+\end_inset
+
+real
+\begin_inset Quotes erd
+\end_inset
+
+ deviations from regional/quarterly mean prices) approach (see Cox-Wohlgenant
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CoxWohlgenant1986"
+
+\end_inset
+
+) - used for studying quality variation in commodities when market prices
+ are not available - would also suffer with the issue of measurement error
+ that is introduced with the use of unit values (see Gibson and Kim 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GibsonKimQualityBog2019"
+
+\end_inset
+
+ for further details).
+ 
+\end_layout
+
+\begin_layout Section
+
+\size normal
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:PriceData"
+
+\end_inset
+
+Data - Price Extraction 
+\end_layout
+
+\begin_layout Standard
+As noted before, out of the food, energy, transport and household commodity
+ groups, we only consider quality differences in food and energy subgroups
+ - whereas the other commodity groups are viewed as groups where asset possessio
+n (or ownership of long-term durable goods) matters more than quality variation.
+ 
+\end_layout
+
+\begin_layout Standard
+The prices observed in the market drive our measure of quality and the later
+ discussion of cross-price effects.
+ Since we don't use price-deflators in our analysis (due the measurement
+ errors that arise with quantity being in both in the denominator of the
+ control variables and in the numerator of the dependent variable), a matching
+ of prices of the items observed in the market (identified by region and
+ district) with the prices of the items purchased by the consumer (with
+ known region and district) is of key importance to our analysis.
+\end_layout
+
+\begin_layout Standard
+LSMS Tanzania surveys record the prices observed in the markets spread across
+ all regions in the country.
+ These prices are available for items in the food and energy commodity groups.
+ The items within these commodities are grouped according to the relative
+ structure of the price time-series observed from 2008 to 2014 shown in
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LSMSMarketPrices"
+
+\end_inset
+
+ (see McKelvey
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ for a similar analysis of rice varieties).
+\end_layout
+
+\begin_layout Standard
+Here is a list of issues that were observed in the available price data
+ as well as the solutions adopted to address the issues.
+\end_layout
+
+\begin_layout Enumerate
+A lot of items in the year 2008 were recorded with the unit as pieces/"idadi"
+ (e.g.
+ 5 pieces of chicken or 4 pieces of banana etc.).
+ For year 2008, there are 588 observations that record prices in terms of
+ pieces.
+ Since it is difficult to associate a physical measure to a piece, the year
+ 2008 was removed from our analysis
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+These items were : maize_green, bread, bunscakes, pasta, cassava_fresh,
+ cassava_flour, sweet_potato, yam, potatoes, banana_green, othervegstarch,
+ pulses, peanuts, coconut, onion, greens, dried_canned_veg, banana_ripe,
+ citrus, mangoes, sugarcane, goat, beef, chicken, eggs, fish_seafood, dried_cann
+ed_fish, fresh_milk, canned_milk, firewood, cooking_oil, salt, brews, kerosene
+ and charcoal.
+ The use of pieces, however, has been discouraged since 2008.
+ For 2010, we only see the prices on bread, banana_ripe, goat, beef, chicken,
+ eggs and fresh_milk items where they are recorded in pieces.
+ These price recording are ignored for our analysis.
+ In 2012, the items where pieces are used are limited to - bunscakes, goat,
+ chicken, eggs and fish_seafood.
+\end_layout
+
+\end_inset
+
+.
+ With the asset ownership details not being available for 2008, the year
+ being too far back to use the 2010 household and transport CPI baskets
+ and it being difficult to find prices of electricity for the year, the
+ year 2008 offers very little to be included in our analysis.
+ That said, we do use the 2008 prices for when the units recorded are not
+ 
+\begin_inset Quotes eld
+\end_inset
+
+pieces
+\begin_inset Quotes erd
+\end_inset
+
+, in order to determine the price-structure that aids the classification
+ of food groups (with similar price-structure).
+ See Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LSMSMarketPrices"
+
+\end_inset
+
+ for the prices observed from 2008 to 2014.
+\end_layout
+
+\begin_layout Enumerate
+A few outlier price observations (<5%) are rejected.
+ 
+\end_layout
+
+\begin_layout Enumerate
+While a household in the LSMS consumption data is identified down to the
+ village and enumeration area level - we do not expect the surveys to record
+ market-prices at every possible enumeration area and village.
+ We thus associate a district level price to a household's consumed item.
+ In other words, the price of an item consumed by a household is linked
+ to all households in the same district where the household is located.
+ We make no attempts to arrive at a price granularity lower than that of
+ a district.
+ When there are multiple price observations at the district level, we arrive
+ a district-level price using a regression (discussed below).
+ Further, when the prices are not available at the district levels, we use
+ the regional averages (i.e.
+ the next level of granularity available).
+ For items such as electricity and gas that are limited to a few urban areas,
+ we simply use the price at a national level
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Prices for electricity were obtained from Peng at al.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "PengElectricityTNZ2016"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+We now describe the regression of marked-price against quantity that we
+ use to assimilate the price data from the survey.
+ To explain this regression, let's consider an example of the marked prices
+ of rice (let's say) for 1 kg, 2kg, 5kg and 10kg in the market.
+ A typical set of marked prices could be 4£, 7.5£, 18£ and 35£ respectively
+ - see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:markedprices"
+
+\end_inset
+
+ for the plot of these example prices.
+ As is often the case, such unit-prices grow at a less than linear rate
+ as is shown in the plot of the unit-price corresponding to the quantities
+ in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:unitprice"
+
+\end_inset
+
+.
+ Therefore a linear regression of 
+\begin_inset Formula $mp$
+\end_inset
+
+ vs 
+\begin_inset Formula $q$
+\end_inset
+
+ (where 
+\begin_inset Formula $mp$
+\end_inset
+
+ is the marked price of the item and 
+\begin_inset Formula $q$
+\end_inset
+
+ the quantity consumed) is hardly appropriate.
+ The goal of the regression is to arrive at the price of unit-quantity (e.g.
+ the price per kg for rice in the current example) rather than matching
+ the appropriate marked price with the quantity purchased by the consumer
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If we were to really look for a perfect match for prices, then we should
+ not only match the quantities consumed by the consumer with the prices
+ recorded in the market but also the time of the household interview with
+ that of the price recorded.
+ Not only is this fine matching somewhat impractical ( survey prices are
+ hardly available at such fine levels of granularity ), it is largely unnecessar
+y since our view of price is that of a value that is faced by a sufficiently
+ large number of consumers in the survey.
+\end_layout
+
+\end_inset
+
+.
+ The regression we use therefore is 
+\begin_inset Formula $\frac{mp}{q}=\beta\frac{1}{q^{2}}+c$
+\end_inset
+
+ (assuming that the marked price is lower than a linear increase - see Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:markedprices"
+
+\end_inset
+
+ - by a factor that itself decreases with increasing 
+\begin_inset Formula $q$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $mp=aq-b/q$
+\end_inset
+
+).
+ Since we use the price set 
+\begin_inset Formula $q=1$
+\end_inset
+
+, the price to be used is simply 
+\begin_inset Formula $\beta+c$
+\end_inset
+
+ for the regression: 
+\begin_inset Formula $\frac{mp}{q}=\beta/q^{2}+c$
+\end_inset
+
+.
+ The regression is run only when more than two prices are available.
+ When the regression can't be used a simple median is used as the price
+ for such cases
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This does not happen as frequently as one may imagine.
+ For 2010, only 9 identified regions for just 6 items have less than three
+ marked-prices available.
+\end_layout
+
+\end_inset
+
+.
+ The price-inference is therefore a 2-stage process - we first obtain prices
+ for every district with the regression method.
+ If there are no marked prices available in a district, we use the regional
+ value of the price.
+ For some items, the region-prices are not available for some regions.
+ Here, the price from obtained by the regressions over the country is used
+ for the item.
+ The prices for some items whose consumption is relatively rare in the diary
+ data (e.g.
+ wild-birds and honey) are not available for any of the regions.
+ These items are ignored for the analysis.
+\end_layout
+
+\begin_layout Standard
+With the prices we obtain after the regression, we match the price for every
+ commodity consumed by the household based on the district it is located
+ in.
+ The next step is to define commodity groups based on the observed price-structu
+re.
+ We use a broad classification of items for separability assumption to hold.
+ Within foods we observe protein, fruits, dense-foods, complements and non-fresh
+ groups and within energy, we put kerosene and electricity under the same
+ group (energy).
+ 
+\end_layout
+
+\begin_layout Standard
+One can argue that a selection bias is introduced when we use the national-avera
+ges for some items and region averages for other.
+ This could be a problem if the unavailability of regional averages occurred
+ for a significant portion of price entries.
+ However, since only about 
+\begin_inset Formula $\sim4\%$
+\end_inset
+
+ of the total price observations have no regional averages, the bias thus
+ introduced would be rather insignificant.
+ Another issue could be taken with our grouping of commodities - as it relies
+ on the annual time-series data.
+ It is indeed possible that the price of some items may be more volatile
+ than the others - and thus the volatility being ignored in the annual time
+ series data would bring some bias.
+ However, since we combine the household log diary with the recall diary
+ (which is recorded on a monthly or yearly basis), a finer time-series for
+ prices is not enough to address this issue.
+ Such a bias can be alleviated only through finer price data 
+\shape italic
+and 
+\shape default
+a uniformly collected household consumption dataset.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement p
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/lsms/allnatprices.png
+	width 5.5in
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LSMSMarketPrices"
+
+\end_inset
+
+Market Prices recorded in 2008, 2010, 2012 and 2014 surveys
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/markedprice.png
+	width 3in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:markedprices"
+
+\end_inset
+
+Typical marked prices of a commodity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/unitprice.png
+	width 3in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:unitprice"
+
+\end_inset
+
+Typical Price per unit of an item
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\size normal
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Analysis"
+
+\end_inset
+
+Analysis
+\end_layout
+
+\begin_layout Standard
+The current analysis adopts a price-based view of quality.
+ Thus a consumer who buys more of the high-priced item is viewed as consuming
+ higher quality.
+ This view allows us to see how the demand for quality is distributed across
+ the population and varies in response to prices.
+ 
+\end_layout
+
+\begin_layout Standard
+A framework often used for analysis of quality treats quality as if it were
+ a regular item to be purchased in the market.
+ As for any other item, therefore, the demand for quality must conform to
+ the usual demand restrictions i.e.
+ the conditions of homogeneity, adding up and non-negativity of the Slutsky
+ matrix.
+ Since we treat quality as if it were any other item, it is natural to ask
+ if a consumer observes a price for quality and if so, should this price
+ of quality appear in the econometric analysis.
+ As we later explain, the price of quality can be represented as the price
+ of a commodity aggregate along with the relative-price structure within
+ the aggregate.
+ The two implicitly determine what one may consider the price of quality.
+ 
+\end_layout
+
+\begin_layout Standard
+Before we describe how quality is measured for our purposes in the current
+ chapter, we survey a few approaches towards quality measurement that have
+ been used in the literature.
+ To avoid confusion of terms in our discussion on quality, we use the nomenclatu
+re provided by Cramer
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CramerIncomePrice1973"
+
+\end_inset
+
+ so that 
+\begin_inset Quotes eld
+\end_inset
+
+goods
+\begin_inset Quotes erd
+\end_inset
+
+ are variants with different quality that all fall under a certain 
+\begin_inset Quotes eld
+\end_inset
+
+commodity
+\begin_inset Quotes erd
+\end_inset
+
+ (see Cox
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CoxWohlgenant1986"
+
+\end_inset
+
+ for further notes on this nomenclature).
+ 
+\end_layout
+
+\begin_layout Standard
+The simplest of these approaches is to view the demand for a high-quality
+ item as more of the low-cost item.
+ This approach strives to obtain an adjustment factor for the demand based
+ on the consumption on items (see Griliches 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GrilichesIndex1971"
+
+\end_inset
+
+ for the theoretical underpinnings with the approach and for an account
+ of measurement of quality change).
+ A formulation more relevant to our approach is provided by Houthakker 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerFamilySurvey"
+
+\end_inset
+
+ and Deaton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation,DeatonEconConsumer"
+
+\end_inset
+
+ where quality is viewed as a separate commodity.
+ Here, the quantities consumed for two (or more) items within a commodity
+ (e.g.
+ tea and carbonated drinks under beverages) can be viewed as a quantity
+ of a composite good (i.e.
+ beverages) along with the value consumed of a quality metric (proportion
+ of tea and carbonated drinks).
+ In other words, the quantity-price tuples 
+\begin_inset Formula $(q_{1},p_{1}),(q_{2},p_{2})...$
+\end_inset
+
+ within a commodity could be expressed as a quantity and quality pair i.e.
+ for 
+\begin_inset Formula $(q_{1},p_{1}),(q_{2},p_{2})...$
+\end_inset
+
+, we should have 
+\begin_inset Formula $(Q_{G},P_{G}),(\nu_{G},p_{\nu_{G}})$
+\end_inset
+
+ where 
+\begin_inset Formula $P_{G},Q_{G}$
+\end_inset
+
+ are prices and quantity consumed for a composite good while 
+\begin_inset Formula $\nu_{G}$
+\end_inset
+
+ represents the quality of the good corresponding to the real quantities
+ consumed for several items.
+ If the quantities consumed are observed then this is simply a price-structure
+ (
+\begin_inset Formula $p_{i}^{*})$
+\end_inset
+
+ weighted sum of quantity 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+\nu_{G} & =\sum_{i\in G}(\frac{q_{i}p_{i}^{*}}{q_{G}})\label{eq:quality_def}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $p_{i}^{*}$
+\end_inset
+
+ represents the price-structure ratio corresponding to the item 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{G}=\sum_{j\in G}q_{j}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $q_{G}$
+\end_inset
+
+ is thus simply the physical sum of quantities consumed.
+ Note that regardless of how the items are aggregated, such a formulation
+ always requires the aggregation conditions of the composite commodity theorem
+ conditions to be met (see Nelson
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+ and Deaton 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonEconConsumer"
+
+\end_inset
+
+ for details).
+ 
+\end_layout
+
+\begin_layout Standard
+As we wish to understand consumer behaviour under the price differentiation
+ within a commodity, it may seem apt to talk about the price of quality
+ in the market.
+ We argue that the relative price structure of items along with a composite
+ price for the aggregate provides a measure equivalent to price of the quality.
+ If 
+\begin_inset Formula $E_{G}$
+\end_inset
+
+ represents the expenditure on group 
+\begin_inset Formula $G$
+\end_inset
+
+, using a constant relative price-structure allows us to write the demand
+ function 
+\begin_inset Formula $g(E_{G},p_{G})$
+\end_inset
+
+ as :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+g(E_{G},p_{G}) & \equiv g(\frac{E_{G}}{P_{G}},p_{G}^{*})\label{eq:demand_function_quality}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So while we do treat quality as a separate commodity, the constant-relative
+ price structure precludes the need of a price of quality in the cost-function
+ (and thus in the budget share regression) 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+One way to establish this equivalence is to interpret the quality in the
+ market as the gradient of price of preferred items (sorted by price or
+ otherwise) - an approach that is more akin to the aggregation problem.
+ Consider for example that with energy, such a gradient would be calculated
+ with the price one has to pay to get more of electricity.
+ Similarly, for food, this would be the price one has to pay to get more
+ of meat etc.
+ The formulation effectively relies on the basket aggregate consumed - and
+ is thus equivalent to the composite aggregated method (which in turn relies
+ on a composite aggregate price).
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Let's consider an example to illustrate how this measure of quality relates
+ with the total expenditure 
+\begin_inset Formula $E_{G}$
+\end_inset
+
+ in the group 
+\begin_inset Formula $G$
+\end_inset
+
+ and the group aggregate price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ (see Nelson
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+ for a more detailed theoretical discussion).
+ Let's say we observe the consumption on lamb and chicken within a protein
+ commodity with prices observed as 20£, 10£ (resp.) and the quantities consumed
+ by the consumer are 1.5 kg and 2 kg (resp.).
+ One approach is to the treat the physical sum of quantities i.e.
+ 3.5 kg as the quantity of the composite good 
+\begin_inset Quotes eld
+\end_inset
+
+protein
+\begin_inset Quotes erd
+\end_inset
+
+.
+ However, it is difficult to argue that the consumers optimise the weight
+ of the composite good - rather than comparing the disparate quantities
+ of items (see Nelson 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+ for the technical details of this argument)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If the sum of physical quantities is denoted as 
+\begin_inset Formula $q_{G}=\sum_{i\in G}q_{i}$
+\end_inset
+
+then 
+\begin_inset Formula $Q_{G}=\frac{E_{G}}{P_{G}}$
+\end_inset
+
+ where 
+\begin_inset Formula $E_{G}$
+\end_inset
+
+ is the expenditure and 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ is the price-index.
+ The core of Nelson's argument is that 
+\begin_inset Formula $Q_{G}=q_{G}$
+\end_inset
+
+ only if quality effects are absent since 
+\begin_inset Formula $Q_{G}=q_{G}\Rightarrow\frac{E_{G}}{P_{G}}=\frac{E_{G}}{V_{G}}$
+\end_inset
+
+
+\begin_inset Formula $\Rightarrow P_{G}=V_{G}=P_{G}\nu_{G}$
+\end_inset
+
+ (unit quantity is interpreted as 
+\begin_inset Formula $V_{G}=\frac{E_{G}}{q_{G}}$
+\end_inset
+
+ ).
+\end_layout
+
+\end_inset
+
+.
+ A quality-adjusted quantity is a more appropriate formulation for this
+ purpose.
+ Since quality is to be priced in the market, we can consider this price-structu
+red weighted quantity as the quality-adjusted quantity and express the pair
+\begin_inset Formula $\{(20,1.5).(10,2)\}$
+\end_inset
+
+ as 
+\begin_inset Formula $(10,4(=2\times1.5+1\times2))$
+\end_inset
+
+ and 
+\begin_inset Formula $(0,1.6=\frac{4}{1.5+2})$
+\end_inset
+
+ .
+  In a certain way, the price of composite quality can be viewed as exactly
+ zero since the total expenditure is already accounted for in the composite
+ good's consumption i.e.
+ 10
+\begin_inset Formula $\times4=40$
+\end_inset
+
+.
+ If the quantities consumed were slightly different for another consumer
+ e.g.
+ 
+\begin_inset Formula $\{(20,0.5),(10,3)\}$
+\end_inset
+
+ then too 
+\begin_inset Formula $(E=40)$
+\end_inset
+
+ and we have 
+\begin_inset Formula $(10,4(=2\times0.5+1\times3))$
+\end_inset
+
+ and 
+\begin_inset Formula $(0,1.14=\frac{4}{3.5})$
+\end_inset
+
+.
+ It is easy to see that the quality is lower for the latter case even though
+ the physical quantity is the same.
+ The quality adjusted quantity accounts for the total expenditure and as
+ such there is no price needed for the quality value calculated in the above
+ fashion.
+ Even though quality is treated as a separate good, the use of a quality-adjuste
+d quantity instead of the physical quantity gives us a clearer view of the
+ composite price of the commodity
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This measure of quality is slightly different from Deaton's approach 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation"
+
+\end_inset
+
+ which uses the sum of physical quantities.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+It is worth reiterating that the quality metric used above rests upon the
+ rather stringent condition of a constant relative price structure (i.e.
+ the Hicks aggregation commodity theorem).
+ This is why our classification of items into commodity groups is driven
+ by the price-structure.
+ Moreover, the quality within a commodity group can be aggregated only as
+ long as the goods that the group comprises of can be ordered based on a
+ certain criteria - an order that is the judgment of the researcher - not
+ the consumer (see Nelson
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+ for this clarification).
+ For the meat commodity group, as an example, there may be no reason to
+ think that goat is of higher quality than beef if the former is slightly
+ costlier.
+ However, quality differences are more plausible if the price differences
+ are larger - e.g.
+ with the choice of pulses over chicken under the protein category.
+ The judgment of quality is thus provided by the researcher at an appropriate
+ level of granularity - a justification that is a prerequisite for any quantity
+ aggregation to make sense.
+ 
+\end_layout
+
+\begin_layout Standard
+Due to the obvious limitations to the universality of such an aggregation
+ criterion, the utility of the above metric in understanding consumption
+ of quality is restricted by the very aggregated view that makes it desirable
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice also that one cannot talk about the quality metric 
+\begin_inset Formula $\nu_{G}$
+\end_inset
+
+ defined above unless the quantity of consumption is observed in data.
+ This is often the case for food, but not necessarily for other goods.
+\end_layout
+
+\end_inset
+
+.
+ The approaches that view a higher quality product in terms of a lower quality
+ product are problematic when the items vary widely.
+ As an example, the demand of a better good in a commodity group as a multiple
+ of the worse good may be plausible for meat/food - but considering electricity
+ in terms of coal into one aggregate is far less plausible (see the discussion
+ on consumer indices in Fisher-Shell 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FisherShell1968"
+
+\end_inset
+
+ on how this issue could be remedied).
+ At the consumer's level, the substitution between kerosene and electricity
+ is not as straightforward as amongst the quality variants of protein.
+ A continuous measure of quality does make more sense in a setting where
+ a mixture of high and low quality items are consumed (see Houthakker 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerFamilySurvey"
+
+\end_inset
+
+ for an example) - but it fails to account for quality difference when choices
+ vary widely.
+ 
+\end_layout
+
+\begin_layout Standard
+In the non-food categories (e.g.
+ transport - which is the subject of a seminal work on discrete choice by
+ Domencic-McFadden
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McFaddenDomencic1975"
+
+\end_inset
+
+), a discrete view of quality differences makes more sense - where the consumers
+ either consume a certain quantity of an item or they don't at all (more
+ so in the developing countries where income inequalities are starker).
+ In the current chapter, we provide a selection approach to interpret demand
+ for such items.
+ Even though it is often possible to proxy quality differences as regional
+ differences, modeling of discrete choice may prove to be a better approach
+ to explaining the choices that consumers face for non-food commodities.
+ This is to be explored in later chapters.
+\end_layout
+
+\begin_layout Standard
+As our wider goal has been to explain status consumption using the intertemporal
+ substitution and the consumer's perception of risk, we intend to use the
+ asset ownership of consumers, their needs and the consumption of quality
+ in the intertemporal setting to explain how the consumers may substitute
+ between quality spread across commodity groups and the assets owned (see
+ condition C1).
+ Thus, a rise in prices of electricity could affect food quality - even
+ though the quantity consumed is limited by needs.
+ An analysis of the cross-price effects i.e.
+ the effect of prices of non-food items on food quality and vice versa can
+ help us understand this substitution.
+ The data on possession of assets can also indicate the differences in the
+ quality tastes in the different asset ownership bands.
+ With a comparison of changes in asset ownership over time and across several
+ household-characteristics, one can comment on whether the consumers sustain
+ the quality consumption patterns relative to stock purchases (LTDG) or
+ not.
+ This would be explored in the subsequent chapters.
+\end_layout
+
+\begin_layout Standard
+We now provide a comparison of two variants of the AIDS model used for measuring
+ quality elasticities in the literature.
+ We assess their relevance, shortcomings before suggesting an adaption to
+ our goals.
+ In the first variant, an detailed item-wise analysis of cross-price elasticitie
+s is provided (Heien-Wessells 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+
+\end_inset
+
+).
+ The second AIDS variant (McKelvey 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+) uses the measure of quality (as defined above) - except for electricity
+ (which is simply an indicator variable).
+ Asset ownership metrics also appear as indicator variables in the latter
+ variant.
+ 
+\end_layout
+
+\begin_layout Standard
+In the end we argue in favour of discrete methods - which we believe would
+ make more sense in the status consumption contexts where the ownership
+ of long-term durable goods needs to be considered.
+ A cross-section analysis of quality and assets purchased is thus provided
+ to motivate the need for a discrete modeling of choice.
+\end_layout
+
+\begin_layout Subsection
+
+\size normal
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:HeienWesselsAIDS"
+
+\end_inset
+
+A selection approach to item-wise AIDS
+\end_layout
+
+\begin_layout Standard
+The first AIDS variant uses non-consumption corrected estimates of demand
+ elasticities to explain the effect of prices and household income on the
+ demand for every item.
+ The first part of this method is a selection step - needed to account for
+ the non-consumption of a certain items.
+ In the second part, a pooled static-AIDS method as described above (see
+ Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_probit"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_aids"
+
+\end_inset
+
+) is used on the consumption microdata from 2010, 2012 and 2014.
+ 
+\end_layout
+
+\begin_layout Standard
+The first-part i.e.
+ selection is a probit that provides refinement to the second-part item-wise
+ AIDS (which would have been appropriate in a more homogeneous dataset with
+ less instances of non-consumption for items).
+ The dependent variable in the probit is an indicator variable which is
+ unity when the item is consumed and zero otherwise.
+ The inverse-imlls ratio calculated from the probit (as explained with the
+ Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invmills"
+
+\end_inset
+
+ - see Heien-Wessells 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+
+\end_inset
+
+) is in turn used as an instrument in the AIDS SUR regressions of the second
+ part (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_aids"
+
+\end_inset
+
+).
+ Notice that the instrument is calculated for every household and every
+ item - and is part of the additivity constraint that is used for estimation
+ (see Appendix).
+\end_layout
+
+\begin_layout Standard
+The constraints of symmetry, additivity and homogeneity are essential in
+ facilitating a discussion of the effect of cross-elasticities on demand
+ (measured as budget shares).
+ The results thus obtained with a seemingly-unrelated regression (SUR) after
+ imposing the constraints are presented in the Appendix.
+ The own-price and cross-price elasticities in the results provide us an
+ overview of the demand across rare and commonly consumed items.
+ We base on interpretation on both the statistical significance (value of
+ 
+\begin_inset Formula $z$
+\end_inset
+
+) and the economic significance (i.e.
+ the size of the coefficient).
+ Observing the signs of the coefficients, we see that mangoes (less consumed)
+ and rice (commonly consumed) are substitutes while fish is a complement
+ to cassava-flour ([qfish_seafood]lpcassava_flour <0 etc.) rice.
+ Further, fresh milk is a complement to beef, beer, cassava_flour ([qcassava_flo
+ur]lpfresh_milk = -0.001) and greens but a substitute to bread and mangoes.
+\end_layout
+
+\begin_layout Standard
+The item-wise analysis suggests a split between the items that are consumed
+ in rural households (where the greens and fruits seem more abundant) against
+ those consumed in urban households (where beef, charcoal and beer are more
+ readily available).
+ The elasticities against income and education also show that the items
+ available in the industrialised regions of the Tanzania seem to have positive
+ elasticities for income and education rank whereas the items of agrarian
+ production seem to matter less to the highly educated, middle-age populations
+ huddled in the urban areas.
+ While many of such insights could be offered with a simpler cross-sectional
+ analysis using a regression of expenditure on the item against the permanent-in
+come or total expenditure by the household etc.
+ (an approach that is followed in much of the literature on conspicuous
+ consumption
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZahraIndia,KausSA,CharlesHurstRace"
+
+\end_inset
+
+), the censored AIDS formulation was favoured due to two reasons - first
+ it allows us to understand the cross-price effects in a more robust framework
+ and second, it accounts for the non-consumption of items.
+ 
+\end_layout
+
+\begin_layout Standard
+Going further with the cross-elasticities analyses, a comparison of how
+ consumers respond to changes in kerosene and electricity prices further
+ confirms the concentrated availability of industrial items.
+ A contrast between the items that are influenced by electricity prices
+ and those that are influenced by kerosene prices demonstrates this split
+ - since the demand for items such as rice, beef is less sensitive to electricit
+y than it is to kerosene.
+ That is to say, it isn't simply that the electricity consumers are more
+ likely to consume the more expensive items (due to their higher incomes)
+ but that a certain items become less relevant in the urban settings or
+ are simply unavailable in the rural settings.
+ This segregation of contexts cannot be ignored in a discussion of status-relate
+d consumption in the developing countries.
+\end_layout
+
+\begin_layout Standard
+Despite the detailed analyses that the cross-elasticities can provide, there
+ are limitations to an item-wise approach.
+ First, the detailed cross-elasticities are more likely to fluctuate over
+ time and would require us to use a dynamic approach to ascertain model
+ stability (an inertia or myopia in choices can be maintained to address
+ this).
+ Second, and more importantly, the cross-price elasticities fail to model
+ the functional separation in consumption e.g.
+ the lack of substitutability between energy and food items.
+ For example, the cross-elasticities of kerosene with respect to buns or
+ cassava cannot be interpreted unless one imposes other assumptions on the
+ closely observed consumption patterns (e.g.
+ more buns would means less cooking in the household etc.) or stricter separabili
+ty assumptions (see Deaton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonUnderstandingConsumption"
+
+\end_inset
+
+ for a discussion on the need to impose such structures).
+ Since we are concerned with the choice of quality exercised by the consumer
+ when faced with multiple varieties of several qualities and price, an aggregate
+d view of the basket seems more appropriate.
+ Such an aggregation ought to be based on a well-defined criteria - which
+ for our current approach is the price of the items.
+ The availability of price information between the years 2008 and 2014 prevents
+ the problems that could be faced by other grouping criteria - such as visibilit
+y (used in much of the literature on conspicuous consumption) - the changes
+ to which are not observed over a sufficiently long period of time.
+\end_layout
+
+\begin_layout Standard
+The aggregated view does add the functional view to the consumer choice
+ that is not available in an item-wise approach.
+ Observing consumption at a higher level e.g.
+ with separability assumptions facilitates the interpretation of cross-price
+ effects.
+ Whenever aggregation is possible (subject to restrictions), it allows us
+ to interpret the consumer choice for quality - while representing the substitut
+ion between broader categories and the price variants within the commodities
+ in the econometric model.
+ 
+\end_layout
+
+\begin_layout Standard
+Further, the aggregation provides an intermediate step to merging the data
+ from recall and diary methods.
+ As items are often recorded with more details for the diary items than
+ for the recall items (the types of phones, clothes purchased by the consumers
+ are hardly recorded in the surveys for example), the merging or data from
+ recall and diary methods is rendered inappropriate.
+ An aggregation can represent the diary data at a coarser granularity -
+ which can be matched with that of the recall method.
+\end_layout
+
+\begin_layout Subsection
+
+\size normal
+An LA-AIDS model for Aggregate Quality 
+\end_layout
+
+\begin_layout Standard
+In the AIDS equations used for the 
+\begin_inset Quotes eld
+\end_inset
+
+Unrestricted method
+\begin_inset Quotes erd
+\end_inset
+
+, we measure quality as described with the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:quality_def"
+
+\end_inset
+
+ (Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Analysis"
+
+\end_inset
+
+).
+ These AIDS equations used are evidently fewer than those in the item-wise
+ censored model of the first AIDS variant.
+ This is because every commodity aggregate - comprising of several items
+ - corresponds to one aggregate quantity/budget equation and a quality metric
+ corresponding to the commodity aggregate.
+ The aggregation also circumvents the issue of non-consumption since it
+ is much less likely for no items to be consumed within a functional commodity
+ group (fruits-veg, starch, protein etc.).
+\end_layout
+
+\begin_layout Standard
+Notice that while such an AIDS formulation does not model the intertemporal
+ substitution, the condition C1 allows us to compare the quality variation
+ in certain commodity groups with the durable good possession in others
+ (Recall also that we rule out the use of a two-state budgeting model since
+ a substitution exists between commodity groups due to this very condition).
+ The commodity groups used for our analyses are food, energy, household
+ and transportation.
+ We use the CPI for housing and transportation since the expenditure on
+ them is considered elementary consumption (these are categories where assets/LT
+DG are deemed more important).
+ In other words, no quality differences are observed in consumption on household
+ items (toilet rolls, clothing etc.) or transportation.
+ The expenditure on housing and transportation are treated as if they were
+ (each) just one commodity whereas different variants of proteins and starches
+ (i.e.
+ goods) are considered.
+ 
+\end_layout
+
+\begin_layout Standard
+The base-price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ for every aggregate 
+\begin_inset Formula $G\in[1,n]$
+\end_inset
+
+ (obtained from the price analysis detailed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:PriceData"
+
+\end_inset
+
+) is simply the minimum price of the goods within the commodity group.
+ This serves as price of the commodity whose budget share is set as the
+ dependent variable in the following AIDS equations:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+w_{G} & =\rho_{1,G}+\sum_{k=1}^{s}\rho_{1,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{1,Gj}ln(P_{j})+\beta_{G,1}ln(x)+\epsilon_{G,1}\label{eq:AIDS_quality_w}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+ln\ V_{G} & =\rho_{2,G}+\sum_{k=1}^{s}\rho_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{2,Gj}ln(P_{j})+\beta_{G,2}ln(x)+\epsilon_{G,2}\label{eq:AIDS_quality_lnV}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are 
+\begin_inset Formula $s$
+\end_inset
+
+ demographic variables (including the asset ownership related dummy variables)
+ in the above equation.
+ The composite unit value 
+\begin_inset Formula $V_{G}=P_{G}\nu_{G}$
+\end_inset
+
+ serves as the dependent variable in the latter quality equation 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Quantity elasticitities are related with quality elasticities with the following
+ relationship: the income elasticity of composite quantity is the sum of
+ income elasticity of quality and the income elasticity of physical quantity
+ (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\end_inset
+
+(see McKelvey
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ and Gibson et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AndalonGibsonSoda2017,GibsonKimQualityBog2019"
+
+\end_inset
+
+ for details on the implementation of McKelvey's 
+\begin_inset Quotes eld
+\end_inset
+
+Unrestricted method
+\begin_inset Quotes erd
+\end_inset
+
+).
+ Since the price for quality is not required, the price-coefficients in
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+additional
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $ln\ V$
+\end_inset
+
+ equations are not subject to any additional symmetry restrictions (see
+ Appendix for the details of the implementation).
+\end_layout
+
+\begin_layout Standard
+The aggregation allows us to be more ambitious - as we include the recall
+ data on household and transport.
+ Since we ignore quality differences in the expenditure on transport and
+ categories, the AIDS SUR equations use household-CPI and transport-CPI
+ as the prices for these respective groups (no 
+\begin_inset Formula $ln\ V$
+\end_inset
+
+ equations are required for the two commodity groups).
+ As we use the assets owned for the two groups in these equations instead,
+ the asset-scores for transport and household groups are included as household
+ characteristics (asset scores are simply a normalised rank assigned to
+ the household based on the total assets it possesses) Other household character
+istics used in the AIDS SUR equations are family size (
+\family typewriter
+consu
+\family default
+), age of the household-head (
+\family typewriter
+age
+\family default
+), occupation-rank (
+\family typewriter
+occupation_rank
+\family default
+), education-rank (
+\family typewriter
+educ_rank
+\family default
+), household-asset-score (
+\family typewriter
+norm_hh_asset_score
+\family default
+), transport-asset-score (
+\family typewriter
+norm_trans_asset_score
+\family default
+) and electrical-assets-score (
+\family typewriter
+norm_elec_asset_score
+\family default
+).
+ 
+\end_layout
+
+\begin_layout Standard
+There are two choices for how to observe the usage of electricity in the
+ data - first, is to use an electricity-usage related dummy variable and
+ second, is to use a probit stage as we have in the first AIDS variant.
+ If we were to understand the consumer preference for electricity, a probit
+ stage would be more appropriate.
+ But since we have already seen from the item-wise AIDS above (Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:HeienWesselsAIDS"
+
+\end_inset
+
+) that consumers prefer electricity as their incomes rise, we're more interested
+ in understanding how the choice for quality for other commodities can change
+ in the context of preference for electricity.
+ Hence, a variable indicating the consumer's possession of electric items
+ is used in the aggregated model as one of the household characteristics
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Another possible approach is to use an indicator variable for whether the
+ consumer uses electricity or not (available in the data through the "lighting
+ source" used by the household) as the dependent variable in one of the
+ additional 
+\begin_inset Formula $ln\ V$
+\end_inset
+
+ equations.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The functional groups chosen for the model are - densefoods, non-fresh,
+ fruits-veg, protein, complements, energy, household and transport (see
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Groups"
+
+\end_inset
+
+).
+ Here, the quality measure is not used for energy, household and transport.
+ Thus, the total number of equations to estimate with the seemingly unrelated
+ regression is 
+\begin_inset Formula $2\times5+3\times1=13$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The results obtained from the SUR confirm many of the findings from the
+ itemwise-probit but also suggest the relevance of asset ownership in the
+ demand for non-durable items - their quality in particular.
+ We notice that having electricity (and assets running on electricity) is
+ associated with higher quality for freshfoods and protein - whereas other
+ food types such as dense-foods are either not influenced much by having
+ electricity or are negatively influenced.
+ This may be due to the improvement of household equipment with electricity
+ such as refrigerator or ovens - as other household-assets (furniture etc.)
+ are not associated with different consumption on quality 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Higher transport asset score is in fact associated with less expenditure
+ on food quality.
+ 
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+It seems that the improved quality in certain food categories is experienced
+ with ownership of assets - more than it is with increased income.
+ Indeed the higher income seems to improve the quality for densefoods and
+ of transport - but not necessarily for other commodities.
+ The dense-foods and and non-fresh commodities are also those that are sensitive
+ (more so than others) to the increased number of household members.
+ The expenditure in the household commodity group - being higher for consumers
+ that are in rural areas compared to those in the urban areas - hints at
+ certain life-style differences in the densely populated urban areas brought
+ about by - amongst other things - the availability of electricity.
+ 
+\end_layout
+
+\begin_layout Subsection
+Discussion
+\end_layout
+
+\begin_layout Standard
+The price-based aggregation in the second AIDS variant - which we have adapted
+ to our requirements - allows us to have a discussion on quality that was
+ somewhat adhoc with an item-wise approach of the first variant.
+ The inclusion of assets and the expenditure data from recall methods on
+ household-transportation further helps us explain how the expenditure on
+ quality may change within the population.
+ As would be amenable to a permanent income approach, the consumer habits
+ do seem to influenced by the financial standing of the consumer that we
+ have attempted to gauge with the assets owned by consumers.
+\end_layout
+
+\begin_layout Standard
+It is difficult to infer more general trends on savings and expenditure
+ from the possession of electrical assets - whose distribution is non-uniform
+ in Tanzania.
+ Given the dependency of several industrial assets on electricity, it is
+ hardly surprising that those in the urban areas spend differently on items.
+ Nevertheless, the observation of quality differences for meat and fresh
+ goods indicates a peculiar environment that the distribution of electricity
+ is associated with.
+ It isn't simply that those with electric assets tend to buy more (due to
+ higher conservation offered by refrigerators and other equipment) - but
+ the quality purchased appears higher for the consumers who own electrical
+ items.
+ The users of electricity may be choosing a slightly different environment
+ where exotic and pricier meats and fresh products are made available.
+ This segregation of quality (in food or in other non-durable commodities)
+ speaks more of the environment where the items are consumed than of the
+ consumer habits.
+ 
+\end_layout
+
+\begin_layout Standard
+Notice that our notion of quality is not 
+\begin_inset Quotes eld
+\end_inset
+
+quality of life
+\begin_inset Quotes erd
+\end_inset
+
+ in general - but simply the quality of non-durable consumption.
+ The differences in quality of assets can also exist for the consumer but
+ we recognise that owned assets are of less importance within certain commodity
+ groups (see condition C1).
+ To quantify some of these notions of life-style choices through quality
+ and assets, we now outline a model for intertemporal choice that would
+ be developed further in later sections.
+ 
+\end_layout
+
+\begin_layout Standard
+We consider a long-term direct utility that the consumer optimises such
+ that it is a function of the needs, the assets she possesses and the quality
+ of her non-durable consumption.
+ Considering two consumers in the urban and rural areas with the assets,
+ quality and needs being 
+\begin_inset Formula $(A_{u},\rho_{u},\eta)$
+\end_inset
+
+ and 
+\begin_inset Formula $(A_{r},\rho_{r},\eta)$
+\end_inset
+
+ respectively (for simplicity, we have set 
+\begin_inset Formula $\eta_{u}=\eta_{r}=\eta$
+\end_inset
+
+), a non-decreasing utility would mean that 
+\begin_inset Formula $A_{u}>A_{r}\Rightarrow u(A_{u},\rho_{u})>u(A_{r},\rho_{u})$
+\end_inset
+
+.
+ It is also possible that 
+\begin_inset Formula $u(A_{u},\rho_{r})$
+\end_inset
+
+ or 
+\begin_inset Formula $(A_{r},\rho_{u})$
+\end_inset
+
+ are not defined since 
+\begin_inset Formula $A_{u},\rho_{u}$
+\end_inset
+
+ may not be available to the rural consumer.
+ Notice that we don't consider income as an input to the long-term utility.
+ This is because we assume that the utility of income is realised with the
+ purchases of assets and quality.
+ For the urban and the rural consumer, as an example, having a refrigerator
+ or a car would be more noticeable than the income itself.
+\end_layout
+
+\begin_layout Standard
+A non-decreasing utility also implies that for a rural consumer who does
+ not possess a refrigerator to have the same utility as her urban counterpart,
+ she would have to purchase a higher quality i.e.
+ Given 
+\begin_inset Formula $A_{u}>A_{r}$
+\end_inset
+
+, 
+\begin_inset Formula $u(A_{u},\rho_{u},)=u(A_{r},\rho_{r})$
+\end_inset
+
+ only if 
+\begin_inset Formula $\rho_{r}>\rho_{u}$
+\end_inset
+
+.
+ While a particular form of this social function 
+\begin_inset Formula $u$
+\end_inset
+
+ may help us understand how a consumer compensates for not having an asset,
+ it is the relevance of such choices to the observed consumption data that
+ concerns us more in an empirical analysis.
+ A utility function that we desire should help us quantitatively explain
+ for example - how much more furniture for a rural consumer would make her
+ indifferent to owning electrical assets (and less furniture) in an urban
+ area.
+ It should also explain whether higher priced assets always provide a higher
+ long-term utility to a consumer etc..
+ With vast differences in income and wealth that exist in many of the developing
+ countries, we believe such questions ought to be considered in any discussion
+ on consumption of quality.
+\end_layout
+
+\begin_layout Standard
+To model the sharp (discrete) differences in life-style choices and the
+ unobservable factors that create them, we introduce an uncertainty in the
+ long-term utility - so that our representative consumer who has a higher
+ value of owned assets has only a probabilistic higher long-term utility.
+ The long-term utility in the model is incremented in a deterministic fashion
+ only with the assets that can be transferred over generations (including
+ education, language spoken and occupational ranks) while the immediate
+ enhancements to felicity, improvement in self-image - all contribute as
+ less deterministic factors to the long-term utility.
+ Thus our representative consumer may not gain any long-term benefits from
+ an immediate felicity and the stochastic factors other than a better self-image
+ and social environment which would in turn help her in acquiring assets
+ in the longer run.
+ We claim that as long as an empirical distinction between quality, needs
+ and assets can be made, the consumption of quality would reflect the self-image
+ of the consumer - i.e.
+ her expectations of a future improvement of the long-term standing.
+\end_layout
+
+\begin_layout Standard
+There is an important advantage in the empirical work with the differentiation
+ of assets from quality in the above fashion - particularly so if one were
+ to extend the notion of long-term utility to status-related consumption.
+ While the literature on conspicuous consumption often relies on Veblen's
+ futility assumption for conspicuous items - treating status goods as those
+ that offer no true utility - our approach may allow all items to contribute
+ to status by letting every purchase of any kind improve one's relative
+ position in the society.
+ A good would contribute to utility by offering i) an immediate benefit
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $(\eta)$
+\end_inset
+
+ ii) an expectation of self-improvement 
+\begin_inset Formula $(\rho)$
+\end_inset
+
+ and iii) a definite long-term improvement in wealth or security 
+\begin_inset Formula $(A)$
+\end_inset
+
+.
+ The researcher can associate certain items to the respective groups for
+ each of these functions (
+\begin_inset Formula $A,\eta$
+\end_inset
+
+ or 
+\begin_inset Formula $\rho$
+\end_inset
+
+) while the model's representative consumers ought to either attain higher
+ wealth (income) through long-term assets or increase the felicity and the
+ expectation of stable high-income through higher non-durable consumption.
+ In an equilibrium, the consumers would stay at a quality consumption level
+ just equivalent to the perceived probability of promotion - as the deterministi
+c part of their long-term utility is provided by owned transferable assets.
+\end_layout
+
+\begin_layout Standard
+The model above is indeed a simplistic one since it treats a population
+ with more focus on quality as the one participating in more conspicuous
+ consumption.
+ However, we must emphasise that the above approach relies on the notions
+ of quality, need and assets - ideas that vary across geographies and require
+ some subjective judgment.
+ It would be hardly appropriate - for example - to consider sundry electrical
+ items as assets in a developed economy.
+ The ability of a market to differentiate items within a commodity also
+ influences a particular view of model's long-term utility (more quality
+ is on offer in some markets than others).
+ 
+\end_layout
+
+\begin_layout Standard
+With a model for a risky long-term utility, we can now return to comparing
+ the rural and the urban consumers.
+ It is possible that the rural consumer not having the refrigerator believes
+ that she isn't far away from having one by enhancing her social network
+ and obtaining higher ranking within her own locality.
+ Urban life does not need to imply a necessarily better life-style but it
+ does provide an increased possibility of access to industrial goods - such
+ as electrical items.
+ Further, if the consumer is amongst the poor in a rural area (lower ranking
+ due to assets) and consumes less quality, then she may have little to lose
+ by moving to the urban area - where the assets may be lower, but the perceived
+ probabilities of transition are higher due to higher population and increased
+ qualities (availability of new assets).
+ There is an upfront cost to pay - possibly with a loss of assets or quality
+ in other areas - but it isn't reflected in the differences in cost of assets
+ alone.
+ Instead, an increased perceived probability (quality) also has a role to
+ play in the long-term utility.
+\end_layout
+
+\begin_layout Standard
+In conclusion, if it is possible to model the acquisition of assets over
+ time, an intertemporal setting could further enhance our understanding
+ of how quality of expenditure changes over time - allowing us to provide
+ more robust insights on how long-term utility inclusive of status is indicated
+ through consumption - which we view as a combination of quality in commodities
+ and acquisition of long-term assets.
+ To motivate a discrete model for consumer choice, we now provide a multinomial
+ logit analysis of quality against assets owned.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="98" columns="2">
+<features islongtable="true" headBottomDL="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row caption="true">
+<cell multicolumn="1" alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Groups"
+
+\end_inset
+
+Items classified according to price groups and function
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nonfresh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cooking_oil
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nonfresh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rice_husked
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nonfresh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rice_paddy
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nonfresh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+maize_green
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nonfresh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+maize_grain
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nonfresh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+maize_flour
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nonfresh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+millet_grain
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nonfresh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+millet_flour
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nonfresh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+wheat
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nonfresh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bread
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bunscakes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pasta
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+othercereal
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pulses
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sugar
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sweet
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+honey
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+peanuts
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+coconut
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cashew_almonds
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nut_products
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+milk_products
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fresh_milk
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+canned_milk
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+goat
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+beef
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pork
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+chicken
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+wild_birds
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+wild_meat
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fish_seafood
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dried_canned_fish
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+protein
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+packaged_fish
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+eggs
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+alcohol
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+beer
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+alcohol
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+brews
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+alcohol
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+winespirits
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+spices
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+salt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+onion
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+greens
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dried_canned_veg
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cassava_fresh
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cassava_flour
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sweet_potato
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+yam
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+potatoes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+banana_green
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+othervegstarch
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+tea
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+coffee
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+miscdrinkpowder
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+canned_drink
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+readymade_tea_coffee
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+banana_ripe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+citrus
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mangoes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sugarcane
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+energy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+kerosene
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+energy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+charcoal
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+energy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+gas
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+energy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electricity
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+energy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+petrol
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cigarettes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cellphone_voucher
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bar_soap
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+clothes_soap
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+toothpaste
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+toilet_paper
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+skin_cream
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+other_personal
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+misc_cleaning
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household_products_repair
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+consumer_durables_repair
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mensclothes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+womensclothes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+childrensclothes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mensshoes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+womensshoes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+childrensshoes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+transport
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+public_transport
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+transport
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+petrol
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+services
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bride_price
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+marriage
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+funeral
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+light_bulbs
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+carpet
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+linen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mat
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mosquito_net
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mattress
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+building_material
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+insurance
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bamboo
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row endhead="true">
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+group
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+item
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+grass
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\size normal
+Cross Sectional Analysis of quality and asset scores
+\end_layout
+
+\begin_layout Standard
+To motivate the intertemporal problem, a cross-sectional analysis of the
+ quality and assets owned is presented in the current chapter.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "C:/local_files/research/africa_attitudes"
+options "ieeetr"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\size normal
+Appendix
+\end_layout
+
+\begin_layout Subsection*
+
+\size normal
+Censored AIDS
+\end_layout
+
+\begin_layout Standard
+\begin_inset External
+	template PDFPages
+	filename C:/local_files/research/consumption/addendum_censored_aids.pdf
+	extra LaTeX "pages=-"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\size normal
+AIDS on quality aggregates
+\end_layout
+
+\begin_layout Standard
+\begin_inset External
+	template PDFPages
+	filename C:/local_files/research/consumption/aidsqualityresults.pdf
+	extra LaTeX "pages=-"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\size normal
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
