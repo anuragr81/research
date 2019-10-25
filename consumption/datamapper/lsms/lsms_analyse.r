@@ -40,10 +40,28 @@ read_stata_aids_results <- function(r,read_coeff){
 }
 
 
+get_asset_average_prices <- function(yr){
+  assetnames_transport   <- c('bike', 'motorbike', 'car')
+  #ignored house and land (because their prices may vary too much for us to estimate 2010 values)
+  assetnames_household   <- c(  'sewingmachine', 'bed',  'watch',  'chair', 'table', 'cupboard', 'sofa','sports_hobby')#,'land', 'house')
+  assetnames_electric     <- c('mobile', 'waterheater','camera', 'phone', 'musicplayer', 'videoplayer', 'musicsystem', 'ac_fan', 'waterpump', 'tv', 'dishtv', 'computer',  'refrigerator' )
+  
+  assetnames <- c(assetnames_electric,c(assetnames_household,assetnames_transport))
+  adat <- ll@read_assets_file(year = yr, dirprefix = "../", fu = fu, ln = lsms_normalizer)
+  assets <- unique(as.character(adat$shortname))
+  assetprices <- sapply(assets, function(x) { quantile(with(subset(adat, number>=1 & shortname==x & !is.na(cost)),cost/number),0.85) } )
+  assetpricesdf <- data.frame(shortname=assets, assetprice = assetprices)
+  rownames(assetpricesdf) <- assetpricesdf$shortname
+  assetpricesdf[is.na(assetpricesdf$assetprice),]$assetprice <- 0
+  dat <- merge(adat,assetprices,by=c("shortname")) %>% mutate(asset_cost = assetprice *number )
+  k <- ddply(subset(dat,is.element(shortname,assetnames))[,c("hhid","asset_cost")],.(hhid),summarise,cost = log(sum(asset_cost)+1e-7))
+  return(k)
+}
+
 all_asset_scores <- function(years,dirprefix,fu,ln,ll){
   assetnames_transport   <- c('bike', 'motorbike', 'car')
-  
-  assetnames_household   <- c(  'sewingmachine', 'bed',  'watch',  'chair', 'table', 'cupboard', 'sofa','sports_hobby','land', 'house')
+  #ignored house and land (because their prices may vary too much for us to estimate 2010 values)
+  assetnames_household   <- c(  'sewingmachine', 'bed',  'watch',  'chair', 'table', 'cupboard', 'sofa','sports_hobby')#,'land', 'house')
   assetnames_electric     <- c('mobile', 'waterheater','camera', 'phone', 'musicplayer', 'videoplayer', 'musicsystem', 'ac_fan', 'waterpump', 'tv', 'dishtv', 'computer',  'refrigerator' )
   out <- NULL
   for (yr in years){
