@@ -7,7 +7,7 @@ run_agg_data <- function (dat) {
     require(haven)
     dat <- as.data.frame(read_dta('c:/temp/aggdata.dta'))
   }
-  result <- customAidsEst( c( "lpnonfresh", "lpdensefoods" , "lpenergy", "lpfruitsveg"),
+  result <- lnvAidsEst( c( "lpnonfresh", "lpdensefoods" , "lpenergy", "lpfruitsveg"),
                            c( "w_nonfresh", "w_densefoods", "w_energy", "w_fruitsveg"), "total_expenditure",
                            data = dat, priceIndex = "SL", maxiter = 100 , method = "MK")
   
@@ -32,17 +32,17 @@ run_test <-function(dat){
   } else {
     Blanciforti86 <- dat
   }
-  customAidsEst( c( "pFood1", "pFood2", "pFood3", "pFood4" ),
+  lnvAidsEst( c( "pFood1", "pFood2", "pFood3", "pFood4" ),
                  c( "wFood1", "wFood2", "wFood3", "wFood4" ), "xFood",
                  data = Blanciforti86, priceIndex = "SL", maxiter = 100 , method = "MK")
   
 }
 
-customAidsCalc <- function( priceNames, totExpName, coef, data,
+lnvAidsCalc <- function( priceNames, totExpName, coef, data,
                             priceIndex = "TL", basePrices = NULL, baseShares = NULL ) {
   
   # check argument 'coef' (coefficients)
-  coefCheckResult <- customAidsCheckCoef( coef, variables = list(
+  coefCheckResult <- lnvAidsCheckCoef( coef, variables = list(
     list( length( priceNames ), "prices", "goods"  ) ) )
   if( !is.null( coefCheckResult ) ){
     stop( coefCheckResult )
@@ -116,14 +116,14 @@ customAidsCalc <- function( priceNames, totExpName, coef, data,
   if( is.character( priceIndex ) ) {
     if( priceIndex == "TL" ) {
       # calculation of translog price index
-      priceIndex <- customAidsPx( priceIndex, priceNames, data = data, coef = coef )
+      priceIndex <- lnvAidsPx( priceIndex, priceNames, data = data, coef = coef )
     } else if( priceIndex == "L" ) {
       # calculation of Laspeyres price index
-      priceIndex <- customAidsPx( priceIndex, priceNames, data = data,
+      priceIndex <- lnvAidsPx( priceIndex, priceNames, data = data,
                                   coef = coef, base = list( prices = basePrices, shares = baseShares ) )
     } else if( priceIndex == "Ls" ) {
       # calculation of simplified Laspeyres price index
-      priceIndex <- customAidsPx( priceIndex, priceNames, data = data,
+      priceIndex <- lnvAidsPx( priceIndex, priceNames, data = data,
                                   coef = coef, base = list( shares = baseShares ) )
     }
   }
@@ -209,19 +209,19 @@ customAidsCalc <- function( priceNames, totExpName, coef, data,
 }
 
 
-customAidsJacobian <- function( allCoef, priceNames, totExpName, data = NULL,
+lnvAidsJacobian <- function( allCoef, priceNames, totExpName, data = NULL,
                                 shifterNames = NULL, omitLast = TRUE, alpha0 = 0 ) {
   nObs <- nrow( data )
   nGoods <- length( priceNames )
   nShifter <- length( shifterNames )
   nExogEq <- 2 + nGoods + nShifter
-  coef <- customAidsCoef( allCoef, nGoods = nGoods, nShifter = nShifter, alpha0 = alpha0 )
+  coef <- AidsCoef( allCoef, nGoods = nGoods, nShifter = nShifter, alpha0 = alpha0 )
   hom <- all.equal( rowSums( coef$gamma ), rep( 0, nGoods ) ) == TRUE
   sym <- all.equal( coef$gamma, t( coef$gamma ) ) == TRUE
-  lnp <- customAidsPx( "TL", priceNames, coef = coef, data = data )
+  lnp <- lnvAidsPx( "TL", priceNames, coef = coef, data = data )
   result <- matrix( 0, nrow = nObs * ( nGoods - 1 ),
                     ncol = nExogEq * ( nGoods - 1 ) )
-  colnames( result ) <- customAidsCoefNamesEst( nGoods, nShifter,
+  colnames( result ) <- lnvAidsCoefNamesEst( nGoods, nShifter,
                                                 hom = FALSE, sym = FALSE )
   aName <- paste( "alpha", c( 1:nGoods ) )
   bName <- paste( "beta", c( 1:nGoods ) )
@@ -285,7 +285,7 @@ customAidsJacobian <- function( allCoef, priceNames, totExpName, data = NULL,
 }
 
 
-customAidsSystem <- function( nGoods, nShifter = 0, LA = TRUE ) {
+lnvAidsSystem <- function( nGoods, nShifter = 0, LA = TRUE ) {
   if( LA ) {
     system <- list()
     for(i in 1:( nGoods - 1 ) ) {
@@ -306,7 +306,7 @@ customAidsSystem <- function( nGoods, nShifter = 0, LA = TRUE ) {
   return( system )
 }
 
-customAidsCoefNamesEst <- function( nGoods, nShifter, hom, sym ) {
+lnvAidsCoefNamesEst <- function( nGoods, nShifter, hom, sym ) {
   result <- NULL
   for( i in 1:( nGoods - 1 ) ) {
     result <- c( result, paste( "alpha", i ),
@@ -325,7 +325,7 @@ customAidsCoefNamesEst <- function( nGoods, nShifter, hom, sym ) {
   return( result )
 }
 
-customAidsCoefNamesAll <- function( nGoods, nShifter ) {
+lnvAidsCoefNamesAll <- function( nGoods, nShifter ) {
   result <- c(
     paste( "alpha", c( 1:nGoods ) ),
     paste( "beta", c( 1:nGoods ) ),
@@ -340,15 +340,15 @@ customAidsCoefNamesAll <- function( nGoods, nShifter ) {
 }
 
 
-customAidsCoef <- function( coef, nGoods, nShifter = 0, cov = NULL, df = 1,
+lnvAidsCoef <- function( coef, nGoods, nShifter = 0, cov = NULL, df = 1,
                             LA = TRUE, priceNames = NULL, shareNames = NULL, shifterNames = NULL,
                             alpha0 = NULL ) {
   # nGoods <- -0.5 + ( 2.25 + nrow( array( coef ) ) )^0.5
   nExogEq <- nGoods + 2 + nShifter
   if( LA ) {
     M <- matrix( 0, nGoods * nExogEq, ( nGoods - 1 ) * nExogEq )
-    rownames( M ) <- customAidsCoefNamesAll( nGoods, nShifter )
-    colnames( M ) <- customAidsCoefNamesEst( nGoods, nShifter, hom = FALSE,
+    rownames( M ) <- lnvAidsCoefNamesAll( nGoods, nShifter )
+    colnames( M ) <- lnvAidsCoefNamesEst( nGoods, nShifter, hom = FALSE,
                                              sym = FALSE )
     aName <- paste( "alpha", c( 1:nGoods ) )
     bName <- paste( "beta", c( 1:nGoods ) )
@@ -375,7 +375,7 @@ customAidsCoef <- function( coef, nGoods, nShifter = 0, cov = NULL, df = 1,
       }
     }
     all     <- c( M %*% coef )
-    names( all ) <- customAidsCoefNamesAll( nGoods, nShifter )
+    names( all ) <- lnvAidsCoefNamesAll( nGoods, nShifter )
     all[ aName[ nGoods ] ]  <- all[ aName[ nGoods ] ] + 1
     alpha   <- all[1:nGoods]
     beta    <- all[(nGoods+1):(2*nGoods)]
@@ -422,7 +422,7 @@ customAidsCoef <- function( coef, nGoods, nShifter = 0, cov = NULL, df = 1,
   return( result )
 }
 
-customAidsCheckCoef <- function( coef, argCoef = "coef",
+lnvAidsCheckCoef <- function( coef, argCoef = "coef",
                                  variables = NULL ) {
   
   # checking argument 'variables' of *this* function
@@ -531,7 +531,7 @@ customAidsCheckCoef <- function( coef, argCoef = "coef",
   
   return( NULL )
 }
-customAidsRestr <- function( nGoods, nShifter = 0, hom = TRUE, sym = TRUE,
+lnvAidsRestr <- function( nGoods, nShifter = 0, hom = TRUE, sym = TRUE,
                              LA = TRUE, restrict.regMat = FALSE ) {
   
   if( sym && !hom ) {
@@ -568,9 +568,9 @@ customAidsRestr <- function( nGoods, nShifter = 0, hom = TRUE, sym = TRUE,
       restr <- NULL
     }
     if( !is.null( restr ) ) {
-      rownames( restr ) <- customAidsCoefNamesEst( nGoods = nGoods,
+      rownames( restr ) <- lnvAidsCoefNamesEst( nGoods = nGoods,
                                                    nShifter = nShifter, hom = FALSE, sym = FALSE )
-      colnames( restr ) <- customAidsCoefNamesEst( nGoods = nGoods,
+      colnames( restr ) <- lnvAidsCoefNamesEst( nGoods = nGoods,
                                                    nShifter = nShifter, hom = hom, sym = sym )
     }
   } else {
@@ -600,14 +600,14 @@ customAidsRestr <- function( nGoods, nShifter = 0, hom = TRUE, sym = TRUE,
       }
     }
     if( !is.null( restr ) ) {
-      colnames( restr ) <- customAidsCoefNamesEst( nGoods = nGoods,
+      colnames( restr ) <- lnvAidsCoefNamesEst( nGoods = nGoods,
                                                    nShifter = nShifter, hom = FALSE, sym = FALSE )
     }
   }
   return( restr )
 }
 
-customAidsPx <- function (priceIndex, priceNames, data, shareNames = NULL, base = 1, 
+lnvAidsPx <- function (priceIndex, priceNames, data, shareNames = NULL, base = 1, 
                           coef = NULL, shifterNames = NULL) 
 {
   if (priceIndex == "TL") {
@@ -616,7 +616,7 @@ customAidsPx <- function (priceIndex, priceNames, data, shareNames = NULL, base 
            " price index")
     }
     else {
-      coefCheckResult <- customAidsCheckCoef(coef, variables = list(list(length(priceNames), 
+      coefCheckResult <- lnvAidsCheckCoef(coef, variables = list(list(length(priceNames), 
                                                                          "priceNames", "goods"), list(ifelse(is.null(shareNames), 
                                                                                                              NA, length(shareNames)), "shareNames", "goods")))
       if (!is.null(coefCheckResult)) {
@@ -753,7 +753,7 @@ customAidsPx <- function (priceIndex, priceNames, data, shareNames = NULL, base 
 }
 
 
-customAidsEst <- function( priceNames, shareNames, totExpName,
+lnvAidsEst <- function( priceNames, shareNames, totExpName,
                            data, method = "LA", priceIndex = "Ls", pxBase = 1,
                            hom = TRUE, sym = TRUE,
                            shifterNames = NULL, instNames = NULL,
@@ -814,7 +814,7 @@ customAidsEst <- function( priceNames, shareNames, totExpName,
     pMeans[ i ] <- mean( data[[ priceNames[ i ] ]][ sample ] )
   }
   # log of price index
-  lnp  <- customAidsPx( priceIndex, priceNames, shareNames = shareNames, data = data,
+  lnp  <- lnvAidsPx( priceIndex, priceNames, shareNames = shareNames, data = data,
                         base = pxBase )
   # prepare data.frame
   sysData <- data.frame( xt = data[[ totExpName ]],
@@ -841,9 +841,9 @@ customAidsEst <- function( priceNames, shareNames, totExpName,
       sysData[[ paste( "s", i, sep = "" ) ]] <- data[[ shifterNames[ i ] ]]
     }
   }
-  restr <- customAidsRestr( nGoods = nGoods, hom = hom, sym = sym, restrict.regMat = restrict.regMat, nShifter = nShifter )
+  restr <- lnvAidsRestr( nGoods = nGoods, hom = hom, sym = sym, restrict.regMat = restrict.regMat, nShifter = nShifter )
   # restrictions for homogeneity and symmetry
-  system <- customAidsSystem( nGoods = nGoods, nShifter = nShifter ) # LA-AIDS equation system
+  system <- lnvAidsSystem( nGoods = nGoods, nShifter = nShifter ) # LA-AIDS equation system
   # estimate system
   if( restrict.regMat ) {
     est <- systemfit( system, estMethod, data = sysData, restrict.regMat = restr,
@@ -853,10 +853,10 @@ customAidsEst <- function( priceNames, shareNames, totExpName,
                       inst = ivFormula, ... )
   }
   if( method == "LA" ) {
-    result$coef <- customAidsCoef( coef( est ), nGoods = nGoods, nShifter = nShifter,
+    result$coef <- lnvAidsCoef( coef( est ), nGoods = nGoods, nShifter = nShifter,
                                    cov = vcov( est ), priceNames = priceNames, shareNames = shareNames,
                                    shifterNames = shifterNames, df = df.residual( est ) )   # coefficients
-    result$wFitted <- customAidsCalc( priceNames, totExpName, data = data,
+    result$wFitted <- lnvAidsCalc( priceNames, totExpName, data = data,
                                       coef = result$coef, priceIndex = lnp )$shares   # estimated budget shares
     iter <- est$iter
   } else if( method %in% c( "MK", "IL" ) ) {
@@ -870,8 +870,8 @@ customAidsEst <- function( priceNames, shareNames, totExpName,
       ILiter <- ILiter + 1      # iterations of IL Loop
       bl     <- b              # coefficients of previous step
       sysData$lxtr <- log( data[[ totExpName ]] ) -
-        customAidsPx( "TL", priceNames, shareNames = shareNames, data = data,
-                      coef = customAidsCoef( coef( est ), nGoods = nGoods, nShifter = nShifter,
+        lnvAidsPx( "TL", priceNames, shareNames = shareNames, data = data,
+                      coef = lnvAidsCoef( coef( est ), nGoods = nGoods, nShifter = nShifter,
                                              alpha0 = alpha0 ) )
       # real total expenditure using Translog price index
       if( restrict.regMat ) {
@@ -889,8 +889,8 @@ customAidsEst <- function( priceNames, shareNames, totExpName,
     }
     # calculating log of "real" (deflated) total expenditure
     sysData$lxtr <- log( data[[ totExpName ]] ) -
-      customAidsPx( "TL", priceNames, data = data,
-                    coef = customAidsCoef( coef( est ), nGoods = nGoods, nShifter = nShifter,
+      lnvAidsPx( "TL", priceNames, data = data,
+                    coef = lnvAidsCoef( coef( est ), nGoods = nGoods, nShifter = nShifter,
                                            alpha0 = alpha0 ) )
     # calculating matrix G
     Gmat <- cbind( rep( 1, nObs ), sysData$lxtr )
@@ -910,10 +910,10 @@ customAidsEst <- function( priceNames, shareNames, totExpName,
       }
     }
     # calculating matrix J
-    jacobian <- customAidsJacobian( coef( est ), priceNames, totExpName, data = data,
+    jacobian <- lnvAidsJacobian( coef( est ), priceNames, totExpName, data = data,
                                     shifterNames = shifterNames, alpha0 = alpha0 )
     if( hom ) {
-      modRegMat <- customAidsRestr( nGoods = nGoods, nShifter = nShifter,
+      modRegMat <- lnvAidsRestr( nGoods = nGoods, nShifter = nShifter,
                                     hom = hom, sym = sym, restrict.regMat = TRUE )
     } else {
       modRegMat <- diag( ( nGoods - 1 ) * ( nGoods + 2 + nShifter ) )
@@ -926,11 +926,11 @@ customAidsEst <- function( priceNames, shareNames, totExpName,
     JmatInv <- modRegMat %*% solve( Jmat, t( modRegMat ) )
     bcov <- JmatInv  %*% ( est$residCov %x% crossprod( Gmat ) ) %*%
       t( JmatInv )
-    result$coef <- customAidsCoef( coef( est ), nGoods = nGoods, nShifter = nShifter,
+    result$coef <- lnvAidsCoef( coef( est ), nGoods = nGoods, nShifter = nShifter,
                                    cov = bcov, priceNames = priceNames, shareNames = shareNames,
                                    shifterNames = shifterNames, df = df.residual( est ) )  # coefficients
     result$coef$alpha0 <- alpha0
-    result$wFitted <- customAidsCalc( priceNames, totExpName, data = data,
+    result$wFitted <- lnvAidsCalc( priceNames, totExpName, data = data,
                                       coef = result$coef, priceIndex = "TL" )$shares
     # estimated budget shares
     result$ILiter <- ILiter
