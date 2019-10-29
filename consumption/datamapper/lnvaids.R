@@ -9,7 +9,7 @@ run_agg_data <- function (dat) {
   }
   result <- lnvAidsEst( c( "lpnonfresh", "lpdensefoods" , "lpenergy", "lpfruitsveg"),
                            c( "w_nonfresh", "w_densefoods", "w_energy", "w_fruitsveg"), "total_expenditure",
-                           data = dat, priceIndex = "SL", maxiter = 100 , method = "MK")
+                           data = dat, priceIndex = "SL", maxiter = 100 , method = "IL")
   
   return(result)
   
@@ -215,7 +215,7 @@ lnvAidsJacobian <- function( allCoef, priceNames, totExpName, data = NULL,
   nGoods <- length( priceNames )
   nShifter <- length( shifterNames )
   nExogEq <- 2 + nGoods + nShifter
-  coef <- AidsCoef( allCoef, nGoods = nGoods, nShifter = nShifter, alpha0 = alpha0 )
+  coef <- lnvAidsCoef( allCoef, nGoods = nGoods, nShifter = nShifter, alpha0 = alpha0 )
   hom <- all.equal( rowSums( coef$gamma ), rep( 0, nGoods ) ) == TRUE
   sym <- all.equal( coef$gamma, t( coef$gamma ) ) == TRUE
   lnp <- lnvAidsPx( "TL", priceNames, coef = coef, data = data )
@@ -845,6 +845,7 @@ lnvAidsEst <- function( priceNames, shareNames, totExpName,
   # restrictions for homogeneity and symmetry
   system <- lnvAidsSystem( nGoods = nGoods, nShifter = nShifter ) # LA-AIDS equation system
   # estimate system
+  print(paste("Using system:",toString(system)))
   if( restrict.regMat ) {
     est <- systemfit( system, estMethod, data = sysData, restrict.regMat = restr,
                       inst = ivFormula, ... )
@@ -887,6 +888,7 @@ lnvAidsEst <- function( priceNames, shareNames, totExpName,
       bd   <- b - bl  # difference between coefficients from this
       # and previous step
     }
+    print(paste("Completed iterations (",ILiter,")"))
     # calculating log of "real" (deflated) total expenditure
     sysData$lxtr <- log( data[[ totExpName ]] ) -
       lnvAidsPx( "TL", priceNames, data = data,
@@ -918,10 +920,6 @@ lnvAidsEst <- function( priceNames, shareNames, totExpName,
     } else {
       modRegMat <- diag( ( nGoods - 1 ) * ( nGoods + 2 + nShifter ) )
     }
-    # Jmat <- t( modRegMat ) %*% ( diag( nGoods - 1 ) %x% t( Gmat ) ) %*% jacobian
-    # JmatInv <- modRegMat %*% solve( Jmat ) %*% t( modRegMat )
-    # bcov <- JmatInv  %*% ( est$residCov %x% ( t( Gmat ) %*% Gmat ) ) %*%
-    #    t( JmatInv )
     Jmat <- crossprod( modRegMat, ( diag( nGoods - 1 ) %x% t( Gmat ) ) ) %*% jacobian
     JmatInv <- modRegMat %*% solve( Jmat, t( modRegMat ) )
     bcov <- JmatInv  %*% ( est$residCov %x% crossprod( Gmat ) ) %*%
