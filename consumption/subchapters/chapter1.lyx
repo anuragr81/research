@@ -895,6 +895,12 @@ name "sec:Model"
 \end_layout
 
 \begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Separability-and-Quality"
+
+\end_inset
+
 Separability and Quality
 \end_layout
 
@@ -1532,7 +1538,11 @@ ity/neighborhood/LTDG.) or addressing of more urgent needs.
 \end_layout
 
 \begin_layout Standard
-Now let's consider the effect of price changes.
+Assuming that 
+\begin_inset Formula $\rho,\eta$
+\end_inset
+
+ are fixed in the short-run, let us now consider the effect of price changes.
  Here, the fact that quality in one group may be substituted with quality
  in another becomes relevant.
  As we have discussed before, such a substitution of quality across commodity
@@ -1566,17 +1576,25 @@ reference "eq:utility"
 \end_layout
 
 \begin_layout Subsection
-Econometric measure for quality
+Econometric model
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Econometric-model"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-A desired property of the price-based metric is that it is easily calculated
- for any commodity group where price of items is available.
- A generic metric for quality across all commodity groups allow us to consider
- a preference order of commodity groups that a consumer would exhibit as
- she cuts back on quality with lower income or higher prices.
- A metric that achieves this purpose is the price-weighted sum of expenditure
- per physical unit within a commodity (see Nelson 
+A desired property of the price-based metric is that it should be applied
+ uniformly to all commodity groups where the price of constituent goods
+ is available.
+ Applied uniformly, metric would allow us to argue for a preference order
+ over commodity groups that the representative consumer can be seen as using
+ as she cuts back on (raises) quality as her income drops (rises).
+ One such metric is the price-weighted sum of expenditure per physical unit
+ within a commodity (see Nelson 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity"
@@ -1850,55 +1868,33 @@ key "DeatonQualityQuantityVariation"
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-The above is easy to extend with change in price as quality itself is a
- multiple price structure at all times.
- While needs becomes the part of the household characteristics in a typical
- econometric model, the question of assets owned by the consumer pose another
- issue if they are view into commodity groups.
- The assets may separable.
- 
-\bar default
-We have already rejected two-state .
- The rejection of the weak separability of quality across commodity groups
- clarifies that quality cannot be decomposed as easily as one decomposes
- expenditure 
-\begin_inset Formula $\sum_{G}E_{G}$
+The above quality metric allows us to estimate price derivatives of quality
+ with an econometric model.
+ The needs of the consumer 
+\begin_inset Formula $\eta$
 \end_inset
 
- in the two-state model.
- The weak separability of LTDG ownership on the high quality consumption
- in every commodity group (
-\begin_inset Formula $\nu_{G}$
+- which we estimate with an age-adjusted number of family members - is treated
+ as the intercept in the budget share regressions.
+ Since the LTDG - which can be viewed associated with different commodity
+ groups - are also included in the the intercept, two further issues need
+ to be handled.
+ First is of their separability of demand with respect to 
+\begin_inset Formula $\rho$
 \end_inset
 
-) is also rejected due to similar arguments.
- In other words, the LTDG in a commodity group 
-\begin_inset Formula $G_{1}$
-\end_inset
+.
+ If LTDG owned by the consumer are classified the into distinct functional
+ groups, one should use different dummy variables corresponding to the respectiv
+e LTDG in every separable commodity group (whose budget share equation is
+ used).
+ The second issue is that there may be differences in quality within the
+ LTDG themselves - which would be ignored in the indicator variables for
+ ownership.
+\end_layout
 
- can influence the high quality consumption 
-\begin_inset Formula $\nu_{G_{2}}$
-\end_inset
-
- in another group 
-\begin_inset Formula $G_{2}$
-\end_inset
-
- .
- 
-\bar under
-Still, quality differences can be exist i.e.
- assets can varying in quality.
- We consider cost of items - quality difference does exist.
- We impose another condition.
-\bar default
-For further empirical work, we formalise the substitution of overall quality
- with the LTDG by introducing the following condition.
-
-\bar under
- 
+\begin_layout Standard
+To address the first issue, we impose the following condition in the model:
 \end_layout
 
 \begin_layout Description
@@ -1912,12 +1908,44 @@ C1
 
 \begin_layout Standard
 The strong distinction between the two types of commodity groups with the
- above condition simplifies our model of consumer demand further.
- With this condition, there are only two ways a consumer can spend on short-term
- consumption - either by switching between the variants of an item (choosing
- higher or lower quality of a composite good) or spending more on an elementary
- good (where quality variation doesn't exist).
- This allows us to include assets owned as part of 
+ above condition simplifies our model of consumer demand and permits the
+ LTDG in a commodity group 
+\begin_inset Formula $G_{1}$
+\end_inset
+
+ (which are part of 
+\begin_inset Formula $\rho)$
+\end_inset
+
+ to influence the high quality consumption 
+\begin_inset Formula $\nu_{G_{2}}$
+\end_inset
+
+ in another group 
+\begin_inset Formula $G_{2}$
+\end_inset
+
+ .
+ Since we treat 
+\begin_inset Formula $\rho$
+\end_inset
+
+ as constant in the near-term, the second issue is also remedied by considering
+ the total cost of the LTDG rather than the indicator variables of their
+ ownership.
+ The quality difference for assets are thus also allowed in the model.
+ 
+\end_layout
+
+\begin_layout Standard
+The same LTDG ownership cost-related variables are therefore used as intercept
+ in equations corresponding to every commodity group.
+ With the condition C1, there are only two ways a consumer can spend on
+ short-term consumption - either by switching between the variants of an
+ item (choosing higher or lower quality of a composite good) or spending
+ more on an elementary good (where quality variation doesn't exist).
+ The condition effectively allows us to include assets owned as part of
+ 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -1928,33 +1956,27 @@ reference "eq:utility"
 
 \end_inset
 
-.
- For example, since quality variation doesn't exist in transport and housing
- data in the Tanzanian survey, the consumer is assumed to spend on 
-\begin_inset Quotes eld
-\end_inset
-
-elementary
-\begin_inset Quotes erd
-\end_inset
-
- short-term consumption instead of purchasing an LTDG (if the LTDG exist
- in a group).
- Another way to see this is that the elementary short-term consumption in
- the commodity groups where LTDG exist competes with the group where quality
- variation exists - for the consumer's money.
+ for our empirical work.
+ The empirical implicatiojns of the condition C1 are not serious.
+ In the Tanzanian data for example, the quality variation is immaterial
+ for non-durable consumption in transport and household categories.
+ Thus one can assume that the elementary short-term consumption in the commodity
+ groups where LTDG exist competes with the group where quality variation
+ exists (and LTDG don't exist) - for the consumer's money.
 \end_layout
 
 \begin_layout Subsection
-Limitations and remedies
+Implementation
 \end_layout
 
 \begin_layout Standard
-It is worth reiterating that the quality metric described above rests upon
- the rather stringent condition of a constant relative price structure (i.e.
+We now revisit the limitations of the model and caveats for interpretation.
+ The most important limitation is that the quality metric described above
+ rests upon the rather stringent condition of aggregation with a constant
+ relative price structure (i.e.
  the Hicks aggregation commodity theorem).
- This is why our classification of items into commodity groups is driven
- by the price-structure.
+ This is the reason why our classification of items into commodity groups
+ is driven by the price-structure.
  Moreover, the quality within a commodity group can be aggregated only as
  long as the goods that the group comprises of can be ordered based on a
  certain criteria - an order that is the judgment of the researcher - not
@@ -1966,8 +1988,8 @@ key "NelsonQualityQuantity"
 \end_inset
 
  for this clarification).
- For the meat commodity group, as an example, there may be no reason to
- think that goat is of higher quality than beef if the former is slightly
+ Taking example of the meat commodity group, there is no reason to think
+ that goat is of higher quality than beef if the former is only slightly
  costlier.
  However, quality differences are more plausible if the price differences
  are larger - e.g.
@@ -1996,8 +2018,13 @@ Notice also that one cannot talk about the quality metric
 \end_inset
 
 .
- The approaches that view a higher quality product in terms of a lower quality
- product are problematic when the items vary widely.
+ We illustrate this with a comparison of item-wise and aggregated approaches.
+ 
+\end_layout
+
+\begin_layout Standard
+In general, any approach that views a higher quality product in terms of
+ a lower quality product is problematic when the items vary widely.
  As an example, the demand of a better good in a commodity group as a multiple
  of the worse good may be plausible for meat/food - but considering electricity
  in terms of coal into one aggregate is far less plausible (see the discussion
@@ -2011,8 +2038,8 @@ key "FisherShell1968"
  on how this issue could be remedied).
  At the consumer's level, the substitution between kerosene and electricity
  is not as straightforward as amongst the quality variants of protein.
- A continuous measure of quality does make more sense in a setting where
- a mixture of high and low quality items are consumed (see Houthakker 
+ A continuous measure of quality does make sense in a setting where a mixture
+ of high and low quality items are consumed (see Houthakker 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HouthakkerFamilySurvey"
@@ -2033,15 +2060,16 @@ key "McFaddenDomencic1975"
 
 \end_inset
 
-), a discrete view of quality differences makes more sense - where the consumers
- either consume a certain quantity of an item or they don't at all (more
- so in the developing countries where income inequalities are starker).
+), a discrete view of quality differences often makes more sense - where
+ the consumers either consume a certain quantity of an item or they don't
+ at all (more so in the developing countries where income inequalities are
+ starker).
  In the current chapter, we provide a selection approach to interpret demand
- for such items.
- Even though it is often possible to proxy quality differences as regional
- differences, modeling of discrete choice may prove to be a better approach
- to explaining the choices that consumers face for non-food commodities.
- This is to be explored in later chapters.
+ for such items and use indicator variables for items that are not substitutable
+ with other items in a category.
+ Still, modeling of discrete choice may prove to be a better approach to
+ explaining the choices that consumers face for non-food commodities.
+ This is to be explored in subsequent chapters.
 \end_layout
 
 \begin_layout Standard
@@ -2051,34 +2079,28 @@ As our wider goal has been to explain status consumption using the intertemporal
  in the intertemporal setting to explain how the consumers may substitute
  between quality spread across commodity groups and the assets owned (see
  condition C1).
- Thus, a rise in prices of electricity could affect food quality - even
- though the quantity consumed is limited by needs.
- An analysis of the cross-price effects i.e.
- the effect of prices of non-food items on food quality and vice versa helps
- us understand this substitution.
- The data on possession of assets can also indicate the differences in the
- quality tastes in the different asset ownership bands.
- With a comparison of changes in asset ownership over time and across several
- household-characteristics, one can comment on whether the consumers sustain
- the quality consumption patterns relative to stock purchases (LTDG) or
- not.
- This would be explored in the subsequent chapters.
-\end_layout
+ The data on possession of assets that is available indicates the differences
+ in the quality habits in the different asset ownership bands (and other
+ characteristics) - that we present in the results from the Tanzanian data
+ - where the commodity groups: food, energy, household and transport are
+ identified.
+ Here, food is the only group where we quantity consumed is recorded.
+ Thus the quality of protein, carbohydrates, beverages etc.
+ - each of which is treated as a composite good - is easy to determine with
+ metric presented in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Econometric-model"
 
-\begin_layout Standard
-In the current chapter, we use the Tanzanian data - where the commodity
- groups: food, energy, household and transport are identified - we look
- at how quality is segregated across household characteristics for food
- and energy (where only quality matters).
- Further, food is the only group where we have quantity consumed recorded
- - and thus the quality of protein, carbohydrates, beverages etc.
- - each of which is treated as a composite good - is easy to determine.
- We treat household and transport, on the other hand, as elementary goods
+\end_inset
+
+.
+ On the other hand, household and transport are treated as elementary goods
  (i.e.
  no quality variation is assumed and only the cost of the items is considered).
- Thus quality (or other short-term consumption) is compared with the LTDG
- in an environment where new goods are supplied and the expectations for
- future income growth change over time.
+ The cross-price effects for the items in the survey for 2010, 2012 and
+ 2014 are also presented for an insight into how prices of non-food items
+ may have an effect on food quality and vice versa.
  
 \end_layout
 
@@ -2179,10 +2201,10 @@ The items sorted according to the mean budget shares
 \end_layout
 
 \begin_layout Standard
-We now provide a comparison of two variants of the AIDS model used for measuring
- quality elasticities in the literature.
- We assess their relevance, shortcomings before suggesting an adaption to
- our goals.
+With essentially the same goals, we now compare two variants of the AIDS
+ model used for measuring quality elasticities in the literature.
+ We assess their relevance, shortcomings before suggesting the model adapted
+ to our goals.
  In the first variant, an detailed item-wise analysis of cross-price elasticitie
 s is provided (Heien-Wessells 
 \begin_inset CommandInset citation

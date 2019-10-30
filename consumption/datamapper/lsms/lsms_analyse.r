@@ -49,12 +49,12 @@ get_asset_average_prices <- function(yr){
   assetnames <- c(assetnames_electric,c(assetnames_household,assetnames_transport))
   adat <- ll@read_assets_file(year = yr, dirprefix = "../", fu = fu, ln = lsms_normalizer)
   assets <- unique(as.character(adat$shortname))
-  assetprices <- sapply(assets, function(x) { quantile(with(subset(adat, number>=1 & shortname==x & !is.na(cost)),cost/number),0.85) } )
+  assetprices <- sapply(assets, function(x) { quantile(with(subset(adat, number>=1 & shortname==x & !is.na(mtm)),mtm),0.85) } )
   assetpricesdf <- data.frame(shortname=assets, assetprice = assetprices)
   rownames(assetpricesdf) <- assetpricesdf$shortname
   assetpricesdf[is.na(assetpricesdf$assetprice),]$assetprice <- 0
-  dat <- merge(adat,assetprices,by=c("shortname")) %>% mutate(asset_cost = assetprice *number )
-  k <- ddply(subset(dat,is.element(shortname,assetnames))[,c("hhid","asset_cost")],.(hhid),summarise,cost = log(sum(asset_cost)+1e-7))
+  dat <- merge(adat,assetpricesdf,by=c("shortname")) %>% mutate(asset_mtm = assetprice *number )
+  k <- ddply(subset(dat,is.element(shortname,assetnames))[,c("hhid","asset_mtm")],.(hhid),summarise,cost = log(sum(asset_mtm)+1e-7))
   return(k)
 }
 
