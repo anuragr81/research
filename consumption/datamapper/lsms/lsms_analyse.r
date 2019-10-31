@@ -11,7 +11,7 @@ write_mills_input <- function (allgroupsdat,millsi,yr){
              'housingstatus', 'roomsnum',  'floormaterial', 'cookingfuel', 'is_resident', 'ln_tot_exp', 'year')
   ag <- unique(subset(allgroupsdat,year==yr)[,gcols])
   ydat <- merge(ag,subset(millsi,year==yr),all.x=TRUE,by=c("hhid","year","region", "district"))
-
+  
   for (sn in as.character(unique(ydat$shortname))) { if (!is.na(sn)) { dat <- subset(ydat,shortname==sn); write_dta(dat,paste('c:/temp/dat',yr,'_',sn,'.dta',sep="")) } } 
   
 }
@@ -28,19 +28,42 @@ read_stata_aids_results <- function(r,read_coeff){
     out <- rbind(out,x)
   }
   if ( read_coeff == FALSE) { 
-  k  <- out[c("q","name","z")]
-  kk <- k %>% spread(name,z)
+    k  <- out[c("q","name","z")]
+    kk <- k %>% spread(name,z)
   } else {
     k  <- out[c("q","name","coeff")]
     kk <- k %>% spread(name,coeff)
   }
-
-  return(kk)
   
+  return(kk)
+
+}
+
+fill_in_2010_house_prices <- function(){
+  ap <-subset(get_asset_average_prices(2012,use_ward=TRUE),shortname=="house")
+  a2010 <- subset(ll@read_assets_file(year = 2010, dirprefix = "../", fu = fu, ln = lsms_normalizer),shortname=="house" & number >=1)
+  o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../", fu = fu, ln = lsms_normalizer)
+  a2010 <- merge(a2010,unique(o2010[,c("hhid","region","district","ward")]),by=c("hhid"))
+  mm <- merge(a2010,ap,by=c("shortname","region","district","ward"),all.x=TRUE)
+  print(paste("Ignored",dim(subset(mm,is.na(assetprice)))[1], "entries"))
+  mm2 <- subset(mm,!is.na(assetprice))
+  
+  return(mm2)
 }
 
 
-get_asset_average_prices <- function(yr){
+fill_in_2010_prices <- function(){
+  ap <- get_asset_average_prices(2012,FALSE)
+  a2010wohouse <- subset(ll@read_assets_file(year = 2010, dirprefix = "../", fu = fu, ln = lsms_normalizer), number >=1 & shortname!="house")
+  datwohouse <- merge(a2010wohouse,ap,by=c("shortname")) %>% mutate(asset_mtm = assetprice *number )
+  
+  mm <- fill_in_2010_house_prices()[,c("hhid","shortname","number","assetprice","itemcode","longname","category")]
+  datwhouse <- mm %>% mutate(asset_mtm = assetprice *number )
+  dat <- rbind(datwohouse,datwhouse)
+  return(dat)
+}
+
+get_asset_average_prices <- function(yr,use_ward){
   assetnames_transport   <- c('bike', 'motorbike', 'car')
   #ignored house and land (because their prices may vary too much for us to estimate 2010 values)
   assetnames_household   <- c(  'sewingmachine', 'bed',  'watch',  'chair', 'table', 'cupboard', 'sofa','sports_hobby')#,'land', 'house')
@@ -48,14 +71,26 @@ get_asset_average_prices <- function(yr){
   
   assetnames <- c(assetnames_electric,c(assetnames_household,assetnames_transport))
   adat <- ll@read_assets_file(year = yr, dirprefix = "../", fu = fu, ln = lsms_normalizer)
+  odat <- ll@load_ohs_file(year = yr, dirprefix = "../", fu = fu, ln = lsms_normalizer)
+  if (use_ward==TRUE){
+    adat <- merge(adat,unique(odat[,c("hhid","region","district","ward")]),by=c("hhid"))
+  }
   assets <- unique(as.character(adat$shortname))
-  assetprices <- sapply(assets, function(x) { quantile(with(subset(adat, number>=1 & shortname==x & !is.na(mtm)),mtm),0.85) } )
-  assetpricesdf <- data.frame(shortname=assets, assetprice = assetprices)
-  rownames(assetpricesdf) <- assetpricesdf$shortname
-  assetpricesdf[is.na(assetpricesdf$assetprice),]$assetprice <- 0
-  dat <- merge(adat,assetpricesdf,by=c("shortname")) %>% mutate(asset_mtm = assetprice *number )
-  k <- ddply(subset(dat,is.element(shortname,assetnames))[,c("hhid","asset_mtm")],.(hhid),summarise,cost = log(sum(asset_mtm)+1e-7))
-  return(k)
+  if (use_ward == TRUE){
+    assetpricesdf <- ddply(subset(adat[,c("mtm","hhid","number","shortname","region","district","ward")],number>=1 & !is.na(mtm)),
+                           .(shortname,region,district,ward), summarise, assetprice=mean(mtm))
+  } else  {
+    assetprices <- sapply(assets, function(x) { quantile(with(subset(adat, number>=1 & shortname==x & !is.na(mtm)),mtm),0.85) } )
+    assetpricesdf <- data.frame(shortname=assets, assetprice = assetprices)
+    rownames(assetpricesdf) <- assetpricesdf$shortname
+    assetpricesdf[is.na(assetpricesdf$assetprice),]$assetprice <- 0
+  }
+  
+  
+  #dat <- merge(adat,assetpricesdf,by=c("shortname")) %>% mutate(asset_mtm = assetprice *number )
+  #k <- ddply(subset(dat,is.element(shortname,assetnames))[,c("hhid","asset_mtm")],.(hhid),summarise,cost = log(sum(asset_mtm)+1e-7))
+  
+    return (assetpricesdf)
 }
 
 all_asset_scores <- function(years,dirprefix,fu,ln,ll){
@@ -72,7 +107,7 @@ all_asset_scores <- function(years,dirprefix,fu,ln,ll){
     asset_scores_household <- plyr::rename(ll@get_asset_score(year = yr, diaryData = cdat, assetsData = adat, assetsList = assetnames_household, ln = ln ),
                                            c("asset_score"="hh_asset_score"))
     asset_scores_electric    <- plyr::rename(ll@get_asset_score(year = yr, diaryData = cdat, assetsData = adat, assetsList = assetnames_electric, ln = ln ),
-                                      c("asset_score"="elec_asset_score"))
+                                             c("asset_score"="elec_asset_score"))
     asset_scores <- merge(asset_scores_household,asset_scores_transport,by=c("hhid"))
     asset_scores <- merge(asset_scores, asset_scores_electric, by = c("hhid"))
     asset_scores$year <- yr
