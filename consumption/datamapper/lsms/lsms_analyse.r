@@ -36,8 +36,9 @@ read_stata_aids_results <- function(r,read_coeff){
   }
   
   return(kk)
-
+  
 }
+
 
 fill_in_2010_house_prices <- function(){
   ap <-subset(get_asset_average_prices(2012,use_ward=TRUE),shortname=="house")
@@ -90,7 +91,38 @@ get_asset_average_prices <- function(yr,use_ward){
   #dat <- merge(adat,assetpricesdf,by=c("shortname")) %>% mutate(asset_mtm = assetprice *number )
   #k <- ddply(subset(dat,is.element(shortname,assetnames))[,c("hhid","asset_mtm")],.(hhid),summarise,cost = log(sum(asset_mtm)+1e-7))
   
-    return (assetpricesdf)
+  return (assetpricesdf)
+}
+
+all_asset_mtms <- function(sum_costs) {
+  assetnames_transport   <- c('bike', 'motorbike', 'car')
+  #ignored house and land (because their prices may vary too much for us to estimate 2010 values)
+  assetnames_household   <- c(  'sewingmachine', 'bed',  'watch',  'chair', 'table', 'cupboard', 'sofa','sports_hobby','land', 'house')
+  assetnames_electric     <- c('mobile', 'waterheater','camera', 'phone', 'musicplayer', 'videoplayer', 'musicsystem', 'ac_fan', 'waterpump', 'tv', 'dishtv', 'computer',  'refrigerator' )
+  
+  commoncols <- c("itemcode" ,"hhid","number","mtm","longname","shortname","category")
+  convert = function (x) plyr::rename(x[,commoncols],c ("mtm"="assetprice")) %>% mutate(asset_mtm = assetprice * number)
+  
+  a2010       <- fill_in_2010_prices()
+  a2010$year  <- 2010
+  a2012       <- ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ln = lsms_normalizer)
+  a2012       <- convert(a2012)
+  a2012$year  <- 2012
+  x           <- rbind(a2010,a2012)
+  a2014       <- ll@read_assets_file(year = 2014, dirprefix = "../",fu = fu, ln = lsms_normalizer)
+  a2014       <- convert(a2014)
+  a2014$year  <- 2014
+  x     <- rbind(x,a2014)
+  if (sum_costs) {
+    transport_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_transport) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,transport_assets_mtm = log(sum(asset_mtm)+1e-7))
+    household_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_household) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,household_assets_mtm = log(sum(asset_mtm)+1e-7))
+    electric_assetcosts  <- ddply(subset(x,is.element(shortname,assetnames_electric) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,electric_assets_mtm = log(sum(asset_mtm)+1e-7))
+    y <- merge(electric_assetcosts,merge(transport_assetcosts,household_assetcosts,by=c("hhid","year")),by=c("hhid","year"))
+    return(y)
+  }
+  else {
+    return(x)
+  }
 }
 
 all_asset_scores <- function(years,dirprefix,fu,ln,ll){
