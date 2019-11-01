@@ -2305,6 +2305,13 @@ reference "eq:wessells_aids"
 
 \end_inset
 
+ in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+
+\end_inset
+
 ) is used on the consumption microdata from 2010, 2012 and 2014.
  
 \end_layout
@@ -2392,7 +2399,7 @@ reference "eq:quality_def"
  (Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Analysis"
+reference "subsec:Econometric-model"
 
 \end_inset
 
@@ -2558,12 +2565,16 @@ Data
 
 \begin_layout Standard
 \paragraph_spacing single
-Tanzania is the first country to be analysed in the study.
- With recent economic growth and a history of nationalization, the country
- provides a much desired snapshot of the consumer world of developing sub-Sahara
-n Africa.
- The data chosen for the preliminary analysis is from the Living Standard
- Measurement Study (LSMS) conducted by the World Bank.
+With recent economic growth and a history of nationalization, Tanzania provides
+ a much desired snapshot of the consumer world of developing sub-Saharan
+ Africa.
+ We note that regional disparities exist in sub-Saharan African countries
+ when it comes to the levels of foreign investment.
+ In Tanzania, the investments from South Africa and Western countries seem
+ to have expanded significantly and thus trends of urbanisation are more
+ likely to appear in the consumption data.
+ We choose our data from the Living Standard Measurement Study (LSMS) -
+ which is conducted by the World Bank.
  LSMS includes expenditure microdata from about 10,000 households - with
  many of the expenditure categories of potential status significance.
  
@@ -2609,29 +2620,26 @@ visible
  consumption - is quite low.
  The variance on the consumption of skin-cream is in fact lower than that
  for bread or milk.
- The budget shares for cigarettes seem quite high (and quite skewed) - however,
- since there are no cheaper substitutes available we don't consider cigarettes
- as part of status consumption.
- Although the descriptive statistics seem to confirm the heuristic that
- amongst many substitutable items, the distribution of expensive varieties
- is more likely to be skewed, it is worth emphasising that neither skewness
- nor mean-cost is used as a criteria to pick items for status consumption.
- 
 \end_layout
 
 \begin_layout Standard
-The substitution between items drives our classification of food item -
- goat and meat are put under the same group - but not tea and coffee - because
- there is little sense in substitution between tea/coffee and goat/meat.
+The substitution between items drives our 
+\begin_inset Quotes eld
+\end_inset
+
+functional
+\begin_inset Quotes erd
+\end_inset
+
+ classification of food items - goat and meat are put under the same group
+ - but not tea and coffee - because there is little sense in substitution
+ between tea/coffee and goat/meat.
  The food category is in fact divided into sub-categories so that demands
  within the category can be considered separable but still lump together
  the substitutes that are of value for quality.
  Instead of having to put tea,coffee with goat,beef in high-price food categorie
-s for quality, we consider put consider the high quality consumption in
- the sub-categories beverages and protein.
- Similarly, instead of classifying beef, pork and goat as varieties of meat,
- we group them together with milk products, lentils and eggs as sources
- of protein - since we view the latter as cheaper sources of protein.
+s for quality, we put the high quality consumption in the sub-categories
+ beverages and protein.
  
 \end_layout
 
@@ -2639,7 +2647,7 @@ s for quality, we consider put consider the high quality consumption in
 The recall method is particularly volatile in developing countries where
  regular payment setups are hardly a norm.
  We must be careful therefore with interpreting differences in the budget
- share over snapshots (2008,2010 and 2012) for a particular household -
+ share over snapshots (2010, 2012 and 2014) for a particular household -
  as the household may not have expenditures in all three instances of the
  survey.
  For cases such as electricity in Tanzania, we find the survey field for
@@ -2657,10 +2665,11 @@ main lighting fuel
  Such matters can be made worse in cases of expenditure where seasonality
  (time of the year) is also an important factor.
  To address the issue, therefore, we are careful not to draw any conclusions
- from a household's expenditure over the time-series (i.e.
- survey snapshots in 2008, 2010 and 2012) - but rely only on the average
- expenditure by a collection of households (in a particular region etc.)
- over time.
+ from a household's expenditure over the time-series but rely only on the
+ average expenditure by a collection of households (in a particular region
+ etc.) over time.
+ Since we use a random effects model in the current chapter, no particular
+ adjustments needed to be made for these concerns.
 \end_layout
 
 \begin_layout Standard
@@ -2684,40 +2693,6 @@ The LSMS data is available to enumeration-area levels in the crowded regions
  ).
  We only consider district level residence and primary spoken language as
  the demographic factors that may affect consumption.
- In a bulky informal sector (which may have expanded due to recent economic
- developments) that has seen expansions in the areas of micro-credit as
- well as mass education 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DolanBoP"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "MeagherNigeria"
-
-\end_inset
-
-, the development of identities is complex and makes the conclusions on
- social identities (which are homogenising with the expansion of internal
- trade) particularly prone to error
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\paragraph_spacing single
-Notice that there are regional disparities in the foreign investment in
- sub-Saharan African countries.
- In Tanzania, for example, the investments from South Africa and Western
- countries have expanded significantly.
- Not all countries in the region have seen a similar scale of investments.
-\end_layout
-
-\end_inset
-
-.
  
 \end_layout
 
@@ -2990,31 +2965,9 @@ We find that the income spectrum is heavily skewed in the developing world.
  on the person's estimate of the item provided as income.
  All of these can make the incomes estimates noisy at best.
  The income levels themselves seem poorly correlated with expenditure levels.
- One possible way to measure this noise is by observing the variance of
- income in the same region
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-If there are 
-\begin_inset Formula $X$
-\end_inset
-
- individuals with 
-\begin_inset Formula $n_{i}(i\epsilon X)$
-\end_inset
-
- sources of income each, then it is safe to assume that workers in the same
- region and same employment-type have reasonably similar incomes.
- The variance in incomes recorded for the same local group can give an estimate
- of how noisy the data is due to self-reporting.
-\end_layout
-
-\end_inset
-
-.
  Given the sparsity of available income data and its poor quality, we choose
- not to use for the consumption study.
+ to use the occupation ranks (which are correlated with the observed income)
+ for the current study.
 \end_layout
 
 \begin_layout Subsection
@@ -3024,7 +2977,8 @@ Steps in preparing LSMS data
 \begin_layout Standard
 \paragraph_spacing single
 Following steps were performed towards the normalisation of LSMS data on
- Tanzania:
+ Tanzania.
+ The files referred to are for year 2010:
 \end_layout
 
 \begin_layout Enumerate
@@ -3099,12 +3053,12 @@ estimate
 
 \begin_layout Enumerate
 \paragraph_spacing single
-All expenditure from (c)-(e) above were summed up as total expenditure
+All expenditure from (c)-(d) above were summed up as total expenditure
 \end_layout
 
 \end_deeper
 \begin_layout Enumerate
-Read Assets from Section N and calculated asset scores
+Read Assets from Section N (for year: 2010) and calculated asset scores
 \end_layout
 
 \begin_layout Enumerate
@@ -3382,8 +3336,8 @@ y.
  region).
  Assuming that the habit of stocking is uniform throughout the country (this
  may sound a sweeping assumption - but since we do take region into account
- - we should be able to account regional differences), we can find household
- factors (e.g.
+ - we could account for regional differences), we can find household factors
+ (e.g.
  household size or distance from market) that may affect consumption.
 \end_layout
 
@@ -3411,52 +3365,14 @@ To test whether the store-and-consume habit is significant, we observe the
 \begin_inset Formula $q,x$
 \end_inset
 
- and is endogenous.
- A reasonable assumption we make is that the percentage of stockpilers does
- not change significantly with the regions.
- In any two regions A and B with populations 
-\begin_inset Formula $p_{A}$
-\end_inset
-
- and 
-\begin_inset Formula $p_{B}$
-\end_inset
-
- respectively therefore, we would have
-\begin_inset Formula $\eta p_{A}$
-\end_inset
-
-and 
-\begin_inset Formula $\eta p_{B}$
-\end_inset
-
- stockpilers (where 
-\begin_inset Formula $\eta$
-\end_inset
-
- is the fixed frequency of stockpilers).
- These stockpilers would buy less frequently but there is no reason to believe
- that they would consume more than the non-stockpilers.
- Thus if stockpilers and non-stockpilers live within a region in the same
- ratio 
-\begin_inset Formula $\eta$
-\end_inset
-
-, we should observe fixed differences (clusters) in all regions (since 
-\begin_inset Formula $\eta$
-\end_inset
-
- is fixed).
- In this analysis, region dummies only appear significant for more populous
- regions and the effect of household-size dominates even if we resample
- the data in smaller samples.
- In summary, given the low effect of the travel-costs on ratio 
+ and is unobserved.
+ Using difference-in-means and observing the low effect of the travel-costs
+ on ratio 
 \begin_inset Formula $log(\frac{q}{x})$
 \end_inset
 
- and the lack of different means in the region, we can be assured that stockpili
-ng is not significant.
- It is more likely that larger families buy more quantities of goods.
+, we conclude that stockpiling is not significant.
+ It is far more likely that the larger families buy more quantities of goods.
 \end_layout
 
 \begin_layout Standard
@@ -3671,10 +3587,10 @@ If we were to really look for a perfect match for prices, then we should
  not only match the quantities consumed by the consumer with the prices
  recorded in the market but also the time of the household interview with
  that of the price recorded.
- Not only is this fine matching somewhat impractical ( survey prices are
- hardly available at such fine levels of granularity ), it is largely unnecessar
-y since our view of price is that of a value that is faced by a sufficiently
- large number of consumers in the survey.
+ This fine matching is both impractical (survey prices being hardly available
+ at such fine levels of granularity) and unnecessary since our view of price
+ is that of a value that is faced by a sufficiently large number of consumers
+ in the survey.
 \end_layout
 
 \end_inset
@@ -3753,15 +3669,22 @@ re.
  Within foods we observe protein, fruits, dense-foods, complements and non-fresh
  groups and within energy, we put kerosene and electricity under the same
  group (energy).
- 
-\end_layout
+ The composite commodity theorem restrictions - more particularly the constant
+ relative price structure - being a requirement for quality elasticities
+ to make sense, the classification of commodity groups is also driven by
+ the market price-structure.
+ In commodity groups where an aggregate quality is calculated, the classificatio
+n is defined so as to take into account both the functional separability
+ and price-structure.
+ A clustering of regression coefficients is used for the classification
+ for items whose prices are shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LSMSMarketPrices"
 
-\begin_layout Standard
+\end_inset
 
-\bar under
-This is why our classification of items into commodity groups is driven
- by the price-structure.
- 
+.
 \end_layout
 
 \begin_layout Standard
@@ -3780,25 +3703,57 @@ ges for some items and region averages for other.
  It is indeed possible that the price of some items may be more volatile
  than the others - and thus the volatility being ignored in the annual time
  series data would bring some bias.
- However, since we combine the household log diary with the recall diary
- (which is recorded on a monthly or yearly basis), a finer time-series for
- prices is not enough to address this issue.
- Such a bias can be alleviated only through finer price data 
+ But since we combine the household log diary with the recall diary (which
+ is recorded on a monthly or yearly basis), a finer time-series for prices
+ is not enough to address this issue.
+ Such a bias could be alleviated only through finer price data 
 \shape italic
 and 
 \shape default
-a uniformly collected household consumption dataset.
+a uniformly collected household consumption microdata.
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
+\begin_inset Float figure
+placement H
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/markedprice.png
+	width 2in
+
+\end_inset
 
 
-\backslash
-onecolumn
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/unitprice.png
+	width 2in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:markedprices"
+
+\end_inset
+
+Typical marked prices and Price per unit of an item
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3808,7 +3763,7 @@ onecolumn
 
 \begin_layout Standard
 \begin_inset Float figure
-placement p
+placement h
 wide false
 sideways false
 status open
@@ -3818,7 +3773,9 @@ status open
 \align center
 \begin_inset Graphics
 	filename C:/local_files/research/consumption/lsms/allnatprices.png
-	width 5.5in
+	width 5in
+	height 5.5in
+	rotateAngle 90
 	rotateOrigin center
 
 \end_inset
@@ -3837,102 +3794,6 @@ name "fig:LSMSMarketPrices"
 \end_inset
 
 Market Prices recorded in 2008, 2010, 2012 and 2014 surveys
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/markedprice.png
-	width 3in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:markedprices"
-
-\end_inset
-
-Typical marked prices of a commodity
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/unitprice.png
-	width 3in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:unitprice"
-
-\end_inset
-
-Typical Price per unit of an item
 \end_layout
 
 \end_inset
@@ -6246,17 +6107,6 @@ grass
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-
-\size normal
-Cross Sectional Analysis of quality and asset scores
-\end_layout
-
-\begin_layout Standard
-To motivate the intertemporal problem, a cross-sectional analysis of the
- quality and assets owned is presented in the current chapter.
 \end_layout
 
 \begin_layout Standard
