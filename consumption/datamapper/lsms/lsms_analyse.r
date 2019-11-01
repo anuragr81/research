@@ -94,6 +94,16 @@ get_asset_average_prices <- function(yr,use_ward){
   return (assetpricesdf)
 }
 
+merge_asset_mtms_with_prepared_quality_data <- function(allg,m){
+  aggdat <- merge(allg,m,all.x=TRUE,by=c("hhid","year"))
+  aggdat[is.na(aggdat$electric_assets_mtm),]$electric_assets_mtm <- log(1e-7)
+  aggdat[is.na(aggdat$transport_assets_mtm),]$transport_assets_mtm <- log(1e-7)
+  aggdat[is.na(aggdat$household_assets_mtm),]$household_assets_mtm <- log(1e-7)
+  aggdat[is.na(aggdat$all_assets_mtm),]$all_assets_mtm <- log(1e-7)
+  
+  return(aggdat)
+}
+
 all_asset_mtms <- function(sum_costs) {
   assetnames_transport   <- c('bike', 'motorbike', 'car')
   #ignored house and land (because their prices may vary too much for us to estimate 2010 values)
@@ -117,7 +127,10 @@ all_asset_mtms <- function(sum_costs) {
     transport_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_transport) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,transport_assets_mtm = log(sum(asset_mtm)+1e-7))
     household_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_household) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,household_assets_mtm = log(sum(asset_mtm)+1e-7))
     electric_assetcosts  <- ddply(subset(x,is.element(shortname,assetnames_electric) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,electric_assets_mtm = log(sum(asset_mtm)+1e-7))
-    y <- merge(electric_assetcosts,merge(transport_assetcosts,household_assetcosts,by=c("hhid","year")),by=c("hhid","year"))
+    assetcosts           <- ddply(subset(x,!is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,all_assets_mtm = log(sum(asset_mtm)+1e-7))
+    
+    y <- merge(assetcosts,merge(electric_assetcosts,merge(transport_assetcosts,household_assetcosts,by=c("hhid","year")),by=c("hhid","year")),by=c("hhid","year"))
+    
     return(y)
   }
   else {
