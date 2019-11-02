@@ -39,6 +39,14 @@ read_stata_aids_results <- function(r,read_coeff){
   
 }
 
+read_stata_aids_results_files <- function(f){
+  #a <- read.csv('c:/local_files/research/consumption/aidsresults9.csv')
+  a <- read.csv(f)
+  b <- a[,c("comm","var","coef","stderr")]
+  bcoef <-t( b[,c("comm","var","coef")] %>% spread(var,coef))
+  return(bcoef)
+} 
+
 
 fill_in_2010_house_prices <- function(){
   ap <-subset(get_asset_average_prices(2012,use_ward=TRUE),shortname=="house")
