@@ -10,11 +10,17 @@ def format_data (x):
 		return re.sub("_","\\_",x)
 	raise RuntimeException("Unsupported Type to be formatted")
 
-def start_longtable(df):
-
+def print_table(df, longtable, landscape):
+	section = "longtable" if longtable else "tabular"
+	
 	colsize = len(df.columns)
 	nrows   = df.shape[0]
-	start = "\\def\\sym#1{\\ifmmode^{#1}\\else\\(^{#1}\\)\\fi} \\begin{longtable}{l*{"+str(colsize)+"}{c}} "
+	start = "\\begin{landscape}" if landscape else ""
+
+	if not longtable:
+		start += "\\resizebox{\\columnwidth}{!}{"
+
+	start += "\\def\\sym#1{\\ifmmode^{#1}\\else\\(^{#1}\\)\\fi} \\begin{" + section + "}{l*{"+str(colsize)+"}{c}} "
 	start += "\\hline\\hline "
 	for i,col in enumerate(df.columns):
 		start += " & \\multicolumn{1}{c}{("+str(i+1)+")}"
@@ -33,7 +39,13 @@ def start_longtable(df):
 	end = ""
 	end += "\\\\ \\hline\\hline  \\multicolumn{2}{l}{\\footnotesize \\textit{p}-values in parentheses}" 
 	end += "\\\\ \\multicolumn{2}{l}{\\footnotesize \sym{*} \\(p<0.05\\), \\sym{**} \\(p<0.01\\), \\sym{***} \\(p<0.001\\)}"
-	end += "\\\\ \\end{longtable}" 
+	end += "\\\\ \\end{" + section + "}"
+
+	if not longtable:
+		end += "}"
+
+	if landscape:
+	    end += "\\end{landscape}" 
 
 	return start + end
 
@@ -42,4 +54,4 @@ if __name__ == "__main__":
 	#df = pd.DataFrame( {'A':[1,2],'B':["GBP","USD"]})
 	df  = pd.read_csv(sys.argv[1])
 	#print(df)
-	print(start_longtable(df))
+	print(print_table(df,True,True))
