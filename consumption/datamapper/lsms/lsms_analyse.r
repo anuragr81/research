@@ -39,12 +39,38 @@ read_stata_aids_results <- function(r,read_coeff){
   
 }
 
-read_stata_aids_results_files <- function(f){
+read_stata_aids_results_files <- function(f,skip_first){
   #a <- read.csv('c:/local_files/research/consumption/aidsresults9.csv')
-  a <- read.csv(f)
+  a <- read.csv(f,header=TRUE)
   b <- a[,c("comm","var","coef","stderr")]
   bcoef <-t( b[,c("comm","var","coef")] %>% spread(var,coef))
-  return(bcoef)
+  #write.csv(bcoef,'c:/temp/bcoef.csv')
+  bstderr <-t( b[,c("comm","var","stderr")] %>% spread(var,stderr))
+  
+  if (skip_first){
+    colnames(bcoef) <- bcoef[1,]
+    bcoef <- bcoef[2:dim(bcoef)[1],]
+    colnames(bstderr) <- bstderr[1,]
+    bstderr <- bstderr[2:dim(bstderr)[1],]
+  }
+  for ( i in seq(dim(bstderr)[2])){
+    bstderr[,i] <- paste("(",bstderr[,i],")")
+  }
+
+  idnames <- rownames(as.data.frame(bcoef))
+  for ( i in seq(1,dim(bstderr)[1])) {
+    y <- as.data.frame(rbind(bcoef[i,],bstderr[i,]))
+    y$idname <- c(idnames[i],"")
+    if (i == 1){
+      x <- y
+    } else {
+      x <- rbind( x, y)     
+    }
+  }
+  
+  nonidcols <- setdiff(colnames(x),c("idname"))
+  x <- x [ ,c("idname",nonidcols)]
+  return(x)
 } 
 
 
@@ -286,9 +312,10 @@ get_categories <- function(){
   return (c("densefoods","nonfresh","fruitsveg","protein","alcohol","complements","energy","household","transport"))
 }
 
-load_group <- function(dat,year){
-  
+load_group <- function(dat,year,categories){
+  if (missing(categories)){
   categories <- get_categories()
+  }
   if (missing(dat)){
     dat <- ll@group_expenditure(year = year, dirprefix = "../",
                                 fu = fu , ln = lsms_normalizer, lgc=lgc,

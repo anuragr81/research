@@ -1450,6 +1450,7 @@ lsms_loader<-function(fu,ln,lgc) {
                       roofmaterial=heads$roofmaterial,
                       floormaterial=heads$floormaterial,
                       wallsmaterial=heads$wallsmaterial,
+                      lightingfuel=heads$lightingfuel,
                       toilet=heads$toilet,
                       cookingfuel=heads$cookingfuel,
 

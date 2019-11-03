@@ -10,7 +10,10 @@ def format_data (x):
 		return re.sub("_","\\_",x)
 	raise RuntimeException("Unsupported Type to be formatted")
 
-def print_table(df, longtable, landscape):
+def print_table(dfinput,idcolumnIndex, longtable, landscape,selected_columns=None,legend=False):
+
+	df = dfinput if selected_columns is None else dfinput[selected_columns]
+	
 	section = "longtable" if longtable else "tabular"
 	
 	colsize = len(df.columns)
@@ -22,11 +25,22 @@ def print_table(df, longtable, landscape):
 
 	start += "\\def\\sym#1{\\ifmmode^{#1}\\else\\(^{#1}\\)\\fi} \\begin{" + section + "}{l*{"+str(colsize)+"}{c}} "
 	start += "\\hline\\hline "
+	
 	for i,col in enumerate(df.columns):
-		start += " & \\multicolumn{1}{c}{("+str(i+1)+")}"
+	
+		if i>idcolumnIndex:
+			start += " & \\multicolumn{1}{c}{("+str(i)+")}"
+		else:
+			start += " & \\multicolumn{1}{c}{}"
+	
 	start += " \\\\"
+	
 	for i,col in enumerate(df.columns):
-		start += " & \\multicolumn{1}{c}{"+str(col)+"}"
+		if i>idcolumnIndex:
+		    start += " & \\multicolumn{1}{c}{"+str(col)+"}"
+		else:
+			start += " & \\multicolumn{1}{c}{}"
+
 	start += "\\\\ \\hline"
 	dat = df.to_dict()
 	for i in range(nrows):
@@ -37,8 +51,10 @@ def print_table(df, longtable, landscape):
 
 
 	end = ""
-	end += "\\\\ \\hline\\hline  \\multicolumn{2}{l}{\\footnotesize \\textit{p}-values in parentheses}" 
-	end += "\\\\ \\multicolumn{2}{l}{\\footnotesize \sym{*} \\(p<0.05\\), \\sym{**} \\(p<0.01\\), \\sym{***} \\(p<0.001\\)}"
+	if legend:
+	    end += "\\\\ \\hline\\hline  \\multicolumn{2}{l}{\\footnotesize \\textit{p}-values in parentheses}" 
+	    end += "\\\\ \\multicolumn{2}{l}{\\footnotesize \sym{*} \\(p<0.05\\), \\sym{**} \\(p<0.01\\), \\sym{***} \\(p<0.001\\)}"
+	
 	end += "\\\\ \\end{" + section + "}"
 
 	if not longtable:
@@ -52,6 +68,10 @@ def print_table(df, longtable, landscape):
 
 if __name__ == "__main__":
 	#df = pd.DataFrame( {'A':[1,2],'B':["GBP","USD"]})
-	df  = pd.read_csv(sys.argv[1])
+	selected_columns = ['idname','qfruitsveg', 'qVfruitsveg', 'qVprotein', 'qnonfresh',
+	 'qcomplements', 'qVcomplements', 'qdensefoods', 'qVdensefoods',  
+	 'qtransport', 'qVnonfresh', 'qhousehold', 'qenergy', 'qprotein']
+	df  = pd.read_csv(sys.argv[1],keep_default_na=False)
+
 	#print(df)
-	print(print_table(df,True,True))
+	print(print_table(dfinput=df,idcolumnIndex=0,longtable=False,landscape=True,selected_columns=selected_columns))
