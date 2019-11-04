@@ -229,7 +229,12 @@ combine_mills_files <- function(years,dirprefix){
   return(o)
 }
 
-
+stored_food_cpi <- function(){
+  x <- data.frame(year=c(2010), food_cpi=c(100))
+  x <- rbind(x,data.frame(year=c(2012), food_cpi=c(142.070554851631)))
+  x <- rbind(x,data.frame(year=c(2014), food_cpi=c(135.859046554779)))
+  return(x)
+}
 calculate_food_cpi <- function(c2010,g2010,o2010){
   
   cc <- merge(c2010,g2010[,c("hhid","total_expenditure")],by=c("hhid"))
@@ -287,8 +292,8 @@ calculate_food_cpi <- function(c2010,g2010,o2010){
   basket <- unique(basket) 
   basket <- ddply(basket, .(shortname),summarise, w = mean(w) , price2010 = mean(price2010[!is.na(price2010)]), price2012 = mean(price2012[!is.na(price2012)]),price2014 = mean(price2014[!is.na(price2014)]))
   basket <- basket%>% mutate( cost2012 = price2012*w , cost2014 = price2014*w , cost2010= price2010)
-  cpi2012 <- mean(with(x,(price2012*w)/(price2010*w)))
-  cpi2014 <- mean(with(x,(price2014*w)/(price2010*w)))
+  cpi2012 <- mean(with(basket,(price2012*w)/(price2010*w)))
+  cpi2014 <- mean(with(basket,(price2014*w)/(price2010*w)))
   df      <- data.frame( year = c(2010,2012,2014) , cpi = c(100,cpi2012*100, cpi2014*100))
   return(df)
   
