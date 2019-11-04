@@ -237,7 +237,7 @@ calculate_food_cpi <- function(c2010,g2010,o2010){
   cc <- cc %>% mutate(w = cost/total_expenditure)
   s <- ddply(cc[,c("hhid","w","shortname")],.(shortname),summarise,wq = quantile(w,0.8))
   
-  foodshortnames <- unique(as.character(subset(ln@lsms_groups_qualitybased_2010_2012(), is.element(category,c("densefoods","nonfresh","fruitsveg","protein","complements")))$shortname))
+  foodshortnames <- unique(as.character(subset(lsms_normalizer()@lsms_groups_qualitybased_2010_2012(), is.element(category,c("densefoods","nonfresh","fruitsveg","protein","complements")))$shortname))
   s <- subset(s,is.element(shortname,foodshortnames))
   s <- s[rev(order(s$wq)),]
   #
@@ -250,7 +250,48 @@ calculate_food_cpi <- function(c2010,g2010,o2010){
   #P_2012 = sum (p_2012*q_2010)/ B
   #P_2014 = sum (p_2014*q_2010)/ B
   #lnp <- lnp + data[[shareNames[i]]] * log(data[[priceNames[i]]]/basePrices[i])
-  return(hhp)
+  
+  groups      <- subset( lsms_normalizer()@lsms_groups_qualitybased_2010_2012(), is.element(shortname,foodshortnames)  )
+  hhp <- merge(hhp,groups,by=c("shortname"))
+  
+  minprices <- ddply(hhp[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min(price))
+  hhp <- merge(minprices,hhp)
+  hhp$price_ratio <- with (hhp,price/min_price) 
+  hhp$factor<-as.integer(hhp$lwp_unit==1)+as.integer(hhp$lwp_unit==2)/1000.0+as.integer(hhp$lwp_unit==3)+as.integer(hhp$lwp_unit==4)/1000.0+as.integer(hhp$lwp_unit==5)
+  hhp$quantity <-with (hhp,lwp*factor)
+  basket <- ddply(hhp[,c("shortname","region","district","quantity","price")],.(region,district,shortname), summarise, w = mean(quantity) , price2010 = mean(price))
+  #totq <- ddply(unique(hhp[,c("hhid","shortname","category","quantity","price_ratio","min_price","cost")]),.(category,hhid),summarise,totq=sum(quantity), 
+  #              qsum = sum (price_ratio*quantity), min_price=unique(min_price),tot_categ_exp = sum(cost))
+  #totq$quality <- with(totq,qsum/totq)
+  #totq <- merge(o2010[,c("region","district","hhid")], totq,by = c("hhid"))
+  #res  <- ddply(totq,.(category),summarise,qall = mean(qsum[!is.na(qsum)]), costall = mean(tot_categ_exp[!is.na(tot_categ_exp)]))
+  
+  c2012         <- ll@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ln = lsms_normalizer)
+  o2012         <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu = fu, ln = lsms_normalizer)
+  mktprices2012 <- ll@load_market_prices(year = 2012, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
+  fooddiarydata2012     <- subset(c2012,as.integer(as.character(item))>10000)
+  hhp2012 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2012,ohsdata=o2012,ddata=fooddiarydata2012)
+  hhp2012 <- merge(hhp2012,groups,by=c("shortname"))
+  prices2012 <- plyr::rename(hhp2012[,c("region","district","shortname","price")],c("price"="price2012"))
+  basket <- merge(basket,prices2012, by = c("region","district","shortname"))
+  
+  c2014         <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln = lsms_normalizer)
+  o2014         <- ll@load_ohs_file(year = 2014, dirprefix = "../",fu = fu, ln = lsms_normalizer)
+  mktprices2014 <- ll@load_market_prices(year = 2014, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
+  fooddiarydata2014     <- subset(c2014,as.integer(as.character(item))>10000)
+  hhp2014 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2014,ohsdata=o2014,ddata=fooddiarydata2014)
+  hhp2014 <- merge(hhp2014,groups,by=c("shortname"))
+  prices2014 <- plyr::rename(hhp2014[,c("region","district","shortname","price")],c("price"="price2014"))
+  basket <- merge(basket,prices2014, by = c("region","district","shortname"))
+  
+  basket <- unique(basket) 
+  basket <- ddply(basket, .(shortname),summarise, w = mean(w) , price2010 = mean(price2010[!is.na(price2010)]), price2012 = mean(price2012[!is.na(price2012)]),price2014 = mean(price2014[!is.na(price2014)]))
+  basket <- basket%>% mutate( cost2012 = price2012*w , cost2014 = price2014*w , cost2010= price2010)
+  cpi2012 <- mean(with(x,(price2012*w)/(price2010*w)))
+  cpi2014 <- mean(with(x,(price2014*w)/(price2010*w)))
+  df      <- data.frame( year = c(2010,2012,2014) , cpi = c(100,cpi2012*100, cpi2014*100))
+  return(df)
+  
 }
 
 prepare_quality_aids <-function (prepdat){
