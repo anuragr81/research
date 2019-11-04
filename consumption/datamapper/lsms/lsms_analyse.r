@@ -345,6 +345,10 @@ prepare_quality_aids <-function (prepdat){
   prepdat <- prepdat %>% mutate(food_quality=densefoods_quality+nonfresh_quality+fruitsveg_quality+protein_quality+complements_quality)
   prepdat <- prepdat %>% mutate(w_food= w_densefoods+w_nonfresh+w_fruitsveg+w_protein+w_complements)
   prepdat$lnV_food <- with(prepdat,log(food_quality+1))
+  
+  foodcpilog <- ( stored_food_cpi() %>% mutate(lpfood = log(food_cpi)) ) [,c("year","lpfood")]
+  prepdat <- merge(foodcpilog,prepdat,by=c("year"))
+  
   return(prepdat)
 }
 
