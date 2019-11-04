@@ -129,12 +129,13 @@ get_asset_average_prices <- function(yr,use_ward){
 }
 
 merge_asset_mtms_with_prepared_quality_data <- function(allg,m){
-  aggdat <- merge(allg,m,all.x=TRUE,by=c("hhid","year"))
-  aggdat[is.na(aggdat$electric_assets_mtm),]$electric_assets_mtm <- log(1e-7)
-  aggdat[is.na(aggdat$transport_assets_mtm),]$transport_assets_mtm <- log(1e-7)
-  aggdat[is.na(aggdat$household_assets_mtm),]$household_assets_mtm <- log(1e-7)
-  aggdat[is.na(aggdat$all_assets_mtm),]$all_assets_mtm <- log(1e-7)
-  
+  aggdat                                                           <- merge(allg,m,all.x=TRUE,by=c("hhid","year"))
+  aggdat[is.na(aggdat$electric_assets_mtm),]$electric_assets_mtm   <- 0
+  aggdat[is.na(aggdat$transport_assets_mtm),]$transport_assets_mtm <- 0
+  aggdat[is.na(aggdat$household_assets_mtm),]$household_assets_mtm <- 0
+  aggdat[is.na(aggdat$all_assets_mtm),]$all_assets_mtm             <- 0
+  aggdat$energy_rank   <- as.integer(is.element(aggdat$lightingfuel,c(1,2,8)))*3 + as.integer(is.element(aggdat$lightingfuel,c(3,4,7)))*2 + as.integer(is.element(aggdat$lightingfuel,c(5,6,9,10)))*1
+  aggdat$has_electric  <- as.integer(is.element(aggdat$lightingfuel,c(1,8)))
   return(aggdat)
 }
 
@@ -158,13 +159,13 @@ all_asset_mtms <- function(sum_costs) {
   a2014$year  <- 2014
   x     <- rbind(x,a2014)
   if (sum_costs) {
-    transport_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_transport) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,transport_assets_mtm = log(sum(asset_mtm)+1e-7))
-    household_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_household) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,household_assets_mtm = log(sum(asset_mtm)+1e-7))
-    electric_assetcosts  <- ddply(subset(x,is.element(shortname,assetnames_electric) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,electric_assets_mtm = log(sum(asset_mtm)+1e-7))
-    assetcosts           <- ddply(subset(x,!is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,all_assets_mtm = log(sum(asset_mtm)+1e-7))
+    transport_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_transport) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,transport_assets_mtm = log(sum(asset_mtm)+1))
+    household_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_household) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,household_assets_mtm = log(sum(asset_mtm)+1))
+    electric_assetcosts  <- ddply(subset(x,is.element(shortname,assetnames_electric) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,electric_assets_mtm = log(sum(asset_mtm)+1))
+    assetcosts           <- ddply(subset(x,!is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,all_assets_mtm = log(sum(asset_mtm)+1))
     
-    y <- merge(assetcosts,merge(electric_assetcosts,merge(transport_assetcosts,household_assetcosts,by=c("hhid","year")),by=c("hhid","year")),by=c("hhid","year"))
-    
+    y <- merge(assetcosts,merge(electric_assetcosts,merge(transport_assetcosts,household_assetcosts,by=c("hhid","year"),all=TRUE),by=c("hhid","year"),all=TRUE),by=c("hhid","year"),all=TRUE)
+    y[is.na(y)]<-0
     return(y)
   }
   else {
@@ -229,6 +230,29 @@ combine_mills_files <- function(years,dirprefix){
 }
 
 
+calculate_food_cpi <- function(c2010,g2010,o2010){
+  
+  cc <- merge(c2010,g2010[,c("hhid","total_expenditure")],by=c("hhid"))
+  cc <- subset(cc,!is.na(cost))
+  cc <- cc %>% mutate(w = cost/total_expenditure)
+  s <- ddply(cc[,c("hhid","w","shortname")],.(shortname),summarise,wq = quantile(w,0.8))
+  
+  foodshortnames <- unique(as.character(subset(ln@lsms_groups_qualitybased_2010_2012(), is.element(category,c("densefoods","nonfresh","fruitsveg","protein","complements")))$shortname))
+  s <- subset(s,is.element(shortname,foodshortnames))
+  s <- s[rev(order(s$wq)),]
+  #
+  mktprices2010 <- ll@load_market_prices(year = 2010, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
+  fooddiarydata2010      <- subset(c2010,as.integer(as.character(item))>10000)
+  hhp <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2010,ohsdata=o2010,ddata=fooddiarydata2010)
+  
+  #1. get mean quantities of items in base year (2010)
+  #B      = sum(p_2010*q_2010)
+  #P_2012 = sum (p_2012*q_2010)/ B
+  #P_2014 = sum (p_2014*q_2010)/ B
+  #lnp <- lnp + data[[shareNames[i]]] * log(data[[priceNames[i]]]/basePrices[i])
+  return(hhp)
+}
+
 prepare_quality_aids <-function (prepdat){
   #consu age is_resident expensiveregion, occupation_rank
   nonna_highest_educ <-subset(prepdat,!is.na(highest_educ))$highest_educ
@@ -248,6 +272,7 @@ prepare_quality_aids <-function (prepdat){
   }
   
   sz = grep("_quality$",colnames(prepdat))
+  
   if (length(sz)>0){
     for (col in colnames(prepdat)[sz]){
       qcolname <- paste("lnV_",gsub("_quality$","",col),sep="")
@@ -257,6 +282,23 @@ prepare_quality_aids <-function (prepdat){
       
     }
   }
+  prepdat[is.na(prepdat$densefoods_quality),]$densefoods_quality <- 0
+  prepdat[is.na(prepdat$nonfresh_quality),]$nonfresh_quality <- 0
+  prepdat[is.na(prepdat$fruitsveg_quality),]$fruitsveg_quality <- 0
+  prepdat[is.na(prepdat$protein_quality),]$protein_quality <- 0
+  prepdat[is.na(prepdat$complements_quality),]$complements_quality <- 0
+
+  prepdat[is.na(prepdat$w_densefoods),]$w_densefoods <- 0
+  prepdat[is.na(prepdat$w_nonfresh),]$w_nonfresh <- 0
+  prepdat[is.na(prepdat$w_fruitsveg),]$w_fruitsveg <- 0
+  prepdat[is.na(prepdat$w_protein),]$w_protein <- 0
+  prepdat[is.na(prepdat$w_complements),]$w_complements <- 0
+  
+  #densefoods_quality nonfresh_quality fruitsveg_quality protein_quality complements_quality
+  #w_densefoods w_nonfresh w_fruitsveg w_protein w_complements
+  prepdat <- prepdat %>% mutate(food_quality=densefoods_quality+nonfresh_quality+fruitsveg_quality+protein_quality+complements_quality)
+  prepdat <- prepdat %>% mutate(w_food= w_densefoods+w_nonfresh+w_fruitsveg+w_protein+w_complements)
+  prepdat$lnV_food <- with(prepdat,log(food_quality+1))
   return(prepdat)
 }
 

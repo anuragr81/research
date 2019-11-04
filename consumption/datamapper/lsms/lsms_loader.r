@@ -16,7 +16,7 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       food_expenditure_data="function",read_assets_file="function",
                                       group_expenditure="function",group_collect="function",get_asset_score="function",
                                       item_usage="function", item_ownership="function",
-                                      split_households="function",
+                                      split_households="function",add_market_price_to_fooddiary="function",
                                       asset_differences="function",get_regressed_market_prices="function"))
 
 
@@ -1851,7 +1851,11 @@ lsms_loader<-function(fu,ln,lgc) {
         hhpg <- merge(minprices,hhpg)
         # get price ratio for every group
         hhpg$price_ratio <- with (hhpg,price/min_price) 
-        hhpg <- plyr::rename(hhpg,c("lwp"="quantity"))
+        
+        hhpg$factor<-as.integer(hhpg$lwp_unit==1)+as.integer(hhpg$lwp_unit==2)/1000.0+as.integer(hhpg$lwp_unit==3)+as.integer(hhpg$lwp_unit==4)/1000.0+as.integer(hhpg$lwp_unit==5)
+        hhpg$quantity <-with (hhpg,lwp*factor)
+        
+        
       }
       
       if (return_before_agg){
@@ -2672,6 +2676,6 @@ lsms_loader<-function(fu,ln,lgc) {
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
              read_assets_file=read_assets_file, group_expenditure=group_expenditure,group_collect=group_collect,
              get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership,split_households=split_households,asset_differences=asset_differences,
-             get_regressed_market_prices=get_regressed_market_prices))
+             get_regressed_market_prices=get_regressed_market_prices, add_market_price_to_fooddiary=add_market_price_to_fooddiary))
   
 }
