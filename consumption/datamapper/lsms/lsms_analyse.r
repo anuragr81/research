@@ -94,7 +94,7 @@ read_stata_aids_results_files <- function(f,skip_first,precision,split_size){
   } else {
     indices  <- split_sz(length(nonidcols),split_size)
     retlist  <- list()
-    for ( i in seq(length(indices))){
+    for ( i in seq(dim(indices)[1])){
       retlist [[i]] <- x[,c("idname",nonidcols[indices[i,]$start:indices[i,]$end])]
     }
     return(retlist)
