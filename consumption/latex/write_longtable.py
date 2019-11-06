@@ -68,10 +68,15 @@ def print_table(dfinput,idcolumnIndex, longtable, landscape,selected_columns=Non
 
 if __name__ == "__main__":
 	#df = pd.DataFrame( {'A':[1,2],'B':["GBP","USD"]})
-	selected_columns = ['idname','qfruitsveg', 'qVfruitsveg', 'qVprotein', 'qnonfresh',
-	 'qcomplements', 'qVcomplements', 'qdensefoods', 'qVdensefoods',  
-	 'qtransport', 'qVnonfresh', 'qhousehold', 'qenergy', 'qprotein']
+	#selected_columns = ['idname','qfruitsveg', 'qVfruitsveg', 'qVprotein', 'qnonfresh',
+	# 'qcomplements', 'qVcomplements', 'qdensefoods', 'qVdensefoods',  
+	# 'qtransport', 'qVnonfresh', 'qhousehold', 'qenergy', 'qprotein']
+	#selected_columns = ["idname","qbeef","qbeer","qbread","qbunscakes","qcassavaflour","qcassavafresh","qcharcoal","qcoconut","qcookingoil","qdriedcannedfish","qelectricity","qfishseafood","qfreshmilk","qgreens","qkerosene","qmangoes","qonion","qpeanuts","qpotatoes","qpulses","qricehusked","qsalt","qsugar","qsweetpotato"]  
 	df  = pd.read_csv(sys.argv[1],keep_default_na=False)
+	if "idname" not in df.columns:
+		print("Must have idname column")
+		sys.exit(1)
+	selected_columns = df.columns
 
 	#print(df)
-	print(print_table(dfinput=df,idcolumnIndex=0,longtable=False,landscape=True,selected_columns=selected_columns))
+	print(print_table(dfinput=df,idcolumnIndex=0,longtable=False,landscape=False,selected_columns=selected_columns))

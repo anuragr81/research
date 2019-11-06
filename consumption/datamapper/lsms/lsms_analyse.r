@@ -39,7 +39,23 @@ read_stata_aids_results <- function(r,read_coeff){
   
 }
 
-read_stata_aids_results_files <- function(f,skip_first){
+split_sz <- function(N,sz) {
+  if (sz > N ){
+    return(data.frame(start=1,end=N))
+  }
+  nsplit <- as.integer(N/sz); 
+  start_list  <- seq(1,N,nsplit) ; 
+  end_list    <- sapply(nsplit + seq(1,N,nsplit) -1 , function(x) { min(x,N) })
+  x <- NULL
+  for ( i in seq(length(start_list))) {
+    x <- rbind(x,data.frame(start=start_list[i],end=end_list[i]))
+  }
+  return(x)
+}
+
+read_stata_aids_results_files <- function(f,skip_first,precision,split_size){
+  
+  
   #a <- read.csv('c:/local_files/research/consumption/aidsresults9.csv')
   a <- read.csv(f,header=TRUE)
   b <- a[,c("comm","var","coef","stderr")]
@@ -47,11 +63,13 @@ read_stata_aids_results_files <- function(f,skip_first){
   #write.csv(bcoef,'c:/temp/bcoef.csv')
   bstderr <-t( b[,c("comm","var","stderr")] %>% spread(var,stderr))
   
+  fm <- function(df) { for ( i in seq(dim(df)[2])) { df[,i] = format(round(as.numeric(df[,i]),4),nsmall=4) } ; return(df) } 
+  
   if (skip_first){
     colnames(bcoef) <- bcoef[1,]
-    bcoef <- bcoef[2:dim(bcoef)[1],]
+    bcoef <- fm(bcoef[2:dim(bcoef)[1],])
     colnames(bstderr) <- bstderr[1,]
-    bstderr <- bstderr[2:dim(bstderr)[1],]
+    bstderr <- fm(bstderr[2:dim(bstderr)[1],])
   }
   for ( i in seq(dim(bstderr)[2])){
     bstderr[,i] <- paste("(",bstderr[,i],")")
@@ -69,8 +87,19 @@ read_stata_aids_results_files <- function(f,skip_first){
   }
   
   nonidcols <- setdiff(colnames(x),c("idname"))
-  x <- x [ ,c("idname",nonidcols)]
-  return(x)
+  
+  if (missing(split_size)){
+    x <- x [ ,c("idname",nonidcols)]
+    return(x)
+  } else {
+    indices  <- split_sz(length(nonidcols),split_size)
+    retlist  <- list()
+    for ( i in seq(length(indices))){
+      retlist [[i]] <- x[,c("idname",nonidcols[indices[i,]$start:indices[i,]$end])]
+    }
+    return(retlist)
+  }
+  
 } 
 
 
