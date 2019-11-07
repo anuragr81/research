@@ -53,31 +53,45 @@ split_sz <- function(N,sz) {
   return(x)
 }
 
+num_stars <- function(pgtz) {
+  return ((as.numeric(pgtz)<.001)*3 + (as.numeric(pgtz)>=.001 & as.numeric(pgtz) < .01)*2 + (as.numeric(pgtz)>=.01 & as.numeric(pgtz) < .05)*1)
+}
+
 read_stata_aids_results_files <- function(f,skip_first,precision,split_size){
   
   
   #a <- read.csv('c:/local_files/research/consumption/aidsresults9.csv')
   a <- read.csv(f,header=TRUE)
-  b <- a[,c("comm","var","coef","stderr")]
+  b <- a[,c("comm","var","coef","Pgtz")]
   bcoef <-t( b[,c("comm","var","coef")] %>% spread(var,coef))
   #write.csv(bcoef,'c:/temp/bcoef.csv')
-  bstderr <-t( b[,c("comm","var","stderr")] %>% spread(var,stderr))
+  bPgtz <-t( b[,c("comm","var","Pgtz")] %>% spread(var,Pgtz))
   
   fm <- function(df) { for ( i in seq(dim(df)[2])) { df[,i] = format(round(as.numeric(df[,i]),4),nsmall=4) } ; return(df) } 
   
   if (skip_first){
     colnames(bcoef) <- bcoef[1,]
     bcoef <- fm(bcoef[2:dim(bcoef)[1],])
-    colnames(bstderr) <- bstderr[1,]
-    bstderr <- fm(bstderr[2:dim(bstderr)[1],])
+    colnames(bPgtz) <- bPgtz[1,]
+    bPgtz <- fm(bPgtz[2:dim(bPgtz)[1],])
   }
-  for ( i in seq(dim(bstderr)[2])){
-    bstderr[,i] <- paste("(",bstderr[,i],")")
+  for ( i in seq(dim(bPgtz)[2])){
+    #numstars_suffix  <- sapply(num_stars(bPgtz[,i]), function(x) { if (x>0) paste("^{",rep("*",x),"}",sep="") else ""} )
+    numstars_suffix = array()
+    nstars_array <- num_stars(bPgtz[,i])
+    for ( j in seq(length(nstars_array))) {
+      if (nstars_array[j]>0){
+        numstars_suffix[j] <- paste("$^{",strrep("*",nstars_array[j]),"}$",sep="")
+      } else {
+        numstars_suffix[j] <- ""
+      }
+    }
+    bPgtz[,i]        <- paste("( ",bPgtz[,i],numstars_suffix," )",sep="")
   }
 
   idnames <- rownames(as.data.frame(bcoef))
-  for ( i in seq(1,dim(bstderr)[1])) {
-    y <- as.data.frame(rbind(bcoef[i,],bstderr[i,]))
+  for ( i in seq(1,dim(bPgtz)[1])) {
+    y <- as.data.frame(rbind(bcoef[i,],bPgtz[i,]))
     y$idname <- c(idnames[i],"")
     if (i == 1){
       x <- y

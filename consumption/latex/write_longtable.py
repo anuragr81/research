@@ -10,7 +10,7 @@ def format_data (x):
 		return re.sub("_","\\_",x)
 	raise RuntimeException("Unsupported Type to be formatted")
 
-def print_table(dfinput,idcolumnIndex, longtable, landscape,selected_columns=None,legend=False):
+def print_table(dfinput,idcolumnIndex, longtable, landscape,selected_columns=None,legend=True):
 
 	df = dfinput if selected_columns is None else dfinput[selected_columns]
 	
