@@ -16,13 +16,13 @@ ngr_normaliser<-function() {
   
   diary_columns_mapping<-function(year){
     if (year == 2010){
-      s = data.frame(surveyname=NULL,name=NULL)
-      s= rbind(s,data.frame(surveyname="hhid",name="hhid"))
-      s= rbind(s,data.frame(surveyname="s7bq1",name="is_consumed"))
-      s= rbind(s,data.frame(surveyname="item_cd",name="item"))
-      s= rbind(s,data.frame(surveyname="s7bq4",name="cost")) # this is populated only if there is consumption form items purchased in last 7 days
-      s= rbind(s,data.frame(surveyname="s7bq2b",name="lwp_unit"))
-      s= rbind(s,data.frame(surveyname="s7bq2a",name="lwp"))
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="s7bq1",name="is_consumed"))
+      s= rbind(s,data.frame(iesname="item_cd",name="item"))
+      s= rbind(s,data.frame(iesname="s7bq4",name="cost")) # this is populated only if there is consumption form items purchased in last 7 days
+      s= rbind(s,data.frame(iesname="s7bq2b",name="lwp_unit"))
+      s= rbind(s,data.frame(iesname="s7bq2a",name="lwp"))
       return(s)
     }
     stop(paste("Year:",year,"not supported"))

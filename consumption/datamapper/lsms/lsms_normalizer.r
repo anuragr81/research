@@ -2663,13 +2663,16 @@ lsms_normalizer<-function() {
   
   
   diary_info_columns_lsms_2010<-function(){
-    return(c("hhid","item","lwp_unit", "lwp", "cost", "own_unit", "own", "gift_unit", "gift"))
+    return(c("hhid","item","lwp_unit", "lwp", "tlwp_unit", "tlwp", "cost", "own_unit", "own", "gift_unit", "gift"))
   }
   
   hh_mapping_lsms_2010 <-function(){
     s = data.frame(iesname=NULL,name=NULL)
     s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
     s= rbind(s,data.frame(iesname="itemcode",name="item"))
+    s= rbind(s,data.frame(iesname="hh_k02_1",name="tlwp_unit"))
+    s= rbind(s,data.frame(iesname="hh_k02_2",name="tlwp"))
+    
     s= rbind(s,data.frame(iesname="hh_k03_1",name="lwp_unit"))
     s= rbind(s,data.frame(iesname="hh_k03_2",name="lwp"))
     s= rbind(s,data.frame(iesname="hh_k04",name="cost"))
@@ -2774,7 +2777,7 @@ lsms_normalizer<-function() {
   }
   
   diary_info_columns_lsms_2012<-function(){
-    return(c("hhid","item","lwp_unit", "lwp", "cost", "own_unit", "own", "gift_unit", "gift"))
+    return(c("hhid","item","tlwp_unit","tlwp","lwp_unit", "lwp", "cost", "own_unit", "own", "gift_unit", "gift"))
   }
   
   hh_mapping_lsms_2012 <-function(){
@@ -2782,6 +2785,9 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="y3_hhid",name="hhid"))
     #s= rbind(s,data.frame(iesname="y2_hhid",name="y2_hhid"))
     s= rbind(s,data.frame(iesname="itemcode",name="item"))
+    s= rbind(s,data.frame(iesname="hh_j02_1",name="tlwp_unit"))
+    s= rbind(s,data.frame(iesname="hh_j02_2",name="tlwp"))
+    
     s= rbind(s,data.frame(iesname="hh_j03_1",name="lwp_unit"))
     s= rbind(s,data.frame(iesname="hh_j03_2",name="lwp"))
     s= rbind(s,data.frame(iesname="hh_j04",name="cost"))
@@ -2851,13 +2857,16 @@ lsms_normalizer<-function() {
   }
   
   diary_info_columns_lsms_2014<-function(){
-    return(c("hhid","item","lwp_unit", "lwp", "cost", "own_unit", "own", "gift_unit", "gift"))
+    return(c("hhid","item","lwp_unit", "lwp","tlwp_unit","tlwp", "cost", "own_unit", "own", "gift_unit", "gift"))
   }
   
   hh_mapping_lsms_2014 <-function(){
     s = data.frame(iesname=NULL,name=NULL)
     s= rbind(s,data.frame(iesname="y4_hhid",name="hhid"))
     s= rbind(s,data.frame(iesname="itemcode",name="item"))
+    s= rbind(s,data.frame(iesname="hh_j02_1",name="tlwp_unit"))
+    s= rbind(s,data.frame(iesname="hh_j02_2",name="tlwp"))
+    
     s= rbind(s,data.frame(iesname="hh_j03_1",name="lwp_unit"))
     s= rbind(s,data.frame(iesname="hh_j03_2",name="lwp"))
     s= rbind(s,data.frame(iesname="hh_j04",name="cost"))

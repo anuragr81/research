@@ -244,10 +244,10 @@ all_asset_scores <- function(years,dirprefix,fu,ln,ll){
 
 run_test <- function() {
   # gcols obtained using: toString(paste("'",colnames(x),"'",sep=""))
-  gcols <- c('hhid', 'total_expenditure', 'toteducexpense', 'tothouserent',  'hsize', 'consu', 'highest_educ', 'age'
-             , 'expensiveregion', 'popdensity','region','district','litlang',
-             'isrural', 'isurbanp', 'occupation', 'occupation_rank', 'years_community', 
-             'housingstatus', 'roomsnum',  'floormaterial', 'cookingfuel', 'is_resident', 'ln_tot_exp', 'year')
+  #gcols <- c('hhid', 'total_expenditure', 'toteducexpense', 'tothouserent',  'hsize', 'consu', 'highest_educ', 'age'
+  #           , 'expensiveregion', 'popdensity','region','district','litlang',
+  #           'isrural', 'isurbanp', 'occupation', 'occupation_rank', 'years_community', 
+  #           'housingstatus', 'roomsnum',  'floormaterial', 'cookingfuel', 'is_resident', 'ln_tot_exp', 'year')
   #ag <- unique(allgroupsdat[,gcols])
   #agi <- merge(ag,i,all.x=TRUE,by=c("hhid","year","region", "district"))
   #ydat <- subset(agi,year==yr)
@@ -255,7 +255,8 @@ run_test <- function() {
   #return(agi)
   
   #return(tot)
-  
+  c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = FALSE)
+  return(c2010)
 }
 
 combine_mills_files <- function(years,dirprefix){

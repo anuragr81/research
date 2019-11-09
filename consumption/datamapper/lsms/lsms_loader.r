@@ -49,7 +49,7 @@ lsms_loader<-function(fu,ln,lgc) {
     return(as.integer(as.character(x)))
   }
   
-  load_diary_file <-function(dirprefix,year,fu,ln){
+  load_diary_file <-function(dirprefix,year,fu,ln,load_cost){
     ##
     if (year == 2014){
       jdat <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_j1.DTA",sep=""),
@@ -232,7 +232,12 @@ lsms_loader<-function(fu,ln,lgc) {
                                      m=ln()@hh_mapping_lsms_2010())
       k$hhid <-as.character(k$hhid)
       #*    Ignored items where there is no associated cost
-      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      if (load_cost){
+        k <- subset(subset(k,!is.na(cost), cost>0))
+      } else {
+        k <- subset(k,!is.na(lwp) | !is.na(tlwp))
+        k$cost <- NA
+      }
       k$item<-atoi(k$item)+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
       factor <- 52
       
@@ -296,14 +301,23 @@ lsms_loader<-function(fu,ln,lgc) {
       # Either outer-join or an rbind must be used
       #*    zero-cost items are ignored for all these 
       ml <-merge(m,l,all=TRUE)
-      
       mlk <-merge(ml,k,all=TRUE)
+      
       ## mapping name codes
+      
       mlk <-merge(mlk,rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+      
       if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
       
+      if (load_cost){
       # filtering out extreme values
       extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid ) 
+      } else {
+        # filtering out extreme values
+        ml <-merge(ml,rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+        
+          extremeDataHhids <- unique ( dplyr::filter( merge(ml,ddply(ml,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid )
+      }
       print (paste("Households with extreme data (with many times the median) - purged from the diary file:",length(extremeDataHhids)))
       mlk              <- dplyr::filter(mlk,!is.element(hhid,extremeDataHhids))
       
@@ -416,7 +430,7 @@ lsms_loader<-function(fu,ln,lgc) {
     ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
     print ("Loaded OHS file")
     # loading diary data
-    dat2010<-load_diary_file(dirprefix = '.',year = year, fu=fu, ln=ln )
+    dat2010<-load_diary_file(dirprefix = '.',year = year, fu=fu, ln=ln,  load_cost = TRUE)
     
     dat2010$factor<-as.integer(dat2010$lwp_unit==1)+as.integer(dat2010$lwp_unit==2)/1000.0+as.integer(dat2010$lwp_unit==3)+as.integer(dat2010$lwp_unit==4)/1000.0+as.integer(dat2010$lwp_unit==5) 
     dat2010$quantity<-dat2010$factor*dat2010$lwp
@@ -473,7 +487,7 @@ lsms_loader<-function(fu,ln,lgc) {
       ohs<-load_ohs_file(year=year, dirprefix = dirprefix,fu = fu,ln = ln)
       print ("Loaded OHS file")
       # loading diary data
-      datConsum<-load_diary_file(dirprefix = dirprefix,year = year, fu=fu, ln=ln )
+      datConsum<-load_diary_file(dirprefix = dirprefix,year = year, fu=fu, ln=ln, load_cost = TRUE )
     }
     
     datConsum$factor<-as.integer(datConsum$lwp_unit==1)+as.integer(datConsum$lwp_unit==2)/1000.0+as.integer(datConsum$lwp_unit==3)+as.integer(datConsum$lwp_unit==4)/1000.0
@@ -1757,7 +1771,7 @@ lsms_loader<-function(fu,ln,lgc) {
     }
   }
   
-  group_collect <- function(year,dirprefix,categoryName,fu,ln,lgc,ld, ohs, hh,basis, use_market_prices, return_before_agg) {
+  group_collect <- function(year,dirprefix,categoryName,fu,ln,lgc,ld, ohs, hh,basis, use_market_prices, return_before_agg,use_diary_costs) {
     
     if (length(categoryName)>1){
       stop("group_collect: use one categoryname")
@@ -2020,13 +2034,13 @@ lsms_loader<-function(fu,ln,lgc) {
   
   ####
   group_expenditure <- function(year,dirprefix,fu,ln,lgc,ld,basis,categoryNames,returnBeforeGrouping,minConsumerNumber,
-                                assets_type,use_market_prices){
+                                assets_type,use_market_prices, use_diary_costs){
     if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
     }
     
     
-    hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
+    hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln, load_cost = use_diary_costs) # must provide total and visible expenditure (must be already translated)
     
     
     
@@ -2060,7 +2074,7 @@ lsms_loader<-function(fu,ln,lgc) {
       }
     }
     
-    totexp          <- get_total_expenditures(hh=hh,ohs=ohs)
+    
     
     heads           <- get_household_head_info(ohs=ohs)
     
@@ -2089,7 +2103,7 @@ lsms_loader<-function(fu,ln,lgc) {
         
         for (categ in categoryNames){
           to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,ld=ld,categoryName=categ
-                                       ,hh=hh,basis=basis, ohs=ohs,use_market_prices=use_market_prices, return_before_agg=FALSE)
+                                       ,hh=hh,basis=basis, ohs=ohs,use_market_prices=use_market_prices, return_before_agg=FALSE, use_diary_costs = use_diary_costs)
           print(paste("To be added: ", toString(colnames(to_be_added))))
           qualitydat     <-   rbind(qualitydat,to_be_added[,c("hhid","category","quality")])
           minpricedat   <-   rbind(minpricedat,to_be_added[,c("hhid","category","min_price")])
@@ -2110,12 +2124,15 @@ lsms_loader<-function(fu,ln,lgc) {
         
       } else if (basis == "price" || basis == "sparseness") {
         vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,ld=ld,categoryName=categoryNames,
-                               hh=hh,basis=basis, ohs=ohs, use_market_prices=use_market_prices, return_before_agg=FALSE)
+                               hh=hh,basis=basis, ohs=ohs, use_market_prices=use_market_prices, return_before_agg=FALSE, use_diary_costs = use_diary_costs)
       } else {
         stop (paste("category names not handled for basis:",basis))
       }
     }
+    
     print("Merging total expenditure")
+    totexp              <- get_total_expenditures(hh=hh,ohs=ohs)
+    
     ds                  <- merge(totexp,vis);
     print(paste("Merging hsize",dim(ds)[1]))
     
@@ -2609,7 +2626,7 @@ lsms_loader<-function(fu,ln,lgc) {
     }
     
     #*  (( Loading diary file
-    hhdat <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln) # must provide total and visible expenditure (must be already translated)
+    hhdat <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln, load_cost = TRUE) # must provide total and visible expenditure (must be already translated)
     
     #* Loading the person/family data fie
     ohsdat <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # (using fmld) must provide age (age_ref), gender(sex_ref), 
