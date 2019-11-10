@@ -1771,19 +1771,26 @@ lsms_loader<-function(fu,ln,lgc) {
     }
   }
   
+  get_relevant_item_codes <- function(year){
+    if (year == 2010){
+      itemcodes <- ln()@items_codes_2010()
+    } else if (year == 2012) {
+      itemcodes <- ln()@items_codes_2012()
+    } else if (year == 2014) {
+      itemcodes <- ln()@items_market_price_codes_2014()
+    } else {
+      stop(paste("Cannot find the itemcodes for year:",year))
+    }
+    return(itemcodes)
+    
+  }
   group_collect <- function(year,dirprefix,categoryName,fu,ln,lgc,ld, ohs, hh,basis, use_market_prices, return_before_agg,use_diary_costs) {
     
     if (length(categoryName)>1){
       stop("group_collect: use one categoryname")
     }
     if (year == 2010 || year == 2012 || year == 2014) {
-      if (year == 2010){
-        itemcodes <- ln()@items_codes_2010()
-      } else if (year == 2012) {
-        itemcodes <- ln()@items_codes_2012()
-      } else if (year == 2014) {
-        itemcodes <- ln()@items_market_price_codes_2014()
-      }
+      itemcodes <- get_relevant_item_codes(year)
       
       if (basis=="price"){
         print("Price based groups")
@@ -1834,6 +1841,7 @@ lsms_loader<-function(fu,ln,lgc) {
         mktprices <- load_market_prices(year = year, dirprefix = dirprefix,fu = fu , ln = ln, use_pieces = FALSE)
         fooddiarydata      <- subset(hh,as.integer(as.character(item))>10000)
         hhp <- add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices,ohsdata=ohs,ddata=fooddiarydata)
+        
         #handle non-food and missing items here
         #notice that we don't worry about items which we don't have diary data for
         print(paste("Obtained prices for items:",toString(unique(hhp$shortname))))
@@ -1858,18 +1866,25 @@ lsms_loader<-function(fu,ln,lgc) {
           hhp <- rbind(hhp,hhpm)
         }
         
-        hhpg <- merge(hhp,groups,by=c("shortname"))
+        hhpg             <- merge(hhp,groups,by=c("shortname"))
         
-        minprices <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min(price))
+        minprices        <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min(price))
         
-        hhpg <- merge(minprices,hhpg)
+        hhpg             <- merge(minprices,hhpg)
         # get price ratio for every group
         hhpg$price_ratio <- with (hhpg,price/min_price) 
         
-        hhpg$factor<-as.integer(hhpg$lwp_unit==1)+as.integer(hhpg$lwp_unit==2)/1000.0+as.integer(hhpg$lwp_unit==3)+as.integer(hhpg$lwp_unit==4)/1000.0+as.integer(hhpg$lwp_unit==5)
-        hhpg$quantity <-with (hhpg,lwp*factor)
-        
-        
+        if (use_diary_costs){
+          hhpg$factor<-as.integer(hhpg$lwp_unit==1)+as.integer(hhpg$lwp_unit==2)/1000.0+as.integer(hhpg$lwp_unit==3)+as.integer(hhpg$lwp_unit==4)/1000.0+as.integer(hhpg$lwp_unit==5)
+          hhpg$quantity <-with (hhpg,lwp*factor)
+        } else {
+          hhpg$factor<-as.integer(hhpg$tlwp_unit==1)+as.integer(hhpg$tlwp_unit==2)/1000.0+as.integer(hhpg$tlwp_unit==3)+as.integer(hhpg$tlwp_unit==4)/1000.0+as.integer(hhpg$tlwp_unit==5)
+          hhpg$quantity <-with (hhpg,tlwp*factor)
+          fooddata <- subset(hhpg,item>=10000)
+          fooddata$cost <- with(fooddata,quantity*price)
+          nonfoodata <- subset(hhpg,item<10000)
+          hhpg <- rbind(fooddata,nonfoodata)
+        }
       }
       
       if (return_before_agg){
@@ -2024,11 +2039,10 @@ lsms_loader<-function(fu,ln,lgc) {
     print(paste("group_collect: Returning the following for category:",categoryName," year:",year))
     print(head(vis))
     
+    
     return(vis[,c("hhid","category","quality","min_price","tot_categ_exp")])
     
     
-    print("Collected group expenditures")
-    return(vis)
   }
   
   
@@ -2101,6 +2115,9 @@ lsms_loader<-function(fu,ln,lgc) {
         minpricedat <- NULL
         categexpdat <- NULL
         
+        
+        
+        
         for (categ in categoryNames){
           to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,ld=ld,categoryName=categ
                                        ,hh=hh,basis=basis, ohs=ohs,use_market_prices=use_market_prices, return_before_agg=FALSE, use_diary_costs = use_diary_costs)
@@ -2129,10 +2146,23 @@ lsms_loader<-function(fu,ln,lgc) {
         stop (paste("category names not handled for basis:",basis))
       }
     }
-    
-    print("Merging total expenditure")
-    totexp              <- get_total_expenditures(hh=hh,ohs=ohs)
-    
+    if (use_diary_costs){
+      print("Merging total expenditure using diary costs")
+      totexp              <- get_total_expenditures(hh=hh,ohs=ohs)
+    } else {
+      print("Merging total expenditure by summing category expenditure based on quantity and prices")
+      hhq                 <- merge(hh,subset(ln()@lsms_groups_qualitybased_2010_2012(), group== "quality"),by=c("shortname"))
+      if (!setequal(unique(as.character(hhq$category)),categoryNames)){
+        stop(paste("Must use all categories for summing expenditure:",toString(unique(as.character(hhq$category)))))
+      }
+      nonquality          <- subset(hh,!is.element(shortname,unique(as.character(hhq$shortname))))
+      totexp_cols         <- paste(categoryNames,"_tot_categ_exp",sep="")
+      vv                  <- vis[,c("hhid",totexp_cols)] 
+      vv[is.na(vv)]       <- 0
+      vv$cost             <- rowSums(vv[,totexp_cols]) ;
+      totexp              <- get_total_expenditures(hh=rbind(vv[,c("hhid","cost")],nonquality[,c("hhid","cost")]),ohs=ohs)
+
+    }
     ds                  <- merge(totexp,vis);
     print(paste("Merging hsize",dim(ds)[1]))
     
@@ -2257,7 +2287,7 @@ lsms_loader<-function(fu,ln,lgc) {
     if (missing(criteria)){
       criteria <- c("region","district")
     }
-    g2<-group_expenditure(year = year, dirprefix = dirprefix,fu = fu, ln=lsms_normalizer, returnBeforeGrouping = TRUE)
+    g2<-group_expenditure(year = year, dirprefix = dirprefix,fu = fu, ln=lsms_normalizer, returnBeforeGrouping = TRUE, use_diary_costs = TRUE)
     
     allrds<-unique(subset(g2,select=criteria))
     
