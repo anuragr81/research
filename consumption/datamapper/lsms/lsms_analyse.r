@@ -255,8 +255,8 @@ run_test <- function() {
   #return(agi)
   
   #return(tot)
-  c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = FALSE)
-  return(c2010)
+  c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = FALSE)
+  return(c2014)
 }
 
 combine_mills_files <- function(years,dirprefix){
@@ -456,7 +456,8 @@ load_group <- function(dat,year,categories){
     dat <- ll@group_expenditure(year = year, dirprefix = "../",
                                 fu = fu , ln = lsms_normalizer, lgc=lgc,
                                 basis = "quality", categoryNames = categories,returnBeforeGrouping = FALSE,
-                                ld = ldat, minConsumerNumber = 5,use_market_prices=TRUE, use_diary_costs=FALSE)
+                                ld = ldat, minConsumerNumber = 5,use_market_prices=TRUE, use_diary_costs=FALSE, 
+                                ignore_non_price_for_quality=FALSE)
   }
   for (categ in categories){
     dat[,paste("w_",categ,sep="")] <- dat[,paste(categ,"_tot_categ_exp",sep="")]/dat$total_expenditure

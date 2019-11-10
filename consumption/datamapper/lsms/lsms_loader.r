@@ -57,9 +57,17 @@ lsms_loader<-function(fu,ln,lgc) {
       k <- fu()@get_translated_frame(dat=jdat,
                                      names=ln()@diary_info_columns_lsms_2014(),
                                      m=ln()@hh_mapping_lsms_2014())
-      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      
       #*    Ignored items where there is no associated cost
-      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      
+      if (load_cost){
+        k <- subset(subset(k,!is.na(cost), cost>0))
+      } else {
+        k <- subset(k,!is.na(lwp) | !is.na(tlwp))
+        k$cost <- NA
+      }
+      
+      
       k$item<-as.integer(as.character(k$item))+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
       factor <- 52
       
@@ -132,8 +140,14 @@ lsms_loader<-function(fu,ln,lgc) {
       if (dim(noshortnamedf)[1] > 0) { 
         stop (paste("itemcodes are not known for some entries in the diary file - ", toString(as.character(unique(noshortnamedf$item))))) 
       }
-      
+      if (load_cost){
+        
       extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
+      } else {
+        # filtering out extreme values
+        ml <-merge(ml,rename(ln()@items_codes_2014()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+        extremeDataHhids <- unique ( dplyr::filter( merge(ml,ddply(ml,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid )
+      }
       print (paste("Households with extreme data (many times the median) - purged from the diary file:",length(extremeDataHhids)))
       mlk              <- dplyr::filter(mlk,!is.element(hhid,extremeDataHhids))
       return(mlk)
@@ -1784,7 +1798,7 @@ lsms_loader<-function(fu,ln,lgc) {
     return(itemcodes)
     
   }
-  group_collect <- function(year,dirprefix,categoryName,fu,ln,lgc,ld, ohs, hh,basis, use_market_prices, return_before_agg,use_diary_costs) {
+  group_collect <- function(year,dirprefix,categoryName,fu,ln,lgc,ld, ohs, hh,basis, use_market_prices, return_before_agg,use_diary_costs,ignore_non_price_for_quality) {
     
     if (length(categoryName)>1){
       stop("group_collect: use one categoryname")
@@ -1866,9 +1880,13 @@ lsms_loader<-function(fu,ln,lgc) {
           hhp <- rbind(hhp,hhpm)
         }
         
+        if (ignore_non_price_for_quality){
+          hhp            <- subset(hhp,!is.na(price))
+        }
         hhpg             <- merge(hhp,groups,by=c("shortname"))
         
-        minprices        <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min(price))
+        #minprices        <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min(price))
+        minprices         <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min( c( Inf,price[!is.na(price)]) ) )
         
         hhpg             <- merge(minprices,hhpg)
         # get price ratio for every group
@@ -2045,10 +2063,40 @@ lsms_loader<-function(fu,ln,lgc) {
     
   }
   
+  load_quality_group <- function(year,dirprefix,fu,ln,lgc,ld,categoryNames,hh,basis,ohs,use_market_prices,
+                                 use_diary_costs, ignore_non_price_for_quality)  {
+    pdat <- NULL 
+    qualitydat <- NULL
+    minpricedat <- NULL
+    categexpdat <- NULL
+    
+    for (categ in categoryNames){
+      to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,ld=ld,categoryName=categ
+                                   ,hh=hh,basis=basis, ohs=ohs,use_market_prices=use_market_prices, return_before_agg=FALSE, use_diary_costs = use_diary_costs,
+                                   ignore_non_price_for_quality = ignore_non_price_for_quality)
+      print(paste("To be added: ", toString(colnames(to_be_added))))
+      qualitydat     <-   rbind(qualitydat,to_be_added[,c("hhid","category","quality")])
+      minpricedat   <-   rbind(minpricedat,to_be_added[,c("hhid","category","min_price")])
+      categexpdat    <- rbind(categexpdat,to_be_added[,c("hhid","category","tot_categ_exp")])
+    }
+    
+    vis <- qualitydat %>% spread(category, quality)
+    colnames (vis) <- as.character(sapply(colnames(vis), function(x) { if(is.element(x,c("hhid"))) {x} else {paste(x,"_quality",sep="")} }))
+    
+    pdat <- minpricedat %>% spread(category, min_price)  
+    colnames (pdat) <- as.character(sapply(colnames(pdat), function(x) { if(is.element(x,c("hhid"))) {x} else {paste(x,"_min_price",sep="")}}))
+    
+    cedat <- categexpdat  %>% spread(category, tot_categ_exp)  
+    colnames (cedat) <- as.character(sapply(colnames(cedat), function(x) { if(is.element(x,c("hhid"))) {x} else {paste(x,"_tot_categ_exp",sep="")}}))
+    
+    vis <- merge(pdat,vis,by=c("hhid"))
+    vis <- merge(cedat,vis,by=c("hhid"))
+    return(vis)
+  }
   
   ####
   group_expenditure <- function(year,dirprefix,fu,ln,lgc,ld,basis,categoryNames,returnBeforeGrouping,minConsumerNumber,
-                                assets_type,use_market_prices, use_diary_costs){
+                                assets_type,use_market_prices, use_diary_costs, ignore_non_price_for_quality){
     if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
     }
@@ -2110,38 +2158,13 @@ lsms_loader<-function(fu,ln,lgc) {
       # if there are multiple categorynames then - use (h %>% spread(category, quality))
       
       if (basis=="quality"){
-        pdat <- NULL 
-        qualitydat <- NULL
-        minpricedat <- NULL
-        categexpdat <- NULL
-        
-        
-        
-        
-        for (categ in categoryNames){
-          to_be_added <- group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,ld=ld,categoryName=categ
-                                       ,hh=hh,basis=basis, ohs=ohs,use_market_prices=use_market_prices, return_before_agg=FALSE, use_diary_costs = use_diary_costs)
-          print(paste("To be added: ", toString(colnames(to_be_added))))
-          qualitydat     <-   rbind(qualitydat,to_be_added[,c("hhid","category","quality")])
-          minpricedat   <-   rbind(minpricedat,to_be_added[,c("hhid","category","min_price")])
-          categexpdat    <- rbind(categexpdat,to_be_added[,c("hhid","category","tot_categ_exp")])
-        }
-        
-        vis <- qualitydat %>% spread(category, quality)
-        colnames (vis) <- as.character(sapply(colnames(vis), function(x) { if(is.element(x,c("hhid"))) {x} else {paste(x,"_quality",sep="")} }))
-        
-        pdat <- minpricedat %>% spread(category, min_price)  
-        colnames (pdat) <- as.character(sapply(colnames(pdat), function(x) { if(is.element(x,c("hhid"))) {x} else {paste(x,"_min_price",sep="")}}))
-        
-        cedat <- categexpdat  %>% spread(category, tot_categ_exp)  
-        colnames (cedat) <- as.character(sapply(colnames(cedat), function(x) { if(is.element(x,c("hhid"))) {x} else {paste(x,"_tot_categ_exp",sep="")}}))
-        
-        vis <- merge(pdat,vis,by=c("hhid"))
-        vis <- merge(cedat,vis,by=c("hhid"))
-        
+        vis <- load_quality_group(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,ld=ld,categoryNames=categoryNames,
+                                  hh=hh,basis=basis,ohs=ohs,use_market_prices=use_market_prices,
+                                  use_diary_costs=use_diary_costs, ignore_non_price_for_quality = ignore_non_price_for_quality)
       } else if (basis == "price" || basis == "sparseness") {
         vis <-   group_collect(year=year,dirprefix=dirprefix,fu=fu,ln=ln,lgc=lgc,ld=ld,categoryName=categoryNames,
-                               hh=hh,basis=basis, ohs=ohs, use_market_prices=use_market_prices, return_before_agg=FALSE, use_diary_costs = use_diary_costs)
+                               hh=hh,basis=basis, ohs=ohs, use_market_prices=use_market_prices, return_before_agg=FALSE, use_diary_costs = use_diary_costs,
+                               ignore_non_price_for_quality = FALSE)
       } else {
         stop (paste("category names not handled for basis:",basis))
       }
