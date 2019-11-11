@@ -457,7 +457,7 @@ load_group <- function(dat,year,categories){
                                 fu = fu , ln = lsms_normalizer, lgc=lgc,
                                 basis = "quality", categoryNames = categories,returnBeforeGrouping = FALSE,
                                 ld = ldat, minConsumerNumber = 5,use_market_prices=TRUE, use_diary_costs=FALSE, 
-                                ignore_non_price_for_quality=FALSE)
+                                ignore_non_price_for_quality=TRUE)
   }
   for (categ in categories){
     dat[,paste("w_",categ,sep="")] <- dat[,paste(categ,"_tot_categ_exp",sep="")]/dat$total_expenditure

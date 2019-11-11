@@ -50,6 +50,8 @@ lsms_loader<-function(fu,ln,lgc) {
   }
   
   load_diary_file <-function(dirprefix,year,fu,ln,load_cost){
+    
+    print(paste("LOAD_DIARY_FILE - load_cost=",load_cost ))
     ##
     if (year == 2014){
       jdat <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_j1.DTA",sep=""),
@@ -63,7 +65,7 @@ lsms_loader<-function(fu,ln,lgc) {
       if (load_cost){
         k <- subset(subset(k,!is.na(cost), cost>0))
       } else {
-        k <- subset(k,!is.na(lwp) | !is.na(tlwp))
+        k <- subset(subset(k,!is.na(lwp) | !is.na(tlwp)),lwp>0 | tlwp>0)
         k$cost <- NA
       }
       
@@ -160,9 +162,15 @@ lsms_loader<-function(fu,ln,lgc) {
       k <- fu()@get_translated_frame(dat=jdat,
                                      names=ln()@diary_info_columns_lsms_2012(),
                                      m=ln()@hh_mapping_lsms_2012())
-      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
       #*    Ignored items where there is no associated cost
-      k <- k[as.numeric(k$cost)>0 & !is.na(k$cost),]
+      
+      if (load_cost){
+        k <- subset(subset(k,!is.na(cost), cost>0))
+      } else {
+        k <- subset(subset(k,!is.na(lwp) | !is.na(tlwp)),lwp>0 | tlwp>0)
+        k$cost <- NA
+      }
+      
       k$item<-as.integer(as.character(k$item))+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
       factor <- 52
       
@@ -230,8 +238,15 @@ lsms_loader<-function(fu,ln,lgc) {
       mlk <-merge(ml,k,all=TRUE)
       mlk <-merge(mlk,rename(ln()@items_codes_2012()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
       if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
-      
+      if (load_cost){
       extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
+      } else {
+        # filtering out extreme values
+        ml <-merge(ml,rename(ln()@items_codes_2012()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+        
+        extremeDataHhids <- unique ( dplyr::filter( merge(ml,ddply(ml,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid )
+      }
+      
       print (paste("Households with extreme data (many times the median) - purged from the diary file:",length(extremeDataHhids)))
       mlk              <- dplyr::filter(mlk,!is.element(hhid,extremeDataHhids))
       return(mlk)
@@ -249,7 +264,7 @@ lsms_loader<-function(fu,ln,lgc) {
       if (load_cost){
         k <- subset(subset(k,!is.na(cost), cost>0))
       } else {
-        k <- subset(k,!is.na(lwp) | !is.na(tlwp))
+        k <- subset(subset(k,!is.na(lwp) | !is.na(tlwp)),lwp>0 | tlwp>0)
         k$cost <- NA
       }
       k$item<-atoi(k$item)+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
@@ -1884,10 +1899,15 @@ lsms_loader<-function(fu,ln,lgc) {
           hhp            <- subset(hhp,!is.na(price))
         }
         hhpg             <- merge(hhp,groups,by=c("shortname"))
+        use_deprecated_min <- FALSE
+        print(paste("use_deprecated_min=",use_deprecated_min))
         
-        #minprices        <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min(price))
-        minprices         <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min( c( Inf,price[!is.na(price)]) ) )
-        
+        if (use_deprecated_min==FALSE){
+          minprices         <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min( c( Inf,price[!is.na(price)]) ) )
+          
+        } else {
+          minprices        <- ddply(hhpg[,c("shortname","price","category","region","district")],.(category,region,district),summarise,min_price=min(price))
+        }
         hhpg             <- merge(minprices,hhpg)
         # get price ratio for every group
         hhpg$price_ratio <- with (hhpg,price/min_price) 
@@ -2175,8 +2195,9 @@ lsms_loader<-function(fu,ln,lgc) {
     } else {
       print("Merging total expenditure by summing category expenditure based on quantity and prices")
       hhq                 <- merge(hh,subset(ln()@lsms_groups_qualitybased_2010_2012(), group== "quality"),by=c("shortname"))
-      if (!setequal(unique(as.character(hhq$category)),categoryNames)){
-        stop(paste("Must use all categories for summing expenditure:",toString(unique(as.character(hhq$category)))))
+      if (length(setdiff(unique(as.character(hhq$category)),categoryNames))>0){
+        stop(paste("Must use all categories for summing expenditure:",toString(unique(as.character(hhq$category))), " - currently missing", 
+                   toString(setdiff(unique(as.character(hhq$category) , unique(as.character(categoryNames) )) ))))
       }
       nonquality          <- subset(hh,!is.element(shortname,unique(as.character(hhq$shortname))))
       totexp_cols         <- paste(categoryNames,"_tot_categ_exp",sep="")
