@@ -456,7 +456,7 @@ load_group <- function(dat,year,categories){
     dat <- ll@group_expenditure(year = year, dirprefix = "../",
                                 fu = fu , ln = lsms_normalizer, lgc=lgc,
                                 basis = "quality", categoryNames = categories,returnBeforeGrouping = FALSE,
-                                ld = ldat, minConsumerNumber = 5,use_market_prices=TRUE, use_diary_costs=FALSE, 
+                                ld = ldat, minConsumerNumber = 5,use_market_prices=TRUE, use_diary_costs=TRUE, 
                                 ignore_non_price_for_quality=TRUE)
   }
   for (categ in categories){
