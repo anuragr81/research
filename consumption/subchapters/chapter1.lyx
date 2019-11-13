@@ -348,6 +348,14 @@ reference "sec:Model"
 \end_inset
 
 .
+ The details of the data used in the study are provided in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:PriceData"
+
+\end_inset
+
+.
  A discussion of the distribution of quality for food and non-food items
  follows in Section 
 \begin_inset CommandInset ref
@@ -374,7 +382,7 @@ name "sec:LiteratureSurvey"
 \end_layout
 
 \begin_layout Standard
-Although not as a key focus of demand studies, quality elasticities have
+Although not as the main focus of demand studies, quality elasticities have
  been derived from consumption data since at least as far back as Houthakker
  
 \begin_inset CommandInset citation
@@ -1660,6 +1668,47 @@ reference "eq:utility"
  and the socio-economic standing (inclusive of LTDG).
 \end_layout
 
+\begin_layout Standard
+Although it is possible that both non-durable and durable goods within a
+ single commodity group contribute to status for the consumer, the real-world
+ often presents a simpler context where either durable or non-durable consumptio
+n dominates in a given commodity group.
+ Thus we impose the following condition to separate composite commodities
+ from the elementary groups where LTDG are more pertinent:
+\end_layout
+
+\begin_layout Description
+
+\series bold
+C1
+\series default
+ There are only two types of commodity groups where quality is aggregated
+ from - one where LTDG exist and one where they don't exist.
+\end_layout
+
+\begin_layout Standard
+Recall that an elementary commodity is one where no quality variation is
+ supposed to exist and higher quality can be achieved only through more
+ purchase of the commodity.
+ A composite commodity - on other hand - is a commodity where a sufficient
+ quality variation exists and a consumer can use a mix of higher quality
+ and lower-quality goods within the commodity.
+ With the condition C1, there are only two ways a consumer can spend on
+ quality - either by switching between the variants of a composite commodity
+ (choosing higher or lower quality of a composite commodity where LTDG do
+ not exist) or spending more on an elementary commodity (where LTDG dominate
+ and quality variation doesn't exist).
+ The empirical implications of the condition C1 aren't serious.
+ In the Tanzanian data for example, the quality variation is immaterial
+ for non-durable consumption in transport and household categories and no
+ LTDG are meant to exist for food and energy categories given the non-durable
+ nature of their consumption.
+ The implication of the above assumption is that the i) elementary short-term
+ consumption in the commodity groups where LTDG exist and ii) consumption
+ in the group where quality variation exists (and LTDG don't) - both compete
+ for the consumer's money.
+\end_layout
+
 \begin_layout Subsection
 Econometric model
 \begin_inset CommandInset label
@@ -1998,7 +2047,7 @@ The above quality metric allows us to estimate price derivatives of quality
 \end_layout
 
 \begin_layout Standard
-The first issue can be resolved by using the total cost (logarithm) of the
+Both the issues can be resolved by using the total cost (logarithm) of the
  LTDG rather than the indicator variables of their ownership.
  The quality difference for assets are thus easily incorporated in the model
  with the use of costs.
@@ -2026,42 +2075,6 @@ The first issue can be resolved by using the total cost (logarithm) of the
  .
  The same LTDG ownership cost-related variables are thus used as intercept
  in equations corresponding to every commodity group.
- Since this assumption effectively lumps together assets from different
- functional groups where quality may or may not be relevant, we impose the
- following condition to separate composite commodities from the elementary
- groups where LTDG are more pertinent:
-\end_layout
-
-\begin_layout Description
-
-\series bold
-C1
-\series default
- There are only two types of commodity groups where quality is aggregated
- from - one where LTDG exist and one where they don't exist.
-\end_layout
-
-\begin_layout Standard
-Recall that an elementary commodity is one where no quality variation is
- supposed to exist and higher quality can be achieved only through more
- purchase of the commodity.
- A composite commodity - on other hand - is a commodity where a sufficient
- quality variation exists and a consumer can use a mix of higher quality
- and lower-quality goods within the commodity.
- With the condition C1, there are only two ways a consumer can spend on
- quality - either by switching between the variants of a composite commodity
- (choosing higher or lower quality of a composite commodity where LTDG do
- not exist) or spending more on an elementary commodity (where LTDG dominate
- and quality variation doesn't exist).
- The empirical implications of the condition C1 aren't serious.
- In the Tanzanian data for example, the quality variation is immaterial
- for non-durable consumption in transport and household categories and no
- LTDG are meant to exist for food and energy categories given the non-durable
- nature of their consumption.
- The implication of the above assumption is that the i) elementary short-term
- consumption in the commodity groups where LTDG exist and ii) consumption
- in the group where quality variation exists (and LTDG don't) - both compete
- for the consumer's money.
 \end_layout
 
 \begin_layout Subsection
@@ -2621,7 +2634,7 @@ functional
 
  classification of items.
  A functional category is one where there is a sufficient degree of substitution
- possible in its members.
+ possible amongst its members.
  As an example, goat and beef are put under the same group - but not with
  tea - as there is little sense in substitution between tea and meat.
  The food category is further divided into sub-categories so that demands
@@ -5650,10 +5663,7 @@ reference "tab:Groups"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-The results obtained from the SUR that are shown in Table 
+ The results obtained from the SUR that are shown in Table 
 \begin_inset ERT
 status open
 
@@ -5669,11 +5679,14 @@ ref{resultsAllassets}
  confirm many of the findings from the itemwise-probit but also suggest
  the relevance of asset ownership in the demand for non-durable items -
  their quality in particular.
- Here, an indicator variable of electricity usage (a dummy indicating the
- lighting fuel in the house) is used as part of the intercept.
- The life-style differences that we observe in non-durable seem associated
- with the assets owned by the consumers and whether they use electricity
- or not.
+ The life-style differences that we observe in non-durable consumption -
+ with respect to the quality of items (indicated with variables starting
+ with 
+\family typewriter
+qV
+\family default
+-) seem associated with the assets owned by the consumers and whether they
+ use electricity or not.
 \end_layout
 
 \begin_layout Standard
@@ -5700,7 +5713,8 @@ ln_tot_exp
  protein and transport (public_transport, car maintenance etc.) - commodities
  where those how have electricity seem to spend more.
  It seems that just starting to use electricity (but not having lots of
- electric assets - a difference can be viewed as an effect of the 
+ electric assets) can increase the quality of protein consumed for the represent
+ative consumer (see the effect of the 
 \family typewriter
 has_electric
 \family default
@@ -5717,7 +5731,7 @@ ref{resultsSubAssets}
 
 \end_inset
 
-) can increase the quality of protein consumed for the representative consumer.
+).
  
 \end_layout
 
@@ -5762,8 +5776,7 @@ expensive_region
  and fruits-veg quality.
  The urban consumers may have less overall assets compared to their counterparts
  in rural areas but they spend more on quality on protein and fruits-veg
- (less on dense-foods and household assets that are likely unavailable in
- the rural areas).
+ (less on dense-foods and household asset).
  The above observations hint at the life-style differences in the densely
  populated urban areas brought about by - amongst other things - the availabilit
 y of electricity and industrial goods.
