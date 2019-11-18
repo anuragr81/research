@@ -7,4 +7,5 @@ nl <- ngr_loader(fu,ngr_normaliser,lgc)
 
 test <- function(){
   dat <- nl@load_diary_file("../",2010,fu, ngr_normaliser)
+  return(dat)
 }

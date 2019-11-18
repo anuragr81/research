@@ -11,7 +11,7 @@ setClass("NigeriaNormaliser", representation(diary_columns_mapping="function", d
 ngr_normaliser<-function() {
   
   diary_info_columns_2010<-function(){
-    return(c("hhid","item","lwp_unit", "lwp", "cost"))
+    return(c("hhid","item","lwp_unit", "lwp","tlwp_unit", "tlwp", "cost"))
   }
   
   diary_columns_mapping<-function(year){
@@ -23,6 +23,9 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s7bq4",name="cost")) # this is populated only if there is consumption form items purchased in last 7 days
       s= rbind(s,data.frame(iesname="s7bq2b",name="lwp_unit"))
       s= rbind(s,data.frame(iesname="s7bq2a",name="lwp"))
+      s= rbind(s,data.frame(iesname="s7bq3b",name="tlwp_unit"))
+      s= rbind(s,data.frame(iesname="s7bq3a",name="tlwp"))
+      
       return(s)
     }
     stop(paste("Year:",year,"not supported"))

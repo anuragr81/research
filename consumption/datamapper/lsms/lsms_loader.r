@@ -77,6 +77,7 @@ lsms_loader<-function(fu,ln,lgc) {
       # quantities are normalized to annual values
       k$cost <- k$cost*factor
       k$lwp <- k$lwp *factor
+      k$tlwp <- k$tlwp *factor
       k$own <-k$own*factor
       k$gift <-k$gift*factor
       
@@ -177,8 +178,9 @@ lsms_loader<-function(fu,ln,lgc) {
       #*    Multiplied weekly diary data by 52 (to look at annual data)
       # quantities are normalized to annual values
       k$cost <- k$cost*factor
-      k$lwp <- k$lwp *factor
-      k$own <-k$own*factor
+      k$lwp  <- k$lwp *factor
+      k$tlwp <- k$tlwp *factor
+      k$own  <-k$own*factor
       k$gift <-k$gift*factor
       
       #*    gift quantities are ignored (total quantity ignored is to be presented)
@@ -273,9 +275,10 @@ lsms_loader<-function(fu,ln,lgc) {
       #*    Multiplied weekly diary data by 52 (to look at annual data)
       # quantities are normalized to annual values
       k$cost <- k$cost*factor
-      k$lwp <- k$lwp *factor
-      k$own <-k$own*factor
-      k$gift <-k$gift*factor
+      k$lwp  <- k$lwp *factor
+      k$tlwp <- k$tlwp *factor
+      k$own  <- k$own*factor
+      k$gift <- k$gift*factor
       
       #*    gift quantities are ignored (total quantity ignored is to be presented)
       #*    weekly recall items are also multiplied by 52
@@ -372,6 +375,7 @@ lsms_loader<-function(fu,ln,lgc) {
       # quantities are normalized to annual values
       k$cost <- k$cost*factor
       k$lwp <- k$lwp *factor
+      k$tlwp <- k$tlwp *factor
       k$own <-k$own*factor
       k$gift <-k$gift*factor
       
