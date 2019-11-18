@@ -6,6 +6,6 @@ source('nigeria/ngr_loader.r');
 nl <- ngr_loader(fu,ngr_normaliser,lgc)
 
 test <- function(){
-  dat <- nl@load_diary_file("../",2010,fu, ngr_normaliser)
+  dat <- nl@load_diary_file("../",2010,fu, ngr_normaliser, load_cost=TRUE)
   return(dat)
 }

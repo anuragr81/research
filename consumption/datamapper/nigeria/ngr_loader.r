@@ -48,18 +48,17 @@ ngr_loader<-function(fu,ngrn,lgc) {
       
       #*    gift quantities are ignored (total quantity ignored is to be presented)
       #*    weekly recall items are also multiplied by 52
-      kdat <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_k.DTA",sep=""),
-                       convert_factors = FALSE,hhidColName = "y4_hhid")
-      
-      l <- fu()@get_translated_frame(dat=kdat,
-                                     names=ln()@get_lsms_seck_info_columns_2014(),
-                                     m=ln()@get_lsms_seck_fields_mapping_2014());
+      lfname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect81_plantingw1.dta",sep="")
+      sec81dat <- read_dta(lfname)
+      l <- fu()@get_translated_frame(dat=sec81dat,
+                                     names=ln()@get_lsms_weekrecall_info_columns(year),
+                                     m=ln()@get_lsms_weekrecall_fields_mapping(year));
       
       l$hhid <-as.character(l$hhid)
       l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
       
       }
-    return(k)
+    return(l)
   }
   load_ohs_file <-function(year,dirprefix,fu,ln){
     #
