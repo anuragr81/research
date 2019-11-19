@@ -15,7 +15,7 @@ setClass("NigeriaLoader", representation(load_diary_file="function",
 
 ngr_loader<-function(fu,ngrn,lgc) {
   
-  load_diary_file <-function(dirprefix,year,fu,ln,load_cost){
+  load_diary_file <-function(dirprefix,year,fu,ngrn,load_cost){
     ##
     if (year == 2010){
       fname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect7b_plantingw1.dta",sep="")
@@ -51,11 +51,16 @@ ngr_loader<-function(fu,ngrn,lgc) {
       lfname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect81_plantingw1.dta",sep="")
       sec81dat <- read_dta(lfname)
       l <- fu()@get_translated_frame(dat=sec81dat,
-                                     names=ln()@get_lsms_weekrecall_info_columns(year),
-                                     m=ln()@get_lsms_weekrecall_fields_mapping(year));
+                                     names=ngrn()@get_lsms_weekrecall_info_columns(year),
+                                     m=ngrn()@get_lsms_weekrecall_fields_mapping(year));
       
       l$hhid <-as.character(l$hhid)
       l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
+      l$item <- as.character(l$item)
+      l <- merge(plyr::rename(l,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      if (dim(subset(l,is.na(shortname)))[1]>0){
+        stop("Could not find weekly recall items",toString(subset(l,is.na(shortname))$code))
+      }
       
       }
     return(l)
