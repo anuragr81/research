@@ -19,7 +19,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
     ##
     if (year == 2010){
       fname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect7b_plantingw1.dta",sep="")
-      sec7dat <- read_dta(fname)
+      sec7dat <- read.dta(fname, convert.factors = FALSE)
       k <- fu()@get_translated_frame(dat=sec7dat,
                                      names=ngrn()@diary_info_columns_2010(),
                                      m=ngrn()@diary_columns_mapping(2010))
@@ -57,10 +57,36 @@ ngr_loader<-function(fu,ngrn,lgc) {
       l$hhid <-as.character(l$hhid)
       l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
       l$item <- as.character(l$item)
+      l$cost <- l$cost*52 # 52 weeks
       l <- merge(plyr::rename(l,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      
       if (dim(subset(l,is.na(shortname)))[1]>0){
         stop("Could not find weekly recall items",toString(subset(l,is.na(shortname))$code))
       }
+      
+      ## monthly recall
+      
+      lmfname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect82_plantingw1.dta",sep="")
+      sec82dat <- read_dta(lmfname)
+      lmdat <- fu()@get_translated_frame(dat=sec82dat,
+                                     names=ngrn()@get_lsms_monthrecall_info_columns(year),
+                                     m=ngrn()@get_lsms_monthrecall_fields_mapping(year));
+      
+      lmdat$hhid <-as.character(lmdat$hhid)
+      lmdat <- lmdat[!is.na(lmdat$cost) & lmdat$cost>0 & !is.na(lmdat$hhid),]
+      lmdat$item <- as.character(lmdat$item)
+      lmdat <- merge(plyr::rename(lmdat,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      if (dim(subset(lmdat,is.na(shortname)))[1]>0){
+        stop("Could not find weekly recall items",toString(subset(l,is.na(shortname))$code))
+      }
+      
+      repair_items <- c("maintenance_house","maintenance_household")
+      lmdat_nonrepair      <- subset(lmdat,!is.element(shortname,repair_items)) 
+      lmdat_repair         <- subset(lmdat,is.element(shortname,repair_items))
+      lmdat_repair$cost    <- lmdat_repair$cost*12
+      lmdat_nonrepair$cost <- lmdat_nonrepair$cost*6
+      lmdat <- rbind(lmdat_nonrepair,lmdat_repair)
+      
       
       }
     return(l)
