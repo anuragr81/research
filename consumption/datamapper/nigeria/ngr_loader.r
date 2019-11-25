@@ -116,9 +116,26 @@ ngr_loader<-function(fu,ngrn,lgc) {
       if (dim(subset(l1ydat,is.na(shortname)))[1]>0){
         stop("Could not find yearly recall items",toString(subset(l1ydat,is.na(shortname))$code))
       }
+
+      #*    merging all the 4 categories results in the expenditure file
       
+      y6m <-merge(l1ydat,l6mdat,all=TRUE)
+      y6m1m <- merge(y6m,lmdat,all=TRUE)
+      
+      diary <-merge(y6m1m,k,all=TRUE)
+
+      # filtering out extreme values
+      if (load_cost){
+        extremeDataHhids <- unique ( dplyr::filter( merge(diary,ddply(diary,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
+      } else {
+        extremeDataHhids <- unique ( dplyr::filter( merge(y6m1m,ddply(y6m1m,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid )
       }
-    return(l1ydat)
+      
+      print (paste("Households with extreme data (many times the median) - purged from the diary file:",length(extremeDataHhids)))
+      diary              <- dplyr::filter(diary,!is.element(hhid,extremeDataHhids))
+      
+      } # end 2010
+    return(diary)
   }
   load_ohs_file <-function(year,dirprefix,fu,ln){
     #
