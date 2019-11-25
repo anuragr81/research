@@ -137,13 +137,20 @@ ngr_loader<-function(fu,ngrn,lgc) {
       } # end 2010
     return(diary)
   }
-  load_ohs_file <-function(year,dirprefix,fu,ln){
+  
+  load_ohs_file <-function(year,dirprefix,fu,ngrn){
     #
     if (year ==2010){
-      
-    }
-    return(1)
+      sec1fname  <-paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect1_plantingw1.dta',sep="")
+      sec1dat    <- read_dta(sec1fname)
+      sec1dat    <- fu()@get_translated_frame(dat=sec1dat,
+                                     names=ngrn()@ohs_info_columns_lsms(year),
+                                     m=ngrn()@ohs_mapping_lsms(year))
+      return(sec1dat)
+      }
+    stop(paste("Year:",year,"not supported"))
   }
+  
   return(new("NigeriaLoader",load_diary_file=load_diary_file, 
              load_ohs_file=load_ohs_file) )
   
