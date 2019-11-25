@@ -77,7 +77,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       lmdat$item <- as.character(lmdat$item)
       lmdat <- merge(plyr::rename(lmdat,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
       if (dim(subset(lmdat,is.na(shortname)))[1]>0){
-        stop("Could not find weekly recall items",toString(subset(l,is.na(shortname))$code))
+        stop("Could not find monthly recall items",toString(subset(lmdat,is.na(shortname))$code))
       }
       
       repair_items <- c("maintenance_house","maintenance_household")
@@ -87,9 +87,38 @@ ngr_loader<-function(fu,ngrn,lgc) {
       lmdat_nonrepair$cost <- lmdat_nonrepair$cost*6
       lmdat <- rbind(lmdat_nonrepair,lmdat_repair)
       
+      # 6 months recall
+      l6mfname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect83_plantingw1.dta",sep="")
+      sec83dat <- read_dta(l6mfname)
+      l6mdat <- fu()@get_translated_frame(dat=sec83dat,
+                                         names=ngrn()@get_lsms_sixmonthrecall_info_columns(year),
+                                         m=ngrn()@get_lsms_sixmonthrecall_fields_mapping(year));
+      
+      l6mdat$hhid <- as.character(l6mdat$hhid)
+      l6mdat      <- l6mdat[!is.na(l6mdat$cost) & l6mdat$cost>0 & !is.na(l6mdat$hhid),]
+      l6mdat$item <- as.character(l6mdat$item)
+      l6mdat      <- merge(plyr::rename(l6mdat,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      if (dim(subset(l6mdat,is.na(shortname)))[1]>0){
+        stop("Could not find six-monthly recall items",toString(subset(l6mdat,is.na(shortname))$code))
+      }
+      l6mdat$cost <- l6mdat$cost*2
+      
+      #12 months recall
+      l1yfname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect84_plantingw1.dta",sep="")
+      sec84dat <- read_dta(l1yfname)
+      l1ydat <- fu()@get_translated_frame(dat=sec84dat,
+                                          names=ngrn()@get_lsms_yearrecall_info_columns(year),
+                                          m=ngrn()@get_lsms_yearrecall_fields_mapping(year));
+      l1ydat$hhid <- as.character(l1ydat$hhid)
+      l1ydat      <- l1ydat[!is.na(l1ydat$cost) & l1ydat$cost>0 & !is.na(l1ydat$hhid),]
+      l1ydat$item <- as.character(l1ydat$item)
+      l1ydat      <- merge(plyr::rename(l1ydat,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      if (dim(subset(l1ydat,is.na(shortname)))[1]>0){
+        stop("Could not find yearly recall items",toString(subset(l1ydat,is.na(shortname))$code))
+      }
       
       }
-    return(l)
+    return(l1ydat)
   }
   load_ohs_file <-function(year,dirprefix,fu,ln){
     #

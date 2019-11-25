@@ -8,6 +8,8 @@ if (isClass("NigeriaNormaliser")){
 setClass("NigeriaNormaliser", representation(diary_columns_mapping="function", diary_info_columns_2010="function",
                                              get_lsms_weekrecall_info_columns="function",get_lsms_weekrecall_fields_mapping="function",
                                              get_lsms_monthrecall_info_columns="function",get_lsms_monthrecall_fields_mapping="function",
+                                             get_lsms_sixmonthrecall_info_columns="function",get_lsms_sixmonthrecall_fields_mapping="function",
+                                             get_lsms_yearrecall_info_columns="function",get_lsms_yearrecall_fields_mapping="function",
                                              item_codes_2010="function"
 ))
 
@@ -50,6 +52,47 @@ ngr_normaliser<-function() {
   
   get_lsms_monthrecall_info_columns <-function(year){
     return(get_lsms_weekrecall_info_columns(year))
+  }
+  
+  get_lsms_sixmonthrecall_info_columns<-function(year){
+    return(get_lsms_weekrecall_info_columns(year))  
+  }
+  
+  get_lsms_sixmonthrecall_fields_mapping <- function(year){
+    if (year == 2010){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="state",name="region"))
+      s= rbind(s,data.frame(iesname="lga",name="district"))
+      s= rbind(s,data.frame(iesname="sector",name="is_urban"))
+      s= rbind(s,data.frame(iesname="ea",name="ea"))
+      s= rbind(s,data.frame(iesname="item_cd",name="item"))
+      s= rbind(s,data.frame(iesname="s8q6",name="cost"))
+      return(s)
+    }
+    
+    
+    stop(paste("Year:",year,"not supported"))
+  }
+  
+  get_lsms_yearrecall_info_columns <- function(year){
+    return(get_lsms_weekrecall_info_columns(year)) 
+  }
+  
+  get_lsms_yearrecall_fields_mapping <- function(year){
+    if (year == 2010){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="state",name="region"))
+      s= rbind(s,data.frame(iesname="lga",name="district"))
+      s= rbind(s,data.frame(iesname="sector",name="is_urban"))
+      s= rbind(s,data.frame(iesname="ea",name="ea"))
+      s= rbind(s,data.frame(iesname="item_cd",name="item"))
+      s= rbind(s,data.frame(iesname="s8q8",name="cost"))
+      return(s)
+    }
+    
+    stop(paste("Year:",year,"not supported"))
   }
   
   #generated using:
@@ -269,6 +312,8 @@ ngr_normaliser<-function() {
   return(new("NigeriaNormaliser",diary_columns_mapping=diary_columns_mapping, 
              diary_info_columns_2010=diary_info_columns_2010,get_lsms_weekrecall_info_columns=get_lsms_weekrecall_info_columns,
              get_lsms_weekrecall_fields_mapping=get_lsms_weekrecall_fields_mapping,item_codes_2010=item_codes_2010,
-             get_lsms_monthrecall_info_columns=get_lsms_monthrecall_info_columns,get_lsms_monthrecall_fields_mapping=get_lsms_monthrecall_fields_mapping) )
+             get_lsms_monthrecall_info_columns=get_lsms_monthrecall_info_columns,get_lsms_monthrecall_fields_mapping=get_lsms_monthrecall_fields_mapping,
+             get_lsms_sixmonthrecall_info_columns=get_lsms_sixmonthrecall_info_columns,get_lsms_sixmonthrecall_fields_mapping=get_lsms_sixmonthrecall_fields_mapping,
+             get_lsms_yearrecall_info_columns=get_lsms_yearrecall_info_columns,get_lsms_yearrecall_fields_mapping=get_lsms_yearrecall_fields_mapping) )
   
 }
