@@ -139,7 +139,9 @@ ngr_normaliser<-function() {
   
   ohs_educ_info_columns_lsms <- function(year){
     if (year == 2010){
-      return(c("hhid","region","district","is_urban", "zone", "highest_educ"))
+      return(c("hhid","region","district","is_urban", "zone", "highest_educ","is_schooled","school_start_age",
+               "qualification","is_inschool","reason_not_inschool","school_body","school_conveyance","school_distance",
+               "educ_costa","educ_costb","educ_costc","educ_costd","educ_coste","educ_costf","educ_costg","educ_costh","educ_costi"))
     }
     
     stop(paste("Year:",year,"not supported"))
@@ -150,6 +152,25 @@ ngr_normaliser<-function() {
     if (year == 2010){
       s = data.frame(iesname=NULL,name=NULL)
       s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="s2q4",name="is_schooled"))
+      s= rbind(s,data.frame(iesname="s2q5",name="reason_not_schooled"))
+      s= rbind(s,data.frame(iesname="s2q6",name="school_start_age"))
+      s= rbind(s,data.frame(iesname="s2q7",name="highest_educ"))
+      s= rbind(s,data.frame(iesname="s2q8",name="qualification"))
+      s= rbind(s,data.frame(iesname="s2q9",name="is_inschool"))
+      s= rbind(s,data.frame(iesname="s2q10",name="reason_not_inschool"))
+      s= rbind(s,data.frame(iesname="s2q11",name="school_body"))
+      s= rbind(s,data.frame(iesname="s2q12",name="school_conveyance"))
+      s= rbind(s,data.frame(iesname="s2q13",name="school_distance"))
+      s= rbind(s,data.frame(iesname="s2q18a",name="educ_costa"))
+      s= rbind(s,data.frame(iesname="s2q18b",name="educ_costb"))
+      s= rbind(s,data.frame(iesname="s2q18c",name="educ_costc"))
+      s= rbind(s,data.frame(iesname="s2q18d",name="educ_costd"))
+      s= rbind(s,data.frame(iesname="s2q18e",name="educ_coste"))
+      s= rbind(s,data.frame(iesname="s2q18f",name="educ_costf"))
+      s= rbind(s,data.frame(iesname="s2q18g",name="educ_costg"))
+      s= rbind(s,data.frame(iesname="s2q18h",name="educ_costh"))
+      s= rbind(s,data.frame(iesname="s2q18i",name="educ_costi"))
       return(s)
     }
     stop(paste("Year:",year,"not supported"))
