@@ -69,8 +69,8 @@ ngr_loader<-function(fu,ngrn,lgc) {
       lmfname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect82_plantingw1.dta",sep="")
       sec82dat <- read_dta(lmfname)
       lmdat <- fu()@get_translated_frame(dat=sec82dat,
-                                     names=ngrn()@get_lsms_monthrecall_info_columns(year),
-                                     m=ngrn()@get_lsms_monthrecall_fields_mapping(year));
+                                         names=ngrn()@get_lsms_monthrecall_info_columns(year),
+                                         m=ngrn()@get_lsms_monthrecall_fields_mapping(year));
       
       lmdat$hhid <-as.character(lmdat$hhid)
       lmdat <- lmdat[!is.na(lmdat$cost) & lmdat$cost>0 & !is.na(lmdat$hhid),]
@@ -91,8 +91,8 @@ ngr_loader<-function(fu,ngrn,lgc) {
       l6mfname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect83_plantingw1.dta",sep="")
       sec83dat <- read_dta(l6mfname)
       l6mdat <- fu()@get_translated_frame(dat=sec83dat,
-                                         names=ngrn()@get_lsms_sixmonthrecall_info_columns(year),
-                                         m=ngrn()@get_lsms_sixmonthrecall_fields_mapping(year));
+                                          names=ngrn()@get_lsms_sixmonthrecall_info_columns(year),
+                                          m=ngrn()@get_lsms_sixmonthrecall_fields_mapping(year));
       
       l6mdat$hhid <- as.character(l6mdat$hhid)
       l6mdat      <- l6mdat[!is.na(l6mdat$cost) & l6mdat$cost>0 & !is.na(l6mdat$hhid),]
@@ -116,14 +116,14 @@ ngr_loader<-function(fu,ngrn,lgc) {
       if (dim(subset(l1ydat,is.na(shortname)))[1]>0){
         stop("Could not find yearly recall items",toString(subset(l1ydat,is.na(shortname))$code))
       }
-
+      
       #*    merging all the 4 categories results in the expenditure file
       
       y6m <-merge(l1ydat,l6mdat,all=TRUE)
       y6m1m <- merge(y6m,lmdat,all=TRUE)
       
       diary <-merge(y6m1m,k,all=TRUE)
-
+      
       # filtering out extreme values
       if (load_cost){
         extremeDataHhids <- unique ( dplyr::filter( merge(diary,ddply(diary,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
@@ -134,7 +134,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       print (paste("Households with extreme data (many times the median) - purged from the diary file:",length(extremeDataHhids)))
       diary              <- dplyr::filter(diary,!is.element(hhid,extremeDataHhids))
       
-      } # end 2010
+    } # end 2010
     return(diary)
   }
   
@@ -144,10 +144,15 @@ ngr_loader<-function(fu,ngrn,lgc) {
       sec1fname  <-paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect1_plantingw1.dta',sep="")
       sec1dat    <- read_dta(sec1fname)
       sec1dat    <- fu()@get_translated_frame(dat=sec1dat,
-                                     names=ngrn()@ohs_info_columns_lsms(year),
-                                     m=ngrn()@ohs_mapping_lsms(year))
-      return(sec1dat)
-      }
+                                              names=ngrn()@ohs_info_columns_lsms(year),
+                                              m=ngrn()@ohs_mapping_lsms(year))
+      sec2fname    <- paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect2_plantingw1.dta',sep="")
+      sec2dat    <- read_dta(sec2fname)
+      sec2dat    <- fu()@get_translated_frame(dat=sec2dat,
+                                              names=ngrn()@ohs_educ_info_columns_lsms(year),
+                                              m=ngrn()@ohs_educ_columns_mapping_lsms(year))
+      return(sec2dat)
+    }
     stop(paste("Year:",year,"not supported"))
   }
   

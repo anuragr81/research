@@ -10,7 +10,8 @@ setClass("NigeriaNormaliser", representation(diary_columns_mapping="function", d
                                              get_lsms_monthrecall_info_columns="function",get_lsms_monthrecall_fields_mapping="function",
                                              get_lsms_sixmonthrecall_info_columns="function",get_lsms_sixmonthrecall_fields_mapping="function",
                                              get_lsms_yearrecall_info_columns="function",get_lsms_yearrecall_fields_mapping="function",
-                                             item_codes_2010="function", ohs_info_columns_lsms="function",ohs_mapping_lsms="function"
+                                             item_codes_2010="function", ohs_info_columns_lsms="function",ohs_mapping_lsms="function",
+                                             ohs_educ_info_columns_lsms="function",ohs_educ_columns_mapping_lsms="function"
 ))
 
 
@@ -135,6 +136,25 @@ ngr_normaliser<-function() {
     
     stop(paste("Year:",year,"not supported"))
   }
+  
+  ohs_educ_info_columns_lsms <- function(year){
+    if (year == 2010){
+      return(c("hhid","region","district","is_urban", "zone", "highest_educ"))
+    }
+    
+    stop(paste("Year:",year,"not supported"))
+  }
+  
+  
+  ohs_educ_columns_mapping_lsms <- function(year){
+    if (year == 2010){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      return(s)
+    }
+    stop(paste("Year:",year,"not supported"))
+  }
+  
   #generated using:
   #write(paste("r=rbind(r,data.frame(longname='",r$longname,"', shortname='",r$shortname,"', code=",as.integer(r$itemcode),"))",sep=""),'c:/temp/t.txt')
   item_codes_2010 <- function(){
@@ -355,6 +375,7 @@ ngr_normaliser<-function() {
              get_lsms_monthrecall_info_columns=get_lsms_monthrecall_info_columns,get_lsms_monthrecall_fields_mapping=get_lsms_monthrecall_fields_mapping,
              get_lsms_sixmonthrecall_info_columns=get_lsms_sixmonthrecall_info_columns,get_lsms_sixmonthrecall_fields_mapping=get_lsms_sixmonthrecall_fields_mapping,
              get_lsms_yearrecall_info_columns=get_lsms_yearrecall_info_columns,get_lsms_yearrecall_fields_mapping=get_lsms_yearrecall_fields_mapping,
-             ohs_info_columns_lsms=ohs_info_columns_lsms, ohs_mapping_lsms=ohs_mapping_lsms) )
+             ohs_info_columns_lsms=ohs_info_columns_lsms, ohs_mapping_lsms=ohs_mapping_lsms,ohs_educ_info_columns_lsms=ohs_educ_info_columns_lsms,
+             ohs_educ_columns_mapping_lsms=ohs_educ_columns_mapping_lsms) )
   
 }
