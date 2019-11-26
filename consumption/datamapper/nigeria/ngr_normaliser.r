@@ -141,7 +141,7 @@ ngr_normaliser<-function() {
     if (year == 2010){
       return(c("hhid","region","district","is_urban", "zone", "highest_educ","is_schooled","school_start_age",
                "qualification","is_inschool","reason_not_inschool","school_body","school_conveyance","school_distance",
-               "educ_costa","educ_costb","educ_costc","educ_costd","educ_coste","educ_costf","educ_costg","educ_costh","educ_costi"))
+               "educ_costa","educ_costb","educ_costc","educ_costd","educ_coste","educ_costf","educ_costg","educ_costh","educ_cost"))
     }
     
     stop(paste("Year:",year,"not supported"))
@@ -170,7 +170,7 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s2q18f",name="educ_costf"))
       s= rbind(s,data.frame(iesname="s2q18g",name="educ_costg"))
       s= rbind(s,data.frame(iesname="s2q18h",name="educ_costh"))
-      s= rbind(s,data.frame(iesname="s2q18i",name="educ_costi"))
+      s= rbind(s,data.frame(iesname="s2q18i",name="educ_cost"))
       return(s)
     }
     stop(paste("Year:",year,"not supported"))
