@@ -97,7 +97,9 @@ ngr_normaliser<-function() {
   
   ohs_info_columns_lsms <- function(year){
     if (year == 2010){
-      return(c("hhid","region","district","is_urban", "zone","YOB"))
+      return(c("hhid","region","district","is_urban", "zone","YOB",'is_hh_member', 'marital_status', 'marriage_year', 
+               'spouse_personid', 'religion', 'is_father_hh', 'father_personid', 'is_father_alive', 'father_educ', 'father_occup',
+               'is_mother_hh', 'mother_personid', 'is_mother_alive', 'mother_educ', 'mother_occup'))
     }
     
     stop(paste("Year:",year,"not supported"))
@@ -107,11 +109,27 @@ ngr_normaliser<-function() {
     if (year == 2010){
       s = data.frame(iesname=NULL,name=NULL)
       s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="indiv",name="personid"))
       s= rbind(s,data.frame(iesname="state",name="region"))
       s= rbind(s,data.frame(iesname="lga",name="district"))
       s= rbind(s,data.frame(iesname="sector",name="is_urban"))
       s= rbind(s,data.frame(iesname="ea",name="ea"))
       s= rbind(s,data.frame(iesname="s1q5_year",name="YOB"))
+      s= rbind(s,data.frame(iesname="s1q7",name="is_hh_member"))
+      s= rbind(s,data.frame(iesname="s1q8",name="marital_status"))
+      s= rbind(s,data.frame(iesname="s1q9",name="marriage_year"))
+      s= rbind(s,data.frame(iesname="s1q11",name="spouse_personid"))
+      s= rbind(s,data.frame(iesname="s1q12",name="religion"))
+      s= rbind(s,data.frame(iesname="s1q13",name="is_father_hh"))
+      s= rbind(s,data.frame(iesname="s1q14",name="father_personid"))
+      s= rbind(s,data.frame(iesname="s1q15",name="is_father_alive"))
+      s= rbind(s,data.frame(iesname="s1q16",name="father_educ"))
+      s= rbind(s,data.frame(iesname="s1q17",name="father_occup"))
+      s= rbind(s,data.frame(iesname="s1q18",name="is_mother_hh"))
+      s= rbind(s,data.frame(iesname="s1q19",name="mother_personid"))
+      s= rbind(s,data.frame(iesname="s1q20",name="is_mother_alive"))
+      s= rbind(s,data.frame(iesname="s1q21",name="mother_educ"))
+      s= rbind(s,data.frame(iesname="s1q22",name="mother_occup"))
       return(s)
     }
     
