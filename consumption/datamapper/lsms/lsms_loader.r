@@ -145,7 +145,7 @@ lsms_loader<-function(fu,ln,lgc) {
       }
       if (load_cost){
         
-      extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
+        extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
       } else {
         # filtering out extreme values
         ml <-merge(ml,rename(ln()@items_codes_2014()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
@@ -241,7 +241,7 @@ lsms_loader<-function(fu,ln,lgc) {
       mlk <-merge(mlk,rename(ln()@items_codes_2012()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
       if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
       if (load_cost){
-      extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
+        extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
       } else {
         # filtering out extreme values
         ml <-merge(ml,rename(ln()@items_codes_2012()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
@@ -342,13 +342,13 @@ lsms_loader<-function(fu,ln,lgc) {
       if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
       
       if (load_cost){
-      # filtering out extreme values
-      extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid ) 
+        # filtering out extreme values
+        extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid ) 
       } else {
         # filtering out extreme values
         ml <-merge(ml,rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
         
-          extremeDataHhids <- unique ( dplyr::filter( merge(ml,ddply(ml,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid )
+        extremeDataHhids <- unique ( dplyr::filter( merge(ml,ddply(ml,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid )
       }
       print (paste("Households with extreme data (with many times the median) - purged from the diary file:",length(extremeDataHhids)))
       mlk              <- dplyr::filter(mlk,!is.element(hhid,extremeDataHhids))
@@ -1500,7 +1500,7 @@ lsms_loader<-function(fu,ln,lgc) {
                       lightingfuel=heads$lightingfuel,
                       toilet=heads$toilet,
                       cookingfuel=heads$cookingfuel,
-
+                      
                       stringsAsFactors=FALSE);
     print(
       paste("Total number of households with head_highest_education=NA : ",
@@ -1669,7 +1669,7 @@ lsms_loader<-function(fu,ln,lgc) {
     } else {
       noregionprice <- k
     }
-
+    
     ignored_items <- as.character(unique(noregionprice$shortname))
     print(paste("add_market_price_to_fooddiary - Could not find prices for:", toString(ignored_items)))
     diary                   <- subset(k,!is.element(shortname,ignored_items))
@@ -2119,19 +2119,22 @@ lsms_loader<-function(fu,ln,lgc) {
   }
   
   ####
-  group_expenditure <- function(year,dirprefix,fu,ln,lgc,ld,basis,categoryNames,returnBeforeGrouping,minConsumerNumber,
+  group_expenditure <- function(hh,ohs,year,dirprefix,fu,ln,lgc,ld,basis,categoryNames,returnBeforeGrouping,minConsumerNumber,
                                 assets_type,use_market_prices, use_diary_costs, ignore_non_price_for_quality){
     if (missing(returnBeforeGrouping)){
       returnBeforeGrouping <- FALSE
     }
     
-    
-    hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln, load_cost = use_diary_costs) # must provide total and visible expenditure (must be already translated)
-    
+    if(missing(hh))
+    {
+      hh            <- load_diary_file(dirprefix=dirprefix,year=year, fu=fu,ln=ln, load_cost = use_diary_costs) # must provide total and visible expenditure (must be already translated)
+    }
     
     
     #* Loading the person/family data file
-    ohs           <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # (using fmld) must provide age (age_ref), gender(sex_ref), 
+    if (missing(ohs)){
+      ohs           <-load_ohs_file(dirprefix=dirprefix,year=year,fu=fu,ln=ln) # (using fmld) must provide age (age_ref), gender(sex_ref), 
+    }
     
     if (!is.integer(ohs$household_status)|| !(is.integer(ohs$highest_educ))){
       stop("factors must be converted an integer")
@@ -2209,7 +2212,7 @@ lsms_loader<-function(fu,ln,lgc) {
       vv[is.na(vv)]       <- 0
       vv$cost             <- rowSums(vv[,totexp_cols]) ;
       totexp              <- get_total_expenditures(hh=rbind(vv[,c("hhid","cost")],nonquality[,c("hhid","cost")]),ohs=ohs)
-
+      
     }
     ds                  <- merge(totexp,vis);
     print(paste("Merging hsize",dim(ds)[1]))

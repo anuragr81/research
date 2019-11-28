@@ -11,7 +11,8 @@ setClass("NigeriaNormaliser", representation(diary_columns_mapping="function", d
                                              get_lsms_sixmonthrecall_info_columns="function",get_lsms_sixmonthrecall_fields_mapping="function",
                                              get_lsms_yearrecall_info_columns="function",get_lsms_yearrecall_fields_mapping="function",
                                              item_codes_2010="function", ohs_info_columns_lsms="function",ohs_mapping_lsms="function",
-                                             ohs_educ_info_columns_lsms="function",ohs_educ_columns_mapping_lsms="function"
+                                             ohs_educ_info_columns_lsms="function",ohs_educ_columns_mapping_lsms="function",
+                                             ohs_income_info_columns_lsms="function",ohs_income_columns_mapping_lsms="function"
 ))
 
 
@@ -98,7 +99,7 @@ ngr_normaliser<-function() {
   
   ohs_info_columns_lsms <- function(year){
     if (year == 2010){
-      return(c("hhid","region","district","is_urban", "zone","YOB",'is_hh_member', 'marital_status', 'marriage_year', 
+      return(c("hhid","region","district","ea","personid","is_urban", "zone","YOB",'is_hh_member', 'marital_status', 'marriage_year', 
                'spouse_personid', 'religion', 'is_father_hh', 'father_personid', 'is_father_alive', 'father_educ', 'father_occup',
                'is_mother_hh', 'mother_personid', 'is_mother_alive', 'mother_educ', 'mother_occup'))
     }
@@ -175,6 +176,26 @@ ngr_normaliser<-function() {
     }
     stop(paste("Year:",year,"not supported"))
   }
+  
+  ohs_income_info_columns_lsms <- function(year){
+    if (year == 2010){
+      return(c("hhid"))
+    }
+    stop(paste("Year:",year,"not supported"))
+    
+  }
+  
+  ohs_income_columns_mapping_lsms <- function(year){
+    
+    if (year == 2010){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      return(s)
+    }
+    stop(paste("Year:",year,"not supported"))
+  }
+  
+  
   
   #generated using:
   #write(paste("r=rbind(r,data.frame(longname='",r$longname,"', shortname='",r$shortname,"', code=",as.integer(r$itemcode),"))",sep=""),'c:/temp/t.txt')
@@ -397,6 +418,7 @@ ngr_normaliser<-function() {
              get_lsms_sixmonthrecall_info_columns=get_lsms_sixmonthrecall_info_columns,get_lsms_sixmonthrecall_fields_mapping=get_lsms_sixmonthrecall_fields_mapping,
              get_lsms_yearrecall_info_columns=get_lsms_yearrecall_info_columns,get_lsms_yearrecall_fields_mapping=get_lsms_yearrecall_fields_mapping,
              ohs_info_columns_lsms=ohs_info_columns_lsms, ohs_mapping_lsms=ohs_mapping_lsms,ohs_educ_info_columns_lsms=ohs_educ_info_columns_lsms,
-             ohs_educ_columns_mapping_lsms=ohs_educ_columns_mapping_lsms) )
+             ohs_educ_columns_mapping_lsms=ohs_educ_columns_mapping_lsms,ohs_income_info_columns_lsms=ohs_income_info_columns_lsms,
+             ohs_income_columns_mapping_lsms=ohs_income_columns_mapping_lsms) )
   
 }

@@ -151,7 +151,17 @@ ngr_loader<-function(fu,ngrn,lgc) {
       sec2dat    <- fu()@get_translated_frame(dat=sec2dat,
                                               names=ngrn()@ohs_educ_info_columns_lsms(year),
                                               m=ngrn()@ohs_educ_columns_mapping_lsms(year))
-      return(sec2dat)
+      
+      sec3fname    <- paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect3_plantingw1.dta',sep="")
+      sec3dat    <- read_dta(sec3fname)
+      sec3dat    <- fu()@get_translated_frame(dat=sec3dat,
+                                              names=ngrn()@ohs_income_info_columns_lsms(year),
+                                              m=ngrn()@ohs_income_columns_mapping_lsms(year))
+      
+      ohs <- merge(sec1dat,sec2dat,by=c("hhid"))
+      
+      ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
+      return(ohs)
     }
     stop(paste("Year:",year,"not supported"))
   }
