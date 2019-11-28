@@ -161,7 +161,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohs <- merge(sec1dat,sec2dat,by=c("hhid"))
       
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
-      return(ohs)
+      return(sec3dat)
     }
     stop(paste("Year:",year,"not supported"))
   }
