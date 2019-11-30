@@ -2027,21 +2027,329 @@ Both the issues can be resolved by using the total cost (logarithm) of the
 \end_layout
 
 \begin_layout Subsection
-Implementation (apologist view to be moved after the discussion of two variants)
+Implementation
 \end_layout
 
 \begin_layout Standard
-We now discuss the limitations of the model and caveats for its interpretations.
- The first caveat is that the quality metric described above rests upon
- the rather stringent condition of aggregation with a constant relative
- price structure (i.e.
+To demonstrate how parametrisation of quality can help measure the relative
+ consumption quality for commodities amongst the population, we compare
+ i) an item-wise AIDS implementation with ii) the AIDS implementation of
+ quality-aggregates.
+ The details for these methods have already been provided in the Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:LiteratureSurvey"
+
+\end_inset
+
+ above.
+ The first method is a detailed item-wise analysis including the cross-price
+ elasticities (Heien-Wessells 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+
+\end_inset
+
+) while the second method uses the above defined measure of quality ( except
+ for electricity - which is simply an indicator variable).
+ In the latter method, the ownership of assets (logarithm of the costs of
+ the asset) is included as controls variables in the latter variant.
+\end_layout
+
+\begin_layout Subsubsection
+
+\size normal
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:HeienWesselsAIDS"
+
+\end_inset
+
+A selection approach to item-wise AIDS
+\end_layout
+
+\begin_layout Standard
+This first AIDS variant uses non-consumption corrected estimates of demand
+ elasticities to explain the effect of prices and household income on the
+ demand for every item.
+ The method comprises of two parts - the first being a 
+\bar under
+selection
+\bar default
+ step - needed to account for the non-consumption of a certain items.
+ The second part is a pooled 
+\bar under
+static-AIDS
+\bar default
+ method (see Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_probit"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_aids"
+
+\end_inset
+
+ in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+
+\end_inset
+
+) that is run over the consumption microdata from 2010, 2012 and 2014.
+\end_layout
+
+\begin_layout Standard
+The first-part i.e.
+ selection is a probit that provides refinement to the second-part item-wise
+ AIDS (which would have been appropriate in a more homogeneous dataset with
+ less instances of non-consumption for items).
+ The dependent variable in the probit is an indicator variable which is
+ unity when the item is consumed and zero otherwise.
+ The control variables used in the first-stage probit are the prices of
+ the item and market-characteristics (region etc.
+ - see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_probit"
+
+\end_inset
+
+) .
+ The inverse-imlls ratio calculated from the probit (as explained with the
+ Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invmills"
+
+\end_inset
+
+ - see Heien-Wessells 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+
+\end_inset
+
+) is in turn used as an instrument in the AIDS regressions in the second
+ part (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_aids"
+
+\end_inset
+
+).
+ Notice that the instrument is calculated for every household and every
+ item - and is part of the additivity constraint that is used for estimation.
+\end_layout
+
+\begin_layout Subsubsection
+
+\size normal
+An LA-AIDS model for Aggregate Quality
+\end_layout
+
+\begin_layout Standard
+In the AIDS equations used for the 
+\begin_inset Quotes eld
+\end_inset
+
+Unrestricted method
+\begin_inset Quotes erd
+\end_inset
+
+, we measure quality as described with the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:quality_def"
+
+\end_inset
+
+ (Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Econometric-model"
+
+\end_inset
+
+).
+ These AIDS equations used are evidently fewer than those in the item-wise
+ censored model of the first AIDS variant.
+ This is because every commodity aggregate - comprising of several items
+ - corresponds to one aggregate quantity/budget equation and a quality metric
+ corresponding to the commodity aggregate.
+ The aggregation also circumvents the issue of non-consumption since it
+ is much less likely for no items to be consumed within a functional commodity
+ group (fruits-veg, starch, protein etc.).
+\end_layout
+
+\begin_layout Standard
+Since we assume that the a commodity group is either dominated by asset
+ possession or it isn't (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Econometric-model"
+
+\end_inset
+
+), the quality variation is only meant to exist in a certain commodity groups.
+ Out of the commodity groups - food, energy, household and transportation
+ - that we use in the study, we observe quality variation in food and energy
+ - where base-prices derived from the market prices for goods within a commodity
+ are used.
+ The expenditure on household and transportation commodity groups - on the
+ other hand - are treated as if they were (each) just one commodity i.e.
+ no quality differences are observed in the non-durable consumption within
+ household commodity group (toilet rolls, clothing etc.) and the transportation
+ commodity group.
+ Herem we use the CPI (base year 2010) for household goods and transportation
+ as prices in the respective budget share regressions for household and
+ transportation (the way base-prices would be used for food and energy commodity
+ groups).
+\end_layout
+
+\begin_layout Standard
+The base-price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ for every aggregate 
+\begin_inset Formula $G\in[1,n]$
+\end_inset
+
+ (obtained from the price analysis detailed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:PriceData"
+
+\end_inset
+
+) is simply the minimum price of the goods within the commodity group.
+ This serves as price of the commodity whose budget share is set as the
+ dependent variable in the following AIDS equations:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+w_{G} & =\rho_{1,G}+\sum_{k=1}^{s}\rho_{1,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{1,Gj}ln(P_{j})+\beta_{G,1}ln(x)+\epsilon_{G,1}\label{eq:AIDS_quality_w}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+ln\ V_{G} & =\rho_{2,G}+\sum_{k=1}^{s}\rho_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{2,Gj}ln(P_{j})+\beta_{G,2}ln(x)+\epsilon_{G,2}\label{eq:AIDS_quality_lnV}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are 
+\begin_inset Formula $s$
+\end_inset
+
+ demographic variables (including the asset ownership related dummy variables)
+ in the above equation.
+ The composite unit value 
+\begin_inset Formula $V_{G}=P_{G}\nu_{G}$
+\end_inset
+
+ serves as the dependent variable in the latter quality equation 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Quantity elasticitities are related with quality elasticities with the following
+ relationship: the income elasticity of composite quantity is the sum of
+ income elasticity of quality and the income elasticity of physical quantity
+ (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\end_inset
+
+(see McKelvey
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+
+\end_inset
+
+ and Gibson et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AndalonGibsonSoda2017,GibsonKimQualityBog2019"
+
+\end_inset
+
+ for details on the implementation of McKelvey's 
+\begin_inset Quotes eld
+\end_inset
+
+Unrestricted method
+\begin_inset Quotes erd
+\end_inset
+
+).
+ Since the price for quality is not required, the price-coefficients in
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+additional
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $ln\ V$
+\end_inset
+
+ equations are not subject to any additional symmetry restrictions (see
+ Appendix for the details of the implementation).
+\end_layout
+
+\begin_layout Subsection
+Discussion
+\end_layout
+
+\begin_layout Standard
+We now discuss some more details of the quality aggregation and reasons
+ for some of choices in the model for quality.
+ Probably the most important caveat for the quality metric described above
+ is the rather stringent condition a constant relative price structure for
+ the aggregation to make sense (i.e.
  the Hicks aggregation commodity theorem).
  This is the reason why our classification of items into commodity groups
- is driven by the price-structure.
- Secondly, the quality within a commodity group can be aggregated only as
- long as the goods that the group comprises of can be ordered based on a
- certain criteria - an order that is the judgment of the researcher - not
- the consumer (see Nelson
+ is driven by the price-structure (and not just assumed separability of
+ demand).
+ The second caveat is that the quality metric is aggregated over a commodity
+ group only as long as the goods within the group can be ordered based on
+ a certain criteria - an order that is the judgment of the researcher -
+ not the consumer (see Nelson
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity"
@@ -2049,15 +2357,16 @@ key "NelsonQualityQuantity"
 \end_inset
 
  for this clarification).
- Taking example of the meat commodity group, there is no reason to think
- that goat is of higher quality than beef if the former is only slightly
+ If we take the meat commodity group as an example, there is no reason to
+ think that goat is of higher quality than beef if the former is only slightly
  costlier.
  However, quality differences are more plausible if the price differences
  are larger - e.g.
  with the choice of pulses over chicken under the protein category.
- The judgment of quality is thus provided by the researcher at an appropriate
- level of granularity - a justification that is a prerequisite for any quantity
- aggregation to make sense.
+ Such a judgment of quality (imposed by the order of price in our case)
+ is thus provided by the researcher at an appropriate level of granularity
+ - a justification that is a prerequisite to interpret any sort of quantity
+ aggregation.
 \end_layout
 
 \begin_layout Standard
@@ -2079,18 +2388,26 @@ Notice also that one cannot talk about the quality metric
 \end_inset
 
 .
- We illustrate this with a comparison of item-wise and aggregated approaches.
+ We illustrate this with a comparison of item-wise and aggregated approaches
+ in the results (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Results"
+
+\end_inset
+
+).
+ While the item-wise approach gives us a more detailed sense of elasticities,
+ an interpretation that is more desirable for an understanding of the segregatio
+n of quality across the segments in the population is provided more readily
+ with the quality-aggregated view.
  
 \end_layout
 
 \begin_layout Standard
-<<
-\end_layout
-
-\begin_layout Standard
-As we don't attempt to aggregate high-quality items from across commodity
- groups, a two-state budgeting approach (commonly used in the literature
- on household demand) can be conveniently discarded.
+Notice that since we don't attempt to aggregate high-quality items from
+ across commodity groups, a two-state budgeting approach (commonly used
+ in the literature on household demand) can be conveniently discarded.
  Recall that the two-state budgeting represents a hierarchy of separable
  goods.
  If the futility argument were valid for high-quality products, one could
@@ -2192,6 +2509,14 @@ key "PhilipsAppliedCons,DeatonEconConsumer"
 
 \begin_layout Standard
 >>
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+We also discard the approaches - which requires perfect substitution -argue
+ in favour of discrete methods.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2366,299 +2691,6 @@ The items sorted according to the mean budget shares
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-With these goals in mind, we now compare two variants of the AIDS model
- used for measuring quality elasticities in the literature.
- We assess their relevance, shortcomings before suggesting an aggregated
- model that is adapted to our goals.
- In the first variant, a detailed item-wise analysis of cross-price elasticities
- is provided (Heien-Wessells 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HeienWessellsAIDSCensored1990"
-
-\end_inset
-
-).
- The second AIDS variant (McKelvey 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "McKelveyQuality2011"
-
-\end_inset
-
-) uses the measure of quality (as defined above) - except for electricity
- (which is simply an indicator variable).
- Asset ownership (log of cost of the asset - which is available in the survey)
- are included as controls variables in the latter variant.
- In the end we continue to argue in favour of discrete methods - which we
- believe would make more sense in the status consumption contexts where
- the ownership of long-term durable goods needs to be considered.
-\end_layout
-
-\begin_layout Subsubsection
-
-\size normal
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:HeienWesselsAIDS"
-
-\end_inset
-
-A selection approach to item-wise AIDS
-\end_layout
-
-\begin_layout Standard
-The first AIDS variant uses non-consumption corrected estimates of demand
- elasticities to explain the effect of prices and household income on the
- demand for every item.
- The first part of this method is a selection step - needed to account for
- the non-consumption of a certain items.
- In the second part, a pooled static-AIDS method as described above (see
- Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_probit"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_aids"
-
-\end_inset
-
- in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Model"
-
-\end_inset
-
-) is used on the consumption microdata from 2010, 2012 and 2014.
- 
-\end_layout
-
-\begin_layout Standard
-The first-part i.e.
- selection is a probit that provides refinement to the second-part item-wise
- AIDS (which would have been appropriate in a more homogeneous dataset with
- less instances of non-consumption for items).
- The dependent variable in the probit is an indicator variable which is
- unity when the item is consumed and zero otherwise.
- The control variables used in the first-stage probit are the prices of
- the item and market-characteristics (region etc.
- - see Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_probit"
-
-\end_inset
-
-) .
- The inverse-imlls ratio calculated from the probit (as explained with the
- Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:invmills"
-
-\end_inset
-
- - see Heien-Wessells 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HeienWessellsAIDSCensored1990"
-
-\end_inset
-
-) is in turn used as an instrument in the AIDS regressions in the second
- part (see Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_aids"
-
-\end_inset
-
-).
- Notice that the instrument is calculated for every household and every
- item - and is part of the additivity constraint that is used for estimation.
-\end_layout
-
-\begin_layout Subsubsection
-
-\size normal
-An LA-AIDS model for Aggregate Quality
-\end_layout
-
-\begin_layout Standard
-In the AIDS equations used for the 
-\begin_inset Quotes eld
-\end_inset
-
-Unrestricted method
-\begin_inset Quotes erd
-\end_inset
-
-, we measure quality as described with the Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:quality_def"
-
-\end_inset
-
- (Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Econometric-model"
-
-\end_inset
-
-).
- These AIDS equations used are evidently fewer than those in the item-wise
- censored model of the first AIDS variant.
- This is because every commodity aggregate - comprising of several items
- - corresponds to one aggregate quantity/budget equation and a quality metric
- corresponding to the commodity aggregate.
- The aggregation also circumvents the issue of non-consumption since it
- is much less likely for no items to be consumed within a functional commodity
- group (fruits-veg, starch, protein etc.).
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-Notice that while such an AIDS formulation does not model the intertemporal
- substitution, the condition C1 allows us to compare the quality variation
- in certain commodity groups with the durable good possession in others.
- The commodity groups used for our analyses are food, energy, household
- and transportation.
- We use the CPI for housing and transportation since the expenditure on
- them is considered elementary consumption (these are categories where assets
- are deemed more important).
- In other words, no quality differences are observed in consumption on household
- items (toilet rolls, clothing etc.) or transportation.
- The expenditure on housing and transportation are treated as if they were
- (each) just one commodity whereas different variants of proteins and starches
- (i.e.
- goods) are considered.
-\end_layout
-
-\begin_layout Standard
-The base-price 
-\begin_inset Formula $P_{G}$
-\end_inset
-
- for every aggregate 
-\begin_inset Formula $G\in[1,n]$
-\end_inset
-
- (obtained from the price analysis detailed in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:PriceData"
-
-\end_inset
-
-) is simply the minimum price of the goods within the commodity group.
- This serves as price of the commodity whose budget share is set as the
- dependent variable in the following AIDS equations:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-w_{G} & =\rho_{1,G}+\sum_{k=1}^{s}\rho_{1,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{1,Gj}ln(P_{j})+\beta_{G,1}ln(x)+\epsilon_{G,1}\label{eq:AIDS_quality_w}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-ln\ V_{G} & =\rho_{2,G}+\sum_{k=1}^{s}\rho_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{2,Gj}ln(P_{j})+\beta_{G,2}ln(x)+\epsilon_{G,2}\label{eq:AIDS_quality_lnV}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-There are 
-\begin_inset Formula $s$
-\end_inset
-
- demographic variables (including the asset ownership related dummy variables)
- in the above equation.
- The composite unit value 
-\begin_inset Formula $V_{G}=P_{G}\nu_{G}$
-\end_inset
-
- serves as the dependent variable in the latter quality equation 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Quantity elasticitities are related with quality elasticities with the following
- relationship: the income elasticity of composite quantity is the sum of
- income elasticity of quality and the income elasticity of physical quantity
- (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "NelsonQualityQuantity"
-
-\end_inset
-
-).
- 
-\end_layout
-
-\end_inset
-
-(see McKelvey
-\begin_inset CommandInset citation
-LatexCommand cite
-key "McKelveyQuality2011"
-
-\end_inset
-
- and Gibson et al 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "AndalonGibsonSoda2017,GibsonKimQualityBog2019"
-
-\end_inset
-
- for details on the implementation of McKelvey's 
-\begin_inset Quotes eld
-\end_inset
-
-Unrestricted method
-\begin_inset Quotes erd
-\end_inset
-
-).
- Since the price for quality is not required, the price-coefficients in
- the 
-\begin_inset Quotes eld
-\end_inset
-
-additional
-\begin_inset Quotes erd
-\end_inset
-
- 
-\begin_inset Formula $ln\ V$
-\end_inset
-
- equations are not subject to any additional symmetry restrictions (see
- Appendix for the details of the implementation).
 \end_layout
 
 \begin_layout Standard
