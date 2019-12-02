@@ -19,11 +19,11 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
+\font_roman "libertine" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
-\font_default_family default
+\font_default_family rmdefault
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
@@ -38,7 +38,7 @@
 \spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -62,12 +62,12 @@
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 4cm
-\topmargin 3cm
-\rightmargin 4cm
-\bottommargin 3cm
-\headheight 3cm
-\headsep 3cm
+\leftmargin 1.5cm
+\topmargin 2cm
+\rightmargin 1.5cm
+\bottommargin 2cm
+\headheight 2cm
+\headsep 2cm
 \columnsep 1.4cm
 \secnumdepth 3
 \tocdepth 3
@@ -107,6 +107,22 @@ Quality and lifestyle amidst urbanisation
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 
 \size normal
@@ -116,10 +132,9 @@ Introduction
 \begin_layout Standard
 Models for demand analysis rely on exogenous price observations for the
  consumer's basket.
- The prices observed in the market embody both i) how the market, subject
- to supply pressures, addresses the needs of the consumers and ii) how it
- prices the differences in quality variants of the same commodity to the
- consumer.
+ The prices observed in the market embody how the market, subject to supply
+ pressures both i) addresses the needs of the consumers and ii) prices the
+ differences in quality variants of the same commodity to the consumers.
  Despite market-observed prices being of a central importance to the demand
  analysis, it is only recently that the detailed prices observed in the
  market are made available in micro-data surveys.
@@ -130,25 +145,41 @@ Models for demand analysis rely on exogenous price observations for the
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-To understand the choice the consumers face in a market when faced with
- rising prices, incomes and urban development, we focus on food quality.
- The prices are important for this analysis.
- The motivation for these is quite simple i) poor countries have most people
- on subsistence - the chance of moving up in society is little ii) the market
- has changed the prices have improved.
- Thus the consumers face choices determined by the markets developments
- in the area - the demand is thus likely to be segmented.
- THis is worth exploring as we explain with a model for quality and long-term
- standing- which is our way to understand CC.
- We explain needs and quality, and look for substitution for consumers.
+We focus on food quality to understand the choice the consumers face in
+ an environment of rising prices, incomes and urban development.
+ The quality in food is made relevant in the developing countries due to
+ most of the population living in a subsistence mode and spending a significant
+ portion of their income on food.
+ Further, since not all consumers may face the same basket of goods due
+ to uneven rates of economic development, the quality the consumer chooses
+ is also subject to the long-term choices she has made (e.g.
+ residence in a region, education, occupation etc.).
+ The demand for quality in food is thus also likely to be segmented due
+ to severe inequalities in varied circumstances of the population and low
+ possibilities of a transition in the consumers' longer-term circumstances
+ (compared to the developed countries).
+ The market-prices of the variants of a commodity in the various regions
+ of economy are thus a prerequisite for such an analysis of quality.
  
-\bar default
-In the analysis that follows, the needs of the consumers are proxied by
- the number of members (age-adjusted) in the household (and other available
- scales) while quality is measured as the portion of budget spent on high
- vs low-price items.
+\end_layout
+
+\begin_layout Standard
+We find the segmentation of quality relevant in a discussion of status-related
+ consumption as well - as conspicuous consumption is often equivalent to
+ high-quality consumption.
+ This is because i) status-benefit from an item is sure to be priced in
+ the market and ii) high relative-quality of an item is likely to carry
+ some status benefit.
+ The consumer choice for quality given her longer-term circumstances (both
+ encapsulated within the household characteristics related to her needs
+ and long-term economic standing) thus provides us a way to explain conspicuous
+ consumption with status-benefits from quality and longer-term economic
+ standing.
+ In the analysis that follows, we employ methods to measure the needs, the
+ socio-economic standing and the consumer choice for quality.
+ While the needs of the consumers are proxied by the number of members (age-adju
+sted) in the household (and other available scales), quality is measured
+ as the portion of budget spent on high vs low-price items.
  With the AIDS formulation 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2056,7 +2087,11 @@ key "DeatonQualityQuantityVariation"
 
 \begin_layout Standard
 The above quality metric readily lends itself to estimation of price derivatives
- related quality and the household characteristics relevant for quality.
+ (with respect to base-price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+) related quality and the household characteristics relevant for quality.
  The needs of the consumer 
 \begin_inset Formula $\eta$
 \end_inset
@@ -2402,6 +2437,8 @@ additional
 
  equations are not subject to any additional symmetry restrictions (see
  Appendix for the details of the implementation).
+ The usual constraints of adding up, symmetry and non-negativity of Slutsky
+ matrix apply to the above demand equations.
 \end_layout
 
 \begin_layout Subsection
@@ -2706,22 +2743,6 @@ reference "subsec:Econometric-model"
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -2731,7 +2752,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/food_observed_prices.png
-	width 5.5in
+	width 3in
 
 \end_inset
 
@@ -2771,7 +2792,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/food_budget_shares.png
-	width 5.5in
+	width 3in
 
 \end_inset
 
@@ -5352,31 +5373,29 @@ An LA-AIDS model for Aggregate Quality
 \begin_layout Standard
 The aggregated view adds the functional view to the consumer choice that
  is not available in an item-wise approach.
- Observing consumption at a higher level with separability assumptions facilitat
-es the interpretation of cross-price effects.
- Whenever aggregation is possible (subject to restrictions), it allows us
- to interpret the consumer choice for quality - while representing the substitut
-ion between broader categories and the price variants within the commodities
- in the econometric model.
- 
+ Observing consumption at a higher level with separability assumptions also
+ facilitates a better interpretation of the cross-price effects - but most
+ importantly, the aggregation (subject to restrictions), allows us to interpret
+ the consumer choice for quality - while representing the substitution between
+ broader categories and the price variants within the commodities in the
+ econometric model.
 \end_layout
 
 \begin_layout Standard
-Further, the aggregation provides an intermediate step to merging the data
- from recall and diary methods.
- As items are often recorded with more details for the diary items than
- for the recall items (the types of phones, clothes purchased by the consumers
- are hardly recorded in the surveys for example), the merging of data from
- recall and diary methods is rendered inappropriate.
- An aggregation can represent the diary data at a coarser granularity -
- which can be matched with that of the recall method.
+We also use the aggregation as an intermediate step in merging data from
+ recall and diary methods.
+ In most surveys, the items recorded with more details for the diary items
+ than for the recall items (the types of phones, clothes purchased by the
+ consumers are hardly recorded in the surveys for example).
+ Viewing the diary data at a higher (aggregated) level - i.e.
+ at a coarser granularity that matches that of the recall methods - allows
+ us to have a combined view of data from recall and diary methods.
 \end_layout
 
 \begin_layout Standard
-As a result, the price-based aggregation in the second AIDS variant - which
- we have adapted to our requirements - allows us to have a discussion on
- quality that was somewhat adhoc with an item-wise approach of the first
- variant.
+The price-based aggregation in this second AIDS variant - which we have
+ adapted to our requirements - allows us to have a discussion on quality
+ that was somewhat adhoc with an item-wise approach of the previous variant.
  The inclusion of assets and the expenditure data from recall methods on
  household-transportation further helps us explain how the expenditure on
  quality differs within the population.
@@ -5387,74 +5406,138 @@ Variables in Use
 \end_layout
 
 \begin_layout Standard
-lp are the cross prices effects, qV are quality, q is regular budget share.
-\end_layout
+The main control variables in the LA-AIDS SUR equations are 
+\family typewriter
+ln_tot_exp
+\family default
+ (logarithm of the total expenditure in the period) and those starting with
+ lp- (which represent the logarithm of the prices corresponding to every
+ commodity in the AIDS regression - see Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
 
-\begin_layout Standard
-We ignore quality differences in the expenditure on transport and categories,
- the AIDS SUR equations use household-CPI and transport-CPI as the prices
- for these respective groups (no 
-\begin_inset Formula $ln\ V$
 \end_inset
 
- equations are required for the two commodity groups).
- As we use the assets owned for the two groups in these equations instead,
- the asset-costs for transport and household groups are included as household
- characteristics (asset costs are total cost of items possessed by a household
- in particular commodity group).
- Other household characteristics used in the AIDS SUR equations are family
- size (
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_lnV"
+
+\end_inset
+
+).
+ As the quality differences are ignored for expenditure on transport and
+ household commodities, the AIDS SUR equations use household-CPI and transport-C
+PI as prices for these commodity groups i.e.
+ 
+\family typewriter
+lphousehold
+\family default
+ and 
+\family typewriter
+lptransport
+\family default
+ (respectively).
+ Other control variables that are used in the intercept of the AIDS SUR
+ equations (see Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_lnV"
+
+\end_inset
+
+) are 
 \family typewriter
 consu
 \family default
-), age of the household-head (
+ (number of member adjusted by age), 
 \family typewriter
 age
 \family default
-), occupation-rank (
+ (age of the household-head), 
 \family typewriter
 occupation_rank
 \family default
-), education-rank (
+ (an ordered variable inferred from the occupation of the head-household),
+ 
 \family typewriter
 educ_rank
 \family default
-) and expensive region( 
+ (a ternary variable inferred from the highest education level of the head
+ of the household) and expensive region( 
 \family typewriter
-expensive_region
+expensiveregion
 \family default
  - which indicates densely populated urban areas).
- 
+ The variables in intercept are subject to the additivity constraints (see
+ Section for details).
 \end_layout
 
 \begin_layout Standard
-As would be amenable to a permanent income approach, the consumer habits
- do seem to be influenced by the financial standing of the consumer that
- we have attempted to gauge with the assets owned by consumers.
+Since we view the accumulated assets worth as the household characteristics
+ (i.e.
+ as a part of
+\begin_inset Formula $\rho$
+\end_inset
+
+ in the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:utility"
+
+\end_inset
+
+), the assets owned for the two groups - household and transport - are also
+ used in the AIDS SUR equations i.e.
+ the variable 
+\family typewriter
+all_assets_mtm
+\family default
+ (which is the logarithm of total cost that the asset would reportedly sell
+ for if it were to be sold at the time of the interview).
+ We also use the variable 
+\family typewriter
+has_electric 
+\family default
+(which indicates whether the household has access to electricity or not).
+ Other formulations discussed in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:RobustnessChecks"
+
+\end_inset
+
+ may use control variables based on the ownership of the types of assets
+ - namely 
+\family typewriter
+electric_assets_mtm
+\family default
+ (the logarithm of total cost of electrical assets - costs being what the
+ asset would reportedly sell for if it were sold at the time of the interview),
  
+\family typewriter
+household_assets_mtm
+\family default
+ (the logarithm of total cost of land or the house that they would reportedly
+ sell for if they were to be sold at the time of the interview) and 
+\family typewriter
+transport_assets_mtm
+\family default
+ (the logarithm of total cost of the car, motorcycle, bicycle and other
+ means of conveyance that they would reportedly sell for if they were to
+ be sold at the time of the interview).
 \end_layout
 
 \begin_layout Standard
-As a significant portion of urban income is spent on electricity, we look
- at the quality choices of electricity users in particular.
- an indicator variable for whether the consumer uses electricity or not
- (available in the data through the "lighting source" used by the household)
- is used as one of the household characteristics
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-One could use this indicator variable as the dependent variable (in place
- of
-\begin_inset Formula $ln\ V$
-\end_inset
-
- ) in the AIDS budget-share equations.
-\end_layout
-
-\end_inset
-
- (see Table 
+The columns in the tables 
 \begin_inset ERT
 status open
 
@@ -5467,7 +5550,74 @@ ref{resultsAllassets}
 
 \end_inset
 
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsSubAssets}
+\end_layout
+
+\end_inset
+
+ either start with q- or with qV-.
+ The columns starting with q- indicate the budget shares (
+\begin_inset Formula $w$
+\end_inset
+
+) that are used as the dependent variables in AIDS regressions (see Equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
+
+\end_inset
+
+ ) and the columns starting with qV- indicate the logarithm of the quality
+ metric as the dependent variable (i.e.
+ 
+\begin_inset Formula $ln\ V$
+\end_inset
+
+ in the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_lnV"
+
+\end_inset
+
 ).
+ As explained earlier in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Discussion"
+
+\end_inset
+
+, we use an indicator variable 
+\family typewriter
+has_electric 
+\family default
+(see Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsAllassets}
+\end_layout
+
+\end_inset
+
+) for whether the consumer uses electricity or not instead of a quality
+ metric for energy in the intercept of the AIDS equations.
+ This due to the wide differences in the characteristics of goods (kerosene,
+ electricity and charcoal) within the energy commodity.
  In an alternate formulation in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5476,24 +5626,33 @@ reference "subsec:RobustnessChecks"
 \end_inset
 
 , a variable showing the total cost of electric assets is used as one of
- the household characteristics.
+ the household characteristics in lieu of the 
+\family typewriter
+has_electric 
+\family default
+variable.
  
 \end_layout
 
 \begin_layout Standard
-Using the classification based on prices and functionality, the groups chosen
- for the model are - densefoods, non-fresh, fruits-veg, protein, complements,
- energy, household and transport (see Table 
+Therefore, The 
+\begin_inset Formula $ln\ V$
+\end_inset
+
+ equations are required only for the food commodity group.
+ Using the classification based on prices and functionality, the commodities
+ chosen within the food group are - densefoods, non-fresh, fruits-veg, protein
+ and complements (see Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Groups"
 
 \end_inset
 
-).
- Here, the quality measure is not used for energy, household and transport.
- Thus, the total number of equations to estimate with the seemingly unrelated
- regression is 
+ all the goods that belong to these commodity groups).
+ Since quality measure is not used for energy, household and transport no
+ quality equations are needed for these commodity.
+ The total number of equations to estimate with the SUR is tehfore 
 \begin_inset Formula $2\times5+3\times1=13$
 \end_inset
 
@@ -5514,14 +5673,7 @@ ref{resultsAllassets}
  confirm many of the findings from the itemwise-probit but also suggest
  the relevance of asset ownership in the demand for non-durable items -
  their quality in particular.
- The life-style differences that we observe in non-durable consumption -
- with respect to the quality of items (indicated with variables starting
- with 
-\family typewriter
-qV
-\family default
--) seem associated with the assets owned by the consumers and whether they
- use electricity or not.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -5529,8 +5681,24 @@ Results
 \end_layout
 
 \begin_layout Standard
-It is worth differentiating between the effect that ownership of assets
- has on quality vs the one the effect of total expenditure
+As would be amenable to a permanent income approach, the consumer habits
+ do seem to be influenced by the financial standing of the consumer that
+ we have attempted to gauge with the occupation rank and assets owned by
+ the consumers.
+ The life-style differences that we observe in non-durable consumption -
+ with respect to the quality of items (indicated with variables starting
+ with 
+\family typewriter
+qV
+\family default
+-) do seem associated with household characteristics and particularly on
+ whether they use electricity or not.
+ 
+\end_layout
+
+\begin_layout Standard
+To be specific, it is worth differentiating between the effect that ownership
+ of assets has on quality vs the one the effect of total expenditure
 \begin_inset Foot
 status open
 
@@ -5548,12 +5716,12 @@ The literature often uses total expenditure as a measure of permanent income.
 ln_tot_exp
 \family default
 ), the quality of non-fresh increases but the quality of fruits-veg decreases.
- Those who own more long-term assets spend relatively less on quality of
- protein and transport (public_transport, car maintenance etc.) - commodities
+ Those with stronger long-term economist standing relatively less on quality
+ of protein and transport (public_transport, car maintenance etc.) - commodities
  where those how have electricity seem to spend more.
  It seems that just starting to use electricity (but not having lots of
- electric assets) can increase the quality of protein consumed for the represent
-ative consumer (see the effect of the 
+ electric assets) can increase the quality of protein consumed for the average
+ consumer (see the effect of the 
 \family typewriter
 has_electric
 \family default
@@ -5571,11 +5739,7 @@ ref{resultsSubAssets}
 \end_inset
 
 ).
- 
-\end_layout
-
-\begin_layout Standard
-Running another SUR with assets split into electrical, household and transport
+ Running another SUR with assets split into electrical, household and transport
  assets confirm the same results (see Table 
 \begin_inset ERT
 status open
@@ -5591,7 +5755,7 @@ ref{resultsSubAssets}
 
 ).
  Here, as one would expect, the consumption on energy is high for electricity
- asset owners due to the high prices of electricity in Tanzania.
+ users due to the high prices of electricity in Tanzania.
  The owners of electrical assets also consume more fruits-veg quality and
  have more expenditure on household products.
  Here too, slightly lower fruitsveg quality is associated total expenditure
@@ -7222,6 +7386,22 @@ status open
 
 \backslash
 newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
 \end_layout
 
 \end_inset
