@@ -2,7 +2,19 @@ setwd('c:/local_files/research/consumption/datamapper/')
 source('translation/frameutils.R');source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');ll=lsms_loader(fu=fu,ln=lsms_normalizer,lgc=lgc)
 source('lsms/lsms_group_collect.r'); source('lsms/lsms_datastorage.R')
 #assign("last.warning", NULL, envir = baseenv())
+#showing plots of 2010
+#dat <- unique(subset(m2010,abs(price)<10*median_price)[,c("shortname","price")])
+#datt <- subset(dat,is.element(shortname,subset(ddply(dat,.(shortname),summarise,n=length(price)),!is.na(shortname) & n>20)$shortname)) %>% mutate(shortname = as.character(shortname))
+#par(mar=c(5,7,1,1)); boxplot(price~shortname,data=datt,horizontal=TRUE,las=2)
 
+
+boxplot_prices <- function(year,thresh){
+  mdat <- ll@load_market_prices(year = year, dirprefix = "../",fu = fu, ln = lsms_normalizer,use_pieces = FALSE)
+  pdat <- subset(dat,is.element(shortname,subset(ddply(unique(subset(mdat,abs(price)<10*median_price)[,c("shortname","price")]),.(shortname),summarise,n=length(price)),!is.na(shortname) & n>thresh)$shortname)) %>% mutate(shortname = as.character(shortname))
+  pdat <- pdat[order(pdat$shortname),]
+  par(mar=c(5,7,1,1)); boxplot(price~shortname,data=pdat,horizontal=TRUE,las=2,
+                               main = paste("Prices for year - ",year))
+}
 write_mills_input <- function (allgroupsdat,millsi,yr){
   # gcols obtained using: toString(paste("'",colnames(x),"'",sep=""))
   gcols <- c('hhid', 'total_expenditure', 'toteducexpense', 'tothouserent',  'hsize', 'consu', 'highest_educ', 'age'

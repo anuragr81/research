@@ -19,7 +19,7 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "libertine" "default"
+\font_roman "times" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -3036,32 +3036,43 @@ visible
  on their functional utility.
  For example, one finds the housing-status (rented/owned/free-house) relevant
  for expenditure on carpets, residence-area relevant for electricity and
- so on.]
+ so on.
 \end_layout
 
 \begin_layout Standard
+The box plots for market observed prices (per standard unit that are liters
+ or kilograms) are show in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Recorded-prices"
 
-\bar under
-The market prices are detailed in Section - the most expensive items are
- consistently.
- Notice how expensive energy is.
- The price differences in within every commodity are plotted.
+\end_inset
 
-\bar default
- 
-\end_layout
+.
+ As one would expect, the prices for meat and seafood is much higher than
+ the rest of the food items.
+ Processed foods as well as energy sources (kerosene) seem relatively high
+ in price compared to other food items.
+ The prices thus observed are matched with the consumption microdata based
+ on the district where every household is located - a process whose details
+ are presented in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:MatchingPrices"
 
-\begin_layout Standard
-The data obtained by merging the item expenditure data collected through
- recall and diary methods was normalised for the empirical work related
- to the quality-related aggregations discussed in Section 
+\end_inset
+
+.
+ For the empirical analysis related to quality-related aggregations discussed
+ in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Model"
 
 \end_inset
 
-.
+, the consumption microdata was obtained by merging and normalising the
+ item expenditure data collected through recall and diary methods.
  As the weekly data is mixed with yearly data, an extrapolation of past
  week's consumption becomes necessary.
  Since larger families are more likely to underestimate their purchases
@@ -3073,7 +3084,46 @@ reference "sec:Model"
 \end_layout
 
 \begin_layout Standard
-\paragraph_spacing single
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/pricesboxplot2010.png
+	width 3in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Recorded-prices"
+
+\end_inset
+
+Recorded prices in 2010
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float table
 placement H
 wide false
@@ -3317,6 +3367,12 @@ istic of a developing country.
 \begin_layout Subsection
 
 \size normal
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:MatchingPrices"
+
+\end_inset
+
 Matching of Prices with Items consumed
 \end_layout
 
@@ -3362,11 +3418,16 @@ key "McKelveyQuality2011"
 \end_inset
 
  for a similar analysis of rice varieties).
+ 
 \end_layout
 
 \begin_layout Standard
-Here is a list of issues that were observed in the available price data
- as well as the solutions adopted to address the issues.
+To classify the goods based on the movement of their prices, we gather the
+ market prices for the relevant items during the survey periods (2010, 2012
+ and 2014).
+ Following is a list of issues that were resolved to obtain the price data
+ to be used for subsequent classification of items and matching with consumption
+ microdata.
 \end_layout
 
 \begin_layout Enumerate
@@ -3465,10 +3526,13 @@ key "PengElectricityTNZ2016"
 \end_layout
 
 \begin_layout Standard
-We now describe the regression of marked-price against quantity that we
- use to assimilate the price data from the survey.
- To explain this regression, let's consider an example of the marked prices
- of rice (let's say) for 1 kg, 2kg, 5kg and 10kg in the market.
+The market-price observed for items are recorded in several units.
+ To assimilate all the price data from across the quantities and regions,
+ we run a regression of marked-price against quantity it was recorded for.
+ The coefficients of the regression can thus provide us the price for an
+ arbitrary quantity of the item.
+ For example, if we had observed the marked prices of rice (let's say) for
+ 1 kg, 2kg, 5kg and 10kg in the market.
  A typical set of marked prices could be 4£, 7.5£, 18£ and 35£ respectively
  - see Figure 
 \begin_inset CommandInset ref
@@ -3478,8 +3542,8 @@ reference "fig:markedprices"
 \end_inset
 
  for the plot of these example prices.
- As is often the case, such unit-prices grow at a less than linear rate
- as is shown in the plot of the unit-price corresponding to the quantities
+ In this example as well as in the real-world, such unit-prices grow at
+ a less than linear rate (see the unit-price corresponding to the quantities
  in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3487,7 +3551,7 @@ reference "fig:markedprices"
 
 \end_inset
 
-.
+).
  Therefore a linear regression of 
 \begin_inset Formula $mp$
 \end_inset
@@ -3505,7 +3569,12 @@ reference "fig:markedprices"
 \end_inset
 
  the quantity consumed) is hardly appropriate.
- The goal of the regression is to arrive at the price of unit-quantity (e.g.
+ Instead, we use a quadratic expression to regress the unit-prices observed
+ against the quantities they're recorded.
+ Given this regression, the price of any arbitrary quantity can thus be
+ obtained.
+ What we need from the regression however, merely the price of the unit-quantity
+ (e.g.
  the price per kg for rice in the current example) rather than matching
  the appropriate marked price with the quantity purchased by the consumer
  
@@ -3561,7 +3630,7 @@ reference "fig:markedprices"
 \end_inset
 
 .
- The regression is run only when more than two prices are available.
+ This regression is run only when more than two prices are available.
  When the regression can't be used a simple median is used as the price
  for such cases
 \begin_inset Foot
@@ -3576,8 +3645,8 @@ This does not happen as frequently as one may imagine.
 \end_inset
 
 .
- The price-inference is therefore a 2-stage process - we first obtain prices
- for every district with the regression method.
+ The price-inference is therefore a 2-stage process - in the first-stage
+ we obtain prices for every district with the regression method.
  If there are no marked prices available in a district, we use the regional
  value of the price.
  For some items, the region-prices are not available for some regions.
@@ -3586,39 +3655,67 @@ This does not happen as frequently as one may imagine.
  The prices for some items whose consumption is relatively rare in the diary
  data (e.g.
  wild-birds and honey) are not available for any of the regions.
- These items are ignored for the analysis.
+ Such items (e.g.
+ alcohol) are ignored for the analysis.
 \end_layout
 
 \begin_layout Standard
-With the prices we obtain after the regression, we match the price for every
- commodity consumed by the household based on the district it is located
- in.
- The next step is to define commodity groups based on the observed price-structu
-re.
- We use a broad classification of items for separability assumption to hold.
- Within foods we observe protein, fruits, dense-foods, complements and non-fresh
- groups and within energy, we put kerosene and electricity under the same
- group (energy).
- The composite commodity theorem restrictions - more particularly the constant
- relative price structure - being a requirement for quality elasticities
- to make sense, the classification of commodity groups is also driven by
- the market price-structure.
- In commodity groups where an aggregate quality is calculated, the classificatio
-n is defined so as to take into account both the functional separability
- and price-structure.
- A clustering of regression coefficients is used for the classification
- for items whose prices are shown in Figure 
+With the prices obtained after the above regression, we match the price
+ for every commodity consumed by the household based on the district it
+ is located in.
+ Once we have the observed market prices for every item by every household,
+ we can aggregate the costs across an arbitrary group of items and calculate
+ quality for the group.
+ Being driven by the conditions discussed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Discussion"
+
+\end_inset
+
+, the classification of items into groups is hardly arbitrary - we are guided
+ both by separability and the constant relative price-structure assumption
+ (i.e.
+ first condition).
+ Had we considered separability alone, the classification of all food-items
+ within a food-group and kerosene-electricity into the energy group would
+ have proven sufficient.
+ But the structure of the price movement observed as the annual time series
+ (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:LSMSMarketPrices"
 
 \end_inset
 
+ for a plot of the average prices for every good) for every item is also
+ relevant for our classification.
+ Thus the sub-groups within food are created based on the correlated changes
+ in price from 2008 until 2014.
+ For example, the price changes for sugar and tea are more similar to each
+ other they are to the changes in prices for rice or cooking-oil
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A clustering of regression coefficients was used to arrive at these groups.
+\end_layout
+
+\end_inset
+
 .
+ We therefore put sugar and tea within a group complements and rice-cooking_oil
+ within a group nonfresh (to indicate the comovement of prices).
+ Similarly, within the food commodity we observe protein, fruitsveg, densefoods
+ and nonfresh groups as the rest of the food-subgroups.
+ For quality elasticities to make sense, the classification of commodity
+ groups based on the market price-structure is essential due the composite
+ commodity theorem restrictions (i.e.
+ the constant relative price structure).
 \end_layout
 
 \begin_layout Standard
-One can argue that a selection bias is introduced when we use the national-avera
+One may argue that a selection bias is introduced when we use the national-avera
 ges for some items and region averages for other.
  This could be a problem if the unavailability of regional averages occurred
  for a significant portion of price entries.
@@ -3626,8 +3723,8 @@ ges for some items and region averages for other.
 \begin_inset Formula $\sim4\%$
 \end_inset
 
- of the total price observations have no regional averages, the bias thus
- introduced would be rather insignificant.
+ of the total price observations have no regional averages (only a few items
+ suffer with the issue), the bias thus introduced would be rather insignificant.
  Another issue could be taken with our grouping of commodities - as it relies
  on the annual time-series data.
  It is indeed possible that the price of some items may be more volatile
@@ -3763,19 +3860,36 @@ Variables
 \end_layout
 
 \begin_layout Standard
-The control variables used are consu (family size adjusted based on the
- age of the member), educrank (education rank interpreted from the highest
- education level of head of every household), invmills (inverse-mills ratio
- as explained in the Section 
+The control variables used are 
+\family typewriter
+consu
+\family default
+ (family size adjusted based on the age of the member), 
+\family typewriter
+educrank
+\family default
+ (education rank interpreted from the highest education level of head of
+ every household), 
+\family typewriter
+invmills
+\family default
+ (inverse-mills ratio as explained in the Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Econometric-model"
 
 \end_inset
 
-), lntotexp (log of the total expenditure) and occupationrank (occupation
- rank - an ordered variable derived from the occupation of the head of the
- household).
+), 
+\family typewriter
+lntotexp
+\family default
+ (log of the total expenditure) and 
+\family typewriter
+occupationrank
+\family default
+ (occupation rank - an ordered variable derived from the occupation of the
+ head of the household).
  Notice that we use occupation rank as the proxy of income (for which the
  survey data is quite sparse) along side with the total expenditure.
  The other control variables starting with lp- are logarithm of price correspond
@@ -5514,7 +5628,7 @@ expensiveregion
 \begin_layout Standard
 Since we view the accumulated assets worth as the household characteristics
  (i.e.
- as a part of
+ as a part of 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -5551,8 +5665,8 @@ reference "subsec:RobustnessChecks"
 electric_assets_mtm
 \family default
  (the logarithm of total cost of electrical assets - costs being what the
- asset would reportedly sell for if it were sold at the time of the interview),
- 
+ asset woulds reportedly sell for if they were to be sold at the time of
+ the interview), 
 \family typewriter
 household_assets_mtm
 \family default
@@ -5646,7 +5760,7 @@ ref{resultsAllassets}
 
 ) for whether the consumer uses electricity or not instead of a quality
  metric for energy in the intercept of the AIDS equations.
- This due to the wide differences in the characteristics of goods (kerosene,
+ This is due to the wide differences in the characteristics of goods (kerosene,
  electricity and charcoal) within the energy commodity.
  In an alternate formulation in Section 
 \begin_inset CommandInset ref
@@ -5769,7 +5883,11 @@ ref{resultsSubAssets}
 \end_inset
 
 ).
- Running another SUR with assets split into electrical, household and transport
+ 
+\end_layout
+
+\begin_layout Standard
+Running another SUR with assets split into electrical, household and transport
  assets confirm the same results (see Table 
 \begin_inset ERT
 status open
@@ -7318,6 +7436,14 @@ Discussion
 \end_layout
 
 \begin_layout Standard
+
+\bar under
+The supply side differences - are seldom used in - conscpicuos.
+ We believe regional differences- degree of urbanisation etc.
+ should be considered in the literature on conscpicous consumption.
+\end_layout
+
+\begin_layout Standard
 Given the differences in consumer baskets for the urban and rural consumer,
  it should not be surprising that those in the urban areas spend differently
  on certain non-durable items.
@@ -7761,60 +7887,100 @@ pulses
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-complements
+densefoods
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-sugar
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-complements
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-sweet
+cassava_flour
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-complements
+densefoods
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-honey
+sweet_potato
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+yam
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+potatoes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+densefoods
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+othervegstarch
 \end_layout
 
 \end_inset
@@ -7901,7 +8067,207 @@ nut_products
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+eggs
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+onion
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+greens
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dried_canned_veg
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cassava_fresh
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+banana_ripe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+citrus
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mangoes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sugarcane
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruitsveg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+banana_green
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -7910,7 +8276,7 @@ protein
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -8145,26 +8511,6 @@ packaged_fish
 \begin_inset Text
 
 \begin_layout Plain Layout
-fruitsveg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-eggs
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 alcohol
 \end_layout
 
@@ -8221,6 +8567,166 @@ winespirits
 </cell>
 </row>
 <row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sugar
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+tea
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+coffee
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+miscdrinkpowder
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+canned_drink
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+readymade_tea_coffee
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sweet
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+honey
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
 <cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -8255,386 +8761,6 @@ complements
 
 \begin_layout Plain Layout
 salt
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fruitsveg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-onion
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fruitsveg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-greens
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fruitsveg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-dried_canned_veg
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fruitsveg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-cassava_fresh
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-densefoods
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-cassava_flour
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-densefoods
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-sweet_potato
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-densefoods
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-yam
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-densefoods
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-potatoes
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fruitsveg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-banana_green
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-densefoods
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-othervegstarch
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-complements
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-tea
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-complements
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-coffee
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-complements
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-miscdrinkpowder
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-complements
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-canned_drink
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-complements
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-readymade_tea_coffee
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fruitsveg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-banana_ripe
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fruitsveg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-citrus
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fruitsveg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-mangoes
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fruitsveg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-sugarcane
 \end_layout
 
 \end_inset
@@ -8731,6 +8857,46 @@ energy
 \end_inset
 </cell>
 <cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+petrol
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+transport
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+public_transport
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+transport
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -9075,46 +9241,6 @@ household
 
 \begin_layout Plain Layout
 childrensshoes
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-transport
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-public_transport
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-transport
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-petrol
 \end_layout
 
 \end_inset
