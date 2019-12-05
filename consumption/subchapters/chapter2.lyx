@@ -1478,33 +1478,37 @@ The model :
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\eta_{t+1}=\eta_{t}$
+\begin_inset Formula $\eta_{t+1}=k\eta_{t}$
 \end_inset
 
  (there is no stochastic element to this since the consumer knows this more
- precisely than the others.
+ precisely than the others).
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $A_{t+1}=A_{t}(1-\alpha)i_{t}+\sigma W_{t}$
+\begin_inset Formula $A_{t+1}=A_{t}+(i_{t}-c_{t})=A_{t}+i_{t}-\eta_{t}A_{t}\Gamma_{t}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $i_{t+1}=\beta i_{t}$
+\begin_inset Formula $i_{t+1}=\beta(i_{t}+\sigma A_{t}W_{t})$
 \end_inset
 
  (the rate of growth of income is also observed and is related to the real
- probability of transition)
+ probability of transition - 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is not known).
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $c_{t}=\mu\eta_{t}A_{t}$
+\begin_inset Formula $c_{t}=\eta_{t}A_{t}\Gamma_{t}$
 \end_inset
 
- (
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1528,11 +1532,11 @@ One can write
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\mu_{t}=\frac{\nu_{t}}{A_{t}}$
+\begin_inset Formula $\mu_{t}=\frac{\nu_{t}}{A_{t}}=\frac{c_{t}}{A_{t}\eta_{t}}$
 \end_inset
 
-(a consumer would maintain the same relative quality - i.e.
- she would increase quality per family member as she acquires more assets)
+(a consumer would try to maintain the same relative quality by increasing
+ quality per family member when she acquires more assets)
 \end_layout
 
 \begin_layout Standard
@@ -1540,19 +1544,209 @@ One can write
 \end_layout
 
 \begin_layout Standard
-A consumer would arrange 
+Here, 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ is the consumption.
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is the rate of growth of income.
+ 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ are assets.
+ 
+\end_layout
+
+\begin_layout Standard
+By choosing 
+\begin_inset Formula $\alpha$
+\end_inset
+
+, a consumer would arrange 
 \begin_inset Formula $c_{t},A_{t}$
 \end_inset
 
  thinking that 
-\begin_inset Formula $A_{t+1}=A_{t}(1-\alpha)i_{t}+$
+\begin_inset Formula $i_{t+1}=\beta(i_{t}+\Gamma_{t}c_{t}W_{t})$
+\end_inset
+
+.
+ The real process for 
+\begin_inset Formula $i_{t+1}$
+\end_inset
+
+ does depends on 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ rather than 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ (this is what separate 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ from 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+).
+ Notice that the consumer does not observe 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and guesses it with 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+.
+ The guesses may be far away from 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ - the structure of the guesses can be based on behavioural experiments
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+How individuals underestimate or overestimate risks is best explained with
+ prospect theory.
+ Generally, the consumer behaviour is stated as
+\begin_inset Formula $u(x)=\sum w(p_{i})\upsilon(x_{i})$
+\end_inset
+
+ (
+\begin_inset Formula $w(p)$
+\end_inset
+
+ is the probability weighting function and 
+\begin_inset Formula $\upsilon(x)$
+\end_inset
+
+ is the payoff-utility function for the consumer.
+ A structure for 
+\begin_inset Formula $\upsilon(x)$
+\end_inset
+
+ would be 
+\begin_inset Formula $log(x)$
+\end_inset
+
+ and one may assume a structure of 
+\begin_inset Formula $w$
+\end_inset
+
+ based on the data).
+ 
+\end_layout
+
+\end_inset
+
+.
+ The consumer acts on a probability that is not known to her - but a higher
+\begin_inset Formula $\Gamma_{t}$
+\end_inset
+
+ would mean consumer would sets a high 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ \SpecialChar endofsentence
+ If the consumer knows 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and that it depends on 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ then she would keep 
+\begin_inset Formula $\Gamma_{t}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Notice that
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ rises continuously.
+ It doesn't need to grow discrete (bought or not) if we assume that there
+ is an asset hierarchy for every consumer as she moves up.
+ A criticism is obviously that assets cost differently in .
+ We however assume that assets can be ordered in a way that a consumer knows
+ the geodesic to get to the next desirable point.
+ Whether actually purchases the item or not is immaterial - since
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ is assumed to either gain value or translate into purchases.
+ For the empirical work, we simply consider the average cost of items -
+ people in the agriculture hardly would buy a luxury car - but we that is
+ for the consumer to follow.
+ We assume that the market reflects the value of long-term assets.
+ 
+\end_layout
+
+\begin_layout Standard
+The consumer would try to optimise 
+\begin_inset Formula $u(A_{t},\eta_{t},c_{t})$
+\end_inset
+
+ in every time period.
+ Using the life-cycle approach, the consumer would want to optimise 
+\begin_inset Formula $\sum_{i=1}^{T}u(c_{i},A_{i},\eta_{i})$
+\end_inset
+
+.
+ This is a stochastic control problem so that the vector 
+\begin_inset Formula $\Gamma^{*}$
+\end_inset
+
+ solves 
+\begin_inset Formula $argmax_{\Gamma}$
 \end_inset
 
 
-\begin_inset Formula $\Gamma c_{t}$
+\begin_inset Formula $\sum_{i=1}^{T}u(\eta_{i}(k)A_{i}(\beta,\sigma)\Gamma_{i},A_{t}+i_{t}-\eta_{i}A_{i}\Gamma_{i},\eta_{t})$
 \end_inset
 
- - there
+
+\end_layout
+
+\begin_layout Standard
+Here is the list of unresolved problems :
+\end_layout
+
+\begin_layout Standard
+1.
+ The rational consumer who knows the movement of 
+\begin_inset Formula $i_{t+1}$
+\end_inset
+
+ cannot have no consumption.
+ The equations needs to be modified to ensure that someone who knows 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ should have a non-zero 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ driven by 
+\begin_inset Formula $A_{t},\eta_{t}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
