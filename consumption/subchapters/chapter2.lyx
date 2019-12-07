@@ -1509,7 +1509,7 @@ The model :
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $c_{t}=c\eta_{t}f(A_{t-1},\rho)g(\Gamma_{t})$
+\begin_inset Formula $c_{t}=\eta_{t}p(A_{t-1},\rho)g(\Gamma_{t})$
 \end_inset
 
 
@@ -1537,11 +1537,11 @@ Here,
 \end_inset
 
  are assets, 
-\begin_inset Formula $f(A_{t},\rho)$
+\begin_inset Formula $p(A_{t},\rho)$
 \end_inset
 
- is a non-decreasing function indicating the scale of quality needed for
- having assets 
+ is a non-decreasing function indicating the prices needed for having assets
+ 
 \begin_inset Formula $A_{t}$
 \end_inset
 
@@ -1554,7 +1554,7 @@ Here,
 \begin_inset Formula $g(\Gamma_{t})$
 \end_inset
 
- is .
+ is the quality that the consumer chooses.
  
 \begin_inset Formula $\Gamma_{t}$
 \end_inset
@@ -1805,6 +1805,10 @@ argmax_{\Gamma}(\sum_{i=1}^{T}u(c_{i},A_{i},\eta_{i}))\label{eq:optim}
 
 \end_layout
 
+\begin_layout Subsection
+Non-Stochastic Optimisation
+\end_layout
+
 \begin_layout Standard
 The non-stochastic version of the above equations is the following:
 \end_layout
@@ -1815,7 +1819,7 @@ The non-stochastic version of the above equations is the following:
 \eta_{t+1}=n\eta_{t}\nonumber \\
 A_{t+1}=A_{t}+(i_{t}-c_{t})\nonumber \\
 i_{t+1}=ki_{t}\nonumber \\
-c_{t}=c\eta_{t}f(A_{t-1},\rho)\label{eq:nonstoch}
+c_{t}=(1+\nu)\eta_{t}p(A_{t-1},\rho)\label{eq:nonstoch}
 \end{gather}
 
 \end_inset
@@ -1831,61 +1835,86 @@ Notice that the rate of growth of income is assumed to grow at an exponential
 \end_inset
 
 , the consumer optimises the non-stochastic sum 
-\begin_inset Formula $\sum_{i=1}^{T}u(c_{i},A_{i},\eta_{i})$
+\begin_inset Formula $u=\sum_{i=1}^{T}\upsilon(c_{i},A_{i},\eta_{i})$
 \end_inset
 
 .
  Since there are no stochastic elements (including 
-\begin_inset Formula $f$
+\begin_inset Formula $p$
 \end_inset
 
 ), the consumer would already know the future values of 
 \begin_inset Formula $c_{t},A_{t},\eta_{t}$
 \end_inset
 
- that would optimise.
-\end_layout
-
-\begin_layout Subsection
-Form of f and u
-\end_layout
-
-\begin_layout Standard
-We can try 
-\begin_inset Formula $f(A_{i},\rho)=M\rho^{\alpha}A_{t}^{1-\alpha}$
-\end_inset
-
-, then 
-\begin_inset Formula $c_{t}=cM\eta_{t}\rho^{\alpha}A_{t}^{1-\alpha}$
-\end_inset
-
- and 
-\begin_inset Formula $A_{t+1}=A_{t}(1-cM\eta_{t}(\frac{\rho}{A_{t}})^{\alpha})+i_{t}$
-\end_inset
-
- .
- The form of 
+ that would optimise 
 \begin_inset Formula $u$
 \end_inset
 
- can be assumed to be 
-\begin_inset Formula $\sum_{i}(\eta_{i}+a\cdot ln\ A_{i}+b\cdot ln\ c_{i})$
+.
+ Since assume that the assets are accumulated over the period 
+\begin_inset Formula $T$
+\end_inset
+
+, the constraint for the consumer can be stated as the total wealth 
+\begin_inset Formula $W=\delta_{i}(A_{T}+\sum c_{i})$
+\end_inset
+
+ where we choose the discount factors 
+\begin_inset Formula $\delta_{i}=\frac{1}{1+i}$
 \end_inset
 
 .
+ This holds even if one assumes that 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+ is 0 at the end by the consumer spending everything (as 
+\begin_inset Formula $c_{T})$
+\end_inset
+
+ at the end of period 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-The form of 
-\begin_inset Formula $f$
+In the non-stochastic case, total wealth and the prices drive the consumer's
+ plan.
+ Equivalent to the case of income constraint 
+\begin_inset Formula $\textbf{p}\cdot\textbf{q}=x$
 \end_inset
 
- needs to be justified based on consumer theory.
- The equation 
+ for the maximisation of 
+\begin_inset Formula $\upsilon(\textbf{q})$
+\end_inset
+
+, the wealth constraint 
+\begin_inset Formula $W$
+\end_inset
+
+ is meant to be known to the representative consumer i.e.
+ the consumer chooses a plan for 
+\begin_inset Formula $c_{i},A_{i}$
+\end_inset
+
+ knowing what her total wealth 
+\begin_inset Formula $W$
+\end_inset
+
+ and future expectations of prices are
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice that 
 \begin_inset Formula $w=\beta ln(x)+\gamma ln(p)+\epsilon$
 \end_inset
 
- comes from 
+ commonly used in estimation derived effectively from 
 \begin_inset Formula $w_{i}=p_{i}q_{i}/x\Rightarrow log(w_{i})=log(p_{i})+log(g(x,p))-log(x)$
 \end_inset
 
@@ -1894,12 +1923,7 @@ The form of
 \end_inset
 
  being the Marshallian demand function).
- 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Using the double-logarithmic model - which is a mere restatement of existence
+ Using the double-logarithmic model - which is a mere restatement of existence
  of elasticities (through total differentiation) - we have 
 \begin_inset Formula $log(g(x,p))=\alpha_{i}+\frac{\partial log(g(x,p))}{\partial log(x)}log(x)+\frac{\partial log(g(x,p))}{\partial log(p)}log(p)$
 \end_inset
@@ -1922,63 +1946,13 @@ key "DeatonEconConsumer"
 \end_inset
 
  - hence the latter's popularity in estimation.
- 
+ An estimation using total wealth constraint can be performed using parallel
+ arguments.
 \end_layout
 
 \end_inset
 
 .
- Since the assets are accumulated over the period 
-\begin_inset Formula $T$
-\end_inset
-
-, the constraint for the consumer is expressed in terms of the total wealth
- 
-\begin_inset Formula $W=\delta_{i}(A_{T}+\sum c_{i})$
-\end_inset
-
- where we can choose 
-\begin_inset Formula $\delta_{i}=\frac{1}{1+i}$
-\end_inset
-
-.
- This holds even if one assumes that 
-\begin_inset Formula $A_{T}$
-\end_inset
-
- is 0 at the end by the consumer spending everything (as 
-\begin_inset Formula $c_{T})$
-\end_inset
-
- at the end of period 
-\begin_inset Formula $T$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-In the non-stochastic case, total wealth and the prices of the consumer's
- plan.
- Just in the case of income constraint 
-\begin_inset Formula $\textbf{p}\cdot\textbf{q}=x$
-\end_inset
-
- for the maximisation of 
-\begin_inset Formula $\upsilon(\textbf{q})$
-\end_inset
-
-, the constraint is meant to be known to the representative consumer i.e.
- the consumer chooses a plan for 
-\begin_inset Formula $c_{i},A_{i}$
-\end_inset
-
- knowing what her total wealth 
-\begin_inset Formula $W$
-\end_inset
-
- and future expectations of prices.
  The demand function would be 
 \begin_inset Formula $c_{t}=g(W,p)$
 \end_inset
@@ -1988,8 +1962,8 @@ In the non-stochastic case, total wealth and the prices of the consumer's
 \end_inset
 
  is the price of consumption.
- We view prices as i) 
-\begin_inset Formula $f(A_{t},\rho)$
+ We view prices of consumption as a combination i) 
+\begin_inset Formula $p(A_{t},\rho)$
 \end_inset
 
  which in turn depends on 
@@ -2000,21 +1974,44 @@ In the non-stochastic case, total wealth and the prices of the consumer's
 \begin_inset Formula $\rho$
 \end_inset
 
- and ii) a scale for needs which is supposed to be a constant 
-\begin_inset Formula $c$
+ and ii) and the scale 
+\begin_inset Formula $\nu$
+\end_inset
+
+ which is chosen by the consumer based on the quality of consumption she
+ desires.
+ The minimum cost for maintaining the needs 
+\begin_inset Formula $\eta_{t}$
+\end_inset
+
+ in the period 
+\begin_inset Formula $t$
+\end_inset
+
+ are meant to be chosen by setting 
+\begin_inset Formula $\nu=0$
 \end_inset
 
 .
- With both 
+ Higher the value of 
+\begin_inset Formula $\nu$
+\end_inset
+
+, higher is the consumption in the period 
+\begin_inset Formula $t$
+\end_inset
+
+ and lower is the future growth of 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+.
+ With 
 \begin_inset Formula $f(A_{t},\rho)$
 \end_inset
 
- and 
-\begin_inset Formula $c$
-\end_inset
-
- representing the price of consumption, consumer would want to control keep
- low 
+ representing the price of consumption, a consumer would want to keep low
+ 
 \begin_inset Formula $c_{t}$
 \end_inset
 
@@ -2023,25 +2020,25 @@ In the non-stochastic case, total wealth and the prices of the consumer's
 \end_inset
 
 .
- However the exact form of 
-\begin_inset Formula $f(A_{t},\rho)$
-\end_inset
-
- needs to be determined.
  
 \end_layout
 
 \begin_layout Standard
-To agree on a form of 
-\begin_inset Formula $f$
+To specify the form of 
+\begin_inset Formula $p$
 \end_inset
 
- (in the non-stochastic case, consider that the only way for a consumer
+ (in the non-stochastic case), consider that the only way for a consumer
  to reach a higher status is through accumulation i.e.
  growth in 
 \begin_inset Formula $A_{t}$
 \end_inset
 
+ (or change in 
+\begin_inset Formula $\rho$
+\end_inset
+
+).
  Thus a consumer is likely to settle for low range 
 \begin_inset Formula $\rho,A$
 \end_inset
@@ -2050,46 +2047,26 @@ To agree on a form of
 \begin_inset Formula $c$
 \end_inset
 
- low and high potential 
+ low and (potentially) high
 \begin_inset Formula $A$
 \end_inset
 
 .
- The total wealth constraints ensures that this is the case when total wealth
- 
+ The total wealth constraints ensures this when total wealth 
 \begin_inset Formula $W$
 \end_inset
 
- (where starting value of 
+ is low (thereby indicating that the starting value of 
 \begin_inset Formula $A_{t}$
 \end_inset
 
- matter more than anything else) is low.
-\end_layout
-
-\begin_layout Standard
-In a more realistic scenario, one should see 
-\begin_inset Formula $f(A,\rho)$
-\end_inset
-
- as a kind of filter function which assigns levels of consumption (rather
- than exact values ) based on 
+ matter more than anything else).
+ Assuming that all assets have a cost of maintenance proportional to the
+ cost of the assets, the asset with cost 
 \begin_inset Formula $A_{t-1}$
 \end_inset
 
- and 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- However, we postpone this discussion until we arrive at the discrete utility
- models and consider estimation.
- For now, we assume that all assets have a cost of maintenance proportional
- to the cost of the assets and the asset with cost 
-\begin_inset Formula $A_{t-1}$
-\end_inset
-
- would be a cost 
+ would bear a cost 
 \begin_inset Formula $aA_{t-1}^{\alpha}$
 \end_inset
 
@@ -2098,19 +2075,53 @@ In a more realistic scenario, one should see
 \begin_inset Formula $\rho$
 \end_inset
 
- can be seen as 
+ can be assumed as 
 \begin_inset Formula $b(\rho)$
 \end_inset
 
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In a more realistic scenario, one might see 
+\begin_inset Formula $f(A,\rho)$
+\end_inset
+
+ as a filter function that assigns levels of consumption (rather than exact
+ contributions to 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+) based on 
+\begin_inset Formula $A_{t-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
 .
+ This may be considered as part of estimation through discrete utility methods.
+ 
 \end_layout
 
-\begin_layout Standard
-The form of 
+\end_inset
+
+ and the form of 
 \begin_inset Formula $u$
 \end_inset
 
- is assumed for the log-linear for now.
+ is assumed to be log-linear .
+ Thus the consumer optimises 
+\begin_inset Formula $\sum_{i}(\alpha\eta_{i}+\beta\cdot ln\ A_{i}+(1-\alpha-\beta)\cdot ln\ c_{i})$
+\end_inset
+
+ where 
+\begin_inset Formula $\alpha,\beta$
+\end_inset
+
+ are constants.
  Notice that while additivity discourages substitution the low substitution
  between 
 \begin_inset Formula $c_{t}$
@@ -2132,18 +2143,51 @@ key "DeatonEconConsumer"
 \end_inset
 
 .
+ We can also remove the parameter 
+\begin_inset Formula $n$
+\end_inset
+
+ from the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nonstoch"
+
+\end_inset
+
+ above if we assume that a consumer does not control 
+\begin_inset Formula $\eta_{t}$
+\end_inset
+
+ needs but has to go along a known trajectory of expanding needs (it can
+ be aligned with the growth in population for the empirical analysis).
+ If we simplify the model by ignoring the role of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ for the moment, we can reformulate the non-stochastic problem as follows:
 \end_layout
 
 \begin_layout Standard
-In the econometric method, the consumer already can guess 
-\begin_inset Formula $k$
+\begin_inset Formula 
+\begin{gather}
+\eta_{t+1}=\eta(t,T)\nonumber \\
+A_{t+1}=A_{t}+(i_{t}-c_{t})\nonumber \\
+i_{t+1}=ki_{t}\nonumber \\
+c_{t}=aA_{t-1}^{\alpha}(1+\nu)\eta_{t}\label{eq:nonstochll}
+\end{gather}
+
 \end_inset
 
- and it's the error-term to 
-\begin_inset Formula $k$
+
+\end_layout
+
+\begin_layout Standard
+The consumer thus needs to solve the dynamic optimisation problem of maximising
+ 
+\begin_inset Formula $\sum_{i=1}^{T}(\alpha log(\eta_{i})+\beta\cdot log(A_{i})+(1-\alpha-\beta)\cdot log(aA_{t-1}^{\alpha}(1+\nu)\eta_{t}))$
 \end_inset
 
- that would determine her optimal choice.
+.
  
 \end_layout
 
@@ -2182,21 +2226,6 @@ reference "eq:optim"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-2.
- It may be helpful to solve the non-stochastic problem in order to resolve
- some structural issues with the problem.
- This would help argue the form of 
-\begin_inset Formula $f$
-\end_inset
-
- and 
-\begin_inset Formula $u$
-\end_inset
-
- as well.
 \end_layout
 
 \begin_layout Standard
