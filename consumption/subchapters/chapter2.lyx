@@ -1473,6 +1473,10 @@ name "sec:Model"
 
 \end_layout
 
+\begin_layout Subsection
+Stochastic optimisation
+\end_layout
+
 \begin_layout Standard
 The model :
 \end_layout
@@ -1486,14 +1490,14 @@ The model :
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $A_{t+1}=A_{t}+(i_{t}-c_{t})=A_{t}+i_{t}-\eta_{t}A_{t}\Gamma_{t}$
+\begin_inset Formula $A_{t+1}=A_{t}+(i_{t}-c_{t})$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $i_{t+1}=\beta(i_{t}+\sigma A_{t}W_{t})$
+\begin_inset Formula $i_{t+1}=ki_{t}+\sigma W_{t}$
 \end_inset
 
  (the rate of growth of income is also observed and is related to the real
@@ -1505,9 +1509,103 @@ The model :
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $c_{t}=\eta_{t}A_{t}\Gamma_{t}$
+\begin_inset Formula $c_{t}=c\eta_{t}f(A_{t},\rho)g(\Gamma_{t})$
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Gamma_{t}=r(\sigma)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ is the consumption.
+ 
+\begin_inset Formula $k$
+\end_inset
+
+ is the rate of growth of income, 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ are assets, 
+\begin_inset Formula $f(A_{t},\rho)$
+\end_inset
+
+ is a non-decreasing function indicating the scale of quality needed for
+ having assets 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ and characteristics 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ 
+\begin_inset Formula $g(\Gamma_{t})$
+\end_inset
+
+ is .
+ 
+\begin_inset Formula $\Gamma_{t}$
+\end_inset
+
+ represents the guess of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ (which is the risk in the stochastic process of income quantifying the
+ possibility of social growth through consumption).
+ If this advantage (i.e.
+ 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ depended on past values of 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ then 
+\begin_inset Formula $\sigma_{t}$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ would need to be considered).
+\begin_inset Formula $\Gamma_{t}$
+\end_inset
+
+ is the risk as believed by the consumer and thus influence the factor 
+\begin_inset Formula $\Gamma_{t}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is assumed to be an ordered variable indicating how likely the consumer's
+ high-quality consumption is with respect to the household characteristics.
+ 
+\begin_inset Formula $r$
+\end_inset
+
+ is the randomising function which represents the consumer's guess for 
+\begin_inset Formula $\sigma$
+\end_inset
+
+.
  
 \end_layout
 
@@ -1540,31 +1638,8 @@ One can write
 \end_layout
 
 \begin_layout Standard
-–
-\end_layout
-
-\begin_layout Standard
-Here, 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- is the consumption.
- 
-\begin_inset Formula $\beta$
-\end_inset
-
- is the rate of growth of income.
- 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- are assets.
- 
-\end_layout
-
-\begin_layout Standard
 By choosing 
-\begin_inset Formula $\alpha$
+\begin_inset Formula $\Gamma_{t}$
 \end_inset
 
 , a consumer would arrange 
@@ -1572,7 +1647,7 @@ By choosing
 \end_inset
 
  thinking that 
-\begin_inset Formula $i_{t+1}=\beta(i_{t}+\Gamma_{t}c_{t}W_{t})$
+\begin_inset Formula $i_{t+1}=ki_{t}+\Gamma_{t}W_{t}$
 \end_inset
 
 .
@@ -1580,24 +1655,16 @@ By choosing
 \begin_inset Formula $i_{t+1}$
 \end_inset
 
- does depends on 
-\begin_inset Formula $A_{t}$
+ depend only on past 
+\begin_inset Formula $i_{t}$
 \end_inset
 
- rather than 
-\begin_inset Formula $c_{t}$
+ and a risk-factor 
+\begin_inset Formula $\sigma$
 \end_inset
 
- (this is what separate 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- from 
-\begin_inset Formula $c_{t}$
-\end_inset
-
-).
- Notice that the consumer does not observe 
+.
+ The consumer does not observe 
 \begin_inset Formula $\sigma$
 \end_inset
 
@@ -1610,7 +1677,7 @@ By choosing
 \begin_inset Formula $\sigma$
 \end_inset
 
- - the structure of the guesses can be based on behavioural experiments
+ - the structure of the guesses can be set based from a behavioural perspective
 \begin_inset Foot
 status open
 
@@ -1649,15 +1716,27 @@ How individuals underestimate or overestimate risks is best explained with
 \end_inset
 
 .
- The consumer acts on a probability that is not known to her - but a higher
+ The consumer acts on a probability that is not known to her - a higher
 \begin_inset Formula $\Gamma_{t}$
 \end_inset
 
- would mean consumer would sets a high 
+ would mean the consumer would set a high 
 \begin_inset Formula $c_{t}$
 \end_inset
 
- \SpecialChar endofsentence
+ - thereby settling for a lower 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ and not improving the long-term state determined by 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
  If the consumer knows 
 \begin_inset Formula $\sigma$
 \end_inset
@@ -1667,11 +1746,15 @@ How individuals underestimate or overestimate risks is best explained with
 \end_inset
 
  then she would keep 
-\begin_inset Formula $\Gamma_{t}=0$
+\begin_inset Formula $\Gamma_{t}=\sigma$
+\end_inset
+
+ i.e.
+ the optimal 
+\begin_inset Formula $c_{t}$
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
@@ -1694,7 +1777,6 @@ Notice that
  people in the agriculture hardly would buy a luxury car - but we that is
  for the consumer to follow.
  We assume that the market reflects the value of long-term assets.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1712,15 +1794,223 @@ The consumer would try to optimise
 \begin_inset Formula $\Gamma^{*}$
 \end_inset
 
- solves 
-\begin_inset Formula $argmax_{\Gamma}$
+ solves the following optimisation: 
+\begin_inset Formula 
+\begin{align}
+argmax_{\Gamma}(\sum_{i=1}^{T}u(c_{i},A_{i},\eta_{i}))\label{eq:optim}
+\end{align}
+
 \end_inset
 
 
-\begin_inset Formula $\sum_{i=1}^{T}u(\eta_{i}(k)A_{i}(\beta,\sigma)\Gamma_{i},A_{t}+i_{t}-\eta_{i}A_{i}\Gamma_{i},\eta_{t})$
+\end_layout
+
+\begin_layout Standard
+The non-stochastic version of the above equations is the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\eta_{t+1}=k\eta_{t}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $A_{t+1}=A_{t}+(i_{t}-c_{t})$
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $i_{t+1}=ki_{t}$
+\end_inset
+
+ (the rate of growth of income is assumed to grow at an exponential rate
+ - as the economy grows)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $c_{t}=c\eta_{t}f(A_{t},\rho)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assuming that her lifetime is 
+\begin_inset Formula $T$
+\end_inset
+
+, the consumer optimises the non-stochastic sum 
+\begin_inset Formula $\sum_{i=1}^{T}u(c_{i},A_{i},\eta_{i})$
+\end_inset
+
+.
+ Since there are no stochastic elements (including 
+\begin_inset Formula $f$
+\end_inset
+
+), the consumer would already know the future values of 
+\begin_inset Formula $c_{t},A_{t},\eta_{t}$
+\end_inset
+
+ that would optimise.
+\end_layout
+
+\begin_layout Subsection
+Form of f and u
+\end_layout
+
+\begin_layout Standard
+We can try 
+\begin_inset Formula $f(A_{i},\rho)=M\rho^{\alpha}A_{t}^{1-\alpha}$
+\end_inset
+
+, then 
+\begin_inset Formula $c_{t}=cM\eta_{t}\rho^{\alpha}A_{t}^{1-\alpha}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{t+1}=A_{t}(1-cM\eta_{t}(\frac{\rho}{A_{t}})^{\alpha})+i_{t}$
+\end_inset
+
+ .
+ The form of 
+\begin_inset Formula $u$
+\end_inset
+
+ can be assumed to be 
+\begin_inset Formula $\sum_{i}(\eta_{i}+a\cdot ln\ A_{i}+b\cdot ln\ c_{i})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The form of 
+\begin_inset Formula $f$
+\end_inset
+
+ needs to be justified based on consumer theory.
+ The equation 
+\begin_inset Formula $w=\beta ln(x)+\gamma ln(p)+\epsilon$
+\end_inset
+
+ comes from 
+\begin_inset Formula $w_{i}=p_{i}q_{i}/x\Rightarrow log(w_{i})=log(p_{i})+log(g(x,p))-log(x)$
+\end_inset
+
+ (
+\begin_inset Formula $g(x,p)$
+\end_inset
+
+ being the Marshallian demand function).
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Using the double-logarithmic model - which is a mere restatement of existence
+ of elasticities (through total differentiation) - we have 
+\begin_inset Formula $log(g(x,p))=\alpha_{i}+\frac{\partial log(g(x,p))}{\partial log(x)}log(x)+\frac{\partial log(g(x,p))}{\partial log(p)}log(p)$
+\end_inset
+
+ and thus 
+\begin_inset Formula $log(w_{i})=\alpha_{i}+(\frac{\partial log(g(x,p))}{\partial log(x)}-1)log(x)+(\frac{\partial log(g(x,p))}{\partial log(p_{i})}+1)log(p_{i})+\sum_{j\ne i}\frac{\partial log(g(x,p))}{\partial log(p_{j})}log(p_{j})$
+\end_inset
+
+.
+ The adding up restriction is more difficult to impose on this form rather
+ a slight modification :
+\begin_inset Formula $w_{i}=\alpha_{i}+\beta_{i}log(x)+\gamma_{i}log(p_{i})$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonEconConsumer"
+
+\end_inset
+
+ - hence the latter's popularity in estimation.
+ 
+\end_layout
+
+\end_inset
+
+.
+ Since the assets are accumulated over the period 
+\begin_inset Formula $T$
+\end_inset
+
+, the constraint for the consumer is expressed in terms of the total wealth
+ 
+\begin_inset Formula $W=\delta_{i}(A_{T}+\sum c_{i})$
+\end_inset
+
+ where we can choose 
+\begin_inset Formula $\delta_{i}=\frac{1}{1+i}$
+\end_inset
+
+.
+ This holds even if one assumes that 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+ is 0 at the end by the consumer spending everything (as 
+\begin_inset Formula $c_{T})$
+\end_inset
+
+ at the end of period 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In the non-stochastic case, total wealth is merely a statement of the consumer's
+ plan.
+ Just in the case of income constraint 
+\begin_inset Formula $\textbf{p}\cdot\textbf{q}=x$
+\end_inset
+
+ for the maximisation of 
+\begin_inset Formula $\upsilon(\textbf{q})$
+\end_inset
+
+, the constraint is meant to be known to the representative consumer i.e.
+ the consumer chooses a plan for 
+\begin_inset Formula $c_{i},A_{i}$
+\end_inset
+
+ knowing what her total wealth 
+\begin_inset Formula $W$
+\end_inset
+
+ is.
+ 
+\end_layout
+
+\begin_layout Standard
+In the econometric method, the consumer already can guess 
+\begin_inset Formula $k$
+\end_inset
+
+ and it's the error-term to 
+\begin_inset Formula $k$
+\end_inset
+
+ that would determine her optimal choice.
+ 
+\end_layout
+
+\begin_layout Subsection
+Issues
 \end_layout
 
 \begin_layout Standard
@@ -1729,24 +2019,41 @@ Here is the list of unresolved problems :
 
 \begin_layout Standard
 1.
- The rational consumer who knows the movement of 
-\begin_inset Formula $i_{t+1}$
+ In what sense is 
+\begin_inset Formula $\sigma_{t}$
 \end_inset
 
- cannot have no consumption.
- The equations needs to be modified to ensure that someone who knows 
-\begin_inset Formula $\sigma$
+ optimal while 
+\begin_inset Formula $\Gamma_{t}$
 \end_inset
 
- should have a non-zero 
-\begin_inset Formula $c_{t}$
+ isn't.
+ It needs to be clarified if the consumer maximises utility by choosing
+\begin_inset Formula $\Gamma_{t}$
 \end_inset
 
- driven by 
-\begin_inset Formula $A_{t},\eta_{t}$
+ or is 
+\begin_inset Formula $\Gamma_{t}$
+\end_inset
+
+ the sub-optimal solution for Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:optim"
+
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+2.
+ It may be helpful to solve the non-stochastic problem in order to resolve
+ some structural issues with the problem.
+\end_layout
+
+\begin_layout Standard
+—
 \end_layout
 
 \begin_layout Standard
@@ -2235,6 +2542,47 @@ A cross-sectional analysis of the two countries would thus observe how quality
 
 \begin_layout Subsection
 The Stochastic Utility
+\end_layout
+
+\begin_layout Standard
+The discrete choice utility does not come into until we want to handle the
+ effect of long-term choices.
+ If we're willing to consider characteristics like education, region, howe-owner
+ship or occupation as permanent for the representative consumer, then we
+ don't need the discrete choice.
+ It's only when we use a dynamic model for making these choices - i.e.
+ whether a consumer could move to a different locality, buy a house etc.
+ is when we need to model the discrete choice.
+\end_layout
+
+\begin_layout Standard
+Notice that we don't need to consider discrete choice for whether the consumer
+ buys and asset or not.
+ Since we consider 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ separate from 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+, the asset account tracks the assets purchased.
+ We only consider the 
+\begin_inset Quotes eld
+\end_inset
+
+realised
+\begin_inset Quotes erd
+\end_inset
+
+ value of this account - i.e.
+ we assume that consumer purchases an asset as soon has she has accumulated
+ enough value in 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ - assets grow in value at the same rate as the cash (which is not a far-fetched
+ assumption given the minimal credit services in the developing economies).
 \end_layout
 
 \begin_layout Standard
