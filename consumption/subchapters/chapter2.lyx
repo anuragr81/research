@@ -1509,7 +1509,7 @@ The model :
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $c_{t}=c\eta_{t}f(A_{t},\rho)g(\Gamma_{t})$
+\begin_inset Formula $c_{t}=c\eta_{t}f(A_{t-1},\rho)g(\Gamma_{t})$
 \end_inset
 
 
@@ -1566,7 +1566,7 @@ Here,
  (which is the risk in the stochastic process of income quantifying the
  possibility of social growth through consumption).
  If this advantage (i.e.
- 
+ if 
 \begin_inset Formula $\sigma$
 \end_inset
 
@@ -1574,15 +1574,15 @@ Here,
 \begin_inset Formula $c_{t}$
 \end_inset
 
- then 
+ or it changes with the age of the consumer then a more general
 \begin_inset Formula $\sigma_{t}$
 \end_inset
 
- as a function of 
+ depending on 
 \begin_inset Formula $c_{t}$
 \end_inset
 
- would need to be considered).
+ may need to be considered).
 \begin_inset Formula $\Gamma_{t}$
 \end_inset
 
@@ -1810,36 +1810,23 @@ The non-stochastic version of the above equations is the following:
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\eta_{t+1}=k\eta_{t}$
+\begin_inset Formula 
+\begin{gather}
+\eta_{t+1}=n\eta_{t}\nonumber \\
+A_{t+1}=A_{t}+(i_{t}-c_{t})\nonumber \\
+i_{t+1}=ki_{t}\nonumber \\
+c_{t}=c\eta_{t}f(A_{t-1},\rho)\label{eq:nonstoch}
+\end{gather}
+
 \end_inset
 
  
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $A_{t+1}=A_{t}+(i_{t}-c_{t})$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $i_{t+1}=ki_{t}$
-\end_inset
-
- (the rate of growth of income is assumed to grow at an exponential rate
- - as the economy grows)
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $c_{t}=c\eta_{t}f(A_{t},\rho)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Assuming that her lifetime is 
+Notice that the rate of growth of income is assumed to grow at an exponential
+ rate - as the economy grows).
+ Assuming that her lifetime is 
 \begin_inset Formula $T$
 \end_inset
 
@@ -1886,7 +1873,6 @@ We can try
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
@@ -1973,7 +1959,7 @@ key "DeatonEconConsumer"
 \end_layout
 
 \begin_layout Standard
-In the non-stochastic case, total wealth is merely a statement of the consumer's
+In the non-stochastic case, total wealth and the prices of the consumer's
  plan.
  Just in the case of income constraint 
 \begin_inset Formula $\textbf{p}\cdot\textbf{q}=x$
@@ -1992,8 +1978,160 @@ In the non-stochastic case, total wealth is merely a statement of the consumer's
 \begin_inset Formula $W$
 \end_inset
 
- is.
+ and future expectations of prices.
+ The demand function would be 
+\begin_inset Formula $c_{t}=g(W,p)$
+\end_inset
+
+ where 
+\begin_inset Formula $p$
+\end_inset
+
+ is the price of consumption.
+ We view prices as i) 
+\begin_inset Formula $f(A_{t},\rho)$
+\end_inset
+
+ which in turn depends on 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho$
+\end_inset
+
+ and ii) a scale for needs which is supposed to be a constant 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ With both 
+\begin_inset Formula $f(A_{t},\rho)$
+\end_inset
+
+ and 
+\begin_inset Formula $c$
+\end_inset
+
+ representing the price of consumption, consumer would want to control keep
+ low 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ if she wants to accumulate 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+.
+ However the exact form of 
+\begin_inset Formula $f(A_{t},\rho)$
+\end_inset
+
+ needs to be determined.
  
+\end_layout
+
+\begin_layout Standard
+To agree on a form of 
+\begin_inset Formula $f$
+\end_inset
+
+ (in the non-stochastic case, consider that the only way for a consumer
+ to reach a higher status is through accumulation i.e.
+ growth in 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ Thus a consumer is likely to settle for low range 
+\begin_inset Formula $\rho,A$
+\end_inset
+
+ (and consequently have low-status) if she wants to keep 
+\begin_inset Formula $c$
+\end_inset
+
+ low and high potential 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The total wealth constraints ensures that this is the case when total wealth
+ 
+\begin_inset Formula $W$
+\end_inset
+
+ (where starting value of 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ matter more than anything else) is low.
+\end_layout
+
+\begin_layout Standard
+In a more realistic scenario, one should see 
+\begin_inset Formula $f(A,\rho)$
+\end_inset
+
+ as a kind of filter function which assigns levels of consumption (rather
+ than exact values ) based on 
+\begin_inset Formula $A_{t-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ However, we postpone this discussion until we arrive at the discrete utility
+ models and consider estimation.
+ For now, we assume that all assets have a cost of maintenance proportional
+ to the cost of the assets and the asset with cost 
+\begin_inset Formula $A_{t-1}$
+\end_inset
+
+ would be a cost 
+\begin_inset Formula $aA_{t-1}^{\alpha}$
+\end_inset
+
+.
+ The similar function for 
+\begin_inset Formula $\rho$
+\end_inset
+
+ can be seen as 
+\begin_inset Formula $b(\rho)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The form of 
+\begin_inset Formula $u$
+\end_inset
+
+ is assumed for the log-linear for now.
+ Notice that while additivity discourages substitution the low substitution
+ between 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ makes the combined utility function 
+\begin_inset Formula $\sum\upsilon(c_{i},A_{i},\eta_{i})$
+\end_inset
+
+ plausible 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonEconConsumer"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2050,6 +2188,15 @@ reference "eq:optim"
 2.
  It may be helpful to solve the non-stochastic problem in order to resolve
  some structural issues with the problem.
+ This would help argue the form of 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $u$
+\end_inset
+
+ as well.
 \end_layout
 
 \begin_layout Standard
