@@ -77,6 +77,9 @@ ns_c <- function(A,nu,eta,alpha,a) {
 }
 ns_next_A <- function(A,income,alpha,a,nu,eta){
   ct  <- ns_c(A=A,eta=eta,alpha=alpha,a=a,nu=nu)
+  if (income < ct ){
+    stop("consumption cannot be higher than income")
+  }
   return (A + income - ct)
 }
 
@@ -84,31 +87,44 @@ ns_income_next <- function(income,k){
   return (k*income)
 }
 
-ns_runsim <- function(nu,N){
+ns_u <- function(arrA,arrc,arreta){
+  u = array()
+  for ( j in seq(length(arrA))) {
+    u [j]  = (log(arrA[j]**(0.2)) + log(arrc[j]**(0.5)) + log(arreta[j]**(0.3)))
+  } 
+  return (u)
+}
+
+
+#r <- ns_runsim(nu=.1,N=50,alpha=.3) ;print (r$c) ; print(r$A) ; par(mfrow=c(2,1)); plot(r$t,r$A);plot(r$t,r$c)
+
+ns_runsim <- function(nu,N,alpha){
   A = array()
   ct = array()
   eta = array()
   i = array()
   gk = 1.02
-  alpha = .1
+  
   a = .05
 
   A[1] = 1
   eta[1] = 1
   i[1] = 10
-
+  ct[1] = ns_c(A = A[1],nu = nu, eta = eta[1],alpha = alpha, a = a)
+  
   for (k in seq(1,N-1)){
 
     A[k+1] <- ns_next_A(A = A[k], income = i[k], alpha = alpha, a =a, nu = nu, eta = eta[k])
     i[k+1] <- ns_income_next(income=i[k], k=gk)
     eta[k+1] <- ns_eta_next(t=k, T=N)
-    ct[k] <-    ns_c(A = A[k],nu = nu, eta = eta[k],alpha = alpha, a = a)
+    ct[k+1] <-    ns_c(A = A[k+1],nu = nu, eta = eta[k+1],alpha = alpha, a = a)
   }
   #u <- allu(arrA = A, arrn = n, arrGamma = G)
   retlist = list()
   retlist[["A"]] = A
   retlist[["c"]] = ct
   retlist[["i"]] = i
+  retlist[["u"]] = ns_u(arrA = A,arrc = ct,arreta = eta)
   retlist[["t"]] = seq(N)
   #retlist[["u"]] = u
   return(retlist)

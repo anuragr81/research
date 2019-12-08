@@ -12,11 +12,35 @@ setClass("NigeriaNormaliser", representation(diary_columns_mapping="function", d
                                              get_lsms_yearrecall_info_columns="function",get_lsms_yearrecall_fields_mapping="function",
                                              item_codes_2010="function", ohs_info_columns_lsms="function",ohs_mapping_lsms="function",
                                              ohs_educ_info_columns_lsms="function",ohs_educ_columns_mapping_lsms="function",
-                                             ohs_income_info_columns_lsms="function",ohs_income_columns_mapping_lsms="function"
+                                             ohs_income_info_columns_lsms="function",ohs_income_columns_mapping_lsms="function",
+                                             market_data_columns_mapping="function",market_data_info="function"
 ))
 
 
 ngr_normaliser<-function() {
+  
+  market_data_columns_mapping <- function(year){
+    if (year == 2010){
+      s = data.frame(iesname=NULL,name=NULL)
+      
+      s= rbind(s,data.frame(iesname="state",name="region"))
+      s= rbind(s,data.frame(iesname="lga",name="district"))
+      s= rbind(s,data.frame(iesname="sector",name="is_urban"))
+      s= rbind(s,data.frame(iesname="ea",name="ea"))
+      s= rbind(s,data.frame(iesname="item_cd",name="item"))
+      s= rbind(s,data.frame(iesname="sc2q2",name="is_available"))
+      s= rbind(s,data.frame(iesname="sc2q3a",name="price"))
+      s= rbind(s,data.frame(iesname="sc2q3b",name="lwp"))
+      s= rbind(s,data.frame(iesname="sc2q3c",name="lwp_unit"))
+      
+      return(s)
+    }
+    stop (paste("Cannot find market data columns for year:",year))
+  }
+  market_data_info <- function(year){
+    return(c("hhid","region","district", "zone","item","ea","is_urban","price","lwp_unit","lwp"))
+    
+  }
   
   diary_info_columns_2010<-function(){
     return(c("hhid","item","lwp_unit", "lwp","tlwp_unit", "gift_unit","gift","own_unit","own", "tlwp", "cost"))
@@ -454,6 +478,7 @@ ngr_normaliser<-function() {
              get_lsms_yearrecall_info_columns=get_lsms_yearrecall_info_columns,get_lsms_yearrecall_fields_mapping=get_lsms_yearrecall_fields_mapping,
              ohs_info_columns_lsms=ohs_info_columns_lsms, ohs_mapping_lsms=ohs_mapping_lsms,ohs_educ_info_columns_lsms=ohs_educ_info_columns_lsms,
              ohs_educ_columns_mapping_lsms=ohs_educ_columns_mapping_lsms,ohs_income_info_columns_lsms=ohs_income_info_columns_lsms,
-             ohs_income_columns_mapping_lsms=ohs_income_columns_mapping_lsms) )
+             ohs_income_columns_mapping_lsms=ohs_income_columns_mapping_lsms,market_data_columns_mapping=market_data_columns_mapping,
+             market_data_info=market_data_info) )
   
 }

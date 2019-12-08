@@ -21,6 +21,7 @@ load_group_ngr <- function(dat,year,categories){
     categories <- get_ngr_categories()
   }
   if (missing(dat)){
+    mdat <- nl@load_market_prices (dirprefix = "../",year = year,fu = fu ,ngrn= ngr_normaliser)
     hh <- nl@load_diary_file(dirprefix = "../",year = year, fu = fu, ngrn = ngr_normaliser,load_cost = TRUE)
     ohs <- nl@load_ohs_file(year = year, dirprefix = "../",fu = fu, ngrn = ngr_normaliser)
     dat <- llc@group_expenditure(hh = hh, ohs = ohs, year = year, dirprefix = "../",

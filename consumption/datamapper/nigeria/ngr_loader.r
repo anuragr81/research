@@ -10,11 +10,24 @@ if (isClass("NigeriaLoader")){
 
 ## all exported functions are declared here
 setClass("NigeriaLoader", representation(load_diary_file="function",
-                                         load_ohs_file="function"
+                                         load_ohs_file="function", 
+                                         load_market_prices = "function"
 ))
 
 ngr_loader<-function(fu,ngrn,lgc) {
   
+  load_market_prices <- function(dirprefix,year,fu,ngrn){
+    if (year == 2010){
+      fname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Community/sectc2_plantingw1.dta",sep="")
+      sec2dat <- read.dta(fname, convert.factors = FALSE)
+      mdat <- fu()@get_translated_frame(dat=sec2dat,
+                                     names=ngrn()@market_data_info(),
+                                     m=ngrn()@market_data_columns_mapping(2010))
+     
+      return(mdat)
+    }
+    stop(paste("Cannot load market prices for year:",year))
+  }
   load_diary_file <-function(dirprefix,year,fu,ngrn,load_cost){
     ##
     if (year == 2010){
@@ -135,6 +148,8 @@ ngr_loader<-function(fu,ngrn,lgc) {
       diary              <- dplyr::filter(diary,!is.element(hhid,extremeDataHhids))
       
     } # end 2010
+    
+    stop (paste("Cannot process data for year:",year))
     return(diary)
   }
   
@@ -167,6 +182,6 @@ ngr_loader<-function(fu,ngrn,lgc) {
   }
   
   return(new("NigeriaLoader",load_diary_file=load_diary_file, 
-             load_ohs_file=load_ohs_file) )
+             load_ohs_file=load_ohs_file,load_market_prices=load_market_prices) )
   
 }
