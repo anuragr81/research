@@ -67,3 +67,49 @@ runsim <- function(){
   retlist[["u"]] = u
   return(retlist)
 }
+
+ns_eta_next <- function(t,T){
+  return(1)
+}
+
+ns_c <- function(A,nu,eta,alpha,a) {
+  return(A**(alpha)*a*(1+nu)*eta)
+}
+ns_next_A <- function(A,income,alpha,a,nu,eta){
+  ct  <- ns_c(A=A,eta=eta,alpha=alpha,a=a,nu=nu)
+  return (A + income - ct)
+}
+
+ns_income_next <- function(income,k){
+  return (k*income)
+}
+
+ns_runsim <- function(nu,N){
+  A = array()
+  ct = array()
+  eta = array()
+  i = array()
+  gk = 1.02
+  alpha = .1
+  a = .05
+
+  A[1] = 1
+  eta[1] = 1
+  i[1] = 10
+
+  for (k in seq(1,N-1)){
+
+    A[k+1] <- ns_next_A(A = A[k], income = i[k], alpha = alpha, a =a, nu = nu, eta = eta[k])
+    i[k+1] <- ns_income_next(income=i[k], k=gk)
+    eta[k+1] <- ns_eta_next(t=k, T=N)
+    ct[k] <-    ns_c(A = A[k],nu = nu, eta = eta[k],alpha = alpha, a = a)
+  }
+  #u <- allu(arrA = A, arrn = n, arrGamma = G)
+  retlist = list()
+  retlist[["A"]] = A
+  retlist[["c"]] = ct
+  retlist[["i"]] = i
+  retlist[["t"]] = seq(N)
+  #retlist[["u"]] = u
+  return(retlist)
+}
