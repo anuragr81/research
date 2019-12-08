@@ -23,7 +23,12 @@ ngr_loader<-function(fu,ngrn,lgc) {
       mdat <- fu()@get_translated_frame(dat=sec2dat,
                                      names=ngrn()@market_data_info(),
                                      m=ngrn()@market_data_columns_mapping(2010))
-     
+      
+      #merging with itemcodes
+      mdat <- merge (plyr::rename(mdat %>% mutate ( item = 10000 + item), c("item"="code")) , ngrn()@item_codes_2010(), by = c("code"))
+      if (dim(subset(mdat,is.na(shortname)))[1]>0){
+        stop(paste("Failed to interprets codes for the items in the market file",toString(unique(subset(mdat,is.na(shortname))$shortname))))
+      }
       return(mdat)
     }
     stop(paste("Cannot load market prices for year:",year))
