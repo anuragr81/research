@@ -23,13 +23,22 @@ ngr_loader<-function(fu,ngrn,lgc) {
       mdat <- fu()@get_translated_frame(dat=sec2dat,
                                      names=ngrn()@market_data_info(),
                                      m=ngrn()@market_data_columns_mapping(2010))
-      
+      mdat <- subset(mdat,!is.na(price) & !is.na(lwp_unit)& !is.na(lwp))
       #merging with itemcodes
       mdat <- merge (plyr::rename(mdat %>% mutate ( item = 10000 + item), c("item"="code")) , ngrn()@item_codes_2010(), by = c("code"))
       if (dim(subset(mdat,is.na(shortname)))[1]>0){
-        stop(paste("Failed to interprets codes for the items in the market file",toString(unique(subset(mdat,is.na(shortname))$shortname))))
+        stop(paste("Failed to interprets codes for the items in the market file",toString(unique(subset(mdat,is.na(shortname))$item))))
       }
-      return(mdat)
+      mdatu <- merge(plyr::rename(mdat,c("lwp_unit"="unitcode")),ngrn()@unit_codes_2010(), by = c("unitcode"),all.x=TRUE)
+      if (dim(subset(mdatu,is.na(unit)))[1]>0){
+        stop(paste("Failed to interprets units in the market file",toString(unique(subset(mdatu,is.na(unit))$item))))
+      }
+      mdatu <- mdatu %>% mutate(quantity = factor*lwp)
+      mdatu <- subset(mdatu,!is.na(factor)) %>% mutate(unit_price = price/quantity) ;
+      ignored <- dplyr::filter( merge(mdatu,ddply(mdatu,.(shortname),summarise,v=fu()@fv(unit_price)),all.x=TRUE) , unit_price >= v)
+      print(paste("Number of entries ignored due to extreme values:", dim(ignored)[1],"(",round(dim(ignored)[1]*100/dim(mdatu)[1],2),"%)"))
+      mdatuf <- dplyr::filter( merge(mdatu,ddply(mdatu,.(shortname),summarise,v=fu()@fv(unit_price)),all.x=TRUE) , unit_price < v)
+      return(mdatuf)
     }
     stop(paste("Cannot load market prices for year:",year))
   }
