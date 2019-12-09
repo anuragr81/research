@@ -1819,7 +1819,7 @@ The non-stochastic version of the above equations is the following:
 \eta_{t+1}=n\eta_{t}\nonumber \\
 A_{t+1}=A_{t}+(i_{t}-c_{t})\nonumber \\
 i_{t+1}=ki_{t}\nonumber \\
-c_{t}=(1+\nu)\eta_{t}p(A_{t-1},\rho)\label{eq:nonstoch}
+c_{t}=\nu\eta_{t}p(A_{t-1},\rho)\label{eq:nonstoch}
 \end{gather}
 
 \end_inset
@@ -1878,7 +1878,11 @@ Notice that the rate of growth of income is assumed to grow at an exponential
 \end_inset
 
 .
- 
+ The consumer choose 
+\begin_inset Formula $\nu\ge1$
+\end_inset
+
+ to consume the quality she desires.
 \end_layout
 
 \begin_layout Standard
@@ -2056,18 +2060,27 @@ To specify the form of
 \begin_inset Formula $W$
 \end_inset
 
- is low (thereby indicating that the starting value of 
+ is low (thereby also imposing the constraint that the starting value of
+ 
 \begin_inset Formula $A_{t}$
 \end_inset
 
- matter more than anything else).
+ may matter more towards else gaining 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ than 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+).
  Assuming that all assets have a cost of maintenance proportional to the
  cost of the assets, the asset with cost 
-\begin_inset Formula $A_{t-1}$
+\begin_inset Formula $A_{t}$
 \end_inset
 
  would bear a cost 
-\begin_inset Formula $aA_{t-1}^{\alpha}$
+\begin_inset Formula $aA_{t}^{\alpha}$
 \end_inset
 
 .
@@ -2164,16 +2177,24 @@ reference "eq:nonstoch"
 \begin_inset Formula $\rho$
 \end_inset
 
- for the moment, we can reformulate the non-stochastic problem as follows:
+ for the moment and consider the factor 
+\begin_inset Formula $\nu$
+\end_inset
+
+ as a proportion of income 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+, we can reformulate the non-stochastic problem as follows:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
 \eta_{t+1}=\eta(t,T)\nonumber \\
-A_{t+1}=A_{t}+(i_{t}-c_{t})=A_{t}(1-aA_{t}^{\alpha-1}(1+\nu)\eta_{t})+i_{t}\nonumber \\
+A_{t+1}=A_{t}+(i_{t+1}-c_{t+1})\nonumber \\
 i_{t+1}=ki_{t}\nonumber \\
-c_{t}=aA_{t}^{\alpha}(1+\nu)\eta_{t}\label{eq:nonstochll}
+c_{t+1}=\nu aA_{t}^{\alpha}i_{t}\eta_{t}\label{eq:nonstochll}
 \end{gather}
 
 \end_inset
@@ -2184,10 +2205,136 @@ c_{t}=aA_{t}^{\alpha}(1+\nu)\eta_{t}\label{eq:nonstochll}
 \begin_layout Standard
 The consumer thus needs to solve the dynamic optimisation problem of maximising
  
-\begin_inset Formula $\sum_{i=1}^{T}(\alpha log(\eta_{i})+\beta\cdot log(A_{i})+(1-\alpha-\beta)\cdot log(aA_{t-1}^{\alpha}(1+\nu)\eta_{t}))$
+\begin_inset Formula $\sum_{i=1}^{T}u(c_{i},A_{i},\eta_{i})$
 \end_inset
 
 .
+ We impose the constraint 
+\begin_inset Formula $i_{t}\ge c_{t}$
+\end_inset
+
+ to ensure that the consumer does not exercise the choice to sell assets
+ 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ in order to consume.
+ The constraint 
+\begin_inset Formula $i_{t}\ge c_{t}$
+\end_inset
+
+ along with the condition 
+\begin_inset Formula $\nu\ge0$
+\end_inset
+
+ implies that 
+\begin_inset Formula $1\le\nu\le\frac{1}{aA_{t}^{\alpha}\eta_{t}}$
+\end_inset
+
+.
+ Since we view 
+\begin_inset Formula $\nu$
+\end_inset
+
+ as the quality choice throughout the 
+\begin_inset Formula $T$
+\end_inset
+
+ periods, the constraint implies that 
+\begin_inset Formula $a,\alpha$
+\end_inset
+
+ must be chosen so that 
+\begin_inset Formula $aA_{t}^{\alpha}\eta_{t}\le1$
+\end_inset
+
+ for 
+\begin_inset Formula $1\le t\le T$
+\end_inset
+
+.
+ The total wealth 
+\begin_inset Formula $W$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The value of 
+\begin_inset Formula $c_{t+1}$
+\end_inset
+
+ represents the consumption in the year 
+\begin_inset Formula $t+1$
+\end_inset
+
+ therefore the consumption in the first year (
+\begin_inset Formula $c_{1}$
+\end_inset
+
+) is part of the initial condition just the way 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ is i.e.
+ the consumer does not choose the consumer in the first year.
+ Consider the last period 
+\begin_inset Formula $T$
+\end_inset
+
+ - for which the consumption is 
+\begin_inset Formula $c_{T}$
+\end_inset
+
+ and assets ownership are 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+.
+ Given 
+\begin_inset Formula $A_{T-1},c_{T-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{T-1}$
+\end_inset
+
+, the consumer must have chosen 
+\begin_inset Formula $\nu$
+\end_inset
+
+ so that the value 
+\begin_inset Formula $\alpha log(A_{T})+\beta log(c_{T})+(1-\alpha-\beta)log(\eta_{T})$
+\end_inset
+
+ is maximised.
+ Since the consumer does not exercise any choice of 
+\begin_inset Formula $\eta_{T}$
+\end_inset
+
+, we can focus on 
+\begin_inset Formula $\beta log(c_{T})=\beta log(\nu aA_{T-1}^{\alpha}i_{T-1}\eta_{T-1})$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha log(A_{T})=\alpha log(A_{T-1}+i_{T-1}(k-\nu aA_{T-1}^{\alpha}\eta_{T-1}))$
+\end_inset
+
+.
+ A 
+\begin_inset Formula $\nu$
+\end_inset
+
+ that maximises 
+\begin_inset Formula $U_{T}=\beta log(\nu aA_{T-1}^{\alpha}i_{T-1}\eta_{T-1})+\alpha log(A_{T-1}+i_{T-1}(k-\nu aA_{T-1}^{\alpha}\eta_{T-1}))$
+\end_inset
+
+ would satisfy the first-order condition 
+\begin_inset Formula $\frac{\partial U}{\partial\nu}=0$
+\end_inset
+
+ .
  
 \end_layout
 
@@ -2235,49 +2382,24 @@ reference "eq:optim"
 
 \begin_layout Standard
 3.
- We need to impose the constraint in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstochll"
-
-\end_inset
-
- above that the consumption cannot be higher than income 
-\begin_inset Formula $i_{t}$
-\end_inset
-
-.
- If 
+ We need to reformulate 
 \begin_inset Formula $c_{t}$
 \end_inset
 
- is kept independent of 
-\begin_inset Formula $i_{t}$
-\end_inset
-
-, then 
-\begin_inset Formula $i_{t}>c_{t}\Rightarrow i_{t}>aA_{t}^{\alpha}(1+\nu)\eta_{t}$
-\end_inset
-
-.
- Instead of using a constrained optimisation - it may be more natural to
- have a 
+ 
 \begin_inset Formula $c_{t}$
 \end_inset
 
- that 
-\begin_inset Quotes eld
+ is determined by 
+\begin_inset Formula $A_{t-1}$
 \end_inset
 
-automatically
-\begin_inset Quotes erd
+ (not 
+\begin_inset Formula $A_{t}$
 \end_inset
 
- tapers before reaching 
-\begin_inset Formula $i_{t}$
-\end_inset
-
-.
+).
+ This should then be used to compute the dynamic programming solution.
 \end_layout
 
 \begin_layout Standard
