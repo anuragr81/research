@@ -2194,7 +2194,7 @@ reference "eq:nonstoch"
 \eta_{t+1}=\eta(t,T)\nonumber \\
 A_{t+1}=A_{t}+(i_{t+1}-c_{t+1})\nonumber \\
 i_{t+1}=ki_{t}\nonumber \\
-c_{t+1}=\nu aA_{t}^{\alpha}i_{t}\eta_{t}\label{eq:nonstochll}
+c_{t+1}=\nu mA_{t}^{a}i_{t}\eta_{t}\label{eq:nonstochll}
 \end{gather}
 
 \end_inset
@@ -2228,7 +2228,7 @@ The consumer thus needs to solve the dynamic optimisation problem of maximising
 \end_inset
 
  implies that 
-\begin_inset Formula $1\le\nu\le\frac{1}{aA_{t}^{\alpha}\eta_{t}}$
+\begin_inset Formula $1\le\nu\le\frac{1}{mA_{t}^{a}\eta_{t}}$
 \end_inset
 
 .
@@ -2241,11 +2241,11 @@ The consumer thus needs to solve the dynamic optimisation problem of maximising
 \end_inset
 
  periods, the constraint implies that 
-\begin_inset Formula $a,\alpha$
+\begin_inset Formula $m,a$
 \end_inset
 
  must be chosen so that 
-\begin_inset Formula $aA_{t}^{\alpha}\eta_{t}\le1$
+\begin_inset Formula $mA_{t}^{a}\eta_{t}\le1$
 \end_inset
 
  for 
@@ -2314,11 +2314,11 @@ The value of
 \end_inset
 
 , we can focus on 
-\begin_inset Formula $\beta log(c_{T})=\beta log(\nu aA_{T-1}^{\alpha}i_{T-1}\eta_{T-1})$
+\begin_inset Formula $\beta log(c_{T})=\beta log(\nu mA_{T-1}^{a}i_{T-1}\eta_{T-1})$
 \end_inset
 
  and 
-\begin_inset Formula $\alpha log(A_{T})=\alpha log(A_{T-1}+i_{T-1}(k-\nu aA_{T-1}^{\alpha}\eta_{T-1}))$
+\begin_inset Formula $\alpha log(A_{T})=\alpha log(A_{T-1}+i_{T-1}(k-\nu mA_{T-1}^{a}\eta_{T-1}))$
 \end_inset
 
 .
@@ -2327,14 +2327,72 @@ The value of
 \end_inset
 
  that maximises 
-\begin_inset Formula $U_{T}=\beta log(\nu aA_{T-1}^{\alpha}i_{T-1}\eta_{T-1})+\alpha log(A_{T-1}+i_{T-1}(k-\nu aA_{T-1}^{\alpha}\eta_{T-1}))$
+\begin_inset Formula $U_{T}=\beta log(\nu mA_{T-1}^{a}i_{T-1}\eta_{T-1})+\alpha log(A_{T-1}+i_{T-1}(k-\nu mA_{T-1}^{a}\eta_{T-1}))$
 \end_inset
 
  would satisfy the first-order condition 
-\begin_inset Formula $\frac{\partial U}{\partial\nu}=0$
+\begin_inset Formula $\frac{\partial U_{T}}{\partial\nu}=0$
 \end_inset
 
  .
+ Notice that 
+\begin_inset Formula $\frac{\partial U_{T}}{\partial\nu}=\frac{\beta}{\nu}+\alpha\frac{-i_{T-1}mA_{T-1}^{a}\eta_{T-1}}{A_{T-1}+i_{T-1}(k-\nu mA_{T-1}^{a}\eta_{T-1})}=0\Rightarrow\frac{\beta}{\nu}=\frac{\alpha i_{T-1}mA_{T-1}^{a}\eta_{T-1}}{A_{T-1}+(i_{T-1}k-\nu mA_{T-1}^{a}i_{T-1}\eta_{T-1})}$
+\end_inset
+
+.
+ Collecting terms, the optimal solution would be 
+\begin_inset Formula $\nu=\frac{A_{T-1}+i_{T-1}k}{i_{T-1}A_{T-1}^{a}\eta_{T-1}(\alpha/\beta+1)m}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The problem is more difficult if we assume that 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is the same for all periods - but can be solved numerically.
+ To estimate, notice that we observe 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $i_{t\in[1,T]}$
+\end_inset
+
+, 
+\begin_inset Formula $\eta_{t},c_{t}$
+\end_inset
+
+ and assume 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Matching 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ with the optimal 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ can help us with estimating 
+\begin_inset Formula $\frac{\alpha}{\beta}$
+\end_inset
+
+, 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $a$
+\end_inset
+
+.
+ When optimising over the whole period, we may want to think about the total
+ wealth constraint.
  
 \end_layout
 
@@ -2399,7 +2457,31 @@ reference "eq:optim"
 \end_inset
 
 ).
- This should then be used to compute the dynamic programming solution.
+ This should then be used to compute the dynamic programming solution
+\end_layout
+
+\begin_layout Standard
+4.
+ What would 
+\begin_inset Formula $m$
+\end_inset
+
+, 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\alpha}{\beta}$
+\end_inset
+
+ tell us? We are not interested in elasticities any more.
+ Can we answer to what extent is quality segregated based assets? How can
+ this be improved with stochastic dynamic programming?
+\end_layout
+
+\begin_layout Standard
+5.
+ Read simulation matching paper.
 \end_layout
 
 \begin_layout Standard
