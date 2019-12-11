@@ -10,7 +10,7 @@ if (isClass("LSMSLoader")){
 
 ## all exported functions are declared here
 setClass("LSMSLoader", representation(combined_data_set="function",load_diary_file="function",
-                                      analyse_cj="function",load_ohs_file="function",
+                                      analyse_cj="function",load_ohs_file="function",load_income_file="function",
                                       match_recorded_prices="function",get_inferred_prices="function",load_market_prices="function",
                                       aggregate_local_prices="function",add_localmedian_price_columns="function",
                                       food_expenditure_data="function",read_assets_file="function",
@@ -2774,6 +2774,7 @@ lsms_loader<-function(fu,ln,lgc) {
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
              read_assets_file=read_assets_file, group_expenditure=group_expenditure,group_collect=group_collect,
              get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership,split_households=split_households,asset_differences=asset_differences,
-             get_regressed_market_prices=get_regressed_market_prices, add_market_price_to_fooddiary=add_market_price_to_fooddiary))
+             get_regressed_market_prices=get_regressed_market_prices, add_market_price_to_fooddiary=add_market_price_to_fooddiary,
+             load_income_file=load_income_file))
   
 }

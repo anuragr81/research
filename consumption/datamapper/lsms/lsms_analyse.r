@@ -7,6 +7,57 @@ source('lsms/lsms_group_collect.r'); source('lsms/lsms_datastorage.R')
 #datt <- subset(dat,is.element(shortname,subset(ddply(dat,.(shortname),summarise,n=length(price)),!is.na(shortname) & n>20)$shortname)) %>% mutate(shortname = as.character(shortname))
 #par(mar=c(5,7,1,1)); boxplot(price~shortname,data=datt,horizontal=TRUE,las=2)
 
+parents_educ_rank <- function(x){
+  #1 NO SCHOOL
+  #2 SOME PRIMARY
+  #3 COMPLETED PRIMARY
+  #4 SOME SECONDARY
+  #5 COMPLETED SECONDARY
+  #6 MORE THAN SECONDARY
+  #7 DON'T KNOW
+  #  converted to 
+  #  le_primary - 1, le_secondary - 2, gt_secondary -3, rest - NA
+  if (is.na(x)){
+    return(NA)
+  }
+  if (x >=1 && x <=3) {
+    return (1)
+  } else {
+    if (x>=4 && x<=5 ){
+      return (2)
+    } else if(x==6){
+      return(3)
+    }
+  }
+  return(NA)
+
+}
+income_process <-function(){
+  i2010            <- ll@load_income_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer)
+  i2010            <- ddply(i2010, .(hhid), summarise, totinc = sum(yearly_pay))
+  o2010            <- subset(ll@load_ohs_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer),personid==1)
+  o2010$age        <- 2010 - o2010$YOB
+  i2010            <- subset(i2010,!is.na(totinc))
+  i2010            <- merge(i2010,o2010,by=c("hhid"),all.x=TRUE )
+  print(paste("Ignoring ",dim(subset(i2010,is.na(region)))[1],"entries (",100*dim(subset(i2010,is.na(region)))[1]/dim(i2010)[1],"%) from the income data due to missing OHS info."))
+  i2010            <- subset(i2010,!is.na(region))
+  i2010$agegroup   <- as.integer(i2010$age<20)*1 + as.integer(i2010$age>=20 & i2010$age<40)*2 + as.integer(i2010$age>=40 & i2010$age<60)*3+ as.integer(i2010$age>=60 & i2010$age<80)*4 + as.integer(i2010$age>=80)*5
+  i2010$lntotinc  <- with(i2010,log(totinc+1e-7))
+  i2010$fathers_educrank <- sapply(as.integer(i2010$fathers_educ), parents_educ_rank)
+  i2010$mothers_educrank <- sapply(as.integer(i2010$mothers_educ), parents_educ_rank)
+  ag <- (ddply(i2010, .(agegroup), summarise, median_income = median(totinc)))
+  plot(ag$agegroup,ag$median_income,type='l',xlab='age group', ylab='median income', main='Incomes by age group')
+  
+  ar <- ddply(i2010, .(region), summarise, p85_income = quantile(totinc,.85) , n = length(hhid))
+  ar <- subset(ar,n>=5)
+  #ar <- subset(ar,n>=5)
+  #i2010 <- merge(a2010,ar)
+  par(mar=c(5,4,1,1)) ; barplot(ar$p85_income/1e+6,space=2,main="Median Incomes", xlab="region", ylab="85th percentile income (millions)" ,names.arg = ar$region, las = 2)
+  
+  
+  
+  return(i2010)
+}
 
 boxplot_prices <- function(year,thresh){
   mdat <- ll@load_market_prices(year = year, dirprefix = "../",fu = fu, ln = lsms_normalizer,use_pieces = FALSE)
