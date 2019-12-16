@@ -217,7 +217,7 @@ unit_codes_2010  <- function(){
   
   ohs_educ_info_columns_lsms <- function(year){
     if (year == 2010){
-      return(c("hhid","region","district","is_urban", "zone", "highest_educ","is_schooled","school_start_age",
+      return(c("hhid","personid", "highest_educ","is_schooled","school_start_age",
                "qualification","is_inschool","reason_not_inschool","school_body","school_conveyance","school_distance",
                "educ_costa","educ_costb","educ_costc","educ_costd","educ_coste","educ_costf","educ_costg","educ_costh","educ_cost"))
     }
@@ -230,6 +230,7 @@ unit_codes_2010  <- function(){
     if (year == 2010){
       s = data.frame(iesname=NULL,name=NULL)
       s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="indiv",name="personid"))
       s= rbind(s,data.frame(iesname="s2q4",name="is_schooled"))
       s= rbind(s,data.frame(iesname="s2q5",name="reason_not_schooled"))
       s= rbind(s,data.frame(iesname="s2q6",name="school_start_age"))
@@ -256,7 +257,7 @@ unit_codes_2010  <- function(){
   
   ohs_income_info_columns_lsms <- function(year){
     if (year == 2010){
-      return(c('hhid', 'region', 'district', 'is_urban', 'ea', 'personid', 'is_gt_5y', 'worked_ext_pastweek', 
+      return(c('hhid', 'personid', 'is_gt_5y', 'worked_ext_pastweek', 
                'worked_hh_pastweek1', 'worked_hh_pastweek2', 'worked_pastweek', 'occupation_primary', 'occupation_sector_primary', 
                'employer_type_primary', 'hours_worked_week_primary', 'is_paid_primary', 'reason_unpaid_primary', 'last_payment_primary', 
                'last_payment_primary_units', 'has_secondary', 'occupation_secondary', 'occupation_sector_secondary', 

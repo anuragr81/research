@@ -160,37 +160,48 @@ ngr_loader<-function(fu,ngrn,lgc) {
       
       print (paste("Households with extreme data (many times the median) - purged from the diary file:",length(extremeDataHhids)))
       diary              <- dplyr::filter(diary,!is.element(hhid,extremeDataHhids))
-      
+      return(diary)  
     } # end 2010
     
     stop (paste("Cannot process data for year:",year))
-    return(diary)
+    
   }
   
   load_ohs_file <-function(year,dirprefix,fu,ngrn){
     #
     if (year ==2010){
       sec1fname  <-paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect1_plantingw1.dta',sep="")
-      sec1dat    <- read_dta(sec1fname)
+      sec1dat    <- read.dta(sec1fname,convert.factors = FALSE)
       sec1dat    <- fu()@get_translated_frame(dat=sec1dat,
                                               names=ngrn()@ohs_info_columns_lsms(year),
                                               m=ngrn()@ohs_mapping_lsms(year))
       sec2fname    <- paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect2_plantingw1.dta',sep="")
-      sec2dat    <- read_dta(sec2fname)
+      sec2dat    <- read.dta(sec2fname,convert.factors = FALSE)
       sec2dat    <- fu()@get_translated_frame(dat=sec2dat,
                                               names=ngrn()@ohs_educ_info_columns_lsms(year),
                                               m=ngrn()@ohs_educ_columns_mapping_lsms(year))
       
       sec3fname    <- paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect3_plantingw1.dta',sep="")
-      sec3dat    <- read_dta(sec3fname)
+      sec3dat    <- read.dta(sec3fname,convert.factors = FALSE)
       sec3dat    <- fu()@get_translated_frame(dat=sec3dat,
                                               names=ngrn()@ohs_income_info_columns_lsms(year),
                                               m=ngrn()@ohs_income_columns_mapping_lsms(year))
       
-      ohs <- merge(sec1dat,sec2dat,by=c("hhid"))
+      print("Mergign OHS data from files")
+      ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
+      ohs <- merge(ohs,sec3dat,by=c("hhid","personid"), all.x=TRUE)
       
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
-      return(sec3dat)
+      ohs$age          <- 2010 - as.integer(as.character(ohs$YOB))
+      print("Testing Data Integrity after merge")
+      if (dim(subset(ddply(ohs[,c("hhid","personid","educ_cost")],.(hhid,personid),summarise,n=length(educ_cost)),n>1))[1]>0){
+        stop("Multiple entries for a person found")
+      }
+      
+      #household_status must be determined by 1. rank based on occupation_rank 2. occupation_primary 3. highest_educ 4. qualification 5. age (pay is not available for the most)
+      #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
+      
+      return(ohs)
     }
     stop(paste("Year:",year,"not supported"))
   }
