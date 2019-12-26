@@ -2924,7 +2924,7 @@ Food, energy, shelter (household), transport are common needs in an economy.
 \end_inset
 
  is the same for all categories and the total consumption can be written
- as 
+ as :
 \end_layout
 
 \begin_layout Standard
@@ -2935,8 +2935,7 @@ c_{t}=\sum_{k=1}^{N}c_{k,t}=(\eta_{t-1}A_{t-1}^{\alpha}m)\sum_{k=1}^{N}\nu_{k}\l
 
 \end_inset
 
-.
- 
+
 \end_layout
 
 \begin_layout Standard
@@ -2958,7 +2957,6 @@ Econometrically, thus all we need is a standard way to represent needs and
  the quality.
  The former is relatively easy to standardise and quality is simply the
  proportion of expensive items for.
- 
 \end_layout
 
 \begin_layout Standard
@@ -2989,15 +2987,19 @@ reference "eq:quality_sum"
 
  is meant to be a habit for quality that the consumer would maintain in
  a particular - regardless of how much the prices change.
- When prices change the quality doesn't change - what changes is m - the
- same quality becomes less expensive and the consumer would rather save
- instead.
- This interpretation is only possible if we view 
+ When prices change based on personal characteristics the long-term quality
+ habit doesn't change - what changes is 
+\begin_inset Formula $m$
+\end_inset
+
+ - the same quality becomes less or more expensive and the consumer would
+ increasing or decreasing consumption respectively (and contributing to
+ asset growth accordingly).
+ This interpretation relies on 
 \begin_inset Formula $\nu$
 \end_inset
 
- as a long-term habit of the consumer.
- 
+ being the long-term habit of the consumer.
 \end_layout
 
 \begin_layout Standard
@@ -3005,20 +3007,130 @@ reference "eq:quality_sum"
 \bar under
 There are continuous and discrete ways to go about measuring quality.
  For food, some portion may be spent on expensive items (which items qualify
- as expensive would be counted based on their local prices - with some items
- that are not available not being counted).
- Since, no mutton or no fish in the region is not counted, nor should no
- electricity.
- Therefore, we should not be declaring a consumer forgoing electricity (and
- therefore choosing less energy quality) if she is in a no-electiricity
- zone.
- Therefore a consumer can forgo electricity only if her long-term choice
- provides her the choice for electricity.
- The issue is then finding out about the long-term states pertaining to
- every choice - that don't explicitly appear in the econometric equation.
- The choice of using electricity or not is determined more often by supply.
- Less so for food.
- We don't want to mix household consumption.
+ as expensive would be counted based on their local prices) with some items
+ that are not available not being counted.
+ In other words, if a consumer lives in an area where there is no meat or
+ seafood available - the quality is constrained to be low.
+ We haven't modeled the constraint explicitly except through price of quality
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $b(\rho)$
+\end_inset
+
+ (which we have ignored).
+ A constraint means the value of 
+\begin_inset Formula $\nu$
+\end_inset
+
+ cannot be high enough.
+ Explicitly it would mean a 
+\begin_inset Formula $max(\nu,h(\rho))$
+\end_inset
+
+ filter.
+ The quality we have defined is still not well formed.
+ When a consumer buys assets her quality 
+\begin_inset Formula $\nu$
+\end_inset
+
+ should go up - at least that's what we would observe.
+ But we have separate 
+\begin_inset Formula $\nu$
+\end_inset
+
+ away from that.
+ Given needs 
+\begin_inset Formula $\eta$
+\end_inset
+
+, what are 
+\begin_inset Formula $\nu$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ that we can match.
+ 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ is easy to match and in terms of needs and quality it should be defined.
+ What we observe as quality is then not 
+\begin_inset Formula $\nu$
+\end_inset
+
+ but 
+\begin_inset Formula $A_{t-1}^{\alpha}m\nu$
+\end_inset
+
+.
+ When a consumer becomes rich then she demands more quality (even though
+ her long-term true habit remains 
+\begin_inset Formula $\nu$
+\end_inset
+
+ ) and when she is in an area where there is no quality options available
+ then 
+\begin_inset Formula $m$
+\end_inset
+
+ remains low and her true habit - quality propensity being the same - results
+ in less quality.
+ We must remember that observed quality - which is simply the proportion
+ of expensive items is the quantity 
+\begin_inset Formula $\nu\times mA^{\alpha}b(\rho)$
+\end_inset
+
+ and not 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+A consumer in a no-electiricity zone is not forgoing electricity (and therefore
+ choosing less energy quality) - instead even though she maintains a long-term
+ habit for 
+\begin_inset Formula $\nu$
+\end_inset
+
+ it is not expressed due to 
+\begin_inset Formula $m=0$
+\end_inset
+
+ (it is worthwhile to see if 
+\begin_inset Formula $m$
+\end_inset
+
+ should also be a power).
+ When the quality options are limited in the area - the result of 
+\begin_inset Formula $\nu\times m$
+\end_inset
+
+ is low (it may be better to state 
+\begin_inset Formula $\nu^{m}$
+\end_inset
+
+ so that low - this really depends on how data fits).
+ Therefore a consumer can forgo electricity only if she has electricity
+ based on her long-term choice (
+\begin_inset Formula $A$
+\end_inset
+
+) or characteristics (
+\begin_inset Formula $\rho$
+\end_inset
+
+).
+ 
 \end_layout
 
 \begin_layout Standard
