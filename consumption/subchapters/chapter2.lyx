@@ -2088,7 +2088,13 @@ Long-term quality in a non-stochastic setting
 \end_layout
 
 \begin_layout Standard
-We explain a model developed with the non-stochastic Euler equations which
+A key feature of the model is that it deconstructs the consumed quality
+ in what is imposed by the market accessible to the consumer and the long-term
+ choices she has made.
+ Due to the two factors, the choice of quality is constrained.
+ We use a parameter only to see how much the consumer choice is affect in
+ relation to the long-term choices she has made.
+ We explain a model developed with the non-stochastic Euler equations which
  use the parameters we have discussed.
  The non-stochastic model - which we calibrate with the consumption microdata
  - is described with the following equations:
@@ -2238,6 +2244,120 @@ The consumer optimises the non-stochastic sum
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+The long-term habit 
+\begin_inset Formula $\nu$
+\end_inset
+
+ in the model is the only variable that is adjusted by the consumer.
+ This is the only variable related to quality that the consumer can control.
+ Other than this parameter, the consumption depends both on needs and the
+ long-term choices of the consumer (the assets the consumer has accumulated
+ and the personal charactieristics she possesses).
+ To explain how this would work in an empirical settings, let's ignore the
+ effect of assets accumulation and long-term choices for a moment and consider
+ a set of comomdities where the quantities and prices are available to us.
+ Given the consumer baskets 
+\begin_inset Formula $(q_{10}q_{11},q_{12})$
+\end_inset
+
+ and 
+\begin_inset Formula $(q_{20},q_{21},q_{22})$
+\end_inset
+
+ - where 
+\begin_inset Formula $q_{ij}$
+\end_inset
+
+ is quantity consumed of item 
+\begin_inset Formula $j$
+\end_inset
+
+ by the consumer 
+\begin_inset Formula $i$
+\end_inset
+
+, 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ would be chosen such that 
+\begin_inset Formula $\eta\nu_{1}p_{0}=\sum_{k=0}^{2}p_{1}q_{1k}$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta p_{0}\nu_{2}=\sum_{k=0}^{2}p_{2}q_{2k}$
+\end_inset
+
+.
+ In this simple example, values 
+\begin_inset Formula $\nu$
+\end_inset
+
+ represents the distance from the fulfilment of basic needs i.e.
+ the cost 
+\begin_inset Formula $\eta p_{0}$
+\end_inset
+
+.
+ We are not interested in the demand function - merely an distance from
+ fulfilment of basic needs - given the locally available options.
+ To view how this can be expanded to constraints on quality, consider the
+ situation where consumer 1 faces only the prices 
+\begin_inset Formula $p_{0}$
+\end_inset
+
+ i.e.
+ all items other than the item 0 are removed for her basket.
+ Therefore, she can spend only on the basic item 
+\begin_inset Formula $q_{10}$
+\end_inset
+
+ - thus reducing 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ as 
+\begin_inset Formula $\sum_{k=0}^{2}p_{k}q_{1k}=p_{0}q_{0}$
+\end_inset
+
+is likely to less than what it would have been if the consumer basket were
+ intact (notice also that 
+\begin_inset Formula $\nu\ge1$
+\end_inset
+
+ by definition).
+ To obtain the form of the function 
+\begin_inset Formula $p(A_{t-1},\rho)$
+\end_inset
+
+ above, notice that constraint on quality due to 
+\begin_inset Formula $A_{t-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is equivalent to removing items from the basket.
+ If a consumer is in a region where only some of the items of the basket
+ (of a more urban consumer who has access to all items) are available to
+ the consumer.
+ The quality choice she can make is therefore equivalent to removing some
+ items from the urban consumer's basket.
+ Similarly, when the consumer own some assets, her basket effectively expands
+ and is forced to be away from basic needs consumption 
+\begin_inset Formula $\eta p_{0}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2833,6 +2953,13 @@ Measurement of Quality
 \end_layout
 
 \begin_layout Standard
+Econometrically, thus all we need is a standard way to represent needs and
+ the quality.
+ The former is relatively easy to standardise and quality is simply the
+ proportion of expensive items for.
+\end_layout
+
+\begin_layout Standard
 One can ignore the discrete choice for quality when the a mix of items with
  different quality is purchased by the consumer.
  A measure of protein quality can explain the consumer choice easily when
@@ -2939,7 +3066,7 @@ c_{t}=\sum_{k=1}^{N}c_{k,t}=(\eta_{t-1}A_{t-1}^{\alpha}m)\sum_{k=1}^{N}\nu_{k}\l
 \end_layout
 
 \begin_layout Standard
-Every household would respond to the common needs differently by adjusting
+Every household would thus respond to the common needs differently by adjusting
  
 \begin_inset Formula $\{\nu_{k}\}$
 \end_inset
@@ -2949,14 +3076,21 @@ Every household would respond to the common needs differently by adjusting
 \end_inset
 
 .
- 
-\end_layout
+ While it is possible to evaluate the model for the different commodity
+ categories (i.e.
+ using 
+\begin_inset Formula $c_{1},\nu_{1}$
+\end_inset
 
-\begin_layout Standard
-Econometrically, thus all we need is a standard way to represent needs and
- the quality.
- The former is relatively easy to standardise and quality is simply the
- proportion of expensive items for.
+, 
+\begin_inset Formula $c_{2},\nu_{2}$
+\end_inset
+
+ etc.) - but we use the combined 
+\begin_inset Formula $\nu=\sum_{k=1}^{N}\nu_{k}$
+\end_inset
+
+ to see how overall quality may evolve in an intertemporal setting.
 \end_layout
 
 \begin_layout Standard
@@ -3208,7 +3342,7 @@ This is of course - assuming that all products (at whatever cost) can be
 \end_layout
 
 \begin_layout Subsubsection
-The two-way substitution
+Elementary and Composite Commodities
 \end_layout
 
 \begin_layout Standard
