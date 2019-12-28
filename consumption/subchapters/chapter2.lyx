@@ -2515,18 +2515,28 @@ The similar function for
 
 \end_inset
 
-.
- The lack of availability of high quality items in rural or remote areas
- is modeled with an indicator function in this simpler variant of the Equations
- 
+and that the characteristics 
+\begin_inset Formula $\rho$
+\end_inset
+
+ can be viewed as part of assets 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ (in a discrete formulation of the model in Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:nonstoch"
 
 \end_inset
 
-.
- Further, a log-linear form of the utility 
+, the lack of availability of high quality items in rural or remote areas
+ can represented with an indicator function).
+ 
+\end_layout
+
+\begin_layout Standard
+A log-linear form of the utility 
 \begin_inset Formula $u$
 \end_inset
 
@@ -2750,7 +2760,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-Such a solution assumes decomposition - i.e.
+Such a solution assumes the decomposition condition - i.e.
  for the consumer to have arrived at 
 \begin_inset Formula $t$
 \end_inset
@@ -2785,18 +2795,75 @@ Such a solution assumes decomposition - i.e.
 \end_layout
 
 \begin_layout Standard
-Another way to solve non-stochastic intertemporal problems is by drawing
+Another way to solve a non-stochastic intertemporal problem is by drawing
  an equivalence between total wealth with total outlay in the classical
- consumer choice problem.
- As we assume that the assets are accumulated over the period 
-\begin_inset Formula $T$
+ consumer choice problem before using similar econometric methods
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Recall that 
+\begin_inset Formula $w=\beta ln(x)+\gamma ln(p)+\epsilon$
 \end_inset
 
-, the constraint for the consumer can be stated as the total wealth 
+ commonly used in estimation derived effectively from 
+\begin_inset Formula $w_{i}=p_{i}q_{i}/x\Rightarrow log(w_{i})=log(p_{i})+log(g(x,p))-log(x)$
+\end_inset
+
+.
+ Here, with 
+\begin_inset Formula $g(x,p)$
+\end_inset
+
+ as the Marshallian demand function, using the double-logarithmic model
+ (which is a mere restatement of existence of elasticities through total
+ differentiation), we have 
+\begin_inset Formula $log(g(x,p))=\alpha_{i}+\frac{\partial log(g(x,p))}{\partial log(x)}log(x)+\frac{\partial log(g(x,p))}{\partial log(p)}log(p)$
+\end_inset
+
+ and thus 
+\begin_inset Formula $log(w_{i})=\alpha_{i}+(\frac{\partial log(g(x,p))}{\partial log(x)}-1)log(x)+(\frac{\partial log(g(x,p))}{\partial log(p_{i})}+1)log(p_{i})+\sum_{j\ne i}\frac{\partial log(g(x,p))}{\partial log(p_{j})}log(p_{j})$
+\end_inset
+
+.
+ The adding up restriction is more difficult to impose on this form rather
+ than the slightly modified : 
+\begin_inset Formula $w_{i}=\alpha_{i}+\beta_{i}log(x)+\gamma_{i}log(p_{i})$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonEconConsumer"
+
+\end_inset
+
+.
+ An estimation of demand elasticities of consumption can be performed using
+ parallel - arguments using the total wealth constraint 
+\begin_inset Formula $W$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ In such a formulation, the constraint for the consumer can be stated as
+ the total wealth 
 \begin_inset Formula $W=\delta_{i}(A_{T}+\sum c_{i})$
 \end_inset
 
- where the discount factors can be chosen as
+ where 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+ are the assets accumulated over the period 
+\begin_inset Formula $T$
+\end_inset
+
+ and the discount factors can be chosen as
 \begin_inset Formula $\delta_{i}=\frac{1}{1+i}$
 \end_inset
 
@@ -2857,61 +2924,13 @@ Another way to solve non-stochastic intertemporal problems is by drawing
 \begin_inset Formula $\rho$
 \end_inset
 
- and ii) and the scale 
+ and ii) and the control 
 \begin_inset Formula $\nu$
 \end_inset
 
  which is chosen by the consumer based on the quality of consumption she
- desires
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Notice that 
-\begin_inset Formula $w=\beta ln(x)+\gamma ln(p)+\epsilon$
-\end_inset
-
- commonly used in estimation derived effectively from 
-\begin_inset Formula $w_{i}=p_{i}q_{i}/x\Rightarrow log(w_{i})=log(p_{i})+log(g(x,p))-log(x)$
-\end_inset
-
-.
- Here, with 
-\begin_inset Formula $g(x,p)$
-\end_inset
-
- as the Marshallian demand function, using the double-logarithmic model
- (which is a mere restatement of existence of elasticities through total
- differentiation), we have 
-\begin_inset Formula $log(g(x,p))=\alpha_{i}+\frac{\partial log(g(x,p))}{\partial log(x)}log(x)+\frac{\partial log(g(x,p))}{\partial log(p)}log(p)$
-\end_inset
-
- and thus 
-\begin_inset Formula $log(w_{i})=\alpha_{i}+(\frac{\partial log(g(x,p))}{\partial log(x)}-1)log(x)+(\frac{\partial log(g(x,p))}{\partial log(p_{i})}+1)log(p_{i})+\sum_{j\ne i}\frac{\partial log(g(x,p))}{\partial log(p_{j})}log(p_{j})$
-\end_inset
-
-.
- The adding up restriction is more difficult to impose on this form rather
- than the slightly modified form : 
-\begin_inset Formula $w_{i}=\alpha_{i}+\beta_{i}log(x)+\gamma_{i}log(p_{i})$
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonEconConsumer"
-
-\end_inset
-
-.
- An estimation using total wealth constraint can be performed using parallel
- - arguments.
-\end_layout
-
-\end_inset
-
-.
- In this chapter, we have focus on a simulation assisted approach to demonstrate
+ desires.
+ In this chapter, we focus on a simulation assisted approach to demonstrate
  what illustrations can be drawn from the model in Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
