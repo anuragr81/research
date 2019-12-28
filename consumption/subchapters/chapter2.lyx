@@ -2084,6 +2084,12 @@ The variance specification is also necessary for the permanent income approaches
 \end_layout
 
 \begin_layout Subsubsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:nonstochproblem"
+
+\end_inset
+
 Long-term quality in a non-stochastic setting
 \end_layout
 
@@ -2960,10 +2966,11 @@ To estimate the above model notice that we observe
 
  as well as the overall quality i.e.
  
-\begin_inset Formula $\nu i_{t}\eta mA^{\alpha-1}$
+\begin_inset Formula $\frac{c_{t}}{\eta_{t}}=\nu i_{t}mA^{\alpha-1}$
 \end_inset
 
- (see the details in Section 
+ which we estimate using cost of a basket of basic needs (see the details
+ in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:EmpiricalIssues"
@@ -2971,7 +2978,10 @@ reference "subsec:EmpiricalIssues"
 \end_inset
 
 ).
- The goal of the econometric method would be to estimate 
+ We estimate the exogenous income process with region, background and other
+ household characteristics - so a consumer is expected to know her income
+ trajectory through these parameters.
+ The goal of the econometric method is to estimate 
 \begin_inset Formula $\frac{\alpha}{\beta}$
 \end_inset
 
@@ -2984,14 +2994,11 @@ reference "subsec:EmpiricalIssues"
 \end_inset
 
 .
- We associate the exogenous income process with region, background and other
- household characteristics - so a consumer is expected to know her income
- trajectory through these parameters.
  
 \end_layout
 
 \begin_layout Standard
-The obvious limitation of the the non-stochastic approach is the independence
+The obvious limitation of the non-stochastic approach is the independence
  of 
 \begin_inset Formula $c_{t}$
 \end_inset
@@ -3104,66 +3111,50 @@ Empirical measurement of quality and needs
 \end_layout
 
 \begin_layout Subsubsection
-Measurement of Quality
+Measurement of Quality and Needs
 \end_layout
 
 \begin_layout Standard
-Econometrically, thus all we need is a standard way to represent needs and
- the quality.
- The former is relatively easy to standardise and quality is simply the
- proportion of expensive items for.
-\end_layout
+As hinted in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:nonstochproblem"
 
-\begin_layout Standard
-One can ignore the discrete choice for quality when the a mix of items with
- different quality is purchased by the consumer.
- A measure of protein quality can explain the consumer choice easily when
- every consumer can purchase some mix of eggs, chicken and beef.
- On the other hand, if the prices for beef rises by a lot or is in short-supply
- in some regions, then a segregation in quality would result - requiring
- us to either use a selection approach to correct the demand elasticities
- for quality.
- Those affected by high prices or unavailability may improve quality in
- some other area for save for assets.
- In trying to answer whether consumers spend on quality or saving, the segregati
-on of quality due to supply is important.
-\end_layout
+\end_inset
 
-\begin_layout Standard
-In a more general view of segregation of quality, one can include the long-term
- choices that constrain consumer's quality choices.
- As such all consumer's rich or poor, prefer (dislike) improved (decreased)
- quality.
- Assuming that a consumer cannot compromise on her needs, she makes choices
- between performing a quality jump now (or later) and saving for assets.
-\end_layout
+, our notion of quality is dependent on what we consider as needs rather
+ than the characteristics of items using the hedonic approach (see Rosen
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RosenImplicitHedonic1974"
 
-\begin_layout Standard
-Our notion of quality is therefore more dependent on what we consider as
- needs rather than the characteristics of items using the hedonic approach.
- We define needs (in accordance with the theory argued for by Doyal and
- Gough 
+\end_inset
+
+).
+ We define needs as the standard requirements not meeting whom would lead
+ to a definite harm (refer to the theory argued for by Doyal and Gough 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DoyalGoughNeeds1991"
 
 \end_inset
 
-) - as the standard requirements not meeting whom would lead to a definite
- harm.
- A family surviving on just starch needs some protein only because of forseeable
- damage to the health that would incur.
- We must also admit that the consumer may not want her needs- the health
- and autonomy might not be a descriptive theory but it certainly is a nominative
- theory.
- We cannot argue that consumers act according to the need - but we can test
- a claims of whether they do or they don't.
+).
+ To the argument that a family can survive on just starch, the counter-argument
+ would that foreseeable definite damage to the health of the consumer that
+ would be incurred by not having protein.
+ As far as our model is concerned, the theory is more valuable from a normative
+ perspective than the descriptive one, since a consumer may not want her
+ needs i.e.
+ she may forgo protein and compromise on the health (and autonomy) in favour
+ of some other non-essential needs.
+ The goal of our econometric methods is therefore not to argue that consumers
+ act according to a certain set of needs - but only to test whether act
+ according to a set of needs or not.
 \end_layout
 
 \begin_layout Standard
 Food, energy, shelter (household), transport are common needs in an economy.
- We abandon the quality metric of the previous chapter - our arguments are
- solely based upon the common needs.
  We would take the standard food-basket - and see how much the consumers
  deviate from the local price of the standard basket.
  The quantities consumed are viewed for food.
@@ -3179,7 +3170,17 @@ Food, energy, shelter (household), transport are common needs in an economy.
  a basic need if the consumers could eat raw food to survive.
  The total working time and conditions must be considered - a consumer would
  rather eat cooked food than save for asset and eat raw food.
- Chopping wood and growing vegetables go hand in hand.
+ 
+\end_layout
+
+\begin_layout Standard
+Once a standard way to represent needs is established, we can view ...
+ The former is relatively easy to standardise and quality is simply the
+ proportion of expensive items for.
+\end_layout
+
+\begin_layout Standard
+Chopping wood and growing vegetables go hand in hand.
  Time and again we come to the conclusion that quality is tied with the
  long-term choices and moves together.
  Very few would compromise on food quality to buy electricity - the model
@@ -3250,6 +3251,12 @@ Every household would thus respond to the common needs differently by adjusting
 
 \begin_layout Standard
 
+\series bold
+The structure of prices.
+\end_layout
+
+\begin_layout Standard
+
 \bar under
 There are two variables that enrich the model.
  First, is the set of market prices - the lack of which have simplified
@@ -3289,6 +3296,36 @@ reference "eq:quality_sum"
 \end_inset
 
  being the long-term habit of the consumer.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Discrete Quality of Continuous Quality
+\end_layout
+
+\begin_layout Standard
+One can ignore the discrete choice for quality when the a mix of items with
+ different quality is purchased by the consumer.
+ A measure of protein quality can explain the consumer choice easily when
+ every consumer can purchase some mix of eggs, chicken and beef.
+ On the other hand, if the prices for beef rises by a lot or is in short-supply
+ in some regions, then a segregation in quality would result - requiring
+ us to either use a selection approach to correct the demand elasticities
+ for quality.
+ Those affected by high prices or unavailability may improve quality in
+ some other area for save for assets.
+ In trying to answer whether consumers spend on quality or saving, the segregati
+on of quality due to supply is important.
+\end_layout
+
+\begin_layout Standard
+In a more general view of segregation of quality, one can include the long-term
+ choices that constrain consumer's quality choices.
+ As such all consumer's rich or poor, prefer (dislike) improved (decreased)
+ quality.
+ Assuming that a consumer cannot compromise on her needs, she makes choices
+ between performing a quality jump now (or later) and saving for assets.
 \end_layout
 
 \begin_layout Standard
@@ -3379,7 +3416,6 @@ There are continuous and discrete ways to go about measuring quality.
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
@@ -3429,11 +3465,12 @@ Econometrically, this is similar to de-meaning the consumption from a cluster.
 \end_layout
 
 \begin_layout Standard
-There are some caveats before an implementation is suggested.
- First, a common set of needs must be identified before quality can be compared
- across two economies.
- Second, the consumer basket to be compared between the developed and a
- developing country should be standardised.
+
+\series bold
+Global basket
+\series default
+: There is a caveat - the consumer basket to be compared between the developed
+ and a developing country should be standardised.
  While we can identify a fixed number of commodity groups in the consumption
  data in a selected country, we should recognise that the quality variation
  may not exist in the market for a certain commodity group in one country
