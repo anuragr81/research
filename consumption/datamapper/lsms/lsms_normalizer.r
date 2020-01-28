@@ -65,7 +65,9 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           ohs_mapping_lsms_2010="function",
                                           get_lsms_sece1_columns_2010="function",
                                           get_lsms_sece2_columns_2010="function",
+                                          get_lsms_sece_columns_2012="function",
                                           get_lsms_sece_fields_mapping_2010="function",
+                                          get_lsms_sece_fields_mapping_2012="function",
                                           diary_info_columns_lsms_2012="function",
                                           diary_info_columns_lsms_2014="function",
                                           ohs_mapping_lsms_2012="function",
@@ -2714,10 +2716,10 @@ lsms_normalizer<-function() {
   
   get_lsms_sece1_columns_2010<-function(){
     return(c("hhid", "personid", "is_ge5", "mainoccup", "is_wageworker", "employertype", "num_colleagues", 
-             "lastpayment_unit", "lastpayment", "workweekhour","workyearmonths", "workyearmonthweeks",
+             "lastpayment_unit", "lastpayment", "workweekhours","workyearmonths", "workyearmonthweeks",
              "workyearweekhours","has_lastpayment_other", "lastpayment_other_unit", 
              "lastpayment_other", "has_secjob", "employertype_secjob", "num_colleagues_secjob", "has_secjobwages",
-             "workweekhour_secjob","workyearmonths_secjob", "workyearmonthweeks_secjob","workyearweekhours_secjob",
+             "workweekhours_secjob","workyearmonths_secjob", "workyearmonthweeks_secjob","workyearweekhours_secjob",
              "lastpayment_secjobwage_unit", "lastpayment_secjobwage", "has_secjobwages_other", "lastpayment_secjobwage_other_unit",
              "lastpayment_secjobwage_other", "has_selfemployment_week", "has_selfemployment_year", "selfemploymenttype",
              "selfemploymentstockvalue", "selfemploymentincome_unit", "selfemploymentincome","selfemploymentyearmonths",
@@ -2730,6 +2732,18 @@ lsms_normalizer<-function() {
              "selfemploymentyearmonths",
              "selfemploymentyearmonthincome"))
   }
+  
+  
+  get_lsms_sece_columns_2012<-function(){
+      return(c("hhid", "personid", "is_ge5", "mainoccup", "secoccup","is_wageworker", "employertype", "num_colleagues", 
+               "lastpayment_unit", "lastpayment", "workweekhours","workyearmonths", "workyearmonthweeks",
+               "workyearweekhours","has_lastpayment_other", "lastpayment_other_unit", "employmenttype","employmenttype_sec",
+               "lastpayment_other", "has_secjob", "employertype_secjob", "num_colleagues_secjob", "has_secjobwages",
+               "workweekhours_secjob","workyearmonths_secjob", "workyearmonthweeks_secjob","workyearweekhours_secjob",
+               "lastpayment_secjobwage_unit", "lastpayment_secjobwage", "has_secjobwages_other", "lastpayment_secjobwage_other_unit",
+               "lastpayment_secjobwage_other"))
+  }
+    
   
   get_lsms_sece_fields_mapping_2010<-function(){
     s = data.frame(iesname=NULL,name=NULL)
@@ -2775,7 +2789,58 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_e71",name="selfemploymentyearmonthincome"))
     return(s)
   }
+
+  get_lsms_sece_fields_mapping_2012<-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="y3_hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="indidy3",name="personid"))
+    s= rbind(s,data.frame(iesname="hh_e01",name="is_ge5"))
+    s= rbind(s,data.frame(iesname="hh_e06_1",name="mainoccup"))
+    s= rbind(s,data.frame(iesname="hh_e06_2",name="secoccup"))
+    s= rbind(s,data.frame(iesname="hh_e18",name="is_wageworker"))
+    
+    s= rbind(s,data.frame(iesname="hh_e10_1",name="employmenttype"))
+    s= rbind(s,data.frame(iesname="hh_e10_2",name="employmenttype_sec"))
+    s= rbind(s,data.frame(iesname="hh_e19",name="employertype"))
+    s= rbind(s,data.frame(iesname="hh_e22",name="num_colleagues"))
+    s= rbind(s,data.frame(iesname="hh_e26_2",name="lastpayment_unit"))
+    s= rbind(s,data.frame(iesname="hh_e26_1",name="lastpayment"))
+    
+    s= rbind(s,data.frame(iesname="hh_e27",name="has_lastpayment_other"))
+    s= rbind(s,data.frame(iesname="hh_e28_2",name="lastpayment_other_unit"))
+    s= rbind(s,data.frame(iesname="hh_e28_1",name="lastpayment_other"))
+    
+    s= rbind(s,data.frame(iesname="hh_e32",name="workweekhours"))
+    s= rbind(s,data.frame(iesname="hh_e29",name="workyearmonths"))
+    s= rbind(s,data.frame(iesname="hh_e30",name="workyearmonthweeks"))
+    s= rbind(s,data.frame(iesname="hh_e31",name="workyearweekhours"))
+    s= rbind(s,data.frame(iesname="hh_e33",name="tenure"))
+    s= rbind(s,data.frame(iesname="hh_e34",name="is_contract"))
+    
+    
+    s= rbind(s,data.frame(iesname="hh_e36",name="has_secjob"))
+    s= rbind(s,data.frame(iesname="hh_e37",name="employertype_secjob"))
+    s= rbind(s,data.frame(iesname="hh_e40",name="num_colleagues_secjob"))
+    
+    s= rbind(s,data.frame(iesname="hh_e42",name="has_secjobwages"))
+    s= rbind(s,data.frame(iesname="hh_e44_2",name="lastpayment_secjobwage_unit"))
+    s= rbind(s,data.frame(iesname="hh_e44_1",name="lastpayment_secjobwage"))
+    s= rbind(s,data.frame(iesname="hh_e45",name="has_secjobwages_other"))
+    s= rbind(s,data.frame(iesname="hh_e46_2",name="lastpayment_secjobwage_other_unit"))
+    s= rbind(s,data.frame(iesname="hh_e46_1",name="lastpayment_secjobwage_other"))
+    
+    s= rbind(s,data.frame(iesname="hh_e50",name="workweekhours_secjob"))
+    s= rbind(s,data.frame(iesname="hh_e47",name="workyearmonths_secjob"))
+    s= rbind(s,data.frame(iesname="hh_e48",name="workyearmonthweeks_secjob"))
+    s= rbind(s,data.frame(iesname="hh_e49",name="workyearweekhours_secjob"))
+    
+    s= rbind(s,data.frame(iesname="hh_e51",name="position_secjob"))
+    s= rbind(s,data.frame(iesname="hh_e52",name="has_contract_secjob"))
+    
+    return(s)
+  }
   
+    
   diary_info_columns_lsms_2012<-function(){
     return(c("hhid","item","tlwp_unit","tlwp","lwp_unit", "lwp", "cost", "own_unit", "own", "gift_unit", "gift"))
   }
@@ -2983,6 +3048,7 @@ lsms_normalizer<-function() {
     #* if (pay is per hours) then we use number of hours worked per week and multiply it with number of 
     #* weeks worked per month and further multiply the product with number of months worked per year
     h<-dat[!is.na(dat[,unit_field]),]
+    #if pay is per hour
     h<-h[h[,unit_field]==1 ,]
     total_hour_workers<- dim(h)[1]
     if (total_hour_workers>0){
@@ -2993,7 +3059,7 @@ lsms_normalizer<-function() {
       total_hour_workers_considered<- dim(h)[1]
       print(paste("Number of hour-wage-workers ignored because of incomplete data:",total_hour_workers-total_hour_workers_considered))
       factor_hour = h[,workyearweekhours_field] * h[,workyearmonthweeks_field]* h[,workyearmonths_field] 
-      h[,output_field] <-factor_hour*h[,quantity_field]
+      h[,output_field] <-factor_hour*(h[,quantity_field]/1e+6)*1e+6
     } else {
       h<-NULL
     }
@@ -3218,6 +3284,10 @@ lsms_normalizer<-function() {
     ),
     stringsAsFactors=FALSE
     )
+    
+    if (!is.element( "selfemploymentincome", colnames(i1) ) ){
+     return(ydata) 
+    } else {
     #rbind for the yearly-pay data-frame
     selfemployment_offset<-1000
     if (max(ydata$employertype)>=selfemployment_offset){
@@ -3263,7 +3333,7 @@ lsms_normalizer<-function() {
     return(ydata)
     
     #* ))
-    
+    }
   }
   
   return(new("LSMSNormalizer",diary_info_columns_lsms_2008=diary_info_columns_lsms_2008,
@@ -3325,8 +3395,10 @@ lsms_normalizer<-function() {
              hh_mapping_lsms_2010=hh_mapping_lsms_2010, 
              ohs_mapping_lsms_2010=ohs_mapping_lsms_2010, 
              get_lsms_sece1_columns_2010=get_lsms_sece1_columns_2010, 
-             get_lsms_sece2_columns_2010=get_lsms_sece2_columns_2010, 
+             get_lsms_sece2_columns_2010=get_lsms_sece2_columns_2010,
+             get_lsms_sece_columns_2012=get_lsms_sece_columns_2012,
              get_lsms_sece_fields_mapping_2010=get_lsms_sece_fields_mapping_2010,
+             get_lsms_sece_fields_mapping_2012=get_lsms_sece_fields_mapping_2012,
              diary_info_columns_lsms_2012=diary_info_columns_lsms_2012,
              diary_info_columns_lsms_2014=diary_info_columns_lsms_2014,
              hh_mapping_lsms_2012=hh_mapping_lsms_2012, 

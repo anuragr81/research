@@ -32,31 +32,29 @@ parents_educ_rank <- function(x){
   return(NA)
 
 }
-income_process <-function(){
-  i2010            <- ll@load_income_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer)
-  i2010            <- ddply(i2010, .(hhid), summarise, totinc = sum(yearly_pay))
-  o2010            <- subset(ll@load_ohs_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer),personid==1)
-  o2010$age        <- 2010 - o2010$YOB
-  i2010            <- subset(i2010,!is.na(totinc))
-  i2010            <- merge(i2010,o2010,by=c("hhid"),all.x=TRUE )
-  print(paste("Ignoring ",dim(subset(i2010,is.na(region)))[1],"entries (",100*dim(subset(i2010,is.na(region)))[1]/dim(i2010)[1],"%) from the income data due to missing OHS info."))
-  i2010            <- subset(i2010,!is.na(region))
-  i2010$agegroup   <- as.integer(i2010$age<20)*1 + as.integer(i2010$age>=20 & i2010$age<40)*2 + as.integer(i2010$age>=40 & i2010$age<60)*3+ as.integer(i2010$age>=60 & i2010$age<80)*4 + as.integer(i2010$age>=80)*5
-  i2010$lntotinc  <- with(i2010,log(totinc+1e-7))
-  i2010$fathers_educrank <- sapply(as.integer(i2010$fathers_educ), parents_educ_rank)
-  i2010$mothers_educrank <- sapply(as.integer(i2010$mothers_educ), parents_educ_rank)
-  ag <- (ddply(i2010, .(agegroup), summarise, median_income = median(totinc)))
-  plot(ag$agegroup,ag$median_income,type='l',xlab='age group', ylab='median income', main='Incomes by age group')
+income_process <-function(yr){
+  idat            <- ll@load_income_file(year = yr, dirprefix = "../",fu = fu, ln = lsms_normalizer)
+  idat            <- ddply(idat, .(hhid), summarise, totinc = sum(yearly_pay))
+  odat            <- subset(ll@load_ohs_file(year = yr, dirprefix = "../",fu = fu, ln = lsms_normalizer),personid==1)
+  odat$age        <- yr - odat$YOB
+  idat            <- subset(idat,!is.na(totinc))
+  idat            <- merge(idat,odat,by=c("hhid"),all.x=TRUE )
+  print(paste("Ignoring ",dim(subset(idat,is.na(region)))[1],"entries (",100*dim(subset(idat,is.na(region)))[1]/dim(idat)[1],"%) from the income data due to missing OHS info."))
+  idat            <- subset(idat,!is.na(region))
+  idat$agegroup   <- as.integer(idat$age<20)*1 + as.integer(idat$age>=20 & idat$age<40)*2 + as.integer(idat$age>=40 & idat$age<60)*3+ as.integer(idat$age>=60 & idat$age<80)*4 + as.integer(idat$age>=80)*5
+  idat$lntotinc  <- with(idat,log(totinc+1e-7))
+  idat$fathers_educrank <- sapply(as.integer(idat$fathers_educ), parents_educ_rank)
+  idat$mothers_educrank <- sapply(as.integer(idat$mothers_educ), parents_educ_rank)
+  ag <- (ddply(idat, .(agegroup), summarise, median_income = median(totinc)))
+  #plot(ag$agegroup,ag$median_income,type='l',xlab='age group', ylab='median income', main='Incomes by age group')
   
-  ar <- ddply(i2010, .(region), summarise, p85_income = quantile(totinc,.85) , n = length(hhid))
-  ar <- subset(ar,n>=5)
+  #ar <- ddply(idat, .(region), summarise, p85_income = quantile(totinc,.85) , n = length(hhid))
   #ar <- subset(ar,n>=5)
-  #i2010 <- merge(a2010,ar)
-  par(mar=c(5,4,1,1)) ; barplot(ar$p85_income/1e+6,space=2,main="Median Incomes", xlab="region", ylab="85th percentile income (millions)" ,names.arg = ar$region, las = 2)
+  #par(mar=c(5,4,1,1)) ; barplot(ar$p85_income/1e+6,space=2,main="Median Incomes", xlab="region", ylab="85th percentile income (millions)" ,names.arg = ar$region, las = 2)
   
   
   
-  return(i2010)
+  return(idat)
 }
 
 boxplot_prices <- function(year,thresh){

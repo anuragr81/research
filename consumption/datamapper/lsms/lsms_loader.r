@@ -1427,7 +1427,13 @@ lsms_loader<-function(fu,ln,lgc) {
       return(ti)
     } 
     if (year == 2012){
-      return(NULL)
+      idat <-read_tnz(paste(dirprefix,'./lsms/./tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_E.dta',sep=""),FALSE,hhidColName = "y3_hhid")
+      
+      i1 <- fu()@get_translated_frame(dat=idat,
+                                      names=ln()@get_lsms_sece_columns_2012(),
+                                      m=ln()@get_lsms_sece_fields_mapping_2012())
+      ti <- ln()@infer_lsms_sece_total_income(i1,NULL);
+      return(ti)
     }
     stop(paste("Year ",year," not supported"))
   }
