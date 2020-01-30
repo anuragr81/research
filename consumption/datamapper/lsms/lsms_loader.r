@@ -1419,7 +1419,7 @@ lsms_loader<-function(fu,ln,lgc) {
       i2$hhid<as.character(i2$hhid)
       #TODO: add the conversion into get_translated_frame functionality
       
-      ti <- ln()@infer_lsms_sece_total_income(i1,i2);
+      ti <- ln()@infer_lsms_sece_total_income(i1,ignore_second_job=TRUE,ignore_self_employment_income=TRUE);
       #* inferred section e data
       #* ))
       # idat2 has only got self-employment details
@@ -1432,7 +1432,18 @@ lsms_loader<-function(fu,ln,lgc) {
       i1 <- fu()@get_translated_frame(dat=idat,
                                       names=ln()@get_lsms_sece_columns_2012(),
                                       m=ln()@get_lsms_sece_fields_mapping_2012())
-      ti <- ln()@infer_lsms_sece_total_income(i1,NULL);
+      ti <- ln()@infer_lsms_sece_total_income(i1,ignore_second_job=TRUE,ignore_self_employment_income=TRUE);
+      return(ti)
+    }
+    if (year == 2014){
+      idat <-read_tnz(paste(dirprefix,'./lsms/./tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_e.dta',sep=""),FALSE,hhidColName = "y4_hhid")
+      
+      i1 <- fu()@get_translated_frame(dat=idat,
+                                      names=ln()@get_lsms_sece_columns_2012(),
+                                      m=ln()@get_lsms_sece_fields_mapping_2014())
+      #ti <- ln()@infer_lsms_sece_total_income(i1,NULL);
+      ti <- ln()@infer_lsms_sece_total_income(i1,ignore_second_job=TRUE,ignore_self_employment_income=TRUE);
+      
       return(ti)
     }
     stop(paste("Year ",year," not supported"))

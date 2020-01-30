@@ -68,6 +68,7 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           get_lsms_sece_columns_2012="function",
                                           get_lsms_sece_fields_mapping_2010="function",
                                           get_lsms_sece_fields_mapping_2012="function",
+                                          get_lsms_sece_fields_mapping_2014="function",
                                           diary_info_columns_lsms_2012="function",
                                           diary_info_columns_lsms_2014="function",
                                           ohs_mapping_lsms_2012="function",
@@ -555,7 +556,7 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='Maize (green, cob)',shortname='maize_green',code='10103',category="food"))
     r=rbind(r,data.frame(item='Maize (grain)',shortname='maize_grain',code='10104',category="food"))
     r=rbind(r,data.frame(item='Maize (flour)',shortname='maize_flour',code='10105',category="food"))
-  
+    
     r=rbind(r,data.frame(item='Millet and sorghum (grain)',shortname='millet_grain',code='11061',category="food"))
     r=rbind(r,data.frame(item='Millet and sorghum (grain)',shortname='millet_grain',code='11062',category="food"))
     r=rbind(r,data.frame(item='Millet and sorghum (flour)',shortname='millet_flour',code='11071',category="food"))
@@ -587,7 +588,7 @@ lsms_normalizer<-function() {
     
     r=rbind(r,data.frame(item='Spinach, cabbage and other green vegetables',shortname='greens',code='16021',category="food"))
     r=rbind(r,data.frame(item='Spinach, cabbage and other green vegetables',shortname='greens',code='16022',category="food"))
-
+    
     r=rbind(r,data.frame(item='Canned, dried and wild vegetables',shortname='dried_canned_veg',code='10603',category="food"))
     r=rbind(r,data.frame(item='Ripe bananas',shortname='banana_ripe',code='10701',category="food"))
     r=rbind(r,data.frame(item='Citrus fruits (oranges, lemon, tangarines, etc.)',shortname='citrus',code='10702',category="food"))
@@ -1421,7 +1422,7 @@ lsms_normalizer<-function() {
     
     return(x)
   }
-
+  
   
   add_categories_simple <- function(x)  {
     
@@ -1966,7 +1967,7 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_i18",name="electricity_source"))
     s= rbind(s,data.frame(iesname="hh_i19",name="rainyseasonwatersource"))
     s= rbind(s,data.frame(iesname="hh_i22",name="rainyseasonwatersourcetime"))
-
+    
     return(s)
   }
   
@@ -2268,8 +2269,8 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="cm_f066",name="price2"))
     return(s)
   }
-
-    
+  
+  
   ohs_seccj_columns_lsms_2008<-function(){
     return(c("item","lwp","lwp_unit","price","region","district","ward","ea"))
   }
@@ -2328,7 +2329,7 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_a09",name="hhid2010"))
     return(s)
   }
-
+  
   ohs_seca_mapping_lsms_2014<-function(){
     s = data.frame(iesname=NULL,name=NULL)
     s= rbind(s,data.frame(iesname="y4_hhid",name="hhid"))
@@ -2440,7 +2441,7 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_m04",name="mtm"))
     return(s)
   }
-
+  
   # file corresponds to secn of 2010
   get_diary_secn_fields_mapping_lsms_2014<-function(){
     s = data.frame(iesname=NULL,name=NULL)
@@ -2508,7 +2509,7 @@ lsms_normalizer<-function() {
       } # end if
     } # end for
   }
-
+  
   occupation_mapping<-function(){
     
     occupation<-"AGRICULTURE/LIVESTOCK.......1
@@ -2640,7 +2641,7 @@ lsms_normalizer<-function() {
              "reason_migration", "birthdistrict", "birthregion"))
   }
   
-    get_ohs_info_columns<-function(dataset,year){
+  get_ohs_info_columns<-function(dataset,year){
     
     if (dataset == "us_cex"){
       if (year ==2004 || year ==2009|| year == 2014){
@@ -2735,15 +2736,15 @@ lsms_normalizer<-function() {
   
   
   get_lsms_sece_columns_2012<-function(){
-      return(c("hhid", "personid", "is_ge5", "mainoccup", "secoccup","is_wageworker", "employertype", "num_colleagues", 
-               "lastpayment_unit", "lastpayment", "workweekhours","workyearmonths", "workyearmonthweeks",
-               "workyearweekhours","has_lastpayment_other", "lastpayment_other_unit", "employmenttype","employmenttype_sec",
-               "lastpayment_other", "has_secjob", "employertype_secjob", "num_colleagues_secjob", "has_secjobwages",
-               "workweekhours_secjob","workyearmonths_secjob", "workyearmonthweeks_secjob","workyearweekhours_secjob",
-               "lastpayment_secjobwage_unit", "lastpayment_secjobwage", "has_secjobwages_other", "lastpayment_secjobwage_other_unit",
-               "lastpayment_secjobwage_other"))
+    return(c("hhid", "personid", "is_ge5", "mainoccup", "secoccup","is_wageworker", "employertype", "num_colleagues", 
+             "lastpayment_unit", "lastpayment", "workweekhours","workyearmonths", "workyearmonthweeks",
+             "workyearweekhours","has_lastpayment_other", "lastpayment_other_unit", "employmenttype","employmenttype_sec",
+             "lastpayment_other", "has_secjob", "employertype_secjob", "num_colleagues_secjob", "has_secjobwages",
+             "workweekhours_secjob","workyearmonths_secjob", "workyearmonthweeks_secjob","workyearweekhours_secjob",
+             "lastpayment_secjobwage_unit", "lastpayment_secjobwage", "has_secjobwages_other", "lastpayment_secjobwage_other_unit",
+             "lastpayment_secjobwage_other"))
   }
-    
+  
   
   get_lsms_sece_fields_mapping_2010<-function(){
     s = data.frame(iesname=NULL,name=NULL)
@@ -2789,7 +2790,7 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_e71",name="selfemploymentyearmonthincome"))
     return(s)
   }
-
+  
   get_lsms_sece_fields_mapping_2012<-function(){
     s = data.frame(iesname=NULL,name=NULL)
     s= rbind(s,data.frame(iesname="y3_hhid",name="hhid"))
@@ -2840,7 +2841,57 @@ lsms_normalizer<-function() {
     return(s)
   }
   
+  
+  get_lsms_sece_fields_mapping_2014<-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="y4_hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="indidy4",name="personid"))
+    s= rbind(s,data.frame(iesname="hh_e01",name="is_ge5"))
+    s= rbind(s,data.frame(iesname="hh_e06_1",name="mainoccup"))
+    s= rbind(s,data.frame(iesname="hh_e06_2",name="secoccup"))
+    s= rbind(s,data.frame(iesname="hh_e18",name="is_wageworker"))
     
+    s= rbind(s,data.frame(iesname="hh_e10_1",name="employmenttype"))
+    s= rbind(s,data.frame(iesname="hh_e10_2",name="employmenttype_sec"))
+    s= rbind(s,data.frame(iesname="hh_e19",name="employertype"))
+    s= rbind(s,data.frame(iesname="hh_e22",name="num_colleagues"))
+    s= rbind(s,data.frame(iesname="hh_e26_2",name="lastpayment_unit"))
+    s= rbind(s,data.frame(iesname="hh_e26_1",name="lastpayment"))
+    
+    s= rbind(s,data.frame(iesname="hh_e27",name="has_lastpayment_other"))
+    s= rbind(s,data.frame(iesname="hh_e28_2",name="lastpayment_other_unit"))
+    s= rbind(s,data.frame(iesname="hh_e28_1",name="lastpayment_other"))
+    
+    s= rbind(s,data.frame(iesname="hh_e32",name="workweekhours"))
+    s= rbind(s,data.frame(iesname="hh_e29",name="workyearmonths"))
+    s= rbind(s,data.frame(iesname="hh_e30",name="workyearmonthweeks"))
+    s= rbind(s,data.frame(iesname="hh_e31",name="workyearweekhours"))
+    s= rbind(s,data.frame(iesname="hh_e34a",name="tenure"))
+    s= rbind(s,data.frame(iesname="hh_e34",name="is_contract"))
+    
+    
+    s= rbind(s,data.frame(iesname="hh_e36",name="has_secjob"))
+    s= rbind(s,data.frame(iesname="hh_e37",name="employertype_secjob"))
+    #s= rbind(s,data.frame(iesname="hh_e40",name="num_colleagues_secjob"))
+    
+    s= rbind(s,data.frame(iesname="hh_e42",name="has_secjobwages"))
+    s= rbind(s,data.frame(iesname="hh_e44_2",name="lastpayment_secjobwage_unit"))
+    s= rbind(s,data.frame(iesname="hh_e44_1",name="lastpayment_secjobwage"))
+    s= rbind(s,data.frame(iesname="hh_e45",name="has_secjobwages_other"))
+    s= rbind(s,data.frame(iesname="hh_e46_2",name="lastpayment_secjobwage_other_unit"))
+    s= rbind(s,data.frame(iesname="hh_e46_1",name="lastpayment_secjobwage_other"))
+    
+    s= rbind(s,data.frame(iesname="hh_e50",name="workweekhours_secjob"))
+    #s= rbind(s,data.frame(iesname="hh_e47",name="workyearmonths_secjob"))
+    #s= rbind(s,data.frame(iesname="hh_e48",name="workyearmonthweeks_secjob"))
+    #s= rbind(s,data.frame(iesname="hh_e49",name="workyearweekhours_secjob"))
+    
+    
+    s= rbind(s,data.frame(iesname="hh_e52",name="has_contract_secjob"))
+    
+    return(s)
+  }
+  
   diary_info_columns_lsms_2012<-function(){
     return(c("hhid","item","tlwp_unit","tlwp","lwp_unit", "lwp", "cost", "own_unit", "own", "gift_unit", "gift"))
   }
@@ -2864,32 +2915,32 @@ lsms_normalizer<-function() {
   }
   
   ohs_mapping_lsms_2014 <- function(){
-      s = data.frame(iesname=NULL,name=NULL)
-      s= rbind(s,data.frame(iesname="y4_hhid",name="hhid"))
-      s= rbind(s,data.frame(iesname="indidy4",name="personid"))
-      s= rbind(s,data.frame(iesname="hh_b02",name="gender"))
-      s= rbind(s,data.frame(iesname="hh_b04",name="age"))
-      s= rbind(s,data.frame(iesname="hh_b05",name="household_status"))
-      s= rbind(s,data.frame(iesname="hh_b07",name="inhouse_consumer"))
-      s= rbind(s,data.frame(iesname="hh_b08",name="inhouse_days_in_month"))
-      s= rbind(s,data.frame(iesname="hh_b09_1",name="inhouse_resident"))
-      s= rbind(s,data.frame(iesname="hh_b10",name="outhouse_days_in_year"))
-      s= rbind(s,data.frame(iesname="hh_b11",name="occupation"))
-      s= rbind(s,data.frame(iesname="hh_b14",name="fathers_educ"))
-      s= rbind(s,data.frame(iesname="hh_b17",name="mothers_educ"))
-      s= rbind(s,data.frame(iesname="hh_b19",name="married"))
-      s= rbind(s,data.frame(iesname="hh_b23_1",name="spouse_resident")) 
-      s= rbind(s,data.frame(iesname="hh_b25",name="outhouse_spouses"))
-      
-      s= rbind(s,data.frame(iesname="hh_b26",name="years_community"))
-      
-      s= rbind(s,data.frame(iesname="hh_b27_2",name="source_migration_region"))
-      s= rbind(s,data.frame(iesname="hh_b27_3",name="source_migration_district"))
-      s= rbind(s,data.frame(iesname="hh_b28",name="reason_migration"))
-      s= rbind(s,data.frame(iesname="hh_b29_2",name="birthregion"))
-      s= rbind(s,data.frame(iesname="hh_b29_3",name="birthdistrict"))
-      return(s)
-    }
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="y4_hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="indidy4",name="personid"))
+    s= rbind(s,data.frame(iesname="hh_b02",name="gender"))
+    s= rbind(s,data.frame(iesname="hh_b04",name="age"))
+    s= rbind(s,data.frame(iesname="hh_b05",name="household_status"))
+    s= rbind(s,data.frame(iesname="hh_b07",name="inhouse_consumer"))
+    s= rbind(s,data.frame(iesname="hh_b08",name="inhouse_days_in_month"))
+    s= rbind(s,data.frame(iesname="hh_b09_1",name="inhouse_resident"))
+    s= rbind(s,data.frame(iesname="hh_b10",name="outhouse_days_in_year"))
+    s= rbind(s,data.frame(iesname="hh_b11",name="occupation"))
+    s= rbind(s,data.frame(iesname="hh_b14",name="fathers_educ"))
+    s= rbind(s,data.frame(iesname="hh_b17",name="mothers_educ"))
+    s= rbind(s,data.frame(iesname="hh_b19",name="married"))
+    s= rbind(s,data.frame(iesname="hh_b23_1",name="spouse_resident")) 
+    s= rbind(s,data.frame(iesname="hh_b25",name="outhouse_spouses"))
+    
+    s= rbind(s,data.frame(iesname="hh_b26",name="years_community"))
+    
+    s= rbind(s,data.frame(iesname="hh_b27_2",name="source_migration_region"))
+    s= rbind(s,data.frame(iesname="hh_b27_3",name="source_migration_district"))
+    s= rbind(s,data.frame(iesname="hh_b28",name="reason_migration"))
+    s= rbind(s,data.frame(iesname="hh_b29_2",name="birthregion"))
+    s= rbind(s,data.frame(iesname="hh_b29_3",name="birthdistrict"))
+    return(s)
+  }
   
   
   ohs_mapping_lsms_2012<-function(){
@@ -3191,7 +3242,7 @@ lsms_normalizer<-function() {
     return(x)
   }
   
-  infer_lsms_sece_total_income<-function(i1,i2){
+  infer_lsms_sece_total_income<-function(i1,ignore_second_job,ignore_self_employment_income){
     #* ((
     #* Rejecting less than 5 year old members from income data
     ydata<-NULL
@@ -3236,103 +3287,108 @@ lsms_normalizer<-function() {
                  stringsAsFactors=FALSE)
     #secondary job wages
     
-    #* sum up values in from secondary of payment (for wage-workers)
-    i1_secjob<-i1[!is.na(i1$has_secjobwages),]
-    i1_secjob<-i1_secjob[!is.na(i1_secjob$has_secjob),]
-    i1_secjob <- i1_secjob[as.integer(i1_secjob$has_secjobwages)==1,]
-    i1_secjob <-i1_secjob[as.integer(i1_secjob$has_secjob)==1,]
-    
-    i1_secjob_y <- computeYearValues(dat=i1_secjob,
-                                     unit_field="lastpayment_secjobwage_unit",
-                                     quantity_field="lastpayment_secjobwage",
-                                     workyearweekhours_field="workyearweekhours_secjob",
-                                     workyearmonthweeks_field="workyearmonthweeks_secjob",
-                                     workyearmonths_field="workyearmonths_secjob",
-                                     output_field="yearly_pay");
-    
-    # secondary job must have employertype invalidated (set to -1 in the current convention)
-    
-    #* Only primary job is used to identify the employer type of the individual 
-    print (paste("Setting employertype as -1 (for ",dim(i1_secjob_y)[1],") wage-workers with secondary jobs"))
-    ydata<-rbind(ydata,
-                 data.frame(hhid=i1_secjob_y$hhid,
-                            personid=i1_secjob_y$personid,
-                            yearly_pay=i1_secjob_y$yearly_pay,
-                            employertype=rep(-1,dim(i1_secjob_y)[1]),
-                            stringsAsFactors=FALSE
-                 ),
-                 stringsAsFactors=FALSE)
-    #* collecting other wages from secondary job
-    i1_secjob_other<-i1[!is.na(i1$has_secjobwages_other),]
-    i1_secjob_other<-i1_secjob_other[!is.na(i1_secjob_other$has_secjob),]
-    i1_secjob_other <-i1_secjob_other[as.integer(i1_secjob_other$has_secjob)==1,]
-    i1_secjob_other <- i1_secjob_other[as.integer(i1_secjob_other$has_secjobwages_other)==1,]
-    
-    i1_secjob_other_y <- computeYearValues(dat=i1_secjob_other,
-                                           unit_field="lastpayment_secjobwage_other_unit",
-                                           quantity_field="lastpayment_secjobwage_other",
-                                           workyearweekhours_field="workyearweekhours_secjob",
-                                           workyearmonthweeks_field="workyearmonthweeks_secjob",
-                                           workyearmonths_field="workyearmonths_secjob",
-                                           output_field="yearly_pay");
-    print(paste("Setting employertype=-1 for ",dim(i1_secjob_other_y)[1]," wage workers with other payments in their secondary jobs")) 
-    ydata<-rbind(ydata,data.frame(hhid=i1_secjob_other_y$hhid,
-                                  personid=i1_secjob_other_y$personid,
-                                  yearly_pay=i1_secjob_other_y$yearly_pay,
-                                  employertype=rep(-1,dim(i1_secjob_other_y)[1]),
-                                  stringsAsFactors=FALSE
-    ),
-    stringsAsFactors=FALSE
-    )
-    
-    if (!is.element( "selfemploymentincome", colnames(i1) ) ){
-     return(ydata) 
+    if (ignore_second_job==TRUE){
+      print("load_income_file - Ignoring second job data from income")
     } else {
-    #rbind for the yearly-pay data-frame
-    selfemployment_offset<-1000
-    if (max(ydata$employertype)>=selfemployment_offset){
-      stop(paste("max(employertype)=",max(ydata$employertype)," in income data(ydata) is less than the selected offset (",selfemployment_offset,")"))
+      #* sum up values in from secondary of payment (for wage-workers)
+      i1_secjob<-i1[!is.na(i1$has_secjobwages),]
+      i1_secjob<-i1_secjob[!is.na(i1_secjob$has_secjob),]
+      i1_secjob <- i1_secjob[as.integer(i1_secjob$has_secjobwages)==1,]
+      i1_secjob <-i1_secjob[as.integer(i1_secjob$has_secjob)==1,]
+      
+      i1_secjob_y <- computeYearValues(dat=i1_secjob,
+                                       unit_field="lastpayment_secjobwage_unit",
+                                       quantity_field="lastpayment_secjobwage",
+                                       workyearweekhours_field="workyearweekhours_secjob",
+                                       workyearmonthweeks_field="workyearmonthweeks_secjob",
+                                       workyearmonths_field="workyearmonths_secjob",
+                                       output_field="yearly_pay");
+      
+      # secondary job must have employertype invalidated (set to -1 in the current convention)
+      
+      #* Only primary job is used to identify the employer type of the individual 
+      print (paste("Setting employertype as -1 (for ",dim(i1_secjob_y)[1],") wage-workers with secondary jobs"))
+      ydata<-rbind(ydata,
+                   data.frame(hhid=i1_secjob_y$hhid,
+                              personid=i1_secjob_y$personid,
+                              yearly_pay=i1_secjob_y$yearly_pay,
+                              employertype=rep(-1,dim(i1_secjob_y)[1]),
+                              stringsAsFactors=FALSE
+                   ),
+                   stringsAsFactors=FALSE)
+      #* collecting other wages from secondary job
+      i1_secjob_other<-i1[!is.na(i1$has_secjobwages_other),]
+      i1_secjob_other<-i1_secjob_other[!is.na(i1_secjob_other$has_secjob),]
+      i1_secjob_other <-i1_secjob_other[as.integer(i1_secjob_other$has_secjob)==1,]
+      i1_secjob_other <- i1_secjob_other[as.integer(i1_secjob_other$has_secjobwages_other)==1,]
+      
+      i1_secjob_other_y <- computeYearValues(dat=i1_secjob_other,
+                                             unit_field="lastpayment_secjobwage_other_unit",
+                                             quantity_field="lastpayment_secjobwage_other",
+                                             workyearweekhours_field="workyearweekhours_secjob",
+                                             workyearmonthweeks_field="workyearmonthweeks_secjob",
+                                             workyearmonths_field="workyearmonths_secjob",
+                                             output_field="yearly_pay");
+      print(paste("Setting employertype=-1 for ",dim(i1_secjob_other_y)[1]," wage workers with other payments in their secondary jobs")) 
+      ydata<-rbind(ydata,data.frame(hhid=i1_secjob_other_y$hhid,
+                                    personid=i1_secjob_other_y$personid,
+                                    yearly_pay=i1_secjob_other_y$yearly_pay,
+                                    employertype=rep(-1,dim(i1_secjob_other_y)[1]),
+                                    stringsAsFactors=FALSE
+      ),
+      stringsAsFactors=FALSE
+      )
     }
-    print (paste("Adding ",selfemployment_offset," to selfemployment_type code and setting those values as employertype"))
-    #* collecting self-employment income
-    i1_selfemployed_y<-computeLsmsSelfemployedValues(dat=i1,
-                                                     has_selfemployment_year_field="has_selfemployment_year",
-                                                     selfemploymentyearmonths_field="selfemploymentyearmonths",
-                                                     selfemploymentyearmonthincome_field="selfemploymentyearmonthincome");
-    a1=data.frame(hhid=i1_selfemployed_y$hhid,
-                  personid=i1_selfemployed_y$personid,
-                  yearly_pay=i1_selfemployed_y$yearly_pay,
-                  employertype=selfemployment_offset+i1_selfemployed_y$selfemploymenttype,
-                  stringsAsFactors=FALSE
-    )
     
-    #* calling computeLsmsSelfemployedValues
-    
-    #i1_selfemployed_y2<-computeLsmsSelfemployedValues(dat=i2,
-    #                                                  has_selfemployment_year_field="has_selfemployment_year",
-    #                                                  selfemploymentyearmonths_field="selfemploymentyearmonths",
-    #                                                  selfemploymentyearmonthincome_field="selfemploymentyearmonthincome");
-    #a2=data.frame(hhid=i1_selfemployed_y2$hhid,
-    #              personid=i1_selfemployed_y2$personid,
-    #              yearly_pay=i1_selfemployed_y2$yearly_pay,
-    #              employertype=i1_selfemployed_y2$selfemploymenttype,
-    #              stringsAsFactors=FALSE)
-    
-    #print("Running outer-join (all-merge) for data from files 1 and 2");
-    #a=merge(a1,a2,all=TRUE)
-    a=a1;
-    
-    ydata<-rbind(ydata,a,stringsAsFactors=FALSE)
-    
-    print ("PENDING CONTROL VARS: employment_type, self_owned_business_type")
-    
-    #* summing up yearly-income from all sources
-    
-    print ("Running ddply to sum up yearly-pay from all sources")
-    ydata <-ddply(ydata,.(hhid,personid),total_income=sum(yearly_pay))
-    return(ydata)
-    
-    #* ))
+    if (ignore_self_employment_income == TRUE || !is.element( "selfemploymentincome", colnames(i1) ) ){
+      print("load_income_file - ignoring self employment data")
+      return(ydata) 
+    } else {
+      #rbind for the yearly-pay data-frame
+      selfemployment_offset<-1000
+      if (max(ydata$employertype)>=selfemployment_offset){
+        stop(paste("max(employertype)=",max(ydata$employertype)," in income data(ydata) is less than the selected offset (",selfemployment_offset,")"))
+      }
+      print (paste("Adding ",selfemployment_offset," to selfemployment_type code and setting those values as employertype"))
+      #* collecting self-employment income
+      i1_selfemployed_y<-computeLsmsSelfemployedValues(dat=i1,
+                                                       has_selfemployment_year_field="has_selfemployment_year",
+                                                       selfemploymentyearmonths_field="selfemploymentyearmonths",
+                                                       selfemploymentyearmonthincome_field="selfemploymentyearmonthincome");
+      a1=data.frame(hhid=i1_selfemployed_y$hhid,
+                    personid=i1_selfemployed_y$personid,
+                    yearly_pay=i1_selfemployed_y$yearly_pay,
+                    employertype=selfemployment_offset+i1_selfemployed_y$selfemploymenttype,
+                    stringsAsFactors=FALSE
+      )
+      
+      #* calling computeLsmsSelfemployedValues
+      
+      #i1_selfemployed_y2<-computeLsmsSelfemployedValues(dat=i2,
+      #                                                  has_selfemployment_year_field="has_selfemployment_year",
+      #                                                  selfemploymentyearmonths_field="selfemploymentyearmonths",
+      #                                                  selfemploymentyearmonthincome_field="selfemploymentyearmonthincome");
+      #a2=data.frame(hhid=i1_selfemployed_y2$hhid,
+      #              personid=i1_selfemployed_y2$personid,
+      #              yearly_pay=i1_selfemployed_y2$yearly_pay,
+      #              employertype=i1_selfemployed_y2$selfemploymenttype,
+      #              stringsAsFactors=FALSE)
+      
+      #print("Running outer-join (all-merge) for data from files 1 and 2");
+      #a=merge(a1,a2,all=TRUE)
+      a=a1;
+      
+      ydata<-rbind(ydata,a,stringsAsFactors=FALSE)
+      
+      print ("PENDING CONTROL VARS: employment_type, self_owned_business_type")
+      
+      #* summing up yearly-income from all sources
+      
+      print ("Running ddply to sum up yearly-pay from all sources")
+      ydata <-ddply(ydata,.(hhid,personid),total_income=sum(yearly_pay))
+      return(ydata)
+      
+      #* ))
     }
   }
   
@@ -3399,6 +3455,7 @@ lsms_normalizer<-function() {
              get_lsms_sece_columns_2012=get_lsms_sece_columns_2012,
              get_lsms_sece_fields_mapping_2010=get_lsms_sece_fields_mapping_2010,
              get_lsms_sece_fields_mapping_2012=get_lsms_sece_fields_mapping_2012,
+             get_lsms_sece_fields_mapping_2014=get_lsms_sece_fields_mapping_2014,
              diary_info_columns_lsms_2012=diary_info_columns_lsms_2012,
              diary_info_columns_lsms_2014=diary_info_columns_lsms_2014,
              hh_mapping_lsms_2012=hh_mapping_lsms_2012, 

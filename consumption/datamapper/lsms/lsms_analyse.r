@@ -30,13 +30,44 @@ parents_educ_rank <- function(x){
     }
   }
   return(NA)
-
+  
 }
+
+apply_expand <- function(carr,arr,op){
+  
+  if (missing(carr)){
+    carr <- c()
+  }
+  
+  indices <- seq(length(arr))
+  if (length(indices)==1) {
+    df <- data.frame(x=toString(c(carr,arr[1])))
+    return(df)
+  } else {
+    df = data.frame()
+    
+    for ( i in indices){
+      indices_c <- indices[indices!=i]
+      if (missing(op)){
+        df <- rbind( df,(apply_expand(carr=c(carr,arr[i]),arr=arr[indices_c])))
+      }
+      else {
+        df <- rbind( df,(apply_expand(carr=c(carr,op(arr[i])),arr=arr[indices_c])))
+      }
+      
+    }
+    return(df)
+  }
+}
+
+
 income_process <-function(yr){
   idat            <- ll@load_income_file(year = yr, dirprefix = "../",fu = fu, ln = lsms_normalizer)
   idat            <- ddply(idat, .(hhid), summarise, totinc = sum(yearly_pay))
   odat            <- subset(ll@load_ohs_file(year = yr, dirprefix = "../",fu = fu, ln = lsms_normalizer),personid==1)
-  odat$age        <- yr - odat$YOB
+  if (!is.element("age",colnames(odat))){
+    odat$age        <- yr - odat$YOB
+  }
   idat            <- subset(idat,!is.na(totinc))
   idat            <- merge(idat,odat,by=c("hhid"),all.x=TRUE )
   print(paste("Ignoring ",dim(subset(idat,is.na(region)))[1],"entries (",100*dim(subset(idat,is.na(region)))[1]/dim(idat)[1],"%) from the income data due to missing OHS info."))
@@ -149,7 +180,7 @@ read_stata_aids_results_files <- function(f,skip_first,precision,split_size){
     }
     bPgtz[,i]        <- paste("( ",bPgtz[,i],numstars_suffix," )",sep="")
   }
-
+  
   idnames <- rownames(as.data.frame(bcoef))
   for ( i in seq(1,dim(bPgtz)[1])) {
     y <- as.data.frame(rbind(bcoef[i,],bPgtz[i,]))
@@ -438,7 +469,7 @@ prepare_quality_aids <-function (prepdat){
   prepdat[is.na(prepdat$fruitsveg_quality),]$fruitsveg_quality <- 0
   prepdat[is.na(prepdat$protein_quality),]$protein_quality <- 0
   prepdat[is.na(prepdat$complements_quality),]$complements_quality <- 0
-
+  
   prepdat[is.na(prepdat$w_densefoods),]$w_densefoods <- 0
   prepdat[is.na(prepdat$w_nonfresh),]$w_nonfresh <- 0
   prepdat[is.na(prepdat$w_fruitsveg),]$w_fruitsveg <- 0
@@ -511,7 +542,7 @@ get_categories <- function(){
 
 load_group <- function(dat,year,categories){
   if (missing(categories)){
-  categories <- get_categories()
+    categories <- get_categories()
   }
   if (missing(dat)){
     dat <- ll@group_expenditure(year = year, dirprefix = "../",

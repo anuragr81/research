@@ -9,7 +9,7 @@ setClass("FrameUtils", representation(si_factor= "function",get_translated_frame
                                       removeall_cols_except="function",find_nonzero_percentile="function",
                                       fv="function",rbind_xy="function",max_non_na="function",get_max_col="function",
                                       diff_lists = "function", combine_lists = "function",
-                                      occurrences_df="function") )
+                                      occurrences_df="function",apply_expand="function") )
 
 removeall_cols_except<-function(dat,listColumnNames){
   #c("region","district","ward","accessiblemarket","travelcost"))
@@ -20,6 +20,34 @@ removeall_cols_except<-function(dat,listColumnNames){
 }
 
 fu<-function(){
+  
+  apply_expand <- function(carr,arr,op){
+    
+    if (missing(carr)){
+      carr <- c()
+    }
+    
+    indices <- seq(length(arr))
+    if (length(indices)==1) {
+      df <- data.frame(x=toString(c(carr,arr[1])))
+      return(df)
+    } else {
+      df = data.frame()
+      
+      for ( i in indices){
+        indices_c <- indices[indices!=i]
+        if (missing(op)){
+          df <- rbind( df,(apply_expand(carr=c(carr,arr[i]),arr=arr[indices_c])))
+        }
+        else {
+          df <- rbind( df,(apply_expand(carr=c(carr,op(arr[i])),arr=arr[indices_c])))
+        }
+        
+      }
+      return(df)
+    }
+  }
+  
  
   diff_lists <- function( x,y ) { jsonlite::toJSON( setdiff ( jsonlite::fromJSON(x), jsonlite::fromJSON(y) ) )}
   
@@ -232,6 +260,6 @@ fu<-function(){
              rbind_xy=rbind_xy,max_non_na=max_non_na,
              get_max_col=get_max_col, occurrences_df=occurrences_df,
              combine_lists=combine_lists,
-             diff_lists=diff_lists) );
+             diff_lists=diff_lists,apply_expand=apply_expand) );
   
 }
