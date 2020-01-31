@@ -2298,11 +2298,14 @@ lsms_normalizer<-function() {
   }
   
   ohs_seca_columns_lsms<-function(year){
-    if (year == 2010 || year == 2008 || year == 2014){
+    if (year == 2010 || year == 2008){
       return(c("hhid","region","district","ward","ea","isrural"))
     } 
     if (year == 2012) {
       return (c("hhid","region","district","ward","ea","isrural","hhid2010"))
+    }
+    if (year == 2014){
+      return(c("hhid","region","district","ward","ea","isrural","hhid2012"))
     }
     stop (paste("sec a column mapping not found for year:", year))
   }
@@ -2338,6 +2341,7 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_a03_1",name="ward"))
     s= rbind(s,data.frame(iesname="hh_a04_1",name="ea"))
     s= rbind(s,data.frame(iesname="y4_rural",name="isrural"))
+    s= rbind(s,data.frame(iesname="hh_a09",name="hhid2012"))
     return(s)
   }
   

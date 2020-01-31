@@ -33,31 +33,106 @@ parents_educ_rank <- function(x){
   
 }
 
-apply_expand <- function(carr,arr,op){
+
+infer_2012_2014_tnz_common_hh <- function(ll,dirprefix, fu, ln, pyout){
+  
+  o2014 <- ll@load_ohs_file(year = 2014, dirprefix = dirprefix,fu=fu, ln=ln)
+  ho2014 <- subset(o2014,!is.na(region) & age >= 24)
+  fname <- 'c:/temp/ho2014.csv'
+  ho2014[is.na(ho2014)] <- 0
+  if (missing(pyout)){
+    write.csv(ho2014,fname,row.names = FALSE)
+    
+    return(fname)
+  } else {
+    
+    o2012 <- ll@load_ohs_file(year = 2012, dirprefix = dirprefix,fu=fu, ln=ln)  
+    ho2012 <- (subset(o2012,!is.na(region) & YOB <= 1990))
+    ho2012[is.na(ho2012)] <- 0
+    
+    ho2012YOB<- ddply(unique((ho2012[,c("hhid","YOB","school_leaving_year")])),.(hhid),summarise, YOB_array=toJSON(sort(YOB)), school_leaving_year_array = toJSON(sort(school_leaving_year)))
+    
+    
+    ho2014YOB <- ddply(unique((ho2014[,c("hhid","school_leaving_year")])),.(hhid),summarise, school_leaving_year_array = toJSON(sort(school_leaving_year)))
+    #pyout <- read.csv(pyoutfile,stringsAsFactors = FALSE)
+    commoncols <- c("hhid","region","district","ward", "roomsnum","ea")
+    
+    #ho2014YOBexpanded <- merge(pyout,ho2014YOB,by=c("hhid"))
+    ho2014YOBsimple   <- unique((ho2014[,c("hhid","age")])) %>% mutate (YOB=2014-age)
+    ho2014YOBsimple   <- merge(ho2014YOB,ddply(ho2014YOBsimple,.(hhid),summarise, YOB_array = toJSON(sort(YOB))))
+    ho2014YOBsimple   <- plyr::rename(merge( unique(ho2014[,c(commoncols,"hhid2012")]) , ho2014YOBsimple, by = c("hhid")), c("hhid"="hhid2014"))
+    
+    ho2012YOB         <- plyr::rename(merge( unique(ho2012[,commoncols]) , ho2012YOB, by = c("hhid")), c("hhid"="hhid2012"))
+    
+    #k <- merge(ho2014YOBsimple,ho2012YOB,by=c("region","district","ward","ea"))
+    k <- merge(ho2014YOBsimple,ho2012YOB,by=c("hhid2012"))
+    #<investigate>
+    #arr= array(); for (i in seq(dim(k)[1]) ) { arr[i] = YOB_similarity(fromJSON(k$YOB_array.x[i]),fromJSON(k$YOB_array.y[i])) }
+    #k$score <- arr
+    #kk <- subset(k,score!=(-1))
+    #</investigate>
+    return(k)
+  }
+}
+
+YOB_similarity <- function(a,b){
+  
+  if (length(b) < length(a)) {
+    temp <- b
+    b <- a
+    a <- temp
+  }
+  # a is of shorter length than b
+  if (sum(abs(sort(a)-a))!=0){
+    stop("array a must be sorted")
+  }
+  if (sum(abs(sort(b)-b))!=0){
+    stop("array b must be sorted")
+  }
+  start <- b[abs(b-a[1]) == min(abs(b-a[1])) ]
+  end   <- b[abs(b-a[length(a)]) == min(abs(b-a[length(a)])) ]
+  newa  <- a[a>=start & a <= end]
+  newb  <- b[b>=start & b <= end]
+  if (length(newb) == length(newa)){
+    return( sum(abs(newa-newb)))
+  } else {
+    return(-1)
+  }
+  
+} 
+
+apply_expand <- function(df,carr,arr,op,groupop){
   
   if (missing(carr)){
     carr <- c()
   }
+  if (missing(df)){
+    df = data.frame(stringsAsFactors = FALSE)
+  }
   
   indices <- seq(length(arr))
   if (length(indices)==1) {
-    df <- data.frame(x=toString(c(carr,arr[1])))
+    newdf <- data.frame(x=groupop(c(carr,arr[1])),stringsAsFactors = FALSE)
+    df <- rbind(df,newdf)
     return(df)
   } else {
-    df = data.frame()
     
     for ( i in indices){
       indices_c <- indices[indices!=i]
       if (missing(op)){
-        df <- rbind( df,(apply_expand(carr=c(carr,arr[i]),arr=arr[indices_c])))
+        df <- apply_expand(df=df,groupop=groupop, carr=c(carr,arr[i]),arr=arr[indices_c])
       }
       else {
-        df <- rbind( df,(apply_expand(carr=c(carr,op(arr[i])),arr=arr[indices_c])))
+        df <- apply_expand(df=df,groupop=groupop, carr=c(carr,op(arr[i])),arr=arr[indices_c])
       }
       
     }
     return(df)
   }
+}
+
+all_comb <- function(x){
+  expand.grid(x=c(10,9),y=c(4,3),z=c(60,59))
 }
 
 
