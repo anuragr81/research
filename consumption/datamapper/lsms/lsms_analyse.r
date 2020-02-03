@@ -90,8 +90,8 @@ infer_2010_2012_tnz_common_hh <- function (o2010,o2012,i2010, i2012,ll,dirprefix
   k <- merge(k, plyr::rename(i2012,c("totinc"="totinc.2012")), by = c("hhid2012"))
   
   #Choosing minimum score when duplicate hhids are present (due to relaxed matching thresholds)
-  h2010 <- (ddply(k[,c("hhid2010","score")], .(hhid2010), summarise, score = min(score)))
-  h2012 <- (ddply(k[,c("hhid2012","score")], .(hhid2012), summarise, score = min(score)))
+  h2010 <- (ddply(unique(k[,c("hhid2010","score")]), .(hhid2010), summarise, score = min(score)))
+  h2012 <- (ddply(unique(k[,c("hhid2012","score")]), .(hhid2012), summarise, score = min(score)))
   
   k <- (merge((merge(k,h2012)),h2010))
   
