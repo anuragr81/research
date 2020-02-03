@@ -32,7 +32,7 @@ parents_educ_rank <- function(x){
   return(NA)
   
 }
-choose_max_highest_educ <- function (x) { arr = x[!is.na(x)] ; if (length(arr)>1) {return (max(arr))} else {return(0)}}
+choose_max_education_rank <- function (x) { arr = x[!is.na(x)] ; if (length(arr)>1) {return (max(arr))} else {return(0)}}
 
 infer_2010_2012_tnz_common_hh <- function (o2010,o2012,i2010, i2012,ll,dirprefix,fu,ln,ncdifftol, yobtol){
   # Using hh as the unit (not hh-head)
@@ -66,11 +66,11 @@ infer_2010_2012_tnz_common_hh <- function (o2010,o2012,i2010, i2012,ll,dirprefix
   
   
   common_cols <- c("region","district","housingstatus")
-  combine_cols <- c("YOB","highest_educ","occupation_rank","num_children",common_cols)
-  ho2010YOB<- ddply(unique((o2010[,c("hhid2010",combine_cols)])),.(hhid2010),summarise, YOB_array=toJSON(sort(YOB)), highest_educ = choose_max_highest_educ(highest_educ) , max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children))
-  ho2012YOB<- ddply(unique((o2012[,c("hhid2012",combine_cols)])),.(hhid2012),summarise, YOB_array=toJSON(sort(YOB)), highest_educ = choose_max_highest_educ(highest_educ), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children))
+  combine_cols <- c("YOB","education_rank","occupation_rank","num_children",common_cols)
+  ho2010YOB<- ddply(unique((o2010[,c("hhid2010",combine_cols)])),.(hhid2010),summarise, YOB_array=toJSON(sort(YOB)), education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children))
+  ho2012YOB<- ddply(unique((o2012[,c("hhid2012",combine_cols)])),.(hhid2012),summarise, YOB_array=toJSON(sort(YOB)), education_rank = choose_max_education_rank(education_rank), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children))
   print("Merging data from 2010 and 2012")
-  k <- merge( ho2012YOB, ho2010YOB, by=c("region","district","highest_educ","max_occupation_rank","housingstatus"))
+  k <- merge( ho2012YOB, ho2010YOB, by=c("region","district","education_rank","max_occupation_rank","housingstatus"))
   
   arr <- array();
   for ( i in seq(length(k$YOB_array.x))) { arr[i] <- YOB_similarity(a = fromJSON(k$YOB_array.x[i]), b=fromJSON(k$YOB_array.y[i]),tol=yobtol)}
@@ -78,6 +78,7 @@ infer_2010_2012_tnz_common_hh <- function (o2010,o2012,i2010, i2012,ll,dirprefix
   k <- subset(k,score < 15 & score >=0)
   k$ncdiff <- abs(k$num_children.x-k$num_children.y)
   k <- subset(k,ncdiff<=ncdifftol)
+  
   if (is.element("hhid",colnames(i2010))){
     i2010 <- plyr::rename(i2010,c("hhid"="hhid2010"))
   }
@@ -87,6 +88,12 @@ infer_2010_2012_tnz_common_hh <- function (o2010,o2012,i2010, i2012,ll,dirprefix
   
   k <- merge(k, plyr::rename(i2010,c("totinc"="totinc.2010")), by = c("hhid2010"))
   k <- merge(k, plyr::rename(i2012,c("totinc"="totinc.2012")), by = c("hhid2012"))
+  
+  #Choosing minimum score when duplicate hhids are present (due to relaxed matching thresholds)
+  h2010 <- (ddply(k[,c("hhid2010","score")], .(hhid2010), summarise, score = min(score)))
+  h2012 <- (ddply(k[,c("hhid2012","score")], .(hhid2012), summarise, score = min(score)))
+  
+  k <- (merge((merge(k,h2012)),h2010))
   
   return(k)
 }
