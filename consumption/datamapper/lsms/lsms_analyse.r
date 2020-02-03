@@ -34,34 +34,60 @@ parents_educ_rank <- function(x){
 }
 choose_max_highest_educ <- function (x) { arr = x[!is.na(x)] ; if (length(arr)>1) {return (max(arr))} else {return(0)}}
 
-infer_2010_2012_tnz_common_hh <- function (o2010,o2012,ll,dirprefix,fu,ln){
+infer_2010_2012_tnz_common_hh <- function (o2010,o2012,i2010, i2012,ll,dirprefix,fu,ln,ncdifftol, yobtol){
   # Using hh as the unit (not hh-head)
   if (missing(o2010)){
     o2010 <- ll@load_ohs_file(year = 2010, dirprefix = dirprefix,fu=fu, ln=ln)
     o2010 <- plyr::rename(o2010, c("hhid"="hhid2010"))
-    write.csv(o2010,'c:/temp/o2010.csv',row.names=TRUE)
+    write.csv(o2010,'c:/temp/o2010.csv',row.names=FALSE)
   }
   if (missing(o2012)){
     o2012 <- ll@load_ohs_file(year = 2012, dirprefix = dirprefix,fu=fu, ln=ln)
     o2012 <- plyr::rename(o2012, c("hhid"="hhid2012"))
-    write.csv(o2012,'c:/temp/o2012.csv',row.names=TRUE)
+    write.csv(o2012,'c:/temp/o2012.csv',row.names=FALSE)
+  }
+  
+  if (missing(i2010)){
+    i2010 <- income_data(ll = ll, yr = 2010, dirprefix = dirprefix, fu=fu, ln=ln)
+    write.csv(i2010, 'c:/temp/i2010.csv',row.names=FALSE)
+  }
+  if (missing(i2012)){
+    i2012 <- income_data(ll = ll, yr = 2012, dirprefix = dirprefix, fu=fu, ln=ln)
+    write.csv(i2012, 'c:/temp/i2012.csv',row.names=FALSE)
   }
   
   
-  
-  
+  o2010 <- merge(o2010, ddply(unique(o2010[,c("hhid2010","personid","YOB")]), .(hhid2010), summarise, num_children = length(YOB[(YOB<=2010) & (YOB >= (2010-18))])), by =c("hhid2010"))
   o2010 <- subset(o2010, YOB < 1990)
+  
+  
+  o2012 <- merge(o2012, ddply(unique(o2012[,c("hhid2012","personid","YOB")]), .(hhid2012), summarise, num_children = length(YOB[(YOB<=2012) & (YOB >= (2012-18))])), by =c("hhid2012"))
   o2012 <- subset(o2012, YOB < 1990)
+  
+  
   common_cols <- c("region","district","housingstatus")
-  combine_cols <- c("YOB","highest_educ","occupation_rank",common_cols)
-  ho2010YOB<- ddply(unique((o2010[,c("hhid2010",combine_cols)])),.(hhid2010),summarise, YOB_array=toJSON(sort(YOB)), highest_educ = choose_max_highest_educ(highest_educ) , max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus))
-  ho2012YOB<- ddply(unique((o2012[,c("hhid2012",combine_cols)])),.(hhid2012),summarise, YOB_array=toJSON(sort(YOB)), highest_educ = choose_max_highest_educ(highest_educ), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus))
+  combine_cols <- c("YOB","highest_educ","occupation_rank","num_children",common_cols)
+  ho2010YOB<- ddply(unique((o2010[,c("hhid2010",combine_cols)])),.(hhid2010),summarise, YOB_array=toJSON(sort(YOB)), highest_educ = choose_max_highest_educ(highest_educ) , max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children))
+  ho2012YOB<- ddply(unique((o2012[,c("hhid2012",combine_cols)])),.(hhid2012),summarise, YOB_array=toJSON(sort(YOB)), highest_educ = choose_max_highest_educ(highest_educ), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children))
+  print("Merging data from 2010 and 2012")
   k <- merge( ho2012YOB, ho2010YOB, by=c("region","district","highest_educ","max_occupation_rank","housingstatus"))
   
   arr <- array();
-  for ( i in seq(length(k$YOB_array.x))) { arr[i] <- YOB_similarity(a = fromJSON(k$YOB_array.x[i]), b=fromJSON(k$YOB_array.y[i]),tol=2)}
+  for ( i in seq(length(k$YOB_array.x))) { arr[i] <- YOB_similarity(a = fromJSON(k$YOB_array.x[i]), b=fromJSON(k$YOB_array.y[i]),tol=yobtol)}
   k$score <- arr;
-  k <- subset(k,score < 15 & score >-2)
+  k <- subset(k,score < 15 & score >=0)
+  k$ncdiff <- abs(k$num_children.x-k$num_children.y)
+  k <- subset(k,ncdiff<=ncdifftol)
+  if (is.element("hhid",colnames(i2010))){
+    i2010 <- plyr::rename(i2010,c("hhid"="hhid2010"))
+  }
+  if (is.element("hhid",colnames(i2012))){
+    i2012 <- plyr::rename(i2012,c("hhid"="hhid2012"))
+  }
+  
+  k <- merge(k, plyr::rename(i2010,c("totinc"="totinc.2010")), by = c("hhid2010"))
+  k <- merge(k, plyr::rename(i2012,c("totinc"="totinc.2012")), by = c("hhid2012"))
+  
   return(k)
 }
 
@@ -105,6 +131,9 @@ infer_2012_2014_tnz_common_hh <- function(ll,dirprefix, fu, ln, pyout){
     #k$score <- arr
     #kk <- subset(k,score!=(-1))
     #</investigate>
+    
+    
+    
     return(k)
   }
 }
@@ -184,9 +213,9 @@ income_process <-function(){
                   "housingstatus","houserent","roomsnum_primary","roomsnum_secondary","wallsmaterial","roofmaterial","floormaterial","toilet",
                   "cookingfuel","lightingfuel","roomsnum","agegroup","lntotinc","fathers_educrank","mothers_educrank")
   
-  i2010 <- plyr::rename(income_data(yr = 2010), c("hhid"="hhid2010"))
-  i2012 <- plyr::rename(income_data(yr = 2012), c("hhid"="hhid2012"))
-  i2014 <- plyr::rename(income_data(yr = 2014), c("hhid"="hhid2014"))
+  i2010 <- plyr::rename(income_data_merged(yr = 2010), c("hhid"="hhid2010"))
+  i2012 <- plyr::rename(income_data_merged(yr = 2012), c("hhid"="hhid2012"))
+  i2014 <- plyr::rename(income_data_merged(yr = 2014), c("hhid"="hhid2014"))
   if (FALSE){
     mapping2010to2012 <- unique(merge(i2010[,c("hhid2010","region")],i2012[,c("hhid2012","hhid2010")],by=c("hhid2010"))[,c("hhid2012","hhid2010")])
     mapping2012to2014 <- unique(merge(i2012[,c("hhid2012","region")],i2014[,c("hhid2014","hhid2012")],by=c("hhid2012"))[,c("hhid2012","hhid2014")])
@@ -204,8 +233,15 @@ income_process <-function(){
   write.csv(i2014,'c:/temp/i2014.csv',row.names = FALSE)
   return(0)
 }
+income_data <- function(ll,yr,dirprefix,fu,ln){
+  idat            <- ll@load_income_file(year = yr, dirprefix = "../",fu = fu, ln = ln)
+  idat            <- ddply(idat, .(hhid), summarise, totinc = sum(yearly_pay))
+  idat            <- subset(idat,!is.na(totinc))
+  return(idat)
+}
 
-income_data <-function(yr){
+
+income_data_merged <-function(yr){
   idat            <- ll@load_income_file(year = yr, dirprefix = "../",fu = fu, ln = lsms_normalizer)
   idat            <- ddply(idat, .(hhid), summarise, totinc = sum(yearly_pay))
   odat            <- subset(ll@load_ohs_file(year = yr, dirprefix = "../",fu = fu, ln = lsms_normalizer),personid==1)
