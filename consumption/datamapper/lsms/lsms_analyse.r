@@ -191,7 +191,13 @@ prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i201
   allk <- subset(allk,ypay2010>0 | ypay2012>0 | ypay2014>0 )
   allkk <- ddply(allk,.(region,max_education_rank,max_occupation_rank,housingstatus), summarise, ypay2010 = mean_of_nonzeros(ypay2010),ypay2012 = mean_of_nonzeros(ypay2012),ypay2014 = mean_of_nonzeros(ypay2014))
   allkk$nonzeros <- as.integer(allkk$ypay2010>0) +as.integer(allkk$ypay2012>0) + as.integer(allkk$ypay2014>0)
-  allkk <- (subset(allkk,nonzeros>2))
+  #allkk <- (subset(allkk,nonzeros>2))
+  #allkk$key <- paste(allkk$region,allkk$max_education_rank, allkk$max_occupation_rank, allkk$housingstatus,sep=":")
+  allkk$key <- paste("1",sprintf("%02d", allkk$region),sprintf("%01d",allkk$max_education_rank), sprintf("%01d",allkk$max_occupation_rank), sprintf("%01d",allkk$housingstatus),sep="")
+  allkk <- merge( allkk[,c("region","max_education_rank","max_occupation_rank","housingstatus","key")],allkk[,c("key","ypay2010","ypay2012","ypay2014")] %>% gather(year,totinc,-key), by=c("key"))
+  #allkk$key <- NULL
+  allkk$year <- sapply(allkk$year, function(x) { as.integer(gsub('ypay','',x)) } )
+  allkk <- subset(allkk,totinc>0)
   return(allkk)
 }
 
