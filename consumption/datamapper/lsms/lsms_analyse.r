@@ -33,6 +33,17 @@ parents_educ_rank <- function(x){
   
 }
 choose_max_education_rank <- function (x) { arr = x[!is.na(x)] ; if (length(arr)>1) {return (max(arr))} else {return(0)}}
+mean_of_nonzeros <- function (x) { arr = x[x!=0] ; if (length(arr)>0) {return (mean(arr))} else {return(0)}}
+
+add_yob_match_score <-function(k,yobtol,ncdifftol){
+  arr <- array();
+  for ( i in seq(length(k$YOB_array.x))) { arr[i] <- YOB_similarity(a = fromJSON(k$YOB_array.x[i]), b=fromJSON(k$YOB_array.y[i]),tol=yobtol)}
+  k$score <- arr;
+  k <- subset(k,score < 15 & score >=0)
+  k$ncdiff <- abs(k$num_children.x-k$num_children.y)
+  k <- subset(k,ncdiff<=ncdifftol)
+  return(k)
+}
 
 prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i2012,i2014, ll,dirprefix,fu,ln,ncdifftol, yobtol){
   # Using hh as the unit (not hh-head)
@@ -59,18 +70,29 @@ prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i201
   }
   
   if (missing(i2010)){
-    i2010 <- income_data(ll = ll, yr = 2010, dirprefix = dirprefix, fu=fu, ln=ln)
+    #i2010 <- income_data(ll = ll, yr = 2010, dirprefix = dirprefix, fu=fu, ln=ln)
+    i2010            <- ll@load_income_file(year = 2010, dirprefix = dirprefix, fu = fu, ln = ln)
     write.csv(i2010, 'c:/temp/i2010.csv',row.names=FALSE)
   }
   if (missing(i2012)){
-    i2012 <- income_data(ll = ll, yr = 2012, dirprefix = dirprefix, fu=fu, ln=ln)
+    #i2012 <- income_data(ll = ll, yr = 2012, dirprefix = dirprefix, fu=fu, ln=ln)
+    i2012            <- ll@load_income_file(year = 2012, dirprefix = dirprefix, fu = fu, ln = ln)
     write.csv(i2012, 'c:/temp/i2012.csv',row.names=FALSE)
   }
   if (missing(i2014)){
-    i2014 <- income_data(ll = ll, yr = 2014, dirprefix = dirprefix, fu=fu, ln=ln)
+    #i2014 <- income_data(ll = ll, yr = 2014, dirprefix = dirprefix, fu=fu, ln=ln)
+    i2014            <- ll@load_income_file(year = 2014, dirprefix = dirprefix, fu = fu, ln = ln)
     write.csv(i2014, 'c:/temp/i2014.csv',row.names=FALSE)
   }
   
+  
+  o2010<- merge(o2010,plyr::rename(i2010,c("hhid"="hhid2010")),by=c("hhid2010","personid"),all.x=TRUE)
+  
+  o2012<- merge(o2012,plyr::rename(i2012,c("hhid"="hhid2012")),by=c("hhid2012","personid"),all.x=TRUE)
+  
+  o2014<- merge(o2014,plyr::rename(i2014,c("hhid"="hhid2014")),by=c("hhid2014","personid"),all.x=TRUE)
+  
+  #Adding arrays to ohs frames
   o2010$hhid2010 <- as.character(o2010$hhid2010)
   o2010 <- merge(o2010, ddply(unique(o2010[,c("hhid2010","personid","YOB")]), .(hhid2010), summarise, num_children = length(YOB[(YOB<=2010) & (YOB >= (2010-18))])), by =c("hhid2010"))
   o2010 <- subset(o2010, YOB < 1990)
@@ -85,30 +107,23 @@ prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i201
   o2014 <- subset(o2014, YOB < 1990)
   
   common_cols <- c("region","district","housingstatus")
-  combine_cols <- c("YOB","education_rank","occupation_rank","num_children",common_cols)
-  ho2010YOB<- ddply(unique((o2010[,c("hhid2010",combine_cols)])),.(hhid2010),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children))
-  ho2012YOB<- ddply(unique((o2012[,c("hhid2012",combine_cols)])),.(hhid2012),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children))
-  ho2014YOB<- ddply(unique((o2014[,c("hhid2014",combine_cols)])),.(hhid2014),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children))
+  combine_cols <- c("YOB","education_rank","occupation_rank","num_children","yearly_pay",common_cols)
+  ho2010YOB<- ddply(unique((o2010[,c("hhid2010",combine_cols)])),.(hhid2010),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children), sum_yearly_pay = sum(yearly_pay[!is.na(yearly_pay)]))
+  ho2012YOB<- ddply(unique((o2012[,c("hhid2012",combine_cols)])),.(hhid2012),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children), sum_yearly_pay = sum(yearly_pay[!is.na(yearly_pay)]))
+  ho2014YOB<- ddply(unique((o2014[,c("hhid2014",combine_cols)])),.(hhid2014),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children), sum_yearly_pay = sum(yearly_pay[!is.na(yearly_pay)]))
   
   print("Merging data from 2010 and 2012")
-  k <- merge( ho2012YOB, ho2010YOB, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"))
+  k <- merge( ho2010YOB, ho2012YOB, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"))
+  k <- add_yob_match_score(k,yobtol=yobtol,ncdifftol=ncdifftol)
   
+  #print("Merging data from 2010 and 2014")
+  #k2 <- merge( ho2014YOB, ho2010YOB, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"))
+  #k2 <- add_yob_match_score(k2,yobtol=yobtol,ncdifftol=ncdifftol)
   
-  arr <- array();
-  for ( i in seq(length(k$YOB_array.x))) { arr[i] <- YOB_similarity(a = fromJSON(k$YOB_array.x[i]), b=fromJSON(k$YOB_array.y[i]),tol=yobtol)}
-  k$score <- arr;
-  k <- subset(k,score < 15 & score >=0)
-  k$ncdiff <- abs(k$num_children.x-k$num_children.y)
-  k <- subset(k,ncdiff<=ncdifftol)
+  print("Merging data from 2012 and 2014")
   
-  print("Merging data from 2010 and 2014")
-  k2 <- merge( ho2014YOB, ho2010YOB, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"))
-  arr <- array();
-  for ( i in seq(length(k2$YOB_array.x))) { arr[i] <- YOB_similarity(a = fromJSON(k2$YOB_array.x[i]), b=fromJSON(k2$YOB_array.y[i]),tol=yobtol)}
-  k2$score <- arr;
-  k2 <- subset(k2,score < 15 & score >=0)
-  k2$ncdiff <- abs(k2$num_children.x-k2$num_children.y)
-  k2 <- subset(k2,ncdiff<=ncdifftol)
+  k3 <- merge( ho2012YOB, ho2014YOB, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"))
+  k3 <- add_yob_match_score(k3,yobtol=yobtol, ncdifftol=ncdifftol)
   
   if (is.element("hhid",colnames(i2010))){
     i2010 <- plyr::rename(i2010,c("hhid"="hhid2010"))
@@ -116,17 +131,68 @@ prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i201
   if (is.element("hhid",colnames(i2012))){
     i2012 <- plyr::rename(i2012,c("hhid"="hhid2012"))
   }
+  if (is.element("hhid",colnames(i2014))){
+    i2014 <- plyr::rename(i2014,c("hhid"="hhid2014"))
+  }
   
-  k <- merge(k, plyr::rename(i2010,c("totinc"="totinc.2010")), by = c("hhid2010"))
-  k <- merge(k, plyr::rename(i2012,c("totinc"="totinc.2012")), by = c("hhid2012"))
+  #k <- merge(k, plyr::rename(i2010,c("totinc"="totinc.2010")), by = c("hhid2010"))
+  #k <- merge(k, plyr::rename(i2012,c("totinc"="totinc.2012")), by = c("hhid2012"))
+  
+  #print("PENDING : avoiding merge of income data by recorded hhids (use average of pseudo-panel instead")
+  
+  #k2 <- merge(k2, plyr::rename(i2010,c("totinc"="totinc.2014")), by = c("hhid2010"))
+  #k2 <- merge(k2, plyr::rename(i2014,c("totinc"="totinc.2014")), by = c("hhid2014"))
   
   #Choosing minimum score when duplicate hhids are present (due to relaxed matching thresholds)
-  h2010 <- (ddply(unique(k[,c("hhid2010","score")]), .(hhid2010), summarise, score = min(score)))
-  h2012 <- (ddply(unique(k[,c("hhid2012","score")]), .(hhid2012), summarise, score = min(score)))
+  panel_columns <- c("region","district","max_education_rank","max_occupation_rank","housingstatus","sum_yearly_pay.x","sum_yearly_pay.y")
   
-  k <- (merge((merge(k,h2012)),h2010))
+  h2010_1 <- (ddply(unique(k[,c("hhid2010","score")]), .(hhid2010), summarise, score = min(score)))
+  h2012_1 <- (ddply(unique(k[,c("hhid2012","score")]), .(hhid2012), summarise, score = min(score)))
   
-  return(k)
+  
+  k <- (merge((merge(k,h2012_1)),h2010_1))
+  
+  ki <- ddply(k[,panel_columns],.(region,district,max_education_rank,max_occupation_rank,housingstatus), summarise,region = unique(region), district=unique(district),
+        max_education_rank=unique(max_education_rank) , max_occupation_rank=unique(max_occupation_rank), housingstatus=unique(housingstatus) , 
+        ypay2010 = mean_of_nonzeros(sum_yearly_pay.x) , ypay2012 = mean_of_nonzeros(sum_yearly_pay.y))
+  
+  #h2010_2 <- (ddply(unique(k2[,c("hhid2010","score")]), .(hhid2010), summarise, score = min(score)))
+  #h2014_2 <- (ddply(unique(k2[,c("hhid2014","score")]), .(hhid2014), summarise, score = min(score)))
+  #k2 <- (merge((merge(k2,h2014_2)),h2010_2))
+  
+  
+  h2012_3 <- (ddply(unique(k3[,c("hhid2012","score")]), .(hhid2012), summarise, score = min(score)))
+  h2014_3 <- (ddply(unique(k3[,c("hhid2014","score")]), .(hhid2014), summarise, score = min(score)))
+  k3 <- (merge((merge(k3,h2014_3)),h2012_3))
+  
+  ki3 <- ddply(k3[,panel_columns],.(region,district,max_education_rank,max_occupation_rank,housingstatus), summarise,region = unique(region), district=unique(district),
+              max_education_rank=unique(max_education_rank) , max_occupation_rank=unique(max_occupation_rank), housingstatus=unique(housingstatus) , 
+              ypay2012 = mean_of_nonzeros(sum_yearly_pay.x) , ypay2014 = mean_of_nonzeros(sum_yearly_pay.y))
+  
+  allk <- merge(ki,ki3, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"), all=TRUE)
+  arr  <- array()
+  for (i in seq(dim(allk)[1])) {
+    x <- allk$ypay2012.x[i] 
+    y <- allk$ypay2012.y[i]
+    if (is.na(x)){
+      arr[i] <- y # NA or 0 would be retained
+    } else {
+      if (is.na(y)){
+        arr[i] <- x
+      } else {
+        arr[i] <- mean(c(x,y))
+      }
+    }
+    
+  }
+  allk$ypay2012 <- arr
+  
+  allk [is.na(allk)] <- 0
+  allk <- subset(allk,ypay2010>0 | ypay2012>0 | ypay2014>0 )
+  allkk <- ddply(allk,.(region,max_education_rank,max_occupation_rank,housingstatus), summarise, ypay2010 = mean_of_nonzeros(ypay2010),ypay2012 = mean_of_nonzeros(ypay2012),ypay2014 = mean_of_nonzeros(ypay2014))
+  allkk$nonzeros <- as.integer(allkk$ypay2010>0) +as.integer(allkk$ypay2012>0) + as.integer(allkk$ypay2014>0)
+  allkk <- (subset(allkk,nonzeros>2))
+  return(allkk)
 }
 
 
