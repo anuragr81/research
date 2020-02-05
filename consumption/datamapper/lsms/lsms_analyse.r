@@ -45,6 +45,14 @@ add_yob_match_score <-function(k,yobtol,ncdifftol){
   return(k)
 }
 
+min_array <- function(k){
+  arr = array()
+  for (i in length(k)) { 
+    arr[i] = min(fromJSON(k[i])) 
+  }
+  return(arr)
+}
+
 prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i2012,i2014, ll,dirprefix,fu,ln,ncdifftol, yobtol){
   # Using hh as the unit (not hh-head)
   if (missing(o2010)){
@@ -111,94 +119,102 @@ prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i201
   ho2010YOB<- ddply(unique((o2010[,c("hhid2010",combine_cols)])),.(hhid2010),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children), sum_yearly_pay = sum(yearly_pay[!is.na(yearly_pay)]))
   ho2012YOB<- ddply(unique((o2012[,c("hhid2012",combine_cols)])),.(hhid2012),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children), sum_yearly_pay = sum(yearly_pay[!is.na(yearly_pay)]))
   ho2014YOB<- ddply(unique((o2014[,c("hhid2014",combine_cols)])),.(hhid2014),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children), sum_yearly_pay = sum(yearly_pay[!is.na(yearly_pay)]))
-  
-  print("Merging data from 2010 and 2012")
-  k <- merge( ho2010YOB, ho2012YOB, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"))
-  k <- add_yob_match_score(k,yobtol=yobtol,ncdifftol=ncdifftol)
-  
-  #print("Merging data from 2010 and 2014")
-  #k2 <- merge( ho2014YOB, ho2010YOB, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"))
-  #k2 <- add_yob_match_score(k2,yobtol=yobtol,ncdifftol=ncdifftol)
-  
-  print("Merging data from 2012 and 2014")
-  
-  k3 <- merge( ho2012YOB, ho2014YOB, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"))
-  k3 <- add_yob_match_score(k3,yobtol=yobtol, ncdifftol=ncdifftol)
-  
-  if (is.element("hhid",colnames(i2010))){
-    i2010 <- plyr::rename(i2010,c("hhid"="hhid2010"))
-  }
-  if (is.element("hhid",colnames(i2012))){
-    i2012 <- plyr::rename(i2012,c("hhid"="hhid2012"))
-  }
-  if (is.element("hhid",colnames(i2014))){
-    i2014 <- plyr::rename(i2014,c("hhid"="hhid2014"))
-  }
-  
-  #k <- merge(k, plyr::rename(i2010,c("totinc"="totinc.2010")), by = c("hhid2010"))
-  #k <- merge(k, plyr::rename(i2012,c("totinc"="totinc.2012")), by = c("hhid2012"))
-  
-  #print("PENDING : avoiding merge of income data by recorded hhids (use average of pseudo-panel instead")
-  
-  #k2 <- merge(k2, plyr::rename(i2010,c("totinc"="totinc.2014")), by = c("hhid2010"))
-  #k2 <- merge(k2, plyr::rename(i2014,c("totinc"="totinc.2014")), by = c("hhid2014"))
-  
-  #Choosing minimum score when duplicate hhids are present (due to relaxed matching thresholds)
-  panel_columns <- c("region","district","max_education_rank","max_occupation_rank","housingstatus","sum_yearly_pay.x","sum_yearly_pay.y")
-  
-  h2010_1 <- (ddply(unique(k[,c("hhid2010","score")]), .(hhid2010), summarise, score = min(score)))
-  h2012_1 <- (ddply(unique(k[,c("hhid2012","score")]), .(hhid2012), summarise, score = min(score)))
-  
-  
-  k <- (merge((merge(k,h2012_1)),h2010_1))
-  
-  ki <- ddply(k[,panel_columns],.(region,district,max_education_rank,max_occupation_rank,housingstatus), summarise,region = unique(region), district=unique(district),
-        max_education_rank=unique(max_education_rank) , max_occupation_rank=unique(max_occupation_rank), housingstatus=unique(housingstatus) , 
-        ypay2010 = mean_of_nonzeros(sum_yearly_pay.x) , ypay2012 = mean_of_nonzeros(sum_yearly_pay.y))
-  
-  #h2010_2 <- (ddply(unique(k2[,c("hhid2010","score")]), .(hhid2010), summarise, score = min(score)))
-  #h2014_2 <- (ddply(unique(k2[,c("hhid2014","score")]), .(hhid2014), summarise, score = min(score)))
-  #k2 <- (merge((merge(k2,h2014_2)),h2010_2))
-  
-  
-  h2012_3 <- (ddply(unique(k3[,c("hhid2012","score")]), .(hhid2012), summarise, score = min(score)))
-  h2014_3 <- (ddply(unique(k3[,c("hhid2014","score")]), .(hhid2014), summarise, score = min(score)))
-  k3 <- (merge((merge(k3,h2014_3)),h2012_3))
-  
-  ki3 <- ddply(k3[,panel_columns],.(region,district,max_education_rank,max_occupation_rank,housingstatus), summarise,region = unique(region), district=unique(district),
-              max_education_rank=unique(max_education_rank) , max_occupation_rank=unique(max_occupation_rank), housingstatus=unique(housingstatus) , 
-              ypay2012 = mean_of_nonzeros(sum_yearly_pay.x) , ypay2014 = mean_of_nonzeros(sum_yearly_pay.y))
-  
-  allk <- merge(ki,ki3, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"), all=TRUE)
-  arr  <- array()
-  for (i in seq(dim(allk)[1])) {
-    x <- allk$ypay2012.x[i] 
-    y <- allk$ypay2012.y[i]
-    if (is.na(x)){
-      arr[i] <- y # NA or 0 would be retained
-    } else {
-      if (is.na(y)){
-        arr[i] <- x
-      } else {
-        arr[i] <- mean(c(x,y))
-      }
-    }
+  calibrate_needs = TRUE
+  if (calibrate_needs){
+    ho2010YOB$minYOB <- min_array(ho2010YOB$YOB_array)
+    ho2012YOB$minYOB <- min_array(ho2012YOB$YOB_array)
+    ho2014YOB$minYOB <- min_array(ho2014YOB$YOB_array)
     
+    return(ho2012YOB)
   }
-  allk$ypay2012 <- arr
+  use_hhid <- TRUE
   
-  allk [is.na(allk)] <- 0
-  allk <- subset(allk,ypay2010>0 | ypay2012>0 | ypay2014>0 )
-  allkk <- ddply(allk,.(region,max_education_rank,max_occupation_rank,housingstatus), summarise, ypay2010 = mean_of_nonzeros(ypay2010),ypay2012 = mean_of_nonzeros(ypay2012),ypay2014 = mean_of_nonzeros(ypay2014))
-  allkk$nonzeros <- as.integer(allkk$ypay2010>0) +as.integer(allkk$ypay2012>0) + as.integer(allkk$ypay2014>0)
-  #allkk <- (subset(allkk,nonzeros>2))
-  #allkk$key <- paste(allkk$region,allkk$max_education_rank, allkk$max_occupation_rank, allkk$housingstatus,sep=":")
-  allkk$key <- paste("1",sprintf("%02d", allkk$region),sprintf("%01d",allkk$max_education_rank), sprintf("%01d",allkk$max_occupation_rank), sprintf("%01d",allkk$housingstatus),sep="")
-  allkk <- merge( allkk[,c("region","max_education_rank","max_occupation_rank","housingstatus","key")],allkk[,c("key","ypay2010","ypay2012","ypay2014")] %>% gather(year,totinc,-key), by=c("key"))
-  #allkk$key <- NULL
-  allkk$year <- sapply(allkk$year, function(x) { as.integer(gsub('ypay','',x)) } )
-  allkk <- subset(allkk,totinc>0)
-  return(allkk)
+  if (use_hhid){
+    #Use the mapping of ids derived from (o201x) on  ho201xYOB to combine them all into one dataframe
+    
+  } else {
+    
+    print("Merging data from 2010 and 2012")
+    k <- merge( ho2010YOB, ho2012YOB, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"))
+    k <- add_yob_match_score(k,yobtol=yobtol,ncdifftol=ncdifftol)
+    
+    #print("Merging data from 2010 and 2014")
+    #k2 <- merge( ho2014YOB, ho2010YOB, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"))
+    #k2 <- add_yob_match_score(k2,yobtol=yobtol,ncdifftol=ncdifftol)
+    
+    print("Merging data from 2012 and 2014")
+    
+    k3 <- merge( ho2012YOB, ho2014YOB, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"))
+    k3 <- add_yob_match_score(k3,yobtol=yobtol, ncdifftol=ncdifftol)
+    
+    if (is.element("hhid",colnames(i2010))){
+      i2010 <- plyr::rename(i2010,c("hhid"="hhid2010"))
+    }
+    if (is.element("hhid",colnames(i2012))){
+      i2012 <- plyr::rename(i2012,c("hhid"="hhid2012"))
+    }
+    if (is.element("hhid",colnames(i2014))){
+      i2014 <- plyr::rename(i2014,c("hhid"="hhid2014"))
+    }
+    #Choosing minimum score when duplicate hhids are present (due to relaxed matching thresholds)
+    panel_columns <- c("region","district","max_education_rank","max_occupation_rank","housingstatus","sum_yearly_pay.x","sum_yearly_pay.y")
+    
+    h2010_1 <- (ddply(unique(k[,c("hhid2010","score")]), .(hhid2010), summarise, score = min(score)))
+    h2012_1 <- (ddply(unique(k[,c("hhid2012","score")]), .(hhid2012), summarise, score = min(score)))
+    
+    
+    k <- (merge((merge(k,h2012_1)),h2010_1))
+    
+    ki <- ddply(k[,panel_columns],.(region,district,max_education_rank,max_occupation_rank,housingstatus), summarise,region = unique(region), district=unique(district),
+                max_education_rank=unique(max_education_rank) , max_occupation_rank=unique(max_occupation_rank), housingstatus=unique(housingstatus) , 
+                ypay2010 = mean_of_nonzeros(sum_yearly_pay.x) , ypay2012 = mean_of_nonzeros(sum_yearly_pay.y))
+    
+    #h2010_2 <- (ddply(unique(k2[,c("hhid2010","score")]), .(hhid2010), summarise, score = min(score)))
+    #h2014_2 <- (ddply(unique(k2[,c("hhid2014","score")]), .(hhid2014), summarise, score = min(score)))
+    #k2 <- (merge((merge(k2,h2014_2)),h2010_2))
+    
+    
+    h2012_3 <- (ddply(unique(k3[,c("hhid2012","score")]), .(hhid2012), summarise, score = min(score)))
+    h2014_3 <- (ddply(unique(k3[,c("hhid2014","score")]), .(hhid2014), summarise, score = min(score)))
+    k3 <- (merge((merge(k3,h2014_3)),h2012_3))
+    
+    ki3 <- ddply(k3[,panel_columns],.(region,district,max_education_rank,max_occupation_rank,housingstatus), summarise,region = unique(region), district=unique(district),
+                 max_education_rank=unique(max_education_rank) , max_occupation_rank=unique(max_occupation_rank), housingstatus=unique(housingstatus) , 
+                 ypay2012 = mean_of_nonzeros(sum_yearly_pay.x) , ypay2014 = mean_of_nonzeros(sum_yearly_pay.y))
+    
+    allk <- merge(ki,ki3, by=c("region","district","max_education_rank","max_occupation_rank","housingstatus"), all=TRUE)
+    arr  <- array()
+    for (i in seq(dim(allk)[1])) {
+      x <- allk$ypay2012.x[i] 
+      y <- allk$ypay2012.y[i]
+      if (is.na(x)){
+        arr[i] <- y # NA or 0 would be retained
+      } else {
+        if (is.na(y)){
+          arr[i] <- x
+        } else {
+          arr[i] <- mean(c(x,y))
+        }
+      }
+      
+    }
+    allk$ypay2012 <- arr
+    
+    allk [is.na(allk)] <- 0
+    allk <- subset(allk,ypay2010>0 | ypay2012>0 | ypay2014>0 )
+    allkk <- ddply(allk,.(region,max_education_rank,max_occupation_rank,housingstatus), summarise, ypay2010 = mean_of_nonzeros(ypay2010),ypay2012 = mean_of_nonzeros(ypay2012),ypay2014 = mean_of_nonzeros(ypay2014))
+    allkk$nonzeros <- as.integer(allkk$ypay2010>0) +as.integer(allkk$ypay2012>0) + as.integer(allkk$ypay2014>0)
+    #allkk <- (subset(allkk,nonzeros>2))
+    #allkk$key <- paste(allkk$region,allkk$max_education_rank, allkk$max_occupation_rank, allkk$housingstatus,sep=":")
+    allkk$key <- as.intger(paste("1",sprintf("%02d", allkk$region),sprintf("%01d",allkk$max_education_rank), sprintf("%01d",allkk$max_occupation_rank), sprintf("%01d",allkk$housingstatus),sep=""))
+    allkk <- merge( allkk[,c("region","max_education_rank","max_occupation_rank","housingstatus","key")],allkk[,c("key","ypay2010","ypay2012","ypay2014")] %>% gather(year,totinc,-key), by=c("key"))
+    #allkk$key <- NULL
+    allkk$year <- sapply(allkk$year, function(x) { as.integer(gsub('ypay','',x)) } )
+    allkk <- subset(allkk,totinc>0)
+    allkk$expensiveregion<-as.integer(is.element(allkk$region,ll@get_expensiveregion_codes()))
+    allkk$lntotinc <- log(allkk$totinc)
+    return(allkk)
+  }
 }
 
 

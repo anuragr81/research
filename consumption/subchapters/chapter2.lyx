@@ -2372,10 +2372,9 @@ Income process can be simplfied but if any characteristics such as education,
 
  do not influence next values (or influence them through variables like
  education), then this simple process can be delineated.
-\end_layout
 
-\begin_layout Standard
-For a simple model of income, consider that income grows at a fixed rate
+\bar default
+ For a simple model of income, consider that income grows at a fixed rate
  
 \begin_inset Formula $k$
 \end_inset
@@ -2409,7 +2408,6 @@ For a simple model of income, consider that income grows at a fixed rate
 
 \begin_layout Standard
 The econometric methods we use to calibrate the income process rely on.
- 
 \end_layout
 
 \begin_layout Standard
@@ -2545,13 +2543,37 @@ needs
 , one may have consider such costs as needs of the consumer, but since our
  notion of needs is based on health and autonomy of the individual, this
  is the only way the costs imposed by the assets and social identities may
- enter in the model.
+ enter in the model
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Although one could view education and occupation as assets - such characteristic
+s may impose a quality constraint themselves only through peer effects -
+ which we wish to capture in the quality control variable 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ 
+\begin_inset Formula $p(A_{t-1},\rho)$
+\end_inset
+
+ only represents the monetary constraints imposed on the consumer.
+ In the model, a certain education or occupation - once acquired - may impose
+ a quality constraint only through assets acquired.
+\end_layout
+
+\end_inset
+
+.
  Another way to interpret the price 
 \begin_inset Formula $p(A_{t-1},\rho)$
 \end_inset
 
  is viewing how a consumer matches her consumption with the assets she owns
  and the long-term characteristics she acquires.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3719,7 +3741,6 @@ reference "eq:nonstochll"
 \end_inset
 
 ) make electricity available to her.
- 
 \end_layout
 
 \begin_layout Standard
@@ -3904,7 +3925,33 @@ We don't have income data on all household head.
  Most households have been tracked over two years rather than four - the
  number of household from 2010 that appear in 2014 are actually less than
  100.
-  
+\end_layout
+
+\begin_layout Subsection
+Empirical Analysis
+\end_layout
+
+\begin_layout Standard
+The panel information for income data is sparse - hence, we use a pseudopanel.
+ The process for 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ is estimated with a GLS estimator for a pseudo-panel.
+ We use the RE estimator to include the effect of the time-invariant cross-secti
+onal variables
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BellJonesFECrossSection2015"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the simulation, age is a necessary variable in the Euler equations since
+ we don't rely on 
 \end_layout
 
 \begin_layout Section

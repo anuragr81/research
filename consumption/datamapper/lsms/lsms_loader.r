@@ -17,7 +17,7 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       group_expenditure="function",group_collect="function",get_asset_score="function",
                                       item_usage="function", item_ownership="function",
                                       split_households="function",add_market_price_to_fooddiary="function",
-                                      asset_differences="function",get_regressed_market_prices="function"))
+                                      asset_differences="function",get_regressed_market_prices="function",get_expensiveregion_codes="function"))
 
 
 lsms_loader<-function(fu,ln,lgc) {
@@ -2792,6 +2792,6 @@ lsms_loader<-function(fu,ln,lgc) {
              read_assets_file=read_assets_file, group_expenditure=group_expenditure,group_collect=group_collect,
              get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership,split_households=split_households,asset_differences=asset_differences,
              get_regressed_market_prices=get_regressed_market_prices, add_market_price_to_fooddiary=add_market_price_to_fooddiary,
-             load_income_file=load_income_file))
+             load_income_file=load_income_file,get_expensiveregion_codes=get_expensiveregion_codes))
   
 }
