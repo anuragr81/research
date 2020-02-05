@@ -47,7 +47,7 @@ add_yob_match_score <-function(k,yobtol,ncdifftol){
 
 min_array <- function(k){
   arr = array()
-  for (i in length(k)) { 
+  for (i in seq(length(k))) { 
     arr[i] = min(fromJSON(k[i])) 
   }
   return(arr)
@@ -124,6 +124,12 @@ prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i201
     ho2010YOB$minYOB <- min_array(ho2010YOB$YOB_array)
     ho2012YOB$minYOB <- min_array(ho2012YOB$YOB_array)
     ho2014YOB$minYOB <- min_array(ho2014YOB$YOB_array)
+    ync <- ddply(ho2012YOB,.(minYOB),summarise,qnc = quantile(num_children,.8)) %>% mutate ( age = 2012 - minYOB)
+    #ync$age_group <- as.integer(ync$age>18 & ync$age<=30)*1 + as.integer(ync$age>30 & ync$age<=40)*2 + as.integer(ync$age>40 & ync$age<=50)*4 + as.integer(ync$age>50 & ync$age<=70)*8 +  as.integer(ync$age>70)*16
+    ync$age_group <- as.integer(ync$age>18 & ync$age<=30)*1 + as.integer(ync$age>30 & ync$age<=40)*2 + as.integer(ync$age>40 & ync$age<=50)*4 + as.integer(ync$age>50 & ync$age<=60)*8 +  as.integer(ync$age>60 & ync$age<=70)*16 +   as.integer(ync$age>70 & ync$age<=80)*32 +   as.integer(ync$age>80)*64
+    yncc <- ddply(ync,.(age_group),summarise, nc = mean(qnc))
+    barplot(yncc$nc,space=2,main="Number of Children with age", xlab="age group", ylab="number of children" ,names.arg = c("18+","30","40","50","60","70","80+"), las = 2)
+    
     
     return(ho2012YOB)
   }
