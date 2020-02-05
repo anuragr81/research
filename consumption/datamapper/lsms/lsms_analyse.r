@@ -53,6 +53,19 @@ min_array <- function(k){
   return(arr)
 }
 
+count_greater_than <- function(json_array, b){
+  arr = array()
+  for ( i in seq(length(b))){
+    a <- fromJSON(json_array[i])
+    if (length(a)>0){
+      arr[i] <- length(a[a>b[i]])
+    } else {
+      arr[i] <-0
+    }
+  }
+  return(arr)
+}
+
 prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i2012,i2014, ll,dirprefix,fu,ln,ncdifftol, yobtol){
   # Using hh as the unit (not hh-head)
   if (missing(o2010)){
@@ -121,17 +134,52 @@ prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i201
   ho2014YOB<- ddply(unique((o2014[,c("hhid2014",combine_cols)])),.(hhid2014),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children), sum_yearly_pay = sum(yearly_pay[!is.na(yearly_pay)]))
   calibrate_needs = TRUE
   if (calibrate_needs){
+    #Adding hhead's YOB
+    ho2010YOB<- merge(ho2010YOB,plyr::rename(unique(subset(o2010,personid==1)[,c("hhid2010","YOB")]), c("YOB"="headYOB")),by=c("hhid2010"))
+    ho2012YOB<- merge(ho2012YOB,plyr::rename(unique(subset(o2012,personid==1)[,c("hhid2012","YOB")]), c("YOB"="headYOB")),by=c("hhid2012"))
+    ho2014YOB<- merge(ho2014YOB,plyr::rename(unique(subset(o2014,personid==1)[,c("hhid2014","YOB")]), c("YOB"="headYOB")),by=c("hhid2014"))
+    
+    personids_with_max_occupation_rank2010 = ddply(unique(merge(o2010[,c("hhid2010","occupation_rank","personid")],ddply(subset(o2010,!is.na(occupation_rank))[,c("hhid2010","occupation_rank")], .(hhid2010), occupation_rank = max(occupation_rank)))[,c("hhid2010","personid")]), .(hhid2010), summarise, personid = min(personid))
+    personids_with_max_occupation_rank2012 = ddply(unique(merge(o2012[,c("hhid2012","occupation_rank","personid")],ddply(subset(o2012,!is.na(occupation_rank))[,c("hhid2012","occupation_rank")], .(hhid2012), occupation_rank = max(occupation_rank)))[,c("hhid2012","personid")]), .(hhid2012), summarise, personid = min(personid))
+    personids_with_max_occupation_rank2014 = ddply(unique(merge(o2014[,c("hhid2014","occupation_rank","personid")],ddply(subset(o2014,!is.na(occupation_rank))[,c("hhid2014","occupation_rank")], .(hhid2014), occupation_rank = max(occupation_rank)))[,c("hhid2014","personid")]), .(hhid2014), summarise, personid = min(personid))
+    
+    ho2010YOB <- merge(ho2010YOB,plyr::rename(merge(personids_with_max_occupation_rank2010,unique(o2010[,c("hhid2010","personid","YOB")])), c("YOB"="occYOB")), by=c("hhid2010"))
+    ho2012YOB <- merge(ho2012YOB,plyr::rename(merge(personids_with_max_occupation_rank2012,unique(o2012[,c("hhid2012","personid","YOB")])), c("YOB"="occYOB")), by=c("hhid2012"))
+    ho2014YOB <- merge(ho2014YOB,plyr::rename(merge(personids_with_max_occupation_rank2014,unique(o2014[,c("hhid2014","personid","YOB")])), c("YOB"="occYOB")), by=c("hhid2014"))
+    
     ho2010YOB$minYOB <- min_array(ho2010YOB$YOB_array)
     ho2012YOB$minYOB <- min_array(ho2012YOB$YOB_array)
     ho2014YOB$minYOB <- min_array(ho2014YOB$YOB_array)
-    ync <- ddply(ho2012YOB,.(minYOB),summarise,qnc = quantile(num_children,.8)) %>% mutate ( age = 2012 - minYOB)
+    
+    ho2010YOB$num_elderly <- count_greater_than(ho2010YOB$YOB_array,ho2010YOB$occYOB)
+    ho2012YOB$num_elderly <- count_greater_than(ho2012YOB$YOB_array,ho2012YOB$occYOB)
+    ho2014YOB$num_elderly <- count_greater_than(ho2014YOB$YOB_array,ho2014YOB$occYOB)
+    
+    ho2010YOB$num_mem <- count_greater_than(ho2010YOB$YOB_array,rep(0,dim(ho2010YOB)[1]))
+    ho2012YOB$num_mem <- count_greater_than(ho2012YOB$YOB_array,rep(0,dim(ho2012YOB)[1]))
+    ho2014YOB$num_mem <- count_greater_than(ho2014YOB$YOB_array,rep(0,dim(ho2014YOB)[1]))
+    
+    ho2010YOB$num_dep <- with(ho2010YOB,num_children+ num_elderly)
+    ho2012YOB$num_dep <- with(ho2012YOB,num_children+ num_elderly)
+    ho2014YOB$num_dep <- with(ho2014YOB,num_children+ num_elderly)
+    
+    ync <- ddply(ho2012YOB,.(occYOB),summarise,qnc = quantile(num_mem,.8)) %>% mutate ( age = 2012 - occYOB)
+    ync$lnqnc = log(ync$qnc)
+    ync$lnage = log(ync$age)
+    ync$agesqr = (ync$age)^2
+    res = lm(data=ync, lnqnc ~ lnage + agesqr)
+    a <- exp(res$coefficients[[1]])
+    b <- res$coefficients[["lnage"]]
+    d <- -res$coefficients[["agesqr"]]
+    print(paste("a=",a,"b=",b,"d=",d))
+    plot(x, a*x^b * exp(-x*x*d),type='l')
     #ync$age_group <- as.integer(ync$age>18 & ync$age<=30)*1 + as.integer(ync$age>30 & ync$age<=40)*2 + as.integer(ync$age>40 & ync$age<=50)*4 + as.integer(ync$age>50 & ync$age<=70)*8 +  as.integer(ync$age>70)*16
     ync$age_group <- as.integer(ync$age>18 & ync$age<=30)*1 + as.integer(ync$age>30 & ync$age<=40)*2 + as.integer(ync$age>40 & ync$age<=50)*4 + as.integer(ync$age>50 & ync$age<=60)*8 +  as.integer(ync$age>60 & ync$age<=70)*16 +   as.integer(ync$age>70 & ync$age<=80)*32 +   as.integer(ync$age>80)*64
     yncc <- ddply(ync,.(age_group),summarise, nc = mean(qnc))
-    barplot(yncc$nc,space=2,main="Number of Children with age", xlab="age group", ylab="number of children" ,names.arg = c("18+","30","40","50","60","70","80+"), las = 2)
+    #barplot(yncc$nc,space=2,main="Number of Children with age (2012)", xlab="age group", ylab="number of children" ,names.arg = c("18+","30","40","50","60","70","80+"), las = 2)
     
     
-    return(ho2012YOB)
+    return(yncc)
   }
   use_hhid <- TRUE
   

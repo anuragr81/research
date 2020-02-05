@@ -2184,7 +2184,54 @@ The needs process is hardly a typical one in the developing countries where
  This is evident from the data - the number of children living in a household
  does not decline sharply with age - implying that older individuals do
  not necessarily live as separate household.
- See Figure.
+ See Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:NumberChildMinYOB"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:NumberChildhhhYOB"
+
+\end_inset
+
+.
+ It would make sense, therefore to consider the number of dependents to
+ the individual rather than the number of children in a consideration of
+ the the consumer's needs over his lifetime.
+ We treat dependents as anyone who is older than the reported household
+ head.
+ While a more complete model for average size of the family may need fertility
+ rate and current population, we assume a structure of the form - assuming
+ that age would determine the family member size (indeed this is not true
+ in the longer-run as the population structure and fertility rates would
+ change).
+ We fit the form 
+\begin_inset Formula $\mu te^{-\kappa t^{2}}$
+\end_inset
+
+ to the age (
+\begin_inset Formula $t$
+\end_inset
+
+) and the number of household members to arrive at the function indicating
+ the expected value of number of members at a certain age (
+\begin_inset Formula $\mu=0.08$
+\end_inset
+
+ and 
+\begin_inset Formula $\kappa=-9\times10^{-5}$
+\end_inset
+
+).
+ Thus, 
+\begin_inset Formula $\eta(t)=(.08)te^{9\times10^{-5}t^{2}}$
+\end_inset
+
+ is used in the Euler equations.
 \end_layout
 
 \begin_layout Standard
@@ -2194,14 +2241,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \align center
 \begin_inset Graphics
 	filename C:/local_files/research/consumption/numchildren_age_2012.png
-	width 2in
+	width 2.5in
 
 \end_inset
 
@@ -2212,7 +2255,90 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Number of Children with age
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:NumberChildMinYOB"
+
+\end_inset
+
+Number of children living in the household vs the age-group of the oldest
+ member 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/numchildren_age_head_2012.png
+	width 2.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:NumberChildhhhYOB"
+
+\end_inset
+
+Number of children living in the household vs the age-group of the (reported)
+ household head
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/nummembers_age_occhead_2012.png
+	width 2.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Number of members in the household vs the age group of the main household
+ earner (usually household head)
 \end_layout
 
 \end_inset
@@ -2367,7 +2493,6 @@ Empirically, we rely on the separation of the long-term (more stable) needs
  than its status-carrying potential (which one would record in a survey).
  Whatever can't be passed on isn't long-term and would not cause any observable
  change in mobility.
- 
 \end_layout
 
 \begin_layout Subsubsection
@@ -2512,7 +2637,7 @@ A key feature of the model is that it deconstructs the consumed quality
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-\eta_{t+1}=\eta(t,T)\nonumber \\
+\eta_{t}=\eta(t,T)\nonumber \\
 A_{t+1}=A_{t}+(i_{t}-c_{t})\nonumber \\
 i_{t+1}=ki_{t}\nonumber \\
 c_{t}=\nu\eta_{t}p(A_{t-1},\rho)\label{eq:nonstoch}
@@ -3024,10 +3149,10 @@ key "DeatonEconConsumer"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-\eta_{t+1}=\eta(t,T)\nonumber \\
+\eta_{t}=\mu te^{\kappa t^{2}}\nonumber \\
 A_{t+1}=A_{t}+(i_{t+1}-c_{t+1})\nonumber \\
 i_{t+1}=ki_{t}\nonumber \\
-c_{t+1}=\nu mA_{t}^{a}i_{t}\eta_{t}\label{eq:nonstochll}
+c_{t+1}=\nu_{t}mA_{t}^{a}i_{t}\eta_{t}\psi_{t}\label{eq:nonstochll}
 \end{gather}
 
 \end_inset
