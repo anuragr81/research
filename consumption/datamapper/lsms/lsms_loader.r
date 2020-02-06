@@ -16,7 +16,7 @@ setClass("LSMSLoader", representation(combined_data_set="function",load_diary_fi
                                       food_expenditure_data="function",read_assets_file="function",
                                       group_expenditure="function",group_collect="function",get_asset_score="function",
                                       item_usage="function", item_ownership="function",
-                                      split_households="function",add_market_price_to_fooddiary="function",
+                                      split_households="function",add_market_price_to_fooddiary="function",add_market_price_to_misc_diary="function",
                                       asset_differences="function",get_regressed_market_prices="function",get_expensiveregion_codes="function"))
 
 
@@ -137,7 +137,7 @@ lsms_loader<-function(fu,ln,lgc) {
       #*    merging all the 4 categories results in the expenditure file
       
       mlk <-merge(ml,k,all=TRUE)
-      mlk <-merge(mlk,rename(ln()@items_codes_2014()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+      mlk <-merge(mlk,plyr::rename(ln()@items_codes_2014()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
       noshortnamedf  <- subset(mlk,is.na(shortname))
       
       if (dim(noshortnamedf)[1] > 0) { 
@@ -148,7 +148,7 @@ lsms_loader<-function(fu,ln,lgc) {
         extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
       } else {
         # filtering out extreme values
-        ml <-merge(ml,rename(ln()@items_codes_2014()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+        ml <-merge(ml,plyr::rename(ln()@items_codes_2014()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
         extremeDataHhids <- unique ( dplyr::filter( merge(ml,ddply(ml,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid )
       }
       print (paste("Households with extreme data (many times the median) - purged from the diary file:",length(extremeDataHhids)))
@@ -238,13 +238,13 @@ lsms_loader<-function(fu,ln,lgc) {
       #*    merging all the 4 categories results in the expenditure file
       
       mlk <-merge(ml,k,all=TRUE)
-      mlk <-merge(mlk,rename(ln()@items_codes_2012()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+      mlk <-merge(mlk,plyr::rename(ln()@items_codes_2012()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
       if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
       if (load_cost){
         extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
       } else {
         # filtering out extreme values
-        ml <-merge(ml,rename(ln()@items_codes_2012()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+        ml <-merge(ml,plyr::rename(ln()@items_codes_2012()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
         
         extremeDataHhids <- unique ( dplyr::filter( merge(ml,ddply(ml,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid )
       }
@@ -337,7 +337,7 @@ lsms_loader<-function(fu,ln,lgc) {
       
       ## mapping name codes
       
-      mlk <-merge(mlk,rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+      mlk <-merge(mlk,plyr::rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
       
       if (dim(subset(mlk,is.na(shortname)))[1] > 0) { stop ("itemcodes are not known for some entries in the diary file")}
       
@@ -346,7 +346,7 @@ lsms_loader<-function(fu,ln,lgc) {
         extremeDataHhids <- unique ( dplyr::filter( merge(mlk,ddply(mlk,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid ) 
       } else {
         # filtering out extreme values
-        ml <-merge(ml,rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
+        ml <-merge(ml,plyr::rename(ln()@items_codes_2010()[,c("shortname","code")],c("code"="item")),by=c("item"),all.x=TRUE)
         
         extremeDataHhids <- unique ( dplyr::filter( merge(ml,ddply(ml,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid )
       }
@@ -559,7 +559,7 @@ lsms_loader<-function(fu,ln,lgc) {
     
     datConsum$group_quantity <- datConsum$quantity
     
-    groupMap          <- rename(ln()@get_group_qconv_factor(year=year),c("lwp_unit"="converted_unit"));
+    groupMap          <- plyr::rename(ln()@get_group_qconv_factor(year=year),c("lwp_unit"="converted_unit"));
     
     
     ## ddply(subset(datConsum,item==11104),.(lwp_unit),summarize,length(hhid)) # we can also complain that appropriate conversions don't exist 
@@ -598,7 +598,7 @@ lsms_loader<-function(fu,ln,lgc) {
       stop(paste("get_inferred_prices - year",year,"not supported"))
     }
     
-    ii               <-rename(ii,c("code"="item","item"="longname"))
+    ii               <-plyr::rename(ii,c("code"="item","item"="longname"))
     
     print (paste("Assuming the groups in the file:",shortNamesFile ,"are in sync with the groups in the conversion function"))
     
@@ -760,7 +760,7 @@ lsms_loader<-function(fu,ln,lgc) {
       
       print(paste('Appending item',i))
       
-      p<- merge(p,rename(x = unique(subset(p,item==i)[c("region","localmedianprice")]), c("localmedianprice"=paste("localmedianprice_",i,sep=""))),by=c("region"),all=TRUE)
+      p<- merge(p,plyr::rename(x = unique(subset(p,item==i)[c("region","localmedianprice")]), c("localmedianprice"=paste("localmedianprice_",i,sep=""))),by=c("region"),all=TRUE)
       
     }
     
@@ -778,7 +778,7 @@ lsms_loader<-function(fu,ln,lgc) {
       assetsData <- fu()@get_translated_frame(dat=secndat,
                                               names=ln()@get_diary_secn_columns_lsms_2008(),
                                               m=ln()@get_diary_secn_fields_mapping_lsms_2008())
-      assetsData <-merge(assetsData, rename(ln()@items_codes_2010(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      assetsData <-merge(assetsData, plyr::rename(ln()@items_codes_2010(),c("code"="itemcode","item"="longname")), all.x=TRUE)
       if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
       return(assetsData)
     }
@@ -791,7 +791,7 @@ lsms_loader<-function(fu,ln,lgc) {
       assetsData <- fu()@get_translated_frame(dat=secndat,
                                               names=ln()@get_diary_secn_columns_lsms_2010(),
                                               m=ln()@get_diary_secn_fields_mapping_lsms_2010())
-      assetsData <-merge(assetsData, rename(ln()@items_codes_2010(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      assetsData <-merge(assetsData, plyr::rename(ln()@items_codes_2010(),c("code"="itemcode","item"="longname")), all.x=TRUE)
       if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
       return(assetsData)
     } 
@@ -805,7 +805,7 @@ lsms_loader<-function(fu,ln,lgc) {
       assetsData <- fu()@get_translated_frame(dat=secndat,
                                               names=ln()@get_diary_secn_columns_lsms_2012(),
                                               m=ln()@get_diary_secn_fields_mapping_lsms_2012())
-      assetsData <-merge(assetsData, rename(ln()@items_codes_2012(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      assetsData <-merge(assetsData, plyr::rename(ln()@items_codes_2012(),c("code"="itemcode","item"="longname")), all.x=TRUE)
       
       ignored_hhids_adoc <- c("0743-001") # high mtm of house
       assetsData <- subset(assetsData,!is.element(hhid,ignored_hhids_adoc))
@@ -823,7 +823,7 @@ lsms_loader<-function(fu,ln,lgc) {
       assetsData <- fu()@get_translated_frame(dat=secndat,
                                               names=ln()@get_diary_secn_columns_lsms_2012(),
                                               m=ln()@get_diary_secn_fields_mapping_lsms_2014())
-      assetsData <-merge(assetsData, rename(ln()@items_codes_2012(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      assetsData <-merge(assetsData, plyr::rename(ln()@items_codes_2012(),c("code"="itemcode","item"="longname")), all.x=TRUE)
       
       ignored_hhids_adoc <- c("0743-001") # high mtm of house
       assetsData <- subset(assetsData,!is.element(hhid,ignored_hhids_adoc))
@@ -858,7 +858,7 @@ lsms_loader<-function(fu,ln,lgc) {
     print(paste("Households(",length(unique(ay$hhid)),")  with no expenditure data on item(s) - ", toString(nonExpenditure)))
     
     #merging ay and dy (cannot overlap since has_expenditure is either TRUE or FALSE)
-    ady              <-rbind(rename(dy[,c("hhid","shortname","mask","item") ], c("item"="itemcode")),ay[,c("hhid","shortname","mask","itemcode")])
+    ady              <-rbind(plyr::rename(dy[,c("hhid","shortname","mask","item") ], c("item"="itemcode")),ay[,c("hhid","shortname","mask","itemcode")])
     
     adys             <-ddply(ady,.(hhid),summarise,asset_score=sum(mask))
     
@@ -1973,7 +1973,7 @@ lsms_loader<-function(fu,ln,lgc) {
       vis                                  <- rbind(vis,noGroupCostLow)
       
       vis                                  <- subset(vis,!is.na(group_cost))
-      vis                                  <- merge(rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
+      vis                                  <- merge(plyr::rename(subset(vis,group=="low"),replace = c("group_cost"="low_cost")),plyr::rename(subset(vis,group=="high")[,c("hhid","group_cost")],replace = c("group_cost"="high_cost")),all=TRUE)
       vis$has_high                         <- !is.na(vis$high_cost) & vis$high_cost>0
       if (dim(vis[is.na(vis$high_cost),])[1]>0){
         vis[is.na(vis$high_cost),]$high_cost <- 0
@@ -2791,7 +2791,7 @@ lsms_loader<-function(fu,ln,lgc) {
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
              read_assets_file=read_assets_file, group_expenditure=group_expenditure,group_collect=group_collect,
              get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership,split_households=split_households,asset_differences=asset_differences,
-             get_regressed_market_prices=get_regressed_market_prices, add_market_price_to_fooddiary=add_market_price_to_fooddiary,
+             get_regressed_market_prices=get_regressed_market_prices, add_market_price_to_fooddiary=add_market_price_to_fooddiary,add_market_price_to_misc_diary=add_market_price_to_misc_diary,
              load_income_file=load_income_file,get_expensiveregion_codes=get_expensiveregion_codes))
   
 }

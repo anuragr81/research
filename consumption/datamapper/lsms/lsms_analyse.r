@@ -694,6 +694,7 @@ all_asset_scores <- function(years,dirprefix,fu,ln,ll){
   return(out)
 }
 
+
 run_test <- function() {
   # gcols obtained using: toString(paste("'",colnames(x),"'",sep=""))
   #gcols <- c('hhid', 'total_expenditure', 'toteducexpense', 'tothouserent',  'hsize', 'consu', 'highest_educ', 'age'
@@ -707,8 +708,85 @@ run_test <- function() {
   #return(agi)
   
   #return(tot)
-  c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = FALSE)
-  return(c2014)
+  
+  
+}
+
+minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices2014){
+  # provide a mapping - per region per district i.e. (region,district,characteristic) -> cost of per-head need per year
+  #food - (protein, carb, fat, fruitsveg)
+  #1200/1500 kcal
+  #carbs - 250g 50% i.e. 600/750 kcal  (250g)
+  #protein - 50g per day
+  #veg - 1/2 volume of carbs - 500g
+  #fat - 50g per day
+  
+  
+  
+  c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  c2012 <- ll@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  
+  o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer)
+  o2012 <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ln=lsms_normalizer)
+  o2014 <- ll@load_ohs_file(year = 2014, dirprefix = "../",fu=fu, ln=lsms_normalizer)
+  
+  fooddiarydata2010      <- subset(c2010,as.integer(as.character(item))>10000)
+  fooddiarydata2012      <- subset(c2010,as.integer(as.character(item))>10000)
+  fooddiarydata2014      <- subset(c2010,as.integer(as.character(item))>10000)
+  
+  if (missing(mktprices2010)){
+  mktprices2010 <- ll@load_market_prices(year = 2010, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
+  }
+  if (missing(mktprices2012)){
+  mktprices2012 <- ll@load_market_prices(year = 2012, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
+  }
+  if (missing(mktprices2014)){
+  mktprices2014 <- ll@load_market_prices(year = 2014, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
+  }
+  
+  hhp2010 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2010,ohsdata=o2010,ddata=fooddiarydata2010)
+  hhp2010 <- merge(lsms_normalizer()@categories_needs_based(),hhp2010)
+  regionfoodprice2010 <- hhp2010 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
+  basket_constituent_costs2010 <- ddply( unique(regionfoodprice2010[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price) , .(region,district,category), rec_cost = sum(rec_cost))
+  basket_costs2010 <- ddply(basket_constituent_costs2010, .(region,district), summarise, basket_cost = sum(rec_cost))
+  regionfoodbasketcosts2010 <- subset(ddply(basket_costs2010,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
+  #barplot(regionfoodbasketcosts2010$basket_cost,names.arg = regionfoodbasketcosts2010$region, las=2 , xlab= "region" , ylab="cost of food basket" , main="Basket costs across regions (2010)")
+  
+  hhp2012 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2012,ohsdata=o2012,ddata=fooddiarydata2012)
+  hhp2012 <- merge(lsms_normalizer()@categories_needs_based(),hhp2012)
+  regionfoodprice2012 <- hhp2012 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
+  basket_constituent_costs2012 <- ddply( unique(regionfoodprice2012[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price) , .(region,district,category), rec_cost = sum(rec_cost))
+  basket_costs2012 <- ddply(basket_constituent_costs2012, .(region,district), summarise, basket_cost = sum(rec_cost))
+  regionfoodbasketcosts2012 <- subset(ddply(basket_costs2012,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
+  
+  hhp2014 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2014,ohsdata=o2014,ddata=fooddiarydata2014)
+  hhp2014 <- merge(lsms_normalizer()@categories_needs_based(),hhp2014)
+  
+  regionfoodprice2014 <- hhp2014 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
+  regionfoodprice2012 <- hhp2012 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
+  basket_constituent_costs2012 <- ddply( unique(regionfoodprice2012[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price) , .(region,district,category), rec_cost = sum(rec_cost))
+  basket_costs2014 <- ddply(basket_constituent_costs2014, .(region,district), summarise, basket_cost = sum(rec_cost))
+  regionfoodbasketcosts2014 <- subset(ddply(basket_costs2014,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
+  
+  #energy - load cheapest energy prices
+  groups <- lsms_normalizer()@categories_needs_based()
+  miscdiarydata2010  <- subset(c2010,is.element(shortname,subset(groups , category =="energy")$shortname))
+  
+  hhpm2010       <- add_market_price_to_misc_diary (curyear = 2010, dirprefix ="../", fu=fu, ln=lsms_normalizer, groups = groups, lgc=lgc,
+                                          ld = ld, marketpricesdata=mktprices2010,ohsdata=o2010,ddata=miscdiarydata2010)
+  #60w bulb for 5 hours (lighting)
+  #1500W electricity for 1 hour (cooking).
+  #1 litre -> 10kWh , 1.5 kW per day
+  # if has fridge, then 180x24 per day
+  # if has computer, then 100W per hr
+  
+  
+  # transport - load petrol prices and load public transport prices
+  # sum up all the costs - this total cost should be seen as p(A_{t-1},\rho) x needs_cost
+  
+  
+  
 }
 
 combine_mills_files <- function(years,dirprefix){

@@ -101,7 +101,8 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           computeYearValues="function",
                                           decode_clusterid="function",
                                           computeLsmsSelfemployedValues="function",
-                                          infer_lsms_sece_total_income="function"))
+                                          infer_lsms_sece_total_income="function",
+                                          categories_needs_based="function"))
 
 lsms_normalizer<-function() {
   
@@ -1491,6 +1492,91 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category = "energy", group="high", shortname="gas"))
     x<-rbind(x,data.frame(category = "energy", group="high",shortname="electricity"))
     x<-rbind(x,data.frame(category = "energy", group="high", shortname="petrol"))
+    
+    return(x)
+  }
+  
+  categories_needs_based <- function()  {
+    
+    x <- data.frame(stringsAsFactors=FALSE)
+    #carbs - 250g 50% i.e. 600/750 kcal  (250g)
+    #protein - 50g per day
+    #veg - 1/2 volume of carbs - 500g (using 400g)
+    #fat - 50g per day
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='rice_husked' , recq = .25))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='rice_paddy', recq = .25))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='maize_green', recq = .25))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='maize_grain', recq = .25))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='maize_flour', recq = .25))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='millet_grain', recq = .25))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='millet_flour', recq = .25))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='wheat', recq = .25))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='bread', recq = .20))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='bunscakes', recq = .20))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='pasta', recq = .20))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='othercereal', recq = .20))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='cassava_fresh', recq = .4))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='cassava_flour', recq = .25))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='sweet_potato', recq = .4))
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='potatoes', recq = .4))
+    
+    x<-rbind(x,data.frame(category='fat', group='needs', shortname='peanuts', recq = .05))
+    x<-rbind(x,data.frame(category='fat', group='needs', shortname='coconut', recq = .05))
+    x<-rbind(x,data.frame(category='fat', group='needs', shortname='cashew_almonds', recq = .05))
+    x<-rbind(x,data.frame(category='fat', group='needs', shortname='nut_products', recq = .05))
+    x<-rbind(x,data.frame(category='fat', group='needs', shortname='cooking_oil', recq = .05))
+    x<-rbind(x,data.frame(category='fat', group='needs', shortname='butter_margarine', recq = .05))
+    
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='pulses', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='milk_products', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='fresh_milk', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='canned_milk', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='goat', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='beef', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='pork', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='chicken', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='wild_birds', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='wild_meat', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='fish_seafood', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='dried_canned_fish', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='packaged_fish', recq = .05))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='eggs', recq = .05))
+    
+    #x<-rbind(x,data.frame(category='alcohol', group='needs', shortname='beer'))
+    #x<-rbind(x,data.frame(category='alcohol', group='needs', shortname='brews'))
+    #x<-rbind(x,data.frame(category='alcohol', group='needs', shortname='winespirits'))
+    
+    #x<-rbind(x,data.frame(category='complements', group='needs', shortname='spices'))
+    #x<-rbind(x,data.frame(category='complements', group='needs', shortname='salt'))
+    #x<-rbind(x,data.frame(category='complements', group='needs', shortname='sugar'))
+    #x<-rbind(x,data.frame(category='complements', group='needs', shortname='sweet'))
+    #x<-rbind(x,data.frame(category='complements', group='needs', shortname='honey'))
+    #x<-rbind(x,data.frame(category='complements', group='needs', shortname='tea'))
+    #x<-rbind(x,data.frame(category='complements', group='needs', shortname='coffee'))
+    #x<-rbind(x,data.frame(category='complements', group='needs', shortname='miscdrinkpowder'))
+    #x<-rbind(x,data.frame(category='complements', group='needs', shortname='canned_drink'))
+    #x<-rbind(x,data.frame(category='complements', group='needs', shortname='readymade_tea_coffee'))
+    
+    
+    x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='onion', recq = .4))
+    x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='greens', recq = .4))
+    x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='dried_canned_veg', recq = .4))
+    x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='yam', recq = .4))
+    x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='banana_green', recq = .4))
+    x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='othervegstarch', recq = .4))
+    x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='banana_ripe', recq = .4))
+    x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='citrus', recq = .4))
+    x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='mangoes', recq = .4))
+    x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='sugarcane', recq = .4))
+    
+    
+    
+    
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq = NA))
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="charcoal", recq = NA))
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="gas", recq = NA))
+    x<-rbind(x,data.frame(category = "energy", group="needs",shortname="electricity", recq = NA))
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq = NA))
     
     return(x)
   }
@@ -3492,5 +3578,6 @@ lsms_normalizer<-function() {
              decode_clusterid=decode_clusterid,
              computeYearValues=computeYearValues, 
              computeLsmsSelfemployedValues=computeLsmsSelfemployedValues, 
-             infer_lsms_sece_total_income=infer_lsms_sece_total_income))
+             infer_lsms_sece_total_income=infer_lsms_sece_total_income,
+             categories_needs_based=categories_needs_based))
 }
