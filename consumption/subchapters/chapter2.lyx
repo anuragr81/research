@@ -2184,6 +2184,45 @@ Needs of the consumer
 \end_layout
 
 \begin_layout Standard
+As we have hinted in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:nonstochproblem"
+
+\end_inset
+
+, our notion of quality is dependent on what we consider as needs rather
+ than the characteristics of items using a hedonic approach (see Rosen
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RosenImplicitHedonic1974"
+
+\end_inset
+
+ for an summary of hedonic approaches).
+ We define needs as the standard requirements not meeting which would lead
+ to a definite harm (this is in accordance to the theory argued for by Doyal
+ and Gough 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DoyalGoughNeeds1991"
+
+\end_inset
+
+).
+ To an argument that a family can survive on just starch, the counter-argument
+ would be that a foreseeable damage to the health of the consumer incurred
+ by not having other nutrients is definite.
+ As far as the model is concerned, the theory of needs is more of a normative
+ concern than descriptive - as a consumer may not always want her needs.
+ This means that such a model for need cannot represent a situation where
+ consumers forgo a certain need to compromise on their health or autonomy
+ in favour of some other needs.
+ This makes the task to ensure that the needs are indeed just the bare minimum
+ extremely important.
+\end_layout
+
+\begin_layout Standard
 The uncertainty associated with how a consumer's needs would evolve until
  the end of her lifetime is very little.
  In a non-stochastic setting, it is assumed in fact that the consumer knows
@@ -2238,22 +2277,25 @@ reference "fig:BasketsRegions2010"
 \end_inset
 
 ) .
- Using a similar treatment fir energy category, we find that the minimum
+ Using a similar treatment for energy category, we find that the minimum
  requirements would be met for consumers in Tanzania with kerosene - given
  its ubiquity and comparatively low price with respect to sparsely available
  electricity in the country.
- The costs are similarly calculated for transport and household categories
- - the details of which are discussed in the section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:nonstochproblem"
+ Here, a calorie quota for a the preparation of a typical meal and lighting
+ is used - leading us to use the cost of a certain amount of kerosene (or
+ a cheaper alternative) when available.
+ For household, the cost of the minimal house in the locality (amortised
+ over the average working life) and the cost of clothing per year is used.
+ We use a calorie quota for transport - which can either be provided by
+ food (walking) or energy (running fuel-engines).
+ 
+\end_layout
 
-\end_inset
-
-.
- For now, it is worth emphasising that all deviation from the consumption
- for basic needs should not be seen as part of the quality choice exercised
- by the consumer.
+\begin_layout Standard
+The empirical measure of quality is the a measure of how much the consumers
+ deviate from the local cost of the standard basket of minimum expenses.
+ Notice however that the deviation from the consumption for basic needs
+ need not always be interpreted the quality choice exercised by the consumer.
  Instead a certain constraints are imposed by the assets owned by the consumer
  and her personal characteristics (education, age) or the long-term choices
  she may have made in the past.
@@ -3305,63 +3347,14 @@ Analysis
 \end_layout
 
 \begin_layout Standard
-We don't have income data on all household head.
- The income process used in the Tanzanian data has been calibrated with
- the primary occupations - which are what every household head is matched
- with.
- We have matched hhid information from the 2012 and 2014 to verify the common
- hhids have similar household reported characteristics (for characteristic
- such as the date of birth of adults etc.).
- For this purpose, the survey for 2014 is different from the past years
- since the year of birth is not recorded in the year - instead age has been
- directly reported.
- This has required us to match the inferred YOB with the year 2012 for matching.
- Most households have been tracked over two years rather than four - the
- number of household from 2010 that appear in 2014 are actually less than
- 100.
+Since needs and income both are exogenous processes in the model, we describe
+ their calibration before discussing the econometric methods to estimate
+ the model specified with Euler equations.
+ 
 \end_layout
 
 \begin_layout Subsection
-Empirical Analysis
-\end_layout
-
-\begin_layout Standard
-The panel information for income data is sparse - hence, we use a pseudopanel.
- The process for 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- is estimated with a GLS estimator for a pseudo-panel.
- We use the RE estimator to include the effect of the time-invariant cross-secti
-onal variables
-\begin_inset CommandInset citation
-LatexCommand cite
-key "BellJonesFECrossSection2015"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-In the simulation, age is a necessary variable in the Euler equations since
- we don't rely on 
-\end_layout
-
-\begin_layout Subsection
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:EmpiricalIssues"
-
-\end_inset
-
-Empirical measurement of quality and needs
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Empirical issues with needs
+Needs Process
 \end_layout
 
 \begin_layout Standard
@@ -3421,9 +3414,169 @@ reference "fig:NumberChildhhhYOB"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
 
-\series bold
-Empirical issues with Assets
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/numchildren_age_2012.png
+	width 2.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:NumberChildMinYOB"
+
+\end_inset
+
+Number of children living in the household vs the age-group of the oldest
+ member 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/numchildren_age_head_2012.png
+	width 2.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:NumberChildhhhYOB"
+
+\end_inset
+
+Number of children living in the household vs the age-group of the (reported)
+ household head
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/nummembers_age_occhead_2012.png
+	width 2.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Number of members in the household vs the age group of the main household
+ earner (usually household head)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Income process
+\end_layout
+
+\begin_layout Standard
+We don't have income data on all household head.
+ The income process used in the Tanzanian data has been calibrated with
+ the primary occupations - which are what every household head is matched
+ with.
+ We have matched hhid information from the 2012 and 2014 to verify the common
+ hhids have similar household reported characteristics (for characteristic
+ such as the date of birth of adults etc.).
+ For this purpose, the survey for 2014 is different from the past years
+ since the year of birth is not recorded in the year - instead age has been
+ directly reported.
+ This has required us to match the inferred YOB with the year 2012 for matching.
+ Most households have been tracked over two years rather than four - the
+ number of household from 2010 that appear in 2014 are actually less than
+ 100.
+\end_layout
+
+\begin_layout Standard
+The panel information for income data is sparse - hence, we use a pseudopanel.
+ The process for 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ is estimated with a GLS estimator for a pseudo-panel.
+ We use the RE estimator to include the effect of the time-invariant cross-secti
+onal variables
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BellJonesFECrossSection2015"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:EmpiricalIssues"
+
+\end_inset
+
+Role of assets in the demand for quality
 \end_layout
 
 \begin_layout Standard
@@ -3439,16 +3592,6 @@ Empirically, we rely on the separation of the long-term (more stable) needs
  than its status-carrying potential (which one would record in a survey).
  Whatever can't be passed on isn't long-term and would not cause any observable
  change in mobility.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Empirical issues with 
-\begin_inset Formula $p(A_{t-1},\rho)$
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -3744,67 +3887,6 @@ reference "eq:nonstoch"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-As we have hinted in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:nonstochproblem"
-
-\end_inset
-
-, our notion of quality is dependent on what we consider as needs rather
- than the characteristics of items using a hedonic approach (see Rosen
-\begin_inset CommandInset citation
-LatexCommand cite
-key "RosenImplicitHedonic1974"
-
-\end_inset
-
- for an summary of hedonic approaches).
- We define needs as the standard requirements not meeting which would lead
- to a definite harm (this is in accordance to the theory argued for by Doyal
- and Gough 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DoyalGoughNeeds1991"
-
-\end_inset
-
-).
- To the argument that a family can survive on just starch, the counter-argument
- would be that a foreseeable damage to the health of the consumer incurred
- by not having protein is definite.
- As far as the model is concerned, the theory of needs is more of a normative
- than descriptive - simply because a consumer may not always want her needs.
- 
-\bar under
-If she forgoes protein and compromises on her health (and probably autonomy)
- in favour of some other needs, the importance of a particular basket -
- and hence the claims based on that basket - would clearly be diminished.
- As a result, the goal of econometric methods we propose is not to argue
- that consumers act according to a certain set of needs (descriptive) but
- only to test whether they act according to a set of needs or not.
-\end_layout
-
-\begin_layout Standard
-Once a standard way to view needs can be set, measure for quality as distance
- the cost of the basic needs can be obtained.
- We identify food, energy, shelter (household) and transport as the commodities
- for which needs exist in a developing economy.
- For food, the price of a standard food basket expressed in terms of protein,
- starch, fat and fruits-vegetables is used.
- For energy, a basic calorie quota for a the preparation of a typical meal
- and lighting is used - leading us to use the cost of a certain amount of
- kerosene (or a cheaper alternative) when available.
- For household, the cost of the minimal house in the locality (amortised
- over the average working life) and the cost of clothing per year is used.
- We use a calorie quota for transport - which can either be provided by
- food (walking) or energy (running fuel-engines).
- The empirical measure of quality is the a measure of how much the consumers
- deviate from the local cost of the standard basket of minimum expenses.
- 
 \end_layout
 
 \begin_layout Standard
@@ -4165,123 +4247,6 @@ While one may identify a fixed number of commodity groups in the country
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/numchildren_age_2012.png
-	width 2.5in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:NumberChildMinYOB"
-
-\end_inset
-
-Number of children living in the household vs the age-group of the oldest
- member 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/numchildren_age_head_2012.png
-	width 2.5in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:NumberChildhhhYOB"
-
-\end_inset
-
-Number of children living in the household vs the age-group of the (reported)
- household head
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/nummembers_age_occhead_2012.png
-	width 2.5in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Number of members in the household vs the age group of the main household
- earner (usually household head)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
