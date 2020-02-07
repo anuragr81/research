@@ -1816,7 +1816,7 @@ name "subsec:UtilityOutline"
 
 \end_inset
 
-Utility Function properties 
+Properties of a Consumer Utility Function 
 \end_layout
 
 \begin_layout Standard
@@ -2156,101 +2156,87 @@ name "subsec:ModelDynamics"
 
 \end_inset
 
-Model Dynamics
+Model Specification
 \end_layout
 
 \begin_layout Standard
-With the above properties of the utility function, we have the following
- features we want in a model:
+With the properties of the utility function we have discussed so far, we
+ discuss the evolution of the three observed variables in the model that
+ are then assimilated in the Euler equations corresponding to the intertemporal
+ substitution setting.
+ These variables are the needs of the consumer, the assets owned and the
+ income of the consumer.
+ We also observe the consumption within certain categories (which for in
+ the current chapter are food, energy, transport and household) that are
+ then related with observed variables with the quality control that the
+ consumer exercises.
+ The current chapter considers a non-stochastic model that is calibrated
+ empirically in an attempt to explain the choice for quality.
+ While the non-stochastic nature of the model does not permit us to differentiat
+e between the uncertainty in one's income from that of the long-term uncertainty
+ that is set by social class or education from, we set ourselves only to
+ demonstrate how a choice for quality could be included in the intertemporal
+ setting with the current model.
 \end_layout
 
 \begin_layout Subsubsection
-A model for needs
+Needs of the consumer
 \end_layout
 
 \begin_layout Standard
-This would be the life-cycle assumption.
- The consumer knows how her needs are going to grow until the end of her
- lifetime.
- This applies even if we model household as the unit (a dynasty rather)
- consider the needs over an infinite time-horizon.
- The idea of needs is an objective one.
+In a non-stochastic setting, the consumer is assumed to know how her needs
+ would evolve until the end of her lifetime.
+ Regardless of whether one models the household as unit that lives forever
+ (dynasty) or as a household individual with a finite lifetime 
+\begin_inset Formula $T$
+\end_inset
+
+, the evolution of needs as the number of living family members at a certain
+ would be aligned with the population trends in the economy.
+ The context of developing countries also highlights a high population growth
+ and a prevalence of a joint-family structure in this function for needs.
  
 \end_layout
 
 \begin_layout Standard
-The needs process is hardly a typical one in the developing countries where
- older families live with children.
- This is evident from the data - the number of children living in a household
- does not decline sharply with age - implying that older individuals do
- not necessarily live as separate household.
- See Figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:NumberChildMinYOB"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:NumberChildhhhYOB"
-
-\end_inset
-
-.
- It would make sense, therefore to consider the number of dependents to
- the individual rather than the number of children in a consideration of
- the the consumer's needs over his lifetime.
- We treat dependents as anyone who is older than the reported household
- head.
- While a more complete model for average size of the family may need fertility
- rate and current population, we assume a structure of the form - assuming
- that age would determine the family member size (indeed this is not true
- in the longer-run as the population structure and fertility rates would
- change).
- We fit the form 
-\begin_inset Formula $\mu te^{-\kappa t^{2}}$
-\end_inset
-
- to the age (
-\begin_inset Formula $t$
-\end_inset
-
-) and the number of household members to arrive at the function indicating
- the expected value of number of members at a certain age (
-\begin_inset Formula $\mu=0.08$
-\end_inset
-
- and 
-\begin_inset Formula $\kappa=-9\times10^{-5}$
-\end_inset
-
-).
- Thus, 
-\begin_inset Formula $\eta(t)=(.08)te^{9\times10^{-5}t^{2}}$
-\end_inset
-
- is used in the Euler equations.
-\end_layout
-
-\begin_layout Standard
-The cost of needs are calculated based on the minimal requirements.
- For food, we use the categories of carbohydrates, fat, protein and fruits-veget
-ables.
- The basket costs are determined at a district level (the level of granularity
- at which the prices are available to us).
- For most regions, this basket may be a diet of cassava, cooking-oil, eggs
- and bananas.
- As one would expect, the cost of this basket is much higher in the urban
- areas (see Figure 
+Given the categories of consumption (food, household, energy and transport),
+ we calculate the cost of basic needs as the cost a minimal requirements
+ in every category.
+ For food, we use the commodity sub-groups of carbohydrates, fat, protein
+ and fruits-vegetables.
+ The cost of this minimal basket of commodities that is composed of the
+ recommended nutrient quantities are then calculated in each region and
+ district - based on the prices of the items recorded in the survey (the
+ level of granularity at which the prices are available to us is also at
+ the district level).
+ For most regions, as it turns out, this minimum-cost basket may be a diet
+ of cassava, cooking-oil, eggs and bananas - as they are most often cheapest
+ items in their respective sub-group.
+ As one would expect, the cost of this basket thus calculated is much higher
+ in the urban areas than in the rural areas (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:BasketsRegions2010"
 
 \end_inset
 
-).
+) .
+\end_layout
+
+\begin_layout Standard
+As we explain in more detail in the section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:nonstochproblem"
+
+\end_inset
+
+, we don't consider all deviation from the consumption for basic needs as
+ part of the quality choice exercised by the consumer.
+ The model holds the view that certain constraints are imposed by the assets
+ owned by the consumer and her personal characteristics (education, age)
+ or the long-term choices she may have made in the past.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2258,131 +2244,6 @@ reference "fig:BasketsRegions2010"
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/numchildren_age_2012.png
-	width 2.5in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:NumberChildMinYOB"
-
-\end_inset
-
-Number of children living in the household vs the age-group of the oldest
- member 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/numchildren_age_head_2012.png
-	width 2.5in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:NumberChildhhhYOB"
-
-\end_inset
-
-Number of children living in the household vs the age-group of the (reported)
- household head
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/nummembers_age_occhead_2012.png
-	width 2.5in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Number of members in the household vs the age group of the main household
- earner (usually household head)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \align center
@@ -2413,10 +2274,6 @@ The costs of the food basket across regions in Tanzania (2010)
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -2427,12 +2284,19 @@ Assets growth of assets
 \end_layout
 
 \begin_layout Standard
-We view asset accumulation as the increments to an asset account - whose
- value is reflected in the total cost of assets inclusive of cash assets
- that the consumer owns.
- This approach treats the accumulation of cash and purchase of assets the
- same.
- In other words, if a consumer sets her eyes on assets 
+
+\bar under
+The wealth of the consumer is represented in the model with a combination
+ of accumulated assets and the personal characteristics (education, occupation
+ or social identity).
+ The former is modeled as an an asset account - whose value is reflected
+ in the total cost of assets inclusive of cash assets that the consumer
+ owns.
+ The use of an asset
+\bar default
+ account means that no distinction is made between the accumulation of cash
+ reserved to purchase assets and the purchase of assets.
+ If a consumer sets her eyes on assets 
 \begin_inset Formula $A$
 \end_inset
 
@@ -2440,11 +2304,11 @@ We view asset accumulation as the increments to an asset account - whose
 \begin_inset Formula $B$
 \end_inset
 
-, with prices 
+ (that have prices 
 \begin_inset Formula $\Pi_{A}<\Pi_{B}$
 \end_inset
 
- and the value of her cash account at time 
+) and the value of her cash account at time 
 \begin_inset Formula $t$
 \end_inset
 
@@ -2474,37 +2338,40 @@ We view asset accumulation as the increments to an asset account - whose
 \end_inset
 
 ).
+ No depreciation in the asset values is assumed as we are concerned with
+ the near-term purchases in the model.
 \end_layout
 
 \begin_layout Standard
-The model also assume that at the of her lifetime, her personal wealth would
- be exactly - her savings would either be consumed or would be passed on
- to her children.
- While all individuals in the population are assumed to be the same as our
- representative consumer in terms of the preferences for needs over quality,
- they differ in the the starting amount and trends of their salaries, the
- trajectory of their needs, their long-term quality habits and the starting
- values of their asset accounts.
- Another way to view the asset account is to consider that all assets in
+Another way to view the asset account is to consider that all assets in
  the economy are managed by a large firm (owing its success to preferences
  being the same for everybody) which provides furniture, housing and all
  amenities at a flat upfront cost.
  Every asset and service - offered as life-long subscription - is purchased
  by giving an amount to this company.
- We ignore the depreciation of assets for the moment for simplicity.
- 
+ The model then assumes that at the of the lifetime of a consumer, her personal
+ wealth would either be consumed or would be passed on to her progeny.
+ While all individuals in the population are assumed to be the same as our
+ representative consumer in terms of the preferences for needs over quality,
+ they differ in the the starting amount of their asset accounts and trends
+ of their salaries, the trajectory of their needs, their long-term quality
+ habits.
 \end_layout
 
 \begin_layout Standard
-Credit or borrowing in the market is also assumed to be negligible (an assumptio
-n that is not so far fetched in a developing economy).
- The no-credit assumption implies that the consumer can only save to buy
- more of the only asset available in the market.
- Therefore, if the consumer's starting income is 
+For simplicity, we assume a zero interest rate environment (it is easy to
+ introduce if considered important) where incomes grow a steady rate.
+ The minimal presence of credit facilities in the developing countries also
+ allows us to ignore credit in the market - which in turn implies that the
+ consumer can only save to buy more of the only asset available in the market.
+\end_layout
+
+\begin_layout Standard
+Consider a consumer whose starting income is 
 \begin_inset Formula $i_{0}$
 \end_inset
 
- so that after 
+ and her salary grows at a steady rate so that after 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -2512,12 +2379,12 @@ n that is not so far fetched in a developing economy).
 \begin_inset Formula $i_{0}k^{\tau}$
 \end_inset
 
- so that the total income she has earned is 
+ and the total income she has earned is 
 \begin_inset Formula $\sum_{j=1}^{\tau}i_{j}=\frac{i_{0}k}{k-1}(k^{\tau}-1)$
 \end_inset
 
 .
- Now at a given time 
+ At the given time 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -2530,36 +2397,35 @@ n that is not so far fetched in a developing economy).
 \begin_inset Formula $\tau$
 \end_inset
 
- would therefore depend both on needs 
+ would therefore depend on the needs 
 \begin_inset Formula $\eta$
 \end_inset
 
- and asset account value 
+, asset account value 
 \begin_inset Formula $A_{t}$
 \end_inset
 
-.
- In a probabilistic model, we would attach a consumer probability of these
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In a probabilistic model, we would attach a consumer probability of these
  events occurring at different values of 
 \begin_inset Formula $\tau$
 \end_inset
 
 .
+ This is postponed until a stochastic model is considered.
 \end_layout
 
-\begin_layout Standard
+\end_inset
 
-\bar under
-Empirically, we rely on the separation of the long-term (more stable) needs
- of the consumer from her short-term (more volatile) needs.
- The longer-term assets are what would cause the stability of income while
- non-durable consumption or assets that are not to improve observed probability
- in any possible are classified as the short-term needs.
- An item-by-item analysis of the life-expectancy of all owned items is possible.
- The average life-time of a product being consumed is a more objective measure
- than its status-carrying potential (which one would record in a survey).
- Whatever can't be passed on isn't long-term and would not cause any observable
- change in mobility.
+ and the consumption of quality in the period 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2567,65 +2433,38 @@ Income Process
 \end_layout
 
 \begin_layout Standard
-A non-stochastic model, there may not be a way to differentiate the 
-\begin_inset Quotes eld
-\end_inset
-
-knowledge
-\begin_inset Quotes erd
-\end_inset
-
- of income being governed by social class or education from the uncertainty
- in the the income process.
- 
-\end_layout
-
-\begin_layout Standard
-The conspicuous consumption is driven not by the income process itself but
- the knowledge that most individuals withing that class, educational level
- etc.
+One could consider the education, parental background, even personality
+ types in a descriptive model for the income of an individual.
+ The goal of the income process in our model is however only to separate
+ the factors affecting economic growth from the factors influence the consumptio
+n of quality.
+ More specifically status-related consumption - which we consider as part
+ of distance from needs (quality) - should be driven not by the income process
+ itself but the knowledge that most individuals withing that class, educational
+ level etc.
  are going to end up a certain way is what determines the consumer choice.
- An income process derived from personal characteristics - instead of a
- that may give us a more accurate function of the unobserved variables e.g.
- personality types - may be more appropriate.
- This is an agreement with the life-cycle hypothesis (see Thaler et al
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ShefrinThaler1988"
-
-\end_inset
-
-) where the representative consumer is a risk manager based on her perception
- shaped by long-term developments - rather than somebody who execute long-term
- plans based on a finite wealth.
+ In other words, the consumers saving for assets is influenced not only
+ by income or its volatility (as implied by the permanent income approach)
+ but also through longer-term notions of wealth which we gauge with personal
+ characteristics and long-term assets.
+ The income process is an exogenous process that gauges the expectation
+ of only the monetary growth.
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-Income process can be simplfied but if any characteristics such as education,
- region are to be associated with it, then it would make sense to attach
- past values of 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- as well.
- If we assume that past values of 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- do not influence next values (or influence them through variables like
- education), then this simple process can be delineated.
-
-\bar default
- For a simple model of income, consider that income grows at a fixed rate
- 
+A simple process of income is thus assumed where the income grows at a steady
+ rate 
 \begin_inset Formula $k$
 \end_inset
 
- every year.
- Thus assuming that at the start of her working age, her starting income
- is 
+ every year .
+ Here, the past values of 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ do not influence the current and future values of (or influence them only
+ through variables like education.
+ At the income at the start of the working age of a consumer is 
 \begin_inset Formula $i_{0}$
 \end_inset
 
@@ -2633,49 +2472,29 @@ Income process can be simplfied but if any characteristics such as education,
 \begin_inset Formula $t$
 \end_inset
 
- is 
+ is simply 
 \begin_inset Formula $i_{t}=i_{0}k^{t}$
 \end_inset
 
-.
- If we attach no uncertainty to the growth of income, as it would be the
- case in a non-stochastic model, the growth rate would remain the same forever
- and is known by the consumer.
- In the stochastic model we would let our consumer maintain a uncertainty
- of both how her annual income unfolds in her future years and the uncertainty
- about her improving being part of a high-consumption club.
- While these uncertainties are turned off in the non-stochastic model, the
- choice of long-term quality against the choice to save for future assets
- in an environment of definite and exogenous income growth in income can
- still be delineated with the model.
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+We attach no uncertainty to the growth of income in this non-stochastic
+ model.
+ Thus the growth rate would remain the same forever and is known by the
+ consumer.
+ In the stochastic model, on the other hand, one could let the consumer
+ maintain two uncertainties - the first being in how her annual income unfolds
+ in her future years and the second before how she becomes part of a stable
+ high-consumption club through means other than income growth.
 \end_layout
-
-\begin_layout Standard
-The econometric methods we use to calibrate the income process rely on.
-\end_layout
-
-\begin_layout Standard
-The variance specification is also necessary for the permanent income approaches.
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-Income process is exogenous.
- A consequence of the exogenous process is that the rich are more likely
- to stay rich than the poor are to become rich (otherwise there would be
- no stratification in the society).
- We would expect total quality per assets to be lower for the rich than
- it is for the poor - whose expectation for the long-term growth is lower
- but they are more likely to overweigh on the probabilistic growth through.
- Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Results"
 
 \end_inset
 
- discusses these expectations in more detail.
+.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -2685,20 +2504,85 @@ name "subsec:nonstochproblem"
 
 \end_inset
 
-Long-term quality in a non-stochastic setting
+Euler Equations and the quality control
 \end_layout
 
 \begin_layout Standard
-A key feature of the model is that it deconstructs the consumed quality
- in what is imposed by the market accessible to the consumer and the long-term
- choices she has made.
- Due to the two factors, the choice of quality is constrained.
- We use a parameter only to see how much the consumer choice is affect in
- relation to the long-term choices she has made.
- We explain a model developed with the non-stochastic Euler equations which
- use the parameters we have discussed.
- The non-stochastic model - which we calibrate with the consumption microdata
- - is described with the following equations:
+Given the exogenous variables needs 
+\begin_inset Formula $\eta_{t}$
+\end_inset
+
+, owned assets 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+, income 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ and observed consumption 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ we now turn to the introduction of a quality control in the Euler equations
+ of the intertemporal settings.
+ By definition a consumer is mean to select a quality control 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ after her needs 
+\begin_inset Formula $\eta_{t}$
+\end_inset
+
+ and those imposed by the assets 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ she owns and is her personal characteristics 
+\begin_inset Formula $\rho$
+\end_inset
+
+ (the lack of subscript in 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is due to the assumption that the personal characteristics don't change
+ in the near-term analysis).
+ The choice of quality therefore has a lower constraint - in that acquiring
+ assets would enhance needs and thus cause a distance from the basic needs
+ which are imposed by health and autonomy requirements.
+ This 
+\begin_inset Quotes eld
+\end_inset
+
+enhanced
+\begin_inset Quotes erd
+\end_inset
+
+ needs necessitate a parameter separate how much the consumer choice is
+ related to her long-term standing influenced by 
+\begin_inset Formula $A_{t-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+ from how much quality she demands in the period 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ The former constraint is denoted with the function 
+\begin_inset Formula $p(A_{t-1},\rho)$
+\end_inset
+
+ and the latter with the quality control 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ which is selected by the consumer.
+ The non-stochastic Euler equations representing this model are as follows:
 \end_layout
 
 \begin_layout Standard
@@ -2728,8 +2612,12 @@ Here,
 \begin_inset Formula $A_{t}$
 \end_inset
 
- is the value of asset account (comprising of cash reserved for assets as
- well as the total value of assets owned), 
+ is the value of asset account in the period 
+\begin_inset Formula $t$
+\end_inset
+
+ (comprising of cash reserved for assets as well as the total value of assets
+ owned), 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -2751,32 +2639,44 @@ Here,
 \end_inset
 
 .
- Notice that in addition to the quality control
-\begin_inset Formula $\nu$
+ The cost of quality constraint 
+\begin_inset Formula $p(A_{t-1},\rho)$
 \end_inset
 
- of needs 
-\begin_inset Formula $\eta_{t}$
+ which represents the minimal per-head quality that a household has to maintain
+ given her personal characteristics and owned assets is scaled with the
+ needs of the consumer.
+ 
+\end_layout
+
+\begin_layout Standard
+The consumer choice of quality 
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
- , the consumption 
+ thus takes into account the fact that certain quality choices are imposed
+ by the asset one possesses (e.g.
+ fuel for cars, electricity for heating equipment, rent/maintenance-fees
+ for housing etc.) where i) avoiding the respective expenses is not an option
+ for the consumer and ii) certain long-term choices or characteristics (e.g.
+ not having a house or living in a region that doesn't have electricity
+ available) limit the choice to avail quality in the short-term.
+ A homeowner is required to maintain her own house the way someone who doesn't
+ own the house has to pay the rent.
+ 
+\begin_inset Formula $p(A_{t-1},\rho)$
+\end_inset
+
+ is what adjusts the non-durable consumption 
 \begin_inset Formula $c_{t}$
 \end_inset
 
- also depends on the price of quality that is imposed by the asset choices
- in the past or the household characteristics that are acquired over generations.
- The reason why we separate this cost from the consumer choice of quality
+ with the maintenance fees or rent.
  
-\begin_inset Formula $\nu$
-\end_inset
+\end_layout
 
- is that i) certain quality choices are imposed by the asset one possesses
- - e.g.
- fuel for cars, electricity for heating equipment etc.
- where avoiding the respective expenses is not an option for the consumer
- and ii) certain long-term choices or characteristics limit the choice to
- avail quality in the short-term.
- In the common usage of 
+\begin_layout Standard
+In the common usage of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2785,9 +2685,12 @@ needs
 \end_inset
 
 , one may have consider such costs as needs of the consumer, but since our
- notion of needs is based on health and autonomy of the individual, this
- is the only way the costs imposed by the assets and social identities may
- enter in the model
+ notion of needs is based on health and autonomy of the individual, 
+\begin_inset Formula $p(A_{t-1},\rho)$
+\end_inset
+
+ is how the costs imposed by the assets and social identities may enter
+ in the model
 \begin_inset Foot
 status open
 
@@ -2811,13 +2714,16 @@ s may impose a quality constraint themselves only through peer effects -
 \end_inset
 
 .
- Another way to interpret the price 
+ 
+\end_layout
+
+\begin_layout Standard
+Another way to interpret the price 
 \begin_inset Formula $p(A_{t-1},\rho)$
 \end_inset
 
  is viewing how a consumer matches her consumption with the assets she owns
  and the long-term characteristics she acquires.
- 
 \end_layout
 
 \begin_layout Standard
@@ -2876,293 +2782,6 @@ Over the life-time of T years, the consumer optimises the non-stochastic
 
  she possesses).
  
-\end_layout
-
-\begin_layout Standard
-To see how this may work in an empirical setting, consider the commodities
- 
-\begin_inset Formula $I_{0},I_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $I_{2}$
-\end_inset
-
- with the respective prices 
-\begin_inset Formula $p_{0},p_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $p_{2}$
-\end_inset
-
- so that 
-\begin_inset Formula $p_{0}<p_{1}<p_{2}$
-\end_inset
-
-.
- Further, let 
-\begin_inset Formula $I_{0}$
-\end_inset
-
- be the item with the lowest available quality (hence the minimum price
- 
-\begin_inset Formula $p_{0}$
-\end_inset
-
-) and the quantity needed for minimum needs be 
-\begin_inset Formula $\eta$
-\end_inset
-
-.
- Ignoring the effect of assets accumulation and long-term choices for a
- moment, a consumers 
-\begin_inset Formula $1$
-\end_inset
-
- and 
-\begin_inset Formula $2$
-\end_inset
-
- choosing 
-\begin_inset Formula $(q_{10}q_{11})$
-\end_inset
-
- and 
-\begin_inset Formula $(q_{20},q_{22})$
-\end_inset
-
- - where 
-\begin_inset Formula $q_{ij}$
-\end_inset
-
- is quantity consumed of item 
-\begin_inset Formula $j$
-\end_inset
-
- by the consumer 
-\begin_inset Formula $i$
-\end_inset
-
- - would effectively set 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{2}$
-\end_inset
-
- so that 
-\begin_inset Formula $\eta\nu_{1}p_{0}=\sum_{k=0}^{2}p_{k}q_{1k}$
-\end_inset
-
- and 
-\begin_inset Formula $\eta p_{0}\nu_{2}=\sum_{k=0}^{2}p_{k}q_{2k}$
-\end_inset
-
-.
- In this setting, the value of the control 
-\begin_inset Formula $\nu_{i\in[1,2]}$
-\end_inset
-
- represents merely the distance from the fulfillment of the basic needs
- i.e.
- the cost 
-\begin_inset Formula $\eta p_{0}$
-\end_inset
-
-.
- The value of the control is not a quality metric that one may use in a
- demand function 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonQualityQuantityVariation,NelsonQualityQuantity"
-
-\end_inset
-
- - but only a distance from the cost of basic needs in the market that is
- accessible to the consumer.
-\end_layout
-
-\begin_layout Standard
-The form of 
-\begin_inset Formula $p(A_{t-1},\rho)$
-\end_inset
-
- in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstoch"
-
-\end_inset
-
- we choose follows from this basic view of quality control - one that can
- be readily expanded to cases when there are constraints on quality.
- Consider a consumer facing only the prices 
-\begin_inset Formula $p_{0}$
-\end_inset
-
- for item 
-\begin_inset Formula $I_{0}$
-\end_inset
-
-, so that all items other than the item 
-\begin_inset Formula $I_{0}$
-\end_inset
-
- have been removed from her basket (or the market accessible to her).
- The likely effect having just the quantity consumed as 
-\begin_inset Formula $q_{10}$
-\end_inset
-
- would be to reduce 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- (since 
-\begin_inset Formula $\sum_{k=0}^{2}p_{k}q_{1k}=p_{0}q_{0}$
-\end_inset
-
- and 
-\begin_inset Formula $p_{0}<p_{1}<p_{2}$
-\end_inset
-
-)
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Notice however, that the constraint 
-\begin_inset Formula $\nu_{1}\ge1$
-\end_inset
-
- still applies.
-\end_layout
-
-\end_inset
-
-.
- The effect of having constraints on quality due to 
-\begin_inset Formula $A_{t-1}$
-\end_inset
-
- and 
-\begin_inset Formula $\rho$
-\end_inset
-
- is equivalent to addition and removal of items from the basket respectively.
- If a consumer is in a region where only some of the items of the basket
- of a more urban consumer (who has access to all items) are available to
- the consumer, the quality control 
-\begin_inset Formula $\nu$
-\end_inset
-
- she chooses is equivalent to removing some items from the urban consumer's
- basket.
- Thus the function 
-\begin_inset Formula $p(A_{t-1},\rho)$
-\end_inset
-
- can be seen as a filter on the set of prices of a basket of all items (i.e.
- items available at a national level or at the respective top level of granulari
-ty) returning the prices over which 
-\begin_inset Formula $\nu$
-\end_inset
-
- is chosen by the consumer.
- Similarly, when the consumer acquires assets, her basket effectively expands
- as she is forced to be away from basic needs consumption cost 
-\begin_inset Formula $\eta p_{0}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The precise form of 
-\begin_inset Formula $p(A_{t-1},\rho)$
-\end_inset
-
- for a given commodity would thus depend on the prices of the different
- quality variants of the commodity and how sparsely the variants are distributed
- across the population.
- To demonstrate the solution of the equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstochll"
-
-\end_inset
-
- for a particular case, we simplify the distribution on of assets by assuming
- that the assets 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- owned by the consumer would incur a cost 
-\begin_inset Formula $mA_{t}^{\alpha}$
-\end_inset
-
-
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-The similar function for 
-\begin_inset Formula $\rho$
-\end_inset
-
- can be assumed as 
-\begin_inset Formula $b(\rho)$
-\end_inset
-
-.
- A more realistic scenario would be one where 
-\begin_inset Formula $p(A,\rho)$
-\end_inset
-
- as a filter function that assigns levels of consumption (rather than exact
- contributions to 
-\begin_inset Formula $c_{t}$
-\end_inset
-
-) based on 
-\begin_inset Formula $A_{t-1}$
-\end_inset
-
- and 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- This can considered as part of estimation through discrete utility methods.
- 
-\end_layout
-
-\end_inset
-
-and that the characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
- can be viewed as part of assets 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- (in a discrete formulation of the model in Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstoch"
-
-\end_inset
-
-, the lack of availability of high quality items in rural or remote areas
- can represented with an indicator function).
- Empirically, one may use the indicator function instead of the effective
- price 
-\begin_inset Formula $p(A_{t-1},\rho)$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -3735,6 +3354,394 @@ Empirical measurement of quality and needs
 \end_layout
 
 \begin_layout Standard
+
+\series bold
+Empirical issues with needs
+\end_layout
+
+\begin_layout Standard
+The needs process is hardly a typical one in the developing countries where
+ older families live with children.
+ This is evident from the data - the number of children living in a household
+ does not decline sharply with age - implying that older individuals do
+ not necessarily live as separate household.
+ See Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:NumberChildMinYOB"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:NumberChildhhhYOB"
+
+\end_inset
+
+.
+ It would make sense, therefore to consider the number of dependents to
+ the individual rather than the number of children in a consideration of
+ the the consumer's needs over his lifetime.
+ We treat dependents as anyone who is older than the reported household
+ head.
+ While a more complete model for average size of the family may need fertility
+ rate and current population, we assume a structure of the form - assuming
+ that age would determine the family member size (indeed this is not true
+ in the longer-run as the population structure and fertility rates would
+ change).
+ We fit the form 
+\begin_inset Formula $\mu te^{-\kappa t^{2}}$
+\end_inset
+
+ to the age (
+\begin_inset Formula $t$
+\end_inset
+
+) and the number of household members to arrive at the function indicating
+ the expected value of number of members at a certain age (
+\begin_inset Formula $\mu=0.08$
+\end_inset
+
+ and 
+\begin_inset Formula $\kappa=-9\times10^{-5}$
+\end_inset
+
+).
+ Thus, 
+\begin_inset Formula $\eta(t)=(.08)te^{9\times10^{-5}t^{2}}$
+\end_inset
+
+ is used in the Euler equations.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Empirical issues with Assets
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+Empirically, we rely on the separation of the long-term (more stable) needs
+ of the consumer from her short-term (more volatile) needs.
+ The longer-term assets are what would cause the stability of income while
+ non-durable consumption or assets that are not to improve observed probability
+ in any possible are classified as the short-term needs.
+ An item-by-item analysis of the life-expectancy of all owned items is possible.
+ The average life-time of a product being consumed is a more objective measure
+ than its status-carrying potential (which one would record in a survey).
+ Whatever can't be passed on isn't long-term and would not cause any observable
+ change in mobility.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Empirical issues with 
+\begin_inset Formula $p(A_{t-1},\rho)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We don't consider running costs of entertainment boats etc.
+ (which can be controlled) - but only those that are necessitated.
+ No-one buys an electrical stove without the plan of using it.
+ Agricultural equipment (also because of the very sparingly available are
+ ignored).
+\end_layout
+
+\begin_layout Standard
+To see how this may work in an empirical setting, consider the commodities
+ 
+\begin_inset Formula $I_{0},I_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{2}$
+\end_inset
+
+ with the respective prices 
+\begin_inset Formula $p_{0},p_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{2}$
+\end_inset
+
+ so that 
+\begin_inset Formula $p_{0}<p_{1}<p_{2}$
+\end_inset
+
+.
+ Further, let 
+\begin_inset Formula $I_{0}$
+\end_inset
+
+ be the item with the lowest available quality (hence the minimum price
+ 
+\begin_inset Formula $p_{0}$
+\end_inset
+
+) and the quantity needed for minimum needs be 
+\begin_inset Formula $\eta$
+\end_inset
+
+.
+ Ignoring the effect of assets accumulation and long-term choices for a
+ moment, a consumers 
+\begin_inset Formula $1$
+\end_inset
+
+ and 
+\begin_inset Formula $2$
+\end_inset
+
+ choosing 
+\begin_inset Formula $(q_{10}q_{11})$
+\end_inset
+
+ and 
+\begin_inset Formula $(q_{20},q_{22})$
+\end_inset
+
+ - where 
+\begin_inset Formula $q_{ij}$
+\end_inset
+
+ is quantity consumed of item 
+\begin_inset Formula $j$
+\end_inset
+
+ by the consumer 
+\begin_inset Formula $i$
+\end_inset
+
+ - would effectively set 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\eta\nu_{1}p_{0}=\sum_{k=0}^{2}p_{k}q_{1k}$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta p_{0}\nu_{2}=\sum_{k=0}^{2}p_{k}q_{2k}$
+\end_inset
+
+.
+ In this setting, the value of the control 
+\begin_inset Formula $\nu_{i\in[1,2]}$
+\end_inset
+
+ represents merely the distance from the fulfillment of the basic needs
+ i.e.
+ the cost 
+\begin_inset Formula $\eta p_{0}$
+\end_inset
+
+.
+ The value of the control is not a quality metric that one may use in a
+ demand function 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation,NelsonQualityQuantity"
+
+\end_inset
+
+ - but only a distance from the cost of basic needs in the market that is
+ accessible to the consumer.
+\end_layout
+
+\begin_layout Standard
+The form of 
+\begin_inset Formula $p(A_{t-1},\rho)$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nonstoch"
+
+\end_inset
+
+ we choose follows from this basic view of quality control - one that can
+ be readily expanded to cases when there are constraints on quality.
+ Consider a consumer facing only the prices 
+\begin_inset Formula $p_{0}$
+\end_inset
+
+ for item 
+\begin_inset Formula $I_{0}$
+\end_inset
+
+, so that all items other than the item 
+\begin_inset Formula $I_{0}$
+\end_inset
+
+ have been removed from her basket (or the market accessible to her).
+ The likely effect having just the quantity consumed as 
+\begin_inset Formula $q_{10}$
+\end_inset
+
+ would be to reduce 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ (since 
+\begin_inset Formula $\sum_{k=0}^{2}p_{k}q_{1k}=p_{0}q_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{0}<p_{1}<p_{2}$
+\end_inset
+
+)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice however, that the constraint 
+\begin_inset Formula $\nu_{1}\ge1$
+\end_inset
+
+ still applies.
+\end_layout
+
+\end_inset
+
+.
+ The effect of having constraints on quality due to 
+\begin_inset Formula $A_{t-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is equivalent to addition and removal of items from the basket respectively.
+ If a consumer is in a region where only some of the items of the basket
+ of a more urban consumer (who has access to all items) are available to
+ the consumer, the quality control 
+\begin_inset Formula $\nu$
+\end_inset
+
+ she chooses is equivalent to removing some items from the urban consumer's
+ basket.
+ Thus the function 
+\begin_inset Formula $p(A_{t-1},\rho)$
+\end_inset
+
+ can be seen as a filter on the set of prices of a basket of all items (i.e.
+ items available at a national level or at the respective top level of granulari
+ty) returning the prices over which 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is chosen by the consumer.
+ Similarly, when the consumer acquires assets, her basket effectively expands
+ as she is forced to be away from basic needs consumption cost 
+\begin_inset Formula $\eta p_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The precise form of 
+\begin_inset Formula $p(A_{t-1},\rho)$
+\end_inset
+
+ for a given commodity would thus depend on the prices of the different
+ quality variants of the commodity and how sparsely the variants are distributed
+ across the population.
+ To demonstrate the solution of the equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nonstochll"
+
+\end_inset
+
+ for a particular case, we simplify the distribution on of assets by assuming
+ that the assets 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ owned by the consumer would incur a cost 
+\begin_inset Formula $mA_{t}^{\alpha}$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The similar function for 
+\begin_inset Formula $\rho$
+\end_inset
+
+ can be assumed as 
+\begin_inset Formula $b(\rho)$
+\end_inset
+
+.
+ A more realistic scenario would be one where 
+\begin_inset Formula $p(A,\rho)$
+\end_inset
+
+ as a filter function that assigns levels of consumption (rather than exact
+ contributions to 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+) based on 
+\begin_inset Formula $A_{t-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ This can considered as part of estimation through discrete utility methods.
+ 
+\end_layout
+
+\end_inset
+
+and that the characteristics 
+\begin_inset Formula $\rho$
+\end_inset
+
+ can be viewed as part of assets 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ (in a discrete formulation of the model in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nonstoch"
+
+\end_inset
+
+, the lack of availability of high quality items in rural or remote areas
+ can represented with an indicator function).
+ Empirically, one may use the indicator function instead of the effective
+ price 
+\begin_inset Formula $p(A_{t-1},\rho)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 As we have hinted in the Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4155,6 +4162,123 @@ While one may identify a fixed number of commodity groups in the country
 .
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/numchildren_age_2012.png
+	width 2.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:NumberChildMinYOB"
+
+\end_inset
+
+Number of children living in the household vs the age-group of the oldest
+ member 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/numchildren_age_head_2012.png
+	width 2.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:NumberChildhhhYOB"
+
+\end_inset
+
+Number of children living in the household vs the age-group of the (reported)
+ household head
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/nummembers_age_occhead_2012.png
+	width 2.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Number of members in the household vs the age group of the main household
+ earner (usually household head)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Data
 \end_layout
@@ -4318,7 +4442,22 @@ Results
 \end_layout
 
 \begin_layout Standard
-==
+
+\bar under
+A consequence of the exogenous process is that the rich are more likely
+ to stay rich than the poor are to become rich (otherwise there would be
+ no stratification in the society).
+ We would expect total quality per assets to be lower for the rich than
+ it is for the poor - whose expectation for the long-term growth is lower
+ but they are more likely to overweigh on the probabilistic growth through.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Results"
+
+\end_inset
+
+ discusses these expectations in more detail.
 \end_layout
 
 \begin_layout Section

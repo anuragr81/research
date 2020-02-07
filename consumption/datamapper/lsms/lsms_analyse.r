@@ -749,15 +749,15 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   hhp2010 <- merge(lsms_normalizer()@categories_needs_based(),hhp2010)
   regionfoodprice2010 <- hhp2010 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
   basket_constituent_costs2010 <- ddply( unique(regionfoodprice2010[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price) , .(region,district,category), rec_cost = sum(rec_cost))
-  basket_costs2010 <- ddply(basket_constituent_costs2010, .(region,district), summarise, basket_cost = sum(rec_cost))
-  regionfoodbasketcosts2010 <- subset(ddply(basket_costs2010,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
+  basket_costs2010 <- ddply(basket_constituent_costs2010, .(region,district), summarise, basket_cost = sum(rec_cost)) %>% mutate(assetlevel="none")
+  #regionfoodbasketcosts2010 <- subset(ddply(basket_costs2010,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
   #barplot(regionfoodbasketcosts2010$basket_cost,names.arg = regionfoodbasketcosts2010$region, las=2 , xlab= "region" , ylab="cost of food basket" , main="Basket costs across regions (2010)")
   
   hhp2012 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2012,ohsdata=o2012,ddata=fooddiarydata2012)
   hhp2012 <- merge(lsms_normalizer()@categories_needs_based(),hhp2012)
   regionfoodprice2012 <- hhp2012 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
   basket_constituent_costs2012 <- ddply( unique(regionfoodprice2012[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price) , .(region,district,category), rec_cost = sum(rec_cost))
-  basket_costs2012 <- ddply(basket_constituent_costs2012, .(region,district), summarise, basket_cost = sum(rec_cost))
+  basket_costs2012 <- ddply(basket_constituent_costs2012, .(region,district), summarise, basket_cost = sum(rec_cost)) %>% mutate(assetlevel="none")
   regionfoodbasketcosts2012 <- subset(ddply(basket_costs2012,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
   
   hhp2014 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2014,ohsdata=o2014,ddata=fooddiarydata2014)
@@ -766,7 +766,7 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   regionfoodprice2014 <- hhp2014 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
   regionfoodprice2012 <- hhp2012 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
   basket_constituent_costs2012 <- ddply( unique(regionfoodprice2012[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price) , .(region,district,category), rec_cost = sum(rec_cost))
-  basket_costs2014 <- ddply(basket_constituent_costs2014, .(region,district), summarise, basket_cost = sum(rec_cost))
+  basket_costs2014 <- ddply(basket_constituent_costs2014, .(region,district), summarise, basket_cost = sum(rec_cost)) %>% mutate(assetlevel="none")
   regionfoodbasketcosts2014 <- subset(ddply(basket_costs2014,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
   
   #energy - load cheapest energy prices
@@ -775,12 +775,25 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   
   hhpm2010       <- add_market_price_to_misc_diary (curyear = 2010, dirprefix ="../", fu=fu, ln=lsms_normalizer, groups = groups, lgc=lgc,
                                           ld = ld, marketpricesdata=mktprices2010,ohsdata=o2010,ddata=miscdiarydata2010)
-  #60w bulb for 5 hours (lighting)
-  #1500W electricity for 1 hour (cooking).
-  #1 litre -> 10kWh , 1.5 kW per day
+
+  
+  if (setequal(unique(paste(subset(hhpm2010, shortname=="kerosene")$region,subset(hhpm2010, shortname=="kerosene")$district)), unique(paste(hhpm2010$region,hhpm2010$district)))==FALSE){
+    stop("Kerosene not available in all regions")
+  }
+  energy_prices2010 <- rbind( subset(hhpm2010, shortname=="kerosene") %>% mutate(kwhprice = 10*price) , subset(hhpm2010, shortname=="electricity") %>% mutate(kwhprice = price))
+  energy_prices2010 <- merge(groups,energy_prices2010)
+  
+  View(energy_prices2010 [ ,c("shortname","category","region","district","recq","kwhprice" )] %>% group_by(region,district,category) %>% filter(kwhprice==min(kwhprice)))
+  
+  #These assets are agricultural: subset(a2010, is.element(shortname,c("milkingmachine","harvester","waterpump","coffeepulpingmachine","engine_outboard")) & number>0)
+  
+  # 60W bulb for 5 hours (lighting)
+  # 1500W electricity for 1 hour (cooking)
+  # 1 litre -> 10kWh , 1.5 kW per day
   # if has fridge, then 180x24 per day
   # if has computer, then 100W per hr
-  
+  # agricultural machines would be assumed to have a different running cost from cars (their usage would be proportional to the land owned by the household)
+  # final mapping has fields: (region,district,assetlevel) -> rc where assetlevel \in { kerosene_stove , elec_bulb, refrig, computer, elecoven, electstove, agri }
   
   # transport - load petrol prices and load public transport prices
   # sum up all the costs - this total cost should be seen as p(A_{t-1},\rho) x needs_cost
