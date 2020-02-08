@@ -2790,8 +2790,8 @@ Here,
 \begin_inset Formula $p(A_{t-1},\rho)$
 \end_inset
 
- can also be approximated outside of the demand framework - allowing us
- to view peer effects solely in the parameter 
+ can also be approximated outside of the demand framework allowing us to
+ view peer effects solely in the parameter 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -3358,8 +3358,8 @@ Needs Process
 \end_layout
 
 \begin_layout Standard
-The needs process is hardly a typical one in the developing countries where
- older families live with children.
+The needs process is hardly typical in the developing countries where older
+ families live with the progeny.
  This is evident from the data - the number of children living in a household
  does not decline sharply with age - implying that older individuals do
  not necessarily live as separate household.
@@ -3410,7 +3410,7 @@ reference "fig:NumberChildhhhYOB"
 \begin_inset Formula $\eta(t)=(.08)te^{9\times10^{-5}t^{2}}$
 \end_inset
 
- is used in the Euler equations.
+ can be used in the Euler equations.
 \end_layout
 
 \begin_layout Standard
@@ -3535,24 +3535,32 @@ Income process
 \end_layout
 
 \begin_layout Standard
-We don't have income data on all household head.
- The income process used in the Tanzanian data has been calibrated with
- the primary occupations - which are what every household head is matched
- with.
- We have matched hhid information from the 2012 and 2014 to verify the common
- hhids have similar household reported characteristics (for characteristic
- such as the date of birth of adults etc.).
- For this purpose, the survey for 2014 is different from the past years
- since the year of birth is not recorded in the year - instead age has been
- directly reported.
- This has required us to match the inferred YOB with the year 2012 for matching.
- Most households have been tracked over two years rather than four - the
- number of household from 2010 that appear in 2014 are actually less than
- 100.
+One limitation of the Tanzanian LSMS data which we use in the current study
+ is that it does not provide income data for every household head.
+ Another limitation is that households that are visited in a particular
+ year and less likely to be visited after the 2 years.
+ This means that while a significant number households would be commend
+ between 2010 and 2012 as well as 2012 and 2014, very few households that
+ were visited in 2010 would be visited in 2014 (in fact less than 100 household
+ from the survey in 2010 were visited in 2014).
+ The lack of a true panel data compels us to prepare a pseudo-panel for
+ the calibration of the income process.
+ This pseudo-panel is based on similarity of the number of adults, the number
+ of child, the year of birth of adults, the occupation and education levels
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A minor issues that was encountered is that while year-of-birth is recorded
+ in the community survey for years 2010 and 2012, the year 2014 has recorded
+ age of the individuals.
+ Since, we match the year-of-birth with a certain tolerance, the difference
+ in inferred YOBs to be matched didn't pose a major issue.
 \end_layout
 
-\begin_layout Standard
-The panel information for income data is sparse - hence, we use a pseudopanel.
+\end_inset
+
+.
  The process for 
 \begin_inset Formula $i_{t}$
 \end_inset
@@ -3576,35 +3584,51 @@ name "subsec:EmpiricalIssues"
 
 \end_inset
 
-Role of assets in the demand for quality
+Quality constraints due to assets
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-Empirically, we rely on the separation of the long-term (more stable) needs
- of the consumer from her short-term (more volatile) needs.
- The longer-term assets are what would cause the stability of income while
- non-durable consumption or assets that are not to improve observed probability
- in any possible are classified as the short-term needs.
- An item-by-item analysis of the life-expectancy of all owned items is possible.
- The average life-time of a product being consumed is a more objective measure
- than its status-carrying potential (which one would record in a survey).
+From an empirical point of view, a long-term asset is any good that is of
+ a sufficiently long expected lifetime that it could be passed on the next
+ generation.
  Whatever can't be passed on isn't long-term and would not cause any observable
- change in mobility.
-\end_layout
-
-\begin_layout Standard
-We don't consider running costs of entertainment boats etc.
- (which can be controlled) - but only those that are necessitated.
- No-one buys an electrical stove without the plan of using it.
- Agricultural equipment (also because of the very sparingly available are
- ignored).
-\end_layout
-
-\begin_layout Standard
-To see how this may work in an empirical setting, consider the commodities
+ change in mobility - and is therefore considered non-durable consumption
+ (inclusive of any status consumption through quality).
+ As discussed in the previous section, certain maintenance fees, rents or
+ running costs would not be considered quality but merely enhanced needs
+ of the consumer.
+ Since status utility to the consumer comprises both of the non-durable
+ consumption and the owned assets, such constraints (maintenance fees etc.)
+ contribute to status only through ownership the assets which bears their
+ cost.
  
+\end_layout
+
+\begin_layout Standard
+To calculate non-durable consumption costs necessitated through assets,
+ we consider average operation time associated with the asset.
+ A refrigerator is expected to run 24 hrs a day - hence the electricity
+ requirement of the refrigerator are part of the running costs incurred
+ to consumer.
+ An electrical stove or agricultural equipment is hardly without a plan
+ to using - hence their running costs are inferred and added to the quality
+ constraint.Using the same rationale, the running costs for entertainment
+ boats etc.
+ (whose running time is controlled and is associated with leisure) are not
+ considered part of the quality constraint.
+ With these caveats, we now turn to finding a precise form of 
+\begin_inset Formula $p(A_{t},\rho)$
+\end_inset
+
+ to be used in an empirical analysis.
+\end_layout
+
+\begin_layout Standard
+Consider first how our notion of quality control 
+\begin_inset Formula $\nu$
+\end_inset
+
+ represents the consumption from a set of items say 
 \begin_inset Formula $I_{0},I_{1}$
 \end_inset
 
@@ -3612,7 +3636,7 @@ To see how this may work in an empirical setting, consider the commodities
 \begin_inset Formula $I_{2}$
 \end_inset
 
- with the respective prices 
+ that have prices 
 \begin_inset Formula $p_{0},p_{1}$
 \end_inset
 
@@ -3620,27 +3644,26 @@ To see how this may work in an empirical setting, consider the commodities
 \begin_inset Formula $p_{2}$
 \end_inset
 
- so that 
+ respectively so that 
 \begin_inset Formula $p_{0}<p_{1}<p_{2}$
 \end_inset
 
 .
- Further, let 
+ Here 
 \begin_inset Formula $I_{0}$
 \end_inset
 
- be the item with the lowest available quality (hence the minimum price
+ is the item with the lowest available quality (hence the minimum price
  
 \begin_inset Formula $p_{0}$
 \end_inset
 
-) and the quantity needed for minimum needs be 
+).
+ Assuming that the quantity needed for minimum needs per head is 
 \begin_inset Formula $\eta$
 \end_inset
 
-.
- Ignoring the effect of assets accumulation and long-term choices for a
- moment, a consumers 
+, two consumers 
 \begin_inset Formula $1$
 \end_inset
 
@@ -3685,7 +3708,7 @@ To see how this may work in an empirical setting, consider the commodities
 \end_inset
 
 .
- In this setting, the value of the control 
+ The value of the control 
 \begin_inset Formula $\nu_{i\in[1,2]}$
 \end_inset
 
@@ -3695,22 +3718,12 @@ To see how this may work in an empirical setting, consider the commodities
 \begin_inset Formula $\eta p_{0}$
 \end_inset
 
-.
- The value of the control is not a quality metric that one may use in a
- demand function 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonQualityQuantityVariation,NelsonQualityQuantity"
-
-\end_inset
-
- - but only a distance from the cost of basic needs in the market that is
- accessible to the consumer.
+ and represents the consumer preference for quality within a certain commodity.
 \end_layout
 
 \begin_layout Standard
 The form of 
-\begin_inset Formula $p(A_{t-1},\rho)$
+\begin_inset Formula $p(A_{t},\rho)$
 \end_inset
 
  in Equation 
@@ -3720,8 +3733,7 @@ reference "eq:nonstoch"
 
 \end_inset
 
- we choose follows from this basic view of quality control - one that can
- be readily expanded to cases when there are constraints on quality.
+ follows from this basic view of quality control.
  Consider a consumer facing only the prices 
 \begin_inset Formula $p_{0}$
 \end_inset
@@ -3739,7 +3751,7 @@ reference "eq:nonstoch"
 \begin_inset Formula $q_{10}$
 \end_inset
 
- would be to reduce 
+ is thus be to reduce 
 \begin_inset Formula $\nu_{1}$
 \end_inset
 
@@ -3767,35 +3779,35 @@ Notice however, that the constraint
 
 .
  The effect of having constraints on quality due to 
-\begin_inset Formula $A_{t-1}$
+\begin_inset Formula $A_{t}$
 \end_inset
 
  and 
 \begin_inset Formula $\rho$
 \end_inset
 
- is equivalent to addition and removal of items from the basket respectively.
- If a consumer is in a region where only some of the items of the basket
- of a more urban consumer (who has access to all items) are available to
- the consumer, the quality control 
+ is thus equivalent to addition and removal of items from the basket respectivel
+y.
+ If a rural consumer who has access to only some of the items from the urban
+ basket (which an urban consumer has access to), the quality control 
 \begin_inset Formula $\nu$
 \end_inset
 
  she chooses is equivalent to removing some items from the urban consumer's
  basket.
  Thus the function 
-\begin_inset Formula $p(A_{t-1},\rho)$
+\begin_inset Formula $p(A_{t},\rho)$
 \end_inset
 
- can be seen as a filter on the set of prices of a basket of all items (i.e.
+ is effectively a filter on the set of prices of a basket of all items (i.e.
  items available at a national level or at the respective top level of granulari
-ty) returning the prices over which 
+ty in an empirical) that returns the prices over which 
 \begin_inset Formula $\nu$
 \end_inset
 
  is chosen by the consumer.
- Similarly, when the consumer acquires assets, her basket effectively expands
- as she is forced to be away from basic needs consumption cost 
+ Equivalently, when the consumer acquires more assets, her basket effectively
+ expands as she is forced to be away from basic needs consumption cost 
 \begin_inset Formula $\eta p_{0}$
 \end_inset
 
@@ -3803,215 +3815,12 @@ ty) returning the prices over which
 \end_layout
 
 \begin_layout Standard
-The precise form of 
-\begin_inset Formula $p(A_{t-1},\rho)$
-\end_inset
-
- for a given commodity would thus depend on the prices of the different
- quality variants of the commodity and how sparsely the variants are distributed
- across the population.
- To demonstrate the solution of the equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstochll"
-
-\end_inset
-
- for a particular case, we simplify the distribution on of assets by assuming
- that the assets 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- owned by the consumer would incur a cost 
-\begin_inset Formula $mA_{t}^{\alpha}$
-\end_inset
-
-
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-The similar function for 
-\begin_inset Formula $\rho$
-\end_inset
-
- can be assumed as 
-\begin_inset Formula $b(\rho)$
-\end_inset
-
-.
- A more realistic scenario would be one where 
-\begin_inset Formula $p(A,\rho)$
-\end_inset
-
- as a filter function that assigns levels of consumption (rather than exact
- contributions to 
-\begin_inset Formula $c_{t}$
-\end_inset
-
-) based on 
-\begin_inset Formula $A_{t-1}$
-\end_inset
-
- and 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- This can considered as part of estimation through discrete utility methods.
- 
-\end_layout
-
-\end_inset
-
-and that the characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
- can be viewed as part of assets 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- (in a discrete formulation of the model in Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstoch"
-
-\end_inset
-
-, the lack of availability of high quality items in rural or remote areas
- can represented with an indicator function).
- Empirically, one may use the indicator function instead of the effective
- price 
-\begin_inset Formula $p(A_{t-1},\rho)$
-\end_inset
-
-.
+==
 \end_layout
 
 \begin_layout Standard
-It could be argued that sustenance is possible in a developing economy with
- tattered clothes and intake of raw food.
- This, however, is unlikely to be a serious concern for the model.
- First, the purpose of our standard basket is much narrower in context than
- defining a poverty level - as it only sets a point of reference to see
- how the quality variants of particular commodities are spread across the
- economy.
- Second, the price filter 
-\begin_inset Formula $p(A_{t-1},\rho)$
-\end_inset
 
- does take care of lifestyles that are lower than the chosen threshold.
- More particularly, the consumers who don't own assets can have a zero consumpti
-on in the model if 
-\begin_inset Formula $p(A_{t-1},\rho)=0$
-\end_inset
-
- for low values of 
-\begin_inset Formula $A_{t-1}$
-\end_inset
-
- (or certain values of 
-\begin_inset Formula $\rho$
-\end_inset
-
-).
- In other words, since a consumer would rather eat cooked food and buy clothes
- than save for asset and eat raw food, the possibility of survival of those
- consuming below our chosen standard basket is not an issue for the model.
- Using similar arguments, we should expect very few consumers to compromise
- over basic food quality by a lot only to purchase electricity or a similar
- asset.
- Since quality often moves together in this manner, it would make sense
- limit much substitution between consumption, assets and quality across
- commodities.
- Hence we permit summation of qualities across commodities and an additive
- utility for the consumer.
- Thus, given 
-\begin_inset Formula $N$
-\end_inset
-
- categories (e.g.
- food, energy etc.), if we have 
-\begin_inset Formula $c_{1,t}=\nu_{1}mA_{t-1}^{a}i_{t-1}\eta_{t-1}$
-\end_inset
-
-, 
-\begin_inset Formula $c_{2,t}=\nu_{2}mA_{t-1}^{a}i_{t-1}\eta_{t-1}$
-\end_inset
-
-, then we can write:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-c_{t}=\sum_{k=1}^{N}c_{k,t}=(\eta_{t-1}A_{t-1}^{\alpha}m)\sum_{k=1}^{N}\nu_{k}\label{eq:quality_sum}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Every household thus responds to the common needs differently by adjusting
- 
-\begin_inset Formula $\{\nu_{k}\}$
-\end_inset
-
- and thus 
-\begin_inset Formula $\nu=\sum_{k=1}^{N}\nu_{k}$
-\end_inset
-
-.
- While it is possible to evaluate the model in Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstochll"
-
-\end_inset
-
- for the different commodity categories (i.e.
- using 
-\begin_inset Formula $c_{1},\nu_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $c_{2},\nu_{2}$
-\end_inset
-
- etc.) - but we use the combined 
-\begin_inset Formula $\nu=\sum_{k=1}^{N}\nu_{k}$
-\end_inset
-
- to explore how overall quality may evolve in an intertemporal setting.
- 
-\end_layout
-
-\begin_layout Standard
-A specification function 
-\begin_inset Formula $p(A_{t-1},\rho)$
-\end_inset
-
- can be accurate only if we have i) detailed price information for all items
- ii) the same level of detail across all local areas considered and iii)
- the asset ownership information for every household.
- With the detailed local structure of market prices (or the information
- about availability), we can decompose consumed quality into what is offered
- by the local characteristics and the choice of quality made by the consumer
- (with the quality control variable
-\begin_inset Formula $\nu$
-\end_inset
-
-).
- The effect of prices on the quality consumed could thus also be viewed
- as what is the change in quality that is offered in the market vs what
- the consumer chooses in the response to change in relative prices structure
- of commodity variants.
-\end_layout
-
-\begin_layout Standard
+\bar under
 As we have briefly discussed in the Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4131,6 +3940,203 @@ reference "eq:quality_sum"
 \end_inset
 
  using the Euler equations.
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+A precise form of 
+\begin_inset Formula $p(A_{t-1},\rho)$
+\end_inset
+
+ for a given commodity thus depends both on the prices of the different
+ quality variants of the commodity and how sparsely the variants are distributed
+ across the population.
+ The cost incurred due to assets i.e.
+ 
+\begin_inset Formula $p(A_{t},\rho)$
+\end_inset
+
+ can be directly estimated from the data.
+ Consider, for example, the cost of housing.
+ When the consumer owns a house, this would be the mortgage fee or maintenance
+ fees but when the consumer does not own a house the constraint becomes
+ the rent.
+ To demonstrate a particular solution of the equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nonstochll"
+
+\end_inset
+
+ for a particular case, however, we simplify the distribution on of assets
+ by assuming that the assets 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ owned by the consumer would incur a cost 
+\begin_inset Formula $mA_{t}^{\alpha}$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The similar function for 
+\begin_inset Formula $\rho$
+\end_inset
+
+ can be assumed as 
+\begin_inset Formula $b(\rho)$
+\end_inset
+
+.
+ A more realistic scenario would be one where 
+\begin_inset Formula $p(A,\rho)$
+\end_inset
+
+ as a filter function that assigns levels of consumption (rather than exact
+ contributions to 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+) based on 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+and that the characteristics 
+\begin_inset Formula $\rho$
+\end_inset
+
+ can be viewed as part of assets 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The price filter 
+\begin_inset Formula $p(A_{t},\rho)$
+\end_inset
+
+ also represents the lifestyle differences imposed through personal characterist
+ics.
+ The consumers who live in a remote area may would have a zero consumption
+ for certain commodities if 
+\begin_inset Formula $p(A_{t},\rho)=0$
+\end_inset
+
+ i.e.
+ for low values of 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ or certain values of 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ Since such a filter makes quality moves together with asset ownership in
+ this manner, the substitution between consumption, assets and quality across
+ commodities is also limited.
+ Thus we permit summation of qualities across commodities and an additive
+ utility for the consumer.
+ Thus, given 
+\begin_inset Formula $N$
+\end_inset
+
+ categories (e.g.
+ food, energy etc.), if we have 
+\begin_inset Formula $c_{1,t}=\nu_{1}mA_{t-1}^{a}i_{t-1}\eta_{t-1}$
+\end_inset
+
+, 
+\begin_inset Formula $c_{2,t}=\nu_{2}mA_{t-1}^{a}i_{t-1}\eta_{t-1}$
+\end_inset
+
+, then we can write:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+c_{t}=\sum_{k=1}^{N}c_{k,t}=(\eta_{t}A_{t}^{\alpha}m)\sum_{k=1}^{N}\nu_{t,k}\label{eq:quality_sum}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Every household thus responds to the common needs differently by adjusting
+ 
+\begin_inset Formula $\{\nu_{t,k}\}$
+\end_inset
+
+ and thus 
+\begin_inset Formula $\nu_{t}=\sum_{k=1}^{N}\nu_{t,k}$
+\end_inset
+
+.
+ While it is possible to evaluate the model in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nonstochll"
+
+\end_inset
+
+ for the different commodity categories (i.e.
+ using 
+\begin_inset Formula $c_{1},\nu_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $c_{2},\nu_{2}$
+\end_inset
+
+ etc.) - we use the combined 
+\begin_inset Formula $\nu_{t}=\sum_{k=1}^{N}\nu_{k}$
+\end_inset
+
+ to explore how overall quality may evolve in an intertemporal setting.
+ 
+\end_layout
+
+\begin_layout Standard
+To calibrate a certain form of 
+\begin_inset Formula $p(A_{t},\rho)$
+\end_inset
+
+ we must have price information for all items that are considered basic
+ needs and the asset ownership information for every household.
+ With the detailed local structure of market prices (or the information
+ about availability), we can decompose consumed quality into what is offered
+ by the local characteristics and the choice of quality made by the consumer
+ (with the quality control variable
+\begin_inset Formula $\nu$
+\end_inset
+
+).
+ The effect of prices on the quality consumed could thus also be viewed
+ as what is the change in quality that is offered in the market vs what
+ the consumer chooses in the response to change in relative prices structure
+ of commodity variants.
 \end_layout
 
 \begin_layout Standard
