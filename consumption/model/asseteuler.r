@@ -126,7 +126,7 @@ ns_runsim <- function(nu,N,a){
   retlist[["A"]] = A
   retlist[["c"]] = ct
   retlist[["i"]] = i
-  retlist[["u"]] = ns_u(arrA = A,arrc = ct,arreta = eta)
+  retlist[["u"]] = nsf_u(arrA = A, arrc = ct,arreta = eta)
   retlist[["t"]] = seq(N)
   retlist[["totu"]] = sum(retlist[["u"]])
   
@@ -135,3 +135,69 @@ ns_runsim <- function(nu,N,a){
   #retlist[["u"]] = u
   return(retlist)
 }
+
+nsf_c <- function(A,nu, eta, Psi, a, m,Q){
+  return(eta*Q + Psi*nu + m*A**a)
+}
+
+nsf_next_A <- function(A,income,a,m,nu,eta,Q,Psi, next_income){
+  ct  <- nsf_c(A = A,nu = nu, eta = eta,a = a, m = m, Q=Q, Psi=Psi)
+  
+  if (next_income < ct ){
+    stop(paste("consumption (",ct, ") cannot be higher than income (",next_income, ")"))
+  }
+  return (A + next_income - ct)
+}
+
+nsf_u <- function(arrA,arrnu){
+  u = array()
+  for ( j in seq(length(arrA))) {
+    u [j]  = (log(arrA[j]**(0.2)) + log(arrnu[j]**(0.8)) )
+  } 
+  return (u)
+}
+
+nsf_income_next <- function(income,gk){
+  return (gk*income)
+}
+
+
+
+ns_runsimf <- function(nu,N,a,i0,gk,eta0,A0, m){
+  A = array()
+  ct = array()
+  eta = array()
+  i = array()
+  
+  A[1] = A0
+  eta[1] = eta0
+  i[1] = i0*gk
+  Q = 10
+  Psi = 5
+  ct[1] = nsf_c(A = A[1],nu = nu, eta = eta[1],a = a, m = m, Q = Q , Psi)
+  
+  for (k in seq(1,N-1)){
+    i[k+1] <- nsf_income_next(income=i[k], gk=gk)
+    A[k+1] <- nsf_next_A(A = A[k], income = i[k], a = a, m =m, nu = nu, eta = eta[k] ,next_income = i[k+1],
+                         Q = Q , Psi = Psi)
+    
+    eta[k+1] <- ns_eta_next(t=k, T=N)
+    ct[k+1] <-  nsf_c(A = A[k],nu = nu, eta = eta[k],a = a, m = m,Q = Q , Psi= Psi)
+    
+  }
+  #u <- allu(arrA = A, arrn = n, arrGamma = G)
+  retlist = list()
+  retlist[["A"]] = A
+  retlist[["c"]] = ct
+  retlist[["i"]] = i
+  
+  retlist[["u"]] = nsf_u(arrA = A, arrnu = rep(nu,length(ct)))
+  retlist[["t"]] = seq(N)
+  retlist[["totu"]] = sum(retlist[["u"]])
+  
+  
+  
+  #retlist[["u"]] = u
+  return(retlist)
+}
+
