@@ -149,10 +149,12 @@ nsf_next_A <- function(A,income,a,m,nu,eta,Q,Psi, next_income){
   return (A + next_income - ct)
 }
 
-nsf_u <- function(arrA,arrnu){
+nsf_u <- function(arrA,arrnu,arrbeta){
+  # each u should be based on a certain beta - that beta is also set by the consumer (it varies by year the consumer is this should be an array) 
+  # 
   u = array()
   for ( j in seq(length(arrA))) {
-    u [j]  = (log(arrA[j]**(0.2)) + log(arrnu[j]**(0.8)) )
+    u [j]  = arrbeta[j] * (log(arrA[j]**(0.2)) + log(arrnu[j]**(0.8)) )
   } 
   return (u)
 }
@@ -161,6 +163,18 @@ nsf_income_next <- function(income,gk){
   return (gk*income)
 }
 
+peerf <- function()
+{
+  N= 100
+  nu <- sapply(rnorm(N,1)+10, function(x) { max(0,x)} ) 
+  rho <- floor(runif(N)*3)+1
+  
+  df <- data.frame(nu = nu , rho = rho)
+  
+  df <- merge(df, ddply(df,.(rho),summarise, mnu = mean(nu)), by = c("rho")) %>% mutate ( nudiff = nu - mnu)
+  return(df)
+    
+}
 
 
 ns_runsimf <- function(nu,N,a,i0,gk,eta0,A0, m){
