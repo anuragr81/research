@@ -178,6 +178,7 @@ peerf <- function()
 
 
 ns_runsimf <- function(nu,N,a,i0,gk,eta0,A0, m){
+  #x <- seq(-10,50,.1) ; plot(x,5*x*exp(-x*x*.001),type='l')
   A = array()
   ct = array()
   eta = array()
