@@ -1569,14 +1569,27 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='mangoes', recq = .4, assetlevel="none"))
     x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='sugarcane', recq = .4, assetlevel="none"))
     
+    # 60W bulb for 5 hours or 2 liters per month (lighting)  # ref: https://energypedia.info/wiki/Lighting
+    # 1500W electricity for 1 hour (cooking)
+    # 1 litre -> 10kWh , 1.5 kW per day
+    # if has fridge, then 180x24 per day
+    # if has computer, then 100W per hr
+    # agricultural machines would be assumed to have a different running cost from cars (their usage would be proportional to the land owned by the household)
+    # final mapping has fields: (region,district,assetlevel) -> rc where assetlevel \in { kerosene_stove , elec_bulb, refrig, computer, elecoven, electstove, agri }
     
     
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq =2/30 , assetlevel="kerosene_lighting")) # none is the base level - no asset ownership level has these default costs
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq = 1.5/10, assetlevel="kerosene_cooking")) # none is the base level 
+    x<-rbind(x,data.frame(category = "energy", group="needs",shortname="electricity", recq = 1.5, assetlevel="elecgas_cooking"))
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (3/12)*4, assetlevel="elec_waterheating"))#per-day units(kWh) based on 3 months of usage in the year
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (4/12)*2, assetlevel="elec_acfan"))
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = .05, assetlevel="elec_tvvideomusic"))
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (.180*24), assetlevel="elec_fridge"))
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (4*5*52*.1)/365 , assetlevel="elec_computer")) # 4-h per weekday usage 
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (.28*5*52)/365.0, assetlevel="elec_iron")) # 4-h per weekday usage 
     
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq = NA, assetlevel="none"))
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="charcoal", recq = NA, assetlevel="none"))
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="gas", recq = NA, assetlevel="none"))
-    x<-rbind(x,data.frame(category = "energy", group="needs",shortname="electricity", recq = NA, assetlevel="none"))
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq = NA, assetlevel="none"))
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq = (5*4)/365/11.0, assetlevel="car")) # 11 km/liters and 4 km per weekday 
+    
     
     return(x)
   }

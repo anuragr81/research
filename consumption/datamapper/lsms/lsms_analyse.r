@@ -788,20 +788,15 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   
   View(energy_prices2010 [ ,c("shortname","category","region","district","recq","kwhprice" )] %>% group_by(region,district,category) %>% filter(kwhprice==min(kwhprice)))
   
-  return(energy_prices2010)
+  return(energy_prices2010) #
+
   #These assets are agricultural: subset(a2010, is.element(shortname,c("milkingmachine","harvester","waterpump","coffeepulpingmachine","engine_outboard")) & number>0)
   
-  # 60W bulb for 5 hours (lighting)
-  # 1500W electricity for 1 hour (cooking)
-  # 1 litre -> 10kWh , 1.5 kW per day
-  # if has fridge, then 180x24 per day
-  # if has computer, then 100W per hr
-  # agricultural machines would be assumed to have a different running cost from cars (their usage would be proportional to the land owned by the household)
-  # final mapping has fields: (region,district,assetlevel) -> rc where assetlevel \in { kerosene_stove , elec_bulb, refrig, computer, elecoven, electstove, agri }
   
   # transport - load petrol prices and load public transport prices
-  # sum up all the costs - this total cost should be seen as p(A_{t-1},\rho) x needs_cost
+  # household - rent and clothes
   
+  # sum up all the costs - this total cost should be seen as p(A_{t-1},\rho) x needs_cost
   
   
 }
