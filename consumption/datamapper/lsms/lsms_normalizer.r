@@ -1588,7 +1588,8 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (4*5*52*.1)/365 , assetlevel="elec_computer")) # 4-h per weekday usage 
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (.28*5*52)/365.0, assetlevel="elec_iron")) # 4-h per weekday usage 
     
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq = (5*4)/365/11.0, assetlevel="car")) # 11 km/liters and 4 km per weekday 
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq = (5*4)/365/11.0, assetlevel="petrol_car")) # 11 km/liters and 4 km per weekday 
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq =(5*4)/365/6.5 , assetlevel="petrol_motorbike"))   
     
     
     return(x)
