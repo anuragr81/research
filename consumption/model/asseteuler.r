@@ -108,7 +108,7 @@ ns_runsim <- function(nu,N,a){
   gk = 1.02
   
   m = .05
-
+  
   A[1] = 1
   eta[1] = 1
   i[1] = 10
@@ -173,7 +173,7 @@ peerf <- function()
   
   df <- merge(df, ddply(df,.(rho),summarise, mnu = mean(nu)), by = c("rho")) %>% mutate ( nudiff = nu - mnu)
   return(df)
-    
+  
 }
 
 
@@ -214,5 +214,74 @@ ns_runsimf <- function(nu,N,a,i0,gk,eta0,A0, m){
   
   #retlist[["u"]] = u
   return(retlist)
+}
+
+needs <- function(x){
+  return(x/3*exp(-x*x*.0002))
+}
+
+next_asset_iteration <- function(A,i_next,tau,delta, m , alpha, r) {
+  #\delta_{\tau+1}A_{\tau+1}&=A_{\tau}(1+r)+ki_{\tau}-\eta_{\tau+1}-mA_{\tau}^{\alpha}
+  return( ( 1/ delta) * ( A*(1+r) + i_next - needs(tau) - m*(A**alpha) ) )
+}
+
+recover_delta <- function( df, m , alpha, r , k) {
+  i0 = df$i0 
+  
+  A = df$A0
+  tau = df$age
+  needs <- df$hsize
+  
+  t2 <- (tau-median(tau))**2
+  df$t2 <- t2
+  gA <- (A*(1+r) - m*A**alpha - needs + k**tau * i0 + 1e-19)
+  df$gA <- gA
+  df<- subset(df, gA>0)
+  print("Ignored non-positive gA")
+  lgA <- log(df$gA)
+  tA_next <- log(df$A1 + 1e-19)
+  res <- lm (data=df, tA_next ~  lgA + t2)
+  print(summary(res))
+}
+
+get_sample_df <- function(){
+  N <- 1000
+  percapitaneedscost <- 20
+  
+  inc <- sapply((200-100*abs(rnorm(N))), function(x) { max(x, 10)})
+  # assets are clearly more skewed than incomes
+  x <- rnorm(N); 
+  A0 <- sapply( N-exp(x*x) , function(x) { max (1, 10*x)} )
+  A1 <- sapply(A0+ inc*rnorm(N)*.01,function(x) { max (1, 10*x)} )
+  age <- sapply(30+rnorm(1000)*5,function(x){ max(x,1)}); 
+  
+  hsize <- sapply(age, function(x) { percapitaneedscost*floor(needs(x))})
+  df = data.frame(i0 = inc, age = age, A0 = A0, A1=A1 , hsize = hsize)
+  return(df)
+}
+
+evolve_assets <- function(i0,k,A0,m,alpha , r){
+  if (missing(m)){
+    m <- 2
+  }
+  if (missing(alpha)){
+    alpha <- .5
+  }
+  
+  tauvec <- seq(20,60)
+  #delta <- tauvec/10 * exp(-tauvec*tauvec/2000)
+  delta <- rep(1,length(tauvec))
+  #ppl_ages <- sapply((40+rnorm(100)*10), function(x) { max(x,20)} ) ;  
+  i = i0
+  A <- A0
+  assets <- array()
+  for (i in seq(length(tauvec))){
+    
+    inc_next =  i0*k
+    A <- next_asset_iteration(A = A, i_next = inc_next, tau = tauvec[i], delta = delta[i], m = m , alpha = alpha, r=r)
+    assets[i] <- A
+  }
+  return(assets)
+  
 }
 

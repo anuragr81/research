@@ -1632,6 +1632,9 @@ lsms_loader<-function(fu,ln,lgc) {
     region_district_consumed_items <- unique(merge(unique(ohsdata[,c("region","district","hhid")]),
                                                    unique(diarydata[,c("hhid","shortname","item")],by=c("hhid")))[,c("region","district","shortname","item")])
     
+    if (dim(region_district_consumed_items)[1]<1){
+      stop("get_regressed_market_prices - Could not find any data to regress")
+    }
     print("Obtaining district level prices")
     market_prices_district <- ddply(unique(marketpricesdata[,c("region","district","code","shortname","lwp","price","factor")]),
                                     .(region,district,shortname),summarise,nprices=length(price[!is.na(price)]),

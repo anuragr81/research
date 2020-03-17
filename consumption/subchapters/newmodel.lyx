@@ -897,6 +897,281 @@ At this point however, the consumer's choice varies according to the age
 \end_inset
 
 .
+ Deaton does clarify in Understanding Consumption - that there cannot be
+ dynamic inconsistency (which is tantamount to irrationality).
+ Hence, the behaviour of an older consumer is the same as the future behaviour
+ of a younger consumer.
+ Finally, it's the total sum 
+\begin_inset Formula $\sum_{i=1}^{T-t}u_{i}$
+\end_inset
+
+ whose optimisation would give us an equation (
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ does not help as is).
+ 
+\end_layout
+
+\begin_layout Standard
+Another possible way to be able to get keep the general 
+\begin_inset Formula $a_{t}/b_{t}$
+\end_inset
+
+ and observe how that establishes the optimal path.
+ The idea of an optimal path needs to be explained better.
+ 
+\end_layout
+
+\begin_layout Standard
+Because we don't have future prices and too much uncertainty around prices
+ for quality vs needs.
+ Let's consider a model without prices.
+ Here, 
+\begin_inset Formula $A_{t+1}=A_{t}(1+r)+ki_{t}-\nu_{t+1}-\eta_{t+1}-p(A_{\tau})$
+\end_inset
+
+.
+ Needs don't carry any advantage through excess so the utility function
+ for a consumer starting her working life is 
+\begin_inset Formula $U=\sum_{\tau=\tau_{0}}u_{\tau}=\sum_{\tau=\tau_{0}}^{T}(a_{\tau}\ log(\nu_{\tau})+b_{t}\ log(A_{\tau})+(1-a_{\tau}-b_{\tau})f(\rho))$
+\end_inset
+
+.
+ Here, needs 
+\begin_inset Formula $\eta_{\tau}$
+\end_inset
+
+ and parameters 
+\begin_inset Formula $a_{\tau},b_{\tau}$
+\end_inset
+
+ are dependent on age.
+ All consumers choose 
+\begin_inset Formula $\nu_{\tau+1}$
+\end_inset
+
+ at age 
+\begin_inset Formula $\tau$
+\end_inset
+
+ so that 
+\begin_inset Formula $u_{\tau+1}-u_{\tau}$
+\end_inset
+
+ is maximised.
+ Thus, 
+\begin_inset Formula $\frac{\partial u_{\tau+1}}{\partial\nu_{t+1}}=0\Rightarrow\frac{a_{\tau+1}}{\nu_{\tau+1}}=\frac{b_{\tau+1}}{A_{\tau+1}}\Rightarrow\nu_{\tau+1}=\frac{a_{\tau+1}}{b_{\tau+1}}A_{\tau+1}$
+\end_inset
+
+(
+\begin_inset Formula $\because\frac{\partial A_{t+1}}{\partial\nu_{t+1}}=-1)$
+\end_inset
+
+.
+ Choosing such 
+\begin_inset Formula $\nu_{t+1}$
+\end_inset
+
+ would ensure that the following condition is met for a consumer who is
+ 
+\begin_inset Formula $\tau$
+\end_inset
+
+ years old - 
+\begin_inset Formula $A_{\tau+1}=A_{\tau}(1+r)+ki_{\tau}-\frac{a_{\tau+1}}{b_{\tau+1}}A_{\tau+1}-\eta_{\tau+1}-p(A_{\tau})$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $1+\frac{a_{\tau+1}}{b_{\tau+1}}=\delta_{\tau+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $p(A_{t})=mA_{\tau}^{\alpha}$
+\end_inset
+
+, then we can write
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+A_{\tau}(1+r)-mA_{\tau}^{\alpha}=\delta_{\tau+1}A_{\tau+1} & -k^{\tau}i_{0}+\eta(\tau)\label{eq:nopricesiteration}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $log(A_{\tau}(1+r)-mA_{\tau+1}^{\alpha}+k^{\tau}i_{0}-\eta_{\tau})+\frac{(\tau-\tau_{m})^{2}}{a}=log(A_{\tau+1})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Difference across quantiles would indicate different mobility in societies.
+ The trouble with recovering 
+\begin_inset Formula $\delta_{\tau+1}$
+\end_inset
+
+ using above is that 
+\begin_inset Formula $\delta_{\tau+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{\tau+1}$
+\end_inset
+
+ are both dependent on 
+\begin_inset Formula $\tau$
+\end_inset
+
+ .
+ This means that every age would correspond to a different coefficient 
+\begin_inset Formula $\delta_{\tau+1}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\delta_{\tau}$
+\end_inset
+
+ affects only the consumer age 
+\begin_inset Formula $\tau$
+\end_inset
+
+ this would mean that only consumers aged 
+\begin_inset Formula $\tau,\tau+1$
+\end_inset
+
+ can be used for estimation.
+ An assumption on how 
+\begin_inset Formula $\delta_{\tau+1}$
+\end_inset
+
+ may depend on 
+\begin_inset Formula $\tau$
+\end_inset
+
+ may be a better approach for data.
+ To answer what this dependence should look like, consider how the utility
+ for the same level of quality and assets would change over age.
+ We would expect more utility through quality in the early years and less
+ during the middle-ages - followed by a mild increase in preference for
+ quality in the later years.
+ A general fitting function (e.g.
+ 
+\begin_inset Formula $f(x)=x^{a}e^{-x^{b}}$
+\end_inset
+
+) can be provided but we should provide both a simple-form and one that
+ adds up to the past utilities.
+ A common function is the discounting function 
+\begin_inset Formula $\frac{1}{(1+\delta)^{\tau}}$
+\end_inset
+
+ .
+ We believe that this relation should depend on needs 
+\begin_inset Formula $\eta$
+\end_inset
+
+ - which itself is attached with life-cycle - the effect of age is aligned
+ with the trajectory of needs.
+ One simple option is to keep the form 
+\begin_inset Formula $e^{-\frac{(x-30)^{2}}{a}}$
+\end_inset
+
+.
+ We could estimate 
+\begin_inset Formula $\frac{a_{\tau}}{b_{\tau}}$
+\end_inset
+
+ - but to accommodate the 
+\begin_inset Formula $\rho$
+\end_inset
+
+-dependent factors, we need to have an explicit dependence 
+\begin_inset Formula $a_{\tau}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{\tau}$
+\end_inset
+
+ (or 
+\begin_inset Formula $\delta_{\tau}$
+\end_inset
+
+) on 
+\begin_inset Formula $\rho$
+\end_inset
+
+ - arguing that individuals with different 
+\begin_inset Formula $\rho$
+\end_inset
+
+ would have a different behaviour.
+\end_layout
+
+\begin_layout Standard
+Another way to see the effect of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is to consider 
+\begin_inset Formula $\sum_{\rho}\nu_{\tau+1}$
+\end_inset
+
+ in the optimisation so that first-order conditions for 
+\begin_inset Formula $u_{\tau+1}=a_{\tau+1}ln(\nu_{\tau+1})+b_{\tau+1}ln(A_{\tau+1})+(1-a_{\tau+1}-b_{\tau+1})ln(\sum_{\rho}\nu_{\tau+1})$
+\end_inset
+
+ are 
+\begin_inset Formula $\frac{a_{\tau+1}}{\nu_{\tau+1}}-\frac{b_{\tau+1}}{A_{\tau+1}}+\frac{(1-a_{\tau+1}-b_{\tau+1})}{G(\rho,\tau+1)}$
+\end_inset
+
+=0 where 
+\begin_inset Formula $G(\rho,\tau+1)=\sum_{\rho}\nu_{\tau+1}$
+\end_inset
+
+.
+ This would lead to a quadratic formulation of 
+\begin_inset Formula $\nu_{\tau+1}$
+\end_inset
+
+.
+ If we continue assuming that consumer choice of 
+\begin_inset Formula $\nu_{\tau+1}$
+\end_inset
+
+ has no influence on the 
+\begin_inset Formula $\sum_{\rho}\nu_{\tau+1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the empirical analysis, we need to change the description of needs so
+ that it is decomposed into a component that varies proportional to the
+ members of the family and one that moves with the assets acquired by the
+ consumer.
+ The estimation of 
+\begin_inset Formula $mA_{t}^{\alpha}$
+\end_inset
+
+ could thus be together with the price of needs.
+ 
+\end_layout
+
+\begin_layout Standard
+Notice what's nice about minimum cost - if a consumer has both kerosene
+ and electricity - we don't need to know exactly how much of each quantity
+ the consumer is using.
 \end_layout
 
 \begin_layout Standard
@@ -904,6 +1179,7 @@ This analysis ignores the types within the commodity - for which a cost-function
  based formulation may be more appropriate.
  As such this form only explains the substitution between long-term assets
  and quality.
+ 
 \end_layout
 
 \end_body
