@@ -737,13 +737,13 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   fooddiarydata2014      <- subset(c2014,as.integer(as.character(item))>10000)
   
   if (missing(mktprices2010)){
-  mktprices2010 <- ll@load_market_prices(year = 2010, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
+    mktprices2010 <- ll@load_market_prices(year = 2010, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
   }
   if (missing(mktprices2012)){
-  mktprices2012 <- ll@load_market_prices(year = 2012, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
+    mktprices2012 <- ll@load_market_prices(year = 2012, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
   }
   if (missing(mktprices2014)){
-  mktprices2014 <- ll@load_market_prices(year = 2014, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
+    mktprices2014 <- ll@load_market_prices(year = 2014, dirprefix = "../",fu = fu , ln = lsms_normalizer, use_pieces = FALSE)
   }
   
   hhp2010 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2010,ohsdata=o2010,ddata=fooddiarydata2010)
@@ -774,8 +774,8 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   miscdiarydata2010  <- subset(c2010,is.element(shortname,subset(groups , category =="energy")$shortname))
   
   hhpm2010       <- ll@add_market_price_to_misc_diary (curyear = 2010, dirprefix ="../", fu=fu, ln=lsms_normalizer, groups = groups, lgc=lgc,
-                                          ld = ld, marketpricesdata=mktprices2010,ohsdata=o2010,ddata=miscdiarydata2010)
-
+                                                       ld = ld, marketpricesdata=mktprices2010,ohsdata=o2010,ddata=miscdiarydata2010)
+  
   
   if (setequal(unique(paste(subset(hhpm2010, shortname=="kerosene")$region,subset(hhpm2010, shortname=="kerosene")$district)), unique(paste(hhpm2010$region,hhpm2010$district)))==FALSE){
     stop("Kerosene not available in all regions")
@@ -783,15 +783,32 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   energy_prices2010 <- rbind( subset(hhpm2010, shortname=="kerosene") %>% mutate(kwhprice = 10*price) , subset(hhpm2010, shortname=="electricity") %>% mutate(kwhprice = price))
   energy_prices2010 <- merge(groups,energy_prices2010)
   
-  #recq from normaliser would correspond to every asset level - with computer, with refrigerator etc
-  #these levels would then matched when generated from the asset ownership data
+  #recq from normaliser reports recq for  every asset level (e.g. for  computer,refrigerator etc.). These levels are matched with those generated from the asset ownership data
   
-  View(energy_prices2010 [ ,c("shortname","category","region","district","recq","kwhprice" )] %>% group_by(region,district,category) %>% filter(kwhprice==min(kwhprice)))
+  #min_energy_prices <- energy_prices2010 [ ,c("shortname","category","region","district","recq","kwhprice","assetlevel" )] %>% group_by(region,district,category) %>% filter(kwhprice==min(kwhprice))
+  a2010 <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer)
+  assumed2010     <- assume_assets(a2010)
+  assetlevels2010 <- merge(subset(a2010, number>0), asset_levels_for_name())[,c("hhid","assetlevel")]
+  assetlevels2010net <- rbind(assetlevels2010,assumed2010)
+  energybasketconstituents2010 <- merge(assetlevels2010net,energy_prices2010 ) %>% mutate(rec_cost = kwhprice * recq)
+  energybasket2010 <- ddply(energybasketconstituents2010, .(hhid), summarise, basket_cost = sum(rec_cost)) 
   
-  return(energy_prices2010) #
-
-  #These assets are agricultural: subset(a2010, is.element(shortname,c("milkingmachine","harvester","waterpump","coffeepulpingmachine","engine_outboard")) & number>0)
+  #household needs: mensclothes, womensclothes, childrensclothes, mensshoes, womensshoes, childrensshoes
+  #o2012whs <- merge( o2012, ddply(o2012,.(hhid),summarise, hsize=length(personid)), by = c("hhid"))
+  #cdat2012 <- merge((unique(o2012whs[,c("hhid","region","district","hsize")])),c2012,by=c("hhid")) %>% mutate( avcost = cost/hsize)
+  ddply(subset(cdat2012,is.element(shortname,c("mensclothes"))), .(region,district,shortname), summarise, mean_cost = mean(cost) , n = length(hhid))
   
+  
+  #use public transport as need - regardless
+  #add car petrol as need
+  
+  if (nrow(subset(energybasket2010,is.na(recq)))>0){
+    stop("Missing recq for in the energy basket")
+  }
+  # kerosene_cooking
+  
+  
+  return(energybasket2010) 
   
   # transport - load petrol prices and load public transport prices
   # household - rent and clothes
@@ -799,6 +816,44 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   # sum up all the costs - this total cost should be seen as p(A_{t-1},\rho) x needs_cost
   
   
+}
+#{
+#  data.frame(code=1,categ = "kerosene_lighting")
+#  data.frame(code=2,categ = "kerosene_cooking")
+#  data.frame(code=3,categ = "electric_lighting")
+#  data.frame(code=4,categ = "electric_cooking")
+#}
+assume_assets <- function(adat){
+  has_electric_stove <- merge(data.frame(hhid=unique(adat$hhid), dummy=1), subset(adat,number>0 & shortname=="stove_electricgas")[,c("hhid","number")],all.x=TRUE)
+  has_electric_stove$dummy <- NULL
+  if (nrow(has_electric_stove[is.na(has_electric_stove$number),])>0){
+    has_electric_stove[is.na(has_electric_stove$number),]$number <- 0
+  }
+  #hard to find somebody who would have an electric stove and use a kerosene lamp
+  
+  has_electric_stove$lighting <- sapply(has_electric_stove$number, function(x){ if (x>0) {"elec_lighting"}else {"kerosene_lighting"}}) 
+  has_electric_stove$cooking <- sapply(has_electric_stove$number, function(x){ if (x>0) {"elec_cooking"}else {"kerosene_cooking"}}) 
+  
+  a1<- plyr::rename(has_electric_stove[c("hhid","lighting")] %>% gather(hhid,lighting), c("lighting"="assetlevel"))
+  a2<- plyr::rename(has_electric_stove[c("hhid","cooking")] %>% gather(hhid,cooking), c("cooking"="assetlevel"))
+  res <- rbind(a1,a2)
+  return(res)
+}
+
+asset_levels_for_name <- function() {
+  r <- data.frame()
+  r <- rbind(r, data.frame( shortname='refrigerator', assetlevel='elec_fridge'))
+  r <- rbind(r, data.frame( shortname='tv', assetlevel='elec_tvvideomusic'))
+  r <- rbind(r, data.frame( shortname='videoplayer', assetlevel='elec_tvvideomusic'))
+  r <- rbind(r, data.frame( shortname='computer', assetlevel='elec_computer'))
+  r <- rbind(r, data.frame( shortname='iron', assetlevel='elec_iron'))
+  r <- rbind(r, data.frame( shortname='stove_electricgas', assetlevel='elecgas_cooking'))
+  r <- rbind(r, data.frame( shortname='stove_other', assetlevel='kerosene_cooking'))
+  r <- rbind(r, data.frame( shortname='waterheater', assetlevel='elec_waterheating'))
+  r <- rbind(r, data.frame( shortname='musicplayer', assetlevel='elec_tvvideomusic'))
+  r <- rbind(r, data.frame( shortname='musicsystem', assetlevel='elec_tvvideomusic'))
+  r <- rbind(r, data.frame( shortname='ac_fan', assetlevel='elec_acfan'))
+  return(r)
 }
 
 combine_mills_files <- function(years,dirprefix){
