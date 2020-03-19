@@ -713,6 +713,20 @@ run_test <- function() {
   
 }
 
+get_clothing_expenditure <-function (o2012,c2012,o2014,c2014)
+{
+  o2012whs <- merge( o2012, ddply(o2012,.(hhid),summarise, hsize=length(personid)), by = c("hhid"))
+  cdat2012 <- merge((unique(o2012whs[,c("hhid","region","district","hsize")])),c2012,by=c("hhid")) %>% mutate( avcost = cost/hsize)
+  clothing_exp2012 <- ddply(subset(cdat2012,is.element(shortname,c("mensclothes","womensclothes","childrensclothes","mensshoes","womensshoes","childrensshoes")))[,c("hhid","region","district","cost","hsize")],.(hhid), clothes_cost = sum(cost)) %>% mutate(avcost = cost/hsize)
+  clothing_exp_agg2012 <- ddply(clothing_exp,.(region),summarise, mc = mean(avcost))
+
+  o2014whs <- merge( o2014, ddply(o2014,.(hhid),summarise, hsize=length(personid)), by = c("hhid"))
+  cdat2014 <- merge((unique(o2014whs[,c("hhid","region","district","hsize")])),c2014,by=c("hhid")) %>% mutate( avcost = cost/hsize)
+  clothing_exp2014 <- ddply(subset(cdat2014,is.element(shortname,c("mensclothes","womensclothes","childrensclothes","mensshoes","womensshoes","childrensshoes")))[,c("hhid","region","district","cost","hsize")],.(hhid), clothes_cost = sum(cost)) %>% mutate(avcost = cost/hsize)
+  clothing_exp_agg2014 <- ddply(clothing_exp2014,.(region),summarise, mc = mean(avcost))
+  return(clothing_exp_agg2014)
+}
+
 minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices2014){
   # provide a mapping - per region per district i.e. (region,district,characteristic) -> cost of per-head need per year
   #food - (protein, carb, fat, fruitsveg)
@@ -793,12 +807,8 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   energybasketconstituents2010 <- merge(assetlevels2010net,energy_prices2010 ) %>% mutate(rec_cost = kwhprice * recq)
   energybasket2010 <- ddply(energybasketconstituents2010, .(hhid), summarise, basket_cost = sum(rec_cost)) 
   
-  #household needs: mensclothes, womensclothes, childrensclothes, mensshoes, womensshoes, childrensshoes
-  #o2012whs <- merge( o2012, ddply(o2012,.(hhid),summarise, hsize=length(personid)), by = c("hhid"))
-  #cdat2012 <- merge((unique(o2012whs[,c("hhid","region","district","hsize")])),c2012,by=c("hhid")) %>% mutate( avcost = cost/hsize)
-  ddply(subset(cdat2012,is.element(shortname,c("mensclothes"))), .(region,district,shortname), summarise, mean_cost = mean(cost) , n = length(hhid))
-  
-  
+  #household needs: mensclothes, womensclothes, childrensclothes, mensshoes, womensshoes, childrensshoes and rent 
+aa  
   #use public transport as need - regardless
   #add car petrol as need
   
