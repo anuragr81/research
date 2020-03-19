@@ -784,24 +784,25 @@ assign_house_maintenance_2010 <- function(c2010, o2010){
 }
 
 
-assign_house_maintenance_2012 <- function(c2012, o2012){
+assign_house_maintenance_2012_2014 <- function(cdat, odat){
 
-  rentdat2012 <- get_local_median_house_rent(o2012)
+  rentdat <- get_local_median_house_rent(odat)
   
-  alldat2012      <- merge(merge(o2012,rentdat2012,all.x=TRUE)[,c("region","district","housingstatus","hhid","med_rent")],get_housing_cost_df(),by=c("housingstatus"))
+  alldat      <- merge(merge(odat,rentdat,all.x=TRUE)[,c("region","district","housingstatus","hhid","med_rent")],get_housing_cost_df(),by=c("housingstatus"))
   
-  if (dim(alldat2012[is.na(alldat2012$med_rent),])[1]>0){
-    alldat2012[is.na(alldat2012$med_rent),]$med_rent <- 0  
+  if (dim(alldat[is.na(alldat$med_rent),])[1]>0){
+    alldat[is.na(alldat$med_rent),]$med_rent <- 0  
   }
   
-  hownerhids2012     <- unique(subset(o2012, housingstatus == 1)$hhid)
-  repair2012  <- subset(c2012, shortname=="house_repair_yearly" & cost >0 & is.element(hhid,hownerhids2012))
-  repair2012 <- merge(repair2012,subset(o2012[,c("hhid","region","district")] , !is.na(region)), by=c("hhid")) # adding region district
-  medrepair2012 <- ddply(repair2012,.(region,district),summarise, med_maint = median(cost/10)) # perform year to month conversion
-  alldatf2012      <- merge(alldat2012,medrepair2012)
-  alldatf2012$housing_cost <- as.integer(alldatf2012$has_house==1) * alldatf2012$med_maint + as.integer(alldatf2012$has_house==0)*alldatf2012$med_rent
+  hownerhids   <- unique(subset(odat, housingstatus == 1)$hhid)
+  repairdat    <- subset(cdat, shortname=="house_repair_yearly" & cost >0 & is.element(hhid,hownerhids))
+  repairdat    <- merge(repairdat,subset(odat[,c("hhid","region","district")] , !is.na(region)), by=c("hhid")) # adding region district
+  medrepair    <- ddply(repairdat,.(region,district),summarise, med_maint = median(cost/10)) # perform year to month conversion
+  alldatf      <- merge(alldat,medrepair)
   
-  return(alldatf2012)
+  alldatf$housing_cost <- as.integer(alldatf$has_house==1) * alldatf$med_maint + as.integer(alldatf$has_house==0)*alldatf$med_rent
+  
+  return(alldatf)
 }
 
 minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices2014){
