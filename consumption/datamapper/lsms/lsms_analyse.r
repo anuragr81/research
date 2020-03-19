@@ -816,7 +816,8 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   energybasket2010 <- ddply(energybasketconstituents2010, .(hhid), summarise, basket_cost = sum(rec_cost)) 
   
   #household needs: mensclothes, womensclothes, childrensclothes, mensshoes, womensshoes, childrensshoes and rent 
-aa  
+  clothing <- get_clothing_expenditure(o2012 = o2012, c2012 = c2012, o2014 = o2014, c2014 = c2014, ld = ld)
+  
   #use public transport as need - regardless
   #add car petrol as need
   

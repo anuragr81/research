@@ -411,7 +411,7 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='Bicycle service',shortname='bicycle_repair',code='220',category="transport"))
     r=rbind(r,data.frame(item='Servant Wages',shortname='services',code='221',category="social_functions"))
     r=rbind(r,data.frame(item='Mortgage payment',shortname='mortgage',code='222',category="ignored"))
-    r=rbind(r,data.frame(item='House repair',shortname='house_repair',code='223',category="ignored"))
+    r=rbind(r,data.frame(item='House repair',shortname='house_repair_monthly',code='223',category="ignored"))
     r=rbind(r,data.frame(item='Household items repair',shortname='household_products_repair',code='224',category="personal_products"))
     r=rbind(r,data.frame(item='CarpetsRugs',shortname='carpet',code='301',category="housing"))
     r=rbind(r,data.frame(item='Linen',shortname='linen',code='302',category="housing"))
@@ -666,7 +666,7 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='Bicycle service',shortname='bicycle_repair',code='220',category="transport"))
     r=rbind(r,data.frame(item='Servant Wages',shortname='services',code='221',category="social_functions"))
     r=rbind(r,data.frame(item='Mortgage payment',shortname='mortgage',code='222',category="ignored"))
-    r=rbind(r,data.frame(item='House repair',shortname='house_repair',code='223',category="ignored"))
+    r=rbind(r,data.frame(item='House repair',shortname='household_repair',code='223',category="ignored"))
     ####
     r=rbind(r,data.frame(item='CarpetsRugs',shortname='carpet',code='301',category="housing"))
     r=rbind(r,data.frame(item='Linen',shortname='linen',code='302',category="housing"))
@@ -687,7 +687,7 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='ConsumerDurableRepairs',shortname='consumer_durables_repair',code='316',category="personal_products"))
     r=rbind(r,data.frame(item='PropertyIncomeTax',shortname='taxes',code='317',category="misc"))
     
-    r=rbind(r,data.frame(item='Dwelling Repairs-maintenance',shortname='houserepair',code='318',category="housing"))
+    r=rbind(r,data.frame(item='Dwelling Repairs-maintenance',shortname='house_repair_yearly',code='318',category="housing"))
     
     r=rbind(r,data.frame(item='mensclothes',shortname='mensclothes',code='319',category="personal_products"))
     r=rbind(r,data.frame(item='womensclothes',shortname='womensclothes',code='320',category="personal_products"))
@@ -849,7 +849,7 @@ lsms_normalizer<-function() {
     
     r=rbind(r,data.frame(item='Servant Wages',shortname='services',code='221',category="social_functions"))
     r=rbind(r,data.frame(item='Mortgage payment',shortname='mortgage',code='222',category="ignored"))
-    r=rbind(r,data.frame(item='House repair',shortname='house_repair',code='223',category="ignored"))
+    r=rbind(r,data.frame(item='House repair',shortname='household_repair',code='223',category="ignored"))
     ####
     r=rbind(r,data.frame(item='CarpetsRugs',shortname='carpet',code='301',category="housing"))
     r=rbind(r,data.frame(item='Linen',shortname='linen',code='302',category="housing"))
@@ -871,7 +871,7 @@ lsms_normalizer<-function() {
     r=rbind(r,data.frame(item='ConsumerDurableRepairs',shortname='consumer_durables_repair',code='316',category="personal_products"))
     r=rbind(r,data.frame(item='PropertyIncomeTax',shortname='taxes',code='317',category="misc"))
     
-    r=rbind(r,data.frame(item='Dwelling Repairs-maintenance',shortname='houserepair',code='318',category="housing"))
+    r=rbind(r,data.frame(item='Dwelling Repairs-maintenance',shortname='house_repair_yearly',code='318',category="housing"))
     
     r=rbind(r,data.frame(item='mensclothes',shortname='mensclothes',code='319',category="personal_products"))
     r=rbind(r,data.frame(item='womensclothes',shortname='womensclothes',code='320',category="personal_products"))
