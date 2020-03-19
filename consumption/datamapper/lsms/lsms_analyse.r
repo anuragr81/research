@@ -713,18 +713,26 @@ run_test <- function() {
   
 }
 
-get_clothing_expenditure <-function (o2012,c2012,o2014,c2014)
+get_clothing_expenditure <-function (ld,o2012,c2012,o2014,c2014)
 {
   o2012whs <- merge( o2012, ddply(o2012,.(hhid),summarise, hsize=length(personid)), by = c("hhid"))
   cdat2012 <- merge((unique(o2012whs[,c("hhid","region","district","hsize")])),c2012,by=c("hhid")) %>% mutate( avcost = cost/hsize)
   clothing_exp2012 <- ddply(subset(cdat2012,is.element(shortname,c("mensclothes","womensclothes","childrensclothes","mensshoes","womensshoes","childrensshoes")))[,c("hhid","region","district","cost","hsize")],.(hhid), clothes_cost = sum(cost)) %>% mutate(avcost = cost/hsize)
-  clothing_exp_agg2012 <- ddply(clothing_exp,.(region),summarise, mc = mean(avcost))
+  clothing_exp_agg2012 <- ddply(clothing_exp,.(region),summarise, avcost2012 = mean(avcost))
 
   o2014whs <- merge( o2014, ddply(o2014,.(hhid),summarise, hsize=length(personid)), by = c("hhid"))
   cdat2014 <- merge((unique(o2014whs[,c("hhid","region","district","hsize")])),c2014,by=c("hhid")) %>% mutate( avcost = cost/hsize)
   clothing_exp2014 <- ddply(subset(cdat2014,is.element(shortname,c("mensclothes","womensclothes","childrensclothes","mensshoes","womensshoes","childrensshoes")))[,c("hhid","region","district","cost","hsize")],.(hhid), clothes_cost = sum(cost)) %>% mutate(avcost = cost/hsize)
-  clothing_exp_agg2014 <- ddply(clothing_exp2014,.(region),summarise, mc = mean(avcost))
-  return(clothing_exp_agg2014)
+  clothing_exp_agg2014 <- ddply(clothing_exp2014,.(region),summarise, avcost2014 = mean(avcost))
+  res <- merge(clothing_exp_agg2014,clothing_exp_agg2012, by=c("region"))
+  #extrapolate 2010 prices with cpi
+  hcpi <- ld@get_household_cpi()
+  res$cpi2010<- subset(hcpi,year==2010)$price
+  res$cpi2012<- subset(hcpi,year==2012)$price
+  res$cpi2014<- subset(hcpi,year==2014)$price
+  res <- res %>% mutate (r2012 = avcost2012/cpi2012) %>% mutate (r2014 = avcost2014/cpi2014) %>% mutate( r2010 = (r2012+r2014)/2 ) %>% mutate( avcost2010 = r2010 * cpi2010)
+  
+  return(res)
 }
 
 minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices2014){
