@@ -734,6 +734,24 @@ get_clothing_expenditure <-function (ld,o2012,c2012,o2014,c2014)
   
   return(res)
 }
+assign_house_maintenance <- function(odat){
+  # rent in area 7
+  r <- data.frame()
+  # 1- owner occupied, 2- EMPLOYER PROVIDED - SUBSIDIZED, 3-EMPLOYER PROVIDED - FREE, 4- RENTED, 5- FREE, 6-NOMADS 
+  r <- rbind(r,data.frame(housingstatus=5,has_house=1))
+  r <- rbind(r,data.frame(housingstatus=4,has_house=0))
+  r <- rbind(r,data.frame(housingstatus=3,has_house=0))
+  r <- rbind(r,data.frame(housingstatus=2,has_house=0))
+  r <- rbind(r,data.frame(housingstatus=1,has_house=1))
+  #  the total rent varies across regions or district can be seen with the following:
+  #  ddply(subset(rent2010whs, !is.na(region)), .(region,district), summarise, mean_rent = mean(houserent) , n = length(hhid) , sd_rent = sd(houserent))
+  #  What we wish to do is to bring down the granularity to a level where variance is low and 
+  #  then use that rent for those who don't pay the rent (quantiles can be used for the purpose). For now we circumvent the process with use of medians
+  rentdat   <- subset(odat, housingstatus==4)
+  medrent <- ddply(subset(rentdat, !is.na(region)), .(region,district), summarise, med_rent = median(houserent) )
+  res   <- merge(odat,medrent,by=c("region","district"))
+  return(res)
+}
 
 minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices2014){
   # provide a mapping - per region per district i.e. (region,district,characteristic) -> cost of per-head need per year
@@ -744,7 +762,10 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   #veg - 1/2 volume of carbs - 500g
   #fat - 50g per day
   
-  
+  #TODO: graphs and table
+  #graph 1. assets in descreasing order of occurrence frequency
+  #graph 2. region-dependency and hsize-depndency on rent (most renters are in 7 - occupation and education rank have little effect)
+  #greph 3: variation in rent for houses by regions 
   
   c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   c2012 <- ll@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
@@ -817,7 +838,7 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   
   #household needs: mensclothes, womensclothes, childrensclothes, mensshoes, womensshoes, childrensshoes and rent 
   clothing <- get_clothing_expenditure(o2012 = o2012, c2012 = c2012, o2014 = o2014, c2014 = c2014, ld = ld)
-  
+  assign_house_maintenance(o2010)
   #use public transport as need - regardless
   #add car petrol as need
   
