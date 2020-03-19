@@ -734,8 +734,20 @@ get_clothing_expenditure <-function (ld,o2012,c2012,o2014,c2014)
   
   return(res)
 }
-assign_house_maintenance <- function(odat){
-  # rent in area 7
+
+get_local_median_house_rent <- function(odat){
+  #  the total rent varies across regions or district can be seen with the following:
+  #  ddply(subset(rent2010whs, !is.na(region)), .(region,district), summarise, mean_rent = mean(houserent) , n = length(hhid) , sd_rent = sd(houserent))
+  #  What we wish to do is to bring down the granularity to a level where variance is low and 
+  #  then use that rent for those who don't pay the rent (quantiles can be used for the purpose). For now we circumvent the process with use of medians
+  rentdat     <- subset(odat, housingstatus==4)
+  medrent     <- ddply(subset(rentdat, !is.na(region)), .(region,district), summarise, med_rent = median(houserent) )
+  rentdatres  <- merge(rentdat,medrent,by=c("region","district"))
+  
+  return(rentdatres)
+}
+
+get_housing_cost_df <- function(){
   r <- data.frame()
   # 1- owner occupied, 2- EMPLOYER PROVIDED - SUBSIDIZED, 3-EMPLOYER PROVIDED - FREE, 4- RENTED, 5- FREE, 6-NOMADS 
   r <- rbind(r,data.frame(housingstatus=5,has_house=1))
@@ -743,14 +755,53 @@ assign_house_maintenance <- function(odat){
   r <- rbind(r,data.frame(housingstatus=3,has_house=0))
   r <- rbind(r,data.frame(housingstatus=2,has_house=0))
   r <- rbind(r,data.frame(housingstatus=1,has_house=1))
-  #  the total rent varies across regions or district can be seen with the following:
-  #  ddply(subset(rent2010whs, !is.na(region)), .(region,district), summarise, mean_rent = mean(houserent) , n = length(hhid) , sd_rent = sd(houserent))
-  #  What we wish to do is to bring down the granularity to a level where variance is low and 
-  #  then use that rent for those who don't pay the rent (quantiles can be used for the purpose). For now we circumvent the process with use of medians
-  rentdat   <- subset(odat, housingstatus==4)
-  medrent <- ddply(subset(rentdat, !is.na(region)), .(region,district), summarise, med_rent = median(houserent) )
-  res   <- merge(odat,medrent,by=c("region","district"))
-  return(res)
+  return(r)
+}
+
+assign_house_maintenance_2010 <- function(c2010, o2010){
+  # rent in area 7
+
+  #Following can check that very few houses that rent have repair costs
+  #co2010 <- merge(c2010, unique(o2010[,c("hhid","housingstatus")]) , by=c("hhid"))
+  #ddply(subset(co2010, shortname=="house_repair_monthly" & cost >0), .(housingstatus), summarise, n = length(unique(hhid)))
+  
+  rentdat2010 <- get_local_median_house_rent(o2010)
+  
+  alldat2010      <- merge(merge(o2010,rentdat2010,all.x=TRUE)[,c("region","district","housingstatus","hhid","med_rent")],get_housing_cost_df(),by=c("housingstatus"))
+  
+  if (dim(alldat2010[is.na(alldat2010$med_rent),])[1]>0){
+    alldat2010[is.na(alldat2010$med_rent),]$med_rent <- 0  
+  }
+  
+  hownerhids2010     <- unique(subset(o2010, housingstatus == 1)$hhid)
+  repair2010  <- subset(c2010, shortname=="house_repair_monthly" & cost >0 & is.element(hhid,hownerhids2010))
+  repair2010 <- merge(repair2010,subset(o2010[,c("hhid","region","district")] , !is.na(region)), by=c("hhid")) # adding region district
+  medrepair2010 <- ddply(repair2010,.(region,district),summarise, med_maint = median(cost))
+  alldatf2010      <- merge(alldat2010,medrepair2010)
+  alldatf2010$housing_cost <- as.integer(alldatf2010$has_house==1) * alldatf2010$med_maint + as.integer(alldatf2010$has_house==0)*alldatf2010$med_rent
+  
+  return(alldatf2010)
+}
+
+
+assign_house_maintenance_2012 <- function(c2012, o2012){
+
+  rentdat2012 <- get_local_median_house_rent(o2012)
+  
+  alldat2012      <- merge(merge(o2012,rentdat2012,all.x=TRUE)[,c("region","district","housingstatus","hhid","med_rent")],get_housing_cost_df(),by=c("housingstatus"))
+  
+  if (dim(alldat2012[is.na(alldat2012$med_rent),])[1]>0){
+    alldat2012[is.na(alldat2012$med_rent),]$med_rent <- 0  
+  }
+  
+  hownerhids2012     <- unique(subset(o2012, housingstatus == 1)$hhid)
+  repair2012  <- subset(c2012, shortname=="house_repair_yearly" & cost >0 & is.element(hhid,hownerhids2012))
+  repair2012 <- merge(repair2012,subset(o2012[,c("hhid","region","district")] , !is.na(region)), by=c("hhid")) # adding region district
+  medrepair2012 <- ddply(repair2012,.(region,district),summarise, med_maint = median(cost/10)) # perform year to month conversion
+  alldatf2012      <- merge(alldat2012,medrepair2012)
+  alldatf2012$housing_cost <- as.integer(alldatf2012$has_house==1) * alldatf2012$med_maint + as.integer(alldatf2012$has_house==0)*alldatf2012$med_rent
+  
+  return(alldatf2012)
 }
 
 minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices2014){
@@ -838,7 +889,7 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   
   #household needs: mensclothes, womensclothes, childrensclothes, mensshoes, womensshoes, childrensshoes and rent 
   clothing <- get_clothing_expenditure(o2012 = o2012, c2012 = c2012, o2014 = o2014, c2014 = c2014, ld = ld)
-  assign_house_maintenance(o2010)
+  r2010 <- get_local_median_house_rent(o2010)
   #use public transport as need - regardless
   #add car petrol as need
   
@@ -870,7 +921,7 @@ assume_assets <- function(adat){
     has_electric_stove[is.na(has_electric_stove$number),]$number <- 0
   }
   #hard to find somebody who would have an electric stove and use a kerosene lamp
-  
+  print("TODO: <<<<<<<<<<<<<<<<<< change mapping to from asset based to section j based >>>>>>>>>>>>")
   has_electric_stove$lighting <- sapply(has_electric_stove$number, function(x){ if (x>0) {"elec_lighting"}else {"kerosene_lighting"}}) 
   has_electric_stove$cooking <- sapply(has_electric_stove$number, function(x){ if (x>0) {"elec_cooking"}else {"kerosene_cooking"}}) 
   
