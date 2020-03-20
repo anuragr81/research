@@ -758,8 +758,8 @@ get_housing_cost_df <- function(){
   return(r)
 }
 
-assign_house_maintenance_2010 <- function(c2010, o2010){
-  # rent in area 7
+analyse_house_maintenance_2010 <- function(c2010, o2010){
+  # We use these only to arrive at the percentage that would be taken as maintenance cost of the house
   
   #Following can check that very few houses that rent have repair costs
   #co2010 <- merge(c2010, unique(o2010[,c("hhid","housingstatus")]) , by=c("hhid"))
@@ -784,8 +784,8 @@ assign_house_maintenance_2010 <- function(c2010, o2010){
 }
 
 
-assign_house_maintenance_2012_2014 <- function(cdat, odat){
-  ohdat   <- subset(odat,household_status==1)
+analyse_house_maintenance_2012_2014 <- function(cdat, odat,adat){
+  ohdat   <- ddply(odat, (.hhid), summarise, region = unique(region), district = unique(district), houserent = sum(houserent)) [ ,c("hhid","region","district","houserent")]
   rentdat <- get_local_median_house_rent(ohdat)
   
   alldat      <- merge(merge(ohdat,rentdat,all.x=TRUE)[,c("region","district","housingstatus","hhid","med_rent")],get_housing_cost_df(),by=c("housingstatus"))
@@ -795,16 +795,40 @@ assign_house_maintenance_2012_2014 <- function(cdat, odat){
   }
   
   hownerhids   <- unique(subset(ohdat, housingstatus == 1)$hhid)
+  houseprices  <- subset(adat, number>0 & shortname=="house")[,c("hhid","mtm")]
   repairdat    <- subset(cdat, shortname=="house_repair_yearly" & cost >0 & is.element(hhid,hownerhids))
   repairdat    <- merge(repairdat,subset(ohdat[,c("hhid","region","district")] , !is.na(region)), by=c("hhid")) # adding region district
   medrepair    <- ddply(repairdat,.(region,district),summarise, med_maint = median(cost)) # perform year to month conversion
+  
   alldatf      <- merge(alldat,medrepair)
   
-  alldatf$housing_cost <- as.integer(alldatf$has_house==1) * alldatf$med_maint + as.integer(alldatf$has_house==0)*alldatf$med_rent
+  alldatf$housing_cost <- as.integer(alldatf$has_house ==1) * alldatf$med_maint + as.integer(alldatf$has_house==0)*alldatf$med_rent
   
   return(alldatf)
 }
 
+assign_house_maintenance <- function (a2010, a2012, a2014, o2010, o2012, o2014) {
+  fee <- .03
+  homeownerhouses2010 <- merge ( subset( merge(a2012, unique(o2012[,c("hhid","hhid2010")]) ) , shortname=="house" & number >0) , plyr::rename(a2010,c("hhid"="hhid2010")) )
+  
+  oh2010   <- ddply(o2010, .(hhid), summarise, houserent = sum(houserent)) [ ,c("hhid","houserent")]
+  rent2010     <- plyr::rename(subset(oh2010,houserent>0 & !is.na(houserent))[,c("hhid","houserent")] , c("houserent" = "running_cost", "hhid"="hhid2010"))
+  norent2010wh <- (merge(plyr::rename(subset(oh2010,houserent==0 || is.na(houserent)), c("hhid"="hhid2010"))[,c("hhid2010","houserent")],homeownerhouses2010[,c("hhid2010","mtm")]) %>% mutate(running_cost = fee*mtm)) [ ,c("hhid2010","running_cost")]
+  runningcosts2010 <- rbind(rent2010,norent2010wh)
+  
+  oh2012               <- ddply(o2012, .(hhid), summarise, houserent = sum(houserent)) [ ,c("hhid","houserent")]
+  homeownerhouses2012  <- subset( a2012,  shortname=="house" & number >0)
+  rent2012             <- plyr::rename(subset(oh2012,houserent>0 & !is.na(houserent))[,c("hhid","houserent")] , c("houserent" = "running_cost"))
+  norent2012wh         <- (merge(subset(oh2012,houserent==0 || is.na(houserent)) [,c("hhid","houserent")],homeownerhouses2012[,c("hhid","mtm")]) %>% mutate(running_cost = fee*mtm) ) [ ,c("hhid","running_cost")]
+  runningcosts2012 <- rbind(rent2012,norent2012wh)
+  
+  oh2014               <- ddply(o2014, .(hhid), summarise, houserent = sum(houserent)) [ ,c("hhid","houserent")]
+  homeownerhouses2014  <- subset( a2014,  shortname=="house" & number >0)
+  rent2014             <- plyr::rename(subset(oh2014,houserent>0 & !is.na(houserent))[,c("hhid","houserent")] , c("houserent" = "running_cost"))
+  norent2014wh         <- (merge(subset(oh2014,houserent==0 || is.na(houserent)) [,c("hhid","houserent")],homeownerhouses2014[,c("hhid","mtm")]) %>% mutate(running_cost = fee*mtm) ) [ ,c("hhid","running_cost")]
+  runningcosts2014     <- rbind(rent2014,norent2014wh)
+  
+}
 minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014){
   # provide a mapping - per region per district i.e. (region,district,characteristic) -> cost of per-head need per year
   #food - (protein, carb, fat, fruitsveg)
@@ -905,7 +929,12 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   #ah2012 <- assign_house_maintenance_2012_2014(cdat = c2012, odat = o2012)
   #ah2014 <- assign_house_maintenance_2012_2014(cdat = c2014, odat = o2014)
   #compare2010 <- merge ( plyr::rename(merge(ah2012, unique(o2012[,c("hhid2010","hhid")]),by="hhid"), c("med_maint"="med_maint_2012" ))[,c("hhid2010","med_maint_2012")] , plyr::rename(ah2010, c("med_maint"="med_maint_2010" , "hhid"="hhid2010")) , by = c("hhid2010"))
+  
+
+  
+  
   #use public transport as need - regardless
+  
   #add car petrol as need
   
   if (nrow(subset(energybasket2010,is.na(recq)))>0){
