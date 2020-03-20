@@ -718,8 +718,8 @@ get_clothing_expenditure <-function (ld,o2012,c2012,o2014,c2014)
   o2012whs <- merge( o2012, ddply(o2012,.(hhid),summarise, hsize=length(personid)), by = c("hhid"))
   cdat2012 <- merge((unique(o2012whs[,c("hhid","region","district","hsize")])),c2012,by=c("hhid")) %>% mutate( avcost = cost/hsize)
   clothing_exp2012 <- ddply(subset(cdat2012,is.element(shortname,c("mensclothes","womensclothes","childrensclothes","mensshoes","womensshoes","childrensshoes")))[,c("hhid","region","district","cost","hsize")],.(hhid), clothes_cost = sum(cost)) %>% mutate(avcost = cost/hsize)
-  clothing_exp_agg2012 <- ddply(clothing_exp,.(region),summarise, avcost2012 = mean(avcost))
-
+  clothing_exp_agg2012 <- ddply(clothing_exp2012,.(region),summarise, avcost2012 = mean(avcost))
+  
   o2014whs <- merge( o2014, ddply(o2014,.(hhid),summarise, hsize=length(personid)), by = c("hhid"))
   cdat2014 <- merge((unique(o2014whs[,c("hhid","region","district","hsize")])),c2014,by=c("hhid")) %>% mutate( avcost = cost/hsize)
   clothing_exp2014 <- ddply(subset(cdat2014,is.element(shortname,c("mensclothes","womensclothes","childrensclothes","mensshoes","womensshoes","childrensshoes")))[,c("hhid","region","district","cost","hsize")],.(hhid), clothes_cost = sum(cost)) %>% mutate(avcost = cost/hsize)
@@ -740,7 +740,7 @@ get_local_median_house_rent <- function(odat){
   #  ddply(subset(rent2010whs, !is.na(region)), .(region,district), summarise, mean_rent = mean(houserent) , n = length(hhid) , sd_rent = sd(houserent))
   #  What we wish to do is to bring down the granularity to a level where variance is low and 
   #  then use that rent for those who don't pay the rent (quantiles can be used for the purpose). For now we circumvent the process with use of medians
-  rentdat     <- subset(odat, housingstatus==4)
+  rentdat     <- unique(subset(odat, housingstatus==4)[,c("hhid","region","district","houserent")])
   medrent     <- ddply(subset(rentdat, !is.na(region)), .(region,district), summarise, med_rent = median(houserent) )
   rentdatres  <- merge(rentdat,medrent,by=c("region","district"))
   
@@ -760,7 +760,7 @@ get_housing_cost_df <- function(){
 
 assign_house_maintenance_2010 <- function(c2010, o2010){
   # rent in area 7
-
+  
   #Following can check that very few houses that rent have repair costs
   #co2010 <- merge(c2010, unique(o2010[,c("hhid","housingstatus")]) , by=c("hhid"))
   #ddply(subset(co2010, shortname=="house_repair_monthly" & cost >0), .(housingstatus), summarise, n = length(unique(hhid)))
@@ -785,19 +785,19 @@ assign_house_maintenance_2010 <- function(c2010, o2010){
 
 
 assign_house_maintenance_2012_2014 <- function(cdat, odat){
-
-  rentdat <- get_local_median_house_rent(odat)
+  ohdat   <- subset(odat,household_status==1)
+  rentdat <- get_local_median_house_rent(ohdat)
   
-  alldat      <- merge(merge(odat,rentdat,all.x=TRUE)[,c("region","district","housingstatus","hhid","med_rent")],get_housing_cost_df(),by=c("housingstatus"))
+  alldat      <- merge(merge(ohdat,rentdat,all.x=TRUE)[,c("region","district","housingstatus","hhid","med_rent")],get_housing_cost_df(),by=c("housingstatus"))
   
   if (dim(alldat[is.na(alldat$med_rent),])[1]>0){
     alldat[is.na(alldat$med_rent),]$med_rent <- 0  
   }
   
-  hownerhids   <- unique(subset(odat, housingstatus == 1)$hhid)
+  hownerhids   <- unique(subset(ohdat, housingstatus == 1)$hhid)
   repairdat    <- subset(cdat, shortname=="house_repair_yearly" & cost >0 & is.element(hhid,hownerhids))
-  repairdat    <- merge(repairdat,subset(odat[,c("hhid","region","district")] , !is.na(region)), by=c("hhid")) # adding region district
-  medrepair    <- ddply(repairdat,.(region,district),summarise, med_maint = median(cost/10)) # perform year to month conversion
+  repairdat    <- merge(repairdat,subset(ohdat[,c("hhid","region","district")] , !is.na(region)), by=c("hhid")) # adding region district
+  medrepair    <- ddply(repairdat,.(region,district),summarise, med_maint = median(cost)) # perform year to month conversion
   alldatf      <- merge(alldat,medrepair)
   
   alldatf$housing_cost <- as.integer(alldatf$has_house==1) * alldatf$med_maint + as.integer(alldatf$has_house==0)*alldatf$med_rent
@@ -805,7 +805,7 @@ assign_house_maintenance_2012_2014 <- function(cdat, odat){
   return(alldatf)
 }
 
-minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices2014){
+minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014){
   # provide a mapping - per region per district i.e. (region,district,characteristic) -> cost of per-head need per year
   #food - (protein, carb, fat, fruitsveg)
   #1200/1500 kcal
@@ -818,14 +818,24 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   #graph 1. assets in descreasing order of occurrence frequency
   #graph 2. region-dependency and hsize-depndency on rent (most renters are in 7 - occupation and education rank have little effect)
   #greph 3: variation in rent for houses by regions 
-  
-  c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
-  c2012 <- ll@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
-  c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
-  
-  o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer)
-  o2012 <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ln=lsms_normalizer)
-  o2014 <- ll@load_ohs_file(year = 2014, dirprefix = "../",fu=fu, ln=lsms_normalizer)
+  if (missing(c2010)){
+    c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  }
+  if (missing(c2012)){
+    c2012 <- ll@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  }
+  if (missing(c2014)){
+    c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  }
+  if (missing(o2010)){
+    o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer)
+  }
+  if (missing(o2012)){
+    o2012 <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ln=lsms_normalizer)
+  }
+  if (missing(o2014)){
+    o2014 <- ll@load_ohs_file(year = 2014, dirprefix = "../",fu=fu, ln=lsms_normalizer)
+  }
   
   fooddiarydata2010      <- subset(c2010,as.integer(as.character(item))>10000)
   fooddiarydata2012      <- subset(c2012,as.integer(as.character(item))>10000)
@@ -890,7 +900,11 @@ minimum_needs_cost_per_head <- function(mktprices2010,mktprices2012,mktprices201
   
   #household needs: mensclothes, womensclothes, childrensclothes, mensshoes, womensshoes, childrensshoes and rent 
   clothing <- get_clothing_expenditure(o2012 = o2012, c2012 = c2012, o2014 = o2014, c2014 = c2014, ld = ld)
-  r2010 <- get_local_median_house_rent(o2010)
+  #The following can compare how housing maintenance costs are affected by change in field
+  #ah2010 <- assign_house_maintenance_2010(c2010 = c2010, o2010 = o2010)
+  #ah2012 <- assign_house_maintenance_2012_2014(cdat = c2012, odat = o2012)
+  #ah2014 <- assign_house_maintenance_2012_2014(cdat = c2014, odat = o2014)
+  #compare2010 <- merge ( plyr::rename(merge(ah2012, unique(o2012[,c("hhid2010","hhid")]),by="hhid"), c("med_maint"="med_maint_2012" ))[,c("hhid2010","med_maint_2012")] , plyr::rename(ah2010, c("med_maint"="med_maint_2010" , "hhid"="hhid2010")) , by = c("hhid2010"))
   #use public transport as need - regardless
   #add car petrol as need
   
