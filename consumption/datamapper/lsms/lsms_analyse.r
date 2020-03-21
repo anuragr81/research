@@ -967,7 +967,8 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   energybasket2010 <- plyr::rename(energybasket2010, c("basket_cost"="energybasket_cost"))
   hc2010           <- plyr::rename(hc2010, c("hc2010.running_cost"="housing_cost", "hc2010.hhid2010"="hhid"))
   
-  allcosts2010     <- merge(foodbasket2010,merge(hc2010, energybasket2010, by = c("hhid")), by=c("hhid"))
+  allcosts2010     <- merge(foodbasket2010,merge(hc2010, energybasket2010, by = c("hhid")), by=c("hhid")) %>% mutate (needs_cost = foodbasket_cost + housing_cost + energybasket_cost)
+  
   #use public transport as need - regardless
   
   #add car petrol as need
@@ -978,7 +979,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   # kerosene_cooking
   
   
-  return(1) 
+  return(allcosts2010) 
   
   # transport - load petrol prices and load public transport prices
   # household - rent and clothes
