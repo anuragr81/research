@@ -1761,7 +1761,7 @@ lsms_loader<-function(fu,ln,lgc) {
       
       
       k<-merge(diarywithregiondistrict,curprices,all.x=TRUE)
-      noregionprice <- subset(k,is.na(region) & is.na(price))
+      noregionprice <- subset(k,is.na(price))
       unavailable_items <- as.character(unique(noregionprice$shortname))
       print(paste("add_market_price_to_misc_diary - No price inference for items :", toString(unavailable_items)))
       diary                   <- subset(k,!is.element(shortname,unavailable_items))
