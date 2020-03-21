@@ -713,7 +713,7 @@ run_test <- function() {
   
 }
 
-get_clothing_expenditure <-function (ld,o2012,c2012,o2014,c2014)
+get_local_clothing_expenditure <-function (ld,o2012,c2012,o2014,c2014)
 {
   o2012whs <- merge( o2012, ddply(o2012,.(hhid),summarise, hsize=length(personid)), by = c("hhid"))
   cdat2012 <- merge((unique(o2012whs[,c("hhid","region","district","hsize")])),c2012,by=c("hhid")) %>% mutate( avcost = cost/hsize)
@@ -808,27 +808,47 @@ analyse_house_maintenance_2012_2014 <- function(cdat, odat,adat){
 }
 
 assign_house_maintenance <- function (a2010, a2012, a2014, o2010, o2012, o2014) {
-  fee <- .03
+  fee <- .025
   homeownerhouses2010 <- merge ( subset( merge(a2012, unique(o2012[,c("hhid","hhid2010")]) ) , shortname=="house" & number >0) , plyr::rename(a2010,c("hhid"="hhid2010")) )
   
   oh2010   <- ddply(o2010, .(hhid), summarise, houserent = sum(houserent)) [ ,c("hhid","houserent")]
   rent2010     <- plyr::rename(subset(oh2010,houserent>0 & !is.na(houserent))[,c("hhid","houserent")] , c("houserent" = "running_cost", "hhid"="hhid2010"))
-  norent2010wh <- (merge(plyr::rename(subset(oh2010,houserent==0 || is.na(houserent)), c("hhid"="hhid2010"))[,c("hhid2010","houserent")],homeownerhouses2010[,c("hhid2010","mtm")]) %>% mutate(running_cost = fee*mtm)) [ ,c("hhid2010","running_cost")]
+  norent2010wh <- subset((merge(plyr::rename(subset(oh2010,houserent==0 || is.na(houserent)), c("hhid"="hhid2010"))[,c("hhid2010","houserent")],homeownerhouses2010[,c("hhid2010","mtm")]) %>% mutate(running_cost = fee*mtm*1.2)) [ ,c("hhid2010","running_cost")] , !is.na(running_cost))
   runningcosts2010 <- rbind(rent2010,norent2010wh)
   
   oh2012               <- ddply(o2012, .(hhid), summarise, houserent = sum(houserent)) [ ,c("hhid","houserent")]
   homeownerhouses2012  <- subset( a2012,  shortname=="house" & number >0)
   rent2012             <- plyr::rename(subset(oh2012,houserent>0 & !is.na(houserent))[,c("hhid","houserent")] , c("houserent" = "running_cost"))
-  norent2012wh         <- (merge(subset(oh2012,houserent==0 || is.na(houserent)) [,c("hhid","houserent")],homeownerhouses2012[,c("hhid","mtm")]) %>% mutate(running_cost = fee*mtm) ) [ ,c("hhid","running_cost")]
+  norent2012wh         <- subset((merge(subset(oh2012,houserent==0 || is.na(houserent)) [,c("hhid","houserent")],homeownerhouses2012[,c("hhid","mtm")]) %>% mutate(running_cost = fee*mtm) ) [ ,c("hhid","running_cost")] , !is.na(running_cost))
   runningcosts2012 <- rbind(rent2012,norent2012wh)
   
   oh2014               <- ddply(o2014, .(hhid), summarise, houserent = sum(houserent)) [ ,c("hhid","houserent")]
   homeownerhouses2014  <- subset( a2014,  shortname=="house" & number >0)
   rent2014             <- plyr::rename(subset(oh2014,houserent>0 & !is.na(houserent))[,c("hhid","houserent")] , c("houserent" = "running_cost"))
-  norent2014wh         <- (merge(subset(oh2014,houserent==0 || is.na(houserent)) [,c("hhid","houserent")],homeownerhouses2014[,c("hhid","mtm")]) %>% mutate(running_cost = fee*mtm) ) [ ,c("hhid","running_cost")]
+  norent2014wh         <- subset( (merge(subset(oh2014,houserent==0 || is.na(houserent)) [,c("hhid","houserent")],homeownerhouses2014[,c("hhid","mtm")]) %>% mutate(running_cost = fee*mtm) ) [ ,c("hhid","running_cost")] , !is.na(running_cost))
   runningcosts2014     <- rbind(rent2014,norent2014wh)
+  #the following gives a quantile comparison
+  #data.frame(rent2010=quantile(rent2010$running_cost,seq(20)/20), norent2010 = quantile(norent2010wh$running_cost, seq(20)/20),rent2012=quantile(rent2012$running_cost,seq(20)/20), norent2012 = quantile(norent2012wh$running_cost, seq(20)/20) , rent2014=quantile(rent2014$running_cost,seq(20)/20), norent2014 = quantile(norent2014wh$running_cost, seq(20)/20))
+  hc <- list()
+  hc[["hc2010"]] <- runningcosts2010
+  hc[["hc2012"]] <- runningcosts2012
+  hc[["hc2014"]] <- runningcosts2014
+  return(hc)
   
 }
+init_data <- function(){
+  a2010 <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
+  a2012 <- ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
+  a2014 <- ll@read_assets_file(year = 2014, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
+  o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
+  o2012 <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
+  o2014 <- ll@load_ohs_file(year = 2014, dirprefix = "../",fu=fu, ln=lsms_normalizer) ;
+  c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  c2012 <- ll@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+}
+
 minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014){
   # provide a mapping - per region per district i.e. (region,district,characteristic) -> cost of per-head need per year
   #food - (protein, carb, fat, fruitsveg)
@@ -923,13 +943,19 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   energybasket2010 <- ddply(energybasketconstituents2010, .(hhid), summarise, basket_cost = sum(rec_cost)) 
   
   #household needs: mensclothes, womensclothes, childrensclothes, mensshoes, womensshoes, childrensshoes and rent 
-  clothing <- get_clothing_expenditure(o2012 = o2012, c2012 = c2012, o2014 = o2014, c2014 = c2014, ld = ld)
+  clothing <- get_local_clothing_expenditure(o2012 = o2012, c2012 = c2012, o2014 = o2014, c2014 = c2014, ld = ldat())
+  
   #The following can compare how housing maintenance costs are affected by change in field
-  #ah2010 <- assign_house_maintenance_2010(c2010 = c2010, o2010 = o2010)
-  #ah2012 <- assign_house_maintenance_2012_2014(cdat = c2012, odat = o2012)
-  #ah2014 <- assign_house_maintenance_2012_2014(cdat = c2014, odat = o2014)
+  #ah2010 <- analyse_house_maintenance_2010(c2010 = c2010, o2010 = o2010)
+  #ah2012 <- analyse_house_maintenance_2012_2014(cdat = c2012, odat = o2012)
+  #ah2014 <- analyse_house_maintenance_2012_2014(cdat = c2014, odat = o2014)
   #compare2010 <- merge ( plyr::rename(merge(ah2012, unique(o2012[,c("hhid2010","hhid")]),by="hhid"), c("med_maint"="med_maint_2012" ))[,c("hhid2010","med_maint_2012")] , plyr::rename(ah2010, c("med_maint"="med_maint_2010" , "hhid"="hhid2010")) , by = c("hhid2010"))
   
+  housing_costs <- assign_house_maintenance(a2010 = a2010, a2012 = a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+  
+  hc2010 <- as.data.frame(housing_costs["hc2010"])
+  hc2012 <- as.data.frame(housing_costs["hc2012"])
+  hc2014 <- as.data.frame(housing_costs["hc2014"])
 
   
   
