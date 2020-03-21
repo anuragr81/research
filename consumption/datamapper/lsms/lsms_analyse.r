@@ -731,7 +731,12 @@ get_local_clothing_expenditure <-function (ld,o2012,c2012,o2014,c2014)
   res$cpi2012<- subset(hcpi,year==2012)$price
   res$cpi2014<- subset(hcpi,year==2014)$price
   res <- res %>% mutate (r2012 = avcost2012/cpi2012) %>% mutate (r2014 = avcost2014/cpi2014) %>% mutate( r2010 = (r2012+r2014)/2 ) %>% mutate( avcost2010 = r2010 * cpi2010)
-  
+  res$r2010 <- NULL
+  res$r2012 <- NULL
+  res$r2014 <- NULL
+  res$cpi2010 <- NULL
+  res$cpi2012 <- NULL
+  res$cpi2014 <- NULL
   return(res)
 }
 
@@ -956,20 +961,24 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   hc2010 <- as.data.frame(housing_costs["hc2010"])
   hc2012 <- as.data.frame(housing_costs["hc2012"])
   hc2014 <- as.data.frame(housing_costs["hc2014"])
-
   
+  basket_costs2010 <- plyr::rename(basket_costs2010,c("basket_cost"="foodbasket_cost"))
+  foodbasket2010   <- merge(basket_costs2010, unique(o2010[,c("hhid","region","district")]), by = c("region","district"))
+  energybasket2010 <- plyr::rename(energybasket2010, c("basket_cost"="energybasket_cost"))
+  hc2010           <- plyr::rename(hc2010, c("hc2010.running_cost"="housing_cost", "hc2010.hhid2010"="hhid"))
   
+  allcosts2010     <- merge(foodbasket2010,merge(hc2010, energybasket2010, by = c("hhid")), by=c("hhid"))
   #use public transport as need - regardless
   
   #add car petrol as need
   
-  if (nrow(subset(energybasket2010,is.na(recq)))>0){
-    stop("Missing recq for in the energy basket")
-  }
+#  if (nrow(subset(energybasket2010,is.na(recq)))>0){
+#    stop("Missing recq for in the energy basket")
+#  }
   # kerosene_cooking
   
   
-  return(energybasket2010) 
+  return(1) 
   
   # transport - load petrol prices and load public transport prices
   # household - rent and clothes
