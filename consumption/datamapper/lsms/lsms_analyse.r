@@ -1004,22 +1004,22 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   foodbasket2010   <- merge(basket_costs2010, unique(o2010[,c("hhid","region","district")]), by = c("region","district"))
   energybasket2010 <- plyr::rename(energybasket2010, c("basket_cost"="energybasket_cost"))
   hc2010           <- plyr::rename(hc2010, c("hc2010.running_cost"="housing_cost", "hc2010.hhid2010"="hhid"))
-  clothing2010     <- plyr::rename(merge(clothing, unique(o2010[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2010")], c("avcost2010","clothingcost"))
-  allcosts2010     <- merge(foodbasket2010,merge(hc2010, energybasket2010, by = c("hhid")), by=c("hhid")) %>% mutate (needs_cost = foodbasket_cost + housing_cost + clothingcost + energybasket_cost)
+  clothing2010     <- plyr::rename(merge(clothing, unique(o2010[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2010")], c("avcost2010"="clothingcost"))
+  allcosts2010     <- merge(clothing2010, merge(foodbasket2010,merge(hc2010, energybasket2010, by = c("hhid")), by=c("hhid")),by=c("hhid") ) %>% mutate (needs_cost = foodbasket_cost + housing_cost + clothingcost + energybasket_cost)
   
   basket_costs2012 <- plyr::rename(basket_costs2012,c("basket_cost"="foodbasket_cost"))
   foodbasket2012   <- merge(basket_costs2012, unique(o2012[,c("hhid","region","district")]), by = c("region","district"))
   energybasket2012 <- plyr::rename(energybasket2012, c("basket_cost"="energybasket_cost"))
   hc2012           <- plyr::rename(hc2012, c("hc2012.running_cost"="housing_cost", "hc2012.hhid"="hhid"))
-  clothing2012     <- plyr::rename(merge(clothing, unique(o2012[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2012")], c("avcost2012","clothingcost"))
-  allcosts2012     <- merge(foodbasket2012,merge(hc2012, energybasket2012, by = c("hhid")), by=c("hhid")) %>% mutate (needs_cost = foodbasket_cost + housing_cost + clothingcost + energybasket_cost)
+  clothing2012     <- plyr::rename(merge(clothing, unique(o2012[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2012")], c("avcost2012"="clothingcost"))
+  allcosts2012     <- merge(clothing2012, merge(foodbasket2012,merge(hc2012, energybasket2012, by = c("hhid")), by=c("hhid")), by=c("hhid"))  %>% mutate (needs_cost = foodbasket_cost + housing_cost + clothingcost + energybasket_cost)
   
   basket_costs2014 <- plyr::rename(basket_costs2014,c("basket_cost"="foodbasket_cost"))
   foodbasket2014   <- merge(basket_costs2014, unique(o2014[,c("hhid","region","district")]), by = c("region","district"))
   energybasket2014 <- plyr::rename(energybasket2014, c("basket_cost"="energybasket_cost"))
   hc2014           <- plyr::rename(hc2014, c("hc2014.running_cost"="housing_cost", "hc2014.hhid"="hhid"))
-  clothing2014     <- plyr::rename(merge(clothing, unique(o2014[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2014")], c("avcost2014","clothingcost"))
-  allcosts2014     <- merge(foodbasket2014,merge(hc2014, energybasket2014, by = c("hhid")), by=c("hhid")) %>% mutate (needs_cost = foodbasket_cost + housing_cost + clothingcost + energybasket_cost)
+  clothing2014     <- plyr::rename(merge(clothing, unique(o2014[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2014")], c("avcost2014"="clothingcost"))
+  allcosts2014     <- merge(clothing2014, merge(foodbasket2014,merge(hc2014, energybasket2014, by = c("hhid")), by=c("hhid")), by = c("hhid")) %>% mutate (needs_cost = foodbasket_cost + housing_cost + clothingcost + energybasket_cost)
     
   #use public transport as need - regardless
   
@@ -1046,7 +1046,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
 #  data.frame(code=3,categ = "electric_lighting")
 #  data.frame(code=4,categ = "electric_cooking")
 #}
-assume_assets <- function(adat){
+assume_assets <- function(adat,odat){
   has_electric_stove <- merge(data.frame(hhid=unique(adat$hhid), dummy=1), subset(adat,number>0 & shortname=="stove_electricgas")[,c("hhid","number")],all.x=TRUE)
   has_electric_stove$dummy <- NULL
   if (nrow(has_electric_stove[is.na(has_electric_stove$number),])>0){
@@ -1054,6 +1054,7 @@ assume_assets <- function(adat){
   }
   #hard to find somebody who would have an electric stove and use a kerosene lamp
   print("TODO: <<<<<<<<<<<<<<<<<< change mapping to from asset based to section j based >>>>>>>>>>>>")
+  #"lightingfuel, cookingfuel
   has_electric_stove$lighting <- sapply(has_electric_stove$number, function(x){ if (x>0) {"elec_lighting"}else {"kerosene_lighting"}}) 
   has_electric_stove$cooking <- sapply(has_electric_stove$number, function(x){ if (x>0) {"elec_cooking"}else {"kerosene_cooking"}}) 
   
