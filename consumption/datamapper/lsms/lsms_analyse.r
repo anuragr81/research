@@ -928,6 +928,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   
   #energy - load cheapest energy prices
   groups <- lsms_normalizer()@categories_needs_based()
+  energy_sources <- c("kerosene","electricity","charcoal")
   
   miscdiarydata2010  <- subset(c2010,is.element(shortname,subset(groups , category =="energy")$shortname))
   hhpm2010       <- ll@add_market_price_to_misc_diary (curyear = 2010, dirprefix ="../", fu=fu, ln=lsms_normalizer, groups = groups, lgc=lgc,
@@ -935,19 +936,21 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   if (setequal(unique(paste(subset(hhpm2010, shortname=="kerosene")$region,subset(hhpm2010, shortname=="kerosene")$district)), unique(paste(hhpm2010$region,hhpm2010$district)))==FALSE){
     stop("Kerosene not available in all regions")
   }
-  energy_prices2010 <- rbind( subset(hhpm2010, shortname=="kerosene") %>% mutate(kwhprice = 10*price) , subset(hhpm2010, shortname=="electricity") %>% mutate(kwhprice = price), subset(hhpm2010, shortname=="charcoal") %>% mutate(kwhprice = price))
-  energy_prices2010 <- merge(groups,energy_prices2010)
   
+  energy_prices2010 <- merge(groups,subset(hhpm2010, is.element(shortname,energy_sources)))
   
+  ###
   miscdiarydata2012  <- subset(c2012,is.element(shortname,subset(groups , category =="energy")$shortname))
+  
   hhpm2012       <- ll@add_market_price_to_misc_diary (curyear = 2012, dirprefix ="../", fu=fu, ln=lsms_normalizer, groups = groups, lgc=lgc,
                                                        ld = ld, marketpricesdata=mktprices2012,ohsdata=o2012,ddata=miscdiarydata2012)
   if (setequal(unique(paste(subset(hhpm2012, shortname=="kerosene")$region,subset(hhpm2012, shortname=="kerosene")$district)), unique(paste(hhpm2012$region,hhpm2012$district)))==FALSE){
     stop("Kerosene not available in all regions")
   }
-  energy_prices2012 <- rbind( subset(hhpm2012, shortname=="kerosene") %>% mutate(kwhprice = 10*price) , subset(hhpm2012, shortname=="electricity") %>% mutate(kwhprice = price), subset(hhpm2012, shortname=="charcoal") %>% mutate(kwhprice = price))
-  energy_prices2012 <- merge(groups,energy_prices2012)
   
+  energy_prices2012 <- merge(groups,subset(hhpm2012, is.element(shortname,energy_sources)))
+  
+  ####
   
   miscdiarydata2014  <- subset(c2014,is.element(shortname,subset(groups , category =="energy")$shortname))
   hhpm2014       <- ll@add_market_price_to_misc_diary (curyear = 2014, dirprefix ="../", fu=fu, ln=lsms_normalizer, groups = groups, lgc=lgc,
@@ -956,12 +959,12 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
     print("Kerosene not available in all regions")
     #median(subset(mktprices2014, shortname=="kerosene")$median_price)
   }
-  energy_prices2014 <- rbind( subset(hhpm2014, shortname=="kerosene") %>% mutate(kwhprice = 10*price) , subset(hhpm2014, shortname=="electricity") %>% mutate(kwhprice = price) , subset(hhpm2014, shortname=="charcoal") %>% mutate(kwhprice = price))
-  energy_prices2014 <- merge(groups,energy_prices2014)
+  
+  energy_prices2014 <- merge(groups,subset(hhpm2014, is.element(shortname,energy_sources)))
   
   #recq from normaliser reports recq for  every asset level (e.g. for  computer,refrigerator etc.). These levels are matched with those generated from the asset ownership data
   
-  #min_energy_prices <- energy_prices2010 [ ,c("shortname","category","region","district","recq","kwhprice","assetlevel" )] %>% group_by(region,district,category) %>% filter(kwhprice==min(kwhprice))
+  #min_energy_prices <- energy_prices2010 [ ,c("shortname","category","region","district","recq","price","assetlevel" )] %>% group_by(region,district,category) %>% filter(price==min(price))
   a2010 <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer)
   a2012 <- ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ln = lsms_normalizer)
   a2014 <- ll@read_assets_file(year = 2014, dirprefix = "../",fu = fu, ln = lsms_normalizer)
@@ -969,19 +972,19 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   assumed2010     <- assume_assets(o2010)
   assetlevels2010 <- merge(subset(a2010, number>0), asset_levels_for_name())[,c("hhid","assetlevel")]
   assetlevels2010net <- rbind(assetlevels2010,assumed2010)
-  energybasketconstituents2010 <- merge(assetlevels2010net,energy_prices2010 ) %>% mutate(rec_cost = kwhprice * recq)
+  energybasketconstituents2010 <- merge(assetlevels2010net,energy_prices2010 ) %>% mutate(rec_cost = price * recq)
   energybasket2010 <- ddply(energybasketconstituents2010, .(hhid), summarise, basket_cost = sum(rec_cost)) 
   
   assumed2012     <- assume_assets(o2012)
   assetlevels2012 <- merge(subset(a2012, number>0), asset_levels_for_name())[,c("hhid","assetlevel")]
   assetlevels2012net <- rbind(assetlevels2012,assumed2012)
-  energybasketconstituents2012 <- merge(assetlevels2012net,energy_prices2012 ) %>% mutate(rec_cost = kwhprice * recq)
+  energybasketconstituents2012 <- merge(assetlevels2012net,energy_prices2012 ) %>% mutate(rec_cost = price * recq)
   energybasket2012 <- ddply(energybasketconstituents2012, .(hhid), summarise, basket_cost = sum(rec_cost)) 
   
   assumed2014     <- assume_assets(o2014)
   assetlevels2014 <- merge(subset(a2014, number>0), asset_levels_for_name())[,c("hhid","assetlevel")]
   assetlevels2014net <- rbind(assetlevels2014,assumed2014)
-  energybasketconstituents2014 <- merge(assetlevels2014net,energy_prices2014 ) %>% mutate(rec_cost = kwhprice * recq)
+  energybasketconstituents2014 <- merge(assetlevels2014net,energy_prices2014 ) %>% mutate(rec_cost = price * recq)
   energybasket2014 <- ddply(energybasketconstituents2014, .(hhid), summarise, basket_cost = sum(rec_cost)) 
   
   
