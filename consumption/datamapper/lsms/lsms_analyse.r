@@ -928,7 +928,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   
   #energy - load cheapest energy prices
   groups <- lsms_normalizer()@categories_needs_based()
-  energy_sources <- c("kerosene","electricity","charcoal")
+  energy_sources <- c("kerosene","electricity","charcoal","petrol")
   
   miscdiarydata2010  <- subset(c2010,is.element(shortname,subset(groups , category =="energy")$shortname))
   hhpm2010       <- ll@add_market_price_to_misc_diary (curyear = 2010, dirprefix ="../", fu=fu, ln=lsms_normalizer, groups = groups, lgc=lgc,
@@ -1123,6 +1123,9 @@ asset_levels_for_name <- function() {
   r <- rbind(r, data.frame( shortname='musicplayer', assetlevel='elec_tvvideomusic'))
   r <- rbind(r, data.frame( shortname='musicsystem', assetlevel='elec_tvvideomusic'))
   r <- rbind(r, data.frame( shortname='ac_fan', assetlevel='elec_acfan'))
+  r <- rbind(r, data.frame( shortname='car', assetlevel='petrol_car'))
+  r <- rbind(r, data.frame( shortname='motorbike', assetlevel='petrol_motorbike'))
+  
   return(r)
 }
 
