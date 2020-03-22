@@ -1046,7 +1046,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
 #  data.frame(code=3,categ = "electric_lighting")
 #  data.frame(code=4,categ = "electric_cooking")
 #}
-assume_assets <- function(adat,odat){
+assume_assets_stove_based <- function(adat){
   has_electric_stove <- merge(data.frame(hhid=unique(adat$hhid), dummy=1), subset(adat,number>0 & shortname=="stove_electricgas")[,c("hhid","number")],all.x=TRUE)
   has_electric_stove$dummy <- NULL
   if (nrow(has_electric_stove[is.na(has_electric_stove$number),])>0){
@@ -1063,6 +1063,49 @@ assume_assets <- function(adat,odat){
   res <- rbind(a1,a2)
   return(res)
 }
+
+lighting_fuel_mapping <- function(){
+  edf <- data.frame()
+  edf <- rbind(edf,data.frame(lightingfuel = c(1), lighting=c("elec_lighting")))
+  edf <- rbind(edf,data.frame(lightingfuel = c(2), lighting=c("kerosene_lighting")))
+  edf <- rbind(edf,data.frame(lightingfuel = c(3), lighting=c("gas_lighting")))
+  edf <- rbind(edf,data.frame(lightingfuel = c(4), lighting=c("gas_lighting")))
+  edf <- rbind(edf,data.frame(lightingfuel = c(5), lighting=c("kerosene_lighting")))
+  edf <- rbind(edf,data.frame(lightingfuel = c(6), lighting=c("kerosene_lighting")))
+  edf <- rbind(edf,data.frame(lightingfuel = c(7), lighting=c("kerosene_lighting")))
+  edf <- rbind(edf,data.frame(lightingfuel = c(8), lighting=c("elec_lighting")))
+  edf <- rbind(edf,data.frame(lightingfuel = c(9), lighting=c("kerosene_lighting")))
+  
+  return(edf)
+}
+
+cooking_fuel_mapping <- function(){
+  
+  edf <- data.frame()
+  edf <- rbind(edf,data.frame(cookingfuel = c(1), cooking=c("kerosene_cooking")))
+  edf <- rbind(edf,data.frame(cookingfuel = c(2), cooking=c("kerosene_cooking")))
+  edf <- rbind(edf,data.frame(cookingfuel = c(3), cooking=c("elec_cooking")))
+  edf <- rbind(edf,data.frame(cookingfuel = c(4), cooking=c("gas_cooking")))
+  edf <- rbind(edf,data.frame(cookingfuel = c(5), cooking=c("charcoal_cooking")))
+  edf <- rbind(edf,data.frame(cookingfuel = c(6), cooking=c("kerosene_cooking")))
+  edf <- rbind(edf,data.frame(cookingfuel = c(7), cooking=c("kerosene_cooking")))
+  edf <- rbind(edf,data.frame(cookingfuel = c(8), cooking=c("kerosene_cooking")))
+  
+  return(edf)
+}
+
+assume_assets <- function(odat){
+  #"lightingfuel, cookingfuel
+  #has_electric_stove$lighting <- sapply(has_electric_stove$number, function(x){ if (x>0) {"elec_lighting"}else {"kerosene_lighting"}}) 
+  #has_electric_stove$cooking <- sapply(has_electric_stove$number, function(x){ if (x>0) {"elec_cooking"}else {"kerosene_cooking"}}) 
+  lighting <- merge(subset(unique(odat[,c("hhid","lightingfuel")]),!is.na(lightingfuel) ), lighting_fuel_mapping())
+  cooking <- merge(subset(unique(odat[,c("hhid","cookingfuel")]),!is.na(cookingfuel)), cooking_fuel_mapping())
+  a1<- plyr::rename(lighting[c("hhid","lighting")] %>% gather(hhid,lighting), c("lighting"="assetlevel"))
+  a2<- plyr::rename(cooking[c("hhid","cooking")] %>% gather(hhid,cooking), c("cooking"="assetlevel"))
+  res <- rbind(a1,a2)
+  return(res)
+}
+
 
 asset_levels_for_name <- function() {
   r <- data.frame()
