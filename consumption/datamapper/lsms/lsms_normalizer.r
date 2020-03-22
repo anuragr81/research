@@ -1571,15 +1571,17 @@ lsms_normalizer<-function() {
     
     # 60W bulb for 5 hours or 2 liters per month (lighting)  # ref: https://energypedia.info/wiki/Lighting
     # 1500W electricity for 1 hour (cooking)
-    # 1 litre -> 10kWh , 1.5 kW per day
+    # 1 litre -> 10kWh , 1.5 kW per day (1kg charcoal -> 30 MJ and 1.5 kWH -> 5.4 MJ so 5.4/30 kg charcoal -> 1.5 kWH)
     # if has fridge, then 180x24 per day
     # if has computer, then 100W per hr
     # agricultural machines would be assumed to have a different running cost from cars (their usage would be proportional to the land owned by the household)
     # final mapping has fields: (region,district,assetlevel) -> rc where assetlevel \in { kerosene_stove , elec_bulb, refrig, computer, elecoven, electstove, agri }
     
     
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq =2/30 , assetlevel="kerosene_lighting")) # none is the base level - no asset ownership level has these default costs
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq = 1.5/10, assetlevel="kerosene_cooking")) # none is the base level 
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq =2/30 , assetlevel="kerosene_lighting")) 
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq = 1.5/10, assetlevel="kerosene_cooking")) 
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="charcoal", recq = 5.4/30, assetlevel="charcoal_cooking")) 
+    
     x<-rbind(x,data.frame(category = "energy", group="needs",shortname="electricity", recq = 1.5, assetlevel="elecgas_cooking"))
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (3/12)*4, assetlevel="elec_waterheating"))#per-day units(kWh) based on 3 months of usage in the year
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (4/12)*2, assetlevel="elec_acfan"))

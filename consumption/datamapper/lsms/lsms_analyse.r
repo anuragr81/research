@@ -710,7 +710,7 @@ run_test <- function() {
   
   #return(tot)
   groups <- lsms_normalizer()@categories_needs_based()
-  miscdiarydata2014  <- subset(c2014,is.element(shortname,subset(groups , category =="energy")$shortname))
+  miscdiarydata2010  <- subset(c2010,is.element(shortname,subset(groups , category =="energy")$shortname))
   hhpm2014       <- ll@add_market_price_to_misc_diary (curyear = 2014, dirprefix ="../", fu=fu, ln=lsms_normalizer, groups = groups, lgc=lgc,
                                                        ld = ld, marketpricesdata=mktprices2014,ohsdata=o2014,ddata=miscdiarydata2014)
   
@@ -935,7 +935,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   if (setequal(unique(paste(subset(hhpm2010, shortname=="kerosene")$region,subset(hhpm2010, shortname=="kerosene")$district)), unique(paste(hhpm2010$region,hhpm2010$district)))==FALSE){
     stop("Kerosene not available in all regions")
   }
-  energy_prices2010 <- rbind( subset(hhpm2010, shortname=="kerosene") %>% mutate(kwhprice = 10*price) , subset(hhpm2010, shortname=="electricity") %>% mutate(kwhprice = price))
+  energy_prices2010 <- rbind( subset(hhpm2010, shortname=="kerosene") %>% mutate(kwhprice = 10*price) , subset(hhpm2010, shortname=="electricity") %>% mutate(kwhprice = price), subset(hhpm2010, shortname=="charcoal") %>% mutate(kwhprice = price))
   energy_prices2010 <- merge(groups,energy_prices2010)
   
   
@@ -945,7 +945,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   if (setequal(unique(paste(subset(hhpm2012, shortname=="kerosene")$region,subset(hhpm2012, shortname=="kerosene")$district)), unique(paste(hhpm2012$region,hhpm2012$district)))==FALSE){
     stop("Kerosene not available in all regions")
   }
-  energy_prices2012 <- rbind( subset(hhpm2012, shortname=="kerosene") %>% mutate(kwhprice = 10*price) , subset(hhpm2012, shortname=="electricity") %>% mutate(kwhprice = price))
+  energy_prices2012 <- rbind( subset(hhpm2012, shortname=="kerosene") %>% mutate(kwhprice = 10*price) , subset(hhpm2012, shortname=="electricity") %>% mutate(kwhprice = price), subset(hhpm2012, shortname=="charcoal") %>% mutate(kwhprice = price))
   energy_prices2012 <- merge(groups,energy_prices2012)
   
   
@@ -956,7 +956,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
     print("Kerosene not available in all regions")
     #median(subset(mktprices2014, shortname=="kerosene")$median_price)
   }
-  energy_prices2014 <- rbind( subset(hhpm2014, shortname=="kerosene") %>% mutate(kwhprice = 10*price) , subset(hhpm2014, shortname=="electricity") %>% mutate(kwhprice = price))
+  energy_prices2014 <- rbind( subset(hhpm2014, shortname=="kerosene") %>% mutate(kwhprice = 10*price) , subset(hhpm2014, shortname=="electricity") %>% mutate(kwhprice = price) , subset(hhpm2014, shortname=="charcoal") %>% mutate(kwhprice = price))
   energy_prices2014 <- merge(groups,energy_prices2014)
   
   #recq from normaliser reports recq for  every asset level (e.g. for  computer,refrigerator etc.). These levels are matched with those generated from the asset ownership data
@@ -1068,8 +1068,8 @@ lighting_fuel_mapping <- function(){
   edf <- data.frame()
   edf <- rbind(edf,data.frame(lightingfuel = c(1), lighting=c("elec_lighting")))
   edf <- rbind(edf,data.frame(lightingfuel = c(2), lighting=c("kerosene_lighting")))
-  edf <- rbind(edf,data.frame(lightingfuel = c(3), lighting=c("gas_lighting")))
-  edf <- rbind(edf,data.frame(lightingfuel = c(4), lighting=c("gas_lighting")))
+  edf <- rbind(edf,data.frame(lightingfuel = c(3), lighting=c("kerosene_lighting")))
+  edf <- rbind(edf,data.frame(lightingfuel = c(4), lighting=c("kerosene_lighting")))
   edf <- rbind(edf,data.frame(lightingfuel = c(5), lighting=c("kerosene_lighting")))
   edf <- rbind(edf,data.frame(lightingfuel = c(6), lighting=c("kerosene_lighting")))
   edf <- rbind(edf,data.frame(lightingfuel = c(7), lighting=c("kerosene_lighting")))
@@ -1085,7 +1085,7 @@ cooking_fuel_mapping <- function(){
   edf <- rbind(edf,data.frame(cookingfuel = c(1), cooking=c("kerosene_cooking")))
   edf <- rbind(edf,data.frame(cookingfuel = c(2), cooking=c("kerosene_cooking")))
   edf <- rbind(edf,data.frame(cookingfuel = c(3), cooking=c("elec_cooking")))
-  edf <- rbind(edf,data.frame(cookingfuel = c(4), cooking=c("gas_cooking")))
+  edf <- rbind(edf,data.frame(cookingfuel = c(4), cooking=c("elec_cooking")))
   edf <- rbind(edf,data.frame(cookingfuel = c(5), cooking=c("charcoal_cooking")))
   edf <- rbind(edf,data.frame(cookingfuel = c(6), cooking=c("kerosene_cooking")))
   edf <- rbind(edf,data.frame(cookingfuel = c(7), cooking=c("kerosene_cooking")))
