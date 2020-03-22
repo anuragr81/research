@@ -634,6 +634,13 @@ merge_asset_mtms_with_prepared_quality_data <- function(allg,m){
   aggdat$has_electric  <- as.integer(is.element(aggdat$lightingfuel,c(1,8)))
   return(aggdat)
 }
+mapping_hhids_2010_2012 <- function(o2012){
+  return ( plyr::rename(subset(unique(o2012[,c("hhid","hhid2010")]), !is.na(hhid2010)) , c("hhid"="hhid2012"))) 
+}
+mapping_hhids_2012_2014 <- function(o2014){
+  return ( plyr::rename(subset(unique(o2014[,c("hhid","hhid2012")]), !is.na(hhid2012)) , c("hhid"="hhid2014"))) 
+}
+
 
 all_asset_mtms <- function(sum_costs) {
   assetnames_transport   <- c('bike', 'motorbike', 'car')
@@ -857,6 +864,19 @@ init_data <- function(){
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
 }
 
+estimation_df <-function( am ){
+  if (missing(am)){
+    am <- all_asset_mtms(sum_costs = TRUE)
+  }
+  
+  df2012 <- (plyr::rename(subset(am,year==2012), c("hhid"="hhid2012", "all_assets_mtm"="all_assets_mtm_2012", "electric_assets_mtm"="electric_assets_mtm_2012", "transport_assets_mtm"="transport_assets_mtm_2012", "household_assets_mtm"="household_assets_mtm_2012")))
+  df2014 <- merge( plyr::rename(subset(am,year==2014), c("hhid"="hhid2014", "all_assets_mtm"="all_assets_mtm_2014", "electric_assets_mtm"="electric_assets_mtm_2014", "transport_assets_mtm"="transport_assets_mtm_2014", "household_assets_mtm"="household_assets_mtm_2014")) , mapping_hhids_2012_2014(o2014))
+  print("PENDING ::::: HANDLING OF NEW HOUSEHOLDS ")
+  res <- merge(df2012 , df2014, by=c("hhid2012"))
+  
+  return(res)
+}
+
 minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014){
   # provide a mapping - per region per district i.e. (region,district,characteristic) -> cost of per-head need per year
   #food - (protein, carb, fat, fruitsveg)
@@ -1023,7 +1043,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   hc2014           <- plyr::rename(hc2014, c("hc2014.running_cost"="housing_cost", "hc2014.hhid"="hhid"))
   clothing2014     <- plyr::rename(merge(clothing, unique(o2014[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2014")], c("avcost2014"="clothingcost"))
   allcosts2014     <- merge(clothing2014, merge(foodbasket2014,merge(hc2014, energybasket2014, by = c("hhid")), by=c("hhid")), by = c("hhid")) %>% mutate (needs_cost = foodbasket_cost + housing_cost + clothingcost + energybasket_cost)
-    
+  
   #use public transport as need - regardless
   
   #add car petrol as need
@@ -1031,6 +1051,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
 #  if (nrow(subset(energybasket2010,is.na(recq)))>0){
 #    stop("Missing recq for in the energy basket")
 #  }
+  
   # kerosene_cooking
   
   

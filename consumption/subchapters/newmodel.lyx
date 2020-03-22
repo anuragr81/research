@@ -1182,5 +1182,110 @@ This analysis ignores the types within the commodity - for which a cost-function
  
 \end_layout
 
+\begin_layout Section*
+Empirical Analysis
+\end_layout
+
+\begin_layout Standard
+The model we use is the following.
+ If 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is the age of the household, 
+\begin_inset Formula 
+\begin{alignat*}{1}
+u_{\tau}(\tau,\rho) & =a_{\tau}log(\Psi_{\tau}(A_{\tau}))+b_{\tau,\rho}log(\nu_{\tau})+(1-a_{\tau}-b_{\tau,\rho})log(A_{\tau})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, we assume that 
+\begin_inset Formula $a_{\tau}$
+\end_inset
+
+ does not vary with personal characteristics, while the 
+\begin_inset Formula $b_{\tau,\rho}$
+\end_inset
+
+ does.
+ This encompasses the peer effects 
+\begin_inset Formula $\int_{\rho}\nu d\nu$
+\end_inset
+
+ .
+ Omitting argument 
+\begin_inset Formula $A_{\tau}$
+\end_inset
+
+ of the needs 
+\begin_inset Formula $\Psi_{\tau}$
+\end_inset
+
+, the Euler equations are
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+A_{\tau+1}=A_{\tau}(1+r)+ki_{\tau}-c_{\tau+1}\label{eq:mar2020_euler}\\
+c_{\tau+1}=\nu_{\tau+1}+\Psi_{\tau+1}\nonumber 
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Any non-durable consumption other than what is driven by the assets and
+ basic-needs would be constitute the status-related consumption (that is
+ the only way status can be derived in the secondary-data).
+ 
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $\frac{\partial u_{\tau+1}}{\partial\nu_{\tau+1}}=\frac{b_{\tau,\rho}}{\nu_{\tau+1}}-\frac{1-a_{\tau}-b_{\tau,\rho}}{A_{\tau+1}}$
+\end_inset
+
+, the first-order conditions imply that 
+\begin_inset Formula $\nu_{\tau+1}=\frac{b_{\tau,\rho}A_{\tau+1}}{1-a_{\tau}-b_{\tau,\rho}}$
+\end_inset
+
+ .
+ Using this in the equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mar2020_euler"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we can write 
+\begin_inset Formula $A_{\tau+1}=A_{\tau}(1+r)+ki_{\tau}-\Psi_{\tau}-\frac{b_{\tau,\rho}A_{\tau+1}}{1-a_{\tau}-b_{\tau,\rho}}A_{\tau+1}$
+\end_inset
+
+ and thus
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+A_{\tau+1} & =\frac{(1+r)(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}A_{\tau}+\frac{(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}(ki_{\tau}-\Psi_{\tau})
+\end{alignat*}
+
+\end_inset
+
+Using the above time-series equation.
+ 
+\end_layout
+
 \end_body
 \end_document
