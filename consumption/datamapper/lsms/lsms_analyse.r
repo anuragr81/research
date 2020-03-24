@@ -891,16 +891,25 @@ estimation_df <-function( am ){
 
 plain_asset_differences_2012_2014 <- function(a2012,a2014){
   #a01_mapping could be mapping_hhids_2012_2014(o2014) for example
+  assetnames_transport   <- c('bike', 'motorbike', 'car')
+  assetnames_household   <- c('land', 'house')
+  assetnames_electric     <- c('mobile','videoplayer', 'ac_fan', 'waterpump', 'tv', 'dishtv', 'computer',  'refrigerator' )
+  all_assets             <- c(c(assetnames_electric,assetnames_household), assetnames_transport)
   
   a01_mapping <- mapping_hhids_2012_2014(o2014)
-  a0 <- plyr::rename(subset(a2012[,c("hhid","number","shortname")],number>0),c("hhid"="hhid2012","number"="number.2012"))
-  a1 <- plyr::rename(subset(a2014[,c("hhid","number","shortname")],number>0),c("hhid"="hhid2014","number"="number.2014"))
+  a0 <- plyr::rename(subset(a2012[,c("hhid","number","shortname")],number>0 & is.element(shortname,all_assets) ),c("hhid"="hhid2012","number"="number.2012"))
+  a1 <- plyr::rename(subset(a2014[,c("hhid","number","shortname")],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2014","number"="number.2014"))
   a1 <- merge(a1,a01_mapping)
-  nonsplithhids <- subset(ddply(a01_mapping, .(hhid2012), summarise , n = length("hhid2014")),n==1)$hhid2014
-  dat = merge (a0, subset(a1,is.element(hhid2014,nonsplithhids)), by =c("hhid2012","shortname")) %>% mutate (delta = number.2014 - number.2012 )
-  dat <- subset(dat, delta !=0)
-  return(dat)
+  nonsplithhs <- subset(ddply(a01_mapping, .(hhid2012), summarise , n = length(hhid2014)),n==1)
+  dat <- merge( merge(nonsplithhs,a0), a1, all=T) 
+  dat[is.na(dat$number.2012),]$number.2012 <-0 
+  dat[is.na(dat$number.2014),]$number.2014 <-0 
+  dat <- dat %>% mutate (delta = number.2014 - number.2012 )
+  d <- subset(dat, abs(delta)>0 & is.element(shortname,all_assets))
+  #k <- ddply(d,.(shortname),summarise, n= length(hhid2012) , median_change = median(delta), q85_change = quantile(delta,.85), q15_change = quantile(delta,.15))
+  return(d)
 }
+
 minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014){
   # provide a mapping - per region per district i.e. (region,district,characteristic) -> cost of per-head need per year
   #food - (protein, carb, fat, fruitsveg)
