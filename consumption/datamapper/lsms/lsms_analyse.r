@@ -662,10 +662,10 @@ all_asset_mtms <- function(sum_costs) {
   a2014$year  <- 2014
   x     <- rbind(x,a2014)
   if (sum_costs) {
-    transport_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_transport) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,transport_assets_mtm = log(sum(asset_mtm)+1))
-    household_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_household) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,household_assets_mtm = log(sum(asset_mtm)+1))
-    electric_assetcosts  <- ddply(subset(x,is.element(shortname,assetnames_electric) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,electric_assets_mtm = log(sum(asset_mtm)+1))
-    assetcosts           <- ddply(subset(x,!is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,all_assets_mtm = log(sum(asset_mtm)+1))
+    transport_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_transport) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,transport_assets_mtm = log(sum(asset_mtm)+1) , transport_assets_mtm_sum = sum(asset_mtm))
+    household_assetcosts <- ddply(subset(x,is.element(shortname,assetnames_household) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,household_assets_mtm = log(sum(asset_mtm)+1), household_assets_mtm_sum = sum(asset_mtm))
+    electric_assetcosts  <- ddply(subset(x,is.element(shortname,assetnames_electric) & !is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,electric_assets_mtm = log(sum(asset_mtm)+1), electric_assets_mtm_sum = sum(asset_mtm))
+    assetcosts           <- ddply(subset(x,!is.na(asset_mtm))[,c("hhid","year","asset_mtm")], .(hhid,year),summarise,all_assets_mtm = log(sum(asset_mtm)+1) , all_assets_mtm_sum = sum(asset_mtm))
     
     y <- merge(assetcosts,merge(electric_assetcosts,merge(transport_assetcosts,household_assetcosts,by=c("hhid","year"),all=TRUE),by=c("hhid","year"),all=TRUE),by=c("hhid","year"),all=TRUE)
     y[is.na(y)]<-0
@@ -716,11 +716,16 @@ run_test <- function() {
   #return(agi)
   
   #return(tot)
-  groups <- lsms_normalizer()@categories_needs_based()
-  miscdiarydata2010  <- subset(c2010,is.element(shortname,subset(groups , category =="energy")$shortname))
-  hhpm2014       <- ll@add_market_price_to_misc_diary (curyear = 2014, dirprefix ="../", fu=fu, ln=lsms_normalizer, groups = groups, lgc=lgc,
-                                                       ld = ld, marketpricesdata=mktprices2014,ohsdata=o2014,ddata=miscdiarydata2014)
-  
+  assetnames_transport   <- c('bike', 'motorbike', 'car')
+  assetnames_household   <- c(  'sewingmachine', 'bed',  'watch',  'chair', 'table', 'cupboard', 'sofa','sports_hobby','land', 'house')
+  assetnames_electric     <- c('mobile', 'waterheater','camera', 'phone', 'musicplayer', 'videoplayer', 'musicsystem', 'ac_fan', 'waterpump', 'tv', 'dishtv', 'computer',  'refrigerator' )
+  m <- mapping_hhids_2012_2014(o2014)
+  a1 <- subset(a2012, hhid=="2432-001" & number >0) [, c("hhid","number","shortname")]
+  a1 <- plyr::rename(a1,c("hhid"="hhid2012","number"="number.2012"))
+  a2 <- subset(a2014, hhid=="0553-001" & number >0 ) [, c("hhid","number","shortname")]
+  a2 <- plyr::rename(a2,c("hhid"="hhid2014", "number"="number.2014"))
+  a2 <- merge(m,a2)
+  a3 <- merge(a1, a2, all=TRUE, by=c("hhid2012","shortname"))
 }
 
 get_local_clothing_expenditure <-function (ld,o2012,c2012,o2014,c2014)
@@ -868,15 +873,34 @@ estimation_df <-function( am ){
   if (missing(am)){
     am <- all_asset_mtms(sum_costs = TRUE)
   }
+  am <- am[,c("hhid","year","all_assets_mtm_sum","electric_assets_mtm_sum","transport_assets_mtm_sum","household_assets_mtm_sum")]
   
-  df2012 <- (plyr::rename(subset(am,year==2012), c("hhid"="hhid2012", "all_assets_mtm"="all_assets_mtm_2012", "electric_assets_mtm"="electric_assets_mtm_2012", "transport_assets_mtm"="transport_assets_mtm_2012", "household_assets_mtm"="household_assets_mtm_2012")))
-  df2014 <- merge( plyr::rename(subset(am,year==2014), c("hhid"="hhid2014", "all_assets_mtm"="all_assets_mtm_2014", "electric_assets_mtm"="electric_assets_mtm_2014", "transport_assets_mtm"="transport_assets_mtm_2014", "household_assets_mtm"="household_assets_mtm_2014")) , mapping_hhids_2012_2014(o2014))
+  df2012 <- (plyr::rename(subset(am,year==2012), c("hhid"="hhid2012", "all_assets_mtm_sum"="all_assets_mtm_2012", "electric_assets_mtm_sum"="electric_assets_mtm_2012", "transport_assets_mtm_sum"="transport_assets_mtm_2012", "household_assets_mtm_sum"="household_assets_mtm_2012")))
+  df2014 <- merge( plyr::rename(subset(am,year==2014), c("hhid"="hhid2014", "all_assets_mtm_sum"="all_assets_mtm_2014", "electric_assets_mtm_sum"="electric_assets_mtm_2014", "transport_assets_mtm_sum"="transport_assets_mtm_2014", "household_assets_mtm_sum"="household_assets_mtm_2014")) , mapping_hhids_2012_2014(o2014))
   print("PENDING ::::: HANDLING OF NEW HOUSEHOLDS ")
+  #dim(subset(ddply(df[,c("hhid2012","hhid2014")], .(hhid2012), summarise , n = length(hhid2014)), n>1))
   res <- merge(df2012 , df2014, by=c("hhid2012"))
-  
+  nonsplit_hhids2012 <- subset(ddply(res[,c("hhid2012","hhid2014")], .(hhid2012), summarise , n = length(hhid2014)), n==1)$hhid2012
+  nonsplit2012_2014  <- subset(res, is.element(hhid2012,nonsplit_hhids2012 )) %>% mutate (diff = all_assets_mtm_2014 - all_assets_mtm_2012)
+  nonsplit2012_2014 <- nonsplit2012_2014 %>% mutate (householddiff = household_assets_mtm_2014 - household_assets_mtm_2012)
+  nonsplit2012_2014 <- nonsplit2012_2014 %>% mutate (transportdiff = transport_assets_mtm_2014 - transport_assets_mtm_2012)
+  nonsplit2012_2014 <- nonsplit2012_2014 %>% mutate (elecdiff = electric_assets_mtm_2014 - electric_assets_mtm_2012)
   return(res)
 }
 
+
+plain_asset_differences_2012_2014 <- function(a2012,a2014){
+  #a01_mapping could be mapping_hhids_2012_2014(o2014) for example
+  
+  a01_mapping <- mapping_hhids_2012_2014(o2014)
+  a0 <- plyr::rename(subset(a2012[,c("hhid","number","shortname")],number>0),c("hhid"="hhid2012","number"="number.2012"))
+  a1 <- plyr::rename(subset(a2014[,c("hhid","number","shortname")],number>0),c("hhid"="hhid2014","number"="number.2014"))
+  a1 <- merge(a1,a01_mapping)
+  nonsplithhids <- subset(ddply(a01_mapping, .(hhid2012), summarise , n = length("hhid2014")),n==1)$hhid2014
+  dat = merge (a0, subset(a1,is.element(hhid2014,nonsplithhids)), by =c("hhid2012","shortname")) %>% mutate (delta = number.2014 - number.2012 )
+  dat <- subset(dat, delta !=0)
+  return(dat)
+}
 minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014){
   # provide a mapping - per region per district i.e. (region,district,characteristic) -> cost of per-head need per year
   #food - (protein, carb, fat, fruitsveg)
