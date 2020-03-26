@@ -1287,7 +1287,7 @@ Using the above time-series equation.
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection*
 Data
 \end_layout
 
@@ -1302,10 +1302,17 @@ The problem with cost is that individuals report with a significant inaccuracy.
 \begin_layout Standard
 Due to this error we rely not on the total value of assets but the more
  cumbersome counting of assets.
- We view differences in assets only when there is a difference in the number
- of assets.
- We don't track the depriciation in our anaysis and view only the cost of
- assets (as they are purchased within the two-year period).
+ One way to approach is this to view differences in assets only when there
+ is a difference in the number of assets.
+ We don't track the depreciation in our anaysis and view only the cost/mtm
+ of assets (as they are purchased within the two-year period).
+ The difference in number is the main driver, when there is the difference
+ in numbers - the total mtm differences would evaluated.
+ It seems the cost has a measurement error and is influenced by the mtm.
+ So mtm is used as the perception of the economy.
+ Instead of discarding anyone who recalls 3 instead of 4 chairs, we let
+ a group be influenced by the number change more when it's 0->1 from when
+ its 3->4.
 \end_layout
 
 \begin_layout Standard
@@ -1313,28 +1320,29 @@ Also, we don't wish to see if the individuals are increasing or decreasing
  what they already have.
  There is no apparent reason why the number of chairs would be reducing
  in two years.
- Home ownership cannot be relied on - because the individuals seem to attach
- what they have to what they own.
+ Home ownership is particularly senseitive to this error because houses
+ are more expensive assets.
+ The individuals seem to attach what they have to what they own.
  The assets that the individuals have are not necessarily those that they
  own.
- On top of that, the count of chairs etc.
- has severe measurement errors.
- We refine home ownership with the housing-status question.
+ We can refine home ownership with the housing-status question.
  Land ownership shows decrease more so when someone already has land.
- Thus, the refinement for land ownership is not needed as long as we're
- interested in new buyers.
- Regardless, we should see how had land and has none now.
- Beds have the problem in gt0 but not in eq0.
+ The weighting in the group can address this issue.
+ The refinement for land ownership the way we refine house ownership is
+ not needed as long as we're more interested in new buyers.
+ The household which had some land and doesn't any more - cannot be ignored.
+ In other assets, we note that beds have the problem in gt0 but not in eq0.
  For chairs, the problem does not go away.
  Sofa, tables are better in eq0 not in gt0.
 \end_layout
 
 \begin_layout Standard
-The idea is that we would focus only on new buyers.
- It would need to be justified why having third bicycle after second is
- less of an asset than having first after none is.
- It's not that buying first asset automatically leads to ownership of more
- of the same asset.
+The idea that we should focus only on new buyers may need to be justified
+ by saying that third bicycle after second is less of an asset than having
+ first after none is.
+ However, it's not that buying first asset automatically leads to ownership
+ of more of the same asset - only that the transition to ownership band
+ jumps as soon as you have an item.
  The reason we wish to focus on new buyers is that it would the effect of
  reduced assets is less pronounced (people are less likely to forget that
  they don't have a particular asset).
@@ -1344,12 +1352,30 @@ The idea is that we would focus only on new buyers.
  Notice that estimating by the average price of the assets by their average
  in the population - rather than the reported price is not a proper approach
  for assets where quality varies significantly e.g.
- house or a furniture.
+ house or a furniture (
+\series bold
+skewness 
+\series default
+and 
+\series bold
+kurtosis 
+\series default
+are used to inspect these).
  This is why 
 \series bold
 asset price bands is a mid-way approach
 \series default
 .
+\end_layout
+
+\begin_layout Standard
+The median costs of assets itself is full of information on how quality
+ may be segregated.
+ Notice, how median of house is far lower than that of car - implying that
+ the latter are exclusive assets (and that a low-cost car is not available).
+ We consider anything more expensive than bed a furniture to be transferre
+ to the next generation.
+ The groups of assets is yet to be decided.
 \end_layout
 
 \begin_layout Standard
@@ -1361,9 +1387,57 @@ Using transition bands can be assisted with aggregation of assets (shortnames)
  A variable that tracks the total cost of an asset ownership group would
  attempt to smoothen the inaccuracies in cost recall.
  The first list we need is that of assets sorted by the median costs.
+ Next we can decide at what point does the consumption end and assets start.
+ For us, this is also price based.
+ We consider anything more expensive than a mobile as a life-long asset.
+ This is not arbitrary.
  Agrarian assets are under-represented so more interesting observations
  could be provided if we had more than 50 donkeys recorded in the survey.
- We could however lump donkey and livestock together.
+ We could however lump donkey, poultry and livestock together and consider
+ the total costs.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/lsms/assets_median_cost_order2012.png
+	width 5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Cost of assets (2014)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

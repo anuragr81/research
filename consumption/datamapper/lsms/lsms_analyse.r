@@ -1,4 +1,5 @@
 library(dplyr)
+library(moments) # for kurtosis
 setwd('c:/local_files/research/consumption/datamapper/')
 source('translation/frameutils.R');source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');ll=lsms_loader(fu=fu,ln=lsms_normalizer,lgc=lgc)
 source('lsms/lsms_group_collect.r'); source('lsms/lsms_datastorage.R')
@@ -889,13 +890,29 @@ estimation_df <-function( am ){
 }
 get_asset_group <- function(){
   r <- data.frame()
-  r <- rbind(r, data.frame(group='furniture', shortname="bed"))
-  r <- rbind(r, data.frame(group='furniture', shortname="chair"))
-  r <- rbind(r, data.frame(group='furniture', shortname="table"))
-  r <- rbind(r, data.frame(group='furniture', shortname="cupboard"))
-  r <- rbind(r, data.frame(group='furniture', shortname="sofa"))
-  r <- rbind(r, data.frame(group='property', shortname="land"))
-  r <- rbind(r, data.frame(group='property', shortname="house"))
+  r=rbind(r,data.frame(shortname='bed' , asset_group='nonelectric'))
+  r=rbind(r,data.frame(shortname='bike' , asset_group='nonelectric'))
+  r=rbind(r,data.frame(shortname='plough' , asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='sewingmachine' , asset_group='nonelectric'))
+  r=rbind(r,data.frame(shortname='donkey' , asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='sofa' , asset_group='nonelectric'))
+  r=rbind(r,data.frame(shortname='harrow' , asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='stove_electricgas' , asset_group='electric'))
+  r=rbind(r,data.frame(shortname='tv' , asset_group='electric'))
+  r=rbind(r,data.frame(shortname='waterpump' , asset_group='electric'))
+  r=rbind(r,data.frame(shortname='refrigerator' , asset_group='electric'))
+  r=rbind(r,data.frame(shortname='animalcart' , asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='boat' , asset_group='nonelectric'))
+  r=rbind(r,data.frame(shortname='musicsystem' , asset_group='electric'))
+  r=rbind(r,data.frame(shortname='computer' , asset_group='electric'))
+  r=rbind(r,data.frame(shortname='trailer' , asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='handmill' , asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='motorbike' , asset_group='transport'))
+  r=rbind(r,data.frame(shortname='house' , asset_group='property'))
+  r=rbind(r,data.frame(shortname='powertiller' , asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='car' , asset_group='transport'))
+  r=rbind(r,data.frame(shortname='tractor' , asset_group='agricultural'))
+  return(r)
 }
 
 plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
@@ -903,25 +920,42 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   # ignoring waterpump, musicplayer, sports_hobby, camera, phone because of low frequencies
   # ignoring the following as they stay within +1/-1 and are susceptible to recall error : watch
   # ignoring the following as they are susceptible to recall error: 'bed', 'chair',  'table', 'cupboard', 'sofa'
-  assetnames_transport   <- c('bike', 'motorbike', 'car')
-  assetnames_household   <- c(  'sewingmachine','land', 'house', 'bed', 'chair',  'table', 'cupboard', 'sofa',"house","livestock")
+  
+  
+  #assetnames_transport   <- c('bike', 'motorbike', 'car')
+  #assetnames_household   <- c(  'sewingmachine','land', 'house', 'bed', 'chair',  'table', 'cupboard', 'sofa',"house","livestock", "poultry","donkey")
   #assetnames_household   <- c('land', 'house')
   #assetnames_electric     <- c('mobile','videoplayer', 'ac_fan', 'waterpump', 'tv', 'dishtv', 'computer',  'refrigerator' )
-  assetnames_electric     <- c('mobile', 'waterheater', 'videoplayer', 'ac_fan', 'musicsystem', 'tv', 'dishtv', 'computer',  'refrigerator' , 'stove_electricgas')
+  #assetnames_electric     <- c('mobile', 'waterheater', 'videoplayer', 'ac_fan', 'musicsystem', 'tv', 'dishtv', 'computer',  'refrigerator' , 'stove_electricgas')
   
   
-#  ag <- get_asset_group()
-  all_assets             <- c(c(assetnames_electric,assetnames_household), assetnames_transport)
+  #  ag <- get_asset_group()
+  #all_assets             <- c(c(assetnames_electric,assetnames_household), assetnames_transport)
   
   
+  a2012dat <- subset(a2012,!is.na(cost) & cost >0 & number >0 & !is.na(number) )
+  a2012dat$shortname <- as.character(a2012dat$shortname)
+  a2014dat <- subset(a2014,!is.na(cost) & cost >0 & number >0 & !is.na(number) )
+  a2014dat$shortname <- as.character(a2014dat$shortname)
+  
+  a2012src    <- (dplyr::filter( merge(a2012dat,ddply(a2012dat,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost < v))
+  a2014src    <- (dplyr::filter( merge(a2014dat,ddply(a2014dat,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost < v))
+  
+  c0 <- ddply(subset(a2012src, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost), n = length(hhid))
+  c0 <- c0[order(c0$mean_cost),]
+  c1 <- ddply(subset(a2014src, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost), n = length(hhid))
+  c1 <- c1[order(c1$mean_cost),]
+  
+  pivot_asset             <- "bed"
+  all_assets              <- subset(c0,median_cost>= c0[c0$shortname==pivot_asset,]$median_cost)$shortname
   
   a01_mapping <- mapping_hhids_2012_2014(o2014)
-  a0 <- plyr::rename(subset(a2012[,c("hhid","number","shortname")],number>0 & is.element(shortname,all_assets) ),c("hhid"="hhid2012","number"="number.2012"))
-  a1 <- plyr::rename(subset(a2014[,c("hhid","number","shortname")],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2014","number"="number.2014"))
+  a0 <- plyr::rename(subset(a2012src[,c("hhid","number","shortname")],number>0 & is.element(shortname,all_assets) ),c("hhid"="hhid2012","number"="number.2012"))
+  a1 <- plyr::rename(subset(a2014src[,c("hhid","number","shortname")],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2014","number"="number.2014"))
   
-  hs2012 <- unique(o2012[ ,c("hhid","housingstatus")]) 
-  hs2012$has_house <- hs2012$housingstatus ==1 
-  hs2012 <- plyr::rename(hs2012,c("hhid"="hhid2012"))[,c("hhid2012","has_house")]
+  hs2012           <- unique(o2012[ ,c("hhid","housingstatus")]) 
+  hs2012$has_house <- hs2012$housingstatus == 1
+  hs2012           <- plyr::rename(hs2012,c("hhid"="hhid2012"))[,c("hhid2012","has_house")]
   
   hs2014 <- unique(o2014[ ,c("hhid","housingstatus")])
   hs2014$has_house <- hs2014$housingstatus ==1 
@@ -937,30 +971,65 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   
   a1 <- merge(a1,a01_mapping)
   nonsplithhs <- subset(ddply(a01_mapping, .(hhid2012), summarise , n = length(hhid2014)),n==1)
+  
   dat <- merge( merge(nonsplithhs,a0), a1, all=T) 
   dat[is.na(dat$number.2012),]$number.2012 <-0 
-  dat[is.na(dat$number.2014),]$number.2014 <-0 
+  dat[is.na(dat$number.2014),]$number.2014 <-0
+  
   dat <- dat %>% mutate (delta = number.2014 - number.2012 )
+  
   d <- subset(dat, abs(delta)>0 & is.element(shortname,all_assets))
   db <- subset(d , number.2012 == 0 | number.2014 == 0 )
   do <- subset(d , number.2012 > 0 & number.2014 > 0 )
+  
   k <- ddply(d,.(shortname),summarise, n= length(hhid2012) , median_change = median(delta), q85_change = quantile(delta,.85), q15_change = quantile(delta,.15))
   
   k <- k[order(k$n),]
   
-  c0 <- ddply(subset(a2012, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost))
-  c0 <- c0[order(c0$mean_cost),]
-  c1 <- ddply(subset(a2014, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost))
-  c1 <- c1[order(c1$mean_cost),]
+  kb <- ddply(db,.(shortname),summarise, n= length(hhid2012) , median_change = median(delta), q85_change = quantile(delta,.85), q15_change = quantile(delta,.15))
+  kb <- kb[order(kb$n),]
+  
+  ko <- ddply(do,.(shortname),summarise, n= length(hhid2012) , median_change = median(delta), q85_change = quantile(delta,.85), q15_change = quantile(delta,.15))
+  ko <- kb[order(kb$n),]
+  
+  ku0 <- ddply (subset(a2012src, number>0 & !is.na(cost) & cost>0) , .(shortname), summarise, k = moments::kurtosis(cost), s = moments::skewness(cost))
+  ku1 <- ddply (subset(a2014src, number>0 & !is.na(cost) & cost>0) , .(shortname), summarise, k = moments::kurtosis(cost), s = moments::skewness(cost))
+  
+  # anything ge expensive than bed is an asset
+  # count the number of entities newly acquired (had none of them before of the group count)
+  
+  
   
   res = list()
+  res[["dat0"]] <- a2012src
+  res[["dat1"]] <- a2014src
   res[["d"]] <- d
   res[["k"]] <- k
+  res[["kb"]] <- kb
+  res[["ko"]] <- ko
   res[["db"]] <- db
   res[["do"]] <- do
   res[["c0"]] <- c0
   res[["c1"]] <- c1
+  res[["ku0"]] <- ku0
+  res[["ku1"]] <- ku1
   return(res)
+}
+
+plot_costs_from_plain_asset_result <- function(sname,res,is_mtm){
+  par(mfrow=c(2,1))
+  if(is_mtm){
+    p0 <- subset(res[["dat0"]],shortname==sname & !is.na(mtm) & mtm>0)$mtm
+    p1 <- subset(res[["dat1"]],shortname==sname & !is.na(mtm) & mtm>0)$mtm
+    
+  } else {
+    p0 <- (subset(res[["dat0"]],shortname==sname & !is.na(cost) & cost>0)$cost )
+    p1 <- (subset(res[["dat1"]],shortname==sname & !is.na(cost) & cost>0)$cost )
+  }
+  hist( p0, breaks=20)
+  hist( p1, breaks=20 )
+  # pdat = res[["c0"]] ; pdat <- pdat[order(pdat$median_cost),]; par(mar=c(10,2,2,2)) ; barplot(pdat$median_cost, names.arg=as.character(pdat$shortname), las=2)
+  #boxplot(data=subset(res[["dat1"]],!is.element(shortname,c('house')))[,c("shortname","mtm")],mtm~shortname,horizontal=F, las=2)
 }
 
 minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014){
@@ -973,7 +1042,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   #fat - 50g per day
   
   #TODO: graphs and table
-  #graph 1. assets in descreasing order of occurrence frequency
+  #graph 1. assets in descreasing order of occurrence frequency (done)
   #graph 2. region-dependency and hsize-depndency on rent (most renters are in 7 - occupation and education rank have little effect)
   #greph 3: variation in rent for houses by regions 
   if (missing(c2010)){
@@ -1134,9 +1203,9 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   
   #add car petrol as need
   
-#  if (nrow(subset(energybasket2010,is.na(recq)))>0){
-#    stop("Missing recq for in the energy basket")
-#  }
+  #  if (nrow(subset(energybasket2010,is.na(recq)))>0){
+  #    stop("Missing recq for in the energy basket")
+  #  }
   
   # kerosene_cooking
   
