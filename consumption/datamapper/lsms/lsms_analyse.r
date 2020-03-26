@@ -868,6 +868,7 @@ init_data <- function(){
   c2012 <- ll@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+  #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
 }
 
 estimation_df <-function( am ){
@@ -912,6 +913,10 @@ get_asset_group <- function(){
   r=rbind(r,data.frame(shortname='powertiller' , asset_group='agricultural'))
   r=rbind(r,data.frame(shortname='car' , asset_group='transport'))
   r=rbind(r,data.frame(shortname='tractor' , asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='cart' , asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='videoplayer' , asset_group='electric'))
+  r=rbind(r,data.frame(shortname='livestock' , asset_group='agricultural'))
+          
   return(r)
 }
 
@@ -929,7 +934,7 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   #assetnames_electric     <- c('mobile', 'waterheater', 'videoplayer', 'ac_fan', 'musicsystem', 'tv', 'dishtv', 'computer',  'refrigerator' , 'stove_electricgas')
   
   
-  #  ag <- get_asset_group()
+  
   #all_assets             <- c(c(assetnames_electric,assetnames_household), assetnames_transport)
   
   
@@ -946,8 +951,14 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   c1 <- ddply(subset(a2014src, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost), n = length(hhid))
   c1 <- c1[order(c1$mean_cost),]
   
+  
   pivot_asset             <- "bed"
   all_assets              <- subset(c0,median_cost>= c0[c0$shortname==pivot_asset,]$median_cost)$shortname
+  ag <- get_asset_group()
+  
+  if (length(setdiff( all_assets,unique(ag$shortname)) ) > 0) {
+    stop(paste0("Missing Assets in the mapping:",toString(setdiff( all_assets,unique(ag$shortname)) )))
+  }
   
   a01_mapping <- mapping_hhids_2012_2014(o2014)
   a0 <- plyr::rename(subset(a2012src[,c("hhid","number","shortname")],number>0 & is.element(shortname,all_assets) ),c("hhid"="hhid2012","number"="number.2012"))
@@ -970,6 +981,15 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   a1 <- b1[,setdiff(colnames(b1),"has_house")]
   
   a1 <- merge(a1,a01_mapping)
+  
+  #merge to get the groups
+  a0 <- merge(a0, ag, all.x=TRUE)
+  a1 <- merge(a1, ag,all.x=TRUE)
+  
+  if (any(is.na(a0$asset_group)) || any(is.na(a1$asset_group))){
+    stop("Could not find asset group for every shortname")
+  }
+  
   nonsplithhs <- subset(ddply(a01_mapping, .(hhid2012), summarise , n = length(hhid2014)),n==1)
   
   dat <- merge( merge(nonsplithhs,a0), a1, all=T) 
