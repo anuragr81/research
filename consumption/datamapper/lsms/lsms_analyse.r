@@ -891,21 +891,21 @@ estimation_df <-function( am ){
 }
 get_asset_group <- function(){
   r <- data.frame()
-  r=rbind(r,data.frame(shortname='bed' , asset_group='nonelectric'))
-  r=rbind(r,data.frame(shortname='bike' , asset_group='nonelectric'))
+  r=rbind(r,data.frame(shortname='bed' , asset_group='furniture'))
+  r=rbind(r,data.frame(shortname='bike' , asset_group='nonelectric_transport'))
   r=rbind(r,data.frame(shortname='plough' , asset_group='agricultural'))
-  r=rbind(r,data.frame(shortname='sewingmachine' , asset_group='nonelectric'))
+  r=rbind(r,data.frame(shortname='sewingmachine' , asset_group='agricultural'))
   r=rbind(r,data.frame(shortname='donkey' , asset_group='agricultural'))
-  r=rbind(r,data.frame(shortname='sofa' , asset_group='nonelectric'))
+  r=rbind(r,data.frame(shortname='sofa' , asset_group='furniture'))
   r=rbind(r,data.frame(shortname='harrow' , asset_group='agricultural'))
   r=rbind(r,data.frame(shortname='stove_electricgas' , asset_group='electric'))
-  r=rbind(r,data.frame(shortname='tv' , asset_group='electric'))
+  r=rbind(r,data.frame(shortname='tv' , asset_group='electronics'))
   r=rbind(r,data.frame(shortname='waterpump' , asset_group='electric'))
   r=rbind(r,data.frame(shortname='refrigerator' , asset_group='electric'))
   r=rbind(r,data.frame(shortname='animalcart' , asset_group='agricultural'))
-  r=rbind(r,data.frame(shortname='boat' , asset_group='nonelectric'))
-  r=rbind(r,data.frame(shortname='musicsystem' , asset_group='electric'))
-  r=rbind(r,data.frame(shortname='computer' , asset_group='electric'))
+  r=rbind(r,data.frame(shortname='boat' , asset_group='nonelectric_transport'))
+  r=rbind(r,data.frame(shortname='musicsystem' , asset_group='electronics'))
+  r=rbind(r,data.frame(shortname='computer' , asset_group='electronics'))
   r=rbind(r,data.frame(shortname='trailer' , asset_group='agricultural'))
   r=rbind(r,data.frame(shortname='handmill' , asset_group='agricultural'))
   r=rbind(r,data.frame(shortname='motorbike' , asset_group='transport'))
@@ -914,9 +914,9 @@ get_asset_group <- function(){
   r=rbind(r,data.frame(shortname='car' , asset_group='transport'))
   r=rbind(r,data.frame(shortname='tractor' , asset_group='agricultural'))
   r=rbind(r,data.frame(shortname='cart' , asset_group='agricultural'))
-  r=rbind(r,data.frame(shortname='videoplayer' , asset_group='electric'))
+  r=rbind(r,data.frame(shortname='videoplayer' , asset_group='electronics'))
   r=rbind(r,data.frame(shortname='livestock' , asset_group='agricultural'))
-          
+  
   return(r)
 }
 
@@ -954,15 +954,15 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   
   pivot_asset             <- "bed"
   all_assets              <- subset(c0,median_cost>= c0[c0$shortname==pivot_asset,]$median_cost)$shortname
-  ag <- get_asset_group()
   
+  ag <- get_asset_group()
   if (length(setdiff( all_assets,unique(ag$shortname)) ) > 0) {
     stop(paste0("Missing Assets in the mapping:",toString(setdiff( all_assets,unique(ag$shortname)) )))
   }
   
   a01_mapping <- mapping_hhids_2012_2014(o2014)
-  a0 <- plyr::rename(subset(a2012src[,c("hhid","number","shortname")],number>0 & is.element(shortname,all_assets) ),c("hhid"="hhid2012","number"="number.2012"))
-  a1 <- plyr::rename(subset(a2014src[,c("hhid","number","shortname")],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2014","number"="number.2014"))
+  a0 <- plyr::rename(subset(a2012src[,c("hhid","number","shortname","mtm")],number>0 & is.element(shortname,all_assets) ),c("hhid"="hhid2012","number"="number.2012","mtm"="mtm.2012"))
+  a1 <- plyr::rename(subset(a2014src[,c("hhid","number","shortname","mtm")],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2014","number"="number.2014","mtm"="mtm.2014"))
   
   hs2012           <- unique(o2012[ ,c("hhid","housingstatus")]) 
   hs2012$has_house <- hs2012$housingstatus == 1
@@ -982,25 +982,32 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   
   a1 <- merge(a1,a01_mapping)
   
-  #merge to get the groups
-  a0 <- merge(a0, ag, all.x=TRUE)
-  a1 <- merge(a1, ag,all.x=TRUE)
   
-  if (any(is.na(a0$asset_group)) || any(is.na(a1$asset_group))){
-    stop("Could not find asset group for every shortname")
-  }
+  nonsplithhids <- subset(ddply(a01_mapping, .(hhid2012), summarise , n = length(hhid2014)),n==1)$hhid2012
   
-  nonsplithhs <- subset(ddply(a01_mapping, .(hhid2012), summarise , n = length(hhid2014)),n==1)
-  
-  dat <- merge( merge(nonsplithhs,a0), a1, all=T) 
-  dat[is.na(dat$number.2012),]$number.2012 <-0 
+  dat <- merge( subset(a0, is.element(hhid2012,nonsplithhids)), subset(a1,is.element(hhid2012,nonsplithhids)), all=T) 
+  dat[is.na(dat$number.2012),]$number.2012 <-0
+  dat[is.na(dat$mtm.2012),]$mtm.2012 <-0 
   dat[is.na(dat$number.2014),]$number.2014 <-0
+  dat[is.na(dat$mtm.2014),]$mtm.2014 <-0 
   
   dat <- dat %>% mutate (delta = number.2014 - number.2012 )
   
+  #merge to get the groups
+  
+  dat <- merge(dat, ag, all.x=TRUE) %>% mutate (netmtm.2014 = number.2014 * mtm.2014) %>% mutate(netmtm.2012 = number.2012 * mtm.2012 ) %>% mutate( netmtm.delta = netmtm.2014- netmtm.2012)
+  
+  if (any(is.na(dat$asset_group))){
+    stop("Could not find asset group for every shortname")
+  }
+  
+  dats <- ddply(dat[c("shortname","hhid2012","number.2012","number.2014","netmtm.2012","netmtm.2014","asset_group")],.(asset_group,hhid2012), summarise, number.2012 = sum(number.2012), number.2014 = sum(number.2014) , netmtm.2012 = sum(netmtm.2012), netmtm.2014 = sum(netmtm.2014))
+  dats <- dats %>% mutate(delta = (number.2014-number.2012) , netmtm.delta = (netmtm.2014-netmtm.2012))
+  dats <- (dplyr::filter( merge(dats,ddply(dats,.(asset_group),summarise,v=fu()@fv10(netmtm.delta)),all.x=TRUE) , abs(netmtm.delta) < v))
   d <- subset(dat, abs(delta)>0 & is.element(shortname,all_assets))
   db <- subset(d , number.2012 == 0 | number.2014 == 0 )
   do <- subset(d , number.2012 > 0 & number.2014 > 0 )
+  
   
   k <- ddply(d,.(shortname),summarise, n= length(hhid2012) , median_change = median(delta), q85_change = quantile(delta,.85), q15_change = quantile(delta,.15))
   
@@ -1024,6 +1031,7 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   res[["dat0"]] <- a2012src
   res[["dat1"]] <- a2014src
   res[["d"]] <- d
+  res[["s"]] <- dats
   res[["k"]] <- k
   res[["kb"]] <- kb
   res[["ko"]] <- ko
@@ -1034,6 +1042,51 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   res[["ku0"]] <- ku0
   res[["ku1"]] <- ku1
   return(res)
+}
+
+logx <- function(x) { if (x==0) return (0) else { if (x<0) { return (-log(-x)) } else { return(log(x))} } }
+
+tsne_analysis <- function(res){
+  ss                 <- res[["s"]]
+  ss                 <- ss[,c("asset_group","hhid2012","netmtm.delta")]
+  ss$lognetmtm.delta <- sapply(ss$netmtm.delta, logx)
+  ss                 <- ss[,c("asset_group","hhid2012","lognetmtm.delta")]
+  ss                 <- ss %>% spread(asset_group, lognetmtm.delta)
+  ss[is.na(ss)]      <- 0 
+  rownames(ss)       <- ss$hhid2012
+  ss$hhid2012        <- NULL
+  tsres              <- tsne(ss, perplexity=50)
+  tsres              <- as.data.frame(tsres)
+  colnames(tsres)    <- c("X","Y")
+  ss$X               <- tsres$X
+  ss$Y               <- tsres$Y
+  ss$hhid2012        <- row.names(ss)
+  return(ss)
+}
+
+tsres_plot <- function (ss,o2012,a2012,color_field,coloffset){
+  if (color_field =="housemtm"){
+    ss2 <- merge ( plyr::rename ( subset(a2012,shortname=="house" & number>0 & !is.na(mtm) & mtm>0), c("hhid"="hhid2012", "mtm"="housemtm"))[,c("hhid2012","housemtm")], ss, by=c("hhid2012"))
+    ss2$housemtm <- as.integer(log(ss2$housemtm))
+  } else {
+    ss2 <- subset(merge(plyr::rename(o2012,c("hhid"="hhid2012"))[,c("hhid2012","region",color_field)], ss), !is.na(region))
+  }
+  plot(ss2$X,ss2$Y,col=ss2[,color_field]+coloffset)
+}
+get_ownership_change_breakdown_from_plain_assets_res <- function(res)
+{
+  asset_groups<- unique(as.character(get_asset_group()$asset_group))
+  r <- data.frame()
+  for (ag in asset_groups){
+    r <- rbind(r, data.frame ( asset_group = ag, lost_to_0 = nrow(subset(res[["s"]], asset_group == ag  & number.2012>0 & number.2014 == 0)), 
+                               lost_to_nonzero = nrow(subset(res[["s"]], asset_group == ag  & number.2012>0 & number.2014 > 0 ) ),
+                               gained_from_zero = nrow(subset(res[["s"]], asset_group == ag  & number.2012==0 & number.2014 > 0 ) ),
+                               kept_same_nzcount = nrow(subset(res[["s"]], asset_group == ag  & number.2012>0 & delta==0 ) )
+    ) )
+    
+    
+  }
+  return(r)
 }
 
 plot_costs_from_plain_asset_result <- function(sname,res,is_mtm){

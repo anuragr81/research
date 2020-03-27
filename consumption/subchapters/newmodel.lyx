@@ -1431,10 +1431,6 @@ Cost of assets (2014)
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -1445,6 +1441,155 @@ Some assets that are not life-long assets should be counted as (even though
  they are recorded as assets).
  Mobile phones or Dish-TV are not meant to be passed on to the next generation.
  These are therefore to be included in consumption.
+\end_layout
+
+\begin_layout Standard
+We find that in groups, numbers are not reliable because most people come
+ around to having non-zero numbers.
+ It is useful to look at non-split houses and use the prices from 2012.
+ This would mimise the the effect of measurement errors for mtm.
+ That said, grained from zero group is dominant.
+ Remember that we're only interested in new assets, therefore new assets
+ can be focussed on.
+ This can allow us to put more weight on new purchases (instead of simply
+ ignoring old assets).
+ We don't need the cost-based logic to justify this.
+ Consider what this would like like given the asset 
+\begin_inset Formula $a$
+\end_inset
+
+ whose value is 
+\begin_inset Formula $P_{a,t}\times n_{a,t}$
+\end_inset
+
+ where 
+\begin_inset Formula $P_{a,t}$
+\end_inset
+
+ is the reported cost/mtm of the asset at time 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{a,t}$
+\end_inset
+
+ the total number of assets.
+ What we're saying is that the the expenditure on new assets should not
+ simply be 
+\begin_inset Formula $P_{a,t}$
+\end_inset
+
+
+\begin_inset Formula $\Delta n_{a,t+1}=P_{a,t}(n_{a,t+1}-n_{a,t})$
+\end_inset
+
+ but also have another term inversely proportional to 
+\begin_inset Formula $n_{a,t}$
+\end_inset
+
+ i.e.
+ having more of the item would not count as a new asset.
+ One way to consider this is to see 
+\begin_inset Formula $log(n_{t+1})-log(n_{t}+\epsilon)$
+\end_inset
+
+.
+ While this is attractive, it cannot take into account the significant number
+ of gained_from_zero users.
+ The former method of using a term inversely proportional to 
+\begin_inset Formula $n_{a,t}$
+\end_inset
+
+ is more general (log can be that inversely proportional function) crude
+ but it may be associated with a simple economic explanation that the effective
+ cost of purchase is more when somebody hasn't had the asset.
+ So in 
+\begin_inset Formula $\Delta A_{t+1}$
+\end_inset
+
+ 
+\begin_inset Formula $A_{t},A_{t+1}$
+\end_inset
+
+ are not the mtms of the owned assets but a certain state.
+ This differentiates the problem of interpreting 
+\begin_inset Formula $\Delta A_{t+1}$
+\end_inset
+
+ from that of understanding 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ itself.
+ The transformation needs to be applied to 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ so that it represents the state in some way.
+ The clusters in the tsne for the various dimensions the log-value of assets
+ of different kinds seem to be due to to urban-rural differences as well
+ - likely due to electricity.
+ This only means that consumption in the urban areas encompasses electricity.
+ How is that related with status consumption? Not having assets are compensated.
+ So look at not having assets - the consumption, the proportion of total
+ expenditure should be different for asset owners.
+ The urban areas also have more income so it's only the proportion we can
+ comment on - and not much else.
+ Remember that we're ignoring bride price - which is not good - it should
+ be included in household.
+ 
+\end_layout
+
+\begin_layout Standard
+The rural urban differences hints that is we separate electric assets from
+ the rest, we may see huge differences we have to remember it's not the
+ split assets - but simply the increase in expenditure we want.
+ In fact 
+\begin_inset Formula $\Delta A_{t+1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+also does the job of viewing purchases of housing and assets in a common
+ way of money.
+ The idea of 
+\begin_inset Quotes eld
+\end_inset
+
+states
+\begin_inset Quotes erd
+\end_inset
+
+ is thus somewhat misinformed - because the whole point of observing 
+\begin_inset Formula $\Delta A_{t+1}$
+\end_inset
+
+ is to observe purchases.
+ The detour we had was only because we have so much measurement error with
+ the netmtm change and we hope that by looking at new purchasers or having
+ less value to changes in other assets we may be able to limit them.
+ This is also inspired by the fact that households are not supposed to give
+ an accurate count.
+ So it may be worthwhile to look at all deltas from non-zero to non-zero
+ has a one-change.
+ The net-mtm would thus be significantly lowered.
+ 1->0 changes would however continue to bother us - we cannot just ignore
+ n->0 changes - the only way to absorb those is to apply the delta filtering
+ (i.e.
+ (n0>n1 & n0>0 )=>(delta=0) ) on to the categories i.e.
+ (2 chairs , 3 beds) -> (1 chair, 1 bed) would be reported to have no change.
+ This also means that (0 chairs, 1 bed) -> (1 chair, 2 bed) counts as no
+ change nor does (2 chairs, 1 bed) -> (0 chairs, 1 bed).
+ The binary filter application which is justified based on the inability
+ to recollect.
+ 
+\end_layout
+
+\begin_layout Standard
+In code, x = data.frame(n0=c(0,0,1,2,3,4,2,1), n1=c(1,2,2,3,4,5,5,5))
 \end_layout
 
 \end_body

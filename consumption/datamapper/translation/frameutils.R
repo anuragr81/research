@@ -7,7 +7,8 @@ if (isClass("FrameUtils")){
 ## all exported functions are declared here
 setClass("FrameUtils", representation(si_factor= "function",get_translated_frame="function",count_higher_than="function",filter_categories_data="function",
                                       removeall_cols_except="function",find_nonzero_percentile="function",
-                                      fv="function",rbind_xy="function",max_non_na="function",get_max_col="function",
+                                      fv="function",fv20="function",fv10="function",
+                                      rbind_xy="function",max_non_na="function",get_max_col="function",
                                       diff_lists = "function", combine_lists = "function",
                                       occurrences_df="function",apply_expand="function") )
 
@@ -97,6 +98,14 @@ fu<-function(){
   
   fv<-function (x) { 
     return(as.double(filter_extremes(dat=x,highMultiple = 30, threshold = .95)[["value"]])) 
+  }
+
+  fv20<-function (x) { 
+    return(as.double(filter_extremes(dat=x,highMultiple = 20, threshold = .95)[["value"]])) 
+  }
+  
+  fv10<-function (x) { 
+    return(as.double(filter_extremes(dat=x,highMultiple = 10, threshold = .95)[["value"]])) 
   }
   
   occurrences_df <- function(x){
@@ -256,7 +265,7 @@ fu<-function(){
              filter_categories_data=filter_categories_data,
              removeall_cols_except=removeall_cols_except,
              find_nonzero_percentile=find_nonzero_percentile,
-             fv=fv,
+             fv=fv,fv20=fv20,fv10=fv10,
              rbind_xy=rbind_xy,max_non_na=max_non_na,
              get_max_col=get_max_col, occurrences_df=occurrences_df,
              combine_lists=combine_lists,
