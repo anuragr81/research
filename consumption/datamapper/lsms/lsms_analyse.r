@@ -9,6 +9,9 @@ source('lsms/lsms_group_collect.r'); source('lsms/lsms_datastorage.R')
 #datt <- subset(dat,is.element(shortname,subset(ddply(dat,.(shortname),summarise,n=length(price)),!is.na(shortname) & n>20)$shortname)) %>% mutate(shortname = as.character(shortname))
 #par(mar=c(5,7,1,1)); boxplot(price~shortname,data=datt,horizontal=TRUE,las=2)
 
+h <- taskCallbackManager()
+h$add(function(expr, value, ok, visible) { options("prompt"=format(Sys.time(), "%H:%M:%S> ")); return(TRUE) }, name = "simpleHandler")
+
 parents_educ_rank <- function(x){
   #1 NO SCHOOL
   #2 SOME PRIMARY
@@ -946,6 +949,10 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   a2012src    <- (dplyr::filter( merge(a2012dat,ddply(a2012dat,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost < v))
   a2014src    <- (dplyr::filter( merge(a2014dat,ddply(a2014dat,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost < v))
   
+  
+  a2012src    <- merge(a2012src, ddply(subset(a2012src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p30=quantile(cost,.3) , p60=quantile(cost,.6)), by=c("shortname"))
+  a2014src    <- merge(a2014src, ddply(subset(a2014src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p30=quantile(cost,.3) , p60=quantile(cost,.6)), by=c("shortname"))
+  
   c0 <- ddply(subset(a2012src, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost), n = length(hhid))
   c0 <- c0[order(c0$mean_cost),]
   c1 <- ddply(subset(a2014src, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost), n = length(hhid))
@@ -961,8 +968,9 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   }
   
   a01_mapping <- mapping_hhids_2012_2014(o2014)
-  a0 <- plyr::rename(subset(a2012src[,c("hhid","number","shortname","mtm")],number>0 & is.element(shortname,all_assets) ),c("hhid"="hhid2012","number"="number.2012","mtm"="mtm.2012"))
-  a1 <- plyr::rename(subset(a2014src[,c("hhid","number","shortname","mtm")],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2014","number"="number.2014","mtm"="mtm.2014"))
+  select_cols <- c("hhid","number","shortname","mtm","p30","p60","cost")
+  a0 <- plyr::rename(subset(a2012src[,select_cols],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2012","number"="number.2012","mtm"="mtm.2012","cost"="cost.2012","p30"="p30.2012","p60"="p60.2012"))
+  a1 <- plyr::rename(subset(a2014src[,select_cols],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2014","number"="number.2014","mtm"="mtm.2014","cost"="cost.2014","p30"="p30.2014","p60"="p60.2014"))
   
   hs2012           <- unique(o2012[ ,c("hhid","housingstatus")]) 
   hs2012$has_house <- hs2012$housingstatus == 1

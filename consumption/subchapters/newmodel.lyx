@@ -1585,6 +1585,88 @@ states
  change nor does (2 chairs, 1 bed) -> (0 chairs, 1 bed).
  The binary filter application which is justified based on the inability
  to recollect.
+ If we calculate all netmtms with the estimates at a fixed year let's say
+ at 
+\begin_inset Formula $t$
+\end_inset
+
+ rather than 
+\begin_inset Formula $t+1$
+\end_inset
+
+then we need to deal with problem of missing mtms from when someone doesn't
+ have the asset any more.
+ More particularly, in the transition (1 chair, 2 beds) at 
+\begin_inset Formula $t$
+\end_inset
+
+ -> (0 chairs, 1 bed) at 
+\begin_inset Formula $t+1$
+\end_inset
+
+, we won't have the price at 
+\begin_inset Formula $t+1$
+\end_inset
+
+.
+ When somebody buys news assets e.g.
+ (0 chairs, 1 bed) -> (1 chair, 1 bed), then using the price at 
+\begin_inset Formula $t$
+\end_inset
+
+ is not feasible.
+ The year 2010, for which we don't have the data would have this problem
+ more directly unless we decide to stay with 
+\begin_inset Formula $t+1$
+\end_inset
+
+prices.
+ There are two directions:
+\end_layout
+
+\begin_layout Standard
+1.
+ Figure out a way to infer prices at 
+\begin_inset Formula $t+1$
+\end_inset
+
+ .
+ One way to do is to average prices at different categories.
+ So, there would be cheap tv, a medium range tv and an expensive tv.
+ When somebody had an expensive tv and but has none, then the current expensive
+ tv's price (determined from some other users are applied).
+ If we were using 
+\begin_inset Formula $t$
+\end_inset
+
+ prices then (0 chair, 1 bed) -> (1 chair, 1 bed) would be calculated the
+ same way.
+ The expensive asset is one which is more expensive than the top 60% of
+ all assets.
+ Prices are thus simply ddply(subset(a2014,number>0 & cost>0 & !is.na(cost)),.(sho
+rtname),summarise, q30=quantile(cost,.3) , q60=quantile(cost,.6)).
+ 
+\end_layout
+
+\begin_layout Standard
+2.
+ Use netmtm as the average of the asset group.
+ So (0 chairs, 1 bed) -> (1 chair, 1 bed) with pricing at 
+\begin_inset Formula $t$
+\end_inset
+
+ (no price for chair) can use the price of bed as if it were for the chair.
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $t+1$
+\end_inset
+
+prices are used, then the trouble exists when some one has lost the assets.
+ In the case (2 chairs, 1 bed) -> (0 chair, 1 bed) for example, we won't
+ have the price for chair.
+ Using would thus require that we ignore all lost asset cases.
  
 \end_layout
 
