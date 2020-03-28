@@ -1645,7 +1645,8 @@ prices.
  all assets.
  Prices are thus simply ddply(subset(a2014,number>0 & cost>0 & !is.na(cost)),.(sho
 rtname),summarise, q30=quantile(cost,.3) , q60=quantile(cost,.6)).
- 
+ Notice that we won't be using mtms here, because costs are less likely
+ to change (even though they do).
 \end_layout
 
 \begin_layout Standard

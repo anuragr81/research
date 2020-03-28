@@ -923,6 +923,34 @@ get_asset_group <- function(){
   return(r)
 }
 
+comparator <- function(x,a,b) { if (is.na(x) || is.na(a) || is.na(b)) { return (NA)} else { if (x<a) { return(3)} else { if (x<b) {return(2)} else {return(1)} } } }
+
+copyover_a <- function(a,b) { 
+  if (is.na(a)){
+    if (is.na(b)){
+      stop("Cannot handle both NAs")
+    } else {
+      return (b)
+    }
+    
+  } else {
+    return (a)
+  }
+}
+
+copyover_b <- function(a,b) { 
+  if (is.na(b)){
+    if (is.na(a)){
+      stop("Cannot handle both NAs")
+    } else {
+      return (a)
+    }
+    
+  } else {
+    return (b)
+  }
+}
+
 plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   #a01_mapping could be mapping_hhids_2012_2014(o2014) for example
   # ignoring waterpump, musicplayer, sports_hobby, camera, phone because of low frequencies
@@ -950,8 +978,8 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   a2014src    <- (dplyr::filter( merge(a2014dat,ddply(a2014dat,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost < v))
   
   
-  a2012src    <- merge(a2012src, ddply(subset(a2012src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p30=quantile(cost,.3) , p60=quantile(cost,.6)), by=c("shortname"))
-  a2014src    <- merge(a2014src, ddply(subset(a2014src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p30=quantile(cost,.3) , p60=quantile(cost,.6)), by=c("shortname"))
+#  a2012src    <- merge(a2012src, ddply(subset(a2012src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p30=quantile(cost,.3) , p60=quantile(cost,.6)), by=c("shortname"))
+#  a2014src    <- merge(a2014src, ddply(subset(a2014src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p30=quantile(cost,.3) , p60=quantile(cost,.6)), by=c("shortname"))
   
   c0 <- ddply(subset(a2012src, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost), n = length(hhid))
   c0 <- c0[order(c0$mean_cost),]
@@ -968,9 +996,9 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   }
   
   a01_mapping <- mapping_hhids_2012_2014(o2014)
-  select_cols <- c("hhid","number","shortname","mtm","p30","p60","cost")
-  a0 <- plyr::rename(subset(a2012src[,select_cols],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2012","number"="number.2012","mtm"="mtm.2012","cost"="cost.2012","p30"="p30.2012","p60"="p60.2012"))
-  a1 <- plyr::rename(subset(a2014src[,select_cols],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2014","number"="number.2014","mtm"="mtm.2014","cost"="cost.2014","p30"="p30.2014","p60"="p60.2014"))
+  select_cols <- c("hhid","number","shortname","mtm","cost")
+  a0 <- plyr::rename(subset(a2012src[,select_cols],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2012","number"="number.2012","mtm"="mtm.2012","cost"="cost.2012"))
+  a1 <- plyr::rename(subset(a2014src[,select_cols],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2014","number"="number.2014","mtm"="mtm.2014","cost"="cost.2014"))
   
   hs2012           <- unique(o2012[ ,c("hhid","housingstatus")]) 
   hs2012$has_house <- hs2012$housingstatus == 1
@@ -1000,6 +1028,20 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   dat[is.na(dat$mtm.2014),]$mtm.2014 <-0 
   
   dat <- dat %>% mutate (delta = number.2014 - number.2012 )
+  #get grade prices
+  dat <- merge( dat, ddply(subset(a2012src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p15.2012=quantile(cost,.15), p30.2012=quantile(cost,.3), p45.2012=quantile(cost,.45) , p60.2012=quantile(cost,.6), p75.2012=quantile(cost,.75) ), by=c("shortname"))
+  dat <- merge( dat, ddply(subset(a2014src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p15.2014=quantile(cost,.15), p30.2014=quantile(cost,.3), p45.2014=quantile(cost,.45) , p60.2014=quantile(cost,.6), p75.2014=quantile(cost,.75) ), by=c("shortname"))
+  
+  dat$grade.2012 <- mapply(comparator,dat$cost.2012,dat$p30.2012,dat$p60.2012)
+  dat$grade.2014 <- mapply(comparator,dat$cost.2014,dat$p30.2014,dat$p60.2014)
+  
+  
+  dat$grade.2012 <- mapply(copyover_a, dat$grade.2012, dat$grade.2014)
+  dat$grade.2014 <- mapply(copyover_b, dat$grade.2012, dat$grade.2014)
+  
+  dat$icost.2014 <- (dat$grade.2014==1)*dat$p15.2014+(dat$grade.2014==2)*dat$p45.2014+(dat$grade.2014==3)*dat$p75.2014
+  dat$fdelta <- ((dat$number.2012>0) & (abs(dat$delta)>2)) | (( (dat$number.2012==0) | (dat$number.2014==0)) & (abs(dat$delta)!=0)); 
+  dat$costdelta <- (dat$fdelta==TRUE)*dat$delta*dat$icost.2014 + (dat$fdelta==FALSE)*0
   
   #merge to get the groups
   
@@ -1009,7 +1051,7 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
     stop("Could not find asset group for every shortname")
   }
   
-  dats <- ddply(dat[c("shortname","hhid2012","number.2012","number.2014","netmtm.2012","netmtm.2014","asset_group")],.(asset_group,hhid2012), summarise, number.2012 = sum(number.2012), number.2014 = sum(number.2014) , netmtm.2012 = sum(netmtm.2012), netmtm.2014 = sum(netmtm.2014))
+  dats <- ddply(dat[c("shortname","hhid2012","number.2012","number.2014","netmtm.2012","netmtm.2014","asset_group","costdelta")],.(asset_group,hhid2012), summarise, number.2012 = sum(number.2012), number.2014 = sum(number.2014) , netmtm.2012 = sum(netmtm.2012), netmtm.2014 = sum(netmtm.2014), costdelta=sum(costdelta))
   dats <- dats %>% mutate(delta = (number.2014-number.2012) , netmtm.delta = (netmtm.2014-netmtm.2012))
   dats <- (dplyr::filter( merge(dats,ddply(dats,.(asset_group),summarise,v=fu()@fv10(netmtm.delta)),all.x=TRUE) , abs(netmtm.delta) < v))
   d <- subset(dat, abs(delta)>0 & is.element(shortname,all_assets))
