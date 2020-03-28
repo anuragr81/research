@@ -1040,9 +1040,10 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   dat$grade.2014 <- mapply(copyover_b, dat$grade.2012, dat$grade.2014)
   
   dat$icost.2014 <- (dat$grade.2014==1)*dat$p15.2014+(dat$grade.2014==2)*dat$p45.2014+(dat$grade.2014==3)*dat$p75.2014
-  dat$fdelta <- ((dat$number.2012>0) & (abs(dat$delta)>2)) | (( (dat$number.2012==0) | (dat$number.2014==0)) & (abs(dat$delta)!=0)); 
-  dat$costdelta <- (dat$fdelta==TRUE)*dat$delta*dat$icost.2014 + (dat$fdelta==FALSE)*0
+  dat$fdelta     <- ((dat$number.2012>0) & (abs(dat$delta)>2)) | (( (dat$number.2012==0) | (dat$number.2014==0)) & (abs(dat$delta)!=0)); 
+  dat$costdelta  <- (dat$fdelta==TRUE)*dat$delta*dat$icost.2014 + (dat$fdelta==FALSE)*0
   
+  x              <- (ddply(dat, .(hhid2012), summarise, expenditure = sum(costdelta)))
   #merge to get the groups
   
   dat <- merge(dat, ag, all.x=TRUE) %>% mutate (netmtm.2014 = number.2014 * mtm.2014) %>% mutate(netmtm.2012 = number.2012 * mtm.2012 ) %>% mutate( netmtm.delta = netmtm.2014- netmtm.2012)
@@ -1081,6 +1082,7 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   res[["dat0"]] <- a2012src
   res[["dat1"]] <- a2014src
   res[["d"]] <- d
+  res[["x"]] <- x
   res[["s"]] <- dats
   res[["k"]] <- k
   res[["kb"]] <- kb
