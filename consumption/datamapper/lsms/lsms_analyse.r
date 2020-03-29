@@ -876,14 +876,20 @@ init_data <- function(){
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
-estimation_df <-function( e, a2010, a2012, a2014, o2010, o2012, o2014 ){
+estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014 ){
   if (missing(e)){
     e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
-  adiffres2012 <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
-  adiff2012 <- res[["df"]]
-  asum2012 <- ddply(subset(res[["d"]][,c("hhid2012","cost.2012")], !is.na(cost.2012)),.(hhid2012),summarise,cost.2012=sum(cost.2012))
-  df           <- merge(asum2012,adiff2012,by=c("hhid2012"))
+  if (missing(pares)){
+    pares <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
+  }
+  
+  adiff2012                                  <- pares[["df"]]
+  asum2012                                   <- ddply(subset(plyr::rename(pares[["dat0"]][,c("hhid","cost")],c("hhid"="hhid2012","cost"="cost.2012")), !is.na(cost.2012)),.(hhid2012),summarise,cost.2012=sum(cost.2012))
+  df                                         <- merge(asum2012,adiff2012,by=c("hhid2012"),all.x=TRUE)
+  df[is.na(df$netmtm.fdelta),]$netmtm.fdelta <- 0
+  
+  
   return (df)
 }
 
@@ -1056,7 +1062,7 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   dats$fdelta        <- ((dats$number.2012>0) & ((dats$delta)>0)) | (( (dats$number.2012==0)) & ((dats$delta)>0))
   dats$netmtm.fdelta <- (dats$fdelta==FALSE)*0 + (dats$fdelta==TRUE)*dats$netmtm.delta
   
-  d           <- subset(dat, abs(delta)>0 & is.element(shortname,all_assets))
+  d           <- subset(dat, is.element(shortname,all_assets))
   db          <- subset(d , number.2012 == 0 | number.2014 == 0 )
   do          <- subset(d , number.2012 > 0 & number.2014 > 0 )
   
@@ -1326,18 +1332,15 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   clothing2014     <- plyr::rename(merge(clothing, unique(o2014[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2014")], c("avcost2014"="clothingcost"))
   allcosts2014     <- merge(clothing2014, merge(foodbasket2014,merge(hc2014, energybasket2014, by = c("hhid")), by=c("hhid")), by = c("hhid")) %>% mutate (needs_cost = foodbasket_cost + housing_cost + clothingcost + energybasket_cost)
   
-  #use public transport as need - regardless
+  print("PENDING TODO:  ADD PUBLIC TRANSPORT AS NEED for where it is available")
   
-  #add car petrol as need
+  select_cols      <- c("hhid","needs_cost")
+  r                <- data.frame()
+  r                <- rbind(r, allcosts2010[,select_cols] %>% mutate(year=2010))
+  r                <- rbind(r, allcosts2012[,select_cols] %>% mutate(year=2012)) 
+  r                <- rbind(r, allcosts2014[,select_cols] %>% mutate(year=2014)) 
   
-  #  if (nrow(subset(energybasket2010,is.na(recq)))>0){
-  #    stop("Missing recq for in the energy basket")
-  #  }
-  
-  # kerosene_cooking
-  
-  
-  return(allcosts2014) 
+  return(r) 
   
   # transport - load petrol prices and load public transport prices
   # household - rent and clothes
