@@ -872,27 +872,21 @@ init_data <- function(){
   c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
+  #df <- estimation_df(a2010 = a2010, a2012 = a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
-estimation_df <-function( am ){
-  if (missing(am)){
-    am <- all_asset_mtms(sum_costs = TRUE)
+estimation_df <-function( e, a2010, a2012, a2014, o2010, o2012, o2014 ){
+  if (missing(e)){
+    e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
-  am <- am[,c("hhid","year","all_assets_mtm_sum","electric_assets_mtm_sum","transport_assets_mtm_sum","household_assets_mtm_sum")]
-  
-  df2012 <- (plyr::rename(subset(am,year==2012), c("hhid"="hhid2012", "all_assets_mtm_sum"="all_assets_mtm_2012", "electric_assets_mtm_sum"="electric_assets_mtm_2012", "transport_assets_mtm_sum"="transport_assets_mtm_2012", "household_assets_mtm_sum"="household_assets_mtm_2012")))
-  df2014 <- merge( plyr::rename(subset(am,year==2014), c("hhid"="hhid2014", "all_assets_mtm_sum"="all_assets_mtm_2014", "electric_assets_mtm_sum"="electric_assets_mtm_2014", "transport_assets_mtm_sum"="transport_assets_mtm_2014", "household_assets_mtm_sum"="household_assets_mtm_2014")) , mapping_hhids_2012_2014(o2014))
-  print("PENDING ::::: HANDLING OF NEW HOUSEHOLDS ")
-  #dim(subset(ddply(df[,c("hhid2012","hhid2014")], .(hhid2012), summarise , n = length(hhid2014)), n>1))
-  res <- merge(df2012 , df2014, by=c("hhid2012"))
-  nonsplit_hhids2012 <- subset(ddply(res[,c("hhid2012","hhid2014")], .(hhid2012), summarise , n = length(hhid2014)), n==1)$hhid2012
-  nonsplit2012_2014  <- subset(res, is.element(hhid2012,nonsplit_hhids2012 )) %>% mutate (diff = all_assets_mtm_2014 - all_assets_mtm_2012)
-  nonsplit2012_2014 <- nonsplit2012_2014 %>% mutate (householddiff = household_assets_mtm_2014 - household_assets_mtm_2012)
-  nonsplit2012_2014 <- nonsplit2012_2014 %>% mutate (transportdiff = transport_assets_mtm_2014 - transport_assets_mtm_2012)
-  nonsplit2012_2014 <- nonsplit2012_2014 %>% mutate (elecdiff = electric_assets_mtm_2014 - electric_assets_mtm_2012)
-  return(res)
+  adiffres2012 <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
+  adiff2012 <- res[["df"]]
+  asum2012 <- ddply(subset(res[["d"]][,c("hhid2012","cost.2012")], !is.na(cost.2012)),.(hhid2012),summarise,cost.2012=sum(cost.2012))
+  df           <- merge(asum2012,adiff2012,by=c("hhid2012"))
+  return (df)
 }
+
 get_asset_group <- function(){
   r <- data.frame()
   r=rbind(r,data.frame(shortname='bed' , asset_group='furniture'))

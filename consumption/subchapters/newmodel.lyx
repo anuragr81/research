@@ -29,9 +29,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -44,6 +45,7 @@
 \use_package undertilde 1
 \cite_engine basic
 \cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -55,6 +57,13 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 1.5cm
+\topmargin 2cm
+\rightmargin 1.5cm
+\bottommargin 2cm
+\headheight 1.5cm
+\headsep 1.5cm
+\footskip 1cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -1213,11 +1222,16 @@ Here, we assume that
 \end_inset
 
  does.
- This encompasses the peer effects 
+ Therefor the utility from quality and assets would vary with personal character
+istics but not needs when accounted with asset ownership.
+ This also encompasses the peer effects 
 \begin_inset Formula $\int_{\rho}\nu d\nu$
 \end_inset
 
  .
+ Any non-durable consumption other than what is driven by the assets and
+ basic-needs would be constitute the status-related consumption (that is
+ the only way status can be derived in the secondary-data).
  Omitting argument 
 \begin_inset Formula $A_{\tau}$
 \end_inset
@@ -1242,13 +1256,6 @@ c_{\tau+1}=\nu_{\tau+1}+\Psi_{\tau+1}\nonumber
 \end_layout
 
 \begin_layout Standard
-Any non-durable consumption other than what is driven by the assets and
- basic-needs would be constitute the status-related consumption (that is
- the only way status can be derived in the secondary-data).
- 
-\end_layout
-
-\begin_layout Standard
 Since 
 \begin_inset Formula $\frac{\partial u_{\tau+1}}{\partial\nu_{\tau+1}}=\frac{b_{\tau,\rho}}{\nu_{\tau+1}}-\frac{1-a_{\tau}-b_{\tau,\rho}}{A_{\tau+1}}$
 \end_inset
@@ -1269,21 +1276,54 @@ noprefix "false"
 \end_inset
 
 , we can write 
-\begin_inset Formula $A_{\tau+1}=A_{\tau}(1+r)+ki_{\tau}-\Psi_{\tau}-\frac{b_{\tau,\rho}A_{\tau+1}}{1-a_{\tau}-b_{\tau,\rho}}A_{\tau+1}$
+\begin_inset Formula $A_{\tau+1}=A_{\tau}(1+r)+ki_{\tau}-\Psi_{\tau+1}-\frac{b_{\tau,\rho}}{1-a_{\tau}-b_{\tau,\rho}}A_{\tau+1}$
 \end_inset
 
- and thus
+.
+ Rearranging terms
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{\tau+1}=A_{\tau}\frac{(1-a_{\tau}-b_{\tau,\rho})(1+r)}{1-a_{\tau}}+\frac{(ki_{\tau}-\Psi_{\tau+1})(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}\Rightarrow$
+\end_inset
+
+
+\begin_inset Formula $A_{\tau+1}=A_{\tau}\frac{1-a_{\tau}-b_{\tau,\rho}+r(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}+\frac{(ki_{\tau}-\Psi_{\tau+1})(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}=A_{\tau}+\frac{r(1-a_{\tau}-b_{\tau,\rho})-b_{\tau,\rho}}{1-a_{\tau}}A_{\tau}+\frac{(ki_{\tau}-\Psi_{\tau+1})(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, we can write 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-A_{\tau+1} & =\frac{(1+r)(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}A_{\tau}+\frac{(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}(ki_{\tau}-\Psi_{\tau})
+\Delta A_{\tau+1}=(r-\frac{(1+r)b_{\tau,\rho}}{1-a_{\tau}})A_{\tau}+\frac{(ki_{\tau}-\Psi_{\tau+1})(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}
 \end{alignat*}
 
 \end_inset
 
-Using the above time-series equation.
+Using the above time-series equation, we can see how 
+\begin_inset Formula $\frac{\partial\nu_{\tau+1}}{\partial A_{\tau+1}}$
+\end_inset
+
+ varies.
+ The solution for 
+\begin_inset Formula $r$
+\end_inset
+
+ is somewhat tricky so we may want to explore a more general asset growth
+ description model (which may consider discounting for example).
+ The trouble with that is that the expansion 
+\begin_inset Formula $1+r$
+\end_inset
+
+ is not as easy available.
  
 \end_layout
 
@@ -1446,7 +1486,11 @@ Some assets that are not life-long assets should be counted as (even though
 \begin_layout Standard
 We find that in groups, numbers are not reliable because most people come
  around to having non-zero numbers.
- It is useful to look at non-split houses and use the prices from 2012.
+ It is useful to look at 
+\series bold
+non-split houses 
+\series default
+and use the prices from 2012.
  This would mimise the the effect of measurement errors for mtm.
  That said, grained from zero group is dominant.
  Remember that we're only interested in new assets, therefore new assets
@@ -1668,7 +1712,6 @@ prices are used, then the trouble exists when some one has lost the assets.
  In the case (2 chairs, 1 bed) -> (0 chair, 1 bed) for example, we won't
  have the price for chair.
  Using would thus require that we ignore all lost asset cases.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1690,6 +1733,20 @@ The results from all these seem to indicate that the changes in assets are
  actually loses the asset).
  To make it more practical, such ignoring of data would require some backing
  with a pseudo-panel.
+\end_layout
+
+\begin_layout Standard
+So far, counting with fdelta gives us a lot of no-asset changes scenario
+ and quite a few asset changes.
+ We may be jumping ahead of the gun a little if we start worrying about
+ the truncated normal distribution just yet.
+ At a more fundamental level, 
+\begin_inset Formula $\Delta A_{t+1}$
+\end_inset
+
+ is a random variable whose probability of remaining 0 is quite high.
+ Also, relevant is the fact that it's the log of assets that are normally
+ distributed - not the asset prices themselves.
 \end_layout
 
 \end_body
