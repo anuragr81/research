@@ -1672,7 +1672,24 @@ prices are used, then the trouble exists when some one has lost the assets.
 \end_layout
 
 \begin_layout Standard
-In code, x = data.frame(n0=c(0,0,1,2,3,4,2,1), n1=c(1,2,2,3,4,5,5,5))
+The results from all these seem to indicate that the changes in assets are
+ simply noises.
+ We may be better off with a pseudo-panel approach here as well.
+ The quality of data is so bad that the differences are just noise - people
+ seem to be losing the assets as often are they gaining them.
+ This observations call into question the theory that assets are increasing
+ at all times.
+ The downside of smoothening is that a lot of genuine purchases might be
+ getting removed.
+ This may make sticking to the original plan of action - which was to just
+ sum up all the mtms without using fdelta-smoothening (i.e.
+ ignoring small changes to assets).
+ The other option to observe the group of assets is also smoothening to
+ some extent - by caring to observe only if someone is observing a new group
+ so that the loss of a group identity can be ignored (simply because nobody
+ actually loses the asset).
+ To make it more practical, such ignoring of data would require some backing
+ with a pseudo-panel.
 \end_layout
 
 \end_body

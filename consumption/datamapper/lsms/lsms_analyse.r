@@ -872,6 +872,7 @@ init_data <- function(){
   c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
+  #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
 estimation_df <-function( am ){
@@ -978,17 +979,18 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   a2014src    <- (dplyr::filter( merge(a2014dat,ddply(a2014dat,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost < v))
   
   
-#  a2012src    <- merge(a2012src, ddply(subset(a2012src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p30=quantile(cost,.3) , p60=quantile(cost,.6)), by=c("shortname"))
-#  a2014src    <- merge(a2014src, ddply(subset(a2014src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p30=quantile(cost,.3) , p60=quantile(cost,.6)), by=c("shortname"))
+  #  a2012src    <- merge(a2012src, ddply(subset(a2012src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p30=quantile(cost,.3) , p60=quantile(cost,.6)), by=c("shortname"))
+  #  a2014src    <- merge(a2014src, ddply(subset(a2014src,number>0 & cost>0 & !is.na(cost)),.(shortname),summarise, p30=quantile(cost,.3) , p60=quantile(cost,.6)), by=c("shortname"))
   
   c0 <- ddply(subset(a2012src, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost), n = length(hhid))
   c0 <- c0[order(c0$mean_cost),]
   c1 <- ddply(subset(a2014src, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost), n = length(hhid))
   c1 <- c1[order(c1$mean_cost),]
   
+  # anything ge expensive than bed is an asset
   
   pivot_asset             <- "bed"
-  all_assets              <- subset(c0,median_cost>= c0[c0$shortname==pivot_asset,]$median_cost)$shortname
+  all_assets              <- setdiff(subset(c0,median_cost>= c0[c0$shortname==pivot_asset,]$median_cost)$shortname,c()) #c("land","house")
   
   ag <- get_asset_group()
   if (length(setdiff( all_assets,unique(ag$shortname)) ) > 0) {
@@ -1000,21 +1002,23 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   a0 <- plyr::rename(subset(a2012src[,select_cols],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2012","number"="number.2012","mtm"="mtm.2012","cost"="cost.2012"))
   a1 <- plyr::rename(subset(a2014src[,select_cols],number>0 & is.element(shortname,all_assets)),c("hhid"="hhid2014","number"="number.2014","mtm"="mtm.2014","cost"="cost.2014"))
   
-  hs2012           <- unique(o2012[ ,c("hhid","housingstatus")]) 
-  hs2012$has_house <- hs2012$housingstatus == 1
-  hs2012           <- plyr::rename(hs2012,c("hhid"="hhid2012"))[,c("hhid2012","has_house")]
-  
-  hs2014 <- unique(o2014[ ,c("hhid","housingstatus")])
-  hs2014$has_house <- hs2014$housingstatus ==1 
-  hs2014 <- plyr::rename(hs2014,c("hhid"="hhid2014"))[,c("hhid2014","has_house")]
-  
-  b0 <- merge(hs2012[,c("has_house","hhid2012")],a0,all.y=TRUE)
-  b0[b0$has_house==FALSE & b0$shortname == "house", ]$number.2012 <- 0
-  a0 <- b0[,setdiff(colnames(b0),"has_house")]
-  
-  b1 <- merge(hs2014[,c("has_house","hhid2014")],a1,all.y=TRUE)
-  b1[b1$has_house==FALSE & b1$shortname == "house", ]$number.2014 <- 0
-  a1 <- b1[,setdiff(colnames(b1),"has_house")]
+  if (is.element("house",all_assets)){
+    hs2012           <- unique(o2012[ ,c("hhid","housingstatus")]) 
+    hs2012$has_house <- hs2012$housingstatus == 1
+    hs2012           <- plyr::rename(hs2012,c("hhid"="hhid2012"))[,c("hhid2012","has_house")]
+    
+    hs2014 <- unique(o2014[ ,c("hhid","housingstatus")])
+    hs2014$has_house <- hs2014$housingstatus ==1 
+    hs2014 <- plyr::rename(hs2014,c("hhid"="hhid2014"))[,c("hhid2014","has_house")]
+    
+    b0 <- merge(hs2012[,c("has_house","hhid2012")],a0,all.y=TRUE)
+    b0[b0$has_house==FALSE & b0$shortname == "house", ]$number.2012 <- 0
+    a0 <- b0[,setdiff(colnames(b0),"has_house")]
+    
+    b1 <- merge(hs2014[,c("has_house","hhid2014")],a1,all.y=TRUE)
+    b1[b1$has_house==FALSE & b1$shortname == "house", ]$number.2014 <- 0
+    a1 <- b1[,setdiff(colnames(b1),"has_house")]
+  }
   
   a1 <- merge(a1,a01_mapping)
   
@@ -1052,29 +1056,32 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
     stop("Could not find asset group for every shortname")
   }
   
-  dats <- ddply(dat[c("shortname","hhid2012","number.2012","number.2014","netmtm.2012","netmtm.2014","asset_group","costdelta")],.(asset_group,hhid2012), summarise, number.2012 = sum(number.2012), number.2014 = sum(number.2014) , netmtm.2012 = sum(netmtm.2012), netmtm.2014 = sum(netmtm.2014), costdelta=sum(costdelta))
-  dats <- dats %>% mutate(delta = (number.2014-number.2012) , netmtm.delta = (netmtm.2014-netmtm.2012))
-  dats <- (dplyr::filter( merge(dats,ddply(dats,.(asset_group),summarise,v=fu()@fv10(netmtm.delta)),all.x=TRUE) , abs(netmtm.delta) < v))
-  d <- subset(dat, abs(delta)>0 & is.element(shortname,all_assets))
-  db <- subset(d , number.2012 == 0 | number.2014 == 0 )
-  do <- subset(d , number.2012 > 0 & number.2014 > 0 )
+  dats        <- ddply(dat[c("shortname","hhid2012","number.2012","number.2014","netmtm.2012","netmtm.2014","asset_group","costdelta")],.(asset_group,hhid2012), summarise, number.2012 = sum(number.2012), number.2014 = sum(number.2014) , netmtm.2012 = sum(netmtm.2012), netmtm.2014 = sum(netmtm.2014), costdelta=sum(costdelta))
+  dats        <- dats %>% mutate(delta = (number.2014-number.2012) , netmtm.delta = (netmtm.2014-netmtm.2012))
+  dats        <- (dplyr::filter( merge(dats,ddply(dats,.(asset_group),summarise,v=fu()@fv10(netmtm.delta)),all.x=TRUE) , abs(netmtm.delta) < v))
+  dats$fdelta <- ((dats$number.2012>0) & ((dats$delta)>0)) | (( (dats$number.2012==0)) & ((dats$delta)>0))
   
   
-  k <- ddply(d,.(shortname),summarise, n= length(hhid2012) , median_change = median(delta), q85_change = quantile(delta,.85), q15_change = quantile(delta,.15))
+  d           <- subset(dat, abs(delta)>0 & is.element(shortname,all_assets))
+  db          <- subset(d , number.2012 == 0 | number.2014 == 0 )
+  do          <- subset(d , number.2012 > 0 & number.2014 > 0 )
   
-  k <- k[order(k$n),]
   
-  kb <- ddply(db,.(shortname),summarise, n= length(hhid2012) , median_change = median(delta), q85_change = quantile(delta,.85), q15_change = quantile(delta,.15))
-  kb <- kb[order(kb$n),]
+  k           <- ddply(d,.(shortname),summarise, n= length(hhid2012) , median_change = median(delta), q85_change = quantile(delta,.85), q15_change = quantile(delta,.15))
   
-  ko <- ddply(do,.(shortname),summarise, n= length(hhid2012) , median_change = median(delta), q85_change = quantile(delta,.85), q15_change = quantile(delta,.15))
-  ko <- kb[order(kb$n),]
+  k           <- k[order(k$n),]
   
-  ku0 <- ddply (subset(a2012src, number>0 & !is.na(cost) & cost>0) , .(shortname), summarise, k = moments::kurtosis(cost), s = moments::skewness(cost))
-  ku1 <- ddply (subset(a2014src, number>0 & !is.na(cost) & cost>0) , .(shortname), summarise, k = moments::kurtosis(cost), s = moments::skewness(cost))
+  kb          <- ddply(db,.(shortname),summarise, n= length(hhid2012) , median_change = median(delta), q85_change = quantile(delta,.85), q15_change = quantile(delta,.15))
+  kb          <- kb[order(kb$n),]
   
-  # anything ge expensive than bed is an asset
-  # count the number of entities newly acquired (had none of them before of the group count)
+  ko          <- ddply(do,.(shortname),summarise, n= length(hhid2012) , median_change = median(delta), q85_change = quantile(delta,.85), q15_change = quantile(delta,.15))
+  ko          <- kb[order(kb$n),]
+  
+  ku0         <- ddply (subset(a2012src, number>0 & !is.na(cost) & cost>0) , .(shortname), summarise, k = moments::kurtosis(cost), s = moments::skewness(cost))
+  ku1         <- ddply (subset(a2014src, number>0 & !is.na(cost) & cost>0) , .(shortname), summarise, k = moments::kurtosis(cost), s = moments::skewness(cost))
+  
+  datsres     <- ddply(subset(dats,fdelta==TRUE), .(hhid2012), summarise, netmtm.delta = sum(netmtm.delta))
+  
   
   
   
@@ -1084,6 +1091,7 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   res[["d"]] <- d
   res[["x"]] <- x
   res[["s"]] <- dats
+  res[["df"]] <- datsres
   res[["k"]] <- k
   res[["kb"]] <- kb
   res[["ko"]] <- ko
