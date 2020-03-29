@@ -1056,11 +1056,11 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
     stop("Could not find asset group for every shortname")
   }
   
-  dats        <- ddply(dat[c("shortname","hhid2012","number.2012","number.2014","netmtm.2012","netmtm.2014","asset_group","costdelta")],.(asset_group,hhid2012), summarise, number.2012 = sum(number.2012), number.2014 = sum(number.2014) , netmtm.2012 = sum(netmtm.2012), netmtm.2014 = sum(netmtm.2014), costdelta=sum(costdelta))
-  dats        <- dats %>% mutate(delta = (number.2014-number.2012) , netmtm.delta = (netmtm.2014-netmtm.2012))
-  dats        <- (dplyr::filter( merge(dats,ddply(dats,.(asset_group),summarise,v=fu()@fv10(netmtm.delta)),all.x=TRUE) , abs(netmtm.delta) < v))
-  dats$fdelta <- ((dats$number.2012>0) & ((dats$delta)>0)) | (( (dats$number.2012==0)) & ((dats$delta)>0))
-  
+  dats               <- ddply(dat[c("shortname","hhid2012","number.2012","number.2014","netmtm.2012","netmtm.2014","asset_group","costdelta")],.(asset_group,hhid2012), summarise, number.2012 = sum(number.2012), number.2014 = sum(number.2014) , netmtm.2012 = sum(netmtm.2012), netmtm.2014 = sum(netmtm.2014), costdelta=sum(costdelta))
+  dats               <- dats %>% mutate(delta = (number.2014-number.2012) , netmtm.delta = (netmtm.2014-netmtm.2012))
+  dats               <- (dplyr::filter( merge(dats,ddply(dats,.(asset_group),summarise,v=fu()@fv10(netmtm.delta)),all.x=TRUE) , abs(netmtm.delta) < v))
+  dats$fdelta        <- ((dats$number.2012>0) & ((dats$delta)>0)) | (( (dats$number.2012==0)) & ((dats$delta)>0))
+  dats$netmtm.fdelta <- (dats$fdelta==FALSE)*0 + (dats$fdelta==TRUE)*dats$netmtm.delta
   
   d           <- subset(dat, abs(delta)>0 & is.element(shortname,all_assets))
   db          <- subset(d , number.2012 == 0 | number.2014 == 0 )
@@ -1080,7 +1080,7 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   ku0         <- ddply (subset(a2012src, number>0 & !is.na(cost) & cost>0) , .(shortname), summarise, k = moments::kurtosis(cost), s = moments::skewness(cost))
   ku1         <- ddply (subset(a2014src, number>0 & !is.na(cost) & cost>0) , .(shortname), summarise, k = moments::kurtosis(cost), s = moments::skewness(cost))
   
-  datsres     <- ddply(subset(dats,fdelta==TRUE), .(hhid2012), summarise, netmtm.delta = sum(netmtm.delta))
+  datsres     <- ddply(dats, .(hhid2012), summarise, netmtm.fdelta = sum(netmtm.fdelta))
   
   
   
