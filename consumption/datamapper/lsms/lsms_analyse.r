@@ -889,11 +889,11 @@ init_data <- function(){
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
-  #df <- estimation_df(pares = res, e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+  #p <- estimation_df(pares = res, e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, pseudop= p)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
-estimation_df <-function( pares, e, pseduop, a2010, a2012, a2014, o2010, o2012, o2014 ){
+estimation_df <-function( pares, e, pseudop, a2010, a2012, a2014, o2010, o2012, o2014 ){
   if (missing(e)){
     e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
@@ -909,10 +909,10 @@ estimation_df <-function( pares, e, pseduop, a2010, a2012, a2014, o2010, o2012, 
   dfe <- merge( df, plyr::rename(subset(e,year==2012),c("hhid"="hhid2012")))
   dfe2012 <- plyr::rename (dfe,c("cost.2012"="At","netmtm.fdelta"="dAt","needs_cost"="Psit"))
   
-  # get income estimate from the RE estimator results obtained from pseudo-panel
-  pseduop <- merge(get_housing_cost_df(),pseduop,by=c("housingstatus")) %>% mutate (is_higheduc = as.integer(max_education_rank==4))
+  # get income estimate from the RE estimator results obtained from pseudo-panel - xtreg lntotinc i.max_education_rank i.max_occupation_rank i.expensiveregion, re
+  pseudop <- merge(get_housing_cost_df(),pseudop,by=c("housingstatus")) %>% mutate (is_higheduc = as.integer(max_education_rank==4))
   
-  return (dfe2012)
+  return (pseudop)
 }
 
 get_asset_group <- function(){
