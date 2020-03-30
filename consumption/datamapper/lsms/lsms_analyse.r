@@ -889,11 +889,40 @@ init_data <- function(){
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
-  #p <- estimation_df(pares = res, e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, pseudop= p)
+  #p <- estimation_df(pares = res, e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, incomeres= incomeres)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
-estimation_df <-function( pares, e, pseudop, a2010, a2012, a2014, o2010, o2012, o2014 ){
+income_estimation_stata_input <- function(pseudop){
+  # get income estimate from the RE estimator results obtained from pseudo-panel - xtreg lntotinc i.max_education_rank i.max_occupation_rank i.expensiveregion, re
+  pseudop <- merge(get_housing_cost_df(),pseudop,by=c("housingstatus")) %>% mutate (is_higheduc = as.integer(max_education_rank==4))
+  return(pseudop)
+}
+get_stata_income_re_results <- function(){
+  
+  eduf <- data.frame(stringsAsFactors = FALSE)
+  eduf <- rbind(eduf,data.frame(is_higheduc=1,coef=1.269024))
+  eduf <- rbind(eduf,data.frame(is_higheduc=0,coef=0))
+  
+  
+  occf <- data.frame(stringsAsFactors = FALSE)
+  occf <- rbind(occf,data.frame(occupation_rank= 1,coef=-3.0891	))
+  occf <- rbind(occf,data.frame(occupation_rank= 2,coef=2.152399))
+  occf <- rbind(occf,data.frame(occupation_rank= 3,coef=2.767533))
+  
+  expf <- data.frame(stringsAsFactors = FALSE)
+  expf <- rbind(expf,data.frame(expensiveregion=1,coeff=	.6500749))
+  cons <- 11.49585
+  
+  res=list()
+  res[["eduf"]] = eduf
+  res[["occf"]] = occf
+  res[["expf"]] = expf
+  res[["const"]] = cons
+  
+  return(res)
+}
+estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014,incomeres ){
   if (missing(e)){
     e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
@@ -909,10 +938,8 @@ estimation_df <-function( pares, e, pseudop, a2010, a2012, a2014, o2010, o2012, 
   dfe <- merge( df, plyr::rename(subset(e,year==2012),c("hhid"="hhid2012")))
   dfe2012 <- plyr::rename (dfe,c("cost.2012"="At","netmtm.fdelta"="dAt","needs_cost"="Psit"))
   
-  # get income estimate from the RE estimator results obtained from pseudo-panel - xtreg lntotinc i.max_education_rank i.max_occupation_rank i.expensiveregion, re
-  pseudop <- merge(get_housing_cost_df(),pseudop,by=c("housingstatus")) %>% mutate (is_higheduc = as.integer(max_education_rank==4))
   
-  return (pseudop)
+  return (def2012)
 }
 
 get_asset_group <- function(){
