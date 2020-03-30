@@ -71,7 +71,7 @@ count_greater_than <- function(json_array, b){
   return(arr)
 }
 
-prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i2012,i2014, ll,dirprefix,fu,ln,ncdifftol, yobtol){
+prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i2012,i2014, ll,dirprefix,fu,ln,ncdifftol, yobtol, calibrate_needs){
   # Using hh as the unit (not hh-head)
   if (missing(o2010)){
     o2010 <- ll@load_ohs_file(year = 2010, dirprefix = dirprefix,fu=fu, ln=ln)
@@ -111,6 +111,19 @@ prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i201
     write.csv(i2014, 'c:/temp/i2014.csv',row.names=FALSE)
   }
   
+  if (!is.element("hhid2010",colnames(i2010))){
+    o2010 <- plyr::rename(o2010,c("hhid"="hhid2010"))
+  }
+  if (!is.element("hhid2012",colnames(i2012))){
+    o2012 <- plyr::rename(o2012,c("hhid"="hhid2012"))
+  }
+  if (!is.element("hhid2014",colnames(i2014))){
+    o2014 <- plyr::rename(o2014,c("hhid"="hhid2014"))
+    if (!is.element("YOB",colnames(o2014))){
+      o2014$YOB <- 2014 - o2014$age - 1
+    }
+  }
+  
   
   o2010<- merge(o2010,plyr::rename(i2010,c("hhid"="hhid2010")),by=c("hhid2010","personid"),all.x=TRUE)
   
@@ -137,7 +150,7 @@ prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i201
   ho2010YOB<- ddply(unique((o2010[,c("hhid2010",combine_cols)])),.(hhid2010),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children), sum_yearly_pay = sum(yearly_pay[!is.na(yearly_pay)]))
   ho2012YOB<- ddply(unique((o2012[,c("hhid2012",combine_cols)])),.(hhid2012),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children), sum_yearly_pay = sum(yearly_pay[!is.na(yearly_pay)]))
   ho2014YOB<- ddply(unique((o2014[,c("hhid2014",combine_cols)])),.(hhid2014),summarise, YOB_array=toJSON(sort(YOB)), max_education_rank = choose_max_education_rank(education_rank), max_occupation_rank = max(occupation_rank) , region= unique(region), district = unique(district), housingstatus=unique(housingstatus), num_children=unique(num_children), sum_yearly_pay = sum(yearly_pay[!is.na(yearly_pay)]))
-  calibrate_needs = TRUE
+  
   if (calibrate_needs){
     #Adding hhead's YOB
     ho2010YOB<- merge(ho2010YOB,plyr::rename(unique(subset(o2010,personid==1)[,c("hhid2010","YOB")]), c("YOB"="headYOB")),by=c("hhid2010"))
@@ -186,7 +199,7 @@ prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i201
     
     return(yncc)
   }
-  use_hhid <- TRUE
+  use_hhid <- FALSE
   
   if (use_hhid){
     #Use the mapping of ids derived from (o201x) on  ho201xYOB to combine them all into one dataframe
@@ -265,7 +278,7 @@ prepare_pseudo_panels_2010_2012_2014 <- function (o2010,o2012,o2014, i2010, i201
     allkk$nonzeros <- as.integer(allkk$ypay2010>0) +as.integer(allkk$ypay2012>0) + as.integer(allkk$ypay2014>0)
     #allkk <- (subset(allkk,nonzeros>2))
     #allkk$key <- paste(allkk$region,allkk$max_education_rank, allkk$max_occupation_rank, allkk$housingstatus,sep=":")
-    allkk$key <- as.intger(paste("1",sprintf("%02d", allkk$region),sprintf("%01d",allkk$max_education_rank), sprintf("%01d",allkk$max_occupation_rank), sprintf("%01d",allkk$housingstatus),sep=""))
+    allkk$key <- as.integer(paste("1",sprintf("%02d", allkk$region),sprintf("%01d",allkk$max_education_rank), sprintf("%01d",allkk$max_occupation_rank), sprintf("%01d",allkk$housingstatus),sep=""))
     allkk <- merge( allkk[,c("region","max_education_rank","max_occupation_rank","housingstatus","key")],allkk[,c("key","ypay2010","ypay2012","ypay2014")] %>% gather(year,totinc,-key), by=c("key"))
     #allkk$key <- NULL
     allkk$year <- sapply(allkk$year, function(x) { as.integer(gsub('ypay','',x)) } )
@@ -870,13 +883,17 @@ init_data <- function(){
   c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   c2012 <- ll@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  i2010 <- read.csv('c:/temp/i2010.csv',stringsAsFactors = FALSE)
+  i2012 <- read.csv('c:/temp/i2012.csv',stringsAsFactors = FALSE)
+  i2014 <- read.csv('c:/temp/i2014.csv',stringsAsFactors = FALSE)
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
-  #df <- estimation_df(a2010 = a2010, a2012 = a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+  #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
+  #df <- estimation_df(pares = res, e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
-estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014 ){
+estimation_df <-function( pares, e, pseduop, a2010, a2012, a2014, o2010, o2012, o2014 ){
   if (missing(e)){
     e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
@@ -889,8 +906,13 @@ estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014 ){
   df                                         <- merge(asum2012,adiff2012,by=c("hhid2012"),all.x=TRUE)
   df[is.na(df$netmtm.fdelta),]$netmtm.fdelta <- 0
   
+  dfe <- merge( df, plyr::rename(subset(e,year==2012),c("hhid"="hhid2012")))
+  dfe2012 <- plyr::rename (dfe,c("cost.2012"="At","netmtm.fdelta"="dAt","needs_cost"="Psit"))
   
-  return (df)
+  # get income estimate from the RE estimator results obtained from pseudo-panel
+  pseduop <- merge(get_housing_cost_df(),pseduop,by=c("housingstatus")) %>% mutate (is_higheduc = as.integer(max_education_rank==4))
+  
+  return (dfe2012)
 }
 
 get_asset_group <- function(){
