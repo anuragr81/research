@@ -889,7 +889,7 @@ init_data <- function(){
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
-  #p <- estimation_df(pares = res, e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, incomeres= incomeres)
+  #p <- estimation_df(pares = res, e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
@@ -899,19 +899,21 @@ income_estimation_stata_input <- function(pseudop){
   return(pseudop)
 }
 get_stata_income_re_results <- function(){
-  
+  #xtreg lntotinc i.is_higheduc i.max_occupation_rank i.expensiveregion, re
   eduf <- data.frame(stringsAsFactors = FALSE)
-  eduf <- rbind(eduf,data.frame(is_higheduc=1,coef=1.269024))
-  eduf <- rbind(eduf,data.frame(is_higheduc=0,coef=0))
+  eduf <- rbind(eduf,data.frame(is_higheduc=1,edufcoef=1.269024))
+  eduf <- rbind(eduf,data.frame(is_higheduc=0,edufcoef=0))
   
   
   occf <- data.frame(stringsAsFactors = FALSE)
-  occf <- rbind(occf,data.frame(occupation_rank= 1,coef=-3.0891	))
-  occf <- rbind(occf,data.frame(occupation_rank= 2,coef=2.152399))
-  occf <- rbind(occf,data.frame(occupation_rank= 3,coef=2.767533))
+  occf <- rbind(occf,data.frame(occupation_rank= 0,occcoef=0	))
+  occf <- rbind(occf,data.frame(occupation_rank= 1,occcoef=-3.0891	))
+  occf <- rbind(occf,data.frame(occupation_rank= 2,occcoef=2.152399))
+  occf <- rbind(occf,data.frame(occupation_rank= 3,occcoef=2.767533))
   
   expf <- data.frame(stringsAsFactors = FALSE)
-  expf <- rbind(expf,data.frame(expensiveregion=1,coeff=	.6500749))
+  expf <- rbind(expf,data.frame(expensiveregion=1,expcoeff=	.6500749))
+  expf <- rbind(expf,data.frame(expensiveregion=0,expcoeff=	0))
   cons <- 11.49585
   
   res=list()
@@ -922,24 +924,47 @@ get_stata_income_re_results <- function(){
   
   return(res)
 }
-estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014,incomeres ){
+estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014 ){
   if (missing(e)){
     e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
   if (missing(pares)){
     pares <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
   }
+  #if (missing(pseudop)){
+  #  pseudop <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, 
+  #                                                  ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,
+  #                                                  calibrate_needs=FALSE)   
+  #}
   
-  adiff2012                                  <- pares[["df"]]
+  adiff2014                                  <- pares[["df"]]
   asum2012                                   <- ddply(subset(plyr::rename(pares[["dat0"]][,c("hhid","cost")],c("hhid"="hhid2012","cost"="cost.2012")), !is.na(cost.2012)),.(hhid2012),summarise,cost.2012=sum(cost.2012))
-  df                                         <- merge(asum2012,adiff2012,by=c("hhid2012"),all.x=TRUE)
-  df[is.na(df$netmtm.fdelta),]$netmtm.fdelta <- 0
-  
-  dfe <- merge( df, plyr::rename(subset(e,year==2012),c("hhid"="hhid2012")))
-  dfe2012 <- plyr::rename (dfe,c("cost.2012"="At","netmtm.fdelta"="dAt","needs_cost"="Psit"))
+  df2012                                         <- merge(asum2012,adiff2014,by=c("hhid2012"),all.x=TRUE)
+  df2012[is.na(df2012$netmtm.fdelta),]$netmtm.fdelta <- 0
   
   
-  return (def2012)
+  dfe2012 <- merge( df2012, plyr::rename(subset(e,year==2012),c("hhid"="hhid2012")))
+  dfe2012 <- plyr::rename (dfe2012,c("cost.2012"="At","netmtm.fdelta"="dAt","needs_cost"="Psit"))
+  
+  dfe2012_dat        <- (merge( plyr::rename(o2012[,c("hhid","expensiveregion","occupation_rank","education_rank")],c("hhid"="hhid2012")), dfe2012, by = c("hhid2012"))) %>% mutate (is_higheduc = as.integer(education_rank==4))
+  statares2012       <- get_stata_income_re_results() 
+  statares2012_eduf  <- statares2012[["eduf"]]
+  statares2012_occf  <- statares2012[["occf"]]
+  statares2012_expf  <- statares2012[["expf"]]
+  statares2012_const <- statares2012[["const"]]
+  dfe2012f1          <- merge(statares2012_occf,dfe2012_dat,by=c("occupation_rank"))
+  if (dim(dfe2012f1[is.na(dfe2012f1$education_rank),])[1]>0){
+    dfe2012f1[is.na(dfe2012f1$education_rank),]$education_rank <- 0
+    dfe2012f1[(dfe2012f1$education_rank==0),]$is_higheduc <- 0
+  }
+  dfe2012f2          <- merge(statares2012_eduf,dfe2012f1,by=c("is_higheduc"))
+  dfe2012f3          <- merge(statares2012_expf,dfe2012f2,by=c("expensiveregion"))
+  dfe2012f3          <- dfe2012f3 %>% mutate(it = expensiveregion*expcoeff + is_higheduc*edufcoef + occupation_rank*occcoef + statares2012_const)
+  
+  
+  lt                 <- with(dfe2012f3,)
+  lm(data=dfe2012f3,dAt~At)
+  return (dfe2012f3)
 }
 
 get_asset_group <- function(){
