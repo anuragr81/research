@@ -889,7 +889,7 @@ init_data <- function(){
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
-  #p <- estimation_df(pares = res, e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, c2010=c2010, c2012=c2012, c2014=c2014)
+  #p <- estimation_df(e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, c2010=c2010, c2012=c2012, c2014=c2014)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
@@ -939,16 +939,16 @@ estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014, c2
   
   adiff2014                                  <- pares[["df"]]
   asum2012                                   <- ddply(subset(plyr::rename(pares[["dat0"]][,c("hhid","cost")],c("hhid"="hhid2012","cost"="cost.2012")), !is.na(cost.2012)),.(hhid2012),summarise,cost.2012=sum(cost.2012))
-  df2012                                         <- merge(asum2012,adiff2014,by=c("hhid2012"),all.x=TRUE)
+  df2012                                     <- merge(asum2012,adiff2014,by=c("hhid2012"),all.x=TRUE)
   df2012[is.na(df2012$netmtm.fdelta),]$netmtm.fdelta <- 0
-  
-  
-  dfe2012 <- merge( df2012, plyr::rename(subset(e,year==2012),c("hhid"="hhid2012")))
-  dfe2012 <- plyr::rename (dfe2012,c("cost.2012"="At","netmtm.fdelta"="dAt","needs_cost"="Psit"))
+  print("PENDING: Use only non-split households - shouldn't have two hhid2014s correspond to one hhid2012")
+  needscost2014     <- merge(plyr::rename(subset(e,year==2014),c("hhid"="hhid2014","needs_cost"="needs_cost_2014")), mapping_hhids_2012_2014(o2014 = o2014), by = c("hhid2014"))
+  dfe2012 <- merge( df2012, needscost2014, by = c("hhid2012"))
+  dfe2012 <- plyr::rename (dfe2012,c("cost.2012"="At","netmtm.fdelta"="dAt","needs_cost_2014"="Psit1"))
   
   #use o2014 data as that corresponds to i_{t+1}
   #take max_education_rank and max_occupation_rank 
-  print("PENDING: TAKE max_education_rank and max_occupation_rank ")
+  
   t1ranks            <- o2014[,c("hhid2012","expensiveregion","occupation_rank","education_rank")]
   t1rankseduc        <- unique(t1ranks[,c("hhid2012","education_rank")] %>% group_by(hhid2012) %>% filter(education_rank==choose_max_education_rank(education_rank)))
   t1ranksoccu        <- unique(t1ranks[,c("hhid2012","occupation_rank")] %>% group_by(hhid2012) %>% filter(occupation_rank==max(occupation_rank)))
@@ -967,17 +967,20 @@ estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014, c2
   }
   dfe2012f2          <- merge(statares2012_eduf,dfe2012f1,by=c("is_higheduc"))
   dfe2012f3          <- merge(statares2012_expf,dfe2012f2,by=c("expensiveregion"))
-  dfe2012f3          <- dfe2012f3 %>% mutate(it = exp(expensiveregion*expcoeff + is_higheduc*edufcoef + occupation_rank*occcoef + statares2012_const))
+  dfe2012f3          <- dfe2012f3 %>% mutate(it1 = exp(expensiveregion*expcoeff + is_higheduc*edufcoef + occupation_rank*occcoef + statares2012_const))
   
   
-  dfe2012f3$lt       <- with(dfe2012f3,it-Psit)
+  dfe2012f3$lt1       <- with(dfe2012f3,it1-Psit1)
+  print("PENDING: Use only non-split households")
+  xt1df               <- merge(plyr::rename( ddply(c2014,.(hhid),summarise,xt1=sum(cost)), c("hhid"="hhid2014") ), mapping_hhids_2012_2014(o2014), by=c("hhid2014"))
+  dfe2012f4           <- merge(xt1df,dfe2012f3,by=c("hhid2012")) %>% mutate (nut1 = xt1-Psit1)
   
-  dfe2012f4          <- merge(plyr::rename( ddply(c2014,.(hhid),summarise,x=sum(cost)), c("hhid"="hhid2014") ), mapping_hhids_2012_2014(o2014), by=c("hhid2014"))
+  res                <- list()
+  res[["dAtres"]]    <- lm(data=dfe2012f4,dAt~At + lt1)
+  res[["vt1"]]       <- lm(data=dfe2012f4,nut1~At + lt1)
+  res[["df"]]        <- dfe2012f4
   
-  lm(data=dfe2012f3,dAt~At + lt)
-  
-  #lm(data=dfe2012f3,dAt~At + lt)
-  return (dfe2012f3)
+  return (res)
 }
 
 get_asset_group <- function(){
