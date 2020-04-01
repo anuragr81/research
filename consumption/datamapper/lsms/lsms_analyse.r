@@ -889,7 +889,7 @@ init_data <- function(){
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
-  #p <- estimation_df(pares = res, e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+  #p <- estimation_df(pares = res, e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, c2010=c2010, c2012=c2012, c2014=c2014)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
@@ -924,7 +924,7 @@ get_stata_income_re_results <- function(){
   
   return(res)
 }
-estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014 ){
+estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014, c2010, c2012, c2014 ){
   if (missing(e)){
     e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
@@ -946,7 +946,15 @@ estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014 ){
   dfe2012 <- merge( df2012, plyr::rename(subset(e,year==2012),c("hhid"="hhid2012")))
   dfe2012 <- plyr::rename (dfe2012,c("cost.2012"="At","netmtm.fdelta"="dAt","needs_cost"="Psit"))
   
-  dfe2012_dat        <- (merge( plyr::rename(o2012[,c("hhid","expensiveregion","occupation_rank","education_rank")],c("hhid"="hhid2012")), dfe2012, by = c("hhid2012"))) %>% mutate (is_higheduc = as.integer(education_rank==4))
+  #use o2014 data as that corresponds to i_{t+1}
+  #take max_education_rank and max_occupation_rank 
+  print("PENDING: TAKE max_education_rank and max_occupation_rank ")
+  t1ranks            <- o2014[,c("hhid2012","expensiveregion","occupation_rank","education_rank")]
+  t1rankseduc        <- unique(t1ranks[,c("hhid2012","education_rank")] %>% group_by(hhid2012) %>% filter(education_rank==choose_max_education_rank(education_rank)))
+  t1ranksoccu        <- unique(t1ranks[,c("hhid2012","occupation_rank")] %>% group_by(hhid2012) %>% filter(occupation_rank==max(occupation_rank)))
+  t1ranksdat         <- merge(t1ranksoccu,t1rankseduc,by=c("hhid2012"))
+  dfe2012_dat        <- merge( t1ranksdat, dfe2012, by = c("hhid2012")) %>% mutate (is_higheduc = as.integer(education_rank==4))
+  dfe2012_dat        <- merge(dfe2012_dat,unique(t1ranks[,c("hhid2012","expensiveregion")]))
   statares2012       <- get_stata_income_re_results() 
   statares2012_eduf  <- statares2012[["eduf"]]
   statares2012_occf  <- statares2012[["occf"]]
@@ -959,11 +967,16 @@ estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014 ){
   }
   dfe2012f2          <- merge(statares2012_eduf,dfe2012f1,by=c("is_higheduc"))
   dfe2012f3          <- merge(statares2012_expf,dfe2012f2,by=c("expensiveregion"))
-  dfe2012f3          <- dfe2012f3 %>% mutate(it = expensiveregion*expcoeff + is_higheduc*edufcoef + occupation_rank*occcoef + statares2012_const)
+  dfe2012f3          <- dfe2012f3 %>% mutate(it = exp(expensiveregion*expcoeff + is_higheduc*edufcoef + occupation_rank*occcoef + statares2012_const))
   
   
-  lt                 <- with(dfe2012f3,)
-  lm(data=dfe2012f3,dAt~At)
+  dfe2012f3$lt       <- with(dfe2012f3,it-Psit)
+  
+  dfe2012f4          <- merge(plyr::rename( ddply(c2014,.(hhid),summarise,x=sum(cost)), c("hhid"="hhid2014") ), mapping_hhids_2012_2014(o2014), by=c("hhid2014"))
+  
+  lm(data=dfe2012f3,dAt~At + lt)
+  
+  #lm(data=dfe2012f3,dAt~At + lt)
   return (dfe2012f3)
 }
 
