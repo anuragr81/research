@@ -941,10 +941,12 @@ estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014, c2
   asum2012                                   <- ddply(subset(plyr::rename(pares[["dat0"]][,c("hhid","cost")],c("hhid"="hhid2012","cost"="cost.2012")), !is.na(cost.2012)),.(hhid2012),summarise,cost.2012=sum(cost.2012))
   df2012                                     <- merge(asum2012,adiff2014,by=c("hhid2012"),all.x=TRUE)
   df2012[is.na(df2012$netmtm.fdelta),]$netmtm.fdelta <- 0
-  print("PENDING: Use only non-split households - shouldn't have two hhid2014s correspond to one hhid2012")
-  needscost2014     <- merge(plyr::rename(subset(e,year==2014),c("hhid"="hhid2014","needs_cost"="needs_cost_2014")), mapping_hhids_2012_2014(o2014 = o2014), by = c("hhid2014"))
-  dfe2012 <- merge( df2012, needscost2014, by = c("hhid2012"))
-  dfe2012 <- plyr::rename (dfe2012,c("cost.2012"="At","netmtm.fdelta"="dAt","needs_cost_2014"="Psit1"))
+
+  needscost2014      <- merge(plyr::rename(subset(e,year==2014),c("hhid"="hhid2014","needs_cost"="needs_cost_2014")), mapping_hhids_2012_2014(o2014 = o2014), by = c("hhid2014"))
+  dfe2012            <- merge( df2012, needscost2014, by = c("hhid2012"))
+  nonsplithhids2012  <- subset(ddply(dfe2012[,c("hhid2012","hhid2014")],.(hhid2012),summarise,n=length(unique(hhid2014))),n==1)$hhid2012
+  dfe2012            <- subset(dfe2012,is.element(hhid2012,nonsplithhids2012))
+  dfe2012            <- plyr::rename (dfe2012,c("cost.2012"="At","netmtm.fdelta"="dAt","needs_cost_2014"="Psit1"))
   
   #use o2014 data as that corresponds to i_{t+1}
   #take max_education_rank and max_occupation_rank 
@@ -953,8 +955,14 @@ estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014, c2
   t1rankseduc        <- unique(t1ranks[,c("hhid2012","education_rank")] %>% group_by(hhid2012) %>% filter(education_rank==choose_max_education_rank(education_rank)))
   t1ranksoccu        <- unique(t1ranks[,c("hhid2012","occupation_rank")] %>% group_by(hhid2012) %>% filter(occupation_rank==max(occupation_rank)))
   t1ranksdat         <- merge(t1ranksoccu,t1rankseduc,by=c("hhid2012"))
+  t0age              <- plyr::rename(subset(o2012[,c("hhid","age","household_status")],household_status==1),c("hhid"="hhid2012"))[,c("hhid2012","age")]
+  
   dfe2012_dat        <- merge( t1ranksdat, dfe2012, by = c("hhid2012")) %>% mutate (is_higheduc = as.integer(education_rank==4))
+  print(paste0("data after merging needs and max_education, max_occupation is with rows=",nrow(dfe2012_dat)))
   dfe2012_dat        <- merge(dfe2012_dat,unique(t1ranks[,c("hhid2012","expensiveregion")]))
+  dfe2012_dat        <- merge(dfe2012_dat , t0age,by=c("hhid2012"))
+  print(paste0("data after merging with age data is with rows=",nrow(dfe2012_dat)))
+  
   statares2012       <- get_stata_income_re_results() 
   statares2012_eduf  <- statares2012[["eduf"]]
   statares2012_occf  <- statares2012[["occf"]]
@@ -1452,7 +1460,6 @@ assume_assets_stove_based <- function(adat){
     has_electric_stove[is.na(has_electric_stove$number),]$number <- 0
   }
   #hard to find somebody who would have an electric stove and use a kerosene lamp
-  print("TODO: <<<<<<<<<<<<<<<<<< change mapping to from asset based to section j based >>>>>>>>>>>>")
   #"lightingfuel, cookingfuel
   has_electric_stove$lighting <- sapply(has_electric_stove$number, function(x){ if (x>0) {"elec_lighting"}else {"kerosene_lighting"}}) 
   has_electric_stove$cooking <- sapply(has_electric_stove$number, function(x){ if (x>0) {"elec_cooking"}else {"kerosene_cooking"}}) 
