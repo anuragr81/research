@@ -720,30 +720,48 @@ all_asset_scores <- function(years,dirprefix,fu,ln,ll){
 }
 
 
-run_test <- function() {
-  # gcols obtained using: toString(paste("'",colnames(x),"'",sep=""))
-  #gcols <- c('hhid', 'total_expenditure', 'toteducexpense', 'tothouserent',  'hsize', 'consu', 'highest_educ', 'age'
-  #           , 'expensiveregion', 'popdensity','region','district','litlang',
-  #           'isrural', 'isurbanp', 'occupation', 'occupation_rank', 'years_community', 
-  #           'housingstatus', 'roomsnum',  'floormaterial', 'cookingfuel', 'is_resident', 'ln_tot_exp', 'year')
-  #ag <- unique(allgroupsdat[,gcols])
-  #agi <- merge(ag,i,all.x=TRUE,by=c("hhid","year","region", "district"))
-  #ydat <- subset(agi,year==yr)
-  #for (sn in as.character(unique(ydat$shortname))) { if (!is.na(sn)) { dat <- subset(ydat,shortname==sn); write_dta(dat,paste('c:/temp/dat',yr,'_',sn,'.dta',sep="")) } } 
-  #return(agi)
+run_test <- function(p.df,use_nu) {
+  agedf <- data.frame(start=c(20,30,40,50,60), end=c(30,40,50,60,200))
+  r <- data.frame(stringsAsFactors = FALSE)
+  for ( i in seq(nrow(agedf))){
+    if (use_nu){
+      res <- lm(data=subset(p.df, age >=agedf[i,]$start & age <agedf[i,]$end), nut1~At+lt1)
+    } else {
+      res <- lm(data=subset(p.df, age >=agedf[i,]$start & age <agedf[i,]$end), dAt~At+lt1)
+    }
+    
+    r <- rbind(r, data.frame ( start=agedf[i,]$start, end= agedf[i,]$end, coef.At = res$coefficients[["At"]], 
+                               coef.lt1 = res$coefficients[["lt1"]],
+                               intercept = res$coefficients[["(Intercept)"]] ) )
+  }
+  return(r)
   
-  #return(tot)
-  assetnames_transport   <- c('bike', 'motorbike', 'car')
-  assetnames_household   <- c(  'sewingmachine', 'bed',  'watch',  'chair', 'table', 'cupboard', 'sofa','sports_hobby','land', 'house')
-  assetnames_electric     <- c('mobile', 'waterheater','camera', 'phone', 'musicplayer', 'videoplayer', 'musicsystem', 'ac_fan', 'waterpump', 'tv', 'dishtv', 'computer',  'refrigerator' )
-  m <- mapping_hhids_2012_2014(o2014)
-  a1 <- subset(a2012, hhid=="2432-001" & number >0) [, c("hhid","number","shortname")]
-  a1 <- plyr::rename(a1,c("hhid"="hhid2012","number"="number.2012"))
-  a2 <- subset(a2014, hhid=="0553-001" & number >0 ) [, c("hhid","number","shortname")]
-  a2 <- plyr::rename(a2,c("hhid"="hhid2014", "number"="number.2014"))
-  a2 <- merge(m,a2)
-  a3 <- merge(a1, a2, all=TRUE, by=c("hhid2012","shortname"))
 }
+
+run_test <- function() {
+
+}
+
+analyse_estimation_df <- function(res,use_nu) {
+  p.df  <- res[["df"]]
+  agedf <- data.frame(start=c(20,30,40,50,60), end=c(30,40,50,60,200))
+  r <- data.frame(stringsAsFactors = FALSE)
+  for ( i in seq(nrow(agedf))){
+    if (use_nu){
+      res <- lm(data=subset(p.df, age >=agedf[i,]$start & age <agedf[i,]$end), nut1~At+lt1)
+    } else {
+      res <- lm(data=subset(p.df, age >=agedf[i,]$start & age <agedf[i,]$end), dAt~At+lt1)
+    }
+    
+    r <- rbind(r, data.frame ( start=agedf[i,]$start, end= agedf[i,]$end, coef.At = res$coefficients[["At"]], 
+                               coef.lt1 = res$coefficients[["lt1"]],
+                               intercept = res$coefficients[["(Intercept)"]] ) )
+  }
+  plot( (r$start+r$end)/2,  r$coef.At,type='l')
+  return(r)
+  
+}
+
 
 get_local_clothing_expenditure <-function (ld,o2012,c2012,o2014,c2014)
 {
@@ -990,6 +1008,9 @@ estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014, c2
   
   return (res)
 }
+
+
+
 
 get_asset_group <- function(){
   r <- data.frame()
