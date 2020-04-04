@@ -1011,7 +1011,7 @@ estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014, c2
   
   res                <- list()
   res[["dAtres"]]    <- lm(data=dfe2012f4,dAt~At + lt1)
-  res[["vt1"]]       <- lm(data=dfe2012f4,nut1~At + lt1)
+  res[["nut1res"]]   <- lm(data=dfe2012f4,nut1~At + lt1)
   res[["df"]]        <- dfe2012f4
   
   return (res)
