@@ -743,6 +743,11 @@ run_test <- function() {
 }
 
 analyse_estimation_df <- function(res,use_nu) {
+  
+  # The age-wise decomposition of regression results is only to demonstrate that 
+  # a time dependent coefficient is necessary. 
+  # the following form of a(t) is expected :
+  # a1 <- 2; a2 <- 2; par(mfrow=c(1,1)); x <- seq(-1,10,.1) ; plot(x,1-(1/((x**a1)*exp(-x/a2))),type='l')
   p.df  <- res[["df"]]
   agedf <- data.frame(start=c(20,30,40,50,60), end=c(30,40,50,60,200))
   r <- data.frame(stringsAsFactors = FALSE)
@@ -757,7 +762,9 @@ analyse_estimation_df <- function(res,use_nu) {
                                coef.lt1 = res$coefficients[["lt1"]],
                                intercept = res$coefficients[["(Intercept)"]] ) )
   }
+  par(mfrow=c(2,1))
   plot( (r$start+r$end)/2,  r$coef.At,type='l')
+  plot( (r$start+r$end)/2,  r$coef.lt1,type='l')
   return(r)
   
 }
@@ -904,6 +911,7 @@ init_data <- function(){
   i2010 <- read.csv('c:/temp/i2010.csv',stringsAsFactors = FALSE)
   i2012 <- read.csv('c:/temp/i2012.csv',stringsAsFactors = FALSE)
   i2014 <- read.csv('c:/temp/i2014.csv',stringsAsFactors = FALSE)
+  e <- read.csv('c:/temp/e.csv',stringsAsFactors = FALSE)
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 

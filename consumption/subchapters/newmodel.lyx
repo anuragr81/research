@@ -1332,16 +1332,26 @@ Since we also observe
 \begin_inset Formula $\nu_{\tau+1}$
 \end_inset
 
-, we can use the equations 
-\begin_inset Formula $\nu_{t+1}=A_{\tau}\frac{b_{\tau,\rho}(1+r)}{1-a_{\tau}}+\frac{b_{\tau,\rho}(ki_{\tau}-\Psi_{\tau+1})}{1-a_{\tau}}$
-\end_inset
-
- to estimate 
+, we can use the following equation estimate 
 \begin_inset Formula $a_{\tau},b_{\tau,\rho}$
 \end_inset
 
-.
- Notice that 
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+\nu_{t+1} & =A_{\tau}\frac{b_{\tau,\rho}(1+r)}{1-a_{\tau}}+\frac{b_{\tau,\rho}(ki_{\tau}-\Psi_{\tau+1})}{1-a_{\tau}}\label{eq:nut1regression}
+\end{alignat}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Notice that 
 \begin_inset Formula $\Delta A_{\tau+1}+\nu_{\tau+1}=rA_{\tau}+(ki_{\tau}-\Psi_{\tau+1})$
 \end_inset
 
@@ -1354,6 +1364,184 @@ Since we also observe
 \end_inset
 
  and the increase in net-worth.
+ A decay can be assumed of the form 
+\begin_inset Formula $a_{\tau}=\alpha x^{a}e^{-\tau}$
+\end_inset
+
+.
+ If we assume that 
+\begin_inset Formula $b_{\tau}$
+\end_inset
+
+ does not change with time (as the assets are effectively intergenerational
+ assets), a further simplification can be achieved.
+ 
+\end_layout
+
+\begin_layout Standard
+Using the assumption that the utility for quality changes both with age
+ 
+\begin_inset Formula $\tau$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+, that the utility for needs only changes with 
+\begin_inset Formula $\tau$
+\end_inset
+
+(not with 
+\begin_inset Formula $\rho$
+\end_inset
+
+) and that the utility for assets 
+\begin_inset Formula $A_{\tau}$
+\end_inset
+
+ changes only with characteristics, we can state the utility equation as
+ the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+u_{\tau}(\tau,\rho) & =a_{\tau}log(\Psi_{\tau})+b_{\rho}log(A_{\tau})+(1-a_{\tau}-b_{\rho})log(\nu_{\tau})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Defining the disposable income 
+\begin_inset Formula $\delta_{t}=i_{t}-\Psi_{t}$
+\end_inset
+
+, we write the Euler equations as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+A_{\tau+1} & =A_{\tau}(1+r)+\delta_{\tau+1}-\nu_{\tau+1}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first-order conditions imply that 
+\begin_inset Formula $\frac{\partial u_{\tau+1}}{\partial\nu_{\tau+1}}=0\Rightarrow\frac{b_{\rho}}{A_{\tau+1}}\frac{\partial A_{\tau+1}}{\partial\nu_{\tau+1}}=-\frac{1-a_{\tau}-b_{\rho}}{\nu_{\tau+1}}$
+\end_inset
+
+.
+ Thus, we can use the equation 
+\begin_inset Formula $\nu_{\tau+1}=\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}A_{\tau+1}$
+\end_inset
+
+ to obtain the first regression equation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Collecting terms in 
+\begin_inset Formula $\nu_{\tau+1}=\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}(A_{\tau}(1+r)+\delta_{\tau+1}-\nu_{\tau+1})$
+\end_inset
+
+, 
+\begin_inset Formula $\nu_{\tau+1}\frac{(1-a_{\tau})}{b_{\rho}}=\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}(A_{\tau}(1+r)+\delta_{\tau+1})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\nu_{\tau+1} & =\frac{(1+r)(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}A_{t}+\frac{(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}\delta_{\tau+1}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For the asset purchase equation, we write 
+\begin_inset Formula $A_{\tau+1}=A_{\tau}(1+r)+\delta_{\tau+1}-\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}A_{\tau+1}$
+\end_inset
+
+ .
+ This leads to 
+\begin_inset Formula $A_{\tau+1}=\frac{1-a_{\tau}+b_{\rho}+a_{\tau}-1}{1-a_{\tau}}A_{\tau}(1+r)+\frac{b_{\rho}}{1-a_{\tau}}\delta_{\tau+1}=(1+\frac{b_{\rho}+a_{\tau}-1}{1-a_{\tau}})(1+r)A_{\tau}+\frac{b_{\rho}}{1-a_{\tau}}\delta_{\tau+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{\tau+1}-A_{\tau}=(r+\frac{(1+r)(b_{\rho}+a_{\tau}-1)}{1-a_{\tau}})A_{\tau}+\frac{b_{\rho}}{1-a_{\tau}}\delta_{\tau+1}$
+\end_inset
+
+.
+ This in turns allows us to write
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\Delta A_{\tau+1} & =(r+(1+r)(\frac{b_{\rho}}{1-a_{\tau}}-1))A_{\tau}+\frac{b_{\rho}}{1-a_{\tau}}\delta_{\tau+1}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Observe that 
+\begin_inset Formula $\nu_{\tau+1}+\Delta A_{\tau+1}=rA_{\tau}+\delta_{\tau+1}$
+\end_inset
+
+.
+ If we let the function 
+\begin_inset Formula $a_{\tau}=a(\tau)$
+\end_inset
+
+ be of a general decay e.g.
+ 
+\begin_inset Formula $\text{\ensuremath{\tau^{a_{1}}e^{-\frac{\tau}{a_{2}}}}}$
+\end_inset
+
+, the regression would involve cross-terms for age with assets 
+\begin_inset Formula $A_{\tau}$
+\end_inset
+
+and disposable income 
+\begin_inset Formula $\delta_{\tau+1}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
