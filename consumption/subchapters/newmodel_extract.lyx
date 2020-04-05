@@ -466,6 +466,56 @@ Similarly,
  quality does not change over time.
 \end_layout
 
+\begin_layout Standard
+Consider the peer effects.
+ The dependence of 
+\begin_inset Formula $\nu$
+\end_inset
+
+ on 
+\begin_inset Formula $\rho$
+\end_inset
+
+ would mean that 
+\begin_inset Formula $\nu-\int_{\rho}\nu$
+\end_inset
+
+ would exclusively be about peer effects.
+ If we have 
+\begin_inset Formula $\nu=f(\rho,A_{t})$
+\end_inset
+
+ then we don't need to double count the effect of 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ In fact we could remove the peer effects in A - because changes in A are
+ less frequent and less of a concern.
+ Note also that 
+\begin_inset Formula $\frac{\partial(\int_{\rho}\nu d\nu)}{\partial\nu}=\frac{\partial f(\rho)}{\partial\nu}=0$
+\end_inset
+
+.
+ 
+\begin_inset Formula $U=\sum_{t}u_{t}=\sum_{t}\beta_{t}\upsilon_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $\upsilon_{t}=a\ log(A_{t})+b\ log(\nu_{t})+(1-a-b)\ log(\int_{\rho}\nu d\nu)$
+\end_inset
+
+.
+ 
+\bar under
+This condition interpretation limits the generality of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ - it is no longer a general personal characteristic but a particular reference
+ group relative to which quality and assets are observed
+\end_layout
+
 \begin_layout Section*
 Form of the utility function
 \end_layout
@@ -547,56 +597,6 @@ Let this utility be
  - so changes in expected value is what would drive the behaviour at every
  step.
  
-\end_layout
-
-\begin_layout Standard
-Consider the peer effects.
- The dependence of 
-\begin_inset Formula $\nu$
-\end_inset
-
- on 
-\begin_inset Formula $\rho$
-\end_inset
-
- would mean that 
-\begin_inset Formula $\nu-\int_{\rho}\nu$
-\end_inset
-
- would exclusively be about peer effects.
- If we have 
-\begin_inset Formula $\nu=f(\rho,A_{t})$
-\end_inset
-
- then we don't need to double count the effect of 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- In fact we could remove the peer effects in A - because changes in A are
- less frequent and less of a concern.
- Note also that 
-\begin_inset Formula $\frac{\partial(\int_{\rho}\nu d\nu)}{\partial\nu}=\frac{\partial f(\rho)}{\partial\nu}=0$
-\end_inset
-
-.
- 
-\begin_inset Formula $U=\sum_{t}u_{t}=\sum_{t}\beta_{t}\upsilon_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\upsilon_{t}=a\ log(A_{t})+b\ log(\nu_{t})+(1-a-b)\ log(\int_{\rho}\nu d\nu)$
-\end_inset
-
-.
- 
-\bar under
-This condition interpretation limits the generality of 
-\begin_inset Formula $\rho$
-\end_inset
-
- - it is no longer a general personal characteristic but a particular reference
- group relative to which quality and assets are observed
 \end_layout
 
 \begin_layout Standard
@@ -697,9 +697,6 @@ The steady state would be achieved with
 \end_layout
 
 \begin_layout Standard
-Because we don't have future prices and too much uncertainty around prices
- for quality vs needs, we consider a model without prices.
- Here, 
 \begin_inset Formula $A_{t+1}=A_{t}(1+r)+ki_{t}-\nu_{t+1}-\eta_{t+1}-p(A_{\tau})$
 \end_inset
 
@@ -750,151 +747,7 @@ Because we don't have future prices and too much uncertainty around prices
 \begin_inset Formula $\tau$
 \end_inset
 
- years old - 
-\begin_inset Formula $A_{\tau+1}=A_{\tau}(1+r)+ki_{\tau}-\frac{a_{\tau+1}}{b_{\tau+1}}A_{\tau+1}-\eta_{\tau+1}-p(A_{\tau})$
-\end_inset
-
-.
- If 
-\begin_inset Formula $1+\frac{a_{\tau+1}}{b_{\tau+1}}=\delta_{\tau+1}$
-\end_inset
-
- and 
-\begin_inset Formula $p(A_{t})=mA_{\tau}^{\alpha}$
-\end_inset
-
-, then we can write
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-A_{\tau}(1+r)-mA_{\tau}^{\alpha}=\delta_{\tau+1}A_{\tau+1} & -k^{\tau}i_{0}+\eta(\tau)\label{eq:nopricesiteration}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $log(A_{\tau}(1+r)-mA_{\tau+1}^{\alpha}+k^{\tau}i_{0}-\eta_{\tau})+\frac{(\tau-\tau_{m})^{2}}{a}=log(A_{\tau+1})$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-Difference across quantiles would indicate different mobility in societies.
- 
-\bar default
-The trouble with recovering 
-\begin_inset Formula $\delta_{\tau+1}$
-\end_inset
-
- using above is that 
-\begin_inset Formula $\delta_{\tau+1}$
-\end_inset
-
- and 
-\begin_inset Formula $A_{\tau+1}$
-\end_inset
-
- are both dependent on 
-\begin_inset Formula $\tau$
-\end_inset
-
- .
- This means that every age would correspond to a different coefficient 
-\begin_inset Formula $\delta_{\tau+1}$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $\delta_{\tau}$
-\end_inset
-
- affects only the consumer age 
-\begin_inset Formula $\tau$
-\end_inset
-
- this would mean that only consumers aged 
-\begin_inset Formula $\tau,\tau+1$
-\end_inset
-
- can be used for estimation.
- An assumption on how 
-\begin_inset Formula $\delta_{\tau+1}$
-\end_inset
-
- may depend on 
-\begin_inset Formula $\tau$
-\end_inset
-
- may be a better approach for data.
- To answer what this dependence should look like, consider how the utility
- for the same level of quality and assets would change over age.
- We would expect more utility through quality in the early years and less
- during the middle-ages - followed by a mild increase in preference for
- quality in the later years.
- A general fitting function (e.g.
- 
-\begin_inset Formula $f(x)=x^{a}e^{-x^{b}}$
-\end_inset
-
-) can be provided but we should provide both a simple-form and one that
- adds up to the past utilities.
- 
-\bar under
-A common function is the discounting function 
-\begin_inset Formula $\frac{1}{(1+\delta)^{\tau}}$
-\end_inset
-
- 
-\bar default
-.
- We believe that this relation should depend on needs 
-\begin_inset Formula $\eta$
-\end_inset
-
- - which itself is attached with life-cycle - the effect of age is aligned
- with the trajectory of needs.
- One simple option is to keep the form 
-\begin_inset Formula $e^{-\frac{(x-30)^{2}}{a}}$
-\end_inset
-
-.
- We could estimate 
-\begin_inset Formula $\frac{a_{\tau}}{b_{\tau}}$
-\end_inset
-
- - but to accommodate the 
-\begin_inset Formula $\rho$
-\end_inset
-
--dependent factors, we need to have an explicit dependence 
-\begin_inset Formula $a_{\tau}$
-\end_inset
-
- and 
-\begin_inset Formula $b_{\tau}$
-\end_inset
-
- (or 
-\begin_inset Formula $\delta_{\tau}$
-\end_inset
-
-) on 
-\begin_inset Formula $\rho$
-\end_inset
-
- - arguing that individuals with different 
-\begin_inset Formula $\rho$
-\end_inset
-
- would have a different behaviour.
+ years old.
 \end_layout
 
 \begin_layout Standard
@@ -968,14 +821,13 @@ Empirical Analysis
 
 \begin_layout Standard
 The model we use is the following.
- If 
-\begin_inset Formula $\tau$
-\end_inset
+ 
+\end_layout
 
- is the age of the household, 
+\begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-u_{\tau}(\tau,\rho) & =a_{\tau}log(\Psi_{\tau}(A_{\tau}))+b_{\tau,\rho}log(\nu_{\tau})+(1-a_{\tau}-b_{\tau,\rho})log(A_{\tau})
+u_{\tau}(\tau,\rho) & =a_{\tau}log(\Psi_{\tau})+b_{\rho}log(A_{\tau})+(1-a_{\tau}-b_{\rho})log(\nu_{\tau})
 \end{alignat*}
 
 \end_inset
@@ -984,40 +836,87 @@ u_{\tau}(\tau,\rho) & =a_{\tau}log(\Psi_{\tau}(A_{\tau}))+b_{\tau,\rho}log(\nu_{
 \end_layout
 
 \begin_layout Standard
-Here, we assume that 
-\begin_inset Formula $a_{\tau}$
+Here 
+\begin_inset Formula $\tau$
 \end_inset
 
- does not vary with personal characteristics, while the 
-\begin_inset Formula $b_{\tau,\rho}$
+ is the age of the household.
+ The model uses the assumption that the utility factor for quality 
+\begin_inset Formula $(\nu_{\tau})$
 \end_inset
 
- does.
- Therefor the utility from quality and assets would vary with personal character
-istics but not needs when accounted with asset ownership.
- This also encompasses the peer effects 
-\begin_inset Formula $\int_{\rho}\nu d\nu$
+ changes both with age 
+\begin_inset Formula $\tau$
 \end_inset
 
- .
- Any non-durable consumption other than what is driven by the assets and
- basic-needs would be constitute the status-related consumption (that is
- the only way status can be derived in the secondary-data).
- Omitting argument 
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+, the utility factor for needs only changes with 
+\begin_inset Formula $\tau$
+\end_inset
+
+(not with 
+\begin_inset Formula $\rho$
+\end_inset
+
+) and the utility for assets 
 \begin_inset Formula $A_{\tau}$
 \end_inset
 
- of the needs 
-\begin_inset Formula $\Psi_{\tau}$
+ changes only with characteristics.
+ The subscript 
+\begin_inset Formula $a_{\tau}$
 \end_inset
 
-, the Euler equations are
+ is used to signify that 
+\begin_inset Formula $a_{\tau}$
+\end_inset
+
+does not with personal characteristics the way 
+\begin_inset Formula $b_{\rho}$
+\end_inset
+
+ does not change with age 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ The utility that the consumer gets from from the same level of quality
+ and assets would vary with both personal characteristics (reference group)
+ 
+\begin_inset Formula $\rho$
+\end_inset
+
+ and age 
+\begin_inset Formula $\tau$
+\end_inset
+
+, but the total cost of needs does not vary with 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ Notice that since 
+\begin_inset Formula $\rho$
+\end_inset
+
+ signifies the term 
+\begin_inset Formula $\int_{\rho}\nu d\nu$
+\end_inset
+
+ it also encompasses the peer effects arising out of the reference group
+ identity.
+ Any non-durable consumption other than what is driven by the assets and
+ the basic-needs would be constitute the status-related consumption.
+ The Euler equations for the intertemporal setting are: 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-A_{\tau+1}=A_{\tau}(1+r)+ki_{\tau}-c_{\tau+1}\label{eq:mar2020_euler}\\
+A_{\tau+1}=A_{\tau}(1+r)+i_{\tau+1}-c_{\tau+1}\label{eq:mar2020_euler}\\
 c_{\tau+1}=\nu_{\tau+1}+\Psi_{\tau+1}\nonumber 
 \end{gather}
 
@@ -1027,7 +926,12 @@ c_{\tau+1}=\nu_{\tau+1}+\Psi_{\tau+1}\nonumber
 \end_layout
 
 \begin_layout Standard
-Since 
+Here, the income process 
+\begin_inset Formula $i_{\tau+1}$
+\end_inset
+
+ is a process known exogenously.
+ Since 
 \begin_inset Formula $\frac{\partial u_{\tau+1}}{\partial\nu_{\tau+1}}=\frac{b_{\tau,\rho}}{\nu_{\tau+1}}-\frac{1-a_{\tau}-b_{\tau,\rho}}{A_{\tau+1}}$
 \end_inset
 
@@ -1144,40 +1048,7 @@ Notice that
 \end_layout
 
 \begin_layout Standard
-Using the assumption that the utility for quality changes both with age
- 
-\begin_inset Formula $\tau$
-\end_inset
-
- and 
-\begin_inset Formula $\rho$
-\end_inset
-
-, that the utility for needs only changes with 
-\begin_inset Formula $\tau$
-\end_inset
-
-(not with 
-\begin_inset Formula $\rho$
-\end_inset
-
-) and that the utility for assets 
-\begin_inset Formula $A_{\tau}$
-\end_inset
-
- changes only with characteristics, we can state the utility equation as
- the following:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-u_{\tau}(\tau,\rho) & =a_{\tau}log(\Psi_{\tau})+b_{\rho}log(A_{\tau})+(1-a_{\tau}-b_{\rho})log(\nu_{\tau})
-\end{alignat*}
-
-\end_inset
-
-
+===========
 \end_layout
 
 \begin_layout Standard
@@ -1820,6 +1691,119 @@ So far, counting with fdelta gives us a lot of no-asset changes scenario
  is a random variable whose probability of remaining 0 is quite high.
  Also, relevant is the fact that it's the log of assets that are normally
  distributed - not the asset prices themselves.
+\end_layout
+
+\begin_layout Section*
+Estimation
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+Difference across quantiles would indicate different mobility in societies.
+ 
+\bar default
+Notice that both
+\begin_inset Formula $\delta_{\tau+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{\tau+1}$
+\end_inset
+
+ are both dependent on 
+\begin_inset Formula $\tau$
+\end_inset
+
+ .
+ This means that every age would correspond to a different coefficient 
+\begin_inset Formula $\delta_{\tau+1}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\delta_{\tau}$
+\end_inset
+
+ affects only the consumer age 
+\begin_inset Formula $\tau$
+\end_inset
+
+ this would mean that only consumers aged 
+\begin_inset Formula $\tau,\tau+1$
+\end_inset
+
+ can be used for estimation.
+ An assumption on how 
+\begin_inset Formula $\delta_{\tau+1}$
+\end_inset
+
+ may depend on 
+\begin_inset Formula $\tau$
+\end_inset
+
+ may be a better approach for data.
+ To answer what this dependence should look like, consider how the utility
+ for the same level of quality and assets would change over age.
+ We would expect more utility through quality in the early years and less
+ during the middle-ages - followed by a mild increase in preference for
+ quality in the later years.
+ A general fitting function (e.g.
+ 
+\begin_inset Formula $f(x)=x^{a}e^{-x^{b}}$
+\end_inset
+
+) can be provided but we should provide both a simple-form and one that
+ adds up to the past utilities.
+ 
+\bar under
+A common function is the discounting function 
+\begin_inset Formula $\frac{1}{(1+\delta)^{\tau}}$
+\end_inset
+
+ 
+\bar default
+.
+ We believe that this relation should depend on needs 
+\begin_inset Formula $\eta$
+\end_inset
+
+ - which itself is attached with life-cycle - the effect of age is aligned
+ with the trajectory of needs.
+ One simple option is to keep the form 
+\begin_inset Formula $e^{-\frac{(x-30)^{2}}{a}}$
+\end_inset
+
+.
+ We could estimate 
+\begin_inset Formula $\frac{a_{\tau}}{b_{\tau}}$
+\end_inset
+
+ - but to accommodate the 
+\begin_inset Formula $\rho$
+\end_inset
+
+-dependent factors, we need to have an explicit dependence 
+\begin_inset Formula $a_{\tau}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{\tau}$
+\end_inset
+
+ (or 
+\begin_inset Formula $\delta_{\tau}$
+\end_inset
+
+) on 
+\begin_inset Formula $\rho$
+\end_inset
+
+ - arguing that individuals with different 
+\begin_inset Formula $\rho$
+\end_inset
+
+ would have a different behaviour.
 \end_layout
 
 \end_body
