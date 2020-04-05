@@ -4,8 +4,10 @@
 
 
 * for 2012 we run:
-tobit dAt At lt1, ll(18200) # c.ag##c.At can also be tried
-reg nut1 c.lt1 c.At##c.age
+** c.ag##c.At can also be tried
+tobit dAt At lt1, ll(18200) 
 
 
+** the effect of c.lt1##c.age is weaker (even At##age is weak)
+reg nut1 c.lt1 c.At##c.age 
 
