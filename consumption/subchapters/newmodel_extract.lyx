@@ -84,42 +84,351 @@
 
 \begin_body
 
-\begin_layout Section*
-Summary
-\end_layout
-
-\begin_layout Standard
+\begin_layout Abstract
 To start with, this is not so much needs as it is about asset-bearing costs.
  The mention of needs should be done with respect to assets.
  
 \end_layout
 
 \begin_layout Section*
-Possible AIDS extension
+Dynamic Optimisation
 \end_layout
 
 \begin_layout Standard
-The difference equation can also incoroprate the intertemporal AIDS approach
- with a quasi-separable form.
- Assume that the relation between 
-\begin_inset Formula $c_{t}$
+The simplest instance of intertemporal substitution is a two period model
+ where assets are meant to be dissolved at the end of the second period.
+ If one may assume that the relative preference of quality over assets does
+ not change over time, the utility to be optimised by the consumer in the
+ two-period model can be written as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+U & =\beta_{1}(a\ log(\nu_{1})+b\ log(A_{1}))+\beta_{2}(a\ log(\nu_{2})+b\ log(A_{2}))
+\end{alignat*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $\nu_{1},\nu_{2}$
+\end_inset
+
+ are consumption on quality in periods 1 and 2 while that on assets in the
+ respective periods (cost of needs is not assumed to carry utility )
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+An alternate equivalent form may be more intuitive 
+\begin_inset Formula $U=a(\beta_{1}log(\nu_{1})+\beta_{2}log(\nu_{2}))+b(\beta_{1}log(A_{1})+\beta_{2}log(A_{2}))$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Here, the wealth constraint can be written as 
+\begin_inset Formula $W=\frac{A_{2}}{(1+r)^{2}}+\frac{c_{1}-p_{1}}{1+r}+\frac{c_{2}-p_{2}}{(1+r)^{2}}$
+\end_inset
+
+ so that Lagrangian 
+\begin_inset Formula $L=U-\lambda(W-\frac{A_{2}}{(1+r)^{2}}-\frac{c_{1}-p_{1}}{1+r}-\frac{c_{2}-p_{2}}{(1+r)^{2}})$
+\end_inset
+
+.
+ The first order conditions (
+\begin_inset Formula $\frac{\partial L}{\partial\nu_{1}}=\frac{\partial L}{\partial\nu_{2}}=\frac{\partial L}{\partial\lambda}=0$
+\end_inset
+
+) do not however simplify this optimisation as easily since one cannot guarantee
+ that 
+\begin_inset Formula $\frac{\partial f(\nu_{2})}{\partial\nu_{1}}=0$
+\end_inset
+
+ .
+ This is where the boundary condition of the final asset state being 0 (i.e.
+ all of the consumer's assets being liquidated and consumed in the last
+ period) as well as a discount factor for expected state can solve the optimisat
+ion problem.
+ However, since we consider the final state of assets exogenous in our model,
+ we take a slightly different approach with the formulation of a dynamic
+ optimisation problem.
+\end_layout
+
+\begin_layout Standard
+If the initial and final asset levels known, one may still write
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+A_{t+1} & =A_{t}(1+r)+i_{t+1}-\nu_{t+1}-\Psi_{t+1}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore the consumer may consume quality 
+\begin_inset Formula $\nu_{1}$
 \end_inset
 
  and 
-\begin_inset Formula $A_{t}$
+\begin_inset Formula $\nu_{2}$
 \end_inset
 
- does not change (in equilibrium for everybody) while the allocation over
- time-period changes - this is a two state budgeting over life-cycle.
- The substitution between 
-\begin_inset Formula $c_{t}$
+(
+\begin_inset Formula $\nu_{0}$
 \end_inset
 
  and 
-\begin_inset Formula $A_{t}$
+\begin_inset Formula $\nu_{3...}$
 \end_inset
 
- should however be translog or depend on price in any case.
+ are undefined) in the periods 1 and 2 where the cost of the needs she bears
+ are 
+\begin_inset Formula $\Psi_{1},\Psi_{2}$
+\end_inset
+
+ (respectively).
+ Under the usual intertemporal conditions, she may save for asset growth
+ to 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+instead of consuming all her income 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ as 
+\begin_inset Formula $c_{t}=\nu_{t}+\Psi_{t}$
+\end_inset
+
+ i.e.
+ she can spend all her income 
+\begin_inset Formula $i_{1},i_{2}$
+\end_inset
+
+as 
+\begin_inset Formula $c_{1},c_{2}$
+\end_inset
+
+ (respectively) or save some of it towards 
+\begin_inset Formula $A_{1},A_{2}$
+\end_inset
+
+.
+ If initial conditions are 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+(the starting wealth), the rate of growth of money (interest rate) and an
+ exogenous income process 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ are known, we can expand the the Euler equations as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+A_{1}=A_{0}(1+r)+i_{1}-c_{1}=A_{0}(1+r)+i_{1}-\Psi_{1}-\nu_{1}\\
+(\because c_{1}=\Psi_{1}+\nu_{1})
+\end{gather*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Similarly, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+A_{2} & =A_{1}(1+r)+i_{2}-\Psi_{2}-\nu_{2}
+\end{alignat*}
+
+\end_inset
+
+ Assuming that we observe both states of the wealth, 
+\begin_inset Formula $A_{0},A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+, as well as 
+\begin_inset Formula $c_{1},c_{2},$
+\end_inset
+
+
+\begin_inset Formula $\Psi_{1},\Psi_{2}$
+\end_inset
+
+ we intend to solve for the parameters that govern the utility function
+ additive over time 
+\begin_inset Formula $u=u_{1}+u_{2}$
+\end_inset
+
+ .
+ Here, 
+\begin_inset Formula $u_{1},u_{2}$
+\end_inset
+
+ are utility measures over periods and 1 and 2 (respectively).
+ To motivate the dynamic optimisation approach, consider the consumer's
+ choices in a one-period consumption - where she could either spend all
+ income 
+\begin_inset Formula $i_{1}$
+\end_inset
+
+ as 
+\begin_inset Formula $c_{_{1}}=\nu_{1}+\Psi_{1}$
+\end_inset
+
+ or keep the minimum consumption (
+\begin_inset Formula $\nu_{1}=0,c_{1}=\Psi_{1}$
+\end_inset
+
+) in the period and end up with 
+\begin_inset Formula $A_{1}>A_{0}$
+\end_inset
+
+.
+ If we can set 
+\begin_inset Formula $u_{0}=0$
+\end_inset
+
+, then the first-order conditions would provide us the optimal condition
+ for 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+.
+ Let this utility be 
+\begin_inset Formula $u_{1}^{*}$
+\end_inset
+
+ due to 
+\begin_inset Formula $\nu_{1}^{*},A_{1}^{*}$
+\end_inset
+
+.
+ To extend this to two periods with dynamic optimisation one can exploit
+ the fact that a consumer independently optimising 
+\begin_inset Formula $u_{1}+u_{2}$
+\end_inset
+
+ would always obtain 
+\begin_inset Formula $u_{1}^{*}+u_{2}^{*}$
+\end_inset
+
+.
+ This is because if 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+ are unbounded functions 
+\begin_inset Formula $max(u_{1}+u_{2})\le max(u_{1})+max(u_{2})=u_{1}^{*}+u_{2}^{*}$
+\end_inset
+
+.
+ Setting 
+\begin_inset Formula $u_{0}=0$
+\end_inset
+
+ is only a tool to formulate the dynamic optimisation approach - using which
+ the expected value of utility is to be optimised over her life period in
+ a 
+\begin_inset Formula $T$
+\end_inset
+
+-period model (
+\begin_inset Formula $T$
+\end_inset
+
+ being the age of the consumer).
+ 
+\end_layout
+
+\begin_layout Standard
+The changes in expected utility per period are what drive her behaviour
+ at every period 
+\begin_inset Formula $\tau$
+\end_inset
+
+ and her choice is set to vary according to her age 
+\begin_inset Formula $\tau$
+\end_inset
+
+ (assuming that all consumers have similar expectations for the trajectory
+ of their needs).
+ A steady state would thus be achieved with 
+\begin_inset Formula $\tau$
+\end_inset
+
+ over all ages.
+ The stability conditions imply that while consumers maintain different
+ 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ , they are only a function of characteristics 
+\begin_inset Formula $\rho$
+\end_inset
+
+and age 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Here, the notion that a consumer may change her behaviour away from the
+ current plan in the future is fallacious since the a consumer at different
+ ages is equivalent to consumers of varied ages at a any point in time (see
+ by Deaton's clarification of the so-called dynamic inconsistency problem
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Understanding Consumption
+\begin_inset Quotes erd
+\end_inset
+
+).
+ In other words, the behaviour of an older consumer is the same as the future
+ behaviour of a younger consumer.
+ So the optimal solution for the total sum 
+\begin_inset Formula $\sum_{i=1}^{T-t}u_{i}$
+\end_inset
+
+ would apply both to the individuals of all ages as well as an individuals
+ over a number of years.
 \end_layout
 
 \begin_layout Section*
@@ -127,36 +436,102 @@ Modeling peer effects
 \end_layout
 
 \begin_layout Standard
-The peer effects mean that the consumer dose not worry about being lower
- than the average of a distant community.
- There is a certain utility she derives from the overall average but that
- matters less than being ahead of the local average.
+The consumer would optimise the utility 
+\begin_inset Formula $u=\sum_{t}\beta_{t}(\upsilon_{t})$
+\end_inset
+
+ .
+ If 
+\begin_inset Formula $\upsilon_{t}=a\ log(A_{t})+b\ log(\nu_{i})$
+\end_inset
+
+, then the consumer gets a chance to compensate for 
+\begin_inset Formula $\rho$
+\end_inset
+
+ with 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ or 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+.
+ More educated people would need less assets and less quality.
+ Using the function 
+\begin_inset Formula $p(A_{t},\rho)$
+\end_inset
+
+ allows us to say that there is a levelling effect to compensating with
+ assets since assets are costly - a limiting factor that would lead to the
+ effect of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ dominating.
+ 
+\bar under
+If peer-effects are modeled more explicitly, let's say through a distance
+ from average of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ (or a belonging to class like in Chai's example), then we know that the
+ consumer would high 
+\begin_inset Formula $\rho$
+\end_inset
+
+ would need to do more (which is similar to them bearing an indirect cost).
+ People in higher occupations would benefit from both being in a higher
+ category and from the deviation from their group.
+ Hence the effect of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ does not need to be double-counted.
+ We might as well take 
+\begin_inset Formula $\rho$
+\end_inset
+
+ out completely and use the 
+\begin_inset Formula $\rho$
+\end_inset
+
+ cluster instead (if static effects e.g.
+ that of social identity in segregated community) are not being considered.
+ The properties of the average over the chosen personal characteristic -
+ allows us to consider an ordinal treatment without losing the tractability
+ of means.
+ 
 \end_layout
 
 \begin_layout Standard
-In a world of just quality (and no assets), the model 
+Distance from needs is not about peer effects.
+ Distance from needs only consider the price effects.
+ Pricier basic needs might mean less quality variation.
+ But peer effects do not come into the analysis of needs or the distance
+ from them.
+\end_layout
+
+\begin_layout Standard
+The peer effects mean that the consumer dose not worry about being lower
+ than the average of a distant community.
+ Instead more significant utility is derived by being ahead of the local
+ average (if quality or assets) than the average of her reference group
+ from a wider point of view.
+ If we consider a market of just quality (and no assets), the model 
 \begin_inset Formula $S=a\nu+b\int_{\rho}f_{\nu}d\nu$
 \end_inset
 
  is the same as the visible consumption model.
  This is the rank based model - an ordinal status game.
  Since 
-\begin_inset Formula $a\nu+b\int_{\rho}f_{\nu}d\nu(a+b)\nu+(-b)(\nu-\int_{\rho}f_{\nu}d\nu)$
+\begin_inset Formula $a\nu+b\int_{\rho}f_{\nu}d\nu=(a+b)\nu+(-b)(\nu-\int_{\rho}f_{\nu}d\nu)$
 \end_inset
 
  allows us to discuss how absolute quality would matter more than the local
- quality
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-We should refrain from thinking of regression controls when considering
- the utility functions.
-\end_layout
-
-\end_inset
-
-.
+ quality.
  To avoid double counting the effect of 
 \begin_inset Formula $\nu$
 \end_inset
@@ -200,14 +575,6 @@ The relation to average over
 \end_layout
 
 \begin_layout Standard
-Distance from needs is not about peer effects.
- Distance from needs only consider the price effects.
- Pricier basic needs might mean less quality variation.
- But peer effects do not come into the analysis of needs or the distance
- from them.
-\end_layout
-
-\begin_layout Standard
 Bring back 
 \begin_inset Formula $A$
 \end_inset
@@ -226,231 +593,15 @@ Bring back
 intertemporal substitution allows for these to be detached
 \series default
 .
- Let's consider the two-period model where 
-\begin_inset Formula $U=\beta_{1}(a\ log(\nu_{1})+b\ log(A_{1}))+\beta_{2}(a\ log(\nu_{2})+b\ log(A_{2}))$
-\end_inset
-
-.
- This turns out to be 
-\begin_inset Formula $U=a(\beta_{1}log(\nu_{1})+\beta_{2}log(\nu_{2}))+b(\beta_{1}log(A_{1})+\beta_{2}log(A_{2}))$
-\end_inset
-
-.
- The constraint is 
-\begin_inset Formula $W=\frac{A_{2}}{(1+r)^{2}}+\frac{c_{1}-p_{1}}{1+r}+\frac{c_{2}-p_{2}}{(1+r)^{2}}$
-\end_inset
-
-.
- 
-\begin_inset Formula $\therefore L=U-\lambda(W-\frac{A_{2}}{(1+r)^{2}}-\frac{c_{1}-p_{1}}{1+r}-\frac{c_{2}-p_{2}}{(1+r)^{2}})$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-First order conditions imply that 
-\begin_inset Formula $\frac{\partial L}{\partial\nu_{1}}=\frac{\partial L}{\partial\nu_{2}}=\frac{\partial L}{\partial\lambda}=0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-However, due to dependence on past values we cannot guarantee that 
-\begin_inset Formula $\frac{\partial f(\nu_{2})}{\partial\nu_{1}}=0$
-\end_inset
-
- .
- This complication can be avoided with a dynamic optimisation formulation.
- If dynamic optimisation is to be used - both two-state budgeting and peer-effec
-ts features seem desirable.
- In the dynamic optimisation problem, one may write
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-A_{t+1} & =A_{t}(1+r)+i_{t+1}-c_{t+1}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The initial conditions are 
-\begin_inset Formula $A_{0},i_{0}$
-\end_inset
-
-.
- The consumer would optimise the utility 
-\begin_inset Formula $u=\sum_{t}\beta_{t}(\upsilon_{t})$
-\end_inset
-
- .
- If 
-\begin_inset Formula $\upsilon_{t}=a\ log(\nu_{t})+b\ log(A_{t})+(1-a-b)log(\rho)$
-\end_inset
-
-, then the consumer gets a chance to compensate for 
-\begin_inset Formula $\rho$
-\end_inset
-
- with 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- or 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
-.
- More educated people would need less assets and less quality.
- Using the function 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- allows us to say that there is a levelling effect to compensating with
- assets since assets are costly - a limiting factor that would lead to the
- effect of 
-\begin_inset Formula $\rho$
-\end_inset
-
- dominating.
- If peer-effects are modeled more explicitly, let's say through a distance
- from average of 
-\begin_inset Formula $\rho$
-\end_inset
-
- (or a belonging to class like in Chai's example), then we know that the
- consumer would high 
-\begin_inset Formula $\rho$
-\end_inset
-
- would need to do more (which is similar to them bearing an indirect cost).
- 
-\bar under
-People in higher occupations would benefit from both being in a higher category
- and from the deviation from their group.
-
-\bar default
- Hence the effect of 
-\begin_inset Formula $\rho$
-\end_inset
-
- does not need to be double-counted.
- We might as well take 
-\begin_inset Formula $\rho$
-\end_inset
-
- out completely and use the 
-\begin_inset Formula $\rho$
-\end_inset
-
- cluster instead (if static effects e.g.
- that of social identity in segregated community) are not being considered.
- The expected value is what matters in the subjective probability analysis.
- As for the price, we intend to use the relative quality as price indicator.
- Two period model is enough for explanation.
-\end_layout
-
-\begin_layout Standard
-Let's assume two periods where the starting wealth is 
-\begin_inset Formula $A_{0}$
-\end_inset
-
-the consumer can consume as 
-\begin_inset Formula $c_{1}$
-\end_inset
-
- or 
-\begin_inset Formula $c_{2}$
-\end_inset
-
-(
-\begin_inset Formula $c_{0}$
-\end_inset
-
- and 
-\begin_inset Formula $c_{3...}$
-\end_inset
-
- are undefined).
- Instead of consuming all her income she would save for asset growth to
- 
-\begin_inset Formula $A_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $A_{2}$
-\end_inset
-
-.
- The consumer can spend all her income 
-\begin_inset Formula $i_{1},i_{2}$
-\end_inset
-
-as 
-\begin_inset Formula $c_{1},c_{2}$
-\end_inset
-
- (respectively) or save some of it towards 
-\begin_inset Formula $A_{1},A_{2}$
-\end_inset
-
-.
- Thus, 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $A_{1}=A_{0}(1+r)+i_{1}-c_{1}=$
-\end_inset
-
-
-\begin_inset Formula $A_{0}(1+r)+i_{1}-\Psi_{1}-\nu_{1}$
-\end_inset
-
- (
-\begin_inset Formula $\because c_{1}=\Psi_{1}+\nu_{1}$
-\end_inset
-
-).
  
 \end_layout
 
-\begin_layout Standard
-Similarly, 
+\begin_layout Section*
+Form of the utility function
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $A_{2}=A_{1}(1+r)+i_{2}-\Psi_{2}-\nu_{2}$
-\end_inset
-
-.
- Assuming that we observe both start and final states of the wealth, 
-\begin_inset Formula $A_{0}$
-\end_inset
-
- and 
-\begin_inset Formula $A_{2}$
-\end_inset
-
-, as well as 
-\begin_inset Formula $c_{1},c_{2},$
-\end_inset
-
-
-\begin_inset Formula $\Psi_{1},\Psi_{2}$
-\end_inset
-
- we can solve for the parameters that govern the utility function 
-\begin_inset Formula $u=u_{1}+u_{2}$
-\end_inset
-
-.
- The assumption 
+The assumption 
 \begin_inset Formula $u=\beta_{1}\upsilon_{1}+\beta_{2}\upsilon_{2}$
 \end_inset
 
@@ -464,235 +615,12 @@ Similarly,
 
  can impose the restriction that the relative preference for assets and
  quality does not change over time.
-\end_layout
-
-\begin_layout Standard
-Consider the peer effects.
- The dependence of 
-\begin_inset Formula $\nu$
-\end_inset
-
- on 
-\begin_inset Formula $\rho$
-\end_inset
-
- would mean that 
-\begin_inset Formula $\nu-\int_{\rho}\nu$
-\end_inset
-
- would exclusively be about peer effects.
- If we have 
-\begin_inset Formula $\nu=f(\rho,A_{t})$
-\end_inset
-
- then we don't need to double count the effect of 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- In fact we could remove the peer effects in A - because changes in A are
- less frequent and less of a concern.
- Note also that 
-\begin_inset Formula $\frac{\partial(\int_{\rho}\nu d\nu)}{\partial\nu}=\frac{\partial f(\rho)}{\partial\nu}=0$
-\end_inset
-
-.
- 
-\begin_inset Formula $U=\sum_{t}u_{t}=\sum_{t}\beta_{t}\upsilon_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\upsilon_{t}=a\ log(A_{t})+b\ log(\nu_{t})+(1-a-b)\ log(\int_{\rho}\nu d\nu)$
-\end_inset
-
-.
- 
-\bar under
-This condition interpretation limits the generality of 
-\begin_inset Formula $\rho$
-\end_inset
-
- - it is no longer a general personal characteristic but a particular reference
- group relative to which quality and assets are observed
-\end_layout
-
-\begin_layout Section*
-Form of the utility function
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\upsilon_{1}=alog(\nu_{1})+blog(A_{1})+c\ log(\int_{\rho}\nu_{1})+d\ log(\int_{\rho}A_{1})$
-\end_inset
-
-.
  The question we need to answer for a dynamic optimisation problem is whether
  
 \begin_inset Formula $u_{1},u_{2}$
 \end_inset
 
  can be considered state variables.
- Consider what would the consumer face in a one-period consumption.
- 
-\bar under
-The consumer could either spend all income 
-\begin_inset Formula $i_{1}$
-\end_inset
-
- as 
-\begin_inset Formula $c_{_{1}}$
-\end_inset
-
- or keep the minimum consumption in the period and end up with 
-\begin_inset Formula $A_{1}>A_{0}$
-\end_inset
-
-.
- If we can assume 
-\begin_inset Formula $u_{0}=0$
-\end_inset
-
-, then the first-order conditions would provide us the optimal conditions.
- 
-\bar default
-Let this utility be 
-\begin_inset Formula $u_{1}^{*}$
-\end_inset
-
- due to 
-\begin_inset Formula $c_{1}^{*},A_{1}^{*}$
-\end_inset
-
-.
- Now, consider two periods.
- Dynamic optimisation is possible if a consumer independently optimises
- 
-\begin_inset Formula $u_{1}+u_{2}$
-\end_inset
-
- would always result in 
-\begin_inset Formula $u_{1}^{*}+u_{2}^{*}$
-\end_inset
-
-.
- If utility is additive, this is necessary because if 
-\begin_inset Formula $u_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $u_{2}$
-\end_inset
-
- are unbounded, functions 
-\begin_inset Formula $max(u_{1}+u_{2})\le max(u_{1})+max(u_{2})=u_{1}^{*}+u_{2}^{*}$
-\end_inset
-
-.
- Thus the dynamic optimisation is justified.
- Setting of 
-\begin_inset Formula $u_{0}=0$
-\end_inset
-
- is only a tool to formulate the dynamic optimisation problem.
- It is true that the consumer's view expected values is what she optimises
- - so changes in expected value is what would drive the behaviour at every
- step.
- 
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-The consumer's choice varies according to the age 
-\begin_inset Formula $\tau$
-\end_inset
-
- (assuming that all consumers have similar expectations for the trajectory
- of their needs).
- A steady state would mean that the 
-\begin_inset Formula $A_{0},A_{1},A_{2}$
-\end_inset
-
- achieve stable values of 
-\begin_inset Formula $\beta_{1},\beta_{2},...,\beta_{T}$
-\end_inset
-
-.
- 
-\bar default
-The steady state would be achieved with 
-\begin_inset Formula $\tau$
-\end_inset
-
- over all ages.
- 
-\begin_inset Formula $\nu_{1},\nu_{2}$
-\end_inset
-
-.
- The consumers maintain different 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- - the assumptions of stability would mean that 
-\begin_inset Formula $\beta_{t}$
-\end_inset
-
- are all fixed.
- Notice that 
-\begin_inset Formula $A_{0},A_{1},i_{0}$
-\end_inset
-
- all vary just the way the age 
-\begin_inset Formula $\tau$
-\end_inset
-
- does.
- The literature has a way to estimate 
-\begin_inset Formula $E(e_{t+1}|e_{t})$
-\end_inset
-
- for time-series equations.
- This is equivalent to steady state difference equations can be derived
- for 
-\begin_inset Formula $T$
-\end_inset
-
- periods (
-\begin_inset Formula $T$
-\end_inset
-
- being the average life-expectancy).
- The current way however doesn't allow us to estimate the 
-\begin_inset Formula $\beta_{t}$
-\end_inset
-
-.
- One thing that is problematic with constant 
-\begin_inset Formula $\beta_{t}$
-\end_inset
-
- is that it is supposed to be a function of 
-\begin_inset Formula $t$
-\end_inset
-
- - however it's dependent on 
-\begin_inset Formula $\tau$
-\end_inset
-
-.
- Deaton does clarify in Understanding Consumption - that there cannot be
- dynamic inconsistency (which is tantamount to irrationality).
- Hence, the behaviour of an older consumer is the same as the future behaviour
- of a younger consumer.
- Finally, it's the total sum 
-\begin_inset Formula $\sum_{i=1}^{T-t}u_{i}$
-\end_inset
-
- whose optimisation would give us an equation (
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- does not help as is).
  
 \end_layout
 
@@ -789,34 +717,57 @@ Another way to see the effect of
 \end_layout
 
 \begin_layout Standard
-In the empirical analysis, we need to change the description of needs so
- that it is decomposed into a component that varies proportional to the
- members of the family and one that moves with the assets acquired by the
- consumer.
- The estimation of 
-\begin_inset Formula $mA_{t}^{\alpha}$
+Consider the peer effects.
+ The dependence of 
+\begin_inset Formula $\nu$
 \end_inset
 
- could thus be together with the price of needs.
- 
-\end_layout
+ on 
+\begin_inset Formula $\rho$
+\end_inset
 
-\begin_layout Standard
-Notice what's nice about minimum cost - if a consumer has both kerosene
- and electricity - we don't need to know exactly how much of each quantity
- the consumer is using.
-\end_layout
+ would mean that 
+\begin_inset Formula $\nu-\int_{\rho}\nu$
+\end_inset
 
-\begin_layout Standard
-This analysis ignores the types within the commodity - for which a cost-function
- based formulation may be more appropriate.
- As such this form only explains the substitution between long-term assets
- and quality.
+ would exclusively be about peer effects.
+ If we have 
+\begin_inset Formula $\nu=f(\rho,A_{t})$
+\end_inset
+
+ then we don't need to double count the effect of 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ In fact we could remove the peer effects in A - because changes in A are
+ less frequent and less of a concern.
+ Note also that 
+\begin_inset Formula $\frac{\partial(\int_{\rho}\nu d\nu)}{\partial\nu}=\frac{\partial f(\rho)}{\partial\nu}=0$
+\end_inset
+
+.
  
+\begin_inset Formula $U=\sum_{t}u_{t}=\sum_{t}\beta_{t}\upsilon_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $\upsilon_{t}=a\ log(A_{t})+b\ log(\nu_{t})+(1-a-b)\ log(\int_{\rho}\nu d\nu)$
+\end_inset
+
+.
+ 
+\bar under
+This condition interpretation limits the generality of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ - it is no longer a general personal characteristic but a particular reference
+ group relative to which quality and assets are observed.
 \end_layout
 
 \begin_layout Section*
-Empirical Analysis
+Model
 \end_layout
 
 \begin_layout Standard
@@ -866,6 +817,8 @@ Here
 \end_inset
 
  changes only with characteristics.
+ The last assumption rests upon the definition of assets being intergenerational
+ (and thus long-term enough for their utility to change over time).
  The subscript 
 \begin_inset Formula $a_{\tau}$
 \end_inset
@@ -930,27 +883,42 @@ Here, the income process
 \begin_inset Formula $i_{\tau+1}$
 \end_inset
 
- is a process known exogenously.
- Since 
-\begin_inset Formula $\frac{\partial u_{\tau+1}}{\partial\nu_{\tau+1}}=\frac{b_{\tau,\rho}}{\nu_{\tau+1}}-\frac{1-a_{\tau}-b_{\tau,\rho}}{A_{\tau+1}}$
+ is a exogenous process that may be function of 
+\begin_inset Formula $\rho$
 \end_inset
 
-, the first-order conditions imply that 
-\begin_inset Formula $\nu_{\tau+1}=\frac{b_{\tau,\rho}A_{\tau+1}}{1-a_{\tau}-b_{\tau,\rho}}$
+.
+ The first-order conditions imply that 
+\begin_inset Formula $\frac{\partial u_{\tau+1}}{\partial\nu_{\tau+1}}=0\Rightarrow\frac{b_{\rho}}{A_{\tau+1}}\frac{\partial A_{\tau+1}}{\partial\nu_{\tau+1}}=-\frac{1-a_{\tau}-b_{\rho}}{\nu_{\tau+1}}$
+\end_inset
+
+, and hence 
+\begin_inset Formula $\nu_{\tau+1}=\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}A_{\tau+1}$
 \end_inset
 
  .
- This itself can be used to verify a structure for 
-\begin_inset Formula $b_{\tau,\rho}$
+ If we observe 
+\begin_inset Formula $\nu_{\tau+1}$
 \end_inset
 
-,
-\begin_inset Formula $a_{\tau,\rho}$
+, the equation can be used for estimation.
+ 
+\begin_inset Formula 
+\begin{alignat*}{1}
+\nu_{\tau+1} & =\frac{(1+r)(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}A_{t}+\frac{(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}\delta_{\tau+1}
+\end{alignat*}
+
 \end_inset
 
- - which must represent how the quality varies for individuals with different
- ages and personal characteristics.
- Using this in the equation 
+
+\end_layout
+
+\begin_layout Standard
+Further, denoting the disposable income 
+\begin_inset Formula $\delta_{t}=i_{t}-\Psi_{t}$
+\end_inset
+
+ and using the first-order conditions in the equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:mar2020_euler"
@@ -960,127 +928,22 @@ noprefix "false"
 
 \end_inset
 
-, we can write 
-\begin_inset Formula $A_{\tau+1}=A_{\tau}(1+r)+ki_{\tau}-\Psi_{\tau+1}-\frac{b_{\tau,\rho}}{1-a_{\tau}-b_{\tau,\rho}}A_{\tau+1}$
-\end_inset
-
-.
- Rearranging terms
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Formula $A_{\tau+1}=A_{\tau}\frac{(1-a_{\tau}-b_{\tau,\rho})(1+r)}{1-a_{\tau}}+\frac{(ki_{\tau}-\Psi_{\tau+1})(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}\Rightarrow$
-\end_inset
-
-
-\begin_inset Formula $A_{\tau+1}=A_{\tau}\frac{1-a_{\tau}-b_{\tau,\rho}+r(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}+\frac{(ki_{\tau}-\Psi_{\tau+1})(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}=A_{\tau}+\frac{r(1-a_{\tau}-b_{\tau,\rho})-b_{\tau,\rho}}{1-a_{\tau}}A_{\tau}+\frac{(ki_{\tau}-\Psi_{\tau+1})(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-, we can write 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\Delta A_{\tau+1}=(r-\frac{(1+r)b_{\tau,\rho}}{1-a_{\tau}})A_{\tau}+\frac{(ki_{\tau}-\Psi_{\tau+1})(1-a_{\tau}-b_{\tau,\rho})}{1-a_{\tau}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Since we also observe 
-\begin_inset Formula $\nu_{\tau+1}$
-\end_inset
-
-, we can use the following equation estimate 
-\begin_inset Formula $a_{\tau},b_{\tau,\rho}$
-\end_inset
-
-:
+, we rewrite the Euler equations as follows:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-\nu_{t+1} & =A_{\tau}\frac{b_{\tau,\rho}(1+r)}{1-a_{\tau}}+\frac{b_{\tau,\rho}(ki_{\tau}-\Psi_{\tau+1})}{1-a_{\tau}}\label{eq:nut1regression}
+A_{\tau+1} & =A_{\tau}(1+r)+\delta_{\tau+1}-\nu_{\tau+1}\label{eq:nut1regression}
 \end{alignat}
 
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Standard
-Notice that 
-\begin_inset Formula $\Delta A_{\tau+1}+\nu_{\tau+1}=rA_{\tau}+(ki_{\tau}-\Psi_{\tau+1})$
-\end_inset
-
- implying that the income for average consumer to choose 
-\begin_inset Formula $\nu_{\tau+1}$
-\end_inset
-
- and new assets must come from the disposable income (
-\begin_inset Formula $ki_{\tau}-\Psi_{\tau+1})$
-\end_inset
-
- and the increase in net-worth.
- A decay can be assumed of the form 
-\begin_inset Formula $a_{\tau}=\alpha x^{a}e^{-\tau}$
-\end_inset
-
-.
- If we assume that 
-\begin_inset Formula $b_{\tau}$
-\end_inset
-
- does not change with time (as the assets are effectively intergenerational
- assets), a further simplification can be achieved.
- 
-\end_layout
-
-\begin_layout Standard
-===========
-\end_layout
-
-\begin_layout Standard
-Defining the disposable income 
-\begin_inset Formula $\delta_{t}=i_{t}-\Psi_{t}$
-\end_inset
-
-, we write the Euler equations as follows:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-A_{\tau+1} & =A_{\tau}(1+r)+\delta_{\tau+1}-\nu_{\tau+1}
-\end{alignat*}
-
-\end_inset
-
 
 \end_layout
 
 \begin_layout Standard
-The first-order conditions imply that 
-\begin_inset Formula $\frac{\partial u_{\tau+1}}{\partial\nu_{\tau+1}}=0\Rightarrow\frac{b_{\rho}}{A_{\tau+1}}\frac{\partial A_{\tau+1}}{\partial\nu_{\tau+1}}=-\frac{1-a_{\tau}-b_{\rho}}{\nu_{\tau+1}}$
-\end_inset
-
-.
- Thus, we can use the equation 
-\begin_inset Formula $\nu_{\tau+1}=\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}A_{\tau+1}$
-\end_inset
-
- to obtain the first regression equation
+Rearranging terms
 \begin_inset Foot
 status open
 
@@ -1111,27 +974,11 @@ Collecting terms in
 
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\nu_{\tau+1} & =\frac{(1+r)(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}A_{t}+\frac{(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}\delta_{\tau+1}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-For the asset purchase equation, we write 
+ and obtaining
 \begin_inset Formula $A_{\tau+1}=A_{\tau}(1+r)+\delta_{\tau+1}-\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}A_{\tau+1}$
 \end_inset
 
- .
- This leads to 
+ we can write 
 \begin_inset Formula $A_{\tau+1}=\frac{1-a_{\tau}+b_{\rho}+a_{\tau}-1}{1-a_{\tau}}A_{\tau}(1+r)+\frac{b_{\rho}}{1-a_{\tau}}\delta_{\tau+1}=(1+\frac{b_{\rho}+a_{\tau}-1}{1-a_{\tau}})(1+r)A_{\tau}+\frac{b_{\rho}}{1-a_{\tau}}\delta_{\tau+1}$
 \end_inset
 
@@ -1140,14 +987,14 @@ For the asset purchase equation, we write
 \end_inset
 
 .
- This in turns allows us to write
+ This leads to the second equation that can be used for estimation:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{alignat*}{1}
-\Delta A_{\tau+1} & =(r+(1+r)(\frac{b_{\rho}}{1-a_{\tau}}-1))A_{\tau}+\frac{b_{\rho}}{1-a_{\tau}}\delta_{\tau+1}
-\end{alignat*}
+\begin{alignat}{1}
+\Delta A_{\tau+1} & =(r+(1+r)(\frac{b_{\rho}}{1-a_{\tau}}-1))A_{\tau}+\frac{b_{\rho}}{1-a_{\tau}}\delta_{\tau+1}\label{eq:dAt_regression}
+\end{alignat}
 
 \end_inset
 
@@ -1155,16 +1002,53 @@ For the asset purchase equation, we write
 \end_layout
 
 \begin_layout Standard
-Observe that 
+Notice that Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nut1regression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dAt_regression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ show that 
 \begin_inset Formula $\nu_{\tau+1}+\Delta A_{\tau+1}=rA_{\tau}+\delta_{\tau+1}$
 \end_inset
 
-.
- Exact specifications of the equations can be derived if we can assume 
+ - implying that the income for the representative consumer to choose 
+\begin_inset Formula $\nu_{\tau+1}$
+\end_inset
+
+ and new assets must come from the disposable income (
+\begin_inset Formula $ki_{\tau}-\Psi_{\tau+1})$
+\end_inset
+
+ and the increase in net-worth through the net-asset change rate 
+\begin_inset Formula $r$
+\end_inset
+
+ (inclusive of depreciation).
+ 
+\end_layout
+
+\begin_layout Standard
+More exact specifications of the above equations can be derived if we can
+ assume 
 \begin_inset Formula $a(\tau)=\frac{1}{1-a_{\tau}}$
 \end_inset
 
- of a general decay e.g.
+ to be of a general decay e.g.
  
 \begin_inset Formula $\text{\ensuremath{\tau^{a_{1}}e^{-\frac{\tau}{a_{2}}}}}$
 \end_inset
@@ -1178,24 +1062,6 @@ Observe that
 \end_inset
 
  being constants).
- Even for a more general form of 
-\begin_inset Formula $a(\tau)$
-\end_inset
-
-, the econometirc methods corresponding to the two equations must involve
- cross-terms for age 
-\begin_inset Formula $\tau$
-\end_inset
-
- with assets 
-\begin_inset Formula $A_{\tau}$
-\end_inset
-
-and disposable income 
-\begin_inset Formula $\delta_{\tau+1}$
-\end_inset
-
- .
  The first equation can be written as
 \end_layout
 
@@ -1226,7 +1092,29 @@ The second equation becomes
 \end_layout
 
 \begin_layout Standard
-The regression of 
+The econometric analysis however can proceed with the general form of 
+\begin_inset Formula $a(\tau)$
+\end_inset
+
+ as long as cross-terms for age 
+\begin_inset Formula $\tau$
+\end_inset
+
+ with assets 
+\begin_inset Formula $A_{\tau}$
+\end_inset
+
+and disposable income 
+\begin_inset Formula $\delta_{\tau+1}$
+\end_inset
+
+ are considered.
+ A case can be made for tobit due to the truncated nature of 
+\begin_inset Formula $\Delta A_{\tau+1}$
+\end_inset
+
+.
+ The regression of 
 \begin_inset Formula $\nu_{\tau+1}$
 \end_inset
 
@@ -1246,32 +1134,7 @@ The regression of
 \begin_inset Formula $\Psi_{\tau+1}$
 \end_inset
 
- with respective cross terms are presented.
- A case can be made for tobit due to the truncated nature of 
-\begin_inset Formula $\Delta A_{\tau+1}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Using the above time-series equation, we can see how 
-\begin_inset Formula $\frac{\partial\nu_{\tau+1}}{\partial A_{\tau+1}}$
-\end_inset
-
- varies.
- The solution for 
-\begin_inset Formula $r$
-\end_inset
-
- is somewhat tricky so we may want to explore a more general asset growth
- description model (which may consider discounting for example).
- The trouble with that is that the expansion 
-\begin_inset Formula $1+r$
-\end_inset
-
- is not as easy available.
+ with respective cross terms are presented in the Section.
  
 \end_layout
 
@@ -1283,7 +1146,7 @@ Data
 The problem with cost is that individuals report with a significant inaccuracy.
  The same item recorded on 2012 and 2014 is recorded at different costs.
  The error is largely due to cost and mtm both based on interview - often
- resulting in cost being closer to the reprted mtm.
+ resulting in cost being closer to the reported mtm.
  
 \end_layout
 
@@ -1804,6 +1667,62 @@ A common function is the discounting function
 \end_inset
 
  would have a different behaviour.
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Section*
+Results
+\end_layout
+
+\begin_layout Standard
+Using the above time-series equation, we can see how 
+\begin_inset Formula $\frac{\partial\nu_{\tau+1}}{\partial A_{\tau+1}}$
+\end_inset
+
+ varies.
+ The solution for 
+\begin_inset Formula $r$
+\end_inset
+
+ is somewhat tricky so we may want to explore a more general asset growth
+ description model (which may consider discounting for example).
+ The trouble with that is that the expansion 
+\begin_inset Formula $1+r$
+\end_inset
+
+ is not as easy available.
+ 
+\end_layout
+
+\begin_layout Section*
+Possible AIDS extension
+\end_layout
+
+\begin_layout Standard
+The difference equation can also incoroprate the intertemporal AIDS approach
+ with a quasi-separable form.
+ Assume that the relation between 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ does not change (in equilibrium for everybody) while the allocation over
+ time-period changes - this is a two state budgeting over life-cycle.
+ The substitution between 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ should however be translog or depend on price in any case.
 \end_layout
 
 \end_body
