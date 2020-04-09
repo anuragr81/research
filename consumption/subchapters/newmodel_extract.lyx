@@ -1030,62 +1030,84 @@ and disposable income
 Data
 \end_layout
 
-\begin_layout Subsection*
-Asset costs
+\begin_layout Standard
+The LSMS survey also records the assets used by the household.
+ The list of assets includes everything from a mobile phone up to land or
+ houses (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Costofassets2014"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the median costs of these assets).
+ The survey records the number of assets owned by the household, the reported
+ cost at which the asset was purchased and the price that the household
+ expects by selling the asset in the market at the time of the survey.
+ While these data fields are promising for the intertemporal setting we
+ wish to make use of, the severe measurement errors with the cost or the
+ current price (referred to as marked-to-market average or mtm average in
+ the current discussion).
 \end_layout
 
 \begin_layout Standard
-The problem with 
-\series bold
-cost 
-\series default
-is that individuals report with a significant inaccuracy.
- The same item recorded on 2012 and 2014 is recorded at different costs.
- The error is largely due to cost and mtm both based on interview - often
- resulting in cost being closer to the reported mtm.
- 
-\end_layout
-
-\begin_layout Subsection*
-Number of Assets
-\end_layout
-
-\begin_layout Standard
-Due to this error we rely not on the total value of assets but the more
- cumbersome counting of assets.
- One way to approach is this to view differences in assets only when there
- is a difference in the number of assets.
- We don't track the depreciation in our anaysis and view only the cost/mtm
- of assets (as they are purchased within the two-year period).
- The difference in number is the main driver, when there is the difference
- in numbers - the total mtm differences would evaluated.
- It seems the cost has a measurement error and is influenced by the mtm.
- So mtm is used as the perception of the economy.
- Instead of discarding anyone who recalls 3 instead of 4 chairs, we let
- a group be influenced by the number change more when it's 0->1 from when
- its 3->4.
-\end_layout
-
-\begin_layout Standard
-Also, we don't wish to see if the individuals are increasing or decreasing
- what they already have.
- There is no apparent reason why the number of chairs would be reducing
- in two years.
- Such errors exist for many assets so the error in expensive assets (e.g.
- houses) would have a high impact on the difference of costs thus calculated.
+The problem with the reported cost is that it is based on the consumer recall
+ - which may change over a period of two years - the cost of the same asset
+ as recorded in 2012 may be significantly different from the cost recorded
+ in 2014.
+ The mtm average on the other hand is less susceptible to the issue as it
+ is not recalled from a consumer's memory and reflects the perceived depreciatio
+n of the asset over time instead.
+ Still, as the mtm average is a value averaged over a number of assets owned,
+ the cost incurred by the purchase of a new asset is not directly observed
+ in the mtm average and relies on the field indicating number of assets.
  
 \end_layout
 
 \begin_layout Standard
-The idea of ownership for houses is also complicated because the individuals
- seem to report house as assets even though are merely renting it.
- This is why we verify the house-ownership with the household questionnare
- (which records the housing-status through a direct question).
- For other assets less expensive than housing (land, furntiure such as Sofa,
- tables etc.) , the invididuals may record the total number of posessesion
- in some error but does not forget that she has the assets completely so
- much.
+The value of the new purchases therefore rely on the number of assets observed
+ in the survey.
+ We recognise an asset purchase only when we a difference in the number
+ of assets over the successive years is observed.
+ The difference between the mtm average is thus recorded as part of new
+ assets only as long as we observe a difference in number of assets in the
+ two-year period.
+ The number of assets observed however are also subject to measurement error
+ and necessitate some further refinements to the cost of assets thus calculated.
+ More specifically, a household may not always count the assets accurately.
+ But since we are interested in the the new asset purchases for our analysis,
+ someone buying their first music players is far more important than someone
+ adding to their collection of music system.
+ Therefore, the asset number changes are counted towards change in assets
+ only if they change from 0 to 1 or substantially (3 to 5 or to 6,7...
+ etc.).
+ As we intend to calculate the total cost of a new asset, the effect of
+ the measurement error with the number of assets is more drastic for more
+ expensive assets such a house.
+ Thankfully, we also observe whether the individual owns a house or not
+ from the household questionnaire (which records the housing-status through
+ a direct question).
+ .
+ One The idea of ownership for houses is also complicated because the individual
+s seem to report house as assets even though are merely residing it.
+ They are not owners but users of the assets.
+\end_layout
+
+\begin_layout Standard
+This is why we verify the house-ownership with the For other assets less
+ expensive than housing (land, furntiure such as Sofa, tables etc.) , the
+ invididuals may record the total number of posessesion in some error but
+ does not forget that she has the assets completely so much.
  This allows us to circumvent the measurement error with the number of assets.
+ 
+\end_layout
+
+\begin_layout Standard
+Further, the assets are divide amongst two or more households which a household
+ split into.
  
 \end_layout
 
@@ -1094,19 +1116,25 @@ Diminishing Returns in Assets Ownership?
 \end_layout
 
 \begin_layout Standard
-The idea that we should focus only on new buyers may need to be justified
- by saying that third bicycle after second is less of an asset than having
- first after none is.
- However, it's not that buying first asset automatically leads to ownership
- of more of the same asset - only that the transition to ownership band
- jumps as soon as you have an item.
- 
+That we should focus only on new purchases - as we're interested in the
+ transition to ownership band as soon as one has an item, the addition of
+ more chairs to someone who already has a chair is not much of a concern
+ for us.
 \end_layout
 
 \begin_layout Standard
-We consider anything more expensive than bed a furniture to be transferre
- to the next generation.
- The groups of assets is yet to be decided.
+As explained in the discussion of the model, we're interested in asset ony
+ as long as they can potentially be transferred (we can verify these in
+ the split of the households).
+ In the data we use in the current chapter, we consider any asset more expensive
+ than bed a furniture to be transferred to the next generation.
+ Some assets that are not life-long assets e.g.
+ mobile phones, dish-tv etc.
+ are not considered in the asset changes 
+\begin_inset Formula $\Delta A_{\tau+1}=A_{\tau+1}-A_{\tau}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection*
@@ -1114,21 +1142,16 @@ Use of groups
 \end_layout
 
 \begin_layout Standard
-Using transition bands can be assisted with aggregation of assets (shortnames)
- into groups (owner of a sewing machine or a music-system may be more difficult
- to explain with than ownership of electrial equipment or significant furniture).
- The advantage of aggregating into such groups is that reductions in some
- assets may be balanced by increase in other assets in the same group.
- A variable that tracks the total cost of an asset ownership group would
- attempt to smoothen the inaccuracies in cost recall.
- The first list we need is that of assets sorted by the median costs.
- Next we can decide at what point does the consumption end and assets start.
- For us, this is also price based.
- Agrarian assets are under-represented so more interesting observations
- could be provided if we had more than 50 donkeys recorded in the survey.
- We could however lump donkey, poultry and livestock together and consider
- the total costs.
- 
+Given our interest in purchases of new items only if someone became a new
+ buyer of an item, one could go a little further with the smoothening of
+ data and find that a new buyer of a sewing machine or music system is less
+ interesting than being a new buyer of an electrial equipment item or furniture.
+ BUt more signiifcantly, such a grouping can help with underrepresentattion
+ of some assets (particularly the agrarian assets in the survey).
+ It may make sense to count paricular animals - chicken, donkeys recorded
+ in the survey into into livestock.
+ Aggregating into such groups helps us compare assets of different groups
+ - but we stick to mtm whicih our model is concerned with.
 \end_layout
 
 \begin_layout Standard
@@ -1152,6 +1175,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Costofassets2014"
+
+\end_inset
+
 Cost of assets (2014)
 \end_layout
 
@@ -1166,13 +1195,6 @@ Cost of assets (2014)
 \end_layout
 
 \begin_layout Standard
-Some assets that are not life-long assets should be counted as (even though
- they are recorded as assets).
- Mobile phones or Dish-TV are not meant to be passed on to the next generation.
- These are therefore to be included in consumption.
-\end_layout
-
-\begin_layout Standard
 We find that in groups, numbers are not reliable because most people come
  around to having non-zero numbers.
  It is useful to look at 
@@ -1181,13 +1203,13 @@ non-split houses
 \series default
 and use the prices from 2012.
  This would mimise the the effect of measurement errors for mtm.
- That said, grained from zero group is dominant.
  Remember that we're only interested in new assets, therefore new assets
  can be focussed on.
- This can allow us to put more weight on new purchases (instead of simply
- ignoring old assets).
- We don't need the cost-based logic to justify this.
- Consider what this would like like given the asset 
+ 
+\end_layout
+
+\begin_layout Standard
+Consider what this would like like given the asset 
 \begin_inset Formula $a$
 \end_inset
 
@@ -1208,103 +1230,82 @@ and use the prices from 2012.
 \end_inset
 
  the total number of assets.
- What we're saying is that the the expenditure on new assets should not
- simply be 
-\begin_inset Formula $P_{a,t}$
-\end_inset
-
-
-\begin_inset Formula $\Delta n_{a,t+1}=P_{a,t}(n_{a,t+1}-n_{a,t})$
-\end_inset
-
- but also have another term inversely proportional to 
-\begin_inset Formula $n_{a,t}$
-\end_inset
-
- i.e.
- having more of the item would not count as a new asset.
- One way to consider this is to see 
-\begin_inset Formula $log(n_{t+1})-log(n_{t}+\epsilon)$
-\end_inset
-
-.
- While this is attractive, it cannot take into account the significant number
- of gained_from_zero users.
- The former method of using a term inversely proportional to 
-\begin_inset Formula $n_{a,t}$
-\end_inset
-
- is more general (log can be that inversely proportional function) crude
- but it may be associated with a simple economic explanation that the effective
- cost of purchase is more when somebody hasn't had the asset.
- So in 
-\begin_inset Formula $\Delta A_{t+1}$
-\end_inset
-
- 
-\begin_inset Formula $A_{t},A_{t+1}$
-\end_inset
-
- are not the mtms of the owned assets but a certain state.
- This differentiates the problem of interpreting 
-\begin_inset Formula $\Delta A_{t+1}$
-\end_inset
-
- from that of understanding 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- itself.
- The transformation needs to be applied to 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- so that it represents the state in some way.
- The clusters in the tsne for the various dimensions the log-value of assets
- of different kinds seem to be due to to urban-rural differences as well
- - likely due to electricity.
- This only means that consumption in the urban areas encompasses electricity.
- How is that related with status consumption? Not having assets are compensated.
- So look at not having assets - the consumption, the proportion of total
- expenditure should be different for asset owners.
- The urban areas also have more income so it's only the proportion we can
- comment on - and not much else.
- Remember that we're ignoring bride price - which is not good - it should
- be included in household.
- 
-\end_layout
-
-\begin_layout Standard
-The rural urban differences hints that is we separate electric assets from
- the rest, we may see huge differences we have to remember it's not the
- split assets - but simply the increase in expenditure we want.
- In fact 
-\begin_inset Formula $\Delta A_{t+1}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-also does the job of viewing purchases of housing and assets in a common
- way of money.
- 
-\end_layout
-
-\begin_layout Standard
-When somebody buys news assets e.g.
- (0 chairs, 1 bed) -> (1 chair, 1 bed), then using the price at 
+ To avoid the measurement error associated with cost-estimate from 
 \begin_inset Formula $t$
 \end_inset
 
- is not feasible.
- The year 2010, for which we don't have the data would have this problem
- more directly unless we decide to stay with 
+ to 
 \begin_inset Formula $t+1$
 \end_inset
 
-prices.
+, we prefer to use the costs estimate at either 
+\begin_inset Formula $t$
+\end_inset
+
+ or 
+\begin_inset Formula $t+1$
+\end_inset
+
+.
+ Therefore the difference in cost of assets 
+\begin_inset Formula $a$
+\end_inset
+
+ could be either be 
+\begin_inset Formula $P_{a,t}\times(n_{a,t+1}-n_{a,t})$
+\end_inset
+
+ or 
+\begin_inset Formula $P_{a,t+1}\times(n_{a,t+1}-n_{a,t})$
+\end_inset
+
+ rather than 
+\begin_inset Formula $P_{a,t+1}\times n_{a,t+1}-n_{a,t}P_{a,t})$
+\end_inset
+
+.
+ If however, we choose the period 
+\begin_inset Formula $t$
+\end_inset
+
+, then we face another problem due to the sparsity of data.
+ As we rely on a district-level granuarity of data, there may not be enough
+ purchases in the district for us to estimate the cost of the item that
+ is not owned by the consumer in the period 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Even if we use the prices at 
+\begin_inset Formula $t+1$
+\end_inset
+
+ (i.e.
  
+\begin_inset Formula $P_{a,t+1}$
+\end_inset
+
+) as we're interested in the price for the new purchases (such that 
+\begin_inset Formula $n_{a,t}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{a,t+1}>0$
+\end_inset
+
+).
+ Thus the expenditure on new assets is 
+\begin_inset Formula $P_{a,t+1}$
+\end_inset
+
+
+\begin_inset Formula $\Delta n_{a,t+1}=P_{a,t+1}(n_{a,t+1}-n_{a,t})$
+\end_inset
+
+.
+ 
+\bar under
+We tried this but the results are not much different.
 \end_layout
 
 \begin_layout Standard
@@ -1324,27 +1325,13 @@ The way we do this is by average prices at different categories.
 rtname),summarise, q30=quantile(cost,.3) , q60=quantile(cost,.6)).
  Notice that we won't be using mtms here, because costs are less likely
  to change (even though they do).
+ 
+\bar under
+We tried this too but the result are not much different.
 \end_layout
 
 \begin_layout Standard
-If 
-\begin_inset Formula $t+1$
-\end_inset
-
-prices are used, then the trouble exists when some one has lost the assets.
- In the case (2 chairs, 1 bed) -> (0 chair, 1 bed) for example, we won't
- have the price for chair.
- Using would thus require that we ignore all lost asset cases.
-\end_layout
-
-\begin_layout Standard
-The results from all these seem to indicate that the changes in assets are
- simply noises.
- We sum up all the mtms with fdelta-smoothening (i.e.
- ignoring small changes to assets).
- The other option to observe the group of assets also smoothens to some
- extent - by observing changes only if someone is observing a new group.
- To make it more practical, such ignoring of data would require some backing
+To make it more practical, such ignoring of data would require some backing
  with a pseudo-panel.
 \end_layout
 
@@ -1483,6 +1470,10 @@ Using the above time-series equation, we can see how
 
  is not as easy available.
  
+\end_layout
+
+\begin_layout Standard
+Urban proxy is important.
 \end_layout
 
 \begin_layout Section*
