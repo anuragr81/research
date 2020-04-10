@@ -32,7 +32,7 @@
 \spacing single
 \use_hyperref false
 \papersize default
-\use_geometry true
+\use_geometry false
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -96,7 +96,7 @@ Utility and Intertemporal Substitution
 
 \begin_layout Standard
 The simplest instance of intertemporal substitution is a two period model
- where assets are meant to be dissolved at the end of the second period.
+ where assets are meant to be liquidated at the end of the second period.
  If one may assume that the relative preference of quality over assets does
  not change over time, the utility to be optimised by the consumer in the
  two-period model can be written as 
@@ -118,8 +118,12 @@ Here,
 \begin_inset Formula $\nu_{1},\nu_{2}$
 \end_inset
 
- are consumption on quality in periods 1 and 2 while that on assets in the
- respective periods (cost of needs is not assumed to carry utility )
+ are consumption on quality in periods 1 and 2 while 
+\begin_inset Formula $A_{1},A_{2}$
+\end_inset
+
+ are that on assets in the respective periods (assuming that needs do not
+ carry utility )
 \begin_inset Foot
 status open
 
@@ -134,7 +138,8 @@ An alternate equivalent form may be more intuitive
 \end_inset
 
 .
- Here, the wealth constraint can be written as 
+ In the typical solution of the intertemporal problem, the wealth constraint
+ could be written as 
 \begin_inset Formula $W=\frac{A_{2}}{(1+r)^{2}}+\frac{c_{1}-p_{1}}{1+r}+\frac{c_{2}-p_{2}}{(1+r)^{2}}$
 \end_inset
 
@@ -142,28 +147,32 @@ An alternate equivalent form may be more intuitive
 \begin_inset Formula $L=U-\lambda(W-\frac{A_{2}}{(1+r)^{2}}-\frac{c_{1}-p_{1}}{1+r}-\frac{c_{2}-p_{2}}{(1+r)^{2}})$
 \end_inset
 
-.
- The first order conditions (
+ leads to the first order conditions 
 \begin_inset Formula $\frac{\partial L}{\partial\nu_{1}}=\frac{\partial L}{\partial\nu_{2}}=\frac{\partial L}{\partial\lambda}=0$
 \end_inset
 
-) do not however simplify this optimisation as easily since one cannot guarantee
- that 
+.
+ Notice however that one cannot guarantee 
 \begin_inset Formula $\frac{\partial f(\nu_{2})}{\partial\nu_{1}}=0$
 \end_inset
 
- .
+ in the for the optimisation of 
+\begin_inset Formula $U$
+\end_inset
+
+.
  This is where the boundary condition of the final asset state being 0 (i.e.
  all of the consumer's assets being liquidated and consumed in the last
- period) as well as a discount factor for expected state can solve the optimisat
-ion problem.
- However, since we consider the final state of assets exogenous in our model,
- we take a slightly different approach with the formulation of a dynamic
- optimisation problem.
+ period) and a discount factor for expected state (whose Euler equations
+ are specified) help simplify the optimisation problem.
+ Since we consider the final state of assets exogenous in our model, we
+ take a slightly different approach with the formulation of a dynamic optimisati
+on problem.
 \end_layout
 
 \begin_layout Standard
-If the initial and final asset levels known, one may still write
+If the initial and final asset levels known, the Euler equations can be
+ written as follows:
 \end_layout
 
 \begin_layout Standard
@@ -178,7 +187,7 @@ A_{t+1} & =A_{t}(1+r)+i_{t+1}-\nu_{t+1}-\Psi_{t+1}
 \end_layout
 
 \begin_layout Standard
-Therefore the consumer may consume quality 
+Above signifies that the consumer may consume quality 
 \begin_inset Formula $\nu_{1}$
 \end_inset
 
@@ -186,7 +195,7 @@ Therefore the consumer may consume quality
 \begin_inset Formula $\nu_{2}$
 \end_inset
 
-(
+ ( 
 \begin_inset Formula $\nu_{0}$
 \end_inset
 
@@ -194,14 +203,14 @@ Therefore the consumer may consume quality
 \begin_inset Formula $\nu_{3...}$
 \end_inset
 
- are undefined) in the periods 1 and 2 where the cost of the needs she bears
- are 
+ being undefined) in the periods 1 and 2 while she bears the cost of the
+ needs 
 \begin_inset Formula $\Psi_{1},\Psi_{2}$
 \end_inset
 
- (respectively).
- Under the usual intertemporal conditions, she may save for asset growth
- to 
+ (in periods 1 and 2 respectively).
+ The intertemporal substitution setting means that she may save for asset
+ growth to 
 \begin_inset Formula $A_{1}$
 \end_inset
 
@@ -209,7 +218,7 @@ Therefore the consumer may consume quality
 \begin_inset Formula $A_{2}$
 \end_inset
 
-instead of consuming all her income 
+ instead of consuming all her income 
 \begin_inset Formula $i_{t}$
 \end_inset
 
@@ -222,7 +231,7 @@ instead of consuming all her income
 \begin_inset Formula $i_{1},i_{2}$
 \end_inset
 
-as 
+ as 
 \begin_inset Formula $c_{1},c_{2}$
 \end_inset
 
@@ -235,8 +244,8 @@ as
 \begin_inset Formula $A_{0}$
 \end_inset
 
-(the starting wealth), the rate of growth of money (interest rate) and an
- exogenous income process 
+ (the starting wealth), the rate of growth of money (interest rate) and
+ an exogenous income process 
 \begin_inset Formula $i_{t}$
 \end_inset
 
@@ -283,17 +292,21 @@ A_{2} & =A_{1}(1+r)+i_{2}-\Psi_{2}-\nu_{2}
 \begin_inset Formula $\Psi_{1},\Psi_{2}$
 \end_inset
 
- we intend to solve for the parameters that govern the utility function
+ we can then to solve for the parameters that govern the utility function
  additive over time 
 \begin_inset Formula $u=u_{1}+u_{2}$
 \end_inset
 
  .
- Here, 
+ 
+\end_layout
+
+\begin_layout Standard
+Here, 
 \begin_inset Formula $u_{1},u_{2}$
 \end_inset
 
- are utility measures over periods and 1 and 2 (respectively).
+ are utilities over periods and 1 and 2 (respectively).
  To motivate the dynamic optimisation approach, consider the consumer's
  choices in a one-period consumption - where she could either spend all
  income 
@@ -390,12 +403,12 @@ The changes in expected utility per period are what drive her behaviour
 \end_inset
 
  over all ages.
- The stability conditions imply that while consumers maintain different
- 
+ The conditions of stability of the steady state imply that while consumers
+ maintain different 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- , they are only a function of characteristics 
+ , they are a function of characteristics 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -409,10 +422,9 @@ and age
 
 \begin_layout Standard
 Here, the notion that a consumer may change her behaviour away from the
- current plan in the future is fallacious since the a consumer at different
- ages is equivalent to consumers of varied ages at a any point in time (see
- by Deaton's clarification of the so-called dynamic inconsistency problem
- 
+ current plan in the future is fallacious since a consumer observed at different
+ ages is equivalent to consumers of varied ages at any point in time (see
+ Deaton's clarification of the so-called dynamic inconsistency problem 
 \begin_inset Quotes eld
 \end_inset
 
@@ -432,7 +444,7 @@ Understanding Consumption
 \end_layout
 
 \begin_layout Subsection*
-Modeling peer effects
+Peer effects
 \end_layout
 
 \begin_layout Standard
@@ -505,9 +517,10 @@ noprefix "false"
 \begin_inset Formula $\rho$
 \end_inset
 
- has two competing roles for the consumer utility - first it allows the
- consumer to not require so much assets and second it requires the consumer
- to maintain a certain level that is required of the 
+ has two competing roles for the consumer utility - first, it allows the
+ consumer to not require so much assets.
+ Second, it requires the consumer to maintain a certain level that is required
+ of the 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -528,11 +541,15 @@ noprefix "false"
 
 \begin_layout Standard
 If peer effects were to be modeled explicitly, let's say through a distance
- from average of 
+ from average 
+\begin_inset Formula $\nu$
+\end_inset
+
+ calculated over 
 \begin_inset Formula $\rho$
 \end_inset
 
- (or a belonging to class like in Chai's example), then as long as the higher
+ (or a belonging to an ordinal class - see Chai), then as long as the higher
  status rank (part of 
 \begin_inset Formula $\rho$
 \end_inset
@@ -541,7 +558,7 @@ If peer effects were to be modeled explicitly, let's say through a distance
 \begin_inset Formula $\rho$
 \end_inset
 
- would also need to keep up the quality consumption to her wealtheir reference
+ would also need to keep up the quality consumption to her wealthier reference
  level.
  Therefore, those in the higher rank (e.g.
  higher status occupations etc.) would benefit both from being in a higher
@@ -549,40 +566,67 @@ If peer effects were to be modeled explicitly, let's say through a distance
 \begin_inset Formula $\rho$
 \end_inset
 
-) and from .
+) and from the higher asset possession that entails being in the high status
+ group (
+\begin_inset Formula $\rho$
+\end_inset
+
+).
  To avoid double-accounting for the effect that 
 \begin_inset Formula $\rho$
 \end_inset
 
- has on the utility, we need choose only one of 
+ has on the utility, we choose only the characteristics 
 \begin_inset Formula $\rho$
 \end_inset
 
- or the reference group over which the distance from average consumption
- is considered relevant for peer effect.
+ that form the reference group over which the distance from average consumption
+ is considered relevant for peer effects.
 \end_layout
 
 \begin_layout Standard
-Some recent literature finds an ordinal treatment of status more suitable
+Some recent literature has found an ordinal treatment of status more suitable
  for modeling status-related consumption.
  We believe that the properties of the average over the chosen personal
  characteristic - allows us to consider an ordinal treatment without losing
- the tractability of averages in estimation.If we are sure to consider only
- the 
+ the tractability of averages in estimation.
+ If we are sure to consider only the 
 \begin_inset Formula $\rho$
 \end_inset
 
  that can serve as a reference group for consumption, then the presence
- of peer effects implies that the consumer dose not worry about being lower
- than the average of a community she considers herself distant from.
- Instead the utility derived by being ahead of the local average (if quality
- or assets) is more significant .
- If we consider a market of just quality (and no assets), the model 
+ of peer effects only means that the consumer does not worry about having
+ less 
+\begin_inset Formula $\nu$
+\end_inset
+
+ than the average of a community (
+\begin_inset Formula $\rho$
+\end_inset
+
+ ) she does not consider herself a member of.
+ Instead, the utility derived by being ahead of the local average (of quality
+ or assets) i.e.
+ 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is more significant to her.
+ 
+\end_layout
+
+\begin_layout Standard
+Let's consider a market of just quality (and no assets) as an illustration.
+ Here, a model for utility through 
+\begin_inset Formula $\nu$
+\end_inset
+
+ can be written as 
 \begin_inset Formula $S=a\nu+b\int_{\rho}f_{\nu}d\nu$
 \end_inset
 
- is similar to the signaling model due to Ireland - in that the utility
- is a combination of private and public sub-utilities.
+ which is similar to the Ireland's signaling model - in the sense that the
+ utility is a combination of private and public sub-utilities.
  The decomposition of the model as 
 \begin_inset Formula $S=a\nu+b\int_{\rho}f_{\nu}d\nu=a(\nu-\int_{\rho}f_{\nu}d\nu)+(a+b)\int_{\rho}f_{\nu}d\nu)$
 \end_inset
@@ -604,33 +648,39 @@ Some recent literature finds an ordinal treatment of status more suitable
 \end_inset
 
 .
- The consumer thus maintains a both relative advantage and the collective
+ The consumer thus maintains both a relative advantage and the collective
  absolute advantage from quality - without issues of double-accounting.
  The approach would not change if difference in assets were introduced in
  the model.
 \end_layout
 
 \begin_layout Standard
-It is worth emphasising that the measurement of distance from needs - which
- we track with 
+It is worth emphasising that the measurement of distance from needs or 
+\shape italic
+excess
+\shape default
+ - which we track with 
 \begin_inset Formula $\nu$
 \end_inset
 
- is not meant to be interpreted as a measure of peer effects.
- The distance from needs in fact only encompasses the higher price of the
- items consumed and as such includes the spatial variation in prices of
- basic.
- The spatial variation is therefore a necessary control before one can hope
- to use 
+ is no direct measure of peer effects.
+ The distance from needs 
 \begin_inset Formula $\nu$
 \end_inset
 
- as a measure of peer effects.
- 
-\end_layout
+ in fact only encompasses the higher price of the items or their consumed
+ quantity.
+ As such 
+\begin_inset Formula $\nu$
+\end_inset
 
-\begin_layout Standard
-The characteristics 
+ is reflects spatial variation in prices as well and thus the controls for
+ spatial variation must be included in the 
+\begin_inset Formula $\rho$
+\end_inset
+
+ over which peer effects are considered.
+ More generally, the characteristics 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -638,29 +688,38 @@ The characteristics
 \begin_inset Formula $\int_{\rho}f_{\nu}d\nu$
 \end_inset
 
- is evaluated are driven by the particular dataset at hand - out of the
- characteristics like region, occupation or education, one may be more important
- than in rest in a particular context.
- 
-\bar under
-Since our goal is to view the relative preference of quality with respect
- to asset ownership, we avoid an assumption of how 
-\begin_inset Formula $\nu$
-\end_inset
-
- may be move together with 
-\begin_inset Formula $A_{t}$
-\end_inset
-
-
-\bar default
-by using the intertemporal substitution framework (similar to the permanent
- income approach).
+ is evaluated are driven by the particular dataset at hand.
+ Out of the characteristics like region, occupation or education, one may
+ be more important than the others rest in a particular context.
  
 \end_layout
 
+\begin_layout Subsection*
+Model
+\end_layout
+
 \begin_layout Standard
-Thus the model we use has the following utility function:
+As we introduce the assets in the model, the Euler equations of the intertempora
+l setting allow us to model to what extent the 
+\begin_inset Formula $\nu$
+\end_inset
+
+ may move together with 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+.Towards the goal of viewing the relative preference of quality with respect
+ to asset ownership, the intertemporal setting prevents an assumption of
+ comovement of 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ (on the lines of the permanent income approach).
+ Finally, therefore the model we use has the following utility function:
 \end_layout
 
 \begin_layout Standard
@@ -680,11 +739,17 @@ Here
 \end_inset
 
  is the age of the household.
- The model uses the assumption that the utility factor for quality 
-\begin_inset Formula $(\nu_{\tau})$
+ The model relies on the assumption that the utility factor for quality
+ 
+\begin_inset Formula $\nu_{\tau}$
 \end_inset
 
- changes both with age 
+ (i.e.
+ 
+\begin_inset Formula $1-a_{\tau}-b_{\rho}$
+\end_inset
+
+) changes both with age 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -692,19 +757,33 @@ Here
 \begin_inset Formula $\rho$
 \end_inset
 
-, the utility factor for needs only changes with 
+, the utility factor for needs 
+\begin_inset Formula $\Psi_{t}$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $a_{\tau}$
+\end_inset
+
+) changes with only 
 \begin_inset Formula $\tau$
 \end_inset
 
-(not with 
+ (not with 
 \begin_inset Formula $\rho$
 \end_inset
 
-) and the utility for assets 
+) and the factor for assets 
 \begin_inset Formula $A_{\tau}$
 \end_inset
 
- changes only with characteristics.
+ (i.e.
+ 
+\begin_inset Formula $b_{\rho}$
+\end_inset
+
+) changes only with characteristics.
  The last assumption rests upon the definition of assets being intergenerational
  (and thus long-term enough for their utility to change over time).
  The subscript 
@@ -715,7 +794,7 @@ Here
 \begin_inset Formula $a_{\tau}$
 \end_inset
 
-does not with personal characteristics the way 
+ does not change with personal characteristics the way 
 \begin_inset Formula $b_{\rho}$
 \end_inset
 
@@ -734,12 +813,17 @@ does not with personal characteristics the way
 \begin_inset Formula $\tau$
 \end_inset
 
-, but the total cost of needs does not vary with 
-\begin_inset Formula $\tau$
+, but due to the very definition of needs, the total cost of needs does
+ not vary with 
+\begin_inset Formula $\rho$
 \end_inset
 
 .
- Notice that since 
+ 
+\end_layout
+
+\begin_layout Standard
+Notice that since 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -749,9 +833,19 @@ does not with personal characteristics the way
 
  it also encompasses the peer effects arising out of the reference group
  identity.
- Any non-durable consumption other than what is driven by the assets and
- the basic-needs would be constitute the status-related consumption.
- The Euler equations for the intertemporal setting are: 
+ Also worth remembering is that any non-durable consumption other than what
+ is driven by the assets and the basic-needs would constitute any status-related
+ consumption.
+ The relationship between 
+\begin_inset Formula $\nu_{\tau}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{\tau}$
+\end_inset
+
+is made explicit with the Euler equations for the intertemporal setting:
+ 
 \end_layout
 
 \begin_layout Standard
@@ -789,8 +883,38 @@ Here, the income process
 \begin_inset Formula $\nu_{\tau+1}$
 \end_inset
 
-, the equation can be used for estimation.
- 
+, the following equation is useful for estimation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Collecting terms we have 
+\begin_inset Formula $\nu_{\tau+1}=\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}(A_{\tau}(1+r)+\delta_{\tau+1}-\nu_{\tau+1})$
+\end_inset
+
+, 
+\begin_inset Formula $\nu_{\tau+1}\frac{(1-a_{\tau})}{b_{\rho}}=\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}(A_{\tau}(1+r)+\delta_{\tau+1})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+: 
 \begin_inset Formula 
 \begin{alignat*}{1}
 \nu_{\tau+1} & =\frac{(1+r)(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}A_{t}+\frac{(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}\delta_{\tau+1}
@@ -831,38 +955,7 @@ A_{\tau+1} & =A_{\tau}(1+r)+\delta_{\tau+1}-\nu_{\tau+1}\label{eq:nut1regression
 \end_layout
 
 \begin_layout Standard
-Rearranging terms
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-Collecting terms in 
-\begin_inset Formula $\nu_{\tau+1}=\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}(A_{\tau}(1+r)+\delta_{\tau+1}-\nu_{\tau+1})$
-\end_inset
-
-, 
-\begin_inset Formula $\nu_{\tau+1}\frac{(1-a_{\tau})}{b_{\rho}}=\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}(A_{\tau}(1+r)+\delta_{\tau+1})$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- and obtaining
+Rearranging terms and obtaining 
 \begin_inset Formula $A_{\tau+1}=A_{\tau}(1+r)+\delta_{\tau+1}-\frac{1-a_{\tau}-b_{\rho}}{b_{\rho}}A_{\tau+1}$
 \end_inset
 
@@ -875,7 +968,8 @@ Collecting terms in
 \end_inset
 
 .
- This leads to the second equation that can be used for estimation:
+ As we wish to use the change in assets, this leads to the second equation
+ that is useful for estimation:
 \end_layout
 
 \begin_layout Standard
@@ -910,11 +1004,11 @@ noprefix "false"
 
 \end_inset
 
- show that 
+ confirm something intuitive 
 \begin_inset Formula $\nu_{\tau+1}+\Delta A_{\tau+1}=rA_{\tau}+\delta_{\tau+1}$
 \end_inset
 
- - implying that the income for the representative consumer to choose 
+ - that the income for the representative consumer to choose 
 \begin_inset Formula $\nu_{\tau+1}$
 \end_inset
 
@@ -932,11 +1026,11 @@ noprefix "false"
 
 \begin_layout Standard
 More exact specifications of the above equations can be derived if we can
- assume 
+ assume the form of 
 \begin_inset Formula $a(\tau)=\frac{1}{1-a_{\tau}}$
 \end_inset
 
- to be of a general decay e.g.
+ as a decay e.g.
  
 \begin_inset Formula $\text{\ensuremath{\tau^{a_{1}}e^{-\frac{\tau}{a_{2}}}}}$
 \end_inset
@@ -950,7 +1044,7 @@ More exact specifications of the above equations can be derived if we can
 \end_inset
 
  being constants).
- The first equation can be written as
+ If so, the first equation could be written as
 \end_layout
 
 \begin_layout Standard
@@ -992,12 +1086,12 @@ The econometric analysis however can proceed with the general form of
 \begin_inset Formula $A_{\tau}$
 \end_inset
 
-and disposable income 
+ and disposable income 
 \begin_inset Formula $\delta_{\tau+1}$
 \end_inset
 
  are considered.
- A case can be made for tobit due to the truncated nature of 
+ A case can be made for tobit due to the truncated distribution of 
 \begin_inset Formula $\Delta A_{\tau+1}$
 \end_inset
 
@@ -1022,7 +1116,7 @@ and disposable income
 \begin_inset Formula $\Psi_{\tau+1}$
 \end_inset
 
- with respective cross terms are presented in the Section.
+ with respective cross terms are presented as results in a subsequent section.
  
 \end_layout
 
@@ -1031,9 +1125,10 @@ Data
 \end_layout
 
 \begin_layout Standard
-The LSMS survey also records the assets used by the household.
- The list of assets includes everything from a mobile phone up to land or
- houses (see Figure 
+A particularly relevant data from the LSMS survey is that of the assets
+ used by the household.
+ The list of assets recorded in the survey includes everything from a mobile
+ phone to land or houses (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Costofassets2014"
@@ -1044,114 +1139,169 @@ noprefix "false"
 \end_inset
 
  for the median costs of these assets).
- The survey records the number of assets owned by the household, the reported
- cost at which the asset was purchased and the price that the household
+ The details of records include the number of assets owned by the household,
+ the reported cost at which the asset was purchased and the price the household
  expects by selling the asset in the market at the time of the survey.
  While these data fields are promising for the intertemporal setting we
- wish to make use of, the severe measurement errors with the cost or the
- current price (referred to as marked-to-market average or mtm average in
- the current discussion).
+ wish to make use of, a refinement of this data is necessary due to the
+ measurement errors with the costs and the current price (referred to as
+ marked-to-market average or mtm average in the current discussion).
 \end_layout
 
 \begin_layout Standard
-The problem with the reported cost is that it is based on the consumer recall
- - which may change over a period of two years - the cost of the same asset
- as recorded in 2012 may be significantly different from the cost recorded
- in 2014.
- The mtm average on the other hand is less susceptible to the issue as it
- is not recalled from a consumer's memory and reflects the perceived depreciatio
-n of the asset over time instead.
- Still, as the mtm average is a value averaged over a number of assets owned,
- the cost incurred by the purchase of a new asset is not directly observed
- in the mtm average and relies on the field indicating number of assets.
- 
+The issue with the reported cost is typical of those based on a consumer
+ recall.
+ Recorded by the survey at two time-points spread across two years (let's
+ call the time points 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $t+1$
+\end_inset
+
+), these reported costs may change over a period of two years - i.e.
+ the reported cost of the same asset in 2012 may be significantly different
+ from the cost recorded in 2014.
+ To some extent, the reported cost of the assets follows the mtm average
+ which itself is less susceptible to the issue as it is not recalled from
+ consumer's memory and reflects the perceived depreciation of the asset
+ over time instead.
+ The mtm average of the asset (like the cost of the asset) is a value averaged
+ over the number of assets owned by consumer.
+ Therefore, the cost incurred by the purchase of a new asset - that we're
+ interested in - is not directly observed in the mtm average and relies
+ on the field indicating number of assets.
 \end_layout
 
 \begin_layout Standard
-The value of the new purchases therefore rely on the number of assets observed
- in the survey.
- We recognise an asset purchase only when we a difference in the number
+As the value of new purchases relies on the number of assets observed in
+ the survey, we detect an asset purchase only when a difference in the number
  of assets over the successive years is observed.
  The difference between the mtm average is thus recorded as part of new
  assets only as long as we observe a difference in number of assets in the
- two-year period.
- The number of assets observed however are also subject to measurement error
- and necessitate some further refinements to the cost of assets thus calculated.
- More specifically, a household may not always count the assets accurately.
- But since we are interested in the the new asset purchases for our analysis,
- someone buying their first music players is far more important than someone
- adding to their collection of music system.
- Therefore, the asset number changes are counted towards change in assets
- only if they change from 0 to 1 or substantially (3 to 5 or to 6,7...
+ two-year period (i.e.
+ from 
+\begin_inset Formula $t$
+\end_inset
+
+ to 
+\begin_inset Formula $t+1$
+\end_inset
+
+).
+ The number of assets observed however is also subject to some measurement
+ error and requires some further refinements to the cost of assets thus
+ calculated.
+ Since we are interested in the the new asset purchases for our analysis,
+ however, someone buying their first music player is less susceptible to
+ counting errors than someone adding to their collection of music systems.
+ The asset number changes are counted towards change in assets only if they
+ change from 0 to 1 or substantially (3 to 5 or to 6,7...
  etc.).
- As we intend to calculate the total cost of a new asset, the effect of
- the measurement error with the number of assets is more drastic for more
- expensive assets such a house.
- Thankfully, we also observe whether the individual owns a house or not
+ 
+\end_layout
+
+\begin_layout Standard
+A possible issue with a calculation of asset cost changes as outlined above
+ is that the measurement error with the number of assets may get magnified
+ for more expensive assets such as house.
+ However, since we also observe whether the individual owns a house or not
  from the household questionnaire (which records the housing-status through
- a direct question).
- .
- One The idea of ownership for houses is also complicated because the individual
-s seem to report house as assets even though are merely residing it.
- They are not owners but users of the assets.
+ a direct question), we can confirm that this error is not significant after
+ reconcile the calculated differences with the data from the household questionn
+aire.
+ What this reconciliation does remind us however is that the assets recorded
+ in the survey indicate whether the household uses (or has access to) the
+ assets rather than what it owns
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A lot of households in rented or employer-provided houses report having
+ a house.
+\end_layout
+
+\end_inset
+
+.
+ Since rental options - except for housing - are fairly limited in the developin
+g economies, this does not pose a significant measurement error.
 \end_layout
 
 \begin_layout Standard
-This is why we verify the house-ownership with the For other assets less
- expensive than housing (land, furntiure such as Sofa, tables etc.) , the
- invididuals may record the total number of posessesion in some error but
- does not forget that she has the assets completely so much.
- This allows us to circumvent the measurement error with the number of assets.
- 
-\end_layout
+A final caveat for the data is the presence of split households.
+ A significant portion of the households may split into two or more households.
+ Considering a split household as the terminal state of a household, we
+ don't consider the parent household while calculating asset differences
+ from the year 
+\begin_inset Formula $t$
+\end_inset
 
-\begin_layout Standard
-Further, the assets are divide amongst two or more households which a household
- split into.
- 
-\end_layout
+ to 
+\begin_inset Formula $t+1$
+\end_inset
 
-\begin_layout Subsection*
-Diminishing Returns in Assets Ownership?
-\end_layout
+ if it has terminated in the year 
+\begin_inset Formula $t+1$
+\end_inset
 
-\begin_layout Standard
-That we should focus only on new purchases - as we're interested in the
- transition to ownership band as soon as one has an item, the addition of
- more chairs to someone who already has a chair is not much of a concern
- for us.
-\end_layout
+.
+ In other words, asset differences are included only as long as the households
+ have not split in the period 
+\begin_inset Formula $t\rightarrow t+1$
+\end_inset
 
-\begin_layout Standard
-As explained in the discussion of the model, we're interested in asset ony
- as long as they can potentially be transferred (we can verify these in
- the split of the households).
- In the data we use in the current chapter, we consider any asset more expensive
- than bed a furniture to be transferred to the next generation.
- Some assets that are not life-long assets e.g.
+.
+ As explained in the discussion of the model, we only wish to consider assets
+ that can can potentially transferred over generations (we can verify these
+ when the households are split).
+ In the Tanzanian LSMS data, we consider any asset more expensive than bed
+ as eligible to be transferred to the next generation.
+ This can be verified with the data on split household.
+ The assets in the survey that are not life-long assets e.g.
  mobile phones, dish-tv etc.
  are not considered in the asset changes 
 \begin_inset Formula $\Delta A_{\tau+1}=A_{\tau+1}-A_{\tau}$
 \end_inset
 
 .
-\end_layout
+ See Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Costofassets2014"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Subsection*
-Use of groups
+\end_inset
+
+ for a cost( median ) order of the assets recorded in 2014.
 \end_layout
 
 \begin_layout Standard
-Given our interest in purchases of new items only if someone became a new
- buyer of an item, one could go a little further with the smoothening of
- data and find that a new buyer of a sewing machine or music system is less
- interesting than being a new buyer of an electrial equipment item or furniture.
- BUt more signiifcantly, such a grouping can help with underrepresentattion
- of some assets (particularly the agrarian assets in the survey).
- It may make sense to count paricular animals - chicken, donkeys recorded
- in the survey into into livestock.
- Aggregating into such groups helps us compare assets of different groups
- - but we stick to mtm whicih our model is concerned with.
+For robustness tests to our conclusions, we attempt to both sharpen and
+ smoothen the data on assets by considering purchases within coarser groups
+ such as electronic items, furniture etc.
+ and by turning off the effect of depreciation in the asset difference calculati
+on respectively.
+ The first test to sharpen the data is with classification of new assets
+ into coarser categories - which is useful in its own right to interpret
+ the distribution of functional assets - since counting the instances of
+ purchases of just any electronic item may make more sense than the purchase
+ of individual items such as a music system or a CD player.
+ The appeal of the grouping approach is also due the extreme differences
+ in urban and rural markets in an economy like Tanzania.
+ Grouping the assets into agricultural electronic, electric and livestock
+ categories accentuates the minor additions to one's assets - by treating
+ cheaper assets purchased by the consumer the same treatment as more expensive
+ assets.
+ The downside with such a grouping is of course this very collation of assets
+ with vast differences in prices within a single group (cd-player and music
+ system for example may have vast differences in prices but could be counted
+ as a new electronic asset purchased).
+ As our primary intention has been to get the total asset cost we have refrained
+ from using such grouping as a primary means of analyses.
 \end_layout
 
 \begin_layout Standard
@@ -1169,9 +1319,6 @@ status open
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1195,21 +1342,15 @@ Cost of assets (2014)
 \end_layout
 
 \begin_layout Standard
-We find that in groups, numbers are not reliable because most people come
- around to having non-zero numbers.
- It is useful to look at 
-\series bold
-non-split houses 
-\series default
-and use the prices from 2012.
- This would mimise the the effect of measurement errors for mtm.
- Remember that we're only interested in new assets, therefore new assets
- can be focussed on.
- 
-\end_layout
-
-\begin_layout Standard
-Consider what this would like like given the asset 
+The method to smoothen the data on the other hand has clearer advantages.
+ As we have noted earlier, in every two years of the survey, the mtm-average
+ by the household is susceptible to both how the household interviewee may
+ estimate the change in the market and whether the interviewee from the
+ household in a particular year is different from the interviewee household
+ member in another year.
+ The assets data can thus be smoothened by separating the effect of these
+ factors if we can consider only only one year's prices.
+ To explain this with an example, consider an asset 
 \begin_inset Formula $a$
 \end_inset
 
@@ -1221,7 +1362,7 @@ Consider what this would like like given the asset
 \begin_inset Formula $P_{a,t}$
 \end_inset
 
- is the reported cost/mtm of the asset at time 
+ is the reported average mtm of the asset at time 
 \begin_inset Formula $t$
 \end_inset
 
@@ -1229,8 +1370,9 @@ Consider what this would like like given the asset
 \begin_inset Formula $n_{a,t}$
 \end_inset
 
- the total number of assets.
- To avoid the measurement error associated with cost-estimate from 
+ is the total number of assets the household possesses.
+ To avoid the measurement error associated with the difference in the estimate
+ from the year 
 \begin_inset Formula $t$
 \end_inset
 
@@ -1238,7 +1380,7 @@ Consider what this would like like given the asset
 \begin_inset Formula $t+1$
 \end_inset
 
-, we prefer to use the costs estimate at either 
+, we prefer to use the mtm-average estimate (price) at either from 
 \begin_inset Formula $t$
 \end_inset
 
@@ -1260,23 +1402,80 @@ Consider what this would like like given the asset
 \end_inset
 
  rather than 
-\begin_inset Formula $P_{a,t+1}\times n_{a,t+1}-n_{a,t}P_{a,t})$
+\begin_inset Formula $n_{a,t+1}P_{a,t+1}-n_{a,t}P_{a,t}$
 \end_inset
 
 .
- If however, we choose the period 
+ Choosing the period 
 \begin_inset Formula $t$
 \end_inset
 
-, then we face another problem due to the sparsity of data.
- As we rely on a district-level granuarity of data, there may not be enough
- purchases in the district for us to estimate the cost of the item that
- is not owned by the consumer in the period 
+ however leads us to another issue due to the sparsity of data.
+ As we rely on a district-level granularity of data, not only would we not
+ have the price reported for an item not owned by the consumer in period
+ 
+\begin_inset Formula $t$
+\end_inset
+
+, there may not be enough purchases in the district for us to estimate the
+ cost of the item that consumer in the period 
+\begin_inset Formula $t$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $P_{a,t}$
+\end_inset
+
+)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+One way to circumvent this is to classify all assets into cheap, middle-range
+ and expensive categories based on cost quantiles in the period 
+\begin_inset Formula $t$
+\end_inset
+
+ and then determine the category of the asset purchased in 
+\begin_inset Formula $t+1$
+\end_inset
+
+ based on its price in 
+\begin_inset Formula $t+1$
+\end_inset
+
+.
+ The price at time 
+\begin_inset Formula $t$
+\end_inset
+
+ would then by the price of matching category (expensive, middle-range or
+ cheap) at time 
 \begin_inset Formula $t$
 \end_inset
 
 .
- Even if we use the prices at 
+ Since, we may as well use the price at 
+\begin_inset Formula $t+1$
+\end_inset
+
+, this indirect methods is rendered unnecessary.
+\end_layout
+
+\end_inset
+
+.
+ As we're interested in the price for the new purchases (i.e.
+ cases such that 
+\begin_inset Formula $n_{a,t}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{a,t+1}>0$
+\end_inset
+
+), the prices at 
 \begin_inset Formula $t+1$
 \end_inset
 
@@ -1285,16 +1484,8 @@ Consider what this would like like given the asset
 \begin_inset Formula $P_{a,t+1}$
 \end_inset
 
-) as we're interested in the price for the new purchases (such that 
-\begin_inset Formula $n_{a,t}=0$
-\end_inset
-
- and 
-\begin_inset Formula $n_{a,t+1}>0$
-\end_inset
-
-).
- Thus the expenditure on new assets is 
+) do not suffer with this issue.
+ The expenditure on new assets calculated is thus 
 \begin_inset Formula $P_{a,t+1}$
 \end_inset
 
@@ -1302,37 +1493,10 @@ Consider what this would like like given the asset
 \begin_inset Formula $\Delta n_{a,t+1}=P_{a,t+1}(n_{a,t+1}-n_{a,t})$
 \end_inset
 
-.
- 
-\bar under
-We tried this but the results are not much different.
-\end_layout
-
-\begin_layout Standard
-The way we do this is by average prices at different categories.
- So, there would be cheap tv, a medium range tv and an expensive tv.
- When somebody had an expensive tv and but has none, then the current expensive
- tv's price (determined from some other users are applied).
- If we were using 
-\begin_inset Formula $t$
-\end_inset
-
- prices then (0 chair, 1 bed) -> (1 chair, 1 bed) would be calculated the
- same way.
- The expensive asset is one which is more expensive than the top 60% of
- all assets.
- Prices are thus simply ddply(subset(a2014,number>0 & cost>0 & !is.na(cost)),.(sho
-rtname),summarise, q30=quantile(cost,.3) , q60=quantile(cost,.6)).
- Notice that we won't be using mtms here, because costs are less likely
- to change (even though they do).
- 
-\bar under
-We tried this too but the result are not much different.
-\end_layout
-
-\begin_layout Standard
-To make it more practical, such ignoring of data would require some backing
- with a pseudo-panel.
+ a quantity that considers an mtm change less affected by the measurement
+ error in the estimate provided by the household member interviewee.
+ In the end, we also plan to confirm the results obtained with a pseudo-panel
+ approach.
 \end_layout
 
 \begin_layout Section*
@@ -1345,25 +1509,7 @@ Estimation
 Difference across quantiles would indicate different mobility in societies.
  
 \bar default
-Notice that both
-\begin_inset Formula $\delta_{\tau+1}$
-\end_inset
-
- and 
-\begin_inset Formula $A_{\tau+1}$
-\end_inset
-
- are both dependent on 
-\begin_inset Formula $\tau$
-\end_inset
-
- .
- This means that every age would correspond to a different coefficient 
-\begin_inset Formula $\delta_{\tau+1}$
-\end_inset
-
-.
- Since 
+Since 
 \begin_inset Formula $\delta_{\tau}$
 \end_inset
 
@@ -1390,33 +1536,6 @@ Notice that both
  We would expect more utility through quality in the early years and less
  during the middle-ages - followed by a mild increase in preference for
  quality in the later years.
- A general fitting function (e.g.
- 
-\begin_inset Formula $f(x)=x^{a}e^{-x^{b}}$
-\end_inset
-
-) can be provided but we should provide both a simple-form and one that
- adds up to the past utilities.
- 
-\bar under
-A common function is the discounting function 
-\begin_inset Formula $\frac{1}{(1+\delta)^{\tau}}$
-\end_inset
-
- 
-\bar default
-.
- We believe that this relation should depend on needs 
-\begin_inset Formula $\eta$
-\end_inset
-
- - which itself is attached with life-cycle - the effect of age is aligned
- with the trajectory of needs.
- One simple option is to keep the form 
-\begin_inset Formula $e^{-\frac{(x-30)^{2}}{a}}$
-\end_inset
-
-.
  We could estimate 
 \begin_inset Formula $\frac{a_{\tau}}{b_{\tau}}$
 \end_inset
@@ -1474,6 +1593,10 @@ Using the above time-series equation, we can see how
 
 \begin_layout Standard
 Urban proxy is important.
+\end_layout
+
+\begin_layout Standard
+Bride price cannot be ignored.
 \end_layout
 
 \begin_layout Section*
