@@ -1730,7 +1730,7 @@ We consider the minimum requirements for commodities such as food, clothing,
  The details of the this process are explained in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Data"
+reference "subsec:Needs-Cost"
 plural "false"
 caps "false"
 noprefix "false"
@@ -3060,9 +3060,9 @@ Collecting terms we have
 
 : 
 \begin_inset Formula 
-\begin{alignat*}{1}
-\nu_{\tau+1} & =\frac{(1+r)(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}A_{t}+\frac{(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}\delta_{\tau+1}
-\end{alignat*}
+\begin{alignat}{1}
+\nu_{\tau+1} & =\frac{(1+r)(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}A_{t}+\frac{(1-a_{\tau}-b_{\rho})}{1-a_{\tau}}\delta_{\tau+1}\label{eq:nut1regression}
+\end{alignat}
 
 \end_inset
 
@@ -3090,7 +3090,7 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-A_{\tau+1} & =A_{\tau}(1+r)+\delta_{\tau+1}-\nu_{\tau+1}\label{eq:nut1regression}
+A_{\tau+1} & =A_{\tau}(1+r)+\delta_{\tau+1}-\nu_{\tau+1}\label{eq:nut1derivation}
 \end{alignat}
 
 \end_inset
@@ -3131,7 +3131,7 @@ Rearranging terms and obtaining
 Notice that Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:nut1regression"
+reference "eq:nut1derivation"
 plural "false"
 caps "false"
 noprefix "false"
@@ -3283,17 +3283,237 @@ name "sec:EmpiricalAnalysis"
 Empirical Analysis
 \end_layout
 
-\begin_layout Subsection
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Data"
+\begin_layout Standard
+Since cost of needs 
+\begin_inset Formula $\Psi_{t}$
+\end_inset
+
+, income 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ and the total assets 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ - which serve as the input to the estimation of the Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nut1regression"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-Data
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dAt_regression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, are observed independently.
+ The extraction of the data for these inputs are described in the Sections
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Needs-Cost"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Income-Process-Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Assets-Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Needs-Cost"
+
+\end_inset
+
+Cost of Needs
+\end_layout
+
+\begin_layout Standard
+The cost of needs 
+\begin_inset Formula $\Psi_{t}$
+\end_inset
+
+ depende on the particular locality where the household is located.
+ Given the categories of consumption in Tanzania i.e.
+ food, household, energy and transport, we calculate the cost of basic needs
+ as the cost a minimal requirements in every category.
+ As an example, we use the commodity sub-groups of carbohydrates, fat, protein
+ and fruits-vegetables in the food category.
+ The cost of this minimal basket per head - which is composed of the recommended
+ nutrient quantities - are then calculated in each region and district based
+ on the prices of the items recorded in the survey (which records the prices
+ at the district level as well).
+ For most regions, as it turns out, this minimum-cost basket could be a
+ diet of cassava, cooking-oil, eggs and bananas - as these are most often
+ the cheapest items in their respective sub-group (
+\begin_inset Formula ${carb,fact,protein,fruitsveg}$
+\end_inset
+
+).
+ As one would expect, the cost of this basket thus calculated is much higher
+ in the urban areas than in the rural areas (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BasketsRegions2010"
+
+\end_inset
+
+) .
+ The cost thus calculated is multiplied with the (adjusted) number of members
+ in the family to arrive at the food component of 
+\begin_inset Formula $\Psi_{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Using a similar treatment for energy category, we find that the minimum
+ requirements would be met for consumers in Tanzania with kerosene - given
+ its ubiquity and comparatively low price with respect to sparsely available
+ electricity in the country.
+ Here, a calorie quota for a the preparation of a typical meal and lighting
+ is used - leading us to use the cost of a certain amount of kerosene (or
+ a cheaper alternative) per household when available.
+ For household, the cost of the minimal house in the locality (amortised
+ over the average working life) and the cost of clothing per year is used.
+ For transport, we use public-transport costs and petrol consumption costs
+ depending on where the consume resides and whether the consumer owns a
+ car or not.
+ 
+\end_layout
+
+\begin_layout Standard
+Indeed a very important part of the needs calculation is the adjustment
+ of 
+\begin_inset Formula $\Psi_{t}$
+\end_inset
+
+ based on the assets the consumer.
+ It is worth clarifying that this inductive effect of having assets is not
+ consider part of the excess control 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ .
+ Someone spending a lot on electricity is therefore not seen as carrying
+ any status in the model.
+ Any status that electricity user may indicate to those who don't have electrici
+ty is through the electrical assets they posses.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Income-Process-Data"
+
+\end_inset
+
+Income Process
+\end_layout
+
+\begin_layout Standard
+To estimate the income process 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+, we use the reported income from primary occupations in the Tanzania LSMS
+ data over the years 2010, 2012 and 2014.
+ One limitation of the Tanzanian LSMS data is that it does not provide income
+ data for every household head for which the consumption diary and assets
+ are recorded.
+ Another limitation of the data set is that a household that is visited
+ in a particular year is less likely to be visited after more than 2 years.
+ This means that while a significant number households would be common between
+ 2010 and 2012 as well as between 2012 and 2014, very few households that
+ were visited in 2010 would be visited the third time in 2014 (in fact less
+ than 100 household from the survey in 2010 seem to be visited in 2014 for
+ income survey).
+ Such a lack of a true panel data compels us to prepare a pseudo-panel for
+ the calibration of the income process.
+ The pseudo-panel we prepare is based on the similarity of the number of
+ adults, the number of children, the year of birth of the adults, the occupation
+ and education levels
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A minor issue encountered while the preparation of the pseudo-panel related
+ to the age of the household members was circumvented with an approximate
+ matching of that year-of-birth values.
+ The LSMS community survey appears to have recorded the year-of-birth values
+ for individuals in years 2010 and 2012 but the age variable is recorded
+ instead for the year 2014.
+ Matching the year-of-birth values from 2012 with the YOB values inferred
+ from the recorded age was made possible by allowing a tolerance for matching
+ the YOB values for the preparation of the pseudo-panel.
+\end_layout
+
+\end_inset
+
+.
+ Since the Hausman tests point to the inconsistency of the RE Gestimator
+ for 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ , we use a FE GLS estimator for the pseudo-panel.
+ That said, we do favour the use of RE estimator when the effect of time-invaria
+nt cross-sectional variables are considered important (see Bell et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BellJonesFECrossSection2015"
+literal "true"
+
+\end_inset
+
+ for a discussion).
+\end_layout
+
+\begin_layout Standard
+.
 \end_layout
 
 \begin_layout Subsubsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Assets-Data"
+
+\end_inset
+
 Data on Assets
 \end_layout
 
@@ -3672,125 +3892,6 @@ One way to circumvent this is to classify all assets into cheap, middle-range
  approach.
 \end_layout
 
-\begin_layout Subsection
-Analysis
-\end_layout
-
-\begin_layout Standard
-Since needs 
-\begin_inset Formula $\eta_{t}$
-\end_inset
-
-, income 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- and the quality constraint 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- are independent of the estimation of the Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstoch"
-
-\end_inset
-
-, we treat their estimation as separate sub-problems.
- For the estimation of the needs process 
-\begin_inset Formula $\eta(t,T)$
-\end_inset
-
- , estimate the function described in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:NeedsProcess"
-
-\end_inset
-
- .
- The function also accommodates the observation that the families in the
- developing countries often have older members living within the household
- due to the joint-family structure prevalent in the societies ( observe
- that the number of children living in a household does not decline sharply
- with age - see Figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:NumberChildMinYOB"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:NumberChildhhhYOB"
-
-\end_inset
-
-).
- Instead of using the number of children as a measure of the needs of the
- household, we estimate 
-\begin_inset Formula $\eta(t,T)$
-\end_inset
-
- using the total number of dependents for the individual household head
- over her lifetime.
- For the empirical analysis, adult dependents in a household are those who
- are older than the reported household head
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-A more descriptive model for the average size of the family may need fertility
- rate and current population.
- As our estimation is over near-term data, we assume a constant structure
- of 
-\begin_inset Formula $\eta(t,T)$
-\end_inset
-
- - assuming that the age would determine the expected family member size
- (this isn't true in the longer-run as the population structure, fertility
- rates change all are subject to change over time).
- 
-\end_layout
-
-\end_inset
-
-.
- Estimating this form gives us the function 
-\begin_inset Formula $\eta(t)=\mu te^{-\kappa t^{2}}$
-\end_inset
-
- (where age is 
-\begin_inset Formula $t$
-\end_inset
-
- and the number of household members is 
-\begin_inset Formula $\eta(t)$
-\end_inset
-
- we observe 
-\begin_inset Formula $\mu=0.08$
-\end_inset
-
- and 
-\begin_inset Formula $\kappa=-9\times10^{-5}$
-\end_inset
-
- i.e.
-\begin_inset Formula $\eta(t)=(.08)te^{-9\times10^{-5}t^{2}}$
-\end_inset
-
- is the function to be used in Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstoch"
-
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Standard
 \begin_inset Float figure
 placement p
@@ -3949,110 +4050,6 @@ Number of members in the household vs the age group of the main household
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Needs are related to consumption 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- through their cost in the particular locality where the household is located.
- Given the categories of consumption in Tanzania i.e.
- food, household, energy and transport, we calculate the cost of basic needs
- as the cost a minimal requirements in every category.
- As an example, we use the commodity sub-groups of carbohydrates, fat, protein
- and fruits-vegetables in the food category.
- The cost of this minimal basket - which is composed of the recommended
- nutrient quantities - are then calculated in each region and district based
- on the prices of the items recorded in the survey (which records the prices
- at the district level as well).
- For most regions, as it turns out, this minimum-cost basket could be a
- diet of cassava, cooking-oil, eggs and bananas - as these are most often
- the cheapest items in their respective sub-group (
-\begin_inset Formula ${carb,fact,protein,fruitsveg}$
-\end_inset
-
-).
- As one would expect, the cost of this basket thus calculated is much higher
- in the urban areas than in the rural areas (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:BasketsRegions2010"
-
-\end_inset
-
-) .
- Using a similar treatment for energy category, we find that the minimum
- requirements would be met for consumers in Tanzania with kerosene - given
- its ubiquity and comparatively low price with respect to sparsely available
- electricity in the country.
- Here, a calorie quota for a the preparation of a typical meal and lighting
- is used - leading us to use the cost of a certain amount of kerosene (or
- a cheaper alternative) when available.
- For household, the cost of the minimal house in the locality (amortised
- over the average working life) and the cost of clothing per year is used.
- For transport, we use public-transport costs and petrol consumption costs
- depending on where the consume resides and whether the consumer owns a
- car or not.
- 
-\end_layout
-
-\begin_layout Standard
-To estimate the income process, we use the reported income from primary
- occupations in the Tanzania LSMS data over the years 2010, 2012 and 2014.
- One limitation of the Tanzanian LSMS data is that it does not provide income
- data for every household head for which the consumption diary and assets
- are recorded.
- Another limitation of the data set is that a household that is visited
- in a particular year is less likely to be visited after more than 2 years.
- This means that while a significant number households would be common between
- 2010 and 2012 as well as between 2012 and 2014, very few households that
- were visited in 2010 would be visited the third time in 2014 (in fact less
- than 100 household from the survey in 2010 seem to be visited in 2014 for
- income survey).
- Such a lack of a true panel data compels us to prepare a pseudo-panel for
- the calibration of the income process.
- The pseudo-panel we prepare is based on the similarity of the number of
- adults, the number of children, the year of birth of the adults, the occupation
- and education levels
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-A minor issue encountered while the preparation of the pseudo-panel related
- to the age of the household members was circumvented with an approximate
- matching of that year-of-birth values.
- The LSMS community survey appears to have recorded the year-of-birth values
- for individuals in years 2010 and 2012 but the age variable is recorded
- instead for the year 2014.
- Matching the year-of-birth values from 2012 with the YOB values inferred
- from the recorded age was made possible by allowing a tolerance for matching
- the YOB values for the preparation of the pseudo-panel.
-\end_layout
-
-\end_inset
-
-.
- Since the Hausman tests point to the inconsistency of the RE Gestimator
- for 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- , we use a FE GLS estimator for the pseudo-panel.
- That said, we do favour the use of RE estimator when the effect of time-invaria
-nt cross-sectional variables are considered important (see Bell et al 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "BellJonesFECrossSection2015"
-literal "true"
-
-\end_inset
-
- for a discussion).
-\end_layout
-
-\begin_layout Standard
-.
 \end_layout
 
 \begin_layout Section
