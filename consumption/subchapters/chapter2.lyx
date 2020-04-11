@@ -1716,22 +1716,39 @@ literal "true"
 We consider the minimum requirements for commodities such as food, clothing,
  housing and employment and calculate the costs associated with them in
  the local context (at a district level in the Tanzanian data - for example).
- The cost of the basic requirements per head 
-\begin_inset Formula $\Psi_{t}$
+ The needs are then adjusted based on the assets one possesses.
+ If a household possesses a car, then the needs of the household are incremented
+ with the petrol consumption per year.
+ Thus, some cost of needs (e.g.
+ for food) are multiplied by the number of household members in the family
+ while other needs are calculated per household to obtain the net cost of
+ needs 
+\begin_inset Formula $\Psi$
 \end_inset
 
- thus calculated are then multiplied with the number of family members 
-\begin_inset Formula $\eta_{t}$
+ for a household.
+ The details of the this process are explained in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Data"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- to obtain the cost of needs of the household (
-\begin_inset Formula $\Psi_{t}\cdot\eta_{t}$
-\end_inset
+.
+ 
+\end_layout
 
-).
- Relying only on total costs associated with a commodity (i.e.
- without using the quantity consumed), this notion of quality cannot differentia
-te between the consumption of a higher quantity and of a higher quality.
+\begin_layout Standard
+Relying only on total costs associated with a commodity (i.e.
+ without using the quantity consumed), this notion of quality or 
+\shape italic
+excess 
+\shape default
+cannot differentiate between the consumption of a higher quantity and of
+ a higher quality.
  Consider for example, a household with a single member having consuming
  the quantity 
 \begin_inset Formula $q_{1}$
@@ -1766,46 +1783,11 @@ te between the consumption of a higher quantity and of a higher quality.
 
 ).
  However, as we do know whether the range of goods within a commodity are
- available in the region or not, it may be possible to draw conclusions
- about over-consumption and higher-quality consumption for a group of consumers
+ available in the region or not, it is possible to draw conclusions about
+ over-consumption and higher-quality consumption for a group of consumers
  - separated by region or other characteristics - who face different ranges
  of goods available within a commodity.
  This is particularly so when using pseudo-panel analyses for the data.
-\end_layout
-
-\begin_layout Standard
-Whether we model the needs of the household as a unit that lives forever
- (dynasty) or as a household individual with a finite lifetime 
-\begin_inset Formula $T$
-\end_inset
-
-, the evolution of needs as the number of living family members at a certain
- period must be aligned with the population trends in the economy.
- In the particular context of a developing country, we find that the expected
- path of needs 
-\begin_inset Formula $\eta(t,T)$
-\end_inset
-
- is influenced with a high population growth rate and prevalence of a joint-fami
-ly structure.
- Based on the data observed in the sub-Saharan African countries, we consider
- the functional form 
-\begin_inset Formula $\eta(t,T)=\mathbbm{1}_{t<T}\mu te^{-\kappa t^{2}}$
-\end_inset
-
- to map the age 
-\begin_inset Formula $t$
-\end_inset
-
- of the household head to the expected value of number of members of the
- household at time time (i.e.
- 
-\begin_inset Formula $\eta(t,T)$
-\end_inset
-
-).
- We assume that this trajectory of needs is known to the consumer and that
- she adjusts her consumption according to this trajectory.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1813,80 +1795,36 @@ Income Process
 \end_layout
 
 \begin_layout Standard
-
-\bar under
 The goal of using an income process in the model is to provide an exogenous
  way to differentiate increase in household incomes from the accumulation
  of assets.
  It is the substitution of the latter with consumption that is crucial to
- our interpretation of status consumption as a quality scale.
-\end_layout
-
-\begin_layout Standard
-Unlike in PIH, we hope that accumulaton of long-term assets have an influence
- on the subsitution between savings and quality.
- This should be included in the intertemporal settings just alongside with
- permanent income - which too is a risk-adjusted income (only that it focuses
- on the monetary risk i.e.
- the volatility in income).
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-We attach no uncertainty to the growth of income in the non-stochastic model.
- Thus the growth rate would remain the same forever and is known to the
- consumer.
- In the stochastic model, on the other hand, one could let the consumer
- maintain two uncertainties - the first being in how her annual income unfolds
- in her future years and the second before how she becomes part of a stable
- high-consumption club through means other than income growth.
-\end_layout
-
-\end_inset
-
+ our interpretation of status consumption as a scale of quality 
+\shape italic
+excess
+\shape default
 .
- 
 \end_layout
 
 \begin_layout Standard
-Empirically, this means that while the exogenous income process may depend
- on education or occupation levels, the effect that long-term characteristics
- have on consumption are not necessarily through income but through constraints
- or the stability that the long-term characteristics and expectations may
- bring.
+Unlike in PIH, the accumulation of long-term assets have an influence on
+ the substitution between savings and quality in an 
+\series bold
+\bar under
+intertemporal setting
+\series default
+\bar default
+.
+ What this means empirically is that while the exogenous income process
+ may depend on education or occupation levels, the effect that long-term
+ characteristics have on consumption are not necessarily through income
+ but through constraints that the long-term characteristics bring.
  As the effects of on consumption are modeled explicitly, it would suffice
- if the income process models an expectation of the monetary growth alone
- i.e.
+ if the income process models an the monetary growth i.e.
  a reflection of the steady growth in the economy on to the consumer's budget.
  For the analysis of the Tanzanian data therefore, we have assumed an income
- process with a steady rate of growth 
-\begin_inset Formula $k$
-\end_inset
-
- every year i.e.
- 
-\begin_inset Formula $i_{t}=i_{0}k^{t}$
-\end_inset
-
- where 
-\begin_inset Formula $i_{0}$
-\end_inset
-
- is the starting income, 
-\begin_inset Formula $t$
-\end_inset
-
- the time period and 
-\begin_inset Formula $k$
-\end_inset
-
- the rate of growth per period.
- Here, the past values of 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- do not influence the current and future values of (or influence them only
- through long-term characteristics characteristics such as education).
+ process dependent on long-term characteristics characteristics such as
+ education and occupation.
  
 \end_layout
 
@@ -1959,34 +1897,29 @@ Another way to view the asset account is to consider that all assets in
  We also assume that at the of the lifetime of a consumer, her personal
  wealth would either be consumed or would be passed on to her progeny so
  that the asset account at the end of the lifetime becomes starting wealth
- of someone else in the economy.
+ of some other household(s) in the economy.
  Consequently, while all individuals in the population are assumed to be
  the same as our representative consumer in terms of the preferences for
  needs over quality, they differ in the the starting amount of their asset
  accounts as well as the trends of their salaries, the trajectory of their
- needs and their long-term quality habits.
+ needs and their quality habits of quality (
+\shape italic
+excess
+\shape default
+).
  If a consumer has a starting income 
 \begin_inset Formula $i_{0}$
 \end_inset
 
- and a steady growth rate 
-\begin_inset Formula $k$
-\end_inset
-
-, she would after 
+ and her salary after 
 \begin_inset Formula $\tau$
 \end_inset
 
- years of working her salary is 
-\begin_inset Formula $i_{0}k^{\tau}$
+ years of working is 
+\begin_inset Formula $i_{\tau}$
 \end_inset
 
- and the total income she has earned is 
-\begin_inset Formula $\sum_{j=1}^{\tau}i_{j}=\frac{i_{0}k}{k-1}(k^{\tau}-1)$
-\end_inset
-
-.
- At a given time 
+ then at a given time 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -2000,42 +1933,24 @@ Another way to view the asset account is to consider that all assets in
 \end_inset
 
  would therefore depend on the needs 
-\begin_inset Formula $\eta$
+\begin_inset Formula $\Psi_{t}$
 \end_inset
 
 , asset account value 
 \begin_inset Formula $A_{t}$
 \end_inset
 
+ and the consumption of quality 
+\begin_inset Formula $\nu_{\tau}$
+\end_inset
 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-In a probabilistic model, we would attach a consumer probability of these
- events occurring at different values of 
+ in the period 
 \begin_inset Formula $\tau$
 \end_inset
 
 .
- This is postponed until a stochastic model is considered.
-\end_layout
-
-\end_inset
-
- and the consumption of quality in the period 
-\begin_inset Formula $\tau$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-For simplicity, we also assume an environment of zero interest and one where
- no depreciation is associated with the assets (which are easy to introduce
- if considered necessary) is assumed.
- Also, due to the minimal presence of credit facilities in the developing
- countries, we assume a negligible credit in the market.
+ Due to the minimal presence of credit facilities in the developing countries,
+ we assume a negligible credit in the market.
  This in turn implies that the consumer can only save to buy more of the
  only asset available in the market.
 \end_layout
@@ -2051,8 +1966,8 @@ Intertemporal substitution model
 \end_layout
 
 \begin_layout Standard
-Given the variables needs 
-\begin_inset Formula $\eta_{t}$
+Given the variables - cost of needs 
+\begin_inset Formula $\Psi_{t}$
 \end_inset
 
 , owned assets 
@@ -2063,8 +1978,8 @@ Given the variables needs
 \begin_inset Formula $i_{t}$
 \end_inset
 
- and observed consumption 
-\begin_inset Formula $c_{t}$
+ and observed consumption on quality 
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
  that are observed in the data, we now turn to a quality control in the
@@ -2075,15 +1990,11 @@ Given the variables needs
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- only after her needs 
-\begin_inset Formula $\eta_{t}$
-\end_inset
-
- and those imposed by the owned assets 
+ only after her needs and those imposed by the owned assets 
 \begin_inset Formula $A_{t}$
 \end_inset
 
- and her personal characteristics 
+ as well as her personal characteristics 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -2092,8 +2003,12 @@ Given the variables needs
 \end_inset
 
  is due to the assumption that the personal characteristics don't change
- in the near-term analysis).
- Thus we view the quality control 
+ in our near-term analysis).
+ Thus we view the control for quality (
+\shape italic
+excess
+\shape default
+) 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -2101,34 +2016,13 @@ Given the variables needs
 \begin_inset Formula $t$
 \end_inset
 
-) as a multiplier of the cost of needs - the higher its value the higher
- would be the distance from the basic needs consumption (and lower would
- be the future growth of 
+) simply the distance in terms of money from the cost of needs for the household.
+ The higher its value the higher would be the distance from the basic needs
+ consumption (and lower would be the future growth of 
 \begin_inset Formula $A_{t}$
 \end_inset
 
-)
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-One could also introduce some inertia for quality in the model by considering
- 
-\begin_inset Formula $\nu_{w}$
-\end_inset
-
- a long-term habit of the consumer that remains the same over the period
- 
-\begin_inset Formula $w$
-\end_inset
-
-.
- 
-\end_layout
-
-\end_inset
-
-.
+).
  Other than the control 
 \begin_inset Formula $\nu$
 \end_inset
@@ -2165,7 +2059,7 @@ The non-durable costs imposed by the assets one possesses (e.g.
 \begin_inset Quotes eld
 \end_inset
 
-enhanced
+extended
 \begin_inset Quotes erd
 \end_inset
 
@@ -2188,44 +2082,47 @@ enhanced
 \end_inset
 
 .
- This former constraint is provided with the cost-function 
-\begin_inset Formula $p(A_{t},\rho)$
+ As discussed in the Section
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:NeedsProcess"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- - which along with the quality control 
-\begin_inset Formula $\nu_{t}$
+ , we view these constraints i.e.
+ costs incurred due to asset ownership (e.g.
+ of maintenance fees or rent in the housing example) as part of the needs
+ 
+\begin_inset Formula $\Psi_{t}$
 \end_inset
 
- selected by the consumer contributes to the consumption 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- in period 
-\begin_inset Formula $t$
+.
+ The effect of supply-related asymmetries in the data e.g.
+ lack of availability of certain goods in a certain region etc.
+ are accommodated in the costs 
+\begin_inset Formula $\Psi_{t}$
 \end_inset
 
 .
  
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
+\end_layout
 
- thus adjusts the non-durable consumption 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- with the costs incurred due to asset ownership (e.g.
- of maintenance fees or rent in the housing example).
- The Euler equations for this model are as follows:
+\begin_layout Standard
+The simplest instance of intertemporal substitution is a two period model
+ where assets are meant to be liquidated at the end of the second period.
+ If one may assume that the relative preference of quality over assets does
+ not change over time, the utility to be optimised by the consumer in the
+ two-period model can be written as 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{gather}
-\eta_{t}=\eta(t,T)\nonumber \\
-A_{t+1}=A_{t}+(i_{t+1}-c_{t+1})\nonumber \\
-i_{t+1}=ki_{t}\nonumber \\
-c_{t+1}=(1+\nu_{t+1})\Psi_{t}\eta_{t}+p(A_{t},\rho)\label{eq:nonstoch}
-\end{gather}
+\begin{alignat*}{1}
+U & =\beta_{1}(a\ log(\nu_{1})+b\ log(A_{1}))+\beta_{2}(a\ log(\nu_{2})+b\ log(A_{2}))
+\end{alignat*}
 
 \end_inset
 
@@ -2234,460 +2131,71 @@ c_{t+1}=(1+\nu_{t+1})\Psi_{t}\eta_{t}+p(A_{t},\rho)\label{eq:nonstoch}
 
 \begin_layout Standard
 Here, 
-\begin_inset Formula $\eta_{t}$
+\begin_inset Formula $\nu_{1},\nu_{2}$
 \end_inset
 
- represents the consumer need unit at time 
-\begin_inset Formula $t$
+ are consumption on quality in periods 1 and 2 while 
+\begin_inset Formula $A_{1},A_{2}$
 \end_inset
 
-, 
-\begin_inset Formula $\Psi_{t}$
-\end_inset
-
- the cost of needs per unit,
-\begin_inset Formula $A_{t}$
-\end_inset
-
- is the value of asset account in the period 
-\begin_inset Formula $t$
-\end_inset
-
- (comprising of cash reserved for assets as well as the total value of assets
- owned), 
-\begin_inset Formula $\rho$
-\end_inset
-
- are the static household characteristics (educational level, religious
- or social identity etc.), 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- is the income obtained in period 
-\begin_inset Formula $t$
-\end_inset
-
- and 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- the consumption in period 
-\begin_inset Formula $t$
-\end_inset
-
-.
- The cost 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- represents the minimal per-head cost that a household has to maintain given
- her personal characteristics and owned assets.
- For example, the costs of housing that contribute to 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- may consist of the mortgage fee or maintenance fees when someone owns a
- house but a monthly rent when the consumer does not own a house.
- The effect of supply-related asymmetries in the data e.g.
- lack of availability of certain goods in a certain region etc.
- can also be accommodated with the function 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
-.
- While 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- can be estimated from the data (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:EmpiricalAnalysis"
-
-\end_inset
-
- ), we demonstrate a particular solution of the equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstoch"
-
-\end_inset
-
- by assuming that the costs associated with the owned assets 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- or of the form 
-\begin_inset Formula $mA_{t}^{\alpha}$
-\end_inset
-
- where the characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
- are (momentarily) considered a part of assets 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- 
+ are that on assets in the respective periods (assuming that needs do not
+ carry utility )
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-One may add a function for 
-\begin_inset Formula $\rho$
+An alternate equivalent form may be more intuitive 
+\begin_inset Formula $U=a(\beta_{1}log(\nu_{1})+\beta_{2}log(\nu_{2}))+b(\beta_{1}log(A_{1})+\beta_{2}log(A_{2}))$
 \end_inset
 
- as 
-\begin_inset Formula $b(\rho)$
-\end_inset
 
- or consider the more realistic scenario where 
-\begin_inset Formula $p(A,\rho)$
-\end_inset
-
- is a filter function that assigns levels of consumption (rather than exact
- contributions to 
-\begin_inset Formula $c_{t}$
-\end_inset
-
-) based on 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
 \end_layout
 
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Given the observed variables 
-\begin_inset Formula $c_{t},A_{t},\rho,i_{t},\Psi_{t}$
+ In the typical solution of the intertemporal problem, the wealth constraint
+ could be written as 
+\begin_inset Formula $W=\frac{A_{2}}{(1+r)^{2}}+\frac{c_{1}-p_{1}}{1+r}+\frac{c_{2}-p_{2}}{(1+r)^{2}}$
 \end_inset
 
- and 
-\begin_inset Formula $\eta_{t}$
+ so that Lagrangian 
+\begin_inset Formula $L=U-\lambda(W-\frac{A_{2}}{(1+r)^{2}}-\frac{c_{1}-p_{1}}{1+r}-\frac{c_{2}-p_{2}}{(1+r)^{2}})$
 \end_inset
 
-, the consumer optimises the non-stochastic sum 
-\begin_inset Formula $u=\sum_{i=1}^{T}\upsilon(\nu_{i},A_{i},\rho_{i})$
-\end_inset
-
- over her life-time of 
-\begin_inset Formula $T$
-\end_inset
-
- years.
- The consumer chooses 
-\begin_inset Formula $\nu_{t+1}\ge0$
-\end_inset
-
- in period 
-\begin_inset Formula $t$
-\end_inset
-
- to consume the quality she desires.
- The minimum cost for maintaining the needs 
-\begin_inset Formula $\eta_{t}$
-\end_inset
-
- in the period 
-\begin_inset Formula $t$
-\end_inset
-
- are meant to be chosen by setting 
-\begin_inset Formula $\nu=0$
+ leads to the first order conditions 
+\begin_inset Formula $\frac{\partial L}{\partial\nu_{1}}=\frac{\partial L}{\partial\nu_{2}}=\frac{\partial L}{\partial\lambda}=0$
 \end_inset
 
 .
- Assuming a log-linear form of the utility 
-\begin_inset Formula $\upsilon$
+ Notice however that one cannot guarantee 
+\begin_inset Formula $\frac{\partial f(\nu_{2})}{\partial\nu_{1}}=0$
 \end_inset
 
-, the consumer optimises 
-\begin_inset Formula $\sum_{i}(\alpha\nu_{i}+\beta\cdot ln\ A_{i}+(1-\alpha-\beta)\cdot ln\ \rho_{i})$
-\end_inset
-
- where 
-\begin_inset Formula $\alpha,\beta$
-\end_inset
-
- are constants.
- Notice that since additivity discourages substitution, the low substitution
- between 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- makes the combined utility function 
-\begin_inset Formula $\sum\upsilon(\nu_{i},A_{i},\rho_{i})$
-\end_inset
-
- plausible 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonEconConsumer"
-literal "true"
-
+ in the for the optimisation of 
+\begin_inset Formula $U$
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-For the dynamic optimisation problem of maximising 
-\begin_inset Formula $\sum_{i=1}^{T}\upsilon(c_{i},A_{i},\eta_{i})$
-\end_inset
-
-, we also impose the constraint 
-\begin_inset Formula $i_{t}\ge c_{t}$
-\end_inset
-
- to ensure that the consumer does not exercise the choice to sell assets
- 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- in order to consume.
- In the equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstochll"
-
-\end_inset
-
-, the value 
-\begin_inset Formula $c_{t+1}$
-\end_inset
-
- represents the consumption in the year 
-\begin_inset Formula $t+1$
-\end_inset
-
- and thus the consumption in the first year (
-\begin_inset Formula $c_{1}$
-\end_inset
-
-) is part of the initial condition - as is the value 
-\begin_inset Formula $A_{1}$
-\end_inset
-
- .
- Given 
-\begin_inset Formula $A_{t},c_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\eta_{t}$
-\end_inset
-
-, the consumer must choose 
-\begin_inset Formula $\nu_{t+1}$
-\end_inset
-
- so that the value 
-\begin_inset Formula $\alpha log(A_{t+1})+\beta log(\nu_{t+1})+(1-\alpha-\beta)log(\rho_{t+1})$
-\end_inset
-
- is maximised.
- Since the consumer does not exercise any choice of 
-\begin_inset Formula $\eta_{t}$
-\end_inset
-
-, we can focus on 
-\begin_inset Formula $\beta log(c_{t+1})$
-\end_inset
-
- and 
-\begin_inset Formula $\alpha log(A_{t+1})$
-\end_inset
-
-.
- A 
-\begin_inset Formula $\nu_{t+1}$
-\end_inset
-
- that maximises 
-\begin_inset Formula $\upsilon(c_{t+1},A_{t+1},\rho)$
-\end_inset
-
- would satisfy the first-order condition 
-\begin_inset Formula $\frac{\partial\upsilon_{t+1}}{\partial\nu_{t+1}}=0$
-\end_inset
-
-.
- The optimal solution 
-\begin_inset Formula $\nu_{t+1}$
-\end_inset
-
- can thus be solved.
-\end_layout
-
-\begin_layout Standard
-Note that 
-\begin_inset Formula $\because\frac{\partial\upsilon_{t+1}}{\partial\nu_{t+1}}=\frac{\alpha}{A_{t+1}}\frac{\partial A_{t+1}}{\partial\nu_{t+1}}+\frac{\beta}{\nu_{t+1}}$
-\end_inset
-
- and 
-\begin_inset Formula $\frac{\partial A_{t+1}}{\partial\nu_{t+1}}=-\eta_{t}\Psi_{t}$
-\end_inset
-
- 
-\begin_inset Formula $\therefore$
-\end_inset
-
- 
-\begin_inset Formula $\frac{\beta}{\nu_{t+1}}=\frac{\alpha\eta_{t}\Psi_{t}}{A_{t+1}}$
-\end_inset
-
- .
- Thus, 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align}
-\eta_{t}\Psi_{t}\nu_{t+1} & =\frac{\beta}{\alpha}A_{t+1}\label{eq:vtplusoptim}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Using Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstoch"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:vtplusoptim"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, we can write 
-\begin_inset Formula $c_{t+1}=\Psi_{t}\eta_{t}+\frac{\beta}{\alpha}A_{t+1}+p(A_{t},\rho)=\Psi_{t}\eta_{t}+\frac{\beta}{\alpha}(A_{t}+ki_{t}-c_{t+1})+p(A_{t},\rho)$
-\end_inset
-
- .
- Therefore, 
-\begin_inset Formula 
-\begin{align}
-c_{t+1} & =\frac{\alpha}{(\alpha+\beta)}\Psi_{t}\eta_{t}+\frac{\beta}{(\alpha+\beta)}A_{t}+\frac{\beta k}{(\alpha+\beta)}i_{t}+\frac{\beta}{(\alpha+\beta)}p(A_{t},\rho)\label{eq:nonstochsol}
-\end{align}
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-The above equation can be used to estimate 
-\begin_inset Formula $\frac{\beta}{\alpha}$
-\end_inset
-
-.
- To consider the solution for a particular form of 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- assume the needs function discussed in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:NeedsProcess"
-
-\end_inset
-
- and 
-\begin_inset Formula $p(A,t)=mA_{t}^{a}$
-\end_inset
-
- so that Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nonstoch"
-
-\end_inset
-
- can be reformulated as follows:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather}
-\eta_{t}=\mu te^{\kappa t^{2}}\nonumber \\
-A_{t+1}=A_{t}+(i_{t+1}-c_{t+1})\nonumber \\
-i_{t+1}=ki_{t}\nonumber \\
-c_{t+1}=(1+\nu_{t})\eta_{t}\Psi_{t}+mA_{t}^{a}\label{eq:nonstochll}
-\end{gather}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Note that such a solution assumes the decomposition condition - i.e.
- for the consumer to have arrived at 
-\begin_inset Formula $t$
-\end_inset
-
-, she must have followed the first-order condition at every time previous
- period 
-\begin_inset Formula $\tau$
-\end_inset
-
- ( where 
-\begin_inset Formula $0\le\tau\le t-1$
-\end_inset
-
-).
- The more difficult problem would need to be solved if it is assumed that
- 
-\begin_inset Formula $\nu$
-\end_inset
-
- is the same for all periods.
- A numerical solution of the problem is viable - and would be preferable
- if the setting of long-term habit of 
-\begin_inset Formula $\nu$
-\end_inset
-
- gives us an better economic interpretation of the quality control 
-\begin_inset Formula $\nu$
-\end_inset
-
-
+ This is where the boundary condition of the final asset state being 0 (i.e.
+ all of the consumer's assets being liquidated and consumed in the last
+ period) and a discount factor for expected state (whose Euler equations
+ are specified) help simplify the optimisation problem
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Instead of formulating a dynamic optimisation problem, one may solve a non-stoch
-astic intertemporal problem by drawing an equivalence between total wealth
- and the total outlay (in the classical consumer choice problem ) before
- employing similar econometric methods.
+This solution a the non-stochastic intertemporal problem essentially draws
+ an equivalence between total wealth constraint 
+\begin_inset Formula $W$
+\end_inset
+
+ and the total outlay 
+\begin_inset Formula $x=\textbf{p}\cdot\textbf{q}$
+\end_inset
+
+ of the classical consumer choice problem ) before employing similar econometric
+ methods.
  Recall that 
 \begin_inset Formula $w=\beta ln(x)+\gamma ln(p)+\epsilon$
 \end_inset
@@ -2712,8 +2220,12 @@ astic intertemporal problem by drawing an equivalence between total wealth
 \end_inset
 
 .
- Since the adding up restriction is more difficult to impose on this form
- rather than the slightly modified : 
+ 
+\end_layout
+
+\begin_layout Plain Layout
+As the adding up restriction is more difficult to impose on this form rather
+ than the slightly modified : 
 \begin_inset Formula $w_{i}=\alpha_{i}+\beta_{i}log(x)+\gamma_{i}log(p_{i})$
 \end_inset
 
@@ -2745,8 +2257,16 @@ literal "true"
 \begin_inset Formula $T$
 \end_inset
 
+, 
+\begin_inset Formula $c_{i}$
+\end_inset
+
+ the consumption in period 
+\begin_inset Formula $i$
+\end_inset
+
  and the discount factors can be chosen as
-\begin_inset Formula $\delta_{i}=\frac{1}{1+i}$
+\begin_inset Formula $\delta_{i}=\frac{1}{(1+r)^{i}}$
 \end_inset
 
  (this holds even if one assumes that 
@@ -2789,40 +2309,282 @@ literal "true"
 \end_inset
 
 .
+ Since we consider the final state of assets exogenous in our model, we
+ take a slightly different approach with the formulation of a dynamic optimisati
+on problem.
+\end_layout
+
+\begin_layout Standard
+If the initial and final asset levels known, the Euler equations can be
+ written as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+A_{t+1} & =A_{t}(1+r)+i_{t+1}-\nu_{t+1}-\Psi_{t+1}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Above signifies that the consumer may consume quality 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ ( 
+\begin_inset Formula $\nu_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{3...}$
+\end_inset
+
+ being undefined) in the periods 1 and 2 while she bears the cost of the
+ needs 
+\begin_inset Formula $\Psi_{1},\Psi_{2}$
+\end_inset
+
+ (in periods 1 and 2 respectively).
+ The intertemporal substitution setting means that she may save for asset
+ growth to 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+ instead of consuming all her income 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ as 
+\begin_inset Formula $c_{t}=\nu_{t}+\Psi_{t}$
+\end_inset
+
+ i.e.
+ she can spend all her income 
+\begin_inset Formula $i_{1},i_{2}$
+\end_inset
+
+ as 
+\begin_inset Formula $c_{1},c_{2}$
+\end_inset
+
+ (respectively) or save some of it towards 
+\begin_inset Formula $A_{1},A_{2}$
+\end_inset
+
+.
+ If initial conditions are 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+ (the starting wealth), the rate of growth of money (interest rate) and
+ an exogenous income process 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ are known, we can expand the the Euler equations as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+A_{1}=A_{0}(1+r)+i_{1}-c_{1}=A_{0}(1+r)+i_{1}-\Psi_{1}-\nu_{1}\\
+(\because c_{1}=\Psi_{1}+\nu_{1})
+\end{gather*}
+
+\end_inset
+
  
 \end_layout
 
 \begin_layout Standard
-The econometric method devised from this solution - which we discuss in
- the next subsection - would estimate 
-\begin_inset Formula $\frac{\alpha}{\beta}$
+Similarly, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+A_{2} & =A_{1}(1+r)+i_{2}-\Psi_{2}-\nu_{2}
+\end{alignat*}
+
 \end_inset
 
-, 
-\begin_inset Formula $m$
+ Assuming that we observe both states of the wealth, 
+\begin_inset Formula $A_{0},A_{1}$
 \end_inset
 
  and 
-\begin_inset Formula $a$
+\begin_inset Formula $A_{2}$
+\end_inset
+
+, as well as 
+\begin_inset Formula $c_{1},c_{2},$
+\end_inset
+
+
+\begin_inset Formula $\Psi_{1},\Psi_{2}$
+\end_inset
+
+ we can then to solve for the parameters that govern the utility function
+ additive over time 
+\begin_inset Formula $u=u_{1}+u_{2}$
+\end_inset
+
+ .
+ 
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $u_{1},u_{2}$
+\end_inset
+
+ are utilities over periods and 1 and 2 (respectively).
+ To motivate the dynamic optimisation approach, consider the consumer's
+ choices in a one-period consumption - where she could either spend all
+ income 
+\begin_inset Formula $i_{1}$
+\end_inset
+
+ as 
+\begin_inset Formula $c_{_{1}}=\nu_{1}+\Psi_{1}$
+\end_inset
+
+ or keep the minimum consumption (
+\begin_inset Formula $\nu_{1}=0,c_{1}=\Psi_{1}$
+\end_inset
+
+) in the period and end up with 
+\begin_inset Formula $A_{1}>A_{0}$
 \end_inset
 
 .
- Low values of 
-\begin_inset Formula $m$
+ If we can set 
+\begin_inset Formula $u_{0}=0$
+\end_inset
+
+, then the first-order conditions would provide us the optimal condition
+ for 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+.
+ Let this utility be 
+\begin_inset Formula $u_{1}^{*}$
+\end_inset
+
+ due to 
+\begin_inset Formula $\nu_{1}^{*},A_{1}^{*}$
+\end_inset
+
+.
+ To extend this to two periods with dynamic optimisation one can exploit
+ the fact that a consumer independently optimising 
+\begin_inset Formula $u_{1}+u_{2}$
+\end_inset
+
+ would always obtain 
+\begin_inset Formula $u_{1}^{*}+u_{2}^{*}$
+\end_inset
+
+.
+ This is because if 
+\begin_inset Formula $u_{1}$
 \end_inset
 
  and 
-\begin_inset Formula $a$
+\begin_inset Formula $u_{2}$
 \end_inset
 
- would be interpreted as low quality variation relative to asset ownership
- (and high otherwise).
- The ratio 
-\begin_inset Formula $\frac{\alpha}{\beta}$
+ are unbounded functions 
+\begin_inset Formula $max(u_{1}+u_{2})\le max(u_{1})+max(u_{2})=u_{1}^{*}+u_{2}^{*}$
 \end_inset
 
- would give us an idea if consumption quality moves together with asset
- ownership.
+.
+ Setting 
+\begin_inset Formula $u_{0}=0$
+\end_inset
+
+ is only a tool to formulate the dynamic optimisation approach - using which
+ the expected value of utility is to be optimised over her life period in
+ a 
+\begin_inset Formula $T$
+\end_inset
+
+-period model (
+\begin_inset Formula $T$
+\end_inset
+
+ being the age of the consumer).
+ 
+\end_layout
+
+\begin_layout Standard
+The changes in expected utility per period are what drive her behaviour
+ at every period 
+\begin_inset Formula $\tau$
+\end_inset
+
+ and her choice is set to vary according to her age 
+\begin_inset Formula $\tau$
+\end_inset
+
+ (assuming that all consumers have similar expectations for the trajectory
+ of their needs).
+ A steady state would thus be achieved with 
+\begin_inset Formula $\tau$
+\end_inset
+
+ over all ages.
+ The conditions of stability of the steady state imply that while consumers
+ maintain different 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ , they are a function of characteristics 
+\begin_inset Formula $\rho$
+\end_inset
+
+and age 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Here, the notion that a consumer may change her behaviour away from the
+ current plan in the future is fallacious since a consumer observed at different
+ ages is equivalent to consumers of varied ages at any point in time (see
+ Deaton's clarification of the so-called dynamic inconsistency problem 
+\begin_inset Quotes eld
+\end_inset
+
+Understanding Consumption
+\begin_inset Quotes erd
+\end_inset
+
+).
+ In other words, the behaviour of an older consumer is the same as the future
+ behaviour of a younger consumer.
+ So the optimal solution for the total sum 
+\begin_inset Formula $\sum_{i=1}^{T-t}u_{i}$
+\end_inset
+
+ would apply both to the individuals of all ages as well as an individuals
+ over a number of years.
 \end_layout
 
 \begin_layout Section
@@ -2833,6 +2595,20 @@ name "sec:EmpiricalAnalysis"
 \end_inset
 
 Empirical Analysis
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Data"
+
+\end_inset
+
+Data
+\end_layout
+
+\begin_layout Subsection
+Analysis
 \end_layout
 
 \begin_layout Standard

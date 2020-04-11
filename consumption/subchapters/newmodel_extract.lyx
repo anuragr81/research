@@ -164,7 +164,123 @@ An alternate equivalent form may be more intuitive
  This is where the boundary condition of the final asset state being 0 (i.e.
  all of the consumer's assets being liquidated and consumed in the last
  period) and a discount factor for expected state (whose Euler equations
- are specified) help simplify the optimisation problem.
+ are specified) help simplify the optimisation problem
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This solution a the non-stochastic intertemporal problem essentially draws
+ an equivalence between total wealth constraint 
+\begin_inset Formula $W$
+\end_inset
+
+ and the total outlay 
+\begin_inset Formula $x=\sum_{i}p_{i}q_{i}$
+\end_inset
+
+ of the classical consumer choice problem ) before employing similar econometric
+ methods.
+ Recall that 
+\begin_inset Formula $w=\beta ln(x)+\gamma ln(p)+\epsilon$
+\end_inset
+
+ commonly used in estimation is effectively derived from 
+\begin_inset Formula $w_{i}=p_{i}q_{i}/x\Rightarrow log(w_{i})=log(p_{i})+log(g(x,p))-log(x)$
+\end_inset
+
+.
+ With 
+\begin_inset Formula $g(x,p)$
+\end_inset
+
+ as the Marshallian demand function, using the double-logarithmic model
+ (which is a mere restatement of existence of elasticities through total
+ differentiation) yields 
+\begin_inset Formula $log(g(x,p))=\alpha_{i}+\frac{\partial log(g(x,p))}{\partial log(x)}log(x)+\frac{\partial log(g(x,p))}{\partial log(p)}log(p)$
+\end_inset
+
+ and thus 
+\begin_inset Formula $log(w_{i})=\alpha_{i}+(\frac{\partial log(g(x,p))}{\partial log(x)}-1)log(x)+(\frac{\partial log(g(x,p))}{\partial log(p_{i})}+1)log(p_{i})+\sum_{j\ne i}\frac{\partial log(g(x,p))}{\partial log(p_{j})}log(p_{j})$
+\end_inset
+
+.
+ Since the adding up restriction is more difficult to impose on this form
+ rather than the slightly modified : 
+\begin_inset Formula $w_{i}=\alpha_{i}+\beta_{i}log(x)+\gamma_{i}log(p_{i})$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonEconConsumer"
+literal "true"
+
+\end_inset
+
+, the latter is the more popular choice.
+ An estimation of demand elasticities of consumption can be performed with
+ parallel arguments using the total wealth constraint 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ In this equivalent formulation, the constraint for the consumer can be
+ stated as the total wealth 
+\begin_inset Formula $W=\delta_{i}(A_{T}+\sum c_{i})$
+\end_inset
+
+ where 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+ are the assets accumulated over the period 
+\begin_inset Formula $T$
+\end_inset
+
+ and the discount factors can be chosen as
+\begin_inset Formula $\delta_{i}=\frac{1}{1+i}$
+\end_inset
+
+ (this holds even if one assumes that 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+ is 0 at the end by the consumer spending everything as 
+\begin_inset Formula $c_{T}$
+\end_inset
+
+ at the end of period 
+\begin_inset Formula $T$
+\end_inset
+
+).
+ Equivalent to the case of income constraint 
+\begin_inset Formula $\textbf{p}\cdot\textbf{q}=x$
+\end_inset
+
+ for the maximisation of 
+\begin_inset Formula $\upsilon(\textbf{q})$
+\end_inset
+
+, the wealth constraint 
+\begin_inset Formula $W$
+\end_inset
+
+ is meant to be known to the representative consumer i.e.
+ the consumer chooses a plan for 
+\begin_inset Formula $c_{i},A_{i}$
+\end_inset
+
+ knowing what her total wealth 
+\begin_inset Formula $W$
+\end_inset
+
+ and future expectations of prices are.
+\end_layout
+
+\end_inset
+
+.
  Since we consider the final state of assets exogenous in our model, we
  take a slightly different approach with the formulation of a dynamic optimisati
 on problem.
@@ -441,6 +557,10 @@ Understanding Consumption
 
  would apply both to the individuals of all ages as well as an individuals
  over a number of years.
+\end_layout
+
+\begin_layout Standard
+>>
 \end_layout
 
 \begin_layout Subsection*
