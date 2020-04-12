@@ -1305,6 +1305,10 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   #graph 1. assets in descreasing order of occurrence frequency (done)
   #graph 2. region-dependency and hsize-depndency on rent (most renters are in 7 - occupation and education rank have little effect)
   #greph 3: variation in rent for houses by regions 
+  
+  DAYS_IN_YEAR<- 365
+  MONTHS_IN_YEAR <- 12
+  
   if (missing(c2010)){
     c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   }
@@ -1341,7 +1345,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   hhp2010 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2010,ohsdata=o2010,ddata=fooddiarydata2010)
   hhp2010 <- merge(lsms_normalizer()@categories_needs_based(),hhp2010)
   regionfoodprice2010 <- hhp2010 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
-  basket_constituent_costs2010 <- ddply( unique(regionfoodprice2010[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price) , .(region,district,category), rec_cost = sum(rec_cost))
+  basket_constituent_costs2010 <- ddply( unique(regionfoodprice2010[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price*DAYS_IN_YEAR) , .(region,district,category), rec_cost = sum(rec_cost))
   basket_costs2010 <- ddply(basket_constituent_costs2010, .(region,district), summarise, basket_cost = sum(rec_cost)) 
   #regionfoodbasketcosts2010 <- subset(ddply(basket_costs2010,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
   #barplot(regionfoodbasketcosts2010$basket_cost,names.arg = regionfoodbasketcosts2010$region, las=2 , xlab= "region" , ylab="cost of food basket" , main="Basket costs across regions (2010)")
@@ -1349,7 +1353,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   hhp2012 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2012,ohsdata=o2012,ddata=fooddiarydata2012)
   hhp2012 <- merge(lsms_normalizer()@categories_needs_based(),hhp2012)
   regionfoodprice2012 <- hhp2012 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
-  basket_constituent_costs2012 <- ddply( unique(regionfoodprice2012[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price) , .(region,district,category), rec_cost = sum(rec_cost))
+  basket_constituent_costs2012 <- ddply( unique(regionfoodprice2012[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price*DAYS_IN_YEAR) , .(region,district,category), rec_cost = sum(rec_cost))
   basket_costs2012 <- ddply(basket_constituent_costs2012, .(region,district), summarise, basket_cost = sum(rec_cost)) 
   #regionfoodbasketcosts2012 <- subset(ddply(basket_costs2012,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
   
@@ -1357,7 +1361,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   hhp2014 <- merge(lsms_normalizer()@categories_needs_based(),hhp2014)
   
   regionfoodprice2014 <- hhp2014 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
-  basket_constituent_costs2014 <- ddply( unique(regionfoodprice2014[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price) , .(region,district,category), rec_cost = sum(rec_cost))
+  basket_constituent_costs2014 <- ddply( unique(regionfoodprice2014[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price*DAYS_IN_YEAR) , .(region,district,category), rec_cost = sum(rec_cost))
   basket_costs2014 <- ddply(basket_constituent_costs2014, .(region,district), summarise, basket_cost = sum(rec_cost)) 
   #regionfoodbasketcosts2014 <- subset(ddply(basket_costs2014,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
   
@@ -1407,19 +1411,19 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   assumed2010     <- assume_assets(o2010)
   assetlevels2010 <- merge(subset(a2010, number>0), asset_levels_for_name())[,c("hhid","assetlevel")]
   assetlevels2010net <- rbind(assetlevels2010,assumed2010)
-  energybasketconstituents2010 <- merge(assetlevels2010net,energy_prices2010 ) %>% mutate(rec_cost = price * recq)
+  energybasketconstituents2010 <- merge(assetlevels2010net,energy_prices2010 ) %>% mutate(rec_cost = DAYS_IN_YEAR * price * recq)
   energybasket2010 <- ddply(energybasketconstituents2010, .(hhid), summarise, basket_cost = sum(rec_cost)) 
   
   assumed2012     <- assume_assets(o2012)
   assetlevels2012 <- merge(subset(a2012, number>0), asset_levels_for_name())[,c("hhid","assetlevel")]
   assetlevels2012net <- rbind(assetlevels2012,assumed2012)
-  energybasketconstituents2012 <- merge(assetlevels2012net,energy_prices2012 ) %>% mutate(rec_cost = price * recq)
+  energybasketconstituents2012 <- merge(assetlevels2012net,energy_prices2012 ) %>% mutate(rec_cost = DAYS_IN_YEAR * price * recq)
   energybasket2012 <- ddply(energybasketconstituents2012, .(hhid), summarise, basket_cost = sum(rec_cost)) 
   
   assumed2014     <- assume_assets(o2014)
   assetlevels2014 <- merge(subset(a2014, number>0), asset_levels_for_name())[,c("hhid","assetlevel")]
   assetlevels2014net <- rbind(assetlevels2014,assumed2014)
-  energybasketconstituents2014 <- merge(assetlevels2014net,energy_prices2014 ) %>% mutate(rec_cost = price * recq)
+  energybasketconstituents2014 <- merge(assetlevels2014net,energy_prices2014 ) %>% mutate(rec_cost = DAYS_IN_YEAR * price * recq)
   energybasket2014 <- ddply(energybasketconstituents2014, .(hhid), summarise, basket_cost = sum(rec_cost)) 
   
   
@@ -1434,9 +1438,9 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   
   housing_costs <- assign_house_maintenance(a2010 = a2010, a2012 = a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   
-  hc2010 <- as.data.frame(housing_costs["hc2010"])
-  hc2012 <- as.data.frame(housing_costs["hc2012"])
-  hc2014 <- as.data.frame(housing_costs["hc2014"])
+  hc2010 <- as.data.frame(housing_costs["hc2010"]) %>% mutate( hc2010.running_cost = MONTHS_IN_YEAR * hc2010.running_cost)
+  hc2012 <- as.data.frame(housing_costs["hc2012"]) %>% mutate( hc2010.running_cost = MONTHS_IN_YEAR * hc2010.running_cost)
+  hc2014 <- as.data.frame(housing_costs["hc2014"]) %>% mutate( hc2010.running_cost = MONTHS_IN_YEAR * hc2010.running_cost)
   
   basket_costs2010 <- plyr::rename(basket_costs2010,c("basket_cost"="foodbasket_cost"))
   foodbasket2010   <- merge(basket_costs2010, unique(o2010[,c("hhid","region","district")]), by = c("region","district"))

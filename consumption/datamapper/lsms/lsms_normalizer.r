@@ -1576,7 +1576,7 @@ lsms_normalizer<-function() {
     # if has computer, then 100W per hr
     # agricultural machines would be assumed to have a different running cost from cars (their usage would be proportional to the land owned by the household)
     # final mapping has fields: (region,district,assetlevel) -> rc where assetlevel \in { kerosene_stove , elec_bulb, refrig, computer, elecoven, electstove, agri }
-    
+    # if has car, gets 11 km/litre mileage and assumes 4 km per weekday
     
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq =2/30 , assetlevel="kerosene_lighting")) 
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq = 1.5/10, assetlevel="kerosene_cooking")) 
@@ -1590,8 +1590,8 @@ lsms_normalizer<-function() {
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (4*5*52*.1)/365 , assetlevel="elec_computer")) # 4-h per weekday usage 
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (.28*5*52)/365.0, assetlevel="elec_iron")) # 4-h per weekday usage 
     
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq = (5*4)/365/11.0, assetlevel="petrol_car")) # 11 km/liters and 4 km per weekday 
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq =(5*4)/365/6.5 , assetlevel="petrol_motorbike"))   
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq = (5*4*52)/365/11.0, assetlevel="petrol_car")) # 11 km/liters and 4 km per weekday
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq =(5*4*52)/365/6.5 , assetlevel="petrol_motorbike"))
     
     
     return(x)
