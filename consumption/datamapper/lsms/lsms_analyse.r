@@ -1413,19 +1413,30 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   assetlevels2010net <- rbind(assetlevels2010,assumed2010)
   energybasketconstituents2010 <- merge(assetlevels2010net,energy_prices2010 ) %>% mutate(rec_cost = DAYS_IN_YEAR * price * recq)
   energybasket2010 <- ddply(energybasketconstituents2010, .(hhid), summarise, basket_cost = sum(rec_cost)) 
+  pubtransport2010 <- plyr::rename(unique(subset(c2010, shortname=="public_transport")[,c("hhid","cost")]),c("cost"="pubtrans.cost"))
+  energybasket2010 <- merge(pubtransport2010,energybasket2010,by=c("hhid"),all.y=T) 
+  energybasket2010[is.na(energybasket2010$pubtrans.cost),]$pubtrans.cost <- 0 
+  energybasket2010 <- energybasket2010 %>% mutate ( basket_cost = basket_cost + pubtrans.cost)
   
   assumed2012     <- assume_assets(o2012)
   assetlevels2012 <- merge(subset(a2012, number>0), asset_levels_for_name())[,c("hhid","assetlevel")]
   assetlevels2012net <- rbind(assetlevels2012,assumed2012)
   energybasketconstituents2012 <- merge(assetlevels2012net,energy_prices2012 ) %>% mutate(rec_cost = DAYS_IN_YEAR * price * recq)
   energybasket2012 <- ddply(energybasketconstituents2012, .(hhid), summarise, basket_cost = sum(rec_cost)) 
+  pubtransport2012 <- plyr::rename(unique(subset(c2012, shortname=="public_transport")[,c("hhid","cost")]),c("cost"="pubtrans.cost"))
+  energybasket2012 <- merge(pubtransport2012,energybasket2012,by=c("hhid"),all.y=T) 
+  energybasket2012[is.na(energybasket2012$pubtrans.cost),]$pubtrans.cost <- 0 
+  energybasket2012 <- energybasket2012 %>% mutate ( basket_cost = basket_cost + pubtrans.cost)
   
   assumed2014     <- assume_assets(o2014)
   assetlevels2014 <- merge(subset(a2014, number>0), asset_levels_for_name())[,c("hhid","assetlevel")]
   assetlevels2014net <- rbind(assetlevels2014,assumed2014)
   energybasketconstituents2014 <- merge(assetlevels2014net,energy_prices2014 ) %>% mutate(rec_cost = DAYS_IN_YEAR * price * recq)
   energybasket2014 <- ddply(energybasketconstituents2014, .(hhid), summarise, basket_cost = sum(rec_cost)) 
-  
+  pubtransport2014 <- plyr::rename(unique(subset(c2014, shortname=="public_transport")[,c("hhid","cost")]),c("cost"="pubtrans.cost"))
+  energybasket2014 <- merge(pubtransport2014,energybasket2014,by=c("hhid"),all.y=T) 
+  energybasket2014[is.na(energybasket2014$pubtrans.cost),]$pubtrans.cost <- 0 
+  energybasket2014 <- energybasket2014 %>% mutate ( basket_cost = basket_cost + pubtrans.cost)
   
   #household needs: mensclothes, womensclothes, childrensclothes, mensshoes, womensshoes, childrensshoes and rent 
   clothing <- get_local_clothing_expenditure(o2012 = o2012, c2012 = c2012, o2014 = o2014, c2014 = c2014, ld = ldat())
@@ -1439,8 +1450,8 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   housing_costs <- assign_house_maintenance(a2010 = a2010, a2012 = a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   
   hc2010 <- as.data.frame(housing_costs["hc2010"]) %>% mutate( hc2010.running_cost = MONTHS_IN_YEAR * hc2010.running_cost)
-  hc2012 <- as.data.frame(housing_costs["hc2012"]) %>% mutate( hc2010.running_cost = MONTHS_IN_YEAR * hc2010.running_cost)
-  hc2014 <- as.data.frame(housing_costs["hc2014"]) %>% mutate( hc2010.running_cost = MONTHS_IN_YEAR * hc2010.running_cost)
+  hc2012 <- as.data.frame(housing_costs["hc2012"]) %>% mutate( hc2012.running_cost = MONTHS_IN_YEAR * hc2012.running_cost)
+  hc2014 <- as.data.frame(housing_costs["hc2014"]) %>% mutate( hc2014.running_cost = MONTHS_IN_YEAR * hc2014.running_cost)
   
   basket_costs2010 <- plyr::rename(basket_costs2010,c("basket_cost"="foodbasket_cost"))
   foodbasket2010   <- merge(basket_costs2010, unique(o2010[,c("hhid","region","district")]), by = c("region","district"))
@@ -1462,8 +1473,6 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   hc2014           <- plyr::rename(hc2014, c("hc2014.running_cost"="housing_cost", "hc2014.hhid"="hhid"))
   clothing2014     <- plyr::rename(merge(clothing, unique(o2014[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2014")], c("avcost2014"="clothingcost"))
   allcosts2014     <- merge(clothing2014, merge(foodbasket2014,merge(hc2014, energybasket2014, by = c("hhid")), by=c("hhid")), by = c("hhid")) %>% mutate (needs_cost = foodbasket_cost + housing_cost + clothingcost + energybasket_cost)
-  
-  print("PENDING TODO:  ADD PUBLIC TRANSPORT AS NEED for where it is available")
   
   select_cols      <- c("hhid","needs_cost")
   r                <- data.frame()
