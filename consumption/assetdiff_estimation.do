@@ -7,15 +7,15 @@
 ** c.ag##c.At can also be tried
 eststo clear
 
-eststo, title (asset purchases): quietly tobit dAt At lt1, ll(18200) 
-
-esttab using c:/temp/dAt.tex, mtitle no p numbers star nogaps compress title(Tobit results with asset changes \$\Delta A_t \$ as dependent variable \label{tabdAt})
-
-eststo clear
-
+eststo, title (asset purchases): quietly tobit dAt lt1 c.At##c.age, ll(18200) 
 eststo, title (quality consumption): quietly reg nut1 c.lt1 c.At##c.age 
 
-esttab using c:/temp/nut.tex, mtitle no p numbers star nogaps compress title(OLS results with quality consumption \$ nu_{t+1} \$ as dependent variable \label{tabnut})
+esttab using c:/temp/respdf.tex, mtitle no p numbers star nogaps compress title(Tobit results with asset changes \$\Delta A_t \$ as dependent variable \label{tabdAt})
+** esttab using c:/temp/dAt.tex, mtitle no p numbers star nogaps compress title(Tobit results with asset changes \$\Delta A_t \$ as dependent variable \label{tabdAt})
+
+**eststo clear
+**eststo, title (quality consumption): quietly reg nut1 c.lt1 c.At##c.age 
+**esttab using c:/temp/nut.tex, mtitle no p numbers star nogaps compress title(OLS results with quality consumption \$ \nu_{t+1} \$ as dependent variable \label{tabnut})
 
 ** the effect of c.lt1##c.age is weaker (even At##age is weak)
 reg nut1 c.lt1 c.At##c.age 
