@@ -1578,20 +1578,22 @@ lsms_normalizer<-function() {
     # final mapping has fields: (region,district,assetlevel) -> rc where assetlevel \in { kerosene_stove , elec_bulb, refrig, computer, elecoven, electstove, agri }
     # if has car, gets 11 km/litre mileage and assumes 4 km per weekday
     
+    
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq =2/30 , assetlevel="kerosene_lighting")) 
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq = 1.5/10, assetlevel="kerosene_cooking")) 
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq = 5/30, assetlevel="kerosene_cooking")) 
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="charcoal", recq = 5.4/30, assetlevel="charcoal_cooking")) 
     
-    x<-rbind(x,data.frame(category = "energy", group="needs",shortname="electricity", recq = 1.5, assetlevel="elecgas_cooking"))
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (3/12)*4, assetlevel="elec_waterheating"))#per-day units(kWh) based on 3 months of usage in the year
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (4/12)*2, assetlevel="elec_acfan"))
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="kerosene", recq =(5*60*1e-3) , assetlevel="elec_lighting")) 
+    x<-rbind(x,data.frame(category = "energy", group="needs",shortname="electricity", recq = 1.0, assetlevel="elecgas_cooking")) # 1.5 -> 1.0
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (3/12)*1, assetlevel="elec_waterheating"))#per-day units(kWh) based on 3 months of usage in the year # 4 -> 1
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (4/12)*.5, assetlevel="elec_acfan")) # 2->.5
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = .05, assetlevel="elec_tvvideomusic"))
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (.180*24), assetlevel="elec_fridge"))
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (.18*24)*(3/12), assetlevel="elec_fridge")) # 
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (4*5*52*.1)/365 , assetlevel="elec_computer")) # 4-h per weekday usage 
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (.28*5*52)/365.0, assetlevel="elec_iron")) # 4-h per weekday usage 
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="electricity", recq = (.28*52)/365.0, assetlevel="elec_iron")) # 1-h per weekday usage 
     
     x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq = (5*4*52)/365/11.0, assetlevel="petrol_car")) # 11 km/liters and 4 km per weekday
-    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq =(5*4*52)/365/6.5 , assetlevel="petrol_motorbike"))
+    x<-rbind(x,data.frame(category = "energy", group="needs", shortname="petrol", recq =(5*2*52)/365/6.5 , assetlevel="petrol_motorbike")) # 2 km per weekday
     
     
     return(x)

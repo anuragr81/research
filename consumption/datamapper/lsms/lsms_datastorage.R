@@ -42,16 +42,16 @@ ldat<-function(){
   
   get_electricity_prices <- function () { 
     x <- data.frame(year=NULL, price=NULL)
-    x<- rbind(x, data.frame( year=2006, price=38))
-    x<- rbind(x, data.frame( year=2007, price=40))
-    x<- rbind(x, data.frame( year=2008, price=49))
-    x<- rbind(x, data.frame( year=2009, price=49))
-    x<- rbind(x, data.frame( year=2010, price=49))
-    x<- rbind(x, data.frame( year=2011, price=60))
-    x<- rbind(x, data.frame( year=2012, price=60))
-    x<- rbind(x, data.frame( year=2013, price=60))
-    x<- rbind(x, data.frame( year=2014, price=100))
-    x<- rbind(x, data.frame( year=2015, price=100))
+    x<- rbind(x, data.frame( year=2006, price=.38))
+    x<- rbind(x, data.frame( year=2007, price=.40))
+    x<- rbind(x, data.frame( year=2008, price=.49))
+    x<- rbind(x, data.frame( year=2009, price=.49))
+    x<- rbind(x, data.frame( year=2010, price=.49))
+    x<- rbind(x, data.frame( year=2011, price=.60))
+    x<- rbind(x, data.frame( year=2012, price=.60))
+    x<- rbind(x, data.frame( year=2013, price=.60))
+    x<- rbind(x, data.frame( year=2014, price=.100))
+    x<- rbind(x, data.frame( year=2015, price=.100))
     x<- ( merge(x, get_exchange_rate_usd_tnz()) %>% mutate ( price = price*usd_tnz) ) [ ,c("year","price") ]
     return(x)
   }

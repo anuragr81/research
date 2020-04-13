@@ -739,7 +739,7 @@ run_test <- function(p.df,use_nu) {
 }
 
 run_test <- function() {
-
+  
 }
 
 analyse_estimation_df <- function(res,use_nu) {
@@ -869,26 +869,31 @@ analyse_house_maintenance_2012_2014 <- function(cdat, odat,adat){
   return(alldatf)
 }
 
-assign_house_maintenance <- function (a2010, a2012, a2014, o2010, o2012, o2014) {
+assign_house_maintenance <- function (a2010, a2012, a2014, o2010, o2012, o2014, truncateval) {
+  
   fee <- .025
   homeownerhouses2010 <- merge ( subset( merge(a2012, unique(o2012[,c("hhid","hhid2010")]) ) , shortname=="house" & number >0) , plyr::rename(a2010,c("hhid"="hhid2010")) )
   
   oh2010   <- ddply(o2010, .(hhid), summarise, houserent = sum(houserent)) [ ,c("hhid","houserent")]
   rent2010     <- plyr::rename(subset(oh2010,houserent>0 & !is.na(houserent))[,c("hhid","houserent")] , c("houserent" = "running_cost", "hhid"="hhid2010"))
   norent2010wh <- subset((merge(plyr::rename(subset(oh2010,houserent==0 || is.na(houserent)), c("hhid"="hhid2010"))[,c("hhid2010","houserent")],homeownerhouses2010[,c("hhid2010","mtm")]) %>% mutate(running_cost = fee*mtm*1.2)) [ ,c("hhid2010","running_cost")] , !is.na(running_cost))
+  
   runningcosts2010 <- rbind(rent2010,norent2010wh)
+  runningcosts2010$running_cost <- sapply(runningcosts2010$running_cost,function(x){ min(x,truncateval)})
   
   oh2012               <- ddply(o2012, .(hhid), summarise, houserent = sum(houserent)) [ ,c("hhid","houserent")]
   homeownerhouses2012  <- subset( a2012,  shortname=="house" & number >0)
   rent2012             <- plyr::rename(subset(oh2012,houserent>0 & !is.na(houserent))[,c("hhid","houserent")] , c("houserent" = "running_cost"))
   norent2012wh         <- subset((merge(subset(oh2012,houserent==0 || is.na(houserent)) [,c("hhid","houserent")],homeownerhouses2012[,c("hhid","mtm")]) %>% mutate(running_cost = fee*mtm) ) [ ,c("hhid","running_cost")] , !is.na(running_cost))
   runningcosts2012 <- rbind(rent2012,norent2012wh)
+  runningcosts2012$running_cost <- sapply(runningcosts2012$running_cost,function(x){ min(x,truncateval)})
   
   oh2014               <- ddply(o2014, .(hhid), summarise, houserent = sum(houserent)) [ ,c("hhid","houserent")]
   homeownerhouses2014  <- subset( a2014,  shortname=="house" & number >0)
   rent2014             <- plyr::rename(subset(oh2014,houserent>0 & !is.na(houserent))[,c("hhid","houserent")] , c("houserent" = "running_cost"))
   norent2014wh         <- subset( (merge(subset(oh2014,houserent==0 || is.na(houserent)) [,c("hhid","houserent")],homeownerhouses2014[,c("hhid","mtm")]) %>% mutate(running_cost = fee*mtm) ) [ ,c("hhid","running_cost")] , !is.na(running_cost))
   runningcosts2014     <- rbind(rent2014,norent2014wh)
+  runningcosts2014$running_cost <- sapply(runningcosts2014$running_cost,function(x){ min(x,truncateval)})
   #the following gives a quantile comparison
   #data.frame(rent2010=quantile(rent2010$running_cost,seq(20)/20), norent2010 = quantile(norent2010wh$running_cost, seq(20)/20),rent2012=quantile(rent2012$running_cost,seq(20)/20), norent2012 = quantile(norent2012wh$running_cost, seq(20)/20) , rent2014=quantile(rent2014$running_cost,seq(20)/20), norent2014 = quantile(norent2014wh$running_cost, seq(20)/20))
   hc <- list()
@@ -915,7 +920,7 @@ init_data <- function(){
   #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
-  #p <- estimation_df(e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, c2010=c2010, c2012=c2012, c2014=c2014)
+  #pres <- estimation_df(e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, c2010=c2010, c2012=c2012, c2014=c2014)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
@@ -967,7 +972,7 @@ estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014, c2
   asum2012                                   <- ddply(subset(plyr::rename(pares[["dat0"]][,c("hhid","cost")],c("hhid"="hhid2012","cost"="cost.2012")), !is.na(cost.2012)),.(hhid2012),summarise,cost.2012=sum(cost.2012))
   df2012                                     <- merge(asum2012,adiff2014,by=c("hhid2012"),all.x=TRUE)
   df2012[is.na(df2012$netmtm.fdelta),]$netmtm.fdelta <- 0
-
+  
   needscost2014      <- merge(plyr::rename(subset(e,year==2014),c("hhid"="hhid2014","needs_cost"="needs_cost_2014")), mapping_hhids_2012_2014(o2014 = o2014), by = c("hhid2014"))
   dfe2012            <- merge( df2012, needscost2014, by = c("hhid2012"))
   nonsplithhids2012  <- subset(ddply(dfe2012[,c("hhid2012","hhid2014")],.(hhid2012),summarise,n=length(unique(hhid2014))),n==1)$hhid2012
@@ -1407,8 +1412,10 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   a2010 <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer)
   a2012 <- ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ln = lsms_normalizer)
   a2014 <- ll@read_assets_file(year = 2014, dirprefix = "../",fu = fu, ln = lsms_normalizer)
-  
+  # assume that cheapest  option (kerosense) for lighting and cooking
   assumed2010     <- assume_assets(o2010)
+  
+  # 
   assetlevels2010 <- merge(subset(a2010, number>0), asset_levels_for_name())[,c("hhid","assetlevel")]
   assetlevels2010net <- rbind(assetlevels2010,assumed2010)
   energybasketconstituents2010 <- merge(assetlevels2010net,energy_prices2010 ) %>% mutate(rec_cost = DAYS_IN_YEAR * price * recq)
@@ -1447,7 +1454,7 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   #ah2014 <- analyse_house_maintenance_2012_2014(cdat = c2014, odat = o2014)
   #compare2010 <- merge ( plyr::rename(merge(ah2012, unique(o2012[,c("hhid2010","hhid")]),by="hhid"), c("med_maint"="med_maint_2012" ))[,c("hhid2010","med_maint_2012")] , plyr::rename(ah2010, c("med_maint"="med_maint_2010" , "hhid"="hhid2010")) , by = c("hhid2010"))
   
-  housing_costs <- assign_house_maintenance(a2010 = a2010, a2012 = a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+  housing_costs <- assign_house_maintenance(a2010 = a2010, a2012 = a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, truncateval = 1e+7)
   
   hc2010 <- as.data.frame(housing_costs["hc2010"]) %>% mutate( hc2010.running_cost = MONTHS_IN_YEAR * hc2010.running_cost)
   hc2012 <- as.data.frame(housing_costs["hc2012"]) %>% mutate( hc2012.running_cost = MONTHS_IN_YEAR * hc2012.running_cost)
@@ -1480,7 +1487,13 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   r                <- rbind(r, allcosts2012[,select_cols] %>% mutate(year=2012)) 
   r                <- rbind(r, allcosts2014[,select_cols] %>% mutate(year=2014)) 
   
-  return(r) 
+  res              <- list()
+  res[["df"]]      <- r
+  res[["df2010"]]  <- allcosts2010
+  res[["df2012"]]  <- allcosts2012
+  res[["df2014"]]  <- allcosts2014
+  
+  return(res) 
   
   # transport - load petrol prices and load public transport prices
   # household - rent and clothes
@@ -1488,6 +1501,28 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   # sum up all the costs - this total cost should be seen as p(A_{t-1},\rho) x needs_cost
   
   
+}
+
+plot_needs <- function(e,year){
+  par(mfrow=c(2,2))
+  if (year == 2010){  
+    hist(e[["df2010"]]$foodbasket_cost)
+    hist(e[["df2010"]]$housing_cost)
+    hist(e[["df2010"]]$energybasket_cost)
+    hist(e[["df2010"]]$clothingcost)
+  } 
+  if (year == 2012){  
+    hist(e[["df2012"]]$foodbasket_cost)
+    hist(e[["df2012"]]$housing_cost)
+    hist(e[["df2012"]]$energybasket_cost)
+    hist(e[["df2012"]]$clothingcost)
+  } 
+  if (year == 2014){  
+    hist(e[["df2014"]]$foodbasket_cost)
+    hist(e[["df2014"]]$housing_cost)
+    hist(e[["df2014"]]$energybasket_cost)
+    hist(e[["df2014"]]$clothingcost)
+  }
 }
 #{
 #  data.frame(code=1,categ = "kerosene_lighting")
