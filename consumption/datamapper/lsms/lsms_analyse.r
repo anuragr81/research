@@ -917,7 +917,7 @@ init_data <- function(){
   i2012 <- read.csv('c:/temp/i2012.csv',stringsAsFactors = FALSE)
   i2014 <- read.csv('c:/temp/i2014.csv',stringsAsFactors = FALSE)
   e <- read.csv('c:/temp/e.csv',stringsAsFactors = FALSE)
-  #e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+  #e <- minimum_needs_cost_per_head(ll= ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
   #pres <- estimation_df(e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, c2010=c2010, c2012=c2012, c2014=c2014)
@@ -955,9 +955,9 @@ get_stata_income_re_results <- function(){
   
   return(res)
 }
-estimation_df <-function( pares, e, a2010, a2012, a2014, o2010, o2012, o2014, c2010, c2012, c2014 ){
+estimation_df <-function( ll, pares, e, a2010, a2012, a2014, o2010, o2012, o2014, c2010, c2012, c2014 ){
   if (missing(e)){
-    e <- minimum_needs_cost_per_head(c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+    e <- minimum_needs_cost_per_head(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
   if (missing(pares)){
     pares <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
@@ -1297,7 +1297,7 @@ plot_costs_from_plain_asset_result <- function(sname,res,is_mtm){
   #boxplot(data=subset(res[["dat1"]],!is.element(shortname,c('house')))[,c("shortname","mtm")],mtm~shortname,horizontal=F, las=2)
 }
 
-minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014){
+minimum_needs_cost_per_head <- function(ll, c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014){
   # provide a mapping - per region per district i.e. (region,district,characteristic) -> cost of per-head need per year
   #food - (protein, carb, fat, fruitsveg)
   #1200/1500 kcal
@@ -1460,22 +1460,33 @@ minimum_needs_cost_per_head <- function(c2010, c2012, c2014, o2010, o2012, o2014
   hc2012 <- as.data.frame(housing_costs["hc2012"]) %>% mutate( hc2012.running_cost = MONTHS_IN_YEAR * hc2012.running_cost)
   hc2014 <- as.data.frame(housing_costs["hc2014"]) %>% mutate( hc2014.running_cost = MONTHS_IN_YEAR * hc2014.running_cost)
   
-  basket_costs2010 <- plyr::rename(basket_costs2010,c("basket_cost"="foodbasket_cost"))
-  foodbasket2010   <- merge(basket_costs2010, unique(o2010[,c("hhid","region","district")]), by = c("region","district"))
+  basket_costs2010       <- plyr::rename(basket_costs2010,c("basket_cost"="foodbasket_cost"))
+  hsize2010              <- unique(merge(o2010[,c("hhid","region","district")], ll@get_hsize(o2010), by = c("hhid")))
+  foodbasket2010 <- merge(hsize2010,basket_costs2010, by = c("region","district")) %>% mutate(foodbasket_cost = consu*cost)
+  
+  #foodbasket2010   <- merge(basket_costs2010, unique(o2010[,c("hhid","region","district")]), by = c("region","district"))
   energybasket2010 <- plyr::rename(energybasket2010, c("basket_cost"="energybasket_cost"))
   hc2010           <- plyr::rename(hc2010, c("hc2010.running_cost"="housing_cost", "hc2010.hhid2010"="hhid"))
   clothing2010     <- plyr::rename(merge(clothing, unique(o2010[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2010")], c("avcost2010"="clothingcost"))
   allcosts2010     <- merge(clothing2010, merge(foodbasket2010,merge(hc2010, energybasket2010, by = c("hhid")), by=c("hhid")),by=c("hhid") ) %>% mutate (needs_cost = foodbasket_cost + housing_cost + clothingcost + energybasket_cost)
   
+  
   basket_costs2012 <- plyr::rename(basket_costs2012,c("basket_cost"="foodbasket_cost"))
-  foodbasket2012   <- merge(basket_costs2012, unique(o2012[,c("hhid","region","district")]), by = c("region","district"))
+  hsize2012        <- unique(merge(o2012[,c("hhid","region","district")], ll@get_hsize(o2012), by = c("hhid")))
+  foodbasket2012   <- merge(hsize2012,basket_costs2012, by = c("region","district")) %>% mutate(foodbasket_cost = consu*cost)
+  
+  #foodbasket2012   <- merge(basket_costs2012, unique(o2012[,c("hhid","region","district")]), by = c("region","district"))
   energybasket2012 <- plyr::rename(energybasket2012, c("basket_cost"="energybasket_cost"))
   hc2012           <- plyr::rename(hc2012, c("hc2012.running_cost"="housing_cost", "hc2012.hhid"="hhid"))
   clothing2012     <- plyr::rename(merge(clothing, unique(o2012[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2012")], c("avcost2012"="clothingcost"))
   allcosts2012     <- merge(clothing2012, merge(foodbasket2012,merge(hc2012, energybasket2012, by = c("hhid")), by=c("hhid")), by=c("hhid"))  %>% mutate (needs_cost = foodbasket_cost + housing_cost + clothingcost + energybasket_cost)
   
+  
   basket_costs2014 <- plyr::rename(basket_costs2014,c("basket_cost"="foodbasket_cost"))
-  foodbasket2014   <- merge(basket_costs2014, unique(o2014[,c("hhid","region","district")]), by = c("region","district"))
+  hsize2014        <- unique(merge(o2014[,c("hhid","region","district")], ll@get_hsize(o2014), by = c("hhid")))
+  foodbasket2014   <- merge(hsize2014,basket_costs2014, by = c("region","district")) %>% mutate(foodbasket_cost = consu*cost)
+  
+  #foodbasket2014   <- merge(basket_costs2014, unique(o2014[,c("hhid","region","district")]), by = c("region","district"))
   energybasket2014 <- plyr::rename(energybasket2014, c("basket_cost"="energybasket_cost"))
   hc2014           <- plyr::rename(hc2014, c("hc2014.running_cost"="housing_cost", "hc2014.hhid"="hhid"))
   clothing2014     <- plyr::rename(merge(clothing, unique(o2014[,c("hhid","region")]), by = c("region")) [ ,c("hhid","avcost2014")], c("avcost2014"="clothingcost"))
