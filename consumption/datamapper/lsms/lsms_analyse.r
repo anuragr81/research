@@ -1462,7 +1462,7 @@ minimum_needs_cost_per_head <- function(ll, c2010, c2012, c2014, o2010, o2012, o
   
   basket_costs2010       <- plyr::rename(basket_costs2010,c("basket_cost"="foodbasket_cost"))
   hsize2010              <- unique(merge(o2010[,c("hhid","region","district")], ll@get_hsize(o2010), by = c("hhid")))
-  foodbasket2010 <- merge(hsize2010,basket_costs2010, by = c("region","district")) %>% mutate(foodbasket_cost = consu*cost)
+  foodbasket2010 <- merge(hsize2010,basket_costs2010, by = c("region","district")) %>% mutate(foodbasket_cost = consu*foodbasket_cost)
   
   #foodbasket2010   <- merge(basket_costs2010, unique(o2010[,c("hhid","region","district")]), by = c("region","district"))
   energybasket2010 <- plyr::rename(energybasket2010, c("basket_cost"="energybasket_cost"))
@@ -1473,7 +1473,7 @@ minimum_needs_cost_per_head <- function(ll, c2010, c2012, c2014, o2010, o2012, o
   
   basket_costs2012 <- plyr::rename(basket_costs2012,c("basket_cost"="foodbasket_cost"))
   hsize2012        <- unique(merge(o2012[,c("hhid","region","district")], ll@get_hsize(o2012), by = c("hhid")))
-  foodbasket2012   <- merge(hsize2012,basket_costs2012, by = c("region","district")) %>% mutate(foodbasket_cost = consu*cost)
+  foodbasket2012   <- merge(hsize2012,basket_costs2012, by = c("region","district")) %>% mutate(foodbasket_cost = consu*foodbasket_cost)
   
   #foodbasket2012   <- merge(basket_costs2012, unique(o2012[,c("hhid","region","district")]), by = c("region","district"))
   energybasket2012 <- plyr::rename(energybasket2012, c("basket_cost"="energybasket_cost"))
@@ -1484,7 +1484,7 @@ minimum_needs_cost_per_head <- function(ll, c2010, c2012, c2014, o2010, o2012, o
   
   basket_costs2014 <- plyr::rename(basket_costs2014,c("basket_cost"="foodbasket_cost"))
   hsize2014        <- unique(merge(o2014[,c("hhid","region","district")], ll@get_hsize(o2014), by = c("hhid")))
-  foodbasket2014   <- merge(hsize2014,basket_costs2014, by = c("region","district")) %>% mutate(foodbasket_cost = consu*cost)
+  foodbasket2014   <- merge(hsize2014,basket_costs2014, by = c("region","district")) %>% mutate(foodbasket_cost = consu*foodbasket_cost)
   
   #foodbasket2014   <- merge(basket_costs2014, unique(o2014[,c("hhid","region","district")]), by = c("region","district"))
   energybasket2014 <- plyr::rename(energybasket2014, c("basket_cost"="energybasket_cost"))
