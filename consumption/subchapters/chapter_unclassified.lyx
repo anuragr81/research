@@ -695,286 +695,9 @@ reference "eq:nonstoch"
 .
 \end_layout
 
-\begin_layout Section
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:FutureDirections"
-
-\end_inset
-
-Stochastic model for quality
-\end_layout
-
 \begin_layout Standard
-The non-stochastic model presented in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:ModelDynamics"
-
-\end_inset
-
- was meant to demonstrate how status consumption may fit into an intertemporal
- setting with a control for quality.
- A more general model that considers the two uncertainties discussed in
- Sections 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:LiteratureReview"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Model"
-
-\end_inset
-
-would be formulated as follows:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather}
-\eta_{t+1}=\eta(t,T)\nonumber \\
-A_{t+1}=A_{t}+(i_{t}-c_{t})\label{eq:stochproblem}\\
-i_{t+1}=ki_{t}+\sigma W_{t}\nonumber \\
-c_{t}=\eta_{t}p(A_{t-1},\rho)g(\Gamma_{t})\nonumber \\
-\Gamma_{t}=r(\sigma,\rho)\nonumber 
-\end{gather}
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Here, 
-\begin_inset Formula $\eta_{t}$
-\end_inset
-
- are the needs of a consumer at age 
-\begin_inset Formula $t$
-\end_inset
-
- (and an expected lifetime of 
-\begin_inset Formula $T$
-\end_inset
-
-), 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- is the consumption in the period 
-\begin_inset Formula $t$
-\end_inset
-
-, 
-\begin_inset Formula $k$
-\end_inset
-
- is the rate of steady growth of income while 
-\begin_inset Formula $\sigma$
-\end_inset
-
- represents the 
-\shape italic
-observed
-\shape default
- uncertainty in income with
-\begin_inset Formula $W_{t}$
-\end_inset
-
- a 
-\begin_inset Formula $N(0,1)$
-\end_inset
-
- noise.
- As before, 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- represents the value of assets owned, 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- a non-decreasing function indicating the costs for owning assets 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- and maintaining characteristics
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- Instead of the quality control 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- we consider a function 
-\begin_inset Formula $g(\Gamma_{t})$
-\end_inset
-
- where 
-\begin_inset Formula $\Gamma_{t}$
-\end_inset
-
- represents the consumer's belief related to 
-\begin_inset Formula $\sigma$
-\end_inset
-
- (which is the risk in the stochastic process of income quantifying the
- possibility of income growth through consumption).
- We can denote this guess function 
-\begin_inset Formula $r$
-\end_inset
-
- which maps 
-\begin_inset Formula $\sigma$
-\end_inset
-
- and characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
- to 
-\begin_inset Formula $\Gamma_{t}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-By believing in 
-\begin_inset Formula $\Gamma_{t}$
-\end_inset
-
-, a consumer would arrange 
-\begin_inset Formula $c_{t},A_{t}$
-\end_inset
-
- assuming that 
-\begin_inset Formula $i_{t+1}=ki_{t}+\Gamma_{t}W_{t}$
-\end_inset
-
-.
- The real process for 
-\begin_inset Formula $i_{t+1}$
-\end_inset
-
- depend only on past 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- and the factor 
-\begin_inset Formula $\sigma$
-\end_inset
-
- which is unknown to the consumer.
- A particular form of the function 
-\begin_inset Formula $r(\sigma,\rho)$
-\end_inset
-
- can be set based on the insights from behavioural economics 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-How individuals underestimate or overestimate risks is best explained with
- prospect theory.
- Generally, the consumer behaviour is stated as
-\begin_inset Formula $u(x)=\sum w(p_{i})\upsilon(x_{i})$
-\end_inset
-
- (
-\begin_inset Formula $w(p)$
-\end_inset
-
- is the probability weighting function and 
-\begin_inset Formula $\upsilon(x)$
-\end_inset
-
- is the payoff-utility function for the consumer.
- A structure for 
-\begin_inset Formula $\upsilon(x)$
-\end_inset
-
- would be 
-\begin_inset Formula $log(x)$
-\end_inset
-
- and one may assume a structure of 
-\begin_inset Formula $w$
-\end_inset
-
- based on the data).
-\end_layout
-
-\end_inset
-
-.
- A higher
-\begin_inset Formula $\Gamma_{t}$
-\end_inset
-
- would mean the consumer would set a high 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- - thereby settling for a lower 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- and not improving the long-term state determined by 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- The optimal 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- would be achieved when maximises the utility 
-\begin_inset Formula $\sum_{t=0}^{T}u(A_{t},\eta_{t},c_{t})$
-\end_inset
-
- over the time-period 
-\begin_inset Formula $T$
-\end_inset
-
-.
- This is stochatic dynamic optimisation problem so that the vector 
-\begin_inset Formula $\Gamma^{*}$
-\end_inset
-
- solves the following optimisation: 
-\begin_inset Formula 
-\begin{align}
-argmax_{\Gamma}(\sum_{i=1}^{T}u(c_{i},A_{i},\eta_{i}))\label{eq:optim}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The literature often introduces demographic variables through the discount
- factor in the utility function
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CagettiWealth2003"
-literal "true"
-
-\end_inset
-
-.
- In the absence of precautionary savings it may be difficult to recover
- the value of the preference parameters using Euler equations
+In the absence of precautionary savings it may be difficult to recover the
+ value of the preference parameters using Euler equations
 \begin_inset CommandInset citation
 LatexCommand cite
 key "CarrollLogLinearDeath2001"
@@ -1634,111 +1357,149 @@ In conclusion, if it is possible to model the acquisition of assets over
 \end_layout
 
 \begin_layout Section
-Issues Outstanding
+APPENDIX
 \end_layout
 
 \begin_layout Standard
-Here is the list of unresolved problems :
-\end_layout
-
-\begin_layout Standard
-1.
- In what sense is 
-\begin_inset Formula $\sigma_{t}$
+In absence of the additivity assumption, a two-way substitution is implied
+ - first, across commodities and second, across qualities variants within
+ a commodity.
+ Consider a two commodity-group world where prices are 
+\begin_inset Formula $p_{1}^{1},p_{1}^{2},p_{1}^{3}$
 \end_inset
 
- optimal while 
-\begin_inset Formula $\Gamma_{t}$
+ for commodity group 1 and 
+\begin_inset Formula $p_{2}^{1},p_{2}^{2},p_{2}^{3}$
 \end_inset
 
- isn't.
- It needs to be clarified if the consumer maximises utility by choosing
-\begin_inset Formula $\Gamma_{t}$
+ for commodity group 2.
+ Assuming the price are in an ascending order, 
+\begin_inset Formula $p_{1}^{1},p_{2}^{1}$
 \end_inset
 
- or is 
-\begin_inset Formula $\Gamma_{t}$
+ are the prices of the cheapest commodity in each group.
+ Assume for a moment that the consumer's income remains constant.
+ Now if price 
+\begin_inset Formula $p_{1}^{3}$
 \end_inset
 
- the sub-optimal solution for Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:optim"
-
+ increases and the quantities consumed of the item with price 
+\begin_inset Formula $p_{1}^{3}$
 \end_inset
 
-.
-\end_layout
-
-\begin_layout Standard
-2.
- It needs to be clarified if the consumer has bequest motives or not.
-\end_layout
-
-\begin_layout Standard
-3.
- We need to reformulate 
-\begin_inset Formula $c_{t}$
-\end_inset
-
+ - i.e.
  
-\begin_inset Formula $c_{t}$
+\begin_inset Formula $q_{1}^{3}$
 \end_inset
 
- is determined by 
-\begin_inset Formula $A_{t-1}$
+ remain the same, then for the total expenditure in group 1 (
+\begin_inset Formula $x_{1}=\sum_{i=1}^{3}p_{i}q_{i}$
 \end_inset
 
- (not 
-\begin_inset Formula $A_{t}$
+) to remain the same, the quantities 
+\begin_inset Formula $q_{1}^{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $q_{1}^{2}$
+\end_inset
+
+ must decline (i.e.
+ less of the items with prices 
+\begin_inset Formula $p_{1}^{1}$
+\end_inset
+
+ and/or 
+\begin_inset Formula $p_{1}^{2}$
+\end_inset
+
+ would be consumed).
+ If the consumer doesn't decrease the quantities consumed 
+\begin_inset Formula $q_{1}^{1},q_{1}^{2}$
+\end_inset
+
+, then 
+\begin_inset Formula $x_{1}=p_{1}^{1}q_{1}^{1}+p_{1}^{2}q_{1}^{2}+p_{1}^{3}q_{1}^{3}$
+\end_inset
+
+ would increase due to rise in 
+\begin_inset Formula $p_{1}^{3}$
+\end_inset
+
+ and the consumer must adjust 
+\begin_inset Formula $x_{2}=p_{2}^{1}q_{2}^{1}+p_{2}^{2}q_{2}^{2}+p_{2}^{3}q_{2}^{3}$
+\end_inset
+
+ - since her total outlay remains the same.
+ It would be possible, therefore, that the consumer spends less on food
+ overall - for example - to support her energy needs.
+ The switch from 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ to 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ would be the 
+\series bold
+first-level 
+\series default
+of substitution and the switch from 
+\begin_inset Formula $q_{1}^{3}$
+\end_inset
+
+ to 
+\begin_inset Formula $q_{1}^{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $q_{1}^{2}$
+\end_inset
+
+ would constitute the 
+\series bold
+second-level 
+\series default
+of substitution.
+\end_layout
+
+\begin_layout Standard
+When additivity assumption cannot be used, two assumptions can simply the
+ model - first that every commodity group is either i) one where LTDG dominate
+ and quality variation does not exist or ii) LTDG don't exist and quality
+ variation exists.
+ With that assumption, consider that the commodity group 2 is comprised
+ only of elementary goods with just one price 
+\begin_inset Formula $p_{2}$
+\end_inset
+
+ and a set of long-term durable goods whose price is 
+\begin_inset Formula $\Pi_{2}$
+\end_inset
+
+>>
+\begin_inset Formula $p_{2}$
+\end_inset
+
+ (LTDG) .
+ In that case, the second-level of substitution would be applicable only
+ for group 1 and the second-level of substitution would be driven only by
+ the savings for the long-term durable good in the group 2 (with price 
+\begin_inset Formula $\Pi_{2}$
 \end_inset
 
 ).
- This should then be used to compute the dynamic programming solution
-\end_layout
-
-\begin_layout Standard
-4.
- What would 
-\begin_inset Formula $m$
-\end_inset
-
-, 
-\begin_inset Formula $a$
-\end_inset
-
- and 
-\begin_inset Formula $\frac{\alpha}{\beta}$
-\end_inset
-
- tell us? We are not interested in elasticities any more.
- Can we answer to what extent is quality segregated based assets? How can
- this be improved with stochastic dynamic programming?
-\end_layout
-
-\begin_layout Standard
-5.
- Cite i) simulation matching paper, ii) Deaton's constraint essays
-\end_layout
-
-\begin_layout Standard
-6.
- The model for variance needs to be specified.
-\end_layout
-
-\begin_layout Standard
-7.
- That housing NDC is dependent on the owning a house or not needs to be
- specified.
- When a household has a house, the ENDC needs are maintenance - but when
- they don't they the ENDC needs are rent.
- Transport is the same way - if someone has a car - the gas are the needs
- - while if someone doesn't have a car the needs are either zero or the
- cost of public transport.
-\end_layout
-
-\begin_layout Section
-APPENDIX
+ Thus, certain commodity groups being dominated by LTDG and others by ENDC
+ associate the first-level of substitution with the LTDG ownership in the
+ model.
+ An implicit assumption here is also that acquiring LTDG is always more
+ expensive than engaging in ENDC - the quality differences within ENDC always
+ matter more in short-term than the quality variation within LTDG.
+ For example, if several types of cars exist in the transport commodity
+ group as do the limousine companies for a taxi-commute, then without the
+ implicit assumption one risks ignoring the quality variation in types of
+ cars.
 \end_layout
 
 \begin_layout Standard
