@@ -2962,7 +2962,7 @@ enhanced
 \end_inset
 
 .
- The non-stochastic Euler equations for this model are as follows:
+ The stochastic Euler equations for this model are as follows:
 \end_layout
 
 \begin_layout Standard
@@ -2971,13 +2971,159 @@ enhanced
 \eta_{t+1}=\eta(t,T)\nonumber \\
 A_{t+1}=A_{t}+(i_{t+1}-c_{t+1})\label{eq:stochproblem}\\
 i_{t+1}=ki_{t}+\sigma W_{t}\nonumber \\
-c_{t}=\Psi(\eta_{t})+p(A_{t},\rho)+\nu_{t+1}(\text{\ensuremath{\Gamma_{t}}})\nonumber \\
-\nu_{t+1}=r(\sigma,\rho)\nonumber 
+c_{t}=\psi(\eta_{t})+p(A_{t},\rho)+\nu_{t+1}(\text{\ensuremath{\Gamma_{t}}})\nonumber \\
+\Gamma_{t}=r(\sigma,\rho)\nonumber 
 \end{gather}
 
 \end_inset
 
  
+\bar under
+The above still needs rework - we don't think subjective probability means
+ estimation of income.
+ A conditional probability model - i.e.
+ hierarchy or some other way of introducing exchangeability must be used.
+\end_layout
+
+\begin_layout Subsubsection
+Reformulation
+\end_layout
+
+\begin_layout Standard
+The life-cycle concerns would need to be considered.
+ In a simple reformulation consider just 
+\begin_inset Formula $u(\nu_{t},A_{t})=\alpha_{t}log(\nu_{t})+(1-\alpha_{t})log(A_{t}$
+\end_inset
+
+).
+ Let's consider the needs (without the adjustment for assets) as 
+\begin_inset Formula $\psi_{t}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $A_{t+1}$
+\end_inset
+
+ is stochastic and depends on the history of 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ (
+\begin_inset Formula $\psi_{t}$
+\end_inset
+
+ does not change as it is independent of choices the consumer makes), it
+ takes into account both the observed probability - which governs 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ and the subjective probability that governs 
+\begin_inset Formula $A_{t}.$
+\end_inset
+
+ Here, we refine 
+\begin_inset Formula $p(A_{t},\rho)$
+\end_inset
+
+ as investment towards the higher probability of windfall in 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+.
+ The peer effects of 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ or the habits that increase the chances (only slightly) do influence 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ but only after an upfront asset bearing cost 
+\begin_inset Formula $p(A_{t})$
+\end_inset
+
+ is paid.
+ If success were a lottery, 
+\begin_inset Formula $p(A_{t},\rho)$
+\end_inset
+
+ would be the.
+ 
+\end_layout
+
+\begin_layout Standard
+In a simple two-period model with a simplification where there are no needs
+ and with the terminal condition applied in the second period, the consumer
+ would benefit very little from the small chance of success.
+ In other words, 
+\begin_inset Formula $\alpha_{t}$
+\end_inset
+
+ would be little from 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ (and the expectation).
+ The following reformulation of the Euler equation has a private utility
+ 
+\begin_inset Formula $\nu_{t+1}$
+\end_inset
+
+ which the consumer enjoys and the public utility which is supposed to enhance
+ her chances - only that she gives has a weighting function for the probability.
+ The real world 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ does not have the weighting.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+A_{t+1}=A_{t}+(i_{t+1}-c_{t+1})\nonumber \\
+i_{t+1}=ki_{t}+\sigma(p(A_{t},\rho))W_{t}\nonumber \\
+c_{t}=p(A_{t},\rho)+\nu_{t+1}\label{eq:stochproblem_2}
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is also the point where a weighting function should be introduced.
+ How individuals underestimate or overestimate risks is best explained with
+ prospect theory.
+ Generally, the consumer behaviour is stated as
+\begin_inset Formula $u(x)=\sum w(p_{i})\upsilon(x_{i})$
+\end_inset
+
+ (
+\begin_inset Formula $w(p)$
+\end_inset
+
+ is the probability weighting function and 
+\begin_inset Formula $\upsilon(x)$
+\end_inset
+
+ is the payoff-utility function for the consumer.
+ However, our model considers that 
+\begin_inset Formula $p$
+\end_inset
+
+ is not known by the consumer - she is supposed to maintain some conditional
+ probability and act based on her own conditioning.
+ 
+\end_layout
+
+\begin_layout Standard
+====
 \end_layout
 
 \begin_layout Standard
@@ -3080,6 +3226,21 @@ observed
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+The main stochastic process seems to be the income itself.
+ Since the consumer sets 
+\begin_inset Formula $\nu_{t+1}$
+\end_inset
+
+ (where 
+\begin_inset Formula $t$
+\end_inset
+
+ is the age of the consumer) assuming the same equation (except with a different
+).
+ We assume that the drift component is known.
 \end_layout
 
 \begin_layout Standard
@@ -3294,24 +3455,7 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-Given the observed variables 
-\begin_inset Formula $c_{t},A_{t},\rho,i_{t},\Psi_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\eta_{t}$
-\end_inset
-
-, the consumer optimises the non-stochastic sum 
-\begin_inset Formula $u=\sum_{i=1}^{T}\upsilon(\nu_{i},A_{i},\rho_{i})$
-\end_inset
-
- over her life-time of 
-\begin_inset Formula $T$
-\end_inset
-
- years.
- The consumer chooses 
+The consumer chooses 
 \begin_inset Formula $\nu_{t+1}\ge0$
 \end_inset
 
@@ -3382,7 +3526,6 @@ literal "true"
 \end_inset
 
  in order to consume.
- 
 \end_layout
 
 \begin_layout Standard
@@ -3434,6 +3577,23 @@ The filter
 \end_inset
 
 ) in the developed market.
+\end_layout
+
+\begin_layout Section
+List of Issues
+\end_layout
+
+\begin_layout Enumerate
+Are the consumer always right about the drift? Probably not - we should
+ refrain from the model for 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ -guesses and rely on subjective probability theory.
+\end_layout
+
+\begin_layout Enumerate
+Include exchangeability and / or hierarchy in the model.
 \end_layout
 
 \begin_layout Section
