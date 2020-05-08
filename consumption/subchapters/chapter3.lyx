@@ -3181,7 +3181,7 @@ This is also the point where a weighting function should be introduced.
 \end_layout
 
 \begin_layout Subsubsection
-No NEEDs MODEL
+A No NEEDS MODEL
 \end_layout
 
 \begin_layout Standard
@@ -3214,13 +3214,334 @@ The simplified model without needs we use to demonstrate this is the following:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-A_{t+1}=A_{t}+i_{t+1}-c_{t+1}+\beta(c_{t+1},\rho)\\
-c_{t+1}
+\Delta A_{t+1}=A_{t+1}-A_{t}=i_{t+1}-c_{t+1}+\sigma_{\rho}W_{t+1}=\delta_{t+1}+\sigma_{\rho}c_{t+1}W_{t+1}\\
+u_{t+1}=\alpha log(c_{t+1})+(1-\alpha)log(A_{t+1})\\
+\rho_{t+1}=F(A_{t})
 \end{gather*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Everyone would maximise the expected value of 
+\begin_inset Formula $u_{t+1}$
+\end_inset
+
+ at every step - based on the probability.
+ The number of users could be minimised if we can assume that individuals
+ with a certain characteristics are exchangeable and therefore would all
+ have the attribute the same chances.
+ Another incentive to increasing 
+\begin_inset Formula $A_{t+1}$
+\end_inset
+
+ is that one's 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is may improve with improved 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+.
+ The consumer knows 
+\begin_inset Formula $F$
+\end_inset
+
+ but not 
+\begin_inset Formula $\sigma_{\rho}$
+\end_inset
+
+.
+ The boundaries in the distribution of 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ are the sole determinant of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ - this can endogenise the role of 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ We can explore two equilibria - first with a constant 
+\begin_inset Formula $\rho$
+\end_inset
+
+ - representing stagnant societies where class is permanent.
+ The consumer only makes a guess about 
+\begin_inset Formula $\sigma_{\rho}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+There are two ways to approach this - first is the Euler iteration which
+ details who assets would evolve.
+ Another option is to formulate a continuous model so that a consumer gets
+ a continuous rise in income 
+\begin_inset Formula $di$
+\end_inset
+
+ responding to which she would increase the consumption 
+\begin_inset Formula $dc$
+\end_inset
+
+ to balance the risk.
+ This is a rather theoretical approach that can be taken to understand what
+ the compare the risk in income with the risk in mobility - the latter being
+ more susceptible to subjective perception.
+ Given the income change 
+\begin_inset Formula $di$
+\end_inset
+
+ the consumer effectively needs to balance the gain in utility between a
+ certain gain with accumulation 
+\begin_inset Formula $dA$
+\end_inset
+
+ through 
+\begin_inset Formula $di-dc$
+\end_inset
+
+ and a probabilistic expected change 
+\begin_inset Formula $\sigma(c)dW$
+\end_inset
+
+ where 
+\begin_inset Formula $\sigma(c)$
+\end_inset
+
+ is an increasing function of 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ Her belief in 
+\begin_inset Formula $\sigma(c)$
+\end_inset
+
+ and the certain rise in income would determine her selection of 
+\begin_inset Formula $dc$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+dA=di-dc+\sigma(c)dW\\
+di=\mu_{\rho}dt
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For simplicity, we assume that the growth in disposable incomes is linear.
+ This is particularly true in the developed countries (see the rise of disposabl
+e incomes in the UK).
+ The model could be extended also by introducing a probabilistic change
+ in 
+\begin_inset Formula $\rho$
+\end_inset
+
+ (through bands of 
+\begin_inset Formula $A$
+\end_inset
+
+).
+ But if we assume no changes in 
+\begin_inset Formula $\rho$
+\end_inset
+
+, we can proceed by assuming that all consumers have there own 
+\begin_inset Formula $\sigma(c)$
+\end_inset
+
+.
+ The resources in the economy are limited by the rise in incomes and therefore
+ some consumers would be more risk-seeking and others risk-averse.
+ A risk-neutral consumer would however choose 
+\begin_inset Formula $\sigma(c)$
+\end_inset
+
+ so that her rise in asset is aligned with the increase in income (?).
+ 
+\end_layout
+
+\begin_layout Standard
+The first-simplication is due to exchangeability is that all consumers have
+ the same 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ where 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ depends on 
+\begin_inset Formula $\rho$
+\end_inset
+
+ and 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ Thus we may describe the model: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+dA=di-dc+\sigma(\rho,c)dW\\
+di=\mu_{\rho}dt
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This may exhaust the discussion of subjective probability in the current
+ model.
+ The next step is to see how the risk-perception would shape the selection
+ of 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ A more risk-seeking consumer is one who has 
+\begin_inset Formula $\sigma(c,\rho)$
+\end_inset
+
+ such that 
+\begin_inset Formula $E(A)>E(A^{*})$
+\end_inset
+
+ where 
+\begin_inset Formula $A^{*}$
+\end_inset
+
+ is the expected asset growth of the risk-neutral consumer.
+ Who is the risk-neutral consumer though? What 
+\begin_inset Formula $c^{*}$
+\end_inset
+
+does she choose?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename uk_incomes_rise.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Disposable Incomes in the UK (Source: Trading Economics, ONS)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+\begin_inset Formula $\sigma_{\rho}$
+\end_inset
+
+ must represent or have a one-to-one correspondence with the transition
+ probability.
+ It might as well be the statistic that guarantees the partial exchangeability(N
+eed to confirm).
+ Let the matrix 
+\begin_inset Formula $p_{ij}=p(A_{i}\rightarrow A_{j}|A_{i})$
+\end_inset
+
+ .
+ In the constant 
+\begin_inset Formula $\rho$
+\end_inset
+
+ model, the consumer only seems to maximise 
+\begin_inset Formula $A_{t+1}$
+\end_inset
+
+ in the end.
+\end_layout
+
+\begin_layout Standard
+Partial exchangeability is with respect to this statistic.
+ 
+\begin_inset Formula $\rho$
+\end_inset
+
+ matters only because a consumer.
+ Going to a certain school or to a certain college would be good enough
+ for the consumer to ascertain long-term success or class mobility.
+ The partial exchangeability has a subjective role.
+\end_layout
+
+\begin_layout Standard
+Exchangeability is the criteria for social classification.
+ Despite same net worth, the very definition of social hierarchy means that
+ a certain individuals with characteristics 
+\begin_inset Formula $\rho$
+\end_inset
+
+ have more access to certain services - simply because individuals (consider
+ how black individuals would have trouble getting a cab in New York city
+ - or a cab driver would ignore some passengers to go to an investment bank
+ rink).
+ These are not because of prejudices but the long-term secuirty perceived
+ by individuals - which directly influence actions (for provision or availing
+ of services).
+ The role of exchangeability would justify the role of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ - having a certain 
+\begin_inset Formula $\rho$
+\end_inset
+
+ would give you access in non-durable terms.
+ Long-term is often changed due to limiting this type of access anyways.
+ Consumption is limited due to exchangeability or does it improve exchangeabilit
+y? It's not clear - what's clear is that a subjective behaviour does not
+ consider things as exchangeable as the real world processes would.
 \end_layout
 
 \begin_layout Standard
