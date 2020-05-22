@@ -367,13 +367,12 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-The advancements of the last century in game theory and statistics have
- made us revisit many of Veblen's observations in more precise and quantitative
- terms - allowing us to interpret his early observations on the seeming
- irrationality of consumer behaviour with a framework for decision under
- risk.
- An understanding of the effect that human behaviour and social conditions
- have on a macroscopic level may still be far from complete
+The advancements in game theory and statistics from the last century - particula
+rly the theory of decision under risk - can explain some of the seeming
+ irrationality of consumer behaviour that Veblen had observed in the late
+ 19th century.
+ The effect that social conditions have on human behaviour remains an area
+ of active research 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "StraussEcoGeo2008"
@@ -381,14 +380,31 @@ literal "true"
 
 \end_inset
 
-, but the framework for decision under risk could be used to understand
- status-related consumption.
- There are two threads in the literature that we find promising in this
- regard.
- The first is that of habit formation amongst consumers and the second on
- the relevance of social identities in visible consumption.
- We believe that a framework of decision under risk should allow us to link
- the two threads in the literature.
+.
+ However, the theory of decision under risk (see von Neumann-Morgenstern
+\begin_inset CommandInset citation
+LatexCommand cite
+key "VonNeumannMorgenstern1944"
+literal "false"
+
+\end_inset
+
+) has successfully explained many of the apparent paradoxes in human behaviour
+ (see Dhami 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SanjitDhamiBehavioural2016"
+literal "false"
+
+\end_inset
+
+).
+ It is possible - within the remit of this theory - to view status consumption
+ i.e.
+ the disproportionate spending on goods that only have a status (or visible)
+ appeal as an instance of the consumer's risk-seeking behaviour.
+ We inherit from the literature on habit formation and visible consumption
+ while adopting this approach to status consumption.
 \end_layout
 
 \begin_layout Standard
@@ -1951,9 +1967,9 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-As we have argued before, the claim that perceived status is matched with
- consumption implies that there is a probabilistic private utility to be
- derived from conspicuous consumption.
+(See unclassified chatper's rewrite:) As we have argued before, the claim
+ that perceived status is matched with consumption implies that there is
+ a probabilistic private utility to be derived from conspicuous consumption.
  A luxury watch may be futile for private use by itself (when compared to
  its cheaper alternatives with same functionality), but if an aspiring businessm
 an uses his knowledge of luxury watches to find new clients for her business,
@@ -3339,7 +3355,7 @@ There are two ways to approach this - first is the Euler iteration which
 \begin_inset Formula 
 \begin{gather*}
 dA=di-dc+\sigma(c)dW\\
-di=\mu_{\rho}dt
+di=\mu_{\rho}dt\Rightarrow dA=\mu_{\rho}dt-dc+\sigma(c)dW
 \end{gather*}
 
 \end_inset
@@ -3406,7 +3422,7 @@ The first-simplication is due to exchangeability is that all consumers have
 \begin_inset Formula 
 \begin{gather*}
 dA=di-dc+\sigma(\rho,c)dW\\
-di=\mu_{\rho}dt
+di=\mu_{\rho}dt\Rightarrow dA=\mu_{\rho}dt-dc+\sigma(\rho,c)dW
 \end{gather*}
 
 \end_inset
@@ -3436,11 +3452,199 @@ This may exhaust the discussion of subjective probability in the current
 \end_inset
 
  is the expected asset growth of the risk-neutral consumer.
- Who is the risk-neutral consumer though? What 
-\begin_inset Formula $c^{*}$
+ The risk-neutral consumer is the one who maximises 
+\begin_inset Formula $E(u(A,c))$
 \end_inset
 
-does she choose?
+.
+ This is possible only if her 
+\begin_inset Formula $\sigma(\rho,c)$
+\end_inset
+
+ is exactly the same as the population's true chance of promotion.
+ 
+\end_layout
+
+\begin_layout Standard
+Another way to view this is a game where every consumer chooses 
+\begin_inset Formula $c$
+\end_inset
+
+ depending on her 
+\begin_inset Formula $\rho$
+\end_inset
+
+ (the change in 
+\begin_inset Formula $\rho$
+\end_inset
+
+ would bring the true justification for status consumption).
+ There are a few questions that necessitate a clarification of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ changes : 
+\end_layout
+
+\begin_layout Enumerate
+If the consumer already knows the dependence of her selection on 
+\begin_inset Formula $\rho$
+\end_inset
+
+, why would she not choose a 
+\begin_inset Formula $c$
+\end_inset
+
+ that is closer to somebody who is known to have a more accurate 
+\begin_inset Formula $\sigma(\rho,c)$
+\end_inset
+
+? If the types are static and 
+\begin_inset Formula $\sigma(\rho,dc)$
+\end_inset
+
+ is known by the consumer, then she gains nothing by being risk-seeking.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If there is a game where the poor and rich can participate? What does a
+ wealthy consumer have to lose from? If she has no downside risk of being
+ wealthy and having a stable income (no matter what she sets 
+\begin_inset Formula $dc$
+\end_inset
+
+ to be) - then there is nothing worth participating for the consumer.
+ The utility from status consumption has been our key argument for the model.
+ Do the poor and the rich get a higher utility from participating in the
+ same absolute level of status consumption? This cannot be answered without
+ representing the promise social mobility? What is the promise of social
+ mobility? If this is a probability? If this the weight of the probability
+ - meaning a poor gives more weight to the probability of rise? In other
+ words, 
+\begin_inset Formula $u(c,p)=w\cdot p\cdot\upsilon(c)$
+\end_inset
+
+ has 
+\begin_inset Formula $w$
+\end_inset
+
+ higher for the poorer consumer.
+ More needs to be clarified for this analysis? Are we tracking assets for
+ the probability which the consumer gives weights to? More expected wealth
+ would motivate the poorer consumer to move up while the same expected wealth
+ may motivate the richer consumer.
+ Target wealth is equivalent to probability weighting - and this is what
+ shapes the non-durable consumption.
+\end_layout
+
+\begin_layout Standard
+A convenient form for 
+\begin_inset Formula $\sigma(\rho,c)$
+\end_inset
+
+ might be 
+\begin_inset Formula $k_{\rho}log(c)$
+\end_inset
+
+ - as we're often concerned with the level of consumption.
+ Another simplification that can be offered is by assuming that 
+\begin_inset Formula $c=mi$
+\end_inset
+
+ and therefore the equations can be reformulated in terms of 
+\begin_inset Formula $m$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+dA & =(1-m)\mu dt+\sigma(m,\rho,i)dt
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\sigma(m,\rho,i)$
+\end_inset
+
+ indicates that the risk the consumer chooses must depend on her consumption
+ 
+\begin_inset Formula $m$
+\end_inset
+
+ as well as income 
+\begin_inset Formula $i$
+\end_inset
+
+ (apart from 
+\begin_inset Formula $\rho$
+\end_inset
+
+).
+ This complicates matters again.
+ It makes more sense to suggest that 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ change more slowly through 
+\begin_inset Formula $A$
+\end_inset
+
+ or even 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ Effectively the movement of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ (if at all) must be linked with the risk-perception.
+ One may thereon clarify how the certain improvement 
+\begin_inset Formula $(1-m)\mu$
+\end_inset
+
+ is preferred over the risky 
+\begin_inset Formula $\sigma(m,\rho,i)$
+\end_inset
+
+.
+ Two major questions thus arise:
+\end_layout
+
+\begin_layout Enumerate
+How does 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ depend on 
+\begin_inset Formula $i,A$
+\end_inset
+
+ and 
+\begin_inset Formula $m$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+What does a risk-neutral consumer do in the model?
+\end_layout
+
+\begin_layout Standard
+The latter consumption cannot be answered until we fix a utility function.
+\end_layout
+
+\begin_layout Standard
+Let's consider the sink
 \end_layout
 
 \begin_layout Standard
@@ -3546,6 +3750,145 @@ y? It's not clear - what's clear is that a subjective behaviour does not
 
 \begin_layout Standard
 ====
+\end_layout
+
+\begin_layout Subsubsection
+A Needs as investment model
+\end_layout
+
+\begin_layout Standard
+It is worth consider needs but only as investments to improvement of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Instead of saying that non-needs go to status promotion, we can start viewing
+ that all needs are investments of some sort and directly contribute.
+ Status consumption is merely a hope for mobility and nothing else.
+ The desire to get ahead of others enhanced this mobility in real terms
+ (not just in perception).
+ 
+\end_layout
+
+\begin_layout Standard
+Let's assume that there is no difference between observed and perceived
+ probability.
+ In this simplified model, all non-needs must contribute to the expected
+ probabilistic growth in income or assets.
+ Let's develop a model with income being the only stochastic process - which
+ just one uncertainty that is known by every consumer.
+ 
+\end_layout
+
+\begin_layout Standard
+To consider whether a model with stochastic 
+\begin_inset Formula $A$
+\end_inset
+
+ makes sense, let's consider a user who receives an income increase 
+\begin_inset Formula $di$
+\end_inset
+
+, she may invest this amount in some assets 
+\begin_inset Formula $A$
+\end_inset
+
+ that would give a certain rise in income (a conventional asset) or add
+ it to the consumption which would improve the income less certainly.
+ A certain cost of having assets can be written as 
+\begin_inset Formula $\delta(A)$
+\end_inset
+
+ is seen as the participation cost so that the consumer can either open
+ up this opportunity to increase 
+\begin_inset Formula $\sigma(A)$
+\end_inset
+
+ through 
+\begin_inset Formula $dA$
+\end_inset
+
+.
+ This can also be seen as the depreciation associated with assets 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ If there was no income then the assets would depreciate to 0.
+ However, the consumer makes sure that there is some 
+\begin_inset Formula $i$
+\end_inset
+
+ at all times to maintain some A.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+di=\mu Idt+\sigma(A)IdW\\
+dA=di-\delta(A)=\mu Idt-\delta(A)+\sigma(A)IdW
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If all consumption is also an investment (expense) of some sort, then the
+ consumer would only want to improve 
+\begin_inset Formula $A$
+\end_inset
+
+ (not caring about consumption with is encapsulated in 
+\begin_inset Formula $\delta(A)$
+\end_inset
+
+ ).
+ This would be like a dynasty.
+ There are 3 questions that remain
+\end_layout
+
+\begin_layout Enumerate
+What is the form of 
+\begin_inset Formula $\delta$
+\end_inset
+
+(A)?
+\end_layout
+
+\begin_layout Enumerate
+How does 
+\begin_inset Formula $\sigma(A,\rho)$
+\end_inset
+
+ depend on 
+\begin_inset Formula $\delta(A)$
+\end_inset
+
+? Notice that 
+\begin_inset Formula $\delta(A)$
+\end_inset
+
+ must directly contribute to the risk consumer takes.
+ Otherwise, there is very little motive for taking the risk.
+\end_layout
+
+\begin_layout Standard
+An alternative would be to view investments as directly increasing 
+\begin_inset Formula $dA$
+\end_inset
+
+ (instead of 
+\begin_inset Formula $di$
+\end_inset
+
+).
+ Regardless, there are two 
+\end_layout
+
+\begin_layout Standard
+===
 \end_layout
 
 \begin_layout Standard
