@@ -2907,7 +2907,7 @@ enhanced
 \begin_inset Formula $p(A_{t},\rho)$
 \end_inset
 
- - repersenting cost of the consumer's assets - different from the quality
+ - representing cost of the consumer's assets - different from the quality
  control 
 \begin_inset Formula $\nu_{t}$
 \end_inset
@@ -2963,7 +2963,11 @@ c_{t}=\psi(\eta_{t})+p(A_{t},\rho)+\nu_{t+1}(\text{\ensuremath{\Gamma_{t}}})\non
 
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
+
 \bar under
 The above still needs rework - we don't think subjective probability means
  estimation of income.
@@ -3103,7 +3107,6 @@ The life-cycle concerns would need to be considered.
 \end_inset
 
  would be the cost to be paid to be a part of the lottery.
- 
 \end_layout
 
 \begin_layout Standard
@@ -3201,11 +3204,56 @@ A No NEEDS MODEL
 \end_layout
 
 \begin_layout Standard
-Let's remove the needs 
-\begin_inset Formula $\Psi_{t}$
+Let's view all needs as some an investment or good-bearing costs.
+ The poor cannot invest but they can get a job where income is stable -
+ rich can't get a job and they have to take a risk with investment.
+ Otherwise the those - this is the first numerical test that can be done.
+ 
+\end_layout
+
+\begin_layout Standard
+Consider the process 
+\begin_inset Formula $ln(i_{t+1})-ln(i_{t})=\frac{1}{i_{t}^{\alpha}}$
 \end_inset
 
- The exchangeability axioms resolve the combinatorial explosion
+ where the income would flatten after a while.
+ In the continuous form - this could be a function of form 
+\begin_inset Formula $i_{t}=1-e^{-\alpha t}$
+\end_inset
+
+ and thus 
+\begin_inset Formula $di=\alpha e^{-\alpha t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We argue that income does not increase with investment whereas goods can.
+ The growth of investments keeps one's goods account stables.
+ A wealthy person must increase investments to maintain the wealth - if
+ new businesses rise where new risk are being undertaken, then those with
+ old wealth must take more risk.
+ We would assume that those with old wealth have full information of the
+ new wealth opportunities (full information market) and therefore therefore
+ new wealth doesn't replace the old wealth in the model.
+ The only way creative destruction is allowed in the model is by new jobs
+ being created and goods account itself affecting income of others.
+ This too is ignored for the moment - the only competition is between the
+ risk-loving wealthy individuals and risk-averse poorer individuals.
+ If we standardise the risk, we might find that the poor are more risk-seeking.
+ This depends on how individuals assign weight to the probability (the weighting
+ function).
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Exchangeability and Uncertainty
+\end_layout
+
+\begin_layout Standard
+The role of exchangeability axioms resolve the combinatorial explosion
 \begin_inset CommandInset citation
 LatexCommand cite
 key "RichardSubjectiveProbRealThing2004,deFinettiLaPrevision1937"
@@ -3294,68 +3342,90 @@ Everyone would maximise the expected value of
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
-There are two ways to approach this - first is the Euler iteration which
- details who assets would evolve.
- Another option is to formulate a continuous model so that a consumer gets
- a continuous rise in income 
+
+\series bold
+Continuous Model
+\end_layout
+
+\begin_layout Standard
+We could use a continuous model so that a consumer gets a continuous rise
+ in income 
 \begin_inset Formula $di$
 \end_inset
 
- responding to which she would increase the consumption 
-\begin_inset Formula $dc$
+ corresponding to wealth 
+\begin_inset Formula $A$
 \end_inset
 
- to balance the risk.
- This is a rather theoretical approach that can be taken to understand what
- the compare the risk in income with the risk in mobility - the latter being
- more susceptible to subjective perception.
+.
+ 
+\begin_inset Formula $di$
+\end_inset
+
+ is lower as 
+\begin_inset Formula $A$
+\end_inset
+
+ rises.
+ There is a mandatory depreciation with wealth - which is not like the cash
+ assets which grow at rate 
+\begin_inset Formula $r$
+\end_inset
+
+.
+  She could increase the consumption 
+\begin_inset Formula $d\psi$
+\end_inset
+
+ to balance the expected growth of 
+\begin_inset Formula $A$
+\end_inset
+
+.
  Given the income change 
 \begin_inset Formula $di$
 \end_inset
 
- the consumer effectively needs to balance the gain in utility between a
- certain gain with accumulation 
+ the consumer effectively needs to balance the gain in utility between i)
+ gained 
 \begin_inset Formula $dA$
 \end_inset
 
  through 
-\begin_inset Formula $di-dc$
+\begin_inset Formula $di-d\psi$
 \end_inset
 
- and a probabilistic expected change 
-\begin_inset Formula $\sigma(c)dW$
+ and ii) a probabilistic expected change 
+\begin_inset Formula $\sigma(\psi)dW$
 \end_inset
 
  where 
-\begin_inset Formula $\sigma(c)$
+\begin_inset Formula $\sigma(\psi)$
 \end_inset
 
- is an increasing function of 
-\begin_inset Formula $c$
-\end_inset
-
-.
- Her belief in 
-\begin_inset Formula $\sigma(c)$
-\end_inset
-
- and the certain rise in income would determine her selection of 
-\begin_inset Formula $dc$
+ is an increasing function of the investments 
+\begin_inset Formula $\psi$
 \end_inset
 
 .
+ Anything that is considered a need by the consumer is also an investment
+ in this way (assuming that basic needs are met for everyone and that no-one
+ is living with no income less than the cost of basic needs).
  
+\begin_inset Formula $\sigma(\psi)$
+\end_inset
+
+ would represent the risk-perception of the consumer.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-dA=di-dc+\sigma(c)dW\\
-di=\mu_{\rho}dt\Rightarrow dA=\mu_{\rho}dt-dc+\sigma(c)dW
+dA=di-(\psi+\delta)dt+\sigma(\psi)dW\\
+di=\mu(A,t)dt
 \end{gather*}
 
 \end_inset
@@ -3364,11 +3434,344 @@ di=\mu_{\rho}dt\Rightarrow dA=\mu_{\rho}dt-dc+\sigma(c)dW
 \end_layout
 
 \begin_layout Standard
-For simplicity, we assume that the growth in disposable incomes is linear.
- This is particularly true in the developed countries (see the rise of disposabl
-e incomes in the UK).
- The model could be extended also by introducing a probabilistic change
- in 
+As a result of the above equations we can write 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+dA & =\mu(A,t)dt-(\psi+\delta)dt+\sigma(\psi)dW
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, the form of 
+\begin_inset Formula $\mu(\rho,t)$
+\end_inset
+
+ and the size of 
+\begin_inset Formula $\delta$
+\end_inset
+
+ both would determine the risk that a consumer takes.
+ More risk would be needed if economy grows and depreciation 
+\begin_inset Formula $\delta$
+\end_inset
+
+ is high.
+ 
+\begin_inset Formula $\delta$
+\end_inset
+
+ is also positively correlated with the rise in incomes 
+\begin_inset Formula $\mu(\rho,t)$
+\end_inset
+
+.
+ In a growing economy both depreciation and rise in incomes would be rapid.
+ It may be possible to combine the two parameters with the rate of economic
+ growth.
+ The conventional asset-growth model ignores that the income for poor is
+ determined the wealth of the not so poor.
+ This must be reflected in the income process - by letting the income growth
+ not growing higher than a certain wealth - which would respond to the higher
+ wealth.
+ Responding to external trade may be seen as a similar behaviour on an aggregate
+d economy.
+\end_layout
+
+\begin_layout Standard
+Aggregation is another important view - if we can aggregate the incomes
+ and wealth of a 
+\begin_inset Formula $n_{k}$
+\end_inset
+
+ consumers in a village, then 
+\begin_inset Formula $n_{k}$
+\end_inset
+
+ their income and asset process could be expressed in a similar form.
+ The form of 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ need to satisfy this aggregation property - and should be used to understand
+ the risk management profile of a village.
+\end_layout
+
+\begin_layout Standard
+Assuming that the two are correlated, we can see that the asset growth 
+\begin_inset Formula $dA$
+\end_inset
+
+ in continuous time depends on 
+\begin_inset Formula $\delta$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ If the final goal is to accumulate wealth 
+\begin_inset Formula $A$
+\end_inset
+
+, then the the rich consumer would lose out if 
+\begin_inset Formula $\mu$
+\end_inset
+
+ increases and she doesn't increase 
+\begin_inset Formula $\sigma$
+\end_inset
+
+.
+ She must increase 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ to prevent a decline in 
+\begin_inset Formula $dA$
+\end_inset
+
+.
+ Likewise in a stagnant economy, 
+\begin_inset Formula $\mu$
+\end_inset
+
+ would be low (i.e.
+ it won't rise with time and its expected value in current time would be
+ low).
+ The risk must be taken by the lower asset consumer for her to hope to rise
+ her 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The game can only be won by accumulating more wealth.
+\end_layout
+
+\begin_layout Standard
+An important distinction is made about the wealth 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ We don't consider the usual assumption that 
+\begin_inset Formula $A$
+\end_inset
+
+ grows with a constant rate.
+ We believe that wealth - as a cash asset or inheritable wealth has the
+ property of decline in value more fundamentally.
+ A pot of gold (probably a Marxist perspective) is valuable only because
+ it would take us a long time to refine and obtain it.
+ Gold has value only because we agree to purchase it for a certain value.
+ By itself it is a risk-less asset only because we value it.
+ In complete chaos, it would have no value.
+ It grows only because an order is maintained and economy keeps growing.
+ The story with houses or any other asset is no different.
+ It grows only because the economy grows.
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ does not represent the growth in economy - but the risk in its growth is
+ what represents the model.
+\end_layout
+
+\begin_layout Standard
+Even though the rise of disposable incomes is often observed to be linear
+ (see the data from UK for example), we prefer the declining growth assumption
+ over life-time more appropriate - due to life-cycle effects for the consumer.
+ Even for the dynasties, the rise in prices would diminish the rise in incomes
+ as wealth rises.
+ Such a process is assumed to be known to the consumer.
+ What she doesn't know is whether her own wealth would follow the same trajector
+y - hence a risk process for wealth is assumed.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Aggregation
+\end_layout
+
+\begin_layout Standard
+For aggregation consider a two persons economy.
+ In one type of model the two persons have some basic dietary needs that
+ are satisfied by exchanging goods that they find or cultivate.
+ In the presence of wealth, one would have a higher wealth than the other
+ or would be more gifted than the other in finding more wealth (or more
+ creative).
+ The more creative person would pass on more wealth to her generations and
+ therefore a some point for the persons 
+\begin_inset Formula $1$
+\end_inset
+
+ and 
+\begin_inset Formula $2$
+\end_inset
+
+, we have 
+\begin_inset Formula $A_{1}<<A_{2}$
+\end_inset
+
+.
+ In this scenario, the consumer 
+\begin_inset Formula $1$
+\end_inset
+
+ might decide to exchange her different services where she takes very little
+ risk and just gets an income 
+\begin_inset Formula $\delta$
+\end_inset
+
+ from the consumer.
+ The consumer 
+\begin_inset Formula $2$
+\end_inset
+
+ already knows that she is better positioned to carry on the wealth creation
+ activities and an exchange is born.
+ The exchange looks like the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+dA_{1}=\delta t-\psi_{1}dt+\sigma(\psi_{1})dW\\
+dA_{2}=-\delta t-\psi_{2}dt+\sigma(\psi_{2})dW
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This exchange is hardly permanent.
+ The risky wealth generation activity that the consumer 
+\begin_inset Formula $2$
+\end_inset
+
+ has undertaken may only last for a few generations and the constant depletion
+ of 
+\begin_inset Formula $\delta t$
+\end_inset
+
+ may deplete the wealth 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+ completely.
+ This means equivalently that the consumer 1's income would be stable would
+ never accumulate higher than what is needed to sustain the balance 
+\begin_inset Formula $A_{2}>A_{1}$
+\end_inset
+
+.
+ An equilibrium in the above equations means i) 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+ takes more risks than 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+i.e.
+ 
+\begin_inset Formula $\psi_{2}>\psi_{1}$
+\end_inset
+
+ and that ii) 
+\begin_inset Formula $A_{2}>A_{1}$
+\end_inset
+
+.
+ This order would be hardly permanent because the process 
+\begin_inset Formula $dW$
+\end_inset
+
+ is random.
+ It is possible that over time the growth in assets is higher for the one
+ with 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+.
+ Let's how the above equation behaves in a Monte Carlo Simulation.
+ This needs us to define the state of the above model when 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+ has depleted to 0.
+ When 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+ has depleted to zero and if 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ is non-zero, we would think that consumer 
+\begin_inset Formula $2$
+\end_inset
+
+ would be employed by consumer 
+\begin_inset Formula $1$
+\end_inset
+
+ and the game should continue.
+ In reality, the would not be available to be set to 
+\begin_inset Formula $\psi_{1},\psi_{2}$
+\end_inset
+
+ and it might not be possible to bring 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ down by reducing 
+\begin_inset Formula $\psi_{1}$
+\end_inset
+
+.
+ The behaviour of the game when 
+\begin_inset Formula $A_{2}\rightarrow0$
+\end_inset
+
+ also asks for consider what the true utility of 
+\begin_inset Formula $A_{1},A_{2}$
+\end_inset
+
+ is.
+ The consumer is consider a probability adjusted view of 
+\begin_inset Formula $A_{1},A_{2}$
+\end_inset
+
+.
+ She may be willing to settle for 
+\begin_inset Formula $A_{1}<A_{2}$
+\end_inset
+
+ only as long as she is risk-averse.
+ The risk-adjusted view would still mean 
+\begin_inset Formula $u(A_{1})>u(A_{2})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The model is extended also by introducing a probabilistic change in 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -3382,18 +3785,34 @@ e incomes in the UK).
 \end_inset
 
 , we can proceed by assuming that all consumers have there own 
-\begin_inset Formula $\sigma(c)$
+\begin_inset Formula $\sigma(\psi)$
 \end_inset
 
 .
  The resources in the economy are limited by the rise in incomes and therefore
  some consumers would be more risk-seeking and others risk-averse.
  A risk-neutral consumer would however choose 
-\begin_inset Formula $\sigma(c)$
+\begin_inset Formula $\sigma(\psi)$
 \end_inset
 
  so that her rise in asset is aligned with the increase in income (?).
- 
+ It's not very clear how 
+\begin_inset Formula $d\psi$
+\end_inset
+
+ aggregates into 
+\begin_inset Formula $\psi$
+\end_inset
+
+ or how 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ changes in response to 
+\begin_inset Formula $d\psi$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -3411,7 +3830,7 @@ The first-simplication is due to exchangeability is that all consumers have
 \end_inset
 
  and 
-\begin_inset Formula $c$
+\begin_inset Formula $\psi$
 \end_inset
 
 .
@@ -3421,7 +3840,7 @@ The first-simplication is due to exchangeability is that all consumers have
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-dA=di-dc+\sigma(\rho,c)dW\\
+dA=di-d\psi+\sigma(\rho,\psi)dW\\
 di=\mu_{\rho}dt\Rightarrow dA=\mu_{\rho}dt-dc+\sigma(\rho,c)dW
 \end{gather*}
 
@@ -3462,7 +3881,6 @@ This may exhaust the discussion of subjective probability in the current
 \end_inset
 
  is exactly the same as the population's true chance of promotion.
- 
 \end_layout
 
 \begin_layout Standard
@@ -3562,7 +3980,7 @@ A convenient form for
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-dA & =(1-m)\mu dt+\sigma(m,\rho,i)dt
+dA & =(1-m)\mu dt+\sigma(m,\rho,i)dW
 \end{alignat*}
 
 \end_inset
@@ -3616,7 +4034,11 @@ dA & =(1-m)\mu dt+\sigma(m,\rho,i)dt
 \end_inset
 
 .
- Two major questions thus arise:
+ 
+\series bold
+Two major questions thus arise
+\series default
+:
 \end_layout
 
 \begin_layout Enumerate
@@ -3636,7 +4058,27 @@ How does
 \end_layout
 
 \begin_layout Enumerate
-What does a risk-neutral consumer do in the model?
+What does a risk-neutral consumer do in the model? This cannot be answered
+ without admitting that there is a risk faced by high 
+\begin_inset Formula $\rho$
+\end_inset
+
+ (the rich who are favoured by the income process).
+ If the rich also face a risk, then income process cannot have no risk.
+ Again, in the developing countries there is just a lot of risk for everybody
+ (even those who are rich) - compared to the developed countries where the
+ risk is lower for everyone and higher for the ultra rich.
+ If we already know that certain 
+\begin_inset Formula $\rho$
+\end_inset
+
+ would perform a certain way - with career choices and long-term choices
+ we make i.e.
+ the 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -3644,7 +4086,267 @@ The latter consumption cannot be answered until we fix a utility function.
 \end_layout
 
 \begin_layout Standard
-Let's consider the sink
+Let's consider the sink where there are investments to be made otherwise
+ the wealth would deplete with needs (with are carried with assets).
+ There is no concept of need other than assets in this context.
+ If the individual does not open more taps then her wealth would be gone.
+ Opening taps has a cost - but the more important question is - how do taps
+ determine income is the quantitative detail missing.
+ In this sense education is too is a sink that .
+\end_layout
+
+\begin_layout Standard
+First question is whether opening taps causes holes (meaning does taking
+ more risk in income would cause needs to grow)? Clearly not.
+ Holes can be caused if there is too much gold (
+\begin_inset Formula $A$
+\end_inset
+
+) but not by opening taps (income or investment).
+ This make the effect one-way i.e.
+ holes bring income with some risk but they income doesn't cause holes per
+ se.
+ Holes are dug by the consumer - as she projects her wealth.
+ If a rich were to give up her wealth, she would dig a sink but just not
+ bigger than what she needs for her basic needs to be fulfilled.
+ Instead of worrying about whether there is a basic level or not - we just
+ care about which is her target 
+\begin_inset Formula $\rho$
+\end_inset
+
+ i.e.
+ target 
+\begin_inset Formula $A$
+\end_inset
+
+ in mind.
+ We don't worry about her age - as we think she acts on behalf of her family
+ or clan (like the McDuck clan).
+ 
+\end_layout
+
+\begin_layout Standard
+If we can say that 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ increases the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and 
+\begin_inset Formula $i$
+\end_inset
+
+, then the second question is how exactly does cost 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ of opening a tap depend on 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ They clearly cannot just be a simple ratio of 
+\begin_inset Formula $A$
+\end_inset
+
+, otherwise the rich would bear more of this cost and the poor very little.
+ Since 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ must be a non-decreasing function of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+, this would mean the poor cannot compete with the rich.
+ 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is something that consumers can allocate to from 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Rich can lose if they don't take risks and they don't share their wealth
+ through opening more holes - their access to must therefore be lower.
+ 
+\end_layout
+
+\begin_layout Standard
+Notice that we took gold only to stress that too much of it does not have
+ any value.
+ If we take fruits of nature - then we know that their appeal .
+ But our behaviour for long-term durable goods is more akin to that towards
+ gold rather than fruits of nature.
+ The latter would also be driven by their demand - but accumulation of gold
+ reflects cash assets - and the lumpsum evaluation of our riches and that
+ of others we're constantly doing.
+ 
+\end_layout
+
+\begin_layout Standard
+As we consider a continuous process where 
+\begin_inset Formula $d\Psi$
+\end_inset
+
+ is controlled by the consumer (all else is exogenous), we must must a process
+ for 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ Are consumer's investments exponential, linear, mean-reverting? Should
+ we assume a shape of choices or of the income process instead? It's worth
+ looking into the relationship of 
+\begin_inset Formula $d\Psi$
+\end_inset
+
+ with others.
+ Assuming that the process 
+\begin_inset Formula $d\Psi$
+\end_inset
+
+ exists, if the income changes depend on how much non-durable consumption
+ 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ an individual does and growth of assets are influenced by i) income change
+ ii) the depreciation and iii) 
+\begin_inset Formula $d\Psi$
+\end_inset
+
+, the relationship would be :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+di=\mu(\Psi)dt+\sigma(\Psi)dW\nonumber \\
+dA=di-\delta(A)-d\Psi\label{eq:di_evolution}
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assuming a depreciation is also key since that is what motivates investment.
+ We know that depreciation is higher for the wealthy.
+ The income seems to be different for the poor than for the rich.
+ The rich cannot just get a job - and they have to rely more on digging
+ holes to maintain their wealth.
+ Nobody would give them a job that would double their wealth - the poor
+ can easily find that job.
+ So the income is a process that diminishes after a while 
+\begin_inset Formula $i$
+\end_inset
+
+ grows slowly at higher values - or that 
+\begin_inset Formula $di$
+\end_inset
+
+ is larger for those with smaller 
+\begin_inset Formula $A$
+\end_inset
+
+ than for those with large 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ In terms of the model in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:di_evolution"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset Formula $di$
+\end_inset
+
+ is independent of 
+\begin_inset Formula $A$
+\end_inset
+
+ and it is lower for the rich only because relative to 
+\begin_inset Formula $A$
+\end_inset
+
+ 
+\begin_inset Formula $di$
+\end_inset
+
+ would be very little (as it's driven only by 
+\begin_inset Formula $\Psi$
+\end_inset
+
+).
+ We need to see if 
+\begin_inset Formula $di$
+\end_inset
+
+ should depend on 
+\begin_inset Formula $A$
+\end_inset
+
+ or not.
+ If rich-poor-level-field is important, then 
+\begin_inset Formula $di$
+\end_inset
+
+ shouldn't depend on 
+\begin_inset Formula $A$
+\end_inset
+
+ (the rich lose in a way that poor don't) but since rich are supposed to
+ lose only by loss of wealth - it can be understood with higher deprecation
+ rate for 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The next question is how do needs reduce depreciation.
+ The rich should be able to scale up 
+\begin_inset Formula $di$
+\end_inset
+
+ by increasing 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ - but there asset would also decrease proportionately with 
+\begin_inset Formula $d\Psi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Another idea is to consider needs as the rate of loss of 
+\begin_inset Formula $A$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $\Psi=\frac{dA}{dt}$
+\end_inset
+
+.
+ Yet another idea is to keep 
+\begin_inset Formula $di=\mu(\Psi,A)dt+\sigma(\Psi,A)dW$
+\end_inset
+
+ and keep depreciation at a constant rate for everybody.
+ The choice requires some discussion.
 \end_layout
 
 \begin_layout Standard
