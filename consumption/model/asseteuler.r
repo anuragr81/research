@@ -285,3 +285,149 @@ evolve_assets <- function(i0,k,A0,m,alpha , r){
   
 }
 
+
+evolve_relative_wealth <-function(nsim,delta,sigma1,sigma2, risksz){
+
+  T = 1
+  dt = 1e-1
+  A1_init = 100
+  A2_init = 100
+  
+  
+  A1df <- data.frame()
+  A2df <- data.frame()
+  incdf <- data.frame()
+  
+  for ( j in seq(nsim)){
+    A1 = A1_init
+    A2 = A2_init
+    A1_arr = array()
+    A2_arr = array()
+    inc_arr = array()
+    
+    count <- 1
+    A1_arr[count] = A1_init
+    A2_arr[count] = A2_init
+    inc_arr[count] = 0
+    
+    timepoints <- seq(0,T,dt)
+    #TODO: replace dW -> sqrt(dt)*rnorm(1)
+    for (i in timepoints)
+    {  
+      dW1 = rnorm(1)
+      dW2 = rnorm(1)
+      inc  = - delta * (A1-A2)  
+      dA1 = inc* dt -sigma1 +  sigma1 * risksz * dW1
+      dA2 = -inc* dt - sigma2 + sigma2 * risksz* dW2
+      A1 = A1 + dA1
+      A2 = A2 + dA2
+      #if (A1<0){
+      #  stop("Cannot be less than 0")
+      #}
+      #if (A2<0){
+      #  stop("Cannot be less than 0")
+      #}
+      
+      
+      count <- count+1
+      A1_arr[count] <- A1
+      A2_arr[count] <- A2
+      inc_arr[count] <- inc
+      
+    }
+    A1add <- t(data.frame(x=A1_arr))
+    colnames(A1add) <- paste0("t_",c(timepoints, T+dt))
+    A1df <- rbind(A1df,A1add)
+    
+    A2add <- t(data.frame(x=A2_arr))
+    colnames(A2add) <- paste0("t_",c(timepoints, T+dt))
+    A2df <- rbind(A2df,A2add)
+    
+    iadd <- t(data.frame(x=inc_arr))
+    colnames(iadd) <- paste0("t_",c(timepoints, T+dt))
+    incdf <- rbind(incdf,iadd)
+    
+  }
+  retlist = list()
+  retlist[["A1"]] <- A1df
+  retlist[["A2"]] <- A2df
+  retlist[["inc"]] <- incdf
+  return(retlist)
+}
+
+
+evolve_relative_wealth_discrete <-function(nsim,delta,sigma1,sigma2, risksz, p){
+  
+  T = 1
+  dt = 1e-1
+  A1_init = 100
+  A2_init = 100
+  
+  
+  A1df <- data.frame()
+  A2df <- data.frame()
+  incdf <- data.frame()
+  
+  for ( j in seq(nsim)){
+    A1 = A1_init
+    A2 = A2_init
+    A1_arr = array()
+    A2_arr = array()
+    inc_arr = array()
+    
+    count <- 1
+    A1_arr[count] = A1_init
+    A2_arr[count] = A2_init
+    inc_arr[count] = 0
+    
+    timepoints <- seq(0,T,dt)
+    
+    for (i in timepoints)
+    {  
+      dW1 = rbinom(1,1,p)
+      dW2 = rbinom(1,1,p)
+      inc  = - delta * (A1-A2)  
+      dA1 = inc* dt -sigma1 +  sigma1 * risksz * dW1
+      dA2 = -inc* dt - sigma2 + sigma2 * risksz* dW2
+      A1 = A1 + dA1
+      A2 = A2 + dA2
+      #if (A1<0){
+      #  stop("Cannot be less than 0")
+      #}
+      #if (A2<0){
+      #  stop("Cannot be less than 0")
+      #}
+      
+      
+      count <- count+1
+      A1_arr[count] <- A1
+      A2_arr[count] <- A2
+      inc_arr[count] <- inc
+      
+    }
+    A1add <- t(data.frame(x=A1_arr))
+    colnames(A1add) <- paste0("t_",c(timepoints, T+dt))
+    A1df <- rbind(A1df,A1add)
+    
+    A2add <- t(data.frame(x=A2_arr))
+    colnames(A2add) <- paste0("t_",c(timepoints, T+dt))
+    A2df <- rbind(A2df,A2add)
+    
+    iadd <- t(data.frame(x=inc_arr))
+    colnames(iadd) <- paste0("t_",c(timepoints, T+dt))
+    incdf <- rbind(incdf,iadd)
+    
+  }
+  retlist = list()
+  retlist[["A1"]] <- A1df
+  retlist[["A2"]] <- A2df
+  retlist[["inc"]] <- incdf
+  return(retlist)
+}
+
+analyse_relative_wealth_results <- function(res){
+  # assume that there is infinite credit available thre is an optimum to be achieved
+  print(colMeans(res[["A1"]]))
+  print(colMeans(res[["A2"]]))
+  
+}
