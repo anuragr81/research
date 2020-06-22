@@ -425,9 +425,24 @@ evolve_relative_wealth_discrete <-function(nsim,delta,sigma1,sigma2, risksz, p){
   return(retlist)
 }
 
+draw_crra<- function(gamma){
+  lines(x,(x**(1-gamma)-1)/(1-gamma),type='l'); 
+}
+
+compare_bernoulli_sum<-function(p,nsims){
+ par(mfrow=(c(2,1)))
+ hist((rbinom(nsims,10,p))) 
+ mean(rbinom(nsims,10,p))
+ x <- data.frame(); for ( i in seq(nsims) ) { x <- rbind(x,(rbinom(10,1,p))) } ; hist(rowSums(x))
+}
+
 analyse_relative_wealth_results <- function(res){
   # assume that there is infinite credit available thre is an optimum to be achieved
   print(colMeans(res[["A1"]]))
   print(colMeans(res[["A2"]]))
-  
+  x<- seq(-1,100,.01)
+  plot(0,0,type='l',xlim=c(-10,100), ylim=c(-1,20))
+  draw_crra(0)
+  draw_crra(0.5)
+  draw_crra(.99)
 }

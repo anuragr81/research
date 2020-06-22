@@ -4340,7 +4340,7 @@ Here, the
 \begin_inset Formula $\alpha>0,\beta>0$
 \end_inset
 
-)..
+).
  Another probability weighting function is the |Tversky-Kahneman function
  
 \begin_inset Formula $w(p)=\frac{p^{\tau}}{(p^{\tau}+(1-p)^{\tau})^{\frac{1}{\tau}}}$
@@ -4723,6 +4723,271 @@ The key point is to consider the condition under which the income arrangement
 \end_inset
 
  change with inc.
+\end_layout
+
+\begin_layout Standard
+To answer these questions consider a more general model where no normality
+ assumption is made.
+ Bernoulli trial provides an easier formulation at the individual levels.
+ We don't have a sufficient background on whether distribution is known
+ or not.
+ We would need to consider a particular real-world source of uncertainty
+ to provide a volatility surface.
+ A general subjective probability function - on the other hand - provides
+ a general model for the subjective probability which influences individual's
+ choice of 
+\begin_inset Formula $\psi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Discrete Model
+\end_layout
+
+\begin_layout Standard
+A discrete model can consider a set of bernoulli trials as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\Delta A_{t} & =-\psi+\sigma(\psi)X_{t}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ is a Benoulli Random variable with probability 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ Summing over, one can write
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+A_{T} & =A_{0}-\psi T+\sigma(\psi)\sum_{t=1}^{T}X_{t}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $S_{t}=\sum_{i=1}^{t}X_{i}$
+\end_inset
+
+ (which would be a binomial variable of size 
+\begin_inset Formula $t$
+\end_inset
+
+), we can write :
+\begin_inset Formula 
+\begin{alignat}{1}
+A_{T} & =A_{0}-\psi T+\sigma(\psi)B_{T}\label{eq:bernoulli_asset}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assuming that a consumer makes a one-time decision on 
+\begin_inset Formula $\psi$
+\end_inset
+
+ based on a time horizon 
+\begin_inset Formula $T$
+\end_inset
+
+, a risk neutral consumer would choose 
+\begin_inset Formula $\psi_{CE}$
+\end_inset
+
+ with uncertainty imposed by 
+\begin_inset Formula $X_{t\in[1,T]}$
+\end_inset
+
+ so that 
+\begin_inset Formula $E(u(A_{T}))=u(A_{T})$
+\end_inset
+
+ is maximised.
+ A risk-seeking consumer would choose 
+\begin_inset Formula $\psi_{CE}$
+\end_inset
+
+ so that 
+\begin_inset Formula $E(u(A_{CE}))=u(A_{CE})$
+\end_inset
+
+.
+ The consumer choosing 
+\begin_inset Formula $\psi$
+\end_inset
+
+ so that 
+\begin_inset Formula $E($
+\end_inset
+
+
+\begin_inset Formula $u(A_{T}))>E(u(A_{CE}))$
+\end_inset
+
+ is considered risk-seeking and the consumer selecting 
+\begin_inset Formula $E(u(A_{T}))<E(u(A_{CE}))$
+\end_inset
+
+ would be considered risk-averse.
+ With Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bernoulli_asset"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we have 
+\begin_inset Formula $E(A_{T})=A_{0}-\psi T+\sigma(\psi)Tp(1-p)$
+\end_inset
+
+ where 
+\begin_inset Formula $p$
+\end_inset
+
+ is the probability associated with the variable 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let's assume a CRRA utilty to illustrate our argument.
+ As 
+\begin_inset Formula $u(A)=\frac{A^{1-\gamma}-1}{1-\gamma}$
+\end_inset
+
+, 
+\begin_inset Formula $E(u(A_{T}))$
+\end_inset
+
+ is a non-decreasing function of 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+, 
+\begin_inset Formula $u(A_{T})$
+\end_inset
+
+ is maximised when 
+\begin_inset Formula $E(A)$
+\end_inset
+
+ is maximised i.e.
+ for 
+\begin_inset Formula $\psi:(\frac{d\sigma}{d\psi}=\frac{1}{p(1-p)})$
+\end_inset
+
+ (where 
+\begin_inset Formula $\frac{d\sigma}{d\psi}>0$
+\end_inset
+
+)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Since 
+\begin_inset Formula $\frac{dA_{T}}{d\psi}=-T+\sigma'(\psi)Tp(1-p)$
+\end_inset
+
+, 
+\begin_inset Formula $E(A_{T})$
+\end_inset
+
+ is maximised trivially at 
+\begin_inset Formula $\psi=0$
+\end_inset
+
+ when 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is a constant.
+ The same is true for 
+\begin_inset Formula $\sigma(\psi)=\psi$
+\end_inset
+
+, 
+\begin_inset Formula $\frac{dA_{T}}{d\psi}=-T(p^{2}-p+1))$
+\end_inset
+
+ and 
+\begin_inset Formula $E(A_{T})=A_{0}-\psi T(p^{2}-p+1)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ If every consumer optimises 
+\begin_inset Formula $u(A_{T})$
+\end_inset
+
+ then consumer has no reason to deviate from the maximum 
+\begin_inset Formula $E(A_{T})$
+\end_inset
+
+.
+ The utility must therefore change.
+ More particularly, we should consider value optimisation vs utility optimisatio
+n the latter being risk-adjusted.
+ Some sort of weighting of probability is a good way to handle this.
+\end_layout
+
+\begin_layout Standard
+The question now is whether the income arrangment would solve the issue.
+ First off why do we need it.
+ First let's consider what would happened if 
+\begin_inset Formula $A_{1}=A_{2}$
+\end_inset
+
+.
+ On average two consumer encounter different uncertainty - they would choose
+ 
+\begin_inset Formula $\psi$
+\end_inset
+
+ based not on the actual uncertainty 
+\begin_inset Formula $\sigma(\psi)$
+\end_inset
+
+ but there risk-aversion.
+ If they're risk averse their asset would fall.
+ We consider utility function of the relative wealth - it's not enough that
+ the consumer has enough income - it would be bad if the consumer loses
+ out to another.
 \end_layout
 
 \begin_layout Standard
@@ -5694,6 +5959,16 @@ The filter
 \end_inset
 
 ) in the developed market.
+\end_layout
+
+\begin_layout Section
+List of Applications
+\end_layout
+
+\begin_layout Enumerate
+Companies deciding to split risks.
+ Smaller companies taking more risks, the larger companies focusing on streamlin
+ed products (Nash Equilibrium based decision to split risks of discovery).
 \end_layout
 
 \begin_layout Section
