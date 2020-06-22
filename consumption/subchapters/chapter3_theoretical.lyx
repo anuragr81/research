@@ -4211,6 +4211,126 @@ Without the income arrangement, a consumer would choose to optimise
 \end_layout
 
 \begin_layout Standard
+Let's consider briefly the dynamics of 
+\begin_inset Formula $dA=-\psi Adt+\psi A\sigma dW$
+\end_inset
+
+.
+ Here, the asset is not meant to grow.
+ The consumer opt output by choosing 
+\begin_inset Formula $\psi=0$
+\end_inset
+
+ - if needs are uncertain, 
+\begin_inset Formula $A$
+\end_inset
+
+ would possibly decline to negative value.
+ As long as the possibility of that happening is low, things work alright
+ (we would like to bring the relative wealth concern by letting the consumer
+ optimise two assets - but we focus on one consumer for now).
+ A consumer cannot choose 
+\begin_inset Formula $\psi>0$
+\end_inset
+
+ -so is 
+\begin_inset Formula $E(A)=0\Rightarrow\psi=0$
+\end_inset
+
+.
+ Assuming a CRRA utility 
+\begin_inset Formula $u(A)=\frac{A^{1-\gamma}-1}{1-\gamma}$
+\end_inset
+
+ .
+ We know that for a lognormal 
+\begin_inset Formula $A$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $log(A)\sim N(\mu,\sigma^{2})$
+\end_inset
+
+ the expected utility 
+\begin_inset Formula $E(u(x))$
+\end_inset
+
+ is given by 
+\begin_inset Formula $E(u(x))=\frac{e^{\mu(1-\gamma)+\frac{\sigma^{2}}{2}(1-\gamma)^{2}-1}}{1-\gamma}$
+\end_inset
+
+ (so that the certainty equivalent 
+\begin_inset Formula $A_{CE}$
+\end_inset
+
+ for a consumer is 
+\begin_inset Formula $A_{CE}=e^{\mu+\frac{(1-\gamma)}{2}\sigma^{2}}$
+\end_inset
+
+).
+ One can optimise 
+\begin_inset Formula $E(u(x))$
+\end_inset
+
+ by optimising 
+\begin_inset Formula $\mu+\frac{1-\gamma}{2}\sigma^{2}$
+\end_inset
+
+.
+ For the dynamics, 
+\begin_inset Formula $dA=-\psi Adt+\psi A\sigma dW\Rightarrow d(logA)=-\psi dt+\psi\sigma dW$
+\end_inset
+
+ , one can use Ito's lemma to infer 
+\begin_inset Formula $log(A)\sim N(-\psi-\frac{\psi^{2}\sigma^{2}}{2},\psi^{2}\sigma^{2})$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $u(A)$
+\end_inset
+
+ is optimised at an optimal 
+\begin_inset Formula $-\psi-\frac{\psi^{2}\sigma^{2}}{2}+\frac{(1-\gamma)}{2}\psi^{2}\sigma^{2}$
+\end_inset
+
+.
+ First order condition leads to 
+\begin_inset Formula $\psi(1+\frac{\gamma\psi\sigma^{2}}{2})=0$
+\end_inset
+
+ i.e.
+ at 
+\begin_inset Formula $\psi=0$
+\end_inset
+
+.
+ This could be verified with a Monte Carlo simulation as well.
+ 
+\end_layout
+
+\begin_layout Standard
+A fundamental issues is that our normality assume is too strong - it's better
+ keep the asset transition probability function as general as possible.
+ It is through limiting the combinatorial explosion that one achieves the
+ standardisation of utility.
+\end_layout
+
+\begin_layout Standard
+The reason why this model doesn't appear realistic is that we're not using
+ the multiple risks that consumer takes.
+ This model assumes that we just there is no risk assumed with education.
+ We should assume that there are a returns from 
+\begin_inset Formula $a(\psi)dt$
+\end_inset
+
+ from eduction etc.
+ that are certain - whereas other that are not so certain.
+ When somebody in cr
+\end_layout
+
+\begin_layout Standard
 Assume that a consumer observes probability 
 \begin_inset Formula $p_{ij}\equiv P(\Delta A_{ij})=P(A_{i}\rightarrow A_{j})$
 \end_inset
@@ -4412,6 +4532,29 @@ Since we don't want this to be of descriptive value at this time, we only
 .
  First, they should represent loss-aversion and there should be non-linear
  probability preference.
+ In a simpler formulation with CRRA or HARA (see Sharpe), we can use have
+ the consumer optimise 
+\begin_inset Formula $E(u(\Delta))=\int u(\Delta)p(\Delta)d\Delta$
+\end_inset
+
+ where 
+\begin_inset Formula $u(\Delta)$
+\end_inset
+
+ is HARA or CRRA utility.
+ Considering CRRA utility, 
+\begin_inset Formula $u(\Delta)=\frac{\Delta^{1-\gamma}-1}{1-\gamma}$
+\end_inset
+
+, the expectation to be optimised would simply be .
+ 
+\end_layout
+
+\begin_layout Standard
+This may not have any descriptive value - but as such it only implies that
+ two individuals would set their risk based on their risk appetite.
+ While we may assume that we may have same fair chances (nature treats everyone
+ unfairly), the world of certainties is limited by real resources.
 \end_layout
 
 \begin_layout Standard
