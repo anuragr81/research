@@ -429,6 +429,18 @@ draw_crra<- function(gamma){
   lines(x,(x**(1-gamma)-1)/(1-gamma),type='l'); 
 }
 
+draw_value_function <- function(){
+  x<- seq(-100,100,.01)
+  plot(0,0,type='l',xlim=c(-100,100), ylim=c(-20,20))
+  df = data.frame( gamma = c(.1,.2,.5,1,2) , lty = c(1,2,3,4,5))
+  for (i in seq(nrow(df))){
+    row <- df[i,]
+    gamma <- row$gamma
+    lty <- row$lty
+    lines(x,sapply(x,function(x) { if(x>0) return((x**gamma)) else return(-(-x)**gamma) }), lty=lty)
+  }
+  
+}
 compare_bernoulli_sum<-function(p,nsims){
  par(mfrow=(c(2,1)))
  hist((rbinom(nsims,10,p))) 
@@ -446,3 +458,30 @@ analyse_relative_wealth_results <- function(res){
   draw_crra(0.5)
   draw_crra(.99)
 }
+
+adjust_geom<-function(A1,A2){
+  m = sqrt(A1*A2)
+  retlist = list()
+  retlist[["A1"]] <- A1/m
+  retlist[["A2"]] <- A2/m
+  return(retlist[["A1"]]/retlist[["A2"]])
+}
+
+
+cost_function <-function(A,a,b){
+  #(1-exp(-x))/(1+exp(-x))
+  #return(a*A**b)
+  m <- 40
+  #try with: loglinear_test(.3,1,a=5,b=50,incpi=1)
+  return (b * ((1-exp(-a*(A-m) ))/(1+exp(-a*(A-m)))) )
+}
+loglinear_test<-function(alpha,A0,a,b,incpi){
+  #loglinear_test(.3,1,a=.10,b=1.5,incpi=1)
+  psivec = seq(0.1,100,.01)
+  cf = cost_function(A0 + incpi*psivec,a=a,b=b)
+  A = A0 - cf + incpi * psivec
+  par(mfrow=c(2,1))
+  plot(psivec,cf,type='l')
+  plot(psivec,A,type='l')
+}
+
