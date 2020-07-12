@@ -287,7 +287,7 @@ evolve_assets <- function(i0,k,A0,m,alpha , r){
 
 
 evolve_relative_wealth <-function(nsim,delta,sigma1,sigma2, risksz){
-
+  
   T = 1
   dt = 1e-1
   A1_init = 100
@@ -442,10 +442,10 @@ draw_value_function <- function(){
   
 }
 compare_bernoulli_sum<-function(p,nsims){
- par(mfrow=(c(2,1)))
- hist((rbinom(nsims,10,p))) 
- mean(rbinom(nsims,10,p))
- x <- data.frame(); for ( i in seq(nsims) ) { x <- rbind(x,(rbinom(10,1,p))) } ; hist(rowSums(x))
+  par(mfrow=(c(2,1)))
+  hist((rbinom(nsims,10,p))) 
+  mean(rbinom(nsims,10,p))
+  x <- data.frame(); for ( i in seq(nsims) ) { x <- rbind(x,(rbinom(10,1,p))) } ; hist(rowSums(x))
 }
 
 analyse_relative_wealth_results <- function(res){
@@ -467,21 +467,72 @@ adjust_geom<-function(A1,A2){
   return(retlist[["A1"]]/retlist[["A2"]])
 }
 
+cost_function_linear <-function(A,a,b){
+  return(a*A+b)
+}
 
-cost_function <-function(A,a,b){
-  #(1-exp(-x))/(1+exp(-x))
-  #return(a*A**b)
+cost_function_polynom <-function(A,a,b){
+  #loglinear_test(.3,1,a=.10,b=1.5,incpi=1)
+  return(a*A**b)
+}
+
+cost_function_exp <-function(A,a,b){
+  return(a*exp(b*A))
+}
+
+
+cost_function_jump <-function(A,a,b){
   m <- 40
   #try with: loglinear_test(.3,1,a=5,b=50,incpi=1)
   return (b * ((1-exp(-a*(A-m) ))/(1+exp(-a*(A-m)))) )
 }
+
 loglinear_test<-function(alpha,A0,a,b,incpi){
-  #loglinear_test(.3,1,a=.10,b=1.5,incpi=1)
   psivec = seq(0.1,100,.01)
-  cf = cost_function(A0 + incpi*psivec,a=a,b=b)
+  #cf = cost_function_exp(A0 + incpi*psivec,a=a,b=b)
+  cf = cost_function_polynom(A0 + incpi*psivec,a=a,b=b)
+  #cf = cost_function_jump(A0 + incpi*psivec,a=a,b=b)
+  #cf = cost_function_linear(A0 + incpi*psivec,a=a,b=b)
   A = A0 - cf + incpi * psivec
-  par(mfrow=c(2,1))
-  plot(psivec,cf,type='l')
-  plot(psivec,A,type='l')
+  dat = data.frame(A=A,psi=psivec)
+  dat$u = with(dat,alpha/2*log(A) + (1-alpha)*log(psi))
+  par(mfrow=c(2,2))
+  plot(psivec,cf,type='l',main = "cost-function")
+  plot(psivec,A,type='l', main="assets")
+  plot(dat$psi,dat$u,type='l', main="utility")
+  return(dat)
 }
 
+explicit_parabolic_cost_solution <- function(a,alpha,A,incpi){
+  expression1 = (alpha * A / 2 -   (alpha-2)/(4*a))
+  expression2 = (1/2)* sqrt( alpha**2 * A**2 + (alpha-2)**2/(4*a**2) - alpha*A*(alpha-4)/a)
+  
+  psi1=((expression1+expression2)-A)/incpi
+  psi2=((expression1-expression2)-A)/incpi
+  print(psi1)
+  print(psi2)
+}
+
+loglinear_incredist<-function(alpha,A10,A20,a,b,incpi){
+  psivec1 = seq(0.1,100,.01)
+  psivec2 = seq(0.1,100,.01)
+  cf1 = cost_function_polynom(A10 + incpi*psivec1,a=a,b=b)
+  cf2 = cost_function_polynom(A20 + incpi*psivec2,a=a,b=b)
+  #cf1 = cost_function_jump(A10 + incpi*psivec,a=a,b=b)
+  #cf2 = cost_function_jump(A20 + incpi*psivec,a=a,b=b)
+  
+  A1 = A10 - cf1 + incpi * psivec1
+  A2 = A20 - cf2 + incpi * psivec2
+  dat1 = data.frame(A=A1,psi=psivec1)
+  dat2 = data.frame(A=A2,psi=psivec2)
+  dat1$u = with(dat1,alpha/2*log(A) + (1-alpha)*log(psi))
+  dat2$u = with(dat2,alpha/2*log(A) + (1-alpha)*log(psi))
+  par(mfrow=c(2,3))
+  plot(psivec1,cf1,type='l',main = "cost-function")
+  plot(psivec1,A1,type='l', main="assets")
+  plot(dat1$psi,dat1$u,type='l', main="utility")
+  
+  plot(psivec2,cf2,type='l',main = "cost-function")
+  plot(psivec2,A2,type='l', main="assets")
+  plot(dat2$psi,dat2$u,type='l', main="utility")
+}

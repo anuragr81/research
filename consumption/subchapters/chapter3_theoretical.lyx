@@ -3648,7 +3648,6 @@ The degenerate case is not of any practical use - also because there is
  is available to both the rich and poor consumer.
  Therefore, the consumer gets to change the destiny of her wealth as a new
  opportunity of increasing wealth comes along.
- 
 \end_layout
 
 \begin_layout Standard
@@ -3663,7 +3662,16 @@ Considering a case under no uncertainty where a new opportunity in the form
 
  comes along, the consumer would be encouraged to spend more of her wealth
  and hope to bridge gap between wealth.
- Reflecting that the consumer with higher wealth would bear higher depreciation
+ Notice that the consumer does not choose between saving for assets and
+ expending in this case - she merely wishes to compete for the total assets
+ (hence no budget equation).
+ In other words, the consumer would take a loan and have more assets only
+ that she would have to bear the cost of credit (which in an ideal world
+ are the same as taxes on the wealth).
+\end_layout
+
+\begin_layout Standard
+Reflecting that the consumer with higher wealth would bear higher depreciation
  in absolute terms having more, we can separate the depreciation from the
  income by considering a cost function 
 \begin_inset Formula $\delta(A_{t})$
@@ -3783,7 +3791,6 @@ Without loss of generality, let's assume that
 \end_inset
 
  is maintained as desired by consumer 2).
- 
 \end_layout
 
 \begin_layout Standard
@@ -3801,10 +3808,21 @@ From a practical standpoint, this too doesn't change the model significantly
 \begin_inset Formula $(\psi_{2},A_{2})$
 \end_inset
 
- instead.
- After all, we judge those around us in the real world not just by their
+ instead and if there is some substitution between acquiring assets and
+ spending income on futile investments.
+ If we introduce the substitution with a cost function which represents
+ the costs of maintaining wealthier assets apart from the choice of 
+\begin_inset Formula $\psi$
+\end_inset
+
+, the resulting model may represent the real-world slightly better.
+ After all we judge those around us in the real world not just by their
  wealth but by what they do with their wealth.
- There are two fundamental ways to include the role of 
+ 
+\end_layout
+
+\begin_layout Standard
+There are two fundamental ways to include the role of 
 \begin_inset Formula $\psi_{1}$
 \end_inset
 
@@ -3836,6 +3854,11 @@ From a practical standpoint, this too doesn't change the model significantly
 
  both in within period and across periods i.e.
  the intertemporal substitution).
+ Some part of wealth - which is in transit (as 
+\begin_inset Formula $\psi$
+\end_inset
+
+) is of a separate value for wealth comparisons.
  The second is to view either just 
 \begin_inset Formula $\psi$
 \end_inset
@@ -3953,10 +3976,10 @@ noprefix "false"
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{gather*}
-A_{t+1,1}=A_{1}-\delta(A_{t,1}+\pi\psi_{1})+\pi\psi_{1}+\tau(A_{2}-A_{1})\\
-A_{t+1,2}=A_{2}-\delta(A_{t,2}+\pi\psi_{2})+\pi\psi_{2}-\tau(A_{2}-A_{1})
-\end{gather*}
+\begin{gather}
+A_{t+1,1}=A_{1}-\delta(A_{t,1}+\pi\psi_{1}+\tau(A_{2}-A_{1}))+\pi\psi_{1}+\tau(A_{2}-A_{1})\label{eq:dynamic_nonstoch_w_redist}\\
+A_{t+1,2}=A_{2}-\delta(A_{t,2}+\pi\psi_{2}-\tau(A_{2}-A_{1}))+\pi\psi_{2}-\tau(A_{2}-A_{1})\nonumber 
+\end{gather}
 
 \end_inset
 
@@ -4081,7 +4104,21 @@ and
 \end_inset
 
  respectively.
- One can choose a form of 
+ One could also argue that only the wealth-in-transit is visible for comparison
+ purposes, the relative wealth would only involve 
+\begin_inset Formula $\psi_{1},\psi_{2}$
+\end_inset
+
+ rather than 
+\begin_inset Formula $A_{1},A_{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+One can choose a form of 
 \begin_inset Formula $f$
 \end_inset
 
@@ -4102,15 +4139,11 @@ Using
 \begin_inset Formula $\psi$
 \end_inset
 
- and the relative wealth 
-\begin_inset Formula $\Delta$
-\end_inset
-
- (which is 
+ and the relative wealth
 \begin_inset Formula $\frac{1}{A_{2}}\sqrt{\frac{A_{1}}{A_{2}}}$
 \end_inset
 
- for consumer 1 and 
+ for consumer 1 (
 \begin_inset Formula $\frac{1}{A_{1}}\sqrt{\frac{A_{2}}{A_{1}}}$
 \end_inset
 
@@ -4147,56 +4180,31 @@ Assuming that
 \end_inset
 
 , we only need to look at the minimisation of the first-period.
- Thus the optimisation of the following utilities:
+ To arrive at a solution we can assume a form of the cost-function.
+ Since the cost of assets are disproportionately higher for the ultra rich
+ as function such as 
+\begin_inset Formula $aA_{t}^{b}$
+\end_inset
+
+ would make sense.
+ When the costs of being rich are sudden as is the case in very unequal
+ societies, a more appropriate function would be.
+ This choice seems rather aribrary - and the structure of cost-function
+ depends on a lot of factors not immediately related to the budget constraint
+ (i.e.
+ purchase cost of assets).
 \end_layout
 
 \begin_layout Standard
-In the case with no income transfer, the first order condition 
-\begin_inset Formula $\frac{\partial u_{1}}{\partial\psi_{1}}=0$
-\end_inset
-
- implies
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Formula $ $
-\end_inset
-
-
+In the case with no income transfer, the following utilities need to be
+ optimised:
 \end_layout
 
-\end_inset
-
- 
-\begin_inset Formula $(\pi-1)\psi_{1}=-\frac{(1-\alpha)}{(1-\frac{\alpha}{2})}$
-\end_inset
-
- which is invalid since 
-\begin_inset Formula $\psi_{1}>0$
-\end_inset
-
-.
- Similarly, 
-\begin_inset Formula $(\pi-1)\psi_{2}=-\frac{(1-\alpha)A_{2}^{*}}{(1-\frac{\alpha}{2})}$
-\end_inset
-
- is also invalid.
- 
-\strikeout on
-Since, we can rewrite
-\begin_inset Formula $A_{1}=A_{1}^{*}+(\pi-1)\psi_{1}=A_{1}^{*}(1-\frac{1-\alpha}{1-\alpha/2})=A_{1}^{*}\frac{\alpha/2}{1-\alpha/2}$
-\end_inset
-
- and 
-\begin_inset Formula $A_{2}=A_{2}^{*}\frac{\alpha/2}{1-\alpha/2}$
-\end_inset
-
- and obtain the indirect utilities as: 
+\begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-u_{1}(A_{1},A_{2},\psi_{1})=\frac{\alpha}{2}log(A_{1}^{*})-\frac{3\alpha}{2}log(A_{2}^{*})+(1-\alpha)log()+(\alpha/2)log(\frac{\alpha/2}{1-\alpha/2})-\frac{3\alpha}{2}log(\frac{\alpha/2}{1-\alpha/2})\\
-u_{2}(A_{1},A_{2},\psi_{1})=\frac{\alpha}{2}log()-\frac{3\alpha}{2}log()+(1-\alpha)log()
+u_{1}(A_{t+1,1},A_{t+1,2},\psi_{1})=\frac{\alpha}{2}log(A_{t,1}-a(A_{t,1}+\pi\psi_{1})^{b}+\pi\psi_{1})-\frac{3\alpha}{2}log(A_{t,2}-a(A_{t,2}+\pi\psi_{2})^{b}+\pi\psi_{2})+(1-\alpha)log(\psi_{1})\\
+u_{2}(A_{t+1,1},A_{t+1,2},\psi_{2})=\frac{\alpha}{2}log(A_{t,2}-a(A_{t,2}+\pi\psi_{2})^{b}+\pi\psi_{2})-\frac{3\alpha}{2}log(A_{t,1}-a(A_{t,1}+\pi\psi_{1})^{b}+\pi\psi_{1})+(1-\alpha)log(\psi_{2})
 \end{gather*}
 
 \end_inset
@@ -4205,28 +4213,349 @@ u_{2}(A_{1},A_{2},\psi_{1})=\frac{\alpha}{2}log()-\frac{3\alpha}{2}log()+(1-\alp
 \end_layout
 
 \begin_layout Standard
-Since a log-form is more suitable for this case, it may better to use the
- form,
+The first order condition in case with no income transfer, 
+\begin_inset Formula $\frac{\partial u_{1}}{\partial\psi_{1}}=0$
+\end_inset
+
+ for a function 
+\begin_inset Formula $aA_{t}^{b}$
+\end_inset
+
+ (
+\begin_inset Formula $b\ne1$
+\end_inset
+
+) can be solved numerically
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\alpha}{2}\frac{1}{A_{t+1,1}}(\psi_{1}+\pi ab(A_{t,1}+\pi\psi_{1})^{b-1})+\frac{1-\alpha}{\psi_{1}}=0\Rightarrow(\alpha-1)=\frac{\frac{\alpha}{2}\psi_{1}(\psi_{1}+\pi ab(A_{t,1}+\pi\psi_{1})^{b-1})}{(A_{t,1}-a(A_{t,1}+\pi\psi_{1})^{b}+\pi\psi_{1})}\Rightarrow\alpha(A_{t,1}-a(A_{t,1}+\pi\psi_{1})^{b}+\pi\psi_{1})=\frac{\alpha}{2}\psi_{1}(\psi_{1}+\pi ab(A_{t,1}+\pi\psi_{1})^{b-1})+(A_{t,1}-a(A_{t,1}+\pi\psi_{1})^{b}+\pi\psi_{1})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ If we let the form be 
+\begin_inset Formula $\delta(A)=e^{bA}$
+\end_inset
+
+, then 
+\begin_inset Formula $u_{1}=\frac{\alpha}{2}log(A_{t,1}-e^{bA_{t,1}+b\pi\psi_{1}}+\pi\psi_{1})-\frac{3\alpha}{2}(A_{t,2}-e^{b(A_{t,2}+\pi\psi_{2})}+\pi\psi_{2})+(1-\alpha)log(\psi_{1})$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\frac{\partial u_{1}}{\partial\psi_{1}}=0\Rightarrow\frac{\alpha}{2}\frac{-b\pi e^{b(A_{t,1}+\pi\psi_{1})}+\pi}{A_{t,1}-e^{b(A_{t,1}+\pi\psi_{1})}+\pi\psi_{1}}=-\frac{1-\alpha}{\psi_{1}}=0$
+\end_inset
+
+ gives a function of logarithm and polynomial terms.
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $u(A_{1}/A_{2},\psi_{1})=C(A_{1}/A_{2})^{\alpha}f(\psi)$
+The easiest solution would be the parabolic solution so that 
+\begin_inset Formula $\delta(A)=aA^{2}$
 \end_inset
 
- (not valid for 
-\begin_inset Formula $A_{1}<A_{2}$
-\end_inset
-
-)
+ and 
 \end_layout
 
 \begin_layout Standard
-When using the 
-\begin_inset Formula $A_{1}/A_{2}$
+\begin_inset Formula 
+\begin{alignat*}{1}
+u_{1} & =\frac{\alpha}{2}log(A_{t,1}-a(A_{t,1}+\pi\psi_{1})^{2}+\pi\psi_{1})-\frac{3\alpha}{2}(A_{t,2}-a(A_{t,2}+\pi\psi_{2})^{2}+\pi\psi_{2})+(1-\alpha)log(\psi_{1})
+\end{alignat*}
+
 \end_inset
 
- form, we still need to have the references level - which would be the geometric
- mean.
+.
+\end_layout
+
+\begin_layout Standard
+Setting 
+\begin_inset Formula $K=A_{t,1}+\pi\psi_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\frac{\partial u_{1}}{\partial\psi_{1}}=0\Rightarrow\frac{\alpha}{2}\frac{(-2aK\pi+\pi)}{K-aK^{2}}+\frac{\pi(1-\alpha)}{K-A}\Rightarrow\frac{(a\alpha K-\frac{\alpha}{2})}{K-aK^{2}}=\frac{(1-\alpha)}{K-A}\Rightarrow\cancel{a\alpha K^{2}}-\alpha K/2-a\alpha AK+\alpha A/2=K-aK^{2}-\alpha K+\cancel{a\alpha K^{2}}$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $2aK^{2}+\alpha K-2a\alpha AK-2K+\alpha A=0$
+\end_inset
+
+.
+ Thus,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+K^{2}+K(\frac{\alpha-2}{2a}-\alpha A)+\frac{\alpha A}{2a} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $K=(\frac{\alpha A}{2}-\frac{\alpha-2}{4a})+\frac{1}{2}\sqrt{\alpha^{2}A^{2}+\frac{(\alpha-2)^{2}}{4a^{2}}-\frac{\alpha A(\alpha-4)}{a}}$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The negative 
+\begin_inset Formula $K$
+\end_inset
+
+ would be discarded.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The consumer 2 would the equivalent equation if we set 
+\begin_inset Formula $K=A_{t,2}+\pi\psi_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For the solutions 
+\begin_inset Formula $K_{1}^{*}$
+\end_inset
+
+, 
+\begin_inset Formula $K_{2}^{*}$
+\end_inset
+
+ the indirect utility is 
+\begin_inset Formula $\frac{\alpha}{2}log(K_{1}^{*2}-aK_{1}^{*})-\frac{3\alpha}{2}log(K_{2}^{*2}-aK_{2}^{*})+(1-\alpha)log(\frac{K_{1}^{*}-A}{\pi})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The solution would indicate that higher i.e.
+ a steep rise in inequality of costs would result in a higher 
+\begin_inset Formula $\psi$
+\end_inset
+
+.
+ The initial wealth also matters.
+ This does consider the relative wealth too but by considering that ...
+ The sigmoid functions can similarly be solved numerically.
+\end_layout
+
+\begin_layout Standard
+It is clear that having a relative income with the dynamic reference point
+ does not change the utility too much.
+ This would change when an income redistribution is also introduced.
+ In the case with income redistribution in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dynamic_nonstoch_w_redist"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the consumer 1's utility would depend on the other consumer's wealth as
+ well.
+\end_layout
+
+\begin_layout Standard
+Define 
+\begin_inset Formula $J_{1}=A_{1}+\pi\psi_{1}+\tau(A_{2}-A_{1}+\pi(\psi_{2}-\psi_{1}))$
+\end_inset
+
+ and 
+\begin_inset Formula $J_{2}=A_{2}+\pi\psi_{2}-\tau(A_{2}-A_{1}+\pi(\psi_{2}-\psi_{1}))$
+\end_inset
+
+ (allowing us to write 
+\begin_inset Formula $\psi_{1}=\frac{J_{1}}{2}(1+\frac{1}{\pi(1-2\tau)})+\frac{J_{2}}{2}(1-\frac{1}{\pi(1-2\tau)})-\frac{A_{1}}{2}(1+\frac{1}{\pi})-\frac{A_{2}}{2}(1-\frac{1}{\pi})$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{2}=\frac{J_{1}}{2}(1-\frac{1}{\pi(1-2\tau)})+\frac{J_{2}}{2}(1+\frac{1}{\pi(1-2\tau)})-\frac{A_{1}}{2}(1-\frac{1}{\pi})-\frac{A_{2}}{2}(1+\frac{1}{\pi})$
+\end_inset
+
+.
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\psi_{1}+\psi_{2}=(J_{1}+J_{2})-(A_{1}+A_{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $J_{1}-J_{2}=(A_{1}-A_{2})+\pi(\psi_{1}-\psi_{2})+2\tau(A_{2}-A_{1})+2\tau\pi(\psi_{2}-\psi_{1})\Rightarrow(1-2\tau)\pi(\psi_{1}-\psi_{2})=(J_{1}-J_{2})-(1-2\tau)(A_{1}-A_{2})$
+\end_inset
+
+ 
+\begin_inset Formula $\Rightarrow\psi_{1}-\psi_{2}=\frac{J_{1}-J_{2}}{\pi(1-2\tau)}-\frac{(A_{1}-A_{2})}{\pi}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+u_{1}(A_{t+1,1},A_{t+1,2},\psi_{1})=\frac{\alpha}{2}log(J_{1}-aJ_{1}^{2})-\frac{3\alpha}{2}log(J_{2}-aJ_{2}^{2})+(1-\alpha)log(\psi_{1})\\
+u_{2}(A_{t+1,1},A_{t+1,2},\psi_{1})=\frac{\alpha}{2}log(J_{2}-aJ_{2}^{2})-\frac{3\alpha}{2}log(J_{1}-aJ_{1}^{2})+(1-\alpha)log(\psi_{2})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The consumer 1 (or equivalently consumer 2) cannot ignore the term for 
+\begin_inset Formula $\psi_{2}$
+\end_inset
+
+(
+\begin_inset Formula $\psi_{1}$
+\end_inset
+
+) in the first-order condition.
+ Since 
+\begin_inset Formula $\frac{\partial J_{1}}{\partial\psi_{1}}=\pi(1-\tau)$
+\end_inset
+
+, 
+\begin_inset Formula $\frac{\partial J_{1}}{\partial\psi_{2}}=\pi\tau$
+\end_inset
+
+, 
+\begin_inset Formula $\frac{\partial J_{2}}{\partial\psi_{1}}=\pi\tau$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\partial J_{2}}{\partial\psi_{2}}=\pi(1-\tau)$
+\end_inset
+
+, the first order conditions are:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+\frac{\alpha\pi(1-\tau)(1-2aJ_{1})}{2}\frac{1}{J_{1}-aJ_{1}^{2}}-\frac{3\alpha\pi\tau(1-2aJ_{2})}{2}\frac{1}{J_{2}-aJ_{2}^{2}}+\frac{2\pi(1-\alpha)}{J_{1}(1+\frac{1}{1-2\tau})+J_{2}(1-\frac{1}{1-2\tau})-A_{1}(\pi+1)-A_{2}(\pi-1)}=0\label{eq:First_order_redist}\\
+-\frac{3\alpha\pi\tau(1-2aJ_{1})}{2}\frac{1}{J_{1}-aJ_{1}^{2}}+\frac{\alpha\pi(1-\tau)(1-2aJ_{2})}{2}\frac{1}{J_{2}-aJ_{2}^{2}}+\frac{2\pi(1-\alpha)}{J_{1}(1-\frac{1}{1-2\tau})+J_{2}(1+\frac{1}{1-2\tau})-A_{1}(\pi-1)-A_{2}(\pi+1)}=0\nonumber 
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Solving this simulataneously, we would get quadratic equations for each
+ condition 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Since the solution of 
+\begin_inset Formula $A_{1}x+B_{1}y=C_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{2}x+B_{2}y=C_{2}$
+\end_inset
+
+ is 
+\begin_inset Formula $x=\frac{B_{2}C_{1}-B_{1}C_{2}}{A_{2}B_{1}-A_{1}B_{2}}$
+\end_inset
+
+ and 
+\begin_inset Formula $y=\frac{A_{2}C_{1}-A_{1}C_{2}}{A_{2}B_{1}-A_{1}B_{2}}$
+\end_inset
+
+.
+ Setting 
+\begin_inset Formula $x=\frac{1}{J_{1}-aJ_{1}^{2}}$
+\end_inset
+
+ and 
+\begin_inset Formula $y=\frac{1}{J_{2}-aJ_{2}^{2}}$
+\end_inset
+
+, 
+\begin_inset Formula $A_{1}=\frac{\alpha\pi(1-\tau)(1-2aJ_{1})}{2}$
+\end_inset
+
+ , 
+\begin_inset Formula $B_{1}=-\frac{3\alpha\pi\tau(1-2aJ_{2})}{2}$
+\end_inset
+
+, 
+\begin_inset Formula $C_{1}=-\frac{2\pi(1-\alpha)}{J_{1}(1+\frac{1}{1-2\tau})+J_{2}(1-\frac{1}{1-2\tau})-A_{1}(\pi+1)-A_{2}(\pi-1)}$
+\end_inset
+
+, 
+\begin_inset Formula $A_{2}=-\frac{3\alpha\pi\tau(1-2aJ_{1})}{2}$
+\end_inset
+
+, 
+\begin_inset Formula $B_{1}=\frac{\alpha\pi(1-\tau)(1-2aJ_{2})}{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{2}=-\frac{2\pi(1-\alpha)}{J_{1}(1-\frac{1}{1-2\tau})+J_{2}(1+\frac{1}{1-2\tau})-A_{1}(\pi-1)-A_{2}(\pi+1)}$
+\end_inset
+
+, we have 
+\begin_inset Formula $A_{2}B_{1}-A_{1}B_{2}=-\frac{3\alpha\pi\tau(1-2aJ_{1})}{2}\times\frac{\alpha\pi(1-\tau)(1-2aJ_{2})}{2}+\frac{\alpha\pi(1-\tau)(1-2aJ_{1})}{2}\times\frac{3\alpha\pi\tau(1-2aJ_{2})}{2}=0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Still the above analysis of cost function is rather arbitrary.
+ In reality the dependence of costs on wealth would have kinks - depending
+ on the economy.
+ Only a more justified relationship between 
+\begin_inset Formula $\psi$
+\end_inset
+
+ and 
+\begin_inset Formula $A$
+\end_inset
+
+ than the loglineary utility can provide a more robust model.
 \end_layout
 
 \begin_layout Subsection
@@ -4236,7 +4565,7 @@ Risk and Uncertainty
 \begin_layout Standard
 Since there is nothing to be gained for a consumer with lower wealth other
  an expectation of closing the wealth gap, the expenditure 
-\begin_inset Formula $\psi-\psi_{0}$
+\begin_inset Formula $\psi$
 \end_inset
 
  can be seen as the consumer's expectation of the wealth difference.
@@ -4269,7 +4598,11 @@ Since there is nothing to be gained for a consumer with lower wealth other
 \end_layout
 
 \begin_layout Standard
-In the real-world, indeed the investments are risky.
+In the real-world, indeed the investments of the form 
+\begin_inset Formula $\psi$
+\end_inset
+
+ are risky.
  Hence, an explicit specification of risk in the Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4294,7 +4627,7 @@ Discrete Model
 
 \begin_layout Standard
 In the discrete model, the certainty payoff from 
-\begin_inset Formula $\pi(\psi-\psi_{0})$
+\begin_inset Formula $\pi\psi$
 \end_inset
 
  is replaced with a Bernoulli trial that provides a payoff based on the
@@ -4302,7 +4635,11 @@ In the discrete model, the certainty payoff from
 \begin_inset Formula $\psi$
 \end_inset
 
-:
+.
+ The cost function does not need to represent the real costs of maintainin
+ assets.
+ The costs are actually the cost of risk.
+ A risk-seeking consumer pays more costs than a risk-averse one.
 \end_layout
 
 \begin_layout Standard
@@ -4472,7 +4809,7 @@ For this model to make some empirical sense, we need a reference point for
 \begin_layout Standard
 
 \series bold
-Risk-Neutral Vs Risk Seeking Behaviour
+Risk-Neutral Vs Risk Seeking Behaviour without PT
 \end_layout
 
 \begin_layout Standard
@@ -4720,38 +5057,28 @@ With
 \end_inset
 
  to matter.
- It can be said that since the consumers observe 
+ If consumers only observe 
 \begin_inset Formula $\psi$
 \end_inset
 
-, the only way they can hope to beat each other is under uncertainty.
- Therefor utility for relative income (
+ (and compete on 
+\begin_inset Formula $\psi$
+\end_inset
+
+), uncertainty is the only way to allow a game to exist (so that a participatiin
+g consumer may have an unlikely belief in winning).
+ The utility for relative income (
 \begin_inset Formula $\Delta A$
 \end_inset
 
-) is not possible without uncertainty.
- Under uncertainty, they both can be risk-averse based on their habits -
- but if we take reference points into account (and set it to be the average),
+) is not just the value but the value under risk.
  
-\begin_inset Formula $A_{1}-\frac{A_{1}+A_{2}}{2}=\Delta A$
-\end_inset
+\end_layout
 
- is the value the consumer would seek (with the respective associated probabilit
-y).
- The idea is not so much to use PT - but to see how a common reference point
- affects the behaviour of the two consumers.
- We forget about reference points for the moment and consider the differences
- between 
-\begin_inset Formula $E(A_{1})$
-\end_inset
-
- and 
-\begin_inset Formula $E(A_{2})$
-\end_inset
-
-.
- Here, the risk-averse individual must have something to gain.
- This can be done by the guarantee that too much difference in assets 
+\begin_layout Standard
+The risk also has a role to play in the income distribution - less taxes
+ are necssary if consumer believe in an unlikely dream of the riches.
+ As before too much difference in assets 
 \begin_inset Formula $A_{1}-A_{2}$
 \end_inset
 
@@ -4764,9 +5091,19 @@ y).
 \end_inset
 
  are to play in the market.
- The system that allows this can be relied upon as the security.
- Let's consider no utility function and no risk aversion - but a leveller
- which the poorer customer can rely on.
+ The consideration of risk allows us to consider how risk-seeking and risk-avers
+e individuals would faced difference - and how possibly there may be risk-sharin
+g in the long-run.
+\end_layout
+
+\begin_layout Standard
+To explore the risk-sharing, consider no utility function (the consumers
+ optimise just 
+\begin_inset Formula $E(A)$
+\end_inset
+
+) and no risk aversion - but a leveller which the poorer customer can rely
+ on.
  If 
 \begin_inset Formula $A_{1}<A_{2}$
 \end_inset
@@ -4789,9 +5126,16 @@ y).
 \end_inset
 
  take more risks).
-\end_layout
+ If the consumers only choose a single value of 
+\begin_inset Formula $\psi$
+\end_inset
 
-\begin_layout Standard
+ (and not a path of values 
+\begin_inset Formula $\psi_{t\in[1,T]}$
+\end_inset
+
+, we can just consider the optimisation of the first period).
+  
 \begin_inset Formula 
 \begin{gather*}
 \Delta A_{1}=\delta(A_{2}-A_{1})-\psi_{1}+\sigma(\psi_{1})X_{t}\\
