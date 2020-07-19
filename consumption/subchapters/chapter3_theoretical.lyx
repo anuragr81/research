@@ -4563,41 +4563,6 @@ Risk and Uncertainty
 \end_layout
 
 \begin_layout Standard
-Since there is nothing to be gained for a consumer with lower wealth other
- an expectation of closing the wealth gap, the expenditure 
-\begin_inset Formula $\psi$
-\end_inset
-
- can be seen as the consumer's expectation of the wealth difference.
- That the risk in investments must be separated from the uncertainty perceived
- by the consumer is best achieved by modeling the risk explicitly.
- This also allows us to justify the form of 
-\begin_inset Formula $u(A,\psi)$
-\end_inset
-
-.
- We can argue that 
-\begin_inset Formula $\psi$
-\end_inset
-
- reflects the discounting for 
-\begin_inset Formula $E(A)$
-\end_inset
-
- i.e.
- a consumer with higher expected value of 
-\begin_inset Formula $A$
-\end_inset
-
- in the future would keep 
-\begin_inset Formula $\psi$
-\end_inset
-
- lower (and vice versa).
- A poor consumer has no option but to be risk-seeking.
-\end_layout
-
-\begin_layout Standard
 In the real-world, indeed the investments of the form 
 \begin_inset Formula $\psi$
 \end_inset
@@ -4619,6 +4584,33 @@ noprefix "false"
  the continuous model.
 \end_layout
 
+\begin_layout Standard
+The consumer utility under risk is different from the utility derived without
+ risk (see Shoemaker).
+ If a consumer is allowed to have an irrational expectation of closing the
+ wealth gap, then the previous utility model can only indicate that a consumer
+ with lower wealth would get the same overall utility as consumer with higher
+ wealth if their consumption 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is sligthly dissimilar.
+ This does not allow us the risk-seeking consumer from a risk-averse consumer
+ by the shape of the utility function.
+ As in the case without uncertainty, we contract an approaches where a consumer
+ optimises only the wealth with one where both 
+\begin_inset Formula $\psi$
+\end_inset
+
+ and 
+\begin_inset Formula $A$
+\end_inset
+
+ are considered.
+ This is performed in the case of a discrete model before the approach for
+ a continuous model is extended.
+\end_layout
+
 \begin_layout Subsubsection
 
 \series bold
@@ -4630,23 +4622,21 @@ In the discrete model, the certainty payoff from
 \begin_inset Formula $\pi\psi$
 \end_inset
 
- is replaced with a Bernoulli trial that provides a payoff based on the
- investment 
+ is replaced with a Bernoulli trial that provides an uncertain payoff based
+ on the investment 
 \begin_inset Formula $\psi$
 \end_inset
 
 .
- The cost function does not need to represent the real costs of maintainin
- assets.
- The costs are actually the cost of risk.
- A risk-seeking consumer pays more costs than a risk-averse one.
+ Continuing with the two consumer model, we assume both consumers observe
+ the same process given by 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{alignat*}{1}
-\Delta A_{t} & =-\psi+\sigma(\psi)X_{t}
-\end{alignat*}
+\begin{alignat}{1}
+A_{t+1}-A_{t} & =-\pi\psi+\sigma(\psi)X_{t}\label{eq:Bernoulli_dynamics}
+\end{alignat}
 
 \end_inset
 
@@ -4682,7 +4672,7 @@ The function
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-A_{T} & =A_{0}-\psi T+\sigma(\psi)\sum_{t=1}^{T}X_{t}
+A_{T} & =A_{0}-\pi\psi T+\sigma(\psi)\sum_{t=1}^{T}X_{t}
 \end{alignat*}
 
 \end_inset
@@ -4702,7 +4692,7 @@ If
 , one can write:
 \begin_inset Formula 
 \begin{alignat}{1}
-A_{T} & =A_{0}-\psi T+\sigma(\psi)B_{T}\label{eq:bernoulli_asset}
+A_{T} & =A_{0}-\pi\psi T+\sigma(\psi)B_{T}\label{eq:bernoulli_asset}
 \end{alignat}
 
 \end_inset
@@ -4716,114 +4706,8 @@ At this point, it is worth discussing the forms of utility the consumer
  In the asset pricing models, one often looks at the forms of value-based
  utility adjusted by risk-aversion paramters.
  See Sharpe.
- In light of the prospect theory, we find it more appropriate to explicitly
- separate value utilities from utilities under risk.
- The consumer utility comprises for 
-\begin_inset Formula $\psi$
-\end_inset
-
- comes due to the risk she chooses.
- A consumer who chooses no risk would set 
-\begin_inset Formula $\psi=0$
-\end_inset
-
- in the model specified by Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:bernoulli_asset"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The combined utility of 
-\begin_inset Formula $\psi$
-\end_inset
-
- and 
-\begin_inset Formula $A$
-\end_inset
-
- thus translates into the combined utility of 
-\begin_inset Formula $\sum_{A\in\mathscr{A}}\upsilon(A)w(P(A))$
-\end_inset
-
- - where 
-\begin_inset Formula $A\in\mathscr{A}$
-\end_inset
-
-is the wealth state from the state-space 
-\begin_inset Formula $\mathscr{A}$
-\end_inset
-
-, 
-\begin_inset Formula $P(A)$
-\end_inset
-
- is the probability of achieving wealth 
-\begin_inset Formula $A$
-\end_inset
-
-, 
-\begin_inset Formula $w(p)$
-\end_inset
-
- is a probability weighting function for a given probability 
-\begin_inset Formula $p$
-\end_inset
-
- and 
-\begin_inset Formula $\upsilon(A)$
-\end_inset
-
- is the value utility from wealth 
-\begin_inset Formula $A$
-\end_inset
-
-.
- This approach to combine the utility of 
-\begin_inset Formula $\psi$
-\end_inset
-
- does not suffer with the usual problems with the choice of a loglinear
- function and is backed by a significant literature in behavioural economics.
-\end_layout
-
-\begin_layout Standard
-For this model to make some empirical sense, we need a reference point for
- the value function and a form for 
-\begin_inset Formula $\sigma(\psi)$
-\end_inset
-
-.
- We may take a different stochastic process for a continuous model and an
- appropriate choice for 
-\begin_inset Formula $\sigma(\psi)$
-\end_inset
-
- by extending the same framework.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Risk-Neutral Vs Risk Seeking Behaviour without PT
-\end_layout
-
-\begin_layout Standard
-Probably the most attractive feature of this extension is the characterisation
- of risk-seeking behaviour.
- This can help us refine how redistribution policies such as taxation might
- allow the (separating?) equilibrium for risk-seeking and risk-averse individual
-s to exist by letting a risk.
- This is relevant for status consumption because the risk-sharing would
- imply that 
-\end_layout
-
-\begin_layout Standard
-Assuming that a consumer makes a one-time decision on 
+ Using this appraoch, if we assume that a consumer makes a one-time decision
+ on 
 \begin_inset Formula $\psi$
 \end_inset
 
@@ -4896,7 +4780,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-Let's assume a CRRA utilty to illustrate our argument.
+Let's assume a CRRA utilty to illustrate this fruther.
  As 
 \begin_inset Formula $u(A)=\frac{A^{1-\gamma}-1}{1-\gamma}$
 \end_inset
@@ -4975,10 +4859,163 @@ Since
 \end_inset
 
 .
- The utility must therefore change.
- More particularly, we should consider value optimisation vs utility optimisatio
-n the latter being risk-adjusted.
- Some sort of weighting of probability is a good way to handle this.
+ 
+\end_layout
+
+\begin_layout Standard
+We could arrive at a solution if we assume diminishing returns for risky
+ gain 
+\begin_inset Formula $\sigma(\psi)$
+\end_inset
+
+.
+ To model the attitude towards risk more accurately, we consider a weighting
+ of probability to differentiate the risk-seeking behaviour from the risk-averse
+ behaviour.
+\end_layout
+
+\begin_layout Standard
+In light of the prospect theory, we thus explicitly separate value utilities
+ from risk-aversion.
+ The consumer utility for 
+\begin_inset Formula $\psi$
+\end_inset
+
+ - not through the loglinear for that was chosen rather arbitrarily in the
+ earlier seciton but through the risk she chooses.
+ A consumer who chooses no risk would set 
+\begin_inset Formula $\psi=0$
+\end_inset
+
+ in the model specified by Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bernoulli_asset"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The combined utility of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ and 
+\begin_inset Formula $A$
+\end_inset
+
+ thus translates into the combined utility of 
+\begin_inset Formula $\sum_{A\in\mathscr{A}}\upsilon(A)w(P(A))$
+\end_inset
+
+ - where 
+\begin_inset Formula $A\in\mathscr{A}$
+\end_inset
+
+is the wealth state from the state-space 
+\begin_inset Formula $\mathscr{A}$
+\end_inset
+
+, 
+\begin_inset Formula $P(A)$
+\end_inset
+
+ is the probability of achieving wealth 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $w(p)$
+\end_inset
+
+ is a probability weighting function for a given probability 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $\upsilon(A)$
+\end_inset
+
+ is the value utility from wealth 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ This approach to combine the utility of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is also backed by a significant literature in behavioural economics.
+\end_layout
+
+\begin_layout Standard
+For this model to make any empirical sense however, we need a reference
+ point for the value function and a form for 
+\begin_inset Formula $\sigma(\psi)$
+\end_inset
+
+.
+ We may take a different stochastic process for a continuous model and an
+ appropriate choice for 
+\begin_inset Formula $\sigma(\psi)$
+\end_inset
+
+ by extending the same framework.
+\end_layout
+
+\begin_layout Standard
+The uncertainty model also provides a more microeconomic meaning to the
+ cost function.
+ The cost of owning more assets is actually the cost of risk - a risk-seeking
+ consumer pays less wealth-bearing costs than a risk-averse one.
+\end_layout
+
+\begin_layout Standard
+With 
+\begin_inset Formula $E(A)$
+\end_inset
+
+ under no uncertainty, only a zero sum game can allow both 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+ to matter.
+ If consumers only observe 
+\begin_inset Formula $\psi$
+\end_inset
+
+ (and compete on 
+\begin_inset Formula $\psi$
+\end_inset
+
+), uncertainty is the only way to allow a game to exist (so that a participatiin
+g consumer may have an unlikely belief in winning).
+ The utility for relative income (
+\begin_inset Formula $\Delta A$
+\end_inset
+
+) is not just the value but the value under risk.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Income Arrangement
+\end_layout
+
+\begin_layout Standard
+This can help us refine how redistribution policies such as taxation might
+ allow the (separating?) equilibrium for risk-seeking and risk-averse individual
+s to exist by letting a risk.
+ This is relevant for status consumption because the risk-sharing would
+ imply that 
 \end_layout
 
 \begin_layout Standard
@@ -5035,44 +5072,6 @@ literal "false"
 
 ) than the risk-aversion level based utilities used in the portfolio optimisatio
 n.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Leveller Process
-\end_layout
-
-\begin_layout Standard
-With 
-\begin_inset Formula $E(A)$
-\end_inset
-
- under no uncertainty, only a zero sum game can allow both 
-\begin_inset Formula $A_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $A_{2}$
-\end_inset
-
- to matter.
- If consumers only observe 
-\begin_inset Formula $\psi$
-\end_inset
-
- (and compete on 
-\begin_inset Formula $\psi$
-\end_inset
-
-), uncertainty is the only way to allow a game to exist (so that a participatiin
-g consumer may have an unlikely belief in winning).
- The utility for relative income (
-\begin_inset Formula $\Delta A$
-\end_inset
-
-) is not just the value but the value under risk.
- 
 \end_layout
 
 \begin_layout Standard
@@ -5135,7 +5134,7 @@ To explore the risk-sharing, consider no utility function (the consumers
 \end_inset
 
 , we can just consider the optimisation of the first period).
-  
+ 
 \begin_inset Formula 
 \begin{gather*}
 \Delta A_{1}=\delta(A_{2}-A_{1})-\psi_{1}+\sigma(\psi_{1})X_{t}\\
@@ -5985,7 +5984,7 @@ Ideally however the risk-seeking behaviour is trivial in this scenario -
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-\nu(\Delta) & =\begin{cases}
+\upsilon(\Delta) & =\begin{cases}
 \Delta^{\gamma} & \Delta\ge0\\
 -\lambda(-\Delta)^{\gamma} & \Delta<0
 \end{cases}
@@ -7563,7 +7562,397 @@ Include exchangeability and / or hierarchy in the model.
 \end_layout
 
 \begin_layout Section
+Addendum
+\end_layout
+
+\begin_layout Standard
+As such the weighting probability has no role in dynamics - unless we assume
+ an as if scenario - where consumer acts as if the probability in asset
+ growth dynamics (
+\begin_inset Formula $\sigma(\psi)$
+\end_inset
+
+ is according to the weight of the probability.
+ 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is the only control that consumer decides with.
+ Every 
+\begin_inset Formula $\psi$
+\end_inset
+
+ would correspond to a lottery who value is calculated with PT.
+ An optimal 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is selected based on the assumption that the same 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is observed by the consumers (no subjectivity when considering 
+\begin_inset Formula $\sigma$
+\end_inset
+
+).
+ Thus when we consider the case with different 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ for different consumers (i.e.
+ consumers 1 and 2 in our example).
+\end_layout
+
+\begin_layout Standard
+The role of probability weighting functions also shows how a belief in unlikely
+ jump 
+\begin_inset Formula $\sigma(\psi)$
+\end_inset
+
+ (e.g.
+ more expenditure on status consumption) would have an influence on consumption.
+\end_layout
+
+\begin_layout Standard
+Given the dynamics in the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Bernoulli_dynamics"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, a consumer faces the asset choice 
+\begin_inset Formula $A_{t+1}=A_{t}-\delta\psi+\sigma(\psi)X_{t}$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $P(X_{t}=1)=p$
+\end_inset
+
+ and 
+\begin_inset Formula $P(X_{t}=0)=1-p$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is non-negative.
+ Therefore, the consumer evaluates the lottery 
+\begin_inset Formula $\{(A_{t}-\delta\psi+\sigma(\psi),p),(A_{t}-\delta\psi,1-p)\}$
+\end_inset
+
+.
+ Using a weighting function 
+\begin_inset Formula $w(p)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}$
+\end_inset
+
+ and a value function 
+\begin_inset Formula $\upsilon(A)$
+\end_inset
+
+, the utility 
+\begin_inset Formula $u(\psi)$
+\end_inset
+
+ which the consumer optimises is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+u(\psi) & =\sum w(p)\upsilon(A_{t+1})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let's assume a reference points 
+\begin_inset Formula $A'$
+\end_inset
+
+, the lottery's value would be
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+u(\psi) & =\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t}-\delta\psi+\sigma(\psi)-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t}-\delta\psi-A')
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can now arrive at the specifics form of the utlility function by choosing
+ the forms of 
+\begin_inset Formula $\sigma(\psi)$
+\end_inset
+
+, the value function 
+\begin_inset Formula $\upsilon(A)$
+\end_inset
+
+ and the references points.
+ We can for example use 
+\begin_inset Formula $A'=\frac{A_{1}+A_{2}}{2}$
+\end_inset
+
+ and the PT value function 
+\begin_inset Formula 
+\begin{alignat*}{1}
+\upsilon(\Delta) & =\begin{cases}
+\Delta^{\gamma} & \Delta\ge0\\
+-\lambda(-\Delta)^{\gamma} & \Delta<0
+\end{cases}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What's interesting is that if we have high-risk activities - utilities from
+ a high and low 
+\begin_inset Formula $\psi$
+\end_inset
+
+ are the same - i.e.
+ the equilibrium may exists with two different 
+\begin_inset Formula $\psi$
+\end_inset
+
+ having the same utility.
+ The size of this dip depends on the risk-aversion (i.e.
+ 
+\begin_inset Formula $\alpha$
+\end_inset
+
+).
+ But more interesting is that having a low 
+\begin_inset Formula $\pi$
+\end_inset
+
+ and a high 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ does result in utilities.
+ 
+\end_layout
+
+\begin_layout Standard
+Is this simply the nature of utility functions? Why should we even try to
+ use PT? There are only two reasons.
+ First, is the loss-aversion (i.e.
+ the consumer dislikes losses more than she likes profits ) and the second
+ is the non-linear effect of probability.
+ A risk-averse individual would see the same opportunity differently.
+ The non-stochastic approach didn't account for these difference while our
+ PT approach only incorporates these two in the model.
+ See graphs of the probability weighting function for varied degrees of
+ risk-aversion 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Probability-Weighting-Function"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and the graphs for value function with varied degrees of loss-aversion
+ in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Value-Function"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename valuefunction.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Value-Function"
+
+\end_inset
+
+Value Function
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pwf_karmakar.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Probability-Weighting-Function"
+
+\end_inset
+
+Probability Weighting Function 
+\begin_inset Formula $\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we can extend this function to two consumers who differ in their risk-appeti
+tes (probability weighting functions controlled by 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in the case of Karmakar probability weighting funtion) but are equally
+ loss-averse (given a mid-point reference point).
+ In this simple case, we also assume that there is not much social stratificatio
+n and the 
+\begin_inset Quotes eld
+\end_inset
+
+chances
+\begin_inset Quotes erd
+\end_inset
+
+ of success are the same.
+ Thus, the same 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is observed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+u_{1}(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}+\sigma(\psi_{1})-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}-A')\\
+u(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}+\sigma(\psi_{2})-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}-A')
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The equilibria arrived at by first-order conditions are independent in the
+ non-stochastic case.
+ Extending the above to the case with income-redistribution as before:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+u_{1}(\psi_{1})=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}+\sigma(\psi_{1})-A'+\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1})+\sigma(\psi_{2})-\sigma(\psi_{1})))+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}-A'+\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1}))\\
+u_{2}(\psi_{2})=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}+\sigma(\psi_{2})-A'-\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1})+\sigma(\psi_{2})-\sigma(\psi_{1})))+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}-A'-\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1}))
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now the equilibria would be sought with a stochastic term as well.
+ The risk-taking is therefore shared.
+\end_layout
+
+\begin_layout Section
 Conclusions
+\end_layout
+
+\begin_layout Standard
+What we embarked upon was a question whether an appropriate mixutre of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ and 
+\begin_inset Formula $A$
+\end_inset
+
+ used suitable.
+ The uncertainty in intertemporal method is unnecssary complicated due to
+ inappropriate use of uncertainty.
+ The notion of subjective probability allows this to simply specification.
+ The approach on endoginigin consumption as part of the evolution of total
+ assets allows us to include status consumption - as an access to status.
 \end_layout
 
 \begin_layout Standard

@@ -1,4 +1,4 @@
-
+require(latex2exp)
 tol = 1e-7
 
 # constraint is applied only at reset times
@@ -356,13 +356,20 @@ evolve_relative_wealth <-function(nsim,delta,sigma1,sigma2, risksz){
 }
 
 
-evolve_relative_wealth_discrete <-function(nsim,delta,sigma1,sigma2, risksz, p){
+evolve_relative_wealth_discrete <-function(nsim,delta,sigma1,sigma2, risksz, p, T, dt, A1_init, A2_init){
   
-  T = 1
-  dt = 1e-1
-  A1_init = 100
-  A2_init = 100
-  
+  if (missing(T)){
+    T <- 1
+  } 
+  if (missing(dt)){
+    dt = 1e-1  
+  }
+  if (missing(A1_init)){
+    A1_init = 100  
+  }
+  if (missing(A2_init)){
+    A2_init = 100
+  }
   
   A1df <- data.frame()
   A2df <- data.frame()
@@ -425,7 +432,7 @@ evolve_relative_wealth_discrete <-function(nsim,delta,sigma1,sigma2, risksz, p){
   return(retlist)
 }
 
-draw_crra<- function(gamma){
+draw_crra<- function(gamma,x){
   lines(x,(x**(1-gamma)-1)/(1-gamma),type='l'); 
 }
 
@@ -454,9 +461,9 @@ analyse_relative_wealth_results <- function(res){
   print(colMeans(res[["A2"]]))
   x<- seq(-1,100,.01)
   plot(0,0,type='l',xlim=c(-10,100), ylim=c(-1,20))
-  draw_crra(0)
-  draw_crra(0.5)
-  draw_crra(.99)
+  draw_crra(0,x=x)
+  draw_crra(0.5,x=x)
+  draw_crra(.99,x=x)
 }
 
 adjust_geom<-function(A1,A2){
@@ -535,4 +542,70 @@ loglinear_incredist<-function(alpha,A10,A20,a,b,incpi){
   plot(psivec2,cf2,type='l',main = "cost-function")
   plot(psivec2,A2,type='l', main="assets")
   plot(dat2$psi,dat2$u,type='l', main="utility")
+}
+
+karmakar <- function(p,alpha){
+  return (p**alpha/(p**alpha + (1-p)**alpha))
+  #return(p)
+}
+
+pt_value <- function(x,gamma,lambda){
+  if (x>=0){
+    return (x**gamma) 
+  } else {
+    return(-lambda* (-x)**gamma)
+  }
+}
+riskf <- function(x,a){
+  #return (sqrt(x))
+  return (x**a)
+}
+
+pt_utility <-function(p,alpha,psi,pinc,A0,Aref, lambda, gamma,a){
+  val1 =  karmakar(p,alpha)  * pt_value( x = A0 - pinc*psi  + riskf(psi,a) - Aref, gamma = gamma , lambda =  lambda )
+  val2 =  karmakar(1-p,alpha) * pt_value( x = A0 - pinc*psi - Aref, gamma = gamma, lambda = lambda )
+  return(val1 + val2)
+}
+
+plot_pt_utilities <-function(p,alpha,pinc,A0, gamma, lambda, Aref,a=a){
+  
+  #see plot_pt_utilities(p = .1,alpha = .2, pinc =10, A0 = 100, gamma = .7, lambda = 10) for a dip
+  #plot_pt_utilities(p = .1,alpha = .2, pinc =.10, A0 = 20, gamma = .7, lambda = 10, Aref = 0, a=.5) for a peak (low incpi)
+  # gamma >1 would be more natural
+  
+  arr = array()
+  count = 1
+  psivec = seq(0,20,.1) # psi cannot be negative
+  for (psi in psivec){
+    arr[count] = pt_utility(p = p, alpha = alpha, psi = psi, pinc = pinc, A0 = A0,Aref = Aref, gamma= gamma, lambda = lambda,a=a)
+    count = count + 1
+  }
+  plot(psivec,arr,type='l')
+}
+
+plot_value_functions<-function(){
+  xvec <- seq(-1,1,.01)
+  lambda = 10
+  plot(0,0,type='l',xlim = c(-1,1.5), ylim=c(-10,2) , main=TeX(paste0("Value Function for $\\lambda$=",lambda)))
+  df = data.frame( gamma = c(.1,.2,.5,1,1.5,3) , lty = c(1,2,3,4,5,6))
+  for (i in seq(nrow(df))){
+    row <- df[i,]
+    lines(xvec,sapply(xvec,function(y) { pt_value(x = y,gamma = row$gamma,lambda = lambda) } ), type='l' , lty=row$lty)
+  }
+  
+  legend(0.2, -5, legend=paste("gamma=",df$gamma), lty=df$lty, cex=0.7)
+}
+
+
+plot_pwf<-function(){
+  pvec <- seq(0,1,.01)
+  
+  plot(0,0,type='l',xlim = c(0,1.5), ylim=c(0,1) , main="Probability weighting function")
+  df = data.frame( alpha = c(.1,.2,.5,1,1.5,3) , lty = c(1,2,3,4,5,6))
+  for (i in seq(nrow(df))){
+    row <- df[i,]
+    lines(pvec,sapply(pvec,function(y) { karmakar(p = y, alpha = row$alpha) } ), type='l' , lty=row$lty)
+  }
+  
+  legend(.8, .4, legend=TeX(paste("$\\alpha$=",df$alpha)), lty=df$lty, cex=0.8)
 }
