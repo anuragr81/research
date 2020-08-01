@@ -1691,7 +1691,17 @@ Income and Assets in the intertemporal model:
 The intertemporal model relies on income savings, an interest rate of growth
  and depreciation.
  The literature tends to use a depreciation factor based on education and
- social classes.
+ social classes (demographic variables provide the discount factor in the
+ utility function see Cagetti
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CagettiWealth2003"
+literal "true"
+
+\end_inset
+
+.
+ ) .
  The simplest instance of such a model would look to associate the certain
  and uncertain parts of consumption with the respective parts of the consumer's
  status.
@@ -3451,7 +3461,15 @@ literal "false"
 
 \end_inset
 
- ) and is defined as follows: 
+ and Rabin 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RabinEU2000"
+literal "false"
+
+\end_inset
+
+) and is defined as follows: 
 \begin_inset Formula 
 \begin{alignat*}{1}
 \upsilon(\Delta) & =\begin{cases}
@@ -3466,6 +3484,110 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+There are two reasons why such a utility function is desirable - first,
+ it represents the property of loss-aversion (i.e.
+ the consumer dislikes losses more than she likes profits ) and second it
+ repreesnt the non-linear effect of probability.
+ A risk-averse individual would see the same opportunity differently from
+ a risk-seeking individuals.
+ A risk-neutral individual would have 
+\begin_inset Formula $w(p)=p$
+\end_inset
+
+.
+ The non-stochastic approach didn't account incorporate these two explicitly
+ in the model.
+ See graphs of the probability weighting function for varied degrees of
+ risk-aversion 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Probability-Weighting-Function-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and the graphs for value function with varied degrees of loss-aversion
+ in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Value-Function-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Cost-function in the lottery: 
+\series default
+The life-cycle concerns would need to be considered.
+ In a simple reformulation consider just 
+\begin_inset Formula $u(\nu_{t},A_{t})=\alpha_{t}log(\nu_{t})+(1-\alpha_{t})log(A_{t}$
+\end_inset
+
+).
+ Let's consider the needs (without the adjustment for assets) as 
+\begin_inset Formula $\psi_{t}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $A_{t+1}$
+\end_inset
+
+ is stochastic and depends on the history of 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ (
+\begin_inset Formula $\psi_{t}$
+\end_inset
+
+ does not change as it is independent of choices the consumer makes), it
+ takes into account both the observed probability and the subjective inference
+ of the probability i.e.
+ the weighting function.
+ Cost function 
+\begin_inset Formula $p(A_{t},\rho)$
+\end_inset
+
+ can seen as the investment towards the higher probability of windfall.
+ The peer effects of 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ or the habits that increase the chances (only slightly) do influence 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ but only after an upfront asset bearing cost 
+\begin_inset Formula $p(A_{t})$
+\end_inset
+
+ is paid.
+ If success were a lottery, 
+\begin_inset Formula $p(A_{t},\rho)$
+\end_inset
+
+ would be the cost to be paid to be a part of the lottery.
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 Role of 
@@ -3474,7 +3596,8 @@ Role of
 
 : 
 \series default
-Notice that as such weighting probability plays no role in dynamics.
+Notice however that just the way in the non-stochastic case, the probability
+ weighting function plays no direct role in the dynamics (evolution of assets).
  It may be possible to use consider a subjective (or personal) probability
  so that the consumer acts as if the probability in asset growth dynamics
  was according to this subjective probability function.
@@ -3501,6 +3624,8 @@ Notice that as such weighting probability plays no role in dynamics.
 \end_inset
 
  could be allowed for the consumers in later enhancements).
+ We assume that a mixture of risk-averse and risk-seeking individuals are
+ spread across the population and some risk-sharing is possible.
 \end_layout
 
 \begin_layout Standard
@@ -3588,8 +3713,8 @@ The specifics form of the utlility function can now be arrived at by choosing
 \begin_inset Formula $\sigma(\psi)$
 \end_inset
 
-.
- With 
+ (e.g.
+ with 
 \begin_inset Formula $\sigma(\psi)=\sqrt{\psi}$
 \end_inset
 
@@ -3597,13 +3722,9 @@ The specifics form of the utlility function can now be arrived at by choosing
 \begin_inset Formula $A'=\frac{A_{1}+A_{2}}{2}$
 \end_inset
 
-, the utility function would look like the following.
- 
-\end_layout
-
-\begin_layout Standard
-What's interesting is that if we have high-risk activities - utilities from
- a high and low 
+).
+ What's interesting is that if we have high-risk activities - utilities
+ from a high and low 
 \begin_inset Formula $\psi$
 \end_inset
 
@@ -3628,45 +3749,7 @@ What's interesting is that if we have high-risk activities - utilities from
 \end_inset
 
  does result in utilities.
- 
-\end_layout
-
-\begin_layout Standard
-Is this simply the nature of utility functions? Why should we even try to
- use PT? There are only two reasons.
- First, is the loss-aversion (i.e.
- the consumer dislikes losses more than she likes profits ) and the second
- is the non-linear effect of probability.
- A risk-averse individual would see the same opportunity differently.
- The non-stochastic approach didn't account for these difference while our
- PT approach only incorporates these two in the model.
- See graphs of the probability weighting function for varied degrees of
- risk-aversion 
-\begin_inset Formula $\alpha$
-\end_inset
-
- in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Probability-Weighting-Function-1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and the graphs for value function with varied degrees of loss-aversion
- in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Value-Function-1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
+ This is evident in the Figures.
 \end_layout
 
 \begin_layout Standard
@@ -3814,6 +3897,16 @@ Now the equilibria would be sought with a stochastic term as well.
 \end_layout
 
 \begin_layout Standard
+The role of probability weighting functions also shows how a belief in unlikely
+ jump 
+\begin_inset Formula $\sigma(\psi)$
+\end_inset
+
+ (e.g.
+ more expenditure on status consumption) would have an influence on consumption.
+\end_layout
+
+\begin_layout Standard
 In a more advanced game the consumers would be able to influence each other
  
 \begin_inset Formula $\sigma$
@@ -3822,83 +3915,15 @@ In a more advanced game the consumers would be able to influence each other
  - by giving each other rewards - or alternatively affect the weighting
  of probability itself.
  
+\end_layout
+
+\begin_layout Standard
+
 \series bold
-Cost-function in the lottery: 
+Reinterpreting Income Arrangement for the stochastic case: 
 \series default
-The life-cycle concerns would need to be considered.
- In a simple reformulation consider just 
-\begin_inset Formula $u(\nu_{t},A_{t})=\alpha_{t}log(\nu_{t})+(1-\alpha_{t})log(A_{t}$
-\end_inset
-
-).
- Let's consider the needs (without the adjustment for assets) as 
-\begin_inset Formula $\psi_{t}$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $A_{t+1}$
-\end_inset
-
- is stochastic and depends on the history of 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- (
-\begin_inset Formula $\psi_{t}$
-\end_inset
-
- does not change as it is independent of choices the consumer makes), it
- takes into account both the observed probability and the subjective inference
- of the probability i.e.
- the weighting function.
- Cost function 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- can seen as the investment towards the higher probability of windfall.
- The peer effects of 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- or the habits that increase the chances (only slightly) do influence 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- but only after an upfront asset bearing cost 
-\begin_inset Formula $p(A_{t})$
-\end_inset
-
- is paid.
- If success were a lottery, 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- would be the cost to be paid to be a part of the lottery.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Income Arrangement 
-\end_layout
-
-\begin_layout Standard
-This can help us refine how redistribution policies such as taxation might
- allow the (separating?) equilibrium for risk-seeking and risk-averse individual
-s to exist by letting a risk.
- This is relevant for status consumption because the risk-sharing would
- imply that 
-\end_layout
-
-\begin_layout Standard
-The question now is whether the income arrangement would solve the issue.
- First off why do we need it.
- First let's consider what would happened if 
+Let's reconsider why we need the income rearrangment.
+ Consider what would happen if 
 \begin_inset Formula $A_{1}=A_{2}$
 \end_inset
 
@@ -3920,516 +3945,7 @@ The question now is whether the income arrangement would solve the issue.
 \end_layout
 
 \begin_layout Standard
-To use a probability weighting function, we can use 
-\begin_inset Formula $P(A_{T}=A|\psi)=Binom(\frac{A+\psi T}{\ensuremath{\sigma(\psi)}}$
-\end_inset
-
-) (where 
-\begin_inset Formula $Binom$
-\end_inset
-
- is the point-probability of the binomial distribution of size 
-\begin_inset Formula $T$
-\end_inset
-
-).
- An appropriate form of 
-\begin_inset Formula $w(p)$
-\end_inset
-
- (e.g.
- the prelec function or any of the functions listed above) can give us a
- condition where utility optimisation is more nuanced (see Rabin 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "RabinEU2000"
-literal "false"
-
-\end_inset
-
-) than the risk-aversion level based utilities used in the portfolio optimisatio
-n.
-\end_layout
-
-\begin_layout Standard
-The risk also has a role to play in the income distribution - less taxes
- are necssary if consumer believe in an unlikely dream of the riches.
- As before too much difference in assets 
-\begin_inset Formula $A_{1}-A_{2}$
-\end_inset
-
- is not sustainable if the both 
-\begin_inset Formula $A_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $A_{2}$
-\end_inset
-
- are to play in the market.
- The consideration of risk allows us to consider how risk-seeking and risk-avers
-e individuals would faced difference - and how possibly there may be risk-sharin
-g in the long-run.
-\end_layout
-
-\begin_layout Standard
-To explore the risk-sharing, consider no utility function (the consumers
- optimise just 
-\begin_inset Formula $E(A)$
-\end_inset
-
-) and no risk aversion - but a leveller which the poorer customer can rely
- on.
- If 
-\begin_inset Formula $A_{1}<A_{2}$
-\end_inset
-
-, the consumer may be encouraged to take a risk so that eventually 
-\begin_inset Formula $A_{1}>A_{2}$
-\end_inset
-
-.
- The leveller actually just keeps the consumer with lower 
-\begin_inset Formula $A$
-\end_inset
-
- (
-\begin_inset Formula $A_{1}$
-\end_inset
-
- or 
-\begin_inset Formula $A_{2}$
-\end_inset
-
- take more risks).
- If the consumers only choose a single value of 
-\begin_inset Formula $\psi$
-\end_inset
-
- (and not a path of values 
-\begin_inset Formula $\psi_{t\in[1,T]}$
-\end_inset
-
-, we can just consider the optimisation of the first period).
- 
-\begin_inset Formula 
-\begin{gather*}
-\Delta A_{1}=\delta(A_{2}-A_{1})-\psi_{1}+\sigma(\psi_{1})X_{t}\\
-\Delta A_{2}=-\delta(A_{2}-A_{1})-\psi_{2}+\sigma(\psi_{2})X_{t}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Relation with status consumption -
-\series default
- How is this related to status consumption? It's the risk-sharing and pooling
- that should define status consumption.
- Ireland model does use it - but an environment of wealth differences can
- also have a status consumption - albeit of a different kind.
- The uncertainty model also provides a more microeconomic meaning to the
- cost function.
- The cost of owning more assets is actually the cost of risk - a risk-seeking
- consumer pays less wealth-bearing costs than a risk-averse one.
-\end_layout
-
-\begin_layout Standard
-===
-\end_layout
-
-\begin_layout Standard
-===
-\end_layout
-
-\begin_layout Standard
-Consider what happens if the there is nothing to be gained with risk or
- if there were no risks in the world, any scenario such as
-\begin_inset Formula $A_{1}<<A_{2}$
-\end_inset
-
- would remain permanent - except through a direct hand-out.
-\end_layout
-
-\begin_layout Standard
-if the definition of an 
-\begin_inset Quotes eld
-\end_inset
-
-asset
-\begin_inset Quotes erd
-\end_inset
-
- was simply a certain wealth (as opposed to uncertain wealth - such as income)
- then the use of the the descriptive function.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Exchangeability and Uncertainty
-\end_layout
-
-\begin_layout Standard
-The role of exchangeability axioms resolve the combinatorial explosion
-\begin_inset CommandInset citation
-LatexCommand cite
-key "RichardSubjectiveProbRealThing2004,deFinettiLaPrevision1937"
-literal "false"
-
-\end_inset
-
- - since the real probability of transmission would treat what characteristics
- the consumers have not whether they individual 
-\begin_inset Formula $p_{ij}$
-\end_inset
-
- they have.
- This provides the rationalisation of the subjective probability functions
- 
-\begin_inset Formula $p_{ij}.$
-\end_inset
-
-The simplified model without needs we use to demonstrate this is the following:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\Delta A_{t+1}=A_{t+1}-A_{t}=i_{t+1}-c_{t+1}+\sigma_{\rho}W_{t+1}=\delta_{t+1}+\sigma_{\rho}c_{t+1}W_{t+1}\\
-u_{t+1}=\alpha log(c_{t+1})+(1-\alpha)log(A_{t+1})\\
-\rho_{t+1}=F(A_{t})
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Everyone would maximise the expected value of 
-\begin_inset Formula $u_{t+1}$
-\end_inset
-
- at every step - based on the probability.
- The number of users could be minimised if we can assume that individuals
- with a certain characteristics are exchangeable and therefore would all
- have the attribute the same chances.
- Another incentive to increasing 
-\begin_inset Formula $A_{t+1}$
-\end_inset
-
- is that one's 
-\begin_inset Formula $\rho$
-\end_inset
-
- is may improve with improved 
-\begin_inset Formula $A_{t}$
-\end_inset
-
-.
- The consumer knows 
-\begin_inset Formula $F$
-\end_inset
-
- but not 
-\begin_inset Formula $\sigma_{\rho}$
-\end_inset
-
-.
- The boundaries in the distribution of 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- are the sole determinant of 
-\begin_inset Formula $\rho$
-\end_inset
-
- - this can endogenise the role of 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- We can explore two equilibria - first with a constant 
-\begin_inset Formula $\rho$
-\end_inset
-
- - representing stagnant societies where class is permanent.
- The consumer only makes a guess about 
-\begin_inset Formula $\sigma_{\rho}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsubsection
-
-\series bold
-Continuous Model
-\end_layout
-
-\begin_layout Standard
-We could use a continuous model so that a consumer gets a continuous rise
- in income 
-\begin_inset Formula $di$
-\end_inset
-
- corresponding to wealth 
-\begin_inset Formula $A$
-\end_inset
-
-.
- 
-\begin_inset Formula $di$
-\end_inset
-
- is lower as 
-\begin_inset Formula $A$
-\end_inset
-
- rises.
- There is a mandatory depreciation with wealth - which is not like the cash
- assets which grow at rate 
-\begin_inset Formula $r$
-\end_inset
-
-.
-  She could increase the consumption 
-\begin_inset Formula $d\psi$
-\end_inset
-
- to balance the expected growth of 
-\begin_inset Formula $A$
-\end_inset
-
-.
- Given the income change 
-\begin_inset Formula $di$
-\end_inset
-
- the consumer effectively needs to balance the gain in utility between i)
- gained 
-\begin_inset Formula $dA$
-\end_inset
-
- through 
-\begin_inset Formula $di-d\psi$
-\end_inset
-
- and ii) a probabilistic expected change 
-\begin_inset Formula $\sigma(\psi)dW$
-\end_inset
-
- where 
-\begin_inset Formula $\sigma(\psi)$
-\end_inset
-
- is an increasing function of the investments 
-\begin_inset Formula $\psi$
-\end_inset
-
-.
- Anything that is considered a need by the consumer is also an investment
- in this way (assuming that basic needs are met for everyone and that no-one
- is living with no income less than the cost of basic needs).
- 
-\begin_inset Formula $\sigma(\psi)$
-\end_inset
-
- would represent the risk-perception of the consumer.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-dA=di-(\psi+\delta)dt+\sigma(\psi)dW\\
-di=\mu(A,t)dt
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-As a result of the above equations we can write 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-dA & =\mu(A,t)dt-(\psi+\delta)dt+\sigma(\psi)dW
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Here, the form of 
-\begin_inset Formula $\mu(\rho,t)$
-\end_inset
-
- and the size of 
-\begin_inset Formula $\delta$
-\end_inset
-
- both would determine the risk that a consumer takes.
- More risk would be needed if economy grows and depreciation 
-\begin_inset Formula $\delta$
-\end_inset
-
- is high.
- 
-\begin_inset Formula $\delta$
-\end_inset
-
- is also positively correlated with the rise in incomes 
-\begin_inset Formula $\mu(\rho,t)$
-\end_inset
-
-.
- In a growing economy both depreciation and rise in incomes would be rapid.
- It may be possible to combine the two parameters with the rate of economic
- growth.
- The conventional asset-growth model ignores that the income for poor is
- determined the wealth of the not so poor.
- This must be reflected in the income process - by letting the income growth
- not growing higher than a certain wealth - which would respond to the higher
- wealth.
- Responding to external trade may be seen as a similar behaviour on an aggregate
-d economy.
-\end_layout
-
-\begin_layout Standard
-Aggregation is another important view - if we can aggregate the incomes
- and wealth of a 
-\begin_inset Formula $n_{k}$
-\end_inset
-
- consumers in a village, then 
-\begin_inset Formula $n_{k}$
-\end_inset
-
- their income and asset process could be expressed in a similar form.
- The form of 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- need to satisfy this aggregation property - and should be used to understand
- the risk management profile of a village.
-\end_layout
-
-\begin_layout Standard
-Assuming that the two are correlated, we can see that the asset growth 
-\begin_inset Formula $dA$
-\end_inset
-
- in continuous time depends on 
-\begin_inset Formula $\delta$
-\end_inset
-
- and 
-\begin_inset Formula $\mu$
-\end_inset
-
-.
- If the final goal is to accumulate wealth 
-\begin_inset Formula $A$
-\end_inset
-
-, then the the rich consumer would lose out if 
-\begin_inset Formula $\mu$
-\end_inset
-
- increases and she doesn't increase 
-\begin_inset Formula $\sigma$
-\end_inset
-
-.
- She must increase 
-\begin_inset Formula $\sigma$
-\end_inset
-
- to prevent a decline in 
-\begin_inset Formula $dA$
-\end_inset
-
-.
- Likewise in a stagnant economy, 
-\begin_inset Formula $\mu$
-\end_inset
-
- would be low (i.e.
- it won't rise with time and its expected value in current time would be
- low).
- The risk must be taken by the lower asset consumer for her to hope to rise
- her 
-\begin_inset Formula $A$
-\end_inset
-
-.
- The game can only be won by accumulating more wealth.
-\end_layout
-
-\begin_layout Standard
-An important distinction is made about the wealth 
-\begin_inset Formula $A$
-\end_inset
-
-.
- We don't consider the usual assumption that 
-\begin_inset Formula $A$
-\end_inset
-
- grows with a constant rate.
- We believe that wealth - as a cash asset or inheritable wealth has the
- property of decline in value more fundamentally.
- A pot of gold (probably a Marxist perspective) is valuable only because
- it would take us a long time to refine and obtain it.
- Gold has value only because we agree to purchase it for a certain value.
- By itself it is a risk-less asset only because we value it.
- In complete chaos, it would have no value.
- It grows only because an order is maintained and economy keeps growing.
- The story with houses or any other asset is no different.
- It grows only because the economy grows.
- 
-\begin_inset Formula $A$
-\end_inset
-
- does not represent the growth in economy - but the risk in its growth is
- what represents the model.
-\end_layout
-
-\begin_layout Standard
-Even though the rise of disposable incomes is often observed to be linear
- (see the data from UK for example), we prefer the declining growth assumption
- over life-time more appropriate - due to life-cycle effects for the consumer.
- Even for the dynasties, the rise in prices would diminish the rise in incomes
- as wealth rises.
- Such a process is assumed to be known to the consumer.
- What she doesn't know is whether her own wealth would follow the same trajector
-y - hence a risk process for wealth is assumed.
-\end_layout
-
-\begin_layout Subsection
-
-\series bold
-Aggregation
-\end_layout
-
-\begin_layout Standard
-For aggregation consider a two persons economy.
- In one type of model the two persons have some basic needs that are satisfied
+In one type of model the two persons have some basic needs that are satisfied
  by exchanging goods that they find or cultivate.
  In the presence of wealth, one would have a higher wealth than the other
  or would be more gifted than the other in finding more wealth (due to creativit
@@ -4614,368 +4130,70 @@ A_{2}=-\psi_{2}t+\sigma(\psi_{2})W_{2}+c_{2}
 \end_layout
 
 \begin_layout Standard
-Without the income arrangement, a consumer would choose to optimise 
-\begin_inset Formula $A_{1},A_{2}$
+The risk also has a role to play in the income distribution - less taxes
+ are necssary if consumer believe in an unlikely dream of the riches.
+ As before too much difference in assets 
+\begin_inset Formula $A_{1}-A_{2}$
 \end_inset
 
- by choosing a risk-profile.
- In this case, the variance only comes from the 
-\begin_inset Formula $\sigma$
-\end_inset
-
- term (i.e.
- 
-\begin_inset Formula $\sigma^{2}$
-\end_inset
-
-).
- the form of utility would can thus be made specific under these conditions.
- A few choices are a CARA utility 
-\begin_inset Formula $u(A)=1-e^{-\lambda A}$
-\end_inset
-
- where 
-\begin_inset Formula $\lambda=-\frac{u''(A)}{u'(A)}$
+ is not sustainable if the both 
+\begin_inset Formula $A_{1}$
 \end_inset
 
  and 
-\begin_inset Formula $\lambda>0$
+\begin_inset Formula $A_{2}$
 \end_inset
 
- or CRRA utility 
-\begin_inset Formula $u(A)=A^{1-\lambda}$
-\end_inset
-
- (
-\begin_inset Formula $\lambda\in(0,1)$
-\end_inset
-
-) and 
-\begin_inset Formula $\lambda=-\frac{Au''(A)}{u'(A)}$
-\end_inset
-
-.
- One approach is to consider - the other is to calibrate a probability function
- which the consumer chooses with.
- We compare both approaches with the above model.
- We assume that the time time-horizon does not come into picture and the
- consumer is only concerned with the immediate values of 
-\begin_inset Formula $A$
-\end_inset
-
-.
- It is often that a consumer is assumed to optimise the expected value of
- assets - but that isn't what consumers would do at a fundamental level.
- We can associate a probability function with the distribution of 
-\begin_inset Formula $\Delta A_{T}=A_{T}-A_{0}$
-\end_inset
-
- to see how the consumer behaviour under probability acts.
+ are to play in the market.
+ The consideration of risk allows us to consider how risk-seeking and risk-avers
+e individuals would faced difference - and how possibly there may be risk-sharin
+g in the long-run.
 \end_layout
 
 \begin_layout Standard
-Let's consider briefly the dynamics of 
-\begin_inset Formula $dA=-\psi Adt+\psi A\sigma dW$
-\end_inset
-
-.
- Here, the asset is not meant to grow.
- The consumer opt output by choosing 
-\begin_inset Formula $\psi=0$
-\end_inset
-
- - if needs are uncertain, 
-\begin_inset Formula $A$
-\end_inset
-
- would possibly decline to negative value.
- As long as the possibility of that happening is low, things work alright
- (we would like to bring the relative wealth concern by letting the consumer
- optimise two assets - but we focus on one consumer for now).
- A consumer cannot choose 
-\begin_inset Formula $\psi>0$
-\end_inset
-
- -so is 
-\begin_inset Formula $E(A)=0\Rightarrow\psi=0$
-\end_inset
-
-.
- Assuming a CRRA utility 
-\begin_inset Formula $u(A)=\frac{A^{1-\gamma}-1}{1-\gamma}$
-\end_inset
-
- .
- We know that for a lognormal 
-\begin_inset Formula $A$
-\end_inset
-
-, i.e.
- 
-\begin_inset Formula $log(A)\sim N(\mu,\sigma^{2})$
-\end_inset
-
- the expected utility 
-\begin_inset Formula $E(u(x))$
-\end_inset
-
- is given by 
-\begin_inset Formula $E(u(x))=\frac{e^{\mu(1-\gamma)+\frac{\sigma^{2}}{2}(1-\gamma)^{2}-1}}{1-\gamma}$
-\end_inset
-
- (so that the certainty equivalent 
-\begin_inset Formula $A_{CE}$
-\end_inset
-
- for a consumer is 
-\begin_inset Formula $A_{CE}=e^{\mu+\frac{(1-\gamma)}{2}\sigma^{2}}$
-\end_inset
-
-).
- One can optimise 
-\begin_inset Formula $E(u(x))$
-\end_inset
-
- by optimising 
-\begin_inset Formula $\mu+\frac{1-\gamma}{2}\sigma^{2}$
-\end_inset
-
-.
- For the dynamics, 
-\begin_inset Formula $dA=-\psi Adt+\psi A\sigma dW\Rightarrow d(logA)=-\psi dt+\psi\sigma dW$
-\end_inset
-
- , one can use Ito's lemma to infer 
-\begin_inset Formula $log(A)\sim N(-\psi-\frac{\psi^{2}\sigma^{2}}{2},\psi^{2}\sigma^{2})$
-\end_inset
-
-.
- Thus 
-\begin_inset Formula $u(A)$
-\end_inset
-
- is optimised at an optimal 
-\begin_inset Formula $-\psi-\frac{\psi^{2}\sigma^{2}}{2}+\frac{(1-\gamma)}{2}\psi^{2}\sigma^{2}$
-\end_inset
-
-.
- First order condition leads to 
-\begin_inset Formula $\psi(1+\frac{\gamma\psi\sigma^{2}}{2})=0$
-\end_inset
-
- i.e.
- at 
-\begin_inset Formula $\psi=0$
-\end_inset
-
-.
- This could be verified with a Monte Carlo simulation as well.
- 
-\end_layout
-
-\begin_layout Standard
-A fundamental issues is that our normality assume is too strong - it's better
- keep the asset transition probability function as general as possible.
- It is through limiting the combinatorial explosion that one achieves the
- standardisation of utility.
-\end_layout
-
-\begin_layout Standard
-The reason why this model doesn't appear realistic is that we're not using
- the multiple risks that consumer takes.
- This model assumes that we just there is no risk assumed with education.
- We should assume that there are a returns from 
-\begin_inset Formula $a(\psi)dt$
-\end_inset
-
- from eduction etc.
- that are certain - whereas other that are not so certain.
- When somebody in cr
-\end_layout
-
-\begin_layout Standard
-Assume that a consumer observes probability 
-\begin_inset Formula $p_{ij}\equiv P(\Delta A_{ij})=P(A_{i}\rightarrow A_{j})$
-\end_inset
-
-.
- Every transition 
-\begin_inset Formula $\Delta A_{ij}=A_{i}-A_{j}$
-\end_inset
-
- consists of a time component and a random component.
- Assuming that a consumer is only looking to optimise the value of 
-\begin_inset Formula $A_{0T}$
-\end_inset
-
- i.e.
- the the value of 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- at a time horizon 
-\begin_inset Formula $T$
-\end_inset
-
-, we may use the normal distribution of brownian motion 
-\begin_inset Formula $W_{T}$
-\end_inset
-
-(i.e.
- 
-\begin_inset Formula $W_{T}-W_{0}$
-\end_inset
-
- being normally distributed with variance 
-\begin_inset Formula $T$
-\end_inset
-
-) to write probability distribution function as 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-p(W_{T}=x) & =\frac{1}{\sqrt{2\pi T}}e^{-\frac{x^{2}}{2T}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\because\Delta=A_{t}-A_{0}=-\psi t+\sigma(\psi)W_{t}$
-\end_inset
-
- 
-\begin_inset Formula $\Rightarrow W_{t}=\frac{\Delta+\psi t}{\sigma(\psi)}$
-\end_inset
-
-.
- Given 
-\begin_inset Formula $\Delta$
-\end_inset
-
- and a continuous probability weighting function 
-\begin_inset Formula $w(p)$
-\end_inset
-
-, a consumer would select 
-\begin_inset Formula $p$
-\end_inset
-
- (and therefore the pair 
-\begin_inset Formula $p,\Delta$
-\end_inset
-
- - which would correspond to a certain 
-\begin_inset Formula $\psi$
-\end_inset
-
-) such that 
-\begin_inset Formula $u(p,\Delta)=\int_{p,\Delta A}w(p)\nu(\Delta A)dpd\Delta$
-\end_inset
-
- is maximised.
-\end_layout
-
-\begin_layout Standard
-Ideally however the risk-seeking behaviour is trivial in this scenario -
- because 
+To explore the risk-sharing, consider no utility function (the consumers
+ optimise just 
 \begin_inset Formula $E(A)$
 \end_inset
 
- has no random components - and the minimisation is rather trivial.
- The value function can be the one used in PT:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\upsilon(\Delta) & =\begin{cases}
-\Delta^{\gamma} & \Delta\ge0\\
--\lambda(-\Delta)^{\gamma} & \Delta<0
-\end{cases}
-\end{alignat*}
-
+) and no risk aversion - but a leveller which the poorer customer can rely
+ on.
+ If 
+\begin_inset Formula $A_{1}<A_{2}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Here, the 
-\begin_inset Formula $\lambda>0$
-\end_inset
-
- and 
-\begin_inset Formula $\gamma\in(0,1)$
+, the consumer may be encouraged to take a risk so that eventually 
+\begin_inset Formula $A_{1}>A_{2}$
 \end_inset
 
 .
- The probability weighting function can take many forms.
- A prelec function is 
-\begin_inset Formula $w(p)=e^{-\beta(-ln\ p)^{\alpha}}$
-\end_inset
-
- (where 
-\begin_inset Formula $\alpha>0,\beta>0$
-\end_inset
-
-).
- Another probability weighting function is the |Tversky-Kahneman function
- 
-\begin_inset Formula $w(p)=\frac{p^{\tau}}{(p^{\tau}+(1-p)^{\tau})^{\frac{1}{\tau}}}$
+ The leveller actually just keeps the consumer with lower 
+\begin_inset Formula $A$
 \end_inset
 
  (
-\begin_inset Formula $\tau\in(.279,1)$
+\begin_inset Formula $A_{1}$
 \end_inset
 
- ) (this is a slight variation of the Karmamar's 
-\begin_inset Formula $w(p)=\frac{p^{\tau}}{p^{\tau}+(1-p)^{\tau}}$
+ or 
+\begin_inset Formula $A_{2}$
 \end_inset
 
- where 
-\begin_inset Formula $\tau\in(0,1)$
+ take more risks).
+ If the consumers only choose a single value of 
+\begin_inset Formula $\psi$
 \end_inset
 
-).
- Goldstein-Einhorn offers 
-\begin_inset Formula $w(p)=\frac{\delta p^{\eta}}{\delta p^{\eta}+(1-p)^{\eta}}$
+ (and not a path of values 
+\begin_inset Formula $\psi_{t\in[1,T]}$
 \end_inset
 
- (where 
-\begin_inset Formula $\eta\ge0,\delta\ge0$
-\end_inset
-
-).
- We already have a stochastic environment that is imaginary and rewards
- the consumer based on a constant volatility (which is unrealistic) - so
- we don't wish to get more precise with these functions - we only consider
- them so that a non-linear probability can justified.
- Only an actual game can tell us if this gives us a more accurate view of
- the probability function.
-\end_layout
-
-\begin_layout Standard
-The utility which the consumer would minimse is simply 
-\begin_inset Formula $E(u)$
-\end_inset
-
- over all possible 
-\begin_inset Formula $\Delta$
-\end_inset
-
-:
-\end_layout
-
-\begin_layout Standard
+, we can just consider the optimisation of the first period).
 \begin_inset Formula 
-\begin{alignat*}{1}
-E(u(\Delta)) & =\int_{\Delta}w(p_{T}(\Delta))\nu(\Delta)d\Delta
-\end{alignat*}
+\begin{gather*}
+\Delta A_{1}=\delta(A_{2}-A_{1})-\psi_{1}+\sigma(\psi_{1})X_{t}\\
+\Delta A_{2}=-\delta(A_{2}-A_{1})-\psi_{2}+\sigma(\psi_{2})X_{t}
+\end{gather*}
 
 \end_inset
 
@@ -4983,64 +4201,106 @@ E(u(\Delta)) & =\int_{\Delta}w(p_{T}(\Delta))\nu(\Delta)d\Delta
 \end_layout
 
 \begin_layout Standard
-Since we don't want this to be of descriptive value at this time, we only
- require two qualities form 
-\begin_inset Formula $\nu$
-\end_inset
+This can help us refine how redistribution policies such as taxation might
+ allow the (separating?) equilibrium for risk-seeking and risk-averse individual
+s to exist by letting a risk.
+ This is relevant for status consumption because the risk-sharing would
+ imply that status consumption is not necessarily important when the class
+ differences are strong.
+ This is the refinement offered by other works.
+ The subjective probability makes the relationship with income more explicit.
+\end_layout
 
- and 
-\begin_inset Formula $w$
+\begin_layout Standard
+
+\series bold
+Relation with status consumption -
+\series default
+ How is this related to status consumption? It's the risk-sharing and pooling
+ that should define status consumption.
+ Ireland model does use it - but an environment of wealth differences can
+ also have a status consumption - albeit of a different kind.
+ The uncertainty model also provides a more microeconomic meaning to the
+ cost function.
+ The cost of owning more assets is actually the cost of risk - a risk-seeking
+ consumer pays less wealth-bearing costs than a risk-averse one.
+ 
+\end_layout
+
+\begin_layout Standard
+It is worth consider needs but only as investments to improvement of 
+\begin_inset Formula $A$
 \end_inset
 
 .
- First, they should represent loss-aversion and there should be non-linear
- probability preference.
- In a simpler formulation with CRRA or HARA (see Sharpe), we can use have
- the consumer optimise 
-\begin_inset Formula $E(u(\Delta))=\int u(\Delta)p(\Delta)d\Delta$
+ Instead of saying that non-needs go to status promotion, we can start viewing
+ that all needs are investments of some sort and directly contribute.
+ Status consumption is merely a hope for mobility and nothing else.
+ The desire to get ahead of others enhanced this mobility in real terms
+ (not just in perception).
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Aggregation: 
+\series default
+With more than two consumers, one could still see how the model could be
+ used to aggregate behaviour based on social strata.
+ For an empirical analysis, it may make more sense treat a group of individual
+ with different perceptions of risk than trying to observe the group of
+ individuals.
+ This makes sense because that is indeed how subjective probability works.
+ 
+\end_layout
+
+\begin_layout Standard
+Exchangeability is the criteria for social classification.
+ Despite same net worth, the very definition of social hierarchy means that
+ a certain individuals with characteristics 
+\begin_inset Formula $\rho$
+\end_inset
+
+ have more access to certain services - simply because individuals (consider
+ how black individuals would have trouble getting a cab in New York city
+ - or a cab driver would ignore some passengers to go to an investment bank
+ rink).
+ These are not because of prejudices but the long-term secuirty perceived
+ by individuals - which directly influence actions (for provision or availing
+ of services).
+ The role of exchangeability would justify the role of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ - having a certain 
+\begin_inset Formula $\rho$
+\end_inset
+
+ would give you access in non-durable terms.
+ Long-term is often changed due to limiting this type of access anyways.
+ Consumption is limited due to exchangeability or does it improve exchangeabilit
+y? It's not clear - what's clear is that a subjective behaviour does not
+ consider things as exchangeable as the real world processes would.
+ The first-simplication is due to exchangeability is that all consumers
+ have the same 
+\begin_inset Formula $\sigma$
 \end_inset
 
  where 
-\begin_inset Formula $u(\Delta)$
+\begin_inset Formula $\sigma$
 \end_inset
 
- is HARA or CRRA utility.
- Considering CRRA utility, 
-\begin_inset Formula $u(\Delta)=\frac{\Delta^{1-\gamma}-1}{1-\gamma}$
+ depends on 
+\begin_inset Formula $\rho$
 \end_inset
 
-, the expectation to be optimised would simply be .
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+.
  
-\end_layout
-
-\begin_layout Standard
-This may not have any descriptive value - but as such it only implies that
- two individuals would set their risk based on their risk appetite.
- While we may assume that we may have same fair chances (nature treats everyone
- unfairly), the world of certainties is limited by real resources.
-\end_layout
-
-\begin_layout Standard
-When there are two players, there has to be zero-sum game or some other
- dependence between the two otherwise, they both make independent bets on
- the assets.
- This is where a vector formulation might help.
- 
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-Remember that we're not fitting data with this.
- We're only looking to explain how equilibria would be achieved at these
- stages.
- Two questions i) could an Nash equilibrium exist between a risk-seeking
- and a risk-averse consumer in the above setting and ii) if an income arrangemen
-t can change the equilibrium.
- A direct transfer of assets may continue to keep the risks - and those
- looking to take risks would take on in different areas.
- The effect of status consumption is destroying this separating equilibrium
- could be meaningful.
 \end_layout
 
 \begin_layout Standard
@@ -5481,1143 +4741,479 @@ To answer these questions consider a more general model where no normality
 .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 
 \series bold
-Model with 
-\begin_inset Formula $\rho$
-\end_inset
-
- and 
-\begin_inset Formula $c$
-\end_inset
-
-
+Continuous Model
 \end_layout
 
 \begin_layout Standard
-We can probabilistic change in 
-\begin_inset Formula $\rho$
-\end_inset
-
- (through bands of 
-\begin_inset Formula $A$
-\end_inset
-
-).
- But if we assume no changes in 
-\begin_inset Formula $\rho$
-\end_inset
-
-, we can proceed by assuming that all consumers have there own 
-\begin_inset Formula $\sigma(\psi)$
-\end_inset
-
-.
- The resources in the economy are limited by the rise in incomes and therefore
- some consumers would be more risk-seeking and others risk-averse.
- A risk-neutral consumer would however choose 
-\begin_inset Formula $\sigma(\psi)$
-\end_inset
-
- so that her rise in asset is aligned with the increase in income (?).
- It's not very clear how 
-\begin_inset Formula $d\psi$
-\end_inset
-
- aggregates into 
-\begin_inset Formula $\psi$
-\end_inset
-
- or how 
-\begin_inset Formula $\sigma$
-\end_inset
-
- changes in response to 
-\begin_inset Formula $d\psi$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The first-simplication is due to exchangeability is that all consumers have
- the same 
-\begin_inset Formula $\sigma$
-\end_inset
-
- where 
-\begin_inset Formula $\sigma$
-\end_inset
-
- depends on 
-\begin_inset Formula $\rho$
-\end_inset
-
- and 
-\begin_inset Formula $\psi$
-\end_inset
-
-.
- Thus we may describe the model: 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-dA=di-d\psi+\sigma(\rho,\psi)dW\\
-di=\mu_{\rho}dt\Rightarrow dA=\mu_{\rho}dt-dc+\sigma(\rho,c)dW
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This may exhaust the discussion of subjective probability in the current
- model.
- The next step is to see how the risk-perception would shape the selection
- of 
-\begin_inset Formula $c$
-\end_inset
-
-.
- A more risk-seeking consumer is one who has 
-\begin_inset Formula $\sigma(c,\rho)$
-\end_inset
-
- such that 
-\begin_inset Formula $E(A)>E(A^{*})$
-\end_inset
-
- where 
-\begin_inset Formula $A^{*}$
-\end_inset
-
- is the expected asset growth of the risk-neutral consumer.
- The risk-neutral consumer is the one who maximises 
-\begin_inset Formula $E(u(A,c))$
-\end_inset
-
-.
- This is possible only if her 
-\begin_inset Formula $\sigma(\rho,c)$
-\end_inset
-
- is exactly the same as the population's true chance of promotion.
-\end_layout
-
-\begin_layout Standard
-Another way to view this is a game where every consumer chooses 
-\begin_inset Formula $c$
-\end_inset
-
- depending on her 
-\begin_inset Formula $\rho$
-\end_inset
-
- (the change in 
-\begin_inset Formula $\rho$
-\end_inset
-
- would bring the true justification for status consumption).
- There are a few questions that necessitate a clarification of 
-\begin_inset Formula $\rho$
-\end_inset
-
- changes:
-\end_layout
-
-\begin_layout Enumerate
-If the consumer already knows the dependence of her selection on 
-\begin_inset Formula $\rho$
-\end_inset
-
-, why would she not choose a 
-\begin_inset Formula $c$
-\end_inset
-
- that is closer to somebody who is known to have a more accurate 
-\begin_inset Formula $\sigma(\rho,c)$
-\end_inset
-
-? If the types are static and 
-\begin_inset Formula $\sigma(\rho,dc)$
-\end_inset
-
- is known by the consumer, then she gains nothing by being risk-seeking.
- 
-\end_layout
-
-\begin_layout Enumerate
-If there is a game where the poor and rich can participate? What does a
- wealthy consumer have to lose from? If she has no downside risk of being
- wealthy and having a stable income (no matter what she sets 
-\begin_inset Formula $dc$
-\end_inset
-
- to be) - then there is nothing worth participating for the consumer.
- The utility from status consumption has been our key argument for the model.
- Do the poor and the rich get a higher utility from participating in the
- same absolute level of status consumption? This cannot be answered without
- representing the promise social mobility? What is the promise of social
- mobility? If this is a probability? If this the weight of the probability
- - meaning a poor gives more weight to the probability of rise? In other
- words, 
-\begin_inset Formula $u(c,p)=w\cdot p\cdot\upsilon(c)$
-\end_inset
-
- has 
-\begin_inset Formula $w$
-\end_inset
-
- higher for the poorer consumer.
- More needs to be clarified for this analysis? Are we tracking assets for
- the probability which the consumer gives weights to? More expected wealth
- would motivate the poorer consumer to move up while the same expected wealth
- may motivate the richer consumer.
- Target wealth is equivalent to probability weighting - and this is what
- shapes the non-durable consumption.
-\end_layout
-
-\begin_layout Standard
-A convenient form for 
-\begin_inset Formula $\sigma(\rho,c)$
-\end_inset
-
- might be 
-\begin_inset Formula $k_{\rho}log(c)$
-\end_inset
-
- - as we're often concerned with the level of consumption.
- Another simplification that can be offered is by assuming that 
-\begin_inset Formula $c=mi$
-\end_inset
-
- and therefore the equations can be reformulated in terms of 
-\begin_inset Formula $m$
-\end_inset
-
-:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-dA & =(1-m)\mu dt+\sigma(m,\rho,i)dW
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\sigma(m,\rho,i)$
-\end_inset
-
- indicates that the risk the consumer chooses must depend on her consumption
- 
-\begin_inset Formula $m$
-\end_inset
-
- as well as income 
-\begin_inset Formula $i$
-\end_inset
-
- (apart from 
-\begin_inset Formula $\rho$
-\end_inset
-
-).
- This complicates matters again.
- It makes more sense to suggest that 
-\begin_inset Formula $\sigma$
-\end_inset
-
- change more slowly through 
-\begin_inset Formula $A$
-\end_inset
-
- or even 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- Effectively the movement of 
-\begin_inset Formula $\rho$
-\end_inset
-
- (if at all) must be linked with the risk-perception.
- One may thereon clarify how the certain improvement 
-\begin_inset Formula $(1-m)\mu$
-\end_inset
-
- is preferred over the risky 
-\begin_inset Formula $\sigma(m,\rho,i)$
-\end_inset
-
-.
- 
-\series bold
-Two major questions thus arise
-\series default
-:
-\end_layout
-
-\begin_layout Enumerate
-How does 
-\begin_inset Formula $\sigma$
-\end_inset
-
- depend on 
-\begin_inset Formula $i,A$
-\end_inset
-
- and 
-\begin_inset Formula $m$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-What does a risk-neutral consumer do in the model? This cannot be answered
- without admitting that there is a risk faced by high 
-\begin_inset Formula $\rho$
-\end_inset
-
- (the rich who are favoured by the income process).
- If the rich also face a risk, then income process cannot have no risk.
- Again, in the developing countries there is just a lot of risk for everybody
- (even those who are rich) - compared to the developed countries where the
- risk is lower for everyone and higher for the ultra rich.
- If we already know that certain 
-\begin_inset Formula $\rho$
-\end_inset
-
- would perform a certain way - with career choices and long-term choices
- we make i.e.
- the 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The latter consumption cannot be answered until we fix a utility function.
-\end_layout
-
-\begin_layout Standard
-Partial exchangeability is with respect to this statistic.
- 
-\begin_inset Formula $\rho$
-\end_inset
-
- matters only because a consumer.
- Going to a certain school or to a certain college would be good enough
- for the consumer to ascertain long-term success or class mobility.
- The partial exchangeability has a subjective role.
-\end_layout
-
-\begin_layout Standard
-Exchangeability is the criteria for social classification.
- Despite same net worth, the very definition of social hierarchy means that
- a certain individuals with characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
- have more access to certain services - simply because individuals (consider
- how black individuals would have trouble getting a cab in New York city
- - or a cab driver would ignore some passengers to go to an investment bank
- rink).
- These are not because of prejudices but the long-term secuirty perceived
- by individuals - which directly influence actions (for provision or availing
- of services).
- The role of exchangeability would justify the role of 
-\begin_inset Formula $\rho$
-\end_inset
-
- - having a certain 
-\begin_inset Formula $\rho$
-\end_inset
-
- would give you access in non-durable terms.
- Long-term is often changed due to limiting this type of access anyways.
- Consumption is limited due to exchangeability or does it improve exchangeabilit
-y? It's not clear - what's clear is that a subjective behaviour does not
- consider things as exchangeable as the real world processes would.
-\end_layout
-
-\begin_layout Subsection
-A Needs as investment model
-\end_layout
-
-\begin_layout Standard
-It is worth consider needs but only as investments to improvement of 
-\begin_inset Formula $A$
-\end_inset
-
-.
- Instead of saying that non-needs go to status promotion, we can start viewing
- that all needs are investments of some sort and directly contribute.
- Status consumption is merely a hope for mobility and nothing else.
- The desire to get ahead of others enhanced this mobility in real terms
- (not just in perception).
- 
-\end_layout
-
-\begin_layout Standard
-Let's assume that there is no difference between observed and perceived
- probability.
- In this simplified model, all non-needs must contribute to the expected
- probabilistic growth in income or assets.
- Let's develop a model with income being the only stochastic process - which
- just one uncertainty that is known by every consumer.
- 
-\end_layout
-
-\begin_layout Standard
-To consider whether a model with stochastic 
-\begin_inset Formula $A$
-\end_inset
-
- makes sense, let's consider a user who receives an income increase 
+We could use a continuous model so that a consumer gets a continuous rise
+ in income 
 \begin_inset Formula $di$
 \end_inset
 
-, she may invest this amount in some assets 
-\begin_inset Formula $A$
-\end_inset
-
- that would give a certain rise in income (a conventional asset) or add
- it to the consumption which would improve the income less certainly.
- A certain cost of having assets can be written as 
-\begin_inset Formula $\delta(A)$
-\end_inset
-
- is seen as the participation cost so that the consumer can either open
- up this opportunity to increase 
-\begin_inset Formula $\sigma(A)$
-\end_inset
-
- through 
-\begin_inset Formula $dA$
-\end_inset
-
-.
- This can also be seen as the depreciation associated with assets 
+ corresponding to wealth 
 \begin_inset Formula $A$
 \end_inset
 
 .
- If there was no income then the assets would depreciate to 0.
- However, the consumer makes sure that there is some 
-\begin_inset Formula $i$
-\end_inset
-
- at all times to maintain some 
-\begin_inset Formula $A$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-di=\mu Idt+\sigma(A)IdW\\
-dA=di-\delta(A)=\mu Idt-\delta(A)+\sigma(A)IdW
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-If all consumption is also an investment (expense) of some sort, then the
- consumer would only want to improve 
-\begin_inset Formula $A$
-\end_inset
-
- (not caring about consumption with is encapsulated in 
-\begin_inset Formula $\delta(A)$
-\end_inset
-
- ).
- This would be like a dynasty.
- There are 3 questions that remain
-\end_layout
-
-\begin_layout Enumerate
-What is the form of 
-\begin_inset Formula $\delta$
-\end_inset
-
-(A)?
-\end_layout
-
-\begin_layout Enumerate
-How does 
-\begin_inset Formula $\sigma(A,\rho)$
-\end_inset
-
- depend on 
-\begin_inset Formula $\delta(A)$
-\end_inset
-
-? Notice that 
-\begin_inset Formula $\delta(A)$
-\end_inset
-
- must directly contribute to the risk consumer takes.
- Otherwise, there is very little motive for taking the risk.
-\end_layout
-
-\begin_layout Standard
-An alternative would be to view investments as directly increasing 
-\begin_inset Formula $dA$
-\end_inset
-
- (instead of 
+ 
 \begin_inset Formula $di$
 \end_inset
 
-).
- Regardless, there are two...
-\end_layout
-
-\begin_layout Standard
-===
-\end_layout
-
-\begin_layout Standard
-Here, 
-\begin_inset Formula $\eta_{t}$
+ is lower as 
+\begin_inset Formula $A$
 \end_inset
 
- represents the consumer need unit at time 
-\begin_inset Formula $t$
-\end_inset
-
-, 
-\begin_inset Formula $\Psi_{t}$
-\end_inset
-
- the cost of needs 
-\begin_inset Formula $\eta_{t}$
-\end_inset
-
-,
-\begin_inset Formula $A_{t}$
-\end_inset
-
- is the value of asset account in the period 
-\begin_inset Formula $t$
-\end_inset
-
- (comprising of cash reserved for assets as well as the total value of assets
- owned), 
-\begin_inset Formula $\rho$
-\end_inset
-
- are the static household characteristics (educational level, religious
- or social identity etc.), 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- is the income obtained in period 
-\begin_inset Formula $t$
-\end_inset
-
- and 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- the consumption in period 
-\begin_inset Formula $t$
-\end_inset
-
-.
- 
-\begin_inset Formula $\sigma$
-\end_inset
-
- represents the 
-\shape italic
-observed
-\shape default
- uncertainty in income with
-\begin_inset Formula $W_{t}$
-\end_inset
-
- a 
-\begin_inset Formula $N(0,1)$
-\end_inset
-
- noise.
- 
-\begin_inset Formula $\Gamma_{t}$
-\end_inset
-
- represents the consumer's belief related to 
-\begin_inset Formula $\sigma$
-\end_inset
-
- (which is the risk in the stochastic process of income quantifying the
- possibility of income growth through consumption).
- Since 
-\begin_inset Formula $\Gamma_{t}$
-\end_inset
-
- is fundamentally a guess about 
-\begin_inset Formula $\sigma$
-\end_inset
-
-, we the function 
+ rises.
+ There is a mandatory depreciation with wealth - which is not like the cash
+ assets which grow at rate 
 \begin_inset Formula $r$
 \end_inset
 
- related maps 
-\begin_inset Formula $\sigma$
+.
+  She could increase the consumption 
+\begin_inset Formula $d\psi$
 \end_inset
 
- and characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
- with 
-\begin_inset Formula $\Gamma_{t}$
+ to balance the expected growth of 
+\begin_inset Formula $A$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-The main stochastic process seems to be the income itself.
- Since the consumer sets 
-\begin_inset Formula $\nu_{t+1}$
+ Given the income change 
+\begin_inset Formula $di$
 \end_inset
 
- (where 
-\begin_inset Formula $t$
+ the consumer effectively needs to balance the gain in utility between i)
+ gained 
+\begin_inset Formula $dA$
 \end_inset
 
- is the age of the consumer) assuming the same equation (except with a different
-).
- We assume that the drift component is known.
-\end_layout
-
-\begin_layout Standard
-The cost 
-\begin_inset Formula $p(A_{t},\rho)$
+ through 
+\begin_inset Formula $di-d\psi$
 \end_inset
 
- represents the cost that a household has to maintain given her personal
- characteristics and owned assets.
- For example, the costs of housing that contribute to 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- may consist of the mortgage fee or maintenance fees when someone owns a
- house but a monthly rent when the consumer does not own a house.
- The effect of supply-related asymmetries in the data e.g.
- lack of availability of certain goods in a certain region etc.
- can also be accommodated with the function 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
-.
- We demonstrate a particular solution of the equations above by assuming
- that the costs associated with the owned assets 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- or of the form 
-\begin_inset Formula $mA_{t}^{\alpha}$
-\end_inset
-
- where the characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
- are (momentarily) considered a part of assets 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-One may add a function for 
-\begin_inset Formula $\rho$
-\end_inset
-
- as 
-\begin_inset Formula $b(\rho)$
-\end_inset
-
- or consider the more realistic scenario where 
-\begin_inset Formula $p(A,\rho)$
-\end_inset
-
- is a filter function that assigns levels of consumption (rather than exact
- contributions to 
-\begin_inset Formula $c_{t}$
-\end_inset
-
-) based on 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-By believing in 
-\begin_inset Formula $\Gamma_{t}$
-\end_inset
-
-, a consumer would arrange 
-\begin_inset Formula $c_{t},A_{t}$
-\end_inset
-
- assuming that 
-\begin_inset Formula $i_{t+1}=ki_{t}+\Gamma_{t}W_{t}$
-\end_inset
-
-.
- The real process for 
-\begin_inset Formula $i_{t+1}$
-\end_inset
-
- depend only on past 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- and the factor 
-\begin_inset Formula $\sigma$
-\end_inset
-
- which is unknown to the consumer.
- A particular form of the function 
-\begin_inset Formula $r(\sigma,\rho)$
-\end_inset
-
- can be set based on the insights from behavioural economics
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-How individuals underestimate or overestimate risks is best explained with
- prospect theory.
- Generally, the consumer behaviour is stated as
-\begin_inset Formula $u(x)=\sum w(p_{i})\upsilon(x_{i})$
-\end_inset
-
- (
-\begin_inset Formula $w(p)$
-\end_inset
-
- is the probability weighting function and 
-\begin_inset Formula $\upsilon(x)$
-\end_inset
-
- is the payoff-utility function for the consumer.
- A structure for 
-\begin_inset Formula $\upsilon(x)$
-\end_inset
-
- would be 
-\begin_inset Formula $log(x)$
-\end_inset
-
- and one may assume a structure of 
-\begin_inset Formula $w$
-\end_inset
-
- based on the data).
-\end_layout
-
-\end_inset
-
-.
- A higher
-\begin_inset Formula $\Gamma_{t}$
-\end_inset
-
- would mean the consumer would set a high 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- - thereby settling for a lower 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- and not improving the long-term state determined by 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- The optimal 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- would be achieved when maximises the utility 
-\begin_inset Formula $\sum_{t=0}^{T}u(A_{t},\eta_{t},c_{t})$
-\end_inset
-
- over the time-period 
-\begin_inset Formula $T$
-\end_inset
-
-.
- This is stochatic dynamic optimisation problem so that the vector 
-\begin_inset Formula $\Gamma^{*}$
-\end_inset
-
- solves the following optimisation: 
-\begin_inset Formula 
-\begin{align}
-argmax_{\Gamma}(\sum_{i=1}^{T}u(c_{i},A_{i},\eta_{i}))\label{eq:optim}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The literature often introduces demographic variables through the discount
- factor in the utility function
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CagettiWealth2003"
-literal "true"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-The consumer chooses 
-\begin_inset Formula $\nu_{t+1}\ge0$
-\end_inset
-
- in period 
-\begin_inset Formula $t$
-\end_inset
-
- to consume the quality she desires.
- The minimum cost for maintaining the needs 
-\begin_inset Formula $\eta_{t}$
-\end_inset
-
- in the period 
-\begin_inset Formula $t$
-\end_inset
-
- are meant to be chosen by setting 
-\begin_inset Formula $\nu=0$
-\end_inset
-
-.
- Assuming a log-linear form of the utility 
-\begin_inset Formula $\upsilon$
-\end_inset
-
-, the consumer optimises 
-\begin_inset Formula $\sum_{i}(\alpha\nu_{i}+\beta\cdot ln\ A_{i}+(1-\alpha-\beta)\cdot ln\ \rho_{i})$
+ and ii) a probabilistic expected change 
+\begin_inset Formula $\sigma(\psi)dW$
 \end_inset
 
  where 
-\begin_inset Formula $\alpha,\beta$
+\begin_inset Formula $\sigma(\psi)$
 \end_inset
 
- are constants.
- Notice that since additivity discourages substitution, the low substitution
- between 
-\begin_inset Formula $\nu_{t}$
+ is an increasing function of the investments 
+\begin_inset Formula $\psi$
+\end_inset
+
+.
+ Anything that is considered a need by the consumer is also an investment
+ in this way (assuming that basic needs are met for everyone and that no-one
+ is living with no income less than the cost of basic needs).
+ 
+\begin_inset Formula $\sigma(\psi)$
+\end_inset
+
+ would represent the risk-perception of the consumer.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+dA=di-(\psi+\delta)dt+\sigma(\psi)dW\\
+di=\mu(A,t)dt
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As a result of the above equations we can write 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+dA & =\mu(A,t)dt-(\psi+\delta)dt+\sigma(\psi)dW
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, the form of 
+\begin_inset Formula $\mu(\rho,t)$
+\end_inset
+
+ and the size of 
+\begin_inset Formula $\delta$
+\end_inset
+
+ both would determine the risk that a consumer takes.
+ More risk would be needed if economy grows and depreciation 
+\begin_inset Formula $\delta$
+\end_inset
+
+ is high.
+ 
+\begin_inset Formula $\delta$
+\end_inset
+
+ is also positively correlated with the rise in incomes 
+\begin_inset Formula $\mu(\rho,t)$
+\end_inset
+
+.
+ In a growing economy both depreciation and rise in incomes would be rapid.
+ It may be possible to combine the two parameters with the rate of economic
+ growth.
+ The conventional asset-growth model ignores that the income for poor is
+ determined the wealth of the not so poor.
+ This must be reflected in the income process - by letting the income growth
+ not growing higher than a certain wealth - which would respond to the higher
+ wealth.
+ Responding to external trade may be seen as a similar behaviour on an aggregate
+d economy.
+\end_layout
+
+\begin_layout Standard
+Aggregation is another important view - if we can aggregate the incomes
+ and wealth of a 
+\begin_inset Formula $n_{k}$
+\end_inset
+
+ consumers in a village, then 
+\begin_inset Formula $n_{k}$
+\end_inset
+
+ their income and asset process could be expressed in a similar form.
+ The form of 
+\begin_inset Formula $i_{t}$
 \end_inset
 
  and 
 \begin_inset Formula $A_{t}$
 \end_inset
 
- makes the combined utility function 
-\begin_inset Formula $\sum\upsilon(\nu_{i},A_{i},\rho_{i})$
+ need to satisfy this aggregation property - and should be used to understand
+ the risk management profile of a village.
+\end_layout
+
+\begin_layout Standard
+Assuming that the two are correlated, we can see that the asset growth 
+\begin_inset Formula $dA$
 \end_inset
 
- plausible 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonEconConsumer"
-literal "true"
+ in continuous time depends on 
+\begin_inset Formula $\delta$
+\end_inset
 
+ and 
+\begin_inset Formula $\mu$
 \end_inset
 
 .
- For the dynamic optimisation problem of maximising 
-\begin_inset Formula $\sum_{i=1}^{T}\upsilon(c_{i},A_{i},\eta_{i})$
+ If the final goal is to accumulate wealth 
+\begin_inset Formula $A$
 \end_inset
 
-, we also impose the constraint 
-\begin_inset Formula $i_{t}\ge c_{t}$
+, then the the rich consumer would lose out if 
+\begin_inset Formula $\mu$
 \end_inset
 
- to ensure that the consumer does not exercise the choice to sell assets
- 
-\begin_inset Formula $A_{t}$
+ increases and she doesn't increase 
+\begin_inset Formula $\sigma$
 \end_inset
 
- in order to consume.
+.
+ She must increase 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ to prevent a decline in 
+\begin_inset Formula $dA$
+\end_inset
+
+.
+ Likewise in a stagnant economy, 
+\begin_inset Formula $\mu$
+\end_inset
+
+ would be low (i.e.
+ it won't rise with time and its expected value in current time would be
+ low).
+ The risk must be taken by the lower asset consumer for her to hope to rise
+ her 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The game can only be won by accumulating more wealth.
 \end_layout
 
 \begin_layout Standard
-The filter 
-\begin_inset Formula $p(A_{t},\rho)$
+An important distinction is made about the wealth 
+\begin_inset Formula $A$
 \end_inset
 
- can be used to standardise the supply conditions in a more general analysis
- - e.g.
- in a comparison of demand between two disparate economies.
- For example, in the more developed market, one expects to see rental options,
- availability of cheaper substitutes or extension of credit facilities to
- the consumer for an durable good that is too expensive for her.
- This contrast in the supply conditions would have two effects on the consumer
- demand.
- First, the difference between successive asset costs in an order of assets
- (i.e.
+.
+ We don't consider the usual assumption that 
+\begin_inset Formula $A$
+\end_inset
+
+ grows with a constant rate.
+ We believe that wealth - as a cash asset or inheritable wealth has the
+ property of decline in value more fundamentally.
+ A pot of gold (probably a Marxist perspective) is valuable only because
+ it would take us a long time to refine and obtain it.
+ Gold has value only because we agree to purchase it for a certain value.
+ By itself it is a risk-less asset only because we value it.
+ In complete chaos, it would have no value.
+ It grows only because an order is maintained and economy keeps growing.
+ The story with houses or any other asset is no different.
+ It grows only because the economy grows.
  
-\begin_inset Formula $\Delta A_{i}=A_{i}-A_{i-1}$
+\begin_inset Formula $A$
 \end_inset
 
- in 
-\begin_inset Formula ${A_{i}}={A_{1}<A_{2}<A_{3}}$
-\end_inset
-
-) would be lower in the more developed market because the market would make
- cheaper alternatives available to the consumer.
- Second, a lot of assets can be availed without ownership in the developed
- market.
- To consider a particular example of car ownership, we would see both that
- the cars can be enjoyed with a frequent non-durable cost (rental) rather
- than through ownership and that the cars are available in a wider range
- of costs in the developed market.
- Standardsing the supply conditions in the two economies with 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- would imply a less discrete distribution of assets in the developed market
- (
-\begin_inset Formula $\Delta A_{t}$
-\end_inset
-
- ) so that the same level of 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- may correspond to a higher 
-\begin_inset Formula $p(A_{t},\rho$
-\end_inset
-
-) in the developed market.
-\end_layout
-
-\begin_layout Section
-List of Applications
-\end_layout
-
-\begin_layout Enumerate
-Companies deciding to split risks.
- Smaller companies taking more risks, the larger companies focusing on streamlin
-ed products (Nash Equilibrium based decision to split risks of discovery).
-\end_layout
-
-\begin_layout Section
-List of Issues
-\end_layout
-
-\begin_layout Enumerate
-Are the consumer always right about the drift? Probably not - we should
- refrain from the model for 
-\begin_inset Formula $\sigma$
-\end_inset
-
- -guesses and rely on subjective probability theory.
-\end_layout
-
-\begin_layout Enumerate
-Include exchangeability and / or hierarchy in the model.
-\end_layout
-
-\begin_layout Section
-Addendum
+ does not represent the growth in economy - but the risk in its growth is
+ what represents the model.
 \end_layout
 
 \begin_layout Standard
-As such the weighting probability has no role in dynamics - unless we assume
- an as if scenario - where consumer acts as if the probability in asset
- growth dynamics (
-\begin_inset Formula $\sigma(\psi)$
+Even though the rise of disposable incomes is often observed to be linear
+ (see the data from UK for example), we prefer the declining growth assumption
+ over life-time more appropriate - due to life-cycle effects for the consumer.
+ Even for the dynasties, the rise in prices would diminish the rise in incomes
+ as wealth rises.
+ Such a process is assumed to be known to the consumer.
+ What she doesn't know is whether her own wealth would follow the same trajector
+y - hence a risk process for wealth is assumed.
+\end_layout
+
+\begin_layout Standard
+Let's consider briefly the dynamics of 
+\begin_inset Formula $dA=-\psi Adt+\psi A\sigma dW$
 \end_inset
 
- is according to the weight of the probability.
+.
+ Here, the asset is not meant to grow.
+ The consumer opt output by choosing 
+\begin_inset Formula $\psi=0$
+\end_inset
+
+ - if needs are uncertain, 
+\begin_inset Formula $A$
+\end_inset
+
+ would possibly decline to negative value.
+ As long as the possibility of that happening is low, things work alright
+ (we would like to bring the relative wealth concern by letting the consumer
+ optimise two assets - but we focus on one consumer for now).
+ A consumer cannot choose 
+\begin_inset Formula $\psi>0$
+\end_inset
+
+ -so is 
+\begin_inset Formula $E(A)=0\Rightarrow\psi=0$
+\end_inset
+
+.
+ Assuming a CRRA utility 
+\begin_inset Formula $u(A)=\frac{A^{1-\gamma}-1}{1-\gamma}$
+\end_inset
+
+ .
+ We know that for a lognormal 
+\begin_inset Formula $A$
+\end_inset
+
+, i.e.
  
-\begin_inset Formula $\psi$
+\begin_inset Formula $log(A)\sim N(\mu,\sigma^{2})$
 \end_inset
 
- is the only control that consumer decides with.
- Every 
-\begin_inset Formula $\psi$
+ the expected utility 
+\begin_inset Formula $E(u(x))$
 \end_inset
 
- would correspond to a lottery who value is calculated with PT.
- An optimal 
-\begin_inset Formula $\psi$
+ is given by 
+\begin_inset Formula $E(u(x))=\frac{e^{\mu(1-\gamma)+\frac{\sigma^{2}}{2}(1-\gamma)^{2}-1}}{1-\gamma}$
 \end_inset
 
- is selected based on the assumption that the same 
-\begin_inset Formula $\sigma$
+ (so that the certainty equivalent 
+\begin_inset Formula $A_{CE}$
 \end_inset
 
- is observed by the consumers (no subjectivity when considering 
-\begin_inset Formula $\sigma$
+ for a consumer is 
+\begin_inset Formula $A_{CE}=e^{\mu+\frac{(1-\gamma)}{2}\sigma^{2}}$
 \end_inset
 
 ).
- Thus when we consider the case with different 
-\begin_inset Formula $\sigma$
+ One can optimise 
+\begin_inset Formula $E(u(x))$
 \end_inset
 
- for different consumers (i.e.
- consumers 1 and 2 in our example).
-\end_layout
-
-\begin_layout Standard
-The role of probability weighting functions also shows how a belief in unlikely
- jump 
-\begin_inset Formula $\sigma(\psi)$
-\end_inset
-
- (e.g.
- more expenditure on status consumption) would have an influence on consumption.
-\end_layout
-
-\begin_layout Standard
-Given the dynamics in the Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Bernoulli_dynamics"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, a consumer faces the asset choice 
-\begin_inset Formula $A_{t+1}=A_{t}-\delta\psi+\sigma(\psi)X_{t}$
+ by optimising 
+\begin_inset Formula $\mu+\frac{1-\gamma}{2}\sigma^{2}$
 \end_inset
 
 .
- Here, 
-\begin_inset Formula $P(X_{t}=1)=p$
+ For the dynamics, 
+\begin_inset Formula $dA=-\psi Adt+\psi A\sigma dW\Rightarrow d(logA)=-\psi dt+\psi\sigma dW$
 \end_inset
 
- and 
-\begin_inset Formula $P(X_{t}=0)=1-p$
+ , one can use Ito's lemma to infer 
+\begin_inset Formula $log(A)\sim N(-\psi-\frac{\psi^{2}\sigma^{2}}{2},\psi^{2}\sigma^{2})$
 \end_inset
 
- and 
+.
+ Thus 
+\begin_inset Formula $u(A)$
+\end_inset
+
+ is optimised at an optimal 
+\begin_inset Formula $-\psi-\frac{\psi^{2}\sigma^{2}}{2}+\frac{(1-\gamma)}{2}\psi^{2}\sigma^{2}$
+\end_inset
+
+.
+ First order condition leads to 
+\begin_inset Formula $\psi(1+\frac{\gamma\psi\sigma^{2}}{2})=0$
+\end_inset
+
+ i.e.
+ at 
+\begin_inset Formula $\psi=0$
+\end_inset
+
+.
+ This could be verified with a Monte Carlo simulation as well.
+ 
+\end_layout
+
+\begin_layout Standard
+A fundamental issues is that our normality assume is too strong - it's better
+ keep the asset transition probability function as general as possible.
+ It is through limiting the combinatorial explosion that one achieves the
+ standardisation of utility.
+\end_layout
+
+\begin_layout Standard
+The reason why this model doesn't appear realistic is that we're not using
+ the multiple risks that consumer takes.
+ This model assumes that we just there is no risk assumed with education.
+ We should assume that there are a returns from 
+\begin_inset Formula $a(\psi)dt$
+\end_inset
+
+ from eduction etc.
+ that are certain - whereas other that are not so certain.
+ When somebody in cr
+\end_layout
+
+\begin_layout Standard
+Assume that a consumer observes probability 
+\begin_inset Formula $p_{ij}\equiv P(\Delta A_{ij})=P(A_{i}\rightarrow A_{j})$
+\end_inset
+
+.
+ Every transition 
+\begin_inset Formula $\Delta A_{ij}=A_{i}-A_{j}$
+\end_inset
+
+ consists of a time component and a random component.
+ Assuming that a consumer is only looking to optimise the value of 
+\begin_inset Formula $A_{0T}$
+\end_inset
+
+ i.e.
+ the the value of 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ at a time horizon 
+\begin_inset Formula $T$
+\end_inset
+
+, we may use the normal distribution of brownian motion 
+\begin_inset Formula $W_{T}$
+\end_inset
+
+(i.e.
+ 
+\begin_inset Formula $W_{T}-W_{0}$
+\end_inset
+
+ being normally distributed with variance 
+\begin_inset Formula $T$
+\end_inset
+
+) to write probability distribution function as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+p(W_{T}=x) & =\frac{1}{\sqrt{2\pi T}}e^{-\frac{x^{2}}{2T}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\because\Delta=A_{t}-A_{0}=-\psi t+\sigma(\psi)W_{t}$
+\end_inset
+
+ 
+\begin_inset Formula $\Rightarrow W_{t}=\frac{\Delta+\psi t}{\sigma(\psi)}$
+\end_inset
+
+.
+ Given 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ and a continuous probability weighting function 
+\begin_inset Formula $w(p)$
+\end_inset
+
+, a consumer would select 
+\begin_inset Formula $p$
+\end_inset
+
+ (and therefore the pair 
+\begin_inset Formula $p,\Delta$
+\end_inset
+
+ - which would correspond to a certain 
 \begin_inset Formula $\psi$
 \end_inset
 
- is non-negative.
- Therefore, the consumer evaluates the lottery 
-\begin_inset Formula $\{(A_{t}-\delta\psi+\sigma(\psi),p),(A_{t}-\delta\psi,1-p)\}$
+) such that 
+\begin_inset Formula $u(p,\Delta)=\int_{p,\Delta A}w(p)\nu(\Delta A)dpd\Delta$
 \end_inset
 
-.
- Using a weighting function 
-\begin_inset Formula $w(p)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}$
-\end_inset
-
- and a value function 
-\begin_inset Formula $\upsilon(A)$
-\end_inset
-
-, the utility 
-\begin_inset Formula $u(\psi)$
-\end_inset
-
- which the consumer optimises is
+ is maximised.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-u(\psi) & =\sum w(p)\upsilon(A_{t+1})
-\end{alignat*}
-
+Ideally however the risk-seeking behaviour is trivial in this scenario -
+ because 
+\begin_inset Formula $E(A)$
 \end_inset
 
-
+ has no random components - and the minimisation is rather trivial.
+ The value function can be the one used in PT:
 \end_layout
 
 \begin_layout Standard
-Let's assume a reference points 
-\begin_inset Formula $A'$
-\end_inset
-
-, the lottery's value would be
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-u(\psi) & =\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t}-\delta\psi+\sigma(\psi)-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t}-\delta\psi-A')
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We can now arrive at the specifics form of the utlility function by choosing
- the forms of 
-\begin_inset Formula $\sigma(\psi)$
-\end_inset
-
-, the value function 
-\begin_inset Formula $\upsilon(A)$
-\end_inset
-
- and the references points.
- We can for example use 
-\begin_inset Formula $A'=\frac{A_{1}+A_{2}}{2}$
-\end_inset
-
- and the PT value function 
 \begin_inset Formula 
 \begin{alignat*}{1}
 \upsilon(\Delta) & =\begin{cases}
@@ -6632,287 +5228,182 @@ We can now arrive at the specifics form of the utlility function by choosing
 \end_layout
 
 \begin_layout Standard
-What's interesting is that if we have high-risk activities - utilities from
- a high and low 
-\begin_inset Formula $\psi$
-\end_inset
-
- are the same - i.e.
- the equilibrium may exists with two different 
-\begin_inset Formula $\psi$
-\end_inset
-
- having the same utility.
- The size of this dip depends on the risk-aversion (i.e.
- 
-\begin_inset Formula $\alpha$
-\end_inset
-
-).
- But more interesting is that having a low 
-\begin_inset Formula $\pi$
-\end_inset
-
- and a high 
-\begin_inset Formula $\sigma$
-\end_inset
-
- does result in utilities.
- 
-\end_layout
-
-\begin_layout Standard
-Is this simply the nature of utility functions? Why should we even try to
- use PT? There are only two reasons.
- First, is the loss-aversion (i.e.
- the consumer dislikes losses more than she likes profits ) and the second
- is the non-linear effect of probability.
- A risk-averse individual would see the same opportunity differently.
- The non-stochastic approach didn't account for these difference while our
- PT approach only incorporates these two in the model.
- See graphs of the probability weighting function for varied degrees of
- risk-aversion 
-\begin_inset Formula $\alpha$
-\end_inset
-
- in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Probability-Weighting-Function"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and the graphs for value function with varied degrees of loss-aversion
- in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Value-Function"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename valuefunction.png
-	width 4in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Value-Function"
-
-\end_inset
-
-Value Function
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename pwf_karmakar.png
-	width 4in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Probability-Weighting-Function"
-
-\end_inset
-
-Probability Weighting Function 
-\begin_inset Formula $\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Now we can extend this function to two consumers who differ in their risk-appeti
-tes (probability weighting functions controlled by 
-\begin_inset Formula $\alpha$
-\end_inset
-
- in the case of Karmakar probability weighting funtion) but are equally
- loss-averse (given a mid-point reference point).
- In this simple case, we also assume that there is not much social stratificatio
-n and the 
-\begin_inset Quotes eld
-\end_inset
-
-chances
-\begin_inset Quotes erd
-\end_inset
-
- of success are the same.
- Thus, the same 
-\begin_inset Formula $\sigma$
-\end_inset
-
- is observed.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-u_{1}(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}+\sigma(\psi_{1})-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}-A')\\
-u(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}+\sigma(\psi_{2})-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}-A')
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The equilibria arrived at by first-order conditions are independent in the
- non-stochastic case.
- Extending the above to the case with income-redistribution as before:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-u_{1}(\psi_{1})=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}+\sigma(\psi_{1})-A'+\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1})+\sigma(\psi_{2})-\sigma(\psi_{1})))+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}-A'+\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1}))\\
-u_{2}(\psi_{2})=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}+\sigma(\psi_{2})-A'-\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1})+\sigma(\psi_{2})-\sigma(\psi_{1})))+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}-A'-\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1}))
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Now the equilibria would be sought with a stochastic term as well.
- The risk-taking is therefore shared.
-\end_layout
-
-\begin_layout Standard
-In a more advanced game the consumers would be able to influence each other
- 
-\begin_inset Formula $\sigma$
-\end_inset
-
- - by giving each other rewards - or alternatively affect the weighting
- of probability itself.
- 
-\series bold
-Cost-function in the lottery: 
-\series default
-The life-cycle concerns would need to be considered.
- In a simple reformulation consider just 
-\begin_inset Formula $u(\nu_{t},A_{t})=\alpha_{t}log(\nu_{t})+(1-\alpha_{t})log(A_{t}$
-\end_inset
-
-).
- Let's consider the needs (without the adjustment for assets) as 
-\begin_inset Formula $\psi_{t}$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $A_{t+1}$
-\end_inset
-
- is stochastic and depends on the history of 
-\begin_inset Formula $i_{t}$
+Here, the 
+\begin_inset Formula $\lambda>0$
 \end_inset
 
  and 
-\begin_inset Formula $\nu_{t}$
+\begin_inset Formula $\gamma\in(0,1)$
+\end_inset
+
+.
+ The probability weighting function can take many forms.
+ A prelec function is 
+\begin_inset Formula $w(p)=e^{-\beta(-ln\ p)^{\alpha}}$
+\end_inset
+
+ (where 
+\begin_inset Formula $\alpha>0,\beta>0$
+\end_inset
+
+).
+ Another probability weighting function is the |Tversky-Kahneman function
+ 
+\begin_inset Formula $w(p)=\frac{p^{\tau}}{(p^{\tau}+(1-p)^{\tau})^{\frac{1}{\tau}}}$
 \end_inset
 
  (
-\begin_inset Formula $\psi_{t}$
+\begin_inset Formula $\tau\in(.279,1)$
 \end_inset
 
- does not change as it is independent of choices the consumer makes), it
- takes into account both the observed probability and the subjective inference
- of the probability i.e.
- the weighting function.
- Cost function 
-\begin_inset Formula $p(A_{t},\rho)$
+ ) (this is a slight variation of the Karmamar's 
+\begin_inset Formula $w(p)=\frac{p^{\tau}}{p^{\tau}+(1-p)^{\tau}}$
 \end_inset
 
- can seen as the investment towards the higher probability of windfall.
- The peer effects of 
-\begin_inset Formula $\nu_{t}$
+ where 
+\begin_inset Formula $\tau\in(0,1)$
 \end_inset
 
- or the habits that increase the chances (only slightly) do influence 
-\begin_inset Formula $i_{t}$
+).
+ Goldstein-Einhorn offers 
+\begin_inset Formula $w(p)=\frac{\delta p^{\eta}}{\delta p^{\eta}+(1-p)^{\eta}}$
 \end_inset
 
- but only after an upfront asset bearing cost 
-\begin_inset Formula $p(A_{t})$
+ (where 
+\begin_inset Formula $\eta\ge0,\delta\ge0$
 \end_inset
 
- is paid.
- If success were a lottery, 
-\begin_inset Formula $p(A_{t},\rho)$
+).
+ We already have a stochastic environment that is imaginary and rewards
+ the consumer based on a constant volatility (which is unrealistic) - so
+ we don't wish to get more precise with these functions - we only consider
+ them so that a non-linear probability can justified.
+ Only an actual game can tell us if this gives us a more accurate view of
+ the probability function.
+\end_layout
+
+\begin_layout Standard
+The utility which the consumer would minimse is simply 
+\begin_inset Formula $E(u)$
 \end_inset
 
- would be the cost to be paid to be a part of the lottery.
+ over all possible 
+\begin_inset Formula $\Delta$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+E(u(\Delta)) & =\int_{\Delta}w(p_{T}(\Delta))\nu(\Delta)d\Delta
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since we don't want this to be of descriptive value at this time, we only
+ require two qualities form 
+\begin_inset Formula $\nu$
+\end_inset
+
+ and 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ First, they should represent loss-aversion and there should be non-linear
+ probability preference.
+ In a simpler formulation with CRRA or HARA (see Sharpe), we can use have
+ the consumer optimise 
+\begin_inset Formula $E(u(\Delta))=\int u(\Delta)p(\Delta)d\Delta$
+\end_inset
+
+ where 
+\begin_inset Formula $u(\Delta)$
+\end_inset
+
+ is HARA or CRRA utility.
+ Considering CRRA utility, 
+\begin_inset Formula $u(\Delta)=\frac{\Delta^{1-\gamma}-1}{1-\gamma}$
+\end_inset
+
+, the expectation to be optimised would simply be .
+ 
+\end_layout
+
+\begin_layout Standard
+This may not have any descriptive value - but as such it only implies that
+ two individuals would set their risk based on their risk appetite.
+ While we may assume that we may have same fair chances (nature treats everyone
+ unfairly), the world of certainties is limited by real resources.
+\end_layout
+
+\begin_layout Standard
+When there are two players, there has to be zero-sum game or some other
+ dependence between the two otherwise, they both make independent bets on
+ the assets.
+ This is where a vector formulation might help.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+Remember that we're not fitting data with this.
+ We're only looking to explain how equilibria would be achieved at these
+ stages.
+ Two questions i) could an Nash equilibrium exist between a risk-seeking
+ and a risk-averse consumer in the above setting and ii) if an income arrangemen
+t can change the equilibrium.
+ A direct transfer of assets may continue to keep the risks - and those
+ looking to take risks would take on in different areas.
+ The effect of status consumption is destroying this separating equilibrium
+ could be meaningful.
 \end_layout
 
 \begin_layout Section
 Conclusions
+\end_layout
+
+\begin_layout Standard
+if the definition of an 
+\begin_inset Quotes eld
+\end_inset
+
+asset
+\begin_inset Quotes erd
+\end_inset
+
+ was simply a certain wealth (as opposed to uncertain wealth - such as income)
+ then the use of the the descriptive function.
+ The role of exchangeability axioms resolve the combinatorial explosion
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RichardSubjectiveProbRealThing2004,deFinettiLaPrevision1937"
+literal "false"
+
+\end_inset
+
+ - since the real probability of transmission would treat what characteristics
+ the consumers have not whether they individual 
+\begin_inset Formula $p_{ij}$
+\end_inset
+
+ they have.
+ This provides the rationalisation of the subjective probability functions
+ 
+\begin_inset Formula $p_{ij}.$
+\end_inset
+
+The number of users could be minimised if we can assume that individuals
+ with a certain characteristics are exchangeable and therefore would all
+ have the attribute the same chances.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -6930,6 +5421,12 @@ What we embarked upon was a question whether an appropriate mixutre of
  The notion of subjective probability allows this to simply specification.
  The approach on endogenising consumption as part of the evolution of total
  assets allows us to include status consumption - as an access to status.
+\end_layout
+
+\begin_layout Standard
+As another application, Companies deciding to split risks.
+ Smaller companies taking more risks, the larger companies focusing on streamlin
+ed products (Nash Equilibrium based decision to split risks of discovery).
 \end_layout
 
 \begin_layout Standard
