@@ -3368,12 +3368,21 @@ We could arrive at a solution if we assume diminishing returns for risky
 \series bold
 No log-linear function needed: 
 \series default
-The consumer utility for 
+Since we let the consumption and investments 
 \begin_inset Formula $\psi$
 \end_inset
 
- - not through the loglinear for that was chosen rather arbitrarily in the
- earlier seciton but through the risk she chooses.
+ (which are often inseparable in the consumption) track the perceived uncertaint
+y in the stochastic dynamics, we no longer need to worry about.
+ THe combination of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ with 
+\begin_inset Formula $A$
+\end_inset
+
+ is equivalent to the combination of risk and value.
  A consumer who chooses no risk would set 
 \begin_inset Formula $\psi=0$
 \end_inset
@@ -3397,7 +3406,7 @@ noprefix "false"
 \begin_inset Formula $A$
 \end_inset
 
- thus translates into the combined utility of 
+ can be written as the combined utility 
 \begin_inset Formula $\sum_{A\in\mathscr{A}}\upsilon(A)w(P(A))$
 \end_inset
 
@@ -3434,11 +3443,26 @@ is the wealth state from the state-space
 \end_inset
 
 .
- This approach to combine the utility of 
-\begin_inset Formula $\psi$
+ The value function we use is the one used in PT ( Kahneman-Tversky
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KahnemanTversykPT1979"
+literal "false"
+
 \end_inset
 
- is also backed by a significant literature in behavioural economics.
+ ) and is defined as follows: 
+\begin_inset Formula 
+\begin{alignat*}{1}
+\upsilon(\Delta) & =\begin{cases}
+\Delta^{\gamma} & \Delta\ge0\\
+-\lambda(-\Delta)^{\gamma} & \Delta<0
+\end{cases}
+\end{alignat*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3450,52 +3474,33 @@ Role of
 
 : 
 \series default
-As such the weighting probability has no role in dynamics - unless we assume
- an as if scenario - where consumer acts as if the probability in asset
- growth dynamics (
-\begin_inset Formula $\sigma(\psi)$
-\end_inset
-
- is according to the weight of the probability.
- 
-\begin_inset Formula $\psi$
-\end_inset
-
- is the only control that consumer decides with.
+Notice that as such weighting probability plays no role in dynamics.
+ It may be possible to use consider a subjective (or personal) probability
+ so that the consumer acts as if the probability in asset growth dynamics
+ was according to this subjective probability function.
+ The weighted probability approach is equivalent and clearer.
  Every 
 \begin_inset Formula $\psi$
 \end_inset
 
- would correspond to a lottery who value is calculated with PT.
+ would correspond to a lottery whose value is calculated with the PT utility
+ function.
  An optimal 
 \begin_inset Formula $\psi$
 \end_inset
 
- is selected based on the assumption that the same 
+ for the two consumer is selected based on the assumption that the same
+ 
 \begin_inset Formula $\sigma$
 \end_inset
 
- is observed by the consumers (no subjectivity when considering 
-\begin_inset Formula $\sigma$
+ is observed by the consumers (this assumption can be relieved the case
+ i.e.
+ 
+\begin_inset Formula $\sigma_{1}\ne\sigma_{2}$
 \end_inset
 
-).
- Thus when we consider the case with different 
-\begin_inset Formula $\sigma$
-\end_inset
-
- for different consumers (i.e.
- consumers 1 and 2 in our example).
-\end_layout
-
-\begin_layout Standard
-The role of probability weighting functions also shows how a belief in unlikely
- jump 
-\begin_inset Formula $\sigma(\psi)$
-\end_inset
-
- (e.g.
- more expenditure on status consumption) would have an influence on consumption.
+ could be allowed for the consumers in later enhancements).
 \end_layout
 
 \begin_layout Standard
@@ -3532,7 +3537,7 @@ noprefix "false"
 \end_inset
 
 .
- Using a weighting function 
+ Using a weighting function (Karmakar) 
 \begin_inset Formula $w(p)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}$
 \end_inset
 
@@ -3559,7 +3564,7 @@ u(\psi) & =\sum w(p)\upsilon(A_{t+1})
 \end_layout
 
 \begin_layout Standard
-Let's assume a reference points 
+Assuming a reference points 
 \begin_inset Formula $A'$
 \end_inset
 
@@ -3578,32 +3583,22 @@ u(\psi) & =\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t}-\delta\psi
 \end_layout
 
 \begin_layout Standard
-We can now arrive at the specifics form of the utlility function by choosing
- the forms of 
+The specifics form of the utlility function can now be arrived at by choosing
+ a particular form of 
 \begin_inset Formula $\sigma(\psi)$
 \end_inset
 
-, the value function 
-\begin_inset Formula $\upsilon(A)$
+.
+ With 
+\begin_inset Formula $\sigma(\psi)=\sqrt{\psi}$
 \end_inset
 
- and the references points.
- We can for example use 
+ and 
 \begin_inset Formula $A'=\frac{A_{1}+A_{2}}{2}$
 \end_inset
 
- and the PT value function 
-\begin_inset Formula 
-\begin{alignat*}{1}
-\upsilon(\Delta) & =\begin{cases}
-\Delta^{\gamma} & \Delta\ge0\\
--\lambda(-\Delta)^{\gamma} & \Delta<0
-\end{cases}
-\end{alignat*}
-
-\end_inset
-
-
+, the utility function would look like the following.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3759,67 +3754,137 @@ Probability Weighting Function
 \end_layout
 
 \begin_layout Standard
+Now we can extend this function to two consumers who differ in their risk-appeti
+tes (probability weighting functions controlled by 
+\begin_inset Formula $\alpha$
+\end_inset
 
+ in the case of Karmakar probability weighting funtion) but are equally
+ loss-averse (given a mid-point reference point).
+ In this simple case, we also assume that there is not much social stratificatio
+n and the 
+\begin_inset Quotes eld
+\end_inset
+
+chances
+\begin_inset Quotes erd
+\end_inset
+
+ of success are the same.
+ Thus, the same 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is observed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+u_{1}(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}+\sigma(\psi_{1})-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}-A')\\
+u(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}+\sigma(\psi_{2})-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}-A')
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The equilibria arrived at by first-order conditions are independent in the
+ non-stochastic case.
+ Extending the above to the case with income-redistribution as before:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+u_{1}(\psi_{1})=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}+\sigma(\psi_{1})-A'+\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1})+\sigma(\psi_{2})-\sigma(\psi_{1})))+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}-A'+\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1}))\\
+u_{2}(\psi_{2})=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}+\sigma(\psi_{2})-A'-\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1})+\sigma(\psi_{2})-\sigma(\psi_{1})))+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}-A'-\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1}))
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now the equilibria would be sought with a stochastic term as well.
+ The risk-taking is therefore shared.
+\end_layout
+
+\begin_layout Standard
+In a more advanced game the consumers would be able to influence each other
+ 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ - by giving each other rewards - or alternatively affect the weighting
+ of probability itself.
+ 
 \series bold
-Reference Point: 
+Cost-function in the lottery: 
 \series default
-For this model to make any empirical sense however, we need a reference
- point for the value function and a form for 
-\begin_inset Formula $\sigma(\psi)$
+The life-cycle concerns would need to be considered.
+ In a simple reformulation consider just 
+\begin_inset Formula $u(\nu_{t},A_{t})=\alpha_{t}log(\nu_{t})+(1-\alpha_{t})log(A_{t}$
+\end_inset
+
+).
+ Let's consider the needs (without the adjustment for assets) as 
+\begin_inset Formula $\psi_{t}$
 \end_inset
 
 .
- We may take a different stochastic process for a continuous model and an
- appropriate choice for 
-\begin_inset Formula $\sigma(\psi)$
+ Since 
+\begin_inset Formula $A_{t+1}$
 \end_inset
 
- by extending the same framework.
-\end_layout
-
-\begin_layout Standard
-The uncertainty model also provides a more microeconomic meaning to the
- cost function.
- The cost of owning more assets is actually the cost of risk - a risk-seeking
- consumer pays less wealth-bearing costs than a risk-averse one.
-\end_layout
-
-\begin_layout Standard
-With 
-\begin_inset Formula $E(A)$
-\end_inset
-
- under no uncertainty, only a zero sum game can allow both 
-\begin_inset Formula $A_{1}$
+ is stochastic and depends on the history of 
+\begin_inset Formula $i_{t}$
 \end_inset
 
  and 
-\begin_inset Formula $A_{2}$
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
- to matter.
- If consumers only observe 
-\begin_inset Formula $\psi$
+ (
+\begin_inset Formula $\psi_{t}$
 \end_inset
 
- (and compete on 
-\begin_inset Formula $\psi$
+ does not change as it is independent of choices the consumer makes), it
+ takes into account both the observed probability and the subjective inference
+ of the probability i.e.
+ the weighting function.
+ Cost function 
+\begin_inset Formula $p(A_{t},\rho)$
 \end_inset
 
-), uncertainty is the only way to allow a game to exist (so that a participatiin
-g consumer may have an unlikely belief in winning).
- The utility for relative income (
-\begin_inset Formula $\Delta A$
+ can seen as the investment towards the higher probability of windfall.
+ The peer effects of 
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
-) is not just the value but the value under risk.
- 
+ or the habits that increase the chances (only slightly) do influence 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+ but only after an upfront asset bearing cost 
+\begin_inset Formula $p(A_{t})$
+\end_inset
+
+ is paid.
+ If success were a lottery, 
+\begin_inset Formula $p(A_{t},\rho)$
+\end_inset
+
+ would be the cost to be paid to be a part of the lottery.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Income Arrangement
+Income Arrangement 
 \end_layout
 
 \begin_layout Standard
@@ -3959,135 +4024,22 @@ To explore the risk-sharing, consider no utility function (the consumers
 \end_layout
 
 \begin_layout Standard
-===
-\end_layout
 
-\begin_layout Standard
-Now we can extend this function to two consumers who differ in their risk-appeti
-tes (probability weighting functions controlled by 
-\begin_inset Formula $\alpha$
-\end_inset
-
- in the case of Karmakar probability weighting funtion) but are equally
- loss-averse (given a mid-point reference point).
- In this simple case, we also assume that there is not much social stratificatio
-n and the 
-\begin_inset Quotes eld
-\end_inset
-
-chances
-\begin_inset Quotes erd
-\end_inset
-
- of success are the same.
- Thus, the same 
-\begin_inset Formula $\sigma$
-\end_inset
-
- is observed.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-u_{1}(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}+\sigma(\psi_{1})-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}-A')\\
-u(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}+\sigma(\psi_{2})-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}-A')
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The equilibria arrived at by first-order conditions are independent in the
- non-stochastic case.
- Extending the above to the case with income-redistribution as before:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-u_{1}(\psi_{1})=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}+\sigma(\psi_{1})-A'+\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1})+\sigma(\psi_{2})-\sigma(\psi_{1})))+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,1}-\delta\psi_{1}-A'+\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1}))\\
-u_{2}(\psi_{2})=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}+\sigma(\psi_{2})-A'-\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1})+\sigma(\psi_{2})-\sigma(\psi_{1})))+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\psi_{2}-A'-\tau(A_{t,2}-A_{t,1}-\delta(\psi_{2}-\psi_{1}))
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Now the equilibria would be sought with a stochastic term as well.
- The risk-taking is therefore shared.
-\end_layout
-
-\begin_layout Standard
-In a more advanced game the consumers would be able to influence each other
- 
-\begin_inset Formula $\sigma$
-\end_inset
-
- - by giving each other rewards - or alternatively affect the weighting
- of probability itself.
- 
 \series bold
-Cost-function in the lottery: 
+Relation with status consumption -
 \series default
-The life-cycle concerns would need to be considered.
- In a simple reformulation consider just 
-\begin_inset Formula $u(\nu_{t},A_{t})=\alpha_{t}log(\nu_{t})+(1-\alpha_{t})log(A_{t}$
-\end_inset
+ How is this related to status consumption? It's the risk-sharing and pooling
+ that should define status consumption.
+ Ireland model does use it - but an environment of wealth differences can
+ also have a status consumption - albeit of a different kind.
+ The uncertainty model also provides a more microeconomic meaning to the
+ cost function.
+ The cost of owning more assets is actually the cost of risk - a risk-seeking
+ consumer pays less wealth-bearing costs than a risk-averse one.
+\end_layout
 
-).
- Let's consider the needs (without the adjustment for assets) as 
-\begin_inset Formula $\psi_{t}$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $A_{t+1}$
-\end_inset
-
- is stochastic and depends on the history of 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- (
-\begin_inset Formula $\psi_{t}$
-\end_inset
-
- does not change as it is independent of choices the consumer makes), it
- takes into account both the observed probability and the subjective inference
- of the probability i.e.
- the weighting function.
- Cost function 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- can seen as the investment towards the higher probability of windfall.
- The peer effects of 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- or the habits that increase the chances (only slightly) do influence 
-\begin_inset Formula $i_{t}$
-\end_inset
-
- but only after an upfront asset bearing cost 
-\begin_inset Formula $p(A_{t})$
-\end_inset
-
- is paid.
- If success were a lottery, 
-\begin_inset Formula $p(A_{t},\rho)$
-\end_inset
-
- would be the cost to be paid to be a part of the lottery.
+\begin_layout Standard
+===
 \end_layout
 
 \begin_layout Standard
