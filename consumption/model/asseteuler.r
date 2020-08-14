@@ -580,7 +580,10 @@ plot_pt_utilities <-function(p,alpha,pinc,A0, gamma, lambda, Aref,a=a){
     arr[count] = pt_utility(p = p, alpha = alpha, psi = psi, pinc = pinc, A0 = A0,Aref = Aref, gamma= gamma, lambda = lambda,a=a)
     count = count + 1
   }
-  plot(psivec,arr,type='l')
+  plot(psivec,arr,type='l', xlab=TeX("$\\psi$"), ylab="u",
+       main = TeX(paste("$\\gamma$=",gamma, "$\\lambda$=",lambda, "$\\delta$=",pinc,"$\\alpha$=",alpha,"p=",p)))
+  
+  
 }
 
 plot_value_functions<-function(){
