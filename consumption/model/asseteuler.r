@@ -535,13 +535,15 @@ loglinear_incredist<-function(alpha,A10,A20,a,b,incpi){
   dat1$u = with(dat1,alpha/2*log(A) + (1-alpha)*log(psi))
   dat2$u = with(dat2,alpha/2*log(A) + (1-alpha)*log(psi))
   par(mfrow=c(2,3))
-  plot(psivec1,cf1,type='l',main = "cost-function")
-  plot(psivec1,A1,type='l', main="assets")
-  plot(dat1$psi,dat1$u,type='l', main="utility")
+  plot(psivec1,cf1,type='l',main = "Consumer 1 - cost" , xlab= TeX("$\\psi_1$") , ylab = "cost of assets")
+  plot(psivec1,A1,type='l', main="Consumer 1 - wealth", xlab= TeX("$\\psi_1$") , ylab = "A")
+  plot(dat1$psi,dat1$u,type='l', main="Consumer 1 - utility", xlab= TeX("$\\psi_1$") , ylab="u")
+  #plot(A10 + incpi*psivec1,cf1,type='l', main="Consumer 1 - A vs costs", xlab= "A" , ylab="cost")
   
-  plot(psivec2,cf2,type='l',main = "cost-function")
-  plot(psivec2,A2,type='l', main="assets")
-  plot(dat2$psi,dat2$u,type='l', main="utility")
+  plot(psivec2,cf2,type='l',main = "Consumer 2 - cost", xlab= TeX("$\\psi_2$") , ylab = "cost of assets")
+  plot(psivec2,A2,type='l', main="Consumer 2 - wealth", xlab= TeX("$\\psi_2$") , ylab = "A")
+  plot(dat2$psi,dat2$u,type='l', main="Consumer 2 - utility", xlab= TeX("$\\psi_2$"), ylab="u")
+  #plot(A20 + incpi*psivec2,cf2,type='l', main="Consumer 2 - A vs costs", xlab= "A" , ylab="cost")
 }
 
 karmakar <- function(p,alpha){
@@ -575,14 +577,13 @@ plot_pt_utilities <-function(p,alpha,pinc,A0, gamma, lambda, Aref,a=a){
   
   arr = array()
   count = 1
-  psivec = seq(0,20,.1) # psi cannot be negative
+  psivec = seq(0,80,.1) # psi cannot be negative
   for (psi in psivec){
     arr[count] = pt_utility(p = p, alpha = alpha, psi = psi, pinc = pinc, A0 = A0,Aref = Aref, gamma= gamma, lambda = lambda,a=a)
     count = count + 1
   }
   plot(psivec,arr,type='l', xlab=TeX("$\\psi$"), ylab="u",
        main = TeX(paste("$\\gamma$=",gamma, "$\\lambda$=",lambda, "$\\delta$=",pinc,"$\\alpha$=",alpha,"p=",p)))
-  
   
 }
 
