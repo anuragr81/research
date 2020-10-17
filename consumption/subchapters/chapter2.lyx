@@ -2161,6 +2161,15 @@ Here,
 \end_inset
 
  are value of durable goods at start of the periods 1 and 2.
+ The constraints 
+\begin_inset Formula $k_{\psi}+k_{\rho}+k_{\nu,i}+k_{A,i}=1$
+\end_inset
+
+ (for all 
+\begin_inset Formula $i\ge0$
+\end_inset
+
+) apply.
  Since we assume that 
 \begin_inset Formula $\psi_{t}$
 \end_inset
@@ -2200,28 +2209,23 @@ on between
 \end_inset
 
  at every period in our model, we can take a slightly different approach
- with a dynamic optimisation formulation and write the growth of durable
- goods as:
+ with a dynamic optimisation formulation.
+ Denoting 
+\begin_inset Formula $\Delta_{t}=A_{t}-A_{t-1}$
+\end_inset
+
+, we write the following budget constraints:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-A_{1}=A_{0}(1+r)+i_{1}-\nu_{1}\psi_{1}-\Psi(\rho,\psi_{1},A_{1})\\
-A_{2}=A_{1}(1+r)+i_{2}-\nu_{2}\psi_{2}-\Psi(\rho,\psi_{2},A_{2})
+J_{1}\equiv x_{1}-\Psi(\rho,\psi_{1},A_{1})=P_{\nu,1}\nu_{1}\psi_{1}+\Delta_{1}P_{A,1}\\
+J_{2}\equiv x_{2}-\Psi(\rho,\psi_{2},A_{2})=P_{\nu,2}\nu_{2}\psi_{2}+\Delta_{2}P_{A,2}
 \end{gather*}
 
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Standard
-THE CONSUMER'S ASSETS CAN'T GROW AUTOMATICALLY.
- DURABLE GOODS COST SOMETHING.
-\end_layout
-
-\begin_layout Standard
 Above signifies that the consumer may consume quality 
 \begin_inset Formula $\nu_{1}$
 \end_inset
@@ -2244,9 +2248,8 @@ Above signifies that the consumer may consume quality
 \end_inset
 
  (in periods 1 and 2 respectively).
+ The intertemporal substitution implies that she may save for growth to
  
-\bar under
-The intertemporal substitution implies that she may save for growth to 
 \begin_inset Formula $A_{1}$
 \end_inset
 
@@ -2254,8 +2257,8 @@ The intertemporal substitution implies that she may save for growth to
 \begin_inset Formula $A_{2}$
 \end_inset
 
- instead of consuming all her income 
-\begin_inset Formula $i_{t}$
+ instead of consuming all her outlay 
+\begin_inset Formula $x_{t}$
 \end_inset
 
  as 
@@ -2263,8 +2266,8 @@ The intertemporal substitution implies that she may save for growth to
 \end_inset
 
  i.e.
- she can spend all her income 
-\begin_inset Formula $i_{1},i_{2}$
+ she can spend all of 
+\begin_inset Formula $x_{1},x_{2}$
 \end_inset
 
  as 
@@ -2276,9 +2279,7 @@ The intertemporal substitution implies that she may save for growth to
 \end_inset
 
 .
- 
-\bar default
-If we observe the states of the wealth - 
+ If we observe the states of the wealth 
 \begin_inset Formula $A_{0},A_{1}$
 \end_inset
 
@@ -2294,15 +2295,15 @@ If we observe the states of the wealth -
 \begin_inset Formula $\{\Psi_{1},\Psi_{2}\}$
 \end_inset
 
-, the rate of growth of money (interest rate) 
-\begin_inset Formula $r$
+, the prices of quality units (
+\begin_inset Formula $P_{\nu,t}$
 \end_inset
 
- and an exogenous income process 
-\begin_inset Formula $i_{t}$
+) and that of durable goods (
+\begin_inset Formula $P_{A,t}$
 \end_inset
 
-, then we can solve for the parameters that govern the utility function
+), then we can solve for the parameters that govern the utility function
  additive over time i.e.
  
 \begin_inset Formula $u=u_{1}+u_{2}$
@@ -2327,17 +2328,13 @@ Since we assume that needs grow deterministically i.e.
 \end_inset
 
  is 
-\begin_inset Formula $J_{t}=i_{t}-\nu_{t}\psi_{t}-\Psi(\rho,\psi_{t},A_{t})=\jmath(i_{t},\psi_{t},A_{t})$
+\begin_inset Formula $J_{t}=x_{t}-\Psi(\rho,\psi_{t},A_{t})=\jmath(i_{t},\psi_{t},A_{t})$
 \end_inset
 
 .
- To motivate the dynamic prograaming approach to this solution, consider
+ To motivate the dynamic programming approach to this solution, consider
  first what consumer's choices would be in a one-period consumption.
- Here, she could either spend all income 
-\begin_inset Formula $i_{1}$
-\end_inset
-
- as 
+ Here, she could either spend her outlay as 
 \begin_inset Formula $c_{_{1}}=\nu_{1}\psi_{1}+\Psi_{1}$
 \end_inset
 
@@ -2428,7 +2425,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-We don't assume that 
+So far we have put no restrictions on 
 \begin_inset Formula $k_{\nu,1}$
 \end_inset
 
@@ -2436,11 +2433,15 @@ We don't assume that
 \begin_inset Formula $k_{\nu,2}$
 \end_inset
 
- constant with time.
- If life-cycle effects mean much to the representative consumer in the model,
- the utility of the same level of quality might decline with age and that
- of the same level of long-term durable goods must increase as the decling
- working age remaining.
+ (or 
+\begin_inset Formula $k_{A,1},k_{A,2})$
+\end_inset
+
+.
+ The presence of of life-cycle effects means that the utility of the same
+ level of quality to the consumer might decline with age and that of the
+ same level of long-term durable goods must increase as the remaining working
+ age declines.
  A form we can assume for 
 \begin_inset Formula $k_{\nu},k_{A}$
 \end_inset
@@ -2453,389 +2454,17 @@ We don't assume that
 \begin_inset Formula $a(\tau,A)$
 \end_inset
 
- as general functions depending on the age 
+ - which are general functions known to the consumer and vary with the age
+ 
 \begin_inset Formula $\tau$
 \end_inset
 
  of the consumer.
- The first-order conditions can be written in terms 
-\end_layout
-
-\begin_layout Standard
-[AGE VARIABLE] The changes in expected utility per period are what drive
- her behaviour at every period 
-\begin_inset Formula $\tau$
-\end_inset
-
- and her choice is set to vary according to her age 
-\begin_inset Formula $\tau$
-\end_inset
-
- (assuming that all consumers have similar expectations for the trajectory
- of their needs).
- A steady state would thus be achieved with ages 
-\begin_inset Formula $\tau$
-\end_inset
-
- .
- The conditions of stability of the steady state imply that while consumers
- maintain different 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
-, they are a function of characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
- and age 
-\begin_inset Formula $\tau$
+ The first-order conditions can be written in terms of 
+\begin_inset Formula $J_{t},P_{A,t},P_{\nu,t}$
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-Here, the notion that a consumer may change her behaviour away from the
- current plan in the future is fallacious since a consumer observed at different
- ages is equivalent to consumers of varied ages at any point in time (see
- Deaton's clarification of the so-called dynamic inconsistency problem
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonUnderstandingConsumption"
-literal "false"
-
-\end_inset
-
-).
- In other words, the behaviour of an older consumer is the same as the future
- behaviour of a younger consumer.
- So the optimal solution for the total sum 
-\begin_inset Formula $\sum_{i=1}^{T-t}u_{i}$
-\end_inset
-
- would apply both to the individuals of all ages as well as an individual
- observed over a number of years.
-\end_layout
-
-\begin_layout Subsection
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Peer-Effects-Simplification"
-
-\end_inset
-
-Peer Effects[REWRITE]
-\end_layout
-
-\begin_layout Standard
-In the model specified in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:twoperiodoptim"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, it is not possible for the consumer to compensate for 
-\begin_inset Formula $\rho$
-\end_inset
-
- with 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- or 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
-.
- Indeed the more educated people or those in better occupations (or those
- with higher perceived class) might need less durable goods and less quality
- to indicate status.
- We therefore include 
-\begin_inset Formula $\rho$
-\end_inset
-
- (which is static for the consumer) as part of the consumer utility by letting
- 
-\begin_inset Formula $b$
-\end_inset
-
- depend on 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Due to the high upfront cost attached to owning long-term durable goods,
- there may be a certain levelling effect to the extent to which durable
- goods may be used to compensate for not having the most favourable 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- Thus the effect of 
-\begin_inset Formula $\rho$
-\end_inset
-
- may dominate the choice for non-durable consumption.
- In other words, ownership of 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- is quite likely to be segregated amongst those with different 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- An influential or a high-status 
-\begin_inset Formula $\rho$
-\end_inset
-
- has two competing roles for the consumer utility - first, it allows the
- consumer to not require as many durable goods as those in a lower 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- Second, it requires the consumer to maintain a certain level that is required
- of the 
-\begin_inset Formula $\rho$
-\end_inset
-
- she possesses.
- This interplay of 
-\begin_inset Formula $\rho$
-\end_inset
-
- and 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- is allows us to model the role of peer effects - i.e.
- that claim that the consumers consider quality relative to her reference
- group rather than an absolute level.
-\end_layout
-
-\begin_layout Standard
-If peer effects were to be modeled explicitly, let's say through a distance
- from average 
-\begin_inset Formula $\nu$
-\end_inset
-
- calculated over 
-\begin_inset Formula $\rho$
-\end_inset
-
- (or over an ordinal class
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ChaiKaus2019"
-literal "false"
-
-\end_inset
-
-), then as long as the higher status rank (part of 
-\begin_inset Formula $\rho$
-\end_inset
-
-) are also wealthy, the consumer with a high status rank due to 
-\begin_inset Formula $\rho$
-\end_inset
-
- would also need to keep up the quality consumption to her wealthier reference
- level.
- Therefore, those in the higher rank (e.g.
- higher status occupations etc.) would benefit both from being in a higher
- status group (
-\begin_inset Formula $\rho$
-\end_inset
-
-) and from the higher durable goods possession that entails being in the
- high status group (
-\begin_inset Formula $\rho$
-\end_inset
-
-).
- To avoid double-counting for the effect that 
-\begin_inset Formula $\rho$
-\end_inset
-
- has on the utility, we choose only the characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
- that form the reference group over which the distance from average consumption
- is considered relevant for peer effects.
-\end_layout
-
-\begin_layout Standard
-Some recent literature has found an ordinal treatment of status more suitable
- for modeling status-related consumption.
- We believe that the properties of the average over the particular personal
- characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
- allows us to consider an ordinal treatment without losing the tractability
- of averages in estimation.
- If we are sure to consider only the 
-\begin_inset Formula $\rho$
-\end_inset
-
- that can serve as a reference group for consumption, then the presence
- of peer effects only means that the consumer does not worry about having
- less 
-\begin_inset Formula $\nu$
-\end_inset
-
- than the average of a community (
-\begin_inset Formula $\rho$
-\end_inset
-
- ) which she does not consider herself a member of.
- Instead, the utility derived by being ahead of the local average (of quality
- or durable goods) i.e.
- 
-\begin_inset Formula $\rho$
-\end_inset
-
- is more significant to her.
- 
-\end_layout
-
-\begin_layout Standard
-To consider what this simplification offers to the econometric methods to
- follow, consider a market of just quality (and no durable goods) as an
- illustration.
- Here, a model for utility through 
-\begin_inset Formula $\nu$
-\end_inset
-
- can be written as 
-\begin_inset Formula $S=a\nu+b\int_{\rho}f_{\nu}d\nu$
-\end_inset
-
- which is similar to the Ireland's signaling model
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ireland_signals"
-literal "false"
-
-\end_inset
-
- - in the sense that the utility is a combination of private and public
- sub-utilities.
- The model for 
-\begin_inset Formula $S$
-\end_inset
-
- can be decomposed as 
-\begin_inset Formula $S=a\nu+b\int_{\rho}f_{\nu}d\nu$
-\end_inset
-
- or
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-S & =a(\nu-\int_{\rho}f_{\nu}d\nu)+(a+b)\int_{\rho}f_{\nu}d\nu)\label{eq:peer_effects_decomposition}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Above can be interpreted as how the total utility can be seen as a combination
- of the sub-utility from the distance in quality from the local average
- and that from the overall effect of 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- This interpretation permits us to approximate the first term with a function
- of 
-\begin_inset Formula $\nu$
-\end_inset
-
- and the second term with a function solely of 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- The consumer thus maintains both a relative advantage and the collective
- absolute advantage from quality - without issues of double-accounting.
- The approach would not change if difference in durable goods were introduced
- in the model.
-\end_layout
-
-\begin_layout Standard
-[NEW NEEDS]
-\bar under
- Peer effects don't matter for needs - because they're needs - so the best
- way to include the effect of 
-\begin_inset Formula $\rho$
-\end_inset
-
- is needs - because that is not influenced by anything else.
-\end_layout
-
-\begin_layout Standard
-It is worth emphasising that the measurement of distance from needs which
- we track with 
-\begin_inset Formula $\nu$
-\end_inset
-
- is not a measure of peer effects in itself.
- The distance from needs 
-\begin_inset Formula $\nu$
-\end_inset
-
- in fact only encompasses the higher price of the items or their consumed
- quantity.
- As 
-\begin_inset Formula $\nu$
-\end_inset
-
- reflects spatial variation in prices, the controls for spatial variation
- must be included in the 
-\begin_inset Formula $\rho$
-\end_inset
-
- over which peer effects are considered (second term in the equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:peer_effects_decomposition"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- More generally, the characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
- that may serve as an appropriate cluster over which 
-\begin_inset Formula $\int_{\rho}f_{\nu}d\nu$
-\end_inset
-
- is evaluated are driven by the particular dataset at hand.
- Out of the characteristics like region, occupation or education, one may
- be more important than others in a particular context.
- 
 \end_layout
 
 \begin_layout Subsection
