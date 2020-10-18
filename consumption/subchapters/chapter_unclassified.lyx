@@ -44,6 +44,7 @@
 \use_package undertilde 1
 \cite_engine basic
 \cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -935,6 +936,102 @@ literal "true"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Income-Process-Data"
+
+\end_inset
+
+Income Process
+\end_layout
+
+\begin_layout Standard
+As the effects of on consumption are modeled explicitly, it would suffice
+ if the income process models only the monetary growth i.e.
+ a reflection of the steady growth in the economy on the consumer's budget
+ (in analysis of the Tanzanian data in the current chapter, an income process
+ dependent on long-term characteristics such as education and occupation
+ is assumed).
+\end_layout
+
+\begin_layout Standard
+To estimate the income process 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+, we use the reported income from primary occupations in the Tanzania LSMS
+ data over the years 2010, 2012 and 2014.
+ One limitation of the Tanzanian LSMS data is that it does not provide income
+ data for every household head for which the consumption diary and durable
+ goods are recorded.
+ Another limitation of the data set is that a household that is visited
+ in a particular year is less likely to be visited after more than 2 years.
+ This means that while a significant number households would be common between
+ 2010 and 2012 as well as between 2012 and 2014, very few households that
+ were visited in 2010 would be visited the third time in 2014 (in fact less
+ than 100 household from the survey in 2010 seem to be visited in 2014 for
+ income survey).
+ Such a lack of a true panel data compels us to prepare a pseudo-panel for
+ the calibration of the income process.
+ The pseudo-panel we prepare is based on the similarity of the number of
+ adults, the number of children, the year of birth of the adults, the occupation
+ and education levels
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A minor issue encountered while the preparation of the pseudo-panel related
+ to the age of the household members was circumvented with an approximate
+ matching of that year-of-birth values.
+ The LSMS community survey appears to have recorded the year-of-birth values
+ for individuals in years 2010 and 2012 but the age variable is recorded
+ instead for the year 2014.
+ Matching the year-of-birth values from 2012 with the YOB values inferred
+ from the recorded age was made possible by allowing a tolerance for matching
+ the YOB values for the preparation of the pseudo-panel.
+\end_layout
+
+\end_inset
+
+.
+ While the FE GLS estimator for the pseudo-panel passes the Hausmann tests,
+ we favour the use of RE estimator since the of time-invariant cross-sectional
+ variables are important for the estimation of Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:nut1regression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dAt_regression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+(see Bell et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BellJonesFECrossSection2015"
+literal "true"
+
+\end_inset
+
+ for a discussion).
 \end_layout
 
 \begin_layout Section
