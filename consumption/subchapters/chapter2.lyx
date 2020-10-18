@@ -2657,7 +2657,290 @@ A cost function approach
 
 \begin_layout Standard
 [COST FUNCTION] A cost-function approach is more generic than the log-linear
- method we have demonstrate the direct utility with.
+ method we have used in the direct utility above.
+ Before we argue for a general PIGLOG cost-function, we first demonstrate
+ the limtiation of the cost-function corrsesponding to the above direct
+ utility.
+ For a general 
+\begin_inset Formula $u=\beta_{i}log(q_{i}-\gamma_{i})$
+\end_inset
+
+ where 
+\begin_inset Formula $\sum{\beta_{i}}=1$
+\end_inset
+
+, if the budget constraint is set to be 
+\begin_inset Formula $x=\sum_{i}p_{i}q_{i}=\textbf{p}\cdot\textbf{q}$
+\end_inset
+
+, the optimisation using a Lagrangian leads to 
+\begin_inset Formula $L=u-\lambda(\sum{p_{i}q_{i}}-x)$
+\end_inset
+
+ and the first-order conditions result in 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+x=\sum{p_{i}q_{i}}\\
+\frac{\beta_{i}}{q_{i}-\gamma_{i}}=\lambda p_{i}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using 
+\begin_inset Formula $\sum{\beta_{i}}=1$
+\end_inset
+
+, we have 
+\begin_inset Formula $\lambda(x-\sum{p_{i}\gamma_{i}})=1$
+\end_inset
+
+ and thus 
+\begin_inset Formula $p_{i}(q_{i}-\gamma_{i})=\beta_{i}(x-\sum{p_{i}\gamma_{i}})$
+\end_inset
+
+ (this is the Marshallian demand function).
+ The indirect utility function - of which cost function is the inverse of
+ - can be written as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+u & =\sum{\beta_{i}}log(q_{i}-\gamma_{i})=\sum\beta_{i}log(\frac{\beta_{i}}{p_{i}}(x-\sum{p_{k}\gamma_{k}}))
+\end{alignat*}
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Once again, using 
+\begin_inset Formula $\sum{\beta_{k}}=1$
+\end_inset
+
+, we have 
+\begin_inset Formula $u=\sum\beta_{i}log(\frac{\beta_{i}}{p_{i}})+\sum\beta_{i}log((x-\sum{p_{k}\gamma_{k}}))\Rightarrow u=\sum\beta_{i}log(\frac{\beta_{i}}{p_{i}})+log(x-\sum{p_{k}\gamma_{k}})$
+\end_inset
+
+.
+ The cost function thus becomes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+log(c(u,\textbf{p})-\sum{p_{k}\gamma_{k}}) & =u-\sum\beta_{i}log(\frac{\beta_{i}}{p_{i}})\label{eq:loglineargeneral}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A PIGLOG cost-functions - which are based on the assumption that the utility
+ scales up linearly with the logarithm of outlay i.e.
+ 
+\begin_inset Formula $u=\frac{log(x)-a(p)}{b(p)-a(p)}$
+\end_inset
+
+, are of the form 
+\begin_inset Formula $log(c(u,\textbf{p})=a(p)(1-u)+b(p)u$
+\end_inset
+
+.
+ An intuitive view (see Deaton 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonMuellbauerAIDS"
+literal "false"
+
+\end_inset
+
+) of the PIGLOG cost-function is a linear-breakdown of log of outlay into
+ costs of subsistence (
+\begin_inset Formula $u=0$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $a(p)$
+\end_inset
+
+) and bliss (
+\begin_inset Formula $u=1$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $b(p)$
+\end_inset
+
+).
+ In this form, the cost function in the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:loglineargeneral"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ would be written as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+log(c(u,\textbf{p})-\sum{p_{k}\gamma_{k}}) & =(1-\sum\beta_{i}log(\frac{\beta_{i}}{p_{i}}))u+(-\sum\beta_{i}log(\frac{\beta_{i}}{p_{i}}))(1-u)
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The argument with dual function shows just how restrictive a loglinear direct
+ utility function really is.
+ The direct utility form claims that the price derivatives of cost-functions
+ (which are typically equated with the budget ratio) are the same for both
+ subsistence and bliss sub-utilities.
+\end_layout
+
+\begin_layout Standard
+The goal of this detour is only to motivate a more general cost function.
+ While we find it easy to speak in terms of the direct utility in plain
+ English (the consumer gets more utility from bread than from vegetables
+ etc.), the equivalent dual form offers the same argument with clear advantages.
+ Just the way the direct utility function with a budget constraints tells
+ us that a higher price would make it difficult to obtain the same utility
+ (comprising of 
+\begin_inset Formula $\textbf{q}=\{q_{i}\}$
+\end_inset
+
+), the cost-function tells us in a less convoluted way that a higher price
+ would cause a consumer to get less utility for the same cost (
+\begin_inset Formula $x=c(u,\textbf{p})$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+In the intertemporal substitution problem that we attempt to solve in the
+ current chapter, a consumer is set to choose between availing 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ which she consumes in the period 
+\begin_inset Formula $t$
+\end_inset
+
+ and increasing asset account 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ by 
+\begin_inset Formula $\Delta_{t}=A_{t}-A_{t-1}$
+\end_inset
+
+.
+ The log-function approach would tell us that the price sensitivity of sub-cost-
+functions for bliss and subsistence ought to be the same.
+ This is a strong assumption except when we assume that the savings rate
+ of the consumer (choice between consuming in the current period vs saving
+ for future) may not change over the lifeitme.
+ This mau seem less problematic than the equivalent simpler problem where
+ a consumer chooses between multiple commodities in the same period.
+ A general cost-function could help us relieve that and allows us to use
+ a time-varying coefficients for savings rate.
+ If we assume that the consumer budget ratios (
+\begin_inset Formula $w_{i}=\frac{\partial c(u,\textbf{p})}{\partial p_{i}}$
+\end_inset
+
+ 
+\begin_inset Formula $\forall i$
+\end_inset
+
+ ) are more 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+-heavy at subsistence levels (one desperately wants to be richer when one
+ is poorer) but more 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+-heavy at bliss levels, then the logarithmic is no longer appropriate.
+\end_layout
+
+\begin_layout Standard
+[WHICH COST FUNCTION] To specify the cost-function in more detail: 
+\bar under
+$latex A_t$ vs $latex c_t$ changes based on the value of $latex A_t$
+\bar default
+.
+ There seem two ways to model this - first is to argue that the price derivative
+s depend on the values of $latex A_t$ as well instead of on the prices $latex
+ 
+\backslash
+textbf{p}$ alone.
+ Second is to argue that prices themselves change based on the value of
+ $latex A_t$.
+ I prefer the latter approach as it is more realistic without imposing significa
+nt restrictions - prices of assets that individuals face vary based on how
+ much assets they already have.
+ The better opportunities for future wealth tend to be limited to those
+ who are already wealthy.
+ The heterogeneity of prices is also supported by the observation the poor
+ live in areas where bliss lower (overall) since it is not possible to obtain
+ utility as high as where the rich live ($latex b(p)$ is high).
+ On the other hand, there may be a big-fish effect as well, as someone not
+ so rich might want to stay in a poor neighborhood to feel like having higher
+ relative income (this is unlikely to happen at lower levels of subsistence).
+\end_layout
+
+\begin_layout Standard
+How peer effects and poverty play out in the preference of saving vs consumption
+ is a topic worth exploring in itself - but the heterogeneity of prices
+ highlighted above raises another interesting question on how to treat unavailab
+ility of items within a commodity.
+ You could find an expensive Korean restaurant in London or New York (in
+ the right neighborhood/island anyways) but most small town residents in
+ Europe and America are deprived of even a decent Bulgogi.
+ Does that the mean the price of bulgogi in Oberbierbach is infinite? One
+ could indeed import items - but that would means import prices having an
+ influence on the consumer choice - a concern that seems misplaced.
+ Even if bulgogi isn't available, a consumer knows" the utility she gets
+ from bulgogi - without considering its price.
+ Most consumers possibly couldn't care less for a bulgogi.
+ The point is that in any real-life dataset, prices and needs are faced
+ and choices made thereafter for commodities rather than items.
+ Therefore, the prices of commodities in our model for utility are necessarily
+ localised.
+ An adjustment of prices must always be informed by the local conditions.
+ Such a consideration of utility and local prices for commodities incorporates
+ peer effects (locality of prices) in consumer utility.
+ Indeed one would also consider the life-cycle effects in the use of intertempor
+al substitution in a real-world situation.
+ And here too, cost functions need not be shunned in favour of a direct
+ utility approach.
+ 
+\end_layout
+
+\begin_layout Standard
+==
 \end_layout
 
 \begin_layout Standard
