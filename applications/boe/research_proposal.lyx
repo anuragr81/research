@@ -1,0 +1,640 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "newcent" "Segoe UI"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing onehalf
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section*
+Problem Statement
+\end_layout
+
+\begin_layout Standard
+The problems bank face is that an increased automation and machine learning
+ could creates more hurdles in the task to setting up model risk controls
+ (which themselves are use to evaluate many types of risk) across the investment
+ banks rather difficult.
+ The strategy for risk has typically followed a fragmented approach due
+ to the varied goals of the business units within an investment bank (desks
+ or divisions).
+ A higher-level perspective of the overall risk is often based on adoption
+ of a particular suite of models - which tend to vary across the banks.
+ 
+\end_layout
+
+\begin_layout Standard
+The proposal attempts to evaluate how the notion of balancing risks across
+ several business unit could may create avenues for taking risks unspecified
+ risks - which the regulation may hardly control.
+ By understanding this incentive quantitatively, one may be able to decide
+ the cost-benefit analysis of ring-fencing and drawing up walls to discourage
+ risk-taking and insider dealing.
+ 
+\end_layout
+
+\begin_layout Standard
+The task may be particularly urgent given the unchartered territory of algorithm
+ic search for opportunities across several assets classes and the desks
+ within a bank that the banks are to enter into.
+ The goal of the research is therefore two fold it looks for methods to
+ self-regulation and at the same time provide a framework to test whether
+ particular self-regulation strategy really work or not and contribute to
+ the debate on the practicality of Chinese wall policies.
+\end_layout
+
+\begin_layout Section*
+Effects of varied perception of risk
+\end_layout
+
+\begin_layout Standard
+All our actions - individuals and firms alike - are shaped by our perception
+ of the future.
+ While modeling the subjective probability function for every individual's
+ perceived future may is hardly a tractable approach- the notions of subjective
+ probability - in particular exchangability
+\begin_inset CommandInset citation
+LatexCommand cite
+key "deFinettiLaPrevision1937"
+literal "false"
+
+\end_inset
+
+ - has made it possible to understand how clusters of individuals sharing
+ a common goal could be be shaped by a common driven by their economic role
+ may behave
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JeffryPutmanSubjectiveProbabilityFinance2015"
+literal "false"
+
+\end_inset
+
+.
+ The subjective probability view - which we use to formulate the problem
+ of risk allocation - has been popularised in economics by Savage 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Savage1972"
+literal "false"
+
+\end_inset
+
+ (see the seminal paper by de Finetti
+\begin_inset CommandInset citation
+LatexCommand cite
+key "deFinettiLaPrevision1937"
+literal "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+When it comes to risks to the future wealth, the firms and institutions
+ are often better equipped and more responsive than the individuals or small
+ communities.
+ Further, the way regulators, structured product salespersons and high-frequency
+ traders might have a different view of risk (see Kirilenko et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KirilenkoHF2017"
+literal "false"
+
+\end_inset
+
+ and Evans et al
+\begin_inset CommandInset citation
+LatexCommand cite
+key "EvansMacroFX2008"
+literal "false"
+
+\end_inset
+
+).
+ The differences in subjective uncertainties and observed uncertainties
+ matter only because of the differences in...
+ It's as if the microevents are aggregated at different levels (see Czech
+ et al
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CzechBondMarkets2020"
+literal "false"
+
+\end_inset
+
+ ) - this is a model of subjective uncertainty.
+ Thus if one were to view PnL targets as utility under risk, it follows
+ that the perception risk in financial securities varies across the several
+ business units at a typical investment bank.
+\end_layout
+
+\begin_layout Standard
+The market risk associated with an equities portfolio is usually detached
+ from the credit risk - which analyses the factors undermining the portfolio
+ with a set of inputs different from what market risk may be interested
+ in.
+ As such each security is meant to have some credit risk - i.e.
+ a (usually low) probability of losing a high amount and the probability
+ that it would under-perform i.e.
+ a relatively high probability of loss in value.
+ These are however hardly accumulated as a combined utility under risk at
+ a financial institution.
+ More particularly, the probabilities inferred from historical volatility
+ used for market risk may be disconnected with the default probabilities
+ that the bank may obtain from .
+ A fragmented view of risk is evident as every desk measures resorts to
+ managing risk it in its own way - driven largely by the time-horizon of
+ the investment, the holding period of the particular type of products and
+ the market data relevant to the security.
+ 
+\end_layout
+
+\begin_layout Standard
+Such a separation is in everyone's interest since the institution necessarily
+ participates in the markets for credit products and rates/equities products
+ to ensure a reliable distribution of risk prevails.
+ However, since markets are not always inefficient, the bank must also engage
+ in the opportunities where risk is undervalued or overvalued.
+ Such opportunities need not be indicated to the market except through investmen
+ts.
+ The reason why the bank does not engage in a transparent methodical way
+ of having such a unified risk approach is because i) the predictive power
+ of the risk that is based on the particular markets is much higher - therefore
+ the returns from a possible integration of risk do not translate into anything
+ monetary ii) a market for such an information doesn't exist (a part of
+ it is explained by Diamond Rajan perspective of illiquid perspective 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DiamondRajanIlliquidity2011"
+literal "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+A necessary side-effect of such a separation is that absence of market for
+ this overall risk.
+ This becomes a rather structural problem since a large investment bank
+ engages with varied (nearly all) sections of the industry.
+ There is an issue of information asymmetry since since the clients who
+ take long-term risk cannot be separated from those taking short-term risks
+ except the banks.
+ Consider an example where an investment bank 
+\begin_inset Formula $B$
+\end_inset
+
+ has clients 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $Q$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $P$
+\end_inset
+
+ is client in a tech sector (which go bust in the next year given the risky
+ environment).
+ On the other  hand, 
+\begin_inset Formula $Q$
+\end_inset
+
+ is a client in the mining industry (which may be as stable as the country
+ is).
+ As a central bank is usually less aware of the needs of clients than the
+ banks, the regulation may at best assume that the two types of clients
+ are being treated the same way at a particular bank - as far as their risk
+ profile at the bank is concerned.
+\end_layout
+
+\begin_layout Standard
+This is hardly a problem since from the point of view of regulation - because
+ it is indeed the very task of an investment bank to price the risk.
+ As some of the industry is managed with corporate and M&A activities (e.g.
+ by helping the clients participate in the market) or the clients may be
+ asked mitigate their risks with financial products, clients necessarily
+ end up possessing the risk that is implicitly known to the bank (which
+ ends up finding our more about all clients than those outside the bank).
+ Since it is up to the client to take her risks - banks only end up receiving
+ a lot of information that they can't necessarily sell.
+ This information a bias towards a decision in a Bayesian framework let's
+ say is maintained at the bank.While strict controls over insider dealing
+ may be implemented, there may be some information that mitigates the overall
+ risk which is in common interest - since finding out about the overall
+ risk is necessary for the surival of the bank.
+\end_layout
+
+\begin_layout Standard
+It is worth asserting that the models for subjective probability are fundamental
+ly from how desks model the risk associated with securities - which is based
+ on the market-microstucture (taking mean-reverting stochastic models for
+ rates) and lognormal-like models for equity (in simple terms) and would
+ have far more predictive power in the respecitve markets.
+ Modeling such agents may be a difficult task but for the purposes of an
+ aggregate consumer in the model, a lot of these uncertainties could be
+ averaged out.
+ The nature of risks - how they are communicated has only partly been.
+ Some seminal work 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HassanPoliticalRisks2020,DiamondRajanIlliquidity2011"
+literal "false"
+
+\end_inset
+
+attempts to understand these - but an aggregate view of how risks are communicat
+ed could help the policy.
+\end_layout
+
+\begin_layout Standard
+From a central banking perspective, a higher level risk view - or the bias
+ parameters - could thus be useful in two ways.
+ First because an incentive-based model of why such trends develop could
+ be provided.
+ While it is true that the information is forced to flow to the market instead
+ of staying within the bank - but latter may be less likely to happen.
+ It it only by understanding of the incentives that we would be able to
+ understand if there communication within the bank can allow such an exchange
+ to happen - meaning that such flow is implicit.
+ Second, because banks are also engaging in such activities as Machine Learning
+ methods to find opportunities (while reportedly saving costs 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JPMML2017"
+literal "false"
+
+\end_inset
+
+).
+ Regardless of whether such a standardisation occurs in the near or later
+ future, the hurdles required in regularising such automation would also
+ complicate the presentation of model risk.
+ .
+ An information-theory model of how such information could flow within the
+ division at a bank could help policy rein in possible extreme risk-taking.
+ An information hierarchy with a behavioural model where agents optimised
+ a probability-weighted utility function as they observe a cross-section
+ of market is therefore planned to be used for this study.
+ With the use of Bayesian econometrics, one could evaluate the the banks
+ own bias eventually in taking a risk - thus parametrising the risk that
+ could be of use to policy.
+ 
+\end_layout
+
+\begin_layout Section*
+Research Question
+\end_layout
+
+\begin_layout Standard
+Do the different time-horizons for financial securities and differences
+ in risk create the need for for a risk-regime to be imposed on the riskier
+ banks in form of regulations.
+ How much better equipped is large bank in distributing risks in the market
+ - How good does the self-regulation work?
+\end_layout
+
+\begin_layout Section*
+Methodology
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename image1.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:InformationFlow"
+
+\end_inset
+
+Assumed flow of the information related to known risks across multiple trading
+ desks
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The reason why this is non-trivial is that all banks use models and model
+ parameters are set by humans - these humans are agents that banks can simulated.
+ The operational replacement of humans is rather impractical because the
+ responsibilites are given to humans, beneficieries and cost-beares are
+ always people not algorithsm.
+ The trading desks are particularly interesting - as they respond to a risks
+ - through complicated risk models they hedge their bets.
+ There is no such thing as a perfect hedge so it is safe to assume that
+ despite their models they to assume a certain risk - probably a bit more
+ balanced than others.
+ The illusion of no-risk could allow them to take more risk - they have
+ a view of an overall probability such as VaR and are hardly look.
+ A simple trading would respond to ...
+ but the others might aware of the market.
+ Therefore the control and use of risk-measures usable by the bank ignores
+ what they mean at a higher level in the bank.
+\end_layout
+
+\begin_layout Standard
+The higher levels of the bank are indeed more interested in the stability
+ of the equilibrium - depending on their own long-term.
+ We can assume that they're just better equipped - with hedging.
+ The risk faced debt products relies on different information - the information
+ matters - but different desks compete for different markets competing with
+ each other.
+ This allows the integration of non-trading units as well - since they behave
+ with longer-term - units sort of their knowledge-base and units of operation.
+\end_layout
+
+\begin_layout Standard
+This may not give us an indication how a normative bank should be behave
+ but it would give us an indication how different structures behave - which
+ is useful in its own right - as it provides us a better model for capital
+ risks than is possible with risk-limits and simple ratios - which are set
+ based on subjective criteria and accounting insights (which too are based
+ on a tremendous knowledge of having overseen portfolio management activities).
+\end_layout
+
+\begin_layout Standard
+The core-part of the research is therefore relies upon modeling the flow
+ of information about risk from from microeconomic risks - to aggregate
+ risks for liquidity - this would give us the true picture of risk - rather
+ than the one that banks usually apply.
+ Let's assume that this true utility is expressed in the form of modern
+ prospect theory utility function
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+u(x,p) & =\sum_{i}w(p)\upsilon(x)
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $w(\cdot)$
+\end_inset
+
+ is a probability weighting function and 
+\begin_inset Formula $\upsilon(\cdot)$
+\end_inset
+
+ is a value function (see Kahenman-Taversky for PT
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KahnemanTversyPT1979"
+literal "false"
+
+\end_inset
+
+).
+ Assuming that the value function is the same (there is no reason to believe
+ that a dollar gained from a trading desk 
+\begin_inset Formula $A$
+\end_inset
+
+ should be viewed differently from another trading desk 
+\begin_inset Formula $B$
+\end_inset
+
+) - the goal is to elicit the weighted probability function parameters that
+ 
+\begin_inset Quotes eld
+\end_inset
+
+explains
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $u(x,p)$
+\end_inset
+
+ observed in the data.
+ A fairly general form of the utility function is the PRELEC function but
+ we could enhanced the weighted probability based on the economic paramters
+ (geography, political regime, stress environment etc.).
+ The time horizon, intraday trading, volatility trading, holding period
+ that would separate all types of trading.
+ Thus the prospect theory across time needs to be considered.
+ The focus only to understand how the information required for activities
+ of the bank are aggregated from the information that is available to each
+ layer.
+\end_layout
+
+\begin_layout Standard
+It must be emphasised however that this is not intended to be a descriptive
+ model.
+ In reality, the sell side services actually are not expected to take inputs
+ from within the banks.
+ As we have discussed before predictive power of the models using economic
+ inputs associated with individual trading desks is always more important.
+ The signals would be allowed to flow from one market to another - very
+ much how high-frequency market - is both informed by past information and
+ might end up influencing - as the liquidity.
+ This could depend on the credit and risk that every bank takes.
+ Do all banks maintain the same risk-profile? This may be useful in its
+ own right- what factors govern the risk-taking.
+\end_layout
+
+\begin_layout Standard
+The value of the current model is only testing the hypothesis that banks
+ there is may be an incentive to share information about risks within the
+ bank than through the market when there are disparities in valuation .
+ And if so, what are the conditions under which such an incentive may exist.
+ Here, what is meant to flow from one layer to another is by assumption
+ merely a certain 
+\begin_inset Quotes eld
+\end_inset
+
+knowledge
+\begin_inset Quotes erd
+\end_inset
+
+ of the behaviour of trading desks that are aggregated at the higher-level
+ (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:InformationFlow"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ ) and used to exercise mandates at the bank.
+ What the model attempts to describe is how the behaviour against a stochastic
+ process would be subjected behavoiural factors at the bank.
+ is that the estimation of probability is different for low payoffs but
+ different for high payoff where it is aggregated.
+ 
+\end_layout
+
+\begin_layout Standard
+Here are a couple of features of the above model.
+ First, the effect of political risks etc.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HokeRiskShocks2019"
+literal "false"
+
+\end_inset
+
+ -are asymmetric - the same shock might cause the smaller trading desk to
+ be influenced differenty from how it is affected at the higher level.
+ How multiple time horizons are integrated from a decision theory point
+ is therefore possible i.e.
+ with value function parameters and the weighting-function parameters.
+ The comparative static of the function would explain.
+\end_layout
+
+\begin_layout Standard
+[M&A] Another feature of above model is that may permit the integration
+ of M&A activities in the risk framework as well.
+ The M&A activities - much like the active management of equities portfolios
+ - are the high-alpha activities that a bank engages in.
+ The model's representative bank that we the averaging allows us to consider
+ the behaviour of the mergers and acquisition activities as random events
+ with a possible high payoff (a high payoff with a small probability and
+ a necessarily long-term horizon).
+ Consider for example, if an institution that has no holdings in an upcoming
+ developing country opens an investment.
+ Without any background knowledge in the new market, the institution would
+ take some time to establish its network in the new economy.
+ The above model may view such an engagement as an investment (inclusive
+ of costs of hiring etc.) - with a possible high future payoff (or a series
+ of payoffs over time).
+ Domestic banks (or banks who already have a presence in the new economy)
+ would have less reluctance and hence a different view of the investment.
+ A model of how such risks are accumulated and could be elucidate by the
+ suggested methodology.
+\end_layout
+
+\begin_layout Standard
+[FURTHER RESEARCH] Finally, the concerns of liquidty could also be included
+ in this framework.
+ 
+\bar under
+That banks are illiquidity (Rajan) seekers might be explained in these terms
+ and the such macroeconomic claims could be verified in this framework.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "IEEEfull,research_proposal_ref"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
