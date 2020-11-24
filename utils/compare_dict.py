@@ -29,12 +29,12 @@ def create_dict(et):
     print (et.tag + " has %d elements" % len(et))
     for i in et:
         if len(i):
-            result = update_dict(result, {i.tag : create_dict(i) })
+            result = update_dict(result, create_dict(i))
             print(result)
             print("<<RESULT")
         else:
             items = dict( (k,v) for k,v in i.items())
-#            print ("Element - dict:%s text=%s" % (str(items), i.text) )
+#           print ("Element - dict:%s text=%s" % (str(items), i.text) )
             if i.text and items:
                 raise ValueError("Both value and attributes are not supported")
             if i.text:
