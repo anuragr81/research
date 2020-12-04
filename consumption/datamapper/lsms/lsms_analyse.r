@@ -1498,7 +1498,7 @@ minimum_needs_cost_per_head <- function(ll, c2010, c2012, c2014, o2010, o2012, o
   r                <- data.frame()
   r                <- rbind(r, allcosts2010[,select_cols] %>% mutate(year=2010))
   r                <- rbind(r, allcosts2012[,select_cols] %>% mutate(year=2012)) 
-  r                <- rbind(r, allcosts2014[,select_cols] %>% mutate(year=2014)) 
+  r                <- rbind(r, allcosts2014[,select_cols] %>% mutate(year=2014))
   
   res              <- list()
   res[["df"]]      <- r
