@@ -613,3 +613,54 @@ plot_pwf<-function(){
   
   legend(.8, .4, legend=TeX(paste("$\\alpha$=",df$alpha)), lty=df$lty, cex=0.8)
 }
+
+get_vara_df <- function(){
+  df <- data.frame()
+  df <- rbind(df,data.frame(a  = 1, b = 2, lty=1))
+  df <- rbind(df,data.frame(a  = 1.2, b = 2 , lty=2))
+  df <- rbind(df,data.frame(a  = 1.5, b = 2 , lty=3))
+  df <- rbind(df,data.frame(a  = 1.9, b = 2 , lty=4))
+  return (df)
+}
+
+get_varb_df <- function(){
+  
+  df <- data.frame()
+  df <- rbind(df,data.frame(a  = 1, b = 1.8, lty=1))
+  df <- rbind(df,data.frame(a  = 1, b = 2 , lty=2))
+  df <- rbind(df,data.frame(a  = 1, b = 2.2 , lty=3))
+  return (df)
+}
+
+plot_piglog_vara <- function(maxX,maxY){
+  if (missing(maxX)){
+    maxX = 100
+  }
+  if (missing(maxY)){
+    maxY = 10
+  }
+  plot_piglog(maxX=maxX,maxY=maxY,df=get_vara_df())
+}
+
+plot_piglog_varb <- function(maxX,maxY){
+  if (missing(maxX)){
+    maxX = 100
+  }
+  if (missing(maxY)){
+    maxY = 10
+  }
+  plot_piglog(maxX=maxX,maxY=maxY,df=get_varb_df())
+}
+
+plot_piglog <- function(maxX,maxY,df){
+  
+  x<-seq(.01,maxX,.01); 
+  plot(0,0,xlim = c(0,maxX), ylim=c(-5,maxY), type='l',main=latex2exp::TeX("$u=\\frac{log(x)-a}{b-a}$"), xlab="x", ylab="u")
+  
+  for (i in seq(nrow(df))){
+    lines(x,(log(x)-df$a[i])/(df$b[i]-df$a[i]),type='l',lty=df$lty[i]);
+  }
+  
+  legend(10, -3, legend=paste("a=",df$a, "b=",df$b), lty=df$lty, cex=0.7)
+  
+}
