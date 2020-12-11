@@ -616,10 +616,11 @@ plot_pwf<-function(){
 
 get_vara_df <- function(){
   df <- data.frame()
-  df <- rbind(df,data.frame(a  = 1, b = 2, lty=1))
-  df <- rbind(df,data.frame(a  = 1.2, b = 2 , lty=2))
-  df <- rbind(df,data.frame(a  = 1.5, b = 2 , lty=3))
-  df <- rbind(df,data.frame(a  = 1.9, b = 2 , lty=4))
+  df <- rbind(df,data.frame(a  = .6, b = 2, lty=1))
+  df <- rbind(df,data.frame(a  = .8, b = 2 , lty=2))
+  df <- rbind(df,data.frame(a  = 1.0, b = 2 , lty=3))
+  df <- rbind(df,data.frame(a  = 1.2, b = 2 , lty=4))
+  df <- rbind(df,data.frame(a  = 1.4, b = 2 , lty=5))
   return (df)
 }
 
