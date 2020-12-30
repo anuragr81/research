@@ -3697,7 +3697,11 @@ cost of the minimum needs basket for the consumer i.e.
 \color inherit
 In the context of sub-Saharan Africa, we use a minimum needs basket comprise
  food, energy, transport and household items categories.
- As a significant population in the developing countries survives on mere
+ 
+\end_layout
+
+\begin_layout Standard
+As a significant population in the developing countries survives on mere
  subsistence, it is not far-fetched to assume that the basic needs of the
  consumer (i.e.
  the subsistence level) do not  include ownership of long-term goods.
@@ -3925,8 +3929,7 @@ consider two consumers so that consumer
 \begin_inset Formula $\rho$
 \end_inset
 
--group.
- Indeed, this also means that the the measurement of quality is as accurate
+-group (this also means that the the measurement of quality is as accurate
  as the knowledge of durable goods one owns - an issue of measurement error
  with 
 \begin_inset Formula $\Psi$
@@ -3942,7 +3945,7 @@ noprefix "false"
 
 \end_inset
 
-.
+).
 \end_layout
 
 \begin_layout Description
@@ -4327,19 +4330,16 @@ Cost Function
 \end_layout
 
 \begin_layout Standard
-Before we get into that, there are two approaches we take:
-\end_layout
-
-\begin_layout Enumerate
-We can take subsistence costs 
+To formulate a PIGLOG function with varying relative quality and needs,
+ one option is to view subsistence costs 
 \begin_inset Formula $a(p)$
 \end_inset
 
- and a function of 
+ as a function of 
 \begin_inset Formula $P_{\psi}$
 \end_inset
 
- (and not 
+ (but not 
 \begin_inset Formula $P_{\nu})$
 \end_inset
 
@@ -4356,14 +4356,16 @@ and
 \end_inset
 
 .
- This would require us to keep consider the cost of needs in the cost-function.Co
-nsider the price of quality is higher (higher subsistence) - higher subsistence
- costs cause pain.
-\end_layout
+ Compared to this approach where the cost of basic needs 
+\begin_inset Formula $P_{\psi}$
+\end_inset
 
-\begin_layout Enumerate
-Using the assumption that we have predetermined needs and that we look at
- consumption where a consumer optimises 
+ must appear in the cost-function, we use the assumption that the consumers
+ are on a predetermined path of needs 
+\begin_inset Formula $\psi_{t}$
+\end_inset
+
+ and let the representative consumer optimise 
 \begin_inset Formula $(\nu,\Delta A)$
 \end_inset
 
@@ -4379,22 +4381,32 @@ Using the assumption that we have predetermined needs and that we look at
 \begin_inset Formula $\rho$
 \end_inset
 
-, the consumer budget can be adjusted by viewing 
-\begin_inset Formula $x_{t}\equiv c_{t}-\Psi(A_{t},\rho)-P_{\psi}\psi$
+.
+ With this approach, the consumer budget is adjusted as 
+\begin_inset Formula $x_{t}\equiv c_{t}-\Psi(A_{t})-P_{\psi}\psi$
 \end_inset
 
 .
- In this cases, the budget excludes the price of needs 
+ Unlike the case where 
+\begin_inset Formula $a(p)$
+\end_inset
+
+ is a function  of 
 \begin_inset Formula $P_{\psi}$
 \end_inset
 
-since it is exogenous in the optimisation of 
-\begin_inset Formula $(\nu,\Delta A)$
+, the subsistence costs are zero in this case as a zero budget corresponds
+ the subsistence level 
+\begin_inset Formula $P_{\psi}\psi$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{t}=0$
 \end_inset
 
 .
- With this assumption the cost-function is simply 
-\begin_inset Formula $c(u,p)=ub(P_{\nu,\rho})$
+ The cost-function can be written simply as 
+\begin_inset Formula $c(u,p)=ub(\psi P_{\nu}(\rho))$
 \end_inset
 
 .
@@ -4403,67 +4415,333 @@ since it is exogenous in the optimisation of
 \begin_inset Formula $P_{\nu}\psi$
 \end_inset
 
-)
-\end_layout
-
-\begin_layout Standard
-With the second choice, consider how a higher or a lower or a higher 
-\begin_inset Formula $P_{\nu}$
-\end_inset
-
- would affect utility.
- Notice that 
+).
+ Recall that 
 \begin_inset Formula $u\in[0,1]$
 \end_inset
 
  by assumption.
 \end_layout
 
+\begin_layout Description
+Property 1
+\end_layout
+
 \begin_layout Standard
-Consider a scenario where 
+Higher subsistence costs for a certain 
 \begin_inset Formula $\rho$
 \end_inset
 
- has no influence on subsistence i.e.
- for all 
-\begin_inset Formula $\rho_{a}$
-\end_inset
-
-, 
-\begin_inset Formula $\exists A_{b}|\upsilon(c_{b}-\Psi_{b},A_{b},\rho_{b})>\upsilon(0,A_{a},\rho_{a})$
+ would suppress consumption on quality for the group 
+\begin_inset Formula $\rho$
 \end_inset
 
 .
- Suddenly, long-term assets and quality is back in the status game.
+\end_layout
+
+\begin_layout Standard
+Higher subsistence costs correspond to a low outlay
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ towards relative quality 
+\begin_inset Formula $P_{\nu}$
+\end_inset
+
+ .
+ Therefore high subsistence costs for a certain 
+\begin_inset Formula $\rho$
+\end_inset
+
+ have the same effect as reducing the disposable outlay 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ (relevant for only quality) for that particular 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ On the other hand, if 
+\begin_inset Formula $\rho$
+\end_inset
+
+ has no effect on subsistence, i.e.
+ given consumer-groups 
+\begin_inset Formula $\rho_{a},\rho_{b}$
+\end_inset
+
+ facing choices
+\begin_inset Formula $(\nu_{a},A)$
+\end_inset
+
+ and 
+\begin_inset Formula $(\nu_{b},A)$
+\end_inset
+
+ respectively, we have the condition that 
+\begin_inset Formula $\exists\nu_{b}|\upsilon(\nu_{b},A,\rho_{b})>\upsilon(\nu_{a}=0,A,\rho_{a})$
+\end_inset
+
+.
+ The subsistence costs being 
+\begin_inset Formula $P_{\psi}\psi$
+\end_inset
+
+ the same for all consumers means that budget for relative quality is subject
+ only to the price of relative quality 
+\begin_inset Formula $P_{\nu}(\rho)$
+\end_inset
+
+.
  
+\end_layout
+
+\begin_layout Standard
+Now consider how a higher or a lower 
+\begin_inset Formula $P_{\nu}$
+\end_inset
+
+ would affect utility.
+ If the price of relative-quality is higher, then bliss would decrease for
+ the outlay
+\begin_inset Formula $x_{t}$
+\end_inset
+
+.
+ Also given the same relative-quality price 
+\begin_inset Formula $P_{\nu}(\rho)$
+\end_inset
+
+, an increase in needs 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ has the same effect as reduction of the outlay 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+.
+ Finally, when 
+\begin_inset Formula $\rho$
+\end_inset
+
+ both 
+\begin_inset Formula $P_{\psi}$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{\nu}$
+\end_inset
+
+ i.e.
+ having a certain 
+\begin_inset Formula $\rho'$
+\end_inset
+
+ affects both
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $P_{\psi}$
+\end_inset
+
+and 
+\begin_inset Formula $P_{\nu}$
+\end_inset
+
+, then consumer with 
+\begin_inset Formula $\rho=\rho'$
+\end_inset
+
+ would have a lower (higher) relative quality outlay 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ corresponding to a higher (lower) 
+\begin_inset Formula $P_{\psi}\psi$
+\end_inset
+
+ but might also lower the 
+\begin_inset Formula $P_{\nu}$
+\end_inset
+
+ corresponding to 
+\begin_inset Formula $\rho'$
+\end_inset
+
+.
+ Lower 
+\begin_inset Formula $P_{\nu}$
+\end_inset
+
+ means more 
+\begin_inset Formula $A$
+\end_inset
+
+ and more (indirect) utility.
+ A consumer finding a lower 
+\begin_inset Formula $P_{\nu}(\rho)$
+\end_inset
+
+ and with lower 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ corresponds to the substitution between high 
+\begin_inset Formula $\sigma(\int_{\rho}A)$
+\end_inset
+
+ and high 
+\begin_inset Formula $m(A)-\sigma(\int_{\rho}A)$
+\end_inset
+
+ we have discussed in the direct utility example.
+\end_layout
+
+\begin_layout Description
+Property 2
+\end_layout
+
+\begin_layout Standard
+The separation based on 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is more likely at subsistence than at bliss levels.
+\end_layout
+
+\begin_layout Standard
+[exchange of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ ] If 
+\begin_inset Formula $\rho$
+\end_inset
+
+ affects subsistence but not bliss, i.e.
+ if consumers with a certain 
+\begin_inset Formula $\rho_{L}$
+\end_inset
+
+ have higher subsistence costs but everyone faces the same costs for bliss,
+ then the consumers 
+\begin_inset Formula $\rho_{L}$
+\end_inset
+
+ with higher subsistence costs effectively face a lower outlay for relative
+ quality.
+ The net utility would depend on what how 
+\begin_inset Formula $P_{\nu}(\rho_{L})$
+\end_inset
+
+ compares with 
+\begin_inset Formula $P_{\nu}(\rho\ne\rho_{L})$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $P_{\nu}(\rho\ne\rho_{L})$
+\end_inset
+
+ is too high then the consumer in groups 
+\begin_inset Formula $\rho\ne\rho_{L}$
+\end_inset
+
+ might want to switch 
+\begin_inset Formula $\rho$
+\end_inset
+
+ (e.g.
+ by moving regions) to avail lower 
+\begin_inset Formula $P_{\nu}(\rho_{L})$
+\end_inset
+
+.
+ This switch is facilitated if subsistence costs are the same for all 
+\begin_inset Formula $\rho$
+\end_inset
+
+ i.e.
+ if the outlay for relative-quality is the same for all consumer.
+ This switch matters less for those with extremely high wealth for whom
+ changing 
+\begin_inset Formula $\rho$
+\end_inset
+
+ would be of negligible impact to the outlay.
+
+\bar under
+ If subsistence costs 
+\begin_inset Formula $P_{\psi}$
+\end_inset
+
+are the same for everyone but bliss costs 
+\begin_inset Formula $P_{\nu}$
+\end_inset
+
+ varies depending on 
+\begin_inset Formula $\rho$
+\end_inset
+
+, then a consumer by switching 
+\begin_inset Formula $\rho$
+\end_inset
+
+ the consumer only changes her 
+\begin_inset Formula $P_{\nu}$
+\end_inset
+
+ (not subsistence).
+ Since consumer facing higher bliss costs lose little by potentially changing
+ 
+\begin_inset Formula $\rho$
+\end_inset
+
+ (e.g.
+ by moving to a poorer neighborhood), a subsititution between 
+\begin_inset Formula $\rho$
+\end_inset
+
+ and 
+\begin_inset Formula $A,v$
+\end_inset
+
+ would follow.
+ This is equivalent to the substitution between 
+\begin_inset Formula $\sigma(\int_{\rho}A)$
+\end_inset
+
+ and 
+\begin_inset Formula $(s(A)-\sigma(\int_{\rho}A),\nu)$
+\end_inset
+
+ in the direct utility approach.
 \end_layout
 
 \begin_layout Standard
 
 \bar under
-Recall that low 
+Since the utility function faces a bigger drop at closer to subsistence
+ compared to the bliss - corresponding to the separation condition through
+ 
+\begin_inset Formula $\rho$
+\end_inset
+
+ near subsistence.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+[Econometric interpretation: Detecting separation] Recall that low 
 \begin_inset Formula $\sigma(\int_{\rho_{L}}A)$
 \end_inset
 
- represents low 
+ in the direct utility corresponds to a low 
 \begin_inset Formula $\Psi$
-\end_inset
-
- and (relatively speaking) and (possibly) higher 
-\begin_inset Formula $P_{\nu}$
-\end_inset
-
- .
- High 
-\begin_inset Formula $\sigma(\int_{\rho_{L}}A)$
-\end_inset
-
- would mean high 
-\begin_inset Formula $\Psi$
-\end_inset
-
- but relatively low
-\begin_inset Formula $P_{\nu}$
 \end_inset
 
 .
@@ -4472,7 +4750,7 @@ Recall that low
 \end_inset
 
  has the effect of making bliss more expensive.
- The perfect segregation would mean substituion of 
+ If the seperation condition is false, then substituion of 
 \begin_inset Formula $A$
 \end_inset
 
@@ -4488,17 +4766,17 @@ Recall that low
 \begin_inset Formula $A,\nu$
 \end_inset
 
- .If people with 
+ would be permitted .
+ In other words, the consumer with 
 \begin_inset Formula $A$
 \end_inset
 
- have the same 
+ can have the same 
 \begin_inset Formula $\nu$
 \end_inset
 
- as those without (i.e.
- they have the same quality as those who don't), then we can say that quality
- is a necessity.
+ as those without, ....
+ say that quality is a necessity.
  If not i.e.
  if people with 
 \begin_inset Formula $A$
@@ -4523,302 +4801,12 @@ Recall that low
 
 .
  higher bliss costs need not concern those that are not high-spenders.
- Of course, the measurement of 
-\begin_inset Formula $\nu$
-\end_inset
-
- is critical here and we try not to use inferred values (based on usage).
-\end_layout
-
-\begin_layout Standard
-Now consider the case when 
-\begin_inset Formula $\rho$
-\end_inset
-
- also influences 
-\begin_inset Formula $P_{\psi}$
-\end_inset
-
- .
- In the second approach, this has the same effect of pushing down the disposable
- income 
-\begin_inset Formula $x_{t}$
-\end_inset
-
- (relevant for only quality).
- 
-\begin_inset Formula $\rho_{L}$
-\end_inset
-
- if bliss costs are higher, then bliss would be lower (or even improbable)
- for those with high expenditure but with 
-\begin_inset Formula $\rho=\rho_{L}$
-\end_inset
-
-.
- For those with 
-\begin_inset Formula $\rho=\rho_{L}$
-\end_inset
-
- spending less (i.e.
- lower 
-\begin_inset Formula $log(x)$
-\end_inset
-
-) a higher 
-\begin_inset Formula $b(p,\rho_{L})$
-\end_inset
-
- does not mean lower utility.
- In other words, by choosing 
-\begin_inset Formula $\rho$
-\end_inset
-
- if the consumer also lowers needs costs 
-\begin_inset Formula $P_{\psi},$
-\end_inset
-
-then choosing 
-\begin_inset Formula $\rho$
-\end_inset
-
- has the same effect of increasing disposable income.
  
 \end_layout
 
 \begin_layout Standard
-The conditions where 
-\begin_inset Formula $\rho$
-\end_inset
-
- differentiates subsistence costs (subsistence costs 
-\begin_inset Formula $a(p,\rho)$
-\end_inset
-
- ) while bliss is achievable at high levels of expenditure (whether it is
- differentiated by certain 
-\begin_inset Formula $\rho$
-\end_inset
-
- - with 
-\begin_inset Formula $b(p,\rho)$
-\end_inset
-
- - or not - with 
-\begin_inset Formula $b(p)$
-\end_inset
-
- ).
- If it was possible change one's 
-\begin_inset Formula $\rho$
-\end_inset
-
- (to 
-\begin_inset Formula $\rho\ne\rho_{L}$
-\end_inset
-
- from 
-\begin_inset Formula $\rho_{L}$
-\end_inset
-
-), then given the same income those with 
-\begin_inset Formula $\rho_{L}$
-\end_inset
-
- who face lower subsistence costs than those with 
-\begin_inset Formula $\rho\ne\rho_{L}$
-\end_inset
-
- have more incentive to stay within
-\begin_inset Formula $\rho_{L}$
-\end_inset
-
-as a lower 
-\begin_inset Formula $a(p,\rho)$
-\end_inset
-
- gives higher utility at lower expenditure levels 
-\begin_inset Formula $log(x)$
-\end_inset
-
-.
- At higher income level 
-\begin_inset Formula $log(x)$
-\end_inset
-
-, low subsistence costs 
-\begin_inset Formula $a(p,\rho_{L})$
-\end_inset
-
- do not pay off as much and the pressure may grow on the consumer to change
- 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- Therefore those who have lower costs of subsistence (
-\begin_inset Formula $a(p,\rho_{L})<a(p,\rho_{i})|\rho_{i}\ne\rho_{L}$
-\end_inset
-
-) may participate in status consumption with those with higher needs but
- only to a certain extent - after which only the higher income 
-\begin_inset Formula $log(x)$
-\end_inset
-
- could improve bliss.
- The difference in subsistence levels - represents the limits imposed by
- lower asset possession (and lower needs).
- One could improve quality and durable goods but the effect of 
-\begin_inset Formula $\sigma(\int_{\rho}A)$
-\end_inset
-
- would dominate even at higher levels of 
-\begin_inset Formula $log(x)$
-\end_inset
-
-.
- The differentiation of 
-\begin_inset Formula $a(p,\rho)$
-\end_inset
-
- represent a state of segregation based on 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- It is worth asking why exactly do subsistence costs differ in first place
- - this is a failure.
- If needs are not being met and humans are inclined to make their ends meet
- - there is a failure.
- Status competition does exist in this case but not a significant one as
- only 
-\begin_inset Formula $s(A)-\sigma(\int_{\rho}A)$
-\end_inset
-
- or 
-\begin_inset Formula $\nu$
-\end_inset
-
- helps but only to a certain level.
- 
-\bar under
-The differentiation of subsistence costs 
-\begin_inset Formula $a(p,\rho)$
-\end_inset
-
- based on 
-\begin_inset Formula $\rho$
-\end_inset
-
- encourages or discourages status consumption but only within the reference
- groups.
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-[GUARANTEED SUBSISTENCE DRIVING STATUS CONSUMPTION] While segregated subsistence
- may leave little for participation in status with the world outside the
- local reference group 
-\begin_inset Formula $\rho$
-\end_inset
-
- (except by exercising the choice to change 
-\begin_inset Formula $\rho$
-\end_inset
-
- with migration or social networks), consider what happends 
-\begin_inset Formula $\rho$
-\end_inset
-
- does not drive subsistence (i.e.
- if basic needs are met either cheap or possibly cheaper in the poor region)
- but it only drives bliss.
- Here, the disposable income is the same for quality.
- In other words, the subsistence costs 
-\begin_inset Formula $P_{psi}$
-\end_inset
-
- are the same for everyone but bliss costs 
-\begin_inset Formula $P_{nu}$
-\end_inset
-
- varies depending on 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- A consumer who faces a higher bliss cost would have higher bliss at low
- levels of expenditure 
-\begin_inset Formula $log(x)$
-\end_inset
-
- and lower bliss at high levels of income.
- But since changing 
-\begin_inset Formula $\rho$
-\end_inset
-
- from 
-\begin_inset Formula $\rho_{H}$
-\end_inset
-
- to 
-\begin_inset Formula $\rho\ne\rho_{H}$
-\end_inset
-
- would only affect bliss but not affect subistence in this case, the subsitution
- between 
-\begin_inset Formula $\rho$
-\end_inset
-
- and consumption does not affect subsistence.
- We certainly have a higher chance of exchange in this case.
- Since consumer facing higher bliss costs lose little by potentially changeing
- 
-\begin_inset Formula $\rho$
-\end_inset
-
- (e.g.
- by moving to a poorer neighborhood), a subsititution between 
-\begin_inset Formula $\rho$
-\end_inset
-
- and 
-\begin_inset Formula $A,v$
-\end_inset
-
- would follow.
- Here too, the effect of 
-\begin_inset Formula $\sigma(\int_{\rho}A)$
-\end_inset
-
- would dominate after a certain level of expenditure 
-\begin_inset Formula $log(x)$
-\end_inset
-
- - but the consumer is a lot closer to higher bliss levels.
- Status competitions exists between 
-\begin_inset Formula $\rho$
-\end_inset
-
- - allowing the consumer could substitute 
-\begin_inset Formula $\rho$
-\end_inset
-
- with lower 
-\begin_inset Formula $\sigma(\int_{\rho}A)$
-\end_inset
-
- - with 
-\begin_inset Formula $(s(A)-\sigma(\int_{\rho}A),\nu)$
-\end_inset
-
- - and an indifference between the choice to avail relative quality in the
- region and living in a region outside might exist.
-\end_layout
-
-\begin_layout Standard
-Now consider if a group that has a higher education ( i.e.
+Consider an example.
+ If a group that has a higher education ( i.e.
  if 
 \begin_inset Formula $\rho$
 \end_inset
@@ -4854,32 +4842,16 @@ Now consider if a group that has a higher education ( i.e.
 
 .
  If being educated drives both subsistence and bliss level utilities, however,
- then similar to the previous case a perfect segregation may exist between
+ then similar to the previous case a separation of utilities may exist between
  those that are educated and the uneducated.
-\end_layout
-
-\begin_layout Standard
-We can summarise the above discussion in two claims that follow from the
+ We can summarise the above discussion in two claims that follow from the
  model dynamics in presence of heterogeneity in prices.
  These motivate our discussion for the econometric analyses of data in the
  subsequent sections.
 \end_layout
 
-\begin_layout Subsubsection*
-Claim 1
-\end_layout
-
-\begin_layout Standard
-The significance of demographic characteristics (
-\begin_inset Formula $\rho$
-\end_inset
-
-) for bliss levels but not on subsistence levels is a precondition for status
- competitions.
-\end_layout
-
-\begin_layout Subsubsection*
-Claim 2
+\begin_layout Description
+Property 3
 \end_layout
 
 \begin_layout Standard
@@ -5054,21 +5026,6 @@ literal "false"
 
  dominate the permanent ownership (savings) and consumption of quality (through
  heterogeneity of prices).
-\end_layout
-
-\begin_layout Standard
-[MARGINAL UTILITY of money] In terms of the cost-function, a heterogeneity
- in price of commodities means that the marginal utility of money (at subsistenc
-e or bliss levels) would also depend on 
-\begin_inset Formula $\rho$
-\end_inset
-
- through heterogeneity in 
-\begin_inset Formula $P_{\nu}$
-\end_inset
-
-.
- 
 \end_layout
 
 \begin_layout Standard
