@@ -21,12 +21,12 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "Lucida Handwriting"
+\font_roman "palatino" "Calisto MT"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts false
+\use_non_tex_fonts true
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -4331,7 +4331,7 @@ Cost Function
 
 \begin_layout Standard
 To formulate a PIGLOG function with varying relative quality and needs,
- one option is to view subsistence costs 
+ one could either view subsistence costs 
 \begin_inset Formula $a(p)$
 \end_inset
 
@@ -4343,11 +4343,11 @@ To formulate a PIGLOG function with varying relative quality and needs,
 \begin_inset Formula $P_{\nu})$
 \end_inset
 
- while 
+ while letting 
 \begin_inset Formula $b(p)$
 \end_inset
 
- is a function of both 
+ remain a function of both 
 \begin_inset Formula $P_{\psi}$
 \end_inset
 
@@ -4355,17 +4355,22 @@ and
 \begin_inset Formula $P_{\nu}$
 \end_inset
 
-.
- Compared to this approach where the cost of basic needs 
-\begin_inset Formula $P_{\psi}$
-\end_inset
-
- must appear in the cost-function, we use the assumption that the consumers
- are on a predetermined path of needs 
+ or use the assumption that the consumers are on a predetermined path of
+ needs 
 \begin_inset Formula $\psi_{t}$
 \end_inset
 
- and let the representative consumer optimise 
+ and consider 
+\begin_inset Formula $P_{\psi}$
+\end_inset
+
+ only in the subsistence costs 
+\begin_inset Formula $a(p)$
+\end_inset
+
+.
+ Using this latter approach we let the representative consumer optimise
+ 
 \begin_inset Formula $(\nu,\Delta A)$
 \end_inset
 
@@ -4381,37 +4386,50 @@ and
 \begin_inset Formula $\rho$
 \end_inset
 
-.
- With this approach, the consumer budget is adjusted as 
-\begin_inset Formula $x_{t}\equiv c_{t}-\Psi(A_{t})-P_{\psi}\psi$
+ so that the consumer budget is adjusted as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+x_{t} & \equiv c_{t}-\Psi(A_{t})-P_{\psi}\psi_{t}+\Delta_{t}\label{eq:x_t_definition}
+\end{alignat}
+
 \end_inset
 
-.
- Unlike the case where 
-\begin_inset Formula $a(p)$
+
+\end_layout
+
+\begin_layout Standard
+Thus the subsistence costs are correspond to 
+\begin_inset Formula $x_{t}=0$
 \end_inset
 
- is a function  of 
-\begin_inset Formula $P_{\psi}$
-\end_inset
-
-, the subsistence costs are zero in this case as a zero budget corresponds
- the subsistence level 
+ (a zero outlay means the subsistence level expenditure 
 \begin_inset Formula $P_{\psi}\psi$
 \end_inset
 
- and 
+ as well as 
 \begin_inset Formula $A_{t}=0$
 \end_inset
 
-.
+ due to the Assumption 1).
  The cost-function can be written simply as 
-\begin_inset Formula $c(u,p)=ub(\psi P_{\nu}(\rho))$
+\begin_inset Formula $c(u,p)=ub(\psi P_{\nu}(\rho),P_{A})$
 \end_inset
 
 .
- Notice that the life-cycle effects are already part of the model as the
- effective price of quality increases with increase in needs (
+ Notice however that having a high permanent ownership lowers the outlay
+ (THE role of 
+\begin_inset Formula $A$
+\end_inset
+
+ needs to be clearer).
+\end_layout
+
+\begin_layout Standard
+Notice also that the life-cycle effects are already part of the model as
+ the effective price of quality increases with increase in needs (
 \begin_inset Formula $P_{\nu}\psi$
 \end_inset
 
@@ -4440,7 +4458,7 @@ Higher subsistence costs for a certain
 \end_layout
 
 \begin_layout Standard
-Higher subsistence costs correspond to a low outlay
+Higher subsistence costs correspond to a low outlay 
 \begin_inset Formula $x_{t}$
 \end_inset
 
@@ -4448,12 +4466,26 @@ Higher subsistence costs correspond to a low outlay
 \begin_inset Formula $P_{\nu}$
 \end_inset
 
- .
- Therefore high subsistence costs for a certain 
+ (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:x_t_definition"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ High subsistence prices 
+\begin_inset Formula $P_{\psi}$
+\end_inset
+
+ for a certain 
 \begin_inset Formula $\rho$
 \end_inset
 
- have the same effect as reducing the disposable outlay 
+ have therefore the same effect as reducing the disposable outlay 
 \begin_inset Formula $x_{t}$
 \end_inset
 
@@ -4488,13 +4520,20 @@ Higher subsistence costs correspond to a low outlay
 \begin_inset Formula $P_{\psi}\psi$
 \end_inset
 
- the same for all consumers means that budget for relative quality is subject
- only to the price of relative quality 
+ the same for all consumers means that expenditure on relative quality is
+ subject only to the price of relative quality 
 \begin_inset Formula $P_{\nu}(\rho)$
 \end_inset
 
-.
- 
+ (apart from the outlay 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ itself which is independent of 
+\begin_inset Formula $\rho$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -4503,13 +4542,27 @@ Now consider how a higher or a lower
 \end_inset
 
  would affect utility.
- If the price of relative-quality is higher, then bliss would decrease for
- the outlay
+ If the price of relative-quality 
+\begin_inset Formula $P_{\nu}$
+\end_inset
+
+ rises, then bliss (utility) would decrease for a given outlay 
 \begin_inset Formula $x_{t}$
 \end_inset
 
-.
- Also given the same relative-quality price 
+ (this is evident also from the shape of the PIGLOG utility from Equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:PIGLOG"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+- see Appendix) .
+ Also, given the same relative-quality price 
 \begin_inset Formula $P_{\nu}(\rho)$
 \end_inset
 
@@ -4522,11 +4575,15 @@ Now consider how a higher or a lower
 \end_inset
 
 .
- Finally, when 
+ 
+\end_layout
+
+\begin_layout Standard
+The formulation also implies that when 
 \begin_inset Formula $\rho$
 \end_inset
 
- both 
+ affects both 
 \begin_inset Formula $P_{\psi}$
 \end_inset
 
@@ -4539,20 +4596,16 @@ Now consider how a higher or a lower
 \begin_inset Formula $\rho'$
 \end_inset
 
- affects both
-\begin_inset space ~
-\end_inset
-
-
+ raises or lowers both 
 \begin_inset Formula $P_{\psi}$
 \end_inset
 
-and 
+ and 
 \begin_inset Formula $P_{\nu}$
 \end_inset
 
-, then consumer with 
-\begin_inset Formula $\rho=\rho'$
+, then while the consumer in the group 
+\begin_inset Formula $\rho'$
 \end_inset
 
  would have a lower (higher) relative quality outlay 
@@ -4563,24 +4616,20 @@ and
 \begin_inset Formula $P_{\psi}\psi$
 \end_inset
 
- but might also lower the 
+ , she find also find a lower 
 \begin_inset Formula $P_{\nu}$
 \end_inset
 
- corresponding to 
+ for 
 \begin_inset Formula $\rho'$
 \end_inset
 
 .
- Lower 
-\begin_inset Formula $P_{\nu}$
+ This is because one cannot have multiple values for 
+\begin_inset Formula $\rho$
 \end_inset
 
- means more 
-\begin_inset Formula $A$
-\end_inset
-
- and more (indirect) utility.
+.
  A consumer finding a lower 
 \begin_inset Formula $P_{\nu}(\rho)$
 \end_inset
@@ -4613,16 +4662,28 @@ The separation based on
 \end_layout
 
 \begin_layout Standard
-The consumer with differing 
+A substitution between 
 \begin_inset Formula $\rho$
 \end_inset
 
- may get the same utility while facing different 
+ and 
+\begin_inset Formula $(A,\nu$
+\end_inset
+
+) is possible only when the consumers having different 
+\begin_inset Formula $\rho$
+\end_inset
+
+ may get the same utility while facing 
 \begin_inset Formula $P_{\psi}$
 \end_inset
 
  and 
 \begin_inset Formula $P_{\nu}$
+\end_inset
+
+ which themselves vary based on 
+\begin_inset Formula $\rho$
 \end_inset
 
 .
@@ -4635,8 +4696,6 @@ The consumer with differing
 \begin_inset Formula $x_{t}$
 \end_inset
 
-
-\bar under
  .
  Consumers with high outlay 
 \begin_inset Formula $x_{t}$
@@ -4647,16 +4706,28 @@ The consumer with differing
 \end_inset
 
  that might affect subsistence.
- The choice for consumers with high outlay 
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+The choice for consumers with high expenditure 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ is reflected by a higher 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ and lower 
 \begin_inset Formula $x_{t}$
 \end_inset
 
- are reflected by the higher 
-\begin_inset Formula $P_{\nu}(\rho$
-\end_inset
-
-).
- Thus, an obvious assymmetry in the utility arises due when 
+ .
+ 
+\series default
+Thus, an obvious assymmetry in the utility arises due when 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -4694,8 +4765,6 @@ The consumer with differing
 \end_layout
 
 \begin_layout Standard
-
-\bar under
 The separation condition - which we interepret as the lack of substitution
  based on 
 \begin_inset Formula $\rho$
