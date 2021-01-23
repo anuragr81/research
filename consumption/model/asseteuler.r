@@ -366,12 +366,17 @@ get_sigma_array<-function(xarr, decay = 0.99){
   return(sigma_array)
 }
 
+# At any point, there is a certain amount of effort that has already been done
+sigma_func <- function(start_p,decay_factor, past_psi,psi){
+  start_p * exp(-decay_factor * (past_psi + psi ))
+}
+
 #big size risksz would enable psi1 >0 and/or psi2>0
 # NEED MORE SIMULATIONS - It seems we're hitting the boundary a lot.
-#y <-evolve_relative_wealth_discrete_natural(nsim = 3000, delta = 0 ,alpha1 = 3, alpha2 = .1,risksz = 10,T = 1,dt = .01,A1_init = 10, A2_init = 100,decay = .9,start_p = .5, gamma=.7, lambda = 10, A_costs = 0); par(mfrow=c(3,1)); plot(colMeans(y$A2)-colMeans(y$A1),type='l'); plot(colMeans(y$A1),type='l'); plot(colMeans(y$A2),type='l')
+#y <-evolve_relative_wealth_discrete_natural(nsim = 3000, delta = 0 ,alpha1 = 3, alpha2 = .1,risksz = 10,T = 1,dt = .01,A1_init = 10, A2_init = 100,decay = .9,start_p = .5, gamma=.7, lambda = 10, A_costs = 0); 
 # scenarios: 
 # rich-guy low-alpha (regular overvalue-low-p but undervalue-high-p guy), no-asset costs, no taxes, starts with high-risk size 10 and start_p = .5- rich becomes super-rich for a bit gets back to zero  - poorer risk-averse always remains low.
-# rich-guy high-alpha (super-risk-seeking overvalue-high-p and ignore-low-p guy),  no-asset costs, no taxes, starts with high-risk size 10 and start_p = .5-  rich never becomes super-rich but plateaus at decent income - poorer makes the most from the mine  (see what happens when taxes come)
+# rich-guy high-alpha (super-risk-seeking overvalue-high-p and ignore-low-p guy),  no-asset costs, no taxes, starts with high-risk size 10 and start_p = .5-  
 
 evolve_relative_wealth_discrete_natural <-function(nsim,delta,alpha1,alpha2,gamma, lambda, risksz, T, dt, A1_init, A2_init, decay, start_p, A_costs){
   
@@ -391,7 +396,7 @@ evolve_relative_wealth_discrete_natural <-function(nsim,delta,alpha1,alpha2,gamm
     decay <- .9
   }
   if (missing(start_p)){
-    start_p <- .2
+    start_p <- .7
   }
   
   if (missing(A_costs)){
@@ -419,12 +424,10 @@ evolve_relative_wealth_discrete_natural <-function(nsim,delta,alpha1,alpha2,gamm
     timepoints <- seq(0,T,dt)
     
     sigma <- start_p
+    sigma_arr <- array()
     
     for (i in timepoints)
     {  
-      
-      
-      
       
       inc  = - delta * (A1-A2)
       #psi should be chosen so that immediate gain u under risk is optimised
@@ -437,14 +440,16 @@ evolve_relative_wealth_discrete_natural <-function(nsim,delta,alpha1,alpha2,gamm
       K1 = D1 - ((A1+A2)/2)
       K2 = D2 - ((A1+A2)/2)
       
-      optim_func <- function(psi,K,risksz,sigma,gamma,lambda,alpha){
-        return (karmakar(sigma,alpha)*pt_value(K - psi + psi*risksz,gamma,lambda)+  karmakar(1-sigma,alpha)* pt_value (K -psi,gamma,lambda) )
+      optim_func <- function(psi,K,risksz,sigma0,gamma,lambda,alpha){
+        # we cannot assume that the payoff would be psi*risksz when dW=1
+        # karmakar(sigma,alpha) is fine because the  bet-size doesn't influence the weighting the -probability itself is of course dependent of which both effort psi and the state itself
+        return (karmakar(sigma_func,alpha)*pt_value(K - psi + psi*risksz,gamma,lambda)+  karmakar(1-sigma,alpha)* pt_value (K -psi,gamma,lambda) )
       }
       
-      #psivec <- seq(-100,100,.1)  ; plot(psivec, sapply(psivec, function(x) { optim_func(psi=x,K=K1,risksz=risksz,gamma=gamma,lambda=lambda,alpha=alpha1) }),type='l' )
+      #psivec <- seq(-100,100,.1)  ; plot(psivec, sapply(psivec, function(x) { optim_func(psi=x,K=K1,risksz=risksz,gamma=gamma,sigma=sigma,lambda=lambda,alpha=alpha1) }),type='l' )
       # consumer always makes the decision before the draw
-      psi1 <- optimise(function(x) { -optim_func(psi=x,K=K1,risksz=risksz,sigma=sigma,gamma=gamma,lambda=lambda,alpha=alpha1) },c(0,D1))$minimum
-      psi2 <- optimise(function(x) { -optim_func(psi=x,K=K2,risksz=risksz,sigma=sigma,gamma=gamma,lambda=lambda,alpha=alpha2) },c(0,D2))$minimum
+      psi1 <- optimise(function(x) { -optim_func(psi=x,K=K1,risksz=risksz,sigma0=sigma,gamma=gamma,lambda=lambda,alpha=alpha1) },c(0,D1))$minimum
+      psi2 <- optimise(function(x) { -optim_func(psi=x,K=K2,risksz=risksz,sigma0=sigma,gamma=gamma,lambda=lambda,alpha=alpha2) },c(0,D2))$minimum
       
       if ( (D1-psi1) <.1 ){
         message = "All D1 spent"
@@ -457,6 +462,7 @@ evolve_relative_wealth_discrete_natural <-function(nsim,delta,alpha1,alpha2,gamm
       dW2 = rbinom(1,1,sigma)
       
       # natural decay
+      sigma_arr[count] <- sigma
       if (dW1 + dW2 >0){
         if (dW1+dW2==1){
           sigma <- decay*sigma
@@ -500,6 +506,147 @@ evolve_relative_wealth_discrete_natural <-function(nsim,delta,alpha1,alpha2,gamm
   retlist[["A1"]] <- A1df
   retlist[["A2"]] <- A2df
   retlist[["inc"]] <- incdf
+  max_y <- max( max(colMeans(retlist$A1)) , colMeans(retlist$A2) )
+  min_y <- min( min(colMeans(retlist$A1)) , colMeans(retlist$A2) )
+  
+  par(mfrow=c(2,2)); 
+  ptimepoints <- c(timepoints,timepoints[length(timepoints)]+dt)
+  plot(ptimepoints,colMeans(retlist$A2)-colMeans(retlist$A1),type='l', main="A2-A1", xlab="T", ylab="A2-A1"); 
+  plot(ptimepoints,colMeans(retlist$A1),type='l',ylim=c(min_y,max_y),main="A1", xlab="T", ylab="A1"); 
+  plot(ptimepoints,colMeans(retlist$A2),type='l',ylim=c(min_y,max_y),main="A2", xlab="T", ylab="A2")
+  plot(timepoints,sigma_arr,type='l',main="natural probability", xlab="T")
+  return(retlist)
+}
+
+#evolve_relative_wealth_discrete_contnatural(nsim = 1000, delta = 0 ,alpha1 = 3, alpha2 = .1,risksz = 10,T = 1,dt = .01,A1_init = 10, A2_init = 100,decay = .9,start_p = .5, gamma=.7, lambda = 10, A_costs = 0)
+evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,gamma, lambda, risksz, T, dt, A1_init, A2_init, decay, start_p, A_costs){
+  
+  if (missing(T)){
+    T <- 1
+  } 
+  if (missing(dt)){
+    dt = 1e-1
+  }
+  if (missing(A1_init)){
+    A1_init = 100  
+  }
+  if (missing(A2_init)){
+    A2_init = 100
+  }
+  if (missing(decay)){
+    decay <- .9
+  }
+  if (missing(start_p)){
+    start_p <- .7
+  }
+  
+  if (missing(A_costs)){
+    A_costs <- 0
+  }
+  
+  A1df <- data.frame()
+  A2df <- data.frame()
+  incdf <- data.frame()
+  
+  
+  for ( j in seq(nsim)){
+    A1 = A1_init
+    A2 = A2_init
+    A1_arr = array()
+    A2_arr = array()
+    inc_arr = array()
+    
+    
+    count <- 1
+    A1_arr[count] = A1_init
+    A2_arr[count] = A2_init
+    inc_arr[count] = 0
+    
+    timepoints <- seq(0,T,dt)
+    total_psi <- 0
+    
+    sigma_arr <- array()
+    
+    for (i in timepoints)
+    {  
+      inc  = - delta * (A1-A2)
+      #psi should be chosen so that immediate gain u under risk is optimised
+      
+      
+      # if K = inc* dt -A_costs*A - ((A1+A2)/2)
+      # the choice would be argmin { w(sigma,alpha)*pt_value( K - psi + psi*risksz,gamma,lambda)+  w(1-sigma,alpha)* pt_value (K -psi,gamma,lambda) }
+      D1 = A1 + inc* dt -A_costs*A1
+      D2 = A2 - inc* dt -A_costs*A2
+      K1 = D1 - ((A1+A2)/2)
+      K2 = D2 - ((A1+A2)/2)
+      
+      optim_func <- function(psi,K,risksz,start_p,total_psi,gamma,lambda,alpha){
+        # we cannot assume that the payoff would be psi*risksz when dW=1
+        # karmakar(sigma,alpha) is fine because the  bet-size doesn't influence the weighting the -probability itself is of course dependent of which both effort psi and the state itself
+        p = sigma_func(start_p=start_p,decay_factor=decay, past_psi = total_psi,psi= psi)
+        wp = karmakar(p,alpha) 
+        w1minusp = karmakar(1-p,alpha)
+        return (wp*pt_value(K - psi + psi*risksz,gamma,lambda)+  w1minusp* pt_value (K -psi,gamma,lambda) )
+      }
+      
+      #psivec <- seq(0,100,.1)  ; plot(psivec, sapply(psivec, function(x) { optim_func(psi=x,K=K1,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha1) }),type='l' )
+      # consumer always makes the decision before the draw
+      psi1 <- optimise(function(x) { -optim_func(psi=x,K=K1,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha1) },c(0,D1))$minimum
+      psi2 <- optimise(function(x) { -optim_func(psi=x,K=K2,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha2) },c(0,D2))$minimum
+      
+      if ( (D1-psi1) <.1 ){
+        message = "All D1 spent"
+      }
+      if ( (D2-psi2) <.1 ){
+        message = "All D2 spent"
+      }
+      
+      cur_sigma = sigma_func(start_p=start_p,decay_factor=decay, past_psi = total_psi,psi= 0)
+      dW1 = rbinom(1,1,cur_sigma) 
+      dW2 = rbinom(1,1,cur_sigma)
+      
+      
+      # natural decay
+      sigma_arr[count] <- cur_sigma
+      # sigma change based on total psi 
+      combined_effort = dW1*psi1 + dW2*psi2
+      total_psi = total_psi  + combined_effort
+      
+      A1 = D1 -psi1 + psi1 * risksz* dW1
+      A2 = D2 -psi2 + psi2 * risksz* dW2
+      
+      count <- count+1
+      A1_arr[count] <- A1
+      A2_arr[count] <- A2
+      inc_arr[count] <- inc
+      
+    }
+    A1add <- t(data.frame(x=A1_arr))
+    colnames(A1add) <- paste0("t_",c(timepoints, T+dt))
+    A1df <- rbind(A1df,A1add)
+    
+    A2add <- t(data.frame(x=A2_arr))
+    colnames(A2add) <- paste0("t_",c(timepoints, T+dt))
+    A2df <- rbind(A2df,A2add)
+    
+    iadd <- t(data.frame(x=inc_arr))
+    colnames(iadd) <- paste0("t_",c(timepoints, T+dt))
+    incdf <- rbind(incdf,iadd)
+    
+  }
+  retlist = list()
+  retlist[["A1"]] <- A1df
+  retlist[["A2"]] <- A2df
+  retlist[["inc"]] <- incdf
+  max_y <- max( max(colMeans(retlist$A1)) , colMeans(retlist$A2) )
+  min_y <- min( min(colMeans(retlist$A1)) , colMeans(retlist$A2) )
+  
+  par(mfrow=c(2,2)); 
+  ptimepoints <- c(timepoints,timepoints[length(timepoints)]+dt)
+  plot(ptimepoints,colMeans(retlist$A2)-colMeans(retlist$A1),type='l', main="A2-A1", xlab="T", ylab="A2-A1"); 
+  plot(ptimepoints,colMeans(retlist$A1),type='l',ylim=c(min_y,max_y),main="A1", xlab="T", ylab="A1"); 
+  plot(ptimepoints,colMeans(retlist$A2),type='l',ylim=c(min_y,max_y),main="A2", xlab="T", ylab="A2")
+  plot(timepoints,sigma_arr,type='l',main="natural probability", xlab="T")
   return(retlist)
 }
 
