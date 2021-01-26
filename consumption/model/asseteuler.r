@@ -547,6 +547,7 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
   A1df <- data.frame()
   A2df <- data.frame()
   incdf <- data.frame()
+  sigmadf <- data.frame()
   
   
   for ( j in seq(nsim)){
@@ -633,6 +634,11 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
     colnames(iadd) <- paste0("t_",c(timepoints, T+dt))
     incdf <- rbind(incdf,iadd)
     
+    
+    sigmaadd <- t(data.frame(x=sigma_arr))
+    colnames(sigmaadd) <- paste0("t_",c(timepoints))
+    sigmadf <- rbind(sigmadf,sigmaadd)
+    
   }
   retlist = list()
   retlist[["A1"]] <- A1df
@@ -646,7 +652,7 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
   plot(ptimepoints,colMeans(retlist$A2)-colMeans(retlist$A1),type='l', main="A2-A1", xlab="T", ylab="A2-A1"); 
   plot(ptimepoints,colMeans(retlist$A1),type='l',ylim=c(min_y,max_y),main="A1", xlab="T", ylab="A1"); 
   plot(ptimepoints,colMeans(retlist$A2),type='l',ylim=c(min_y,max_y),main="A2", xlab="T", ylab="A2")
-  plot(timepoints,sigma_arr,type='l',main="natural probability", xlab="T")
+  plot(timepoints,colMeans(sigmadf),type='l',main="natural probability", xlab="T", ylab="s")
   return(retlist)
 }
 
