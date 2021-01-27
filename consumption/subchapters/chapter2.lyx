@@ -21,7 +21,7 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "libertine" "Times New Roman"
+\font_roman "libertine" "Lucida Fax"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -39,7 +39,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize 10
-\spacing single
+\spacing onehalf
 \use_hyperref false
 \papersize default
 \use_geometry true
@@ -82,7 +82,7 @@
 \math_numbering_side default
 \quotes_style english
 \dynamic_quotes 0
-\papercolumns 2
+\papercolumns 1
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
@@ -6350,7 +6350,7 @@ name "subsec:QualityMeasurement"
 
 \end_inset
 
-Quality (no quality calculation actually)
+Quality
 \end_layout
 
 \begin_layout Standard
@@ -6738,33 +6738,33 @@ l transfers i.e.
 \end_inset
 
 ) only if it can be passed on through generations.
- The durable goods that cannot be passed through generations are not considered
- long-term and excluded from 
-\begin_inset Formula $A$
-\end_inset
-
- (this is due to the life-cycle considerations).From a rather impractical
- view, one could argue that since social characteristics are acquired over
- a life-time and often require some investment (e.g.
- education fees or club-membership fees), we should be able to treat such
- social characteristics as assets (such characteristics may for example
- have a certain value in the employment market).
- We reject such an argument on purely empirical grounds since having a social
- characteristic (being educated etc.) does not carry any maintenance costs
- which would be included in 
-\begin_inset Formula $\Psi$
-\end_inset
-
-.
  An empirical criterion for consideration of 
 \begin_inset Formula $A$
 \end_inset
 
- is therefore also that increasing 
+ is also that increasing 
 \begin_inset Formula $A$
 \end_inset
 
  should increase 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ (there are no assets that don't can be maintained without any costs).
+ Therefore the durable goods that cannot be passed through generations are
+ not considered long-term and excluded from 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ One could argue that since social characteristics are acquired over a life-time
+ and often require some investment (e.g.
+ education fees or club-membership fees), they too should be treated as
+ assets (as such characteristics might often have a certain value in the
+ employment market).
+ Such an argument would be rejected on purely empirical grounds since having
+ a social characteristic (being educated etc.) does not carry any maintenance
+ costs that could be included in 
 \begin_inset Formula $\Psi$
 \end_inset
 
@@ -6784,8 +6784,9 @@ Durable goods
 \begin_layout Standard
 A particularly relevant data from the LSMS survey is that of the durable
  goods used by the household.
- The list of durable goods recorded in the survey includes everything from
- a mobile phone to land or houses (see Figure 
+ The list of durable goods recorded in the survey ranges from short-term
+ durable items such as mobile phones to the expensive and long-term assets
+ such as land or houses (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Costofassets2014"
@@ -6796,22 +6797,43 @@ noprefix "false"
 \end_inset
 
  for the median costs of these durable goods).
- The details of records include the number of durable goods owned by the
- household, the reported cost at which the durable good was purchased and
- the price the household expects by selling the durable good in the market
- at the time of the survey.
- While these data fields are promising for the intertemporal setting we
- wish to make use of, some refinement of this data is necessary due to the
- measurement errors with the costs and the current price (the latter is
- referred to as marked-to-market average or mtm average in the current discussio
-n).
+ The details of records include the number 
+\begin_inset Formula $n_{t}$
+\end_inset
+
+ of durable goods owned by the household, the reported cost 
+\begin_inset Formula $C_{t}$
+\end_inset
+
+ at which the durable good was purchased and the price 
+\begin_inset Formula $P_{t}$
+\end_inset
+
+ the household expects by selling the durable good in the market at the
+ time of the survey.
+ We refer to the price 
+\begin_inset Formula $P_{t}$
+\end_inset
+
+ that the household expects by selling the durable good in the market as
+ marked-to-market average or simply mtm average in the foregoing discussion.
 \end_layout
 
 \begin_layout Standard
+While the data fields 
+\begin_inset Formula $P_{t},n_{t}$
+\end_inset
 
-\bar under
-The issue with the reported cost is typical of those based on a consumer
- recall.
+ and 
+\begin_inset Formula $C_{t}$
+\end_inset
+
+ are useful, some refinement is required due to possible measurement errors.
+ The first issue is that the cost 
+\begin_inset Formula $C_{t}$
+\end_inset
+
+ of is a recall value.
  Recorded by the survey at two time-points spread across two years (let's
  call the time points 
 \begin_inset Formula $t$
@@ -6831,77 +6853,83 @@ The issue with the reported cost is typical of those based on a consumer
 \end_inset
 
 ).
- To some extent, the reported cost of the durable goods follows the mtm
- average which itself is less susceptible to the issue as it is not recalled
- from consumer's memory and reflects the perceived depreciation of the durable
- good over time instead.
- The mtm average of the durable goods (like the cost of the durable good)
- is a value averaged over the number of durable goods owned by consumer.
- Therefore, the cost incurred by the purchase of a new durable good - that
- we're interested in - is not directly observed in the mtm average and relies
- on the field indicating number of durable goods.
-\end_layout
-
-\begin_layout Standard
-As the value of new purchases relies on the number of durable goods observed
- in the survey, we detect an durable good purchase only when a difference
- in the number of durable goods over the successive years is observed.
- The difference between the mtm average is thus recorded as part of new
- durable goods only as long as we observe a difference in number of durable
- goods in the two-year period (i.e.
- from 
+ This may be simply be because a different member of the same household
+ provides the estimate in the two years.
+ This problem is worsened due to to factors.
+ First, that the data we have from the three waves are not panel -data in
+ the true sense - since the household visited in the year 
 \begin_inset Formula $t$
 \end_inset
 
- to 
-\begin_inset Formula $t+1$
+ is likely to have been visited in the year 
+\begin_inset Formula $t-1$
+\end_inset
+
+ but very unlikely to have been visited in the year 
+\begin_inset Formula $t-2$
+\end_inset
+
+.
+ Second, a significant number of households are split in multiple households
+ - thus permitting more measurement errors as the new household members
+ recall the cost of owned items.
+ 
+\end_layout
+
+\begin_layout Standard
+Due to above issues with 
+\begin_inset Formula $C_{t}$
+\end_inset
+
+, we use the reported price 
+\begin_inset Formula $P_{t}$
+\end_inset
+
+ of the durable goods (i.e.
+ the mtm average) as it not recalled from consumer's memory and reflects
+ the perceived depreciation of the durable good over time instead.
+ However, the mtm average of the durable goods (like the cost of the durable
+ good) is a value averaged over the number of durable goods 
+\begin_inset Formula $n_{a,t}$
+\end_inset
+
+ (for item 
+\begin_inset Formula $a$
+\end_inset
+
+) owned by consumer.
+ Therefore, the cost incurred by the purchase of a new durable goods in
+ the year 
+\begin_inset Formula $t$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $\Delta_{t}=A_{t}-A_{t-1}$
+\end_inset
+
+ - which we're interested in - also depends on the field 
+\begin_inset Formula $n_{a,t}$
+\end_inset
+
+ indicating the number of durable goods (for each good 
+\begin_inset Formula $a$
 \end_inset
 
 ).
- The number of durable goods observed however is also subject to some measuremen
-t error and requires some further refinements for us to calculate the total
- cost of durable goods.
- That said, since we are interested in the the new durable good purchases
- for our analysis, someone buying their first music player is unlikely to
- make counting errors than someone adding to their collection of music systems.
- We thus look for significant changes in durable goods numbers (e.g.
- if they change from 0 to 1 or substantially 3 to 5 or to 6,7...
- etc.).
+ We record a durable good purchase only when a significant difference in
+ the number of durable goods over the successive years is observed.
+ 
 \end_layout
 
 \begin_layout Standard
-A possible issue with a calculation of durable good cost changes as outlined
- above is that the measurement error with the number of durable goods may
- get magnified for more expensive durable goods such as house.
- However, since we also observe whether the individual owns a house or not
- from the household questionnaire (which records the housing-status through
- a direct question), we confirm that this error is not significant after
- reconciling the calculated differences with the data from the household
- questionnaire.
- What this reconciliation does remind us however is that the durable goods
- recorded in the survey indicate whether the household uses (or has access
- to) the durable goods rather than what it owns
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-A lot of households in rented or employer-provided houses report having
- a house.
-\end_layout
-
+The split household are treated as the terminal state of a household i.e.
+ if the household is split in the year 
+\begin_inset Formula $t+1$
 \end_inset
 
-.
- Since rental options - except for housing - are fairly limited in the developin
-g economies, this does not pose a significant measurement error.
-\end_layout
-
-\begin_layout Standard
-A final caveat for the data is the presence of split households.
- A significant portion of the households may split into two or more households.
- Considering a split household as the terminal state of a household, we
- don't consider the parent household while calculating durable good differences
- from the year 
+, the parent household is not considered in computation of the durable good
+ differences from the year 
 \begin_inset Formula $t$
 \end_inset
 
@@ -6909,23 +6937,19 @@ A final caveat for the data is the presence of split households.
 \begin_inset Formula $t+1$
 \end_inset
 
- if it has terminated in the year 
-\begin_inset Formula $t+1$
-\end_inset
-
 .
- In other words, durable good net-differences are included only as long
- as the households have not split in the period 
+ Thus, the durable good net-differences include a household only if it has
+ not split in the period 
 \begin_inset Formula $t\rightarrow t+1$
 \end_inset
 
 .
- As explained in the discussion of the model, we only wish to consider durable
- goods that can be potentially transferred over generations (it is easy
- to verify these when the households are split).
+ Notice that the presence of split households also provides us an opportunity
+ to verify the classification of durable goods - since the goods that can
+ be are transferred over generations are split into the resultant households
+ after the split.
  In the Tanzanian LSMS data, we consider any durable good more expensive
  than bed as eligible to be transferred to the next generation.
- This can be verified with the data on split household.
  The durable goods in the survey that are not life-long durable goods e.g.
  mobile phones, dish-tv etc.
  are not considered in the net-durable good changes 
@@ -6943,6 +6967,7 @@ noprefix "false"
 \end_inset
 
  for a median-cost order of the durable goods recorded in 2014).
+ 
 \end_layout
 
 \begin_layout Standard
@@ -6951,23 +6976,37 @@ For robustness tests to our conclusions, we attempt to both sharpen and
  coarser groups such as electronic items, furniture etc.
  and by turning off the effect of depreciation in the durable good difference
  calculation respectively.
- The first test to sharpen the data is with classification of new durable
- goods into coarser categories - which is useful in its own right in order
- to interpret the distribution of functional durable goods - since counting
- the instances of purchases of just any electronic item may make more sense
- than the purchase of individual items such as a music system or a CD player.
- The appeal of the grouping approach is also due the extreme differences
- in urban and rural markets in an economy like Tanzania.
+ To 
+\begin_inset Quotes eld
+\end_inset
+
+sharpen
+\begin_inset Quotes erd
+\end_inset
+
+ the data, we use a classification of new durable goods into a few categories
+ rather than an aggregate of all durable goods.
+ This is insightful in its own right as it illustrates the distribution
+ of functional durable goods - since counting the instances of purchases
+ of just any electronic item may make more sense than the purchase of individual
+ items such as a music system or a CD player.
  Grouping the durable goods into agricultural electronic, electric and livestock
  categories accentuates the minor additions to one's durable goods - by
  giving the cheaper durable goods purchased by the consumer the same treatment
  as the more expensive durable goods.
- The downside with such a grouping is of course this very collation of durable
- goods with vast differences in prices within a single group (cd-player
- and music system for example may have vast differences in prices but could
- be counted as a new electronic durable good purchased).
- As our primary intention has been to get the total durable goods costs
- we have refrained from using such grouping as a primary means of analyses.
+ Since our asset-groups are based on urban/rural residence, these differences
+ accounted for in the analyses through 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ The finer view of asset ownership data validates the view one would get
+ by considering the cost of assets and urban-rural classification (as part
+ of 
+\begin_inset Formula $\rho$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -7009,15 +7048,34 @@ Cost of durable goods (2014)
 \end_layout
 
 \begin_layout Standard
-The method to smoothen the data on the other hand has clear advantages.
- As we have noted earlier, in every two years of the survey, the mtm-average
- by the household is susceptible to both how the household interviewee may
- estimate the change in the market and whether the interviewee from the
- household in a particular year is different from the interviewee household
- member in another year.
- The durable goods data can thus be smoothened by separating the effect
- of these factors if we can consider only only one year's prices.
- To explain this with an example, consider an durable good 
+The need for a test after smoothening the data arises due to possible measuremen
+t errors in the recording of the mtm-average.
+ The three LSMS waves we have considered have been conducted in way that
+ a household visited in the year 
+\begin_inset Formula $t$
+\end_inset
+
+ is quite likely to have visited in the year 
+\begin_inset Formula $t-1$
+\end_inset
+
+ but very unlikely to have been visited in the year 
+\begin_inset Formula $t-2$
+\end_inset
+
+.
+ Thus while a calculation of
+\begin_inset Formula $\Delta_{t}=A_{t}-A_{t-1}$
+\end_inset
+
+ can be used over the period of two years, it is possible either that the
+ household interviewee estimates the change in the mtm differently in the
+ two or that the local market conditions have changed in the region (it
+ is also possible that a different member of the same household provides
+ a different estimate in the two years).
+ We smoothen the asset ownership data by separating the effect of such factors
+ by consider one year's prices alone.
+ For example, with a durable good 
 \begin_inset Formula $a$
 \end_inset
 
@@ -7025,7 +7083,7 @@ The method to smoothen the data on the other hand has clear advantages.
 \begin_inset Formula $P_{a,t}\times n_{a,t}$
 \end_inset
 
- where 
+ (where 
 \begin_inset Formula $P_{a,t}$
 \end_inset
 
@@ -7037,17 +7095,8 @@ The method to smoothen the data on the other hand has clear advantages.
 \begin_inset Formula $n_{a,t}$
 \end_inset
 
- is the total number of durable goods the household possesses.
- To avoid the measurement error associated with the difference in the estimate
- from the year 
-\begin_inset Formula $t$
-\end_inset
-
- to 
-\begin_inset Formula $t+1$
-\end_inset
-
-, we prefer to use the mtm-average estimate (price) at either from 
+ is the total number of durable goods the household possesses), we use the
+ mtm-average estimate (price) at either from 
 \begin_inset Formula $t$
 \end_inset
 
@@ -7055,86 +7104,52 @@ The method to smoothen the data on the other hand has clear advantages.
 \begin_inset Formula $t+1$
 \end_inset
 
-.
- Therefore the difference in cost of durable goods 
-\begin_inset Formula $a$
-\end_inset
-
- could be either be 
-\begin_inset Formula $P_{a,t}\times(n_{a,t+1}-n_{a,t})$
-\end_inset
-
- or 
-\begin_inset Formula $P_{a,t+1}\times(n_{a,t+1}-n_{a,t})$
-\end_inset
-
- rather than 
-\begin_inset Formula $n_{a,t+1}P_{a,t+1}-n_{a,t}P_{a,t}$
+ to calculate 
+\begin_inset Formula $\Delta_{t+1}=A_{t+1}-A_{t}$
 \end_inset
 
 .
- Choosing the period 
-\begin_inset Formula $t$
+ Therefore either 
+\begin_inset Formula $\Delta_{t+1}=P_{a,t}\times(n_{a,t+1}-n_{a,t})$
 \end_inset
 
- however leads us to another issue due to the sparsity of data.
- As we rely on a district-level granularity of data, not only would we not
- have the price reported for an item not owned by the consumer in period
- 
-\begin_inset Formula $t$
+ ( or 
+\begin_inset Formula $\Delta_{t+1}=P_{a,t+1}\times(n_{a,t+1}-n_{a,t})$
 \end_inset
 
-, there may not be enough purchases in the district for us to estimate the
- cost of the item that consumer in the period 
-\begin_inset Formula $t$
+ ) instead of 
+\begin_inset Formula $\Delta_{t+1}=n_{a,t+1}P_{a,t+1}-n_{a,t}P_{a,t}$
 \end_inset
 
- (i.e.
- 
-\begin_inset Formula $P_{a,t}$
-\end_inset
-
-)
+.
+ It is evident that former is less affected by the measurement error than
+ the latter
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-One way to circumvent this is to classify all durable goods into cheap,
- middle-range and expensive categories based on cost quantiles in the period
- 
-\begin_inset Formula $t$
+Due to the sparsity of the survey, the data on asset-ownership may not be
+ available at the district-level - i.e.
+ no consumers may have the price for a certain good in a particular region
+ in both the yeas.
+ Such problems are remedied with the consideration of 
+\begin_inset Formula $A$
 \end_inset
 
- and then determine the category of the durable good purchased in 
+-bands.
+ The problem is also avoided if we use the price 
+\begin_inset Formula $P_{t+1}$
+\end_inset
+
+of the item in year 
 \begin_inset Formula $t+1$
 \end_inset
 
- based on its price in 
-\begin_inset Formula $t+1$
+ or consider only new purchases for 
+\begin_inset Formula $\Delta_{t+1}$
 \end_inset
 
-.
- The price at time 
-\begin_inset Formula $t$
-\end_inset
-
- would then by the price of matching category (expensive, middle-range or
- cheap) at time 
-\begin_inset Formula $t$
-\end_inset
-
-.
- Since, we may as well use the price at 
-\begin_inset Formula $t+1$
-\end_inset
-
-, this indirect methods is rendered unnecessary.
-\end_layout
-
-\end_inset
-
-.
- As we're interested in the price for the new purchases (i.e.
+(i.e.
  cases such that 
 \begin_inset Formula $n_{a,t}=0$
 \end_inset
@@ -7143,41 +7158,13 @@ One way to circumvent this is to classify all durable goods into cheap,
 \begin_inset Formula $n_{a,t+1}>0$
 \end_inset
 
-), the prices at 
-\begin_inset Formula $t+1$
-\end_inset
-
- (i.e.
- 
-\begin_inset Formula $P_{a,t+1}$
-\end_inset
-
-) do not suffer with this issue.
- The expenditure on new durable goods calculated is thus 
-\begin_inset Formula $P_{a,t+1}$
-\end_inset
-
-
-\begin_inset Formula $\Delta n_{a,t+1}=P_{a,t+1}(n_{a,t+1}-n_{a,t})$
-\end_inset
-
- a quantity that considers an mtm change less affected by the measurement
- error in the estimate provided by the household member interviewee.
+).
  
 \end_layout
 
-\begin_layout Standard
-To add to the robustness checks for the results we discuss in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Conclusion"
-plural "false"
-caps "false"
-noprefix "false"
-
 \end_inset
 
-, we also plan to use the durable goods -data within a pseudo-panel approach.
+.
 \end_layout
 
 \begin_layout Standard
