@@ -8,7 +8,7 @@
 eststo clear
 
 eststo, title (asset purchases): quietly tobit dAt lt1 c.At##c.age, ll(18200) 
-eststo, title (quality consumption): quietly reg nut1 c.lt1 c.At##c.age 
+eststo, title (quality consumption): quietly reg nut1 c.lt1 c.At##c.age
 
 esttab using c:/temp/respdf.tex, mtitle no p numbers star nogaps compress title(Tobit results with asset changes \$\Delta A_t \$ as dependent variable \label{tabdAt})
 ** esttab using c:/temp/dAt.tex, mtitle no p numbers star nogaps compress title(Tobit results with asset changes \$\Delta A_t \$ as dependent variable \label{tabdAt})
@@ -20,3 +20,4 @@ esttab using c:/temp/respdf.tex, mtitle no p numbers star nogaps compress title(
 ** the effect of c.lt1##c.age is weaker (even At##age is weak)
 reg nut1 c.lt1 c.At##c.age 
 
+** for budget ratio we can use e$df2012 and pares$df

@@ -1600,7 +1600,6 @@ lsms_normalizer<-function() {
   }
   
   
-  
   add_categories_price_structured_based <- function(x)  {
     
     x<-rbind(x,data.frame(category='nonfresh', group='quality', shortname='cooking_oil'))
