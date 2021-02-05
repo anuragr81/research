@@ -961,6 +961,10 @@ get_stata_income_re_results <- function(){
 
 estimation_df_budget_quantile<- function(ll, pares,e)
 {
+  if (missing(pares)){
+    pares <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
+  }
+  
   #needs don't include housing fee (transport fee must also be removed)
   needs2012 <- plyr::rename(subset(e$df,year==2012), c("hhid"="hhid2012"))
   psiA2012 <- merge(pares$df,needs2012,all.y=TRUE)
@@ -975,6 +979,9 @@ estimation_df_budget_quantile<- function(ll, pares,e)
   #  3. What about marriage and funeral? Do we ignore them? They should be seen as liability - but they are not asset costs.
   #  4. We don't know the basic needs - there is no point in even having that argument - is bicycle repair addressing a basic need (depends on the job that person has). We
   #     don't know what needs mean at personal levels - we can say in general the bicycle repairs must be a need for those who have a bicycle. A few questions we consider
+  #     If people spend a lot more on food let's say in a particular region then they would stand
+  #     out the idea is to understand quality except the burden of assets.
+  
   #     4.1. Do liability costs increase with the relevant asset (s)?	(this can't be false for something that's in Psi)
   #     4.2. Is consumption necessary given the asset level where one is? (if it is necessary purely due to inertia reasons then it cannot be a part of Psi) - it must be
   #          clarified (as the write-up doesn't) that who considers something "necessary". We're saying on one hand that all necessities must go in Psi but at 
@@ -989,22 +996,28 @@ estimation_df_budget_quantile<- function(ll, pares,e)
   #     we subtract the food basket cost as part of needs. There is no other way other than to impose a calorific value or weight(which is not appropriate).
   #     5.1. For Food, this is the recq we already had
   #     5.2. For energy, if somebody spent a certain amount on electricity - we consider that Psi (so no problem arises). We don't use the assume_assets - because the bills are already included.
-
+  #  6. region-wide is as accurate since the weights for smaller regions is less
   #  
-  
-
-  
   #
-  # if people spend a lot more on food let's say in a particular region then they would stand
-  # out the idea is to understand quality except the burden of assets.
   
   #total consumption
-  hs2012 <- unique(merge(unique(o2012[,c("hhid","region","district","isrural")]), ll@get_hsize(o2012), by = c("hhid")))
-  psiAregion2012 <- merge(plyr::rename(hs2012,c("hhid"="hhid2012")),psiA2012,by=c("hhid2012"))
-  ct2012 <- plyr::rename(ddply(subset(c2012,!is.na(cost))[,c("hhid","cost")],.(hhid),summarise,ct=sum(cost)),c("hhid"="hhid2012"))
+  ohs2012 <- subset(o2012,!is.na(region))
+  hs2012 <- unique(merge(unique(ohs2012[,c("hhid","region","district","isrural")]), ll@get_hsize(ohs2012), by = c("hhid")))
+  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) )
+  hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
+  psiAregion2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),psiA2012,by=c("hhid2012"))
+  ct2012<- plyr::rename(ll@get_total_expenditures(hh = c2012, ohs = ohs2012), c("hhid"="hhid2012","total_expenditure"="ct"))
+  #ct2012 <- plyr::rename(ddply(subset(c2012,!is.na(cost))[,c("hhid","cost")],.(hhid),summarise,ct=sum(cost)),c("hhid"="hhid2012"))
   psiAregionct2012 <- (merge(psiAregion2012,ct2012,by=c("hhid2012")))
-  # region-wide is as accurate since the weights for smaller regions is less
-  View(ddply(psiAregionct2012 ,.(region,isrural),summarise,nc=mean(needs_cost), ct=mean(ct)) %>% mutate ( nut = ct - nc))
+  
+  # setting lnA0
+  assetslog2012 <- ddply(pares$a0,.(hhid2012),summarise,lnA0=log(sum(number.2012*mtm.2012)))
+  psiAregionctA02012 <- merge(psiAregionct2012,assetslog2012,all.x = T)
+  if (nrow(subset(psiAregionctA02012,is.na(lnA0)))>0){
+    psiAregionctA02012[is.na(psiAregionctA02012$lnA0),]$lnA0 <- 0
+  }
+  
+  View(ddply(psiAregionct2012 ,.(region,isrural),summarise,nc=mean(basic_needs_cost), ct=mean(ct)) %>% mutate ( nut = ct - nc))
   #View(ddply(psiAregionct2012 ,.(region.x,isrural),summarise,nc=mean(needs_cost), ct=mean(ct), fnc = mean(foodbasket_cost), hnc=mean(housing_cost) , pnc = mean(pubtrans.cost), enc = mean(energybasket_cost) ) %>% mutate ( nut = ct - nc , nutf = ct - fnc))
   pares$df
   print("DONE")
@@ -1087,7 +1100,7 @@ minimum_needs_wo_usage <- function(ll, c2010, c2012, c2014, o2010, o2012, o2014,
   hhpm2014       <- ll@add_market_price_to_misc_diary (curyear = 2014, dirprefix ="../", fu=fu, ln=lsms_normalizer, groups = energy_groups, lgc=lgc,
                                                        ld = ld, marketpricesdata=mktprices2014,ohsdata=o2014,ddata=miscdiarydata2014)
   if (setequal(unique(paste(subset(hhpm2014, shortname=="kerosene")$region,subset(hhpm2014, shortname=="kerosene")$district)), unique(paste(hhpm2014$region,hhpm2014$district)))==FALSE){
-    print("Kerosene not available in all regions")
+    stop("Kerosene not available in all regions")
     #median(subset(mktprices2014, shortname=="kerosene")$median_price)
   }
   
@@ -1111,6 +1124,7 @@ minimum_needs_wo_usage <- function(ll, c2010, c2012, c2014, o2010, o2012, o2014,
   res[["df2010"]]  <- needs2010
   res[["df2012"]]  <- needs2012
   res[["df2014"]]  <- needs2014
+  return(res)
 }
 
 
@@ -1379,6 +1393,8 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   res = list()
   res[["dat0"]] <- a2012src
   res[["dat1"]] <- a2014src
+  res[["a0"]] <- a0
+  res[["a1"]] <- a1
   res[["d"]] <- d
   res[["x"]] <- x
   res[["s"]] <- dats
