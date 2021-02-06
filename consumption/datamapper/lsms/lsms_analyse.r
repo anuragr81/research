@@ -961,6 +961,11 @@ get_stata_income_re_results <- function(){
 
 estimation_df_budget_quantile<- function(ll, pares,e)
 {
+  
+  if (missing(e)){
+    e <- minimum_needs_wo_usage(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+  }
+  
   if (missing(pares)){
     pares <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
   }
@@ -1010,17 +1015,31 @@ estimation_df_budget_quantile<- function(ll, pares,e)
   #ct2012 <- plyr::rename(ddply(subset(c2012,!is.na(cost))[,c("hhid","cost")],.(hhid),summarise,ct=sum(cost)),c("hhid"="hhid2012"))
   psiAregionct2012 <- (merge(psiAregion2012,ct2012,by=c("hhid2012")))
   
+ 
+  # use to infer Psi and categories_non_basic_wassets
+  psi_groups <- subset(lsms_normalizer()@categories_non_basic_wassets(),group=="asset_costs")
+  psi_data    <- plyr::rename(ddply(merge(c2012,psi_groups,by=c("shortname"))[c("hhid","shortname","cost")],.(hhid),summarise,Psi=sum(cost)), c("hhid"="hhid2012"))
+  psiAregionctPsiExcess2012 <- merge(psiAregionct2012,psi_data)
+  cA2012 <- ddply(plyr::rename(merge(c2012,subset(lsms_normalizer()@categories_non_basic_wassets(),group=="assets"))[,c("hhid","shortname","cost")],c("hhid"="hhid2012","cost"="cA")) , .(hhid2012),summarise,cA=sum(cA))
+  psiAregionctPsi2012 <- merge(psiAregionctPsiExcess2012,cA2012)
+  
+  psiAregionctPsi2012$dA <- with(psiAregionctPsi2012, cA+ netmtm.fdelta)
+  #View(ddply(psiAregionctPsi2012 ,.(region,isrural),summarise,nc=mean(basic_needs_cost), ct=mean(ct), Psi=mean(Psi)) %>% mutate ( nut = ct - nc - Psi))
+  
+  psiAregionctPsi2012$w_A <- with(psiAregionctPsi2012,(dA)/(ct-basic_needs_cost-Psi+dA))
+  psiAregionctPsi2012$w_nu <- with(psiAregionctPsi2012,(ct-basic_needs_cost-Psi)/(ct-basic_needs_cost-Psi+dA))
+  
   # setting lnA0
   assetslog2012 <- ddply(pares$a0,.(hhid2012),summarise,lnA0=log(sum(number.2012*mtm.2012)))
-  psiAregionctA02012 <- merge(psiAregionct2012,assetslog2012,all.x = T)
-  if (nrow(subset(psiAregionctA02012,is.na(lnA0)))>0){
-    psiAregionctA02012[is.na(psiAregionctA02012$lnA0),]$lnA0 <- 0
+  psiAregionctPsiA02012 <- merge(psiAregionctPsi2012,assetslog2012,all.x = T)
+  if (nrow(subset(psiAregionctPsiA02012,is.na(lnA0)))>0){
+    psiAregionctPsiA02012[is.na(psiAregionctPsiA02012$lnA0),]$lnA0 <- 0
   }
   
-  View(ddply(psiAregionct2012 ,.(region,isrural),summarise,nc=mean(basic_needs_cost), ct=mean(ct)) %>% mutate ( nut = ct - nc))
-  #View(ddply(psiAregionct2012 ,.(region.x,isrural),summarise,nc=mean(needs_cost), ct=mean(ct), fnc = mean(foodbasket_cost), hnc=mean(housing_cost) , pnc = mean(pubtrans.cost), enc = mean(energybasket_cost) ) %>% mutate ( nut = ct - nc , nutf = ct - fnc))
-  pares$df
+  print(paste("Ignoring ",nrow(subset(psiAregionctPsiA02012,w_nu<0 | w_A<0)),"rows"))
+  psiAregionctPsiA02012 <- subset(psiAregionctPsiA02012,w_nu>=0 & w_A>=0)
   print("DONE")
+  return(psiAregionctPsiA02012)
 }
 
 #e <- minimum_needs_wo_usage(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
