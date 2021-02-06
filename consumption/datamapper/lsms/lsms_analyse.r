@@ -1245,6 +1245,31 @@ get_asset_group <- function(){
   r=rbind(r,data.frame(shortname='videoplayer' , asset_group='electronics'))
   r=rbind(r,data.frame(shortname='livestock' , asset_group='agricultural'))
   
+  
+  r=rbind(r,data.frame(shortname='mosquitonet',asset_group='furniture'))
+  r=rbind(r,data.frame(shortname='stove_other',asset_group='electric'))
+  r=rbind(r,data.frame(shortname='poultry',asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='watch',asset_group='electronics'))
+  r=rbind(r,data.frame(shortname='chair',asset_group='furniture'))
+  r=rbind(r,data.frame(shortname='iron',asset_group='electric'))
+  r=rbind(r,data.frame(shortname='table',asset_group='furniture'))
+  r=rbind(r,data.frame(shortname='coffeepulpingmachine',asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='waterheater',asset_group='electric'))
+  r=rbind(r,data.frame(shortname='ac_fan',asset_group='electric'))
+  r=rbind(r,data.frame(shortname='radio',asset_group='electronics'))
+  r=rbind(r,data.frame(shortname='landline',asset_group='electronics'))
+  r=rbind(r,data.frame(shortname='mobile',asset_group='electronics'))
+  r=rbind(r,data.frame(shortname='wheelbarrow',asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='spraymachine',asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='musicplayer',asset_group='electronics'))
+  r=rbind(r,data.frame(shortname='dishtv',asset_group='electronics'))
+  r=rbind(r,data.frame(shortname='engine_outboard',asset_group='electric'))
+  
+  
+  
+  #mapping:mosquitonet, stove_other, poultry, watch, chair, iron, table, coffeepulpingmachine, waterheater, ac_fan, radio, landline, mobile, wheelbarrow, spraymachine, musicplayer, dishtv, engine_outboard
+  
+  
   return(r)
 }
 
@@ -1276,7 +1301,7 @@ copyover_b <- function(a,b) {
   }
 }
 
-plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
+plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014,pivot_asset){
   #a01_mapping could be mapping_hhids_2012_2014(o2014) for example
   # ignoring waterpump, musicplayer, sports_hobby, camera, phone because of low frequencies
   # ignoring the following as they stay within +1/-1 and are susceptible to recall error : watch
@@ -1313,7 +1338,6 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014){
   
   # anything ge expensive than bed is an asset
   
-  pivot_asset             <- "bed"
   all_assets              <- setdiff(subset(c0,median_cost>= c0[c0$shortname==pivot_asset,]$median_cost)$shortname,c()) #c("land","house")
   
   ag <- get_asset_group()
