@@ -921,7 +921,7 @@ init_data <- function(){
   i2014 <- read.csv('c:/temp/i2014.csv',stringsAsFactors = FALSE)
   e <- read.csv('c:/temp/e.csv',stringsAsFactors = FALSE)
   #e <- minimum_needs_cost_per_head(ll= ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
-  #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
+  #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014, pivot_asset="bed)
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
   #pres <- estimation_df(e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, c2010=c2010, c2012=c2012, c2014=c2014)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
@@ -963,17 +963,18 @@ estimation_df_budget_quantile<- function(ll, pares,e)
 {
   
   if (missing(e)){
-    e <- minimum_needs_wo_usage(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+    e <- minimum_household_needs_wo_usage(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
   
   if (missing(pares)){
-    pares <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
+    pares <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014, pivot_asset = "stove_other")
   }
   
   #needs don't include housing fee (transport fee must also be removed)
   needs2012 <- plyr::rename(subset(e$df,year==2012), c("hhid"="hhid2012"))
   psiA2012 <- merge(pares$df,needs2012,all.y=TRUE)
-  psiA2012[is.na(psiA2012$netmtm.fdelta),]$netmtm.fdelta <-0
+  psiA2012[is.na(psiA2012$netmtm_fdelta),]$netmtm_fdelta <-0
+  
   # 1. we can't rely on regions too much because the house-rents are missing in some regions
   # 2. We can treat all habits as quality (as they are indistinguishable)
   #    The cost of asset owners in every neighborhood can be substracted. Psi should be presented not 
@@ -1007,8 +1008,8 @@ estimation_df_budget_quantile<- function(ll, pares,e)
   
   #total consumption
   ohs2012 <- subset(o2012,!is.na(region))
-  hs2012 <- unique(merge(unique(ohs2012[,c("hhid","region","district","isrural")]), ll@get_hsize(ohs2012), by = c("hhid")))
-  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) )
+  hs2012 <- unique(merge(unique(ohs2012[,c("hhid","region","district","isrural","expensiveregion")]), ll@get_hsize(ohs2012), by = c("hhid")))
+  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , max_age = max(age))
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   psiAregion2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),psiA2012,by=c("hhid2012"))
   ct2012<- plyr::rename(ll@get_total_expenditures(hh = c2012, ohs = ohs2012), c("hhid"="hhid2012","total_expenditure"="ct"))
@@ -1023,11 +1024,12 @@ estimation_df_budget_quantile<- function(ll, pares,e)
   cA2012 <- ddply(plyr::rename(merge(c2012,subset(lsms_normalizer()@categories_non_basic_wassets(),group=="assets"))[,c("hhid","shortname","cost")],c("hhid"="hhid2012","cost"="cA")) , .(hhid2012),summarise,cA=sum(cA))
   psiAregionctPsi2012 <- merge(psiAregionctPsiExcess2012,cA2012)
   
-  psiAregionctPsi2012$dA <- with(psiAregionctPsi2012, cA+ netmtm.fdelta)
+  psiAregionctPsi2012$dA <- with(psiAregionctPsi2012, cA+ netmtm_fdelta)
   #View(ddply(psiAregionctPsi2012 ,.(region,isrural),summarise,nc=mean(basic_needs_cost), ct=mean(ct), Psi=mean(Psi)) %>% mutate ( nut = ct - nc - Psi))
   
   psiAregionctPsi2012$w_A <- with(psiAregionctPsi2012,(dA)/(ct-basic_needs_cost-Psi+dA))
   psiAregionctPsi2012$w_nu <- with(psiAregionctPsi2012,(ct-basic_needs_cost-Psi)/(ct-basic_needs_cost-Psi+dA))
+  
   
   # setting lnA0
   assetslog2012 <- ddply(pares$a0,.(hhid2012),summarise,lnA0=log(sum(number.2012*mtm.2012)))
@@ -1037,13 +1039,64 @@ estimation_df_budget_quantile<- function(ll, pares,e)
   }
   
   print(paste("Ignoring ",nrow(subset(psiAregionctPsiA02012,w_nu<0 | w_A<0)),"rows"))
+  
+  psiAregionctPsiA02012$logx <- sapply(psiAregionctPsiA02012$ct-psiAregionctPsiA02012$basic_needs_cost-psiAregionctPsiA02012$Psi+psiAregionctPsiA02012$dA, function(x) { if(x<0) { -log(-x) } else {log(x)} } )
+  
   psiAregionctPsiA02012 <- subset(psiAregionctPsiA02012,w_nu>=0 & w_A>=0)
+  A_bands <- c(.3,.65,1)
+  A_band_boundaries <- quantile(psiAregionctPsiA02012$lnA0,A_bands)
+  psiAregionctPsiA02012$A_band <- sapply(psiAregionctPsiA02012$lnA0,function(x) { get_band(c(-Inf,A_band_boundaries[1],A_band_boundaries[2]),c(A_band_boundaries[1],A_band_boundaries[2],A_band_boundaries[3]),x) })
+  
+  psiAregionctPsiA02012$group <- paste0("A",psiAregionctPsiA02012$A_band,"E",psiAregionctPsiA02012$expensiveregion,"R",psiAregionctPsiA02012$isrural)
+  psiAregionctPsiA02012$group_code <- with(psiAregionctPsiA02012,100*A_band+ 10*expensiveregion + isrural)
   print("DONE")
   return(psiAregionctPsiA02012)
 }
 
-#e <- minimum_needs_wo_usage(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
-minimum_needs_wo_usage <- function(ll, c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014, housing_fee){
+
+get_ABand_code_mapping <-function() {
+  x <- data.frame()
+  x <- rbind(x,data.frame(group='A1E0R0',group_code=100))
+  x <- rbind(x,data.frame(group='A1E0R1',group_code=101))
+  x <- rbind(x,data.frame(group='A1E1R0',group_code=110))
+  x <- rbind(x,data.frame(group='A1E1R1',group_code=111))
+  
+  x <- rbind(x,data.frame(group='A2E0R0',group_code=200))
+  x <- rbind(x,data.frame(group='A2E0R1',group_code=201))
+  x <- rbind(x,data.frame(group='A2E1R0',group_code=210))
+  x <- rbind(x,data.frame(group='A2E1R1',group_code=211))
+  
+  x <- rbind(x,data.frame(group='A3E0R0',group_code=300))
+  x <- rbind(x,data.frame(group='A3E0R1',group_code=301))
+  x <- rbind(x,data.frame(group='A3E1R0',group_code=310))
+  x <- rbind(x,data.frame(group='A3E1R1',group_code=311))
+  return(x)
+}
+
+get_band <-function (band_left_limits, band_right_limits,x) {
+  if (length(band_left_limits)!=length(band_right_limits)){
+    stop("band_right_limits must be of the same size as band_left_limits")
+  }
+  for (i in seq(length(band_left_limits))){
+    left_limit = band_left_limits[i]
+    right_limit = band_right_limits[i]
+    if (x<=right_limit && x > left_limit){
+      return (i)
+    }
+    
+  }
+  if (x==-Inf){
+    return(1)
+  } 
+  if (x==Inf){
+    return(length(band_right_limits))
+  }
+  
+  stop(paste0("Not found:",i))
+}
+
+#e <- minimum_household_needs_wo_usage(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+minimum_household_needs_wo_usage <- function(ll, c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014, housing_fee){
   # 
   DAYS_IN_YEAR<- 365
   MONTHS_IN_YEAR <- 12
@@ -1066,23 +1119,30 @@ minimum_needs_wo_usage <- function(ll, c2010, c2012, c2014, o2010, o2012, o2014,
   hhp2010 <- merge(lsms_normalizer()@categories_needs_based(),hhp2010)
   regionfoodprice2010 <- hhp2010 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
   basket_constituent_costs2010 <- ddply( unique(regionfoodprice2010[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price*DAYS_IN_YEAR) , .(region,district,category), rec_cost = sum(rec_cost))
-  basket_costs2010 <- ddply(basket_constituent_costs2010, .(region,district), summarise, basket_cost = sum(rec_cost)) 
-  #regionfoodbasketcosts2010 <- subset(ddply(basket_costs2010,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
-  #barplot(regionfoodbasketcosts2010$basket_cost,names.arg = regionfoodbasketcosts2010$region, las=2 , xlab= "region" , ylab="cost of food basket" , main="Basket costs across regions (2010)")
+  basket_costs2010 <- ddply(basket_constituent_costs2010, .(region,district), summarise, basket_cost = sum(rec_cost))
+  
+  hsize2010              <- unique(merge(o2010[,c("hhid","region","district")], ll@get_hsize(o2010), by = c("hhid")))
+  foodbasket_costs2010 <- merge(hsize2010,basket_costs2010, by = c("region","district")) %>% mutate(familybasket_cost = consu*basket_cost) 
+  
   
   hhp2012 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2012,ohsdata=o2012,ddata=fooddiarydata2012)
   hhp2012 <- merge(lsms_normalizer()@categories_needs_based(),hhp2012)
   regionfoodprice2012 <- hhp2012 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
   basket_constituent_costs2012 <- ddply( unique(regionfoodprice2012[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price*DAYS_IN_YEAR) , .(region,district,category), rec_cost = sum(rec_cost))
   basket_costs2012 <- ddply(basket_constituent_costs2012, .(region,district), summarise, basket_cost = sum(rec_cost)) 
-  #regionfoodbasketcosts2012 <- subset(ddply(basket_costs2012,.(region),summarise,basket_cost = min(basket_cost)),!is.na(region))
+  
+  hsize2012              <- unique(merge(o2012[,c("hhid","region","district")], ll@get_hsize(o2012), by = c("hhid")))
+  foodbasket_costs2012 <- merge(hsize2012,basket_costs2012, by = c("region","district")) %>% mutate(familybasket_cost = consu*basket_cost) 
   
   hhp2014 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2014,ohsdata=o2014,ddata=fooddiarydata2014)
   hhp2014 <- merge(lsms_normalizer()@categories_needs_based(),hhp2014)
   
   regionfoodprice2014 <- hhp2014 [ ,c("shortname","category","region","district","price","recq" )] %>% group_by(region,district,category) %>% filter(price==min(price))
   basket_constituent_costs2014 <- ddply( unique(regionfoodprice2014[,c("region","district","category","recq","price")]) %>% mutate( rec_cost = recq*price*DAYS_IN_YEAR) , .(region,district,category), rec_cost = sum(rec_cost))
-  basket_costs2014 <- ddply(basket_constituent_costs2014, .(region,district), summarise, basket_cost = sum(rec_cost)) 
+  basket_costs2014 <- ddply(basket_constituent_costs2014, .(region,district), summarise, basket_cost = sum(rec_cost))
+  
+  hsize2014              <- unique(merge(o2014[,c("hhid","region","district")], ll@get_hsize(o2014), by = c("hhid")))
+  foodbasket_costs2014 <- merge(hsize2014,basket_costs2014, by = c("region","district")) %>% mutate(familybasket_cost = consu*basket_cost) 
   
   ############# ENERGY ##############
   #energy - load cheapest energy prices (electricity prices are not available locally - so just take minimum of kerosene and charcoal)
@@ -1127,9 +1187,9 @@ minimum_needs_wo_usage <- function(ll, c2010, c2012, c2014, o2010, o2012, o2014,
   
   
   ### BASIC NEEDS 
-  needs2010 <- (merge( (energy_prices2010 [,c("region","district","hhid","price","recqs")]) %>% mutate( energy_cost = recqs*price) ,basket_costs2010 ) %>% mutate(basic_needs_cost=energy_cost+basket_cost))
-  needs2012 <- (merge( (energy_prices2012 [,c("region","district","hhid","price","recqs")]) %>% mutate( energy_cost = recqs*price) ,basket_costs2012 ) %>% mutate(basic_needs_cost=energy_cost+basket_cost))
-  needs2014 <- (merge( (energy_prices2014 [,c("region","district","hhid","price","recqs")]) %>% mutate( energy_cost = recqs*price) ,basket_costs2014 ) %>% mutate(basic_needs_cost=energy_cost+basket_cost))
+  needs2010 <- (merge( (energy_prices2010 [,c("region","district","hhid","price","recqs")]) %>% mutate( energy_cost = recqs*price) ,foodbasket_costs2010, by = c("hhid","region","district") ) %>% mutate(basic_needs_cost=energy_cost+familybasket_cost))
+  needs2012 <- (merge( (energy_prices2012 [,c("region","district","hhid","price","recqs")]) %>% mutate( energy_cost = recqs*price) ,foodbasket_costs2012, by = c("hhid","region","district") ) %>% mutate(basic_needs_cost=energy_cost+familybasket_cost))
+  needs2014 <- (merge( (energy_prices2014 [,c("region","district","hhid","price","recqs")]) %>% mutate( energy_cost = recqs*price) ,foodbasket_costs2014, by = c("hhid","region","district") ) %>% mutate(basic_needs_cost=energy_cost+familybasket_cost))
   
   
   select_cols      <- c("hhid","basic_needs_cost")
@@ -1152,7 +1212,7 @@ estimation_df <-function( ll, pares, e, a2010, a2012, a2014, o2010, o2012, o2014
     e <- minimum_needs_cost_per_head(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
   if (missing(pares)){
-    pares <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014)
+    pares <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014,pivot_asset="bed")
   }
   #if (missing(pseudop)){
   #  pseudop <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, 
@@ -1163,13 +1223,13 @@ estimation_df <-function( ll, pares, e, a2010, a2012, a2014, o2010, o2012, o2014
   adiff2014                                  <- pares[["df"]]
   asum2012                                   <- ddply(subset(plyr::rename(pares[["dat0"]][,c("hhid","cost")],c("hhid"="hhid2012","cost"="cost.2012")), !is.na(cost.2012)),.(hhid2012),summarise,cost.2012=sum(cost.2012))
   df2012                                     <- merge(asum2012,adiff2014,by=c("hhid2012"),all.x=TRUE)
-  df2012[is.na(df2012$netmtm.fdelta),]$netmtm.fdelta <- 0
+  df2012[is.na(df2012$netmtm_fdelta),]$netmtm_fdelta <- 0
   
   needscost2014      <- merge(plyr::rename(subset(e,year==2014),c("hhid"="hhid2014","needs_cost"="needs_cost_2014")), mapping_hhids_2012_2014(o2014 = o2014), by = c("hhid2014"))
   dfe2012            <- merge( df2012, needscost2014, by = c("hhid2012"))
   nonsplithhids2012  <- subset(ddply(dfe2012[,c("hhid2012","hhid2014")],.(hhid2012),summarise,n=length(unique(hhid2014))),n==1)$hhid2012
   dfe2012            <- subset(dfe2012,is.element(hhid2012,nonsplithhids2012))
-  dfe2012            <- plyr::rename (dfe2012,c("cost.2012"="At","netmtm.fdelta"="dAt","needs_cost_2014"="Psit1"))
+  dfe2012            <- plyr::rename (dfe2012,c("cost.2012"="At","netmtm_fdelta"="dAt","needs_cost_2014"="Psit1"))
   
   #use o2014 data as that corresponds to i_{t+1}
   #take max_education_rank and max_occupation_rank 
@@ -1408,7 +1468,7 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014,pivot_asse
   dats               <- dats %>% mutate(delta = (number.2014-number.2012) , netmtm.delta = (netmtm.2014-netmtm.2012))
   dats               <- (dplyr::filter( merge(dats,ddply(dats,.(asset_group),summarise,v=fu()@fv10(netmtm.delta)),all.x=TRUE) , abs(netmtm.delta) < v))
   dats$fdelta        <- ((dats$number.2012>0) & ((dats$delta)>0)) | (( (dats$number.2012==0)) & ((dats$delta)>0))
-  dats$netmtm.fdelta <- (dats$fdelta==FALSE)*0 + (dats$fdelta==TRUE)*dats$netmtm.delta
+  dats$netmtm_fdelta <- (dats$fdelta==FALSE)*0 + (dats$fdelta==TRUE)*dats$netmtm.delta
   
   d           <- subset(dat, is.element(shortname,all_assets))
   db          <- subset(d , number.2012 == 0 | number.2014 == 0 )
@@ -1428,7 +1488,7 @@ plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014,pivot_asse
   ku0         <- ddply (subset(a2012src, number>0 & !is.na(cost) & cost>0) , .(shortname), summarise, k = moments::kurtosis(cost), s = moments::skewness(cost))
   ku1         <- ddply (subset(a2014src, number>0 & !is.na(cost) & cost>0) , .(shortname), summarise, k = moments::kurtosis(cost), s = moments::skewness(cost))
   
-  datsres     <- ddply(dats, .(hhid2012), summarise, netmtm.fdelta = sum(netmtm.fdelta))
+  datsres     <- ddply(dats, .(hhid2012), summarise, netmtm_fdelta = sum(netmtm_fdelta))
   
   
   

@@ -11,7 +11,9 @@ def format_data (x):
 	raise RuntimeException("Unsupported Type to be formatted")
 
 def print_table(dfinput,idcolumnIndex, longtable, landscape,selected_columns=None,legend=True):
-
+	"""
+	everything would repeat if before endhead tag
+	"""
 	df = dfinput if selected_columns is None else dfinput[selected_columns]
 	
 	section = "longtable" if longtable else "tabular"
@@ -66,6 +68,11 @@ def print_table(dfinput,idcolumnIndex, longtable, landscape,selected_columns=Non
 	return start + end
 
 
+
+def has_invalidchars(colname):
+	if set(colname).intersection(set(['.','_'])):
+		raise ValueError("Invalid character in %s" % colname)
+
 if __name__ == "__main__":
 	#df = pd.DataFrame( {'A':[1,2],'B':["GBP","USD"]})
 	#selected_columns = ['idname','qfruitsveg', 'qVfruitsveg', 'qVprotein', 'qnonfresh',
@@ -73,10 +80,12 @@ if __name__ == "__main__":
 	# 'qtransport', 'qVnonfresh', 'qhousehold', 'qenergy', 'qprotein']
 	#selected_columns = ["idname","qbeef","qbeer","qbread","qbunscakes","qcassavaflour","qcassavafresh","qcharcoal","qcoconut","qcookingoil","qdriedcannedfish","qelectricity","qfishseafood","qfreshmilk","qgreens","qkerosene","qmangoes","qonion","qpeanuts","qpotatoes","qpulses","qricehusked","qsalt","qsugar","qsweetpotato"]  
 	df  = pd.read_csv(sys.argv[1],keep_default_na=False)
-	if "idname" not in df.columns:
-		print("Must have idname column")
-		sys.exit(1)
+
+	if any (has_invalidchars(colname) for colname in df.columns):
+		raise ValueError("")
+
 	selected_columns = df.columns
 
 	#print(df)
-	print(print_table(dfinput=df,idcolumnIndex=0,longtable=False,landscape=False,selected_columns=selected_columns))
+	#print(print_table(dfinput=df,idcolumnIndex=0,longtable=False,landscape=False,selected_columns=selected_columns))
+	print(print_table(dfinput=df,idcolumnIndex=0,longtable=True,landscape=False,selected_columns=selected_columns))

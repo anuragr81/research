@@ -21,7 +21,7 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "times" "Modern"
+\font_roman "times" "Palatino Linotype"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -38,7 +38,7 @@
 \output_sync 1
 \bibtex_command default
 \index_command default
-\paperfontsize 9
+\paperfontsize 10
 \spacing onehalf
 \use_hyperref false
 \papersize default
@@ -4643,11 +4643,11 @@ Assumption 4
 \begin_layout Standard
 
 \shape italic
-The needs level 
-\begin_inset Formula $\Psi$
+The price of quality 
+\begin_inset Formula $P_{\#nu}$
 \end_inset
 
- are observed at the level of groups demarcated by 
+is observed at the level of groups demarcated by 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -4655,50 +4655,35 @@ The needs level
 \end_layout
 
 \begin_layout Standard
-The empirical data on usage of the long-term goods e.g.
- electricity bills for the electrical equipment are subject to seasonality
- and measurement errors.
- As we cannot reliably estimate the maintenance-costs 
+If 
 \begin_inset Formula $\Psi$
 \end_inset
 
- associated with owned set of goods 
-\begin_inset Formula $A$
+ can be observed at the individual level, the consumer's expenditure on
+ quality is driven by the prices of needs observed.
+ In empirical data, the observed prices 
+\begin_inset Formula $P_{psi}$
 \end_inset
 
- at an individual consumer's level, we are limited to using 
-\begin_inset Formula $\Psi$
+ are observed at a sufficiently local level (i.e.
+ of 
+\begin_inset Formula $rho$
 \end_inset
 
- values at the level of the 
-\begin_inset Formula $\rho$
-\end_inset
-
--group under consideration.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\Psi$
-\end_inset
-
- being observed at the 
-\begin_inset Formula $\rho$
-\end_inset
-
--level implies necessarily that 
+) - implying necessarily that 
 \begin_inset Formula $P_{\nu}$
 \end_inset
 
- must also be observed at the 
+ too must also be observed at the same 
 \begin_inset Formula $\rho$
 \end_inset
 
- -level in the empirical analysis.
- This is because for every consumer (due to the definition of 
+ -level.
+ This is drive by the following relation (due to the definition of 
 \begin_inset Formula $\nu$
 \end_inset
 
-) we have 
+) :
 \end_layout
 
 \begin_layout Standard
@@ -4773,7 +4758,7 @@ relative
 \begin_inset Quotes erd
 \end_inset
 
- quality, 
+ quality 
 \begin_inset Formula $P_{\nu}$
 \end_inset
 
@@ -4781,7 +4766,7 @@ relative
 \begin_inset Formula $A$
 \end_inset
 
--band and only measures the price of consumption on quality conditioned
+-band, it only measures the price of consumption on quality conditioned
  on the durable goods 
 \begin_inset Formula $A$
 \end_inset
@@ -4796,8 +4781,8 @@ relative
 \begin_inset Formula $P_{\nu}\nu=\frac{c_{t}-\Psi-P_{\psi}\psi}{\psi}$
 \end_inset
 
- is an estimate of the consumption on quality in the group which the consumer
- belongs to.
+ is merely an estimate of the consumption on quality in the group which
+ the consumer belongs to.
  
 \end_layout
 
@@ -4961,6 +4946,20 @@ To illustrate this with an example, consider two consumers
  merely provides a way for us to standardise the competition with quality
  by allowing us to compare non-durable consumption from consumers having
  more durable goods with that from those who don't.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+hline
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7260,9 +7259,13 @@ status open
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 
 \backslash
-begin{table}[!htbp]
+begin{table} [!htbp]
 \backslash
 centering 
 \backslash
@@ -7280,107 +7283,149 @@ else
 \backslash
 fi} 
 \backslash
-caption{Tobit and OLS results with durable good changes $
+caption{Results of quantile regression with $w_{
 \backslash
-Delta A $ and $
+nu}$ as dependent variable 
 \backslash
-nu$ as dependent variables 
+label{tabwnu}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
-label{tabdAt}} 
-\backslash
-begin{tabular}{l*{2}{c}} 
+begin{tabular}{l*{4}{c}} 
 \backslash
 hline
 \backslash
-hline           &
+hline  & 
 \backslash
-multicolumn{1}{c}{(1)}&
+multicolumn{1}{c}{} & 
 \backslash
-multicolumn{1}{c}{(2)}
+multicolumn{1}{c}{(1)} & 
 \backslash
-
+multicolumn{1}{c}{(2)} & 
 \backslash
-           &
-\backslash
-multicolumn{1}{c}{durable good purchases}&
-\backslash
-multicolumn{1}{c}{quality consumption}
+multicolumn{1}{c}{(3)} 
 \backslash
 
 \backslash
- 
+ & 
 \backslash
-hline main      &                  &                  
+multicolumn{1}{c}{} & 
 \backslash
-
+multicolumn{1}{c}{q30} & 
 \backslash
- lt1       & -0.00817
+multicolumn{1}{c}{q60} & 
 \backslash
-sym{*}  &  0.00181
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.011)         &  (0.016)         
-\backslash
-
-\backslash
- At        &   -0.758         &    0.975         
-\backslash
-
-\backslash
-           &  (0.685)         &  (0.211)         
-\backslash
-
-\backslash
- age       &  82055.2         & -73734.2
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.213)         &  (0.022)         
-\backslash
-
-\backslash
- c.At 
-\backslash
-#c.age&  0.00778         &  -0.0215         
-\backslash
-
-\backslash
-           &  (0.815)         &  (0.138)         
+multicolumn{1}{c}{q90}
 \backslash
 
 \backslash
  
 \backslash
-_cons    &-7274367.6
-\backslash
-sym{*}  &2657440.7         
+hline
 \backslash
 
 \backslash
-           &  (0.018)         &  (0.069)         
+ & 1.A
+\backslash
+_band & 0.000    & 0.000    & 0.000   
 \backslash
 
 \backslash
- 
-\backslash
-hline sigma     &                  &                  
+ &  & (.)    & (.)    & (.)   
 \backslash
 
 \backslash
- 
+ & 2.A
 \backslash
-_cons    &11894144.3
-\backslash
-sym{***}&                  
+_band & 0.039*   & 0.022**  & 0.002   
 \backslash
 
 \backslash
-           &  (0.000)         &                  
+ &  & (0.02)    & (0.01)    & (0.00)   
+\backslash
+
+\backslash
+ & 3.A
+\backslash
+_band & 0.039    & 0.019*   & 0.002   
+\backslash
+
+\backslash
+ &  & (0.02)    & (0.01)    & (0.00)   
+\backslash
+
+\backslash
+ & logx & 0.041*** & 0.015*** & 0.002   
+\backslash
+
+\backslash
+ &  & (0.01)    & (0.00)    & (0.00)   
+\backslash
+
+\backslash
+ & 0.isrural & 0.000    & 0.000    & 0.000   
+\backslash
+
+\backslash
+ &  & (.)    & (.)    & (.)   
+\backslash
+
+\backslash
+ & 1.isrural & -0.016    & -0.009*   & -0.002   
+\backslash
+
+\backslash
+ &  & (0.01)    & (0.00)    & (0.00)   
+\backslash
+
+\backslash
+ & 0.occupationrank & 0.000    & 0.000    & 0.000   
+\backslash
+
+\backslash
+ &  & (.)    & (.)    & (.)   
+\backslash
+
+\backslash
+ & 1.occupationrank & -0.045*   & -0.010    & 0.003   
+\backslash
+
+\backslash
+ &  & (0.02)    & (0.01)    & (0.00)   
+\backslash
+
+\backslash
+ & 2.occupationrank & 0.024    & 0.023**  & 0.006** 
+\backslash
+
+\backslash
+ &  & (0.02)    & (0.01)    & (0.00)   
+\backslash
+
+\backslash
+ & 3.occupationrank & 0.003    & 0.013    & 0.005   
+\backslash
+
+\backslash
+ &  & (0.03)    & (0.01)    & (0.00)   
+\backslash
+
+\backslash
+ & 
+\backslash
+_cons & 0.266*   & 0.713*** & 0.951***
+\backslash
+
+\backslash
+ &  & (0.11)    & (0.06)    & (0.04)   
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 
 \backslash
@@ -7390,7 +7435,7 @@ hline
 \backslash
 (N
 \backslash
-)     &      240         &      240         
+)     &     1409         
 \backslash
 
 \backslash
@@ -7398,9 +7443,9 @@ hline
 \backslash
 hline
 \backslash
-hline 
+hline  
 \backslash
-multicolumn{3}{l}{
+multicolumn{2}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -7410,7 +7455,249 @@ textit{p}-values in parentheses}
 \backslash
  
 \backslash
-multicolumn{3}{l}{
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table} [!htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Results of quantile regression with $w_{A}$ as dependent variable
+ 
+\backslash
+label{tabwA}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular}{l*{4}{c}} 
+\backslash
+hline
+\backslash
+hline  & 
+\backslash
+multicolumn{1}{c}{} & 
+\backslash
+multicolumn{1}{c}{(1)} & 
+\backslash
+multicolumn{1}{c}{(2)} & 
+\backslash
+multicolumn{1}{c}{(3)} 
+\backslash
+
+\backslash
+ & 
+\backslash
+multicolumn{1}{c}{} & 
+\backslash
+multicolumn{1}{c}{q30} & 
+\backslash
+multicolumn{1}{c}{q60} & 
+\backslash
+multicolumn{1}{c}{q90}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ & 1.A
+\backslash
+_band & 0.000    & 0.000    & 0.000   
+\backslash
+
+\backslash
+ &  & (.)    & (.)    & (.)   
+\backslash
+
+\backslash
+ & 2.A
+\backslash
+_band & -0.012*   & -0.027*   & -0.067   
+\backslash
+
+\backslash
+ &  & (0.00)    & (0.01)    & (0.05)   
+\backslash
+
+\backslash
+ & 3.A
+\backslash
+_band & -0.008    & -0.019    & -0.027   
+\backslash
+
+\backslash
+ &  & (0.01)    & (0.01)    & (0.06)   
+\backslash
+
+\backslash
+ & logx & -0.010**  & -0.035*** & -0.047*  
+\backslash
+
+\backslash
+ &  & (0.00)    & (0.01)    & (0.02)   
+\backslash
+
+\backslash
+ & 0.isrural & 0.000    & 0.000    & 0.000   
+\backslash
+
+\backslash
+ &  & (.)    & (.)    & (.)   
+\backslash
+
+\backslash
+ & 1.isrural & 0.008*   & 0.005    & 0.025   
+\backslash
+
+\backslash
+ &  & (0.00)    & (0.01)    & (0.04)   
+\backslash
+
+\backslash
+ & 0.occupationrank & 0.000    & 0.000    & 0.000   
+\backslash
+
+\backslash
+ &  & (.)    & (.)    & (.)   
+\backslash
+
+\backslash
+ & 1.occupationrank & 0.009    & 0.022    & 0.045   
+\backslash
+
+\backslash
+ &  & (0.01)    & (0.02)    & (0.06)   
+\backslash
+
+\backslash
+ & 2.occupationrank & -0.017**  & -0.027*   & -0.146** 
+\backslash
+
+\backslash
+ &  & (0.01)    & (0.01)    & (0.05)   
+\backslash
+
+\backslash
+ & 3.occupationrank & -0.014    & -0.012    & 0.020   
+\backslash
+
+\backslash
+ &  & (0.01)    & (0.02)    & (0.09)   
+\backslash
+
+\backslash
+ & 
+\backslash
+_cons & 0.185*** & 0.614*** & 1.070***
+\backslash
+
+\backslash
+ &  & (0.05)    & (0.12)    & (0.30)  
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     1409        
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{2}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -7437,8 +7724,17 @@ sym{***}
  
 \backslash
 end{tabular} 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
-end{table} 
+end{table}
 \end_layout
 
 \end_inset
@@ -7447,26 +7743,46 @@ end{table}
 \end_layout
 
 \begin_layout Standard
-We provide results of the regression of budget ratios 
-\begin_inset Formula $w_{\nu},w_{\Delta A}$
+The results of the regression of budget ratios 
+\begin_inset Formula $w_{\nu}$
 \end_inset
 
- against the logarithm of prices of quality 
-\begin_inset Formula $log(P_{\nu})$
+ and 
+\begin_inset Formula $w_{A}$
 \end_inset
 
-, that of total expenditure 
-\begin_inset Formula $log(J_{t})$
+ against the logarithm of of disposable income 
+\begin_inset Formula $log(c_{t}-\Psi_{t}-P_{\psi}\psi+\Delta_{t}$
 \end_inset
 
- and that of price of needs 
-\begin_inset Formula $log(P_{\psi})$
+) (variable 
+\family typewriter
+logx
+\family default
+) are presented in the Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabwnu}
+\end_layout
+
 \end_inset
 
-.
- The price of quality and needs are estimated at the district level and
- the total expenditure is calculated at the same level as needs 
-\begin_inset Formula $\Psi_{t}$
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabwA}
+\end_layout
+
 \end_inset
 
 .
@@ -7474,10 +7790,10 @@ We provide results of the regression of budget ratios
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{gather*}
-w_{\nu}=\frac{\nu_{t}\psi_{t}P_{\nu,t}}{\nu_{t}\psi_{t}P_{\nu,t}+\Delta A_{t}}=\frac{c_{t}-\Psi_{t}-P_{\psi}\psi}{c_{t}-\Psi_{t}-P_{\psi}\psi+\Delta A_{t}}\\
-w_{\Delta A}=\frac{\Delta A_{t}}{\nu_{t}\psi_{t}P_{\nu,t}+\Delta A_{t}}=\frac{\Delta A_{t}}{c_{t}-\Psi_{t}-P_{\psi}\psi+\Delta A_{t}}
-\end{gather*}
+\begin{gather}
+w_{\nu}=\frac{\nu_{t}\psi_{t}P_{\nu,t}}{\nu_{t}\psi_{t}P_{\nu,t}+\Delta A_{t}}=\frac{c_{t}-\Psi_{t}-P_{\psi}\psi}{c_{t}-\Psi_{t}-P_{\psi}\psi+\Delta A_{t}}\label{eq:BudgetMeasure_nu}\\
+w_{\Delta A}=\frac{\Delta A_{t}}{\nu_{t}\psi_{t}P_{\nu,t}+\Delta A_{t}}=\frac{\Delta A_{t}}{c_{t}-\Psi_{t}-P_{\psi}\psi+\Delta A_{t}}\label{eq:BudgetMeasure_A}
+\end{gather}
 
 \end_inset
 
@@ -7485,192 +7801,48 @@ w_{\Delta A}=\frac{\Delta A_{t}}{\nu_{t}\psi_{t}P_{\nu,t}+\Delta A_{t}}=\frac{\D
 \end_layout
 
 \begin_layout Standard
-Before we discuss these results, notice that the claim 2 can be evaluated
- in the data in the two different periods 2010-2012 and 2012-2014.
- The subsistence (
-\begin_inset Formula $P_{\psi,t}\psi_{t}$
+The control variable 
+\family typewriter
+A_Band 
+\family default
+is determined based on the quantile (30th, 60th or 90th) of wealth 
+\begin_inset Formula $ln(A_{t})$
 \end_inset
 
-) is different in these years and it can also vary across the population
- e.g.
- in urban and rural areas.
- The Claim 2 says that when subsistence level costs increases but needs
- stay the same the status consumption should decline (i.e.
- no higher quality and no more durable goods).
- On the other hand, when subsistence becomes cheaper the status consumption
- should increase (more durable goods and/or higher quality).
- This should also be seen in the cross-section (a claim that Claim 2 does
- not encompass but the model also implies is that when the needs themselves
- increase as consumers move to urban areas or acquire more durable goods,
+ a consumer is in.
  
-\begin_inset Formula $P_{nu}nu$
-\end_inset
-
- would also reduce).
- The subsistence level costs amount to 
-\begin_inset Formula $P_{\psi,t}\psi_{t}$
-\end_inset
-
- (where 
-\begin_inset Formula $\psi_{t}$
-\end_inset
-
- is a function of the age of the individual and is calculated at the local
- level 
-\series bold
-DISTRICT/REGION/URBAN?
-\series default
- - region and urban could be the same).
- The status consumption is a combination of 
-\begin_inset Formula $\Delta A_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{t}=\frac{c_{t}-\Psi_{t}}{\psi_{t}}$
-\end_inset
-
- - which are to be calculated at the local level as well.
- 
-\bar under
-region X {urban,rural} seems the right way.
- The needs 
-\begin_inset Formula $\psi$
-\end_inset
-
- are also aggregated at the needs cost level - we're interested in the how
- an urban consumer responds to high needs vs rural consumer to same needs.
- This is a cross section concern which can be visited first.
+\family typewriter
+is_rural 
+\family default
+is a discrete variable indicating whether the consumer's residence in a
+ rural area or not (as recorded in the survey).
+ The 
+\family typewriter
+occupation_rank
+\family default
+ of the household is determined by classifying the list of occupations derived
+ from income data and choosing the highest rank amongst the members of the
+ household.
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-Considering the cross-sectional concern
-\bar default
-, Claim 2 would be true the combination of 
-\begin_inset Formula $\Delta A$
+As discussed earlier, the subsistence is a level of consumption defined
+ by cost of the minimum basket 
+\begin_inset Formula $P_{\psi}\psi$
 \end_inset
 
- and 
-\begin_inset Formula $\nu$
-\end_inset
-
- increases when 
-\begin_inset Formula $P_{\psi}$
-\end_inset
-
- increases for the population.
- The elasticity of 
-\begin_inset Formula $w_{\nu}$
-\end_inset
-
- and 
-\begin_inset Formula $w_{\Delta A}$
-\end_inset
-
- with respect to price 
-\begin_inset Formula $P_{\psi}$
-\end_inset
-
- is one way to do it but since we assume that 
-\begin_inset Formula $\psi$
-\end_inset
-
- is predetermined for the consumer, the derivatives we cannot set
-\begin_inset Formula $w_{\psi}\equiv\frac{\partial c(u,\textbf{p})}{\partial P_{\psi}}$
-\end_inset
-
- and 
-\begin_inset Formula $w_{\psi}$
-\end_inset
-
- against 
-\begin_inset Formula $log(\textbf{p})$
-\end_inset
-
- and 
-\begin_inset Formula $log(J)$
-\end_inset
-
-.
- This is because 
-\begin_inset Formula $\psi$
-\end_inset
-
- is pre-determined and the interpretation for 
-\begin_inset Formula $\frac{\partial log(c(u,\textbf{p})}{\partial P_{\psi}}$
-\end_inset
-
- must be arrived at through 
-\begin_inset Formula $\frac{\partial log(c(u,\textbf{p}))}{\partial J}$
-\end_inset
-
-.
- 
-\begin_inset Formula $P_{\psi}$
-\end_inset
-
- is not needed in the RHS of the equation because it is already in the 
-\begin_inset Formula $J=x-\Psi$
-\end_inset
-
-.
- We can indeed use 
-\begin_inset Formula $\frac{\partial w_{\nu}}{\partial P_{\psi}}=\frac{\frac{\partial w_{\nu}}{\partial P_{\nu}}}{\frac{\partial P_{\psi}}{\partial P_{\nu}}}$
-\end_inset
-
- and 
-\begin_inset Formula $\frac{\partial w_{\Delta}}{\partial P_{\psi}}=\frac{\partial w_{\Delta}}{\partial P_{\nu}}\cdot\frac{\partial P_{\nu}}{\partial P_{\psi}}$
-\end_inset
-
-.
- Here, 
-\begin_inset Formula $\frac{\partial P_{\nu}}{\partial P_{\psi}}$
-\end_inset
-
- is estimated in one-time series regression.
- 
-\end_layout
-
-\begin_layout Standard
-To be clear our measure for the price of quality is simply the calculation
- of quality against needs - As such higher subsistence level (higher price
- needs) prices would mean higher price of quality - provided the distance
- from needs is embedded in our measurement of the price of quality.
- Similarly, lower subsistence (i.e.
- lower prices of needs basket) would mean lower price of quality.
- Here what we mean by subsistence - is a level of utility - a sort of poverty
- line defined by the cost of the minimum basket 
-\begin_inset Formula $\Psi$
-\end_inset
-
- (which in turns depends on 
-\begin_inset Formula $P_{\psi}$
-\end_inset
-
-) .
- We think of a 
-\begin_inset Formula $P_{\nu}$
-\end_inset
-
-as price function - that is estimated using total costs 
-\begin_inset Formula $P_{\nu}(\rho)\nu_{i}+P_{\psi}(\rho)\psi_{i}+\Psi(A_{i},\rho)=c$
-\end_inset
-
- for all consumers
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-The price of durable goods don't undergo the same treatment since no quality
- variation is assumed in durable goods which are also tradable, liquid and
- have a permanent standard effect on utility.
-\end_layout
+ while the price of relative quality is implied with the equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:x_t_definition"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
 .
- Here, 
+ Empirically 
 \begin_inset Formula $P_{\nu}$
 \end_inset
 
@@ -7678,235 +7850,683 @@ The price of durable goods don't undergo the same treatment since no quality
 \begin_inset Formula $P_{\psi}$
 \end_inset
 
- and 
-\begin_inset Formula $\Psi$
-\end_inset
-
- (i.e.
- varies only according to 
+ and thus the price of quality does not vary for every consumer (much the
+ way the price of needs measured as the price of minimum needs basket varies
+ only with 
 \begin_inset Formula $\rho$
 \end_inset
 
 ).
- If the price of quality has any meaning, it does not vary for every consumer
- - just the way cost of the basket - varying only with 
-\begin_inset Formula $\rho$
+ 
+\begin_inset Formula $\Psi(A)$
 \end_inset
 
- - isn't assumed to vary for every consumer.
+ on the other hand is observed directly as the expenses that are only possible
+ if the consumer has a certain assets (which themselves are tracked in the
+ durable goods data - see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Assets-Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ 
 \end_layout
 
 \begin_layout Standard
-We prefer to not having to calculate 
-\begin_inset Formula $\Psi$
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}[!htbpl]{l*{2}{c}} 
+\backslash
+caption{Classification of Expenditure items}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+multicolumn{1}{c}{} & 
+\backslash
+multicolumn{1}{c}{item} & 
+\backslash
+multicolumn{1}{c}{category}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ 
+\backslash
+endhead & matches & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & public
+\backslash
+_transport & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & gas & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & water & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & cellphone
+\backslash
+_voucher & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & milling & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & motor
+\backslash
+_repair & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & bicycle
+\backslash
+_repair & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & mortgage & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & house
+\backslash
+_repair
+\backslash
+_monthly & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & household
+\backslash
+_products
+\backslash
+_repair & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & council
+\backslash
+_rates & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & insurance & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & theft
+\backslash
+_losses & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & legalfines & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & consumer
+\backslash
+_durables
+\backslash
+_repair & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & taxes & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & household
+\backslash
+_repair & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & other
+\backslash
+_costs & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & house
+\backslash
+_repair
+\backslash
+_yearly & asset
+\backslash
+_costs
+\backslash
+
+\backslash
+ & light
+\backslash
+_bulbs & assets
+\backslash
+
+\backslash
+ & phone & assets
+\backslash
+
+\backslash
+ & carpet & assets
+\backslash
+
+\backslash
+ & linen & assets
+\backslash
+
+\backslash
+ & mat & assets
+\backslash
+
+\backslash
+ & mosquito
+\backslash
+_net & assets
+\backslash
+
+\backslash
+ & mattress & assets
+\backslash
+
+\backslash
+ & sports
+\backslash
+_hobby & assets
+\backslash
+
+\backslash
+ & camera & assets
+\backslash
+
+\backslash
+ & building
+\backslash
+_material & assets
+\backslash
+
+\backslash
+ & bamboo & assets
+\backslash
+
+\backslash
+ & grass & assets
+\backslash
+
+\backslash
+ & cigarettes & excess
+\backslash
+
+\backslash
+ & bar
+\backslash
+_soap & excess
+\backslash
+
+\backslash
+ & clothes
+\backslash
+_soap & excess
+\backslash
+
+\backslash
+ & toothpaste & excess
+\backslash
+
+\backslash
+ & toilet
+\backslash
+_paper & excess
+\backslash
+
+\backslash
+ & skin
+\backslash
+_cream & excess
+\backslash
+
+\backslash
+ & other
+\backslash
+_personal & excess
+\backslash
+
+\backslash
+ & misc
+\backslash
+_cleaning & excess
+\backslash
+
+\backslash
+ & donation & excess
+\backslash
+
+\backslash
+ & services & excess
+\backslash
+
+\backslash
+ & bride
+\backslash
+_price & excess
+\backslash
+
+\backslash
+ & marriage & excess
+\backslash
+
+\backslash
+ & funeral & excess
+\backslash
+
+\backslash
+ & sugar & excess
+\backslash
+
+\backslash
+ & sweet & excess
+\backslash
+
+\backslash
+ & honey & excess
+\backslash
+
+\backslash
+ & salt & excess
+\backslash
+
+\backslash
+ & spices & excess
+\backslash
+
+\backslash
+ & tea & excess
+\backslash
+
+\backslash
+ & coffee & excess
+\backslash
+
+\backslash
+ & miscdrinkpowder & excess
+\backslash
+
+\backslash
+ & canned
+\backslash
+_drink & excess
+\backslash
+
+\backslash
+ & readymade
+\backslash
+_tea
+\backslash
+_coffee & excess
+\backslash
+
+\backslash
+ & beer & excess
+\backslash
+
+\backslash
+ & brews & excess
+\backslash
+
+\backslash
+ & winespirits & excess
+\backslash
+
+\backslash
+ & mensclothes & excess
+\backslash
+
+\backslash
+ & womensclothes & excess
+\backslash
+
+\backslash
+ & childrensclothes & excess
+\backslash
+
+\backslash
+ & mensshoes & excess
+\backslash
+
+\backslash
+ & womensshoes & excess
+\backslash
+
+\backslash
+ & childrensshoes & excess
+\backslash
+
+\backslash
+ & charcoal & needs
+\backslash
+
+\backslash
+ & electricity & needs
+\backslash
+
+\backslash
+ & petrol & needs
+\backslash
+
+\backslash
+   
+\backslash
+end{longtable}
+\end_layout
+
 \end_inset
 
- based on usage - since we already have decided that 
-\begin_inset Formula $\Psi$
-\end_inset
 
- would be calculated on 
-\begin_inset Formula $\rho$
-\end_inset
-
- level.
- The arguments for this have been discussed.
 \end_layout
 
 \begin_layout Standard
-====
-\end_layout
+In a typical consumption problem, we investigate a substitution between
+ different consumer goods for a consumer budget.
+ Such a substitution (or the one between quality and quantity of feed that
+ has been explored in the literature
+\begin_inset Foot
+status open
 
-\begin_layout Standard
-The typical life-cycle consumption patterns can be confirmed with the significan
-ce of age-related coefficients.
- More particularly, the quality (excess) consumption seems to decline with
- age while durable good purchases do not seem to be influenced by age as
- much.
- Apart from the 
-\begin_inset Formula $i$
+\begin_layout Plain Layout
+See Deaton 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation"
+literal "false"
+
 \end_inset
 
- and needs, the disposable income (
-\begin_inset Formula $\delta=i-\Psi$
+, Nelson
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+literal "false"
+
 \end_inset
 
-) also depends on the durable goods someone owns through 
-\begin_inset Formula $\Psi$
-\end_inset
+ and Kim 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GibsonKimQualityBog2019"
+literal "false"
 
- (which includes durable good-bearing costs).
- Thus a weak significance of 
-\begin_inset Formula $A$
-\end_inset
-
- simultaneously with a strong significance of 
-\begin_inset Formula $\delta$
-\end_inset
-
- implies a stronger effect of durable goods 
-\begin_inset Formula $A$
-\end_inset
-
- that have much influence on 
-\begin_inset Formula $\Psi$
-\end_inset
-
- (durable goods such as land that do not require a high maintenance cost
- proportional to their cost are purchased less often than those that have
- higher bearing costs).
- Further, the coefficient of 
-\begin_inset Formula $\delta$
-\end_inset
-
- for 
-\begin_inset Formula $\Delta A$
-\end_inset
-
- is negative while it is positive for quality 
-\begin_inset Formula $\nu$
 \end_inset
 
 .
- This suggests that higher disposable income (lower needs or higher income)
- is more often associated with higher quality (excess) and less durable
- good purchases.
+\end_layout
+
+\end_inset
+
+) is hardly trivial for a notion of quality as excess of needs and its associati
+on with the long-term asset ownership.
+ Empirically, this also implies that the region-related dummy variables
+ or needs units cannot be used as control variables in the quantile regression
+ for Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:BudgetMeasure_nu"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:BudgetMeasure_A"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ - since they are already being used to calculate the budget rations 
+\begin_inset Formula $w_{\nu}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{A}$
+\end_inset
+
+ (as 
+\begin_inset Formula $P_{\psi}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ respectively).
+ The effects of whether a particular region is expensive or not and how
+ large a household are already included in the log of disposable income
+ 
+\begin_inset Formula $logx$
+\end_inset
+
+ which is one of the control variables.
+ Other control variables that we use (such as the education level or a dummy
+ variable indicating whether the area of residence is rural or not) are
+ permissible only as long as they're not correlated with the budget ratios
+ themselves.
 \end_layout
 
 \begin_layout Standard
-The effect of durable goods 
-\begin_inset Formula $A$
+In terms of the model we have described in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- is statistically weak, but the economic significance of 
-\begin_inset Formula $A$
-\end_inset
-
- is quite significant.
- More durable goods purchases are made by those who are already rich in
- relative terms, the new durable goods purchased are mostly those that are
- associated with high running costs.
- While the distribution of wealth - reflected in the ownership of expensive
- durable goods such as a house or land - do determine which consumers purchase
- new durable goods, the significance of disposable income 
-\begin_inset Formula $\delta=i-\Psi$
-\end_inset
-
- (shown as lt1 in the table) - which we estimate using occupation, education
- and needs over the years 2012 and 2014 - and its negative coefficient for
- 
+, more quality would mean less 
 \begin_inset Formula $\Delta A$
 \end_inset
 
- indicates that the new durable goods are purchased by those with high 
-\begin_inset Formula $\Psi$
+ only if the 
+\begin_inset Formula $\Delta A$
 \end_inset
 
- (which is inclusive of durable goods bearing costs) and/or the new durable
- good purchases are by those who have relatively less incomes (
-\begin_inset Formula $i_{t}$
+ is high enough.
+ We find the large purchases of 
+\begin_inset Formula $\Delta A$
 \end_inset
 
- estimated through better occupation and education).
- This trend seems to reverse for the measure of quality 
+ are limited in the data and the cross-section differences through 
+\begin_inset Formula $\rho$
+\end_inset
+
+ are evident in the consumption of 
 \begin_inset Formula $\nu$
 \end_inset
 
- (
-\shape italic
-excess
-\shape default
-).
+ and 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The substitution between more quality and more assets is observed within
+ the quantiles and the groups e.g.
+ the substitution between 
+\begin_inset Formula $\nu$
+\end_inset
+
+ and 
+\begin_inset Formula $A$
+\end_inset
+
+ for rural and urban consumers.
+ The quality seems to be higher in the urban areas and the purchase of assets
+ is lower (for medium 
+\begin_inset Formula $A$
+\end_inset
+
+-bands ).
+ The higher 
+\begin_inset Formula $A$
+\end_inset
+
+-bands are more dominant in higher quantiles of 
+\begin_inset Formula $w_{\nu}$
+\end_inset
+
+ (Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabwA}
+\end_layout
+
+\end_inset
+
+) so a competition through quality between high and medium asset owners
+ seems likely.
+ Slightly lower quality for middle 
+\begin_inset Formula $A$
+\end_inset
+
+-bands in the rural areas - implies that the rural consumers may have a
+ slight advantage in relative quality.The rural consumers in lower quantile
+ (q30) seem to spend more towards agricultural assets - in ways those lower
+ quantiles in the urban ares don't.
+ 
+\bar under
+The role of occupational rank is interesting - the middle occupational ranks
+ (educated) seem more interested in quality - possibly due to recent urbanisatio
+n.
 \end_layout
 
 \begin_layout Standard
-Unlike the ownership of durable good such as land and housing, disposable
- income 
-\begin_inset Formula $\delta$
+The general trend with disposable income 
+\family typewriter
+logx
+\family default
+ (whether through lower needs or higher income) its association with more
+ quality throughout all quantiles.
+ While we don't use family size as a control variable, the increase in family
+ needs (more family members) amounts to a reduction in the income 
+\family typewriter
+logx
+\family default
+ - which implies a reduction in quality.
+ Looking at results from 
+\begin_inset Formula $w_{A}$
 \end_inset
 
- is the sort of wealth that lends to more social mobility.
- The educated and the highly-paid may pass on their skills and social networks
- to the progeny, but the transfer of such soft-durable goods to the next
- generation is more dissipative than the monetary wealth.
- Such soft-assets might not result in the ownership of more expensive durable
- goods (such as housing or land) but these do require consumption on education
- and social functions anyways.
- The durable good purchases may suggest the limits of the durable goods
- purchases.
- This is made clearer with the significance of 
-\begin_inset Formula $\delta$
+ in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabwA}
+\end_layout
+
 \end_inset
 
- for expenditure on quality(
-\shape italic
-excess
-\shape default
-) consumption indicates.
- Those with less durable goods but with better income do seem to spend more
- on quality (including education).
+ we also see a general focus away from assets - the tendency to focus on
+ assets decreases in higher quantiles (with more negative coefficients for
+ q60,q90).The effect of rural-urban and regional differences seems is significant
+ here as well (see the sign of isrural discrete variable).
 \end_layout
 
 \begin_layout Standard
-The differences in urban and rural lifestyles also play a role in the difference
- in durable good purchases as well as quality.
- This is in particular due to the the availability of electricity being
- limited to urban areas in Tanzania.
+In conclusion, the differences in urban and rural lifestyles play a role
+ in the difference in durable good purchases as well as quality.
+ This is in particular due to the availability of electricity being limited
+ to urban areas in Tanzania.
  The durable goods that are not as expensive as land or housing are more
  likely to be available in the urban settings.
  In terms of the model, what such a difference in the consumer baskets implies
  is that while the educated and highly-paid face higher prices for durable
  good purchases in the urban areas - they are less likely to raise prices
- in the items they depend on the the rural areas for and more likely to
- deviate from their basic needs with their local (urban) requirements.
+ in the items they depend on the the rural areas for - thus are more likely
+ to deviate from their basic needs with their local (urban) requirements.
  This would raise the prices of the industrial goods in the urban areas
  - thus separating the consumption habits of those in the urban areas from
  those who don't have avenues for expenditure on industrial goods (electricity
  etc.) in the rural areas.
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-There is a need to exercise caution in the interpretation of the tobit /
- OLS results using the 
-\begin_inset Formula $\Psi_{t}$
-\end_inset
-
- which - in econometric terms - is treated as a proxy for prices, regional
- variations, age and the effects of wealth.
- To allow our conclusions to be more robust, it may be worthwhile to to
- decompose 
-\begin_inset Formula $\Psi$
-\end_inset
-
- into more control variables - possibly by reformulating the model in the
- Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:nut1regression"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:dAt_regression"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- to employ a quantile regression based on age, income, durable good costs
- - while still maintaining the key purpose of the model which is to separate
- means of income from wealth in an analysis of the intertemporal substitution
- between durable good purchases and quality (excess) under a life-cycle
- setting.
- 
 \end_layout
 
 \begin_layout Subsection
@@ -7917,7 +8537,7 @@ Discussion
 The purpose of our analysis has been to look beyond the models for visible
  consumption in an environment of uneven prices for relative quality.
  At a fundamental level, we believe the status consumption is motivated
- by the perceived risk in one's stability of wealth.
+ by the perceived upside risk in future wealth.
  Therefore, consumers' participation in status consumption should be seen
  as a specific instance of the the participants exhibiting a risk-seeking
  behaviour (i.e.
@@ -7968,31 +8588,43 @@ consideration of how the durable goods are distributed in the economy and
 \end_layout
 
 \begin_layout Standard
-Indeed this is not to say that the consumption on items that are categorically
- visible does not tell us much about the demand in the developing countries.
+Indeed this is not to say that the consumption on items that are visible
+ does not tell us much about the demand in the developing countries.
  In the context of Tanzania, expenditure on bride-price is a clear case
  for visible consumption - and is worth exploring in its own right - but
  if one were to develop a theory of status consumption instead of revisiting
  visible consumption in varied cultural contexts in this manner, the considerati
-ons of social mobility, wealth and durable goods ownership seem an obvious
- first step.
- Indeed in the particular case of marriages too, we would only improve our
- understanding of the bride price if we realise that marriages are both
- an indication of one's social status as well as a potential for advancement
- in social ranking - forces that are at play in durable goods purchases
- more generally in much the same way.
+ons of social mobility, wealth and durable goods ownership are approrpriate.
+ In the particular case of marriages too, we would only improve our understandin
+g of the bride price if we realise that marriages are both an indication
+ of one's social status as well as a potential for advancement in social
+ ranking - forces that are at play in durable goods purchases more generally
+ in much the same way.
 \end_layout
 
 \begin_layout Standard
-We find that the literature on rural and urban differences in the developing
- world should be extended to include status consumption on grounds of generality.
+The rural and urban differences in the developing world should provide a
+ specific context to the status consumption.
  The context of status consumption varies significantly across economies
  and one often needs to make adjustments for the particular social conditions
  to draw conclusions on visible consumption.
- Using an intertemporal behavioural model to explain consumption may help
- us in standardising the markets for status in disparate economies and help
- us observe the extent to which the consumers engage in status consumption
- across the various states of economies.
+ An intertemporal model allows us to standardising the markets for status
+ in disparate economies and help us observe the extent to which the consumers
+ engage in status consumption across the various states of economies.
+ The differences in wealths and consumer's futility of status consumption
+ in presence of wide differences allows us to understand how status competitions
+ could work under immense wealth differences.
+\end_layout
+
+\begin_layout Standard
+[People with low income have low 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ - a quite life in the woods doesn't carry much status - there is no competition
+ even though quality might be high.
+ needs are not met in the rural areas for the poor.
+ ]
 \end_layout
 
 \begin_layout Standard
