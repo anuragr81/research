@@ -20,6 +20,6 @@ def populate_dates(start_date,offset,time_ranges, weekend_time_ranges=None):
 
 
 if __name__ == "__main__":
-    wkdts = populate_dates( time_ranges = [ "08:30-10:00" , "17:00-19:00","19:00-21:00" , "21:00-22:30" ], start_date = d(2020,12,25), offset=10, weekend_time_ranges = [ "08:30-10:00" , "10:00-13:00","13:00-17:00", "17:00-19:00","19:00-21:00" , "21:00-22:30" ])
+    wkdts = populate_dates( time_ranges = [ "09:30-10:00" , "10:30-12:30", "16:00-17:30" ], start_date = d(2021,2,22), offset=14)
     for x in wkdts:
         print(x)

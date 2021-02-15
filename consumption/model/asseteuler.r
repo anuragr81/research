@@ -1,4 +1,4 @@
-#require(latex2exp)
+require(latex2exp)
 tol = 1e-7
 
 # constraint is applied only at reset times
@@ -366,9 +366,16 @@ get_sigma_array<-function(xarr, decay = 0.99){
   return(sigma_array)
 }
 
+#TEST with:
 # At any point, there is a certain amount of effort that has already been done
-sigma_func <- function(start_p,decay_factor, past_psi,psi){
+#arr=array(); total_x = 0; dx = .1; for ( i in seq(10000)) { arr[i]=sigma_func_decline(start_p=.5,decay_factor=1e-2, past_psi=total_x,0) ; total_x = total_x + dx  }; par(mfrow=c(1,1)); plot(arr,type='l')
+sigma_func_decline <- function(start_p,decay_factor, past_psi,psi){
   start_p * exp(-decay_factor * (past_psi + psi ))
+}
+#TEST with:
+#arr=array(); total_x = 0; dx = .1; for ( i in seq(10000)) { arr[i]=sigma_func_rise(start_p=.5,decay_factor=1e-2, end_p=.9,past_psi=total_x,psi=0) ; total_x = total_x + dx  }; par(mfrow=c(1,1)); plot(arr,type='l')
+sigma_func_rise <- function(start_p,end_p, decay_factor, past_psi,psi){
+  start_p  + (end_p-start_p)*(1-exp(-decay_factor * (past_psi + psi)))
 }
 
 #big size risksz would enable psi1 >0 and/or psi2>0
@@ -518,9 +525,67 @@ evolve_relative_wealth_discrete_natural <-function(nsim,delta,alpha1,alpha2,gamm
   return(retlist)
 }
 
-#evolve_relative_wealth_discrete_contnatural(nsim = 1000, delta = 0 ,alpha1 = 3, alpha2 = .1,risksz = 10,T = 1,dt = .01,A1_init = 10, A2_init = 100,decay = .9,start_p = .5, gamma=.7, lambda = 10, A_costs = 0)
-evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,gamma, lambda, risksz, T, dt, A1_init, A2_init, decay, start_p, A_costs){
+sample_run <- function(){
+  df <- data.frame(x=c(10,50,100,150,200),y=c(490,450,400,350,300))
+  rise_func <- function(start_p,decay_factor,past_psi,psi){ sigma_func_rise (start_p=start_p,decay_factor=decay_factor,past_psi=past_psi,psi=psi,end_p=start_p+.1)}
+  for (i in seq(nrow(df)))
+  { 
+    frow=df[i,];
+    x <- evolve_relative_wealth_discrete_contnatural(nsim = 1000, delta = 0.0 ,alpha1 =.1, alpha2 = 2,risksz = 10,
+                                                     T = 1,dt = .01,A1_init=frow$x, A2_init=frow$y,decay = .001,
+                                                     start_p = .1, gamma=.7, lambda = 10, A_costs = 0, plot_range = F, sigma_func=rise_func)
+    print(paste("(",frow$x,",",frow$y,") A1:",tail(colMeans(x$A1),1),"A2:",tail(colMeans(x$A2),1)))
+    
+    if(abs(tail(diff(colMeans(x$A1)),1) /tail(colMeans(x$A1),1)) >5e-2){
+      #stop("A1")
+    } 
+    if(abs(tail(diff(colMeans(x$A2)),1) /tail(colMeans(x$A2),1)) >5e-2){
+      #stop("A2")
+    }
+  }
+}
+
+
+taxes_due_for_1 <- function(delta, A1,A2){
+  return (delta * (A1-A2))
+}
+
+taxes_due_for_2 <- function(delta, A1,A2){
+  return (-delta * (A1-A2))
+}
+
+
+reference_point <- function(A1,A2){
+  return ((A1+A2)/2)
+}
+
+disposable_income <- function(A, A_costs, tax_func){
+  return(A - tax_func(A) -A_costs*A)
+}
+
+optim_func <- function(psi,A,risksz,start_p,total_psi,gamma,lambda,alpha,tax_func, A_costs,ref_pt,decay){
+  # we cannot assume that the payoff would be psi*risksz when dW=1
+  # we can assume that the consumer considers p-state only considering her own effort - given that she can't be sure about what psi would be chosen by the other (the other
+  # option is for us to assume that the consumers assumes an expected value of psi - or the last value of psi in the previous draw)
+  # karmakar(sigma,alpha) is fine because the  bet-size doesn't influence the weighting the -probability itself is of course dependent of which both effort psi and the state itself
   
+  upside_relative = disposable_income(A = A - psi + psi*risksz, A_costs = A_costs, tax_func = tax_func) -ref_pt
+  downside_relative = disposable_income(A = A - psi, A_costs = A_costs, tax_func = tax_func) -ref_pt
+  
+  p = sigma_func(start_p=start_p,decay_factor=decay, past_psi = total_psi,psi= psi)
+  wp = karmakar(p,alpha) 
+  w1minusp = karmakar(1-p,alpha)
+  return (wp*pt_value(upside_relative,gamma,lambda)+  w1minusp* pt_value (downside_relative,gamma,lambda) )
+}
+
+#evolve_relative_wealth_discrete_contnatural(nsim = 1000, delta = 0 ,alpha1 = 3, alpha2 = .1,risksz = 10,T = 1,dt = .01,A1_init = 10, A2_init = 100,decay = .9,start_p = .5, gamma=.7, lambda = 10, A_costs = 0, plot_range=F, sigma_func=sigma_func_decline)
+evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,gamma, lambda, risksz, T, dt, A1_init, A2_init, decay, start_p, A_costs, plot_range,sigma_func){
+  
+  print(paste("delta=",delta,"alpha1=",alpha1,"alpha2=",alpha2,"gamma=",gamma, "lambda=",lambda, "risksz=",risksz, "T=",T, "dt=",dt, "A1_init=",A1_init, "A2_init=",A2_init, "decay=",decay, "start_p=",start_p, "A_costs=",A_costs))
+              
+  if (missing(plot_range)){
+    plot_range <- F
+  }
   if (missing(T)){
     T <- 1
   } 
@@ -548,7 +613,8 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
   A2df <- data.frame()
   incdf <- data.frame()
   sigmadf <- data.frame()
-  
+  psi1df <- data.frame()
+  psi2df <- data.frame()
   
   for ( j in seq(nsim)){
     A1 = A1_init
@@ -556,12 +622,15 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
     A1_arr = array()
     A2_arr = array()
     inc_arr = array()
-    
+    psi1_arr <- array()
+    psi2_arr <- array()
     
     count <- 1
     A1_arr[count] = A1_init
     A2_arr[count] = A2_init
     inc_arr[count] = 0
+    psi1_arr[count] = 0
+    psi2_arr[count] = 0
     
     timepoints <- seq(0,T,dt)
     total_psi <- 0
@@ -570,31 +639,23 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
     
     for (i in timepoints)
     {  
-      inc  = - delta * (A1-A2)
+      
       #psi should be chosen so that immediate gain u under risk is optimised
       
+      D1 = disposable_income(A = A1,A_costs = A_costs, tax_func = function(x) {taxes_due_for_1(delta=delta, A1=x,  A2=A2)})
+      D2 = disposable_income(A = A2,A_costs = A_costs, tax_func = function(x) {taxes_due_for_2(delta=delta, A1=A1, A2=x) })
       
-      # if K = inc* dt -A_costs*A - ((A1+A2)/2)
-      # the choice would be argmin { w(sigma,alpha)*pt_value( K - psi + psi*risksz,gamma,lambda)+  w(1-sigma,alpha)* pt_value (K -psi,gamma,lambda) }
-      D1 = A1 + inc* dt -A_costs*A1
-      D2 = A2 - inc* dt -A_costs*A2
-      K1 = D1 - ((A1+A2)/2)
-      K2 = D2 - ((A1+A2)/2)
-      
-      optim_func <- function(psi,K,risksz,start_p,total_psi,gamma,lambda,alpha){
-        # we cannot assume that the payoff would be psi*risksz when dW=1
-        # karmakar(sigma,alpha) is fine because the  bet-size doesn't influence the weighting the -probability itself is of course dependent of which both effort psi and the state itself
-        p = sigma_func(start_p=start_p,decay_factor=decay, past_psi = total_psi,psi= psi)
-        wp = karmakar(p,alpha) 
-        w1minusp = karmakar(1-p,alpha)
-        return (wp*pt_value(K - psi + psi*risksz,gamma,lambda)+  w1minusp* pt_value (K -psi,gamma,lambda) )
-      }
-      
-      #psivec <- seq(0,100,.1)  ; plot(psivec, sapply(psivec, function(x) { optim_func(psi=x,K=K1,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha1) }),type='l' )
+      ref_pt = reference_point(A1=A1,A2=A2)
+
       # consumer always makes the decision before the draw
-      psi1 <- optimise(function(x) { -optim_func(psi=x,K=K1,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha1) },c(0,D1))$minimum
-      psi2 <- optimise(function(x) { -optim_func(psi=x,K=K2,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha2) },c(0,D2))$minimum
+      psi1 <- optimise(function(x) { -optim_func(decay=decay,psi=x,A=A1,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha1,tax_func=function(x) {taxes_due_for_1(delta=delta, A1=x,A2=A2)}, ref_pt= ref_pt, A_costs=A_costs) },c(0,D1))$minimum
+      psi2 <- optimise(function(x) { -optim_func(decay=decay,psi=x,A=A2,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha2,tax_func=function(x) {taxes_due_for_2(delta=delta, A1=A1,A2=x)}, ref_pt= ref_pt, A_costs=A_costs) },c(0,D2))$minimum
       
+      if (plot_range){
+        par(mfrow=c(2,1))
+        psivec1 <- seq(0-10,D1+200,.1)  ; plot(psivec1, sapply(psivec1, function(x) { optim_func(decay=decay,psi=x,A=A1,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha1,ref_pt=ref_pt, A_costs=A_costs, tax_func=function(x) {taxes_due_for_1(delta=delta, A1=x,A2=A2)}) }),type='l' , main=paste0("argmax=",round(psi1,2)))
+        psivec2 <- seq(0-10,D2+200,.1)  ; plot(psivec2, sapply(psivec2, function(x) { optim_func(decay=decay,psi=x,A=A2,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha2,ref_pt=ref_pt, A_costs=A_costs, tax_func=function(x) {taxes_due_for_2(delta=delta, A1=A1,A2=x)}) }),type='l', main=paste0("argmax=",round(psi2,2)))
+      }
       if ( (D1-psi1) <.1 ){
         message = "All D1 spent"
       }
@@ -619,7 +680,9 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
       count <- count+1
       A1_arr[count] <- A1
       A2_arr[count] <- A2
-      inc_arr[count] <- inc
+      inc_arr[count] <- taxes_due_for_1(delta=delta, A1=A1,  A2=A2)
+      psi1_arr[count] <- psi1
+      psi2_arr[count] <- psi2
       
     }
     A1add <- t(data.frame(x=A1_arr))
@@ -634,6 +697,13 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
     colnames(iadd) <- paste0("t_",c(timepoints, T+dt))
     incdf <- rbind(incdf,iadd)
     
+    psi1add <- t(data.frame(x=psi1_arr))
+    colnames(psi1add) <- paste0("t_",c(timepoints, T+dt))
+    psi1df <- rbind(psi1df,psi1add)
+    
+    psi2add <- t(data.frame(x=psi2_arr))
+    colnames(psi2add) <- paste0("t_",c(timepoints, T+dt))
+    psi2df <- rbind(psi2df,psi2add)
     
     sigmaadd <- t(data.frame(x=sigma_arr))
     colnames(sigmaadd) <- paste0("t_",c(timepoints))
@@ -644,15 +714,33 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
   retlist[["A1"]] <- A1df
   retlist[["A2"]] <- A2df
   retlist[["inc"]] <- incdf
+  retlist[["psi1"]] <- psi1df
+  retlist[["psi2"]] <- psi2df
+  
   max_y <- max( max(colMeans(retlist$A1)) , colMeans(retlist$A2) )
   min_y <- min( min(colMeans(retlist$A1)) , colMeans(retlist$A2) )
   
-  par(mfrow=c(2,2)); 
+  par(mfrow=c(2,3)); 
   ptimepoints <- c(timepoints,timepoints[length(timepoints)]+dt)
-  plot(ptimepoints,colMeans(retlist$A2)-colMeans(retlist$A1),type='l', main="A2-A1", xlab="T", ylab="A2-A1"); 
-  plot(ptimepoints,colMeans(retlist$A1),type='l',ylim=c(min_y,max_y),main="A1", xlab="T", ylab="A1"); 
-  plot(ptimepoints,colMeans(retlist$A2),type='l',ylim=c(min_y,max_y),main="A2", xlab="T", ylab="A2")
-  plot(timepoints,colMeans(sigmadf),type='l',main="natural probability", xlab="T", ylab="s")
+  plot(ptimepoints,colMeans(retlist$A2)-colMeans(retlist$A1),type='l', main=latex2exp::TeX("$A_2-A_1$"), xlab="T", ylab=latex2exp::TeX("$A_2-A_1$")); 
+  if (alpha1>alpha2){
+    tag_A1  <- "RiskAverse"  
+  } else{
+    tag_A1  <- "RiskSeeking"  
+  }
+  if (alpha2>alpha1){
+    tag_A2  <- "RiskAverse"  
+  } else{
+    tag_A2  <- "RiskSeeking"  
+  }
+  
+  tag_A1=""
+  tag_A2=""
+  plot(ptimepoints,colMeans(retlist$A1),type='l',ylim=c(min_y,max_y),main=latex2exp::TeX(paste0("$A_1(\\alpha_1=",alpha1,")$",tag_A1)), xlab="T", ylab=latex2exp::TeX("$A_1$")); 
+  plot(ptimepoints,colMeans(retlist$A2),type='l',ylim=c(min_y,max_y),main=latex2exp::TeX(paste0("$A_2(\\alpha_2=",alpha2,")$",tag_A2)), xlab="T", ylab=latex2exp::TeX("$A_2$"))
+  plot(timepoints,colMeans(sigmadf),type='l',main=latex2exp::TeX("$p$"), xlab="T", ylab="s")
+  plot(ptimepoints,colMeans(psi1df),type='l',main=latex2exp::TeX("$\\psi_1$"), xlab="T", ylab="s")
+  plot(ptimepoints,colMeans(psi2df),type='l',main=latex2exp::TeX("$\\psi_2$"), xlab="T", ylab="s")
   return(retlist)
 }
 
@@ -674,6 +762,7 @@ evolve_relative_wealth_discrete <-function(nsim,delta,sigma1,sigma2, risksz, p, 
   A1df <- data.frame()
   A2df <- data.frame()
   incdf <- data.frame()
+  
   
   for ( j in seq(nsim)){
     A1 = A1_init

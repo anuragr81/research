@@ -30,7 +30,7 @@ print(.libPaths())
 library("utils")
 
 # download libraries that are required
-packages <- c("dplyr","moments","plyr","haven","tidyr","jsonlite")
+packages <- c("dplyr","moments","plyr","haven","tidyr","jsonlite","plotly")
 
 for (i in 1:length(packages)) {
   if (packages[i] %in% rownames(installed.packages(local.lib.path)) == FALSE) {

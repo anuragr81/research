@@ -351,7 +351,7 @@ literal "true"
  - first related to the behavioural approaches to life-cycle model and second
  related to the significance of social characteristics in visible consumption
  - can both be linked with such a formulation of status.
- In linking the two threads, we rely on the intertemporal substitution problem
+ We attempt to link the two threads in an intertemporal substitution framework
  - where a rational utility-optimising consumer balances between the non-durable
  and durable consumption based on her planned savings over her life-time
  (a problem often treated equivalent to the classical utility maximising
@@ -1331,6 +1331,13 @@ JUST INTUITIVELY, we should also be clear about why risk-seeking and risk-averse
  high probability) - the poor risk-seeking class and vs high-alpha (overvalue
  high-probability - assuming it to be certain and undervaluing low-probability)
  - the rich class (not necessarily risk-averse).
+ These are characteristics are more likely to depend on social factors other
+ than the starting point of wealth differences - which matter less when
+ the needs have been addressed (see other chapter where we discuss about
+ extreme wealth differences).
+ Risk preferences are more sticky (stable) and related to occupation and
+ structures.
+ Status consumption is for the more risk-seeking types.
 \end_layout
 
 \begin_layout Standard
@@ -1644,8 +1651,8 @@ An appropriate reminder is: What has digging got to do with status consumption?
  It is tempting view status consumption as conscious lying where miners
  have the incentive to lie (to rush people in) but miners must know the
  truth eventually and continue looking for the right signal.
- Status consumptin is slightly quite different from this game in the sense
- that it always has a value indicating who already has lot of gold.
+ Status consumption is slightly different from this game in the sense that
+ it always has a value indicating who already has lot of gold.
  Status consumption does not bring money itself that much is clear to everybody
  (they're futile).
  Status consumption is more like miners heading to party where there are
@@ -1660,6 +1667,212 @@ An appropriate reminder is: What has digging got to do with status consumption?
  is trying for gold and if there are no possibilities for finding more gold,
  a riskier-game could be played with redistribution of gold instead of anybody
  getting more gold overall.
+\end_layout
+
+\begin_layout Standard
+As such we find that given a chance to take the risk, the consumer would
+ take the risk.
+ If we're thinking that there is something to be balanced then we need to
+ see how consumers balance between saving and spending.
+ It appears that consumers don't care about a risk proposition and have
+ no intention of closing the wealth gap by saving.
+ To close the wealth gap by saving the cosumer should believe that the other
+ consumer would lose out in the long run.
+ If the risk-seeking person is wanting to take risk being relatively poor,
+ that needs to be explained - one reason is that relatively poor would make
+ him loss averse (run away from being poor).
+ The important question is how do we interpret consumer not taking risk
+ because of rich being risk-averse (high-alpha).
+ When the consumer minimises risk her wealth is secured.
+ But when the poor takes risk she must continue taking risk.
+ When the asset differences are not that much this loss aversion is less
+ extreme.
+\end_layout
+
+\begin_layout Standard
+For example, (nsim = 1000, delta = 0 ,alpha1 =2, alpha2 = .1,risksz = 10,T
+ = 1,dt = .01,A1_init = 
+\series bold
+20
+\series default
+, A2_init =100 ,decay = .1,start_p = .5, gamma=.7, lambda = 10, A_costs = 0,
+ plot_range = F) settles at 50 - whereas (nsim = 1000, delta = 0 ,alpha1
+ =2, alpha2 = .1,risksz = 10,T = 1,dt = .01,A1_init = 10, A2_init =300 ,decay
+ = .1,start_p = .5, gamma=.7, lambda = 10, A_costs = 0, plot_range = F)- settles
+ lower.
+ Why 
+\end_layout
+
+\begin_layout Standard
+===
+\end_layout
+
+\begin_layout Standard
+In a real-world example, the consumer would take a chance with 
+\begin_inset Formula $\psi$
+\end_inset
+
+ out of the disposable income where asset costs carry some costs (albeit
+ linear).
+ That their are basic needs is implict from the extreme wealth differences
+ - because the reference point is the mid-point and the poorer consumer
+ is extremely loss-averse (and would take every chance to get out of the
+ loss).
+ When disposable income decline the consumer has nothing to spend.
+ Notice that introducing credit is not different from starting with a different
+ income.
+ Therefore credit amounts to starting the evolution with a different (lower
+ or higher) initial income.
+ Since owned assets always bear some costs in the real-world, we introduce
+ an asset costs so that the consumer stops also may have more incentive
+ for risk-taking.
+ Asset costs also mean that without any returns to assets, the assets would
+ decline to zero.
+\end_layout
+
+\begin_layout Standard
+In the equations:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline}
+A_{1}(t+1)=A_{1}(t)+\delta(A_{2}(t)-A_{1}(t))-\text{\ensuremath{\chi A_{1}(t)}-}\psi_{1}^{*}(t)+\sigma(n(t))W\\
+A_{2}(t+1)=A_{2}(t)+\delta(A_{1}(t)-A_{2}(t))-\text{\ensuremath{\chi A_{2}(t)}-}\psi_{2}^{*}(t)+\sigma(n(t))W\label{eq:Asset_evolution}
+\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The process 
+\begin_inset Formula $\sigma(n(t))$
+\end_inset
+
+ as well as the real probability of gain 
+\begin_inset Formula $p(n(t))$
+\end_inset
+
+ depend on the history (past states) of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ represented by 
+\begin_inset Formula $n_{t}$
+\end_inset
+
+ which is the running sum :
+\begin_inset Formula 
+\begin{alignat}{1}
+n_{t} & =\sum_{\tau=0}^{t}(\psi_{1}(\tau)+\psi_{2}(\tau))\label{eq:Effort}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If we denote 
+\begin_inset Formula $D_{1}(t)\equiv A_{1}(t)+\delta(A_{2}(t)-A_{1}(t))-\text{\ensuremath{\chi A_{1}(t)}}$
+\end_inset
+
+and 
+\begin_inset Formula $D_{2}(t)\equiv A_{2}(t)+\delta(A_{1}(t)-A_{2}(t))-\text{\ensuremath{\chi A_{2}(t)}}$
+\end_inset
+
+ then Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Asset_evolution"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be written as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline}
+A_{1}(t+1)=A_{1}(t)+D_{1}(t)+\sigma(n(t))W\\
+A_{2}(t+1)=A_{2}(t)+D_{2}(t)+\sigma(n(t))W\label{eq:AsseEvolution_brief}
+\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For brevity, we represent 
+\begin_inset Formula $p(n(t))$
+\end_inset
+
+ as 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma(n(t))$
+\end_inset
+
+ as 
+\begin_inset Formula $\sigma_{t}$
+\end_inset
+
+.
+ The reference income for both the consumers are 
+\begin_inset Formula $A'=\frac{A_{1}+A_{2}}{2}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $W$
+\end_inset
+
+ can take values 0 or 1 in the random trials, the utility functions that
+ determine the consumers' choices for 
+\begin_inset Formula $\psi_{1}^{*}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{2}^{*}$
+\end_inset
+
+ are :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+u_{1}(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{1}(t)-\psi+R\sigma_{t}-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{1}(t)-\psi-A')\\
+u_{2}(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{2}(t)-\psi+R\sigma_{t}-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{2}(t)-\psi-A')
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If the consumer succeeds, she reduces her income by 
+\begin_inset Formula $\psi_{1}^{*}$
+\end_inset
+
+ or 
+\begin_inset Formula $\psi_{2}^{*}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+===
 \end_layout
 
 \begin_layout Standard
@@ -2029,13 +2242,26 @@ We reject the approaches where the value
 
  is optimised we wish to consider the risk.
  PT has more support here.
-\end_layout
 
-\begin_layout Standard
-=
-\end_layout
+\series default
+ The unsuitability of a non-decreasing 
+\begin_inset Formula $u(A_{T})$
+\end_inset
 
-\begin_layout Standard
+ is also because the consumer in our model must derive status utility not
+ only from 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+ but also from 
+\begin_inset Formula $\psi$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
 The simplest of such cases are those where 
 \begin_inset Formula $u(A_{t+1})$
 \end_inset
@@ -2156,22 +2382,6 @@ literal "false"
 ).
 \end_layout
 
-\begin_layout Standard
-=
-\end_layout
-
-\begin_layout Standard
-The unsuitability of a non-decreasing 
-\begin_inset Formula $u(A_{T})$
-\end_inset
-
- is also because the consumer in our model must derive status utility not
- only from 
-\begin_inset Formula $A_{T}$
-\end_inset
-
- but also from 
-\begin_inset Formula $\psi$
 \end_inset
 
 .
@@ -2200,9 +2410,9 @@ noprefix "false"
  consumption (risk taken) is fully under control of the consumer.
 
 \series bold
- [ WHY SHOULD WE CARE ABOUT DEGREES OF RISK-AVERSION right now though ?
- Are we trying to see how risk-seeking and risk-averse individuals control
- wealth - then say so]
+ WHY SHOULD WE CARE ABOUT DEGREES OF RISK-AVERSION right now though ? Are
+ we trying to see how risk-seeking and risk-averse individuals control wealth
+ - then say so]
 \series default
  We can thus view the differences caused by the degrees of risk-aversion
  if we assume a diminishing returns for a risky gain 
@@ -2520,7 +2730,7 @@ Assuming a reference points
 \begin_inset Formula $A'$
 \end_inset
 
-, the lottery's value would be
+, the lottery's value would b
 \end_layout
 
 \begin_layout Standard
@@ -2702,35 +2912,58 @@ u_{2}(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(A_{t,2}-\delta\
 \end_layout
 
 \begin_layout Standard
-We can see that in a risky environment, the risk-averse individual (who
- overvalues low 
-\begin_inset Formula $p$
+
+\series bold
+RECALL THAT low-
+\begin_inset Formula $\alpha\Rightarrow$
 \end_inset
 
- but underweights large 
+Risk-seeking and high-
+\begin_inset Formula $\alpha$
+\end_inset
+
+
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+Risk-averse
+\end_layout
+
+\begin_layout Standard
+We can see that in a risky environment, the risk-seeking individual (
+\bar under
+who overvalues low 
 \begin_inset Formula $p$
 \end_inset
 
  i.e.
+ thinks she is lucky in unlikely situations but underweights large 
+\begin_inset Formula $p$
+\end_inset
+
+ i.e.
+ is circumspect about almost certain events i.e.
  low 
 \begin_inset Formula $\alpha$
 \end_inset
 
-) would either keep 
+)
+\bar default
+ would either keep 
 \begin_inset Formula $\psi$
 \end_inset
 
- as low as possible or arrive at a low optimum 
-\begin_inset Formula $\psi$
-\end_inset
-
- but a risk-seeking individual (ignores low probability events but assume
- high-probability as certain i.e.
+ high but a risk-averse individual 
+\bar under
+(who ignores low probability of gains as too unlikely but takes high-probability
+ as granted i.e.
  high 
 \begin_inset Formula $\alpha$
 \end_inset
 
-) may achieve the equilbrium at a much higher 
+)
+\bar default
+ may achieve the equilbrium at a much lower 
 \begin_inset Formula $\psi$
 \end_inset
 
