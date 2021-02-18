@@ -527,12 +527,13 @@ evolve_relative_wealth_discrete_natural <-function(nsim,delta,alpha1,alpha2,gamm
 
 sample_run <- function(){
   df <- data.frame(x=c(10,50,100,150,200),y=c(490,450,400,350,300))
-  rise_func <- function(start_p,decay_factor,past_psi,psi){ sigma_func_rise (start_p=start_p,decay_factor=decay_factor,past_psi=past_psi,psi=psi,end_p=start_p+.1)}
+  rise_func <- function(start_p,decay_factor,past_psi,psi){ sigma_func_rise (start_p=start_p,decay_factor=decay_factor,past_psi=past_psi,psi=psi,end_p=start_p+.5)}
   for (i in seq(nrow(df)))
   { 
     frow=df[i,];
-    x <- evolve_relative_wealth_discrete_contnatural(nsim = 1000, delta = 0.0 ,alpha1 =.1, alpha2 = 2,risksz = 10,
-                                                     T = 1,dt = .01,A1_init=frow$x, A2_init=frow$y,decay = .001,
+
+    x <- evolve_relative_wealth_discrete_contnatural(nsim = 3000, delta = 0.05 ,alpha1 =.1, alpha2 = 2,risksz = 10,
+                                                     T = 1,dt = .01,A1_init=frow$x, A2_init=frow$y,decay = .01,
                                                      start_p = .1, gamma=.7, lambda = 10, A_costs = 0, plot_range = F, sigma_func=rise_func)
     print(paste("(",frow$x,",",frow$y,") A1:",tail(colMeans(x$A1),1),"A2:",tail(colMeans(x$A2),1)))
     
