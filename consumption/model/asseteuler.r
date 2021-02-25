@@ -380,7 +380,7 @@ sigma_func_rise <- function(start_p,end_p, decay_factor, past_psi,psi){
 
 #big size risksz would enable psi1 >0 and/or psi2>0
 # NEED MORE SIMULATIONS - It seems we're hitting the boundary a lot.
-#y <-evolve_relative_wealth_discrete_natural(nsim = 3000, delta = 0 ,alpha1 = 3, alpha2 = .1,risksz = 10,T = 1,dt = .01,A1_init = 10, A2_init = 100,decay = .9,start_p = .5, gamma=.7, lambda = 10, A_costs = 0); 
+#y <-evolve_relative_wealth_discrete_natural(nsim = 3000, delta = 0 ,alpha1 = 3, alpha2 = .1,risksz = 10,T = 1,dt = .01,A1_init = 10, A2_init = 100,decay = .9,start_p = .5, gamma=.7, lambda = 10, A_costs_factor = 0); 
 # scenarios: 
 # rich-guy low-alpha (regular overvalue-low-p but undervalue-high-p guy), no-asset costs, no taxes, starts with high-risk size 10 and start_p = .5- rich becomes super-rich for a bit gets back to zero  - poorer risk-averse always remains low.
 # rich-guy high-alpha (super-risk-seeking overvalue-high-p and ignore-low-p guy),  no-asset costs, no taxes, starts with high-risk size 10 and start_p = .5-  
@@ -527,14 +527,18 @@ evolve_relative_wealth_discrete_natural <-function(nsim,delta,alpha1,alpha2,gamm
 
 sample_run <- function(){
   df <- data.frame(x=c(10,50,100,150,200),y=c(490,450,400,350,300))
-  rise_func <- function(start_p,decay_factor,past_psi,psi){ sigma_func_rise (start_p=start_p,decay_factor=decay_factor,past_psi=past_psi,psi=psi,end_p=start_p+.5)}
+  rise_func <- function(start_p,decay_factor,past_psi,psi){ sigma_func_rise (start_p=start_p,decay_factor=decay_factor,past_psi=past_psi,psi=psi,end_p=start_p+.3)}
   for (i in seq(nrow(df)))
   { 
     frow=df[i,];
 
-    x <- evolve_relative_wealth_discrete_contnatural(nsim = 3000, delta = 0.05 ,alpha1 =.1, alpha2 = 2,risksz = 10,
-                                                     T = 1,dt = .01,A1_init=frow$x, A2_init=frow$y,decay = .01,
-                                                     start_p = .1, gamma=.7, lambda = 10, A_costs = 0, plot_range = F, sigma_func=rise_func)
+    x <- evolve_relative_wealth_discrete_contnatural(nsim = 2000, delta = 0 ,alpha1 =.3, alpha2 = 2, risksz = 10,
+                                                     T = 1,dt = .001,A1_init=frow$x, A2_init=frow$y,decay = .01,
+                                                     start_p = .2, gamma=.7, lambda = 10, A_costs_factor = 0., plot_range = F, sigma_func=rise_func)
+    
+    #x <- evolve_relative_wealth_discrete_contnatural(nsim = 3000, delta = 0 ,alpha1 =2, alpha2 = .1, risksz = 10,
+    #                                                 T = 1,dt = .005,A1_init=frow$x, A2_init=frow$y,decay = .01,
+    #                                                 start_p = .2, gamma=.7, lambda = 10, A_costs_factor = 500, plot_range = F, sigma_func=sigma_func_decline)
     print(paste("(",frow$x,",",frow$y,") A1:",tail(colMeans(x$A1),1),"A2:",tail(colMeans(x$A2),1)))
     
     if(abs(tail(diff(colMeans(x$A1)),1) /tail(colMeans(x$A1),1)) >5e-2){
@@ -560,18 +564,24 @@ reference_point <- function(A1,A2){
   return ((A1+A2)/2)
 }
 
-disposable_income <- function(A, A_costs, tax_func){
-  return(A - tax_func(A) -A_costs*A)
+disposable_income <- function(A, A_costs_factor, tax_func){
+  if (A_costs_factor==0){
+    return(A - tax_func(A) )
+  }
+  else{
+    return(A - tax_func(A) -(A**2.25)/(A_costs_factor**1.5))
+  }
+  
 }
 
-optim_func <- function(psi,A,risksz,start_p,total_psi,gamma,lambda,alpha,tax_func, A_costs,ref_pt,decay){
+optim_func <- function(psi,A,risksz,start_p,total_psi,gamma,lambda,alpha,tax_func, A_costs_factor,ref_pt,decay){
   # we cannot assume that the payoff would be psi*risksz when dW=1
   # we can assume that the consumer considers p-state only considering her own effort - given that she can't be sure about what psi would be chosen by the other (the other
   # option is for us to assume that the consumers assumes an expected value of psi - or the last value of psi in the previous draw)
   # karmakar(sigma,alpha) is fine because the  bet-size doesn't influence the weighting the -probability itself is of course dependent of which both effort psi and the state itself
   
-  upside_relative = disposable_income(A = A - psi + psi*risksz, A_costs = A_costs, tax_func = tax_func) -ref_pt
-  downside_relative = disposable_income(A = A - psi, A_costs = A_costs, tax_func = tax_func) -ref_pt
+  upside_relative = disposable_income(A = A - psi + psi*risksz, A_costs_factor = A_costs_factor, tax_func = tax_func) -ref_pt
+  downside_relative = disposable_income(A = A - psi, A_costs_factor = A_costs_factor, tax_func = tax_func) -ref_pt
   
   p = sigma_func(start_p=start_p,decay_factor=decay, past_psi = total_psi,psi= psi)
   wp = karmakar(p,alpha) 
@@ -579,10 +589,10 @@ optim_func <- function(psi,A,risksz,start_p,total_psi,gamma,lambda,alpha,tax_fun
   return (wp*pt_value(upside_relative,gamma,lambda)+  w1minusp* pt_value (downside_relative,gamma,lambda) )
 }
 
-#evolve_relative_wealth_discrete_contnatural(nsim = 1000, delta = 0 ,alpha1 = 3, alpha2 = .1,risksz = 10,T = 1,dt = .01,A1_init = 10, A2_init = 100,decay = .9,start_p = .5, gamma=.7, lambda = 10, A_costs = 0, plot_range=F, sigma_func=sigma_func_decline)
-evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,gamma, lambda, risksz, T, dt, A1_init, A2_init, decay, start_p, A_costs, plot_range,sigma_func){
+#evolve_relative_wealth_discrete_contnatural(nsim = 1000, delta = 0 ,alpha1 = 3, alpha2 = .1,risksz = 10,T = 1,dt = .01,A1_init = 10, A2_init = 100,decay = .9,start_p = .5, gamma=.7, lambda = 10, A_costs_factor = 0, plot_range=F, sigma_func=sigma_func_decline)
+evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,gamma, lambda, risksz, T, dt, A1_init, A2_init, decay, start_p, A_costs_factor, plot_range,sigma_func){
   
-  print(paste("delta=",delta,"alpha1=",alpha1,"alpha2=",alpha2,"gamma=",gamma, "lambda=",lambda, "risksz=",risksz, "T=",T, "dt=",dt, "A1_init=",A1_init, "A2_init=",A2_init, "decay=",decay, "start_p=",start_p, "A_costs=",A_costs))
+  print(paste("delta=",delta,"alpha1=",alpha1,"alpha2=",alpha2,"gamma=",gamma, "lambda=",lambda, "risksz=",risksz, "T=",T, "dt=",dt, "A1_init=",A1_init, "A2_init=",A2_init, "decay=",decay, "start_p=",start_p, "A_costs_factor=",A_costs_factor))
               
   if (missing(plot_range)){
     plot_range <- F
@@ -606,8 +616,8 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
     start_p <- .7
   }
   
-  if (missing(A_costs)){
-    A_costs <- 0
+  if (missing(A_costs_factor)){
+    A_costs_factor <- 0
   }
   
   A1df <- data.frame()
@@ -643,19 +653,19 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
       
       #psi should be chosen so that immediate gain u under risk is optimised
       
-      D1 = disposable_income(A = A1,A_costs = A_costs, tax_func = function(x) {taxes_due_for_1(delta=delta, A1=x,  A2=A2)})
-      D2 = disposable_income(A = A2,A_costs = A_costs, tax_func = function(x) {taxes_due_for_2(delta=delta, A1=A1, A2=x) })
+      D1 = disposable_income(A = A1,A_costs_factor = A_costs_factor, tax_func = function(x) {taxes_due_for_1(delta=delta, A1=x,  A2=A2)})
+      D2 = disposable_income(A = A2,A_costs_factor = A_costs_factor, tax_func = function(x) {taxes_due_for_2(delta=delta, A1=A1, A2=x) })
       
       ref_pt = reference_point(A1=A1,A2=A2)
 
       # consumer always makes the decision before the draw
-      psi1 <- optimise(function(x) { -optim_func(decay=decay,psi=x,A=A1,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha1,tax_func=function(x) {taxes_due_for_1(delta=delta, A1=x,A2=A2)}, ref_pt= ref_pt, A_costs=A_costs) },c(0,D1))$minimum
-      psi2 <- optimise(function(x) { -optim_func(decay=decay,psi=x,A=A2,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha2,tax_func=function(x) {taxes_due_for_2(delta=delta, A1=A1,A2=x)}, ref_pt= ref_pt, A_costs=A_costs) },c(0,D2))$minimum
+      psi1 <- optimise(function(x) { -optim_func(decay=decay,psi=x,A=A1,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha1,tax_func=function(x) {taxes_due_for_1(delta=delta, A1=x,A2=A2)}, ref_pt= ref_pt, A_costs_factor=A_costs_factor) },c(0,D1))$minimum
+      psi2 <- optimise(function(x) { -optim_func(decay=decay,psi=x,A=A2,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha2,tax_func=function(x) {taxes_due_for_2(delta=delta, A1=A1,A2=x)}, ref_pt= ref_pt, A_costs_factor=A_costs_factor) },c(0,D2))$minimum
       
       if (plot_range){
         par(mfrow=c(2,1))
-        psivec1 <- seq(0-10,D1+200,.1)  ; plot(psivec1, sapply(psivec1, function(x) { optim_func(decay=decay,psi=x,A=A1,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha1,ref_pt=ref_pt, A_costs=A_costs, tax_func=function(x) {taxes_due_for_1(delta=delta, A1=x,A2=A2)}) }),type='l' , main=paste0("argmax=",round(psi1,2)))
-        psivec2 <- seq(0-10,D2+200,.1)  ; plot(psivec2, sapply(psivec2, function(x) { optim_func(decay=decay,psi=x,A=A2,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha2,ref_pt=ref_pt, A_costs=A_costs, tax_func=function(x) {taxes_due_for_2(delta=delta, A1=A1,A2=x)}) }),type='l', main=paste0("argmax=",round(psi2,2)))
+        psivec1 <- seq(0-10,D1+200,.1)  ; plot(psivec1, sapply(psivec1, function(x) { optim_func(decay=decay,psi=x,A=A1,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha1,ref_pt=ref_pt, A_costs_factor=A_costs_factor, tax_func=function(x) {taxes_due_for_1(delta=delta, A1=x,A2=A2)}) }),type='l' , main=paste0("argmax=",round(psi1,2)))
+        psivec2 <- seq(0-10,D2+200,.1)  ; plot(psivec2, sapply(psivec2, function(x) { optim_func(decay=decay,psi=x,A=A2,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha2,ref_pt=ref_pt, A_costs_factor=A_costs_factor, tax_func=function(x) {taxes_due_for_2(delta=delta, A1=A1,A2=x)}) }),type='l', main=paste0("argmax=",round(psi2,2)))
       }
       if ( (D1-psi1) <.1 ){
         message = "All D1 spent"
