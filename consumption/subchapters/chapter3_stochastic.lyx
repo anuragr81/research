@@ -2271,10 +2271,10 @@ The needs of the consumer (adjusted for wealth as part of
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{multline}
-A_{1}(t+1)=A_{1}(t)+\delta(A_{2}(t)-A_{1}(t))-\text{\ensuremath{\chi A_{1}(t)}-}\psi_{1}^{*}(t)+\sigma(n(t))W\\
+\begin{gather}
+A_{1}(t+1)=A_{1}(t)+\delta(A_{2}(t)-A_{1}(t))-\text{\ensuremath{\chi A_{1}(t)}-}\psi_{1}^{*}(t)+\sigma(n(t))W\nonumber \\
 A_{2}(t+1)=A_{2}(t)+\delta(A_{1}(t)-A_{2}(t))-\text{\ensuremath{\chi A_{2}(t)}-}\psi_{2}^{*}(t)+\sigma(n(t))W\label{eq:Asset_evolution}
-\end{multline}
+\end{gather}
 
 \end_inset
 
@@ -2337,10 +2337,10 @@ noprefix "false"
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{multline}
-A_{1}(t+1)=A_{1}(t)+D_{1}(t)+\sigma(n(t))W\\
+\begin{gather}
+A_{1}(t+1)=A_{1}(t)+D_{1}(t)+\sigma(n(t))W\nonumber \\
 A_{2}(t+1)=A_{2}(t)+D_{2}(t)+\sigma(n(t))W\label{eq:AsseEvolution_brief}
-\end{multline}
+\end{gather}
 
 \end_inset
 
@@ -2556,7 +2556,7 @@ noprefix "false"
 \begin_inset Formula $A(t)$
 \end_inset
 
- are fixed) by the consumer.
+ are fixed).
  As wealth declines only through consumption (risk) and the consumption
  (risk taken) is fully under control of the consumer, the decision of an
  optimal 
@@ -2593,7 +2593,7 @@ literal "false"
 \end_inset
 
 .
- Thus the set of all possible 
+ The set of all possible 
 \begin_inset Formula $\psi$
 \end_inset
 
@@ -2603,23 +2603,13 @@ literal "false"
 \end_inset
 
  - which defines the probability weighting function.
- For example, such lotteries could correspond to the range of consumer's
- options to choose from a secure cash savings to a balanced strategy of
- spending towards education in the hope for income rise over years or a
- bet on an expensive club membership in a hope for relevant social connections
- - all with varying levels of risk so that a consumer's own risk-preference
- always influences the selection of a particular lottery.
- 
 \end_layout
 
 \begin_layout Standard
-To evaluate the various lotteries for the consumer, a prospect-theory (PT)
- utility function can capture both the non-linear probability (
-\begin_inset Formula $w_{\alpha}(p)$
-\end_inset
-
- to represent the consumer's subjectivity) and her loss-aversion with respect
- to a certain reference wealth level 
+To evaluate the various lotteries for the consumer, we use a prospect-theory
+ (PT) utility function which captures both the non-linear weighting of probabili
+ty and the consumer's loss-aversion with respect to a certain reference
+ wealth level 
 \begin_inset Formula $r$
 \end_inset
 
@@ -2628,7 +2618,7 @@ To evaluate the various lotteries for the consumer, a prospect-theory (PT)
 \begin_inset Formula $L$
 \end_inset
 
- evaluated with PT is seen as a sequence of payoffs 
+ in this formulation is seen as a sequence of payoffs 
 \begin_inset Formula $\{x_{i}\}$
 \end_inset
 
@@ -2747,7 +2737,22 @@ literal "false"
 
 \end_inset
 
-) is defined as follows: 
+) is defined as follows (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Value-Function-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the plots of the value function with varied degrees of loss-aversion
+ setting 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+): 
 \begin_inset Formula 
 \begin{alignat*}{1}
 \upsilon(\Delta) & =\begin{cases}
@@ -2762,26 +2767,88 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-The loss-aversion in consumer's wealth (i.e.
+While the loss-aversion in consumer's utility (i.e.
  the consumer dislikes losses more than she likes profits) is represented
- through the shape of the value function.
- The graphs for value function with varied degrees of loss-aversion are
- presented Figure 
+ through the shape of the value function, the non-linear weighting of probabilit
+y is represented with a Karmakar 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KarmakarSWU1978"
+literal "false"
+
+\end_inset
+
+ probability weighting function (see the graphs of the Karmakar probability
+ weighting function for varied degrees of risk-aversion 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Value-Function-1"
+reference "fig:Probability-Weighting-Function-1"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- (choosing 
-\begin_inset Formula $\lambda=1$
+)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A probability weighting function prevents common consequences paradox (see
+ Dhami
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SanjitDhamiBehavioural2016"
+literal "false"
+
 \end_inset
 
-).
- On other hand, the probability weighting function 
+) in consumer choice.
+ A more general probability weighting function than the Karmakar function
+ that both avoid the subproportionality issue and satisfies the reduction
+ invariance is the Prelec
+\begin_inset CommandInset citation
+LatexCommand cite
+key "PrelecFunction1998"
+literal "false"
+
+\end_inset
+
+ function (reduction invariance is the property that for a lottery 
+\begin_inset Formula $L=(x,p_{1})$
+\end_inset
+
+ received with probability 
+\begin_inset Formula $p_{2}$
+\end_inset
+
+where 
+\begin_inset Formula $(L,p_{2})\sim(x,q)$
+\end_inset
+
+, it is always implied that 
+\begin_inset Formula $(L^{\lambda},p_{2}^{\lambda})\sim(x,q^{\lambda})$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda>0$
+\end_inset
+
+ (where
+\begin_inset Formula $L^{\lambda}=(x,p_{1}^{\lambda})$
+\end_inset
+
+ ).
+\end_layout
+
+\end_inset
+
+.
+ It is helpful to view the probability weighting function 
 \begin_inset Formula $w(\cdot)$
 \end_inset
 
@@ -2795,7 +2862,7 @@ noprefix "false"
 
 \end_inset
 
- illustrates two contrastive consumer types :
+ as a presentation of two contrastive consumer types:
 \end_layout
 
 \begin_layout Enumerate
@@ -2803,7 +2870,7 @@ low-
 \begin_inset Formula $\alpha$
 \end_inset
 
- consumer who overvalues low-probability and takes high probability as certain
+ consumer who overvalues low-probability and takes high probability as certain.
 \end_layout
 
 \begin_layout Enumerate
@@ -2839,27 +2906,12 @@ high-
 \color inherit
  consumer who ignores low-probability events (as if they didn’t exist) and
  overvalues high-probability events – treating them as almost certain.
- 
 \end_layout
 
 \begin_layout Standard
-The graphs of the probability weighting function for varied degrees of risk-aver
-sion 
-\begin_inset Formula $\alpha$
-\end_inset
-
- are shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Probability-Weighting-Function-1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- It is evident that the low-
+Thus if one can view expenditure on education or social mobility games as
+ small probability bets (and a view of certainty in tax-incomes), then it
+ is implied that the low-
 \family roman
 \series medium
 \shape up
@@ -2920,9 +2972,38 @@ noprefix "false"
 \uwave default
 \noun default
 \color inherit
- individual as the latter may remain circumspect about taking chances in
- small probability social mobility bets (and consider tax-income certain).
- The consumer would thus optimise 
+ individual (as the latter may remain circumspect about surer events).
+ The social-mobility in an empirical application could correspond to a range
+ of options from a secure cash savings to a balanced strategy of spending
+ towards education (in a hope for income rise over years) or a bet on an
+ expensive club membership in a hope for relevant social connections - all
+ with varying levels of risk so that a consumer's own risk-preference always
+ influences the selection of a particular lottery (and a certain 
+\begin_inset Formula $\psi$
+\end_inset
+
+ ).
+ The key feature of the utility in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:basic_utility"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in the setup specified in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Wealth-process"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is that the consumer optimises 
 \begin_inset Formula $u(A\in\mathscr{A})$
 \end_inset
 
@@ -2953,7 +3034,7 @@ noprefix "false"
 \end_inset
 
 .
- If we use a Bernoulli setting with probability 
+ If we use a Bernoulli setting with the probability 
 \begin_inset Formula $p$
 \end_inset
 
@@ -2976,24 +3057,32 @@ u(A|\psi,p) & =\sum_{A\in\mathscr{A})}\nu(A)w(P(A_{T}=A))\label{eq:utility_berno
 \end_layout
 
 \begin_layout Standard
-Since we have 
-\begin_inset Formula $P(X_{t}=1)=p$
+Thus we have 
+\begin_inset Formula $P(X_{t}=1)=p(t)$
 \end_inset
 
  and 
-\begin_inset Formula $P(X_{t}=0)=1-p$
+\begin_inset Formula $P(X_{t}=0)=1-p(t)$
 \end_inset
 
- in the Bernoulli distribution, the consumer would evaluate the lottery
- 
-\begin_inset Formula $\{(D(t)-\psi+R\sigma_{t}-A',p),(D(t)-\psi-A',1-p)\}$
+ in the Bernoulli distribution and the consumer evaluates the lottery 
+\begin_inset Formula $\{(D(t)-\psi(t)+R\sigma_{t}-r,p(t)),(D(t)-\psi(t)-r,1-p(t))\}$
 \end_inset
 
  (
 \begin_inset Formula $\psi\ge0$
 \end_inset
 
-) .
+) in every period 
+\begin_inset Formula $t$
+\end_inset
+
+ .
+ Here, 
+\begin_inset Formula $r$
+\end_inset
+
+ is the reference level relevant for the value-function alone.
  Choosing a particular form of probability weighting function 
 \begin_inset Formula $w(p)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}$
 \end_inset
@@ -3006,62 +3095,7 @@ literal "false"
 
 \end_inset
 
-)
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-A probability weighting function is for preventing common consequences paradox
- (see Dhami
-\begin_inset CommandInset citation
-LatexCommand cite
-key "SanjitDhamiBehavioural2016"
-literal "false"
-
-\end_inset
-
-).
- A more general probability weighting function than the Karmakar function
- that does not suffer with subproportionality issue and also satisfies the
- reduction invariance is due to Prelec
-\begin_inset CommandInset citation
-LatexCommand cite
-key "PrelecFunction1998"
-literal "false"
-
-\end_inset
-
-.
- Reduction invariance is the property that for a lottery 
-\begin_inset Formula $L=(x,p_{1})$
-\end_inset
-
- received with probability 
-\begin_inset Formula $p_{2}$
-\end_inset
-
-where 
-\begin_inset Formula $(L,p_{2})\sim(x,q)$
-\end_inset
-
-, it is implied that 
-\begin_inset Formula $(L^{\lambda},p_{2}^{\lambda})\sim(x,q^{\lambda})$
-\end_inset
-
- for all 
-\begin_inset Formula $\lambda>0$
-\end_inset
-
- (where
-\begin_inset Formula $L^{\lambda}=(x,p_{1}^{\lambda})$
-\end_inset
-
- ).
-\end_layout
-
-\end_inset
-
-, the value function 
+), the value function 
 \begin_inset Formula $\upsilon(A)$
 \end_inset
 
@@ -3097,7 +3131,7 @@ noprefix "false"
 \begin_inset Formula $\psi_{1},\psi_{2}$
 \end_inset
 
- (respectively) that the consumer optimises are:
+ (respectively) that the consumers optimise are:
 \end_layout
 
 \begin_layout Standard
@@ -3105,8 +3139,8 @@ noprefix "false"
 \bar under
 \begin_inset Formula 
 \begin{multline}
-u_{1}(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{1}(t)-\psi+R\sigma_{t}-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{1}(t)-\psi-A')\\
-u_{2}(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{2}(t)-\psi+R\sigma_{t}-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{2}(t)-\psi-A')\label{eq:utility_final}
+u_{1}(\psi(t))=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{1}(t)-\psi+R\sigma_{t}-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{1}(t)-\psi-A')\\
+u_{2}(\psi(t))=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{2}(t)-\psi+R\sigma_{t}-A')+\frac{(1-p)^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{2}(t)-\psi-A')\label{eq:utility_final}
 \end{multline}
 
 \end_inset
@@ -3115,19 +3149,53 @@ u_{2}(\psi)=\frac{p^{\alpha}}{p^{\alpha}+(1-p)^{\alpha}}\upsilon(D_{2}(t)-\psi+R
 \end_layout
 
 \begin_layout Standard
-At every draw a success (
+In summary, a success (
 \begin_inset Formula $X_{t}=1)$
 \end_inset
 
- would enhance her wealth whereas a failure (
+ at the draw 
+\begin_inset Formula $t$
+\end_inset
+
+ would enhance a consumer's wealth whereas a failure (
 \begin_inset Formula $X_{t}=0$
 \end_inset
 
-) would reduces her wealth by 
-\begin_inset Formula $\psi$
+) would reduce her wealth by 
+\begin_inset Formula $\psi(t)$
 \end_inset
 
  (which she plans before the draw).
+ With a constant 
+\begin_inset Formula $\alpha$
+\end_inset
+
+, the consumer would thus choose the value 
+\begin_inset Formula $\psi^{*}$
+\end_inset
+
+ over the time period 
+\begin_inset Formula $t$
+\end_inset
+
+ so 
+\begin_inset Formula $E(u(\psi(t)))$
+\end_inset
+
+ is maximised.
+ Equivalently if 
+\begin_inset Formula $d\tau$
+\end_inset
+
+ steps until 
+\begin_inset Formula $t$
+\end_inset
+
+ are considered in evaluating the expectation, then the consumer optimises
+\begin_inset Formula $\int_{0}^{t}u(\psi(\tau))d\tau$
+\end_inset
+
+ .
  It is evident that the risk-seeking individual (the low-
 \begin_inset Formula $\alpha$
 \end_inset
@@ -3151,7 +3219,7 @@ At every draw a success (
 \end_inset
 
  individual who ignores low probability of gains as too unlikely but takes
- high-probability as granted) .
+ high-probability as granted).
 \end_layout
 
 \begin_layout Standard
@@ -3249,174 +3317,28 @@ Dynamic Reference Points
 \end_layout
 
 \begin_layout Standard
-[2-dimensional-reference-level] In an environment where rates of success
- rise, a wealthy risk-seeker would be in a better situation than if she
- were risk-averse.
- Similarly, with declining rates of success, the richer risk-averse consumer
- would become richer while poorer risk-seeker becomes poorer.
- If risk-aversion levels were static, then the consumer 
-\begin_inset Formula $1$
-\end_inset
-
- can assume that consumer 
-\begin_inset Formula $2$
-\end_inset
-
- holds her 
-\begin_inset Formula $alpha$
-\end_inset
-
- constant in her evaluations of future wealth.
- Additionally, if 
-\begin_inset Formula $r$
-\end_inset
-
- was constant as well, we would arrive at an equilibrium where the consumers
- are better or worse off depending on their risk-aversion levels (which
- control effort 
-\begin_inset Formula $psi$
-\end_inset
-
-) and whether they are in a rising or declining regime.
- As Koszegi's framework have argued however, consumers are likely to be
- unsure about the reference points under more real-world circumstances.
- If we relieve the static 
-\begin_inset Formula $alpha$
-\end_inset
-
- assumption and assume that a consumer could be unsure about her own 
-\begin_inset Formula $alpha$
-\end_inset
-
- (and that of the other consumer) while evaluating future wealth point,
- then the expectation of utility in Equation above would need to evaluated
- over variation in 
-\begin_inset Formula $alpha$
-\end_inset
-
- as well.
- Notice however that it being a reference point, 
+Due to the dynamics of the model, a wealthy risk-seeker would be in a better
+ off in an environment where probabilities of success rise whereas in an
+ environment of declining rates of success, the richer risk-averse consumer
+ would become richer (and poorer risk-seeker poorer).
+ If the value of risk-aversion (
 \begin_inset Formula $\alpha$
 \end_inset
 
- cannot be changed as frequently as 
-\begin_inset Formula $\psi$
-\end_inset
+) were held constant by both the consumer, then her evaluations of the future
+ wealth would be driven only by her own (static) risk-aversion.
+ Additionally, if wealth reference were merely a function of current wealth,
+ the dynamics in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AsseEvolution_brief"
+plural "false"
+caps "false"
+noprefix "false"
 
-.
- If the consumer could adjust her risk-aversion levels like 
-\begin_inset Formula $\psi$
-\end_inset
-
- in a long period (in a more realistic example occupational choices or education
- are some long-term choices that would influence the consumer's long-term
- perceptions of risk and the reference level), one's risk-aversion level
- becomes a part of consumer choice.
- By making a long-term choice on 
-\begin_inset Formula $\alpha$
 \end_inset
 
  and 
-\begin_inset Formula $r$
-\end_inset
-
-, the consumer is effectively choosing a reference point relative to which
- her expectations for 
-\begin_inset Formula $\psi$
-\end_inset
-
- would be formed.
- See Paper for theoretical underpinning related to the personal equilibrium.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-\bar under
-Let's consider the implications of this in our interpretation of status
- consumption.
- 
-\end_layout
-
-\begin_layout Standard
-[power of status consumption] The status consumption is a market of experiences.
- Persuasion is a power in this subjective plane.
- Through acquiring habits, taste and identity - which provide a security
- to the consumer (pulling her up when she is falling in an unfavourable
- direction) - a consumer who is risk-averse towards 
-\begin_inset Formula $\sigma$
-\end_inset
-
- (i.e.
- 
-\series bold
-undervalue
-\series default
- low probability) 
-\bar under
-would make someone else more risk-averse (?) 
-\bar default
-because the other person would acquire their tastes believeing that their
- lucks are associated with the level of risk-aversion (similarly the risk-seekin
-g makes others more risk-seeking).
- The poor can benefit from knowing of the true risks of being wealthy and
- might want to indicate their interest or disinterest in wealth (with consumptio
-n - that marks status within their own reference).
- While status consumption is always tied to one's own reference level, it
- always represents a long-term protective (imaginary) asset (hope-against-hope)
- to create a favourable risk-aversion level in untoward circumstances.
- Status consumption costs something.
- By investing in it, the risk-averse loser lowers her alpha (bandwagon)
- and the risk-seeking loser increases her alpha (snob).
- It doesn't influence the other but only improves oneself.
- Status consumption is an 
-\begin_inset Quotes eld
-\end_inset
-
-influence good
-\begin_inset Quotes erd
-\end_inset
-
- which offers good habits to the loser (if she is already a loser) it makes
- sense - but even when somebody is a winner it offers a protection - for
- the long-term.
- The status consumption can thus provide the consumer a security that is
- not part of natural process - by reassuring the consumer that the other
- consumer would not put herself in an environment too far away from her.
- 
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Assumption: 
-\series default
-If we assume that 
-\begin_inset Formula $\alpha$
-\end_inset
-
- is a function of 
-\begin_inset Formula $r$
-\end_inset
-
- and that 
-\begin_inset Formula $r$
-\end_inset
-
- depends only on 
-\begin_inset Formula $A_{1}A_{2}$
-\end_inset
-
- (e.g.
- the average of 
-\begin_inset Formula $A_{1}$
-\end_inset
-
-and 
-\begin_inset Formula $A_{2}$
-\end_inset
-
- that we have chosen in the Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:utility_final"
@@ -3426,11 +3348,203 @@ noprefix "false"
 
 \end_inset
 
-, then the problem is simplified to choosing a certain 
-\begin_inset Formula $\alpha(\Delta A,r,p)$
+ would imply an equilibrium where the consumers are better or worse off
+ depending on their risk-aversion levels (which control effort 
+\begin_inset Formula $\psi$
 \end_inset
 
+).
+ However, as the recent developments in models for anticipatory emotions
+ have argued, real-world consumers are likely to be unsure about their reference
+ points.
+ If we relieve the static 
+\begin_inset Formula $\alpha$
+\end_inset
 
+ assumption and assume that the consumer could be unsure about her own 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ while evaluating her future wealth (and that of the other consumer), the
+ expectation of utility in Equation
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:utility_final"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ would need be evaluated over the variation in 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ as well.
+ 
+\end_layout
+
+\begin_layout Standard
+The consumer does not change 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ as frequently as 
+\begin_inset Formula $\psi$
+\end_inset
+
+ in this setting since reference points for a consumer choice are not set
+ simultaneously with the choice itself (see Koszegi 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KoszegiAnticipationPersonalEqlb2010"
+literal "false"
+
+\end_inset
+
+ for theoretical underpinning of the model).
+ With the dynamic reference point, 
+\begin_inset Formula $\alpha,r$
+\end_inset
+
+ are selected over a longer-term 
+\begin_inset Formula $T$
+\end_inset
+
+ than the period 
+\begin_inset Formula $t$
+\end_inset
+
+ over which the choice of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is made.
+ If the consumer can adjust her risk-aversion levels (e.g.
+ occupational choices or long-term choices such as education that influence
+ the consumer's long-term reference levels), albeit not as frequently as
+ investment 
+\begin_inset Formula $\psi$
+\end_inset
+
+, then the consumer would optimise utility by selecting appropriate reference
+ levels as well.
+\end_layout
+
+\begin_layout Standard
+The subjective plane of the optimisation is where status consumption becomes
+ relevant in our model.
+ While the consumers are uncertain of each other's response to the respective
+ changes in wealth, a market for status goods serves as a market of experiences
+ that may connect the consumers of varied risk and wealth configurations.
+ In the real world, status goods are used both to distill away those with
+ less wealth-retaining abilities and to attract those with wealth-gaining
+ attitudes.
+ Through acquiring habits, taste and identity that develop around status
+ items, the consumer obtains a subjective security (or a boost in self-image)
+ that makes her believe that she would not drift into an unfavourable risk-avers
+ion level (habit).
+ The longer-term choice for 
+\begin_inset Formula $\alpha(T)$
+\end_inset
+
+ is different from immediate risk-taking she must enact through selection
+ of 
+\begin_inset Formula $\psi(t)$
+\end_inset
+
+ and the slower habit acquisition allows the risk-averse (risk-seeking)
+ consumer 
+\bar under
+to make other more risk-averse (risk-seeking) through consumptio
+\bar default
+n.
+ In other words, by investing in status items, a risk-averse loser buys
+ a protection against 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ going too far up (by engaging in bandwagon consumption for example) and
+ the risk-seeking loser protects against lowering her 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ too much (by choosing a snob type consumption).
+ Status consumption is an 
+\begin_inset Quotes eld
+\end_inset
+
+influence good
+\begin_inset Quotes erd
+\end_inset
+
+ in the model that offers a perceived security which is not provided by
+ the natural process.
+ Another way to look at the above setting is as a zero-sum game where the
+ consumers are uncertain about each other's future risk-levels and are thus
+ willing to pay a price for the knowledge that the other individual would
+ always have a favourable risk-aversion (higher or lower) with respect to
+ oneself.
+ Status consumption is constituted in how the two consumer exchange the
+ information about their-risk aversion levels with each other.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+If 
+\begin_inset Formula $\alpha_{T}$
+\end_inset
+
+ is a reference point then 
+\begin_inset Formula $\alpha_{T}$
+\end_inset
+
+ cannot also be a function of 
+\begin_inset Formula $t$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+While above discussed uncertainty in reference points pertains both to 
+\begin_inset Formula $\alpha_{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+, we assume that the reference 
+\begin_inset Formula $r_{T}$
+\end_inset
+
+ is a function of 
+\begin_inset Formula $\Delta A_{T}$
+\end_inset
+
+ (e.g.
+ the average of the 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+ for the two consumers in the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:utility_final"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) so a consumer chooses just 
+\begin_inset Formula $\alpha_{T}$
+\end_inset
+
+ at the start of the stochastic draw (based on her past experiences)
 \begin_inset Foot
 status open
 
@@ -3445,285 +3559,294 @@ The other option is to consider a two-dimensional reference point vector
 \end_inset
 
  of the other consumer).
- This too could be extended to use the relevance about status consumption.
+ This too could be extended to make the same argument about the relevance
+ of status and security.
 \end_layout
 
 \end_inset
 
 .
- One consequence of 
-\begin_inset Formula $r$
+ Instead of 
+\begin_inset Formula $\alpha$
 \end_inset
 
- depending on 
-\begin_inset Formula $A_{1},A_{2}$
+ in the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:utility_final"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- is that then the richer consumer directly influences the poorer consumers
- by raising their mid-point reference point (i.e making the poorer consumer
- more risk-taking than she otherwise would be).
-  Wealth-differences are more visible than risk perceptions - but that's
- not how status consumption matters in the model.
- That's where status consumption - a statement of power - ensures that the
- the consumer would dominate the other person's alpha - either by giving
- it higher confidence or reluctance.
- A cost-function associated with the 
+, the consumer uses the function 
+\begin_inset Formula $\iota(\Delta A_{T},\alpha_{T})$
+\end_inset
+
+ which adjusts 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ relevant at a time point 
+\begin_inset Formula $t$
+\end_inset
+
+ to the consumer in every evaluation of future wealth at time 
+\begin_inset Formula $t$
+\end_inset
+
+ based on 
+\begin_inset Formula $\alpha_{T}$
+\end_inset
+
+ - the value of reference-point chosen at start of every 
+\begin_inset Formula $t$
+\end_inset
+
+-period and 
+\begin_inset Formula $\Delta A_{T}$
+\end_inset
+
+ - the differences in wealth of the consumer at the start of the 
+\begin_inset Formula $t-$
+\end_inset
+
+period.
+ Notice that due to 
+\begin_inset Formula $r_{T}$
+\end_inset
+
+ depending only on 
+\begin_inset Formula $\Delta A_{T}$
+\end_inset
+
+, the richer consumer directly influences the poorer consumers by raising
+ their mid-point reference point (i.e making the poorer consumer more risk-taking
+ than she would otherwise be).
+ The consumer thus optimises the expected PT utility by by considering 
+\begin_inset Formula $\alpha_{T}$
+\end_inset
+
+ for time period 
+\begin_inset Formula $t$
+\end_inset
+
+ as the following double stochastic integral:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+E(u(T))=\int_{0}^{T}u(\alpha_{\tau})d\tau & =\int^{T}(\int^{t}u(\alpha_{\tau},\psi(k))dk)d\tau\label{eq:double_integral}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As such a consumer would select 
+\begin_inset Formula $\alpha_{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi(k)$
+\end_inset
+
+ in every 
+\begin_inset Formula $t-$
+\end_inset
+
+period such that 
+\begin_inset Formula $E(u(T))$
+\end_inset
+
+ is maximised.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+A consumer who also spends on status consumption would evaluated this expectatio
+n under a constraint on 
+\begin_inset Formula $\alpha_{T}$
+\end_inset
+
+ - since the status consumption offers her a security that her 
+\begin_inset Formula $\alpha_{T}$
+\end_inset
+
+ needs not fall out from that of the other consumer.
+ Notice that there are no material changes with status consumption on 
+\begin_inset Formula $\psi$
+\end_inset
+
+ – it is only the subjective evaluation of future wealth that is affected
+ by spending on status consumption.
+
+\family default
+\series bold
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\end_layout
+
+\begin_layout Standard
+In the gold-rush analogy, status consumption is the value of a signal that
+ indicates a higher subjective likelihood of finding gold in the future,
+ status consumption also provides the security of a shared belief among
+ the risk-sharing consumers.
+ A consumer who can let both herself and the other consumer believe that
+ she is poised to find the next big mine with much higher wealth levels
+ than their current fortunes would carry a higher status (regardless of
+ whether she is the richer consumer or not).
+ Similarly, a consumer may lose her status not simply due to direct wealth
+ loss but through a disbelief in her future prospects as well.
+ By ensuring that the consumers keep their risk-aversion levels close to
+ each other, they attempt to ensure that their fortunes don't diverge too
+ much relative to each other.
+ Thus even though a signal of projected wealth may have no value by itself
+ (it always requires labor 
+\begin_inset Formula $\psi$
+\end_inset
+
+ to retrieve more gold), it carries a value to the consumer since it shifts
+ one's risk-aversion 
+\begin_inset Formula $\alpha_{T}$
+\end_inset
+
+ in the desired direction.
+ We thus associate a cost-function 
+\begin_inset Formula $\kappa(L)$
+\end_inset
+
+ with status consumption for a certain bound 
 \begin_inset Formula $(L)$
 \end_inset
 
- pair so 
+ so that 
 \begin_inset Formula $|\alpha_{1}-\alpha_{2}|<L$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-[Two period model] The consumer not want to be too risk-averse in an environment
- where being risk-seeking awards more (by being on a bandwagon) and she
- would avoid being risk-seeking in an environment where being risk-averse
- might make oneself better off (using snob consumption).
- Status consumption offers a protection to the consumer by letting her know
- that she has a favourable risk-level.
- The knowledge that the other individual would always a risk-aversion higher
- or lower than oneself is of value to the consumer in a zero-sum game.
- The consumer 
-\begin_inset Formula $P$
+ By paying a cost 
+\begin_inset Formula $\kappa(L)$
 \end_inset
 
- would have a higher status than 
-\begin_inset Formula $Q$
+, therefore, the consumer guarantees that the difference 
+\begin_inset Formula $|\alpha_{1}-\alpha_{2}|$
 \end_inset
 
-, not by having a higher likelihood of wealth projected by herself but also
- ensure that the other consumer 
-\begin_inset Formula $Q$
-\end_inset
-
- also projects the consumer 
-\begin_inset Formula $P$
-\end_inset
-
- to have a higher wealth.
- Status consumption in constituted in how the two consumer exchange the
- information about their-risk aversion levels with each other.
-\end_layout
-
-\begin_layout Standard
-[Two period model - what favourable risk-level means] We use the anticipatory
- emotions framework proposed by Koszegi
-\begin_inset CommandInset citation
-LatexCommand cite
-key "KoszegiAnticipationPersonalEqlb2010"
-literal "false"
-
-\end_inset
-
- to understand how the consumer may choose status consumption.
- Due to the value the consumer attaches to risky investments (e.g.
- on education and lifestyle), the consumer must make a choice by assuming
- a certain behaviour by the other consumer.
- This is how she chooses a certain function 
-\begin_inset Formula $\alpha(\Delta A,p)$
+ would not become higher than 
+\begin_inset Formula $L$
 \end_inset
 
 .
- Being risk-seeking provide higher relative wealth when the return for risk
- is high enough and the other consumer makes lesser effort.
- On the other hand, it pays off to be risk-averse if 
-\begin_inset Formula $p$
-\end_inset
-
- is too low.
- Therefore the consumer would switch to being risk-averse only if she is
- confident that p is not enough for the other consumer to close the wealth
- gap.
- Let’s say that the consumer works based on the expected time until when
- the other consumer would close the wealth gap – an expected value that
- would decrease as the p goes up or the other consumer becomes more risk-seeking.
- The poor consumer has no option to switch to being risk-averse except when
- the finding rate is too low (and being risk-seeking would hurt) and/or
- when there is taxation.
- Otherwise, extreme loss aversion would mean that she would take whatever
- risk there is to take.
- Given that the consumer gains more in sufficiently near term by risk-seeking,
- the consumer would only know in the long-term period 
-\begin_inset Formula $T$
-\end_inset
-
- that she needs to be more risk-seeking or less.
- She finds that she has too little or too high aversion or propensity for
- risk only after realising a loss at time 
-\begin_inset Formula $T$
-\end_inset
-
-.
- The expected values at times 
-\begin_inset Formula $\tau$
-\end_inset
-
- and 
-\begin_inset Formula $T$
-\end_inset
-
- (
-\begin_inset Formula $\tau<T$
-\end_inset
-
-) determine the cost and motivation for status consumption.
- The gain-loss utilty does not sastisfy desirable properties (loss aversion
- for large-stakes) for non-linear absolute utility.
-\end_layout
-
-\begin_layout Standard
-[FORMALLY] Thus optimal 
-\begin_inset Formula $\alpha$
-\end_inset
-
- choice is made for 
-\begin_inset Formula $T$
-\end_inset
-
- and 
-\begin_inset Formula $\psi$
-\end_inset
-
- in 
-\begin_inset Formula $t<T$
-\end_inset
-
-.
- The choice of 
-\begin_inset Formula $\psi$
-\end_inset
-
- is always relative to a certain 
-\begin_inset Formula $\alpha(A,p)$
-\end_inset
-
- so the consumer wishes to optimise expected PT utility by paying towards
- the constrained evaluation of the integral 
-\begin_inset Formula $\alpha(A,p)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 
 \series bold
-[Value of Status Consumption] 
+ 
 \series default
-Even outside the two consumer model, the market for status consumption is
- essentially a market of experiences and these are experiences are used
- to connect individuals of varied risk and wealth configurations.
- Status consumption is used to distill away those with less wealth or with
- unfavourable risk-attitudes.
+The monetary value for status consumption in the framework is simply the
+ average loss incurred by a consumer when she makes her choice on 
+\begin_inset Formula $\psi(t)$
+\end_inset
 
-\bar under
- A fair value of private club memberships or an expertise in conspicuous
- items (watches, cars etc.) which may eventually get the consumer in the
- rich club (over generations if not immediately) should be proportional
- to intergenerational probability.
- That status consumption may deviate from the expected value may in fact
- be evident for the dismal state of intergenerational mobility in the world
- economy
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ChettyUSIntergen2014"
-literal "false"
+ and 
+\begin_inset Formula $\alpha_{T}$
+\end_inset
+
+ in the absence of knowing the other consumer risk-aversion.
+ This follows from the integral 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:double_integral"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
 .
- 
-\bar default
-A monetary value for status consumption in the framework is simply the average
- loss incurred by her when she make her choice on 
-\begin_inset Formula $\psi$
-\end_inset
-
- (over a given time-horizon 
-\begin_inset Formula $T$
-\end_inset
-
-) in the absence of the knowledge of the other consumer risk-aversion.
- In the gold-rush analogy, status consumption would be equivalent to a signal
- that indicates a higher subjective likelihood of finding gold in the future
- for both the consumers.
- A consumer who can let both herself and the other consumer believe that
- is she is poised to find the next big mine with much higher wealth levels
- than their current fortunes would carry a higher status (regardless of
- whether she is the richer consumer or not).
- Equivalently, a consumer may lose her status not simply due to direct wealth
- loss but through a disbelief in her future prospects alone.
- Status consumption provides the security of a shared belief to either of
- consumers and thus even though as a signal of projected wealth it may have
- no value by itself (it always requires labor 
-\begin_inset Formula $\psi$
-\end_inset
-
- to retrieve more gold), it may carry a value to the consumer since it improves
- one's risk-seeking behaviour in the desired direction.
 \end_layout
 
 \begin_layout Standard
-[Stability: TAXES and ASSET-COSTS] The above dynamics would imply that asset
- differences would be much higher than their starting points if a risk-taking
- consumer gets richer and the opportunities to gain mobility (return from
- the wealth process) dry up – leaving no chance for the poorer consumer
- to participate in the wealth game.
+The above dynamics imply necessarily that the asset differences would be
+ much higher than their starting point if a risk-taking consumer gets richer
+ and the opportunities to gain mobility (return from the wealth process)
+ dry up – thus leaving no chance for the poorer consumer to participate
+ in the wealth game.
  To reduce final wealth differences and to leave the game in a state ripe
  enough until a natural process reinvigorates with more wealth, a taxation
- rate provides an additional control to the wealth differences in the wealth
- game.
- Such taxation pressures would increase or decrease with asset differences
- in the final states.
- We view the taxation policy simply as a means to transfer a proportion
- of wealth differences from the richer consumer to the poor consumer.
+ policy could provide an additional control to the wealth differences in
+ the game.
+ A taxation policy can be seen as simply a means to transfer a (linear)
+ proportion of wealth differences from the richer consumer to the poor consumer.
  The tax rates remain constant throughout and their effect on the future
  income are known to the consumer.
- The above model to understand how taxation would influence status consumption
- in a rising and declining economy.
- The stability of the model is merely the point where the consumers have
- run out of risk-taking opportunities – as their disposable income would
- approach near zero as the wealth opportunities dry out – or reaches a level
- where expected rise in income equals 0 (or the costs of assets in a non-zero
- asset costs model).
- In other word, the equilibrium state of the model is arrived at when costs
- balance the future expectation of income (wealth changes).
+ In the presence of risk-aversion, the above model for status consumption
+ also helps us understand how taxation could influence consumer preferences
+ among consumers with varying wealth levels and risk-aversion (in a rising
+ and declining economy).
+ The complexity of the model can be addressed with Monte Carlo simulations
+ so that the stability condition is merely the point at which the consumers
+ have run out of risk-taking opportunities (i.e.
+ their disposable income have neared zero or costs balance the future expectatio
+n of wealth changes).
 \end_layout
 
 \begin_layout Standard
-[Takeaways] Instead of assuming wealth-differences we also focus on how
- the relevance of the knowledge of future across social sections could influence
- consumption more than the asset difference and income.This offers three
- advantages that are of value towards the normative theory for status consumptio
-n.
- First, we can interpret a true value of status consumption.
- Whether the consumer perceptions are out of touch with reality or not is
- a quantiative measure of how futile status consumption might relatively
- in disparate economies - say in the developing and the developed world.
- Secondly, we understand quantitatively what how taxation could cause the
- create pressures on status consumption under rising and declining regimes
- - which is particularly appealing since the latter are of less importance
- in subjective.
- The model allows us to do that because we assume that uncertainties at
- long-term are usually controlled by more.
- Thirdly, social privileges also matter in this model as someone who can
- always ensure 
+
+\bar under
+[Takeaways] 
+\bar default
+Instead of assuming wealth-differences we also focus on how the relevance
+ of the knowledge of future across social sections could influence consumption
+ more than the asset difference and income.
+ This offers three advantages that are of value towards the normative theory
+ for status consumption.
+ First, we wish to arrive at a fair value of status consumption.
+ Not all status consumption is a 
 \begin_inset Quotes eld
 \end_inset
 
-power
+waste
 \begin_inset Quotes erd
 \end_inset
 
- of 
-\begin_inset Formula $\alpha$
-\end_inset
-
-.
+ but is necessitated by asymmetries in future hopes not fully due to asset
+ differences but probably socio-political changes that create different
+ perceptions of the future.
+ This allows us to under status consumption and its proposed futility in
+ a wider contexts or in disparate economies (say in the developing and the
+ developed world).
+ Secondly, we get a more quantitative view of the effect of taxation on
+ status consumption - by related it to the certainty of future wealth and
+ behavioural approaches to risk.
+ 
+\bar under
+Taxation is straight money - but status consumption is risky consumption.
+\bar default
+Thirdly, this framework also allows an explicit way of endogenising social
+ privileges in status by explaining the material impact merely subjective
+ pecking orders.
 \end_layout
 
 \begin_layout Section
@@ -3731,11 +3854,14 @@ Conclusions
 \end_layout
 
 \begin_layout Standard
-[Main Conclusion] The model interprets the relevance of local reference
- points as the personal equilibirum of consumers.
+[Main Conclusion] The model attempts to find the conditions in an environment
+ of uncertainty that justifies status consumption ...
+ .
+ The model interprets the relevance of local reference points as the personal
+ equilibirum of consumers.
  This takes an approach that is more general and of more descriptive relevance
- than many of the models we've used.The roots of subjective inference lie
- in exchangeability 
+ than many of the models we've explored.
+ As the roots of subjective inference lie in exchangeability 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "RichardSubjectiveProbRealThing2004,deFinettiLaPrevision1937"
@@ -3743,18 +3869,11 @@ literal "false"
 
 \end_inset
 
-.
- Despite carrying the same 
-\begin_inset Quotes eld
-\end_inset
-
-economic
-\begin_inset Quotes erd
-\end_inset
-
- significance, the very presence of social hierarchy means that the individuals
- would associate a higher subjective probability with a certain characteristics
- 
+., we wish to use a model that highlights how subjective interpretation could
+ relate to hierarchy and still carry an economic impact.
+ As the roots of uncertainty lie in exchangeability, the very presence of
+ social hierarchy can be interpreted as individuals associating a higher
+ subjective probability with a certain characteristics 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -3767,96 +3886,23 @@ exchangeable
 \end_inset
 
  in a private sense.
- Such preferences are hardly anomalies but reflect a long-term security
- perceived by individuals that they associate with characteristics 
-\begin_inset Formula $\rho$
-\end_inset
-
-.
- A desirable feature of the above framework is that it also endogenises
- social characteristics vector as the consumer's notion of subjectivity.
- The assumption of common 
-\begin_inset Formula $\sigma$
-\end_inset
-
- is however that of 100% mobility.
- In the real world, the access to 
-\begin_inset Formula $\sigma$
-\end_inset
-
- that scales payoff with effort 
-\begin_inset Formula $\psi$
-\end_inset
-
- would be segmented or limited to individuals of a certain 
-\begin_inset Formula $A$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-[CYCLES IN ECONOMY] As such, the inheritable wealth would decline in value
- when it's not invested in any growing economy.
- In a declining economy (consider depletion of gold in our example), even
- though wealth may depreciate slower it would still keep the consumer's
- relative advantage to others and the consumers would continue to form an
- expectation of increased future wealth just the same.
  It can be argued that wealth in the economy is important not only because
  of the purchasing power but fundamentally due to the social order in the
  form of an expectation held by other participants in the economy that they
  can replicate the success of the wealthy by acting as participants in the
- economy 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-In the presence of social stratification, such expectations would be segmented
- across social groups.
-\end_layout
-
+ economy.
+ Such subjective preferences there are hardly anomalies but reflect a long-term
+ security perceived by individuals that they associate with certain social
+ characteristics.
+ The 
+\begin_inset Quotes eld
 \end_inset
 
-.
- The nature of the distribution would thus be independent of the state of
- the economy.
- For example, the model may allow us to compare status consumption in a
- developed economy with that in a developing economy.
- From the point of view of the consumer's perception of risk - which the
- model incorporates - the most relevant difference between the developing
- countries and the developed countries is that of the strength of welfare
- institutions.
- In a developed economy, the state institutions intervene when market forces
- aren't directed enough to handle financially risky undertakings or to distribut
-e items that are identified as public goods.
- On the other hand, the state institutions are generally weaker in the developin
-g world - often failing to provide incentives to the private enterprise
- for distribution of public goods.
- The differences that the levels of uncertainty at local levels cause could
- explain the varied context of status consumption.
- When the determinants of status are public goods, the expectation for their
- growth is less risky than when these are not provided as a public good.
- This has implications for status consumption.
- Consider basic education - which may be of status importance in the developing
- economy in a way that it isn't in the developed economy.
- This is primarily because the distribution of education (and other similar
- assets that may be public goods) is state-assisted in a developed country
- and the expected risk in levels of education of the progeny is lowered.
- Thus, the extent to which education may eventually matter towards status
- in the developed economy depends on how consumers set themselves apart
- in the social order based on other means of signaling status e.g.
- consumption or social identity (since education may no longer differentiate
- them in the social order).
- On the other hand, when a minimum degree of education isn't guaranteed
- by the state (as is the case in a developing economy), the expected growth
- from education is higher (observed probability).
- 
-\end_layout
+economic
+\begin_inset Quotes erd
+\end_inset
 
-\begin_layout Standard
-[TAXATION] Taxation is straight money - but status consumption is risky
- consumption.
+ significance of such preferences is an empirical concern.
 \end_layout
 
 \begin_layout Standard
