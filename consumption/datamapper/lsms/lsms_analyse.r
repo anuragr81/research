@@ -959,21 +959,26 @@ get_stata_income_re_results <- function(){
   return(res)
 }
 
-estimation_df_budget_quantile<- function(ll, pares,e)
+estimation_df_budget_quantile<- function(ll,e)
 {
   
   if (missing(e)){
     e <- minimum_household_needs_wo_usage(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
   
-  if (missing(pares)){
-    pares <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014, pivot_asset = "stove_other")
-  }
+  #if (missing(pares)){
+  #  pares <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014, pivot_asset = "stove_other")
+  #}
   
   #needs don't include housing fee (transport fee must also be removed)
+  psiA2010 <- plyr::rename(subset(e$df,year==2010), c("hhid"="hhid2010"))
+  
   needs2012 <- plyr::rename(subset(e$df,year==2012), c("hhid"="hhid2012"))
-  psiA2012 <- merge(pares$df,needs2012,all.y=TRUE)
-  psiA2012[is.na(psiA2012$netmtm_fdelta),]$netmtm_fdelta <-0
+  psiA2012 <- needs2012 # merge(pares$df,needs2012,all.y=TRUE)
+  #psiA2012[is.na(psiA2012$netmtm_fdelta),]$netmtm_fdelta <-0
+  
+  psiA2014 <- plyr::rename(subset(e$df,year==2014), c("hhid"="hhid2014"))
+  
   
   # 1. we can't rely on regions too much because the house-rents are missing in some regions
   # 2. We can treat all habits as quality (as they are indistinguishable)
@@ -1007,38 +1012,127 @@ estimation_df_budget_quantile<- function(ll, pares,e)
   #
   
   #total consumption
+  
+  # 2010
+  ohs2010 <- subset(o2010,!is.na(region))
+  hs2010 <- unique(merge(unique(ohs2010[,c("hhid","region","district","isrural","expensiveregion")]), ll@get_hsize(ohs2010), by = c("hhid")))
+  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , max_age = max(age))
+  hswithchars2010 <- merge(hs2010,chosenchars2010,all.x = T)
+  psiAregion2010 <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),psiA2010,by=c("hhid2010"))
+  ct2010<- plyr::rename(ll@get_total_expenditures(hh = c2010, ohs = ohs2010), c("hhid"="hhid2010","total_expenditure"="ct"))
+  psiAregionct2010 <- (merge(psiAregion2010,ct2010,by=c("hhid2010")))
+  
+  # 2012
+  
+  
   ohs2012 <- subset(o2012,!is.na(region))
   hs2012 <- unique(merge(unique(ohs2012[,c("hhid","region","district","isrural","expensiveregion")]), ll@get_hsize(ohs2012), by = c("hhid")))
   chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , max_age = max(age))
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   psiAregion2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),psiA2012,by=c("hhid2012"))
   ct2012<- plyr::rename(ll@get_total_expenditures(hh = c2012, ohs = ohs2012), c("hhid"="hhid2012","total_expenditure"="ct"))
-  #ct2012 <- plyr::rename(ddply(subset(c2012,!is.na(cost))[,c("hhid","cost")],.(hhid),summarise,ct=sum(cost)),c("hhid"="hhid2012"))
   psiAregionct2012 <- (merge(psiAregion2012,ct2012,by=c("hhid2012")))
+  
+  #2014
+  
+  ohs2014 <- subset(o2014,!is.na(region))
+  hs2014 <- unique(merge(unique(ohs2014[,c("hhid","region","district","isrural","expensiveregion")]), ll@get_hsize(ohs2014), by = c("hhid")))
+  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , max_age = max(age))
+  hswithchars2014 <- merge(hs2014,chosenchars2014,all.x = T)
+  psiAregion2014 <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),psiA2014,by=c("hhid2014"))
+  ct2014<- plyr::rename(ll@get_total_expenditures(hh = c2014, ohs = ohs2014), c("hhid"="hhid2014","total_expenditure"="ct"))
+  psiAregionct2014 <- (merge(psiAregion2014,ct2014,by=c("hhid2014")))
   
  
   # use to infer Psi and categories_non_basic_wassets
   psi_groups <- subset(lsms_normalizer()@categories_non_basic_wassets(),group=="asset_costs")
-  psi_data    <- plyr::rename(ddply(merge(c2012,psi_groups,by=c("shortname"))[c("hhid","shortname","cost")],.(hhid),summarise,Psi=sum(cost)), c("hhid"="hhid2012"))
-  psiAregionctPsiExcess2012 <- merge(psiAregionct2012,psi_data)
+  
+  psi_data_2010    <- plyr::rename(ddply(merge(c2010,psi_groups,by=c("shortname"))[c("hhid","shortname","cost")],.(hhid),summarise,Psi=sum(cost)), c("hhid"="hhid2010"))
+  psi_data_2012    <- plyr::rename(ddply(merge(c2012,psi_groups,by=c("shortname"))[c("hhid","shortname","cost")],.(hhid),summarise,Psi=sum(cost)), c("hhid"="hhid2012"))
+  psi_data_2014    <- plyr::rename(ddply(merge(c2014,psi_groups,by=c("shortname"))[c("hhid","shortname","cost")],.(hhid),summarise,Psi=sum(cost)), c("hhid"="hhid2014"))
+  
+  #2010
+  psiAregionctPsiExcess2010 <- merge(psiAregionct2010,psi_data_2010)
+  cA2010 <- ddply(plyr::rename(merge(c2010,subset(lsms_normalizer()@categories_non_basic_wassets(),group=="assets"))[,c("hhid","shortname","cost")],c("hhid"="hhid2010","cost"="cA")) , .(hhid2010),summarise,cA=sum(cA))
+  psiAregionctPsi2010 <- merge(psiAregionctPsiExcess2010,cA2010)
+  
+  #2012
+  psiAregionctPsiExcess2012 <- merge(psiAregionct2012,psi_data_2012)
   cA2012 <- ddply(plyr::rename(merge(c2012,subset(lsms_normalizer()@categories_non_basic_wassets(),group=="assets"))[,c("hhid","shortname","cost")],c("hhid"="hhid2012","cost"="cA")) , .(hhid2012),summarise,cA=sum(cA))
   psiAregionctPsi2012 <- merge(psiAregionctPsiExcess2012,cA2012)
   
-  psiAregionctPsi2012$dA <- with(psiAregionctPsi2012, cA+ netmtm_fdelta)
-  #View(ddply(psiAregionctPsi2012 ,.(region,isrural),summarise,nc=mean(basic_needs_cost), ct=mean(ct), Psi=mean(Psi)) %>% mutate ( nut = ct - nc - Psi))
+  #2014
+  psiAregionctPsiExcess2014 <- merge(psiAregionct2014,psi_data_2014)
+  cA2014 <- ddply(plyr::rename(merge(c2014,subset(lsms_normalizer()@categories_non_basic_wassets(),group=="assets"))[,c("hhid","shortname","cost")],c("hhid"="hhid2014","cost"="cA")) , .(hhid2014),summarise,cA=sum(cA))
+  psiAregionctPsi2014 <- merge(psiAregionctPsiExcess2014,cA2014)
   
+  ############## Assigning weights ####
+   
+  psiAregionctPsi2010$dA <- with(psiAregionctPsi2010, cA) #cA+ netmtm_fdelta)
+  psiAregionctPsi2010$w_A <- with(psiAregionctPsi2010,(dA)/(ct-basic_needs_cost-Psi+dA))
+  psiAregionctPsi2010$w_nu <- with(psiAregionctPsi2010,(ct-basic_needs_cost-Psi)/(ct-basic_needs_cost-Psi+dA))
+  
+  psiAregionctPsi2012$dA <- with(psiAregionctPsi2012, cA) #cA+ netmtm_fdelta)
   psiAregionctPsi2012$w_A <- with(psiAregionctPsi2012,(dA)/(ct-basic_needs_cost-Psi+dA))
   psiAregionctPsi2012$w_nu <- with(psiAregionctPsi2012,(ct-basic_needs_cost-Psi)/(ct-basic_needs_cost-Psi+dA))
   
+  psiAregionctPsi2014$dA <- with(psiAregionctPsi2014, cA) #cA+ netmtm_fdelta)
+  psiAregionctPsi2014$w_A <- with(psiAregionctPsi2014,(dA)/(ct-basic_needs_cost-Psi+dA))
+  psiAregionctPsi2014$w_nu <- with(psiAregionctPsi2014,(ct-basic_needs_cost-Psi)/(ct-basic_needs_cost-Psi+dA))
+  
+  
+  ##############
   
   # setting lnA0
-  assetslog2012 <- ddply(pares$a0,.(hhid2012),summarise,lnA0=log(sum(number.2012*mtm.2012)))
+  ##2010
+  hhids2010_2012 <- mapping_hhids_2010_2012(o2012)
+  
+  asset_mtms_2012 = asset_mtms(a2012,"bed","2012")
+  asset_mtms_2010 <- plyr::rename(merge(hhids2010_2012,asset_mtms_2012),c("mtm.2012"="mtm.2010","cost.2012"="cost.2010","number.2012"="number.2010"))[,c("hhid2010","hhid2012","shortname","number.2010","mtm.2010","cost.2010")]
+  
+  assetslog2010 <- ddply(asset_mtms_2010,.(hhid2010),summarise,lnA0=log(sum(number.2010*mtm.2010)))
+  psiAregionctPsiA02010 <- merge(psiAregionctPsi2010,assetslog2010,all.x = T)
+  if (nrow(subset(psiAregionctPsiA02010,is.na(lnA0)))>0){
+    psiAregionctPsiA02010[is.na(psiAregionctPsiA02010$lnA0),]$lnA0 <- 0
+  }
+  
+  print(paste("Ignoring ",nrow(subset(psiAregionctPsiA02010,w_nu<0 | w_A<0)),"rows"))
+  
+  ##2012
+  
+  assetslog2012 <- ddply(asset_mtms_2012,.(hhid2012),summarise,lnA0=log(sum(number.2012*mtm.2012)))
   psiAregionctPsiA02012 <- merge(psiAregionctPsi2012,assetslog2012,all.x = T)
   if (nrow(subset(psiAregionctPsiA02012,is.na(lnA0)))>0){
     psiAregionctPsiA02012[is.na(psiAregionctPsiA02012$lnA0),]$lnA0 <- 0
   }
   
   print(paste("Ignoring ",nrow(subset(psiAregionctPsiA02012,w_nu<0 | w_A<0)),"rows"))
+  
+  #2014
+  
+  asset_mtms_2014 = asset_mtms(a2014,"bed","2014")
+  assetslog2014 <- ddply(asset_mtms_2014,.(hhid2014),summarise,lnA0=log(sum(number.2014*mtm.2014)))
+  psiAregionctPsiA02014 <- merge(psiAregionctPsi2014,assetslog2014,all.x = T)
+  if (nrow(subset(psiAregionctPsiA02014,is.na(lnA0)))>0){
+    psiAregionctPsiA02014[is.na(psiAregionctPsiA02014$lnA0),]$lnA0 <- 0
+  }
+  
+  print(paste("Ignoring ",nrow(subset(psiAregionctPsiA02014,w_nu<0 | w_A<0)),"rows"))
+  
+  ############## 2010
+  
+  psiAregionctPsiA02010$logx <- sapply(psiAregionctPsiA02010$ct-psiAregionctPsiA02010$basic_needs_cost-psiAregionctPsiA02010$Psi+psiAregionctPsiA02010$dA, function(x) { if(x<0) { -log(-x) } else {log(x)} } )
+  
+  psiAregionctPsiA02010 <- subset(psiAregionctPsiA02010,w_nu>=0 & w_A>=0)
+  A_bands <- c(.3,.65,1)
+  A_band_boundaries <- quantile(psiAregionctPsiA02010$lnA0,A_bands)
+  psiAregionctPsiA02010$A_band <- sapply(psiAregionctPsiA02010$lnA0,function(x) { get_band(c(-Inf,A_band_boundaries[1],A_band_boundaries[2]),c(A_band_boundaries[1],A_band_boundaries[2],A_band_boundaries[3]),x) })
+  
+  psiAregionctPsiA02010$group <- paste0("A",psiAregionctPsiA02010$A_band,"E",psiAregionctPsiA02010$expensiveregion,"R",psiAregionctPsiA02010$isrural)
+  psiAregionctPsiA02010$group_code <- with(psiAregionctPsiA02010,100*A_band+ 10*expensiveregion + isrural)
+  
+  
+  ############## 2012
   
   psiAregionctPsiA02012$logx <- sapply(psiAregionctPsiA02012$ct-psiAregionctPsiA02012$basic_needs_cost-psiAregionctPsiA02012$Psi+psiAregionctPsiA02012$dA, function(x) { if(x<0) { -log(-x) } else {log(x)} } )
   
@@ -1049,6 +1143,21 @@ estimation_df_budget_quantile<- function(ll, pares,e)
   
   psiAregionctPsiA02012$group <- paste0("A",psiAregionctPsiA02012$A_band,"E",psiAregionctPsiA02012$expensiveregion,"R",psiAregionctPsiA02012$isrural)
   psiAregionctPsiA02012$group_code <- with(psiAregionctPsiA02012,100*A_band+ 10*expensiveregion + isrural)
+  
+  ############## 2014
+  
+  psiAregionctPsiA02014$logx <- sapply(psiAregionctPsiA02014$ct-psiAregionctPsiA02014$basic_needs_cost-psiAregionctPsiA02014$Psi+psiAregionctPsiA02014$dA, function(x) { if(x<0) { -log(-x) } else {log(x)} } )
+  
+  psiAregionctPsiA02014 <- subset(psiAregionctPsiA02014,w_nu>=0 & w_A>=0)
+  A_bands <- c(.3,.65,1)
+  A_band_boundaries <- quantile(psiAregionctPsiA02014$lnA0,A_bands)
+  psiAregionctPsiA02014$A_band <- sapply(psiAregionctPsiA02014$lnA0,function(x) { get_band(c(-Inf,A_band_boundaries[1],A_band_boundaries[2]),c(A_band_boundaries[1],A_band_boundaries[2],A_band_boundaries[3]),x) })
+  
+  psiAregionctPsiA02014$group <- paste0("A",psiAregionctPsiA02014$A_band,"E",psiAregionctPsiA02014$expensiveregion,"R",psiAregionctPsiA02014$isrural)
+  psiAregionctPsiA02014$group_code <- with(psiAregionctPsiA02014,100*A_band+ 10*expensiveregion + isrural)
+  
+  #############
+  
   print("DONE")
   return(psiAregionctPsiA02012)
 }
@@ -1359,6 +1468,35 @@ copyover_b <- function(a,b) {
   } else {
     return (b)
   }
+}
+
+
+asset_mtms <- function(assets_dat,pivot_asset,year){
+    
+    assets <- subset(assets_dat,!is.na(cost) & cost >0 & number >0 & !is.na(number) )
+    assets$shortname <- as.character(assets$shortname)
+
+    assets_src    <- (dplyr::filter( merge(assets,ddply(assets,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost < v))
+
+    
+
+    c0 <- ddply(subset(assets_src, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost), n = length(hhid))
+    c0 <- c0[order(c0$mean_cost),]
+    
+    # anything ge expensive than pivot_asset is an asset
+    
+    all_assets              <- setdiff(subset(c0,median_cost>= c0[c0$shortname==pivot_asset,]$median_cost)$shortname,c()) #c("land","house")
+    
+    ag <- get_asset_group()
+    if (length(setdiff( all_assets,unique(ag$shortname)) ) > 0) {
+      stop(paste0("Missing Assets in the mapping:",toString(setdiff( all_assets,unique(ag$shortname)) )))
+    }
+    
+    
+    select_cols <- c("hhid","number","shortname","mtm","cost")
+    a <- plyr::rename(subset(assets_src[,select_cols],number>0 & is.element(shortname,all_assets)),c("hhid"=paste0("hhid",year),"number"=paste0("number.",year),"mtm"=paste0("mtm.",year),"cost"=paste0("cost.",year)))
+    return(a)
+    
 }
 
 plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014,pivot_asset){

@@ -535,7 +535,7 @@ sample_run <- function(){
     x <- evolve_relative_wealth_discrete_contnatural(nsim = 2000, delta = 0 ,alpha1 =.3, alpha2 = 2, risksz = 10,
                                                      T = 1,dt = .001,A1_init=frow$x, A2_init=frow$y,decay = .01,
                                                      start_p = .2, gamma=.7, lambda = 10, A_costs_factor = 0., plot_range = F, sigma_func=rise_func)
-    
+
     #x <- evolve_relative_wealth_discrete_contnatural(nsim = 3000, delta = 0 ,alpha1 =2, alpha2 = .1, risksz = 10,
     #                                                 T = 1,dt = .005,A1_init=frow$x, A2_init=frow$y,decay = .01,
     #                                                 start_p = .2, gamma=.7, lambda = 10, A_costs_factor = 500, plot_range = F, sigma_func=sigma_func_decline)
