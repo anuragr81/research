@@ -1015,7 +1015,7 @@ estimation_df_budget_quantile<- function(ll,e)
   
   # 2010
   ohs2010 <- subset(o2010,!is.na(region))
-  hs2010 <- unique(merge(unique(ohs2010[,c("hhid","region","district","isrural","expensiveregion")]), ll@get_hsize(ohs2010), by = c("hhid")))
+  hs2010 <- unique(merge(unique(ohs2010[,c("hhid","region","district","ward","isrural","expensiveregion")]), ll@get_hsize(ohs2010), by = c("hhid")))
   chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , max_age = max(age))
   hswithchars2010 <- merge(hs2010,chosenchars2010,all.x = T)
   psiAregion2010 <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),psiA2010,by=c("hhid2010"))
@@ -1026,7 +1026,7 @@ estimation_df_budget_quantile<- function(ll,e)
   
   
   ohs2012 <- subset(o2012,!is.na(region))
-  hs2012 <- unique(merge(unique(ohs2012[,c("hhid","region","district","isrural","expensiveregion")]), ll@get_hsize(ohs2012), by = c("hhid")))
+  hs2012 <- unique(merge(unique(ohs2012[,c("hhid","region","district","ward","isrural","expensiveregion")]), ll@get_hsize(ohs2012), by = c("hhid")))
   chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , max_age = max(age))
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   psiAregion2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),psiA2012,by=c("hhid2012"))
@@ -1036,7 +1036,7 @@ estimation_df_budget_quantile<- function(ll,e)
   #2014
   
   ohs2014 <- subset(o2014,!is.na(region))
-  hs2014 <- unique(merge(unique(ohs2014[,c("hhid","region","district","isrural","expensiveregion")]), ll@get_hsize(ohs2014), by = c("hhid")))
+  hs2014 <- unique(merge(unique(ohs2014[,c("hhid","region","district","ward","isrural","expensiveregion")]), ll@get_hsize(ohs2014), by = c("hhid")))
   chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , max_age = max(age))
   hswithchars2014 <- merge(hs2014,chosenchars2014,all.x = T)
   psiAregion2014 <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),psiA2014,by=c("hhid2014"))
@@ -1090,7 +1090,7 @@ estimation_df_budget_quantile<- function(ll,e)
   asset_mtms_2012 = asset_mtms(a2012,"bed","2012")
   asset_mtms_2010 <- plyr::rename(merge(hhids2010_2012,asset_mtms_2012),c("mtm.2012"="mtm.2010","cost.2012"="cost.2010","number.2012"="number.2010"))[,c("hhid2010","hhid2012","shortname","number.2010","mtm.2010","cost.2010")]
   
-  assetslog2010 <- ddply(asset_mtms_2010,.(hhid2010),summarise,lnA0=log(sum(number.2010*mtm.2010)))
+  assetslog2010 <- ddply(asset_mtms_2010,.(hhid2010),summarise,lnA0=log(sum(number.2010*mtm.2010)),A0=(sum(number.2010*mtm.2010)))
   psiAregionctPsiA02010 <- merge(psiAregionctPsi2010,assetslog2010,all.x = T)
   if (nrow(subset(psiAregionctPsiA02010,is.na(lnA0)))>0){
     psiAregionctPsiA02010[is.na(psiAregionctPsiA02010$lnA0),]$lnA0 <- 0
@@ -1100,7 +1100,7 @@ estimation_df_budget_quantile<- function(ll,e)
   
   ##2012
   
-  assetslog2012 <- ddply(asset_mtms_2012,.(hhid2012),summarise,lnA0=log(sum(number.2012*mtm.2012)))
+  assetslog2012 <- ddply(asset_mtms_2012,.(hhid2012),summarise,lnA0=log(sum(number.2012*mtm.2012)),A0=sum(number.2012*mtm.2012))
   psiAregionctPsiA02012 <- merge(psiAregionctPsi2012,assetslog2012,all.x = T)
   if (nrow(subset(psiAregionctPsiA02012,is.na(lnA0)))>0){
     psiAregionctPsiA02012[is.na(psiAregionctPsiA02012$lnA0),]$lnA0 <- 0
@@ -1111,13 +1111,40 @@ estimation_df_budget_quantile<- function(ll,e)
   #2014
   
   asset_mtms_2014 = asset_mtms(a2014,"bed","2014")
-  assetslog2014 <- ddply(asset_mtms_2014,.(hhid2014),summarise,lnA0=log(sum(number.2014*mtm.2014)))
+  assetslog2014 <- ddply(asset_mtms_2014,.(hhid2014),summarise,lnA0=log(sum(number.2014*mtm.2014)),A0=sum(number.2014*mtm.2014))
   psiAregionctPsiA02014 <- merge(psiAregionctPsi2014,assetslog2014,all.x = T)
   if (nrow(subset(psiAregionctPsiA02014,is.na(lnA0)))>0){
     psiAregionctPsiA02014[is.na(psiAregionctPsiA02014$lnA0),]$lnA0 <- 0
   }
   
   print(paste("Ignoring ",nrow(subset(psiAregionctPsiA02014,w_nu<0 | w_A<0)),"rows"))
+  # Asset and excess-per-heads plots
+  #plot_type='p';yy=2e+7; par(mfrow=c(3,1)); plot(psiAregionctPsiA02010$lnA0,with(psiAregionctPsiA02010,(ct-basic_needs_cost-Psi)),ylim=c(0,yy),xlim=c(0,20),type=plot_type); plot(psiAregionctPsiA02012$lnA0,with(psiAregionctPsiA02012,(ct-basic_needs_cost-Psi)),ylim=c(0,yy),xlim=c(0,20),type=plot_type);  plot(psiAregionctPsiA02014$lnA0,with(psiAregionctPsiA02014,(ct-basic_needs_cost-Psi)),ylim=c(0,yy),xlim=c(0,20),type=plot_type)
+  #yy=9e+6; par(mfrow=c(3,1)); plot(psiAregionctPsiA02010$A0,with(psiAregionctPsiA02010,(ct-basic_needs_cost-Psi)),ylim=c(0,yy),xlim=c(0,2e+5)); plot(psiAregionctPsiA02012$A0,with(psiAregionctPsiA02012,(ct-basic_needs_cost-Psi)),ylim=c(0,yy),xlim=c(0,2e+5));  plot(psiAregionctPsiA02014$A0,with(psiAregionctPsiA02014,(ct-basic_needs_cost-Psi)),ylim=c(0,yy),xlim=c(0,2e+5))
+  
+  #yy=1e+7; par(mfrow=c(3,1)); plot(psiAregionctPsiA02010$lnA0,with(psiAregionctPsiA02010,(Psi)),ylim=c(0,yy),xlim=c(0,20)); plot(psiAregionctPsiA02012$lnA0,with(psiAregionctPsiA02012,(Psi)),ylim=c(0,yy),xlim=c(0,20));  plot(psiAregionctPsiA02014$lnA0,with(psiAregionctPsiA02014,(Psi)),ylim=c(0,yy),xlim=c(0,20))
+  #yy=1e+7; par(mfrow=c(3,1)); plot(psiAregionctPsiA02010$lnA0,with(psiAregionctPsiA02010,(dA)),ylim=c(0,yy),xlim=c(0,20)); plot(psiAregionctPsiA02012$lnA0,with(psiAregionctPsiA02012,(dA)),ylim=c(0,yy),xlim=c(0,20));  plot(psiAregionctPsiA02014$dA,with(psiAregionctPsiA02014,(Psi)),ylim=c(0,yy),xlim=c(0,20))
+  
+  ## Visually, w_nu seems to represent the higher excess in the middle income groups:
+  #par(mfrow=c(2,1)) ; plot(psiAregionctPsiA02012$lnA0, with(psiAregionctPsiA02012,(ct-basic_needs_cost-Psi))); plot(psiAregionctPsiA02012$lnA0, with(psiAregionctPsiA02012,(w_nu)))
+  
+  #### fix absence of isrural psiAregionctPsiA02014 ######
+  region_identifier_cols <- c("region","district","ward")
+  region_identifier_data2012 <- unique(psiAregionctPsiA02012[,region_identifier_cols])
+  if (nrow(subset(region_identifier_data2012,is.na(ward)))>0){
+    region_identifier_data2012[is.na(region_identifier_data2012$ward)]$ward <- -1
+  }
+  isrural_info_available <- unique(psiAregionctPsiA02012[,c(region_identifier_cols,"isrural")])
+  # treating urban areas with rural wards as urban since min(nonrural=0,isrural=1)= nonrural(0)
+  isrural_info_available <- ddply(isrural_info_available,.(region,district),summarise,isrural=min(isrural))
+  psiAregionctPsiA02014$isrural <- NULL
+  if(nrow(subset(isrural_info_available,is.na(isrural)))){
+    stop(paste("No info found for ",nrow(subset(isrural_info_available,is.na(isrural))),toString(region_identifier_cols)))
+  }
+  
+  psiAregionctPsiA02014 <- merge(psiAregionctPsiA02014,isrural_info_available,by=c("region","district"))
+  ################ end psiAregionctPsiA02014 isrural fix #####
+  
   
   ############## 2010
   
@@ -1158,7 +1185,53 @@ estimation_df_budget_quantile<- function(ll,e)
   
   #############
   
+  # also report log of A - that's the band we're look at - i.e. people within the same band and those within the same rural / urban group - rural people care about rural with english-speaking. But looking at
+  # rural district people with the assets within the band (take whatever comes within an arbitrary percentage range so that are some people within it).
+  b <- 1.5;
+  ls2014 <- (psiAregionctPsiA02014[,c("hhid2014","lnA0","region","district","ward","isrural")] %>% mutate(lbA0=lnA0-b,ubA0=lnA0+b))
+  
+  
+  psiAregionctPsiA02010$A_left <- NULL
+  psiAregionctPsiA02010$A_right <- NULL
+  psiAregionctPsiA02012$A_left <- NULL
+  psiAregionctPsiA02012$A_right <- NULL
+  psiAregionctPsiA02014$A_left <- NULL
+  psiAregionctPsiA02014$A_right <- NULL
+  
+  maxLocalAssets2010 <- ddply(psiAregionctPsiA02010,.(region,district),summarise,maxLocallnA0=max(lnA0))
+  maxLocalAssets2012 <- ddply(psiAregionctPsiA02012,.(region,district),summarise,maxLocallnA0=max(lnA0))
+  maxLocalAssets2014 <- ddply(psiAregionctPsiA02014,.(region,district),summarise,maxLocallnA0=max(lnA0))
+  
+  psiAregionctPsiA02010 <- merge(psiAregionctPsiA02010,maxLocalAssets2010,by=c("region","district"))
+  psiAregionctPsiA02012 <- merge(psiAregionctPsiA02012,maxLocalAssets2010,by=c("region","district"))
+  psiAregionctPsiA02014 <- merge(psiAregionctPsiA02014,maxLocalAssets2010,by=c("region","district"))
+  
+  
+  psiAregionctPsiA02010 <- psiAregionctPsiA02010 %>% mutate(A_left=lnA0-b) %>% mutate(A_right_ub=lnA0+b) %>% mutate(A_2right_ub=lnA0+2*b)
+  psiAregionctPsiA02012 <- psiAregionctPsiA02012 %>% mutate(A_left=lnA0-b) %>% mutate(A_right_ub=lnA0+b) %>% mutate(A_2right_ub=lnA0+2*b)
+  psiAregionctPsiA02014 <- psiAregionctPsiA02014 %>% mutate(A_left=lnA0-b) %>% mutate(A_right_ub=lnA0+b) %>% mutate(A_2right_ub=lnA0+2*b)
+  
+  
+  psiAregionctPsiA02010 <- merge( psiAregionctPsiA02010, ddply(psiAregionctPsiA02010,.(hhid2010), summarise, A_right = min(maxLocallnA0,A_right_ub), A_2right = min(maxLocallnA0,A_2right_ub)), by = c("hhid2010"))
+  psiAregionctPsiA02012 <- merge( psiAregionctPsiA02012, ddply(psiAregionctPsiA02012,.(hhid2012), summarise, A_right = min(maxLocallnA0,A_right_ub), A_2right = min(maxLocallnA0,A_2right_ub)), by = c("hhid2012"))
+  psiAregionctPsiA02014 <- merge( psiAregionctPsiA02014, ddply(psiAregionctPsiA02014,.(hhid2014), summarise, A_right = min(maxLocallnA0,A_right_ub), A_2right = min(maxLocallnA0,A_2right_ub)), by = c("hhid2014"))
+  
+  psiAregionctPsiA02010$band_average <- mapply(function(x,y,r,d){log(median(exp(subset(psiAregionctPsiA02010,lnA0 > x & lnA0 <= y & region == r & district == d)$lnA0))) },psiAregionctPsiA02010$A_left,psiAregionctPsiA02010$A_right,psiAregionctPsiA02010$region,psiAregionctPsiA02010$district)
+  
+  #next-rich-band average is the band average for the richest band
+  psiAregionctPsiA02010$nextrich_band_average <- mapply(function(x,y,r,d){log(median(exp(subset(psiAregionctPsiA02010,lnA0 >= x & lnA0 <= y & region == r & district == d)$lnA0))) },psiAregionctPsiA02010$A_right,psiAregionctPsiA02010$A_2right,psiAregionctPsiA02010$region,psiAregionctPsiA02010$district)
+  
+  psiAregionctPsiA02010$band_nat_average <- mapply(function(x,y){log(median(exp(subset(psiAregionctPsiA02010,lnA0 > x & lnA0 <= y )$lnA0))) },psiAregionctPsiA02010$A_left,psiAregionctPsiA02010$A_right)
+  psiAregionctPsiA02010$band_cardinality <- mapply(function(x,y,r,d){nrow(subset(psiAregionctPsiA02010,lnA0 > x & lnA0 <= y  & region == r & district == d)) },psiAregionctPsiA02010$A_left,psiAregionctPsiA02010$A_right,psiAregionctPsiA02010$region,psiAregionctPsiA02010$district)
+  
+  psiAregionctPsiA02010$w_nu_area <- mapply(function(h,x,y,r,d){mean(subset(psiAregionctPsiA02010,hhid2010 != h & lnA0 > x & lnA0 <= y  & region == r & district == d)$w_nu) },psiAregionctPsiA02010$hhid2010, psiAregionctPsiA02010$A_left,psiAregionctPsiA02010$A_right,psiAregionctPsiA02010$region,psiAregionctPsiA02010$district)
+  psiAregionctPsiA02010$band_richness <- with(psiAregionctPsiA02010,band_average-band_nat_average)
+  #psiAregionctPsiA02010$area_richness <- mapply(function(r,d){log( median(exp(subset(psiAregionctPsiA02010,region==r & district == d )$lnA0))  / median(exp(psiAregionctPsiA02010$lnA0))) },psiAregionctPsiA02010$region,psiAregionctPsiA02010$district)
+  #ddply(psiAregionctPsiA02010,.(region),summarise,n=median(band_richness))
+  #summary(lm(data=psiAregionctPsiA02010,w_nu ~ band_richness + log(basic_needs_cost) + logx))
+  
   print("DONE")
+  
   return(psiAregionctPsiA02012)
 }
 
@@ -1231,7 +1304,9 @@ minimum_household_needs_wo_usage <- function(ll, c2010, c2012, c2014, o2010, o20
   basket_costs2010 <- ddply(basket_constituent_costs2010, .(region,district), summarise, basket_cost = sum(rec_cost))
   
   hsize2010              <- unique(merge(o2010[,c("hhid","region","district")], ll@get_hsize(o2010), by = c("hhid")))
-  foodbasket_costs2010 <- merge(hsize2010,basket_costs2010, by = c("region","district")) %>% mutate(familybasket_cost = consu*basket_cost) 
+  
+  # multiple prices with the number of members in the family to arrive at average cost (prices index could be calculated as a consu weighted average)
+  foodbasket_costs2010 <- merge(hsize2010,basket_costs2010, by = c("region","district")) %>% mutate(familybasket_cost = consu*basket_cost)
   
   
   hhp2012 <- ll@add_market_price_to_fooddiary (lgc=lgc,ld=ld,marketpricesdata=mktprices2012,ohsdata=o2012,ddata=fooddiarydata2012)
@@ -1300,8 +1375,16 @@ minimum_household_needs_wo_usage <- function(ll, c2010, c2012, c2014, o2010, o20
   needs2012 <- (merge( (energy_prices2012 [,c("region","district","hhid","price","recqs")]) %>% mutate( energy_cost = recqs*price) ,foodbasket_costs2012, by = c("hhid","region","district") ) %>% mutate(basic_needs_cost=energy_cost+familybasket_cost))
   needs2014 <- (merge( (energy_prices2014 [,c("region","district","hhid","price","recqs")]) %>% mutate( energy_cost = recqs*price) ,foodbasket_costs2014, by = c("hhid","region","district") ) %>% mutate(basic_needs_cost=energy_cost+familybasket_cost))
   
+  # BASIC NEEDS PRICES
+  prices2010 <- merge(ddply(foodbasket_costs2010 , .(region,district), summarise, food_price = sum(familybasket_cost)/sum(consu)), ddply(energy_prices2010 , .(region,district), summarise, energy_price = sum(recqs*price)/sum(recqs)) , by = c("region","district")) %>% mutate(needs_price = food_price + energy_price)
+  prices2012 <- merge(ddply(foodbasket_costs2012 , .(region,district), summarise, food_price = sum(familybasket_cost)/sum(consu)), ddply(energy_prices2012 , .(region,district), summarise, energy_price = sum(recqs*price)/sum(recqs)) , by = c("region","district")) %>% mutate(needs_price = food_price + energy_price)
+  prices2014 <- merge(ddply(foodbasket_costs2014 , .(region,district), summarise, food_price = sum(familybasket_cost)/sum(consu)), ddply(energy_prices2014 , .(region,district), summarise, energy_price = sum(recqs*price)/sum(recqs)) , by = c("region","district")) %>% mutate(needs_price = food_price + energy_price)
   
-  select_cols      <- c("hhid","basic_needs_cost")
+  needs2010 <- merge(needs2010,prices2010,by=c("region","district"))
+  needs2012 <- merge(needs2012,prices2010,by=c("region","district"))
+  needs2014 <- merge(needs2014,prices2010,by=c("region","district"))
+  
+  select_cols      <- c("hhid","basic_needs_cost","needs_price")
   r                <- data.frame()
   r                <- rbind(r, needs2010[,select_cols] %>% mutate(year=2010))
   r                <- rbind(r, needs2012[,select_cols] %>% mutate(year=2012)) 
