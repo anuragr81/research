@@ -88,6 +88,20 @@ ngr_normaliser<-function() {
       
       return(s)
     }
+    if (year == 2012){
+      s = data.frame(iesname=NULL,name=NULL)
+      
+      s= rbind(s,data.frame(iesname="state",name="region"))
+      s= rbind(s,data.frame(iesname="lga",name="district"))
+      s= rbind(s,data.frame(iesname="sector",name="is_urban"))
+      s= rbind(s,data.frame(iesname="ea",name="ea"))
+      s= rbind(s,data.frame(iesname="item_cd",name="item"))
+      s= rbind(s,data.frame(iesname="c2q1",name="is_available"))
+      s= rbind(s,data.frame(iesname="c2q3",name="price"))
+      s= rbind(s,data.frame(iesname="c2q2",name="lwp_unit"))
+      
+      return(s)
+    }
     stop (paste("Cannot find market data columns for year:",year))
   }
   market_data_info <- function(year){
@@ -180,6 +194,12 @@ ngr_normaliser<-function() {
                'spouse_personid', 'religion', 'is_father_hh', 'father_personid', 'is_father_alive', 'father_educ', 'father_occup',
                'is_mother_hh', 'mother_personid', 'is_mother_alive', 'mother_educ', 'mother_occup'))
     }
+    if (year == 2012){
+      return(c("hhid","region","district","ea","personid","is_urban", "zone","YOB",'is_hh_member', 'marital_status', 
+               'marriage_year_1','marriage_year_2', 'marriage_year_3', 'marriage_year_4',  
+               'spouse_personid', 'religion', 'is_father_hh', 'father_personid', 'is_father_alive', 'father_educ', 'father_occup',
+               'is_mother_hh', 'mother_personid', 'is_mother_alive', 'mother_educ', 'mother_occup'))
+    }
     
     stop(paste("Year:",year,"not supported"))
   }
@@ -209,6 +229,38 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s1q20",name="is_mother_alive"))
       s= rbind(s,data.frame(iesname="s1q21",name="mother_educ"))
       s= rbind(s,data.frame(iesname="s1q22",name="mother_occup"))
+      return(s)
+    } 
+    if (year == 2012){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="indiv",name="personid"))
+      s= rbind(s,data.frame(iesname="state",name="region"))
+      s= rbind(s,data.frame(iesname="lga",name="district"))
+      s= rbind(s,data.frame(iesname="sector",name="is_urban"))
+      s= rbind(s,data.frame(iesname="ea",name="ea"))
+      s= rbind(s,data.frame(iesname="s1q7_year",name="YOB"))
+      s= rbind(s,data.frame(iesname="s1q8",name="marital_status"))
+      
+      s= rbind(s,data.frame(iesname="s1q11a",name="marriage_year_1"))
+      s= rbind(s,data.frame(iesname="s1q11b",name="marriage_year_2"))
+      s= rbind(s,data.frame(iesname="s1q11c",name="marriage_year_3"))
+      s= rbind(s,data.frame(iesname="s1q11d",name="marriage_year_4"))
+      
+      s= rbind(s,data.frame(iesname="s1q13",name="spouse_personid"))
+      
+      
+      s= rbind(s,data.frame(iesname="s1q18",name="religion"))
+      s= rbind(s,data.frame(iesname="s1q19",name="is_father_hh"))
+      s= rbind(s,data.frame(iesname="s1q20",name="father_personid"))
+      s= rbind(s,data.frame(iesname="s1q21",name="is_father_alive"))
+      s= rbind(s,data.frame(iesname="s1q22",name="father_educ"))
+      s= rbind(s,data.frame(iesname="s1q23",name="father_occup"))
+      s= rbind(s,data.frame(iesname="s1q24",name="is_mother_hh"))
+      s= rbind(s,data.frame(iesname="s1q25",name="mother_personid"))
+      s= rbind(s,data.frame(iesname="s1q26",name="is_mother_alive"))
+      s= rbind(s,data.frame(iesname="s1q27",name="mother_educ"))
+      s= rbind(s,data.frame(iesname="s1q28",name="mother_occup"))
       return(s)
     }
     
@@ -250,6 +302,33 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s2q18g",name="educ_costg"))
       s= rbind(s,data.frame(iesname="s2q18h",name="educ_costh"))
       s= rbind(s,data.frame(iesname="s2q18i",name="educ_cost"))
+      return(s)
+    }
+    if (year == 2012){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="indiv",name="personid"))
+      s= rbind(s,data.frame(iesname="s2q5",name="is_schooled"))
+      
+      s= rbind(s,data.frame(iesname="s2q6",name="reason_not_schooled"))
+      s= rbind(s,data.frame(iesname="s2q7",name="school_start_age"))
+      s= rbind(s,data.frame(iesname="s2q8",name="highest_educ"))
+      s= rbind(s,data.frame(iesname="s2q9",name="qualification"))
+      s= rbind(s,data.frame(iesname="s2q10",name="is_inschool"))
+      s= rbind(s,data.frame(iesname="s2q11",name="reason_not_inschool"))
+      s= rbind(s,data.frame(iesname="s2q12",name="school_body"))
+      s= rbind(s,data.frame(iesname="s2q13",name="school_conveyance"))
+      s= rbind(s,data.frame(iesname="s2q14",name="school_distance"))
+      
+      s= rbind(s,data.frame(iesname="s2q19a",name="educ_costa"))
+      s= rbind(s,data.frame(iesname="s2q19b",name="educ_costb"))
+      s= rbind(s,data.frame(iesname="s2q19c",name="educ_costc"))
+      s= rbind(s,data.frame(iesname="s2q19d",name="educ_costd"))
+      s= rbind(s,data.frame(iesname="s2q19e",name="educ_coste"))
+      s= rbind(s,data.frame(iesname="s2q19f",name="educ_costf"))
+      s= rbind(s,data.frame(iesname="s2q19g",name="educ_costg"))
+      s= rbind(s,data.frame(iesname="s2q19h",name="educ_costh"))
+      s= rbind(s,data.frame(iesname="s2q19i",name="educ_cost"))
       return(s)
     }
     stop(paste("Year:",year,"not supported"))

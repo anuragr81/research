@@ -2239,6 +2239,11 @@ lsms_normalizer<-function() {
   }
   
   get_ohs_secc_columns_lsms_2010<-function(){
+    #KISWAHILI...1
+    #KISWAHILI & ENGLISH.....2
+    #ENGLISH...3
+    #ANY OTHER LANGUAGE..4
+    #NO .. 5
     return(c("hhid","personid","is_ge5y","litlang","is_literate","highest_educ","schoolowner",
              "schoolconveyance","has_missedschool","educexpense","has_adulteduc","adulteducmonths"))
   }
@@ -2262,6 +2267,11 @@ lsms_normalizer<-function() {
   }
   
   get_ohs_secc_columns_lsms_2012<-function(){
+    #KISWAHILI...1
+    #KISWAHILI & ENGLISH.....2
+    #ENGLISH...3
+    #ANY OTHER LANGUAGE..4
+    #NO .. 5
     return(c("hhid","personid","is_ge5y","litlang","is_literate","highest_educ","schoolowner",
              "schoolconveyance","has_missedschool","educexpense","has_adulteduc","adulteducmonths",
              "attended_school","school_start_age","school_leaving_year","schoolconveyance","schooltransporttime"));
@@ -2299,6 +2309,11 @@ lsms_normalizer<-function() {
   
   
   get_ohs_secc_columns_lsms_2014<-function(){
+    #KISWAHILI...1
+    #KISWAHILI & ENGLISH.....2
+    #ENGLISH...3
+    #ANY OTHER LANGUAGE..4
+    #NO .. 5
     return(c("hhid","personid","is_ge5y","litlang","is_literate","highest_educ","schoolowner",
              "schoolconveyance","has_missedschool","educexpense","has_adulteduc","adulteducmonths",
              "attended_school","school_start_age","school_leaving_year","schoolconveyance","schooltransporttime"));
