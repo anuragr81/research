@@ -21,3 +21,5 @@ esttab using c:/temp/respdf.tex, mtitle no p numbers star nogaps compress title(
 reg nut1 c.lt1 c.At##c.age 
 
 ** for budget ratio we can use e$df2012 and pares$df
+
+

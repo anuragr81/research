@@ -1232,8 +1232,7 @@ estimation_df_budget_quantile<- function(ll,e)
   res[["df2010"]] <- psiAregionctPsiA02010
   res[["df2012"]] <- psiAregionctPsiA02012
   res[["df2014"]] <- psiAregionctPsiA02014
-  ##
-  
+  ## 2010 2012 mapping
   hhid2012_hhid10_mapping <- mapping_hhids_2010_2012(o2012 = o2012)
   df2010_2012 <- merge(hhid2012_hhid10_mapping , plyr::rename(psiAregionctPsiA02012,c("hhid"="hhid2012"))) %>% mutate(year = 2012)
   df2010_2012$hhid2012 <- NULL
@@ -1245,6 +1244,20 @@ estimation_df_budget_quantile<- function(ll,e)
   print(paste("Ignoring split",length(split_hhids2010_2012),"/",length(unique(df2010_2012$hhid)),"households"))
   df2010_2012 <- subset(df2010_2012,!is.element(hhid,split_hhids2010_2012))
   res[["df2010_2012"]] <- df2010_2012
+  
+  ##
+  ## 2010 2012 mapping
+  hhid2014_hhid12_mapping <- mapping_hhids_2012_2014(o2014 = o2014)
+  df2012_2014 <- merge(hhid2014_hhid12_mapping , plyr::rename(psiAregionctPsiA02014,c("hhid"="hhid2014"))) %>% mutate(year = 2014)
+  df2012_2014$hhid2014 <- NULL
+  df2012_2014 <- plyr::rename(df2012_2014,c("hhid2012"="hhid"))
+  df2012_2014 <- rbind(df2012_2014,psiAregionctPsiA02012 %>% mutate(year =2012))
+  df2012_2014$hhid <- as.factor(df2012_2014$hhid)
+  split_hhids2012_2014 <- unique(subset(ddply(df2012_2014,.(hhid,year),summarise,n=length(consu)),n>1)$hhid)
+  
+  print(paste("Ignoring split",length(split_hhids2012_2014),"/",length(unique(df2012_2014$hhid)),"households"))
+  df2012_2014 <- subset(df2012_2014,!is.element(hhid,split_hhids2012_2014))
+  res[["df2012_2014"]] <- df2012_2014
   print("DONE")
   return(res)
 }
@@ -1270,6 +1283,8 @@ get_band_metrics <- function(dat,b){
   dat$band_nat_average <- mapply(function(x,y){log(median(exp(subset(dat,lnA0 > x & lnA0 <= y )$lnA0))) },dat$A_left,dat$A_right)
   dat$band_cardinality <- mapply(function(x,y,r,d){nrow(subset(dat,lnA0 > x & lnA0 <= y  & region == r & district == d)) },dat$A_left,dat$A_right,dat$region,dat$district)
   #dat$w_nu_area <- mapply(function(h,x,y,r,d){mean(subset(dat,hhid != h & lnA0 > x & lnA0 <= y  & region == r & district == d)$w_nu) },dat$hhid, dat$A_left,dat$A_right,dat$region,dat$district)
+  
+  
   dat$band_richness <- with(dat,band_average-band_nat_average)
   dat$outofplace <- with(dat,nextrich_band_average-band_nat_average)
   dat$has_english <- dat$litlang==2 | dat$litlang==3
@@ -1282,6 +1297,23 @@ get_band_metrics <- function(dat,b){
   #ANY OTHER LANGUAGE..4
   #NO .. 5
   
+  # alternative formulation of band_richness : divide my asset value by the quantile-asset-value in the national asset hierarhcy where quantile is my AV in the local asset hierarchy. This  would tell me how rich an area I am in
+  # If I am in a rich area, then my quantile's AV in the national hierarhcy is much lower (so I have a high score)
+  # Similarly, if I am in a poor area, then my quantile's AV in the national hierarhcy is much high (so I have a low score)
+  # If I am surrounded by rich people then I might feel miserable even though folks in the country are poorer than me i.e. low relative position locally but high national position.
+  get_hhid_ranks_for_region_district <- function(r,d) {dd=subset(dat,region==r & district==d); ranks =ecdf(dd$lnA0)(dd$lnA0) ; return(data.frame(hhid=dd$hhid,local_rank=ranks))}
+  # don't consider percentiles for less than 3 number of points
+  dat <- subset(dat,band_cardinality>2)
+  rds <- unique(dat[,c("region","district")])
+  hhids_with_local_ranks <- NULL
+  for (irow in seq(nrow(rds))){
+    reg = rds[irow,]$region
+    dis = rds[irow,]$district
+    hhids_with_local_ranks <- rbind(hhids_with_local_ranks,get_hhid_ranks_for_region_district(r=reg,d=dis))
+  }
+  dat <- merge(dat,hhids_with_local_ranks,by=c("hhid"))
+  dat$nat_asset_rankval <- sapply(dat$local_rank, function(x) { quantile(dat$lnA0,x)} )
+  dat$richness_rank <- with(dat,lnA0-nat_asset_rankval)
   return (dat)
 }
 
