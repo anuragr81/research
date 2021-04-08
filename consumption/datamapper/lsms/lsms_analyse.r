@@ -1218,14 +1218,15 @@ estimation_df_budget_quantile<- function(ll,e)
   
   # also report log of A - that's the band we're look at - i.e. people within the same band and those within the same rural / urban group - rural people care about rural with english-speaking. But looking at
   # rural district people with the assets within the band (take whatever comes within an arbitrary percentage range so that are some people within it).
-  bw <- 1.5;
+  bw <- log(2);
+  lw <- .2
   
   #psiAregionctPsiA02010$area_richness <- mapply(function(r,d){log( median(exp(subset(psiAregionctPsiA02010,region==r & district == d )$lnA0))  / median(exp(psiAregionctPsiA02010$lnA0))) },psiAregionctPsiA02010$region,psiAregionctPsiA02010$district)
   #ddply(psiAregionctPsiA02010,.(region),summarise,n=median(band_richness))
 
-  psiAregionctPsiA02010 <- get_band_metrics(dat=plyr::rename(psiAregionctPsiA02010,c("hhid2010"="hhid")),b = bw)
-  psiAregionctPsiA02012 <- get_band_metrics(dat=plyr::rename(psiAregionctPsiA02012,c("hhid2012"="hhid")),b = bw)
-  psiAregionctPsiA02014 <- get_band_metrics(dat=plyr::rename(psiAregionctPsiA02014,c("hhid2014"="hhid")),b = bw)
+  psiAregionctPsiA02010 <- get_band_metrics(dat=plyr::rename(psiAregionctPsiA02010,c("hhid2010"="hhid")),b = bw, l=lw)
+  psiAregionctPsiA02012 <- get_band_metrics(dat=plyr::rename(psiAregionctPsiA02012,c("hhid2012"="hhid")),b = bw, l=lw)
+  psiAregionctPsiA02014 <- get_band_metrics(dat=plyr::rename(psiAregionctPsiA02014,c("hhid2014"="hhid")),b = bw, l=lw)
   
   
   res = list()
@@ -1263,7 +1264,7 @@ estimation_df_budget_quantile<- function(ll,e)
 }
 
 
-get_band_metrics <- function(dat,b){
+get_band_metrics <- function(dat,b,l){
   
   maxLocalAssets <- ddply(dat,.(region,district),summarise,maxLocallnA0=max(lnA0))
   
@@ -1301,7 +1302,13 @@ get_band_metrics <- function(dat,b){
   # If I am in a rich area, then my quantile's AV in the national hierarhcy is much lower (so I have a high score)
   # Similarly, if I am in a poor area, then my quantile's AV in the national hierarhcy is much high (so I have a low score)
   # If I am surrounded by rich people then I might feel miserable even though folks in the country are poorer than me i.e. low relative position locally but high national position.
-  get_hhid_ranks_for_region_district <- function(r,d) {dd=subset(dat,region==r & district==d); ranks =ecdf(dd$lnA0)(dd$lnA0) ; return(data.frame(hhid=dd$hhid,local_rank=ranks))}
+  get_hhid_ranks_for_region_district <- function(r,d) {
+    dd=subset(dat,region==r & district==d); 
+    ranks =ecdf(dd$lnA0)(dd$lnA0) ; 
+    next_ranks = ranks + l
+    local_outofplace_ranks = sapply(next_ranks, function(x){quantile(dd$lnA0,min(x,1))}) - dd$lnA0
+    return(data.frame(hhid=dd$hhid,local_rank=ranks, local_outofplace= local_outofplace_ranks))
+  }
   # don't consider percentiles for less than 3 number of points
   dat <- subset(dat,band_cardinality>2)
   rds <- unique(dat[,c("region","district")])
@@ -1313,6 +1320,7 @@ get_band_metrics <- function(dat,b){
   }
   dat <- merge(dat,hhids_with_local_ranks,by=c("hhid"))
   dat$nat_asset_rankval <- sapply(dat$local_rank, function(x) { quantile(dat$lnA0,x)} )
+  
   dat$richness_rank <- with(dat,lnA0-nat_asset_rankval)
   return (dat)
 }
