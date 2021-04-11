@@ -1487,6 +1487,19 @@ minimum_household_needs_wo_usage <- function(ll, c2010, c2012, c2014, o2010, o20
   return(res)
 }
 
+get_next_band_hhid <- function(d){
+  dat <- d
+  ranks <- ecdf(dat$lnA0)(dat$lnA0)
+  next_ranks <- ranks+ .2
+  dat$next_aval_extrapolated <- (sapply(next_ranks, function(x){quantile(dat$lnA0,min(x,1))}))
+  next_band_df = data.frame()
+  for ( i in seq(nrow(dat)) ) {
+    cur_next_aval <- dat[i,]$next_aval_extrapolated
+    next_band_set <- (dat %>% mutate(absdiff = abs(cur_next_aval - lnA0)) %>% filter( absdiff == min(absdiff)))
+    next_band_df <- rbind(next_band_df,plyr::rename(next_band_set[1,][,c("lnA0","Psi")], c("lnA0"="next_band_aval","Psi"="next_band_psi") ))
+  }
+  return(cbind(dat,next_band_df))
+}
 
 estimation_df <-function( ll, pares, e, a2010, a2012, a2014, o2010, o2012, o2014, c2010, c2012, c2014 ){
   if (missing(e)){

@@ -12,3 +12,4 @@ eststo, title (BW+RP): quietly xtreg w_nu richness_rank local_outofplace log_nee
 
 esttab using c:/temp/resnu.tex, mtitle no p numbers star nogaps compress title(FE estimation for excess budget weight \$ w\_{\nu}\$ as dependent variable \label{tabExcessFE})
 
+*xtreg logct lnA0 ,  fe vce(robust)
