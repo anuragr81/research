@@ -33,6 +33,8 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           get_lsms_secj_fields_mapping_2010="function", 
                                           get_lsms_secm_info_columns="function",
                                           get_region_popdensity_map="function",
+                                          hh_secg_columns_lsms="function",
+                                          get_hh_secg_fields_mapping_lsms_2012="function",
                                           read_tnz="function",
                                           get_lsms_secm_fields_mapping="function",
                                           get_lsms_secl_info_columns_2010="function",
@@ -2277,6 +2279,32 @@ lsms_normalizer<-function() {
              "attended_school","school_start_age","school_leaving_year","schoolconveyance","schooltransporttime"));
   }
   
+  hh_secg_columns_lsms<-function(){
+    return (c('hhid', 'personid', 'health_perception', 'finance_perception',
+              'housing_perception', 'job_perception', 'healthcare_perception',
+              'education_perception', 'crime_perception', 'life_perception',
+              'richness_perception', 'richness_change_perception', 'richness_decade_change_perception'))
+  }
+  
+  get_hh_secg_fields_mapping_lsms_2012 <-function(){
+    s = data.frame(iesname=NULL,name=NULL)
+    s= rbind(s,data.frame(iesname="y3_hhid",name="hhid"))
+    s= rbind(s,data.frame(iesname="indidy3",name="personid"))
+    s= rbind(s,data.frame(iesname="hh_g03_1",name="health_perception"))
+    s= rbind(s,data.frame(iesname="hh_g03_2",name="finance_perception"))
+    s= rbind(s,data.frame(iesname="hh_g03_3",name="housing_perception"))
+    s= rbind(s,data.frame(iesname="hh_g03_4",name="job_perception"))
+    s= rbind(s,data.frame(iesname="hh_g03_5",name="healthcare_perception"))
+    s= rbind(s,data.frame(iesname="hh_g03_6",name="education_perception"))
+    s= rbind(s,data.frame(iesname="hh_g03_7",name="crime_perception"))
+    s= rbind(s,data.frame(iesname="hh_g03_8",name="life_perception"))
+    s= rbind(s,data.frame(iesname="hh_g04",name="richness_perception"))
+    s= rbind(s,data.frame(iesname="hh_g05",name="richness_change_perception"))
+    s= rbind(s,data.frame(iesname="hh_g06",name="richness_decade_change_perception"))
+    return(s)
+    
+  }
+  
   get_ohs_secc_fields_mapping_lsms_2012<-function(){
     s = data.frame(iesname=NULL,name=NULL)
     s= rbind(s,data.frame(iesname="y3_hhid",name="hhid"))
@@ -3678,6 +3706,8 @@ lsms_normalizer<-function() {
              get_ohs_secc_fields_mapping_lsms_2014=get_ohs_secc_fields_mapping_lsms_2014,
              ohs_mapping_lsms_2012=ohs_mapping_lsms_2012,
              ohs_mapping_lsms_2014=ohs_mapping_lsms_2014,
+             hh_secg_columns_lsms=hh_secg_columns_lsms,
+             get_hh_secg_fields_mapping_lsms_2012=get_hh_secg_fields_mapping_lsms_2012,
              get_lsms_secj_info_columns_2012=get_lsms_secj_info_columns_2012,
              get_lsms_secj_info_columns_2014=get_lsms_secj_info_columns_2014,
              get_lsms_secj_fields_mapping_2012=get_lsms_secj_fields_mapping_2012,

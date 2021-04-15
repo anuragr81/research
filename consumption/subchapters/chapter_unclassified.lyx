@@ -1970,5 +1970,601 @@ When additivity assumption cannot be used, two assumptions can simply the
  cars.
 \end_layout
 
+\begin_layout Section
+TODO
+\end_layout
+
+\begin_layout Enumerate
+It's effectively relative wealth that we're talking about
+\end_layout
+
+\begin_layout Enumerate
+If it's a Ramsey Savings problem, then let's specify it like that.
+\end_layout
+
+\begin_layout Enumerate
+Don't worry about Koszegi - take the top-down approach instead of bottom-up
+ approach.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Start by saying from the very beginning that the consumers would be be risk-aver
+se in the short term but risk-seeking in the long-term
+\end_layout
+
+\begin_layout Enumerate
+Speak of the issue that the consumer's don't already know risk-averse they
+ in the very beginning.
+\end_layout
+
+\begin_layout Enumerate
+The Ramsey problem itself needs to be solved first.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Solve the model
+\end_layout
+
+\begin_layout Enumerate
+Don't use status and wealth interchangably.
+ Sociologists have argued that white are rich because rich are white.
+\end_layout
+
+\begin_layout Enumerate
+Change effort variable to 
+\begin_inset Formula $\nu$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+How are 
+\begin_inset Formula $\nu$
+\end_inset
+
+/
+\begin_inset Formula $\psi$
+\end_inset
+
+ differences playing out in the system/solution?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Chapter 3 Rewrite
+\end_layout
+
+\begin_layout Subsection
+Goal
+\end_layout
+
+\begin_layout Subsubsection
+Background
+\end_layout
+
+\begin_layout Standard
+The model for tax under PT hasn't been used to understand Status consumption.
+ Policy has recommended local context 
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+ local context is never understood well.
+ 
+\bar under
+Status models are based on visibility.
+ We take a PT-based approach relating it to uncertainty- which may be more
+ generic.
+\end_layout
+
+\begin_layout Standard
+Tax is for status indication purposes.
+ If tax is observed as low status then individuals competing for status
+ might not want it.
+ How does a risk-situation consider tax.
+\end_layout
+
+\begin_layout Subsubsection
+Problem
+\end_layout
+
+\begin_layout Standard
+Instead of focusing on visbiility, we are concerned with how consumers compete
+ under uncertainty.
+ In the intertemporal problem, we look for myopia among consumers as well.
+\end_layout
+
+\begin_layout Subsection
+Model
+\end_layout
+
+\begin_layout Standard
+The two cases to compare are:
+\end_layout
+
+\begin_layout Enumerate
+A classical optimisation of non-PT utlility based on wealth.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The optimisation of PT utility
+\end_layout
+
+\begin_layout Standard
+What a model calibrates are the levels of displeasure - feeling like a loser
+ - future expectations etc.
+ - these are meant to be observed.
+\end_layout
+
+\begin_layout Subsection
+Classical Approach
+\end_layout
+
+\begin_layout Standard
+The consumer would optimise with 
+\begin_inset Formula $\nu$
+\end_inset
+
+ and 
+\begin_inset Formula $A$
+\end_inset
+
+ the expected utility or the expected 
+\begin_inset Formula $A$
+\end_inset
+
+ itself.
+ Consider the dynamics:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+\Delta & =-\nu+\sigma(\nu)W\label{eq:Bernoulli_dynamics}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, the 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is not fixed at every period 
+\begin_inset Formula $t$
+\end_inset
+
+ (let's not put anything that that stays the same for more than one period).
+\end_layout
+
+\begin_layout Standard
+For the optimisation of 
+\begin_inset Formula $A$
+\end_inset
+
+ the consumer would observe 
+\begin_inset Formula $E(A)=p\times(A-\nu+\sigma(\nu))+(1-p)\times(A-\nu)=A-\nu+p\sigma(\nu)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Optimising a CRRA utility 
+\begin_inset Formula $u(A)=\frac{A^{1-\gamma}-1}{1-\gamma}$
+\end_inset
+
+ , 
+\begin_inset Formula $E(W)=p$
+\end_inset
+
+ the consumer must optimise 
+\begin_inset Formula $u(A+\Delta)=pu(A-\nu+\sigma(\nu))+(1-p)u(A-v)$
+\end_inset
+
+ or 
+\begin_inset Formula $u(A+\Delta)=p\frac{(A-\nu+\sigma(\nu))^{1-\gamma}-1}{1-\gamma}+(1-p)\frac{(A-\nu)^{1-\gamma}-1}{1-\gamma}$
+\end_inset
+
+.
+ In this utility, the parameter 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is the relative risk-aversion 
+\begin_inset Formula $-\frac{U''(A)A}{U'(A)}$
+\end_inset
+
+.
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+Using expression 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+>> A, gamma, nu, p = symbols('A gamma nu p')
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+>> p*((A-nu+sqrt(nu))**(1-gamma)-1)/(1-gamma)+ (1-p)*(((A-nu)**(1-gamma)-1))/(1-
+gamma), we can solve for nu with 
+\begin_inset Quotes eld
+\end_inset
+
+solve(diff(p*((A-nu+sqrt(nu))**(1-gamma)-1)/(1-gamma)+ (1-p)*(((A-nu)**(1-gamma)
+-1))/(1-gamma),nu),nu)
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Optimal conditions: 
+\begin_inset Formula $(\frac{1}{2\sqrt{\nu}}-1)(1+\frac{\sqrt{\nu}}{A-\nu})^{-\gamma}=\frac{(1-p)}{p}$
+\end_inset
+
+.
+ The solution 
+\begin_inset Formula $\nu^{*}$
+\end_inset
+
+ by for varying 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ with a given value of 
+\begin_inset Formula $p,A_{0}$
+\end_inset
+
+and a selected 
+\begin_inset Formula $\sigma(\nu)=\sqrt{\nu}$
+\end_inset
+
+ are shown in Figure
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Generated with 
+\begin_inset Quotes eld
+\end_inset
+
+p <- .5 ; gamma= .5 ; A<-1; nu <- NULL ; gammas = seq(0.1,6.9,.01); nus = sapply(
+ gammas, function(y) { optimise(function(x) { (1/(2*sqrt(x))-1)*(1+(sqrt(x))/(A-
+x))**(-y) - (1-p)/p } , c(0,1))$minimum }) ; plot (gammas,nus,type='l',
+ xlab=latex2exp::TeX("$
+\backslash
+
+\backslash
+gamma$"), ylab=latex2exp::TeX("$
+\backslash
+
+\backslash
+nu^*$"),main=latex2exp::TeX("$p=
+\backslash
+
+\backslash
+frac{1}{2}, 
+\backslash
+
+\backslash
+sigma(
+\backslash
+
+\backslash
+nu)=
+\backslash
+
+\backslash
+sqrt{
+\backslash
+
+\backslash
+nu},A_0=1$"))
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ It is evident that increasing risk-aversion decreases the amount of risk
+ the consumer is willing to take.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename crra_solution.png
+	width 2in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Plot of solution 
+\begin_inset Formula $\nu^{*}$
+\end_inset
+
+for the CRRA utility under 
+\begin_inset Formula $p=\frac{1}{2}$
+\end_inset
+
+, 
+\begin_inset Formula $A_{0}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma(\nu)=\sqrt{\nu}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\sigma(\nu)=\sqrt{\nu}$
+\end_inset
+
+ is a simplification only for the purposes of demonstrating the effect of
+ risk-aversion.
+ A process of wealth can be more generic.
+ What we expect this process to be uncertain in ways that the consumer does
+ not understand its process well.
+ More generally, 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ could be a part of another stochastic process.
+ This is needed for the myopia assumption.
+ If consumer's already 
+\begin_inset Formula $\sigma(\nu)$
+\end_inset
+
+ then their optimisation about be deterministic.
+ So let the effective 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ determine by another a another Bernoulli random variable that the consumer
+ only observes but cannot incorporate.
+ The uncertainty on the returns from 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is therefore two fold.
+ An obvious question is that why can't the unified random process be implemented
+? The answer is only that we want to model that 
+\begin_inset Formula $\sigma(\nu)$
+\end_inset
+
+ not being not but still changing - this has to correspond is some ways
+ to the taxi driver's decision problem.
+ I feel I am just pushing Koszegi's approach in excitement - but it does
+ not seem to have any fundamental reason.
+ 
+\series bold
+What exactly is being postponed in the process? 
+\series default
+This problem needs to be presented and explained using the Koszegi framework
+ as the classical method.
+ 
+\series bold
+Status is a problem of reference - but is it status a problem of 
+\series default
+intertemporal substitution as well if status consumption is a risky choice.
+ Consumer's would delay consumption to fulfill their needs and add more
+ to 
+\begin_inset Formula $A$
+\end_inset
+
+ if they can - but if they are optimising status ( seen not the result of
+ an additional visible bit - but the response with respect to a reference)
+ then they would take on more risk.
+\end_layout
+
+\begin_layout Enumerate
+What is the negative correlation that is making people (e.g.
+ why taxi drives quit early) choose different from what labour theory would
+ predict?
+\end_layout
+
+\begin_layout Enumerate
+Is the common thread merely the presence of reference-points - why do we
+ need weighted probability functions?
+\end_layout
+
+\begin_layout Standard
+The double-expectation would be the one to be optimised.
+ This setting illustrated in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Cycles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be described as a set of two stochastic processes.
+ This could be represented with the Koszegi approach - where consumer does
+ not know the future 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and optimises asset 
+\begin_inset Formula $A$
+\end_inset
+
+ or a CRRA utility with risk-aversion.
+\end_layout
+
+\begin_layout Standard
+The mechanics of this uncertainty is the consumers believing in certain
+ traits being special i.e.
+ a momentum of past success.
+ There is no inherent uncertainty in 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ .
+ Koszegi's framework would apply in the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ uncertainty but uncertainty with 
+\begin_inset Formula $\alpha_{0}$
+\end_inset
+
+ is the essential mechanism of uncertainty.
+ So two tasks must be completed:
+\end_layout
+
+\begin_layout Enumerate
+The uncertainty in 
+\begin_inset Formula $\alpha_{0}$
+\end_inset
+
+ must be related with 
+\begin_inset Formula $\sigma$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The equivalent setting in CRRA must be considered - need to summarise what
+ we are adding with the competition.
+\end_layout
+
+\begin_layout Standard
+But we also need the consumers to be myopic.
+ Now imagine if 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is changing at every 
+\begin_inset Formula $T=2k$
+\end_inset
+
+-1 so that 
+\begin_inset Formula $t$
+\end_inset
+
+ advances as 
+\begin_inset Formula $t=0,2,4,...$
+\end_inset
+
+ and 
+\begin_inset Formula $T$
+\end_inset
+
+ as 
+\begin_inset Formula $T=0,1,3,5,...$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is controlled with another stochastic process - let's associated this with
+ a simple rise and decay of a random size.
+ 
+\bar under
+The classical approach would optimise it.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename TimeLine.jpeg
+	width 5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Cycles"
+
+\end_inset
+
+Chart for Dynamics
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+PT Approach
+\end_layout
+
 \end_body
 \end_document

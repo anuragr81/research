@@ -12,6 +12,7 @@ if (isClass("LSMSLoader")){
 setClass("LSMSLoader", representation(combined_data_set="function",load_diary_file="function",
                                       analyse_cj="function",load_ohs_file="function",load_income_file="function",
                                       match_recorded_prices="function",get_inferred_prices="function",load_market_prices="function",
+                                      load_perception_data="function",
                                       aggregate_local_prices="function",add_localmedian_price_columns="function",
                                       food_expenditure_data="function",read_assets_file="function",
                                       group_expenditure="function",group_collect="function",get_asset_score="function",
@@ -631,6 +632,17 @@ lsms_loader<-function(fu,ln,lgc) {
     
   }
   
+  load_perception_data <-function(year,dirprefix,fu,ln){
+    if (year==2012){
+      k <- read_dta(paste0(dirprefix,'/lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_G.dta'))
+      k <- fu()@get_translated_frame(dat=k, names=ln()@hh_secg_columns_lsms(), m=ln()@get_hh_secg_fields_mapping_lsms_2012())
+      k <- k[!is.na(k$life_perception) &  !is.na(k$health_perception)  & !is.na(k$finance_perception) & !is.element(k$life_perception,c(8)),]
+      return(k)
+    }
+    
+    stop(paste("year:",year,"not supported"))
+  }
+  
   load_market_prices <-function(year,dirprefix,fu,ln,use_pieces,aggregation_code){
     
     if (missing(use_pieces)){
@@ -960,6 +972,9 @@ lsms_loader<-function(fu,ln,lgc) {
       
       ohsj<-merge(ohs,j,all.x=TRUE)
       
+      ohsj$is_resident<-as.integer(as.integer(ohsj$years_community)==99)
+      ohsj$years_community<-ohsj$years_community+ohsj$is_resident*(ohsj$age-99);
+      
       return(ohsj)
       
     }
@@ -1046,7 +1061,15 @@ lsms_loader<-function(fu,ln,lgc) {
       print(head(j))
       j$roomsnum<-j$roomsnum_primary+j$roomsnum_secondary
       ohsj<-merge(ohs,j,all=TRUE)
-      return(ohsj)
+      ohsj$is_resident<-as.integer(as.integer(ohsj$years_community)==99)
+      ohsj$years_community<-ohsj$years_community+ohsj$is_resident*(ohsj$age-99);
+      ## 
+      
+      percept <- load_perception_data(year=year,dirprefix=dirprefix,fu=fu,ln=ln)
+      ohsjp <- merge(ohsj,percept, all.x=T, by=c("hhid","personid"))
+      
+      
+      return(ohsjp)
       
     }
     
@@ -1125,6 +1148,8 @@ lsms_loader<-function(fu,ln,lgc) {
       j$houserent[is.na(j$houserent)]<-0
       j$roomsnum<-j$roomsnum_primary+j$roomsnum_secondary
       ohsj<-merge(ohs,j,all=TRUE)
+      ohsj$is_resident<-as.integer(as.integer(ohsj$years_community)==99)
+      ohsj$years_community<-ohsj$years_community+ohsj$is_resident*(ohsj$age-99);
       return(ohsj)
       
     }
@@ -2791,7 +2816,7 @@ lsms_loader<-function(fu,ln,lgc) {
   
   return(new("LSMSLoader",combined_data_set=combined_data_set,load_diary_file=load_diary_file, 
              analyse_cj=analyse_cj,load_ohs_file=load_ohs_file,match_recorded_prices=match_recorded_prices, load_market_prices=load_market_prices,
-             get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices,
+             get_inferred_prices=get_inferred_prices,aggregate_local_prices=aggregate_local_prices, load_perception_data=load_perception_data,
              add_localmedian_price_columns=add_localmedian_price_columns,food_expenditure_data=food_expenditure_data,
              read_assets_file=read_assets_file, group_expenditure=group_expenditure,group_collect=group_collect,
              get_asset_score=get_asset_score, item_usage = item_usage, item_ownership=item_ownership,get_hsize=get_hsize,

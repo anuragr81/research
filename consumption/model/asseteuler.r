@@ -531,11 +531,11 @@ sample_run <- function(){
   for (i in seq(nrow(df)))
   { 
     frow=df[i,];
-
+    
     x <- evolve_relative_wealth_discrete_contnatural(nsim = 2000, delta = 0 ,alpha1 =.3, alpha2 = 2, risksz = 10,
                                                      T = 1,dt = .001,A1_init=frow$x, A2_init=frow$y,decay = .01,
                                                      start_p = .2, gamma=.7, lambda = 10, A_costs_factor = 0., plot_range = F, sigma_func=rise_func)
-
+    
     #x <- evolve_relative_wealth_discrete_contnatural(nsim = 3000, delta = 0 ,alpha1 =2, alpha2 = .1, risksz = 10,
     #                                                 T = 1,dt = .005,A1_init=frow$x, A2_init=frow$y,decay = .01,
     #                                                 start_p = .2, gamma=.7, lambda = 10, A_costs_factor = 500, plot_range = F, sigma_func=sigma_func_decline)
@@ -593,7 +593,7 @@ optim_func <- function(psi,A,risksz,start_p,total_psi,gamma,lambda,alpha,tax_fun
 evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,gamma, lambda, risksz, T, dt, A1_init, A2_init, decay, start_p, A_costs_factor, plot_range,sigma_func){
   
   print(paste("delta=",delta,"alpha1=",alpha1,"alpha2=",alpha2,"gamma=",gamma, "lambda=",lambda, "risksz=",risksz, "T=",T, "dt=",dt, "A1_init=",A1_init, "A2_init=",A2_init, "decay=",decay, "start_p=",start_p, "A_costs_factor=",A_costs_factor))
-              
+  
   if (missing(plot_range)){
     plot_range <- F
   }
@@ -657,7 +657,7 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
       D2 = disposable_income(A = A2,A_costs_factor = A_costs_factor, tax_func = function(x) {taxes_due_for_2(delta=delta, A1=A1, A2=x) })
       
       ref_pt = reference_point(A1=A1,A2=A2)
-
+      
       # consumer always makes the decision before the draw
       psi1 <- optimise(function(x) { -optim_func(decay=decay,psi=x,A=A1,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha1,tax_func=function(x) {taxes_due_for_1(delta=delta, A1=x,A2=A2)}, ref_pt= ref_pt, A_costs_factor=A_costs_factor) },c(0,D1))$minimum
       psi2 <- optimise(function(x) { -optim_func(decay=decay,psi=x,A=A2,risksz=risksz,start_p=start_p,total_psi=total_psi,gamma=gamma,lambda=lambda,alpha=alpha2,tax_func=function(x) {taxes_due_for_2(delta=delta, A1=A1,A2=x)}, ref_pt= ref_pt, A_costs_factor=A_costs_factor) },c(0,D2))$minimum
@@ -754,6 +754,64 @@ evolve_relative_wealth_discrete_contnatural <-function(nsim,delta,alpha1,alpha2,
   plot(ptimepoints,colMeans(psi2df),type='l',main=latex2exp::TeX("$\\psi_2$"), xlab="T", ylab="s")
   return(retlist)
 }
+
+crra <- function(A,gamma){
+  if (gamma <0 || gamma >1 ){
+    stop("Invalid CRRA parameter")
+  }
+  return ( (A**gamma-1)/(1-gamma))
+}
+
+evolve_plain_asset_crra <-function(nsim, p, T, dt, A_init,gamma, nu){
+  # use the function sigma_func to evolve the asset and compare with theoretical mean
+  
+  A<- A_init
+  
+  sigma_func <- function(x){
+    return(sqrt(x))
+  }
+  
+  Adf <- data.frame()
+  for ( j in seq(nsim)){
+    A = A_init
+    A_arr = array()
+    
+    count <- 1
+    A_arr[count] = A_init
+    
+    #timepoints <- seq(0,T,dt)
+    timepoints <- c(1)
+    
+    for (i in timepoints)
+    {  
+      dW = rbinom(1,1,p)
+      
+      dA = -nu +  sigma_func(nu) * dW
+      if (A + dA <0 ){
+        A <- 0 
+      } else {
+        A = A + dA
+      }
+      
+      count <- count+1
+      A_arr[count] <- A
+      
+    }
+    Aadd <- t(data.frame(x=A_arr))
+    colnames(Aadd) <- paste0("t_",c(timepoints, T+dt))
+    
+    Adf <- rbind(Adf,Aadd)
+    
+    
+  }
+  print(paste("Theortical Mean:",A_init-nu+sigma_func(nu)*p))
+  print(paste("Final Value:",colMeans(Adf)[-1]))
+  print(paste("Final Util:",crra(colMeans(Adf)[-1],gamma )))
+  return (Adf)
+  
+}
+
+
 
 evolve_relative_wealth_discrete <-function(nsim,delta,sigma1,sigma2, risksz, p, T, dt, A1_init, A2_init){
   

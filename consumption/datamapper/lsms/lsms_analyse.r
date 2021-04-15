@@ -934,6 +934,20 @@ assign_house_maintenance <- function (a2010, a2012, a2014, o2010, o2012, o2014, 
   return(hc)
   
 }
+
+get_perception_rank <-function(r){
+  if (is.na(r)){
+    return(NA)
+  }
+  if(r == 1 || r == 2 || r == 3 || r==4) {
+    return(T)
+  } else if ( r==5 || r==6 || r==7) {
+    return(F)
+  } else {
+    return (NA)
+  }
+}
+
 init_data <- function(){
   a2010 <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
   a2012 <- ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
@@ -987,6 +1001,38 @@ get_stata_income_re_results <- function(){
   return(res)
 }
 
+perception_data_analysis <- function(o2012, ignore_split_hhids)
+{
+  use_discrete <- F
+  dirprefix <- "../"
+  fu <- fu
+  ln <- lsms_normalizer
+  ll <- ll
+  k2012 <- ll@load_perception_data(year=2012,dirprefix=dirprefix,fu=fu,ln=ln)
+  
+  if (use_discrete){
+    ko2012 <- merge(k2012,o2012, by =c("hhid","personid"))
+    ko2012$healthOK <- sapply(ko2012$health_perception,get_perception_rank)
+    ko2012$financeOK <- sapply(ko2012$finance_perception,get_perception_rank)
+    ko2012$lifeOK <- sapply(ko2012$life_perception,get_perception_rank)
+    
+    kh <- ddply(unique(ko2012[,c("hhid","lifeOK","financeOK","healthOK")]),.(hhid),summarise,healthOK=max(healthOK),financeOK=max(financeOK),lifeOK=max(lifeOK))
+  } else {
+    
+    kh2012 <- ddply(unique(k2012[,c("hhid","life_perception","finance_perception","health_perception")]),.(hhid),summarise,health_perception=min(health_perception),finance_perception=min(finance_perception),life_perception=min(life_perception))
+    
+  }
+  
+  kh2012 <- merge(plyr::rename(kh2012,c("hhid"="hhid2012")),mapping_hhids_2010_2012(o2012))
+  if (ignore_split_hhids){
+    non_split_hhids <- subset(ddply(kh2012,.(hhid2010),summarise,n=length(life_perception)), n==1)$hhid2010
+    kh2012 <- subset(kh2012,is.element(hhid2010,non_split_hhids))
+  }
+  return(kh2012)
+  
+}
+
+
 estimation_df_budget_quantile<- function(ll,e)
 {
   
@@ -1039,13 +1085,23 @@ estimation_df_budget_quantile<- function(ll,e)
   #  
   #
   
+  
+  perception_columns <- c("life_perception"="hh_life_perception" , "finance_perception"="hh_finance_perception", "richness_perception"="hh_richness_perception","housing_perception"="hh_housing_perception","health_perception"="hh_health_perception")
+  hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang")
   #total consumption
   
   # 2010
   ohs2010 <- subset(o2010,!is.na(region))
   hs2010 <- unique(merge(unique(ohs2010[,c("hhid","region","district","ward","isrural","expensiveregion")]), ll@get_hsize(ohs2010), by = c("hhid")))
-  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , max_age = max(age), litlang = choose_max_litlang(litlang))
-  hswithchars2010 <- merge(hs2010,chosenchars2010,all.x = T)
+  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
+  
+#  perception_columns
+  
+  hhead2010 <- plyr::rename(subset(o2010,household_status==1)[,names(hhead_columns)],hhead_columns )
+  chosencharshead2010 <- merge(chosenchars2010,hhead2010, all.x=T)
+  
+  
+  hswithchars2010 <- merge(hs2010,chosencharshead2010,all.x = T)
   psiAregion2010 <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),psiA2010,by=c("hhid2010"))
   ct2010<- plyr::rename(ll@get_total_expenditures(hh = c2010, ohs = ohs2010), c("hhid"="hhid2010","total_expenditure"="ct"))
   psiAregionct2010 <- (merge(psiAregion2010,ct2010,by=c("hhid2010")))
@@ -1055,8 +1111,17 @@ estimation_df_budget_quantile<- function(ll,e)
   
   ohs2012 <- subset(o2012,!is.na(region))
   hs2012 <- unique(merge(unique(ohs2012[,c("hhid","region","district","ward","isrural","expensiveregion")]), ll@get_hsize(ohs2012), by = c("hhid")))
-  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , max_age = max(age), litlang = choose_max_litlang(litlang))
-  hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
+  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
+  
+  if (length(setdiff(names(perception_columns),colnames(o2012)))==0){
+    hhead_columns_w_percept <- c(hhead_columns,perception_columns)
+  }
+  
+  hhead2012 <- plyr::rename(subset(o2012,household_status==1)[,names(hhead_columns_w_percept)],hhead_columns_w_percept )
+  
+  chosencharshead2012 <- merge(chosenchars2012,hhead2012, all.x=T)
+  hswithchars2012 <- merge(hs2012,chosencharshead2012,all.x = T)
+  
   psiAregion2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),psiA2012,by=c("hhid2012"))
   ct2012<- plyr::rename(ll@get_total_expenditures(hh = c2012, ohs = ohs2012), c("hhid"="hhid2012","total_expenditure"="ct"))
   psiAregionct2012 <- (merge(psiAregion2012,ct2012,by=c("hhid2012")))
@@ -1065,8 +1130,13 @@ estimation_df_budget_quantile<- function(ll,e)
   
   ohs2014 <- subset(o2014,!is.na(region))
   hs2014 <- unique(merge(unique(ohs2014[,c("hhid","region","district","ward","isrural","expensiveregion")]), ll@get_hsize(ohs2014), by = c("hhid")))
-  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , max_age = max(age), litlang = choose_max_litlang(litlang))
-  hswithchars2014 <- merge(hs2014,chosenchars2014,all.x = T)
+  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
+  
+  hhead2014 <- plyr::rename(subset(o2014,household_status==1)[,names(hhead_columns)],hhead_columns )
+  
+  chosencharshead2014 <- merge(chosenchars2014,hhead2014, all.x=T)
+  
+  hswithchars2014 <- merge(hs2014,chosencharshead2014,all.x = T)
   psiAregion2014 <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),psiA2014,by=c("hhid2014"))
   ct2014<- plyr::rename(ll@get_total_expenditures(hh = c2014, ohs = ohs2014), c("hhid"="hhid2014","total_expenditure"="ct"))
   psiAregionct2014 <- (merge(psiAregion2014,ct2014,by=c("hhid2014")))
@@ -1235,10 +1305,11 @@ estimation_df_budget_quantile<- function(ll,e)
   res[["df2014"]] <- psiAregionctPsiA02014
   ## 2010 2012 mapping
   hhid2012_hhid10_mapping <- mapping_hhids_2010_2012(o2012 = o2012)
-  df2010_2012 <- merge(hhid2012_hhid10_mapping , plyr::rename(psiAregionctPsiA02012,c("hhid"="hhid2012"))) %>% mutate(year = 2012)
+  psiAregionctPsiA_common_cols_2010_2012 <- intersect(colnames(psiAregionctPsiA02010),colnames(psiAregionctPsiA02012) )
+  df2010_2012 <- merge(hhid2012_hhid10_mapping , plyr::rename(psiAregionctPsiA02012[,psiAregionctPsiA_common_cols_2010_2012],c("hhid"="hhid2012"))) %>% mutate(year = 2012)
   df2010_2012$hhid2012 <- NULL
   df2010_2012 <- plyr::rename(df2010_2012,c("hhid2010"="hhid"))
-  df2010_2012 <- rbind(df2010_2012,psiAregionctPsiA02010 %>% mutate(year =2010))
+  df2010_2012 <- rbind(df2010_2012,psiAregionctPsiA02010[,psiAregionctPsiA_common_cols_2010_2012] %>% mutate(year =2010))
   df2010_2012$hhid <- as.factor(df2010_2012$hhid)
   split_hhids2010_2012 <- unique(subset(ddply(df2010_2012,.(hhid,year),summarise,n=length(consu)),n>1)$hhid)
   
@@ -1248,11 +1319,12 @@ estimation_df_budget_quantile<- function(ll,e)
   
   ##
   ## 2010 2012 mapping
+  psiAregionctPsiA_common_cols_2012_2014 <- intersect(colnames(psiAregionctPsiA02012),colnames(psiAregionctPsiA02014) )
   hhid2014_hhid12_mapping <- mapping_hhids_2012_2014(o2014 = o2014)
-  df2012_2014 <- merge(hhid2014_hhid12_mapping , plyr::rename(psiAregionctPsiA02014,c("hhid"="hhid2014"))) %>% mutate(year = 2014)
+  df2012_2014 <- merge(hhid2014_hhid12_mapping , plyr::rename(psiAregionctPsiA02014[,psiAregionctPsiA_common_cols_2012_2014],c("hhid"="hhid2014"))) %>% mutate(year = 2014)
   df2012_2014$hhid2014 <- NULL
   df2012_2014 <- plyr::rename(df2012_2014,c("hhid2012"="hhid"))
-  df2012_2014 <- rbind(df2012_2014,psiAregionctPsiA02012 %>% mutate(year =2012))
+  df2012_2014 <- rbind(df2012_2014,psiAregionctPsiA02012[,psiAregionctPsiA_common_cols_2012_2014] %>% mutate(year =2012))
   df2012_2014$hhid <- as.factor(df2012_2014$hhid)
   split_hhids2012_2014 <- unique(subset(ddply(df2012_2014,.(hhid,year),summarise,n=length(consu)),n>1)$hhid)
   
