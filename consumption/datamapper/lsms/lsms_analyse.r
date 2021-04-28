@@ -1392,7 +1392,10 @@ get_band_metrics <- function(dat,b,l){
   }
   dat <- merge(dat,hhids_with_local_ranks,by=c("hhid"))
   dat$nat_asset_rankval <- sapply(dat$local_rank, function(x) { quantile(dat$lnA0,x)} )
-  
+  aranks <- ecdf(dat$lnA0)(dat$lnA0)
+  next_aranks <- ecdf(dat$lnA0)(dat$lnA0) + l
+  nat_outofplace_ranks = sapply(next_aranks, function(x){quantile(dat$lnA0,min(x,1))}) - dat$lnA0
+  dat$nat_outofplace_rank <- nat_outofplace_ranks
   dat$richness_rank <- with(dat,lnA0-nat_asset_rankval)
   return (dat)
 }
