@@ -4,14 +4,14 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass article
+\textclass extarticle
 \use_default_options true
 \maintain_unincluded_children false
 \language english
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
+\font_roman "tgschola" "Caslon OS"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -28,10 +28,11 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
+\paperfontsize 9
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -56,6 +57,12 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 2cm
+\rightmargin 2cm
+\headheight 2.5cm
+\headsep 2.5cm
+\footskip 2.5cm
+\columnsep 2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -64,7 +71,7 @@
 \math_numbering_side default
 \quotes_style english
 \dynamic_quotes 0
-\papercolumns 1
+\papercolumns 2
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
@@ -2106,7 +2113,11 @@ What a model calibrates are the levels of displeasure - feeling like a loser
 \end_layout
 
 \begin_layout Subsection
-Classical Approach
+Simple case with a known 
+\begin_inset Formula $\sigma$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2151,11 +2162,11 @@ Here, the
 
 \begin_layout Standard
 For the optimisation of 
-\begin_inset Formula $A$
+\begin_inset Formula $\Delta$
 \end_inset
 
  the consumer would observe 
-\begin_inset Formula $E(A)=p\times(A-\nu+\sigma(\nu))+(1-p)\times(A-\nu)=A-\nu+p\sigma(\nu)$
+\begin_inset Formula $E(\Delta)=p\times(-\nu+\sigma(\nu))+(1-p)\times(-\nu)=-\nu+p\sigma(\nu)$
 \end_inset
 
 .
@@ -2366,27 +2377,21 @@ for the CRRA utility under
  is a simplification only for the purposes of demonstrating the effect of
  risk-aversion.
  A process of wealth can be more generic.
- We need to be clear about where the uncertainty comes from.
- A consumer is unsure about the return from 
+ What we're saying is that the returns process is exogenous (as in the gold
+ mine which implies a hypergeometric distribution for returns from 
 \begin_inset Formula $\nu$
 \end_inset
 
- - we don't need the consumer to be double uncertain.
- Gold-rush example is fine - but that's as good as assuming that 
+ as 
 \begin_inset Formula $\sigma$
 \end_inset
 
- rises and falls - effectively saying that there is a hypergeometric distributio
-n for returns from 
-\begin_inset Formula $\nu$
-\end_inset
-
-.
+ rises and falls).
  The only reason we assume a process for 
 \begin_inset Formula $\sigma$
 \end_inset
 
- is when we assume no structure for 
+ is to assume no structure for 
 \begin_inset Formula $\sigma$
 \end_inset
 
@@ -2403,13 +2408,13 @@ n for returns from
 
 .
  It needs to be clear beforehand that 
-\begin_inset Formula $sigma$
+\begin_inset Formula $\sigma$
 \end_inset
 
  cannot be assumed in the nature and that the nature of uncertainty is both
  due to risk with resources and the uncertainty in perception.
  Searching for the right function for 
-\begin_inset Formula $sigma$
+\begin_inset Formula $\sigma$
 \end_inset
 
  is actually the wrong question.
@@ -2419,7 +2424,7 @@ n for returns from
 [myopia and status] It is the latter uncertainty in the reference points
  - that results in the consumer being myopic with respect to the investment
  
-\begin_inset Formula $nu$
+\begin_inset Formula $\nu$
 \end_inset
 
 .
@@ -2443,7 +2448,11 @@ intertemporal substitution as long as status consumption is a risky choice.
  All else being the same a risk-seeking consumer would choose more status
  consumption.
  The risk-seeking behaviour is expressible in CRRA model (a more risk-averse
- individual would choose a lower nu - see graph 
+ individual would choose a lower 
+\begin_inset Formula $\nu$
+\end_inset
+
+ - see graph 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:CRRA_solution"
@@ -2454,20 +2463,23 @@ noprefix "false"
 \end_inset
 
 ).
- 
+\end_layout
+
+\begin_layout Subsubsection
+Questions
 \end_layout
 
 \begin_layout Standard
-Notice that 
+We represent 
 \begin_inset Formula $A$
 \end_inset
 
- is the classical approach (with just one consumer) and 
+ as the classical approach (with just one consumer) and 
 \begin_inset Formula $B$
 \end_inset
 
- is the relative wealth approach.
- We don't have a model of uncertainty except the the box-and-competition.
+ as the relative wealth approach.
+ The model of uncertainty we use is the box-and-competition.
  How much reward is given by status competition is a difficult empirical
  concept - so we need a more basic model for uncertainty.
  We can only compare 
@@ -2520,23 +2532,12 @@ Koszegi is essentialy a model of references based on expectations - so the
 How exactly do expectations shape taxi driver decisions?
 \end_layout
 
-\begin_layout Standard
-[long-term vs short-term] One remaining feature in this alternative formulation
- of status is a consumer being risk-seeking through status consumption in
- the short-term but risk-averse in the long-term.
- In 
-\begin_inset Formula $A$
+\begin_layout Subsection
+Finding the right 
+\begin_inset Formula $\sigma$
 \end_inset
 
-, the approach is merely CRRA risk-aversion without 
-\begin_inset Formula $w(p)$
-\end_inset
 
- - which is used in 
-\begin_inset Formula $B$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -2688,6 +2689,126 @@ How exactly do expectations shape taxi driver decisions?
 \end_layout
 
 \begin_layout Standard
+[Box vs Competition in CRRA] There is no god that plays dice so we don't
+ assume 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ as such.
+ Two primary properties of the uncertainty in the model are that i
+\series bold
+) the sources of uncertainty are multiple 
+\series default
+and ii) 
+\series bold
+consumers are myopic 
+\series default
+i.e.
+ they are more uncertain about some sources than others.
+ For example, we would prefer to be unsure about the economy than to be
+ unsure about their job.
+ In the box and competition view, the first source is due to finiteness
+ of resources and the second due to uncertainty in the expectation - which
+ is explicitly modeled with a competition.
+ In the CRRA utility (
+\begin_inset Formula $A$
+\end_inset
+
+) a consumer participates in a status competition lottery so that an amount
+ 
+\begin_inset Formula $aR$
+\end_inset
+
+ is awarded to her with a probability 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ The expected gain for her 
+\begin_inset Formula $pRa$
+\end_inset
+
+ where 
+\begin_inset Formula $a$
+\end_inset
+
+ the amount that is allocated to her if she wins.
+ For a game of  
+\begin_inset Formula $n$
+\end_inset
+
+ participants 
+\begin_inset Formula $a>1/n$
+\end_inset
+
+ (One could have a vector 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\textbf{a}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ but we use this simplification for now).
+ While it's true that quality is not a finite resource like gold - we are
+ only modeling that some unknown amount is allocated using a competition.
+ The CRRA utility would correspond to this amount.
+ Status consumption is part of 
+\begin_inset Formula $\nu$
+\end_inset
+
+ in the CRRA formulation.
+ A higher 
+\begin_inset Formula $\nu$
+\end_inset
+
+ would mean a higher size of the bet.
+ The size of the bet and the payoff is indeed capped at 
+\begin_inset Formula $R$
+\end_inset
+
+ (we could use a logistic functions as continuous approximations) for the
+ capped gain.
+ Since the consumer is unsure about the the size of 
+\begin_inset Formula $R$
+\end_inset
+
+ and does not differentiate between uncertainty in 
+\begin_inset Formula $R$
+\end_inset
+
+ and in 
+\begin_inset Formula $W$
+\end_inset
+
+, she would proceed with a fixed expectation.
+ Instead of long-term vs short-term the consumer has risk and security in
+ the model.
+\end_layout
+
+\begin_layout Standard
 [But how does 
 \begin_inset Formula $psi$
 \end_inset
@@ -2812,117 +2933,1119 @@ relative advantage is linearly distributed
  themselves would get more than what we can allocate them).
  Now we have two options 1.
  have a zero position natural process or a 2.
- carry over natural process.
+ carry over natural process..
+\end_layout
+
+\begin_layout Subsubsection
+Zero Position Approach
 \end_layout
 
 \begin_layout Standard
-her and it only allocates an equal amount to everyone.
- More formally,
-\end_layout
-
-\begin_layout Standard
-[Box vs Competition in CRRA] There is no god that plays dice so instead
- of 
-\begin_inset Formula $\sigma$
-\end_inset
-
- we must use a more realistic source of uncertainties.
- i) the sources of uncertainty are multiple and ii) consumers are myopic
- i.e.
- they are more uncertain about some sources than others.
- For example, we would prefer to be unsure about the economy than to be
- unsure about the economy.
- In the box and competition view, the first source is due to finiteness
- of resources and the second due to uncertainty in the expectation - which
- is shaped with a competition.
- In the CRRA a consumer can be said to participate in a status competition
- lottery so that an amount 
-\begin_inset Formula $aR$
-\end_inset
-
- is awarded to her with a probability 
-\begin_inset Formula $p$
-\end_inset
-
-.
- The expected gain for her 
-\begin_inset Formula $pRa$
-\end_inset
-
- where 
-\begin_inset Formula $a$
-\end_inset
-
- the amount that is allocated to her if she wins.
- For a game of  
-\begin_inset Formula $n$
-\end_inset
-
- participants 
-\begin_inset Formula $a>1/n$
-\end_inset
-
- (One could have a vector 
-\begin_inset Formula $\#textbf\{a\}$
-\end_inset
-
- but we use this simplification for now).
- While it's true that quality is not a finite resource like gold - we are
- only modeling that some unknown amount is allocated using a competition.
- The CRRA utility would correspond to this amount.
- Status consumption is part of 
+Here a consumer invests 
 \begin_inset Formula $\nu$
 \end_inset
 
- in the CRRA formulation.
+ and security amount 
+\begin_inset Formula $\xi$
+\end_inset
+
+ which returns profit 
+\begin_inset Formula $P(\nu)$
+\end_inset
+
+ when 
+\begin_inset Formula $W=1$
+\end_inset
+
+ and a security payment 
+\begin_inset Formula $S(\xi)$
+\end_inset
+
+ depending on the investment 
+\begin_inset Formula $\xi$
+\end_inset
+
+ apart from the loss 
+\begin_inset Formula $\phi$
+\end_inset
+
+ when 
+\begin_inset Formula $W=0$
+\end_inset
+
+.
+ 
+\begin_inset Formula $W$
+\end_inset
+
+ is a Bernoulli trial with 
+\begin_inset Formula $E(W)=p$
+\end_inset
+
+.
+ We assume that a consumer must set up a strategy if this lottery is played
+ multiple times.
+ Functions 
+\begin_inset Formula $P$
+\end_inset
+
+, 
+\begin_inset Formula $S$
+\end_inset
+
+ and the amount 
+\begin_inset Formula $\phi$
+\end_inset
+
+ are exogenous in this system so that the profit incentives for player who
+ sets up this lottery are not considered.
+ Therefore, the payoff from 
+\begin_inset Formula $\nu$
+\end_inset
+
+ and 
+\begin_inset Formula $\xi$
+\end_inset
+
+ (so that 
+\begin_inset Formula $\xi+\nu=x$
+\end_inset
+
+ ) at every draw is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+M(\nu,\xi) & =\begin{cases}
+P(\nu) & W=1\\
+-\phi+S(\xi) & W=0
+\end{cases}\label{eq:lottery_payoff}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above can be optimised by the CRRA consumer 
+\begin_inset Formula $A$
+\end_inset
+
+ and the CDR consumer 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ The expected value to be optimised is 
+\begin_inset Formula $E(M,\nu,\xi)=pP(\nu)+(1-p)(S(\xi)-\phi)$
+\end_inset
+
+.
+ Since we don't assume any accumulation (an equivalent formulation would
+ included long-term and short-term risk-aversion), the utility to be optimised
+ for CRRA consumer depends would be 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\Delta^{*}\equiv E(u(\Delta))=p\cdot u(P(\nu))+(1-p)u(S(\xi)-\phi)
+\end{alignat*}
+
+\end_inset
+
+ Since 
+\begin_inset Formula $u(\Delta)=\frac{\Delta^{1-\gamma}-1}{1-\gamma}$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial\Delta^{*}}{\partial\nu}=pP(\nu)^{-\gamma}P'(\nu)\\
+\frac{\partial\Delta^{*}}{\partial\xi}=(1-p)(S(\xi)-\phi)^{-\gamma}S'(\xi)
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since this budget for risk only comes into play when survival needs have
+ been met, excess above needs 
+\begin_inset Formula $x$
+\end_inset
+
+, we have 
+\begin_inset Formula $x=\nu+\xi$
+\end_inset
+
+, we can write the first-order conditions for 
+\begin_inset Formula $L=\Delta^{*}-\lambda(x-\nu-\xi)$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula 
+\begin{alignat*}{1}
+\frac{P'(\nu)/P(\nu)^{\gamma}}{S'(x-\nu)/(S(x-\nu)-\phi)^{\gamma}} & =\frac{(1-p)}{p}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+How 
+\begin_inset Formula $P(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $S(x-\nu)$
+\end_inset
+
+ grow with 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is therefore crucial to this solution.
+ Fir the risk-netural consumer we have 
+\begin_inset Formula $\gamma=0$
+\end_inset
+
+ and the relationship simplifies to 
+\begin_inset Formula $\frac{P'(\nu)}{S'(x-\nu)}=\frac{1}{p}-1$
+\end_inset
+
+.
+ 
+\begin_inset Formula $P'(\nu)$
+\end_inset
+
+ represents a diminishing marginal utility and 
+\begin_inset Formula $S'(x-\nu)$
+\end_inset
+
+ the rising marginal utility for 
+\begin_inset Formula $\nu$
+\end_inset
+
+, the consumer would rush to increase 
+\begin_inset Formula $\nu$
+\end_inset
+
+ as 
+\begin_inset Formula $p$
+\end_inset
+
+ increases.
  A higher 
-\begin_inset Formula $nu$
+\begin_inset Formula $p$
 \end_inset
 
- would mean a higher size of the bet.
- The size of the bet and the payoff is indeed capped at 
-\begin_inset Formula $R$
+ would mean that a lower 
+\begin_inset Formula $\nu'<\nu$
 \end_inset
 
- (we could use a logistic functions as continuous approximations) for the
- capped gain.
- Since the consumer is unsure about the the size of 
-\begin_inset Formula $R$
+ would provide the same marginal utility to the consumers as 
+\begin_inset Formula $\nu$
 \end_inset
 
- and does not differentiate between uncertainty in R and in W, she would
- proceed with a fixed expectation.
- If a consumer wants to be be risk-seeking in short-term (by selecting 
-\begin_inset Formula $nu$
+.
+ We can assume that 
+\begin_inset Formula $P(\nu)$
 \end_inset
 
- for p) and risk-averse in the long-term (if 
-\begin_inset Formula $R$
+ has diminishing marginal utility for 
+\begin_inset Formula $\nu$
 \end_inset
 
- is too high), her only option is to control nu in the model? CRRA does
- not differentiate between long-term vs short-term 
-\begin_inset Formula $nu$
+ the way 
+\begin_inset Formula $S(\xi)$
+\end_inset
+
+ has diminishing marginal utility for 
+\begin_inset Formula $\xi$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-[Box vs Competition in PT] In a competitive model, the consumers use a reference
- point that is based on each other's alpha - which is private.
- Status consumption is still the nu but nu also selects a certain shape.
- The equivalence of long-term vs short-term is the modified box which also
- allows oneself to increase cooperation for a flat price.
- The same conclusion may be arrived by phasing the draw of 
-\begin_inset Formula $R$
+[Box vs Competition in PT] In a competitive model, the consumers would like
+ to be less risk-averse than the other consumer when for 
+\begin_inset Formula $\nu$
 \end_inset
 
- out of the draw for 
-\begin_inset Formula $W$
+ but more risk-averse than the other consumer for 
+\begin_inset Formula $\xi$
 \end_inset
 
 .
+ The exact amounts depend on the differences in 
+\begin_inset Formula $x$
+\end_inset
+
+ and the risk-aversion levels 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ We can see how differences in 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ together affect the optimal selection.
+ The utility to be optimised is the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+\Delta_{C}=u(\Delta) & =w(p)\upsilon(P(\nu)-r)+w(1-p)\upsilon(S(\xi)-\phi-r)\label{eq:PT_lottery_util}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first issue is that of reference point 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ Setting the reference point 
+\begin_inset Formula $r$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $x_{1}-x_{2}$
+\end_inset
+
+ is as good as setting it as a constant since consumers don't change 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+,
+\begin_inset Formula $x_{2}$
+\end_inset
+
+.
+ One assumption we can use is that when 
+\begin_inset Formula $x_{1}>x_{2}$
+\end_inset
+
+, the consumer think that the other consumer would have 
+\begin_inset Formula $\nu=x_{1}-x_{2}$
+\end_inset
+
+ 
+\begin_inset Formula $\xi=x_{2}$
+\end_inset
+
+.
+ So if 
+\begin_inset Formula $x_{1}=1000\$$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}=2000\$$
+\end_inset
+
+, then my reference point is one where the rich guy's uses extra income
+ in all risk.
+ Another option is to use the 
+\begin_inset Formula $E(\Delta)$
+\end_inset
+
+ as the reference.
+ What do the two consumers compare themselves with? We could also set the
+ reference point to 0 (since 
+\begin_inset Formula $P$
+\end_inset
+
+, 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi$
+\end_inset
+
+ are all exogenous anyways).
+ Setting 
+\begin_inset Formula $r=0$
+\end_inset
+
+ allows us to start worrying about the consumer's need to have a higher
+ risk-aversion (
+\begin_inset Formula $\xi$
+\end_inset
+
+) or a higher risk-seeking 
+\begin_inset Formula $(\nu)$
+\end_inset
+
+ than the other.
+ Assume that both 
+\begin_inset Formula $\xi$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu$
+\end_inset
+
+ are visible to both consumers.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+G(x,\nu) & =\begin{cases}
+P(\nu) & W=1\\
+-\phi+S(x-\nu) & W=0
+\end{cases}\label{eq:lottery_payoff_G}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There needs to be a role of the reference point but to understand how nu
+ x matter in the competition, consider how a consumer with a different x1
+ != x2 would optimise the distance of final payoffs.
+ Optimising the distance is key as it allows to poorer consumer to participate
+ in the competition as well - otherwise all outcomes where the poorer consumer
+ loses are equivalent.
+ This also avoid discontinues in the solution of nu_1 when when nu_2 is
+ free to vary.
+ Before we talk about the reference point in the value function, consider
+ the case when the consumer optimises the distance in wealth itself rather
+ than any utility.
+ Thus given nu2, the consumer 1 would always maximise E(G(nu_1,x_1))-E(G(nu_2,x_
+x)) .
+ Even when this value is negative it's preferable to have a less negative
+ value.
+ This equilibrium is conditioned on nu_2 the behaviour of the other consumer.
+ The first question that needs to be asked is whether the consumer optimises
+ over all possible value of theoretical 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\backslash
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+nu_2.
+ i.e.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\backslash
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+nu_1.
+ If 
+\begin_inset Formula $k_{1}$
+\end_inset
+
+ is a function of nu_2 that maximises 
+\begin_inset Formula $E(G(x_{1},\nu_{1}))-E(G(x_{2},\nu_{2}))$
+\end_inset
+
+ for 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $(x_{1},x_{2})$
+\end_inset
+
+, the the right value of
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ would depend on the expectation over 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ as well.
+ 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ is therefore a double expectation - the first over 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ given 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ and the other over 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+.
+ As such 
+\begin_inset Formula $\nu_{2}\in[0,x_{2}]$
+\end_inset
+
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\nu_{1}\in[0,x_{1}]$
+\end_inset
+
+.
+ Therefore every consumer must choose the wealth that optimises the double
+ expectation.
+ 
+\end_layout
+
+\begin_layout Standard
+If expected value was being optimised, this would mean that relative difference
+ is maximised by maximising one's own outcome.
+ This is because
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+V_{1}=E_{\nu_{2}}[E_{\nu_{1}}[G(x_{1},\nu_{1})-G(x_{2},\nu_{2})]] & =E_{\nu_{2}}[E_{\nu_{1}}(G(x_{1},\nu_{1}))-G(x_{2},\nu_{2})]=E_{\nu_{1}}(G(x_{1},\nu_{1}))-E_{\nu_{2}}(G(x_{2},\nu_{2}))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By symmetry, we have 
+\begin_inset Formula $V_{2}=E_{\nu_{2}}(G(x_{2},\nu_{2})-E_{\nu_{1}}(G(x_{1},\nu_{1}))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Above implies a Nash equilibrium where the consumers choose 
+\begin_inset Formula $\nu_{1}^{*}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{2}^{*}$
+\end_inset
+
+ such that 
+\begin_inset Formula $E_{\nu_{1}}(G(x_{1},\nu_{1}))$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{\nu_{2}}(G(x_{2},\nu_{2})$
+\end_inset
+
+ are maximised.
+ This is because if a consumer 1 chooses any 
+\begin_inset Formula $\nu_{1}'$
+\end_inset
+
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\ne\nu_{1}^{*}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ then 
+\begin_inset Formula $E_{\nu_{1}}(G(x_{1},\nu_{1}'))<E_{\nu_{1}}(G(x_{1},\nu_{1}^{*}))$
+\end_inset
+
+ and the consumer would have a suboptimal solution.
+ Consider, how this would change if a consumer was optimising a utility
+ then 
+\begin_inset Formula $V_{1}=E_{\nu_{2}}[E_{\nu_{1}}[u(G(x_{1},\nu_{1})-G(x_{2},\nu_{2}))]]$
+\end_inset
+
+ .
+ Maximising one's own utility is still optimal is u(x) is linear since 
+\begin_inset Formula $u(G(x_{1},\nu_{1})-G(x_{2},\nu_{2}))=u(G(x_{1},\nu_{1}))-u(G(x_{2},\nu_{2}))$
+\end_inset
+
+ and the rest of the arguments stay the same.
+ The utility is closer to reality if consumers are optimising not relative
+ wealth - but wealth relative to a common reference point.
+\end_layout
+
+\begin_layout Standard
+For the consumers competing with each in the PT case, we consider the PT
+ utility relative to a common reference point i.e.
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{alignat}{1}
+u(x,\textbf{p}) & =\sum_{i}^{n}{\upsilon(x-r)\cdot w(p_{i})}\label{eq:PT_definition_utility_vector_p}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\textbf{p}$
+\end_inset
+
+ represents the vector probabilities
+\begin_inset Formula $\{p_{1},p_{2},..,p_{n}\}$
+\end_inset
+
+ for events 
+\begin_inset Formula $E_{i\in[1,n]}$
+\end_inset
+
+ each of which carry a payoff 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ to the consumer, 
+\begin_inset Formula $w(p,\alpha)$
+\end_inset
+
+ is a probability weighting function representing a consumer's risk-aversion
+ parameter 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $r$
+\end_inset
+
+ is the reference point used by the consumer is the following linear value
+ function (
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+which is reasonable for small stakes
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ around the reference point):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+\upsilon(x) & =\begin{cases}
+x & x>0\\
+-\lambda x & x\le0
+\end{cases}\label{eq:linear_value_function_PT}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\backslash
+
+\end_layout
+
+\begin_layout Standard
+The reference points in PT as well as the non-linearity in value function
+ are an empirical concern.
+ A normative approach to variability of stochastic reference points from
+ Koszegi and Rabin considers the extent to which the consumers are acclimatised
+ to the reference point relevant to their decision.
+ Koszegi approach is similar in many ways to a disappointment aversion model.
+ In the Koszegi-Rabin model, a consumer can be considered having acclimatised
+ to her reference point - which would imply reference as the expected value
+ of the payoff.
+ Alternatively, a consumer may choose a reference point that is closer to
+ the final decision allowing her not time to acclimatise - therefore choosing
+ a reference point with as much uncertainty as the final decision.
+ The former equilibria - where the consumers has time to acclimatise is
+ called a CPE while the latter is called an unacclimatised personal equilibrium
+ (UPE).
+ In the latter case, varied reference points can result in varied UPEs out
+ of which a preferred personal equilibrium (PPE) is considered optimal.
+ In the context of relative wealth, the presence of status inference indicate
+ that the consumers have enough time to observe the reference point.
+ Also, as long as there is some notion of fairness in a society a consumer
+ can compare herself to an 
+\begin_inset Formula $x$
+\end_inset
+
+ different from hers - particularly, since 
+\begin_inset Formula $x$
+\end_inset
+
+ is the only parameter that separates a the consumer's fate from her competitor'
+s (
+\begin_inset Formula $\alpha$
+\end_inset
+
+ are consumer preference that are not part of choice).
+ If we assume that the consumers believe that the values of 
+\begin_inset Formula $x$
+\end_inset
+
+ are distributed with the same distribution then 
+\begin_inset Formula $E(x_{1})=E(x_{2})=r$
+\end_inset
+
+ which is the appropriate reference point.
+ This however is hardly the state of ones' income.
+ We tend to be more despondent about the future states of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The other extreme is that 
+\begin_inset Formula $E(x_{1})=x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $E(x_{2})=x_{2}$
+\end_inset
+
+.
+ If that is the case, we would see no concerns of relative wealth either.
+ 
+\end_layout
+
+\begin_layout Standard
+If there is sense in acclimatisation over a long-time, the non-linearity
+ of uncertainty must vanish .
+ Any perception of fairness should also mean that the differences in 
+\begin_inset Formula $x$
+\end_inset
+
+ should not matter towards the reference point.
+ 
+\begin_inset Formula $r$
+\end_inset
+
+ is similar to the a certainty equivalent of long-term expectations of gains
+ from the lottery.
+ Given an indirect utility 
+\begin_inset Formula $I(x)$
+\end_inset
+
+ for a given 
+\begin_inset Formula $P$
+\end_inset
+
+, 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi$
+\end_inset
+
+ we know that a risk-neutral knows her fate is determined with 
+\begin_inset Formula $x$
+\end_inset
+
+ alone, reference points are essentially view independent of one's 
+\begin_inset Formula $x$
+\end_inset
+
+ - so 
+\begin_inset Formula $E(x_{1})=\mu_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $E(x_{2})=\mu_{2}$
+\end_inset
+
+ is not the solution for reference points.
+ If we're saying that reference points are a function of 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ so that 
+\begin_inset Formula $r=\mu(x_{1},x_{2})$
+\end_inset
+
+.
+ The two extremes being unrealistic, we're looking for how the reference
+ itself is distributed given 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+.
+ The CPE condition provides us a solution of 
+\begin_inset Formula $r$
+\end_inset
+
+ since 
+\begin_inset Formula $I(r)=$
+\end_inset
+
+
+\begin_inset Formula $E_{x}(E_{\nu}(G(x,\nu))$
+\end_inset
+
+ where 
+\begin_inset Formula $I$
+\end_inset
+
+ is the indirect utility for the consumer (i.e.
+ 
+\begin_inset Formula $I(x)\equiv G(x,\nu^{*})$
+\end_inset
+
+ where 
+\begin_inset Formula $\nu^{*}$
+\end_inset
+
+ is such that 
+\begin_inset Formula $G(x,\nu)$
+\end_inset
+
+ is maximised 
+\begin_inset Formula $\nexists\nu|G(x,\nu)>G(x,\nu^{*})$
+\end_inset
+
+ ) .
+ In terms for the inverse for 
+\begin_inset Formula $I(r)$
+\end_inset
+
+ and given a distribution of 
+\begin_inset Formula $x$
+\end_inset
+
+ (over which expectation 
+\begin_inset Formula $E_{x}(\cdot)$
+\end_inset
+
+ is calculated), the reference point can be defined as the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+r & =I^{-1}(E_{x}(E_{\nu}(G(x,\nu)))
+\end{alignat*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+What matter to the consumer is whether 
+\begin_inset Formula $r$
+\end_inset
+
+ is between 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ or if it's on the same side of (
+\begin_inset Formula $r$
+\end_inset
+
+ i.e.
+ it's either below 
+\begin_inset Formula $min(x_{1},x_{2})$
+\end_inset
+
+ or above 
+\begin_inset Formula $max(x_{1},x_{2})$
+\end_inset
+
+ ).
+ The utility that the consumer 1 optimises is now
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Koszegi's utility function could also be used to make the same argument
+ - but we prefer PT for its descriptive robustness.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{alignat*}{1}
+G(x,\nu) & =w(p)\upsilon(P(\nu)-r)+w(1-p)\upsilon(S(x-\nu)-\phi-r)
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Evaluating the PT utility representing the consumer's loss aversion, it
+ is helpful to decompose the value function 
+\begin_inset Formula $\upsilon(x)$
+\end_inset
+
+ as defined in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:PT_definition_utility_vector_p"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ around the inflection point so that the 
+\begin_inset Formula $E_{\nu}(G(x,\nu)|x)$
+\end_inset
+
+ can be written as :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+E_{\nu}(G(x,\nu)|x) & =\int_{P(\nu)>r}w(p)\cdot(P(\nu)-r)d\nu-\int_{P(\nu)<r}\lambda w(p)(r-P(\nu))d\nu+\int_{S(x-\nu)-\phi>r}w(1-p)\upsilon(S(x-\nu)-\phi-r)d\nu-\int_{S(x-\nu)-\phi<r}\lambda w(1-p)\upsilon(r-(S(x-\nu)-\phi))d\nu
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For simpler notation let 
+\begin_inset Formula $w_{1}\equiv w(p,\alpha_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $w_{1}'\equiv w(1-p,\alpha_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $w_{2}\equiv w(p,\alpha_{2})$
+\end_inset
+
+, and 
+\begin_inset Formula $w_{2}'\equiv w(1-p,\alpha_{2})$
+\end_inset
+
+, the expected utility to be optimised for consumer 1 is: 
+\begin_inset Formula 
+\begin{alignat*}{1}
+E_{\nu_{1}}(G(x,\nu_{1})|x) & =\int_{P(\nu_{1})>r}w_{1}\cdot(P(\nu_{1})-r)d\nu_{1}-\int_{P(\nu_{1})<r}\lambda w_{1}(r-P(\nu_{1}))d\nu_{1}+\int_{S(x-\nu_{1})-\phi>r}w_{1}'\upsilon(S(x-\nu_{1})-\phi-r)d\nu_{1}-\int_{S(x-\nu_{1})-\phi<r}\lambda w_{1}'\upsilon(r-(S(x-\nu_{1})-\phi))d\nu_{1}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly for consumer 2, we have 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+E_{\nu_{2}}(G(x,\nu_{2})|x) & =\int_{P(\nu_{2})>r}w_{1}\cdot(P(\nu_{2})-r)d\nu_{2}-\int_{P(\nu_{2})<r}\lambda w_{1}(r-P(\nu_{2}))d\nu_{2}+\int_{S(x-\nu_{2})-\phi>r}w_{1}'\upsilon(S(x-\nu_{2})-\phi-r)d\nu_{2}-\int_{S(x-\nu_{2})-\phi<r}\lambda w_{1}'\upsilon(r-(S(x-\nu_{2})-\phi))d\nu_{2}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When
+\begin_inset Formula $x_{1}<r<x_{2}$
+\end_inset
+
+ and if 
+\begin_inset Formula $r$
+\end_inset
+
+ is closer to 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+, only a more risk-seeking consumer 1 could get the same utility as the
+ consumer 2.
+ 
+\end_layout
+
+\begin_layout Standard
+Notice 
+\begin_inset Formula $w_{1}+w_{1}'=1$
+\end_inset
+
+, 
+\end_layout
+
+\begin_layout Subsection
+Extensions
 \end_layout
 
 \begin_layout Standard
@@ -3020,7 +4143,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename TimeLine.jpeg
-	width 5in
+	width 3in
 
 \end_inset
 
@@ -3043,6 +4166,22 @@ Chart for Dynamics
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
 \end_layout
 
 \end_inset
@@ -3108,9 +4247,9 @@ Consumer optimises with a double integral when faced with a two-phase model
 
 \begin_layout Plain Layout
 A mid-point wealth assumption would be used to optimise utility.
- In a Competition-based Dynamic Reference, status consumption is a two-way
- risk - the consumer uses status consumption to optimise a utility based
- on dynamics reference.
+ In a Competitive Dynamic Reference, status consumption is a two-way risk
+ - the consumer uses status consumption to optimise a utility based on dynamics
+ reference.
 \end_layout
 
 \end_inset

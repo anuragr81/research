@@ -7,8 +7,8 @@ eststo clear
 
 xtset hhid year
 eststo, title(RP): quietly xtreg w_nu local_outofplace log_needs_price logx ,  fe vce(robust)
-eststo, title (BW): quietly xtreg w_nu richness_rank log_needs_price logx ,  fe vce(robust)
-eststo, title (BW+RP): quietly xtreg w_nu richness_rank local_outofplace log_needs_price logx,  fe vce(robust)
+eststo, title (SP): quietly xtreg w_nu nat_outofplace_rank log_needs_price logx ,  fe vce(robust)
+eststo, title (SP+RP): quietly xtreg w_nu nat_outofplace_rank local_outofplace log_needs_price logx,  fe vce(robust)
 
 esttab using c:/temp/resnu.tex, mtitle no p numbers star nogaps compress title(FE estimation for excess budget weight \$ w\_{\nu}\$ as dependent variable \label{tabExcessFE})
 
