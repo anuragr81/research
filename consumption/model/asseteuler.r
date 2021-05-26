@@ -1,4 +1,5 @@
 require(latex2exp)
+require(dplyr)
 tol = 1e-7
 
 # constraint is applied only at reset times
@@ -1122,4 +1123,110 @@ plot_piglog <- function(maxX,maxY,df){
   
   legend(10, 2, legend=paste("a=",df$a, "b=",df$b), lty=df$lty, cex=0.7)
   
+}
+
+optim_pt_func <- function(p,alpha,ref,nu,x,chi,phi,g,l){
+  return (karmakar(p,alpha)*pt_value(chi + P_nu(nu=nu) - ref,gamma=g,lambda=l)+  karmakar(1-p,alpha)* pt_value (S_xi(xi=x-nu)-phi-ref,gamma=g,lambda=l) )
+} 
+optim_eu_func <- function(p,nu,x,chi,phi){
+  return (p*(chi + P_nu(nu=nu))+  (1-p)* (S_xi(xi=x-nu)-phi) )
+}
+optim_crra_func <- function(p,nu,x,chi,phi,g){
+  return (p*crra(chi + P_nu(nu=nu),gamma = g)+  (1-p)* crra(S_xi(xi=x-nu)-phi,gamma = g) )
+}
+P_nu <- function(nu) { 100*(nu**.3) ; }
+S_xi <- function(xi) { 100*(xi**.2); }
+
+
+evolve_lottery_maker_account<-function(nsims, ref_start,pt_g,pt_lambda,x1_start,alpha1,alpha2,M, r,R){
+  #evolve_lottery_maker_account(ref_start = 0,pt_g = .88,x1_start = 80,alpha1 = .2,pt_lambda = 2.25 ) gets 738 as expected return but 
+  #evolve_lottery_maker_account(ref_start = 0,pt_g = .88,x1_start = 120,alpha1 = 5,pt_lambda = 2.25 ) would get just 699.63 despite higher x
+  
+  #with simulation of lottery makers's account : evolve_lottery_maker_account(ref_start = 0,pt_g = .88,x1_start = 280,alpha1 = .2,pt_lambda = 2.25,nsims = 1 ,alpha2 = .2,M=10) 
+  
+  # g = .88 and lambda=2.25 are the PT (KT) recommended values
+  #par(mfrow=c(2,1)); xvec <- seq(0,100,.1); plot(xvec,sapply(xvec,function(x){P_nu(x)),type='l'); plot(xvec,sapply(xvec,function(x){S_xi(x)}),type='l')
+  p_draw <- .3
+  
+
+  l = 2
+  crra_g <- .6
+  CHI = 1e+6
+  PHI = 1e+2
+
+  #
+  x1 <- x1_start
+  x2 <- x1_start
+  ref <- ref_start
+
+  
+  nu1_pt <- optimise(function(y) { -optim_pt_func(g=pt_g,l=pt_lambda,x=x1,nu=y,alpha=alpha1, ref= ref, p = p_draw,chi=CHI,phi=PHI) },c(0,x1))$minimum
+  nu1_eu <- optimise(function(y) { -optim_eu_func(x=x1,nu=y,p = p_draw,chi=CHI,phi=PHI) },c(0,x1))$minimum
+  nu1_crra <- optimise(function(y) { -optim_crra_func(g=crra_g,x=x1,nu=y,p = p_draw,chi=CHI,phi=PHI) },c(0,x1))$minimum
+  
+  if (FALSE){
+  par(mfrow=c(3,1))
+  nu_vec <- seq(0,x1,.01)  ; plot(nu_vec, sapply(nu_vec, function(y) { optim_pt_func(g=pt_g,l=l,x=x1,nu=y,alpha=alpha1, ref= ref, p = p_draw,chi=CHI,phi=PHI) }),type='l' ,main=sprintf("%.2f",nu1_pt))
+  nu_vec <- seq(0,x1,.01)  ; plot(nu_vec, sapply(nu_vec, function(y) { optim_eu_func(x=x1,nu=y,p = p_draw,chi=CHI,phi=PHI) }),type='l' ,main=sprintf("%.2f",nu1_eu))
+  nu_vec <- seq(0,x1,.01)  ; plot(nu_vec, sapply(nu_vec, function(y) { optim_crra_func(g=crra_g,x=x1,nu=y,p = p_draw,chi=CHI,phi=PHI) }),type='l' ,main=sprintf("%.2f",nu1_crra))
+  }
+  expected_payoff <- optim_eu_func(p = p_draw,nu = nu1_pt, x = x1,chi = CHI,phi = PHI)
+  #return(data.frame(nu1_pt=nu1_pt,expected_payoff=expected_payoff))
+  
+  # The lottery maker must advertise the lottery with the security offered
+  # To emphasise the liquidity conditions, the lottery maker must start with no money and just pool resources to bet. We have two options, Gamma and Delta as lottery makers own lottery which is then distributed into P(nu),S(x-nu)
+  # from every consumer. The other option is to have a multiplier lottery that literally bets the money taken from the consumers. The former case separate the lottery makers own lottery from the cosumer lottery while 
+  # the latter removes the need of the lottery makers own lottery.
+  # Only the second way makes sense, because the lottery maker is meant to do something with the nu and xi she gets. The collected money must be invested in a lottery and the second approach provides 
+  # the easiest way to do that.
+  # So in this latter case, the lottery maker starts with a promised amount M (she does not have this amount already but it is given out after playing the lottery on the amount x she does received )
+  # The lottery maker does not use the funds of her own - in fact she takes the money and takes some risk in an investment that would give a return r on the investment in good times and R in bad times
+  xres <- NULL
+  lmres <- NULL
+  
+  for (i in seq(nsims)){
+    
+    #nobody would want to play a risk-neutral lottery - the ratio should be based on r, R rather than p_draw")
+    nu1_pt <- optimise(function(y) { -optim_pt_func(g=pt_g,l=pt_lambda,x=x1,nu=y,alpha=alpha1, ref= ref, p = p_draw,chi=(1+r)*M,phi=(1+R)*M) },c(0,x1))$minimum
+    nu2_pt <- optimise(function(y) { -optim_pt_func(g=pt_g,l=pt_lambda,x=x2,nu=y,alpha=alpha2, ref= ref, p = p_draw,chi=(1+r)*M,phi=(1+R)*M) },c(0,x2))$minimum
+    
+    expected_payoff1 <- optim_eu_func(p = p_draw,nu = nu1_pt, x = x1,chi = (1+r)*M,phi = (1+R)*M)
+    expected_payoff2 <- optim_eu_func(p = p_draw,nu = nu2_pt, x = x2,chi = (1+r)*M,phi = (1+R)*M)
+    
+    if (expected_payoff1<x1){
+      print(xres)
+      print(lmres)
+      stop(paste("Player 1 dropped (",expected_payoff1,"<",x1,")"))
+    }
+    
+    if (expected_payoff2<x2){
+      print(xres)
+      print(lmres)
+      stop(paste("Player 2 dropped (",expected_payoff2,"<",x2,")"))
+    }
+    costs <- costs_per_draw()
+    xres <- rbind(xres,(data.frame(nsim=i, x1=x1,nu1_pt=nu1_pt,expected_payoff_1=expected_payoff1,M=M,x2=x2,nu2_pt=nu2_pt,expected_payoff_2=expected_payoff2)))
+    
+    lmres <- rbind(lmres,(data.frame(nsim=i,P_to_give = p_draw*(P_nu(nu1_pt)+P_nu(nu2_pt)), S_to_give = (1-p_draw)*(S_xi(x1-nu1_pt)+S_xi(x2-nu2_pt)),
+                     received_total = x1 + x2,
+                     average_x = (x1 + x2)/2,
+                     promised_M = M*(1+r)*p_draw - M*(1+R)*(1-p_draw),
+                     accounts_payable = -expected_payoff1 - expected_payoff2,
+                     total_lottery_proceeds = (p_draw)*(x1+x2)*(1+r) - (1-p_draw)*(x1+x2)*(1+R)) %>% mutate(account_value=total_lottery_proceeds + accounts_payable)))
+    if (lmres$account_value[length(lmres$account_value)]<0){
+      print(xres)
+      print(lmres)
+      stop("Lottery maker ran out of cash")
+    }
+                     
+    x1 <- expected_payoff1 - costs
+    x2 <- expected_payoff2 - costs
+  }
+  print(xres)
+  print(lmres)
+}
+
+
+costs_per_draw <- function(x1){
+  return (100)
 }
