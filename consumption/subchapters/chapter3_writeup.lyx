@@ -24,7 +24,7 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "tgschola" "Caslon OS"
+\font_roman "libertine" "Caslon OS"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -41,7 +41,7 @@ theorems-sec
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 11
+\paperfontsize 10
 \spacing single
 \use_hyperref false
 \papersize default
@@ -84,7 +84,7 @@ theorems-sec
 \math_numbering_side default
 \quotes_style english
 \dynamic_quotes 0
-\papercolumns 1
+\papercolumns 2
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
@@ -2469,7 +2469,7 @@ Using the above formulation for the binary growth economy where
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-u(x,\nu) & =w(p)\upsilon(P(\nu)+\chi-r)+w(1-p)\upsilon(S(\xi)-\phi-r)\label{eq:PT_lottery_util}
+u(x,\nu,\alpha,r) & =w(p,\alpha)\upsilon(P(\nu)+\chi-r)+w(1-p,\alpha)\upsilon(S(\xi)-\phi-r)\label{eq:PT_lottery_util}
 \end{alignat}
 
 \end_inset
@@ -2663,29 +2663,50 @@ noprefix "false"
 
 \end_inset
 
- states that the non-linearity of uncertainty must vanish in the observation
- of a reference point and on the other, a slight perception of fairness
- would mean that the differences in 
+ states that neither the non-linearity of private uncertainty nor the difference
+s in 
 \begin_inset Formula $x$
 \end_inset
 
- should not matter towards the reference point 
+ should matter towards the reference point 
 \begin_inset Formula $r$
 \end_inset
 
- .
- It is useful to view 
+ relevant to the consumer.
+ The view of 
 \begin_inset Formula $r$
 \end_inset
 
- as the certainty equivalent of long-term expectations of gains from the
- lottery.
- If we can define a function 
-\begin_inset Formula $m(x)=\{\nu_{x}|\nexists\nu|E_{p}(G(x,\nu))>E_{p}(G(x,\nu_{x}))\}$
+ as the long-term expectations of gains from the lottery irrespective of
+ one's 
+\begin_inset Formula $x$
 \end_inset
 
- i.e.
- the value 
+ and 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ More formally, let us define
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+m(x) & =\{\nu_{x}|\nexists\nu|E_{p}(G(x,\nu))>E_{p}(G(x,\nu_{x}))\}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The value 
+\begin_inset Formula $m(x)$
+\end_inset
+
+ is the 
 \begin_inset Formula $\nu$
 \end_inset
 
@@ -2703,7 +2724,7 @@ noprefix "false"
 \noun off
 \color none
 
-\begin_inset Formula $N(x,\nu)\equiv E_{p}(G(x,\nu))$
+\begin_inset Formula $E_{p}(G(x,\nu))$
 \end_inset
 
 
@@ -2719,7 +2740,7 @@ noprefix "false"
 \uwave default
 \noun default
 \color inherit
- for a given 
+ for given 
 \begin_inset Formula $x,P$
 \end_inset
 
@@ -2735,150 +2756,8 @@ noprefix "false"
 \begin_inset Formula $\phi$
 \end_inset
 
- then the  maximum expected return from an outlay 
-\begin_inset Formula $x$
-\end_inset
-
- is 
-\begin_inset Formula $E_{p}(G(x,m(x))$
-\end_inset
-
  .
- Denoting 
-\begin_inset Formula $I(x)\equiv E_{p}(G(x,m(x)))$
-\end_inset
-
- we can view reference points are essentially a a risk-neutral view independent
- of one's 
-\begin_inset Formula $x$
-\end_inset
-
- i.e.
- 
-\begin_inset Formula $I(r)=E_{p}(G(r,m(r)))$
-\end_inset
-
-
-\begin_inset Formula $=E_{x}(I(x))$
-\end_inset
-
-.
- For a given a distribution of 
-\begin_inset Formula $x$
-\end_inset
-
- (over which expectation 
-\begin_inset Formula $E_{x}(\cdot)$
-\end_inset
-
- is calculated), the reference point can thus be written as:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-r & =I^{-1}(E_{x}(E_{p}(G(x,m(x))))
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Such a reference point may not in all games.
- So the expectation of 
-\begin_inset Formula $E_{x}(\cdot)$
-\end_inset
-
- for various 
-\begin_inset Formula $x$
-\end_inset
-
- values is not stable and the above solution does not differ a lot from
- the the separate reference points assumption (
-\begin_inset Formula $E(x_{1})=x_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $E(x_{2})=x_{2}$
-\end_inset
-
-).
- For there to be a reference point, we must have stable states in the lottery.
- The assumption that the distrbution function is not changed and except
- in parameters means that all consumers were to play based on their own
- 
-\begin_inset Formula $x$
-\end_inset
-
- the distribution would remain the same.
- Distribution changing 
-\begin_inset Formula $I(x)$
-\end_inset
-
- many not be stable- but otherwise it defines any the observed expectation
- of over 
-\begin_inset Formula $x$
-\end_inset
-
- 's after playing the lottery.
- For consumers 
-\begin_inset Formula $i_{1...n}$
-\end_inset
-
-with outlays 
-\begin_inset Formula $\textbf{{x}}=\{x_{i}\}_{1...n}=\{x_{1},x_{2},...,x_{n}\}$
-\end_inset
-
- the expected outcomes 
-\begin_inset Formula $I(\textbf{x})=\{I(x_{1}),I(x_{2}),...\}$
-\end_inset
-
- would correspond to a reference point by considering expectation over 
-\begin_inset Formula $\alpha$
-\end_inset
-
- of every consumer as well.
- If consumer don't 
-\begin_inset Quotes eld
-\end_inset
-
-know
-\begin_inset Quotes erd
-\end_inset
-
- that people tend to be wrong - there would have no hope for competing with
- somebody with a higher outlay.
- This averaging is what gives everyone the same reference.
- The averaging is over 
-\begin_inset Formula $x$
-\end_inset
-
- and thus implicitly through 
-\begin_inset Formula $\alpha$
-\end_inset
-
- as well.
- This is discussed in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:DistributionLottery"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-With a reference point 
-\begin_inset Formula $r$
-\end_inset
-
- endogenised , we reinterpret the Equation 
+ Equivalently for utility in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:PT_lottery_util"
@@ -2888,31 +2767,215 @@ noprefix "false"
 
 \end_inset
 
- while assuming (without loss of generality) that 
+, define
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\iota(x,\alpha,r) & =\{\nu^{*}|\nexists\nu|u(x,\nu,\alpha,r)>u(x,\nu^{*},\alpha,r)\}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Further, based on 
+\begin_inset Formula $m(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $\iota(x,\alpha)$
+\end_inset
+
+ define 
+\begin_inset Formula $I(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $J(x,\alpha)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+I(x) & \equiv E_{p}(G(x,m(x))
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+J(x,\alpha,r) & \equiv E_{p}(G(x,\iota(x,\alpha,r))\label{eq:J_amount}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The reference point is the risk-neutral view independent of one's 
+\begin_inset Formula $x$
+\end_inset
+
+ an 
+\begin_inset Formula $r$
+\end_inset
+
+ such that 
+\begin_inset Formula $I(r)=E_{p}(G(r,m(r)))$
+\end_inset
+
+
+\begin_inset Formula $=E_{x,\alpha}J(x,\alpha,r)$
+\end_inset
+
+ 
+\series bold
+\bar under
+pipe 
+\series default
+\bar default
+
+\begin_inset Formula $r$
+\end_inset
+
+ i.e.
+ for a given a distribution of 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in a consume population (over which expectation 
+\begin_inset Formula $E_{x,\alpha}(\cdot)$
+\end_inset
+
+ is calculated), the reference point is certainty equivalent of the expected
+ income over all 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ In other words, we may write 
+\begin_inset Formula $r$
+\end_inset
+
+ as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+r & =I^{-1}(E_{x,\alpha}(J(x,\alpha))
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We detail the conditions on 
+\begin_inset Formula $P,S,\phi,\chi$
+\end_inset
+
+ that would ensure the existence of such an 
+\begin_inset Formula $r$
+\end_inset
+
+, but it suffices to say that the function 
+\begin_inset Formula $J(x,\alpha)$
+\end_inset
+
+ must guarantee that the distribution of 
+\begin_inset Formula $x$
+\end_inset
+
+ is stable for there to be an invertible 
+\begin_inset Formula $I(r)$
+\end_inset
+
+.
+ In the degenerate case where all consumers are risk-neutral 
+\begin_inset Formula $\alpha=1$
+\end_inset
+
+, there would no differences in 
+\begin_inset Formula $x$
+\end_inset
+
+ arising out of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $r$
+\end_inset
+
+ would be the same as 
+\begin_inset Formula $x$
+\end_inset
+
+ at all times.
+ We detail the stability conditions for 
+\begin_inset Formula $I(r)$
+\end_inset
+
+ in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:DistributionLottery"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, but considering than the reference 
+\begin_inset Formula $r$
+\end_inset
+
+ exists as defined above, let us consider how utility in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:PT_lottery_util"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ influences relative wealth where (without loss of generality) the consumer
+ 1 is poorer than consumer 2 i.e.
+ 
 \begin_inset Formula $x_{1}<x_{2}$
 \end_inset
 
 .
  
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-The negative distance from the outlay of the avearge consumer is what makes
- the consumer loss-averse.
 \end_layout
 
 \begin_layout Standard
-For any two consumers competing for status, what matters most to the consumer
- in this formulation is whether 
+
+\bar under
+For the two consumers competing for status, consider when 
 \begin_inset Formula $r$
 \end_inset
 
@@ -2924,7 +2987,7 @@ For any two consumers competing for status, what matters most to the consumer
 \begin_inset Formula $x_{2}$
 \end_inset
 
- or if both 
+ vs when both 
 \begin_inset Formula $x_{1}$
 \end_inset
 
@@ -2950,24 +3013,13 @@ For any two consumers competing for status, what matters most to the consumer
 \end_inset
 
  ).
- To observe this in more detail consider the utility optimised by the consumer
- 1:
-\begin_inset Formula 
-\begin{alignat*}{1}
-u(x,\nu) & =w(p)\upsilon(P(\nu)+\chi-r)+w(1-p)\upsilon(S(x-\nu)-\phi-r)
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
+ 
+\bar default
 Decomposing the value function 
 \begin_inset Formula $\upsilon(x)$
 \end_inset
 
- as defined in Equation 
+ defined in the Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:PT_definition_utility_vector_p"
@@ -3076,172 +3128,50 @@ The maximisation of utility depends on
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Enumerate
-While consumers may have their personal views of what provides them higher
- status (a view that is fully captured in the value of risk-aversion parameter
- 
-\begin_inset Formula $\alpha$
-\end_inset
-
-), what matters towards long-term status is whether the consumers have higher
- wealth or not.
- We compare the status of the two consumers as the 
-\begin_inset Formula $E(G(x_{1},\nu_{1}^{*})$
-\end_inset
-
- and 
-\begin_inset Formula $E(G(x_{2},\nu_{2}^{*})$
-\end_inset
-
- where 
-\begin_inset Formula $r,$
-\end_inset
-
-
-\begin_inset Formula $(x_{1},\alpha_{1})$
-\end_inset
-
- and 
-\begin_inset Formula $(x_{2},\alpha_{2})$
-\end_inset
-
- are fixed for the consumer and the selection of 
-\begin_inset Formula $(\nu_{1}^{*},\nu_{2}^{*})$
-\end_inset
-
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-is driven by 
-\begin_inset Formula $r$
-\end_inset
-
- and 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-the risk aversion levels 
-\begin_inset Formula $(\alpha_{1},\alpha_{2})$
-\end_inset
-
-.
- Too much risk-aversion can be costly to a consumer if 
+ Consider how relative returns from 
 \begin_inset Formula $P(\nu)$
 \end_inset
 
- is stronger than 
-\begin_inset Formula $S(x-\nu)$
+ and 
+\begin_inset Formula $S(\xi)$
+\end_inset
+
+ would influence the competition when 
+\begin_inset Formula $x_{1}<r<x_{2}$
 \end_inset
 
 .
- Likewise, a strong 
-\begin_inset Formula $S(x-\nu)$
+ When the returns from 
+\begin_inset Formula $P(\nu)$
 \end_inset
 
- would mean that being risk-seeking could be costly to the consumer.
- Risk-aversion levels and the position of 
-\begin_inset Formula $r$
+ are higher, risk-seeking is encouraged while when securities grow sharper
+ with increasing 
+\begin_inset Formula $\xi$
 \end_inset
 
- with respect to 
-\begin_inset Formula $x_{1}$
+, risk-aversion (higher 
+\begin_inset Formula $\alpha$
 \end_inset
 
- and 
-\begin_inset Formula $x_{2}$
-\end_inset
-
- crystallise the difference in 
-\begin_inset Formula $\nu_{1}^{*}$
-\end_inset
-
- when 
-\begin_inset Formula $\nu_{2}^{*}$
-\end_inset
-
- by creating conditions under which the differing risk-aversion levels could
- create relative-poverty trap despite utility from status consumption (likely
- through perceived notion of social mobility).
+ ) would be favoured.
 \end_layout
 
-\begin_layout Enumerate
-If it's possible that 
-\begin_inset Formula $P(\nu)>r$
-\end_inset
-
- and 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $S(x-\nu)-\phi>r$
-\end_inset
-
- for both the consumers, then the role of 
-\begin_inset Formula $r$
-\end_inset
-
- is reduced.
-\end_layout
-
-\begin_layout Enumerate
-One part of the exercise is seeing how 
-\begin_inset Formula $x_{1}<x_{2}$
-\end_inset
-
- could result in 
-\begin_inset Formula $E(G(x_{1,}\nu_{1}^{*}))>E(G(x_{2,}\nu_{2}^{*}))$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
+\begin_layout Standard
 As such we can have two types of equilibrium with the consumer 1 (
 \begin_inset Formula $x_{1}<x_{2}$
 \end_inset
 
 ) is more risk-seeking than the consumer 2 or consumer 1 is more risk-averse
  than consumer 2.
- The model allows us to look for conditions under which these could be necessita
-ted.
+ Using the above model we can can comment on conditions under which the
+ poorer consumer would be necessarily more risk-seeking or risk-averse.
  
 \end_layout
 
-\begin_layout Enumerate
-Conversely, consider now an environment where security comes at a heavy
- price and the consumer 2 is far more risk-averse and thus 
+\begin_layout Standard
+Consider for example an environment where security comes at a heavy price
+ and the consumer 2 is far more risk-averse than consumer 1 and thus 
 \family roman
 \series medium
 \shape up
@@ -3302,36 +3232,7 @@ so that
 \end_inset
 
  the consumer 1 is better off being risk-seeking.
-\end_layout
-
-\begin_layout Standard
-[CONDITIONS under which lower status consumption pays off - in both CRRA
- and CW] In CW, 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-a structure of 
-\begin_inset Formula $P$
-\end_inset
-
- where the diminishing returns from 
-\begin_inset Formula $\nu$
-\end_inset
-
- are slow, the consumer 1 with 
-\begin_inset Formula $x_{1}<x_{2}$
-\end_inset
-
- is likely to choose 
+ On the other hand, if consumer 1 chooses 
 \begin_inset Formula $\nu_{1}^{*}$
 \end_inset
 
@@ -3347,24 +3248,28 @@ a structure of
 \begin_inset Formula $P(\nu_{2}^{*})+\chi>r,S(x_{2}-\nu_{2}^{*})-\phi<r$
 \end_inset
 
-.
- This is one of the cases where being being risk-averse pays favours that
- consumer 1 because 
-\begin_inset Formula $E(G(x_{1}\nu_{1}^{*}))=$
-\end_inset
+, then being being risk-averse favours consumer 1.
+ 
+\end_layout
 
+\begin_layout Standard
 
-\begin_inset Formula $p(P(\nu_{1}^{*})+\chi))+(1-p)(S(x_{1}-\nu_{1}^{*})-\phi))$
-\end_inset
-
- for low 
-\begin_inset Formula $p$
-\end_inset
-
-.
- Particular functions can be illustrate this further.
- If social structures results in differences risk-aversion, then status
- would eventually be determined by the absolute values of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+We can thus state that if social structures result in differences risk-aversion
+ i.e.
+ if risk-aversions are due to social or occupational structures, then the
+ long-term status - which be determined by the absolute values of 
 \begin_inset Formula $E_{p}(G(x_{1},\nu_{1}^{*}))$
 \end_inset
 
@@ -3372,26 +3277,8 @@ a structure of
 \begin_inset Formula $E_{p}(G(x_{2},\nu_{2}^{*})$
 \end_inset
 
- .
- there may be conditions that would allow the the risk-averse to close the
- gap relative to consumer 2.
-\end_layout
-
-\begin_layout Standard
-# WE CAN ASSUME A CERTAIN FORM OF 
-\begin_inset Formula $P$
-\end_inset
-
- and 
-\begin_inset Formula $S$
-\end_inset
-
- to demonstrate what the competition looks like - particularly the differences
- in 
-\begin_inset Formula $\nu$
-\end_inset
-
-.
+ - would favour lower or higher risk-aversion more for a stable distribution
+ of income.
 \end_layout
 
 \begin_layout Subsection
@@ -3405,613 +3292,334 @@ Distribution is implied by repeated lotteries
 \end_layout
 
 \begin_layout Standard
-[Distribution is implied by repeated lotteries] Although we have assumed
- the lottery maker has enough liquidity to arrange for the lottery infinitely,
- a more accurate formulation of the reference point over time requires us
- to consider the lottery maker's constraints.
- Also the consumers who play lottery many times would increase their outlay
- 
-\begin_inset Formula $x$
-\end_inset
-
- for the next play and therefore the relevant reference point also changes
- as consumers get to play the lottery more than once.
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
- 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-Not only must 
-\begin_inset Formula $r$
-\end_inset
-
- change at every draw and the distribution of 
-\begin_inset Formula $x$
-\end_inset
-
- must be aligned differences in 
-\begin_inset Formula $\alpha$
-\end_inset
-
- for there to be a stable belief of a reference point.
- Also, all consumers share the same reference point only if they share beliefs
- about distribution of 
-\begin_inset Formula $\alpha$
-\end_inset
-
- and 
-\begin_inset Formula $x$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-Given that 
-\begin_inset Formula $\alpha$
-\end_inset
-
- for the consumers are preferences that are tied with occupational or social
- characteristics, we assume that they stay the same for all repeated draws
- 
-\begin_inset Formula $\alpha$
-\end_inset
-
-.
- For everything else being the same 
-\begin_inset Formula $\alpha$
-\end_inset
-
- would imply a certain distribution of 
-\begin_inset Formula $x$
-\end_inset
-
-.
- 
-\family default
-\series bold
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-Therefore, the reference point would be based on 
-\begin_inset Formula $\alpha$
-\end_inset
-
- as well.
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-Further, we assume that the lottery consumer does not know about the consumer
- 
-\begin_inset Formula $\alpha$
-\end_inset
-
- and is not permitted to discriminate the consumer based on the 
-\begin_inset Formula $\alpha$
-\end_inset
-
-.
- What the lottery maker does observe are the payments it receives from every
- consumer i.e.
- 
+The setup of functions 
 \begin_inset Formula $P(\nu)$
-\end_inset
-
- and 
-\begin_inset Formula $S(x-\nu)$
-\end_inset
-
-.
- A near-zero 
-\begin_inset Formula $x$
-\end_inset
-
- for any of the consumer is not in the interest of the lottery maker because
- that would make the player drop out of the lottery scheme.
- In repeated draws, the only way to ensure this is that no consumers gets
- an expected income lower than what she already has in the lottery.
- More formally, 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-if we denote the income a consumer with risk-aversion 
-\begin_inset Formula $\alpha$
-\end_inset
-
- receives after playing a lottery with outlay 
-\begin_inset Formula $x$
-\end_inset
-
- with a function 
-\begin_inset Formula $J(x,\alpha)$
-\end_inset
-
- then 
-\begin_inset Formula $J(x,\alpha)\ge x$
-\end_inset
-
- for all consumers at all times.
- Note that 
-\begin_inset Formula $J(x,\alpha)$
-\end_inset
-
- is the expected income 
-\begin_inset Formula $E(G(x,\nu^{*}))$
-\end_inset
-
- where 
-\begin_inset Formula $\nu^{*}$
-\end_inset
-
- is selected by maximising the consumer utility 
-\begin_inset Formula $u(x,\nu)$
-\end_inset
-
- i.e.
- 
-\begin_inset Formula $J(x,\alpha)=E(G(x,\nu^{*}))$
-\end_inset
-
- where 
-\begin_inset Formula $\nexists\nu\ne\nu^{*}$
-\end_inset
-
- such that 
-\begin_inset Formula $u(x,\nu)>u(x,\nu^{*})$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-[IS THIS TRUE?]
-\series default
-Every one believes that they're making the wisest decision for themselves.
- In this setup, they believe that the rich would make poor decisions at
- some point or that they would be lucky at the right time and either become
- rich themselves be rich enough to avoid too much risk.
- Consumers are optimising both income and the risk - by having a certain
- 
-\begin_inset Formula $\alpha$
-\end_inset
-
- - they don't want high 
-\begin_inset Formula $I(x)$
-\end_inset
-
- because of the risks it entails (and are averse to it).
- All of the consumers therefore have a certain preference for risk - given
- a certain income.
- When they get 
-\begin_inset Formula $I(x)$
-\end_inset
-
- (they wouldn't get 
-\begin_inset Formula $J(x,\alpha)$
-\end_inset
-
-), their 
-\begin_inset Formula $r$
-\end_inset
-
- must be updated.
- The game must be so that 
-\begin_inset Formula $J(x,\alpha)$
-\end_inset
-
- over 
-\begin_inset Formula $\alpha$
-\end_inset
-
- does not change the overall distribution of 
-\begin_inset Formula $x$
-\end_inset
-
- only the mean i.e.
- it is a linear transformation of the older random variable so that 
-\begin_inset Formula $E(x_{\tau=t+1})=aE(x_{\tau=t})+b$
-\end_inset
-
- where 
-\begin_inset Formula $a$
-\end_inset
-
-and 
-\begin_inset Formula $b$
-\end_inset
-
- are constants.
- In going from 
-\begin_inset Formula $x_{t=\tau}$
-\end_inset
-
- to 
-\begin_inset Formula $x_{t=\tau+1}$
-\end_inset
-
-, the consumer uses a 
-\begin_inset Formula $\nu$
-\end_inset
-
- so that 
-\begin_inset Formula $x_{\tau=t+1}=J(x_{t=\tau},\alpha_{x_{\tau}-r_{\tau}})$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-The differences in risk-aversion do not matter to the lottery maker but
- differences in 
-\begin_inset Formula $x$
-\end_inset
-
- indeed.
- In a low 
-\begin_inset Formula $p$
-\end_inset
-
- environment i.e.
- 
-\begin_inset Formula $p<<\frac{1}{2}$
-\end_inset
-
-, with 
-\begin_inset Formula $P(\nu)$
-\end_inset
-
- as an increasing function 
-\begin_inset Formula $\nu$
 \end_inset
 
  and 
 \begin_inset Formula $S(\xi)$
 \end_inset
 
- as an increasing function of 
+ represent the risks undertaken by the consumer for according to different
+ risk-aversion levels.
+ A fundamental property of the dynamics in the binary growth economy (see
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:binary-growth-economy"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) is that even though a consumer expects to maximise her own wealth subject
+ to risk-aversion, the aggregated wealth of all consumer is not subject
+ to the private risks factors applicable to individual consumers.
+ The economic activities which the consumers are a part of imply that the
+ aggregate consumption and income are managed by institutions where individual
+ risk-aversion level are irrelevant.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Such 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+higher institutional structures 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+are not subject to the occupational structures and are represented with
+ a risk-neutral lottery maker entity that places large bets on the amounts
+ collected from the consumer
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+s.
+ The raison d'etre of the risk-neutral lottery maker is merely the ability
+ to place large bets that are not accessible to the consumers with individual
+ incomes.
+ For large 
+\begin_inset Formula $X>>x_{i}\forall i$
+\end_inset
+
+, this lottery can be summarised as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+L(X) & =\{(X(1+\rho),p),(-X(1+R),1-p)\}\label{eq:macroeconomy}
+\end{alignat}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+The primary concern of the lottery maker is to maintain her own liquidity
+ in the macroeconomy defined by the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:macroeconomy"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ with appropriate restrictions on 
+\begin_inset Formula $P$
+\end_inset
+
+, 
+\begin_inset Formula $S$
+\end_inset
+
+ , 
+\begin_inset Formula $\chi$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi$
+\end_inset
+
+ that are the components of the lottery presented to a consumer.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Since the lottery maker observes a rate of return 
+\begin_inset Formula $(1+\rho)$
+\end_inset
+
+ and a rate or loss 
+\begin_inset Formula $(1+R)$
+\end_inset
+
+ in the above lottery , the expected outcome for the above lottery given
+ the investment 
+\begin_inset Formula $X$
+\end_inset
+
+ is 
+\begin_inset Formula $E(L(X))=pX(1+\rho)-(1-p)X(1+R)$
+\end_inset
+
+.
+ The proceeds from the macroeconomy lottery can be distributed among participati
+ng consumer based on a particular policy of risk-taking chosen by the lottery
+ maker.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+More particularly, she can provide incentives to risk-aversion if she thinks
+ the risk-taken by the consumer is more than she can undertake in the macroecono
+my or give incentives for risk-seeking instead if she believes that too
+ much security is being sought by the consumers
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+.
+ However, the consumer's risk aversions 
+\begin_inset Formula $\alpha$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ are private and the lottery maker is neither aware of differences in 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ nor can she set up a lottery policy that discriminates 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+a consumer with a certain 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ The lottery maker can still decide a risk-taking policy based on the reference
+ point that is observed by all consumers.
+ In the multiple draws of the lottery, the consumers may change their fortune
+ as the macroeconomy evolves, but in equilibrium, 
+\begin_inset Formula $P,S,\chi$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi$
+\end_inset
+
+ would be chosen such that the long-term differences in risk-aversion 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in the economy correspond to a stable distribution of income.
+\end_layout
+
+\begin_layout Standard
+We assume no accumulation of funds in this economy so that the consumers
+ bet all their disposable income as 
+\begin_inset Formula $\nu$
+\end_inset
+
+ and 
 \begin_inset Formula $\xi$
 \end_inset
 
-, the poorer consumer 1 can only get more expected income than the richer
- consumer 2 (i.e.
- when
-\begin_inset Formula $x_{1}<x_{2}$
+ in the lottery at a particular draw and that the lottery maker immediately
+ distributes the proceeds from the lottery played using with money collected
+ to the consumers.
+ Thus the amount 
+\begin_inset Formula $J(x,\alpha,r)$
 \end_inset
 
-) only the richer consumer is more risk-seeking i.e.
- 
-\begin_inset Formula $\alpha_{1}<\alpha_{2}$
+ that depends on 
+\begin_inset Formula $P,S,\chi$
 \end_inset
 
-.
- 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-Let's say if consumer 1 makes a 100£ per month while consumer 2 makes 1000£.
- To be of the same status, consumer 1 must believe that she follow a path
- to richness that that is not open to the other consumer.
- However, there is also a limit to how far this can be believed - hecne
- the the role of 
-\begin_inset Formula $r$
+, 
+\begin_inset Formula $\phi$
 \end_inset
 
- in 
-\begin_inset Formula $J(x,\alpha).$
+ as well as the 
+\begin_inset Formula $\alpha,r$
 \end_inset
 
- A chosen 
-\begin_inset Formula $\nu^{*}$
+ (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:J_amount"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- is such that making 
-\begin_inset Formula $100£$
+) is reclaimed immediately by the consumer.
+ The decision made by the consumer 
+\begin_inset Formula $i$
 \end_inset
 
- does not stop me from having amassed the same fortune over a lifetime game
- that the person making 1000£ does then 
-\begin_inset Formula $r$
-\end_inset
-
- coming through that 
-\begin_inset Formula $E_{x}(\cdot)$
-\end_inset
-
- makes sense.
- 
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-[IMPLICATION OF 
-\begin_inset Formula $\alpha$
-\end_inset
-
- on 
-\begin_inset Formula $r$
-\end_inset
-
-] For more risk-seeking the richer consumer is the closer the reference
- point should be in the the next plays.
- Likewise, the more risk-averse the richer consumer is she may increase
- the reference level for next plays accordingly.
- Both consumers being risk-averse i.e.
- the differences in 
-\begin_inset Formula $\alpha$
-\end_inset
-
- being to each other less would make the differences in 
-\begin_inset Formula $x$
-\end_inset
-
- matter a lot.
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-In the ideal world for lottery maker all consumers have the same 
-\begin_inset Formula $x$
-\end_inset
-
- and the same 
-\begin_inset Formula $\alpha$
-\end_inset
-
- (?).
- 
-\bar default
-The lottery maker could use the following condition (theorem) for reference
- point.
-\end_layout
-
-\begin_layout Theorem
-The stable reference point 
-\begin_inset Formula $r$
-\end_inset
-
- is such that 
-\begin_inset Formula $I(r)=r$
-\end_inset
-
- where 
-\begin_inset Formula $I(x)$
-\end_inset
-
- is the maximum expected income for an outlay 
-\begin_inset Formula $x$
-\end_inset
-
- and it does not exist for an increasing 
-\begin_inset Formula $I(x)$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Proof
-A increasing 
-\begin_inset Formula $I(x)$
-\end_inset
-
- can never stabilise.
- On the other hand, notice that extremely rich person - i.e.
- someone with very high 
-\begin_inset Formula $x$
-\end_inset
-
- would not seek for security.
- Like someone with very low 
-\begin_inset Formula $x$
-\end_inset
-
- would just seek security.
- A reference point resolves the consumers uncertainty of other person's
- 
-\begin_inset Formula $\alpha$
-\end_inset
-
- by taking an average over all 
-\begin_inset Formula $\alpha$
-\end_inset
-
- values.
- Such a resolution would be done with 
-\begin_inset Formula $\alpha$
-\end_inset
-
- of others as a decreasing function of 
-\begin_inset Formula $x$
-\end_inset
-
- that 
-\begin_inset Formula $I(x)$
-\end_inset
-
- is not an increasing function of 
-\begin_inset Formula $x$
-\end_inset
-
- (to be proven).
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-When all of us have the same 
-\begin_inset Formula $x$
-\end_inset
-
-, then reference need not be 
-\begin_inset Formula $x$
-\end_inset
-
- because the consumer don't directly observe the income of others - they
- know the reference through long-term observation - so the reference would
- also be the final state of the society if we started with the same 
-\begin_inset Formula $x$
-\end_inset
-
-.
- For the same 
-\begin_inset Formula $x$
-\end_inset
-
-, we would see that for a high 
-\begin_inset Formula $p$
-\end_inset
-
- the risk-seeker gains and for a low 
-\begin_inset Formula $p$
-\end_inset
-
- risk-averse would be poorer.
- Since we assume 
-\begin_inset Formula $p$
-\end_inset
-
- to be constant and low in the setup, the risk-averse those with high-alpha
- would win and keep winning.
- This would create an underclass where risk-seekers become poorer and poorer.
- That's clearly not a stable lottery system.
- So the liquidity assumption must be known to the consumers as well - i.e.
- that a government would rescue them if the income falls.
- This is equivalent to a reference that represents the lottery maker's liquidity.
- If the lottery makers observes that some risk-averse people have earned
- more on average she would like to make sure the risk-averse people get
- less return successively.
- In other words, the lottery maker 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-would setup 
-\begin_inset Formula $P$
+ to pick a certain 
+\begin_inset Formula $\nu_{i}$
 \end_inset
 
  and 
-\begin_inset Formula $S$
+\begin_inset Formula $\xi_{i}$
 \end_inset
 
- to make sure neither risk-averse nor risk-seeking people have so much advantage
- that they jeopardise the playing condition for everyone.
- This means that the differences becoming so much that 
+ as she observes a reference point 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ and is subjected to a long-term risk-aversion levels 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+, thus is dependent on other observations in the same draw.
+ 
 \family roman
 \series medium
 \shape up
@@ -4024,106 +3632,10 @@ would setup
 \uwave off
 \noun off
 \color none
-for any consumer 
-\begin_inset Formula $J(x_{t+1},\alpha)<x_{t}$
-\end_inset
-
- at any time.
- 
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-Consider what happens when 
-\begin_inset Formula $r$
-\end_inset
-
- is too high for a risk-averse consumer.
- She would do all she can to get close to 
-\begin_inset Formula $r$
-\end_inset
-
- with a certain chance (banking on 
-\begin_inset Formula $P$
-\end_inset
-
- or 
-\begin_inset Formula $S$
-\end_inset
-
- as indicated by their shape as well as 
-\begin_inset Formula $p$
-\end_inset
-
-).
- A risk-seeking consumer may lean towards consider 
-\begin_inset Formula $P(\nu)$
-\end_inset
-
- (i.e.
- have higher 
-\begin_inset Formula $\nu$
-\end_inset
-
- than the zero-reference risk-neutral consumer ) but the being too far from
- 
-\begin_inset Formula $r$
-\end_inset
-
- dominates the decision.
- When 
-\begin_inset Formula $r$
-\end_inset
-
- is too low in the low 
-\begin_inset Formula $p$
-\end_inset
-
- environment, the consumer  does want to move away from 
-\begin_inset Formula $r$
-\end_inset
-
- too but not as much as the consumer with lower income would want to get
- closer to 
-\begin_inset Formula $r$
-\end_inset
-
- .
- This is all lottery consumer is aware of and therefore all what the lottery
- maker can do is to discourage risk-seeking.
- Consumers too far behind 
-\begin_inset Formula $r$
-\end_inset
-
- would not want to fall further behind than more richer people would want
- to go further away from 
-\begin_inset Formula $r$
-\end_inset
-
-.
- It makes sense therefore to reduce 
-\begin_inset Formula $P(\nu)$
-\end_inset
-
- - which is all that can be done to make sure 
-\begin_inset Formula $S(\xi)$
-\end_inset
-
- is relied on (
+In equilibrium, the reference point assumed by the consumers and the lottery
+ defined by
 \family default
-\series bold
+\series default
 \shape default
 \size default
 \emph default
@@ -4134,7 +3646,51 @@ Consider what happens when
 \uwave default
 \noun default
 \color inherit
-test this!
+ 
+\begin_inset Formula $P$
+\end_inset
+
+, 
+\begin_inset Formula $S$
+\end_inset
+
+ , 
+\begin_inset Formula $\chi$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi$
+\end_inset
+
+ should be such that the lottery maker distributes the gains and losses
+ in the macroeconomy to the consumers making their decision based on the
+ reference point and the long-term risk-aversion levels 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+There are two constraints that such an equilibirum must conform to.
+ First is the liquidity constraint for the lottery maker - the constraint
+ that the lottery maker can neither take an amount or a risk higher than
+ what shes provides to the consumers based on the lottery definition.
+ The second is the feasibility constraint for the lottery - which is that
+ the consumer must see a net utility again in playing the lottery.
+ 
+\end_layout
+
+\begin_layout Standard
+Specifically, the lottery maker cannot distribute to the consumer any amount
+ that is lower than what she has promised i.e.
+ 
+\begin_inset Formula $p(\sum P(\nu_{i})+n\chi)+(1-p)(\sum_{i}S(x_{i}-\nu_{i})-n\phi)$
+\end_inset
+
+.
+ Thus the expected lottery proceeds must be higher than or equal to this
+ promised amount
 \family roman
 \series medium
 \shape up
@@ -4147,187 +3703,214 @@ test this!
 \uwave off
 \noun off
 \color none
-).
+.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+The degenerate case for the lottery is when the starting disposable income
+ for all the consumers is zero i.e.
+ if
+\begin_inset Formula $x_{i}=0$
+\end_inset
+
+ 
+\begin_inset Formula $\forall i$
+\end_inset
+
+.
+ In this case, the lottery maker would not bet anything and would promise
+ nothing to the consumers setting up 
+\begin_inset Formula $\chi=\phi$
+\end_inset
+
+=0 and 
+\begin_inset Formula $P(\nu)=$
+\end_inset
+
+ 
+\begin_inset Formula $P(\xi)=0$
+\end_inset
+
+.
+ Whenever all consumers have non zero disposable income to participate in
+ the lottery with i.e.
+ 
+\begin_inset Formula $x_{i}>0$
+\end_inset
+
+ 
+\begin_inset Formula $\forall i$
+\end_inset
+
+, the lottery maker would distribute the proceedds and risk to consumers
+ who are owed 
+\begin_inset Formula $\sum_{i}P(\nu_{i})$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{i}S(\nu_{i})$
+\end_inset
+
+ after the lottery.
+ In equilibrium, the lottery maker would set up a lottery so that she provide
+ the consumers a security that is implied through the lottery 
+\begin_inset Formula $L=\{(x(1+r),p),(-x(1+R),1-p)\}$
+\end_inset
+
+.
+ If she allocates 
+\begin_inset Formula $M,N$
+\end_inset
+
+ to be invested in the lottery so that
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $\chi=M(1+r)/n$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi=N(1+R)/n$
+\end_inset
+
+ for 
+\begin_inset Formula $n$
+\end_inset
+
+ consumers, then her expected income 
+\begin_inset Formula $E(L(\sum x_{i}))$
+\end_inset
+
+ must balance 
+\begin_inset Formula $p(\sum P(\nu_{i})+M(1+r))+(1-p)(\sum S(x_{i}-\nu_{i})-N(1+R))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The lottery must also satisfy that feasibility constraint for every consumer
+ - so that the lottery provide a net utility gain in playing the lottery.
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ The lottery maker must therefore ensure that no consumer obtain an expected
+ income 
+\begin_inset Formula $J(x,\alpha,r)$
+\end_inset
+
+ lower than the 
+\begin_inset Formula $x$
+\end_inset
+
+ the consumer has before playing the lottery.
+ The reference point therefore directly influences the lottery maker set
+ of the lottery.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+The feasibility condition of the lottery is therefore simply the constraint
+ that 
+\begin_inset Formula $J(x_{t},\alpha,r_{t})\ge x_{t}$
+\end_inset
+
+ for all consumers at all times.
+\end_layout
+
+\begin_layout Standard
+A common reference point in a lottery that satisfies both the conditions
+ thus serves a purpose both for the consumers and the lottery maker.
+ For the consumer, 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $\{x_{i}\}_{t}$
+\end_inset
+
+ allows those with disparate risk aversions to participate in a non-discriminati
+ng lottery.
+ For the lottery maker , it enables a stable lottery without having a control
+ on the risk-aversion levels 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ Status competitions imply that a consumer would believe that she makes
+ the best decision given her outlay and circumstances that imply a private
+ risk-aversion and a corresponding view of the future.
+ So while a higher income 
+\begin_inset Formula $x$
+\end_inset
+
+ does mean higher expected income and status in the long-run, the uncertainty
+ about the other consumer's 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ would permit some risk-taking as long as the consumers are not too far
+ from the common reference point.
+ For example, if a consumer 1 has a disposable income of 100£ per month
+ while consumer 2 has 1000£, social interactions could facilitate a similar
+ sense of status for the two in the short-run if the consumer 1 believes
+ that she can follow a path to richness that is not open to consumer 2.
+ However, if the consumer 1 is too far below the reference that is common
+ for both consumer 1 and 2, then both her perception and long-term status
+ (i.e.
+ the
+\begin_inset Formula $x\rightarrow J(x,\alpha,r$
+\end_inset
+
+) in equilibrium) would be lower.
+ 
 \end_layout
 
 \begin_layout Section
 Questions
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
 
-\series bold
-Question 1
-\series default
-: which one of 
-\begin_inset Formula $x$
-\end_inset
-
- and 
-\begin_inset Formula $\alpha$
-\end_inset
-
- are more stable.
- If consumers are known to have a stable 
-\begin_inset Formula $x$
-\end_inset
-
- and a stable 
-\begin_inset Formula $\alpha$
-\end_inset
-
- (which is the most likely scenario), then our comparisons should obtain
- that 
-\begin_inset Formula $r$
-\end_inset
-
- that results in the stability of 
-\begin_inset Formula $x$
-\end_inset
-
- and 
-\begin_inset Formula $r$
-\end_inset
-
-.
- We have only talked about stability of 
-\begin_inset Formula $x$
-\end_inset
-
-as stability of 
-\begin_inset Formula $E_{p}(G(x,\nu_{x}))$
-\end_inset
-
- assuming no accumulation.
- If 
-\begin_inset Formula $x$
-\end_inset
-
- is stable (given) then we need to clarify why accumulation is absent? 
-\series bold
-The logical problem is that if distribution of 
-\begin_inset Formula $x$
-\end_inset
-
- is known then that distribution itself should determine status - since
- it's long-term value of expected wealth that determines status.
- 
-\series default
-The idea that a lower 
-\begin_inset Formula $\alpha$
-\end_inset
-
- makes the status in a long-term higher or lower is the wrong approach -
- since the consumer would already know her status given her 
-\begin_inset Formula $x$
-\end_inset
-
- and the transition probabilities.
- The idea can be explained only if we accept that i) there is no accumulation
- or the lottery is lifetime bet and that ii) the observed distribution is
- a stable state that the consumer approximates her own position with.
- Although the consumer does not compute reference points (she merely observes
- it), the reference point must be a function of time - since the structure
- of lottery would change the distribution of 
-\begin_inset Formula $x$
-\end_inset
-
- - so ultimately we might need to provide more assumptions for the accumulation
- and the lottery maker's liquidity.
- For example, we could say that that distribution is also exogenous since
- the lottery maker may be investing in something that's not open for consumer's
- to play with.
- Therefore, the distribution is not dependent on the liquidity but only
- past plays of the lottery.
- 
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Question 2
-\series default
-: is transition probability needed for 
-\begin_inset Formula $r$
-\end_inset
-
-? In other words, Does computing 
-\begin_inset Formula $E_{x}(\cdot)$
-\end_inset
-
- in 
-\begin_inset Formula $E_{p}(G(r,\nu_{r}))=E_{x}(E_{p}(G(x,\nu_{x})))$
-\end_inset
-
- require knowing the transition probabilities of 
-\begin_inset Formula $x$
-\end_inset
-
-.
- Our claim is that consumers obtain the differences and know how the mechanism
- works, but not the long-term probability of transition- because 
-\begin_inset Formula $\alpha$
-\end_inset
-
- are not known for all consumers.
- Thus future is unknown but current.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Questions 3
-\series default
-: Do we need to assume that higher income would result in higher 
-\begin_inset Formula $\alpha$
-\end_inset
-
- or lower 
-\begin_inset Formula $\alpha$
-\end_inset
-
- - that richer consumers become loss averse is already implied by 
-\begin_inset Formula $r$
-\end_inset
-
-.
- Being loss-averse is not about having higher 
-\begin_inset Formula $\alpha$
-\end_inset
-
- - it might be just about having 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\upsilon(k)$
-\end_inset
-
- around 
-\begin_inset Formula $r$
-\end_inset
-
- (verify that).
- Notice that this is not a question of time-varying choices because the
- consumer is only projecting her view.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Question 4:
-\series default
- 
-\series bold
 \bar under
 Pushing 
 \begin_inset Formula $\alpha$
@@ -4359,573 +3942,17 @@ Pushing
  
 \end_layout
 
-\begin_layout Standard
-
-\series bold
-\bar under
-Consider first the case when 
-\begin_inset Formula $\alpha$
-\end_inset
-
- is not tied with 
-\begin_inset Formula $x$
-\end_inset
-
- and for any consumer 
-\begin_inset Formula $k$
-\end_inset
-
- at any draw 
-\begin_inset Formula $t=\tau$
-\end_inset
-
- , 
-\begin_inset Formula $x_{t=\tau+1,t=k}=J(x_{t=\tau,i=k},\alpha_{i=k})$
-\end_inset
-
- In this case, even if the consumer becomes rich she remains risk-averse
- or risk-seeking and therefore she can only optimise subject to her own
+\begin_layout Enumerate
+If only either of the consumer contributes i.e.
  
-\begin_inset Formula $\alpha$
-\end_inset
-
- (not observing the 
-\begin_inset Formula $\alpha$
-\end_inset
-
- of others and deciding everything relative to the reference at time 
-\begin_inset Formula $\tau$
-\end_inset
-
- i.e.
- 
-\begin_inset Formula $r_{t=\tau}$
-\end_inset
-
-).
- Indeed 
-\begin_inset Formula $r_{t=\tau}$
-\end_inset
-
- must itself depend on 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\alpha$
-\end_inset
-
- of everyone (how?).
- 
-\end_layout
-
-\begin_layout Standard
-##SIMULATION##
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-Assuming 
-\begin_inset Formula $r=x_{0}$
-\end_inset
-
- at the start of the draws the next lottery would be the level that the
- lottery maker is concerned i.e.
- the money that she expects give away is 
-\begin_inset Formula $p(\sum_{i}^{n}P(\nu_{i})+n\xi)+(1-p)(\sum(S(x-\nu_{i})-n\phi)$
-\end_inset
-
-.
- The lottery maker is only concerned with long-term probabilities and offsets
- all risks to the consumers.
- She has no control over how risk-seeking someone is.
- If some consumers take more 
-\begin_inset Formula $\nu$
-\end_inset
-
-, it is offset by others using 
-\begin_inset Formula $\xi$
-\end_inset
-
-, then the lottery makes should not be bothered - but it's the consumers
- whose reference point are changed as per lottery maker's average as well
- (while the differences in risk-aversion levels start to materialise).
- When some people have more money than the rest - the consumers project
- based on their own 
-\begin_inset Formula $\alpha$
-\end_inset
-
- what would have happened - they don't observe 
-\begin_inset Formula $x$
-\end_inset
-
- but they would see the effects of 
-\begin_inset Formula $P(\nu)$
+\begin_inset Formula $x_{1}>0$
 \end_inset
 
  and 
-\begin_inset Formula $S(\xi)$
+\begin_inset Formula $x_{2}=0$
 \end_inset
 
- immediately (inferring 
-\begin_inset Formula $x$
-\end_inset
-
- indirectly).
- Lotteries have been played enough times that some risk-averse folks have
- got more 
-\begin_inset Formula $x$
-\end_inset
-
- than them, the reference must now change.
- It's tempting to use a median but more than 50% of think that we make better
- decisions than rest of the 50% so we definitely deserve higher than the
- median.
- Our reference does depend on 
-\begin_inset Formula $\alpha$
-\end_inset
-
- - namely 
-\begin_inset Formula $J(x,\alpha)$
-\end_inset
-
-.
- Consider what the lottery maker collects at every time, she must distribute
- the surplus equally among all because she cannot allocate based on 
-\begin_inset Formula $\alpha$
-\end_inset
-
- (as she doesn't know which consumer has what 
-\begin_inset Formula $\alpha$
-\end_inset
-
- ).
- 
-\begin_inset Formula $\alpha$
-\end_inset
-
- should be private by definition.
-\end_layout
-
-\begin_layout Standard
-Since the lottery maker only receives liquidity from the proceeds of the
- lottery and the collection from the players, she can only provide the consumer
- a security greater than what is implied through the lottery 
-\begin_inset Formula $L=\{(x(1+r),p),(-x(1+R),1-p)\}$
-\end_inset
-
- the by transferring the money collected from a more risk-seeking consumer.
- If instead, the lottery maker decides to upfront about the returns from
- the lottery 
-\begin_inset Formula $L$
-\end_inset
-
- then she can promise an amount 
-\begin_inset Formula $M$
-\end_inset
-
- to be invested in the lottery so that
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
- 
-\begin_inset Formula $\chi=M(1+r)$
-\end_inset
-
- and 
-\begin_inset Formula $\phi=M(1+R)$
-\end_inset
-
- for every consumers.
- In this way, 
-\begin_inset Formula $\chi$
-\end_inset
-
- and 
-\begin_inset Formula $\phi$
-\end_inset
-
- are set through selection of 
-\begin_inset Formula $M$
-\end_inset
-
- by the consumer and the lottery maker ensures that the risks in her lottery
- are transferred as is to every consumer.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Tabular
-<lyxtabular version="3" rows="9" columns="4">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top" width="4cm">
-<column alignment="center" valignment="top" width="4cm">
-<column alignment="left" valignment="middle" width="4cm">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-consumer 1 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-consumer 2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-lottery maker
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-before trial
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $x_{1}$
-\end_inset
-
-=
-\begin_inset Formula $x_{1}'$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $x_{2}=x_{2}'$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-at first trial
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $L'_{t=1}=(x_{1}+x_{2})(p(1+r)$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $-(1-p)(1+R))$
-\end_inset
-
- 
-\begin_inset Newline newline
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-after first trial
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula $x_{1}=p\cdot P(\nu_{1})$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $+(1-p)S(x_{0}-\nu_{1})$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $+pM(1+r)$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $-(1-p)M(1+R)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula $x_{2}=p\cdot P(\nu_{2})$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $+(1-p)S(x_{0}-\nu_{2})$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $+pM(1+r)$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $-(1-p)M(1+R)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $L_{t=1}=L'_{t=1}$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $-p\sum_{i=1}^{n}P(\nu_{i})$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $-(1-p)\sum_{i=1}^{n}S(\nu_{i})$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $-(pnM(1+r)$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula $-(1-p)nM(1+R))$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-at second trial
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $L_{t=2}'=L_{t=1}+$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
+, then all the consumer 2 can only stay in the game as ong as 
 \family roman
 \series medium
 \shape up
@@ -4939,7 +3966,7 @@ at second trial
 \noun off
 \color none
 
-\begin_inset Formula $(x_{1}+x_{2})(p(1+r)$
+\begin_inset Formula $\chi>-\phi$
 \end_inset
 
 
@@ -4955,176 +3982,15 @@ at second trial
 \uwave default
 \noun default
 \color inherit
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $-(1-p)(1+R))$
-\end_inset
-
-
+ .
+ 
 \end_layout
 
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-..
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-..
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-..
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-..
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-at
-\begin_inset Formula $n^{th}$
-\end_inset
-
- trial
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $L_{t=n}'=L_{t=n-1}+$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $(x_{1}+x_{2})(p(1+r)$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $-(1-p)(1+R))$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-after 
-\begin_inset Formula $n^{th}$
-\end_inset
-
-trial
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+\begin_layout Enumerate
+Check that for more risk-seeking the richer consumer is the closer the reference
+ point should be in the the next plays.
+ Likewise, the more risk-averse the richer consumer is she may increase
+ the reference level for next
 \family roman
 \series medium
 \shape up
@@ -5137,313 +4003,17 @@ trial
 \uwave off
 \noun off
 \color none
-\begin_inset Formula $x_{1}=p\cdot P(\nu_{1})$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $+(1-p)S(x_{0}-\nu_{1})$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $+pM(1+r)$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $-(1-p)M(1+R)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula $x_{2}=p\cdot P(\nu_{2})$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $+(1-p)S(x_{0}-\nu_{2})$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $+pM(1+r)$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $-(1-p)M(1+R)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The two conditions in the game are 
-\begin_inset Formula $p\cdot P(\nu)+(1-p)S(x-\nu)+\{p\chi+(1-p)\phi\}>x$
-\end_inset
-
- at all times for all consumers and that 
-\begin_inset Formula $L'>0$
-\end_inset
-
- at all times.
- The former condition can be easily broken if the consumer does gain enough
- relative to the reference point - recall that 
-\begin_inset Formula $\nu$
-\end_inset
-
- is chosen by maximising utility 
-\begin_inset Formula $u(x,\nu,\alpha)=w(p,\alpha)\upsilon(P(\nu)+\chi-r)+w(1-p,\alpha)\upsilon(S(x-\nu)-\phi-r)$
-\end_inset
-
-.
- In a low 
-\begin_inset Formula $p$
-\end_inset
-
- environment the consumer who is too risk-seeking would continue to lose
- - that means the interest-condition would not be met for her.
- The lottery maker cannot control 
-\begin_inset Formula $\nu$
-\end_inset
-
- nor can she allocate anything based on 
-\begin_inset Formula $\nu$
-\end_inset
-
- - all what she can do is to ascertain that the risk-seeking consumer does
- not take too much risk - in another words adjust provide more security
- (to incentivise risk-aversion).
- For setting one value for the entire game she would need to choose 
-\begin_inset Formula $r$
-\end_inset
-
- that considers this possibility.
- Notice that too much risk-aversion in the low 
-\begin_inset Formula $p$
-\end_inset
-
- environment could also be problematic for the lottery maker because that
- would mean just security investments and too much cash - which is not lottery
- makers intention.
- Since the lottery maker does not observe 
+ plays accordingly.
+ Both consumers being risk-averse i.e.
+ the differences in 
 \begin_inset Formula $\alpha$
 \end_inset
 
- - she can only ensure that the outliers are not that many i.e.
- the difference in risk-aversion does not cause the income differences so
- much that the reference points makes the lottery worthless.
- She therefore sets up 
-\begin_inset Formula $P,S$
-\end_inset
-
- so that outliers are limited or indeed zero.
- The lottery maker only needs to check the sums 
-\begin_inset Formula $\mathscr{P}=\sum_{i}^{n}P(\nu_{i})$
-\end_inset
-
- and 
-\begin_inset Formula $\mathscr{S}=\sum_{i}^{n}S(\xi_{i})$
-\end_inset
-
- to see which side is dominates.
- The question is easily answered if we consider how lottery maker balance
- 
-\begin_inset Formula $P$
-\end_inset
-
- and 
-\begin_inset Formula $S$
-\end_inset
-
- accounts to begin with.
- She cannot afford to keep it anything else but align it with 
-\begin_inset Formula $L=p\chi-(1-p)\phi$
-\end_inset
-
-.
- The next argument must be made to justify why lottery-maker's amount becomes
- the reference point.
- But considering the primeval problem, how exactly must the lottery maker
- balance her game.
- The truth is the lottery maker is also taking a bet - and she must maximise
- her returns - but in our cases, this a particularly benign lottery maker
- who steps in only to motivate the participants.
- Consider what would happen if 
-\begin_inset Formula $\mathscr{P}>0$
-\end_inset
-
- and 
-\begin_inset Formula $\mathscr{S}=0$
-\end_inset
-
- in a low 
-\begin_inset Formula $p$
-\end_inset
-
- environment i.e.
- all consumers want upside risks.
- The lottery maker is fine as long as 
-\begin_inset Formula $\mathscr{P<}$
-\end_inset
-
-
-\begin_inset Formula $nL$
-\end_inset
-
- i.e.
- the amount to be paid back does not exceed here expected amount.
- Similarly, she must also ensure that 
-\begin_inset Formula $\mathscr{S}<L$
-\end_inset
-
-.
- Combining both arguments we can say that 
-\begin_inset Formula $\mathscr{P-S}<nL$
-\end_inset
-
-.
- To double check, consider what would happen if nobody had any income 
-\begin_inset Formula $P(\nu)=S(\xi)=0$
-\end_inset
-
-.
- The consumers would not be interested in playing the lottery and the 
-\begin_inset Formula $nL$
-\end_inset
-
- would be distributed among all participants everytime.
- Except in these dictatorial conditions when 
-\begin_inset Formula $P(\nu)>0$
-\end_inset
-
- and 
-\begin_inset Formula $S(\xi)>0$
-\end_inset
-
-, we have 
-\begin_inset Formula $E(\mathscr{P)+}E(\mathscr{S})<nL$
-\end_inset
-
- so that the lottery maker can stay liquid.
-\end_layout
-
-\begin_layout Standard
-There are two problems that we have noticed yet:
-\end_layout
-
-\begin_layout Enumerate
-The lottery maker does not generate money or receive it from another source
- - she has a starting amount and 
-\begin_inset Formula $P(\nu)$
-\end_inset
-
- does not generate money but increases the allocation by lottery maker -
- who does nothing more than collected all the money as 
-\begin_inset Formula $\nu$
-\end_inset
-
- and 
-\begin_inset Formula $x-\nu$
-\end_inset
-
- and bets it in nature.
-\end_layout
-
-\begin_layout Enumerate
-We have assumed that 
-\begin_inset Formula $\chi$
-\end_inset
-
- and 
-\begin_inset Formula $\phi$
-\end_inset
-
- are natural constants - they are also to be set by the lottery maker if
- she has no source.
-\end_layout
-
-\begin_layout Standard
-The next conditions is that 
-\begin_inset Formula $J(x,\alpha)>x$
-\end_inset
-
- for all 
+ being to each other less would make the differences in 
 \begin_inset Formula $x$
 \end_inset
 
- for which the lottery maker must also make sure that 
-\begin_inset Formula $|\mathscr{P-\text{\ensuremath{\mathscr{S}} }|}$
-\end_inset
-
- is not above a certain threshold.
- If it is above that threshold, the consumers would drop out.
-\end_layout
-
-\begin_layout Standard
-Considering what would happen with a difference 
-\begin_inset Formula $\alpha$
-\end_inset
-
- while the initial income is the same.
+ matter a lot.
 \end_layout
 
 \begin_layout Section

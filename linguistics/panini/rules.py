@@ -131,15 +131,63 @@ def halantyam_103003(suffix):
 def suffix_it(suffix):
     if not isinstance(suffix,Suffix):
         raise ValueError("Invalid Suffix")
-    it_position1 = lashakvataddhite_103008(suffix)
-    it_position2 = halantyam_103003(suffix)
-    return {'suffix':suffix,'it':(it_position1 ,it_position2)}
+    it_positions = []
     
-    return root
+    it_pos = lashakvataddhite_103008(suffix)
+    if it_pos is not None:
+        it_positions.append(it_pos)
+    
+    it_pos = halantyam_103003(suffix)
+    if it_pos is not None:
+        it_positions.append(it_pos)
+        
+    return {'suffix':suffix,'it':tuple(it_positions), 'it_chars':[suffix.get_suffix()[i] for i in it_positions]}
+    
+   
+def vriddhi(x):
+    if x =="a":
+        return "aa"
+    elif x == "i":
+        return "ii"
+    elif x == "e":
+        return "ay"
+    else:
+        raise ValueError("vriddhi not supported")
+        
+def upadhaa(x):    
+    if not isinstance(x,list) or not all(isinstance(j,str) for j in x):
+        raise ValueError("invalid input: %s" % x)
+    if len(x)>=2:
+        return len(x)-2
+    else:
+        raise ValueError("Insufficient length for upadhaa")
+    
+
+def chajoHkughiNnNnyatoH_703052(x,it_chars):
+    
+    return x
+        
+def ataupadhaayaaH_702116(anga,it_chars):
+    """
+    the it characters are used  to decide if upadha is implied in the anga or not
+    """
+    if 'Nc' in it_chars or 'Nn' in it_chars:
+        #Ncit or Nnit
+        upadhaa_pos = upadhaa(anga) 
+        return (anga[0:upadhaa_pos ]+[{'op':vriddhi, 'input' : anga[upadhaa_pos]}] + anga[upadhaa_pos+1:])
+        
+    else:
+        return anga
+
 if __name__ =="__main__":
     input_str= "bhaj"
     input_data = (parse_string(input_str))
     
     #parse_string("bhaj"), 
-    print(suffix_it(get_suffix()))
+    it_chars= (suffix_it(get_suffix())['it_chars'])
+    possible_anga_vriddhi = (ataupadhaayaaH_702116(anga=input_data,it_chars=it_chars))
+    apply_vriddhi = lambda k: k['op'](k['input']) if isinstance(k,dict) and 'op' in k else k
+    post_vriddhi_anga = [apply_vriddhi (x) for x in possible_anga_vriddhi ]
+    chajoHkughiNnNnyatoH_70352
+    print(post_vriddhi_anga )
     
