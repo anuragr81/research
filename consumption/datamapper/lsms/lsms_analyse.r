@@ -1035,7 +1035,7 @@ perception_data_analysis <- function(o2012, ignore_split_hhids)
 
 estimation_df_budget_quantile<- function(ll,e)
 {
-  
+  stop("Missing houserent calculation from ohs data")
   if (missing(e)){
     e <- minimum_household_needs_wo_usage(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
