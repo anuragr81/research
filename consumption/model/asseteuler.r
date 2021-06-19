@@ -1137,6 +1137,109 @@ optim_crra_func <- function(p,nu,x,chi,phi,g){
 P_nu <- function(nu) { 100*(nu**.3) ; }
 S_xi <- function(xi) { 100*(xi**.2); }
 
+iota <- function(x,alpha,r,g_pt,l_pt,p_draw,chi,phi){
+  nu_pt <- optimise(function(y) { -optim_pt_func(g=g_pt,l=l_pt,x=x,nu=y,alpha=alpha, ref= r, p = p_draw,chi=chi,phi=phi) },c(0,x))$minimum;
+  return(nu_pt)
+}
+J_cons <- function(x,alpha,r,g_pt,l_pt,p_draw,chi,phi) {
+  
+  nu_pt <- iota(x=x,alpha=alpha,r=r,g_pt=g_pt,l_pt=l_pt,p_draw=p_draw,chi=chi,phi=phi)
+
+  expected_result = optim_eu_func(p=p_draw,chi=chi,phi=phi,x=x,nu=nu_pt)
+  return(expected_result)
+}
+
+optim_pt_u <- function(x,alpha,r,g_pt,l_pt,p_draw,chi,phi) {
+nu_pt = iota(x=x,alpha=alpha,r=r,g_pt=g_pt,l_pt=l_pt,p_draw=p_draw,chi=chi,phi=phi)
+max_u = optim_pt_func(g=g_pt,l=l_pt,x=x,nu=nu_pt,alpha=alpha, ref= r, p = p_draw,chi=chi,phi=phi)
+return(max_u)
+}
+plot_u <- function()
+{
+  # Lottery definitions
+  
+  CHI=100
+  PHI=150
+  p_draw = .2
+  
+  par(mfrow=c(1,1))
+  # plot settings 
+  g_pt = .88
+  l_pt = 2.25
+  refs <- c(-200,0,200)
+  base_ref <- 100
+  alphas <- c(.2,1,2,5)
+  x_arr <- seq(.1,20,.01)
+  
+  us <- sapply(x_arr, function (y) {optim_pt_u(x = y,alpha = alphas[1],r = base_ref,g_pt = g_pt,l_pt = l_pt,p_draw = p_draw,chi = CHI, phi=PHI)}) 
+  us_diff <- us - p_draw*CHI + (1-p_draw)*(-PHI)
+  plot(x_arr,us_diff,type='l')
+}
+plot_Js <-function(){
+  # Lottery definitions
+  
+  CHI=100
+  PHI=150
+  p_draw = .2
+  
+  # plot settings 
+  g_pt = .88 # .2 for kinks
+  l_pt = 2.25
+  
+
+  base_alpha_1= .2
+  base_alpha_2= 1
+  base_alpha_3= 2
+  x_arr <- seq(.1,200,.1)
+  
+  base_ref <- 200
+  cex_zoom_setting <- .65
+  #plot(0,0,type='l')
+  refs <- c(-200,0,200)
+  alphas <- c(.2,1,2,5)
+  ltys <- c(1,2,3,4,5,6)
+  par(mfrow=c(2,2))
+  legend_y= 50
+  
+  plot(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = base_alpha_1,r = refs[1],p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[1], main=TeX(paste("$\\alpha$=",base_alpha_1)), xlab="x",ylab="J(x)")
+  lines(x_arr,x_arr)
+  for ( i in seq(2,length(refs))){
+
+    lines(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = base_alpha_1,r = refs[i],p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[i], main=TeX(paste("$\\alpha$=",base_alpha_1)), xlab="x",ylab="J(x)")
+  }
+  legend(100, legend_y, legend=paste("r=",refs), lty=ltys, cex=cex_zoom_setting)
+  
+  
+  plot(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = base_alpha_2,r = refs[1],p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[1], main=TeX(paste("$\\alpha$=",base_alpha_2)), xlab="x",ylab="J(x)")
+  lines(x_arr,x_arr)
+  for ( i in seq(2,length(refs))){
+    
+    lines(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = base_alpha_2,r = refs[i],p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[i], main=TeX(paste("$\\alpha$=",base_alpha_2)), xlab="x",ylab="J(x)")
+  }
+  legend(100, legend_y, legend=paste("r=",refs), lty=ltys, cex=cex_zoom_setting)
+  
+  
+  plot(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = base_alpha_3,r = refs[1],p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[1], main=TeX(paste("$\\alpha$=",base_alpha_3)), xlab="x",ylab="J(x)")
+  lines(x_arr,x_arr)
+  for ( i in seq(2,length(refs))){
+    
+    lines(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = base_alpha_3,r = refs[i],p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[i], main=TeX(paste("$\\alpha$=",base_alpha_3)), xlab="x",ylab="J(x)")
+  }
+  legend(100, legend_y, legend=paste("r=",refs), lty=ltys, cex=cex_zoom_setting)
+  
+  
+  plot(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = alphas[1],r = base_ref,p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[1], main=TeX(paste("r=",base_ref)), xlab="x",ylab="J(x)")
+  lines(x_arr,x_arr)
+  for ( i in seq(2,length(alphas))){
+
+    lines(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = alphas[i],r = base_ref,p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[i], main=TeX(paste("r=",base_ref)), xlab="x",ylab="J(x)")
+  }
+  
+  
+  legend(100, legend_y, legend=latex2exp::TeX(paste("$\\alpha$=",alphas)), lty=ltys, cex=cex_zoom_setting)
+  
+  
+}
 
 evolve_lottery_maker_account<-function(nsims, ref_start,pt_g,pt_lambda,x1_start,alpha1,alpha2,M, r,R){
   #evolve_lottery_maker_account(ref_start = 0,pt_g = .88,x1_start = 80,alpha1 = .2,pt_lambda = 2.25 ) gets 738 as expected return but 

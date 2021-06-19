@@ -1,4 +1,5 @@
 import re
+import pandas as pd
 
 def ach():
     return ("aa","ai","au","a","ii","i","uu","u","lRi","Ri","e","o")
@@ -188,6 +189,24 @@ if __name__ =="__main__":
     possible_anga_vriddhi = (ataupadhaayaaH_702116(anga=input_data,it_chars=it_chars))
     apply_vriddhi = lambda k: k['op'](k['input']) if isinstance(k,dict) and 'op' in k else k
     post_vriddhi_anga = [apply_vriddhi (x) for x in possible_anga_vriddhi ]
-    chajoHkughiNnNnyatoH_70352
+    #chajoHkughiNnNnyatoH_70352
     print(post_vriddhi_anga )
+    #a =pd.read_csv('dhaatupaatha.csv')
+    #fh=open('dhaatu_list.txt',encoding="utf-8") 
+    dhaatulist=[]
+    with open('dhaatu_list.txt',encoding="utf-8") as fh:
+        x=fh.read()
+        l=x.split("\n")
+        for i in l:
+            dhaatulist.append(bytes(i,'unicode_escape'))
+    dhaatulist_unicode =[]
+    for dhaatu in dhaatulist:
+        bsz=6
+        nletters_dhatu = int(len(dhaatu)/bsz)
+        dhaatu_unicode=[]
+        for i in range(nletters_dhatu):
+            dhaatu_unicode.append(''.join([chr(k) for k in dhaatu[bsz*i:bsz*(i+1)]]))
+        dhaatulist_unicode.append(dhaatu_unicode)
     
+    with open('devnag_map.txt',encoding="utf-8") as fh:
+        dm = fh.read()

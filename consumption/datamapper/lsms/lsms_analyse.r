@@ -1,5 +1,11 @@
+
 library(dplyr)
-library(moments) # for kurtosis
+
+library(maps)
+library(ggplot2)
+library(ggrepel)
+
+#library(moments) # for kurtosis
 setwd('c:/local_files/research/consumption/datamapper/')
 source('translation/frameutils.R');source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');ll=lsms_loader(fu=fu,ln=lsms_normalizer,lgc=lgc)
 source('lsms/lsms_group_collect.r'); source('lsms/lsms_datastorage.R')
@@ -949,12 +955,13 @@ get_perception_rank <-function(r){
 }
 
 init_data <- function(){
-  a2010 <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
-  a2012 <- ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
-  a2014 <- ll@read_assets_file(year = 2014, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
+  
   o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
   o2012 <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
   o2014 <- ll@load_ohs_file(year = 2014, dirprefix = "../",fu=fu, ln=lsms_normalizer) ;
+  a2010 <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
+  a2012 <- ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
+  a2014 <- ll@read_assets_file(year = 2014, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
   c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   c2012 <- ll@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
@@ -969,6 +976,23 @@ init_data <- function(){
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
+plot_assets_map <- function(){
+  
+  world_map <- map_data("world")
+  tnz_map = subset(world_map ,region=="Tanzania")
+  hhid_mtms_2012 <- ddply(subset(a2012,!is.na(number)  & !is.na(mtm) & number>0), .(hhid), summarise, hhid_mtm=sum(mtm*number))
+  hhid_mtms_o2012 <- merge(o2012,hhid_mtms_2012 ,by="hhid")
+  map_data <- subset(ddply(hhid_mtms_o2012,.(region,district,S,E,region_name),summarise, mean_a = median(hhid_mtm)), !is.na(region))
+  
+  #ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+  #                      colour="light green", fill="light green") +geom_point(data=map_data,aes(x=E, y=S, size = mean_a))
+  
+  ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+                        colour="light yellow", fill="light yellow") +geom_point(data=map_data,aes(x=E, y=S, size = mean_a)) + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50')
+  
+  # + geom_text(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),hjust=0,vjust=0)
+  
+}
 income_estimation_stata_input <- function(pseudop){
   # get income estimate from the RE estimator results obtained from pseudo-panel - xtreg lntotinc i.max_education_rank i.max_occupation_rank i.expensiveregion, re
   pseudop <- merge(get_housing_cost_df(),pseudop,by=c("housingstatus")) %>% mutate (is_higheduc = as.integer(max_education_rank==4))
@@ -1035,7 +1059,9 @@ perception_data_analysis <- function(o2012, ignore_split_hhids)
 
 estimation_df_budget_quantile<- function(ll,e)
 {
-  stop("Missing houserent calculation from ohs data")
+  inc_houserent = F
+  inc_educexpense = F
+  #stop("Missing houserent calculation from ohs data")
   if (missing(e)){
     e <- minimum_household_needs_wo_usage(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   }
@@ -1103,7 +1129,7 @@ estimation_df_budget_quantile<- function(ll,e)
   
   hswithchars2010 <- merge(hs2010,chosencharshead2010,all.x = T)
   psiAregion2010 <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),psiA2010,by=c("hhid2010"))
-  ct2010<- plyr::rename(ll@get_total_expenditures(hh = c2010, ohs = ohs2010), c("hhid"="hhid2010","total_expenditure"="ct"))
+  ct2010<- plyr::rename(ll@get_total_expenditures(hh = c2010, ohs = ohs2010, include_education=inc_educexpense, include_houserent = inc_houserent), c("hhid"="hhid2010","total_expenditure"="ct"))
   psiAregionct2010 <- (merge(psiAregion2010,ct2010,by=c("hhid2010")))
   
   # 2012
@@ -1123,7 +1149,7 @@ estimation_df_budget_quantile<- function(ll,e)
   hswithchars2012 <- merge(hs2012,chosencharshead2012,all.x = T)
   
   psiAregion2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),psiA2012,by=c("hhid2012"))
-  ct2012<- plyr::rename(ll@get_total_expenditures(hh = c2012, ohs = ohs2012), c("hhid"="hhid2012","total_expenditure"="ct"))
+  ct2012<- plyr::rename(ll@get_total_expenditures(hh = c2012, ohs = ohs2012, include_education = inc_educexpense, include_houserent = inc_houserent), c("hhid"="hhid2012","total_expenditure"="ct"))
   psiAregionct2012 <- (merge(psiAregion2012,ct2012,by=c("hhid2012")))
   
   #2014
@@ -1138,16 +1164,31 @@ estimation_df_budget_quantile<- function(ll,e)
   
   hswithchars2014 <- merge(hs2014,chosencharshead2014,all.x = T)
   psiAregion2014 <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),psiA2014,by=c("hhid2014"))
-  ct2014<- plyr::rename(ll@get_total_expenditures(hh = c2014, ohs = ohs2014), c("hhid"="hhid2014","total_expenditure"="ct"))
+  ct2014<- plyr::rename(ll@get_total_expenditures(hh = c2014, ohs = ohs2014,include_education = inc_educexpense, include_houserent = inc_houserent), c("hhid"="hhid2014","total_expenditure"="ct"))
   psiAregionct2014 <- (merge(psiAregion2014,ct2014,by=c("hhid2014")))
-  
- 
+
   # use to infer Psi and categories_non_basic_wassets
   psi_groups <- subset(lsms_normalizer()@categories_non_basic_wassets(),group=="asset_costs")
   
   psi_data_2010    <- plyr::rename(ddply(merge(c2010,psi_groups,by=c("shortname"))[c("hhid","shortname","cost")],.(hhid),summarise,Psi=sum(cost)), c("hhid"="hhid2010"))
   psi_data_2012    <- plyr::rename(ddply(merge(c2012,psi_groups,by=c("shortname"))[c("hhid","shortname","cost")],.(hhid),summarise,Psi=sum(cost)), c("hhid"="hhid2012"))
   psi_data_2014    <- plyr::rename(ddply(merge(c2014,psi_groups,by=c("shortname"))[c("hhid","shortname","cost")],.(hhid),summarise,Psi=sum(cost)), c("hhid"="hhid2014"))
+  
+  if (inc_educexpense){
+    print("Adding education expense")
+    psi_data_2010    <- (merge(psi_data_2010, psiAregionct2010[,c("hhid2010","toteducexpense")],by=c("hhid2010")) %>%  mutate(Psi=Psi+toteducexpense))[c("hhid2010","Psi")]
+    psi_data_2012    <- (merge(psi_data_2012, psiAregionct2012[,c("hhid2012","toteducexpense")],by=c("hhid2012")) %>%  mutate(Psi=Psi+toteducexpense))[c("hhid2012","Psi")]
+    psi_data_2014    <- (merge(psi_data_2014, psiAregionct2014[,c("hhid2014","toteducexpense")],by=c("hhid2014")) %>%  mutate(Psi=Psi+toteducexpense))[c("hhid2014","Psi")]
+    }
+  if (inc_houserent){
+    print("Adding houserent")
+    psi_data_2010    <- (merge(psi_data_2010, psiAregionct2010[,c("hhid2010","tothouserent")],by=c("hhid2010")) %>% mutate(Psi=Psi+tothouserent))[c("hhid2010","Psi")]
+    psi_data_2012    <- (merge(psi_data_2012, psiAregionct2012[,c("hhid2012","tothouserent")],by=c("hhid2012")) %>% mutate(Psi=Psi+tothouserent))[c("hhid2012","Psi")]
+    psi_data_2014    <- (merge(psi_data_2014, psiAregionct2014[,c("hhid2014","tothouserent")],by=c("hhid2014")) %>% mutate(Psi=Psi+tothouserent))[c("hhid2014","Psi")]
+    
+  }
+   
+  
   
   #2010
   psiAregionctPsiExcess2010 <- merge(psiAregionct2010,psi_data_2010)
@@ -1293,7 +1334,27 @@ estimation_df_budget_quantile<- function(ll,e)
   
   #psiAregionctPsiA02010$area_richness <- mapply(function(r,d){log( median(exp(subset(psiAregionctPsiA02010,region==r & district == d )$lnA0))  / median(exp(psiAregionctPsiA02010$lnA0))) },psiAregionctPsiA02010$region,psiAregionctPsiA02010$district)
   #ddply(psiAregionctPsiA02010,.(region),summarise,n=median(band_richness))
+  
+  res=list();
+  res[["psiAregionctPsiA02010"]]=psiAregionctPsiA02010
+  res[["psiAregionctPsiA02012"]]=psiAregionctPsiA02012
+  res[["psiAregionctPsiA02014"]]=psiAregionctPsiA02014
+  return(res)
+  #prepare_results_with_band_metrics(psiAregionctPsiA02010=res[["psiAregionctPsiA02010"]],psiAregionctPsiA02012=res[["psiAregionctPsiA02012"]],psiAregionctPsiA02014=res[["psiAregionctPsiA02014"]],bw=bw,lw=lw,o2012=o2012,o2014=o2014)
+  #file.remove('c:/temp/df2010_2012.dta');file.remove('c:/temp/df2012_2014.dta'); file.remove('c:/temp/resnu.tex');write_dta(df$df2010_2012,path = 'c:/temp/df2010_2012.dta');write_dta(df$df2012_2014,path = 'c:/temp/df2012_2014.dta')
+}
 
+prepare_results_with_band_metrics <- function(psiAregionctPsiA02010,psiAregionctPsiA02012,psiAregionctPsiA02014,bw,lw,o2012,o2014,expensive_filter,rural_filter){
+  if (!missing(expensive_filter)){
+    psiAregionctPsiA02010 <- subset(psiAregionctPsiA02010,expensiveregion==expensive_filter)
+    psiAregionctPsiA02012 <- subset(psiAregionctPsiA02012,expensiveregion==expensive_filter)
+    psiAregionctPsiA02014 <- subset(psiAregionctPsiA02014,expensiveregion==expensive_filter)
+  }
+  if (!missing(rural_filter)){
+    psiAregionctPsiA02010 <- subset(psiAregionctPsiA02010,isrural==rural_filter)
+    psiAregionctPsiA02012 <- subset(psiAregionctPsiA02012,isrural==rural_filter)
+    psiAregionctPsiA02014 <- subset(psiAregionctPsiA02014,isrural==rural_filter)
+  }
   psiAregionctPsiA02010 <- get_band_metrics(dat=plyr::rename(psiAregionctPsiA02010,c("hhid2010"="hhid")),b = bw, l=lw)
   psiAregionctPsiA02012 <- get_band_metrics(dat=plyr::rename(psiAregionctPsiA02012,c("hhid2012"="hhid")),b = bw, l=lw)
   psiAregionctPsiA02014 <- get_band_metrics(dat=plyr::rename(psiAregionctPsiA02014,c("hhid2014"="hhid")),b = bw, l=lw)
@@ -1334,7 +1395,6 @@ estimation_df_budget_quantile<- function(ll,e)
   print("DONE")
   return(res)
 }
-
 
 get_band_metrics <- function(dat,b,l){
   

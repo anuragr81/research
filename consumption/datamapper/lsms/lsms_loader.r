@@ -909,7 +909,7 @@ lsms_loader<-function(fu,ln,lgc) {
       fu()@removeall_cols_except(l,c("region","district","ward","accessiblemarket","travelcost"))
       #* Also considered urban/rural based on population density 
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
-      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban);
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name);
       
       
       adat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_a.DTA',sep=""),
@@ -1000,7 +1000,7 @@ lsms_loader<-function(fu,ln,lgc) {
       fu()@removeall_cols_except(l,c("region","district","ward","accessiblemarket","travelcost"))
       #* Also considered urban/rural based on population density 
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
-      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban);
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name);
       
       
       adat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_A.dta',sep=""),
@@ -1101,7 +1101,7 @@ lsms_loader<-function(fu,ln,lgc) {
       ##
       #* Also considered urban/rural based on population density 
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
-      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban);
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name);
       
       adat<-read_tnz(paste(dirprefix,'./lsms/TZNPS2HH1DTA/HH_SEC_A.dta',sep=""),FALSE)
       
@@ -1184,7 +1184,7 @@ lsms_loader<-function(fu,ln,lgc) {
       ##
       #* Also considered urban/rural based on population density 
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
-      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban);
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name);
       
       adat<-read_tnz(paste(dirprefix,'./lsms/tnz2008/TZNPS1HHDTA_E/SEC_A_T.dta',sep=""),FALSE,hhidColName = "hhid")
       
@@ -1475,35 +1475,34 @@ lsms_loader<-function(fu,ln,lgc) {
     stop(paste("Year ",year," not supported"))
   }
   
-  get_total_expenditures <- function (hh,ohs) {
+  get_total_expenditures <- function (hh,ohs,include_education,include_houserent) {
     print("Calculating total expenditures")
     totexp<-ddply(hh,.(hhid),summarize,total_expenditure=sum(cost))
     print(paste("Number of households with total expenditure data minus housing = ",length(unique(totexp$hhid))))
+    if (include_houserent){
+      # obtain map (hhid->housing) with ddply
+      tothouserent<-ddply(ohs,.(hhid),summarize,tothouserent=sum(houserent))
+      # obtain map (hhid->educexpen) with ddply 
+      print(paste("Number of households with houserent data = ",length(unique(tothouserent$hhid))))
+    }
+    if (include_education){
+      print ("Appending educexpense and houserent to total expenditure");
+      #* setting houses with education exenses= NA as zero
+      ohs$educexpense[is.na(ohs$educexpense)]<-0
+      toteducexpense<-ddply(ohs,.(hhid),summarize,toteducexpense=sum(educexpense))
+      print(paste("Number of households with educexpense data = ",length(unique(toteducexpense$hhid))))
+      
+      totexp<-merge(totexp,toteducexpense)
+      print(paste("Number of households after merging total_expenditure and total_educexpense = ",length(unique(totexp$hhid))))
+      totexp$total_expenditure=totexp$total_expenditure+totexp$toteducexpense
+    }
+    if (include_houserent){
+      totexp<-merge(totexp,tothouserent)
+      print(paste("Number of households after merging total_expenditure with houserent = ",length(unique(totexp$hhid))))
+      totexp$total_expenditure=totexp$total_expenditure+totexp$tothouserent
+    }
     
-    # obtain map (hhid->housing) with ddply
-    tothouserent<-ddply(ohs,.(hhid),summarize,tothouserent=sum(houserent))
-    # obtain map (hhid->educexpen) with ddply 
-    print(paste("Number of households with houserent data = ",length(unique(tothouserent$hhid))))
-    
-    print ("Appending educexpense and houserent to total expenditure");
-    #* setting houses with education exenses= NA as zero
-    ohs$educexpense[is.na(ohs$educexpense)]<-0
-    toteducexpense<-ddply(ohs,.(hhid),summarize,toteducexpense=sum(educexpense))
-    print(paste("Number of households with educexpense data = ",length(unique(toteducexpense$hhid))))
-    
-    totexp<-merge(totexp,toteducexpense)
-    print(paste("Number of households after merging total_expenditure and total_educexpense = ",length(unique(totexp$hhid))))
-    
-    totexp<-merge(totexp,tothouserent)
-    print(paste("Number of households after merging total_expenditure with houserent = ",length(unique(totexp$hhid))))
-    
-    totexp$total_expenditure=totexp$total_expenditure+totexp$toteducexpense+totexp$tothouserent
-    
-    #* calculating educational expense and total houserent
     print(paste("Number of households with total expenditure data = ",length(unique(totexp$hhid))))
-    #* finding personids of the house-heads and their education-level, age, years in community, 
-    #* language, occupation and 
-    #* other household characteristics
     return(totexp)
   }
   
