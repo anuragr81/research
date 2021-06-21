@@ -977,21 +977,35 @@ init_data <- function(){
 }
 
 plot_assets_map <- function(){
+  stop("Plot perceptions")
   
+  plot_occup <- F
   world_map <- map_data("world")
   tnz_map = subset(world_map ,region=="Tanzania")
   hhid_mtms_2012 <- ddply(subset(a2012,!is.na(number)  & !is.na(mtm) & number>0), .(hhid), summarise, hhid_mtm=sum(mtm*number))
   hhid_mtms_o2012 <- merge(o2012,hhid_mtms_2012 ,by="hhid")
-  map_data <- subset(ddply(hhid_mtms_o2012,.(region,district,S,E,region_name),summarise, mean_a = median(hhid_mtm)), !is.na(region))
+
+  
+  if (plot_occup){
+    hhid_mtms_o2012_woccup <- subset(hhid_mtms_o2012, !is.na(occupation_rank))
+    map_data <- subset(ddply(hhid_mtms_o2012_woccup,.(region,district,S,E,region_name),summarise, mean_a = median(hhid_mtm), occupation_rank=mean(occupation_rank)), !is.na(region))
+  } else {
+    hhid_mtms_o2012_weduc <- subset(hhid_mtms_o2012, !is.na(education_rank))
+    map_data <- subset(ddply(hhid_mtms_o2012_weduc,.(region,district,S,E,region_name),summarise, mean_a = median(hhid_mtm), education_rank=mean(education_rank)), !is.na(region))
+  }
   
   #ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
   #                      colour="light green", fill="light green") +geom_point(data=map_data,aes(x=E, y=S, size = mean_a))
   
-  ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
-                        colour="light yellow", fill="light yellow") +geom_point(data=map_data,aes(x=E, y=S, size = mean_a)) + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50')
-  
-  # + geom_text(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),hjust=0,vjust=0)
-  
+  if (plot_occup){  
+    ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+                          colour="light yellow", fill="light yellow") + geom_point(data=map_data,aes(x=E, y=S, size = mean_a, color = occupation_rank))+ scale_size(range = c(.1, 10), name="assets_value") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Asset Values and Occupation Rank distribution in Tanzania (2012)")
+  } else {
+    ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+                          colour="light yellow", fill="light yellow") + geom_point(data=map_data,aes(x=E, y=S, size = mean_a, color = education_rank))+ scale_size(range = c(.1, 10), name="assets_value") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Asset Values and Education Rank distribution in Tanzania (2012)")
+  }
+# + geom_text(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),hjust=0,vjust=0)
+
 }
 income_estimation_stata_input <- function(pseudop){
   # get income estimate from the RE estimator results obtained from pseudo-panel - xtreg lntotinc i.max_education_rank i.max_occupation_rank i.expensiveregion, re
@@ -1121,7 +1135,7 @@ estimation_df_budget_quantile<- function(ll,e)
   hs2010 <- unique(merge(unique(ohs2010[,c("hhid","region","district","ward","isrural","expensiveregion")]), ll@get_hsize(ohs2010), by = c("hhid")))
   chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
   
-#  perception_columns
+  #  perception_columns
   
   hhead2010 <- plyr::rename(subset(o2010,household_status==1)[,names(hhead_columns)],hhead_columns )
   chosencharshead2010 <- merge(chosenchars2010,hhead2010, all.x=T)
@@ -1166,7 +1180,7 @@ estimation_df_budget_quantile<- function(ll,e)
   psiAregion2014 <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),psiA2014,by=c("hhid2014"))
   ct2014<- plyr::rename(ll@get_total_expenditures(hh = c2014, ohs = ohs2014,include_education = inc_educexpense, include_houserent = inc_houserent), c("hhid"="hhid2014","total_expenditure"="ct"))
   psiAregionct2014 <- (merge(psiAregion2014,ct2014,by=c("hhid2014")))
-
+  
   # use to infer Psi and categories_non_basic_wassets
   psi_groups <- subset(lsms_normalizer()@categories_non_basic_wassets(),group=="asset_costs")
   
@@ -1179,7 +1193,7 @@ estimation_df_budget_quantile<- function(ll,e)
     psi_data_2010    <- (merge(psi_data_2010, psiAregionct2010[,c("hhid2010","toteducexpense")],by=c("hhid2010")) %>%  mutate(Psi=Psi+toteducexpense))[c("hhid2010","Psi")]
     psi_data_2012    <- (merge(psi_data_2012, psiAregionct2012[,c("hhid2012","toteducexpense")],by=c("hhid2012")) %>%  mutate(Psi=Psi+toteducexpense))[c("hhid2012","Psi")]
     psi_data_2014    <- (merge(psi_data_2014, psiAregionct2014[,c("hhid2014","toteducexpense")],by=c("hhid2014")) %>%  mutate(Psi=Psi+toteducexpense))[c("hhid2014","Psi")]
-    }
+  }
   if (inc_houserent){
     print("Adding houserent")
     psi_data_2010    <- (merge(psi_data_2010, psiAregionct2010[,c("hhid2010","tothouserent")],by=c("hhid2010")) %>% mutate(Psi=Psi+tothouserent))[c("hhid2010","Psi")]
@@ -1187,7 +1201,7 @@ estimation_df_budget_quantile<- function(ll,e)
     psi_data_2014    <- (merge(psi_data_2014, psiAregionct2014[,c("hhid2014","tothouserent")],by=c("hhid2014")) %>% mutate(Psi=Psi+tothouserent))[c("hhid2014","Psi")]
     
   }
-   
+  
   
   
   #2010
@@ -1206,7 +1220,7 @@ estimation_df_budget_quantile<- function(ll,e)
   psiAregionctPsi2014 <- merge(psiAregionctPsiExcess2014,cA2014)
   
   ############## Assigning weights ####
-   
+  
   psiAregionctPsi2010$dA <- with(psiAregionctPsi2010, cA) #cA+ netmtm_fdelta)
   psiAregionctPsi2010$w_A <- with(psiAregionctPsi2010,(dA)/(ct-basic_needs_cost-Psi+dA))
   psiAregionctPsi2010$w_nu <- with(psiAregionctPsi2010,(ct-basic_needs_cost-Psi)/(ct-basic_needs_cost-Psi+dA))
@@ -1792,31 +1806,31 @@ copyover_b <- function(a,b) {
 
 
 asset_mtms <- function(assets_dat,pivot_asset,year){
-    
-    assets <- subset(assets_dat,!is.na(cost) & cost >0 & number >0 & !is.na(number) )
-    assets$shortname <- as.character(assets$shortname)
-
-    assets_src    <- (dplyr::filter( merge(assets,ddply(assets,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost < v))
-
-    
-
-    c0 <- ddply(subset(assets_src, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost), n = length(hhid))
-    c0 <- c0[order(c0$mean_cost),]
-    
-    # anything ge expensive than pivot_asset is an asset
-    
-    all_assets              <- setdiff(subset(c0,median_cost>= c0[c0$shortname==pivot_asset,]$median_cost)$shortname,c()) #c("land","house")
-    
-    ag <- get_asset_group()
-    if (length(setdiff( all_assets,unique(ag$shortname)) ) > 0) {
-      stop(paste0("Missing Assets in the mapping:",toString(setdiff( all_assets,unique(ag$shortname)) )))
-    }
-    
-    
-    select_cols <- c("hhid","number","shortname","mtm","cost")
-    a <- plyr::rename(subset(assets_src[,select_cols],number>0 & is.element(shortname,all_assets)),c("hhid"=paste0("hhid",year),"number"=paste0("number.",year),"mtm"=paste0("mtm.",year),"cost"=paste0("cost.",year)))
-    return(a)
-    
+  
+  assets <- subset(assets_dat,!is.na(cost) & cost >0 & number >0 & !is.na(number) )
+  assets$shortname <- as.character(assets$shortname)
+  
+  assets_src    <- (dplyr::filter( merge(assets,ddply(assets,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost < v))
+  
+  
+  
+  c0 <- ddply(subset(assets_src, number>0 & !is.na(cost) & cost>0), .(shortname), summarise , median_cost = median(cost), mean_cost = mean(cost), n = length(hhid))
+  c0 <- c0[order(c0$mean_cost),]
+  
+  # anything ge expensive than pivot_asset is an asset
+  
+  all_assets              <- setdiff(subset(c0,median_cost>= c0[c0$shortname==pivot_asset,]$median_cost)$shortname,c()) #c("land","house")
+  
+  ag <- get_asset_group()
+  if (length(setdiff( all_assets,unique(ag$shortname)) ) > 0) {
+    stop(paste0("Missing Assets in the mapping:",toString(setdiff( all_assets,unique(ag$shortname)) )))
+  }
+  
+  
+  select_cols <- c("hhid","number","shortname","mtm","cost")
+  a <- plyr::rename(subset(assets_src[,select_cols],number>0 & is.element(shortname,all_assets)),c("hhid"=paste0("hhid",year),"number"=paste0("number.",year),"mtm"=paste0("mtm.",year),"cost"=paste0("cost.",year)))
+  return(a)
+  
 }
 
 plain_asset_differences_2012_2014 <- function(a2012,a2014,o2012,o2014,pivot_asset){
@@ -2268,7 +2282,7 @@ needs_of_household <- function(ll, c2010, c2012, c2014, o2010, o2012, o2014, mkt
   #graph 1. assets in descreasing order of occurrence frequency (done)
   #graph 2. region-dependency and hsize-depndency on rent (most renters are in 7 - occupation and education rank have little effect)
   #greph 3: variation in rent for houses by regions 
-
+  
   if (missing(c2010)){
     c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   }
