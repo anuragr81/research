@@ -27,7 +27,7 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "tgtermes" "Caslon OS"
+\font_roman "default" "Caslon OS"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -118,12 +118,6 @@ s for relative wealth.
 
 \begin_layout Section
 Introduction
-\end_layout
-
-\begin_layout Standard
-DO CONSUMERS REALLY DON'T KNOW OTHER'S ALPHA? They do but it does not affect
- their plans.
- LM does but she can't discriminate.
 \end_layout
 
 \begin_layout Standard
@@ -2762,36 +2756,26 @@ Reference points implied by long-term equilibria
 \end_layout
 
 \begin_layout Standard
-So far we have assumed an exogenous common risky process that is observed
- differently by the consumers depending on their risk-aversion levels.
- A more realistic representation of the process would one where the returns
- from lottery presented to the consumer is subject to constraints or resources
- in a certain macroeconomy.
- The constraints from a shared resource in turn imply that the expenditure
- patterns of risk-seeking and risk-averse behaviours must balance each other
- and add up to the returns provided by a certain macro-economy in the long-run.
- In other words, the returns to the consumer from 
-\begin_inset Formula $P$
-\end_inset
 
-, 
-\begin_inset Formula $S$
-\end_inset
-
- , 
-\begin_inset Formula $\chi$
+\series bold
+[SHOULD MACRO p be the same as INDLOTTERY's p] 
+\series default
+So far we have assumed an exogenous risky process that is observed differently
+ by consumers depending on their risk-aversion levels.
+ A more realistic representation of the process is one where returns from
+ the lottery presented to the consumer are subject to constraints or resources
+ of a certain macroeconomy.
+ Such constraints imply that the returns provided to the consumer from 
+\begin_inset Formula $P(\nu)$
 \end_inset
 
  and 
-\begin_inset Formula $\phi$
+\begin_inset Formula $S(x-\nu)$
 \end_inset
 
- that we have assumed exogenous would be subject to long-run constraints.
- 
-\end_layout
-
-\begin_layout Standard
-We represent these constraints of a macro-economy with returns 
+ that depend on their risk-seeking and risk-averse behaviours must balance
+ each other while adding up to the returns provided by a certain macro-economy.
+ We represent such constraints of the macro-economy with returns 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -2799,18 +2783,42 @@ We represent these constraints of a macro-economy with returns
 \begin_inset Formula $R$
 \end_inset
 
- that provided on a fixed starting wealth of consumers.
- The social and occupational structures that imply 
-\begin_inset Formula $\alpha_{i}\in[\alpha_{l},\alpha_{h}]$
+ provided on a fixed starting wealth of consumers with same probability
+ 
+\begin_inset Formula $p$
 \end_inset
 
- for the consumers participating in the macroeconomy are also fixed in the
- long-run.
- A certain reference point in this long-run would thus indicate how the
- relative wealth competition among the consumers may be constrained by a
- certain macroeconomy.
- In order to represent the constraints on the growth of combined wealth
- of the consumers imposed by the macroeconomy, we consider a 
+.
+ This 
+\begin_inset Quotes eld
+\end_inset
+
+macroeconomy lottery
+\begin_inset Quotes erd
+\end_inset
+
+ on initial wealth 
+\begin_inset Formula $X$
+\end_inset
+
+ is therefore defined as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+L(X) & =\{(X(1+\rho),p),(-X(1+R),1-p)\}\label{eq:macroeconomy}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The growth of the combined wealth of the consumers is subject to these returns
+ from the macroeconomy.
+ To facilitate the discussion of these constraints, we consider a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2826,7 +2834,8 @@ lottery-maker
 \begin_inset Formula $p(P(\nu)+\chi)+(1-p)(S(x-\nu)-\phi)$
 \end_inset
 
- back to the consumers based on the proceeds from the growth in the macroeconomy.
+ back to the consumers based on the proceeds from growth in the above macroecono
+my.
  
 \family roman
 \series medium
@@ -2848,8 +2857,16 @@ lottery maker
 \begin_inset Quotes erd
 \end_inset
 
- entity influences the long-term relative wealth in the economy by merely
- placing large bets on the amounts collected from the consumer
+ influences the long-term relative wealth in the economy by merely placing
+ large bets 
+\begin_inset Formula $(X>>x_{i}$
+\end_inset
+
+for all consumers 
+\begin_inset Formula $i$
+\end_inset
+
+) on the amounts collected from the consumer
 \family default
 \series default
 \shape default
@@ -2863,35 +2880,14 @@ lottery maker
 \noun default
 \color inherit
 s.
- For large 
-\begin_inset Formula $X>>x_{i}\forall i$
+ The social and occupational structures that imply 
+\begin_inset Formula $\alpha_{i}\in[\alpha_{l},\alpha_{h}]$
 \end_inset
 
-, the 
-\begin_inset Quotes eld
-\end_inset
-
-macroeconomy lottery
-\begin_inset Quotes erd
-\end_inset
-
- played by the lottery maker is therefore:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-L(X) & =\{(X(1+\rho),p),(-X(1+R),1-p)\}\label{eq:macroeconomy}
-\end{alignat}
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Assuming a risk-neutral lottery maker (an assumption which doesn't change
- the analysis significantly), 
+ for the consumers participating in the macroeconomy are also fixed in the
+ long-run.
+ Assuming that this lottery maker is risk-neutral (an assumption which doesn't
+ change the analysis significantly), 
 \family roman
 \series medium
 \shape up
@@ -2971,8 +2967,9 @@ E(L(X)) & =pX(1+\rho)-(1-p)X(1+R)
 
 \begin_layout Standard
 While not all lotteries presented to the consumer may be aligned with the
- above macroeconomy lottery, a lottery that represents the long run must.
- A long-term eqiulibrium must therefore correspond to a certain long-term
+ above macroeconomy lottery, a certain lottery that represents the returns
+ in the long run must.
+ In other words, a long-term eqiulibrium would correspond to a certain long-term
  consumer lottery identified by 
 \begin_inset Formula $\{\bar{P}$
 \end_inset
@@ -2990,7 +2987,7 @@ While not all lotteries presented to the consumer may be aligned with the
 \end_inset
 
  that provides the returns aligned with the above macroeconomy lottery.
- Thus even though the lottery maker may provide incentives for risk-aversion
+ Even though the lottery maker may provide incentives for risk-aversion
  if the risk-taken by the consumer is more than what can undertaken in the
  macroeconomy (or provide incentives for risk-seeking if too much security
  is being sought by the consumers
@@ -3019,15 +3016,7 @@ While not all lotteries presented to the consumer may be aligned with the
 \uwave default
 \noun default
 \color inherit
-
-\begin_inset Formula $r_{t}$
-\end_inset
-
- =
-\begin_inset Formula $h(\{x_{i}\}_{t})$
-\end_inset
-
- and the a risk-taking policy implied by the lottery components 
+a risk-taking policy implied by the lottery components 
 \begin_inset Formula $\{\bar{P}$
 \end_inset
 
@@ -3043,13 +3032,33 @@ While not all lotteries presented to the consumer may be aligned with the
 \begin_inset Formula $\bar{\phi}\}$
 \end_inset
 
- such that the risk and value in the macroeconomy is distributed to the
- lottery participating consumers.
- 
-\end_layout
+ and the consumer's inferred references 
+\begin_inset Formula $r_{t}$
+\end_inset
 
-\begin_layout Standard
-Therefore, every consumer with 
+ =
+\begin_inset Formula $h(\{x_{i}\}_{t},\alpha_{l},\alpha_{h})$
+\end_inset
+
+ such that the risk and value in the macroeconomy is exactly distributed
+ to the lottery participating consumers as 
+\begin_inset Formula $\{\bar{P}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{S}$
+\end_inset
+
+ , 
+\begin_inset Formula $\bar{\chi}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\phi}\}$
+\end_inset
+
+ .
+ In essence, therefore every consumer with 
 \family roman
 \series medium
 \shape up
@@ -3079,10 +3088,46 @@ a certain
 \uwave default
 \noun default
 \color inherit
- ought to know of the level of wealth implied by such a long-term consumer
- lottery imposed by the macroeconomy.
- As we show, a stable long-term lottery also implies stable states of 
-\begin_inset Formula $x_{i}$
+ ought to know of the level of wealth implied by long-term consumer lottery
+ 
+\begin_inset Formula $\{\bar{P}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{S}$
+\end_inset
+
+ , 
+\begin_inset Formula $\bar{\chi}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\phi}\}$
+\end_inset
+
+ imposed by the macroeconomy.
+ As we now show, a stable long-term lottery 
+\begin_inset Formula $\{\bar{P}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{S}$
+\end_inset
+
+ , 
+\begin_inset Formula $\bar{\chi}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\phi}\}$
+\end_inset
+
+ and a certain 
+\begin_inset Formula $h(\{x_{i}\}_{t},\alpha_{l},\alpha_{h})$
+\end_inset
+
+ imply that in the long run must lead to 
+\begin_inset Formula $J(x_{i})$
 \end_inset
 
 
@@ -3106,7 +3151,7 @@ a certain
 \begin_inset Formula $\delta$
 \end_inset
 
- is a constant) in this long-term equilibrium.
+ is a constant).
 
 \family default
 \series default
@@ -3122,7 +3167,7 @@ a certain
 \color inherit
  Since the reference point is viewed by all consumers the long-term reference
  point would simply by 
-\begin_inset Formula $r=h(\{\bar{x_{i}}\})$
+\begin_inset Formula $r=h(\{\bar{x_{i}}\},\alpha_{l},\alpha_{h})$
 \end_inset
 
  where 
@@ -3133,7 +3178,25 @@ a certain
 \begin_inset Formula $i$
 \end_inset
 
- .
+ and the 
+\begin_inset Formula $\alpha_{l},\alpha_{h}$
+\end_inset
+
+ are the range of risk-aversion parameters .
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3150,8 +3213,8 @@ a certain
 \uwave off
 \noun off
 \color none
-Notice that since the same lottery is offered to all consumers and since
- the consumer's risk aversions 
+Note that since the same lottery is offered to all consumers and since the
+ consumer's risk aversions 
 \begin_inset Formula $\alpha$
 \end_inset
 
@@ -3206,7 +3269,7 @@ a consumer based on a certain
 \color inherit
  What lottery maker does observe with along with other consumers is the
  reference point 
-\begin_inset Formula $r=h(\{x_{i}\}_{t})_{t}$
+\begin_inset Formula $r=h(\{x_{i}\},\alpha_{l},\alpha_{h})$
 \end_inset
 
  which is inferred the same way by her as by other consumers using the observed
@@ -3215,13 +3278,41 @@ a consumer based on a certain
 \end_inset
 
 .
- 
-\end_layout
+ To see how the macroeconomy restricts the long-term lottery 
+\begin_inset Formula $\{\bar{P}$
+\end_inset
 
-\begin_layout Standard
-The liquidity constraint would ensure that the lottery maker neither takes
- an amount or a risk higher than what she provides to the consumers based
- on the lottery definition - 
+, 
+\begin_inset Formula $\bar{S}$
+\end_inset
+
+ , 
+\begin_inset Formula $\bar{\chi}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\phi}\}$
+\end_inset
+
+ , consider first the liquidity constraint on 
+\begin_inset Formula $\{\bar{P}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{S}$
+\end_inset
+
+ , 
+\begin_inset Formula $\bar{\chi}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\phi}\}$
+\end_inset
+
+ - ensuring that the lottery maker neither takes an amount or a risk higher
+ than what she provides to the consumers based on the lottery definition
+ - 
 \begin_inset Formula $P,S,$
 \end_inset
 
@@ -3307,8 +3398,8 @@ noprefix "false"
 \end_inset
 
 .
- In other cases, when all consumers have non zero disposable income to participa
-te in the lottery i.e.
+ When all consumers have non zero disposable income to participate in the
+ lottery i.e.
  
 \begin_inset Formula $x_{i}>0$
 \end_inset
@@ -3317,8 +3408,8 @@ te in the lottery i.e.
 \begin_inset Formula $\forall i$
 \end_inset
 
-, the lottery maker would distribute the proceeds and risk to consumers
- who are owed 
+, the lottery maker would on the other hand distribute the proceeds and
+ risk to consumers who are owed 
 \begin_inset Formula $\sum_{i}P(\nu_{i})$
 \end_inset
 
@@ -3331,8 +3422,9 @@ te in the lottery i.e.
 \end_layout
 
 \begin_layout Standard
-Note that the constraints that define the long-term equilibrium lottery
- (identified by components
+The other constraint that matters to the lottery maker is the incentive
+ for the lottery participant.
+ For a consumer to have an incentive to participate in the lottery 
 \begin_inset Formula $\{\bar{P}$
 \end_inset
 
@@ -3348,26 +3440,7 @@ Note that the constraints that define the long-term equilibrium lottery
 \begin_inset Formula $\bar{\phi}\}$
 \end_inset
 
-) include not only the liquidity constraints for the lottery maker (i.e.
- alignment of risk-reward structure with the macro-economy lottery ) but
- also the incentives for the lottery to the consumer as well.
- For the consumer to have an incentive to participate in the lottery 
-\begin_inset Formula $\{\bar{P}$
-\end_inset
-
-, 
-\begin_inset Formula $\bar{S}$
-\end_inset
-
- , 
-\begin_inset Formula $\bar{\chi}$
-\end_inset
-
-, 
-\begin_inset Formula $\bar{\phi}\}$
-\end_inset
-
-, it must be ensured that the lottery provides a net expected gain for the
+, it must be ensured that the lottery provides a net expected gain for every
  consumer.
  
 \family roman
@@ -3382,12 +3455,12 @@ Note that the constraints that define the long-term equilibrium lottery
 \uwave off
 \noun off
 \color none
-In other words, the lottery maker must choose the lottery components without
+In other words, the lottery maker must choose the lottery components (without
  considering 
 \begin_inset Formula $\alpha$
 \end_inset
 
- so that the expected gain in income is higher or the same.
+) so that the expected gain in income is higher or the same.
  In terms of the functions we have defined, the expected income 
 \begin_inset Formula $J(x,\alpha,r)\forall$
 \end_inset
@@ -3431,8 +3504,8 @@ In other words, the lottery maker must choose the lottery components without
 \uwave off
 \noun off
 \color none
-ensures that the reference point directly influences the lottery maker's
- setup of the long-term lottery components 
+thus causes the reference point to directly influence the lottery maker's
+ setup of the long-term lottery components
 \family default
 \series default
 \shape default
@@ -3445,16 +3518,7 @@ ensures that the reference point directly influences the lottery maker's
 \uwave default
 \noun default
 \color inherit
-
-\begin_inset Formula $P,S,\chi$
-\end_inset
-
- and 
-\begin_inset Formula $\phi$
-\end_inset
-
- .
- Since each lottery 
+ 
 \begin_inset Formula $\{\bar{P}$
 \end_inset
 
@@ -3470,25 +3534,58 @@ ensures that the reference point directly influences the lottery maker's
 \begin_inset Formula $\bar{\phi}\}$
 \end_inset
 
- that solves the constraints of liquidity and incentives corresponding to
- a macroeconomy lottery would have a unique reference point 
-\begin_inset Formula $h(\{x_{i}\}_{t})$
+ .
+ Notice also that each consumer lottery 
+\begin_inset Formula $\{\bar{P}$
 \end_inset
 
- observed by the lottery maker.
- The solution of the two constraints is simplified by the observation that
- incentive constraint is stronger than the liquidity condition implied by
- the macroeconomy lottery.
+, 
+\begin_inset Formula $\bar{S}$
+\end_inset
+
+ , 
+\begin_inset Formula $\bar{\chi}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\phi}\}$
+\end_inset
+
+ that solves the liquidity and incentive constraints corresponding to a
+ macroeconomy lottery would have a unique reference point 
+\begin_inset Formula $h(\{x_{i}\}_{t},\alpha_{l},\alpha_{h})$
+\end_inset
+
+ observed by the lottery maker (as well as other consumers).
+ The restrictions on 
+\begin_inset Formula $\{\bar{P}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{S}$
+\end_inset
+
+ , 
+\begin_inset Formula $\bar{\chi}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\phi}\}$
+\end_inset
+
+ due to the macroeconomy are simplified by the observation that incentive
+ constraint is a stronger condition than the liquidity constraint.
+ This is proven along side with the first condition for the incentive constraint.
 \end_layout
 
 \begin_layout Theorem
 A macroeconomy lottery must be profitable i.e.
- E(L)>L for there to be a long-term equilibrium where a reference point
- is observed.
+ E(L)>L for there to be a long-term equilibrium satisfying the incentive
+ constraint.
 \end_layout
 
 \begin_layout Proof
-Notice that the liquidity condition implies that 
+The liquidity condition implies that 
 \begin_inset Formula $p(\sum P(\nu_{i})+n\chi)+(1-p)(\sum_{i}S(x_{i}-\nu_{i})-n\phi)=e_{L}\sum x_{i}$
 \end_inset
 
@@ -3501,7 +3598,7 @@ Notice that the liquidity condition implies that
 \begin_inset Formula $P,S,\chi,\phi$
 \end_inset
 
- need to be set up so that 
+ in the long-term need to be set up so that 
 \begin_inset Formula 
 \begin{align*}
 \frac{p(\sum P(\nu_{i})+n\chi)+(1-p)(\sum_{i}S(x_{i}-\nu_{i})-n\phi)}{\sum x_{i}} & =e_{L}
@@ -3509,7 +3606,7 @@ Notice that the liquidity condition implies that
 
 \end_inset
 
- The feasibility condition relevant to the lottery maker that every consumer
+ The incentive condition relevant to the lottery maker that every consumer
  
 \begin_inset Formula $i$
 \end_inset
@@ -3526,7 +3623,8 @@ Summing over all consumers, the two equations imply that
 \begin_inset Formula $e_{L}\ge1$
 \end_inset
 
- - a condition that is satisfied for any macroeconomy with profitable returns.
+ - a condition that is satisfied for any macroeconomy with profitable or
+ break-even returns.
  
 \end_layout
 
@@ -3538,28 +3636,27 @@ Summing over all consumers, the two equations imply that
 \end_layout
 
 \begin_layout Standard
-The converse of the above theorem however is not always true - i.e.
- all profitable macroeconomy lotteries need not correspond to long-term
- 
-\begin_inset Formula $\{P,S,\chi,\phi\}$
+However, the converse of the above theorem need not be true - i.e.
+ all profitable macroeconomy lotteries do not correspond to long-term 
+\begin_inset Formula $\{\bar{P},\bar{S},\bar{\chi},\bar{\phi}\}$
 \end_inset
 
- and the long-term reference.
+ and the corresponding reference.
  The condition 
-\begin_inset Formula $e_{L}>1$
+\begin_inset Formula $e_{L}\ge1$
 \end_inset
 
- only implies that consumer's liquidity condition is met.
- Since we don't require 
+ implies only that consumer's liquidity condition is met.
+ As we don't require 
 \begin_inset Formula $p(P(\nu_{i})+\chi)+(1-p)(S(x_{i}-\nu_{i})-\phi)\ge x_{i}$
 \end_inset
 
- to hold in order to satisfy 
-\begin_inset Formula $p(\sum P(\nu_{i})+n\chi)+(1-p)(\sum_{i}S(x_{i}-\nu_{i})-n\phi)\ge x_{i}$
+ to hold for all consumers 
+\begin_inset Formula $i$
 \end_inset
 
- for all 
-\begin_inset Formula $i$
+ in order to satisfy the sum 
+\begin_inset Formula $p(\sum P(\nu_{i})+n\chi)+(1-p)(\sum_{i}S(x_{i}-\nu_{i})-n\phi)\ge e_{L}\sum x_{i}$
 \end_inset
 
 , the incentives condition may not be met for all consumers if 
@@ -3567,7 +3664,7 @@ The converse of the above theorem however is not always true - i.e.
 \end_inset
 
 is too low.
- More specifically, a consumer with a low 
+ In other words, a consumer with a low 
 \begin_inset Formula $\alpha_{i}$
 \end_inset
 
@@ -3576,8 +3673,7 @@ is too low.
 \begin_inset Formula $x_{i}$
 \end_inset
 
- poses a feasibility problem to the lottery maker as the lottery maker must
- make sure 
+ poses an incentive problem to the lottery maker who must ensure that 
 \begin_inset Formula $J(x_{i},\alpha_{i},r)\ge x_{i}$
 \end_inset
 
@@ -3621,9 +3717,18 @@ The lower
 \end_inset
 
 .
- It also follows that in the long-term lottery relevant for the reference
- would be selected only so that all the consumers stay in the lottery.
- The only condition that would allow this to happen is when 
+ It also follows that in a long-term lottery is only feasible as long as
+ a reference exists for all consumers to stay in the lottery.
+ Further, if the reference point 
+\begin_inset Formula $h(\{x_{i}\},\alpha_{l},\alpha_{h})$
+\end_inset
+
+ does increase as consumers increase their 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ by playing successive lotteries , the only condition that would allow this
+ to happen is when 
 \begin_inset Formula $J(x,\alpha_{i},r)=x$
 \end_inset
 
@@ -3631,7 +3736,7 @@ The lower
 \begin_inset Formula $\alpha_{i}\in[\alpha_{l},\alpha_{h}]$
 \end_inset
 
-.
+ in the long-term.
  The following theorem clarifies this.
 \end_layout
 
@@ -3683,7 +3788,7 @@ Let's assume
 
 .
  Since 
-\begin_inset Formula $h(\{x_{i}\})$
+\begin_inset Formula $h(\{x_{i}\},\alpha_{l},\alpha_{h})$
 \end_inset
 
  is an increasing function of 
@@ -3730,11 +3835,12 @@ Let's assume
 \begin_layout Standard
 
 \bar under
-A reference point for consumers 
+Thus a reference point that exists only if incentive condition is satisfied
+ for consumers have risk-aversion levels in 
 \begin_inset Formula $[\alpha_{l},\alpha_{h}]$
 \end_inset
 
- is a function 
+ as a function 
 \begin_inset Formula $h(\{x_{i}\})$
 \end_inset
 
@@ -3747,14 +3853,20 @@ A reference point for consumers
 \end_inset
 
 .
- This is the reference that long-term economy would imply on the consumers.
- Since long-term occupational structures are part of the macreconomy and
- the reference point a necessary condition for the feasibility of the lottery,
- the existence of the reference point is a necessary condition for all consumers
- to participate in the lottery implied by a macro-economy.
+ 
+\bar default
+The reference point in the long-run thus indicates how the relative wealth
+ competition among the consumers is constrained by a certain macroeconomy.
+ 
+\bar under
+Also, since long-term occupational structures are part of the macreconomy
+ and the reference point a necessary condition for the feasibility of the
+ lottery, the existence of the reference point becomes a necessary condition
+ for all consumers to participate in the lottery implied by a macro-economy.
 
 \bar default
- So while for the same risk-aversion a higher income 
+ This also makes empirical sense since while for the same risk-aversion
+ a higher income 
 \begin_inset Formula $x$
 \end_inset
 
@@ -3771,9 +3883,11 @@ A reference point for consumers
  that she can follow a path to richness that is not open to consumer 2.
  A more risk-seeking consumer 1 would thus obtain the same utility as consumer
  2.
- However, if the consumer 1 is too risk-seeking then the competition as
- well as the reference would become infeasible.
- 
+ However, it is also true that if the consumer 1 is too risk-seeking then
+ then she may seek a security that the macroeconomy may not provide as a
+ common refernce.
+ Having different reference points is therefore a necessary side-effect
+ of wide differences in income.
 \end_layout
 
 \begin_layout Section
@@ -3787,9 +3901,13 @@ Conclusions
 \end_layout
 
 \begin_layout Standard
-The two questions we sought to can thus be answered using the conditions
- for the long-term reference point is implied by the long-term returns in
- a macroeconomy.
+The two questions we sought to to find answers for were ...
+ 
+\end_layout
+
+\begin_layout Standard
+using the conditions for the long-term reference point is implied by the
+ long-term returns in a macroeconomy.
  The PT-utility functions where this reference point is utilised helps us
  understand the incentives for lower status consumption as well.
  The above conditions for the existence of reference points not only provide
