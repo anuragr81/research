@@ -1499,9 +1499,16 @@ lsms_normalizer<-function() {
     return(x)
   }
   
-  categories_non_basic_wassets <- function()  {
-    x <- subset(categories_needs_based(),!is.element(shortname,c("kerosene")) & !is.element(assetlevel,c("none")))[,c("category","group","shortname","assetlevel")]
-    
+  categories_non_basic_wassets <- function(include_food)  {
+    if (missing(include_food)){
+      include_food <- F
+    }
+    if (include_food){
+      x <- subset(categories_needs_based(),!is.element(category,c("energy")))[,c("category","group","shortname","assetlevel")]
+    }
+    else {
+      x <- subset(categories_needs_based(),!is.element(shortname,c("kerosene")) & !is.element(assetlevel,c("none")))[,c("category","group","shortname","assetlevel")]
+    }
     x<-rbind(x,data.frame(category='general', group='excess', shortname='cigarettes', assetlevel='none'))
     x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='matches', assetlevel='none'))
     x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='public_transport', assetlevel='none'))

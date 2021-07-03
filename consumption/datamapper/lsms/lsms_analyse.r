@@ -1071,6 +1071,67 @@ perception_data_analysis <- function(o2012, ignore_split_hhids)
 }
 
 
+get_split_budget_ratios <- function (categs_a , categs_b, dat , group_field) {
+  if(is.element("w_a", colnames(dat))  ){
+    stop("dat already has a columnn with the name_a")
+  }
+  if(is.element("w_b", colnames(dat))  ){
+    stop("dat already has a columnn with the name_b")
+  }
+  
+  
+  
+  # using logical variable to indicate which group_field values occur in the respective categories
+  dat$w_a <- is.element(dat[,group_field],categs_a)
+  dat$w_b <- is.element(dat[,group_field],categs_b)
+  
+  # selecting and summing data from respective categories
+  dat_a <- ddply(subset(plyr::rename(dat[,c("hhid","cost","w_a")],c("cost"="cost_a")),w_a==TRUE), .(hhid),summarise,cost_a=sum(cost_a))
+  dat_b <- ddply(subset(plyr::rename(dat[,c("hhid","cost","w_b")],c("cost"="cost_b")),w_b=TRUE), .(hhid),summarise,cost_b=sum(cost_b))
+  
+  # sum up costs from different categories
+  datres <- merge(dat_a,dat_b,by=c("hhid"))
+  datres <- datres %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b)) 
+  #return(datres[,c("hhid","w_a","w_b")])
+  return(datres)
+}
+
+estimation_nonparametric <- function(ll){
+  # Don't include education or housing expenses - because they're part of needs anyways
+  inc_houserent = F
+  inc_educexpense = F
+  all_costs_considered <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
+  food_costs_group <- subset(all_costs_considered,is.element(group,c("needs")))$shortname
+  excess_costs_group <- subset(all_costs_considered,is.element(group,c("excess")))$shortname
+  
+  k2010 <- get_split_budget_ratios(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2010, group_field = "shortname")
+  k2012 <- get_split_budget_ratios(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2012, group_field = "shortname")
+  k2014 <- get_split_budget_ratios(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2014, group_field = "shortname")
+  
+  
+  hhids2010_2012 <- mapping_hhids_2010_2012(o2012)
+  
+  asset_mtms_2012 = asset_mtms(a2012,"bed","2012")
+  asset_mtms_2010 <- plyr::rename(merge(hhids2010_2012,asset_mtms_2012),c("mtm.2012"="mtm.2010","cost.2012"="cost.2010","number.2012"="number.2010"))[,c("hhid2010","hhid2012","shortname","number.2010","mtm.2010","cost.2010")]
+  asset_mtms_2014 = asset_mtms(a2014,"bed","2014")
+  
+  assetslog2010 <- ddply(asset_mtms_2010,.(hhid2010),summarise,lnA0=log(sum(number.2010*mtm.2010)),A0=(sum(number.2010*mtm.2010)))
+  assetslog2012 <- ddply(asset_mtms_2012,.(hhid2012),summarise,lnA0=log(sum(number.2012*mtm.2012)),A0=sum(number.2012*mtm.2012))
+  assetslog2014 <- ddply(asset_mtms_2014,.(hhid2014),summarise,lnA0=log(sum(number.2014*mtm.2014)),A0=sum(number.2014*mtm.2014))
+  
+  
+  ka2010 <- (merge(assetslog2010,plyr::rename(k2010,c("hhid"="hhid2010")),by=c("hhid2010"))) %>% mutate (year=2010)
+  ka2012 <- (merge(assetslog2012,plyr::rename(k2012,c("hhid"="hhid2012")),by=c("hhid2012"))) %>% mutate (year=2012)
+  ka2014 <- (merge(assetslog2014,plyr::rename(k2014,c("hhid"="hhid2014")),by=c("hhid2014"))) %>% mutate (year=2014)
+  
+  res=list()
+  res[["df2010"]] <- ka2010
+  res[["df2012"]] <- ka2012
+  res[["df2014"]] <- ka2014
+  
+  return(res)
+}
+
 estimation_df_budget_quantile<- function(ll,e)
 {
   inc_houserent = F
