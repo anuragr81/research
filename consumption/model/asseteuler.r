@@ -1144,15 +1144,15 @@ iota <- function(x,alpha,r,g_pt,l_pt,p_draw,chi,phi){
 J_cons <- function(x,alpha,r,g_pt,l_pt,p_draw,chi,phi) {
   
   nu_pt <- iota(x=x,alpha=alpha,r=r,g_pt=g_pt,l_pt=l_pt,p_draw=p_draw,chi=chi,phi=phi)
-
+  
   expected_result = optim_eu_func(p=p_draw,chi=chi,phi=phi,x=x,nu=nu_pt)
   return(expected_result)
 }
 
 optim_pt_u <- function(x,alpha,r,g_pt,l_pt,p_draw,chi,phi) {
-nu_pt = iota(x=x,alpha=alpha,r=r,g_pt=g_pt,l_pt=l_pt,p_draw=p_draw,chi=chi,phi=phi)
-max_u = optim_pt_func(g=g_pt,l=l_pt,x=x,nu=nu_pt,alpha=alpha, ref= r, p = p_draw,chi=chi,phi=phi)
-return(max_u)
+  nu_pt = iota(x=x,alpha=alpha,r=r,g_pt=g_pt,l_pt=l_pt,p_draw=p_draw,chi=chi,phi=phi)
+  max_u = optim_pt_func(g=g_pt,l=l_pt,x=x,nu=nu_pt,alpha=alpha, ref= r, p = p_draw,chi=chi,phi=phi)
+  return(max_u)
 }
 plot_u <- function()
 {
@@ -1186,7 +1186,7 @@ plot_Js <-function(){
   g_pt = .88 # .2 for kinks
   l_pt = 2.25
   
-
+  
   base_alpha_1= .2
   base_alpha_2= 1
   base_alpha_3= 2
@@ -1204,7 +1204,7 @@ plot_Js <-function(){
   plot(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = base_alpha_1,r = refs[1],p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[1], main=TeX(paste("$\\alpha$=",base_alpha_1)), xlab="x",ylab="J(x)")
   lines(x_arr,x_arr)
   for ( i in seq(2,length(refs))){
-
+    
     lines(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = base_alpha_1,r = refs[i],p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[i], main=TeX(paste("$\\alpha$=",base_alpha_1)), xlab="x",ylab="J(x)")
   }
   legend(100, legend_y, legend=paste("r=",refs), lty=ltys, cex=cex_zoom_setting)
@@ -1231,7 +1231,7 @@ plot_Js <-function(){
   plot(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = alphas[1],r = base_ref,p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[1], main=TeX(paste("r=",base_ref)), xlab="x",ylab="J(x)")
   lines(x_arr,x_arr)
   for ( i in seq(2,length(alphas))){
-
+    
     lines(x_arr,sapply(x_arr, function(y) { J_cons(x = y,alpha = alphas[i],r = base_ref,p_draw = p_draw,chi = CHI,phi = PHI,g_pt = g_pt,l_pt = l_pt) } ),type='l',lty=ltys[i], main=TeX(paste("r=",base_ref)), xlab="x",ylab="J(x)")
   }
   
@@ -1251,27 +1251,27 @@ evolve_lottery_maker_account<-function(nsims, ref_start,pt_g,pt_lambda,x1_start,
   #par(mfrow=c(2,1)); xvec <- seq(0,100,.1); plot(xvec,sapply(xvec,function(x){P_nu(x)),type='l'); plot(xvec,sapply(xvec,function(x){S_xi(x)}),type='l')
   p_draw <- .3
   
-
+  
   l = 2
   crra_g <- .6
   CHI = 1e+6
   PHI = 1e+2
-
+  
   #
   x1 <- x1_start
   x2 <- x1_start
   ref <- ref_start
-
+  
   
   nu1_pt <- optimise(function(y) { -optim_pt_func(g=pt_g,l=pt_lambda,x=x1,nu=y,alpha=alpha1, ref= ref, p = p_draw,chi=CHI,phi=PHI) },c(0,x1))$minimum
   nu1_eu <- optimise(function(y) { -optim_eu_func(x=x1,nu=y,p = p_draw,chi=CHI,phi=PHI) },c(0,x1))$minimum
   nu1_crra <- optimise(function(y) { -optim_crra_func(g=crra_g,x=x1,nu=y,p = p_draw,chi=CHI,phi=PHI) },c(0,x1))$minimum
   
   if (FALSE){
-  par(mfrow=c(3,1))
-  nu_vec <- seq(0,x1,.01)  ; plot(nu_vec, sapply(nu_vec, function(y) { optim_pt_func(g=pt_g,l=l,x=x1,nu=y,alpha=alpha1, ref= ref, p = p_draw,chi=CHI,phi=PHI) }),type='l' ,main=sprintf("%.2f",nu1_pt))
-  nu_vec <- seq(0,x1,.01)  ; plot(nu_vec, sapply(nu_vec, function(y) { optim_eu_func(x=x1,nu=y,p = p_draw,chi=CHI,phi=PHI) }),type='l' ,main=sprintf("%.2f",nu1_eu))
-  nu_vec <- seq(0,x1,.01)  ; plot(nu_vec, sapply(nu_vec, function(y) { optim_crra_func(g=crra_g,x=x1,nu=y,p = p_draw,chi=CHI,phi=PHI) }),type='l' ,main=sprintf("%.2f",nu1_crra))
+    par(mfrow=c(3,1))
+    nu_vec <- seq(0,x1,.01)  ; plot(nu_vec, sapply(nu_vec, function(y) { optim_pt_func(g=pt_g,l=l,x=x1,nu=y,alpha=alpha1, ref= ref, p = p_draw,chi=CHI,phi=PHI) }),type='l' ,main=sprintf("%.2f",nu1_pt))
+    nu_vec <- seq(0,x1,.01)  ; plot(nu_vec, sapply(nu_vec, function(y) { optim_eu_func(x=x1,nu=y,p = p_draw,chi=CHI,phi=PHI) }),type='l' ,main=sprintf("%.2f",nu1_eu))
+    nu_vec <- seq(0,x1,.01)  ; plot(nu_vec, sapply(nu_vec, function(y) { optim_crra_func(g=crra_g,x=x1,nu=y,p = p_draw,chi=CHI,phi=PHI) }),type='l' ,main=sprintf("%.2f",nu1_crra))
   }
   expected_payoff <- optim_eu_func(p = p_draw,nu = nu1_pt, x = x1,chi = CHI,phi = PHI)
   #return(data.frame(nu1_pt=nu1_pt,expected_payoff=expected_payoff))
@@ -1311,17 +1311,17 @@ evolve_lottery_maker_account<-function(nsims, ref_start,pt_g,pt_lambda,x1_start,
     xres <- rbind(xres,(data.frame(nsim=i, x1=x1,nu1_pt=nu1_pt,expected_payoff_1=expected_payoff1,M=M,x2=x2,nu2_pt=nu2_pt,expected_payoff_2=expected_payoff2)))
     
     lmres <- rbind(lmres,(data.frame(nsim=i,P_to_give = p_draw*(P_nu(nu1_pt)+P_nu(nu2_pt)), S_to_give = (1-p_draw)*(S_xi(x1-nu1_pt)+S_xi(x2-nu2_pt)),
-                     received_total = x1 + x2,
-                     average_x = (x1 + x2)/2,
-                     promised_M = M*(1+r)*p_draw - M*(1+R)*(1-p_draw),
-                     accounts_payable = -expected_payoff1 - expected_payoff2,
-                     total_lottery_proceeds = (p_draw)*(x1+x2)*(1+r) - (1-p_draw)*(x1+x2)*(1+R)) %>% mutate(account_value=total_lottery_proceeds + accounts_payable)))
+                                     received_total = x1 + x2,
+                                     average_x = (x1 + x2)/2,
+                                     promised_M = M*(1+r)*p_draw - M*(1+R)*(1-p_draw),
+                                     accounts_payable = -expected_payoff1 - expected_payoff2,
+                                     total_lottery_proceeds = (p_draw)*(x1+x2)*(1+r) - (1-p_draw)*(x1+x2)*(1+R)) %>% mutate(account_value=total_lottery_proceeds + accounts_payable)))
     if (lmres$account_value[length(lmres$account_value)]<0){
       print(xres)
       print(lmres)
       stop("Lottery maker ran out of cash")
     }
-                     
+    
     x1 <- expected_payoff1 - costs
     x2 <- expected_payoff2 - costs
   }
@@ -1332,4 +1332,78 @@ evolve_lottery_maker_account<-function(nsims, ref_start,pt_g,pt_lambda,x1_start,
 
 costs_per_draw <- function(x1){
   return (100)
+}
+
+my_band <-function(A,A_bands){
+  if (any(diff(A_bands)<=0)){
+    stop("my_band: expects A_bands with increasing boundaries ")
+  }
+  
+  if (is.atomic(A)){
+    mb_ge = A_bands[A_bands >= A]
+    ub <- mb_ge[1]
+    mb_lt = A_bands[A_bands < A]
+    lb <- mb_lt[length(mb_lt)]
+    if (length(mb_lt)==0){
+      return(c("Lower than lowest A_band"))
+    }
+    if (length(mb_ge)==0){
+      return(c("Higher than highest A_band"))
+    } else {
+      return(c(lb,ub))
+    }
+  }else {
+    stop("A must be atomic")
+  }
+}
+
+band_nu_reference <- function(A,A_bands) {
+  # returns the reference relevant for A in the list specifying A_bands
+  band_lb_ub = my_band(A = A,A_bands = A_bands)
+  band_lb = band_lb_ub[1]
+  band_ub = band_lb_ub[2]
+  
+  #arbitrary function for reference
+  refval=(band_lb + band_ub)/2
+  return(refval)
+}
+
+pt_cont_value_func <- function(x){
+  # PT like continuous value-function to be used if the consumers obtained utility from nu directly
+  exponent_value = 3
+  return(x**exponent_value*(2+exp(x))/(1+exp(x)))
+} 
+
+util_nu_A <-function (nu,A,A_bands, ref_func, J_func)
+{
+  # this is the function to be optimised by the consumer, nu affects consumer choice only through
+  # the consumer evaluates current asset based on the probability implied from nu and J
+  numYears = 10
+  JT= J_func(nu-ref_func(A=A,A_bands=A_bands))
+  total_value = 0
+  JTProd = 1
+  tol = .2
+  
+  for (i in seq(numYears)) {
+    JTProd = JTProd*JT
+    next_total_value = total_value+ A * JTProd
+    if ((next_total_value/total_value-1)> tol){
+      stop("More number of years required for convergence")
+    }
+    total_value = next_total_value
+  }
+  
+  return(total_value)
+}
+segmented_asset_band_nu <- function(A_bands, A, ref_func){
+  
+  #income is directly proportional to asset-bands
+  #utility is availed from A and nu-ref. nu is not merely utility but some risk too.
+  #having a certain nu-ref influences J which directly rewards with increments in A
+  #evaluation of future A is therefore based on nu
+  
+}
+
+evolve_segmented_asset_bands<-function(){
+  
 }

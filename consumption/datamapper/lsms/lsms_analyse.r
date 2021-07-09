@@ -1123,7 +1123,8 @@ estimation_nonparametric <- function(ll){
   ka2010 <- (merge(assetslog2010,plyr::rename(k2010,c("hhid"="hhid2010")),by=c("hhid2010"))) %>% mutate (year=2010)
   ka2012 <- (merge(assetslog2012,plyr::rename(k2012,c("hhid"="hhid2012")),by=c("hhid2012"))) %>% mutate (year=2012)
   ka2014 <- (merge(assetslog2014,plyr::rename(k2014,c("hhid"="hhid2014")),by=c("hhid2014"))) %>% mutate (year=2014)
-  
+
+  #a<-merge(plyr::rename(i2010,c("hhid"="hhid2010")),assetslog2010 ,by=c("hhid2010"))
   res=list()
   res[["df2010"]] <- ka2010
   res[["df2012"]] <- ka2012
