@@ -13,6 +13,24 @@ constraint <- function(savings, consumption, assets){
   return (abs(sum(assets) + sum(consumption) - sum(savings))<tol)
 }
 
+J_nu <- function(t,a,b,bound) {
+  return(bound * (exp(a*(t-b))/(1+exp(a*(t-b)))))
+}
+
+expected_asset_value <- function(B0,B1,y0,y1,nu,ja,jb,pb){
+  p = J_nu(t=nu,a=ja,b=jb,bound=pb)
+  eval = p *( B1 + (y1- nu) ) + (1-p)*(B0 + (y0- nu) )
+  return(eval)
+}
+
+plot_discrete_band_scenarios <- function(B0,B1,y0,y1,ja,pb){
+  par(mfrow=c(1,2))
+  x <- seq(0,y1,.1); 
+  plot(x,J_nu(t=x,a=ja,b=(y1+y0)/2,bound = pb),ylab="J_nu",type='l')
+  plot(x,expected_asset_value(B0=B0,B1=B1,nu=x,y0=y0,y1=y1,ja=ja,jb=(y1+y0)/2,pb=pb),ylab="expected AV",type='l')
+  
+}
+
 
 next_available_asset<-function(cost){
   costs <- seq(10,100,10)
@@ -1373,6 +1391,14 @@ pt_cont_value_func <- function(x){
   exponent_value = 3
   return(x**exponent_value*(2+exp(x))/(1+exp(x)))
 } 
+
+probabilistic_nu_jump <- function(x,p){
+  #W = rbinom(1,1,p)
+  # The function that provides a discrete jump with increasing probability (higher p) for higher consumption
+  # The value x normalises the variation in asset-bands by letting the probability function
+  #    be the same for all reference levels
+  return(rnorm(1)*p)
+}
 
 util_nu_A <-function (nu,A,A_bands, ref_func, J_func)
 {
