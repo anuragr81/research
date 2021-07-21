@@ -1094,7 +1094,7 @@ get_split_costs <- function (categs_a , categs_b, dat , group_field) {
   return(datres)
 }
 
-estimation_nonparametric <- function(ll){
+get_nonparametric_df <- function(ll){
   # Don't include education or housing expenses - because they're part of needs anyways
   inc_houserent = F
   inc_educexpense = F
@@ -1115,9 +1115,9 @@ estimation_nonparametric <- function(ll){
   k2012_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2012, group_field = "shortname")
   k2014_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2014, group_field = "shortname")
   
-  k2010 <- (merge(k2010_tot,hsizex2010,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))[,c("hhid","cost_a","cost_b")]
-  k2012 <- (merge(k2012_tot,hsizex2012,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))[,c("hhid","cost_a","cost_b")] 
-  k2014 <- (merge(k2014_tot,hsizex2014,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))[,c("hhid","cost_a","cost_b")] 
+  k2010 <- (merge(k2010_tot,hsizex2010,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))
+  k2012 <- (merge(k2012_tot,hsizex2012,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))
+  k2014 <- (merge(k2014_tot,hsizex2014,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))
   
   k2010 <- k2010 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b))
   k2012 <- k2012 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b)) 
@@ -1135,9 +1135,12 @@ estimation_nonparametric <- function(ll){
   
   
   
-  ka2010 <- (merge(assetslog2010,plyr::rename(k2010,c("hhid"="hhid2010")),by=c("hhid2010"))) %>% mutate (year=2010) %>% mutate( logx=log(x))
-  ka2012 <- (merge(assetslog2012,plyr::rename(k2012,c("hhid"="hhid2012")),by=c("hhid2012"))) %>% mutate (year=2012) %>% mutate( logx=log(x))
-  ka2014 <- (merge(assetslog2014,plyr::rename(k2014,c("hhid"="hhid2014")),by=c("hhid2014"))) %>% mutate (year=2014) %>% mutate( logx=log(x))
+  ka2010 <- (merge(assetslog2010,plyr::rename(k2010,c("hhid"="hhid2010")),by=c("hhid2010"))) %>% mutate (year=2010) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
+  ka2010 <- ka2010[,setdiff(colnames(ka2010),c("consu","hsize"))]
+  ka2012 <- (merge(assetslog2012,plyr::rename(k2012,c("hhid"="hhid2012")),by=c("hhid2012"))) %>% mutate (year=2012) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
+  ka2012 <- ka2012[,setdiff(colnames(ka2012),c("consu","hsize"))]
+  ka2014 <- (merge(assetslog2014,plyr::rename(k2014,c("hhid"="hhid2014")),by=c("hhid2014"))) %>% mutate (year=2014) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
+  ka2014 <- ka2014[,setdiff(colnames(ka2014),c("consu","hsize"))]
 
   
   #
@@ -1184,9 +1187,9 @@ estimation_nonparametric <- function(ll){
   
   #a<-merge(plyr::rename(i2010,c("hhid"="hhid2010")),assetslog2010 ,by=c("hhid2010"))
   res=list()
-  res[["df2010"]] <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ka2010, by = c("hhid2010"))
-  res[["df2012"]] <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ka2012, by = c("hhid2012"))
-  res[["df2014"]] <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),ka2014, by = c("hhid2014"))
+  res[["df2010"]] <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ka2010, by = c("hhid2010")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+  res[["df2012"]] <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ka2012, by = c("hhid2012")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+  res[["df2014"]] <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),ka2014, by = c("hhid2014")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
   
   
   #
@@ -1194,6 +1197,31 @@ estimation_nonparametric <- function(ll){
   return(res)
 }
 
+run_non_parmetric_regression <- function(ll,dfslist)
+  {
+  if(missing(dfslist)){
+    dfslist <- get_nonparametric_df(ll)
+  }
+  select_df="df2010"
+  
+  S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
+  E <- with(dfslist[[select_df]], seq(min(E), max(E), len=25))
+  newdata <- expand.grid(S=S, E=E)
+  
+  mod.lo_a <- loess(cost_a ~ S + E , span=.5, degree=1, data=dfslist[[select_df]])
+  mod.lo_b <- loess(cost_b ~ S + E , span=.5, degree=1, data=dfslist[[select_df]])
+  
+  
+  fit.npa <- matrix(predict(mod.lo_a, newdata), 25, 25)
+  fit.npb <- matrix(predict(mod.lo_b, newdata), 25, 25)
+  
+  
+  par(mfrow=c(1,2))
+  
+  persp(S, E, fit.npa, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5)
+  persp(S, E, fit.npb, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5)
+  
+}
 estimation_df_budget_quantile<- function(ll,e)
 {
   inc_houserent = F
