@@ -761,6 +761,194 @@ Empirical Results
 \end_layout
 
 \begin_layout Standard
+The non-parametric regression needs to run with Euclidean distance and distance
+ in 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ We would like to smooth the data on rich people in the same neighorhood
+ - because individuals of the same asset are likely to compete with each
+ other and are segregated in some ways from others.
+ In other words, assets provide the reference and the difference from this
+ reference is roughly estimated by distances from a certain wealth group.
+ We evaluate food quality (food weight) and non-food quality (non-food weight)
+ with respect to the 
+\begin_inset Formula $A$
+\end_inset
+
+-neighborhood.
+\end_layout
+
+\begin_layout Standard
+Consider three consumers 
+\begin_inset Formula $A,B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+, who have asset-values of 
+\begin_inset Formula $\{V_{A},V_{B},V_{C}\}=\{100,200,800\}$
+\end_inset
+
+ and the distances among them are 
+\begin_inset Formula $\{AB,BC,CA\}=$
+\end_inset
+
+ 
+\begin_inset Formula $\{2,10,12\}$
+\end_inset
+
+ .
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ are neighbours due to both distance and asset-values.
+ This is different from 
+\begin_inset Formula $\{AB,BC,CA\}=$
+\end_inset
+
+ 
+\begin_inset Formula $\{20,18,2\}$
+\end_inset
+
+ when 
+\begin_inset Formula $B,C$
+\end_inset
+
+ are distance neighbours but not asset-value neighbours.
+ To obtain this into one distance we can transform the 
+\begin_inset Formula $S,E$
+\end_inset
+
+ values with the asset-factor.
+ Two consumers who are physically close but asset-wise apart should have
+ a longer Euclidean distance than when they have similar assets.
+ The distances between all areas is 
+\begin_inset Formula ${n \choose 2}$
+\end_inset
+
+.
+ If the regression were to run with just 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $E$
+\end_inset
+
+ neighbours would be decided based on Euclidean distance 
+\begin_inset Formula $\sqrt{S^{2}+E^{2}}$
+\end_inset
+
+.
+ If we want this to include asset-distances then we're mixing distances
+ with asset values - treating consumers that live a little further the same
+ as those who are a bit richer.
+ The distance we want has lexicographic properties - we consider assets-only
+ if the consumers are with a certain area.
+ In the second case with 
+\begin_inset Formula $\{AB,BC,CA\}=$
+\end_inset
+
+ 
+\begin_inset Formula $\{20,18,2\}$
+\end_inset
+
+ , 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+ are physical neibhbours but not asset-neighbours.
+ The difference in assets is therefore relevant for us.
+ On the other hand when 
+\begin_inset Formula $\{AB,BC,CA\}=$
+\end_inset
+
+ 
+\begin_inset Formula $\{2,10,12\}$
+\end_inset
+
+, then 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+ are too distant and the asset-difference is irrelevant for us.
+ While understanding distance from each other compares with 
+\begin_inset Formula $A$
+\end_inset
+
+-distance from each other, we do not consider asset differences when the
+ distance is above a certain threshold.
+ If we map 
+\begin_inset Formula ${n \choose 2}$
+\end_inset
+
+ points with valid 
+\begin_inset Formula $ln(A)$
+\end_inset
+
+ values we would need to map these 
+\begin_inset Formula $ln(A)$
+\end_inset
+
+ pairs back to 
+\begin_inset Formula $n+n$
+\end_inset
+
+ coordinates.
+ As such we don't have 
+\begin_inset Formula $A_{X},A_{Y}$
+\end_inset
+
+ components - but we know that the distance is infinite for neighbours that
+ are beyond a certain distance apart.
+ In other words, the relevant distance is such that asset differences are
+ infinite for large (above a threshold) geographical distance.
+ This can be accomplished with a custom distance.
+ It is then worthwhile to compare just distance with the asset-inclusive
+ distance in the comparison.
+\end_layout
+
+\begin_layout Standard
+Recall that our motivation for the non-parametric regression is the reference
+ that implicitly comes through assets.
+ We want to see how asset differences compared to income drive the behaviour.
+ Does 
+\begin_inset Formula $ln(x)$
+\end_inset
+
+ determine 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ more than 
+\begin_inset Formula $ln(A)$
+\end_inset
+
+ - this too needs to be commented on.
+ It is worth understanding if asset-neighborhoods matter more than logx
+ neighborhoods.
+ Remember that we want to remove the effect of number of household memebers
+ so we consider a per-head comparison.
+\end_layout
+
+\begin_layout Standard
 [FEATURE-LIST FOR ESTIMATION] If we assume a certain form of 
 \begin_inset Formula $\kappa(\nu,A+\Delta A)$
 \end_inset
