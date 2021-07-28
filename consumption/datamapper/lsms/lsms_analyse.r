@@ -1187,9 +1187,17 @@ get_nonparametric_df <- function(ll){
   
   #a<-merge(plyr::rename(i2010,c("hhid"="hhid2010")),assetslog2010 ,by=c("hhid2010"))
   res=list()
-  res[["df2010"]] <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ka2010, by = c("hhid2010")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
-  res[["df2012"]] <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ka2012, by = c("hhid2012")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
-  res[["df2014"]] <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),ka2014, by = c("hhid2014")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+  dat2010 <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ka2010, by = c("hhid2010")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+  dat2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ka2012, by = c("hhid2012")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+  dat2014 <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),ka2014, by = c("hhid2014")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+  
+  dat2010 <- subset(dat2010,!is.na(A0) & !is.infinite(cpA_a))
+  dat2012 <- subset(dat2012,!is.na(A0) & !is.infinite(cpA_a))
+  dat2014 <- subset(dat2014,!is.na(A0) & !is.infinite(cpA_a))
+  
+  res[["df2010"]] <- dat2010
+  res[["df2012"]] <- dat2012
+  res[["df2014"]] <- dat2014
   
   
   #
@@ -1197,30 +1205,36 @@ get_nonparametric_df <- function(ll){
   return(res)
 }
 
-run_non_parmetric_regression <- function(ll,dfslist)
+run_non_parmetric_regression <- function(ll,dfslist,year,sp)
   {
   if(missing(dfslist)){
     dfslist <- get_nonparametric_df(ll)
   }
-  select_df="df2010"
+  select_df=paste0("df",year)
   
   S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
   E <- with(dfslist[[select_df]], seq(min(E), max(E), len=25))
   newdata <- expand.grid(S=S, E=E)
+  mod.lo_cpaa <- loess(cpA_a ~ S + E , span=sp, degree=1, data=dfslist[[select_df]])
+  mod.lo_cpab <- loess(cpA_b ~ S + E , span=sp, degree=1, data=dfslist[[select_df]])
   
-  mod.lo_a <- loess(cost_a ~ S + E , span=.5, degree=1, data=dfslist[[select_df]])
-  mod.lo_b <- loess(cost_b ~ S + E , span=.5, degree=1, data=dfslist[[select_df]])
+  mod.lo_ca <- loess(cost_a ~ S + E , span=sp, degree=1, data=dfslist[[select_df]])
+  mod.lo_cb <- loess(cost_b ~ S + E , span=sp, degree=1, data=dfslist[[select_df]])
   
+  fit.cpaa <- matrix(predict(mod.lo_cpaa, newdata), 25, 25)
+  fit.cpab <- matrix(predict(mod.lo_cpab, newdata), 25, 25)
   
-  fit.npa <- matrix(predict(mod.lo_a, newdata), 25, 25)
-  fit.npb <- matrix(predict(mod.lo_b, newdata), 25, 25)
+  fit.ca <- matrix(predict(mod.lo_ca, newdata), 25, 25)
+  fit.cb <- matrix(predict(mod.lo_cb, newdata), 25, 25)
   
+  par(mfrow=c(2,2))
   
-  par(mfrow=c(1,2))
-  
-  persp(S, E, fit.npa, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5)
-  persp(S, E, fit.npb, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5)
-  
+  persp(S, E, fit.cpaa, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = "cpA a")
+  persp(S, E, fit.cpab, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = "cpA b")
+  persp(S, E, fit.ca, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = "c a")
+  persp(S, E, fit.cb, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = "c b")
+
+    
 }
 estimation_df_budget_quantile<- function(ll,e)
 {

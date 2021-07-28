@@ -1430,6 +1430,13 @@ segmented_asset_band_nu <- function(A_bands, A, ref_func){
   
 }
 
+sigmoid_function <-function(x,a,u) {
+  return(exp(a*(x-u) )/(1+exp(a*(x-u))))
+}
+
 evolve_segmented_asset_bands<-function(){
-  
+  T=10
+ for (t in seq(T)) {
+   nu = rnorm(1)
+ }
 }
