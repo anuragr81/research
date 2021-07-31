@@ -1434,9 +1434,182 @@ sigmoid_function <-function(x,a,u) {
   return(exp(a*(x-u) )/(1+exp(a*(x-u))))
 }
 
-evolve_segmented_asset_bands<-function(){
-  T=10
- for (t in seq(T)) {
-   nu = rnorm(1)
+evolve_segmented_asset_bands_uniform_selection<-function(T,debug){
+  sc <- T
+  #band_incomes y
+  y <- c(10,100,1000,5000)
+  n <- c(10,8,5,2)
+  if(missing(debug)){
+  debug <- F
+  }
+  A <- list()
+  for (i in seq(y)){
+    A [[i]] <- array()
+    for (j in seq(n[i])){
+      A[[i]][j] <- 0
+    }
+  }
+  
+  for (t in seq(T)) {
+    if (debug){
+    print("=====")
+    print(A)
+    }
+    # increment with nu
+    for (i in seq(length(y))){
+      candidates <- seq(n[i])
+      for (ci in candidates){
+        nu <- 0
+        A [[i]][ci] <-A[[i]][ci]  + y[i] -nu
+      }
+    }
+    
+    if (sc){
+    for (i in seq(length(y))){
+      candidates <- seq(n[i])
+      winner_i <- sample(candidates,1)
+      loser_i <- sample(setdiff(candidates,winner_i),1)
+
+      if(debug) { 
+        print (paste("winner[",i,"]=",winner_i,"losser[",i,"]=",loser_i)) 
+      }
+      if (i<length(y)){
+        #Winner's spot would be taken by the loser
+        A[[i]][winner_i] <- 0 
+      }
+      
+      if (i>1){
+        #losers spot would be taken by the winner from the lower band
+        A[[i]][loser_i] <- 0
+      }
+      
+    }
+    }
+    
+    
+    
+    
+  }
+  print("<<<<<<<<>>>>>>>>>>>>")
+  print(A)
+}
+
+is_winner <- function(nu_bars, i, selected_nu_fracs, y, sigma) {
+  # every band is supposed to have a fixed bar{nu} which controls the probability of selection (we can choose 
+  #  to plot the historical plots of nu-bar{nu} to see how the probability function looks).
+  #  Notice that we can only talk about about a certain distribution of nu in the reference/band and
+  # the consumer's position in it would influence the consumer's fortune.
+  
+  # When looking what the consumer maximises - i.e. the best outcome - we are not looking for a pareto outcome
+  # for all the consumers but onlywhat interests the consumer for a given certain queuing mechanism. This
+  # Nash result depends on a certain known/fixed behaviour of other consumers. To fix the consumer behaviour for 
+  # all other consumer's we need to be sure about what nu they would choose i.e. the  bar{nu} as well as 
+  # the distribution of nu around bar{nu} a consumer face.s
+  
+  # By simulating we can talk about the final equilibrium that would give us an optimal configuration
+  # that maximises outcome for a certain consumer in a certain band. 
+  nu <- selected_nu_fracs[i] *y [i]
+  bar_nu <- nu_bars[i]
+  # nu-nu_bar should generate a certain probabilty and higher nu -nu_bar should give higher winning probability
+  # notice that nu/y varies from 0 to 1.
+  # lets assume consumers are normally distributed around nu_bar. so a consumer with a certain nu
+  # would be selected pnorm number of times if we allow a winner when r > nu_bar (which is the mean)
+  # over time a consumer wins n number of times which is the cdf
+  # the assumption is that nu/bar{nu} is normally distributed with stdev 1 and mean 1.
+  # check that mean(.2 > rnorm(10000000,mean = 0,sd = 1)) is same as pnorm(.2,mean = 0,sd = 1)
+  
+  # in every draw we are picking a random winner so that the exceptional consumers are found and rewarded
+  # as such we would pick anybody but people who have high nu-frac have a higher chance
+  
+  r <- nu/bar_nu -1 - sigma  # increasing nu increases the chance of winning - decreasing it decreases it
+  if (r > rnorm(n=1,mean=0,sd=1)){
+    return(T)
+  } else{
+    return(F)
+  }
+  
  }
+
+
+is_loser <- function(nu_bars, i, selected_nu_fracs, y , sigma) {
+  nu <- selected_nu_fracs[i] *y [i]
+  bar_nu <- nu_bars[i]
+  
+  #increasing nu  decreases r and decreases the chance of losing #
+
+  r <- 1-nu/bar_nu- sigma # nu < bar_nu => bar_nu - nu > 0 => 1 - nu/bar_nu > 0 (random greater than this number is less likely )
+  # nu > bar_nu => bar_nu - nu < 0 => 1 - nu/bar_nu < 0 (random greater than this number is more likely)
+  if (r > rnorm(n=1,mean=0,sd=1)){
+    return(T)
+  } else{
+    return(F)
+  }
+  
+}
+
+
+evolve_segmented_asset_bands_indiv<-function(T,sigma,debug,selected_nu_fracs,consumer_pos,nu_bars,y){
+  # No need for the simulation of A for the entire population - since we assume that rest of the consumers
+  # have chose nu that spreads around bar{nu} with a known (normal) distribution
+  
+  #band_incomes y
+  if (missing(y)){
+    y <- c(10,100,1000,5000)
+  }
+  #consumer's current band
+  if (missing(consumer_pos)){
+    consumer_pos = 1
+  }
+  #band population
+  # n <- c(10,8,5,2)
+  
+  #band averages nus
+  if(missing(nu_bars)){
+    nu_bars <- c(5,20,300,4000)
+  }
+  if(missing(sigma)){
+    sigma <- 1
+  }
+  #consumer strategy in equilibrium
+  if(missing(selected_nu_fracs)){
+    selected_nu_fracs <- c(.2,.2,.3,.4)
+  }
+  
+  if(missing(debug)){
+    debug <- F
+  }
+  A <- 0
+  cur_pos <- consumer_pos
+  As <- array()
+  is <- array()
+  for (t in seq(T)) {
+    # if the consumer is a winner
+    # then she just exercises her choice being in the next band
+    # if she is a loser then she exercises the choice of being in the loser band 
+    # in equilibrium pushing her either way would eventually push her back in her final situation
+    
+    # for the normal distribution, a consumer with high nu would be rewarded more often and 
+    # the consumer with low nu would be punished more often
+    # we allow sigma on both sides to be safe - expanding sigma suppreses status competitions
+    # since a winner would be less likely to and loser less likely to win - since we decrease sigma from both
+    # provide this window of saftey
+    
+    # The winner rises up and losers falls down
+    if (is_winner(nu_bars = nu_bars, i = cur_pos, selected_nu_fracs = selected_nu_fracs, y = y , sigma = sigma) ){
+      if (cur_pos <length(y)){
+        A <- 0 
+        cur_pos <- cur_pos + 1 
+      }
+    } else if(is_loser(nu_bars = nu_bars, i = cur_pos, selected_nu_fracs = selected_nu_fracs, y = y , sigma = sigma) ) {
+      if(cur_pos > 1){
+        A <- 0
+        cur_pos <- 1
+      }
+    } else {
+      A <- A + y[cur_pos] * ( 1- selected_nu_fracs[cur_pos]) 
+    }
+    As[t] = A
+    is[t] = cur_pos
+  }
+  return(data.frame(t=seq(T),A=As,i=is))
 }
