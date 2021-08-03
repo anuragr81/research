@@ -1434,13 +1434,13 @@ sigmoid_function <-function(x,a,u) {
   return(exp(a*(x-u) )/(1+exp(a*(x-u))))
 }
 
-evolve_segmented_asset_bands_uniform_selection<-function(T,debug){
+evolve_segmented_asset_bands_uniform_selection_asset_zeroing<-function(T,debug){
   sc <- T
   #band_incomes y
   y <- c(10,100,1000,5000)
   n <- c(10,8,5,2)
   if(missing(debug)){
-  debug <- F
+    debug <- F
   }
   A <- list()
   for (i in seq(y)){
@@ -1452,8 +1452,8 @@ evolve_segmented_asset_bands_uniform_selection<-function(T,debug){
   
   for (t in seq(T)) {
     if (debug){
-    print("=====")
-    print(A)
+      print("=====")
+      print(A)
     }
     # increment with nu
     for (i in seq(length(y))){
@@ -1465,25 +1465,96 @@ evolve_segmented_asset_bands_uniform_selection<-function(T,debug){
     }
     
     if (sc){
+      for (i in seq(length(y))){
+        candidates <- seq(n[i])
+        winner_i <- sample(candidates,1)
+        loser_i <- sample(setdiff(candidates,winner_i),1)
+        
+        if(debug) { 
+          print (paste("winner[",i,"]=",winner_i,"losser[",i,"]=",loser_i)) 
+        }
+        if (i<length(y)){
+          #Winner's spot would be taken by the loser
+          A[[i]][winner_i] <- 0 
+        }
+        
+        if (i>1){
+          #losers spot would be taken by the winner from the lower band
+          A[[i]][loser_i] <- 0
+        }
+        
+      }
+    }
+    
+    
+    
+    
+  }
+  print("<<<<<<<<>>>>>>>>>>>>")
+  print(A)
+}
+
+
+evolve_segmented_asset_bands_uniform_selection<-function(T,nus,sc,debug){
+  
+  #band_incomes y
+  y <- c(10,100,1000,5000)
+  n <- c(10,8,5,2)
+  if (missing(nus)){
+    nus <- c(5,20,200,1000)
+  }
+  if(missing(debug)){
+    debug <- F
+  }
+  A <- list()
+  for (i in seq(y)){
+    A [[i]] <- array()
+    for (j in seq(n[i])){
+      A[[i]][j] <- 0
+    }
+  }
+  
+  for (t in seq(T)) {
+    if (debug){
+      print("=====")
+      print(A)
+    }
+    # increment with nu
     for (i in seq(length(y))){
       candidates <- seq(n[i])
-      winner_i <- sample(candidates,1)
-      loser_i <- sample(setdiff(candidates,winner_i),1)
-
-      if(debug) { 
-        print (paste("winner[",i,"]=",winner_i,"losser[",i,"]=",loser_i)) 
+      for (ci in candidates){
+        nu <- nus[i]
+        A [[i]][ci] <-A[[i]][ci]  + y[i] -nu
       }
-      if (i<length(y)){
-        #Winner's spot would be taken by the loser
-        A[[i]][winner_i] <- 0 
-      }
-      
-      if (i>1){
-        #losers spot would be taken by the winner from the lower band
-        A[[i]][loser_i] <- 0
-      }
-      
     }
+    
+    if (sc){
+      winners <- array()
+      losers <- array()
+      for (i in seq(length(y))){
+        candidates <- seq(n[i])
+        winner_i <- sample(candidates,1)
+        loser_i <- sample(setdiff(candidates,winner_i),1)
+        winners[i] <- winner_i
+        losers[i] <- loser_i
+      }
+      for (i in seq(length(y))){
+        if (i<length(y)){
+          #Winner's spot would be taken by the loser from the higher band
+          # so the winner's assets are now in the next band
+          temp = A[[i]][winners[i]]
+          
+          
+          A[[i]][winners[i]] = A[[i+1]][losers[i+1]]
+          A[[i+1]][losers[i+1]] = temp
+          if(debug){
+            print(paste("winners[i]=",winners[i],",losers[i+1]=",losers[i+1],"i=",i))
+            print(A)
+          }
+        }
+        
+        
+      }
     }
     
     
@@ -1528,7 +1599,7 @@ is_winner <- function(nu_bars, i, selected_nu_fracs, y, sigma) {
     return(F)
   }
   
- }
+}
 
 
 is_loser <- function(nu_bars, i, selected_nu_fracs, y , sigma) {
@@ -1536,7 +1607,7 @@ is_loser <- function(nu_bars, i, selected_nu_fracs, y , sigma) {
   bar_nu <- nu_bars[i]
   
   #increasing nu  decreases r and decreases the chance of losing #
-
+  
   r <- 1-nu/bar_nu- sigma # nu < bar_nu => bar_nu - nu > 0 => 1 - nu/bar_nu > 0 (random greater than this number is less likely )
   # nu > bar_nu => bar_nu - nu < 0 => 1 - nu/bar_nu < 0 (random greater than this number is more likely)
   if (r > rnorm(n=1,mean=0,sd=1)){

@@ -1,24 +1,44 @@
-import re
+import re, sys
 import pandas as pd
+from functools import reduce
 
 def ach():
-    return ("aa","ai","au","a","ii","i","uu","u","lRi","Ri","e","o")
+    return ("aa","ii","uu","Rii") + pratyaahaara('a','ch')
+
+def pratyaahaara(start,end):
+    plist= ({'letters':("a","i","u",),'marker':'Nn'},{'letters':('Ri','lRi'),'marker':'k'},
+        {'letters':('e','o',),'marker':'Ng'},{'letters':('ai','au'),'marker':'ch'},{'letters':('h','y','v','r',),'marker':'Xt'},{'letters':('l',),'marker':'N'},
+        {'letters':('Nc','m','Ng','Nn','n'),'marker':'m'},{'letters':('jh','bh'),'marker':'Nc'},{'letters':('gh','Xdh','dh'),'marker':'Xsh'},
+        {'letters':('j','b','g','Xd','d',),'marker':'sh'},{'letters':('kh','ph','chh','Xth','th','ch','Xt','t',),'marker':'v'},
+        {'letters':('k','p',),'marker':'y'},{'letters':('sh','Xsh','s',),'marker':'r'},{'letters':('h',),'marker':'l'},)
+    markers = [p['marker'] for p in plist]
+    if end not in markers:
+        raise ValueError("Unkown marker: %s" % end)
+    entries = [(i,j) for i,j in enumerate(plist) if end==j['marker']]
+    if len(entries)>1:
+        raise RuntimeError("Multiple entries not supported")
+    else:
+        not_found = True
+        for i,entry in enumerate(plist):
+            if start in entry['letters']:
+                not_found = False
+                results = plist[i:(entries[0][0]+1)]
+                output = []
+                for res_entry in results:
+                    output = output+list(res_entry['letters'])
+                return tuple(output)
+                
+        if not_found:
+            raise ValueError("Unknown starting letter: %s" % start)
+        
 
 def hal():
     return ("kh","k","gh","g","Ng","Nc","Nn","chh","ch","jh","j",
             "Xth","Xt","Xdh","Xd","Xsh","Xn","th","t","dh","d","n",
             "ph","p","bh","b","m","y","r","l","v","sh",
             "s","h")
-    
-def saOmyogaantasyalopaH(x):
-    
-    if not isinstance(x,list):
-        raise ValueError("input must be a list")
-    if x:
-        if len(x)>2:
-            if x[-1] in hal() and x[-2] in hal():
-                return (True,x[0:(len(x)-1)])
-    return (False,x)
+def anunaasika():
+    return ("Ng","Nc","Nn","M","m")
 
 def san_pratyayaaH():
     return ("san","kyach","kaamyach","kyaNg","kyaXsh",
@@ -46,6 +66,38 @@ def upasargaaH():
 def strii_pratyayaaH():
     return ("Xtaap","Xdaap","chaap","Ngiip","NgiiXsh",
             "Xniin","uuNg","ti","XshyaNg","Xshpha")
+
+def sup_pratyayaaH():
+    return ('su', 'au','jas','am','auT','shas','Taa','bhyaam','bhis','Nge','bhyaam',
+        'bhyas','Ngasi','bhyaam','bhyas','Ngas','os','aam','Ngi','os','sup')
+    
+def saOmyogaantasyalopaH(x):
+    
+    if not isinstance(x,list):
+        raise ValueError("input must be a list")
+    if x:
+        if len(x)>2:
+            if x[-1] in hal() and x[-2] in hal():
+                return (True,x[0:(len(x)-1)])
+    return (False,x)
+
+def upadesheajanunaasikait_103002(aadesha):
+    
+    apply_rule = lambda x: x[0:-1] if x[-1] in anunaasika() or x[-1] in ach()  else x
+    prev_iter = aadesha
+    next_iter = apply_rule(aadesha)
+    for l in aadesha:
+        if next_iter == prev_iter:
+            return prev_iter
+        else:
+            prev_iter = next_iter
+            next_iter = apply_rule(next_iter)
+
+    return next_iter
+     
+
+
+
 
 def aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(pratyaya):
     letter = pratyaya[0]
@@ -164,7 +216,12 @@ def upadhaa(x):
         raise ValueError("Insufficient length for upadhaa")
     
 
-def chajoHkughiNnNnyatoH_703052(x,it_chars):
+
+def chajoHkughiNnNnyatoH_703052(x,suffix):
+    chakaar_to_ku = lambda y : 'k' if y=='ch' else y
+    jakaar_to_ku = lambda y : 'g' if y=='j' else y
+    if suffix.get_suffix()[0] in ('gh',) or suffix.get_suffix()[-1] in ('gh',) or suffix.get_suffix() == "Nyat":
+        return ''.join(jakaar_to_ku(chakaar_to_ku(j)) for j in x)
     
     return x
         
@@ -180,17 +237,44 @@ def ataupadhaayaaH_702116(anga,it_chars):
     else:
         return anga
 
+def is_praatipadika_by_suffix(suffix):
+    if not isinstance(suffix,Suffix):
+        raise ValueError("Must be type:Suffix")
+    suffix_str = ''.join(suffix.get_suffix())
+    if suffix_str in kRit_pratyayaaH():
+        return True
+    return False
+
+def form_pada(sup,is_sup,index_x,index_y):
+    if is_sup:
+        sup_suffix = upadesheajanunaasikait_103002(sup_pratyayaaH()[index_x*3+index_y])
+        
+        print("DONE")
+    else:
+        raise RuntimeError("non-sup not supported")
+
 if __name__ =="__main__":
     input_str= "bhaj"
     input_data = (parse_string(input_str))
     
-    #parse_string("bhaj"), 
-    it_chars= (suffix_it(get_suffix())['it_chars'])
+    relevant_suffix=get_suffix()
+    it_results = suffix_it(relevant_suffix)
+    it_chars= (it_results['it_chars'])
+    
     possible_anga_vriddhi = (ataupadhaayaaH_702116(anga=input_data,it_chars=it_chars))
     apply_vriddhi = lambda k: k['op'](k['input']) if isinstance(k,dict) and 'op' in k else k
     post_vriddhi_anga = [apply_vriddhi (x) for x in possible_anga_vriddhi ]
-    #chajoHkughiNnNnyatoH_70352
-    print(post_vriddhi_anga )
+    
+    post_ku_vriddhi_anga=chajoHkughiNnNnyatoH_703052(post_vriddhi_anga,relevant_suffix)
+    post_it_suffix = ''.join(v for i,v in enumerate(relevant_suffix.get_suffix()) if i not in it_results['it'])
+    sup = post_ku_vriddhi_anga+post_it_suffix
+    if is_praatipadika_by_suffix(relevant_suffix):
+        form_pada(sup=sup,is_sup=True,index_x=0,index_y=0)
+        
+    else:
+        print ("Not a praatipadika")
+    
+    sys.exit(0)
     #a =pd.read_csv('dhaatupaatha.csv')
     #fh=open('dhaatu_list.txt',encoding="utf-8") 
     dhaatulist=[]
