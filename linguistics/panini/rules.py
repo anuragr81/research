@@ -40,6 +40,13 @@ def hal():
 def anunaasika():
     return ("Ng","Nc","Nn","M","m")
 
+def chu():
+    return ("ch","chh","j","jh","Nc")
+
+def Xtu():
+    return ("Xt","Xth","Xd","Xdh","Nn")
+
+
 def san_pratyayaaH():
     return ("san","kyach","kaamyach","kyaNg","kyaXsh",
             "kvip","Xnich","yaNg","yak","aaya",
@@ -85,13 +92,15 @@ def upadesheajanunaasikait_103002(aadesha):
     
     apply_rule = lambda x: x[0:-1] if x[-1] in anunaasika() or x[-1] in ach()  else x
     prev_iter = aadesha
+    print("aadesha="+str(aadesha))
     next_iter = apply_rule(aadesha)
-    for l in aadesha:
-        if next_iter == prev_iter:
-            return prev_iter
-        else:
-            prev_iter = next_iter
-            next_iter = apply_rule(next_iter)
+
+    #for l in aadesha:
+    #    if next_iter == prev_iter:
+    #        return prev_iter
+    #    else:
+    #        prev_iter = next_iter
+    #        next_iter = apply_rule(next_iter)
 
     return next_iter
      
@@ -157,8 +166,10 @@ class Suffix:
 def apply_it(self,pos,suffix_str):
     return [val for index,val in enumerate(self._suffix) if index!=pos]
 
-def get_suffix():
-    return Suffix("ghaNc")
+def get_relevant_suffix(sense):
+    sense2suffix = {'bhaava':Suffix("ghaNc"), 'kartaa':Suffix('Nnvul')}
+    return sense2suffix[sense]
+    
 
 def lashakvataddhite_103008(suffix):
     """ 
@@ -171,15 +182,21 @@ def lashakvataddhite_103008(suffix):
     else:
         return None
 
-def halantyam_103003(suffix):
-    if not isinstance(suffix,Suffix):
-        raise ValueError("Invalid Suffix")    
-    antyam = suffix.get_suffix()[len(suffix.get_suffix())-1]
+def halantyam_103003(upadesha):
+    
+    antyam = upadesha[len(upadesha)-1]
     if antyam in hal():
-        return len(suffix.get_suffix())-1
+        return len(upadesha)-1
     else:
         return None
- 
+
+def chuXtuu_10307(suffix):
+    if not isinstance   (suffix,Suffix  ):
+        raise ValueError    ("suffix must be of Suffix type")
+    if suffix.get_suffix()[0] in  chu() or suffix.get_suffix()[0] in Xtu():
+        return 0
+    else:
+        return None
     
 def suffix_it(suffix):
     if not isinstance(suffix,Suffix):
@@ -190,10 +207,14 @@ def suffix_it(suffix):
     if it_pos is not None:
         it_positions.append(it_pos)
     
-    it_pos = halantyam_103003(suffix)
+    it_pos = halantyam_103003(suffix.get_suffix())
     if it_pos is not None:
         it_positions.append(it_pos)
         
+    it_pos = chuXtuu_10307(suffix)
+    if it_pos is not None:
+        it_positions.append(it_pos)
+
     return {'suffix':suffix,'it':tuple(it_positions), 'it_chars':[suffix.get_suffix()[i] for i in it_positions]}
     
    
@@ -205,7 +226,7 @@ def vriddhi(x):
     elif x == "e":
         return "ay"
     else:
-        raise ValueError("vriddhi not supported")
+        return x
         
 def upadhaa(x):    
     if not isinstance(x,list) or not all(isinstance(j,str) for j in x):
@@ -221,7 +242,8 @@ def chajoHkughiNnNnyatoH_703052(x,suffix):
     chakaar_to_ku = lambda y : 'k' if y=='ch' else y
     jakaar_to_ku = lambda y : 'g' if y=='j' else y
     if suffix.get_suffix()[0] in ('gh',) or suffix.get_suffix()[-1] in ('gh',) or suffix.get_suffix() == "Nyat":
-        return ''.join(jakaar_to_ku(chakaar_to_ku(j)) for j in x)
+        #return ''.join(jakaar_to_ku(chakaar_to_ku(j)) for j in x)
+        return [jakaar_to_ku(chakaar_to_ku(j)) for j in x]
     
     return x
         
@@ -232,10 +254,51 @@ def ataupadhaayaaH_702116(anga,it_chars):
     if 'Nc' in it_chars or 'Nn' in it_chars:
         #Ncit or Nnit
         upadhaa_pos = upadhaa(anga) 
+        print("anga="+str(anga)+"upadhaa_pos="+str(upadhaa_pos))
         return (anga[0:upadhaa_pos ]+[{'op':vriddhi, 'input' : anga[upadhaa_pos]}] + anga[upadhaa_pos+1:])
         
     else:
         return anga
+
+def NnonaH_601063(dhaatu):
+    if not isinstance   (dhaatu,list):
+        raise    ValueError ("dhaatu must be a list of characters  ")
+    if dhaatu[0] == "Nn":
+        return ['n']+dhaatu[1:]
+    else:
+        return dhaatu
+
+def sasajuXshoruH_802066(pada):
+    if not isinstance(pada,list):
+        raise ValueError("input must be a list of characters")
+    if pada[-1]=="s":
+        return pada[0:-1] + ["r"]
+
+    if ''.join(pada) == "sajuXsh":
+        raise ValueError("sajuXsh not supported yet")
+
+def kharavasaanayorvisarjaniiyaH_801015(pada):
+    # must be used in avasaana
+    if not isinstance(pada,list):
+        raise ValueError("Input must be a list of characters")
+    khar = pratyaahaara('kh','r')
+    if pada[-1]=="r" and (pada[-2] in khar or pada[-2] in ach()):
+        return pada[0:-1] + ['H']
+    return pada
+
+
+def yuvoranaakau_701001(suffix_string):
+    if not isinstance(suffix_string,list):
+        raise ValueError("suffix_string must of type list")
+        
+    if suffix_string[-2:] == ["y","u"]:
+        return suffix_string[0:-2] + ["ana"]
+    if suffix_string[-2:] == ["v","u"]:
+        return suffix_string[0:-2] + ["aka"]
+
+    return suffix_string
+
+
 
 def is_praatipadika_by_suffix(suffix):
     if not isinstance(suffix,Suffix):
@@ -248,33 +311,47 @@ def is_praatipadika_by_suffix(suffix):
 def form_pada(sup,is_sup,index_x,index_y):
     if is_sup:
         sup_suffix = upadesheajanunaasikait_103002(sup_pratyayaaH()[index_x*3+index_y])
-        
-        print("DONE")
+        return sup + [sup_suffix]
     else:
         raise RuntimeError("non-sup not supported")
 
-if __name__ =="__main__":
-    input_str= "bhaj"
+def declense(input_str,index_x,index_y,sense,is_dhaatu):
     input_data = (parse_string(input_str))
+    if is_dhaatu:
+        input_data = upadesheajanunaasikait_103002(input_data)
+        input_data = NnonaH_601063(input_data)
     
-    relevant_suffix=get_suffix()
+    relevant_suffix=get_relevant_suffix(sense)
     it_results = suffix_it(relevant_suffix)
     it_chars= (it_results['it_chars'])
-    
+    print("relevant_suffix="+str(relevant_suffix)+"it_chars="+str(it_chars))
     possible_anga_vriddhi = (ataupadhaayaaH_702116(anga=input_data,it_chars=it_chars))
     apply_vriddhi = lambda k: k['op'](k['input']) if isinstance(k,dict) and 'op' in k else k
     post_vriddhi_anga = [apply_vriddhi (x) for x in possible_anga_vriddhi ]
     
     post_ku_vriddhi_anga=chajoHkughiNnNnyatoH_703052(post_vriddhi_anga,relevant_suffix)
-    post_it_suffix = ''.join(v for i,v in enumerate(relevant_suffix.get_suffix()) if i not in it_results['it'])
+
+    post_it_suffix = [v for i,v in enumerate(relevant_suffix.get_suffix()) if i not in it_results['it']]
+    post_it_suffix = yuvoranaakau_701001(post_it_suffix)
     sup = post_ku_vriddhi_anga+post_it_suffix
+    print("post_ku_vriddhi_anga="+str(post_ku_vriddhi_anga)+" post_it_suffix="+str(post_it_suffix))
     if is_praatipadika_by_suffix(relevant_suffix):
-        form_pada(sup=sup,is_sup=True,index_x=0,index_y=0)
-        
+        pada = form_pada(sup=sup,is_sup=True,index_x=0,index_y=0)
+        final_pada=(kharavasaanayorvisarjaniiyaH_801015(sasajuXshoruH_802066(pada)))
+
+        return(final_pada)
     else:
-        print ("Not a praatipadika")
+        raise ValueError("Not a praatipadika")
     
+
+if __name__ =="__main__":
+    #input_str= "bhaj"
+
+    #assert(''.join(declense("bhaja",0,0,sense="bhaava",is_dhaatu=True))=="bhaagaH")
+    print(''.join(declense("NniiNc",0,0,sense="kartaa",is_dhaatu=True)))
+
     sys.exit(0)
+
     #a =pd.read_csv('dhaatupaatha.csv')
     #fh=open('dhaatu_list.txt',encoding="utf-8") 
     dhaatulist=[]
