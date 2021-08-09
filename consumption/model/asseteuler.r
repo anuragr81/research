@@ -1496,7 +1496,9 @@ evolve_segmented_asset_bands_uniform_selection_asset_zeroing<-function(T,debug){
 
 
 evolve_segmented_asset_bands_uniform_selection<-function(T,nus,sc,debug){
+  #alpha <- 10 ; plot(x,plogis(x)**alpha/(plogis(x)**alpha+(1-plogis(x))**alpha))
   
+  #A<-0 ; y1 <- 10; y2 <- 20; x <- seq(0,10,.1);plot(x,plogis(x)*log(A+y1-x+y2) + (1-plogis(x)) * (log(A+y1-x+y1)) ,type='l')
   #band_incomes y
   y <- c(10,100,1000,5000)
   n <- c(10,8,5,2)
