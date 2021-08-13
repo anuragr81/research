@@ -20,7 +20,7 @@ def aadirNciXtuXdavaH_103005(upadesha):
     if upadesha[0:2] in  (["Nc","i"],["Xt","u"],["Xd","u"]):
         return [0,1]
     else:
-        return None
+        return []
 
 def chuXtuu_10307(suffix):
     if not isinstance   (suffix,Suffix  ):

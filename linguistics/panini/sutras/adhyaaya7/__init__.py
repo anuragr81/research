@@ -1,5 +1,19 @@
 from ..common_definitions import vriddhi,upadhaa, ach
 
+
+def yuvoranaakau_701001(suffix_string):
+    if not isinstance(suffix_string,list):
+        raise ValueError("suffix_string must of type list")
+        
+    if suffix_string[-2:] == ["y","u"]:
+        return suffix_string[0:-2] + ["a","n","a"]
+    if suffix_string[-2:] == ["v","u"]:
+        return suffix_string[0:-2] + ["a","k","a"]
+
+    return suffix_string
+
+
+
 def aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(pratyaya):
     letter = pratyaya[0]
     if letter== "ph":

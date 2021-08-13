@@ -44,6 +44,7 @@
 \use_package undertilde 1
 \cite_engine basic
 \cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -98,32 +99,364 @@ The function to optimise
 \end_layout
 
 \begin_layout Standard
-First order conditions imply:
+With 
+\begin_inset Formula $M_{2}=A+y_{1}+y_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $M_{1}=A+y_{1}+y_{1}$
+\end_inset
+
+,
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $W'(\nu)=W(\nu)(\alpha\frac{\Gamma_{2}(A+y_{1}-\nu+y_{2})^{\alpha-1}-\Gamma_{1}(A+y_{1}-\nu+y_{1})^{\alpha-1}}{\Gamma_{2}(A+y_{1}-\nu+y_{2})^{\alpha}-\Gamma_{1}(A+y_{1}-\nu+y_{1})^{\alpha}})+\frac{\alpha\Gamma_{1}(A+y_{1}-\nu+y_{1})^{\alpha-1}}{\Gamma_{2}(A+y_{1}-\nu+y_{2})^{\alpha}-\Gamma_{1}(A+y_{1}-\nu+y_{1})^{\alpha}}$
+\begin_inset Formula $f(\nu)=W(\nu)(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})+\Gamma_{1}(M_{1}-\nu)^{\alpha}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\frac{(A+y_{1}-\nu+y_{2})}{(A+y_{1}-\nu+y_{1})}=K$
+\begin_inset Formula $f'(\nu)=(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})W'(\nu)+W(\nu)(\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1})-\alpha(M_{1}-\nu)^{\alpha-1}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $W'(\nu)=W(\nu)(\frac{\alpha(\Gamma_{2}K^{\alpha-1}-\Gamma_{1})}{(A+y_{1}-\nu+y_{1})^{\alpha}(\Gamma_{2}K^{\alpha}-\Gamma_{1})})+\frac{\alpha\Gamma_{1}}{(A+y_{1}-\nu+y_{1})^{\alpha}(\Gamma_{2}K^{\alpha}-\Gamma_{1})}$
+\begin_inset Formula $f(\nu)=0\Rightarrow(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})W'(\nu)=W(\nu)(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})+\alpha(M_{1}-\nu)^{\alpha-1}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\backslash
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $W'(\nu)=W(\nu)(\alpha\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}})+\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Wolfram:
+\end_layout
+
+\begin_layout Standard
+integrate((G2*(M2 - nu)**(a-1)-G1*(M1-nu)**(a-1))/(G2*(M2-nu)**a-G1*(M1-nu)**a),
+nu) 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+To double check diff(log(Gamma1*(M1-nu)**alpha-Gamma2*(M2-nu)**alpha),nu).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\int a(s)ds=-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})+C$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The characteristic function may thus be defined only when 
+\begin_inset Formula $\Gamma_{1}(M_{1}-\nu)^{\alpha}>\Gamma_{2}(M_{2}-\nu)^{\alpha}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+With 
+\begin_inset Formula $D=log(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha})$
+\end_inset
+
+ we have 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This characteristic function is easy to verify with wolfram: diff(-log(G_1*(M_1-
+nu)^(alpha)-G_2*(M_2-nu)^(alpha)),nu)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $A(\nu)=\int_{0}^{\nu}a(s)ds=-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})-(-log(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha}))=log(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha})-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})=D-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+A(\nu) & =D-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $e^{-A(s)}=e^{log(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})-D}=e^{-D}(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+e^{A(\nu)} & =\frac{e^{D}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now 
+\begin_inset Formula $\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\int_{\nu_{0}}^{\nu}e^{-D}(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})\times\frac{\alpha\Gamma_{1}(M_{1}-s)^{\alpha-1}}{\Gamma_{2}(M_{2}-s)^{\alpha}-\Gamma_{1}(M_{1}-s)^{\alpha}}=-\alpha e^{-D}\Gamma_{1}\int_{\nu_{0}}^{\nu}(M_{1}-s)^{\alpha-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The integration
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+wolfram: integrate((M_1-s)^(alpha-1),s)
+\end_layout
+
+\end_inset
+
+ of the last term is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\int_{\nu_{0}}^{\nu}(M_{1}-s)^{\alpha-1}=-\frac{1}{\alpha}(M_{1}-s)^{\alpha}|_{\nu_{0}}^{\nu}=-\frac{1}{\alpha}((M_{1}-\nu)^{\alpha}-M_{1}^{\alpha})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds & =-\alpha e^{-D}\Gamma_{1}(-\frac{1}{\alpha}((M_{1}-\nu)^{\alpha}-M_{1}^{\alpha}))=\frac{\Gamma_{1}((M_{1}-\nu)^{\alpha}-M_{1}^{\alpha})}{e^{D}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $W(0)=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+W(\nu) & =e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\frac{\Gamma_{1}(M_{1}^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\label{eq:solution_1}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Checking answers from Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:solution_1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+wolfram: diff( (G_1*((M_1)^(alpha))-(M_1-nu)^(alpha))/(G_2*(M_2-nu)^(alpha)
+ -G_1*(M_1-nu)^(alpha)),nu)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $e^{A(\nu)}\times\frac{d(\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds)}{d\nu}=\frac{e^{D}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}\times\frac{-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{e^{D}}=b(\nu)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Also, 
+\begin_inset Formula $e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\frac{e^{D}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}\times\frac{\Gamma_{1}((M_{1}-\nu)^{\alpha}-M_{1}^{\alpha})}{e^{D}}=W(\nu)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
+\begin_inset Formula $a(\nu)W(\nu)+b(\nu)=W'(\nu)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+===
+\end_layout
+
+\begin_layout Standard
+We know that for 
 \begin_inset Formula $y'(t)=a(t)y(t)+b(t)$
+\end_inset
+
+, 
+\begin_inset Formula $y(t_{0})=y_{0}$
+\end_inset
+
+and a function 
+\begin_inset Formula $A(t)=\int_{t_{0}}^{t}a(s)ds$
+\end_inset
+
+ we have the solution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+y(t) & =y_{0}e^{A(t)}+e^{A(t)}\int_{t_{0}}^{t}e^{-A(s)}b(s)ds
+\end{alignat*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Substituting 
+\begin_inset Formula $t\rightarrow\nu$
+\end_inset
+
+ and 
+\begin_inset Formula $y\rightarrow W(\nu)$
+\end_inset
+
+.
+ We have the following solution for 
+\begin_inset Formula $W'(\nu)=a(\nu)W(\nu)+b(\nu)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+W(\nu) & =y_{0}e^{A(\nu)}+e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds\label{eq:standard_ode_solution}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Checking this, we can write 
+\begin_inset Formula $W('\nu)=y_{0}e^{A(\nu)}A'(\nu)+e^{A(\nu)}e^{-A(\nu)}b(\nu)+A'(\nu)e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\because A'(\nu)=a(\nu)$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+, 
+\begin_inset Formula $W'(\nu)=y_{0}a(\nu)e^{A(\nu)}+a(\nu)e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds+b(\nu)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now 
+\begin_inset Formula $a(\nu)W(\nu)+b(\nu)=y_{0}a(\nu)e^{A(\nu)}+a(\nu)e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds+b(\nu)$
 \end_inset
 
 

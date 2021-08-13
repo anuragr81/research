@@ -6,6 +6,7 @@ from sutras.common_definitions import *
 from sutras.adhyaaya1 import *
 from sutras.adhyaaya6 import *
 from sutras.adhyaaya7 import *
+from sutras.adhyaaya8 import *
 
     
 def saOmyogaantasyalopaH(x):   
@@ -29,7 +30,8 @@ def apply_it(self,pos,suffix_str):
     return [val for index,val in enumerate(self._suffix) if index!=pos]
 
 def get_relevant_suffix(sense):
-    sense2suffix = {'bhaava':Suffix("ghaNc"), 'kartaa':Suffix('Nnvul')}
+    sense2suffix = {'bhaava':Suffix("ghaNc"), 'kartaa':Suffix('Nnvul'),
+                    'bhava':Suffix('aNn')}
     return sense2suffix[sense]
     
     
@@ -56,38 +58,6 @@ def suffix_it(suffix):
 
     return {'suffix':suffix,'it':tuple(it_positions), 'it_chars':[suffix.get_suffix()[i] for i in it_positions]}
     
-
-def sasajuXshoruH_802066(pada):
-    if not isinstance(pada,list):
-        raise ValueError("input must be a list of characters")
-    if pada[-1]=="s":
-        return pada[0:-1] + ["r"]
-
-    if ''.join(pada) == "sajuXsh":
-        raise ValueError("sajuXsh not supported yet")
-
-def kharavasaanayorvisarjaniiyaH_801015(pada):
-    # must be used in avasaana
-    if not isinstance(pada,list):
-        raise ValueError("Input must be a list of characters")
-    khar = pratyaahaara('kh','r')
-    if pada[-1]=="r" and (pada[-2] in khar or pada[-2] in ach()):
-        return pada[0:-1] + ['H']
-    return pada
-
-
-def yuvoranaakau_701001(suffix_string):
-    if not isinstance(suffix_string,list):
-        raise ValueError("suffix_string must of type list")
-        
-    if suffix_string[-2:] == ["y","u"]:
-        return suffix_string[0:-2] + ["a","n","a"]
-    if suffix_string[-2:] == ["v","u"]:
-        return suffix_string[0:-2] + ["a","k","a"]
-
-    return suffix_string
-
-
 
 def is_praatipadika_by_suffix(suffix):
     if not isinstance(suffix,Suffix):
@@ -124,7 +94,7 @@ def declense(input_str,index_x,index_y,sense,is_dhaatu):
         it_pos_list = aadirNciXtuXdavaH_103005(input_data)
         input_data = [x for i,x in enumerate(input_data) if i not in it_pos_list]
     
-    
+    #TODO: vriddha saMjNcaa
     relevant_suffix=get_relevant_suffix(sense)
     it_results = suffix_it(relevant_suffix)
     it_chars= (it_results['it_chars'])
@@ -142,11 +112,11 @@ def declense(input_str,index_x,index_y,sense,is_dhaatu):
 
     post_ku_vriddhi_anga3, post_it_suffix3 = use_saMhitaa(post_ku_vriddhi_anga2,post_it_suffix)
     sup = uraNnraparaH_101050(post_ku_vriddhi_anga3,post_it_suffix3)
-    #sup = post_ku_vriddhi_anga3+post_it_suffix3
+    
     
     print("post_ku_vriddhi_anga3="+str(post_ku_vriddhi_anga3)+" post_it_suffix3="+str(post_it_suffix3))
     if is_praatipadika_by_suffix(relevant_suffix):
-        pada = form_pada(sup=sup,is_sup=True,index_x=0,index_y=0)
+        pada = form_pada(sup=sup,is_sup=True,index_x=index_x,index_y=index_y)
         final_pada=(kharavasaanayorvisarjaniiyaH_801015(sasajuXshoruH_802066(pada)))
 
         return(final_pada)
@@ -156,11 +126,14 @@ def declense(input_str,index_x,index_y,sense,is_dhaatu):
 
 if __name__ =="__main__":
     #input_str= "bhaj"
+    if False:
+        assert(''.join(declense("bhaja",0,0,sense="bhaava",is_dhaatu=True))=="bhaagaH")
+        assert(''.join(declense("NniiNc",0,0,sense="kartaa",is_dhaatu=True))=="naayakaH")
+        #print(''.join(declense("chiNc",0,0,sense="kartaa",is_dhaatu=True))) # chiNc -> chaayaka? (XshXtuNc se dhaatvaadeH XshaH saH)
+        assert(''.join(declense("XdukRiNc",0,0,sense="kartaa",is_dhaatu=True))=="kaarakaH") 
 
-    #assert(''.join(declense("bhaja",0,0,sense="bhaava",is_dhaatu=True))=="bhaagaH")
-    #assert(''.join(declense("NniiNc",0,0,sense="kartaa",is_dhaatu=True))=="naayakaH")
-    #print(''.join(declense("chiNc",0,0,sense="kartaa",is_dhaatu=True))) # chiNc -> chaayaka? (XshXtuNc se dhaatvaadeH XshaH saH)
-    print(''.join(declense("XdukRiNc",0,0,sense="kartaa",is_dhaatu=True))) # chiNc -> chaayaka? (XshXtuNc se dhaatvaadeH XshaH saH)
+
+    print(''.join(declense("shaalaa",6,0,sense="bhava",is_dhaatu=False))) # 4.2.91 - sheXshe (explain)
     sys.exit(0)
 
     #a =pd.read_csv('dhaatupaatha.csv')

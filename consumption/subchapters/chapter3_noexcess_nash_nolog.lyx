@@ -2017,9 +2017,38 @@ W(\prescript{1}{}\nu_{1})\ u_{2}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{2})\\
 The first term above includes the consumer's expected accumulation if she
  reaches the band 2 while the second term considers the accumulation if
  she remains in the band 1.
- To allow the assets in the poor income band to have higher utility for
- the consumer than in the richer band, we use the following form of the
- utility so that an asset value 
+ The first-order conditions for above optimisation are as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+W'(\prescript{1}{}\nu_{1})=\\
+-\frac{\{u_{2}'(A+y_{1}-\prescript{1}{}\nu_{1}+y_{2})-u_{1}'(A+y_{1}-\prescript{1}{}\nu_{1}+y_{1})\}}{\{u_{2}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{2})-u_{1}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{1})\}}W(\prescript{1}{}\nu_{1})+\\
+\frac{-u_{1}'(A+y_{1}-\prescript{1}{}\nu_{1}+y_{1})}{\{u_{2}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{2})-u_{1}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{1})\}}_{1}=0\\
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With 
+\begin_inset Formula $\prescript{1}{}\nu_{1}$
+\end_inset
+
+ as the only unknown and with 
+\begin_inset Formula $W_{1}(0)=0$
+\end_inset
+
+ , above is an initial value linear differential equation following solution:
+\end_layout
+
+\begin_layout Standard
+To allow the assets in the poor income band to have higher utility for the
+ consumer than in the richer band, we use the following form of the utility
+ so that an asset value 
 \begin_inset Formula $\prescript{t}{}A$
 \end_inset
 
@@ -2041,16 +2070,12 @@ The first term above includes the consumer's expected accumulation if she
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-u_{k}(A) & =log(\Gamma_{k}A)\label{eq:utility_function}
+u_{k}(A) & =\Gamma_{k}A^{\alpha},0<\alpha<1\label{eq:utility_function}
 \end{alignat}
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Probably easier to do a plain polynomial rather than the logarithm.
 \end_layout
 
 \begin_layout Standard
@@ -2094,8 +2119,8 @@ noprefix "false"
 \color none
 \begin_inset Formula 
 \begin{multline*}
-W(\prescript{1}{}\nu_{1})\ log(\Gamma_{2}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{2}))+\\
-(1-W(\prescript{1}{}\nu_{1}))log(\Gamma_{1}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{1})
+W(\prescript{1}{}\nu_{1})\ \Gamma_{2}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{2})^{\alpha}+\\
+(1-W(\prescript{1}{}\nu_{1}))\Gamma_{1}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{1})^{\alpha}
 \end{multline*}
 
 \end_inset
@@ -2104,16 +2129,14 @@ W(\prescript{1}{}\nu_{1})\ log(\Gamma_{2}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{2}))
 \end_layout
 
 \begin_layout Standard
-The first-order conditions are as follows
+The solution for above is
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{multline*}
-W'(\prescript{1}{}\nu_{1})log(\frac{\Gamma_{2}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{2})}{\Gamma_{1}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{1})})+\\
-W(\prescript{1}{}\nu_{1})(\frac{1}{log(\Gamma_{2}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{2}))}-\frac{1}{log(\Gamma_{1}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{1}))})+\\
-\frac{1}{log(\Gamma_{1})+log(A+y_{1}-\prescript{1}{}\nu_{1}+y_{1})}=0\\
-\end{multline*}
+\begin{alignat}{1}
+W(\nu) & =\frac{\Gamma_{1}(M_{1}^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\label{eq:solution_1}
+\end{alignat}
 
 \end_inset
 
@@ -2121,16 +2144,24 @@ W(\prescript{1}{}\nu_{1})(\frac{1}{log(\Gamma_{2}(A+y_{1}-\prescript{1}{}\nu_{1}
 \end_layout
 
 \begin_layout Standard
-With 
-\begin_inset Formula $\prescript{1}{}\nu_{1}$
+\begin_inset Formula $W(\nu)$
 \end_inset
 
- as the only unknown and with 
-\begin_inset Formula $W_{1}(0)=0$
+ is a non-decreasing function.
+ 
+\begin_inset Formula $\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}\rightarrow0$
 \end_inset
 
- as the initial conditions, above is a linear differential equation with
- the following solution:
+, the 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ is no longer possible.
+ There is no solution 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ is a bounded function.
 \end_layout
 
 \begin_layout Subsubsection

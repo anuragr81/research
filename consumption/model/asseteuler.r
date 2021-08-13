@@ -1686,3 +1686,13 @@ evolve_segmented_asset_bands_indiv<-function(T,sigma,debug,selected_nu_fracs,con
   }
   return(data.frame(t=seq(T),A=As,i=is))
 }
+
+test <- function(){
+  x <- seq(0,100,1); alpha <- .5; G1=1; G2=.7;M1=100; M2 = 200; par(mfrow=c(3,1)); 
+  plot(x,(M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l'); 
+  plot(x,(M1**alpha-(M1-x)**alpha),type='l'); 
+  plot(x,(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l');
+  print((M1**alpha-(M1-x)**alpha))
+  print((G2*(M2-x)**alpha-G1*(M1-x)**alpha))
+  print((M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha))
+}
