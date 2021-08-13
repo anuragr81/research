@@ -1687,12 +1687,31 @@ evolve_segmented_asset_bands_indiv<-function(T,sigma,debug,selected_nu_fracs,con
   return(data.frame(t=seq(T),A=As,i=is))
 }
 
+
 test <- function(){
-  x <- seq(0,100,1); alpha <- .5; G1=1; G2=.7;M1=100; M2 = 200; par(mfrow=c(3,1)); 
-  plot(x,(M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l'); 
-  plot(x,(M1**alpha-(M1-x)**alpha),type='l'); 
-  plot(x,(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l');
-  print((M1**alpha-(M1-x)**alpha))
-  print((G2*(M2-x)**alpha-G1*(M1-x)**alpha))
-  print((M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha))
+  x <- seq(0,100,1); alpha <- .5; G1=1; G2=.9;
+  A = 100; y1 = 100; y2=200;
+  M1=A + y1 + y1
+  M2=A + y1 + y2
+  if (F){
+    par(mfrow=c(3,1)); 
+    plot(x,(M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l'); 
+    plot(x,(M1**alpha-(M1-x)**alpha),type='l'); 
+    plot(x,(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l');
+    print((M1**alpha-(M1-x)**alpha))
+    print((G2*(M2-x)**alpha-G1*(M1-x)**alpha))
+    print((M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha))
+  }
+  # Checking L2
+  x<- seq(0,y1,.1);
+  delta = 10
+  
+  plot(0,0,xlim = c(0,y1),ylim=c(-5,5));
+  lines(x,(M2**alpha-(M2-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l');
+  #y1 <- y1 + delta
+  y2 <- y2 + delta
+  M1=A + y1 + y1
+  M2=A + y1 + y2
+  lines(x,(M2**alpha-(M2-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l');
+  
 }

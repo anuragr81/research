@@ -76,6 +76,14 @@
 
 \begin_body
 
+\begin_layout Section
+Solution to two-period problem
+\end_layout
+
+\begin_layout Subsection
+Winning probability
+\end_layout
+
 \begin_layout Standard
 \begin_inset Formula $u_{k}(A)=\Gamma_{k}A^{\alpha}$
 \end_inset
@@ -295,7 +303,7 @@ Therefore,
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds & =-\alpha e^{-D}\Gamma_{1}(-\frac{1}{\alpha}((M_{1}-\nu)^{\alpha}-M_{1}^{\alpha}))=\frac{\Gamma_{1}((M_{1}-\nu)^{\alpha}-M_{1}^{\alpha})}{e^{D}}
+\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds & =-\alpha e^{-D}\Gamma_{1}(-\frac{1}{\alpha}((M_{1}-\nu)^{\alpha}-M_{1}^{\alpha}))=\frac{\Gamma_{1}((M_{1}-\nu)^{\alpha}-(M_{1}-\nu_{0})^{\alpha})}{e^{D}}
 \end{alignat*}
 
 \end_inset
@@ -313,7 +321,7 @@ Therefore,
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-W(\nu) & =e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\frac{\Gamma_{1}(M_{1}^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\label{eq:solution_1}
+W(\nu) & =W(\nu_{0})e^{A(\nu)}+e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\frac{W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}+\frac{\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\label{eq:solution_1}
 \end{alignat}
 
 \end_inset
@@ -435,7 +443,7 @@ W(\nu) & =y_{0}e^{A(\nu)}+e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds\label{eq
 
 \begin_layout Standard
 Checking this, we can write 
-\begin_inset Formula $W('\nu)=y_{0}e^{A(\nu)}A'(\nu)+e^{A(\nu)}e^{-A(\nu)}b(\nu)+A'(\nu)e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds$
+\begin_inset Formula $W'(\nu)=y_{0}e^{A(\nu)}A'(\nu)+e^{A(\nu)}e^{-A(\nu)}b(\nu)+A'(\nu)e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds$
 \end_inset
 
 
@@ -468,6 +476,111 @@ Checking this, we can write
 \begin_layout Standard
 Now 
 \begin_inset Formula $a(\nu)W(\nu)+b(\nu)=y_{0}a(\nu)e^{A(\nu)}+a(\nu)e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds+b(\nu)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Losing probability
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $L'(\nu)=L(\nu)\alpha\frac{\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}+\frac{\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using Wolfram : integrate((G1*(M1 - nu)**(a-1)-G2*(M2-nu)**(a-1))/(G1*(M1-nu)**a
+-G2*(M2-nu)**a),nu), we have the characteristic function 
+\begin_inset Formula $A(\nu)=\int_{\nu_{0}}^{\nu}a(s)ds=-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})+C$
+\end_inset
+
+ which would result in the same characteristic function as in the winning
+ case (denoting 
+\begin_inset Formula $D=log(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha})$
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+A(\nu) & =D-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+e^{A(\nu)} & =\frac{e^{D}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Further,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\int_{\nu_{0}}^{\nu}e^{-D}(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})\times\frac{\alpha\Gamma_{2}(M_{2}-s)^{\alpha-1}}{\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha}}=-\alpha e^{-D}\Gamma_{2}\int_{\nu_{0}}^{\nu}(M_{2}-s)^{\alpha-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The integration
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+wolfram: integrate((M_2-s)^(alpha-1),s)
+\end_layout
+
+\end_inset
+
+ of the last term is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\int_{\nu_{0}}^{\nu}(M_{2}-s)^{\alpha-1}=-\frac{1}{\alpha}(M_{2}-s)^{\alpha}|_{\nu_{0}}^{\nu}=-\frac{1}{\alpha}((M_{2}-\nu)^{\alpha}-(M_{2}-\nu_{0})^{\alpha})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds & =\frac{\Gamma_{2}((M_{2}-\nu)^{\alpha}-(M_{2}-\nu_{0})^{\alpha})}{e^{D}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, the solution is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+L(\nu) & =\frac{L(\nu_{0})(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha})}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}+\frac{\Gamma_{2}((M_{2}-\nu)^{\alpha}-(M_{2}-\nu_{0})^{\alpha})}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
+\end{alignat*}
+
 \end_inset
 
 
