@@ -4,6 +4,7 @@ from functools import reduce
 from sutras.common_definitions import *
 
 from sutras.adhyaaya1 import *
+from sutras.adhyaaya4 import *
 from sutras.adhyaaya6 import *
 from sutras.adhyaaya7 import *
 from sutras.adhyaaya8 import *
@@ -84,6 +85,11 @@ def use_saMhitaa(anga,suffix):
 
     return anga,suffix
 
+def reduce_state(state):
+    
+    if isinstance(state[0],Anga):
+        return reduce_state([combine_anga(state[0],state[1]),state[2:]])
+    
 
 def declense(input_str,index_x,index_y,sense,is_dhaatu):
 
@@ -93,18 +99,29 @@ def declense(input_str,index_x,index_y,sense,is_dhaatu):
         input_data = NnonaH_601063(input_data)
         it_pos_list = aadirNciXtuXdavaH_103005(input_data)
         input_data = [x for i,x in enumerate(input_data) if i not in it_pos_list]
+        
+    anga = input_data
+    state =[ input_data, relevant_suffix ]    
     
-    #TODO: vriddha saMjNcaa
+    print(reduce_state(state))
+    
     relevant_suffix=get_relevant_suffix(sense)
+    #TODO: vriddha saMjNcaa
+    additional_suffix= tatrabhavaH_403053(sense=sense,suffix=relevant_suffix)
+    if additional_suffix:
+        state .append(additional_suffix)
+    
+    reduce_state(state)        
     it_results = suffix_it(relevant_suffix)
+    
     it_chars= (it_results['it_chars'])
     print("relevant_suffix="+str(relevant_suffix)+"it_chars="+str(it_chars))
-    possible_anga_vriddhi = (ataupadhaayaaH_702116(anga=input_data,it_chars=it_chars, suffix=relevant_suffix))
+    possible_anga_vriddhi = (ataupadhaayaaH_702116(anga=anga,it_chars=it_chars, suffix=relevant_suffix))
     apply_vriddhi = lambda k: k['op'](k['input']) if isinstance(k,dict) and 'op' in k else k
     post_vriddhi_anga = [apply_vriddhi (x) for x in possible_anga_vriddhi ]
 
     
-    post_ku_vriddhi_anga1=chajoHkughiNnNnyatoH_703052(post_vriddhi_anga,relevant_suffix)
+    post_ku_vriddhi_anga1 = chajoHkughiNnNnyatoH_703052(post_vriddhi_anga,relevant_suffix)
     post_ku_vriddhi_anga2 = acho_NcNniti_702115(post_ku_vriddhi_anga1,relevant_suffix.get_suffix())
     #non_it_letters = [x for x in suffix if x not in it_chars ]
     post_it_suffix = [v for i,v in enumerate(relevant_suffix.get_suffix()) if i not in it_results['it']]

@@ -18,6 +18,20 @@ def parse_string(input_str):
     return output
 
 
+class Anga:
+    def __init__(self,anga):
+        self._anga = anga
+        
+    def get_anga(self):
+        return self._anga
+        
+    def __str__(self):
+        return str(self._anga )
+
+    def __repr__(self):
+        return str(self._anga )
+
+    
 class Suffix:
     def __init__(self,suffix):
         if isinstance(suffix,str):

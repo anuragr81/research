@@ -8,6 +8,7 @@ def sasajuXshoruH_802066(pada):
 
     if ''.join(pada) == "sajuXsh":
         raise ValueError("sajuXsh not supported yet")
+    return pada
 
 
 def kharavasaanayorvisarjaniiyaH_801015(pada):
