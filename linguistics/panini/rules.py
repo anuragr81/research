@@ -87,10 +87,50 @@ def use_saMhitaa(anga,suffix):
 
 def reduce_state(state):
     
-    if isinstance(state[0],Anga):
-        return reduce_state([combine_anga(state[0],state[1]),state[2:]])
+    if isinstance(state[-1],Suffix):
+        return reduce_state(add_suffix(state[0:-1],state[-1]))
+    
+    #return reduce_state([combine_anga(state[0],state[1]),state[2:]])
     
 
+def add_suffix(state,suffix):
+    if not isinstance(suffix,Suffix):
+        raise ValueError("suffix must be of type Suffix")
+        
+    if not isinstance(state,list):
+        raise ValueError("state must be of type list")
+        
+    if len(state) == 1:
+        if not isinstance(state[0],Anga):
+            raise ValueError("first element of state must of type Anga")
+        it_results = suffix_it(suffix)
+        it_chars= (it_results['it_chars'])
+        
+        possible_anga_vriddhi = (ataupadhaayaaH_702116(anga=anga,it_chars=it_chars, suffix=suffix))
+        apply_vriddhi = lambda k: k['op'](k['input']) if isinstance(k,dict) and 'op' in k else k
+        post_vriddhi_anga = [apply_vriddhi (x) for x in possible_anga_vriddhi ]
+        #print("suffix="+str(suffix)+"it_chars="+str(it_chars))
+        post_ku_vriddhi_anga1 = chajoHkughiNnNnyatoH_703052(post_vriddhi_anga,relevant_suffix)
+        post_ku_vriddhi_anga2 = acho_NcNniti_702115(post_ku_vriddhi_anga1,relevant_suffix.get_suffix())
+        #non_it_letters = [x for x in suffix if x not in it_chars ]
+        post_it_suffix = [v for i,v in enumerate(relevant_suffix.get_suffix()) if i not in it_results['it']]
+        post_it_suffix = yuvoranaakau_701001(post_it_suffix)
+    
+        post_ku_vriddhi_anga3, post_it_suffix3 = use_saMhitaa(post_ku_vriddhi_anga2,post_it_suffix)
+        sup = uraNnraparaH_101050(post_ku_vriddhi_anga3,post_it_suffix3)
+        
+        
+        print("post_ku_vriddhi_anga3="+str(post_ku_vriddhi_anga3)+" post_it_suffix3="+str(post_it_suffix3))
+        if is_praatipadika_by_suffix(relevant_suffix):
+            pada = form_pada(sup=sup,is_sup=True,index_x=index_x,index_y=index_y)
+            final_pada=(kharavasaanayorvisarjaniiyaH_801015(sasajuXshoruH_802066(pada)))
+    
+            return(final_pada)
+        else:
+            raise ValueError("Not a praatipadika")
+        
+    raise RuntimeError("Not Implemented")
+    
 def declense(input_str,index_x,index_y,sense,is_dhaatu):
 
     input_data = (parse_string(input_str))
@@ -99,46 +139,22 @@ def declense(input_str,index_x,index_y,sense,is_dhaatu):
         input_data = NnonaH_601063(input_data)
         it_pos_list = aadirNciXtuXdavaH_103005(input_data)
         input_data = [x for i,x in enumerate(input_data) if i not in it_pos_list]
-        
-    anga = input_data
-    state =[ input_data, relevant_suffix ]    
-    
-    print(reduce_state(state))
     
     relevant_suffix=get_relevant_suffix(sense)
+    
+    anga = Anga(input_data)
+    state =[ input_data, relevant_suffix ]
+    
     #TODO: vriddha saMjNcaa
-    additional_suffix= tatrabhavaH_403053(sense=sense,suffix=relevant_suffix)
+    additional_suffix = tatrabhavaH_403053(sense=sense,suffix=relevant_suffix)
     if additional_suffix:
         state .append(additional_suffix)
     
-    reduce_state(state)        
-    it_results = suffix_it(relevant_suffix)
+    print(reduce_state(state))
     
-    it_chars= (it_results['it_chars'])
-    print("relevant_suffix="+str(relevant_suffix)+"it_chars="+str(it_chars))
-    possible_anga_vriddhi = (ataupadhaayaaH_702116(anga=anga,it_chars=it_chars, suffix=relevant_suffix))
-    apply_vriddhi = lambda k: k['op'](k['input']) if isinstance(k,dict) and 'op' in k else k
-    post_vriddhi_anga = [apply_vriddhi (x) for x in possible_anga_vriddhi ]
 
     
-    post_ku_vriddhi_anga1 = chajoHkughiNnNnyatoH_703052(post_vriddhi_anga,relevant_suffix)
-    post_ku_vriddhi_anga2 = acho_NcNniti_702115(post_ku_vriddhi_anga1,relevant_suffix.get_suffix())
-    #non_it_letters = [x for x in suffix if x not in it_chars ]
-    post_it_suffix = [v for i,v in enumerate(relevant_suffix.get_suffix()) if i not in it_results['it']]
-    post_it_suffix = yuvoranaakau_701001(post_it_suffix)
-
-    post_ku_vriddhi_anga3, post_it_suffix3 = use_saMhitaa(post_ku_vriddhi_anga2,post_it_suffix)
-    sup = uraNnraparaH_101050(post_ku_vriddhi_anga3,post_it_suffix3)
     
-    
-    print("post_ku_vriddhi_anga3="+str(post_ku_vriddhi_anga3)+" post_it_suffix3="+str(post_it_suffix3))
-    if is_praatipadika_by_suffix(relevant_suffix):
-        pada = form_pada(sup=sup,is_sup=True,index_x=index_x,index_y=index_y)
-        final_pada=(kharavasaanayorvisarjaniiyaH_801015(sasajuXshoruH_802066(pada)))
-
-        return(final_pada)
-    else:
-        raise ValueError("Not a praatipadika")
     
 
 if __name__ =="__main__":
