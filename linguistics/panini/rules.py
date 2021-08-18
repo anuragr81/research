@@ -85,12 +85,40 @@ def use_saMhitaa(anga,suffix):
 
     return anga,suffix
 
+def apply_centered_rule(state,pos):
+    """ Use all of state to reduce based on rules centered on pos """
+    print("Rule applied on pos=%d" % pos)
+    if len(state) == 1:
+        return state
+    elif len(state)== 2:
+        # combine the current and next whenever possible
+        return [state[pos]]
+    else:
+        # return the remainder apart from the reduced value form (pos,pos+1) 
+        # whenever possible
+        return state[0:pos] + [state[pos]] + state[(pos+2):]
+    
 def reduce_state(state):
     
-    if isinstance(state[-1],Suffix):
-        return reduce_state(add_suffix(state[0:-1],state[-1]))
+    if not isinstance(state,list):
+        raise ValueError("state must be a list")
+    if state:
+        if len(state) == 1:
+            return state
+        else:            
+            i = 0
+            while i < len(state):
+                next_state = apply_centered_rule(state,i)
+                if next_state == state:
+                    # move to the next position
+                    i = i + 1
+                else:
+                    i = 0
+                    state = next_state
+                    
+    return state
     
-    #return reduce_state([combine_anga(state[0],state[1]),state[2:]])
+    
     
 
 def add_suffix(state,suffix):
@@ -153,12 +181,14 @@ def declense(input_str,index_x,index_y,sense,is_dhaatu):
     print(reduce_state(state))
     
 
-    
+
     
     
 
 if __name__ =="__main__":
     #input_str= "bhaj"
+    print(reduce_state([1,2,3]))
+    sys.exit(0)
     if False:
         assert(''.join(declense("bhaja",0,0,sense="bhaava",is_dhaatu=True))=="bhaagaH")
         assert(''.join(declense("NniiNc",0,0,sense="kartaa",is_dhaatu=True))=="naayakaH")
