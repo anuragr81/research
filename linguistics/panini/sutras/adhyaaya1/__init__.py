@@ -37,7 +37,7 @@ def lashakvataddhite_103008(suffix):
     """
     if not isinstance(suffix,Suffix):
         raise ValueError("Invalid Suffix")
-    if not suffix.is_taddhit and suffix.get_suffix()[0] in ("l","sh","k","kh","g","gh","Nc"):
+    if not suffix.is_taddhita and suffix.get_suffix()[0] in ("l","sh","k","kh","g","gh","Nc"):
         return 0
     else:
         return None

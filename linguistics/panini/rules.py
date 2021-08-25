@@ -4,6 +4,7 @@ from functools import reduce
 from sutras.common_definitions import *
 
 from sutras.adhyaaya1 import *
+from sutras.adhyaaya2 import *
 from sutras.adhyaaya4 import *
 from sutras.adhyaaya6 import *
 from sutras.adhyaaya7 import *
@@ -118,85 +119,94 @@ def reduce_state_for_each(state):
     return state
     
 
-def insert_states_from_rules(state,pos):
-    #look for state behind and ahead of pos
-    # to apply what expansions are applicable
-    
-def expand_state(state):
-    
+def add_agamas(state):
     if not isinstance(state,list):
         raise ValueError("state must be a list")
-    i = 0
-    while i < len(state):
-        next_state = insert_states_from_rules(state,i)
-        if next_state == state:
-            # move to the next position
-            i = i + 1
-        else:
-            i = 0
-            state = next_state
-                
+    # all agamas must be listed here
+    to_add=[]
+    for i, st in enumerate(state):
+        if isinstance(st,Group):
+            if vRiddhaachchhaH_402113(st):
+                # chha is added to the end
+                to_add.append((len(state), Suffix("chha")))
+            
+    # not add agamas to all states       
+    while to_add:
+       entry = to_add[0]
+       state.insert(entry [0],entry [1])
+       # re-adjust to_add to reflect added state
+       to_add = [(pos+1,dat) for pos,dat in to_add[1:]]
     return state
     
     
+   
 
-def add_suffix(state,suffix):
+def add_suffix(anga,suffix):
     if not isinstance(suffix,Suffix):
         raise ValueError("suffix must be of type Suffix")
         
-    if not isinstance(state,list):
-        raise ValueError("state must be of type list")
-        
-    if len(state) == 1:
-        if not isinstance(state[0],Anga):
-            raise ValueError("first element of state must of type Anga")
-        it_results = suffix_it(suffix)
-        it_chars= (it_results['it_chars'])
-        
-        possible_anga_vriddhi = (ataupadhaayaaH_702116(anga=anga,it_chars=it_chars, suffix=suffix))
-        apply_vriddhi = lambda k: k['op'](k['input']) if isinstance(k,dict) and 'op' in k else k
-        post_vriddhi_anga = [apply_vriddhi (x) for x in possible_anga_vriddhi ]
-        #print("suffix="+str(suffix)+"it_chars="+str(it_chars))
-        post_ku_vriddhi_anga1 = chajoHkughiNnNnyatoH_703052(post_vriddhi_anga,relevant_suffix)
-        post_ku_vriddhi_anga2 = acho_NcNniti_702115(post_ku_vriddhi_anga1,relevant_suffix.get_suffix())
-        #non_it_letters = [x for x in suffix if x not in it_chars ]
-        post_it_suffix = [v for i,v in enumerate(relevant_suffix.get_suffix()) if i not in it_results['it']]
-        post_it_suffix = yuvoranaakau_701001(post_it_suffix)
+   
+    if not isinstance(anga,Anga):
+        raise ValueError("first element of state must of type Anga")
+    it_results = suffix_it(suffix)
+    it_chars= (it_results['it_chars'])
     
-        post_ku_vriddhi_anga3, post_it_suffix3 = use_saMhitaa(post_ku_vriddhi_anga2,post_it_suffix)
-        sup = uraNnraparaH_101050(post_ku_vriddhi_anga3,post_it_suffix3)
-        
-        
-        print("post_ku_vriddhi_anga3="+str(post_ku_vriddhi_anga3)+" post_it_suffix3="+str(post_it_suffix3))
-        if is_praatipadika_by_suffix(relevant_suffix):
-            pada = form_pada(sup=sup,is_sup=True,index_x=index_x,index_y=index_y)
-            final_pada= kharavasaanayorvisarjaniiyaH_801015(sasajuXshoruH_802066(pada))
-            return final_pada
-        else:
-            raise ValueError("Not a praatipadika")
-        
-    raise RuntimeError("Not Implemented")
+    possible_anga_vriddhi = (ataupadhaayaaH_702116(anga=anga.get_anga(),it_chars=it_chars, suffix=suffix))
+    apply_vriddhi = lambda k: k['op'](k['input']) if isinstance(k,dict) and 'op' in k else k
+    post_vriddhi_anga = [apply_vriddhi (x) for x in possible_anga_vriddhi ]
+    #print("suffix="+str(suffix)+"it_chars="+str(it_chars))
+    post_ku_vriddhi_anga1 = chajoHkughiNnNnyatoH_703052(post_vriddhi_anga,suffix)
+    post_ku_vriddhi_anga2 = acho_NcNniti_702115(post_ku_vriddhi_anga1,suffix.get_suffix())
+    #non_it_letters = [x for x in suffix if x not in it_chars ]
+    post_it_suffix = [v for i,v in enumerate(suffix.get_suffix()) if i not in it_results['it']]
+    post_it_suffix = yuvoranaakau_701001(post_it_suffix)
+    print ("Using substitution")
+    #TODO: ask why chuXtuu does not apply for chh -> 701002
+    x = aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(post_it_suffix)
+    print(x)
     
-def declense(input_data,index_x,index_y,sense,is_dhaatu):
+
+    post_ku_vriddhi_anga3, post_it_suffix3 = use_saMhitaa(post_ku_vriddhi_anga2,post_it_suffix)
+    sup = uraNnraparaH_101050(post_ku_vriddhi_anga3,post_it_suffix3)        
+    print("post_ku_vriddhi_anga3="+str(post_ku_vriddhi_anga3)+" post_it_suffix3="+str(post_it_suffix3) + " sup=" + str(sup))
+    return sup
+
+
+
+def declense(state,index_x,index_y,sense,is_dhaatu):
     
     relevant_suffix=get_relevant_suffix(sense)
     
-    if len(state) == 1:
+    if isinstance(state,Anga):
+        input_data = state.get_anga()
         if is_dhaatu:
             input_data = upadesheajanunaasikait_103002(input_data)
             input_data = NnonaH_601063(input_data)
             it_pos_list = aadirNciXtuXdavaH_103005(input_data)
             input_data = [x for i,x in enumerate(input_data) if i not in it_pos_list]   
    
-        anga = Anga(input_data)
-        state =[ anga , relevant_suffix ]
-       
         
+        sup = add_suffix(Anga(input_data),relevant_suffix)
+        
+        if is_praatipadika_by_suffix(relevant_suffix):
+            pada = form_pada(sup=sup,is_sup=True,index_x=index_x,index_y=index_y)
+            final_pada= kharavasaanayorvisarjaniiyaH_801015(sasajuXshoruH_802066(pada))
+            return final_pada
+        else:
+            raise ValueError("Not a praatipadika")    
+             
     else:
-        print(expand_state(state))
+        state_after_agama = add_agamas(state)
+        if isinstance(state_after_agama[-1],Suffix):
+            if state_after_agama[-1].is_taddhita:
+                # treat as praatipaadika
+                state_after_agama= supodhaatupraatipadikayoH_204071(state_after_agama)
+        if len(state_after_agama) == 2:
+            #TODO:  force Anga for now - but find out why did 1.4.13 - yasmaatpratyayavidhi... 
+            # not apply much i.e. in shaala Ngi itself (before we do the lopa)
+            output = add_suffix(Anga(state_after_agama[0].data()),state_after_agama[1])
+            print(output)
     
-
-
     
     
 
@@ -207,11 +217,11 @@ if __name__ =="__main__":
         assert(''.join(declense(parse_string("bhaja"),0,0,sense="bhaava",is_dhaatu=True))=="bhaagaH")
         assert(''.join(declense(parse_string("NniiNc"),0,0,sense="kartaa",is_dhaatu=True))=="naayakaH")
         #print(''.join(declense(parse_string("chiNc"),0,0,sense="kartaa",is_dhaatu=True))) # chiNc -> chaayaka? (XshXtuNc se dhaatvaadeH XshaH saH)
-        assert(''.join(declense(parse_string("XdukRiNc"),0,0,sense="kartaa",is_dhaatu=True))=="kaarakaH") 
+        assert(''.join(declense(Anga(parse_string("XdukRiNc")),0,0,sense="kartaa",is_dhaatu=True))=="kaarakaH") 
 
-
+    
     #print(''.join(declense("shaalaa",6,0,sense="bhava",is_dhaatu=False))) # 4.2.91 - sheXshe (explain)
-    print(declense([parse_string("shaalaa")]+[[sup_pratyayaaH()[6*3+0]]],0,0,sense="bhava",is_dhaatu=False))
+    print(declense([Group(parse_string("shaalaa")),Suffix(sup_pratyayaaH()[6*3+0])],0,0,sense="bhava",is_dhaatu=False))
     sys.exit(0)
 
     #a =pd.read_csv('dhaatupaatha.csv')

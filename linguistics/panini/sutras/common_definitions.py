@@ -17,13 +17,25 @@ def parse_string(input_str):
             matches =False
     return output
 
-
-class Anga:
+class Group:
+    def __init__(self,data):
+        self._data = data
+        
+    def has_vRiddhi(self):
+        achs = [ j for j in self._data if j in ach() ]
+        if achs and achs[0] in ('aa','ai','au',):
+            return True
+        return False
+    
+    def data(self):
+        return self._data
+    
+class Anga(Group):
     def __init__(self,anga):
-        self._anga = anga
+        self._anga = Group(anga)
         
     def get_anga(self):
-        return self._anga
+        return self._anga.data()
         
     def __str__(self):
         return str(self._anga )
@@ -40,8 +52,8 @@ class Suffix:
             self._suffix= suffix
         else:
             raise ValueError("suffix must be a string")
-        taddhits = []
-        self.is_taddhit = suffix in taddhits
+        taddhitas = ['chha']
+        self.is_taddhita = suffix in taddhitas
         
     def get_suffix(self):
         return self._suffix
