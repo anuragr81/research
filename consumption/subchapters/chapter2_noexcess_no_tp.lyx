@@ -576,31 +576,131 @@ L=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})-\lambda(log(x)-log(r)-log(\
 \end_inset
 
 .
- We usually estimate sensitities with the estimation so it's better to find
- the expression for 
-\begin_inset Formula $\frac{\partial\nu}{\partial x}$
+ The differences 
+\begin_inset Formula $d\nu$
 \end_inset
 
- and estimate that with the data - arguing how much do consumers improve
- quality as their 
-\begin_inset Formula $x$
+ and 
+\begin_inset Formula $dx$
 \end_inset
 
- increases or 
-\begin_inset Formula $\frac{\partial r}{\partial x}$
+ could also be compared by solving for 
+\begin_inset Formula $\frac{\partial\nu^{*}}{\partial x}$
 \end_inset
 
- to see how the references change with respect to 
+.
+ But either way, a linear dependence of 
+\begin_inset Formula $\nu$
+\end_inset
+
+ (
+\begin_inset Formula $d\nu)$
+\end_inset
+
+ on 
+\begin_inset Formula $x(dx)$
+\end_inset
+
+ is implied (introduction of 
+\begin_inset Formula $r$
+\end_inset
+
+ would bring endogeneity since 
+\begin_inset Formula $\nu$
+\end_inset
+
+ itself is calculated with 
+\begin_inset Formula $r$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+If we interpret the average-consumption-level itself as a function of 
+\begin_inset Formula $r$
+\end_inset
+
+ as as 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ then the budget is slightly different 
+\begin_inset Formula $x=\nu\pi(r)$
+\end_inset
+
+.
+ The key idea is that 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ is observed in data as the aggregate consumption implied in given reference
+ - it's the property of the region and the asset ownership.
+ A richer area and a richer asset-band that is represented by a higher 
+\begin_inset Formula $r$
+\end_inset
+
+ would correspond to a certain value 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ above which the excess 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is calculated.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+L=u(\nu,r)-\lambda(log(x)-log(\nu)-log(\pi(r)))\\
+L=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})-\lambda(log(x)-log(\pi(r))-log(\nu))
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ is an increasing and differentiable function that estimates the average
+ consumption for reference 
 \begin_inset Formula $r$
 \end_inset
 
 .
- It is only after we have these expressions that we can think about whether
- 
-\begin_inset Formula $\frac{\partial x}{\partial r},\frac{\partial x}{\partial\nu}$
+ Now, 
+\begin_inset Formula $\frac{\partial L}{\partial\nu}=0\Rightarrow\frac{\alpha}{1-\frac{\bar{\nu}}{\nu}}=-\lambda$
 \end_inset
 
- is more meaingful for the data.
+ and 
+\begin_inset Formula $\frac{\partial L}{\partial r}=0\Rightarrow\frac{1-\alpha}{r-\bar{r}}=-\frac{\lambda\pi'(r)}{\pi(r)}\Rightarrow\frac{\pi(r)}{\pi'(r)}\frac{1-\alpha}{r-\bar{r}}=-\lambda$
+\end_inset
+
+.
+ We have 
+\begin_inset Formula $\pi(r)\nu=x$
+\end_inset
+
+ or 
+\begin_inset Formula $\frac{1}{\nu}=\frac{\pi(r)}{x}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\frac{\pi(r)}{\pi'(r)}\frac{1-\alpha}{r-\bar{r}}=\frac{\alpha}{1-\frac{\bar{\nu}}{\nu}}\Rightarrow\frac{\pi(r)}{\pi'(r)}\frac{1-\alpha}{r-\bar{r}}=\frac{\alpha}{1-\frac{\pi(r)\bar{\nu}}{x}}$
+\end_inset
+
+ or 
+\begin_inset Formula $\frac{1-\alpha}{\pi'(r)(r-\bar{r})}=\frac{\alpha}{\pi(r)(1-\frac{\pi(r)\bar{\nu}}{x})}\Rightarrow\frac{\alpha}{(1-\alpha)}(r-\bar{r})\pi'(r)=\pi(r)-\frac{\pi(r)^{2}\bar{\nu}}{x}$
+\end_inset
+
+.
+ This is a differential equation with the following solution (see APPENDIX).
 \end_layout
 
 \begin_layout Standard
@@ -702,6 +802,18 @@ ferences changes our conclusions from the regression.
 
  is implied - by using it we're only seeing whether richer people have less
  quality (and vice versa) or not.
+ 
+\begin_inset Formula $\nu$
+\end_inset
+
+ represents the quality above the consumption in the reference and 
+\begin_inset Formula $r$
+\end_inset
+
+ represents to total asset worth of the geographical reference.
+ More asset worthy people need not spend above their average - whereas those
+ with less assets might.
+ We're trying to test whether that's true or not.
  
 \end_layout
 
@@ -1390,6 +1502,316 @@ Kingdom and Knight 2007
 \end_layout
 
 \begin_layout Standard
+.
+\end_layout
+
+\begin_layout Section*
+APPENDIX
+\end_layout
+
+\begin_layout Standard
+Given 
+\begin_inset Formula $u(r,\nu)=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+L=u(\nu,r)-\lambda(log(x)-log(r)-log(\nu))\\
+L=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})-\lambda(log(x)-log(r)-log(\nu))
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then, 
+\begin_inset Formula $\frac{\partial L}{\partial\nu}=0\Rightarrow\frac{\alpha\nu}{\nu-\bar{\nu}}=-\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\partial u}{\partial r}=0\Rightarrow$
+\end_inset
+
+ 
+\begin_inset Formula $\frac{r(1-\alpha)}{r-\bar{r}}=-\lambda$
+\end_inset
+
+.
+ This leads to 
+\begin_inset Formula $\frac{r(1-\alpha)}{r-\bar{r}}=\frac{\alpha\nu}{\nu-\bar{\nu}}\Rightarrow\frac{\nu r(1-\alpha)}{r-\bar{r}}=\frac{\alpha\nu^{2}}{\nu-\bar{\nu}}$
+\end_inset
+
+ .
+ Further, 
+\begin_inset Formula $\frac{x(1-\alpha)}{x-\nu\bar{r}}=\frac{\alpha\nu}{\nu-\bar{\nu}}\Rightarrow\alpha x\nu-\alpha\bar{r}\nu^{2}=x(1-\alpha)\nu-x(1-\alpha)\bar{\nu}$
+\end_inset
+
+ or 
+\begin_inset Formula $\alpha\bar{r}\nu^{2}+(1-2\alpha)x\nu-x(1-\alpha)\bar{\nu}=0$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\nu^{*}=x\frac{2\alpha-1}{2\alpha\bar{r}}\pm\frac{\sqrt{x^{2}(1-2\alpha)^{2}+4\bar{r}x\alpha(1-\alpha)\bar{\nu}}}{2\alpha\bar{r}}$
+\end_inset
+
+.
+ Changes in quality vs changes in 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ could be compared with 
+\begin_inset Formula $\frac{\partial\nu^{*}}{\partial x}=$
+\end_inset
+
+ ..
+ so that we regress? or plainly 
+\begin_inset Formula $\nu$
+\end_inset
+
+ vs 
+\begin_inset Formula $x$
+\end_inset
+
+ which would have fixed effects.
+\end_layout
+
+\begin_layout Standard
+Solving for 
+\begin_inset Formula $r$
+\end_inset
+
+, we should get which corresponds to 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The solution for 
+\begin_inset Formula $\alpha\bar{r}\nu^{2}+(1-2\alpha)x\nu-\bar{\nu}(1-\alpha)x=0$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection*
+Solution with 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Equation 
+\begin_inset Formula $\frac{\alpha}{(1-\alpha)}(r-\bar{r})\pi'(r)=\pi(r)-\frac{\pi(r)^{2}\bar{\nu}}{x}$
+\end_inset
+
+ is a Bernoulli Equation.
+ Rewriting it as the following, we can use the definition 
+\begin_inset Formula $g(r)=\frac{1}{\pi(r)}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+\pi'(r) & =\frac{1-\alpha}{\alpha(r-\bar{r})}\pi(r)+(-\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})})\pi(r)^{2}\label{eq:simple_form_pi_r}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The definition 
+\begin_inset Formula $g(r)=\frac{1}{\pi(r)}$
+\end_inset
+
+ leads to 
+\begin_inset Formula $g'(r)=\frac{-\pi'(r)}{\pi(r)^{2}}$
+\end_inset
+
+ and allows us to simplify the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:simple_form_pi_r"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as 
+\begin_inset Formula $\frac{\pi'(r)}{\pi(r)^{2}}=\frac{1-\alpha}{\alpha(r-\bar{r})}\frac{1}{\pi(r)}+(-\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})})$
+\end_inset
+
+ so that the following is a linear differential equation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+g'(r) & =\frac{1-\alpha}{\alpha(r-\bar{r})}g(r)+(-\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $a(r)\equiv\frac{1-\alpha}{\alpha(r-\bar{r})}$
+\end_inset
+
+ and 
+\begin_inset Formula $b(r)=-\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})}$
+\end_inset
+
+.
+ We know that for 
+\begin_inset Formula $g'(r)=a(r)g(r)+b(r)$
+\end_inset
+
+ and 
+\begin_inset Formula $g(r_{0})=g_{0}$
+\end_inset
+
+the initial value problem has the following solution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+g(r) & =g_{0}e^{A(r)}+e^{A(r)}\int_{r_{0}}^{r}e^{-A(s)}b(s)ds\label{eq:general_solution}
+\end{alignat}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $A(r)=\int_{r_{0}}^{r}a(s)ds$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $A(r)=(\frac{1-\alpha}{\alpha})log(\frac{r_{0}-\bar{r}}{r-\bar{r}})$
+\end_inset
+
+ and 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+e^{A(r)} & =(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}(r-\bar{r})^{\frac{\alpha}{1-\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\int_{r_{0}}^{r}e^{-A(s)}b(s)ds=\int_{r_{0}}^{r}\{-(\frac{r_{0}-\bar{r}}{s-\bar{r}})^{-\frac{1-\alpha}{\alpha}}\frac{(1-\alpha)\bar{\nu}}{x\alpha(s-\bar{r})}\}ds=-\frac{(1-\alpha)\bar{\nu}(r_{0}-\bar{r})^{-\frac{1-\alpha}{\alpha}}}{x\alpha}\int_{r_{0}}^{r}(s-\bar{r})^{\frac{\alpha}{1-\alpha}-1}ds$
+\end_inset
+
+.
+ Since, 
+\begin_inset Formula $\frac{\alpha}{1-\alpha}>0$
+\end_inset
+
+, integrand is a polynomial function and therefore,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\int_{r_{0}}^{r}e^{-A(s)}b(s)ds & =\frac{(1-\alpha)^{2}\bar{\nu}(r_{0}-\bar{r})^{-\frac{1-\alpha}{\alpha}}}{x\alpha^{2}}\{(r_{0}-\bar{r})^{\frac{\alpha}{1-\alpha}}-(r-\bar{r})^{\frac{\alpha}{1-\alpha}}\}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ would thus be the following polynomial function
+\begin_inset Formula 
+\begin{alignat*}{1}
+\pi(r)=\frac{\pi(r_{0})(r-\bar{r})^{-\frac{\alpha}{1-\alpha}}}{(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}+(\frac{(1-\alpha)^{2}\bar{\nu}\pi(r_{0})}{x\alpha^{2}})((r_{0}-\bar{r})^{\frac{\alpha}{1-\alpha}}-(r-\bar{r})^{\frac{\alpha}{1-\alpha}})}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For the optimal 
+\begin_inset Formula $r^{*}$
+\end_inset
+
+, 
+\begin_inset Formula $\nu^{*}=\frac{x}{\pi(r^{*})}=x$
+\end_inset
+
+ or
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\nu^{*}=\frac{x(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}+(\frac{(1-\alpha)^{2}\bar{\nu}\pi(r_{0})}{\alpha^{2}})((r_{0}-\bar{r})^{\frac{\alpha}{1-\alpha}}-(r-\bar{r})^{\frac{\alpha}{1-\alpha}})}{\pi(r_{0})(r-\bar{r})^{-\frac{\alpha}{1-\alpha}}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\nu^{*}$
+\end_inset
+
+grows linearly with 
+\begin_inset Formula $x$
+\end_inset
+
+ and non-linearly with 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ It would have terms of 
+\begin_inset Formula $r^{\alpha/(1-\alpha)}$
+\end_inset
+
+ and 
+\begin_inset Formula $r^{\alpha^{2}/(1-\alpha)^{2}}$
+\end_inset
+
 .
 \end_layout
 

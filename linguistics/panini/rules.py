@@ -158,17 +158,24 @@ def add_suffix(anga,suffix):
     post_ku_vriddhi_anga1 = chajoHkughiNnNnyatoH_703052(post_vriddhi_anga,suffix)
     post_ku_vriddhi_anga2 = acho_NcNniti_702115(post_ku_vriddhi_anga1,suffix.get_suffix())
     #non_it_letters = [x for x in suffix if x not in it_chars ]
-    post_it_suffix = [v for i,v in enumerate(suffix.get_suffix()) if i not in it_results['it']]
-    post_it_suffix = yuvoranaakau_701001(post_it_suffix)
-    print ("Using substitution")
     #TODO: ask why chuXtuu does not apply for chh -> 701002
-    x = aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(post_it_suffix)
-    print(x)
+    if ''.join(suffix.get_suffix())=="chha":
+        post_it_suffix  = suffix.get_suffix()
+    else:     
+        post_it_suffix = [v for i,v in enumerate(suffix.get_suffix()) if i not in it_results['it']]
+        post_it_suffix = yuvoranaakau_701001(post_it_suffix)
+    print ("Using substitution")
     
-
+    post_it_suffix = aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(post_it_suffix)
+    
     post_ku_vriddhi_anga3, post_it_suffix3 = use_saMhitaa(post_ku_vriddhi_anga2,post_it_suffix)
-    sup = uraNnraparaH_101050(post_ku_vriddhi_anga3,post_it_suffix3)        
-    print("post_ku_vriddhi_anga3="+str(post_ku_vriddhi_anga3)+" post_it_suffix3="+str(post_it_suffix3) + " sup=" + str(sup))
+    #use aagama aadesha again
+    if yachibham_104018(post_it_suffix3):
+        post_ku_vriddhi_anga4, post_it_suffix4 = yasyeticha_604148(post_ku_vriddhi_anga3, Suffix(post_it_suffix3))
+    else :
+        post_ku_vriddhi_anga4, post_it_suffix4 = post_ku_vriddhi_anga3, post_it_suffix3
+    sup = uraNnraparaH_101050(post_ku_vriddhi_anga4,post_it_suffix4)
+    print("post_ku_vriddhi_anga4="+str(post_ku_vriddhi_anga4)+" post_it_suffix4="+str(post_it_suffix4) + " sup=" + str(sup))
     return sup
 
 

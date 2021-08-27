@@ -17,15 +17,15 @@ def yuvoranaakau_701001(suffix_string):
 def aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(pratyaya):
     letter = pratyaya[0]
     if letter== "ph":
-        return "aayan"
+        return ["aa","y","a","n"] + pratyaya[1:]
     elif letter == "Xdh":
-        return "ey"
+        return ["e","y"]+ pratyaya[1:]
     elif letter == "kh":
-        return "iin"
+        return ["ii","n"]+ pratyaya[1:]
     elif letter == "chh":
-        return "iiy"
+        return ["ii","y"]+ pratyaya[1:]
     elif letter == "gh":
-        return "iy"
+        return ["i","y"]+ pratyaya[1:]
     
 
         

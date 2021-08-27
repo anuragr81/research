@@ -1,3 +1,4 @@
+from ..common_definitions import Suffix
 
 def NnonaH_601063(dhaatu):
     if not isinstance   (dhaatu,list):
@@ -18,3 +19,11 @@ def echoayavaayaavaH_601075(x):
         return "aav"
         
     return x
+
+
+def yasyeticha_604148(anga_str,suffix):
+    if not isinstance(suffix,Suffix):
+        raise ValueError("suffix must be of Suffix type")
+    if suffix.is_taddhita or suffix.get_suffix()[0] in ('i','ii'):
+        return anga_str[0:-1], suffix
+    return anga_str, suffix

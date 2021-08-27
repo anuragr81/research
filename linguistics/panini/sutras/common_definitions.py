@@ -52,8 +52,8 @@ class Suffix:
             self._suffix= suffix
         else:
             raise ValueError("suffix must be a string")
-        taddhitas = ['chha']
-        self.is_taddhita = suffix in taddhitas
+        taddhitas = ['chha','iiy']
+        self.is_taddhita = ''.join(self._suffix) in taddhitas
         
     def get_suffix(self):
         return self._suffix

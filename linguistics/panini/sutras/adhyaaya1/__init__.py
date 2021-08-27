@@ -8,6 +8,7 @@ def uraNnraparaH_101050(a, b):
             return a[0:-1] + ["aa","r"]+ b
     return a + b
 
+
 def halantyam_103003(upadesha):
     
     antyam = upadesha[len(upadesha)-1]
@@ -59,3 +60,11 @@ def upadesheajanunaasikait_103002(aadesha):
     #        next_iter = apply_rule(next_iter)
 
     return next_iter
+
+
+
+
+def yachibham_104018(suffix_str):
+    return suffix_str[0] in ach() or suffix_str[0] == 'y' 
+    
+    
