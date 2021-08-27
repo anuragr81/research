@@ -701,6 +701,20 @@ This
 
 .
  This is a differential equation with the following solution (see APPENDIX).
+ This view considers 
+\begin_inset Formula $\nu$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+ for every consumer which the consumer chooses based on her idiosyncratic
+ needs, but the effect of 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ is consider at a coarser (higher) level.
 \end_layout
 
 \begin_layout Standard
@@ -708,8 +722,16 @@ This
 \begin_inset Formula $r$
 \end_inset
 
-] We can take per head consumption within a certain region (justifying geographi
-cal distance).
+] Recall that we're looking for substitution between richness of reference
+ (measured as assets) and quality in consumption.
+ 
+\begin_inset Formula $r$
+\end_inset
+
+ is not the property of area or region but the richness of the individual
+ - the past choice she has made.
+ We can take per head consumption within a certain region (justifying geographic
+al distance).
  But the seasonality issues must cancel out when for everyone - therefore
  we cannot put many other regional factors - whether somebody is in a crowded
  region or not or other demographic factors - we have to ensure that the
@@ -719,12 +741,19 @@ cal distance).
 \end_inset
 
 .
- The consumption average has to be for at least 10 individuals - otherwise
- it's not useful.
- We consider neighboring district alone - which are surveyed based on population
- - but we standardise everything based on the population density and geographica
-l distance - the plan is to not look strictly at the neighboring districts
- per se but those within a certain population-adjusted geographical distance
+ This ensures enough variation around 
+\begin_inset Formula $r$
+\end_inset
+
+ to cancel out idiosyncratic factors.
+ For the estimation of 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+, we consider both asset-richness and geographical distance (standardised
+ based on the population density so as to not look strictly at the neighboring
+ districts per se but those within a certain population-adjusted geographical
+ distance e.g.
  by looking at those with greater than 
 \begin_inset Formula $L$
 \end_inset
@@ -733,74 +762,119 @@ l distance - the plan is to not look strictly at the neighboring districts
 \begin_inset Formula $G$
 \end_inset
 
- people in it.
- The first question we want to ask if the consumer care about those asset-richer
- than them or not.
- Now the next question is what this consumption level 
+ people in it).
+ The averages are taken within the boundaries of 
 \begin_inset Formula $r$
 \end_inset
 
- means for the utility and the budget.
- For utility, we want to argue that it is completely orthogonal to quality
- - this means that when the consumer lives in the rich neighborhood whatever
- quality she tries to get must be on top of the one that is implied by being
- in that reference i.e.
- quality defined within that richness level.
- For budget, the argument is more problematic - because we have taken when
- we take the average 
-\begin_inset Formula $\bar{c_{t}}$
+ - we don't run two regressions as that assumes a certain structure of 
+\begin_inset Formula $\pi(r)$
 \end_inset
 
- as the implication of how much someone should spend.
- That my quality mean how much higher I am from my neighbour's consumption
- level must also depend on how rich my neighbor is and what race or nationality
- she is etc..
- The reference group definition might need to be adjusted if asset-differences
- are also to be considered.
- One can also compare how changing the reference definition to include asset-dif
-ferences changes our conclusions from the regression.
- But assuming that asset differences don't matter - and one is influenced
- by one's neighbour's alone.
- If so, we're interested in whether I would spend higher than my neighbour's
- consumption when I am in a richer reference than when I am in a poor reference.
- Even if we don't consider asset differences, we consider the definition
- of richness in the definition of 
-\begin_inset Formula $r$
-\end_inset
-
-.
- If I live in a poor neighborhood I would have a lot more quality.
- Remember that we're looking for substitution between richness of reference
- (measured as assets) and quality in consumption.
- 
-\begin_inset Formula $r$
-\end_inset
-
- is not the property of area or region but the richness of the individual
- - the past choice she has made.
- Again seasonality issues would need to be averaged out.
- If my 
+ (what we're doing is loosely similar to kernel regression - except that
+ we're not using kernels to smoothen 
 \begin_inset Formula $c_{t}$
 \end_inset
 
- is compared to a neighbour who also has the same number of families, then
- I would have a higher 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
-.
+ but observing how sharp it is).
  
-\begin_inset Formula $\nu_{t}$
-\end_inset
+\end_layout
 
- is a rather forced metric indicating how high I am from the observed average
- (to prevent circular dependence, we may exclude the consumer from the average
- calculation for every consumer).
- Remember that 
+\begin_layout Standard
+[Measurement of 
 \begin_inset Formula $\nu$
 \end_inset
 
- is implied - by using it we're only seeing whether richer people have less
+] The consumption average which we use to estimate 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ has to be for at least a few individuals i.e.
+ every 
+\begin_inset Formula $r$
+\end_inset
+
+ observation point should be assoicated with an acceptable number of consumption
+ points.
+ ..
+ Our argument is that 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is orthogonal to 
+\begin_inset Formula $r$
+\end_inset
+
+ in the utility - so that when the consumer lives in the rich neighborhood,
+ the utility from quality is independent from that from reference or the
+ rich-area.
+ The 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ corresponds to the local average
+\begin_inset Formula $\bar{c_{t}}$
+\end_inset
+
+ which indicates how much more a consumer may spend from the regional average.
+ We intend to compare how changing the reference definition (e.g.
+ by removing asset-differences definition influences our conclusions).
+ The problem however is that we don't observe 
+\begin_inset Formula $\nu$
+\end_inset
+
+ without deciding a 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is to be included in the regression then it cannot be recorded without
+ assuming a certain 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+.
+ Assuming a certain 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ indeed assumes a lot about 
+\begin_inset Formula $\nu$
+\end_inset
+
+ .
+ The theory is telling what would happen if 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ were to be known and 
+\begin_inset Formula $\nu$
+\end_inset
+
+ were to be chosen by the consumer.
+ But in reality, the consumer does not know 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ and we don't really have data for 
+\begin_inset Formula $\nu$
+\end_inset
+
+ except through 
+\begin_inset Formula $r$
+\end_inset
+
+ (to prevent circular dependence, we may exclude the consumer from the average
+ calculation for every consumer).
+ 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is implied - we can use it to test whether the richer consumers use less
  quality (and vice versa) or not.
  
 \begin_inset Formula $\nu$
@@ -818,15 +892,7 @@ ferences changes our conclusions from the regression.
 \end_layout
 
 \begin_layout Standard
-[Measurement of 
-\begin_inset Formula $\nu$
-\end_inset
-
-] 
-\end_layout
-
-\begin_layout Standard
-Operation: If consumers are more distant from the average in dar-es-salaam
+Operation: If consumers are more distant from the average in Dar-es-salaam
  than in a rural village then we can see whether this is aligned with the
  asset differences.
  This is not very interesting but could be just the effect of higher density
@@ -1813,6 +1879,42 @@ grows linearly with
 \end_inset
 
 .
+ Since 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ is the overall average it's better to be use that into regression.
+ We interpret 
+\begin_inset Formula $\nu$
+\end_inset
+
+ using 
+\begin_inset Formula $\frac{x}{\nu^{*}}=\pi(r^{*})$
+\end_inset
+
+ - so that 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is for every consumer but 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ is the average for - we can again somehow use a kernel-like logic to consider
+ that consumers choose 
+\begin_inset Formula $\nu$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+ individually but we observe 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ at a higher level.
+ 
 \end_layout
 
 \begin_layout Standard
