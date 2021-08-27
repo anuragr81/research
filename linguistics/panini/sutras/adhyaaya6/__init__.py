@@ -25,5 +25,5 @@ def yasyeticha_604148(anga_str,suffix):
     if not isinstance(suffix,Suffix):
         raise ValueError("suffix must be of Suffix type")
     if suffix.is_taddhita or suffix.get_suffix()[0] in ('i','ii'):
-        return anga_str[0:-1], suffix
-    return anga_str, suffix
+        return anga_str[0:-1], suffix.get_suffix()
+    return anga_str, suffix.get_suffix()

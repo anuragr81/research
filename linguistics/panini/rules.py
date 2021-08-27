@@ -169,7 +169,7 @@ def add_suffix(anga,suffix):
     post_it_suffix = aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(post_it_suffix)
     
     post_ku_vriddhi_anga3, post_it_suffix3 = use_saMhitaa(post_ku_vriddhi_anga2,post_it_suffix)
-    #use aagama aadesha again
+    #TODO: use aagama aadesha again(?)
     if yachibham_104018(post_it_suffix3):
         post_ku_vriddhi_anga4, post_it_suffix4 = yasyeticha_604148(post_ku_vriddhi_anga3, Suffix(post_it_suffix3))
     else :
@@ -209,10 +209,14 @@ def declense(state,index_x,index_y,sense,is_dhaatu):
                 # treat as praatipaadika
                 state_after_agama= supodhaatupraatipadikayoH_204071(state_after_agama)
         if len(state_after_agama) == 2:
+            #TODO: Can we be sure that more than state-expansion through
+            # aagama aadesha would not be implied from within adding/appending
+            # of suffixes
+            
             #TODO:  force Anga for now - but find out why did 1.4.13 - yasmaatpratyayavidhi... 
             # not apply much i.e. in shaala Ngi itself (before we do the lopa)
             output = add_suffix(Anga(state_after_agama[0].data()),state_after_agama[1])
-            print(output)
+            return output
     
     
     
