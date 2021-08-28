@@ -1094,6 +1094,15 @@ get_split_costs <- function (categs_a , categs_b, dat , group_field) {
   return(datres)
 }
 
+get_parametric_band_df <- function(ll){
+  inc_houserent = F
+  inc_educexpense = F
+  all_costs <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
+  #asset purchases and asset-bearing costs are not considered
+  needs_and_excess_costs <- subset(all_costs, is.element(group,c("excess","needs")))
+  
+  return(needs_and_excess_costs)
+}
 get_nonparametric_df <- function(ll){
   # Don't include education or housing expenses - because they're part of needs anyways
   inc_houserent = F
