@@ -20,7 +20,7 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "tgschola" "default"
+\font_roman "tgtermes" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -37,7 +37,7 @@ theorems-sec
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 9
+\paperfontsize 8
 \spacing single
 \use_hyperref false
 \papersize default
@@ -822,17 +822,22 @@ This
 \begin_inset Formula $r$
 \end_inset
 
- - we don't run two regressions as that assumes a certain structure of 
+.
+ Our goal is not to estimate 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
- (what we're doing is loosely similar to kernel regression - except that
- we're not using kernels to smoothen 
-\begin_inset Formula $c_{t}$
+ itself.
+ If so, we would have run two regressions - first for 
+\begin_inset Formula $\pi(r)$
 \end_inset
 
- but observing how sharp it is).
- Instead, we run a regression assume a certain form or 
+ and then estimate 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ But instead we run a regression assuming a general form or 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
@@ -855,19 +860,7 @@ od.
 \begin_inset Formula $\nu$
 \end_inset
 
-] The consumption average which we use to estimate 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- has to be for at least a few individuals i.e.
- every 
-\begin_inset Formula $r$
-\end_inset
-
- observation point should be assoicated with an acceptable number of consumption
- points.
- ..
- Our argument is that 
+] The essential argument is that 
 \begin_inset Formula $\nu$
 \end_inset
 
@@ -878,7 +871,34 @@ od.
  in the utility - so that when the consumer lives in the rich neighborhood,
  the utility from quality is independent from that from reference or the
  rich-area.
- The 
+ The consumption average which we use to estimate 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ has to be for at least a few individuals i.e.
+ every 
+\begin_inset Formula $r$
+\end_inset
+
+ observation point should be associated with an acceptable number of consumption
+ points.
+ 
+\begin_inset Formula $r$
+\end_inset
+
+ is a regional concern - the alternative would be consider cluster around
+ every consumer (and exclude the consumer herself) - and obtain 
+\begin_inset Formula $\nu-\pi(r)$
+\end_inset
+
+ for the individual 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ This is easier to define as it just gives us a vector of tolerance {distance
+ , asset-value} the difference from which the consumer gets a utility from.
+ The interpretation that 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
@@ -886,37 +906,22 @@ od.
 \begin_inset Formula $\bar{c_{t}}$
 \end_inset
 
- which indicates how much more a consumer may spend from the regional average.
- We intend to compare how changing the reference definition (e.g.
- by removing asset-differences definition influences our conclusions).
- The problem however is that we don't observe 
-\begin_inset Formula $\nu$
-\end_inset
-
- without deciding a 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- i.e.
+ is still possible.
  
+\begin_inset Formula $\pi(r_{i,t})$
+\end_inset
+
+ would indicate how much more a consumer may spend from people around her.
+ The apparent problem is that while 
 \begin_inset Formula $\nu$
 \end_inset
 
- is to be included in the regression then it cannot be recorded without
- assuming a certain 
+ is included in the regression, it is not recorded without assuming a certain
+ 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
 .
- Assuming a certain 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- indeed assumes a lot about 
-\begin_inset Formula $\nu$
-\end_inset
-
- .
  The theory is telling what would happen if 
 \begin_inset Formula $\pi(r)$
 \end_inset
@@ -940,29 +945,33 @@ od.
 
  (to prevent circular dependence, we may exclude the consumer from the average
  calculation for every consumer).
- 
+ Representing the quality above the consumption in the reference 
+\begin_inset Formula $r$
+\end_inset
+
+, the metric 
 \begin_inset Formula $\nu$
 \end_inset
 
- is implied - we can use it to test whether the richer consumers use less
- quality (and vice versa) or not.
- 
-\begin_inset Formula $\nu$
-\end_inset
-
- represents the quality above the consumption in the reference and 
+ is used only to test whether the richer consumers use less quality (and
+ vice versa) or not.Here, 
 \begin_inset Formula $r$
 \end_inset
 
  represents to total asset worth of the geographical reference.
- More asset worthy people need not spend above their average - whereas those
- with less assets might.
- We're trying to test whether that's true or not.
+ In other words, we're trying to test whether more asset worthy people need
+ not spend above their average or not.
+\end_layout
+
+\begin_layout Standard
+[Robustness analysis] We could compare how changing the reference definition
+ (e.g.
+ by removing asset-differences definition) influences our conclusions.
  
 \end_layout
 
 \begin_layout Standard
-Operation: If consumers are more distant from the average in Dar-es-salaam
+[Interpretation] If consumers are more distant from the average in Dar-es-salaam
  than in a rural village then we can see whether this is aligned with the
  asset differences.
  This is not very interesting but could be just the effect of higher density
@@ -1641,6 +1650,22 @@ Kingdom and Knight 2007
 .
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 APPENDIX
 \end_layout
@@ -1747,6 +1772,42 @@ Solution with
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+L=u(\nu,r)-\lambda(log(x)-log(r)-log(\nu))\\
+L=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})-\lambda(log(x)-log(r)-log(\nu))
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\partial L}{\partial\nu}=0\Rightarrow\frac{\alpha}{1-\bar{\nu}/\nu}=-\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\partial L}{\partial r}=0\Rightarrow\frac{1-\alpha}{1-\bar{r}/r}=-\lambda$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\because1/r=\nu/x$
+\end_inset
+
+ we have the quadratic equation 
+\begin_inset Formula $\frac{\alpha}{1-\bar{\nu}/\nu}=\frac{1-\alpha}{1-\nu\bar{r}/x}\Rightarrow\frac{\nu}{\alpha}-\frac{\bar{\nu}}{\alpha}=\frac{\nu}{1-\alpha}-\frac{\nu^{2}\bar{r}}{(1-\alpha)x}$
+\end_inset
+
+ or 
+\begin_inset Formula $\frac{\bar{r}}{(1-\alpha)x}\nu^{2}+(\frac{1}{\alpha}-\frac{1}{1-\alpha})\nu-\frac{\bar{\nu}}{\alpha}=0$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
