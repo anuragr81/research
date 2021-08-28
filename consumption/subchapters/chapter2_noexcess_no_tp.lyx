@@ -216,6 +216,19 @@ ts and excess consumption - but associating reference to each of the three
 \end_layout
 
 \begin_layout Standard
+[Unsuitability of cost-function view] If we use the PIGLOG framework or
+ even the loglinear framework, the issue of prices of items comes back.
+ The analyses have often proceeded with just unit-prices (equivalent to
+ taking reference averages) but the approach suffers with measurement error
+ issues.
+ The cost-function is less interesting also because we are not relying on
+ intertemporal substitution - our focus being on cross-sectional factors
+ alone.
+ Therefore the role of price rise towards savings is less of a concern in
+ the model.
+\end_layout
+
+\begin_layout Standard
 [Difference across asset bands more important than substitution] Our goal
  is more to understand how excess consumption would vary across needs.
  By needs we merely consider the items for basic needs - this is not arbitrary
@@ -335,27 +348,7 @@ The needs are predetermined so all needs consumption e.g.
 \begin_layout Standard
 [Asset-based references] The clusters defining the reference with respect
  to which the quality is availed by the consumer are based on asset-ownership.
- In the parametric model, we look at the per capita consumption (heads determine
-d by another regression) difference from cluster-averages across the regions
- in 3 years.
- the econometric method we seek relies on per-head consumption variation
- across rich people - prices matter - but their regional effect is being
- understood.
- We may use dummies based on food-price regions and just look at how per-head
- consumption changes across food regions.
- 
-\begin_inset Formula 
-\begin{alignat*}{1}
-u & =\upsilon(c_{k,t}-r_{k,t})
-\end{alignat*}
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-The model we consider is that consumers optimise quality based on reference
+ The model we consider is that consumers optimise quality based on reference
  and they determine their expenditure based on the needs driven by the number
  of family units who live in a certain locality and the reference that depends
  on the level of asset-possession in a given area.
@@ -440,13 +433,22 @@ choose
  Arguing about substitution of quality and reference is effectively this
  argument.
  As such, that the consumer's substitute between needs and quality is more
- plausible.unhappiness literature can motivate moving and reference choice.
- 
-\begin_inset Formula $u(\nu,r)=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})$
+ plausible.unhappiness literature can motivate moving and reference choice
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+u(\nu,r) & =\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})\label{eq:basic_utility}
+\end{alignat}
+
 \end_inset
 
-.
- The assumptions that matter is that 
+
+\end_layout
+
+\begin_layout Standard
+The assumptions that matter is that 
 \begin_inset Formula $\alpha,\bar{r},\bar{\nu}$
 \end_inset
 
@@ -470,15 +472,6 @@ choose
 \end_inset
 
  or not.
- Of course, how we measure 
-\begin_inset Formula $r$
-\end_inset
-
- and 
-\begin_inset Formula $\nu$
-\end_inset
-
- is the most important element of the analysis.
  
 \begin_inset Formula $r$
 \end_inset
@@ -487,7 +480,7 @@ choose
 \begin_inset Formula $\nu$
 \end_inset
 
- must be orthogonal in the sense that a consumer either chooses 
+ are orthogonal in the sense that a consumer either chooses 
 \begin_inset Formula $r$
 \end_inset
 
@@ -495,8 +488,8 @@ choose
 \begin_inset Formula $\nu$
 \end_inset
 
- - otherwise this is a meaningless analysis.
- The budget would remain 
+.
+ The budget remains 
 \begin_inset Formula $\nu r\psi=c\Rightarrow log(\nu)+log(r)+log(\psi)=log(c)$
 \end_inset
 
@@ -514,12 +507,19 @@ choose
 \begin_inset Formula $\frac{c}{\psi}=x$
 \end_inset
 
-, the budget is 
-\begin_inset Formula $log(\nu)+log(r)=log(x)$
+, the budget can be simplified as 
+\begin_inset Formula 
+\begin{alignat*}{1}
+log(\nu)+log(r) & =log(x)
+\end{alignat*}
+
 \end_inset
 
-.
- The empirical method would find if there is substitution between reference
+
+\end_layout
+
+\begin_layout Standard
+The empirical method would find if there is substitution between reference
  - i.e.
  do consumers change their 
 \begin_inset Formula $\nu$
@@ -530,106 +530,16 @@ choose
 \end_inset
 
  is poorer.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-L=u(\nu,r)-\lambda(log(x)-log(r)-log(\nu))\\
-L=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})-\lambda(log(x)-log(r)-log(\nu))
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\frac{\partial L}{\partial\nu}=0\Rightarrow\frac{\alpha}{1-\bar{\nu}/\nu}=-\lambda$
-\end_inset
-
- and 
-\begin_inset Formula $\frac{\partial L}{\partial r}=0\Rightarrow\frac{1-\alpha}{1-\bar{r}/r}=-\lambda$
-\end_inset
-
-.
- 
-\begin_inset Formula $\because1/r=\nu/x$
-\end_inset
-
- we have the quadratic equation 
-\begin_inset Formula $\frac{\alpha}{1-\bar{\nu}/\nu}=\frac{1-\alpha}{1-\nu\bar{r}/x}\Rightarrow\frac{\nu}{\alpha}-\frac{\bar{\nu}}{\alpha}=\frac{\nu}{1-\alpha}-\frac{\nu^{2}\bar{r}}{(1-\alpha)x}$
-\end_inset
-
- or 
-\begin_inset Formula $\frac{\bar{r}}{(1-\alpha)x}\nu^{2}+(\frac{1}{\alpha}-\frac{1}{1-\alpha})\nu-\frac{\bar{\nu}}{\alpha}=0$
-\end_inset
-
-.
- The estimation equation we arrive at is not in terms of 
-\begin_inset Formula $r$
-\end_inset
-
- but purely in terms of 
-\begin_inset Formula $\nu$
-\end_inset
-
-.
- The differences 
-\begin_inset Formula $d\nu$
-\end_inset
-
- and 
-\begin_inset Formula $dx$
-\end_inset
-
- could also be compared by solving for 
-\begin_inset Formula $\frac{\partial\nu^{*}}{\partial x}$
-\end_inset
-
-.
- But either way, a linear dependence of 
-\begin_inset Formula $\nu$
-\end_inset
-
- (
-\begin_inset Formula $d\nu)$
-\end_inset
-
- on 
-\begin_inset Formula $x(dx)$
-\end_inset
-
- is implied (introduction of 
-\begin_inset Formula $r$
-\end_inset
-
- would bring endogeneity since 
-\begin_inset Formula $\nu$
-\end_inset
-
- itself is calculated with 
-\begin_inset Formula $r$
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-If we interpret the average-consumption-level itself as a function of 
-\begin_inset Formula $r$
-\end_inset
-
- as as 
+ We represent consumption-level average associated with a reference group
+ as a function 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
- then the budget is slightly different 
-\begin_inset Formula $x=\nu\pi(r)$
+ - which depends only on the reference 
+\begin_inset Formula $r$
 \end_inset
 
-.
+ .
  The key idea is that 
 \begin_inset Formula $\pi(r)$
 \end_inset
@@ -649,6 +559,7 @@ If we interpret the average-consumption-level itself as a function of
 \end_inset
 
  is calculated.
+ The first order conditions are therefore
 \end_layout
 
 \begin_layout Standard
@@ -664,7 +575,7 @@ L=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})-\lambda(log(x)-log(\pi(r))-
 \end_layout
 
 \begin_layout Standard
-This 
+Notice that 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
@@ -674,7 +585,7 @@ This
 \end_inset
 
 .
- Now, 
+ Solving the first-order conditions, 
 \begin_inset Formula $\frac{\partial L}{\partial\nu}=0\Rightarrow\frac{\alpha}{1-\frac{\bar{\nu}}{\nu}}=-\lambda$
 \end_inset
 
@@ -700,21 +611,34 @@ This
 \end_inset
 
 .
- This is a differential equation with the following solution (see APPENDIX).
- This view considers 
-\begin_inset Formula $\nu$
-\end_inset
-
- and 
-\begin_inset Formula $x$
-\end_inset
-
- for every consumer which the consumer chooses based on her idiosyncratic
- needs, but the effect of 
+ This allows us to intepret the average consumption 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
- is consider at a coarser (higher) level.
+ with respect to 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ DO THIS REGRESSION TO CHECK IF THERE IS NEGATIVE SUBSTITUTION BETWEEN 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ and 
+\begin_inset Formula $r$
+\end_inset
+
+ i.e.
+ when 
+\begin_inset Formula $r$
+\end_inset
+
+ increases 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ does not grow as fast.
+ Otherwise, we need to change the model.
 \end_layout
 
 \begin_layout Standard
@@ -733,28 +657,9 @@ This
 \end_inset
 
  (kernel) by definition.
- If we use 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- as the level 
-\begin_inset Formula $r$
-\end_inset
-
--dependent level over which the excess is calculated, then 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- cannot include personal 
-\begin_inset Formula $A$
-\end_inset
-
-.
- If we observed only 
-\begin_inset Formula $c_{t}$
-\end_inset
-
-, we would have to consider idiosyncratic effects of 
+ As such the average consumption would directly depend on the personal assets
+ owned by the consumer.
+ The idiosyncratic effects of 
 \begin_inset Formula $A$
 \end_inset
 
@@ -762,9 +667,9 @@ This
 \begin_inset Formula $c_{t}$
 \end_inset
 
- as well.
- However, since we do observe itemwise expenditur for the recall diary as
- well, we can remove the effect of 
+ would thus need to be considered.
+ However, since we observe itemwise expenditure in the recall diary, we
+ remove the effect of 
 \begin_inset Formula $A$
 \end_inset
 
@@ -773,42 +678,56 @@ This
 \end_inset
 
 .
- The function 
+ 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
- which depends on 
-\begin_inset Formula $r$
+ - which we observe therefore consists only of items that depend only on
+ 
+\begin_inset Formula $\psi$
 \end_inset
 
- - which is the property of an area - thus simplify our analysis.
- Using 
+ - the effect of which is removed with 
+\begin_inset Formula $x_{t}=\frac{c_{t}}{\psi_{t}}$
+\end_inset
+
+ and the reference itself.
+ Since 
 \begin_inset Formula $x_{t}=\frac{c_{t}}{\psi_{t}}=\nu_{t}\pi(r_{t})$
 \end_inset
 
-, the per head consumption within a certain region (justifying geographical
- distance) is 
+, the per head consumption 
 \begin_inset Formula $\pi(r_{t})$
 \end_inset
 
- whereas idiosyncratic factors are included in 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- .
- This is only a way to understand how consumers differ from the regional
- average.
- The data within ever boundary should be enough to average out the idiosyncratic
- effects or issues related to seasonality of data (less electricity needed
- in winter etc.).
- 
+ within a certain region 
 \begin_inset Formula $r_{t}$
 \end_inset
 
- considers both the asset-richness and geographical distance (standardised
- based on the population density so as to not look strictly at the neighboring
- districts per se but those within a certain population-adjusted geographical
- distance e.g.
+ (representing geographical distance and the asset possessions in a given
+ neighborhood) spo that all idiosyncratic factors are included in 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+.
+ Notice that this is simply a way to represent how consumption differs from
+ the regional averages.
+ A clear limitation implied by 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ is that number of observed households within ever boundary should be enough
+ to average out the idiosyncratic effects or issues related to seasonality
+ of data (e.g.
+ less electricity needed in winter etc.).
+ The averages 
+\begin_inset Formula $\pi(r)$
+\end_inset
+
+ is observed over the boundaries of - which consider both the asset-richness
+ and geographical distance (standardised based on the population density
+ so as to not look strictly at the neighboring districts per se but those
+ within a certain population-adjusted geographical distance e.g.
  by looking at those with greater than 
 \begin_inset Formula $L$
 \end_inset
@@ -818,41 +737,30 @@ This
 \end_inset
 
  people in it).
- The averages are taken within the boundaries of 
-\begin_inset Formula $r$
-\end_inset
-
-.
- Our goal is not to estimate 
+ In observing the 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
- itself.
- If so, we would have run two regressions - first for 
+, we exclude the consumer household's own consumption from the cluster around
+ every the household.
+ It is worth emphasising that the goal of our analysis is not to estimate
+ 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
- and then estimate 
+ itself - which may required direct estimation.
+ Instead we intend to test whether the representative consumer - whose average
+ 
 \begin_inset Formula $\nu$
 \end_inset
 
-.
- But instead we run a regression assuming a general form or 
+ we observe in the regression - substitute being close to average quality
+ in a rich neighborhood with running to exclusivity in a poor neighborhood
+ while assuming a general form of 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
 .
- Given her 
-\begin_inset Formula $r$
-\end_inset
-
-, the representative consumer - who average 
-\begin_inset Formula $\nu$
-\end_inset
-
- we observe in the regression, should substitute being close to average
- quality in a rich neighborhood with running to exclusivity in a poor neighborho
-od.
 \end_layout
 
 \begin_layout Standard
@@ -860,92 +768,48 @@ od.
 \begin_inset Formula $\nu$
 \end_inset
 
-] The essential argument is that 
+] This is an implication of the utility assumed in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:basic_utility"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ When the consumer lives in the rich neighborhood, the utility she achieves
+ from quality above reference area's average is the same.
+ Thus a rich consumer likes being the richest in her area as much as the
+ poor consumers likes being the richest in hers.
+ The way we have defined 
 \begin_inset Formula $\nu$
 \end_inset
 
- is orthogonal to 
-\begin_inset Formula $r$
-\end_inset
-
- in the utility - so that when the consumer lives in the rich neighborhood,
- the utility from quality is independent from that from reference or the
- rich-area.
- The consumption average which we use to estimate 
+, it is not interpreted without a known certain 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
- has to be for at least a few individuals i.e.
- every 
-\begin_inset Formula $r$
+ - which we estimate as the region's average.
+ The regression equations implied by the model tell nus how 
+\begin_inset Formula $\nu$
 \end_inset
 
- observation point should be associated with an acceptable number of consumption
- points.
- 
-\begin_inset Formula $r$
+ (which depends on 
+\begin_inset Formula $\pi(r)$
 \end_inset
 
- is a regional concern - the alternative would be consider cluster around
- every consumer (and exclude the consumer herself) - and obtain 
-\begin_inset Formula $\nu-\pi(r)$
+ through 
+\begin_inset Formula $\nu=\frac{x}{\pi(r)}$
 \end_inset
 
- for the individual 
+ ) depends on 
 \begin_inset Formula $r$
 \end_inset
 
 .
- This is easier to define as it just gives us a vector of tolerance {distance
- , asset-value} the difference from which the consumer gets a utility from.
- The interpretation that 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- corresponds to the local average
-\begin_inset Formula $\bar{c_{t}}$
-\end_inset
-
- is still possible.
- 
-\begin_inset Formula $\pi(r_{i,t})$
-\end_inset
-
- would indicate how much more a consumer may spend from people around her.
- The apparent problem is that while 
-\begin_inset Formula $\nu$
-\end_inset
-
- is included in the regression, it is not recorded without assuming a certain
- 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
-.
- The theory is telling what would happen if 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- were to be known and 
-\begin_inset Formula $\nu$
-\end_inset
-
- were to be chosen by the consumer.
- But in reality, the consumer does not know 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- and we don't really have data for 
-\begin_inset Formula $\nu$
-\end_inset
-
- except through 
-\begin_inset Formula $r$
-\end_inset
-
- (to prevent circular dependence, we may exclude the consumer from the average
- calculation for every consumer).
- Representing the quality above the consumption in the reference 
+ Representing the quality above the consumption in her reference 
 \begin_inset Formula $r$
 \end_inset
 
@@ -953,14 +817,9 @@ od.
 \begin_inset Formula $\nu$
 \end_inset
 
- is used only to test whether the richer consumers use less quality (and
- vice versa) or not.Here, 
-\begin_inset Formula $r$
-\end_inset
-
- represents to total asset worth of the geographical reference.
- In other words, we're trying to test whether more asset worthy people need
- not spend above their average or not.
+ is used only to test whether the consumers in richer references use less
+ quality (and vice versa) or not.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -980,29 +839,25 @@ od.
  Dar-es-salaam has a higher quality of items - so consumers have more opportunit
 y to deviate from mean consumption - but does that have an effect on the
  total assets they own.
+ These effects would be included in 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
  Do owners of high assets spend differently in rural areas than in urban
- areas.
- This just means that rich people in rural areas don't have a lot to 
+ areas i.e.
+ the analysis tells us if rich people in rural areas spend differently.
+ It could be because consumer don't have a lot to 
 \begin_inset Formula $c_{t}$
 \end_inset
 
- spend - that does not tell much about the peer-effects story.
+ spend or that they feel less peer-pressure, the demand does not tell that
+ to us.
+ This is where subjective well being can guide us.
 \end_layout
 
 \begin_layout Standard
-Notice that we are not looking at substitution between items but merely
- the total value selected by the consumer.
- The usual approach to look for budget ratios is not used here.
- We're more interested in the privately determined needs and the reference-depen
-dent quality metric.
-\end_layout
-
-\begin_layout Standard
-[Comparison with prices] Expenditures would be higher when prices are higher
- - so price-wise variation also makes sense.
- We only have food prices so no point talking about price (because we would
- have to provide non-food prices too) - but it may be worthwhile to see
- how non-food and food consumption varies with food prices
+[Subjective Well-being data]
 \end_layout
 
 \begin_layout Subsection
@@ -1076,26 +931,10 @@ We run regression and quantile regressions to see how this ratio changes.
 \end_layout
 
 \begin_layout Standard
-Recall that is actually no lottery proposition to the consumer.
- The consumer's intention is to maximise 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- regardless of the composition.
- The references
-\begin_inset Formula $r_{food},r_{houshold}$
-\end_inset
-
- are proxies of asset-band consumption levels.
- All focus is therefore on the role played by reference.
- We try to use the base-level from asset-cluster identified with bias-minimisato
-n of asset differences based on distance-based asset-differences.
- Dense rich areas would have a different quality for food vs non-food.
- Utility - by its very definition -seem to brings a parametric approach
- and that's why it becomes important to keep our definition of references
- generic and clear.The non-parametric regression is effectively understand
- how wide the reference boundaries should (this should played around with
- 
+We expect to accommodate the observation that dense rich areas would have
+ a different quality for food vs non-food.
+ The non-parametric regression is effectively to understand how wide the
+ reference boundaries should (this should played around with 
 \bar under
 using bias and error for various values of 
 \begin_inset Quotes eld
@@ -1107,7 +946,7 @@ span
 
 
 \bar default
-.
+).
  We're interested only in the differences in per head consumption across
  regions.
  For now, we do find that per-head food budget is much higher in the urban
@@ -1123,224 +962,12 @@ span
  instead of the infinite distance logic.
 \end_layout
 
-\begin_layout Standard
-[Unsuitability of cost-function view] If we use the PIGLOG framework or
- even the loglinear framework, the issue of prices of items comes back.
- The analyses have often proceeded with just unit-prices (equivalent to
- taking reference averages) but the approach suffers with measurement error
- issues.
- The cost-function is less interesting also because we are not relying on
- intertemporal substitution - our focus being on cross-sectional factors
- alone.
- Therefore the role of price rise towards savings is less of a concern in
- the model.
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
-
-\end_layout
-
-\begin_layout Standard
-[Theoretical Approach] 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-For PT to work, we'll have to relate the normative argument of status consumptio
-n for mobility (related with utility through future value) with the descriptive
- argument of status competition that is known to cause status consumption.
- Otherwise, it is difficult to justify how consumers purchase status to
- become rich by a specific amount.
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-What's common across both the arguments is that consumers participate in
- the consumption.
- The only connection we offer is through reference bands.
- The differences in wealth bands create different reference bands but they
- also create competitions.
- So the consumers can try to get ahead by pitching themselves to be the
- richer bands.
- This may not work when the difference in bands is very high - but it should
- work if the difference is low.
- The transition probability may be considered exogenous and consumers belief
- subject to a certain reference (and other demographic factors which result
- in risk-aversion).
-  However, the probability of transition is not the probability that the
- consumer observes while purchasing status goods.
- For the connection of normative and descriptive arguments, these probabilities
- must be connected with each other as well.
- Status consumption creates hopes - but can we cannot associate it with
- an observable amount of money it creates hopes for.
- One way to do that is to observe how transition probability related with
- wealth bands so that asset value of band becomes the
-\bar under
- promised amoun
-\bar default
-t..
- This is the approach to be followed in the theoretical model - as we don't
- observe the exogenous transition probability in the empirical data.
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-In this theoretical model, the upliftment through social networks is the
- only way a consumer gets any monetary benefit from status consumption.
- More status consumption would take her closer to higher band.
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
-
-\end_layout
-
 \begin_layout Section
 Empirical Analysis
 \end_layout
 
 \begin_layout Subsection
-Subjective Well Being and Status consumption
-\end_layout
-
-\begin_layout Standard
-[Relation with happiness and causality direction] The issue of causality
- is important for subjective well-being just the same - it needs to be clear
- whether the consumer's happiness influences the selection of 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $(\nu,\Delta A)$
-\end_inset
-
- or the choice of 
-\begin_inset Formula $(\nu,\Delta A)$
-\end_inset
-
- makes her happy.
- They both may amount to the same in the regression model aiming to measure
- the two in equilibrium.
- But our discussion of them would require us to have a model of how happiness
- is influenced by status consumption or vice versa.
- To clarify this notice that consumers don't select consumption that makes
- them happy - instead they select consumption that gives the maximum utility
- for a given constraint.
- Thus we are reluctant to arguing that consumers 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar under
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-optimise happiness 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-to select consumption.
- What we can do is to thus verify if the consumers are happy after making
- consumption choices.
- We could verify to see if our definition of being miserable (being low
- in the reference groups) tallies with the reported subjective well being.
- In conclusion, whether a consumer is optimistic about the future or not
- may have little to do with how she spends - but it is still possible to
- empirically test whether increasing negative distance from reference makes
- the consumer unhappy or not.
- This would help us test if the local reference are relevant for consumption.
- 
-\end_layout
-
-\begin_layout Standard
-[WHERE DOES THAT TAKE US?] Fine - so we used differences in quality in lieu
- of promises of status consumption (who benefit is not measurable) - what
- are the conclusions of this model? We can look at cross-sectional differences
- in quality year after year.
- The approach with AIDS would require the price index and the price of goods
- as well.
- That approach has been used in the chapter 1.
- Only asset-wide differences in quality are to be explained in this chapter.
-\end_layout
-
-\begin_layout Subsection
-Empirical Results
+Noparamteric Regression Results
 \end_layout
 
 \begin_layout Standard
@@ -1630,6 +1257,96 @@ Recall that our motivation for the non-parametric regression is the reference
  earlier).
 \end_layout
 
+\begin_layout Subsection
+Paramteric Regression Results
+\end_layout
+
+\begin_layout Subsection
+Subjective Well Being and Status consumption
+\end_layout
+
+\begin_layout Standard
+[Relation with happiness and causality direction] The issue of causality
+ is important for subjective well-being just the same - it needs to be clear
+ whether the consumer's happiness influences the selection of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $(\nu,\Delta A)$
+\end_inset
+
+ or the choice of 
+\begin_inset Formula $(\nu,\Delta A)$
+\end_inset
+
+ makes her happy.
+ They both may amount to the same in the regression model aiming to measure
+ the two in equilibrium.
+ But our discussion of them would require us to have a model of how happiness
+ is influenced by status consumption or vice versa.
+ To clarify this notice that consumers don't select consumption that makes
+ them happy - instead they select consumption that gives the maximum utility
+ for a given constraint.
+ Thus we are reluctant to arguing that consumers 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar under
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+optimise happiness 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+to select consumption.
+ What we can do is to thus verify if the consumers are happy after making
+ consumption choices.
+ We could verify to see if our definition of being miserable (being low
+ in the reference groups) tallies with the reported subjective well being.
+ In conclusion, whether a consumer is optimistic about the future or not
+ may have little to do with how she spends - but it is still possible to
+ empirically test whether increasing negative distance from reference makes
+ the consumer unhappy or not.
+ This would help us test if the local reference are relevant for consumption.
+ 
+\end_layout
+
+\begin_layout Standard
+[WHERE DOES THAT TAKE US?] Fine - so we used differences in quality in lieu
+ of promises of status consumption (who benefit is not measurable) - what
+ are the conclusions of this model? We can look at cross-sectional differences
+ in quality year after year.
+ The approach with AIDS would require the price index and the price of goods
+ as well.
+ That approach has been used in the chapter 1.
+ Only asset-wide differences in quality are to be explained in this chapter.
+\end_layout
+
 \begin_layout Standard
 Astebi et al suggest the importance of reference
 \begin_inset CommandInset citation
@@ -1854,7 +1571,7 @@ noprefix "false"
 \end_inset
 
  as 
-\begin_inset Formula $\frac{\pi'(r)}{\pi(r)^{2}}=\frac{1-\alpha}{\alpha(r-\bar{r})}\frac{1}{\pi(r)}+(-\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})})$
+\begin_inset Formula $-\frac{\pi'(r)}{\pi(r)^{2}}=-\frac{1-\alpha}{\alpha(r-\bar{r})}\frac{1}{\pi(r)}+\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})}$
 \end_inset
 
  so that the following is a linear differential equation
@@ -1863,7 +1580,7 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-g'(r) & =\frac{1-\alpha}{\alpha(r-\bar{r})}g(r)+(-\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})})
+g'(r) & =-\frac{1-\alpha}{\alpha(r-\bar{r})}g(r)+\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})}
 \end{alignat*}
 
 \end_inset
@@ -1873,11 +1590,11 @@ g'(r) & =\frac{1-\alpha}{\alpha(r-\bar{r})}g(r)+(-\frac{(1-\alpha)\bar{\nu}}{x\a
 
 \begin_layout Standard
 Let 
-\begin_inset Formula $a(r)\equiv\frac{1-\alpha}{\alpha(r-\bar{r})}$
+\begin_inset Formula $a(r)\equiv-\frac{1-\alpha}{\alpha(r-\bar{r})}$
 \end_inset
 
  and 
-\begin_inset Formula $b(r)=-\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})}$
+\begin_inset Formula $b(r)=\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})}$
 \end_inset
 
 .
@@ -1919,7 +1636,7 @@ Here,
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-e^{A(r)} & =(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}(r-\bar{r})^{\frac{\alpha}{1-\alpha}}
+e^{A(r)} & =(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}(r-\bar{r})^{-\frac{1-\alpha}{\alpha}}
 \end{alignat*}
 
 \end_inset
@@ -1928,21 +1645,34 @@ e^{A(r)} & =(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}(r-\bar{r})^{\frac{\alpha}{
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\int_{r_{0}}^{r}e^{-A(s)}b(s)ds=\int_{r_{0}}^{r}\{-(\frac{r_{0}-\bar{r}}{s-\bar{r}})^{-\frac{1-\alpha}{\alpha}}\frac{(1-\alpha)\bar{\nu}}{x\alpha(s-\bar{r})}\}ds=-\frac{(1-\alpha)\bar{\nu}(r_{0}-\bar{r})^{-\frac{1-\alpha}{\alpha}}}{x\alpha}\int_{r_{0}}^{r}(s-\bar{r})^{\frac{\alpha}{1-\alpha}-1}ds$
+\begin_inset Formula $\int_{r_{0}}^{r}e^{-A(s)}b(s)ds=\int_{r_{0}}^{r}\{(\frac{s-\bar{r}}{r_{0}-\bar{r}})^{\frac{1-\alpha}{\alpha}}\frac{(1-\alpha)\bar{\nu}}{x\alpha(s-\bar{r})}\}ds=\frac{(1-\alpha)\bar{\nu}}{x\alpha(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}}\int_{r_{0}}^{r}(s-\bar{r})^{\frac{1}{\alpha}-2}ds$
+\end_inset
+
+ 
+\begin_inset Formula $ $
+\end_inset
+
+ With 
+\begin_inset Formula $\alpha\ne\frac{1}{2}$
+\end_inset
+
+, we have the following solution (for 
+\begin_inset Formula $\alpha=\frac{1}{2}$
+\end_inset
+
+ the integrand is a constant).
+ 
+\begin_inset Formula $\int_{r_{0}}^{r}e^{-A(s)}b(s)ds==\frac{(1-\alpha)\bar{\nu}}{x\alpha(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}}\times\frac{1}{\frac{1}{\alpha}-1}\{(s-\bar{r})^{\frac{1}{\alpha}-1}|_{r_{0}}^{r}\}=\frac{\bar{\nu}}{x(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}}\{(r-\bar{r})^{\frac{1-\alpha}{\alpha}}-(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}\}$
 \end_inset
 
 .
- Since, 
-\begin_inset Formula $\frac{\alpha}{1-\alpha}>0$
-\end_inset
-
-, integrand is a polynomial function and therefore,
+ Therefore,
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-\int_{r_{0}}^{r}e^{-A(s)}b(s)ds & =\frac{(1-\alpha)^{2}\bar{\nu}(r_{0}-\bar{r})^{-\frac{1-\alpha}{\alpha}}}{x\alpha^{2}}\{(r_{0}-\bar{r})^{\frac{\alpha}{1-\alpha}}-(r-\bar{r})^{\frac{\alpha}{1-\alpha}}\}
+\int_{r_{0}}^{r}e^{-A(s)}b(s)ds & =\frac{\bar{\nu}}{x}((\frac{r-\bar{r}}{r_{0}-\bar{r}}){}^{\frac{1-\alpha}{\alpha}}-1)
 \end{alignat*}
 
 \end_inset
@@ -1951,18 +1681,69 @@ e^{A(r)} & =(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}(r-\bar{r})^{\frac{\alpha}{
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- would thus be the following polynomial function
+Thus 
 \begin_inset Formula 
 \begin{alignat*}{1}
-\pi(r)=\frac{\pi(r_{0})(r-\bar{r})^{-\frac{\alpha}{1-\alpha}}}{(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}+(\frac{(1-\alpha)^{2}\bar{\nu}\pi(r_{0})}{x\alpha^{2}})((r_{0}-\bar{r})^{\frac{\alpha}{1-\alpha}}-(r-\bar{r})^{\frac{\alpha}{1-\alpha}})}
+g(r) & =\frac{1}{\pi(r_{0})}(\frac{r_{0}-\bar{r}}{r-\bar{r}})^{\frac{1-\alpha}{\alpha}}+(\frac{r_{0}-\bar{r}}{r-\bar{r}})^{\frac{1-\alpha}{\alpha}}\times\frac{\bar{\nu}}{x}((\frac{r-\bar{r}}{r_{0}-\bar{r}}){}^{\frac{1-\alpha}{\alpha}}-1)
 \end{alignat*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+or
+\begin_inset Formula 
+\begin{alignat*}{1}
+g(r)=\frac{1}{\pi(r)} & =(\frac{1}{\pi(r_{0})}-\frac{\bar{\nu}}{x})(\frac{r_{0}-\bar{r}}{r-\bar{r}})^{\frac{1-\alpha}{\alpha}}+\frac{\bar{\nu}}{x}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or 
+\begin_inset Formula 
+\begin{alignat*}{1}
+\pi(r) & =\frac{x(r-\bar{r})^{\frac{1-\alpha}{\alpha}}}{(\frac{x}{\pi(r_{0})}-\bar{\nu})(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}+(r-\bar{r})^{\frac{1-\alpha}{\alpha}}\bar{\nu}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above demands that we use the cross terms of 
+\begin_inset Formula $x$
+\end_inset
+
+ and higher powers of 
+\begin_inset Formula $r$
+\end_inset
+
+ in the regression.
+ Notice that the above permits the 
+\begin_inset Formula $\alpha<\frac{1}{2}$
+\end_inset
+
+ when 
+\begin_inset Formula $\frac{1}{\alpha}-1>1$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha>\frac{1}{2}$
+\end_inset
+
+ when 
+\begin_inset Formula $\frac{1}{\alpha}-1<1$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1971,7 +1752,7 @@ For the optimal
 \end_inset
 
 , 
-\begin_inset Formula $\nu^{*}=\frac{x}{\pi(r^{*})}=x$
+\begin_inset Formula $\nu^{*}=\frac{x}{\pi(r^{*})}=xg(r)$
 \end_inset
 
  or
@@ -1980,7 +1761,7 @@ For the optimal
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-\nu^{*}=\frac{x(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}+(\frac{(1-\alpha)^{2}\bar{\nu}\pi(r_{0})}{\alpha^{2}})((r_{0}-\bar{r})^{\frac{\alpha}{1-\alpha}}-(r-\bar{r})^{\frac{\alpha}{1-\alpha}})}{\pi(r_{0})(r-\bar{r})^{-\frac{\alpha}{1-\alpha}}}
+\nu^{*}= & (\frac{x}{\pi(r_{0})}-\bar{\nu})(\frac{r_{0}-\bar{r}}{r-\bar{r}})^{\frac{1-\alpha}{\alpha}}+\bar{\nu}
 \end{alignat*}
 
 \end_inset
@@ -2001,51 +1782,11 @@ grows linearly with
 \end_inset
 
 .
- It would have terms of 
-\begin_inset Formula $r^{\alpha/(1-\alpha)}$
-\end_inset
-
- and 
-\begin_inset Formula $r^{\alpha^{2}/(1-\alpha)^{2}}$
-\end_inset
-
-.
  Since 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
  is the overall average it's better to be use that into regression.
- We interpret 
-\begin_inset Formula $\nu$
-\end_inset
-
- using 
-\begin_inset Formula $\frac{x}{\nu^{*}}=\pi(r^{*})$
-\end_inset
-
- - so that 
-\begin_inset Formula $\nu$
-\end_inset
-
- is for every consumer but 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- is the average for - we can again somehow use a kernel-like logic to consider
- that consumers choose 
-\begin_inset Formula $\nu$
-\end_inset
-
- and 
-\begin_inset Formula $x$
-\end_inset
-
- individually but we observe 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- at a higher level.
- 
 \end_layout
 
 \begin_layout Standard
