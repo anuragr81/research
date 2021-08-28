@@ -5644,5 +5644,154 @@ In this theoretical model, the upliftment through social networks is the
  More status consumption would take her closer to higher band.
 \end_layout
 
+\begin_layout Subsection
+Rejection of assets in loess distances
+\end_layout
+
+\begin_layout Standard
+Consider three consumers 
+\begin_inset Formula $A,B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+, who have asset-values of 
+\begin_inset Formula $\{V_{A},V_{B},V_{C}\}=\{100,200,800\}$
+\end_inset
+
+ and the distances among them are 
+\begin_inset Formula $\{AB,BC,CA\}=$
+\end_inset
+
+ 
+\begin_inset Formula $\{2,10,12\}$
+\end_inset
+
+ .
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ are neighbours due to both distance and asset-values.
+ This is different from 
+\begin_inset Formula $\{AB,BC,CA\}=$
+\end_inset
+
+ 
+\begin_inset Formula $\{20,18,2\}$
+\end_inset
+
+ when 
+\begin_inset Formula $B,C$
+\end_inset
+
+ are distance neighbours but not asset-value neighbours.
+ To obtain this into one distance we can transform the 
+\begin_inset Formula $S,E$
+\end_inset
+
+ values with the asset-factor.
+ Two consumers who are physically close but asset-wise apart should have
+ a longer Euclidean distance than when they have similar assets.
+ The distances between all areas is 
+\begin_inset Formula ${n \choose 2}$
+\end_inset
+
+.
+ If the regression were to run with just 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $E$
+\end_inset
+
+ neighbours would be decided based on Euclidean distance 
+\begin_inset Formula $\sqrt{S^{2}+E^{2}}$
+\end_inset
+
+.
+ If we want this to include asset-distances then we're mixing distances
+ with asset values - treating consumers that live a little further the same
+ as those who are a bit richer.
+ The distance we want has lexicographic properties - we consider assets-only
+ if the consumers are with a certain area.
+ In the second case with 
+\begin_inset Formula $\{AB,BC,CA\}=$
+\end_inset
+
+ 
+\begin_inset Formula $\{20,18,2\}$
+\end_inset
+
+ , 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+ are physical neibhbours but not asset-neighbours.
+ The difference in assets is therefore relevant for us.
+ On the other hand when 
+\begin_inset Formula $\{AB,BC,CA\}=$
+\end_inset
+
+ 
+\begin_inset Formula $\{2,10,12\}$
+\end_inset
+
+, then 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+ are too distant and the asset-difference is irrelevant for us.
+ While understanding distance from each other compares with 
+\begin_inset Formula $A$
+\end_inset
+
+-distance from each other, we do not consider asset differences when the
+ distance is above a certain threshold.
+ If we map 
+\begin_inset Formula ${n \choose 2}$
+\end_inset
+
+ points with valid 
+\begin_inset Formula $ln(A)$
+\end_inset
+
+ values we would need to map these 
+\begin_inset Formula $ln(A)$
+\end_inset
+
+ pairs back to 
+\begin_inset Formula $n+n$
+\end_inset
+
+ coordinates.
+ As such we don't have 
+\begin_inset Formula $A_{X},A_{Y}$
+\end_inset
+
+ components - but we know that the distance is infinite for neighbours that
+ are beyond a certain distance apart.
+ In other words, the relevant distance is such that asset differences are
+ infinite for large (above a threshold) geographical distance.
+ This can be accomplished with a custom distance.
+ It is then worthwhile to compare just distance with the asset-inclusive
+ distance in the comparison.
+\end_layout
+
 \end_body
 \end_document

@@ -984,7 +984,7 @@ plot_assets_map <- function(){
   tnz_map = subset(world_map ,region=="Tanzania")
   hhid_mtms_2012 <- ddply(subset(a2012,!is.na(number)  & !is.na(mtm) & number>0), .(hhid), summarise, hhid_mtm=sum(mtm*number))
   hhid_mtms_o2012 <- merge(o2012,hhid_mtms_2012 ,by="hhid")
-
+  
   
   if (plot_occup){
     hhid_mtms_o2012_woccup <- subset(hhid_mtms_o2012, !is.na(occupation_rank))
@@ -1004,8 +1004,8 @@ plot_assets_map <- function(){
     ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
                           colour="light yellow", fill="light yellow") + geom_point(data=map_data,aes(x=E, y=S, size = mean_a, color = education_rank))+ scale_size(range = c(.1, 10), name="assets_value") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Asset Values and Education Rank distribution in Tanzania (2012)")
   }
-# + geom_text(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),hjust=0,vjust=0)
-
+  # + geom_text(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),hjust=0,vjust=0)
+  
 }
 income_estimation_stata_input <- function(pseudop){
   # get income estimate from the RE estimator results obtained from pseudo-panel - xtreg lntotinc i.max_education_rank i.max_occupation_rank i.expensiveregion, re
@@ -1100,6 +1100,11 @@ get_parametric_band_df <- function(ll){
   all_costs <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
   #asset purchases and asset-bearing costs are not considered
   needs_and_excess_costs <- subset(all_costs, is.element(group,c("excess","needs")))
+  ne2010 <- (ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
+  ne2012 <- (ddply(subset(c2012,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
+  ne2014 <- (ddply(subset(c2014,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
+  
+  
   
   return(needs_and_excess_costs)
 }
@@ -1107,30 +1112,7 @@ get_nonparametric_df <- function(ll){
   # Don't include education or housing expenses - because they're part of needs anyways
   inc_houserent = F
   inc_educexpense = F
-  all_costs_considered <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
-  food_costs_group <- subset(all_costs_considered,is.element(group,c("needs")))$shortname
-  excess_costs_group <- subset(all_costs_considered,is.element(group,c("excess")))$shortname
-  
-  x2010 <- plyr::rename(ll@get_total_expenditures(hh = c2010, ohs = o2010, include_education=inc_educexpense, include_houserent = inc_houserent), c("total_expenditure"="x"))
-  x2012 <- plyr::rename(ll@get_total_expenditures(hh = c2012, ohs = o2012, include_education=inc_educexpense, include_houserent = inc_houserent),c("total_expenditure"="x"))
-  x2014 <- plyr::rename(ll@get_total_expenditures(hh = c2014, ohs = o2014, include_education=inc_educexpense, include_houserent = inc_houserent),c("total_expenditure"="x"))
-  
-  
-  hsizex2010 <- merge(ll@get_hsize(o2010),x2010,by=c("hhid"))
-  hsizex2012 <- merge(ll@get_hsize(o2012),x2012,by=c("hhid"))
-  hsizex2014 <- merge(ll@get_hsize(o2014),x2014,by=c("hhid"))
-  
-  k2010_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2010, group_field = "shortname")
-  k2012_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2012, group_field = "shortname")
-  k2014_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2014, group_field = "shortname")
-  
-  k2010 <- (merge(k2010_tot,hsizex2010,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))
-  k2012 <- (merge(k2012_tot,hsizex2012,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))
-  k2014 <- (merge(k2014_tot,hsizex2014,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))
-  
-  k2010 <- k2010 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b))
-  k2012 <- k2012 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b)) 
-  k2014 <- k2014 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b)) 
+  food_analysis = F
   
   hhids2010_2012 <- mapping_hhids_2010_2012(o2012)
   
@@ -1143,15 +1125,48 @@ get_nonparametric_df <- function(ll){
   assetslog2014 <- ddply(asset_mtms_2014,.(hhid2014),summarise,lnA0=log(sum(number.2014*mtm.2014)),A0=sum(number.2014*mtm.2014))
   
   
-  
-  ka2010 <- (merge(assetslog2010,plyr::rename(k2010,c("hhid"="hhid2010")),by=c("hhid2010"))) %>% mutate (year=2010) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
-  ka2010 <- ka2010[,setdiff(colnames(ka2010),c("consu","hsize"))]
-  ka2012 <- (merge(assetslog2012,plyr::rename(k2012,c("hhid"="hhid2012")),by=c("hhid2012"))) %>% mutate (year=2012) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
-  ka2012 <- ka2012[,setdiff(colnames(ka2012),c("consu","hsize"))]
-  ka2014 <- (merge(assetslog2014,plyr::rename(k2014,c("hhid"="hhid2014")),by=c("hhid2014"))) %>% mutate (year=2014) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
-  ka2014 <- ka2014[,setdiff(colnames(ka2014),c("consu","hsize"))]
-
-  
+  if (food_analysis==T){
+    all_costs_considered <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
+    food_costs_group <- subset(all_costs_considered,is.element(group,c("needs")))$shortname
+    excess_costs_group <- subset(all_costs_considered,is.element(group,c("excess")))$shortname
+    
+    x2010 <- plyr::rename(ll@get_total_expenditures(hh = c2010, ohs = o2010, include_education=inc_educexpense, include_houserent = inc_houserent), c("total_expenditure"="x"))
+    x2012 <- plyr::rename(ll@get_total_expenditures(hh = c2012, ohs = o2012, include_education=inc_educexpense, include_houserent = inc_houserent),c("total_expenditure"="x"))
+    x2014 <- plyr::rename(ll@get_total_expenditures(hh = c2014, ohs = o2014, include_education=inc_educexpense, include_houserent = inc_houserent),c("total_expenditure"="x"))
+    
+    
+    hsizex2010 <- merge(ll@get_hsize(o2010),x2010,by=c("hhid"))
+    hsizex2012 <- merge(ll@get_hsize(o2012),x2012,by=c("hhid"))
+    hsizex2014 <- merge(ll@get_hsize(o2014),x2014,by=c("hhid"))
+    
+    k2010_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2010, group_field = "shortname")
+    k2012_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2012, group_field = "shortname")
+    k2014_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2014, group_field = "shortname")
+    
+    k2010 <- (merge(k2010_tot,hsizex2010,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))
+    k2012 <- (merge(k2012_tot,hsizex2012,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))
+    k2014 <- (merge(k2014_tot,hsizex2014,by=c("hhid")) %>% mutate(cost_a=cost_a/consu) %>% mutate(cost_b=cost_b/consu))
+    
+    k2010 <- k2010 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b))
+    k2012 <- k2012 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b)) 
+    k2014 <- k2014 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b)) 
+    
+    ka2010 <- (merge(assetslog2010,plyr::rename(k2010,c("hhid"="hhid2010")),by=c("hhid2010"))) %>% mutate (year=2010) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
+    ka2010 <- ka2010[,setdiff(colnames(ka2010),c("consu","hsize"))]
+    ka2012 <- (merge(assetslog2012,plyr::rename(k2012,c("hhid"="hhid2012")),by=c("hhid2012"))) %>% mutate (year=2012) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
+    ka2012 <- ka2012[,setdiff(colnames(ka2012),c("consu","hsize"))]
+    ka2014 <- (merge(assetslog2014,plyr::rename(k2014,c("hhid"="hhid2014")),by=c("hhid2014"))) %>% mutate (year=2014) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
+    ka2014 <- ka2014[,setdiff(colnames(ka2014),c("consu","hsize"))]
+    
+  } else {
+    all_costs <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
+    #asset purchases and asset-bearing costs are not considered
+    needs_and_excess_costs <- subset(all_costs, is.element(group,c("excess","needs")))
+    ne2010 <- (ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
+    ne2012 <- (ddply(subset(c2012,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
+    ne2014 <- (ddply(subset(c2014,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
+    
+  }
   #
   perception_columns <- c("life_perception"="hh_life_perception" , "finance_perception"="hh_finance_perception", "richness_perception"="hh_richness_perception","housing_perception"="hh_housing_perception","health_perception"="hh_health_perception")
   hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang")
@@ -1196,13 +1211,16 @@ get_nonparametric_df <- function(ll){
   
   #a<-merge(plyr::rename(i2010,c("hhid"="hhid2010")),assetslog2010 ,by=c("hhid2010"))
   res=list()
-  dat2010 <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ka2010, by = c("hhid2010")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
-  dat2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ka2012, by = c("hhid2012")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
-  dat2014 <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),ka2014, by = c("hhid2014")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+  if(food_analysis==T){
+    dat2010 <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ka2010, by = c("hhid2010")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+    dat2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ka2012, by = c("hhid2012")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+    dat2014 <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),ka2014, by = c("hhid2014")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+    dat2010 <- subset(dat2010,!is.na(A0) & !is.infinite(cpA_a))
+    dat2012 <- subset(dat2012,!is.na(A0) & !is.infinite(cpA_a))
+    dat2014 <- subset(dat2014,!is.na(A0) & !is.infinite(cpA_a))
+  }
   
-  dat2010 <- subset(dat2010,!is.na(A0) & !is.infinite(cpA_a))
-  dat2012 <- subset(dat2012,!is.na(A0) & !is.infinite(cpA_a))
-  dat2014 <- subset(dat2014,!is.na(A0) & !is.infinite(cpA_a))
+  
   
   res[["df2010"]] <- dat2010
   res[["df2012"]] <- dat2012
@@ -1215,7 +1233,7 @@ get_nonparametric_df <- function(ll){
 }
 
 run_non_parmetric_regression <- function(ll,dfslist,year,sp)
-  {
+{
   if(missing(dfslist)){
     dfslist <- get_nonparametric_df(ll)
   }
@@ -1242,8 +1260,8 @@ run_non_parmetric_regression <- function(ll,dfslist,year,sp)
   persp(S, E, fit.cpab, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = "cpA b")
   persp(S, E, fit.ca, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = "c a")
   persp(S, E, fit.cb, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = "c b")
-
-    
+  
+  
 }
 estimation_df_budget_quantile<- function(ll,e)
 {
