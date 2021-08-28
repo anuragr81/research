@@ -1162,9 +1162,9 @@ get_nonparametric_df <- function(ll){
     all_costs <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
     #asset purchases and asset-bearing costs are not considered
     needs_and_excess_costs <- subset(all_costs, is.element(group,c("excess","needs")))
-    ne2010 <- (ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
-    ne2012 <- (ddply(subset(c2012,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
-    ne2014 <- (ddply(subset(c2014,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
+    ne2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2010"))
+    ne2012 <- plyr::rename(ddply(subset(c2012,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2012"))
+    ne2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2014"))
     
   }
   #
@@ -1218,6 +1218,23 @@ get_nonparametric_df <- function(ll){
     dat2010 <- subset(dat2010,!is.na(A0) & !is.infinite(cpA_a))
     dat2012 <- subset(dat2012,!is.na(A0) & !is.infinite(cpA_a))
     dat2014 <- subset(dat2014,!is.na(A0) & !is.infinite(cpA_a))
+  } else{
+    dat2010 <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ne2010, by = c("hhid2010")) 
+    dat2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ne2012, by = c("hhid2012")) 
+    dat2014 <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),ne2014, by = c("hhid2014")) 
+    #dat2010 <- subset(dat2010,!is.na(A0) )
+    #dat2012 <- subset(dat2012,!is.na(A0) )
+    #dat2014 <- subset(dat2014,!is.na(A0) )
+    
+    # the average of consumption of consumers within a given population-distance becomes pi(r), the total asset value becomes r, the total expenditure is cost_ne
+    # remember we have distances only of consumers 
+    all_points <- unique(rbind(unique(rbind(unique(dat2010[,c("region","district","S","E")]),unique(dat2012[,c("region","district","S","E")]))),unique(dat2014[,c("region","district","S","E")])))
+    all_points$point <- paste(all_points$region,all_points$district,sep="-")
+    all_distances <- expand.grid(all_points$point,all_points$point)
+    colnames(all_distances) <- c("P1","P2")
+    all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P1")),all_distances,by=c("P1")) ,c("S"="S1","E"="E1","region"="region1","district"="district1") )
+    all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P2")),all_distances,by=c("P2")) ,c("S"="S2","E"="E2","region"="region2","district"="district2") )
+    all_distances$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2)
   }
   
   
