@@ -1219,9 +1219,18 @@ get_nonparametric_df <- function(ll){
     dat2012 <- subset(dat2012,!is.na(A0) & !is.infinite(cpA_a))
     dat2014 <- subset(dat2014,!is.na(A0) & !is.infinite(cpA_a))
   } else{
-    dat2010 <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ne2010, by = c("hhid2010")) 
-    dat2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ne2012, by = c("hhid2012")) 
-    dat2014 <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),ne2014, by = c("hhid2014")) 
+    indivdat2010_woassets <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ne2010, by = c("hhid2010")) 
+    indivdat2012_woassets <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ne2012, by = c("hhid2012")) 
+    indivdat2014_woassets <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),ne2014, by = c("hhid2014")) 
+    
+    indivdat2010 <- merge(assetslog2010, indivdat2010_woassets, by = "hhid2010")
+    indivdat2012 <- merge(assetslog2012, indivdat2012_woassets, by = "hhid2012")
+    indivdat2014 <- merge(assetslog2014, indivdat2014_woassets, by = "hhid2014")
+    
+    indivdat2010$P1 <- paste(indivdat2010$region,indivdat2010$district,sep="-")
+    indivdat2012$P1 <- paste(indivdat2012$region,indivdat2012$district,sep="-")
+    indivdat2014$P1 <- paste(indivdat2014$region,indivdat2014$district,sep="-")
+    
     #dat2010 <- subset(dat2010,!is.na(A0) )
     #dat2012 <- subset(dat2012,!is.na(A0) )
     #dat2014 <- subset(dat2014,!is.na(A0) )
@@ -1232,17 +1241,30 @@ get_nonparametric_df <- function(ll){
     # in the desired data-frame we would have hhdis with their region-id in P2 (which also included P1). So that pi(r) is the same for all consumers in the P2. 
     # the output would be the pi(r) for all hhid 
     
-    bubble_distances <- get_bubble_distances(dat2010=dat2010, dat2012=dat2012,dat2014=dat2014,distance_threshold = .3)
+    bubble_distances <- get_bubble_distances(dat2010=indivdat2010, dat2012=indivdat2012,dat2014=indivdat2014,distance_threshold = .3)
     
-    bubble_mean_cost2010 <- calculate_mean_over_bubbles(input_dat=dat2010,bubble_distances = bubble_distances, field="cost_ne")
-    bubble_mean_cost2012 <- calculate_mean_over_bubbles(input_dat=dat2012,bubble_distances = bubble_distances, field="cost_ne")
-    bubble_mean_cost2014 <- calculate_mean_over_bubbles(input_dat=dat2014,bubble_distances = bubble_distances, field="cost_ne")
+    bubble_mean_cost2010 <- calculate_mean_over_bubbles(input_dat=indivdat2010,bubble_distances = bubble_distances, field="cost_ne")
+    bubble_mean_cost2012 <- calculate_mean_over_bubbles(input_dat=indivdat2012,bubble_distances = bubble_distances, field="cost_ne")
+    bubble_mean_cost2014 <- calculate_mean_over_bubbles(input_dat=indivdat2014,bubble_distances = bubble_distances, field="cost_ne")
+
+    bubble_assets_2010 <- calculate_mean_over_bubbles(input_dat=indivdat2010, bubble_distances=bubble_distances, field="A0")
+    bubble_assets_2012 <- calculate_mean_over_bubbles(input_dat=indivdat2012, bubble_distances=bubble_distances, field="A0")
+    bubble_assets_2014 <- calculate_mean_over_bubbles(input_dat=indivdat2014, bubble_distances=bubble_distances, field="A0")
     
-    print(dim(res))
-    # this is problematic - because merge should be on wide criteria
+    bubble_fields_2010 <- merge(bubble_mean_cost2010,bubble_assets_2010)
+    bubble_fields_2012 <- merge(bubble_mean_cost2012,bubble_assets_2012)
+    bubble_fields_2014 <- merge(bubble_mean_cost2012,bubble_assets_2014)
     
+    dat2010 <- merge(bubble_fields_2010, indivdat2010, by="P1")
+    dat2012 <- merge(bubble_fields_2012, indivdat2012, by="P1")
+    dat2014 <- merge(bubble_fields_2014, indivdat2014, by="P1")
+    
+    dat2010 <- dat2010 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne)
+    dat2012 <- dat2012 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne)
+    dat2014 <- dat2014 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne)
     
     #test
+    #summary(lm(data=dat2010, nu~logx + r))
     
   }
   
@@ -1257,17 +1279,18 @@ get_nonparametric_df <- function(ll){
 
 
 calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
-  input_dat$P1 <- paste(input_dat$region,input_dat$district,sep="-")
   res<- array()
+  populations <- array()
   pb <- txtProgressBar(min = 0, max = dim(bubble_distances)[1], style = 3)
   for (i in seq(dim(bubble_distances)[1])){
     tempdat <- subset(input_dat %>% mutate(found=sapply(input_dat$P1,function(x){ length(grep(x,bubble_distances[i,]$B))>0})) , found==T)
     res[i]=mean(tempdat[,field])
+    populations[i] = nrow(tempdat)
     setTxtProgressBar(pb, i)
   }
-  resdf <- data.frame(m=res)
+  resdf <- data.frame(m=res,N=populations)
   
-  colnames(resdf)<- c(paste("mean",field,sep="_"))
+  colnames(resdf)<- c(paste("mean",field,sep="_"), "N")
   resdf$P1 <- bubble_distances$P1
   return(resdf)
 }
