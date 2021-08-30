@@ -1226,27 +1226,71 @@ get_nonparametric_df <- function(ll){
     #dat2012 <- subset(dat2012,!is.na(A0) )
     #dat2014 <- subset(dat2014,!is.na(A0) )
     
-    # the average of consumption of consumers within a given population-distance becomes pi(r), the total asset value becomes r, the total expenditure is cost_ne
-    # remember we have distances only of consumers 
-    all_points <- unique(rbind(unique(rbind(unique(dat2010[,c("region","district","S","E")]),unique(dat2012[,c("region","district","S","E")]))),unique(dat2014[,c("region","district","S","E")])))
-    all_points$point <- paste(all_points$region,all_points$district,sep="-")
-    all_distances <- expand.grid(all_points$point,all_points$point)
-    colnames(all_distances) <- c("P1","P2")
-    all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P1")),all_distances,by=c("P1")) ,c("S"="S1","E"="E1","region"="region1","district"="district1") )
-    all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P2")),all_distances,by=c("P2")) ,c("S"="S2","E"="E2","region"="region2","district"="district2") )
-    all_distances$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2)
+    
+    #length(grep("9-31",k[143,]$n))
+    
+    # in the desired data-frame we would have hhdis with their region-id in P2 (which also included P1). So that pi(r) is the same for all consumers in the P2. 
+    # the output would be the pi(r) for all hhid 
+    
+    bubble_distances <- get_bubble_distances(dat2010=dat2010, dat2012=dat2012,dat2014=dat2014,distance_threshold = .3)
+    
+    bubble_mean_cost2010 <- calculate_mean_over_bubbles(input_dat=dat2010,bubble_distances = bubble_distances, field="cost_ne")
+    bubble_mean_cost2012 <- calculate_mean_over_bubbles(input_dat=dat2012,bubble_distances = bubble_distances, field="cost_ne")
+    bubble_mean_cost2014 <- calculate_mean_over_bubbles(input_dat=dat2014,bubble_distances = bubble_distances, field="cost_ne")
+    
+    print(dim(res))
+    # this is problematic - because merge should be on wide criteria
+    
+    
+    #test
+    
   }
-  
-  
   
   res[["df2010"]] <- dat2010
   res[["df2012"]] <- dat2012
   res[["df2014"]] <- dat2014
   
-  
   #
   
   return(res)
+}
+
+
+calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
+  input_dat$P1 <- paste(input_dat$region,input_dat$district,sep="-")
+  res<- array()
+  pb <- txtProgressBar(min = 0, max = dim(bubble_distances)[1], style = 3)
+  for (i in seq(dim(bubble_distances)[1])){
+    tempdat <- subset(input_dat %>% mutate(found=sapply(input_dat$P1,function(x){ length(grep(x,bubble_distances[i,]$B))>0})) , found==T)
+    res[i]=mean(tempdat[,field])
+    setTxtProgressBar(pb, i)
+  }
+  resdf <- data.frame(m=res)
+  
+  colnames(resdf)<- c(paste("mean",field,sep="_"))
+  resdf$P1 <- bubble_distances$P1
+  return(resdf)
+}
+get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold){
+  # the average of consumption of consumers within a given population-distance becomes pi(r), the total asset value becomes r, the total expenditure is cost_ne
+  # remember we have distances only of consumers 
+  all_points <- unique(rbind(unique(rbind(unique(dat2010[,c("region","district","S","E")]),unique(dat2012[,c("region","district","S","E")]))),unique(dat2014[,c("region","district","S","E")])))
+  all_points$point <- paste(all_points$region,all_points$district,sep="-")
+  all_distances <- expand.grid(all_points$point,all_points$point)
+  colnames(all_distances) <- c("P1","P2")
+  all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P1")),all_distances,by=c("P1")) ,c("S"="S1","E"="E1","region"="region1","district"="district1") )
+  all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P2")),all_distances,by=c("P2")) ,c("S"="S2","E"="E2","region"="region2","district"="district2") )
+  all_distances$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2)
+   
+  filtered_distances <- subset(all_distances,distance<distance_threshold)
+  bubble_distances <- ddply(filtered_distances[,c("P1","P2")],.(P1),summarise,B=toString(P2))
+  return(bubble_distances)
+}
+
+test_search_cluster <- function(){
+  tdf <- data.frame(P1=c("1-1","2-4"),B=c("2-2, 1-1","2-4, 1-2"))
+  dat <- data.frame(hhid=seq(4),P1=c("2-4","1-1","2-2","1-2"))
+  subset(dat %>% mutate(found=sapply(dat$P1,function(x){ length(grep(x,tdf[2,]))>0})),found==T)
 }
 
 run_non_parmetric_regression <- function(ll,dfslist,year,sp)
