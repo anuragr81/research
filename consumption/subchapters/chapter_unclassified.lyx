@@ -5793,5 +5793,80 @@ Consider three consumers
  distance in the comparison.
 \end_layout
 
+\begin_layout Subsection
+Rejection of per-head consu calculation
+\end_layout
+
+\begin_layout Standard
+[Per-head consumption - 
+\series bold
+consu
+\series default
+] We have per-head consumption based on an arbitrary consu variable.
+ But this should be based on an independent analysis.
+ On average how different is consumption of old people vs young people -
+ we can use use the histogram across age to present and then also provide
+ a side-by-side comparison with hsize.
+ Consider 
+\begin_inset Formula $n$
+\end_inset
+
+ households with 
+\begin_inset Formula $\prescript{i}{}m_{1},\prescript{i}{}m_{2},\prescript{i}{}m_{3},...,\prescript{i}{}m_{k}$
+\end_inset
+
+ representing the number of individuals in age groups 
+\begin_inset Formula $(0,a_{1}],(a_{1},a_{2}],(a_{2},a_{3}]$
+\end_inset
+
+ within the household 
+\begin_inset Formula $i$
+\end_inset
+
+ where 
+\begin_inset Formula $a_{1},a_{2},a_{3}$
+\end_inset
+
+ are arbitrary ages in the increasing order.
+ Given the costs per household 
+\begin_inset Formula $\prescript{1}{}c,\prescript{2}{}c,\prescript{3}{}c...,\prescript{n}{}c$
+\end_inset
+
+ for 
+\begin_inset Formula $n$
+\end_inset
+
+ households, we can solve the following for 
+\begin_inset Formula $n$
+\end_inset
+
+ points of data to obtain the estimates of costs 
+\begin_inset Formula $\{\psi_{j\in[1,k]}\}$
+\end_inset
+
+ for every age-group to provide an age-adjusted number of family members.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\prescript{i}{}c & =\sum_{j}^{k}{\prescript{i}{}m_{j}\cdot\psi_{j}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We run regression and quantile regressions to see how this ratio changes
+ and present results with both plain 
+\begin_inset Formula $hsize$
+\end_inset
+
+ values and the adjusted-household cardinality values.
+\end_layout
+
 \end_body
 \end_document
