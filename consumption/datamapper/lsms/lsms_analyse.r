@@ -1303,6 +1303,7 @@ get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold){
   colnames(all_distances) <- c("P1","P2")
   all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P1")),all_distances,by=c("P1")) ,c("S"="S1","E"="E1","region"="region1","district"="district1") )
   all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P2")),all_distances,by=c("P2")) ,c("S"="S2","E"="E2","region"="region2","district"="district2") )
+  stop("Euclidean distances should be adjusted by population")
   all_distances$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2)
    
   filtered_distances <- subset(all_distances,distance<distance_threshold)

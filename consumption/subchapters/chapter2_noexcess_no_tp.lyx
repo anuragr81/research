@@ -856,22 +856,137 @@ Energy is not a basic need but attached with asset - we don't worry about
 \end_layout
 
 \begin_layout Standard
-We have not used the geodata and and the geo-locations were not know at
+[Measurement of 
+\begin_inset Formula $r$
+\end_inset
+
+] We have not used the geodata and and the geo-locations were not know at
  the time of this chapter and therefore the neighbouring wards analysis
- was not possible.
+ was not possible (the geocoding was not feasible based on the available
+ MTAA field).
  The lowest unit is could be the ward level - but the data is not available
  for most of the wards.
- The geocoding is not possible based on the MTAA field.
+ We have therefore not considered the neighborhood around ward - and focused
+ on the population mass in the consumer's district or an area wider than
+ the consumer's district.
+ The populations for every district were obtained from the 2012 Population
+ and Housing Census (PHC) for Tanzania.
+ Within Dar-es-salaam ward population must be used- solely because of the
+ high-population of the district.
+ Due to our inability to associate wards with a geographical, we're unable
+ to define a finer bubble consider bubbles of around a million people.
+ Districts can be aggregated to the same level of the dar-es-salaam district
+ for a fairer comparison.
+ It would take the consumer to travel into a much larger area to face the
+ same diversity of faces in a dar-es-salaam district - which is 5 times
+ the size in terms of population of the populous Tanzanian district.
 \end_layout
 
 \begin_layout Standard
-subset(ddply(unique(o2012[,c("region","district","ward","hhid")]),.(region,distri
-ct,ward),summarise,n=length(hhid)),n>0)
+Dar-es-Salaam Ilala 595,928 624,683 1,220,611
 \end_layout
 
 \begin_layout Standard
-We aggregate districts into dar-es-salaam ward population level wherever
- necessary.
+Dar-es-Salaam Temeke 669,056 699,825 1,368,881
+\end_layout
+
+\begin_layout Standard
+Mwanza Geita 861,055 878,475 1,739,530 
+\end_layout
+
+\begin_layout Standard
+Dar-es-Salaam KINONDONI 860,802 914,247 1,775,049
+\end_layout
+
+\begin_layout Standard
+[Measurement of 
+\begin_inset Formula $r$
+\end_inset
+
+ - population adjustment ] Without the assets, the population adjusted distance
+ is the bubble of people.
+ In two areas 
+\begin_inset Formula $D$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ that are of areas 
+\begin_inset Formula $A_{D},A_{R}$
+\end_inset
+
+ so that 
+\begin_inset Formula $D$
+\end_inset
+
+ is more densely populated 
+\begin_inset Formula $R$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $\rho_{D}>\rho_{R}$
+\end_inset
+
+ (
+\begin_inset Formula $\rho_{D},\rho_{R}$
+\end_inset
+
+ are the population per 
+\begin_inset Formula $km^{2}$
+\end_inset
+
+ for 
+\begin_inset Formula $D,R$
+\end_inset
+
+ respectively).
+ The area we would consider in 
+\begin_inset Formula $D$
+\end_inset
+
+ for comparison with 
+\begin_inset Formula $A_{R}$
+\end_inset
+
+ should be 
+\begin_inset Formula $\frac{A_{R}\rho_{R}}{\rho_{D}}$
+\end_inset
+
+ instead of 
+\begin_inset Formula $A_{D}$
+\end_inset
+
+.
+ Equivalently, we could compared 
+\begin_inset Formula $\frac{A_{D}\rho_{D}}{\rho_{R}}$
+\end_inset
+
+ with 
+\begin_inset Formula $A_{D}$
+\end_inset
+
+.
+ The distances we consider in other words adjusted by the respective populations.
+ 
+\bar under
+Two areas are considered close to each other of they are rarely populated.
+\end_layout
+
+\begin_layout Standard
+We would consider a smaller area in 
+\begin_inset Formula $D$
+\end_inset
+
+ corresponding to a wider area in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Instead of the Euclidean distance, this approach considers a population
+ ratio adjusted distance.
 \end_layout
 
 \begin_layout Standard
@@ -965,7 +1080,6 @@ having assets do influence consumers
 
  does not include asset purchases or asset costs but merely the indication
  of how much below or above the consumer is to the average.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1007,7 +1121,6 @@ noprefix "false"
 [Robustness analysis] We could compare how changing the reference definition
  (e.g.
  by removing asset-differences definition) influences our conclusions.
- 
 \end_layout
 
 \begin_layout Subsection
@@ -1037,7 +1150,7 @@ Subjective Well Being and Status consumption
 \noun off
 \color none
 
-\begin_inset Formula $(\nu,\Delta A)$ ======= We expect to accommodate the observation that dense rich areas would have a different quality for food vs non-food. The non-parametric regression is effectively to understand how wide the reference boundaries should (this should played around with \bar{u}nder using bias and error for various values of 
+\begin_inset Formula $(\nu,\Delta A)$ We expect to accommodate the observation that dense rich areas would have a different quality for food vs non-food. The non-parametric regression is effectively to understand how wide the reference boundaries should (this should played around with \bar{u}nder using bias and error for various values of 
 
 \end_inset
 
