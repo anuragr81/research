@@ -367,7 +367,6 @@ The needs are predetermined so all needs consumption e.g.
 
  is the cost of the reference (no intertemporal concerns are assumed and
  there is no measure of quality other than the distance from the reference).
- 
 \end_layout
 
 \begin_layout Standard
@@ -481,7 +480,7 @@ The assumptions that matter is that
 \begin_inset Formula $\frac{c}{\psi}=x$
 \end_inset
 
-, the budget can be simplified as 
+, the budget can be simplified as
 \begin_inset Formula 
 \begin{alignat*}{1}
 log(\nu)+log(r) & =log(x)
@@ -585,7 +584,7 @@ Notice that
 \end_inset
 
 .
- This allows us to intepret the average consumption 
+ This allows us to interpret the average consumption 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
@@ -854,6 +853,25 @@ Energy is not a basic need but attached with asset - we don't worry about
  While not impossible, the consumer is not not expected to buy a music system
  and then not use it for the sake of saving electricity - nor is she expected
  to have a party to show her music system itself.
+\end_layout
+
+\begin_layout Standard
+We have not used the geodata and and the geo-locations were not know at
+ the time of this chapter and therefore the neighbouring wards analysis
+ was not possible.
+ The lowest unit is could be the ward level - but the data is not available
+ for most of the wards.
+ The geocoding is not possible based on the MTAA field.
+\end_layout
+
+\begin_layout Standard
+subset(ddply(unique(o2012[,c("region","district","ward","hhid")]),.(region,distri
+ct,ward),summarise,n=length(hhid)),n>0)
+\end_layout
+
+\begin_layout Standard
+We aggregate districts into dar-es-salaam ward population level wherever
+ necessary.
 \end_layout
 
 \begin_layout Standard
@@ -1200,7 +1218,7 @@ Kingdom and Knight 2007
 \end_layout
 
 \begin_layout Section
-Empirical Analysis
+Results
 \end_layout
 
 \begin_layout Subsection
@@ -1225,16 +1243,13 @@ Non-parametric Regression Results
  There would be more inequality in urban areas too - which would result
  in more asset bands (which would be associated with differentiation in
  status goods as well.
- ) This is the approach to be followed instead of using a Euclidean-distance
- approach that includes infinite distance.
+ ) 
 \end_layout
 
 \begin_layout Standard
-[NON-PARAMETRIC Regression for food budgets] The idea in non-parametric
- regression is essentially that of smoothing.
- We're interesting in know weight on food vs non-food varies with logarithmic
- of assets - here we don't see linear log(A) but some sort of geographic
- kernel.
+[NON-PARAMETRIC Regression for food budgets] We're interesting in know weight
+ on food vs non-food varies with logarithmic of assets - here we don't see
+ linear log(A) but some sort of geographic kernel.
  Cost-function of time-series view is not needed (for reasons specified
  earlier).
 \end_layout
