@@ -1241,7 +1241,8 @@ get_nonparametric_df <- function(ll){
     # in the desired data-frame we would have hhdis with their region-id in P2 (which also included P1). So that pi(r) is the same for all consumers in the P2. 
     # the output would be the pi(r) for all hhid 
     
-    bubble_distances <- get_bubble_distances(dat2010=indivdat2010, dat2012=indivdat2012,dat2014=indivdat2014,distance_threshold = .3)
+    #bubble_distances <- get_bubble_distances(dat2010=indivdat2010, dat2012=indivdat2012,dat2014=indivdat2014,distance_threshold = .3)
+    bubble_distances <- get_bubble_distances(dat2010=indivdat2010, dat2012=indivdat2012,dat2014=indivdat2014,popdistance_threshold = .1)
     
     bubble_mean_cost2010 <- calculate_mean_over_bubbles(input_dat=indivdat2010,bubble_distances = bubble_distances, field="cost_ne")
     bubble_mean_cost2012 <- calculate_mean_over_bubbles(input_dat=indivdat2012,bubble_distances = bubble_distances, field="cost_ne")
@@ -1264,7 +1265,7 @@ get_nonparametric_df <- function(ll){
     dat2014 <- dat2014 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne)
     
     #test
-    #summary(lm(data=dat2010, nu~logx + r))
+    print(summary(lm(data=dat2010, nu~logx + r)))
     
   }
   
@@ -1294,7 +1295,7 @@ calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
   resdf$P1 <- bubble_distances$P1
   return(resdf)
 }
-get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold){
+get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold,popdistance_threshold){
   # the average of consumption of consumers within a given population-distance becomes pi(r), the total asset value becomes r, the total expenditure is cost_ne
   # remember we have distances only of consumers 
   selected_cols <- c("region","district","S","E","population")
@@ -1309,8 +1310,19 @@ get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold){
   # The distances between two points that are populous would be lower than two points that are less populous
   # The distances are still symmetric - because even if one is significantly more populous than the other - they're closer than they would be when they're not populous.
   all_distances$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2)
-   
-  filtered_distances <- subset(all_distances,distance<distance_threshold)
+  all_distances$pop_distance <- mapply(function(s1,e1,s2,e2,N1,N2) {(1e+6/(N1+N2))* sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2,all_distances$population1,all_distances$population2)
+  if (missing(popdistance_threshold) ){
+    if (missing(distance_threshold)){
+      stop("Must provide either distance_threshold or popdistance_threshold")  
+    } else{
+      filtered_distances <- subset(all_distances,distance<distance_threshold)
+    }
+  } else if (missing(distance_threshold)) {
+    filtered_distances <- subset(all_distances,pop_distance<popdistance_threshold)
+  } else{
+    stop("Cannot use both distance_threshold and popdistance_threshold")
+  }
+  
   bubble_distances <- ddply(filtered_distances[,c("P1","P2")],.(P1),summarise,B=toString(P2))
   return(bubble_distances)
 }

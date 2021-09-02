@@ -903,107 +903,58 @@ Dar-es-Salaam KINONDONI 860,802 914,247 1,775,049
 \begin_inset Formula $r$
 \end_inset
 
- - population adjustment ] Without the assets, the population adjusted distance
- is the bubble of people.
- In two areas 
-\begin_inset Formula $D$
+ - population adjustment ] To compare districts with differente populations,
+ we consider a population-adjusted distance over which the cluster of 
+\begin_inset Formula $\pi(r)$
 \end_inset
 
  and 
-\begin_inset Formula $R$
+\begin_inset Formula $r$
 \end_inset
 
- that are of areas 
-\begin_inset Formula $A_{D},A_{R}$
+ are aggregated.
+ this approach considers a population ratio adjusted distance.
+ Here, the distance calculated is a Euclidean distance but different thresholds
+ are considered for whether a district qualifies as a neighbouring district
+ or not.
+ For 
+\begin_inset Formula $N_{A}+N_{B}$
 \end_inset
 
- so that 
-\begin_inset Formula $D$
+ people living in the distance 
+\begin_inset Formula $r_{AB}$
 \end_inset
 
- is more densely populated 
-\begin_inset Formula $R$
+, we have 
+\begin_inset Formula $\frac{r_{AB}}{N_{A}+N_{B}}$
 \end_inset
 
- i.e.
- 
-\begin_inset Formula $\rho_{D}>\rho_{R}$
+ as the symmetric population-adjusted distance.
+ For denser areas, this distance would be shorter.
+ This makes intuitive sense as sparser populations are supposed to make
+ consumers would feel that their bubble is smaller despite being spread
+ out over a larger physical area.
+ In denser ares, on the other hand, denser areas mean narrower reference
+ group over which we can calculate 
+\begin_inset Formula $r$
 \end_inset
 
- (
-\begin_inset Formula $\rho_{D},\rho_{R}$
-\end_inset
-
- are the population per 
-\begin_inset Formula $km^{2}$
-\end_inset
-
- for 
-\begin_inset Formula $D,R$
-\end_inset
-
- respectively).
- The area we would consider in 
-\begin_inset Formula $D$
-\end_inset
-
- for comparison with 
-\begin_inset Formula $A_{R}$
-\end_inset
-
- should be 
-\begin_inset Formula $\frac{A_{R}\rho_{R}}{\rho_{D}}$
-\end_inset
-
- instead of 
-\begin_inset Formula $A_{D}$
+ and 
+\begin_inset Formula $\pi(r)$
 \end_inset
 
 .
- Equivalently, we could compared 
-\begin_inset Formula $\frac{A_{D}\rho_{D}}{\rho_{R}}$
-\end_inset
-
+ With more districts in comparison e.g.
  with 
-\begin_inset Formula $A_{D}$
-\end_inset
-
-.
- The distances we consider in other words adjusted by the respective populations.
- 
-\bar under
-Two areas are considered close to each other of they are rarely populated.
-\end_layout
-
-\begin_layout Standard
-We would consider a smaller area in 
-\begin_inset Formula $D$
-\end_inset
-
- corresponding to a wider area in 
-\begin_inset Formula $R$
-\end_inset
-
-.
- Instead of the Euclidean distance, this approach considers a population
- ratio adjusted distance.
- We don't modify the distance formula itself but consider different thresholds
- for each distance.
- For two districts that are of disparate population, we consider the threshold
- adjusted by 
-\begin_inset Formula $min(\rho_{D},\rho_{R})/max(\rho_{D},\rho_{R})$
-\end_inset
-
-.
- Given 
 \begin_inset Formula $A,B,C$
 \end_inset
 
-, if the population in district 
+, where despite equal distances among them if the population in district
+ 
 \begin_inset Formula $A$
 \end_inset
 
- changes more relative to 
+ is higher relative to 
 \begin_inset Formula $B$
 \end_inset
 
@@ -1011,7 +962,7 @@ We would consider a smaller area in
 \begin_inset Formula $C$
 \end_inset
 
- over the next decade, then the distances 
+, the distances 
 \begin_inset Formula $A,B$
 \end_inset
 
@@ -1019,8 +970,7 @@ We would consider a smaller area in
 \begin_inset Formula $A,C$
 \end_inset
 
- reduces i.e.
- the consumers are relative 
+ would be less as consumers are relatively 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1028,96 +978,37 @@ closer
 \begin_inset Quotes erd
 \end_inset
 
- to the new developments in 
+ to the developments in 
 \begin_inset Formula $A$
 \end_inset
 
- than they were before.
- The distances in 
+ but distances 
 \begin_inset Formula $B,C$
 \end_inset
 
- however remain the same of they were before.
- If on the other hand, both 
-\begin_inset Formula $B,C$
-\end_inset
-
- develop more than 
+ would not be influenced except through 
 \begin_inset Formula $A$
-\end_inset
-
-, then the distances 
-\begin_inset Formula $A,B$
-\end_inset
-
- and 
-\begin_inset Formula $A,C$
-\end_inset
-
- are longer - but the distance between 
-\begin_inset Formula $B,C$
-\end_inset
-
- remains the same.
- The distance between a zero-population district is not defined (even though
- it's 0).
- The problem with this formula however is that two 
-\begin_inset Formula $\{A,B\}$
-\end_inset
-
- and 
-\begin_inset Formula $\{C,D\}$
-\end_inset
-
- that are spread over the same area so that 
-\begin_inset Formula $A,B$
-\end_inset
-
- are densely populated and 
-\begin_inset Formula $C,D$
-\end_inset
-
- are not is exactly the same.
- This is because 
-\begin_inset Formula $\frac{min(\rho_{D},\rho_{R})}{max(\rho_{D},\rho_{R})}$
-\end_inset
-
- cares about only the relative population.
- We could take a median population 261147 to standardise these.
- This is not as simple as multiplying all populations with a common number
- since the problem is that 
-\begin_inset Formula $\frac{x}{y}$
-\end_inset
-
- is the same as 
-\begin_inset Formula $\frac{100x}{100y}$
-\end_inset
-
- in the metric.
- We need something more than 
-\begin_inset Formula $\frac{x}{y}$
-\end_inset
-
- where 
-\begin_inset Formula $x,y$
-\end_inset
-
- are respective populations in the distance metric.
- The asymmetric distance logic considers that populations of the two points
- (districts) being compared.
- Without areas, we assume that there are 
-\begin_inset Formula $N_{A}+N_{B}$
-\end_inset
-
- people in the distance 
-\begin_inset Formula $r_{AB}$
 \end_inset
 
 .
- The properties of a centre-of-mass distance is not a lot different from
- the min-max approach since - here too only the relative distances matter.
- The only way to ascertain that is to fix a number of poeple and see what
- are would they be spread over.
+ The same applies if 
+\begin_inset Formula $A$
+\end_inset
+
+ has less population relative to 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ As a result of this adjustment, the distances between all districts shift
+ towards right - meaning we're expanding the bubble for more districts with
+ this adjustment.
+ Pop-distances increase for arusha (region 1) but decrease for dar-es-salaam
+ (region 7).
 \end_layout
 
 \begin_layout Standard
