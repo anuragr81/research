@@ -987,6 +987,80 @@ We would consider a smaller area in
 .
  Instead of the Euclidean distance, this approach considers a population
  ratio adjusted distance.
+ We don't modify the distance formula itself but consider different thresholds
+ for each distance.
+ For two districts that are of disparate population, we consider the threshold
+ adjusted by 
+\begin_inset Formula $min(\rho_{D},\rho_{R})/max(\rho_{D},\rho_{R})$
+\end_inset
+
+.
+ Given 
+\begin_inset Formula $A,B,C$
+\end_inset
+
+, if the population in district 
+\begin_inset Formula $A$
+\end_inset
+
+ changes more relative to 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+ over the next decade, then the distances 
+\begin_inset Formula $A,B$
+\end_inset
+
+ and 
+\begin_inset Formula $A,C$
+\end_inset
+
+ reduces i.e.
+ the consumers are relative 
+\begin_inset Quotes eld
+\end_inset
+
+closer
+\begin_inset Quotes erd
+\end_inset
+
+ to the new developments in 
+\begin_inset Formula $A$
+\end_inset
+
+ than they were before.
+ The distances in 
+\begin_inset Formula $B,C$
+\end_inset
+
+ however remain the same of they were before.
+ If on the other hand, both 
+\begin_inset Formula $B,C$
+\end_inset
+
+ develop more than 
+\begin_inset Formula $A$
+\end_inset
+
+, then the distances 
+\begin_inset Formula $A,B$
+\end_inset
+
+ and 
+\begin_inset Formula $A,C$
+\end_inset
+
+ are longer - but the distance between 
+\begin_inset Formula $B,C$
+\end_inset
+
+ remains the same.
+ The distance between a zero-population district is not defined (even though
+ it's 0).
 \end_layout
 
 \begin_layout Standard

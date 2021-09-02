@@ -911,7 +911,7 @@ lsms_loader<-function(fu,ln,lgc) {
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
       pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked.csv',sep=""))
       u <- merge(plyr::rename(pop,c("region"="region_name","district"="district_name","total"="total_population")), u, by = c("region_name","district_name"),all.y=T)
-      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name,population=u$total_population);
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name,population=as.numeric(u$total_population))
       
       
       adat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_a.DTA',sep=""),
@@ -1004,7 +1004,7 @@ lsms_loader<-function(fu,ln,lgc) {
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
       pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked.csv',sep=""))
       u <- merge(plyr::rename(pop,c("region"="region_name","district"="district_name","total"="total_population")), u, by = c("region_name","district_name"),all.y=T)
-      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name,population=u$total_population);
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name,population=as.numeric(u$total_population))
       
       
       adat<-read_tnz(filename = paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_A.dta',sep=""),
@@ -1107,7 +1107,7 @@ lsms_loader<-function(fu,ln,lgc) {
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
       pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked.csv',sep=""))
       u <- merge(plyr::rename(pop,c("region"="region_name","district"="district_name","total"="total_population")), u, by = c("region_name","district_name"),all.y=T)
-      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name ,population=u$total_population);
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name ,population=as.numeric(u$total_population));
       
       adat<-read_tnz(paste(dirprefix,'./lsms/TZNPS2HH1DTA/HH_SEC_A.dta',sep=""),FALSE)
       
@@ -1192,7 +1192,7 @@ lsms_loader<-function(fu,ln,lgc) {
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
       pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked.csv',sep=""))
       u <- merge(plyr::rename(pop,c("region"="region_name","district"="district_name","total"="total_population")), u, by = c("region_name","district_name"),all.y=T)
-      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name,population=u$total_population);
+      u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name,population=as.numeric(u$total_population))
       
       adat<-read_tnz(paste(dirprefix,'./lsms/tnz2008/TZNPS1HHDTA_E/SEC_A_T.dta',sep=""),FALSE,hhidColName = "hhid")
       

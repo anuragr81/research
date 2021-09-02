@@ -1171,10 +1171,10 @@ get_nonparametric_df <- function(ll){
   perception_columns <- c("life_perception"="hh_life_perception" , "finance_perception"="hh_finance_perception", "richness_perception"="hh_richness_perception","housing_perception"="hh_housing_perception","health_perception"="hh_health_perception")
   hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang")
   #total consumption
-  
+  relevant_fields <-c("hhid","region","district","ward","isrural","expensiveregion","S","E","population")
   # 2010
   ohs2010 <- subset(o2010,!is.na(region))
-  hs2010 <- unique(merge(unique(ohs2010[,c("hhid","region","district","ward","isrural","expensiveregion","S","E")]), ll@get_hsize(ohs2010), by = c("hhid")))
+  hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), ll@get_hsize(ohs2010), by = c("hhid")))
   chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
   #  perception_columns
   hhead2010 <- plyr::rename(subset(o2010,household_status==1)[,names(hhead_columns)],hhead_columns )
@@ -1185,7 +1185,7 @@ get_nonparametric_df <- function(ll){
   
   # 2012
   ohs2012 <- subset(o2012,!is.na(region))
-  hs2012 <- unique(merge(unique(ohs2012[,c("hhid","region","district","ward","isrural","expensiveregion","S","E")]), ll@get_hsize(ohs2012), by = c("hhid")))
+  hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), ll@get_hsize(ohs2012), by = c("hhid")))
   chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
   
   if (length(setdiff(names(perception_columns),colnames(o2012)))==0){
@@ -1199,7 +1199,7 @@ get_nonparametric_df <- function(ll){
   
   #2014
   ohs2014 <- subset(o2014,!is.na(region))
-  hs2014 <- unique(merge(unique(ohs2014[,c("hhid","region","district","ward","isrural","expensiveregion","S","E")]), ll@get_hsize(ohs2014), by = c("hhid")))
+  hs2014 <- unique(merge(unique(ohs2014[,relevant_fields]), ll@get_hsize(ohs2014), by = c("hhid")))
   chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
   
   hhead2014 <- plyr::rename(subset(o2014,household_status==1)[,names(hhead_columns)],hhead_columns )
@@ -1304,6 +1304,8 @@ get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold){
   all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P1")),all_distances,by=c("P1")) ,c("S"="S1","E"="E1","region"="region1","district"="district1") )
   all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P2")),all_distances,by=c("P2")) ,c("S"="S2","E"="E2","region"="region2","district"="district2") )
   stop("Euclidean distances should be adjusted by population")
+  # The distances between two points that are populous would be lower than two points that are less populous
+  # The distances are still symmetric - because even if one is significantly more populous than the other - they're closer than they would be when they're not populous.
   all_distances$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2)
    
   filtered_distances <- subset(all_distances,distance<distance_threshold)
