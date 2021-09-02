@@ -17,7 +17,7 @@ mkdir $TGTDIR
 cp application.py $TGTDIR/application.py
 cp .gitignore $TGTDIR/.gitignore
 cp requirements.txt $TGTDIR/requirements.txt
-
+cp index.html $TGTDIR/index.html
 
 curdir=`pwd`
 cd $TGTDIR
