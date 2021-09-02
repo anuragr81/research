@@ -1297,13 +1297,15 @@ calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
 get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold){
   # the average of consumption of consumers within a given population-distance becomes pi(r), the total asset value becomes r, the total expenditure is cost_ne
   # remember we have distances only of consumers 
-  all_points <- unique(rbind(unique(rbind(unique(dat2010[,c("region","district","S","E")]),unique(dat2012[,c("region","district","S","E")]))),unique(dat2014[,c("region","district","S","E")])))
+  selected_cols <- c("region","district","S","E","population")
+  all_points <- unique(rbind(unique(rbind(unique(dat2010[,selected_cols]),unique(dat2012[,selected_cols]))),unique(dat2014[,selected_cols])))
+  
   all_points$point <- paste(all_points$region,all_points$district,sep="-")
   all_distances <- expand.grid(all_points$point,all_points$point)
   colnames(all_distances) <- c("P1","P2")
-  all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P1")),all_distances,by=c("P1")) ,c("S"="S1","E"="E1","region"="region1","district"="district1") )
-  all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P2")),all_distances,by=c("P2")) ,c("S"="S2","E"="E2","region"="region2","district"="district2") )
-  stop("Euclidean distances should be adjusted by population")
+  all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P1")),all_distances,by=c("P1")) ,c("S"="S1","E"="E1","region"="region1","district"="district1","population"="population1") )
+  all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P2")),all_distances,by=c("P2")) ,c("S"="S2","E"="E2","region"="region2","district"="district2","population"="population2") )
+  
   # The distances between two points that are populous would be lower than two points that are less populous
   # The distances are still symmetric - because even if one is significantly more populous than the other - they're closer than they would be when they're not populous.
   all_distances$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2)
