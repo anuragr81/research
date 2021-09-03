@@ -1352,8 +1352,8 @@ run_non_parmetric_regression_for_food_vs_nonfood <- function(ll,dfslist,year,sp)
   #mod.lo_cpaa <- loess(cpA_a ~ S + E , span=sp, degree=1, data=dfslist[[select_df]])
   #mod.lo_cpab <- loess(cpA_b ~ S + E , span=sp, degree=1, data=dfslist[[select_df]])
   
-  mod.lo_ca <- loess(w_a ~ S + E , span=sp, degree=1, data=dfslist[[select_df]])
-  mod.lo_cb <- loess(w_b ~ S + E , span=sp, degree=1, data=dfslist[[select_df]])
+  mod.lo_ca <- loess(cost_a ~ S + E , span=sp, degree=1, data=dfslist[[select_df]])
+  mod.lo_cb <- loess(cost_b ~ S + E , span=sp, degree=1, data=dfslist[[select_df]])
   
   #fit.cpaa <- matrix(predict(mod.lo_cpaa, newdata), 25, 25)
   #fit.cpab <- matrix(predict(mod.lo_cpab, newdata), 25, 25)
@@ -1365,8 +1365,8 @@ run_non_parmetric_regression_for_food_vs_nonfood <- function(ll,dfslist,year,sp)
   
   #persp(S, E, fit.cpaa, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = "cpA a")
   #persp(S, E, fit.cpab, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = "cpA b")
-  persp(S, E, fit.ca, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$w_{food}$"))
-  persp(S, E, fit.cb, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$w_{non-food}$"))
+  persp(S, E, fit.ca, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$c_{food}$") , zlab="")
+  persp(S, E, fit.cb, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$c_{non-food}$"), zlab="")
   
   
 }
