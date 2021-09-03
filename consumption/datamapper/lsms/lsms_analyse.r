@@ -1,4 +1,4 @@
-
+require(latex2exp)
 library(dplyr)
 
 library(maps)
@@ -1108,11 +1108,12 @@ get_parametric_band_df <- function(ll){
   
   return(needs_and_excess_costs)
 }
-get_nonparametric_df <- function(ll){
+get_nonparametric_df <- function(ll,food_analysis){
   # Don't include education or housing expenses - because they're part of needs anyways
   inc_houserent = F
   inc_educexpense = F
-  food_analysis = F
+  #food_analysis = F
+  
   
   hhids2010_2012 <- mapping_hhids_2010_2012(o2012)
   
@@ -1338,10 +1339,10 @@ test_search_cluster <- function(){
   subset(dat %>% mutate(found=sapply(dat$P1,function(x){ length(grep(x,tdf[2,]))>0})),found==T)
 }
 
-run_non_parmetric_regression <- function(ll,dfslist,year,sp)
+run_non_parmetric_regression_for_food_vs_nonfood <- function(ll,dfslist,year,sp)
 {
   if(missing(dfslist)){
-    dfslist <- get_nonparametric_df(ll)
+    dfslist <- get_nonparametric_df(ll,food_analysis = T)
   }
   select_df=paste0("df",year)
   
@@ -1369,6 +1370,29 @@ run_non_parmetric_regression <- function(ll,dfslist,year,sp)
   
   
 }
+
+run_non_parmetric_regression_for_nu_vs_r <- function(ll,dfslist,year,sp)
+{
+  if(missing(dfslist)){
+    dfslist <- get_nonparametric_df(ll,food_analysis = F)
+  }
+  select_df=paste0("df",year)
+  
+  S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
+  E <- with(dfslist[[select_df]], seq(min(E), max(E), len=25))
+  newdata <- expand.grid(S=S, E=E)
+  mod.lo_nu_r <- loess(excess_unit_asset ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] %>% mutate (excess_unit_asset = nu/r))
+
+  fit.nu_r <- matrix(predict(mod.lo_nu_r, newdata), 25, 25)
+
+  par(mfrow=c(1,1))
+  
+  persp(S, E, fit.nu_r, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$\\nu/r$"), zlab = "")
+  
+  
+}
+
+
 estimation_df_budget_quantile<- function(ll,e)
 {
   inc_houserent = F
