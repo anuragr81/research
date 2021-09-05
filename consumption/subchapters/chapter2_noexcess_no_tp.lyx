@@ -1806,9 +1806,9 @@ noprefix "false"
 
 \begin_layout Standard
 [NON-PARAMETRIC Regression for food budgets] The non-durable consumption
- in the east coast regions is also generally higher - mostly due to higher
- expenditure on food items (due to higher prices and more options) in the
- east coast (Dar-es-Salaam and Zanzibar regions).
+ in the east coast regions is also generally higher (Dar-es-Salaam and Zanzibar
+ regions) - likely due to higher expenditure on food items (higher prices
+ and more options for quality).
  This is evident in the Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1838,7 +1838,7 @@ noprefix "false"
 \end_inset
 
 ).
- In the central regions, the consumers seem to have proportionately less
+ In these central regions, the consumers seem to have proportionately less
  assets but they spend proportionately higher on quality items.
  Consumption per asset is much lower in the rural heartland where spending
  opportunities are lower.
@@ -1848,13 +1848,91 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-[Subjective Well-being] This is clears up when we look at the subjective
- well-being data (see Figure )....
- who have higher assets may be happier than those with less assets even
- though those with less assets spend proportionately higher on ndc than
- them.
- The exceptions are indeed those extremely unsatisfied consumers who are
- also often extremely poor and have low excess.
+[Subjective Well-being] This is cleared up when we look at the subjective
+ well-being data (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:SubjectiveWellBeing2012"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ A relatively positive (negative) outlook of the future seems predominantly
+ related to having higher assets.
+ This seems evident when we compare the loess plot for owned assets in Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:log_assets_2012"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ with the consumer perceptions in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:SubjectiveWellBeing2012"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The plot of 
+\begin_inset Formula $\nu_{t}/r_{t}$
+\end_inset
+
+ in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:loess_nu_per_r"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ suggests that high excess (
+\begin_inset Formula $\nu_{t}/r_{t}$
+\end_inset
+
+ ) does not seem to make the consumer 
+\begin_inset Quotes eld
+\end_inset
+
+happier
+\begin_inset Quotes erd
+\end_inset
+
+ i.e.
+ improve her perception of the future in general but 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ has some role to play in the denser urban areas - in part due to better
+ variety in food for middle-income consumers.
+ The perception for financial situation seems high in the east coast - suggestin
+g that the urban amenities such as electricity may have a substantial impact
+ on the consumer perceptions.
+ To explore the relative effect of middle-income occupations in urban areas
+ (particular the east-coast districts), we now turn to the parametric analysis
+ in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:ParametricRegressions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1946,6 +2024,50 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
+	filename tnz_non_param_log_assets_2012.png
+	width 6in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:log_assets_2012"
+
+\end_inset
+
+The loess plot for the assets owned 
+\begin_inset Formula $log(A)$
+\end_inset
+
+ in 2012
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
 	filename tnz_non_param_excess_per_asset_in_ref_2012.png
 	width 4in
 
@@ -1964,11 +2086,15 @@ name "fig:loess_nu_per_r"
 
 \end_inset
 
-Loess regression with smoothing parameter = 
+Loess results for 
+\begin_inset Formula $\frac{\nu_{t}}{r_{t}}$
+\end_inset
+
+with smoothing parameter = 
 \begin_inset Formula $0.5$
 \end_inset
 
-
+ for year 2012
 \end_layout
 
 \end_inset
@@ -2016,17 +2142,19 @@ Subjective well-being in Tanzania (2012)
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
 \begin_layout Subsection
-Parametric Regression Results
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:ParametricRegressions"
+
+\end_inset
+
+Parametric Regressions
 \end_layout
 
 \begin_layout Standard
@@ -2041,6 +2169,170 @@ Parametric Regression Results
  This is seen both in the non-linear regression and the linear-regression
  result that we follow to decompose other factors in the cluster such as
  education and occupation-rank.
+ The results from estimation of 
+\begin_inset Formula $\nu=b_{0}\times r^{b_{1}}$
+\end_inset
+
+ are presented in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabExcessNonlinear}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{FE estimation for excess budget weight $ 
+\backslash
+nu $ as dependent variable 
+\backslash
+label{tabExcessNonlinear}} 
+\backslash
+begin{tabular}{l*{1}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{A
+\backslash
+_band}
+\backslash
+
+\backslash
+ 
+\backslash
+hline b0        &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    5.157         
+\backslash
+
+\backslash
+           &  (0.060)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline b1        &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -1.213
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     3848         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
