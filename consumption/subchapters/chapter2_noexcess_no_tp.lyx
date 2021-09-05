@@ -21,7 +21,7 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "tgschola" "default"
+\font_roman "palatino" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -1779,50 +1779,82 @@ name "sec:Results"
 \end_layout
 
 \begin_layout Subsection
-Non-parametric Regression Results
+Non-parametric Analysis
 \end_layout
 
 \begin_layout Standard
-[
-\begin_inset Formula $\nu$
+[Occupation differences] The disparity in the east-coast and the rest of
+ Tanzania is striking both in terms of the population density and disparity
+ in income.
+ We find that the occupations associated with higher income are far fewer
+ in the hinterland than on the east coast (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:occupations_r"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- per 
-\begin_inset Formula $r$
-\end_inset
-
-] Asset-bands are motivated by the differences in wealth and occupation
- across Tanzania.
- See plot.
- 
+).
+ However, the higher population of poor individuals in the densely populated
+ east-coast means that despite lower income, the median net-asset worth
+ of the individuals in regions such as Singida and Manyara matches up with
+ that of the consumers in the east coast of Tanzania.
 \end_layout
 
 \begin_layout Standard
-[NON-PARAMETRIC Regression for food budgets] We're interesting in know weight
- on food vs non-food varies with logarithmic of assets - here we don't see
- linear log(A) but a geographic kernel.
- The results show that food quality is reportedly much higher in the east
- coast of Tanzania.
- Dense rich areas may have different quality for food vs non-food.
- The non-parametric regression attempts to understand how wide the reference
- boundaries should be (span).
- We're interested only in the differences in per head consumption across
- regions.
- We find that per-head food budget is much higher in the urban regions.
- But we also see higher non-durable non-asset consumption in urban regions
- - Dar es salaam - regions.
- Consumers have less assets but they spend much higher on non-food items.
+[NON-PARAMETRIC Regression for food budgets] The non-durable consumption
+ in the east coast regions is also generally higher - mostly due to higher
+ expenditure on food items (due to higher prices and more options) in the
+ east coast (Dar-es-Salaam and Zanzibar regions).
+ This is evident in the Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FoodNonFood_x"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Comparing the differences in overall per head non-durable consumption (includin
+g both food and non-food items) across regions, we find that the central
+ regions have a higher expenditure relative to their asset-richness (measure
+ by 
+\begin_inset Formula $\frac{\nu_{t}}{r_{t}}$
+\end_inset
+
+ - see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:loess_nu_per_r"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ In the central regions, the consumers seem to have proportionately less
+ assets but they spend proportionately higher on quality items.
  Consumption per asset is much lower in the rural heartland where spending
- opportunities are lower (is that the story?).
+ opportunities are lower.
+ This suggests either that higher food prices suppress non-food expenditure
+ in the east-coast or that the consumers feel a higher need to spend on
+ non-food items in the central parts of the country.
 \end_layout
 
 \begin_layout Standard
-[Findings] those who have higher assets may be happier than those with less
- assets even though those with less assets spend proportionately higher
- on ndc than them.
+[Subjective Well-being] This is clears up when we look at the subjective
+ well-being data (see Figure )....
+ who have higher assets may be happier than those with less assets even
+ though those with less assets spend proportionately higher on ndc than
+ them.
  The exceptions are indeed those extremely unsatisfied consumers who are
  also often extremely poor and have low excess.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1875,7 +1907,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename tnz_non_param_food_non_food_2012.png
-	width 5in
+	width 6in
 
 \end_inset
 
@@ -1886,7 +1918,13 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Food and Non-Expenditures 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:FoodNonFood_x"
+
+\end_inset
+
+Food and Non-Food Expenditures 
 \end_layout
 
 \end_inset
@@ -1897,16 +1935,6 @@ Food and Non-Expenditures
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-[Quality vs asset results] The plot for 
-\begin_inset Formula $nu/r$
-\end_inset
-
- is provided in Figure .
- The east coast shows a clear excess opportunity - not necessarily status
- consumption (for which there is subjective welfare data).
 \end_layout
 
 \begin_layout Standard
@@ -1953,6 +1981,50 @@ Loess regression with smoothing parameter =
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename tnz_non_param_perception_2012.png
+	width 6in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:SubjectiveWellBeing2012"
+
+\end_inset
+
+Subjective well-being in Tanzania (2012)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Parametric Regression Results
 \end_layout
@@ -1965,7 +2037,10 @@ Parametric Regression Results
 \begin_inset Formula $r$
 \end_inset
 
- 
+ .
+ This is seen both in the non-linear regression and the linear-regression
+ result that we follow to decompose other factors in the cluster such as
+ education and occupation-rank.
 \end_layout
 
 \begin_layout Standard
@@ -2165,10 +2240,7 @@ e^{A(r)} & =(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}(r-\bar{r})^{-\frac{1-\alph
 \begin_inset Formula $\int_{r_{0}}^{r}e^{-A(s)}b(s)ds=\int_{r_{0}}^{r}\{(\frac{s-\bar{r}}{r_{0}-\bar{r}})^{\frac{1-\alpha}{\alpha}}\frac{(1-\alpha)\bar{\nu}}{x\alpha(s-\bar{r})}\}ds=\frac{(1-\alpha)\bar{\nu}}{x\alpha(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}}\int_{r_{0}}^{r}(s-\bar{r})^{\frac{1}{\alpha}-2}ds$
 \end_inset
 
- 
-\begin_inset Formula $ $
-\end_inset
-
+.
  With 
 \begin_inset Formula $\alpha\ne\frac{1}{2}$
 \end_inset

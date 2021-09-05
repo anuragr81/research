@@ -1365,8 +1365,8 @@ run_non_parmetric_regression_for_food_vs_nonfood <- function(ll,dfslist,year,sp)
   
   #persp(S, E, fit.cpaa, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = "cpA a")
   #persp(S, E, fit.cpab, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = "cpA b")
-  persp(S, E, fit.ca, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$c_{food}$") , zlab="")
-  persp(S, E, fit.cb, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$c_{non-food}$"), zlab="")
+  persp(S, E, fit.ca, theta=30, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$x_{food}$") , zlab="")
+  persp(S, E, fit.cb, theta=30, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$x_{non-food}$"), zlab="")
   
   
 }
@@ -1388,6 +1388,63 @@ run_non_parmetric_regression_for_nu_vs_r <- function(ll,dfslist,year,sp)
   par(mfrow=c(1,1))
   
   persp(S, E, fit.nu_r, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$\\nu/r$"), zlab = "")
+  
+}
+
+run_non_parmetric_regression_for_A <- function(ll,dfslist,year,sp,theta,phi)
+{
+  if(missing(dfslist)){
+    dfslist <- get_nonparametric_df(ll,food_analysis = F)
+  }
+  select_df=paste0("df",year)
+  
+  S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
+  E <- with(dfslist[[select_df]], seq(min(E), max(E), len=25))
+  newdata <- expand.grid(S=S, E=E)
+  mod.lo_lnA <- loess(lnA0 ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  
+  fit.lo_lnA <- matrix(predict(mod.lo_lnA, newdata), 25, 25)
+  
+  par(mfrow=c(1,1))
+  if (missing(theta)){
+    theta <- 10
+  }
+  if (missing(phi)){
+    phi <- 20
+  }
+  persp(S, E, fit.lo_lnA, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$log(A)$"), zlab = "")
+  
+}
+
+
+run_non_parmetric_regression_for_perception <- function(ll,dfslist,year,sp)
+{
+  if(missing(dfslist)){
+    dfslist <- get_nonparametric_df(ll,food_analysis = F)
+  }
+  select_df=paste0("df",year)
+  
+  S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
+  E <- with(dfslist[[select_df]], seq(min(E), max(E), len=25))
+  newdata <- expand.grid(S=S, E=E)
+  
+  mod.lo_life_percept <- loess(hh_life_perception ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  mod.lo_rich_percept <- loess(hh_richness_perception ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  mod.lo_housing_percept <- loess(hh_housing_perception ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  mod.lo_finance_percept <- loess(hh_finance_perception ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  #hh_finance_perception, hh_richness_perception, hh_housing_perception, hh_health_perception
+  par(mfrow=c(2,2))
+  
+  fit.lo_life_percept <- matrix(predict(mod.lo_life_percept, newdata), 25, 25)
+  fit.lo_rich_percept <- matrix(predict(mod.lo_rich_percept, newdata), 25, 25)
+  fit.lo_housing_percept <- matrix(predict(mod.lo_housing_percept, newdata), 25, 25)
+  fit.lo_finance_percept <- matrix(predict(mod.lo_finance_percept, newdata), 25, 25)
+  
+  persp(S, E, fit.lo_life_percept, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$perception_{life}$"), zlab = "")
+  persp(S, E, fit.lo_rich_percept, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$perception_{richness}$"), zlab = "")
+  persp(S, E, fit.lo_housing_percept, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$perception_{housing}$"), zlab = "")
+  persp(S, E, fit.lo_finance_percept, theta=10, phi=20, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$perception_{finance}$"), zlab = "")
+  
   
 }
 
