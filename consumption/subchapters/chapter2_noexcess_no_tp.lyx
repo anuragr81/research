@@ -485,8 +485,8 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-L=u(\nu,r)-\lambda(log(x)-log(\nu)-log(\pi(r)))\\
-L=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})-\lambda(log(x)-log(\pi(r))-log(\nu))
+L=u(\nu_{t},r_{t})-\lambda(log(x)-log(\nu_{t})-log(\pi(r_{t})))\\
+L=\alpha log(\nu_{t}-\bar{\nu})+(1-\alpha)log(r_{t}-\bar{r})-\lambda(log(x_{t})-log(\pi(r_{t}))-log(\nu_{t}))
 \end{gather*}
 
 \end_inset
@@ -497,8 +497,8 @@ L=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})-\lambda(log(x)-log(\pi(r))-
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-\frac{\partial L}{\partial\nu}=0\Rightarrow\frac{\alpha}{1-\frac{\bar{\nu}}{\nu}}=-\lambda\\
-\frac{\partial L}{\partial r}=0\Rightarrow\frac{1-\alpha}{r-\bar{r}}=-\frac{\lambda\pi'(r)}{\pi(r)}\Rightarrow\frac{\pi(r)}{\pi'(r)}\frac{1-\alpha}{r-\bar{r}}=-\lambda
+\frac{\partial L}{\partial\nu_{t}}=0\Rightarrow\frac{\alpha}{1-\frac{\bar{\nu}}{\nu_{t}}}=-\lambda\\
+\frac{\partial L}{\partial r_{t}}=0\Rightarrow\frac{1-\alpha}{r_{t}-\bar{r}}=-\frac{\lambda\pi'(r_{t})}{\pi(r_{t})}\Rightarrow\frac{\pi(r_{t})}{\pi'(r_{t})}\frac{1-\alpha}{r_{t}-\bar{r}}=-\lambda
 \end{gather*}
 
 \end_inset
@@ -521,8 +521,8 @@ Using
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-\frac{\pi(r)}{\pi'(r)}\frac{1-\alpha}{r-\bar{r}}=\frac{\alpha}{1-\frac{\bar{\nu}}{\nu}}\Rightarrow\frac{\pi(r)}{\pi'(r)}\frac{1-\alpha}{r-\bar{r}}=\frac{\alpha}{1-\frac{\pi(r)\bar{\nu}}{x}}\\
-\frac{1-\alpha}{\pi'(r)(r-\bar{r})}=\frac{\alpha}{\pi(r)(1-\frac{\pi(r)\bar{\nu}}{x})}\Rightarrow\frac{\alpha}{(1-\alpha)}(r-\bar{r})\pi'(r)=\pi(r)-\frac{\pi(r)^{2}\bar{\nu}}{x}
+\frac{\pi(r_{t})}{\pi'(r_{t})}\frac{1-\alpha}{r_{t}-\bar{r}}=\frac{\alpha}{1-\frac{\bar{\nu}}{\nu_{t}}}\Rightarrow\frac{\pi(r_{t})}{\pi'(r_{t})}\frac{1-\alpha}{r_{t}-\bar{r}}=\frac{\alpha}{1-\frac{\pi(r_{t})\bar{\nu}}{x_{t}}}\\
+\frac{1-\alpha}{\pi'(r_{t})(r_{t}-\bar{r})}=\frac{\alpha}{\pi(r_{t})(1-\frac{\pi(r_{t})\bar{\nu}}{x})}\Rightarrow\frac{\alpha}{(1-\alpha)}(r_{t}-\bar{r})\pi'(r_{t})=\pi(r_{t})-\frac{\pi(r_{t})^{2}\bar{\nu}}{x}
 \end{gather*}
 
 \end_inset
@@ -1179,7 +1179,7 @@ status open
 
 
 \backslash
-begin{longtable}{l l l} 
+begin{longtable}{l l r} 
 \backslash
 caption{List of owned assets (sorted by median reported market-price) 
 \backslash
@@ -1187,12 +1187,7 @@ label{assetslist}}
 \backslash
 
 \backslash
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-
+  
 \backslash
 hline
 \backslash
@@ -1214,7 +1209,7 @@ hline
 \backslash
 
 \backslash
- & bed & 30000.0
+ & bed & 30000.00
 \backslash
 
 \backslash
@@ -1222,45 +1217,45 @@ hline
 \backslash
 
 \backslash
- & videoplayer & 40000.0
+ & videoplayer & 40000.00
 \backslash
 
 \backslash
- & bike & 50000.0
+ & bike & 50000.00
 \backslash
 
 \backslash
- & cart & 50000.0
+ & cart & 50000.00
 \backslash
 
 \backslash
- & donkey & 50000.0
+ & donkey & 50000.00
 \backslash
 
 \backslash
- & plough & 90000.0
+ & plough & 90000.00
 \backslash
 
 \backslash
- & sewingmachine & 90000.0
+ & sewingmachine & 90000.00
 \backslash
 
 \backslash
- & harrow & 100000.0
+ & harrow & 100000.00
 \backslash
 
 \backslash
  & stove
 \backslash
-_electricgas & 100000.0
+_electricgas & 100000.00
 \backslash
 
 \backslash
- & tv & 100000.0
+ & tv & 100000.00
 \backslash
 
 \backslash
- & waterpump & 100000.0
+ & waterpump & 100000.00
 \backslash
 
 \backslash
@@ -1268,19 +1263,19 @@ _electricgas & 100000.0
 \backslash
 
 \backslash
- & musicsystem & 200000.0
+ & musicsystem & 200000.00
 \backslash
 
 \backslash
- & refrigerator & 200000.0
+ & refrigerator & 200000.00
 \backslash
 
 \backslash
- & computer & 350000.0
+ & computer & 350000.00
 \backslash
 
 \backslash
- & animalcart & 400000.0
+ & animalcart & 400000.00
 \backslash
 
 \backslash
@@ -1288,27 +1283,27 @@ _electricgas & 100000.0
 \backslash
 
 \backslash
- & handmill & 1000000.0
+ & handmill & 1000000.00
 \backslash
 
 \backslash
- & motorbike & 1200000.0
+ & motorbike & 1200000.00
 \backslash
 
 \backslash
- & powertiller & 1400000.0
+ & powertiller & 1400000.00
 \backslash
 
 \backslash
- & trailer & 3000000.0
+ & trailer & 3000000.00
 \backslash
 
 \backslash
- & car & 6000000.0
+ & car & 6000000.00
 \backslash
 
 \backslash
- & tractor & 20000000.0
+ & tractor & 20000000.00
 \backslash
 
 \backslash
@@ -1355,11 +1350,11 @@ laam and Geita regions.
  population-adjusted distances - effectively aggregated data from districts
  the same level as that of the a district in Dar-es-salaam region.
  Here, the population-adjusted distance - over which the cluster of 
-\begin_inset Formula $\pi(r)$
+\begin_inset Formula $\pi(r_{t})$
 \end_inset
 
  and 
-\begin_inset Formula $r$
+\begin_inset Formula $r_{t}$
 \end_inset
 
  are aggregated - is merely a Euclidean distance weighted with the total
@@ -1374,11 +1369,11 @@ laam and Geita regions.
 \end_inset
 
 , the symmetric population-adjusted distance is simply 
-\begin_inset Formula $\frac{r_{AB}}{N_{A}+N_{B}}$
+\begin_inset Formula $\frac{\delta_{AB}}{N_{A}+N_{B}}$
 \end_inset
 
  where 
-\begin_inset Formula $r_{AB}$
+\begin_inset Formula $\delta_{AB}$
 \end_inset
 
  is the Euclidean distance between coordinates for 
@@ -1390,7 +1385,7 @@ laam and Geita regions.
 \end_inset
 
  is population that is meant to reside within the distance 
-\begin_inset Formula $r_{AB}$
+\begin_inset Formula $\delta_{AB}$
 \end_inset
 
 .
@@ -1399,11 +1394,11 @@ s that are supposed to make consumers feel a smaller despite being spread
  over a larger geographical area, this distance would be wider.
  In other words, denser areas mean narrower reference group over which we
  can calculate 
-\begin_inset Formula $r$
+\begin_inset Formula $r_{t}$
 \end_inset
 
  and 
-\begin_inset Formula $\pi(r)$
+\begin_inset Formula $\pi(r_{t})$
 \end_inset
 
 .
@@ -1425,7 +1420,7 @@ For a given boundary of reference around every consumer's district, the
 \end_inset
 
  is deemed as the average market value of assets owned while 
-\begin_inset Formula $\pi(r)$
+\begin_inset Formula $\pi(r_{t})$
 \end_inset
 
  is simply the average excess consumption (expenditure on items that are
@@ -1435,108 +1430,39 @@ either excess or needs
 \bar default
 ) within the boundary.
  All consumers within the boundary are assumed to have the same 
-\begin_inset Formula $r$
-\end_inset
-
- and 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- while their 
-\begin_inset Formula $\nu=\frac{x}{\pi(r)}$
-\end_inset
-
- varies.
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-[Measurement of 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
-] The idiosyncratic effects of 
-\begin_inset Formula $A$
-\end_inset
-
- on 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- would thus need to be considered.
-
-\bar default
- Since we observe itemwise expenditure in the recall diary, we remove the
- effect of 
-\begin_inset Formula $A$
-\end_inset
-
- by excluding expenditures that are associated with 
-\begin_inset Formula $A$
-\end_inset
-
-.
- 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- .
- Since 
-\begin_inset Formula $x_{t}=\frac{c_{t}}{\psi_{t}}=\nu_{t}\pi(r_{t})$
-\end_inset
-
-, the per head consumption 
-\begin_inset Formula $\pi(r_{t})$
-\end_inset
-
- within a certain region 
 \begin_inset Formula $r_{t}$
 \end_inset
 
- (representing geographical distance and the asset possessions in a given
- neighborhood) so that all idiosyncratic factors are included in 
-\begin_inset Formula $\nu_{t}$
+ and 
+\begin_inset Formula $\pi(r_{t})$
 \end_inset
 
-.
- A clear limitation implied by 
-\begin_inset Formula $\pi(r)$
+ while their 
+\begin_inset Formula $\nu_{t}=\frac{x_{t}}{\pi(r_{t})}$
 \end_inset
 
- is that number of observed households within ever boundary should be enough
- to average out the idiosyncratic effects or issues related to seasonality
- of data (e.g.
+ varies.
+ A clear limitation imposed by such an observation of 
+\begin_inset Formula $\pi(r_{t})$
+\end_inset
+
+ is that number of observed households over which it is calculated should
+ be enough to cancel out the idiosyncratic effects or issues related to
+ seasonality of data (e.g.
  less electricity needed in winter etc.).
- The averages 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- is observed over the boundaries of - which consider both the asset-richness
- and geographical distance.
- It is worth emphasising that the goal of our analysis is not to estimate
- 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- itself - which may required direct estimation.
- Instead we intend to test whether the representative consumer - whose average
- 
-\begin_inset Formula $\nu$
-\end_inset
-
- we observe in the regression - substitute being close to average quality
- in a rich neighborhood with running to exclusivity in a poor neighborhood
- while assuming a general form of 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Subsubsection
 \paragraph_spacing single
-Data on subjective well-being
+Subjective well-being
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+The subjective well-being questionnaire in the survey records the financial,
+ health and overall satisfaction levels for every individual.
+ We use these to test whether asset distribution or excess expenditure provides
+ higher satisfaction to the consumer.
 \end_layout
 
 \begin_layout Subsection
@@ -1548,148 +1474,90 @@ Empirical Method
 \begin_inset Formula $\nu$
 \end_inset
 
-] Due to the utility assumed in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:basic_utility"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, a rich consumer likes being the richest in her area as much as the poor
- consumers likes being the richest in hers.
- The way we have defined 
+] The regression equations implied by the model tell us how 
 \begin_inset Formula $\nu$
 \end_inset
 
-, it is not interpreted without a known certain 
+ (which is expenditure in excess of 
+\begin_inset Formula $\pi(r_{t})$
+\end_inset
+
+ ) varies by 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ in a population.
+ The goal of the empirical analysis is therefore only to test whether the
+ consumers in richer references use less relative quality (and vice versa)
+ or not.
+ More specifically, the model parametrises the urban-rural and regional
+ differences through 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
- - which we estimate as the region's average.
- The regression equations implied by the model tell nus how 
-\begin_inset Formula $\nu$
-\end_inset
-
- (which depends on 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- through 
-\begin_inset Formula $\nu=\frac{x}{\pi(r)}$
-\end_inset
-
- ) depends on 
+ and 
 \begin_inset Formula $r$
 \end_inset
 
-.
- Representing the quality above the consumption in her reference 
-\begin_inset Formula $r$
-\end_inset
-
-, the metric 
-\begin_inset Formula $\nu$
-\end_inset
-
- is used only to test whether the consumers in richer references use less
- quality (and vice versa) or not.
- Do owners of high assets spend differently in rural areas than in urban
- areas i.e.
- the analysis tells us if rich people in rural areas spend differently.
- It could be because consumer don't have a lot to 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- spend or that they feel less peer-pressure, 
-\bar under
-the demand does not tell that to us
-\bar default
-.
- This is where subjective well being can guide us (this is what makes peer
- effects relevant to consumption analysis).
+ - attempting to understand just to what extent the differences in long-term
+ asset-ownership could be overcome with expensive non-durable consumption
+ (excess).
+ It is worth emphasising that consumer diaries cannot tell us whether a
+ consumer spends more on non-durable consumption because of a peer-pressure
+ she feels or because she is forced to spend higher on non-durable consumption
+ across the neighborhoods in an economy.
+ This assessment could be made - at least to some extent - with the data
+ on subjective well being recorded in the survey.
 \end_layout
 
 \begin_layout Standard
-[Empirical judgment with pi(r)] Since 
+[Empirical judgment with pi(r)] Our justification for excluding the cost
+ of owning and maintaining assets from 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is that 
 \begin_inset Formula $r$
 \end_inset
 
- includes the effect of asset worth in the consumer's neighborhood, we exclude
- the cost of owning and maintaining assets.
- If we did include the cost of owning and maintaining assets, the scaling
- of the total expenditure 
+ already include the effect of net-asset worth for the consumer's status
+ utility.
+ The idea that the consumer 
 \begin_inset Quotes eld
 \end_inset
 
-needs
+scale-up
 \begin_inset Quotes erd
 \end_inset
 
- by 
+ non-nondurable consumption by availing higher quality or quantity than
+ necessary does not make sense if we include the costs imposed on the consumer
+ due to owning assets (through maintenance, repair, fees etc.).
+ The total expenditure 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
- - which is the effect of neighborhood on the consumer's expenditure would
- not make sense - since the effect of 
-\begin_inset Formula $A$
-\end_inset
-
- is also included in the total expenditure.
- The scaling of needs by 
-\begin_inset Formula $\nu$
-\end_inset
-
- makes sense only if the costs associated with more assets is excluded from
- 
-\begin_inset Formula $c_{t}$
-\end_inset
-
-.
- The asset-maintenance costs are thus excluded from the total expenditure
- 
-\begin_inset Formula $c$
-\end_inset
-
-.
- Recall that average consumption 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- could indicate peer-pressure or the availability of quality in the consumer's
- neighborhood - a distinction that is not made in the analysis of consumer
- diaries.
- It is worth clarifying that even though we do not consider the asset-maintenanc
-e costs in 
-\begin_inset Formula $c_{t},$
-\end_inset
-
-having assets do influence consumers 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- through through 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- ( rather than through asset costs which are not included in 
-\begin_inset Formula $c_{t}$
-\end_inset
-
-).
- The advantage that the consumer get from being asset-rich and being in
- an upscale area is included in 
+ which the consumer scales up and encompasses the social need of being in
+ the neighbourhood 
 \begin_inset Formula $r$
 \end_inset
 
- and not in 
+ - must therefore also exclude the cost of maintaining assets.
+  In other words, the advantage that the consumer gets from being in an
+ asset-rich neighborhood is meant to be measured with 
+\begin_inset Formula $r$
+\end_inset
+
+ rather than 
 \begin_inset Formula $\nu$
 \end_inset
 
 .
- In terms of the model, as the consumer scales 
+ As the consumer scales up the expenditure 
 \begin_inset Formula $\pi(r)\cdot\psi$
 \end_inset
 
@@ -1697,8 +1565,14 @@ having assets do influence consumers
 \begin_inset Formula $\nu$
 \end_inset
 
- to avail higher utility (
-\begin_inset Formula $c_{t}=\pi(r)\nu_{t}\psi_{t}$
+ for higher utility (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:budget_definition"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
 ), 
@@ -1706,55 +1580,104 @@ having assets do influence consumers
 \end_inset
 
  does not include asset purchases or asset costs but merely the indication
- of how much below or above the consumer is to the average.
-\end_layout
-
-\begin_layout Standard
-[Non-Parametric-SubjectiveWellBeing ] The non-parametric plots can also
- show happiness.
- Financial or otherwise.
- If consumption makes people happy we should see that those spending higher
- on quality should be happier than those who don't have high quality (for
- the same given assets).
- Also, those who have higher assets may be happier than those with less
- assets even though those with less assets spend higher on ndc than them.
- The plot of happiness measures can only be smoothened - which we should
- try for both 
-\begin_inset Formula $\nu$
-\end_inset
-
- (which depends on on 
+ of how much below or above the consumer is to the average 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
-) and assets 
-\begin_inset Formula $A$
-\end_inset
-
- (which is individual).
- We could then comment about the role of 
-\begin_inset Formula $\nu$
+ imposed by her locality 
+\begin_inset Formula $r$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-[Parametric-SubjectiveWellBeing ] In terms of the parametric model, we must
- be careful to interpret that happiness is not optimised by the consumer.
- It makes descriptive sense to say that there is nothing else the consumers
- would rather optimise - but we can never have all the variables of what
- makes consumers happy - we are better positioned to understand happiness
- as a need.
- Consumers are all meant to believe that being rich would make them happier
- - the consumers may choose to stay miserable because household under needs
- do not make consumer decisions based on needs - future happiness than present
- happiness.
- Self-reported happiness indicates what consumer - but makes a poor assessment
- of what motivates her.
- The issue of causality is important for subjective well-being just the
- same - it needs to be clear whether the consumer's happiness influences
- the selection of 
+[Non-Parametric-SubjectiveWellBeing ] The consumer motivation in selecting
+ a particular 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ - i.e.
+ whether she increases 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ to achieve higher status or to fulfill social needs necessitated by her
+ environment - cannot be explained by an analysis of her consumption diary.
+ We attempt to understand the motivations to some extent by inferring how
+ miserable the consumer might in an environment of high 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ (and relatively lower 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+) and low 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+(and relatively higher 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+.
+ To this purpose, we discuss non-parametric plots for financial and overall
+ contentment in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Results"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Our goal is to find test whether for the same total expenditure 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+, those with less assets feel dissatisfied while also having higher excess
+ levels or not (and likewise if, extremely satisfied consumers in the higher
+ asset band have less excess or not).
+ If consumption makes people happy we should see that those spending higher
+ on quality should be happier than those who don't have high quality (for
+ the same given assets).
+ We present these results with non-parametric smoothing of the happiness
+ measures and comparing them with similar plots for 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ (which depends on 
+\begin_inset Formula $\pi(r_{t})$
+\end_inset
+
+) and asset-bands 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ .
+ 
+\end_layout
+
+\begin_layout Standard
+[Parametric-SubjectiveWellBeing ] We do not assume that happiness is what
+ is optimised by the consumer.
+ While it may makes descriptive sense to say that there is nothing else
+ the consumers would rather optimise - one must also admit that consumption
+ surveys may not have enough variables that contribute the consumer's happiness.
+ In other words, our approach with consumption surveys is often better positione
+d to interpret happiness itself as a need that is constrained with differences
+ in income and social status.
+ Consumers could indeed believe that being rich would make them happier
+ - but we cannot rule out the possibility that the consumers choose to stay
+ miserable in order to achieve happiness in the future or happiness for
+ their children.
+ A household - whose decisions we attempt to understand with our representative
+ consumer - makes decision on based on needs under income constraints -
+ rather than less understood goals of happiness.
+ 
 \family roman
 \series medium
 \shape up
@@ -1767,36 +1690,28 @@ having assets do influence consumers
 \uwave off
 \noun off
 \color none
-
-\begin_inset Formula $(\nu,\Delta A)$
-\end_inset
-
- or the choice of 
-\begin_inset Formula $(\nu,\Delta A)$
-\end_inset
-
- makes her happy.
- They both may amount to the same in the regression model aiming to measure
- the two in equilibrium.
- But our discussion of them would require us to have a model of how happiness
- is influenced by status consumption or vice versa.
- To clarify this notice that consumers don't select consumption that makes
- them happy - instead they select consumption that gives the maximum utility
- for a given constraint.
- Thus we are reluctant to arguing that consumers 
+In other words, the consumers don't select consumption that makes them happy
+ but they select consumption that gives them maximum utility over a lifetime
+ for a given known constraint.
+ 
 \family default
 \series default
 \shape default
 \size default
 \emph default
-\bar under
+\bar default
 \strikeout default
 \xout default
 \uuline default
 \uwave default
 \noun default
 \color inherit
-optimise happiness 
+In our view, therefore, the self-reported happiness captures what consumer
+ feels after having exercised her choice but makes an insufficient assessment
+ of what motivates her choice.
+ This issue of causality in our model must be borne in mind for the interpretati
+on of the subjective well-being data i.e.
+ 
 \family roman
 \series medium
 \shape up
@@ -1809,71 +1724,47 @@ optimise happiness
 \uwave off
 \noun off
 \color none
-to select consumption.
- What we can do is to thus verify if the consumers are happy after making
- consumption choices.
- We could verify to see if our definition of being miserable (being low
- in the reference groups) tallies with the reported subjective well being.
- In conclusion, whether a consumer is optimistic about the future or not
- may have little to do with how she spends - but it is still possible to
- empirically test whether increasing negative distance from reference makes
- the consumer unhappy or not.
- This would help us test if the local reference are relevant for consumption.
- 
-\end_layout
+the model's assumption that the choice of 
+\begin_inset Formula $(\nu_{t},r_{t})$
+\end_inset
 
-\begin_layout Standard
-1.
- confident poor consumers with low status consumption: Either she has lower
- reference or that she believes that she is going to be rich 
-\end_layout
+ influences her happiness 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+rather than happiness (the mechanisms influencing which are less adequately
+ captured in the survey) influencing her selection of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
 
-\begin_layout Standard
-2.
- confident poor consumer with high status consumption budget: there is high
- status consumption 
-\end_layout
+\begin_inset Formula $(\nu_{t},r_{t})$
+\end_inset
 
-\begin_layout Standard
-3.
- despondent poor consumers with low status consumption: low reference low
- expectations
-\end_layout
-
-\begin_layout Standard
-4.
- despondent poor consumers with high status consumption: high reference
- 
-\end_layout
-
-\begin_layout Standard
-5.
- confident rich consumers with low status consumption: high reference non
- need for status consumption (compare with poor consumers status consumption
- and happiness) 
-\end_layout
-
-\begin_layout Standard
-6.
- confident rich consumer with high status consumption budget: there is high
- status consumption 
-\end_layout
-
-\begin_layout Standard
-7.
- despondent rich consumers with low status consumption: low reference low
- probability
-\end_layout
-
-\begin_layout Standard
-8.
- despondent rich consumers with high status consumption: high reference
-\end_layout
-
-\begin_layout Standard
-[Robustness analysis] We could compare how changing the reference definition
- (e.g.
- by removing asset-differences definition) influences our conclusions.
+.
+ Our analysis is therefore limited to understanding how happy the consumers
+ are after making their consumption choices.
+ This effectively compares the model's definition of being miserable (being
+ in a poorer reference group or having low excess) with the reported subjective
+ well being in the survey.
 \end_layout
 
 \begin_layout Section
@@ -1903,6 +1794,7 @@ Non-parametric Regression Results
 ] Asset-bands are motivated by the differences in wealth and occupation
  across Tanzania.
  See plot.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1922,6 +1814,15 @@ Non-parametric Regression Results
  Consumers have less assets but they spend much higher on non-food items.
  Consumption per asset is much lower in the rural heartland where spending
  opportunities are lower (is that the story?).
+\end_layout
+
+\begin_layout Standard
+[Findings] those who have higher assets may be happier than those with less
+ assets even though those with less assets spend proportionately higher
+ on ndc than them.
+ The exceptions are indeed those extremely unsatisfied consumers who are
+ also often extremely poor and have low excess.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2088,6 +1989,22 @@ APPENDIX
 \end_layout
 
 \begin_layout Standard
+For simplicity of expression we replace 
+\begin_inset Formula $r_{t}\rightarrow r$
+\end_inset
+
+, 
+\begin_inset Formula $x_{t}\rightarrow x$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{t}\rightarrow r$
+\end_inset
+
+ to write
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
 L=u(\nu,r)-\lambda(log(x)-log(r)-log(\nu))\\
@@ -2097,6 +2014,10 @@ L=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})-\lambda(log(x)-log(r)-log(\
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+With the first order conditions,
 \end_layout
 
 \begin_layout Standard
