@@ -8,7 +8,14 @@
 \begin_preamble
 \usepackage{mathtools}
 \usepackage{amsmath}
+\usepackage{lscape}
 \usepackage{longtable}
+\usepackage{bbm}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+\usepackage[left,modulo]{lineno}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -21,7 +28,7 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "palatino" "default"
+\font_roman "tgtermes" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -38,7 +45,7 @@ theorems-sec
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 11
+\paperfontsize 9
 \spacing single
 \use_hyperref false
 \papersize default
@@ -73,7 +80,8 @@ theorems-sec
 \bottommargin 2.5cm
 \headheight 2.5cm
 \headsep 2.5cm
-\footskip 2.5cm
+\footskip 2cm
+\columnsep 1cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -82,7 +90,7 @@ theorems-sec
 \math_numbering_side default
 \quotes_style english
 \dynamic_quotes 0
-\papercolumns 1
+\papercolumns 2
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
@@ -178,6 +186,22 @@ newpage
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Model
 \begin_inset CommandInset label
@@ -190,35 +214,33 @@ name "sec:Model"
 \end_layout
 
 \begin_layout Standard
-[Substitution and Theoretical problems with Intertemporal Substitution]
- While the intertemporal substitution framework has been widely used for
- problems in consumer economics, its applications in status consumption
- have been relatively limited.
- This is in part due to unavailability of brand information and detailed
+[Issues with Intertemporal Substitution] While the intertemporal substitution
+ framework has been widely used in consumer economics, its applications
+ in status consumption have been limited.
+ This seems in part due to unavailability of brand information and detailed
  prices of the supposed status goods in a typical consumption survey.
- This seems also due to the particular characteristics of the status items
- in that they are meant both indicate a rich consumer's exclusive status
- while create bandwagons for the poorer consumer.
- The returns from status items to consumers are hardly substituted with
- savings when the demand for status items can always grow and vary with
- social contexts - which are seldom captured sufficiently in the typical
- consumption survey (even if detailed price information were to be recorded).
- In the proposed chapter, we use a particular dataset on ownership of long-term
- assets to infer the context of status consumption and attempt to understand
+ But this also due to the peculiar characteristic of a status item which
+ on one indicates a rich consumer's exclusive status while on the other
+ creates bandwagons for the poorer consumer.
+ The returns from status items to the consumer are hardly substituted with
+ savings when the demand for status items can always grow for all consumers
+ while varying with social contexts seldom captured in a consumption survey.
+ In the proposed chapter, employing a particular dataset on ownership of
+ long-term assets along side with the consumption diary, we attempt to infer
+ the context of status consumption in a developing economy while explaining
  how the demand for non-durable consumption in excess of one's needs - which
- we view as non-durable status consumption - varies across regions in a
- developing economy.
+ we view as non-durable status consumption - can vary across regions in
+ an economy.
 \end_layout
 
 \begin_layout Standard
 [Reference groups - definition ] The notion of a reference group for status
- is key to our understanding of the consumer's context of status and consumption
- as they help pin down a certain level of status consumption as her social
- need.
- Without an association of the consumer's status needs with a reference
- group, one cannot answer - for example - whether the not-so-rich spend
- disproportionately higher on status items in an economy or that the high
- spending on status goods is limited to the rich.
+ is key to our understanding of the consumer's context as they help pin
+ down a certain level of status consumption as the consumer's social need.
+ Without this association with a reference group one cannot answer - for
+ example - whether the not-so-rich spend disproportionately higher on status
+ items in an economy or that the high spending on status goods is limited
+ to the rich.
  Unlike the mechanisms of invidious comparison (IC) and pecuniary emulation
  (PE) identified by Veblen - concerns that are essentially normative - reference
  groups provide a descriptive context for status competitions where a consumer
@@ -229,8 +251,8 @@ name "sec:Model"
 \end_layout
 
 \begin_layout Standard
-[Model] We interpret reference groups as the level of asset-ownership in
- the consumer's immediate environment.
+[Model] In the current model, we interpret reference groups as the level
+ of asset-ownership in the consumer's immediate environment.
  A consumer who resides in an area where a higher population has more durable
  assets transferable over generations is consider a 
 \begin_inset Quotes eld
@@ -242,13 +264,13 @@ higher
 
  (richer) reference group.
  The utility function which the representative consumer optimises consists
- of the non-durable consumption above needs and the band of the long-term
- assets ownership.
- Given a budget 
-\begin_inset Formula $x$
+ of the non-durable consumption above needs and the band (or the reference
+ group) indicated by the long-term assets ownership.
+ Thus a per-head consumption budget 
+\begin_inset Formula $x_{t}$
 \end_inset
 
-, the representative consumer can thus either spend on non-durable consumption
+, the representative consumer can either spend on non-durable consumption
  above needs (henceforth referred to as 
 \begin_inset Quotes eld
 \end_inset
@@ -257,8 +279,15 @@ excess
 \begin_inset Quotes erd
 \end_inset
 
-) or choose a reference which advances her position in the economy-wide
- asset-hierarchy.
+) 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ or choose a reference 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ which advances her position in the economy-wide asset-hierarchy.
  We assume that the needs of the consumer are predetermined and are tied
  with the number of family units.
  Therefore, after excluding the essential needs of the consumer and the
@@ -268,19 +297,20 @@ excess
 \end_layout
 
 \begin_layout Standard
-[Symbols] It is worth highlighting that that the current approach does not
- assume a substitution between quantity and quality.
- Instead, the representative consumer is assumed to pursue quality only
- once her basic needs are met.
- Consider that a poor family living in Dar-es-salaam would have different
- 
+[Symbols] It is worth highlighting that the above approach does not assume
+ a substitution between quantity and quality.
+ Instead, the representative consumer pursues quality only once her basic
+ needs are met.
+ Consider for example how a poor family living in Dar-es-salaam would have
+ different total consumption 
 \begin_inset Formula $c_{t}$
 \end_inset
 
  from a rich family living in Iringa.
  This difference depends both on the needs of the respective families and
- the local consumption in the area (within a certain geographical area or
- a certain population mass around where the consumers reside i.e.
+ the local costs of consumption in the area (i.e.
+ within a certain geographical area or a certain population mass around
+ where the consumers reside i.e.
  Iringa and Dar-es-Salaam).
  Denoting the total budget of the two households as 
 \begin_inset Formula $c_{t}$
@@ -319,12 +349,12 @@ Here,
 \begin_inset Formula $\pi(r_{t})$
 \end_inset
 
- is the cost imposed by the consumer's surroundings 
-\begin_inset Formula $r$
+ the local costs of consumption imposed by the consumer's surroundings 
+\begin_inset Formula $r_{t}$
 \end_inset
 
 .
- To reiterate, the consumer does not 
+ To reiterate, the representative consumer does not 
 \begin_inset Quotes eld
 \end_inset
 
@@ -337,31 +367,39 @@ choose
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- above needs (excess) and the position 
+ above needs (excess) and her local surroundings 
 \begin_inset Formula $r_{t}$
 \end_inset
 
- in her local surroundings.
+.
  Higher excess in a lower reference 
-\begin_inset Formula $r$
+\begin_inset Formula $r_{t}$
 \end_inset
 
- is can be substituted with lower excess in a higher (richer) reference.
+ can thus be substituted with lower excess in a higher (richer) reference.
  The model necessarily assumes a continuum of asset-bands 
 \begin_inset Formula $r_{t}$
 \end_inset
 
  as well as that of consumption 
-\begin_inset Formula $\nu$
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
- above needs.
- The representative consumer is meant to have the choice to move to a village
- or live in an urban area much the way she can move between rich and poor
- areas.While such a choice is typically constrained by one's income or social
- class, we attempt to understand the behaviour of the representative consumer
- if she were to be granted a higher income by formulating the following
- consumer's utility
+ above needs costs 
+\begin_inset Formula $\psi_{t}\times\pi(r_{t})$
+\end_inset
+
+ i.e.
+ the representative consumer has the choice to move to a village or live
+ in an urban area (or move between rich and poor areas within a locality).
+ While in a real-world sceanrio, such a choice is constrained by one's income
+ or social class, ours is only an attempt to understand the behaviour of
+ the representative consumer if she were to be granted a higher budget 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+.
+ We thus formulate the following utility for the consumer
 \end_layout
 
 \begin_layout Standard
@@ -376,7 +414,7 @@ u(\nu_{t},r_{t}) & =\alpha log(\nu_{t}-\bar{\nu})+(1-\alpha)log(r_{t}-\bar{r})\l
 \end_layout
 
 \begin_layout Standard
-Notice that 
+Here, 
 \begin_inset Formula $\alpha\in(0,1)$
 \end_inset
 
@@ -385,7 +423,7 @@ Notice that
 \end_inset
 
  are constants.
- Using the Equation 
+ From Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:budget_definition"
@@ -396,12 +434,22 @@ noprefix "false"
 \end_inset
 
 , we have 
-\begin_inset Formula $\nu_{t}r_{t}\psi_{t}=c_{t}\Rightarrow log(\nu_{t})+log(r_{t})+log(\psi_{t})=log(c_{t})$
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\nu_{t}r_{t}\psi_{t} & =c_{t}\Rightarrow log(\nu_{t})+log(r_{t})+log(\psi_{t})=log(c_{t})
+\end{alignat*}
+
 \end_inset
 
-.
- Denoting the per-head consumption in the household as 
-\begin_inset Formula $\frac{c_{t}}{\psi_{t}}=x_{t}$
+
+\end_layout
+
+\begin_layout Standard
+Given the per-head consumption in the household 
+\begin_inset Formula $\frac{c_{t}}{\psi_{t}}\equiv x_{t}$
 \end_inset
 
 , the budget can be rewritten as
@@ -416,53 +464,54 @@ log(\nu_{t})+log(r_{t}) & =log(x_{t})\label{eq:budget_logs}
 \end_layout
 
 \begin_layout Standard
-The goal of our empirical method is thus to test the significance of the
- substitution between 
-\begin_inset Formula $\nu$
+The goal of the empirical methods relying on the above model is merely test
+ the significance of the substitution between 
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
  and 
-\begin_inset Formula $r$
+\begin_inset Formula $r_{t}$
 \end_inset
 
 .
- The consumption-level average associated with the consumer's surroundings
- is represented with a function 
-\begin_inset Formula $\pi(r)$
+ Notice that the consumption-level average associated with the consumer's
+ surroundings represented with the function 
+\begin_inset Formula $\pi(r_{t})$
 \end_inset
 
- - which depends only on the reference 
-\begin_inset Formula $r$
-\end_inset
-
-.
- Notice that 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- is observed directly in data as the aggregate consumption implied in a
- given reference 
-\begin_inset Formula $r$
+ depends only on the reference 
+\begin_inset Formula $r_{t}$
 \end_inset
 
 .
- A richer area and a richer asset-band (a higher 
-\begin_inset Formula $r$
+ In the data, therefore, 
+\begin_inset Formula $\pi(r_{t})$
 \end_inset
 
-) would correspond to a certain value 
-\begin_inset Formula $\pi(r)$
+ can be observed directly as the aggregate consumption implied associated
+ with the reference 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+.
+ In other words, a richer area i.e.
+ a richer asset-band (a higher 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+) corresponds to a certain value 
+\begin_inset Formula $\pi(r_{t})$
 \end_inset
 
  above which the excess 
-\begin_inset Formula $\nu$
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
  is chosen by the consumer.
- The first order conditions implied by Equations 
+ The first order conditions for Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:budget_logs"
+reference "eq:basic_utility"
 plural "false"
 caps "false"
 noprefix "false"
@@ -472,7 +521,7 @@ noprefix "false"
  and 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:basic_utility"
+reference "eq:budget_logs"
 plural "false"
 caps "false"
 noprefix "false"
@@ -531,28 +580,21 @@ Using
 \end_layout
 
 \begin_layout Standard
-The above equation allows us to interpret the average consumption 
-\begin_inset Formula $\nu$
+The above motivates our comparison of the average consumption 
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
- with respect to 
-\begin_inset Formula $r$
+ with 
+\begin_inset Formula $r_{t}$
 \end_inset
 
  (see Appendix for the constraints on 
 \begin_inset Formula $\pi(r)$
 \end_inset
 
- imposed by the solution for the above first-order conditions).
- We provide the results from a non-linear regression of 
-\begin_inset Formula $\nu$
-\end_inset
-
- with respect 
-\begin_inset Formula $r$
-\end_inset
-
- (the asset-ownership level) in Section 
+ imposed by the solution of the above first-order conditions).
+ The results from the non-linear regression for the above model are presented
+ in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Results"
@@ -564,17 +606,7 @@ noprefix "false"
 
 .
  The results from a non-parametric regression using the above the above
- view are also discussed in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Results"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
+ view are also discussed.
 \end_layout
 
 \begin_layout Section
@@ -589,7 +621,7 @@ LSMS Data for Tanzania
 \begin_layout Standard
 \paragraph_spacing single
 The consumption microdata from LSMS surveys for Tanzania from the years
- 2010, 2012 and 2014 waves were used for inferring the 
+ 2012 and 2014 waves were used for inferring the 
 \begin_inset Formula $r$
 \end_inset
 
@@ -620,29 +652,31 @@ name "subsec:Needs-Cost"
 
 \end_inset
 
-Excess 
+Excess
 \end_layout
 
 \begin_layout Standard
 We classify the consumption items in the LSMS survey under four major categories
  - food, energy, transport and household.
- Here, we count all consumption of food items as needs.
- This classification is not unusual in the literature on status consumption
- - but since there is ample evidence of a pressure on food-quality in sub-Sahara
-n countries, the analysis of food and non-food budgets is worth some attention
- in its own right.
- When the needs for food quality are not met for the entire population,
- social interactions are likely to separate consumers who can afford better
- food quality from those who can't (see wa-masters).
- However, the classification of all food as consumer needs in our model
- implies that the representative consumer optimises quality in non-food
- items only once she has addressed quality in food.
- 
+ Instead of of considering all food items as basic needs, we consider the
+ variation in food quality across the regions in Tanzania as part of excess.
+ As there seems to be ample evidence of a pressure on food-quality in sub-Sahara
+n countries, we believe that an attainment of higher food quality would
+ be visible enough in the society to be considered as part of excess.
+ Further, since only about 10% of Tanzanians avail electricity, the improvement
+ of food quality through having a refrigerator is a luxury that cannot be
+ considered as basic needs of the consumer.
+ In other words, when the needs for food quality are not met for the majority
+ of a population, social interactions are likely to separate consumers who
+ can afford better food quality from those who can't (see wa-masters).
 \end_layout
 
 \begin_layout Standard
-We consider all expenditure on energy and transport as costs of maintaining
- a certain level of assets.
+
+\bar under
+We consider all expenditure 
+\bar default
+on energy and transport as costs of maintaining a certain level of assets.
  Thus it's only in the household category where we find the non-food expenditure
  that is not associated with an asset owned by the consumer.
  The list of these expenditure item is summarised in the Table 
@@ -659,6 +693,22 @@ ref{itemsclassification}
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1106,8 +1156,23 @@ end{longtable}
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
-\paragraph_spacing single
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Assets-Data"
@@ -1169,6 +1234,22 @@ The details of records in the dataset include the number
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1314,6 +1395,22 @@ hline
 hline  
 \backslash
 end{longtable} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
 \end_layout
 
 \end_inset
@@ -1945,7 +2042,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename tnz_assets_occuprank_distribution_2012.png
-	width 5in
+	width 4in
 
 \end_inset
 
@@ -1985,7 +2082,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename tnz_non_param_food_non_food_2012.png
-	width 6in
+	width 3in
 
 \end_inset
 
@@ -2025,7 +2122,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename tnz_non_param_log_assets_2012.png
-	width 6in
+	width 3in
 
 \end_inset
 
@@ -2117,7 +2214,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename tnz_non_param_perception_2012.png
-	width 6in
+	width 4in
 
 \end_inset
 
@@ -2200,6 +2297,49 @@ ref{tabExcessLinear}
 \end_inset
 
 .
+ It seems evident that consumers with higher 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ have less 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ overall.
+ This is true for years 2010 and 2012.
+ High-income occupations seems associated with higher 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ and poorer occupations with less 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ but a higher education in the household seems to indicate a higher 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ less often.
+\end_layout
+
+\begin_layout Standard
+The results seem to indicate 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2630,6 +2770,22 @@ status open
 
 
 \backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
 newpage
 \end_layout
 
@@ -2643,7 +2799,7 @@ APPENDIX
 \end_layout
 
 \begin_layout Standard
-For simplicity of expression we replace 
+For simplicity of notation, we replace 
 \begin_inset Formula $r_{t}\rightarrow r$
 \end_inset
 
@@ -2655,7 +2811,8 @@ For simplicity of expression we replace
 \begin_inset Formula $\nu_{t}\rightarrow r$
 \end_inset
 
- to write
+ in the following expressions.
+ The utility function is therefore
 \end_layout
 
 \begin_layout Standard
@@ -2830,7 +2987,7 @@ e^{A(r)} & =(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}(r-\bar{r})^{-\frac{1-\alph
 
  the integrand is a constant).
  
-\begin_inset Formula $\int_{r_{0}}^{r}e^{-A(s)}b(s)ds==\frac{(1-\alpha)\bar{\nu}}{x\alpha(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}}\times\frac{1}{\frac{1}{\alpha}-1}\{(s-\bar{r})^{\frac{1}{\alpha}-1}|_{r_{0}}^{r}\}=\frac{\bar{\nu}}{x(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}}\{(r-\bar{r})^{\frac{1-\alpha}{\alpha}}-(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}\}$
+\begin_inset Formula $\int_{r_{0}}^{r}e^{-A(s)}b(s)ds=\frac{(1-\alpha)\bar{\nu}}{x\alpha(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}}\times\frac{1}{\frac{1}{\alpha}-1}\{(s-\bar{r})^{\frac{1}{\alpha}-1}|_{r_{0}}^{r}\}=\frac{\bar{\nu}}{x(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}}\{(r-\bar{r})^{\frac{1-\alpha}{\alpha}}-(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}\}$
 \end_inset
 
 .
@@ -2873,7 +3030,11 @@ g(r)=\frac{1}{\pi(r)} & =(\frac{1}{\pi(r_{0})}-\frac{\bar{\nu}}{x})(\frac{r_{0}-
 \end_layout
 
 \begin_layout Standard
-or 
+Since 
+\begin_inset Formula $g(r)=\frac{1}{\pi(r)}$
+\end_inset
+
+, we have
 \begin_inset Formula 
 \begin{alignat*}{1}
 \pi(r) & =\frac{x(r-\bar{r})^{\frac{1-\alpha}{\alpha}}}{(\frac{x}{\pi(r_{0})}-\bar{\nu})(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}+(r-\bar{r})^{\frac{1-\alpha}{\alpha}}\bar{\nu}}
@@ -2885,16 +3046,12 @@ or
 \end_layout
 
 \begin_layout Standard
-The above demands that we use the cross terms of 
-\begin_inset Formula $x$
-\end_inset
-
- and higher powers of 
+The above suggests using higher powers of 
 \begin_inset Formula $r$
 \end_inset
 
  in the regression.
- Notice that the above permits the 
+ Notice also that the above permits 
 \begin_inset Formula $\alpha<\frac{1}{2}$
 \end_inset
 
@@ -2950,33 +3107,11 @@ grows linearly with
 \end_inset
 
 .
- Since 
-\begin_inset Formula $\pi(r)$
-\end_inset
-
- is the overall average it's better to be use that into regression.
- Using 
-\begin_inset Formula $\nu$
-\end_inset
-
- in the LHS and having 
-\begin_inset Formula $x$
-\end_inset
-
- in the RHS does not make sense due to collinearity as 
-\begin_inset Formula $\nu$
-\end_inset
-
- is observed only through 
-\begin_inset Formula $x$
-\end_inset
-
-.
- We can consider the regression as an estimate of 
+ We thus consider the regression as an estimate of 
 \begin_inset Formula $\frac{\partial\nu^{*}}{\partial x}$
 \end_inset
 
- - whose non-linear regression is needed.
+ where a non-linear formulation is used.
 \end_layout
 
 \begin_layout Standard
