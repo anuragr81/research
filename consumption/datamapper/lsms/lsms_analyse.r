@@ -1333,6 +1333,35 @@ get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold,popd
   return(bubble_distances)
 }
 
+build_xt_df <- function(dat2010,dat2012)
+{
+  if (is.element("hhid",colnames(dat2010))  && !is.element("hhid2010",colnames(dat2010))){
+    dat2010$hhid2010 <- dat2010$hhid
+  } else if (!is.element("hhid",colnames(dat2010))  && is.element("hhid2010",colnames(dat2010))){
+    dat2010$hhid <- dat2010$hhid2010
+  }
+  
+  if (is.element("hhid",colnames(dat2012))  && !is.element("hhid2012",colnames(dat2012))){
+    dat2012$hhid2012 <- dat2012$hhid
+  } else if (!is.element("hhid",colnames(dat2012))  && is.element("hhid2012",colnames(dat2012))){
+    dat2012$hhid <- dat2012$hhid2012
+  }
+  
+  hhid2012_hhid10_mapping <- mapping_hhids_2010_2012(o2012 = o2012)
+  common_cols_2010_2012 <- intersect(colnames(dat2010),colnames(dat2012) )
+  df2010_2012 <- merge(hhid2012_hhid10_mapping , plyr::rename(dat2012[,common_cols_2010_2012],c("hhid"="hhid2012"))) %>% mutate(year = 2012)
+  df2010_2012$hhid2012 <- NULL
+  df2010_2012 <- plyr::rename(df2010_2012,c("hhid2010"="hhid"))
+  df2010_2012 <- rbind(df2010_2012,dat2010[,common_cols_2010_2012] %>% mutate(year =2010))
+  df2010_2012$hhid <- as.factor(df2010_2012$hhid)
+  split_hhids2010_2012 <- unique(subset(ddply(df2010_2012,.(hhid,year),summarise,n=length(consu)),n>1)$hhid)
+  
+  print(paste("Ignoring split",length(split_hhids2010_2012),"/",length(unique(df2010_2012$hhid)),"households"))
+  df2010_2012 <- subset(df2010_2012,!is.element(hhid,split_hhids2010_2012))
+  return(df2010_2012)
+  
+}
+
 test_search_cluster <- function(){
   tdf <- data.frame(P1=c("1-1","2-4"),B=c("2-2, 1-1","2-4, 1-2"))
   dat <- data.frame(hhid=seq(4),P1=c("2-4","1-1","2-2","1-2"))
