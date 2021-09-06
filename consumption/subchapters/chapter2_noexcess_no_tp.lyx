@@ -74,9 +74,9 @@ theorems-sec
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 2.5cm
+\leftmargin 2cm
 \topmargin 2.5cm
-\rightmargin 2.5cm
+\rightmargin 2cm
 \bottommargin 2.5cm
 \headheight 2.5cm
 \headsep 2.5cm
@@ -534,8 +534,23 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-L=u(\nu_{t},r_{t})-\lambda(log(x)-log(\nu_{t})-log(\pi(r_{t})))\\
-L=\alpha log(\nu_{t}-\bar{\nu})+(1-\alpha)log(r_{t}-\bar{r})-\lambda(log(x_{t})-log(\pi(r_{t}))-log(\nu_{t}))
+L=u(\nu_{t},r_{t})-\lambda(log(x)-log(\nu_{t})-log(\pi(r_{t})))
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+i.e.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+L=\alpha log(\nu_{t}-\bar{\nu})+(1-\alpha)log(r_{t}-\bar{r})\\
+-\lambda(log(x_{t})-log(\pi(r_{t}))-log(\nu_{t}))
 \end{gather*}
 
 \end_inset
@@ -571,7 +586,8 @@ Using
 \begin_inset Formula 
 \begin{gather*}
 \frac{\pi(r_{t})}{\pi'(r_{t})}\frac{1-\alpha}{r_{t}-\bar{r}}=\frac{\alpha}{1-\frac{\bar{\nu}}{\nu_{t}}}\Rightarrow\frac{\pi(r_{t})}{\pi'(r_{t})}\frac{1-\alpha}{r_{t}-\bar{r}}=\frac{\alpha}{1-\frac{\pi(r_{t})\bar{\nu}}{x_{t}}}\\
-\frac{1-\alpha}{\pi'(r_{t})(r_{t}-\bar{r})}=\frac{\alpha}{\pi(r_{t})(1-\frac{\pi(r_{t})\bar{\nu}}{x})}\Rightarrow\frac{\alpha}{(1-\alpha)}(r_{t}-\bar{r})\pi'(r_{t})=\pi(r_{t})-\frac{\pi(r_{t})^{2}\bar{\nu}}{x}
+\frac{1-\alpha}{\pi'(r_{t})(r_{t}-\bar{r})}=\frac{\alpha}{\pi(r_{t})(1-\frac{\pi(r_{t})\bar{\nu}}{x})}\\
+\Rightarrow\frac{\alpha}{(1-\alpha)}(r_{t}-\bar{r})\pi'(r_{t})=\pi(r_{t})-\frac{\pi(r_{t})^{2}\bar{\nu}}{x}
 \end{gather*}
 
 \end_inset
@@ -672,14 +688,24 @@ n countries, we believe that an attainment of higher food quality would
 \end_layout
 
 \begin_layout Standard
+The expenditures on energy and transport are considered costs of maintaining
+ a certain level of assets.
+ This accommodates the view that while comparing statuses of two consumers
+ only one of who owns a motorcycle, we do not need to compare how much petrol
+ they've purchased when we've already taken into account their transportation-re
+lated assets.
+ Therefore, it's only the household category where the non-food expenditure
+ is not associated with the assets owned by the consumer.
+ The items over which the expenditure is aggregated to arrive at total excess
+ 
+\begin_inset Formula $\nu_{t}$
+\end_inset
 
-\bar under
-We consider all expenditure 
-\bar default
-on energy and transport as costs of maintaining a certain level of assets.
- Thus it's only in the household category where we find the non-food expenditure
- that is not associated with an asset owned by the consumer.
- The list of these expenditure item is summarised in the Table 
+ in the year 
+\begin_inset Formula $t$
+\end_inset
+
+ are listed in Table 
 \begin_inset ERT
 status open
 
@@ -695,483 +721,6 @@ ref{itemsclassification}
 .
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{longtable}[!htbpl]{c c c l} 
-\backslash
-caption{Classification of Expenditure items  
-\backslash
-label{itemsclassification}} 
-\backslash
-
-\backslash
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline  & 
-\backslash
-multicolumn{1}{c}{type} & 
-\backslash
-multicolumn{1}{c}{category} & 
-\backslash
-multicolumn{1}{l}{name}
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-
-\backslash
- & needs & carbs & rice
-\backslash
-_husked
-\backslash
-
-\backslash
- & needs & carbs & rice
-\backslash
-_paddy
-\backslash
-
-\backslash
- & needs & carbs & maize
-\backslash
-_green
-\backslash
-
-\backslash
- & needs & carbs & maize
-\backslash
-_grain
-\backslash
-
-\backslash
- & needs & carbs & maize
-\backslash
-_flour
-\backslash
-
-\backslash
- & needs & carbs & millet
-\backslash
-_grain
-\backslash
-
-\backslash
- & needs & carbs & millet
-\backslash
-_flour
-\backslash
-
-\backslash
- & needs & carbs & wheat
-\backslash
-
-\backslash
- & needs & carbs & bread
-\backslash
-
-\backslash
- & needs & carbs & bunscakes
-\backslash
-
-\backslash
- & needs & carbs & pasta
-\backslash
-
-\backslash
- & needs & carbs & othercereal
-\backslash
-
-\backslash
- & needs & carbs & cassava
-\backslash
-_fresh
-\backslash
-
-\backslash
- & needs & carbs & cassava
-\backslash
-_flour
-\backslash
-
-\backslash
- & needs & carbs & sweet
-\backslash
-_potato
-\backslash
-
-\backslash
- & needs & carbs & potatoes
-\backslash
-
-\backslash
- & needs & fat & peanuts
-\backslash
-
-\backslash
- & needs & fat & coconut
-\backslash
-
-\backslash
- & needs & fat & cashew
-\backslash
-_almonds
-\backslash
-
-\backslash
- & needs & fat & nut
-\backslash
-_products
-\backslash
-
-\backslash
- & needs & fat & cooking
-\backslash
-_oil
-\backslash
-
-\backslash
- & needs & fat & butter
-\backslash
-_margarine
-\backslash
-
-\backslash
- & needs & protein & pulses
-\backslash
-
-\backslash
- & needs & protein & milk
-\backslash
-_products
-\backslash
-
-\backslash
- & needs & protein & fresh
-\backslash
-_milk
-\backslash
-
-\backslash
- & needs & protein & canned
-\backslash
-_milk
-\backslash
-
-\backslash
- & needs & protein & goat
-\backslash
-
-\backslash
- & needs & protein & beef
-\backslash
-
-\backslash
- & needs & protein & pork
-\backslash
-
-\backslash
- & needs & protein & chicken
-\backslash
-
-\backslash
- & needs & protein & wild
-\backslash
-_birds
-\backslash
-
-\backslash
- & needs & protein & wild
-\backslash
-_meat
-\backslash
-
-\backslash
- & needs & protein & fish
-\backslash
-_seafood
-\backslash
-
-\backslash
- & needs & protein & dried
-\backslash
-_canned
-\backslash
-_fish
-\backslash
-
-\backslash
- & needs & protein & packaged
-\backslash
-_fish
-\backslash
-
-\backslash
- & needs & protein & eggs
-\backslash
-
-\backslash
- & needs & fruitsveg & onion
-\backslash
-
-\backslash
- & needs & fruitsveg & greens
-\backslash
-
-\backslash
- & needs & fruitsveg & dried
-\backslash
-_canned
-\backslash
-_veg
-\backslash
-
-\backslash
- & needs & fruitsveg & yam
-\backslash
-
-\backslash
- & needs & fruitsveg & banana
-\backslash
-_green
-\backslash
-
-\backslash
- & needs & fruitsveg & othervegstarch
-\backslash
-
-\backslash
- & needs & fruitsveg & banana
-\backslash
-_ripe
-\backslash
-
-\backslash
- & needs & fruitsveg & citrus
-\backslash
-
-\backslash
- & needs & fruitsveg & mangoes
-\backslash
-
-\backslash
- & needs & fruitsveg & sugarcane
-\backslash
-
-\backslash
- & excess & general & cigarettes
-\backslash
-
-\backslash
- & excess & general & bar
-\backslash
-_soap
-\backslash
-
-\backslash
- & excess & general & clothes
-\backslash
-_soap
-\backslash
-
-\backslash
- & excess & general & toothpaste
-\backslash
-
-\backslash
- & excess & general & toilet
-\backslash
-_paper
-\backslash
-
-\backslash
- & excess & general & skin
-\backslash
-_cream
-\backslash
-
-\backslash
- & excess & general & other
-\backslash
-_personal
-\backslash
-
-\backslash
- & excess & general & misc
-\backslash
-_cleaning
-\backslash
-
-\backslash
- & excess & general & donation
-\backslash
-
-\backslash
- & excess & general & services
-\backslash
-
-\backslash
- & excess & general & bride
-\backslash
-_price
-\backslash
-
-\backslash
- & excess & general & marriage
-\backslash
-
-\backslash
- & excess & general & funeral
-\backslash
-
-\backslash
- & excess & general & sugar
-\backslash
-
-\backslash
- & excess & general & sweet
-\backslash
-
-\backslash
- & excess & general & honey
-\backslash
-
-\backslash
- & excess & general & salt
-\backslash
-
-\backslash
- & excess & general & spices
-\backslash
-
-\backslash
- & excess & general & tea
-\backslash
-
-\backslash
- & excess & general & coffee
-\backslash
-
-\backslash
- & excess & general & miscdrinkpowder
-\backslash
-
-\backslash
- & excess & general & canned
-\backslash
-_drink
-\backslash
-
-\backslash
- & excess & general & readymade
-\backslash
-_tea
-\backslash
-_coffee
-\backslash
-
-\backslash
- & excess & general & beer
-\backslash
-
-\backslash
- & excess & general & brews
-\backslash
-
-\backslash
- & excess & general & winespirits
-\backslash
-
-\backslash
- & excess & general & mensclothes
-\backslash
-
-\backslash
- & excess & general & womensclothes
-\backslash
-
-\backslash
- & excess & general & childrensclothes
-\backslash
-
-\backslash
- & excess & general & mensshoes
-\backslash
-
-\backslash
- & excess & general & womensshoes
-\backslash
-
-\backslash
- & excess & general & childrensshoes
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline  
-\backslash
-end{longtable} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-twocolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsubsection
 \begin_inset CommandInset label
 LatexCommand label
@@ -1184,20 +733,22 @@ Durable goods and reference level consumption
 
 \begin_layout Standard
 \paragraph_spacing single
-We infer the asset-richness of the neighborhood that the representative
- consumer would choose using the stock of durable goods recorded in the
- LSMS survey.
- While the durable goods recorded in the survey range from short-term durable
- items such as mobile phones to the expensive and long-term assets such
- as land or houses, we consider a durable goods as a long-term asset only
- if it is transferable over generations.
- This is easy to verify by inspecting the households that are split when
- a young member of the unsplit family starts a new household.
- 
+The asset-richness of the neighborhood which the representative consumer
+ is set to choose is inferred using the data on stock of durable goods owned
+ by every consumer.
+ While the durable goods recorded in the LSMS survey range from short-term
+ durable items such as mobile phones to the expensive and long-term assets
+ such as land or houses, we are interested primarily in the long-term asset
+ that can be transferred over generations - accumulations that better encompass
+ the notion of asset-richness.
+ Also, the assets transferred over a generation can be readily verified
+ by inspecting households in the data that are split when a young member
+ of the unsplit family starts a new household.
 \end_layout
 
 \begin_layout Standard
-The details of records in the dataset include the number 
+The details of records of asset-ownership in the LSMS dataset include the
+ number 
 \begin_inset Formula $n_{t}$
 \end_inset
 
@@ -1209,23 +760,26 @@ The details of records in the dataset include the number
 \begin_inset Formula $P_{t}$
 \end_inset
 
- the household expects by selling the durable good in the market at the
- time of the survey.
+ the household expects by selling the durable good in the current market
+ at the time of survey.
  We use the reported price 
 \begin_inset Formula $P_{t}$
 \end_inset
 
- of the durable goods to infer the wealth bands in area surrounding the
- consumer.
- Using
+ of the durable goods to infer the asset-value in area surrounding the consumer
+ - partly because 
 \begin_inset Formula $P_{t}$
 \end_inset
 
- has the advantage that the prices are not recalled from consumer's memory
- while they also reflects the perceived depreciation of the durable good
- over time.
- The total cost of the assets of a household is thus obtained simply by
- multiplying the number of assets 
+ is not susceptible to errors associated with recall of the purchase value
+ (which often varies for the same item over years in the panel data for
+ a household) and also because 
+\begin_inset Formula $P_{t}$
+\end_inset
+
+ reflects the perceived depreciation of the durable good over time as well.
+ The total cost of the assets of a household is thus obtained is simpyl
+ a product of the number of assets 
 \begin_inset Formula $n_{t}$
 \end_inset
 
@@ -1234,188 +788,6 @@ The details of records in the dataset include the number
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{longtable}{l l r} 
-\backslash
-caption{List of owned assets (sorted by median reported market-price) 
-\backslash
-label{assetslist}} 
-\backslash
-
-\backslash
-  
-\backslash
-hline
-\backslash
-hline  & 
-\backslash
-multicolumn{1}{l}{name} & 
-\backslash
-multicolumn{1}{l}{median-price}
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-
-\backslash
- & livestock & 21428.57 
-\backslash
-
-\backslash
- & bed & 30000.00
-\backslash
-
-\backslash
- & sofa & 33333.33
-\backslash
-
-\backslash
- & videoplayer & 40000.00
-\backslash
-
-\backslash
- & bike & 50000.00
-\backslash
-
-\backslash
- & cart & 50000.00
-\backslash
-
-\backslash
- & donkey & 50000.00
-\backslash
-
-\backslash
- & plough & 90000.00
-\backslash
-
-\backslash
- & sewingmachine & 90000.00
-\backslash
-
-\backslash
- & harrow & 100000.00
-\backslash
-
-\backslash
- & stove
-\backslash
-_electricgas & 100000.00
-\backslash
-
-\backslash
- & tv & 100000.00
-\backslash
-
-\backslash
- & waterpump & 100000.00
-\backslash
-
-\backslash
- & boat & 104166.67
-\backslash
-
-\backslash
- & musicsystem & 200000.00
-\backslash
-
-\backslash
- & refrigerator & 200000.00
-\backslash
-
-\backslash
- & computer & 350000.00
-\backslash
-
-\backslash
- & animalcart & 400000.00
-\backslash
-
-\backslash
- & house & 666666.67
-\backslash
-
-\backslash
- & handmill & 1000000.00
-\backslash
-
-\backslash
- & motorbike & 1200000.00
-\backslash
-
-\backslash
- & powertiller & 1400000.00
-\backslash
-
-\backslash
- & trailer & 3000000.00
-\backslash
-
-\backslash
- & car & 6000000.00
-\backslash
-
-\backslash
- & tractor & 20000000.00
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline  
-\backslash
-end{longtable} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-twocolumn
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1431,22 +803,27 @@ status open
 \begin_layout Plain Layout
 A more appropriate analysis could use the immediate neighborhood of the
  consumer's wards - but not having the geographic location of the ward (or
- the MTAA field in the survey) limits our analysis at the level of the consumer'
-s district.
+ the MTAA field in the survey) limits the granularity of our analysis to
+ the level the district which a consumer belongs to.
 \end_layout
 
 \end_inset
 
 , we use the geocoding of the districts where the consumes reside to infer
  the consumer's neighborhood.
- We also the consider the population mass in the consumer's district using
+ We also consider a population-adjusted neighborhood metric around the neighbour
+hood by incorporating the population mass in the consumer's district using
  the 2012 Population and Housing Census (PHC) for Tanzania.
- The districts with the higher population in the data are those in the Dar-es-sa
-laam and Geita regions.
- One can therefore consider neighorhoods based on distance as well as on
- population-adjusted distances - effectively aggregated data from districts
- the same level as that of the a district in Dar-es-salaam region.
- Here, the population-adjusted distance - over which the cluster of 
+ As the districts with the highest population densities are in the Dar-es-salaam
+ and Geita regions, we repeat our analyses with the rural distances standardised
+ to the level of Dar-es-salaam districts - effectively aggregating data
+ from districts to the same level as that of the district in Dar-es-salaam
+ region
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This population-adjusted distance - over which the cluster of 
 \begin_inset Formula $\pi(r_{t})$
 \end_inset
 
@@ -1454,19 +831,12 @@ laam and Geita regions.
 \begin_inset Formula $r_{t}$
 \end_inset
 
- are aggregated - is merely a Euclidean distance weighted with the total
- population in district where the consumer resides and the one that could
- be within the consumer's cluster or not (depending on the threshold distance).
- More specifically, for populations 
-\begin_inset Formula $N_{A},N_{B}$
-\end_inset
-
- in districts 
-\begin_inset Formula $A,B$
-\end_inset
-
-, the symmetric population-adjusted distance is simply 
+ are aggregated - is simply 
 \begin_inset Formula $\frac{\delta_{AB}}{N_{A}+N_{B}}$
+\end_inset
+
+ for the consumer in district 
+\begin_inset Formula $A$
 \end_inset
 
  where 
@@ -1485,12 +855,20 @@ laam and Geita regions.
 \begin_inset Formula $\delta_{AB}$
 \end_inset
 
-.
- For denser areas, this distance would be shorter whereas for sparser population
-s that are supposed to make consumers feel a smaller despite being spread
- over a larger geographical area, this distance would be wider.
- In other words, denser areas mean narrower reference group over which we
- can calculate 
+ i.e.
+ the distance weighted by the total population in districts 
+\begin_inset Formula $A,B$
+\end_inset
+
+ which are meant to be in the consumer's vicinity depending on a given threshold.
+ This size of the bubble around the consumer that determines her locality
+ is therefore the set of districts that are a distance less than the threshold.
+ It is evident that the population-adjusted distance shorter for denser
+ areas but larger for sparser populations (which are supposed to make consumers
+ feel a smaller reference despite being spread over a larger geographical
+ area).
+ In other words, denser areas simply mean a narrower reference group over
+ which 
 \begin_inset Formula $r_{t}$
 \end_inset
 
@@ -1498,35 +876,49 @@ s that are supposed to make consumers feel a smaller despite being spread
 \begin_inset Formula $\pi(r_{t})$
 \end_inset
 
+ are calculated.
+ For example, the population-distances would be higher in Arusha (region
+ 1 in the survey) but far less in Dar-es-salaam (region 7 in the survey).
+\end_layout
+
+\end_inset
+
 .
- We can see - for example - the population-distances increase for Arusha
- (region 1) but decrease for Dar-es-salaam (region 7).
- However, our empirical results are not sensitive to the selection of population
- adjusted distance over the simple Euclidean distance - mostly due to coarse
- granularity of our reference boundaries.
- Further, the Euclidean distance criteria are sufficient to expand the reference
- groups comprising of districts that are too small and close to each other
- e.g.
- Sumbawanga and Nkasi in Rukwa that we consider to be within the same reference.
+ The results discussed in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Results"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ do not however the results with the population-adjusted-distance as our
+ conclusions are not sensitive to the selection of population adjusted distance
+ vs the simple Euclidean distance.
+ This may be both because of the coarse granularity of our reference boundaries
+ (district level) and the wider districts in the rural regions (with only
+ a few exceptions such as Sumbawanga and Nkasi in Rukwa which we consider
+ within the same reference on grounds of proximity in Euclidean distance).
 \end_layout
 
 \begin_layout Standard
-For a given boundary of reference around every consumer's district, the
- consumer's asset-richness 
-\begin_inset Formula $r$
+Thus for a given boundary of reference around every consumer's district,
+ the consumer's asset-richness 
+\begin_inset Formula $r_{t}$
 \end_inset
 
- is deemed as the average market value of assets owned while 
+ is the average market value of assets owned by the consumers within the
+ boundary.
+ Similarly, 
 \begin_inset Formula $\pi(r_{t})$
 \end_inset
 
- is simply the average excess consumption (expenditure on items that are
- 
-\bar under
-either excess or needs
-\bar default
-) within the boundary.
- All consumers within the boundary are assumed to have the same 
+ is the average excess consumption (expenditure on items that are either
+ classified as excess or food) for consumers within the boundary.
+ This necessarily implies that all consumers within a boundary have the
+ same 
 \begin_inset Formula $r_{t}$
 \end_inset
 
@@ -1539,13 +931,9 @@ either excess or needs
 \end_inset
 
  varies.
- A clear limitation imposed by such an observation of 
-\begin_inset Formula $\pi(r_{t})$
-\end_inset
-
- is that number of observed households over which it is calculated should
- be enough to cancel out the idiosyncratic effects or issues related to
- seasonality of data (e.g.
+ This mandates that the number of observed households within the reference
+ boundary should be high enough to cancel out the idiosyncratic effects
+ as well as the issues related to seasonality of data-capture (e.g.
  less electricity needed in winter etc.).
 \end_layout
 
@@ -1557,9 +945,10 @@ Subjective well-being
 \begin_layout Standard
 \paragraph_spacing single
 The subjective well-being questionnaire in the survey records the financial,
- health and overall satisfaction levels for every individual.
+ health, housing and overall satisfaction levels for every individual.
  We use these to test whether asset distribution or excess expenditure provides
- higher satisfaction to the consumer.
+ higher satisfaction to the consumer and explain what the inferences mean
+ for the notions of status and consumption in Tanzania.
 \end_layout
 
 \begin_layout Subsection
@@ -1572,7 +961,7 @@ Empirical Method
 \end_inset
 
 ] The regression equations implied by the model tell us how 
-\begin_inset Formula $\nu$
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
  (which is expenditure in excess of 
@@ -1589,11 +978,11 @@ Empirical Method
  or not.
  More specifically, the model parametrises the urban-rural and regional
  differences through 
-\begin_inset Formula $\pi(r)$
+\begin_inset Formula $\pi(r_{t})$
 \end_inset
 
  and 
-\begin_inset Formula $r$
+\begin_inset Formula $r_{t}$
 \end_inset
 
  - attempting to understand just to what extent the differences in long-term
@@ -1608,17 +997,21 @@ Empirical Method
 \end_layout
 
 \begin_layout Standard
-[Empirical judgment with pi(r)] Our justification for excluding the cost
- of owning and maintaining assets from 
+[Empirical judgment with 
+\begin_inset Formula $\pi(r_{t})$
+\end_inset
+
+] Our justification for excluding the cost of owning and maintaining assets
+ from 
 \begin_inset Formula $c_{t}$
 \end_inset
 
  and therefore 
-\begin_inset Formula $\nu$
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
  is that 
-\begin_inset Formula $r$
+\begin_inset Formula $r_{t}$
 \end_inset
 
  already include the effect of net-asset worth for the consumer's status
@@ -1635,7 +1028,7 @@ scale-up
  necessary does not make sense if we include the costs imposed on the consumer
  due to owning assets (through maintenance, repair, fees etc.).
  The total expenditure 
-\begin_inset Formula $\pi(r)$
+\begin_inset Formula $\pi(r_{t})$
 \end_inset
 
  which the consumer scales up and encompasses the social need of being in
@@ -1646,20 +1039,20 @@ scale-up
  - must therefore also exclude the cost of maintaining assets.
   In other words, the advantage that the consumer gets from being in an
  asset-rich neighborhood is meant to be measured with 
-\begin_inset Formula $r$
+\begin_inset Formula $r_{t}$
 \end_inset
 
  rather than 
-\begin_inset Formula $\nu$
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
 .
  As the consumer scales up the expenditure 
-\begin_inset Formula $\pi(r)\cdot\psi$
+\begin_inset Formula $\pi(r_{t})\cdot\psi_{t}$
 \end_inset
 
  by 
-\begin_inset Formula $\nu$
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
  for higher utility (see Equation 
@@ -2755,6 +2148,665 @@ sym{***}
 end{tabular} 
 \backslash
 end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}[!p]{c c c l} 
+\backslash
+caption{Classification of Expenditure items  
+\backslash
+label{itemsclassification}} 
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline
+\backslash
+hline  & 
+\backslash
+multicolumn{1}{c}{type} & 
+\backslash
+multicolumn{1}{c}{category} & 
+\backslash
+multicolumn{1}{l}{name}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ & needs & carbs & rice
+\backslash
+_husked
+\backslash
+
+\backslash
+ & needs & carbs & rice
+\backslash
+_paddy
+\backslash
+
+\backslash
+ & needs & carbs & maize
+\backslash
+_green
+\backslash
+
+\backslash
+ & needs & carbs & maize
+\backslash
+_grain
+\backslash
+
+\backslash
+ & needs & carbs & maize
+\backslash
+_flour
+\backslash
+
+\backslash
+ & needs & carbs & millet
+\backslash
+_grain
+\backslash
+
+\backslash
+ & needs & carbs & millet
+\backslash
+_flour
+\backslash
+
+\backslash
+ & needs & carbs & wheat
+\backslash
+
+\backslash
+ & needs & carbs & bread
+\backslash
+
+\backslash
+ & needs & carbs & bunscakes
+\backslash
+
+\backslash
+ & needs & carbs & pasta
+\backslash
+
+\backslash
+ & needs & carbs & othercereal
+\backslash
+
+\backslash
+ & needs & carbs & cassava
+\backslash
+_fresh
+\backslash
+
+\backslash
+ & needs & carbs & cassava
+\backslash
+_flour
+\backslash
+
+\backslash
+ & needs & carbs & sweet
+\backslash
+_potato
+\backslash
+
+\backslash
+ & needs & carbs & potatoes
+\backslash
+
+\backslash
+ & needs & fat & peanuts
+\backslash
+
+\backslash
+ & needs & fat & coconut
+\backslash
+
+\backslash
+ & needs & fat & cashew
+\backslash
+_almonds
+\backslash
+
+\backslash
+ & needs & fat & nut
+\backslash
+_products
+\backslash
+
+\backslash
+ & needs & fat & cooking
+\backslash
+_oil
+\backslash
+
+\backslash
+ & needs & fat & butter
+\backslash
+_margarine
+\backslash
+
+\backslash
+ & needs & protein & pulses
+\backslash
+
+\backslash
+ & needs & protein & milk
+\backslash
+_products
+\backslash
+
+\backslash
+ & needs & protein & fresh
+\backslash
+_milk
+\backslash
+
+\backslash
+ & needs & protein & canned
+\backslash
+_milk
+\backslash
+
+\backslash
+ & needs & protein & goat
+\backslash
+
+\backslash
+ & needs & protein & beef
+\backslash
+
+\backslash
+ & needs & protein & pork
+\backslash
+
+\backslash
+ & needs & protein & chicken
+\backslash
+
+\backslash
+ & needs & protein & wild
+\backslash
+_birds
+\backslash
+
+\backslash
+ & needs & protein & wild
+\backslash
+_meat
+\backslash
+
+\backslash
+ & needs & protein & fish
+\backslash
+_seafood
+\backslash
+
+\backslash
+ & needs & protein & dried
+\backslash
+_canned
+\backslash
+_fish
+\backslash
+
+\backslash
+ & needs & protein & packaged
+\backslash
+_fish
+\backslash
+
+\backslash
+ & needs & protein & eggs
+\backslash
+
+\backslash
+ & needs & fruitsveg & onion
+\backslash
+
+\backslash
+ & needs & fruitsveg & greens
+\backslash
+
+\backslash
+ & needs & fruitsveg & dried
+\backslash
+_canned
+\backslash
+_veg
+\backslash
+
+\backslash
+ & needs & fruitsveg & yam
+\backslash
+
+\backslash
+ & needs & fruitsveg & banana
+\backslash
+_green
+\backslash
+
+\backslash
+ & needs & fruitsveg & othervegstarch
+\backslash
+
+\backslash
+ & needs & fruitsveg & banana
+\backslash
+_ripe
+\backslash
+
+\backslash
+ & needs & fruitsveg & citrus
+\backslash
+
+\backslash
+ & needs & fruitsveg & mangoes
+\backslash
+
+\backslash
+ & needs & fruitsveg & sugarcane
+\backslash
+
+\backslash
+ & excess & general & cigarettes
+\backslash
+
+\backslash
+ & excess & general & bar
+\backslash
+_soap
+\backslash
+
+\backslash
+ & excess & general & clothes
+\backslash
+_soap
+\backslash
+
+\backslash
+ & excess & general & toothpaste
+\backslash
+
+\backslash
+ & excess & general & toilet
+\backslash
+_paper
+\backslash
+
+\backslash
+ & excess & general & skin
+\backslash
+_cream
+\backslash
+
+\backslash
+ & excess & general & other
+\backslash
+_personal
+\backslash
+
+\backslash
+ & excess & general & misc
+\backslash
+_cleaning
+\backslash
+
+\backslash
+ & excess & general & donation
+\backslash
+
+\backslash
+ & excess & general & services
+\backslash
+
+\backslash
+ & excess & general & bride
+\backslash
+_price
+\backslash
+
+\backslash
+ & excess & general & marriage
+\backslash
+
+\backslash
+ & excess & general & funeral
+\backslash
+
+\backslash
+ & excess & general & sugar
+\backslash
+
+\backslash
+ & excess & general & sweet
+\backslash
+
+\backslash
+ & excess & general & honey
+\backslash
+
+\backslash
+ & excess & general & salt
+\backslash
+
+\backslash
+ & excess & general & spices
+\backslash
+
+\backslash
+ & excess & general & tea
+\backslash
+
+\backslash
+ & excess & general & coffee
+\backslash
+
+\backslash
+ & excess & general & miscdrinkpowder
+\backslash
+
+\backslash
+ & excess & general & canned
+\backslash
+_drink
+\backslash
+
+\backslash
+ & excess & general & readymade
+\backslash
+_tea
+\backslash
+_coffee
+\backslash
+
+\backslash
+ & excess & general & beer
+\backslash
+
+\backslash
+ & excess & general & brews
+\backslash
+
+\backslash
+ & excess & general & winespirits
+\backslash
+
+\backslash
+ & excess & general & mensclothes
+\backslash
+
+\backslash
+ & excess & general & womensclothes
+\backslash
+
+\backslash
+ & excess & general & childrensclothes
+\backslash
+
+\backslash
+ & excess & general & mensshoes
+\backslash
+
+\backslash
+ & excess & general & womensshoes
+\backslash
+
+\backslash
+ & excess & general & childrensshoes
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+end{longtable} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}[!p]{l l r} 
+\backslash
+caption{List of owned assets (sorted by median reported market-price) 
+\backslash
+label{assetslist}} 
+\backslash
+
+\backslash
+  
+\backslash
+hline
+\backslash
+hline  & 
+\backslash
+multicolumn{1}{l}{name} & 
+\backslash
+multicolumn{1}{l}{median-price}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ & livestock & 21428.57 
+\backslash
+
+\backslash
+ & bed & 30000.00
+\backslash
+
+\backslash
+ & sofa & 33333.33
+\backslash
+
+\backslash
+ & videoplayer & 40000.00
+\backslash
+
+\backslash
+ & bike & 50000.00
+\backslash
+
+\backslash
+ & cart & 50000.00
+\backslash
+
+\backslash
+ & donkey & 50000.00
+\backslash
+
+\backslash
+ & plough & 90000.00
+\backslash
+
+\backslash
+ & sewingmachine & 90000.00
+\backslash
+
+\backslash
+ & harrow & 100000.00
+\backslash
+
+\backslash
+ & stove
+\backslash
+_electricgas & 100000.00
+\backslash
+
+\backslash
+ & tv & 100000.00
+\backslash
+
+\backslash
+ & waterpump & 100000.00
+\backslash
+
+\backslash
+ & boat & 104166.67
+\backslash
+
+\backslash
+ & musicsystem & 200000.00
+\backslash
+
+\backslash
+ & refrigerator & 200000.00
+\backslash
+
+\backslash
+ & computer & 350000.00
+\backslash
+
+\backslash
+ & animalcart & 400000.00
+\backslash
+
+\backslash
+ & house & 666666.67
+\backslash
+
+\backslash
+ & handmill & 1000000.00
+\backslash
+
+\backslash
+ & motorbike & 1200000.00
+\backslash
+
+\backslash
+ & powertiller & 1400000.00
+\backslash
+
+\backslash
+ & trailer & 3000000.00
+\backslash
+
+\backslash
+ & car & 6000000.00
+\backslash
+
+\backslash
+ & tractor & 20000000.00
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+end{longtable} 
 \end_layout
 
 \end_inset
