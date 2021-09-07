@@ -784,7 +784,7 @@ The details of records of asset-ownership in the LSMS dataset include the
 \end_inset
 
  reflects the perceived depreciation of the durable good over time as well.
- The total cost of the assets of a household is thus obtained is simpyl
+ The total cost of the assets of a household is thus obtained is simply
  a product of the number of assets 
 \begin_inset Formula $n_{t}$
 \end_inset
@@ -794,6 +794,8 @@ The details of records of asset-ownership in the LSMS dataset include the
 \end_inset
 
 .
+ We do not use the changes in asset value in the panel to avoid measurement
+ errors.
 \end_layout
 
 \begin_layout Standard
@@ -2904,14 +2906,82 @@ For simplicity of notation, we replace
 \end_inset
 
  in the following expressions.
- The utility function is therefore
+ The budget is 
+\begin_inset Formula $c=\psi\nu\pi(r)+\Omega(r,\omega)$
+\end_inset
+
+ where 
+\begin_inset Formula $\Omega(r,\omega)$
+\end_inset
+
+ is the cost of assets above 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\omega$
+\end_inset
+
+ are the assets selected by the consumer.
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ stays the same it does not change so we can say that the consumer chooses
+ 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $\omega$
+\end_inset
+
+ at once.
+ There is no substitution between 
+\begin_inset Formula $\omega$
+\end_inset
+
+ and 
+\begin_inset Formula $r$
+\end_inset
+
+ - since when the consumer chooses 
+\begin_inset Formula $r$
+\end_inset
+
+ she also chooses the 
+\begin_inset Formula $\omega$
+\end_inset
+
+ within it.
+ This means that 
+\begin_inset Formula $r$
+\end_inset
+
+ should be interpreted both as assets and hierarchy.
+\end_layout
+
+\begin_layout Standard
+The utility function is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+u(\nu,r,\omega) & =\alpha log(\nu-\bar{\nu})+\beta log(r-\bar{r})+(1-\alpha-\beta)log(\omega)
+\end{alignat*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-L=u(\nu,r)-\lambda(log(x)-log(r)-log(\nu))\\
-L=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})-\lambda(log(x)-log(r)-log(\nu))
+L=u(\nu,r)-\lambda(c-\psi\nu\pi(r)-\Omega(r,\omega))\\
+L=\alpha log(\nu-\bar{\nu})+\beta log(r-\bar{r})+(1-\alpha-\beta)log(\omega)-\lambda(c-\psi\nu\pi(r)-\Omega(r,\omega))
 \end{gather*}
 
 \end_inset
@@ -2924,27 +2994,10 @@ With the first order conditions,
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\frac{\partial L}{\partial\nu}=0\Rightarrow\frac{\alpha}{1-\bar{\nu}/\nu}=-\lambda$
+\begin_inset Formula $\frac{\partial L}{\partial\nu}=\frac{\alpha}{\nu-\bar{\nu}}+\lambda\p$
 \end_inset
 
- and 
-\begin_inset Formula $\frac{\partial L}{\partial r}=0\Rightarrow\frac{1-\alpha}{1-\bar{r}/r}=-\lambda$
-\end_inset
 
-.
- 
-\begin_inset Formula $\because1/r=\nu/x$
-\end_inset
-
- we have the quadratic equation 
-\begin_inset Formula $\frac{\alpha}{1-\bar{\nu}/\nu}=\frac{1-\alpha}{1-\nu\bar{r}/x}\Rightarrow\frac{\nu}{\alpha}-\frac{\bar{\nu}}{\alpha}=\frac{\nu}{1-\alpha}-\frac{\nu^{2}\bar{r}}{(1-\alpha)x}$
-\end_inset
-
- or 
-\begin_inset Formula $\frac{\bar{r}}{(1-\alpha)x}\nu^{2}+(\frac{1}{\alpha}-\frac{1}{1-\alpha})\nu-\frac{\bar{\nu}}{\alpha}=0$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard

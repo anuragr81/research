@@ -6198,5 +6198,325 @@ Reducing the contents for subjective well-being
  despondent rich consumers with high status consumption: high reference
 \end_layout
 
+\begin_layout Subsection
+Model with no local hierarchy (replaced with new)
+\end_layout
+
+\begin_layout Standard
+For simplicity of notation, we replace 
+\begin_inset Formula $r_{t}\rightarrow r$
+\end_inset
+
+, 
+\begin_inset Formula $x_{t}\rightarrow x$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{t}\rightarrow r$
+\end_inset
+
+ in the following expressions.
+ The utility function is therefore
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+L=u(\nu,r)-\lambda(log(x)-log(r)-log(\nu))\\
+L=\alpha log(\nu-\bar{\nu})+(1-\alpha)log(r-\bar{r})-\lambda(log(x)-log(r)-log(\nu))
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With the first order conditions,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\partial L}{\partial\nu}=0\Rightarrow\frac{\alpha}{1-\bar{\nu}/\nu}=-\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\partial L}{\partial r}=0\Rightarrow\frac{1-\alpha}{1-\bar{r}/r}=-\lambda$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\because1/r=\nu/x$
+\end_inset
+
+ we have the quadratic equation 
+\begin_inset Formula $\frac{\alpha}{1-\bar{\nu}/\nu}=\frac{1-\alpha}{1-\nu\bar{r}/x}\Rightarrow\frac{\nu}{\alpha}-\frac{\bar{\nu}}{\alpha}=\frac{\nu}{1-\alpha}-\frac{\nu^{2}\bar{r}}{(1-\alpha)x}$
+\end_inset
+
+ or 
+\begin_inset Formula $\frac{\bar{r}}{(1-\alpha)x}\nu^{2}+(\frac{1}{\alpha}-\frac{1}{1-\alpha})\nu-\frac{\bar{\nu}}{\alpha}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Equation 
+\begin_inset Formula $\frac{\alpha}{(1-\alpha)}(r-\bar{r})\pi'(r)=\pi(r)-\frac{\pi(r)^{2}\bar{\nu}}{x}$
+\end_inset
+
+ is a Bernoulli Equation.
+ Rewriting it as the following, we can use the definition 
+\begin_inset Formula $g(r)=\frac{1}{\pi(r)}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+\pi'(r) & =\frac{1-\alpha}{\alpha(r-\bar{r})}\pi(r)+(-\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})})\pi(r)^{2}\label{eq:simple_form_pi_r}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The definition 
+\begin_inset Formula $g(r)=\frac{1}{\pi(r)}$
+\end_inset
+
+ leads to 
+\begin_inset Formula $g'(r)=\frac{-\pi'(r)}{\pi(r)^{2}}$
+\end_inset
+
+ and allows us to simplify the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:simple_form_pi_r"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as 
+\begin_inset Formula $-\frac{\pi'(r)}{\pi(r)^{2}}=-\frac{1-\alpha}{\alpha(r-\bar{r})}\frac{1}{\pi(r)}+\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})}$
+\end_inset
+
+ so that the following is a linear differential equation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+g'(r) & =-\frac{1-\alpha}{\alpha(r-\bar{r})}g(r)+\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $a(r)\equiv-\frac{1-\alpha}{\alpha(r-\bar{r})}$
+\end_inset
+
+ and 
+\begin_inset Formula $b(r)=\frac{(1-\alpha)\bar{\nu}}{x\alpha(r-\bar{r})}$
+\end_inset
+
+.
+ We know that for 
+\begin_inset Formula $g'(r)=a(r)g(r)+b(r)$
+\end_inset
+
+ and 
+\begin_inset Formula $g(r_{0})=g_{0}$
+\end_inset
+
+the initial value problem has the following solution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+g(r) & =g_{0}e^{A(r)}+e^{A(r)}\int_{r_{0}}^{r}e^{-A(s)}b(s)ds\label{eq:general_solution}
+\end{alignat}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $A(r)=\int_{r_{0}}^{r}a(s)ds$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $A(r)=(\frac{1-\alpha}{\alpha})log(\frac{r_{0}-\bar{r}}{r-\bar{r}})$
+\end_inset
+
+ and 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+e^{A(r)} & =(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}(r-\bar{r})^{-\frac{1-\alpha}{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\int_{r_{0}}^{r}e^{-A(s)}b(s)ds=\int_{r_{0}}^{r}\{(\frac{s-\bar{r}}{r_{0}-\bar{r}})^{\frac{1-\alpha}{\alpha}}\frac{(1-\alpha)\bar{\nu}}{x\alpha(s-\bar{r})}\}ds=\frac{(1-\alpha)\bar{\nu}}{x\alpha(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}}\int_{r_{0}}^{r}(s-\bar{r})^{\frac{1}{\alpha}-2}ds$
+\end_inset
+
+.
+ With 
+\begin_inset Formula $\alpha\ne\frac{1}{2}$
+\end_inset
+
+, we have the following solution (for 
+\begin_inset Formula $\alpha=\frac{1}{2}$
+\end_inset
+
+ the integrand is a constant).
+ 
+\begin_inset Formula $\int_{r_{0}}^{r}e^{-A(s)}b(s)ds=\frac{(1-\alpha)\bar{\nu}}{x\alpha(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}}\times\frac{1}{\frac{1}{\alpha}-1}\{(s-\bar{r})^{\frac{1}{\alpha}-1}|_{r_{0}}^{r}\}=\frac{\bar{\nu}}{x(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}}\{(r-\bar{r})^{\frac{1-\alpha}{\alpha}}-(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}\}$
+\end_inset
+
+.
+ Therefore,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\int_{r_{0}}^{r}e^{-A(s)}b(s)ds & =\frac{\bar{\nu}}{x}((\frac{r-\bar{r}}{r_{0}-\bar{r}}){}^{\frac{1-\alpha}{\alpha}}-1)
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus 
+\begin_inset Formula 
+\begin{alignat*}{1}
+g(r) & =\frac{1}{\pi(r_{0})}(\frac{r_{0}-\bar{r}}{r-\bar{r}})^{\frac{1-\alpha}{\alpha}}+(\frac{r_{0}-\bar{r}}{r-\bar{r}})^{\frac{1-\alpha}{\alpha}}\times\frac{\bar{\nu}}{x}((\frac{r-\bar{r}}{r_{0}-\bar{r}}){}^{\frac{1-\alpha}{\alpha}}-1)
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or
+\begin_inset Formula 
+\begin{alignat*}{1}
+g(r)=\frac{1}{\pi(r)} & =(\frac{1}{\pi(r_{0})}-\frac{\bar{\nu}}{x})(\frac{r_{0}-\bar{r}}{r-\bar{r}})^{\frac{1-\alpha}{\alpha}}+\frac{\bar{\nu}}{x}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $g(r)=\frac{1}{\pi(r)}$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{alignat*}{1}
+\pi(r) & =\frac{x(r-\bar{r})^{\frac{1-\alpha}{\alpha}}}{(\frac{x}{\pi(r_{0})}-\bar{\nu})(r_{0}-\bar{r})^{\frac{1-\alpha}{\alpha}}+(r-\bar{r})^{\frac{1-\alpha}{\alpha}}\bar{\nu}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above suggests using higher powers of 
+\begin_inset Formula $r$
+\end_inset
+
+ in the regression.
+ Notice also that the above permits 
+\begin_inset Formula $\alpha<\frac{1}{2}$
+\end_inset
+
+ when 
+\begin_inset Formula $\frac{1}{\alpha}-1>1$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha>\frac{1}{2}$
+\end_inset
+
+ when 
+\begin_inset Formula $\frac{1}{\alpha}-1<1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+For the optimal 
+\begin_inset Formula $r^{*}$
+\end_inset
+
+, 
+\begin_inset Formula $\nu^{*}=\frac{x}{\pi(r^{*})}=xg(r)$
+\end_inset
+
+ or
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\nu^{*}= & (\frac{x}{\pi(r_{0})}-\bar{\nu})(\frac{r_{0}-\bar{r}}{r-\bar{r}})^{\frac{1-\alpha}{\alpha}}+\bar{\nu}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\nu^{*}$
+\end_inset
+
+grows linearly with 
+\begin_inset Formula $x$
+\end_inset
+
+ and non-linearly with 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ We thus consider the regression as an estimate of 
+\begin_inset Formula $\frac{\partial\nu^{*}}{\partial x}$
+\end_inset
+
+ where a non-linear formulation is used.
+\end_layout
+
 \end_body
 \end_document

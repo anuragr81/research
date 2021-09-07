@@ -1261,14 +1261,13 @@ get_nonparametric_df <- function(ll,food_analysis){
     dat2012 <- merge(bubble_fields_2012, indivdat2012, by="P1")
     dat2014 <- merge(bubble_fields_2014, indivdat2014, by="P1")
     
-    dat2010 <- dat2010 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne)
-    dat2012 <- dat2012 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne)
-    dat2014 <- dat2014 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne)
+    dat2010 <- dat2010 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r)
+    dat2012 <- dat2012 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r)
+    dat2014 <- dat2014 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r)
     
     dat2010 <-subset(dat2010,!is.na(r))
     dat2012 <-subset(dat2012,!is.na(r))
     dat2014 <-subset(dat2014,!is.na(r))
-    
     
     #test
     #print(summary(lm(data=dat2010, nu~ r + max_occupation_rank + max_education_rank)))
