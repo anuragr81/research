@@ -1,12 +1,13 @@
 use "C:\temp\df2010.dta", clear
 
-eststo, title (2010): sqreg nu r i.max_occupation_rank i.max_education_rank, q(.30 .60 .90) reps(100)
+eststo, title (2010): quietly sqreg nu r i.max_occupation_rank i.max_education_rank, q(.30 .60 .90) reps(100)
+
 use "C:\temp\df2012.dta", clear
 
 *eststo, title (2012): sqreg nu r i.max_occupation_rank i.max_education_rank, q(.30 .60 .90) reps(100)
 
 
-eststo, title (2012): sqreg nu r i.max_occupation_rank i.max_education_rank, q(.30 .60 .90) reps(100)
+eststo, title (2012): quietly sqreg nu r i.max_occupation_rank i.max_education_rank, q(.30 .60 .90) reps(100)
 
 
 esttab using c:/temp/resnu.tex, mtitle no p numbers star nogaps compress

@@ -1283,6 +1283,25 @@ get_nonparametric_df <- function(ll,food_analysis){
   return(res)
 }
 
+plot_pi_r_against_r <- function(dflist){
+  #years <- c("2010","2012")
+  years <- c("2012")
+  par(mfrow = c(1,length(years)))
+  for (year in years ){
+    print(year)
+    data = dflist[[paste0("df",year)]]
+    data <- data %>% mutate( lc = log(mean_cost_ne))
+    plot(data=data,lc ~ r , xlab =latex2exp::TeX("$r$") , ylab=latex2exp::TeX("$log(\\pi(r))$") , main = year)
+    abline(lm(data=data, lc ~ r))
+  }
+  par(mfrow = c(1,1))
+  
+  #plot(data=nfa[["df2010"]] %>% mutate(dA = lnA0- r, lnu = log(nu)), lnu ~ dA, xlim = c (-10,5))
+  #abline(lm(data=nfa[["df2012"]] %>% mutate(dA = lnA0- r, lnu = log(nu)), lnu ~ dA))
+  
+  ## also check : hist((nfa[["df2012"]] %>% mutate(dA = lnA0- r, lnu = log(nu)))$lnu)
+}
+
 
 calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
   res<- array()
