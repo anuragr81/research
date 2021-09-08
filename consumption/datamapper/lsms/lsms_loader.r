@@ -940,9 +940,12 @@ lsms_loader<-function(fu,ln,lgc) {
         fu()@removeall_cols_except(l,c("region","district","ward","accessiblemarket","travelcost"))
       }
       #* Also considered urban/rural based on population density 
-      u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
+      u <-read.csv(paste(dirprefix,'./lsms/district_code_2014.csv',sep=""))
       pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked.csv',sep=""))
       u <- merge(plyr::rename(pop,c("region"="region_name","district"="district_name","total"="total_population")), u, by = c("region_name","district_name"),all.y=T)
+      if (nrow(subset(u,is.na(S) | is.na(E)))>0){
+        stop("Missing entries in population-district-code mapping")
+      }
       u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name,population=as.numeric(u$total_population))
       
       
@@ -961,6 +964,9 @@ lsms_loader<-function(fu,ln,lgc) {
       
       
       a<-merge(a,u,all.x=TRUE)
+      if (nrow(subset(a,is.na(S) | is.na(E)))>0){
+        stop("Missing entries in population-district-code mapping")
+      }
       #a<-merge(a,l,all.x=TRUE)
       a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
       popDensity <- read.csv(paste(dirprefix,"./lsms/tnzpopdensity.csv",sep=""))
@@ -1057,6 +1063,9 @@ lsms_loader<-function(fu,ln,lgc) {
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
       pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked.csv',sep=""))
       u <- merge(plyr::rename(pop,c("region"="region_name","district"="district_name","total"="total_population")), u, by = c("region_name","district_name"),all.y=T)
+      if (nrow(subset(u,is.na(S) | is.na(E)))>0){
+        stop("Missing entries in population-district-code mapping")
+      }
       u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name,population=as.numeric(u$total_population))
       
       
@@ -1067,7 +1076,10 @@ lsms_loader<-function(fu,ln,lgc) {
       a <- fu()@get_translated_frame(dat=adat,
                                      names=ln()@ohs_seca_columns_lsms(2012),
                                      m=ln()@ohs_seca_mapping_lsms_2012())
-      a<-merge(a,u)
+      a<-merge(a,u,all.x=TRUE)
+      if (nrow(subset(a,is.na(S) | is.na(E)))>0){
+        stop("Missing entries in population-district-code mapping")
+      }
       #a<-merge(a,l)
       a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
       popDensity <- read.csv(paste(dirprefix,"./lsms/tnzpopdensity.csv",sep=""))
@@ -1161,6 +1173,9 @@ lsms_loader<-function(fu,ln,lgc) {
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
       pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked.csv',sep=""))
       u <- merge(plyr::rename(pop,c("region"="region_name","district"="district_name","total"="total_population")), u, by = c("region_name","district_name"),all.y=T)
+      if (nrow(subset(u,is.na(S) | is.na(E)))>0){
+        stop("Missing entries in population-district-code mapping")
+      }
       u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name ,population=as.numeric(u$total_population));
       
       adat<-read_tnz(paste(dirprefix,'./lsms/TZNPS2HH1DTA/HH_SEC_A.dta',sep=""),FALSE)
@@ -1168,7 +1183,10 @@ lsms_loader<-function(fu,ln,lgc) {
       a <- fu()@get_translated_frame(dat=adat,
                                      names=ln()@ohs_seca_columns_lsms(2010),
                                      m=ln()@ohs_seca_mapping_lsms_2010())
-      a<-merge(a,u)
+      a<-merge(a,u,all.x=TRUE)
+      if (nrow(subset(a,is.na(S) | is.na(E)))>0){
+        stop("Missing entries in population-district-code mapping")
+      }
       #a<-merge(a,l)
       a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
       popDensity <- read.csv(paste(dirprefix,"./lsms/tnzpopdensity.csv",sep=""))
@@ -1247,6 +1265,9 @@ lsms_loader<-function(fu,ln,lgc) {
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
       pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked.csv',sep=""))
       u <- merge(plyr::rename(pop,c("region"="region_name","district"="district_name","total"="total_population")), u, by = c("region_name","district_name"),all.y=T)
+      if (nrow(subset(u,is.na(S) | is.na(E)))>0){
+        stop("Missing entries in population-district-code mapping")
+      }
       u = data.frame(region=u$region,district=u$district,isurbanp=u$is_urban, S=u$S, E=u$E,region_name=u$region_name,population=as.numeric(u$total_population))
       
       adat<-read_tnz(paste(dirprefix,'./lsms/tnz2008/TZNPS1HHDTA_E/SEC_A_T.dta',sep=""),FALSE,hhidColName = "hhid")
@@ -1254,7 +1275,10 @@ lsms_loader<-function(fu,ln,lgc) {
       a <- fu()@get_translated_frame(dat=adat,
                                      names=ln()@ohs_seca_columns_lsms(2008),
                                      m=ln()@ohs_seca_mapping_lsms_2008())
-      a<-merge(a,u)
+      a<-merge(a,u,all.x=TRUE)
+      if (nrow(subset(a,is.na(S) | is.na(E)))>0){
+        stop("Missing entries in population-district-code mapping")
+      }
       #a<-merge(a,l)
       a$expensiveregion<-as.integer(is.element(a$region,get_expensiveregion_codes()))
       popDensity <- read.csv(paste(dirprefix,"./lsms/tnzpopdensity.csv",sep=""))

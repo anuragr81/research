@@ -1097,6 +1097,10 @@ get_split_costs <- function (categs_a , categs_b, dat , group_field) {
 get_parametric_band_df <- function(ll){
   inc_houserent = F
   inc_educexpense = F
+  
+  educ_pivot <- 3
+  occup_pivot <- 2
+  
   all_costs <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
   #asset purchases and asset-bearing costs are not considered
   needs_and_excess_costs <- subset(all_costs, is.element(group,c("excess","needs")))
@@ -1242,7 +1246,7 @@ get_nonparametric_df <- function(ll,food_analysis){
     # in the desired data-frame we would have hhdis with their region-id in P2 (which also included P1). So that pi(r) is the same for all consumers in the P2. 
     # the output would be the pi(r) for all hhid 
     
-    bubble_distances <- get_bubble_distances(dat2010=indivdat2010, dat2012=indivdat2012,dat2014=indivdat2014,distance_threshold = .06)
+    bubble_distances <- get_bubble_distances(dat2010=indivdat2010, dat2012=indivdat2012,dat2014=indivdat2014,distance_threshold = .06, educ_pivot = educ_pivot, occup_pivot=occup_pivot)
     #bubble_distances <- get_bubble_distances(dat2010=indivdat2010, dat2012=indivdat2012,dat2014=indivdat2014,popdistance_threshold = .1)
     
     bubble_mean_cost2010 <- calculate_mean_over_bubbles(input_dat=indivdat2010,bubble_distances = bubble_distances, field="cost_ne")
@@ -1255,15 +1259,17 @@ get_nonparametric_df <- function(ll,food_analysis){
     
     bubble_fields_2010 <- merge(bubble_mean_cost2010,bubble_assets_2010)
     bubble_fields_2012 <- merge(bubble_mean_cost2012,bubble_assets_2012)
-    bubble_fields_2014 <- merge(bubble_mean_cost2012,bubble_assets_2014)
+    bubble_fields_2014 <- merge(bubble_mean_cost2014,bubble_assets_2014)
     
     dat2010 <- merge(bubble_fields_2010, indivdat2010, by="P1")
     dat2012 <- merge(bubble_fields_2012, indivdat2012, by="P1")
     dat2014 <- merge(bubble_fields_2014, indivdat2014, by="P1")
     
-    dat2010 <- dat2010 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r)
-    dat2012 <- dat2012 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r)
-    dat2014 <- dat2014 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r)
+    
+    
+    dat2010 <- dat2010 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r, high_educ = as.integer(max_education_rank>educ_pivot), high_occup = as.integer(max_occupation_rank>occup_pivot))
+    dat2012 <- dat2012 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r, high_educ = as.integer(max_education_rank>educ_pivot), high_occup = as.integer(max_occupation_rank>occup_pivot))
+    dat2014 <- dat2014 %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r, high_educ = as.integer(max_education_rank>educ_pivot), high_occup = as.integer(max_occupation_rank>occup_pivot))
     
     dat2010 <-subset(dat2010,!is.na(r))
     dat2012 <-subset(dat2012,!is.na(r))
@@ -1319,11 +1325,13 @@ calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
   resdf$P1 <- bubble_distances$P1
   return(resdf)
 }
-get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold,popdistance_threshold){
+get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold,popdistance_threshold, educ_pivot, occup_pivot){
   # the average of consumption of consumers within a given population-distance becomes pi(r), the total asset value becomes r, the total expenditure is cost_ne
   # remember we have distances only of consumers 
-  selected_cols <- c("region","district","S","E","population")
-  all_points <- unique(rbind(unique(rbind(unique(dat2010[,selected_cols]),unique(dat2012[,selected_cols]))),unique(dat2014[,selected_cols])))
+  
+  loc_cols <- c("region","district","S","E","population","max_occupation_rank","max_education_rank")
+  #loc_cols <- c("region","district","S","E")
+  all_points <- unique(rbind(unique(rbind(unique(dat2010[,loc_cols]),unique(dat2012[,loc_cols]))),unique(dat2014[,loc_cols])))
   
   all_points$point <- paste(all_points$region,all_points$district,sep="-")
   all_distances <- expand.grid(all_points$point,all_points$point)
@@ -1335,6 +1343,7 @@ get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold,popd
   # The distances are still symmetric - because even if one is significantly more populous than the other - they're closer than they would be when they're not populous.
   all_distances$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2)
   all_distances$pop_distance <- mapply(function(s1,e1,s2,e2,N1,N2) {(1e+6/(N1+N2))* sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2,all_distances$population1,all_distances$population2)
+  all_distances$is_educ_neighbour <- mapply(function(ed1,ed2) { (ed1> educ_pivot) && (ed2 > educ_pivot) } , all_distances$max_education_rank1,all_distances$max_education_rank2)
   if (missing(popdistance_threshold) ){
     if (missing(distance_threshold)){
       stop("Must provide either distance_threshold or popdistance_threshold")  
@@ -1353,8 +1362,12 @@ get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold,popd
 
 
 #x <- build_xt_df(dat2010 = nf[["df2010"]], dat2012= nf[["df2012"]],dat2014 = nf[["df2014"]])
-build_xt_df <- function(dat2010,dat2012,dat2014)
+build_xt_df <- function(dflist)
 {
+  dat2010 <- dflist[["df2010"]]
+  dat2012 <- dflist[["df2012"]]
+  dat2014 <- dflist[["df2014"]]
+  
   if (is.element("hhid",colnames(dat2010))  && !is.element("hhid2010",colnames(dat2010))){
     dat2010$hhid2010 <- dat2010$hhid
   } else if (!is.element("hhid",colnames(dat2010))  && is.element("hhid2010",colnames(dat2010))){
