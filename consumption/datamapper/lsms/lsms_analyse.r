@@ -1351,7 +1351,9 @@ get_bubble_distances <- function(dat2010,dat2012,dat2014,distance_threshold,popd
   return(bubble_distances)
 }
 
-build_xt_df <- function(dat2010,dat2012)
+
+#x <- build_xt_df(dat2010 = nf[["df2010"]], dat2012= nf[["df2012"]],dat2014 = nf[["df2014"]])
+build_xt_df <- function(dat2010,dat2012,dat2014)
 {
   if (is.element("hhid",colnames(dat2010))  && !is.element("hhid2010",colnames(dat2010))){
     dat2010$hhid2010 <- dat2010$hhid
@@ -1364,19 +1366,43 @@ build_xt_df <- function(dat2010,dat2012)
   } else if (!is.element("hhid",colnames(dat2012))  && is.element("hhid2012",colnames(dat2012))){
     dat2012$hhid <- dat2012$hhid2012
   }
-  
+
+  if (is.element("hhid",colnames(dat2014))  && !is.element("hhid2014",colnames(dat2014))){
+    dat2014$hhid2014 <- dat2014$hhid
+  } else if (!is.element("hhid",colnames(dat2014))  && is.element("hhid2014",colnames(dat2014))){
+    dat2014$hhid <- dat2014$hhid2014
+  }
+
+    
   hhid2012_hhid10_mapping <- mapping_hhids_2010_2012(o2012 = o2012)
-  common_cols_2010_2012 <- intersect(colnames(dat2010),colnames(dat2012) )
-  df2010_2012 <- merge(hhid2012_hhid10_mapping , plyr::rename(dat2012[,common_cols_2010_2012],c("hhid"="hhid2012"))) %>% mutate(year = 2012)
+  hhid2014_hhid12_mapping <- mapping_hhids_2012_2014(o2014 = o2014)
+  common_cols_2010_2012_2014 <- intersect(colnames(dat2014),intersect(colnames(dat2010),colnames(dat2012) ))
+  df2010_2012 <- merge(hhid2012_hhid10_mapping , plyr::rename(dat2012[,common_cols_2010_2012_2014],c("hhid"="hhid2012"))) %>% mutate(year = 2012)
   df2010_2012$hhid2012 <- NULL
   df2010_2012 <- plyr::rename(df2010_2012,c("hhid2010"="hhid"))
-  df2010_2012 <- rbind(df2010_2012,dat2010[,common_cols_2010_2012] %>% mutate(year =2010))
+  df2010_2012 <- rbind(df2010_2012,dat2010[,common_cols_2010_2012_2014] %>% mutate(year =2010))
   df2010_2012$hhid <- as.factor(df2010_2012$hhid)
   split_hhids2010_2012 <- unique(subset(ddply(df2010_2012,.(hhid,year),summarise,n=length(consu)),n>1)$hhid)
   
   print(paste("Ignoring split",length(split_hhids2010_2012),"/",length(unique(df2010_2012$hhid)),"households"))
   df2010_2012 <- subset(df2010_2012,!is.element(hhid,split_hhids2010_2012))
-  return(df2010_2012)
+  
+  ####
+  df2012_2014 <- merge(hhid2014_hhid12_mapping , plyr::rename(dat2014[,common_cols_2010_2012_2014],c("hhid"="hhid2014"))) %>% mutate(year = 2014)
+  df2012_2014$hhid2014 <- NULL
+  df2012_2014 <- plyr::rename(df2012_2014,c("hhid2012"="hhid"))
+  df2012_2014 <- rbind(df2012_2014,dat2012[,common_cols_2010_2012_2014] %>% mutate(year =2012))
+  df2012_2014$hhid <- as.factor(df2012_2014$hhid)
+  split_hhids2012_2014 <- unique(subset(ddply(df2012_2014,.(hhid,year),summarise,n=length(consu)),n>1)$hhid)
+  
+  print(paste("Ignoring split",length(split_hhids2012_2014),"/",length(unique(df2012_2014$hhid)),"households"))
+  df2012_2014 <- subset(df2012_2014,!is.element(hhid,split_hhids2012_2014))
+  
+  
+  res=list()
+  res[["df2010_2012"]] <- df2010_2012
+  res[["df2012_2014"]] <- df2012_2014
+  return(res)
   
 }
 
@@ -2154,6 +2180,7 @@ get_asset_group <- function(){
   r=rbind(r,data.frame(shortname='donkey' , asset_group='agricultural'))
   r=rbind(r,data.frame(shortname='sofa' , asset_group='furniture'))
   r=rbind(r,data.frame(shortname='harrow' , asset_group='agricultural'))
+  r=rbind(r,data.frame(shortname='harvester' , asset_group='agricultural'))
   r=rbind(r,data.frame(shortname='stove_electricgas' , asset_group='electric'))
   r=rbind(r,data.frame(shortname='tv' , asset_group='electronics'))
   r=rbind(r,data.frame(shortname='waterpump' , asset_group='electric'))

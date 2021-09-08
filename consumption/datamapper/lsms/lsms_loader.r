@@ -54,6 +54,7 @@ lsms_loader<-function(fu,ln,lgc) {
   load_diary_file <-function(dirprefix,year,fu,ln,load_cost){
     
     print(paste("LOAD_DIARY_FILE - load_cost=",load_cost ))
+    
     ##
     if (year == 2014){
       jdat1 <- read_tnz(filename = paste(dirprefix,"./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_STATA11/hh_sec_j1.DTA",sep=""),
