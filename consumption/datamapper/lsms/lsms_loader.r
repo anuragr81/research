@@ -941,7 +941,7 @@ lsms_loader<-function(fu,ln,lgc) {
       }
       #* Also considered urban/rural based on population density 
       u <-read.csv(paste(dirprefix,'./lsms/district_code_2014.csv',sep=""))
-      pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked.csv',sep=""))
+      pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked_2014.csv',sep=""))
       u <- merge(plyr::rename(pop,c("region"="region_name","district"="district_name","total"="total_population")), u, by = c("region_name","district_name"),all.y=T)
       if (nrow(subset(u,is.na(S) | is.na(E)))>0){
         stop("Missing entries in population-district-code mapping")
