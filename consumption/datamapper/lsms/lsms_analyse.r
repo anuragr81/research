@@ -1257,7 +1257,12 @@ get_nonparametric_df <- function(ll,food_analysis){
     for (year in c(2010,2012,2014)){
       dfdat <- dflist[[paste0("indivdat",year)]]
       
-      bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06, educ_pivot = educ_pivot, occup_pivot=occup_pivot)
+      bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06)
+      
+      ##all_distances$is_educ_neighbour <- mapply(function(ed1,ed2) { (ed1> educ_pivot) && (ed2 > educ_pivot) } , all_distances$max_education_rank1,all_distances$max_education_rank2)
+      ##,"max_occupation_rank","max_education_rank"
+      stop("Use ddply to over aggregated frames" )
+      
       bubble_mean_cost <- calculate_mean_over_bubbles(input_dat=dfdat,bubble_distances = bubble_distances, field="cost_ne")
       bubble_assets <- calculate_mean_over_bubbles(input_dat=dfdat, bubble_distances=bubble_distances, field="A0")
       bubble_fields <- merge(bubble_mean_cost,bubble_assets)
@@ -1295,14 +1300,17 @@ plot_pi_r_against_r <- function(dflist){
   ## also check : hist((nfa[["df2012"]] %>% mutate(dA = lnA0- r, lnu = log(nu)))$lnu)
 }
 
-
-calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
-  res<- array()
+get_bubble_aggregated_df <- function(input_dat,bubble_distances){
+  
   populations <- array()
   pb <- txtProgressBar(min = 0, max = dim(bubble_distances)[1], style = 3)
   for (i in seq(dim(bubble_distances)[1])){
     tempdat <- subset(input_dat %>% mutate(found=sapply(input_dat$P1,function(x){ length(grep(x,bubble_distances[i,]$B))>0})) , found==T)
+    tempdat <- 
     res[i]=mean(tempdat[,field])
+    #mean can be calculated over 
+    #tempdat %>% mutate(high_occup = as.integer(max_occupation_rank>1))
+    #tempdat %>% mutate(high_educ = as.integer(max_education_rank>1))
     populations[i] = nrow(tempdat)
     setTxtProgressBar(pb, i)
   }
@@ -1312,12 +1320,33 @@ calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
   resdf$P1 <- bubble_distances$P1
   return(resdf)
 }
-get_bubble_distances <- function(dat,distance_threshold,popdistance_threshold, educ_pivot, occup_pivot){
+
+
+calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
+  res<- array()
+  populations <- array()
+  pb <- txtProgressBar(min = 0, max = dim(bubble_distances)[1], style = 3)
+  for (i in seq(dim(bubble_distances)[1])){
+    tempdat <- subset(input_dat %>% mutate(found=sapply(input_dat$P1,function(x){ length(grep(x,bubble_distances[i,]$B))>0})) , found==T)
+    res[i]=mean(tempdat[,field])
+    #mean can be calculated over 
+    #tempdat %>% mutate(high_occup = as.integer(max_occupation_rank>1))
+    #tempdat %>% mutate(high_educ = as.integer(max_education_rank>1))
+    populations[i] = nrow(tempdat)
+    setTxtProgressBar(pb, i)
+  }
+  resdf <- data.frame(m=res,N=populations)
+  
+  colnames(resdf)<- c(paste("mean",field,sep="_"), "N")
+  resdf$P1 <- bubble_distances$P1
+  return(resdf)
+}
+get_bubble_distances <- function(dat,distance_threshold,popdistance_threshold){
   # the average of consumption of consumers within a given population-distance becomes pi(r), the total asset value becomes r, the total expenditure is cost_ne
   # remember we have distances only of consumers 
   
-  loc_cols <- c("region","district","S","E","population","max_occupation_rank","max_education_rank")
-  #loc_cols <- c("region","district","S","E")
+  loc_cols <- c("region","district","S","E","population")
+  
   all_points <- unique(dat[,loc_cols])
   
   all_points$point <- paste(all_points$region,all_points$district,sep="-")
@@ -1330,7 +1359,7 @@ get_bubble_distances <- function(dat,distance_threshold,popdistance_threshold, e
   # The distances are still symmetric - because even if one is significantly more populous than the other - they're closer than they would be when they're not populous.
   all_distances$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2)
   all_distances$pop_distance <- mapply(function(s1,e1,s2,e2,N1,N2) {(1e+6/(N1+N2))* sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2,all_distances$population1,all_distances$population2)
-  all_distances$is_educ_neighbour <- mapply(function(ed1,ed2) { (ed1> educ_pivot) && (ed2 > educ_pivot) } , all_distances$max_education_rank1,all_distances$max_education_rank2)
+  
   if (missing(popdistance_threshold) ){
     if (missing(distance_threshold)){
       stop("Must provide either distance_threshold or popdistance_threshold")  
@@ -1409,7 +1438,11 @@ build_xt_df <- function(dflist)
 test_search_cluster <- function(){
   tdf <- data.frame(P1=c("1-1","2-4"),B=c("2-2, 1-1","2-4, 1-2"))
   dat <- data.frame(hhid=seq(4),P1=c("2-4","1-1","2-2","1-2"))
-  subset(dat %>% mutate(found=sapply(dat$P1,function(x){ length(grep(x,tdf[2,]))>0})),found==T)
+  resdf<-NULL
+  for (i in seq(nrow(tdf))){
+  resdf <- rbind(resdf,subset(dat %>% mutate(found=sapply(dat$P1,function(x){ length(grep(x,tdf[i,]))>0})),found==T) %>% mutate(B=tdf[i,]$B , found=NULL))
+  }
+  return(resdf)
 }
 
 run_non_parmetric_regression_for_food_vs_nonfood <- function(ll,dfslist,year,sp)
