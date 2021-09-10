@@ -1258,7 +1258,7 @@ get_nonparametric_df <- function(ll,food_analysis){
       dfdat <- dflist[[paste0("indivdat",year)]]
       
       bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06)
-      
+      dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
       ##all_distances$is_educ_neighbour <- mapply(function(ed1,ed2) { (ed1> educ_pivot) && (ed2 > educ_pivot) } , all_distances$max_education_rank1,all_distances$max_education_rank2)
       ##,"max_occupation_rank","max_education_rank"
       stop("Use ddply to over aggregated frames" )
@@ -1302,22 +1302,19 @@ plot_pi_r_against_r <- function(dflist){
 
 get_bubble_aggregated_df <- function(input_dat,bubble_distances){
   
-  populations <- array()
   pb <- txtProgressBar(min = 0, max = dim(bubble_distances)[1], style = 3)
+  resdf <- NULL
   for (i in seq(dim(bubble_distances)[1])){
-    tempdat <- subset(input_dat %>% mutate(found=sapply(input_dat$P1,function(x){ length(grep(x,bubble_distances[i,]$B))>0})) , found==T)
-    tempdat <- 
-    res[i]=mean(tempdat[,field])
+    tempdat <- subset(input_dat %>% mutate(found=sapply(input_dat$P1,function(x){ is.element(x,fromJSON(bubble_distances[i,]$B))}) ), found==T)
+    tempdat <- tempdat %>% mutate(B=bubble_distances[i,]$B , found=NULL)
+    resdf <- rbind(resdf,tempdat)
+    
     #mean can be calculated over 
     #tempdat %>% mutate(high_occup = as.integer(max_occupation_rank>1))
     #tempdat %>% mutate(high_educ = as.integer(max_education_rank>1))
-    populations[i] = nrow(tempdat)
     setTxtProgressBar(pb, i)
   }
-  resdf <- data.frame(m=res,N=populations)
-  
-  colnames(resdf)<- c(paste("mean",field,sep="_"), "N")
-  resdf$P1 <- bubble_distances$P1
+
   return(resdf)
 }
 
@@ -1372,7 +1369,7 @@ get_bubble_distances <- function(dat,distance_threshold,popdistance_threshold){
     stop("Cannot use both distance_threshold and popdistance_threshold")
   }
   
-  bubble_distances <- ddply(unique(filtered_distances[,c("P1","P2")]),.(P1),summarise,B=toString(P2))
+  bubble_distances <- ddply(unique(filtered_distances[,c("P1","P2")]),.(P1),summarise,B=toJSON(P2))
   return(bubble_distances)
 }
 
