@@ -1269,7 +1269,7 @@ get_nonparametric_df <- function(ll,food_analysis){
       bubble_fields_w_P1 <- merge(bubble_distances,bubble_fields,by=c('B'))
       
       rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1")
-      rd_bubble_weduc <- merge(rd,bubble_educ, by = c("B","high_educ"))
+      rd_bubble_weduc <- merge(rd_bubble,bubble_educ, by = c("B","high_educ"))
       rd_bubble_weducoccup <- merge(rd_bubble_weduc,bubble_occup, by = c("B","high_occup"))
       rd <- rd_bubble_weducoccup %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r) 
       
