@@ -1098,8 +1098,6 @@ get_parametric_band_df <- function(ll){
   inc_houserent = F
   inc_educexpense = F
   
-  educ_pivot <- 3
-  occup_pivot <- 2
   
   all_costs <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
   #asset purchases and asset-bearing costs are not considered
@@ -1117,6 +1115,9 @@ get_nonparametric_df <- function(ll,food_analysis){
   inc_houserent = F
   inc_educexpense = F
   #food_analysis = F
+  
+  educ_pivot <- 3
+  occup_pivot <- 2
   
   
   hhids2010_2012 <- mapping_hhids_2010_2012(o2012)
@@ -1256,18 +1257,21 @@ get_nonparametric_df <- function(ll,food_analysis){
     
     for (year in c(2010,2012,2014)){
       dfdat <- dflist[[paste0("indivdat",year)]]
+      dfdat <- dfdat %>% mutate( high_educ = as.integer(max_education_rank>educ_pivot) , high_occup = as.integer(max_occupation_rank>occup_pivot))
       
       bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06)
       dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
-      ##all_distances$is_educ_neighbour <- mapply(function(ed1,ed2) { (ed1> educ_pivot) && (ed2 > educ_pivot) } , all_distances$max_education_rank1,all_distances$max_education_rank2)
-      ##,"max_occupation_rank","max_education_rank"
-      stop("Use ddply to over aggregated frames" )
+
+      bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne=mean(cost_ne),mean_A0=mean(A0)) 
+      bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost=mean(cost_ne),mean_occup_A0=mean(A0))
+      bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost=mean(cost_ne),mean_educ_A0=mean(A0))
       
-      bubble_mean_cost <- calculate_mean_over_bubbles(input_dat=dfdat,bubble_distances = bubble_distances, field="cost_ne")
-      bubble_assets <- calculate_mean_over_bubbles(input_dat=dfdat, bubble_distances=bubble_distances, field="A0")
-      bubble_fields <- merge(bubble_mean_cost,bubble_assets)
-      rd <- merge(bubble_fields, dfdat, by="P1")
-      rd <- rd%>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r, high_educ = as.integer(max_education_rank>educ_pivot), high_occup = as.integer(max_occupation_rank>occup_pivot))
+      bubble_fields_w_P1 <- merge(bubble_distances,bubble_fields,by=c('B'))
+      
+      rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1")
+      rd_bubble_weduc <- merge(rd,bubble_educ, by = c("B","high_educ"))
+      rd_bubble_weducoccup <- merge(rd_bubble_weduc,bubble_occup, by = c("B","high_occup"))
+      rd <- rd_bubble_weducoccup %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r) 
       
       rd <-subset(rd,!is.na(r))
       res[[paste0("dat",year)]] <- rd
