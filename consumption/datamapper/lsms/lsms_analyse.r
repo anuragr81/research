@@ -1438,16 +1438,14 @@ build_xt_df <- function(dflist)
   df2012_2014 <- rbind(df2012_2014,dat2012[,common_cols_2010_2012_2014] %>% mutate(year =2012))
   df2012_2014$hhid <- as.factor(df2012_2014$hhid)
   split_hhids2012_2014 <- unique(subset(ddply(df2012_2014,.(hhid,year),summarise,n=length(consu)),n>1)$hhid)
-  
+  warning("The year 3 hhids are missing in a lot of records for 2014 but a significant number of households in the extension file do have this field") 
   print(paste("Ignoring split",length(split_hhids2012_2014),"/",length(unique(df2012_2014$hhid)),"households"))
   df2012_2014 <- subset(df2012_2014,!is.element(hhid,split_hhids2012_2014))
-  
   
   res=list()
   res[["df2010_2012"]] <- df2010_2012
   res[["df2012_2014"]] <- df2012_2014
   return(res)
-  
 }
 
 test_search_cluster <- function(){
