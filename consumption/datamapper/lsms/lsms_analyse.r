@@ -1263,18 +1263,20 @@ get_nonparametric_df <- function(ll,food_analysis){
       dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
 
       bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne=mean(cost_ne),mean_A0=mean(A0)) 
-      bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost=mean(cost_ne),mean_occup_A0=mean(A0))
-      bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost=mean(cost_ne),mean_educ_A0=mean(A0))
+      bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost_ne=mean(cost_ne),mean_occup_A0=mean(A0))
+      bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost_ne=mean(cost_ne),mean_educ_A0=mean(A0))
       
       bubble_fields_w_P1 <- merge(bubble_distances,bubble_fields,by=c('B'))
       
       rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1")
       rd_bubble_weduc <- merge(rd_bubble,bubble_educ, by = c("B","high_educ"))
       rd_bubble_weducoccup <- merge(rd_bubble_weduc,bubble_occup, by = c("B","high_occup"))
-      rd <- rd_bubble_weducoccup %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7)) %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r) 
-      
+      rd <- rd_bubble_weducoccup %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7))
+      rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r)
+      rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>% mutate ( nu_occup = x/mean_occup_cost_ne) %>% mutate (Ar_occup=lnA0-r_occup)
+      rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate ( nu_educ = x/mean_educ_cost_ne) %>% mutate (Ar_educ=lnA0-r_educ)
       rd <-subset(rd,!is.na(r))
-      res[[paste0("dat",year)]] <- rd
+      res[[paste0("df",year)]] <- rd
     }
     
     #test
@@ -1478,7 +1480,7 @@ run_non_parmetric_regression_for_food_vs_nonfood <- function(ll,dfslist,year,sp)
   
 }
 
-run_non_parmetric_regression_for_nu_vs_r <- function(ll,dfslist,year,sp)
+run_non_parmetric_regression_for_nu_vs_r <- function(ll,dfslist,year,sp,r_type)
 {
   if(missing(dfslist)){
     dfslist <- get_nonparametric_df(ll,food_analysis = F)
@@ -1488,8 +1490,17 @@ run_non_parmetric_regression_for_nu_vs_r <- function(ll,dfslist,year,sp)
   S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
   E <- with(dfslist[[select_df]], seq(min(E), max(E), len=25))
   newdata <- expand.grid(S=S, E=E)
-  mod.lo_nu_r <- loess(excess_unit_asset ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] %>% mutate (excess_unit_asset = nu/r))
-
+  if (r_type == "educ") {
+    plot_data <- dfslist[[select_df]] %>% mutate (excess_unit_asset = nu_educ/r_educ)
+  } else if (r_type == "occup") {
+    plot_data <- dfslist[[select_df]] %>% mutate (excess_unit_asset = nu_occup/r_occup)
+  } else if (r_type == "all") {
+    plot_data <- dfslist[[select_df]] %>% mutate (excess_unit_asset = nu/r)
+  } else {
+    stop("Unknown r_type")
+  }
+  
+  mod.lo_nu_r <- loess(excess_unit_asset ~ S + E , span=sp, degree=1, data=plot_data)
   fit.nu_r <- matrix(predict(mod.lo_nu_r, newdata), 25, 25)
 
   par(mfrow=c(1,1))
