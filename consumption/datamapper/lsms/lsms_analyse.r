@@ -954,6 +954,18 @@ get_perception_rank <-function(r){
   }
 }
 
+load_data <- function()
+{
+  
+  df2010 <- read_dta('../lsms/data/df2010.dta')
+  df2012 <- read_dta('../lsms/data/df2012.dta')
+  df2014 <- read_dta('../lsms/data/df2014.dta')
+  res = list()
+  res[['df2010']] <- df2010
+  res[['df2012']] <- df2012
+  res[['df2014']] <- df2014
+  return(res)
+}
 init_data <- function(){
   
   o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
