@@ -1523,6 +1523,8 @@ run_non_parmetric_regression_for_nu_vs_r <- function(ll,dfslist,year,sp,r_type)
 
 run_non_parmetric_regression_for_A <- function(ll,dfslist,year,sp,theta,phi)
 {
+  #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
+
   if(missing(dfslist)){
     dfslist <- get_nonparametric_df(ll,food_analysis = F)
   }
