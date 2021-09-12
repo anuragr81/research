@@ -1295,11 +1295,11 @@ Non-parametric Analysis
 \end_layout
 
 \begin_layout Standard
-[Occupation differences] The disparity in the east-coast and the rest of
- Tanzania is probably the most salient observations from the consumption
- data.
- This occupations associated with higher income seem far fewer in the hinterland
- than on the east coast (see Figure 
+[Occupation differences] One of the most striking and pervasive observations
+ from the consumption data in Tanzania is the disparity in income and occupation
+s between the east-coast and the rest of the country.
+ More particularly, the occupations associated with higher income are far
+ fewer in the hinterland than on the east coast (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:occupations_r"
@@ -1310,23 +1310,16 @@ noprefix "false"
 \end_inset
 
 ).
- The higher population of poor individuals in the densely populated east-coast
- also means that despite lower income, the median net-asset worth of the
- individuals in regions such as Singida and Manyara matches up with that
- of the consumers in the east coast of Tanzania.
- The occupation and education related variables used for these comparisons
- (such as in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:occupations_r"
-plural "false"
-caps "false"
-noprefix "false"
-
+ Here, the occupation and education related 
+\begin_inset Quotes eld
 \end_inset
 
-) are dervied from the occupation details using a ranking shown in Tables
- 
+ranks
+\begin_inset Quotes erd
+\end_inset
+
+ are dervied from the data on income in the survey and the occupation details
+ using the mappings shown in Tables 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:occupation_rank"
@@ -1346,16 +1339,98 @@ noprefix "false"
 
 \end_inset
 
- (we use this mapping later for references that consider consumers having
- the same occupation or education rank as oneself).
+ (we use these mappings also to assign reference boundaries considering
+ consumers with the same occupation/education level as oneself).
+ The high population of relatively asset-poor individuals in the densely
+ populated east-coast as well as the poverty in the rural areas provides
+ a particular context for status and quality that has implications for any
+ inferences related to status consumption.
 \end_layout
 
 \begin_layout Standard
-[NON-PARAMETRIC Regression for food budgets] That the non-durable consumption
- in the east coast regions is higher (Dar-es-Salaam and Zanzibar regions)
- is also possible due to higher expenditure on food items (both due to higher
- prices and more available options for quality).
- Comparing the food and non-food expenditures in Figure 
+[NON-PARAMETRIC Regression for food budgets] For example, despite lower
+ income, the median net-asset worth of the individuals in regions such as
+ Singida and Manyara (around lat:-5, long:36 ) could match up with that
+ of the consumers in the east coast of Tanzania (lat:-6 long:40).
+ However, this neither does not correspond to similar levels of income (see
+ the differences in occupation ranks )
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Empirical studies often preferr the use of occupation and education data
+ to proxy the differences in income (e.g.
+ Alesina et al.) in the sub-Saharan African economies.
+ This is both due to insufficient coverage of the income surveys and large
+ informal sectors in the economies.
+\end_layout
+
+\end_inset
+
+ or level of the non-durable consumption.
+ This can be verified with a comparison of the non-durable consumption per
+ unit-asset across the regions and the assets-worth of the individual households.
+ For such country-wide comparisons, we use local regression (loess) plots
+ that smoothen the plotted value in the household's surroundings (the districts
+ 
+\begin_inset Formula $S$
+\end_inset
+
+ and 
+\begin_inset Formula $E$
+\end_inset
+
+ coordinates).
+ The excess non-durable consumption 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ over local asset worth i.e.
+ 
+\begin_inset Formula $\frac{\nu_{t}}{r_{t}}$
+\end_inset
+
+ is plotted in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:loess_nu_per_r"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and the assets-worth of the individual households 
+\begin_inset Formula $log(A_{t})$
+\end_inset
+
+ for year 2012 are shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:log_assets_2012"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The loess plots suggest both a relatively high consumption in the central
+ region and poverty in the .
+ The concerns for status in such regions are likely to completely different
+ (the parametric analyses test the variation of 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ in more detail).
+\end_layout
+
+\begin_layout Standard
+One could argue that the non-durable consumption in the east coast regions
+ is higher (Dar-es-Salaam and Zanzibar regions) solely because higher prices
+ or more available options for food quality in the east coast.
+ To consider this argument, we compare the food and non-food expenditures
+ in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:FoodNonFood_x"
@@ -1365,11 +1440,13 @@ noprefix "false"
 
 \end_inset
 
-, we find that the food expenditures are not predominantly responsible for
- variation in non-durable consumption across the regions.
- This loess (local - regression) plots in Figure are drawn by smoothening
- the expenditure over the distance between districts.
- The per head overall non-durable consumption (including both food and non-food
+ - and find that the food expenditures are not the primary driver for the
+ variation in non-durable consumption between east-coast and central regions.
+ 
+\end_layout
+
+\begin_layout Standard
+The per head overall non-durable consumption (including both food and non-food
  items) across regions shows that the central and southern regions have
  a higher expenditure relative to their asset-richness (measure by 
 \begin_inset Formula $\frac{\nu_{t}}{r_{t}}$
@@ -1434,9 +1511,23 @@ noprefix "false"
  Centrl region may have higher assets but the perceptions of life remains
  poor.
  The perceptions for housing and relative richness are much worse in the
- denser regions but the overall perceptions are higher.
- Overall perceptions and housing-relative richness perceptions are quite
- low in the poorer regions.
+ north regions (housing / richness dip in - 2, 40) but the overall perceptions
+ are higher than the south.
+ - where both overall perceptions and housing/relative richness perceptions
+ are quite low (the dip in the middle).
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+As argued before, whether status consumption makes the consumer happier
+ or not is a difficult inference to make using the data on subjective perception
+s.
+ This is because a consumer could also feel miserable while raising expenses
+ on relative non-durable consumption.
+ However, the variation in subjective perception data does provide us how
+ relative importance of non-durable consumption changes as we compare the
+ local contexts across the regions.
 \end_layout
 
 \begin_layout Standard
@@ -1467,15 +1558,14 @@ noprefix "false"
 \bar default
 
 \backslash
-nu_t does have a role to play in the denser urban areas - partly also due
- to better variety in food (and availability of electricity - which expands
- options to improve food quality) and other amenities for the middle-income
- consumers in the denser areas.
+nu _t does have a role to play in the denser urban areas.
  The perception for financial situation seems high in the east coast - suggestin
 g that the urban amenities may have an impact on the consumer perceptions.
- To explore the differences the dense urban areas (particular the east-coast
- districts) and the central parts of the country, we look at the dependence
- of in more detail.
+ A better variety in food (enhanced with the availability of electricity
+ and refrigeration) could also contribute to the utility from food consumption.
+ To further explore the differences the dense urban areas (particular the
+ east-coast districts) and the central parts of the country, we look at
+ the dependence of in more detail.
  The effects of regional disparity seem stronger than the occupation and
  education differences within the locality - largely because the high-earning
  occupations are much fewer in the rural parts of the economy.
@@ -3145,7 +3235,7 @@ Ths hilw richness in asset-references, in other words, the average costs
  Since we don't assume that status through consumption should be anything
  other than the assets one spends and non-durable consumption one shows,
  .
-  Therefore while there may be no substitution between 
+ Therefore while there may be no substitution between 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
