@@ -966,6 +966,11 @@ load_data <- function()
   res[['df2014']] <- df2014
   return(res)
 }
+
+plot_population_heat_map <- function(odat){
+  df <- unique(odat[,c("S","E","population")])
+  
+} 
 init_data <- function(){
   
   o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
@@ -988,34 +993,38 @@ init_data <- function(){
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
-plot_assets_map <- function(){
-  stop("Plot perceptions")
-  
-  plot_occup <- F
+plot_region_map <- function(plot_type){
+
   world_map <- map_data("world")
   tnz_map = subset(world_map ,region=="Tanzania")
   hhid_mtms_2012 <- ddply(subset(a2012,!is.na(number)  & !is.na(mtm) & number>0), .(hhid), summarise, hhid_mtm=sum(mtm*number))
   hhid_mtms_o2012 <- merge(o2012,hhid_mtms_2012 ,by="hhid")
   
   
-  if (plot_occup){
+  if (plot_type=="occupation"){
     hhid_mtms_o2012_woccup <- subset(hhid_mtms_o2012, !is.na(occupation_rank))
     map_data <- subset(ddply(hhid_mtms_o2012_woccup,.(region,district,S,E,region_name),summarise, mean_a = median(hhid_mtm), occupation_rank=mean(occupation_rank)), !is.na(region))
-  } else {
+    ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+                          colour="light yellow", fill="light yellow") + geom_point(data=map_data,aes(x=E, y=S, size = mean_a, color = occupation_rank))+ scale_size(range = c(.1, 10), name="assets_value") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Asset Values and Occupation Rank distribution in Tanzania (2012)")
+  } else if (plot_type == "education") {
     hhid_mtms_o2012_weduc <- subset(hhid_mtms_o2012, !is.na(education_rank))
     map_data <- subset(ddply(hhid_mtms_o2012_weduc,.(region,district,S,E,region_name),summarise, mean_a = median(hhid_mtm), education_rank=mean(education_rank)), !is.na(region))
+    ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+                          colour="light yellow", fill="light yellow") + geom_point(data=map_data,aes(x=E, y=S, size = mean_a, color = education_rank))+ scale_size(range = c(.1, 10), name="assets_value") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Asset Values and Education Rank distribution in Tanzania (2012)")
+  } else if (plot_type == "population") {
+    pop <- unique(o2012[,c("region","district","population")])
+    map_data_pop <- merge(map_data,pop)
+    ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+                          colour="light yellow", fill="light yellow") + geom_point(data=map_data_pop,aes(x=E, y=S, size = population))+ scale_size(range = c(.1, 10), name="population") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Population distribution in Tanzania (2012)")
+    
+  } else {
+    stop("Unknown Plot type")
   }
   
   #ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
   #                      colour="light green", fill="light green") +geom_point(data=map_data,aes(x=E, y=S, size = mean_a))
   
-  if (plot_occup){  
-    ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
-                          colour="light yellow", fill="light yellow") + geom_point(data=map_data,aes(x=E, y=S, size = mean_a, color = occupation_rank))+ scale_size(range = c(.1, 10), name="assets_value") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Asset Values and Occupation Rank distribution in Tanzania (2012)")
-  } else {
-    ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
-                          colour="light yellow", fill="light yellow") + geom_point(data=map_data,aes(x=E, y=S, size = mean_a, color = education_rank))+ scale_size(range = c(.1, 10), name="assets_value") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Asset Values and Education Rank distribution in Tanzania (2012)")
-  }
+  
   # + geom_text(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),hjust=0,vjust=0)
   
 }
