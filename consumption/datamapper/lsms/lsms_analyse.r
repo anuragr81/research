@@ -993,8 +993,8 @@ init_data <- function(){
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
 }
 
-plot_region_map <- function(plot_type){
-
+plot_region_map <- function(plot_type,e){
+  
   world_map <- map_data("world")
   tnz_map = subset(world_map ,region=="Tanzania")
   hhid_mtms_2012 <- ddply(subset(a2012,!is.na(number)  & !is.na(mtm) & number>0), .(hhid), summarise, hhid_mtm=sum(mtm*number))
@@ -1017,7 +1017,14 @@ plot_region_map <- function(plot_type){
     ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
                           colour="light yellow", fill="light yellow") + geom_point(data=map_data_pop,aes(x=E, y=S, size = population))+ scale_size(range = c(.1, 10), name="population") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Population distribution in Tanzania (2012)")
     
-  } else {
+  }  else if(plot_type=="food_prices") {
+    if (missing(e)){
+      e <- minimum_needs_cost_per_head(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+    }
+    costs_data_map <- merge(map_data,e$df2012)
+    ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+                          colour="light yellow", fill="light yellow") + geom_point(data=costs_data_map,aes(x=E, y=S, size = foodbasket_cost ))+ scale_size(range = c(.1, 10), name="food-basket price") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Food Prices in Tanzania (2012)")
+  }else {
     stop("Unknown Plot type")
   }
   
@@ -1028,6 +1035,8 @@ plot_region_map <- function(plot_type){
   # + geom_text(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),hjust=0,vjust=0)
   
 }
+
+
 income_estimation_stata_input <- function(pseudop){
   # get income estimate from the RE estimator results obtained from pseudo-panel - xtreg lntotinc i.max_education_rank i.max_occupation_rank i.expensiveregion, re
   pseudop <- merge(get_housing_cost_df(),pseudop,by=c("housingstatus")) %>% mutate (is_higheduc = as.integer(max_education_rank==4))
