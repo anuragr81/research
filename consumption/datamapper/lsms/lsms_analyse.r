@@ -1024,7 +1024,16 @@ plot_region_map <- function(plot_type,e){
     costs_data_map <- merge(map_data,e$df2012)
     ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
                           colour="light yellow", fill="light yellow") + geom_point(data=costs_data_map,aes(x=E, y=S, size = foodbasket_cost ))+ scale_size(range = c(.1, 10), name="food-basket price") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Food Prices in Tanzania (2012)")
-  }else {
+  }
+  else if(plot_type=="housing_prices") {
+    if (missing(e)){
+      e <- minimum_needs_cost_per_head(ll = ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
+    }
+    costs_data_map <- merge(map_data,e$df2012)
+    ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+                          colour="light yellow", fill="light yellow") + geom_point(data=costs_data_map,aes(x=E, y=S, size = housing_cost ))+ scale_size(range = c(.1, 10), name="housing price") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Housing Prices in Tanzania (2012)")
+  }
+  else {
     stop("Unknown Plot type")
   }
   
