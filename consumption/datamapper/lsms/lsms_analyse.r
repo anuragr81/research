@@ -1033,6 +1033,7 @@ plot_region_map <- function(plot_type,e){
     ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
                           colour="light yellow", fill="light yellow") + geom_point(data=costs_data_map,aes(x=E, y=S, size = housing_cost ))+ scale_size(range = c(.1, 10), name="housing price") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Housing Prices in Tanzania (2012)")
   }
+  
   else {
     stop("Unknown Plot type")
   }
@@ -1301,9 +1302,9 @@ get_nonparametric_df <- function(ll,food_analysis){
       bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06)
       dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
 
-      bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne=mean(cost_ne),mean_A0=mean(A0)) 
-      bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost_ne=mean(cost_ne),mean_occup_A0=mean(A0))
-      bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost_ne=mean(cost_ne),mean_educ_A0=mean(A0))
+      bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_x=mean(cost_ne/hsize),mean_A0=mean(A0)) 
+      bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost_ne_x=mean(cost_ne/hsize),mean_occup_A0=mean(A0))
+      bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost_ne_x=mean(cost_ne/hsize),mean_educ_A0=mean(A0))
       
       bubble_fields_w_P1 <- merge(bubble_distances,bubble_fields,by=c('B'))
       
@@ -1311,9 +1312,9 @@ get_nonparametric_df <- function(ll,food_analysis){
       rd_bubble_weduc <- merge(rd_bubble,bubble_educ, by = c("B","high_educ"))
       rd_bubble_weducoccup <- merge(rd_bubble_weduc,bubble_occup, by = c("B","high_occup"))
       rd <- rd_bubble_weducoccup %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7))
-      rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne) %>% mutate (Ar=lnA0-r)
-      rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>% mutate ( nu_occup = x/mean_occup_cost_ne) %>% mutate (Ar_occup=lnA0-r_occup)
-      rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate ( nu_educ = x/mean_educ_cost_ne) %>% mutate (Ar_educ=lnA0-r_educ)
+      rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne_x) %>% mutate (Ar=lnA0-r)
+      rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>% mutate ( nu_occup = x/mean_occup_cost_ne_x) %>% mutate (Ar_occup=lnA0-r_occup)
+      rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate ( nu_educ = x/mean_educ_cost_ne_x) %>% mutate (Ar_educ=lnA0-r_educ)
       rd <-subset(rd,!is.na(r))
       res[[paste0("df",year)]] <- rd
     }
@@ -1333,7 +1334,7 @@ plot_pi_r_against_r <- function(dflist){
   for (year in years ){
     print(year)
     data = dflist[[paste0("df",year)]]
-    data <- data %>% mutate( lc = log(mean_cost_ne))
+    data <- data %>% mutate( lc = log(mean_cost_ne_x))
     plot(data=data,lc ~ r , xlab =latex2exp::TeX("$r$") , ylab=latex2exp::TeX("$log(\\pi(r))$") , main = year)
     abline(lm(data=data, lc ~ r))
   }
@@ -1538,6 +1539,7 @@ run_non_parmetric_regression_for_nu_vs_r <- function(ll,dfslist,year,sp,r_type)
   }
   
   mod.lo_nu_r <- loess(excess_unit_asset ~ S + E , span=sp, degree=1, data=plot_data)
+  
   fit.nu_r <- matrix(predict(mod.lo_nu_r, newdata), 25, 25)
 
   par(mfrow=c(1,1))
@@ -1570,6 +1572,61 @@ run_non_parmetric_regression_for_A <- function(ll,dfslist,year,sp,theta,phi)
     phi <- 20
   }
   persp(S, E, fit.lo_lnA, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$log(A)$"), zlab = "")
+  
+}
+
+run_non_parmetric_regression_for_pi_r <- function(ll,dfslist,year,sp,theta,phi)
+{
+  #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
+  
+  if(missing(dfslist)){
+    dfslist <- get_nonparametric_df(ll,food_analysis = F)
+  }
+  select_df=paste0("df",year)
+  
+  S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
+  E <- with(dfslist[[select_df]], seq(min(E), max(E), len=25))
+  newdata <- expand.grid(S=S, E=E)
+  mod.lo_pi_r <- loess(mean_cost_ne_x ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  
+  fit.lo_pi_r <- matrix(predict(mod.lo_pi_r, newdata), 25, 25)
+  
+  par(mfrow=c(1,1))
+  if (missing(theta)){
+    theta <- 10
+  }
+  if (missing(phi)){
+    phi <- 20
+  }
+  persp(S, E, fit.lo_pi_r, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$\\pi(r)$"), zlab = "")
+  
+}
+
+
+run_non_parmetric_regression_for_hsize <- function(ll,dfslist,year,sp,theta,phi)
+{
+  #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
+  
+  if(missing(dfslist)){
+    dfslist <- get_nonparametric_df(ll,food_analysis = F)
+  }
+  select_df=paste0("df",year)
+  
+  S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
+  E <- with(dfslist[[select_df]], seq(min(E), max(E), len=25))
+  newdata <- expand.grid(S=S, E=E)
+  mod.lo_hsize <- loess(hsize ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  
+  fit.lo_hsize <- matrix(predict(mod.lo_hsize, newdata), 25, 25)
+  
+  par(mfrow=c(1,1))
+  if (missing(theta)){
+    theta <- 10
+  }
+  if (missing(phi)){
+    phi <- 20
+  }
+  persp(S, E, fit.lo_hsize, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$\\psi$"), zlab = "")
   
 }
 
