@@ -6,14 +6,19 @@ eststo clear
 
 
 use "C:\temp\df2010.dta", clear
+generate has_english =  litlang == 2 | litlang == 3
+
 eststo, title (2010): quietly reg nu r Ar i.max_occupation_rank i.max_education_rank
 * eststo, title (2010): quietly nl (nu  = {b0=.1}*(r^{b1=.5}))
 
 use "C:\temp\df2012.dta", clear
+generate has_english =  litlang == 2 | litlang == 3
 eststo, title (2012): quietly reg nu r Ar i.max_occupation_rank i.max_education_rank
 *eststo, title (2012): quietly nl (nu  = {b0=.1}*(r^{b1=.5}))
 
 use "C:\temp\df2014.dta", clear
+generate has_english =  litlang == 2 | litlang == 3
+
 eststo, title (2014): quietly reg nu r Ar i.max_occupation_rank i.max_education_rank
 *eststo, title (2014): quietly nl (nu  = {b0=.1}*(r^{b1=.5}))
 
