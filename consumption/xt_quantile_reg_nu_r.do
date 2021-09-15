@@ -1,5 +1,4 @@
 use "C:\temp\df2010.dta", clear
-
 eststo clear
 
 eststo, title (2010): quietly sqreg nu r Ar i.max_occupation_rank i.max_education_rank, q(.30 .60 .90) reps(100)
