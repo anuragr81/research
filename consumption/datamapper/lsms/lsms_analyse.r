@@ -1626,7 +1626,8 @@ run_non_parmetric_regression_for_hsize <- function(ll,dfslist,year,sp,theta,phi)
   if (missing(phi)){
     phi <- 20
   }
-  persp(S, E, fit.lo_hsize, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$\\psi$"), zlab = "")
+  persp(S, E, fit.lo_hsize, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$\\psi$"), zlab = "", zlim=c(0,7))
+  #
   
 }
 
