@@ -407,7 +407,7 @@ ngr_normaliser<-function() {
   }
   
   get_diary_assets_fields_mapping_lsms<- function(year){
-    if (year == 2012) {
+    if (year == 2012 || year == 2010) {
         s = data.frame(iesname=NULL,name=NULL)
         s= rbind(s,data.frame(iesname="hhid",name="hhid"))
         s= rbind(s,data.frame(iesname="item_cd",name="itemcode"))

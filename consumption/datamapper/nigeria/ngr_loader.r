@@ -52,14 +52,30 @@ ngr_loader<-function(fu,ngrn,lgc) {
     
     
     if (year == 2010){
-      secnFileName <- paste(dirprefix,'./lsms/TZNPS2HH2DTA/HH_SEC_N.dta',sep="")
-      print(paste("read_assets_file - opening file:",secnFileName))
-      secndat<-read.dta(secnFileName,convert.factors = FALSE)
       
-      assetsData <- fu()@get_translated_frame(dat=secndat,
-                                              names=ngrn()@get_diary_secn_columns_lsms_2010(),
-                                              m=ngrn()@get_diary_secn_fields_mapping_lsms_2010())
-      assetsData <-merge(assetsData, plyr::rename(ngrn()@items_codes_2010(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      secnFileName1 <- paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA//Post Planting Wave 1/Household/sect5_plantingw1.dta',sep="")
+      print(paste("read_assets_file - opening file:",secnFileName1))
+      secnFileName2 <- paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA//Post Planting Wave 1/Household/sect5b_plantingw1.dta',sep="")
+      print(paste("read_assets_file - opening file:",secnFileName2))
+      
+      secndat1<-read.dta(secnFileName1,convert.factors = FALSE)
+      secndat2<-read.dta(secnFileName2,convert.factors = FALSE)
+      
+      assetsData1 <- fu()@get_translated_frame(dat=secndat1,
+                                              names=c("hhid","itemcode","number"),
+                                              m=ngrn()@get_diary_assets_fields_mapping_lsms(year))
+      
+      assetsData2 <- fu()@get_translated_frame(dat=secndat2,
+                                               names=c("hhid","itemcode","age","mtm"),
+                                               m=ngrn()@get_diary_assets_fields_mapping_lsms(year))
+      
+      assetsData <- merge(assetsData1,assetsData2)
+      print(paste("Ignoring",nrow(subset(assetsData,is.na(number))),"entries because of no reported number"))
+      assetsData <- subset(assetsData,!is.na(number))
+      assetsData <-merge(assetsData, ngrn()@items_codes(year), all.x=TRUE)
+      ignored_hhids_adoc <- c("") # high mtm of house
+      assetsData <- subset(assetsData,!is.element(hhid,ignored_hhids_adoc))
+      print (paste("Ignored hhids:",toString(ignored_hhids_adoc)))
       if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
       return(assetsData)
     } 
