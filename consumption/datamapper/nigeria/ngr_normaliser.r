@@ -14,7 +14,7 @@ setClass("NigeriaNormaliser", representation(diary_columns_mapping="function", d
                                              ohs_educ_info_columns_lsms="function",ohs_educ_columns_mapping_lsms="function",
                                              ohs_income_info_columns_lsms="function",ohs_income_columns_mapping_lsms="function",
                                              market_data_columns_mapping="function",market_data_info="function",
-                                             unit_codes_2010="function"
+                                             unit_codes_2010="function", get_diary_assets_fields_mapping_lsms="function",items_codes="function"
 ))
 
 
@@ -277,7 +277,44 @@ ngr_normaliser<-function() {
     stop(paste("Year:",year,"not supported"))
   }
   
-  
+  items_codes <- function(year){
+    r <- NULL
+    r <- rbind(r, data.frame(shortname='furniture_large', longname='Furniture (3/4 piece sofa set)', itemcode='301'))
+    r <- rbind(r, data.frame(shortname='furniture_small', longname='Furniture (chairs)', itemcode='302'))
+    r <- rbind(r, data.frame(shortname='furntiure_medium', longname='Furniture (table)', itemcode='303'))
+    r <- rbind(r, data.frame(shortname='mattress', longname='Mattress ', itemcode='304'))
+    r <- rbind(r, data.frame(shortname='bed', longname='Bed', itemcode='305'))
+    r <- rbind(r, data.frame(shortname='mat', longname='Mat', itemcode='306'))
+    r <- rbind(r, data.frame(shortname='sewing_machine', longname='Sewing machine', itemcode='307'))
+    r <- rbind(r, data.frame(shortname='gas_cooker', longname='Gas cooker', itemcode='308'))
+    r <- rbind(r, data.frame(shortname='stove_electric', longname='Stove (electric)', itemcode='309'))
+    r <- rbind(r, data.frame(shortname='stove_gas_table', longname='Stove gas (table)', itemcode='310'))
+    r <- rbind(r, data.frame(shortname='stove_kerosene', longname='Stove (kerosene)', itemcode='311'))
+    r <- rbind(r, data.frame(shortname='fridge', longname='Fridge', itemcode='312'))
+    r <- rbind(r, data.frame(shortname='freezer', longname='Freezer', itemcode='313'))
+    r <- rbind(r, data.frame(shortname='air_conditioner', longname='Air conditioner', itemcode='314'))
+    r <- rbind(r, data.frame(shortname='washing_machine', longname='Washing Machine', itemcode='315'))
+    r <- rbind(r, data.frame(shortname='electric_clothes_dryer', longname='Electric Clothes Dryer', itemcode='316'))
+    r <- rbind(r, data.frame(shortname='bicycle', longname='Bicycle', itemcode='317'))
+    r <- rbind(r, data.frame(shortname='motorbike', longname='Motorbike', itemcode='318'))
+    r <- rbind(r, data.frame(shortname='cars', longname='Cars and other vehicles', itemcode='319'))
+    r <- rbind(r, data.frame(shortname='generator', longname='Generator', itemcode='320'))
+    r <- rbind(r, data.frame(shortname='fan', longname='Fan', itemcode='321'))
+    r <- rbind(r, data.frame(shortname='radio', longname='Radio', itemcode='322'))
+    r <- rbind(r, data.frame(shortname='cassette_recorder', longname='Cassette recorder', itemcode='323'))
+    r <- rbind(r, data.frame(shortname='sound_system', longname='Hi-Fi (Sound System)', itemcode='324'))
+    r <- rbind(r, data.frame(shortname='microwave_oven', longname='Microwave', itemcode='325'))
+    r <- rbind(r, data.frame(shortname='iron', longname='Iron', itemcode='326'))
+    r <- rbind(r, data.frame(shortname='tv_set', longname='TV Set', itemcode='327'))
+    r <- rbind(r, data.frame(shortname='computer', longname='Computer ', itemcode='328'))
+    r <- rbind(r, data.frame(shortname='dvd_player', longname='DVD Player', itemcode='329'))
+    r <- rbind(r, data.frame(shortname='satellite_dish', longname='Satellite Dish', itemcode='330'))
+    r <- rbind(r, data.frame(shortname='musical_instrument', longname='Musical Instrument', itemcode='331'))
+    r <- rbind(r, data.frame(shortname='mobile_phone', longname='Mobile Phone', itemcode='332'))
+    r <- rbind(r, data.frame(shortname='inverter', longname='Inverter', itemcode='333'))
+    r <- rbind(r, data.frame(shortname='other_asset', longname='Other', itemcode='334'))
+    return(r)
+  }
   ohs_educ_columns_mapping_lsms <- function(year){
     if (year == 2010){
       s = data.frame(iesname=NULL,name=NULL)
@@ -367,6 +404,19 @@ ngr_normaliser<-function() {
     r = rbind(r,data.frame(timeunitcode=7, timeunitname="half year"))
     r = rbind(r,data.frame(timeunitcode=8, timeunitname="year"))
     return(r)
+  }
+  
+  get_diary_assets_fields_mapping_lsms<- function(year){
+    if (year == 2012) {
+        s = data.frame(iesname=NULL,name=NULL)
+        s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+        s= rbind(s,data.frame(iesname="item_cd",name="itemcode"))
+        s= rbind(s,data.frame(iesname="s5q1",name="number"))
+        s= rbind(s,data.frame(iesname="s5q3",name="age"))
+        s= rbind(s,data.frame(iesname="s5q4",name="mtm"))
+        return(s)
+    }
+    stop(paste("Year:",year,"not supported"))
   }
   
   ohs_income_columns_mapping_lsms <- function(year){
@@ -669,6 +719,7 @@ ngr_normaliser<-function() {
              ohs_info_columns_lsms=ohs_info_columns_lsms, ohs_mapping_lsms=ohs_mapping_lsms,ohs_educ_info_columns_lsms=ohs_educ_info_columns_lsms,
              ohs_educ_columns_mapping_lsms=ohs_educ_columns_mapping_lsms,ohs_income_info_columns_lsms=ohs_income_info_columns_lsms,
              ohs_income_columns_mapping_lsms=ohs_income_columns_mapping_lsms,market_data_columns_mapping=market_data_columns_mapping,
-             market_data_info=market_data_info, unit_codes_2010=unit_codes_2010) )
+             market_data_info=market_data_info, unit_codes_2010=unit_codes_2010,
+             get_diary_assets_fields_mapping_lsms=get_diary_assets_fields_mapping_lsms,items_codes=items_codes) )
   
 }
