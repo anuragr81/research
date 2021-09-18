@@ -21,8 +21,8 @@ ngr_loader<-function(fu,ngrn,lgc) {
       fname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Community/sectc2_plantingw1.dta",sep="")
       sec2dat <- read.dta(fname, convert.factors = FALSE)
       mdat <- fu()@get_translated_frame(dat=sec2dat,
-                                     names=ngrn()@market_data_info(),
-                                     m=ngrn()@market_data_columns_mapping(2010))
+                                        names=ngrn()@market_data_info(),
+                                        m=ngrn()@market_data_columns_mapping(2010))
       mdat <- subset(mdat,!is.na(price) & !is.na(lwp_unit)& !is.na(lwp))
       #merging with itemcodes
       mdat <- merge (plyr::rename(mdat %>% mutate ( item = 10000 + item), c("item"="code")) , ngrn()@item_codes_2010(), by = c("code"))
@@ -47,6 +47,70 @@ ngr_loader<-function(fu,ngrn,lgc) {
     }
     stop(paste("Cannot load market prices for year:",year))
   }
+  
+  read_assets_file<-function(year,dirprefix,fu,ln){
+    
+    
+    if (year == 2010){
+      secnFileName <- paste(dirprefix,'./lsms/TZNPS2HH2DTA/HH_SEC_N.dta',sep="")
+      print(paste("read_assets_file - opening file:",secnFileName))
+      secndat<-read.dta(secnFileName,convert.factors = FALSE)
+      
+      assetsData <- fu()@get_translated_frame(dat=secndat,
+                                              names=ln()@get_diary_secn_columns_lsms_2010(),
+                                              m=ln()@get_diary_secn_fields_mapping_lsms_2010())
+      assetsData <-merge(assetsData, plyr::rename(ln()@items_codes_2010(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
+      return(assetsData)
+    } 
+    if (year == 2012 ) {
+      
+      #secn of 2010 maps to secm of 2012
+      secnFileName <- paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_M.dta',sep="")
+      print(paste("read_assets_file - opening file:",secnFileName))
+      secndat<-read.dta(secnFileName,convert.factors = FALSE)
+      
+      assetsData <- fu()@get_translated_frame(dat=secndat,
+                                              names=ln()@get_diary_secn_columns_lsms_2012(),
+                                              m=ln()@get_diary_secn_fields_mapping_lsms_2012())
+      assetsData <-merge(assetsData, plyr::rename(ln()@items_codes_2012(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      
+      ignored_hhids_adoc <- c("0743-001") # high mtm of house
+      assetsData <- subset(assetsData,!is.element(hhid,ignored_hhids_adoc))
+      print (paste("Ignored hhids:",toString(ignored_hhids_adoc)))
+      if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
+      return(assetsData)
+    }
+    if (year == 2015 ) {
+      
+      #secn of 2010 maps to secm of 2012
+      secnFileName1 <- paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_STATA11/hh_sec_m.DTA',sep="")
+      secnFileName2 <- paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_m.DTA',sep="")
+      print(paste("read_assets_file - opening file:",secnFileName1))
+      secndat_1<-read.dta(secnFileName1,convert.factors = FALSE)
+      print(paste("read_assets_file - opening file:",secnFileName2))
+      secndat_2<-read.dta(secnFileName2,convert.factors = FALSE)
+      assetsData1 <- fu()@get_translated_frame(dat=secndat_1,
+                                               names=ln()@get_diary_secn_columns_lsms_2012(),
+                                               m=ln()@get_diary_secn_fields_mapping_lsms_2014())
+      assetsData2 <- fu()@get_translated_frame(dat=secndat_2,
+                                               names=ln()@get_diary_secn_columns_lsms_2012(),
+                                               m=ln()@get_diary_secn_fields_mapping_lsms_2014())
+      
+      assetsData <- rbind(assetsData1,assetsData2)
+      assetsData <-merge(assetsData, plyr::rename(ln()@items_codes_2012(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      
+      ignored_hhids_adoc <- c("0743-001") # high mtm of house
+      assetsData <- subset(assetsData,!is.element(hhid,ignored_hhids_adoc))
+      print (paste("Ignored hhids:",toString(ignored_hhids_adoc)))
+      if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
+      return(assetsData)
+    }
+    
+    stop("read_assets_file - year", year, "not supported")
+    
+  }
+  
   load_diary_file <-function(dirprefix,year,fu,ngrn,load_cost){
     ##
     if (year == 2010){
@@ -314,7 +378,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
                                               names=ngrn()@ohs_income_info_columns_lsms(year),
                                               m=ngrn()@ohs_income_columns_mapping_lsms(year))
       
-      print("Mergign OHS data from files")
+      print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
       ohs <- merge(ohs,sec3dat,by=c("hhid","personid"), all.x=TRUE)
       
@@ -346,13 +410,13 @@ ngr_loader<-function(fu,ngrn,lgc) {
                                               names=ngrn()@ohs_educ_info_columns_lsms(2010),
                                               m=ngrn()@ohs_educ_columns_mapping_lsms(year))
       
-      #sec3fname    <- paste(dirprefix,'./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post\ Planting\ Wave\ 2/Household/sect3_plantingw1.dta',sep="")
-      #sec3dat    <- read.dta(sec3fname,convert.factors = FALSE)
-      #sec3dat    <- fu()@get_translated_frame(dat=sec3dat,
-      #                                        names=ngrn()@ohs_income_info_columns_lsms(2010),
-      #                                        m=ngrn()@ohs_income_columns_mapping_lsms(year))
+      sec3fname1    <- paste(dirprefix,'./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post\ Planting\ Wave\ 2/Household/sect3a_plantingw2.dta',sep="")
+      sec3dat1    <- read.dta(sec3fname1,convert.factors = FALSE)
+      sec3dat1    <- fu()@get_translated_frame(dat=sec3dat1,
+                                              names=ngrn()@ohs_income_info_columns_lsms(2012),
+                                              m=ngrn()@ohs_income_columns_mapping_lsms(year),isDebug=T)
       
-      #print("Mergign OHS data from files")
+      print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
       #ohs <- merge(ohs,sec3dat,by=c("hhid","personid"), all.x=TRUE)
       
@@ -378,31 +442,32 @@ ngr_loader<-function(fu,ngrn,lgc) {
              load_ohs_file=load_ohs_file,load_market_prices=load_market_prices) )
   
 }
-
-year <- 2012
-ngrn<- ngr_normaliser
-
-dirprefix = "../"
-
-
-fname <- paste(dirprefix,"./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post\ Planting\ Wave\ 2/Community/sectc2_plantingw2.dta",sep="")
-sec2dat <- read.dta(fname, convert.factors = FALSE)
-mdat <- fu()@get_translated_frame(dat=sec2dat,
-                                  names=ngrn()@market_data_info(),
-                                  m=ngrn()@market_data_columns_mapping(2012))
-mdat$lwp <- 1
-mdat <- subset(mdat,!is.na(price) & !is.na(lwp_unit)& !is.na(lwp))
-#merging with itemcodes
-mdat <- merge (plyr::rename(mdat %>% mutate ( item = 10000 + item), c("item"="code")) , ngrn()@item_codes_2010(), by = c("code"))
-if (dim(subset(mdat,is.na(shortname)))[1]>0){
-  stop(paste("Failed to interprets codes for the items in the market file",toString(unique(subset(mdat,is.na(shortname))$item))))
+if (F){
+  year <- 2010
+  ngrn<- ngr_normaliser
+  
+  dirprefix = "../"
+  
+  
+  fname <- paste(dirprefix,"./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post\ Planting\ Wave\ 2/Community/sectc2_plantingw2.dta",sep="")
+  sec2dat <- read.dta(fname, convert.factors = FALSE)
+  mdat <- fu()@get_translated_frame(dat=sec2dat,
+                                    names=ngrn()@market_data_info(),
+                                    m=ngrn()@market_data_columns_mapping(2012))
+  mdat$lwp <- 1
+  mdat <- subset(mdat,!is.na(price) & !is.na(lwp_unit)& !is.na(lwp))
+  #merging with itemcodes
+  mdat <- merge (plyr::rename(mdat %>% mutate ( item = 10000 + item), c("item"="code")) , ngrn()@item_codes_2010(), by = c("code"))
+  if (dim(subset(mdat,is.na(shortname)))[1]>0){
+    stop(paste("Failed to interprets codes for the items in the market file",toString(unique(subset(mdat,is.na(shortname))$item))))
+  }
+  mdatu <- merge(plyr::rename(mdat,c("lwp_unit"="unitcode")),ngrn()@unit_codes_2010(), by = c("unitcode"),all.x=TRUE)
+  if (dim(subset(mdatu,is.na(unit)))[1]>0){
+    warning(paste("Failed to interpret some units in the market file",toString(unique(subset(mdatu,is.na(unit))$item))))
+  }
+  mdatu <- mdatu %>% mutate(quantity = factor*lwp)
+  mdatu <- subset(mdatu,!is.na(factor)) %>% mutate(unit_price = price/quantity) ;
+  ignored <- dplyr::filter( merge(mdatu,ddply(mdatu,.(shortname),summarise,v=fu()@fv(unit_price)),all.x=TRUE) , unit_price >= v)
+  print(paste("Number of entries ignored due to extreme values:", dim(ignored)[1],"(",round(dim(ignored)[1]*100/dim(mdatu)[1],2),"%)"))
+  mdatuf <- dplyr::filter( merge(mdatu,ddply(mdatu,.(shortname),summarise,v=fu()@fv(unit_price)),all.x=TRUE) , unit_price < v)
 }
-mdatu <- merge(plyr::rename(mdat,c("lwp_unit"="unitcode")),ngrn()@unit_codes_2010(), by = c("unitcode"),all.x=TRUE)
-if (dim(subset(mdatu,is.na(unit)))[1]>0){
-  stop(paste("Failed to interprets units in the market file",toString(unique(subset(mdatu,is.na(unit))$item))))
-}
-mdatu <- mdatu %>% mutate(quantity = factor*lwp)
-mdatu <- subset(mdatu,!is.na(factor)) %>% mutate(unit_price = price/quantity) ;
-ignored <- dplyr::filter( merge(mdatu,ddply(mdatu,.(shortname),summarise,v=fu()@fv(unit_price)),all.x=TRUE) , unit_price >= v)
-print(paste("Number of entries ignored due to extreme values:", dim(ignored)[1],"(",round(dim(ignored)[1]*100/dim(mdatu)[1],2),"%)"))
-mdatuf <- dplyr::filter( merge(mdatu,ddply(mdatu,.(shortname),summarise,v=fu()@fv(unit_price)),all.x=TRUE) , unit_price < v)

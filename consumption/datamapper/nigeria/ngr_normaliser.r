@@ -342,6 +342,14 @@ ngr_normaliser<-function() {
                'last_payment_primary_units', 'has_secondary', 'occupation_secondary', 'occupation_sector_secondary', 
                'employer_type_secondary', 'months_secondary_work', 'weeks_secondary_work', 'hoursperweek_secondary_work', 
                'is_paid_secondary', 'reason_unpaid_secondary', 'last_payment_secondary', 'last_payment_secondary_units'))
+    } 
+    if (year == 2012 || year == 2015){
+      return(c('hhid', 'personid', 'is_gt_5y', 'worked_ext_pastweek', 
+               'worked_hh_pastweek1', 'worked_hh_pastweek2', 'worked_pastweek', 'occupation_primary', 'occupation_sector_primary', 
+               'employer_type_primary', 'hours_worked_week_primary', 'is_paid_primary', 'reason_unpaid_primary', 'last_payment_primary', 
+               'last_payment_primary_units', 'has_secondary', 'occupation_secondary', 'occupation_sector_secondary', 
+               'employer_type_secondary', 'months_secondary_work', 'weeks_secondary_work' )
+               )
     }
     stop(paste("Year:",year,"not supported"))
     
@@ -398,6 +406,41 @@ ngr_normaliser<-function() {
       
       return(s)
     }
+    
+    if (year == 2012){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="state",name="region"))
+      s= rbind(s,data.frame(iesname="lga",name="district"))
+      s= rbind(s,data.frame(iesname="sector",name="is_urban"))
+      s= rbind(s,data.frame(iesname="ea",name="ea"))
+      s= rbind(s,data.frame(iesname="indiv",name="personid"))
+      s= rbind(s,data.frame(iesname="s3aq1",name="is_gt_5y"))
+      s= rbind(s,data.frame(iesname="s3aq4",name="worked_ext_pastweek"))
+      s= rbind(s,data.frame(iesname="s3aq5",name="worked_hh_pastweek1"))
+      s= rbind(s,data.frame(iesname="s3aq6",name="worked_hh_pastweek2"))
+      s= rbind(s,data.frame(iesname="s3aq7",name="worked_pastweek"))
+      s= rbind(s,data.frame(iesname="s3aq13a",name="occupation_primary"))
+      s= rbind(s,data.frame(iesname="s3aq13b",name="occupation_primary_code"))
+      s= rbind(s,data.frame(iesname="s3aq14",name="occupation_sector_primary"))
+      s= rbind(s,data.frame(iesname="s3aq14b",name="occupation_sector_primary_code"))
+      s= rbind(s,data.frame(iesname="s3aq15",name="employer_type_primary"))
+      s= rbind(s,data.frame(iesname="s3aq18",name="hours_worked_week_primary"))
+      s= rbind(s,data.frame(iesname="s3aq19",name="is_paid_primary"))
+      s= rbind(s,data.frame(iesname="s3aq20",name="reason_unpaid_primary"))
+      s= rbind(s,data.frame(iesname="s3aq21a",name="last_payment_primary"))
+      s= rbind(s,data.frame(iesname="s3aq21b",name="last_payment_primary_units"))
+      s= rbind(s,data.frame(iesname="s3aq25",name="has_secondary"))
+      s= rbind(s,data.frame(iesname="s3aq26a",name="occupation_secondary"))
+      s= rbind(s,data.frame(iesname="s3aq26b",name="occupation_secondary_code"))
+      s= rbind(s,data.frame(iesname="s3aq27",name="occupation_sector_secondary"))
+      s= rbind(s,data.frame(iesname="s3aq28",name="employer_type_secondary"))
+      s= rbind(s,data.frame(iesname="s3aq29",name="months_secondary_work"))
+      s= rbind(s,data.frame(iesname="s3aq30",name="weeks_secondary_work"))
+      return(s)
+    }
+    
+    
     stop(paste("Year:",year,"not supported"))
   }
   
