@@ -194,7 +194,7 @@ ngr_normaliser<-function() {
                'spouse_personid', 'religion', 'is_father_hh', 'father_personid', 'is_father_alive', 'father_educ', 'father_occup',
                'is_mother_hh', 'mother_personid', 'is_mother_alive', 'mother_educ', 'mother_occup'))
     }
-    if (year == 2012){
+    if (year == 2012 || year == 2015){
       return(c("hhid","region","district","ea","personid","is_urban", "zone","YOB",'is_hh_member', 'marital_status', 
                'marriage_year_1','marriage_year_2', 'marriage_year_3', 'marriage_year_4',  
                'spouse_personid', 'religion', 'is_father_hh', 'father_personid', 'is_father_alive', 'father_educ', 'father_occup',
@@ -231,7 +231,7 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s1q22",name="mother_occup"))
       return(s)
     } 
-    if (year == 2012){
+    if (year == 2012 || year == 2015){
       s = data.frame(iesname=NULL,name=NULL)
       s= rbind(s,data.frame(iesname="hhid",name="hhid"))
       s= rbind(s,data.frame(iesname="indiv",name="personid"))

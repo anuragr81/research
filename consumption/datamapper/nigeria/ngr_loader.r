@@ -406,9 +406,6 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
       ohs$age          <- 2010 - as.integer(as.character(ohs$YOB))
       print("Testing Data Integrity after merge")
-      if (dim(subset(ddply(ohs[,c("hhid","personid","educ_cost")],.(hhid,personid),summarise,n=length(educ_cost)),n>1))[1]>0){
-        stop("Multiple entries for a person found")
-      }
       
       #household_status must be determined by 1. rank based on occupation_rank 2. occupation_primary 3. highest_educ 4. qualification 5. age (pay is not available for the most)
       #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
@@ -439,14 +436,47 @@ ngr_loader<-function(fu,ngrn,lgc) {
       
       print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
-      #ohs <- merge(ohs,sec3dat,by=c("hhid","personid"), all.x=TRUE)
+      ohs <- merge(ohs,sec3dat1,by=c("hhid","personid"), all.x=TRUE)
       
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
       ohs$age          <- 2012 - as.integer(as.character(ohs$YOB))
-      print("Testing Data Integrity after merge")
-      if (dim(subset(ddply(ohs[,c("hhid","personid","educ_cost")],.(hhid,personid),summarise,n=length(educ_cost)),n>1))[1]>0){
-        stop("Multiple entries for a person found")
-      }
+      
+      #household_status must be determined by 1. rank based on occupation_rank 2. occupation_primary 3. highest_educ 4. qualification 5. age (pay is not available for the most)
+      #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
+      
+      return(ohs)
+    }
+    
+    if ( year == 2015) {
+      
+      
+      
+      sec1fname  <-paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect1_plantingw3.dta',sep="")
+      print(paste("Opening file:",sec1fname))
+      sec1dat    <- read_dta(sec1fname)
+      sec1dat    <- fu()@get_translated_frame(dat=sec1dat,
+                                              names=ngrn()@ohs_info_columns_lsms(year),
+                                              m=ngrn()@ohs_mapping_lsms(year))
+      sec2fname    <- paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect2_plantingw2.dta',sep="")
+      print(paste("Opening file:",sec2fname))
+      sec2dat    <- read_dta(sec2fname)
+      sec2dat    <- fu()@get_translated_frame(dat=sec2dat,
+                                              names=ngrn()@ohs_educ_info_columns_lsms(2010),
+                                              m=ngrn()@ohs_educ_columns_mapping_lsms(year))
+      
+      sec3fname1    <- paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect3_plantingw2.dta',sep="")
+      print(paste("Opening file:",sec3fname1))
+      sec3dat1    <- read_dta(sec3fname1)
+      sec3dat1    <- fu()@get_translated_frame(dat=sec3dat1,
+                                               names=ngrn()@ohs_income_info_columns_lsms(2012),
+                                               m=ngrn()@ohs_income_columns_mapping_lsms(year))
+      
+      print(paste("Merging OHS data from files for year:",year))
+      ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
+      ohs <- merge(ohs,sec3dat,by=c("hhid","personid"), all.x=TRUE)
+      
+      ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
+      ohs$age          <- 2015 - as.integer(as.character(ohs$YOB))
       
       #household_status must be determined by 1. rank based on occupation_rank 2. occupation_primary 3. highest_educ 4. qualification 5. age (pay is not available for the most)
       #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
