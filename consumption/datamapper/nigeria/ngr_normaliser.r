@@ -713,7 +713,14 @@ ngr_normaliser<-function() {
   
   
   ohs_geodata_columns_mapping_lsms <- function(year){
-    if (year == 2010 || year == 2012 || year == 2015){
+    if (year == 2010)  {
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="lat_dd_mod",name="S"))
+      s= rbind(s,data.frame(iesname="lon_dd_mod",name="E"))
+      return(s)
+    }
+    if (year == 2012 || year == 2015){
       s = data.frame(iesname=NULL,name=NULL)
       s= rbind(s,data.frame(iesname="hhid",name="hhid"))
       s= rbind(s,data.frame(iesname="LAT_DD_MOD",name="S"))

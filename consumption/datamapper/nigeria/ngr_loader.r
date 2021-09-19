@@ -399,9 +399,17 @@ ngr_loader<-function(fu,ngrn,lgc) {
                                               names=ngrn()@ohs_income_info_columns_lsms(year),
                                               m=ngrn()@ohs_income_columns_mapping_lsms(year))
       
+      secGeofname    <- paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Geodata/NGA_HouseholdGeovariables_Y1.dta',sep="")
+      secGeodat    <- read.dta(secGeofname,convert.factors = FALSE)
+      
+      secGeodat    <- fu()@get_translated_frame(dat=secGeodat,
+                                                names=c("hhid","S","E"),
+                                                m=ngrn()@ohs_geodata_columns_mapping_lsms(year))
+      
       print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
       ohs <- merge(ohs,sec3dat,by=c("hhid","personid"), all.x=TRUE)
+      ohs <- merge(ohs,secGeodat,by=c("hhid"),all.x=T)
       
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
       ohs$age          <- 2010 - as.integer(as.character(ohs$YOB))
@@ -484,9 +492,17 @@ ngr_loader<-function(fu,ngrn,lgc) {
                                                names=ngrn()@ohs_income_info_columns_lsms(2012),
                                                m=ngrn()@ohs_income_columns_mapping_lsms(year))
       
+      secGeofname    <- paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/NGA_HouseholdGeovars_Y3.dta',sep="")
+      secGeodat    <- read.dta(secGeofname,convert.factors = FALSE)
+      
+      secGeodat    <- fu()@get_translated_frame(dat=secGeodat,
+                                                names=c("hhid","S","E"),
+                                                m=ngrn()@ohs_geodata_columns_mapping_lsms(year))
+      
       print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
       ohs <- merge(ohs,sec3dat,by=c("hhid","personid"), all.x=TRUE)
+      ohs <- merge(ohs,secGeodat,by=c("hhid"),all.x=T)
       
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
       ohs$age          <- 2015 - as.integer(as.character(ohs$YOB))
