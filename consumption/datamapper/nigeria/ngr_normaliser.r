@@ -13,7 +13,7 @@ setClass("NigeriaNormaliser", representation(diary_columns_mapping="function", d
                                              item_codes_2010="function", ohs_info_columns_lsms="function",ohs_mapping_lsms="function",
                                              ohs_educ_info_columns_lsms="function",ohs_educ_columns_mapping_lsms="function",
                                              ohs_income_info_columns_lsms="function",ohs_income_columns_mapping_lsms="function",
-                                             market_data_columns_mapping="function",market_data_info="function",
+                                             market_data_columns_mapping="function",market_data_info="function",ohs_geodata_columns_mapping_lsms="function",
                                              unit_codes_2010="function", get_diary_assets_fields_mapping_lsms="function",items_codes="function"
 ))
 
@@ -710,6 +710,20 @@ ngr_normaliser<-function() {
     
     stop(paste("Year:",year,"not supported"))
   }
+  
+  
+  ohs_geodata_columns_mapping_lsms <- function(year){
+    if (year == 2010 || year == 2012 || year == 2015){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="LAT_DD_MOD",name="S"))
+      s= rbind(s,data.frame(iesname="LON_DD_MOD",name="E"))
+      return(s)
+    }
+    
+    stop(paste("Year:",year,"not supported"))
+  }
+  
   return(new("NigeriaNormaliser",diary_columns_mapping=diary_columns_mapping, 
              diary_info_columns_2010=diary_info_columns_2010,get_lsms_weekrecall_info_columns=get_lsms_weekrecall_info_columns,
              get_lsms_weekrecall_fields_mapping=get_lsms_weekrecall_fields_mapping,item_codes_2010=item_codes_2010,
@@ -719,7 +733,7 @@ ngr_normaliser<-function() {
              ohs_info_columns_lsms=ohs_info_columns_lsms, ohs_mapping_lsms=ohs_mapping_lsms,ohs_educ_info_columns_lsms=ohs_educ_info_columns_lsms,
              ohs_educ_columns_mapping_lsms=ohs_educ_columns_mapping_lsms,ohs_income_info_columns_lsms=ohs_income_info_columns_lsms,
              ohs_income_columns_mapping_lsms=ohs_income_columns_mapping_lsms,market_data_columns_mapping=market_data_columns_mapping,
-             market_data_info=market_data_info, unit_codes_2010=unit_codes_2010,
+             market_data_info=market_data_info, unit_codes_2010=unit_codes_2010,ohs_geodata_columns_mapping_lsms=ohs_geodata_columns_mapping_lsms,
              get_diary_assets_fields_mapping_lsms=get_diary_assets_fields_mapping_lsms,items_codes=items_codes) )
   
 }

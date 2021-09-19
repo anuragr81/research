@@ -405,7 +405,8 @@ ngr_loader<-function(fu,ngrn,lgc) {
       
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
       ohs$age          <- 2010 - as.integer(as.character(ohs$YOB))
-      print("Testing Data Integrity after merge")
+      
+
       
       #household_status must be determined by 1. rank based on occupation_rank 2. occupation_primary 3. highest_educ 4. qualification 5. age (pay is not available for the most)
       #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
@@ -431,12 +432,24 @@ ngr_loader<-function(fu,ngrn,lgc) {
       sec3fname1    <- paste(dirprefix,'./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post\ Planting\ Wave\ 2/Household/sect3a_plantingw2.dta',sep="")
       sec3dat1    <- read.dta(sec3fname1,convert.factors = FALSE)
       sec3dat1    <- fu()@get_translated_frame(dat=sec3dat1,
-                                              names=ngrn()@ohs_income_info_columns_lsms(2012),
+                                              names=ngrn()@ohs_income_info_columns_lsms(year),
                                               m=ngrn()@ohs_income_columns_mapping_lsms(year))
+      
+      
+      secGeofname    <- paste(dirprefix,'./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Geodata Wave 2/NGA_HouseholdGeovars_Y2.dta',sep="")
+      secGeodat    <- read.dta(secGeofname,convert.factors = FALSE)
+      
+      secGeodat    <- fu()@get_translated_frame(dat=secGeodat,
+                                               names=c("hhid","S","E"),
+                                               m=ngrn()@ohs_geodata_columns_mapping_lsms(year))
       
       print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
       ohs <- merge(ohs,sec3dat1,by=c("hhid","personid"), all.x=TRUE)
+      ohs <- merge(ohs,secGeodat,by=c("hhid"),all.x=T)
+      
+      
+      #../lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Geodata Wave 2/NGA_HouseholdGeovars_Y2.dta
       
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
       ohs$age          <- 2012 - as.integer(as.character(ohs$YOB))
