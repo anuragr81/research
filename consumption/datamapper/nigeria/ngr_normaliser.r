@@ -803,14 +803,16 @@ ngr_normaliser<-function() {
     if (year == 2010 || year == 2012)  {
       s = data.frame(iesname=NULL,name=NULL)
       s= rbind(s,data.frame(iesname="hhid",name="hhid"))
-      s= rbind(s,data.frame(iesname="s9q3",name="varied_quality"))
+      s= rbind(s,data.frame(iesname="s9q1a",name="less_quality_1"))
+      s= rbind(s,data.frame(iesname="s9q1b",name="less_quality_2"))
+      s= rbind(s,data.frame(iesname="s9q3",name="same_diet"))
       s= rbind(s,data.frame(iesname="s9q5",name="out_of_food"))
       return(s)
     }
     if (year == 2015)  {
       s = data.frame(iesname=NULL,name=NULL)
       s= rbind(s,data.frame(iesname="hhid",name="hhid"))
-      s= rbind(s,data.frame(iesname="s9bq4",name="not_varied_quality"))
+      s= rbind(s,data.frame(iesname="s9bq4",name="less_quality"))
       s= rbind(s,data.frame(iesname="s9bq7",name="out_of_food"))
       return(s)
     }

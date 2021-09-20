@@ -527,16 +527,17 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
       ohs <- merge(ohs,sec3dat,by=c("hhid","personid"), all.x=TRUE)
       ohs <- merge(ohs,secGeodat,by=c("hhid"),all.x=T)
-      
+
+      #food quality      
       secFqname    <- paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post Planting Wave 1/Household/sect9_plantingw1.dta',sep="")
       secFqdat    <- read.dta(secFqname,convert.factors = FALSE)
       
       secFqdat    <- fu()@get_translated_frame(dat=secFqdat,
-                                                names=c("hhid","varied_quality","out_of_food"),
+                                                names=c("hhid","same_diet","less_quality_1","less_quality_2","out_of_food"),
                                                 m=ngrn()@ohs_food_quality_columns_mapping_lsms(year))
       
-      
-      #food quality
+
+      ohs <- merge(ohs,secFqdat,by=c("hhid"),all.x=T)
       
     
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
@@ -578,12 +579,19 @@ ngr_loader<-function(fu,ngrn,lgc) {
       secGeodat    <- fu()@get_translated_frame(dat=secGeodat,
                                                 names=c("hhid","S","E"),
                                                 m=ngrn()@ohs_geodata_columns_mapping_lsms(year))
+
+      secFqname    <- paste(dirprefix,'./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post Planting Wave 2/Household/sect9_plantingw2.dta',sep="")
+      secFqdat    <- read.dta(secFqname,convert.factors = FALSE)
+      
+      secFqdat    <- fu()@get_translated_frame(dat=secFqdat,
+                                               names=c("hhid","same_diet","less_quality_1","less_quality_2","out_of_food"),
+                                               m=ngrn()@ohs_food_quality_columns_mapping_lsms(year))
       
       print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
       ohs <- merge(ohs,sec3dat1,by=c("hhid","personid"), all.x=TRUE)
       ohs <- merge(ohs,secGeodat,by=c("hhid"),all.x=T)
-      
+      ohs <- merge(ohs,secFqdat,by=c("hhid"),all.x=T)
       
       #../lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Geodata Wave 2/NGA_HouseholdGeovars_Y2.dta
       
@@ -625,10 +633,20 @@ ngr_loader<-function(fu,ngrn,lgc) {
                                                 names=c("hhid","S","E"),
                                                 m=ngrn()@ohs_geodata_columns_mapping_lsms(year))
       
+      secFqname    <- paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect9b_plantingw3.dta',sep="")
+      secFqdat    <- read.dta(secFqname,convert.factors = FALSE)
+      
+      secFqdat    <- fu()@get_translated_frame(dat=secFqdat,
+                                               names=c("hhid","same_diet","less_quality","out_of_food"),
+                                               m=ngrn()@ohs_food_quality_columns_mapping_lsms(year))
+      
+      
+            
       print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
       ohs <- merge(ohs,sec3dat1,by=c("hhid","personid"), all.x=TRUE)
       ohs <- merge(ohs,secGeodat,by=c("hhid"),all.x=T)
+      ohs <- merge(ohs,secFqdat,by=c("hhid"),all.x=T)
       
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
       ohs$age          <- 2015 - as.integer(as.character(ohs$YOB))
