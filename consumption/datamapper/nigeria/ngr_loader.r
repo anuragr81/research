@@ -470,26 +470,24 @@ ngr_loader<-function(fu,ngrn,lgc) {
     
     if ( year == 2015) {
       
-      
-      
       sec1fname  <-paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect1_plantingw3.dta',sep="")
       print(paste("Opening file:",sec1fname))
       sec1dat    <- read_dta(sec1fname)
       sec1dat    <- fu()@get_translated_frame(dat=sec1dat,
-                                              names=ngrn()@ohs_info_columns_lsms(year),
-                                              m=ngrn()@ohs_mapping_lsms(year))
-      sec2fname    <- paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect2_plantingw2.dta',sep="")
+                                              names=setdiff(ngrn()@ohs_info_columns_lsms(year),c("state")),
+                                              m=subset(ngrn()@ohs_mapping_lsms(year),!is.element(iesname,c("state"))))
+      sec2fname    <- paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect2_harvestw3.dta',sep="")
       print(paste("Opening file:",sec2fname))
       sec2dat    <- read_dta(sec2fname)
       sec2dat    <- fu()@get_translated_frame(dat=sec2dat,
                                               names=ngrn()@ohs_educ_info_columns_lsms(2010),
                                               m=ngrn()@ohs_educ_columns_mapping_lsms(year))
       
-      sec3fname1    <- paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect3_plantingw2.dta',sep="")
+      sec3fname1    <- paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect3_plantingw3.dta',sep="")
       print(paste("Opening file:",sec3fname1))
       sec3dat1    <- read_dta(sec3fname1)
       sec3dat1    <- fu()@get_translated_frame(dat=sec3dat1,
-                                               names=ngrn()@ohs_income_info_columns_lsms(2012),
+                                               names=ngrn()@ohs_income_info_columns_lsms(2015),
                                                m=ngrn()@ohs_income_columns_mapping_lsms(year))
       
       secGeofname    <- paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/NGA_HouseholdGeovars_Y3.dta',sep="")
@@ -501,7 +499,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       
       print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
-      ohs <- merge(ohs,sec3dat,by=c("hhid","personid"), all.x=TRUE)
+      ohs <- merge(ohs,sec3dat1,by=c("hhid","personid"), all.x=TRUE)
       ohs <- merge(ohs,secGeodat,by=c("hhid"),all.x=T)
       
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))

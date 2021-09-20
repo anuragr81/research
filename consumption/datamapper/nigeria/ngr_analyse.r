@@ -179,6 +179,9 @@ init_data <- function(){
   a2010 <- nl@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ngrn = ngr_normaliser) ; 
   a2012 <- nl@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ngrn = ngr_normaliser) ; 
   a2015 <- nl@read_assets_file(year = 2015, dirprefix = "../",fu = fu, ngrn = ngr_normaliser) ; 
+  print("DONE")
+  return(F)
+  
   c2010 <- nl@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ngrn =ngr_normaliser, load_cost = TRUE)
   c2012 <- nl@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ngrn =ngr_normaliser, load_cost = TRUE)
   c2015 <- nl@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ngrn =ngr_normaliser, load_cost = TRUE)
