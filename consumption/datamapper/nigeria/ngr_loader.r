@@ -528,6 +528,17 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohs <- merge(ohs,sec3dat,by=c("hhid","personid"), all.x=TRUE)
       ohs <- merge(ohs,secGeodat,by=c("hhid"),all.x=T)
       
+      secFqname    <- paste(dirprefix,'./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post Planting Wave 1/Household/sect9_plantingw1.dta',sep="")
+      secFqdat    <- read.dta(secFqname,convert.factors = FALSE)
+      
+      secFqdat    <- fu()@get_translated_frame(dat=secFqdat,
+                                                names=c("hhid","varied_quality","out_of_food"),
+                                                m=ngrn()@ohs_food_quality_columns_mapping_lsms(year))
+      
+      
+      #food quality
+      
+    
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
       ohs$age          <- 2010 - as.integer(as.character(ohs$YOB))
       
