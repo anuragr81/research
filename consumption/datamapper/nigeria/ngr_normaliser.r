@@ -313,6 +313,16 @@ ngr_normaliser<-function() {
     r <- rbind(r, data.frame(shortname='mobile_phone', longname='Mobile Phone', itemcode='332'))
     r <- rbind(r, data.frame(shortname='inverter', longname='Inverter', itemcode='333'))
     r <- rbind(r, data.frame(shortname='other_asset', longname='Other', itemcode='334'))
+    
+    r <- rbind(r, data.frame(shortname='other_asset', longname='Other', itemcode='3341'))
+    r <- rbind(r, data.frame(shortname='other_asset', longname='Other', itemcode='3342'))
+    r <- rbind(r, data.frame(shortname='other_asset', longname='Other', itemcode='3343'))
+    r <- rbind(r, data.frame(shortname='other_asset', longname='Other', itemcode='3344'))
+    r <- rbind(r, data.frame(shortname='other_asset', longname='Other', itemcode='3345'))
+    r <- rbind(r, data.frame(shortname='other_asset', longname='Other', itemcode='3346'))
+    r <- rbind(r, data.frame(shortname='other_asset', longname='Other', itemcode='3347'))
+    r <- rbind(r, data.frame(shortname='other_asset', longname='Other', itemcode='3348'))
+    
     return(r)
   }
   ohs_educ_columns_mapping_lsms <- function(year){
@@ -442,7 +452,7 @@ ngr_normaliser<-function() {
   }
   
   get_diary_assets_fields_mapping_lsms<- function(year){
-    if (year == 2012 || year == 2010) {
+    if (year == 2012 || year == 2010 || year == 2015) {
         s = data.frame(iesname=NULL,name=NULL)
         s= rbind(s,data.frame(iesname="hhid",name="hhid"))
         s= rbind(s,data.frame(iesname="item_cd",name="itemcode"))
@@ -685,6 +695,7 @@ ngr_normaliser<-function() {
     r=rbind(r,data.frame(longname='Repairs & maintenance to dwelling', shortname='maintenance_house', code=327))
     r=rbind(r,data.frame(longname='Repairs to household and personal items', shortname='maintenance_household', code=328))
     r=rbind(r,data.frame(longname='House Rent', shortname='house_rent', code=329))
+    r=rbind(r,data.frame(longname='Other Monthly Expenditure', shortname='other_monthly', code=330))
     r=rbind(r,data.frame(longname='Infant clothing', shortname='clothes_infant', code=401))
     r=rbind(r,data.frame(longname='Baby nappies/diapers', shortname='clothes_baby', code=402))
     r=rbind(r,data.frame(longname='Boys Tailored clothes', shortname='clothes_boys_tailored', code=403))
@@ -713,8 +724,21 @@ ngr_normaliser<-function() {
     r=rbind(r,data.frame(longname='Books (not for school)', shortname='books_notschool', code=426))
     r=rbind(r,data.frame(longname='House decorations', shortname='house_decorations', code=427))
     r=rbind(r,data.frame(longname='Nights lodging in rest house or hotel', shortname='lodging_charges', code=428))
-    r=rbind(r,data.frame(longname='Health expenditures (excluding insurance)', shortname='health_expenditure', code=430))
     r=rbind(r,data.frame(longname='Donations to church mosque other religious group', shortname='donations', code=429))
+    r=rbind(r,data.frame(longname='Health expenditures (excluding insurance)', shortname='health_expenditure', code=430))
+    
+    r=rbind(r,data.frame(longname='Handloomed', shortname='clothing_materials', code=431))
+    r=rbind(r,data.frame(longname='Footwear repairs', shortname='', code=432))
+    r=rbind(r,data.frame(longname='Electric Kettle', shortname='electric_kettle', code=433))
+    r=rbind(r,data.frame(longname='Non electric Pot', shortname='nonelectric_pot', code=434))
+    r=rbind(r,data.frame(longname='Appliance Repairs', shortname='', code=435))
+    r=rbind(r,data.frame(longname='Bed Sheets', shortname='bed_sheets', code=436))
+    r=rbind(r,data.frame(longname='Pillows', shortname='pillows', code=437))
+    r=rbind(r,data.frame(longname='Linen', shortname='linen', code=438))
+    r=rbind(r,data.frame(longname='Carpets', shortname='carpets', code=439))
+    r=rbind(r,data.frame(longname='Cellphone', shortname='cellphone', code=440))
+    r=rbind(r,data.frame(longname='Lodging Expenses', shortname='lodging', code=441))
+    
     r=rbind(r,data.frame(longname='Carpet rugs drapes curtains', shortname='carpets_rugs', code=501))
     r=rbind(r,data.frame(longname='Linen towels sheets blankets', shortname='linen', code=502))
     r=rbind(r,data.frame(longname='Mat sleeping or for drying maize flour', shortname='mat', code=503))

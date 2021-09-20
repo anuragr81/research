@@ -62,8 +62,8 @@ ngr_loader<-function(fu,ngrn,lgc) {
       secndat2<-read.dta(secnFileName2,convert.factors = FALSE)
       
       assetsData1 <- fu()@get_translated_frame(dat=secndat1,
-                                              names=c("hhid","itemcode","number"),
-                                              m=ngrn()@get_diary_assets_fields_mapping_lsms(year))
+                                               names=c("hhid","itemcode","number"),
+                                               m=ngrn()@get_diary_assets_fields_mapping_lsms(year))
       
       assetsData2 <- fu()@get_translated_frame(dat=secndat2,
                                                names=c("hhid","itemcode","age","mtm"),
@@ -90,8 +90,8 @@ ngr_loader<-function(fu,ngrn,lgc) {
       secndat2<-read.dta(secnFileName2,convert.factors = FALSE)
       
       assetsData1 <- fu()@get_translated_frame(dat=secndat1,
-                                              names=c("hhid","itemcode","number"),
-                                              m=ngrn()@get_diary_assets_fields_mapping_lsms(year))
+                                               names=c("hhid","itemcode","number"),
+                                               m=ngrn()@get_diary_assets_fields_mapping_lsms(year))
       
       assetsData2 <- fu()@get_translated_frame(dat=secndat2,
                                                names=c("hhid","itemcode","age","mtm"),
@@ -108,20 +108,23 @@ ngr_loader<-function(fu,ngrn,lgc) {
       if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
       return(assetsData)
     }
+    
     if (year == 2015 ) {
+      secnFileName <- paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect5_plantingw3.dta',sep="")
+      print(paste("read_assets_file - opening file:",secnFileName))
       
-      #secn of 2010 maps to secm of 2012
-      secnFileName1 <- paste(dirprefix,'',sep="")
-      print(paste("read_assets_file - opening file:",secnFileName1))
-      secndat_1<-read.dta(secnFileName1,convert.factors = FALSE)
-      assetsData1 <- fu()@get_translated_frame(dat=secndat_1,
-                                               names=ngrn()@get_diary_secn_columns_lsms_2012(),
-                                               m=ngrn()@get_diary_secn_fields_mapping_lsms_2014())
+      secndat<-read.dta(secnFileName,convert.factors = FALSE)
       
       
-      assetsData <-merge(assetsData1, plyr::rename(ngrn()@items_codes_2012(),c("code"="itemcode","item"="longname")), all.x=TRUE)
+      assetsData <- fu()@get_translated_frame(dat=secndat,
+                                              names=c("hhid","itemcode","number","age","mtm"),
+                                              m=ngrn()@get_diary_assets_fields_mapping_lsms(year))
       
-      ignored_hhids_adoc <- c("0743-001") # high mtm of house
+      print(paste("Ignoring",nrow(subset(assetsData,is.na(number))),"entries because of no reported number"))
+      assetsData <- subset(assetsData,!is.na(number))
+      assetsData <-merge(assetsData, ngrn()@items_codes(year), all.x=TRUE)
+      
+      ignored_hhids_adoc <- c("") # high mtm of house
       assetsData <- subset(assetsData,!is.element(hhid,ignored_hhids_adoc))
       print (paste("Ignored hhids:",toString(ignored_hhids_adoc)))
       if (dim(subset(assetsData,is.na(shortname)))[1] >0 ) { stop ("assets codes are not known") ; }
@@ -136,6 +139,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
     ##
     if (year == 2010){
       fname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect7b_plantingw1.dta",sep="")
+      print(paste("Opening:",fname))
       sec7dat <- read.dta(fname, convert.factors = FALSE)
       k <- fu()@get_translated_frame(dat=sec7dat,
                                      names=ngrn()@diary_info_columns_2010(),
@@ -256,6 +260,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
     if (year == 2012){
       
       fname <- paste(dirprefix,"./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post\ Planting\ Wave\ 2/Household/sect7b_plantingw2.dta",sep="")
+      print(paste("Opening:",fname))
       sec7dat <- read.dta(fname, convert.factors = FALSE)
       k <- fu()@get_translated_frame(dat=sec7dat,
                                      names=ngrn()@diary_info_columns_2010(),
@@ -375,6 +380,118 @@ ngr_loader<-function(fu,ngrn,lgc) {
       return(diary)  
     } # end 2012
     
+    if (year == 2015){
+      
+      fname <- paste(dirprefix,"./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect7b_plantingw3.dta",sep="")
+      print(paste("Opening:",fname))
+      sec7dat <- read.dta(fname, convert.factors = FALSE)
+      k <- fu()@get_translated_frame(dat=sec7dat,
+                                     names=ngrn()@diary_info_columns_2010(),
+                                     m=ngrn()@diary_columns_mapping(2010))
+      #,
+      #        convert_factors = FALSE,hhidColName = "y4_hhid")
+      # we have 7-day recalls (81) 1-month recalls (82) six month recalls(83) , 12-month recalls (84)
+      
+      if (load_cost){
+        k <- subset(subset(k,!is.na(cost), cost>0))
+      } else {
+        k <- subset(subset(k,!is.na(lwp) | !is.na(tlwp)),lwp>0 | tlwp>0)
+        k$cost <- NA
+      }
+      
+      
+      k$item<-as.integer(as.character(k$item))+10000 # adding 10,000 only to avoid overlaps with sections (l,m)
+      factor <- 52
+      
+      
+      #*    Multiplied weekly diary data by 52 (to look at annual data)
+      # quantities are normalized to annual values
+      k$cost <- k$cost*factor
+      k$lwp <- k$lwp *factor
+      k$tlwp <- k$tlwp *factor
+      k$own <-k$own*factor
+      k$gift <-k$gift*factor
+      
+      
+      #*    gift quantities are ignored (total quantity ignored is to be presented)
+      #*    weekly recall items are also multiplied by 52
+      lfname <- paste(dirprefix,"./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect8a_plantingw3.dta",sep="")
+      sec81dat <- read_dta(lfname)
+      l <- fu()@get_translated_frame(dat=sec81dat,
+                                     names=ngrn()@get_lsms_weekrecall_info_columns(2010),
+                                     m=ngrn()@get_lsms_weekrecall_fields_mapping(2010));
+      
+      l$hhid <-as.character(l$hhid)
+      l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
+      l$item <- as.character(l$item)
+      l$cost <- l$cost*52 # 52 weeks
+      l <- merge(plyr::rename(l,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      
+      if (dim(subset(l,is.na(shortname)))[1]>0){
+        stop("Could not find weekly recall items",toString(subset(l,is.na(shortname))$code))
+      }
+      
+      ## monthly recall
+      
+      lmfname <- paste(dirprefix,"./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect8b_plantingw3.dta",sep="")
+      sec82dat <- read_dta(lmfname)
+      lmdat <- fu()@get_translated_frame(dat=sec82dat,
+                                         names=ngrn()@get_lsms_monthrecall_info_columns(2010),
+                                         m=ngrn()@get_lsms_monthrecall_fields_mapping(2010));
+      
+      lmdat$hhid <-as.character(lmdat$hhid)
+      lmdat <- lmdat[!is.na(lmdat$cost) & lmdat$cost>0 & !is.na(lmdat$hhid),]
+      lmdat$item <- as.character(lmdat$item)
+      lmdat <- merge(plyr::rename(lmdat,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      if (dim(subset(lmdat,is.na(shortname)))[1]>0){
+        stop("Could not find monthly recall items",toString(unique(subset(lmdat,is.na(shortname))$code)))
+      }
+      
+      repair_items <- c("maintenance_house","maintenance_household")
+      lmdat_nonrepair      <- subset(lmdat,!is.element(shortname,repair_items)) 
+      lmdat_repair         <- subset(lmdat,is.element(shortname,repair_items))
+      lmdat_repair$cost    <- lmdat_repair$cost*12
+      lmdat_nonrepair$cost <- lmdat_nonrepair$cost*6
+      lmdat <- rbind(lmdat_nonrepair,lmdat_repair)
+      
+      # 6 months recall
+      l6mfname <- paste(dirprefix,"./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect8c_plantingw3.dta",sep="")
+      sec83dat <- read_dta(l6mfname)
+      l6mdat <- fu()@get_translated_frame(dat=sec83dat,
+                                          names=ngrn()@get_lsms_sixmonthrecall_info_columns(2010),
+                                          m=ngrn()@get_lsms_sixmonthrecall_fields_mapping(2010));
+      
+      l6mdat$hhid <- as.character(l6mdat$hhid)
+      l6mdat      <- l6mdat[!is.na(l6mdat$cost) & l6mdat$cost>0 & !is.na(l6mdat$hhid),]
+      l6mdat$item <- as.character(l6mdat$item)
+      l6mdat      <- merge(plyr::rename(l6mdat,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      if (dim(subset(l6mdat,is.na(shortname)))[1]>0){
+        stop("Could not find six-monthly recall items",toString( unique(subset(l6mdat,is.na(shortname))$code ) ))
+      }
+      l6mdat$cost <- l6mdat$cost*2
+      
+      #No 12 months recall for 2015
+
+      #*    merging all the 3 categories results in the expenditure file
+      
+      y6m1m <- merge(l6mdat,lmdat,all=TRUE)
+      
+      diary <-merge(y6m1m,k,all=TRUE)
+      
+      # filtering out extreme values
+      if (load_cost){
+        extremeDataHhids <- unique ( dplyr::filter( merge(diary,ddply(diary,.(shortname),summarise,v=fu()@fv(cost)),all.x=TRUE) , cost > v)$hhid )
+      } else {
+        extremeDataHhids <- unique ( dplyr::filter( merge(y6m1m,ddply(y6m1m,.(shortname),summarise,v=fu()@fv(cost) ),all.x=TRUE) , cost > v)$hhid )
+      }
+      
+      print (paste("Households with extreme data (many times the median) - purged from the diary file:",length(extremeDataHhids)))
+      diary              <- dplyr::filter(diary,!is.element(hhid,extremeDataHhids))
+      
+      return(diary)  
+      
+    }
+    
     stop (paste("Cannot process data for year:",year))
     
   }
@@ -414,7 +531,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
       ohs$age          <- 2010 - as.integer(as.character(ohs$YOB))
       
-
+      
       
       #household_status must be determined by 1. rank based on occupation_rank 2. occupation_primary 3. highest_educ 4. qualification 5. age (pay is not available for the most)
       #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
@@ -440,16 +557,16 @@ ngr_loader<-function(fu,ngrn,lgc) {
       sec3fname1    <- paste(dirprefix,'./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post\ Planting\ Wave\ 2/Household/sect3a_plantingw2.dta',sep="")
       sec3dat1    <- read.dta(sec3fname1,convert.factors = FALSE)
       sec3dat1    <- fu()@get_translated_frame(dat=sec3dat1,
-                                              names=ngrn()@ohs_income_info_columns_lsms(year),
-                                              m=ngrn()@ohs_income_columns_mapping_lsms(year))
+                                               names=ngrn()@ohs_income_info_columns_lsms(year),
+                                               m=ngrn()@ohs_income_columns_mapping_lsms(year))
       
       
       secGeofname    <- paste(dirprefix,'./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Geodata Wave 2/NGA_HouseholdGeovars_Y2.dta',sep="")
       secGeodat    <- read.dta(secGeofname,convert.factors = FALSE)
       
       secGeodat    <- fu()@get_translated_frame(dat=secGeodat,
-                                               names=c("hhid","S","E"),
-                                               m=ngrn()@ohs_geodata_columns_mapping_lsms(year))
+                                                names=c("hhid","S","E"),
+                                                m=ngrn()@ohs_geodata_columns_mapping_lsms(year))
       
       print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
