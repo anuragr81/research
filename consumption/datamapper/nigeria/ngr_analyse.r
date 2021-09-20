@@ -172,12 +172,11 @@ mapping_hhids_2012_2015 <- function(o2015){
 }
 
 init_data <- function(){
-  
-  
+
   o2010 <- nl@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ngrn=ngr_normaliser) ; 
   o2012 <- nl@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ngrn=ngr_normaliser) ; 
   o2015 <- nl@load_ohs_file(year = 2015, dirprefix = "../",fu=fu, ngrn=ngr_normaliser) ;
-  o2015 <- nl@load_ohs_file(year = 2015, dirprefix = "../",fu=fu, ngrn=ngr_normaliser) ;
+
   a2010 <- nl@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ngrn = ngr_normaliser) ; 
   a2012 <- nl@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ngrn = ngr_normaliser) ; 
   a2015 <- nl@read_assets_file(year = 2015, dirprefix = "../",fu = fu, ngrn = ngr_normaliser) ; 
@@ -187,7 +186,9 @@ init_data <- function(){
   
 }
 
-get_nonparametric_df <- function(ll,food_analysis,o2012,a2012){
+
+
+get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a2012, a2015,c2010,c2012,c2015){
   # Don't include education or housing expenses - because they're part of needs anyways
   inc_houserent = F
   inc_educexpense = F
@@ -197,19 +198,17 @@ get_nonparametric_df <- function(ll,food_analysis,o2012,a2012){
   occup_pivot <- 2
   
   
-  hhids2010_2012 <- mapping_hhids_2010_2012(o2012)
+  asset_mtms_2010 = asset_mtms(a2010,"furntiure_medium","2010")
+  asset_mtms_2012 = asset_mtms(a2012,"furntiure_medium","2012")
+  asset_mtms_2015 = asset_mtms(a2015,"furntiure_medium","2015")
   
-  asset_mtms_2012 = asset_mtms(a2012,"bed","2012")
-  asset_mtms_2010 <- plyr::rename(merge(hhids2010_2012,asset_mtms_2012),c("mtm.2012"="mtm.2010","cost.2012"="cost.2010","number.2012"="number.2010"))[,c("hhid2010","hhid2012","shortname","number.2010","mtm.2010","cost.2010")]
-  asset_mtms_2014 = asset_mtms(a2014,"bed","2014")
-  
-  assetslog2010 <- ddply(asset_mtms_2010,.(hhid2010),summarise,lnA0=log(sum(number.2010*mtm.2010)+1e-7),A0=(sum(number.2010*mtm.2010)))
-  assetslog2012 <- ddply(asset_mtms_2012,.(hhid2012),summarise,lnA0=log(sum(number.2012*mtm.2012)+1e-7),A0=sum(number.2012*mtm.2012))
-  assetslog2014 <- ddply(asset_mtms_2014,.(hhid2014),summarise,lnA0=log(sum(number.2014*mtm.2014)+1e-7),A0=sum(number.2014*mtm.2014))
+  assetslog2010 <- ddply(asset_mtms_2010,.(hhid),summarise,lnA0=log(sum(number.2010*mtm.2010)+1e-7),A0=(sum(number.2010*mtm.2010)))
+  assetslog2012 <- ddply(asset_mtms_2012,.(hhid),summarise,lnA0=log(sum(number.2012*mtm.2012)+1e-7),A0=sum(number.2012*mtm.2012))
+  assetslog2014 <- ddply(asset_mtms_2014,.(hhid),summarise,lnA0=log(sum(number.2014*mtm.2014)+1e-7),A0=sum(number.2014*mtm.2014))
   
   
   if (food_analysis==T){
-    all_costs_considered <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
+    all_costs_considered <- ngr_normalizer()@categories_non_basic_wassets(include_food=T)
     food_costs_group <- subset(all_costs_considered,is.element(group,c("needs")))$shortname
     excess_costs_group <- subset(all_costs_considered,is.element(group,c("excess")))$shortname
     
@@ -242,7 +241,7 @@ get_nonparametric_df <- function(ll,food_analysis,o2012,a2012){
     ka2014 <- ka2014[,setdiff(colnames(ka2014),c("consu","hsize"))]
     
   } else {
-    all_costs <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
+    all_costs <- ngr_normalizer()@categories_non_basic_wassets(include_food=T)
     #asset purchases and asset-bearing costs are not considered
     needs_and_excess_costs <- subset(all_costs, is.element(group,c("excess","needs")))
     ne2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2010"))
@@ -250,7 +249,7 @@ get_nonparametric_df <- function(ll,food_analysis,o2012,a2012){
     ne2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2014"))
     
   }
-  #
+  
   perception_columns <- c("life_perception"="hh_life_perception" , "finance_perception"="hh_finance_perception", "richness_perception"="hh_richness_perception","housing_perception"="hh_housing_perception","health_perception"="hh_health_perception")
   hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang")
   #total consumption
@@ -362,4 +361,30 @@ get_nonparametric_df <- function(ll,food_analysis,o2012,a2012){
   }
   
   return(res)
+}
+asset_mtms <- function(assets_dat,pivot_asset,year){
+  
+  assets <- subset(assets_dat,!is.na(mtm) & mtm >0 & number >0 & !is.na(number) )
+  assets$shortname <- as.character(assets$shortname)
+  
+  assets_src    <- (dplyr::filter( merge(assets,ddply(assets,.(shortname),summarise,v=fu()@fv(mtm)),all.x=TRUE) , mtm < v))
+  
+  
+  c0 <- ddply(subset(assets_src, number>0 & !is.na(mtm) & mtm>0), .(shortname), summarise , median_mtm = median(mtm), mean_mtm = mean(mtm), n = length(hhid))
+  c0 <- c0[order(c0$mean_mtm),]
+  
+  # anything ge expensive than pivot_asset is an asset
+  
+  all_assets              <- setdiff(subset(c0,median_mtm>= c0[c0$shortname==pivot_asset,]$median_mtm)$shortname,c()) #c("land","house")
+  
+
+  select_cols <- c("hhid","number","shortname","mtm")
+  a <- plyr::rename(subset(assets_src[,select_cols],number>0 & is.element(shortname,all_assets)),c("number"=paste0("number.",year),"mtm"=paste0("mtm.",year)))
+  return(a)
+  
+}
+
+
+test <- function(){
+  get_nonparametric_df(nl=nl,food_analysis = F,o2010 = o2010, o2012 = o2012, o2015 = o2015, a2010 = a2010, a2012 = a2012, a2015 = a2015,c2010 = c2010, c2012 = c2012, c2015 = c2015)
 }

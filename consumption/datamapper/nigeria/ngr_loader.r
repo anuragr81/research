@@ -644,7 +644,8 @@ ngr_loader<-function(fu,ngrn,lgc) {
             
       print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
-      ohs <- merge(ohs,sec3dat1,by=c("hhid","personid"), all.x=TRUE)
+      # merge is only with hhid and personid
+      ohs <- merge(ohs,sec3dat1[,c("hhid","personid",setdiff(colnames(sec3dat1),colnames(ohs)))],by=c("hhid","personid"),all.x=TRUE)
       ohs <- merge(ohs,secGeodat,by=c("hhid"),all.x=T)
       ohs <- merge(ohs,secFqdat,by=c("hhid"),all.x=T)
       

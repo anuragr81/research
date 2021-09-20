@@ -836,6 +836,86 @@ ngr_normaliser<-function() {
     
     stop(paste("Year:",year,"not supported"))
   }
+ 
+  categories_non_basic_wassets <- function(include_food)  {
+    
+    x <- data.frame(stringsAsFactors=FALSE)
+    
+    x<-rbind(x,data.frame(category='carbs', group='needs', shortname='rice_husked' ))
+    x<-rbind(x,data.frame(category='fat', group='needs', shortname='peanuts'))
+    x<-rbind(x,data.frame(category='protein', group='needs', shortname='pulses'))
+    x<-rbind(x,data.frame(category='fruitsveg', group='needs', shortname='onion'))
+    
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='cigarettes'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='matches'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='public_transport'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='gas'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='water'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='cellphone_voucher'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='milling'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='bar_soap'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='clothes_soap'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='toothpaste'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='toilet_paper'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='skin_cream'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='other_personal'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='misc_cleaning'))
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='light_bulbs')) # assets
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='phone')) # assets
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='donation'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='motor_repair'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='bicycle_repair'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='services'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='mortgage'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='house_repair_monthly'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='household_products_repair'))
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='carpet')) # assets
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='linen')) # assets
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='mat')) # assets
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='mosquito_net')) # assets
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='mattress')) # assets
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='sports_hobby')) # assets
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='camera')) # assets
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='building_material')) # assets
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='council_rates'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='insurance'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='theft_losses'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='legalfines'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='bride_price'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='marriage'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='funeral'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='consumer_durables_repair'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='taxes'))
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='bamboo')) # assets
+    x<-rbind(x,data.frame(category='general', group='assets', shortname='grass')) # assets
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='sugar'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='sweet'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='honey'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='salt'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='spices'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='tea'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='coffee'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='miscdrinkpowder'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='canned_drink'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='readymade_tea_coffee'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='beer'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='brews'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='winespirits'))
+    
+    
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='household_repair'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='other_costs'))
+    x<-rbind(x,data.frame(category='general', group='asset_costs', shortname='house_repair_yearly'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='mensclothes'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='womensclothes'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='childrensclothes'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='mensshoes'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='womensshoes'))
+    x<-rbind(x,data.frame(category='general', group='excess', shortname='childrensshoes'))
+    
+    return(x)
+    
+  }
   
   return(new("NigeriaNormaliser",diary_columns_mapping=diary_columns_mapping, 
              diary_info_columns_2010=diary_info_columns_2010,get_lsms_weekrecall_info_columns=get_lsms_weekrecall_info_columns,
