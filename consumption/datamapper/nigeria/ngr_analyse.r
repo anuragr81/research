@@ -188,7 +188,7 @@ init_data <- function(){
 
 
 
-get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a2012, a2015,c2010,c2012,c2015){
+ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a2012, a2015,c2010,c2012,c2015){
   
   educ_pivot <- 3
   occup_pivot <- 2
@@ -196,19 +196,19 @@ get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a201
   asset_mtms_2010 = asset_mtms(a2010,"furntiure_medium","2010")
   asset_mtms_2012 = asset_mtms(a2012,"furntiure_medium","2012")
   asset_mtms_2015 = asset_mtms(a2015,"furntiure_medium","2015")
-  
+  print("Summing up asset values")
   assetslog2010 <- ddply(asset_mtms_2010,.(hhid),summarise,lnA0=log(sum(number.2010*mtm.2010)+1e-7),A0=(sum(number.2010*mtm.2010)))
   assetslog2012 <- ddply(asset_mtms_2012,.(hhid),summarise,lnA0=log(sum(number.2012*mtm.2012)+1e-7),A0=sum(number.2012*mtm.2012))
-  assetslog2014 <- ddply(asset_mtms_2014,.(hhid),summarise,lnA0=log(sum(number.2014*mtm.2014)+1e-7),A0=sum(number.2014*mtm.2014))
+  assetslog2015 <- ddply(asset_mtms_2015,.(hhid),summarise,lnA0=log(sum(number.2015*mtm.2015)+1e-7),A0=sum(number.2015*mtm.2015))
   
   if (food_analysis==T){
     all_costs_considered <- ngr_normaliser()@expenditure_categories()
-    food_costs_group <- subset(all_costs_considered,is.element(group,c("needs")))$shortname
+    food_costs_group <- subset(all_costs_considered,is.element(group,c("food")))$shortname
     excess_costs_group <- subset(all_costs_considered,is.element(group,c("excess")))$shortname
     
     x2010 <- plyr::rename(ngr_normaliser()@get_total_expenditures(hh = c2010, ohs = o2010), c("total_expenditure"="x"))
     x2012 <- plyr::rename(ngr_normaliser()@get_total_expenditures(hh = c2012, ohs = o2012),c("total_expenditure"="x"))
-    x2014 <- plyr::rename(ngr_normaliser()@get_total_expenditures(hh = c2014, ohs = o2014),c("total_expenditure"="x"))
+    x2015 <- plyr::rename(ngr_normaliser()@get_total_expenditures(hh = c2015, ohs = o2015),c("total_expenditure"="x"))
     
     hsizex2010 <- merge(ngr_normaliser()@get_hsize(o2010),x2010,by=c("hhid"))
     hsizex2012 <- merge(ngr_normaliser()@get_hsize(o2012),x2012,by=c("hhid"))
@@ -216,73 +216,58 @@ get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a201
     
     k2010_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2010, group_field = "shortname")
     k2012_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2012, group_field = "shortname")
-    k2014_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2014, group_field = "shortname")
+    k2015_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2015, group_field = "shortname")
     
     k2010 <- (merge(k2010_tot,hsizex2010,by=c("hhid")) %>% mutate(cost_a=cost_a/hsize) %>% mutate(cost_b=cost_b/hsize))
     k2012 <- (merge(k2012_tot,hsizex2012,by=c("hhid")) %>% mutate(cost_a=cost_a/hsize) %>% mutate(cost_b=cost_b/hsize))
-    k2014 <- (merge(k2014_tot,hsizex2014,by=c("hhid")) %>% mutate(cost_a=cost_a/hsize) %>% mutate(cost_b=cost_b/hsize))
+    k2015 <- (merge(k2015_tot,hsizex2014,by=c("hhid")) %>% mutate(cost_a=cost_a/hsize) %>% mutate(cost_b=cost_b/hsize))
     
     k2010 <- k2010 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b))
     k2012 <- k2012 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b)) 
-    k2014 <- k2014 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b)) 
+    k2015 <- k2015 %>% mutate(w_a = cost_a/(cost_a+cost_b)) %>% mutate(w_b = cost_b/(cost_a+cost_b)) 
     
     ka2010 <- (merge(assetslog2010,plyr::rename(k2010,c("hhid"="hhid2010")),by=c("hhid2010"))) %>% mutate (year=2010) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
     ka2010 <- ka2010[,setdiff(colnames(ka2010),c("consu","hsize"))]
     ka2012 <- (merge(assetslog2012,plyr::rename(k2012,c("hhid"="hhid2012")),by=c("hhid2012"))) %>% mutate (year=2012) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
     ka2012 <- ka2012[,setdiff(colnames(ka2012),c("consu","hsize"))]
-    ka2014 <- (merge(assetslog2014,plyr::rename(k2014,c("hhid"="hhid2014")),by=c("hhid2014"))) %>% mutate (year=2014) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
+    ka2014 <- (merge(assetslog2015,plyr::rename(k2015,c("hhid"="hhid2015")),by=c("hhid2015"))) %>% mutate (year=2014) %>% mutate( logx=log(x)) %>% mutate( logxc=log(x/consu))
     ka2014 <- ka2014[,setdiff(colnames(ka2014),c("consu","hsize"))]
     
   } else {
     all_costs <- ngr_normaliser()@expenditure_categories()
     #asset purchases and asset-bearing costs are not considered
-    needs_and_excess_costs <- subset(all_costs, is.element(group,c("excess","needs")))
-    ne2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2010"))
-    ne2012 <- plyr::rename(ddply(subset(c2012,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2012"))
-    ne2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2014"))
-    
+    needs_and_excess_costs <- subset(all_costs, is.element(group,c("food","excess")))
+    print("Summing up categories")
+    ne2010 <- ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost))
+    ne2012 <- ddply(subset(c2012,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost))
+    ne2015 <- ddply(subset(c2015,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost))
   }
   
-  perception_columns <- c("life_perception"="hh_life_perception" , "finance_perception"="hh_finance_perception", "richness_perception"="hh_richness_perception","housing_perception"="hh_housing_perception","health_perception"="hh_health_perception")
-  hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang")
   #total consumption
-  relevant_fields <-c("hhid","region","district","ward","isrural","expensiveregion","S","E","population")
+  relevant_fields <-c("hhid","region","district","ea","is_urban","S","E")
   # 2010
   ohs2010 <- subset(o2010,!is.na(region))
-  hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), ll@get_hsize(ohs2010), by = c("hhid")))
+  hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), nl@get_hsize(ohs2010), by = c("hhid")))
   chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
   #  perception_columns
-  hhead2010 <- plyr::rename(subset(o2010,household_status==1)[,names(hhead_columns)],hhead_columns )
-  chosencharshead2010 <- merge(chosenchars2010,hhead2010, all.x=T)
-  hswithchars2010 <- merge(hs2010,chosencharshead2010,all.x = T)
+  
+  hswithchars2010 <- merge(hs2010,chosenchars2010,all.x = T)
   # -6.727135 39.14395
   
   
   # 2012
   ohs2012 <- subset(o2012,!is.na(region))
-  hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), ll@get_hsize(ohs2012), by = c("hhid")))
+  hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), nl@get_hsize(ohs2012), by = c("hhid")))
   chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
   
-  if (length(setdiff(names(perception_columns),colnames(o2012)))==0){
-    hhead_columns_w_percept <- c(hhead_columns,perception_columns)
-  }
-  
-  hhead2012 <- plyr::rename(subset(o2012,household_status==1)[,names(hhead_columns_w_percept)],hhead_columns_w_percept )
-  
-  chosencharshead2012 <- merge(chosenchars2012,hhead2012, all.x=T)
-  hswithchars2012 <- merge(hs2012,chosencharshead2012,all.x = T)
+  hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   
   #2014
   ohs2014 <- subset(o2014,!is.na(region))
-  hs2014 <- unique(merge(unique(ohs2014[,relevant_fields]), ll@get_hsize(ohs2014), by = c("hhid")))
+  hs2014 <- unique(merge(unique(ohs2014[,relevant_fields]), nl@get_hsize(ohs2014), by = c("hhid")))
   chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
-  
-  hhead2014 <- plyr::rename(subset(o2014,household_status==1)[,names(hhead_columns)],hhead_columns )
-  
-  chosencharshead2014 <- merge(chosenchars2014,hhead2014, all.x=T)
-  
-  hswithchars2014 <- merge(hs2014,chosencharshead2014,all.x = T)
-  
+  hswithchars2014 <- merge(hs2014,chosenchars2014,all.x = T)
+
   
   #a<-merge(plyr::rename(i2010,c("hhid"="hhid2010")),assetslog2010 ,by=c("hhid2010"))
   res=list()
@@ -362,7 +347,7 @@ asset_mtms <- function(assets_dat,pivot_asset,year){
   
   assets_src    <- (dplyr::filter( merge(assets,ddply(assets,.(shortname),summarise,v=fu()@fv(mtm)),all.x=TRUE) , mtm < v))
   
-  
+  print("Filtered out excessively high asset values")
   c0 <- ddply(subset(assets_src, number>0 & !is.na(mtm) & mtm>0), .(shortname), summarise , median_mtm = median(mtm), mean_mtm = mean(mtm), n = length(hhid))
   c0 <- c0[order(c0$mean_mtm),]
   
@@ -379,5 +364,5 @@ asset_mtms <- function(assets_dat,pivot_asset,year){
 
 
 test <- function(){
-  get_nonparametric_df(nl=nl,food_analysis = F,o2010 = o2010, o2012 = o2012, o2015 = o2015, a2010 = a2010, a2012 = a2012, a2015 = a2015,c2010 = c2010, c2012 = c2012, c2015 = c2015)
+  ngr_get_nonparametric_df(nl=nl,food_analysis = F,o2010 = o2010, o2012 = o2012, o2015 = o2015, a2010 = a2010, a2012 = a2012, a2015 = a2015,c2010 = c2010, c2012 = c2012, c2015 = c2015)
 }
