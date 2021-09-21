@@ -189,14 +189,9 @@ init_data <- function(){
 
 
 get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a2012, a2015,c2010,c2012,c2015){
-  # Don't include education or housing expenses - because they're part of needs anyways
-  inc_houserent = F
-  inc_educexpense = F
-  #food_analysis = F
   
   educ_pivot <- 3
   occup_pivot <- 2
-  
   
   asset_mtms_2010 = asset_mtms(a2010,"furntiure_medium","2010")
   asset_mtms_2012 = asset_mtms(a2012,"furntiure_medium","2012")
@@ -206,20 +201,18 @@ get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a201
   assetslog2012 <- ddply(asset_mtms_2012,.(hhid),summarise,lnA0=log(sum(number.2012*mtm.2012)+1e-7),A0=sum(number.2012*mtm.2012))
   assetslog2014 <- ddply(asset_mtms_2014,.(hhid),summarise,lnA0=log(sum(number.2014*mtm.2014)+1e-7),A0=sum(number.2014*mtm.2014))
   
-  
   if (food_analysis==T){
-    all_costs_considered <- ngr_normalizer()@categories_non_basic_wassets(include_food=T)
+    all_costs_considered <- ngr_normaliser()@expenditure_categories()
     food_costs_group <- subset(all_costs_considered,is.element(group,c("needs")))$shortname
     excess_costs_group <- subset(all_costs_considered,is.element(group,c("excess")))$shortname
     
-    x2010 <- plyr::rename(ll@get_total_expenditures(hh = c2010, ohs = o2010, include_education=inc_educexpense, include_houserent = inc_houserent), c("total_expenditure"="x"))
-    x2012 <- plyr::rename(ll@get_total_expenditures(hh = c2012, ohs = o2012, include_education=inc_educexpense, include_houserent = inc_houserent),c("total_expenditure"="x"))
-    x2014 <- plyr::rename(ll@get_total_expenditures(hh = c2014, ohs = o2014, include_education=inc_educexpense, include_houserent = inc_houserent),c("total_expenditure"="x"))
+    x2010 <- plyr::rename(ngr_normaliser()@get_total_expenditures(hh = c2010, ohs = o2010), c("total_expenditure"="x"))
+    x2012 <- plyr::rename(ngr_normaliser()@get_total_expenditures(hh = c2012, ohs = o2012),c("total_expenditure"="x"))
+    x2014 <- plyr::rename(ngr_normaliser()@get_total_expenditures(hh = c2014, ohs = o2014),c("total_expenditure"="x"))
     
-    
-    hsizex2010 <- merge(ll@get_hsize(o2010),x2010,by=c("hhid"))
-    hsizex2012 <- merge(ll@get_hsize(o2012),x2012,by=c("hhid"))
-    hsizex2014 <- merge(ll@get_hsize(o2014),x2014,by=c("hhid"))
+    hsizex2010 <- merge(ngr_normaliser()@get_hsize(o2010),x2010,by=c("hhid"))
+    hsizex2012 <- merge(ngr_normaliser()@get_hsize(o2012),x2012,by=c("hhid"))
+    hsizex2014 <- merge(ngr_normaliser()@get_hsize(o2014),x2014,by=c("hhid"))
     
     k2010_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2010, group_field = "shortname")
     k2012_tot <- get_split_costs(categs_a = food_costs_group,categs_b = excess_costs_group,dat = c2012, group_field = "shortname")
@@ -241,7 +234,7 @@ get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a201
     ka2014 <- ka2014[,setdiff(colnames(ka2014),c("consu","hsize"))]
     
   } else {
-    all_costs <- ngr_normalizer()@categories_non_basic_wassets(include_food=T)
+    all_costs <- ngr_normaliser()@expenditure_categories()
     #asset purchases and asset-bearing costs are not considered
     needs_and_excess_costs <- subset(all_costs, is.element(group,c("excess","needs")))
     ne2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2010"))
