@@ -247,8 +247,9 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   relevant_fields <-c("hhid","region","district","ea","is_urban","S","E")
   # 2010
   ohs2010 <- subset(o2010,!is.na(region))
-  hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), nl@get_hsize(ohs2010), by = c("hhid")))
-  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
+  hsizes2010 <- ddply(ohs2010[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
+  hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), hsizes2010, by = c("hhid")))
+  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
   #  perception_columns
   
   hswithchars2010 <- merge(hs2010,chosenchars2010,all.x = T)
@@ -257,15 +258,16 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   
   # 2012
   ohs2012 <- subset(o2012,!is.na(region))
-  hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), nl@get_hsize(ohs2012), by = c("hhid")))
-  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
+  hsizes2012 <- ddply(ohs2012[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
+  hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
+  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
   
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   
   #2014
   ohs2014 <- subset(o2014,!is.na(region))
   hs2014 <- unique(merge(unique(ohs2014[,relevant_fields]), nl@get_hsize(ohs2014), by = c("hhid")))
-  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
+  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
   hswithchars2014 <- merge(hs2014,chosenchars2014,all.x = T)
 
   
