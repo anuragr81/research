@@ -15,7 +15,7 @@ setClass("NigeriaNormaliser", representation(diary_columns_mapping="function", d
                                              ohs_income_info_columns_lsms="function",ohs_income_columns_mapping_lsms="function",
                                              market_data_columns_mapping="function",market_data_info="function",ohs_geodata_columns_mapping_lsms="function",
                                              unit_codes_2010="function", get_diary_assets_fields_mapping_lsms="function",items_codes="function",
-                                             ohs_food_quality_columns_mapping_lsms="function",expenditure_categories="function"
+                                             ohs_food_quality_columns_mapping_lsms="function",expenditure_categories="function",time_units_mapping="function"
 ))
 
 
@@ -516,10 +516,10 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s3aq5",name="worked_hh_pastweek1"))
       s= rbind(s,data.frame(iesname="s3aq6",name="worked_hh_pastweek2"))
       s= rbind(s,data.frame(iesname="s3aq7",name="worked_pastweek"))
-      s= rbind(s,data.frame(iesname="s3aq13a",name="occupation_primary"))
-      s= rbind(s,data.frame(iesname="s3aq13b",name="occupation_primary_code"))
-      s= rbind(s,data.frame(iesname="s3aq14",name="occupation_sector_primary"))
-      s= rbind(s,data.frame(iesname="s3aq14b",name="occupation_sector_primary_code"))
+      s= rbind(s,data.frame(iesname="s3aq13a",name="occupation_primary_text"))
+      s= rbind(s,data.frame(iesname="s3aq13b",name="occupation_primary"))
+      s= rbind(s,data.frame(iesname="s3aq14",name="occupation_sector_primary_text"))
+      s= rbind(s,data.frame(iesname="s3aq14b",name="occupation_sector_primary"))
       s= rbind(s,data.frame(iesname="s3aq15",name="employer_type_primary"))
       s= rbind(s,data.frame(iesname="s3aq18",name="hours_worked_week_primary"))
       s= rbind(s,data.frame(iesname="s3aq19",name="is_paid_primary"))
@@ -536,6 +536,8 @@ ngr_normaliser<-function() {
       return(s)
     }
     
+    
+    
     if (year == 2015){
       s = data.frame(iesname=NULL,name=NULL)
       s= rbind(s,data.frame(iesname="hhid",name="hhid"))
@@ -549,8 +551,8 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s3q5",name="worked_hh_pastweek1"))
       s= rbind(s,data.frame(iesname="s3q6",name="worked_hh_pastweek2"))
       s= rbind(s,data.frame(iesname="s3q7",name="worked_pastweek"))
-      s= rbind(s,data.frame(iesname="s3q13a",name="occupation_primary"))
-      s= rbind(s,data.frame(iesname="s3q13b",name="occupation_primary_code"))
+      s= rbind(s,data.frame(iesname="s3q13a",name="occupation_primary_text"))
+      s= rbind(s,data.frame(iesname="s3q13b",name="occupation_primary"))
       s= rbind(s,data.frame(iesname="s3q14",name="occupation_sector_primary"))
       s= rbind(s,data.frame(iesname="s3q15",name="employer_type_primary"))
       s= rbind(s,data.frame(iesname="s3q18",name="hours_worked_week_primary"))
@@ -567,6 +569,19 @@ ngr_normaliser<-function() {
     stop(paste("Year:",year,"not supported"))
   }
   
+  
+  time_units_mapping <- function(){
+    r <- NULL
+    r <- rbind(r,data.frame(unit=1,factor=8*250))
+    r <- rbind(r,data.frame(unit=2,factor=250))
+    r <- rbind(r,data.frame(unit=3,factor=52))
+    r <- rbind(r,data.frame(unit=4,factor=24))
+    r <- rbind(r,data.frame(unit=5,factor=12))
+    r <- rbind(r,data.frame(unit=6,factor=4))
+    r <- rbind(r,data.frame(unit=7,factor=2))
+    r <- rbind(r,data.frame(unit=8,factor=1))
+    return(r)
+  }
   
   
   #generated using:
@@ -1042,6 +1057,7 @@ ngr_normaliser<-function() {
              ohs_income_columns_mapping_lsms=ohs_income_columns_mapping_lsms,market_data_columns_mapping=market_data_columns_mapping,
              market_data_info=market_data_info, unit_codes_2010=unit_codes_2010,ohs_geodata_columns_mapping_lsms=ohs_geodata_columns_mapping_lsms,
              get_diary_assets_fields_mapping_lsms=get_diary_assets_fields_mapping_lsms,items_codes=items_codes,
-             ohs_food_quality_columns_mapping_lsms=ohs_food_quality_columns_mapping_lsms,expenditure_categories=expenditure_categories) )
+             ohs_food_quality_columns_mapping_lsms=ohs_food_quality_columns_mapping_lsms,expenditure_categories=expenditure_categories,
+             time_units_mapping=time_units_mapping) )
   
 }

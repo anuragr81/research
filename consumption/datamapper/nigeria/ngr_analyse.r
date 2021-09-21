@@ -171,6 +171,26 @@ mapping_hhids_2012_2015 <- function(o2015){
   return ( plyr::rename(subset(unique(o2015[,c("hhid","hhid2012")]), !is.na(hhid2012)) , c("hhid"="hhid2015")))
 }
 
+
+infer_occupation_ranks <- function(o2010,o2012,o2015) {
+  i2010_primary <- plyr::rename(subset(o2010,!is.na(occupation_primary) & !is.na(last_payment_primary)  )[,c("hhid","personid","occupation_primary","last_payment_primary","last_payment_primary_units")],c("occupation_primary"="occupation","last_payment_primary"="pay","last_payment_primary_units"="pay_units"))
+  i2010_secondary <- plyr::rename(subset(o2010,!is.na(occupation_secondary) & !is.na(last_payment_secondary) )[,c("hhid","personid","occupation_secondary","last_payment_secondary","last_payment_secondary_units")],c("occupation_secondary"="occupation","last_payment_secondary"="pay","last_payment_secondary_units"="pay_units"))
+  stop("Pending multiply with units and add per personid per hhid - after taking into account hours/weeks worked ")
+  #Only consider those worked_ext_pastweek
+  
+  computeYearValues(dat,
+                              unit_field,
+                              quantity_field,
+                              workyearweekhours_field,
+                              workyearmonthweeks_field,
+                              workyearmonths_field,
+                              output_field)
+  
+  tu <- time_units_mapping()
+  i2010 <- rbind(i2010_primary,i2010_secondary)
+  
+}
+
 init_data <- function(){
 
   o2010 <- nl@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ngrn=ngr_normaliser) ; 

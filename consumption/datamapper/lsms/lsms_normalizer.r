@@ -3416,7 +3416,7 @@ lsms_normalizer<-function() {
     }else{
       m<-NULL
     }
-    #if (pay i quartor)
+    #if (pay i quarter)
     #* if the pay is per quarter, then we infer the effective number of quarters from the number of 
     #* months worked per year (number_of_months/3) and multiply with the number of 
     #* months worked per year
