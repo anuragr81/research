@@ -171,24 +171,59 @@ mapping_hhids_2012_2015 <- function(o2015){
   return ( plyr::rename(subset(unique(o2015[,c("hhid","hhid2012")]), !is.na(hhid2012)) , c("hhid"="hhid2015")))
 }
 
+convert<- function(pay,hours_per_week,weeks_worked) { 
+  if (pay_units == 1 ) { 
+    return(hours_per_week * pay * weeks_worked)
+  }
+  
+  if (pay_units == 2 ){
+    #daily pay
+    # number of days worked per week - (hours_per_week/40) 
+    return(weeks_worked*(hours_per_week/40)*pay)
+  } 
+  if (pay_units == 3){
+    #weekly pay
+    return(weeks_worked*pay)
+  } 
+  if (pay_units == 4){
+    #fortnightly pay
+    return (pay/2*weeks_worked)
+  }
+  if (pay_units == 5){
+    #monthly pay
+    return (pay/4 * weeks_worked)
+  }
+  if (pay_units == 6){
+    #quarterly pay
+    #13 weeks in a quarter
+    return (pay/13 * weeks_worked)
+  }
+  if (pay_units == 7){
+    #half-yearly pay
+    #26 weeks in a half-year
+    return (pay/26 * weeks_worked)
+  }
+  if (pay_units == 8){
+    #yearly
+    return (pay)
+  }
+  stop("Unknown payment unit")
+}
 
-infer_occupation_ranks <- function(o2010,o2012,o2015) {
-  i2010_primary <- plyr::rename(subset(o2010,!is.na(occupation_primary) & !is.na(last_payment_primary)  )[,c("hhid","personid","occupation_primary","last_payment_primary","last_payment_primary_units")],c("occupation_primary"="occupation","last_payment_primary"="pay","last_payment_primary_units"="pay_units"))
-  i2010_secondary <- plyr::rename(subset(o2010,!is.na(occupation_secondary) & !is.na(last_payment_secondary) )[,c("hhid","personid","occupation_secondary","last_payment_secondary","last_payment_secondary_units")],c("occupation_secondary"="occupation","last_payment_secondary"="pay","last_payment_secondary_units"="pay_units"))
-  stop("Pending multiply with units and add per personid per hhid - after taking into account hours/weeks worked ")
-  #Only consider those worked_ext_pastweek
+infer_occupation_ranks <- function(ngrn,o2010) {
+  warning("Using only 2010 data - ignoring the worked-for-outside-hh field")
+  get_weeks=function(m,w){ if (is.na(w)) { return (m*4.3)} else {return(w)} }
+  ow2010 <- o2010
+  ow2010$weeks_worked_primary <- mapply(get_weeks,ow2010$yearmonths_worked_primary, ow2010$yearweeks_worked_primary)
+  ow2010$weeks_worked_secondary <- mapply(get_weeks,ow2010$yearmonths_worked_secondary, ow2010$yearweeks_worked_secondary)
   
-  computeYearValues(dat,
-                              unit_field,
-                              quantity_field,
-                              workyearweekhours_field,
-                              workyearmonthweeks_field,
-                              workyearmonths_field,
-                              output_field)
-  
-  tu <- time_units_mapping()
+  i2010_primary <- plyr::rename(subset(ow2010,!is.na(occupation_primary) & !is.na(last_payment_primary)  )[,c("hhid","personid","occupation_primary","last_payment_primary","last_payment_primary_units","weeks_worked_primary","hours_worked_week_primary")],c("occupation_primary"="occupation","last_payment_primary"="pay","last_payment_primary_units"="pay_units","weeks_worked_primary"="weeks_worked",'hours_worked_week_primary'='hours_per_week'))
+  i2010_secondary <- plyr::rename(subset(ow2010,!is.na(occupation_secondary) & !is.na(last_payment_secondary) )[,c("hhid","personid","occupation_secondary","last_payment_secondary","last_payment_secondary_units","weeks_worked_secondary",'hoursperweek_secondary_work')],c("occupation_secondary"="occupation","last_payment_secondary"="pay","last_payment_secondary_units"="pay_units","weeks_worked_secondary"="weeks_worked",'hoursperweek_secondary_work'='hours_per_week'))
   i2010 <- rbind(i2010_primary,i2010_secondary)
+  #i2010 <- merge(i2010, plyr::rename(ngrn()@time_units_mapping(),c("unit"="pay_units")),all.x=T)
+  i2010 <- (subset(i2010,!is.na(hours_per_week) & !is.na(pay_units)))
   
+  return(i2010)
 }
 
 init_data <- function(){

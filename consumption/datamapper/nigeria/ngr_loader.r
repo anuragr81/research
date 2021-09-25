@@ -544,7 +544,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohs$age          <- 2010 - as.integer(as.character(ohs$YOB))
       
       
-      
+    
       #household_status must be determined by 1. rank based on occupation_rank 2. occupation_primary 3. highest_educ 4. qualification 5. age (pay is not available for the most)
       #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
       
