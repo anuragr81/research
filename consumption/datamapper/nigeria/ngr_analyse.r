@@ -171,7 +171,7 @@ mapping_hhids_2012_2015 <- function(o2015){
   return ( plyr::rename(subset(unique(o2015[,c("hhid","hhid2012")]), !is.na(hhid2012)) , c("hhid"="hhid2015")))
 }
 
-convert<- function(pay,hours_per_week,weeks_worked) { 
+compute_yearly_pay<- function(pay,pay_units, hours_per_week,weeks_worked) { 
   if (pay_units == 1 ) { 
     return(hours_per_week * pay * weeks_worked)
   }
@@ -210,7 +210,7 @@ convert<- function(pay,hours_per_week,weeks_worked) {
   stop("Unknown payment unit")
 }
 
-infer_occupation_ranks <- function(ngrn,o2010) {
+infer_occupation_ranks <- function(o2010 , ignore_top) {
   warning("Using only 2010 data - ignoring the worked-for-outside-hh field")
   get_weeks=function(m,w){ if (is.na(w)) { return (m*4.3)} else {return(w)} }
   ow2010 <- o2010
@@ -220,10 +220,17 @@ infer_occupation_ranks <- function(ngrn,o2010) {
   i2010_primary <- plyr::rename(subset(ow2010,!is.na(occupation_primary) & !is.na(last_payment_primary)  )[,c("hhid","personid","occupation_primary","last_payment_primary","last_payment_primary_units","weeks_worked_primary","hours_worked_week_primary")],c("occupation_primary"="occupation","last_payment_primary"="pay","last_payment_primary_units"="pay_units","weeks_worked_primary"="weeks_worked",'hours_worked_week_primary'='hours_per_week'))
   i2010_secondary <- plyr::rename(subset(ow2010,!is.na(occupation_secondary) & !is.na(last_payment_secondary) )[,c("hhid","personid","occupation_secondary","last_payment_secondary","last_payment_secondary_units","weeks_worked_secondary",'hoursperweek_secondary_work')],c("occupation_secondary"="occupation","last_payment_secondary"="pay","last_payment_secondary_units"="pay_units","weeks_worked_secondary"="weeks_worked",'hoursperweek_secondary_work'='hours_per_week'))
   i2010 <- rbind(i2010_primary,i2010_secondary)
-  #i2010 <- merge(i2010, plyr::rename(ngrn()@time_units_mapping(),c("unit"="pay_units")),all.x=T)
-  i2010 <- (subset(i2010,!is.na(hours_per_week) & !is.na(pay_units)))
   
-  return(i2010)
+  i2010 <- (subset(i2010,!is.na(hours_per_week) & !is.na(pay_units)))
+  i2010$yearly_pay <- mapply(compute_yearly_pay,i2010$pay,i2010$pay_units,i2010$hours_per_week,i2010$weeks_worked)
+  ignored <- subset(i2010, yearly_pay>=quantile(i2010$yearly_pay,1-ignore_top))
+  print(paste("Ignoring ", length(unique(ignored$hhid)) ,"/",length(unique(i2010$hhid)), "households"))
+  i2010 <- subset(i2010, yearly_pay<quantile(i2010$yearly_pay,1-ignore_top))
+  occup <- ddply(i2010,.(occupation),summarise,l_mean_ypay = log(mean(yearly_pay)),l_median_ypay = log(median(yearly_pay)))
+  occup <- merge(plyr::rename(read.csv('../lsms/nigeria/occupation_codes.csv')[,c("occupation_code","occupation_name")],c("occupation_code"="occupation")),occup,by="occupation")
+  occup <- (occup[order(occup$l_median_ypay),])
+  occup$occupation_rank <- as.integer(o$l_median_ypay<=11.9) +  2*as.integer(o$l_median_ypay>11.9 & o$l_median_ypay<12.61154)  + 3*as.integer(o$l_median_ypay>=12.61154);
+  return(occup)
 }
 
 init_data <- function(){
