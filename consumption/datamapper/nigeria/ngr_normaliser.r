@@ -787,6 +787,27 @@ ngr_normaliser<-function() {
   
   occupation_ranks <- function(){
     r <- NULL
+    
+    r <- rbind(r,data.frame(occupation='7111', occupation_rank='1' ,occupation_name='miners & quarry workers'))
+    r <- rbind(r,data.frame(occupation='7133', occupation_rank='1' ,occupation_name='insulators'))
+    r <- rbind(r,data.frame(occupation='7216', occupation_rank='1' ,occupation_name='under-water workers'))
+    r <- rbind(r,data.frame(occupation='7241', occupation_rank='1' ,occupation_name='electrical mechanics and fitters'))
+    r <- rbind(r,data.frame(occupation='7311', occupation_rank='1' ,occupation_name='precision instrument makers repairs'))
+    r <- rbind(r,data.frame(occupation='7312', occupation_rank='1' ,occupation_name='acoustical musical instrument'))
+    r <- rbind(r,data.frame(occupation='7324', occupation_rank='1' ,occupation_name='glass and ceramic painters and decorators'))
+    r <- rbind(r,data.frame(occupation='7341', occupation_rank='1' ,occupation_name='compositors and type setters'))
+    r <- rbind(r,data.frame(occupation='7344', occupation_rank='1' ,occupation_name='bookbinders and related workers'))
+    r <- rbind(r,data.frame(occupation='7345', occupation_rank='1' ,occupation_name='silk screen, block and textile printers'))
+    r <- rbind(r,data.frame(occupation='7436', occupation_rank='1' ,occupation_name='sewers, embroiderers and related workers'))
+    r <- rbind(r,data.frame(occupation='8122', occupation_rank='1' ,occupation_name='metal melters, casters and rolling-mill operators'))
+    r <- rbind(r,data.frame(occupation='8132', occupation_rank='1' ,occupation_name='other glass & ceramic plant operators'))
+    r <- rbind(r,data.frame(occupation='8223', occupation_rank='1' ,occupation_name='metal finishers, plasters and coaters'))
+    r <- rbind(r,data.frame(occupation='8269', occupation_rank='1' ,occupation_name='other textile product machine operators'))
+    r <- rbind(r,data.frame(occupation='8312', occupation_rank='1' ,occupation_name='railway barkers, signalers & shutters'))
+    r <- rbind(r,data.frame(occupation='8334', occupation_rank='1' ,occupation_name='lifting -truck operators'))
+    r <- rbind(r,data.frame(occupation='9120', occupation_rank='1' ,occupation_name='shoe cleaning & other street services'))
+    
+    
     r <- rbind(r,data.frame(occupation='3461', occupation_rank='1' ,occupation_name='decorators & commercial designers'))
     r <- rbind(r,data.frame(occupation='7321', occupation_rank='1' ,occupation_name='potters and related clay and abrasive formers'))
     r <- rbind(r,data.frame(occupation='8251', occupation_rank='1' ,occupation_name='printing machine operators'))
@@ -914,6 +935,28 @@ ngr_normaliser<-function() {
     r <- rbind(r,data.frame(occupation='7243', occupation_rank='1' ,occupation_name='radio and television service'))
     r <- rbind(r,data.frame(occupation='7231', occupation_rank='1' ,occupation_name='motor vehicle mechanics and filters'))
     r <- rbind(r,data.frame(occupation='7437', occupation_rank='1' ,occupation_name='upholsterers and related workers'))
+    r <- rbind(r,data.frame(occupation='812', occupation_rank='1' ,occupation_name='cement and other mineral processing machine operators'))
+    r <- rbind(r,data.frame(occupation='3151', occupation_rank='1' ,occupation_name='building & fire inspectors'))
+    r <- rbind(r,data.frame(occupation='3228', occupation_rank='1' ,occupation_name='pharmaceutical assistants'))
+    r <- rbind(r,data.frame(occupation='8143', occupation_rank='1' ,occupation_name='paper making plant operators'))
+    r <- rbind(r,data.frame(occupation='8159', occupation_rank='1' ,occupation_name='other chemical-processing plant operators'))
+    r <- rbind(r,data.frame(occupation='8282', occupation_rank='1' ,occupation_name='electrical machinery assemblers'))
+    r <- rbind(r,data.frame(occupation='9161', occupation_rank='1' ,occupation_name='garbage collectors'))
+    
+    
+    r <- rbind(r,data.frame(occupation='3132', occupation_rank='2' ,occupation_name='broadcasting and telecommunications-equipment controllers'))
+    r <- rbind(r,data.frame(occupation='3141', occupation_rank='2' ,occupation_name='ship engineers'))
+    r <- rbind(r,data.frame(occupation='3145', occupation_rank='2' ,occupation_name='air traffic safety technicians'))
+    r <- rbind(r,data.frame(occupation='3223', occupation_rank='2' ,occupation_name='dieticians and nutritionists'))
+    r <- rbind(r,data.frame(occupation='3224', occupation_rank='2' ,occupation_name='optometrists & opticians'))
+    r <- rbind(r,data.frame(occupation='3226', occupation_rank='2' ,occupation_name='physiotherapists and related workers'))
+    r <- rbind(r,data.frame(occupation='3320', occupation_rank='2' ,occupation_name='pre-primary education teaching associate professionals'))
+    r <- rbind(r,data.frame(occupation='3412', occupation_rank='2' ,occupation_name='insurance representatives'))
+    r <- rbind(r,data.frame(occupation='3418', occupation_rank='2' ,occupation_name='auctioneers'))
+    r <- rbind(r,data.frame(occupation='3432', occupation_rank='3' ,occupation_name='legal & related business associate professionals'))
+    r <- rbind(r,data.frame(occupation='3470', occupation_rank='2' ,occupation_name='non-ordained religion associate professionals'))
+    r <- rbind(r,data.frame(occupation='4144', occupation_rank='2' ,occupation_name='scribes'))
+    r <- rbind(r,data.frame(occupation='5122', occupation_rank='2' ,occupation_name='waiters and banenders'))
     r <- rbind(r,data.frame(occupation='2133', occupation_rank='2' ,occupation_name='computer programmers'))
     r <- rbind(r,data.frame(occupation='6112', occupation_rank='2' ,occupation_name='tree shrub crop growers'))
     r <- rbind(r,data.frame(occupation='3221', occupation_rank='2' ,occupation_name='medical assistants'))
@@ -979,6 +1022,8 @@ ngr_normaliser<-function() {
     r <- rbind(r,data.frame(occupation='2141', occupation_rank='2' ,occupation_name='architects, town and traffic planners'))
     r <- rbind(r,data.frame(occupation='1120', occupation_rank='2' ,occupation_name='senior government officials'))
     r <- rbind(r,data.frame(occupation='1226', occupation_rank='2' ,occupation_name='supply and distribution managers'))
+    r <- rbind(r,data.frame(occupation='2147', occupation_rank='2' ,occupation_name='mining engineers, metallurgists and related professionals'))
+    
     r <- rbind(r,data.frame(occupation='2213', occupation_rank='3' ,occupation_name='agronomists and related professionals'))
     r <- rbind(r,data.frame(occupation='9331', occupation_rank='3' ,occupation_name='freight handlers'))
     r <- rbind(r,data.frame(occupation='7245', occupation_rank='3' ,occupation_name='electrical line installers repairs & cable jointers'))
@@ -1020,6 +1065,18 @@ ngr_normaliser<-function() {
     r <- rbind(r,data.frame(occupation='2221', occupation_rank='3' ,occupation_name='medical doctors'))
     r <- rbind(r,data.frame(occupation='3112', occupation_rank='3' ,occupation_name='civil engineering technicians'))
     r <- rbind(r,data.frame(occupation='5111', occupation_rank='3' ,occupation_name='flight attendants & travel stewards'))
+    r <- rbind(r,data.frame(occupation='1110', occupation_rank='3' ,occupation_name='legislators'))
+    r <- rbind(r,data.frame(occupation='1142', occupation_rank='3' ,occupation_name='senior official of employers, workers and other economic int'))
+    r <- rbind(r,data.frame(occupation='1317', occupation_rank='3' ,occupation_name='general managers in business services firms'))
+    r <- rbind(r,data.frame(occupation='2211', occupation_rank='3' ,occupation_name='biologists, botanists, zoologists & related professionals'))
+    r <- rbind(r,data.frame(occupation='2351', occupation_rank='3' ,occupation_name='education methods specialists'))
+    r <- rbind(r,data.frame(occupation='2441', occupation_rank='3' ,occupation_name='economists'))
+    r <- rbind(r,data.frame(occupation='2453', occupation_rank='3' ,occupation_name='composers, musicians & singers'))
+    r <- rbind(r,data.frame(occupation='3122', occupation_rank='3' ,occupation_name='computer equipment controllers'))
+    r <- rbind(r,data.frame(occupation='2422', occupation_rank='3' ,occupation_name='judges'))
+    
+    
+    
     return(r)
   }
   
