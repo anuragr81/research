@@ -1704,39 +1704,46 @@ test <- function(){
     print((G2*(M2-x)**alpha-G1*(M1-x)**alpha))
     print((M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha))
   }
-  if (T){
+  if (F){
     x <- seq(0,100,1); alpha <- .5; G1=1; G2=.9;
     A = 100; y1 = 100; y2=200;
+    W0 =.2;
     
     M1=A + y1 + y1
     M2=A + y1 + y2
-    # Checking L2
+    
+    # Checking W1
     x<- seq(0,y1,.1);
     delta = 0
     A_delta = 0
+    W0_adjustment = .5
     
     
     plot(0,0,xlim = c(0,y1),ylim=c(-5,5));
-    lines(x,(M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l',lty=1);
+    lines(x,W0*(G2*(M2)**alpha-G1*(M1)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha) + (M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l',lty=1);
     y1 <- y1 + delta
     
-    G1_adjustment = 1
-    G2_adjustment = 1.01
     
-    #y2 <- y2 + delta
-    A <- A+ A_delta
+    G1_adjustment = 1
+    G2_adjustment = 1 #1.01
+    
+    #y1 <- y1 + delta
+    y2 <- y2 + delta
+    #A <- A+ A_delta
     M1=A + y1 + y1
     M2=A + y1 + y2
     G1 = G1_adjustment*G1
     G2 = G2_adjustment*G2
+    W0 = W0*W0_adjustment
     
-    lines(x,(M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l',lty=2);
+    lines(x,W0*(G2*(M2)**alpha-G1*(M1)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha) + (M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l',lty=2);
     legend(y1/2, -3, legend=c("1","2"), lty=c(1,2), cex=0.7)
   }
   
-  if (F){
+  if (T){
     x <- seq(0,100,1); alpha <- .5; G1=1; G2=.9;
     A = 100; y1 = 100; y2=200;
+    L0 = .2;
     
     M1=A + y1 + y1
     M2=A + y1 + y2
@@ -1746,19 +1753,19 @@ test <- function(){
     A_delta = 0
     G1_adjustment = 1
     G2_adjustment = 1
-    
+    L0_adjustment = 2
     
     plot(0,0,xlim = c(0,y1),ylim=c(-5,5));
-    lines(x,(M2**alpha-(M2-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l',lty=1);
-    #y1 <- y1 + delta
-    y2 <- y2 + delta
+    lines(x,L0*(G2*(M2)**alpha-G1*(M1)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha) +  (M2**alpha-(M2-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l',lty=1);
+    y1 <- y1 + delta
+    #y2 <- y2 + delta
     A <- A+ A_delta
     G1 = G1_adjustment*G1
     G2 = G2_adjustment*G2
-    
+    L0 = L0*L0_adjustment
     M1=A + y1 + y1
     M2=A + y1 + y2
-    lines(x,(M2**alpha-(M2-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l',lty=2);
+    lines(x,L0*(G2*(M2)**alpha-G1*(M1)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha) +  (M2**alpha-(M2-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha),type='l',lty=2);
     legend(y1/2, -3, legend=c("1","2"), lty=c(1,2), cex=0.7)
   }
   
