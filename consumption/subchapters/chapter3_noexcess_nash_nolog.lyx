@@ -2741,39 +2741,37 @@ Fixed
 
 \begin_layout Standard
 Without loss of generality, we look at functions 
-\begin_inset Formula $L,W$
+\begin_inset Formula $W$
 \end_inset
 
  which pass through the origin i.e.
  for all short-term functions 
-\begin_inset Formula $L(0)=W(0)=0$
+\begin_inset Formula $W(0)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $L(0)=1$
 \end_inset
 
 .
- With no status consumption, the consumer would neither move up nor down.
- This means that the consumers would both can never choose 
+ This class of functions 
+\begin_inset Formula $W$
+\end_inset
+
+ means that with no status consumption, the consumer would not move up.
+ Similalrly, 
+\begin_inset Formula $L(0)=1$
+\end_inset
+
+ means that the consumer is sure to lose her position if she does not have
+ status consumption.
+ This also means that the consumers would both never choose 
 \begin_inset Formula $\nu_{1}=\nu_{2}=0$
 \end_inset
 
  since that would break the long-term constraint (accumulation of disposable
- incomes is not sustainable).
- In other words, 
-\begin_inset Formula $L(\nu),W(\nu)$
-\end_inset
-
- for 
-\begin_inset Formula $L(0)=W(0)=0$
-\end_inset
-
- must be so that 
-\begin_inset Formula $\nu_{1}\ne0$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{2}\ne0$
-\end_inset
-
-.
+ incomes alone is not sustainable).
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -2796,33 +2794,190 @@ If
 \end_inset
 
  form.
- Let's consider a logistic form 
-\begin_inset Formula $W(\nu)=\frac{1}{1+e^{-(\nu-\bar{\nu})/s_{1}}}$
+ To test this, we consider a simple form 
+\begin_inset Formula $W(\nu)=1-e^{-\omega\nu}$
 \end_inset
 
- where 
-\begin_inset Formula $\bar{\nu},s_{1}$
+ and 
+\begin_inset Formula $L(\nu)=e^{-\lambda\nu}$
 \end_inset
 
- are constants.
- This itself is asymptotic with respect to 
-\begin_inset Formula $W(0)=\frac{1}{2}$
+.
+ Here, 
+\begin_inset Formula $W(0)=0$
 \end_inset
 
- (and 
-\begin_inset Formula $L(0)=0$
+ and 
+\begin_inset Formula $L(0)=1$
 \end_inset
 
- ).
- The assumption that initial conditions are the same would mean that 
-\begin_inset Formula $\bar{\nu}$
+.
+ The assumption that initial conditions are the same corresponds to functions
+ differing only in 
+\begin_inset Formula $\omega$
 \end_inset
 
- (the location of R'splogis function) is the same - but only 
-\begin_inset Formula $s_{1}$
+ and 
+\begin_inset Formula $\lambda$
 \end_inset
 
- changes.
+.
+ 
+\end_layout
+
+\begin_layout Standard
+With 
+\begin_inset Formula $W(0)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $W(\nu)=1-e^{-\omega\nu}$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:solution_1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+e^{-\omega\nu_{1}} & =1-\frac{\Gamma_{1}(M_{1}{}^{\alpha}-(M_{1}-\nu_{1})^{\alpha})}{\Gamma_{2}(M_{2}-\nu_{1})^{\alpha}-\Gamma_{1}(M_{1}-\nu_{1})^{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+e^{-\omega\nu_{1}}=1-\frac{\Gamma_{1}(1-(1-\nu_{1}/M_{1})^{\alpha})}{\Gamma_{2}(M_{2}/M_{1}-\nu_{1}/M_{1})^{\alpha}-\Gamma_{1}(1-\nu_{1}/M_{1})^{\alpha}}\\
+=1-\frac{\Gamma_{1}(1-(1-\nu_{1}/M_{1})^{\alpha})}{\Gamma_{2}M_{2}/M_{1}(1-\nu_{1}/M_{2})^{\alpha}-\Gamma_{1}(1-\nu_{1}/M_{1})^{\alpha}}\\
+=\frac{\Gamma_{2}M_{2}/M_{1}(1-\nu_{1}/M_{2})^{\alpha}-\Gamma_{1}}{\Gamma_{2}M_{2}/M_{1}(1-\nu_{1}/M_{2})^{\alpha}-\Gamma_{1}(1-\nu_{1}/M_{1})^{\alpha}}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or,
+\begin_inset Formula 
+\begin{gather*}
+e^{\omega\nu_{1}}=\frac{\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\nu_{1}/M_{1})^{\alpha}}{\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\nu_{1}/M_{2})^{-\alpha}}\\
+\Rightarrow(\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\nu_{1}/M_{2})^{-\alpha})e^{\omega\nu_{1}}=\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\nu_{1}/M_{1})^{\alpha}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $\alpha<1$
+\end_inset
+
+ 
+\begin_inset Formula $\nu_{1}<y_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{1}<<M_{1}$
+\end_inset
+
+ (assets are high relative to 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+), we use the linear approximations 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $e^{x}\approx1+x$
+\end_inset
+
+ and 
+\begin_inset Formula $(1-x)^{\alpha}\approx1-x\alpha$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ to write,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+(\Gamma_{2}M_{2}/M_{1}-\frac{\Gamma_{1}}{1-\alpha\nu_{1}/M_{2}})(1+\omega\nu_{1})=\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\alpha\nu_{1}/M_{1})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+(\Gamma_{2}M_{2}/M_{1}(1-\alpha\nu_{1}/M_{2})-\Gamma_{1})(1+\omega\nu_{1})=\Gamma_{2}M_{2}/M_{1}(1-\alpha\nu_{1}/M_{2})-\Gamma_{1}(1-\alpha\nu_{1}/M_{1})(1-\alpha\nu_{1}/M_{2})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can solve for 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ as .
+ For large assets, we would see that.
+ choosing 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ would depend on 
+\begin_inset Formula $\omega$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\omega$
+\end_inset
+
+ does not change, then it would not be possible to maintain the long-term
+ equilibrium.
+ For small 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+, we can think of equivalent 
+\begin_inset Formula $\omega$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -2913,6 +3068,43 @@ More detailed outcomes could be explored in the above set up if we assume
 \end_inset
 
  is iterated many times over.
+\end_layout
+
+\begin_layout Standard
+3.
+ The distinction between waste and upward mobility does seem to be obfuscated
+ in this model.
+ That's because the difference is not always clear in the real-world (because
+ consumers consider something a waste only after reconciling their past
+ expenditure).
+ The extreme income differences have the role of segregating as well - because
+ consumers don't spend on anything (or are influenced by things) that would
+ improve the lives of the band above them.
+ There is a practical utility from the status consumption in the real world
+ - while we don't distinguish between waste and means for upward mobility,
+ we argue that the status consumption is necessitated by this struggle and
+ is wasteful only in the wider context - not in the narrow status comparison
+ reference where it is necessitated.
+ Faced with income inequalities, the consumers must weigh the local hierarchy
+ (
+\begin_inset Formula $\Gamma_{k}$
+\end_inset
+
+) against the status advantages.
+ Our interpretation for status consumption consider both 
+\begin_inset Formula $\Gamma_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $W,L$
+\end_inset
+
+ .
+ Increases in inequalities might increase 
+\begin_inset Formula $\Gamma_{k}$
+\end_inset
+
+ in a way that makes more inequalities acceptable (and vice versa).
 \end_layout
 
 \begin_layout Section*
