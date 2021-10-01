@@ -2822,7 +2822,6 @@ If
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
@@ -2875,8 +2874,7 @@ e^{-\omega\nu_{1}}=1-\frac{\Gamma_{1}(1-(1-\nu_{1}/M_{1})^{\alpha})}{\Gamma_{2}(
 or,
 \begin_inset Formula 
 \begin{gather*}
-e^{\omega\nu_{1}}=\frac{\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\nu_{1}/M_{1})^{\alpha}}{\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\nu_{1}/M_{2})^{-\alpha}}\\
-\Rightarrow(\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\nu_{1}/M_{2})^{-\alpha})e^{\omega\nu_{1}}=\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\nu_{1}/M_{1})^{\alpha}
+e^{\omega\nu_{1}}=\frac{\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\nu_{1}/M_{1})^{\alpha}(1-\nu_{1}/M_{2})^{-\alpha}}{\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\nu_{1}/M_{2})^{-\alpha}}
 \end{gather*}
 
 \end_inset
@@ -2923,20 +2921,24 @@ status open
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{gather*}
-(\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}+\Gamma_{1}\alpha\nu_{1}/M_{2})(1+\omega\nu_{1})=\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\alpha\nu_{1}/M_{1})
-\end{gather*}
+\begin{alignat*}{1}
+1+\omega\nu_{1} & =\frac{\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\alpha\nu_{1}/M_{1})(1+\alpha\nu_{1}/M_{2})}{\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1+\alpha\nu_{1}/M_{2})}
+\end{alignat*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+or,
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{gather*}
-(\Gamma_{2}M_{2}/M_{1}-\Gamma_{1})(1+\omega\nu_{1})+(\Gamma_{1}\alpha\nu_{1}/M_{2})(1+\omega\nu_{1})=\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}+\Gamma_{1}\alpha\nu_{1}/M_{1}
-\end{gather*}
+\begin{alignat*}{1}
+(1+\omega\nu_{1})((\Gamma_{2}M_{2}/M_{1}-\Gamma_{1})-\Gamma_{1}\alpha\nu_{1}/M_{2}) & =\Gamma_{2}M_{2}/M_{1}-(\Gamma_{1}-\alpha\nu_{1}\Gamma_{1}/M_{1})(1+\alpha\nu_{1}/M_{2})
+\end{alignat*}
 
 \end_inset
 
@@ -2944,53 +2946,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-(\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}+\omega\nu_{1}(\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}))+\Gamma_{1}\alpha\nu_{1}/M_{2}+\omega\nu_{1}\Gamma_{1}\alpha\nu_{1}/M_{2}=\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}+\Gamma_{1}\alpha\nu_{1}/M_{1}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\nu_{1}(\nu_{1}\omega\Gamma_{1}\alpha/M_{2}+\{\omega(\Gamma_{2}M_{2}/M_{1}-\Gamma_{1})+\Gamma_{1}\alpha/M_{2}-\Gamma_{1}\alpha/M_{1}\})=0
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The solution is either 
-\begin_inset Formula $\nu_{1}=0$
-\end_inset
-
- or 
-\begin_inset Formula $\nu_{1}=\frac{\omega(M_{1}M_{2}\Gamma_{1}-\Gamma_{2}M_{2}^{2})-\Gamma_{1}\alpha M_{1}+\Gamma_{1}\alpha M_{2}}{\omega\Gamma_{1}\alpha M_{1}}=\frac{\omega(M_{2}/\alpha-\Gamma_{2}M_{2}^{2}/(\alpha\Gamma_{1}))-1+M_{2}/M_{1}}{\omega}=\frac{(M_{2}/\alpha-\Gamma_{2}M_{2}^{2}/(\alpha\Gamma_{1}))+(M_{2}/M_{1}-1)/\omega}{\omega}=\frac{M_{2}}{\alpha}(1-\frac{\Gamma_{2}}{\Gamma_{1}}M_{2})+\frac{1}{\omega}(1/M_{1}-1/M_{2})$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $\nu_{1}=0$
-\end_inset
-
- is not sustainable in the long-term, the consumer must choose:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\nu_{1}=\frac{M_{2}}{\alpha}(1-\frac{\Gamma_{2}}{\Gamma_{1}}M_{2})+\frac{1}{\omega}(1/M_{1}-1/M_{2})
-\end{gather*}
-
-\end_inset
-
-
+Solving the above quadratic equation,
 \end_layout
 
 \begin_layout Standard
@@ -3004,27 +2960,8 @@ the assets would grow as follows in the short-term equilibrium:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-E(A)=\frac{\omega\nu_{1}}{1+\omega\nu_{1}}(M_{2}-\nu_{1})+(\frac{1}{1+\omega\nu_{1}})(M_{1}-\nu_{1})= & \frac{1}{1+\omega\nu_{1}}(\nu_{1}(\omega M_{2}-1)-\nu_{1}^{2}+M_{1})
+E(A)=\frac{\omega\nu_{1}}{1+\omega\nu_{1}}(M_{2}-\nu_{1})+(\frac{1}{1+\omega\nu_{1}})(M_{1}-\nu_{1})= & \frac{\nu_{1}(\omega M_{2}-1)-\nu_{1}^{2}+M_{1}}{1+\omega\nu_{1}}
 \end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Using 
-\begin_inset Formula $\omega\nu_{1}=\frac{\omega M_{2}}{\alpha}(1-\frac{\Gamma_{2}}{\Gamma_{1}}M_{2})+(1/M_{1}-1/M_{2})$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-(\Gamma_{2}M_{2}/M_{1}(1-\alpha\nu_{1}/M_{2})-\Gamma_{1})(1+\omega\nu_{1})=\Gamma_{2}M_{2}/M_{1}(1-\alpha\nu_{1}/M_{2})-\Gamma_{1}(1-\alpha\nu_{1}/M_{1})(1-\alpha\nu_{1}/M_{2})
-\end{gather*}
 
 \end_inset
 
@@ -3062,6 +2999,10 @@ We can solve for
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Exact simulations can be run to confirm the results.
 \end_layout
 
 \begin_layout Section
