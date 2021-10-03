@@ -1770,3 +1770,25 @@ test <- function(){
   }
   
 }
+
+
+W_expr <- function(alpha,G1,G2,y1,y2,A,x,W0){
+  M1=A + y1 + y1
+  M2=A + y1 + y2
+  return(W0*(G2*(M2)**alpha-G1*(M1)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha) + (M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha))
+}
+W_p <- function(omega,x){
+  return(1-exp(-omega*x))
+}
+evolve_long_term <- function(){
+  alpha <- .5; G1=1; G2=1;
+  omega <- .2
+  A = 0; y1 = 100; y2=120;
+  W0 =1;
+  if (F){
+    x <- seq(0,100,1); 
+    plot(0,0,xlim = c(0,y1),ylim=c(-5,5));
+    lines(x,sapply(x,function(y){W_expr(W0 = W_p(omega=omega,x=0), alpha=alpha,G1 = G1,G2=G2,y1 = y1, y2=y2,A=A,x=y)}),type='l',lty=1)
+  }
+  return(optimise(function(y){W_p(omega=omega,x=y)-W_expr(W0 = W_p(omega=omega,x=0), alpha=alpha,G1 = G1,G2=G2,y1 = y1, y2=y2,A=A,x=y)},c(0,y1)))
+}
