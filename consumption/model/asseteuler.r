@@ -1775,11 +1775,27 @@ test <- function(){
 W_expr <- function(alpha,G1,G2,y1,y2,A,x,x0,W0){
   M1=A + y1 + y1
   M2=A + y1 + y2
-  D = G2*(M2-x)**alpha- G1*(M1-x)**alpha
+  D = G2*((M2-x)**alpha)- G1*((M1-x)**alpha)
   N1 = W0*(G2*(M2**alpha)-G1*(M1**alpha))
   N2 = G1*((M1-x0)**alpha-(M1-x)**alpha)
   return((N1+N2)/D)
 }
+
+W_deriv_expr <- function(alpha,G1,G2,y1,y2,A,x,x0,W0){
+  M1=A + y1 + y1
+  M2=A + y1 + y2
+  
+  B = W0 *(G2*(M2**alpha) - G1*(M1**alpha))
+  D = G2*((M2-x)**alpha)- G1*((M1-x)**alpha)
+  N1 = alpha * G1 * G2 *(M2-M1)*((M1-x)**(alpha-1))*((M2-x)**(alpha-1))
+  N2 = alpha * B* (  G2 *( (M2-x)**(alpha-1))  - G1 *( (M1-x)**(alpha-1))  )
+  N3 = alpha * G1* G2 * ((M1-x0)**(alpha)) * ((M2-x)**(alpha-1))
+  N4 = -alpha * G1*G1 * ((M1-x0)**(alpha)) * ((M1-x)**(alpha-1))
+  
+  return((N1+N2+N3+N4)/(D**2))
+  
+}
+
 
 W_p <- function(omega,x){
   return(1-exp(-omega*x))
@@ -1807,12 +1823,24 @@ d_expected_nolog_util <-function(y,y1,y2,G1,G2,alpha,omega,A_0){
   second_term <-  W_p(omega=omega,x=y) *  alpha * (G1*(M1-y)**(alpha-1) - G2*(M2-y)**(alpha-1))
   third_term <- -alpha * G1*(M1-y)**(alpha-1)
   return (first_term+second_term+third_term)
-                                        
+}
+
+calculate_df <-function(alpha,G1,G2,y1,y2,x,A,x0,W0){
+  dWx<- W_deriv_expr(alpha = alpha,G1 = G1,G2 = G2,y1 = y1,y2 = y2,A = A,x = x,x0 = x0,W0 = W0)
+  Wx <- W_expr(alpha = alpha,G1 = G1,G2 = G2,y1 = y1,y2 = y2,A = A,x = x,x0 = x0,W0 = W0)
+
+  D = G2*((M2-x)**alpha)- G1*((M1-x)**alpha)
+  df = D*dWx - alpha * G1 * ((M1-x)**(alpha-1)) + alpha * Wx* (G1*((M1-x)**(alpha-1)) - G2 * ((M2-x)**(alpha-1)))
+  
+  wpexpr <- (Wx * alpha * (G2*((M2-x)**(alpha-1))-G1*((M1-x)**(alpha-1)))
+                 + (alpha*G1*((M1-x)**(alpha-1))))/D
+  #plot(y,sapply(y,function(x){W_expr(alpha = alpha,G1 = G1,G2 = G2,y1 = y1,y2 = y2,A = A,x = x,x0 = x0,W0 = W0)})/100,type='l')
+  return(df)
 }
 evolve_long_term <- function(){
   alpha <- .5; G1=1; G2=1;
   omega <- .2
-  A = 0; y1 = 100; y2=120;
+  A = 0; y1 = 300; y2=420;
 
   if (F){
     x <- seq(0,100,1); 
@@ -1829,6 +1857,7 @@ evolve_long_term <- function(){
   #lines(r,sapply(r,function(y){W_expr(W0 = W_p(omega=omega,x=0), alpha=alpha,G1 = G1,G2=G2,y1 = y1, y2=y2,A=A,x=y)}),type='l')
   #lines(r,sapply(r,function(y){W_p(omega=omega,x=y)}),type='l')
   print(d_expected_nolog_util(A_0=A,omega=omega,y=result$minimum,y1=y1,y2=y2,G1=G1,G2=G2,alpha=alpha))
+  k <- calculate_df(alpha = alpha,G1 = G1,G2 = G2,y1 = y1,y2 = y2,x = result$minimum,A = A,x0 = 0,W0 = W_p(omega = omega,x = 0))
   return(result)
   #print("DONE")
   

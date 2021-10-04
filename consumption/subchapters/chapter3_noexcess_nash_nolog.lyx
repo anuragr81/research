@@ -5439,6 +5439,99 @@ We can check that for y=result$minimum, the following expression is the
 \end_layout
 
 \begin_layout Standard
+This means that 
+\begin_inset Formula $W'(\nu)$
+\end_inset
+
+ does evaluate to the above R-expression correctly - but our expression
+ W_expr differs from W_p(omega=omega,x=result$minimum).
+ This does not make sense.
+\end_layout
+
+\begin_layout Standard
+The next step is to using the formula expression (our solution) for 
+\begin_inset Formula $W'(\nu)$
+\end_inset
+
+ to check the value of 
+\begin_inset Formula $f(\nu)$
+\end_inset
+
+ which requires both 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $W'(\nu)$
+\end_inset
+
+.
+ It also needs to be checked that the numerical value of the derivative
+ 
+\begin_inset Formula $W'(\nu)\approx\frac{W(\nu+\delta)-W(\nu)}{\delta}$
+\end_inset
+
+ calculated with 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ solution-expression also leads to 
+\begin_inset Formula $f'(\nu)=0$
+\end_inset
+
+.
+ This also leads to 
+\begin_inset Formula $f'(\nu)=0$
+\end_inset
+
+.
+ This just means that there are multiple 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ passing through the common 
+\begin_inset Formula $W(0)=0$
+\end_inset
+
+ that would make 
+\begin_inset Formula $f'(\nu)=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+1.
+ Can we prove that the solution for 
+\begin_inset Formula $f'(\nu)=0$
+\end_inset
+
+ gives a unique 
+\begin_inset Formula $\nu$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+2.
+ Notice that we already have a form for 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+! Is the exponential 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ to be in agreement with our 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
 ==
 \end_layout
 
@@ -5464,6 +5557,23 @@ W(\nu)=\frac{W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The solution is basically 
+\begin_inset Formula $\nu^{*}$
+\end_inset
+
+ such that 
+\begin_inset Formula $W(\nu^{*})=\frac{W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ in the solution does not describe the CDF and depends on 
 \end_layout
 
 \begin_layout Standard
@@ -5577,11 +5687,13 @@ D\frac{dN}{d\nu} & =\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{gather*}
+\begin{multline*}
 N\frac{dD}{d\nu}=(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}))\times\alpha(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
-=\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha}\times(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
-=\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}}+\alpha\Gamma_{2}\Gamma_{1}(M_{1}-\nu)^{\alpha}(M_{2}-\nu)^{\alpha-1}
-\end{gather*}
+=\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
+-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha}\times(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
+=\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
+\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}}+\alpha\Gamma_{2}\Gamma_{1}(M_{1}-\nu)^{\alpha}(M_{2}-\nu)^{\alpha-1}
+\end{multline*}
 
 \end_inset
 
@@ -5591,12 +5703,16 @@ N\frac{dD}{d\nu}=(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\a
 \begin_layout Standard
 Now after cancelling out the underlined terms,
 \begin_inset Formula 
-\begin{gather}
-D(\frac{dN}{d\nu})-N(\frac{dD}{d\nu})=\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})-\alpha\Gamma_{2}\Gamma_{1}(M_{1}-\nu)^{\alpha}(M_{2}-\nu)^{\alpha-1}\nonumber \\
-=\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}\{(M_{2}-\nu)-(M_{1}-\nu)\}-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\nonumber \\
+\begin{multline}
+D(\frac{dN}{d\nu})-N(\frac{dD}{d\nu})=\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\\
+-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})-\alpha\Gamma_{2}\Gamma_{1}(M_{1}-\nu)^{\alpha}(M_{2}-\nu)^{\alpha-1}\\
+=\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}\{(M_{2}-\nu)-(M_{1}-\nu)\}\\
+-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
 =\alpha\Gamma_{1}\Gamma_{2}(M_{2}-M_{1})(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\label{eq:W_nu_derivative}\\
-=\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-M_{1})(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}}+\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu_{0})^{\alpha}(M_{2}-\nu)^{\alpha-1}}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu_{0})^{\alpha}(M_{1}-\nu)^{\alpha-1}}\nonumber 
-\end{gather}
+=\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-M_{1})(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}}\\
++\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\\
++\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu_{0})^{\alpha}(M_{2}-\nu)^{\alpha-1}}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu_{0})^{\alpha}(M_{1}-\nu)^{\alpha-1}}
+\end{multline}
 
 \end_inset
 
@@ -5624,9 +5740,10 @@ or
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{alignat*}{1}
-\alpha\frac{B+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\times\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}} & +\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\times(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})}{(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})^{2}}
-\end{alignat*}
+\begin{multline*}
+\alpha\frac{B+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\times\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\\
++\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\times(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})}{(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})^{2}}
+\end{multline*}
 
 \end_inset
 
@@ -5636,9 +5753,10 @@ or
 \begin_layout Standard
 or 
 \begin_inset Formula 
-\begin{align}
-\frac{1}{D^{2}}\times & \{(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})+\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{2\alpha-1}\}\label{eq:expanded_expression}
-\end{align}
+\begin{multline}
+\frac{1}{D^{2}}\times\{(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})\\
++\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{2\alpha-1}\}\label{eq:expanded_expression}
+\end{multline}
 
 \end_inset
 
@@ -5688,7 +5806,12 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\frac{1}{D^{2}}\times\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}-\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu)^{\alpha}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}+\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}$
+\begin_inset Formula 
+\begin{gather*}
+\frac{1}{D^{2}}\times\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}\\
+-\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu)^{\alpha}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}+\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}
+\end{gather*}
+
 \end_inset
 
 
@@ -5699,7 +5822,14 @@ or
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\frac{1}{D^{2}}\times\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}(M_{2}-M_{1})}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}$
+\begin_inset Formula 
+\begin{multline*}
+\frac{1}{D^{2}}\times\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\\
+\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\\
+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\\
+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}(M_{2}-M_{1})}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}
+\end{multline*}
+
 \end_inset
 
 
