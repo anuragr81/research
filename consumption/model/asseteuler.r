@@ -1772,10 +1772,13 @@ test <- function(){
 }
 
 
-W_expr <- function(alpha,G1,G2,y1,y2,A,x,W0){
+W_expr <- function(alpha,G1,G2,y1,y2,A,x,x0,W0){
   M1=A + y1 + y1
   M2=A + y1 + y2
-  return(W0*(G2*(M2**alpha)-G1*(M1**alpha))/(G2*(M2-x)**alpha-G1*(M1-x)**alpha) + G1*(M1**alpha-(M1-x)**alpha)/(G2*(M2-x)**alpha-G1*(M1-x)**alpha))
+  D = G2*(M2-x)**alpha- G1*(M1-x)**alpha
+  N1 = W0*(G2*(M2**alpha)-G1*(M1**alpha))
+  N2 = G1*((M1-x0)**alpha-(M1-x)**alpha)
+  return((N1+N2)/D)
 }
 
 W_p <- function(omega,x){

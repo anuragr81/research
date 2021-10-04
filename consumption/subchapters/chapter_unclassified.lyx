@@ -6199,7 +6199,7 @@ Reducing the contents for subjective well-being
 \end_layout
 
 \begin_layout Subsection
-Removed explanation for why panel is not used
+explanation for why panel is not used
 \end_layout
 
 \begin_layout Standard
@@ -6353,6 +6353,170 @@ k
 (\Gamma_{2}M_{2}/M_{1}-\frac{\Gamma_{1}}{1-\alpha\nu_{1}/M_{2}+(\alpha(\alpha-1)/2)\nu_{1}^{2}/M_{2}^{2}})(1+\omega\nu_{1}+\frac{\omega^{2}\nu_{1}^{2}}{2})=\Gamma_{2}M_{2}/M_{1}-\Gamma_{1}(1-\alpha\nu_{1}/M_{1}+\frac{\alpha(\alpha-1)\nu_{1}^{2}}{2M_{1}^{2}})
 \end{gather*}
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Wrong Computation
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $D=\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}$
+\end_inset
+
+ and 
+\begin_inset Formula $N=W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}$
+\end_inset
+
+.
+ Further,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\because\frac{dD}{d\nu} & =\alpha(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\because & \frac{dN}{d\nu}=(1-\alpha)\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-2}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\therefore W'(\nu) & =\frac{1}{D^{2}}\{(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})((1-\alpha)\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-2})-(W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})(\alpha(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1}))\}=\frac{K}{D^{2}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Expanding 
+\begin_inset Formula $(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})((1-\alpha)\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-2})$
+\end_inset
+
+, we have (with 
+\begin_inset Quotes eld
+\end_inset
+
+(G_2*(M_2-x)**a-G_1*(M_1-x)**a)*((1-a)*a*G_1*(M_1-x)**(a-2))
+\begin_inset Quotes erd
+\end_inset
+
+ )
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+-\alpha^{2}\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha}(M_{1}-\nu)^{\alpha-2}+\underline{\alpha^{2}\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-2}}+\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha}(M_{1}-\nu)^{\alpha-2}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-2}\label{eq:derivative_part_1}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Expanding 
+\begin_inset Formula $(W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})(\alpha(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1}))$
+\end_inset
+
+ with 
+\begin_inset Quotes eld
+\end_inset
+
+(W0*(G_2*(M_2)**a-G_1(M_1)**a)+a*G_1(M_1-x)**(a-1))*(a*(G_1*(M_1-x)**(a-1)-G_2*(
+M_2-x)**(a-1)))
+\begin_inset Quotes erd
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+-\alpha^{2}\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu)^{\alpha-1}+\underline{\alpha^{2}\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-2}}-\alpha\Gamma_{1}^{2}W(0)M_{1}^{\alpha}(M_{1}-\nu)^{\alpha-1}+\alpha\Gamma_{1}\Gamma_{2}W(0)M_{2}^{\alpha}(M_{1}-\nu)^{\alpha-1}+\alpha\Gamma_{1}\Gamma_{2}W(0)M_{1}^{\alpha}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{2}^{2}W(0)M_{2}^{\alpha}(M_{2}-\nu)^{\alpha-1}\label{eq:derivative_part_2}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Simplifying 
+\begin_inset Formula $K$
+\end_inset
+
+ with both expressions together does not work in Wolframe.
+ So subtracting 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:derivative_part_2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ from 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:derivative_part_1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $-\alpha^{2}\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha}(M_{1}-\nu)^{\alpha-2}+\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha}(M_{1}-\nu)^{\alpha-2}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-2}-(-\alpha^{2}\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{1}^{2}W(0)M_{1}^{\alpha}(M_{1}-\nu)^{\alpha-1}+\alpha\Gamma_{1}\Gamma_{2}W(0)M_{2}^{\alpha}(M_{1}-\nu)^{\alpha-1}+\alpha\Gamma_{1}\Gamma_{2}W(0)M_{1}^{\alpha}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{2}^{2}W(0)M_{2}^{\alpha}(M_{2}-\nu)^{\alpha-1})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $-\alpha^{2}\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha}(M_{1}-\nu)^{\alpha-2}+\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha}(M_{1}-\nu)^{\alpha-2}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-2}+\alpha^{2}\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu)^{\alpha-1}+\alpha\Gamma_{1}^{2}W(0)M_{1}^{\alpha}(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{1}\Gamma_{2}W(0)M_{2}^{\alpha}(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{1}\Gamma_{2}W(0)M_{1}^{\alpha}(M_{2}-\nu)^{\alpha-1}+\alpha\Gamma_{2}^{2}W(0)M_{2}^{\alpha}(M_{2}-\nu)^{\alpha-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or 
+\begin_inset Formula $\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}((1-\alpha)\Gamma_{2}(M_{2}-\nu)^{\alpha}(M_{1}-\nu)^{-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}+\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1})+\alpha\Gamma_{1}^{2}W(0)M_{1}^{\alpha}(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{1}\Gamma_{2}W(0)M_{2}^{\alpha}(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{1}\Gamma_{2}W(0)M_{1}^{\alpha}(M_{2}-\nu)^{\alpha-1}+\alpha\Gamma_{2}^{2}W(0)M_{2}^{\alpha}(M_{2}-\nu)^{\alpha-1}$
 \end_inset
 
 

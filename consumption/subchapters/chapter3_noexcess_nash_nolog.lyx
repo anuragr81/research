@@ -5372,6 +5372,51 @@ Verification
 \end_layout
 
 \begin_layout Standard
+Verifying 
+\begin_inset Formula $f(\nu)$
+\end_inset
+
+ with diff(w(x)*(G_2*(M_2-x)**a)+(1-w(x))*G_1*((M_1-x)**a) ,x) which gives:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $f'(\nu)=-\Gamma_{1}(M_{1}-\nu)^{\alpha}W'(\nu)+\Gamma_{2}(M_{2}-\nu)^{\alpha}W'(\nu)-\alpha\Gamma_{1}(1-W(\nu))(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{2}W(\nu)(M_{2}-\nu)^{\alpha-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $f'(\nu)=\{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}\}W'(\nu)-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}+\alpha W(\nu)\{\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1}\}=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $f'(\nu)=\{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}\}W'(\nu)=\alpha W(\nu)\{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\}+\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The condition for 
+\begin_inset Formula $f'(\nu)=0$
+\end_inset
+
+ thus leads to the following:
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
 W'(\nu) & =W(\nu)(\alpha\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}})+\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}
@@ -5380,6 +5425,319 @@ W'(\nu) & =W(\nu)(\alpha\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+We can check that for y=result$minimum, the following expression is the
+ same as dW_p(omega=omega,x=y):
+\end_layout
+
+\begin_layout Standard
+(W_p(omega=omega,x=y) * alpha * (G2*(M2-y)**(alpha-1)-G1*(M1-y)**(alpha-1)))/((G
+2*(M2-y)**(alpha)-G1*(M1-y)**(alpha)))+(alpha*G1*(M1-y)**(alpha-1))/(G2*(M2-y)**
+(alpha)-G1*(M1-y)**(alpha))
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+Calculating the derivative 
+\begin_inset Formula $W'(\nu)$
+\end_inset
+
+ for the solution 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+W(\nu)=\frac{W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\\
+\Rightarrow W'(\nu)=\frac{D(\frac{dN}{d\nu})-N(\frac{dD}{d\nu})}{D^{2}}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $N=W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and 
+\begin_inset Formula $D=\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $B=W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+So 
+\begin_inset Formula 
+\begin{align*}
+W(\nu) & =\frac{B+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that 
+\begin_inset Formula $\frac{dN}{d\nu}$
+\end_inset
+
+ (using 
+\begin_inset Quotes eld
+\end_inset
+
+diff(G_1*((M_1-x0)**a-(M_1-x)**a),x)
+\begin_inset Quotes erd
+\end_inset
+
+) is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{dN}{d\nu} & =\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\frac{dD}{d\nu} & =\alpha(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now (using 
+\begin_inset Quotes eld
+\end_inset
+
+a*G_1*(M_1-x)**(a-1)*(G_2*(M_2-x)**a-G_1*(M_1-x)**a)
+\begin_inset Quotes erd
+\end_inset
+
+),
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+D(\frac{dN}{d\nu}) & =\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\times(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or 
+\begin_inset Formula 
+\begin{alignat*}{1}
+D\frac{dN}{d\nu} & =\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+N\frac{dD}{d\nu}=(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}))\times\alpha(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
+=\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha}\times(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
+=\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}}+\alpha\Gamma_{2}\Gamma_{1}(M_{1}-\nu)^{\alpha}(M_{2}-\nu)^{\alpha-1}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now after cancelling out the underlined terms,
+\begin_inset Formula 
+\begin{gather}
+D(\frac{dN}{d\nu})-N(\frac{dD}{d\nu})=\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})-\alpha\Gamma_{2}\Gamma_{1}(M_{1}-\nu)^{\alpha}(M_{2}-\nu)^{\alpha-1}\nonumber \\
+=\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}\{(M_{2}-\nu)-(M_{1}-\nu)\}-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\nonumber \\
+=\alpha\Gamma_{1}\Gamma_{2}(M_{2}-M_{1})(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\label{eq:W_nu_derivative}\\
+=\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-M_{1})(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}}+\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu_{0})^{\alpha}(M_{2}-\nu)^{\alpha-1}}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu_{0})^{\alpha}(M_{1}-\nu)^{\alpha-1}}\nonumber 
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This expression should be the same as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+ & W(\nu)(\alpha\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}})+\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\alpha\frac{B+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\times\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}} & +\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\times(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})}{(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})^{2}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or 
+\begin_inset Formula 
+\begin{align}
+\frac{1}{D^{2}}\times & \{(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})+\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{2\alpha-1}\}\label{eq:expanded_expression}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Expanding the first term 
+\begin_inset Formula $(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})$
+\end_inset
+
+ (with 
+\begin_inset Quotes eld
+\end_inset
+
+(a*G_2*(M_2-x)^(a-1)-a*G_1*(M_1-x)^(a-1))*(B+G_1*(M_1-x0)^a-G_1*(M_1-x)^a)
+\begin_inset Quotes erd
+\end_inset
+
+) as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}\\
++\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}-\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu)^{\alpha}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}\\
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rewriting (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:expanded_expression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ ) by including its second term,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{1}{D^{2}}\times\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}-\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu)^{\alpha}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}+\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{1}{D^{2}}\times\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}(M_{2}-M_{1})}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can see that the above expression is the same as what we have obtained
+ as 
+\begin_inset Formula $D(\frac{dN}{d\nu})-N(\frac{dD}{d\nu})$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:W_nu_derivative"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+But is it that the expression only works if we calculate it's 
+\begin_inset Formula $W'(\nu)$
+\end_inset
+
+ but 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ itself does not give the right solution? 
+\end_layout
+
+\begin_layout Standard
+==
 \end_layout
 
 \end_body
