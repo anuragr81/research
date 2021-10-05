@@ -1801,6 +1801,10 @@ W_p <- function(omega,x){
   return(1-exp(-omega*x))
 }
 
+L_p <- function(lambda,x){
+  return(exp(-lambda*x))
+}
+
 dW_p <- function(omega,x){
   return(omega*exp(-omega*x))
 }
@@ -1809,13 +1813,34 @@ nolog_util <- function (G,A,alpha){
   return(G*A**alpha)
 }
 
-expected_nolog_util<-function(y,y1,y2,G1,G2,alpha,omega,A_0){
+expected_A_1<-function(y,y1,y2,alpha,omega,A_0){
+  upside <- W_p(omega=omega,x=y) * (A_0+y1-y+y2) 
+  downside <- (1-W_p(omega=omega,x=y))*(A_0+y1-y+y1)
+  return (upside+downside)
+}
+
+expected_A_2<-function(y,y1,y2,alpha,lambda,A_0){
+  upside <-  (1-L_p(lambda=lambda,x=y))* (A_0+y1-y+y2) 
+  downside <-  L_p(lambda=lambda,x=y) *(A_0+y1-y+y1)
+  return (upside+downside)
+}
+
+expected_nolog_util_1<-function(y,y1,y2,G1,G2,alpha,omega,A_0){
   upside <- W_p(omega=omega,x=y) * nolog_util(A=A_0+y1-y+y2,G=G2,alpha=alpha) 
   downside <- (1-W_p(omega=omega,x=y))*nolog_util(A=A_0+y1-y+y1,G=G1,alpha=alpha)
   return (upside+downside)
 }
 
-d_expected_nolog_util <-function(y,y1,y2,G1,G2,alpha,omega,A_0){
+expected_nolog_util_2<-function(y,y1,y2,G1,G2,alpha,lambda,A_0){
+  downside <- L_p(lambda=lambda,x=y)*nolog_util(A=A_0+y1-y+y1,G=G1,alpha=alpha)
+  upside <- (1-L_p(lambda=lambda,x=y)) * nolog_util(A=A_0+y1-y+y2,G=G2,alpha=alpha)
+  
+  return (upside+downside)
+}
+
+
+
+d_expected_nolog_util_1 <-function(y,y1,y2,G1,G2,alpha,omega,A_0){
   M1=A_0 + y1 + y1
   M2=A_0 + y1 + y2
   
@@ -1825,7 +1850,7 @@ d_expected_nolog_util <-function(y,y1,y2,G1,G2,alpha,omega,A_0){
   return (first_term+second_term+third_term)
 }
 
-calculate_df <-function(alpha,G1,G2,y1,y2,x,A,x0,W0){
+calculate_df_1 <-function(alpha,G1,G2,y1,y2,x,A,x0,W0){
   dWx<- W_deriv_expr(alpha = alpha,G1 = G1,G2 = G2,y1 = y1,y2 = y2,A = A,x = x,x0 = x0,W0 = W0)
   Wx <- W_expr(alpha = alpha,G1 = G1,G2 = G2,y1 = y1,y2 = y2,A = A,x = x,x0 = x0,W0 = W0)
 
@@ -1837,10 +1862,11 @@ calculate_df <-function(alpha,G1,G2,y1,y2,x,A,x0,W0){
   #plot(y,sapply(y,function(x){W_expr(alpha = alpha,G1 = G1,G2 = G2,y1 = y1,y2 = y2,A = A,x = x,x0 = x0,W0 = W0)})/100,type='l')
   return(df)
 }
-evolve_long_term <- function(){
-  alpha <- .5; G1=1; G2=1;
-  omega <- .2
-  A = 0; y1 = 300; y2=420;
+evolve_long_term_w <- function(omega,A,G2_1,n){
+  alpha <- .5; G1=1; G2=G2_1*G1;
+  # increasing A has a parallel shift
+  
+  y1 = 300; y2=420;
 
   if (F){
     x <- seq(0,100,1); 
@@ -1848,19 +1874,59 @@ evolve_long_term <- function(){
     lines(x,sapply(x,function(y){W_expr(W0 = W_p(omega=omega,x=0), alpha=alpha,G1 = G1,G2=G2,y1 = y1, y2=y2,A=A,x=y)}),type='l',lty=1)
   }
   r <- seq(0,y1,y1/1000.0)
-  par(mfrow=c(2,1))
-  plot(r, sapply(r,function(y){expected_nolog_util(A_0=A,omega=omega,y=y,y1=y1,y2=y2,G1=G1,G2=G2,alpha=alpha)}),type='l')
-  plot(r, sapply(r,function(y){d_expected_nolog_util(A_0=A,omega=omega,y=y,y1=y1,y2=y2,G1=G1,G2=G2,alpha=alpha)}),type='l')
-  result <- optimise(function(y){-expected_nolog_util(A_0=A,omega=omega,y=y,y1=y1,y2=y2,G1=G1,G2=G2,alpha=alpha)},c(0,y1))
+  
+  #plot(r, sapply(r,function(y){expected_nolog_util_1(A_0=A,omega=omega,y=y,y1=y1,y2=y2,G1=G1,G2=G2,alpha=alpha)}),type='l')
+  #plot(r, sapply(r,function(y){d_expected_nolog_util_1(A_0=A,omega=omega,y=y,y1=y1,y2=y2,G1=G1,G2=G2,alpha=alpha)}),type='l')
+  
   #print(W_expr(W0 = W_p(omega=omega,x=0), alpha=alpha,G1 = G1,G2=G2,y1 = y1, y2=y2,A=A,x=result$minimum) - W_p(omega=omega,x=result$minimum))
   #plot(r,sapply(r,function(y){W_expr(W0 = W_p(omega=omega,x=0), alpha=alpha,G1 = G1,G2=G2,y1 = y1, y2=y2,A=A,x=y)}),type='l')
   #lines(r,sapply(r,function(y){W_expr(W0 = W_p(omega=omega,x=0), alpha=alpha,G1 = G1,G2=G2,y1 = y1, y2=y2,A=A,x=y)}),type='l')
   #lines(r,sapply(r,function(y){W_p(omega=omega,x=y)}),type='l')
-  print(d_expected_nolog_util(A_0=A,omega=omega,y=result$minimum,y1=y1,y2=y2,G1=G1,G2=G2,alpha=alpha))
-  k <- calculate_df(alpha = alpha,G1 = G1,G2 = G2,y1 = y1,y2 = y2,x = result$minimum,A = A,x0 = 0,W0 = W_p(omega = omega,x = 0))
-  return(result)
-  #print("DONE")
+  As <- array()
+  ys <- array()
+  for (i in seq(n)){
+    result <- optimise(function(y){-expected_nolog_util_1(A_0=A,omega=omega,y=y,y1=y1,y2=y2,G1=G1,G2=G2,alpha=alpha)},c(0,y1))
+    #print(expected_nolog_util_1(A_0=A,omega=omega,y=result$minimum,y1=y1,y2=y2,G1=G1,G2=G2,alpha=alpha))
+    A <- expected_A_1(y = result$minimum,y1 = y1,y2 = y2,alpha = alpha,omega = omega  ,A_0 = A)
+    As[i]<- A
+    ys[i] <- result$minimum
+  }
   
-  
+  res=list()
+  res[["A"]] <- As
+  res[["nu"]] <- ys
+  par(mfrow=c(1,2))
+  plot(ys,type='l')
+  plot(As,type='l')
   #return(optimise(function(y){W_p(omega=omega,x=y)-W_expr(W0 = W_p(omega=omega,x=0), alpha=alpha,G1 = G1,G2=G2,y1 = y1, y2=y2,A=A,x=y)},c(0,y1)))
+}
+
+evolve_long_term_l <- function(lambda,A,G2_1,n){
+  alpha <- .5; G1=1; G2=G2_1*G1;
+  y1 = 300; y2=420;
+  
+  r <- seq(0,y1,y1/1000.0)
+  
+  As <- array()
+  ys <- array()
+  for (i in seq(n)){
+    
+    if(F){
+      par(mfrow=c(1,1));    plot(r, sapply(r,function(y){expected_nolog_util_2(A_0=A,lambda=lambda,y=y,y1=y1,y2=y2,G1=G1,G2=G2,alpha=alpha)}),type='l')
+    }
+    result <- optimise(function(y){-expected_nolog_util_2(A_0=A,lambda=lambda,y=y,y1=y1,y2=y2,G1=G1,G2=G2,alpha=alpha)},c(0,y1))
+    
+    A <- expected_A_2(y = result$minimum,y1 = y1,y2 = y2,alpha = alpha,lambda = lambda  ,A_0 = A)
+    As[i]<- A
+    ys[i] <- result$minimum
+  }
+  
+  res=list()
+  res[["A"]] <- As
+  res[["nu"]] <- ys
+  par(mfrow=c(1,2))
+  plot(ys,type='l')
+  plot(As,type='l')
+  #return(optimise(function(y){W_p(omega=omega,x=y)-W_expr(W0 = W_p(omega=omega,x=0), alpha=alpha,G1 = G1,G2=G2,y1 = y1, y2=y2,A=A,x=y)},c(0,y1)))
+  return(res)
 }

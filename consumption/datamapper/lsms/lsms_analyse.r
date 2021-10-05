@@ -982,10 +982,6 @@ init_data <- function(){
   c2010 <- ll@load_diary_file(dirprefix = "../",year = 2010, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   c2012 <- ll@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
   c2014 <- ll@load_diary_file(dirprefix = "../",year = 2014, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
-  i2010 <- read.csv('c:/temp/i2010.csv',stringsAsFactors = FALSE)
-  i2012 <- read.csv('c:/temp/i2012.csv',stringsAsFactors = FALSE)
-  i2014 <- read.csv('c:/temp/i2014.csv',stringsAsFactors = FALSE)
-  e <- read.csv('c:/temp/e.csv',stringsAsFactors = FALSE)
   #e <- minimum_needs_cost_per_head(ll= ll, c2010 = c2010, c2012 = c2012, c2014 = c2014, o2010 = o2010, o2012 = o2012, o2014 = o2014)
   #res <- plain_asset_differences_2012_2014(a2012 = a2012, a2014 = a2014, o2012 = o2012, o2014 = o2014, pivot_asset="bed)
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
@@ -1145,8 +1141,6 @@ get_parametric_band_df <- function(ll){
   ne2010 <- (ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
   ne2012 <- (ddply(subset(c2012,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
   ne2014 <- (ddply(subset(c2014,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
-  
-  
   
   return(needs_and_excess_costs)
 }
