@@ -1930,3 +1930,52 @@ evolve_long_term_l <- function(lambda,A,G2_1,n){
   #return(optimise(function(y){W_p(omega=omega,x=y)-W_expr(W0 = W_p(omega=omega,x=0), alpha=alpha,G1 = G1,G2=G2,y1 = y1, y2=y2,A=A,x=y)},c(0,y1)))
   return(res)
 }
+
+W_p_logis <- function(omega,omega_bar,nu){
+  return(plogis(q = nu,location = omega_bar, scale = omega))
+}
+
+k <- function(A,beta,psi){
+  return(A-psi*(A**beta))
+}
+
+evolve_plogis <- function(A,omega_bar,psi,beta){
+  
+  omega <- 1
+
+  y1 <- 100
+  y2 <- 200
+  
+  r <- seq(0,y1,.1)
+  w <-  function(nu) { W_p_logis(omega=omega,omega_bar=omega_bar, nu=nu) }
+  ea <- function(nu) { w(nu) * k (A=A + y2 - nu,psi=psi,beta=beta) + (1-w(nu))*k(A=A+y1-nu,psi=psi,beta=beta) }
+  
+  As <- array()
+  ys <- array()
+  
+  As[1] <- 0
+  
+  for (i in seq(100)){
+    nu_1 <- optimise(function(x) { -ea(x)},c(0,y1))
+    new_income <- ea(nu_1$minimum)
+    if (new_income<0){
+      stop("Cannot have game with negative income")
+    }
+    A <- A + new_income
+    ys[i] <- nu_1$minimum
+    As[i]<- A
+    
+  }
+  
+  
+  #plot(r,sapply(r,ea),type='l')
+  res=list()
+  res[["A"]] <- As
+  res[["nu"]] <- ys
+  par(mfrow=c(1,2))
+  plot(ys,type='l')
+  plot(As,type='l')
+  
+  return(res)
+}
+

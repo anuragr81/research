@@ -1243,7 +1243,7 @@ We have already assumed that
  i.e.
  the consumer do not use anything from savings towards the status consumption.
  Let's assume that the consumer's assets are 
-\begin_inset Formula $A_{0}$
+\begin_inset Formula $\prescript{0}{}A$
 \end_inset
 
  before the start of period 
@@ -1256,7 +1256,7 @@ We have already assumed that
 \end_inset
 
  itself, the consumer would accumulate
-\begin_inset Formula $A_{0}+(y_{1}-\nu_{1})$
+\begin_inset Formula $\prescript{0}{}A+(y_{1}-\nu_{1})$
 \end_inset
 
  where 
@@ -1277,6 +1277,11 @@ We have already assumed that
 \end_inset
 
  .
+ Considering the costs associated with assets as 
+\begin_inset Formula $c(A)=\psi A^{\beta}$
+\end_inset
+
+.
  Therefore, her expected accumulation in the next period 
 \begin_inset Formula $t+1$
 \end_inset
@@ -1287,7 +1292,7 @@ We have already assumed that
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-A_{0}+(y_{1}-\nu_{1})+W_{1}(\nu_{1})(y_{1}-\nu_{1})+(1-W_{1}(\nu_{1}))(y_{2}-\nu_{2})
+\prescript{0}{}A+(y_{1}-\nu_{1})+W_{1}(\nu_{1})(y_{1}-\nu_{1})+(1-W_{1}(\nu_{1}))(y_{2}-\nu_{2}) & -\psi\cdot(\prescript{0}{}A)^{\beta}
 \end{align*}
 
 \end_inset
@@ -1429,14 +1434,16 @@ There are only two ways a long-term equilbirium would be implied with the
 \end_inset
 
  so that 
-\begin_inset Formula $\prescript{\tau}{}B\rightarrow\prescript{\tau+1}{}B$
+\begin_inset Formula $\prescript{\tau}{}B\rightarrow\psi\cdot(\prescript{\tau}{}A)^{\beta}$
 \end_inset
 
- or if the trivial condition 
-\begin_inset Formula $B_{\tau}=0$
+.
+ This means that the sum 
+\begin_inset Formula $\prescript{\tau}{}B$
 \end_inset
 
- is met (the latter is a special case of the former).
+ must converge to a constant - this does not mean an equalisation of but
+ merely the differences in relative wealth justified by the cost-function.
  The former condition for the stationarity imply the following
 \end_layout
 
@@ -1466,6 +1473,14 @@ y_{2}-\nu_{2}^{*}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+==
 \end_layout
 
 \begin_layout Standard
@@ -1583,6 +1598,225 @@ In comparison to the model used by Hopkins-Kornienko, the relation between
 
  in each band and carry over the assets accumulated from past promotions
  and demotions.
+\end_layout
+
+\begin_layout Subsection
+Long-term condition with costs
+\end_layout
+
+\begin_layout Standard
+[Infinite horizon consumer] Would consumer have infinite horizon? We turn
+ this feature off for now and see what would happen if the consumer's horizon
+ was just one time period.
+ This simplifies the long-term constraint for the cost-function which requires
+ 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+-dependent 
+\begin_inset Formula $\sum_{t}^{\infty}B_{t}$
+\end_inset
+
+ to converge to a constant.
+ At every period 
+\begin_inset Formula $t$
+\end_inset
+
+, the consumer who optimises 
+\begin_inset Formula $A_{t+1}$
+\end_inset
+
+ chooses 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ (or 
+\begin_inset Formula $\prescript{t}{}\nu_{2}$
+\end_inset
+
+) given 
+\begin_inset Formula $\prescript{t}{}A$
+\end_inset
+
+, 
+\begin_inset Formula $\omega,\bar{\omega},y_{1},y_{2},w(\cdot)$
+\end_inset
+
+.
+ More specifically, the consumer must choose 
+\begin_inset Formula $\nu$
+\end_inset
+
+ so that the following is maximised
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+W(\nu_{1})k(\prescript{t}{}A+y_{2}-\nu_{1})+(1-W(\nu_{1}))k(\prescript{t}{}A+y_{1}-\nu_{1})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $k(A)=A-\psi A^{\beta}$
+\end_inset
+
+ and 
+\begin_inset Formula $k'(A)=1-\psi\beta A^{\beta-1}$
+\end_inset
+
+.
+ The consumer chooses 
+\begin_inset Formula $\nu_{1}^{*}$
+\end_inset
+
+ so that 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+k'(\prescript{t}{}A+y_{1}-\nu_{1})+W'(\nu_{1})\{k(\prescript{t}{}A+y_{2}-\nu_{1})-k(\prescript{t}{}A+y_{1}-\nu_{1})\}+\\
+W(\nu_{1})\{k'(\prescript{t}{}A+y_{2}-\nu_{1})-k'(\prescript{t}{}A+y_{1}-\nu_{1})\}=0
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $W(\nu_{1})=\frac{1}{1+e^{-\omega(\nu-\bar{\omega})}}$
+\end_inset
+
+, 
+\begin_inset Formula $W'(\nu_{1})=\frac{\omega e^{-\omega(\nu-\bar{\omega})}}{(1+e^{-\omega(\nu-\bar{\omega}})^{2}}$
+\end_inset
+
+we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}+\frac{\omega e^{-\omega(\nu-\bar{\omega})}}{(1+e^{-\omega(\nu-\bar{\omega}})^{2}}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}+\\
+\frac{\psi\beta}{1+e^{-\omega(\nu-\bar{\omega})}}\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Multiplying with 
+\begin_inset Formula $(1+e^{-\omega(\nu-\bar{\omega}})^{2}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+(1+e^{-\omega(\nu-\bar{\omega}})^{2}(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\\
++\omega e^{-\omega(\nu-\bar{\omega})}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}+\\
+\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+(1+e^{-2\omega(\nu-\bar{\omega})}+2e^{-\omega(\nu-\bar{\omega})})(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\\
++\omega e^{-\omega(\nu-\bar{\omega})}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}=\\
+\psi\beta\{((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}-\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}\}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Letting 
+\begin_inset Formula $z\equiv e^{-\omega(\nu-\bar{\omega})}$
+\end_inset
+
+ a solution exists for the following quadratic in 
+\begin_inset Formula $z$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})z^{2}+z\\
++[2(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\omega\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}]z\\
++(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+only as long as 
+\begin_inset Formula 
+\begin{multline*}
+[2(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\omega\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}]^{2}\\
+>4\times(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\times[(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}]
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We test whether the optimal solution exists empirically for the function
+ by choosing arbitrary values of 
+\begin_inset Formula $\psi,\beta,\omega,\bar{\omega}$
+\end_inset
+
+.
+ There is curvature to be optimised - but the more important question is
+ whether the summation of 
+\begin_inset Formula $W(\nu_{1})k(\prescript{t}{}A+y_{2}-\nu_{1})+(1-W(\nu_{1}))k(\prescript{t}{}A+y_{1}-\nu_{1})$
+\end_inset
+
+ converges to zero over time.
+\end_layout
+
+\begin_layout Standard
+[Long-term condition with costs] Since we associate cost to assets, the
+ equilibrium costs that are meant to be offset by the income gain in the
+ equilibrium are path-dependent.
+ Since assets are accumulative, the costs associated with assets depend
+ not on the final income but the sum of past incomes.
+ Therefore, the discussion of the equilibrium requires a given for of 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ that provides the history of 
+\begin_inset Formula $\nu_{1},\nu_{2}$
+\end_inset
+
+ at every instance.
+ Assuming logistic form, this condition means in the finite horizon:
 \end_layout
 
 \begin_layout Subsection
@@ -3342,7 +3576,23 @@ noprefix "false"
  verified.
  This might give us some idea about how long-term equilibrium never being
  achieved would be meaningful.
+ Stability of the relative difference 
+\begin_inset Formula $A_{1}\rightarrow A_{2}$
+\end_inset
+
+ is too restrictive as it implies no gains from status consumption and the
+ divergence of i.e.
  
+\begin_inset Formula $A_{2}-A_{1}\rightarrow\infty$
+\end_inset
+
+ is too general (almost anything would lead to divergence).
+ Hence a cost-function approach is worth comparing.
+ The cost-function approach requires observing properties of 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
