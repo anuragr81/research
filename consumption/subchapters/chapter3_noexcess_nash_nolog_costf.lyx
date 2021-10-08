@@ -1281,6 +1281,10 @@ We have already assumed that
 \begin_inset Formula $c(A)=\psi A^{\beta}$
 \end_inset
 
+ and the net assets are 
+\begin_inset Formula $f(A)=A-c(A)$
+\end_inset
+
 .
  The expected accumulation in the next period 
 \begin_inset Formula $t+1$
@@ -1292,7 +1296,7 @@ We have already assumed that
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\prescript{0}{}A+(y_{1}-\prescript{1}{}\nu_{1}-c(\prescript{0}{}A))+W_{1}(\prescript{1}{}\nu_{1})(y_{1}-\prescript{t+1}{}\nu_{1})+(1-W_{1}(\prescript{t}{}\nu_{1}))(y_{2}-\nu_{2}) & -\psi\cdot(\prescript{0}{}A)^{\beta}
+f(\prescript{t}{}A+y_{1})+W_{1}(\prescript{t}{}\nu_{1})f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})+(1-W_{1}(\prescript{t}{}\nu_{1}))f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1})
 \end{align*}
 
 \end_inset
@@ -1301,11 +1305,36 @@ We have already assumed that
 \end_layout
 
 \begin_layout Standard
-In equilibrium, 
-\begin_inset Formula $\prescript{t}{}\nu_{1}=\prescript{t+1}{}\nu_{1}$
+In equilibrium, no new income would be added as the cost of assets must
+ balance any asset increment added.
+ Therefore,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+W_{1}(\prescript{t}{}\nu_{1})f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})+(1-W_{1}(\prescript{t}{}\nu_{1}))f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1}) & =0
+\end{align*}
+
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+W_{1}(\prescript{t}{}\nu_{1}) & =\frac{1}{1-\frac{f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1})}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This necessitates that the cost-function is structured so that it penalises
+ higher assets after one point.
 \end_layout
 
 \begin_layout Standard
