@@ -1935,35 +1935,49 @@ W_p_logis <- function(omega,omega_bar,nu){
   return(plogis(q = nu,location = omega_bar, scale = omega))
 }
 
+L_p_logis <- function(lambda,lambda_bar,nu){
+  return(plogis(q = nu,location = lambda_bar, scale = lambda))
+}
+
 k <- function(A,beta,psi){
   return(A-psi*(A**beta))
 }
 
-evolve_plogis <- function(A,omega_bar,psi,beta){
+evolve_plogis <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,psi,beta){
   
-  omega <- 1
-
   y1 <- 100
   y2 <- 200
   
   r <- seq(0,y1,.1)
   w <-  function(nu) { W_p_logis(omega=omega,omega_bar=omega_bar, nu=nu) }
-  ea <- function(nu) { w(nu) * k (A=A + y2 - nu,psi=psi,beta=beta) + (1-w(nu))*k(A=A+y1-nu,psi=psi,beta=beta) }
+  l <-  function(nu) { L_p_logis(lambda=lambda,lambda_bar=lambda_bar, nu=nu) }
   
-  As <- array()
-  ys <- array()
+  ea_w <- function(nu,A_1) { w(nu) * k (A=A_1 + y2 - nu,psi=psi,beta=beta) + (1-w(nu))*k(A=A_1+y1-nu,psi=psi,beta=beta) }
+  ea_l <- function(nu,A_2) { (1-l(nu)) * k (A=A_2 + y2 - nu,psi=psi,beta=beta) + l(nu)*k(A=A_2+y1-nu,psi=psi,beta=beta) }
   
-  As[1] <- 0
+  As_1 <- array()
+  ys_1 <- array()
+  
+  As_2 <- array()
+  ys_2 <- array()
+  
   
   for (i in seq(100)){
-    nu_1 <- optimise(function(x) { -ea(x)},c(0,y1))
-    new_income <- ea(nu_1$minimum)
-    if (new_income<0){
+    nu_1 <- optimise(function(x) { -ea_w(x,A_1=A1)},c(0,y1))
+    nu_2 <- optimise(function(x) { -ea_l(x,A_2=A2)},c(0,y2))
+    
+    new_income_1 <- ea_w(nu_1$minimum,A_1=A1)
+    new_income_2 <- ea_w(nu_2$minimum,A_2=A2)
+    if (new_income_1<0){
       stop("Cannot have game with negative income")
     }
-    A <- A + new_income
-    ys[i] <- nu_1$minimum
-    As[i]<- A
+    A1 <- A1 + new_income_1
+    
+    ys_1[i] <- nu_1$minimum
+    As[i]<- A1
+    
+    ys_2[i] <- nu_2$minimum
+    As_2[i]<- A2
     
   }
   
