@@ -1943,10 +1943,8 @@ k <- function(A,beta,psi){
   return(A-psi*(A**beta))
 }
 
-evolve_plogis <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,psi,beta){
+evolve_plogis <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,psi,beta,y1,y2){
   
-  y1 <- 100
-  y2 <- 200
   
   r <- seq(0,y1,.1)
   w <-  function(nu) { W_p_logis(omega=omega,omega_bar=omega_bar, nu=nu) }
@@ -1964,17 +1962,21 @@ evolve_plogis <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,psi,beta){
   
   for (i in seq(100)){
     nu_1 <- optimise(function(x) { -ea_w(x,A_1=A1)},c(0,y1))
+    if (F){
+      par(mfrow=c(1,1))
+      plot(seq(0,y1),sapply(seq(0,y1),function(k){ea_w(nu=k,A_1=A1)}),type='l')
+    }
     nu_2 <- optimise(function(x) { -ea_l(x,A_2=A2)},c(0,y2))
     
     new_income_1 <- ea_w(nu_1$minimum,A_1=A1)
-    new_income_2 <- ea_w(nu_2$minimum,A_2=A2)
+    new_income_2 <- ea_l(nu_2$minimum,A_2=A2)
     if (new_income_1<0){
       stop("Cannot have game with negative income")
     }
     A1 <- A1 + new_income_1
     
     ys_1[i] <- nu_1$minimum
-    As[i]<- A1
+    As_1[i]<- A1
     
     ys_2[i] <- nu_2$minimum
     As_2[i]<- A2
@@ -1984,11 +1986,11 @@ evolve_plogis <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,psi,beta){
   
   #plot(r,sapply(r,ea),type='l')
   res=list()
-  res[["A"]] <- As
-  res[["nu"]] <- ys
+  res[["A_1"]] <- As_1
+  res[["nu_1"]] <- ys_1
   par(mfrow=c(1,2))
-  plot(ys,type='l')
-  plot(As,type='l')
+  plot(res[["nu_1"]],type='l')
+  plot(res[["A_1"]],type='l')
   
   return(res)
 }
