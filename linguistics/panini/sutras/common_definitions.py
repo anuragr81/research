@@ -31,9 +31,13 @@ class Group:
         return self._data
     
 class Anga(Group):
-    def __init__(self,anga):
+    def __init__(self,anga,is_dhaatu=False):
         self._anga = Group(anga)
+        self._is_dhaatu=is_dhaatu
         
+    def is_dhaatu(self):
+        return self._is_dhaatu
+    
     def get_anga(self):
         return self._anga.data()
         

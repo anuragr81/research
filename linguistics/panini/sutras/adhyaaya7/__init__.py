@@ -14,6 +14,7 @@ def yuvoranaakau_701001(suffix_string):
 
 
 
+
 def aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(pratyaya):
     letter = pratyaya[0]
     if letter== "ph":
@@ -64,3 +65,12 @@ def chajoHkughiNnNnyatoH_703052(x,suffix):
     return x
 
 
+def aardhadhaatukasyeXdvalaadeH_704114(x,is_aardhadhaatuka,suffix):
+    
+    if is_aardhadhaatuka:
+        return x + ["i","Xt"]
+    else:
+        return x
+    
+    
+    

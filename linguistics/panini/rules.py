@@ -31,8 +31,16 @@ class Prefix:
 def apply_it(self,pos,suffix_str):
     return [val for index,val in enumerate(self._suffix) if index!=pos]
 
-def get_relevant_suffix(sense):
-    sense2suffix = {'bhaava':Suffix("ghaNc"), 'kartaa':Suffix('Nnvul'),'bhava':Suffix("aNn")}
+
+def get_dhaatu_lakaara(dhaatu, lakaara):
+    if lakaara=="luNg":
+        #via chleHsich
+        return Suffix("sich")
+    raise ValueError("Unknown lakaara")
+def get_relevant_suffix(sense,dhaatu=None):
+    sense2suffix = {'bhaava':Suffix("ghaNc"), 'kartaa':Suffix('Nnvul'),
+                    'bhava':Suffix("aNn"),
+                    'luNg':get_dhaatu_lakaara(dhaatu=sense,lakaara='luNg')}
     return sense2suffix[sense]
     
     
@@ -157,6 +165,11 @@ def add_suffix(anga,suffix):
     #print("suffix="+str(suffix)+"it_chars="+str(it_chars))
     post_ku_vriddhi_anga1 = chajoHkughiNnNnyatoH_703052(post_vriddhi_anga,suffix)
     post_ku_vriddhi_anga2 = acho_NcNniti_702115(post_ku_vriddhi_anga1,suffix.get_suffix())
+    if anga.is_dhaatu():
+        forced_aardhadhaatuka = True
+        # 0703096- astisicho apRikte - would enable iT otherwise 
+        # prevented with 0702010 - ekaacha upadeshe anudaattaat
+        post_ku_vriddhi_anga2 = aardhadhaatukasyeXdvalaadeH_704114(post_ku_vriddhi_anga2,forced_aardhadhaatuka,suffix.get_suffix())
     #non_it_letters = [x for x in suffix if x not in it_chars ]
     #TODO: ask why chuXtuu does not apply for chh -> 701002
     if ''.join(suffix.get_suffix())=="chha":
@@ -182,18 +195,20 @@ def add_suffix(anga,suffix):
 
 def declense(state,index_x,index_y,sense,is_dhaatu):
     
-    relevant_suffix=get_relevant_suffix(sense)
+    
     
     if isinstance(state,Anga):
         input_data = state.get_anga()
         if is_dhaatu:
+            relevant_suffix=get_relevant_suffix(sense,dhaatu=input_data)
             input_data = upadesheajanunaasikait_103002(input_data)
             input_data = NnonaH_601063(input_data)
             it_pos_list = aadirNciXtuXdavaH_103005(input_data)
             input_data = [x for i,x in enumerate(input_data) if i not in it_pos_list]   
-   
+        else:
+            relevant_suffix=get_relevant_suffix(sense)
         
-        sup = add_suffix(Anga(input_data),relevant_suffix)
+        sup = add_suffix(Anga(input_data,is_dhaatu),relevant_suffix)
         
         if is_praatipadika_by_suffix(relevant_suffix):
             pada = form_pada(sup=sup,is_sup=True,index_x=index_x,index_y=index_y)
@@ -203,6 +218,7 @@ def declense(state,index_x,index_y,sense,is_dhaatu):
             raise ValueError("Not a praatipadika")    
              
     else:
+        relevant_suffix=get_relevant_suffix(sense)
         state_after_agama = add_agamas(state)
         if isinstance(state_after_agama[-1],Suffix):
             if state_after_agama[-1].is_taddhita:
@@ -231,7 +247,8 @@ if __name__ =="__main__":
         assert ''.join(declense([Group(parse_string("shaalaa")),Suffix(sup_pratyayaaH()[6*3+0])],0,0,sense="bhava",is_dhaatu=False)) == "shaaliiya"
     #TODO:
     #print(''.join(declense(parse_string("chiNc"),0,0,sense="kartaa",is_dhaatu=True))) # chiNc -> chaayaka? (XshXtuNc se dhaatvaadeH XshaH saH)
-       
+    print(declense(Anga(parse_string("chiNc")),0,0,sense="luNg",is_dhaatu=True))
+    
     
     sys.exit(0)
 
