@@ -1232,7 +1232,147 @@ Chain implied by two income bands
 \end_layout
 
 \begin_layout Standard
-We have already assumed that 
+[Optimum 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+]
+\end_layout
+
+\begin_layout Standard
+Notice that the consumer's horizon is just one time period.
+ At every period 
+\begin_inset Formula $t$
+\end_inset
+
+, the consumer who optimises 
+\begin_inset Formula $u(A_{t+1})$
+\end_inset
+
+ chooses 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ (or 
+\begin_inset Formula $\prescript{t}{}\nu_{2}$
+\end_inset
+
+) given 
+\begin_inset Formula $\prescript{t}{}A$
+\end_inset
+
+, 
+\begin_inset Formula $\omega,\bar{\omega},y_{1},y_{2},w(\cdot)$
+\end_inset
+
+.
+ More specifically, the consumer must choose 
+\begin_inset Formula $\nu$
+\end_inset
+
+ so that the following is maximised
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+W(\prescript{t}{}\nu_{1})u_{2}(f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2}))+(1-W(\prescript{t}{}\nu_{1}))u_{1}(f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1}))
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $f(A)=A-\psi A^{\beta}$
+\end_inset
+
+ (and 
+\begin_inset Formula $f'(A)=1-\beta A^{\beta-1}$
+\end_inset
+
+).
+ We assume that the consumer enjoys the same wealth more in band 1 than
+ in band 2.
+ This is ensured with 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% We don't worry about the explicit solution because we're using solvers
+ for this purpose
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+u_{1}(A)=\Gamma_{1}A^{\alpha}\\
+u_{2}(A)=\Gamma_{2}A^{\alpha}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The consumer in band 1 thus chooses 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ so that the above expression is maximised.
+ Denoting the expression optimising expression as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\prescript{t}{}\nu_{1} & =g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A,\omega,\bar{\omega},\alpha,\beta)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\prescript{t}{}\nu_{2} & =g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A,\lambda,\bar{\lambda},\alpha,\beta)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The constraints are implied on 
+\begin_inset Formula $\omega,\bar{\omega},\alpha$
+\end_inset
+
+ due to two constraint.
+ First is the population constraint which implies 
+\begin_inset Formula $W(\prescript{t}{}\nu_{1})=L(\prescript{t}{}\nu_{2})$
+\end_inset
+
+.
+ The second is the long-term constraint which we now elaborate.
+\end_layout
+
+\begin_layout Standard
+[LTE] We have already assumed that 
 \begin_inset Formula $\nu_{1}\in[0,y_{1}]$
 \end_inset
 
@@ -1296,12 +1436,12 @@ We have already assumed that
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-f(\prescript{t}{}A+y_{1})+W_{1}(\prescript{t}{}\nu_{1})f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})+(1-W_{1}(\prescript{t}{}\nu_{1}))f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1})
+W_{1}(\prescript{t}{}\nu_{1})f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})+(1-W_{1}(\prescript{t}{}\nu_{1}))f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1})
 \end{align*}
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard
@@ -1311,7 +1451,7 @@ In equilibrium, no new income would be added as the cost of assets must
 \end_inset
 
 .
- Therefore,
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1328,7 +1468,7 @@ W_{1}(\prescript{t}{}\nu_{1})f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-W_{1}(\prescript{t}{}\nu_{1}) & =\frac{1}{1-\frac{f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1})}}
+W_{1}(\prescript{t}{}\nu_{1}) & =\frac{1}{1-\frac{f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})}}
 \end{align*}
 
 \end_inset
@@ -1337,57 +1477,14 @@ W_{1}(\prescript{t}{}\nu_{1}) & =\frac{1}{1-\frac{f(\prescript{t}{}A+y_{1}-\pres
 \end_layout
 
 \begin_layout Standard
-The long-term equilibrium would necessitate that the cost-function penalises
- higher assets after one point.
-\end_layout
-
-\begin_layout Standard
-Additionally, the population constraint would require that 
-\begin_inset Formula $W(\prescript{t}{}\nu_{1})=L(\prescript{t}{}\nu_{2})$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Notice that the consumer's horizon is just one time period.
- At every period 
-\begin_inset Formula $t$
-\end_inset
-
-, the consumer who optimises 
-\begin_inset Formula $u(A_{t+1})$
-\end_inset
-
- chooses 
-\begin_inset Formula $\prescript{t}{}\nu_{1}$
-\end_inset
-
- (or 
-\begin_inset Formula $\prescript{t}{}\nu_{2}$
-\end_inset
-
-) given 
-\begin_inset Formula $\prescript{t}{}A$
-\end_inset
-
-, 
-\begin_inset Formula $\omega,\bar{\omega},y_{1},y_{2},w(\cdot)$
-\end_inset
-
-.
- More specifically, the consumer must choose 
-\begin_inset Formula $\nu$
-\end_inset
-
- so that the following is maximised
+Similarly, for the consumer in band 2
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{alignat*}{1}
-W(\nu_{1})u_{2}(f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2}))+(1-W(\nu_{1}))u_{1}(f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1}))
-\end{alignat*}
+\begin{align*}
+L_{2}(\prescript{t}{}\nu_{2})f(\prescript{t}{}A+y_{2}-\prescript{t}{}\nu_{2}+y_{1})+(1-L_{2}(\prescript{t}{}\nu_{2}))f(\prescript{t}{}A+y_{2}-\prescript{t}{}\nu_{2}+y_{2}) & =0
+\end{align*}
 
 \end_inset
 
@@ -1395,30 +1492,347 @@ W(\nu_{1})u_{2}(f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2}))+(1-W(\nu
 \end_layout
 
 \begin_layout Standard
-where 
-\begin_inset Formula $f(A)=A-\psi A^{\beta}$
+Therefore,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+L(\prescript{t}{}\nu_{2}) & =\frac{1}{1-\frac{f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})}{f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2})}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The values 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\prescript{t}{}\nu_{1},\prescript{t}{}\nu_{2},\prescript{t}{}A_{1},\prescript{t}{}A_{2}$
+\end_inset
+
+ should be so that f is increasing on for user 1 and decreasing for user
+ 2.
+ This means there should be valley (e.g.
+ like 
+\begin_inset Formula $(x-a)^{2}$
+\end_inset
+
+).
+ This is an important finding - a cost structure that comes into long-term
+ equilibrium must discourage more income at higher assets but encourage
+ more income at lower assets.
+ The population constraint further ensures that the proportion of cost imposed
+ by the income differences must also be the same
+\begin_inset Formula 
+\begin{align*}
+\frac{f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})} & =\frac{f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})}{f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2})}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%asset_cost_categs <- subset(lsms_normalizer()@categories_non_basic_wassets(),gr
+oup=="asset_costs")$shortname
+\end_layout
+
+\begin_layout Plain Layout
+
+%ac2012<-ddply(subset(c2012,is.element(shortname,asset_cost_categs) & !is.na(cost)
+),.(hhid),summarise,ac=sum(cost))
+\end_layout
+
+\begin_layout Plain Layout
+
+%asset_mtms_2012 = asset_mtms(a2012,"bed","2012")
+\end_layout
+
+\begin_layout Plain Layout
+
+%assetslog2012 <- ddply(asset_mtms_2012,.(hhid2012),summarise,lnA0=log(sum(number.
+2012*mtm.2012)),A0=sum(number.2012*mtm.2012))
+\end_layout
+
+\begin_layout Plain Layout
+
+%ac2012<- merge(plyr::rename(ac2012,c("hhid"="hhid2012")),assetslog2012
+ ,by=c("hhid2012"))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can see that the long-term equilibrium restriction for the cost-function
+ is not what is observed in the data (see the plot of logarithms of asset-costs
+ and asset-values ) 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% need not write in the chapter
+\end_layout
+
 \end_inset
 
 .
- Let's assume for the moment that it does not matter to the consumer whether
- her accumulation is in band 1 or in band 2.
- The consumer in band 1 thus chooses 
-\begin_inset Formula $\prescript{t}{}\nu_{1}$
+ Without the long-term stability constraint the population constraint 
+\begin_inset Formula $W(\prescript{t}{}\nu_{1})=L(\prescript{t}{}\nu_{2})$
 \end_inset
 
- so that
+ may only imply 
+\begin_inset Formula $\omega\nu_{1}+\lambda\nu_{2}=\omega\bar{\omega}+\lambda\bar{\lambda}$
+\end_inset
+
+ in every short-term equilbrium.
+ The next question is whether this is observed in the data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename logc_vs_logA_2012.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+log(asset-costs) vs log(asset-values)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Relative wealth equilibrium
+\end_layout
+
+\begin_layout Standard
+In equilibrium, the relative wealth could just be as stable as the differential
+ income.
+ This is a less stringent condition as it allows the individual 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\prescript{t}{}A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\prescript{t}{}A_{2}$
+\end_inset
+
+ to grow indefinitely.
+ But imposing population condition this would imply that both bands face
+ the same costs.
+ This is also not observed in the data.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-k'(\prescript{t}{}A+y_{1}-\nu_{1})+W'(\nu_{1})\{k(\prescript{t}{}A+y_{2}-\nu_{1})-k(\prescript{t}{}A+y_{1}-\nu_{1})\}+\\
-W(\nu_{1})\{k'(\prescript{t}{}A+y_{2}-\nu_{1})-k'(\prescript{t}{}A+y_{1}-\nu_{1})\}=0
+W_{1}(\prescript{t}{}\nu_{1})f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})+(1-W_{1}(\prescript{t}{}\nu_{1}))f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})\\
+=L_{2}(\prescript{t}{}\nu_{2})f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})+(1-L_{2}(\prescript{t}{}\nu_{2}))f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2})
 \end{multline*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Non-LTE Arguments (data-driven)
+\end_layout
+
+\begin_layout Standard
+Since we have given up on long-term equilibrium on grounds of data, let's
+ consider what short-term equilbrium entails.
+ This only guarantees that symmetrical swap i.e.
+ 
+\begin_inset Formula $W(\prescript{t}{}\nu_{1})=L(\prescript{t}{}\nu_{2})$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+The summary of unknowns
+\end_layout
+
+\begin_layout Standard
+1.
+ 
+\begin_inset Formula $\prescript{t}{}A_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ 
+\begin_inset Formula $\prescript{t}{}A_{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ 
+\begin_inset Formula $\prescript{t}{}\nu_{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+5.
+ 
+\begin_inset Formula $\bar{\omega}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+6.
+ 
+\begin_inset Formula $\bar{\lambda}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\prescript{t}{}A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\prescript{t}{}A_{2}$
+\end_inset
+
+ may never stabilise - because if they did stabilise, then a cost-function
+ with a dip must exist.
+ Therefore, since we cannot put any condition on 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ - the cost-function approach itself must be discarded.
+\end_layout
+
+\begin_layout Standard
+The summary of conditions
+\end_layout
+
+\begin_layout Standard
+1.
+ population constraint 
+\begin_inset Formula $W(\prescript{t}{}\nu_{1})=L(\prescript{t}{}\nu_{2})$
+\end_inset
+
+ which implies 
+\begin_inset Formula $\omega\nu_{1}^{*}+\lambda\nu_{2}^{*}=\omega\bar{\omega}+\lambda\bar{\lambda}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ 
+\begin_inset Formula $\prescript{t}{}\nu_{1}=g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A_{1},\omega,\bar{\omega},\alpha,\beta)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ 
+\begin_inset Formula $\prescript{t}{}\nu_{2}=g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A_{2},\lambda,\bar{\lambda},\alpha,\beta)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ 
+\begin_inset Formula $W_{1}(\prescript{t}{}\nu_{1})=\frac{1}{1-\frac{f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1})}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+5.
+ 
+\end_layout
+
+\begin_layout Standard
+=====
 \end_layout
 
 \begin_layout Standard
@@ -2952,7 +3366,7 @@ However, if we choose
 \begin_inset Formula $W,L$
 \end_inset
 
- may still be subject to the popultation constraint.
+ may still be subject to the population constraint.
  Population constraint cannot be broken more frequently than the staying-the-sam
 e equilibrium of the long-term - since bands cannot even exist without populatio
 n stability.
@@ -3003,7 +3417,6 @@ However, if we're to look at the consumer's optimisation, then we need to
 \end_inset
 
  is satisfied in the short-run.
- 
 \end_layout
 
 \begin_layout Standard
@@ -3091,7 +3504,7 @@ Since
 \begin_inset Formula $u_{1}(\nu)$
 \end_inset
 
- is maximised when 
+ is maximised when
 \begin_inset Formula 
 \begin{multline*}
 (1+e^{-\omega(\nu-\bar{\omega})})(-\frac{dN}{d\nu})=\omega Ne^{-\omega(\nu-\bar{\omega})}
@@ -3108,7 +3521,7 @@ where
 \end_inset
 
 .
- Now, 
+ Now,
 \end_layout
 
 \begin_layout Standard
@@ -3123,7 +3536,7 @@ where
 \end_layout
 
 \begin_layout Standard
-Therefore, 
+Therefore,
 \end_layout
 
 \begin_layout Standard

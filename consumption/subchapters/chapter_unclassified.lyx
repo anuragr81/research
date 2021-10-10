@@ -6755,5 +6755,177 @@ or
 
 \end_layout
 
+\begin_layout Section
+Rejected polynomial on polynomial
+\end_layout
+
+\begin_layout Standard
+Notice that the consumer's horizon is just one time period.
+ At every period 
+\begin_inset Formula $t$
+\end_inset
+
+, the consumer who optimises 
+\begin_inset Formula $u(A_{t+1})$
+\end_inset
+
+ chooses 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ (or 
+\begin_inset Formula $\prescript{t}{}\nu_{2}$
+\end_inset
+
+) given 
+\begin_inset Formula $\prescript{t}{}A$
+\end_inset
+
+, 
+\begin_inset Formula $\omega,\bar{\omega},y_{1},y_{2},w(\cdot)$
+\end_inset
+
+.
+ More specifically, the consumer must choose 
+\begin_inset Formula $\nu$
+\end_inset
+
+ so that the following is maximised
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+W(\nu_{1})u_{2}(f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2}))+(1-W(\nu_{1}))u_{1}(f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1}))
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $f(A)=A-\psi A^{\beta}$
+\end_inset
+
+.
+ Let's assume for the moment that it does not matter to the consumer whether
+ her accumulation is in band 1 or in band 2.
+ The consumer in band 1 thus chooses 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ so that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+k'(\prescript{t}{}A+y_{1}-\nu_{1})+W'(\nu_{1})\{k(\prescript{t}{}A+y_{2}-\nu_{1})-k(\prescript{t}{}A+y_{1}-\nu_{1})\}+\\
+W(\nu_{1})\{k'(\prescript{t}{}A+y_{2}-\nu_{1})-k'(\prescript{t}{}A+y_{1}-\nu_{1})\}=0
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $W(\nu_{1})=\frac{1}{1+e^{-\omega(\nu-\bar{\omega})}}$
+\end_inset
+
+, 
+\begin_inset Formula $W'(\nu_{1})=\frac{\omega e^{-\omega(\nu-\bar{\omega})}}{(1+e^{-\omega(\nu-\bar{\omega}})^{2}}$
+\end_inset
+
+we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}+\frac{\omega e^{-\omega(\nu-\bar{\omega})}}{(1+e^{-\omega(\nu-\bar{\omega}})^{2}}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}+\\
+\frac{\psi\beta}{1+e^{-\omega(\nu-\bar{\omega})}}\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Multiplying with 
+\begin_inset Formula $(1+e^{-\omega(\nu-\bar{\omega}})^{2}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+(1+e^{-\omega(\nu-\bar{\omega}})^{2}(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\\
++\omega e^{-\omega(\nu-\bar{\omega})}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}+\\
+\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+(1+e^{-2\omega(\nu-\bar{\omega})}+2e^{-\omega(\nu-\bar{\omega})})(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\\
++\omega e^{-\omega(\nu-\bar{\omega})}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}=\\
+\psi\beta\{((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}-\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}\}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Letting 
+\begin_inset Formula $z\equiv e^{-\omega(\nu-\bar{\omega})}$
+\end_inset
+
+ a solution exists for the following quadratic in 
+\begin_inset Formula $z$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})z^{2}+z\\
++[2(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\omega\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}]z\\
++(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+only as long as 
+\begin_inset Formula 
+\begin{multline*}
+[2(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\omega\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}]^{2}\\
+>4\times(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\times[(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}]
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
