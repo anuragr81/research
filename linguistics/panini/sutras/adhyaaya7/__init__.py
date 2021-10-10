@@ -26,6 +26,8 @@ def aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(pratyaya):
         return ["ii","y"]+ pratyaya[1:]
     elif letter == "gh":
         return ["i","y"]+ pratyaya[1:]
+    else:
+        return pratyaya
     
 
         

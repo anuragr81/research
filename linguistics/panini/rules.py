@@ -225,14 +225,14 @@ if __name__ =="__main__":
     #input_str= "bhaj"
     
     if False:
-        assert(''.join(declense(parse_string("bhaja"),0,0,sense="bhaava",is_dhaatu=True))=="bhaagaH")
-        assert(''.join(declense(parse_string("NniiNc"),0,0,sense="kartaa",is_dhaatu=True))=="naayakaH")
-        #print(''.join(declense(parse_string("chiNc"),0,0,sense="kartaa",is_dhaatu=True))) # chiNc -> chaayaka? (XshXtuNc se dhaatvaadeH XshaH saH)
+        assert(''.join(declense(Anga(parse_string("bhaja")),0,0,sense="bhaava",is_dhaatu=True))=="bhaagaH")
+        assert(''.join(declense(Anga(parse_string("NniiNc")),0,0,sense="kartaa",is_dhaatu=True))=="naayakaH")        
         assert(''.join(declense(Anga(parse_string("XdukRiNc")),0,0,sense="kartaa",is_dhaatu=True))=="kaarakaH") 
-
+        assert ''.join(declense([Group(parse_string("shaalaa")),Suffix(sup_pratyayaaH()[6*3+0])],0,0,sense="bhava",is_dhaatu=False)) == "shaaliiya"
+    #TODO:
+    #print(''.join(declense(parse_string("chiNc"),0,0,sense="kartaa",is_dhaatu=True))) # chiNc -> chaayaka? (XshXtuNc se dhaatvaadeH XshaH saH)
+       
     
-    #print(''.join(declense("shaalaa",6,0,sense="bhava",is_dhaatu=False))) # 4.2.91 - sheXshe (explain)
-    print(declense([Group(parse_string("shaalaa")),Suffix(sup_pratyayaaH()[6*3+0])],0,0,sense="bhava",is_dhaatu=False))
     sys.exit(0)
 
     #a =pd.read_csv('dhaatupaatha.csv')
