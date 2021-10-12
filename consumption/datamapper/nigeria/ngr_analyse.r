@@ -228,10 +228,59 @@ infer_occupation_ranks <- function(o2010 , ignore_top) {
   i2010 <- subset(i2010, yearly_pay<quantile(i2010$yearly_pay,1-ignore_top))
   occup <- ddply(i2010,.(occupation),summarise,l_mean_ypay = log(mean(yearly_pay)),l_median_ypay = log(median(yearly_pay)))
   occup <- merge(plyr::rename(read.csv('../lsms/nigeria/occupation_codes.csv')[,c("occupation_code","occupation_name")],c("occupation_code"="occupation")),occup,by="occupation")
-  occup <- (occup[order(occup$l_median_ypay),])
-  occup$occupation_rank <- as.integer(o$l_median_ypay<=11.9) +  2*as.integer(o$l_median_ypay>11.9 & o$l_median_ypay<12.61154)  + 3*as.integer(o$l_median_ypay>=12.61154);
+  occup <- occup[order(occup$l_median_ypay),]
+  
+  occup$occupation_rank <- as.integer(occup$l_median_ypay<=11.9) +  2*as.integer(occup$l_median_ypay>11.9 & occup$l_median_ypay<12.61154)  + 3*as.integer(occup$l_median_ypay>=12.61154)
+  # adjustments
+  occup<- rbind(occup,data.frame(occupation="7133",occupation_name="insulators",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="2211",occupation_name="biologists",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=2))
+  occup<- rbind(occup,data.frame(occupation="7241",occupation_name="electrical mechanics",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="7311",occupation_name="precision instrument makers",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="5122",occupation_name="waiters",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="2453",occupation_name="musicians",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="8269",occupation_name="textile machine operators",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="7312",occupation_name="musicians (acoustic)",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="8223",occupation_name="metal finishers",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="7324",occupation_name="ceramic painters",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="4144",occupation_name="scribes",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="3320",occupation_name="education specialists(1)",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="7341",occupation_name="type setters",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="3418",occupation_name="auctioneers",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="3122",occupation_name="computer equipment operators",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="7216",occupation_name="under-water workers",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="3223",occupation_name="dieticians and nutritionists",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="7345",occupation_name="textile printers",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="3224",occupation_name="optometrists",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="8312",occupation_name="railway workers",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="7436",occupation_name="embroiderers",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="8122",occupation_name="metal melters",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="3141",occupation_name="ship engineers",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="7344",occupation_name="bookbinders",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="3226",occupation_name="physiotherapists",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  
+  
+  occup<- rbind(occup,data.frame(occupation="3470",occupation_name="religion associate",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=2))
+  occup<- rbind(occup,data.frame(occupation="2351",occupation_name="education specialists(2)",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=2))
+  occup<- rbind(occup,data.frame(occupation="2441",occupation_name="economists",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=2))
+  occup<- rbind(occup,data.frame(occupation="3432",occupation_name="legal professionals",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=2))
+  occup<- rbind(occup,data.frame(occupation="1110",occupation_name="legislators",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  
+  if (F){
+  
+  
+  
+  occup<- rbind(occup,data.frame(occupation="",occupation_name="",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="",occupation_name="",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="",occupation_name="",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="",occupation_name="",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="",occupation_name="",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  occup<- rbind(occup,data.frame(occupation="",occupation_name="",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
+  
+  }
+  
   return(occup)
 }
+
 
 init_data <- function(){
 
