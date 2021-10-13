@@ -210,6 +210,13 @@ compute_yearly_pay<- function(pay,pay_units, hours_per_week,weeks_worked) {
   stop("Unknown payment unit")
 }
 
+infer_education_ranks <- function(o2010){
+  educ <- unique(o2010[c("hhid","personid","highest_educ")])
+  educ[is.na(educ$highest_educ),]$highest_educ <- 0
+  educ$education_rank <- as.integer(educ$highest_educ<=0)*0 + as.integer(educ$highest_educ>0 & educ$highest_educ<=11)*1 + as.integer(educ$highest_educ>11 & educ$highest_educ<=23)*2 +as.integer(educ$highest_educ>23)*3
+  return(educ)
+}
+
 infer_occupation_ranks <- function(o2010 , ignore_top) {
   warning("Using only 2010 data - ignoring the worked-for-outside-hh field")
   get_weeks=function(m,w){ if (is.na(w)) { return (m*4.3)} else {return(w)} }
@@ -286,14 +293,6 @@ infer_occupation_ranks <- function(o2010 , ignore_top) {
   occup<- rbind(occup,data.frame(occupation="3432",occupation_name="legal professionals",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=3))
   
   
-  if (F){
-  
-  occup<- rbind(occup,data.frame(occupation="",occupation_name="",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
-  occup<- rbind(occup,data.frame(occupation="",occupation_name="",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
-  occup<- rbind(occup,data.frame(occupation="",occupation_name="",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
-  occup<- rbind(occup,data.frame(occupation="",occupation_name="",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=1))
-  
-  }
   
   return(occup)
 }
@@ -315,11 +314,23 @@ init_data <- function(){
 }
 
 
+choose_max_education_rank <- function (x) { arr = x[!is.na(x)] ; if (length(arr)>1) {return (max(arr))} else {return(0)}}
 
+
+#d <- ngr_get_nonparametric_df(nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)'
 ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a2012, a2015,c2010,c2012,c2015){
   
   educ_pivot <- 3
   occup_pivot <- 2
+  
+  #occupation_mapping
+  occupation_mapping <- infer_occupation_ranks(o2010 = o2010,ignore_top = .05)
+  
+  o2010<- merge(plyr::rename(o2010,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
+  o2012<- merge(plyr::rename(o2012,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
+  o2015<- merge(plyr::rename(o2015,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
+  
+  
   
   asset_mtms_2010 = asset_mtms(a2010,"furntiure_medium","2010")
   asset_mtms_2012 = asset_mtms(a2012,"furntiure_medium","2012")
@@ -377,7 +388,7 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   ohs2010 <- subset(o2010,!is.na(region))
   hsizes2010 <- ddply(ohs2010[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
   hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), hsizes2010, by = c("hhid")))
-  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
+  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) )
   #  perception_columns
   
   hswithchars2010 <- merge(hs2010,chosenchars2010,all.x = T)
@@ -388,15 +399,16 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   ohs2012 <- subset(o2012,!is.na(region))
   hsizes2012 <- ddply(ohs2012[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
-  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
+  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank))
   
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   
-  #2014
-  ohs2014 <- subset(o2014,!is.na(region))
-  hs2014 <- unique(merge(unique(ohs2014[,relevant_fields]), nl@get_hsize(ohs2014), by = c("hhid")))
-  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang))
-  hswithchars2014 <- merge(hs2014,chosenchars2014,all.x = T)
+  #2015
+  ohs2015 <- subset(o2015,!is.na(region))
+  hsizes2015 <- ddply(ohs2015[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
+  hs2015 <- unique(merge(unique(ohs2015[,relevant_fields]), hsizes2015, by = c("hhid")))
+  chosenchars2015 <- ddply(ohs2015[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) )
+  hswithchars2015 <- merge(hs2015,chosenchars2015,all.x = T)
 
   
   #a<-merge(plyr::rename(i2010,c("hhid"="hhid2010")),assetslog2010 ,by=c("hhid2010"))
@@ -404,26 +416,26 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   if(food_analysis==T){
     dat2010 <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ka2010, by = c("hhid2010")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
     dat2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ka2012, by = c("hhid2012")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
-    dat2014 <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),ka2014, by = c("hhid2014")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+    dat2015 <- merge(plyr::rename(hswithchars2015,c("hhid"="hhid2014")),ka2015, by = c("hhid2014")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
     dat2010 <- subset(dat2010,!is.na(A0) & !is.infinite(cpA_a))
     dat2012 <- subset(dat2012,!is.na(A0) & !is.infinite(cpA_a))
-    dat2014 <- subset(dat2014,!is.na(A0) & !is.infinite(cpA_a))
+    dat2015 <- subset(dat2015,!is.na(A0) & !is.infinite(cpA_a))
     res[["df2010"]] <- dat2010
     res[["df2012"]] <- dat2012
-    res[["df2014"]] <- dat2014
+    res[["df2015"]] <- dat2015
     
   } else{
     indivdat2010_woassets <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ne2010, by = c("hhid2010")) 
     indivdat2012_woassets <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ne2012, by = c("hhid2012")) 
-    indivdat2014_woassets <- merge(plyr::rename(hswithchars2014,c("hhid"="hhid2014")),ne2014, by = c("hhid2014")) 
+    indivdat2015_woassets <- merge(plyr::rename(hswithchars2015,c("hhid"="hhid2014")),ne2015, by = c("hhid2014")) 
     
     indivdat2010 <- merge(assetslog2010, indivdat2010_woassets, by = "hhid2010")
     indivdat2012 <- merge(assetslog2012, indivdat2012_woassets, by = "hhid2012")
-    indivdat2014 <- merge(assetslog2014, indivdat2014_woassets, by = "hhid2014")
+    indivdat2015 <- merge(assetslog2014, indivdat2014_woassets, by = "hhid2015")
     
     indivdat2010$P1 <- paste(indivdat2010$region,indivdat2010$district,sep="-")
     indivdat2012$P1 <- paste(indivdat2012$region,indivdat2012$district,sep="-")
-    indivdat2014$P1 <- paste(indivdat2014$region,indivdat2014$district,sep="-")
+    indivdat2015$P1 <- paste(indivdat2014$region,indivdat2015$district,sep="-")
     
     #dat2010 <- subset(dat2010,!is.na(A0) )
     #dat2012 <- subset(dat2012,!is.na(A0) )
@@ -437,9 +449,9 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
     dflist <- list()
     dflist[["indivdat2010"]] <- indivdat2010
     dflist[["indivdat2012"]] <- indivdat2012
-    dflist[["indivdat2014"]] <- indivdat2014
+    dflist[["indivdat2015"]] <- indivdat2015
     
-    for (year in c(2010,2012,2014)){
+    for (year in c(2010,2012,2015)){
       dfdat <- dflist[[paste0("indivdat",year)]]
       dfdat <- dfdat %>% mutate( high_educ = as.integer(max_education_rank>educ_pivot) , high_occup = as.integer(max_occupation_rank>occup_pivot))
       

@@ -543,7 +543,10 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohs$highest_educ <- as.integer(as.character(ohs$highest_educ))
       ohs$age          <- 2010 - as.integer(as.character(ohs$YOB))
       
-      
+      ohs$highest_educ_temp <- ohs$highest_educ
+      ohs[is.na(ohs$highest_educ_temp),]$highest_educ_temp <- 0
+      ohs$education_rank <- as.integer(ohs$highest_educ_temp<=0)*0 + as.integer(ohs$highest_educ_temp>0 & ohs$highest_educ_temp<=11)*1 + as.integer(ohs$highest_educ_temp>11 & ohs$highest_educ_temp<=23)*2 +as.integer(ohs$highest_educ_temp>23)*3
+      ohs$highest_educ_temp <- NULL
     
       #household_status must be determined by 1. rank based on occupation_rank 2. occupation_primary 3. highest_educ 4. qualification 5. age (pay is not available for the most)
       #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
@@ -601,6 +604,11 @@ ngr_loader<-function(fu,ngrn,lgc) {
       #household_status must be determined by 1. rank based on occupation_rank 2. occupation_primary 3. highest_educ 4. qualification 5. age (pay is not available for the most)
       #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
       
+      ohs$highest_educ_temp <- ohs$highest_educ
+      ohs[is.na(ohs$highest_educ_temp),]$highest_educ_temp <- 0
+      ohs$education_rank <- as.integer(ohs$highest_educ_temp<=0)*0 + as.integer(ohs$highest_educ_temp>0 & ohs$highest_educ_temp<=11)*1 + as.integer(ohs$highest_educ_temp>11 & ohs$highest_educ_temp<=23)*2 +as.integer(ohs$highest_educ_temp>23)*3
+      ohs$highest_educ_temp <- NULL
+      
       return(ohs)
     }
     
@@ -654,6 +662,11 @@ ngr_loader<-function(fu,ngrn,lgc) {
       
       #household_status must be determined by 1. rank based on occupation_rank 2. occupation_primary 3. highest_educ 4. qualification 5. age (pay is not available for the most)
       #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
+      ohs$highest_educ_temp <- ohs$highest_educ
+      
+      ohs[is.na(ohs$highest_educ_temp),]$highest_educ_temp <- 0
+      ohs$education_rank <- as.integer(ohs$highest_educ_temp<=0)*0 + as.integer(ohs$highest_educ_temp>0 & ohs$highest_educ_temp<=11)*1 + as.integer(ohs$highest_educ_temp>11 & ohs$highest_educ_temp<=23)*2 +as.integer(ohs$highest_educ_temp>23)*3
+      ohs$highest_educ_temp <- NULL
       
       return(ohs)
     }
