@@ -317,6 +317,54 @@ init_data <- function(){
 choose_max_education_rank <- function (x) { arr = x[!is.na(x)] ; if (length(arr)>1) {return (max(arr))} else {return(0)}}
 
 
+get_bubble_distances <- function(dat,distance_threshold,popdistance_threshold){
+  # the average of consumption of consumers within a given population-distance becomes pi(r), the total asset value becomes r, the total expenditure is cost_ne
+  # remember we have distances only of consumers 
+  
+  loc_cols <- c("region","district","S","E")
+  
+  all_points <- unique(dat[,loc_cols])
+  
+  all_points$point <- paste(all_points$region,all_points$district,sep="-")
+  all_distances <- expand.grid(all_points$point,all_points$point)
+  colnames(all_distances) <- c("P1","P2")
+  all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P1")),all_distances,by=c("P1")) ,c("S"="S1","E"="E1","region"="region1","district"="district1") )
+  all_distances <- plyr::rename(merge(plyr::rename(all_points,c("point"="P2")),all_distances,by=c("P2")) ,c("S"="S2","E"="E2","region"="region2","district"="district2") )
+  
+  # The distances between two points that are populous would be lower than two points that are less populous
+  # The distances are still symmetric - because even if one is significantly more populous than the other - they're closer than they would be when they're not populous.
+  all_distances$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , all_distances$S1,all_distances$E1,all_distances$S2,all_distances$E2)
+  
+  if (missing(distance_threshold)){
+    stop("Must provide either distance_threshold or popdistance_threshold")  
+  } else{
+    filtered_distances <- subset(all_distances,distance<distance_threshold)
+  }
+  
+  bubble_distances <- ddply(unique(filtered_distances[,c("P1","P2")]),.(P1),summarise,B=toJSON(P2))
+  return(bubble_distances)
+}
+
+get_bubble_aggregated_df <- function(input_dat,bubble_distances){
+  
+  pb <- txtProgressBar(min = 0, max = dim(bubble_distances)[1], style = 3)
+  resdf <- NULL
+  for (i in seq(dim(bubble_distances)[1])){
+    tempdat <- subset(input_dat %>% mutate(found=sapply(input_dat$P1,function(x){ is.element(x,fromJSON(bubble_distances[i,]$B))}) ), found==T)
+    tempdat <- tempdat %>% mutate(B=bubble_distances[i,]$B , found=NULL)
+    resdf <- rbind(resdf,tempdat)
+    
+    #mean can be calculated over 
+    #tempdat %>% mutate(high_occup = as.integer(max_occupation_rank>1))
+    #tempdat %>% mutate(high_educ = as.integer(max_education_rank>1))
+    setTxtProgressBar(pb, i)
+  }
+  
+  return(resdf)
+}
+
+
+
 #d <- ngr_get_nonparametric_df(nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)'
 ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a2012, a2015,c2010,c2012,c2015){
   
@@ -414,9 +462,9 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   #a<-merge(plyr::rename(i2010,c("hhid"="hhid2010")),assetslog2010 ,by=c("hhid2010"))
   res=list()
   if(food_analysis==T){
-    dat2010 <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ka2010, by = c("hhid2010")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
-    dat2012 <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ka2012, by = c("hhid2012")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
-    dat2015 <- merge(plyr::rename(hswithchars2015,c("hhid"="hhid2014")),ka2015, by = c("hhid2014")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+    dat2010 <- merge(hswithchars2010,ka2010, by = c("hhid")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+    dat2012 <- merge(hswithchars2012,ka2012, by = c("hhid")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
+    dat2015 <- merge(hswithchars2015,ka2015, by = c("hhid")) %>% mutate (cpA_a = cost_a/A0) %>% mutate (cpA_b = cost_b/A0)
     dat2010 <- subset(dat2010,!is.na(A0) & !is.infinite(cpA_a))
     dat2012 <- subset(dat2012,!is.na(A0) & !is.infinite(cpA_a))
     dat2015 <- subset(dat2015,!is.na(A0) & !is.infinite(cpA_a))
@@ -425,24 +473,18 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
     res[["df2015"]] <- dat2015
     
   } else{
-    indivdat2010_woassets <- merge(plyr::rename(hswithchars2010,c("hhid"="hhid2010")),ne2010, by = c("hhid2010")) 
-    indivdat2012_woassets <- merge(plyr::rename(hswithchars2012,c("hhid"="hhid2012")),ne2012, by = c("hhid2012")) 
-    indivdat2015_woassets <- merge(plyr::rename(hswithchars2015,c("hhid"="hhid2014")),ne2015, by = c("hhid2014")) 
+    indivdat2010_woassets <- merge(hswithchars2010,ne2010, by = c("hhid")) 
+    indivdat2012_woassets <- merge(hswithchars2012,ne2012, by = c("hhid")) 
+    indivdat2015_woassets <- merge(hswithchars2015,ne2015, by = c("hhid")) 
     
-    indivdat2010 <- merge(assetslog2010, indivdat2010_woassets, by = "hhid2010")
-    indivdat2012 <- merge(assetslog2012, indivdat2012_woassets, by = "hhid2012")
-    indivdat2015 <- merge(assetslog2014, indivdat2014_woassets, by = "hhid2015")
+    indivdat2010 <- merge(assetslog2010, indivdat2010_woassets, by = "hhid")
+    indivdat2012 <- merge(assetslog2012, indivdat2012_woassets, by = "hhid")
+    indivdat2015 <- merge(assetslog2015, indivdat2015_woassets, by = "hhid")
     
     indivdat2010$P1 <- paste(indivdat2010$region,indivdat2010$district,sep="-")
     indivdat2012$P1 <- paste(indivdat2012$region,indivdat2012$district,sep="-")
-    indivdat2015$P1 <- paste(indivdat2014$region,indivdat2015$district,sep="-")
+    indivdat2015$P1 <- paste(indivdat2015$region,indivdat2015$district,sep="-")
     
-    #dat2010 <- subset(dat2010,!is.na(A0) )
-    #dat2012 <- subset(dat2012,!is.na(A0) )
-    #dat2014 <- subset(dat2014,!is.na(A0) )
-    
-    
-    #length(grep("9-31",k[143,]$n))
     
     # in the desired data-frame we would have hhdis with their region-id in P2 (which also included P1). So that pi(r) is the same for all consumers in the P2. 
     # the output would be the pi(r) for all hhid 
