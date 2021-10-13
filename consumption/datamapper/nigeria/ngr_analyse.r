@@ -1,4 +1,5 @@
 
+
 setwd('c:/local_files/research/consumption/datamapper/')
 source('translation/frameutils.R');
 source('nigeria/ngr_normaliser.r'); 
@@ -6,6 +7,11 @@ source('nigeria/ngr_loader.r');
 nl <- ngr_loader(fu,ngr_normaliser,lgc)
 source('lsms/lsms_normalizer.r');
 source('lsms/lsms_loader.r');llc=lsms_loader(fu=fu,ln=lsms_normalizer,lgc=lgc)
+
+library(maps)
+library(ggplot2)
+library(ggrepel)
+
 
 test <- function(){
   #dat <- nl@load_diary_file("../",2010,fu, ngr_normaliser, load_cost=TRUE)
@@ -17,6 +23,39 @@ get_ngr_categories <- function(){
   return (c("densefoods","nonfresh","fruitsveg","protein","alcohol","complements","energy","household","transport"))
 }
 
+
+plot_region_map <- function(plot_type,a2012,o2010,o2012){
+  
+  world_map <- map_data("world")
+  ngr_map = subset(world_map ,region=="Nigeria")
+  hhid_mtms_2012 <- ddply(subset(a2012,!is.na(number)  & !is.na(mtm) & number>0), .(hhid), summarise, hhid_mtm=sum(mtm*number))
+  
+  
+  
+  
+  if (plot_type=="occupation"){
+    occupation_mapping <- infer_occupation_ranks(o2010 = o2010,ignore_top = .05)
+    ohs2012_wrank<- merge(plyr::rename(subset(o2012,!is.na(region)),c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
+    chosenchars2012 <- ddply(ohs2012_wrank[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank),max_age=max(age))
+    
+    plot_data_wo_assets <- subset(merge(chosenchars2012,o2012,by=c("hhid")), !is.na(max_occupation_rank))
+    plot_data <- merge(plot_data_wo_assets,hhid_mtms_2012 ,by="hhid")
+     
+    plot_data$region_name <-""
+    map_data <- subset(ddply(plot_data,.(region,district,S,E,region_name),summarise, mean_a = median(hhid_mtm), occupation_rank=mean(max_occupation_rank)), !is.na(region))
+    ggplot()+geom_polygon(data=ngr_map, aes(x=long, y=lat, group=group), 
+                          colour="light yellow", fill="light yellow") + geom_point(data=map_data,aes(x=E, y=S, size = mean_a, color = occupation_rank))+ scale_size(range = c(.1, 10), name="assets_value") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Asset Values and Occupation Rank distribution in Nigeria (2012)")
+  } else if (plot_type == "education") {
+    hhid_mtms_o2012 <- merge(o2012,hhid_mtms_2012 ,by="hhid")
+    hhid_mtms_o2012_weduc <- subset(hhid_mtms_o2012, !is.na(education_rank))
+    hhid_mtms_o2012_weduc$region_name <-""
+    map_data <- subset(ddply(hhid_mtms_o2012_weduc,.(region,district,S,E,region_name),summarise, mean_a = median(hhid_mtm), education_rank=mean(education_rank)), !is.na(region))
+    ggplot()+geom_polygon(data=ngr_map, aes(x=long, y=lat, group=group), 
+                          colour="light yellow", fill="light yellow") + geom_point(data=map_data,aes(x=E, y=S, size = mean_a, color = education_rank))+ scale_size(range = c(.1, 10), name="assets_value") + geom_label_repel(data=map_data, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50') + ggtitle("Asset Values and Education Rank distribution in Nigeria (2012)")
+    
+  }
+  
+}
 minimum_household_needs_wo_usage <- function(ll, c2010, c2012, c2014, o2010, o2012, o2014, mktprices2010,mktprices2012,mktprices2014, housing_fee){
   # 
   DAYS_IN_YEAR<- 365
