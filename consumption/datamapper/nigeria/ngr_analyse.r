@@ -373,13 +373,7 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   
   #occupation_mapping
   occupation_mapping <- infer_occupation_ranks(o2010 = o2010,ignore_top = .05)
-  
-  o2010<- merge(plyr::rename(o2010,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
-  o2012<- merge(plyr::rename(o2012,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
-  o2015<- merge(plyr::rename(o2015,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
-  
-  
-  
+
   asset_mtms_2010 = asset_mtms(a2010,"furntiure_medium","2010")
   asset_mtms_2012 = asset_mtms(a2012,"furntiure_medium","2012")
   asset_mtms_2015 = asset_mtms(a2015,"furntiure_medium","2015")
@@ -436,7 +430,10 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   ohs2010 <- subset(o2010,!is.na(region))
   hsizes2010 <- ddply(ohs2010[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
   hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), hsizes2010, by = c("hhid")))
-  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) )
+  
+  ohs2010_wrank<- merge(plyr::rename(ohs2010,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
+  
+  chosenchars2010 <- ddply(ohs2010_wrank[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank),age=max(age) )
   #  perception_columns
   
   hswithchars2010 <- merge(hs2010,chosenchars2010,all.x = T)
@@ -447,7 +444,9 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   ohs2012 <- subset(o2012,!is.na(region))
   hsizes2012 <- ddply(ohs2012[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
-  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank))
+  ohs2012_wranks<- merge(plyr::rename(ohs2012,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
+  
+  chosenchars2012 <- ddply(ohs2012_wranks[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank),age=max(age))
   
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   
@@ -455,7 +454,10 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   ohs2015 <- subset(o2015,!is.na(region))
   hsizes2015 <- ddply(ohs2015[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
   hs2015 <- unique(merge(unique(ohs2015[,relevant_fields]), hsizes2015, by = c("hhid")))
-  chosenchars2015 <- ddply(ohs2015[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank) )
+  
+  chosenchars2015_woranks <- ddply(ohs2015[,c("hhid","age")],.(hhid),summarise,age=max(age))
+  rank_from_past_years <- ddply(rbind(chosenchars2010,chosenchars2012),.(hhid),summarise, max_education_rank=max(max_education_rank), max_occupation_rank=max(max_occupation_rank))
+  chosenchars2015 <- merge(rank_from_past_years,chosenchars2015_woranks,by=c("hhid"))
   hswithchars2015 <- merge(hs2015,chosenchars2015,all.x = T)
 
   
@@ -494,6 +496,7 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
     dflist[["indivdat2015"]] <- indivdat2015
     
     for (year in c(2010,2012,2015)){
+      
       dfdat <- dflist[[paste0("indivdat",year)]]
       dfdat <- dfdat %>% mutate( high_educ = as.integer(max_education_rank>educ_pivot) , high_occup = as.integer(max_occupation_rank>occup_pivot))
       
