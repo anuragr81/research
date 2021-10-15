@@ -24,11 +24,13 @@ get_ngr_categories <- function(){
 }
 
 
-plot_region_map <- function(plot_type,a2012,o2010,o2012){
+plot_region_map <- function(plot_type,a2012,o2010,o2012,ignored_assets_top){
   
   world_map <- map_data("world")
   ngr_map = subset(world_map ,region=="Nigeria")
-  hhid_mtms_2012 <- ddply(subset(a2012,!is.na(number)  & !is.na(mtm) & number>0), .(hhid), summarise, hhid_mtm=sum(mtm*number))
+  hhid_mtms_2012_all <- ddply(subset(a2012,!is.na(number)  & !is.na(mtm) & number>0), .(hhid), summarise, hhid_mtm=sum(mtm*number))
+  highest_quantile_considered <- quantile(hhid_mtms_2012_all$hhid_mtm,1-ignored_assets_top)
+  hhid_mtms_2012 <- subset(hhid_mtms_2012_all,hhid_mtm<highest_quantile_considered)
   
   
   
