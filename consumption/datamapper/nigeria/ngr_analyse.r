@@ -406,7 +406,7 @@ get_bubble_aggregated_df <- function(input_dat,bubble_distances){
 
 
 
-#d <- ngr_get_nonparametric_df(nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)'
+#d <- ngr_get_nonparametric_df(nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)
 ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a2012, a2015,c2010,c2012,c2015){
   
   educ_pivot <- 3
