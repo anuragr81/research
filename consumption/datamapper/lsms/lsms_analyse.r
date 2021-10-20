@@ -1106,6 +1106,13 @@ perception_data_analysis <- function(o2012, ignore_split_hhids)
   
 }
 
+check_shortnames <- function(dat,categs,ignore_list){
+  if(length(setdiff( setdiff(unique(dat$shortname),categs), ignore_list)) >0){
+    stop(paste("Could not find ",toString(setdiff( setdiff(unique(dat$shortname),categs), ignore_list))))
+  }
+}
+
+
 
 get_split_costs <- function (categs_a , categs_b, dat , group_field) {
   if(is.element("w_a", colnames(dat))  ){
@@ -1116,6 +1123,9 @@ get_split_costs <- function (categs_a , categs_b, dat , group_field) {
   }
   
   
+  if (length(setdiff(unique(dat[,group_field]),unique(union(categs_a,categs_b))))>0){
+    stop(paste("Could not find : ",setdiff(unique(dat[,group_field]),unique(union(categs_a,categs_b)))," in the items-code-mapping"))
+  }
   
   # using logical variable to indicate which group_field values occur in the respective categories
   dat$w_a <- is.element(dat[,group_field],categs_a)
@@ -1187,8 +1197,16 @@ get_nonparametric_df <- function(ll,food_analysis){
   } else {
     all_costs <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
     #asset purchases and asset-bearing costs are not considered
+    
+    
     food_costs <- subset(all_costs, is.element(group,c("needs")))
     excess_costs <- subset(all_costs, is.element(group,c("excess")))
+    ignore_costs <- unique(union(subset(all_costs,is.element(group,c("asset_costs","assets")))$shortname, c("kerosene","electricity","petrol","charcoal")))
+    
+    check_shortnames(dat=c2010,categs=union(food_costs$shortname,excess_costs$shortname),ignore_list = ignore_costs)
+    check_shortnames(dat=c2012,categs=union(food_costs$shortname,excess_costs$shortname),ignore_list = ignore_costs)
+    check_shortnames(dat=c2014,categs=union(food_costs$shortname,excess_costs$shortname),ignore_list = ignore_costs)
+    
     food2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2010"))
     food2012 <- plyr::rename(ddply(subset(c2012,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2012"))
     food2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2014"))
