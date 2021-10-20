@@ -1467,7 +1467,7 @@ test_search_cluster <- function(){
   return(resdf)
 }
 
-run_non_parmetric_regression_for_food_vs_nonfood <- function(ll,dfslist,year,sp)
+run_non_parametric_regression_for_food_vs_nonfood <- function(ll,dfslist,year,sp)
 {
   if(missing(dfslist)){
     dfslist <- get_nonparametric_df(ll,food_analysis = T)
@@ -1499,7 +1499,7 @@ run_non_parmetric_regression_for_food_vs_nonfood <- function(ll,dfslist,year,sp)
   
 }
 
-run_non_parmetric_regression_for_nu_vs_r <- function(ll,dfslist,year,sp,r_type)
+run_non_parametric_regression_for_nu_vs_r <- function(ll,dfslist,year,sp,r_type)
 {
   if(missing(dfslist)){
     dfslist <- get_nonparametric_df(ll,food_analysis = F)
@@ -1529,7 +1529,7 @@ run_non_parmetric_regression_for_nu_vs_r <- function(ll,dfslist,year,sp,r_type)
   
 }
 
-run_non_parmetric_regression_for_A <- function(ll,dfslist,year,sp,theta,phi)
+run_non_parametric_regression_for_A <- function(ll,dfslist,year,sp,theta,phi)
 {
   #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
 
@@ -1556,7 +1556,7 @@ run_non_parmetric_regression_for_A <- function(ll,dfslist,year,sp,theta,phi)
   
 }
 
-run_non_parmetric_regression_for_pi_r <- function(ll,dfslist,year,sp,theta,phi)
+run_non_parametric_regression_for_food_nonfood_ne <- function(ll,dfslist,year,sp,theta,phi)
 {
   #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
   
@@ -1568,9 +1568,11 @@ run_non_parmetric_regression_for_pi_r <- function(ll,dfslist,year,sp,theta,phi)
   S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
   E <- with(dfslist[[select_df]], seq(min(E), max(E), len=25))
   newdata <- expand.grid(S=S, E=E)
-  mod.lo_pi_r <- loess(mean_cost_ne_x ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  mod.lo_food_x <- loess(mean_cost_ne_food_x ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  mod.lo_nonfood_x <- loess(mean_cost_ne_nonfood_x ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
   
-  fit.lo_pi_r <- matrix(predict(mod.lo_pi_r, newdata), 25, 25)
+  fit.lo_food_x <- matrix(predict(mod.lo_food_x, newdata), 25, 25)
+  fit.lo_nonfood_x <- matrix(predict(mod.lo_nonfood_x, newdata), 25, 25)
   
   par(mfrow=c(1,1))
   if (missing(theta)){
@@ -1579,12 +1581,14 @@ run_non_parmetric_regression_for_pi_r <- function(ll,dfslist,year,sp,theta,phi)
   if (missing(phi)){
     phi <- 20
   }
-  persp(S, E, fit.lo_pi_r, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$\\pi(r)$"), zlab = "")
+  par(mfrow=c(1,2))
+  persp(S, E, fit.lo_food_x, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = "food exp", zlab = "")
+  persp(S, E, fit.lo_nonfood_x, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = "non-food exp", zlab = "")
   
 }
 
 
-run_non_parmetric_regression_for_hsize <- function(ll,dfslist,year,sp,theta,phi)
+run_non_parametric_regression_for_hsize <- function(ll,dfslist,year,sp,theta,phi)
 {
   #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
   
@@ -1613,7 +1617,7 @@ run_non_parmetric_regression_for_hsize <- function(ll,dfslist,year,sp,theta,phi)
 }
 
 
-run_non_parmetric_regression_for_perception <- function(ll,dfslist,year,sp)
+run_non_parametric_regression_for_perception <- function(ll,dfslist,year,sp)
 {
   if(missing(dfslist)){
     dfslist <- get_nonparametric_df(ll,food_analysis = F)

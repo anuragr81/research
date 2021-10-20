@@ -338,6 +338,19 @@ infer_occupation_ranks <- function(o2010 , ignore_top) {
   return(occup)
 }
 
+load_data <- function()
+{
+  
+  ngrdf2010 <- read_dta('../lsms/data/ngr_df2010.dta')
+  ngrdf2012 <- read_dta('../lsms/data/ngr_df2012.dta')
+  ngrdf2015 <- read_dta('../lsms/data/ngr_df2015.dta')
+  res = list()
+  res[['df2010']] <- ngrdf2010
+  res[['df2012']] <- ngrdf2012
+  res[['df2015']] <- ngrdf2015
+  return(res)
+}
+
 
 init_data <- function(){
 
@@ -578,6 +591,39 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   
   return(res)
 }
+
+run_non_parametric_regression_for_food_nonfood_ne <- function(ll,dfslist,year,sp,theta,phi)
+{
+  #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
+  
+  if(missing(dfslist)){
+    dfslist <- ngr_get_nonparametric_df(ll,food_analysis = F)
+  }
+  select_df=paste0("df",year)
+  
+  S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
+  E <- with(dfslist[[select_df]], seq(min(E), max(E), len=25))
+  newdata <- expand.grid(S=S, E=E)
+  mod.lo_food_x <- loess(mean_cost_ne_food_x ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  mod.lo_nonfood_x <- loess(mean_cost_ne_nonfood_x ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  
+  fit.lo_food_x <- matrix(predict(mod.lo_food_x, newdata), 25, 25)
+  fit.lo_nonfood_x <- matrix(predict(mod.lo_nonfood_x, newdata), 25, 25)
+  
+  par(mfrow=c(1,1))
+  if (missing(theta)){
+    theta <- 10
+  }
+  if (missing(phi)){
+    phi <- 20
+  }
+  par(mfrow=c(1,2))
+  persp(S, E, fit.lo_food_x, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = "food exp", zlab = "")
+  persp(S, E, fit.lo_nonfood_x, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = "non-food exp", zlab = "")
+  
+}
+
+
 asset_mtms <- function(assets_dat,pivot_asset,year){
   
   assets <- subset(assets_dat,!is.na(mtm) & mtm >0 & number >0 & !is.na(number) )

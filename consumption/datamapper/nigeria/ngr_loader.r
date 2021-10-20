@@ -167,6 +167,12 @@ ngr_loader<-function(fu,ngrn,lgc) {
       k$own <-k$own*factor
       k$gift <-k$gift*factor
       
+      k <- merge(plyr::rename(k,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      if (dim(subset(k,is.na(shortname)))[1]>0){
+        stop("Could not find diary items",toString(unique(subset(k,is.na(shortname))$code)))
+      }
+      
+      
       #*    gift quantities are ignored (total quantity ignored is to be presented)
       #*    weekly recall items are also multiplied by 52
       lfname <- paste(dirprefix,"./lsms/nigeria/2010/NGA_2010_GHSP-W1_v03_M_STATA/Post\ Planting\ Wave\ 1/Household/sect81_plantingw1.dta",sep="")
@@ -289,6 +295,12 @@ ngr_loader<-function(fu,ngrn,lgc) {
       k$own <-k$own*factor
       k$gift <-k$gift*factor
       
+      k <- merge(plyr::rename(k,c("item"="code")),ngrn()@item_codes_2012()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      if (dim(subset(k,is.na(shortname)))[1]>0){
+        stop("Could not find diary items",toString(unique(subset(k,is.na(shortname))$code)))
+      }
+      
+      
       #*    gift quantities are ignored (total quantity ignored is to be presented)
       #*    weekly recall items are also multiplied by 52
       lfname <- paste(dirprefix,"./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post\ Planting\ Wave\ 2/Household/sect8a_plantingw2.dta",sep="")
@@ -301,7 +313,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
       l$item <- as.character(l$item)
       l$cost <- l$cost*52 # 52 weeks
-      l <- merge(plyr::rename(l,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      l <- merge(plyr::rename(l,c("item"="code")),ngrn()@item_codes_2012()[,c("shortname","code")],by=c('code'),all.x=TRUE)
       
       if (dim(subset(l,is.na(shortname)))[1]>0){
         stop("Could not find weekly recall items",toString(subset(l,is.na(shortname))$code))
@@ -318,7 +330,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       lmdat$hhid <-as.character(lmdat$hhid)
       lmdat <- lmdat[!is.na(lmdat$cost) & lmdat$cost>0 & !is.na(lmdat$hhid),]
       lmdat$item <- as.character(lmdat$item)
-      lmdat <- merge(plyr::rename(lmdat,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      lmdat <- merge(plyr::rename(lmdat,c("item"="code")),ngrn()@item_codes_2012()[,c("shortname","code")],by=c('code'),all.x=TRUE)
       if (dim(subset(lmdat,is.na(shortname)))[1]>0){
         stop("Could not find monthly recall items",toString(subset(lmdat,is.na(shortname))$code))
       }
@@ -340,7 +352,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       l6mdat$hhid <- as.character(l6mdat$hhid)
       l6mdat      <- l6mdat[!is.na(l6mdat$cost) & l6mdat$cost>0 & !is.na(l6mdat$hhid),]
       l6mdat$item <- as.character(l6mdat$item)
-      l6mdat      <- merge(plyr::rename(l6mdat,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      l6mdat      <- merge(plyr::rename(l6mdat,c("item"="code")),ngrn()@item_codes_2012()[,c("shortname","code")],by=c('code'),all.x=TRUE)
       if (dim(subset(l6mdat,is.na(shortname)))[1]>0){
         stop("Could not find six-monthly recall items",toString(subset(l6mdat,is.na(shortname))$code))
       }
@@ -355,7 +367,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       l1ydat$hhid <- as.character(l1ydat$hhid)
       l1ydat      <- l1ydat[!is.na(l1ydat$cost) & l1ydat$cost>0 & !is.na(l1ydat$hhid),]
       l1ydat$item <- as.character(l1ydat$item)
-      l1ydat      <- merge(plyr::rename(l1ydat,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      l1ydat      <- merge(plyr::rename(l1ydat,c("item"="code")),ngrn()@item_codes_2012()[,c("shortname","code")],by=c('code'),all.x=TRUE)
       if (dim(subset(l1ydat,is.na(shortname)))[1]>0){
         stop("Could not find yearly recall items",toString(subset(l1ydat,is.na(shortname))$code))
       }
@@ -412,6 +424,10 @@ ngr_loader<-function(fu,ngrn,lgc) {
       k$own <-k$own*factor
       k$gift <-k$gift*factor
       
+      k <- merge(plyr::rename(k,c("item"="code")),ngrn()@item_codes_2015()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      if (dim(subset(k,is.na(shortname)))[1]>0){
+        stop("Could not find diary items",toString(unique(subset(k,is.na(shortname))$code)))
+      }
       
       #*    gift quantities are ignored (total quantity ignored is to be presented)
       #*    weekly recall items are also multiplied by 52
@@ -425,7 +441,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       l <- l[!is.na(l$cost) & l$cost>0 & !is.na(l$hhid),]
       l$item <- as.character(l$item)
       l$cost <- l$cost*52 # 52 weeks
-      l <- merge(plyr::rename(l,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      l <- merge(plyr::rename(l,c("item"="code")),ngrn()@item_codes_2015()[,c("shortname","code")],by=c('code'),all.x=TRUE)
       
       if (dim(subset(l,is.na(shortname)))[1]>0){
         stop("Could not find weekly recall items",toString(subset(l,is.na(shortname))$code))
@@ -442,7 +458,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       lmdat$hhid <-as.character(lmdat$hhid)
       lmdat <- lmdat[!is.na(lmdat$cost) & lmdat$cost>0 & !is.na(lmdat$hhid),]
       lmdat$item <- as.character(lmdat$item)
-      lmdat <- merge(plyr::rename(lmdat,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      lmdat <- merge(plyr::rename(lmdat,c("item"="code")),ngrn()@item_codes_2015()[,c("shortname","code")],by=c('code'),all.x=TRUE)
       if (dim(subset(lmdat,is.na(shortname)))[1]>0){
         stop("Could not find monthly recall items",toString(unique(subset(lmdat,is.na(shortname))$code)))
       }
@@ -464,7 +480,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       l6mdat$hhid <- as.character(l6mdat$hhid)
       l6mdat      <- l6mdat[!is.na(l6mdat$cost) & l6mdat$cost>0 & !is.na(l6mdat$hhid),]
       l6mdat$item <- as.character(l6mdat$item)
-      l6mdat      <- merge(plyr::rename(l6mdat,c("item"="code")),ngrn()@item_codes_2010()[,c("shortname","code")],by=c('code'),all.x=TRUE)
+      l6mdat      <- merge(plyr::rename(l6mdat,c("item"="code")),ngrn()@item_codes_2015()[,c("shortname","code")],by=c('code'),all.x=TRUE)
       if (dim(subset(l6mdat,is.na(shortname)))[1]>0){
         stop("Could not find six-monthly recall items",toString( unique(subset(l6mdat,is.na(shortname))$code ) ))
       }
