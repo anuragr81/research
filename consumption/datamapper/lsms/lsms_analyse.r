@@ -1130,20 +1130,6 @@ get_split_costs <- function (categs_a , categs_b, dat , group_field) {
   return(datres)
 }
 
-get_parametric_band_df <- function(ll){
-  inc_houserent = F
-  inc_educexpense = F
-  
-  
-  all_costs <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
-  #asset purchases and asset-bearing costs are not considered
-  needs_and_excess_costs <- subset(all_costs, is.element(group,c("excess","needs")))
-  ne2010 <- (ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
-  ne2012 <- (ddply(subset(c2012,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
-  ne2014 <- (ddply(subset(c2014,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)))
-  
-  return(needs_and_excess_costs)
-}
 get_nonparametric_df <- function(ll,food_analysis){
   # Don't include education or housing expenses - because they're part of needs anyways
   inc_houserent = F
@@ -1206,10 +1192,13 @@ get_nonparametric_df <- function(ll,food_analysis){
     food2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2010"))
     food2012 <- plyr::rename(ddply(subset(c2012,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2012"))
     food2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2014"))
-    excess2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2010"))
-    excess2012 <- plyr::rename(ddply(subset(c2012,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2012"))
-    excess2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2014"))
+    excess2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_nonfood=sum(cost)),c("hhid"="hhid2010"))
+    excess2012 <- plyr::rename(ddply(subset(c2012,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_nonfood=sum(cost)),c("hhid"="hhid2012"))
+    excess2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_nonfood=sum(cost)),c("hhid"="hhid2014"))
     
+    ne2010 <- merge(food2010,excess2010,by=c("hhid2010"),all=T)
+    ne2012 <- merge(food2012,excess2012,by=c("hhid2012"),all=T)
+    ne2014 <- merge(food2014,excess2014,by=c("hhid2014"),all=T)
     
   }
   #
@@ -1280,13 +1269,6 @@ get_nonparametric_df <- function(ll,food_analysis){
     indivdat2012$P1 <- paste(indivdat2012$region,indivdat2012$district,sep="-")
     indivdat2014$P1 <- paste(indivdat2014$region,indivdat2014$district,sep="-")
     
-    #dat2010 <- subset(dat2010,!is.na(A0) )
-    #dat2012 <- subset(dat2012,!is.na(A0) )
-    #dat2014 <- subset(dat2014,!is.na(A0) )
-    
-    
-    #length(grep("9-31",k[143,]$n))
-    
     # in the desired data-frame we would have hhdis with their region-id in P2 (which also included P1). So that pi(r) is the same for all consumers in the P2. 
     # the output would be the pi(r) for all hhid 
     dflist <- list()
@@ -1301,19 +1283,19 @@ get_nonparametric_df <- function(ll,food_analysis){
       bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06)
       dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
 
-      bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_x=mean(cost_ne/hsize),mean_A0=mean(A0)) 
-      bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost_ne_x=mean(cost_ne/hsize),mean_occup_A0=mean(A0))
-      bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost_ne_x=mean(cost_ne/hsize),mean_educ_A0=mean(A0))
+      bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize),mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize), mean_A0=mean(A0)) 
+      bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost_ne_food_x=mean(cost_ne_food/hsize), mean_occup_cost_ne_nonfood_x = mean(cost_ne_nonfood/hsize), mean_occup_A0=mean(A0))
+      bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost_ne_food_x=mean(cost_ne_food/hsize),mean_educ_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),mean_educ_A0=mean(A0))
       
       bubble_fields_w_P1 <- merge(bubble_distances,bubble_fields,by=c('B'))
       
       rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1")
       rd_bubble_weduc <- merge(rd_bubble,bubble_educ, by = c("B","high_educ"))
       rd_bubble_weducoccup <- merge(rd_bubble_weduc,bubble_occup, by = c("B","high_occup"))
-      rd <- rd_bubble_weducoccup %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7))
-      rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne_x) %>% mutate (Ar=lnA0-r)
-      rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>% mutate ( nu_occup = x/mean_occup_cost_ne_x) %>% mutate (Ar_occup=lnA0-r_occup)
-      rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate ( nu_educ = x/mean_educ_cost_ne_x) %>% mutate (Ar_educ=lnA0-r_educ)
+      rd <- rd_bubble_weducoccup %>% mutate(x_food = cost_ne_food/hsize) %>% mutate(x_nonfood = cost_ne_nonfood/hsize) %>% mutate(logx_food=log(x_food+1e-7),logx_nonfood=log(x_nonfood+1e-7))
+      rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate (Ar=lnA0-r)
+      rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>%  mutate (Ar_occup=lnA0-r_occup)
+      rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate (Ar_educ=lnA0-r_educ)
       rd <-subset(rd,!is.na(r))
       res[[paste0("df",year)]] <- rd
     }
