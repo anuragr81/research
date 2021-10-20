@@ -1201,10 +1201,15 @@ get_nonparametric_df <- function(ll,food_analysis){
   } else {
     all_costs <- lsms_normalizer()@categories_non_basic_wassets(include_food=T)
     #asset purchases and asset-bearing costs are not considered
-    needs_and_excess_costs <- subset(all_costs, is.element(group,c("excess","needs")))
-    ne2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2010"))
-    ne2012 <- plyr::rename(ddply(subset(c2012,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2012"))
-    ne2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost)),c("hhid"="hhid2014"))
+    food_costs <- subset(all_costs, is.element(group,c("needs")))
+    excess_costs <- subset(all_costs, is.element(group,c("excess")))
+    food2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2010"))
+    food2012 <- plyr::rename(ddply(subset(c2012,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2012"))
+    food2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2014"))
+    excess2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2010"))
+    excess2012 <- plyr::rename(ddply(subset(c2012,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2012"))
+    excess2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost)),c("hhid"="hhid2014"))
+    
     
   }
   #
