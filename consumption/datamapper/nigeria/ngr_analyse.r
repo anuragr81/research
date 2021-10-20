@@ -406,7 +406,7 @@ get_bubble_aggregated_df <- function(input_dat,bubble_distances){
 
 
 
-#d <- ngr_get_nonparametric_df(nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)
+#ng <- ngr_get_nonparametric_df(nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)
 ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a2012, a2015,c2010,c2012,c2015){
   
   educ_pivot <- 3
@@ -458,11 +458,21 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   } else {
     all_costs <- ngr_normaliser()@expenditure_categories()
     #asset purchases and asset-bearing costs are not considered
-    needs_and_excess_costs <- subset(all_costs, is.element(group,c("food","excess")))
-    print("Summing up categories")
-    ne2010 <- ddply(subset(c2010,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost))
-    ne2012 <- ddply(subset(c2012,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost))
-    ne2015 <- ddply(subset(c2015,is.element(shortname,needs_and_excess_costs$shortname)),.(hhid),summarise,cost_ne=sum(cost))
+    food_costs <- subset(all_costs, is.element(group,c("food")))
+    excess_costs <- subset(all_costs, is.element(group,c("excess")))
+    
+    food2010 <- ddply(subset(c2010,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost))
+    food2012 <- ddply(subset(c2012,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost))
+    food2015 <- ddply(subset(c2015,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost))
+    
+    excess2010 <- ddply(subset(c2010,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_nonfood=sum(cost))
+    excess2012 <- ddply(subset(c2012,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_nonfood=sum(cost))
+    excess2015 <- ddply(subset(c2015,is.element(shortname,excess_costs$shortname)),.(hhid),summarise,cost_ne_nonfood=sum(cost))
+    
+    ne2010 <- merge(food2010,excess2010,by=c("hhid"),all=T)
+    ne2012 <- merge(food2012,excess2012,by=c("hhid"),all=T)
+    ne2015 <- merge(food2015,excess2015,by=c("hhid"),all=T)
+    
   }
   
   #total consumption
@@ -544,19 +554,19 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
       bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06)
       dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
       
-      bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_x=mean(cost_ne/hsize),mean_A0=mean(A0)) 
-      bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost_ne_x=mean(cost_ne/hsize),mean_occup_A0=mean(A0))
-      bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost_ne_x=mean(cost_ne/hsize),mean_educ_A0=mean(A0))
+      bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize),mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize), mean_A0=mean(A0)) 
+      bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost_ne_food_x=mean(cost_ne_food/hsize), mean_occup_cost_ne_nonfood_x = mean(cost_ne_nonfood/hsize), mean_occup_A0=mean(A0))
+      bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost_ne_food_x=mean(cost_ne_food/hsize),mean_educ_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),mean_educ_A0=mean(A0))
       
       bubble_fields_w_P1 <- merge(bubble_distances,bubble_fields,by=c('B'))
       
       rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1")
       rd_bubble_weduc <- merge(rd_bubble,bubble_educ, by = c("B","high_educ"))
       rd_bubble_weducoccup <- merge(rd_bubble_weduc,bubble_occup, by = c("B","high_occup"))
-      rd <- rd_bubble_weducoccup %>% mutate(x = cost_ne/hsize) %>% mutate(logx=log(x+1e-7))
-      rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate ( nu = x/mean_cost_ne_x) %>% mutate (Ar=lnA0-r)
-      rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>% mutate ( nu_occup = x/mean_occup_cost_ne_x) %>% mutate (Ar_occup=lnA0-r_occup)
-      rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate ( nu_educ = x/mean_educ_cost_ne_x) %>% mutate (Ar_educ=lnA0-r_educ)
+      rd <- rd_bubble_weducoccup %>% mutate(x_food = cost_ne_food/hsize) %>% mutate(x_nonfood = cost_ne_nonfood/hsize) %>% mutate(logx_food=log(x_food+1e-7),logx_nonfood=log(x_nonfood+1e-7))
+      rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate (Ar=lnA0-r)
+      rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>%  mutate (Ar_occup=lnA0-r_occup)
+      rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate (Ar_educ=lnA0-r_educ)
       rd <-subset(rd,!is.na(r))
       res[[paste0("df",year)]] <- rd
     }
