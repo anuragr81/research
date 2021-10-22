@@ -417,17 +417,12 @@ get_bubble_aggregated_df <- function(input_dat,bubble_distances){
   return(resdf)
 }
 
-check_shortnames_new <- function(dat,categs,ignore_list){
+check_shortnames <- function(dat,categs,ignore_list){
   if(length(setdiff( setdiff(unique(dat$shortname),categs), ignore_list)) >0){
     stop(paste("Could not find ",toString(setdiff( setdiff(unique(dat$shortname),categs), ignore_list))))
   }
 }
 
-check_shortnames <- function(dat,categs){
-  if(length(setdiff(unique(dat$shortname),categs))>0){
-    stop(paste("Could not find ",toString(setdiff(unique(dat$shortname),categs))))
-  }
-}
 
 
 #ng <- ngr_get_nonparametric_df(nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)
@@ -484,10 +479,11 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
     #asset purchases and asset-bearing costs are not considered
     food_costs <- subset(all_costs, is.element(group,c("food")))
     excess_costs <- subset(all_costs, is.element(group,c("excess")))
+    ignore_costs <- subset(all_costs, is.element(group,c("assets","asset_costs")))$shortname
     
-    check_shortnames(dat=c2010,categs=union(food_costs$shortname,excess_costs$shortname))
-    check_shortnames(dat=c2012,categs=union(food_costs$shortname,excess_costs$shortname))
-    check_shortnames(dat=c2015,categs=union(food_costs$shortname,excess_costs$shortname))
+    check_shortnames(dat=c2010,categs=union(food_costs$shortname,excess_costs$shortname),ignore_list = ignore_costs)
+    check_shortnames(dat=c2012,categs=union(food_costs$shortname,excess_costs$shortname),ignore_list = ignore_costs)
+    check_shortnames(dat=c2015,categs=union(food_costs$shortname,excess_costs$shortname),ignore_list = ignore_costs)
     
     
     food2010 <- ddply(subset(c2010,is.element(shortname,food_costs$shortname)),.(hhid),summarise,cost_ne_food=sum(cost))
