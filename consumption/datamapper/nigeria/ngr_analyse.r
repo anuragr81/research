@@ -604,6 +604,31 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
   return(res)
 }
 
+
+run_non_parametric_regression_for_A <- function(dfslist,year,sp,theta,phi)
+{
+  #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
+  
+  select_df=paste0("df",year)
+  
+  S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
+  E <- with(dfslist[[select_df]], seq(min(E), max(E), len=25))
+  newdata <- expand.grid(S=S, E=E)
+  mod.lo_lnA <- loess(lnA0 ~ S + E , span=sp, degree=1, data=dfslist[[select_df]] )
+  
+  fit.lo_lnA <- matrix(predict(mod.lo_lnA, newdata), 25, 25)
+  
+  par(mfrow=c(1,1))
+  if (missing(theta)){
+    theta <- 10
+  }
+  if (missing(phi)){
+    phi <- 20
+  }
+  persp(S, E, fit.lo_lnA, theta=theta, phi=phi, ticktype="detailed", expand=2/3,shade=0.5,main = latex2exp::TeX("$log(A)$"), zlab = "")
+  
+}
+
 run_non_parametric_regression_for_food_nonfood_ne <- function(ll,dfslist,year,sp,theta,phi)
 {
   #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
