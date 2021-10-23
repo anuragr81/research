@@ -734,29 +734,54 @@ n_rank+ max_occupation_rank + hh_age + isrural))
  is unnecessary because we assume a cost-structure Psi(r)- suggesting that
  asset-costs are already considered with assets.
  The theoretical justification of the averages are that they are prices
- - of needs (basic-food or all-food) and asset-maintenance.
- If we forget about the intertemporal substituion for a bit - then we can
- see how consumer chooses between asset-costs and needs - so the averages
- of both and the budget for the two are considered using AIDS.
+ - of needs (whether basic-food or all-food depends on the availability
+ of non-foods prices and the measurement erros by mixing) of asset-maintenance.
+ The substitution between asset-costs, needs and nde can be considered -
+ so the averages of assets (the role of r), price of needs (average food)
+ and (average nde) can then be considered.
  Without AIDS, we can just take q_nde as dependent variable and then consider
- prices on the independent variable.
- The answer to why we consider average nde as price and average A as price
- is not so clear.
- We cannot nde~av(nde) as our equation (nde/total)~ave(nde) - may still
- make sense.
+ prices (averages) as independent variables.
+ Care should be taken on how this corresponds to the model stated in the
+ chapter.
+ The average of basic-needs + asset costs makes sense, but then we need
+ to explain that r_t (price of richness) comprises both of an average needs
+ (price) component and an average assets (price) component.
+ This also explains that logx - which is not an average and an individual
+ value - must remain as independent variable.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% So in summary, the only substitution we want to present is between nu
+ and r_t.
+ If we were to use AIDS (let's say), then the weight would be of total asset-cos
+ts and nde (not needs).
+ The total costs we care about is therefore also just the sum of asset_costs
+ (energy, transport) and nu (food, household).
+ instead of asset-cost averages we use asset-price-averages and instead
+ of price of food+household - we use the total price of food+household (thats'
+ the average nde).
+ High assets_costs + nu .
+ When use q_nde as dependent variable occupation could be used as an instrument.
+\end_layout
+
+\begin_layout Plain Layout
+
+% summary(lm(w_ne ~ logx + log(mean_A0) +  log(mean_cost_ne) + max_occupation_ra
+nk, data=ng$df2010))
 \end_layout
 
 \begin_layout Plain Layout
 
 % the quantile analysis checks to what extent the various quantiles differ
- in their coefficients.
- The linear model specification needs to be robust before a quantile regression
- is employed.
+ in their coefficients but the linear model specification needs to be robust
+ before a quantile regression is employed.
 \end_layout
 
 \begin_layout Plain Layout
 
-% I
+% 
 \end_layout
 
 \end_inset
