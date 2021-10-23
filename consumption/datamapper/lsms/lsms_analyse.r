@@ -1399,6 +1399,19 @@ save_data <- function(dfslist)
    write_dta(dfslist[['df2014']],'../lsms/data/tn_df2014.dta')
 }
 
+load_data <- function()
+{
+  
+  tndf2010 <- read_dta('../lsms/data/tn_df2010.dta')
+  tndf2012 <- read_dta('../lsms/data/tn_df2012.dta')
+  tndf2014 <- read_dta('../lsms/data/tn_df2014.dta')
+  res = list()
+  res[['df2010']] <- tndf2010
+  res[['df2012']] <- tndf2012
+  res[['df2014']] <- tndf2014
+  return(res)
+}
+
 
 calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
   res<- array()

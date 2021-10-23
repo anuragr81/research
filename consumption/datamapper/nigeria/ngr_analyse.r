@@ -430,6 +430,22 @@ check_shortnames <- function(dat,categs,ignore_list){
   }
 }
 
+zero_nas <- function(dat){
+  print("Zeroing NAs for ne-aggregation")
+  if (nrow(dat[is.na(dat$cost_ne_food),])>0)
+  {
+    dat[is.na(dat$cost_ne_food),]$cost_ne_food <- 0
+  }
+  if (nrow(dat[is.na(dat$cost_ne_nonfood),])>0)
+  {
+    dat[is.na(dat$cost_ne_nonfood),]$cost_ne_nonfood <- 0
+  }
+  if (nrow(dat[is.na(dat$cost_asset_costs),])>0)
+  {
+    dat[is.na(dat$cost_asset_costs),]$cost_asset_costs <- 0
+  }
+  return(dat)
+}
 
 
 #ng <- ngr_get_nonparametric_df(nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)
@@ -507,13 +523,13 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
     asset_costs2015 <- ddply(subset(c2015,is.element(shortname,asset_costs$shortname)),.(hhid),summarise,cost_asset_costs=sum(cost))
     
     ne2010_noac <- merge(food2010,excess2010,by=c("hhid"),all=T)
-    ne2010 <- merge(ne2010_noac,asset_costs2010,by=c("hhid"),all=T)
+    ne2010 <- zero_nas(merge(ne2010_noac,asset_costs2010,by=c("hhid"),all=T))
     
     ne2012_noac <- merge(food2012,excess2012,by=c("hhid"),all=T)
-    ne2012 <- merge(ne2012_noac,asset_costs2012,by=c("hhid"),all=T)
+    ne2012 <- zero_nas(merge(ne2012_noac,asset_costs2012,by=c("hhid"),all=T))
     
     ne2015_noac <- merge(food2015,excess2015,by=c("hhid"),all=T)
-    ne2015 <- merge(ne2015_noac,asset_costs2015,by=c("hhid"),all=T)
+    ne2015 <- zero_nas(merge(ne2015_noac,asset_costs2015,by=c("hhid"),all=T))
     
   }
   
