@@ -1,16 +1,15 @@
-use "C:\temp\df2010.dta", clear
+
 eststo clear
-generate has_english =  litlang == 2 | litlang == 3
 
-eststo, title (2010): quietly sqreg x r Ar i.max_occupation_rank i.max_education_rank, q(.30 .60 .90) reps(100)
+use "C:\local_files\research\consumption\lsms\data\ngr_df2010.dta", clear
+eststo, title (2010): quietly sqreg log_q_ne logx log_mean_A0 log_mean_cost_ne  i.max_occupation_rank i.max_education_rank age, q(.30 .60 .90) reps(100)
 
-use "C:\temp\df2012.dta", clear
-generate has_english =  litlang == 2 | litlang == 3
-eststo, title (2012): quietly sqreg x r Ar i.max_occupation_rank i.max_education_rank, q(.30 .60 .90) reps(100)
+use "C:\local_files\research\consumption\lsms\data\ngr_df2012.dta", clear
+eststo, title (2012): quietly sqreg log_q_ne logx log_mean_A0 log_mean_cost_ne  i.max_occupation_rank i.max_education_rank age, q(.30 .60 .90) reps(100)
 
-use "C:\temp\df2014.dta", clear
-generate has_english =  litlang == 2 | litlang == 3
-eststo, title (2014): quietly sqreg x r Ar i.max_occupation_rank i.max_education_rank, q(.30 .60 .90) reps(100)
+use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
+
+eststo, title (2015): quietly sqreg log_q_ne logx log_mean_A0 log_mean_cost_ne  i.max_occupation_rank i.max_education_rank age, q(.30 .60 .90) reps(100)
 
 
 esttab using c:/temp/resnu.tex, mtitle no p numbers star nogaps compress
