@@ -768,8 +768,33 @@ ts and nde (not needs).
 
 \begin_layout Plain Layout
 
+% the following also has the problem logx and w_ne cannot be obtained due
+ to there being extreme measurement errors.
+\end_layout
+
+\begin_layout Plain Layout
+
 % summary(lm(w_ne ~ logx + log(mean_A0) +  log(mean_cost_ne) + max_occupation_ra
 nk, data=ng$df2010))
+\end_layout
+
+\begin_layout Plain Layout
+
+% One issue with using assets-costs to calculate w_ne but using large-asset
+ prices is that the consumer subscriptionprices are not the same as asset-prices.
+ asset-prices don't influence asset-costs - the % consumer's ownership of
+ assets.
+ So for asset-prices to be on the RHS, the consumer's ownership needs to
+ be in consumer choice.
+ w_ne approach is fraught with problems of asset-purchases accuracy as well.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% log(q_nde) ~ P_A + P_all + logx is a more crude way - which just looks
+ at nde - and ignores asset-costs altogether (except through logx - which
+ in this approach is meant to include all idiosyncratic factors).
 \end_layout
 
 \begin_layout Plain Layout
@@ -782,6 +807,299 @@ nk, data=ng$df2010))
 \begin_layout Plain Layout
 
 % 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Nigeria : Linear estimation for excess weight $ w_{ne} $ as dependent
+ variable 
+\backslash
+label{tabExcessLinearNigeria}} 
+\backslash
+begin{tabular}{l*{3}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}&
+\backslash
+multicolumn{1}{c}{(3)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2010}&
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2015}
+\backslash
+
+\backslash
+ 
+\backslash
+hline logx      & -0.00420         & -0.00469         & -0.00216         
+\backslash
+
+\backslash
+           &  (0.096)         &  (0.051)         &  (0.383)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  -0.0199
+\backslash
+sym{***}&  -0.0264
+\backslash
+sym{***}&  -0.0284
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&   0.0104
+\backslash
+sym{*}  & -0.00892
+\backslash
+sym{*}  & -0.00217         
+\backslash
+
+\backslash
+           &  (0.027)         &  (0.043)         &  (0.630)         
+\backslash
+
+\backslash
+ 1.hh
+\backslash
+_occupation
+\backslash
+_rank&        0         &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.hh
+\backslash
+_occupation
+\backslash
+_rank&  -0.0376
+\backslash
+sym{***}&  -0.0203
+\backslash
+sym{***}&  -0.0221
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 3.hh
+\backslash
+_occupation
+\backslash
+_rank&  -0.0507
+\backslash
+sym{***}&  -0.0154
+\backslash
+sym{*}  &  -0.0414
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.049)         &  (0.000)         
+\backslash
+
+\backslash
+ 0.hh
+\backslash
+_education
+\backslash
+_rank&        0         &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 1.hh
+\backslash
+_education
+\backslash
+_rank&   0.0503         &  -0.0101         &   0.0152         
+\backslash
+
+\backslash
+           &  (0.145)         &  (0.775)         &  (0.730)         
+\backslash
+
+\backslash
+ 2.hh
+\backslash
+_education
+\backslash
+_rank& 0.000458         &  -0.0105
+\backslash
+sym{*}  & -0.00609         
+\backslash
+
+\backslash
+           &  (0.926)         &  (0.029)         &  (0.218)         
+\backslash
+
+\backslash
+ 3.hh
+\backslash
+_education
+\backslash
+_rank& -0.00865
+\backslash
+sym{*}  &  -0.0119
+\backslash
+sym{**} &  -0.0120
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.041)         &  (0.002)         &  (0.003)         
+\backslash
+
+\backslash
+ age       & 0.000338
+\backslash
+sym{**} &0.0000870         &-0.000142         
+\backslash
+
+\backslash
+           &  (0.008)         &  (0.462)         &  (0.216)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    1.038
+\backslash
+sym{***}&    1.344
+\backslash
+sym{***}&    1.264
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     4285         &     4028         &     4110         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{4}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{4}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
 \end_layout
 
 \end_inset

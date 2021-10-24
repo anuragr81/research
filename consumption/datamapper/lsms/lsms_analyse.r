@@ -971,6 +971,8 @@ plot_population_heat_map <- function(odat){
   df <- unique(odat[,c("S","E","population")])
   
 } 
+
+
 init_data <- function(){
   
   o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
@@ -1154,6 +1156,10 @@ zero_nas <- function(dat){
   {
     dat[is.na(dat$cost_asset_costs),]$cost_asset_costs <- 0
   }
+  if (nrow(dat[is.na(dat$cost_assets),])>0)
+  {
+    dat[is.na(dat$cost_assets),]$cost_assets <- 0
+  }
   return(dat)
 }
 
@@ -1220,6 +1226,7 @@ get_nonparametric_df <- function(ll,food_analysis){
     excess_costs <- subset(all_costs, is.element(group,c("excess")))
     ignore_costs <- unique(union(subset(all_costs,is.element(group,c("asset_costs","assets")))$shortname, c("kerosene","electricity","petrol","charcoal")))
     asset_costs <- subset(all_costs, is.element(group,c("asset_costs")))
+    assets_diary_costs <- subset(all_costs, is.element(group,c("assets")))
     
     check_shortnames(dat=c2010,categs=union(food_costs$shortname,excess_costs$shortname),ignore_list = ignore_costs)
     check_shortnames(dat=c2012,categs=union(food_costs$shortname,excess_costs$shortname),ignore_list = ignore_costs)
@@ -1236,14 +1243,21 @@ get_nonparametric_df <- function(ll,food_analysis){
     asset_costs2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,asset_costs$shortname)),.(hhid),summarise,cost_asset_costs=sum(cost)),c("hhid"="hhid2010"))
     asset_costs2012 <- plyr::rename(ddply(subset(c2012,is.element(shortname,asset_costs$shortname)),.(hhid),summarise,cost_asset_costs=sum(cost)),c("hhid"="hhid2012"))
     asset_costs2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,asset_costs$shortname)),.(hhid),summarise,cost_asset_costs=sum(cost)),c("hhid"="hhid2014"))
+
+    assets_diary_2010 <- plyr::rename(ddply(subset(c2010,is.element(shortname,assets_diary_costs$shortname)),.(hhid),summarise,cost_assets=sum(cost)),c("hhid"="hhid2010"))
+    assets_diary_2012 <- plyr::rename(ddply(subset(c2012,is.element(shortname,assets_diary_costs$shortname)),.(hhid),summarise,cost_assets=sum(cost)),c("hhid"="hhid2012"))
+    assets_diary_2014 <- plyr::rename(ddply(subset(c2014,is.element(shortname,assets_diary_costs$shortname)),.(hhid),summarise,cost_assets=sum(cost)),c("hhid"="hhid2014"))
     
-    ne2010_noac <- merge(food2010,excess2010,by=c("hhid2010"),all=T)
+    ne2010_noac_noa <- merge(food2010,excess2010,by=c("hhid2010"),all=T)
+    ne2010_noac <- merge(ne2010_noac_noa,assets_diary_2010,by=c("hhid2010"),all=T)
     ne2010 <- zero_nas(merge(ne2010_noac,asset_costs2010,by=c("hhid2010"),all=T))
     
-    ne2012_noac <- merge(food2012,excess2012,by=c("hhid2012"),all=T)
+    ne2012_noac_noa <- merge(food2012,excess2012,by=c("hhid2012"),all=T)
+    ne2012_noac <- merge(ne2012_noac_noa,assets_diary_2012,by=c("hhid2012"),all=T)
     ne2012 <- zero_nas(merge(ne2012_noac,asset_costs2012,by=c("hhid2012"),all=T))
     
-    ne2014_noac <- merge(food2014,excess2014,by=c("hhid2014"),all=T)
+    ne2014_noac_noa <- merge(food2014,excess2014,by=c("hhid2014"),all=T)
+    ne2014_noac <- merge(ne2014_noac_noa,assets_diary_2014,by=c("hhid2014"),all=T)
     ne2014 <- zero_nas(merge(ne2014_noac,asset_costs2014,by=c("hhid2014"),all=T))
     
     
@@ -1339,7 +1353,7 @@ get_nonparametric_df <- function(ll,food_analysis){
       rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1")
       rd_bubble_weduc <- merge(rd_bubble,bubble_educ, by = c("B","high_educ"))
       rd_bubble_weducoccup <- merge(rd_bubble_weduc,bubble_occup, by = c("B","high_occup"))
-      rd <- rd_bubble_weducoccup %>% mutate(x_ne_food = cost_ne_food/hsize) %>% mutate(x_ne_nonfood = cost_ne_nonfood/hsize) %>% mutate(logx_ne_food=log(x_ne_food+1e-7),logx_ne_nonfood=log(x_ne_nonfood+1e-7)) %>% mutate(x_ne = x_ne_food + x_ne_nonfood , x_ac = cost_asset_costs/hsize) %>% mutate(w_ne = x_ne / (x_ne + x_ac) , logx= log(x_ne+x_ac) , mean_cost_ne = mean_cost_ne_food_x + mean_cost_ne_nonfood_x)
+      rd <- rd_bubble_weducoccup %>% mutate(x_ne_food = cost_ne_food/hsize) %>% mutate(x_ne_nonfood = cost_ne_nonfood/hsize) %>% mutate(logx_ne_food=log(x_ne_food+1e-7),logx_ne_nonfood=log(x_ne_nonfood+1e-7)) %>% mutate( x_a = cost_assets/hsize ,  x_ac = cost_asset_costs/hsize)
       rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate (Ar=lnA0-r)
       rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>%  mutate (Ar_occup=lnA0-r_occup)
       rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate (Ar_educ=lnA0-r_educ)
@@ -1406,9 +1420,10 @@ load_data <- function()
   tndf2012 <- read_dta('../lsms/data/tn_df2012.dta')
   tndf2014 <- read_dta('../lsms/data/tn_df2014.dta')
   res = list()
-  res[['df2010']] <- tndf2010
-  res[['df2012']] <- tndf2012
-  res[['df2014']] <- tndf2014
+
+  res[['df2010']] <- tndf2010 %>% mutate ( log_q_ne = log(1e-7+ cost_ne_nonfood + cost_ne_food) , logx =log(cost_ne_food + cost_asset_costs +cost_assets +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) )
+  res[['df2012']] <- tndf2012 %>% mutate ( log_q_ne = log(1e-7+ cost_ne_nonfood + cost_ne_food) , logx =log(cost_ne_food + cost_asset_costs +cost_assets +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) )
+  res[['df2014']] <- tndf2014 %>% mutate ( log_q_ne = log(1e-7+ cost_ne_nonfood + cost_ne_food) , logx =log(cost_ne_food + cost_asset_costs +cost_assets +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) )
   return(res)
 }
 

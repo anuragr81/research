@@ -354,9 +354,22 @@ load_data <- function()
 
 save_data <- function(dfslist)
 {
+  
+  if (nrow(subset(dfslist[['df2010']],age<0))>0){
+    print(paste("Ignoring",nrow(subset(dfslist[['df2010']],age<0)),"entries with negative age"))
+    dfslist[['df2010']] <- subset(dfslist[['df2010']],age>=0)
+    
+  }
   ngrdf2010 <- write_dta(dfslist[['df2010']],'../lsms/data/ngr_df2010.dta')
   ngrdf2012 <- write_dta(dfslist[['df2012']],'../lsms/data/ngr_df2012.dta')
   ngrdf2015 <- write_dta(dfslist[['df2015']],'../lsms/data/ngr_df2015.dta')
+  
+  x <- build_xt_df(dflist = dfslist)
+  
+  write_dta(x$df2010_2012,'../lsms/data/ngr_df2010_2012.dta')
+  write_dta(x$df2012_2015,'../lsms/data/ngr_df2012_2015.dta')
+  write_dta(x$df2010_2012_2015,'../lsms/data/ngr_df2010_2012_2015.dta')
+  
 }
 
 init_data <- function(){
@@ -445,6 +458,27 @@ zero_nas <- function(dat){
     dat[is.na(dat$cost_asset_costs),]$cost_asset_costs <- 0
   }
   return(dat)
+}
+build_xt_df <- function(dflist)
+{
+  dat2010 <- dflist[["df2010"]]
+  dat2012 <- dflist[["df2012"]]
+  dat2015 <- dflist[["df2015"]]
+  
+
+  common_cols_2010_2012_2015 <- intersect(colnames(dat2010),intersect(colnames(dat2012),colnames(dat2015) ))
+  
+  df2010_2012 <- rbind(dat2012[,common_cols_2010_2012_2015] %>% mutate(year =2012), dat2010[,common_cols_2010_2012_2015] %>% mutate(year =2010))
+  
+  df2012_2015 <- rbind(dat2015[,common_cols_2010_2012_2015]%>% mutate(year =2015),dat2012[,common_cols_2010_2012_2015] %>% mutate(year =2012))
+  
+  df2010_2012_2015 <-rbind(dat2010[,common_cols_2010_2012_2015] %>% mutate(year =2010), rbind(dat2015[,common_cols_2010_2012_2015]%>% mutate(year =2015),dat2012[,common_cols_2010_2012_2015] %>% mutate(year =2012) ) )
+  
+  res=list()
+  res[["df2010_2012"]] <- df2010_2012
+  res[["df2012_2015"]] <- df2012_2015
+  res[["df2010_2012_2015"]] <- df2010_2012_2015
+  return(res)
 }
 
 
