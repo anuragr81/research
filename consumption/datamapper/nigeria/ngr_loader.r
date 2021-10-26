@@ -562,6 +562,9 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohs$highest_educ_temp <- ohs$highest_educ
       ohs[is.na(ohs$highest_educ_temp),]$highest_educ_temp <- 0
       #ohs$education_rank <- as.integer(ohs$highest_educ_temp<=0)*0 + as.integer(ohs$highest_educ_temp>0 & ohs$highest_educ_temp<=11)*1 + as.integer(ohs$highest_educ_temp>11 & ohs$highest_educ_temp<=23)*2 +as.integer(ohs$highest_educ_temp>23)*3
+      if (length(setdiff(unique(ohs$highest_educ_temp),education_rank_mapping$highest_educ))>0 ){
+        stop("Missing education codes")
+      }
       ohs <- merge(ohs,plyr::rename(education_rank_mapping,c("highest_educ"="highest_educ_temp"))[,c("highest_educ_temp","education_rank")],by=c("highest_educ_temp"))
       ohs$highest_educ_temp <- NULL
     
@@ -626,6 +629,12 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohs$highest_educ_temp <- ohs$highest_educ
       ohs[is.na(ohs$highest_educ_temp),]$highest_educ_temp <- 0
       #ohs$education_rank <- as.integer(ohs$highest_educ_temp<=0)*0 + as.integer(ohs$highest_educ_temp>0 & ohs$highest_educ_temp<=11)*1 + as.integer(ohs$highest_educ_temp>11 & ohs$highest_educ_temp<=23)*2 +as.integer(ohs$highest_educ_temp>23)*3
+      ignored_educ_types <- c(4,19,20) # Invalid entries in the data
+      ohs <- subset(ohs,!is.element(highest_educ_temp,ignored_educ_types))
+      if (length(setdiff(unique(ohs$highest_educ_temp),education_rank_mapping$highest_educ))>0 ){
+        
+        stop("Missing education codes")
+      }
       ohs <- merge(ohs,plyr::rename(education_rank_mapping,c("highest_educ"="highest_educ_temp"))[,c("highest_educ_temp","education_rank")],by=c("highest_educ_temp"))
       ohs$highest_educ_temp <- NULL
       
@@ -687,6 +696,9 @@ ngr_loader<-function(fu,ngrn,lgc) {
       education_rank_mapping <- read.csv(paste0(dirprefix,"./lsms/nigeria/education_codes.csv"),stringsAsFactors = F)
       ohs[is.na(ohs$highest_educ_temp),]$highest_educ_temp <- 0
       #ohs$education_rank <- as.integer(ohs$highest_educ_temp<=0)*0 + as.integer(ohs$highest_educ_temp>0 & ohs$highest_educ_temp<=11)*1 + as.integer(ohs$highest_educ_temp>11 & ohs$highest_educ_temp<=23)*2 +as.integer(ohs$highest_educ_temp>23)*3
+      if (length(setdiff(unique(ohs$highest_educ_temp),education_rank_mapping$highest_educ))>0 ){
+        stop("Missing education codes")
+      }
       ohs <- merge(ohs,plyr::rename(education_rank_mapping,c("highest_educ"="highest_educ_temp"))[,c("highest_educ_temp","education_rank")],by=c("highest_educ_temp"))
       ohs$highest_educ_temp <- NULL
       
