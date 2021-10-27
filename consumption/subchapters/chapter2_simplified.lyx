@@ -881,13 +881,13 @@ n_rank+ max_occupation_rank + age + is_urban))
 \begin_layout Plain Layout
 
 %summary(lm(data=tn$df2010,x_food ~  mean_cost_ne_food_x +r + max_education_rank
-+ max_occupation_rank + hh_age + isrural))
++ max_occupation_rank + age + isrural))
 \end_layout
 
 \begin_layout Plain Layout
 
 %summary(lm(data=tn$df2010,x_nonfood ~  mean_cost_ne_nonfood_x +r + max_educatio
-n_rank+ max_occupation_rank + hh_age + isrural))
+n_rank+ max_occupation_rank + age + isrural))
 \end_layout
 
 \begin_layout Plain Layout
@@ -1388,7 +1388,7 @@ ss.
 \end_layout
 
 \begin_layout Standard
-Recalll that the non-durable consumption 
+Recall that the non-durable consumption 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -1502,7 +1502,7 @@ noprefix "false"
 \end_inset
 
 ).
- Iin Nigeria (see Figure 
+ In Nigeria (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:occupations_r_ngr"
@@ -1514,25 +1514,38 @@ noprefix "false"
 
 ) , on the other hand, the income-disparities in occupations and asset-differenc
 es seem less extreme.
- For the comparison of occupations in the two economies, we have standardised
- the different occupations by observing their association with the income
- in the respective countries.
- The occupation levels are thus measured using 
-\begin_inset Quotes eld
+ The range of occupations available to the consumer populations in the surveys
+ from Tanzania and Nigeria are varied.
+ We hence perform the comparison of occupations in the two economies by
+ standardising the different occupations into occupation ranks ranging from
+ 0 to 3.
+ The occupation ranks are essentially based on sorting the varied occupations
+ in the two economies by the income of consumers in the respective countries.
+ In of using occupation levels, in the analysis, we use these occupation-ranks
+ derived by mapping the occupation levels to ranks ranging from 0 to 3 (see
+ Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{occupation_rank_tn}
+\end_layout
+
 \end_inset
 
-ranks
-\begin_inset Quotes erd
-\end_inset
+ and 
+\begin_inset ERT
+status open
 
- derived from the income-data in the survey by mapping the occupation levels
- to values (ranks) ranging from 0 to 3 (see Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:occupation_rank_tnz"
-plural "false"
-caps "false"
-noprefix "false"
+\begin_layout Plain Layout
+
+
+\backslash
+ref{occupation_rank_ngr}
+\end_layout
 
 \end_inset
 
@@ -1542,12 +1555,19 @@ status open
 
 \begin_layout Plain Layout
 In of sub-Saharan Africa, empirical studies often use the data on occupation
- or education to proxy the income differences (see Alesina et al.).
+ or education to proxy the income differences (see Alesina et al.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AlesinaMobilityAfrica2019"
+literal "false"
+
+\end_inset
+
+).
  The primary reason for this the sparsity of income data.
- The income data in LSMS is not available for the entire survey population
- either.
- This may due largely due an insufficient coverage of the income surveys
- given significant informal sectors in the economies.
+ In the LSMS data used for Nigeria and Tanzania, the income data is not
+ available for the entire survey population.
+ This is partly due to significant informal sectors in the economies.
 \end_layout
 
 \end_inset
@@ -1623,8 +1643,8 @@ Since status concerns are necessarily localised, the non-durable consumption
  for consumers in the asset poor south and west are indeed much lower.
  On the other hand, despite lower incomes in the central north, the median
  net-asset worth of the individuals in regions such as Singida and Manyara
- (region around -5S,36E) could match up with that of the consumers in the
- east coast of Tanzania (see Figure 
+ could match up with that of the consumers in the east coast of Tanzania
+ (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:occupations_r_tn"
@@ -1674,6 +1694,27 @@ n choices to optimise subjective well-being is a much stronger argument
 \end_layout
 
 \begin_layout Standard
+The regional disparities are less extreme in Nigeria even though the southern
+ areas of the country seem to have more higher-paid occupations and a higher
+ expenditure on non-durable expenditure overall.
+ Despite the differences in educational and occupational levels in between
+ the north and south of the country, the disparity in asset ownership is
+ not nearly as extreme as in Tanzania.
+ We explore the implications of this uniformity on non-durable consumption
+ with a parametric approach in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:ParametricRegressions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -1701,7 +1742,7 @@ name "fig:occupations_r_tn"
 
 \end_inset
 
-Differences in occupations and consumer-owned assets (2012 - Tanzania)
+Occupations and consumer-owned assets in Tanzania (2012)
 \end_layout
 
 \end_inset
@@ -1716,6 +1757,7 @@ Differences in occupations and consumer-owned assets (2012 - Tanzania)
 
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
@@ -1741,12 +1783,2913 @@ name "fig:occupations_r_ngr"
 
 \end_inset
 
-Differences in occupations and consumer-owned assets (2012 - Nigeria)
+Occupations and consumer-owned assets in Nigeria (2012)
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:ParametricRegressions"
+
+\end_inset
+
+Parametric Analysis
+\end_layout
+
+\begin_layout Standard
+As detailed in the previous sections, we have 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ as the average asset value averages in the locality, 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ the household's non-durable consumption and 
+\begin_inset Formula $p_{nde}(r_{t})$
+\end_inset
+
+ the average cost of non-durable consumption in the locality.
+ We also use the factor variables 
+\family typewriter
+\size small
+max_occupation_rank
+\family default
+\size default
+ and 
+\family typewriter
+\size small
+max_education_rank 
+\family default
+\size default
+which are the maximum occupation and education ranks in the household respective
+ly.
+ The results from an OLS regression of 
+\begin_inset Formula $log(\nu_{t})$
+\end_inset
+
+ against 
+\begin_inset Formula $log(x_{t})$
+\end_inset
+
+ ( where 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ is total per-head expenditure ), 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ , 
+\begin_inset Formula $age$
+\end_inset
+
+ and 
+\begin_inset Formula $log(p_{nde})$
+\end_inset
+
+ are presented in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabExcessLinear_tn}
+\end_layout
+
+\end_inset
+
+ for Tanzania and Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabExcessLinear_ngr}
+\end_layout
+
+\end_inset
+
+ for Nigeria.
+\end_layout
+
+\begin_layout Standard
+The key of the variable-names used in the results is as follows
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+\size small
+logx 
+\family default
+\size default
+or 
+\begin_inset Formula $log(x_{t})$
+\end_inset
+
+ - calculated as the logarithm of per-head total expenditure 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ per household - inclusive of asset-maintenance costs and all non-durable
+ consumption (both food and non-food).
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+\size small
+log_mean_A0
+\family default
+\size default
+ or 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ - calculated as the logarithm of mean asset-ownership level in the 4-km
+ radius area around the consumer district
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+\size small
+log_mean_cost_ne 
+\family default
+\size default
+or 
+\begin_inset Formula $log(p_{nde})$
+\end_inset
+
+ - calculated as the logarithm of the mean non-durable expenditure excluding
+ asset costs in the area surrounding the consumer
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+\size small
+max_occupation_rank 
+\family default
+\size default
+- the highest occupation rank among the family members of the household
+ used as a factor variable
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+\size small
+max_education_rank 
+\family default
+\size default
+- the highest education rank among the family members of the household used
+ as a factor variable
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+\size small
+age
+\family default
+\size default
+ - the age of the head of the household (reported in the survey)
+\end_layout
+
+\begin_layout Standard
+The results show that the non-durable expenditure excluding asset-costs
+ (see Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{itemsclassification_tn}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{itemsclassification_ngr}
+\end_layout
+
+\end_inset
+
+ ) decline with higher 
+\begin_inset Formula $p_{nde}(r_{t})$
+\end_inset
+
+ in Nigeria but not in Tanzania where the role of 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ dominates.
+ The areas with higher average non-durable consumption have the effect of
+ reducing non-durable consumption for the individual - but the local level
+ consumption has a stronger effect on the reported non-durable consumption
+ in Nigeria than in Tanzania.
+ The consumers with higher incomes and higher net asset worth having less
+ per-head non-durable consumption is due to rising assets costs - but this
+ effect is more pronounced in Nigeria.
+ 
+\end_layout
+
+\begin_layout Standard
+In other words, the individual consumption moves together with the local
+ consumption levels after accounting for total income in Nigeria but in
+ Tanzania, the consumer's non-durable consumption is relative stable with
+ respect to areas of richness.
+ Since we have included food in 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ - this is due in part to food consumption dominating the consumer's non-durable
+ consumption in Tanzania and because of asset costs relevant for a much
+ smaller portion of population in Tanzania.
+\end_layout
+
+\begin_layout Standard
+Looking at the changes in local asset averages for the same household, we
+ also see with the results from an FE estimation (after removing the unchanged
+ rank variables) that there is some substitution between 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ .
+ As the local asset averages rise the consumers spend less on non-durable
+ consumption - as their asset costs rise in Nigeria but this is less so
+ in Tanzania.
+ 
+\end_layout
+
+\begin_layout Standard
+The asset costs being more pronounced in Nigeria means that the overall
+ needs associated with assets - that include maintenance, fees, payments
+ and subscription etc.
+ grow strongly tied with owned assets at finer levels in Nigeria and therefore
+ the role of non-durable consumption less.
+ Since assets are more uniformly distributed in Nigeria, the role of assets
+ in status indication is evidently higher than in Tanzania where the asset-owner
+ship is rather limited for most of the population.
+\end_layout
+
+\begin_layout Standard
+[Granularity and Urban-rural differences] Notice that the granularity of
+ aggregation is of key importance in our interpretation.
+ There is no denying that income and occupation differences within levels
+ finer than the district level may be relevant but the district-level aggregatio
+n only allows us to understand wider regional disparities.
+ Notice also that while the above analysis of urban and rural disparities
+ may appear to ignore any differences between the consumer's agricultural
+ and industrial assets, the measure 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ does consider the effect of urban and rural differences due to urban and
+ rural disparities in wealth.
+ Thus, if a consumer gains more status by owning a luxury car in the city
+ than owning a tractor (which cost the same) in a village, our approach
+ does not differentiate between the vehicle being a tractor or a luxury
+ car but it does consider the asset in a rich area (city) and the poor area
+ (village).
+ The measures of 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ depending only on their reported prices alone (see Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{assetslist}
+\end_layout
+
+\end_inset
+
+) therefore suffice for our analysis.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Tanzania: Linear estimation for excess weight $ log(
+\backslash
+nu_{t}) $ as dependent variable 
+\backslash
+label{tabExcessLinear_tn}} 
+\backslash
+begin{tabular}{l*{3}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}&
+\backslash
+multicolumn{1}{c}{(3)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2010}&
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2014}
+\backslash
+
+\backslash
+ 
+\backslash
+hline logx      &    1.053
+\backslash
+sym{***}&    1.066
+\backslash
+sym{***}&    1.062
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  -0.0543
+\backslash
+sym{***}&  -0.0359
+\backslash
+sym{***}&  -0.0155         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.106)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&    0.148         &   0.0725         &  -0.0855         
+\backslash
+
+\backslash
+           &  (0.630)         &  (0.806)         &  (0.796)         
+\backslash
+
+\backslash
+ 0.hh
+\backslash
+_occupation
+\backslash
+_rank&        0         &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 1.hh
+\backslash
+_occupation
+\backslash
+_rank&   0.0389         &   0.0376         &   0.0503         
+\backslash
+
+\backslash
+           &  (0.217)         &  (0.151)         &  (0.076)         
+\backslash
+
+\backslash
+ 2.hh
+\backslash
+_occupation
+\backslash
+_rank& -0.00996         &  -0.0551
+\backslash
+sym{*}  &   0.0461         
+\backslash
+
+\backslash
+           &  (0.764)         &  (0.041)         &  (0.109)         
+\backslash
+
+\backslash
+ 3.hh
+\backslash
+_occupation
+\backslash
+_rank&  -0.0430         &  -0.0600         &   0.0222         
+\backslash
+
+\backslash
+           &  (0.406)         &  (0.159)         &  (0.622)         
+\backslash
+
+\backslash
+ 0.hh
+\backslash
+_education
+\backslash
+_rank&        0         &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 1.hh
+\backslash
+_education
+\backslash
+_rank&   0.0360         &   0.0159         &  0.00358         
+\backslash
+
+\backslash
+           &  (0.152)         &  (0.454)         &  (0.874)         
+\backslash
+
+\backslash
+ 2.hh
+\backslash
+_education
+\backslash
+_rank&   0.0426         &   0.0435         &   0.0171         
+\backslash
+
+\backslash
+           &  (0.214)         &  (0.099)         &  (0.512)         
+\backslash
+
+\backslash
+ 3.hh
+\backslash
+_education
+\backslash
+_rank&  -0.0190         &  -0.0500         &  -0.0255         
+\backslash
+
+\backslash
+           &  (0.791)         &  (0.374)         &  (0.635)         
+\backslash
+
+\backslash
+ 4.hh
+\backslash
+_education
+\backslash
+_rank& -0.00136         &   0.0434         &  -0.0399         
+\backslash
+
+\backslash
+           &  (0.988)         &  (0.574)         &  (0.568)         
+\backslash
+
+\backslash
+ age    &  0.00301
+\backslash
+sym{***}&  0.00235
+\backslash
+sym{***}&  0.00109         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.085)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -0.790         &   -1.047         &   -0.887         
+\backslash
+
+\backslash
+           &  (0.260)         &  (0.128)         &  (0.235)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     3196         &     4053         &     3607         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{4}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{4}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Nigeria: Linear estimation for excess weight $ log(
+\backslash
+nu_{t}) $ as dependent variable 
+\backslash
+label{tabExcessLinear_ngr}} 
+\backslash
+begin{tabular}{l*{3}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}&
+\backslash
+multicolumn{1}{c}{(3)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2010}&
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2015}
+\backslash
+
+\backslash
+ 
+\backslash
+hline logx      &    1.063
+\backslash
+sym{***}&    1.029
+\backslash
+sym{***}&    1.054
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  -0.0321
+\backslash
+sym{***}&  -0.0359
+\backslash
+sym{***}&  -0.0521
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&   -0.346
+\backslash
+sym{*}  &   -0.297
+\backslash
+sym{***}&   -0.117         
+\backslash
+
+\backslash
+           &  (0.029)         &  (0.000)         &  (0.501)         
+\backslash
+
+\backslash
+ 1.hh
+\backslash
+_occupation
+\backslash
+_rank&        0         &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.hh
+\backslash
+_occupation
+\backslash
+_rank&  -0.0553
+\backslash
+sym{**} &  -0.0325
+\backslash
+sym{***}&  -0.0351         
+\backslash
+
+\backslash
+           &  (0.003)         &  (0.000)         &  (0.052)         
+\backslash
+
+\backslash
+ 3.hh
+\backslash
+_occupation
+\backslash
+_rank&  -0.0919
+\backslash
+sym{**} &  -0.0299
+\backslash
+sym{*}  &  -0.0671
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.001)         &  (0.018)         &  (0.013)         
+\backslash
+
+\backslash
+ 0.hh
+\backslash
+_education
+\backslash
+_rank&        0         &        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 1.hh
+\backslash
+_education
+\backslash
+_rank&   0.0652         & -0.00769         &  0.00692         
+\backslash
+
+\backslash
+           &  (0.574)         &  (0.893)         &  (0.969)         
+\backslash
+
+\backslash
+ 2.hh
+\backslash
+_education
+\backslash
+_rank& -0.00166         &  -0.0116         &  -0.0388
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.921)         &  (0.135)         &  (0.049)         
+\backslash
+
+\backslash
+ 3.hh
+\backslash
+_education
+\backslash
+_rank&  -0.0215         &  -0.0156
+\backslash
+sym{*}  &  -0.0222         
+\backslash
+
+\backslash
+           &  (0.143)         &  (0.013)         &  (0.170)         
+\backslash
+
+\backslash
+ age       & 0.000730         & 0.000164         & -0.00104
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.085)         &  (0.392)         &  (0.025)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    0.265         &    0.635
+\backslash
+sym{***}&    0.132         
+\backslash
+
+\backslash
+           &  (0.416)         &  (0.000)         &  (0.703)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     4285         &     4028         &     4110         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{4}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{4}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Tanzania: FE estimation for excess $ log(
+\backslash
+nu_{t}) $ as dependent variable 
+\backslash
+label{tabExcessFE}} 
+\backslash
+begin{tabular}{l*{1}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012-2014}
+\backslash
+
+\backslash
+ 
+\backslash
+hline logx      &    0.991
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  0.00704         
+\backslash
+
+\backslash
+           &  (0.696)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&    1.252         
+\backslash
+
+\backslash
+           &  (0.114)         
+\backslash
+
+\backslash
+ age    &  0.00176         
+\backslash
+
+\backslash
+           &  (0.632)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -3.600         
+\backslash
+
+\backslash
+           &  (0.057)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     4454         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Nigeria: FE estimation for excess $ log(
+\backslash
+nu_{t}) $ as dependent variable 
+\backslash
+label{tabExcessFE}} 
+\backslash
+begin{tabular}{l*{1}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012-2015}
+\backslash
+
+\backslash
+ 
+\backslash
+hline logx      &    1.031
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  -0.0192
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.002)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&  -0.0600         
+\backslash
+
+\backslash
+           &  (0.514)         
+\backslash
+
+\backslash
+ age       &-0.000888
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.012)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -0.118         
+\backslash
+
+\backslash
+           &  (0.506)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     8138         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Conclusions
+\end_layout
+
+\begin_layout Standard
+[Difference in assets costs] The difference in asset-costs causes the difference
+ between Tanzania and Nigeria.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% consider using dummies for north, east and south.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using asset ownership to define the consumer's context, we have considered
+ status consumption ....
+ while accounting for the income and lifestyle disparities that characterise
+ a developing economy.
+ Instead of focusing on visible consumption, we look at status consumption
+ as non-necessary non-durable consumption apart from the stock of durable
+ goods which serve as consumer's endowments.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}[!p]{c c c l} 
+\backslash
+caption{Excess and food items in Tanzania 
+\backslash
+label{itemsclassification_tn}} 
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline
+\backslash
+hline  & 
+\backslash
+multicolumn{1}{c}{type} & 
+\backslash
+multicolumn{1}{c}{category} & 
+\backslash
+multicolumn{1}{l}{name}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ & needs & carbs & rice
+\backslash
+_husked
+\backslash
+
+\backslash
+ & needs & carbs & rice
+\backslash
+_paddy
+\backslash
+
+\backslash
+ & needs & carbs & maize
+\backslash
+_green
+\backslash
+
+\backslash
+ & needs & carbs & maize
+\backslash
+_grain
+\backslash
+
+\backslash
+ & needs & carbs & maize
+\backslash
+_flour
+\backslash
+
+\backslash
+ & needs & carbs & millet
+\backslash
+_grain
+\backslash
+
+\backslash
+ & needs & carbs & millet
+\backslash
+_flour
+\backslash
+
+\backslash
+ & needs & carbs & wheat
+\backslash
+
+\backslash
+ & needs & carbs & bread
+\backslash
+
+\backslash
+ & needs & carbs & bunscakes
+\backslash
+
+\backslash
+ & needs & carbs & pasta
+\backslash
+
+\backslash
+ & needs & carbs & othercereal
+\backslash
+
+\backslash
+ & needs & carbs & cassava
+\backslash
+_fresh
+\backslash
+
+\backslash
+ & needs & carbs & cassava
+\backslash
+_flour
+\backslash
+
+\backslash
+ & needs & carbs & sweet
+\backslash
+_potato
+\backslash
+
+\backslash
+ & needs & carbs & potatoes
+\backslash
+
+\backslash
+ & needs & fat & peanuts
+\backslash
+
+\backslash
+ & needs & fat & coconut
+\backslash
+
+\backslash
+ & needs & fat & cashew
+\backslash
+_almonds
+\backslash
+
+\backslash
+ & needs & fat & nut
+\backslash
+_products
+\backslash
+
+\backslash
+ & needs & fat & cooking
+\backslash
+_oil
+\backslash
+
+\backslash
+ & needs & fat & butter
+\backslash
+_margarine
+\backslash
+
+\backslash
+ & needs & protein & pulses
+\backslash
+
+\backslash
+ & needs & protein & milk
+\backslash
+_products
+\backslash
+
+\backslash
+ & needs & protein & fresh
+\backslash
+_milk
+\backslash
+
+\backslash
+ & needs & protein & canned
+\backslash
+_milk
+\backslash
+
+\backslash
+ & needs & protein & goat
+\backslash
+
+\backslash
+ & needs & protein & beef
+\backslash
+
+\backslash
+ & needs & protein & pork
+\backslash
+
+\backslash
+ & needs & protein & chicken
+\backslash
+
+\backslash
+ & needs & protein & wild
+\backslash
+_birds
+\backslash
+
+\backslash
+ & needs & protein & wild
+\backslash
+_meat
+\backslash
+
+\backslash
+ & needs & protein & fish
+\backslash
+_seafood
+\backslash
+
+\backslash
+ & needs & protein & dried
+\backslash
+_canned
+\backslash
+_fish
+\backslash
+
+\backslash
+ & needs & protein & packaged
+\backslash
+_fish
+\backslash
+
+\backslash
+ & needs & protein & eggs
+\backslash
+
+\backslash
+ & needs & fruitsveg & onion
+\backslash
+
+\backslash
+ & needs & fruitsveg & greens
+\backslash
+
+\backslash
+ & needs & fruitsveg & dried
+\backslash
+_canned
+\backslash
+_veg
+\backslash
+
+\backslash
+ & needs & fruitsveg & yam
+\backslash
+
+\backslash
+ & needs & fruitsveg & banana
+\backslash
+_green
+\backslash
+
+\backslash
+ & needs & fruitsveg & othervegstarch
+\backslash
+
+\backslash
+ & needs & fruitsveg & banana
+\backslash
+_ripe
+\backslash
+
+\backslash
+ & needs & fruitsveg & citrus
+\backslash
+
+\backslash
+ & needs & fruitsveg & mangoes
+\backslash
+
+\backslash
+ & needs & fruitsveg & sugarcane
+\backslash
+
+\backslash
+ & excess & general & cigarettes
+\backslash
+
+\backslash
+ & excess & general & bar
+\backslash
+_soap
+\backslash
+
+\backslash
+ & excess & general & clothes
+\backslash
+_soap
+\backslash
+
+\backslash
+ & excess & general & toothpaste
+\backslash
+
+\backslash
+ & excess & general & toilet
+\backslash
+_paper
+\backslash
+
+\backslash
+ & excess & general & skin
+\backslash
+_cream
+\backslash
+
+\backslash
+ & excess & general & other
+\backslash
+_personal
+\backslash
+
+\backslash
+ & excess & general & misc
+\backslash
+_cleaning
+\backslash
+
+\backslash
+ & excess & general & donation
+\backslash
+
+\backslash
+ & excess & general & services
+\backslash
+
+\backslash
+ & excess & general & bride
+\backslash
+_price
+\backslash
+
+\backslash
+ & excess & general & marriage
+\backslash
+
+\backslash
+ & excess & general & funeral
+\backslash
+
+\backslash
+ & excess & general & sugar
+\backslash
+
+\backslash
+ & excess & general & sweet
+\backslash
+
+\backslash
+ & excess & general & honey
+\backslash
+
+\backslash
+ & excess & general & salt
+\backslash
+
+\backslash
+ & excess & general & spices
+\backslash
+
+\backslash
+ & excess & general & tea
+\backslash
+
+\backslash
+ & excess & general & coffee
+\backslash
+
+\backslash
+ & excess & general & miscdrinkpowder
+\backslash
+
+\backslash
+ & excess & general & canned
+\backslash
+_drink
+\backslash
+
+\backslash
+ & excess & general & readymade
+\backslash
+_tea
+\backslash
+_coffee
+\backslash
+
+\backslash
+ & excess & general & beer
+\backslash
+
+\backslash
+ & excess & general & brews
+\backslash
+
+\backslash
+ & excess & general & winespirits
+\backslash
+
+\backslash
+ & excess & general & mensclothes
+\backslash
+
+\backslash
+ & excess & general & womensclothes
+\backslash
+
+\backslash
+ & excess & general & childrensclothes
+\backslash
+
+\backslash
+ & excess & general & mensshoes
+\backslash
+
+\backslash
+ & excess & general & womensshoes
+\backslash
+
+\backslash
+ & excess & general & childrensshoes
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+end{longtable} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}[!p]{l l c l} 
+\backslash
+caption{Excess and food items  in Nigeria 
+\backslash
+label{itemsclassification_ngr}} 
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline
+\backslash
+hline  & 
+\backslash
+multicolumn{1}{c}{name} & 
+\backslash
+multicolumn{1}{c}{category} & 
+\backslash
+multicolumn{1}{c}{type}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ & corn & carbs & food
+\backslash
+
+\backslash
+ & millet & carbs & food
+\backslash
+
+\backslash
+ & maize
+\backslash
+_grain & carbs & food
+\backslash
+
+\backslash
+ & rice
+\backslash
+_local & carbs & food
+\backslash
+
+\backslash
+ & rice
+\backslash
+_imported & carbs & food
+\backslash
+
+\backslash
+ & bread & carbs & food
+\backslash
+
+\backslash
+ & maize
+\backslash
+_flour & carbs & food
+\backslash
+
+\backslash
+ & yam
+\backslash
+_flour & carbs & food
+\backslash
+
+\backslash
+ & cassava
+\backslash
+_flour & carbs & food
+\backslash
+
+\backslash
+ & wheat
+\backslash
+_flour & carbs & food
+\backslash
+
+\backslash
+ & other
+\backslash
+_grains & carbs & food
+\backslash
+
+\backslash
+ & cassava
+\backslash
+_fresh & carbs & food
+\backslash
+
+\backslash
+ & yam
+\backslash
+_fresh & carbs & food
+\backslash
+
+\backslash
+ & gari
+\backslash
+_white & carbs & food
+\backslash
+
+\backslash
+ & gari
+\backslash
+_yellow & carbs & food
+\backslash
+
+\backslash
+ & cocoyam & carbs & food
+\backslash
+
+\backslash
+ & plantains & fruitsveg & food
+\backslash
+
+\backslash
+ & sweet
+\backslash
+_potato & carbs & food
+\backslash
+
+\backslash
+ & potato & carbs & food
+\backslash
+
+\backslash
+ & roots
+\backslash
+_other & fruitsveg & food
+\backslash
+
+\backslash
+ & soyabeans & fruitsveg & food
+\backslash
+
+\backslash
+ & brown
+\backslash
+_beans & fruitsveg & food
+\backslash
+
+\backslash
+ & white
+\backslash
+_beans & fruitsveg & food
+\backslash
+
+\backslash
+ & peanuts & fat & food
+\backslash
+
+\backslash
+ & nuts
+\backslash
+_others & fat & food
+\backslash
+
+\backslash
+ & palm
+\backslash
+_oil & fat & food
+\backslash
+
+\backslash
+ & butter
+\backslash
+_margarine & fat & food
+\backslash
+
+\backslash
+ & peanut
+\backslash
+_oil & fat & food
+\backslash
+
+\backslash
+ & oil
+\backslash
+_others & fat & food
+\backslash
+
+\backslash
+ & bananas & fruitsveg & food
+\backslash
+
+\backslash
+ & citrus & fruitsveg & food
+\backslash
+
+\backslash
+ & mangoes & fruitsveg & food
+\backslash
+
+\backslash
+ & avocado
+\backslash
+_pear & fruitsveg & food
+\backslash
+
+\backslash
+ & pineapples & fruitsveg & food
+\backslash
+
+\backslash
+ & fruit
+\backslash
+_canned & fruitsveg & food
+\backslash
+
+\backslash
+ & other
+\backslash
+_fruits & fruitsveg & food
+\backslash
+
+\backslash
+ & tomatoes & fruitsveg & food
+\backslash
+
+\backslash
+ & tomatoes
+\backslash
+_puree & fruitsveg & food
+\backslash
+
+\backslash
+ & onions & fruitsveg & food
+\backslash
+
+\backslash
+ & eggplant & fruitsveg & food
+\backslash
+
+\backslash
+ & okra
+\backslash
+_fresh & fruitsveg & food
+\backslash
+
+\backslash
+ & okra
+\backslash
+_dried & fruitsveg & food
+\backslash
+
+\backslash
+ & pepper & fruitsveg & food
+\backslash
+
+\backslash
+ & fresh
+\backslash
+_leaves & fruitsveg & food
+\backslash
+
+\backslash
+ & vegetables
+\backslash
+_others & fruitsveg & food
+\backslash
+
+\backslash
+ & chicken & fruitsveg & food
+\backslash
+
+\backslash
+ & duck & fruitsveg & food
+\backslash
+
+\backslash
+ & poultry
+\backslash
+_others & fruitsveg & food
+\backslash
+
+\backslash
+ & eggs
+\backslash
+_garden & protein & food
+\backslash
+
+\backslash
+ & eggs
+\backslash
+_agri & protein & food
+\backslash
+
+\backslash
+ & eggs
+\backslash
+_local & protein & food
+\backslash
+
+\backslash
+ & eggs
+\backslash
+_others & protein & food
+\backslash
+
+\backslash
+ & beef &  & food
+\backslash
+
+\backslash
+ & mutton & protein & food
+\backslash
+
+\backslash
+ & pork & protein & food
+\backslash
+
+\backslash
+ & goat & protein & food
+\backslash
+
+\backslash
+ & game & protein & food
+\backslash
+
+\backslash
+ & beef
+\backslash
+_corned & protein & food
+\backslash
+
+\backslash
+ & meat
+\backslash
+_others & protein & food
+\backslash
+
+\backslash
+ & fresh
+\backslash
+_fish & protein & food
+\backslash
+
+\backslash
+ & frozen
+\backslash
+_fish & protein & food
+\backslash
+
+\backslash
+ & smoked
+\backslash
+_fish & protein & food
+\backslash
+
+\backslash
+ & dried
+\backslash
+_fish & protein & food
+\backslash
+
+\backslash
+ & snails & protein & food
+\backslash
+
+\backslash
+ & seafoods & protein & food
+\backslash
+
+\backslash
+ & canned
+\backslash
+_seafood & protein & food
+\backslash
+
+\backslash
+ & fish
+\backslash
+_others & protein & food
+\backslash
+
+\backslash
+ & fresh
+\backslash
+_milk & protein & food
+\backslash
+
+\backslash
+ & milk
+\backslash
+_powder & protein & food
+\backslash
+
+\backslash
+ & babymilk & protein & food
+\backslash
+
+\backslash
+ & canned
+\backslash
+_milk & protein & food
+\backslash
+
+\backslash
+ & milk
+\backslash
+_others & protein & food
+\backslash
+
+\backslash
+ & coffee & beverages & food
+\backslash
+
+\backslash
+ & choco
+\backslash
+_drinks & beverages & food
+\backslash
+
+\backslash
+ & tea & beverages & food
+\backslash
+
+\backslash
+ & sugar & carbs & food
+\backslash
+
+\backslash
+ & jams & carbs & food
+\backslash
+
+\backslash
+ & honey & carbs & food
+\backslash
+
+\backslash
+ & sweets
+\backslash
+_others & carbs & food
+\backslash
+
+\backslash
+ & condiments & fruitsveg & food
+\backslash
+
+\backslash
+ & water
+\backslash
+_bottled & beverages & food
+\backslash
+
+\backslash
+ & water
+\backslash
+_sachet & beverages & food
+\backslash
+
+\backslash
+ & malt
+\backslash
+_drinks & beverages & food
+\backslash
+
+\backslash
+ & soft
+\backslash
+_drinks & beverages & food
+\backslash
+
+\backslash
+ & peanut
+\backslash
+_pack & fat & food
+\backslash
+
+\backslash
+ & soft
+\backslash
+_drinks
+\backslash
+_others & beverages & food
+\backslash
+
+\backslash
+ & local
+\backslash
+_beer & beverages & food
+\backslash
+
+\backslash
+ & palm
+\backslash
+_wine & beverages & food
+\backslash
+
+\backslash
+ & pito & beverages & food
+\backslash
+
+\backslash
+ & gin & beverages & food
+\backslash
+
+\backslash
+ & alcoholic
+\backslash
+_others & beverages & food
+\backslash
+
+\backslash
+ & maize
+\backslash
+_unshelled & carbs & food
+\backslash
+
+\backslash
+ & maize
+\backslash
+_shelled & carbs & food
+\backslash
+
+\backslash
+ & cake & carbs & food
+\backslash
+
+\backslash
+ & buns & carbs & food
+\backslash
+
+\backslash
+ & biscuits & carbs & food
+\backslash
+
+\backslash
+ & meat
+\backslash
+_roll & carbs & food
+\backslash
+
+\backslash
+ & cheese & fat & food
+\backslash
+
+\backslash
+ & water & general & food
+\backslash
+
+\backslash
+ & palm
+\backslash
+_kernel
+\backslash
+_oil & fat & food
+\backslash
+
+\backslash
+ & maize
+\backslash
+_unshelled
+\backslash
+_cob & carbs & food
+\backslash
+
+\backslash
+ & maize
+\backslash
+_shelled
+\backslash
+_cob & carbs & food
+\backslash
+
+\backslash
+ & peanuts
+\backslash
+_unshelled & fat & food
+\backslash
+
+\backslash
+ & peanuts
+\backslash
+_shelled & fat & food
+\backslash
+
+\backslash
+ & coconut & fat & food
+\backslash
+
+\backslash
+ & kolanut & fat & food
+\backslash
+
+\backslash
+ & cashews & fat & food
+\backslash
+
+\backslash
+ & sheabutter & fat & food
+\backslash
+
+\backslash
+ & coconut
+\backslash
+_oil & fat & food
+\backslash
+
+\backslash
+ & animal
+\backslash
+_fat & fat & food
+\backslash
+
+\backslash
+ & pawpaw & fruitsveg & food
+\backslash
+
+\backslash
+ & watermelon & fruitsveg & food
+\backslash
+
+\backslash
+ & apples & fruitsveg & food
+\backslash
+
+\backslash
+ & pepper
+\backslash
+_fresh & fruitsveg & food
+\backslash
+
+\backslash
+ & pepper
+\backslash
+_dry & fruitsveg & food
+\backslash
+
+\backslash
+ & salt & fruitsveg & food
+\backslash
+
+\backslash
+ & obgono
+\backslash
+_unground & fruitsveg & food
+\backslash
+
+\backslash
+ & obgono
+\backslash
+_ground & fruitsveg & food
+\backslash
+
+\backslash
+ & pepper
+\backslash
+_ground & fruitsveg & food
+\backslash
+
+\backslash
+ & shelled
+\backslash
+_melon & fruitsveg & food
+\backslash
+
+\backslash
+ & unshelled
+\backslash
+_melon & fruitsveg & food
+\backslash
+
+\backslash
+ & ground
+\backslash
+_melon & fruitsveg & food
+\backslash
+
+\backslash
+ & guava & fruitsveg & food
+\backslash
+
+\backslash
+ & cigarettes & general & excess
+\backslash
+
+\backslash
+ & newspapers & general & excess
+\backslash
+
+\backslash
+ & soap & general & excess
+\backslash
+
+\backslash
+ & toilet
+\backslash
+_paper & general & excess
+\backslash
+
+\backslash
+ & cosmetics & general & excess
+\backslash
+
+\backslash
+ & vitamin & general & excess
+\backslash
+
+\backslash
+ & clothes
+\backslash
+_infant & general & excess
+\backslash
+
+\backslash
+ & clothes
+\backslash
+_baby & general & excess
+\backslash
+
+\backslash
+ & clothes
+\backslash
+_boys
+\backslash
+_tailored & general & excess
+\backslash
+
+\backslash
+ & clothes
+\backslash
+_boys
+\backslash
+_made & general & excess
+\backslash
+
+\backslash
+ & clothes
+\backslash
+_girls
+\backslash
+_tailored & general & excess
+\backslash
+
+\backslash
+ & clothes
+\backslash
+_girls
+\backslash
+_made & general & excess
+\backslash
+
+\backslash
+ & clothes
+\backslash
+_men
+\backslash
+_tailored & general & excess
+\backslash
+
+\backslash
+ & clothes
+\backslash
+_men
+\backslash
+_made & general & excess
+\backslash
+
+\backslash
+ & women
+\backslash
+_clothes
+\backslash
+_tailored & general & excess
+\backslash
+
+\backslash
+ & women
+\backslash
+_clothes
+\backslash
+_made & general & excess
+\backslash
+
+\backslash
+ & ankara
+\backslash
+_george
+\backslash
+_clothes & general & excess
+\backslash
+
+\backslash
+ & clothes
+\backslash
+_others & general & excess
+\backslash
+
+\backslash
+ & shoes
+\backslash
+_boys & general & excess
+\backslash
+
+\backslash
+ & shoes
+\backslash
+_men & general & excess
+\backslash
+
+\backslash
+ & shoes
+\backslash
+_girls & general & excess
+\backslash
+
+\backslash
+ & shoes
+\backslash
+_women & general & excess
+\backslash
+
+\backslash
+ & donations & general & excess
+\backslash
+
+\backslash
+ & bed
+\backslash
+_sheets & general & excess
+\backslash
+
+\backslash
+ & pillows & general & excess
+\backslash
+
+\backslash
+ & linen & general & excess
+\backslash
+
+\backslash
+ & carpets & general & excess
+\backslash
+
+\backslash
+ & cellphone & general & excess
+\backslash
+
+\backslash
+ & carpets
+\backslash
+_rugs & general & excess
+\backslash
+
+\backslash
+ & linen
+\backslash
+_towels & general & excess
+\backslash
+
+\backslash
+ & sports
+\backslash
+_hobby & general & excess
+\backslash
+
+\backslash
+ & films & general & excess
+\backslash
+
+\backslash
+ & dowry & general & excess
+\backslash
+
+\backslash
+ & marriage
+\backslash
+_ceremony
+\backslash
+_costs & general & excess
+\backslash
+
+\backslash
+ & funeral
+\backslash
+_costs & general & excess
+\backslash
+
+\backslash
+ & internet & general & excess
+\backslash
+
+\backslash
+ & cinema
+\backslash
+_dvd & general & excess
+\backslash
+
+\backslash
+ & tailoring
+\backslash
+_charge & general & excess
+\backslash
+
+\backslash
+ & laundry
+\backslash
+_charge & general & excess
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+end{longtable} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}[!p]{l l r} 
+\backslash
+caption{List of owned assets (sorted by median reported market-price) in
+ Tanzania 
+\backslash
+label{assetslist}} 
+\backslash
+
+\backslash
+  
+\backslash
+hline
+\backslash
+hline  & 
+\backslash
+multicolumn{1}{l}{name} & 
+\backslash
+multicolumn{1}{l}{median-price}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ & livestock & 21428.57 
+\backslash
+
+\backslash
+ & bed & 30000.00
+\backslash
+
+\backslash
+ & sofa & 33333.33
+\backslash
+
+\backslash
+ & videoplayer & 40000.00
+\backslash
+
+\backslash
+ & bike & 50000.00
+\backslash
+
+\backslash
+ & cart & 50000.00
+\backslash
+
+\backslash
+ & donkey & 50000.00
+\backslash
+
+\backslash
+ & plough & 90000.00
+\backslash
+
+\backslash
+ & sewingmachine & 90000.00
+\backslash
+
+\backslash
+ & harrow & 100000.00
+\backslash
+
+\backslash
+ & stove
+\backslash
+_electricgas & 100000.00
+\backslash
+
+\backslash
+ & tv & 100000.00
+\backslash
+
+\backslash
+ & waterpump & 100000.00
+\backslash
+
+\backslash
+ & boat & 104166.67
+\backslash
+
+\backslash
+ & musicsystem & 200000.00
+\backslash
+
+\backslash
+ & refrigerator & 200000.00
+\backslash
+
+\backslash
+ & computer & 350000.00
+\backslash
+
+\backslash
+ & animalcart & 400000.00
+\backslash
+
+\backslash
+ & house & 666666.67
+\backslash
+
+\backslash
+ & handmill & 1000000.00
+\backslash
+
+\backslash
+ & motorbike & 1200000.00
+\backslash
+
+\backslash
+ & powertiller & 1400000.00
+\backslash
+
+\backslash
+ & trailer & 3000000.00
+\backslash
+
+\backslash
+ & car & 6000000.00
+\backslash
+
+\backslash
+ & tractor & 20000000.00
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+end{longtable} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
 \end_layout
 
 \end_inset
@@ -1827,11 +4770,11 @@ hline
 \backslash
 
 \backslash
- & 1 & Livestock/Agriculture & 0
+ & 17 & Unemployed (too young) & 0  
 \backslash
 
 \backslash
- & 17 & Unemployed (too young) & 1
+ & 1 & Livestock/Agriculture & 1
 \backslash
 
 \backslash
@@ -3118,15 +6061,16 @@ end{longtable}
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
 \align center
 \begin_inset ERT
 status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
 
 \begin_layout Plain Layout
 
@@ -3137,6 +6081,20 @@ begin{longtable}{l l r c}
 hline
 \backslash
 hline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Education levels as ranks in Tanzania 
+\backslash
+label{education_rank_tnz}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 
 \backslash
@@ -3280,38 +6238,16 @@ end{longtable}
 
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:education_rank_tnz"
-
-\end_inset
-
-Education Levels as education ranks in Tanzania
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
 \begin_inset ERT
 status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
 
 \begin_layout Plain Layout
 
@@ -3321,7 +6257,21 @@ begin{longtable}{l*{3}{c}}
 \backslash
 hline
 \backslash
-hline 
+hline
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Education levels as ranks in Nigeria 
+\backslash
+label{education_rank_ngr}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 
 \backslash
@@ -3460,2764 +6410,6 @@ hline
  
 \backslash
 end{longtable} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:Education-Levels-ngr"
-
-\end_inset
-
-Education Levels as education ranks in Nigeria
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:ParametricRegressions"
-
-\end_inset
-
-Parametric Analysis
-\end_layout
-
-\begin_layout Standard
-As detailed in the previous sections, we have 
-\begin_inset Formula $r_{t}$
-\end_inset
-
- as the average asset value averages in the locality, 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- the household's non-durable consumption and 
-\begin_inset Formula $p_{nde}(r_{t})$
-\end_inset
-
- the average cost of non-durable consumption in the locality.
- Further, the factor variables 
-\family typewriter
-\size small
-max_occupation_rank
-\family default
-\size default
- and 
-\family typewriter
-\size small
-max_education_rank 
-\family default
-\size default
-are the maximum occupation and education ranks in the household respectively.
-\end_layout
-
-\begin_layout Standard
-We first perform an OLS regression of 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- against 
-\begin_inset Formula $log(x)$
-\end_inset
-
- ( 
-\end_layout
-
-\begin_layout Standard
-Following are the variable-names used in the results.
-\end_layout
-
-\begin_layout Enumerate
-
-\family typewriter
-\size small
-logx 
-\family default
-\size default
-- logarithm of per-head total expenditure 
-\begin_inset Formula $x_{t}$
-\end_inset
-
- per household - inclusive of asset-maintenance costs and all non-durable
- consumption (both food and non-food)
-\end_layout
-
-\begin_layout Standard
-We do find some evidence of substitution between 
-\begin_inset Formula $r_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- in the panel.
-\end_layout
-
-\begin_layout Standard
-income differences dominate at the local level for excess 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- but regional disparities are more important than occupational differences
- at the coarser level.
- 
-\end_layout
-
-\begin_layout Standard
-Notice that while the above analysis of urban and rural disparities may
- appear to ignore any differences between the consumer's agricultural and
- industrial assets, the measure 
-\begin_inset Formula $r_{t}$
-\end_inset
-
- does consider the effect of urban and rural differences due to urban and
- rural disparities in wealth.
- Thus, if a consumer gains more status by owning a luxury car in the city
- than owning a tractor (which cost the same) in a village, our approach
- does not differentiate between the vehicle being a tractor or a luxury
- car but it does consider the asset in a rich area (city) and the poor area
- (village).
- The measures of 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- and 
-\begin_inset Formula $r_{t}$
-\end_inset
-
- depending only on their reported prices alone (see Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{assetslist}
-\end_layout
-
-\end_inset
-
-) therefore suffice for the above analysis.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Nigeria: Linear estimation for excess weight $ log(q_{ne}) $ as
- dependent variable 
-\backslash
-label{tabExcessLinear}} 
-\backslash
-begin{tabular}{l*{3}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}&
-\backslash
-multicolumn{1}{c}{(3)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2010}&
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &    1.063
-\backslash
-sym{***}&    1.029
-\backslash
-sym{***}&    1.054
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  -0.0321
-\backslash
-sym{***}&  -0.0359
-\backslash
-sym{***}&  -0.0521
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&   -0.346
-\backslash
-sym{*}  &   -0.297
-\backslash
-sym{***}&   -0.117         
-\backslash
-
-\backslash
-           &  (0.029)         &  (0.000)         &  (0.501)         
-\backslash
-
-\backslash
- 1.hh
-\backslash
-_occupation
-\backslash
-_rank&        0         &        0         &        0         
-\backslash
-
-\backslash
-           &      (.)         &      (.)         &      (.)         
-\backslash
-
-\backslash
- 2.hh
-\backslash
-_occupation
-\backslash
-_rank&  -0.0553
-\backslash
-sym{**} &  -0.0325
-\backslash
-sym{***}&  -0.0351         
-\backslash
-
-\backslash
-           &  (0.003)         &  (0.000)         &  (0.052)         
-\backslash
-
-\backslash
- 3.hh
-\backslash
-_occupation
-\backslash
-_rank&  -0.0919
-\backslash
-sym{**} &  -0.0299
-\backslash
-sym{*}  &  -0.0671
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.018)         &  (0.013)         
-\backslash
-
-\backslash
- 0.hh
-\backslash
-_education
-\backslash
-_rank&        0         &        0         &        0         
-\backslash
-
-\backslash
-           &      (.)         &      (.)         &      (.)         
-\backslash
-
-\backslash
- 1.hh
-\backslash
-_education
-\backslash
-_rank&   0.0652         & -0.00769         &  0.00692         
-\backslash
-
-\backslash
-           &  (0.574)         &  (0.893)         &  (0.969)         
-\backslash
-
-\backslash
- 2.hh
-\backslash
-_education
-\backslash
-_rank& -0.00166         &  -0.0116         &  -0.0388
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.921)         &  (0.135)         &  (0.049)         
-\backslash
-
-\backslash
- 3.hh
-\backslash
-_education
-\backslash
-_rank&  -0.0215         &  -0.0156
-\backslash
-sym{*}  &  -0.0222         
-\backslash
-
-\backslash
-           &  (0.143)         &  (0.013)         &  (0.170)         
-\backslash
-
-\backslash
- age       & 0.000730         & 0.000164         & -0.00104
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.085)         &  (0.392)         &  (0.025)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    0.265         &    0.635
-\backslash
-sym{***}&    0.132         
-\backslash
-
-\backslash
-           &  (0.416)         &  (0.000)         &  (0.703)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     4285         &     4028         &     4110         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{4}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{4}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Tanzania: Linear estimation for excess weight $ log(q_{ne}) $ as
- dependent variable 
-\backslash
-label{tabExcessLinear}} 
-\backslash
-begin{tabular}{l*{3}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}&
-\backslash
-multicolumn{1}{c}{(3)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2010}&
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2014}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &    1.053
-\backslash
-sym{***}&    1.066
-\backslash
-sym{***}&    1.062
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  -0.0543
-\backslash
-sym{***}&  -0.0359
-\backslash
-sym{***}&  -0.0155         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.106)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&    0.148         &   0.0725         &  -0.0855         
-\backslash
-
-\backslash
-           &  (0.630)         &  (0.806)         &  (0.796)         
-\backslash
-
-\backslash
- 0.hh
-\backslash
-_occupation
-\backslash
-_rank&        0         &        0         &        0         
-\backslash
-
-\backslash
-           &      (.)         &      (.)         &      (.)         
-\backslash
-
-\backslash
- 1.hh
-\backslash
-_occupation
-\backslash
-_rank&   0.0389         &   0.0376         &   0.0503         
-\backslash
-
-\backslash
-           &  (0.217)         &  (0.151)         &  (0.076)         
-\backslash
-
-\backslash
- 2.hh
-\backslash
-_occupation
-\backslash
-_rank& -0.00996         &  -0.0551
-\backslash
-sym{*}  &   0.0461         
-\backslash
-
-\backslash
-           &  (0.764)         &  (0.041)         &  (0.109)         
-\backslash
-
-\backslash
- 3.hh
-\backslash
-_occupation
-\backslash
-_rank&  -0.0430         &  -0.0600         &   0.0222         
-\backslash
-
-\backslash
-           &  (0.406)         &  (0.159)         &  (0.622)         
-\backslash
-
-\backslash
- 0.hh
-\backslash
-_education
-\backslash
-_rank&        0         &        0         &        0         
-\backslash
-
-\backslash
-           &      (.)         &      (.)         &      (.)         
-\backslash
-
-\backslash
- 1.hh
-\backslash
-_education
-\backslash
-_rank&   0.0360         &   0.0159         &  0.00358         
-\backslash
-
-\backslash
-           &  (0.152)         &  (0.454)         &  (0.874)         
-\backslash
-
-\backslash
- 2.hh
-\backslash
-_education
-\backslash
-_rank&   0.0426         &   0.0435         &   0.0171         
-\backslash
-
-\backslash
-           &  (0.214)         &  (0.099)         &  (0.512)         
-\backslash
-
-\backslash
- 3.hh
-\backslash
-_education
-\backslash
-_rank&  -0.0190         &  -0.0500         &  -0.0255         
-\backslash
-
-\backslash
-           &  (0.791)         &  (0.374)         &  (0.635)         
-\backslash
-
-\backslash
- 4.hh
-\backslash
-_education
-\backslash
-_rank& -0.00136         &   0.0434         &  -0.0399         
-\backslash
-
-\backslash
-           &  (0.988)         &  (0.574)         &  (0.568)         
-\backslash
-
-\backslash
- hh
-\backslash
-_age    &  0.00301
-\backslash
-sym{***}&  0.00235
-\backslash
-sym{***}&  0.00109         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.085)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -0.790         &   -1.047         &   -0.887         
-\backslash
-
-\backslash
-           &  (0.260)         &  (0.128)         &  (0.235)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     3196         &     4053         &     3607         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{4}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{4}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Nigeria: FE estimation for excess $ log(q_{ne}) $ as dependent variable
- 
-\backslash
-label{tabExcessFE}} 
-\backslash
-begin{tabular}{l*{1}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012-2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &    1.031
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  -0.0192
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.002)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&  -0.0600         
-\backslash
-
-\backslash
-           &  (0.514)         
-\backslash
-
-\backslash
- age       &-0.000888
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.012)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -0.118         
-\backslash
-
-\backslash
-           &  (0.506)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     8138         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Tanzania: FE estimation for excess $ log(q_{ne}) $ as dependent
- variable 
-\backslash
-label{tabExcessFE}} 
-\backslash
-begin{tabular}{l*{1}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012-2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &    0.991
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  0.00704         
-\backslash
-
-\backslash
-           &  (0.696)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&    1.252         
-\backslash
-
-\backslash
-           &  (0.114)         
-\backslash
-
-\backslash
- hh
-\backslash
-_age    &  0.00176         
-\backslash
-
-\backslash
-           &  (0.632)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -3.600         
-\backslash
-
-\backslash
-           &  (0.057)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     4454         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Conclusions
-\end_layout
-
-\begin_layout Standard
-[Difference in assets costs] The difference in asset-costs causes the difference
- between Tanzania and Nigeria.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% consider using dummies for north, east and south.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Using asset ownership to define the consumer's context, we have considered
- status consumption ....
- while accounting for the income and lifestyle disparities that characterise
- a developing economy.
- Instead of focusing on visible consumption, we look at status consumption
- as non-necessary non-durable consumption apart from the stock of durable
- goods which serve as consumer's endowments.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-twocolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{longtable}[!p]{c c c l} 
-\backslash
-caption{Excess and food items in Tanzania 
-\backslash
-label{itemsclassification_tn}} 
-\backslash
-
-\backslash
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline  & 
-\backslash
-multicolumn{1}{c}{type} & 
-\backslash
-multicolumn{1}{c}{category} & 
-\backslash
-multicolumn{1}{l}{name}
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-
-\backslash
- & needs & carbs & rice
-\backslash
-_husked
-\backslash
-
-\backslash
- & needs & carbs & rice
-\backslash
-_paddy
-\backslash
-
-\backslash
- & needs & carbs & maize
-\backslash
-_green
-\backslash
-
-\backslash
- & needs & carbs & maize
-\backslash
-_grain
-\backslash
-
-\backslash
- & needs & carbs & maize
-\backslash
-_flour
-\backslash
-
-\backslash
- & needs & carbs & millet
-\backslash
-_grain
-\backslash
-
-\backslash
- & needs & carbs & millet
-\backslash
-_flour
-\backslash
-
-\backslash
- & needs & carbs & wheat
-\backslash
-
-\backslash
- & needs & carbs & bread
-\backslash
-
-\backslash
- & needs & carbs & bunscakes
-\backslash
-
-\backslash
- & needs & carbs & pasta
-\backslash
-
-\backslash
- & needs & carbs & othercereal
-\backslash
-
-\backslash
- & needs & carbs & cassava
-\backslash
-_fresh
-\backslash
-
-\backslash
- & needs & carbs & cassava
-\backslash
-_flour
-\backslash
-
-\backslash
- & needs & carbs & sweet
-\backslash
-_potato
-\backslash
-
-\backslash
- & needs & carbs & potatoes
-\backslash
-
-\backslash
- & needs & fat & peanuts
-\backslash
-
-\backslash
- & needs & fat & coconut
-\backslash
-
-\backslash
- & needs & fat & cashew
-\backslash
-_almonds
-\backslash
-
-\backslash
- & needs & fat & nut
-\backslash
-_products
-\backslash
-
-\backslash
- & needs & fat & cooking
-\backslash
-_oil
-\backslash
-
-\backslash
- & needs & fat & butter
-\backslash
-_margarine
-\backslash
-
-\backslash
- & needs & protein & pulses
-\backslash
-
-\backslash
- & needs & protein & milk
-\backslash
-_products
-\backslash
-
-\backslash
- & needs & protein & fresh
-\backslash
-_milk
-\backslash
-
-\backslash
- & needs & protein & canned
-\backslash
-_milk
-\backslash
-
-\backslash
- & needs & protein & goat
-\backslash
-
-\backslash
- & needs & protein & beef
-\backslash
-
-\backslash
- & needs & protein & pork
-\backslash
-
-\backslash
- & needs & protein & chicken
-\backslash
-
-\backslash
- & needs & protein & wild
-\backslash
-_birds
-\backslash
-
-\backslash
- & needs & protein & wild
-\backslash
-_meat
-\backslash
-
-\backslash
- & needs & protein & fish
-\backslash
-_seafood
-\backslash
-
-\backslash
- & needs & protein & dried
-\backslash
-_canned
-\backslash
-_fish
-\backslash
-
-\backslash
- & needs & protein & packaged
-\backslash
-_fish
-\backslash
-
-\backslash
- & needs & protein & eggs
-\backslash
-
-\backslash
- & needs & fruitsveg & onion
-\backslash
-
-\backslash
- & needs & fruitsveg & greens
-\backslash
-
-\backslash
- & needs & fruitsveg & dried
-\backslash
-_canned
-\backslash
-_veg
-\backslash
-
-\backslash
- & needs & fruitsveg & yam
-\backslash
-
-\backslash
- & needs & fruitsveg & banana
-\backslash
-_green
-\backslash
-
-\backslash
- & needs & fruitsveg & othervegstarch
-\backslash
-
-\backslash
- & needs & fruitsveg & banana
-\backslash
-_ripe
-\backslash
-
-\backslash
- & needs & fruitsveg & citrus
-\backslash
-
-\backslash
- & needs & fruitsveg & mangoes
-\backslash
-
-\backslash
- & needs & fruitsveg & sugarcane
-\backslash
-
-\backslash
- & excess & general & cigarettes
-\backslash
-
-\backslash
- & excess & general & bar
-\backslash
-_soap
-\backslash
-
-\backslash
- & excess & general & clothes
-\backslash
-_soap
-\backslash
-
-\backslash
- & excess & general & toothpaste
-\backslash
-
-\backslash
- & excess & general & toilet
-\backslash
-_paper
-\backslash
-
-\backslash
- & excess & general & skin
-\backslash
-_cream
-\backslash
-
-\backslash
- & excess & general & other
-\backslash
-_personal
-\backslash
-
-\backslash
- & excess & general & misc
-\backslash
-_cleaning
-\backslash
-
-\backslash
- & excess & general & donation
-\backslash
-
-\backslash
- & excess & general & services
-\backslash
-
-\backslash
- & excess & general & bride
-\backslash
-_price
-\backslash
-
-\backslash
- & excess & general & marriage
-\backslash
-
-\backslash
- & excess & general & funeral
-\backslash
-
-\backslash
- & excess & general & sugar
-\backslash
-
-\backslash
- & excess & general & sweet
-\backslash
-
-\backslash
- & excess & general & honey
-\backslash
-
-\backslash
- & excess & general & salt
-\backslash
-
-\backslash
- & excess & general & spices
-\backslash
-
-\backslash
- & excess & general & tea
-\backslash
-
-\backslash
- & excess & general & coffee
-\backslash
-
-\backslash
- & excess & general & miscdrinkpowder
-\backslash
-
-\backslash
- & excess & general & canned
-\backslash
-_drink
-\backslash
-
-\backslash
- & excess & general & readymade
-\backslash
-_tea
-\backslash
-_coffee
-\backslash
-
-\backslash
- & excess & general & beer
-\backslash
-
-\backslash
- & excess & general & brews
-\backslash
-
-\backslash
- & excess & general & winespirits
-\backslash
-
-\backslash
- & excess & general & mensclothes
-\backslash
-
-\backslash
- & excess & general & womensclothes
-\backslash
-
-\backslash
- & excess & general & childrensclothes
-\backslash
-
-\backslash
- & excess & general & mensshoes
-\backslash
-
-\backslash
- & excess & general & womensshoes
-\backslash
-
-\backslash
- & excess & general & childrensshoes
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline  
-\backslash
-end{longtable} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{longtable}[!p]{c c c l} 
-\backslash
-caption{Excess and food items  in Nigeria 
-\backslash
-label{itemsclassification_ngr}} 
-\backslash
-
-\backslash
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline  & 
-\backslash
-multicolumn{1}{c}{} & 
-\backslash
-multicolumn{1}{c}{(1)} & 
-\backslash
-multicolumn{1}{c}{(2)} 
-\backslash
-
-\backslash
- & 
-\backslash
-multicolumn{1}{c}{} & 
-\backslash
-multicolumn{1}{c}{category} & 
-\backslash
-multicolumn{1}{c}{type}
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-
-\backslash
- & corn & carbs & food
-\backslash
-
-\backslash
- & millet & carbs & food
-\backslash
-
-\backslash
- & maize
-\backslash
-_grain & carbs & food
-\backslash
-
-\backslash
- & rice
-\backslash
-_local & carbs & food
-\backslash
-
-\backslash
- & rice
-\backslash
-_imported & carbs & food
-\backslash
-
-\backslash
- & bread & carbs & food
-\backslash
-
-\backslash
- & maize
-\backslash
-_flour & carbs & food
-\backslash
-
-\backslash
- & yam
-\backslash
-_flour & carbs & food
-\backslash
-
-\backslash
- & cassava
-\backslash
-_flour & carbs & food
-\backslash
-
-\backslash
- & wheat
-\backslash
-_flour & carbs & food
-\backslash
-
-\backslash
- & other
-\backslash
-_grains & carbs & food
-\backslash
-
-\backslash
- & cassava
-\backslash
-_fresh & carbs & food
-\backslash
-
-\backslash
- & yam
-\backslash
-_fresh & carbs & food
-\backslash
-
-\backslash
- & gari
-\backslash
-_white & carbs & food
-\backslash
-
-\backslash
- & gari
-\backslash
-_yellow & carbs & food
-\backslash
-
-\backslash
- & cocoyam & carbs & food
-\backslash
-
-\backslash
- & plantains & fruitsveg & food
-\backslash
-
-\backslash
- & sweet
-\backslash
-_potato & carbs & food
-\backslash
-
-\backslash
- & potato & carbs & food
-\backslash
-
-\backslash
- & roots
-\backslash
-_other & fruitsveg & food
-\backslash
-
-\backslash
- & soyabeans & fruitsveg & food
-\backslash
-
-\backslash
- & brown
-\backslash
-_beans & fruitsveg & food
-\backslash
-
-\backslash
- & white
-\backslash
-_beans & fruitsveg & food
-\backslash
-
-\backslash
- & peanuts & fat & food
-\backslash
-
-\backslash
- & nuts
-\backslash
-_others & fat & food
-\backslash
-
-\backslash
- & palm
-\backslash
-_oil & fat & food
-\backslash
-
-\backslash
- & butter
-\backslash
-_margarine & fat & food
-\backslash
-
-\backslash
- & peanut
-\backslash
-_oil & fat & food
-\backslash
-
-\backslash
- & oil
-\backslash
-_others & fat & food
-\backslash
-
-\backslash
- & bananas & fruitsveg & food
-\backslash
-
-\backslash
- & citrus & fruitsveg & food
-\backslash
-
-\backslash
- & mangoes & fruitsveg & food
-\backslash
-
-\backslash
- & avocado
-\backslash
-_pear & fruitsveg & food
-\backslash
-
-\backslash
- & pineapples & fruitsveg & food
-\backslash
-
-\backslash
- & fruit
-\backslash
-_canned & fruitsveg & food
-\backslash
-
-\backslash
- & other
-\backslash
-_fruits & fruitsveg & food
-\backslash
-
-\backslash
- & tomatoes & fruitsveg & food
-\backslash
-
-\backslash
- & tomatoes
-\backslash
-_puree & fruitsveg & food
-\backslash
-
-\backslash
- & onions & fruitsveg & food
-\backslash
-
-\backslash
- & eggplant & fruitsveg & food
-\backslash
-
-\backslash
- & okra
-\backslash
-_fresh & fruitsveg & food
-\backslash
-
-\backslash
- & okra
-\backslash
-_dried & fruitsveg & food
-\backslash
-
-\backslash
- & pepper & fruitsveg & food
-\backslash
-
-\backslash
- & fresh
-\backslash
-_leaves & fruitsveg & food
-\backslash
-
-\backslash
- & vegetables
-\backslash
-_others & fruitsveg & food
-\backslash
-
-\backslash
- & chicken & fruitsveg & food
-\backslash
-
-\backslash
- & duck & fruitsveg & food
-\backslash
-
-\backslash
- & poultry
-\backslash
-_others & fruitsveg & food
-\backslash
-
-\backslash
- & eggs
-\backslash
-_garden & protein & food
-\backslash
-
-\backslash
- & eggs
-\backslash
-_agri & protein & food
-\backslash
-
-\backslash
- & eggs
-\backslash
-_local & protein & food
-\backslash
-
-\backslash
- & eggs
-\backslash
-_others & protein & food
-\backslash
-
-\backslash
- & beef &  & food
-\backslash
-
-\backslash
- & mutton & protein & food
-\backslash
-
-\backslash
- & pork & protein & food
-\backslash
-
-\backslash
- & goat & protein & food
-\backslash
-
-\backslash
- & game & protein & food
-\backslash
-
-\backslash
- & beef
-\backslash
-_corned & protein & food
-\backslash
-
-\backslash
- & meat
-\backslash
-_others & protein & food
-\backslash
-
-\backslash
- & fresh
-\backslash
-_fish & protein & food
-\backslash
-
-\backslash
- & frozen
-\backslash
-_fish & protein & food
-\backslash
-
-\backslash
- & smoked
-\backslash
-_fish & protein & food
-\backslash
-
-\backslash
- & dried
-\backslash
-_fish & protein & food
-\backslash
-
-\backslash
- & snails & protein & food
-\backslash
-
-\backslash
- & seafoods & protein & food
-\backslash
-
-\backslash
- & canned
-\backslash
-_seafood & protein & food
-\backslash
-
-\backslash
- & fish
-\backslash
-_others & protein & food
-\backslash
-
-\backslash
- & fresh
-\backslash
-_milk & protein & food
-\backslash
-
-\backslash
- & milk
-\backslash
-_powder & protein & food
-\backslash
-
-\backslash
- & babymilk & protein & food
-\backslash
-
-\backslash
- & canned
-\backslash
-_milk & protein & food
-\backslash
-
-\backslash
- & milk
-\backslash
-_others & protein & food
-\backslash
-
-\backslash
- & coffee & beverages & food
-\backslash
-
-\backslash
- & choco
-\backslash
-_drinks & beverages & food
-\backslash
-
-\backslash
- & tea & beverages & food
-\backslash
-
-\backslash
- & sugar & carbs & food
-\backslash
-
-\backslash
- & jams & carbs & food
-\backslash
-
-\backslash
- & honey & carbs & food
-\backslash
-
-\backslash
- & sweets
-\backslash
-_others & carbs & food
-\backslash
-
-\backslash
- & condiments & fruitsveg & food
-\backslash
-
-\backslash
- & water
-\backslash
-_bottled & beverages & food
-\backslash
-
-\backslash
- & water
-\backslash
-_sachet & beverages & food
-\backslash
-
-\backslash
- & malt
-\backslash
-_drinks & beverages & food
-\backslash
-
-\backslash
- & soft
-\backslash
-_drinks & beverages & food
-\backslash
-
-\backslash
- & peanut
-\backslash
-_pack & fat & food
-\backslash
-
-\backslash
- & soft
-\backslash
-_drinks
-\backslash
-_others & beverages & food
-\backslash
-
-\backslash
- & local
-\backslash
-_beer & beverages & food
-\backslash
-
-\backslash
- & palm
-\backslash
-_wine & beverages & food
-\backslash
-
-\backslash
- & pito & beverages & food
-\backslash
-
-\backslash
- & gin & beverages & food
-\backslash
-
-\backslash
- & alcoholic
-\backslash
-_others & beverages & food
-\backslash
-
-\backslash
- & maize
-\backslash
-_unshelled & carbs & food
-\backslash
-
-\backslash
- & maize
-\backslash
-_shelled & carbs & food
-\backslash
-
-\backslash
- & cake & carbs & food
-\backslash
-
-\backslash
- & buns & carbs & food
-\backslash
-
-\backslash
- & biscuits & carbs & food
-\backslash
-
-\backslash
- & meat
-\backslash
-_roll & carbs & food
-\backslash
-
-\backslash
- & cheese & fat & food
-\backslash
-
-\backslash
- & water & general & food
-\backslash
-
-\backslash
- & palm
-\backslash
-_kernel
-\backslash
-_oil & fat & food
-\backslash
-
-\backslash
- & maize
-\backslash
-_unshelled
-\backslash
-_cob & carbs & food
-\backslash
-
-\backslash
- & maize
-\backslash
-_shelled
-\backslash
-_cob & carbs & food
-\backslash
-
-\backslash
- & peanuts
-\backslash
-_unshelled & fat & food
-\backslash
-
-\backslash
- & peanuts
-\backslash
-_shelled & fat & food
-\backslash
-
-\backslash
- & coconut & fat & food
-\backslash
-
-\backslash
- & kolanut & fat & food
-\backslash
-
-\backslash
- & cashews & fat & food
-\backslash
-
-\backslash
- & sheabutter & fat & food
-\backslash
-
-\backslash
- & coconut
-\backslash
-_oil & fat & food
-\backslash
-
-\backslash
- & animal
-\backslash
-_fat & fat & food
-\backslash
-
-\backslash
- & pawpaw & fruitsveg & food
-\backslash
-
-\backslash
- & watermelon & fruitsveg & food
-\backslash
-
-\backslash
- & apples & fruitsveg & food
-\backslash
-
-\backslash
- & pepper
-\backslash
-_fresh & fruitsveg & food
-\backslash
-
-\backslash
- & pepper
-\backslash
-_dry & fruitsveg & food
-\backslash
-
-\backslash
- & salt & fruitsveg & food
-\backslash
-
-\backslash
- & obgono
-\backslash
-_unground & fruitsveg & food
-\backslash
-
-\backslash
- & obgono
-\backslash
-_ground & fruitsveg & food
-\backslash
-
-\backslash
- & pepper
-\backslash
-_ground & fruitsveg & food
-\backslash
-
-\backslash
- & shelled
-\backslash
-_melon & fruitsveg & food
-\backslash
-
-\backslash
- & unshelled
-\backslash
-_melon & fruitsveg & food
-\backslash
-
-\backslash
- & ground
-\backslash
-_melon & fruitsveg & food
-\backslash
-
-\backslash
- & guava & fruitsveg & food
-\backslash
-
-\backslash
- & cigarettes & general & excess
-\backslash
-
-\backslash
- & newspapers & general & excess
-\backslash
-
-\backslash
- & soap & general & excess
-\backslash
-
-\backslash
- & toilet
-\backslash
-_paper & general & excess
-\backslash
-
-\backslash
- & cosmetics & general & excess
-\backslash
-
-\backslash
- & vitamin & general & excess
-\backslash
-
-\backslash
- & clothes
-\backslash
-_infant & general & excess
-\backslash
-
-\backslash
- & clothes
-\backslash
-_baby & general & excess
-\backslash
-
-\backslash
- & clothes
-\backslash
-_boys
-\backslash
-_tailored & general & excess
-\backslash
-
-\backslash
- & clothes
-\backslash
-_boys
-\backslash
-_made & general & excess
-\backslash
-
-\backslash
- & clothes
-\backslash
-_girls
-\backslash
-_tailored & general & excess
-\backslash
-
-\backslash
- & clothes
-\backslash
-_girls
-\backslash
-_made & general & excess
-\backslash
-
-\backslash
- & clothes
-\backslash
-_men
-\backslash
-_tailored & general & excess
-\backslash
-
-\backslash
- & clothes
-\backslash
-_men
-\backslash
-_made & general & excess
-\backslash
-
-\backslash
- & women
-\backslash
-_clothes
-\backslash
-_tailored & general & excess
-\backslash
-
-\backslash
- & women
-\backslash
-_clothes
-\backslash
-_made & general & excess
-\backslash
-
-\backslash
- & ankara
-\backslash
-_george
-\backslash
-_clothes & general & excess
-\backslash
-
-\backslash
- & clothes
-\backslash
-_others & general & excess
-\backslash
-
-\backslash
- & shoes
-\backslash
-_boys & general & excess
-\backslash
-
-\backslash
- & shoes
-\backslash
-_men & general & excess
-\backslash
-
-\backslash
- & shoes
-\backslash
-_girls & general & excess
-\backslash
-
-\backslash
- & shoes
-\backslash
-_women & general & excess
-\backslash
-
-\backslash
- & donations & general & excess
-\backslash
-
-\backslash
- & bed
-\backslash
-_sheets & general & excess
-\backslash
-
-\backslash
- & pillows & general & excess
-\backslash
-
-\backslash
- & linen & general & excess
-\backslash
-
-\backslash
- & carpets & general & excess
-\backslash
-
-\backslash
- & cellphone & general & excess
-\backslash
-
-\backslash
- & carpets
-\backslash
-_rugs & general & excess
-\backslash
-
-\backslash
- & linen
-\backslash
-_towels & general & excess
-\backslash
-
-\backslash
- & sports
-\backslash
-_hobby & general & excess
-\backslash
-
-\backslash
- & films & general & excess
-\backslash
-
-\backslash
- & dowry & general & excess
-\backslash
-
-\backslash
- & marriage
-\backslash
-_ceremony
-\backslash
-_costs & general & excess
-\backslash
-
-\backslash
- & funeral
-\backslash
-_costs & general & excess
-\backslash
-
-\backslash
- & internet & general & excess
-\backslash
-
-\backslash
- & cinema
-\backslash
-_dvd & general & excess
-\backslash
-
-\backslash
- & tailoring
-\backslash
-_charge & general & excess
-\backslash
-
-\backslash
- & laundry
-\backslash
-_charge & general & excess
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline  
-\backslash
-end{longtable} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-twocolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{longtable}[!p]{l l r} 
-\backslash
-caption{List of owned assets (sorted by median reported market-price) 
-\backslash
-label{assetslist}} 
-\backslash
-
-\backslash
-  
-\backslash
-hline
-\backslash
-hline  & 
-\backslash
-multicolumn{1}{l}{name} & 
-\backslash
-multicolumn{1}{l}{median-price}
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-
-\backslash
- & livestock & 21428.57 
-\backslash
-
-\backslash
- & bed & 30000.00
-\backslash
-
-\backslash
- & sofa & 33333.33
-\backslash
-
-\backslash
- & videoplayer & 40000.00
-\backslash
-
-\backslash
- & bike & 50000.00
-\backslash
-
-\backslash
- & cart & 50000.00
-\backslash
-
-\backslash
- & donkey & 50000.00
-\backslash
-
-\backslash
- & plough & 90000.00
-\backslash
-
-\backslash
- & sewingmachine & 90000.00
-\backslash
-
-\backslash
- & harrow & 100000.00
-\backslash
-
-\backslash
- & stove
-\backslash
-_electricgas & 100000.00
-\backslash
-
-\backslash
- & tv & 100000.00
-\backslash
-
-\backslash
- & waterpump & 100000.00
-\backslash
-
-\backslash
- & boat & 104166.67
-\backslash
-
-\backslash
- & musicsystem & 200000.00
-\backslash
-
-\backslash
- & refrigerator & 200000.00
-\backslash
-
-\backslash
- & computer & 350000.00
-\backslash
-
-\backslash
- & animalcart & 400000.00
-\backslash
-
-\backslash
- & house & 666666.67
-\backslash
-
-\backslash
- & handmill & 1000000.00
-\backslash
-
-\backslash
- & motorbike & 1200000.00
-\backslash
-
-\backslash
- & powertiller & 1400000.00
-\backslash
-
-\backslash
- & trailer & 3000000.00
-\backslash
-
-\backslash
- & car & 6000000.00
-\backslash
-
-\backslash
- & tractor & 20000000.00
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline  
-\backslash
-end{longtable} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage
 \end_layout
 
 \end_inset
