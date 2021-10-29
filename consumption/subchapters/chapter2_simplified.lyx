@@ -1807,10 +1807,12 @@ Parametric Analysis
 \end_layout
 
 \begin_layout Standard
-[Summary] The assets are lower in Nigeria than in Tanzania.
- So non-durable consumption is more important.
- Nigeria has a higher role of assets.
- The expenditure on non-food actually seems to decline.
+[Summary] The assets are higher in Nigeria and more uniformly distributed
+ than in Tanzania.
+ So non-durable consumption should be more important in Tanzani while Nigeria
+ should have a higher role of assets.
+ The expenditure on non-food seems to decline with higher average costs
+ in both.
  Asset distribution has a fundamental role to play.
  In Tanzania, they just aren't there.
  
@@ -2189,11 +2191,24 @@ status open
 
 \begin_layout Plain Layout
 
-% In Nigeria, the sign is also negative but the role of food is less
+% with weights,
 \end_layout
 
 \begin_layout Plain Layout
 
+summary(lm(data=tn$df2012,w_nonfood_ne ~logx + log_mean_cost_ne_food + log_mean_
+cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + hh_age + max_education_ra
+nk + isrural + hsize))
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+% In Nigeria, the sign is also negative but the role of food is less.
 \end_layout
 
 \begin_layout Plain Layout
@@ -2212,6 +2227,25 @@ status open
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
+%With weights
+\end_layout
+
+\begin_layout Plain Layout
+
+% summary(lm(data=ng$df2012,w_nonfood_ne ~logx + log_mean_cost_ne_food +
+ log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + age + max_educa
+tion_rank + is_urban + hsize))
+\end_layout
+
+\begin_layout Plain Layout
+
+% asset difference less important in Nigeria.
+ we see that asset differences are huge.
+ the substitution between A and w_nonfood is next.
 \end_layout
 
 \end_inset
