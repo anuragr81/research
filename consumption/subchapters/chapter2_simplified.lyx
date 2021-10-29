@@ -28,7 +28,7 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "libertine" "default"
+\font_roman "tgtermes" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -45,7 +45,7 @@ theorems-sec
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 12
+\paperfontsize 11
 \spacing single
 \use_hyperref false
 \papersize default
@@ -1807,20 +1807,20 @@ Parametric Analysis
 \end_layout
 
 \begin_layout Standard
-As detailed in the previous sections, we have 
+As detailed in the previous sections, 
 \begin_inset Formula $r_{t}$
 \end_inset
 
- as the average asset value averages in the locality, 
+ is measured as the average asset value averages in the locality, 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- the household's non-durable consumption and 
+ as household's non-durable consumption and 
 \begin_inset Formula $p_{nde}(r_{t})$
 \end_inset
 
- the average cost of non-durable consumption in the locality.
- We also use the factor variables 
+ as the average cost of non-durable consumption in the locality.
+ We also use factor variables 
 \family typewriter
 \size small
 max_occupation_rank
@@ -1832,8 +1832,12 @@ max_occupation_rank
 max_education_rank 
 \family default
 \size default
-which are the maximum occupation and education ranks in the household respective
-ly.
+- the maximum occupation and education ranks in the household respectively.
+ We also use 
+\begin_inset Formula $age$
+\end_inset
+
+ of the household-head as one of the control variables.
  The results from an OLS regression of 
 \begin_inset Formula $log(\nu_{t})$
 \end_inset
@@ -1885,7 +1889,7 @@ ref{tabExcessLinear_ngr}
 \end_inset
 
  for Nigeria.
- The list of all variable-names shown in the results is as follows 
+ The summary of all variable-names shown in the results is as follows 
 \end_layout
 
 \begin_layout Enumerate
@@ -1966,11 +1970,12 @@ max_education_rank
 age
 \family default
 \size default
- - the age of the head of the household (reported in the survey)
+ - the age of the head of the household (household-heads are reported in
+ the survey)
 \end_layout
 
 \begin_layout Standard
-The results show that the non-durable expenditure excluding asset-costs
+The OLS results show that the non-durable expenditure excluding asset-costs
  (see Tables 
 \begin_inset ERT
 status open
@@ -2006,28 +2011,53 @@ ref{itemsclassification_ngr}
 \end_inset
 
  dominates.
- The areas with higher average non-durable consumption have the effect of
- reducing non-durable consumption for the individual - but the local level
- consumption has a stronger effect on the reported non-durable consumption
- in Nigeria than in Tanzania.
- The consumers with higher incomes and higher net asset worth having less
- per-head non-durable consumption is due to rising assets costs - but this
- effect is more pronounced in Nigeria.
+ In other words, the areas with higher average non-durable consumption have
+ the effect of reducing non-durable consumption for the individual after
+ accounting for income in Nigeria-but less so Tanzania.
+ The individual consumption moves together with the local consumption levels
+ after accounting for total income in Nigeria but in Tanzania, the consumer's
+ non-durable consumption is relative stable with respect to local consumption
+ levels areas of richness.
  
 \end_layout
 
 \begin_layout Standard
-In other words, the individual consumption moves together with the local
- consumption levels after accounting for total income in Nigeria but in
- Tanzania, the consumer's non-durable consumption is relative stable with
- respect to areas of richness.
- Since we have included food in 
+There are two reasons why this might be.
+ 
+\end_layout
+
+\begin_layout Standard
+[Assets more important in Nigeria] First, the asset costs are evidently
+ higher when asset ownership is significant for a population.
+ The role of asset costs is thus more pronounced in Nigeria and the overall
+ needs associated with assets - that include maintenance, fees, payments
+ and subscription etc.
+ - are strongly tied with owned assets at finer levels in Nigeria.
+ The higher asset costs for more individuals means nearly similar non-durable
+ consumption.
+ In terms of our model, one can say that the role of assets for status indicatio
+n is higher in Nigeria.
+ In a population of consumers with no-reported assets in Tanzania, non-durable
+ consumption could carry more status.
+ However, the status differences between those with assets and without assets
+ are unlikely to be influenced by non-durable consumption.
+ 
+\end_layout
+
+\begin_layout Standard
+Since we have included food in 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- - this is due in part to food consumption dominating the consumer's non-durable
- consumption in Tanzania and because of asset costs relevant for a much
+ - this may also be due to food consumption dominating the consumer's non-durabl
+e consumption in Tanzania and because of asset costs relevant for a much
  smaller portion of population in Tanzania.
+\end_layout
+
+\begin_layout Standard
+[asset costs] The consumers with higher incomes and higher net asset worth
+ having less per-head non-durable consumption is due to rising assets costs
+ - but this effect is more pronounced in Nigeria.
 \end_layout
 
 \begin_layout Standard
@@ -2045,18 +2075,6 @@ Looking at the changes in local asset averages for the same household, we
  As the local asset averages rise the consumers spend less on non-durable
  consumption - as their asset costs rise in Nigeria but this is less so
  in Tanzania.
- 
-\end_layout
-
-\begin_layout Standard
-The asset costs being more pronounced in Nigeria means that the overall
- needs associated with assets - that include maintenance, fees, payments
- and subscription etc.
- grow strongly tied with owned assets at finer levels in Nigeria and therefore
- the role of non-durable consumption less.
- Since assets are more uniformly distributed in Nigeria, the role of assets
- in status indication is evidently higher than in Tanzania where the asset-owner
-ship is rather limited for most of the population.
  
 \end_layout
 
