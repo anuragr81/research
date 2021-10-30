@@ -977,7 +977,9 @@ init_data <- function(){
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
   #pres <- estimation_df(e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, c2010=c2010, c2012=c2012, c2014=c2014)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
-}
+  tn <- get_nonparametric_df(ll = ll,food_analysis = F, o2010=o2010, o2012=o2012, o2014=o2014, a2010=a2010, a2012=a2012, a2014=a2014, c2010=c2010, c2012=c2012, c2014=c2014 )
+  return(tn)
+  }
 
 plot_region_map <- function(plot_type,e){
   
@@ -1153,7 +1155,7 @@ zero_nas <- function(dat){
   return(dat)
 }
 
-get_nonparametric_df <- function(ll,food_analysis){
+get_nonparametric_df <- function(ll,food_analysis, o2010, o2012, o2014, a2010, a2012, a2014, c2010, c2012, c2014 ){
   # Don't include education or housing expenses - because they're part of needs anyways
   inc_houserent = F
   inc_educexpense = F
@@ -1400,7 +1402,7 @@ save_data <- function(dfslist)
 {
   write_dta(dfslist[['df2010']],'../lsms/data/tn_df2010.dta')
   write_dta(dfslist[['df2012']],'../lsms/data/tn_df2012.dta')
-   write_dta(dfslist[['df2014']],'../lsms/data/tn_df2014.dta')
+  write_dta(dfslist[['df2014']],'../lsms/data/tn_df2014.dta')
 }
 
 load_data <- function()
@@ -1415,10 +1417,10 @@ load_data <- function()
   res[['df2010']] <- res[['df2010']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
   
   res[['df2012']] <- tndf2012 %>% mutate ( log_q_ne = log(1e-7+ cost_ne_nonfood + cost_ne_food) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
-  res[['df2012']] <- res[['df2010']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
+  res[['df2012']] <- res[['df2012']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
   
   res[['df2014']] <- tndf2014 %>% mutate ( log_q_ne = log(1e-7+ cost_ne_nonfood + cost_ne_food) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
-  res[['df2014']] <- res[['df2010']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
+  res[['df2014']] <- res[['df2014']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
   return(res)
 }
 
@@ -1546,9 +1548,6 @@ test_search_cluster <- function(){
 
 run_non_parametric_regression_for_food_vs_nonfood <- function(ll,dfslist,year,sp)
 {
-  if(missing(dfslist)){
-    dfslist <- get_nonparametric_df(ll,food_analysis = T)
-  }
   select_df=paste0("df",year)
   
   S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
@@ -1578,9 +1577,6 @@ run_non_parametric_regression_for_food_vs_nonfood <- function(ll,dfslist,year,sp
 
 run_non_parametric_regression_for_nu_vs_r <- function(ll,dfslist,year,sp,r_type)
 {
-  if(missing(dfslist)){
-    dfslist <- get_nonparametric_df(ll,food_analysis = F)
-  }
   select_df=paste0("df",year)
   
   S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
@@ -1610,9 +1606,6 @@ run_non_parametric_regression_for_A <- function(ll,dfslist,year,sp,theta,phi)
 {
   #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
 
-  if(missing(dfslist)){
-    dfslist <- get_nonparametric_df(ll,food_analysis = F)
-  }
   select_df=paste0("df",year)
   
   S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
@@ -1637,9 +1630,6 @@ run_non_parametric_regression_for_food_nonfood_ne <- function(ll,dfslist,year,sp
 {
   #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
   
-  if(missing(dfslist)){
-    dfslist <- get_nonparametric_df(ll,food_analysis = F)
-  }
   select_df=paste0("df",year)
   
   S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
@@ -1669,9 +1659,6 @@ run_non_parametric_regression_for_hsize <- function(ll,dfslist,year,sp,theta,phi
 {
   #Also plot - plot(data=nf[["df2012"]] %>% mutate(log_cost=log(mean_cost_ne)), log_cost ~ r, xlab=latex2exp::TeX("$r_t$"),ylab = latex2exp::TeX("$log(x_t)$"))")
   
-  if(missing(dfslist)){
-    dfslist <- get_nonparametric_df(ll,food_analysis = F)
-  }
   select_df=paste0("df",year)
   
   S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
@@ -1696,9 +1683,6 @@ run_non_parametric_regression_for_hsize <- function(ll,dfslist,year,sp,theta,phi
 
 run_non_parametric_regression_for_perception <- function(ll,dfslist,year,sp)
 {
-  if(missing(dfslist)){
-    dfslist <- get_nonparametric_df(ll,food_analysis = F)
-  }
   select_df=paste0("df",year)
   
   S <- with(dfslist[[select_df]], seq(min(S), max(S), len=25))
