@@ -1616,10 +1616,6 @@ W(\prescript{t}{}\nu_{1})\pi(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2}
 \end_layout
 
 \begin_layout Standard
-or,
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 W_{1}(\prescript{t}{}\nu_{1}) & =\frac{1}{1-\frac{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})}}\label{eq:w_lte}
@@ -1643,10 +1639,6 @@ L_{2}(\prescript{t}{}\nu_{2})\pi(\prescript{t}{}A+y_{2}-\prescript{t}{}\nu_{2}+y
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Therefore,
 \end_layout
 
 \begin_layout Standard
@@ -1723,7 +1715,7 @@ noprefix "false"
 \color none
 \begin_inset Formula 
 \begin{align}
-\frac{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})} & =\frac{\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})}{\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2})}<1\label{eq:f_shape}
+\frac{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})} & =\frac{\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})}{\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2})}<1\label{eq:cost_function_shape}
 \end{align}
 
 \end_inset
@@ -1748,11 +1740,32 @@ noprefix "false"
 The two conditions mean the presence of a cost structure that discourages
  assets at higher asset-level but encourages higher asset at lower asset-levels
  in the same measure.
-\end_layout
+ More specifically, a certain cost-function structure is implied due to
+ the condition in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost_function_shape"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Standard
-The shape of the cost-function necessitated by the cost-function can be
- inferred by observing that for lower assets 
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ The condition 
 \begin_inset Formula $a_{1},a_{2}$
 \end_inset
 
@@ -1760,13 +1773,12 @@ The shape of the cost-function necessitated by the cost-function can be
 \begin_inset Formula $a_{1}<a_{2}\Rightarrow f(a_{1})>f(a_{2})$
 \end_inset
 
- leads to 
+ i.e.
+ 
 \begin_inset Formula $a_{1}-c(a_{1})>a_{2}-c(a_{2})\Rightarrow a_{2}-a_{1}<c(a_{2})-c(a_{1})$
 \end_inset
 
-.
- Thus cost-function must be concave at the lower-assets.
- Likewise, 
+ means that the cost-function must be convex at lower-asset values and 
 \begin_inset Formula $\mathfrak{a}_{1}<\mathfrak{a}_{2}$
 \end_inset
 
@@ -1774,30 +1786,21 @@ The shape of the cost-function necessitated by the cost-function can be
 \begin_inset Formula $\Rightarrow f(\mathfrak{a}_{1})<f(\mathfrak{a}_{2})$
 \end_inset
 
- leads to 
+ leading to 
 \begin_inset Formula $\mathfrak{a}_{1}-c(\mathfrak{a}_{1})<\mathfrak{a}_{2}-c(\mathfrak{a}_{2})\Rightarrow\mathfrak{a}_{2}-\mathfrak{a}_{1}>c(\mathfrak{a}_{2})-c(\mathfrak{a}_{1})$
 \end_inset
 
- i.e.
- a convex shape for high asset levels.
- A long-term equilibrium income inequality may thus exist only if the cost-funct
-ion meets such a condition.
- The consumer utility cannot lead any changes if an income inequality is
- maintained.
- 
+ means that the cost-function would be concave for high asset levels.
 \end_layout
 
 \begin_layout Standard
-The fundamental idea with the cost-function is that balances the winning
- probability with the losing probability - a condition that is fulfilled
- only when cost-function penalise more income at high assets levels and
- relieves costs at lower assets.
- If that does not happen, let's say, if costs rose for high 
-\begin_inset Formula $y_{1}$
-\end_inset
-
- at lower asset levels as well - then long-term equilibrium cannot be implied
- with the difference in 
+The cost-function effectively balances the winning probability with the
+ losing probability by penalising more assets at lower wealth levels and
+ relieving costs at higher wealth levels.
+ If that does not happen, let's say, e.g.
+ if costs dropped at lower asset levels or rose at high asset levels then
+ a long-term equilibrium cannot be persist side by side with persistent
+ differences in 
 \begin_inset Formula $y_{1}$
 \end_inset
 
@@ -1806,19 +1809,54 @@ The fundamental idea with the cost-function is that balances the winning
 \end_inset
 
 .
+ In some ways, the particular structure of cost function explains how redistribu
+tion, inequality and mobility can co-exist in the long-term economy.
+\end_layout
+
+\begin_layout Subsection
+Empirical Question
 \end_layout
 
 \begin_layout Standard
-[Short-term equilibria with long-term constraints] Given that such a segregation
- results in the long-term does not rule out that alternate equilibria may
- exist in the short-term.
- The population constraint implies 
-\begin_inset Formula $\omega\nu_{1}+\lambda\nu_{2}=\omega\bar{\omega}+\lambda\bar{\lambda}$
+We use the above framework to test how we can compare how local per-head
+ non-durable consumption could 
+\begin_inset Quotes eld
 \end_inset
 
-.
- With the shape of a cost-function of the following form we have a fairly
- general cost-function as well
+indicate
+\begin_inset Quotes erd
+\end_inset
+
+ status in an economy and if i) asset and income differences are stable,
+ ii) populations are relatively stable of occupation ranks.
+ If consumers can be believed to act as if a certain reward function existed,
+ then do their non-durable consumption trends imply (we take South Africa
+ or Tanzania) a different probability trends.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%quantile(unique(ng$df2010$mean_A0),seq(10)/10)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Empirical Test
+\end_layout
+
+\begin_layout Standard
+Cost-function structure assumption:
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 c(a,m,n) & =\frac{1}{1+e^{-m(x-n)}}
@@ -1830,332 +1868,8 @@ c(a,m,n) & =\frac{1}{1+e^{-m(x-n)}}
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename logc_vs_logA_2012.png
-	width 4in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-log(asset-costs) vs log(asset-values)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%asset_cost_categs <- subset(lsms_normalizer()@categories_non_basic_wassets(),gr
-oup=="asset_costs")$shortname
-\end_layout
-
-\begin_layout Plain Layout
-
-%ac2012<-ddply(subset(c2012,is.element(shortname,asset_cost_categs) & !is.na(cost)
-),.(hhid),summarise,ac=sum(cost))
-\end_layout
-
-\begin_layout Plain Layout
-
-%asset_mtms_2012 = asset_mtms(a2012,"bed","2012")
-\end_layout
-
-\begin_layout Plain Layout
-
-%assetslog2012 <- ddply(asset_mtms_2012,.(hhid2012),summarise,lnA0=log(sum(number.
-2012*mtm.2012)),A0=sum(number.2012*mtm.2012))
-\end_layout
-
-\begin_layout Plain Layout
-
-%ac2012<- merge(plyr::rename(ac2012,c("hhid"="hhid2012")),assetslog2012
- ,by=c("hhid2012"))
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Summary
-\end_layout
-
-\begin_layout Standard
-The constraints we consider are 
-\end_layout
-
-\begin_layout Standard
-1.
- The poulation constraint
-\end_layout
-
-\begin_layout Standard
-2.
- 
-\end_layout
-
-\begin_layout Standard
-The constraints are implied on 
-\begin_inset Formula $\omega,\bar{\omega},\alpha$
-\end_inset
-
- due to two constraint.
- First is the population constraint which implies 
-\begin_inset Formula $W(\prescript{t}{}\nu_{1})=L(\prescript{t}{}\nu_{2})$
-\end_inset
-
-.
- The second is the long-term constraint which we now elaborate.
-\end_layout
-
-\begin_layout Standard
-=====
-\end_layout
-
-\begin_layout Standard
-[Long-term condition with costs] Since we associate cost to assets, the
- equilibrium costs that are meant to be offset by the income gain in the
- equilibrium are path-dependent.
- Since assets are accumulative, the costs associated with assets depend
- not on the final income but the sum of past incomes.
- Therefore, the discussion of the equilibrium requires a given for of 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- that provides the history of 
-\begin_inset Formula $\nu_{1},\nu_{2}$
-\end_inset
-
- at every instance.
- Assuming logistic form, this condition means in the finite horizon:
-\end_layout
-
-\begin_layout Subsubsection
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:CombinedLongShortTerm"
-
-\end_inset
-
-Combined Long term and Short-term Behaviour
-\end_layout
-
-\begin_layout Standard
-That the short-term equilibria could imply a long-term redistribution of
- assets through status competitions depends on how 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- are set up relative to 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
-.
- For example, when 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- is high relative to 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
-, the consumers in the lower band (band 1) get rewarded more often than
- when the consumers in the richer band (band 2) lose.
- The asset differences would thus necessarily improve for the consumers
- in the lower band even though the income differences remain the same.
- Likewise, when 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
- is high relative to 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- i.e.
- a consumer in the richer band (band 2) lose more often than when the consumer
- in the lower band gain a position in the band, and the relative differences
- in assets also get reduced.
- Since less asset differences have the effect of making status competitions
- less intense, it follows that the long-term stability and equity is not
- ruled out through the short-term equilibria.
- To consider this in more detail 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-we ask ourselves if consumer differences in assets grow over time if consumers
- starts with disparate 
-\begin_inset Formula $A_{1},A_{2}$
-\end_inset
-
- and with a given 
-\begin_inset Formula $L(0),W(0)$
-\end_inset
-
-.
- Remember we do need a scheme for 
-\begin_inset Formula $L(\nu_{0}),W(\nu_{0})$
-\end_inset
-
- i.e.
- the initial values for there to be a unique solution.
- Also, all other parameters e.g.
- 
-\begin_inset Formula $\Gamma_{2},\Gamma_{1}$
-\end_inset
-
- are fixed in the long-term.
- 
-\end_layout
-
-\begin_layout Standard
-[
-\begin_inset Formula $W(\nu_{0})>L(\nu_{0})$
-\end_inset
-
-] Is this stable let's say for 
-\begin_inset Formula $\nu_{0}=0$
-\end_inset
-
- ? When 
-\begin_inset Formula $W(\nu_{0})>L(\nu_{0})$
-\end_inset
-
- then from the solution equations (the extra terms corresponding to 
-\begin_inset Formula $L(0),W(0)$
-\end_inset
-
-), consumers would lower 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- but raise 
-\begin_inset Formula $\nu_{2}$
-\end_inset
-
-.
- Higher 
-\begin_inset Formula $W(\nu_{0})$
-\end_inset
-
- would bump the RHS up and require lower 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- - the consumers are getting good chances of promotion so they would care
- less about 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- and more about 
-\begin_inset Formula $\nu_{2}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-[
-\begin_inset Formula $W(\nu_{0})<L(\nu_{0})$
-\end_inset
-
-] Similarly, this would raise 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- but lower 
-\begin_inset Formula $\nu_{2}$
-\end_inset
-
- .
- Letting 
-\begin_inset Formula $L,W$
-\end_inset
-
- change by keeping 
-\begin_inset Formula $L(0),W(0)$
-\end_inset
-
- same for the entire-long term - is akin to focusing on a family of 
-\begin_inset Formula $L,W$
-\end_inset
-
- rather than a general 
-\begin_inset Formula $L,W$
-\end_inset
-
-.
- If we don't fix 
-\begin_inset Formula $L(\nu_{0})$
-\end_inset
-
- and 
-\begin_inset Formula $W(\nu_{0})$
-\end_inset
-
- then we cannot consider the summation to the long-term solution.
- The other option is to explore a particular form of 
-\begin_inset Formula $W(\nu),L(\nu)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsubsection
-Particular form of 
-\begin_inset Formula $L(\nu),W(\nu)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-If 
-\begin_inset Formula $L(0)=W(0)$
-\end_inset
-
- is really without loss of generality then, we don't need any other conditions
- for particular form - we should be able to transform/translate any particular
- form to the 
-\begin_inset Formula $L(0)=W(0)$
-\end_inset
-
- form.
- To test this, we consider a simple form 
+...
+ consider a simple form 
 \begin_inset Formula $W(\nu)=1-e^{-\omega\nu}$
 \end_inset
 
@@ -2424,119 +2138,8 @@ noprefix "false"
  
 \end_layout
 
-\begin_layout Standard
-[No long-term equilibrium] Consider if there was no long-term stability
- condition and that it was fine for the relative wealth to explode! The
- idea being that implosion would follow explosion - i.e.
- after a long-term divergence, segregation, the promise of mobility would
- cease being feasible and relative wealth would be reset forcibly.
- The other option is that there would be another regime where differences
- in 
-\begin_inset Formula $A$
-\end_inset
-
- would decline.
- So that the long-term equilibrium is never achieved.
- But without long-term equilbirium, where do we get the other condition
- to obtain the 
-\begin_inset Formula $\bar{\omega}$
-\end_inset
-
-,
-\begin_inset Formula $\bar{\lambda}$
-\end_inset
-
- which the consumer (apart from 
-\begin_inset Formula $\lambda,\omega$
-\end_inset
-
- which are known constants) optimises over? While we have 
-\begin_inset Formula $W(\nu_{1}^{*})=L(\nu_{2}^{*})$
-\end_inset
-
- - which we find realistic - the other constraint comes from the imbalance
- - where 
-\begin_inset Formula $W(\nu_{1}^{*})<1-L(\nu_{2}^{*})\Rightarrow W(\nu_{1}^{*})=L(\nu_{2}^{*})<\frac{1}{2}$
-\end_inset
-
- or 
-\begin_inset Formula $W(\nu_{1}^{*})>1-L(\nu_{2}^{*})\Rightarrow W(\nu_{1}^{*})=L(\nu_{2}^{*})>\frac{1}{2}$
-\end_inset
-
- i.e.
- in the equilibrium the rich consumers are more secure or the poor consumers
- are more upward mobile.
- However inequalities like 
-\begin_inset Formula $W(\nu_{1}^{*})=L(\nu_{2}^{*})<\frac{1}{2}$
-\end_inset
-
- don't fully identify the model - and the general idea is only that of low
- 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- and 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
- at equilbirium - whose effect on relative wealth evolution needs to be
- verified.
- This might give us some idea about how long-term equilibrium never being
- achieved would be meaningful.
- Stability of the relative difference 
-\begin_inset Formula $A_{1}\rightarrow A_{2}$
-\end_inset
-
- is too restrictive as it implies no gains from status consumption and the
- divergence of i.e.
- 
-\begin_inset Formula $A_{2}-A_{1}\rightarrow\infty$
-\end_inset
-
- is too general (almost anything would lead to divergence).
- Hence a cost-function approach is worth comparing.
- The cost-function approach requires observing properties of 
-\begin_inset Formula $B_{t}$
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Subsection
-Findings in Simulation:
-\end_layout
-
-\begin_layout Enumerate
-We see that any 
-\begin_inset Formula $\Gamma_{1}>\Gamma_{2}$
-\end_inset
-
- leads to eventually zero 
-\begin_inset Formula $\nu$
-\end_inset
-
-.
- Do consumers switch to 
-\begin_inset Formula $\nu=0$
-\end_inset
-
- when they enjoy lower band more?
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-In the long-term consumer should be penalised for taking more risk - so
- the regime must also change to one where more risks don't pay off.
- This reduces assets in the long-term.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-What does the game that maximises .
-\end_layout
-
-\begin_layout Subsection
-Model in Data
+Solution
 \end_layout
 
 \begin_layout Standard
@@ -2621,7 +2224,7 @@ t puts the
  
 \series bold
 \bar under
-What is more important so that we can assume the less important? 
+What is more important so that we can assume the less important?
 \end_layout
 
 \begin_layout Standard

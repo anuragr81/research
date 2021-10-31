@@ -8256,5 +8256,163 @@ But is it that the expression only works if we calculate it's
  itself does not give the right solution? 
 \end_layout
 
+\begin_layout Section
+Removed no LTE discussion
+\end_layout
+
+\begin_layout Standard
+[No long-term equilibrium] Consider if there was no long-term stability
+ condition and that it was fine for the relative wealth to explode! The
+ idea being that implosion would follow explosion - i.e.
+ after a long-term divergence, segregation, the promise of mobility would
+ cease being feasible and relative wealth would be reset forcibly.
+ The other option is that there would be another regime where differences
+ in 
+\begin_inset Formula $A$
+\end_inset
+
+ would decline.
+ So that the long-term equilibrium is never achieved.
+ But without long-term equilbirium, where do we get the other condition
+ to obtain the 
+\begin_inset Formula $\bar{\omega}$
+\end_inset
+
+,
+\begin_inset Formula $\bar{\lambda}$
+\end_inset
+
+ which the consumer (apart from 
+\begin_inset Formula $\lambda,\omega$
+\end_inset
+
+ which are known constants) optimises over? While we have 
+\begin_inset Formula $W(\nu_{1}^{*})=L(\nu_{2}^{*})$
+\end_inset
+
+ - which we find realistic - the other constraint comes from the imbalance
+ - where 
+\begin_inset Formula $W(\nu_{1}^{*})<1-L(\nu_{2}^{*})\Rightarrow W(\nu_{1}^{*})=L(\nu_{2}^{*})<\frac{1}{2}$
+\end_inset
+
+ or 
+\begin_inset Formula $W(\nu_{1}^{*})>1-L(\nu_{2}^{*})\Rightarrow W(\nu_{1}^{*})=L(\nu_{2}^{*})>\frac{1}{2}$
+\end_inset
+
+ i.e.
+ in the equilibrium the rich consumers are more secure or the poor consumers
+ are more upward mobile.
+ However inequalities like 
+\begin_inset Formula $W(\nu_{1}^{*})=L(\nu_{2}^{*})<\frac{1}{2}$
+\end_inset
+
+ don't fully identify the model - and the general idea is only that of low
+ 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ at equilbirium - whose effect on relative wealth evolution needs to be
+ verified.
+ This might give us some idea about how long-term equilibrium never being
+ achieved would be meaningful.
+ Stability of the relative difference 
+\begin_inset Formula $A_{1}\rightarrow A_{2}$
+\end_inset
+
+ is too restrictive as it implies no gains from status consumption and the
+ divergence of i.e.
+ 
+\begin_inset Formula $A_{2}-A_{1}\rightarrow\infty$
+\end_inset
+
+ is too general (almost anything would lead to divergence).
+ Hence a cost-function approach is worth comparing.
+ The cost-function approach requires observing properties of 
+\begin_inset Formula $B_{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Removed plot of asset costs vs assets
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename logc_vs_logA_2012.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+log(asset-costs) vs log(asset-values)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%asset_cost_categs <- subset(lsms_normalizer()@categories_non_basic_wassets(),gr
+oup=="asset_costs")$shortname
+\end_layout
+
+\begin_layout Plain Layout
+
+%ac2012<-ddply(subset(c2012,is.element(shortname,asset_cost_categs) & !is.na(cost)
+),.(hhid),summarise,ac=sum(cost))
+\end_layout
+
+\begin_layout Plain Layout
+
+%asset_mtms_2012 = asset_mtms(a2012,"bed","2012")
+\end_layout
+
+\begin_layout Plain Layout
+
+%assetslog2012 <- ddply(asset_mtms_2012,.(hhid2012),summarise,lnA0=log(sum(number.
+2012*mtm.2012)),A0=sum(number.2012*mtm.2012))
+\end_layout
+
+\begin_layout Plain Layout
+
+%ac2012<- merge(plyr::rename(ac2012,c("hhid"="hhid2012")),assetslog2012
+ ,by=c("hhid2012"))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document

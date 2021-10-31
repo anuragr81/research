@@ -4,7 +4,6 @@ require(AER)
 source('datanormalizer.R')
 source('../panelfunc.R')
 
-setwd('c:/local_files/research/consumption/sa/')
 
 load_sa_data_file_list <- function(){
 
