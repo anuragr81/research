@@ -1832,6 +1832,10 @@ indicate
  If consumers can be believed to act as if a certain reward function existed,
  then do their non-durable consumption trends imply (we take South Africa
  or Tanzania) a different probability trends.
+ The difference between SA and Tanzania are social.
+ Assuming that asset differences and occupational differences are stable.
+ What are the fundamental differences in the status competitions implied
+ by the non-durable consumption levels.
 \end_layout
 
 \begin_layout Standard
@@ -1853,18 +1857,93 @@ Empirical Test
 \end_layout
 
 \begin_layout Standard
-Cost-function structure assumption:
+In a two-state world, the following could work
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-c(a,m,n) & =\frac{1}{1+e^{-m(x-n)}}
+c(A,m,n) & =\frac{A_{0}}{1+e^{-m(A-n)}}
 \end{align*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+However, asset-costs as a function of assets is a just an imagination.
+ The costs imposed by assets are not fully captured in the reported asset-costs.
+ A function that combines the costs imposed by cars with costs imposed by
+ houses - needs to average over a lot of thing.
+ For the for fitting purposes itself, estimating a function that considers
+ the number cars and houses owned would have be better - but that isn't
+ what we're concerned with.
+ For this reasons, the asset-cost function shape must not be relied on.
+ Instead how a given fitted value of cost-function would impact the net
+ equilibrium is more interesting.
+ We are interested only in the condition in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost_function_shape"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ being satisfied - without estimating the entire function itself.
+ Therefore, 
+\bar under
+the assumption with a known cost-function (whatever its shape as long as
+ the two consumers are on either side of the inflection point) must suffice.
+\end_layout
+
+\begin_layout Standard
+But we know that there are many classes operating within an economy.
+ We take interest in the just occupation_rank based populations - looking
+ at the differences between occupation_rank = 1 and occupation_rank 
+\begin_inset Formula $\in$
+\end_inset
+
+{2,3}.
+ We can see how asset-costs behave in between these two and assume a smooth
+ structure between the two - instead of attempting estimation of asset based
+ function which is far too noisy.
+ 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+ for us is therefore a combination of occupation rank, usual assets and
+ regional differences as well (anything that the consumer gains in the competiti
+on).
+ The cost-function can therefore be hardly estimated.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%ddply(ddd,.(max_occupation_rank),summarise,n=length(hhid2010))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Parameters for Tanzania
+\end_layout
+
+\begin_layout Standard
+Fitting the cost-function we have...
+\end_layout
+
+\begin_layout Subsection
+Parameters for South Africa
 \end_layout
 
 \begin_layout Standard
