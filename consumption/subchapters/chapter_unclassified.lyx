@@ -6927,5 +6927,1334 @@ only as long as
 
 \end_layout
 
+\begin_layout Section
+Solution attempts with polynomial cost-function
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $W(\nu_{1})=\frac{1}{1+e^{-\omega(\nu-\bar{\omega})}}$
+\end_inset
+
+, 
+\begin_inset Formula $W'(\nu_{1})=\frac{\omega e^{-\omega(\nu-\bar{\omega})}}{(1+e^{-\omega(\nu-\bar{\omega}})^{2}}$
+\end_inset
+
+we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}+\frac{\omega e^{-\omega(\nu-\bar{\omega})}}{(1+e^{-\omega(\nu-\bar{\omega}})^{2}}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}+\\
+\frac{\psi\beta}{1+e^{-\omega(\nu-\bar{\omega})}}\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Multiplying with 
+\begin_inset Formula $(1+e^{-\omega(\nu-\bar{\omega}})^{2}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+(1+e^{-\omega(\nu-\bar{\omega}})^{2}(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\\
++\omega e^{-\omega(\nu-\bar{\omega})}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}+\\
+\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+(1+e^{-2\omega(\nu-\bar{\omega})}+2e^{-\omega(\nu-\bar{\omega})})(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\\
++\omega e^{-\omega(\nu-\bar{\omega})}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}=\\
+\psi\beta\{((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}-\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}\}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Letting 
+\begin_inset Formula $z\equiv e^{-\omega(\nu-\bar{\omega})}$
+\end_inset
+
+ a solution exists for the following quadratic in 
+\begin_inset Formula $z$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})z^{2}+z\\
++[2(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\omega\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}]z\\
++(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+only as long as 
+\begin_inset Formula 
+\begin{multline*}
+[2(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\omega\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}]^{2}\\
+>4\times(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\times[(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}]
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We test whether the optimal solution exists empirically for the function
+ by choosing arbitrary values of 
+\begin_inset Formula $\psi,\beta,\omega,\bar{\omega}$
+\end_inset
+
+.
+ There is curvature to be optimised - but the more important question is
+ whether the summation of 
+\begin_inset Formula $W(\nu_{1})k(\prescript{t}{}A+y_{2}-\nu_{1})+(1-W(\nu_{1}))k(\prescript{t}{}A+y_{1}-\nu_{1})$
+\end_inset
+
+ converges to zero over time.
+ For 
+\begin_inset Formula $y_{1}=100,y_{2}=100$
+\end_inset
+
+, 
+\begin_inset Formula $\omega=1$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\omega}=30,\beta=1.1,\psi=0.3$
+\end_inset
+
+.
+ If costs of assets don't increase we may never have an equilibrium.
+ Now the next question is whether we can have a 
+\begin_inset Formula $\nu_{1}^{*}<y_{1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Discarded thoughts on combining short-term equilibria in favor of Long-term
+ equilibria with cost-functions
+\end_layout
+
+\begin_layout Standard
+[How do short-term 
+\begin_inset Formula $L,W$
+\end_inset
+
+ combine] Let's assume that 
+\begin_inset Formula $\prescript{}{T}W(\nu),\prescript{}{T}L(\nu)$
+\end_inset
+
+ is at time 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ What is the effective 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\prescript{}{(T_{1},T_{2})}W(\nu),\prescript{}{(T_{1},T_{2})}L(\nu)$
+\end_inset
+
+ in the interval 
+\begin_inset Formula $(T_{1},T_{2})$
+\end_inset
+
+? This sum must converge to the long-term 
+\begin_inset Formula $L,W$
+\end_inset
+
+ so that 
+\begin_inset Formula $W(\nu_{1})+L(\nu_{2})=1$
+\end_inset
+
+ constraint.
+ Let's assume that 
+\begin_inset Formula $\nu_{1},\nu_{2}$
+\end_inset
+
+ chosen by the consumer change just at the same time as short-term 
+\begin_inset Formula $L,W$
+\end_inset
+
+ change so every 
+\begin_inset Formula $L,W$
+\end_inset
+
+ corresponds to a unique 
+\begin_inset Formula $\nu_{1},\nu_{2}$
+\end_inset
+
+ and we can take 
+\begin_inset Formula $L,W,\nu_{1},\nu_{2}$
+\end_inset
+
+ as a one instance of the game.
+ So the question now do the two instances of the game 
+\begin_inset Formula $(\prescript{}{T_{1}}W,\prescript{}{T_{1}}L,\prescript{}{T_{1}}\nu_{1},\prescript{}{T_{1}}\nu_{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $(\prescript{}{T_{2}}W,\prescript{}{T_{2}}L,\prescript{}{T_{2}}\nu_{1},\prescript{}{T_{2}}\nu_{2})$
+\end_inset
+
+ correspond to a unique  
+\begin_inset Formula $(\prescript{}{T_{1}+T_{2}}W,\prescript{}{T_{1}+T_{2}}L,\prescript{}{T_{1}+T_{2}}\nu_{1},\prescript{}{T_{1}+T_{2}}\nu_{2})$
+\end_inset
+
+ ?
+\end_layout
+
+\begin_layout Section
+Reject No-LTE solution attempt
+\end_layout
+
+\begin_layout Standard
+[Long-term constraint with the second condition] The long-term solution
+ is not interesting - since we all live in a world where relative wealth
+ is hardly stable and is open to risks.
+ That we cannot have a long-term stability of relative asset-differences
+ is less controversial.
+ The population constraint is however more realistic.
+ Consider however the implications of when the second equation is provided
+ with the long-term constraint 
+\begin_inset Formula $W(\nu_{1}^{*})+L(\nu_{2}^{*})=1$
+\end_inset
+
+.
+ Together, both the constraints would mean 
+\begin_inset Formula $W(\nu_{1}^{*})=L(\nu_{2}^{*})=\frac{1}{2}$
+\end_inset
+
+.
+ The consumers would have to have a 50-50 chance of being in having different
+ income bands in the long-term.
+ This shows how limiting the long-term constraint really is for the Nash-eqiulib
+ria.
+ For what its worth, consider what the consumer's equilbrium would look
+ like.
+ Notice that 
+\begin_inset Formula $W(\nu_{1}^{*})=\frac{1}{2}\Rightarrow\nu_{1}^{*}=\bar{\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu_{2}^{*})=\frac{1}{2}\Rightarrow\nu_{2}^{*}=\bar{\omega}$
+\end_inset
+
+.
+ The long-term equilibrium would thus be defined by how 
+\begin_inset Formula $\omega,\lambda$
+\end_inset
+
+ may vary.
+ The imposition of 
+\begin_inset Formula $\nu_{1}^{*}=\nu_{2}^{*}=\frac{1}{2}$
+\end_inset
+
+ means that the short-term finite-horizon must also be set up i.e.
+ 
+\begin_inset Formula $\lambda,\bar{\lambda},\omega,\bar{\omega}$
+\end_inset
+
+ chosen for the game so that the consumer utility is maximised at 
+\begin_inset Formula $\nu_{1}^{*}=\bar{\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{2}^{*}=\bar{\lambda}$
+\end_inset
+
+.
+ This is quite limiting.
+ Besides, instead of asking what a given game would mean in the long-term,
+ we're answering what game would need to be set up for there to be a long-term
+ stability.
+ This is not important - but shows how limiting the long-term constraints
+ really are to the short-term game.
+ With the logistic function the utility optimised by the consumer is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+u_{1}(\nu)=\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha}+e^{-\omega(\nu-\bar{\omega})}\Gamma_{1}(M_{1}-\nu)^{\alpha}}{1+e^{-\omega(\nu-\bar{\omega})}}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $1+e^{-\omega(\nu-\bar{\omega})}\ne0$
+\end_inset
+
+, 
+\begin_inset Formula $u_{1}(\nu)$
+\end_inset
+
+ is maximised when
+\begin_inset Formula 
+\begin{multline*}
+(1+e^{-\omega(\nu-\bar{\omega})})(-\frac{dN}{d\nu})=\omega Ne^{-\omega(\nu-\bar{\omega})}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $N=\Gamma_{2}(M_{2}-\nu)^{\alpha}+e^{-\omega(\nu-\bar{\omega})}\Gamma_{1}(M_{1}-\nu)^{\alpha}$
+\end_inset
+
+.
+ Now,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+-\frac{dN}{d\nu}=\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}+\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}e^{-\omega(\nu-\bar{\omega})}+e^{-\omega(\nu-\bar{\omega})}(M_{1}-\nu)^{\alpha-1}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+(1+e^{-\omega(\nu-\bar{\omega})})(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}+\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}e^{-\omega(\nu-\bar{\omega})}+e^{-\omega(\nu-\bar{\omega})}(M_{1}-\nu)^{\alpha-1})\\
+=\omega e^{-\omega(\nu-\bar{\omega})}(\Gamma_{2}(M_{2}-\nu)^{\alpha}+e^{-\omega(\nu-\bar{\omega})}\Gamma_{1}(M_{1}-\nu)^{\alpha})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+(1+e^{\omega(\nu-\bar{\omega})})(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}+\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}e^{-\omega(\nu-\bar{\omega})}+e^{-\omega(\nu-\bar{\omega})}(M_{1}-\nu)^{\alpha-1})\\
+=\omega(\Gamma_{2}(M_{2}-\nu)^{\alpha}+e^{-\omega(\nu-\bar{\omega})}\Gamma_{1}(M_{1}-\nu)^{\alpha})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}+\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}e^{-\omega(\nu-\bar{\omega})}+e^{-\omega(\nu-\bar{\omega})}(M_{1}-\nu)^{\alpha-1}+\alpha e^{\omega(\nu-\bar{\omega})}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}+\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}+(M_{1}-\nu)^{\alpha-1}\\
+=\omega\Gamma_{2}(M_{2}-\nu)^{\alpha}+\omega e^{-\omega(\nu-\bar{\omega})}\Gamma_{1}(M_{1}-\nu)^{\alpha}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or,
+\begin_inset Formula $e^{-\omega(\nu-\bar{\omega})}=\frac{\omega\Gamma_{2}(M_{2}-\nu)^{\alpha}-\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}-(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}}{\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}+(M_{1}-\nu)^{\alpha-1}+\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\nu=\bar{\omega}$
+\end_inset
+
+, a game can be set up to let consumer maximise utility at 
+\begin_inset Formula $\nu_{1}=\bar{\omega}$
+\end_inset
+
+ as long as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+(M_{2}-\bar{\omega})^{\alpha-1}(\omega\Gamma_{2}(M_{2}-\nu)-\bar{\omega}\alpha\Gamma_{2}) & =(M_{1}-\bar{\omega})^{\alpha-1}(\omega\Gamma_{1}(M_{1}-\bar{\omega})+2)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Discarded Appendix with differential equations
+\end_layout
+
+\begin_layout Standard
+We know that for 
+\begin_inset Formula $y'(t)=a(t)y(t)+b(t)$
+\end_inset
+
+ and 
+\begin_inset Formula $y(t_{0})=y_{0}$
+\end_inset
+
+we have the solution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+y(t) & =y_{0}e^{A(t)}+e^{A(t)}\int_{t_{0}}^{t}e^{-A(s)}b(s)ds\label{eq:general_solution}
+\end{alignat}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $A(t)=\int_{t_{0}}^{t}a(s)ds$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Given 
+\begin_inset Formula $u_{k}(A)=\Gamma_{k}A^{\alpha}$
+\end_inset
+
+, we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+W(\nu)u_{2}(A+y_{1}-\nu+y_{2})+(1-W(\nu))u_{1}(A+y_{1}-\nu+y_{1})\\
+=W(\nu)\Gamma_{2}(A+y_{1}-\nu+y_{2})^{\alpha}+(1-W(\nu))\Gamma_{1}(A+y_{1}-\nu+y_{1})^{\alpha}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We rewrite the function 
+\begin_inset Formula $f(\nu)$
+\end_inset
+
+ which is to be optimised by choosing 
+\begin_inset Formula $M_{1}=A+y_{1}+y_{1}$
+\end_inset
+
+and 
+\begin_inset Formula $M_{2}=A+y_{1}+y_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+f(\nu)=W(\nu)(\Gamma_{2}(A+y_{1}-\nu+y_{2})^{\alpha}-\Gamma_{1}(A+y_{1}-\nu+y_{1})^{\alpha})+\Gamma_{1}(A+y_{1}-\nu+y_{1})^{\alpha}\\
+\Rightarrow f(\nu)=W(\nu)(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})+\Gamma_{1}(M_{1}-\nu)^{\alpha}
+\end{gather*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+The derivative 
+\begin_inset Formula $f'(\nu)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+f'(\nu) & =(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})W'(\nu)+W(\nu)(\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1})-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first order condition 
+\begin_inset Formula $f'(\nu)$
+\end_inset
+
+ implies
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+f'(\nu) & =0\Rightarrow(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})W'(\nu)=W(\nu)(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})+\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+W'(\nu) & =W(\nu)(\alpha\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}})+\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The characteristic function 
+\begin_inset Formula $A(t)=\int a(s)ds$
+\end_inset
+
+ in the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:general_solution"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ corresponds to the following (notice that this is defined only as long
+ as 
+\begin_inset Formula $\Gamma_{1}(M_{1}-\nu)^{\alpha}\ne\Gamma_{2}(M_{2}-\nu)^{\alpha}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\int a(s)ds & =-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})+C
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Writing 
+\begin_inset Formula $D=log(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha})$
+\end_inset
+
+ we have
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{gather*}
+A(\nu)=\int_{0}^{\nu}a(s)ds=-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})-(-log(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha}))\\
+=log(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha})-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})\\
+=D-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+A(\nu) & =D-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+e^{-A(s)} & =e^{log(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})-D}=e^{-D}(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+e^{A(\nu)} & =\frac{e^{D}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now 
+\begin_inset Formula 
+\begin{gather*}
+\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\int_{\nu_{0}}^{\nu}e^{-D}(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})\times\frac{\alpha\Gamma_{1}(M_{1}-s)^{\alpha-1}}{\Gamma_{2}(M_{2}-s)^{\alpha}-\Gamma_{1}(M_{1}-s)^{\alpha}}\\
+=-\alpha e^{-D}\Gamma_{1}\int_{\nu_{0}}^{\nu}(M_{1}-s)^{\alpha-1}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The integration of the last term is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\int_{\nu_{0}}^{\nu}(M_{1}-s)^{\alpha-1} & =-\frac{1}{\alpha}(M_{1}-s)^{\alpha}|_{\nu_{0}}^{\nu}=-\frac{1}{\alpha}((M_{1}-\nu)^{\alpha}-(M_{1}-\nu_{0})^{\alpha})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds & =-\alpha e^{-D}\Gamma_{1}(-\frac{1}{\alpha}((M_{1}-\nu)^{\alpha}-(M_{1}-\nu_{0})^{\alpha}))=\frac{\Gamma_{1}((M_{1}-\nu)^{\alpha}-(M_{1}-\nu_{0})^{\alpha})}{e^{D}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+W(\nu) & =W(\nu_{0})e^{A(\nu)}+e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\frac{W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}+\frac{\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\label{eq:solution_1-1}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Equivalently for the 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+, we have 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+L'(\nu) & =L(\nu)\alpha\frac{\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}+\frac{\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Again, the characteristic function is as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+A(\nu) & =D-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+e^{A(\nu)} & =\frac{e^{D}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Further,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\int_{\nu_{0}}^{\nu}e^{-D}(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})\times\frac{\alpha\Gamma_{2}(M_{2}-s)^{\alpha-1}}{\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha}}\\
+=-\alpha e^{-D}\Gamma_{2}\int_{\nu_{0}}^{\nu}(M_{2}-s)^{\alpha-1}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The integration of the last term is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\int_{\nu_{0}}^{\nu}(M_{2}-s)^{\alpha-1} & =-\frac{1}{\alpha}(M_{2}-s)^{\alpha}|_{\nu_{0}}^{\nu}=-\frac{1}{\alpha}((M_{2}-\nu)^{\alpha}-(M_{2}-\nu_{0})^{\alpha})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds & =\frac{\Gamma_{2}((M_{2}-\nu)^{\alpha}-(M_{2}-\nu_{0})^{\alpha})}{e^{D}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The solution for 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ is therefore
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+L(\nu) & =\frac{L(\nu_{0})(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha})}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}+\frac{\Gamma_{2}((M_{2}-\nu)^{\alpha}-(M_{2}-\nu_{0})^{\alpha})}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Discarded Verification
+\end_layout
+
+\begin_layout Standard
+Verifying 
+\begin_inset Formula $f(\nu)$
+\end_inset
+
+ with diff(w(x)*(G_2*(M_2-x)**a)+(1-w(x))*G_1*((M_1-x)**a) ,x) which gives:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $f'(\nu)=-\Gamma_{1}(M_{1}-\nu)^{\alpha}W'(\nu)+\Gamma_{2}(M_{2}-\nu)^{\alpha}W'(\nu)-\alpha\Gamma_{1}(1-W(\nu))(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{2}W(\nu)(M_{2}-\nu)^{\alpha-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $f'(\nu)=\{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}\}W'(\nu)-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}+\alpha W(\nu)\{\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1}\}=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $f'(\nu)=\{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}\}W'(\nu)=\alpha W(\nu)\{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\}+\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The condition for 
+\begin_inset Formula $f'(\nu)=0$
+\end_inset
+
+ thus leads to the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+W'(\nu) & =W(\nu)(\alpha\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}})+\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can check that for y=result$minimum, the following expression is the
+ same as dW_p(omega=omega,x=y):
+\end_layout
+
+\begin_layout Standard
+(W_p(omega=omega,x=y) * alpha * (G2*(M2-y)**(alpha-1)-G1*(M1-y)**(alpha-1)))/((G
+2*(M2-y)**(alpha)-G1*(M1-y)**(alpha)))+(alpha*G1*(M1-y)**(alpha-1))/(G2*(M2-y)**
+(alpha)-G1*(M1-y)**(alpha))
+\end_layout
+
+\begin_layout Standard
+This means that 
+\begin_inset Formula $W'(\nu)$
+\end_inset
+
+ does evaluate to the above R-expression correctly - but our expression
+ W_expr differs from W_p(omega=omega,x=result$minimum).
+ This does not make sense.
+\end_layout
+
+\begin_layout Standard
+The next step is to using the formula expression (our solution) for 
+\begin_inset Formula $W'(\nu)$
+\end_inset
+
+ to check the value of 
+\begin_inset Formula $f(\nu)$
+\end_inset
+
+ which requires both 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $W'(\nu)$
+\end_inset
+
+.
+ It also needs to be checked that the numerical value of the derivative
+ 
+\begin_inset Formula $W'(\nu)\approx\frac{W(\nu+\delta)-W(\nu)}{\delta}$
+\end_inset
+
+ calculated with 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ solution-expression also leads to 
+\begin_inset Formula $f'(\nu)=0$
+\end_inset
+
+.
+ This also leads to 
+\begin_inset Formula $f'(\nu)=0$
+\end_inset
+
+.
+ This just means that there are multiple 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ passing through the common 
+\begin_inset Formula $W(0)=0$
+\end_inset
+
+ that would make 
+\begin_inset Formula $f'(\nu)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+1.
+ Can we prove that the solution for 
+\begin_inset Formula $f'(\nu)=0$
+\end_inset
+
+ gives a unique 
+\begin_inset Formula $\nu$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+2.
+ Notice that we already have a form for 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+! Is the exponential 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ to be in agreement with our 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+Calculating the derivative 
+\begin_inset Formula $W'(\nu)$
+\end_inset
+
+ for the solution 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+W(\nu)=\frac{W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\\
+\Rightarrow W'(\nu)=\frac{D(\frac{dN}{d\nu})-N(\frac{dD}{d\nu})}{D^{2}}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The solution is basically 
+\begin_inset Formula $\nu^{*}$
+\end_inset
+
+ such that 
+\begin_inset Formula $W(\nu^{*})=\frac{W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ in the solution does not describe the CDF and depends on
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $N=W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and 
+\begin_inset Formula $D=\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $B=W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+So 
+\begin_inset Formula 
+\begin{align*}
+W(\nu) & =\frac{B+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that 
+\begin_inset Formula $\frac{dN}{d\nu}$
+\end_inset
+
+ (using 
+\begin_inset Quotes eld
+\end_inset
+
+diff(G_1*((M_1-x0)**a-(M_1-x)**a),x)
+\begin_inset Quotes erd
+\end_inset
+
+) is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{dN}{d\nu} & =\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\frac{dD}{d\nu} & =\alpha(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now (using 
+\begin_inset Quotes eld
+\end_inset
+
+a*G_1*(M_1-x)**(a-1)*(G_2*(M_2-x)**a-G_1*(M_1-x)**a)
+\begin_inset Quotes erd
+\end_inset
+
+),
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+D(\frac{dN}{d\nu}) & =\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\times(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or 
+\begin_inset Formula 
+\begin{alignat*}{1}
+D\frac{dN}{d\nu} & =\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+N\frac{dD}{d\nu}=(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}))\times\alpha(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
+=\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
+-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha}\times(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
+=\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
+\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}}+\alpha\Gamma_{2}\Gamma_{1}(M_{1}-\nu)^{\alpha}(M_{2}-\nu)^{\alpha-1}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now after cancelling out the underlined terms,
+\begin_inset Formula 
+\begin{multline}
+D(\frac{dN}{d\nu})-N(\frac{dD}{d\nu})=\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\\
+-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})-\alpha\Gamma_{2}\Gamma_{1}(M_{1}-\nu)^{\alpha}(M_{2}-\nu)^{\alpha-1}\\
+=\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}\{(M_{2}-\nu)-(M_{1}-\nu)\}\\
+-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
+=\alpha\Gamma_{1}\Gamma_{2}(M_{2}-M_{1})(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
+=\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-M_{1})(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}}\\
++\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\\
++\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu_{0})^{\alpha}(M_{2}-\nu)^{\alpha-1}}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu_{0})^{\alpha}(M_{1}-\nu)^{\alpha-1}}\label{eq:W_nu_derivative}
+\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This expression should be the same as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+ & W(\nu)(\alpha\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}})+\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\alpha\frac{B+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\times\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\\
++\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\times(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})}{(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})^{2}}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or 
+\begin_inset Formula 
+\begin{multline}
+\frac{1}{D^{2}}\times\{(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})\\
++\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{2\alpha-1}\}\label{eq:expanded_expression}
+\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Expanding the first term 
+\begin_inset Formula $(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})$
+\end_inset
+
+ (with 
+\begin_inset Quotes eld
+\end_inset
+
+(a*G_2*(M_2-x)^(a-1)-a*G_1*(M_1-x)^(a-1))*(B+G_1*(M_1-x0)^a-G_1*(M_1-x)^a)
+\begin_inset Quotes erd
+\end_inset
+
+) as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}\\
++\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}-\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu)^{\alpha}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}\\
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rewriting (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:expanded_expression"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ ) by including its second term,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{1}{D^{2}}\times\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}\\
+-\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu)^{\alpha}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}+\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\frac{1}{D^{2}}\times\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\\
+\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\\
+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\\
+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}(M_{2}-M_{1})}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can see that the above expression is the same as what we have obtained
+ as 
+\begin_inset Formula $D(\frac{dN}{d\nu})-N(\frac{dD}{d\nu})$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:W_nu_derivative"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+But is it that the expression only works if we calculate it's 
+\begin_inset Formula $W'(\nu)$
+\end_inset
+
+ but 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ itself does not give the right solution? 
+\end_layout
+
 \end_body
 \end_document

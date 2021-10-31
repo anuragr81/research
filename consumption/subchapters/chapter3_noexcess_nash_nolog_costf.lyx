@@ -96,8 +96,11 @@ theorems-sec
 
 \begin_body
 
+\begin_layout Part
+One-period solution
+\end_layout
+
 \begin_layout Section
-\paragraph_spacing single
 \noindent
 Literature Survey
 \end_layout
@@ -742,7 +745,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Subsection
-Long-term Equilibria
+Equilibrium conditions
 \end_layout
 
 \begin_layout Standard
@@ -1232,52 +1235,24 @@ Chain implied by two income bands
 \end_layout
 
 \begin_layout Standard
-[Optimum 
-\begin_inset Formula $\nu_{1}$
+Since the infinite growth of wealth can never be in equilibrium, we assume
+ as a cost-function associated with wealth.
+ In empirical terms, this would summarise the expected expenditure required
+ to maintain a certain level of assets - including any maintenance fees,
+ club memberships based on owning a certain asset etc..
+ Assuming a general cost-function 
+\begin_inset Formula $c(A)$
 \end_inset
 
-]
-\end_layout
-
-\begin_layout Standard
-Notice that the consumer's horizon is just one time period.
- At every period 
-\begin_inset Formula $t$
-\end_inset
-
-, the consumer who optimises 
-\begin_inset Formula $u(A_{t+1})$
-\end_inset
-
- chooses 
-\begin_inset Formula $\prescript{t}{}\nu_{1}$
-\end_inset
-
- (or 
-\begin_inset Formula $\prescript{t}{}\nu_{2}$
-\end_inset
-
-) given 
-\begin_inset Formula $\prescript{t}{}A$
-\end_inset
-
-, 
-\begin_inset Formula $\omega,\bar{\omega},y_{1},y_{2},w(\cdot)$
-\end_inset
-
-.
- More specifically, the consumer must choose 
-\begin_inset Formula $\nu$
-\end_inset
-
- so that the following is maximised
+, the net asset value of the consumer after adjusting for asset-costs is
+ 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{alignat*}{1}
-W(\prescript{t}{}\nu_{1})u_{2}(f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2}))+(1-W(\prescript{t}{}\nu_{1}))u_{1}(f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1}))
-\end{alignat*}
+\begin{align}
+\pi(A) & =A-c(A)\label{eq:net_cost_function}
+\end{align}
 
 \end_inset
 
@@ -1285,18 +1260,65 @@ W(\prescript{t}{}\nu_{1})u_{2}(f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y
 \end_layout
 
 \begin_layout Standard
-where 
-\begin_inset Formula $f(A)=A-\psi A^{\beta}$
+We now consider the consumer decision with a time horizon of 
+\begin_inset Formula $T=1$
 \end_inset
 
- (and 
-\begin_inset Formula $f'(A)=1-\beta A^{\beta-1}$
+.
+ At every period 
+\begin_inset Formula $t$
 \end_inset
 
-).
- We assume that the consumer enjoys the same wealth more in band 1 than
- in band 2.
- This is ensured with 
+, with a view only one time period ahead, the consumer 1 thus optimises
+ 
+\begin_inset Formula $u(A_{t+1})$
+\end_inset
+
+ by choosing a certain 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ .
+ As such the consumer just has one life and a one shot-investment to make
+ towards her life-time status.
+ Just before the next period 
+\begin_inset Formula $t+1$
+\end_inset
+
+, her total asset acquisition would be 
+\begin_inset Formula $\prescript{t}{}A+(y_{1}-\prescript{t}{}\nu_{1})$
+\end_inset
+
+ where 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ is her expenditure on status consumption.
+ As the consumer could either be in band 1 or band 2 in the next period
+ 
+\begin_inset Formula $t+1$
+\end_inset
+
+ with probability 
+\begin_inset Formula $W_{1}(\prescript{t}{}\nu_{1})$
+\end_inset
+
+ or in band 1 with probability 
+\begin_inset Formula $1-W_{1}(\prescript{1}{}\nu_{1})$
+\end_inset
+
+ she optimise the following utility
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+W(\prescript{t}{}\nu_{1})u_{2}(\pi(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2}))+(1-W(\prescript{t}{}\nu_{1}))u_{1}(\pi(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1}))\label{eq:band_1_utility_optim}
+\end{alignat}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1315,11 +1337,17 @@ status open
 \end_layout
 
 \begin_layout Standard
+Here, the consumer utility is based on relative wealth (rather than absolute)
+ i.e.
+ the consumer enjoys the same wealth more in band 1 than in band 2 so that
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
-\begin{gather*}
-u_{1}(A)=\Gamma_{1}A^{\alpha}\\
-u_{2}(A)=\Gamma_{2}A^{\alpha}
-\end{gather*}
+\begin{gather}
+u_{1}(A)=\Gamma_{1}A^{\alpha}\nonumber \\
+u_{2}(A)=\Gamma_{2}A^{\alpha}\label{eq:user_utilities}
+\end{gather}
 
 \end_inset
 
@@ -1331,15 +1359,30 @@ The consumer in band 1 thus chooses
 \begin_inset Formula $\prescript{t}{}\nu_{1}$
 \end_inset
 
- so that the above expression is maximised.
- Denoting the expression optimising expression as 
+ so that the expression in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:band_1_utility_optim"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is maximised.
+ Let the solution be represented by functions 
+\begin_inset Formula $g_{1},g_{2}$
+\end_inset
+
+ so that 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-\prescript{t}{}\nu_{1} & =g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A,\omega,\bar{\omega},\alpha,\beta)
-\end{align*}
+\begin{gather}
+\prescript{t}{}\nu_{1}=g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A,\textbf{w},\textbf{p})\label{eq:user_optim_choices}\\
+\prescript{t}{}\nu_{2}=g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A,\textbf{l},\textbf{p})\nonumber 
+\end{gather}
 
 \end_inset
 
@@ -1347,32 +1390,32 @@ The consumer in band 1 thus chooses
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\prescript{t}{}\nu_{2} & =g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A,\lambda,\bar{\lambda},\alpha,\beta)
-\end{align*}
-
+Here, 
+\begin_inset Formula $\textbf{p}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-The constraints are implied on 
-\begin_inset Formula $\omega,\bar{\omega},\alpha$
+ is a set of constants representing the cost-function 
+\begin_inset Formula $\pi(A)$
 \end_inset
 
- due to two constraint.
- First is the population constraint which implies 
-\begin_inset Formula $W(\prescript{t}{}\nu_{1})=L(\prescript{t}{}\nu_{2})$
+ and 
+\begin_inset Formula $\textbf{w}$
 \end_inset
 
-.
- The second is the long-term constraint which we now elaborate.
-\end_layout
+,
+\begin_inset Formula $\textbf{l}$
+\end_inset
 
-\begin_layout Standard
-[LTE] We have already assumed that 
+ are the sets of constants representing the functions 
+\begin_inset Formula $W(\nu_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $L(\nu_{2})$
+\end_inset
+
+ respectively.
+ Notice that 
 \begin_inset Formula $\nu_{1}\in[0,y_{1}]$
 \end_inset
 
@@ -1381,63 +1424,122 @@ The constraints are implied on
 \end_inset
 
  i.e.
- the consumer do not use anything from savings towards the status consumption.
- Let's assume that the consumer's assets are 
-\begin_inset Formula $\prescript{t}{}A$
+ the consumers do not use anything from savings towards the status consumption.
+ It is worth emphasising that the utility to the consumer considers the
+ total assets acquired by the consumer rather than the new income received
+ in successive periods.
+ The consumers are assumed to save everything up at the end of first period
+ i.e.
+ they do not spend on status consumption at the end of their lives.
+ This holds for when higher number of periods are considered - the consumption
+ 
+\begin_inset Formula $\nu$
 \end_inset
 
- before the start of period 
+ in the last period is always zero for all the consumers regardless of how
+ much wealth they have amassed.
+\end_layout
+
+\begin_layout Standard
+While a symmetric Nash equilibrium can be specific with finite time horizons,
+ we are interested in the long-term equilibrium conditions particularly
+ due to our interest in the role of an environment where long-term inequalities
+ in income are sustained.
+ If the functions 
+\begin_inset Formula $W(\nu_{1}),L(\nu_{2})$
+\end_inset
+
+ could change with time 
 \begin_inset Formula $t$
 \end_inset
 
- in band 1.
- In the period 
-\begin_inset Formula $t$
+ ( i.e.
+ if
+\begin_inset Formula $\textbf{w}$
 \end_inset
 
- itself, the consumer 1 would accumulate
-\begin_inset Formula $\prescript{t}{}A+(y_{1}-\prescript{t}{}\nu_{1})$
+,
+\begin_inset Formula $\textbf{l}$
 \end_inset
 
- where 
+ are time varying), then the consumers are meant to adjust 
 \begin_inset Formula $\prescript{t}{}\nu_{1}$
 \end_inset
 
- is her expenditure on status consumption.
- In the next period 
-\begin_inset Formula $t+1$
+ and 
+\begin_inset Formula $\prescript{t}{}\nu_{2}$
 \end_inset
 
-, the consumer could either be in band 2 with probability 
-\begin_inset Formula $W_{1}(\prescript{t}{}\nu_{1})$
+ accordingly.
+ Defining the functions 
+\begin_inset Formula $W(\nu_{1})$
 \end_inset
 
- or in band 1 with probability 
-\begin_inset Formula $1-W_{1}(\prescript{1}{}\nu_{1})$
+ and 
+\begin_inset Formula $L(\nu_{2})$
 \end_inset
 
- .
- Considering the costs associated with assets as 
-\begin_inset Formula $c(A)=\psi A^{\beta}$
+ only for stable populations, we summarise these with the following assumption.
+\end_layout
+
+\begin_layout Assumption
+\begin_inset CommandInset label
+LatexCommand label
+name "assu:LWnu_set"
+
 \end_inset
 
- and the net assets are 
-\begin_inset Formula $f(A)=A-c(A)$
+The consumers selects 
+\begin_inset Formula $\nu$
 \end_inset
 
-.
- The expected accumulation in the next period 
-\begin_inset Formula $t+1$
+ as frequently as changes in 
+\begin_inset Formula $L,W$
 \end_inset
 
- is 
+ defined for stable band populations.
+\end_layout
+
+\begin_layout Standard
+Due to the assumption 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "assu:LWnu_set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the consumer's horizon coincides with that of 
+\begin_inset Formula $L(\nu_{1}),W(\nu_{2})$
+\end_inset
+
+ and the short-term Nash equilibria are population-stable status competitions.
+ The direct implication of the population stability of income bands 1 and
+ 2 is that the consumers in band 1 that are promoted to band 2 are balanced
+ by the consumers in band 2 being demoted to band 1.
+ More complex dynamics could from the above model could follow if we assume
+ that the population constraint is imposed over multiple time periods (rather
+ than 1), but with assumption 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "assu:LWnu_set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the population-stability constraint in the long-term equilibrium implies
+ that
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-W_{1}(\prescript{t}{}\nu_{1})f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})+(1-W_{1}(\prescript{t}{}\nu_{1}))f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1})
-\end{align*}
+\begin{align}
+W(\prescript{t}{}\nu_{1}) & =L(\prescript{t}{}\nu_{2})\label{eq:population_stability}
+\end{align}
 
 \end_inset
 
@@ -1445,20 +1547,68 @@ W_{1}(\prescript{t}{}\nu_{1})f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{
 \end_layout
 
 \begin_layout Standard
-In equilibrium, no new income would be added as the cost of assets must
- balance any asset increment added and the assets would stabilise at
+Since the long-term equilibrium also implies stability of wealth levels,
+ we also impose the condition that no more asset-value is added to the consumer'
+s assets as she chooses the equilibrium 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+(consumer 1) or 
+\begin_inset Formula $\prescript{t}{}\nu_{2}$
+\end_inset
+
+ (consumer 2).
+ Thus, 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+the assets would stabilise at
 \begin_inset Formula $\prescript{t}{}A$
 \end_inset
 
-.
- 
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ and the following quantity would tend to zero for consumer 1 in equilibrium.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-W_{1}(\prescript{t}{}\nu_{1})f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})+(1-W_{1}(\prescript{t}{}\nu_{1}))f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1}) & =0
-\end{align*}
+\begin{alignat*}{1}
+W(\prescript{t}{}\nu_{1})\pi(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})+(1-W(\prescript{t}{}\nu_{1}))\pi(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1}) & \rightarrow0
+\end{alignat*}
 
 \end_inset
 
@@ -1466,10 +1616,14 @@ W_{1}(\prescript{t}{}\nu_{1})f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{
 \end_layout
 
 \begin_layout Standard
+or,
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-W_{1}(\prescript{t}{}\nu_{1}) & =\frac{1}{1-\frac{f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})}}
-\end{align*}
+\begin{align}
+W_{1}(\prescript{t}{}\nu_{1}) & =\frac{1}{1-\frac{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})}}\label{eq:w_lte}
+\end{align}
 
 \end_inset
 
@@ -1477,13 +1631,13 @@ W_{1}(\prescript{t}{}\nu_{1}) & =\frac{1}{1-\frac{f(\prescript{t}{}A_{1}+y_{1}-\
 \end_layout
 
 \begin_layout Standard
-Similarly, for the consumer in band 2
+Similarly, for the consumer in band 2 we have
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-L_{2}(\prescript{t}{}\nu_{2})f(\prescript{t}{}A+y_{2}-\prescript{t}{}\nu_{2}+y_{1})+(1-L_{2}(\prescript{t}{}\nu_{2}))f(\prescript{t}{}A+y_{2}-\prescript{t}{}\nu_{2}+y_{2}) & =0
+L_{2}(\prescript{t}{}\nu_{2})\pi(\prescript{t}{}A+y_{2}-\prescript{t}{}\nu_{2}+y_{1})+(1-L_{2}(\prescript{t}{}\nu_{2}))\pi(\prescript{t}{}A+y_{2}-\prescript{t}{}\nu_{2}+y_{2}) & =0
 \end{align*}
 
 \end_inset
@@ -1497,9 +1651,9 @@ Therefore,
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-L(\prescript{t}{}\nu_{2}) & =\frac{1}{1-\frac{f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})}{f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2})}}
-\end{align*}
+\begin{align}
+L(\prescript{t}{}\nu_{2}) & =\frac{1}{1-\frac{\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})}{\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2})}}\label{eq:l_lte}
+\end{align}
 
 \end_inset
 
@@ -1507,7 +1661,7 @@ L(\prescript{t}{}\nu_{2}) & =\frac{1}{1-\frac{f(\prescript{t}{}A_{2}+y_{2}-\pres
 \end_layout
 
 \begin_layout Standard
-The values 
+
 \family roman
 \series medium
 \shape up
@@ -1520,26 +1674,56 @@ The values
 \uwave off
 \noun off
 \color none
+Combining the population stability condition in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:population_stability"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_inset Formula $\prescript{t}{}\nu_{1},\prescript{t}{}\nu_{2},\prescript{t}{}A_{1},\prescript{t}{}A_{2}$
 \end_inset
 
- should be so that f is increasing on for user 1 and decreasing for user
- 2.
- This means there should be valley (e.g.
- like 
-\begin_inset Formula $(x-a)^{2}$
+with the long-term asset stability conditions in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:w_lte"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
-).
- This is an important finding - a cost structure that comes into long-term
- equilibrium must discourage more income at higher assets but encourage
- more income at lower assets.
- The population constraint further ensures that the proportion of cost imposed
- by the income differences must also be the same
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:l_lte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ therefore leads to 
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
 \begin_inset Formula 
 \begin{align}
-\frac{f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})} & =\frac{f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})}{f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2})}<1\label{eq:f_shape}
+\frac{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})} & =\frac{\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})}{\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2})}<1\label{eq:f_shape}
 \end{align}
 
 \end_inset
@@ -1548,121 +1732,27 @@ The values
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
 
-\begin_layout Plain Layout
-
-%asset_cost_categs <- subset(lsms_normalizer()@categories_non_basic_wassets(),gr
-oup=="asset_costs")$shortname
-\end_layout
-
-\begin_layout Plain Layout
-
-%ac2012<-ddply(subset(c2012,is.element(shortname,asset_cost_categs) & !is.na(cost)
-),.(hhid),summarise,ac=sum(cost))
-\end_layout
-
-\begin_layout Plain Layout
-
-%asset_mtms_2012 = asset_mtms(a2012,"bed","2012")
-\end_layout
-
-\begin_layout Plain Layout
-
-%assetslog2012 <- ddply(asset_mtms_2012,.(hhid2012),summarise,lnA0=log(sum(number.
-2012*mtm.2012)),A0=sum(number.2012*mtm.2012))
-\end_layout
-
-\begin_layout Plain Layout
-
-%ac2012<- merge(plyr::rename(ac2012,c("hhid"="hhid2012")),assetslog2012
- ,by=c("hhid2012"))
-\end_layout
-
-\end_inset
-
-
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+The two conditions mean the presence of a cost structure that discourages
+ assets at higher asset-level but encourages higher asset at lower asset-levels
+ in the same measure.
 \end_layout
 
 \begin_layout Standard
-We can see that the long-term equilibrium restriction for the cost-function
- is not what is observed in the data (see the plot of logarithms of asset-costs
- and asset-values ) 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% need not write in the chapter
-\end_layout
-
-\end_inset
-
-.
- Without the long-term stability constraint the population constraint 
-\begin_inset Formula $W(\prescript{t}{}\nu_{1})=L(\prescript{t}{}\nu_{2})$
-\end_inset
-
- only implies 
-\begin_inset Formula $\omega\nu_{1}+\lambda\nu_{2}=\omega\bar{\omega}+\lambda\bar{\lambda}$
-\end_inset
-
- in every short-term equilbrium.
- The next question is whether this is observed in the data.
-\end_layout
-
-\begin_layout Standard
-[Backtracking on cost-function] We don't however consider the costs involved
- in moving to the city.
- While we explain the someone moving to the city with the utility view,
- that there are rural and urban poor consumers in long-term equilibrium
- implies a certain structure of the cost-function where the net asset value
- (
-\begin_inset Formula $value-costs$
-\end_inset
-
-) is less when she gets more assets for the poor consumer.
- Due to the amenities that are granted solely on the basis of being in a
- rich area the consumer being in the urban might make acquiring more assets
- more costly.
- By just being in the city - where the consumer avails more amenities her
- increased income would mean higher expense.
- While that may bring felicity to the consumer (that matters in the utility
- function), the costs increases without any asset growth in the long-term
- function.
- Being educated with less money is more costly because all the class/environment
--related costs it brings - but having lower class (
-\begin_inset Formula $y_{1}$
-\end_inset
-
-) when you are asset-rich is less punitive because you've already made it
- with the high assets.
- With higher acquired assets 
-\begin_inset Formula $A_{2}$
-\end_inset
-
- in the long-term equilibrium in, the net value (
-\begin_inset Formula $value-costs$
-\end_inset
-
-) would be less after she loses her band to get income
-\begin_inset Formula $y_{1}$
-\end_inset
-
-.
- Another way of saying is that for the long-term income inequality necessitates
- that higher income 
-\begin_inset Formula $y_{1}\rightarrow y_{2}$
-\end_inset
-
- imposes some costs on the consumer.
-\end_layout
-
-\begin_layout Standard
-[Backtracking on cost-function] The shape of the cost-function necessitated
- by the cost-function can be inferred by observing that for lower assets
- 
+The shape of the cost-function necessitated by the cost-function can be
+ inferred by observing that for lower assets 
 \begin_inset Formula $a_{1},a_{2}$
 \end_inset
 
@@ -1773,323 +1863,78 @@ log(asset-costs) vs log(asset-values)
 
 \end_layout
 
-\begin_layout Subsection
-Relative wealth equilibrium
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%asset_cost_categs <- subset(lsms_normalizer()@categories_non_basic_wassets(),gr
+oup=="asset_costs")$shortname
 \end_layout
 
-\begin_layout Standard
-In equilibrium, the relative wealth could just be as stable as the differential
- income.
- This is a less stringent condition as it allows the individual 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\begin_layout Plain Layout
 
-\begin_inset Formula $\prescript{t}{}A_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\prescript{t}{}A_{2}$
-\end_inset
-
- to grow indefinitely.
- But imposing population condition this would imply that both bands face
- the same costs.
- This is also not observed in the data.
+%ac2012<-ddply(subset(c2012,is.element(shortname,asset_cost_categs) & !is.na(cost)
+),.(hhid),summarise,ac=sum(cost))
 \end_layout
 
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-W_{1}(\prescript{t}{}\nu_{1})f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})+(1-W_{1}(\prescript{t}{}\nu_{1}))f(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})\\
-=L_{2}(\prescript{t}{}\nu_{2})f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})+(1-L_{2}(\prescript{t}{}\nu_{2}))f(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2})
-\end{multline*}
+\begin_layout Plain Layout
+
+%asset_mtms_2012 = asset_mtms(a2012,"bed","2012")
+\end_layout
+
+\begin_layout Plain Layout
+
+%assetslog2012 <- ddply(asset_mtms_2012,.(hhid2012),summarise,lnA0=log(sum(number.
+2012*mtm.2012)),A0=sum(number.2012*mtm.2012))
+\end_layout
+
+\begin_layout Plain Layout
+
+%ac2012<- merge(plyr::rename(ac2012,c("hhid"="hhid2012")),assetslog2012
+ ,by=c("hhid2012"))
+\end_layout
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subsection
-Non-LTE Arguments (data-driven)
+\begin_layout Standard
+Summary
 \end_layout
 
 \begin_layout Standard
-Since we have given up on long-term equilibrium on grounds of data, let's
- consider what short-term equilbrium entails.
- This only guarantees that symmetrical swap i.e.
- 
-\begin_inset Formula $W(\prescript{t}{}\nu_{1})=L(\prescript{t}{}\nu_{2})$
-\end_inset
-
- .
-\end_layout
-
-\begin_layout Standard
-The summary of unknowns
+The constraints we consider are 
 \end_layout
 
 \begin_layout Standard
 1.
- 
-\begin_inset Formula $\prescript{t}{}A_{1}$
-\end_inset
-
-
+ The poulation constraint
 \end_layout
 
 \begin_layout Standard
 2.
  
-\begin_inset Formula $\prescript{t}{}A_{2}$
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-3.
- 
-\begin_inset Formula $\prescript{t}{}\nu_{1}$
+The constraints are implied on 
+\begin_inset Formula $\omega,\bar{\omega},\alpha$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-4.
- 
-\begin_inset Formula $\prescript{t}{}\nu_{2}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-5.
- 
-\begin_inset Formula $\bar{\omega}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-6.
- 
-\begin_inset Formula $\bar{\lambda}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\prescript{t}{}A_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\prescript{t}{}A_{2}$
-\end_inset
-
- may never stabilise - because if they did stabilise, then a cost-function
- with a dip must exist.
- Therefore, since we cannot put any condition on 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- - the cost-function approach itself must be discarded.
-\end_layout
-
-\begin_layout Standard
-The summary of conditions
-\end_layout
-
-\begin_layout Standard
-1.
- population constraint 
+ due to two constraint.
+ First is the population constraint which implies 
 \begin_inset Formula $W(\prescript{t}{}\nu_{1})=L(\prescript{t}{}\nu_{2})$
 \end_inset
 
- which implies 
-\begin_inset Formula $\omega\nu_{1}^{*}+\lambda\nu_{2}^{*}=\omega\bar{\omega}+\lambda\bar{\lambda}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-2.
- 
-\begin_inset Formula $\prescript{t}{}\nu_{1}=g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A_{1},\omega,\bar{\omega},\alpha,\beta)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-3.
- 
-\begin_inset Formula $\prescript{t}{}\nu_{2}=g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A_{2},\lambda,\bar{\lambda},\alpha,\beta)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-4.
- 
-\begin_inset Formula $W_{1}(\prescript{t}{}\nu_{1})=\frac{1}{1-\frac{f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{f(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1})}}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-5.
- 
+.
+ The second is the long-term constraint which we now elaborate.
 \end_layout
 
 \begin_layout Standard
 =====
-\end_layout
-
-\begin_layout Standard
-Since 
-\begin_inset Formula $W(\nu_{1})=\frac{1}{1+e^{-\omega(\nu-\bar{\omega})}}$
-\end_inset
-
-, 
-\begin_inset Formula $W'(\nu_{1})=\frac{\omega e^{-\omega(\nu-\bar{\omega})}}{(1+e^{-\omega(\nu-\bar{\omega}})^{2}}$
-\end_inset
-
-we have
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}+\frac{\omega e^{-\omega(\nu-\bar{\omega})}}{(1+e^{-\omega(\nu-\bar{\omega}})^{2}}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}+\\
-\frac{\psi\beta}{1+e^{-\omega(\nu-\bar{\omega})}}\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Multiplying with 
-\begin_inset Formula $(1+e^{-\omega(\nu-\bar{\omega}})^{2}$
-\end_inset
-
-,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-(1+e^{-\omega(\nu-\bar{\omega}})^{2}(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\\
-+\omega e^{-\omega(\nu-\bar{\omega})}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}+\\
-\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-(1+e^{-2\omega(\nu-\bar{\omega})}+2e^{-\omega(\nu-\bar{\omega})})(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\\
-+\omega e^{-\omega(\nu-\bar{\omega})}\times\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}=\\
-\psi\beta\{((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}-\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}\}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Letting 
-\begin_inset Formula $z\equiv e^{-\omega(\nu-\bar{\omega})}$
-\end_inset
-
- a solution exists for the following quadratic in 
-\begin_inset Formula $z$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})z^{2}+z\\
-+[2(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\omega\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}]z\\
-+(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}=0
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-only as long as 
-\begin_inset Formula 
-\begin{multline*}
-[2(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\omega\{(y_{2}-y_{1})-\psi((\prescript{t}{}A+y_{2}-\nu_{1})^{\beta}-(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta})\}]^{2}\\
->4\times(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})\times[(1-\psi\beta(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1})+\psi\beta\{(\prescript{t}{}A+y_{1}-\nu_{1})^{\beta-1}-(\prescript{t}{}A+y_{2}-\nu_{1})^{\beta-1}\}]
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We test whether the optimal solution exists empirically for the function
- by choosing arbitrary values of 
-\begin_inset Formula $\psi,\beta,\omega,\bar{\omega}$
-\end_inset
-
-.
- There is curvature to be optimised - but the more important question is
- whether the summation of 
-\begin_inset Formula $W(\nu_{1})k(\prescript{t}{}A+y_{2}-\nu_{1})+(1-W(\nu_{1}))k(\prescript{t}{}A+y_{1}-\nu_{1})$
-\end_inset
-
- converges to zero over time.
- For 
-\begin_inset Formula $y_{1}=100,y_{2}=100$
-\end_inset
-
-, 
-\begin_inset Formula $\omega=1$
-\end_inset
-
-, 
-\begin_inset Formula $\bar{\omega}=30,\beta=1.1,\psi=0.3$
-\end_inset
-
-.
- If costs of assets don't increase we may never have an equilibrium.
- Now the next question is whether we can have a 
-\begin_inset Formula $\nu_{1}^{*}<y_{1}$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -2108,974 +1953,6 @@ We test whether the optimal solution exists empirically for the function
 
  at every instance.
  Assuming logistic form, this condition means in the finite horizon:
-\end_layout
-
-\begin_layout Subsection
-Short-term Equilibria
-\end_layout
-
-\begin_layout Standard
-[Introduce 
-\begin_inset Formula $L_{k}(\nu),W_{k}(\nu)$
-\end_inset
-
- over the short-term - possibly representing them with different symbols
- - and emphasise that they are not the same as those implied by the long-term
- mobility - Short-term means 
-\begin_inset Formula $L(\nu),W(\nu)$
-\end_inset
-
- need not remain the same for eternity but can change - How do short-term
- 
-\begin_inset Formula $L,W$
-\end_inset
-
- combine]
-\end_layout
-
-\begin_layout Standard
-[How do short-term 
-\begin_inset Formula $L,W$
-\end_inset
-
- combine] Let's assume that 
-\begin_inset Formula $\prescript{}{T}W(\nu),\prescript{}{T}L(\nu)$
-\end_inset
-
- is at time 
-\begin_inset Formula $T$
-\end_inset
-
-.
- What is the effective 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\prescript{}{(T_{1},T_{2})}W(\nu),\prescript{}{(T_{1},T_{2})}L(\nu)$
-\end_inset
-
- in the interval 
-\begin_inset Formula $(T_{1},T_{2})$
-\end_inset
-
-? This sum must converge to the long-term 
-\begin_inset Formula $L,W$
-\end_inset
-
- so that 
-\begin_inset Formula $W(\nu_{1})+L(\nu_{2})=1$
-\end_inset
-
- constraint.
- Let's assume that 
-\begin_inset Formula $\nu_{1},\nu_{2}$
-\end_inset
-
- chosen by the consumer change just at the same time as short-term 
-\begin_inset Formula $L,W$
-\end_inset
-
- change so every 
-\begin_inset Formula $L,W$
-\end_inset
-
- corresponds to a unique 
-\begin_inset Formula $\nu_{1},\nu_{2}$
-\end_inset
-
- and we can take 
-\begin_inset Formula $L,W,\nu_{1},\nu_{2}$
-\end_inset
-
- as a one instance of the game.
- So the question now do the two instances of the game 
-\begin_inset Formula $(\prescript{}{T_{1}}W,\prescript{}{T_{1}}L,\prescript{}{T_{1}}\nu_{1},\prescript{}{T_{1}}\nu_{2})$
-\end_inset
-
- and 
-\begin_inset Formula $(\prescript{}{T_{2}}W,\prescript{}{T_{2}}L,\prescript{}{T_{2}}\nu_{1},\prescript{}{T_{2}}\nu_{2})$
-\end_inset
-
- correspond to a unique  
-\begin_inset Formula $(\prescript{}{T_{1}+T_{2}}W,\prescript{}{T_{1}+T_{2}}L,\prescript{}{T_{1}+T_{2}}\nu_{1},\prescript{}{T_{1}+T_{2}}\nu_{2})$
-\end_inset
-
- ?
-\end_layout
-
-\begin_layout Assumption
-\begin_inset CommandInset label
-LatexCommand label
-name "assu:LWnu_set"
-
-\end_inset
-
-
-\begin_inset Formula $L,W$
-\end_inset
-
- do not change more or less frequently than the consumer selects 
-\begin_inset Formula $\nu$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-[Combing two short-term puzzles different from multiple time horizons] This
- problem is not about the consumer's time-horizons themselves being longer.
- Due to the assumption 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "assu:LWnu_set"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the consumer's horizon is coincides with the 
-\begin_inset Formula $L,W$
-\end_inset
-
-.
- As we now see the starting wealth 
-\begin_inset Formula $A$
-\end_inset
-
-, the incomes 
-\begin_inset Formula $y_{1},y_{2}$
-\end_inset
-
- and the initial values 
-\begin_inset Formula $L(0)$
-\end_inset
-
- and 
-\begin_inset Formula $W(0)$
-\end_inset
-
- (if the exact forms of 
-\begin_inset Formula $L,W$
-\end_inset
-
- are not assumed) are all required for there to be unique 
-\begin_inset Formula $\nu_{1},\nu_{2}$
-\end_inset
-
- selected by the consumer.
-\end_layout
-
-\begin_layout Standard
-To explore short-term Nash equilibria in the population-preserving status
- competitions, we assume that the consumers optimise total assets accumulated
- subject to their band-reference in a single-period.
- In other words, the consumer just has one life and a one shot-investment
- to make towards her life-time status.
- As mentioned before, the consumer receives a higher utility from the same
- value of assets if she is in a poorer band compared to when she is in a
- richer band.
- It is worth emphasising that the utility to the consumer considers the
- total assets acquired by the consumer rather than the new income received
- in successive period.
- Finally, the consumers are assumed to save everything up at the end of
- first period i.e.
- they do not spend on status consumption at the end of their lives.
- This holds for when higher number of periods are considered - the consumption
- 
-\begin_inset Formula $\nu$
-\end_inset
-
- in the last period is always zero for all the consumers regardless of how
- much wealth they have amassed.
-\end_layout
-
-\begin_layout Standard
-Let's denote 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-the consumption towards status competitions in the period 
-\begin_inset Formula $t$
-\end_inset
-
- in band 
-\begin_inset Formula $k$
-\end_inset
-
- as 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
-\begin_inset Formula $\prescript{t}{}\nu_{k}$
-\end_inset
-
-.
- Considering the one-period horizon, the consumer in band 1 must choose
- 
-\begin_inset Formula $\prescript{1}{}\nu_{1}$
-\end_inset
-
- to maximise her expected utility in bands 2 and 1.
- As the values 
-\begin_inset Formula $\begin{pmatrix}\prescript{2}{}\nu_{1} & \prescript{2}{}\nu_{2}\end{pmatrix}=\begin{pmatrix}0 & 0\end{pmatrix}$
-\end_inset
-
- are known for both the consumers, the consumer in band 1 with a starting
- wealth 
-\begin_inset Formula $A$
-\end_inset
-
- would select 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\prescript{1}{}\nu_{1}$
-\end_inset
-
- so that her expected utility in the next period is the following
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula 
-\begin{alignat}{1}
-W(\prescript{1}{}\nu_{1})\ u_{2}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{2}) & +(1-W(\prescript{1}{}\nu_{1}))u_{1}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{1})\label{eq:one_period_band_1_optim}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The first term in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:one_period_band_1_optim"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- includes the consumer's expected accumulation if she reaches the band 2
- while the second term considers the accumulation if she remains in the
- band 1.
- The utility functions for the same level of assets are different in bands
- 1 and 2 - hence the use of functions 
-\begin_inset Formula $u_{1}(\cdot)$
-\end_inset
-
- and 
-\begin_inset Formula $u_{2}(\cdot)$
-\end_inset
-
- in the second and first terms respectively.
- The first-order conditions for above optimisation would have 
-\begin_inset Formula $\prescript{1}{}\nu_{1}$
-\end_inset
-
- as the only unknown so that with a known 
-\begin_inset Formula $W_{1}(0)$
-\end_inset
-
- an initial value linear differential equation would follow.
- 
-\end_layout
-
-\begin_layout Standard
-For further analyses, we use a specific form of utility that allows the
- assets in the poor income band to have higher utility for the consumer
- than in the richer band
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-u_{k}(A) & =\Gamma_{k}A^{\alpha},0<\alpha<1\label{eq:utility_function}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Therefore an asset value 
-\begin_inset Formula $\prescript{t}{}A$
-\end_inset
-
- is 
-\begin_inset Formula $\Gamma_{k}/\Gamma_{k+1}$
-\end_inset
-
- units more desirable in the band 
-\begin_inset Formula $k$
-\end_inset
-
- than in band 
-\begin_inset Formula $k+1$
-\end_inset
-
- with the above form.
- Assuming risk-neutral EUT consumers, the utility in the Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:utility_function"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- implies the following expected utility optimise by the band 1 consumer
- (see Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:one_period_band_1_optim"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- )
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-W(\prescript{1}{}\nu_{1})\ \Gamma_{2}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{2})^{\alpha}+(1-W(\prescript{1}{}\nu_{1}))\Gamma_{1}(A+y_{1}-\prescript{1}{}\nu_{1}+y_{1})^{\alpha}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Representing 
-\begin_inset Formula $M_{1}\equiv A+y_{1}+y_{1}$
-\end_inset
-
-and 
-\begin_inset Formula $M_{2}\equiv A+y_{1}+y_{2}$
-\end_inset
-
-, the solution for the optimisation of the above expected utility (see Appendix)
- is the following
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline}
-W(\nu_{1})=\frac{W(0)(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})}{\Gamma_{2}(M_{2}-\nu_{1})^{\alpha}-\Gamma_{1}(M_{1}-\nu_{1})^{\alpha}}\\
-+\frac{\Gamma_{1}(M_{1}{}^{\alpha}-(M_{1}-\nu_{1})^{\alpha})}{\Gamma_{2}(M_{2}-\nu_{1})^{\alpha}-\Gamma_{1}(M_{1}-\nu_{1})^{\alpha}}\label{eq:solution_1}
-\end{multline}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Notice that the singularity is avoided in the above solution as long as
- the condition 
-\begin_inset Formula $\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}\rightarrow0$
-\end_inset
-
- is not true.
- The status competition would indeed fall apart when 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- would need to be too high for there to be a 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\nu$
-\end_inset
-
- selected by the consumer.
- 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-As a CDF, 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- is a bounded (i.e.
- 
-\begin_inset Formula $W(\nu)\in[0,1]$
-\end_inset
-
-), non-decreasing and a convex function while the right hand side of Equation
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:solution_1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- is an increasing function - implying that there would always be a unique
- solution to the Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:solution_1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- (for given initial conditions e.g.
-\begin_inset Formula $W(0)$
-\end_inset
-
-,
-\begin_inset Formula $L(0)$
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-An equivalent solution is implied for the consumer in band 2.
- Considering the utility corresponding to the Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:one_period_band_1_optim"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- the consumer in band 2 would optimise the following utility.
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula 
-\begin{alignat}{1}
-(1-L_{2}(\prescript{1}{}\nu_{2}))\ u_{2}(A+y_{1}-\prescript{1}{}\nu_{2}+y_{2})+L_{2}(\prescript{1}{}\nu_{2})u_{1}(A+y_{1}-\prescript{1}{}\nu_{2}+y_{1})\label{eq:one_period_band_2_optim}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Using the same notation as above, the utility can be rewritten as
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-(1-L(\nu))\Gamma_{2}(M_{2}-\nu)^{\alpha}+L(\nu)\Gamma_{1}(M_{1}-\nu)^{\alpha}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The first order conditions for the above function lead to the following
- equation
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula 
-\begin{alignat*}{1}
-L'(\nu) & =L(\nu)\alpha\frac{\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}+\frac{\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The solution for the above equation is
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather}
-L(\nu_{2})=\frac{L(0)(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})}{\Gamma_{2}(M_{2}-\nu_{2})^{\alpha}-\Gamma_{1}(M_{1}-\nu_{2})^{\alpha}}+\label{eq:solution_2}\\
-\frac{\Gamma_{2}(M_{2}^{\alpha}-(M_{2}-\nu_{2})^{\alpha})}{\Gamma_{2}(M_{2}-\nu_{2})^{\alpha}-\Gamma_{1}(M_{1}-\nu_{2})^{\alpha}}\nonumber 
-\end{gather}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Notice that a rewarding 
-\begin_inset Formula $W_{1}(\nu)$
-\end_inset
-
- would mean high probability to be promoted to band 2 while a lower 
-\begin_inset Formula $L_{2}(\nu)$
-\end_inset
-
- means more security to stay in band 2 for a low cost.
- It is worth noting that in the solution equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:solution_1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:solution_2"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the initial values 
-\begin_inset Formula $L(0)$
-\end_inset
-
- and 
-\begin_inset Formula $W(0)$
-\end_inset
-
- could represent a range of completely different scenarios.
- For example, 
-\begin_inset Formula $L(0)>0$
-\end_inset
-
- and 
-\begin_inset Formula $W(0)=0$
-\end_inset
-
- would correspond to a situation where by not participating in the status
- consumption, the consumer is likely to lose her band and not have any chance
- to be promoted to a higher band.
- Thus even though the long-term constraint 
-\begin_inset Formula $W(\nu_{1})+L(\nu_{2})\rightarrow1$
-\end_inset
-
- to optimal consumer selections 
-\begin_inset Formula $\nu_{1},\nu_{2}$
-\end_inset
-
-, the two do complement each other in the short-term.
-\end_layout
-
-\begin_layout Standard
-[Combined scenarios] Similarly, if 
-\begin_inset Formula $W(0)>0$
-\end_inset
-
- and 
-\begin_inset Formula $L(0)=0$
-\end_inset
-
- then the consumer does not lose her position by not spending on status
- consumption but still has a decent chance of getting to higher state.
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-The set up 
-\begin_inset Formula $W(0)>0$
-\end_inset
-
- and 
-\begin_inset Formula $L(0)=0$
-\end_inset
-
- cannot correspond to 
-\begin_inset Formula $\nu_{1}=\nu_{2}=0$
-\end_inset
-
- in the long-term but can 
-\begin_inset Formula $W(0)>0$
-\end_inset
-
- and 
-\begin_inset Formula $L(0)=0$
-\end_inset
-
- imply a short-term equilibrium? Notice that we do need to fix 
-\begin_inset Formula $L(\nu_{0}),W(\nu_{0})$
-\end_inset
-
- (e.g.
- 
-\begin_inset Formula $\nu_{0}=0$
-\end_inset
-
-) for a unique solution.
- The consumers can therefore choose 
-\begin_inset Formula $\nu_{1},\nu_{2}$
-\end_inset
-
- only if 
-\begin_inset Formula $W(0)$
-\end_inset
-
- and 
-\begin_inset Formula $L(0)$
-\end_inset
-
- known along with 
-\begin_inset Formula $A,y_{1},y_{2}$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $L,W$
-\end_inset
-
- change in every instance of the game, we don't solve the multi-period problem.
- However, we must record what happens on average after playing the game.
- Do consumer differences in assets grow over time if consumers starts with
- disparate 
-\begin_inset Formula $A_{1},A_{2}$
-\end_inset
-
-? We visit this in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:CombinedLongShortTerm"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsubsection
-Comparative Statics
-\end_layout
-
-\begin_layout Standard
-Looking at the comparative statics of the above solution, increasing the
- disposable income 
-\begin_inset Formula $y_{1}$
-\end_inset
-
- decreases the required 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- by pushing the right-hand-side (RHS) of the solution equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:solution_1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- upwards.
- The status consumption pressures seem to be relieved as income gap narrows.
- Increasing 
-\begin_inset Formula $y_{2}$
-\end_inset
-
- moves the RHS of Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:solution_1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- down and requires a higher amount 
-\begin_inset Formula $\nu$
-\end_inset
-
- to have a matching 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
-.
- The status consumption seem to intensify as the income gap grows.
- As suppressing 
-\begin_inset Formula $y_{1}$
-\end_inset
-
- and increasing 
-\begin_inset Formula $y_{2}$
-\end_inset
-
- both increase status consumption in the model, the argument that lower
- relative incomes may give the consumers more incentives to improve their
- well-being may still hold but only as long as the status competitions are
- feasible.
- Equivalently for 
-\begin_inset Formula $L_{2}(\nu)$
-\end_inset
-
-, increasing 
-\begin_inset Formula $y_{1}$
-\end_inset
-
- implies less 
-\begin_inset Formula $\nu$
-\end_inset
-
- required in the short-term equilibrium for security of staying in the band
- (i.e.
- consumers in band 2 care less about losing their band) and increasing 
-\begin_inset Formula $y_{2}$
-\end_inset
-
- shifts 
-\begin_inset Formula $L(\nu_{2})$
-\end_inset
-
- down and requires more 
-\begin_inset Formula $\nu_{2}$
-\end_inset
-
- to be put up by consumers for them to preserve their band identity.
- Once again, the narrowing of income bands decreases status consumption
- - as if closer incomes gaps were to cause less 
-\begin_inset Quotes eld
-\end_inset
-
-insecurity
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Looking at the role which 
-\begin_inset Formula $\Gamma_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\Gamma_{2}$
-\end_inset
-
- play towards consumer choice, we find that increasing 
-\begin_inset Formula $\Gamma_{1}$
-\end_inset
-
- decreases the status consumption as it brings more utility from having
- less assets.
- Equivalently, increasing 
-\begin_inset Formula $\Gamma_{2}$
-\end_inset
-
- requires more 
-\begin_inset Formula $\nu_{2}$
-\end_inset
-
- and increases the status consumption - by increasing the perceived benefits
- from being in a higher income band.
- With the starting wealth 
-\begin_inset Formula $A$
-\end_inset
-
- itself, we see that increasing 
-\begin_inset Formula $A$
-\end_inset
-
- lowers the required 
-\begin_inset Formula $\nu$
-\end_inset
-
- for 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- while decreasing 
-\begin_inset Formula $A$
-\end_inset
-
- raises the required 
-\begin_inset Formula $\nu$
-\end_inset
-
-.
- With 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
-, higher starting assets 
-\begin_inset Formula $A$
-\end_inset
-
- move the RHS of the solution in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:solution_2"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- up and lower the required 
-\begin_inset Formula $\nu$
-\end_inset
-
- .
- Similarly, low 
-\begin_inset Formula $A$
-\end_inset
-
- requires higher 
-\begin_inset Formula $\nu$
-\end_inset
-
- for 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
-.
- With higher assets to start with, the consumers are expected to be less
- worried about asset loss.
-\end_layout
-
-\begin_layout Standard
-The above model predicts that the narrowing of income would reduce status
- consumption as well as the risk with future assets.
- Since there are limits to how much savings alone can improve the consumer's
- wealth, taking more risk through status consumption is hardly a waste for
- the consumer in the model.
- The risk through status competitions in fact works to reduce asset inequality.
- One could argue therefore that a policy that intend to improve savings
- (i.e.
- increase 
-\begin_inset Formula $A$
-\end_inset
-
- alone) but does not spur status consumption should fail to counter the
- effects of intrinsic income inequalities which may in turn be a result
- of persistent long-term geographic or social barriers.
 \end_layout
 
 \begin_layout Subsubsection
@@ -3256,75 +2133,6 @@ we ask ourselves if consumer differences in assets grow over time if consumers
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Subsubsection
-Fixed 
-\begin_inset Formula $L(\nu_{0}),W(\nu_{0})$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Without loss of generality, we look at functions 
-\begin_inset Formula $W$
-\end_inset
-
- which pass through the origin i.e.
- for all short-term functions 
-\begin_inset Formula $W(0)=0$
-\end_inset
-
- and 
-\begin_inset Formula $L(0)=1$
-\end_inset
-
-.
- This class of functions 
-\begin_inset Formula $W$
-\end_inset
-
- means that with no status consumption, the consumer would not move up.
- Similalrly, 
-\begin_inset Formula $L(0)=1$
-\end_inset
-
- means that the consumer is sure to lose her position if she does not have
- status consumption.
- This also means that the consumers would both never choose 
-\begin_inset Formula $\nu_{1}=\nu_{2}=0$
-\end_inset
-
- since that would break the long-term constraint (accumulation of disposable
- incomes alone is not sustainable).
- 
-\end_layout
-
-\begin_layout Standard
-Even in the short-term, we make sure that the swap mechanism is population
- preserving.
- This means that 
-\begin_inset Formula $W(\nu_{1}^{*})$
-\end_inset
-
- is the same as 
-\begin_inset Formula $L(\nu_{2}^{*})$
-\end_inset
-
-.
- The probability that the equilibrium pushes the consumer up is matched
- by the probability that the consumer goes down.
- This is the necessary requirement of the short-term equilibrium.
- From the solution this means 
-\begin_inset Formula 
-\begin{multline*}
-\frac{L(0)(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\Gamma_{2}(M_{2}^{\alpha}-(M_{2}-\nu_{2}^{*})^{\alpha})}{\Gamma_{2}(M_{2}-\nu_{2}^{*})^{\alpha}-\Gamma_{1}(M_{1}-\nu_{2}^{*})^{\alpha}}=\frac{W(0)(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\Gamma_{1}(M_{1}{}^{\alpha}-(M_{1}-\nu_{1}^{*})^{\alpha})}{\Gamma_{2}(M_{2}-\nu_{1}^{*})^{\alpha}-\Gamma_{1}(M_{1}-\nu_{1}^{*})^{\alpha}}
-\end{multline*}
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
@@ -3544,197 +2352,6 @@ However, if we're to look at the consumer's optimisation, then we need to
 \end_inset
 
  is satisfied in the short-run.
-\end_layout
-
-\begin_layout Standard
-[Long-term constraint with the second condition] The long-term solution
- is not interesting - since we all live in a world where relative wealth
- is hardly stable and is open to risks.
- That we cannot have a long-term stability of relative asset-differences
- is less controversial.
- The population constraint is however more realistic.
- Consider however the implications of when the second equation is provided
- with the long-term constraint 
-\begin_inset Formula $W(\nu_{1}^{*})+L(\nu_{2}^{*})=1$
-\end_inset
-
-.
- Together, both the constraints would mean 
-\begin_inset Formula $W(\nu_{1}^{*})=L(\nu_{2}^{*})=\frac{1}{2}$
-\end_inset
-
-.
- The consumers would have to have a 50-50 chance of being in having different
- income bands in the long-term.
- This shows how limiting the long-term constraint really is for the Nash-eqiulib
-ria.
- For what its worth, consider what the consumer's equilbrium would look
- like.
- Notice that 
-\begin_inset Formula $W(\nu_{1}^{*})=\frac{1}{2}\Rightarrow\nu_{1}^{*}=\bar{\omega}$
-\end_inset
-
- and 
-\begin_inset Formula $L(\nu_{2}^{*})=\frac{1}{2}\Rightarrow\nu_{2}^{*}=\bar{\omega}$
-\end_inset
-
-.
- The long-term equilibrium would thus be defined by how 
-\begin_inset Formula $\omega,\lambda$
-\end_inset
-
- may vary.
- The imposition of 
-\begin_inset Formula $\nu_{1}^{*}=\nu_{2}^{*}=\frac{1}{2}$
-\end_inset
-
- means that the short-term finite-horizon must also be set up i.e.
- 
-\begin_inset Formula $\lambda,\bar{\lambda},\omega,\bar{\omega}$
-\end_inset
-
- chosen for the game so that the consumer utility is maximised at 
-\begin_inset Formula $\nu_{1}^{*}=\bar{\omega}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{2}^{*}=\bar{\lambda}$
-\end_inset
-
-.
- This is quite limiting.
- Besides, instead of asking what a given game would mean in the long-term,
- we're answering what game would need to be set up for there to be a long-term
- stability.
- This is not important - but shows how limiting the long-term constraints
- really are to the short-term game.
- With the logistic function the utility optimised by the consumer is
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-u_{1}(\nu)=\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha}+e^{-\omega(\nu-\bar{\omega})}\Gamma_{1}(M_{1}-\nu)^{\alpha}}{1+e^{-\omega(\nu-\bar{\omega})}}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Since 
-\begin_inset Formula $1+e^{-\omega(\nu-\bar{\omega})}\ne0$
-\end_inset
-
-, 
-\begin_inset Formula $u_{1}(\nu)$
-\end_inset
-
- is maximised when
-\begin_inset Formula 
-\begin{multline*}
-(1+e^{-\omega(\nu-\bar{\omega})})(-\frac{dN}{d\nu})=\omega Ne^{-\omega(\nu-\bar{\omega})}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-where 
-\begin_inset Formula $N=\Gamma_{2}(M_{2}-\nu)^{\alpha}+e^{-\omega(\nu-\bar{\omega})}\Gamma_{1}(M_{1}-\nu)^{\alpha}$
-\end_inset
-
-.
- Now,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
--\frac{dN}{d\nu}=\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}+\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}e^{-\omega(\nu-\bar{\omega})}+e^{-\omega(\nu-\bar{\omega})}(M_{1}-\nu)^{\alpha-1}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Therefore,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-(1+e^{-\omega(\nu-\bar{\omega})})(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}+\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}e^{-\omega(\nu-\bar{\omega})}+e^{-\omega(\nu-\bar{\omega})}(M_{1}-\nu)^{\alpha-1})\\
-=\omega e^{-\omega(\nu-\bar{\omega})}(\Gamma_{2}(M_{2}-\nu)^{\alpha}+e^{-\omega(\nu-\bar{\omega})}\Gamma_{1}(M_{1}-\nu)^{\alpha})
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-or,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-(1+e^{\omega(\nu-\bar{\omega})})(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}+\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}e^{-\omega(\nu-\bar{\omega})}+e^{-\omega(\nu-\bar{\omega})}(M_{1}-\nu)^{\alpha-1})\\
-=\omega(\Gamma_{2}(M_{2}-\nu)^{\alpha}+e^{-\omega(\nu-\bar{\omega})}\Gamma_{1}(M_{1}-\nu)^{\alpha})
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}+\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}e^{-\omega(\nu-\bar{\omega})}+e^{-\omega(\nu-\bar{\omega})}(M_{1}-\nu)^{\alpha-1}+\alpha e^{\omega(\nu-\bar{\omega})}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}+\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}+(M_{1}-\nu)^{\alpha-1}\\
-=\omega\Gamma_{2}(M_{2}-\nu)^{\alpha}+\omega e^{-\omega(\nu-\bar{\omega})}\Gamma_{1}(M_{1}-\nu)^{\alpha}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-or,
-\begin_inset Formula $e^{-\omega(\nu-\bar{\omega})}=\frac{\omega\Gamma_{2}(M_{2}-\nu)^{\alpha}-\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}-(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}}{\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}+(M_{1}-\nu)^{\alpha-1}+\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\omega\Gamma_{1}(M_{1}-\nu)^{\alpha}}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-If 
-\begin_inset Formula $\nu=\bar{\omega}$
-\end_inset
-
-, a game can be set up to let consumer maximise utility at 
-\begin_inset Formula $\nu_{1}=\bar{\omega}$
-\end_inset
-
- as long as:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-(M_{2}-\bar{\omega})^{\alpha-1}(\omega\Gamma_{2}(M_{2}-\nu)-\bar{\omega}\alpha\Gamma_{2}) & =(M_{1}-\bar{\omega})^{\alpha-1}(\omega\Gamma_{1}(M_{1}-\bar{\omega})+2)
-\end{align*}
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -4253,421 +2870,50 @@ More detailed outcomes could be explored in the above set up if we assume
  in a way that makes more inequalities acceptable (and vice versa).
 \end_layout
 
-\begin_layout Section*
-APPENDIX
+\begin_layout Subsection
+Contrast with the conventional Approach
 \end_layout
 
 \begin_layout Standard
-We know that for 
-\begin_inset Formula $y'(t)=a(t)y(t)+b(t)$
+In the conventional approach of the intertemporal substitution, we would
+ argue that there is an observed rate of growth of assets which the consumer
+ - but this interest rate is a huge assumption it works only because we
+ want to observe consumption against long-term economic growth.
+ That consumers differentiate between items for status also because their
+ is a need associated with reference is discarded by the blanket assumption
+ that all assets must grow and thus all consumption gives a felicity.
+ All non-assets need not be consumed but invested in different streams -
+ education is a different consumption from jewelry and so on.
+ We therefore consider reference to be of key importance.
+ That consumers must optimise value with respect to reference provides a
+ better view of status consumption and does not require status consumption
+ to be futile.
+ Only fixing a function 
+\begin_inset Formula $J(nu)$
 \end_inset
 
- and 
-\begin_inset Formula $y(t_{0})=y_{0}$
-\end_inset
-
-we have the solution
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-y(t) & =y_{0}e^{A(t)}+e^{A(t)}\int_{t_{0}}^{t}e^{-A(s)}b(s)ds\label{eq:general_solution}
-\end{alignat}
-
-\end_inset
-
+ would tell us how soon the game would end etc..
  
 \end_layout
 
 \begin_layout Standard
-Here, 
-\begin_inset Formula $A(t)=\int_{t_{0}}^{t}a(s)ds$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Given 
-\begin_inset Formula $u_{k}(A)=\Gamma_{k}A^{\alpha}$
-\end_inset
-
-, we have
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-W(\nu)u_{2}(A+y_{1}-\nu+y_{2})+(1-W(\nu))u_{1}(A+y_{1}-\nu+y_{1})\\
-=W(\nu)\Gamma_{2}(A+y_{1}-\nu+y_{2})^{\alpha}+(1-W(\nu))\Gamma_{1}(A+y_{1}-\nu+y_{1})^{\alpha}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We rewrite the function 
-\begin_inset Formula $f(\nu)$
-\end_inset
-
- which is to be optimised by choosing 
-\begin_inset Formula $M_{1}=A+y_{1}+y_{1}$
-\end_inset
-
-and 
-\begin_inset Formula $M_{2}=A+y_{1}+y_{2}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-f(\nu)=W(\nu)(\Gamma_{2}(A+y_{1}-\nu+y_{2})^{\alpha}-\Gamma_{1}(A+y_{1}-\nu+y_{1})^{\alpha})+\Gamma_{1}(A+y_{1}-\nu+y_{1})^{\alpha}\\
-\Rightarrow f(\nu)=W(\nu)(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})+\Gamma_{1}(M_{1}-\nu)^{\alpha}
-\end{gather*}
-
-\end_inset
-
+[COMPARISON with intertemporal model does not arise in two-period models]
+ At this point it is worth contrasting this approach with the typical intertempo
+ral substitution approach where all assets must be consumed at the point.
+ Our approach is similar except that it refines the utility from the final
+ consumption as a bet towards the final asset-band.
+ So we have assumed a risk-neutral consumer who only ....
  
 \end_layout
 
 \begin_layout Standard
-The derivative 
-\begin_inset Formula $f'(\nu)$
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-f'(\nu) & =(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})W'(\nu)+W(\nu)(\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1})-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The first order condition 
-\begin_inset Formula $f'(\nu)$
-\end_inset
-
- implies
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-f'(\nu) & =0\Rightarrow(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})W'(\nu)=W(\nu)(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})+\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-W'(\nu) & =W(\nu)(\alpha\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}})+\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The characteristic function 
-\begin_inset Formula $A(t)=\int a(s)ds$
-\end_inset
-
- in the Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:general_solution"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- corresponds to the following (notice that this is defined only as long
- as 
-\begin_inset Formula $\Gamma_{1}(M_{1}-\nu)^{\alpha}\ne\Gamma_{2}(M_{2}-\nu)^{\alpha}$
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\int a(s)ds & =-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})+C
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Writing 
-\begin_inset Formula $D=log(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha})$
-\end_inset
-
- we have
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula 
-\begin{gather*}
-A(\nu)=\int_{0}^{\nu}a(s)ds=-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})-(-log(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha}))\\
-=log(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha})-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})\\
-=D-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Thus,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-A(\nu) & =D-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-and,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-e^{-A(s)} & =e^{log(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})-D}=e^{-D}(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Therefore,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-e^{A(\nu)} & =\frac{e^{D}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Now 
-\begin_inset Formula 
-\begin{gather*}
-\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\int_{\nu_{0}}^{\nu}e^{-D}(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})\times\frac{\alpha\Gamma_{1}(M_{1}-s)^{\alpha-1}}{\Gamma_{2}(M_{2}-s)^{\alpha}-\Gamma_{1}(M_{1}-s)^{\alpha}}\\
-=-\alpha e^{-D}\Gamma_{1}\int_{\nu_{0}}^{\nu}(M_{1}-s)^{\alpha-1}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The integration of the last term is 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\int_{\nu_{0}}^{\nu}(M_{1}-s)^{\alpha-1} & =-\frac{1}{\alpha}(M_{1}-s)^{\alpha}|_{\nu_{0}}^{\nu}=-\frac{1}{\alpha}((M_{1}-\nu)^{\alpha}-(M_{1}-\nu_{0})^{\alpha})
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Therefore,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds & =-\alpha e^{-D}\Gamma_{1}(-\frac{1}{\alpha}((M_{1}-\nu)^{\alpha}-(M_{1}-\nu_{0})^{\alpha}))=\frac{\Gamma_{1}((M_{1}-\nu)^{\alpha}-(M_{1}-\nu_{0})^{\alpha})}{e^{D}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-and
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-W(\nu) & =W(\nu_{0})e^{A(\nu)}+e^{A(\nu)}\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\frac{W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}+\frac{\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\label{eq:solution_1-1}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Equivalently for the 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
-, we have 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-L'(\nu) & =L(\nu)\alpha\frac{\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}+\frac{\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Again, the characteristic function is as follows
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-A(\nu) & =D-log(\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha})
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Therefore,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-e^{A(\nu)} & =\frac{e^{D}}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Further,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds=\int_{\nu_{0}}^{\nu}e^{-D}(\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha})\times\frac{\alpha\Gamma_{2}(M_{2}-s)^{\alpha-1}}{\Gamma_{1}(M_{1}-s)^{\alpha}-\Gamma_{2}(M_{2}-s)^{\alpha}}\\
-=-\alpha e^{-D}\Gamma_{2}\int_{\nu_{0}}^{\nu}(M_{2}-s)^{\alpha-1}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The integration of the last term is 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\int_{\nu_{0}}^{\nu}(M_{2}-s)^{\alpha-1} & =-\frac{1}{\alpha}(M_{2}-s)^{\alpha}|_{\nu_{0}}^{\nu}=-\frac{1}{\alpha}((M_{2}-\nu)^{\alpha}-(M_{2}-\nu_{0})^{\alpha})
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Therefore,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\int_{\nu_{0}}^{\nu}e^{-A(s)}b(s)ds & =\frac{\Gamma_{2}((M_{2}-\nu)^{\alpha}-(M_{2}-\nu_{0})^{\alpha})}{e^{D}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The solution for 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
- is therefore
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-L(\nu) & =\frac{L(\nu_{0})(\Gamma_{1}(M_{1})^{\alpha}-\Gamma_{2}(M_{2})^{\alpha})}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}+\frac{\Gamma_{2}((M_{2}-\nu)^{\alpha}-(M_{2}-\nu_{0})^{\alpha})}{\Gamma_{1}(M_{1}-\nu)^{\alpha}-\Gamma_{2}(M_{2}-\nu)^{\alpha}}
-\end{alignat*}
-
-\end_inset
-
-
+The typical intertemporal substitution model also assumes the opposite of
+ what have by using the assumption that nothing survives of the assets except
+ for the consumption.
+ What we're saying is that only that all consumption and accumulation must
+ go to asset-band identity.
+ That is like saying that effective wealth is zero at the end and the assets
+ grow at a certain rate.
 \end_layout
 
 \begin_layout Standard
@@ -4686,7 +2932,7 @@ newpage
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Part
 General 
 \begin_inset Formula $T$
 \end_inset
@@ -5001,25 +3247,6 @@ W_{1}(\prescript{T-1}{}\nu_{1}^{*}) & 1-L_{2}(\prescript{T-1}{}\nu_{2}^{*})
 \end_layout
 
 \begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
-
-\end_layout
-
-\begin_layout Standard
 [non-EUT consumer] The risk-aversion differences in the setup implied by
  is necessarily due to the curvature in consumer's expected utility i.e.
  through a given preference for probability.
@@ -5290,25 +3517,6 @@ ty that there would be fewest consumers outperforming her in the status
 
  are therefore continuous - for the discrete event of a consumer reaching
  the next band or not.
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
-
 \end_layout
 
 \begin_layout Standard
@@ -5622,25 +3830,6 @@ y_{k-1}-\prescript{t}{}\nu_{k-1}
 We can also confirm the results with the product rule.
 \end_layout
 
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
-
-\end_layout
-
 \begin_layout Section
 Simulation
 \end_layout
@@ -5859,25 +4048,6 @@ The consumers in other words are forced to be spread around a
 \end_layout
 
 \begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
-
-\end_layout
-
-\begin_layout Standard
 [CONSUMER'S GAIN FROM exchange] Does the consumer have any reason to hope
  for exchange - what are her reasons and what does she gain? Truly randomly
  she has the same chance of landing up in either higher or lower with 
@@ -5931,25 +4101,6 @@ The consumers in other words are forced to be spread around a
  
 \end_layout
 
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
-
-\end_layout
-
 \begin_layout Subsubsection
 Nash Equlibrium with normal distribution of 
 \family roman
@@ -5968,25 +4119,6 @@ Nash Equlibrium with normal distribution of
 \begin_inset Formula $\nu$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
 
 \end_layout
 
@@ -6079,25 +4211,6 @@ Considering a consumer at a band that is neither the lowest nor the highest,
 
 \begin_layout Subsubsection
 General Model
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
-
 \end_layout
 
 \begin_layout Standard
@@ -6251,25 +4364,6 @@ L(\bar{\nu}-\nu) & =\begin{cases}
 \end_layout
 
 \begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
-
-\end_layout
-
-\begin_layout Standard
 [SWAP PROBABILITY] We have assumed that the winner gets to trade places
  with the loser in the next band and gets to keep her assets.
  The consumer does not know the 
@@ -6318,573 +4412,6 @@ L(\bar{\nu}-\nu) & =\begin{cases}
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
-
-\end_layout
-
-\begin_layout Subsection
-Contrast with the conventional Approach
-\end_layout
-
-\begin_layout Standard
-In the conventional approach of the intertemporal substitution, we would
- argue that there is an observed rate of growth of assets which the consumer
- - but this interest rate is a huge assumption it works only because we
- want to observe consumption against long-term economic growth.
- That consumers differentiate between items for status also because their
- is a need associated with reference is discarded by the blanket assumption
- that all assets must grow and thus all consumption gives a felicity.
- All non-assets need not be consumed but invested in different streams -
- education is a different consumption from jewelry and so on.
- We therefore consider reference to be of key importance.
- That consumers must optimise value with respect to reference provides a
- better view of status consumption and does not require status consumption
- to be futile.
- Only fixing a function 
-\begin_inset Formula $J(nu)$
-\end_inset
-
- would tell us how soon the game would end etc..
- 
-\end_layout
-
-\begin_layout Standard
-[COMPARISON with intertemporal model does not arise in two-period models]
- At this point it is worth contrasting this approach with the typical intertempo
-ral substitution approach where all assets must be consumed at the point.
- Our approach is similar except that it refines the utility from the final
- consumption as a bet towards the final asset-band.
- So we have assumed a risk-neutral consumer who only ....
- 
-\end_layout
-
-\begin_layout Standard
-The typical intertemporal substitution model also assumes the opposite of
- what have by using the assumption that nothing survives of the assets except
- for the consumption.
- What we're saying is that only that all consumption and accumulation must
- go to asset-band identity.
- That is like saying that effective wealth is zero at the end and the assets
- grow at a certain rate.
-\end_layout
-
-\begin_layout Section
-Verification
-\end_layout
-
-\begin_layout Standard
-Verifying 
-\begin_inset Formula $f(\nu)$
-\end_inset
-
- with diff(w(x)*(G_2*(M_2-x)**a)+(1-w(x))*G_1*((M_1-x)**a) ,x) which gives:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $f'(\nu)=-\Gamma_{1}(M_{1}-\nu)^{\alpha}W'(\nu)+\Gamma_{2}(M_{2}-\nu)^{\alpha}W'(\nu)-\alpha\Gamma_{1}(1-W(\nu))(M_{1}-\nu)^{\alpha-1}-\alpha\Gamma_{2}W(\nu)(M_{2}-\nu)^{\alpha-1}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-or,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $f'(\nu)=\{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}\}W'(\nu)-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}+\alpha W(\nu)\{\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1}\}=0$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-or,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $f'(\nu)=\{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}\}W'(\nu)=\alpha W(\nu)\{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\}+\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The condition for 
-\begin_inset Formula $f'(\nu)=0$
-\end_inset
-
- thus leads to the following:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-W'(\nu) & =W(\nu)(\alpha\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}})+\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We can check that for y=result$minimum, the following expression is the
- same as dW_p(omega=omega,x=y):
-\end_layout
-
-\begin_layout Standard
-(W_p(omega=omega,x=y) * alpha * (G2*(M2-y)**(alpha-1)-G1*(M1-y)**(alpha-1)))/((G
-2*(M2-y)**(alpha)-G1*(M1-y)**(alpha)))+(alpha*G1*(M1-y)**(alpha-1))/(G2*(M2-y)**
-(alpha)-G1*(M1-y)**(alpha))
-\end_layout
-
-\begin_layout Standard
-This means that 
-\begin_inset Formula $W'(\nu)$
-\end_inset
-
- does evaluate to the above R-expression correctly - but our expression
- W_expr differs from W_p(omega=omega,x=result$minimum).
- This does not make sense.
-\end_layout
-
-\begin_layout Standard
-The next step is to using the formula expression (our solution) for 
-\begin_inset Formula $W'(\nu)$
-\end_inset
-
- to check the value of 
-\begin_inset Formula $f(\nu)$
-\end_inset
-
- which requires both 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- and 
-\begin_inset Formula $W'(\nu)$
-\end_inset
-
-.
- It also needs to be checked that the numerical value of the derivative
- 
-\begin_inset Formula $W'(\nu)\approx\frac{W(\nu+\delta)-W(\nu)}{\delta}$
-\end_inset
-
- calculated with 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- solution-expression also leads to 
-\begin_inset Formula $f'(\nu)=0$
-\end_inset
-
-.
- This also leads to 
-\begin_inset Formula $f'(\nu)=0$
-\end_inset
-
-.
- This just means that there are multiple 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- passing through the common 
-\begin_inset Formula $W(0)=0$
-\end_inset
-
- that would make 
-\begin_inset Formula $f'(\nu)=0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-1.
- Can we prove that the solution for 
-\begin_inset Formula $f'(\nu)=0$
-\end_inset
-
- gives a unique 
-\begin_inset Formula $\nu$
-\end_inset
-
-?
-\end_layout
-
-\begin_layout Standard
-2.
- Notice that we already have a form for 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
-! Is the exponential 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- to be in agreement with our 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
-?
-\end_layout
-
-\begin_layout Standard
-==
-\end_layout
-
-\begin_layout Standard
-Calculating the derivative 
-\begin_inset Formula $W'(\nu)$
-\end_inset
-
- for the solution 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
-,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-W(\nu)=\frac{W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\\
-\Rightarrow W'(\nu)=\frac{D(\frac{dN}{d\nu})-N(\frac{dD}{d\nu})}{D^{2}}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The solution is basically 
-\begin_inset Formula $\nu^{*}$
-\end_inset
-
- such that 
-\begin_inset Formula $W(\nu^{*})=\frac{W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}$
-\end_inset
-
-.
- 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- in the solution does not describe the CDF and depends on
-\end_layout
-
-\begin_layout Standard
-where 
-\begin_inset Formula $N=W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-and 
-\begin_inset Formula $D=\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $B=W(\nu_{0})(\Gamma_{2}(M_{2})^{\alpha}-\Gamma_{1}(M_{1})^{\alpha})$
-\end_inset
-
-,
-\end_layout
-
-\begin_layout Standard
-So 
-\begin_inset Formula 
-\begin{align*}
-W(\nu) & =\frac{B+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Notice that 
-\begin_inset Formula $\frac{dN}{d\nu}$
-\end_inset
-
- (using 
-\begin_inset Quotes eld
-\end_inset
-
-diff(G_1*((M_1-x0)**a-(M_1-x)**a),x)
-\begin_inset Quotes erd
-\end_inset
-
-) is
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\frac{dN}{d\nu} & =\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-\frac{dD}{d\nu} & =\alpha(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Now (using 
-\begin_inset Quotes eld
-\end_inset
-
-a*G_1*(M_1-x)**(a-1)*(G_2*(M_2-x)**a-G_1*(M_1-x)**a)
-\begin_inset Quotes erd
-\end_inset
-
-),
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-D(\frac{dN}{d\nu}) & =\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\times(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-or 
-\begin_inset Formula 
-\begin{alignat*}{1}
-D\frac{dN}{d\nu} & =\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-N\frac{dD}{d\nu}=(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}))\times\alpha(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
-=\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
--\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha}\times(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
-=\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
-\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}}+\alpha\Gamma_{2}\Gamma_{1}(M_{1}-\nu)^{\alpha}(M_{2}-\nu)^{\alpha-1}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Now after cancelling out the underlined terms,
-\begin_inset Formula 
-\begin{multline}
-D(\frac{dN}{d\nu})-N(\frac{dD}{d\nu})=\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\\
--\Gamma_{2}(M_{2}-\nu)^{\alpha-1})-\alpha\Gamma_{2}\Gamma_{1}(M_{1}-\nu)^{\alpha}(M_{2}-\nu)^{\alpha-1}\\
-=\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}\{(M_{2}-\nu)-(M_{1}-\nu)\}\\
--\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
-=\alpha\Gamma_{1}\Gamma_{2}(M_{2}-M_{1})(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}-\alpha(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha})(\Gamma_{1}(M_{1}-\nu)^{\alpha-1}-\Gamma_{2}(M_{2}-\nu)^{\alpha-1})\\
-=\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-M_{1})(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}}\\
-+\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\\
-+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu_{0})^{\alpha}(M_{2}-\nu)^{\alpha-1}}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu_{0})^{\alpha}(M_{1}-\nu)^{\alpha-1}}\label{eq:W_nu_derivative}
-\end{multline}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This expression should be the same as 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
- & W(\nu)(\alpha\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}})+\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}
-\end{alignat*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-or 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-\alpha\frac{B+\Gamma_{1}((M_{1}-\nu_{0})^{\alpha}-(M_{1}-\nu)^{\alpha})}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\times\frac{\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1}}{\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha}}\\
-+\frac{\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1}\times(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})}{(\Gamma_{2}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})^{2}}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-or 
-\begin_inset Formula 
-\begin{multline}
-\frac{1}{D^{2}}\times\{(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})\\
-+\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{2\alpha-1}\}\label{eq:expanded_expression}
-\end{multline}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Expanding the first term 
-\begin_inset Formula $(\alpha\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\alpha\Gamma_{1}(M_{1}-\nu)^{\alpha-1})(B+\Gamma_{1}(M_{1}-\nu_{0})^{\alpha}-\Gamma_{1}(M_{1}-\nu)^{\alpha})$
-\end_inset
-
- (with 
-\begin_inset Quotes eld
-\end_inset
-
-(a*G_2*(M_2-x)^(a-1)-a*G_1*(M_1-x)^(a-1))*(B+G_1*(M_1-x0)^a-G_1*(M_1-x)^a)
-\begin_inset Quotes erd
-\end_inset
-
-) as 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}\\
-+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}-\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu)^{\alpha}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}\\
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Rewriting (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:expanded_expression"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- ) by including its second term,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\frac{1}{D^{2}}\times\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}\\
--\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu)^{\alpha}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}+\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-or
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-\frac{1}{D^{2}}\times\underline{\alpha B(\Gamma_{2}(M_{2}-\nu)^{\alpha-1}-\Gamma_{1}(M_{1}-\nu)^{\alpha-1})}\\
-\underline{-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\\
-\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{2}-\nu)^{\alpha-1}(M_{1}-\nu_{0})^{\alpha}}+\\
-\underline{\alpha\Gamma_{1}\Gamma_{2}(M_{1}-\nu)^{\alpha-1}(M_{2}-\nu)^{\alpha-1}(M_{2}-M_{1})}-\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}+\alpha\Gamma_{1}^{2}(M_{1}-\nu)^{2\alpha-1}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We can see that the above expression is the same as what we have obtained
- as 
-\begin_inset Formula $D(\frac{dN}{d\nu})-N(\frac{dD}{d\nu})$
-\end_inset
-
- in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:W_nu_derivative"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-But is it that the expression only works if we calculate it's 
-\begin_inset Formula $W'(\nu)$
-\end_inset
-
- but 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- itself does not give the right solution? 
-\end_layout
-
-\begin_layout Standard
-==
 \end_layout
 
 \end_body
