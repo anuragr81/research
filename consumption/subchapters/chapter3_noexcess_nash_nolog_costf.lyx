@@ -1778,7 +1778,12 @@ noprefix "false"
 \begin_inset Formula $a_{1}-c(a_{1})>a_{2}-c(a_{2})\Rightarrow a_{2}-a_{1}<c(a_{2})-c(a_{1})$
 \end_inset
 
- means that the cost-function must be convex at lower-asset values and 
+ means that the cost-function grow fast at lower-asset values (i.e.
+ 
+\begin_inset Formula $\frac{dc}{dA}>1$
+\end_inset
+
+ for low levels of assets) and 
 \begin_inset Formula $\mathfrak{a}_{1}<\mathfrak{a}_{2}$
 \end_inset
 
@@ -1790,7 +1795,82 @@ noprefix "false"
 \begin_inset Formula $\mathfrak{a}_{1}-c(\mathfrak{a}_{1})<\mathfrak{a}_{2}-c(\mathfrak{a}_{2})\Rightarrow\mathfrak{a}_{2}-\mathfrak{a}_{1}>c(\mathfrak{a}_{2})-c(\mathfrak{a}_{1})$
 \end_inset
 
- means that the cost-function would be concave for high asset levels.
+ means that the cost-function would drop at high asset levels (i.e.
+ 
+\begin_inset Formula $\frac{dc}{dA}<1$
+\end_inset
+
+ at high levels of 
+\begin_inset Formula $A$
+\end_inset
+
+).
+ This also implies that the point of inflection is one where 
+\begin_inset Formula $\pi(A)=A\Rightarrow A-c(A)=A$
+\end_inset
+
+ or 
+\begin_inset Formula $c(A)=\frac{A}{2}$
+\end_inset
+
+.
+ If we have a non-decreasing cost-function, then 
+\begin_inset Formula $c(A)\le\frac{A}{2}$
+\end_inset
+
+ before the inflection point.
+ A linear-cost function where 
+\begin_inset Formula $\frac{dc}{dA}$
+\end_inset
+
+ is constant might not work because 
+\begin_inset Formula $A-c(A)$
+\end_inset
+
+ would become negative when 
+\begin_inset Formula $dc/dA>1$
+\end_inset
+
+ (coeff>1).
+ What's more useful is that 
+\begin_inset Formula $dc/dA>1\Rightarrow dc/dA-d(A)>0\Rightarrow d(A-c(A))/dA<0\Rightarrow$
+\end_inset
+
+
+\begin_inset Formula $\frac{d\pi}{dA}<0$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $\pi$
+\end_inset
+
+ is decreasing at low levels of assets.
+\end_layout
+
+\begin_layout Standard
+In fact, the condition is even stronger since the 
+\begin_inset Formula $\nu_{1},\nu_{2}$
+\end_inset
+
+ are positioned so that their relative positions are symmetrical i.e.
+ there must exist points 
+\begin_inset Formula $M,N$
+\end_inset
+
+ and values 
+\begin_inset Formula $x,y$
+\end_inset
+
+ so that 
+\begin_inset Formula $\frac{\pi(M+x)}{\pi(M)}$
+\end_inset
+
+=
+\begin_inset Formula $\frac{\pi(N)}{\pi(N+x)}<1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1857,23 +1937,9 @@ Empirical Test
 \end_layout
 
 \begin_layout Standard
-In a two-state world, the following could work
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-c(A,m,n) & =\frac{A_{0}}{1+e^{-m(A-n)}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-However, asset-costs as a function of assets is a just an imagination.
- The costs imposed by assets are not fully captured in the reported asset-costs.
+Notice that asset-costs as a function of assets is only an imagination.
+ The costs imposed by assets are not fully captured in the reported asset-costs
+ in the empirical data.
  A function that combines the costs imposed by cars with costs imposed by
  houses - needs to average over a lot of thing.
  For the for fitting purposes itself, estimating a function that considers
@@ -1897,6 +1963,35 @@ noprefix "false"
 \bar under
 the assumption with a known cost-function (whatever its shape as long as
  the two consumers are on either side of the inflection point) must suffice.
+\end_layout
+
+\begin_layout Standard
+So given two bands (made of occupation-rank or otherwise), we need a solution
+ conditions that does not depend on a particular form of cost-function.
+ All what matters is that there is an inflection point that separates the
+ two bands i.e.
+ 
+\begin_inset Formula $\frac{dc}{dA}>1$
+\end_inset
+
+ for small 
+\begin_inset Formula $A$
+\end_inset
+
+ but 
+\begin_inset Formula $\frac{dc}{dA}<1$
+\end_inset
+
+ for high 
+\begin_inset Formula $A$
+\end_inset
+
+ - i.e.
+ 
+\begin_inset Formula $\frac{dc}{dA}=1$
+\end_inset
+
+ somewhere in the middle.
 \end_layout
 
 \begin_layout Standard

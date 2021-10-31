@@ -1995,3 +1995,11 @@ evolve_plogis <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,psi,beta,y1,y2
   return(res)
 }
 
+
+net_function<-function(A){
+  m = 2;
+  n = 5
+  A0= 10;
+  #return(A0/(1+exp(-m*(A-n))))
+  return(A-(A0/(1+exp(-m*(A-n)))))
+}
