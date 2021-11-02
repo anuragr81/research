@@ -1996,10 +1996,21 @@ evolve_plogis <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,psi,beta,y1,y2
 }
 
 
-net_function<-function(A){
-  m = 2;
-  n = 5
-  A0= 10;
-  #return(A0/(1+exp(-m*(A-n))))
-  return(A-(A0/(1+exp(-m*(A-n)))))
+
+
+plot_w_sol <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,alpha,beta,A0,y1,y2,G1,G2){
+  net_asset_func <- function(A) { return (beta*(A0-A)**2)}
+
+  w <-  function(nu) { W_p_logis(omega=omega,omega_bar=omega_bar, nu=nu) }
+  l <-  function(nu) { L_p_logis(lambda=lambda,lambda_bar=lambda_bar, nu=nu) }
+  
+  polyn_util_1 <- function(A) { return (G1* A**alpha)}
+  polyn_util_2 <- function(A) { return (G2* A**alpha)}
+  
+  ea_uw <- function(nu,A_1) { w(nu) * polyn_util_1( net_asset_func (A=A_1 + y2 - nu,psi=psi,beta=beta)) 
+    + (1-w(nu))*polyn_util_1( net_asset_func(A=A_1+y1-nu,psi=psi,beta=beta)  ) }
+  ea_ul <- function(nu,A_2) { (1-l(nu)) * k (A=A_2 + y2 - nu,psi=psi,beta=beta) + l(nu)*k(A=A_2+y1-nu,psi=psi,beta=beta) }
+
+    
 }
+
