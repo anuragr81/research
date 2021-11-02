@@ -24,7 +24,7 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "tgschola" "Segoe UI Emoji"
+\font_roman "ae" "Segoe UI Emoji"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -41,7 +41,7 @@ theorems-sec
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 10
+\paperfontsize 11
 \spacing single
 \use_hyperref false
 \papersize default
@@ -745,7 +745,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Subsection
-Equilibrium conditions
+General equilibrium conditions
 \end_layout
 
 \begin_layout Standard
@@ -1260,6 +1260,44 @@ Since the infinite growth of wealth can never be in equilibrium, we assume
 \end_layout
 
 \begin_layout Standard
+This cost-function summarises the 
+\begin_inset Quotes eld
+\end_inset
+
+certain
+\begin_inset Quotes erd
+\end_inset
+
+ costs from acquiring a certain wealth level 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The expenditures are encompassed by 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ (or 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ ) are 
+\begin_inset Quotes eld
+\end_inset
+
+risky
+\begin_inset Quotes erd
+\end_inset
+
+ since the promotion to future is uncertain while the costs of owning assets
+ - through the function 
+\begin_inset Formula $c(A)$
+\end_inset
+
+ that is known to consumer - are certain.
+\end_layout
+
+\begin_layout Standard
 We now consider the consumer decision with a time horizon of 
 \begin_inset Formula $T=1$
 \end_inset
@@ -1307,7 +1345,7 @@ We now consider the consumer decision with a time horizon of
 \begin_inset Formula $1-W_{1}(\prescript{1}{}\nu_{1})$
 \end_inset
 
- she optimise the following utility
+ she optimises the following utility
 \end_layout
 
 \begin_layout Standard
@@ -1607,7 +1645,7 @@ the assets would stabilise at
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-W(\prescript{t}{}\nu_{1})\pi(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{2})+(1-W(\prescript{t}{}\nu_{1}))\pi(\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}+y_{1}) & \rightarrow0
+W(\prescript{t}{}\nu_{1})\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})+(1-W(\prescript{t}{}\nu_{1}))\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1}) & \rightarrow0
 \end{alignat*}
 
 \end_inset
@@ -1633,7 +1671,7 @@ Similarly, for the consumer in band 2 we have
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-L_{2}(\prescript{t}{}\nu_{2})\pi(\prescript{t}{}A+y_{2}-\prescript{t}{}\nu_{2}+y_{1})+(1-L_{2}(\prescript{t}{}\nu_{2}))\pi(\prescript{t}{}A+y_{2}-\prescript{t}{}\nu_{2}+y_{2}) & =0
+L_{2}(\prescript{t}{}\nu_{2})\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})+(1-L_{2}(\prescript{t}{}\nu_{2}))\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2}) & =0
 \end{align*}
 
 \end_inset
@@ -1650,6 +1688,68 @@ L(\prescript{t}{}\nu_{2}) & =\frac{1}{1-\frac{\pi(\prescript{t}{}A_{2}+y_{2}-\pr
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Since 
+\begin_inset Formula $\prescript{t}{}A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\prescript{t}{}A_{2}$
+\end_inset
+
+ would stabilise in the long-term we drop the subscript 
+\begin_inset Formula $t$
+\end_inset
+
+ to write 
+\begin_inset Formula $\prescript{t}{}A_{1}\rightarrow A_{1}^{*}$
+\end_inset
+
+and 
+\begin_inset Formula $\prescript{t}{}A_{2}\rightarrow A_{2}^{*}$
+\end_inset
+
+ .
+ Similarly, 
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $\prescript{t}{}\nu_{1}\rightarrow\nu_{1}^{*}$
+\end_inset
+
+and 
+\begin_inset Formula $\prescript{t}{}\nu_{2}\rightarrow\nu_{2}^{*}$
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1715,7 +1815,7 @@ noprefix "false"
 \color none
 \begin_inset Formula 
 \begin{align}
-\frac{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{2})}{\pi(\prescript{t}{}A_{1}+y_{1}-\prescript{t}{}\nu_{1}+y_{1})} & =\frac{\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{1})}{\pi(\prescript{t}{}A_{2}+y_{2}-\prescript{t}{}\nu_{2}+y_{2})}<1\label{eq:cost_function_shape}
+\frac{\pi(A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{2})}{\pi(A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{1})} & =\frac{\pi(A_{2}^{*}+y_{2}-\nu_{2}^{*}+y_{1})}{\pi(A_{2}^{*}+y_{2}-\nu_{2}^{*}+y_{2})}<1\label{eq:cost_function_shape}
 \end{align}
 
 \end_inset
@@ -1805,34 +1905,7 @@ noprefix "false"
 \end_inset
 
 ).
- This also implies that the point of inflection is one where 
-\begin_inset Formula $\pi(A)=A\Rightarrow A-c(A)=A$
-\end_inset
-
- or 
-\begin_inset Formula $c(A)=\frac{A}{2}$
-\end_inset
-
-.
- If we have a non-decreasing cost-function, then 
-\begin_inset Formula $c(A)\le\frac{A}{2}$
-\end_inset
-
- before the inflection point.
- A linear-cost function where 
-\begin_inset Formula $\frac{dc}{dA}$
-\end_inset
-
- is constant might not work because 
-\begin_inset Formula $A-c(A)$
-\end_inset
-
- would become negative when 
-\begin_inset Formula $dc/dA>1$
-\end_inset
-
- (coeff>1).
- What's more useful is that 
+ Since 
 \begin_inset Formula $dc/dA>1\Rightarrow dc/dA-d(A)>0\Rightarrow d(A-c(A))/dA<0\Rightarrow$
 \end_inset
 
@@ -1845,32 +1918,9 @@ noprefix "false"
 \begin_inset Formula $\pi$
 \end_inset
 
- is decreasing at low levels of assets.
-\end_layout
-
-\begin_layout Standard
-In fact, the condition is even stronger since the 
-\begin_inset Formula $\nu_{1},\nu_{2}$
-\end_inset
-
- are positioned so that their relative positions are symmetrical i.e.
- there must exist points 
-\begin_inset Formula $M,N$
-\end_inset
-
- and values 
-\begin_inset Formula $x,y$
-\end_inset
-
- so that 
-\begin_inset Formula $\frac{\pi(M+x)}{\pi(M)}$
-\end_inset
-
-=
-\begin_inset Formula $\frac{\pi(N)}{\pi(N+x)}<1$
-\end_inset
-
-.
+ is decreasing at low levels of assets and increasing at high levels of
+ assets.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1891,6 +1941,271 @@ The cost-function effectively balances the winning probability with the
 .
  In some ways, the particular structure of cost function explains how redistribu
 tion, inequality and mobility can co-exist in the long-term economy.
+\end_layout
+
+\begin_layout Subsection
+Equilibrium for particular cost and mobility function
+\end_layout
+
+\begin_layout Subsubsection
+Cost-function
+\end_layout
+
+\begin_layout Standard
+A parabolic net asset function that satisfies the condition in Equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost_function_shape"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be specified as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\pi(A) & =\alpha(A-A_{0})^{2}\label{eq:particular_net_asset_function}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The cost-function is implied by the above net asset function in Equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:particular_net_asset_function"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is the inverted parabolic function 
+\begin_inset Formula $c(A)=A-\alpha(A-A_{0})^{2}$
+\end_inset
+
+.
+ Given 
+\begin_inset Formula $\frac{dc}{dA}=1-2\alpha(A-A_{0})$
+\end_inset
+
+, 
+\begin_inset Formula $\frac{dc}{dA}>1\Rightarrow A<A_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{dc}{dA}<1\Rightarrow A>A_{0}$
+\end_inset
+
+.
+ Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost_function_shape"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ effectively implies that the two consumers in different bands must be on
+ either side of 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+More specifically, if we set 
+\begin_inset Formula $x\equiv y_{2}-y_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $M\equiv A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{1}$
+\end_inset
+
+ , 
+\begin_inset Formula $N\equiv A_{2}^{*}+y_{2}-\nu_{2}^{*}+y_{1}$
+\end_inset
+
+, then the condition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost_function_shape"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be rewritten as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\pi(M+x)}{\pi(M)}=\frac{\pi(N)}{\pi(N+x)} & <1
+\end{align*}
+
+\end_inset
+
+or, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{(M+x-A_{0})^{2}}{(M-A_{0})^{2}} & =\frac{(N-A_{0})^{2}}{(N+x-A_{0})^{2}}\Rightarrow(1+\frac{x}{M-A_{0}})(1+\frac{x}{N-A_{0}})=1
+\end{align*}
+
+\end_inset
+
+Since (
+\begin_inset Formula $M+x)<A_{0}<(N+x)$
+\end_inset
+
+ , we have 
+\begin_inset Formula 
+\begin{align*}
+x(x-2(A_{0}-(M+N)))=0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Further, since 
+\begin_inset Formula $x\ne0$
+\end_inset
+
+ (
+\begin_inset Formula $y_{1}<y_{2}$
+\end_inset
+
+) 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+M+N & =A_{1}^{*}+A_{2}^{*}+3y_{1}+y_{2}-(\nu_{1}^{*}+\nu_{2}^{*})=A_{0}-\frac{y_{2}-y_{1}}{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The constraint in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost_function_shape"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is therefore satisfied as long as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\nu_{1}^{*}+\nu_{2}^{*} & =A_{1}^{*}+A_{2}^{*}+\frac{y_{1}+y_{2}}{2}-A_{0}+2y_{1}+y_{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Assuming a specific 
+\begin_inset Formula $W(\nu_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $L(\nu_{2})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For further analysis we use the logistic form of 
+\begin_inset Formula $W(\nu_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu_{2})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $W(\nu)=\frac{1}{1+e^{-\omega(\nu-\bar{\omega})}}$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu)=1-\frac{1}{1+e^{-\lambda(\nu-\bar{\lambda})}}$
+\end_inset
+
+ then the 
+\begin_inset Formula $W(\nu_{1}^{*})=L(\nu_{2}^{*})$
+\end_inset
+
+ implies the relationship 
+\begin_inset Formula $\omega\nu_{1}^{*}+\lambda\nu_{2}^{*}=\omega\bar{\omega}+\lambda\bar{\lambda}$
+\end_inset
+
+ which is more general so that 
+\begin_inset Formula $\omega,\lambda,\bar{\omega},\bar{\lambda}$
+\end_inset
+
+ can be chosen for every 
+\begin_inset Formula $\nu_{1}^{*}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{2}^{*}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\omega,\bar{\omega},\lambda,\bar{\lambda}$
+\end_inset
+
+ changing satisfy 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\omega\nu_{1}^{*}+\lambda\nu_{2}^{*} & =\omega\bar{\omega}+\lambda\bar{\lambda}\label{eq:param_constraint}
+\end{align}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1937,61 +2252,37 @@ Empirical Test
 \end_layout
 
 \begin_layout Standard
-Notice that asset-costs as a function of assets is only an imagination.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Notice that asset-costs as a function of assets is only an imagination.
  The costs imposed by assets are not fully captured in the reported asset-costs
  in the empirical data.
- A function that combines the costs imposed by cars with costs imposed by
- houses - needs to average over a lot of thing.
+ A function that combines the  costs imposed by cars with costs imposed
+ by houses - needs to average over a lot of thing.
  For the for fitting purposes itself, estimating a function that considers
  the number cars and houses owned would have be better - but that isn't
  what we're concerned with.
  For this reasons, the asset-cost function shape must not be relied on.
  Instead how a given fitted value of cost-function would impact the net
  equilibrium is more interesting.
- We are interested only in the condition in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:cost_function_shape"
-plural "false"
-caps "false"
-noprefix "false"
+ We are interested only in the condition in Equation  being satisfied -
+ without estimating the entire function itself.
+ Therefore, the assumption with a known cost-function (whatever its shape
+ as long as the two consumers are on either side of the inflection point)
+ must suffice.
+\end_layout
 
 \end_inset
 
- being satisfied - without estimating the entire function itself.
- Therefore, 
-\bar under
-the assumption with a known cost-function (whatever its shape as long as
- the two consumers are on either side of the inflection point) must suffice.
+
 \end_layout
 
 \begin_layout Standard
 So given two bands (made of occupation-rank or otherwise), we need a solution
  conditions that does not depend on a particular form of cost-function.
- All what matters is that there is an inflection point that separates the
- two bands i.e.
- 
-\begin_inset Formula $\frac{dc}{dA}>1$
-\end_inset
-
- for small 
-\begin_inset Formula $A$
-\end_inset
-
- but 
-\begin_inset Formula $\frac{dc}{dA}<1$
-\end_inset
-
- for high 
-\begin_inset Formula $A$
-\end_inset
-
- - i.e.
- 
-\begin_inset Formula $\frac{dc}{dA}=1$
-\end_inset
-
- somewhere in the middle.
 \end_layout
 
 \begin_layout Standard
@@ -2041,325 +2332,8 @@ Fitting the cost-function we have...
 Parameters for South Africa
 \end_layout
 
-\begin_layout Standard
-...
- consider a simple form 
-\begin_inset Formula $W(\nu)=1-e^{-\omega\nu}$
-\end_inset
-
- and 
-\begin_inset Formula $L(\nu)=e^{-\lambda\nu}$
-\end_inset
-
-.
- Here, 
-\begin_inset Formula $W(0)=0$
-\end_inset
-
- and 
-\begin_inset Formula $L(0)=1$
-\end_inset
-
-.
- The assumption that initial conditions are the same corresponds to functions
- differing only in 
-\begin_inset Formula $\omega$
-\end_inset
-
- and 
-\begin_inset Formula $\lambda$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-With 
-\begin_inset Formula $W(0)=0$
-\end_inset
-
- and 
-\begin_inset Formula $W(\nu)=1-e^{-\omega\nu}$
-\end_inset
-
- in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:solution_1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and 
-\begin_inset Formula $L(\nu)=e^{-\lambda\nu}$
-\end_inset
-
-.
- The population stability would balance 
-\begin_inset Formula $\lambda$
-\end_inset
-
- and 
-\begin_inset Formula $\omega$
-\end_inset
-
- so that 
-\begin_inset Formula $W(\nu_{1}^{*})=L(\nu_{2}^{*})$
-\end_inset
-
- a condition that cannot be fulfilled with exponential 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
-, 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
-.
- 
-\begin_inset Formula 
-\begin{multline*}
-1-e^{-\omega\nu_{1}^{*}}=e^{-\lambda\nu_{2}^{*}}\\
-\Rightarrow\omega\nu_{1}^{*}+\lambda\nu_{2}^{*}=0
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-However, if we choose 
-\begin_inset Formula $W(\nu)=\frac{1}{1+e^{-\omega(\nu-\bar{\omega})}}$
-\end_inset
-
- and 
-\begin_inset Formula $L(\nu)=1-\frac{1}{1+e^{-\lambda(\nu-\bar{\lambda})}}$
-\end_inset
-
- then the 
-\begin_inset Formula $W(\nu_{1}^{*})=L(\nu_{2}^{*})$
-\end_inset
-
- implies the relationship 
-\begin_inset Formula $\omega\nu_{1}^{*}+\lambda\nu_{2}^{*}=\omega\bar{\omega}+\lambda\bar{\lambda}$
-\end_inset
-
- which is more general so that 
-\begin_inset Formula $\omega,\lambda,\bar{\omega},\bar{\lambda}$
-\end_inset
-
- can be chosen for every 
-\begin_inset Formula $\nu_{1}^{*}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{2}^{*}$
-\end_inset
-
-.
- In the simple model the choice of 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- and 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
- would make sure that the same number of users are swapped.
- This time-period i.e.
- the frequency at which the 
-\begin_inset Formula $W,L$
-\end_inset
-
- change can be lower than that of the game i.e.
- the consumers may play many instances of the game (have many generations
- with the same 
-\begin_inset Formula $W,L$
-\end_inset
-
-) before 
-\begin_inset Formula $W,L$
-\end_inset
-
- change.
- The long-term constraint is not applicable in the short-term while 
-\begin_inset Formula $W,L$
-\end_inset
-
- may still be subject to the population constraint.
- Population constraint cannot be broken more frequently than the staying-the-sam
-e equilibrium of the long-term - since bands cannot even exist without populatio
-n stability.
- In the simple long-term accumulation, we consider 
-\begin_inset Formula $W,L$
-\end_inset
-
- changing in every lifetime.
- If so, we only have to worry about changes - 
-\begin_inset Formula $\omega,\bar{\omega},\lambda,\bar{\lambda}$
-\end_inset
-
- changing to satisfy 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align}
-\omega\nu_{1}^{*}+\lambda\nu_{2}^{*} & =\omega\bar{\omega}+\lambda\bar{\lambda}\label{eq:param_constraint}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-However, if we're to look at the consumer's optimisation, then we need to
- some constraint on 
-\begin_inset Formula $\omega,\bar{\omega},\lambda,\bar{\lambda}$
-\end_inset
-
- other than 
-\begin_inset Formula $\omega\nu_{1}^{*}+\lambda\nu_{2}^{*}=\omega\bar{\omega}+\lambda\bar{\lambda}$
-\end_inset
-
- - because the consumer cannot optimise without a fixed - 
-\begin_inset Formula $\omega,\bar{\omega},\lambda,\bar{\lambda}$
-\end_inset
-
- .
- So we're essentially looking for 
-\begin_inset Formula $\omega,\bar{\omega},\lambda,\bar{\lambda}$
-\end_inset
-
- so that population constraint 
-\begin_inset Formula $\omega\nu_{1}^{*}+\lambda\nu_{2}^{*}=\omega\bar{\omega}+\lambda\bar{\lambda}$
-\end_inset
-
- is satisfied in the short-run.
-\end_layout
-
-\begin_layout Standard
-[Chicken-and-egg] The choice of 
-\begin_inset Formula $W,L$
-\end_inset
-
- is a chicken-egg problem because we have to set up 
-\begin_inset Formula $W,L$
-\end_inset
-
- in a way that the consumer's choose 
-\begin_inset Formula $\nu$
-\end_inset
-
- using their own 
-\begin_inset Formula $\Gamma_{1},\Gamma_{2}$
-\end_inset
-
- but 
-\begin_inset Formula $W,L$
-\end_inset
-
- also satisfies a condition based on 
-\begin_inset Formula $\nu_{1}^{*},\nu_{2}^{*}$
-\end_inset
-
-.
- This means that 
-\begin_inset Formula $L,W$
-\end_inset
-
- parameters 
-\begin_inset Formula $\omega,\bar{\omega},\lambda,\bar{\lambda}$
-\end_inset
-
- - would also depend on 
-\begin_inset Formula $\Gamma_{1},\Gamma_{2}$
-\end_inset
-
- .
- When saying that 
-\begin_inset Formula $\Gamma_{1},\Gamma_{2}$
-\end_inset
-
- don't change we're also claiming that 
-\begin_inset Formula $\omega,\bar{\omega},\lambda,\bar{\lambda}$
-\end_inset
-
- don't change.
- The only way this is possible is if consumers only respond to 
-\begin_inset Formula $\omega,\bar{\omega},\lambda,\bar{\lambda}$
-\end_inset
-
- while keeping 
-\begin_inset Formula $\Gamma_{1},\Gamma_{2}$
-\end_inset
-
- constant and their response is always so that the condition 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:param_constraint"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- is satisfied.
- 
-\end_layout
-
 \begin_layout Subsection
 Solution
-\end_layout
-
-\begin_layout Standard
-[Meaning of 
-\begin_inset Formula $\bar{\omega},\bar{\lambda}$
-\end_inset
-
-, 
-\begin_inset Formula $\omega,\lambda$
-\end_inset
-
- as constraints] We know 
-\begin_inset Formula $\bar{\omega},\bar{\lambda}$
-\end_inset
-
- as magnitudes of the 
-\begin_inset Formula $W,L$
-\end_inset
-
-.
- The signs are the most important part of the regime 
-\begin_inset Formula $W,L$
-\end_inset
-
- and they might tell us something about the environment if we can solve
- for them.
- Let's assume that we had an idea of 
-\begin_inset Formula $\Gamma_{2}/\Gamma_{1}$
-\end_inset
-
- so that 
-\begin_inset Formula $\Gamma_{2},\Gamma_{1}$
-\end_inset
-
- are assumed as given.
- 
-\begin_inset Formula $A_{1},A_{2}$
-\end_inset
-
- are initial conditions.
- LTE imposes the shape restriction on the cost-function and population constrain
-t puts the 
-\begin_inset Formula $\omega\nu_{1}^{*}+\lambda\nu_{2}^{*}=\omega\bar{\omega}+\lambda\bar{\lambda}$
-\end_inset
-
- restriction where
 \end_layout
 
 \begin_layout Standard
@@ -2401,160 +2375,8 @@ t puts the
 What is more important so that we can assume the less important?
 \end_layout
 
-\begin_layout Standard
-[
-\begin_inset Formula $A_{1},A_{2}$
-\end_inset
-
- and 
-\begin_inset Formula $y_{1},y_{2}$
-\end_inset
-
-] Since cost-function is provided by LTE
-\begin_inset Formula $y_{1},y_{2}$
-\end_inset
-
- are as long term as 
-\begin_inset Formula $A_{1},A_{2}$
-\end_inset
-
- - the relationship between 
-\begin_inset Formula $A_{1},A_{2}$
-\end_inset
-
- and cost-function parameters are already fixed.
- The relationship between 
-\begin_inset Formula $y_{1},y_{2}$
-\end_inset
-
-(which are proxies of occupational differences) and long-term asset accumulation
-s (which are observed directly - whether as average or individual) is therefore
- fixed with the LTE and cost-function parameters.
- The consumer's short term equilibria differ only through 
-\begin_inset Formula $\Gamma_{1},\Gamma_{2}$
-\end_inset
-
- and the characteristics of 
-\begin_inset Formula $W,L$
-\end_inset
-
- i.e.
- 
-\begin_inset Formula $\bar{\omega},\bar{\lambda}$
-\end_inset
-
-, 
-\begin_inset Formula $\omega,\lambda$
-\end_inset
-
- - which are constrained only with the population constraint.
- 
-\end_layout
-
-\begin_layout Standard
-One issue is that we don't know if the net assets really have a concave-convex
- mix.
- This can be argued if costs are unobserved - but a solution of the above
- model can be provided only if cost-function is calibrated.
- Since cost-function is an implication of LTE, we don't need to worry about
- whether it fits the data or not.
- It is indeed the model assumption.
- Whether being in the city is an asset or not - is a moot point as it is
- effectively the implication of data.
- Once we have fitted the data, we have the property of the cost-function.
- The choice of 
-\begin_inset Formula $y_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $y_{2}$
-\end_inset
-
- then corresponds to a given 
-\begin_inset Formula $A_{1},A_{2}$
-\end_inset
-
- - which are LTE asset values.
- If we assume 
-\begin_inset Formula $\omega=\lambda$
-\end_inset
-
- then we can argue which kind of a regime we're in Tanzania vs Nigeria (because
- we'll have 3 unknowns and 3 equations).
- 
-\end_layout
-
-\begin_layout Standard
-[Varying 
-\begin_inset Formula $\omega,\lambda$
-\end_inset
-
- vs varying 
-\begin_inset Formula $\bar{\omega},\bar{\lambda}$
-\end_inset
-
-] Varying 
-\begin_inset Formula $\omega,\lambda$
-\end_inset
-
- could have interesting results too - to argue for results, we could use
- 
-\begin_inset Formula $\omega,\lambda$
-\end_inset
-
- as well.
- This needs to be experimented with.
-\end_layout
-
-\begin_layout Standard
-[GOAL] The goal of the exercise is to compare the probability function parameter
-s implied by cost-functions and asset differences in the country or the
- locality in Tanzania and Nigeria.
- And then use them to argue that status consumption has to be more costly
- or not.
- List of unknowns are 
-\begin_inset Formula $\Gamma_{1}/\Gamma_{2},\lambda,\bar{\lambda},\omega,\bar{\omega}$
-\end_inset
-
-.
- For the goal of comparison we would 
-\end_layout
-
 \begin_layout Section
 Conclusions
-\end_layout
-
-\begin_layout Standard
-More detailed outcomes could be explored in the above set up if we assume
- a certain distribution of attributes that determine success in competitions
- and a specific scheme of selecting winners and losers.
- A game-theoretic interpretation like Hopkins-Kornienko could thus be used
- to experiment with specific forms of 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- and 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
- represented by a scheme of selecting winners and losers based on expenditure
- 
-\begin_inset Formula $\nu$
-\end_inset
-
-.
- In summary, we find that despite limiting restrictions of the long-term
- equilibrium implied by persistent income differences, the finite-horizon
- equilibria could exist for status competitions defined by 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
-,
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- and can neutralise the severity of relative income differences by distributing
- assets over time.
 \end_layout
 
 \begin_layout Standard
@@ -2585,29 +2407,7 @@ More detailed outcomes could be explored in the above set up if we assume
  We can say that the utility from being poor may be more significant when
  communication increases i.e.
  the consumer no longer feels content in the poor.
- That does not change the usual dynamics of rewards - neither the long-term
  
-\begin_inset Formula $\mathscr{L},\mathscr{W}$
-\end_inset
-
- nor the short-term 
-\begin_inset Formula $L,W$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-2.
- How does wealth really transfer with the pursuit of short-term equilibria.
- Can this be solved.
- What happens over the multiple short-term equilibria i.e.
- the evolution of consumer's wealth as 
-\begin_inset Formula $T=1$
-\end_inset
-
- is iterated many times over.
 \end_layout
 
 \begin_layout Standard
