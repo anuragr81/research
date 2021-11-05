@@ -2167,11 +2167,29 @@ Random
 \end_layout
 
 \begin_layout Standard
-The asset accumulation could itself be risky so that 
+The asset accumulation could itself be risky so that a random variable resets
+ the 
+\begin_inset Formula $\prescript{t}{}A_{1}$
+\end_inset
+
+ with a fixed probability distribution of a random variable 
+\begin_inset Formula $N_{t}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-A_{1}=A_{1}+y_{1}-k_{1}W\\
-A_{2}=A_{2}+y_{2}-k_{2}W
+\prescript{t+1}{}A_{1}=\begin{cases}
+\prescript{t}{}A_{1} & N_{t}=0\\
+0 & N_{t}=1
+\end{cases}\\
+\prescript{t+1}{}A_{2}=\begin{cases}
+\prescript{t}{}A_{2} & N_{t}=0\\
+0 & N_{t}=1
+\end{cases}
 \end{gather*}
 
 \end_inset
@@ -2180,31 +2198,362 @@ A_{2}=A_{2}+y_{2}-k_{2}W
 \end_layout
 
 \begin_layout Standard
-This is arranged so that 
-\begin_inset Formula $y_{1}=k_{1}\mu$
+The additional risk with 
+\begin_inset Formula $\prescript{t}{}A_{1}$
 \end_inset
 
  and 
-\begin_inset Formula $y_{2}=k_{2}\mu$
+\begin_inset Formula $\prescript{t}{}A_{2}$
+\end_inset
+
+ forces the long-term convergence of 
+\begin_inset Formula $\prescript{t}{}A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\prescript{t}{}A_{2}$
+\end_inset
+
+ to 
+\begin_inset Formula $A_{1}^{*}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{2}^{*}$
+\end_inset
+
+ and permits a probability game driven by 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ (?) 
+\end_layout
+
+\begin_layout Standard
+What can the consumer do if her long-term expectations include the possibility
+ of losing everything? The above scheme allows us to set the initial wealth
+ to simply zero and the long-term wealth to be dependent on 
+\begin_inset Formula $y_{1},y_{2}$
+\end_inset
+
+ alone.
+ More specifically, if the consumers start with 
+\begin_inset Formula $A_{1}=0$
+\end_inset
+
+ (
+\begin_inset Formula $A_{2}=0$
+\end_inset
+
+ ), then they would accumulate 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+A_{1}^{*}\rightarrow\sum_{t=1}^{t=T}(y_{1}-\prescript{t}{}\nu_{1})\label{eq:assets_reset_accumulation}\\
+A_{2}^{*}\rightarrow\sum_{t=1}^{t=T}(y_{2}-\prescript{t}{}\nu_{2})\nonumber 
+\end{gather}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $T$
+\end_inset
+
+ is the average time interval over which 
+\begin_inset Formula $N_{t}$
+\end_inset
+
+ remains zero i.e.
+ 
+\begin_inset Formula $T\rightarrow\frac{1}{n}\sum^{n}(\tau-\iota)$
 \end_inset
 
  where 
-\begin_inset Formula $\mu\equiv E(W)$
+\begin_inset Formula $\iota,t$
+\end_inset
+
+ are two time intervals such that 
+\begin_inset Formula $N_{\iota}=N_{\tau}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $N_{t}=0$
+\end_inset
+
+ 
+\begin_inset Formula $\forall\in t\in[\iota+1,\tau+1]$
 \end_inset
 
 .
+ We assume that the process 
+\begin_inset Formula $N_{t}$
+\end_inset
+
+ does not depend on 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ (or 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+) and therefore, both the consumers are subjected to the same variable 
+\begin_inset Formula $N_{t}$
+\end_inset
+
+.
+ The above equilibrium means that after getting her accumulations reset
+ at a time 
+\begin_inset Formula $t=\iota$
+\end_inset
+
+, the consumer gets the highest utility by accumulating highest assets as
+ possible in the time expected time interval 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Since the consumer does not obtain utility from anything but asset accumulation
+, she would optimise the assets-values in the short-term.
+\end_layout
+
+\begin_layout Standard
+Notice that unlike the finite-horizon optimisation problems, the consumer
+ has no idea of 
+\begin_inset Formula $T$
+\end_inset
+
+ and therefore at a time 
+\begin_inset Formula $t$
+\end_inset
+
+, she can only be concerned with the next period 
+\begin_inset Formula $t+1$
+\end_inset
+
+.
+ With that, the optimisation...
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\nu_{1},\nu_{2}$
+\end_inset
+
+ that are provided are remain the same until the assets are reset again
+ (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:assets_reset_accumulation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ above).
+ However, we have not considered that the consumers would swap between 1
+ and 2 and carry over their assets too.
+ Therefore, a constant 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ throughout the time time-period 
+\begin_inset Formula $T$
+\end_inset
+
+ cannot be assumed.
+ The next equilibrium we look for is when consumers consider the possibility
+ of a swap while carrying over the past assets.
+\end_layout
+
+\begin_layout Standard
+The accumulation in the next period comprises both of the savings from the
+ period 
+\begin_inset Formula $t$
+\end_inset
+
+ and those from the period 
+\begin_inset Formula $t+1$
+\end_inset
+
+.
+ If we represent gains from the period 
+\begin_inset Formula $\tau$
+\end_inset
+
+ as
+\begin_inset Formula $\prescript{\tau}{}B_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\prescript{\tau}{}B_{2}$
+\end_inset
+
+ for consumers in band 1 and band 2 respectively
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+, then, 
+\begin_inset Formula $\prescript{t}{}B_{1}=y_{1}-\nu_{1}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ for the consumer in band 1 and the expected accumulation in the next period
+ 
+\begin_inset Formula $t+1$
+\end_inset
+
+ is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\prescript{t+1}{}B_{1} & =W_{1}(\nu)(y_{2}-\nu_{2})+(1-W_{1}(\nu))(y_{1}-\nu_{1})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The assets of the consumer in band 1 thus continue to grow as 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\sum_{t=1}^{\tau}\prescript{t}{}B_{1}$
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ Representing 
+\begin_inset Formula $\prescript{t}{}B=\begin{pmatrix}\prescript{t}{}B_{1} & \prescript{t}{}B_{2}\end{pmatrix}$
+\end_inset
+
+The consumer's expected income at time 
+\begin_inset Formula $t$
+\end_inset
+
+ is therefore
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+\prescript{t}{}B & =\begin{pmatrix}y_{1}-\nu_{1} & y_{2}-\nu_{2}\end{pmatrix}\begin{pmatrix}1-W_{1}(\nu_{1}) & L_{2}(\nu_{2})\\
+W_{1}(\nu_{1}) & 1-L_{2}(\nu_{2})
+\end{pmatrix}^{t}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+1.
+ Above would replace the equilibrium in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:assets_reset_accumulation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+2.
+ We cannot assume that the consumer selection by assuming 
+\begin_inset Formula $A_{1}=A_{2}=0$
+\end_inset
+
+ would be valid throughout the interval 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ If the consumer has a 1-time-period horizon then she must.
+ We need the 
+\begin_inset Formula $g_{1},g_{2}$
+\end_inset
+
+ as function of 
+\begin_inset Formula $A$
+\end_inset
+
+ and then consider the net formula.
+ The length of 
+\begin_inset Formula $T$
+\end_inset
+
+ has a clear influence on the consumer decision to participate since a consumer
+ does not care about mobility when she can accumulate longer and the differences
+ between 
+\begin_inset Formula $y_{1},y_{2}$
+\end_inset
+
+ are low.
+ This needs to be considered for more than the short-term equilibrium.
 \end_layout
 
 \begin_layout Subsection
 Equilibrium for particular asset value and mobility functions
-\end_layout
-
-\begin_layout Subsubsection
-Cost-function
-\end_layout
-
-\begin_layout Standard
-We may choose a simple formulation of the net asset function if it is defined.
 \end_layout
 
 \begin_layout Subsubsection
