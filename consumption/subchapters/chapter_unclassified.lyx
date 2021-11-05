@@ -8415,6 +8415,23 @@ oup=="asset_costs")$shortname
 \end_layout
 
 \begin_layout Section
+Removing Net asset value shape discussion
+\end_layout
+
+\begin_layout Standard
+As long as status competition is feasible for consumer 1, she should see
+ an increase in the long-term net asset value by being in band 2.
+ The possibility of moving from band 1 to band 2 only to observe the net
+ asset value decline is ruled out because higher income bands are also meant
+ to have a higher asset reference.
+ This is ascertained as long there are peer effects associated with the
+ assets (or a higher reference level for assets).
+ Thus while the consumer in band 1 cannot afford to have a decline in net
+ asset value if she moves to the next band, the consumer in the rich band
+ might accept a poorer band with a net increase in asset value.
+\end_layout
+
+\begin_layout Section
 Rejected attempt to pit logistic cost function from asset-costs data
 \end_layout
 
@@ -8480,6 +8497,225 @@ status open
 -b2) ) ) - df$mean_x_ac) ;quantile(b0/(1+exp(-(b1)*(df$mean_A0-b2) ) ),seq(10)/1
 0)
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Rejecting particular cost-function approach
+\end_layout
+
+\begin_layout Standard
+Choosing a simple formulation of the net asset function we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\pi(A) & =\beta(A_{0}-A)^{2}\label{eq:particular_net_asset_function}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If we set 
+\begin_inset Formula $x\equiv y_{2}-y_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $M\equiv A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{1}$
+\end_inset
+
+ , 
+\begin_inset Formula $N\equiv A_{2}^{*}+y_{2}-\nu_{2}^{*}+y_{1}$
+\end_inset
+
+, then the condition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cost_function_shape"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be rewritten as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\pi(M+x)}{\pi(M)}=\frac{\pi(N)}{\pi(N+x)} & <0
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $x\ne0$
+\end_inset
+
+ (
+\begin_inset Formula $y_{1}<y_{2}$
+\end_inset
+
+) ,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{(A_{0}-M-x)^{2}}{(A_{0}-M)^{2}} & =\frac{(A_{0}-N)^{2}}{(A_{0}-N-x)^{2}}\Rightarrow x=2A_{0}-(M+N)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+M+N & =2A_{0}-(y_{2}-y_{1})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since, 
+\begin_inset Formula $M+N=A_{1}^{*}+A_{2}^{*}+3y_{1}+y_{2}-(\nu_{1}^{*}+\nu_{2}^{*})$
+\end_inset
+
+ we have 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\frac{(A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{1})+(A_{2}^{*}+y_{2}-\nu_{2}^{*}+y_{2})}{2} & =A_{0}\label{eq:particular_conditions_net_average}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or,
+\begin_inset Formula 
+\begin{align}
+\nu_{1}^{*}+\nu_{2}^{*}=(A_{1}^{*}+A_{2}^{*})+2(y_{1}+y_{2}-A_{0})\label{eq:particular_conditions_nu1_nu2}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:particular_conditions_net_average"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ implies that the total average of the long-term asset values in band 1
+ and band 2 would be the peak asset value possible in the economy.
+ Using Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:particular_conditions_nu1_nu2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we can solve 
+\begin_inset Formula $\nu_{1}^{*},\nu_{2}^{*}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\nu_{1}^{*} & =A_{1}^{*}+\frac{3}{2}y_{1}+\frac{1}{2}y_{2}-A_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\nu_{2}^{*} & =A_{2}^{*}+\frac{3}{2}y_{2}+\frac{1}{2}y_{1}-A_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The equilibrium values of 
+\begin_inset Formula $A_{1}^{*},A_{2}^{*}$
+\end_inset
+
+ are thus dependent solely on the values 
+\begin_inset Formula $\nu_{1}^{*},\nu_{2}^{*}$
+\end_inset
+
+ chosen by the consumers.
+ This leads to a singularity condition.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{2} & =A_{0}-\frac{1}{2}y_{1}+\frac{1}{2}y_{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{1} & =A_{0}+\frac{1}{2}y_{1}-\frac{1}{2}y_{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{1-\frac{\pi(A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{2})}{\pi(A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{1})}} & =\frac{1}{1-\frac{\pi(A_{0}+\frac{y_{2}-y_{1}}{2})}{\pi(A_{0}-\frac{y_{2}-y_{1}}{2})}}
+\end{align*}
 
 \end_inset
 

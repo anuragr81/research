@@ -2007,7 +2007,7 @@ plot_w_sol <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,alpha,beta,A0,y1,
   polyn_util_1 <- function(A) { return (G1* A**alpha)}
   polyn_util_2 <- function(A) { return (G2* A**alpha)}
   
-  ea_uw <- function(nu,A_1) { w(nu) * polyn_util_1( net_asset_func (A=A_1 + y2 - nu,psi=psi,beta=beta)) 
+  ea_uw <- function(nu,A_1) { w(nu) * polyn_util_1( net_asset_func (A=A_1 + y2 - nu,psi=psi,beta=beta))
     + (1-w(nu))*polyn_util_1( net_asset_func(A=A_1+y1-nu,psi=psi,beta=beta)  ) }
   ea_ul <- function(nu,A_2) { (1-l(nu)) * k (A=A_2 + y2 - nu,psi=psi,beta=beta) + l(nu)*k(A=A_2+y1-nu,psi=psi,beta=beta) }
 
