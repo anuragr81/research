@@ -1843,12 +1843,17 @@ As detailed in the previous sections,
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- as household's non-durable consumption and 
-\begin_inset Formula $p_{nde}(r_{t})$
+ as household's non-durable consumption while
+\begin_inset Formula $p_{food}(r_{t})$
 \end_inset
 
- as the average cost of non-durable consumption in the locality.
- We also use factor variables 
+ , 
+\begin_inset Formula $p_{nonfood}(r_{t})$
+\end_inset
+
+ as the average cost of food and non-food non-durable consumption in the
+ consumer household's locality.
+ We also use the factor variables 
 \family typewriter
 \size small
 max_occupation_rank
@@ -1861,20 +1866,28 @@ max_education_rank
 \family default
 \size default
 - the maximum occupation and education ranks in the household respectively.
- We also use 
+ The 
 \begin_inset Formula $age$
 \end_inset
 
- of the household-head as one of the control variables.
+ of the household-head , the number of members of the household and a factor
+ variable indicating whether the district is categorised as rural or urban
+ are also used as control variables.
  The results from an OLS regression of 
-\begin_inset Formula $log(\nu_{t})$
+\begin_inset Formula $w_{food\_ne}$
 \end_inset
 
- against 
+ and 
+\begin_inset Formula $w_{nonfood\_ne}$
+\end_inset
+
+ as dependent variables i.e.
+ the share of food and non-food items in the total non-durable consumption
+ excluding asset costs against 
 \begin_inset Formula $log(x_{t})$
 \end_inset
 
- ( where 
+ ( 
 \begin_inset Formula $x_{t}$
 \end_inset
 
@@ -1882,15 +1895,7 @@ max_education_rank
 \begin_inset Formula $r_{t}$
 \end_inset
 
- , 
-\begin_inset Formula $age$
-\end_inset
-
- and 
-\begin_inset Formula $log(p_{nde})$
-\end_inset
-
- are presented in Table 
+ and other control variable are discussed in Table 
 \begin_inset ERT
 status open
 
@@ -1898,7 +1903,7 @@ status open
 
 
 \backslash
-ref{tabExcessLinear_tn}
+ref{tabExcessLinearTNZ_w_nonfood_ne}
 \end_layout
 
 \end_inset
@@ -1911,27 +1916,89 @@ status open
 
 
 \backslash
-ref{tabExcessLinear_ngr}
+ref{tabExcessLinearNGR_w_nonfood_ne}
 \end_layout
 
 \end_inset
 
  for Nigeria.
- The summary of all variable-names shown in the results is as follows
+ The list of control variables used in these results are as follows
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
 
-\family typewriter
-\size small
-logx 
-\family default
-\size default
-or 
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="center" valignment="top" width="2in">
+<column alignment="left" valignment="top" width="3.5in">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Control
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variable Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 \begin_inset Formula $log(x_{t})$
 \end_inset
 
- - calculated as the logarithm of per-head total expenditure 
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+logx
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+logarithm of per-head total expenditure 
 \begin_inset Formula $x_{t}$
 \end_inset
 
@@ -1939,104 +2006,338 @@ or
  as non-food non-durable expenditure.
 \end_layout
 
-\begin_layout Enumerate
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \family typewriter
 \size small
 log_mean_A0
 \family default
 \size default
- or 
-\begin_inset Formula $r_{t}$
-\end_inset
-
- - calculated as the logarithm of mean asset-ownership level in the 4-km
- radius area around the consumer district
+ 
 \end_layout
 
-\begin_layout Enumerate
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+logarithm of mean asset-ownership level in the 4-km radius area around the
+ consumer district
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p_{food}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \family typewriter
 \size small
-log_mean_cost_ne 
-\family default
-\size default
-or 
-\begin_inset Formula $log(p_{nde})$
-\end_inset
-
- - calculated as the logarithm of the mean non-durable expenditure excluding
- asset costs in the area surrounding the consumer
+log_mean_cost_ne_food
 \end_layout
 
-\begin_layout Enumerate
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+logarithm of the mean non-durable expenditure on food (excluding asset costs
+ in the area surrounding the consumer)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p_{nonfood}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \family typewriter
 \size small
-max_occupation_rank 
-\family default
-\size default
-- the highest occupation rank among the family members of the household
- used as a factor variable
+log_mean_cost_ne_nonfood
 \end_layout
 
-\begin_layout Enumerate
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+logarithm of the mean non-durable expenditure on non-food items (excluding
+ asset costs in the area surrounding the consumer)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $hh\ vars$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Household/demographic variables
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+max_occupation_rank
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+highest education rank among the family members of the household used as
+ a factor variable
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $hh\ vars$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \family typewriter
 \size small
 max_education_rank 
-\family default
-\size default
-- the highest education rank among the family members of the household used
- as a factor variable
 \end_layout
 
-\begin_layout Enumerate
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+highest education rank among the family members of the household used as
+ a factor variable
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $hh\ vars$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \family typewriter
 \size small
 age
 \family default
 \size default
- - the age of the head of the household (household-heads are reported in
- the survey)
+ 
 \end_layout
 
-\begin_layout Enumerate
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+age of the head of the household (household-heads are reported in the survey)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $hh\ vars$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \family typewriter
 \size small
-log_q_ne 
-\family default
-\size default
-or 
-\begin_inset Formula $log(q_{ne})$
-\end_inset
+hsize
+\end_layout
 
-- is the logarithm of expenditure on non-durable consumption including food
- and non-food expenditure but excluding the asset costs.
- Thie is used as dependent variable in Tables 
-\begin_inset ERT
-status open
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
 
 \begin_layout Plain Layout
+number of members in the household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
 
 
-\backslash
-ref{tabExcessLinear_tn}
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Variable Names
 \end_layout
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We also run the regressions with 
+\begin_inset Formula $log(q_{ne\_food})$
+\end_inset
+
  and 
-\begin_inset ERT
+\begin_inset Formula $log(q_{ne\_nonfood})$
+\end_inset
+
+ i.e.
+ the logarithm of expenditure on non-durable consumption on food and non-food
+ items (both excluding the asset costs).
+ These results - comparable with the regressions of 
+\begin_inset Formula $w_{food\_ne}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{nonfood\_ne}$
+\end_inset
+
+ are provided in the Appendix
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
+The regressions with log mean of non-durable consumption including food
+ and non-food items (
+\begin_inset Formula $p_{nde}$
+\end_inset
 
+ ) as the control variable replacing 
+\begin_inset Formula $p_{food}$
+\end_inset
 
-\backslash
-ref{tabExcessLinear_ngr}
+ and 
+\begin_inset Formula $p_{nonfood}$
+\end_inset
+
+ are available on request.
 \end_layout
 
 \end_inset
@@ -2044,28 +2345,13 @@ ref{tabExcessLinear_ngr}
  .
 \end_layout
 
-\begin_layout Subsubsection
-Food Inclusive Analysis
-\end_layout
-
 \begin_layout Standard
-Since we have included food in 
-\begin_inset Formula $\nu_{t}$
+The non-durable expenditure items excluding asset-costs that we use for
+ the budget share of non-food 
+\begin_inset Formula $w_{nonfood}$
 \end_inset
 
- - this may also be due to food consumption dominating the consumer's non-durabl
-e consumption in Tanzania and because of asset costs relevant for a much
- smaller portion of population in Tanzania.
- The positive sign of isrural in Tanzania and negative in Nigeria also seems
- to suggest this.
-\end_layout
-
-\begin_layout Subsubsection
-Food Excluding Analysis
-\end_layout
-
-\begin_layout Standard
-The non-durable expenditure excluding asset-costs (see Tables 
+ are shown in Tables 
 \begin_inset ERT
 status open
 
@@ -2091,87 +2377,231 @@ ref{itemsclassification_ngr}
 
 \end_inset
 
- ) 
+ for Tanzania and Nigeria respectively.
+ With the total expenditure on food (type 
+\begin_inset Quotes eld
+\end_inset
+
+food
+\begin_inset Quotes erd
+\end_inset
+
+ in the tables) and non-food non-durable items (type 
+\begin_inset Quotes eld
+\end_inset
+
+excess 
+\begin_inset Quotes eld
+\end_inset
+
+ in the tables) aggregated as 
+\begin_inset Formula $q_{food}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{nonfood}$
+\end_inset
+
+ respectively we calculate the budget shares 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ used as the dependent variables in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabExcessLinearTNZ_w_nonfood_ne}
 \end_layout
 
-\begin_layout Enumerate
-[urban-rural] In a population of consumers with no-reported assets in Tanzania,
- non-durable consumption could carry more status by itself.
- However, the status differences between those with assets and without assets
- are unlikely to be influenced by non-durable consumption.
- With urban-rural dummies confirm the significance.
- In Tanzania, rural consumer spend less portion on non-food and higher log_q_ne_
-food.
- In Nigeria, the effect of rural on portion on food/non-food is not significant.
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabExcessLinearNGR_w_nonfood_ne}
 \end_layout
 
-\begin_layout Enumerate
-[age]Older families have more food portions (w_food_ne) in both Tanzania
- and Nigeria (subsistence is not really away in Nigeria).
+\end_inset
+
+ (for Tanzania and Nigeria respectively) as follows
 \end_layout
 
-\begin_layout Enumerate
-[log_mean_A0 + occupation].
- It's better to look at the combination of occupation_rank and log_mean_A0.
- There is no substitution in general between non-food nde and assets (we
- should be looking at occupation+ assets).
- Looking at w_nonfood_ne, we see that individuals consistently spend more
- portion of budget when they have more assets in Tanzania (less so in Nigeria).
-\end_layout
-
-\begin_layout Enumerate
-[expensive-food and expensive-non-food regions] Expensive food regions decrease
- non-food portion and expensive non-food regions increase non-food portion
- (this effect does get lost when we observe all-nde i.e.
- food + non-food averages/prices ).
- When consumers live in area where food is expensive they would rather increase
- food portion but when they (also) live in areas where non-food prices are
- high, their non-food expenditure goes up (LESS SEG).
- Individuals with high prices of either food or non-food do seem to live
- together - with individuals focusing more on food.
- This means they would address food needs first but still go for non-durable
- consumption while they can - only that in Tanzania this effect is combined
- with occupation and assets (more so in comparison to Nigeria).
- Given higher income do consumers run to improve per-head food consumption
- instead? This is the only way the story can be developed.
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Combined effect of food and non-food prices/averages - The areas with higher
- average non-durable consumption have the effect of reducing non-durable
- consumption for the individual after accounting for income in both economies.
- The individual consumption moves together with the local consumption levels
- after accounting for total income, the consumer's non-durable consumption
- is slightly more stable with respect to local consumption levels in Nigeria.
-\end_layout
-
-\end_deeper
 \begin_layout Standard
-[Summary] 1.
- Asset differences are wider in TNZ - so consumers focus on non-durable
- consumption.
- That does not change the wide differences themselves.
- 2.
- The growth of w_nonfood with assets in Tanzania means that assets are more
- segregated in districts.
- More extreme differences mean less overlapping status consumption.3.
- Response to Food prices is different.
- (first point) The assets are higher in Nigeria and more uniformly distributed
- than in Tanzania.
- So non-durable consumption should be more important in Tanzania while Nigeria
- should have a higher role of assets.
- (second point) Asset-differences do have an influence more of segregative
- type in Tanzania.
- (third point) With more subsistence, we don't see any role of non-durable
- consumption in Tanzania.
- (1+2+3) asset-difference increase non-durable consumption - certainly not
- if food needs are not being met.
- (
-\series bold
-conclusion
-\series default
-) differences in assets don't encourage non-durable consumption.
+\begin_inset Formula 
+\begin{align*}
+w_{nonfood} & =\frac{q_{nonfood}}{q_{food}+q_{nonfood}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here are a few observations from these results
+\end_layout
+
+\begin_layout Enumerate
+The role of 
+\family typewriter
+\size small
+max_occupation_rank
+\family default
+\size default
+ and
+\family typewriter
+\size small
+ log_mean_A0
+\family default
+\size default
+ is strong in both the countries.
+ The 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ is more sensitive to assets and occupation rank in Tanzania.
+ In other words, higher asset regions (east of the country) seems to significant
+ly contribute to non-durable consumption share.
+\end_layout
+
+\begin_layout Enumerate
+In Tanzania, rural consumers spend less portion on non-food but in Nigeria,
+ the effect of urban factor variable on 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ is not significant.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Older families have more a higher proportion of expenditure on food 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ in both Tanzania and Nigeria.
+\end_layout
+
+\begin_layout Enumerate
+Larger family sizes have more non-food proportion indicating expansion of
+ external or social needs with the family size.
+\end_layout
+
+\begin_layout Enumerate
+Expensive food regions decrease non-food portion and increase food proportion.
+ This is merely food (including its quality) is a more important to the
+ consumer in both Nigeria and Tanzania.
+ Expensive non-food regions increase non-food portion as well - meaning
+  that the consumers with non-food expenditure proportion tend to be in
+ the same regions.
+ Put another way, the expenditure on non-food items is clustered across
+ regions in both Nigeria and Tanzania
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%(this effect does get lost when we observe all-nde i.e.
+ food + non-food averages/prices 
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Given higher income the consumers do seem to reduce per-head non-food consumptio
+n (see the significance of 
+\family typewriter
+\size small
+logx
+\family default
+\size default
+ for Tanzania and Nigeria).
+ The significance of excess consumption is different from the typical conditions
+ of a developed economy.
+\end_layout
+
+\begin_layout Enumerate
+The role of education ranks seems higher in Tanzania than Nigeria.
+ This suggests that consumer lifestyles are more segregated by education
+ levels - likely due to education levels being limited to fewer urban areas
+ in Tanzania.
+\end_layout
+
+\begin_layout Standard
+Since we are interested in the role played by extreme asset differences
+ on non-durable consumption excesses, we look first at the relative importance
+ of non-durable consumption compared to long-term assets for status purposes
+ in the two economies.
+ Second, we look at how extreme asset differences across regions influence
+ excess non-durable consumption in the economies.
+\end_layout
+
+\begin_layout Standard
+To the first point, we see that asset differences in Tanzania have a significant
+ influence on the non-durable consumption opportunities for the consumer.
+ While in a population of consumers with no-reported assets (e.g.
+ in Tanzania), non-durable consumption should carry all status - but the
+ status differences between those with assets and without assets are unlikely
+ to be influenced by non-durable consumption.
+ The higher proportion of non-durable consumption - no matter how significant
+ - cannot counteract the influence of significant differences in asset ownership
+ (as is the case in Tanzania).
+ In terms of the model we have discussed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, more extreme differences in wealth mean less overlapping status consumption-
+ an effect that is less extreme in Nigeria where assets are more uniformly
+ distributed and the role of assets towards status purposes is higher.
+\end_layout
+
+\begin_layout Standard
+The second point is that of the effect of asset-rich regions on levels non-durab
+le consumption.
+ The extreme differences in assets that split an economy into poor and rich
+ regions may segregate the non-durable consumption.
+ 
+\end_layout
+
+\begin_layout Standard
+When a high proportion of the non-durable expenditure is spent on food and
+ the consumers needs are significantly influenced by demand for food, the
+ role of asset differences is reduced further.
+ Food cannot be ignored.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% consider using dummies for north, east and south.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2385,8 +2815,8 @@ status open
 \begin_layout Plain Layout
 
 % 6.
- difference between the p_{non-food} coeff and p_{food} coeff is higher
- for TNZ than for NGR
+ (not significant) difference between the p_{non-food} coeff and p_{food}
+ coeff is higher for TNZ than for NGR
 \end_layout
 
 \begin_layout Plain Layout
@@ -2651,7 +3081,7 @@ caption{Nigeria: Linear estimation for $ w_{nonfood
 \backslash
 _ne} $ as dependent variable 
 \backslash
-label{tabExcessLinearNigeria_w_nonfood_ne}} 
+label{tabExcessLinearNGR_w_nonfood_ne}} 
 \backslash
 begin{tabular}{l*{3}{c}} 
 \backslash
@@ -3019,7 +3449,7 @@ caption{Tanzania: Linear estimation for $ w_{nonfood
 \backslash
 _ne} $ as dependent variable 
 \backslash
-label{tabExcessLinearTNZ_w_nonfood}} 
+label{tabExcessLinearTNZ_w_nonfood_ne}} 
 \backslash
 begin{tabular}{l*{3}{c}} 
 \backslash
@@ -3415,7 +3845,7 @@ caption{Tanzania: FE estimation for excess $ log(
 \backslash
 nu_{t}) $ as dependent variable 
 \backslash
-label{tabExcessFE}} 
+label{tabExcessFETNZ}} 
 \backslash
 begin{tabular}{l*{1}{c}} 
 \backslash
@@ -3581,7 +4011,7 @@ caption{Nigeria: FE estimation for excess $ log(
 \backslash
 nu_{t}) $ as dependent variable 
 \backslash
-label{tabExcessFE}} 
+label{tabExcessFENGR}} 
 \backslash
 begin{tabular}{l*{1}{c}} 
 \backslash
@@ -3721,66 +4151,6 @@ end{table}
 
 \end_layout
 
-\begin_layout Subsection
-Conclusions
-\end_layout
-
-\begin_layout Standard
-[Difference in assets costs] The difference in asset-costs causes the difference
- between Tanzania and Nigeria.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% consider using dummies for north, east and south.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Using asset ownership to define the consumer's context, we have considered
- status consumption ....
- while accounting for the income and lifestyle disparities that characterise
- a developing economy.
- Instead of focusing on visible consumption, we look at status consumption
- as non-necessary non-durable consumption apart from the stock of durable
- goods which serve as consumer's endowments.
-\end_layout
-
-\begin_layout Standard
-[Summary] 1.
- Asset differences are wider in TNZ - so consumers focus on non-durable
- consumption.
- That does not change the wide differences themselves.
- 2.
- The growth of w_nonfood with assets in Tanzania means that assets are more
- segregated in districts.
- More extreme differences mean less overlapping status consumption.3.
- Response to Food prices is different.
- (first point) The assets are higher in Nigeria and more uniformly distributed
- than in Tanzania.
- So non-durable consumption should be more important in Tanzania while Nigeria
- should have a higher role of assets.
- (second point) Asset-differences do have an influence more of segregative
- type in Tanzania.
- (third point) With more subsistence, we don't see any role of non-durable
- consumption in Tanzania.
- (1+2+3) asset-difference increase non-durable consumption - certainly not
- if food needs are not being met.
- (
-\series bold
-conclusion
-\series default
-) differences in assets don't encourage non-durable consumption.
-\end_layout
-
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -3803,11 +4173,7 @@ status open
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
-
+ 
 \backslash
 begin{longtable}[!p]{c c c l} 
 \backslash
@@ -3817,12 +4183,7 @@ label{itemsclassification_tn}}
 \backslash
 
 \backslash
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-
+  
 \backslash
 hline
 \backslash
@@ -3838,195 +4199,185 @@ multicolumn{1}{l}{name}
 \backslash
  
 \backslash
-hline
-\end_layout
-
-\begin_layout Plain Layout
-
-
+hline 
 \backslash
-endhead
-\end_layout
-
-\begin_layout Plain Layout
-
-
+endhead 
 \backslash
 
 \backslash
- & needs & carbs & rice
+ & food & carbs & rice
 \backslash
 _husked
 \backslash
 
 \backslash
- & needs & carbs & rice
+ & food & carbs & rice
 \backslash
 _paddy
 \backslash
 
 \backslash
- & needs & carbs & maize
+ & food & carbs & maize
 \backslash
 _green
 \backslash
 
 \backslash
- & needs & carbs & maize
+ & food & carbs & maize
 \backslash
 _grain
 \backslash
 
 \backslash
- & needs & carbs & maize
+ & food & carbs & maize
 \backslash
 _flour
 \backslash
 
 \backslash
- & needs & carbs & millet
+ & food & carbs & millet
 \backslash
 _grain
 \backslash
 
 \backslash
- & needs & carbs & millet
+ & food & carbs & millet
 \backslash
 _flour
 \backslash
 
 \backslash
- & needs & carbs & wheat
+ & food & carbs & wheat
 \backslash
 
 \backslash
- & needs & carbs & bread
+ & food & carbs & bread
 \backslash
 
 \backslash
- & needs & carbs & bunscakes
+ & food & carbs & bunscakes
 \backslash
 
 \backslash
- & needs & carbs & pasta
+ & food & carbs & pasta
 \backslash
 
 \backslash
- & needs & carbs & othercereal
+ & food & carbs & othercereal
 \backslash
 
 \backslash
- & needs & carbs & cassava
+ & food & carbs & cassava
 \backslash
 _fresh
 \backslash
 
 \backslash
- & needs & carbs & cassava
+ & food & carbs & cassava
 \backslash
 _flour
 \backslash
 
 \backslash
- & needs & carbs & sweet
+ & food & carbs & sweet
 \backslash
 _potato
 \backslash
 
 \backslash
- & needs & carbs & potatoes
+ & food & carbs & potatoes
 \backslash
 
 \backslash
- & needs & fat & peanuts
+ & food & fat & peanuts
 \backslash
 
 \backslash
- & needs & fat & coconut
+ & food & fat & coconut
 \backslash
 
 \backslash
- & needs & fat & cashew
+ & food & fat & cashew
 \backslash
 _almonds
 \backslash
 
 \backslash
- & needs & fat & nut
+ & food & fat & nut
 \backslash
 _products
 \backslash
 
 \backslash
- & needs & fat & cooking
+ & food & fat & cooking
 \backslash
 _oil
 \backslash
 
 \backslash
- & needs & fat & butter
+ & food & fat & butter
 \backslash
 _margarine
 \backslash
 
 \backslash
- & needs & protein & pulses
+ & food & protein & pulses
 \backslash
 
 \backslash
- & needs & protein & milk
+ & food & protein & milk
 \backslash
 _products
 \backslash
 
 \backslash
- & needs & protein & fresh
+ & food & protein & fresh
 \backslash
 _milk
 \backslash
 
 \backslash
- & needs & protein & canned
+ & food & protein & canned
 \backslash
 _milk
 \backslash
 
 \backslash
- & needs & protein & goat
+ & food & protein & goat
 \backslash
 
 \backslash
- & needs & protein & beef
+ & food & protein & beef
 \backslash
 
 \backslash
- & needs & protein & pork
+ & food & protein & pork
 \backslash
 
 \backslash
- & needs & protein & chicken
+ & food & protein & chicken
 \backslash
 
 \backslash
- & needs & protein & wild
+ & food & protein & wild
 \backslash
 _birds
 \backslash
 
 \backslash
- & needs & protein & wild
+ & food & protein & wild
 \backslash
 _meat
 \backslash
 
 \backslash
- & needs & protein & fish
+ & food & protein & fish
 \backslash
 _seafood
 \backslash
 
 \backslash
- & needs & protein & dried
+ & food & protein & dried
 \backslash
 _canned
 \backslash
@@ -4034,25 +4385,25 @@ _fish
 \backslash
 
 \backslash
- & needs & protein & packaged
+ & food & protein & packaged
 \backslash
 _fish
 \backslash
 
 \backslash
- & needs & protein & eggs
+ & food & protein & eggs
 \backslash
 
 \backslash
- & needs & fruitsveg & onion
+ & food & fruitsveg & onion
 \backslash
 
 \backslash
- & needs & fruitsveg & greens
+ & food & fruitsveg & greens
 \backslash
 
 \backslash
- & needs & fruitsveg & dried
+ & food & fruitsveg & dried
 \backslash
 _canned
 \backslash
@@ -4060,35 +4411,35 @@ _veg
 \backslash
 
 \backslash
- & needs & fruitsveg & yam
+ & food & fruitsveg & yam
 \backslash
 
 \backslash
- & needs & fruitsveg & banana
+ & food & fruitsveg & banana
 \backslash
 _green
 \backslash
 
 \backslash
- & needs & fruitsveg & othervegstarch
+ & food & fruitsveg & othervegstarch
 \backslash
 
 \backslash
- & needs & fruitsveg & banana
+ & food & fruitsveg & banana
 \backslash
 _ripe
 \backslash
 
 \backslash
- & needs & fruitsveg & citrus
+ & food & fruitsveg & citrus
 \backslash
 
 \backslash
- & needs & fruitsveg & mangoes
+ & food & fruitsveg & mangoes
 \backslash
 
 \backslash
- & needs & fruitsveg & sugarcane
+ & food & fruitsveg & sugarcane
 \backslash
 
 \backslash
@@ -7018,7 +7369,7 @@ caption{Nigeria: Linear estimation for $ log(q_{nonfood
 \backslash
 _ne}) $ as dependent variable 
 \backslash
-label{tabExcessLinearNigeria_log_q_nonfood_ne}} 
+label{tabExcessLinearNGR_log_q_nonfood_ne}} 
 \backslash
 begin{tabular}{l*{3}{c}} 
 \backslash
