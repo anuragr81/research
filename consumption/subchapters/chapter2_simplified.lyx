@@ -381,6 +381,12 @@ onecolumn
 \end_layout
 
 \begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Research-Question"
+
+\end_inset
+
 Research Question
 \end_layout
 
@@ -803,16 +809,16 @@ With the first order conditions, we have
 \end_layout
 
 \begin_layout Standard
-Above motivates our regressions of 
+Above motivates our regressions of measures of 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- -share against 
+ against 
 \begin_inset Formula $r_{t}$
 \end_inset
 
- and the the average non-durable consumption in the consumer's locality
- that we discuss in Section 
+ and the the average non-durable consumption for food and non-food items
+ in the consumer's locality in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Results"
@@ -2447,604 +2453,41 @@ w_{nonfood} & =\frac{q_{nonfood}}{q_{food}+q_{nonfood}}
 \end_layout
 
 \begin_layout Standard
-Here are a few observations from these results
-\end_layout
-
-\begin_layout Enumerate
-The role of 
-\family typewriter
-\size small
-max_occupation_rank
-\family default
-\size default
- and
-\family typewriter
-\size small
- log_mean_A0
-\family default
-\size default
- is strong in both the countries.
- The 
-\begin_inset Formula $w_{nonfood}$
-\end_inset
-
- is more sensitive to assets and occupation rank in Tanzania.
- In other words, higher asset regions (east of the country) seems to significant
-ly contribute to non-durable consumption share.
-\end_layout
-
-\begin_layout Enumerate
-In Tanzania, rural consumers spend less portion on non-food but in Nigeria,
- the effect of urban factor variable on 
-\begin_inset Formula $w_{nonfood}$
-\end_inset
-
- is not significant.
- 
-\end_layout
-
-\begin_layout Enumerate
-Older families have more a higher proportion of expenditure on food 
-\begin_inset Formula $w_{nonfood}$
-\end_inset
-
- in both Tanzania and Nigeria.
-\end_layout
-
-\begin_layout Enumerate
-Larger family sizes have more non-food proportion indicating expansion of
- external or social needs with the family size.
-\end_layout
-
-\begin_layout Enumerate
-Expensive food regions decrease non-food portion and increase food proportion.
- This is merely food (including its quality) is a more important to the
- consumer in both Nigeria and Tanzania.
- Expensive non-food regions increase non-food portion as well - meaning
-  that the consumers with non-food expenditure proportion tend to be in
- the same regions.
- Put another way, the expenditure on non-food items is clustered across
- regions in both Nigeria and Tanzania
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%(this effect does get lost when we observe all-nde i.e.
- food + non-food averages/prices 
-\end_layout
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Enumerate
-Given higher income the consumers do seem to reduce per-head non-food consumptio
-n (see the significance of 
-\family typewriter
-\size small
-logx
-\family default
-\size default
- for Tanzania and Nigeria).
- The significance of excess consumption is different from the typical conditions
- of a developed economy.
-\end_layout
-
-\begin_layout Enumerate
-The role of education ranks seems higher in Tanzania than Nigeria.
- This suggests that consumer lifestyles are more segregated by education
- levels - likely due to education levels being limited to fewer urban areas
- in Tanzania.
-\end_layout
-
-\begin_layout Standard
-Since we are interested in the role played by extreme asset differences
- on non-durable consumption excesses, we look first at the relative importance
- of non-durable consumption compared to long-term assets for status purposes
- in the two economies.
- Second, we look at how extreme asset differences across regions influence
- excess non-durable consumption in the economies.
-\end_layout
-
-\begin_layout Standard
-To the first point, we see that asset differences in Tanzania have a significant
- influence on the non-durable consumption opportunities for the consumer.
- While in a population of consumers with no-reported assets (e.g.
- in Tanzania), non-durable consumption should carry all status - but the
- status differences between those with assets and without assets are unlikely
- to be influenced by non-durable consumption.
- The higher proportion of non-durable consumption - no matter how significant
- - cannot counteract the influence of significant differences in asset ownership
- (as is the case in Tanzania).
- In terms of the model we have discussed in Section 
+In the cost-function equivalent of Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Model"
+reference "eq:basic_utility"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
-, more extreme differences in wealth mean less overlapping status consumption-
- an effect that is less extreme in Nigeria where assets are more uniformly
- distributed and the role of assets towards status purposes is higher.
-\end_layout
-
-\begin_layout Standard
-The second point is that of the effect of asset-rich regions on levels non-durab
-le consumption.
- The extreme differences in assets that split an economy into poor and rich
- regions may segregate the non-durable consumption.
- 
-\end_layout
-
-\begin_layout Standard
-When a high proportion of the non-durable expenditure is spent on food and
- the consumers needs are significantly influenced by demand for food, the
- role of asset differences is reduced further.
- Food cannot be ignored.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% consider using dummies for north, east and south.
-\end_layout
-
+, 
+\begin_inset Formula $w_{nonfood}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% we cannot fix isrural for 2014 tnz - as it is associated with ward and
- we don't know the name of the ward.
-\end_layout
-
-\begin_layout Plain Layout
-
-% we thus use the 2012 data
-\end_layout
-
-\begin_layout Plain Layout
-
-%(merge(unique(indivdat2012[,c("S","E","isrural")]),indivdat2014[,c("S","E",'reg
-ion','district','ward')],by=c("S","E"),all.y=T))
-\end_layout
-
+ would correspond to price derivatives as 
+\begin_inset Formula $w_{nonfood}=\frac{\partial u}{\partial p_{nonfood}}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% 
-\end_layout
-
-\begin_layout Plain Layout
-
-% summary(lm(data=tn$df2012,log_q_ne ~ logx + log_mean_cost_ne + log_mean_A0
- + max_occupation_rank + hh_age + max_education_rank + isrural))
-\end_layout
-
-\begin_layout Plain Layout
-
-% sensitivity to non-food and food prices is reversed in nigeria
-\end_layout
-
-\begin_layout Plain Layout
-
-% summary(lm(data=ng$df2012,log_q_ne_nonfood ~logx + log_mean_cost_ne_nonfood
- + log_mean_cost_ne_food + log_mean_A0 + max_occupation_rank + age + max_educati
-on_rank + is_urban + hsize))
-\end_layout
-
-\begin_layout Plain Layout
-
-% summary(lm(data=tn$df2012,log_q_ne_nonfood ~logx + log_mean_cost_ne_nonfood
- + log_mean_cost_ne_food + log_mean_A0 + max_occupation_rank + hh_age +
- max_education_rank + isrural + hsize))
-\end_layout
-
-\begin_layout Plain Layout
-
-%
-\end_layout
-
+ and motivate the regressions of 
+\begin_inset Formula $w_{food},w_{nonfood}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%
-\end_layout
-
-\begin_layout Plain Layout
-
-% A.
- Expenditure on Non-Food q_ne_food
-\end_layout
-
-\begin_layout Plain Layout
-
-% 1.
- self-price (food)is less important (it's a necessity) for both
-\end_layout
-
-\begin_layout Plain Layout
-
-% 2.
- non-food and food coefficients are negative
-\end_layout
-
-\begin_layout Plain Layout
-
-% 3.
- isrural effect is +ve for TNZ , isurban effect is -ve for NGR
-\end_layout
-
-\begin_layout Plain Layout
-
-% 4.
- hsize is negative
-\end_layout
-
-\begin_layout Plain Layout
-
-% 5.
- age is more important in Nigeria- but that is suspect
-\end_layout
-
-\begin_layout Plain Layout
-
-% 6.
- occupation rank is more important in tanzania
-\end_layout
-
-\begin_layout Plain Layout
-
-% 7.
- log_mean_A0 is strong for both (what does that mean)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-% B.
- Expenditure on Non-Food q_ne_nonfood
-\end_layout
-
-\begin_layout Plain Layout
-
-% 1.
- age is more important in Nigeria- that is suspect
-\end_layout
-
-\begin_layout Plain Layout
-
-% 2.
- occupation rank is more important in tanzania
-\end_layout
-
-\begin_layout Plain Layout
-
-% 3.
- rural/urban tag is not worth comparing (because of different notions)
-\end_layout
-
-\begin_layout Plain Layout
-
-% 4.
- log_mean_A0 is weak in Tanzania (statistically stronger in Nigeria)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-% Weights based regression comparison in C and D - assuming a substitution
- between food and non-food
-\end_layout
-
-\begin_layout Plain Layout
-
-% C.
- w_food
-\end_layout
-
-\begin_layout Plain Layout
-
-% 1.
- w_food value is higher overall in tanzania (w_non_food low)
-\end_layout
-
-\begin_layout Plain Layout
-
-% 2.
- log_mean_A0 is sometimes weaker for NGR (less segregation)
-\end_layout
-
-\begin_layout Plain Layout
-
-% 3.
- age is important for both NGR and TNZ - it is positive for both 
-\end_layout
-
-\begin_layout Plain Layout
-
-% 4.
- education seems more important than occupation for TNZ (opposite in NGR)
-\end_layout
-
-\begin_layout Plain Layout
-
-% 5.
- p_{non-food} coeff is -ve and p_{food} coeff is +ve (both significant)
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-% 6.
- (not significant) difference between the p_{non-food} coeff and p_{food}
- coeff is higher for TNZ than for NGR
-\end_layout
-
-\begin_layout Plain Layout
-
-% 7.
- hsize is negative for both TNZ and NGR
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-% D.w_nonfood
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-% 1.
- w_non_food value is lower overall in tanzania
-\end_layout
-
-\begin_layout Plain Layout
-
-% 2.
- log_mean_A0 is somewhat weaker in Nigeria
-\end_layout
-
-\begin_layout Plain Layout
-
-% 3.
- isrural significant in TNZ but is_urban insignificant in NGR
-\end_layout
-
-\begin_layout Plain Layout
-
-% 4.
- hsize is strong +ve in for non-food in both TNZ and NGR
-\end_layout
-
-\begin_layout Plain Layout
-
-% 5.
- p_{food} coeff is negative and p_{non-food} coeff is positive
-\end_layout
-
-\begin_layout Plain Layout
-
-% 6.
- occupation effect is higher in Tanzania (more segregation)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-% E.
- Interpretations
-\end_layout
-
-\begin_layout Plain Layout
-
-% 1.
- C5 says that higher price-non-food-expenditure suppresses w_food (individuals
- would decrease w_food when there is higher non-food area - so they move
- together with the food consumption).
- higher-price-food-expenditure on the other hand increases food weight (meaning
- consumers run to food when prices are higher).
- C6 suggests that consumers run to food more easily in TNZ - thus indicating
- more non-durable consumption in Nigeria.
-\end_layout
-
-\begin_layout Plain Layout
-
-% 2.
- C3 says that older households have higher food consumption.
- C7 means that bigger households tend to have lower w_food than smaller
- households.
- Younger households have less w_food - meaning more non-durable consumption
- among younger people in both countries.
-\end_layout
-
-\begin_layout Plain Layout
-
-% 3.
- D5 says high-food-expenditure-regions have lower non-durable consumption
- (again because food is more important).
- D5 also says that high-non-food-expenditure regions have a positive influence
- so the consumption does move together for non-food.
-\end_layout
-
-\begin_layout Plain Layout
-
-% 4.
- D2 says that asset-differences have a -ve influence on w_nonfood.
- Richer areas suppress non-food expenditure a lot in Tanzania.
- Urban areas actually push people to food.
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-% F.
- How to get q_ne_food
-\end_layout
-
-\begin_layout Plain Layout
-
-% 1.
- TNZ:
-\end_layout
-
-\begin_layout Plain Layout
-
-% summary(lm(data=tn$df2012,log_q_ne_food ~logx + log_mean_cost_ne_food
- + log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + hh_age
- + max_education_rank + isrural + hsize))
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-% 2.
- NGR:
-\end_layout
-
-\begin_layout Plain Layout
-
-% summary(lm(data=ng$df2012,log_q_ne_food ~logx + log_mean_cost_ne_food
- + log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + age +
- max_education_rank + is_urban + hsize))
-\end_layout
-
-\begin_layout Plain Layout
-
-% For 2010 use: summary(lm(data=subset(ng$df2010,is.finite(logx)),log_q_ne_food
- ~logx + log_mean_cost_ne_food + log_mean_cost_ne_nonfood  + log_mean_A0
- + max_occupation_rank + age + max_education_rank + is_urban + hsize))
-\end_layout
-
-\begin_layout Plain Layout
-
-% 
-\end_layout
-
-\begin_layout Plain Layout
-
-% G.
- How to get weights non-food
-\end_layout
-
-\begin_layout Plain Layout
-
-% 1.
- TNZ:
-\end_layout
-
-\begin_layout Plain Layout
-
-% summary(lm(data=tn$df2012,w_nonfood_ne ~logx + log_mean_cost_ne_food +
- log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + hh_age
- + max_education_rank + isrural + hsize))
-\end_layout
-
-\begin_layout Plain Layout
-
-% 2.
- NGR:
-\end_layout
-
-\begin_layout Plain Layout
-
-% summary(lm(data=ng$df2012,w_nonfood_ne ~logx + log_mean_cost_ne_food +
- log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + age + max_educa
-tion_rank + is_urban + hsize))
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
+ against the prices of 
+\begin_inset Formula $p_{food},p_{nonfood}$
 \end_inset
 
+ , 
+\begin_inset Formula $log(x)$
+\end_inset
 
-\end_layout
-
-\begin_layout Standard
-[Granularity and Urban-rural differences] Notice that the granularity of
- aggregation is of key importance in our interpretation.
- There is no denying that income and occupation differences within levels
- finer than the district level may be relevant but the district-level aggregatio
-n only allows us to understand wider regional disparities
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-The measure 
+ as well as 
 \begin_inset Formula $r_{t}$
 \end_inset
 
- does however consider the effect of urban and rural differences due to
- urban and rural disparities in wealth.
- If a consumer gains more status by owning a luxury car in the city than
- owning a tractor (which cost the same) in a village, our approach might
- not differentiate between the vehicle being a tractor or a luxury car but
- it does consider the asset in a rich area (city) and the poor area (village).
-\end_layout
-
-\end_inset
-
-.
+ for cross-sectional view of the consumer data.
 \end_layout
 
 \begin_layout Standard
@@ -3816,6 +3259,224 @@ end{table}
 \end_layout
 
 \begin_layout Standard
+Here are a few observations from these results
+\end_layout
+
+\begin_layout Enumerate
+While the role of 
+\family typewriter
+\size small
+max_occupation_rank
+\family default
+\size default
+ and
+\family typewriter
+\size small
+ log_mean_A0
+\family default
+\size default
+ is strong in both the countries, 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ is more sensitive to assets and occupation rank in Tanzania.
+ Higher-asset regions (east of the country) seem to contribute significantly
+ to the non-durable consumption share in Tanzania.
+\end_layout
+
+\begin_layout Enumerate
+In Tanzania, rural consumers spend less portion on non-food while in Nigeria,
+ the effect of urban factor variable on 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ is not significant.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Larger family sizes have more non-food proportion indicating expansion of
+ external or social needs with the family size.
+\end_layout
+
+\begin_layout Enumerate
+
+\family typewriter
+\size small
+age
+\family default
+\size default
+ of the household has a positive effect on the proportion of expenditure
+ on food 
+\begin_inset Formula $w_{food}$
+\end_inset
+
+ in both Tanzania and Nigeria.
+ The higher portion of expenditure spent on food spent in families with
+ older household-heads (the median household-head age is 43 in Tanzania
+ and 48 in Nigeria), suggests a stronger demand for quality in families
+ young children.
+\end_layout
+
+\begin_layout Enumerate
+Expensive food regions seem to decrease non-food proportion 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ and increase food proportion 
+\begin_inset Formula $w_{food}$
+\end_inset
+
+.
+ This seems to suggest again that food (including its quality) is more important
+ to the consumers in both Nigeria and Tanzania than the non-food non-durable
+ consumption.
+ On the other hand, since expensive non-food regions increase non-food portion
+ as well, the consumers with higher non-food expenditure proportion tend
+ to be in the same regions.
+ Put another way, the expenditure on non-food items is clustered across
+ regions in both Nigeria and Tanzania
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%(this effect does get lost when we observe all-nde i.e.
+ food + non-food averages/prices 
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Given higher income, the per-head non-food consumption proportion 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ drops for the consumers in both Tanzania and Nigeria (see the significance
+ of 
+\family typewriter
+\size small
+logx
+\family default
+\size default
+ for Tanzania and Nigeria in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabExcessLinearTNZ_w_nonfood_ne}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabExcessLinearNGR_w_nonfood_ne}
+\end_layout
+
+\end_inset
+
+ respectively).
+ The significance of excess consumption here is different from the typical
+ conditions of a developed economy.
+\end_layout
+
+\begin_layout Enumerate
+The role of education ranks seems higher in Tanzania than Nigeria.
+ This suggests that consumer lifestyles are more segregated by education
+ levels - likely due to individuals with high education levels being limited
+ to fewer urban areas in Tanzania.
+\end_layout
+
+\begin_layout Section
+Conclusions
+\end_layout
+
+\begin_layout Standard
+Since we are interested in the role played by extreme asset differences
+ on non-durable consumption excesses, we look first at the relative importance
+ of non-durable consumption compared to long-term assets for status purposes
+ in the two economies.
+ Second, we look at how extreme asset differences across regions influence
+ excess non-durable consumption in the economies.
+\end_layout
+
+\begin_layout Standard
+To the first point, we use the model in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to argue that the role of assets is higher for status consumption in Nigeria.
+ In a population of consumers with no-reported assets (e.g.
+ in Tanzania), non-durable consumption (including food) is all that can
+ carry some status.
+ In Nigeria where assets are more uniformly distributed, the role of assets
+ towards status purposes is higher.
+ We verify a substitution between assets and non-durable consumption (including
+ both food and non-food nondurable consumption) for panel data households
+ in Nigeria for year 2012 (see Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabExcessFENGR}
+\end_layout
+
+\end_inset
+
+).
+ This substitution is not significant in Tanzania (see Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabExcessFETNZ}
+\end_layout
+
+\end_inset
+
+)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Note however that when a high proportion of the non-durable expenditure
+ is spent on food and the consumers needs are significantly influenced by
+ demand for food, the role of asset differences is generally meant to be
+ lower (compared to the environment of a developed economy).
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -3841,9 +3502,8 @@ else
 \backslash
 fi} 
 \backslash
-caption{Tanzania: FE estimation for excess $ log(
-\backslash
-nu_{t}) $ as dependent variable 
+caption{Tanzania: FE estimation for excess $ log(q_ne_{t}) $ as dependent
+ variable 
 \backslash
 label{tabExcessFETNZ}} 
 \backslash
@@ -4007,9 +3667,8 @@ else
 \backslash
 fi} 
 \backslash
-caption{Nigeria: FE estimation for excess $ log(
-\backslash
-nu_{t}) $ as dependent variable 
+caption{Nigeria: FE estimation for excess $ log(q_ne_{t}) $ as dependent
+ variable 
 \backslash
 label{tabExcessFENGR}} 
 \backslash
@@ -4149,6 +3808,499 @@ end{table}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+To the second point, we note that the status differences between those with
+ assets and without assets are unlikely to be influenced by non-durable
+ consumption.
+ The higher proportion of non-durable consumption - no matter how significant
+ - cannot countervail the influence of significant differences in asset
+ ownership (as is the case in Tanzania).
+ The asset differences in Tanzania thus have a significant influence on
+ the non-durable consumption opportunities for the consumer.
+ In term of the model from Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the more extreme differences in wealth imply a less overlapping status
+ consumption - an effect that is less extreme in Nigeria.
+ To answer the question we had in motivated in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Research-Question"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the effect of asset-rich regions on levels of non-durable consumption
+ can be extreme and the segregation of demand based on asset-rich regions
+ significant.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% consider using dummies for north, east and south.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% we cannot fix isrural for 2014 tnz - as it is associated with ward and
+ we don't know the name of the ward.
+\end_layout
+
+\begin_layout Plain Layout
+
+% we thus use the 2012 data
+\end_layout
+
+\begin_layout Plain Layout
+
+%(merge(unique(indivdat2012[,c("S","E","isrural")]),indivdat2014[,c("S","E",'reg
+ion','district','ward')],by=c("S","E"),all.y=T))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% 
+\end_layout
+
+\begin_layout Plain Layout
+
+% summary(lm(data=tn$df2012,log_q_ne ~ logx + log_mean_cost_ne + log_mean_A0
+ + max_occupation_rank + hh_age + max_education_rank + isrural))
+\end_layout
+
+\begin_layout Plain Layout
+
+% sensitivity to non-food and food prices is reversed in nigeria
+\end_layout
+
+\begin_layout Plain Layout
+
+% summary(lm(data=ng$df2012,log_q_ne_nonfood ~logx + log_mean_cost_ne_nonfood
+ + log_mean_cost_ne_food + log_mean_A0 + max_occupation_rank + age + max_educati
+on_rank + is_urban + hsize))
+\end_layout
+
+\begin_layout Plain Layout
+
+% summary(lm(data=tn$df2012,log_q_ne_nonfood ~logx + log_mean_cost_ne_nonfood
+ + log_mean_cost_ne_food + log_mean_A0 + max_occupation_rank + hh_age +
+ max_education_rank + isrural + hsize))
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\end_layout
+
+\begin_layout Plain Layout
+
+% A.
+ Expenditure on Non-Food q_ne_food
+\end_layout
+
+\begin_layout Plain Layout
+
+% 1.
+ self-price (food)is less important (it's a necessity) for both
+\end_layout
+
+\begin_layout Plain Layout
+
+% 2.
+ non-food and food coefficients are negative
+\end_layout
+
+\begin_layout Plain Layout
+
+% 3.
+ isrural effect is +ve for TNZ , isurban effect is -ve for NGR
+\end_layout
+
+\begin_layout Plain Layout
+
+% 4.
+ hsize is negative
+\end_layout
+
+\begin_layout Plain Layout
+
+% 5.
+ age is more important in Nigeria- but that is suspect
+\end_layout
+
+\begin_layout Plain Layout
+
+% 6.
+ occupation rank is more important in tanzania
+\end_layout
+
+\begin_layout Plain Layout
+
+% 7.
+ log_mean_A0 is strong for both (what does that mean)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% B.
+ Expenditure on Non-Food q_ne_nonfood
+\end_layout
+
+\begin_layout Plain Layout
+
+% 1.
+ age is more important in Nigeria- that is suspect
+\end_layout
+
+\begin_layout Plain Layout
+
+% 2.
+ occupation rank is more important in tanzania
+\end_layout
+
+\begin_layout Plain Layout
+
+% 3.
+ rural/urban tag is not worth comparing (because of different notions)
+\end_layout
+
+\begin_layout Plain Layout
+
+% 4.
+ log_mean_A0 is weak in Tanzania (statistically stronger in Nigeria)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Weights based regression comparison in C and D - assuming a substitution
+ between food and non-food
+\end_layout
+
+\begin_layout Plain Layout
+
+% C.
+ w_food
+\end_layout
+
+\begin_layout Plain Layout
+
+% 1.
+ w_food value is higher overall in tanzania (w_non_food low)
+\end_layout
+
+\begin_layout Plain Layout
+
+% 2.
+ log_mean_A0 is sometimes weaker for NGR (less segregation)
+\end_layout
+
+\begin_layout Plain Layout
+
+% 3.
+ age is important for both NGR and TNZ - it is positive for both 
+\end_layout
+
+\begin_layout Plain Layout
+
+% 4.
+ education seems more important than occupation for TNZ (opposite in NGR)
+\end_layout
+
+\begin_layout Plain Layout
+
+% 5.
+ p_{non-food} coeff is -ve and p_{food} coeff is +ve (both significant)
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% 6.
+ (not significant) difference between the p_{non-food} coeff and p_{food}
+ coeff is higher for TNZ than for NGR
+\end_layout
+
+\begin_layout Plain Layout
+
+% 7.
+ hsize is negative for both TNZ and NGR
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% D.w_nonfood
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% 1.
+ w_non_food value is lower overall in tanzania
+\end_layout
+
+\begin_layout Plain Layout
+
+% 2.
+ log_mean_A0 is somewhat weaker in Nigeria
+\end_layout
+
+\begin_layout Plain Layout
+
+% 3.
+ isrural significant in TNZ but is_urban insignificant in NGR
+\end_layout
+
+\begin_layout Plain Layout
+
+% 4.
+ hsize is strong +ve in for non-food in both TNZ and NGR
+\end_layout
+
+\begin_layout Plain Layout
+
+% 5.
+ p_{food} coeff is negative and p_{non-food} coeff is positive
+\end_layout
+
+\begin_layout Plain Layout
+
+% 6.
+ occupation effect is higher in Tanzania (more segregation)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% E.
+ Interpretations
+\end_layout
+
+\begin_layout Plain Layout
+
+% 1.
+ C5 says that higher price-non-food-expenditure suppresses w_food (individuals
+ would decrease w_food when there is higher non-food area - so they move
+ together with the food consumption).
+ higher-price-food-expenditure on the other hand increases food weight (meaning
+ consumers run to food when prices are higher).
+ C6 suggests that consumers run to food more easily in TNZ - thus indicating
+ more non-durable consumption in Nigeria.
+\end_layout
+
+\begin_layout Plain Layout
+
+% 2.
+ C3 says that older households have higher food consumption.
+ C7 means that bigger households tend to have lower w_food than smaller
+ households.
+ Younger households have less w_food - meaning more non-durable consumption
+ among younger people in both countries.
+\end_layout
+
+\begin_layout Plain Layout
+
+% 3.
+ D5 says high-food-expenditure-regions have lower non-durable consumption
+ (again because food is more important).
+ D5 also says that high-non-food-expenditure regions have a positive influence
+ so the consumption does move together for non-food.
+\end_layout
+
+\begin_layout Plain Layout
+
+% 4.
+ D2 says that asset-differences have a -ve influence on w_nonfood.
+ Richer areas suppress non-food expenditure a lot in Tanzania.
+ Urban areas actually push people to food.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% F.
+ How to get q_ne_food
+\end_layout
+
+\begin_layout Plain Layout
+
+% 1.
+ TNZ:
+\end_layout
+
+\begin_layout Plain Layout
+
+% summary(lm(data=tn$df2012,log_q_ne_food ~logx + log_mean_cost_ne_food
+ + log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + hh_age
+ + max_education_rank + isrural + hsize))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% 2.
+ NGR:
+\end_layout
+
+\begin_layout Plain Layout
+
+% summary(lm(data=ng$df2012,log_q_ne_food ~logx + log_mean_cost_ne_food
+ + log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + age +
+ max_education_rank + is_urban + hsize))
+\end_layout
+
+\begin_layout Plain Layout
+
+% For 2010 use: summary(lm(data=subset(ng$df2010,is.finite(logx)),log_q_ne_food
+ ~logx + log_mean_cost_ne_food + log_mean_cost_ne_nonfood  + log_mean_A0
+ + max_occupation_rank + age + max_education_rank + is_urban + hsize))
+\end_layout
+
+\begin_layout Plain Layout
+
+% 
+\end_layout
+
+\begin_layout Plain Layout
+
+% G.
+ How to get weights non-food
+\end_layout
+
+\begin_layout Plain Layout
+
+% 1.
+ TNZ:
+\end_layout
+
+\begin_layout Plain Layout
+
+% summary(lm(data=tn$df2012,w_nonfood_ne ~logx + log_mean_cost_ne_food +
+ log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + hh_age
+ + max_education_rank + isrural + hsize))
+\end_layout
+
+\begin_layout Plain Layout
+
+% 2.
+ NGR:
+\end_layout
+
+\begin_layout Plain Layout
+
+% summary(lm(data=ng$df2012,w_nonfood_ne ~logx + log_mean_cost_ne_food +
+ log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + age + max_educa
+tion_rank + is_urban + hsize))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+[Granularity and Urban-rural differences] Notice that the granularity of
+ aggregation is of key importance in our interpretation.
+ There is no denying that income and occupation differences within levels
+ finer than the district level may be relevant but the district-level aggregatio
+n only allows us to understand wider regional disparities
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The measure 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ does however consider the effect of urban and rural differences due to
+ urban and rural disparities in wealth.
+ If a consumer gains more status by owning a luxury car in the city than
+ owning a tractor (which cost the same) in a village, our approach might
+ not differentiate between the vehicle being a tractor or a luxury car but
+ it does consider the asset in a rich area (city) and the poor area (village).
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
