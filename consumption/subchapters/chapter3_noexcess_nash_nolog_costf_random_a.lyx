@@ -745,6 +745,17 @@ noprefix "false"
 \end_layout
 
 \begin_layout Subsection
+Short-Term Equilibrium
+\end_layout
+
+\begin_layout Standard
+Short-term equilibrium analysis was based on the idea that consumers save
+ it all up at the end of their horizon.
+ But now our approach has been reversed in the light of the long-term conditions
+ - which require the asset to be zeroed.
+\end_layout
+
+\begin_layout Subsection
 General equilibrium conditions
 \end_layout
 
@@ -2338,7 +2349,7 @@ Notice that unlike the finite-horizon optimisation problems, the consumer
 \end_inset
 
 .
- With that, the optimisation...
+ With that, the optimisation ...
 \end_layout
 
 \begin_layout Standard
@@ -2371,9 +2382,151 @@ noprefix "false"
  cannot be assumed.
  The next equilibrium we look for is when consumers consider the possibility
  of a swap while carrying over the past assets.
+ This swap would include a Markov chain where the consumer has a fixed expected
+ horizon 
+\begin_inset Formula $T$
+\end_inset
+
+ in mind at which time she would not save anything and spend everything
+ towards status consumption as her savings are about to disappear.
+ 
 \end_layout
 
 \begin_layout Standard
+Considering a simpler formulation where 
+\begin_inset Formula $T=2$
+\end_inset
+
+ and is known to the consumer so that the only choice the consumer makes
+ is at 
+\begin_inset Formula $t=1$
+\end_inset
+
+ .
+ The consumer in band 1 would choose 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\prescript{1}{}\nu_{1}$
+\end_inset
+
+ so that her utility at 
+\begin_inset Formula $t=T=2$
+\end_inset
+
+ is maximised.
+ Since the consumer expects her assets to disappear at time 
+\begin_inset Formula $T=2$
+\end_inset
+
+, her expected utility at 
+\begin_inset Formula $T=1$
+\end_inset
+
+ is 
+\begin_inset Formula $W(\prescript{2}{}\nu_{1})u(y_{2})+(1-W(\prescript{2}{}\nu_{1}))u(y_{1})$
+\end_inset
+
+ if she is in band 1 in period 
+\begin_inset Formula $t=1$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{2}=(1-L(\prescript{1}{}\nu_{2}))u(y_{2})+L(\prescript{1}{}\nu_{2})u(y_{1})$
+\end_inset
+
+ if she is band 2 in the period 
+\begin_inset Formula $t=1$
+\end_inset
+
+.
+  With 
+\begin_inset Formula $U_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{2}$
+\end_inset
+
+ known, we can find out 
+\begin_inset Formula $\prescript{1}{}\nu_{1}$
+\end_inset
+
+ that would optimise 
+\begin_inset Formula $W(\prescript{1}{}\nu_{1})U_{2}+(1-W(\prescript{1}{}\nu_{1}))U_{1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Similarly, for the consumer in band 2, the 
+\begin_inset Formula $\prescript{2}{}\nu_{2}=y_{2}$
+\end_inset
+
+ if she remains in band 2 at 
+\begin_inset Formula $t=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\prescript{2}{}\nu_{2}=y_{1}$
+\end_inset
+
+ if she is demoted to band 1 at 
+\begin_inset Formula $t=1$
+\end_inset
+
+.
+ 
+\begin_inset Formula $U_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{2}$
+\end_inset
+
+ remain the same as before and the consumer in band 2 would choose 
+\begin_inset Formula $\prescript{1}{}\nu_{2}$
+\end_inset
+
+ to maximise 
+\begin_inset Formula $L(\prescript{1}{}\nu_{2})U_{1}+(1-L(\prescript{1}{}\nu_{2}))U_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
 The accumulation in the next period comprises both of the savings from the
  period 
 \begin_inset Formula $t$
@@ -2434,7 +2587,7 @@ The accumulation in the next period comprises both of the savings from the
  is
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Formula 
 \begin{align*}
 \prescript{t+1}{}B_{1} & =W_{1}(\nu)(y_{2}-\nu_{2})+(1-W_{1}(\nu))(y_{1}-\nu_{1})
@@ -2445,7 +2598,7 @@ The accumulation in the next period comprises both of the savings from the
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The assets of the consumer in band 1 thus continue to grow as 
 \family roman
 \series medium
@@ -2488,7 +2641,7 @@ The consumer's expected income at time
  is therefore
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Formula 
 \begin{alignat*}{1}
 \prescript{t}{}B & =\begin{pmatrix}y_{1}-\nu_{1} & y_{2}-\nu_{2}\end{pmatrix}\begin{pmatrix}1-W_{1}(\nu_{1}) & L_{2}(\nu_{2})\\
@@ -2501,7 +2654,7 @@ W_{1}(\nu_{1}) & 1-L_{2}(\nu_{2})
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 1.
  Above would replace the equilibrium in Equation 
 \begin_inset CommandInset ref
@@ -2514,10 +2667,9 @@ noprefix "false"
 \end_inset
 
 .
- 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 2.
  We cannot assume that the consumer selection by assuming 
 \begin_inset Formula $A_{1}=A_{2}=0$
@@ -2550,6 +2702,11 @@ noprefix "false"
 
  are low.
  This needs to be considered for more than the short-term equilibrium.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -3008,6 +3165,53 @@ or if
 ).
 \end_layout
 
+\begin_layout Subsubsection
+\begin_inset Formula $u(A)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Choosing 
+\begin_inset Formula $u_{1}(A)=\Gamma_{1}A^{\alpha}$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{2}(A)=\Gamma_{2}A^{\alpha}$
+\end_inset
+
+, the following functions can represent the solution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\prescript{1}{}\nu_{1}=g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\omega,\bar{\omega})\\
+\prescript{1}{}\nu_{2}=g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\lambda,\bar{\lambda})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The population constraint implies that the solutions must be linearly related
+ as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\omega(\nu_{1}^{*}-\bar{\omega}) & =-\lambda(\nu_{2}^{*}-\bar{\lambda})\Rightarrow g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\omega,\bar{\omega})=-\frac{\lambda}{\omega}g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\lambda,\bar{\lambda})+\frac{\lambda\bar{\lambda}}{\omega}+\bar{\omega}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Solution and Interpretation
 \end_layout
@@ -3113,6 +3317,7 @@ to left makes it a favourable environment for the low-consumer - creating
 
  , our goal would be to find out if there is dynamism in the economy or
  not.
+ This depends on what the solution tells us.
 \end_layout
 
 \begin_layout Standard

@@ -1996,21 +1996,25 @@ evolve_plogis <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,psi,beta,y1,y2
 }
 
 
+polyn_util <- function(A,G,alpha) { return (G* A**alpha)}
+inv_util <- function(u,G,alpha) { return (u/G)**(1/alpha) }
 
 
-plot_w_sol <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,alpha,beta,A0,y1,y2,G1,G2){
-  net_asset_func <- function(A) { return (beta*(A0-A)**2)}
-
+plot_w_sol <- function(omega_bar,omega,lambda_bar,lambda,G1,G2,U1,U2,alpha){
+  
   w <-  function(nu) { W_p_logis(omega=omega,omega_bar=omega_bar, nu=nu) }
   l <-  function(nu) { L_p_logis(lambda=lambda,lambda_bar=lambda_bar, nu=nu) }
   
-  polyn_util_1 <- function(A) { return (G1* A**alpha)}
-  polyn_util_2 <- function(A) { return (G2* A**alpha)}
+  stop("Check if y1,y2 do maximise utility")
+  U1 = w(y1)*polyn_util(y2)  + (1-w(y1))*polyn_util(y1)
+  U2 = l(y2)*polyn_util(y1)  + (1-l(y2))*polyn_util(y1)
   
-  ea_uw <- function(nu,A_1) { w(nu) * polyn_util_1( net_asset_func (A=A_1 + y2 - nu,psi=psi,beta=beta))
-    + (1-w(nu))*polyn_util_1( net_asset_func(A=A_1+y1-nu,psi=psi,beta=beta)  ) }
-  ea_ul <- function(nu,A_2) { (1-l(nu)) * k (A=A_2 + y2 - nu,psi=psi,beta=beta) + l(nu)*k(A=A_2+y1-nu,psi=psi,beta=beta) }
-
-    
+  ea_uw <- function(nu) { w(nu) * U2    + (1-w(nu))*U1}
+  ea_ul <- function(nu) { (1-l(nu)) * U2+ l(nu)*U1 }
+  nu1 <- seq(0,inv_util(U1,G1,alpha),.1)
+  nu2 <- seq(0,inv_util(U1,G2,alpha),.1)
+  par(mfrow=c(1,2))
+  plot(nu1,sapply(nu1,ea_uw),type='l')
+  plot(nu2,sapply(nu2,ea_ul),type='l')
 }
 
