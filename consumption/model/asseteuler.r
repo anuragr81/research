@@ -2000,21 +2000,63 @@ polyn_util <- function(A,G,alpha) { return (G* A**alpha)}
 inv_util <- function(u,G,alpha) { return (u/G)**(1/alpha) }
 
 
-plot_w_sol <- function(omega_bar,omega,lambda_bar,lambda,G1,G2,U1,U2,alpha){
+two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,G1,G2,y1,y2,alpha){
   
   w <-  function(nu) { W_p_logis(omega=omega,omega_bar=omega_bar, nu=nu) }
   l <-  function(nu) { L_p_logis(lambda=lambda,lambda_bar=lambda_bar, nu=nu) }
   
-  stop("Check if y1,y2 do maximise utility")
-  U1 = w(y1)*polyn_util(y2)  + (1-w(y1))*polyn_util(y1)
-  U2 = l(y2)*polyn_util(y1)  + (1-l(y2))*polyn_util(y1)
+  E1 <- function(x,y1,y2) { w(x)*y2  + (1-w(x))*y1}
+  E2 <- function(x,y1,y2) { l(x)*y1  + (1-l(x))*y2}
   
-  ea_uw <- function(nu) { w(nu) * U2    + (1-w(nu))*U1}
-  ea_ul <- function(nu) { (1-l(nu)) * U2+ l(nu)*U1 }
-  nu1 <- seq(0,inv_util(U1,G1,alpha),.1)
-  nu2 <- seq(0,inv_util(U1,G2,alpha),.1)
+  # optimise(function(x) { -stage1_ew(x,y1,y2) },c(0,y1))$minimum
+  
+  #plot(seq(0,y1,.1),sapply(seq(0,y1,.1),function(x){stage1_ew(x = x,y1=y1,y2=y2)}))
+  #plot(seq(0,y2,.1),sapply(seq(0,y2,.1),function(x){stage1_el(x = x,y1=y1,y2=y2)}))
+  
+  Aw_band1 <-function(x) {y1-x+y2-x+E2(x,y1,y2) }
+  Al_band1 <-function(x) {y1-x+y1-x+E1(x,y1,y2) }
+  
+  Aw_band2 <- function(x) {y2-x+y2-x+E2(x,y1,y2) }
+  Al_band2 <- function(x) {y2-x+y1-x+E1(x,y1,y2) }
+  
+  ea_uw = function(x) { w(x)*polyn_util(G=G2,A=Aw_band1(x),alpha=alpha)  + (1-w(x))*polyn_util(G=G1,A=Al_band1(x),alpha=alpha)}
+  ea_ul = function(x) { l(x)*polyn_util(G=G1,A=Al_band2(x),alpha=alpha)  + (1-l(x))*polyn_util(G=G2,A=Aw_band2(x),alpha=alpha)}
+
+  nu1 <- seq(0,y1,.1)
+  nu2 <- seq(0,y2,.1)
   par(mfrow=c(1,2))
   plot(nu1,sapply(nu1,ea_uw),type='l')
   plot(nu2,sapply(nu2,ea_ul),type='l')
+}
+
+plot_w_params<-function(){
+  par(mfrow=c(1,1))
+  if(T){
+    lambda = .1 ; bar_lambda = 50; x<-seq(0,100,.1); 
+    plot(x,1/(1+exp(-lambda * (x-bar_lambda))),type='l',xlab=latex2exp::TeX("$\\nu$"),ylab=latex2exp::TeX("$W(\\nu)$"),lty=1); 
+    lines(x,1/(1+exp(-lambda*2 * (x-bar_lambda))),type='l',lty=2); 
+    lines(x,1/(1+exp(-lambda*.5 * (x-bar_lambda))),type='l',lty=3); legend(60, .4, legend=c(latex2exp::TeX("$ \\omega = 0.1$"),latex2exp::TeX("$ \\omega = 0.2$"),latex2exp::TeX("$ \\omega = 0.05$")) , lty=c(1,2,3), cex=0.7) 
+  } else {
+  lambda = .1 ; bar_lambda = 50; x<-seq(0,100,.1); plot(x,1/(1+exp(-lambda * (x-bar_lambda))),type='l',xlab=latex2exp::TeX("$\\nu$"),ylab=latex2exp::TeX("$W(\\nu)$"),lty=1); 
+  lines(x,1/(1+exp(-lambda*(x-bar_lambda-20))),type='l',lty=2)
+  lines(x,1/(1+exp(-lambda*(x-bar_lambda+20))),type='l',lty=3)
+  legend(60, .4, legend=latex2exp::TeX(paste("$ \\bar{\\omega}=",c(50,70,30),"$")) , lty=c(1,2,3), cex=0.7)
+  }
+}
+
+plot_l_params<-function(speed){
+  par(mfrow=c(1,1))
+  if(speed){
+    lambda = .1 ; bar_lambda = 50; x<-seq(0,100,.1); 
+    plot(x,1-1/(1+exp(-lambda * (x-bar_lambda))),type='l',xlab=latex2exp::TeX("$\\nu$"),ylab=latex2exp::TeX("$L(\\nu)$"),lty=1); 
+    lines(x,1-1/(1+exp(-lambda*2 * (x-bar_lambda))),type='l',lty=2); 
+    lines(x,1-1/(1+exp(-lambda*.5 * (x-bar_lambda))),type='l',lty=3); 
+    legend(80, .4, legend=c(latex2exp::TeX("$ \\lambda = 0.1$"),latex2exp::TeX("$ \\lambda = 0.2$"),latex2exp::TeX("$ \\lambda = 0.05$")) , lty=c(1,2,3), cex=0.9) 
+  } else {
+    lambda = .1 ; bar_lambda = 50; x<-seq(0,100,.1); plot(x,1-1/(1+exp(-lambda * (x-bar_lambda))),type='l',xlab=latex2exp::TeX("$\\nu$"),ylab=latex2exp::TeX("$L(\\nu)$"),lty=1); 
+    lines(x,1-1/(1+exp(-lambda*(x-bar_lambda-20))),type='l',lty=2)
+    lines(x,1-1/(1+exp(-lambda*(x-bar_lambda+20))),type='l',lty=3)
+    legend(85, .4, legend=latex2exp::TeX(paste("$ \\bar{\\lambda}=",c(50,70,30),"$")) , lty=c(1,2,3), cex=1.1)
+  }
 }
 

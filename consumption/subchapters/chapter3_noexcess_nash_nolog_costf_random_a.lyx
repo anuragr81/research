@@ -97,7 +97,7 @@ theorems-sec
 \begin_body
 
 \begin_layout Part
-One-period solution
+Two-period solution
 \end_layout
 
 \begin_layout Section
@@ -2262,8 +2262,7 @@ What can the consumer do if her long-term expectations include the possibility
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-A_{1}^{*}\rightarrow\sum_{t=1}^{t=T}(y_{1}-\prescript{t}{}\nu_{1})\label{eq:assets_reset_accumulation}\\
-A_{2}^{*}\rightarrow\sum_{t=1}^{t=T}(y_{2}-\prescript{t}{}\nu_{2})\nonumber 
+A^{*}\rightarrow\sum_{t=1}^{t=T}I_{t}\label{eq:assets_reset_accumulation}
 \end{gather}
 
 \end_inset
@@ -2335,221 +2334,63 @@ Here,
 \end_layout
 
 \begin_layout Standard
-Notice that unlike the finite-horizon optimisation problems, the consumer
- has no idea of 
+The short-term equilibrium corresponds to one where the consumer do not
+ care about the future 
 \begin_inset Formula $T$
 \end_inset
 
- and therefore at a time 
-\begin_inset Formula $t$
+ and optimise the utility in a period 
+\begin_inset Formula $T'\le T$
 \end_inset
 
-, she can only be concerned with the next period 
-\begin_inset Formula $t+1$
-\end_inset
 
-.
- With that, the optimisation ...
-\end_layout
-
-\begin_layout Standard
-The 
-\begin_inset Formula $\nu_{1},\nu_{2}$
-\end_inset
-
- that are provided are remain the same until the assets are reset again
- (see Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:assets_reset_accumulation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- above).
- However, we have not considered that the consumers would swap between 1
- and 2 and carry over their assets too.
- Therefore, a constant 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- throughout the time time-period 
-\begin_inset Formula $T$
-\end_inset
-
- cannot be assumed.
- The next equilibrium we look for is when consumers consider the possibility
- of a swap while carrying over the past assets.
- This swap would include a Markov chain where the consumer has a fixed expected
- horizon 
-\begin_inset Formula $T$
-\end_inset
-
- in mind at which time she would not save anything and spend everything
- towards status consumption as her savings are about to disappear.
- 
-\end_layout
-
-\begin_layout Standard
-Considering a simpler formulation where 
-\begin_inset Formula $T=2$
-\end_inset
-
- and is known to the consumer so that the only choice the consumer makes
- is at 
-\begin_inset Formula $t=1$
-\end_inset
-
- .
- The consumer in band 1 would choose 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\prescript{1}{}\nu_{1}$
-\end_inset
-
- so that her utility at 
-\begin_inset Formula $t=T=2$
-\end_inset
-
- is maximised.
- Since the consumer expects her assets to disappear at time 
-\begin_inset Formula $T=2$
-\end_inset
-
-, her expected utility at 
-\begin_inset Formula $T=1$
-\end_inset
-
- is 
-\begin_inset Formula $W(\prescript{2}{}\nu_{1})u(y_{2})+(1-W(\prescript{2}{}\nu_{1}))u(y_{1})$
-\end_inset
-
- if she is in band 1 in period 
-\begin_inset Formula $t=1$
-\end_inset
-
- and 
-\begin_inset Formula $U_{2}=(1-L(\prescript{1}{}\nu_{2}))u(y_{2})+L(\prescript{1}{}\nu_{2})u(y_{1})$
-\end_inset
-
- if she is band 2 in the period 
-\begin_inset Formula $t=1$
-\end_inset
-
-.
-  With 
-\begin_inset Formula $U_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $U_{2}$
-\end_inset
-
- known, we can find out 
-\begin_inset Formula $\prescript{1}{}\nu_{1}$
-\end_inset
-
- that would optimise 
-\begin_inset Formula $W(\prescript{1}{}\nu_{1})U_{2}+(1-W(\prescript{1}{}\nu_{1}))U_{1}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Similarly, for the consumer in band 2, the 
-\begin_inset Formula $\prescript{2}{}\nu_{2}=y_{2}$
-\end_inset
-
- if she remains in band 2 at 
-\begin_inset Formula $t=1$
-\end_inset
-
- and 
-\begin_inset Formula $\prescript{2}{}\nu_{2}=y_{1}$
-\end_inset
-
- if she is demoted to band 1 at 
-\begin_inset Formula $t=1$
-\end_inset
-
-.
- 
-\begin_inset Formula $U_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $U_{2}$
-\end_inset
-
- remain the same as before and the consumer in band 2 would choose 
-\begin_inset Formula $\prescript{1}{}\nu_{2}$
-\end_inset
-
- to maximise 
-\begin_inset Formula $L(\prescript{1}{}\nu_{2})U_{1}+(1-L(\prescript{1}{}\nu_{2}))U_{2}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Box Boxed
-position "t"
-hor_pos "c"
-has_inner_box 1
-inner_pos "t"
-use_parbox 0
-use_makebox 0
-width "100col%"
-special "none"
-height "1in"
-height_special "totalheight"
-thickness "0.4pt"
-separation "3pt"
-shadowsize "4pt"
-framecolor "black"
-backgroundcolor "none"
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-The accumulation in the next period comprises both of the savings from the
- period 
-\begin_inset Formula $t$
+Since 
+\begin_inset Formula $T$
 \end_inset
 
- and those from the period 
-\begin_inset Formula $t+1$
+ is observed by the consumer, a consumer with a time horizon
+\begin_inset Formula $T'>T$
+\end_inset
+
+ effectively optimises over 
+\begin_inset Formula $T''<T$
+\end_inset
+
+ where 
+\begin_inset Formula $kT+T''=T'$
 \end_inset
 
 .
- If we represent gains from the period 
-\begin_inset Formula $\tau$
+\end_layout
+
 \end_inset
 
- as
-\begin_inset Formula $\prescript{\tau}{}B_{1}$
+.
+ Considering a simplification let's set 
+\begin_inset Formula $T'=1$
 \end_inset
 
  and 
-\begin_inset Formula $\prescript{\tau}{}B_{2}$
+\begin_inset Formula $T=2$
 \end_inset
 
- for consumers in band 1 and band 2 respectively
+ and the starting wealth to zero - so that a short-term equilibrium corresponds
+ to the optimisation of utility from assets in the next period with no considera
+tion of the period after 
+\begin_inset Formula $T'$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $T=2$
+\end_inset
+
+).
+ 
 \family roman
 \series medium
 \shape up
@@ -2562,10 +2403,15 @@ The accumulation in the next period comprises both of the savings from the
 \uwave off
 \noun off
 \color none
-, then, 
-\begin_inset Formula $\prescript{t}{}B_{1}=y_{1}-\nu_{1}$
+The consumer does not consider any status expenses after period 
+\begin_inset Formula $t=T=1$
 \end_inset
 
+ so 
+\begin_inset Formula $\prescript{1}{}\nu_{1}=\prescript{1}{}\nu_{2}=0$
+\end_inset
+
+.
 
 \family default
 \series default
@@ -2579,18 +2425,44 @@ The accumulation in the next period comprises both of the savings from the
 \uwave default
 \noun default
 \color inherit
- for the consumer in band 1 and the expected accumulation in the next period
- 
-\begin_inset Formula $t+1$
+ The consumer in band 1 would thus choose 
+\begin_inset Formula $\prescript{0}{}\nu_{1}^{*}$
 \end_inset
 
- is
+ so that
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ the following expected utility is optimised.
+ 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
 \begin_inset Formula 
 \begin{align*}
-\prescript{t+1}{}B_{1} & =W_{1}(\nu)(y_{2}-\nu_{2})+(1-W_{1}(\nu))(y_{1}-\nu_{1})
+\upsilon_{1}(\prescript{0}{}\nu_{1})=W(\prescript{0}{}\nu_{1})u(y_{1}-\prescript{0}{}\nu_{1}+y_{2})+(1-W(\prescript{0}{}\nu_{1}))u(y_{1}-\prescript{0}{}\nu_{1}+y_{1})
 \end{align*}
 
 \end_inset
@@ -2598,8 +2470,8 @@ The accumulation in the next period comprises both of the savings from the
 
 \end_layout
 
-\begin_layout Plain Layout
-The assets of the consumer in band 1 thus continue to grow as 
+\begin_layout Standard
+Similarly, the consumer in band 2 would choose 
 \family roman
 \series medium
 \shape up
@@ -2613,11 +2485,77 @@ The assets of the consumer in band 1 thus continue to grow as
 \noun off
 \color none
 
-\begin_inset Formula $\sum_{t=1}^{\tau}\prescript{t}{}B_{1}$
+\begin_inset Formula $\prescript{0}{}\nu_{2}$
+\end_inset
+
+ so that the following expected utility is optimised:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\upsilon_{2}(\prescript{0}{}\nu_{2})= & (1-L(\prescript{0}{}\nu_{2}))u(y_{2}-\prescript{0}{}\nu_{2}+y_{2})+L(\prescript{0}{}\nu_{2})u(y_{2}-\prescript{0}{}\nu_{2}+y_{1})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The properties of this short-term equilibrium has been earlier considered.
+ A long-term equilibrium on the other hand require both that assets are
+ reset and that the population in the two bands is stable.
+ In this long-term equilibrium the consumers consider the long-term 
+\begin_inset Formula $T$
+\end_inset
+
+ after which assets are to be lost.
+ The gain or loss that matters at time 
+\begin_inset Formula $t=T$
+\end_inset
+
+ is through the transition in bands.
+ Unlike the short-term equilibrium the consumers must choose 
+\begin_inset Formula $\{\prescript{T}{}\nu_{1},\prescript{T}{}\nu_{2}\}$
+\end_inset
+
+ in period 
+\begin_inset Formula $T$
+\end_inset
+
+ to maximise the utility from starting in band 1 or band 2.
+ 
+\end_layout
+
+\begin_layout Standard
+In the long-term we look for 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ that is same for both periods 
+\begin_inset Formula $T'=1$
+\end_inset
+
+ and 
+\begin_inset Formula $T=2$
 \end_inset
 
 .
-
+ Thus,
 \family default
 \series default
 \shape default
@@ -2630,115 +2568,401 @@ The assets of the consumer in band 1 thus continue to grow as
 \uwave default
 \noun default
 \color inherit
- Representing 
-\begin_inset Formula $\prescript{t}{}B=\begin{pmatrix}\prescript{t}{}B_{1} & \prescript{t}{}B_{2}\end{pmatrix}$
+ the consumer in band 1 would choose 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
-The consumer's expected income at time 
-\begin_inset Formula $t$
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+so that her utility from asset accumulation across 
+\begin_inset Formula $t=1$
 \end_inset
 
- is therefore
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+and 
+\begin_inset Formula $t=2$
+\end_inset
+
+ is maximised.
+ Since the consumer expects her assets to disappear at time 
+\begin_inset Formula $T=2$
+\end_inset
+
+, she has the following expected income at 
+\begin_inset Formula $t=2$
+\end_inset
+
+ if she is in band 1 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset Formula 
-\begin{alignat*}{1}
-\prescript{t}{}B & =\begin{pmatrix}y_{1}-\nu_{1} & y_{2}-\nu_{2}\end{pmatrix}\begin{pmatrix}1-W_{1}(\nu_{1}) & L_{2}(\nu_{2})\\
-W_{1}(\nu_{1}) & 1-L_{2}(\nu_{2})
-\end{pmatrix}^{t}
-\end{alignat*}
+\begin{align*}
+E_{1}(\bar{\nu}_{1}) & =W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1}
+\end{align*}
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-1.
- Above would replace the equilibrium in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:assets_reset_accumulation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Plain Layout
-2.
- We cannot assume that the consumer selection by assuming 
-\begin_inset Formula $A_{1}=A_{2}=0$
-\end_inset
-
- would be valid throughout the interval 
-\begin_inset Formula $T$
-\end_inset
-
-.
- If the consumer has a 1-time-period horizon then she must.
- We need the 
-\begin_inset Formula $g_{1},g_{2}$
-\end_inset
-
- as function of 
-\begin_inset Formula $A$
-\end_inset
-
- and then consider the net formula.
- The length of 
-\begin_inset Formula $T$
-\end_inset
-
- has a clear influence on the consumer decision to participate since a consumer
- does not care about mobility when she can accumulate longer and the differences
- between 
-\begin_inset Formula $y_{1},y_{2}$
-\end_inset
-
- are low.
- This needs to be considered for more than the short-term equilibrium.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Equilibrium for particular asset value and mobility functions
-\end_layout
-
-\begin_layout Subsubsection
-\begin_inset Formula $W(\nu_{1})$
-\end_inset
-
-, 
-\begin_inset Formula $L(\nu_{2})$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-The two constraints which the the probability implied with 
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Similarly, the consumer in band 2 has the following expected income in the
+ period 
+\begin_inset Formula $t=2$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{align*}
+E_{2}(\bar{\nu}_{2}) & =(1-L(\bar{\nu}_{2}))y_{2}+L(\bar{\nu}_{2})y_{1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Recall that 
+\begin_inset Formula $\bar{\nu}_{1}<y_{1}$
+\end_inset
+
+and 
+\begin_inset Formula $\bar{\nu}_{2}<y_{2}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ for both the periods.
+ At 
+\begin_inset Formula $t=0$
+\end_inset
+
+, the consumer in band 1 would optimise the utility from the total assets
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{align*}
+W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))+(1-W(\bar{\nu}_{1}))u(y_{1}-\bar{\nu}_{1}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly,the consumer in band 2 would optimise the following expected utility
+ from total assets over the two periods
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))+(1-L(\bar{\nu}_{2}))u(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+An important assumption as before in this long-term equilibrium is that
+ a consumer follows the behaviour of the band.
+ Therefore, a higher 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ does benefit the consumer in band 2 by lowering her probability of becoming
+ rich again.
+ The risks are getting distributed therefore.
+\end_layout
+
+\begin_layout Standard
+A high 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ similarly benefits 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% see solution for the following for peak :
+\end_layout
+
+\begin_layout Plain Layout
+
+% two_stage_sol(omega_bar = 1,omega = 1,lambda_bar = 1,lambda = 1,G1 = 1.27,G2
+ = 1, y1= 1,y2 = 10  ,alpha = .3)
+\end_layout
+
+\begin_layout Plain Layout
+
+% two_stage_sol(omega_bar = 1,omega = 1,lambda_bar = 1,lambda = .2,G1 = 1.27,G2
+ = 1, y1= 1,y2 = 10  ,alpha = .3)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+G1>G2 (1.2>1) makes the nu_1 high.
+\end_layout
+
+\begin_layout Standard
+If the consumer 1 choose a higher 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ ...
+ the high 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Discontinuity: Before reset the the consumer accumulates and after the
+ reset her asset disappears.
+ The combined utility is maximised the final expected assets and the consumer
+ cannot maximise at t=1 without considering what happens after (e.g.
+ another consumer comes, L,W change etc.).
+ Further, since the choice at t=1 is different from choice at t=0 if considering
+ the next period alone, a single nu for two time periods can only be forced.
+  The total assets which we consider are different in the current assets
+ where the decision is being made.
+ The same asset can be enjoyed more in the poorer band and that matters
+ only when utilities are considered i.e.
+ after summing them up over time.
+\end_layout
+
+\begin_layout Plain Layout
+
+% Draw: We are still not clear about when the draw occurs.
+ This makes the idea of optimising assets-without-risk-of-loss somewhat
+ difficult.
+ Consumer's can only optimise assets post draw.
+ In two successive periods, if consumer take a part of their y into nu.
+ they only care about u from final A not intermediate u.
+ So no addition of intertemporal utility is needed.
+\end_layout
+
+\begin_layout Plain Layout
+
+% Forcing single nu: If we force a single nu then we can comment on what
+ consumer loses by choosing too high nu.
+ In words, choosing a high nu focuses too much the transition and the consumer
+ loses in the short-term.
+ Choosing too low - gives her assets in the short-term but she does not
+ care about the long-term.
+\end_layout
+
+\begin_layout Plain Layout
+
+% Discarding intertemporal substitution - The solution with intertemporal
+ utility has the advantage that it provides a control for whether consumers
+ care more about the long-term transition or the the accumulation.
+ Long-term movements are not influenced by savings at all (all savings are
+ meant to go to waste in the long run).
+ This also allows us to 
+\begin_inset Quotes eld
+\end_inset
+
+approximate
+\begin_inset Quotes erd
+\end_inset
+
+ the case with general  with a discount-factor.
+ The intertemporal methods does however go against the central argument
+ that consumers optimise long-term accumulations.
+ We are left with no options but to rely on the same nu for both periods
+ in order to explain the substitution between later and earlier risk.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since the consumers choose 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ only once, a high 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ , 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ means hoping for a favourable transition while choosing a low 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ means relying on accumulation.
+ While above model could be generalised for a general 
+\begin_inset Formula $T$
+\end_inset
+
+, we wish to obtain the implications for the asset accumulations and optimal
+ 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ ,
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ in the long-term equilibrium.
+ Acting as a long-standing dynasty, the consumers in such an equilibrium
+ consider both the short-term horizon in which they would become richer
+ through accumulation or band transition over the long-term for them to
+ start over with.
+\end_layout
+
+\begin_layout Subsection
+Equilibria with particular mobility and utility functions
+\end_layout
+
+\begin_layout Standard
+We now select particular functions 
+\begin_inset Formula $u(A),W(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ to motivate an econometric model for understanding how separation between
+ asset groups could exist in long-term with income differences.
+ Selecting 
 \begin_inset Formula $W(\nu)$
 \end_inset
 
- is that the status competitions cannot guarantee a reward i.e.
+, we note two constraints on the probability implied by 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ - first that the status competitions cannot guarantee a reward i.e.
  
 \begin_inset Formula $W(\nu)\ne1$
 \end_inset
 
- and that any consumer with a higher 
+ and second, that any consumer with a higher 
 \begin_inset Formula $\nu$
 \end_inset
 
- be rewarded with a higher probability than a consumer with a lower 
+ should be rewarded with a higher probability than a consumer with a lower
+ 
 \begin_inset Formula $\nu$
 \end_inset
 
@@ -2747,13 +2971,13 @@ The two constraints which the the probability implied with
 \begin_inset Formula $W(\nu_{1})$
 \end_inset
 
- serves as a general formulation for such a probability
+ serves as a general formulation for this purpose
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-W(\nu) & =\frac{1}{1+e^{-\omega(\nu-\bar{\omega})}}\label{eq:particular_W_nu_definition}
+W(\nu) & =\frac{1}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}\label{eq:particular_W_nu_definition}
 \end{align}
 
 \end_inset
@@ -2799,7 +3023,7 @@ omega = 0.05$")) , lty=c(1,2,3), cex=0.7)
 \end_layout
 
 \begin_layout Standard
-Here, 
+The parameter 
 \begin_inset Formula $\omega$
 \end_inset
 
@@ -2837,30 +3061,61 @@ noprefix "false"
 \end_inset
 
 .
- In the two-consumer economy, 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- represents the mobility and 
-\begin_inset Formula $1-L(\nu)$
-\end_inset
-
- the security in income bands.
  The parameter 
-\begin_inset Formula $\bar{\omega}$
+\begin_inset Formula $\underbar{\ensuremath{\omega}}$
 \end_inset
 
- similar represents the intensity of competitions as it signifies minimum
+represents whether a significant rise in probability occurs for a higher
  
 \begin_inset Formula $\nu$
 \end_inset
 
- for which there would be a material probability for the consumer to transition
- to the next income band (see plots for varying 
+ (corresponding to a high 
 \begin_inset Formula $\bar{\omega}$
 \end_inset
 
- in Figure 
+) or a low 
+\begin_inset Formula $\nu$
+\end_inset
+
+ (corresponding to a low 
+\begin_inset Formula $\bar{\omega}$
+\end_inset
+
+).
+ Roughly speaking, 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ represents the upward mobility in the two-consumer economy and 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is the degree of reward i.e.
+ how easy it is to achieve the mobility (high 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+) while 
+\begin_inset Formula $\bar{\omega}$
+\end_inset
+
+ is the intensity of status competitions i.e.
+ how much 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is required for mobility (the minimum 
+\begin_inset Formula $\nu$
+\end_inset
+
+ for which there would be a material probability for the consumer to transition
+ to the next income band).
+ The plots for varying 
+\begin_inset Formula $\underbar{\ensuremath{\omega}}$
+\end_inset
+
+ are shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:W_nu_parameters_means"
@@ -2870,7 +3125,8 @@ noprefix "false"
 
 \end_inset
 
-).
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3016,7 +3272,16 @@ name "fig:W_nu_parameters_means"
 \end_layout
 
 \begin_layout Standard
-Choosing the equivalent form for 
+Just as 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ represents the upward mobility, 
+\begin_inset Formula $1-L(\nu)$
+\end_inset
+
+ represents the security in the income band(s).
+ The form of 
 \begin_inset Formula $L(\nu_{2})$
 \end_inset
 
@@ -3025,21 +3290,162 @@ Choosing the equivalent form for
 \end_inset
 
 , 
-\begin_inset Formula $\bar{\lambda}$
+\begin_inset Formula $\underbar{\ensuremath{\lambda}}$
 \end_inset
 
-,
+ is thus as follows
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-L(\nu) & =1-\frac{1}{1+e^{-\lambda(\nu-\bar{\lambda})}}\label{eq:L_nu_definition}
+L(\nu) & =1-\frac{1}{1+e^{-\lambda(\nu-\underbar{\ensuremath{\lambda}})}}\label{eq:L_nu_definition}
 \end{align}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The degree of loss is driven by the parameter 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ (see plots in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:L_loss_parameters"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ ) and the intensity of competitions driven by the parameter 
+\begin_inset Formula $\underbar{\ensuremath{\lambda}}$
+\end_inset
+
+(see Plots in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:L_loss_parameters_mean"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plots_logistic_function_l.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:L_loss_parameters"
+
+\end_inset
+
+
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ parameters
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plots_logistic_function_l_means.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:L_loss_parameters_mean"
+
+\end_inset
+
+
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ parameters
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since we are interested in economies where there is a significant overall
+ growth, we assume more upward mobility than security in the economy.
+ Therefore, one can say that 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is observed to be much higher than 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ in the growing economy.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3072,7 +3478,7 @@ noprefix "false"
 status open
 
 \begin_layout Plain Layout
-\begin_inset Formula $\frac{1}{1+e^{-\omega(\nu-\bar{\omega})}}+\frac{1}{1+e^{-\lambda(\nu-\bar{\lambda})}}=1$
+\begin_inset Formula $\frac{1}{1+e^{-\omega(\nu-\underbar{\ensuremath{\omega}})}}+\frac{1}{1+e^{-\lambda(\nu-\underbar{\ensuremath{\lambda}})}}=1$
 \end_inset
 
  
@@ -3080,7 +3486,7 @@ status open
 \end_inset
 
 
-\begin_inset Formula $(1+e^{-\omega(\nu-\bar{\omega})})(1+e^{-\lambda(\nu-\bar{\lambda})})=1+e^{-\omega(\nu-\bar{\omega})}+1+e^{-\lambda(\nu-\bar{\lambda})}$
+\begin_inset Formula $(1+e^{-\omega(\nu-\underbar{\ensuremath{\omega}})})(1+e^{-\lambda(\nu-\underbar{\ensuremath{\lambda}})})=1+e^{-\omega(\nu-\underbar{\ensuremath{\omega}})}+1+e^{-\lambda(\nu-\underbar{\ensuremath{\lambda}})}$
 \end_inset
 
 
@@ -3089,11 +3495,11 @@ status open
 \end_inset
 
  the following relationship between 
-\begin_inset Formula $\nu_{1}^{*}$
+\begin_inset Formula $\text{\ensuremath{\bar{\nu}_{1}}}$
 \end_inset
 
  and 
-\begin_inset Formula $\nu_{2}^{*}$
+\begin_inset Formula $\bar{\nu}_{2}$
 \end_inset
 
 
@@ -3102,7 +3508,7 @@ status open
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\omega(\nu_{1}^{*}-\bar{\omega})+\lambda(\nu_{2}^{*}-\bar{\lambda}) & =0\label{eq:param_constraint}
+\omega(\bar{\nu}_{1}-\underbar{\ensuremath{\omega}})+\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}}) & =0\label{eq:param_constraint}
 \end{align}
 
 \end_inset
@@ -3111,84 +3517,55 @@ status open
 \end_layout
 
 \begin_layout Standard
-For the probabilities in Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:particular_W_nu_definition"
-plural "false"
-caps "false"
-noprefix "false"
+\begin_inset ERT
+status open
 
-\end_inset
+\begin_layout Plain Layout
 
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:L_nu_definition"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the population constraint is satisfied if 
-\begin_inset Formula $\nu_{1}^{*}\rightarrow\bar{\omega}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{2}^{*}\rightarrow\bar{\lambda}$
-\end_inset
-
- i.e.
- the intensity of the competitions is matched by the consumer selections
- of 
-\begin_inset Formula $\nu_{1}^{*}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{2}^{*}$
-\end_inset
-
-or if 
-\begin_inset Formula $\omega(\nu_{1}^{*}-\bar{\omega})=\lambda(\bar{\lambda}-\nu_{2}^{*})$
-\end_inset
-
- i.e.
- the mobility in status competitions 
-\begin_inset Formula $(\omega$
-\end_inset
-
-) balances the security (
-\begin_inset Formula $\lambda$
-\end_inset
-
-).
+% if omega=lambda, then the population constraint means that sum of nu_1
+ nu_2 should be the same as bar_omega + bar_lambda.
+ Is that possible? What econometric methods do we get from it
 \end_layout
 
-\begin_layout Subsubsection
-\begin_inset Formula $u(A)$
+\begin_layout Plain Layout
+
+% [ECONOMETRIC] We only observe long term A and status consumption itself.
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-Choosing 
-\begin_inset Formula $u_{1}(A)=\Gamma_{1}A^{\alpha}$
-\end_inset
-
- and 
-\begin_inset Formula $u_{2}(A)=\Gamma_{2}A^{\alpha}$
-\end_inset
-
-, the following functions can represent the solution
+The goal of our analysis is to understand to what extent the consumer in
+ poor consumers enjoy their own reference group.
+ This means the degree of segregation of asset-differences that would exist
+ in the economy.
+ To measure this degree of separation we 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-\prescript{1}{}\nu_{1}=g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\omega,\bar{\omega})\\
-\prescript{1}{}\nu_{2}=g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\lambda,\bar{\lambda})
+u_{1}(A)=\Gamma_{1}A^{\alpha}\\
+u_{2}(A)=\Gamma_{2}A^{\alpha}
+\end{gather*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+If we let the solution following functions can represent the solution ...
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\bar{\nu}_{1}=g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\omega,\underbar{\ensuremath{\omega}})\\
+\bar{\nu}_{2}=g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\lambda,\underbar{\ensuremath{\lambda}})
 \end{gather*}
 
 \end_inset
@@ -3204,7 +3581,7 @@ The population constraint implies that the solutions must be linearly related
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\omega(\nu_{1}^{*}-\bar{\omega}) & =-\lambda(\nu_{2}^{*}-\bar{\lambda})\Rightarrow g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\omega,\bar{\omega})=-\frac{\lambda}{\omega}g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\lambda,\bar{\lambda})+\frac{\lambda\bar{\lambda}}{\omega}+\bar{\omega}
+\omega(\nu_{1}^{*}-\underbar{\ensuremath{\omega}}) & =-\lambda(\nu_{2}^{*}-\underbar{\ensuremath{\lambda}})\Rightarrow g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\omega,\underbar{\ensuremath{\omega}})=-\frac{\lambda}{\omega}g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\lambda,\underbar{\ensuremath{\lambda}})+\frac{\lambda\underbar{\ensuremath{\lambda}}}{\omega}+\underbar{\ensuremath{\omega}}
 \end{align*}
 
 \end_inset
@@ -3218,11 +3595,11 @@ Solution and Interpretation
 
 \begin_layout Standard
 The basic question is whether we are better off assuming that 
-\begin_inset Formula $\bar{\omega},$
+\begin_inset Formula $\underbar{\ensuremath{\omega}},$
 \end_inset
 
 
-\begin_inset Formula $\bar{\lambda}$
+\begin_inset Formula $\underbar{\ensuremath{\lambda}}$
 \end_inset
 
  are known or that 
@@ -3230,7 +3607,7 @@ The basic question is whether we are better off assuming that
 \end_inset
 
  are known.
- Which empirical question does either attempt to answer?
+ Which empirical question does either attempt to answer? 
 \end_layout
 
 \begin_layout Enumerate
@@ -3258,7 +3635,7 @@ With known
 
 ).
  The goal would be check what the long-term effects of 
-\begin_inset Formula $\bar{\omega},\bar{\lambda}$
+\begin_inset Formula $\underbar{\ensuremath{\omega}},\underbar{\ensuremath{\lambda}}$
 \end_inset
 
  would be.
@@ -3266,13 +3643,13 @@ With known
 
 \begin_layout Enumerate
 With known 
-\begin_inset Formula $\bar{\omega},\bar{\lambda}$
+\begin_inset Formula $\underbar{\ensuremath{\omega}},\underbar{\ensuremath{\lambda}}$
 \end_inset
 
  we are saying that we know what type of set up one is i.e.
  we know if the bands are secure or not.
  Pushing 
-\begin_inset Formula $\bar{\omega}$
+\begin_inset Formula $\underbar{\ensuremath{\omega}}$
 \end_inset
 
 to left makes it a favourable environment for the low-consumer - creating
@@ -3285,13 +3662,13 @@ to left makes it a favourable environment for the low-consumer - creating
 \end_inset
 
  for a material (pushing 
-\begin_inset Formula $\bar{\omega}$
+\begin_inset Formula $\underbar{\ensuremath{\omega}}$
 \end_inset
 
  makes it difficult to even achieve a decent mobility - and therefore creates
  segregation).
  Similarly, pushing 
-\begin_inset Formula $\bar{\lambda}$
+\begin_inset Formula $\underbar{\ensuremath{\lambda}}$
 \end_inset
 
  left requires less 
@@ -3303,7 +3680,7 @@ to left makes it a favourable environment for the low-consumer - creating
 \end_inset
 
 ) while pushing 
-\begin_inset Formula $\bar{\lambda}$
+\begin_inset Formula $\underbar{\ensuremath{\lambda}}$
 \end_inset
 
  right makes requires higher 
@@ -3312,7 +3689,7 @@ to left makes it a favourable environment for the low-consumer - creating
 
  from consumer 2.
  With known 
-\begin_inset Formula $\bar{\omega},\bar{\lambda}$
+\begin_inset Formula $\underbar{\ensuremath{\omega}},\underbar{\ensuremath{\lambda}}$
 \end_inset
 
  , our goal would be to find out if there is dynamism in the economy or
@@ -3320,9 +3697,41 @@ to left makes it a favourable environment for the low-consumer - creating
  This depends on what the solution tells us.
 \end_layout
 
+\begin_layout Enumerate
+We can argue that promotion is always higher than demotion so 
+\begin_inset Formula $\lambda<<\omega$
+\end_inset
+
+.
+ The question that the model allows us to answer is the ratio 
+\begin_inset Formula $\Gamma_{2}/\Gamma_{1}$
+\end_inset
+
+ that is necessary for there to be a given imbalance in 
+\begin_inset Formula $\omega/\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\lambda}-\bar{\omega}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\nu_{1},\nu_{2}$
+\end_inset
+
+ are observed - the mobility is the same.
+ 
+\begin_inset Formula $\Gamma_{2}/\Gamma_{1}$
+\end_inset
+
+ is the separation between the two bands - what makes the consumers in two
+ bands care less about the competitions.
+\end_layout
+
 \begin_layout Standard
 First choice of finding which 
-\begin_inset Formula $\bar{\omega},\bar{\lambda}$
+\begin_inset Formula $\underbar{\ensuremath{\omega}},\underbar{\ensuremath{\lambda}}$
 \end_inset
 
  regime we are in based on a certain observation of 
@@ -3346,26 +3755,6 @@ First choice of finding which
 \end_layout
 
 \begin_layout Standard
-This requires us to explore the effect of 
-\begin_inset Formula $\omega$
-\end_inset
-
-,
-\begin_inset Formula $\bar{\omega}$
-\end_inset
-
- on the optimisation of 
-\begin_inset Formula $W(\nu_{1})u_{1}(\pi(A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{2}))+(1-W(\nu_{1}^{*}))u_{1}(\pi(A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{1}))$
-\end_inset
-
- (and similarly for 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -3382,178 +3771,6 @@ nu$"),ylab=latex2exp::TeX("$W(
 \backslash
 nu)$"),lty=1); 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Selection of 
-\begin_inset Formula $\nu_{1}^{*},\nu_{2}^{*}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Given 
-\begin_inset Formula $A_{1}^{*},y_{1},y_{2}$
-\end_inset
-
- and 
-\begin_inset Formula $W(\nu_{1})$
-\end_inset
-
- as defined in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:particular_W_nu_definition"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- above, the consumer in band 1 would optimise the following utility in equilibri
-um
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-W(\nu_{1})u_{1}(\pi(A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{2}))+(1-W(\nu_{1}^{*}))u_{1}(\pi(A_{1}^{*}+y_{1}-\nu_{1}^{*}+y_{1}))
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Here,
-\begin_inset Formula $u_{1}(A)=\Gamma_{1}A^{\alpha}$
-\end_inset
-
- and 
-\begin_inset Formula $\pi(A)=\beta(A-A_{0})^{2}$
-\end_inset
-
- .
- Given the logistic form of 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
-, we represent the maximum value of the above convex function with 
-\begin_inset Formula $\nu_{1}=h_{1}(A_{1}^{*},y_{1},y_{2})$
-\end_inset
-
- that depends also on the known functions 
-\begin_inset Formula $u_{1}(A)$
-\end_inset
-
- and 
-\begin_inset Formula $\pi(A)$
-\end_inset
-
- (apart from 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-The solution of 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- would vary for given 
-\begin_inset Formula $\omega$
-\end_inset
-
- or 
-\begin_inset Formula $\bar{\omega}.$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $\omega\nu_{1}^{*}+\lambda\nu_{2}^{*}=\omega\bar{\omega}+\lambda\bar{\lambda}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $(y_{1}-\nu_{1}^{*})+(y_{2}-\nu_{2}^{*})=(A_{0}-(A_{1}^{*}+y_{1}))-((A_{2}^{*}+y_{2})-A_{0})$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In interpreting a given economy, we need to understand how mobility (
-\begin_inset Formula $W(\nu),1-L(\nu)$
-\end_inset
-
-) , redistribution (cost-function i.e.
- 
-\begin_inset Formula $A_{0},A_{1}^{*},A_{2}^{*}$
-\end_inset
-
-) and the inequalities (
-\begin_inset Formula $\Gamma_{1},\Gamma_{2}$
-\end_inset
-
-) are observed in an economy.
- 
-\begin_inset Formula $\lambda$
-\end_inset
-
- means mobility.
- 
-\begin_inset Formula $\omega$
-\end_inset
-
- means security.
-\end_layout
-
-\begin_layout Subsubsection
-\begin_inset Formula $\omega=\lambda$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The 
-\begin_inset Formula $\omega=\lambda$
-\end_inset
-
- condition says that the mobility conditions are the same for downfall and
- rise.
-\end_layout
-
-\begin_layout Standard
-Assuming 
-\begin_inset Formula $\omega=\lambda$
-\end_inset
-
-, we have 
-\begin_inset Formula $\nu_{1}^{*}+\nu_{2}^{*}=\bar{\omega}+\bar{\lambda}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Therefore, 
-\begin_inset Formula 
-\begin{align*}
-(y_{1}+y_{2})-(A_{0}-(A_{1}^{*}+y_{1}))+((A_{2}^{*}+y_{2})-A_{0}) & =\bar{\omega}+\bar{\lambda}
-\end{align*}
 
 \end_inset
 
