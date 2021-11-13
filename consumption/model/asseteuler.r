@@ -2024,9 +2024,19 @@ two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,G1,G2,y1,y2,alpha){
 
   nu1 <- seq(0,y1,.1)
   nu2 <- seq(0,y2,.1)
+  
   par(mfrow=c(1,2))
-  plot(nu1,sapply(nu1,ea_uw),type='l')
-  plot(nu2,sapply(nu2,ea_ul),type='l')
+  nu_1_chosen = optimise(function(x) { -ea_uw(x) },c(0,y1))$minimum
+  nu_2_chosen = optimise(function(x) { -ea_ul(x) },c(0,y2))$minimum
+  
+  ea_w = function(x) { w(x)*Aw_band1(x)  + (1-w(x))*Al_band1(x)}
+  ea_l = function(x) { l(x)*Al_band2(x)  + (1-l(x))*Aw_band2(x)}
+  
+  plot(nu1,sapply(nu1,ea_uw),type='l',main=paste('A(nu_1=',round(nu_1_chosen,3),")=",round(ea_w(nu_1_chosen),3)))
+  plot(nu2,sapply(nu2,ea_ul),type='l',main=paste('A(nu_2=',round(nu_2_chosen,3),")=",round(ea_l(nu_2_chosen),3)))
+
+  
+  
 }
 
 plot_w_params<-function(){
