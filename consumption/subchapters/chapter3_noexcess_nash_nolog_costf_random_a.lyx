@@ -114,7 +114,7 @@ While status-driven consumption and appeal for social mobility may have
  gain social mobility.
  Viewing status consumption as investments towards the probabilistic social
  mobility in the economy, we explore the interplay of contentment and aspiration
- in consumer choice to optimise wealth over the long-term.
+ in intertemporal choice to optimise wealth over the long-term.
 \end_layout
 
 \begin_layout Standard
@@ -1963,102 +1963,46 @@ Chain implied by two income bands
 \end_layout
 
 \begin_layout Standard
-...
-\end_layout
-
-\begin_layout Standard
-Since the infinite growth of wealth can never be in equilibrium, we assume
- asset-evaulation under risk.
- Before moving further, we provide the proof that unbounded asset-not under
- risk cannot achieve a long-term equilibrium.
-\end_layout
-
-\begin_layout Theorem
-There are no W,L and 
-\begin_inset Formula $\pi$
+For the long-term income bands to exist with a stable wealth differences,
+ the assets must face some risk.
+ We introduce this with a stochastic variable which resets the future assets
+ at an expected finite time 
+\begin_inset Formula $T$
 \end_inset
 
- that satisfy the population constraint in a long-term equilibrium of asset
- accumulations.
-\end_layout
-
-\begin_layout Proof
-A Consider an 
-\series bold
-\bar under
-assets-cost-function
-\series default
-\bar default
- associated with wealth level.
- In empirical terms, this would summarise the expected expenditure required
+ .
+ Before describing these long-term dynamics in more details, we prove that
+ unbounded asset accumulations cannot achieve a long-term equilibrium under
+ a population stability conditions.
+ To motivate this proof, consider a general cost-function associated with
+ the assets so that the consumers in the long-term equilibrium balance future
+ expected income with the costs imposed by the current assets.
+ In empirical terms, this may summarise the expected expenditure required
  to maintain a certain level of wealth - including any maintenance fees,
  interest on loan, club memberships etc.
- that are associated with a certain level of wealth.
- Assuming a general needs-function 
+ associated with a certain level of wealth.
+ A general cost-function 
 \begin_inset Formula $c(A)$
 \end_inset
 
-, the net asset value of the consumer after adjusting for asset-costs is
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\pi(A)=A-c(A)$
-\end_inset
-
-.
- 
+ corresponds to a net asset value of the consumer after adjusting for asset-cost
+s as 
 \end_layout
 
-\begin_layout Proof
-Due to population stability in ...
- an economy with income bands 1 and 2 , we have that the consumers in band
- 1 that are promoted to band 2 are balanced by the consumers in band 2 being
- demoted to band 1.
- The population-stability constraint in the long-term equilibrium implies
- tha
-\end_layout
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\pi(A) & =A-c(A)\label{eq:net_asset_value_def}
+\end{align}
 
-\begin_layout Proof
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula $W(\prescript{t}{}\nu_{1})=L(\prescript{t}{}\nu_{2})$
 \end_inset
 
 
 \end_layout
 
-\begin_layout Proof
-This need-cost-function summarises the 
-\begin_inset Quotes eld
-\end_inset
-
-certain
-\begin_inset Quotes erd
-\end_inset
-
- costs from acquiring a certain wealth level 
+\begin_layout Standard
+This cost-function summarises the “certain” costs from acquiring a certain
+ wealth level 
 \begin_inset Formula $A$
 \end_inset
 
@@ -2071,23 +2015,10 @@ certain
 \begin_inset Formula $\nu_{2}$
 \end_inset
 
- ) are 
-\begin_inset Quotes eld
-\end_inset
-
-risky
-\begin_inset Quotes erd
-\end_inset
-
- since the promotion to future is uncertain.
- The costs of owning assets - through the function 
-\begin_inset Formula $c(A)$
-\end_inset
-
- that is known to consumer - are however certain.
- The consumer is allowed to put herself leverage her position by choosing
- costs higher than she can afford.
- The liquidity concerns still ensure that 
+ for consumer in band 2) are “risky” as the promotion to future is uncertain.
+ Note that even though the consumer is allowed to leverage herself by choosing
+ costs higher than she can afford, the liquidity concerns would ensure that
+ 
 \begin_inset Formula $\nu_{1}<y_{1}$
 \end_inset
 
@@ -2096,7 +2027,65 @@ risky
 \end_inset
 
 .
- 
+ We now state following theorem in terms of the function 
+\begin_inset Formula $\pi(A)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:NoLTEWithoutRisk"
+
+\end_inset
+
+There exist no 
+\begin_inset Formula $W_{1}(\nu)$
+\end_inset
+
+,
+\begin_inset Formula $L_{2}(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi(A)$
+\end_inset
+
+ that can satisfy the population constraint in a long-term equilibrium of
+ asset accumulations under no risk.
+\end_layout
+
+\begin_layout Proof
+The proof - which we state for two bands - can be generalised for higher
+ number of bands.
+ Note first that the population-stability constraint for the two band-economy
+ implies that in the long-term equilibrium we have
+\end_layout
+
+\begin_layout Proof
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{align}
+W(\prescript{t}{}\nu_{1}) & =L(\prescript{t}{}\nu_{2})\label{eq:two_band_population_stability}
+\end{align}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Proof
@@ -2137,7 +2126,21 @@ As a long-term equilibrium also implies stability of wealth levels, no more
 \uwave default
 \noun default
 \color inherit
-the assets would stabilise at 
+with the general net asset value function 
+\begin_inset Formula $\pi(A)$
+\end_inset
+
+ (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:net_asset_value_def"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), the assets would stabilise at 
 \begin_inset Formula $\prescript{t}{}A_{1}$
 \end_inset
 
@@ -2285,7 +2288,7 @@ Above ensures that the expected loss from being in band 1 is balanced by
 \uwave off
 \noun off
 \color none
-Since 
+As 
 \begin_inset Formula $\prescript{t}{}A_{1}$
 \end_inset
 
@@ -2293,7 +2296,7 @@ Since
 \begin_inset Formula $\prescript{t}{}A_{2}$
 \end_inset
 
- would stabilise in the long-term we drop the subscript 
+ stabilise in the long-term we drop the subscript 
 \begin_inset Formula $t$
 \end_inset
 
@@ -2318,14 +2321,14 @@ and
  Combining the population stability condition in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:population_stability_two_bands"
+reference "eq:two_band_population_stability"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
-with the long-term asset stability conditions in Equations 
+ with the long-term asset stability conditions in Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:w_lte"
@@ -2383,12 +2386,7 @@ As long as status competition is feasible for consumer 1, she should see
  Thus while the consumer in band 1 cannot afford to have a decline in net
  asset value if she moves to the next band, the consumer in the rich band
  might accept a poorer band with a net increase in asset value.
- This implies that the the net asset-value function must be concave with
- the two consumers perched at the roots of net asset function 
-\begin_inset Formula $\pi(A)$
-\end_inset
-
-.
+ This implies that the the net asset-value function must be concave (see
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2399,16 +2397,15 @@ noprefix "false"
 
 \end_inset
 
- demonstrates this condition.
- A concave net asset value function eventually corresponds to convex costs
- associated with the asset - which is plausible when there costs increase
- both for extremely high wealth levels and for extremely low wealth levels.
+).
+ 
 \end_layout
 
 \begin_layout Proof
-The long-term equilibrium also ensures that the consumer arriving from the
- different band gathers nothing more than other consumers in the band.
- Thus
+However, the long-term equilibrium also ensures that the consumer arriving
+ from the different band gathers nothing more than other consumers in the
+ same band.
+ Thus, we also have
 \end_layout
 
 \begin_layout Proof
@@ -2417,6 +2414,22 @@ The long-term equilibrium also ensures that the consumer arriving from the
 \pi(A_{1}^{*}-\nu_{1}^{*}+y_{2})=\pi(A_{2}^{*}-\nu_{2}^{*}+y_{2})\nonumber \\
 \pi(A_{2}^{*}-\nu_{2}^{*}+y_{1})=\pi(A_{1}^{*}-\nu_{1}^{*}+y_{1})\label{eq:stability_2}
 \end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%A concave net asset value function eventually corresponds to convex costs
+ associated with the asset - which is plausible when there costs increase
+ both for extremely high wealth levels and for extremely low wealth levels.
+\end_layout
 
 \end_inset
 
@@ -2472,38 +2485,6 @@ noprefix "false"
 \end_layout
 
 \begin_layout Proof
-Thus, the consumer must see net gain on average from participating in the
- status consumption for
-\begin_inset Formula $\prescript{t}{}A_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\prescript{t}{}A_{2}$
-\end_inset
-
- to have stable 
-\begin_inset Formula $A_{1}^{*},A_{2}^{*}$
-\end_inset
-
-.
- When such an equilibrium occurs, the probability functions 
-\begin_inset Formula $W(\nu_{1})$
-\end_inset
-
- and 
-\begin_inset Formula $L(\nu_{2})$
-\end_inset
-
- would have to be 
-\begin_inset Formula $\frac{1}{2}$
-\end_inset
-
- each.
- We thus assume that asset-stability is not a prerequisite for an equilibrium
- with difference in long-term differences in income.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -2540,25 +2521,8 @@ name "fig:asset_value_function_demo"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-As asset accumulations cannot stabilise except for the trivial seletion
- of 
-\begin_inset Formula $W(\nu_{1})$
-\end_inset
-
- and 
-\begin_inset Formula $L(\nu_{2})$
-\end_inset
-
-, we consider a bounded accumulation of assets under risk with a stochastic
- variable 
-\begin_inset Formula $N_{t}$
-\end_inset
-
- that resets the 
+Thus, the consumer must see no net gain on average from participating in
+ the status consumption for
 \begin_inset Formula $\prescript{t}{}A_{1}$
 \end_inset
 
@@ -2566,7 +2530,38 @@ As asset accumulations cannot stabilise except for the trivial seletion
 \begin_inset Formula $\prescript{t}{}A_{2}$
 \end_inset
 
- with a given probability
+ to have stable 
+\begin_inset Formula $A_{1}^{*},A_{2}^{*}$
+\end_inset
+
+.
+ The population constraint therefore implies that 
+\begin_inset Formula $W(\nu_{1}^{*})=L(\nu_{2}^{*})=\frac{1}{2}$
+\end_inset
+
+ as the only possible equilibrium when no new assets are added by participation
+ in status competitions.
+\end_layout
+
+\begin_layout Standard
+We use an independent stochastic variable 
+\begin_inset Formula $N_{t}$
+\end_inset
+
+ for the bounded asset accumulations under risk for both the consumer.
+ The variable 
+\begin_inset Formula $N_{t}$
+\end_inset
+
+ reset the 
+\begin_inset Formula $\prescript{t}{}A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\prescript{t}{}A_{2}$
+\end_inset
+
+ with a known probability as follows
 \end_layout
 
 \begin_layout Standard
@@ -2588,60 +2583,45 @@ As asset accumulations cannot stabilise except for the trivial seletion
 \end_layout
 
 \begin_layout Standard
-The additional risk with 
-\begin_inset Formula $\prescript{t}{}A_{1}$
+Since 
+\begin_inset Formula $N_{t}$
 \end_inset
 
- and 
-\begin_inset Formula $\prescript{t}{}A_{2}$
+ is observed by both the consumers independently, the above set up also
+ allows us to ignore the role of starting assets consider 
+\begin_inset Formula $A_{1}=A_{2}=0$
 \end_inset
 
- forces the long-term convergence of 
-\begin_inset Formula $\prescript{t}{}A_{1}$
+ for both the consumers.
+ Assuming that 
+\begin_inset Formula $N_{t}=1$
 \end_inset
 
- and 
-\begin_inset Formula $\prescript{t}{}A_{2}$
+ occurs infrequently after an expected time period 
+\begin_inset Formula $T$
 \end_inset
 
- to 
-\begin_inset Formula $A_{1}^{*}$
+ and defining 
+\begin_inset Formula $\prescript{t}{}I_{1}$
 \end_inset
 
- and 
-\begin_inset Formula $A_{2}^{*}$
+, 
+\begin_inset Formula $\prescript{t}{}I_{2}$
 \end_inset
 
- and permits a probability game driven by 
-\begin_inset Formula $W(\nu)$
+ for the consumers in the bands 1 and 2 at the time 
+\begin_inset Formula $t$
 \end_inset
 
- (?) 
-\end_layout
-
-\begin_layout Standard
-What can the consumer do if her long-term expectations include the possibility
- of losing everything? The above scheme allows us to set the initial wealth
- to simply zero and the long-term wealth to be dependent on 
-\begin_inset Formula $y_{1},y_{2}$
-\end_inset
-
- alone.
- More specifically, if the consumers start with 
-\begin_inset Formula $A_{1}=0$
-\end_inset
-
- (
-\begin_inset Formula $A_{2}=0$
-\end_inset
-
- ), then they would accumulate 
+, the long-term asset accumulations for the consumer would tend to the following
+ finite values
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-A^{*}\rightarrow\sum_{t=1}^{t=T}I_{t}\label{eq:assets_reset_accumulation}
+A_{1}^{*}\rightarrow\frac{1}{T}\sum_{t=1}^{t=T}\prescript{t}{}I_{1}\nonumber \\
+A_{2}^{*}\rightarrow\frac{1}{T}\sum_{t=1}^{t=T}\prescript{t}{}I_{2}\label{eq:assets_reset_accumulation}
 \end{gather}
 
 \end_inset
@@ -2650,71 +2630,32 @@ A^{*}\rightarrow\sum_{t=1}^{t=T}I_{t}\label{eq:assets_reset_accumulation}
 \end_layout
 
 \begin_layout Standard
-Here, 
+Since the consumer accumulations are expected to be reset at a time 
+\begin_inset Formula $t=T$
+\end_inset
+
+, the consumer does not expect to gain from accumulation at the time 
 \begin_inset Formula $T$
 \end_inset
 
- is the average time interval over which 
-\begin_inset Formula $N_{t}$
-\end_inset
+ and must therefore set up 
+\end_layout
 
- remains zero i.e.
- 
-\begin_inset Formula $T\rightarrow\frac{1}{n}\sum^{n}(\tau-\iota)$
-\end_inset
-
- where 
-\begin_inset Formula $\iota,t$
-\end_inset
-
- are two time intervals such that 
-\begin_inset Formula $N_{\iota}=N_{\tau}=1$
-\end_inset
-
- and 
-\begin_inset Formula $N_{t}=0$
-\end_inset
-
- 
-\begin_inset Formula $\forall\in t\in[\iota+1,\tau+1]$
-\end_inset
-
-.
- We assume that the process 
-\begin_inset Formula $N_{t}$
-\end_inset
-
- does not depend on 
-\begin_inset Formula $A_{1}$
-\end_inset
-
- (or 
-\begin_inset Formula $A_{2}$
-\end_inset
-
-) and therefore, both the consumers are subjected to the same variable 
-\begin_inset Formula $N_{t}$
-\end_inset
-
-.
- The above equilibrium means that after getting her accumulations reset
- at a time 
-\begin_inset Formula $t=\iota$
-\end_inset
-
-, the consumer gets the highest utility by accumulating highest assets as
- possible in the time expected time interval 
+\begin_layout Standard
+highest utility by accumulating highest assets as possible in the time expected
+ time interval 
 \begin_inset Formula $T$
 \end_inset
 
 .
  Since the consumer does not obtain utility from anything but asset accumulation
-, she would optimise the assets-values in the short-term.
-\end_layout
+s, she would optimise the assets-values in the short-term 
+\begin_inset Formula $t$
+\end_inset
 
-\begin_layout Standard
-The short-term equilibrium corresponds to one where the consumer do not
- care about the future 
+.
+ The existence of a short-term equilibrium om the above setup means that
+ the consumer is not concerned 
 \begin_inset Formula $T$
 \end_inset
 
@@ -4089,60 +4030,6 @@ status open
 \end_layout
 
 \begin_layout Standard
-[W/O POP CONST ]With the population constraint, 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- would be still be a functon of both 
-\begin_inset Formula $\text{\underbar{\ensuremath{\omega}}}$
-\end_inset
-
- and 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\text{\underbar{\ensuremath{\lambda}}}$
-\end_inset
-
- - since 
-\begin_inset Formula $E_{1}(\cdot)$
-\end_inset
-
-,
-\begin_inset Formula $E_{2}(\cdot)$
-\end_inset
-
- both influence the consumer's selection of 
-\begin_inset Formula $\nu_{1},\nu_{2}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-[W POP CONST ]With the population constraint, a given 
-\begin_inset Formula $\kappa$
-\end_inset
-
-, 
-\begin_inset Formula $\bar{\nu}_{1}<\underbar{\ensuremath{\omega}}\Rightarrow\bar{\nu}_{2}>\underbar{\ensuremath{\lambda}}$
-\end_inset
-
- is necessitate vice versa.
- Is this possible?
-\end_layout
-
-\begin_layout Standard
 [Long-term Asset balance] In the two-period economy, we can now discuss
  what long-term differences in Assets would develop over time.
  The only assets that are accumualated are those over the two periods.
@@ -4208,6 +4095,70 @@ In equilbrium these are the values the two consumers would achieve while
 \end_inset
 
  periods.
+ Since 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+ is always bounded and a consumer must choose only one 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ (or 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+) for the entire period 
+\begin_inset Formula $T$
+\end_inset
+
+ , a maximal 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ (or 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+) can always be selected.
 \end_layout
 
 \begin_layout Subsection
@@ -4215,29 +4166,96 @@ Interpretations
 \end_layout
 
 \begin_layout Standard
-Definitions:
+We look into specific selection of 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ and 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ under different scenarios.
+ Some definitions are as below.
+\end_layout
+
+\begin_layout Subsubsection
+Definitions
 \end_layout
 
 \begin_layout Enumerate
 Segregation is when equilbirium when consumer gives up on status consumption.
 \end_layout
 
+\begin_layout Subsubsection
+Observations on Effects
+\end_layout
+
 \begin_layout Standard
-Following are the effects on chosen that we can confirm with simulations:
+Following are the effects of chosen parameters on the selection of 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ (or 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+) 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+that we confirm with simulations.
+ 
 \end_layout
 
 \begin_layout Enumerate
-Having G1=G2 and omega=lambda and bar_omega=bar_lambda, would make the poorer
- consumer bet everything on nu so that the optimal solution is nu=0 for
- the rich consumer and nu=y1 for the poor consumer.
+Lack of contentment would drive the consumer to bet everything on status
+ consumption.
+ Having G1=G2 and omega=lambda and bar_omega=bar_lambda, would make the
+ poorer consumer bet everything on nu so that the optimal solution is nu=0
+ for the rich consumer and nu=y1 for the poor consumer.
  
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-% we check this with  - two_stage_sol(omega_bar = 1,omega = 1,lambda_bar
- = 1,lambda = 1,G1 =1,G2 = 1, y1= 1,y2 = 10  ,alpha = .3)
+% we check this with  - two_stage_sol(omega_bar = 0,omega = 1,lambda_bar
+ = 0,lambda = 1,G1 =1,G2 = 1, y1= 1,y2 = 10  ,alpha = .3)
 \end_layout
 
 \end_inset
@@ -4246,6 +4264,45 @@ status open
 \end_layout
 
 \begin_deeper
+\begin_layout Enumerate
+Moving omega_bar negative i.e.
+ rewarding the consumer a lot for very little lowers her choice for nu (she
+ can settle for less) 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%two_stage_sol(omega_bar = -20,omega = 1,lambda_bar = 0,lambda = 1,G1 =1,G2
+ = 1, y1= 1,y2 = 10  ,alpha = .3)
+\end_layout
+
+\end_inset
+
+.
+ Moving omaga_bar positive makes the poorer consumer resign from status
+ consumption as she find no status consumption more appropriate 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% two_stage_sol(omega_bar = 0,omega = 100,lambda_bar = 0,lambda = 1,G1 =1,G2
+ = 1, y1= 1,y2 = 10  ,alpha = .3)
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Moving lambda to positive has the same effect as moving omega negative.
+ Moving lambda_bar negative makes nu2 0 and nu1 high.
+ nu2=0 makes sense because negative lambda makes rich secure for nothing.
+ But it also makes the poor raise her nu1.
+\end_layout
+
 \begin_layout Enumerate
 Increasing y2 inrceases A1 significantly as well - since in the long-term
  the poorer consumer is meant to reach band2 with the some probability.
@@ -4256,34 +4313,47 @@ Increasing
 \begin_inset Formula $\omega/\lambda$
 \end_inset
 
- does not change the shape of the curve too much (adjusting either omega
- or lambda does not have much role either)
-\end_layout
+ changes the shape of the curve raising nu for both poor and rich but does
+ cause a 
+\begin_inset Quotes eld
+\end_inset
 
-\begin_layout Enumerate
-Increasing bar_lambda - makes the band 2 e_ul sloping downwards more flat
-\end_layout
+dip
+\begin_inset Quotes erd
+\end_inset
 
-\end_deeper
-\begin_layout Enumerate
-G1>G2 (1.2>1) makes nu_1 higher - But with same omega and lambda (omega=lambda),
- both nu1 and nu2 are low.
-\end_layout
-
-\begin_layout Enumerate
+ - just size of the jump does not change the long-term the maximum nu needed.
+ 
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-% omega_bar=lambda_bar=0 makes the eu_w curve a little smooth and suggests
- low nu for both two_stage_sol(omega_bar = 0,omega = 1,lambda_bar = 0,lambda
- = 1,G1 =1.3,G2 = 1, y1= 1,y2 = 10  ,alpha = .3)
+%two_stage_sol(omega_bar = 0,omega = 100,lambda_bar = 0,lambda = 1,G1 =1,G2
+ = 1, y1= 1,y2 = 10  ,alpha = .3)
 \end_layout
 
 \end_inset
 
+.
+ 
+\end_layout
 
+\end_deeper
+\begin_layout Enumerate
+Increasing G1 seems to balance with omega 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%two_stage_sol(omega_bar = 0,omega = 3,lambda_bar = 0,lambda = 1,G1 =1.2,G2
+ = 1, y1= 1,y2 = 10  ,alpha = .3)
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -4328,6 +4398,238 @@ nu)$"),lty=1);
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Enforcing the population constraint makes and setting lambda=1 (so we're
+ interested in the right omega) or fixing a certain omega and fixing lambda_bar=
+0 can help us find the right solution.
+ Since we're interested in G1/G2 - we look for what G1/G2 is necessitated
+ by lambda_bar (for a fixed kappa) as well as what lambda_bar would lead
+ to a given G1/G2.
+ With rising sastisfaction, lambda_bar is lower - meaning more satisfaction
+ with being poorer.
+ However, the reverse interpretation (finding G1/G2) does not work.
+ In general, there are issues with finding the right G1/G2 - because the
+ the sensitivity with respect to G1/G2 is quite high.
+ It's better to ask what G1/G2 means for lambda_fixed and omega_bar when
+ we fix kappa.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%get_missing_var(fixed_varname = "omega_bar",fixed_varval = 1.11, plot =
+ T)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+G1/G2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lambda_bar
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.247
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.038
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.612
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.313
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.45
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.002
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+lambda_bar for G1/G2 ( y1=1, y2=10, alpha=.3,kappa=3,lambda=1)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% find_o <- function(o) { two_stage_sol(omega_bar = 0,omega = o,lambda_bar
+ = 0,lambda = 1,G1 =1.2,G2 = 1, y1= 1,y2 = 10  ,alpha = .3,plot = F)}
+\end_layout
+
+\begin_layout Plain Layout
+
+% plot(x,sapply(x,find_o))
+\end_layout
+
+\begin_layout Plain Layout
+
+% optimise(function(x){abs(find_o(x))},c(0,10))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Fixing omega/lambda and lambda=1
+\end_layout
+
+\begin_layout Plain Layout
+
+% find_o <- function(o) { two_stage_sol(omega_bar = 0,omega = o,lambda_bar
+ = 0,lambda = 1,G1 =1.2,G2 = 1, y1= 1,y2 = 10  ,alpha = .3,plot = F)}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Above can also be verified with the solution.
 \end_layout
 
 \begin_layout Section
@@ -4448,9 +4750,47 @@ Conclusions
 \end_layout
 
 \begin_layout Standard
-[IT'S ALREADY OBVIOUS that extreme differences in income would increase
- status consumption since the consumers would bet more - what does the model
- add ]
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% HK: a more affluent society will have lower utility at each income level.
+ Hence, an increase in average income may be consistent with a decrease
+ in social welfare.
+ More plausibly, social welfare may rise only slowly in response to economic
+ growth.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% HK: poor are made worse off by greater equality.
+ Such an increase in equality will also increase conspicuous  waste by those
+ on middle incomes or low and middle incomes, while conspicuous consumption
+ by the rich may decrease (our finding too).
+ consequently, when we consider corrective taxes on conspicuous consumption,
+ we find that the more equally income is distributed, the higher taxes and
+ subsidies should be for those with low to middle incomes, and the lower
+ they should be  or those with high incomes.
+ Indeed, we are able to show that in some circumstances a corrective policy
+ with higher tax rates (but also higher subsidies) for those with low incomes
+ can lead to a Pareto improvement
+\end_layout
+
+\begin_layout Plain Layout
+
+% HK: Reducing inequality increases competition.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+[LTE] We look at long-term equilbirium to explore the specific conditions
+ of developing economies where inequalities are due to social barriers.
 \end_layout
 
 \begin_layout Standard

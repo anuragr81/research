@@ -1932,11 +1932,15 @@ evolve_long_term_l <- function(lambda,A,G2_1,n){
 }
 
 W_p_logis <- function(omega,omega_bar,nu){
-  return(plogis(q = nu,location = omega_bar, scale = omega))
+#  return(plogis(q = nu,location = omega_bar, scale = omega))
+#  print(paste("W_p_logis=",nu))
+  return (1/(1+exp(-omega * (nu-omega_bar))))
 }
 
 L_p_logis <- function(lambda,lambda_bar,nu){
-  return(plogis(q = nu,location = lambda_bar, scale = lambda))
+  #return(plogis(q = nu,location = lambda_bar, scale = lambda))
+#  print(paste("L_p_logis=",nu))
+  return (1-1/(1+exp(-lambda* (nu-lambda_bar))))
 }
 
 k <- function(A,beta,psi){
@@ -1996,11 +2000,14 @@ evolve_plogis <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,psi,beta,y1,y2
 }
 
 
-polyn_util <- function(A,G,alpha) { return (G* A**alpha)}
+polyn_util <- function(A,G,alpha) { 
+  #print(paste("polyn_util:,","G=",toString(G),"A=",toString(A),"u=",G* A**alpha)) ; 
+  return (G* A**alpha)
+  }
 inv_util <- function(u,G,alpha) { return (u/G)**(1/alpha) }
 
 
-two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,G1,G2,y1,y2,alpha){
+two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,G1,G2,y1,y2,alpha,plot){
   
   w <-  function(nu) { W_p_logis(omega=omega,omega_bar=omega_bar, nu=nu) }
   l <-  function(nu) { L_p_logis(lambda=lambda,lambda_bar=lambda_bar, nu=nu) }
@@ -2019,8 +2026,8 @@ two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,G1,G2,y1,y2,alpha){
   Aw_band2 <- function(x) {y2-x+y2-x+E2(x,y1,y2) }
   Al_band2 <- function(x) {y2-x+y1-x+E1(x,y1,y2) }
   
-  ea_uw = function(x) { w(x)*polyn_util(G=G2,A=Aw_band1(x),alpha=alpha)  + (1-w(x))*polyn_util(G=G1,A=Al_band1(x),alpha=alpha)}
-  ea_ul = function(x) { l(x)*polyn_util(G=G1,A=Al_band2(x),alpha=alpha)  + (1-l(x))*polyn_util(G=G2,A=Aw_band2(x),alpha=alpha)}
+  ea_uw = function(x) {  return(w(x)*polyn_util(G=G2,A=Aw_band1(x),alpha=alpha)  + (1-w(x))*polyn_util(G=G1,A=Al_band1(x),alpha=alpha))}
+  ea_ul = function(x) {  return(l(x)*polyn_util(G=G1,A=Al_band2(x),alpha=alpha)  + (1-l(x))*polyn_util(G=G2,A=Aw_band2(x),alpha=alpha))}
 
   nu1 <- seq(0,y1,.1)
   nu2 <- seq(0,y2,.1)
@@ -2029,14 +2036,108 @@ two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,G1,G2,y1,y2,alpha){
   nu_1_chosen = optimise(function(x) { -ea_uw(x) },c(0,y1))$minimum
   nu_2_chosen = optimise(function(x) { -ea_ul(x) },c(0,y2))$minimum
   
+  
+  
   ea_w = function(x) { w(x)*Aw_band1(x)  + (1-w(x))*Al_band1(x)}
   ea_l = function(x) { l(x)*Al_band2(x)  + (1-l(x))*Aw_band2(x)}
   
-  plot(nu1,sapply(nu1,ea_uw),type='l',main=paste('A(nu_1=',round(nu_1_chosen,3),")=",round(ea_w(nu_1_chosen),3)))
-  plot(nu2,sapply(nu2,ea_ul),type='l',main=paste('A(nu_2=',round(nu_2_chosen,3),")=",round(ea_l(nu_2_chosen),3)))
+  kappa = omega/lambda
+  if (plot){
+    plot(nu1,sapply(nu1,ea_uw),type='l',main=paste('A(nu_1=',round(nu_1_chosen,3),")=",round(ea_w(nu_1_chosen),3)))
+    plot(nu2,sapply(nu2,ea_ul),type='l',main=paste('A(nu_2=',round(nu_2_chosen,3),")=",round(ea_l(nu_2_chosen),3)))
+  }
+  
+  return(abs(nu_1_chosen  + kappa* (nu_2_chosen - lambda_bar) - omega_bar))
+  
+}
 
+plot_missing_vars<-function(){
+  xvals <- c(1.05,1.1,1.15,1.2,1.25,1.3,1.35,1.40,1.45)
+  yvals <- array()
+  for (i in seq(length(xvals))){
+    x <- xvals[i]
+    sol<- get_missing_var("omega_bar",x)
+    if (sol[["error"]]>1e-2){
+      stop("No solution")
+    }
+    yvals[i] <- sol[["lambda_bar_optimised"]]
+  }
+  plot(xvals,yvals,type='o')
+}
+
+get_missing_var<-function(fixed_varname,fixed_varval,plot)
+{
+  fixed_y1 = 1 
+  fixed_y2 = 5
+  fixed_alpha = .3
   
+  if (fixed_varname=="omega_bar"){
+    fixed_lambda=1
+    fixed_kappa = 3
+    
+    fixed_G2 = 1
+    fixed_G1 = fixed_varval*fixed_G2
+    
+    omega_bar_fixed = .5
+    #lambda_bar
+    find_lambda_bar <- function(lbar){
+      two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lbar,lambda=fixed_lambda,G1=fixed_G1,G2=fixed_G2,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+    }
+    
+    lambda_bar_optimised <- (optimise(function(x){abs(find_lambda_bar(x))},c(0,10)))$minimum
+    
+    error <- two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_optimised,lambda=fixed_lambda,G1=fixed_G1,G2=fixed_G2,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=plot)
+    
+    res=list()
+    res[["error"]] = error
+    res[["lambda_bar_optimised"]] = lambda_bar_optimised
+    return(res)
+  }
+
+  if (fixed_varname=="omega"){
+    lambda_bar_fixed = 2
+    omega_bar_fixed  = 0
+    
+    fixed_G2 = 1
+    fixed_G1 = fixed_varval*fixed_G2
+    fixed_lambda=1
+    
+    find_kappa <- function(kappa){
+      two_stage_sol(omega_bar=omega_bar_fixed,omega=kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,G1=fixed_G1,G2=fixed_G2,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+    }
+    
+    kappa_optimised <- (optimise(function(x){abs(find_kappa(x))},c(1e-3,1e+3)))$minimum
+    
+    error <- two_stage_sol(omega_bar=omega_bar_fixed,omega=kappa_optimised*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,G1=fixed_G1,G2=fixed_G2,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=plot)
+    
+    res=list()
+    res[["error"]] = error
+    res[["kappa_optimised"]] = kappa_optimised
+    return(res)
+  }
   
+  if (fixed_varname=="contentment"){
+    fixed_lambda=1
+    fixed_kappa = 3
+    
+    fixed_G2 = 1
+    omega_bar_fixed = fixed_varval
+    lambda_bar_fixed = 0
+    
+    find_G1 <- function(g1){
+      two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,G1=g1*fixed_G2,G2=fixed_G2,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+    }
+    
+    G1_optimised <- (optimise(function(x){abs(find_G1(x))},c(1e-4,1e+2)))$minimum
+    error <- two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,G1=G1_optimised*fixed_G2,G2=fixed_G2,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+    res=list()
+    res[["error"]] = error
+    res[["G1_optimised"]] = G1_optimised
+    return(res)
+    
+  }
+  stop("Could not identify fixed_varname")
+
 }
 
 plot_w_params<-function(){
