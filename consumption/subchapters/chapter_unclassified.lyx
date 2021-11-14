@@ -9405,5 +9405,327 @@ noprefix "false"
 
 \end_layout
 
+\begin_layout Section
+Redundant: Consumer Choice Arguments for short-term equilibrium 
+\end_layout
+
+\begin_layout Standard
+We now consider the consumer decision with a time horizon of 
+\begin_inset Formula $T=1$
+\end_inset
+
+.
+ At every period 
+\begin_inset Formula $t$
+\end_inset
+
+, with a view only one time period ahead, the consumer 1 thus optimises
+ 
+\begin_inset Formula $u(A_{t+1})$
+\end_inset
+
+ by choosing a certain 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ .
+ As such the consumer just has one life and a one shot-investment to make
+ towards her life-time status.
+ If the consumer has assets 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\prescript{t}{}A$
+\end_inset
+
+ in period 
+\begin_inset Formula $t$
+\end_inset
+
+, then 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+her total assets in the period 
+\begin_inset Formula $t+1$
+\end_inset
+
+ would be 
+\begin_inset Formula $\prescript{t}{}A+y_{1}-\prescript{t}{}\nu_{1}$
+\end_inset
+
+ if she is band 1 - where 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ is her expenditure on status consumption.
+ If she is in band 2 - with  a probability 
+\begin_inset Formula $W_{1}(\prescript{t}{}\nu_{1})$
+\end_inset
+
+, her net assets would 
+\begin_inset Formula $\prescript{t}{}A+y_{2}-\prescript{t}{}\nu_{1}$
+\end_inset
+
+.
+ The consumer would remain in the band 1 in the next period 
+\begin_inset Formula $t+1$
+\end_inset
+
+ with probability 
+\begin_inset Formula $1-W_{1}(\prescript{1}{}\nu_{1})$
+\end_inset
+
+ .
+ Thus she would optimise the following utility
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+W(\prescript{t}{}\nu_{1})u_{2}(\pi(\prescript{t}{}A-\prescript{t}{}\nu_{1}+y_{2}))+(1-W(\prescript{t}{}\nu_{1}))u_{1}(\pi(\prescript{t}{}A-\prescript{t}{}\nu_{1}+y_{1}))\label{eq:band_1_utility_optim}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% We don't worry about the explicit solution because we're using solvers
+ for this purpose
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, the consumer utility is based on relative wealth (rather than absolute)
+ i.e.
+ the consumer enjoys the same wealth more in band 1 than in band 2 so that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+u_{1}(A)=\gamma(A-\Pi_{1})^{\alpha}\nonumber \\
+u_{2}(A)=\gamma(A-\Pi_{2})^{\alpha}\label{eq:user_utilities}
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $\Pi_{1},\Pi_{2}$
+\end_inset
+
+ are constants so that 
+\begin_inset Formula $\Pi_{1}<\Pi_{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% We also need to worry about if the consumer can enjoy negative A - one
+ way to clarify is that her reference has changed .
+ which means moving from negative to positive or vice versa is fine if 
+\end_layout
+
+\begin_layout Plain Layout
+
+% her reference adjusted utility permits it.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The consumer in band 1 thus chooses 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ so that the expression in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:band_1_utility_optim"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is maximised.
+ Let the solution be represented by functions 
+\begin_inset Formula $g_{1},g_{2}$
+\end_inset
+
+ so that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+\prescript{t}{}\nu_{1}=g_{1}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A,\textbf{w},\textbf{p})\label{eq:user_optim_choices}\\
+\prescript{t}{}\nu_{2}=g_{2}(\Gamma_{1},\Gamma_{2},y_{1},y_{2},\prescript{t}{}A,\textbf{l},\textbf{p})\nonumber 
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $\textbf{p}$
+\end_inset
+
+ is a set of constants representing the net asset-value
+\begin_inset Formula $\pi(A)$
+\end_inset
+
+ and 
+\begin_inset Formula $\textbf{w}$
+\end_inset
+
+,
+\begin_inset Formula $\textbf{l}$
+\end_inset
+
+ are the sets of constants representing the functions 
+\begin_inset Formula $W(\nu_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $L(\nu_{2})$
+\end_inset
+
+ respectively.
+ Notice that 
+\begin_inset Formula $\nu_{1}\in[0,y_{1}]$
+\end_inset
+
+, 
+\begin_inset Formula $\nu_{2}\in[0,y_{2}]$
+\end_inset
+
+ i.e.
+ the consumers do not use anything from savings towards the status consumption.
+ It is worth emphasising that the utility to the consumer considers the
+ total assets acquired by the consumer rather than the new income received
+ in successive periods.
+ The consumers are assumed to save everything up at the end of first period
+ i.e.
+ they do not spend on status consumption at the end of their lives.
+ This holds for when higher number of periods are considered - the consumption
+ 
+\begin_inset Formula $\nu$
+\end_inset
+
+ in the last period is always zero for all the consumers regardless of how
+ much wealth they have amassed.
+\end_layout
+
+\begin_layout Standard
+If the functions 
+\begin_inset Formula $W(\nu_{1}),L(\nu_{2})$
+\end_inset
+
+ could change with time 
+\begin_inset Formula $t$
+\end_inset
+
+ ( i.e.
+ if
+\begin_inset Formula $\textbf{w}$
+\end_inset
+
+,
+\begin_inset Formula $\textbf{l}$
+\end_inset
+
+ are time varying), then the consumers are meant to adjust 
+\begin_inset Formula $\prescript{t}{}\nu_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\prescript{t}{}\nu_{2}$
+\end_inset
+
+ accordingly.
+ While a symmetric Nash equilibrium can be specific with finite time horizons,
+ we are interested in the long-term equilibrium conditions as the inequalities
+ that we're interested in are also sustained in the long-term.
+ Further, the functions 
+\begin_inset Formula $W(\nu_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu_{2})$
+\end_inset
+
+ are defined only for stable populations of the bands - which leads us to
+ the following assumption.
+\end_layout
+
+\begin_layout Standard
+assumption :The consumers adjust 
+\begin_inset Formula $\nu$
+\end_inset
+
+ according to 
+\begin_inset Formula $L,W$
+\end_inset
+
+ defined for stable band populations.
+\end_layout
+
+\begin_layout Standard
+Due to the above assumption , the consumer's horizon coincides with that
+ of 
+\begin_inset Formula $L(\nu_{1}),W(\nu_{2})$
+\end_inset
+
+ and the short-term Nash equilibria are population-stable status competitions.
+ 
+\end_layout
+
 \end_body
 \end_document
