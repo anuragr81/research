@@ -2051,6 +2051,45 @@ two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,G1,G2,y1,y2,alpha,pl
   
 }
 
+
+no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha,plot){
+  
+  w <-  function(nu) { W_p_logis(omega=omega,omega_bar=omega_bar, nu=nu) }
+  l <-  function(nu) { L_p_logis(lambda=lambda,lambda_bar=lambda_bar, nu=nu) }
+  
+  E1 <- function(x,y1,y2) { w(x)*y2  + (1-w(x))*y1}
+  E2 <- function(x,y1,y2) { l(x)*y1  + (1-l(x))*y2}
+  
+  Aw_band1 <-function(x) {y1-x+y2-x+E2(x,y1,y2) }
+  Al_band1 <-function(x) {y1-x+y1-x+E1(x,y1,y2) }
+  
+  Aw_band2 <- function(x) {y2-x+y2-x+E2(x,y1,y2) }
+  Al_band2 <- function(x) {y2-x+y1-x+E1(x,y1,y2) }
+  
+  ea_uw = function(x) {  return(w(x)*log(Aw_band1(x))  + (1-w(x))*log(Al_band1(x)))}
+  ea_ul = function(x) {  return(l(x)*log(Al_band2(x))  + (1-l(x))*log(Aw_band2(x)))}
+  
+  nu1 <- seq(0,y1,y1/100)
+  nu2 <- seq(0,y2,y2/100)
+  
+  par(mfrow=c(1,2))
+  nu_1_chosen = optimise(function(x) { -ea_uw(x) },c(0,y1))$minimum
+  nu_2_chosen = optimise(function(x) { -ea_ul(x) },c(0,y2))$minimum
+  
+  ea_w = function(x) { w(x)*Aw_band1(x)  + (1-w(x))*Al_band1(x)}
+  ea_l = function(x) { l(x)*Al_band2(x)  + (1-l(x))*Aw_band2(x)}
+  
+  kappa = omega/lambda
+  if (plot){
+    plot(nu1,sapply(nu1,ea_uw),type='l',main=paste('A(nu_1=',round(nu_1_chosen,3),")=",round(ea_w(nu_1_chosen),3)))
+    plot(nu2,sapply(nu2,ea_ul),type='l',main=paste('A(nu_2=',round(nu_2_chosen,3),")=",round(ea_l(nu_2_chosen),3)))
+  }
+  
+  return(abs(nu_1_chosen  + kappa* (nu_2_chosen - lambda_bar) - omega_bar))
+  
+}
+
+
 plot_missing_vars<-function(){
   xvals <- c(1.05,1.1,1.15,1.2,1.25,1.3,1.35,1.40,1.45)
   yvals <- array()
@@ -2171,3 +2210,227 @@ plot_l_params<-function(speed){
   }
 }
 
+
+get_no_greed_missing_var<-function(fixed_varname,fixed_varval,plot)
+{
+  
+  if (fixed_varname=="omega_bar"){
+    fixed_y1 = 1 
+    fixed_y2 = 5
+    fixed_alpha = .3
+    
+    fixed_lambda=1
+    fixed_kappa =3
+
+    omega_bar_fixed = fixed_varval
+    #lambda_bar
+    find_lambda_bar <- function(lbar){
+      no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lbar,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+    }
+    
+    lambda_bar_optimised <- (optimise(function(x){abs(find_lambda_bar(x))},c(0,max(fixed_y1,fixed_y2))))$minimum
+    
+    error <- no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_optimised,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=plot)
+    
+    res=list()
+    res[["error"]] = error
+    res[["lambda_bar_optimised"]] = lambda_bar_optimised
+    return(res)
+  }
+  
+  
+  if (fixed_varname=="omega_bar_y1"){
+    fixed_y1 = fixed_varval 
+    fixed_y2 = 5
+    fixed_alpha =1
+    
+    fixed_lambda=1
+    fixed_kappa =3
+    
+    lambda_bar_fixed = 1
+    
+    find_omega_bar <- function(obar){
+      no_greed_two_stage_sol(omega_bar=obar,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+    }
+    
+    omega_bar_optimised <- (optimise(function(x){abs(find_omega_bar(x))},c(0,max(fixed_y1,fixed_y2))))$minimum
+    
+    error <- no_greed_two_stage_sol(omega_bar=omega_bar_optimised,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=plot)
+    
+    res=list()
+    res[["error"]] = error
+    res[["omega_bar_optimised"]] = omega_bar_optimised
+    return(res)
+  }
+  
+  if (fixed_varname=="omega_bar_y2"){
+    fixed_y1 = 2
+    fixed_y2 = fixed_varval
+    fixed_alpha =1
+    
+    fixed_lambda=1
+    fixed_kappa =2
+    
+    lambda_bar_fixed =.2
+    
+    find_omega_bar <- function(obar){
+      no_greed_two_stage_sol(omega_bar=obar,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+    }
+    
+    omega_bar_optimised <- (optimise(function(x){abs(find_omega_bar(x))},c(0,max(fixed_y1,fixed_y2))))$minimum
+    
+    error <- no_greed_two_stage_sol(omega_bar=omega_bar_optimised,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=plot)
+    
+    res=list()
+    res[["error"]] = error
+    res[["omega_bar_optimised"]] = omega_bar_optimised
+    return(res)
+  }
+  
+  
+  
+  if (fixed_varname=="lambda_bar_y1"){
+    fixed_y1 = fixed_varval 
+    fixed_y2 = 5
+    fixed_alpha = 1
+    
+    fixed_lambda=1
+    fixed_kappa =.5
+    
+    omega_bar_fixed = .2
+    #lambda_bar
+    find_lambda_bar <- function(lbar){
+      no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lbar,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+    }
+    
+    lambda_bar_optimised <- (optimise(function(x){abs(find_lambda_bar(x))},c(0,max(fixed_y1,fixed_y2))))$minimum
+    
+    error <- no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_optimised,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=plot)
+    
+    res=list()
+    res[["error"]] = error
+    res[["lambda_bar_optimised"]] = lambda_bar_optimised
+    return(res)
+  }
+  
+  if (fixed_varname=="lambda_bar_y2"){
+    fixed_y1 = 1 
+    fixed_y2 = fixed_varval
+    fixed_alpha = 1
+    
+    fixed_lambda=1
+    fixed_kappa =3
+    
+    omega_bar_fixed = .2
+    #lambda_bar
+    find_lambda_bar <- function(lbar){
+      no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lbar,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+    }
+    
+    lambda_bar_optimised <- (optimise(function(x){abs(find_lambda_bar(x))},c(0,max(fixed_y1,fixed_y2))))$minimum
+    
+    error <- no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_optimised,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=plot)
+    
+    res=list()
+    res[["error"]] = error
+    res[["lambda_bar_optimised"]] = lambda_bar_optimised
+    return(res)
+  }
+  
+  
+  if (fixed_varname=="y2_lambda_bar"){
+    fixed_y1 = 1 
+    fixed_alpha = 1
+    fixed_lambda=1
+    fixed_kappa = 2
+    
+    omega_bar_fixed = .3
+    lambda_bar_fixed = fixed_varval
+    #lambda_bar
+    find_y2 <- function(y2var){
+      no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=fixed_y1,y2=y2var,alpha=fixed_alpha,plot=F)
+    }
+    
+    y2_optimised <- (optimise(function(x){abs(find_y2(x))},c(1e-2,lambda_bar_fixed*5) ) ) $minimum
+    
+    error <- no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=fixed_y1,y2=y2_optimised,alpha=fixed_alpha,plot=plot)
+    
+    res=list()
+    res[["error"]] = error
+    res[["y2_optimised"]] = y2_optimised
+    return(res)
+  }
+  
+  
+  if (fixed_varname=="y2_omega_bar"){
+    fixed_y1 = 1 
+    fixed_alpha = 1
+    fixed_lambda=1
+    fixed_kappa = 2
+    
+    omega_bar_fixed = fixed_varval
+    lambda_bar_fixed = 1.2
+    #lambda_bar
+    find_y2 <- function(y2var){
+      no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=fixed_y1,y2=y2var,alpha=fixed_alpha,plot=F)
+    }
+    
+    y2_optimised <- (optimise(function(x){abs(find_y2(x))},c(1e-2,lambda_bar_fixed*5) ) ) $minimum
+    
+    error <- no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=fixed_y1,y2=y2_optimised,alpha=fixed_alpha,plot=plot)
+    
+    res=list()
+    res[["error"]] = error
+    res[["y2_optimised"]] = y2_optimised
+    return(res)
+  }
+  
+  if (fixed_varname=="y1_lambda_bar"){
+    y2_fixed = 5
+    fixed_alpha = 1
+    fixed_lambda=1
+    fixed_kappa = 4
+    
+    omega_bar_fixed = .2
+    lambda_bar_fixed = fixed_varval
+    #lambda_bar
+    find_y1 <- function(y1var){
+      no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=y1var,y2=y2_fixed,alpha=fixed_alpha,plot=F)
+    }
+    
+    y1_optimised <- (optimise(function(x){abs(find_y1(x))},c(1e-2,omega_bar_fixed*5) ) ) $minimum
+    
+    error <- no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=y1_optimised,y2=y2_fixed,alpha=fixed_alpha,plot=plot)
+    
+    res=list()
+    res[["error"]] = error
+    res[["y1_optimised"]] = y1_optimised
+    return(res)
+  }
+  
+  if (fixed_varname=="y1_omega_bar"){
+    y2_fixed = 5
+    fixed_alpha = 1
+    fixed_lambda=1
+    fixed_kappa = 2
+    
+    omega_bar_fixed = fixed_varval
+    lambda_bar_fixed = 1.2
+    #lambda_bar
+    find_y1 <- function(y1var){
+      no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=y1var,y2=y2_fixed,alpha=fixed_alpha,plot=F)
+    }
+    
+    y1_optimised <- (optimise(function(x){abs(find_y1(x))},c(1e-2,omega_bar_fixed*5) ) ) $minimum
+    
+    error <- no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=y1_optimised,y2=y2_fixed,alpha=fixed_alpha,plot=plot)
+    
+    res=list()
+    res[["error"]] = error
+    res[["y1_optimised"]] = y1_optimised
+    return(res)
+  }
+  
+  stop("Could not identify fixed_varname")
+  
+}

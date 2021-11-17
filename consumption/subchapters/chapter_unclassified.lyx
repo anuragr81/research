@@ -9727,5 +9727,139 @@ Due to the above assumption , the consumer's horizon coincides with that
  
 \end_layout
 
+\begin_layout Section
+Rejected old segregation interpretation
+\end_layout
+
+\begin_layout Enumerate
+Lack of contentment would drive the consumer to bet everything on status
+ consumption.
+ Having G1=G2 and omega=lambda and bar_omega=bar_lambda, would make the
+ poorer consumer bet everything on nu so that the optimal solution is nu=0
+ for the rich consumer and nu=y1 for the poor consumer.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% we check this with  - two_stage_sol(omega_bar = 0,omega = 1,lambda_bar
+ = 0,lambda = 1,G1 =1,G2 = 1, y1= 1,y2 = 10  ,alpha = .3)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Moving omega_bar negative i.e.
+ rewarding the consumer a lot for very little lowers her choice for nu (she
+ can settle for less) 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%two_stage_sol(omega_bar = -20,omega = 1,lambda_bar = 0,lambda = 1,G1 =1,G2
+ = 1, y1= 1,y2 = 10  ,alpha = .3)
+\end_layout
+
+\end_inset
+
+.
+ Moving omaga_bar positive makes the poorer consumer resign from status
+ consumption as she find no status consumption more appropriate 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% two_stage_sol(omega_bar = 0,omega = 100,lambda_bar = 0,lambda = 1,G1 =1,G2
+ = 1, y1= 1,y2 = 10  ,alpha = .3)
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Moving lambda to positive has the same effect as moving omega negative.
+ Moving lambda_bar negative makes nu2 0 and nu1 high.
+ nu2=0 makes sense because negative lambda makes rich secure for nothing.
+ But it also makes the poor raise her nu1.
+\end_layout
+
+\begin_layout Enumerate
+Increasing y2 inrceases A1 significantly as well - since in the long-term
+ the poorer consumer is meant to reach band2 with the some probability.
+\end_layout
+
+\begin_layout Enumerate
+Increasing 
+\begin_inset Formula $\omega/\lambda$
+\end_inset
+
+ changes the shape of the curve raising nu for both poor and rich but does
+ cause a 
+\begin_inset Quotes eld
+\end_inset
+
+dip
+\begin_inset Quotes erd
+\end_inset
+
+ - just size of the jump does not change the long-term the maximum nu needed.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%two_stage_sol(omega_bar = 0,omega = 100,lambda_bar = 0,lambda = 1,G1 =1,G2
+ = 1, y1= 1,y2 = 10  ,alpha = .3)
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Increasing G1 seems to balance with omega 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%two_stage_sol(omega_bar = 0,omega = 3,lambda_bar = 0,lambda = 1,G1 =1.2,G2
+ = 1, y1= 1,y2 = 10  ,alpha = .3)
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Enforcing the population constraint makes and setting lambda=1 (so we're
+ interested in the right omega) or fixing a certain omega and fixing lambda_bar=
+0 can help us find the right solution.
+ Since we're interested in G1/G2 - we look for what G1/G2 is necessitated
+ by lambda_bar (for a fixed kappa) as well as what lambda_bar would lead
+ to a given G1/G2.
+ With rising sastisfaction, lambda_bar is lower - meaning more satisfaction
+ with being poorer.
+ However, the reverse interpretation (finding G1/G2) does not work.
+ In general, there are issues with finding the right G1/G2 - because the
+ the sensitivity with respect to G1/G2 is quite high.
+ It's better to ask what G1/G2 means for lambda_fixed and omega_bar when
+ we fix kappa.
+\end_layout
+
 \end_body
 \end_document
