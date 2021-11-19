@@ -2066,23 +2066,32 @@ no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha
   Aw_band2 <- function(x) {y2-x+y2-x+E2(x,y1,y2) }
   Al_band2 <- function(x) {y2-x+y1-x+E1(x,y1,y2) }
   
+  ea_suw = function(x) {  return(w(x)*log(y1-x+y2)  + (1-w(x))*log(y1-x+y1))}
+  ea_sul = function(x) {  return(l(x)*log(y2-x+y1)  + (1-l(x))*log(y2-x+y2))}
+  
   ea_uw = function(x) {  return(w(x)*log(Aw_band1(x))  + (1-w(x))*log(Al_band1(x)))}
   ea_ul = function(x) {  return(l(x)*log(Al_band2(x))  + (1-l(x))*log(Aw_band2(x)))}
   
   nu1 <- seq(0,y1,y1/100)
   nu2 <- seq(0,y2,y2/100)
   
-  par(mfrow=c(1,2))
-  nu_1_chosen = optimise(function(x) { -ea_uw(x) },c(0,y1))$minimum
-  nu_2_chosen = optimise(function(x) { -ea_ul(x) },c(0,y2))$minimum
+  par(mfrow=c(2,2))
+  nu_1_chosen = optimise(function(x) { -ea_uw(x) },c(0,y1+1))$minimum
+  nu_2_chosen = optimise(function(x) { -ea_ul(x) },c(0,y2+1))$minimum
+  
+  nu_1_st_chosen = optimise(function(x) { -ea_suw(x) },c(0,y1+1))$minimum
+  nu_2_st_chosen = optimise(function(x) { -ea_sul(x) },c(0,y2+1))$minimum
+  
   
   ea_w = function(x) { w(x)*Aw_band1(x)  + (1-w(x))*Al_band1(x)}
   ea_l = function(x) { l(x)*Al_band2(x)  + (1-l(x))*Aw_band2(x)}
   
   kappa = omega/lambda
   if (plot){
-    plot(nu1,sapply(nu1,ea_uw),type='l',main=paste('A(nu_1=',round(nu_1_chosen,3),")=",round(ea_w(nu_1_chosen),3)))
-    plot(nu2,sapply(nu2,ea_ul),type='l',main=paste('A(nu_2=',round(nu_2_chosen,3),")=",round(ea_l(nu_2_chosen),3)))
+    plot(nu1,sapply(nu1,ea_uw),type='l',main=paste('LT A(nu_1=',round(nu_1_chosen,3),")=",round(ea_w(nu_1_chosen),3)))
+    plot(nu2,sapply(nu2,ea_ul),type='l',main=paste('LT A(nu_2=',round(nu_2_chosen,3),")=",round(ea_l(nu_2_chosen),3)))
+    plot(nu1,sapply(nu1,ea_suw),type='l',main=paste('ST A(nu_1=',round(nu_1_st_chosen,3),")=",round(ea_w(nu_1_st_chosen),3)))
+    plot(nu2,sapply(nu2,ea_sul),type='l',main=paste('ST A(nu_2=',round(nu_2_st_chosen,3),")=",round(ea_l(nu_2_st_chosen),3)))
   }
   
   return(abs(nu_1_chosen  + kappa* (nu_2_chosen - lambda_bar) - omega_bar))
@@ -2241,13 +2250,13 @@ get_no_greed_missing_var<-function(fixed_varname,fixed_varval,plot)
   
   if (fixed_varname=="omega_bar_y1"){
     fixed_y1 = fixed_varval 
-    fixed_y2 = 5
+    fixed_y2 = 12
     fixed_alpha =1
     
     fixed_lambda=1
-    fixed_kappa =3
+    fixed_kappa =10
     
-    lambda_bar_fixed = 1
+    lambda_bar_fixed = 3
     
     find_omega_bar <- function(obar){
       no_greed_two_stage_sol(omega_bar=obar,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_fixed,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
@@ -2291,13 +2300,13 @@ get_no_greed_missing_var<-function(fixed_varname,fixed_varval,plot)
   
   if (fixed_varname=="lambda_bar_y1"){
     fixed_y1 = fixed_varval 
-    fixed_y2 = 5
+    fixed_y2 = 7 #5
     fixed_alpha = 1
     
     fixed_lambda=1
-    fixed_kappa =.5
+    fixed_kappa =3
     
-    omega_bar_fixed = .2
+    omega_bar_fixed = .3
     #lambda_bar
     find_lambda_bar <- function(lbar){
       no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lbar,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
