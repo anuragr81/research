@@ -24,12 +24,12 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "tgtermes" "Hoefler Text"
+\font_roman "ae" "Hoefler Text"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts true
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -41,7 +41,7 @@ theorems-sec
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 10
+\paperfontsize 11
 \spacing single
 \use_hyperref false
 \papersize default
@@ -102,17 +102,16 @@ Status competitions under extreme income differences
 
 \begin_layout Abstract
 While status-driven consumption and the appeal for social mobility through
- consumption appear to have become more prominent in recent decades, relative
- income differences have remained as permanent as differences in long-term
- wealth.
- We explain how the social promise offered by status consumption may be
- constrained by finite economic growth in an economy - which we view as
- comprising of disparate income bands that the consumers transition through
- while gaining social mobility.
- Viewing status consumption as intertemporal choice to invest towards the
- probabilistic social mobility in long-term, we explore the implications
- of contentment with one's one income bands due to social or cultural barriers
- for social mobility in the economy.
+ consumption appear to have become more prominent in recent decades, social
+ mobility studies remark relatively stagnant relative differences in income
+ and long-term wealth.
+ We focus on how the social promise offered by status consumption may be
+ constrained by finite economic growth in an economy - by viewing the economy
+ as a set of disparate income bands which the consumers transition through
+ as they gain probabilistic social mobility.
+ Modeling status consumption as intertemporal choice for investments towards
+ long-term status in the long-term, we provide the implications of sustained
+ income differences and long-term stability for the status consumption demand.
 \end_layout
 
 \begin_layout Standard
@@ -172,13 +171,24 @@ o see Krupka-Weber].
 \end_layout
 
 \begin_layout Section
+Research Goal
+\end_layout
+
+\begin_layout Standard
+If there are significant differences in disposable income across bands in
+ a population that participates in status competitions, then does an increase
+ in income differences always imply an increase in status consumption for
+ the poorer consumers?
+\end_layout
+
+\begin_layout Section
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:intro"
 
 \end_inset
 
-Motivation
+Introduction
 \end_layout
 
 \begin_layout Standard
@@ -330,8 +340,8 @@ In the model we develop, the utility from the consumer's future wealth consists
 \end_layout
 
 \begin_layout Standard
-It is worth highlighting that the status of the consumer is encompassed
- solely by the assets she would amass in a probable future.
+It is worth highlighting that the status of the consumer in the model is
+ encompassed solely by the assets she would amass in a probable future.
  Therefore, the status comparisons are based not on the total assets at
  a time but the expected assets within a certain time-horizon.
  By means of an example, consider a classical musician who may be perceived
@@ -368,23 +378,14 @@ literal "false"
 \end_inset
 
  .
- Associating the matching process from Cole-Maliath
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ColeMaliathSocialNorms1992"
-literal "false"
-
-\end_inset
-
-  with a transition in income bands, we also account for the poorer consumer
- having a propensity to remain within her income band due to the localised
- notions of status.
- This is permitted by letting the consumer with lower assets in a poorer
- band have a higher utility than she would for the same level of assets
- in a richer band.
  In the proposed formulation of status under extreme income differences
- with stable band populations, we find that status consumption are intensified
- as the income inequalities rise in an economy.
+ with stable band populations, we find that status consumption may be intensifie
+d as the income inequalities rise in an economy in the short-term but the
+ long-term stability of income bands and assets have implications that reverse
+ the effect in income-differences.
+ More specifically, the finiteness of income bands implies that a lowering
+ of income-differences in the long-term would make the value of status consumpti
+on higher for poorer consumers.
  The details of these findings are described in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -395,13 +396,37 @@ noprefix "false"
 
 \end_inset
 
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Conclusions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
 .
 \end_layout
 
 \begin_layout Standard
-[CONTENTMENT vs ASPIRATION] Contentment might overweigh in for income inequaliti
-es and socio-cultural segregation may be a result of long-term income inequaliti
-es.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Associating the matching process from Cole-Maliath  with a transition
+ in income bands, we also account for the poorer consumer having a propensity
+ to remain within her income band due to the localised notions of status.
+ This is permitted by letting the consumer with lower assets in a poorer
+ band have a higher utility than she would for the same level of assets
+ in a richer band.
+ 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2937,9 +2962,9 @@ At
 \noun off
 \color none
 \begin_inset Formula 
-\begin{align*}
-W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))+(1-W(\bar{\nu}_{1}))u(y_{1}-\bar{\nu}_{1}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))
-\end{align*}
+\begin{multline}
+u_{1}(\bar{\nu}_{1},\bar{\nu}_{2})\equiv W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))+(1-W(\bar{\nu}_{1}))u(y_{1}-\bar{\nu}_{1}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))\label{eq:consumer1_two_stage_util}
+\end{multline}
 
 \end_inset
 
@@ -2953,9 +2978,9 @@ The consumer in band 2 - on the other hand - would optimise the following
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))+(1-L(\bar{\nu}_{2}))u(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))
-\end{align*}
+\begin{multline}
+u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))+(1-L(\bar{\nu}_{2}))u(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))\label{eq:consumer2_two_stage_util}
+\end{multline}
 
 \end_inset
 
@@ -4274,6 +4299,34 @@ The above findings can be also confirmed by testing if a rise in
 \end_inset
 
  .
+
+\bar under
+ 
+\bar default
+That the narrowing of income differences decreases significance of status
+ consumption for the poorer consumer may sound counter-intuitive...
+ but is explained by the dependence of the long-term utility on the values
+ chosen by the other consumer in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:consumer1_two_stage_util"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:consumer2_two_stage_util"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -4539,6 +4592,12 @@ in{2,3}.
 \end_layout
 
 \begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Conclusions"
+
+\end_inset
+
 Conclusions
 \end_layout
 
@@ -4585,61 +4644,48 @@ status open
 The current approach views the accumulation of assets under known risk as
  the only goal of the representative consumer in the economy with necessary
  status competitions.
- Unlike Hopkins-Korenienko model, we view social welfare only as pareto
- optimality of expected future states.
+ This is different from the more common intertemporal substitution approach
+ with assets growing under a constant rate- an approach that is better suited
+ for a view of overall consumption spread over a long-time.
+ The view of future asset under risk models the dependence of status consumption
+ on one's reference more explicitly than that assumption that all assets
+ grow at a constant rate or that all consumption gives a certain felicity.
+ We believe that this framework could be extended with the introduction
+ of risk-aversion, the consumer's non-linear response reference to risk
+ or a utility depending on a common reference point observed by both the
+ consumers.
+\end_layout
+
+\begin_layout Standard
+Unlike Hopkins-Korenienko model, we view social welfare only as pareto optimalit
+y of expected future states.
  While this prevents us from differentiating between social welfare and
  economic growth for the consumer, our goal has been to understand the effect
  of extreme income differences which are permanent for both the consumers.
- 
-\end_layout
-
-\begin_layout Standard
-Similar to the finding from the HK model however, we do find that increase
- in equality could increase status consumption - which could be viewed as
- wasteful from a social welfare perspective.
-\end_layout
-
-\begin_layout Standard
-The ...
- approach of the intertemporal substitution, we would argue that there is
- an observed rate of growth of assets which the consumer - but this interest
- rate is a huge assumption it works only because we want to observe consumption
- against long-term economic growth.
- That consumers differentiate between items for status also because their
- is a need associated with reference is discarded by the blanket assumption
- that all assets must grow and thus all consumption gives a felicity.
- All non-assets need not be consumed but invested in different streams -
- education is a different consumption from jewelry and so on.
- We therefore consider reference to be of key importance.
- That consumers must optimise value with respect to reference provides a
- better view of status consumption and does not require status consumption
- to be futile.
- Only fixing a function 
-\begin_inset Formula $J(nu)$
+ Similar to the findings from the HK model however, we do find status consumptio
+n - viewed as wasteful from a social welfare perspective - could increase
+ for the poorer consumer with an increase in equality (narrower 
+\begin_inset Formula $\Delta y$
 \end_inset
 
- would tell us how soon the game would end etc..
- 
+).
 \end_layout
 
 \begin_layout Standard
-There are two major results
-\end_layout
-
-\begin_layout Enumerate
-Segregation conditions
-\end_layout
-
-\begin_layout Enumerate
-Long-term effects of income differences on status competitions - The key
- observations we have is that narrowing income differences decreases significanc
-e of status consumption.
- So while the short-term equilibrium would make us think that wider income
- differences make status competitions more stringent and status consumption
- higher, the long-term equilibrium imply a different dynamics where wider
- income differences reduce status consumption by either making promotion
- difficult or security cheaper.
- This result would result in an overall reduction of status consumption.
+To summarise, there are two key implications for status consumption under
+ income inequalities that we explain in the current chapter.
+ First, a segregation of demand is possible with status consumption under
+ inequalities since either poorer consumer may see no benefits from participatin
+g in status competitions or the rich person might find too little security
+ on offer from status consumption.
+ Second, we provide long-term equilibrium conditions for how change in income
+ differences could drive status competitions.
+ While it is tempting to argue with short-term equilibrium conditions that
+ wider income differences make status competitions more stringent and status
+ consumption higher, the long-term equilibrium imply a different dynamics
+ where wide income differences could reduce status consumption by making
+ promotion difficult (for the poor consumers) or security cheaper (for the
+ richer consumers).
 \end_layout
 
 \begin_layout Standard
@@ -4921,75 +4967,78 @@ ixed_varval = 4.75 , plot = T)
 \end_layout
 
 \begin_layout Standard
-[Next: greed and loss-aversion] It's worthwhile to look at what the idea
- of greed really means.
- When consumers have a preference for lower assets in the low band, the
- introduction of greed or contentment would can shift the equilibrium further.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% [Next: greed and loss-aversion] When consumers have a preference for lower
+ assets in the low band, the introduction of greed or contentment would
+ can shift the equilibrium further.
  Contentment is just the name of loss-aversion associated.
- Consumers might be less loss-averse with respect to 
-\begin_inset Formula $A_{0}$
-\end_inset
-
- in which case they are more content with lower than 
-\begin_inset Formula $A_{0}$
-\end_inset
-
-.
+ Consumers might be less loss-averse with respect to A_{0} in which case
+ they are more content with lower than A_{0}.
  On the other hand, they might be in a regime where consumers don't like
- being less than 
-\begin_inset Formula $A_{0}$
-\end_inset
-
- at all.
+ being less than A_{0} at all.
  We look at the contentment vs aspiration in the above setup for a given
  
-\begin_inset Formula $\kappa$
-\end_inset
-
- .
+\backslash
+kappa .
  The consumer utility uses a reference function defined around long-term
- 
-\begin_inset Formula $A_{0}$
-\end_inset
-
- so that there are two regimes.
+ A_{0} so that there are two regimes.
  First, where being poor may not become successively bad.
  Second, is the regime where contentment is valuable and the consumer below
- 
-\begin_inset Formula $A_{0}$
-\end_inset
-
- don't mind it too much compared to how much consumers with more wealth...
+ A_{0} don't mind it too much compared to how much consumers with more wealth...
  .
  The other regime is when consumer are more greedy and people mind being
  poor a lot compared to being rich.
  We see how either of these regimes are influenced by 
-\begin_inset Formula $\kappa$
-\end_inset
-
- vs 
-\begin_inset Formula $y_{2}-y_{1}$
-\end_inset
-
-(This way we don't need to deal with measurement of g1/g2 but we can argue
- only what greed and contentment with assets implies).
+\backslash
+kappa vs y_{2}-y_{1}(This way we don't need to deal with measurement of
+ g1/g2 but we can argue only what greed and contentment with assets implies).
  Greed can help us relieve the stringent 
-\begin_inset Formula $\overline{\nu}_{2}<\frac{\underbar{\ensuremath{\omega}}}{\kappa}+\overline{\lambda}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{1}^{*}<\underbar{\kappa\ensuremath{\lambda}+}\underbar{\ensuremath{\omega}}$
-\end_inset
-
-.
+\backslash
+overline{
+\backslash
+nu}_{2}<
+\backslash
+frac{
+\backslash
+underbar{
+\backslash
+ensuremath{
+\backslash
+omega}}}{
+\backslash
+kappa}+
+\backslash
+overline{
+\backslash
+lambda} and 
+\backslash
+nu_{1}^{*}<
+\backslash
+underbar{
+\backslash
+ensuremath{
+\backslash
+kappa}
+\backslash
+ensuremath{
+\backslash
+ensuremath{
+\backslash
+lambda}}+}
+\backslash
+underbar{
+\backslash
+ensuremath{
+\backslash
+omega}}.
  Future applications could apply risk-aversion levels.This needs to be explored
  further.
  
 \end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
 
 \begin_layout Plain Layout
 
