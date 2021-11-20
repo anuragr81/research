@@ -2060,6 +2060,9 @@ no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha
   E1 <- function(x,y1,y2) { w(x)*y2  + (1-w(x))*y1}
   E2 <- function(x,y1,y2) { l(x)*y1  + (1-l(x))*y2}
   
+  #E1 <- function(x,y1,y2) { w(x)*(y2-x)  + (1-w(x))*(y1-x)}
+  #E2 <- function(x,y1,y2) { l(x)*(y1-x)  + (1-l(x))*(y2-x)}
+  
   Aw_band1 <-function(x) {y1-x+y2-x+E2(x,y1,y2) }
   Al_band1 <-function(x) {y1-x+y1-x+E1(x,y1,y2) }
   
