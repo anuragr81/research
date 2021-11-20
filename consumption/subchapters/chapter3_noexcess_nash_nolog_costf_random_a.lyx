@@ -921,6 +921,85 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
+The consumer in the two-band economy can either be demoted and promoted
+ over time and her expected future wealth would be expected asset values
+ from future income bands she can be in.
+ In the Markov chain implied in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ReducedChain"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the future state of the consumer is thus based on either of the future
+ bands she could be in with the respective probabilities associated with
+ the transition i.e.
+ the consumer in band 1 could expect to have either 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+ income in the next period with probabilities 
+\begin_inset Formula $1-W_{1}(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $W_{1}(\nu)$
+\end_inset
+
+ respectively.
+ In the period after next, she could be in 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+ as 
+\begin_inset Formula $y_{1}\rightarrow y_{1}\rightarrow y_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $y_{1}\rightarrow y_{2}\rightarrow y_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $y_{1}\rightarrow y_{1}\rightarrow y_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $y_{1}\rightarrow y_{2}\rightarrow y_{2}$
+\end_inset
+
+ and end up as 
+\begin_inset Formula $y_{1}\rightarrow y_{1}\rightarrow y_{2}\rightarrow y_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $y_{1}\rightarrow y_{2}\rightarrow y_{1}\rightarrow y_{1}$
+\end_inset
+
+ and so in further periods.
+ Similarly, the consumer in band 2 could be in band 1 or 2 in the next period
+ with the respective probabilities 
+\begin_inset Formula $L_{2}(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $1-L_{2}(\nu)$
+\end_inset
+
+ and so on.
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -1363,7 +1442,7 @@ The solution for the above equation is
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-L(\nu_{2}) & =\frac{L(0)((M_{2})^{\alpha}-(M_{1})^{\alpha})}{(M_{2}-\nu_{2})^{\alpha}-(M_{1}-\nu_{2})^{\alpha}}+\frac{M_{2}^{\alpha}-(M_{2}-\nu_{2})^{\alpha}}{(M_{2}-\nu_{2})^{\alpha}-(M_{1}-\nu_{2})^{\alpha}}\label{eq:solution_2}
+L(\nu_{2}) & =\frac{L(0)(M_{2}{}^{\alpha}-M_{1}{}^{\alpha})}{(M_{2}-\nu_{2})^{\alpha}-(M_{1}-\nu_{2})^{\alpha}}+\frac{M_{2}^{\alpha}-(M_{2}-\nu_{2})^{\alpha}}{(M_{2}-\nu_{2})^{\alpha}-(M_{1}-\nu_{2})^{\alpha}}\label{eq:solution_2}
 \end{align}
 
 \end_inset
@@ -1639,14 +1718,83 @@ status open
 \end_layout
 
 \begin_layout Standard
-ASSETS CAN ONLY BE CONSIDERED IF THEY ARE UNDER RISK.
+Unlike the approach used in Hopkins-Kornienko 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HopkinsKornienkoStatusGames2004"
+literal "false"
+
+\end_inset
+
+, we do not assume an existing distribution of success-determining qualities.
+ Instead, 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ are meant to determine the distribution of success or accumulation of assets
+ in the economy.
+ Therefore past success in status competitions is the only relevant determinant
+ of success and the consumer identity in the model.
+ In real-world circumstances, such as occupational or marriage markets,
+ we argue that the consumers know about their abilities only through participati
+on (through expenditures in education or social activities) where their
+ past success as well as starting wealth determine their future decisions
+ of 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ In this sense, the model is more similar to the matching described by Cole-Mali
+ath
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ColeMaliathSocialNorms1992"
+literal "false"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-the co-existence of long-term income inequalities and status competitions
- means that without the status consumption, the disparate disposable incomes
- across two bands cannot provide a stable long-term equilibrium.
- More specifically, the accumulations 
+For the purposes of our discussion on long-term condition, we consider a
+ simplified chain with only two income bands which the consumers can transition
+ in between.
+ The simplification - shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ReducedChain"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ - can be easily extended to higher bands (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:FullChain"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Now consider that the co-existence of long-term income inequalities and
+ status competitions means that the disparate disposable incomes across
+ two bands cannot provide a 
+\bar under
+stable long-term equilibrium
+\bar default
+ without any status consumption or redistribution.
+ If we rule out any institutions of direct redistribution of income, the
+ accumulations 
 \begin_inset Formula $A_{i}=\sum_{t}^{T}\prescript{t}{}y_{i}$
 \end_inset
 
@@ -1668,31 +1816,25 @@ the co-existence of long-term income inequalities and status competitions
 
  ) would lead to unstable differences in accumulated wealth across bands
  over time.
- As such this is no different from the assumption of stable growth of assets
- where too the different starting assets would imply disparate interest-incomes
- to the consumers in different bands.
+ This is no different from the assumption of stable growth of assets where
+ the different starting assets implies disparate interest-incomes to the
+ consumers in different bands.
+ With no scheme for a redistribution, we now ask if status consumption in
+ a more general sense may offer the social mobility that it is meant to
+ provide.
+ As such an equilibrium with different disposable incomes seems plausible
+ as long as the consumers can move across bands often enough and if the
+ preferences for all consumers are the same.
 \end_layout
 
 \begin_layout Standard
-It seems obvious that a sustained difference in disposable incomes cannot
- lead to an equilibrium in asset accumulations until a redistribution is
- also specified.
- Instead of seeking the right level of redistribution (taxes etc.) we ask
- if status consumption in a more general sense offer the social mobility
- that they are meant to provide.
- This suggests that the presence of status competitions might allow the
- income inequalities to prevail.
- If the preferences for all consumers are the same, an equilibrium may be
- implied in an economy with different bands of disposable incomes if the
- consumers can move across bands often enough.
- Since long-term inequalities in income are persistent through the long-term
- equilibrium, the status competitions which the consumers participate in
- must be population-preserving in the sense that in the long-run the number
- of consumers who leave an income band must be balanced by those who enter
- the income band.
+A necessary condition for such a status competitions in the long-term is
+ that they must be population-preserving.
+ In other words, the number of consumers who leave an income band in the
+ long-run must be balanced by those entering the income band.
  An equilibrium with long-term income inequalities cannot exist if not for
  such a population preserving status competition.
- We thus observe the status competitions within such a population preserving
+ We thus observe the status competitions under such a population preserving
  mechanism - equivalent to a scheme where an equal number of consumers are
  selected in successive bands and swapped with each other at a certain cost
  (see Figure 
@@ -1706,17 +1848,7 @@ noprefix "false"
 \end_inset
 
 ).
- The presence of status consumption implies that the richer band would spend
- proportionately higher on status competitions and the long-term equilibrium
- would sustain income inequalities across the bands.
- We then examine the conditions under which such a setup would lead to a
- long-term equilibrium.
- As we later demonstrate, only assets under risk may lead to a long-term
- equilibrium in the above setup.
-\end_layout
-
-\begin_layout Standard
-With the swapping mechanism described above, if 
+ With such swapping mechanism, if 
 \begin_inset Formula $W_{k}(\nu)$
 \end_inset
 
@@ -1758,66 +1890,33 @@ With the swapping mechanism described above, if
 \end_inset
 
 .
- The asset accumulations of the consumers would necessarily spread around
- if the consumers were randomly selected to be swapped with same probability
- between each pair income bands.
- The swap mechanism implied the the balance of probabilities- 
-\begin_inset Formula $W_{k}(\nu)=L_{k+1}(\nu)$
-\end_inset
-
- so that the same number of consumers are exchanged between successive income
- bands - is necessary for the stability of populations of income bands.
- Since assets are carried over every consumer with the swap, the selection
- of winners and losers does move the wealth around to some extent.
-\end_layout
-
-\begin_layout Standard
-As long as all consumers eventually get a fair chance to participate in
- the exchange, a stable equilibrium would allow assets to spread around
- consumers in different bands.
  
 \end_layout
 
 \begin_layout Standard
-Unlike the approach used in Hopkins-Kornienko 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HopkinsKornienkoStatusGames2004"
-literal "false"
-
+The asset accumulations of the consumers would spread around if the consumers
+ were randomly selected to be swapped with same probability between each
+ pair income bands since the assets are carried over every consumer with
+ the swap.
+ In the long term the consumers would be wary of giving up more by losing
+ their current band as they move up the income bands and care less about
+ losing their current band as they won't risk being shunned in the lowest
+ bands.
+ However, the condition for such a status competition to lead to a stability
+ wealth differences in the long-term are quite stringent and require the
+ richer band to spend proportionately higher on status competitions for
+ there to be not net gain from status consumption in the long-run.
+ In other words, status competitions may never be 
+\begin_inset Quotes eld
 \end_inset
 
-, we don't assume an existing distribution of success-determining qualities.
- Instead, we rely on specific forms of 
-\begin_inset Formula $W(\nu)$
+random enough
+\begin_inset Quotes erd
 \end_inset
 
- and 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
- in the model.
- The past success itself is the only relevant determinant of success and
- the consumer identity in the model.
- The essential argument using this approach is that in real-world circumstances,
- such as occupational or marriage markets, the consumers know about their
- abilities only through participation (through expenditures in education
- or social activities) where their past success as well as starting wealth
- determine their future decisions of 
-\begin_inset Formula $\nu$
-\end_inset
-
-.
- In this sense, the model is more similar to the matching described by Cole-Mali
-ath
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ColeMaliathSocialNorms1992"
-literal "false"
-
-\end_inset
-
-.
+ for the exchange to provide long-term equilibrium of assets.
+ As we now demonstrate, only assets under a common risk could allow a long-term
+ equilibrium with the above setup.
 \end_layout
 
 \begin_layout Standard
@@ -1861,72 +1960,6 @@ Winners and losers in a status competition exchange
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-- but whether this is sufficient for a long-term stability of asset accumulation
-s ...
- This is because the consumers would be wary of giving up more by losing
- their current band when they move up the income bands and care less about
- losing their current band as they won't risk being shunned in the lowest
- bands.
-\end_layout
-
-\begin_layout Standard
-There are however two issues that must also be considered.
- First, the status competitions may never be 
-\begin_inset Quotes eld
-\end_inset
-
-random enough
-\begin_inset Quotes erd
-\end_inset
-
- for the exchange.
- In real world example, status competitions are characterised by how they
- favour those with higher expenditure within a band.
- With all else being the same, higher education expenditure or club memberships
- in a life-time does have a higher likelihood of social mobility.
- Second, whether a probability distribution might exist for such an exchange
- to have a stable distribution of assets that also sustain income inequalities
- is less clear.
- To address both these issues, we now describe the implications of long-term
- equilibria in more detail.
- 
-\end_layout
-
-\begin_layout Standard
-The above described exchange and the set of probabilities for a given 
-\begin_inset Formula $1...n$
-\end_inset
-
- bands are shown in the Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:FullChain"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- As before, we consider a simplified chain with only two income bands which
- the consumers can transition in between.
- The simplification - shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:ReducedChain"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- - does not change the core of the argument.
- 
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -1951,109 +1984,22 @@ status open
 \end_layout
 
 \begin_layout Standard
-As the consumer can either be demoted and promoted over time, her expected
- future wealth would be expected asset values from future income bands she
- can be in.
- In the Markov chain that is implied in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:FullChain"
-plural "false"
-caps "false"
-noprefix "false"
 
-\end_inset
-
-, the future state of the consumer is based on either of the future bands
- she could be in with the respective probabilities associated with the transitio
-n.
- More particularly, in the two-band case shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:ReducedChain"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the consumer in band 1 could expect to have either 
-\begin_inset Formula $y_{1}$
-\end_inset
-
- or 
-\begin_inset Formula $y_{2}$
-\end_inset
-
- income in the next period with probabilities 
-\begin_inset Formula $1-W_{1}(\nu)$
-\end_inset
-
- and 
-\begin_inset Formula $W_{1}(\nu)$
-\end_inset
-
- respectively.
- In the period after next, she could be in 
-\begin_inset Formula $y_{1}$
-\end_inset
-
- or 
-\begin_inset Formula $y_{2}$
-\end_inset
-
- as 
-\begin_inset Formula $y_{1}\rightarrow y_{1}\rightarrow y_{1}$
+\bar under
+[ASSET under risk ] To motivate the proof for there being no non-constant
+ 
+\begin_inset Formula $W(\nu)$
 \end_inset
 
 , 
-\begin_inset Formula $y_{1}\rightarrow y_{2}\rightarrow y_{1}$
+\begin_inset Formula $L(\nu)$
 \end_inset
 
-, 
-\begin_inset Formula $y_{1}\rightarrow y_{1}\rightarrow y_{2}$
-\end_inset
-
-, 
-\begin_inset Formula $y_{1}\rightarrow y_{2}\rightarrow y_{2}$
-\end_inset
-
- and end up as 
-\begin_inset Formula $y_{1}\rightarrow y_{1}\rightarrow y_{2}\rightarrow y_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $y_{1}\rightarrow y_{2}\rightarrow y_{1}\rightarrow y_{1}$
-\end_inset
-
- and so in further periods.
- Similarly, the consumer in band 2 could be in band 1 or 2 in the next period
- with the respective probabilities 
-\begin_inset Formula $L_{2}(\nu)$
-\end_inset
-
- and 
-\begin_inset Formula $1-L_{2}(\nu)$
-\end_inset
-
- and so on.
-\end_layout
-
-\begin_layout Standard
-For the long-term income bands to exist with a stable wealth differences,
- the assets must face some risk.
- We introduce this with a stochastic variable which resets the future assets
- at an expected finite time 
-\begin_inset Formula $T$
-\end_inset
-
- .
- Before describing these long-term dynamics in more details, we prove that
- unbounded asset accumulations cannot achieve a long-term equilibrium under
- a population stability conditions.
- To motivate this proof, consider a general cost-function associated with
- the assets so that the consumers in the long-term equilibrium balance future
- expected income with the costs imposed by the current assets.
+ that may lead to a stability of wealth
+\bar default
+, we define a general cost-function associated with the level assets so
+ that the consumers in the long-term equilibrium balance future expected
+ income with the costs imposed by the current assets.
  In empirical terms, this may summarise the expected expenditure required
  to maintain a certain level of wealth - including any maintenance fees,
  interest on loan, club memberships etc.
@@ -2078,8 +2024,8 @@ s as
 \end_layout
 
 \begin_layout Standard
-This cost-function summarises the “certain” costs from acquiring a certain
- wealth level 
+Another way to look at this the general cost-function is the set of “certain”
+ costs from acquiring a certain wealth level 
 \begin_inset Formula $A$
 \end_inset
 
@@ -2092,7 +2038,8 @@ This cost-function summarises the “certain” costs from acquiring a certain
 \begin_inset Formula $\nu_{2}$
 \end_inset
 
- for consumer in band 2) are “risky” as the promotion to future is uncertain.
+ for consumer in band 2) are risky - given that the promotion to future
+ is uncertain.
  Note that even though the consumer is allowed to leverage herself by choosing
  costs higher than she can afford, the liquidity concerns would ensure that
  
@@ -2103,6 +2050,31 @@ This cost-function summarises the “certain” costs from acquiring a certain
 \begin_inset Formula $y_{2}<\nu_{2}$
 \end_inset
 
+.
+\end_layout
+
+\begin_layout Standard
+[ 
+\series bold
+\bar under
+PROOF 
+\series default
+\bar default
+] For the long-term income bands to exist with a stable wealth differences,
+ the assets must face some risk.
+ We introduce this with a stochastic variable which resets the future assets
+ at an expected finite time 
+\begin_inset Formula $T$
+\end_inset
+
+ .
+ Before describing these long-term dynamics in more details, we prove that
+ unbounded asset accumulations cannot achieve a long-term equilibrium under
+ a population stability conditions.
+ 
+\end_layout
+
+\begin_layout Standard
 .
  We now state following theorem in terms of the function 
 \begin_inset Formula $\pi(A)$
