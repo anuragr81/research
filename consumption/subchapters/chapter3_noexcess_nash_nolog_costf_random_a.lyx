@@ -3070,17 +3070,24 @@ Notice that the above expected utilities depend both on
 \end_layout
 
 \begin_layout Standard
-The above conditions imply that a higher 
+The above long-term conditions imply that a higher 
 \begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
- makes the loss of to a lower band more acceptable for the consumer in band
- 2 that in the long-term equilibrium.
+ makes the loss to a lower band more acceptable for the consumer in band
+ 2.
+ If the consumer absorbs the choice made by poorer consumers when she is
+ demoted to band 1, then the choice of the poorer band is also factored
+ into her choice at 
+\begin_inset Formula $t=1$
+\end_inset
+
+.
  Similarly, a higher 
 \begin_inset Formula $\bar{\nu}_{2}$
 \end_inset
 
- makes staying in the poorer band more appealing for the consumer 1.
+ might make staying in the poorer band more appealing for the consumer 1.
  The competitions therefore do allow the consumers to share the exogenous
  risks in 
 \begin_inset Formula $W(\nu_{1})$
@@ -3091,9 +3098,162 @@ The above conditions imply that a higher
 \end_inset
 
 .
- To see how the risks may be shared between the bands through the long-term
- equilibrium under the above conditions, we look at specific instances of
- the functions 
+ 
+\end_layout
+
+\begin_layout Standard
+The above model also allows us to evaluate if consumers are better off in
+ the long-term with the assets they accumulate with the choice of long-term
+ 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+.
+ More specifically, if 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ are selected by maximising a certain utility, the expected assets over
+ the two periods for consumer 1 and 2 are simply
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+E(A_{1})= & W(\bar{\nu}_{1})(y_{1}-\bar{\nu}_{1}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))+(1-W(\bar{\nu}_{1}))(y_{1}-\bar{\nu}_{1}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+E(A_{2})= & L(\bar{\nu}_{2})(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))+(1-L(\bar{\nu}_{2}))(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, since 
+\begin_inset Formula $A_{T}$
+\end_inset
+
+ is always bounded for any general 
+\begin_inset Formula $T$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+(>2), a maximal 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ (or 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+,...) can always be selected.
+ The comparison of 
+\begin_inset Formula $E(A_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $E(A_{2})$
+\end_inset
+
+ may allow us to 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+evaluate if setting up fairer status competitions could more desirable redistrib
+uting income if a complete abandonment of status competitions (with 
+\begin_inset Formula $\nu_{1}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $\nu_{2}=0$
+\end_inset
+
+ ) is undesirable.
+\end_layout
+
+\begin_layout Standard
+To see how the risks may be shared between the bands through the long-term
+ equilibrium under the above conditions for a given utility, we look at
+ specific instances of the functions 
 \begin_inset Formula $W(\nu)$
 \end_inset
 
@@ -3407,22 +3567,9 @@ nu$"),ylab=latex2exp::TeX("$W(
 \backslash
 
 \backslash
-nu)$"),lty=1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-%lines(x,1/(1+exp(-lambda*(x-bar_lambda-20))),type='l',lty=2)
-\end_layout
-
-\begin_layout Plain Layout
-
-%lines(x,1/(1+exp(-lambda*(x-bar_lambda+20))),type='l',lty=3)
-\end_layout
-
-\begin_layout Plain Layout
-
-%legend(60, .4, legend=latex2exp::TeX(paste("$ 
+nu)$"),lty=1); lines(x,1/(1+exp(-lambda*(x-bar_lambda-20))),type='l',lty=2);
+ lines(x,1/(1+exp(-lambda*(x-bar_lambda+20))),type='l',lty=3) ; legend(60,
+ .4, legend=latex2exp::TeX(paste("$ 
 \backslash
 
 \backslash
@@ -3477,7 +3624,11 @@ name "fig:W_nu_parameters"
 \begin_inset Formula $W(\nu)$
 \end_inset
 
- parameters
+ parameter 
+\begin_inset Formula $\omega$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3689,6 +3840,39 @@ name "fig:L_loss_parameters_mean"
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% LAMBDA_BAR PLOT : lambda = .1 ; bar_lambda = 50; x<-seq(0,100,.1); plot(x,1-1/(1
++exp(-lambda * (x-bar_lambda))),type='l',xlab=latex2exp::TeX("$
+\backslash
+
+\backslash
+nu$"),ylab=latex2exp::TeX("$W(
+\backslash
+
+\backslash
+nu)$"),lty=1); lines(x,1-1/(1+exp(-lambda*(x-bar_lambda-20))),type='l',lty=2);
+ lines(x,1-1/(1+exp(-lambda*(x-bar_lambda+20))),type='l',lty=3) ; legend(85,
+ .4, legend=latex2exp::TeX(paste("$ 
+\backslash
+
+\backslash
+underline{
+\backslash
+
+\backslash
+lambda}=",c(50,70,30),"$")) , lty=c(1,2,3), cex=0.6)
 \end_layout
 
 \end_inset
@@ -4047,146 +4231,6 @@ An equivalent condition is implied by
 \end_inset
 
  as well.
-\end_layout
-
-\begin_layout Standard
-When such a status competition is permitted in the two-period economy, our
- set up allows to also evaluate if consumers are better off in the long-term
- with the assets they accumulate.More specifically, with 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
-,
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
- selected maximising a given utility, the expected assets over the two periods
- for consumer 1 and 2 are simply
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-E(A_{1})= & W(\bar{\nu}_{1})(y_{1}-\bar{\nu}_{1}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))+(1-W(\bar{\nu}_{1}))(y_{1}-\bar{\nu}_{1}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-E(A_{2})= & L(\bar{\nu}_{2})(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))+(1-L(\bar{\nu}_{2}))(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Here, since 
-\begin_inset Formula $A_{T}$
-\end_inset
-
- is always bounded for any general 
-\begin_inset Formula $T$
-\end_inset
-
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-(>2), a maximal 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
- (or 
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
-,...,) can always be selected.
- The comparison of 
-\begin_inset Formula $E(A_{1})$
-\end_inset
-
- and 
-\begin_inset Formula $E(A_{2})$
-\end_inset
-
- may allow us to 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-evaluate if setting up fairer status competitions could more desirable redistrib
-uting income if a complete abandonment of status competitions (with 
-\begin_inset Formula $\nu_{1}=0$
-\end_inset
-
- or 
-\begin_inset Formula $\nu_{2}=0$
-\end_inset
-
- ) is undesirable.
 \end_layout
 
 \begin_layout Standard
