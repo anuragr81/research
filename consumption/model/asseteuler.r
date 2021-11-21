@@ -2051,6 +2051,14 @@ two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,G1,G2,y1,y2,alpha,pl
   
 }
 
+plain_util <- function(A){
+  #return(log(A))
+  if (A<0){
+    return(0)
+  } else {
+    return (A**.3)
+  }
+}
 
 no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha,plot){
   
@@ -2069,11 +2077,11 @@ no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha
   Aw_band2 <- function(x) {y2-x+y2-x+E2(x,y1,y2) }
   Al_band2 <- function(x) {y2-x+y1-x+E1(x,y1,y2) }
   
-  ea_suw = function(x) {  return(w(x)*log(y1-x+y2)  + (1-w(x))*log(y1-x+y1))}
-  ea_sul = function(x) {  return(l(x)*log(y2-x+y1)  + (1-l(x))*log(y2-x+y2))}
+  ea_suw = function(x) {  return(w(x)*plain_util(y1-x+y2)  + (1-w(x))*plain_util(y1-x+y1))}
+  ea_sul = function(x) {  return(l(x)*plain_util(y2-x+y1)  + (1-l(x))*plain_util(y2-x+y2))}
   
-  ea_uw = function(x) {  return(w(x)*log(Aw_band1(x))  + (1-w(x))*log(Al_band1(x)))}
-  ea_ul = function(x) {  return(l(x)*log(Al_band2(x))  + (1-l(x))*log(Aw_band2(x)))}
+  ea_uw = function(x) {  return(w(x)*plain_util(Aw_band1(x))  + (1-w(x))*plain_util(Al_band1(x)))}
+  ea_ul = function(x) {  return(l(x)*plain_util(Al_band2(x))  + (1-l(x))*plain_util(Aw_band2(x)))}
   
   nu1 <- seq(0,y1,y1/100)
   nu2 <- seq(0,y2,y2/100)
@@ -2144,7 +2152,7 @@ get_missing_var<-function(fixed_varname,fixed_varval,plot)
     res[["lambda_bar_optimised"]] = lambda_bar_optimised
     return(res)
   }
-
+  
   if (fixed_varname=="omega"){
     lambda_bar_fixed = 2
     omega_bar_fixed  = 0
@@ -2188,7 +2196,7 @@ get_missing_var<-function(fixed_varname,fixed_varval,plot)
     
   }
   stop("Could not identify fixed_varname")
-
+  
 }
 
 plot_w_params<-function(){
@@ -2199,10 +2207,10 @@ plot_w_params<-function(){
     lines(x,1/(1+exp(-lambda*2 * (x-bar_lambda))),type='l',lty=2); 
     lines(x,1/(1+exp(-lambda*.5 * (x-bar_lambda))),type='l',lty=3); legend(60, .4, legend=c(latex2exp::TeX("$ \\omega = 0.1$"),latex2exp::TeX("$ \\omega = 0.2$"),latex2exp::TeX("$ \\omega = 0.05$")) , lty=c(1,2,3), cex=0.7) 
   } else {
-  lambda = .1 ; bar_lambda = 50; x<-seq(0,100,.1); plot(x,1/(1+exp(-lambda * (x-bar_lambda))),type='l',xlab=latex2exp::TeX("$\\nu$"),ylab=latex2exp::TeX("$W(\\nu)$"),lty=1); 
-  lines(x,1/(1+exp(-lambda*(x-bar_lambda-20))),type='l',lty=2)
-  lines(x,1/(1+exp(-lambda*(x-bar_lambda+20))),type='l',lty=3)
-  legend(60, .4, legend=latex2exp::TeX(paste("$ \\bar{\\omega}=",c(50,70,30),"$")) , lty=c(1,2,3), cex=0.7)
+    lambda = .1 ; bar_lambda = 50; x<-seq(0,100,.1); plot(x,1/(1+exp(-lambda * (x-bar_lambda))),type='l',xlab=latex2exp::TeX("$\\nu$"),ylab=latex2exp::TeX("$W(\\nu)$"),lty=1); 
+    lines(x,1/(1+exp(-lambda*(x-bar_lambda-20))),type='l',lty=2)
+    lines(x,1/(1+exp(-lambda*(x-bar_lambda+20))),type='l',lty=3)
+    legend(60, .4, legend=latex2exp::TeX(paste("$ \\bar{\\omega}=",c(50,70,30),"$")) , lty=c(1,2,3), cex=0.7)
   }
 }
 
@@ -2233,7 +2241,7 @@ get_no_greed_missing_var<-function(fixed_varname,fixed_varval,plot)
     
     fixed_lambda=1
     fixed_kappa =3
-
+    
     omega_bar_fixed = fixed_varval
     #lambda_bar
     find_lambda_bar <- function(lbar){
@@ -2446,3 +2454,4 @@ get_no_greed_missing_var<-function(fixed_varname,fixed_varval,plot)
   stop("Could not identify fixed_varname")
   
 }
+
