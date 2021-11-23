@@ -243,7 +243,8 @@ status open
 
 \begin_layout Plain Layout
 
-%Must explain if status consumption is ndc or dc + ndc
+%Must explain if status consumption is ndc or dc + ndc.
+ QUALITY in ASSETS is just ASSETS this needs to be explained.
 \end_layout
 
 \end_inset
@@ -631,6 +632,10 @@ literal "true"
 
  for a first-order dynamic model).
  
+\end_layout
+
+\begin_layout Standard
+[EXPLAIN WHY COMMODITY SUREG is preferred in the study over Heien Wessels]
 \end_layout
 
 \begin_layout Standard
@@ -1417,15 +1422,12 @@ Quality and Prices
 \end_layout
 
 \begin_layout Standard
-We now establish that quality-related inferences cannot be drawn from a
- model that does not use an explicit measure of quality in the utility function.
- The properties of the quality-metric we use for the econometric analysis
- are subsequently explained.
- Without an explicit measure of quality, the commonly used Stone-Geary utility
- for all commodity groups - for example - would be inadequate to explain
- demand for quality.
- Here, the indirect utility function obtained with the optimisation of Stone-Gea
-ry direct utility function 
+It is evident that quality-related inferences cannot be drawn without an
+ explicit measure of quality in the utility function.
+ To demonstrate this, let's consider the commonly used Stone-Geary utility
+ for all commodity groups.
+ The indirect utility function with the optimisation of Stone-Geary direct
+ utility function 
 \begin_inset Formula $u=\sum\beta_{i}log(q_{i}+\gamma_{i})$
 \end_inset
 
@@ -1437,7 +1439,7 @@ ry direct utility function
 \begin_inset Formula $p\cdot q=\sum p_{i}q_{i}=x$
 \end_inset
 
- ) can be written as 
+ ) is 
 \begin_inset Foot
 status open
 
@@ -1481,14 +1483,28 @@ u\equiv\psi(x,p) & =\sum\beta_{i}log(x\beta_{i}/p_{i}+\gamma_{i})
 \end_layout
 
 \begin_layout Standard
-With the assumption that a consumer observes the price index of a commodity
- (rather than individual prices), an econometric method based on the above
- indirect utility can be employed for a set of commodity groups with items
- within.
- However, since a better quality item is set to be more expensive than the
- less quality item, a switch to higher quality by the consumer is inseparable
- from an increase in the price-index of the commodity (whose multiple variants
- are observed).
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%would be inadequate to explain demand for quality.
+ Here
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As long we can assume that a consumer observes the price index of a commodity
+ (rather than individual prices), the above indirect utility does not differenti
+ate between an increase in the price-index of the commodity (whose multiple
+ variants are observed) and the switch to a better quality item by the consumer.
+ This may be a serious issue in empirical analyses when i) only the prices
+ of commodities are considered and ii) a higher quality is more expensive
+ than less quality.
  The increase in the price-index of an item (regardless of whether it's
  a 
 \begin_inset Quotes eld
@@ -1499,14 +1515,10 @@ parallel
 \end_inset
 
  shift -so that the relative price structure of the variants remains the
- same or not) is going to be always interpreted as the consumer reducing
- the quantity consumed of the item.
- Indeed it may still be possible to use the model as long as one assumes
- that the individual's quality preferences are fixed, but a change in quality
- as a response to price cannot be studied with the model as such.
- An explicit measure of quality is therefore necessary in the direct utility
- (or equivalently in the cost-function) for us to interpret meaningful results
- for quality using the corresponding econometric method
+ same or not) may end up being interpreted as the consumer reducing the
+ quantity consumed of the item.
+ A change in quality as a response to price thus cannot be measured appropriatel
+y with the above model
 \begin_inset Foot
 status open
 
@@ -1518,10 +1530,13 @@ All of the usual limitations of an additive utility function such as Stone
 \end_inset
 
 .
+ An explicit measure of quality in the direct utility (or equivalently in
+ the cost-function) surely does not pose the same problem.
+ 
 \end_layout
 
 \begin_layout Standard
-In our model, a quality metric is therefore associated to the aggregate
+In the econometric model we use, a quality metric is associated to the aggregate
  of goods seen as a commodity (see Houthakker 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1547,7 +1562,7 @@ literal "true"
 \end_inset
 
  for the related formulations).
- Here, the quantities consumed for two (or more) items within a commodity
+ Thus, the quantities consumed for two (or more) items within a commodity
  (e.g.
  tea and carbonated drinks under beverages that can be interchanged by the
  consumer) are viewed as an aggregate-quantity of a composite good (i.e.
@@ -1893,9 +1908,20 @@ reference "eq:utility"
 \end_inset
 
 ).
- All non-essential needs are interpreted solely in terms of quality (ENDC)
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%All non-essential needs are interpreted solely in terms of quality (ENDC)
  and the socio-economic standing.
- Further, the constant-price structure assumption along with Equation 
+ 
+\end_layout
+
+\end_inset
+
+ The constant-price structure assumption along with Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:utility"
@@ -1918,7 +1944,11 @@ reference "eq:utility"
 \end_layout
 
 \begin_layout Standard
-The model in Equation 
+[
+\series bold
+QUALITY in ASSETS is just ASSETS
+\series default
+]The model in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:utility"
@@ -2321,8 +2351,8 @@ The above quality metric readily lends itself to estimation of price derivatives
  an expensive house or an expensive car can be separated from cheaper options).
 \end_layout
 
-\begin_layout Subsection
-Implementation
+\begin_layout Section
+Empirical Method
 \end_layout
 
 \begin_layout Standard
@@ -2340,18 +2370,8 @@ reference "sec:LiteratureSurvey"
 \end_inset
 
  above.
- The first method is a detailed item-wise analysis including the cross-price
- elasticities (Heien-Wessells 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HeienWessellsAIDSCensored1990"
-literal "true"
-
-\end_inset
-
-) while the second method uses the above defined measure of quality ( except
- for electricity - which is simply an indicator variable - for reasons we
- discuss in Section 
+ We uses the above defined measure of quality ( except for electricity -
+ which is simply an indicator variable as discussed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Discussion"
@@ -2359,37 +2379,15 @@ reference "subsec:Discussion"
 \end_inset
 
 ).
- In the latter method, we also include the ownership of assets (logarithm
- of the costs of the asset) and the demand for items we don't calculate
- the quality metric for.
-\end_layout
-
-\begin_layout Subsubsection
-
-\size normal
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:HeienWesselsAIDS"
-
-\end_inset
-
-A selection approach to item-wise AIDS
-\end_layout
-
-\begin_layout Standard
-This first AIDS variant uses non-consumption corrected estimates of demand
- elasticities to explain the effect of prices and household income on the
- demand for every item.
- The method comprises of two parts - the first being a 
-\bar under
-selection
-\bar default
- step - needed to account for the non-consumption of a certain items.
- The second part is a pooled 
+ The ownership of assets (logarithm of the costs of the asset) and the demand
+ for items we don't calculate the quality metric for are included.
+ These results are discussed subsequently.
+ A comparison with the item-wise analysis of the cross-price elasticities
+ using a pooled 
 \bar under
 static-AIDS
 \bar default
- method (see Equations 
+ corrected for non-consumption (with a probit) as defined in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:wessells_probit"
@@ -2403,42 +2401,7 @@ reference "eq:wessells_aids"
 
 \end_inset
 
- in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Model"
-
-\end_inset
-
-) that is run over the consumption microdata from 2010, 2012 and 2014.
-\end_layout
-
-\begin_layout Standard
-The first-part i.e.
- selection is a probit that provides refinement to the second-part item-wise
- AIDS (which would have been appropriate in a more homogeneous dataset with
- less instances of non-consumption for items).
- The dependent variable in the probit is an indicator variable which is
- unity when the item is consumed and zero otherwise.
- The control variables used in the first-stage probit are the prices of
- the item and market-characteristics (region etc.
- - see Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_probit"
-
-\end_inset
-
-) .
- The inverse-mills ratio calculated from the probit (as explained with the
- Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:invmills"
-
-\end_inset
-
- - see Heien-Wessells 
+ is also provided (seeHeien-Wessells 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HeienWessellsAIDSCensored1990"
@@ -2446,23 +2409,7 @@ literal "true"
 
 \end_inset
 
-) is in turn used as an instrument in the AIDS regressions of the second
- part (see Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_aids"
-
-\end_inset
-
-).
- Notice that the instrument is calculated for every household and every
- item - and is part of the additivity constraint that is used for estimation.
-\end_layout
-
-\begin_layout Subsubsection
-
-\size normal
-An LA-AIDS model for Aggregate Quality
+) .
 \end_layout
 
 \begin_layout Standard
@@ -2645,21 +2592,15 @@ additional
  matrix do apply to the above demand equations.
 \end_layout
 
-\begin_layout Subsection
-Discussion
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Discussion"
-
-\end_inset
-
-
+\begin_layout Standard
+[QUALITY AGGREGATION] We now discuss the conditions under which the quality
+ aggregation should be interpreted and detail the reasons for some choices
+ made in the model for quality.
+ 
 \end_layout
 
 \begin_layout Standard
-We now discuss the conditions under which the quality aggregation should
- be interpreted and detail the reasons for some choices made in the model
- for quality.
+1.
  The first condition for the quality metric described in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2676,7 +2617,8 @@ reference "subsec:Econometric-model"
 \end_layout
 
 \begin_layout Standard
-The second condition is that the quality metric is aggregated over a commodity
+2.
+ The second condition is that the quality metric is aggregated over a commodity
  group only as long as the goods within the group can be ordered based on
  a certain criteria - an order that is the judgment of the researcher -
  not the consumer (see Nelson
@@ -2701,55 +2643,18 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-Due to the obvious limitations to the universality of such an aggregation
- criterion, the utility of the above metric in understanding consumption
- of quality is restricted by the very aggregated view that makes it desirable
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Notice also that one cannot talk about the quality metric 
-\begin_inset Formula $\nu_{G}$
-\end_inset
-
- defined above unless the quantity of consumption is observed in data.
-\end_layout
-
-\end_inset
-
-.
- We illustrate this with a comparison of item-wise and aggregated approaches
- in the results (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Results"
-
-\end_inset
-
-).
- While the item-wise approach gives us a more detailed sense of elasticities,
- an interpretation that is more desirable for an understanding of the segregatio
-n of quality across the segments in the population is provided more readily
- with a quality-aggregated view.
- 
-\end_layout
-
-\begin_layout Standard
-Notice that since we don't attempt to aggregate high-quality items from
- across commodity groups, a two-state budgeting approach (commonly used
- in the literature on household demand) can be conveniently discarded.
- Recall that the two-state budgeting represents a hierarchy of separable
- goods.
- If the futility argument were valid for high-quality products, one could
- have aggregated quality consumed in different commodity groups into an
- overall quality metric.
- Without the futility argument, on the other hand, such an aggregation is
- improper.
- This is because a key condition for the tree-like structure of a two-state
- budgeting model is that the relative demand between two items in any two
- different categories changes only in response to the total expenditure
- (i.e response to price changes and total expenditure changes must use the
- same channels of communication in the commodity tree
+While an item-wise approach gives may give us a more detailed sense of elasticit
+ies (see Appendix III), an interpretation that is more desirable for an
+ understanding of the segregation of quality across the segments in the
+ population is provided more readily with a quality-aggregated view.
+ Here, we discard the a two-state budgeting approach (commonly used in the
+ literature on household demand) since we don't aggregate high-quality items
+ from across commodity groups (given our restraint from using the futility
+ argument).
+ As such a the two-state budgeting hierarchy requires the relative demand
+ between two items in any two different categories to change only in response
+ to the total expenditure (i.e response to price changes and total expenditure
+ changes must use the same channels of communication in the commodity tree
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonEconConsumer,StrotzUtilityTree1957"
@@ -2757,11 +2662,10 @@ literal "true"
 
 \end_inset
 
-).
- Evidently, this is impossible to guarantee if we claim that quality can
- be substituted from across the commodity groups i.e.
- if consumers may be indifferent to choosing quality in one category to
- that in another.
+) and this condition cannot be guaranteed when is a substitution of quality
+ from across the commodity groups (i.e.
+ that consumers may be indifferent to choosing quality in one category to
+ that in another).
 \end_layout
 
 \begin_layout Standard
@@ -2841,23 +2745,16 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-The grounds for rejection of the two-state model - i.e.
- the fact that quality cannot be aggregated at a level coarser than the
- separable categories (commodity groups) we impose on the demand - is the
- third condition for our quality-aggregation.
- The question that follows next is how fine can the commodity group over
- which the quality is aggregated can be divided (the finest granularity
- of groups being one where every commodity group is composed of exactly
- one item).
- As would be amenable to the separability assumption, we're guided by the
- substitution within the group while we form the commodity groups from the
- individual goods.
- Thus if there is substitution possible between two items, they ought to
- be in the same commodity group.
- 
-\end_layout
+3.
+ The quality cannot be aggregated at a level coarser than the separable
+ categories (commodity groups).
+ With the finest granularity of groups being one where every commodity group
+ is composed of exactly one item, we consider substitution possible between
+ two items only if they are in the same commodity group
+\begin_inset Foot
+status open
 
-\begin_layout Standard
+\begin_layout Plain Layout
 An approach that strictly follows this rule is the so-called 
 \begin_inset Quotes eld
 \end_inset
@@ -2884,46 +2781,21 @@ literal "true"
 \end_inset
 
  on how this issue could be remedied).
- At the consumer's (behavioural) level, the substitution between kerosene
- and electricity is not as straightforward as amongst the quality variants
- of protein - so while a metric for quality does make sense in a setting
- where a mixture of high and low quality items are consumed (e.g.
+ At the consumer's level, the substitution between kerosene and electricity
+ is not as straightforward as amongst the quality variants of protein -
+ so while a metric for quality does make sense in a setting where a mixture
+ of high and low quality items are consumed (e.g.
  in food) it fails to account for quality differences when choices vary
  widely.
- Reflecting this observation, the exception we make for wide quality differences
- is the fourth condition for quality aggregation.
- In other words, wide differences in quality or fundamental characteristics
- are not to be viewed as a continuous measure for aggregate quality.
- Thus while we do form groups based on possible substitution within the
- group for all the food-categories, we use indicator variables instead of
- the aggregate-quality measure for energy commodity (where consumption on
- kerosene, charcoal, electricity and gas are observed in the data).
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Going a step further in the direction provided by the fourth condition,
- a discrete view of quality differences may be appropriate for all non-food
- categories (e.g.
- transport - which is the subject of a seminal work on discrete choice by
- Domencic-McFadden
-\begin_inset CommandInset citation
-LatexCommand cite
-key "McFaddenDomencic1975"
-literal "true"
-
-\end_inset
-
-) where the consumers either consume a certain quantity of an item or they
- don't at all (more so in the developing countries where income inequalities
- are starker).
- The discrete utility models are to be explored in the subsequent chapters.
- 
 \end_layout
 
 \end_inset
 
 .
+ While we do form groups based on possible substitution within the group
+ for all the food-categories, we use indicator variables instead of the
+ aggregate-quality measure for energy commodity (where consumption on kerosene,
+ charcoal, electricity and gas are observed in the data).
 \end_layout
 
 \begin_layout Standard
@@ -2948,7 +2820,6 @@ reference "subsec:Econometric-model"
  The cross-price effects for the items in the survey for 2010, 2012 and
  2014 are also presented to provide an insight into how prices of non-food
  items may have an effect on food quality and vice versa.
- 
 \end_layout
 
 \begin_layout Standard
@@ -3991,1759 +3862,26 @@ name "sec:Results"
 The quality distribution is normal- as we can see for all the categories.
  The segregation of quality is key in other areas - but not so much in food.
  The consumer may not forgo food.
-\end_layout
 
-\begin_layout Subsection
-
-\size normal
-A selection approach to item-wise AIDS
-\end_layout
-
-\begin_layout Standard
-The constraints of symmetry, additivity and homogeneity are essential in
- facilitating a discussion of the effect of cross-elasticities on demand
- (measured as budget shares).
- The results thus obtained with a seemingly-unrelated regression (SUR) after
- imposing the constraints are presented in the Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{resultsProbit1}
-\end_layout
-
-\end_inset
-
-, 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{resultsProbit2}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{resultsProbit3}
-\end_layout
-
-\end_inset
-
-.
- The own-price and cross-price elasticities presented in the results provide
- us an overview of the demand across rare and commonly consumed items.
- 
-\end_layout
-
-\begin_layout Subsubsection
-Variables
+\bar default
+ The aggregation (subject to restrictions) to the commodity allows us to
+ interpret the consumer choice for quality - while at the same time representing
+ the substitution between broader categories and the price variants within
+ the commodities in the econometric model.
 \end_layout
 
 \begin_layout Standard
-The control variables used are 
-\family typewriter
-consu
-\family default
- (family size adjusted based on the age of the member), 
-\family typewriter
-educrank
-\family default
- (education rank interpreted from the highest education level of head of
- every household), 
-\family typewriter
-invmills
-\family default
- (inverse-mills ratio as explained in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Econometric-model"
-
-\end_inset
-
-), 
-\family typewriter
-lntotexp
-\family default
- (log of the total expenditure) and 
-\family typewriter
-occupationrank
-\family default
- (occupation rank - an ordered variable derived from the occupation of the
- head of the household).
- Notice that we use occupation rank as the proxy of income (for which the
- survey data is quite sparse) along side with the total expenditure.
- The other control variables starting with lp- are logarithm of price correspond
-ing to every commodity in the second-stage AIDS regression (see Equation
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_aids"
-
-\end_inset
-
-).
- The columns in the table (names starting with q) indicate the budget shares
- that are used as the dependent variables in the second-stage regression
- (see Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_aids"
-
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Subsubsection
-Results
-\end_layout
-
-\begin_layout Standard
-We base our interpretation on both the the statistical significance (value
- of 
-\begin_inset Formula $z$
-\end_inset
-
-) and the economic significance (i.e.
- the size of the coefficient) of the control variables in the results.
- Observing the signs of the coefficients, we see that mangoes (less consumed)
- and rice (commonly consumed) are substitutes while fish is a complement
- to cassava-flour ([qfish_seafood]lpcassava_flour <0 etc.) rice.
- Further, fresh milk is a complement to beef, beer, cassava_flour ([qcassava_flo
-ur]lpfresh_milk = -0.001) and greens but a substitute to bread and mangoes.
-\end_layout
-
-\begin_layout Standard
-The item-wise analysis suggests a split between the items that are consumed
- in rural households (where the greens and fruits seem more abundant) against
- those consumed in urban households (where beef, charcoal and beer are more
- readily available).
- The elasticities against income and education also show that the items
- available in the industrialised regions of the Tanzania seem to have positive
- elasticities for income and education rank whereas the items of agrarian
- production seem to matter less to the highly educated, middle-age populations
- huddled in the urban areas.
- While many of such insights could be offered with a simpler cross-sectional
- analysis using a regression of expenditure on the item against the permanent-in
-come or total expenditure by the household etc.
- (an approach that is followed in much of the literature on conspicuous
- consumption
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ZahraIndia,KausSA,CharlesHurstRace"
-literal "true"
-
-\end_inset
-
-), an AIDS formulation is favoured due to two reasons - first it allows
- us to understand the cross-price effects in a more robust framework and
- second, it can account for the non-consumption of items.
- 
-\end_layout
-
-\begin_layout Standard
-Going further with the cross-elasticities analyses, a comparison of how
- consumers respond to changes in kerosene and electricity prices further
- confirms the concentrated availability of industrial items.
- A contrast between the items that are influenced by electricity prices
- and those that are influenced by kerosene prices demonstrates this split
- - since the demand for items such as rice, beef is less sensitive to electricit
-y than it is to kerosene.
- That is to say, it isn't simply that the electricity consumers are more
- likely to consume the more expensive items (due to their higher incomes)
- but that a certain items become less relevant in the urban settings or
- are simply unavailable in the rural settings.
- We argue that such a segregation of consumer contexts is relevant for a
- discussion of status-related consumption in the developing countries.
-\end_layout
-
-\begin_layout Standard
-There is more we seek from the consumption data than one item's preference
- relative to another - as there are limitations to a cross-elasticities
- analysis.
- The detailed cross-elasticities are more likely to fluctuate over time
- and would require us to use a dynamic approach to ascertain model stability
- (an inertia in choices could be more explicitly modeled to address this).
- But more importantly, the cross-price elasticities fail to model the functional
- separation in consumption e.g.
- the lack of substitutability between energy and food items.
- For example, the cross-elasticities of kerosene with respect to buns or
- cassava cannot be interpreted unless one imposes other assumptions on the
- closely observed consumption patterns (e.g.
- more buns would means less cooking in the household etc.) or stricter separabili
-ty assumptions (see Deaton
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonUnderstandingConsumption"
-literal "true"
-
-\end_inset
-
- for a discussion on the need to impose such structures).
- Since we are concerned with the choice of quality exercised by the consumer
- when faced with multiple varieties of several qualities and price, an aggregate
-d view of the basket seems more appropriate.
- Such an aggregation ought to be based on a well-defined criteria - which
- for our current approach is the price of the items as well as the functionality
- of commodities.
- The availability of price information between the years 2008 and 2014 prevents
- the problems that could be faced by other grouping criteria - such as visibilit
-y - the changes to which are not observed over a sufficiently long period
- of time.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-caption{
-\backslash
-label{resultsProbit1}sureg for all items after the first-stage non-consumption
- probit (1/3)} 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-resizebox{
-\backslash
-columnwidth}{!}{
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-begin{tabular}{l*{9}{c}} 
-\backslash
-hline
-\backslash
-hline  & 
-\backslash
-multicolumn{1}{c}{} & 
-\backslash
-multicolumn{1}{c}{(1)} & 
-\backslash
-multicolumn{1}{c}{(2)} & 
-\backslash
-multicolumn{1}{c}{(3)} & 
-\backslash
-multicolumn{1}{c}{(4)} & 
-\backslash
-multicolumn{1}{c}{(5)} & 
-\backslash
-multicolumn{1}{c}{(6)} & 
-\backslash
-multicolumn{1}{c}{(7)} & 
-\backslash
-multicolumn{1}{c}{(8)} 
-\backslash
-
-\backslash
- & 
-\backslash
-multicolumn{1}{c}{} & 
-\backslash
-multicolumn{1}{c}{qbeef} & 
-\backslash
-multicolumn{1}{c}{qbeer} & 
-\backslash
-multicolumn{1}{c}{qbread} & 
-\backslash
-multicolumn{1}{c}{qbunscakes} & 
-\backslash
-multicolumn{1}{c}{qcassavaflour} & 
-\backslash
-multicolumn{1}{c}{qcassavafresh} & 
-\backslash
-multicolumn{1}{c}{qcharcoal} & 
-\backslash
-multicolumn{1}{c}{qcoconut}
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-
-\backslash
- & age &  0.0005 &  0.0000 &  0.0001 & -0.0002 & -0.0001 &  0.0001 & -0.0002 &
- -0.0001
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0020$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & cons & -0.3348 & -0.0985 & -0.0514 & -0.0326 &  0.0639 & -0.0334 & -0.0831 &
- -0.0495
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & consu & -0.0033 & -0.0002 & -0.0001 &  0.0005 &  0.0003 & -0.0001 & -0.0006
- &  0.0000
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0040$^{**}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7610
- )
-\backslash
-
-\backslash
- & educrank &  0.0174 &  0.0018 &  0.0230 & -0.0686 & -0.0127 & -0.0073 & -0.0249
- & -0.0169
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0600 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & invmills &  0.0001 &  0.0011 &  0.0003 & -0.0032 &  0.0007 &  0.0013 & -0.0005
- & -0.0007
-\backslash
-
-\backslash
- &  & ( 0.9140 ) & ( 0.0000$^{***}$ ) & ( 0.0560 ) & ( 0.0000$^{***}$ ) & (
- 0.0250$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.1260 ) & ( 0.0010$^{**}$ )
-\backslash
-
-\backslash
- & lntotexp &  0.0285 &  0.0065 &  0.0046 &  0.0073 & -0.0044 &  0.0021 &  0.0114
- &  0.0056
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lpbeef & -0.0548 & -0.0074 &  0.0161 &  0.0080 &  0.0025 & -0.0015 & -0.0089
- &  0.0337
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lpbeer & -0.0074 & -0.0023 &  0.0024 & -0.0021 &  0.0019 & -0.0017 &  0.0034
- & -0.0027
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lpbread &  0.0161 &  0.0024 &  0.0008 & -0.0029 &  0.0071 & -0.0028 &  0.0001
- &  0.0042
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7670 ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpbunscakes &  0.0080 & -0.0021 & -0.0029 & -0.0118 & -0.0043 &  0.0016 & 
- 0.0060 & -0.0040
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lpcassavaflour &  0.0025 &  0.0019 &  0.0071 & -0.0043 &  0.0001 & -0.0016
- &  0.0062 &  0.0032
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.8650 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpcassavafresh & -0.0015 & -0.0017 & -0.0028 &  0.0016 & -0.0016 &  0.0008
- & -0.0021 & -0.0036
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lpcharcoal & -0.0089 &  0.0034 &  0.0001 &  0.0060 &  0.0062 & -0.0021 &  0.0227
- &  0.0032
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7670 ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpcoconut &  0.0337 & -0.0027 &  0.0042 & -0.0040 &  0.0032 & -0.0036 &  0.0032
- & -0.0078
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lpcookingoil & -0.0057 &  0.0009 & -0.0010 &  0.0014 &  0.0005 &  0.0053 &
- -0.0225 &  0.0055
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0060$^{**}$ ) & ( 0.0020$^{**}$ ) & ( 0.0040$^{**}$
- ) & ( 0.1230 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpdriedcannedfish &  0.0038 & -0.0016 & -0.0023 &  0.0032 & -0.0070 & -0.0009
- &  0.0015 & -0.0007
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$
- )
-\backslash
-
-\backslash
- & lpelectricity &  0.0006 &  0.0022 & -0.0039 & -0.0028 &  0.0059 & -0.0007 &
-  0.0078 & -0.0056
-\backslash
-
-\backslash
- &  & ( 0.5150 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0240$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpfishseafood &  0.0051 &  0.0041 &  0.0001 & -0.0039 & -0.0005 &  0.0031 &
-  0.0049 & -0.0099
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7470 ) & ( 0.0000$^{***}$
- ) & ( 0.0760 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpfreshmilk & -0.0018 & -0.0022 &  0.0043 &  0.0018 & -0.0006 & -0.0028 & 
- 0.0111 &  0.0083
-\backslash
-
-\backslash
- &  & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0070$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpgreens & -0.0060 &  0.0010 &  0.0016 & -0.0027 &  0.0022 &  0.0004 & -0.0069
- &  0.0074
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpkerosene & -0.0140 &  0.0029 & -0.0056 &  0.0033 &  0.0054 & -0.0013 & -0.0027
- &  0.0020
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lpmangoes & -0.0036 & -0.0017 &  0.0003 & -0.0017 & -0.0006 & -0.0005 &  0.0038
- &  0.0038
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0260$^{*}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lponion & -0.0052 & -0.0037 &  0.0007 &  0.0042 &  0.0019 &  0.0028 &  0.0028
- &  0.0008
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0030$^{**}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0030$^{**}$
- )
-\backslash
-
-\backslash
- & lppeanuts & -0.0032 & -0.0005 & -0.0025 & -0.0027 & -0.0008 &  0.0006 &  0.0013
- & -0.0004
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0220$^{*}$
- )
-\backslash
-
-\backslash
- & lppotatoes &  0.0092 & -0.0020 & -0.0001 &  0.0009 &  0.0002 &  0.0001 & -0.0030
- &  0.0017
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.4210 ) & ( 0.0000$^{***}$
- ) & ( 0.2440 ) & ( 0.2530 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ )
-\backslash
-
-\backslash
- & lppulses &  0.0000 & -0.0002 & -0.0023 &  0.0020 & -0.0073 & -0.0005 &  0.0041
- & -0.0057
-\backslash
-
-\backslash
- &  & ( 0.9880 ) & ( 0.5550 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & (
- 0.0000$^{***}$ ) & ( 0.0460$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpricehusked &  0.0503 & -0.0013 & -0.0050 &  0.0004 & -0.0092 & -0.0008 &
- -0.0139 & -0.0080
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0080$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.5770
- ) & ( 0.0000$^{***}$ ) & ( 0.0390$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpsalt & -0.0081 &  0.0016 & -0.0007 & -0.0013 & -0.0002 &  0.0013 & -0.0022
- & -0.0009
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.1760 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpsugar & -0.0003 &  0.0094 & -0.0071 &  0.0073 & -0.0045 &  0.0048 & -0.0190
- & -0.0236
-\backslash
-
-\backslash
- &  & ( 0.7210 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpsweetpotato & -0.0090 & -0.0005 & -0.0014 &  0.0002 & -0.0004 & -0.0001 &
-  0.0026 & -0.0007
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0020$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.3670
- ) & ( 0.0270$^{*}$ ) & ( 0.3110 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ )
-\backslash
-
-\backslash
- & occupationrank & -0.0015 & -0.0003 &  0.0011 &  0.0011 & -0.0005 &  0.0015
- &  0.0139 &  0.0034
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0020$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline  
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular}} 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{table}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-caption{
-\backslash
-label{resultsProbit2}sureg for all items after the first-stage non-consumption
- probit (2/3)} 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-resizebox{
-\backslash
-columnwidth}{!}{
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-begin{tabular}{l*{9}{c}} 
-\backslash
-hline
-\backslash
-hline  & 
-\backslash
-multicolumn{1}{c}{} & 
-\backslash
-multicolumn{1}{c}{(1)} & 
-\backslash
-multicolumn{1}{c}{(2)} & 
-\backslash
-multicolumn{1}{c}{(3)} & 
-\backslash
-multicolumn{1}{c}{(4)} & 
-\backslash
-multicolumn{1}{c}{(5)} & 
-\backslash
-multicolumn{1}{c}{(6)} & 
-\backslash
-multicolumn{1}{c}{(7)} & 
-\backslash
-multicolumn{1}{c}{(8)} 
-\backslash
-
-\backslash
- & 
-\backslash
-multicolumn{1}{c}{} & 
-\backslash
-multicolumn{1}{c}{qcookingoil} & 
-\backslash
-multicolumn{1}{c}{qdriedcannedfish} & 
-\backslash
-multicolumn{1}{c}{qelectricity} & 
-\backslash
-multicolumn{1}{c}{qfishseafood} & 
-\backslash
-multicolumn{1}{c}{qfreshmilk} & 
-\backslash
-multicolumn{1}{c}{qgreens} & 
-\backslash
-multicolumn{1}{c}{qkerosene} & 
-\backslash
-multicolumn{1}{c}{qmangoes}
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-
-\backslash
- & age & -0.0002 & -0.0002 &  0.0001 &  0.0001 &  0.0000 & -0.0001 &  0.0004 &
- -0.0001
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & cons &  0.3757 &  0.1711 & -0.1125 &  0.0766 & -0.0623 &  0.0536 &  0.5433 &
- -0.0182
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & consu &  0.0014 &  0.0014 & -0.0009 &  0.0003 & -0.0004 & -0.0004 &  0.0013
- & -0.0003
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & educrank &  0.0120 & -0.0022 &  0.0735 &  0.0331 &  0.0215 & -0.0146 &  0.0243
- &  0.0004
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.2630 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.4690
- )
-\backslash
-
-\backslash
- & invmills & -0.0053 & -0.0001 &  0.0067 & -0.0032 &  0.0019 & -0.0009 &  0.0008
- &  0.0011
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.7150 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0310$^{*}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lntotexp & -0.0217 & -0.0107 &  0.0008 & -0.0027 &  0.0035 &  0.0007 & -0.0335
- &  0.0010
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpbeef & -0.0057 &  0.0038 &  0.0006 &  0.0051 & -0.0018 & -0.0060 & -0.0140
- & -0.0036
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.5150 ) & ( 0.0000$^{***}$
- ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpbeer &  0.0009 & -0.0016 &  0.0022 &  0.0041 & -0.0022 &  0.0010 &  0.0029
- & -0.0017
-\backslash
-
-\backslash
- &  & ( 0.0060$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpbread & -0.0010 & -0.0023 & -0.0039 &  0.0001 &  0.0043 &  0.0016 & -0.0056
- &  0.0003
-\backslash
-
-\backslash
- &  & ( 0.0020$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7470
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0260$^{*}$
- )
-\backslash
-
-\backslash
- & lpbunscakes &  0.0014 &  0.0032 & -0.0028 & -0.0039 &  0.0018 & -0.0027 & 
- 0.0033 & -0.0017
-\backslash
-
-\backslash
- &  & ( 0.0040$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpcassavaflour &  0.0005 & -0.0070 &  0.0059 & -0.0005 & -0.0006 &  0.0022
- &  0.0054 & -0.0006
-\backslash
-
-\backslash
- &  & ( 0.1230 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0760 ) & (
- 0.0070$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpcassavafresh &  0.0053 & -0.0009 & -0.0007 &  0.0031 & -0.0028 & -0.0004
- & -0.0013 & -0.0005
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0240$^{*}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpcharcoal & -0.0225 &  0.0015 &  0.0078 &  0.0049 &  0.0111 & -0.0069 & -0.0027
- &  0.0038
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lpcoconut &  0.0055 & -0.0007 & -0.0056 & -0.0099 &  0.0083 &  0.0074 &  0.0020
- &  0.0038
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpcookingoil &  0.0136 &  0.0019 & -0.0085 &  0.0084 & -0.0013 & -0.0049 &
-  0.0005 & -0.0043
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0030$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.3900 ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpdriedcannedfish &  0.0019 & -0.0089 &  0.0075 & -0.0111 &  0.0003 &  0.0049
- &  0.0043 &  0.0024
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.1750 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpelectricity & -0.0085 &  0.0075 &  0.0265 &  0.0054 &  0.0051 & -0.0075 &
- -0.0066 &  0.0064
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lpfishseafood &  0.0084 & -0.0111 &  0.0054 & -0.0181 &  0.0017 &  0.0017 &
-  0.0020 &  0.0003
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0930
- )
-\backslash
-
-\backslash
- & lpfreshmilk & -0.0013 &  0.0003 &  0.0051 &  0.0017 & -0.0046 & -0.0005 & 
- 0.0043 &  0.0016
-\backslash
-
-\backslash
- &  & ( 0.0030$^{**}$ ) & ( 0.1750 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0160$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpgreens & -0.0049 &  0.0049 & -0.0075 &  0.0017 & -0.0005 &  0.0004 & -0.0007
- & -0.0005
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0160$^{*}$ ) & ( 0.0900 ) & ( 0.0300$^{*}$ ) & ( 0.0000$^{***}$ )
-\backslash
-
-\backslash
- & lpkerosene &  0.0005 &  0.0043 & -0.0066 &  0.0020 &  0.0043 & -0.0007 & -0.0041
- & -0.0028
-\backslash
-
-\backslash
- &  & ( 0.3900 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0300$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpmangoes & -0.0043 &  0.0024 &  0.0064 &  0.0003 &  0.0016 & -0.0005 & -0.0028
- &  0.0018
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0930
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lponion & -0.0112 &  0.0034 &  0.0037 &  0.0028 & -0.0043 & -0.0021 &  0.0001
- & -0.0015
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.8780 ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lppeanuts & -0.0005 & -0.0010 &  0.0062 & -0.0001 & -0.0039 &  0.0023 & -0.0008
- &  0.0005
-\backslash
-
-\backslash
- &  & ( 0.1200 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.5280 ) & (
- 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lppotatoes & -0.0019 &  0.0016 & -0.0061 &  0.0024 &  0.0009 &  0.0015 &  0.0005
- & -0.0007
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0290$^{*}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lppulses & -0.0067 & -0.0026 &  0.0098 &  0.0011 & -0.0029 & -0.0047 &  0.0015
- & -0.0023
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0240$^{*}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0150$^{*}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpricehusked &  0.0102 &  0.0028 & -0.0093 & -0.0029 &  0.0017 &  0.0078 &
-  0.0108 &  0.0046
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0080$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpsalt &  0.0015 & -0.0009 & -0.0010 &  0.0028 & -0.0017 & -0.0023 & -0.0013
- & -0.0004
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0230$^{*}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpsugar &  0.0213 &  0.0002 & -0.0347 &  0.0006 & -0.0124 &  0.0053 & -0.0038
- & -0.0054
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.6450 ) & ( 0.0000$^{***}$ ) & ( 0.2340 ) & (
- 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpsweetpotato & -0.0025 & -0.0009 & -0.0006 &  0.0003 & -0.0021 &  0.0022 &
-  0.0062 &  0.0005
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.1750 ) & ( 0.1180 ) & (
- 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & occupationrank & -0.0070 & -0.0044 &  0.0037 & -0.0033 &  0.0016 &  0.0007
- &  0.0030 &  0.0006
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline  
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular}} 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{table}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-caption{
-\backslash
-label{resultsProbit3}sureg for all items after the first-stage non-consumption
- probit (3/3)} 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-resizebox{
-\backslash
-columnwidth}{!}{
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-begin{tabular}{l*{9}{c}} 
-\backslash
-hline
-\backslash
-hline  & 
-\backslash
-multicolumn{1}{c}{} & 
-\backslash
-multicolumn{1}{c}{(1)} & 
-\backslash
-multicolumn{1}{c}{(2)} & 
-\backslash
-multicolumn{1}{c}{(3)} & 
-\backslash
-multicolumn{1}{c}{(4)} & 
-\backslash
-multicolumn{1}{c}{(5)} & 
-\backslash
-multicolumn{1}{c}{(6)} & 
-\backslash
-multicolumn{1}{c}{(7)} & 
-\backslash
-multicolumn{1}{c}{(8)} 
-\backslash
-
-\backslash
- & 
-\backslash
-multicolumn{1}{c}{} & 
-\backslash
-multicolumn{1}{c}{qonion} & 
-\backslash
-multicolumn{1}{c}{qpeanuts} & 
-\backslash
-multicolumn{1}{c}{qpotatoes} & 
-\backslash
-multicolumn{1}{c}{qpulses} & 
-\backslash
-multicolumn{1}{c}{qricehusked} & 
-\backslash
-multicolumn{1}{c}{qsalt} & 
-\backslash
-multicolumn{1}{c}{qsugar} & 
-\backslash
-multicolumn{1}{c}{qsweetpotato}
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-
-\backslash
- & age & -0.0001 &  0.0000 & -0.0001 &  0.0001 & -0.0003 &  0.0001 &  0.0002 &
- -0.0001
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0450$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & cons &  0.3803 & -0.0119 & -0.0409 &  0.0248 & -0.4139 &  0.2239 &  0.1990 &
-  0.0138
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & consu &  0.0002 & -0.0001 & -0.0003 &  0.0012 & -0.0006 &  0.0009 &  0.0015
- & -0.0001
-\backslash
-
-\backslash
- &  & ( 0.0010$^{**}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & educrank & -0.0108 & -0.0039 & -0.0007 & -0.0161 & -0.0210 &  0.0177 &  0.0007
- & -0.0080
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.3210 ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7030 ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & invmills & -0.0075 &  0.0011 &  0.0005 & -0.0030 & -0.0065 &  0.0001 & -0.0042
- &  0.0011
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.4090 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lntotexp & -0.0195 &  0.0002 &  0.0045 & -0.0017 &  0.0356 & -0.0151 & -0.0040
- &  0.0009
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0690 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpbeef & -0.0052 & -0.0032 &  0.0092 &  0.0000 &  0.0503 & -0.0081 & -0.0003
- & -0.0090
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.9880
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7210 ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpbeer & -0.0037 & -0.0005 & -0.0020 & -0.0002 & -0.0013 &  0.0016 &  0.0094
- & -0.0005
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.5550
- ) & ( 0.0080$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0020$^{**}$
- )
-\backslash
-
-\backslash
- & lpbread &  0.0007 & -0.0025 & -0.0001 & -0.0023 & -0.0050 & -0.0007 & -0.0071
- & -0.0014
-\backslash
-
-\backslash
- &  & ( 0.0030$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.4210 ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpbunscakes &  0.0042 & -0.0027 &  0.0009 &  0.0020 &  0.0004 & -0.0013 & 
- 0.0073 &  0.0002
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.5770 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.3670 )
-\backslash
-
-\backslash
- & lpcassavaflour &  0.0019 & -0.0008 &  0.0002 & -0.0073 & -0.0092 & -0.0002
- & -0.0045 & -0.0004
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.2440 ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.1760 ) & ( 0.0000$^{***}$ ) & ( 0.0270$^{*}$ )
-\backslash
-
-\backslash
- & lpcassavafresh &  0.0028 &  0.0006 &  0.0001 & -0.0005 & -0.0008 &  0.0013
- &  0.0048 & -0.0001
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.2530 ) & ( 0.0460$^{*}$
- ) & ( 0.0390$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.3110 )
-\backslash
-
-\backslash
- & lpcharcoal &  0.0028 &  0.0013 & -0.0030 &  0.0041 & -0.0139 & -0.0022 & -0.0190
- &  0.0026
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lpcoconut &  0.0008 & -0.0004 &  0.0017 & -0.0057 & -0.0080 & -0.0009 & -0.0236
- & -0.0007
-\backslash
-
-\backslash
- &  & ( 0.0030$^{**}$ ) & ( 0.0220$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpcookingoil & -0.0112 & -0.0005 & -0.0019 & -0.0067 &  0.0102 &  0.0015 &
-  0.0213 & -0.0025
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.1200 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpdriedcannedfish &  0.0034 & -0.0010 &  0.0016 & -0.0026 &  0.0028 & -0.0009
- &  0.0002 & -0.0009
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.6450 ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpelectricity &  0.0037 &  0.0062 & -0.0061 &  0.0098 & -0.0093 & -0.0010 &
- -0.0347 & -0.0006
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0230$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.1750
- )
-\backslash
-
-\backslash
- & lpfishseafood &  0.0028 & -0.0001 &  0.0024 &  0.0011 & -0.0029 &  0.0028 &
-  0.0006 &  0.0003
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.5280 ) & ( 0.0000$^{***}$ ) & ( 0.0240$^{*}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.2340 ) & ( 0.1180 )
-\backslash
-
-\backslash
- & lpfreshmilk & -0.0043 & -0.0039 &  0.0009 & -0.0029 &  0.0017 & -0.0017 & -0.0124
- & -0.0021
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0080$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpgreens & -0.0021 &  0.0023 &  0.0015 & -0.0047 &  0.0078 & -0.0023 &  0.0053
- &  0.0022
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lpkerosene &  0.0001 & -0.0008 &  0.0005 &  0.0015 &  0.0108 & -0.0013 & -0.0038
- &  0.0062
-\backslash
-
-\backslash
- &  & ( 0.8780 ) & ( 0.0010$^{**}$ ) & ( 0.0290$^{*}$ ) & ( 0.0150$^{*}$ ) &
- ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpmangoes & -0.0015 &  0.0005 & -0.0007 & -0.0023 &  0.0046 & -0.0004 & -0.0054
- &  0.0005
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & lponion &  0.0027 & -0.0009 &  0.0005 &  0.0041 &  0.0070 & -0.0002 & -0.0101
- &  0.0016
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0070$^{**}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.2450 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lppeanuts & -0.0009 & -0.0026 & -0.0004 &  0.0002 & -0.0033 &  0.0016 &  0.0095
- &  0.0013
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0280$^{*}$ ) & ( 0.6520
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lppotatoes &  0.0005 & -0.0004 & -0.0016 &  0.0011 &  0.0023 & -0.0011 & -0.0039
- & -0.0021
-\backslash
-
-\backslash
- &  & ( 0.0070$^{**}$ ) & ( 0.0280$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lppulses &  0.0041 &  0.0002 &  0.0011 &  0.0108 &  0.0112 & -0.0018 & -0.0056
- & -0.0034
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.6520 ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpricehusked &  0.0070 & -0.0033 &  0.0023 &  0.0112 & -0.0654 &  0.0070 &
- -0.0005 &  0.0034
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.6630 ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpsalt & -0.0002 &  0.0016 & -0.0011 & -0.0018 &  0.0070 &  0.0011 &  0.0053
- &  0.0021
-\backslash
-
-\backslash
- &  & ( 0.2450 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpsugar & -0.0101 &  0.0095 & -0.0039 & -0.0056 & -0.0005 &  0.0053 &  0.0625
- &  0.0047
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.6630 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
- )
-\backslash
-
-\backslash
- & lpsweetpotato &  0.0016 &  0.0013 & -0.0021 & -0.0034 &  0.0034 &  0.0021 &
-  0.0047 & -0.0014
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
-$ )
-\backslash
-
-\backslash
- & occupationrank & -0.0023 & -0.0009 &  0.0000 & -0.0035 &  0.0000 &  0.0003
- & -0.0076 & -0.0003
-\backslash
-
-\backslash
- &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.5270 ) & ( 0.0000$^{***}$
- ) & ( 0.9600 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$
- )
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline  
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{2}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular}} 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{table}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-
-\size normal
-An LA-AIDS model for Aggregate Quality
-\end_layout
-
-\begin_layout Standard
-The quality-aggregated view from the second AIDS method provides the functional
- view to the consumer choice that is not available with the previous item-wise
- approach.
- Observing consumption at a higher level with separability assumptions also
- facilitates a better interpretation of the cross-price effects - but most
- of all, the aggregation (subject to restrictions) allows us to interpret
- the consumer choice for quality - while at the same time representing the
- substitution between broader categories and the price variants within the
- commodities in the econometric model.
-\end_layout
-
-\begin_layout Standard
-We also use the aggregation as an intermediate step in merging data from
- recall and diary methods.
- In most surveys, the items recorded with more details for the diary items
- than for the recall items (the types of phones, clothes purchased by the
- consumers are hardly recorded in the surveys for example).
- Viewing the diary data at a higher (aggregated) level - i.e.
+The aggregation into commodities also allows us as an intermediate step
+ in merging data from recall and diary methods.
+ As items are often recorded with more details for the diary items than
+ for the recall items (the types of phones, clothes purchased by the consumers
+ are hardly recorded in the surveys for example), viewing diary data at
+ a higher (aggregated) level - i.e.
  at a coarser granularity that matches that of the recall methods - allows
  us to have a combined view of data from recall and diary methods.
-\end_layout
-
-\begin_layout Standard
-Thus the price-based aggregation in this second AIDS variant - which we
- have adapted to our requirements - allows us to have a discussion on quality
- that was somewhat adhoc with an item-wise approach of the previous variant.
- The inclusion of assets and the expenditure data from recall methods on
- household-transportation further helps us explain how the expenditure on
- quality differs across various commodity groups within the population.
-\end_layout
-
-\begin_layout Subsubsection
-Variables in Use
+ Further, the inclusion of assets and the expenditure data from recall methods
+ on household-transportation further helps us explain how the expenditure
+ on quality differs across various commodity groups within the population.
 \end_layout
 
 \begin_layout Standard
@@ -5827,6 +3965,506 @@ reference "subsec:Econometric-model"
 \end_inset
 
  for details).
+ These are listed in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Control-Variables"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="14" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="center" valignment="top" width="2in">
+<column alignment="left" valignment="top" width="3.5in">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Control
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variable Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $log(x_{t})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+ln_tot_exp
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+logarithm of per-head total expenditure 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ per household 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+lp
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+consu
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+number of members adjusted by age
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+age
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+age of the household-head
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+all_assets_mtm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+educ_rank
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ 
+\family typewriter
+expensiveregion
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+transport_assets_mtm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+electric_assets_mtm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+has_electric
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+q
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+qV
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Control-Variables"
+
+\end_inset
+
+Control Variables
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6019,21 +4657,15 @@ ref{resultsAllassets}
 
 \end_inset
 
- confirm many of the findings from the itemwise-probit but also suggest
- the relevance of asset ownership in the demand for non-durable items -
- their quality in particular.
+ suggest the relevance of asset ownership in the demand for non-durable
+ items - their quality in particular.
  
 \end_layout
 
-\begin_layout Subsubsection
-Results
-\end_layout
-
 \begin_layout Standard
-As would be amenable to a permanent income approach, the consumer habits
- do seem to be influenced by the financial standing of the consumer that
- we have attempted to gauge with the occupation rank and assets owned by
- the consumers.
+The consumer habits do seem to be influenced by the financial standing of
+ the consumer that we have attempted to gauge with the occupation rank and
+ assets owned by the consumers.
  The life-style differences that we observe in non-durable consumption -
  with respect to the quality of items (indicated with variables starting
  with 
@@ -6043,12 +4675,8 @@ qV
 -) do seem associated with household characteristics related to the long-term
  economic standing (and particularly on whether they use electricity or
  not).
- 
-\end_layout
-
-\begin_layout Standard
-To be specific, it is worth differentiating between the effect that ownership
- of assets has on quality vs the effect of total expenditure
+ Here, it is worth differentiating between the effect that ownership of
+ assets has on quality vs the effect of total expenditure
 \begin_inset Foot
 status open
 
@@ -7637,8 +6265,8 @@ end{table}
 
 \end_layout
 
-\begin_layout Subsection
-Discussion
+\begin_layout Section
+Conclusions
 \end_layout
 
 \begin_layout Standard
@@ -9833,13 +8461,86 @@ newpage
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
 
-\size normal
-APPENDIX I
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/lsms/allnatprices.png
+	width 5in
+	height 5.5in
+	rotateAngle 90
+	rotateOrigin center
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LSMSMarketPrices"
+
+\end_inset
+
+Market Prices recorded in 2008, 2010, 2012 and 2014 surveys
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{
+\backslash
+centering{APPENDIX I}} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
 Historical developments in sub-Saharan Africa 
 \begin_inset CommandInset label
 LatexCommand label
@@ -10098,38 +8799,32 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement h
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/lsms/allnatprices.png
-	width 5in
-	height 5.5in
-	rotateAngle 90
-	rotateOrigin center
+
+
+\backslash
+newpage
+\end_layout
 
 \end_inset
 
 
 \end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
 
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:LSMSMarketPrices"
 
-\end_inset
-
-Market Prices recorded in 2008, 2010, 2012 and 2014 surveys
+\backslash
+section*{
+\backslash
+centering{APPENDIX II}} 
 \end_layout
 
 \end_inset
@@ -10137,16 +8832,7 @@ Market Prices recorded in 2008, 2010, 2012 and 2014 surveys
 
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-APPENDIX II
-\end_layout
-
-\begin_layout Subsection
+\begin_layout Subsection*
 \paragraph_spacing single
 Steps in Preparing Data 
 \end_layout
@@ -10538,6 +9224,1783 @@ ts were made for the classification of non-durable consumption into the
 on of a factor of 12) - but instead an assumption on the average life of
  the item being repaired or maintained was considered to perform the extrapolati
 on to the annual expenditure.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{
+\backslash
+centering{APPENDIX III}} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Selection Method
+\end_layout
+
+\begin_layout Standard
+The dependent variable in the probit is an indicator variable which is unity
+ when the item is consumed and zero otherwise.
+ The control variables used in the first-stage probit are the prices of
+ the item and market-characteristics (region etc.
+ - see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_probit"
+
+\end_inset
+
+) .
+ The inverse-mills ratio calculated from the probit (as explained with the
+ Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:invmills"
+
+\end_inset
+
+ - see Heien-Wessells 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+literal "true"
+
+\end_inset
+
+) is in turn used as an instrument in the AIDS regressions of the second
+ part (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_aids"
+
+\end_inset
+
+).
+ Notice that the instrument is calculated for every household and every
+ item - and is part of the additivity constraint that is used for estimation.
+\end_layout
+
+\begin_layout Standard
+The constraints of symmetry, additivity and homogeneity are essential in
+ facilitating a discussion of the effect of cross-elasticities on demand
+ (measured as budget shares).
+ The results thus obtained with a seemingly-unrelated regression (SUR) after
+ imposing the constraints are presented in the Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsProbit1}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsProbit2}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsProbit3}
+\end_layout
+
+\end_inset
+
+.
+ The own-price and cross-price elasticities presented in the results provide
+ us an overview of the demand across rare and commonly consumed items.
+ 
+\end_layout
+
+\begin_layout Standard
+The control variables used are 
+\family typewriter
+consu
+\family default
+ (family size adjusted based on the age of the member), 
+\family typewriter
+educrank
+\family default
+ (education rank interpreted from the highest education level of head of
+ every household), 
+\family typewriter
+invmills
+\family default
+ (inverse-mills ratio as explained in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Econometric-model"
+
+\end_inset
+
+), 
+\family typewriter
+lntotexp
+\family default
+ (log of the total expenditure) and 
+\family typewriter
+occupationrank
+\family default
+ (occupation rank - an ordered variable derived from the occupation of the
+ head of the household).
+ Notice that we use occupation rank as the proxy of income (for which the
+ survey data is quite sparse) along side with the total expenditure.
+ The other control variables starting with lp- are logarithm of price correspond
+ing to every commodity in the second-stage AIDS regression (see Equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_aids"
+
+\end_inset
+
+).
+ The columns in the table (names starting with q) indicate the budget shares
+ that are used as the dependent variables in the second-stage regression
+ (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_aids"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+We base our interpretation on both the the statistical significance (value
+ of 
+\begin_inset Formula $z$
+\end_inset
+
+) and the economic significance (i.e.
+ the size of the coefficient) of the control variables in the results.
+ Observing the signs of the coefficients, we see that mangoes (less consumed)
+ and rice (commonly consumed) are substitutes while fish is a complement
+ to cassava-flour ([qfish_seafood]lpcassava_flour <0 etc.) rice.
+ Further, fresh milk is a complement to beef, beer, cassava_flour ([qcassava_flo
+ur]lpfresh_milk = -0.001) and greens but a substitute to bread and mangoes.
+\end_layout
+
+\begin_layout Standard
+The item-wise analysis suggests a split between the items that are consumed
+ in rural households (where the greens and fruits seem more abundant) against
+ those consumed in urban households (where beef, charcoal and beer are more
+ readily available).
+ The elasticities against income and education also show that the items
+ available in the industrialised regions of the Tanzania seem to have positive
+ elasticities for income and education rank whereas the items of agrarian
+ production seem to matter less to the highly educated, middle-age populations
+ huddled in the urban areas.
+ While many of such insights could be offered with a simpler cross-sectional
+ analysis using a regression of expenditure on the item against the permanent-in
+come or total expenditure by the household etc.
+ (an approach that is followed in much of the literature on conspicuous
+ consumption
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZahraIndia,KausSA,CharlesHurstRace"
+literal "true"
+
+\end_inset
+
+), an AIDS formulation is favoured due to two reasons - first it allows
+ us to understand the cross-price effects in a more robust framework and
+ second, it can account for the non-consumption of items.
+ 
+\end_layout
+
+\begin_layout Standard
+Going further with the cross-elasticities analyses, a comparison of how
+ consumers respond to changes in kerosene and electricity prices further
+ confirms the concentrated availability of industrial items.
+ A contrast between the items that are influenced by electricity prices
+ and those that are influenced by kerosene prices demonstrates this split
+ - since the demand for items such as rice, beef is less sensitive to electricit
+y than it is to kerosene.
+ That is to say, it isn't simply that the electricity consumers are more
+ likely to consume the more expensive items (due to their higher incomes)
+ but that a certain items become less relevant in the urban settings or
+ are simply unavailable in the rural settings.
+ We argue that such a segregation of consumer contexts is relevant for a
+ discussion of status-related consumption in the developing countries.
+\end_layout
+
+\begin_layout Standard
+There is more we seek from the consumption data than one item's preference
+ relative to another - as there are limitations to a cross-elasticities
+ analysis.
+ The detailed cross-elasticities are more likely to fluctuate over time
+ and would require us to use a dynamic approach to ascertain model stability
+ (an inertia in choices could be more explicitly modeled to address this).
+ But more importantly, the cross-price elasticities fail to model the functional
+ separation in consumption e.g.
+ the lack of substitutability between energy and food items.
+ For example, the cross-elasticities of kerosene with respect to buns or
+ cassava cannot be interpreted unless one imposes other assumptions on the
+ closely observed consumption patterns (e.g.
+ more buns would means less cooking in the household etc.) or stricter separabili
+ty assumptions (see Deaton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonUnderstandingConsumption"
+literal "true"
+
+\end_inset
+
+ for a discussion on the need to impose such structures).
+ Since we are concerned with the choice of quality exercised by the consumer
+ when faced with multiple varieties of several qualities and price, an aggregate
+d view of the basket seems more appropriate.
+ Such an aggregation ought to be based on a well-defined criteria - which
+ for our current approach is the price of the items as well as the functionality
+ of commodities.
+ The availability of price information between the years 2008 and 2014 prevents
+ the problems that could be faced by other grouping criteria - such as visibilit
+y - the changes to which are not observed over a sufficiently long period
+ of time.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{
+\backslash
+label{resultsProbit1}sureg for all items after the first-stage non-consumption
+ probit (1/3)} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox{
+\backslash
+columnwidth}{!}{
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+begin{tabular}{l*{9}{c}} 
+\backslash
+hline
+\backslash
+hline  & 
+\backslash
+multicolumn{1}{c}{} & 
+\backslash
+multicolumn{1}{c}{(1)} & 
+\backslash
+multicolumn{1}{c}{(2)} & 
+\backslash
+multicolumn{1}{c}{(3)} & 
+\backslash
+multicolumn{1}{c}{(4)} & 
+\backslash
+multicolumn{1}{c}{(5)} & 
+\backslash
+multicolumn{1}{c}{(6)} & 
+\backslash
+multicolumn{1}{c}{(7)} & 
+\backslash
+multicolumn{1}{c}{(8)} 
+\backslash
+
+\backslash
+ & 
+\backslash
+multicolumn{1}{c}{} & 
+\backslash
+multicolumn{1}{c}{qbeef} & 
+\backslash
+multicolumn{1}{c}{qbeer} & 
+\backslash
+multicolumn{1}{c}{qbread} & 
+\backslash
+multicolumn{1}{c}{qbunscakes} & 
+\backslash
+multicolumn{1}{c}{qcassavaflour} & 
+\backslash
+multicolumn{1}{c}{qcassavafresh} & 
+\backslash
+multicolumn{1}{c}{qcharcoal} & 
+\backslash
+multicolumn{1}{c}{qcoconut}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ & age &  0.0005 &  0.0000 &  0.0001 & -0.0002 & -0.0001 &  0.0001 & -0.0002 &
+ -0.0001
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0020$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & cons & -0.3348 & -0.0985 & -0.0514 & -0.0326 &  0.0639 & -0.0334 & -0.0831 &
+ -0.0495
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & consu & -0.0033 & -0.0002 & -0.0001 &  0.0005 &  0.0003 & -0.0001 & -0.0006
+ &  0.0000
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0040$^{**}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7610
+ )
+\backslash
+
+\backslash
+ & educrank &  0.0174 &  0.0018 &  0.0230 & -0.0686 & -0.0127 & -0.0073 & -0.0249
+ & -0.0169
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0600 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & invmills &  0.0001 &  0.0011 &  0.0003 & -0.0032 &  0.0007 &  0.0013 & -0.0005
+ & -0.0007
+\backslash
+
+\backslash
+ &  & ( 0.9140 ) & ( 0.0000$^{***}$ ) & ( 0.0560 ) & ( 0.0000$^{***}$ ) & (
+ 0.0250$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.1260 ) & ( 0.0010$^{**}$ )
+\backslash
+
+\backslash
+ & lntotexp &  0.0285 &  0.0065 &  0.0046 &  0.0073 & -0.0044 &  0.0021 &  0.0114
+ &  0.0056
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lpbeef & -0.0548 & -0.0074 &  0.0161 &  0.0080 &  0.0025 & -0.0015 & -0.0089
+ &  0.0337
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lpbeer & -0.0074 & -0.0023 &  0.0024 & -0.0021 &  0.0019 & -0.0017 &  0.0034
+ & -0.0027
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lpbread &  0.0161 &  0.0024 &  0.0008 & -0.0029 &  0.0071 & -0.0028 &  0.0001
+ &  0.0042
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7670 ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpbunscakes &  0.0080 & -0.0021 & -0.0029 & -0.0118 & -0.0043 &  0.0016 & 
+ 0.0060 & -0.0040
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lpcassavaflour &  0.0025 &  0.0019 &  0.0071 & -0.0043 &  0.0001 & -0.0016
+ &  0.0062 &  0.0032
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.8650 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpcassavafresh & -0.0015 & -0.0017 & -0.0028 &  0.0016 & -0.0016 &  0.0008
+ & -0.0021 & -0.0036
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lpcharcoal & -0.0089 &  0.0034 &  0.0001 &  0.0060 &  0.0062 & -0.0021 &  0.0227
+ &  0.0032
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7670 ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpcoconut &  0.0337 & -0.0027 &  0.0042 & -0.0040 &  0.0032 & -0.0036 &  0.0032
+ & -0.0078
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lpcookingoil & -0.0057 &  0.0009 & -0.0010 &  0.0014 &  0.0005 &  0.0053 &
+ -0.0225 &  0.0055
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0060$^{**}$ ) & ( 0.0020$^{**}$ ) & ( 0.0040$^{**}$
+ ) & ( 0.1230 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpdriedcannedfish &  0.0038 & -0.0016 & -0.0023 &  0.0032 & -0.0070 & -0.0009
+ &  0.0015 & -0.0007
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$
+ )
+\backslash
+
+\backslash
+ & lpelectricity &  0.0006 &  0.0022 & -0.0039 & -0.0028 &  0.0059 & -0.0007 &
+  0.0078 & -0.0056
+\backslash
+
+\backslash
+ &  & ( 0.5150 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0240$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpfishseafood &  0.0051 &  0.0041 &  0.0001 & -0.0039 & -0.0005 &  0.0031 &
+  0.0049 & -0.0099
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7470 ) & ( 0.0000$^{***}$
+ ) & ( 0.0760 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpfreshmilk & -0.0018 & -0.0022 &  0.0043 &  0.0018 & -0.0006 & -0.0028 & 
+ 0.0111 &  0.0083
+\backslash
+
+\backslash
+ &  & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0070$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpgreens & -0.0060 &  0.0010 &  0.0016 & -0.0027 &  0.0022 &  0.0004 & -0.0069
+ &  0.0074
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpkerosene & -0.0140 &  0.0029 & -0.0056 &  0.0033 &  0.0054 & -0.0013 & -0.0027
+ &  0.0020
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lpmangoes & -0.0036 & -0.0017 &  0.0003 & -0.0017 & -0.0006 & -0.0005 &  0.0038
+ &  0.0038
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0260$^{*}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lponion & -0.0052 & -0.0037 &  0.0007 &  0.0042 &  0.0019 &  0.0028 &  0.0028
+ &  0.0008
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0030$^{**}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0030$^{**}$
+ )
+\backslash
+
+\backslash
+ & lppeanuts & -0.0032 & -0.0005 & -0.0025 & -0.0027 & -0.0008 &  0.0006 &  0.0013
+ & -0.0004
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0220$^{*}$
+ )
+\backslash
+
+\backslash
+ & lppotatoes &  0.0092 & -0.0020 & -0.0001 &  0.0009 &  0.0002 &  0.0001 & -0.0030
+ &  0.0017
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.4210 ) & ( 0.0000$^{***}$
+ ) & ( 0.2440 ) & ( 0.2530 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ )
+\backslash
+
+\backslash
+ & lppulses &  0.0000 & -0.0002 & -0.0023 &  0.0020 & -0.0073 & -0.0005 &  0.0041
+ & -0.0057
+\backslash
+
+\backslash
+ &  & ( 0.9880 ) & ( 0.5550 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & (
+ 0.0000$^{***}$ ) & ( 0.0460$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpricehusked &  0.0503 & -0.0013 & -0.0050 &  0.0004 & -0.0092 & -0.0008 &
+ -0.0139 & -0.0080
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0080$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.5770
+ ) & ( 0.0000$^{***}$ ) & ( 0.0390$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpsalt & -0.0081 &  0.0016 & -0.0007 & -0.0013 & -0.0002 &  0.0013 & -0.0022
+ & -0.0009
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.1760 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpsugar & -0.0003 &  0.0094 & -0.0071 &  0.0073 & -0.0045 &  0.0048 & -0.0190
+ & -0.0236
+\backslash
+
+\backslash
+ &  & ( 0.7210 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpsweetpotato & -0.0090 & -0.0005 & -0.0014 &  0.0002 & -0.0004 & -0.0001 &
+  0.0026 & -0.0007
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0020$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.3670
+ ) & ( 0.0270$^{*}$ ) & ( 0.3110 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ )
+\backslash
+
+\backslash
+ & occupationrank & -0.0015 & -0.0003 &  0.0011 &  0.0011 & -0.0005 &  0.0015
+ &  0.0139 &  0.0034
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0020$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{
+\backslash
+label{resultsProbit2}sureg for all items after the first-stage non-consumption
+ probit (2/3)} 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox{
+\backslash
+columnwidth}{!}{
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+begin{tabular}{l*{9}{c}} 
+\backslash
+hline
+\backslash
+hline  & 
+\backslash
+multicolumn{1}{c}{} & 
+\backslash
+multicolumn{1}{c}{(1)} & 
+\backslash
+multicolumn{1}{c}{(2)} & 
+\backslash
+multicolumn{1}{c}{(3)} & 
+\backslash
+multicolumn{1}{c}{(4)} & 
+\backslash
+multicolumn{1}{c}{(5)} & 
+\backslash
+multicolumn{1}{c}{(6)} & 
+\backslash
+multicolumn{1}{c}{(7)} & 
+\backslash
+multicolumn{1}{c}{(8)} 
+\backslash
+
+\backslash
+ & 
+\backslash
+multicolumn{1}{c}{} & 
+\backslash
+multicolumn{1}{c}{qcookingoil} & 
+\backslash
+multicolumn{1}{c}{qdriedcannedfish} & 
+\backslash
+multicolumn{1}{c}{qelectricity} & 
+\backslash
+multicolumn{1}{c}{qfishseafood} & 
+\backslash
+multicolumn{1}{c}{qfreshmilk} & 
+\backslash
+multicolumn{1}{c}{qgreens} & 
+\backslash
+multicolumn{1}{c}{qkerosene} & 
+\backslash
+multicolumn{1}{c}{qmangoes}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ & age & -0.0002 & -0.0002 &  0.0001 &  0.0001 &  0.0000 & -0.0001 &  0.0004 &
+ -0.0001
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & cons &  0.3757 &  0.1711 & -0.1125 &  0.0766 & -0.0623 &  0.0536 &  0.5433 &
+ -0.0182
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & consu &  0.0014 &  0.0014 & -0.0009 &  0.0003 & -0.0004 & -0.0004 &  0.0013
+ & -0.0003
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & educrank &  0.0120 & -0.0022 &  0.0735 &  0.0331 &  0.0215 & -0.0146 &  0.0243
+ &  0.0004
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.2630 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.4690
+ )
+\backslash
+
+\backslash
+ & invmills & -0.0053 & -0.0001 &  0.0067 & -0.0032 &  0.0019 & -0.0009 &  0.0008
+ &  0.0011
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.7150 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0310$^{*}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lntotexp & -0.0217 & -0.0107 &  0.0008 & -0.0027 &  0.0035 &  0.0007 & -0.0335
+ &  0.0010
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpbeef & -0.0057 &  0.0038 &  0.0006 &  0.0051 & -0.0018 & -0.0060 & -0.0140
+ & -0.0036
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.5150 ) & ( 0.0000$^{***}$
+ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpbeer &  0.0009 & -0.0016 &  0.0022 &  0.0041 & -0.0022 &  0.0010 &  0.0029
+ & -0.0017
+\backslash
+
+\backslash
+ &  & ( 0.0060$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpbread & -0.0010 & -0.0023 & -0.0039 &  0.0001 &  0.0043 &  0.0016 & -0.0056
+ &  0.0003
+\backslash
+
+\backslash
+ &  & ( 0.0020$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7470
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0260$^{*}$
+ )
+\backslash
+
+\backslash
+ & lpbunscakes &  0.0014 &  0.0032 & -0.0028 & -0.0039 &  0.0018 & -0.0027 & 
+ 0.0033 & -0.0017
+\backslash
+
+\backslash
+ &  & ( 0.0040$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpcassavaflour &  0.0005 & -0.0070 &  0.0059 & -0.0005 & -0.0006 &  0.0022
+ &  0.0054 & -0.0006
+\backslash
+
+\backslash
+ &  & ( 0.1230 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0760 ) & (
+ 0.0070$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpcassavafresh &  0.0053 & -0.0009 & -0.0007 &  0.0031 & -0.0028 & -0.0004
+ & -0.0013 & -0.0005
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0240$^{*}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpcharcoal & -0.0225 &  0.0015 &  0.0078 &  0.0049 &  0.0111 & -0.0069 & -0.0027
+ &  0.0038
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lpcoconut &  0.0055 & -0.0007 & -0.0056 & -0.0099 &  0.0083 &  0.0074 &  0.0020
+ &  0.0038
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpcookingoil &  0.0136 &  0.0019 & -0.0085 &  0.0084 & -0.0013 & -0.0049 &
+  0.0005 & -0.0043
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0030$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.3900 ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpdriedcannedfish &  0.0019 & -0.0089 &  0.0075 & -0.0111 &  0.0003 &  0.0049
+ &  0.0043 &  0.0024
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.1750 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpelectricity & -0.0085 &  0.0075 &  0.0265 &  0.0054 &  0.0051 & -0.0075 &
+ -0.0066 &  0.0064
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lpfishseafood &  0.0084 & -0.0111 &  0.0054 & -0.0181 &  0.0017 &  0.0017 &
+  0.0020 &  0.0003
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0930
+ )
+\backslash
+
+\backslash
+ & lpfreshmilk & -0.0013 &  0.0003 &  0.0051 &  0.0017 & -0.0046 & -0.0005 & 
+ 0.0043 &  0.0016
+\backslash
+
+\backslash
+ &  & ( 0.0030$^{**}$ ) & ( 0.1750 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0160$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpgreens & -0.0049 &  0.0049 & -0.0075 &  0.0017 & -0.0005 &  0.0004 & -0.0007
+ & -0.0005
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0160$^{*}$ ) & ( 0.0900 ) & ( 0.0300$^{*}$ ) & ( 0.0000$^{***}$ )
+\backslash
+
+\backslash
+ & lpkerosene &  0.0005 &  0.0043 & -0.0066 &  0.0020 &  0.0043 & -0.0007 & -0.0041
+ & -0.0028
+\backslash
+
+\backslash
+ &  & ( 0.3900 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0300$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpmangoes & -0.0043 &  0.0024 &  0.0064 &  0.0003 &  0.0016 & -0.0005 & -0.0028
+ &  0.0018
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0930
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lponion & -0.0112 &  0.0034 &  0.0037 &  0.0028 & -0.0043 & -0.0021 &  0.0001
+ & -0.0015
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.8780 ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lppeanuts & -0.0005 & -0.0010 &  0.0062 & -0.0001 & -0.0039 &  0.0023 & -0.0008
+ &  0.0005
+\backslash
+
+\backslash
+ &  & ( 0.1200 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.5280 ) & (
+ 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lppotatoes & -0.0019 &  0.0016 & -0.0061 &  0.0024 &  0.0009 &  0.0015 &  0.0005
+ & -0.0007
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0290$^{*}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lppulses & -0.0067 & -0.0026 &  0.0098 &  0.0011 & -0.0029 & -0.0047 &  0.0015
+ & -0.0023
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0240$^{*}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0150$^{*}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpricehusked &  0.0102 &  0.0028 & -0.0093 & -0.0029 &  0.0017 &  0.0078 &
+  0.0108 &  0.0046
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0080$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpsalt &  0.0015 & -0.0009 & -0.0010 &  0.0028 & -0.0017 & -0.0023 & -0.0013
+ & -0.0004
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0230$^{*}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpsugar &  0.0213 &  0.0002 & -0.0347 &  0.0006 & -0.0124 &  0.0053 & -0.0038
+ & -0.0054
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.6450 ) & ( 0.0000$^{***}$ ) & ( 0.2340 ) & (
+ 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpsweetpotato & -0.0025 & -0.0009 & -0.0006 &  0.0003 & -0.0021 &  0.0022 &
+  0.0062 &  0.0005
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.1750 ) & ( 0.1180 ) & (
+ 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & occupationrank & -0.0070 & -0.0044 &  0.0037 & -0.0033 &  0.0016 &  0.0007
+ &  0.0030 &  0.0006
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{
+\backslash
+label{resultsProbit3}sureg for all items after the first-stage non-consumption
+ probit (3/3)} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox{
+\backslash
+columnwidth}{!}{
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+begin{tabular}{l*{9}{c}} 
+\backslash
+hline
+\backslash
+hline  & 
+\backslash
+multicolumn{1}{c}{} & 
+\backslash
+multicolumn{1}{c}{(1)} & 
+\backslash
+multicolumn{1}{c}{(2)} & 
+\backslash
+multicolumn{1}{c}{(3)} & 
+\backslash
+multicolumn{1}{c}{(4)} & 
+\backslash
+multicolumn{1}{c}{(5)} & 
+\backslash
+multicolumn{1}{c}{(6)} & 
+\backslash
+multicolumn{1}{c}{(7)} & 
+\backslash
+multicolumn{1}{c}{(8)} 
+\backslash
+
+\backslash
+ & 
+\backslash
+multicolumn{1}{c}{} & 
+\backslash
+multicolumn{1}{c}{qonion} & 
+\backslash
+multicolumn{1}{c}{qpeanuts} & 
+\backslash
+multicolumn{1}{c}{qpotatoes} & 
+\backslash
+multicolumn{1}{c}{qpulses} & 
+\backslash
+multicolumn{1}{c}{qricehusked} & 
+\backslash
+multicolumn{1}{c}{qsalt} & 
+\backslash
+multicolumn{1}{c}{qsugar} & 
+\backslash
+multicolumn{1}{c}{qsweetpotato}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ & age & -0.0001 &  0.0000 & -0.0001 &  0.0001 & -0.0003 &  0.0001 &  0.0002 &
+ -0.0001
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0450$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & cons &  0.3803 & -0.0119 & -0.0409 &  0.0248 & -0.4139 &  0.2239 &  0.1990 &
+  0.0138
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & consu &  0.0002 & -0.0001 & -0.0003 &  0.0012 & -0.0006 &  0.0009 &  0.0015
+ & -0.0001
+\backslash
+
+\backslash
+ &  & ( 0.0010$^{**}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & educrank & -0.0108 & -0.0039 & -0.0007 & -0.0161 & -0.0210 &  0.0177 &  0.0007
+ & -0.0080
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.3210 ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7030 ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & invmills & -0.0075 &  0.0011 &  0.0005 & -0.0030 & -0.0065 &  0.0001 & -0.0042
+ &  0.0011
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.4090 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lntotexp & -0.0195 &  0.0002 &  0.0045 & -0.0017 &  0.0356 & -0.0151 & -0.0040
+ &  0.0009
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0690 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpbeef & -0.0052 & -0.0032 &  0.0092 &  0.0000 &  0.0503 & -0.0081 & -0.0003
+ & -0.0090
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.9880
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.7210 ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpbeer & -0.0037 & -0.0005 & -0.0020 & -0.0002 & -0.0013 &  0.0016 &  0.0094
+ & -0.0005
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.5550
+ ) & ( 0.0080$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0020$^{**}$
+ )
+\backslash
+
+\backslash
+ & lpbread &  0.0007 & -0.0025 & -0.0001 & -0.0023 & -0.0050 & -0.0007 & -0.0071
+ & -0.0014
+\backslash
+
+\backslash
+ &  & ( 0.0030$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.4210 ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpbunscakes &  0.0042 & -0.0027 &  0.0009 &  0.0020 &  0.0004 & -0.0013 & 
+ 0.0073 &  0.0002
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.5770 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.3670 )
+\backslash
+
+\backslash
+ & lpcassavaflour &  0.0019 & -0.0008 &  0.0002 & -0.0073 & -0.0092 & -0.0002
+ & -0.0045 & -0.0004
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.2440 ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.1760 ) & ( 0.0000$^{***}$ ) & ( 0.0270$^{*}$ )
+\backslash
+
+\backslash
+ & lpcassavafresh &  0.0028 &  0.0006 &  0.0001 & -0.0005 & -0.0008 &  0.0013
+ &  0.0048 & -0.0001
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.2530 ) & ( 0.0460$^{*}$
+ ) & ( 0.0390$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.3110 )
+\backslash
+
+\backslash
+ & lpcharcoal &  0.0028 &  0.0013 & -0.0030 &  0.0041 & -0.0139 & -0.0022 & -0.0190
+ &  0.0026
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lpcoconut &  0.0008 & -0.0004 &  0.0017 & -0.0057 & -0.0080 & -0.0009 & -0.0236
+ & -0.0007
+\backslash
+
+\backslash
+ &  & ( 0.0030$^{**}$ ) & ( 0.0220$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpcookingoil & -0.0112 & -0.0005 & -0.0019 & -0.0067 &  0.0102 &  0.0015 &
+  0.0213 & -0.0025
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.1200 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpdriedcannedfish &  0.0034 & -0.0010 &  0.0016 & -0.0026 &  0.0028 & -0.0009
+ &  0.0002 & -0.0009
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.6450 ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpelectricity &  0.0037 &  0.0062 & -0.0061 &  0.0098 & -0.0093 & -0.0010 &
+ -0.0347 & -0.0006
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0230$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.1750
+ )
+\backslash
+
+\backslash
+ & lpfishseafood &  0.0028 & -0.0001 &  0.0024 &  0.0011 & -0.0029 &  0.0028 &
+  0.0006 &  0.0003
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.5280 ) & ( 0.0000$^{***}$ ) & ( 0.0240$^{*}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.2340 ) & ( 0.1180 )
+\backslash
+
+\backslash
+ & lpfreshmilk & -0.0043 & -0.0039 &  0.0009 & -0.0029 &  0.0017 & -0.0017 & -0.0124
+ & -0.0021
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0080$^{**}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpgreens & -0.0021 &  0.0023 &  0.0015 & -0.0047 &  0.0078 & -0.0023 &  0.0053
+ &  0.0022
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lpkerosene &  0.0001 & -0.0008 &  0.0005 &  0.0015 &  0.0108 & -0.0013 & -0.0038
+ &  0.0062
+\backslash
+
+\backslash
+ &  & ( 0.8780 ) & ( 0.0010$^{**}$ ) & ( 0.0290$^{*}$ ) & ( 0.0150$^{*}$ ) &
+ ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpmangoes & -0.0015 &  0.0005 & -0.0007 & -0.0023 &  0.0046 & -0.0004 & -0.0054
+ &  0.0005
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & lponion &  0.0027 & -0.0009 &  0.0005 &  0.0041 &  0.0070 & -0.0002 & -0.0101
+ &  0.0016
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0070$^{**}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.2450 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lppeanuts & -0.0009 & -0.0026 & -0.0004 &  0.0002 & -0.0033 &  0.0016 &  0.0095
+ &  0.0013
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0280$^{*}$ ) & ( 0.6520
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lppotatoes &  0.0005 & -0.0004 & -0.0016 &  0.0011 &  0.0023 & -0.0011 & -0.0039
+ & -0.0021
+\backslash
+
+\backslash
+ &  & ( 0.0070$^{**}$ ) & ( 0.0280$^{*}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lppulses &  0.0041 &  0.0002 &  0.0011 &  0.0108 &  0.0112 & -0.0018 & -0.0056
+ & -0.0034
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.6520 ) & ( 0.0010$^{**}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpricehusked &  0.0070 & -0.0033 &  0.0023 &  0.0112 & -0.0654 &  0.0070 &
+ -0.0005 &  0.0034
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.6630 ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpsalt & -0.0002 &  0.0016 & -0.0011 & -0.0018 &  0.0070 &  0.0011 &  0.0053
+ &  0.0021
+\backslash
+
+\backslash
+ &  & ( 0.2450 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpsugar & -0.0101 &  0.0095 & -0.0039 & -0.0056 & -0.0005 &  0.0053 &  0.0625
+ &  0.0047
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.6630 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$
+ )
+\backslash
+
+\backslash
+ & lpsweetpotato &  0.0016 &  0.0013 & -0.0021 & -0.0034 &  0.0034 &  0.0021 &
+  0.0047 & -0.0014
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}
+$ )
+\backslash
+
+\backslash
+ & occupationrank & -0.0023 & -0.0009 &  0.0000 & -0.0035 &  0.0000 &  0.0003
+ & -0.0076 & -0.0003
+\backslash
+
+\backslash
+ &  & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.5270 ) & ( 0.0000$^{***}$
+ ) & ( 0.9600 ) & ( 0.0000$^{***}$ ) & ( 0.0000$^{***}$ ) & ( 0.0010$^{**}$
+ )
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{2}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
