@@ -14,12 +14,16 @@
 \hbadness=10000
 \end_preamble
 \use_default_options true
+\begin_modules
+theorems-ams
+theorems-ams-extended
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "tgtermes" "Hoefler Text"
+\font_roman "libertine" "Hoefler Text"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -520,8 +524,17 @@ name "sec:LiteratureSurvey"
 \end_layout
 
 \begin_layout Standard
-[Houthakker - Engel Method] The analysis of quality elasticities has been
- of interest at least as since Houthakker 
+[Houthakker - Engel Method] (see for example the Houthakker model
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerQuality1952"
+literal "true"
+
+\end_inset
+
+ using an explicit price of quality).
+ The analysis of quality elasticities has been of interest at least as since
+ Houthakker 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HouthakkerFamilySurvey"
@@ -1084,11 +1097,11 @@ name "sec:Model"
 \begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Separability-and-Quality"
+name "subsec:QualityMeasure"
 
 \end_inset
 
-Separability and Visible Consumption
+Measuring price-based quality
 \end_layout
 
 \begin_layout Standard
@@ -1276,9 +1289,9 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-As we don't use the futility assumption, we do not assume that the high
- quality items from different commodity groups are not meant to be interchangeab
-le with each other as such.
+[Limitations] As we don't use the futility assumption, we do not assume
+ that the high quality items from different commodity groups are not meant
+ to be interchangeable with each other as such.
  The set of high-quality items in commodities thus do not need to be the
  same as the set of visible items in a consumer basket.
  While expensive meats and beverages may not be as visible as cosmetics,
@@ -1296,25 +1309,12 @@ high-quality items are thus improper.
  into an overall quality.
  Therefore, our approach only gauges how consumers put some weight on higher-qua
 lity within each commodity group without examining how quality may be budgeted
- for by the consumer within the non-overallping commodity groups.
+ for by the consumer within the non-overlapping commodity groups.
  In other words, no attempts are made to understand how consumers may purchase
  a desired amount of (overall) quality.
  It is the variation in high-quality consumption across the population that
  motivates our analysis of the status-related consumption in the context
  of the developing economies.
- 
-\end_layout
-
-\begin_layout Subsection
-Price-based quality
-\end_layout
-
-\begin_layout Standard
-Assumption : Prie structure
-\end_layout
-
-\begin_layout Standard
-Simplification: Only assets
 \end_layout
 
 \begin_layout Standard
@@ -1357,9 +1357,57 @@ As quality cannot be aggregated from across commodity groups, the econometric
  The econometric methods then attempt to view both how the demand for quality
  is distributed across the population and how it varies in response to change
  in prices.
+ The use of a commodity aggregate for quality means imposes the restriction
+ of a constant relative price structure (
+\series bold
+Hicks aggregation restriction
+\series default
+).
+ The market prices (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LSMSMarketPrices"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) are used to ensure that this condition is met.
 \end_layout
 
 \begin_layout Standard
+[Aggregate quality computation] In the econometric model we use, a quality
+ metric is associated to the aggregate of goods seen as a commodity (see
+ Houthakker 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerFamilySurvey"
+literal "true"
+
+\end_inset
+
+, Nelson
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+literal "true"
+
+\end_inset
+
+and Deaton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation,DeatonEconConsumer"
+literal "true"
+
+\end_inset
+
+ for the related formulations)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
 Notice that no quality-related inferences can be drawn without an explicit
  measure of quality in the utility.
  Consider for example the commonly used Stone-Geary utility for all commodity
@@ -1414,33 +1462,9 @@ Notice that no quality-related inferences can be drawn without an explicit
  item.
 \end_layout
 
-\begin_layout Standard
-In the econometric model we use, a quality metric is associated to the aggregate
- of goods seen as a commodity (see Houthakker 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HouthakkerFamilySurvey"
-literal "true"
-
 \end_inset
 
-, Nelson
-\begin_inset CommandInset citation
-LatexCommand cite
-key "NelsonQualityQuantity"
-literal "true"
-
-\end_inset
-
-and Deaton
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonQualityQuantityVariation,DeatonEconConsumer"
-literal "true"
-
-\end_inset
-
- for the related formulations).
+.
  Thus, the quantities consumed for two (or more) items within a commodity
  (e.g.
  tea and carbonated drinks under beverages that can be interchanged by the
@@ -1470,194 +1494,59 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-It follows that in the above aggregation, the price of quality (along with
- the quality metric) should also appear in the model for consumer choice
- (see for example the Houthakker model
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HouthakkerQuality1952"
-literal "true"
+[Simplification] To identify the commodity aggeregate over which the quality
+ measure is aggregate over, we also make use of a simplication so that not
+ all variation in quality is considered of importance to the consumer optimising
+ status and needs.
+ More specifically, the varition quality is ignored for a particular commodity
+ category if the there are long-term assets that dominate the effect on
+ status.
+\end_layout
+
+\begin_layout Assumption
+\begin_inset CommandInset label
+LatexCommand label
+name "assu:AssetDomination"
 
 \end_inset
 
- using an explicit price of quality).
- Further, the demand must also follow the Hick's commodity theorem.
- This is made possible - indirectly - with a constant relative price structure
- of the variants of a commodity.
- The constant relative structure is a condition necessary for aggregation
- and allows the price of quality to be interpreted in terms of a composite
- price 
-\begin_inset Formula $P_{G}$
-\end_inset
-
- for the commodity aggregate 
-\begin_inset Formula $G$
-\end_inset
-
- and the price-structure 
-\begin_inset Formula $p_{G}^{*}$
-\end_inset
-
-.
- Thus, if 
-\begin_inset Formula $E_{G}$
-\end_inset
-
- represents the expenditure on group 
-\begin_inset Formula $G$
-\end_inset
-
-, then using a constant relative price-structure allows us to write the
- demand function 
-\begin_inset Formula $g(E_{G},p_{G})$
-\end_inset
-
- as :
+Both quantity and quality in a commodity aggregate matter to the consumer
+ iff there are no long-term assets associated with the aggregate.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-g(E_{G},p_{G}) & \equiv g(\frac{E_{G}}{P_{G}},p_{G}^{*})\label{eq:demand_function_quality}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Thus, instead of viewing demands for {wheat, rice, corn, eggs, beef, chicken,
- fish, charcoal, kerosene, electricity} - for example - with a list of 10
- functions, one can choose to view the demands for commodities that encompass
- the 10 goods - {carb,protein and energy} with 3 functions corresponding
- to each commodity group.
- The econometric methods can thus be developed to measure the elasticities
- of the quality and the quantity consumed for each of the three commodity
- groups.
- Notice that the AIDS method requires the constraints on the symmetry of
- cross-elasticities, homogeneity and non-negativity are relevant for both
- the cases (10 items or 3 commodities).
- Since the constant-relative price structure prevents the need for cross-price
- derivatives related to quality in Equation 
+For example, having a car and hiring a limousine taxi in the transport commodity
+ category may both carry some status benefit to the consumer.
+ The assumption 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:demand_function_quality"
+reference "assu:AssetDomination"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-, we do not require an explicit price-of-quality in the cost-function (or
- the budget share regressions).
- The cross-price-derivatives in discussion are therefore with respect to
- 
-\begin_inset Formula $P_{G\in\mathscr{{G}}}$
-\end_inset
-
- where 
-\begin_inset Formula $\mathscr{{G}}$
-\end_inset
-
- is the collection of all commodities (e.g.
- {food, energy, household, transport} in the LSMS Tanzania data).
-\end_layout
-
-\begin_layout Standard
-Apart from the prices of items, which we view in terms of a relative price
- structure and a base price (
-\begin_inset Formula $P_{G}$
-\end_inset
-
-), the quality demanded by the representative consumer in the model is sensitive
- to needs of the consumer and her household characteristics.
- Here, what is implied by needs are the means of subsistence that are standardis
-ed to be the same for a wealthy and a destitute household.
- No qualitative distinction is drawn - for example - between the status
- needs of a rich and a poor family (through their disparate educational
- needs etc.).
- The notion of status in the model comes only from the quality and household
- characteristics that are associated with the common need for the rich and
- poor households - who all are meant to maintain high quality as possible
- across all commodity groups - each of which are consumed by every consumer
- in the population.
- In other words, only the quality and security associated with these common
- needs differ amongst population and the higher quality/security is better
- afforded with higher income (or other relevant household characteristics
- relevant in the population).
- The first assumption that helps parametrise factors affecting quality is
- therefore that the essential needs of the family unit (member) are the
- same for all consumers.
- The second assumption which makes the consumer utility a non-decreasing
- function of this desired quality metric - is that all consumers hope to
- increase either their long-term standing (household characteristics) or
- quality (ENDC) at all times.
- 
-\end_layout
-
-\begin_layout Standard
-[] In the environment of stable prices, it follows that the distribution
- of ENDC weights - which the quality metric measures - would be different
- for a richer household that has access to higher income, better markets
- (which higher quality goods are available) and more assets (whose upkeep
- and maintenance costs cause the demand for quality to be different from
- someone either does not own or have given up on hopes of acquiring assets
- or addresses).
- Within the group of consumers with the same long-term standing, the quality
- essentially competes with the needs of the consumer.
- Due to the very definition of needs, the consumer cannot sacrifice needs
- in order to purchase quality and thus when prices are stable, a rise in
- quality must come either from an increase in income or from change in circumsta
-nces.
- Likewise, a drop in quality must be due to change in circumstances(socio-econom
-ic standing which we assess with a vector of occupation, education, region/local
-ity/neighborhood/assets) or addressing of more urgent needs.
- Consnider what happends when the represenative consume undergoes a change
- in long-term circumstances.
- With such a change, e.g.
- purchase of a long-term asset of educational or occupational attainment,
- the consumers long-term habits of non-durable consumption quality would
- also undergo a change.
- It is worth highlighting that the difference between basic needs and status-nee
-ds is not a concern for the model - which only observes the differences
- between high-price and low-price consumption in the same group - assuming
- that the essential needs are independent of the wealth of the consumer.
- In other words, all non-essential needs are interpreted solely in terms
- of quality and the socio-economic standing.
- The constant-price structure assumption along with allows the price elasticitie
-s with respect to the base-price 
-\begin_inset Formula $P_{G}$
-\end_inset
-
- to enter into the econometric equations side-by-side with the needs and
- household/personal characteristics.
-\end_layout
-
-\begin_layout Standard
-[
-\series bold
-QUALITY in ASSETS is just ASSETS
-\series default
-] A simplication of the model is by us ignoring the quality variation in
- some commodity groups - due to the long-term assets being more important.
- As such both having a car and hiring a limousine taxi could carry some
- status benefit to the consumer (as both are in the transport commodity
- group) but our simplication considers a simpler context when only either
- one of i) non-durable consumption and ii) long-term assets dominate a commodity
- group.
- So in the tranport commodity group, only one i) car ownership and ii) expensive
--taxi is meant to matter to the consumer.
+ implies a simplified context where only one of i) non-durable consumption
+ and ii) long-term assets in the commodity group matter to the consumer.
+ Therefore, in the tranport commodity group, only either of i) car ownership
+ or ii) expensive-taxi-rides matter to the consumer.
  In the consumption data for Tanzania, the empirical implications of this
- assumption are therefore not as serious and allow us to focus on quality
- variation only for commodities where assets do not play a role.
- The assumption that no assets are relevant for food and energy categories
- given the non-durable nature of their consumption.
- Further, the quality variation is immaterial in the data for non-durable
- consumption in transport and household categories.
- Thus if every commodity group is either dominated by long-term asset or
- it isn't, there are only two ways a consumer can spend on quality - either
- by switching between the variants of a composite commodity (choosing higher
- or lower quality of a composite commodity where long-term assets do not
- exist) or spending more on an elementary commodity (where long-term assets
- dominate and quality variation doesn't exist) 
+ assumption are not serious and allow us to focus on quality variation only
+ for commodities where assets do not play a role.
+ More specifically, out of the four commodity aggregates energy, transport
+ household and those associated with food (fruits-vegetables, non-fresh
+ itemsetc.), only quality is considered for energy and food aggregates categories
+ due the non-durable nature of their consumption.
+ On the other hand, only quantity (i.e.
+ the expenditure) is considered of importance for non-durable consumption
+ in transport and household categories.
+ As long as one may classify every commodity group as either dominated by
+ long-term asset or not, there are only two ways a consumer can spend on
+ quality - either by switching between the variants of a composite commodity
+ (choosing higher or lower quality of a composite commodity where long-term
+ assets do not exist) or spending more on an elementary commodity (where
+ long-term assets dominate and quality variation doesn't exist) 
 \begin_inset Foot
 status open
 
@@ -1674,15 +1563,141 @@ Recall that an elementary commodity is one where no quality variation is
 \end_inset
 
 .
- The implication of the assumption is only that both elementary consumption
- and composite commodity consumption - compete for the consumer's money.
- This offers a significant reduction in complexity for the empirical analysis.
+ In other words, both elementary consumption and composite commodity consumption
+ compete for the consumer's money.
 \end_layout
 
 \begin_layout Standard
-With the segmentation of habits is a key purpose of our analysis, we use
- a simple metric as the relative-price-weighted sum of expenditure per physical
- unit within a commodity (which is argued for in Nelson 
+[Aggregate quality ] For the elasticities for commodity aggregates quality
+ to make sense, the demand must follow the
+\series bold
+ Hick's commodity 
+\series default
+theorem.
+ This is made possible with a constant relative price structure assumption
+ for the variants (items) of (within) a commodity.
+\end_layout
+
+\begin_layout Assumption
+\begin_inset CommandInset label
+LatexCommand label
+name "assu:Hicks"
+
+\end_inset
+
+The prices of items within a commodity aggregate have a constant relative
+ structure.
+\end_layout
+
+\begin_layout Standard
+The Assumption 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "assu:Hicks"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ allows the price of quality to be interpreted in terms of a composite price
+ 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ for the commodity aggregate 
+\begin_inset Formula $G$
+\end_inset
+
+ and the price-structure 
+\begin_inset Formula $p_{G}^{*}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $E_{G}$
+\end_inset
+
+ represents the expenditure on group 
+\begin_inset Formula $G$
+\end_inset
+
+, then using a constant relative price-structure allows us to write the
+ commodity-aggregate specific demand function 
+\begin_inset Formula $g(E_{G},p_{G})$
+\end_inset
+
+ in terms of the price-structure 
+\begin_inset Formula $p_{G}^{*}$
+\end_inset
+
+ as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+g(E_{G},p_{G}) & \equiv g(\frac{E_{G}}{P_{G}},p_{G}^{*})=g(Q_{G},p_{G}^{*})\label{eq:demand_function_quality}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There may be different ways of selecting an appropriate 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ (see Nelson
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+literal "false"
+
+\end_inset
+
+ and Deaton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation"
+literal "false"
+
+\end_inset
+
+ for examples), but the key benefit from the formulation in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:demand_function_quality"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is that it allows us to consider the a quantity 
+\begin_inset Formula $Q_{G}\equiv\frac{E_{G}}{P_{G}}$
+\end_inset
+
+ and a corresponding quality variable 
+\begin_inset Formula $V_{G}$
+\end_inset
+
+.
+ Instead of viewing demands for {wheat, rice, corn, eggs, beef, chicken,
+ fish, charcoal, kerosene, electricity} - for example - with a list of 10
+ functions, one can choose to view the demands for commodities that encompass
+ the 10 goods - {carb, protein and energy} with 3 functions corresponding
+ to each commodity group.
+ The the elasticities of the quality and the quantity consumed for each
+ of the three commodity groups can be used to interpret the demand for quality
+ across the commodity aggregates.
+ 
+\end_layout
+
+\begin_layout Standard
+[Quality metric and Nelson] Following Nelson
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity"
@@ -1690,13 +1705,61 @@ literal "true"
 
 \end_inset
 
-).
- Given a group 
+, we use a simple metric as the relative-price-weighted sum of expenditure
+ per physical unit within a commodity based on a minimum price in the commodity
+ aggregate items as the base-price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+.
+ Nelson's rejection of the use of the sum of physical quantities 
+\begin_inset Formula $q_{G}=\sum_{i\in G}q_{i}$
+\end_inset
+
+ as 
+\begin_inset Formula $Q_{G}$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:demand_function_quality"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is based on the argument that 
+\begin_inset Formula $Q_{G}=q_{G}$
+\end_inset
+
+ can occur only if the quality effects are absent since 
+\begin_inset Formula $Q_{G}=q_{G}\Rightarrow\frac{E_{G}}{P_{G}}=\frac{E_{G}}{U_{G}}$
+\end_inset
+
+
+\begin_inset Formula $\Rightarrow P_{G}=U_{G}=P_{G}\nu_{G}$
+\end_inset
+
+ (unit quantity is interpreted as 
+\begin_inset Formula $U_{G}=\frac{E_{G}}{q_{G}}$
+\end_inset
+
+ ).
+ For the commodity aggregate 
 \begin_inset Formula $G$
 \end_inset
 
- when the quantities consumed are observed, the metric is simply a sum of
- quantity 
+ so that the quantities consumed 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+ are observed, the quality metric 
+\begin_inset Formula $V_{G}$
+\end_inset
+
+ is simply a sum of quantity 
 \begin_inset Formula $q_{i,G}$
 \end_inset
 
@@ -1710,7 +1773,7 @@ literal "true"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-\nu_{G} & =\sum_{i\in G}(\frac{q_{i,G}p_{i,G}^{*}}{q_{G}})\label{eq:quality_def}
+V_{G} & =\sum_{i\in G}(\frac{q_{i,G}p_{i,G}^{*}}{q_{G}})\label{eq:quality_def}
 \end{alignat}
 
 \end_inset
@@ -1778,7 +1841,7 @@ literal "true"
 \end_inset
 
  is being considered.
- In other words, 
+ 
 \begin_inset Formula $p_{i,G}^{*}$
 \end_inset
 
@@ -1854,50 +1917,7 @@ literal "true"
 
 \end_inset
 
- for the technical details of this argument)
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-If the sum of physical quantities is denoted as 
-\begin_inset Formula $q_{G}=\sum_{i\in G}q_{i}$
-\end_inset
-
-then 
-\begin_inset Formula $Q_{G}=\frac{E_{G}}{P_{G}}$
-\end_inset
-
- where 
-\begin_inset Formula $E_{G}$
-\end_inset
-
- is the expenditure and 
-\begin_inset Formula $P_{G}$
-\end_inset
-
- is the price-index.
- The core of Nelson's argument is that 
-\begin_inset Formula $Q_{G}=q_{G}$
-\end_inset
-
- only if quality effects are absent since 
-\begin_inset Formula $Q_{G}=q_{G}\Rightarrow\frac{E_{G}}{P_{G}}=\frac{E_{G}}{V_{G}}$
-\end_inset
-
-
-\begin_inset Formula $\Rightarrow P_{G}=V_{G}=P_{G}\nu_{G}$
-\end_inset
-
- (unit quantity is interpreted as 
-\begin_inset Formula $V_{G}=\frac{E_{G}}{q_{G}}$
-\end_inset
-
- ).
-\end_layout
-
-\end_inset
-
-.
+ for the technical details of this argument).
  A quality-adjusted quantity is a more appropriate formulation for this
  purpose.
  Since quality is to be priced in the market, we can consider this price-structu
@@ -1909,16 +1929,22 @@ red weighted quantity as the quality-adjusted quantity and express the pair
 \begin_inset Formula $(10,5(=2\times1.5+1\times2))$
 \end_inset
 
- and 
+ , 
 \begin_inset Formula $(0,1.14=\frac{4}{1.5+2})$
 \end_inset
 
- - where the minimum of 
+ .
+ Here, 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ is simply the minimum of 
 \begin_inset Formula $20,10$
 \end_inset
 
- is used as 
-\begin_inset Formula $P_{G}(=10)$
+ i.e.
+ 
+\begin_inset Formula $10$
 \end_inset
 
  and the price-structure 
@@ -1926,127 +1952,676 @@ red weighted quantity as the quality-adjusted quantity and express the pair
 \end_inset
 
  is (2,1) for {lamb,chicken}.
- In a certain way, the price of composite quality can be viewed as exactly
- zero since the total expenditure is already accounted for in the composite
- good's consumption i.e.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="center" valignment="top" width="0.7in">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+Item
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+Prices
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+Quantity
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lamb 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p_{1}=$
+\end_inset
+
+20£
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.5
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Chicken 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p_{2}$
+\end_inset
+
+=10£
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="center" valignment="top" width="0.5in">
+<column alignment="center" valignment="top" width="1.5in">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+Aggregate
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+\begin_inset Formula $P_{protein}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+Measure
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quantity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $5(=2\cdot1.5+1\cdot2)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quality
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.43(=\frac{5}{1.5+2})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Quality Measurement in Illus.
+ 1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The price of composite quality is undefined as the total expenditure is
+ accounted for with the composite good's consumption i.e.
  10
-\begin_inset Formula $\times4=40$
+\begin_inset Formula $\times5=40$
 \end_inset
 
 .
- If the quantities consumed were slightly different for another consumer
- e.g.
+ Comparing the 
+\begin_inset Formula $V_{protein}=1.43$
+\end_inset
+
+ with the quality for another consumer as whose prices and quantities are
  
 \begin_inset Formula $\{(20,0.5),(10,3)\}$
 \end_inset
 
- then too 
-\begin_inset Formula $(E=P_{G}Q_{G}=\sum_{G}p_{i}q_{i}=40)$
+ respectively for lamb and chine, we have 
+\begin_inset Formula $E_{G}=P_{G}Q_{G}=\sum_{G}p_{i}q_{i}=40$
 \end_inset
 
- and we have the latter pair interpreted as
+.
+ As shown in the table below, the quantity and quality are 
 \begin_inset Formula $(10,4(=2\times0.5+1\times3))$
 \end_inset
 
  and 
-\begin_inset Formula $(0,1=\frac{4}{4})$
+\begin_inset Formula $(0,1.14=\frac{4}{3.5})$
 \end_inset
 
-.
- It is easy to see that the quality is lower for the latter case even though
- the physical quantity is the same.
+ respectively.
+ The quality is lower for the latter case even though the physical quantity
+ is the same.
  The quality adjusted quantity accounts for the total expenditure and as
  such there is no price needed for the quality value calculated in the above
  fashion.
- Even though quality is treated as a separate good, the use of a quality-adjuste
-d quantity instead of the physical quantity gives us a clearer view of the
- composite price of the commodity
-\begin_inset Foot
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float table
+placement H
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-This measure of quality is slightly different from Deaton's approach 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonQualityQuantityVariation"
-literal "true"
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="center" valignment="top" width="0.7in">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+Item
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+Prices
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+Quantity
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lamb
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p_{1}=$
+\end_inset
+
+20£
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.5
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Chicken
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p_{2}$
+\end_inset
+
+=10£
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
 
 \end_inset
 
- which uses the sum of physical quantities.
+
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="center" valignment="top" width="0.5in">
+<column alignment="center" valignment="top" width="1.5in">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+Aggregate
 \end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+\begin_inset Formula $P_{protein}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+Measure
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quantity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4(=2\cdot0.5+1\cdot3)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quality
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.14(=\frac{4}{3.5})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Quality Measurement in Illus.
+ 2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+[Econometric Goals - Needs the same] Apart from the prices of items, which
+ we view in terms of a relative price structure and a base price (
+\begin_inset Formula $P_{G}$
+\end_inset
+
+), the quality demanded by the representative consumer in the model is sensitive
+ to needs of the consumer and her household characteristics.
+ Here, what is implied by needs are the means of subsistence that are standardis
+ed to be the same for a wealthy and a destitute household.
+ No qualitative distinction is drawn - for example - between the status
+ needs of a rich and a poor family (through their disparate educational
+ needs etc.).
+ The notion of status in the model comes only from the quality and household
+ characteristics that are associated with the common need for the rich and
+ poor households - who all are meant to maintain high quality as possible
+ across all commodity groups - each of which are consumed by every consumer
+ in the population.
+ In other words, only the quality and security associated with these common
+ needs differ amongst population and the higher quality/security is better
+ afforded with higher income (or other relevant household characteristics
+ relevant in the population).
+ The first assumption that helps parametrise factors affecting quality is
+ therefore that the essential needs of the family unit (member) are the
+ same for all consumers.
+ The second assumption which makes the consumer utility a non-decreasing
+ function of this desired quality metric - is that all consumers hope to
+ increase either their long-term standing (household characteristics) or
+ quality (ENDC) at all times.
+ 
+\end_layout
+
+\begin_layout Standard
+[] In the environment of stable prices, it follows that the distribution
+ of ENDC weights - which the quality metric measures - would be different
+ for a richer household that has access to higher income, better markets
+ (which higher quality goods are available) and more assets (whose upkeep
+ and maintenance costs cause the demand for quality to be different from
+ someone either does not own or have given up on hopes of acquiring assets
+ or addresses).
+ Within the group of consumers with the same long-term standing, the quality
+ essentially competes with the needs of the consumer.
+ Due to the very definition of needs, the consumer cannot sacrifice needs
+ in order to purchase quality and thus when prices are stable, a rise in
+ quality must come either from an increase in income or from change in circumsta
+nces.
+ Likewise, a drop in quality must be due to change in circumstances(socio-econom
+ic standing which we assess with a vector of occupation, education, region/local
+ity/neighborhood/assets) or addressing of more urgent needs.
+ Consnider what happends when the represenative consume undergoes a change
+ in long-term circumstances.
+ With such a change, e.g.
+ purchase of a long-term asset of educational or occupational attainment,
+ the consumers long-term habits of non-durable consumption quality would
+ also undergo a change.
+ It is worth highlighting that the difference between basic needs and status-nee
+ds is not a concern for the model - which only observes the differences
+ between high-price and low-price consumption in the same group - assuming
+ that the essential needs are independent of the wealth of the consumer.
+ In other words, all non-essential needs are interpreted solely in terms
+ of quality and the socio-economic standing.
+ The constant-price structure assumption along with allows the price elasticitie
+s with respect to the base-price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ to enter into the econometric equations side-by-side with the needs and
+ household/personal characteristics.
+\end_layout
+
+\begin_layout Subsection
+Econometric Method
+\end_layout
+
+\begin_layout Standard
+[Control variables across cateogries] The above quality metric readily lends
+ itself to estimation of income and price elasticities (with respect to
+ base-price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+) across a cross-section of household characteristics relevant for quality.
+ We use the AIDS implementation with the quality-aggregates described in
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:QualityMeasure"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Section
-Empirical Method
-\end_layout
-
-\begin_layout Standard
-The above quality metric readily lends itself to estimation of price derivatives
- (with respect to base-price 
-\begin_inset Formula $P_{G}$
-\end_inset
-
-) related quality and the household characteristics relevant for quality.
- We use AIDS implementation of quality-aggregates.
- The details for these methods have already been provided in the Section
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:LiteratureSurvey"
-
-\end_inset
-
- above.
- We uses the above defined measure of quality ( except for electricity -
- which is simply an indicator variable as discussed in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Discussion"
-
-\end_inset
-
-).
- The ownership of assets (logarithm of the costs of the asset) and the demand
- for items we don't calculate the quality metric for are included.
- These results are discussed subsequently.
- A comparison with the item-wise analysis of the cross-price elasticities
- using a pooled 
-\bar under
-static-AIDS
-\bar default
- corrected for non-consumption (with a probit) as defined in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_probit"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_aids"
-
-\end_inset
-
- is also provided (seeHeien-Wessells 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HeienWessellsAIDSCensored1990"
-literal "true"
-
-\end_inset
-
-) .
+ While the quality measure based on price and quantity is used for food
+ sub-categories - protein (meat, fish), fruits-vegetables, non-fresh food
+ items (dry carbohydrates such as rice, wheat), complements (tea, coffee
+ etc.) and densefoods (dense energy providing food as buns, pasta, flours).
+ The relative price structure of items within these categories does not
+ change significantly over the survey years 2010, 2012 and 2014.
+ For energy, we use the indicator variables specifying whether the consumer
+ uses electricity of not.
+ The ownership of assets for transport and household which appears as the
+ control variable in the AIDS regression is measured with the logarithm
+ of the costs of the asset.
+ Ignoring the quality variation for transport and household expenditure
+ categories means that quality is not estimated for these categories .
 \end_layout
 
 \begin_layout Standard
-In the AIDS equations used for this second 
+[AIDS Method] In the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2054,76 +2629,31 @@ Unrestricted method
 \begin_inset Quotes erd
 \end_inset
 
- variant, we measure quality as described with the Equation 
+ AIDS system of equation we use for estimation of price and income sensitivites
+ for quality (see Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:quality_def"
 
 \end_inset
 
- (Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Econometric-model"
-
-\end_inset
-
-).
- These AIDS equations used are evidently fewer than those in the item-wise
- censored model of the first AIDS variant.
- This is because every commodity aggregate - comprising of several items
- - corresponds to one aggregate quantity/budget equation and a quality metric
- corresponding to the commodity aggregate.
+ , each quality - dependent variable corresponds to one quantity/budget
+ equation and one quality metric equation.
  The aggregation also circumvents the issue of non-consumption since it
- is much less likely for no items to be consumed within a functional commodity
- group (fruits-veg, starch, protein etc.).
- Therefore no correction related to non-consumption is needed in this approach.
-\end_layout
-
-\begin_layout Standard
-Since we assume that a commodity group is either dominated by asset possession
- or it isn't (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Econometric-model"
-
+ is much less likely for no items to be consumed within a commodity group
+ (fruits-veg, protein etc.).
+ No correction related to non-consumption - as used in the Heien-Well method
+ - is needed in this approach.
+ The following are the system of equations corresponding to commodity aggregate
+ (group) 
+\begin_inset Formula $G$
 \end_inset
 
-), the quality variation is only meant to exist in a certain commodity groups.
- Out of the commodity groups - food, energy, household and transportation
- - which we use in the current chapter, we observe quality variation only
- in food and energy - where base-prices derived from the local market prices
- for goods within a commodity are used.
- The expenditure on household and transportation commodity groups - on the
- other hand - are treated as if they were (each) just one commodity i.e.
- no quality differences are observed in the non-durable consumption within
- household commodity group (toilet rolls, clothing etc.) and the transportation
- commodity group.
- Here we use the CPI (base year 2010) for household goods and transportation
- as prices in the respective budget share regressions for household and
- transportation (the way base-prices would be used for food and energy commodity
- groups).
-\end_layout
-
-\begin_layout Standard
-The base-price 
+ where the price 
 \begin_inset Formula $P_{G}$
 \end_inset
 
- for every aggregate 
-\begin_inset Formula $G\in\mathscr{G}$
-\end_inset
-
- (obtained from the price analysis detailed in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:PriceData"
-
-\end_inset
-
-) is simply the minimum price of the goods within the commodity group.
- This serves as price of the commodity whose budget share is set as the
- dependent variable in the following AIDS equations:
+ of the aggregate appears as a control variable set as the dependent variable
 \end_layout
 
 \begin_layout Standard
@@ -2149,12 +2679,31 @@ ln\ V_{G} & =\rho_{2,G}+\sum_{k=1}^{s}\rho_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{2,G
 \end_layout
 
 \begin_layout Standard
-There are 
+In the above Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_lnV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, there are 
 \begin_inset Formula $s$
 \end_inset
 
- demographic variables (including the asset ownership related dummy variables)
- in the above equation.
+ demographic variables (including the asset ownership related dummy variables).
  The composite unit value 
 \begin_inset Formula $V_{G}=P_{G}\nu_{G}$
 \end_inset
@@ -2219,17 +2768,117 @@ additional
 \begin_inset Formula $ln\ V$
 \end_inset
 
- equations are not subject to any additional symmetry restrictions (see
- Appendix for the details of the implementation).
- The usual constraints of adding up, symmetry and non-negativity of Slutsky
- matrix do apply to the above demand equations.
+ equations are not subject to any additional symmetry restrictions - while
+ the usual constraints of adding up, symmetry and non-negativity of Slutsky
+ matrix apply to the equations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+The AIDS method requires the constraints on the symmetry of cross-elasticities,
+ homogeneity and non-negativity are relevant for both the cases (10 items
+ or 3 commodities).
+ Since the constant-relative price structure prevents the need for cross-price
+ derivatives related to quality in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:demand_function_quality"
+
+\end_inset
+
+, we do not require an explicit price-of-quality in the cost-function (or
+ the budget share regressions).
+ The cross-price-derivatives in discussion are therefore with respect to
+ 
+\begin_inset Formula $P_{G\in\mathscr{{G}}}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathscr{{G}}$
+\end_inset
+
+ is the collection of all commodities (e.g.
+ {food, energy, household, transport} in the LSMS Tanzania data).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+[Base Prices] The base-price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ for every aggregate 
+\begin_inset Formula $G\in\mathscr{G}$
+\end_inset
+
+ (obtained from the price analysis detailed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:PriceData"
+
+\end_inset
+
+) in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:base_price_structure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+is simply the minimum price of the goods within the commodity group.
+ Only the locally observed market prices (at the district level) for goods
+ within a commodity aggregate are used for the base-prices derived in Equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:base_price_structure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The expenditure on household and transportation commodity groups - on the
+ other hand - are treated as if they were (each) just one commodity i.e.
+ no quality differences are observed in the non-durable consumption within
+ the commodity group.
+ Therefore, the sum of expenditure clothing, toilet rolls and other houeshold
+ goods would appear as part of the quantity in the AIDS system of equation.
+ Since market -prices are not recorded for these items in the survery, the
+ CPI (base year 2010) for household goods and transportation as prices in
+ the respective budget share regressions for household and transportation.
 \end_layout
 
 \begin_layout Standard
 [QUALITY AGGREGATION] We now discuss the conditions under which the quality
  aggregation should be interpreted and detail the reasons for some choices
  made in the model for quality.
- 
 \end_layout
 
 \begin_layout Standard
@@ -2464,6 +3113,131 @@ reference "subsec:Econometric-model"
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\size normal
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:PriceData"
+
+\end_inset
+
+
+\size default
+Data
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+With recent economic growth and a history of nationalization, Tanzania serves
+ as a typical case-study of consumer markets in the developing sub-Saharan
+ Africa.
+ In more recent times, since the investments from South Africa and Western
+ countries have significantly expanded in the country, the trends of urbanisatio
+n appear clearly in its consumption data.
+ The data used for our studies is from the Living Standard Measurement Study
+ (LSMS) - which is conducted by the World Bank.
+\end_layout
+
+\begin_layout Standard
+The substitution between items has driven the 
+\begin_inset Quotes eld
+\end_inset
+
+functional
+\begin_inset Quotes erd
+\end_inset
+
+ classification of items.
+ A functional category is one where there is a sufficient degree of substitution
+ possible amongst its members.
+ As an example, goat and beef are put under the same group - but not with
+ tea - as there is little sense in substitution between tea and meat.
+ The food category is further divided into sub-categories so that demands
+ within the category can be considered separable in both the functional
+ sense and the price-movement sense (which is the basis of the computation
+ of quality as presented in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Econometric-model"
+
+\end_inset
+
+ ).
+ Due to reasons cited in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:QualityMeasure"
+
+\end_inset
+
+, the items of high quality are not explored as a separate category by themselve
+s.
+ 
+\end_layout
+
+\begin_layout Standard
+LSMS survey uses diary method for food and recall methods for non-food items.
+ While we are interested in how sparsely some items are consumed, we are
+ careful not to interpret the absence of an item in the recall record for
+ a household as the item not being used by the household.
+ This is because not all items in the recall diary are recorded at the same
+ frequency - some items in the survey are recorded as they're recalled from
+ a month before the interview - while others may be recalled from the year
+ before the interview.
+ Similarly, the an interpretation of the differences in the budget share
+ over snapshots (2010, 2012 and 2014) for a particular household and item-
+ cannot be interpreted as a consumption pattern of a household since we
+ may not have the records in the recall diary for all three instances of
+ the survey (2010, 2012 and 2014)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In fact, we find that for cases such as electricity, the survey field for
+ 
+\begin_inset Quotes eld
+\end_inset
+
+main lighting fuel
+\begin_inset Quotes erd
+\end_inset
+
+ seems more reliable for the test of electricity consumption than the last
+ expenditure on electricity.
+ 
+\end_layout
+
+\end_inset
+
+.
+ Such matters can be made worse in cases of expenditure where seasonality
+ (time of the year) is also an important factor.
+ To avoid such issues, therefore, we rely only on the average expenditure
+ by a group of households in a particular region/district rather than interpreti
+ng the changes in consumption over the years of an individual household.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+The survey does not include the data on tribal/social identities of the
+ participants.
+ Other proxies that may be correlated with social identities (e.g.
+ language spoken, regional origin etc.) that are available at the village
+ or equivalent level in the survey are used for the purpose.
+ Other household characteristics we consider of importance are education,
+ urban residence and income levels.
+ Both occupation and education are converted into ordered variables for
+ use in the econometric analysis.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -2541,131 +3315,6 @@ The items sorted according to the mean budget shares
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace bigskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-
-\size normal
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:PriceData"
-
-\end_inset
-
-
-\size default
-Data
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing single
-With recent economic growth and a history of nationalization, Tanzania serves
- as a typical case-study of consumer markets in the developing sub-Saharan
- Africa.
- In more recent times, since the investments from South Africa and Western
- countries have significantly expanded in the country, the trends of urbanisatio
-n appear clearly in its consumption data.
- The data used for our studies is from the Living Standard Measurement Study
- (LSMS) - which is conducted by the World Bank.
-\end_layout
-
-\begin_layout Standard
-The substitution between items has driven the 
-\begin_inset Quotes eld
-\end_inset
-
-functional
-\begin_inset Quotes erd
-\end_inset
-
- classification of items.
- A functional category is one where there is a sufficient degree of substitution
- possible amongst its members.
- As an example, goat and beef are put under the same group - but not with
- tea - as there is little sense in substitution between tea and meat.
- The food category is further divided into sub-categories so that demands
- within the category can be considered separable in both the functional
- sense and the price-movement sense (which is the basis of the computation
- of quality as presented in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Econometric-model"
-
-\end_inset
-
- ).
- Due to reasons cited in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Separability-and-Quality"
-
-\end_inset
-
-, the items of high quality are not explored as a separate category by themselve
-s.
- 
-\end_layout
-
-\begin_layout Standard
-LSMS survey uses diary method for food and recall methods for non-food items.
- While we are interested in how sparsely some items are consumed, we are
- careful not to interpret the absence of an item in the recall record for
- a household as the item not being used by the household.
- This is because not all items in the recall diary are recorded at the same
- frequency - some items in the survey are recorded as they're recalled from
- a month before the interview - while others may be recalled from the year
- before the interview.
- Similarly, the an interpretation of the differences in the budget share
- over snapshots (2010, 2012 and 2014) for a particular household and item-
- cannot be interpreted as a consumption pattern of a household since we
- may not have the records in the recall diary for all three instances of
- the survey (2010, 2012 and 2014)
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-In fact, we find that for cases such as electricity, the survey field for
- 
-\begin_inset Quotes eld
-\end_inset
-
-main lighting fuel
-\begin_inset Quotes erd
-\end_inset
-
- seems more reliable for the test of electricity consumption than the last
- expenditure on electricity.
- 
-\end_layout
-
-\end_inset
-
-.
- Such matters can be made worse in cases of expenditure where seasonality
- (time of the year) is also an important factor.
- To avoid such issues, therefore, we rely only on the average expenditure
- by a group of households in a particular region/district rather than interpreti
-ng the changes in consumption over the years of an individual household.
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing single
-The survey does not include the data on tribal/social identities of the
- participants.
- Other proxies that may be correlated with social identities (e.g.
- language spoken, regional origin etc.) that are available at the village
- or equivalent level in the survey are used for the purpose.
- Other household characteristics we consider of importance are education,
- urban residence and income levels.
- Both occupation and education are converted into ordered variables for
- use in the econometric analysis.
 \end_layout
 
 \begin_layout Subsection
@@ -3036,7 +3685,6 @@ Descriptive statistics for LSMS Tanzania 2010
 \end_layout
 
 \begin_layout Standard
-\paragraph_spacing single
 We find that the income spectrum is heavily skewed in the data - as is character
 istic of a developing country.
  Out of the households who consumption diary is available, only around 30%
@@ -3509,6 +4157,10 @@ The quality distribution is normal- as we can see for all the categories.
  interpret the consumer choice for quality - while at the same time representing
  the substitution between broader categories and the price variants within
  the commodities in the econometric model.
+\end_layout
+
+\begin_layout Standard
+[Heien-Wells] Results are provided in the APPENDIX for comparison.
 \end_layout
 
 \begin_layout Standard
