@@ -3014,8 +3014,9 @@ Data
 
 \begin_layout Standard
 \paragraph_spacing single
-With recent economic growth and a history of nationalization, Tanzania serves
- as a case-study of consumer markets in the developing sub-Saharan Africa.
+[Intro] With recent economic growth and a history of nationalization, Tanzania
+ serves as a case-study of consumer markets in the developing sub-Saharan
+ Africa.
  In more recent times, since the investments from South Africa and Western
  countries have significantly expanded in the country, the trends of urbanisatio
 n are evident in the consumption data.
@@ -3024,13 +3025,14 @@ n are evident in the consumption data.
 \end_layout
 
 \begin_layout Standard
-The survey LSMS records past expenditure with diary and recall methods.
+[Descriptive Stats] The survey LSMS records past expenditure with diary
+ and recall methods.
  The diary method is used for food items while other purchases are recorded
  as weekly, monthly and yearly recalls.
  Evidently, the food expenditure are recorded with a greater level of detail
  than other expenditures.
- We present the summary statistics from the microdata for 2010 (base year)
- in Table 
+ The summary statistics from the LSMS microdata for 2010 (base year) are
+ presented in the Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Descriptive-statistics-LSMS-2010"
@@ -3041,9 +3043,41 @@ reference "fig:Descriptive-statistics-LSMS-2010"
 \end_layout
 
 \begin_layout Standard
-One of the advantages of using commodity aggregates over an item-wise analysis
- is that it avoids the measurement errors in quality arising out of combining
- recall and diary items.
+[Meging Normalisation] Before it may be used for measurement for quality,
+ the consumption microdata from the survey years is merged and normalised.
+ Here, the weekly data is mixed with yearly data by extrapolating of past
+ week's consumption.
+ The details of this process are described in Appendix II.
+ Once normalised, the matching of market prices for the items consumed by
+ a household is done for quality in food and energy subgroups (see Assumption
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "assu:AssetDomination"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+[Relative prices structure] One of the advantages of using commodity aggregates
+ over an item-wise analysis is that it avoids the measurement errors in
+ quality arising out of combining recall and diary items.
  As detailed in the Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3084,9 +3118,9 @@ s.
 \end_layout
 
 \begin_layout Standard
-While we are interested in how sparsely some items are consumed, we are
- careful not to interpret the absence of an item in the recall record for
- a household as the item not being used by the household.
+[Caveat] While we are interested in how sparsely some items are consumed,
+ we are careful not to interpret the absence of an item in the recall record
+ for a household as the item not being used by the household.
  This is because not all items in the recall diary are recorded at the same
  frequency - some items in the survey are recorded as they're recalled from
  a month before the interview - while others may be recalled from the year
@@ -3111,29 +3145,14 @@ main lighting fuel
 
 \begin_layout Standard
 \paragraph_spacing single
-While survey does not include the data on tribal/social identities of the
- participants, other proxies that may be correlated with social identities
- (e.g.
- language spoken, regional origin etc.) that are available at the village
- or equivalent level in the survey.
- Of particular interest are the education, urban residence and income levels
- - from where we derive occupational and education ranks to be used in the
- econometric analysis.
- The assignment of education ranks is shown in Table
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{education_rank_tnz}
-\end_layout
-
-\end_inset
-
-.
- The assignment of occupation rank is shown in Table 
+[Rank Variables] While survey does not include the data on tribal/social
+ identities of the participants, other proxies of social identities such
+ as language-spoken, regional origin etc.
+ are available in the survey and are used in our analyses.
+ Of particular interest are the education, occupation and income levels.
+ Instead of directly using income data, we rely on a mapping of incomes
+ to the list of occupation ranks.
+ This assignment of occupation ranks is shown in Table 
 \begin_inset ERT
 status open
 
@@ -3147,14 +3166,29 @@ ref{occupation_rank_tn}
 \end_inset
 
 .
- The occupation ranks are derived from the income data in the survey.
- There are two reasons why we use income data through the occupation ranks
- instead of using it directly in the analyses.
+ There are two reasons why the income data is used only through occupation
+ ranks instead.
  First, the income data is available for only around 30% of the households
  which we have diary data for.
  Second, due to the large informal sector in the country, having two jobs
  and owning multiple self-owned (small) businesses is not uncommon and would
  lead to biases in the use of household income.
+ The assignment of education rank - an order variable corresponding to different
+ education levels - is shown in Table
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{education_rank_tnz}
+\end_layout
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3428,7 +3462,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/food_observed_prices.png
-	width 3in
+	width 4in
 
 \end_inset
 
@@ -3468,7 +3502,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/food_budget_shares.png
-	width 3in
+	width 4in
 
 \end_inset
 
@@ -3499,9 +3533,16 @@ The items sorted according to the mean budget shares
 \end_layout
 
 \begin_layout Standard
-The market observed prices available in the survey facilitate a comparison
- of items that are associated with higher budget shares with those that
- have higher prices in the local markets (see Figures 
+[Market Prices] Since we don't use price-deflators (i.e.
+ the unit-value method of obtaining prices where the expenditure averages
+ are used as price) due to measurement errors that arise with quantity being
+ in both in the denominator of the control variables and in the numerator
+ of the dependent variable for our measure of quality, the locally market
+ observed prices available in the survey are of crucial importance to our
+ anlayses.
+ The market-prices facilitate our comparison of items that are associated
+ with higher budget shares with those that have higher prices in the local
+ markets (see Figures 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:mean_prices"
@@ -3516,11 +3557,10 @@ reference "fig:mean_budget_shares"
 \end_inset
 
 ).
- Since the market-observed prices are recorded at every district level,
- the prices observed at the district are matched with every household based
- on the district the household is located.
- The box plots for market observed prices (per standard unit that are liters
- or kilograms) are shown in Figure 
+ These market-observed prices are recorded at every district level are matched
+ with every household based on the district the household is located.
+ We provide an overview of the market observed prices (per standard unit
+ that are liters or kilograms) in the box plots in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Recorded-prices"
@@ -3528,31 +3568,18 @@ reference "fig:Recorded-prices"
 \end_inset
 
 .
- Notice that the variation in prices for meat and seafood seem higher than
+ The locally available market-price allows us to view how the consumers
+ in rural districts are not exposed to prices of expensive urban.
+ For example, the variation in prices for meat and seafood seem higher than
  those in the prices of the rest of the food items.
  Similarly, processed foods as well as energy sources (kerosene) seem relatively
  high in price compared to other food items.
- That the consumers in rural districts are not exposed to prices of processed
- foods and exotic meats must be considered while considering the variation
- in quality.
-\end_layout
-
-\begin_layout Standard
-For the quality-related aggregations described in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Model"
-
-\end_inset
-
-, the consumption microdata is merged and normalised.
- More specifically, the weekly data is mixed with yearly data by extrapolating
- of past week's consumption.
- The details of the process is described in the Appendix II.
+ 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
@@ -3815,30 +3842,8 @@ Descriptive statistics for LSMS Tanzania 2010
 \end_layout
 
 \begin_layout Standard
-[Matching process] We now describe the process of matching the market prices
- for the items consumed by a household in more detail.
- As noted before, out of the food, energy, transport and household commodity
- groups, we only consider quality differences in food and energy subgroups
- - whereas the other commodity groups are viewed as groups where asset possessio
-n (or ownership of long-term durable goods) matters more than quality variation.
-\end_layout
-
-\begin_layout Standard
-The prices observed in the market drive our measure of quality and the later
- discussion of cross-price effects.
- Since we don't use price-deflators in our analysis (due to measurement
- errors that arise with quantity being in both in the denominator of the
- control variables and in the numerator of the dependent variable), a matching
- of prices of the items observed in the market (identified by region and
- district) with the prices of the items purchased by the consumer (with
- known region and district) is of key importance to our analysis.
-\end_layout
-
-\begin_layout Standard
-LSMS Tanzania surveys record the prices observed in the markets spread across
- all regions in the country.
- These prices are available for items in the food and energy commodity groups.
- The items within these commodities are grouped according to the 
+[Matching process] The items within these commodities are grouped according
+ to the 
 \shape italic
 local
 \shape default
@@ -3859,13 +3864,9 @@ literal "true"
 \end_inset
 
  for a similar analysis of rice varieties).
- 
-\end_layout
-
-\begin_layout Standard
-To classify the goods based on the movement of their prices, we gather the
- market prices for the relevant items during the survey periods (2010, 2012
- and 2014).
+ To classify the goods based on the movement of their prices, we gather
+ the market prices for the relevant items during the survey periods (2010,
+ 2012 and 2014).
  Following is a list of issues that were resolved to obtain the price data
  to be used for subsequent classification of items and matching with consumption
  microdata.
