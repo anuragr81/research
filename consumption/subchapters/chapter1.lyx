@@ -3586,12 +3586,11 @@ reference "fig:Recorded-prices"
  at every district level or at finer levels.
  These prices are matched with every household based on the district the
  household is located.
- In other words, the price of an item consumed by a household is linked
- to all households in the same district where the household is located.
- When there are multiple price observations at the district level, we arrive
- a district-level price using a regression.
- For items such as electricity and gas that are limited to a few urban areas,
- we simply use the price at a national level
+ When there are multiple price observations at the district level (through
+ price capture at constituent wards and villages), we arrive a district-level
+ price using a regression.
+ On other hand, for items such as electricity and gas that are limited to
+ a few urban areas, we simply use the price at a national level
 \begin_inset Foot
 status open
 
@@ -3881,64 +3880,96 @@ Descriptive statistics for LSMS Tanzania 2010
 \begin_inset Formula $q$
 \end_inset
 
- Regression ] The market-price observed for items are recorded in several
- units.
+ Regression ] The use of the regression for obtaining the market-prices
+ at the district level also makes sense because prices are recorded for
+ in several units.
  To assimilate all the price data from across the quantities and regions,
- we run a regression of marked-price against quantity it was recorded for.
- The coefficients of the regression can thus provide us the price for an
- arbitrary quantity of the item.
- For example, if we had observed the marked prices of rice (let's say) for
- 1 kg, 2kg, 5kg and 10kg in the market.
- A typical set of marked prices could be 4£, 7.5£, 18£ and 35£ respectively
- - see Figure 
+ the coefficients of the regression provide us the price for an arbitrary
+ quantity of the item.
+ Since unit-prices grow at a less than linear rate (see the unit-price correspon
+ding to the quantities in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:markedprices"
 
 \end_inset
 
- for the plot of these example prices.
- In this example as well as in the real-world, such unit-prices grow at
- a less than linear rate (see the unit-price corresponding to the quantities
- in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:markedprices"
-
+), we use a quadratic expression 
+\begin_inset Formula $\frac{mp}{q}=\beta\frac{1}{q^{2}}+c$
 \end_inset
 
-).
- Therefore a linear regression of 
+ to regress the observed marked-prices 
 \begin_inset Formula $mp$
 \end_inset
 
- vs 
+ against the quantities 
 \begin_inset Formula $q$
 \end_inset
 
- (where 
-\begin_inset Formula $mp$
+ they're recorded in where 
+\begin_inset Formula $\beta$
 \end_inset
 
- is the marked price of the item and 
-\begin_inset Formula $q$
+ is the coefficient and 
+\begin_inset Formula $c$
 \end_inset
 
- the quantity consumed) is hardly appropriate.
- Instead, we use a quadratic expression to regress the unit-prices observed
- against the quantities they're recorded.
- Given this regression, the price of any arbitrary quantity can thus be
- obtained.
- What we need from the regression however, is merely the price of the unit-quant
-ity (e.g.
- the price per kg for rice in the current example) rather than matching
- the appropriate marked price with the quantity purchased by the consumer
+ is a constant .
+ The price of any arbitrary quantity of an item is thus obtained simply
+ as 
+\begin_inset Formula $\frac{\beta}{\underline{q}^{2}}+c$
+\end_inset
+
+.
+ For the price of unit-quantity that we use in the regression, we have 
+\begin_inset Formula $q=1$
+\end_inset
+
+ so that the price is simply 
+\begin_inset Formula $\beta+c$
+\end_inset
+
+ .
  
-\begin_inset Foot
+\end_layout
+
+\begin_layout Standard
+With the prices obtained after the above regression, we match the price
+ for every commodity consumed by the household based on the district it
+ is located in.
+ Once we have the observed market prices for every item by every household,
+ we can aggregate the costs across an arbitrary group of items and calculate
+ quality for the group.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-If we were to really look for a perfect match for prices, then we should
+
+%When the regression can't be used a simple median is used as the price
+ for such cases.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%What we need from the regression however, is merely the price of the unit-quant
+ity (e.g.
+ the price per kg for rice in the current example) rather than matching
+ the appropriate marked price with the quantity purchased by the consumer.
+ If we were to really look for a perfect match for prices, then we should
  not only match the quantities consumed by the consumer with the prices
  recorded in the market but also the time of the household interview with
  that of the price recorded.
@@ -3950,79 +3981,7 @@ If we were to really look for a perfect match for prices, then we should
 
 \end_inset
 
-.
- The regression we use therefore is 
-\begin_inset Formula $\frac{mp}{q}=\beta\frac{1}{q^{2}}+c$
-\end_inset
 
- (assuming that the marked price is lower than a linear increase - see Figure
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:markedprices"
-
-\end_inset
-
- - by a factor that itself decreases with increasing 
-\begin_inset Formula $q$
-\end_inset
-
- i.e.
- 
-\begin_inset Formula $mp=aq-b/q$
-\end_inset
-
-).
- Since we use the price set 
-\begin_inset Formula $q=1$
-\end_inset
-
-, the price to be used is simply 
-\begin_inset Formula $\beta+c$
-\end_inset
-
- for the regression: 
-\begin_inset Formula $\frac{mp}{q}=\beta/q^{2}+c$
-\end_inset
-
-.
- This regression is run only when more than two prices are available.
- When the regression can't be used a simple median is used as the price
- for such cases
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-This does not happen as frequently as one may imagine.
- For 2010, only 9 identified regions for just 6 items have less than three
- marked-prices available.
-\end_layout
-
-\end_inset
-
-.
- The price-inference is therefore a 2-stage process - in the first-stage
- we obtain prices for every district with the regression method.
- If there are no marked prices available in a district, we use the regional
- value of the price.
- For some items, the region-prices are not available for some regions.
- Here, the price from obtained by the regressions over the country is used
- for the item.
- The prices for some items whose consumption is relatively rare in the diary
- data (e.g.
- wild-birds and honey) are not available for any of the regions.
- Such items (e.g.
- alcohol) are ignored for the analysis.
-\end_layout
-
-\begin_layout Standard
-With the prices obtained after the above regression, we match the price
- for every commodity consumed by the household based on the district it
- is located in.
- Once we have the observed market prices for every item by every household,
- we can aggregate the costs across an arbitrary group of items and calculate
- quality for the group.
- 
 \end_layout
 
 \begin_layout Standard
