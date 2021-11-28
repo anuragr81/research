@@ -23,12 +23,12 @@ theorems-ams-extended
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "libertine" "Hoefler Text"
+\font_roman "libertine" "Spectral"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts false
+\use_non_tex_fonts true
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -3490,46 +3490,6 @@ Items sorted according to maximum prices recorded in the survey
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename figures/food_budget_shares.png
-	width 4in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:mean_budget_shares"
-
-\end_inset
-
-The items sorted according to the mean budget shares
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 [Market Prices] Given the use of commodity aggregates for our analysis of
  quality, the market prices play a crucial in our analyses.
  Further, choosing market-prices to classify the items in aggregates over
@@ -3546,25 +3506,18 @@ literal "false"
 \end_inset
 
 ).
- The market-prices thus facilitate our comparison of items that are associated
- with higher budget shares with those that have higher prices in the local
- markets (see Figures 
+ An overview of the market observed prices (per standard unit that are liters
+ or kilograms) in presented in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:mean_prices"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:mean_budget_shares"
-
-\end_inset
-
-).
- An overview of the market observed prices (per standard unit that are liters
- or kilograms) in the box plots in Figure 
+ and in the box plots in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Recorded-prices"
@@ -3586,11 +3539,8 @@ reference "fig:Recorded-prices"
  at every district level or at finer levels.
  These prices are matched with every household based on the district the
  household is located.
- When there are multiple price observations at the district level (through
- price capture at constituent wards and villages), we arrive a district-level
- price using a regression.
- On other hand, for items such as electricity and gas that are limited to
- a few urban areas, we simply use the price at a national level
+ For items such as electricity and gas that are limited to a few urban areas,
+ we simply use the price at a national level
 \begin_inset Foot
 status open
 
@@ -3609,6 +3559,55 @@ literal "true"
 \end_inset
 
 .
+ When there are multiple price observations at the district level (through
+ price capture at in more than one constituent wards or villages), then
+ we arrive a district-level price using a regression over price records
+ for the item in the district.
+ The use of the regression for obtaining the market-prices at the district
+ level also makes sense because prices are recorded in several units.
+ By assimilating all the price data from across the quantities and regions
+ in the regression, we use the coefficients to obtain the price for a unit-quant
+ity of an item (kg,litres etc.).
+ As the unit-prices grow at a less than linear rate with quantity, we use
+ a quadratic expression 
+\begin_inset Formula $\frac{mp}{q}=\beta\frac{1}{q^{2}}+c$
+\end_inset
+
+ to regress the observed marked-prices 
+\begin_inset Formula $mp$
+\end_inset
+
+ against the quantities 
+\begin_inset Formula $q$
+\end_inset
+
+ they're recorded in where 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is the coefficient and 
+\begin_inset Formula $c$
+\end_inset
+
+ is a constant .
+ The price of any arbitrary quantity 
+\begin_inset Formula $\underline{q}$
+\end_inset
+
+ of an item is thus simply 
+\begin_inset Formula $\frac{\beta}{\underline{q}^{2}}+c$
+\end_inset
+
+ and for the price of unit-quantity that we use for base-prices and relative
+ price structures, the price is simply 
+\begin_inset Formula $\beta+c$
+\end_inset
+
+ (for 
+\begin_inset Formula $q=1$
+\end_inset
+
+ ).
 \end_layout
 
 \begin_layout Standard
@@ -3876,74 +3875,6 @@ Descriptive statistics for LSMS Tanzania 2010
 \end_layout
 
 \begin_layout Standard
-[
-\begin_inset Formula $q$
-\end_inset
-
- Regression ] The use of the regression for obtaining the market-prices
- at the district level also makes sense because prices are recorded for
- in several units.
- To assimilate all the price data from across the quantities and regions,
- the coefficients of the regression provide us the price for an arbitrary
- quantity of the item.
- Since unit-prices grow at a less than linear rate (see the unit-price correspon
-ding to the quantities in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:markedprices"
-
-\end_inset
-
-), we use a quadratic expression 
-\begin_inset Formula $\frac{mp}{q}=\beta\frac{1}{q^{2}}+c$
-\end_inset
-
- to regress the observed marked-prices 
-\begin_inset Formula $mp$
-\end_inset
-
- against the quantities 
-\begin_inset Formula $q$
-\end_inset
-
- they're recorded in where 
-\begin_inset Formula $\beta$
-\end_inset
-
- is the coefficient and 
-\begin_inset Formula $c$
-\end_inset
-
- is a constant .
- The price of any arbitrary quantity of an item is thus obtained simply
- as 
-\begin_inset Formula $\frac{\beta}{\underline{q}^{2}}+c$
-\end_inset
-
-.
- For the price of unit-quantity that we use in the regression, we have 
-\begin_inset Formula $q=1$
-\end_inset
-
- so that the price is simply 
-\begin_inset Formula $\beta+c$
-\end_inset
-
- .
- 
-\end_layout
-
-\begin_layout Standard
-With the prices obtained after the above regression, we match the price
- for every commodity consumed by the household based on the district it
- is located in.
- Once we have the observed market prices for every item by every household,
- we can aggregate the costs across an arbitrary group of items and calculate
- quality for the group.
- 
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -4014,54 +3945,6 @@ ages for some items and region averages for other.
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/markedprice.png
-	width 2in
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/unitprice.png
-	width 2in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:markedprices"
-
-\end_inset
-
-Typical marked prices and Price per unit of an item
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Results
 \begin_inset CommandInset label
@@ -4074,6 +3957,25 @@ name "sec:Results"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
 
 \bar under
 The quality distribution is normal- as we can see for all the categories.
@@ -4081,38 +3983,24 @@ The quality distribution is normal- as we can see for all the categories.
  The consumer may not forgo food.
 
 \bar default
- The aggregation (subject to restrictions) to the commodity allows us to
- interpret the consumer choice for quality - while at the same time representing
- the substitution between broader categories and the price variants within
- the commodities in the econometric model.
+ 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 [Heien-Wells] Results are provided in the APPENDIX for comparison.
 \end_layout
 
-\begin_layout Standard
-The aggregation into commodities also allows us as an intermediate step
- in merging data from recall and diary methods.
- As items are often recorded with more details for the diary items than
- for the recall items (the types of phones, clothes purchased by the consumers
- are hardly recorded in the surveys for example), viewing diary data at
- a higher (aggregated) level - i.e.
- at a coarser granularity that matches that of the recall methods - allows
- us to have a combined view of data from recall and diary methods.
- Further, the inclusion of assets and the expenditure data from recall methods
- on household-transportation further helps us explain how the expenditure
- on quality differs across various commodity groups within the population.
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The main control variables in the LA-AIDS SUR equations are 
-\family typewriter
-ln_tot_exp
-\family default
- (logarithm of the total expenditure in the period) and those starting with
- lp- (which represent the logarithm of the prices corresponding to every
- commodity in the AIDS regression - see Equations 
+The aggregation (subject to restrictions) to the commodity allows us to
+ interpret the consumer choice for quality - while at the same time representing
+ the substitution between broader categories and the price variants within
+ the commodities in the econometric model.
+ The results from the AIDS formulation specified in Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:AIDS_quality_w"
@@ -4126,19 +4014,114 @@ reference "eq:AIDS_quality_lnV"
 
 \end_inset
 
-).
+ are presented in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsAllassets}
+\end_layout
+
+\end_inset
+
+ and with slightly different formulations in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsSubAssets}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsFoodCPIAllAssets}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+[Variables] The main control variables in the LA-AIDS SUR equations are
+ list in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Control-Variables"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The significance of income is indicated with the coefficients for logarithm
+ of total expenditure 
+\family typewriter
+\size footnotesize
+ln_tot_exp
+\family default
+\size default
+.
+ The logarithm of base-price derived from market-price are represented with
+ the variable starting with the prefix 
+\family typewriter
+\size footnotesize
+lp
+\family default
+\size default
+- .
+ Every commodity in the AIDS regression (see Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_lnV"
+
+\end_inset
+
+) thus corresponds to an 
+\family typewriter
+\size footnotesize
+lp
+\family default
+\size default
+ variable.
  As the quality differences are ignored for the expenditure on transport
  and household commodities, the AIDS SUR equations use household-CPI and
  transport-CPI as prices for these commodity groups i.e.
  
 \family typewriter
+\size footnotesize
 lphousehold
 \family default
+\size default
  and 
 \family typewriter
-lptransport
+\size footnotesize
+lptransport 
 \family default
- (respectively).
+\size default
+(respectively).
  Other control variables that are used in the intercept of the AIDS SUR
  equations (see Equations 
 \begin_inset CommandInset ref
@@ -4171,32 +4154,12 @@ occupation_rank
 \family typewriter
 educ_rank
 \family default
- (a ternary variable inferred from the highest education level of the head
+ (an ordered variable inferred from the highest education level of the head
  of the household) and 
 \family typewriter
 expensiveregion
 \family default
  ( indicator variable for densely populated urban areas).
- The variables in the intercept are subject to the additivity constraints
- (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Econometric-model"
-
-\end_inset
-
- for details).
- These are listed in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Control-Variables"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -4209,26 +4172,16 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="14" columns="3">
+<lyxtabular version="3" rows="12" columns="2">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0.7in">
-<column alignment="center" valignment="top" width="2in">
+<column alignment="left" valignment="top" width="2in">
 <column alignment="left" valignment="top" width="3.5in">
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Control
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Variable Name
+Variable
 \end_layout
 
 \end_inset
@@ -4244,19 +4197,7 @@ Description
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $log(x_{t})$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4282,16 +4223,7 @@ logarithm of per-head total expenditure
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4314,16 +4246,7 @@ lp
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4345,16 +4268,7 @@ number of members adjusted by age
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4376,16 +4290,7 @@ age of the household-head
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4407,16 +4312,7 @@ all_assets_mtm
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4438,16 +4334,7 @@ educ_rank
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4469,16 +4356,7 @@ expensiveregion
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4500,16 +4378,7 @@ transport_assets_mtm
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4531,16 +4400,7 @@ electric_assets_mtm
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4562,80 +4422,7 @@ has_electric
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-q
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-qV
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4679,73 +4466,17 @@ Control Variables
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-Since we view the accumulated assets worth as the household characteristics
- (i.e.
- as a part of 
-\begin_inset Formula $\rho$
-\end_inset
-
- in the Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:utility"
-
-\end_inset
-
-), the assets owned for the two groups - household and transport - are also
- used in the AIDS SUR equations i.e.
- the variable 
-\family typewriter
-all_assets_mtm
-\family default
- (which is the logarithm of total cost that the asset would reportedly sell
- for if it were to be sold at the time of the interview).
- We also use the variable 
-\family typewriter
-has_electric 
-\family default
-(which indicates whether the household has access to electricity or not)
- in place of a quality metric for energy.
- Other formulations discussed in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:RobustnessChecks"
-
-\end_inset
-
- may use control variables based on the ownership of the types of assets
- - namely 
-\family typewriter
-electric_assets_mtm
-\family default
- (the logarithm of total cost of electrical assets - costs being what the
- asset woulds reportedly sell for if they were to be sold at the time of
- the interview), 
-\family typewriter
-household_assets_mtm
-\family default
- (the logarithm of total cost of land or the house that they would reportedly
- sell for if they were to be sold at the time of the interview) and 
-\family typewriter
-transport_assets_mtm
-\family default
- (the logarithm of total cost of the car, motorcycle, bicycle and other
- means of conveyance that they would reportedly sell for if they were to
- be sold at the time of the interview).
-\end_layout
-
-\begin_layout Standard
-The columns in the tables 
+[Assets and non-food-non-energy costs as control variables] Since we are
+ interested in how the quality might across regions and the level of assets
+ one owns, the assets in the commodity groups household and transport are
+ used as control variables in the AIDS SUR equations as well.
+ For the results discussed in Table 
 \begin_inset ERT
 status open
 
@@ -4758,7 +4489,63 @@ ref{resultsAllassets}
 
 \end_inset
 
- and 
+ , the variable 
+\family typewriter
+all_assets_mtm
+\family default
+ represents the logarithm of total cost that the asset would sell for if
+ it were to be sold at the time of the interview (price reported by the
+ consumer).
+ Inferring the energy quality with the indicator variable specifying electricity
+ usage, we also the variable 
+\family typewriter
+has_electric 
+\family default
+(indicating whether the household has access to electricity or not) in the
+ equations.
+ Some formulations for robustness checks discussed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:RobustnessChecks"
+
+\end_inset
+
+ also use variables based on the ownership of certain types of assets i.e.
+ the electric assets (variable 
+\family typewriter
+electric_assets_mtm
+\family default
+ representing the logarithm of total reported costs of electrical assets
+ based on the price they would sell for if they were to be sold at the time
+ of the interview by the consumer), the household-assets (variable 
+\family typewriter
+household_assets_mtm
+\family default
+ representing the logarithm of total reported cost of the land or house
+ owned by the consumer) and the transport assets ( 
+\family typewriter
+transport_assets_mtm
+\family default
+ representing the logarithm of total cost of the car, motorcycle, bicycle
+ and other means of conveyance).
+\end_layout
+
+\begin_layout Standard
+[Dependent Variable] The dependent variables of the AIDS regressions in
+ columns in the Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsAllassets}
+\end_layout
+
+\end_inset
+
+ , 
 \begin_inset ERT
 status open
 
@@ -4771,21 +4558,53 @@ ref{resultsSubAssets}
 
 \end_inset
 
- either start with q- or with qV-.
- The columns starting with q- indicate the budget shares (
-\begin_inset Formula $w$
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsFoodCPIAllAssets}
+\end_layout
+
 \end_inset
 
-) that are used as the dependent variables in AIDS regressions (see Equation
- 
+ either start with 
+\family typewriter
+\size footnotesize
+q
+\family default
+\size default
+- or with 
+\family typewriter
+\size footnotesize
+qV
+\family default
+\size default
+-.
+ The columns starting with 
+\family typewriter
+\size footnotesize
+q-
+\family default
+\size default
+ indicate the quantity-budget shares that are used as the dependent variables
+ in AIDS regressions (see Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:AIDS_quality_w"
 
 \end_inset
 
- ) and the columns starting with qV- indicate the logarithm of the quality
- metric as the dependent variable (i.e.
+ ) and the columns starting with 
+\family typewriter
+\size footnotesize
+qV- 
+\family default
+\size default
+indicate the logarithm of the quality metric as the dependent variable (i.e.
  
 \begin_inset Formula $ln\ V$
 \end_inset
@@ -4798,66 +4617,26 @@ reference "eq:AIDS_quality_lnV"
 \end_inset
 
 ).
- As explained earlier in Section 
+ Using the classification based on prices and functionality (as described
+ in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Discussion"
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-, we use an indicator variable 
-\family typewriter
-has_electric 
-\family default
-(see Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{resultsAllassets}
-\end_layout
-
-\end_inset
-
-) for whether the consumer uses electricity or not instead of a quality
- metric for energy in the intercept of the AIDS equations.
- This is due to the wide differences in the characteristics of goods (kerosene,
- electricity and charcoal) within the energy commodity.
- In an alternate formulation in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:RobustnessChecks"
-
-\end_inset
-
-, a variable showing the total cost of electric assets is used as one of
- the household characteristics in lieu of the 
-\family typewriter
-has_electric 
-\family default
-variable.
- 
-\end_layout
-
-\begin_layout Standard
-The 
-\begin_inset Formula $ln\ V$
-\end_inset
-
- equations are used only for the food commodity group.
- Using the classification based on prices and functionality, the commodities
- chosen within the food group are - densefoods, non-fresh, fruits-veg, protein
- and complements (see Table 
+), the commodities chosen within the food group are - densefoods, non-fresh,
+ fruits-veg, protein and complements (see Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Groups"
 
 \end_inset
 
- all the goods that belong to these commodity groups).
+ for all the goods that belong to these commodity groups).
  Since quality measure is not used for energy, household and transport no
  quality equations are needed for these commodity.
  The total number of equations to estimate with the SUR is therefore 
@@ -4865,7 +4644,12 @@ reference "tab:Groups"
 \end_inset
 
 .
- The results obtained from the SUR that are shown in Table 
+ 
+\end_layout
+
+\begin_layout Standard
+[Discussion all assets] The results obtained from the SUR shown in Table
+ 
 \begin_inset ERT
 status open
 
@@ -4880,48 +4664,46 @@ ref{resultsAllassets}
 
  suggest the relevance of asset ownership in the demand for non-durable
  items - their quality in particular.
- 
-\end_layout
-
-\begin_layout Standard
-The consumer habits do seem to be influenced by the financial standing of
- the consumer that we have attempted to gauge with the occupation rank and
- assets owned by the consumers.
- The life-style differences that we observe in non-durable consumption -
- with respect to the quality of items (indicated with variables starting
- with 
+ Further, the variable 
 \family typewriter
-qV
+expensive_region
 \family default
--) do seem associated with household characteristics related to the long-term
- economic standing (and particularly on whether they use electricity or
- not).
- Here, it is worth differentiating between the effect that ownership of
- assets has on quality vs the effect of total expenditure
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-The literature often uses total expenditure as a measure of permanent income.
-\end_layout
-
-\end_inset
-
-.
- Those with electrical assets (the logarithm of whose total cost is used
- as the control variable) tend to spend more on fruits-veg quality.
+ is significant overall for non-fresh quality, protein quality, household
+ commodity group, transport commodity group and the energy commodity group.
+ The consumer habits do seem to be influenced by the financial standing
+ of the consumer indicated with both occupation rank and assets owned by
+ the consumers.
+ While those with more assets spend less on some food quality categories,
+ they do spend more on the household-related non-durable consumption.
  With higher expenditure (
 \family typewriter
 ln_tot_exp
 \family default
-), the quality of non-fresh increases but the quality of fruits-veg decreases.
- Those with a stronger long-term economist standing spend relatively less
+), the quality of non-fresh seems to increase but the quality of fruits-veg
+ decreases.
+ In addition than the relevance of 
+\family typewriter
+\size footnotesize
+expensive region
+\family default
+\size default
+, this may further suggest a differentiated food quality pattern in the
+ urban areas for those with no access to electricity.
+\end_layout
+
+\begin_layout Standard
+[has_electric discussion] Of particular interest is the association of the
+ quality of goods (indicated with variables starting with 
+\family typewriter
+qV
+\family default
+-) with whether the consumers use electricity or not.
+ Those with a stronger long-term economic standing spend relatively less
  on quality of protein and transport (public_transport, car maintenance
- etc.) - which are commodities where those who have electricity seem to spend
- more.
- It seems that just starting to use electricity (but not having lots of
- electric assets) can increase the quality of protein consumed for the average
- consumer (see the effect of the 
+ etc.) - commodities where those who have electricity seem to spend more.
+ It would appear that just starting to use electricity (but not having lots
+ of electric assets) can increase the quality of protein consumed for the
+ average consumer (see the effect of the 
 \family typewriter
 has_electric
 \family default
@@ -4939,12 +4721,12 @@ ref{resultsSubAssets}
 \end_inset
 
 ).
- 
 \end_layout
 
 \begin_layout Standard
-Running another SUR with assets split into electrical, household and transport
- assets confirm the same results (see Table 
+[Discussion electric assets] Running another SUR with assets split into
+ electrical, household and transport assets confirms the relevance of electric
+ assets (see Table 
 \begin_inset ERT
 status open
 
@@ -4958,34 +4740,24 @@ ref{resultsSubAssets}
 \end_inset
 
 ).
- Here, as one would expect, the consumption on energy is high for electricity
- users due to the high prices of electricity in Tanzania.
- The owners of electrical assets also consume more fruits-veg quality and
- have more expenditure on household products.
- Here too, slightly lower fruitsveg quality is associated total expenditure
- (
+ As one would expect, the consumption on energy is higher for electricity
+ users due to the high prices of electricity in Tanzania but the owners
+ of electrical assets also consume more fruits-veg quality and have more
+ expenditure on household products (while a slightly lower fruitsveg quality
+ is associated total expenditure 
 \family typewriter
 ln_tot_exp
 \family default
 ).
- While those with more assets spend less on some food quality categories,
- they do spend more on the household-related non-durable consumption.
+ 
 \end_layout
 
 \begin_layout Standard
-The variable 
-\family typewriter
-expensive_region
-\family default
- is significant for non-fresh quality, protein quality, household commodity
- group, transport commodity group and the energy commodity group.
- Within urban areas, having electricity is associated with higher protein
- and fruits-veg quality.
+The above observations suggest the life-style differences in the densely
+ populated urban areas brought about by availability of industrial goods.
  The urban consumers may have less overall assets compared to their counterparts
  in rural areas but they spend more on quality on protein and fruits-veg
  (less on dense-foods and household asset).
- The above observations suggest the life-style differences in the densely
- populated urban areas brought about by availability of industrial goods.
 \end_layout
 
 \begin_layout Subsection
@@ -4999,8 +4771,9 @@ Robustness Checks
 \end_layout
 
 \begin_layout Standard
-To ensure that the relevance of high asset ownership in differences of quality
- is a robust observation, we rerun the SUR with an aggregated food category.
+To ensure that the relevance of high asset ownership (and electrical assets
+ in particular) for differences of quality is a robust observation, we rerun
+ the SUR with an aggregated food category.
  This formulation no longer uses the price-based groups and views all food-subca
 tegories as one food group
 \begin_inset Foot
@@ -5095,25 +4868,6 @@ ces from the quantities consumed in the past week (which is reported for
  Recalculating quality and budget shares still shows us the same economic
  and statistical significance (results available on request) of electricity
  and household assets in quality of fruitsveg, proteins and other subcategories.
-\end_layout
-
-\begin_layout Standard
-It is worth reiterating that the differences in quality should be seen as
- more than just response to high prices in the urban areas.
- As our quality metric is derived from locally available prices (the base
- price 
-\begin_inset Formula $P_{G}$
-\end_inset
-
- can be different in every district), it already accounts for regional differenc
-es in prices.
- One possible explanation is that the focus on industrial goods and meat
- categories is stronger in urban areas and is maintained as consumer habits.
- A comparison of quality differences amongst the population in other countries
- could verify this argument i.e.
- if quality differences for a certain commodity groups are found significant
- with respect to the long-term socio-economic standing of the consumer in
- other markets.
 \end_layout
 
 \begin_layout Standard
@@ -6560,6 +6314,25 @@ The relatively higher consumption on household items for those with better
  an intertemporal setting could enhance our understanding of how quality
  of expenditure changes over time - allowing us to provide more robust insights
  on how long-term utility inclusive of status is indicated through consumption.
+\end_layout
+
+\begin_layout Standard
+[Other countries ] It is worth reiterating that the differences in quality
+ should be seen as more than just response to high prices in the urban areas.
+ As our quality metric is derived from locally available prices (the base
+ price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ can be different in every district), it already accounts for regional differenc
+es in prices.
+ One possible explanation is that the focus on industrial goods and meat
+ categories is stronger in urban areas.
+ A comparison of quality differences amongst the population in other countries
+ could verify this argument i.e.
+ if quality differences for a certain commodity groups are found significant
+ with respect to the long-term socio-economic standing of the consumer in
+ other markets.
 \end_layout
 
 \begin_layout Standard
