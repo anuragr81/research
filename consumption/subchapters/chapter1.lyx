@@ -3015,40 +3015,62 @@ Data
 \begin_layout Standard
 \paragraph_spacing single
 With recent economic growth and a history of nationalization, Tanzania serves
- as a typical case-study of consumer markets in the developing sub-Saharan
- Africa.
+ as a case-study of consumer markets in the developing sub-Saharan Africa.
  In more recent times, since the investments from South Africa and Western
  countries have significantly expanded in the country, the trends of urbanisatio
-n appear clearly in its consumption data.
- The data used for our studies is from the Living Standard Measurement Study
- (LSMS) - which is conducted by the World Bank.
+n are evident in the consumption data.
+ The data we use for our analysis is from the Living Standard Measurement
+ Study (LSMS) - conducted by the World Bank - for year 2010, 2012 and 2014.
 \end_layout
 
 \begin_layout Standard
-The substitution between items has driven the 
-\begin_inset Quotes eld
-\end_inset
-
-functional
-\begin_inset Quotes erd
-\end_inset
-
- classification of items.
- A functional category is one where there is a sufficient degree of substitution
- possible amongst its members.
- As an example, goat and beef are put under the same group - but not with
- tea - as there is little sense in substitution between tea and meat.
- The food category is further divided into sub-categories so that demands
- within the category can be considered separable in both the functional
- sense and the price-movement sense (which is the basis of the computation
- of quality as presented in Section 
+The survey LSMS records past expenditure with diary and recall methods.
+ The diary method is used for food items while other purchases are recorded
+ as weekly, monthly and yearly recalls.
+ Evidently, the food expenditure are recorded with a greater level of detail
+ than other expenditures.
+ We present the summary statistics from the microdata for 2010 (base year)
+ in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Econometric-model"
+reference "fig:Descriptive-statistics-LSMS-2010"
 
 \end_inset
 
- ).
+.
+\end_layout
+
+\begin_layout Standard
+One of the advantages of using commodity aggregates over an item-wise analysis
+ is that it avoids the measurement errors in quality arising out of combining
+ recall and diary items.
+ As detailed in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the commodity aggregates over which quality is evaluated both in the functiona
+l sense and the price-movement sense.
+ The functional category is one where there is a sufficient degree of substituti
+on possible amongst its members.
+ As an example, goat and beef are put under the same group - but not with
+ tea - as there is little sense in substitution between tea and meat.
+ The price movements over years are shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LSMSMarketPrices"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
  Due to reasons cited in the Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3062,8 +3084,7 @@ s.
 \end_layout
 
 \begin_layout Standard
-LSMS survey uses diary method for food and recall methods for non-food items.
- While we are interested in how sparsely some items are consumed, we are
+While we are interested in how sparsely some items are consumed, we are
  careful not to interpret the absence of an item in the recall record for
  a household as the item not being used by the household.
  This is because not all items in the recall diary are recorded at the same
@@ -3071,11 +3092,12 @@ LSMS survey uses diary method for food and recall methods for non-food items.
  a month before the interview - while others may be recalled from the year
  before the interview.
  Similarly, the an interpretation of the differences in the budget share
- over snapshots (2010, 2012 and 2014) for a particular household and item-
+ over snapshots (2010, 2012 and 2014) for a particular household and item
  cannot be interpreted as a consumption pattern of a household since we
  may not have the records in the recall diary for all three instances of
  the survey (2010, 2012 and 2014).
- For the case of electricity usage, we find that the survey field for 
+ For example, with the case of electricity usage, we find that the survey
+ field for 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3085,20 +3107,315 @@ main lighting fuel
 
  is more reliable for the test of electricity consumption than the last
  expenditure on electricity.
- 
 \end_layout
 
 \begin_layout Standard
 \paragraph_spacing single
-The survey does not include the data on tribal/social identities of the
- participants.
- Other proxies that may be correlated with social identities (e.g.
+While survey does not include the data on tribal/social identities of the
+ participants, other proxies that may be correlated with social identities
+ (e.g.
  language spoken, regional origin etc.) that are available at the village
- or equivalent level in the survey are used for the purpose.
- Other household characteristics we consider of importance are education,
- urban residence and income levels.
- Both occupation and education are converted into ordered variables for
- use in the econometric analysis.
+ or equivalent level in the survey.
+ Of particular interest are the education, urban residence and income levels
+ - from where we derive occupational and education ranks to be used in the
+ econometric analysis.
+ The assignment of education ranks is shown in Table
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{education_rank_tnz}
+\end_layout
+
+\end_inset
+
+.
+ The assignment of occupation rank is shown in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{occupation_rank_tn}
+\end_layout
+
+\end_inset
+
+.
+ The occupation ranks are derived from the income data in the survey.
+ There are two reasons why we use income data through the occupation ranks
+ instead of using it directly in the analyses.
+ First, the income data is available for only around 30% of the households
+ which we have diary data for.
+ Second, due to the large informal sector in the country, having two jobs
+ and owning multiple self-owned (small) businesses is not uncommon and would
+ lead to biases in the use of household income.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}[!p]{l r l r}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Occupations as ranks in Tanzania 
+\backslash
+label{occupation_rank_tn}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ & 
+\backslash
+multicolumn{1}{c}{code} & 
+\backslash
+multicolumn{1}{c}{occupation area} & 
+\backslash
+multicolumn{1}{c}{occupation rank}
+\backslash
+
+\backslash
+ & 14 & Student & 0
+\backslash
+
+\backslash
+ & 13 & Job Seeker & 0
+\backslash
+
+\backslash
+ & 12 & Paid Family Work & 0
+\backslash
+
+\backslash
+ & 16 & Unemployed & 0
+\backslash
+
+\backslash
+ & 11 & Unpaid Family Work & 0
+\backslash
+
+\backslash
+ & 17 & Unemployed (too young) & 0  
+\backslash
+
+\backslash
+ & 1 & Livestock/Agriculture & 1
+\backslash
+
+\backslash
+ & 2 & Fishing & 1
+\backslash
+
+\backslash
+ & 3 & Mining & 1
+\backslash
+
+\backslash
+ & 4 & Tourism & 1
+\backslash
+
+\backslash
+ & 7 & Private Sector & 2
+\backslash
+
+\backslash
+ & 9 & Non-Agricultural (w Employer) & 2
+\backslash
+
+\backslash
+ & 10 & Non-Agricultural (w/o Employer) & 2
+\backslash
+
+\backslash
+ & 8 & Non-Government/Religious Org & 3
+\backslash
+
+\backslash
+ & 5 & Government & 3
+\backslash
+
+\backslash
+ & 6 & Parastatal & 3 
+\backslash
+end{longtable}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}{l l r c}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Education levels as ranks in Tanzania 
+\backslash
+label{education_rank_tnz}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ & 
+\backslash
+multicolumn{1}{c}{} & 
+\backslash
+multicolumn{1}{c}{education code} & 
+\backslash
+multicolumn{1}{c}{education rank}
+\backslash
+
+\backslash
+ & PP & 1 & 1
+\backslash
+
+\backslash
+ & ADULT & 2 & 1
+\backslash
+
+\backslash
+ & D1 & 11 & 1
+\backslash
+
+\backslash
+ & D2 & 12 & 1
+\backslash
+
+\backslash
+ & D3 & 13 & 1
+\backslash
+
+\backslash
+ & D4 & 14 & 1
+\backslash
+
+\backslash
+ & D5 & 15 & 1
+\backslash
+
+\backslash
+ & D6 & 16 & 1
+\backslash
+
+\backslash
+ & D7 & 17 & 1
+\backslash
+
+\backslash
+ & D8 & 18 & 1
+\backslash
+
+\backslash
+ & OSC & 19 & 2
+\backslash
+
+\backslash
+ & MS COURSE & 20 & 2
+\backslash
+
+\backslash
+ & F1 & 21 & 2
+\backslash
+
+\backslash
+ & F2 & 22 & 2
+\backslash
+
+\backslash
+ & F3 & 23 & 2
+\backslash
+
+\backslash
+ & F4 & 24 & 2
+\backslash
+
+\backslash
+ & O COURSE & 25 & 3
+\backslash
+
+\backslash
+ & F5 & 31 & 3
+\backslash
+
+\backslash
+ & F6 & 32 & 3
+\backslash
+
+\backslash
+ & A COURSE & 33 & 4
+\backslash
+
+\backslash
+ & DIPLOMA & 34 & 4
+\backslash
+
+\backslash
+ & U1 & 41 & 4
+\backslash
+
+\backslash
+ & U2 & 42 & 4
+\backslash
+
+\backslash
+ & U3 & 43 & 4
+\backslash
+
+\backslash
+ & U4 & 44 & 4
+\backslash
+
+\backslash
+ & U5
+\backslash
+& & 45 & 4 
+\backslash
+end{longtable} 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3181,28 +3498,6 @@ The items sorted according to the mean budget shares
 
 \end_layout
 
-\begin_layout Subsection
-\paragraph_spacing single
-
-\size normal
-Descriptive Statistics
-\end_layout
-
-\begin_layout Standard
-The consumption microdata from LSMS records food expenditure with a greater
- level of detail than other expenditures.
- The summary statistics from the microdata for 2010 (base year) are shown
- in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Descriptive-statistics-LSMS-2010"
-
-\end_inset
-
-.
- 
-\end_layout
-
 \begin_layout Standard
 The market observed prices available in the survey facilitate a comparison
  of items that are associated with higher budget shares with those that
@@ -3220,32 +3515,11 @@ reference "fig:mean_budget_shares"
 
 \end_inset
 
-) .
- When observing items that may be of 
-\begin_inset Quotes eld
-\end_inset
-
-visible
-\begin_inset Quotes erd
-\end_inset
-
- value ( or those that are rare or expensive), the descriptive statistics
- do not suggest a common trend for their consumption.
- On one hand, we have tea and coffee that are expensive but are used in
- very low quantities and on the other hand, we have skin-cream that despite
- their apparent importance for visibility purposes are not as expensive
- and show no variation in quality (as inferred from unit-values).
- Further, the consumption on these items may depend very much on what they're
- used for i.e.
- the household characteristics that drive their consumption vary depending
- on their functional utility.
- For example, one finds the housing-status (rented/owned/free-house) relevant
- for expenditure on carpets, residence-area relevant for electricity and
- so on.
-\end_layout
-
-\begin_layout Standard
-The box plots for market observed prices (per standard unit that are liters
+).
+ Since the market-observed prices are recorded at every district level,
+ the prices observed at the district are matched with every household based
+ on the district the household is located.
+ The box plots for market observed prices (per standard unit that are liters
  or kilograms) are shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3254,42 +3528,27 @@ reference "fig:Recorded-prices"
 \end_inset
 
 .
- As one would expect, the variation in prices for meat and seafood is much
- higher than those in the prices of the rest of the food items.
- Processed foods as well as energy sources (kerosene) seem relatively high
- in price compared to other food items.
- The prices thus observed are matched with the consumption microdata based
- on the district where every household is located - a process whose details
- are presented in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:MatchingPrices"
-
-\end_inset
-
-.
- 
+ Notice that the variation in prices for meat and seafood seem higher than
+ those in the prices of the rest of the food items.
+ Similarly, processed foods as well as energy sources (kerosene) seem relatively
+ high in price compared to other food items.
+ That the consumers in rural districts are not exposed to prices of processed
+ foods and exotic meats must be considered while considering the variation
+ in quality.
 \end_layout
 
 \begin_layout Standard
-For the empirical analysis related to quality-related aggregations discussed
- in Section 
+For the quality-related aggregations described in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Model"
 
 \end_inset
 
-, the consumption microdata was obtained by merging and normalising the
- item expenditure data collected through recall and diary methods.
- As the weekly data is mixed with yearly data, an extrapolation of past
- week's consumption becomes necessary.
- Since larger families are more likely to underestimate their purchases
- when recalling, such an extrapolation can overestimate food costs.
- To address this issue, we use adjustment factors both for the multiples
- used in extrapolation of weekly/monthly data (based on their usage pattern)
- and for the number of family members (i.e.
- older family and children are not counted as exactly 1 family member).
+, the consumption microdata is merged and normalised.
+ More specifically, the weekly data is mixed with yearly data by extrapolating
+ of past week's consumption.
+ The details of the process is described in the Appendix II.
 \end_layout
 
 \begin_layout Standard
@@ -3549,43 +3808,16 @@ Descriptive statistics for LSMS Tanzania 2010
 \end_layout
 
 \begin_layout Standard
-We find that the income spectrum is heavily skewed in the data - as is character
-istic of a developing country.
- Out of the households who consumption diary is available, only around 30%
- have any reported income.
- Amongst those who have a reported income, having two jobs and owning multiple
- self-owned (small) businesses is not uncommon and the mode of payment is
- often non-cash.
- The amount of income recorded for the household is thus frequently based
- on the person's estimate of the item provided as income.
- All of these can make the inference of income noisy at best.
- The income levels themselves seem poorly correlated with expenditure levels.
- Given the sparsity of available income data and its poor quality, we choose
- to use the occupation ranks (which are correlated with the observed income)
- for the current study.
-\end_layout
-
-\begin_layout Standard
 \begin_inset VSpace bigskip
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subsection
-
-\size normal
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:MatchingPrices"
-
-\end_inset
-
-Matching of Prices with Items consumed
-\end_layout
-
 \begin_layout Standard
-As noted before, out of the food, energy, transport and household commodity
+[Matching process] We now describe the process of matching the market prices
+ for the items consumed by a household in more detail.
+ As noted before, out of the food, energy, transport and household commodity
  groups, we only consider quality differences in food and energy subgroups
  - whereas the other commodity groups are viewed as groups where asset possessio
 n (or ownership of long-term durable goods) matters more than quality variation.
