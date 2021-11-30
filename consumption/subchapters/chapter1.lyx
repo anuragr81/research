@@ -23,12 +23,12 @@ theorems-ams-extended
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "libertine" "Spectral"
+\font_roman "tgtermes" "Spectral"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts true
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -252,8 +252,42 @@ belle epoque
 \begin_layout Standard
 [separability and futility addressed as well] The segmentation of quality
  based on owned assets is key to our view of status consumption.
- Since i) a consumer improves quality in food and other commodity groups
- when her income rises and ii) since status can be improved with consumption
+ To avoid confusion of terms in the future discussion on items and quality,
+ we use the nomenclature provided by Cramer
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CramerIncomePrice1973"
+literal "true"
+
+\end_inset
+
+ so that 
+\begin_inset Quotes eld
+\end_inset
+
+goods
+\begin_inset Quotes erd
+\end_inset
+
+ are variants with different quality that all fall under a certain 
+\begin_inset Quotes eld
+\end_inset
+
+commodity
+\begin_inset Quotes erd
+\end_inset
+
+ (see Cox
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CoxWohlgenant1986"
+literal "true"
+
+\end_inset
+
+ for further notes on this nomenclature).
+ Now since i) a consumer improves quality in food and other commodity groups
+ when her income rises and ii) since status can bes improved with consumption
  only through either non-durable or durable consumption, the improvement
  and sustenance of quality across multiple commodity groups carries status
  among those with the same asset-ownership levels.
@@ -468,8 +502,8 @@ name "sec:LiteratureSurvey"
 \end_layout
 
 \begin_layout Standard
-[Houthakker- Engel Method] The analysis of quality elasticities has been
- of interest at least since Houthakker 
+The analysis of quality elasticities has been of interest at least since
+ Houthakker's post-war analysis of family surveys
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HouthakkerFamilySurvey"
@@ -477,10 +511,10 @@ literal "true"
 
 \end_inset
 
-'s post-war analysis of family surveys.
- Allowing the consumer utility to optimise both quality and quantity by
- treating quality as a separate good that scaled up the minimum-expenditure
- subject to a given price of quality, Houthakker's 
+.
+ Allowing the consumer utility to optimise both quality and quantity while
+ treating quality as a separate good which scaled up the minimum-expenditure
+ for a given price of quality, Houthakker 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HouthakkerQuality1952"
@@ -488,14 +522,14 @@ literal "true"
 
 \end_inset
 
- approach viewed the quality price elasticity of demand (quantity purchased)
- by splitting it into the quantity price elasticity of expenditure on quality
- and the income elasticity of quality measure.
- This approach to view quality as a separate good has been expanded upon
- by much of the literature on quality.
+ decomposed the quality price elasticity of demand (quantity purchased)
+ by splitting it into a quantity price elasticity of expenditure on quality
+ and an income elasticity of quality measure.
+ The treatment of quality as a separate good has since been a common approach
+ in the literature on quality.
  One such application is the simple repackaging method, where a high-quality
- item is seen as the multiples of the lower quality items.
- If the quality for a (composite) good is 
+ item is seen as multiples of the lower quality item(s).
+ Thus, if the quality for a (composite) good is 
 \begin_inset Formula $\theta$
 \end_inset
 
@@ -543,8 +577,8 @@ The base-price is chosen so as view the demand for items with price
 \begin_inset Formula $h(\theta)$
 \end_inset
 
- as a function of the quality parameter, one may therefore use the following
- cost-function transformation (see Deaton
+ as a function of the quality parameter, one uses the following cost-function
+ transformation (see Deaton
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonEconConsumer"
@@ -581,11 +615,11 @@ quality
 \begin_inset Quotes erd
 \end_inset
 
- - might not always lead to a satisfactory interpretation of the electricity
- consumption in terms of the quantity and price of kerosene consumed.
- The simple-repackaging model has been more often used with classical approaches
- in the context of the cost-of-living index problem (see for example Fisher-Shel
-l 
+ - may not be satisfactorily explained by viewing electricity consumption
+ in terms of the quantity and price of kerosene consumed.
+ The simple-repackaging model has been more popular in the context of the
+ cost-of-living index problem where such a substitution is both plausible
+ and desirable (see the classical application from Fisher-Shell 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "FisherShell1968"
@@ -597,7 +631,7 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-[Market Prices Problem] More recent approaches to measuring quality 
+More recent approaches to measuring quality 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity,DeatonQualityQuantityVariation,DeatonSurveyElasticities,GibsonKimQualityBog2019,AndalonGibsonSoda2017"
@@ -605,9 +639,10 @@ literal "false"
 
 \end_inset
 
-have been limited to analysis for food - partly because of the unavailability
- of quantities consumed for commodities other than food in most consumer
- surveys.
+ have used measures of quality based on the quantities consumed of items.
+ These methods have been limited to analysis for food quality - largely
+ because of the quantities consumed are not recorded for commodities other
+ than food in most consumer surveys.
  While the measure of quality based on quantities consumed may often suffice
  for an overview of food quality, the issue of unavailability of market
  prices (and thereby of quality) in the studies of quality has only recently
@@ -623,8 +658,9 @@ literal "true"
  More specifically, the measurement of quality is often performed without
  the available market prices by simply averaging over the expenditure in
  a given region (or over the entire population of consumers).
- In other words, the implicit price-deflator (or unit-values) are used prices
- in the empirical analyses (see Tafere et al 
+ The so-called implicit price-deflator (or unit-value) method uses these
+ averages in place of prices in the empirical analyses (see Tafere et al
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "TafereTaffesseEthiopia2010"
@@ -633,15 +669,28 @@ literal "true"
 \end_inset
 
  for a recent implementation).
- While this may be appropriate for specific empirical questions, the measurement
- errors that it introduces cannot be ignored for finer conclusions related
- to price and income elasticities.
- This is because the measurement error that arises due to the quantity consumed
- by the consumer appearing both in the dependent variable (as budget share's
- numerator) and in the control variable (as the denominator for unit-value
- used as price).
- Since observing market prices prevents such measurements errors (see the
- discussion by McKelvey 
+ 
+\end_layout
+
+\begin_layout Standard
+While price-deflators may be appropriate for certain empirical questions,
+ the measurement errors introduced by their use are difficult to ignore
+ for finer conclusions related to price and income elasticities.
+ More particularly, the quantity consumed by the consumer appearing both
+ in the dependent variable (as budget share's numerator) and in the control
+ variable (as the denominator for unit-value used as price) cannot be always
+ mitigated for finer questions related to consumer preferences for certain
+ items
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011,GibsonKimQualityBog2019"
+literal "false"
+
+\end_inset
+
+.
+ Since the market prices available in the survey prevents such measurements
+ errors (see the discussion by McKelvey 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "McKelveyQuality2011"
@@ -657,10 +706,8 @@ literal "true"
 
 \end_inset
 
-), we prefer their use for measuring the consumption of quality given their
- granularity of their observation in the LSMS survey for Tanzania (prices
- recorded at the level of a district or at a lower granularity).
- Consequently, also avoid other approaches such as the RDMP (
+), we prefer their use for measuring the consumption of quality.
+ Consequently, we also avoid other approaches such as the RDMP (
 \begin_inset Quotes eld
 \end_inset
 
@@ -677,15 +724,14 @@ literal "true"
 
 \end_inset
 
- that do not leverage the details of market-observed prices.
+ that do not depend on locally market-observed prices.
 \end_layout
 
 \begin_layout Standard
-[All is not lost ] Indeed, all is not lost in the absence of market-data
- prices.
- There have been a few techniques used in the literature to address the
- measurement errors arising from the use of price-deflators in lieu of market-ob
-served prices.
+For situations where market-prices are not available to such detail (the
+ LSMS data we use records prices at the district or finer levels), there
+ have been a few techniques to address the measurement errors arising from
+ the use of price-deflators.
  Deaton 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -704,13 +750,16 @@ literal "true"
 
 \end_inset
 
- for panel data analyses.
- 
-\end_layout
+ for panel data analyses (also see McKelvey's assessment 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+literal "true"
 
-\begin_layout Standard
-[AIDS without Market Prices ] In the current chapter, we use the AIDS model
- (see Deaton 
+\end_inset
+
+ of the Deaton method).
+ In the current chapter, we use the AIDS model (see Deaton 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonMuellbauerAIDS"
@@ -727,16 +776,11 @@ literal "false"
 \end_inset
 
  using the market prices observed at the consumer's residence district.
- See McKelvey's assessment 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "McKelveyQuality2011"
-literal "true"
+ 
+\end_layout
 
-\end_inset
-
- of the Deaton method).
- Based on PIGL approaches originally popularised by Barten
+\begin_layout Standard
+Based on PIGL approaches originally popularised by Barten
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BartenPreferences"
@@ -760,10 +804,10 @@ literal "true"
 
 \end_inset
 
-, the method conforms to the demand function restrictions.
- AIDS method can be readily extended to other panel data scenarios.
- For instance, the structural changes in the parameters over time is addressed
- with a dynamic AIDS formulation (see Anderson and Blundell 
+, the AIDS method readily conforms to the demand function restrictions.
+ Further, the method can be extended to other panel data scenarios as well.
+ For instance, the structural changes in the parameters over time has been
+ addressed with a dynamic AIDS formulation (see Anderson and Blundell 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AndersonBlundellAIDSTest1983,AndersonBlundellDynEqn1982"
@@ -771,9 +815,8 @@ literal "true"
 
 \end_inset
 
- for a first-order dynamic model).
- Similarly, the demographic variables are accommodated in the AIDS model
- with the a 
+ for a first-order dynamic model) and the demographic variables are accommodated
+ in the AIDS model using a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -789,15 +832,16 @@ literal "true"
 
 \end_inset
 
-) where the intercept 
-\begin_inset Formula $\alpha_{i}$
-\end_inset
-
- in the equation 
+) .
+ The demographic translation method uses the AIDS equation 
 \begin_inset Formula $w=\alpha_{i}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{jh})+\beta_{i}ln(\frac{x_{h}}{P})$
 \end_inset
 
- is expanded as 
+ and specifies an intercept 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ as 
 \begin_inset Formula $\alpha_{i}=\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{k}$
 \end_inset
 
@@ -809,16 +853,20 @@ literal "true"
 \begin_inset Formula $i\in[1,n]$
 \end_inset
 
- for 
+ for the 
 \begin_inset Formula $n$
 \end_inset
 
- items ).
+ items).
 \end_layout
 
 \begin_layout Standard
-[Heien Wessels] An issue in the measurement of quality estimation is also
- non-consumption of high-quality items.
+Differentiating high-quality items from the low-quality items within a particula
+r commodity (good) also poses the issue of non-consumption of high-quality
+ items.
+ If one were to calculate the price elasticities for high-quality and low-qualit
+y items separately, an obvious issue is that high-quality items might not
+ be consumed at all for a significant part of the consumer population.
  Heien and Wessells 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -827,10 +875,11 @@ literal "true"
 
 \end_inset
 
- address the issue by correcting by non-consumption using the inverse Mills
- ratio into AIDS regressions.
- This approach makes sense for an analysis of quality so as long as the
- consumption on high quality goods can be considered 
+ address the issue by correcting for non-consumption using the inverse Mills
+ ratio as instrument into the AIDS regressions.
+ This approach makes sense for an analysis of quality so as long as individual
+ items elasticities are desirable and the consumption on high quality goods
+ can be considered 
 \begin_inset Quotes eld
 \end_inset
 
@@ -859,163 +908,21 @@ literal "true"
 \end_inset
 
 .
- The first-stage of this Heien-Wells method is a probit where the dependent
- variable is an indicator variable - denoting whether the household 
-\begin_inset Formula $h$
-\end_inset
-
- consumes the item 
-\begin_inset Formula $i$
-\end_inset
-
- (given 
-\begin_inset Formula $s$
-\end_inset
-
- demographic variables) or not.
  
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-Y_{ih} & =f(p_{1h},p_{2h},...,p_{nh},m_{h},d_{1h},d_{2h},...d_{sh})\label{eq:wessells_probit}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The inverse mills ratio is calculated for every household using the probit
- regression equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wessells_probit"
-
-\end_inset
-
-.
- This inverse mills ratio i.e.
- the quantity 
-\begin_inset Formula $R_{ih}$
-\end_inset
-
- is calculated as follows
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-R_{ih} & =\begin{cases}
-\frac{\phi(p_{h},m_{h},d_{h})}{\Phi(p_{h},m_{h},d_{h})} & q_{ih}>0\\
-\frac{\phi(p_{h},m_{h},d_{h})}{1-\Phi(p_{h},m_{h},d_{h})} & q_{ih}=0
-\end{cases}\label{eq:invmills}
-\end{alignat}
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $R_{ih}$
-\end_inset
-
- is then used as an instrument in the following estimation equation:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-w_{i} & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{kh}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{jh})+\beta_{i}ln(\frac{x_{h}}{P})+\delta_{i}R_{ih}\label{eq:wessells_aids}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Typically one uses the following formulation for 
-\begin_inset Formula $ln(P)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat*}{1}
-ln(P) & =\alpha_{0}+\sum_{i=1}^{n}\alpha_{i}ln(p_{i})+\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\gamma_{ij}ln(p_{i})ln(p_{j})
-\end{alignat*}
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-But a simpler linear-AIDS formulation 
-\begin_inset Formula $P=\sum_{i=1}^{n}w_{i}ln(p_{ih})$
-\end_inset
-
- is also often used (Stone's index).
- Notice that the inverse-mills instrument must also comply with the symmetry
- and homogeneity-restrictions and thus one must ensure that 
-\begin_inset Formula $\sum_{i=0}^{n}\delta_{i}R_{ih}=0$
-\end_inset
-
- in addition to 
-\begin_inset Formula $\sum\alpha_{i}=0$
-\end_inset
-
-, 
-\begin_inset Formula $\sum_{i=1}^{n}\gamma_{ij}=0\forall j\in[1,n]$
-\end_inset
-
- , 
-\begin_inset Formula $\sum_{j=1}^{n}\beta_{i}=0$
-\end_inset
-
- and 
-\begin_inset Formula $\gamma_{ij}=\gamma_{ji}$
-\end_inset
-
-.
- Heien-Wessells
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HeienWessellsAIDSCensored1990"
-literal "true"
-
-\end_inset
-
- choose a more general approach for the instrument variable by adding an
- equation to the system with term 
-\begin_inset Formula $\delta_{i}R_{ih}$
-\end_inset
-
- replaced by 
-\begin_inset Formula $-\sum_{i=0}^{n-1}\delta_{i}R_{ih}$
-\end_inset
-
-so that the additivity condition is always met.
-\end_layout
-
-\begin_layout Standard
-[SUREG preferred over Heien Wessels] We intend to use the heterogeneity
- in the economy implied by the details market prices to understand how quality
- of non-durable consumption relevant for social status may vary in a developing
- economy against the long-term assets that may segregate status competitions
- among consumers.
- Thus, while Heien-Wessels approach may be well-suited for comparison of
- elasticities for particular items, we seek a comparison of quality across
- multiple commodities that may give us an overview of overall quality.
+As we intend to use the heterogeneity in the economy implied by the market
+ prices to understand how non-durable consumption quality relevant for social
+ status may vary and segregate status competitions, we prefer a view of
+ quality aggregated over a commodity to the item-wise view used in the Heien-Wes
+sels approach.
+ While the latter may be well-suited for comparison of elasticities for
+ particular items, we seek a comparison of quality across multiple commodities
+ for an overview of overall quality.
  For this purpose, we find the AIDS method including demographic characteristics
- in the cross-section along with the measure of quality based on market-observed
- prices and quantities consumed as suggested by Nelson
+ in the cross-section and a quality determined using market-observed prices
+ (Nelson
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity"
@@ -1023,7 +930,7 @@ literal "false"
 
 \end_inset
 
- more appropriate for our analysis.
+ ) better suited for our analysis.
 \end_layout
 
 \begin_layout Section
@@ -1044,24 +951,27 @@ name "subsec:QualityMeasure"
 
 \end_inset
 
-Measuring price-based quality
+Price-based quality
 \end_layout
 
 \begin_layout Standard
 In the empirical studies on demand, the separability of demand for commodities
  that are grouped on the basis of their functional utility is often assumed.
- The separability is essentially a structure imposed on consumer demand
- by the researcher, but what make them ubiquitous in the demand literature
- is high-level interpretations they offer for consumer demand.
- A high-level interpretation is what makes a comparison with the past states
- of demand or the state of demand in other economies possible.
- 
+ Even though the separability of consumer demand is not always verified
+ empirically in consumer studies, the assumption of separability is nearly
+ ubiquitous in the literature it is one of the least intrusive assumptions
+ one could make on the structure of demand for a high-level interpretation.
+ The interpretations based on separable groups facilitate the comparison
+ with of current demand with the past and across the cross-section in the
+ demand studies.
 \end_layout
 
 \begin_layout Standard
-Yet these functional groups are largely ignored in the literature of status
- consumption.
- While measuring the consumption of
+Despite their ubiquity in the demand literature, the discussion of separability
+ seems largely absent from the literature of status consumption.
+ This is because of the advantage offered by the futility assumption i.e.
+ the assumption that all visible goods serve no purpose other than signaling.
+ Therefore, while measuring the consumption of
 \begin_inset Quotes eld
 \end_inset
 
@@ -1069,12 +979,12 @@ conspicuous
 \begin_inset Quotes erd
 \end_inset
 
- items, the demand elasticities are often estimated in the literature on
- conspicuous consumption using a collection of visible/conspicuous items
- as if they were a separate commodity group themselves.
- The literature justifies the use of a separate group of conspicuous items
- with the assumption that conspicuous consumption has a zero-utility in
- the usual (private) sense (see Ireland model
+ items, the demand elasticities are invariably estimated using a collection
+ of visible/conspicuous items as if they were a separate commodity group
+ themselves.
+ The separate group of conspicuous items is justified the assumption that
+ conspicuous consumption has a zero-utility in the usual (private) sense
+ (see Ireland model
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ireland_signals"
@@ -1092,22 +1002,23 @@ literal "true"
 \end_inset
 
  for the details of this argument).
- This approach makes sense only because the focus of such studies is the
- visible consumption itself.
- Thus the demand for the items that are known to be visible 
+ The demand for the items that are known to be visible 
 \shape italic
 a priori 
 \shape default
-can be assumed to be also separable.
- On the other hand, working with consumption diary microdata in the developing
- (largely agrarian) countries, we find this assumption (henceforth referred
- to as the futility assumption) somewhat limiting.
+is therefore also separable.
+ 
+\end_layout
+
+\begin_layout Standard
+In the context of the consumption diary microdata in the developing (largely
+ agrarian) countries, we find the futility assumption somewhat limiting.
  This is because in such markets, a high-quality item (priced higher in
  the market than its substitutes) is conspicuous not solely on grounds of
- its visibility - when most people don't have access to electricity in an
- economy, then having electricity as opposed to kerosene can also provide
- a status benefit (even though electricity is not a status or visible good
- 
+ its visibility but its utility as well.
+ When most people don't have access to electricity in an economy, then having
+ electricity as opposed to kerosene can also provide a status benefit (even
+ though electricity is not a status or visible good 
 \shape italic
 per se
 \shape default
@@ -1115,37 +1026,18 @@ per se
  Similarly, when most people take public-transport to work, having a car
  or taking a taxi also provides a status benefit and so on.
  To use a framework for status consumption in a developing economy, we must
- go beyond the idea of visible items.
- In the model we develop, therefore, no distinction of private vs public/visible
+ therefore go beyond the idea of visible items.
+ In the model we present, therefore, no distinction of private vs public/visible
  consumption is considered necessary as all items are potential signaling
  items.
  Because of how widespread the low-quality consumption may be, an item that
  is not so important from a visibility perspective (i.e.
- not futile) may still be relevant for status - which we see as a part of
- the consumer's long-term utility.
- This we argue is even more so the case in the developing world - where
- both the poverty levels and inequality are very high - and conspicuous
- consumption need not be futile in the usual sense at all.
+ not futile) may still be relevant for status.
 \end_layout
 
 \begin_layout Standard
-[Using Market Prices]The literature on demand analysis often relies on exogenous
- price observations for the consumer's basket.
- The prices observed in the market embody how the market, subject to supply
- pressures both i) addresses the needs of the consumers and ii) prices the
- differences in quality variants of the same commodity to the consumers.
- Despite market-observed prices being of a central importance to the demand
- analysis, it is only recently that the detailed prices observed in the
- market are made available in micro-data surveys.
- Arguing that market prices are key to an understanding of quality, we enhance
- a typical demand analysis to include the quality variation within commodities,
- the needs faced by the consumer and other household characteristics such
- as income and social-economic standing.
-\end_layout
-
-\begin_layout Standard
-[Quality Metric Specifications ] Arguing that a discussion of status needs
- to encompass more than visibility in the developing world
+[Quality Metric Specifications and its limitation ] Arguing that a discussion
+ of status needs to encompass more than visibility in the developing world
 \begin_inset Foot
 status open
 
@@ -1191,162 +1083,31 @@ literal "true"
 
 \end_inset
 
-, we use a quality metric that measures the segmentation of quality in the
- population given a set of functionally separable commodity groups.
- We do not rely on analysis of visible items alone whose demand needs to
- be considered as if they were a weakly separable group by themselves.
- To avoid confusion of terms in the future discussion on items and quality,
- we use the nomenclature provided by Cramer
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CramerIncomePrice1973"
-literal "true"
-
-\end_inset
-
- so that 
-\begin_inset Quotes eld
-\end_inset
-
-goods
-\begin_inset Quotes erd
-\end_inset
-
- are variants with different quality that all fall under a certain 
-\begin_inset Quotes eld
-\end_inset
-
-commodity
-\begin_inset Quotes erd
-\end_inset
-
- (see Cox
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CoxWohlgenant1986"
-literal "true"
-
-\end_inset
-
- for further notes on this nomenclature).
-\end_layout
-
-\begin_layout Standard
-[Limitations] As we don't use the futility assumption, we do not assume
- that the high quality items from different commodity groups are not meant
- to be interchangeable with each other as such.
- The set of high-quality items in commodities thus do not need to be the
- same as the set of visible items in a consumer basket.
- While expensive meats and beverages may not be as visible as cosmetics,
- the higher quality they carry is of interest to our measure of quality
- even though an aggregate measure of quality arrived at by substitution
- among high-quality items across various commodity groups is not feasible.
- The claims for separability of 
-\shape italic
-all 
-\shape default
-high-quality items are thus improper.
- For example, even though kobe beef cannot be substituted with luxury travel
- as such, a high standard of life can be indicated by either or both of
- them without necessarily a separable functionality utility that aggregates
- into an overall quality.
- Therefore, our approach only gauges how consumers put some weight on higher-qua
-lity within each commodity group without examining how quality may be budgeted
+ - where both the poverty levels and inequality are high - we use a quality
+ metric that measures the segmentation of quality in the population given
+ a set of functionally separable commodity groups.
+ Here, as we don't use the futility assumption, we do not assume that the
+ high quality items from different commodity groups are not meant to be
+ interchangeable with each other either.
+ In other words, the set of high-quality items within each of the commodities
+ cannot together offer a utility in a manner the visible items taken together
+ do.
+ Thus we attempt to gauge only how consumers put some weight on higher-quality
+ within each commodity group without examining how quality may be budgeted
  for by the consumer within the non-overlapping commodity groups.
- In other words, no attempts are made to understand how consumers may purchase
+ Even though kobe beef cannot be substituted with luxury travel as such,
+ the high standard of life indicated by either or both of them does not
+ require us to have a utility for quality separable across food and transport
+ commodities.
+ Therefore, no attempts are made to understand how consumers may purchase
  a desired amount of (overall) quality.
- It is the variation in high-quality consumption across the population that
- motivates our analysis of the status-related consumption in the context
- of the developing economies.
+ The variation in high-quality consumption across the population is observed
+ only as a vector of quality composed of quality metrics corresponding to
+ each commodity.
 \end_layout
 
 \begin_layout Standard
-As quality cannot be aggregated from across commodity groups, the econometric
- methods we develop employ a vector of quality metrics for every commodity
- group i.e.
- a vector 
-\begin_inset Formula ${\nu_{G\in\mathscr{{G}}}}$
-\end_inset
-
- where 
-\begin_inset Formula $G$
-\end_inset
-
- is a commodity group 
-\begin_inset Formula $G\in\mathscr{G}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathscr{G}$
-\end_inset
-
- is the set of all commodities so that the representative consumer can prefer
- higher quality in one group 
-\begin_inset Formula $G_{1}$
-\end_inset
-
- over that in the another 
-\begin_inset Formula $G_{2}$
-\end_inset
-
-.
- The quality metric in each group 
-\begin_inset Formula $G$
-\end_inset
-
- is calculated using the local prices of the goods within that commodity.
- More simply put, a consumer who buys more of the high-priced item within
- a commodity group is viewed as consuming higher quality of that commodity.
- The econometric methods then attempt to view both how the demand for quality
- is distributed across the population and how it varies in response to change
- in prices.
- The use of a commodity aggregate for quality means imposes the restriction
- of a constant relative price structure (
-\series bold
-Hicks aggregation restriction
-\series default
-).
- The market prices (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:LSMSMarketPrices"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-) are used to ensure that this condition is met.
-\end_layout
-
-\begin_layout Standard
-[Aggregate quality computation] In the econometric model we use, a quality
- metric is associated to the aggregate of goods seen as a commodity (see
- Houthakker 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HouthakkerFamilySurvey"
-literal "true"
-
-\end_inset
-
-, Nelson
-\begin_inset CommandInset citation
-LatexCommand cite
-key "NelsonQualityQuantity"
-literal "true"
-
-\end_inset
-
-and Deaton
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonQualityQuantityVariation,DeatonEconConsumer"
-literal "true"
-
-\end_inset
-
- for the related formulations)
+The econometric methods we use employ a vector of quality metrics
 \begin_inset Foot
 status open
 
@@ -1407,19 +1168,65 @@ Notice that no quality-related inferences can be drawn without an explicit
 
 \end_inset
 
+ for every commodity group i.e.
+ a vector 
+\begin_inset Formula ${\nu_{G\in\mathscr{{G}}}}$
+\end_inset
+
+ where 
+\begin_inset Formula $G$
+\end_inset
+
+ is a commodity group 
+\begin_inset Formula $G\in\mathscr{G}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathscr{G}$
+\end_inset
+
+ is the set of all commodities so that the representative consumer can prefer
+ higher quality in one group 
+\begin_inset Formula $G_{1}$
+\end_inset
+
+ over that in the another 
+\begin_inset Formula $G_{2}$
+\end_inset
+
 .
- Thus, the quantities consumed for two (or more) items within a commodity
+ The quality metric in each group 
+\begin_inset Formula $G$
+\end_inset
+
+ is calculated using the local prices of the goods within that commodity.
+ More simply put, a consumer who buys more of the high-priced item within
+ a commodity group is viewed as consuming higher quality of that commodity.
+ We then attempt to view both how the demand for quality is distributed
+ across the population and how it varies in response to change in prices.
+ The use of a commodity aggregate for also imposes the restrictions of a
+ constant relative price structure (i.e.
+ the Hicks aggregation restriction - see Nelson
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+literal "false"
+
+\end_inset
+
+).
+ For the quantities consumed for two (or more) items within a commodity
  (e.g.
  tea and carbonated drinks under beverages that can be interchanged by the
- consumer) are viewed as an aggregate-quantity of a composite good (i.e.
+ consumer), we obtain the aggregate-quantity of a composite good (i.e.
  beverages) along with the value consumed of a quality metric (proportion
  of tea and carbonated drinks).
  In other words, the quantity-price tuples 
 \begin_inset Formula $(q_{1},p_{1}),(q_{2},p_{2}),(q_{3},p_{3})...$
 \end_inset
 
- within a commodity could be expressed as a quantity and quality pair for
- a commodity aggregate - 
+ within a commodity are expressed as a quantity and quality pair corresponding
+ to commodity aggregate 
 \begin_inset Formula $(Q_{G},P_{G}),(\nu_{G},p_{\nu_{G}})$
 \end_inset
 
@@ -1428,22 +1235,21 @@ Notice that no quality-related inferences can be drawn without an explicit
 \end_inset
 
  are prices and quantity consumed for a composite commodity while 
-\begin_inset Formula $\nu_{G}$
+\begin_inset Formula $V_{G}$
 \end_inset
 
- represents the quality of the commodity - treated as a separate good.
- The quantity and quality pair of goods correspond to the real quantities
- consumed for several items.
+ represents the quality of the commodity.
 \end_layout
 
 \begin_layout Standard
-[Simplification] To identify the commodity aggeregate over which the quality
- measure is aggregate over, we also make use of a simplication so that not
- all variation in quality is considered of importance to the consumer optimising
- status and needs.
- More specifically, the varition quality is ignored for a particular commodity
- category if the there are long-term assets that dominate the effect on
- status.
+[Simplification] To identify the commodities over which the quality measure
+ is aggregated over, we make use of a simplication so that not all variation
+ in quality is considered of importance to the consumer optimising status
+ and needs - where the needs are interpreted as quantity and status implied
+ form quality.
+ Due to this simplification, the variation quality is ignored for a particular
+ commodity category if the there are long-term assets that dominate the
+ effect on status from the commodity.
 \end_layout
 
 \begin_layout Assumption
@@ -1474,17 +1280,23 @@ noprefix "false"
  and ii) long-term assets in the commodity group matter to the consumer.
  Therefore, in the tranport commodity group, only either of i) car ownership
  or ii) expensive-taxi-rides matter to the consumer.
- In the consumption data for Tanzania, the empirical implications of this
- assumption are not serious and allow us to focus on quality variation only
- for commodities where assets do not play a role.
- More specifically, out of the four commodity aggregates energy, transport
+ The implications of this assumption are not serious in the consumption
+ data from Tanzania and permit us to focus on quality variation only for
+ commodities where assets do not play a role.
+ More specifically, out of the commodity aggregates - energy, transport
  household and those associated with food (fruits-vegetables, non-fresh
- itemsetc.), only quality is considered for energy and food aggregates categories
+ itemsetc.), quality is only considered for energy and food aggregates categories
  due the non-durable nature of their consumption.
  On the other hand, only quantity (i.e.
  the expenditure) is considered of importance for non-durable consumption
  in transport and household categories.
- As long as one may classify every commodity group as either dominated by
+ This assumption stands only because most consumers in the data do not have
+ significant consumption in the transport and household categories.
+ 
+\end_layout
+
+\begin_layout Standard
+As long as one may classify every commodity group as either dominated by
  long-term asset or not, there are only two ways a consumer can spend on
  quality - either by switching between the variants of a composite commodity
  (choosing higher or lower quality of a composite commodity where long-term
@@ -1514,9 +1326,9 @@ Recall that an elementary commodity is one where no quality variation is
 [Aggregate quality ] For the elasticities for commodity aggregates quality
  to make sense, the demand must follow the
 \series bold
- Hick's commodity 
+ 
 \series default
-theorem.
+Hick's commodity theorem.
  This is made possible with a constant relative price structure assumption
  for the variants (items) of (within) a commodity.
 \end_layout
@@ -1589,11 +1401,11 @@ g(E_{G},p_{G}) & \equiv g(\frac{E_{G}}{P_{G}},p_{G}^{*})=g(Q_{G},p_{G}^{*})\labe
 \end_layout
 
 \begin_layout Standard
-There may be different ways of selecting an appropriate 
+With a particular 
 \begin_inset Formula $P_{G}$
 \end_inset
 
- (see Nelson
+ - for which there are varying criteria of selection (see Nelson
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity"
@@ -1609,7 +1421,7 @@ literal "false"
 
 \end_inset
 
- for examples), but the key benefit from the formulation in Equation 
+) - the formulation in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:demand_function_quality"
@@ -1619,24 +1431,30 @@ noprefix "false"
 
 \end_inset
 
- is that it allows us to consider the a quantity 
+ depends both on the quantity 
 \begin_inset Formula $Q_{G}\equiv\frac{E_{G}}{P_{G}}$
 \end_inset
 
- and a corresponding quality variable 
+ and the quality variable 
 \begin_inset Formula $V_{G}$
 \end_inset
 
 .
  Instead of viewing demands for {wheat, rice, corn, eggs, beef, chicken,
- fish, charcoal, kerosene, electricity} - for example - with a list of 10
- functions, one can choose to view the demands for commodities that encompass
- the 10 goods - {carb, protein and energy} with 3 functions corresponding
- to each commodity group.
- The the elasticities of the quality and the quantity consumed for each
- of the three commodity groups can be used to interpret the demand for quality
- across the commodity aggregates.
- 
+ fish, charcoal, kerosene, electricity} individually with a list of 10 functions
+ for example, we can choose to view demands for commodities {carb, protein
+ and energy} that encompass the 10 goods with the 3 functions corresponding
+ to each commodity group so long as the Assumption 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "assu:Hicks"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ holds.
 \end_layout
 
 \begin_layout Standard
@@ -1648,13 +1466,12 @@ literal "true"
 
 \end_inset
 
-, we use a simple metric as the relative-price-weighted sum of expenditure
- per physical unit within a commodity based on a minimum price in the commodity
- aggregate items as the base-price 
+, we use a simple metric using the relative-price-weighted sum of expenditure
+ per physical unit within a commodity and choose 
 \begin_inset Formula $P_{G}$
 \end_inset
 
-.
+ as the minimum price amongst the commodity aggregate constituent items.
  Nelson's rejection of the use of the sum of physical quantities 
 \begin_inset Formula $q_{G}=\sum_{i\in G}q_{i}$
 \end_inset
@@ -1663,7 +1480,15 @@ literal "true"
 \begin_inset Formula $Q_{G}$
 \end_inset
 
- in Equation 
+ (used by Deaton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation"
+literal "false"
+
+\end_inset
+
+) in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:demand_function_quality"
@@ -1726,6 +1551,15 @@ V_{G} & =\sum_{i\in G}(\frac{q_{i,G}p_{i,G}^{*}}{q_{G}})\label{eq:quality_def}
 
 \begin_layout Standard
 Here, 
+\begin_inset Formula $q_{G}$
+\end_inset
+
+ .
+ 
+\begin_inset Formula $(=\sum_{j\in G}q_{j,G})$
+\end_inset
+
+ is the physical sum of quantities consumed and 
 \begin_inset Formula $p_{i,G}^{*}$
 \end_inset
 
@@ -1737,35 +1571,19 @@ Here,
 \begin_inset Formula $G$
 \end_inset
 
- and 
-\begin_inset Formula $q_{G}=\sum_{j\in G}q_{j,G}$
+ where 
+\begin_inset Formula $p_{i,G}$
 \end_inset
 
-.
- 
-\begin_inset Formula $q_{G}$
+ are the prices for item 
+\begin_inset Formula $i$
 \end_inset
 
- is the physical sum of quantities consumed.
- Recall that regardless of how the items are aggregated, such a formulation
- always requires the aggregation conditions of the composite commodity theorem
- conditions to be met (see Nelson
-\begin_inset CommandInset citation
-LatexCommand cite
-key "NelsonQualityQuantity"
-literal "true"
-
+ in commodity group 
+\begin_inset Formula $G$
 \end_inset
 
- and Deaton 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonEconConsumer"
-literal "true"
-
-\end_inset
-
- for details).
+ observed in the market.
  The ratio 
 \begin_inset Formula $p_{i,G}^{*}$
 \end_inset
@@ -1774,8 +1592,7 @@ literal "true"
 \begin_inset Formula $P_{G}$
 \end_inset
 
- i.e.
- the price of the base-commodity in the group 
+ (the price of the base-commodity in the group 
 \begin_inset Formula $G$
 \end_inset
 
@@ -1783,30 +1600,13 @@ literal "true"
 \begin_inset Formula $G$
 \end_inset
 
- is being considered.
- 
-\begin_inset Formula $p_{i,G}^{*}$
-\end_inset
-
- represents the price structure vector such the prices 
-\begin_inset Formula $p_{i,G}$
-\end_inset
-
- observed in the market for item 
-\begin_inset Formula $i$
-\end_inset
-
- in the group 
-\begin_inset Formula $G$
-\end_inset
-
- can be written as follows:
+ is being considered) so that
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-p_{i,G} & =(P_{c}\times p_{i,G}^{*})\forall i\in G\label{eq:base_price_structure}
+p_{i,G} & =(P_{G}\times p_{i,G}^{*})\forall i\in G\label{eq:base_price_structure}
 \end{alignat}
 
 \end_inset
@@ -2185,12 +1985,8 @@ The price of composite quality is undefined as the total expenditure is
 \end_inset
 
  respectively.
- The quality is lower for the latter case even though the physical quantity
+ The quality is lower for the latter consumer even though the physical quantity
  is the same.
- The quality adjusted quantity accounts for the total expenditure and as
- such there is no price needed for the quality value calculated in the above
- fashion.
- 
 \end_layout
 
 \begin_layout Standard
@@ -2462,20 +2258,20 @@ Econometric Method
  the same for a wealthy and a destitute household and no distinction is
  drawn between the basic needs of a rich and a poor family (through their
  disparate educational needs etc.).
- To reiterate, the notion of status in the model comes only from the quality,
- the long-term assets and household characteristics.
- Notice also that due to the very definition of needs, the consumer cannot
- sacrifice needs in order to purchase quality.
- Thus for prices fixed, a rise in quality must come either from an increase
- in income or from change in circumstances.
+ The notion of status in the model comes only from the quality in non-durable
+ consumption against the the long-term assets and permanent household characteri
+stics for the consumer.
+ Since the consumer cannot sacrifice needs in order to purchase quality
+ (due to the very definition of needs), a rise in quality (for prices fixed)
+ must come either from an increase in income or from change in circumstances.
  Likewise, a drop in quality must be due to change in circumstances (socio-econo
 mic standing which we assess with a vector of occupation, education, region/loca
 lity/neighborhood/assets) or addressing of more urgent needs.
- A consumer having undergone change in her long-term circumstances is thus
- treated as two consumers with different needs and/or long-term assets.
+ We consider a consumer having undergone changes in her long-term circumstances
+ as a different consumer with different needs and/or long-term assets.
  In other words, with changes such as purchase of a long-term asset of education
-al or occupational attainment, the consumers long-term habits of non-durable
- consumption quality would also undergo a change.
+al or occupational attainment, the consumer's long-term habits of non-durable
+ consumption quality are permitted to change.
 \end_layout
 
 \begin_layout Standard
@@ -2490,19 +2286,19 @@ noprefix "false"
 
 \end_inset
 
- readily lends itself to estimation of income and price elasticities (with
- respect to base-price 
+ thus leads to an estimation of income and price elasticities (with respect
+ to base-price 
 \begin_inset Formula $P_{G}$
 \end_inset
 
 ) across a cross-section of household characteristics relevant for quality
  with an AIDS implementation.
- To recap, we use the price-based quality and quantity for food sub-categories
- - protein (meat, fish), fruits-vegetables, non-fresh food items (dry carbohydra
-tes such as rice, wheat), complements (tea, coffee etc.) and densefoods (dense
- energy providing food as buns, pasta, flours) while using an indicator
- variable for energy that specifies whether the consumer uses electricity
- or not.
+ More specifically, we use the price-based quality and quantity for food
+ sub-categories - protein (meat, fish), fruits-vegetables, non-fresh food
+ items (dry carbohydrates such as rice, wheat), complements (tea, coffee
+ etc.) and densefoods (dense energy providing food as buns, pasta, flours)
+ while using an indicator variable for energy that specifies whether the
+ consumer uses electricity or not.
  The prices shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2527,9 +2323,10 @@ noprefix "false"
 .
  The ownership of assets for transport and household which appears as the
  control variable in the AIDS regression is measured with the logarithm
- of the costs of the asset.
- Also, ignoring the quality variation for transport and household expenditure
- categories means that quality is not estimated for these categories.
+ of the costs of the assets owned.
+ The quality variation is ignored for transport and household expenditure
+ categories and thus the quality variable associated with the two commodity
+ groups is not estimated.
 \end_layout
 
 \begin_layout Standard
@@ -2539,6 +2336,14 @@ noprefix "false"
 
 Unrestricted method
 \begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+literal "false"
+
 \end_inset
 
  AIDS system of equation we use for estimation of price and income sensitivites
@@ -2554,8 +2359,8 @@ reference "eq:quality_def"
  The aggregation also circumvents the issue of non-consumption since it
  is much less likely for no items to be consumed within a commodity group
  (fruits-veg, protein etc.).
- No correction related to non-consumption - as used in the Heien-Well method
- - is needed in this approach.
+ No correction related to non-consumption - as used in the Heien-Wells method
+ - is thus required in this approach.
  The following are the system of equations corresponding to commodity aggregate
  (group) 
 \begin_inset Formula $G$
@@ -2617,7 +2422,7 @@ noprefix "false"
 
  demographic variables (including the asset ownership related dummy variables).
  The composite unit value 
-\begin_inset Formula $V_{G}=P_{G}\nu_{G}$
+\begin_inset Formula $P_{G}V_{G}$
 \end_inset
 
  serves as the dependent variable in the latter quality equation 
@@ -2687,14 +2492,10 @@ additional
 
 \begin_layout Standard
 [Base Prices] The base-price 
-\begin_inset Formula $P_{j}$
+\begin_inset Formula $P_{G}$
 \end_inset
 
- for every 
-\begin_inset Formula $n$
-\end_inset
-
- items in a given aggregate in Equation 
+ for every aggregate in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:base_price_structure"
@@ -2707,18 +2508,7 @@ noprefix "false"
 is simply the minimum price of the goods within the commodity group.
  Here, only the locally observed market prices (at the district level) rather
  than the unit-value (estimated by averaging expenditure over a locality)
- for goods within a commodity aggregate are used for the base-price computation
- (see Details in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:PriceData"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
+ for goods within a commodity aggregate are used for the base-price computation.
  The expenditure on household and transportation commodity groups - on the
  other hand - are treated as if they were (each) just one commodity i.e.
  no quality differences are observed in the non-durable consumption within
@@ -2731,12 +2521,14 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-[Caveats] Evidently, the analysis of quality across food and energy based
- on commodity aggregates also imposes some restrictions due to the very
- nature of aggregation over various commodities based on their prices.
- More particularly, both the separability assumptions and the price-based
- assessment of quality are decision made by the researcher rather than the
- consumer (see Nelson
+[Caveat I] The above described aggregation is not without its limitations
+ because of the substitutability assumptions it makes on the items within
+ a group.
+ The aggregation effectively assumes that a substitution between two items
+ is possible only as long as they belong to the same commodity group.
+ Such an assumption of separability is indeed a characteristic of the view
+ chosen by the researcher rather than a claim on the consumer's behaviour
+ (see Nelson
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity"
@@ -2744,73 +2536,37 @@ literal "false"
 
 \end_inset
 
- for this clarification).
- Take for example, the protein commodity group - where as such there may
- no reason to think that being slightly more costly makes goat-meat of higher
- quality - in a sense perceived by the consumer - than beef.
- At time same time however, quality differences are evident if the price
- differences are larger - e.g.
- with the choice of pulses over chicken.
- The aggregated view of quality similarly might be argued as averaging the
- substitutions between items that are of interest in their own right.
+ for further substantiation of the argument).
+ Take for example, the protein commodity group - comprising of goat and
+ beef.
+ There is no reason to think that they may be not be enough substitution
+ in the two items in the consumer data or even that one is of higher quality
+ than the other solely on grounds of a slightly higher price.
+ However, a discussion of quality in protein aggregates becomes more relevant
+ when there are higher price differences between substitutes that indicate
+ clear differences in quality e.g.
+ with the protein group comprising of {pulses, chicken} and the consumer
+ substituting with variants of protein.
+ The grouping of commodity items is effectively the choice of the researcher.
+ To address such concerns with the aggregation, we also provide a comparison
+ with the item-wised view of elasticities suggested by Heien-Wells
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+literal "false"
+
+\end_inset
+
+.
+ The results from this item-wise approach with a more detailed sense of
+ elasticities are presented in Appendix III.
  
 \end_layout
 
 \begin_layout Standard
-To address this particular concern with aggregation, we provide comparison
- with an item-wised view of elasticities and explain the limitations for
- aggregation of quality.
- The results from an item-wise approach with a more detailed sense of elasticiti
-es using the Heien-Wells approach are presented in Appendix III.
- We prefer the quality-aggregated view as it provides more insights into
- variation in quality - given our focus on the segregation of quality across
- the segments of the population.
- However, it is also worth clarifying that the aggregation approve assumes
- a substitution between two items only as long as they belong to the same
- commodity group
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-An approach that strictly satisfies this property too strictly is 
-\begin_inset Quotes eld
-\end_inset
-
-simple-repackaging
-\begin_inset Quotes erd
-\end_inset
-
- method.
- The method assumes a perfect substitution across goods in a commodity group
- so that a higher quality product can be viewed in terms of a lower quality
- product.
- We find the perfect substitution assumption less useful when the goods
- within the commodity vary widely in quality (or fundamental other characteristi
-cs).
- As an example, the demand of a better good in a commodity group as a multiple
- of the worse good may be plausible for meat/food - but considering electricity
- in terms of coal into one aggregate is far less plausible (see the discussion
- on consumer indices in Fisher-Shell 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "FisherShell1968"
-literal "true"
-
-\end_inset
-
- on how this issue could be remedied).
- At the consumer's level, the substitution between kerosene and electricity
- is not as straightforward as amongst the quality variants of protein -
- so while a metric for quality does make sense in a setting where a mixture
- of high and low quality items are consumed (e.g.
- in food) it fails to account for quality differences when choices vary
- widely.
-\end_layout
-
-\end_inset
-
- .
- The commonly used two-state budgeting approach 
+[Caveat II] It is worth revisiting why we have not aggregated quality from
+ across all commodities in the manner of a two-state budgeting approach
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonEconConsumer"
@@ -2818,13 +2574,16 @@ literal "false"
 
 \end_inset
 
- is not used - i.e.
- substitution is not considered for high-quality items from across commodity
- group - due to the rather stringent requirement of the relative demand
- between two items in any two different categories to change only in response
- to the total expenditure.
- In other words, the response to price changes and total expenditure changes
- must use the same channels of communication in the commodity tree
+ commonly used in the literature.
+ This is also due to there being no substitution among high-quality items
+ from across commodity groups - the assumption which we have made in the
+ absence of the futility assumption.
+ More particularly, the rather stringent requirement of the two-state budgeting
+ is the restriction that the relative demand between two items in any two
+ different categories must change only in response to the total expenditure
+ i.e.
+ the response to price changes and total expenditure changes must use the
+ same channels of communication in the commodity tree
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonEconConsumer,StrotzUtilityTree1957"
@@ -2833,8 +2592,8 @@ literal "true"
 \end_inset
 
 ).
- Evidently, the condition cannot be guaranteed when there is a substitution
- of quality from across the commodity groups.
+ This condition cannot be guaranteed when there is a substitution of quality
+ from across the commodity groups.
 \end_layout
 
 \begin_layout Standard
@@ -2880,31 +2639,19 @@ literal "true"
 
  for details on the theory).
  This condition - however - falls apart if we introduce the substitution
- for quality across the commodity groups.
- More particularly, if we assume that a consumer gets quality utility from
- using electricity and from eating beef interchangeably, then having decided
- on 
+ for quality across the commodity groups i.e.
+ if we assume that a consumer gets quality utility from using electricity
+ and from eating beef interchangeably, then having decided on 
 \begin_inset Formula $x_{F},x_{E}$
 \end_inset
 
  does not guarantee that she would not switch to more consumption on electricity
  if kobe beef becomes cheaper.
- This is because overall quality - due to our assumption - is aggregated
- from across the commodity groups.
+ This can happen as long as overall quality is aggregated from across the
+ commodity groups.
  Thus unlike in the case of energy and food without quality substitution
- across commodity-groups, cheaper food can be compensated with the switch
- to electricity.
- Since price sensitivities and total expenditure sensitivities don't follow
- the same channel of communication in the two-state budgeting tree, the
- necessary condition for two-stage separability is not met (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "PhilipsAppliedCons,DeatonEconConsumer"
-literal "true"
-
-\end_inset
-
-).
+ across commodity-groups, cheaper food could be compensated with the switch
+ to electricity - thereby violating the conditions of a two-state budgeting.
 \end_layout
 
 \begin_layout Standard
@@ -2972,8 +2719,8 @@ n are evident in the consumption data.
  and recall methods.
  The diary method is used for food items while other purchases are recorded
  as weekly, monthly and yearly recalls.
- Evidently, the food expenditure are recorded with a greater level of detail
- than other expenditures.
+ The expenditures on food are recorded with a greater level of detail than
+ other expenditures.
  The summary statistics from the LSMS microdata for 2010 (base year) are
  presented in the Table 
 \begin_inset CommandInset ref
@@ -2990,7 +2737,7 @@ reference "fig:Descriptive-statistics-LSMS-2010"
 [Cross-Sectional variables Rank Variables] The demographic variables from
  survey that we use in our a cross-sectional analysis are the language-spoken,
  current locality, place of origin, the education and occupational levels.
- While the income data is available in the survey, we use it indirectly
+ While the income data is available in the survey, we use it only indirectly
  with a mapping of incomes on to the list of occupational (ordered) ranks.
  The assignment of occupation ranks from occupation field is shown in Table
  
@@ -3014,7 +2761,7 @@ ref{occupation_rank_tn}
  and owning multiple self-owned (small) businesses is not uncommon and would
  lead to biases in the use of household income.
  The assignment of education rank - an order variable corresponding to different
- education levels - is shown in Table
+ education levels - is shown in Table 
 \begin_inset ERT
 status open
 
@@ -3076,9 +2823,6 @@ status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-newpage
 \end_layout
 
 \begin_layout Plain Layout
@@ -3191,7 +2935,7 @@ status open
 
 
 \backslash
-begin{longtable}{l l r c}
+begin{longtable}[!p]{l l r c}
 \end_layout
 
 \begin_layout Plain Layout
@@ -3384,9 +3128,13 @@ main lighting fuel
 \end_layout
 
 \begin_layout Standard
-[Relative prices structure] One of the advantages of using commodity aggregates
- over an item-wise analysis is that it avoids the measurement errors in
- quality arising out of combining recall and diary items.
+[Relative prices structure] 
+\bar under
+One of the advantages of 
+\bar default
+using commodity aggregates over an item-wise analysis is that it avoids
+ the measurement errors in quality arising out of combining recall and diary
+ items.
  As detailed in the Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3434,17 +3182,14 @@ literal "true"
 
 \begin_layout Standard
 [Market Prices] Given the use of commodity aggregates for our analysis of
- quality, the market prices play a crucial in our analyses.
- Further, choosing market-prices to classify the items in aggregates over
- which the quality is evaluated also avoids the measurement errors from
- the unit-value method (i.e.
- the method to obtain prices as expenditure averages) that may carry a bias
- in both the denominator of the control variables and in the numerator of
- the measure of quality (see Gibson et al
-\begin_inset CommandInset citation
-LatexCommand cite
-key "GibsonKimQualityBog2019"
-literal "false"
+ quality, the market prices play a key role in the classification of commodities
+ due to the Hicks commodity theorem (see Assumption 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "assu:Hicks"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
@@ -9104,6 +8849,186 @@ centering{APPENDIX III}}
 
 \begin_layout Subsection*
 Cross-sectional AIDS with adjustment for non-consumption
+\end_layout
+
+\begin_layout Subsubsection*
+Model
+\end_layout
+
+\begin_layout Standard
+The first-stage of the Heien-Wells method is the following probit where
+ the dependent variable 
+\begin_inset Formula $Y_{ih}$
+\end_inset
+
+ is an indicator variable denoting whether the household 
+\begin_inset Formula $h$
+\end_inset
+
+ consumes the item 
+\begin_inset Formula $i$
+\end_inset
+
+ from 
+\begin_inset Formula $n$
+\end_inset
+
+ items or not.
+ Given 
+\begin_inset Formula $s$
+\end_inset
+
+ demographic variables 
+\begin_inset Formula $d_{jh}$
+\end_inset
+
+ for 
+\begin_inset Formula $j\in[1,s]$
+\end_inset
+
+, prices 
+\begin_inset Formula $p_{kh}$
+\end_inset
+
+ for 
+\begin_inset Formula $k\in[1,n]$
+\end_inset
+
+ and household-income 
+\begin_inset Formula $m_{h}$
+\end_inset
+
+, the inverse mills is calculated for the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+Y_{ih} & =f(p_{1h},p_{2h},...,p_{nh},m_{h},d_{1h},d_{2h},...d_{sh})\label{eq:wessells_probit}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that the inverse mills ratio 
+\begin_inset Formula $R_{ih}$
+\end_inset
+
+ is calculated for every household using the probit regression (Equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wessells_probit"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+R_{ih} & =\begin{cases}
+\frac{\phi(p_{h},m_{h},d_{h})}{\Phi(p_{h},m_{h},d_{h})} & q_{ih}>0\\
+\frac{\phi(p_{h},m_{h},d_{h})}{1-\Phi(p_{h},m_{h},d_{h})} & q_{ih}=0
+\end{cases}\label{eq:invmills}
+\end{alignat}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $R_{ih}$
+\end_inset
+
+ is then used as an instrument in the following estimation equation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+w_{i} & =\rho_{io}+\sum_{k=1}^{s}\rho_{ik}d_{kh}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{jh})+\beta_{i}ln(\frac{x_{h}}{P})+\delta_{i}R_{ih}\label{eq:wessells_aids}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Typically one uses the following formulation for 
+\begin_inset Formula $ln(P)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+ln(P) & =\alpha_{0}+\sum_{i=1}^{n}\alpha_{i}ln(p_{i})+\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}\gamma_{ij}ln(p_{i})ln(p_{j})
+\end{alignat*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+But a simpler linear-AIDS formulation 
+\begin_inset Formula $P=\sum_{i=1}^{n}w_{i}ln(p_{ih})$
+\end_inset
+
+ is also often used (Stone's index).
+ Notice that the inverse-mills instrument must also comply with the symmetry
+ and homogeneity-restrictions and thus one must ensure that 
+\begin_inset Formula $\sum_{i=0}^{n}\delta_{i}R_{ih}=0$
+\end_inset
+
+ in addition to 
+\begin_inset Formula $\sum\alpha_{i}=0$
+\end_inset
+
+, 
+\begin_inset Formula $\sum_{i=1}^{n}\gamma_{ij}=0\forall j\in[1,n]$
+\end_inset
+
+ , 
+\begin_inset Formula $\sum_{j=1}^{n}\beta_{i}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{ij}=\gamma_{ji}$
+\end_inset
+
+.
+ Heien-Wessells
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+literal "true"
+
+\end_inset
+
+ choose a more general approach for the instrument variable by adding an
+ equation to the system with term 
+\begin_inset Formula $\delta_{i}R_{ih}$
+\end_inset
+
+ replaced by 
+\begin_inset Formula $-\sum_{i=0}^{n-1}\delta_{i}R_{ih}$
+\end_inset
+
+so that the additivity condition is always met.
+\end_layout
+
+\begin_layout Subsubsection*
+Implementation and Results
 \end_layout
 
 \begin_layout Standard
