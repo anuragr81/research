@@ -239,7 +239,7 @@ def declense(state,index_x,index_y,sense,is_dhaatu):
 
 if __name__ =="__main__":
     #input_str= "bhaj"
-    
+    assert ''.join(declense([Group(parse_string("shaalaa")),Suffix(sup_pratyayaaH()[6*3+0])],0,0,sense="bhava",is_dhaatu=False)) == "shaaliiya"
     if False:
         assert(''.join(declense(Anga(parse_string("bhaja")),0,0,sense="bhaava",is_dhaatu=True))=="bhaagaH")
         assert(''.join(declense(Anga(parse_string("NniiNc")),0,0,sense="kartaa",is_dhaatu=True))=="naayakaH")        
