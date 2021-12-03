@@ -556,7 +556,7 @@ reference "sec:Model"
  The details of the data used in the study are provided in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:PriceData"
+reference "sec:Data"
 
 \end_inset
 
@@ -1538,6 +1538,17 @@ noprefix "false"
 \end_inset
 
  hold.
+ The classification is detailed further in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2781,7 +2792,7 @@ noprefix "false"
 \size normal
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:PriceData"
+name "sec:Data"
 
 \end_inset
 
@@ -2795,9 +2806,9 @@ Data
 With the recent economic growth and a history of nationalization, Tanzania
  serves as a case-study of consumer markets in the developing sub-Saharan
  Africa.
- In more recent times, since the investments from South Africa and Western
- countries have significantly expanded in the country, the trends of urbanisatio
-n are evident in the consumption data.
+ In more recent times, the investments from South Africa and Western countries
+ have significantly expanded in the country and the trends of urbanisation
+ are evident in the consumption data.
  The data we use for our analysis is from the Living Standard Measurement
  Study (LSMS) - conducted by the World Bank - for years 2010, 2012 and 2014.
  To understand where Tanzania fits in with respect to other republics in
@@ -3224,8 +3235,7 @@ noprefix "false"
 
 \end_inset
 
-, the commodity aggregates over which quality is evaluated both in i) the
- 
+, the commodity aggregates are considered separate both in i) the 
 \shape italic
 functional
 \shape default
@@ -3233,12 +3243,19 @@ functional
 \shape italic
 price-movement
 \shape default
- sense.
+ sense i.e.
+ every commodity aggregate is has goods that have the same functional significan
+ce 
+\shape italic
+and 
+\shape default
+have a similar price-movement.
  A functional category is one where there is a sufficient degree of substitution
  possible amongst its members.
  As an example, goat and beef are put under the same group - but not with
  tea - as there is little sense in substitution between tea and meat.
- The price movements over years are shown in Figure 
+ The price movements over years used for the price-movement sense are shown
+ in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:LSMSMarketPrices"
@@ -3356,17 +3373,17 @@ ity of an good (kg,litres etc.).
 
 \begin_layout Standard
 The values of assets owned by the consumer that we use as control variable(s)
- are obtained using from the record of durable goods in the survey.
- The durable goods in the LSMS survey range from short-term durable items
+ are obtained from the record of durable goods in the survey.
+ The durable goods in the LSMS data range from short-term durable items
  such as mobile phones to the expensive and long-term assets such as land
  or housing.
  Of these, we are interested only in the transferable long-term owned assets
  that undergo changes in the survey years 2010, 2012 and 2014.
- We can verify the assets transferred over a generation by inspecting households
+ We verify the assets transferred over a generation by inspecting households
  in the data that are split when a young member of the unsplit family starts
- a new household.
- All assets except land and house that are more expensive than the bed (furnitur
-e) contribute the long-term asset-values for the consumer in our analyses.
+ a new household - treating the assets except land and house that are more
+ expensive than the bed (furniture) as those that contribute to the long-term
+ asset-values.
 \end_layout
 
 \begin_layout Standard
@@ -4036,8 +4053,11 @@ ref{resultsAllassets}
 all_assets_mtm
 \family default
  represents the logarithm of total cost that the asset would sell for if
- it were to be sold at the time of the interview (price reported by the
- consumer).
+ it were to be sold at the time of the interview (price 
+\begin_inset Formula $P_{t}$
+\end_inset
+
+ reported by the consumer).
  Inferring the energy quality with the indicator variable specifying electricity
  usage, we also the variable 
 \family typewriter
@@ -4420,7 +4440,7 @@ q
 qV
 \family default
 \size default
-- indicate quantities and quality measurement.
+- indicate quantity and quality measurements respectively.
  The columns starting with 
 \family typewriter
 \size footnotesize
@@ -4521,20 +4541,19 @@ The occupation-ranks also have a role in this separation of quality - since
  higher occupation ranks tend to have both higher quantity and higher quality
  across all commodities.
  Since higher occupation-ranks are concentrated in the eastern coast and
- centre of Tanzania, we look at the effect of 
+ centre of Tanzania, we also look at the effect of 
 \family typewriter
-expensive_region
+expensiveregion
 \family default
  to see how higher living-costs in a region may influence the consumption
  of quality.
  The effects of 
 \family typewriter
-expensive_region
+expensiveregion
 \family default
  do suggest a higher quality for non-fresh and protein goods as well as
  a higher expenditure on transport and energy albeit a lower expenditure
- on household non-durable consumption.
- 
+ on household non-durable consumption in certain regions.
 \end_layout
 
 \begin_layout Standard
@@ -6893,32 +6912,50 @@ Given the differences in consumer baskets for the urban and rural consumer,
  areas with availability of electricity and industrial goods.
  More particularly, it is not just that those with higher asset worth tend
  to buy more - but that the quality purchased for a few categories are always
- higher (lower) for the consumers who own medium-cost assets (notwithstanding
- the fact that the consumers do not forgo food quality over non-food quality).
+ higher (lower) for the consumers who own medium-cost assets (considering
+ also that the consumers do not forgo food necessities over non-food quality).
 \end_layout
 
 \begin_layout Standard
 The role of status consumption (when not exhibited by the richest of the
  consumer) is to offset the long-established hierarchies in markets.
- Therefore the consumers in urban areas who don't own a lot of assets would
- benefit from spending more on industrial non-durable consumption than an
- equivalent consumer in the rural area who does not face the same choice
- of industrial goods.
- But such status consumption cannot expand to outside of the urban centres
- except without a substitution offered for not being in urban areas.
+ Therefore the consumer in urban area who does not own a lot of assets would
+ benefit from spending more on industrial non-durable consumption relative
+ to others in his environment than an equivalent consumer in the rural area
+ who does not face the same choice of industrial goods.
+ But such status consumption cannot has a limited reach except for a substitutio
+n in quality offered for not being in urban areas.
  More particularly, a status competition between the rich and poor consumers
  in the urban area or between the urban and rural consumer would imply that
- having lower-assets is associated with comparable quality.
+ having lower-assets is associated with higher or comparable quality.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% The only reference we have considered is price related.
+ More reference points should be considered.
+ This may serve as key anchor to the next chapter.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 The demand analysis models we use help verify if the consumer in the urban
  area (or a richer consumer) sacrifices quality in one group to avail it
  in another (a choice that the rural or poorer consumer does not have).
- If status consumption exists, then we would expect either that the pricier
- meats or electrical goods available to the urban food consumer let her
- deprioritise the quality in other commodities or that the consumers with
- lower assets spend relatively higher on overall non-durable quality.
+ If status consumption exists, then we would expect either i) that the quality
+ in some commodity (e.g.
+ pricier meats or electrical goods available to the urban consumer) makes
+ the richer consumer compromise on quality and long-terms assets in other
+ commodities or ii) that the consumers with lower assets spend relatively
+ higher on overall non-durable quality.
  Our observations do not provide a strong evidence for either of these.
  Instead, we find that the habits of urban and rural consumers as well as
  those of poor and rich within the urban areas are far apart from each other.
@@ -6926,10 +6963,11 @@ The demand analysis models we use help verify if the consumer in the urban
  owned-assets - further suggests that there is little status consumption
  available to the rural or poorer consumers.
  The observed segregation of quality based on the long-term economic standing
- mean that the rural consumer who has both a lower asset ownership and a
- poorer non-durable consumption quality cannot be in a status competition
- with the urban or richer consumer (i.e.
- have disparate reference points) and see no benefit from status consumption.
+ mean that the poorer consumer - rural or urban - who has both a lower asset
+ ownership and a poorer non-durable consumption quality would not be in
+ a status competition with the urban or richer consumer (i.e.
+ have disparate reference points) and would not see a benefit from status
+ consumption.
 \end_layout
 
 \begin_layout Standard
@@ -6939,9 +6977,9 @@ In summary, if status consumption is meant to permit the consumers with
  such a compensation behaviour and rules out the Veblen sense of pecuniary
  emulation.
  In Tanzania, we see more evidence for on segmentation than compensation.
- We argue that the possibility of such segregation of quality choices must
- be considered before we attempt to measure the extent of status consumption
- in a developing economy.
+ We thus suggest that the possibility of such segregation of quality choices
+ must be considered before one attempts to measure the extent of status
+ consumption in a developing economy.
 \end_layout
 
 \begin_layout Standard
@@ -9647,22 +9685,20 @@ name "subsec:historical_note"
 \paragraph_spacing single
 The landscape of the political history of sub-Saharan African is dominated
  by anti-colonial movements in the past century.
- The nascent economies of the newly formed republics in the sub-Saharan
- Africa have not all uniformly followed path of the developed world.
+ The changes in the nascent economies of the newly formed republics in the
+ sub-Saharan Africa have been hardly uniform.
  The industrial class in many sub-Saharan African countries is still poor
  in absolute terms.
  The administrative successes and stability of post-colonial governments
- are varied - often depending on the extent of agrarian empires that had
- existed before.
+ are varied - depending often on the extent of agrarian empires that had
+ existed before in the economies.
  It would seem that the extractive administrative frameworks of Ottoman
  or Moghul empires, for example, could be adapted well by European colonists
  in Asian countries when compared to the administrative units (much as the
  political boundaries themselves) created in sub-Saharan Africa.
  The processes of decolonization starting in the late last century that
- have encompassed loosely similar post-war political voices in Asia and
- Africa have had mixed successes in the developing wold.
- More particularly, the post-colonial centralization attempts in late 20th
- century decades in both Asia and Africa have had a mixed levels of success.
+ have encompassed loosely similar post-war political voices have had mixed
+ successes.
  We provide an overview of the historical background of a few sub-Saharan
  African countries to summarise the similarities and peculiarities in the
  modern republics of the developing world.
@@ -9674,26 +9710,25 @@ Nigeria
 
 \begin_layout Standard
 \paragraph_spacing single
-The foremost observation pertaining to status competitions in Nigeria is
- that access to education is varied.
- This seems to be driven primarily due to the role of missionary education
- in Nigeria.
- In other words, the regional disparities in the current education levels
- across the northern and southern parts of Nigeria seems associated with
- the religious difference in the population.
- The north has had a higher Islamic influence while the South has been influence
-d by Western Christianity.
+A distinguishing feature of Nigeria's economy seems to be a differential
+ access to education.
+ The education levels across the northern and southern parts of Nigeria
+ seem split also based on the religions affiliations.
+ The north of the country has had a more significant Islamic influence whereas
+ the South has been influenced by Western Christianity.
+ The other relevant feature of the political economy has been the uncertain
+ role played by market forces.
  In the initial years of the republic, the market forces seemed to have
- had been left relatively untouched even though farming-based wage labour
- continued into the post-colonial era.
- The movements of African socialism in Nigeria were to limit power of merchant
- class further - contributing to difficulties in the formation of a strong
- base for small businesses in the economy.
- Therefore, despite the presence of quite a few multi-national corporations,
- the presence of a strong business sector stills appears hampered.
+ had been left relatively untouched (even though farming-based wage labour
+ continued into the post-colonial era), but the movements of African socialism
+ seemed to have limited the power of merchant class to some extent.
+ This may have been responsible for some of the difficulties in the formation
+ of a strong base for small businesses in the economy.
+ Despite the presence of quite a few multi-national corporations in more
+ recent decades, a strong business sector stills appears lacking in Nigeria.
  The majority of these corporations being state-backed monopolies does not
  sufficiently assist the transformation of the the large informal sectors
- in the economy  into a a middle class with significant purchasing power
+ in the economy  into a middle class with a significant purchasing power
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -9703,9 +9738,9 @@ literal "true"
 \end_inset
 
 .
- That said, the recent development in the economy may not have created a
- sufficient base for entrepreneurs, they have revived a focus on education
- and expanded the market for industrial goods.
+ Still, while the recent developments may not have created a wide base for
+ entrepreneurs, they have revived a focus on education and expanded the
+ market for industrial goods.
  For example, an average of 42% workforce in Nigeria have secondary education
  or higher, upto 28% of those in mere survival activities have a secondary
  school certificate and 12% have post-secondary qualifications 
@@ -9717,8 +9752,7 @@ literal "true"
 \end_inset
 
 .
- We believe therefore that the competitions for status may be hardly ruled
- out in the country.
+ As such the competitions for status may be hardly ruled out in the country.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -9738,13 +9772,13 @@ Given its engagement in the liberation movements in Mozambique in 1974 and
  the reduction of private sector did not experience much opposition.
  However, inconsistencies were apparent in Tanzania's socialist model with
  insufficient support from workers and a ban on producer-consumer societies.
- The industrial sector seemed to have suffer because of import subsidies
+ The industrial sector seemed to have suffered because of import subsidies
  until many decades after the independence.
- The import substituting industrialization (ISI) led to often to oversubsidizing
+ The import substituting industrialization (ISI) often led to oversubsidizing
  and adjustment to capital flows in order to provide for basic needs.
  The rent-seeking in bureaucracy combined with the capital-intensive technology
- meant high costs for economic development across sectors and resulted in
- subsequent decline of the industrial capacity utilization 
+ resulted in high costs for economic development across sectors and a subsequent
+ decline of the industrial capacity utilization 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "LofchieTNZ"
@@ -9765,11 +9799,8 @@ literal "true"
 \end_inset
 
 .
- The state regulated economy presents a disconnect between the parallel
- markets and a protectionist trade policy.
- The more recent participation of firms from South Africa and China also
- result in conflict among labour populations due to under development of
- training infrastructure within the economy.
+ The state regulated economy also presents somewhat of a disconnect of the
+ parallel markets from a protectionist trade policy.
  While the use of internet communications is higher in Tanzania than in
  Africa's average, the private's sector access to finance is low (albeit
  rising) and the size of informal sector substantial (60% of the labour
@@ -9821,7 +9852,7 @@ literal "true"
 
 .
  However, the industrial goods have proliferated in model Anglola and and
- stronger business ties with China have development.
+ stronger business ties with China have developed in the last decade.
  
 \end_layout
 
@@ -9832,17 +9863,17 @@ Kenya
 
 \begin_layout Standard
 \paragraph_spacing single
-The political power is influenced by many ethnicities in Kenya.
- Policy changes are often tend to be contested based on ethnic lines.
+The political power is influenced by many ethnicities in Kenya and policy
+ changes often tend to be contested on ethnic lines.
  For example, when resettlement was attempted under Kenyatta's leadership,
- the discontent was predominantly from non-
+ the discontent was strong but predominantly from the non-
 \shape italic
 Kikuyu
 \shape default
  population.
  Other attempts at nationalization - e.g.
  taking control of foods sales or establishment of purchase centres - have
- met with similar confrontations.
+ met with similar ethnic confrontations.
  The prevalence of small-scale independent works and lack of support offered
  to them has not been addressed either by the socialist governments or the
  growing private sector
@@ -9854,8 +9885,8 @@ literal "true"
 \end_inset
 
 .
- Much like other sub-Saharan African countries, there are extreme difference
- in the urban and rural life-styles in Kenya.
+ Much like other sub-Saharan African countries, there seem extreme differences
+ between the urban and rural life-styles in Kenya.
 \end_layout
 
 \begin_layout Standard
