@@ -2307,17 +2307,13 @@ Variables used in Results
 
 \begin_layout Standard
 We also run the regressions with 
-\begin_inset Formula $log(\nu_{food})$
-\end_inset
-
- and 
-\begin_inset Formula $log(\nu_{nonfood})$
+\begin_inset Formula $log(\nu_{t})$
 \end_inset
 
  i.e.
- the logarithm of expenditure on non-durable consumption on food and non-food
- items (both excluding the asset costs).
- These results - comparable with the regressions of 
+ the logarithm of expenditure on all non-durable consumption excluding the
+ asset costs).
+ These results - comparable with the those for 
 \begin_inset Formula $w_{food}$
 \end_inset
 
@@ -2325,7 +2321,7 @@ We also run the regressions with
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
- are provided in Table 
+ - are provided in Table 
 \begin_inset ERT
 status open
 
@@ -2333,7 +2329,7 @@ status open
 
 
 \backslash
-ref{tabExcessLinearTNZ_q_nonfood_ne}
+ref{tabExcessLinearTNZ_log_q_ne}
 \end_layout
 
 \end_inset
@@ -2346,7 +2342,7 @@ status open
 
 
 \backslash
-ref{tabExcessLinearNGR_log_q_nonfood_ne}
+ref{tabExcessLinearNGR_log_q_ne}
 \end_layout
 
 \end_inset
@@ -2378,12 +2374,8 @@ The regressions with log mean of non-durable consumption including food
 \end_layout
 
 \begin_layout Standard
-The non-durable expenditure items excluding asset-costs that we use for
- the budget share of non-food 
-\begin_inset Formula $w_{nonfood}$
-\end_inset
-
- are shown in Tables 
+The non-durable items excluding those that are necessitated by assets are
+ shown in Tables 
 \begin_inset ERT
 status open
 
@@ -2439,7 +2431,7 @@ NDCexAC
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
- used as the dependent variables in Tables 
+ (used as dependent variables in Tables 
 \begin_inset ERT
 status open
 
@@ -2465,7 +2457,7 @@ ref{tabExcessLinearNGR_w_nonfood_ne}
 
 \end_inset
 
- (for Tanzania and Nigeria respectively) as follows
+ for Tanzania and Nigeria respectively) as follows
 \end_layout
 
 \begin_layout Standard
@@ -2541,6 +2533,27 @@ max_occupation_rank
  is more sensitive to assets and occupation rank in Tanzania.
  Higher-asset regions (east of the country) seem to contribute significantly
  to the non-durable consumption share in Tanzania.
+ The same effect of 
+\family typewriter
+\size small
+max_occupation_rank
+\family default
+\size default
+ and
+\family typewriter
+\size small
+ log_mean_A0
+\family default
+\size default
+ is seen in 
+\begin_inset Formula $\nu_{food}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{nonfood}$
+\end_inset
+
+ as well.
 \end_layout
 
 \begin_layout Enumerate
@@ -2550,12 +2563,17 @@ In Tanzania, rural consumers spend less portion on non-food while in Nigeria,
 \end_inset
 
  is not significant.
- 
+ The same effect is seen for 
+\begin_inset Formula $\nu_{nonfood}$
+\end_inset
+
+ in both the countries.
 \end_layout
 
 \begin_layout Enumerate
-Larger family sizes have more non-food proportion - possibly indicating
- expansion of needs with the family size.
+Larger family sizes have both higher non-food proportion and higher absolute
+ non-food consumption - possibly indicating expansion of needs with the
+ family size.
 \end_layout
 
 \begin_layout Enumerate
@@ -2658,6 +2676,42 @@ The role of education ranks seems higher in Tanzania than Nigeria.
  This suggests that consumer lifestyles are more segregated by education
  levels - likely due to individuals with high education levels being limited
  to fewer urban areas in Tanzania.
+\end_layout
+
+\begin_layout Enumerate
+[w-nonfood vs absolue 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+] Aboslute 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ declines for richer consumers but non-food component increases.
+ Higher occupations do reduce the per-head non-durable consumption (so segregati
+on is not extreme?) - but the focus on non-food consumption increases.
+\end_layout
+
+\begin_layout Enumerate
+[food-prices nonfood-prices effect on 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+] Tanzania has far higher economic significance for 
+\series bold
+food
+\series default
+.
+\end_layout
+
+\begin_layout Enumerate
+[occupation rank] Occupation rank and education rank both have effects but
+ their effects are not suprising- medium ranks tend spend more on non-food.
+\end_layout
+
+\begin_layout Enumerate
+[non-food prices ] log_mean_cost_ne_nonfood does not have significance for
+ Tanzania 
 \end_layout
 
 \begin_layout Section
@@ -3650,11 +3704,719 @@ status open
 
 \begin_layout Plain Layout
 
+
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Tanzania: Linear estimation for $ log
+\backslash
+_q
+\backslash
+_ne
+\backslash
+_x $ as dependent variable 
+\backslash
+label{tabExcessLinearTNZ}} 
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2014}
+\backslash
+
+\backslash
+ 
+\backslash
+hline logx      &    0.881
+\backslash
+sym{***}&    0.820
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  -0.0464
+\backslash
+sym{***}&  -0.0199
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.012)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&    0.153
+\backslash
+sym{***}&    0.231
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&  0.00599         &   0.0712
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.908)         &  (0.028)         
+\backslash
+
+\backslash
+ 0.max
+\backslash
+_occupation
+\backslash
+_rank&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 1.max
+\backslash
+_occupation
+\backslash
+_rank&   -0.554
+\backslash
+sym{***}&   -0.564
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 2.max
+\backslash
+_occupation
+\backslash
+_rank&   -0.262
+\backslash
+sym{***}&   -0.269
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 3.max
+\backslash
+_occupation
+\backslash
+_rank&   -0.280
+\backslash
+sym{***}&   -0.265
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 0.max
+\backslash
+_education
+\backslash
+_rank&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 1.max
+\backslash
+_education
+\backslash
+_rank&   -0.288
+\backslash
+sym{***}&   -0.294
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 2.max
+\backslash
+_education
+\backslash
+_rank&   -0.323
+\backslash
+sym{***}&   -0.309
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 3.max
+\backslash
+_education
+\backslash
+_rank&   -0.346
+\backslash
+sym{***}&   -0.239
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 4.max
+\backslash
+_education
+\backslash
+_rank&   -0.288
+\backslash
+sym{**} &   -0.330
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.001)         &  (0.000)         
+\backslash
+
+\backslash
+ age       &  -0.0128
+\backslash
+sym{***}&  -0.0120
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural &  -0.0591
+\backslash
+sym{*}  &                  
+\backslash
+
+\backslash
+           &  (0.039)         &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -0.208         &   -1.505
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.559)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     4068         &     3613         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
 
+\backslash
+begin{table}[htbp]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Nigeria: Linear estimation for $ log
+\backslash
+_q
+\backslash
+_ne
+\backslash
+_x $ as dependent variable 
+\backslash
+label{tabExcessLinear}} 
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2015}
+\backslash
+
+\backslash
+ 
+\backslash
+hline logx      &    0.686
+\backslash
+sym{***}&    0.634
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  -0.0863
+\backslash
+sym{***}&  -0.0958
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&    0.448
+\backslash
+sym{***}&    0.593
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&   0.0961
+\backslash
+sym{***}&   0.0388         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.111)         
+\backslash
+
+\backslash
+ 1.max
+\backslash
+_occupation
+\backslash
+_rank&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.max
+\backslash
+_occupation
+\backslash
+_rank& -0.00821         & -0.00620         
+\backslash
+
+\backslash
+           &  (0.738)         &  (0.829)         
+\backslash
+
+\backslash
+ 3.max
+\backslash
+_occupation
+\backslash
+_rank&  -0.0854
+\backslash
+sym{*}  &  -0.0362         
+\backslash
+
+\backslash
+           &  (0.038)         &  (0.418)         
+\backslash
+
+\backslash
+ 0.max
+\backslash
+_education
+\backslash
+_rank&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 1.max
+\backslash
+_education
+\backslash
+_rank&   -0.676
+\backslash
+sym{***}&   -0.490         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.079)         
+\backslash
+
+\backslash
+ 2.max
+\backslash
+_education
+\backslash
+_rank&   -0.322
+\backslash
+sym{***}&   -0.325
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 3.max
+\backslash
+_education
+\backslash
+_rank&   -0.353
+\backslash
+sym{***}&   -0.310
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 4.max
+\backslash
+_education
+\backslash
+_rank&   -0.317
+\backslash
+sym{***}&   -0.281
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ age       & 0.000941         & 0.000779         
+\backslash
+
+\backslash
+           &  (0.116)         &  (0.289)         
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_urban&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.is
+\backslash
+_urban&  -0.0570
+\backslash
+sym{**} &  -0.0605
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.007)         &  (0.022)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -2.237
+\backslash
+sym{***}&   -2.555
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     4028         &     4110         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% 
 \backslash
 begin{table}[H]
 \backslash
@@ -4010,7 +4772,7 @@ status open
 
 \begin_layout Plain Layout
 
-
+% 
 \backslash
 begin{table}[H]
 \backslash
