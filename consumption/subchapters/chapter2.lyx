@@ -690,7 +690,43 @@ Using the property
 \end_inset
 
  and the non-durable consumption - which has food and non-food components.
- 
+ Given 
+\begin_inset Formula $n$
+\end_inset
+
+ items, the total expenditure 
+\begin_inset Formula $x$
+\end_inset
+
+ , and price estimates 
+\begin_inset Formula $P_{j}$
+\end_inset
+
+ for item 
+\begin_inset Formula $j$
+\end_inset
+
+, the LA-AIDS (linear approximate AIDS) corresponds to the following regression
+ equation for the item 
+\begin_inset Formula $i$
+\end_inset
+
+ (
+\begin_inset Formula $\in\{food,non\_food\}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+w_{i} & =\alpha_{i}+\sum_{j=1}^{n}\gamma_{j}log(P_{j})+\beta_{i}log(x)+\epsilon_{i}\label{eq:AIDS_quality_w}
+\end{alignat}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -698,8 +734,13 @@ The above model motivates our regressions of measures of
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- - as non-food non-durable consumption excluding asset costs and as budget
- share of non-food component against 
+ i.e.
+ the non-food non-durable consumption excluding asset costs as well as the
+ budget share of non-food component 
+\begin_inset Formula $w_{non\_food}$
+\end_inset
+
+ against 
 \begin_inset Formula $r_{t}$
 \end_inset
 
@@ -966,16 +1007,16 @@ ref{itemsclassification_ngr}
 \begin_inset Formula $r_{t}$
 \end_inset
 
- for the consumer, we exclude costs associated with energy and transport
- from the notion of excess non-durable consumption.
+ for the consumer, the costs associated with energy and transport must be
+ excluded from the notion of non-durable consumption relevant for signaling.
  Thus the only non-food relevant expenditure for status that we measure
  as 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
  excludes the costs implied by the assets owned by the consumer.
- The items over which the expenditure is aggregated to arrive at total excess
- 
+ The items over which the expenditure is aggregated to arrive at total non-durab
+le consumption excluding asset-costs 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -1039,12 +1080,12 @@ status open
 
 \begin_layout Plain Layout
 
-%We consider excess  comprising both food and non-food non-durable consumption
+%We consider nu_t  comprising both food and non-food non-durable consumption
  (food and household expenditures).
  This is due the wide-ranging evidence for pressures on food-quality in
  sub-Saharan countries (see for example Schneider et al).
  We argue that an attainment of higher food quality would be visible enough
- in a poor economy and should be considered a part of excess.
+ in a poor economy and should be considered a part of nu_t.
  In other words, when the needs for food quality are not met for the majority
  of a population, social interactions are likely to separate consumers who
  can afford better food quality from those who can't.
@@ -1072,7 +1113,7 @@ name "subsec:Assets-Data"
 
 \end_inset
 
-Durable goods and reference levels
+Long-term assets and reference levels
 \end_layout
 
 \begin_layout Standard
@@ -1232,8 +1273,8 @@ In summary, we infer consumer's asset-richness
 
  as the logarithm of average market value of assets owned by the consumers
  within the boundary of reference around the consumer (including the district
- which the consumer belongs to), the non-durable consumption averages as
- 
+ which the consumer belongs to) and use the non-durable consumption averages
+ as 
 \begin_inset Formula $p_{food}(r_{t})$
 \end_inset
 
@@ -1241,17 +1282,14 @@ In summary, we infer consumer's asset-richness
 \begin_inset Formula $p_{nonfood}(r_{t})$
 \end_inset
 
- for food and non-food items respectively, and the budget shares of food
- 
-\begin_inset Formula $\nu_{food}$
-\end_inset
+ for food and non-food items respectively in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
+plural "false"
+caps "false"
+noprefix "false"
 
- and non-food 
-\begin_inset Formula $\nu_{nonfood}$
-\end_inset
-
- components of non-durable excess 
-\begin_inset Formula $\nu_{t}$
 \end_inset
 
 .
@@ -1259,20 +1297,13 @@ In summary, we infer consumer's asset-richness
 \begin_inset Formula $r_{t}$
 \end_inset
 
-, 
-\begin_inset Formula $p_{food}(r_{t})$
-\end_inset
-
- and 
-\begin_inset Formula $p_{nonfood}(r_{t})$
-\end_inset
-
- imposes is that the number of observed households within the reference
- boundary should be high enough to average out the idiosyncratic effects
- and issues related to seasonality of data-capture (e.g.
+ and consumption-averages also impose is that the number of observed households
+ within the reference boundary should be high enough to average out the
+ idiosyncratic effects and issues related to seasonality of data-capture
+ (e.g.
  less electricity needed in winter etc.).
- At the time of writing this chapter, we've made sure no districts with
- less than 10 observations per year are included in our analyses.
+ For this reason, we've made sure that no districts with less than 10 observatio
+ns per year are included in our analyses.
 \end_layout
 
 \begin_layout Section
@@ -1281,9 +1312,9 @@ Empirical Method
 
 \begin_layout Standard
 The primary goal of our empirical analysis is to find the extent to which
- the non-durable excess expenditure - after accounting for income - is influence
-d by local asset-ownership levels and the local non-durable consumption
- level in the two countries.
+ the non-durable expenditure excluding asset costs - after accounting for
+ income - is influenced by local asset-ownership levels and the local non-durabl
+e consumption level in the two countries.
  If only asset-levels determine the non-durable consumption level in an
  economy, then that would imply a segregation of non-durable consumption
  based on asset-richness.
@@ -1308,16 +1339,16 @@ Recall that the non-durable consumption
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- is measured as the per-head consumption on non-durable excess items including
- both food and non-food components.
- The excess  
+ is the non-durable items excluding asset-costs that includes both food
+ and non-food components.
+ 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- comprises of both food and non-food non-durable consumption (i.e.
- food and household expenditures) primarily due the wide-ranging evidence
- for pressures on food-quality in sub-Saharan countries (see for example
- Schneider et al
+ comprising of both food and non-food non-durable consumption (i.e.
+ food and household expenditures) supports the wide-ranging evidence for
+ pressures on food-quality in sub-Saharan countries (see for example Schneider
+ et al
 \begin_inset CommandInset citation
 LatexCommand cite
 key "MastersMalawiFoodQuality2021"
@@ -1327,10 +1358,11 @@ literal "false"
 
 ).
  When the needs for food quality are not met for the majority of a population,
- social interactions are likely to separate consumers who can afford better
+ social interactions are likely to reveal consumers who can afford better
  food quality from those who can't.
  The attainment of higher food quality would - in other words - be visible
- enough in a poor economy and should be considered a part of excess.
+ enough in a poor economy and should be considered a part of non-durable
+ consumption relevant for status.
  To take a specific example, when only a small part of the population has
  access to electricity (e.g.
  about 10% in Tanzania), the improvement of food quality through having
@@ -1365,40 +1397,13 @@ status open
 \end_layout
 
 \begin_layout Standard
-
-\series bold
-[Why Budget shares ] 
-\series default
-Budget shares 
-\end_layout
-
-\begin_layout Standard
-The budget shares relevant for the parametric analysis are the shares of
- food (
-\begin_inset Formula $\nu_{food}$
-\end_inset
-
-) and non-food (
-\begin_inset Formula $\nu_{nonfood}$
-\end_inset
-
-) components i.e.
- 
-\begin_inset Formula $w_{food}$
-\end_inset
-
- and 
-\begin_inset Formula $w_{nonfood}$
-\end_inset
-
- respective of 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
-.
+We use the food and non-food budget shares to understand the role long-term
+ assets on non-food non-durable consumption.
  The consumer income used in the analysis is proxied with the total per-expendit
-ure including all expenses (asset costs, food, excess etc.).
- Further, 
+ure including all expenses (asset costs, food, non-food expenses).
+ We also see how the total food and non-food non-durable consumption values
+ vary across assets.
+ Here, as mentioned before, 
 \begin_inset Formula $p_{food}(r_{t}),p_{nonfood}(r_{t})$
 \end_inset
 
@@ -1422,7 +1427,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-As we have emphasised before, 
+As we have mentioned before, 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -1433,14 +1438,13 @@ As we have emphasised before,
  already includes the contribution of assets to one's status.
  As a consumer does not choose the maintenance of assets separately from
  choosing to purchase the asset, the idea that a representative consumer
- increases her per-head non-durable consumption with 
+ increases her non-durable consumption 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- (excess) by availing a higher quality or quantity than necessary makes
- sense only if we exclude the costs imposed on the consumer due to having
- bought certain assets (through maintenance, repair, fees etc.) from the
- per-head consumption 
+ by availing a higher quality or quantity than necessary makes sense only
+ if we exclude the costs imposed on the consumer due to having bought certain
+ assets (through maintenance, repair, fees etc.) from 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -1647,27 +1651,51 @@ noprefix "false"
  in the central and eastern regions, the occupational/asset differences
  and non-durable consumption are more comparable between the two regions.
  In Tanzania, where we have data on subjective well-being for individuals,
- we also find that eastern regions have much higher perceptions and excess
- as well as high value of assets compared to central areas
+ we also find that eastern regions have much higher perceptions and non-durable
+ consumption excluding asset costs as well as high value of assets compared
+ to central areas
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
 The inherent claim while interpreting the subject well-being data in this
- manner is that the consumers with higher excess registering higher satisfaction
- than those with less excess, would 
+ manner is that the consumers with higher non-durable consumption excluding
+ asset costs 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ registering higher satisfaction than those with less 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ would 
 \shape italic
 ceteris paribus 
 \shape default
 be happier.
  The converse is a stronger claim - since happier consumers need not have
- higher excess to be happier.
+ higher 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ to be happier.
  In fact if status is a social need and is enhanced by peer effects, a consumer
- might as well feel miserable as she raises expenses on excess.
+ might as well feel miserable as she raises 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+.
  The attribution of consumer contentment to a particular type of consumption
  (e.g.
- excess) is requires more assumption than merely testing whether a high
- excess is aligned with high consumer perception or not.
+ 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+) is requires more assumption than merely testing whether a high 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ is aligned with high consumer perception or not.
  In other words, the the claim that consumers make consumption choices to
  optimise subjective well-being is a much stronger argument than what we
  require.
@@ -2407,11 +2435,12 @@ food
 \begin_inset Quotes eld
 \end_inset
 
-excess 
-\begin_inset Quotes eld
+NDCexAC
+\begin_inset Quotes erd
 \end_inset
 
- in the tables) aggregated as 
+ - the non-durable consumption excluding assets costs in the tables) aggregated
+ as 
 \begin_inset Formula $\nu_{food}$
 \end_inset
 
@@ -3351,8 +3380,8 @@ ref{tabExcessLinearNGR_w_nonfood_ne}
 \end_inset
 
  respectively).
- The significance of excess consumption here is different from the typical
- conditions of a developed economy.
+ The significance of non-durable consumption excluding asset costs here
+ is different from the typical conditions of a developed economy.
 \end_layout
 
 \begin_layout Enumerate
@@ -3373,9 +3402,17 @@ Conclusions
 \end_layout
 
 \begin_layout Standard
-A view of status in terms of non-durable excess and long-term assets allows
- us to argue that extreme asset-differences may not be overcome with non-durable
- consumption excesses in a status competition.
+A view of status in terms of non-durable consumption excluding asset costs
+ 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ and long-term assets allows us to argue that extreme asset-differences
+ may not be overcome with 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ in a status competition.
  More particularly, the extreme differences in assets make status items
  from the richer asset band less appealing for the consumers in the poorer
  band - more so in the absence of opportunites for consumers from different
@@ -3388,7 +3425,11 @@ A view of status in terms of non-durable excess and long-term assets allows
  must undergo a separation of reference groups.
  The segregation of status consumption patterns implied by such a separation
  is what we intend to observe as effects of extreme asset-differences on
- non-durable consumption excesses using the model in Section 
+ 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ using the model in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Model"
@@ -3426,11 +3467,17 @@ If such a segregation dominates, status goods can be hardly said to be relevant
  part of the population is ruled out when non-durable consumption is strongly
  segmented across asset-bands.
  To measure this segregation of consumption patterns in empirical terms,
- we have compared the two economies with respect to their non-durable excess
+ we have compared the two economies with respect to their 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
  - which we measure as the non-food portion of the non-durable consumption
  excluding any costs implied by assets.
- These empirical results inspect the extent to which non-durable consumption
- excesses may be segmented by asset-possessions in the two economies.
+ These empirical results inspect the extent to which 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ may be segmented by asset-possessions in the two economies.
 \end_layout
 
 \begin_layout Standard
@@ -3449,11 +3496,18 @@ While the urban settings would always have higher assets and higher non-durable
 \end_layout
 
 \begin_layout Standard
-The comparison of non-durable excesses consumption in Tanzania and Nigeria
- is performed in two parts.
+The comparison of 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ in Tanzania and Nigeria is performed in two parts.
  First, we look at the non-durable consumption measure in the two countries.
  Second, we measure how much the extreme asset differences may influence
- excess non-durable consumption in the economies.
+ 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ in the economies.
 \end_layout
 
 \begin_layout Standard
@@ -3463,9 +3517,12 @@ In the first part of our comparison, we find that the more uniformly distributed
  Since a significant population in both the economies spends a large portion
  of their budget on food, the overall non-durable consumption is comparable
  for Tanzania and Nigeria.
- But given that status can only achieved through long-term assets and non-durabl
-e excesses, non-durable consumption (including food) is all that may carry
- some status in a population of consumers with no-reported assets (e.g.
+ But given that status can only achieved through long-term assets and 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+, non-durable consumption (including food) is all that may carry some status
+ in a population of consumers with no-reported assets (e.g.
  in Tanzania).
  An FE regression for 
 \begin_inset Formula $log(q_{ne})$
@@ -3533,7 +3590,7 @@ else
 \backslash
 fi} 
 \backslash
-caption{Tanzania: FE estimation for excess $ log(
+caption{Tanzania: FE estimation for  $ log(
 \backslash
 nu_{t}) $ as dependent variable 
 \backslash
@@ -3699,7 +3756,7 @@ else
 \backslash
 fi} 
 \backslash
-caption{Nigeria: FE estimation for excess $ log(
+caption{Nigeria: FE estimation for  $ log(
 \backslash
 nu_{t}) $ as dependent variable 
 \backslash
@@ -3848,12 +3905,23 @@ In the second part we compare the effect of asset-differences on non-durable
  consumption after accounting for occupation and education differences.
  The differences in non-durable consumption between medium occupations and
  low occupations is relatively less.
- While excess is higher for highest occupations for both Nigeria and Tanzania,
- it is more sensitive to asset-accumulation in Tanzania.
- The extreme differences in wealth imply a less overlapping excess consumption
+ While 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ is higher for highest occupations for both Nigeria and Tanzania, it is
+ more sensitive to asset-accumulation in Tanzania.
+ The extreme differences in wealth imply a less overlapping 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
  in Tanzania.
  The effect of asset-richness on levels of non-durable consumption and the
- segregation of demand for excess are thus significant in Tanzania.
+ segregation of demand for 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ are thus significant in Tanzania.
 \end_layout
 
 \begin_layout Standard
@@ -3870,10 +3938,13 @@ We conclude that the effect extreme asset-differences in a developing economy
 That said, it is worth emphasising that above conclusions are drawn for
  a given level of granularity of aggregation.
  The income and occupation differences within groups finer than the district
- level aggregation might show more detailed variation in excess consumption
- across income levels but our interpretations with district-level aggregations
- have been concerned with the effect of wider regional disparities on status
- consumption in the economies.
+ level aggregation might show more detailed variation in 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ consumption across income levels but our interpretations with district-level
+ aggregations have been concerned with the effect of wider regional disparities
+ on status consumption in the economies.
  We have used the measure 
 \begin_inset Formula $r_{t}$
 \end_inset
@@ -4351,7 +4422,7 @@ status open
 \backslash
 begin{longtable}[!p]{c c c l} 
 \backslash
-caption{Excess and food items in Tanzania 
+caption{NDCexAC and food items in Tanzania 
 \backslash
 label{itemsclassification_tn}} 
 \backslash
@@ -4617,111 +4688,111 @@ _ripe
 \backslash
 
 \backslash
- & excess & general & cigarettes
+ & NDCexAC & general & cigarettes
 \backslash
 
 \backslash
- & excess & general & bar
+ & NDCexAC & general & bar
 \backslash
 _soap
 \backslash
 
 \backslash
- & excess & general & clothes
+ & NDCexAC & general & clothes
 \backslash
 _soap
 \backslash
 
 \backslash
- & excess & general & toothpaste
+ & NDCexAC & general & toothpaste
 \backslash
 
 \backslash
- & excess & general & toilet
+ & NDCexAC & general & toilet
 \backslash
 _paper
 \backslash
 
 \backslash
- & excess & general & skin
+ & NDCexAC & general & skin
 \backslash
 _cream
 \backslash
 
 \backslash
- & excess & general & other
+ & NDCexAC & general & other
 \backslash
 _personal
 \backslash
 
 \backslash
- & excess & general & misc
+ & NDCexAC & general & misc
 \backslash
 _cleaning
 \backslash
 
 \backslash
- & excess & general & donation
+ & NDCexAC & general & donation
 \backslash
 
 \backslash
- & excess & general & services
+ & NDCexAC & general & services
 \backslash
 
 \backslash
- & excess & general & bride
+ & NDCexAC & general & bride
 \backslash
 _price
 \backslash
 
 \backslash
- & excess & general & marriage
+ & NDCexAC & general & marriage
 \backslash
 
 \backslash
- & excess & general & funeral
+ & NDCexAC & general & funeral
 \backslash
 
 \backslash
- & excess & general & sugar
+ & NDCexAC & general & sugar
 \backslash
 
 \backslash
- & excess & general & sweet
+ & NDCexAC & general & sweet
 \backslash
 
 \backslash
- & excess & general & honey
+ & NDCexAC & general & honey
 \backslash
 
 \backslash
- & excess & general & salt
+ & NDCexAC & general & salt
 \backslash
 
 \backslash
- & excess & general & spices
+ & NDCexAC & general & spices
 \backslash
 
 \backslash
- & excess & general & tea
+ & NDCexAC & general & tea
 \backslash
 
 \backslash
- & excess & general & coffee
+ & NDCexAC & general & coffee
 \backslash
 
 \backslash
- & excess & general & miscdrinkpowder
+ & NDCexAC & general & miscdrinkpowder
 \backslash
 
 \backslash
- & excess & general & canned
+ & NDCexAC & general & canned
 \backslash
 _drink
 \backslash
 
 \backslash
- & excess & general & readymade
+ & NDCexAC & general & readymade
 \backslash
 _tea
 \backslash
@@ -4729,39 +4800,39 @@ _coffee
 \backslash
 
 \backslash
- & excess & general & beer
+ & NDCexAC & general & beer
 \backslash
 
 \backslash
- & excess & general & brews
+ & NDCexAC & general & brews
 \backslash
 
 \backslash
- & excess & general & winespirits
+ & NDCexAC & general & winespirits
 \backslash
 
 \backslash
- & excess & general & mensclothes
+ & NDCexAC & general & mensclothes
 \backslash
 
 \backslash
- & excess & general & womensclothes
+ & NDCexAC & general & womensclothes
 \backslash
 
 \backslash
- & excess & general & childrensclothes
+ & NDCexAC & general & childrensclothes
 \backslash
 
 \backslash
- & excess & general & mensshoes
+ & NDCexAC & general & mensshoes
 \backslash
 
 \backslash
- & excess & general & womensshoes
+ & NDCexAC & general & womensshoes
 \backslash
 
 \backslash
- & excess & general & childrensshoes
+ & NDCexAC & general & childrensshoes
 \backslash
 
 \backslash
@@ -4805,18 +4876,13 @@ status open
 \backslash
 begin{longtable}[!p]{l l c l} 
 \backslash
-caption{Excess and food items  in Nigeria 
+caption{NDCexAC and food items  in Nigeria 
 \backslash
 label{itemsclassification_ngr}} 
 \backslash
 
 \backslash
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-
+  
 \backslash
 hline
 \backslash
@@ -4832,19 +4898,9 @@ multicolumn{1}{c}{type}
 \backslash
  
 \backslash
-hline
-\end_layout
-
-\begin_layout Plain Layout
-
-
+hline 
 \backslash
-endhead
-\end_layout
-
-\begin_layout Plain Layout
-
-
+endhead 
 \backslash
 
 \backslash
@@ -5498,49 +5554,41 @@ _melon & fruitsveg & food
 \backslash
 
 \backslash
- & cigarettes & general & excess
+ & cigarettes & general & NDCexAC
 \backslash
 
 \backslash
- & newspapers & general & excess
+ & newspapers & general & NDCexAC
 \backslash
 
 \backslash
- & soap & general & excess
+ & soap & general & NDCexAC
 \backslash
 
 \backslash
  & toilet
 \backslash
-_paper & general & excess
+_paper & general & NDCexAC
 \backslash
 
 \backslash
- & cosmetics & general & excess
+ & cosmetics & general & NDCexAC
 \backslash
 
 \backslash
- & vitamin & general & excess
-\backslash
-
-\backslash
- & clothes
-\backslash
-_infant & general & excess
+ & vitamin & general & NDCexAC
 \backslash
 
 \backslash
  & clothes
 \backslash
-_baby & general & excess
+_infant & general & NDCexAC
 \backslash
 
 \backslash
  & clothes
 \backslash
-_boys
-\backslash
-_tailored & general & excess
+_baby & general & NDCexAC
 \backslash
 
 \backslash
@@ -5548,7 +5596,15 @@ _tailored & general & excess
 \backslash
 _boys
 \backslash
-_made & general & excess
+_tailored & general & NDCexAC
+\backslash
+
+\backslash
+ & clothes
+\backslash
+_boys
+\backslash
+_made & general & NDCexAC
 \backslash
 
 \backslash
@@ -5556,7 +5612,7 @@ _made & general & excess
 \backslash
 _girls
 \backslash
-_tailored & general & excess
+_tailored & general & NDCexAC
 \backslash
 
 \backslash
@@ -5564,7 +5620,7 @@ _tailored & general & excess
 \backslash
 _girls
 \backslash
-_made & general & excess
+_made & general & NDCexAC
 \backslash
 
 \backslash
@@ -5572,7 +5628,7 @@ _made & general & excess
 \backslash
 _men
 \backslash
-_tailored & general & excess
+_tailored & general & NDCexAC
 \backslash
 
 \backslash
@@ -5580,7 +5636,7 @@ _tailored & general & excess
 \backslash
 _men
 \backslash
-_made & general & excess
+_made & general & NDCexAC
 \backslash
 
 \backslash
@@ -5588,7 +5644,7 @@ _made & general & excess
 \backslash
 _clothes
 \backslash
-_tailored & general & excess
+_tailored & general & NDCexAC
 \backslash
 
 \backslash
@@ -5596,7 +5652,7 @@ _tailored & general & excess
 \backslash
 _clothes
 \backslash
-_made & general & excess
+_made & general & NDCexAC
 \backslash
 
 \backslash
@@ -5604,89 +5660,89 @@ _made & general & excess
 \backslash
 _george
 \backslash
-_clothes & general & excess
+_clothes & general & NDCexAC
 \backslash
 
 \backslash
  & clothes
 \backslash
-_others & general & excess
+_others & general & NDCexAC
 \backslash
 
 \backslash
  & shoes
 \backslash
-_boys & general & excess
+_boys & general & NDCexAC
 \backslash
 
 \backslash
  & shoes
 \backslash
-_men & general & excess
+_men & general & NDCexAC
 \backslash
 
 \backslash
  & shoes
 \backslash
-_girls & general & excess
+_girls & general & NDCexAC
 \backslash
 
 \backslash
  & shoes
 \backslash
-_women & general & excess
+_women & general & NDCexAC
 \backslash
 
 \backslash
- & donations & general & excess
+ & donations & general & NDCexAC
 \backslash
 
 \backslash
  & bed
 \backslash
-_sheets & general & excess
+_sheets & general & NDCexAC
 \backslash
 
 \backslash
- & pillows & general & excess
+ & pillows & general & NDCexAC
 \backslash
 
 \backslash
- & linen & general & excess
+ & linen & general & NDCexAC
 \backslash
 
 \backslash
- & carpets & general & excess
+ & carpets & general & NDCexAC
 \backslash
 
 \backslash
- & cellphone & general & excess
+ & cellphone & general & NDCexAC
 \backslash
 
 \backslash
  & carpets
 \backslash
-_rugs & general & excess
+_rugs & general & NDCexAC
 \backslash
 
 \backslash
  & linen
 \backslash
-_towels & general & excess
+_towels & general & NDCexAC
 \backslash
 
 \backslash
  & sports
 \backslash
-_hobby & general & excess
+_hobby & general & NDCexAC
 \backslash
 
 \backslash
- & films & general & excess
+ & films & general & NDCexAC
 \backslash
 
 \backslash
- & dowry & general & excess
+ & dowry & general & NDCexAC
 \backslash
 
 \backslash
@@ -5694,35 +5750,35 @@ _hobby & general & excess
 \backslash
 _ceremony
 \backslash
-_costs & general & excess
+_costs & general & NDCexAC
 \backslash
 
 \backslash
  & funeral
 \backslash
-_costs & general & excess
+_costs & general & NDCexAC
 \backslash
 
 \backslash
- & internet & general & excess
+ & internet & general & NDCexAC
 \backslash
 
 \backslash
  & cinema
 \backslash
-_dvd & general & excess
+_dvd & general & NDCexAC
 \backslash
 
 \backslash
  & tailoring
 \backslash
-_charge & general & excess
+_charge & general & NDCexAC
 \backslash
 
 \backslash
  & laundry
 \backslash
-_charge & general & excess
+_charge & general & NDCexAC
 \backslash
 
 \backslash
