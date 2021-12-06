@@ -44,7 +44,6 @@ def reduce_to_it_lopa(expr,index):
     it_pos = lashakvataddhite_103008(suffix)
     
     if it_pos is not None:
-        # Suffix has a decomposed form "reduced" - which is mutable at every rule application (ideally traceable with sutra)
         # splitting the suffix and asking for next phase with the index + 1
         return reduce_to_it_lopa(expr=expr[0:index] + [Node(It(desuffix(suffix)[0:it_pos+1])) , Node(desuffix(suffix) [it_pos+1:])] + expr[index+1:] ,index=index+1)
 
@@ -59,7 +58,7 @@ def reduce_to_it_lopa(expr,index):
                                        Node(desuffix(suffix)[it_pos_list[-1]+1:])] + expr[index+1:],index=index+1)
     
     it_pos = halantyam_103003(desuffix(suffix))
-    #TODO: only ends would be removed no the start
+    #only ends are removed not the start
     if it_pos is not None:
         return reduce_to_it_lopa(expr=expr[0:index] + [Node(desuffix(suffix)[0:it_pos]) , Node(It(desuffix(suffix) [it_pos:]))] + expr[index+1:] ,index=index)
     
@@ -68,9 +67,6 @@ def reduce_to_it_lopa(expr,index):
         return reduce_to_it_lopa(expr=expr[0:index] + [Node(It(desuffix(suffix)[0:it_pos+1])) , Node(desuffix(suffix) [it_pos+1:])] + expr[index+1:] ,index=index+1)
         
     return expr
-        
-
-        
     
 
 def process_list(expr):
@@ -78,14 +74,19 @@ def process_list(expr):
         raise ValueError("Only nodes are to be present")
     new_expr = expr.copy()
     
+    # the logic for applying it-lopa is that 
+    # all suffixes are searched and then lopa-application is applied
+    # this is the application phase - and it ensued only because we invoked it at first
+    # there may be other things that are needed before application occurs
+
     while True:
         suffix_indices= [ index for index,node in enumerate(new_expr) if isinstance(node._data,Suffix)]
         if suffix_indices:
-            new_expr = reduce_to_it_lopa(expr=new_expr,index=suffix_indices[0]        )
+            new_expr = reduce_to_it_lopa(expr=new_expr,index=suffix_indices[0])
         else:
             break
     
-    return new_expr 
+    return new_expr
 
 expression=[Node(parse_string("bhaja")),Node(Suffix("ghaNc")),Node(Suffix("Nnvul"))]
 

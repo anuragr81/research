@@ -24,10 +24,11 @@ def aadirNciXtuXdavaH_103005(upadesha):
         return []
 
 def chuXtuu_10307(suffix):
-    if isinstance   (suffix,Suffix  ):
+    
+    suffix_str = suffix.get_suffix() if isinstance   (suffix,Suffix) else suffix
      
-        if suffix.get_suffix()[0] in  chu() or suffix.get_suffix()[0] in Xtu():
-            return 0
+    if suffix_str [0] in  chu() or suffix_str [0] in Xtu():
+        return 0
     
     return None
 
