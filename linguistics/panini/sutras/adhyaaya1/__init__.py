@@ -24,24 +24,23 @@ def aadirNciXtuXdavaH_103005(upadesha):
         return []
 
 def chuXtuu_10307(suffix):
-    if not isinstance   (suffix,Suffix  ):
-        raise ValueError    ("suffix must be of Suffix type")
-    if suffix.get_suffix()[0] in  chu() or suffix.get_suffix()[0] in Xtu():
-        return 0
-    else:
-        return None
+    if isinstance   (suffix,Suffix  ):
+     
+        if suffix.get_suffix()[0] in  chu() or suffix.get_suffix()[0] in Xtu():
+            return 0
+    
+    return None
 
     
 def lashakvataddhite_103008(suffix):
     """ 
     returns the position of it
     """
-    if not isinstance(suffix,Suffix):
-        raise ValueError("Invalid Suffix")
-    if not suffix.is_taddhita and suffix.get_suffix()[0] in ("l","sh","k","kh","g","gh","Nc"):
-        return 0
-    else:
-        return None
+    if isinstance(suffix,Suffix):
+        if not suffix.is_taddhita and suffix.get_suffix()[0] in ("l","sh","k","kh","g","gh","Nc"):
+            return 0
+    
+    return None
 
 
 

@@ -50,17 +50,28 @@ class Anga(Group):
     
 class Suffix:
     def __init__(self,suffix):
+        
+        
         if isinstance(suffix,str):
             self._suffix = parse_string(suffix)
         elif isinstance(suffix,list) and all(isinstance(j,str) for j in suffix):
             self._suffix= suffix
         else:
             raise ValueError("suffix must be a string")
-        taddhitas = ['chha','iiy']
-        self.is_taddhita = ''.join(self._suffix) in taddhitas
+        
+        all_pratyayaaH = kRit_pratyayaaH()+tiNg_pratyayaaH()+san_pratyayaaH()+strii_pratyayaaH()+sup_pratyayaaH()+taddhita_prayayaaH() + unclassified_pratyayaaH()
+        if ''.join(self._suffix) not in all_pratyayaaH:
+            raise ValueError("Unknown suffix %s" % ''.join(self._suffix))            
+        
+        self.is_taddhita = ''.join(self._suffix) in taddhita_prayayaaH()
+        self.reduced= None
         
     def get_suffix(self):
         return self._suffix
+    
+    def apply_reduction(self,functor, **kwargs):
+        self.reduced = functor(**kwargs)
+        
     
     def __str__(self):
         return str(self._suffix)
@@ -133,6 +144,9 @@ def Xtu():
     return ("Xt","Xth","Xd","Xdh","Nn")
 
 
+
+def unclassified_pratyayaaH():
+    return ('sich','chli')
 def san_pratyayaaH():
     return ("san","kyach","kaamyach","kyaNg","kyaXsh",
             "kvip","Nnich","yaNg","yak","aaya",
@@ -163,7 +177,11 @@ def strii_pratyayaaH():
 def sup_pratyayaaH():
     return ('su', 'au','jas','am','auT','shas','Taa','bhyaam','bhis','Nge','bhyaam',
         'bhyas','Ngasi','bhyaam','bhyas','Ngas','os','aam','Ngi','os','sup')
-        
+
+
+def taddhita_prayayaaH ():
+    return ('chha','iiy')
+
 def upadhaa(x):    
     if not isinstance(x,list) or not all(isinstance(j,str) for j in x):
         raise ValueError("invalid input: %s" % x)
