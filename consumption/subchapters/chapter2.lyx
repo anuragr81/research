@@ -33,7 +33,7 @@ theorems-sec
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts true
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -209,6 +209,20 @@ We assess this empirically by comparing the non-durable consumption and
  We also comment if in the specific context of urbanisation-related developments
 , status consumption could be largely an appeal for urbanisation in the
  poorest sections of the developing economies.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%comparison needs to be stressed
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2785,8 +2799,27 @@ on might be.
 \end_layout
 
 \begin_layout Enumerate
-[Asset_A0 vs quality] There is some substition between owning assets and
- availing nu.
+[Asset_A0 vs quality] In overall non-durable consumption excluding assets
+ costs (
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+), there is some substitution between owning assets and availing 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ - since consumers with high assets given the same income have less 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+.
+ But the non-food portion of 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ is more sensitive to assets in Tanzania - where higher assets mean more
+ non-food components whereas the relation is weaker in Nigeria.
+ This motivates this regression on higher and lower asset owner populations.
 \end_layout
 
 \begin_layout Subsection*
@@ -2794,12 +2827,20 @@ Quantile Effects
 \end_layout
 
 \begin_layout Subsubsection*
-Rich vs Poor
+Asset-Rich vs Asset-Poor 
 \end_layout
 
 \begin_layout Standard
 We can run the same regression for rich and poor consumers to see how poor
  have difference coefficients compared to rich.
+\end_layout
+
+\begin_layout Subsubsection*
+Expenditure-Rich vs Expenditure-Poor
+\end_layout
+
+\begin_layout Standard
+The same as Asset-Rich vs Asset-Poor except with asset-values.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -3083,7 +3124,44 @@ status open
 
 \begin_layout Plain Layout
 
-% tabExcessLinearTNZ_w_nonfood_ne
+
+\backslash
+setcounter{topnumber}{4} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{bottomnumber}{4} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{totalnumber}{4} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+topfraction}{0.85} 
+\backslash
+renewcommand{
+\backslash
+bottomfraction}{0.85} 
+\backslash
+renewcommand{
+\backslash
+textfraction}{0.15} 
+\backslash
+renewcommand{
+\backslash
+floatpagefraction}{0.7}
 \end_layout
 
 \end_inset
@@ -3099,7 +3177,23 @@ status open
 
 
 \backslash
-begin{table}[htbp]
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[!htb]
 \backslash
 centering 
 \backslash
@@ -3123,7 +3217,14 @@ _nonfood
 \backslash
 _ne $ as dependent variable 
 \backslash
-label{tabExcessLinearTNZ_w_nonfood_ne}} 
+label{tabExcessLinearTNZ_w_nonfood_ne}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox{2.5in}{!}{ 
 \backslash
 begin{tabular}{l*{2}{c}} 
 \backslash
@@ -3353,7 +3454,7 @@ sym{***}
 \backslash
  
 \backslash
-end{tabular} 
+end{tabular} } 
 \backslash
 end{table} 
 \end_layout
@@ -3385,7 +3486,7 @@ status open
 
 
 \backslash
-begin{table}[htbp]
+begin{table}[!htb]
 \backslash
 centering 
 \backslash
@@ -3410,6 +3511,8 @@ _nonfood
 _ne $ as dependent variable 
 \backslash
 label{tabExcessLinearNGR_w_nonfood_ne}} 
+\backslash
+resizebox{2.5in}{!}{ 
 \backslash
 begin{tabular}{l*{2}{c}} 
 \backslash
@@ -3635,7 +3738,7 @@ sym{***}
 \backslash
  
 \backslash
-end{tabular} 
+end{tabular} } 
 \backslash
 end{table} 
 \end_layout
@@ -3667,7 +3770,7 @@ status open
 
 
 \backslash
-begin{table}[htbp]
+begin{table}[!htb]
 \backslash
 centering 
 \backslash
@@ -3692,6 +3795,8 @@ _q
 _ne $ as dependent variable 
 \backslash
 label{tabExcessLinearTNZ}} 
+\backslash
+resizebox{2.5in}{!}{ 
 \backslash
 begin{tabular}{l*{2}{c}} 
 \backslash
@@ -3915,7 +4020,7 @@ sym{***}
 \backslash
  
 \backslash
-end{tabular} 
+end{tabular} } 
 \backslash
 end{table} 
 \end_layout
@@ -3947,7 +4052,7 @@ status open
 
 
 \backslash
-begin{table}[htbp]
+begin{table}[!htb]
 \backslash
 centering 
 \backslash
@@ -3972,6 +4077,8 @@ _q
 _ne $ as dependent variable 
 \backslash
 label{tabExcessLinearNGR}} 
+\backslash
+resizebox{2.5in}{!}{  
 \backslash
 begin{tabular}{l*{2}{c}} 
 \backslash
@@ -4199,7 +4306,7 @@ sym{***}
 \backslash
  
 \backslash
-end{tabular} 
+end{tabular} } 
 \backslash
 end{table} 
 \end_layout
@@ -4217,7 +4324,23 @@ status open
 
 
 \backslash
-begin{table}[H]
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[!htb]
 \backslash
 centering 
 \backslash
@@ -4240,6 +4363,8 @@ caption{Tanzania: FE estimation for  $ log(
 nu_{t}) $ as dependent variable 
 \backslash
 label{tabExcessFETNZ}} 
+\backslash
+resizebox{2in}{!}{ 
 \backslash
 begin{tabular}{l*{1}{c}} 
 \backslash
@@ -4365,7 +4490,7 @@ sym{***}
 \backslash
  
 \backslash
-end{tabular} 
+end{tabular} } 
 \backslash
 end{table}
 \end_layout
@@ -4383,7 +4508,7 @@ status open
 
 
 \backslash
-begin{table}[H]
+begin{table}[!htb]
 \backslash
 centering 
 \backslash
@@ -4406,6 +4531,8 @@ caption{Nigeria: FE estimation for  $ log(
 nu_{t}) $ as dependent variable 
 \backslash
 label{tabExcessFENGR}} 
+\backslash
+resizebox{2in}{!}{ 
 \backslash
 begin{tabular}{l*{1}{c}} 
 \backslash
@@ -4535,7 +4662,7 @@ sym{***}
 \backslash
  
 \backslash
-end{tabular} 
+end{tabular} } 
 \backslash
 end{table} 
 \end_layout
