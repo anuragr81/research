@@ -1,14 +1,28 @@
+library(foreign)
+library(haven)
 
 #options(echo=TRUE) # if you want see commands in output file
-options(echo=F) # if you want see commands in output file
+options(echo=T) # if you want see commands in output file
 args <- commandArgs(trailingOnly = TRUE)
-fpath=args[1]
 
-data.frame ( fname = c("linear_nu_food_nonfood_costs_r_ngr.do") );
+fpath=args[1]
+split_field=args[2]
+output_file_lo = args[3]
+output_file_hi = args[4]
+
 if (file.exists(fpath)){
-fname = basename(fpath)
-print("Processing")
+  print(fpath)
+  dat = as.data.frame(read_dta(fpath))
+  vals =dat[,split_field]
+  medval = median(vals)
+  
+  print(paste("Median is ",medval))
+  lodat=dat[dat[,split_field]<=medval,]
+  hidat=dat[dat[,split_field]>medval,]
+  
+  write_dta(lodat,output_file_lo)
+  write_dta(hidat,output_file_hi)
 } else {
-	stop("NO file")
+  stop("NO file")
 }
 
