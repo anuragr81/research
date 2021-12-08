@@ -9,8 +9,11 @@ def remove_if_exists(x):
     
 stata_program_fpath="c:\\Program Files (x86)\\Stata14\\Stata-64.exe"
 ngr_data = {'file1':"c:/local_files/research/consumption/lsms/data/ngr_df2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/ngr_df2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/ngr_df2015.dta" }
+tn_data = {'file1':"c:/local_files/research/consumption/lsms/data/tn_df2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/tn_df2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/tn_df2014.dta" }
 settings = {'NGR_direct': {'operation':'direct','data': ngr_data} , 
-            'NGR_hilo_A': {'operation':'hilo','data': ngr_data , 'split_field':'lnA0'} }
+            'NGR_hilo_A': {'operation':'hilo','data': ngr_data , 'split_field':'lnA0'},
+            'TNZ_direct': {'operation':'direct','data': tn_data} , 
+            'TNZ_hilo_A': {'operation':'hilo','data': tn_data , 'split_field':'lnA0'} }
 
 
 if not os.path.exists(stata_program_fpath):
@@ -83,7 +86,6 @@ if settings[settings_name]['operation'] == 'hilo':
                                    data_files['file1'][ftype],
                                    data_files['file2'][ftype],
                                    data_files['file3'][ftype]])
-        
         
         if (os.path.getmtime(temp_file) <time_before_call):
             raise RuntimeError("File Pointed to is before the call")
