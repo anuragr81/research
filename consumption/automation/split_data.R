@@ -14,6 +14,7 @@ if (file.exists(fpath)){
   print(fpath)
   dat = as.data.frame(read_dta(fpath))
   vals =dat[,split_field]
+  vals = vals[is.finite(vals)]
   medval = median(vals)
   
   print(paste("Median is ",medval))

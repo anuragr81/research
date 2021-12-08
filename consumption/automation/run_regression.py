@@ -12,8 +12,10 @@ ngr_data = {'file1':"c:/local_files/research/consumption/lsms/data/ngr_df2010.dt
 tn_data = {'file1':"c:/local_files/research/consumption/lsms/data/tn_df2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/tn_df2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/tn_df2014.dta" }
 settings = {'NGR_direct': {'operation':'direct','data': ngr_data} , 
             'NGR_hilo_A': {'operation':'hilo','data': ngr_data , 'split_field':'lnA0'},
+            'NGR_hilo_x': {'operation':'hilo','data': ngr_data , 'split_field':'logx'},
             'TNZ_direct': {'operation':'direct','data': tn_data} , 
-            'TNZ_hilo_A': {'operation':'hilo','data': tn_data , 'split_field':'lnA0'} }
+            'TNZ_hilo_A': {'operation':'hilo','data': tn_data , 'split_field':'lnA0'} ,
+            'TNZ_hilo_x': {'operation':'hilo','data': tn_data , 'split_field':'logx'} }
 
 
 if not os.path.exists(stata_program_fpath):
