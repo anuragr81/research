@@ -74,6 +74,10 @@ choose_max_litlang <- function (x) {
   }
 }
 
+retrieve_missing_rural_info_2014 <- function(o2014){
+  #ddply(unique(o2014[,c("hhid","region","district","ward")]),.(region,district,ward),summarise,n=toJSON(hhid2012))
+  
+}
 add_yob_match_score <-function(k,yobtol,ncdifftol){
   arr <- array();
   for ( i in seq(length(k$YOB_array.x))) { arr[i] <- YOB_similarity(a = fromJSON(k$YOB_array.x[i]), b=fromJSON(k$YOB_array.y[i]),tol=yobtol)}
@@ -1452,6 +1456,42 @@ calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
   resdf$P1 <- bubble_distances$P1
   return(resdf)
 }
+
+get_missing_isrural_mapping_for_2014 <- function(tn){
+  a<-unique(tn$df2012[,c("region","district","B","S","E")])
+  b<-unique(tn$df2014[,c("region","district","B","S","E")])
+  a$B2012 <- a$B
+  b$B2014 <- b$B
+  a$B <- NULL
+  b$B <- NULL
+  k <- expand.grid(a$B2012,b$B2014)
+  colnames(k) <- c("B2012","B2014")
+  k <- plyr::rename(merge(k,a,all=T,by=c("B2012")),c("S"="S2012","E"="E2012"))
+  k <- plyr::rename(merge(k,b,all=T,by=c("B2014")),c("S"="S2014","E"="E2014"))
+  k$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , k$S2012,k$E2012,k$S2014,k$E2014)
+  # start with a small distance and eliminate B2014 values
+  mapping <- NULL
+  curk<- subset(k,distance<.3)
+  exact_matching_B2014 = subset( ddply(curk[,c("B2014","B2012")],.(B2014),summarise,n=length(B2012)), n==1)$B2014
+  mapping <- unique(rbind(mapping,subset(curk, is.element(B2014,exact_matching_B2014))[,c("B2012","B2014")]))
+  remaining_k <- subset(k,!is.element(B2014,exact_matching_B2014))
+  ## second pass with a lower distance
+  curk <- subset(remaining_k,distance<.1)
+  exact_matching_B2014 = subset( ddply(curk[,c("B2014","B2012")],.(B2014),summarise,n=length(B2012)), n==1)$B2014
+  mapping <- unique(rbind(mapping,subset(curk, is.element(B2014,exact_matching_B2014))[,c("B2012","B2014")]))
+  remaining_k <- subset(k,!is.element(B2014,mapping$B2014))
+  
+  ## next pass with a lower distance
+  
+  curk <- subset(remaining_k,distance<.05)
+  exact_matching_B2014 = subset( ddply(curk[,c("B2014","B2012")],.(B2014),summarise,n=length(B2012)), n==1)$B2014
+  mapping <- unique(rbind(mapping,subset(curk, is.element(B2014,exact_matching_B2014))[,c("B2012","B2014")]))
+  remaining_k <- subset(k,!is.element(B2014,mapping$B2014))
+  
+  stop("Make it a function")
+  print("DONE")
+}
+
 get_bubble_distances <- function(dat,distance_threshold,popdistance_threshold){
   # the average of consumption of consumers within a given population-distance becomes pi(r), the total asset value becomes r, the total expenditure is cost_ne
   # remember we have distances only of consumers 

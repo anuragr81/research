@@ -130,6 +130,8 @@ def process_list(expr):
     #TODO: reduce the list by considering parents etc.
     # list of unique seniormost parents
     print(OrderedDict([(x.parent,None) for x in new_expr]))
+    # join all immediate neighours - 2-neighborhoods
+    
     return new_expr
 
 expression=[Node(Dhaatu(parse_string("bhaj")),parent=None),Node(Suffix("ghaNc"),parent=None)]
