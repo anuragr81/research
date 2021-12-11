@@ -361,6 +361,11 @@ load_data <- function()
   res[['df2015']] <- res[['df2015']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
   res[['df2015']] <- res[['df2015']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
+  
+  res[['df2010']] <- add_rural_mapping_for_districts(res,2010)
+  res[['df2012']] <- add_rural_mapping_for_districts(res,2012)
+  res[['df2015']] <- add_rural_mapping_for_districts(res,2015)
+  
   return(res)
 }
 
@@ -405,6 +410,42 @@ init_data <- function(){
 
 
 choose_max_education_rank <- function (x) { arr = x[!is.na(x)] ; if (length(arr)>1) {return (max(arr))} else {return(0)}}
+
+
+add_rural_mapping_for_districts <- function(ngr,year)
+{
+  if (year == 2010){
+    ngr[["df2010"]]$isurban <- as.integer(ngr[["df2010"]]$is_urban==1)
+    rural_wards_df = ddply(unique(ngr$df2010[c("B","region","district","ea","isurban")]),.(B),summarise,rural_wards=1-sum(isurban)/length(isurban))
+    result = merge(ngr$df2010 , rural_wards_df,by=c("B"),all.x=T)
+    if (nrow(subset(result,is.na(rural_wards))) >0){
+      stop(paste("Missing rural_wards data for year:",year))
+    }
+    
+    return(result)
+  } 
+  if (year == 2012){
+    ngr[["df2012"]]$isurban <- as.integer(ngr[["df2012"]]$is_urban==1)
+    rural_wards_df = ddply(unique(ngr$df2012[c("B","region","district","ea","isurban")]),.(B),summarise,rural_wards=1-sum(isurban)/length(isurban))
+    result = merge(ngr$df2012 , rural_wards_df,by=c("B"),all.x=T)
+    if (nrow(subset(result,is.na(rural_wards))) >0){
+      stop(paste("Missing rural_wards data for year:",year))
+    }
+    
+    return(result)
+  }
+  if (year == 2015){
+    ngr[["df2015"]]$isurban <- as.integer(ngr[["df2015"]]$is_urban==1)
+    rural_wards_df = ddply(unique(ngr$df2015[c("B","region","district","ea","isurban")]),.(B),summarise,rural_wards=1-sum(isurban)/length(isurban))
+    result = merge(ngr$df2015 , rural_wards_df,by=c("B"),all.x=T)
+    if (nrow(subset(result,is.na(rural_wards))) >0){
+      stop(paste("Missing rural_wards data for year:",year))
+    }
+    
+    return(result)
+  }
+  stop(paste("Unknown year:",year))
+}
 
 
 get_bubble_distances <- function(dat,distance_threshold,popdistance_threshold){

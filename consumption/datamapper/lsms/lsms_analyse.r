@@ -1433,6 +1433,10 @@ load_data <- function()
   # adding quantiles
   res[['df2014']] <- res[['df2014']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
+  res[['df2010']] <- add_rural_mapping_for_districts(res,2010)
+  res[['df2012']] <- add_rural_mapping_for_districts(res,2012)
+  res[['df2014']] <- add_rural_mapping_for_districts(res,2014)
+  
   return(res)
 }
 
@@ -1458,6 +1462,8 @@ calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
 }
 
 get_missing_isrural_mapping_for_2014 <- function(tn){
+  
+  
   a<-unique(tn$df2012[,c("region","district","B","S","E")])
   b<-unique(tn$df2014[,c("region","district","B","S","E")])
   a$B2012 <- a$B
@@ -1469,28 +1475,76 @@ get_missing_isrural_mapping_for_2014 <- function(tn){
   k <- plyr::rename(merge(k,a,all=T,by=c("B2012")),c("S"="S2012","E"="E2012"))
   k <- plyr::rename(merge(k,b,all=T,by=c("B2014")),c("S"="S2014","E"="E2014"))
   k$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , k$S2012,k$E2012,k$S2014,k$E2014)
+  
   # start with a small distance and eliminate B2014 values
-  mapping <- NULL
-  curk<- subset(k,distance<.3)
-  exact_matching_B2014 = subset( ddply(curk[,c("B2014","B2012")],.(B2014),summarise,n=length(B2012)), n==1)$B2014
-  mapping <- unique(rbind(mapping,subset(curk, is.element(B2014,exact_matching_B2014))[,c("B2012","B2014")]))
-  remaining_k <- subset(k,!is.element(B2014,exact_matching_B2014))
-  ## second pass with a lower distance
-  curk <- subset(remaining_k,distance<.1)
-  exact_matching_B2014 = subset( ddply(curk[,c("B2014","B2012")],.(B2014),summarise,n=length(B2012)), n==1)$B2014
-  mapping <- unique(rbind(mapping,subset(curk, is.element(B2014,exact_matching_B2014))[,c("B2012","B2014")]))
-  remaining_k <- subset(k,!is.element(B2014,mapping$B2014))
   
-  ## next pass with a lower distance
+  mapping <- subset(k,distance==0)[,c("B2012","B2014")]
+  #res = list()
+  #res[["remaining"]] = subset(k,is.element(B2014,setdiff(b$B2014,mapping$B2014)) & !is.element(B2014,mapping$B2014))
   
-  curk <- subset(remaining_k,distance<.05)
-  exact_matching_B2014 = subset( ddply(curk[,c("B2014","B2012")],.(B2014),summarise,n=length(B2012)), n==1)$B2014
-  mapping <- unique(rbind(mapping,subset(curk, is.element(B2014,exact_matching_B2014))[,c("B2012","B2014")]))
-  remaining_k <- subset(k,!is.element(B2014,mapping$B2014))
+  #for (distance in c(.3,.1,.05,.01,.005,.0005,.0001,.00005,.00001)){
+  #  res = get_mapping_to_add( remaining_k=res[["remaining"]], distance_threshold=distance)
+  #  mapping <- rbind(mapping,res[["mapping_to_add"]])
+  #  
+  #}
   
-  stop("Make it a function")
-  print("DONE")
+  missing_mapping_items <- unique(as.character(subset(k,is.element(B2014,setdiff(b$B2014,mapping$B2014)) & !is.element(B2014,mapping$B2014))$B2014))
+  for (missing_item in missing_mapping_items){
+    m<- subset(k,B2014==missing_item)
+    mapping <- rbind(mapping,m[order(m$distance),][1,][,c("B2012","B2014")])
+  }
+  missing_mapping_items <- unique(as.character(subset(k,is.element(B2014,setdiff(b$B2014,mapping$B2014)) & !is.element(B2014,mapping$B2014))$B2014))
+  
+  if (length(missing_mapping_items)>0){
+    stop("Could not map missing elements")
+  }
+  
+  return(unique(mapping))
 }
+
+add_rural_mapping_for_districts <- function(tn,year)
+{
+  if (year == 2010){
+    rural_wards_df = ddply(unique(tn$df2010[c("B","region","district","ward","isrural")]),.(B),summarise,rural_wards=sum(isrural)/length(isrural))
+    result = merge(tn$df2010 , rural_wards_df,by=c("B"),all.x=T)
+    if (nrow(subset(result,is.na(rural_wards))) >0){
+      stop(paste("Missing rural_wards data for year:",year))
+    }
+    return(result)
+  } 
+  if (year == 2012){
+    rural_wards_df = ddply(unique(tn$df2012[c("B","region","district","ward","isrural")]),.(B),summarise,rural_wards=sum(isrural)/length(isrural))
+    result = merge(tn$df2012 , rural_wards_df,by=c("B"),all.x=T)
+    if (nrow(subset(result,is.na(rural_wards))) >0){
+      stop(paste("Missing rural_wards data for year:",year))
+    }
+    return(result)
+  }
+  
+  if (year == 2014){
+    rural_wards_df_2012 = plyr::rename(ddply(unique(tn$df2012[c("B","region","district","ward","isrural")]),.(B),summarise,rural_wards=sum(isrural)/length(isrural)), c("B"="B2012"))
+    B2012_2014_mapping <- get_missing_isrural_mapping_for_2014(tn)
+    B2012_2014_rural_wards <- merge(rural_wards_df_2012,B2012_2014_mapping,by=c("B2012"))
+    
+    result = plyr::rename(merge( plyr::rename(tn$df2014,c("B"="B2014")), B2012_2014_rural_wards,by=c("B2014"),all.x=T),c("B2014"="B"))
+    result$B2012 <- NULL
+    if (nrow(subset(result,is.na(rural_wards))) >0){
+      stop(paste("Missing rural_wards data for year:",year))
+    }
+    return(result)
+  }
+  stop(paste("Unknown year:",year))
+}
+
+get_mapping_to_add <- function(remaining_k,distance_threshold){
+  curk<- subset(remaining_k,distance<distance_threshold)
+  exact_matching_B2014 = subset( ddply(curk[,c("B2014","B2012")],.(B2014),summarise,n=length(B2012)), n==1)$B2014
+  res = list()
+  res[["remaining"]] = subset(remaining_k,!is.element(B2014,exact_matching_B2014))
+  res[["mapping_to_add"]] = unique(subset(curk, is.element(B2014,exact_matching_B2014))[,c("B2012","B2014")])
+  return(res)
+}
+
 
 get_bubble_distances <- function(dat,distance_threshold,popdistance_threshold){
   # the average of consumption of consumers within a given population-distance becomes pi(r), the total asset value becomes r, the total expenditure is cost_ne
