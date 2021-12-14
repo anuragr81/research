@@ -11,9 +11,13 @@ stata_program_fpath="c:\\Program Files (x86)\\Stata14\\Stata-64.exe"
 ngr_data = {'file1':"c:/local_files/research/consumption/lsms/data/ngr_df2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/ngr_df2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/ngr_df2015.dta" }
 tn_data = {'file1':"c:/local_files/research/consumption/lsms/data/tn_df2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/tn_df2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/tn_df2014.dta" }
 settings = {'NGR_direct': {'operation':'direct','data': ngr_data,'food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} , 
+            'NGR_q30prices': {'operation':'direct','data': ngr_data,'food_price_var':'log_q30_cost_ne_food','nonfood_price_var':'log_q30_cost_ne_nonfood'} , 
+            'NGR_q70prices': {'operation':'direct','data': ngr_data,'food_price_var':'log_q70_cost_ne_food','nonfood_price_var':'log_q70_cost_ne_nonfood'} , 
             'NGR_hilo_A': {'operation':'hilo','data': ngr_data , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'},
             'NGR_hilo_x': {'operation':'hilo','data': ngr_data , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'},
             'TNZ_direct': {'operation':'direct','data': tn_data,'food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} , 
+            'TNZ_q30prices': {'operation':'direct','data': tn_data,'food_price_var':'log_q30_cost_ne_food','nonfood_price_var':'log_q30_cost_ne_nonfood'} , 
+            'TNZ_q70prices': {'operation':'direct','data': tn_data,'food_price_var':'log_q70_cost_ne_food','nonfood_price_var':'log_q70_cost_ne_nonfood'} , 
             'TNZ_hilo_A': {'operation':'hilo','data': tn_data , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} ,
             'TNZ_hilo_x': {'operation':'hilo','data': tn_data , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} }
 
@@ -101,4 +105,5 @@ if settings[settings_name]['operation'] == 'hilo':
 
     sys.exit(0)
 
-raise RuntimeError("Unknown operation")
+print("Unknown operation")
+sys.exit(1)
