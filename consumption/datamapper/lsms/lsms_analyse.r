@@ -1433,8 +1433,12 @@ load_data <- function()
   # adding quantiles
   res[['df2014']] <- res[['df2014']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
+  res[['df2010']]$rural_wards <- NULL
   res[['df2010']] <- add_rural_mapping_for_districts(res,2010)
+  res[['df2012']]$rural_wards <- NULL
+  
   res[['df2012']] <- add_rural_mapping_for_districts(res,2012)
+  res[['df2014']]$rural_wards <- NULL
   res[['df2014']] <- add_rural_mapping_for_districts(res,2014)
   
   return(res)
@@ -1505,7 +1509,7 @@ get_missing_isrural_mapping_for_2014 <- function(tn){
 add_rural_mapping_for_districts <- function(tn,year)
 {
   if (year == 2010){
-    rural_wards_df = ddply(unique(tn$df2010[c("B","region","district","ward","isrural")]),.(B),summarise,rural_wards=sum(isrural)/length(isrural))
+    rural_wards_df = ddply(unique(tn[["df2010"]][c("B","region","district","ward","isrural")]),.(B),summarise,rural_wards=sum(isrural)/length(isrural))
     result = merge(tn$df2010 , rural_wards_df,by=c("B"),all.x=T)
     if (nrow(subset(result,is.na(rural_wards))) >0){
       stop(paste("Missing rural_wards data for year:",year))
@@ -1513,7 +1517,7 @@ add_rural_mapping_for_districts <- function(tn,year)
     return(result)
   } 
   if (year == 2012){
-    rural_wards_df = ddply(unique(tn$df2012[c("B","region","district","ward","isrural")]),.(B),summarise,rural_wards=sum(isrural)/length(isrural))
+    rural_wards_df = ddply(unique(tn[["df2012"]][c("B","region","district","ward","isrural")]),.(B),summarise,rural_wards=sum(isrural)/length(isrural))
     result = merge(tn$df2012 , rural_wards_df,by=c("B"),all.x=T)
     if (nrow(subset(result,is.na(rural_wards))) >0){
       stop(paste("Missing rural_wards data for year:",year))
@@ -1522,11 +1526,11 @@ add_rural_mapping_for_districts <- function(tn,year)
   }
   
   if (year == 2014){
-    rural_wards_df_2012 = plyr::rename(ddply(unique(tn$df2012[c("B","region","district","ward","isrural")]),.(B),summarise,rural_wards=sum(isrural)/length(isrural)), c("B"="B2012"))
+    rural_wards_df_2012 = plyr::rename(ddply(unique(tn[["df2012"]][c("B","region","district","ward","isrural")]),.(B),summarise,rural_wards=sum(isrural)/length(isrural)), c("B"="B2012"))
     B2012_2014_mapping <- get_missing_isrural_mapping_for_2014(tn)
     B2012_2014_rural_wards <- merge(rural_wards_df_2012,B2012_2014_mapping,by=c("B2012"))
     
-    result = plyr::rename(merge( plyr::rename(tn$df2014,c("B"="B2014")), B2012_2014_rural_wards,by=c("B2014"),all.x=T),c("B2014"="B"))
+    result = plyr::rename(merge( plyr::rename(tn[["df2014"]],c("B"="B2014")), B2012_2014_rural_wards,by=c("B2014"),all.x=T),c("B2014"="B"))
     result$B2012 <- NULL
     if (nrow(subset(result,is.na(rural_wards))) >0){
       stop(paste("Missing rural_wards data for year:",year))

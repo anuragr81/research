@@ -10,12 +10,12 @@ def remove_if_exists(x):
 stata_program_fpath="c:\\Program Files (x86)\\Stata14\\Stata-64.exe"
 ngr_data = {'file1':"c:/local_files/research/consumption/lsms/data/ngr_df2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/ngr_df2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/ngr_df2015.dta" }
 tn_data = {'file1':"c:/local_files/research/consumption/lsms/data/tn_df2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/tn_df2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/tn_df2014.dta" }
-settings = {'NGR_direct': {'operation':'direct','data': ngr_data} , 
-            'NGR_hilo_A': {'operation':'hilo','data': ngr_data , 'split_field':'lnA0'},
-            'NGR_hilo_x': {'operation':'hilo','data': ngr_data , 'split_field':'logx'},
-            'TNZ_direct': {'operation':'direct','data': tn_data} , 
-            'TNZ_hilo_A': {'operation':'hilo','data': tn_data , 'split_field':'lnA0'} ,
-            'TNZ_hilo_x': {'operation':'hilo','data': tn_data , 'split_field':'logx'} }
+settings = {'NGR_direct': {'operation':'direct','data': ngr_data,'food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} , 
+            'NGR_hilo_A': {'operation':'hilo','data': ngr_data , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'},
+            'NGR_hilo_x': {'operation':'hilo','data': ngr_data , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'},
+            'TNZ_direct': {'operation':'direct','data': tn_data,'food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} , 
+            'TNZ_hilo_A': {'operation':'hilo','data': tn_data , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} ,
+            'TNZ_hilo_x': {'operation':'hilo','data': tn_data , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} }
 
 
 if not os.path.exists(stata_program_fpath):
@@ -43,6 +43,8 @@ if settings[settings_name]['operation'] == 'direct':
     time_before_call = time.time()
             
     retcode=subprocess.check_call([stata_program_fpath,"/e","do",dofpath,depvar,
+                                   settings[settings_name]['food_price_var'],
+                                   settings[settings_name]['nonfood_price_var'],
                                    selected_settings_data['file1'],
                                    selected_settings_data['file2'],
                                    selected_settings_data['file3']])
@@ -84,11 +86,14 @@ if settings[settings_name]['operation'] == 'hilo':
         time_before_call = time.time()
         print("ftype="+str(ftype))
         
-        retcode=subprocess.check_call([stata_program_fpath,"/e","do",dofpath,depvar,
+        cmdline=[stata_program_fpath,"/e","do",dofpath,depvar,
+                                   settings[settings_name]['food_price_var'],
+                                   settings[settings_name]['nonfood_price_var'],
                                    data_files['file1'][ftype],
                                    data_files['file2'][ftype],
-                                   data_files['file3'][ftype]])
-        
+                                   data_files['file3'][ftype]]
+        print(cmdline)
+        retcode=subprocess.check_call(cmdline)
         if (os.path.getmtime(temp_file) <time_before_call):
             raise RuntimeError("File Pointed to is before the call")
         shutil.copyfile(temp_file,re.sub("\\.tex$","_"+ftype+".tex",temp_file))

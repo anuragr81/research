@@ -362,8 +362,11 @@ load_data <- function()
   res[['df2015']] <- res[['df2015']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
   
+  res[['df2010']]$rural_wards <- NULL
   res[['df2010']] <- add_rural_mapping_for_districts(res,2010)
+  res[['df2012']]$rural_wards <- NULL
   res[['df2012']] <- add_rural_mapping_for_districts(res,2012)
+  res[['df2015']]$rural_wards <- NULL
   res[['df2015']] <- add_rural_mapping_for_districts(res,2015)
   
   return(res)
