@@ -134,7 +134,7 @@ def process_list(expr):
     
     return new_expr
 
-expression=[Node(Dhaatu(parse_string("bhaj")),parent=None),Node(Suffix("ghaNc"),parent=None)]
+expression=[Node(Dhaatu(parse_string("bhaj")),parent=None),Node(Suffix("ghaNc"),parent=None)]`
 
 
 processed_expr=(process_list(expression))
