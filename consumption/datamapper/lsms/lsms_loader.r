@@ -1017,6 +1017,11 @@ lsms_loader<-function(fu,ln,lgc) {
       
       jdat1 <- read.dta(paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_STATA11/hh_sec_i.DTA',sep=""),convert.factors=FALSE)
       jdat2 <- read.dta(paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_i.DTA',sep=""),convert.factors=FALSE)
+      
+      
+      
+      
+      
       jdat <- rbind(jdat1,jdat2)
       
       j <- fu()@get_translated_frame(dat=jdat,
@@ -1033,7 +1038,22 @@ lsms_loader<-function(fu,ln,lgc) {
       ohsj$is_resident<-as.integer(as.integer(ohsj$years_community)==99)
       ohsj$years_community<-ohsj$years_community+ohsj$is_resident*(ohsj$age-99);
       
-      return(ohsj)
+      ## food security
+      foodsecdat1 <- read.dta(paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_STATA11/hh_sec_h.DTA',sep=""),convert.factors=FALSE)
+      foodsecdat2 <- read.dta(paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/hh_sec_h.DTA',sep=""),convert.factors=FALSE)
+      
+      foodsecdat <- rbind(foodsecdat1,foodsecdat2)
+      
+      foodsec <- fu()@get_translated_frame(dat=foodsecdat,
+                                           names=ln()@get_lsms_seci_info_columns(year),
+                                           m=ln()@get_lsms_seci_fields_mapping(year))
+      foodsec$outoffood <- as.integer(as.integer(foodsec$outoffood)==1) + as.integer(as.integer(foodsec$outoffood)==2)*0
+      
+      ### merging ###
+      ohsjf <- merge(ohsj,foodsec,by=c("hhid"),all.x=T)
+      
+      
+      return(ohsjf)
       
     }
     #
@@ -1138,8 +1158,20 @@ lsms_loader<-function(fu,ln,lgc) {
       ohsjp <- merge(ohsj,percept, all.x=T, by=c("hhid","personid"))
       
       
-      return(ohsjp)
+      ## food security
       
+      foodsecdat <- read.dta(paste0(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/HH_SEC_H.dta'),convert.factors = F)
+      
+      foodsec <- fu()@get_translated_frame(dat=foodsecdat,
+                                           names=ln()@get_lsms_seci_info_columns(year),
+                                           m=ln()@get_lsms_seci_fields_mapping(year))
+      foodsec$outoffood <- as.integer(as.integer(foodsec$outoffood)==1) + as.integer(as.integer(foodsec$outoffood)==2)*0
+      
+      ### merging ###
+      ohsjpf <- merge(ohsjp,foodsec,by=c("hhid"),all.x=T)
+      
+      
+      return(ohsjpf)
     }
     
     if (year == 2010){
@@ -1225,10 +1257,26 @@ lsms_loader<-function(fu,ln,lgc) {
       j$roomsnum_secondary[is.na(j$roomsnum_secondary)]<-0
       j$houserent[is.na(j$houserent)]<-0
       j$roomsnum<-j$roomsnum_primary+j$roomsnum_secondary
+      
+      
+      
+      ### merging ###
       ohsj<-merge(ohs,j,all=TRUE)
       ohsj$is_resident<-as.integer(as.integer(ohsj$years_community)==99)
       ohsj$years_community<-ohsj$years_community+ohsj$is_resident*(ohsj$age-99);
-      return(ohsj)
+      
+      ## food security
+      
+      foodsecdat <- read.dta(paste0(dirprefix,'./lsms/TZNPS2HH1DTA/HH_SEC_I1.dta'),convert.factors = F)
+      
+      foodsec <- fu()@get_translated_frame(dat=foodsecdat,
+                                           names=ln()@get_lsms_seci_info_columns(year),
+                                           m=ln()@get_lsms_seci_fields_mapping(year))
+      foodsec$outoffood <- as.integer(as.integer(foodsec$outoffood)==1) + as.integer(as.integer(foodsec$outoffood)==2)*0
+      
+      ### merging ###
+      ohsjf <- merge(ohsj,foodsec,by=c("hhid"),all.x=T)
+      return(ohsjf)
       
     }
     ##########################2008#########################

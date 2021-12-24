@@ -21,6 +21,8 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           lsms_groups_qualitybased_2010_2012="function",
                                           lsms_groups_sparsenessbased_2010_2012="function",
                                           assets_order_2010_2012="function",
+                                          get_lsms_seci_info_columns="function",
+                                          get_lsms_seci_fields_mapping="function",
                                           items_codes_2012="function",
                                           items_codes_2014="function",
                                           asset_types_2010_2012="function",
@@ -3473,6 +3475,32 @@ lsms_normalizer<-function() {
     #* ))
     return(x)
   }
+ 
+  get_lsms_seci_info_columns <-function( year ){
+    return(c("hhid","outoffood"))
+  }
+  
+  get_lsms_seci_fields_mapping<-function( year ){
+    if (year == 2010){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="hh_i08",name="outoffood")) 
+      return(s)
+    }
+    if (year == 2012){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="y3_hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="hh_h08",name="outoffood")) 
+      return(s)
+    }
+    if (year == 2014){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="y4_hhid",name="hhid"))
+      s= rbind(s,data.frame(iesname="hh_h08",name="outoffood")) 
+      return(s)
+    }
+    stop(paste("Year",year," not supported"))
+  }
   
   infer_lsms_sece_total_income<-function(i1,ignore_second_job,ignore_self_employment_income){
     #* ((
@@ -3713,6 +3741,8 @@ lsms_normalizer<-function() {
              get_ohs_secc_fields_mapping_lsms_2014=get_ohs_secc_fields_mapping_lsms_2014,
              ohs_mapping_lsms_2012=ohs_mapping_lsms_2012,
              ohs_mapping_lsms_2014=ohs_mapping_lsms_2014,
+             get_lsms_seci_info_columns=get_lsms_seci_info_columns,
+             get_lsms_seci_fields_mapping=get_lsms_seci_fields_mapping,
              hh_secg_columns_lsms=hh_secg_columns_lsms,
              get_hh_secg_fields_mapping_lsms_2012=get_hh_secg_fields_mapping_lsms_2012,
              get_lsms_secj_info_columns_2012=get_lsms_secj_info_columns_2012,
