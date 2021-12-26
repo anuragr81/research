@@ -1709,7 +1709,7 @@ lsms_loader<-function(fu,ln,lgc) {
     
     hhid_personid_consu$consumption_factor<-as.integer(hhid_personid_consu$age<=5)*.2+as.integer(hhid_personid_consu$age>5 & hhid_personid_consu$age<=10)*.3+as.integer(hhid_personid_consu$age>10 & hhid_personid_consu$age<=15)*.4+as.integer(hhid_personid_consu$age>15 & hhid_personid_consu$age<=45)+as.integer(hhid_personid_consu$age>45 & hhid_personid_consu$age<=65)*.7+as.integer(hhid_personid_consu$age>65)*.6
     
-    hhid_personid<- ddply(hhid_personid_consu,.(hhid),summarize,hsize=length(personid), consu=sum(consumption_factor));
+    hhid_personid<- ddply(hhid_personid_consu,.(hhid),summarise,hsize=length(personid), consu=sum(consumption_factor));
     print(paste("Number of households with hsize data = ",length(unique(hhid_personid$hhid))))
     
     return(hhid_personid)
