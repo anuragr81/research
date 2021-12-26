@@ -1339,15 +1339,20 @@ get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, 
         datfields <- ddply(dfdat,.(region,district,ward,ea),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0), n_ea= length(unique(hhid))) 
         
         out_of_foodhhs <- subset(dfdat[,c("hhid","region","district","ward","outoffood","cost_ne_nonfood","cost_ne_food")],outoffood==1)
-        out_of_food_at_wards_level <- subset(ddply(out_of_foodhhs,.(region,district,ward),summarise,n=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n>=1)
+        out_of_food_at_wards_level <- subset(ddply(out_of_foodhhs,.(region,district,ward),summarise,n_outoffood=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n>=1)
         
         dfdat$hhid <- NULL
         
-        datfields <- datfields %>% mutate (r = log(mean_A0)) 
+        datfields <- merge(datfields,out_of_food_at_wards_level,by=c("region","district","ward"))
+        
+        if (nrow(subset(datfields,is.na(n_outoffood )))>0){
+          stop("Missing outoffood data for some wards")
+        }
+        
+        datfields <- datfields %>% mutate (r = log(mean_A0))
         
         rd <- merge(datfields, dfdat, by=c("region","district","ward","ea"))
         rd <- rd %>% mutate (Ar=lnA0-r)
-        
         
         print(paste("Number of households ignored because of missing r:",length(unique(subset(rd,is.na(r))[,paste0("hhid",year)])),"/",length(unique(rd[,paste0("hhid",year)]))))
         
@@ -1357,7 +1362,6 @@ get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, 
                     length(unique(rd[,paste0("hhid",year)]))  ) )
                     
         rd <- subset(rd,n_ea>=2)
-        
         
         res[[paste0("df",year)]] <- rd
       }
