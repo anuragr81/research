@@ -1336,20 +1336,19 @@ get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, 
         dfdat <- dflist[[paste0("indivdat",year)]]
         
         dfdat$hhid <- dfdat[,paste0("hhid",year)]
-        datfields <- ddply(dfdat,.(region,district,ward,ea),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0), n_ea= length(unique(hhid))) 
+        datfields_wo_outoffood <- ddply(dfdat,.(region,district,ward,ea),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0), n_ea= length(unique(hhid))) 
         
         out_of_foodhhs <- subset(dfdat[,c("hhid","region","district","ward","outoffood","cost_ne_nonfood","cost_ne_food")],outoffood==1)
-        out_of_food_at_wards_level <- subset(ddply(out_of_foodhhs,.(region,district,ward),summarise,n_outoffood=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n>=1)
+        #out_of_food_at_wards_level <- subset(ddply(out_of_foodhhs,.(region,district,ward),summarise,n_outoffood=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
+        out_of_food_at_district_level <- subset(ddply(out_of_foodhhs,.(region,district),summarise,n_outoffood=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
         
         dfdat$hhid <- NULL
         
-        datfields <- merge(datfields,out_of_food_at_wards_level,by=c("region","district","ward"))
+        datfields <- merge(datfields_wo_outoffood,out_of_food_at_district_level,by=c("region","district"), all.x=T) %>% mutate (r = log(mean_A0))
         
         if (nrow(subset(datfields,is.na(n_outoffood )))>0){
           stop("Missing outoffood data for some wards")
         }
-        
-        datfields <- datfields %>% mutate (r = log(mean_A0))
         
         rd <- merge(datfields, dfdat, by=c("region","district","ward","ea"))
         rd <- rd %>% mutate (Ar=lnA0-r)
@@ -1364,6 +1363,7 @@ get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, 
         rd <- subset(rd,n_ea>=2)
         
         res[[paste0("df",year)]] <- rd
+        stop("NOT DECIDED HOW MANY HOUSES WOULD BE USED FOR OUTOFFOOD LEVEL")
       }
       
       
@@ -1698,6 +1698,33 @@ build_xt_df <- function(dflist)
   res[["df2010_2012"]] <- df2010_2012
   res[["df2012_2014"]] <- df2012_2014
   return(res)
+}
+
+choose_min_distance_with_data <- function(distances,datvec){
+  ret = data.frame(distance=distances,data=datvec)
+  result = subset(ret,!is.na(data)) %>% filter(distance==min(distance))
+  return (result[1,]$data)
+}
+
+closest_district <-function(a,m,use_test_data){
+  if(missing(use_test_data)){
+    use_test_data <- F
+  }
+  if (use_test_data){
+    a <- data.frame(loc=c("A","B","C"),S=c(1,2,3),E=c(3,4,5))
+    m <- data.frame(loc=c("B","C"),data=c("X","Y"))
+  }
+  
+  k <- expand.grid(a$loc,a$loc)
+  colnames(k) <- c("src","tgt")
+  b <- plyr::rename(merge(k,plyr::rename(a,c("loc"="src")),by=c("src")), c("S"="src.S","E"="src.E") )
+  b <- plyr::rename(merge(b,plyr::rename(a,c("loc"="tgt")),by=c("tgt")), c("S"="tgt.S","E"="tgt.E") )
+  
+  b$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , b$src.S,b$src.E,b$tgt.S,b$tgt.E)
+  b <- merge(b,plyr::rename(m,c("loc"="tgt")),by=c("tgt"),all.x=T)
+  b <- b[order(b$src),]
+  result <- ddply(b[,c("loc","src","distance","data")],.(loc),summarise, data=choose_min_distance_with_data(distance,data))
+  return(result)
 }
 
 test_search_cluster <- function(){
