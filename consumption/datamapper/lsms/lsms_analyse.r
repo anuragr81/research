@@ -1342,8 +1342,22 @@ get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, 
         #out_of_food_at_wards_level <- subset(ddply(out_of_foodhhs,.(region,district,ward),summarise,n_outoffood=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
         out_of_food_at_district_level <- subset(ddply(out_of_foodhhs,.(region,district),summarise,n_outoffood=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
         
-        dfdat$hhid <- NULL
+        #ensure that S and E are not more refined than at district level
+        district_coordinates <- ddply(unique(dfdat[,c("region","district","S","E")]),.(region,district),summarise,S=mean(S),E=mean(E))
+        district_coordinates$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,district_coordinates$region, district_coordinates$district )
         
+        districts_data = out_of_food_at_district_level
+        districts_data$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,districts_data$region, districts_data$district )
+        
+        
+        dat <- closest_loc_data (a=district_coordinates,m=districts_data,data_field="min_ne_food")
+        
+        dat$region <- sapply(as.character(dat$src),function(x){jsonlite::fromJSON(x)[1]})
+        dat$district <- sapply(as.character(dat$src),function(x){jsonlite::fromJSON(x)[2]})
+        
+          
+        dfdat$hhid <- NULL
+        print("Using merge based on closest district with consumer having run out of food")
         datfields <- merge(datfields_wo_outoffood,out_of_food_at_district_level,by=c("region","district"), all.x=T) %>% mutate (r = log(mean_A0))
         
         if (nrow(subset(datfields,is.na(n_outoffood )))>0){
@@ -1706,7 +1720,10 @@ choose_min_distance_with_data <- function(distances,datvec){
   return (result[1,]$data)
 }
 
-closest_district <-function(a,m,use_test_data){
+closest_loc_data <-function(a,m,data_field,use_test_data){
+  m$data <- m[,data_field]
+  m <- m[,c("loc","data")]
+  
   if(missing(use_test_data)){
     use_test_data <- F
   }
@@ -1723,7 +1740,8 @@ closest_district <-function(a,m,use_test_data){
   b$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , b$src.S,b$src.E,b$tgt.S,b$tgt.E)
   b <- merge(b,plyr::rename(m,c("loc"="tgt")),by=c("tgt"),all.x=T)
   b <- b[order(b$src),]
-  result <- ddply(b[,c("loc","src","distance","data")],.(loc),summarise, data=choose_min_distance_with_data(distance,data))
+  result <- ddply(b[,c("src","distance","data")],.(src),summarise, data=choose_min_distance_with_data(distance,data))
+  result <- plyr::rename(result,c("data"=data_field,"src"="loc"))
   return(result)
 }
 
