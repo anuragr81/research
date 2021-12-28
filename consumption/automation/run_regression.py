@@ -8,30 +8,38 @@ def remove_if_exists(x):
                 
     
 stata_program_fpath="c:\\Program Files (x86)\\Stata14\\Stata-64.exe"
-ngr_data = {'file1':"c:/local_files/research/consumption/lsms/data/ngr_df2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/ngr_df2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/ngr_df2015.dta" }
-tn_data = {'file1':"c:/local_files/research/consumption/lsms/data/tn_df2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/tn_df2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/tn_df2014.dta" }
-settings = {'NGR_direct': {'operation':'direct','data': ngr_data,'food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} , 
-            'NGR_q30prices': {'operation':'direct','data': ngr_data,'food_price_var':'log_q30_cost_ne_food','nonfood_price_var':'log_q30_cost_ne_nonfood'} , 
-            'NGR_q70prices': {'operation':'direct','data': ngr_data,'food_price_var':'log_q70_cost_ne_food','nonfood_price_var':'log_q70_cost_ne_nonfood'} , 
-            'NGR_hilo_A': {'operation':'hilo','data': ngr_data , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'},
-            'NGR_hilo_x': {'operation':'hilo','data': ngr_data , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'},
-            'TNZ_direct': {'operation':'direct','data': tn_data,'food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} , 
-            'TNZ_q30prices': {'operation':'direct','data': tn_data,'food_price_var':'log_q30_cost_ne_food','nonfood_price_var':'log_q30_cost_ne_nonfood'} , 
-            'TNZ_q70prices': {'operation':'direct','data': tn_data,'food_price_var':'log_q70_cost_ne_food','nonfood_price_var':'log_q70_cost_ne_nonfood'} , 
-            'TNZ_hilo_A': {'operation':'hilo','data': tn_data , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} ,
-            'TNZ_hilo_x': {'operation':'hilo','data': tn_data , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} }
+ngr_data_district = {'file1':"c:/local_files/research/consumption/lsms/data/ngr_df2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/ngr_df2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/ngr_df2015.dta" }
+tnz_data_district = {'file1':"c:/local_files/research/consumption/lsms/data/tn_df2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/tn_df2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/tn_df2014.dta" }
 
+ngr_data_ea= {'file1':"c:/local_files/research/consumption/lsms/data/ngr_df_ea2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/ngr_df_ea2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/ngr_df_ea2015.dta" }
+tnz_data_ea= {'file1':"c:/local_files/research/consumption/lsms/data/tn_df_ea2010.dta", 'file2':"c:/local_files/research/consumption/lsms/data/tn_df_ea2012.dta", 'file3':"c:/local_files/research/consumption/lsms/data/tn_df_ea2014.dta" }
+
+datasets = {'ea':{'ngr':ngr_data_ea,'tnz':tnz_data_ea},'district':{'ngr':ngr_data_district,'tnz':tnz_data_district}}
 
 if not os.path.exists(stata_program_fpath):
     raise RuntimeError("Invalid Stata exec path")
 
-if len(sys.argv)< 4:
+if len(sys.argv)< 5:
     print("Must have all arguments")
     sys.exit(1)
 
 dofpath = sys.argv[1]
 depvar  = sys.argv[2]
 settings_name = sys.argv[3]
+dataset_name = sys.argv[4]
+
+
+settings = {'NGR_direct': {'operation':'direct','data': datasets[dataset_name]['ngr'],'food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} , 
+            'NGR_q30prices': {'operation':'direct','data': datasets[dataset_name]['ngr'],'food_price_var':'log_q30_cost_ne_food','nonfood_price_var':'log_q30_cost_ne_nonfood'} , 
+            'NGR_q70prices': {'operation':'direct','data': datasets[dataset_name]['ngr'],'food_price_var':'log_q70_cost_ne_food','nonfood_price_var':'log_q70_cost_ne_nonfood'} , 
+            'NGR_hilo_A': {'operation':'hilo','data': datasets[dataset_name]['ngr'] , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'},
+            'NGR_hilo_x': {'operation':'hilo','data': datasets[dataset_name]['ngr'] , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'},
+            'TNZ_direct': {'operation':'direct','data': datasets[dataset_name]['tnz'],'food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_nonfood'} , 
+            'TNZ_q30prices': {'operation':'direct','data': datasets[dataset_name]['tnz'],'food_price_var':'log_q30_cost_ne_food','nonfood_price_var':'log_q30_cost_ne_nonfood'} , 
+            'TNZ_q70prices': {'operation':'direct','data': datasets[dataset_name]['tnz'],'food_price_var':'log_q70_cost_ne_food','nonfood_price_var':'log_q70_cost_ne_nonfood'} , 
+            'TNZ_hilo_A': {'operation':'hilo','data': datasets[dataset_name]['tnz'] , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} ,
+            'TNZ_hilo_x': {'operation':'hilo','data': datasets[dataset_name]['tnz'] , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} }
+
 
 if settings_name not in settings:
     raise RuntimeError("Unknown settings name : %s " % settings_name )
