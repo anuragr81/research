@@ -1721,6 +1721,10 @@ literal "false"
  recorded as) and the weekly/monthly recall items (where non-food items
  are recorded).
  
+\bar under
+The measurement of consumption in excess of the consumption of households
+ that have run out with food consumption in the past year - also takes care
+ of such measurement error issues.
 \end_layout
 
 \begin_layout Standard
@@ -1826,6 +1830,17 @@ w_{i} & =\alpha_{i}+\sum_{j=1}^{n}\gamma_{j}log(P_{j})+\beta_{i}log(x)+\epsilon_
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+log(\nu_{i}) & =\alpha_{i}+\sum_{j=1}^{n}\gamma_{j}log(P_{j})+\beta_{i}log(x)+\epsilon_{i}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The above model motivates our regressions of measures of 
 \begin_inset Formula $\nu_{t}$
 \end_inset
@@ -1864,6 +1879,110 @@ The above model motivates our regressions of measures of
 \end_inset
 
  from the expenditure assets-costs.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+For the households whose total consumption (the food and non-food consumption)
+ is less than the food -consumption average of the households struggling
+ to meet food demand in the district, 
+\bar default
+the measure of quality is also zero.
+ The plot for year 2012 is shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:log_nu_t_selection"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The food consumption of households running out of food therefore requires
+ us to correct the estimates with selection - which effectively argues that
+ the consumers being poor creates a bias towards status consumption.
+ The selection equation attempts to understand the factors that contribute
+ to the consumer's poverty.
+ This is foremost a result of the low total consumption and the total asset
+ ownership level.
+ MLE output of coefficient shows there is no selection bias.
+ The 
+\bar under
+selection should have the effects of 
+\begin_inset Formula $log(A)$
+\end_inset
+
+ which have more influence on the level of household poverty than on the
+ selection of 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ where regional average has the role that we're interested in.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% heckman log_q_ne logx log_mean_A0 mean_cost_ne_food_x mean_cost_ne_nonfood_x
+  max_occupation_rank max_education_rank age hsize , select (has_nu = logx
+ lnA0 hsize i.isrural) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename zeroed_log_nu_plot_2010.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:log_nu_t_selection"
+
+\end_inset
+
+The measure of 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ for year 2012 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5135,6 +5254,22 @@ literal "false"
  nevertheless.
  The question is whether we do need the positive externality effect for
  our question or not.
+ If we argue that consumers care about immediate reference and not about
+ the reference richer than them, then we would experience lower status consumpti
+on i.e.
+ 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ for the same 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ when polarisation is higher.
+ In this case, we would look for a significance for polarisation.
+ High polarisation and high status consumption would mean that consumers
+ do care about references more.
+ This can be compared across TNZ and NGR.
 \end_layout
 
 \begin_layout Standard

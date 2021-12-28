@@ -965,7 +965,7 @@ plot_population_heat_map <- function(odat){
 } 
 
 
-init_data <- function(){
+init_data <- function(use_ea){
   
   o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
   o2012 <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
@@ -981,7 +981,7 @@ init_data <- function(){
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
   #pres <- estimation_df(e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, c2010=c2010, c2012=c2012, c2014=c2014)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
-  tn <- get_nonparametric_df(ll = ll,food_analysis = F, use_ea=F, o2010=o2010, o2012=o2012, o2014=o2014, a2010=a2010, a2012=a2012, a2014=a2014, c2010=c2010, c2012=c2012, c2014=c2014 )
+  tn <- get_nonparametric_df(ll = ll,food_analysis = F, use_ea=use_ea, o2010=o2010, o2012=o2012, o2014=o2014, a2010=a2010, a2012=a2012, a2014=a2014, c2010=c2010, c2012=c2012, c2014=c2014 )
   return(tn)
   }
 
@@ -1338,30 +1338,28 @@ get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, 
         dfdat$hhid <- dfdat[,paste0("hhid",year)]
         datfields_wo_outoffood <- ddply(dfdat,.(region,district,ward,ea),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0), n_ea= length(unique(hhid))) 
         
-        out_of_foodhhs <- subset(dfdat[,c("hhid","region","district","ward","outoffood","cost_ne_nonfood","cost_ne_food")],outoffood==1)
+        out_of_foodhhs <- subset(dfdat[,c("hhid","region","district","ward","outoffood","cost_ne_nonfood","cost_ne_food","hsize")],outoffood==1)
         #out_of_food_at_wards_level <- subset(ddply(out_of_foodhhs,.(region,district,ward),summarise,n_outoffood=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
-        out_of_food_at_district_level <- subset(ddply(out_of_foodhhs,.(region,district),summarise,n_outoffood=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
+        districts_data <- subset(ddply(out_of_foodhhs,.(region,district),summarise,n_outoffood=length(hhid), min_ne_food_x=mean(cost_ne_food/hsize),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
+        districts_data$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,districts_data$region, districts_data$district )
         
         #ensure that S and E are not more refined than at district level
         district_coordinates <- ddply(unique(dfdat[,c("region","district","S","E")]),.(region,district),summarise,S=mean(S),E=mean(E))
         district_coordinates$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,district_coordinates$region, district_coordinates$district )
         
-        districts_data = out_of_food_at_district_level
-        districts_data$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,districts_data$region, districts_data$district )
+        # merge on the basis of closest district in the mapping m
+        out_of_food_at_district_level <- closest_loc_data (a=district_coordinates,m=districts_data,data_field="min_ne_food_x")
         
-        
-        dat <- closest_loc_data (a=district_coordinates,m=districts_data,data_field="min_ne_food")
-        
-        dat$region <- sapply(as.character(dat$src),function(x){jsonlite::fromJSON(x)[1]})
-        dat$district <- sapply(as.character(dat$src),function(x){jsonlite::fromJSON(x)[2]})
+        out_of_food_at_district_level$region <- with ( out_of_food_at_district_level, sapply(as.character(loc),function(x){jsonlite::fromJSON(x)[1]}))
+        out_of_food_at_district_level$district <- with (out_of_food_at_district_level, sapply(as.character(loc),function(x){jsonlite::fromJSON(x)[2]}))
         
           
         dfdat$hhid <- NULL
         print("Using merge based on closest district with consumer having run out of food")
         datfields <- merge(datfields_wo_outoffood,out_of_food_at_district_level,by=c("region","district"), all.x=T) %>% mutate (r = log(mean_A0))
         
-        if (nrow(subset(datfields,is.na(n_outoffood )))>0){
-          stop("Missing outoffood data for some wards")
+        if (nrow(subset(datfields,is.na(min_ne_food_x )))>0){
+          stop("Missing outoffood data for some districts or wards")
         }
         
         rd <- merge(datfields, dfdat, by=c("region","district","ward","ea"))
@@ -1377,12 +1375,11 @@ get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, 
         rd <- subset(rd,n_ea>=2)
         
         res[[paste0("df",year)]] <- rd
-        stop("NOT DECIDED HOW MANY HOUSES WOULD BE USED FOR OUTOFFOOD LEVEL")
       }
       
       
       
-    } else{
+    } else{ # not using ea
       
       indivdat2010$ea <- NULL
       indivdat2012$ea <- NULL
@@ -1428,7 +1425,7 @@ get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, 
       #test
       #print(summary(lm(data=dat2010, nu~ r + max_occupation_rank + max_education_rank)))
       
-    }
+    }# endif use_ea
     
   } # endif food_analysis
   
@@ -1475,47 +1472,74 @@ get_bubble_aggregated_df <- function(input_dat,bubble_distances){
   return(resdf)
 }
 
-save_data <- function(dfslist)
+save_data <- function(dfslist,use_ea)
 {
-  write_dta(dfslist[['df2010']],'../lsms/data/tn_df2010.dta')
-  write_dta(dfslist[['df2012']],'../lsms/data/tn_df2012.dta')
-  write_dta(dfslist[['df2014']],'../lsms/data/tn_df2014.dta')
+  if (use_ea){
+    write_dta(dfslist[['df2010']],'../lsms/data/tn_df_ea2010.dta')
+    write_dta(dfslist[['df2012']],'../lsms/data/tn_df_ea2012.dta')
+    write_dta(dfslist[['df2014']],'../lsms/data/tn_df_ea2014.dta')  
+  } else {
+    write_dta(dfslist[['df2010']],'../lsms/data/tn_df2010.dta')
+    write_dta(dfslist[['df2012']],'../lsms/data/tn_df2012.dta')
+    write_dta(dfslist[['df2014']],'../lsms/data/tn_df2014.dta')
+  }
 }
 
-load_data <- function()
+load_data <- function(use_ea)
 {
-  
-  tndf2010 <- read_dta('../lsms/data/tn_df2010.dta')
-  tndf2012 <- read_dta('../lsms/data/tn_df2012.dta')
-  tndf2014 <- read_dta('../lsms/data/tn_df2014.dta')
-  res = list()
+  if (use_ea){
+    tndf2010 <- read_dta('../lsms/data/tn_df_ea2010.dta')
+    tndf2012 <- read_dta('../lsms/data/tn_df_ea2012.dta')
+    tndf2014 <- read_dta('../lsms/data/tn_df_ea2014.dta')
+    return(add_fields_to_data(tndf2010=tndf2010,tndf2012=tndf2012,tndf2014=tndf2014,use_ea=T))
+  } else{
+    tndf2010 <- read_dta('../lsms/data/tn_df2010.dta')
+    tndf2012 <- read_dta('../lsms/data/tn_df2012.dta')
+    tndf2014 <- read_dta('../lsms/data/tn_df2014.dta')
+    return(add_fields_to_data(tndf2010=tndf2010,tndf2012=tndf2012,tndf2014=tndf2014,use_ea=F))
+  }
+}
 
-  res[['df2010']] <- tndf2010 %>% mutate ( log_q_ne = log(1e-7+ cost_ne_nonfood + cost_ne_food) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
+log_zeroed <- function(x){
+  if (x<0){
+    return(0)
+  } else {
+    return(log(1e-7+x))
+  }
+}
+add_fields_to_data<-function(use_ea,tndf2010,tndf2012,tndf2014){
+  res = list()
+  
+  
+  res[['df2010']] <- tndf2010 %>% mutate ( has_nu = as.integer(cost_ne_food+cost_ne_nonfood> min_ne_food_x*hsize), log_q_ne = sapply(cost_ne_nonfood + cost_ne_food - min_ne_food_x*hsize,log_zeroed) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
   res[['df2010']] <- res[['df2010']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
   # adding quantiles
   res[['df2010']] <- res[['df2010']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
-  res[['df2012']] <- tndf2012 %>% mutate ( log_q_ne = log(1e-7+ cost_ne_nonfood + cost_ne_food) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
+  res[['df2012']] <- tndf2012 %>% mutate ( has_nu = as.integer(cost_ne_food+cost_ne_nonfood> min_ne_food_x*hsize), log_q_ne = sapply(cost_ne_nonfood + cost_ne_food - min_ne_food_x*hsize,log_zeroed) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
   res[['df2012']] <- res[['df2012']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
   # adding quantiles
   res[['df2012']] <- res[['df2012']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
-  res[['df2014']] <- tndf2014 %>% mutate ( log_q_ne = log(1e-7+ cost_ne_nonfood + cost_ne_food) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
+  res[['df2014']] <- tndf2014 %>% mutate ( has_nu = as.integer(cost_ne_food+cost_ne_nonfood> min_ne_food_x*hsize), log_q_ne = sapply(cost_ne_nonfood + cost_ne_food - min_ne_food_x*hsize,log_zeroed) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
   res[['df2014']] <- res[['df2014']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
   # adding quantiles
   res[['df2014']] <- res[['df2014']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
   res[['df2010']]$rural_wards <- NULL
-  res[['df2010']] <- add_rural_mapping_for_districts(res,2010)
   res[['df2012']]$rural_wards <- NULL
-  
-  res[['df2012']] <- add_rural_mapping_for_districts(res,2012)
   res[['df2014']]$rural_wards <- NULL
-  res[['df2014']] <- add_rural_mapping_for_districts(res,2014)
   
-  return(res)
+  if (use_ea){
+    return(res)
+  } else{
+    res[['df2010']] <- add_rural_mapping_for_districts(res,2010)
+    res[['df2012']] <- add_rural_mapping_for_districts(res,2012)
+    res[['df2014']] <- add_rural_mapping_for_districts(res,2014)
+    return(res)
+  }
+  
 }
-
 
 calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
   res<- array()
