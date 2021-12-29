@@ -105,19 +105,14 @@ if N>10:
     
 struct=[]
 
-def as_sequence(st,start,sequences):
-    if start>=len(st):
-        return st[start:len(st)]
-    else:
-        sequence = as_sequence(st,start=start+1,sequences=sequences)
-        sequences.append(sequence)
-        return sequences
     
 def add_at_nth_column(st,n_index,data):
     """
     Go to the index'th column - i.e. level of the hierarchy and add
-    the element at the level
-    The function generates the tree of the form [Root,Child1,Child2,...,]
+      the element at the level
+    The function generates the tree of the form [Root,[Child1],[Child2],...,]
+    The elements of the form [A,B,C] are nodes - but the [A,[B,C],C] - represents
+       a tree
     """    
     cur_pos = len(st)-1
     
@@ -133,16 +128,48 @@ def add_at_nth_column(st,n_index,data):
         raise ValueError("Invalid Type")
     return st
     #    raise ValueError("Invalid insert")
-    
+
+def parse_struct(st):
+    """
+    Build a structure of form {key:[value1,value2]} where value1 could be
+     another structure of the same form.
+    """
+    if st:
+        if isinstance(st,list):
+            if len(st)>1:
+                # first node in the list is the root of the sub-tree to be followed
+                if not isinstance(st[0],list):
+                    new_root = {st[0]:[]}
+                    for x in st[1:]:
+                        result=parse_struct(st=x)
+                        print(result)
+                        new_root[st[0]].append(result)
+                  
+                    return new_root
+                else:
+                    raise ValueError("Can't be a root")
+            else:#st==1
+                
+                result=parse_struct(st[0])
+                print(result)
+                return result
+        else:
+            #nodes
+            print("node=%s"%st)
+            return st
+    else:        
+        return None
+
 struct=add_at_nth_column(struct,0,"X")
 struct=add_at_nth_column(struct,1,"Y")
-struct=add_at_nth_column(struct,2,"Z")
-struct=add_at_nth_column(struct,2,"A")
-struct=add_at_nth_column(struct,1,"B")
-struct=add_at_nth_column(struct,0,"C")
+if True:
+    struct=add_at_nth_column(struct,2,"Z")
+    struct=add_at_nth_column(struct,2,"A")
+    struct=add_at_nth_column(struct,1,"B")
+    struct=add_at_nth_column(struct,0,"C")
 
 print(struct)
-print(as_sequence(struct,0,[]))
+parse_struct(struct)
 sys.exit(0)
 for i in range(nrows):
     current_level = N
