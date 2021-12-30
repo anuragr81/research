@@ -148,7 +148,7 @@ def parse_struct(st):
                             new_root[st[0]].append(x)
                         else:
                             result=parse_struct(st=x)
-                            print("Adding (%s,%s)"% (st[0],result))
+                            #print("Adding (%s,%s)"% (st[0],result))
                             new_root[st[0]].append(result)
                   
                     return new_root
@@ -159,10 +159,35 @@ def parse_struct(st):
                 return result
         else:
             #nodes
-            print("node=%s"%st)
+            #print("node=%s"%st)
             return st
     else:        
         return None
+
+
+def color_for_index(ci):
+    return {0:'DarkRed',1:'Crimson',2:'Chocolate',3:'BurlyWood',4:'Gold',
+            5:'LawnGreen',6:'Green',7:'DarkTurqoise',8:'DeekSkyBlue',
+            9:'DodgerBlue',10:'MediumBlue',11:'Navy',12:'Violet',13:'Purple',
+            14:'Magenta'}[ci]
+    
+def colored_html(st,colorIndex=0):
+    if st:
+        if isinstance(st,list):
+            res =[]
+            #next_colorIndex  =colorIndex if len(st)==1 else colorIndex+1
+            for x in st:
+                res = res + [colored_html(x,colorIndex)]
+            return res
+        elif isinstance(st,dict):
+            res =[]
+            for k,v in st.items():
+                res = res + [(k+"_"+color_for_index(colorIndex),colored_html(v,colorIndex+1))]
+            return res
+        else:
+            return st+"_"+color_for_index(colorIndex)
+    else:
+        raise ValueError("Cannot by empty")
 
 struct=add_at_nth_column(struct,0,"X")
 struct=add_at_nth_column(struct,1,"Y")
@@ -173,7 +198,9 @@ if True:
     struct=add_at_nth_column(struct,1,"C")
     struct=add_at_nth_column(struct,0,"D")
 
-print(parse_struct(struct))
+dict_struct =(parse_struct(struct))
+x=colored_html(dict_struct)
+print(x)
 sys.exit(0)
 for i in range(nrows):
     current_level = N
