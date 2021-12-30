@@ -1,5 +1,6 @@
 import pandas as pd
 import os,sys
+from collections import OrderedDict
 
 """
 There can be no dangling inserts. The only new nodes are at roots. A new L3 goes to L2 (not anything before L2). Therefore, Ln is inserted only in L(n-1).
@@ -139,7 +140,7 @@ def parse_struct(st):
             if len(st)>1:
                 # first node in the list is the root of the sub-tree to be followed
                 if not isinstance(st[0],list):
-                    new_root = {st[0]:[]}
+                    new_root = OrderedDict({st[0]:[]})
                     for x in st[1:]:
                         
                         if all(not isinstance(y,list) for y in x):
@@ -166,26 +167,30 @@ def parse_struct(st):
 
 
 def color_for_index(ci):
-    return {0:'DarkRed',1:'Crimson',2:'Chocolate',3:'BurlyWood',4:'Gold',
-            5:'LawnGreen',6:'Green',7:'DarkTurqoise',8:'DeekSkyBlue',
-            9:'DodgerBlue',10:'MediumBlue',11:'Navy',12:'Violet',13:'Purple',
-            14:'Magenta'}[ci]
-    
-def colored_html(st,colorIndex=0):
+    return {0:'DarkRed',1:'Crimson',2:'Chocolate',3:'Gold',
+            4:'LawnGreen',5:'Green',6:'DeekSkyBlue',
+            7:'DodgerBlue',8:'MediumBlue',9:'Navy',10:'Violet',11:'Purple',
+            12:'Magenta'}[ci]
+
+def text_in_colours(text,colorIndex):
+    return '<span style="color:'+color_for_index(colorIndex)+'">'+text+'</span>'
+
+def colored_html(st,colorIndex=0,paths=[]):
     if st:
         if isinstance(st,list):
-            res =[]
-            #next_colorIndex  =colorIndex if len(st)==1 else colorIndex+1
             for x in st:
-                res = res + [colored_html(x,colorIndex)]
-            return res
-        elif isinstance(st,dict):
-            res =[]
+                paths = colored_html(x,colorIndex,paths=paths)
+            return paths
+        elif isinstance(st,OrderedDict):
             for k,v in st.items():
-                res = res + [(k+"_"+color_for_index(colorIndex),colored_html(v,colorIndex+1))]
-            return res
+                paths.append(text_in_colours(text=k,colorIndex=colorIndex))
+                paths = colored_html(v,colorIndex+1,paths=paths)
+            return paths
         else:
-            return st+"_"+color_for_index(colorIndex)
+            if isinstance(st,dict):
+                raise ValueError("Unsupported type")
+            paths.append(text_in_colours(text=st,colorIndex=colorIndex))
+            return paths
     else:
         raise ValueError("Cannot by empty")
 
@@ -200,7 +205,12 @@ if True:
 
 dict_struct =(parse_struct(struct))
 x=colored_html(dict_struct)
-print(x)
+colored_text_to_write=', '.join(x)
+print(colored_text_to_write)
+with open('text_output.html','w') as fh:
+    fh.write("<!DOCTYPE html> \n <html> \n <body> \n <p>"+colored_text_to_write+"</p> </body>\n </html>")
+   
+
 sys.exit(0)
 for i in range(nrows):
     current_level = N
