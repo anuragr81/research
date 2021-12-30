@@ -141,17 +141,21 @@ def parse_struct(st):
                 if not isinstance(st[0],list):
                     new_root = {st[0]:[]}
                     for x in st[1:]:
-                        result=parse_struct(st=x)
-                        print(result)
-                        new_root[st[0]].append(result)
+                        
+                        if all(not isinstance(y,list) for y in x):
+                            # the following step treates scalars as nodes
+                            # rather than subtrees
+                            new_root[st[0]].append(x)
+                        else:
+                            result=parse_struct(st=x)
+                            print("Adding (%s,%s)"% (st[0],result))
+                            new_root[st[0]].append(result)
                   
                     return new_root
                 else:
                     raise ValueError("Can't be a root")
-            else:#st==1
-                
+            else:#st==1              
                 result=parse_struct(st[0])
-                print(result)
                 return result
         else:
             #nodes
@@ -165,11 +169,11 @@ struct=add_at_nth_column(struct,1,"Y")
 if True:
     struct=add_at_nth_column(struct,2,"Z")
     struct=add_at_nth_column(struct,2,"A")
-    struct=add_at_nth_column(struct,1,"B")
-    struct=add_at_nth_column(struct,0,"C")
+    struct=add_at_nth_column(struct,2,"B")
+    struct=add_at_nth_column(struct,1,"C")
+    struct=add_at_nth_column(struct,0,"D")
 
-print(struct)
-parse_struct(struct)
+print(parse_struct(struct))
 sys.exit(0)
 for i in range(nrows):
     current_level = N
