@@ -78,34 +78,7 @@ def is_null_col(dat,col):
         return pd.isnull(dat.L10)
     
     raise ValueError("Number of columns higher than what is supported")
-                   
-
-class Struct:
-	def __init__(self):
-		self.struct =[[]]
-		
-		
-
-	def add(self,level,data):
-		if not isinstance(level,int):
-			raise ValueError("Not in: %s" % level)
-		self.struct[-1][level-1].append(data)
-
-
-		
-
-b = pd.read_excel('c:/temp/test.xlsx')
-nrows = b.shape[0]
-
-N=b.shape[1]
-
-if N>10:
-    raise ValueError("Number of columns higher than what is supported")
-
-#struct = [ [ [    [ [[    [[[     []         ]]]       ]]]  ] ] ]
-    
-struct=[]
-
+		   
     
 def add_at_nth_column(st,n_index,data):
     """
@@ -167,13 +140,13 @@ def parse_struct(st):
 
 
 def color_for_index(ci):
-    return {0:'DarkRed',1:'Crimson',2:'Chocolate',3:'Gold',
-            4:'LawnGreen',5:'Green',6:'DeekSkyBlue',
+    return {0:'Black',1:'DarkRed',2:'Crimson',3:'Chocolate',
+            4:'DarkOliveGreen',5:'Green',6:'DeekSkyBlue',
             7:'DodgerBlue',8:'MediumBlue',9:'Navy',10:'Violet',11:'Purple',
             12:'Magenta'}[ci]
 
-def text_in_colours(text,colorIndex):
-    return '<span style="color:'+color_for_index(colorIndex)+'">'+text+'</span>'
+def text_in_colours(text,colorIndex,prefix=''):
+    return prefix+'<span style="color:'+color_for_index(colorIndex)+'">'+text+'</span>'
 
 def colored_html(st,colorIndex=0,paths=[]):
     if st:
@@ -192,32 +165,54 @@ def colored_html(st,colorIndex=0,paths=[]):
             paths.append(text_in_colours(text=st,colorIndex=colorIndex))
             return paths
     else:
-        raise ValueError("Cannot by empty")
+        return paths
 
-struct=add_at_nth_column(struct,0,"X")
-struct=add_at_nth_column(struct,1,"Y")
-if True:
+
+def test_add_at_nth_columns():
+    struct=[]
+    struct=add_at_nth_column(struct,0,"X")
+    struct=add_at_nth_column(struct,1,"Y")
+    
     struct=add_at_nth_column(struct,2,"Z")
     struct=add_at_nth_column(struct,2,"A")
     struct=add_at_nth_column(struct,2,"B")
     struct=add_at_nth_column(struct,1,"C")
     struct=add_at_nth_column(struct,0,"D")
+    
+    dict_struct =(parse_struct(struct))
+    assert dict_struct==OrderedDict([('X', [OrderedDict([('Y', [['Z', 'A', 'B'], 'C'])]), 'D'])])
+    x=colored_html(dict_struct)
+    colored_text_to_write=', '.join(x)
+    assert colored_text_to_write=='<span style="color:DarkRed">X</span>, <span style="color:Crimson">Y</span>, <span style="color:Chocolate">Z</span>, <span style="color:Chocolate">A</span>, <span style="color:Chocolate">B</span>, <span style="color:Chocolate">C</span>, <span style="color:Crimson">D</span>'
+
+def write_into_file(text):
+    with open('text_output.html','w',encoding='utf-8') as fh:
+        fh.write("<!DOCTYPE html> \n <html> \n <body> \n <p>"+text+"</p> </body>\n </html>")
+
+
+#b = pd.read_excel('c:/temp/test.xlsx')
+b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/ashtadhyayi_chapter1_2.xlsx')
+nrows = b.shape[0]
+N=b.shape[1]
+
+if N>10:
+    raise ValueError("Number of columns higher than what is supported")
+
+struct=[]
+results =[]
+for i in range(nrows):
+    for j in range(N):
+        row= (b.loc[i])
+        if not is_null_col(row,j):
+            data_to_add=row["L"+str(j+1)]
+            results = results + [(j+1,d) for d in str(data_to_add).split(',')]
+            for d in str(data_to_add).split(','):
+                struct=add_at_nth_column(struct,j,d)
+    
+       
 
 dict_struct =(parse_struct(struct))
-x=colored_html(dict_struct)
-colored_text_to_write=', '.join(x)
-print(colored_text_to_write)
-with open('text_output.html','w') as fh:
-    fh.write("<!DOCTYPE html> \n <html> \n <body> \n <p>"+colored_text_to_write+"</p> </body>\n </html>")
-   
-
-sys.exit(0)
-for i in range(nrows):
-    current_level = N
-    while current_level>1:
-        row= (b.loc[i])
-        maxCol = (find_first_non_na_backwards(row))
-        
-
-
-
+print(dict_struct)
+text=colored_html(dict_struct)
+print(text)
+write_into_file(', '.join(text))
