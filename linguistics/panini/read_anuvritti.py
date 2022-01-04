@@ -1,4 +1,5 @@
 import pandas as pd
+from pprint import pprint
 import os,sys
 from collections import OrderedDict
 
@@ -80,7 +81,7 @@ def is_null_col(dat,col):
     raise ValueError("Number of columns higher than what is supported")
 		   
     
-def add_at_nth_column(st,n_index,data):
+def add_at_nth_column(st,n_index,data,allow_append =True):
     """
     Go to the index'th column - i.e. level of the hierarchy and add
       the element at the level
@@ -88,18 +89,26 @@ def add_at_nth_column(st,n_index,data):
     The elements of the form [A,B,C] are nodes - but the [A,[B,C],C] - represents
        a tree
     """    
-    cur_pos = len(st)-1
-    
+    print(data)
     if n_index>0:
-        st [cur_pos] =  add_at_nth_column(st[cur_pos], n_index-1,data)
+        st [-1] =  add_at_nth_column(st[-1], n_index-1,data)
         return st
+
     if isinstance(st,list):
-        if st and isinstance(st[-1],list):
-            st[-1].append(data)
+        
+        if st :
+            if isinstance(st[-1],list):           
+                st[-1].append(data)
+            else:
+                #create a new tree form the last node
+                old_data_to_be_nested=st[-1]
+                st[-1]=[old_data_to_be_nested,[data]]
         else:
-            st.append([data])
+            # initialising
+            st=['root',[data]]
     else:
         raise ValueError("Invalid Type")
+        
     return st
     #    raise ValueError("Invalid insert")
 
@@ -127,7 +136,9 @@ def parse_struct(st):
                   
                     return new_root
                 else:
-                    raise ValueError("Can't be a root")
+                    #raise ValueError("Can't be a root")
+                    # treat them as list of sub-trees
+                    return [parse_struct(x) for x in st]
             else:#st==1              
                 result=parse_struct(st[0])
                 return result
@@ -179,21 +190,24 @@ def test_add_at_nth_columns():
     struct=add_at_nth_column(struct,1,"C")
     struct=add_at_nth_column(struct,0,"D")
     
-    dict_struct =(parse_struct(struct))
-    assert dict_struct==OrderedDict([('X', [OrderedDict([('Y', [['Z', 'A', 'B'], 'C'])]), 'D'])])
+    dict_struct =parse_struct(['root',struct])
+    assert dict_struct==OrderedDict([('root', [[OrderedDict([('X', [['Y', 'Z', 'A', 'B'], 'C'])]), 'D']])])
     x=colored_html(dict_struct)
     colored_text_to_write=', '.join(x)
-    assert colored_text_to_write=='<span style="color:DarkRed">X</span>, <span style="color:Crimson">Y</span>, <span style="color:Chocolate">Z</span>, <span style="color:Chocolate">A</span>, <span style="color:Chocolate">B</span>, <span style="color:Chocolate">C</span>, <span style="color:Crimson">D</span>'
+    assert colored_text_to_write=='<span style="color:Black">root</span>, <span style="color:DarkRed">X</span>, <span style="color:Crimson">Y</span>, <span style="color:Crimson">Z</span>, <span style="color:Crimson">A</span>, <span style="color:Crimson">B</span>, <span style="color:Crimson">C</span>, <span style="color:DarkRed">D</span>'
 
 def write_into_file(text):
     with open('text_output.html','w',encoding='utf-8') as fh:
         fh.write("<!DOCTYPE html> \n <html> \n <body> \n <p>"+text+"</p> </body>\n </html>")
 
-
-#b = pd.read_excel('c:/temp/test.xlsx')
-b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/ashtadhyayi_chapter1_2.xlsx')
+#test_add_at_nth_columns()
+#sys.exit(0)
+        
+b = pd.read_excel('c:/temp/test.xlsx')
+#b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/ashtadhyayi_chapter1_2.xlsx')
 nrows = b.shape[0]
 N=b.shape[1]
+
 
 if N>10:
     raise ValueError("Number of columns higher than what is supported")
@@ -208,11 +222,10 @@ for i in range(nrows):
             results = results + [(j+1,d) for d in str(data_to_add).split(',')]
             for d in str(data_to_add).split(','):
                 struct=add_at_nth_column(struct,j,d)
-    
-       
+pprint(struct)
 
-dict_struct =(parse_struct(struct))
-print(dict_struct)
+dict_struct =parse_struct(['root',struct])
+pprint(dict(dict_struct))
 text=colored_html(dict_struct)
 print(text)
 write_into_file(', '.join(text))
