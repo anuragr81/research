@@ -985,13 +985,23 @@ init_data <- function(use_ea){
   return(tn)
   }
 
+plot_q_A_heatmap<-function(tn,year){
+  world_map <- map_data("world")
+  tnz_map = subset(world_map ,region=="Tanzania")
+  dat <-tn[[paste0("df",year)]]
+  dat$log_q_by_A <- ((mapply(function(logq,logA) { if (logq<=0) { return(0)} else {return((logq-logA))}},dat$log_q_ne,dat$lnA0)))
+  simple_normalise <- function(x,minval,maxval) {return ((x-minval)/(maxval-minval))}
+  
+  ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+                        colour="light yellow", fill="light yellow") + geom_point(data=dat,aes(x=E, y=S, size = log_q_by_A))+ scale_size(range = c(.1, 10), name="excess per asset")  + ggtitle("excess per asset (2012)")
+  #tnz_map$colour_to_fill <- mapply( function(lat,long,m) { if (lat**2+long**2 >m){return("yellow")} else {return("blue")}} , tnz_map$lat, tnz_map$long, median(tnz_map$long**2+tnz_map$lat**2))
+}
 plot_region_map <- function(plot_type,e){
   
   world_map <- map_data("world")
   tnz_map = subset(world_map ,region=="Tanzania")
   hhid_mtms_2012 <- ddply(subset(a2012,!is.na(number)  & !is.na(mtm) & number>0), .(hhid), summarise, hhid_mtm=sum(mtm*number))
   hhid_mtms_o2012 <- merge(o2012,hhid_mtms_2012 ,by="hhid")
-  
   
   if (plot_type=="occupation"){
     hhid_mtms_o2012_woccup <- subset(hhid_mtms_o2012, !is.na(occupation_rank))
@@ -1533,6 +1543,7 @@ add_fields_to_data<-function(use_ea,tndf2010,tndf2012,tndf2014){
   if (use_ea){
     return(res)
   } else{
+
     res[['df2010']] <- add_rural_mapping_for_districts(res,2010)
     res[['df2012']] <- add_rural_mapping_for_districts(res,2012)
     res[['df2014']] <- add_rural_mapping_for_districts(res,2014)

@@ -332,18 +332,32 @@ infer_occupation_ranks <- function(o2010 , ignore_top) {
   occup<- rbind(occup,data.frame(occupation="1110",occupation_name="legislators",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=3))
   occup<- rbind(occup,data.frame(occupation="1142",occupation_name="senior business officers",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=3))
   occup<- rbind(occup,data.frame(occupation="3432",occupation_name="legal professionals",l_mean_ypay = NA, l_median_ypay=NA, occupation_rank=3))
-  
-  
+
   
   return(occup)
 }
 
-load_data <- function()
+load_data <- function(use_ea)
 {
   
-  ngrdf2010 <- read_dta('../lsms/data/ngr_df2010.dta')
-  ngrdf2012 <- read_dta('../lsms/data/ngr_df2012.dta')
-  ngrdf2015 <- read_dta('../lsms/data/ngr_df2015.dta')
+  if(use_ea){
+    ngrdf2010 <- read_dta('../lsms/data/ngr_df_ea2010.dta')
+    ngrdf2012 <- read_dta('../lsms/data/ngr_df_ea2012.dta')
+    ngrdf2015 <- read_dta('../lsms/data/ngr_df_ea2015.dta')
+    
+    return(add_fields_to_data(ngrdf2010=ngrdf2010,ngrdf2012=ngrdf2012,ngrdf2015=ngrdf2015,use_ea=T))
+  } else {
+    
+    
+    ngrdf2010 <- read_dta('../lsms/data/ngr_df2010.dta')
+    ngrdf2012 <- read_dta('../lsms/data/ngr_df2012.dta')
+    ngrdf2015 <- read_dta('../lsms/data/ngr_df2015.dta')
+    return(add_fields_to_data(ngrdf2010=ngrdf2010,ngrdf2012=ngrdf2012,ngrdf2015=ngrdf2015,use_ea=F))
+  }
+  
+}
+add_fields_to_data <- function(use_ea,ngrdf2010,ngrdf2012,ngrdf2015)
+{
   
   res = list()
   res[['df2010']] <- ngrdf2010 %>% mutate ( log_q_ne = log(1e-7+ cost_ne_nonfood + cost_ne_food) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
@@ -361,19 +375,20 @@ load_data <- function()
   res[['df2015']] <- res[['df2015']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
   res[['df2015']] <- res[['df2015']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
+  if (use_ea){
+    return(res)
+  }  
+  else{
+    res[['df2010']] <- add_rural_mapping_for_districts(res,2010)
+    res[['df2012']] <- add_rural_mapping_for_districts(res,2012)
+    res[['df2015']] <- add_rural_mapping_for_districts(res,2015)
+    return(res)
+  }
   
-  res[['df2010']]$rural_wards <- NULL
-  res[['df2010']] <- add_rural_mapping_for_districts(res,2010)
-  res[['df2012']]$rural_wards <- NULL
-  res[['df2012']] <- add_rural_mapping_for_districts(res,2012)
-  res[['df2015']]$rural_wards <- NULL
-  res[['df2015']] <- add_rural_mapping_for_districts(res,2015)
-  
-  return(res)
+
 }
 
-
-save_data <- function(dfslist)
+save_data <- function(dfslist,use_ea)
 {
   
   if (nrow(subset(dfslist[['df2010']],age<0))>0){
@@ -381,19 +396,31 @@ save_data <- function(dfslist)
     dfslist[['df2010']] <- subset(dfslist[['df2010']],age>=0)
     
   }
-  ngrdf2010 <- write_dta(dfslist[['df2010']],'../lsms/data/ngr_df2010.dta')
-  ngrdf2012 <- write_dta(dfslist[['df2012']],'../lsms/data/ngr_df2012.dta')
-  ngrdf2015 <- write_dta(dfslist[['df2015']],'../lsms/data/ngr_df2015.dta')
+  if (use_ea){
+     write_dta(dfslist[['df2010']],'../lsms/data/ngr_df_ea2010.dta')
+     write_dta(dfslist[['df2012']],'../lsms/data/ngr_df_ea2012.dta')
+     write_dta(dfslist[['df2015']],'../lsms/data/ngr_df_ea2015.dta')
+  }
+  else{
+     write_dta(dfslist[['df2010']],'../lsms/data/ngr_df2010.dta')
+     write_dta(dfslist[['df2012']],'../lsms/data/ngr_df2012.dta')
+     write_dta(dfslist[['df2015']],'../lsms/data/ngr_df2015.dta')
+  }
   
   x <- build_xt_df(dflist = dfslist)
   
-  write_dta(x$df2010_2012,'../lsms/data/ngr_df2010_2012.dta')
-  write_dta(x$df2012_2015,'../lsms/data/ngr_df2012_2015.dta')
-  write_dta(x$df2010_2012_2015,'../lsms/data/ngr_df2010_2012_2015.dta')
-  
+  if (use_ea){
+    write_dta(x$df2010_2012,'../lsms/data/ngr_df_ea2010_2012.dta')
+    write_dta(x$df2012_2015,'../lsms/data/ngr_df_ea2012_2015.dta')
+    write_dta(x$df2010_2012_2015,'../lsms/data/ngr_df_ea2010_2012_2015.dta')
+  } else{
+    write_dta(x$df2010_2012,'../lsms/data/ngr_df2010_2012.dta')
+    write_dta(x$df2012_2015,'../lsms/data/ngr_df2012_2015.dta')
+    write_dta(x$df2010_2012_2015,'../lsms/data/ngr_df2010_2012_2015.dta')
+  }
 }
 
-init_data <- function(){
+init_data <- function(use_ea){
 
   o2010 <- nl@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ngrn=ngr_normaliser) ; 
   o2012 <- nl@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ngrn=ngr_normaliser) ; 
@@ -406,7 +433,7 @@ init_data <- function(){
   c2012 <- nl@load_diary_file(dirprefix = "../",year = 2012, fu = fu, ngrn =ngr_normaliser, load_cost = TRUE)
   c2015 <- nl@load_diary_file(dirprefix = "../",year = 2015, fu = fu, ngrn =ngr_normaliser, load_cost = TRUE)
   
-  ng <- ngr_get_nonparametric_df(nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)
+  ng <- ngr_get_nonparametric_df(use_ea=use_ea, nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)
 
   return(ng)
 }
@@ -550,7 +577,7 @@ build_xt_df <- function(dflist)
 
 
 #ng <- ngr_get_nonparametric_df(nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)
-ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, a2012, a2015,c2010,c2012,c2015){
+ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,a2010, a2012, a2015,c2010,c2012,c2015){
   
   educ_pivot <- 3
   occup_pivot <- 2
@@ -705,38 +732,59 @@ ngr_get_nonparametric_df <- function(nl,food_analysis,o2010, o2012,o2015,a2010, 
     indivdat2012$P1 <- paste(indivdat2012$region,indivdat2012$district,sep="-")
     indivdat2015$P1 <- paste(indivdat2015$region,indivdat2015$district,sep="-")
     
-    
-    # in the desired data-frame we would have hhdis with their region-id in P2 (which also included P1). So that pi(r) is the same for all consumers in the P2. 
-    # the output would be the pi(r) for all hhid 
-    dflist <- list()
-    dflist[["indivdat2010"]] <- indivdat2010
-    dflist[["indivdat2012"]] <- indivdat2012
-    dflist[["indivdat2015"]] <- indivdat2015
-    
-    for (year in c(2010,2012,2015)){
+    if (use_ea){
+      dflist <- list()
+      dflist[["indivdat2010"]] <- indivdat2010
+      dflist[["indivdat2012"]] <- indivdat2012
+      dflist[["indivdat2015"]] <- indivdat2015
       
-      dfdat <- dflist[[paste0("indivdat",year)]]
-      dfdat <- dfdat %>% mutate( high_educ = as.integer(max_education_rank>educ_pivot) , high_occup = as.integer(max_occupation_rank>occup_pivot))
+      for (year in c(2010,2012,2015)){
+        dfdat <- dflist[[paste0("indivdat",year)]]
+        
+        dfdat$hhid <- dfdat[,paste0("hhid",year)]
+        datfields_wo_outoffood <- ddply(dfdat,.(region,district,ward,ea),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0), n_ea= length(unique(hhid))) 
+        
+        out_of_foodhhs <- subset(dfdat[,c("hhid","region","district","ward","outoffood","cost_ne_nonfood","cost_ne_food","hsize")],outoffood==1)
+        #out_of_food_at_wards_level <- subset(ddply(out_of_foodhhs,.(region,district,ward),summarise,n_outoffood=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
+        districts_data <- subset(ddply(out_of_foodhhs,.(region,district),summarise,n_outoffood=length(hhid), min_ne_food_x=mean(cost_ne_food/hsize),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
+        districts_data$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,districts_data$region, districts_data$district )
+        
+      }
       
-      bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06)
-      dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
+    }else {
+      # in the desired data-frame we would have hhdis with their region-id in P2 (which also included P1). So that pi(r) is the same for all consumers in the P2. 
+      # the output would be the pi(r) for all hhid 
+      dflist <- list()
+      dflist[["indivdat2010"]] <- indivdat2010
+      dflist[["indivdat2012"]] <- indivdat2012
+      dflist[["indivdat2015"]] <- indivdat2015
       
-      bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0)) 
-#      bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost_ne_food_x=mean(cost_ne_food/hsize), mean_occup_cost_ne_nonfood_x = mean(cost_ne_nonfood/hsize), mean_occup_A0=mean(A0))
-#      bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost_ne_food_x=mean(cost_ne_food/hsize),mean_educ_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),mean_educ_A0=mean(A0))
+      for (year in c(2010,2012,2015)){
+        
+        dfdat <- dflist[[paste0("indivdat",year)]]
+        dfdat <- dfdat %>% mutate( high_educ = as.integer(max_education_rank>educ_pivot) , high_occup = as.integer(max_occupation_rank>occup_pivot))
+        
+        bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06)
+        dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
+        
+        bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0)) 
+        #      bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost_ne_food_x=mean(cost_ne_food/hsize), mean_occup_cost_ne_nonfood_x = mean(cost_ne_nonfood/hsize), mean_occup_A0=mean(A0))
+        #      bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost_ne_food_x=mean(cost_ne_food/hsize),mean_educ_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),mean_educ_A0=mean(A0))
+        
+        bubble_fields_w_P1 <- merge(bubble_distances,bubble_fields,by=c('B'))
+        
+        rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1")
+        #      rd_bubble_weduc <- merge(rd_bubble,bubble_educ, by = c("B","high_educ"))
+        #      rd_bubble_weducoccup <- merge(rd_bubble_weduc,bubble_occup, by = c("B","high_occup"))
+        rd <- rd_bubble %>% mutate(x_ne_food = cost_ne_food/hsize) %>% mutate(x_ne_nonfood = cost_ne_nonfood/hsize) %>% mutate(logx_ne_food=log(x_ne_food+1e-7),logx_ne_nonfood=log(x_ne_nonfood+1e-7)) %>% mutate( x_ac = cost_asset_costs/hsize)
+        rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate (Ar=lnA0-r)
+        #rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>%  mutate (Ar_occup=lnA0-r_occup)
+        #rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate (Ar_educ=lnA0-r_educ)
+        rd <-subset(rd,!is.na(r))
+        res[[paste0("df",year)]] <- rd
+      }
       
-      bubble_fields_w_P1 <- merge(bubble_distances,bubble_fields,by=c('B'))
-      
-      rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1")
-#      rd_bubble_weduc <- merge(rd_bubble,bubble_educ, by = c("B","high_educ"))
-#      rd_bubble_weducoccup <- merge(rd_bubble_weduc,bubble_occup, by = c("B","high_occup"))
-      rd <- rd_bubble %>% mutate(x_ne_food = cost_ne_food/hsize) %>% mutate(x_ne_nonfood = cost_ne_nonfood/hsize) %>% mutate(logx_ne_food=log(x_ne_food+1e-7),logx_ne_nonfood=log(x_ne_nonfood+1e-7)) %>% mutate( x_ac = cost_asset_costs/hsize)
-      rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate (Ar=lnA0-r)
-      #rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>%  mutate (Ar_occup=lnA0-r_occup)
-      #rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate (Ar_educ=lnA0-r_educ)
-      rd <-subset(rd,!is.na(r))
-      res[[paste0("df",year)]] <- rd
-    }
+    } # endif use_ea
     
     #test
     #print(summary(lm(data=dat2010, nu~ r + max_occupation_rank + max_education_rank)))

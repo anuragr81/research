@@ -549,8 +549,9 @@ ngr_loader<-function(fu,ngrn,lgc) {
       secFqdat    <- read.dta(secFqname,convert.factors = FALSE)
       
       secFqdat    <- fu()@get_translated_frame(dat=secFqdat,
-                                                names=c("hhid","same_diet","less_quality_1","less_quality_2","out_of_food"),
+                                                names=c("hhid","same_diet","less_quality_1","less_quality_2","outoffood"),
                                                 m=ngrn()@ohs_food_quality_columns_mapping_lsms(year))
+      secFqdat$outoffood <- as.integer(as.integer(secFqdat$outoffood)==1) + as.integer(as.integer(secFqdat$outoffood)==2)*0
       
 
       ohs <- merge(ohs,secFqdat,by=c("hhid"),all.x=T)
@@ -607,9 +608,9 @@ ngr_loader<-function(fu,ngrn,lgc) {
       secFqdat    <- read.dta(secFqname,convert.factors = FALSE)
       
       secFqdat    <- fu()@get_translated_frame(dat=secFqdat,
-                                               names=c("hhid","same_diet","less_quality_1","less_quality_2","out_of_food"),
+                                               names=c("hhid","same_diet","less_quality_1","less_quality_2","outoffood"),
                                                m=ngrn()@ohs_food_quality_columns_mapping_lsms(year))
-      
+      secFqdat$outoffood <- as.integer(as.integer(secFqdat$outoffood)==1) + as.integer(as.integer(secFqdat$outoffood)==2)*0
       print(paste("Merging OHS data from files for year:",year))
       ohs <- merge(sec1dat,sec2dat,by=c("hhid","personid"))
       ohs <- merge(ohs,sec3dat1,by=c("hhid","personid"), all.x=TRUE)
@@ -674,9 +675,9 @@ ngr_loader<-function(fu,ngrn,lgc) {
       secFqdat    <- read.dta(secFqname,convert.factors = FALSE)
       
       secFqdat    <- fu()@get_translated_frame(dat=secFqdat,
-                                               names=c("hhid","same_diet","less_quality","out_of_food"),
+                                               names=c("hhid","same_diet","less_quality","outoffood"),
                                                m=ngrn()@ohs_food_quality_columns_mapping_lsms(year))
-      
+      secFqdat$outoffood <- as.integer(as.integer(secFqdat$outoffood)==1) + as.integer(as.integer(secFqdat$outoffood)==2)*0
       
             
       print(paste("Merging OHS data from files for year:",year))
