@@ -575,6 +575,37 @@ build_xt_df <- function(dflist)
   return(res)
 }
 
+choose_min_distance_with_data <- function(distances,datvec){
+  ret = data.frame(distance=distances,data=datvec)
+  result = subset(ret,!is.na(data)) %>% filter(distance==min(distance))
+  return (result[1,]$data)
+}
+
+closest_loc_data <-function(a,m,data_field,use_test_data){
+  m$data <- m[,data_field]
+  m <- m[,c("loc","data")]
+  
+  if(missing(use_test_data)){
+    use_test_data <- F
+  }
+  if (use_test_data){
+    a <- data.frame(loc=c("A","B","C"),S=c(1,2,3),E=c(3,4,5))
+    m <- data.frame(loc=c("B","C"),data=c("X","Y"))
+  }
+  
+  k <- expand.grid(a$loc,a$loc)
+  colnames(k) <- c("src","tgt")
+  b <- plyr::rename(merge(k,plyr::rename(a,c("loc"="src")),by=c("src")), c("S"="src.S","E"="src.E") )
+  b <- plyr::rename(merge(b,plyr::rename(a,c("loc"="tgt")),by=c("tgt")), c("S"="tgt.S","E"="tgt.E") )
+  
+  b$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , b$src.S,b$src.E,b$tgt.S,b$tgt.E)
+  b <- merge(b,plyr::rename(m,c("loc"="tgt")),by=c("tgt"),all.x=T)
+  b <- b[order(b$src),]
+  result <- ddply(b[,c("src","distance","data")],.(src),summarise, data=choose_min_distance_with_data(distance,data))
+  result <- plyr::rename(result,c("data"=data_field,"src"="loc"))
+  return(result)
+}
+
 
 #ng <- ngr_get_nonparametric_df(nl = nl,food_analysis = F,o2010 = o2010,o2012 = o2012,o2015 = o2015,a2010 = a2010,a2012 = a2012,a2015 = a2015,c2010 = c2010,c2012 = c2012,c2015 = c2015)
 ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,a2010, a2012, a2015,c2010,c2012,c2015){
@@ -678,7 +709,7 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   
   ohs2010_wrank<- merge(plyr::rename(ohs2010,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
   
-  chosenchars2010 <- ddply(ohs2010_wrank[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank),age=max(age) )
+  chosenchars2010 <- ddply(ohs2010_wrank[,c("hhid","education_rank","occupation_rank","age","outoffood")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank),age=max(age), outoffood=max(outoffood) )
   #  perception_columns
   
   hswithchars2010 <- merge(hs2010,chosenchars2010,all.x = T)
@@ -691,7 +722,7 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
   ohs2012_wranks<- merge(plyr::rename(ohs2012,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
   
-  chosenchars2012 <- ddply(ohs2012_wranks[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank),age=max(age))
+  chosenchars2012 <- ddply(ohs2012_wranks[,c("hhid","education_rank","occupation_rank","age","outoffood")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank),age=max(age), outoffood=max(outoffood))
   
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   
@@ -700,7 +731,7 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   hsizes2015 <- ddply(ohs2015[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
   hs2015 <- unique(merge(unique(ohs2015[,relevant_fields]), hsizes2015, by = c("hhid")))
   
-  chosenchars2015_woranks <- ddply(ohs2015[,c("hhid","age")],.(hhid),summarise,age=max(age))
+  chosenchars2015_woranks <- ddply(ohs2015[,c("hhid","age","outoffood")],.(hhid),summarise,age=max(age), outoffood=max(outoffood))
   rank_from_past_years <- ddply(rbind(chosenchars2010,chosenchars2012),.(hhid),summarise, max_education_rank=max(max_education_rank), max_occupation_rank=max(max_occupation_rank))
   chosenchars2015 <- merge(rank_from_past_years,chosenchars2015_woranks,by=c("hhid"))
   hswithchars2015 <- merge(hs2015,chosenchars2015,all.x = T)
@@ -740,14 +771,47 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
       
       for (year in c(2010,2012,2015)){
         dfdat <- dflist[[paste0("indivdat",year)]]
+
+        datfields_wo_outoffood <- ddply(dfdat,.(region,district,ea),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0), n_ea= length(unique(hhid))) 
         
-        dfdat$hhid <- dfdat[,paste0("hhid",year)]
-        datfields_wo_outoffood <- ddply(dfdat,.(region,district,ward,ea),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0), n_ea= length(unique(hhid))) 
-        
-        out_of_foodhhs <- subset(dfdat[,c("hhid","region","district","ward","outoffood","cost_ne_nonfood","cost_ne_food","hsize")],outoffood==1)
+        out_of_foodhhs <- subset(dfdat[,c("hhid","region","district","outoffood","cost_ne_nonfood","cost_ne_food","hsize")],outoffood==1)
         #out_of_food_at_wards_level <- subset(ddply(out_of_foodhhs,.(region,district,ward),summarise,n_outoffood=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
         districts_data <- subset(ddply(out_of_foodhhs,.(region,district),summarise,n_outoffood=length(hhid), min_ne_food_x=mean(cost_ne_food/hsize),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
         districts_data$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,districts_data$region, districts_data$district )
+       
+        
+        #ensure that S and E are not more refined than at district level
+        district_coordinates <- ddply(unique(dfdat[,c("region","district","S","E")]),.(region,district),summarise,S=mean(S),E=mean(E))
+        district_coordinates$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,district_coordinates$region, district_coordinates$district )
+        
+        # merge on the basis of closest district in the mapping m
+        out_of_food_at_district_level <- closest_loc_data (a=district_coordinates,m=districts_data,data_field="min_ne_food_x")
+        
+        out_of_food_at_district_level$region <- with ( out_of_food_at_district_level, sapply(as.character(loc),function(x){jsonlite::fromJSON(x)[1]}))
+        out_of_food_at_district_level$district <- with (out_of_food_at_district_level, sapply(as.character(loc),function(x){jsonlite::fromJSON(x)[2]}))
+        
+        
+        
+        print("Using merge based on closest district with consumer having run out of food")
+        datfields <- merge(datfields_wo_outoffood,out_of_food_at_district_level,by=c("region","district"), all.x=T) %>% mutate (r = log(mean_A0))
+        
+        if (nrow(subset(datfields,is.na(min_ne_food_x )))>0){
+          stop("Missing outoffood data for some districts or wards")
+        }
+        
+        rd <- merge(datfields, dfdat, by=c("region","district","ea"))
+        rd <- rd %>% mutate (Ar=lnA0-r)
+        
+        print(paste("Number of households ignored because of missing r:",length(unique(subset(rd,is.na(r))[,c("hhid")])),"/",length(unique(rd[,c("hhid")]))))
+        
+        rd <-subset(rd,!is.na(r))
+        
+        print(paste("Number of households ignored because of less than 2 households in the ea:",length(unique(subset(rd,n_ea<2)[,c("hhid")])),"/",
+                    length(unique(rd[,c("hhid")]))  ) )
+        
+        rd <- subset(rd,n_ea>=2)
+        
+        res[[paste0("df",year)]] <- rd
         
       }
       
