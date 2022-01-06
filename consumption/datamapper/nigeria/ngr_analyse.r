@@ -577,7 +577,10 @@ build_xt_df <- function(dflist)
 
 choose_min_distance_with_data <- function(distances,datvec){
   ret = data.frame(distance=distances,data=datvec)
-  result = subset(ret,!is.na(data)) %>% filter(distance==min(distance))
+  #print(nrow(subset(ret,!is.na(data))))
+  #write.csv(ret,'c:/temp/ret.csv',row.names = F)
+  result = subset(ret,!is.na(data)) %>% dplyr::filter(distance==min(distance))
+  
   return (result[1,]$data)
 }
 
@@ -810,6 +813,7 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
                     length(unique(rd[,c("hhid")]))  ) )
         
         rd <- subset(rd,n_ea>=2)
+        rd$loc <- NULL
         
         res[[paste0("df",year)]] <- rd
         
@@ -939,5 +943,5 @@ asset_mtms <- function(assets_dat,pivot_asset,year){
 
 
 test <- function(){
-  ngr_get_nonparametric_df(nl=nl,food_analysis = F,o2010 = o2010, o2012 = o2012, o2015 = o2015, a2010 = a2010, a2012 = a2012, a2015 = a2015,c2010 = c2010, c2012 = c2012, c2015 = c2015)
+  return(ngr_get_nonparametric_df(nl=nl,use_ea=T,food_analysis = F,o2010 = o2010, o2012 = o2012, o2015 = o2015, a2010 = a2010, a2012 = a2012, a2015 = a2015,c2010 = c2010, c2012 = c2012, c2015 = c2015))
 }

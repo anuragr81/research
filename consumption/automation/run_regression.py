@@ -52,15 +52,18 @@ if settings[settings_name]['operation'] == 'direct':
     
     temp_file = 'c:/temp/resnu.tex'
     remove_if_exists(temp_file)
+    print("Checking time before call")
     time_before_call = time.time()
             
-    retcode=subprocess.check_call([stata_program_fpath,"/e","do",dofpath,depvar,
+    command_to_run=[stata_program_fpath,"/e","do",dofpath,depvar,
                                    settings[settings_name]['food_price_var'],
                                    settings[settings_name]['nonfood_price_var'],
                                    selected_settings_data['file1'],
                                    selected_settings_data['file2'],
-                                   selected_settings_data['file3']])
-    
+                                   selected_settings_data['file3']]
+
+    print("Running:%s"% ' '.join(command_to_run))
+    retcode=subprocess.check_call(command_to_run)
     if (os.path.getmtime(temp_file) <time_before_call):
         raise RuntimeError("File Pointed to is before the call")
 
