@@ -29,16 +29,16 @@ settings_name = sys.argv[3]
 dataset_name = sys.argv[4]
 
 
-settings = {'NGR_direct': {'operation':'direct','data': datasets[dataset_name]['ngr'],'food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} , 
+settings = {'NGR_direct': {'operation':'direct','data': datasets[dataset_name]['ngr'],'food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_nonfood'} , 
             'NGR_q30prices': {'operation':'direct','data': datasets[dataset_name]['ngr'],'food_price_var':'log_q30_cost_ne_food','nonfood_price_var':'log_q30_cost_ne_nonfood'} , 
             'NGR_q70prices': {'operation':'direct','data': datasets[dataset_name]['ngr'],'food_price_var':'log_q70_cost_ne_food','nonfood_price_var':'log_q70_cost_ne_nonfood'} , 
-            'NGR_hilo_A': {'operation':'hilo','data': datasets[dataset_name]['ngr'] , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'},
-            'NGR_hilo_x': {'operation':'hilo','data': datasets[dataset_name]['ngr'] , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'},
+            'NGR_hilo_A': {'operation':'hilo','data': datasets[dataset_name]['ngr'] , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_nonfood'},
+            'NGR_hilo_x': {'operation':'hilo','data': datasets[dataset_name]['ngr'] , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_nonfood'},
             'TNZ_direct': {'operation':'direct','data': datasets[dataset_name]['tnz'],'food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_nonfood'} , 
             'TNZ_q30prices': {'operation':'direct','data': datasets[dataset_name]['tnz'],'food_price_var':'log_q30_cost_ne_food','nonfood_price_var':'log_q30_cost_ne_nonfood'} , 
             'TNZ_q70prices': {'operation':'direct','data': datasets[dataset_name]['tnz'],'food_price_var':'log_q70_cost_ne_food','nonfood_price_var':'log_q70_cost_ne_nonfood'} , 
-            'TNZ_hilo_A': {'operation':'hilo','data': datasets[dataset_name]['tnz'] , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} ,
-            'TNZ_hilo_x': {'operation':'hilo','data': datasets[dataset_name]['tnz'] , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_food'} }
+            'TNZ_hilo_A': {'operation':'hilo','data': datasets[dataset_name]['tnz'] , 'split_field':'lnA0','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_nonfood'} ,
+            'TNZ_hilo_x': {'operation':'hilo','data': datasets[dataset_name]['tnz'] , 'split_field':'logx','food_price_var':'log_mean_cost_ne_food','nonfood_price_var':'log_mean_cost_ne_nonfood'} }
 
 
 if settings_name not in settings:

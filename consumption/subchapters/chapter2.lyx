@@ -29,12 +29,12 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "times" "Hoefler Text"
+\font_roman "tgtermes" "Libre Baskerville"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts true
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -46,7 +46,7 @@ theorems-sec
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 10
+\paperfontsize 11
 \spacing single
 \use_hyperref false
 \papersize default
@@ -75,9 +75,9 @@ theorems-sec
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 2cm
+\leftmargin 3cm
 \topmargin 2.5cm
-\rightmargin 2cm
+\rightmargin 3cm
 \bottommargin 2.5cm
 \headheight 2.5cm
 \headsep 2.5cm
@@ -91,7 +91,7 @@ theorems-sec
 \math_numbering_side default
 \quotes_style english
 \dynamic_quotes 0
-\papercolumns 2
+\papercolumns 1
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
@@ -2517,7 +2517,7 @@ name "subsec:Excess"
 
 \end_inset
 
-Non-durable consumption
+Non-durable consumption Excess
 \end_layout
 
 \begin_layout Standard
@@ -2609,7 +2609,7 @@ ref{itemsclassification_ngr}
 \end_layout
 
 \begin_layout Standard
-As we described in the Section 
+As described in the Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Model"
@@ -2623,16 +2623,16 @@ noprefix "false"
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- - view as the non-durable consumption excluding asset costs and the minimal
- the food consumption in the consumer's district - is recorded as a non-zero
+ is the non-durable consumption excluding asset costs and the minimal the
+ food consumption in the consumer's district - is recorded as a non-zero
  value only if the consumption excluding asset costs is above the minimum
  food level.
  However, since the households that run out of food are more likely to be
  those with larger families, we would be overestimating the needs of the
- smaller households is consider the total consumption of the household as
- the criteria for determining excess.
+ smaller households if we consider the total consumption of the household
+ as the criteria for determining excess.
  Therefore, the minimum level is identified using the per-head expenditure
- - the food needs of the family of the household are thus 
+ - so that the food needs of the family of the household are 
 \begin_inset Formula $\xi\times\overline{c}_{outoffood}$
 \end_inset
 
@@ -2939,9 +2939,11 @@ Recall that the non-durable consumption excess
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- has both food and non-food components.
- This supports the wide-ranging evidence for pressures on food-quality in
- sub-Saharan countries (see for example Schneider et al
+ includes both food and non-food components.
+ As we have argued earlier, the non-durable consumption above the minimum
+ level of needs is considered towards status in the current approach.
+ This also supports the wide-ranging evidence for pressures on food-quality
+ in sub-Saharan countries (see for example Schneider et al
 \begin_inset CommandInset citation
 LatexCommand cite
 key "MastersMalawiFoodQuality2021"
@@ -2956,10 +2958,6 @@ literal "false"
  The attainment of higher food quality would - in other words - be visible
  enough in a poor economy and should be considered a part of non-durable
  consumption relevant for status.
- To take a specific example, when only a small part of the population has
- access to electricity (e.g.
- about 10% in Tanzania), the improvement of food quality through having
- a refrigerator is somewhat of a luxury.
 \end_layout
 
 \begin_layout Standard
@@ -3016,6 +3014,8 @@ noprefix "false"
 \end_inset
 
 .
+ The liquidity constraints the consumer faces influence the private assets
+ stock rather than the reference-level richness and status pressures.
  Therefore, we use 
 \begin_inset Formula $log(A)$
 \end_inset
@@ -3024,9 +3024,11 @@ noprefix "false"
 \begin_inset Formula $log(x)$
 \end_inset
 
- in the selection as the absolute level of assets (regardless of how much
- is owned by the neighbors) has a direct role in the poverty but only peer-effec
-ts (through the richness of the reference and the prices 
+ in the selection equation while using reference-richness 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ as well as the prices 
 \begin_inset Formula $p_{food}(r)$
 \end_inset
 
@@ -3034,34 +3036,19 @@ ts (through the richness of the reference and the prices
 \begin_inset Formula $p_{nonfood}(r)$
 \end_inset
 
-) influence the amount of excess 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
-.
- In other words, absolute income and asset-ownership affect whether the
- consumer has some 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- or not but not how much she spends on 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
-.
+ - which account for peer-effects - in the main estimation.
  Notice also that the variables such as the household-size and the household
  income do not matter outside the context of the individual household for
  consumption - whereas the reference level means 
 \begin_inset Formula $r_{t}$
 \end_inset
 
- and the variables indicating social position such as the educational or
- occupational level contribute to peer effects towards excess 
+ or the variables indicating social position (educational or occupational
+ level) contribute to peer effects towards excess 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- .
- 
+
 \begin_inset Foot
 status open
 
@@ -3080,9 +3067,9 @@ While education or occupational may be used to defined the consumer's reference,
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-log(\nu_{i}) & =\alpha_{i}+\gamma_{food}log(p_{food})+\gamma_{nonfood}log(p_{nonfood})+\beta_{i}log(c_{t})+\epsilon_{i}
-\end{align*}
+\begin{align}
+log(\nu_{i}) & =\alpha_{i}+\gamma_{food}log(p_{food})+\gamma_{nonfood}log(p_{nonfood})+\beta_{i}log(c_{t})+\epsilon_{i}\label{eq:plain_regression_heckman}
+\end{align}
 
 \end_inset
 
@@ -3185,24 +3172,59 @@ The local average costs of food and non-food non-durable consumption in
 \begin_inset Formula $p_{food}(r_{t}),p_{nonfood}(r_{t})$
 \end_inset
 
- in a PIGLOG formulation 
-\begin_inset Formula $log(c(u,\textbf{p}))=a(\textbf{p}))(1-u)+b(\textbf{p}))u$
+ in a PIGLOG formulation (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:PIGLOG_simple"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- as well where 
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+log(c(u,\textbf{p})) & =a(\textbf{p}))(1-u)+b(\textbf{p}))u\label{eq:PIGLOG_simple}
+\end{align}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+In the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:PIGLOG_simple"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
 \begin_inset Formula $\textbf{p}$
 \end_inset
 
  is a vector of prices, 
-\begin_inset Formula $a(\textbf{p}),b(\textbf{p})$
-\end_inset
-
- are general functions and 
 \begin_inset Formula $u$
 \end_inset
 
- is the consumer utility.
- With budget shares 
+ is the consumer utility and 
+\begin_inset Formula $a(\textbf{p}),b(\textbf{p})$
+\end_inset
+
+ are general functions.
+ With 
+\begin_inset Formula $c_{food},c_{nonfood}$
+\end_inset
+
+ the food and non-food expenditures, the budget shares 
 \begin_inset Formula $w_{food}=\frac{c_{food}}{c_{food}+c_{nonfood}}$
 \end_inset
 
@@ -3210,30 +3232,24 @@ The local average costs of food and non-food non-durable consumption in
 \begin_inset Formula $w_{nonfood}=\frac{c_{nonfood}}{c_{food}+c_{nonfood}}$
 \end_inset
 
- for 
-\begin_inset Formula $c_{food},c_{nonfood}$
-\end_inset
-
- being the food and non-food expenditures, the PIGLOG formulations allows
- the following estimation (due to 
+ correspond to 
 \begin_inset Formula $w_{i}=\frac{\partial log(c(u,\textbf{p}))}{\partial p_{i}}$
 \end_inset
 
- ).
- More specifically, with the total expenditure 
+ and lead to the following LA-AIDS (linear approximate AIDS) estimation
+ for total expenditure 
 \begin_inset Formula $c_{t}$
 \end_inset
 
-, the price estimates 
+, food price estimate (average) 
 \begin_inset Formula $p_{food}(r_{t})$
 \end_inset
 
- and 
+ and non-food price estimate
 \begin_inset Formula $p_{nonfood}(r_{t})$
 \end_inset
 
- for food and non-food consumption(respectively), the LA-AIDS (linear approximat
-e AIDS) corresponds to the following regression equation
+.
 \end_layout
 
 \begin_layout Standard
@@ -4398,8 +4414,8 @@ An FE regression for
 \begin_inset Formula $log(q_{ne})$
 \end_inset
 
- (non-durable consumption including both food and non-food nondurable consumptio
-n) against 
+ (non-durable consumption including both food and non-food non-durable consumpti
+on) against 
 \begin_inset Formula $r_{t}$
 \end_inset
 
@@ -4444,7 +4460,8 @@ In both Tanzania and Nigeria, more non-durable consumption excluding asset-costs
  
 \series bold
 \bar under
-This makes our concerns with RD similar to the Malawi findings(
+This makes our concerns with relative deprivation similar to the Malawi
+ findings(
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ravallionwhocares2010"
@@ -4812,7 +4829,7 @@ name "subsec:HiLo"
 
 \end_inset
 
-Differences in richer and poorer sub-samples 
+Differences in richer and poorer sub-samples
 \end_layout
 
 \begin_layout Standard
@@ -5441,13 +5458,18 @@ log_mean_cost_ne_food
 EA-level Results
 \end_layout
 
+\begin_layout Standard
+On running MLE, there is some evidence of selection bias for NGR.
+ 
+\end_layout
+
 \begin_layout Subsubsection
 Robustness checks
 \end_layout
 
 \begin_layout Standard
 Instead of seeking the relevance of the mean food and non-food per-head
- non-durable consumption excluding costs in the consumer's surroudnings,
+ non-durable consumption excluding costs in the consumer's surroundings,
  we also look at how the 30th and 70th percentiles food and non-food averages
  may influence the consumer household's non-durable consumption excluding
  costs 
@@ -5499,7 +5521,6 @@ status open
  i) that is all that they can avail ii) they prefer food quality over others.
  We know that food quality is higher in the city .
  So ii) is ruled out.
- 
 \end_layout
 
 \end_inset
@@ -5551,18 +5572,8 @@ status open
 \end_layout
 
 \begin_layout Standard
-[Implication for Status consumption arguments - Connected asset difference
- with poverty - What Segregation means for status consumption ] 
+[Implication for Status consumption arguments]
 \bar under
-If such a separation is implied in the data, there are status consumption
- must also be segmented so that there are no status goods applicable to
- the wider population.
- The status needs in the higher reference are therefore never shaped by
- those in the lower reference in the case of separation.
- The important question then is if it is possible to say quantitatively
- when status consumption could be deemed insignifcant for the majority of
- the population when non-durable consumption is strongly segmented across
- asset-bands.
  
 \bar default
 In a comparison - we only seek a comparative answer (with NGR,TNZ).
@@ -5621,7 +5632,7 @@ We are comparing
 \series bold
 ] 
 \series default
-The issue of granularity is therefore key in our interpreations.
+The issue of granularity is key in our interpreations.
  While urban settings would always have higher assets and higher non-durable
  consumption opportunities overall, the cross-country comparison on a similar
  granularity based on poppulation and geographical area quantiies the effect
@@ -5697,82 +5708,14 @@ the failure of basic capabilities to reach certain minimally acceptable
 \end_layout
 
 \begin_layout Standard
-[Polarisation and Separation] 
-\end_layout
-
-\begin_layout Standard
-Extreme asset differences themselves tell us that status consumption is
- going to be different.
+[Polarisation and Separation] Extreme asset differences themselves tell
+ us that status consumption is going to be different.
  Does non-food being less controlled by assets tell us something about the
  extreme differences in Tanzania? This would need to be implied - at least
  intuitively - with the polarisation measures (this polarisation depends
  on identification between groups - to consider that in the current analysis
  we'll have to assume that there are no ethnic groupings and that asset-groups
- themselves are all that control the identification as well as antagonism).
- The polarisation literature highlights that inequality is different from
- polarisation - we're looking at clustering.
- One way is to see relative poverty in both the asset and non-asset dimensions
- , or in the 4 dimensions (this idea is from Bossert).
- Nolan-Callan
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CallanNolanPovertyLine1991"
-literal "false"
-
-\end_inset
-
- also mention the Dickes approach to consider multiple dimensions - based
- on the simple logic that a household that is poor in terms of housing must
- also be poor in term of clothing - otherwise we have - we cannot extend
- this approach the opposite way by saying that a consumer who uses conspicuous
- consumption must exhibit it through.
- This is permissible since poverty seeks an upper bound of costs - below
- which all consumers can be considered poor.
- We're on the other looking for a lower bound of consumption above which
- all consumption would be extraneous.
- We must consider necessities in all areas.
- That said, the deprivation sense can be arrived by looking at the number
- of consumers with less consumption that oneself in the ward/district.
- Relative poverty line can be drawn by considering subjective poverty in
- both countries as well.
- Those economies where subjective perception is high might show higher w_nonfood
- - the sense of poverty line would be the level which defines subjective
- perception (see Callan-Nolan
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CallanNolanPovertyLine1991"
-literal "false"
-
-\end_inset
-
- and Meier-Stiglitz
-\begin_inset CommandInset citation
-LatexCommand cite
-key "meier2001frontiers"
-literal "false"
-
-\end_inset
-
-).
- Kanbur-Squire
-\begin_inset CommandInset citation
-LatexCommand cite
-key "meier2001frontiers"
-literal "false"
-
-\end_inset
-
- do consider conspicuous consumption as contributing to poverty line.
-\end_layout
-
-\begin_layout Standard
-[Measures of polarisation] We already have the district averages - they
- are what we consider polarisation on the district level.
- We can use ea-level data.
- This would lead to dropping a lot of data - but it would provide a comparison
- nevertheless.
- The question is whether we do need the positive externality effect for
- our question or not.
+ themselves are all that control the identification as well as antagonism.
  If we argue that consumers care about immediate reference and not about
  the reference richer than them, then we would experience lower status consumpti
 on i.e.
@@ -5959,402 +5902,9 @@ status open
   
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
 \begin_layout Plain Layout
 
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Tanzania Heckman: $ log(q_{ne}) $ 
-\backslash
-label{tablogqneTNZ}} 
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2014}
-\backslash
-
-\backslash
- 
-\backslash
-hline log
-\backslash
-_q
-\backslash
-_ne  &                  &                  
-\backslash
-
-\backslash
- logx      &    1.557
-\backslash
-sym{***}&    1.401
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  -0.0492
-\backslash
-sym{***}&  -0.0485
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&  -0.0247         &  -0.0425
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.586)         &  (0.023)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&   -0.100         &   -0.114
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.053)         &  (0.018)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&  -0.0995
-\backslash
-sym{***}&  -0.0729
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.002)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank&  -0.0129         &  -0.0216         
-\backslash
-
-\backslash
-           &  (0.606)         &  (0.301)         
-\backslash
-
-\backslash
- age       & -0.00298
-\backslash
-sym{**} &-0.000907         
-\backslash
-
-\backslash
-           &  (0.009)         &  (0.394)         
-\backslash
-
-\backslash
- hsize     &   -0.106
-\backslash
-sym{***}&   -0.123
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 0.isrural &        0         &                  
-\backslash
-
-\backslash
-           &      (.)         &                  
-\backslash
-
-\backslash
- 1.isrural &    0.342
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -6.563
-\backslash
-sym{***}&   -3.827
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline has
-\backslash
-_nu    &                  &                  
-\backslash
-
-\backslash
- logx      &    1.355
-\backslash
-sym{***}&    1.484
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- lnA0      &  -0.0590
-\backslash
-sym{***}&  -0.0163         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.297)         
-\backslash
-
-\backslash
- mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food
-\backslash
-_x&-0.000000829
-\backslash
-sym{***}&-0.00000247
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- hsize     &   -0.271
-\backslash
-sym{***}&   -0.296
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 0.isrural &        0         &                  
-\backslash
-
-\backslash
-           &      (.)         &                  
-\backslash
-
-\backslash
- 1.isrural &    0.599
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -16.74
-\backslash
-sym{***}&   -18.17
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline athrho    &                  &                  
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &  -0.0225         &  -0.0144         
-\backslash
-
-\backslash
-           &  (0.812)         &  (0.844)         
-\backslash
-
-\backslash
- 
-\backslash
-hline lnsigma   &                  &                  
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -0.193
-\backslash
-sym{***}&   -0.165
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     2652         &     3364         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} 
-\backslash
-end{table} 
+% tablogqneTNZ - tablogqneNGR
 \end_layout
 
 \end_inset
@@ -6470,11 +6020,1134 @@ else
 \backslash
 fi} 
 \backslash
-caption{Tanzania: $ w_{nonfood} $ 
+caption{Nigeria (selection): $ log
 \backslash
-label{tabwnonfoodTNZ}} 
+_q
+\backslash
+_ne $ 
+\backslash
+label{tablog_q_neNGR}} 
 \backslash
 resizebox{2.25in}{!}{  
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2014}
+\backslash
+
+\backslash
+ 
+\backslash
+hline log
+\backslash
+_q
+\backslash
+_ne  &                  &                  
+\backslash
+
+\backslash
+ logx      &    1.011
+\backslash
+sym{***}&    1.014
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  -0.0258
+\backslash
+sym{***}&  -0.0245
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&   0.0388
+\backslash
+sym{***}&   0.0247
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&  -0.0555
+\backslash
+sym{***}&  -0.0355
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&  -0.0157
+\backslash
+sym{**} &  -0.0211
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.001)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank& -0.00147         & -0.00714
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.414)         &  (0.000)         
+\backslash
+
+\backslash
+ age       & 0.000221         & 0.000181         
+\backslash
+
+\backslash
+           &  (0.196)         &  (0.318)         
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_urban&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.is
+\backslash
+_urban&   0.0342
+\backslash
+sym{***}&   0.0358
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   0.0567         & -0.00565         
+\backslash
+
+\backslash
+           &  (0.424)         &  (0.937)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline has
+\backslash
+_nu    &                  &                  
+\backslash
+
+\backslash
+ logx      &    1.587
+\backslash
+sym{***}&    1.398
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ lnA0      &  -0.0592
+\backslash
+sym{**} &  -0.0261         
+\backslash
+
+\backslash
+           &  (0.002)         &  (0.192)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&   -0.859
+\backslash
+sym{***}&   -0.943
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ hsize     &   -0.296
+\backslash
+sym{***}&   -0.276
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_urban&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.is
+\backslash
+_urban&    0.123
+\backslash
+sym{*}  &    0.284
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.030)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -7.857
+\backslash
+sym{***}&   -5.376
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline athrho    &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    0.311
+\backslash
+sym{***}&    0.250
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline lnsigma   &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -2.144
+\backslash
+sym{***}&   -2.062
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     4087         &     4038         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Tanzania (selection): $ log
+\backslash
+_q
+\backslash
+_ne $ 
+\backslash
+label{tablog_q_neTNZ}} 
+\backslash
+resizebox{2.25in}{!}{  
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2014}
+\backslash
+
+\backslash
+ 
+\backslash
+hline log
+\backslash
+_q
+\backslash
+_ne  &                  &                  
+\backslash
+
+\backslash
+ logx      &    0.856
+\backslash
+sym{***}&    0.713
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  -0.0216
+\backslash
+sym{*}  & -0.00996         
+\backslash
+
+\backslash
+           &  (0.036)         &  (0.399)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&  0.00815         &  -0.0461
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.842)         &  (0.026)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&  -0.0583         &    0.103
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.085)         &  (0.006)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&  -0.0346
+\backslash
+sym{*}  &  -0.0498
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.049)         &  (0.009)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&  -0.0122         & -0.00992         
+\backslash
+
+\backslash
+           &  (0.523)         &  (0.578)         
+\backslash
+
+\backslash
+ age       & -0.00166
+\backslash
+sym{*}  & 0.000209         
+\backslash
+
+\backslash
+           &  (0.020)         &  (0.788)         
+\backslash
+
+\backslash
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural &   0.0470         &                  
+\backslash
+
+\backslash
+           &  (0.414)         &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    2.259
+\backslash
+sym{***}&    2.917
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline has
+\backslash
+_nu    &                  &                  
+\backslash
+
+\backslash
+ logx      &    0.795
+\backslash
+sym{***}&    0.735
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ lnA0      &  -0.0308
+\backslash
+sym{***}&-0.000202         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.983)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&  -0.0927
+\backslash
+sym{*}  &   -0.145
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.025)         &  (0.000)         
+\backslash
+
+\backslash
+ hsize     &   -0.125
+\backslash
+sym{***}&   -0.118
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural &    0.163
+\backslash
+sym{*}  &                  
+\backslash
+
+\backslash
+           &  (0.012)         &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -8.850
+\backslash
+sym{***}&   -7.736
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline athrho    &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -2.385
+\backslash
+sym{***}&   -2.021
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline lnsigma   &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   0.0315         &   0.0461
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.111)         &  (0.008)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     2652         &     3364         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% tabw_nonfood_neNGR
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Nigeria: $ w
+\backslash
+_nonfood
+\backslash
+_ne $ 
+\backslash
+label{tabw_nonfood_neNGR}} 
+\backslash
+resizebox{2.75in}{!}{ 
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2015}
+\backslash
+
+\backslash
+ 
+\backslash
+hline logx      &  -0.0444
+\backslash
+sym{***}&  -0.0596
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  0.00296         &  0.00438         
+\backslash
+
+\backslash
+           &  (0.235)         &  (0.055)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&  -0.0572
+\backslash
+sym{***}&  -0.0678
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&   0.0772
+\backslash
+sym{***}&   0.0962
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&  0.00605         &   0.0131
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.083)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&  0.00195         &  0.00268
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.130)         &  (0.030)         
+\backslash
+
+\backslash
+ age       &-0.000582
+\backslash
+sym{***}&-0.000394
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.001)         
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_urban&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.is
+\backslash
+_urban& -0.00150         & -0.00122         
+\backslash
+
+\backslash
+           &  (0.733)         &  (0.766)         
+\backslash
+
+\backslash
+ hsize     &  0.00356
+\backslash
+sym{***}&  0.00588
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    0.586
+\backslash
+sym{***}&    0.684
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     4021         &     4015         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% tabw_nonfood_neTNZ
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Tanzania: $ w
+\backslash
+_nonfood
+\backslash
+_ne $ 
+\backslash
+label{tabw_nonfood_neTNZ}} 
+\backslash
+resizebox{2.75in}{!}{ 
 \backslash
 begin{tabular}{l*{2}{c}} 
 \backslash
@@ -6500,7 +7173,7 @@ multicolumn{1}{c}{2014}
 \backslash
 hline logx      &   -0.139
 \backslash
-sym{***}&   -0.129
+sym{***}&   -0.144
 \backslash
 sym{***}
 \backslash
@@ -6514,15 +7187,13 @@ sym{***}
 \backslash
 _mean
 \backslash
-_A0&   0.0124
+_A0&  0.00924
 \backslash
-sym{***}&  0.00686
-\backslash
-sym{*}  
+sym{***}&  0.00400         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.031)         
+           &  (0.000)         &  (0.077)         
 \backslash
 
 \backslash
@@ -6534,9 +7205,9 @@ _cost
 \backslash
 _ne
 \backslash
-_food&   -0.114
+_food&   -0.131
 \backslash
-sym{***}&   -0.156
+sym{***}&  -0.0371
 \backslash
 sym{***}
 \backslash
@@ -6554,9 +7225,9 @@ _cost
 \backslash
 _ne
 \backslash
-_nonfood&    0.162
+_nonfood&    0.207
 \backslash
-sym{***}&    0.202
+sym{***}&    0.115
 \backslash
 sym{***}
 \backslash
@@ -6570,15 +7241,11 @@ sym{***}
 \backslash
 _occupation
 \backslash
-_rank&   0.0140
-\backslash
-sym{***}&   0.0190
-\backslash
-sym{***}
+_rank&  0.00876         &  0.00166         
 \backslash
 
 \backslash
-           &  (0.001)         &  (0.000)         
+           &  (0.052)         &  (0.673)         
 \backslash
 
 \backslash
@@ -6586,21 +7253,9 @@ sym{***}
 \backslash
 _education
 \backslash
-_rank&   0.0161
+_rank&   0.0177
 \backslash
-sym{***}&   0.0160
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- age       & -0.00142
-\backslash
-sym{***}& -0.00101
+sym{***}&   0.0137
 \backslash
 sym{***}
 \backslash
@@ -6610,1886 +7265,9 @@ sym{***}
 \backslash
 
 \backslash
- rural
+ age       &-0.000540
 \backslash
-_wards&  -0.0217         &  -0.0125         
-\backslash
-
-\backslash
-           &  (0.177)         &  (0.328)         
-\backslash
-
-\backslash
- hsize     &  0.00868
-\backslash
-sym{***}&   0.0118
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    1.668
-\backslash
-sym{***}&    1.631
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     4067         &     3613         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% tabExcessLinearNGR_w_nonfood_ne
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[H]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Nigeria: $ w_{nonfood} $ 
-\backslash
-label{tabwnonfoodNGR}} 
-\backslash
-resizebox{2.25in}{!}{  
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &  -0.0430
-\backslash
-sym{***}&  -0.0521
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  0.00171         &  0.00106         
-\backslash
-
-\backslash
-           &  (0.538)         &  (0.689)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&  -0.0611
-\backslash
-sym{***}&  -0.0749
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&   0.0777
-\backslash
-sym{***}&   0.0976
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&  0.00648         &   0.0147
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.064)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank&  0.00199         &  0.00226         
-\backslash
-
-\backslash
-           &  (0.127)         &  (0.068)         
-\backslash
-
-\backslash
- age       &-0.000630
-\backslash
-sym{***}&-0.000473
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards& -0.00405         &  0.00202         
-\backslash
-
-\backslash
-           &  (0.420)         &  (0.671)         
-\backslash
-
-\backslash
- hsize     &  0.00353
-\backslash
-sym{***}&  0.00499
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    0.622
-\backslash
-sym{***}&    0.697
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     4028         &     4109         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%tabExcessLinearTNZ- log(
-\backslash
-nu_t) 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[H]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Tanzania: $ log(
-\backslash
-nu_t) $ 
-\backslash
-label{tablogqTNZ}} 
-\backslash
-resizebox{2.25in}{!}{  
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2014}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &    1.044
-\backslash
-sym{***}&    1.005
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  -0.0144         & -0.00982
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.116)         &  (0.032)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&    0.137
-\backslash
-sym{***}&    0.116
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&   -0.150
-\backslash
-sym{***}&   -0.131
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&  -0.0370
-\backslash
-sym{***}&  -0.0150
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.009)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank& 0.000409         &  -0.0103
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.969)         &  (0.040)         
-\backslash
-
-\backslash
- age       &  0.00218
-\backslash
-sym{***}&  0.00149
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&    0.161
-\backslash
-sym{***}&   0.0838
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- hsize     &  0.00259         &  0.00360
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.464)         &  (0.047)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -0.814
-\backslash
-sym{*}  &   -0.196         
-\backslash
-
-\backslash
-           &  (0.036)         &  (0.243)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     4068         &     3613         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% tabExcessLinearNGR - log(
-\backslash
-nu_t)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[H]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Nigeria: $ log(
-\backslash
-nu_t) $ 
-\backslash
-label{tablogqNGR}} 
-\backslash
-resizebox{2.25in}{!}{ 
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &    1.021
-\backslash
-sym{***}&    1.046
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  -0.0273
-\backslash
-sym{***}&  -0.0434
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&   0.0350
-\backslash
-sym{***}&   0.0313         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.094)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&  -0.0524
-\backslash
-sym{***}&  -0.0265         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.087)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&  -0.0172
-\backslash
-sym{***}&  -0.0267
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.025)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank& -0.00534
-\backslash
-sym{**} &  -0.0107
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.005)         &  (0.033)         
-\backslash
-
-\backslash
- age       &0.0000199         & -0.00114
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.914)         &  (0.014)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&   0.0513
-\backslash
-sym{***}&   0.0408
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.034)         
-\backslash
-
-\backslash
- hsize     &  0.00437
-\backslash
-sym{***}&  0.00549
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.038)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &  -0.0342         &   -0.272         
-\backslash
-
-\backslash
-           &  (0.639)         &  (0.122)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     4028         &     4110         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% w_{nonfood}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Tanzania: Low Assets $ w_{nonfood} $ 
-\backslash
-label{tabloAwnonfoodneTNZ}}  
-\backslash
-resizebox{2.25in}{!}{ 
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2014}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &   -0.157
-\backslash
-sym{***}&   -0.142
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  0.00421         &  0.00409         
-\backslash
-
-\backslash
-           &  (0.400)         &  (0.369)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&  -0.0873
-\backslash
-sym{***}&   -0.127
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&    0.161
-\backslash
-sym{***}&    0.164
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&  0.00793         &   0.0154
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.200)         &  (0.011)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank&   0.0243
-\backslash
-sym{***}&  0.00587         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.332)         
-\backslash
-
-\backslash
- age       & -0.00105
-\backslash
-sym{***}& -0.00141
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&  -0.0222         &  -0.0264         
-\backslash
-
-\backslash
-           &  (0.368)         &  (0.177)         
-\backslash
-
-\backslash
- hsize     &  0.00376         &   0.0134
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.097)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    1.708
-\backslash
-sym{***}&    1.954
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     2042         &     1822         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Nigeria: Low Assets  $ w_{nonfood} $ 
-\backslash
-label{tabloAwnonfoodneNGR}} 
-\backslash
-resizebox{2.25in}{!}{  
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &  -0.0541
-\backslash
-sym{***}&  -0.0701
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0& -0.00113         & -0.00697         
-\backslash
-
-\backslash
-           &  (0.788)         &  (0.066)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&  -0.0593
-\backslash
-sym{***}&  -0.0606
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&   0.0776
-\backslash
-sym{***}&   0.0926
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank& -0.00377         &  0.00447         
-\backslash
-
-\backslash
-           &  (0.586)         &  (0.419)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank&  0.00376         &-0.000168         
-\backslash
-
-\backslash
-           &  (0.075)         &  (0.928)         
-\backslash
-
-\backslash
- age       &-0.000873
-\backslash
-sym{***}&-0.000700
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards& -0.00820         &  0.00134         
-\backslash
-
-\backslash
-           &  (0.319)         &  (0.862)         
-\backslash
-
-\backslash
- hsize     &  0.00342
-\backslash
-sym{**} &  0.00601
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.003)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    0.783
-\backslash
-sym{***}&    0.899
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     1979         &     2047         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Tanzania: High Assets $ w_{nonfood} $ 
-\backslash
-label{tabhiAwnonfoodneTNZ}} 
-\backslash
-resizebox{2.25in}{!}{ 
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2014}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &   -0.132
-\backslash
-sym{***}&   -0.125
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&   0.0146
-\backslash
-sym{**} &  0.00236         
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.597)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&   -0.134
-\backslash
-sym{***}&   -0.182
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&    0.155
-\backslash
-sym{***}&    0.235
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&   0.0198
-\backslash
-sym{***}&   0.0205
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank&  0.00311         &   0.0156
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.509)         &  (0.000)         
-\backslash
-
-\backslash
- age       & -0.00190
-\backslash
-sym{***}&-0.000725
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.001)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&  -0.0244         &-0.000464         
-\backslash
-
-\backslash
-           &  (0.235)         &  (0.978)         
-\backslash
-
-\backslash
- hsize     &  0.00901
-\backslash
-sym{***}&  0.00975
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    1.933
-\backslash
-sym{***}&    1.603
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     2025         &     1791         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Nigeria: High Assets $ w_{nonfood} $ 
-\backslash
-label{tabhiAwnonfoodneNGR}} 
-\backslash
-resizebox{2.25in}{!} { 
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &  -0.0382
-\backslash
-sym{***}&  -0.0498
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0& -0.00477         & -0.00397         
-\backslash
-
-\backslash
-           &  (0.215)         &  (0.300)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&  -0.0613
-\backslash
-sym{***}&  -0.0868
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&   0.0783
-\backslash
-sym{***}&    0.104
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&  0.00838
-\backslash
-sym{*}  &   0.0117
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.030)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank&-0.000970         &  0.00260         
-\backslash
-
-\backslash
-           &  (0.544)         &  (0.103)         
-\backslash
-
-\backslash
- age       &-0.000264         &-0.000187         
-\backslash
-
-\backslash
-           &  (0.125)         &  (0.230)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&-0.000995         &  0.00179         
-\backslash
-
-\backslash
-           &  (0.871)         &  (0.752)         
-\backslash
-
-\backslash
- hsize     &  0.00232
-\backslash
-sym{**} &  0.00284
+sym{**} &-0.000834
 \backslash
 sym{***}
 \backslash
@@ -8499,11 +7277,39 @@ sym{***}
 \backslash
 
 \backslash
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural &  -0.0162         &                  
+\backslash
+
+\backslash
+           &  (0.077)         &                  
+\backslash
+
+\backslash
+ hsize     &   0.0103
+\backslash
+sym{***}&   0.0172
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
  
 \backslash
-_cons    &    0.635
+_cons    &    1.393
 \backslash
-sym{***}&    0.818
+sym{***}&    1.402
 \backslash
 sym{***}
 \backslash
@@ -8519,7 +7325,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     2049         &     2062         
+)     &     2652         &     3364         
 \backslash
 
 \backslash
@@ -8581,9 +7387,7 @@ status open
 
 \begin_layout Plain Layout
 
-% log(
-\backslash
-nu_t)
+%Heckman - low assets
 \end_layout
 
 \end_inset
@@ -8599,7 +7403,23 @@ status open
 
 
 \backslash
-begin{table}[htbp]
+twocolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
 \backslash
 centering 
 \backslash
@@ -8617,13 +7437,13 @@ else
 \backslash
 fi} 
 \backslash
-caption{Tanzania: Low Assets $ log(
+caption{Nigeria Low Assets : $ 
 \backslash
-nu_t) $ 
+nu $ 
 \backslash
-label{tablogloAqneTNZ}} 
+label{tablog_lowA_q_neNGR}} 
 \backslash
-resizebox{2.25in}{!}{ 
+resizebox{2.75in}{!}{ 
 \backslash
 begin{tabular}{l*{2}{c}} 
 \backslash
@@ -8647,7 +7467,15 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline logx      &    1.065
+hline log
+\backslash
+_q
+\backslash
+_ne  &                  &                  
+\backslash
+
+\backslash
+ logx      &    1.018
 \backslash
 sym{***}&    1.022
 \backslash
@@ -8663,31 +7491,11 @@ sym{***}
 \backslash
 _mean
 \backslash
-_A0&  -0.0159         & -0.00466         
+_A0& 0.000732         &-0.000615         
 \backslash
 
 \backslash
-           &  (0.340)         &  (0.487)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&    0.120
-\backslash
-sym{*}  &   0.0812
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.048)         &  (0.000)         
+           &  (0.872)         &  (0.895)         
 \backslash
 
 \backslash
@@ -8699,211 +7507,27 @@ _cost
 \backslash
 _ne
 \backslash
-_nonfood&   -0.191
+_food&   0.0222
 \backslash
-sym{*}  &   -0.101
-\backslash
-sym{***}
+sym{**} &  0.00579         
 \backslash
 
 \backslash
-           &  (0.017)         &  (0.000)         
+           &  (0.006)         &  (0.478)         
 \backslash
 
 \backslash
- max
+ log
 \backslash
-_occupation
+_mean
 \backslash
-_rank&  -0.0480
+_cost
 \backslash
-sym{*}  &  -0.0223
+_ne
 \backslash
-sym{*}  
+_nonfood&  -0.0483
 \backslash
-
-\backslash
-           &  (0.019)         &  (0.013)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank& -0.00389         & -0.00389         
-\backslash
-
-\backslash
-           &  (0.862)         &  (0.663)         
-\backslash
-
-\backslash
- age       &  0.00193
-\backslash
-sym{*}  &  0.00173
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.017)         &  (0.000)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&    0.181
-\backslash
-sym{*}  &    0.118
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.027)         &  (0.000)         
-\backslash
-
-\backslash
- hsize     &  0.00252         &  0.00269         
-\backslash
-
-\backslash
-           &  (0.738)         &  (0.357)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -0.363         &   -0.441         
-\backslash
-
-\backslash
-           &  (0.605)         &  (0.073)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     2043         &     1822         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Nigeria: Low Assets $ log(
-\backslash
-nu_t)  $ 
-\backslash
-label{tablogloAqneNGR}} 
-\backslash
-resizebox{2.25in}{!} { 
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &    1.047
-\backslash
-sym{***}&    1.084
+sym{***}&  -0.0324
 \backslash
 sym{***}
 \backslash
@@ -8913,61 +7537,15 @@ sym{***}
 \backslash
 
 \backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  -0.0126         &  -0.0350         
-\backslash
-
-\backslash
-           &  (0.054)         &  (0.077)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&   0.0209         & -0.00438         
-\backslash
-
-\backslash
-           &  (0.064)         &  (0.903)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&  -0.0468
-\backslash
-sym{***}&  -0.0147         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.633)         
-\backslash
-
-\backslash
  max
 \backslash
 _occupation
 \backslash
-_rank& -0.00479         &-0.000920         
+_rank&  -0.0111         & -0.00318         
 \backslash
 
 \backslash
-           &  (0.656)         &  (0.975)         
+           &  (0.174)         &  (0.672)         
 \backslash
 
 \backslash
@@ -8975,53 +7553,195 @@ _rank& -0.00479         &-0.000920
 \backslash
 _education
 \backslash
-_rank& -0.00435         &  -0.0142         
+_rank& -0.00117         &  -0.0109
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.185)         &  (0.145)         
+           &  (0.645)         &  (0.000)         
 \backslash
 
 \backslash
- age       & 0.000255         & -0.00183
+ age       & 0.000434
 \backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.370)         &  (0.033)         
+sym{*}  & 0.000333         
 \backslash
 
 \backslash
- rural
-\backslash
-_wards&   0.0722
-\backslash
-sym{***}&   0.0232         
+           &  (0.040)         &  (0.124)         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.564)         
+ 1.is
+\backslash
+_urban&        0         &        0         
 \backslash
 
 \backslash
- hsize     &  0.00229         &  0.00320         
+           &      (.)         &      (.)         
 \backslash
 
 \backslash
-           &  (0.205)         &  (0.559)         
+ 2.is
+\backslash
+_urban&   0.0448
+\backslash
+sym{***}&   0.0370
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   -0.428
+_cons    &   -0.211
 \backslash
-sym{***}&   -0.484         
+sym{*}  &   -0.189
+\backslash
+sym{*}  
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.167)         
+           &  (0.030)         &  (0.047)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline has
+\backslash
+_nu    &                  &                  
+\backslash
+
+\backslash
+ logx      &    1.636
+\backslash
+sym{***}&    1.322
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ lnA0      &  -0.0471         &  -0.0183         
+\backslash
+
+\backslash
+           &  (0.189)         &  (0.623)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&   -0.898
+\backslash
+sym{***}&   -0.992
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ hsize     &   -0.354
+\backslash
+sym{***}&   -0.323
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_urban&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.is
+\backslash
+_urban&    0.117         &    0.343
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.169)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -7.814
+\backslash
+sym{***}&   -3.833
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline athrho    &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    0.260
+\backslash
+sym{***}&    0.125         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.102)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline lnsigma   &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -2.239
+\backslash
+sym{***}&   -2.217
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -9031,7 +7751,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     1979         &     2048         
+)     &     2034         &     2024         
 \backslash
 
 \backslash
@@ -9079,7 +7799,7 @@ sym{***}
 \backslash
 end{tabular} } 
 \backslash
-end{table} 
+end{table}
 \end_layout
 
 \end_inset
@@ -9095,7 +7815,7 @@ status open
 
 
 \backslash
-begin{table}[htbp]
+begin{table}[H]
 \backslash
 centering 
 \backslash
@@ -9113,13 +7833,13 @@ else
 \backslash
 fi} 
 \backslash
-caption{Tanzania: High Assets $  log(
+caption{Tanzania Low Assets : $ 
 \backslash
-nu_t) $ 
+nu $ 
 \backslash
-label{tabloghiAqneTNZ}} 
+label{tablog_lowA_q_neTNZ}} 
 \backslash
-resizebox{2.25in}{!} { 
+resizebox{2.75in}{!}{ 
 \backslash
 begin{tabular}{l*{2}{c}} 
 \backslash
@@ -9143,9 +7863,17 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline logx      &    1.035
+hline log
 \backslash
-sym{***}&    0.987
+_q
+\backslash
+_ne  &                  &                  
+\backslash
+
+\backslash
+ logx      &    0.803
+\backslash
+sym{***}&    0.731
 \backslash
 sym{***}
 \backslash
@@ -9159,31 +7887,11 @@ sym{***}
 \backslash
 _mean
 \backslash
-_A0& -0.00742         & -0.00989         
+_A0&  -0.0149         &  -0.0208         
 \backslash
 
 \backslash
-           &  (0.325)         &  (0.117)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&    0.145
-\backslash
-sym{***}&    0.159
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.234)         &  (0.241)         
 \backslash
 
 \backslash
@@ -9195,15 +7903,31 @@ _cost
 \backslash
 _ne
 \backslash
-_nonfood&  -0.0992
-\backslash
-sym{**} &   -0.161
+_food&  0.00575         &   -0.245
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.006)         &  (0.000)         
+           &  (0.919)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&  -0.0431         &    0.283
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.361)         &  (0.000)         
 \backslash
 
 \backslash
@@ -9211,13 +7935,11 @@ sym{***}
 \backslash
 _occupation
 \backslash
-_rank&  -0.0246
-\backslash
-sym{**} & -0.00698         
+_rank&  -0.0114         &  -0.0558         
 \backslash
 
 \backslash
-           &  (0.005)         &  (0.332)         
+           &  (0.630)         &  (0.058)         
 \backslash
 
 \backslash
@@ -9225,17 +7947,63 @@ sym{**} & -0.00698
 \backslash
 _education
 \backslash
-_rank&  0.00485         &  -0.0110         
+_rank&  -0.0206         &  -0.0240         
 \backslash
 
 \backslash
-           &  (0.532)         &  (0.060)         
+           &  (0.455)         &  (0.432)         
 \backslash
 
 \backslash
- age       &  0.00254
+ age       & -0.00103         & 0.000392         
 \backslash
-sym{***}&  0.00127
+
+\backslash
+           &  (0.232)         &  (0.736)         
+\backslash
+
+\backslash
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural &   0.0550         &                  
+\backslash
+
+\backslash
+           &  (0.510)         &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    2.684
+\backslash
+sym{**} &    3.246
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.001)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline has
+\backslash
+_nu    &                  &                  
+\backslash
+
+\backslash
+ logx      &    0.780
+\backslash
+sym{***}&    0.755
 \backslash
 sym{***}
 \backslash
@@ -9245,41 +8013,111 @@ sym{***}
 \backslash
 
 \backslash
- rural
+ lnA0      &  -0.0491
 \backslash
-_wards&    0.162
+sym{**} &  -0.0258         
 \backslash
-sym{***}&   0.0613
+
+\backslash
+           &  (0.003)         &  (0.215)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&  -0.0425         &  -0.0686
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.010)         
+           &  (0.460)         &  (0.006)         
 \backslash
 
 \backslash
- hsize     &  0.00539
+ hsize     &   -0.132
 \backslash
-sym{*}  &  0.00564
+sym{***}&   -0.138
 \backslash
-sym{*}  
+sym{***}
 \backslash
 
 \backslash
-           &  (0.035)         &  (0.011)         
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural &   0.0399         &                  
+\backslash
+
+\backslash
+           &  (0.668)         &                  
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   -1.548
+_cons    &   -8.888
 \backslash
-sym{***}&   -0.138         
+sym{***}&   -8.614
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.556)         
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline athrho    &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -2.615
+\backslash
+sym{***}&   -2.085
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline lnsigma   &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   0.0151         &    0.101
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.602)         &  (0.000)         
 \backslash
 
 \backslash
@@ -9289,7 +8127,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     2025         &     1791         
+)     &     1326         &     1685         
 \backslash
 
 \backslash
@@ -9351,9 +8189,23 @@ status open
 
 \begin_layout Plain Layout
 
+%Heckman - high assets
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 
 \backslash
-begin{table}[htbp]
+begin{table}[H]
 \backslash
 centering 
 \backslash
@@ -9371,301 +8223,13 @@ else
 \backslash
 fi} 
 \backslash
-caption{Nigeria: High Assets $  log(
+caption{Nigeria High Assets : $ 
 \backslash
-nu_t)$ 
+nu $ 
 \backslash
-label{tabloghiAqneNGR}}  
+label{tablog_hiA_q_neNGR}} 
 \backslash
-resizebox{2.25in}{!} {  
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &    1.004
-\backslash
-sym{***}&    1.020
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  -0.0261
-\backslash
-sym{***}&  -0.0296
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&   0.0461
-\backslash
-sym{***}&   0.0608
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&  -0.0583
-\backslash
-sym{***}&  -0.0322
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&  -0.0149
-\backslash
-sym{**} &  -0.0271
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.004)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank& -0.00351         & -0.00601
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.102)         &  (0.015)         
-\backslash
-
-\backslash
- age       &-0.000353         &-0.000230         
-\backslash
-
-\backslash
-           &  (0.126)         &  (0.340)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&   0.0361
-\backslash
-sym{***}&   0.0526
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- hsize     &  0.00763
-\backslash
-sym{***}&  0.00900
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   0.0755         &   -0.482
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.410)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     2049         &     2062         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% =================== INCOME (totexp) RICHNESS ================
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% w_{nonfood}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Tanzania: Low totexp $ w_{nonfood} $ 
-\backslash
-label{tabloxwnonfoodTNZ}} 
-\backslash
-resizebox{2.25in}{!}{ 
+resizebox{2.75in}{!}{  
 \backslash
 begin{tabular}{l*{2}{c}} 
 \backslash
@@ -9689,9 +8253,17 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline logx      &   -0.177
+hline log
 \backslash
-sym{***}&   -0.167
+_q
+\backslash
+_ne  &                  &                  
+\backslash
+
+\backslash
+ logx      &    1.032
+\backslash
+sym{***}&    1.038
 \backslash
 sym{***}
 \backslash
@@ -9705,29 +8277,9 @@ sym{***}
 \backslash
 _mean
 \backslash
-_A0&   0.0221
+_A0&  -0.0420
 \backslash
-sym{***}&   0.0133
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.009)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&   -0.101
-\backslash
-sym{***}&   -0.153
+sym{***}&  -0.0351
 \backslash
 sym{***}
 \backslash
@@ -9745,311 +8297,9 @@ _cost
 \backslash
 _ne
 \backslash
-_nonfood&    0.185
+_food&   0.0451
 \backslash
-sym{***}&    0.215
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&   0.0208
-\backslash
-sym{**} &   0.0189
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.003)         &  (0.006)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank&   0.0262
-\backslash
-sym{**} &   0.0206
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.005)         
-\backslash
-
-\backslash
- age       & -0.00136
-\backslash
-sym{***}& -0.00117
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&   -0.104
-\backslash
-sym{***}&  -0.0673
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.005)         
-\backslash
-
-\backslash
- hsize     &   0.0114
-\backslash
-sym{***}&   0.0159
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    1.656
-\backslash
-sym{***}&    1.896
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     2033         &     1807         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Nigeria: Low totexp $ w_{nonfood} $ 
-\backslash
-label{tabloxwnonfoodNGR}}  
-\backslash
-resizebox{2.25in}{!}{ 
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &  -0.0837
-\backslash
-sym{***}&  -0.0948
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0& 0.000285         & -0.00141         
-\backslash
-
-\backslash
-           &  (0.951)         &  (0.740)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&  -0.0494
-\backslash
-sym{***}&  -0.0698
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&   0.0745
-\backslash
-sym{***}&    0.100
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&-0.000525         &  0.00654         
-\backslash
-
-\backslash
-           &  (0.942)         &  (0.272)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank&  0.00526
-\backslash
-sym{*}  &  0.00219         
-\backslash
-
-\backslash
-           &  (0.019)         &  (0.295)         
-\backslash
-
-\backslash
- age       &-0.000930
-\backslash
-sym{***}&-0.000640
+sym{***}&   0.0316
 \backslash
 sym{***}
 \backslash
@@ -10059,19 +8309,75 @@ sym{***}
 \backslash
 
 \backslash
- rural
+ log
 \backslash
-_wards&  -0.0148         &  0.00651         
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&  -0.0598
+\backslash
+sym{***}&  -0.0378
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.113)         &  (0.458)         
+           &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
- hsize     &  0.00604
+ max
 \backslash
-sym{***}&  0.00742
+_occupation
+\backslash
+_rank&  -0.0114         &  -0.0212
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.061)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&0.0000300         & -0.00192         
+\backslash
+
+\backslash
+           &  (0.990)         &  (0.495)         
+\backslash
+
+\backslash
+ age       &-0.0000631         &-0.000178         
+\backslash
+
+\backslash
+           &  (0.815)         &  (0.534)         
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_urban&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.is
+\backslash
+_urban&   0.0302
+\backslash
+sym{***}&   0.0355
 \backslash
 sym{***}
 \backslash
@@ -10083,9 +8389,145 @@ sym{***}
 \backslash
  
 \backslash
-_cons    &    1.019
+_cons    &  -0.0520         &   -0.259
 \backslash
-sym{***}&    1.145
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.649)         &  (0.029)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline has
+\backslash
+_nu    &                  &                  
+\backslash
+
+\backslash
+ logx      &    1.669
+\backslash
+sym{***}&    1.606
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ lnA0      &   0.0326         &  -0.0600         
+\backslash
+
+\backslash
+           &  (0.456)         &  (0.159)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&   -0.896
+\backslash
+sym{***}&   -0.973
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ hsize     &   -0.261
+\backslash
+sym{***}&   -0.246
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_urban&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.is
+\backslash
+_urban&    0.165
+\backslash
+sym{*}  &    0.261
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.032)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -9.879
+\backslash
+sym{***}&   -7.434
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline athrho    &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    0.441
+\backslash
+sym{***}&    0.363
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline lnsigma   &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -2.086
+\backslash
+sym{***}&   -1.977
 \backslash
 sym{***}
 \backslash
@@ -10101,7 +8543,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     1989         &     2054         
+)     &     2053         &     2014         
 \backslash
 
 \backslash
@@ -10165,7 +8607,7 @@ status open
 
 
 \backslash
-begin{table}[htbp]
+begin{table}[H]
 \backslash
 centering 
 \backslash
@@ -10183,11 +8625,13 @@ else
 \backslash
 fi} 
 \backslash
-caption{Tanzania: High totexp  $ w_{nonfood}  $ 
+caption{Tanzania High Assets: $ 
 \backslash
-label{tabhixwnonfoodTNZ}} 
+nu $ 
 \backslash
-resizebox{2.25in}{!}{ 
+label{tablog_hiA_q_neTNZ}} 
+\backslash
+resizebox{2.75in}{!}{  
 \backslash
 begin{tabular}{l*{2}{c}} 
 \backslash
@@ -10211,9 +8655,1051 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline logx      &  -0.0253
+hline log
 \backslash
-sym{**} &  -0.0323
+_q
+\backslash
+_ne  &                  &                  
+\backslash
+
+\backslash
+ logx      &    0.867
+\backslash
+sym{***}&    0.811
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  -0.0523
+\backslash
+sym{**} &  -0.0108         
+\backslash
+
+\backslash
+           &  (0.003)         &  (0.533)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&-0.000999         &   0.0120         
+\backslash
+
+\backslash
+           &  (0.987)         &  (0.571)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&  -0.0192         &   0.0893         
+\backslash
+
+\backslash
+           &  (0.692)         &  (0.077)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&  -0.0484
+\backslash
+sym{*}  &  -0.0225         
+\backslash
+
+\backslash
+           &  (0.044)         &  (0.414)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank& -0.00985         &  -0.0108         
+\backslash
+
+\backslash
+           &  (0.700)         &  (0.644)         
+\backslash
+
+\backslash
+ age       & -0.00135         & 0.000170         
+\backslash
+
+\backslash
+           &  (0.219)         &  (0.883)         
+\backslash
+
+\backslash
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural &   0.0401         &                  
+\backslash
+
+\backslash
+           &  (0.613)         &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    2.243
+\backslash
+sym{*}  &    0.793         
+\backslash
+
+\backslash
+           &  (0.021)         &  (0.315)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline has
+\backslash
+_nu    &                  &                  
+\backslash
+
+\backslash
+ logx      &    0.832
+\backslash
+sym{***}&    1.038
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ lnA0      &  -0.0175         &  -0.0100         
+\backslash
+
+\backslash
+           &  (0.319)         &  (0.655)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&   -0.143
+\backslash
+sym{*}  &   -0.599
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.017)         &  (0.000)         
+\backslash
+
+\backslash
+ hsize     &   -0.118
+\backslash
+sym{***}&   -0.183
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural &    0.237
+\backslash
+sym{*}  &                  
+\backslash
+
+\backslash
+           &  (0.011)         &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -9.066
+\backslash
+sym{***}&   -5.838
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline athrho    &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -2.522
+\backslash
+sym{***}&   -1.618
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline lnsigma   &                  &                  
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   0.0506         &  -0.0459         
+\backslash
+
+\backslash
+           &  (0.064)         &  (0.052)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     1326         &     1679         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% lo - w_nonfood
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Nigeria Low Assets: $ w_{nonfood} $ 
+\backslash
+label{tabw_loA_nonfood_neNGR}} 
+\backslash
+resizebox{2.75in}{!}{ 
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2015}
+\backslash
+
+\backslash
+ 
+\backslash
+hline logx      &  -0.0546
+\backslash
+sym{***}&  -0.0772
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&-0.000217         & -0.00442         
+\backslash
+
+\backslash
+           &  (0.954)         &  (0.200)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&  -0.0551
+\backslash
+sym{***}&  -0.0526
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&   0.0760
+\backslash
+sym{***}&   0.0873
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank& -0.00305         &  0.00429         
+\backslash
+
+\backslash
+           &  (0.658)         &  (0.444)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&  0.00376         &-0.000130         
+\backslash
+
+\backslash
+           &  (0.072)         &  (0.945)         
+\backslash
+
+\backslash
+ age       &-0.000829
+\backslash
+sym{***}&-0.000622
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_urban&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.is
+\backslash
+_urban& -0.00696         &  0.00149         
+\backslash
+
+\backslash
+           &  (0.330)         &  (0.826)         
+\backslash
+
+\backslash
+ hsize     &  0.00338
+\backslash
+sym{**} &  0.00685
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.004)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    0.746
+\backslash
+sym{***}&    0.911
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     1978         &     2004         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Tanzania Low Assets: $ w_{nonfood} $ 
+\backslash
+label{tabw_loA_nonfood_neTNZ}} 
+\backslash
+resizebox{2.75in}{!}{ 
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2014}
+\backslash
+
+\backslash
+ 
+\backslash
+hline logx      &   -0.152
+\backslash
+sym{***}&   -0.150
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0&  0.00176         &  0.00164         
+\backslash
+
+\backslash
+           &  (0.590)         &  (0.635)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&   -0.117
+\backslash
+sym{***}&  -0.0401
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&    0.204
+\backslash
+sym{***}&    0.104
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&  0.00188         &-0.000269         
+\backslash
+
+\backslash
+           &  (0.784)         &  (0.964)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&   0.0259
+\backslash
+sym{***}&  0.00526         
+\backslash
+
+\backslash
+           &  (0.001)         &  (0.383)         
+\backslash
+
+\backslash
+ age       &-0.000235         & -0.00112
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.372)         &  (0.000)         
+\backslash
+
+\backslash
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural &  -0.0256         &                  
+\backslash
+
+\backslash
+           &  (0.072)         &                  
+\backslash
+
+\backslash
+ hsize     &  0.00766
+\backslash
+sym{**} &   0.0180
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.004)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    1.529
+\backslash
+sym{***}&    1.670
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     1326         &     1685         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\backslash
+end{table} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% hi - w_nonfood
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
+\backslash
+centering 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+caption{Nigeria High Assets: $ w_{nonfood} $ 
+\backslash
+label{tabw_hiA_nonfood_neNGR}} 
+\backslash
+resizebox{2.75in}{!}{ 
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2015}
+\backslash
+
+\backslash
+ 
+\backslash
+hline logx      &  -0.0392
+\backslash
+sym{***}&  -0.0541
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_A0& -0.00305         & -0.00138         
+\backslash
+
+\backslash
+           &  (0.376)         &  (0.660)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_food&  -0.0583
+\backslash
+sym{***}&  -0.0823
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&   0.0782
+\backslash
+sym{***}&    0.105
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&  0.00806
+\backslash
+sym{*}  &  0.00966
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.036)         &  (0.003)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&-0.000879         &  0.00369
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.578)         &  (0.017)         
+\backslash
+
+\backslash
+ age       &-0.000208         &-0.0000869         
+\backslash
+
+\backslash
+           &  (0.223)         &  (0.563)         
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_urban&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.is
+\backslash
+_urban&  0.00298         & -0.00448         
+\backslash
+
+\backslash
+           &  (0.579)         &  (0.347)         
+\backslash
+
+\backslash
+ hsize     &  0.00240
+\backslash
+sym{**} &  0.00359
 \backslash
 sym{***}
 \backslash
@@ -10223,125 +9709,11 @@ sym{***}
 \backslash
 
 \backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  0.00460         &0.00000589         
-\backslash
-
-\backslash
-           &  (0.201)         &  (0.999)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&   -0.175
-\backslash
-sym{***}&   -0.184
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&    0.155
-\backslash
-sym{***}&    0.192
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank& -0.00105         &   0.0100
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.801)         &  (0.010)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank&  0.00643         &  0.00733
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.066)         &  (0.012)         
-\backslash
-
-\backslash
- age       & -0.00107
-\backslash
-sym{***}&-0.000658
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards& -0.00822         &  0.00472         
-\backslash
-
-\backslash
-           &  (0.605)         &  (0.705)         
-\backslash
-
-\backslash
- hsize     &  0.00312
-\backslash
-sym{*}  &  0.00639
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.015)         &  (0.000)         
-\backslash
-
-\backslash
  
 \backslash
-_cons    &    1.001
+_cons    &    0.592
 \backslash
-sym{***}&    0.801
+sym{***}&    0.784
 \backslash
 sym{***}
 \backslash
@@ -10357,7 +9729,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     2034         &     1806         
+)     &     2043         &     2011         
 \backslash
 
 \backslash
@@ -10421,7 +9793,7 @@ status open
 
 
 \backslash
-begin{table}[htbp]
+begin{table}[H]
 \backslash
 centering 
 \backslash
@@ -10439,277 +9811,11 @@ else
 \backslash
 fi} 
 \backslash
-caption{Nigeria:  High totexp $ w_{nonfood}  $ 
+caption{Tanzania High Assets: $ w_{nonfood} $ 
 \backslash
-label{tabhixwnonfoodNGR}} 
+label{tabw_hiA_nonfood_neTNZ}} 
 \backslash
-resizebox{2.25in}{!}{ 
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      & -0.00645         &  -0.0201
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.232)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  0.00133         &-0.000636         
-\backslash
-
-\backslash
-           &  (0.657)         &  (0.822)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&  -0.0836
-\backslash
-sym{***}&  -0.0829
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&   0.0826
-\backslash
-sym{***}&   0.0911
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&  0.00644         &   0.0123
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.054)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank& -0.00149         &  0.00228         
-\backslash
-
-\backslash
-           &  (0.278)         &  (0.073)         
-\backslash
-
-\backslash
- age       &-0.000177         &-0.000410
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.246)         &  (0.001)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&  0.00762         &  0.00318         
-\backslash
-
-\backslash
-           &  (0.129)         &  (0.479)         
-\backslash
-
-\backslash
- hsize     &-0.000704         &  0.00160
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.338)         &  (0.016)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    0.374
-\backslash
-sym{***}&    0.477
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     2039         &     2055         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% log(
-\backslash
-nu_t)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Tanzania: Low totexp $ log(
-\backslash
-nu_t) $ 
-\backslash
-label{labeltabloxqTNZ}} 
-\backslash
-resizebox{2.25in}{!}{ 
+resizebox{2.75in}{!}{ 
 \backslash
 begin{tabular}{l*{2}{c}} 
 \backslash
@@ -10733,9 +9839,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline logx      &    1.062
+hline logx      &   -0.134
 \backslash
-sym{***}&    1.024
+sym{***}&   -0.148
 \backslash
 sym{***}
 \backslash
@@ -10749,35 +9855,13 @@ sym{***}
 \backslash
 _mean
 \backslash
-_A0&  -0.0365
+_A0&  0.00795
 \backslash
-sym{*}  &  -0.0171
-\backslash
-sym{*}  
+sym{*}  & -0.00235         
 \backslash
 
 \backslash
-           &  (0.029)         &  (0.012)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&    0.123
-\backslash
-sym{*}  &   0.0631
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.038)         &  (0.005)         
+           &  (0.016)         &  (0.455)         
 \backslash
 
 \backslash
@@ -10789,15 +9873,35 @@ _cost
 \backslash
 _ne
 \backslash
-_nonfood&   -0.183
+_food&   -0.141
 \backslash
-sym{*}  &   -0.109
+sym{***}&  -0.0320
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.027)         &  (0.000)         
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne
+\backslash
+_nonfood&    0.205
+\backslash
+sym{***}&    0.121
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -10805,15 +9909,13 @@ sym{***}
 \backslash
 _occupation
 \backslash
-_rank&  -0.0564
+_rank&   0.0160
 \backslash
-sym{**} &  -0.0256
-\backslash
-sym{**} 
+sym{**} &  0.00268         
 \backslash
 
 \backslash
-           &  (0.007)         &  (0.005)         
+           &  (0.006)         &  (0.605)         
 \backslash
 
 \backslash
@@ -10821,31 +9923,47 @@ sym{**}
 \backslash
 _education
 \backslash
-_rank&  0.00171         &  -0.0121         
+_rank&  0.00596         &   0.0125
+\backslash
+sym{**} 
 \backslash
 
 \backslash
-           &  (0.944)         &  (0.220)         
+           &  (0.268)         &  (0.004)         
 \backslash
 
 \backslash
- age       &  0.00197
+ age       &-0.000983
 \backslash
-sym{*}  &  0.00153
+sym{***}&-0.000695
 \backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.013)         &  (0.000)         
+sym{**} 
 \backslash
 
 \backslash
- rural
+           &  (0.000)         &  (0.003)         
 \backslash
-_wards&    0.409
+
 \backslash
-sym{***}&    0.171
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural & -0.00737         &                  
+\backslash
+
+\backslash
+           &  (0.527)         &                  
+\backslash
+
+\backslash
+ hsize     &  0.00975
+\backslash
+sym{***}&   0.0160
 \backslash
 sym{***}
 \backslash
@@ -10855,21 +9973,17 @@ sym{***}
 \backslash
 
 \backslash
- hsize     & 0.000760         &0.0000553         
-\backslash
-
-\backslash
-           &  (0.913)         &  (0.985)         
-\backslash
-
-\backslash
  
 \backslash
-_cons    &   -0.351         &  0.00458         
+_cons    &    1.523
+\backslash
+sym{***}&    1.442
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.623)         &  (0.986)         
+           &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -10879,7 +9993,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     2034         &     1807         
+)     &     1326         &     1679         
 \backslash
 
 \backslash
@@ -10936,785 +10050,7 @@ end{table}
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Nigeria: Low totexp $ log(
-\backslash
-nu_t) $ 
-\backslash
-label{labeltabhixqTNZ}} 
-\backslash
-resizebox{2.25in}{!}{  
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &    1.053
-\backslash
-sym{***}&    1.103
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  -0.0209
-\backslash
-sym{**} &  -0.0514
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.003)         &  (0.010)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&   0.0198         &  0.00926         
-\backslash
-
-\backslash
-           &  (0.073)         &  (0.787)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&  -0.0541
-\backslash
-sym{***}& -0.00955         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.745)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank& -0.00192         &  -0.0216         
-\backslash
-
-\backslash
-           &  (0.860)         &  (0.438)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank& -0.00644         &  -0.0181         
-\backslash
-
-\backslash
-           &  (0.058)         &  (0.065)         
-\backslash
-
-\backslash
- age       & 0.000503         & -0.00188
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.082)         &  (0.031)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&   0.0583
-\backslash
-sym{***}&   0.0372         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.366)         
-\backslash
-
-\backslash
- hsize     &  0.00231         &  0.00657         
-\backslash
-
-\backslash
-           &  (0.183)         &  (0.209)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -0.343
-\backslash
-sym{**} &   -0.705         
-\backslash
-
-\backslash
-           &  (0.009)         &  (0.066)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     1989         &     2055         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Tanzania: High totexp $ log(
-\backslash
-nu_t) $ 
-\backslash
-label{labeltabloxqNGR}} 
-\backslash
-resizebox{2.25in}{!}{  
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2014}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &    0.926
-\backslash
-sym{***}&    0.903
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0& -0.00246         & -0.00859         
-\backslash
-
-\backslash
-           &  (0.683)         &  (0.140)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&    0.253
-\backslash
-sym{***}&    0.234
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&   -0.163
-\backslash
-sym{***}&   -0.164
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank& -0.00784         &-0.000941         
-\backslash
-
-\backslash
-           &  (0.261)         &  (0.888)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank& -0.00401         & -0.00952         
-\backslash
-
-\backslash
-           &  (0.493)         &  (0.060)         
-\backslash
-
-\backslash
- age       &  0.00130
-\backslash
-sym{***}& 0.000864
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.006)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&    0.118
-\backslash
-sym{***}&   0.0791
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- hsize     &  0.00912
-\backslash
-sym{***}&  0.00967
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -0.551         &    0.154         
-\backslash
-
-\backslash
-           &  (0.086)         &  (0.582)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     2034         &     1806         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[htbp]
-\backslash
-centering 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi} 
-\backslash
-caption{Nigeria: High totexp $ log(
-\backslash
-nu_t)  $ 
-\backslash
-label{labeltabhixqNGR}} 
-\backslash
-resizebox{2.25in}{!}{  
-\backslash
-begin{tabular}{l*{2}{c}} 
-\backslash
-hline
-\backslash
-hline           &
-\backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{2015}
-\backslash
-
-\backslash
- 
-\backslash
-hline logx      &    0.981
-\backslash
-sym{***}&    0.979
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_A0&  -0.0315
-\backslash
-sym{***}&  -0.0278
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_food&   0.0607
-\backslash
-sym{***}&   0.0690
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne
-\backslash
-_nonfood&  -0.0511
-\backslash
-sym{***}&  -0.0372
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_occupation
-\backslash
-_rank&  -0.0207
-\backslash
-sym{***}&  -0.0228
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- max
-\backslash
-_education
-\backslash
-_rank& -0.00407
-\backslash
-sym{*}  & -0.00595
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.044)         &  (0.011)         
-\backslash
-
-\backslash
- age       &-0.000599
-\backslash
-sym{**} &0.0000161         
-\backslash
-
-\backslash
-           &  (0.007)         &  (0.943)         
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&   0.0431
-\backslash
-sym{***}&   0.0385
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- hsize     &  0.00798
-\backslash
-sym{***}&  0.00719
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    0.250
-\backslash
-sym{*}  &  -0.0127         
-\backslash
-
-\backslash
-           &  (0.036)         &  (0.915)         
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-(N
-\backslash
-)     &     2039         &     2055         
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-hline 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-textit{p}-values in parentheses}
-\backslash
-
-\backslash
- 
-\backslash
-multicolumn{3}{l}{
-\backslash
-footnotesize 
-\backslash
-sym{*} 
-\backslash
-(p<0.05
-\backslash
-), 
-\backslash
-sym{**} 
-\backslash
-(p<0.01
-\backslash
-), 
-\backslash
-sym{***} 
-\backslash
-(p<0.001
-\backslash
-)}
-\backslash
-
-\backslash
- 
-\backslash
-end{tabular} } 
-\backslash
-end{table} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
+==
 \end_layout
 
 \begin_layout Standard
