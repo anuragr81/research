@@ -81,9 +81,10 @@ if settings[settings_name]['operation'] == 'hilo':
         remove_if_exists(hi_file)
         
         try :
-            
-            retcode=subprocess.check_call(["Rscript", "split_data.R",source_data[file_field],
-                                           settings[settings_name]['split_field'],lo_file,hi_file])
+            command_to_run=["Rscript", "split_data.R",source_data[file_field],
+                                           settings[settings_name]['split_field'],lo_file,hi_file]
+            print("Running:%s"% ' '.join(command_to_run))
+            retcode=subprocess.check_call(command_to_run)
             
         except Exception as e:
             raise e
@@ -107,7 +108,7 @@ if settings[settings_name]['operation'] == 'hilo':
                                    data_files['file1'][ftype],
                                    data_files['file2'][ftype],
                                    data_files['file3'][ftype]]
-        print(cmdline)
+        print("Running:%s"% ' '.join(cmdline))
         retcode=subprocess.check_call(cmdline)
         if (os.path.getmtime(temp_file) <time_before_call):
             raise RuntimeError("File Pointed to is before the call")

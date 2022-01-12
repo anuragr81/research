@@ -8,7 +8,7 @@ display "file3=`file3'"
 
 * use "C:\local_files\research\consumption\lsms\data\ngr_df2010.dta", clear
 * use `file1', clear
-* eststo, title (2010): quietly heckman `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar' max_occupation_rank max_education_rank age i.is_urban, select (has_nu = logx lnA0 `foodpricevar' hsize i.is_urban)
+* eststo, title (2010): quietly heckman `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar' max_occupation_rank max_education_rank age i.is_urban, select (has_nu = logx lnA0 `foodpricevar' hsize i.is_urban) twostep
 
 
 *use "C:\local_files\research\consumption\lsms\data\ngr_df2012.dta", clear
@@ -16,7 +16,7 @@ use `file2', clear
 
 gen log_q_ne_x = log_q_ne - log(hsize)
 
-eststo, title (2012): quietly heckman `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar' max_occupation_rank max_education_rank age i.is_urban, select (has_nu = logx lnA0 `foodpricevar' hsize i.is_urban)
+eststo, title (2012): quietly heckman `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar' max_occupation_rank max_education_rank age i.is_urban, select (has_nu = logx lnA0 `foodpricevar' hsize i.is_urban) twostep
 
 
 *use "C:\local_files\research\consumption\lsms\data\ngr_df2014.dta", clear
@@ -24,7 +24,7 @@ use `file3', clear
 
 gen log_q_ne_x = log_q_ne - log(hsize)
 
-eststo, title (2014): quietly heckman `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar' max_occupation_rank max_education_rank age i.is_urban, select (has_nu = logx lnA0 `foodpricevar' hsize i.is_urban)
+eststo, title (2014): quietly heckman `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar' max_occupation_rank max_education_rank age i.is_urban, select (has_nu = logx lnA0 `foodpricevar' hsize i.is_urban) twostep
 
 
 esttab using c:/temp/resnu.tex, mtitle no p numbers nogaps compress title(Nigeria (selection): \$ `depvar' \$ \label{tab`depvar'NGR})
