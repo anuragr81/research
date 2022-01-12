@@ -776,24 +776,7 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
         dfdat <- dflist[[paste0("indivdat",year)]]
 
         datfields_wo_outoffood <- ddply(dfdat,.(region,district,ea),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0), n_ea= length(unique(hhid))) 
-        
-        out_of_foodhhs <- subset(dfdat[,c("hhid","region","district","outoffood","cost_ne_nonfood","cost_ne_food","hsize")],outoffood==1)
-        #out_of_food_at_wards_level <- subset(ddply(out_of_foodhhs,.(region,district,ward),summarise,n_outoffood=length(hhid), min_ne_food=mean(cost_ne_food),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
-        districts_data <- subset(ddply(out_of_foodhhs,.(region,district),summarise,n_outoffood=length(hhid), min_ne_food_x=mean(cost_ne_food/hsize),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
-        districts_data$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,districts_data$region, districts_data$district )
-       
-        
-        #ensure that S and E are not more refined than at district level
-        district_coordinates <- ddply(unique(dfdat[,c("region","district","S","E")]),.(region,district),summarise,S=mean(S),E=mean(E))
-        district_coordinates$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,district_coordinates$region, district_coordinates$district )
-        
-        # merge on the basis of closest district in the mapping m
-        out_of_food_at_district_level <- closest_loc_data (a=district_coordinates,m=districts_data,data_field="min_ne_food_x")
-        
-        out_of_food_at_district_level$region <- with ( out_of_food_at_district_level, sapply(as.character(loc),function(x){jsonlite::fromJSON(x)[1]}))
-        out_of_food_at_district_level$district <- with (out_of_food_at_district_level, sapply(as.character(loc),function(x){jsonlite::fromJSON(x)[2]}))
-        
-        
+        out_of_food_at_district_level <- get_outoffood_at_district_level(dfdata=dfdat)
         
         print("Using merge based on closest district with consumer having run out of food")
         datfields <- merge(datfields_wo_outoffood,out_of_food_at_district_level,by=c("region","district"), all.x=T) %>% mutate (r = log(mean_A0))
@@ -832,6 +815,16 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
         dfdat <- dflist[[paste0("indivdat",year)]]
         dfdat <- dfdat %>% mutate( high_educ = as.integer(max_education_rank>educ_pivot) , high_occup = as.integer(max_occupation_rank>occup_pivot))
         
+        out_of_food_at_district_level <- get_outoffood_at_district_level(dfdata=dfdat)
+        
+        print("Using merge based on closest district with consumer having run out of food")
+        dfdat <- merge(dfdat,out_of_food_at_district_level,by=c("region","district"), all.x=T)
+        
+        if (nrow(subset(dfdat,is.na(min_ne_food_x )))>0){
+          stop("Missing outoffood data for some districts or wards")
+        }
+        
+        
         bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06)
         dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
         
@@ -849,6 +842,7 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
         #rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>%  mutate (Ar_occup=lnA0-r_occup)
         #rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate (Ar_educ=lnA0-r_educ)
         rd <-subset(rd,!is.na(r))
+        rd$loc <- NULL
         res[[paste0("df",year)]] <- rd
       }
       
@@ -862,6 +856,25 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   return(res)
 }
 
+get_outoffood_at_district_level <- function(dfdata){
+  
+  out_of_foodhhs <- subset(dfdata[,c("hhid","region","district","outoffood","cost_ne_nonfood","cost_ne_food","hsize")],outoffood==1)
+  
+  districts_data <- subset(ddply(out_of_foodhhs,.(region,district),summarise,n_outoffood=length(hhid), min_ne_food_x=mean(cost_ne_food/hsize),min_ne_nonfood=mean(cost_ne_nonfood)), n_outoffood>=1)
+  districts_data$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,districts_data$region, districts_data$district )
+  
+  
+  #ensure that S and E are not more refined than at district level
+  district_coordinates <- ddply(unique(dfdata[,c("region","district","S","E")]),.(region,district),summarise,S=mean(S),E=mean(E))
+  district_coordinates$loc <- mapply(function(r,d) { jsonlite::toJSON( c(r,d) ) } ,district_coordinates$region, district_coordinates$district )
+  
+  # merge on the basis of closest district in the mapping m
+  out_of_food_at_district_level <- closest_loc_data (a=district_coordinates,m=districts_data,data_field="min_ne_food_x")
+  
+  out_of_food_at_district_level$region <- with ( out_of_food_at_district_level, sapply(as.character(loc),function(x){jsonlite::fromJSON(x)[1]}))
+  out_of_food_at_district_level$district <- with (out_of_food_at_district_level, sapply(as.character(loc),function(x){jsonlite::fromJSON(x)[2]}))
+  return(out_of_food_at_district_level)
+}
 
 run_non_parametric_regression_for_A <- function(dfslist,year,sp,theta,phi)
 {
