@@ -116,7 +116,7 @@ def add_at_nth_column(st,n_index,data,allow_append =True):
 def parse_list(st):
     res= []
     for x  in st:
-          res.append(parse_struct(x))
+        res.append(parse_struct(x))
     return res
 
 def parse_struct(st):
@@ -125,7 +125,14 @@ def parse_struct(st):
             return st
         
         if len(st)>2:
-            raise ValueError("Not a tree")
+            if isinstance(st,list):
+                return parse_list(st)
+            else:
+                raise ValueError("Not a tree")
+                
+        if len(st)==1:
+            return parse_struct(st[0])
+
         if isinstance(st[0],list):
             raise ValueError("Must be a scalar")
             
@@ -178,12 +185,22 @@ def parse_struct_old(st):
 
 
 def color_for_index(ci):
-    return {0:'Black',1:'DarkRed',2:'Crimson',3:'Chocolate',
+    general_dict = {0:'Black',1:'DarkRed',2:'Crimson',3:'Chocolate',
             4:'DarkOliveGreen',5:'Green',6:'DeekSkyBlue',
             7:'DodgerBlue',8:'MediumBlue',9:'Navy',10:'Violet',11:'Purple',
-            12:'Magenta'}[ci]
+            12:'Magenta'}
+    narrow_dict = {0:'Black',1:'Black',2:'Crimson',3:'Chocolate',
+            4:'Green',5:'DeekSkyBlue',
+            6:'DodgerBlue',7:'Navy',8:'Violet',9:'Purple',
+            10:'Magenta'}
+    return narrow_dict[ci]
+    
+    
+    
 
 def text_in_colours(text,colorIndex,prefix=''):
+    if colorIndex <= 1:
+        prefix = "&nbsp;&nbsp;"
     return prefix+'<span style="color:'+color_for_index(colorIndex)+'">'+text+'</span>'
 
 def colored_html(st,colorIndex=0,paths=[]):
@@ -230,7 +247,7 @@ def write_into_file(text):
 #test_add_at_nth_columns()
 #sys.exit(0)
         
-b = pd.read_excel('c:/temp/test.xlsx')
+b = pd.read_excel('c:/temp/test3.xlsx')
 #b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/ashtadhyayi_chapter1_2.xlsx')
 nrows = b.shape[0]
 N=b.shape[1]
@@ -254,5 +271,5 @@ print(struct)
 dict_struct =parse_struct(struct)
 pprint(dict(dict_struct))
 text=colored_html(dict_struct)
-print(text)
+#print(text)
 write_into_file(', '.join(text))
