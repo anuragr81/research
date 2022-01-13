@@ -99,6 +99,7 @@ def add_at_nth_column(st,n_index,data,allow_append =True):
         if st :
             if isinstance(st[-1],list):           
                 st[-1].append(data)
+                #st[-1]= add_at_nth_column(st[-1], 0,data)
             else:
                 #create a new tree form the last node
                 old_data_to_be_nested=st[-1]
@@ -112,7 +113,30 @@ def add_at_nth_column(st,n_index,data,allow_append =True):
     return st
     #    raise ValueError("Invalid insert")
 
+def parse_list(st):
+    res= []
+    for x  in st:
+          res.append(parse_struct(x))
+    return res
+
 def parse_struct(st):
+    if st:
+        if not isinstance(st,list):
+            return st
+        
+        if len(st)>2:
+            raise ValueError("Not a tree")
+        if isinstance(st[0],list):
+            raise ValueError("Must be a scalar")
+            
+        if isinstance(st[1],list):
+            return OrderedDict({st[0]:parse_list(st[1])})
+        else:
+            return st
+    else:
+        return st
+    
+def parse_struct_old(st):
     """
     Build a structure of form {key:[value1,value2]} where value1 could be
      another structure of the same form.
@@ -120,6 +144,9 @@ def parse_struct(st):
     if st:
         if isinstance(st,list):
             if len(st)>1:
+                # before treating every element as potential root
+                # treat as the list of sub-trees
+                
                 # first node in the list is the root of the sub-tree to be followed
                 if not isinstance(st[0],list):
                     new_root = OrderedDict({st[0]:[]})
@@ -222,9 +249,9 @@ for i in range(nrows):
             results = results + [(j+1,d) for d in str(data_to_add).split(',')]
             for d in str(data_to_add).split(','):
                 struct=add_at_nth_column(struct,j,d)
-pprint(struct)
+print(struct)
 
-dict_struct =parse_struct(['root',struct])
+dict_struct =parse_struct(struct)
 pprint(dict(dict_struct))
 text=colored_html(dict_struct)
 print(text)
