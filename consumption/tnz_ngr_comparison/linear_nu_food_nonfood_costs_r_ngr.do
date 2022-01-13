@@ -3,7 +3,7 @@
 * eststo, title (2010): quietly nl (nu  = {b0=.1}*(r^{b1=.5}))
 
 
-* REPLACE i.is_urban with i.is_urban for EA and vice versa
+* REPLACE rural_wards with rural_wards for EA and vice versa
 
 
 args depvar foodpricevar nonfoodpricevar file1 file2 file3 
@@ -15,21 +15,21 @@ display "file3=`file3'"
 
 * use "C:\local_files\research\consumption\lsms\data\ngr_df2010.dta", clear
 * use `file1', clear
-* eststo, title (2010): quietly reg `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar'  max_occupation_rank max_education_rank age i.is_urban hsize
+* eststo, title (2010): quietly reg `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar'  max_occupation_rank max_education_rank age rural_wards hsize
 
 *use "C:\local_files\research\consumption\lsms\data\ngr_df2012.dta", clear
 use `file2', clear
 
 gen log_q_ne_x = log_q_ne - log(hsize)
 
-eststo, title (2012): quietly reg `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar'  max_occupation_rank max_education_rank age i.is_urban hsize
+eststo, title (2012): quietly reg `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar'  max_occupation_rank max_education_rank age rural_wards hsize
 
 *use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
 use `file3', clear
 
 gen log_q_ne_x = log_q_ne - log(hsize)
 
-eststo, title (2015): quietly reg `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar'  max_occupation_rank max_education_rank age i.is_urban hsize
+eststo, title (2015): quietly reg `depvar' logx log_mean_A0 `foodpricevar' `nonfoodpricevar'  max_occupation_rank max_education_rank age rural_wards hsize
 
 
 esttab using c:/temp/resnu.tex, mtitle no p numbers nogaps compress title(Nigeria: \$ `depvar' \$ \label{tab`depvar'NGR}) 
