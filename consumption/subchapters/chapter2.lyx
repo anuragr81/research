@@ -4321,7 +4321,22 @@ In the cost-function formulation,
 \end_layout
 
 \begin_layout Standard
-Here are a few observations from these results
+Here are a few observations from these results:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% log_mean_A, logx, rural, hsize, age, food-price,non-food-price,education-rank,
+ occupation-rank
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
@@ -4468,6 +4483,95 @@ noprefix "false"
 \end_layout
 
 \begin_layout Enumerate
+[logx] A high consumption 
+\begin_inset Formula $log(\nu_{t})$
+\end_inset
+
+ is associated with both higher 
+\family typewriter
+\size small
+logx
+\family default
+\size default
+ and lower assets in both Nigeria and Tanzania (we revisit this with poor
+ and rich sub-samples in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:HiLo"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The per-head non-food consumption proportion 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ - on the other hand -drops for consumers in both Tanzania and Nigeria (see
+ the significance of 
+\family typewriter
+\size small
+logx
+\family default
+\size default
+ in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabq_neNGR_district}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tablog_q_neNGR}
+\end_layout
+
+\end_inset
+
+ for Nigeria and Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabq_neTNZ_district}
+\end_layout
+
+\end_inset
+
+ , 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tablog_q_neTNZ}
+\end_layout
+
+\end_inset
+
+ for Tanzania).
+\end_layout
+
+\begin_layout Enumerate
 [rural] In both Tanzania and Nigeria, the districts with more rural areas
  seem to have have a higher excess 
 \begin_inset Formula $\nu_{t}$
@@ -4487,6 +4591,7 @@ noprefix "false"
  effects in the country.
  In both the countries, rural consumers more generally seem to be spending
  the excess predominantly on food.
+ 
 \end_layout
 
 \begin_layout Enumerate
@@ -4752,95 +4857,6 @@ ref{tabw_neTNZ}
 
 \end_deeper
 \begin_layout Enumerate
-[logx] A high consumption 
-\begin_inset Formula $log(\nu_{t})$
-\end_inset
-
- is associated with both higher 
-\family typewriter
-\size small
-logx
-\family default
-\size default
- and lower assets in both Nigeria and Tanzania (we revisit this with poor
- and rich sub-samples in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:HiLo"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- The per-head non-food consumption proportion 
-\begin_inset Formula $w_{nonfood}$
-\end_inset
-
- - on the other hand -drops for consumers in both Tanzania and Nigeria (see
- the significance of 
-\family typewriter
-\size small
-logx
-\family default
-\size default
- in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabq_neNGR_district}
-\end_layout
-
-\end_inset
-
-, 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tablog_q_neNGR}
-\end_layout
-
-\end_inset
-
- for Nigeria and Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabq_neTNZ_district}
-\end_layout
-
-\end_inset
-
- , 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tablog_q_neTNZ}
-\end_layout
-
-\end_inset
-
- for Tanzania).
-\end_layout
-
-\begin_layout Enumerate
 [education-rank] The role of education ranks seems higher in Tanzania than
  Nigeria.
  This suggests that consumer lifestyles are more segregated by education
@@ -4869,6 +4885,21 @@ name "subsec:HiLo"
 \end_inset
 
 Differences in richer and poorer sub-samples
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% log_mean_A, logx, rural, hsize, age, food-price,non-food-price,education-rank,
+ occupation-rank
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4924,6 +4955,19 @@ To inspect the effect of having high or low asset possession on non-durable
 \end_inset
 
  at the EA level in Tanzania suggesting lower non-food excess in rural Tanzania.
+ Looking at the coefficients for has_excess at the EA level, we see that
+ the effect of is_rural is stronger for higher assets half for 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ in Tanzania (the effect of is_rural is not significant for 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+) suggesting that rural consumers with higher assets are significantly more
+ likely to have an excess in the rural areas.
+ For Nigeria, we see on the other hand that urban EAs are more likely to
+ have higher excess.
 \end_layout
 
 \begin_layout Enumerate
@@ -5038,54 +5082,102 @@ ref{tabq_loA_neNGR}
 
 \end_inset
 
- for the lower asset half) .
- This suggests that the needs don't scale up at lower-asset levels in both
- Tanzania and Nigeria.
- In other words,
+ for the lower asset half).
+ This suggests that households with less assets are more likely to have
+ excess in Nigeria than in Tanzania (see the coefficients in the has_excess).
+ Given that the effect of hsize on the non-food component 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ also becomes stronger in Tanzania for consumer with higher assets, this
+ also suggests that non-food expenditure scales up with higher needs (number
+ of family members) only for consumers with higher assets in Tanzania.
 \end_layout
 
 \begin_layout Enumerate
-The effect of age becomes slightly clearer in the sub-samples.
- More particularly, the effect of age on 
-\begin_inset Formula $log(\nu_{t})$
+[food non-food prices on 
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
- in Nigeria is very weak for asset-richer half of the population in Nigeria
- (see Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabloghiAqneNGR}
+]
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+[food prices on 
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
-) - but the role of age in Nigeria for the asset-poorer sub-population (see
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tablogloAqneNGR}
-\end_layout
-
+] At EA level, higher-food consumption averages correspond to higher 
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
-) is not different from that in Tanzania.
+ in the higher asset half of Nigeria but this effect weaker everywhere else.
+ Higher food price regions means less likelihood of having excess throughout
+ (see coefficients of food-averages for has_excess )
 \end_layout
 
 \begin_layout Enumerate
-The role of occupation rank is also more significant only for richer half
- of the population in both economies.
- This indicates how lower occupation-ranks form the majority of asset-poorer
- sub-sample for both Nigeria and Tanzania.
+[non-food prices on 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+] Except for the higher-asset half in Tanzania, the high non-food averages
+ tend to reduce 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+.
+ The non-food averages do not have a significant effect on 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ in the higher asset half for Tanzania - suggesting that the excess does
+ not falls with rising average non-food expenditure for the higher asset-half
+ in Tanzania.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+[food nonfood-prices on 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+] The effect of non-food or food-averages is not significantly different
+ across asset-halves in both Nigeria and Tanzania.
+\end_layout
+
+\begin_layout Enumerate
+[age]Age has significant effect on excess 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ in both higher and asset halves in Tanzania while it has little significance
+ in Nigeria.
+ The effect of age on 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ is weaker in Tanzania in the higher asset half.
+\end_layout
+
+\begin_layout Enumerate
+[education_rank]
+\end_layout
+
+\begin_layout Enumerate
+[occupation_rank] The statistical significance of occupation rank 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ is higher at the district level than at the EA level while it does not
+ have a significant differences across asset-halves for 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ .
+ This suggests that higher occupational ranks may be clustered in the districts
+ that also provide more non-food consumption opportunities.
 \end_layout
 
 \begin_layout Standard
