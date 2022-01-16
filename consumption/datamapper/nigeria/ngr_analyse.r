@@ -475,8 +475,9 @@ add_rural_mapping_for_districts <- function(ngr,year)
 {
   if (year == 2010){
     ngr[["df2010"]]$isurban <- as.integer(ngr[["df2010"]]$is_urban==1)
+    ngr[["df2010"]]$rural_wards <- NULL
     rural_wards_df = ddply(unique(ngr$df2010[c("B","region","district","ea","isurban")]),.(B),summarise,rural_wards=1-sum(isurban)/length(isurban))
-    result = merge(ngr$df2010 , rural_wards_df,by=c("B"),all.x=T)
+    result = merge(ngr[["df2010"]] , rural_wards_df,by=c("B"),all.x=T)
     if (nrow(subset(result,is.na(rural_wards))) >0){
       stop(paste("Missing rural_wards data for year:",year))
     }
@@ -485,8 +486,9 @@ add_rural_mapping_for_districts <- function(ngr,year)
   } 
   if (year == 2012){
     ngr[["df2012"]]$isurban <- as.integer(ngr[["df2012"]]$is_urban==1)
+    ngr[["df2012"]]$rural_wards <- NULL
     rural_wards_df = ddply(unique(ngr$df2012[c("B","region","district","ea","isurban")]),.(B),summarise,rural_wards=1-sum(isurban)/length(isurban))
-    result = merge(ngr$df2012 , rural_wards_df,by=c("B"),all.x=T)
+    result = merge(ngr[["df2012"]] , rural_wards_df,by=c("B"),all.x=T)
     if (nrow(subset(result,is.na(rural_wards))) >0){
       stop(paste("Missing rural_wards data for year:",year))
     }
@@ -495,8 +497,9 @@ add_rural_mapping_for_districts <- function(ngr,year)
   }
   if (year == 2015){
     ngr[["df2015"]]$isurban <- as.integer(ngr[["df2015"]]$is_urban==1)
+    ngr[["df2015"]]$rural_wards <- NULL
     rural_wards_df = ddply(unique(ngr$df2015[c("B","region","district","ea","isurban")]),.(B),summarise,rural_wards=1-sum(isurban)/length(isurban))
-    result = merge(ngr$df2015 , rural_wards_df,by=c("B"),all.x=T)
+    result = merge(ngr[["df2015"]] , rural_wards_df,by=c("B"),all.x=T)
     if (nrow(subset(result,is.na(rural_wards))) >0){
       stop(paste("Missing rural_wards data for year:",year))
     }
