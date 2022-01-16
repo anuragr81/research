@@ -11,7 +11,7 @@ source('lsms/lsms_loader.r');llc=lsms_loader(fu=fu,ln=lsms_normalizer,lgc=lgc)
 library(maps)
 library(ggplot2)
 library(ggrepel)
-
+library(acid)# for polarisation
 
 test <- function(){
   #dat <- nl@load_diary_file("../",2010,fu, ngr_normaliser, load_cost=TRUE)
@@ -376,12 +376,41 @@ add_fields_to_data <- function(use_ea,ngrdf2010,ngrdf2012,ngrdf2015)
   res[['df2015']] <- res[['df2015']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
   if (use_ea){
+    
+    #adding polarisation
+    res[["df2010"]]$ER <- NULL
+    pol2010<- ddply(unique(res[["df2010"]][,c("hhid","region","district","ea","lnA0")]),.(region,district,ea),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
+    res[["df2010"]] <- merge(res[["df2010"]],pol2010,by=c("region","district","ea"),all.x=T)
+    
+    res[["df2012"]]$ER <- NULL
+    pol2012<- ddply(unique(res[["df2012"]][,c("hhid","region","district","ea","lnA0")]),.(region,district,ea),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
+    res[["df2012"]] <- merge(res[["df2012"]],pol2012,by=c("region","district","ea"),all.x=T)
+    
+    res[["df2015"]]$ER <- NULL
+    pol2015<- ddply(unique(res[["df2015"]][,c("hhid","region","district","ea","lnA0")]),.(region,district,ea),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
+    res[["df2015"]] <- merge(res[["df2015"]],pol2015,by=c("region","district","ea"),all.x=T)
+    
     return(res)
   }  
   else{
     res[['df2010']] <- add_rural_mapping_for_districts(res,2010)
     res[['df2012']] <- add_rural_mapping_for_districts(res,2012)
     res[['df2015']] <- add_rural_mapping_for_districts(res,2015)
+    
+    
+    res[["df2010"]]$ER <- NULL
+    pol2010<- ddply(unique(res[["df2010"]][,c("hhid","region","district","lnA0")]),.(region,district),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
+    res[["df2010"]]<- merge(res[["df2010"]],pol2010,by=c("region","district"),all.x=T)
+    
+    res[["df2012"]]$ER <- NULL
+    pol2012<- ddply(unique(res[["df2012"]][,c("hhid","region","district","lnA0")]),.(region,district),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
+    res[["df2012"]]<- merge(res[["df2012"]],pol2012,by=c("region","district"),all.x=T)
+    
+    res[["df2015"]]$ER <- NULL
+    pol2015<- ddply(unique(res[["df2015"]][,c("hhid","region","district","lnA0")]),.(region,district),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
+    res[["df2015"]]<- merge(res[["df2015"]],pol2015,by=c("region","district"),all.x=T)
+    
+    
     return(res)
   }
   
@@ -583,6 +612,14 @@ choose_min_distance_with_data <- function(distances,datvec){
   
   return (result[1,]$data)
 }
+
+polarisation <- function(means,populations){
+  shares<-populations/sum(populations)
+  rho<-data.frame(means=means,shares=shares)
+  alpha<-1
+  return(polarisation.ER(alpha,rho,comp=FALSE)$P)
+}
+
 
 closest_loc_data <-function(a,m,data_field,use_test_data){
   m$data <- m[,data_field]
