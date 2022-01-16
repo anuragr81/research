@@ -4,6 +4,7 @@ library(dplyr)
 library(maps)
 library(ggplot2)
 library(ggrepel)
+library(acid) # for polarisation
 
 #library(moments) # for kurtosis
 setwd('c:/local_files/research/consumption/datamapper/')
@@ -1118,7 +1119,12 @@ check_shortnames <- function(dat,categs,ignore_list){
   }
 }
 
-
+polarisation <- function(means,populations){
+  shares<-populations/sum(populations)
+  rho<-data.frame(means=means,shares=shares)
+  alpha<-1
+  return(polarisation.ER(alpha,rho,comp=FALSE)$P)
+}
 
 get_split_costs <- function (categs_a , categs_b, dat , group_field) {
   if(is.element("w_a", colnames(dat))  ){
@@ -1559,12 +1565,40 @@ add_fields_to_data<-function(use_ea,tndf2010,tndf2012,tndf2014){
   res[['df2014']]$rural_wards <- NULL
   
   if (use_ea){
+    #adding polarisation
+    res[["df2010"]]$ER <- NULL
+    pol2010<- ddply(unique(res[["df2010"]][,c("hhid2010","region","district","ward","ea","lnA0")]),.(region,district,ward,ea),summarise,n=length(hhid2010),ER=polarisation(lnA0,rep(1,length(hhid2010))))
+    res[["df2010"]] <- merge(res[["df2010"]],pol2010,by=c("region","district","ward","ea"),all.x=T)
+    
+    res[["df2012"]]$ER <- NULL
+    pol2012<- ddply(unique(res[["df2012"]][,c("hhid2012","region","district","ward","ea","lnA0")]),.(region,district,ward,ea),summarise,n=length(hhid2012),ER=polarisation(lnA0,rep(1,length(hhid2012))))
+    res[["df2012"]] <- merge(res[["df2012"]],pol2010,by=c("region","district","ward","ea"),all.x=T)
+    
+    res[["df2014"]]$ER <- NULL
+    pol2014<- ddply(unique(res[["df2014"]][,c("hhid2014","region","district","ward","ea","lnA0")]),.(region,district,ward,ea),summarise,n=length(hhid2014),ER=polarisation(lnA0,rep(1,length(hhid2014))))
+    res[["df2014"]] <- merge(res[["df2014"]],pol2010,by=c("region","district","ward","ea"),all.x=T)
+
     return(res)
   } else{
-
+    
+    
     res[['df2010']] <- add_rural_mapping_for_districts(res,2010)
     res[['df2012']] <- add_rural_mapping_for_districts(res,2012)
     res[['df2014']] <- add_rural_mapping_for_districts(res,2014)
+    
+    
+    res[["df2010"]]$ER <- NULL
+    pol2010<- ddply(unique(res[["df2010"]][,c("hhid2010","region","district","lnA0")]),.(region,district),summarise,n=length(hhid2010),ER=polarisation(lnA0,rep(1,length(hhid2010))))
+    res[["df2010"]]<- merge(res[["df2010"]],pol2010,by=c("region","district"),all.x=T)
+    
+    res[["df2012"]]$ER <- NULL
+    pol2012<- ddply(unique(res[["df2012"]][,c("hhid2012","region","district","lnA0")]),.(region,district),summarise,n=length(hhid2012),ER=polarisation(lnA0,rep(1,length(hhid2012))))
+    res[["df2012"]]<- merge(res[["df2012"]],pol2012,by=c("region","district"),all.x=T)
+    
+    res[["df2014"]]$ER <- NULL
+    pol2014<- ddply(unique(res[["df2014"]][,c("hhid2014","region","district","lnA0")]),.(region,district),summarise,n=length(hhid2014),ER=polarisation(lnA0,rep(1,length(hhid2014))))
+    res[["df2014"]]<- merge(res[["df2014"]],pol2014,by=c("region","district"),all.x=T)
+    
     return(res)
   }
   
