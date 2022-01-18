@@ -104,7 +104,7 @@ theorems-sec
 \begin_body
 
 \begin_layout Title
-Status consumption and Asset Inequality: A comparative study
+Status consumption and Inequality: A comparative study
 \end_layout
 
 \begin_layout Abstract
@@ -521,10 +521,36 @@ end{quote}
  bound of necessary level of consumption.
  In other words, much the way poverty is defined at the level below which
  needs are definitely unmet for all consumers (qualifying them to be poor
- or dysfunctional), status consumption depends on an uppermost bound of
- necessary consumption so that the consumption below the level is considered
- necessary and all spending above the level is deemed status-related or
- wasteful.
+ or dysfunctional
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Sen 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SenInequalityReexamined1992"
+literal "false"
+
+\end_inset
+
+ defines poverty as 
+\begin_inset Quotes eld
+\end_inset
+
+the failure of basic capabilities to reach certain minimally acceptable
+ levels
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+), status consumption depends on an uppermost bound of necessary consumption
+ so that the consumption below the level is considered necessary and all
+ spending above the level is deemed status-related or wasteful.
  Such notions must extend to multiple dimensions as well - so that just
  the way a household can be said to suffer with health poverty but not food
  poverty, it could be gifted with status through education but cursed with
@@ -3139,16 +3165,16 @@ status open
 
 \begin_layout Plain Layout
 
-% heckman log_q_ne logx log_mean_A0 mean_cost_ne_food_x mean_cost_ne_nonfood_x
-  max_occupation_rank max_education_rank age hsize , select (has_nu = logx
+% heckman log_q_ne logx r_t mean_cost_ne_food_x mean_cost_ne_nonfood_x 
+ max_occupation_rank max_education_rank age hsize , select (has_nu = logx
  lnA0 hsize i.isrural)
 \end_layout
 
 \begin_layout Plain Layout
 
-% reg mills logx log_mean_A0 mean_cost_ne_food_x mean_cost_ne_nonfood_x
-  max_occupation_rank max_education_rank age hsize  if has_nu==1, robust
-  * significant multicollinearity
+% reg mills logx r_t mean_cost_ne_food_x mean_cost_ne_nonfood_x  max_occupation_
+rank max_education_rank age hsize  if has_nu==1, robust  * significant multicoll
+inearity
 \end_layout
 
 \end_inset
@@ -3320,36 +3346,46 @@ name "sec:Results"
 \end_layout
 
 \begin_layout Standard
-[Restating the question] We want to see if the consumers respond to their
- local ea or district, or they are separated by disparities in the ea or
- districts.
- The effect of relative income would be higher in urban areas - no doubt.
- But how does the quality consumption vary for the consumers across poverty.
- Do consumers increase consumption due to being in a rich area or do they
- compensate by being in a poorer region (so that poorer regions/localities
- show a higher ndc).
- Does asset polarisation i.e.
- separation tell us more? Distance from market could tell us something but
- we're looking at measures of isolation depending on assets.
- Is separation matters, then a more polarised population should show less
- (does polarisation vary in tanzania and nigeria)
-\end_layout
+We use the results of the above estimation (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Empirical-Method"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Standard
-Questions
-\end_layout
+\end_inset
 
-\begin_layout Enumerate
-Is polarisation of assets and of income higher in Nigeria than in Tanzania?
-\end_layout
+) to test - at the local enumeration-area (EA) level and the district level
+ - if the consumers have significantly different excess consumption after
+ accounting for income and asset-ownership level.
+ We use this to argue whether the status consumption would be separated
+ by disparities or not.
+ The essential question we ask if the consumers increase consumption due
+ to being in a rich area or do they compensate by being in a poorer region
+ with a higher excess consumption.
+ Before presenting the results from the estimation in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:ParametricRegressions"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Enumerate
-Does nu above needs overall depend on A alone
-\end_layout
+\end_inset
 
-\begin_layout Enumerate
-Does nu above needs become higher in richer regions after accounting for
- income in the area?
+, we use insights in the distribution of assets using a few non-parametric
+ approaches in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Nonparametric"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -3363,9 +3399,29 @@ A non-parametric view
 \end_layout
 
 \begin_layout Standard
-While the overall poverty levels may be similar in Nigeria and Tanzania,
- the extreme differences in Tanzania (particularly between the south of
- the country and the east) are in contrast with those in Nigeria.
+The overall poverty levels are similar in Nigeria and Tanzania - but the
+ asset-disparity does seem more extreme in Tanzania (particularly between
+ the south of the country and the east - see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:occupations_r_ngr"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for Nigeria and Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:occupations_r_tn"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for Tanzania).
  More specifically, the occupations associated with higher income seem far
  fewer in the hinterland than in the east coast of Tanzania (see Figure
  
@@ -3390,7 +3446,7 @@ noprefix "false"
 \end_inset
 
 ) , on the other hand, the income-disparities in occupations and asset-differenc
-es seem less extreme.
+es are less extreme.
  
 \end_layout
 
@@ -3445,10 +3501,8 @@ literal "false"
 \end_inset
 
 ).
- The primary reason for this the sparsity of income data.
- In the LSMS data used for Nigeria and Tanzania, the income data is not
- available for the entire survey population.
- This is partly due to significant informal sectors in the economies.
+ The primary reason for this the sparsity of income data - a problem aggravated
+ because of informal sectors of a significant size in the economies.
 \end_layout
 
 \end_inset
@@ -3489,70 +3543,28 @@ The regional disparities in economic conditions and population density provide
  a particular context to status differences in the economy - as the disparity
  in services as well as amenities across the country have strong implications
  for any consumption deemed status-related.
- A key interpretation of our model for status consumption is that status
- competitions are essentially non-overlapping between two groups of consumers
- when one has both extremely low asset-levels compared to the other and
- extremely low non-durable consumption levels as well.
- In other words, a consumer cannot be in a status competition with another
- consumer when she has both lower level of asset-richness and inferior (or
- deficient) non-durable consumption as well.
- With the south of Tanzania not having nearly the same level of electricity
- consumption nor comparable durable goods associated with electricity as
- the east of Tanzania, the non-durable consumption from the consumers in
- south of Tanzania is hardly in reference to the consumers in urban east
- of Tanzania.
- We use the parametric analysis to test for this effect in Tanzania and
- Nigeria.
-\end_layout
-
-\begin_layout Standard
-Since status concerns are necessarily localised, the non-durable consumption
- for consumers in the asset poor south and west are indeed much lower.
- On the other hand, despite lower incomes in the central north, the median
- net-asset worth of the individuals in regions such as Singida and Manyara
- could match up with that of the consumers in the east coast of Tanzania
- (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:occupations_r_tn"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- With the average asset-values and food average costs relatively more aligned
- in the central and eastern regions, the occupational/asset differences
- and non-durable consumption are more comparable between the two regions
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-In Tanzania, where we have data on subjective well-being for individuals,
- we also find that eastern regions have much higher perceptions and non-durable
- consumption excluding asset costs as well as high value of assets compared
- to central areas.
- Still, the consumers in southern regions have relatively higher reported
- satisfaction levels than the centre.
- While poverty may not influence subjective well-being so much in Tanzania,
- it cannot be ruled out that the poor are not in the same status competition
- as the rich.
- Not having a similar detail for Nigeria in the LSMS survey prevents us
- from comparing subjective well being data in the two economies.
-\end_layout
-
-\end_inset
-
-.
  
 \end_layout
 
 \begin_layout Standard
-As for the regional disparities, they appear less extreme in Nigeria even
- though the southern areas of the country seem to have more higher-paid
- occupations and a higher expenditure on non-durable expenditure overall
- (see Figure 
+Status concerns are necessarily localised and therefore it is evident that
+ the consumers that are far apart in distance are unlikely to be in a status
+ competition.
+ Looking at the non-durable consumption at local levels (finer that of the
+ a region), we see how local distribution of assets affects the excess consumpti
+on.
+ More particularly, a separation would be implied when the consumers with
+ asset-richness also have significantly higher excess consumption - thus
+ a consumer cannot be in a status competition with another consumer within
+ the local reference area.
+\end_layout
+
+\begin_layout Standard
+Such a disparities are more localised in Nigeria while being more extreme
+ in Tanzania.
+ Despite the southern areas of Nigeria having more higher-paid occupations
+ and a higher expenditure on non-durable expenditure overall (see Figure
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:occupations_r_ngr"
@@ -3562,12 +3574,10 @@ noprefix "false"
 
 \end_inset
 
-).
- Despite the differences in educational and occupational levels in between
- the north and south of the country, the disparity in asset ownership is
- not nearly as extreme as in Tanzania.
+), the disparity in asset ownership across regions is not nearly as extreme
+ as in Tanzania.
  The implications of this uniformity on non-durable consumption is discussed
- using a parametric approach in the Section 
+ using a parametric approach in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:ParametricRegressions"
@@ -3677,12 +3687,13 @@ As detailed in the previous sections,
 \begin_inset Formula $r_{t}$
 \end_inset
 
- is measured as the average asset value averages in the locality, 
+ is measured as the logarithm of the average asset value in the locality,
+ 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- as household's non-durable consumption excluding asset maintenance costs
- above minimal consumption in the area while 
+ as the logarithm of household's non-durable consumption excluding asset
+ maintenance costs above minimal consumption in the area while 
 \begin_inset Formula $p_{food}(r_{t})$
 \end_inset
 
@@ -3735,34 +3746,9 @@ max_education_rank
 \begin_inset Formula $r_{t}$
 \end_inset
 
- and other control variable are discussed in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabExcessLinearTNZ_w_nonfood_ne}
-\end_layout
-
-\end_inset
-
- for Tanzania and Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabExcessLinearNGR_w_nonfood_ne}
-\end_layout
-
-\end_inset
-
- for Nigeria.
- The results from Heckman selection outlined
+ and other control variable are presented both at the district level and
+ the EA level.
+ The results from a Heckman selection outlined
 \series bold
  
 \series default
@@ -3776,48 +3762,15 @@ noprefix "false"
 
 \end_inset
 
-.
- These results - comparable with the those for 
-\begin_inset Formula $w_{food}$
-\end_inset
-
- and 
-\begin_inset Formula $w_{nonfood}$
-\end_inset
-
- - are provided in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabExcessLinearTNZ_log_q_ne}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabExcessLinearNGR_log_q_ne}
-\end_layout
-
-\end_inset
-
-.
+ is also discussed for both district and EA levels.
+ Using the LR test results from the ML (maximum-likelihood) estimation for
+ the Heckman selection, we do note some evidence of a selection bias for
+ Nigeria.
  
 \end_layout
 
 \begin_layout Standard
-The control variables used in above results are listed in the following
- table:
+The above control variables are listed in the following table:
 \end_layout
 
 \begin_layout Standard
@@ -3830,7 +3783,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="10" columns="3">
+<lyxtabular version="3" rows="11" columns="3">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0.7in">
 <column alignment="center" valignment="top" width="2in">
@@ -3924,7 +3877,7 @@ logarithm of per-head total expenditure
 
 \family typewriter
 \size small
-log_mean_A0
+r_t
 \family default
 \size default
  
@@ -3938,6 +3891,41 @@ log_mean_A0
 \begin_layout Plain Layout
 logarithm of mean asset-ownership level in the 4-km radius area around the
  consumer district
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $log(A_{t})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+lnA0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -4190,7 +4178,14 @@ number of members in the household
 
 \family typewriter
 \size small
-rural_wards
+rural_wards, is_rural,
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+is_urban
 \end_layout
 
 \end_inset
@@ -4216,7 +4211,11 @@ the percentage of rural wards/eas in a district of consumer's residence
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Variables used in Results
+Variables used in Results with nu_t and 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ as dependent variables
 \end_layout
 
 \end_inset
@@ -4278,33 +4277,7 @@ food
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
- (used as dependent variables in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabExcessLinearTNZ_w_nonfood_ne}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabExcessLinearNGR_w_nonfood_ne}
-\end_layout
-
-\end_inset
-
- for Tanzania and Nigeria respectively) as follows
+ as follows
 \end_layout
 
 \begin_layout Standard
@@ -4347,7 +4320,8 @@ In the cost-function formulation,
 \end_layout
 
 \begin_layout Standard
-Here are a few observations from these results:
+Some observations from the results for each of the relevant control variables
+ are now discussed.
 \end_layout
 
 \begin_layout Standard
@@ -4366,7 +4340,10 @@ status open
 \end_layout
 
 \begin_layout Enumerate
-[log_mean_A0] While the role of 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ - While the role of 
 \family typewriter
 \size small
 max_occupation_rank
@@ -4375,14 +4352,14 @@ max_occupation_rank
  and
 \family typewriter
 \size small
- log_mean_A0
+ r_t
 \family default
 \size default
  is strong in both the countries, 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
- is more sensitive to assets and occupation rank in Tanzania(see Tables
+ is more sensitive to assets and occupation rank in Tanzania (see Tables
  
 \begin_inset ERT
 status open
@@ -4442,28 +4419,30 @@ ref{tablog_q_neTNZ}
 \end_inset
 
  in Tanzania.
- With 
-\begin_inset Formula $log(\nu_{t})$
-\end_inset
-
- , we see that 
+ Since 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- rises with averages of per-head food expenditures and falls per-head non-food
- expenditures.
- There seems some substitution between having more assets and having high
+ rises with averages of per-head food expenditures 
+\begin_inset Formula $p_{food}$
+\end_inset
+
+ and falls with per-head non-food expenditures 
+\begin_inset Formula $p_{nonfood}$
+\end_inset
+
+, there is some substitution between having more assets and having high
  
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- due to the negative coefficient of
+ (see the negative coefficient of
 \family typewriter
 \size small
- log_mean_A0
+ r_t
 \family default
 \size default
- in both the economies
+ in both the economies)
 \begin_inset Foot
 status open
 
@@ -4485,16 +4464,16 @@ on) against
 
 \end_inset
 
-- but the significance (both economic and statistical) of 
+, the significance (both economic and statistical) of 
 \family typewriter
 \size small
-log_mean_A0
+r_t
 \family default
 \size default
  becomes weaker as one goes from district to EA level in Tanzania.
  This suggests that concentration of assets influences consumption at district
  level in Tanzania in a way that it does not in Nigeria.
- We explore this effect in more details with the sub-samples having high
+ This effect is explored in more detail with the sub-samples having high
  and low assets in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4505,12 +4484,15 @@ noprefix "false"
 
 \end_inset
 
- .
+.
 \end_layout
 
 \begin_layout Enumerate
-[logx] A high consumption 
-\begin_inset Formula $log(\nu_{t})$
+\begin_inset Formula $log(x_{t})$
+\end_inset
+
+ - A high excess consumption 
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
  is associated with both higher 
@@ -4519,8 +4501,8 @@ noprefix "false"
 logx
 \family default
 \size default
- and lower assets in both Nigeria and Tanzania (we revisit this with poor
- and rich sub-samples in Section 
+ and lower assets in both Nigeria and Tanzania (we revisit this with asset-poor
+ and asset-rich sub-samples in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:HiLo"
@@ -4531,12 +4513,12 @@ noprefix "false"
 \end_inset
 
 ).
- The per-head non-food consumption proportion 
+ The non-food consumption proportion 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
- - on the other hand -drops for consumers in both Tanzania and Nigeria (see
- the significance of 
+ - on the other hand - drops with rising income for consumers in both Tanzania
+ and Nigeria (see the significance of 
 \family typewriter
 \size small
 logx
@@ -4595,11 +4577,35 @@ ref{tablog_q_neTNZ}
 \end_inset
 
  for Tanzania).
+ This suggests a predominance of food consumption the data - while consumers
+ with a higher total expenditure 
+\begin_inset Formula $log(x_{t})$
+\end_inset
+
+ raise their excess 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+, the proportion 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ does not continue to rise with higher 
+\begin_inset Formula $log(x_{t})$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Enumerate
-[rural] In both Tanzania and Nigeria, the districts with more rural areas
- seem to have have a higher excess 
+
+\family typewriter
+\size small
+is_rural/is_urban/rural_wards
+\family default
+\size default
+ - In both Tanzania and Nigeria, the districts with more rural areas seem
+ to have have a higher excess 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -4607,32 +4613,43 @@ ref{tablog_q_neTNZ}
  Looking at the finer EA level, we see however that the enumeration areas
  in urban areas have a higher excess compared to those in rural areas.
  More rural wards surrounding an urban district seem to provide an environment
- where the consumption is away from the minimal food-security level (separation?
-).
- Further, the non-food component 
+ where the consumption is away from the minimal food-security level.
+ This offers some evidence of a separation from urban areas.
+ In both the countries, rural consumers more generally seem to be spending
+ the excess predominantly on food but in Tanzania, we see that the non-food
+ component 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
- is lower for rural consumers in Tanzania, suggesting lower urbanisation
- effects in the country.
- In both the countries, rural consumers more generally seem to be spending
- the excess predominantly on food.
- 
+ is lower for rural consumers, suggesting lower urbanisation effects in
+ the country.
 \end_layout
 
 \begin_layout Enumerate
-[hsize]Larger family sizes present a consistent downward pressure on 
+
+\family typewriter
+\size small
+hsize - 
+\family default
+\size default
+Larger family sizes present a consistent downward pressure on 
 \family typewriter
 \size small
 has_excess 
 \family default
 \size default
-- family sizes do have an effect on whether there is excess consumption
+- since family sizes have an effect on whether there is excess consumption
  or not.
 \end_layout
 
 \begin_layout Enumerate
-[age] Although of weak economic significance, 
+
+\family typewriter
+\size small
+age -
+\family default
+\size default
+ Although of weak economic significance, 
 \family typewriter
 \size small
 age
@@ -4679,27 +4696,29 @@ noprefix "false"
 \end_layout
 
 \begin_layout Enumerate
-[food-price, non-food-price effects on 
+\begin_inset Formula $p_{food},p_{nonfood}$
+\end_inset
+
+ for 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
-]
+
 \end_layout
 
 \begin_deeper
 \begin_layout Enumerate
-[Food prices on 
+\begin_inset Formula $p_{food}$
+\end_inset
+
+ - For Nigeria, the higher food cluster-averages are associated with higher
+ 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
-] For Nigeria countries, higher food cluster-averages mean higher 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
-.
- For Tanzania, this is relationship is less clear.
- Further, the economic significance of food averages relative to the economic
- significance of non-food averages is lower for Nigeria (see Tables 
+ but the relationship is less clear for Tanzania.
+ The economic significance of food averages relative to the economic significanc
+e of non-food averages is lower for Nigeria (see Tables 
 \begin_inset ERT
 status open
 
@@ -4752,22 +4771,20 @@ ref{tablog_q_neTNZ}
 \end_inset
 
  ).
- The non-food consumption 
+ In other words, the non-food consumption 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- seems to changes more sharply with non-food averages as food-averages rise
- in Tanzania.
+ seems to change more sharply with food averages as food-averages rise in
+ Tanzania.
  This may be a result of a higher disparity in non-food consumption in Tanzania.
- 
 \end_layout
 
 \begin_layout Enumerate
-[non-food effects on 
-\begin_inset Formula $\nu_{t}$
+\begin_inset Formula $p_{nonfood}$
 \end_inset
 
-] For Nigeria, higher non-food cluster-averages mean lower 
+ - For Nigeria, the higher non-food cluster-averages mean a lower 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -4776,49 +4793,47 @@ ref{tablog_q_neTNZ}
 \end_inset
 
 ).
- In Tanzania, this effect is less clear - both at the EA and district levels.
- While the higher non-food consumption is clustered in both economies, the
- non-food consumption seems more concentrated in Tanzania.
- 
+ In Tanzania, this effect is again less clear at both EA and district levels.
 \end_layout
 
 \end_deeper
 \begin_layout Enumerate
-[food-prices, non-food effects on 
+\begin_inset Formula $p_{food},p_{nonfood}$
+\end_inset
+
+ for 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
-] 
+
 \end_layout
 
 \begin_deeper
 \begin_layout Enumerate
-[food prices on 
-\begin_inset Formula $w_{nonfood}$
+\begin_inset Formula $p_{food}$
 \end_inset
 
-] Areas with high food-expenditures have lower non-food proportion
+ - Areas with high food-expenditures correspond to a lower non-food proportion
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
  in both Nigeria and Tanzania.
- Expensive food regions - in other words - appear to decrease non-food budget
- share 
+ Expensive food regions - in other words - appear to decrease the non-food
+ budget share 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
  .
  While food (including its quality) may be more important to most consumers
  in both Nigeria and Tanzania, this seems largely an effect of limited opportuni
-ties for non-food consumption in rural areas.
+ties for non-food consumption in the rural areas.
 \end_layout
 
 \begin_layout Enumerate
-[non-food prices on 
-\begin_inset Formula $w_{nonfood}$
+\begin_inset Formula $p_{nonfood}$
 \end_inset
 
-] The expensive non-food regions increase non-food budget share (see Tables
+ - The expensive non-food regions increase non-food budget share (see Tables
  
 \begin_inset ERT
 status open
@@ -4878,26 +4893,37 @@ ref{tabw_neTNZ}
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
- at the district level.
+ at the district level in both the economies.
 \end_layout
 
 \end_deeper
 \begin_layout Enumerate
-[education-rank] The role of education ranks seems higher in Tanzania than
- Nigeria.
+
+\family typewriter
+\size small
+education_rank
+\family default
+\size default
+ - The role of education ranks seems higher in Tanzania than Nigeria.
  This suggests that consumer lifestyles are more segregated by education
  levels in Tanzania - likely due to individuals with high education levels
  being limited to fewer urban areas in the country.
 \end_layout
 
 \begin_layout Enumerate
-[occupation rank] Better occupation ranks tend to spend more on non-food
- components while the excess itself 
+
+\family typewriter
+\size small
+occupation_rank
+\family default
+\size default
+ - Better occupation ranks tend to spend more on non-food components while
+ the excess itself 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- declines due to more assets and more assets costs (justifying higher total
- needs-level costs) accumulated by those with higher asset costs.
+ declines due to more assets and higher assets costs (justifying higher
+ total needs-level costs).
  The effect of occupation rank becomes stronger for Tanzania - indicating
  that the occupation ranks are more concentrated in certain districts in
  Tanzania.
@@ -4933,56 +4959,127 @@ To inspect the effect of having high or low asset possession on non-durable
  consumption excluding asset costs in more detail, we estimate the results
  over two sub-samples having less than the median asset-possession level
  and higher.
+ We refer to the two halves as the lower and higher asset-richness halves.
 \end_layout
 
 \begin_layout Enumerate
-[log_mean_A0] The role of log_mean_A0 is stronger on 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ - The role of 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ is generally stronger on 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- in for the consumers having more than the median value of assets.
- For consumers with the lower than the median assets value, 
+ for the consumers having more than the median value of assets i.e.
+ the higher asset-half.
+ For consumers with the lower than the median assets value (the lower asset-half
+), 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- does not change significantly with log_mean_A0.
- This means that the excess is rather unaffected by the reference area for
- the those that are poor.
+ does not change significantly with 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+.
+ This suggests that the excess is rather unaffected by the reference area
+ for the those that are poor.
  Notice that splitting into higher and lower asset -groups, reduces the
- effect lnA0 has on has_excess (the variable indicating whether household
- has a significant excess or not).
- With significant high asset and low-asset states 
+ effect 
+\begin_inset Formula $log(A_{t})$
+\end_inset
+
+ has on 
+\family typewriter
+\size small
+has_excess
+\family default
+\size default
+ (the variable indicating whether household has a significant excess or
+ not).
 \end_layout
 
 \begin_layout Enumerate
-[logx] Compared to the economic significance of totexp (logx - the total
- expenditure) for excess 
+\begin_inset Formula $log(x_{t})$
+\end_inset
+
+ - Compared to the economic significance of 
+\family typewriter
+\size small
+logx
+\family default
+\size default
+ (the total expenditure) for excess 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- in the lower asset half in Nigeria, the economic significance of totexp
- is higher for higher assets half in Nigeria.
- This suggest that higher-asset consumers spend more of their totexp on
- excess.
- This effect reverses in Tanzania where the economic significance of totexp
- is lower for the higher assets half is lower - suggesting that more more
- consumers spend on excess in the lower asset half in Tanzania.
- This suggests some separation.
+ in the lower asset half in Nigeria, the economic significance of 
+\family typewriter
+\size small
+logx 
+\family default
+\size default
+is higher for the higher asset half in Nigeria.
+ This suggests the obvious implication that the higher-asset consumers spend
+ more of their total expenditure on excess.
+ However, this effect reverses in Tanzania where the economic significance
+ of 
+\family typewriter
+\size small
+logx 
+\family default
+\size default
+is lower for the higher assets half is lower - suggesting that more consumers
+ spend on excess in the lower asset half in Tanzania.
+ This points to another evidence of a separation of consumption in Tanzania.
 \end_layout
 
 \begin_layout Enumerate
-[rural] The rural dummy (rural_wards or is_rural) is not significant for
- excess 
+
+\family typewriter
+\size small
+is_rural/is_urban/rural_wards
+\family default
+\size default
+ - The rural factor variables (
+\family typewriter
+\size small
+rural_wards 
+\family default
+\size default
+and 
+\family typewriter
+\size small
+is_rural
+\family default
+\size default
+) are not significant for excess 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- - although it slightly significant for 
+ - although they are slightly significant for 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
- at the EA level in Tanzania suggesting lower non-food excess in rural Tanzania.
- Looking at the coefficients for has_excess at the EA level, we see that
- the effect of is_rural is stronger for higher assets half for 
+ at the EA level in Tanzania.
+ This again seems due to lower non-food excess opportunities in rural Tanzania.
+ Looking at the coefficients for 
+\family typewriter
+\size small
+has_excess 
+\family default
+\size default
+at the EA level, we see that the effect of 
+\family typewriter
+\size small
+is_rural 
+\family default
+\size default
+is stronger for higher assets half for 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -4997,13 +5094,19 @@ To inspect the effect of having high or low asset possession on non-durable
 \end_layout
 
 \begin_layout Enumerate
-[hsize] The role of 
+
 \family typewriter
 \size small
 hsize
 \family default
 \size default
- is stronger for the asset rich population in the Tanzania (see Tables 
+ - The role of 
+\family typewriter
+\size small
+hsize
+\family default
+\size default
+ is stronger for the asset rich half in Tanzania (see Tables 
 \begin_inset ERT
 status open
 
@@ -5110,45 +5213,76 @@ ref{tabq_loA_neNGR}
 
  for the lower asset half).
  This suggests that households with less assets are more likely to have
- excess in Nigeria than in Tanzania (see the coefficients in the has_excess).
- Given that the effect of hsize on the non-food component 
+ excess in Nigeria than in Tanzania (see the coefficients in the has_excess)
+ - suggesting lower relative excess (and subsistence level lifestyles) in
+ Tanzania.
+ Given that the effect of 
+\family typewriter
+\size small
+hsize 
+\family default
+\size default
+on the non-food component 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
- also becomes stronger in Tanzania for consumer with higher assets, this
- also suggests that non-food expenditure scales up with higher needs (number
- of family members) only for consumers with higher assets in Tanzania.
+ also becomes stronger in Tanzania for the consumer with higher assets,
+ this also suggests that non-food expenditure scales up with higher needs
+ (number of family members) better for consumers with higher assets in Tanzania.
 \end_layout
 
 \begin_layout Enumerate
-[food non-food prices on 
+
+\family typewriter
+\size small
+age
+\family default
+\size default
+ - Age has a significant effect on excess 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
-]
+ in both higher and asset halves in Tanzania while it has relatively little
+ significance in Nigeria.
+ Dominated by other factors, the effect of age on 
+\begin_inset Formula $w_{nonfood}$
+\end_inset
+
+ is weaker in Tanzania as well as in the higher asset half in Nigeria.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $p_{food},p_{nonfood}$
+\end_inset
+
+ for 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
 \begin_layout Enumerate
-[food prices on 
+\begin_inset Formula $p_{food}$
+\end_inset
+
+ - At the EA level, higher-food consumption averages correspond to higher
+ 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
-] At EA level, higher-food consumption averages correspond to higher 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- in the higher asset half of Nigeria but this effect weaker everywhere else.
- Higher food price regions means less likelihood of having excess throughout
- (see coefficients of food-averages for has_excess )
+ in the higher asset half of Nigeria but the effect is weaker everywhere
+ else.
+ Higher food price regions means less likelihood of having excess more generally
+ (see coefficients of food-averages for has_excess ).
 \end_layout
 
 \begin_layout Enumerate
-[non-food prices on 
-\begin_inset Formula $\nu_{t}$
+\begin_inset Formula $p_{nonfood}$
 \end_inset
 
-] Except for the higher-asset half in Tanzania, the high non-food averages
+ - Except for the higher-asset half in Tanzania, the high non-food averages
  tend to reduce 
 \begin_inset Formula $\nu_{t}$
 \end_inset
@@ -5159,36 +5293,31 @@ ref{tabq_loA_neNGR}
 \end_inset
 
  in the higher asset half for Tanzania - suggesting that the excess does
- not falls with rising average non-food expenditure for the higher asset-half
+ not fall with rising average non-food expenditure for the higher asset-half
  in Tanzania.
 \end_layout
 
 \end_deeper
 \begin_layout Enumerate
-[food nonfood-prices on 
+\begin_inset Formula $p_{food},p_{nonfood}$
+\end_inset
+
+ for 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
-] The effect of non-food or food-averages is not significantly different
- across asset-halves in both Nigeria and Tanzania.
+ - The effect of non-food or food-averages is not significantly different
+ across the asset-halves in both Nigeria and Tanzania.
 \end_layout
 
 \begin_layout Enumerate
-[age]Age has significant effect on excess 
-\begin_inset Formula $\nu_{t}$
-\end_inset
 
- in both higher and asset halves in Tanzania while it has little significance
- in Nigeria.
- The effect of age on 
-\begin_inset Formula $w_{nonfood}$
-\end_inset
-
- is weaker in Tanzania in the higher asset half.
-\end_layout
-
-\begin_layout Enumerate
-[education_rank] The education rank has some effect on 
+\family typewriter
+\size small
+education_rank
+\family default
+\size default
+ - The education rank has some effect on 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -5206,31 +5335,39 @@ ref{tabq_loA_neNGR}
 
  for slightly higher households is likely due to higher education levels
  concentrated in a fewer districts in Tanzania (relative to Nigeria).
- Therefore, the effect of education rank on 
+ The effect of education rank on 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
- is also strong- regardless of whether the consumer is in the higher or
- lower asset half.
+ is thus also strong- regardless of whether the consumer is in the higher
+ or lower asset half.
 \end_layout
 
 \begin_layout Enumerate
-[occupation_rank] The statistical significance of occupation rank 
+
+\family typewriter
+\size small
+occupation_rank 
+\family default
+\size default
+- The statistical significance of occupation rank 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
  is higher at the district level than at the EA level while it does not
- have a significant differences across asset-halves for 
+ exhibit significant differences across asset-halves for 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
  .
- This suggests that higher occupational ranks may be clustered in the districts
- that also provide more non-food consumption opportunities.
+ This suggests that higher occupational ranks clustered in fewer districts
+ generally provide more non-food consumption opportunities - an effect that
+ dominates the relevance of educational level differences at local levels.
 \end_layout
 
 \begin_layout Standard
-Considering the upper and lower halves of total expenditure, we find that
+Considering the upper and lower halves of total expenditure - which we refer
+ to as lower and higher totexp halves - we note the following observations
 \end_layout
 
 \begin_layout Standard
@@ -5249,34 +5386,72 @@ status open
 \end_layout
 
 \begin_layout Enumerate
-[log_mean_A0] The consumer with higher totexp (total expenditure) do not
- have significantly different non-food components in either of the countries
- - but the asset-richness of the reference has an effect on the consumers'
- excess in the higher totexp half in Tanzania.
+\begin_inset Formula $r_{t}$
+\end_inset
+
+- The consumer with higher totexp (total expenditure) do not have a significantl
+y different non-food proportion in either of the economies.
+ That said, the asset-richness of the reference has an effect on the consumers'
+ excess in the higher totexp half in Tanzania - suggesting a higher excess
+ and income in the urban areas of Tanzania.
 \end_layout
 
 \begin_layout Enumerate
-[logx] While the effect of logx on the excess does not change significantly
- across the lower and higher totexp halves in the two economies, the economic
- significance of logx on non-food proportion 
+\begin_inset Formula $log(x_{t})$
+\end_inset
+
+ - While the effect of 
+\family typewriter
+\size small
+logx 
+\family default
+\size default
+on excess 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ does not change significantly across the lower and higher totexp halves
+ in the two economies, the economic significance of 
+\family typewriter
+\size small
+logx 
+\family default
+\size default
+on non-food proportion 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
  is higher for the lower-totexp half in both Tanzania and Nigeria.
- The non-food proportions make a smaller part of consumers with higher-totexp
- - suggesting that the expenditure on non-food consumption is not nearly
- absent at lower levels of totexp.
+ This is due to the non-food proportions making a smaller part for consumers
+ with higher-totexp - suggesting that the expenditure on non-food consumption
+ is not insignificant at lower levels of totexp.
 \end_layout
 
 \begin_layout Enumerate
-[isrural] The effect of is_rural at EA level differs across the two economies.
- The consumer with higher totexp have high excess consumption in the rural
+
+\family typewriter
+\size small
+is_rural/is_urban/rural_wards
+\family default
+\size default
+ - The effect of 
+\family typewriter
+\size small
+is_rural 
+\family default
+\size default
+at EA level differs across the two economies.
+ The consumers with higher totexp have high excess consumption in the rural
  areas in Tanzania but in Nigeria, the effect of urban consumption dominates
  for consumers with high expenditure.
  This suggests that income is generally high in the urban areas in Nigeria.
  We also note that the rural consumers have a substantially lower non-food
- consumption in lower totexp for Tanzania - unlike in Nigeria where lower
- totexp half does not have significantly different non-food expenditures
+ consumption 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ in the lower totexp half for Tanzania - unlike in Nigeria where the lower
+ totexp half does not have a significantly different non-food expenditure
  (the effect of is_urban is weak on 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
@@ -5301,7 +5476,13 @@ status open
 \end_layout
 
 \begin_layout Enumerate
-[hsize] The lower-totexp is much likely to have less 
+
+\family typewriter
+\size small
+hsize
+\family default
+\size default
+ - The lower-totexp is much likely to have less 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -5310,12 +5491,15 @@ status open
 \end_layout
 
 \begin_layout Enumerate
-[food non-food prices on 
+\begin_inset Formula $p_{food},p_{nonfood}$
+\end_inset
+
+ for 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
-] High food per-head and non-food consumption averages does not have a strong
- effect on 
+ - High food per-head and non-food consumption averages does not have a
+ strong effect on 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -5325,17 +5509,26 @@ d with regional variations in Tanzania.
 \end_layout
 
 \begin_layout Enumerate
-[food non-food prices on 
+\begin_inset Formula $p_{food},p_{nonfood}$
+\end_inset
+
+ for 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
-] The food and non-food prices do not have a significant effect on the non-food
- componenets across the higher and lower totexp halves in either of the
- economies.
+ - The food and non-food prices do not have a significant effect on the
+ non-food components across the higher and lower totexp halves in either
+ of the economies.
 \end_layout
 
 \begin_layout Enumerate
-[age] For the lower totexp half, the effect of age is opposite on the excess
+
+\family typewriter
+\size small
+age
+\family default
+\size default
+ - For the lower totexp half, the effect of age is opposite on the excess
  
 \begin_inset Formula $\nu_{t}$
 \end_inset
@@ -5353,9 +5546,15 @@ d with regional variations in Tanzania.
 \end_layout
 
 \begin_layout Enumerate
-[education_rank] While education rank does not seem to have a signficant
- different across the lower and higher totexp half in either of the economies,
- the education rank has some effect on 
+
+\family typewriter
+\size small
+education_rank
+\family default
+\size default
+ - While education rank does not seem to have a signficant different across
+ the lower and higher totexp half in either of the economies, the education
+ rank has some effect on 
 \begin_inset Formula $w_{nonfood}$
 \end_inset
 
@@ -5365,8 +5564,14 @@ d with regional variations in Tanzania.
 \end_layout
 
 \begin_layout Enumerate
-[occupation_rank] Occupation rank mean less excess in higher totexp half
- and significantly higher non-food consumption in Nigeria.
+
+\family typewriter
+\size small
+occupation_rank
+\family default
+\size default
+ - Occupation rank mean less excess in higher totexp half and significantly
+ higher non-food consumption in Nigeria.
  This effect is much weaker for Tanzania.
 \end_layout
 
@@ -5375,79 +5580,26 @@ Robustness checks
 \end_layout
 
 \begin_layout Standard
-On running MLE, there is some evidence of selection bias for NGR.
-\end_layout
-
-\begin_layout Standard
-[Polarisation and Separation] Extreme asset differences themselves tell
- us that status consumption is going to be different.
- Does non-food being less controlled by assets tell us something about the
- extreme differences in Tanzania? This would need to be implied - at least
- intuitively - with the polarisation measures (this polarisation depends
- on identification between groups - to consider that in the current analysis
- we'll have to assume that there are no ethnic groupings and that asset-groups
- themselves are all that control the identification as well as antagonism.
- If we argue that consumers care about immediate reference and not about
- the reference richer than them, then we would experience lower status consumpti
-on i.e.
- 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- for the same 
-\begin_inset Formula $A_{t}$
-\end_inset
-
- when polarisation is higher.
- In this case, we would look for a significance for polarisation.
- High polarisation and high status consumption would mean that consumers
- do care about references more.
- This can be compared across TNZ and NGR.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% using neighborhood deprivation
-\end_layout
-
-\begin_layout Plain Layout
-
-% We have used the LS measure before to see whether w_i is driven by LS
- or not.
- We can see how the overall polarisation measures of assets are sensitive
- rather than the entire log(A).
- Our question is whether consumers compete with those with higher than the
- refernece or not - thus a higher or lower cluster could be more clearly
- identified by considering first whether assets are or less polarised in
- TNZ vs NGR.
- In terms of regression, nothing changes except that instead of log(A) we
- look for asset polarisation dummies or instead of prices we look for consumptio
-n polarised dummies.
-\end_layout
+We also include the measures of polarisation of assets values (rather than
+ measurements of inequality) to test if excess consumption is lowered in
+ references exhibiting high levels for polarisation in asset ownership.
+ The means relevant for Ray-Esteban 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Esteban1991OnTM"
+literal "false"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-The populations are nearly the same in the EA level - so we consider the
- means at the EA level and the total share of the the population.
- More consumers in an EA would correspond to a higher share.
- Richer EAs would have a higher mean.
-\end_layout
-
-\begin_layout Standard
-This can be done at the district level too - by taking district level means
- and district populations.
- We are see if more polarised EAs or polarised districts have a significance
- in addition to richness.
+ polarisation measure are the asset ownership levels (at the EA and district
+ levels) while distribution is simply the total share of the population.
+ Thus, more consumers in an EA (district) correspond to a higher share while
+ richer EAs (or districts) would imply a higher mean for the measure.
  The results show some relevance of polarisation for Nigeria - but not as
  much for Tanzania.
+ This suggests that more polarised assets influence consumption in Nigeria
+ but not so much in Tanzania.
+ This also confirm the evidence of separation at local levels in Tanzania.
 \end_layout
 
 \begin_layout Section
@@ -5461,29 +5613,8 @@ Conclusions
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% [Limits on analysis of coonsumption ] Given more income the consumers
- would increase food quality - (normative question).
- We know that consumers do depends on their immediate surrounding s- i.e.
- what is available and who they're connected with.
- Therefore, we would think they would avail food quality for two reasons
- i) that is all that they can avail ii) they prefer food quality over others.
- We know that food quality is higher in the city .
- So ii) is ruled out.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-[Segregation - are we observing it?] That status is shaped by both non-durable
- consumption excluding asset costs 
+Arguing that status is shaped by both non-durable consumption excluding
+ asset costs 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
@@ -5493,102 +5624,15 @@ es may not be overcome with
 \end_inset
 
  in status competitions.
- If there are no reported assets for a vast majority of the population this
- has two key implications - first, that the status competitions are simply
- not feasible between two groups if they are separated by region or social
- barriers leading to extreme asset differences.
+ More particularly, if there are no reported assets for a vast majority
+ of the population this view of status has two key implications - first,
+ that the status competitions are simply not feasible between two groups
+ if they are separated by extreme asset differences.
  Second, non-durable consumption (including food) might carry locally relevant
  status supported by comparisons among consumers with no-reported assets.
- As the extreme differences in assets - through social or geographical barriers
- - imply differentiated social contexts, the status competitions among consumer
- groups where extreme asset differences exist would undergo a separation
- of reference groups - that we attempt to measure in our empirical analyses
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%It is to measure the degree of such segregation of consumption patterns
- in empirical terms, that we have compared the two economies with respect
- to their  (the non-durable consumption excluding any costs implied by assets).
- 
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-[Implication for Status consumption arguments] In a cross-country comparison,
- we test if significance of asset richness for excess consumption is weak
- in either of the countries.
- We weak significance means that there excess consumption is similar across
- reference-groups of varied asset richness - allowing the status consumption
- to overcome the long-term implications of status.
- When the effect of asset richness on excess consumption is strong and positive,
- on the other hand, status needs are non-overlapping and the completely
- different 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- in the reference groups would mean a little scope for status consumption.
- At the level of the consumer, this disparate consumption pattern would
- imply a higher utility from the poorer reference.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% Astebi: We argue in favor of taking comparisons to others seriously when
- assessing and introducing welfare policies, also in less developed countries.
- Astebi do recommend but - but this segregation undermines has particular
- implications for welfare - using the capability approach consumers have
- a different needs.
-\end_layout
-
-\begin_layout Plain Layout
-
-% Sen - Suppes differences in utility - presents us the argument for suppressing
- status consumption.
- The ordinal idea in difference principle do not consider how badly status
- is needed - the more important question - which we don't consider in this
- is chapter - is whether status needed at all? 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-[Findings for separation] We find that Tanzania has a higher separation
- (enlist observations).
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-[
-\series default
-We are comparing 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
-
-\series bold
-] 
-\series default
-To understand how such significance changes over the scope of reference
- areas, we perform the above analysis at the finer EA level and the wider
- district level.
- While urban settings would always have higher assets and higher non-durable
- consumption opportunities overall, the cross-country comparison on a similar
- granularity based on population and geographical area quantifies the effect
- of extreme assets-differences on status consumption
+ The reference groups thus could both limit status competitions at a wider
+ level but spur them at a finer level.
+ Our results suggests some evidence of such a separation for Tanzania
 \begin_inset Foot
 status open
 
@@ -5618,38 +5662,32 @@ literal "false"
 
 \end_inset
 
-.
- Asset bands provide us the reference-point required to argue for the segregatio
-n in status competitions imposed due to separated status consumption cause
- by wide asset-differences.
- The model quantifies how status consumption is limited in developing economies
- due a common standard of living at a subsistence level with very little
- asset possessions.
+ and thus a limited sense of status consumption in the economy.
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% [Welfare question ] Capability drives the welfare question or whether
- status consumption is detrimental or not.
- Sen [#SenInequalityReexamined1992] views poverty as 
-\begin_inset Quotes eld
+[Findings for separation] More specifically, we test in a cross-country
+ comparison whether the significance of asset richness for excess consumption
+ is weaker in one of the countries.
+ While urban settings would always have higher assets and higher non-durable
+ consumption opportunities overall, the cross-country comparison on a similar
+ granularity based on population and geographical area quantifies the effect
+ of extreme assets-differences on status consumption.
+ A weak significance implies that the excess consumption is similar across
+ reference-groups of varied asset richness - allowing the status consumption
+ to overcome the long-term implications of status.
+ When the effect of asset richness on excess consumption is strong and positive,
+ on the other hand, status needs are non-overlapping and the completely
+ different 
+\begin_inset Formula $\nu_{t}$
 \end_inset
 
-the failure of basic capabilities to reach certain minimally acceptable
- levels
-\begin_inset Quotes erd
-\end_inset
-
-)
-\end_layout
-
-\end_inset
-
-
+ in the reference groups would mean a little scope for status consumption.
+ At the level of the consumer, this disparate consumption pattern would
+ imply a higher utility from the poorer reference.
+ Here, we find that Tanzania has a higher separation (enlist observations)
+ as the differences in excess consumption are relatively more fixed to the
+ local references in the economy.
 \end_layout
 
 \begin_layout Standard
@@ -5657,59 +5695,15 @@ the failure of basic capabilities to reach certain minimally acceptable
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
-] Therefore we compare both the non-durable consumption 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- itself in the two countries and evaluated how extreme asset differences
- and the regional barriers causing scarcities may influence 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- in the two economies.
- While a significant population in both the economies spends a larger budget
- share on food, the overall non-durable consumption is largely comparable
- for Tanzania and Nigeria.
- However, we also find that the more uniformly distributed assets in Nigeria
- imply that long-term asset ownership has a more significant role towards
- status (in Nigeria).
- More non-durable comprises of non-food component in Nigeria than in Tanzania
- and the food quality seems more segregated across rural and urban regions
- in Tanzania than in Nigeria.
-\end_layout
-
-\begin_layout Standard
-[List of observations 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
-] The substitution between having more assets and having high non-durable
- consumption is higher in Nigeria.
+] While a significant population in both the economies spends a larger budget
+ share on food and the overall non-durable consumption is largely comparable
+ for the countries, we also find that the more uniformly distributed assets
+ in Nigeria imply and that excess consumption is more segregated across
+ rural and urban regions in Tanzania.
+ The substitution between having more assets and having high non-durable
+ consumption is thus higher in Nigeria.
  In Tanzania, on the other hand, the substitution between owning assets
  and non-durable consumption is limited.
- That the needs don't scale up non-durable consumption as much in 
-\bar under
-Tanzania suggests a squeeze on the total non-durable expenditures
-\bar default
-.
-\end_layout
-
-\begin_layout Standard
-[List of observations 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
-] Similarly, while the differences in non-durable consumption between medium
- occupations and low occupations is relatively less in both the economies
- (
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- is higher for highest occupations for both Nigeria and Tanzania), 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- is also more sensitive to asset-accumulation in Tanzania.
  The extreme differences in wealth imply a less overlapping 
 \begin_inset Formula $\nu_{t}$
 \end_inset
@@ -5999,11 +5993,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -6019,11 +6011,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0257
+_t&  -0.0257
 \backslash
 sym{***}&  -0.0277
 \backslash
@@ -6141,7 +6131,7 @@ _cons    &   0.0373         &   0.0727
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -6399,11 +6389,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -6419,11 +6407,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0384
+_t&  -0.0384
 \backslash
 sym{*}  &  -0.0407
 \backslash
@@ -6547,7 +6533,7 @@ sym{***}
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -6831,11 +6817,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00171         &  0.00106         
+_t&  0.00171         &  0.00106         
 \backslash
 
 \backslash
@@ -7099,11 +7083,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&   0.0124
+_t&   0.0124
 \backslash
 sym{***}&  0.00686
 \backslash
@@ -7383,11 +7365,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -7403,11 +7383,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0& -0.00405         &  -0.0111
+_t& -0.00405         &  -0.0111
 \backslash
 sym{*}  
 \backslash
@@ -7521,7 +7499,7 @@ sym{*}  &  -0.0972
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -7773,11 +7751,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -7793,11 +7769,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00378         &  -0.0508         
+_t&  0.00378         &  -0.0508         
 \backslash
 
 \backslash
@@ -7915,7 +7889,7 @@ sym{**}
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -8173,11 +8147,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -8193,11 +8165,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0360
+_t&  -0.0360
 \backslash
 sym{***}&  -0.0334
 \backslash
@@ -8311,7 +8281,7 @@ _cons    &  -0.0782         &   -0.180
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -8567,11 +8537,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -8587,11 +8555,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0807
+_t&  -0.0807
 \backslash
 sym{***}&  -0.0362         
 \backslash
@@ -8701,7 +8667,7 @@ sym{*}
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -8967,11 +8933,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0& -0.00113         & -0.00697         
+_t& -0.00113         & -0.00697         
 \backslash
 
 \backslash
@@ -9233,11 +9197,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00421         &  0.00409         
+_t&  0.00421         &  0.00409         
 \backslash
 
 \backslash
@@ -9501,11 +9463,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0& -0.00477         & -0.00397         
+_t& -0.00477         & -0.00397         
 \backslash
 
 \backslash
@@ -9767,11 +9727,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&   0.0146
+_t&   0.0146
 \backslash
 sym{**} &  0.00236         
 \backslash
@@ -10045,11 +10003,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -10065,11 +10021,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0153
+_t&  -0.0153
 \backslash
 sym{*}  &  -0.0161
 \backslash
@@ -10189,7 +10143,7 @@ sym{*}
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -10421,11 +10375,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -10441,11 +10393,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0508         &  -0.0210         
+_t&  -0.0508         &  -0.0210         
 \backslash
 
 \backslash
@@ -10553,7 +10503,7 @@ _cons    &   -1.202         &   -0.798
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -10789,11 +10739,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -10809,11 +10757,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0315
+_t&  -0.0315
 \backslash
 sym{***}&  -0.0355
 \backslash
@@ -10929,7 +10875,7 @@ _cons    &    0.233         &  -0.0543
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -11163,11 +11109,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -11183,11 +11127,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&   0.0138         &  -0.0632         
+_t&   0.0138         &  -0.0632         
 \backslash
 
 \backslash
@@ -11291,7 +11233,7 @@ _cons    &   -1.894         &   -0.852
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -11537,11 +11479,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0& 0.000285         & -0.00141         
+_t& 0.000285         & -0.00141         
 \backslash
 
 \backslash
@@ -11805,11 +11745,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&   0.0221
+_t&   0.0221
 \backslash
 sym{***}&   0.0133
 \backslash
@@ -12085,11 +12023,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00133         &-0.000636         
+_t&  0.00133         &-0.000636         
 \backslash
 
 \backslash
@@ -12349,11 +12285,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00460         &0.00000589         
+_t&  0.00460         &0.00000589         
 \backslash
 
 \backslash
@@ -12539,6 +12473,22 @@ end{table}
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 EA Level Results
 \end_layout
@@ -12597,11 +12547,9 @@ else
 \backslash
 fi} 
 \backslash
-caption{Nigeria (selection): $ log
+caption{Nigeria (selection): $ nu
 \backslash
-_q
-\backslash
-_ne $ 
+_t $ 
 \backslash
 label{tablog_q_neNGR}} 
 \backslash
@@ -12629,11 +12577,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -12649,11 +12595,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0258
+_t&  -0.0258
 \backslash
 sym{***}&  -0.0245
 \backslash
@@ -12781,7 +12725,7 @@ _cons    &   0.0567         & -0.00565
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -13005,11 +12949,9 @@ else
 \backslash
 fi} 
 \backslash
-caption{Tanzania (selection): $ log
+caption{Tanzania (selection): $ nu
 \backslash
-_q
-\backslash
-_ne $ 
+_t $ 
 \backslash
 label{tablog_q_neTNZ}} 
 \backslash
@@ -13037,11 +12979,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -13057,11 +12997,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0216
+_t&  -0.0216
 \backslash
 sym{*}  & -0.00996         
 \backslash
@@ -13179,7 +13117,7 @@ sym{***}
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -13476,11 +13414,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00296         &  0.00438         
+_t&  0.00296         &  0.00438         
 \backslash
 
 \backslash
@@ -13760,11 +13696,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00924
+_t&  0.00924
 \backslash
 sym{***}&  0.00400         
 \backslash
@@ -14044,11 +13978,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -14064,11 +13996,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0& 0.000732         &-0.000615         
+_t& 0.000732         &-0.000615         
 \backslash
 
 \backslash
@@ -14192,7 +14122,7 @@ sym{*}
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -14440,11 +14370,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -14460,11 +14388,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0149         &  -0.0208         
+_t&  -0.0149         &  -0.0208         
 \backslash
 
 \backslash
@@ -14574,7 +14500,7 @@ sym{***}
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -14830,11 +14756,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -14850,11 +14774,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0420
+_t&  -0.0420
 \backslash
 sym{***}&  -0.0351
 \backslash
@@ -14980,7 +14902,7 @@ sym{*}
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -15232,11 +15154,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -15252,11 +15172,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0523
+_t&  -0.0523
 \backslash
 sym{**} &  -0.0108         
 \backslash
@@ -15364,7 +15282,7 @@ sym{*}  &    0.793
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -15630,11 +15548,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&-0.000217         & -0.00442         
+_t&-0.000217         & -0.00442         
 \backslash
 
 \backslash
@@ -15892,11 +15808,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00176         &  0.00164         
+_t&  0.00176         &  0.00164         
 \backslash
 
 \backslash
@@ -16164,11 +16078,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0& -0.00305         & -0.00138         
+_t& -0.00305         & -0.00138         
 \backslash
 
 \backslash
@@ -16428,11 +16340,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00795
+_t&  0.00795
 \backslash
 sym{*}  & -0.00235         
 \backslash
@@ -16696,11 +16606,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -16716,11 +16624,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0149
+_t&  -0.0149
 \backslash
 sym{*}  &  -0.0154
 \backslash
@@ -16848,7 +16754,7 @@ _cons    &   0.0658         &    0.226
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -17092,11 +16998,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -17112,11 +17016,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0477         &  0.00757         
+_t&  -0.0477         &  0.00757         
 \backslash
 
 \backslash
@@ -17220,7 +17122,7 @@ sym{*}
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -17460,11 +17362,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -17480,11 +17380,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0308
+_t&  -0.0308
 \backslash
 sym{***}&  -0.0311
 \backslash
@@ -17610,7 +17508,7 @@ _cons    &    0.238         &   -0.168
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -17854,11 +17752,9 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline log
+hline nu
 \backslash
-_q
-\backslash
-_ne  &                  &                  
+_t  &                  &                  
 \backslash
 
 \backslash
@@ -17874,11 +17770,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  -0.0359
+_t&  -0.0359
 \backslash
 sym{*}  &  -0.0681
 \backslash
@@ -17994,7 +17888,7 @@ sym{**} &   -0.578
 \backslash
 hline has
 \backslash
-_nu    &                  &                  
+_excess    &                  &                  
 \backslash
 
 \backslash
@@ -18246,11 +18140,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00205         &  0.00282         
+_t&  0.00205         &  0.00282         
 \backslash
 
 \backslash
@@ -18524,11 +18416,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&   0.0111
+_t&   0.0111
 \backslash
 sym{**} &   0.0111
 \backslash
@@ -18802,11 +18692,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00239         &  0.00208         
+_t&  0.00239         &  0.00208         
 \backslash
 
 \backslash
@@ -19080,11 +18968,9 @@ sym{***}
 \backslash
 
 \backslash
- log
+ r
 \backslash
-_mean
-\backslash
-_A0&  0.00450
+_t&  0.00450
 \backslash
 sym{*}  & -0.00429
 \backslash
@@ -19367,8 +19253,8 @@ status open
 
 \begin_layout Plain Layout
 
-% summary(lm(data=tn$df2012,log_q_ne ~ logx + log_mean_cost_ne + log_mean_A0
- + max_occupation_rank + hh_age + max_education_rank + isrural))
+% summary(lm(data=tn$df2012,log_q_ne ~ logx + log_mean_cost_ne + r_t + max_occup
+ation_rank + hh_age + max_education_rank + isrural))
 \end_layout
 
 \begin_layout Plain Layout
@@ -19379,15 +19265,15 @@ status open
 \begin_layout Plain Layout
 
 % summary(lm(data=ng$df2012,log_q_ne_nonfood ~logx + log_mean_cost_ne_nonfood
- + log_mean_cost_ne_food + log_mean_A0 + max_occupation_rank + age + max_educati
-on_rank + is_urban + hsize))
+ + log_mean_cost_ne_food + r_t + max_occupation_rank + age + max_education_rank
+ + is_urban + hsize))
 \end_layout
 
 \begin_layout Plain Layout
 
 % summary(lm(data=tn$df2012,log_q_ne_nonfood ~logx + log_mean_cost_ne_nonfood
- + log_mean_cost_ne_food + log_mean_A0 + max_occupation_rank + hh_age +
- max_education_rank + isrural + hsize))
+ + log_mean_cost_ne_food + r_t + max_occupation_rank + hh_age + max_education_ra
+nk + isrural + hsize))
 \end_layout
 
 \begin_layout Plain Layout
@@ -19454,7 +19340,7 @@ status open
 \begin_layout Plain Layout
 
 % 7.
- log_mean_A0 is strong for both (what does that mean)
+ r_t is strong for both (what does that mean)
 \end_layout
 
 \begin_layout Plain Layout
@@ -19488,7 +19374,7 @@ status open
 \begin_layout Plain Layout
 
 % 4.
- log_mean_A0 is weak in Tanzania (statistically stronger in Nigeria)
+ r_t is weak in Tanzania (statistically stronger in Nigeria)
 \end_layout
 
 \begin_layout Plain Layout
@@ -19516,7 +19402,7 @@ status open
 \begin_layout Plain Layout
 
 % 2.
- log_mean_A0 is sometimes weaker for NGR (less segregation)
+ r_t is sometimes weaker for NGR (less segregation)
 \end_layout
 
 \begin_layout Plain Layout
@@ -19573,7 +19459,7 @@ status open
 \begin_layout Plain Layout
 
 % 2.
- log_mean_A0 is somewhat weaker in Nigeria
+ r_t is somewhat weaker in Nigeria
 \end_layout
 
 \begin_layout Plain Layout
@@ -19672,8 +19558,8 @@ status open
 \begin_layout Plain Layout
 
 % summary(lm(data=tn$df2012,log_q_ne_food ~logx + log_mean_cost_ne_food
- + log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + hh_age
- + max_education_rank + isrural + hsize))
+ + log_mean_cost_ne_nonfood  + r_t + max_occupation_rank + hh_age + max_educatio
+n_rank + isrural + hsize))
 \end_layout
 
 \begin_layout Plain Layout
@@ -19689,15 +19575,15 @@ status open
 \begin_layout Plain Layout
 
 % summary(lm(data=ng$df2012,log_q_ne_food ~logx + log_mean_cost_ne_food
- + log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + age +
- max_education_rank + is_urban + hsize))
+ + log_mean_cost_ne_nonfood  + r_t + max_occupation_rank + age + max_education_r
+ank + is_urban + hsize))
 \end_layout
 
 \begin_layout Plain Layout
 
 % For 2010 use: summary(lm(data=subset(ng$df2010,is.finite(logx)),log_q_ne_food
- ~logx + log_mean_cost_ne_food + log_mean_cost_ne_nonfood  + log_mean_A0
- + max_occupation_rank + age + max_education_rank + is_urban + hsize))
+ ~logx + log_mean_cost_ne_food + log_mean_cost_ne_nonfood  + r_t + max_occupatio
+n_rank + age + max_education_rank + is_urban + hsize))
 \end_layout
 
 \begin_layout Plain Layout
@@ -19720,8 +19606,8 @@ status open
 \begin_layout Plain Layout
 
 % summary(lm(data=tn$df2012,w_nonfood_ne ~logx + log_mean_cost_ne_food +
- log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + hh_age
- + max_education_rank + isrural + hsize))
+ log_mean_cost_ne_nonfood  + r_t + max_occupation_rank + hh_age + max_education_
+rank + isrural + hsize))
 \end_layout
 
 \begin_layout Plain Layout
@@ -19733,8 +19619,8 @@ status open
 \begin_layout Plain Layout
 
 % summary(lm(data=ng$df2012,w_nonfood_ne ~logx + log_mean_cost_ne_food +
- log_mean_cost_ne_nonfood  + log_mean_A0 + max_occupation_rank + age + max_educa
-tion_rank + is_urban + hsize))
+ log_mean_cost_ne_nonfood  + r_t + max_occupation_rank + age + max_education_ran
+k + is_urban + hsize))
 \end_layout
 
 \begin_layout Plain Layout
