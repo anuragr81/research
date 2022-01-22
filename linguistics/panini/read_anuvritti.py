@@ -79,7 +79,18 @@ def is_null_col(dat,col):
         return pd.isnull(dat.L10)
     
     raise ValueError("Number of columns higher than what is supported")
-		   
+
+def is_list_a_tree(x):
+    if not isinstance(x,list):
+        return False
+    elif not x:
+        return False
+    else:
+        if len(x) == 2:
+            if not isinstance(x[0],list) and isinstance(x[1],list):
+                return True
+        else:
+            return False
     
 def add_at_nth_column(st,n_index,data,allow_append =True):
     """
@@ -97,9 +108,8 @@ def add_at_nth_column(st,n_index,data,allow_append =True):
     if isinstance(st,list):
         
         if st :
-            if isinstance(st[-1],list):           
-                st[-1].append(data)
-                #st[-1]= add_at_nth_column(st[-1], 0,data)
+            if isinstance(st[-1],list):   
+                st [-1] = add_at_nth_column(st[-1], n_index,data)
             else:
                 #create a new tree form the last node
                 old_data_to_be_nested=st[-1]
@@ -200,7 +210,7 @@ def color_for_index(ci):
 
 def text_in_colours(text,colorIndex,prefix=''):
     if colorIndex <= 1:
-        prefix = "&nbsp;&nbsp;"
+        prefix = "<br>"#"&nbsp;&nbsp;"
     return prefix+'<span style="color:'+color_for_index(colorIndex)+'">'+text+'</span>'
 
 def colored_html(st,colorIndex=0,paths=[]):
