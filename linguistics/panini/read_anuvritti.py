@@ -1,4 +1,5 @@
 import pandas as pd
+from copy import deepcopy
 from pprint import pprint
 import os,sys
 from collections import OrderedDict
@@ -92,36 +93,218 @@ def is_list_a_tree(x):
         else:
             return False
     
-def add_at_nth_column(st,n_index,data,allow_append =True):
+    
+def add_at_nth_column_failed(st,n_index,data):
+    print("data=",data,",n_index=",n_index)
+    if not st:
+        # initialising
+        return ['root',[data]]    
+
+
+    if n_index ==0:
+        st[1].append(data)
+    else:
+        pos=st
+        for i in range(0,n_index):
+            pos = pos[-1]
+            if i== (n_index-1):
+               pos = add_node(pos,data)
+
+    return st
+    
+def get_index(x,i):
+    if i == 0:
+        return x[-1]
+    elif i == 1:
+        return x[-1][-1]
+    elif i == 2:
+        return x[-1][-1][-1]
+    elif i == 3:
+        return x[-1][-1][-1][-1]
+    elif i == 4:
+        return x[-1][-1][-1][-1][-1]
+    elif i == 5:
+        return x[-1][-1][-1][-1][-1][-1]
+    elif i == 6:
+        return x[-1][-1][-1][-1][-1][-1][-1]
+    else:
+        raise ValueError("Not supported")
+
+
+
+def set_index(x,i,dat):
+    if i == 0:
+        x[-1]= dat
+        
+    elif i == 1:
+        x[-1][-1]=dat
+    elif i == 2:
+        x[-1][-1][-1]= dat
+    elif i == 3:
+        x[-1][-1][-1][-1]= dat
+    elif i == 4:
+        x[-1][-1][-1][-1][-1]= dat
+    elif i == 5:
+        x[-1][-1][-1][-1][-1][-1]= dat
+    elif i == 6:
+        x[-1][-1][-1][-1][-1][-1][-1]= dat
+    else:
+        raise ValueError("Not supported")
+
+def append_index(x,i,dat):
+    if i == 0:
+        x[-1].append(dat)
+    elif i == 1:
+        x[-1][-1].append(dat)
+    elif i == 2:
+        x[-1][-1][-1].append(dat)
+    elif i == 3:
+        x[-1][-1][-1][-1].append(dat)
+    elif i == 4:
+        x[-1][-1][-1][-1][-1].append(dat)
+    elif i == 5:
+        x[-1][-1][-1][-1][-1][-1].append(dat)
+    elif i == 6:
+        x[-1][-1][-1][-1][-1][-1][-1].append(dat)
+    else:
+        raise ValueError("Not supported")
+
+class ColumnCache:
+    
+    def __init__(self):
+        self.col=None
+    def set_col(self,j):
+        self.col = j
+    def get_col(self):
+        return self.col
+
+def get_index_dict(x,i):
+    if i == 0:
+        return x
+    if i == 1:
+        return x[[y for y in x.keys()][-1]]        
+    if i==2 :
+        return x['root'][-1][[y for y in x['root'][-1].keys()][0]]
+    if i == 3:
+        n_2 = x['root'][-1][[y for y in x['root'][-1].keys()][0]]
+        return n_2[-1][[j for j in n_2[-1].keys()][-1]]
+    if i == 4 :
+        n_3 = get_index_dict(x, 3)
+        return n_3[-1][[j for j in n_3[-1].keys()][-1]]
+    if i == 5:
+        n_4 = get_index_dict(x, 4)
+        return n_4[-1][[j for j in n_4[-1].keys()][-1]]
+    if i == 6:
+        n = get_index_dict(x, 5)
+        return n[-1][[j for j in n[-1].keys()][-1]]
+    if i == 7:
+        n = get_index_dict(x, 6)
+        return n[-1][[j for j in n[-1].keys()][-1]]
+    
+    if i == 8:
+        n = get_index_dict(x, 7)
+        return n[-1][[j for j in n[-1].keys()][-1]]
+    if i == 9:
+        n = get_index_dict(x, 8)
+        return n[-1][[j for j in n[-1].keys()][-1]]
+    if i == 10:
+        n = get_index_dict(x, 9)
+        return n[-1][[j for j in n[-1].keys()][-1]]
+    if i == 11:
+        n = get_index_dict(x, 10)
+        return n[-1][[j for j in n[-1].keys()][-1]]
+    if i == 12:
+        n = get_index_dict(x, 11)
+        return n[-1][[j for j in n[-1].keys()][-1]]
+    if i == 13:
+        n = get_index_dict(x, 12)
+        return n[-1][[j for j in n[-1].keys()][-1]]
+    if i == 14:
+        n = get_index_dict(x, 13)
+        return n[-1][[j for j in n[-1].keys()][-1]]
+    if i == 15:
+        n = get_index_dict(x, 14)
+        return n[-1][[j for j in n[-1].keys()][-1]]
+    
+    raise ValueError("Not supported")
+
+
+        
+def add_at_nth_column(cc,st,n_index,data):
     """
-    Go to the index'th column - i.e. level of the hierarchy and add
-      the element at the level
-    The function generates the tree of the form [Root,[Child1],[Child2],...,]
-    The elements of the form [A,B,C] are nodes - but the [A,[B,C],C] - represents
-       a tree
-    """    
-    print(data)
-    if n_index>0:
-        st [-1] =  add_at_nth_column(st[-1], n_index-1,data)
+    find the n_index and then call add_node
+    """
+    print("data=",data,",n_index=",n_index)
+    if not st:
+        return OrderedDict({'root':[data]})
+    
+    old_data = get_index_dict(st,n_index)
+    if not isinstance(old_data,OrderedDict):
+        # must be a list
+        if not isinstance(old_data,list):
+            raise ValueError("not a list")
+        if isinstance(old_data[-1],OrderedDict):
+            last_key = [x for x in old_data[-1].keys()][-1]
+            old_data[-1][last_key ].append(data)
+        else:
+            old_data[-1] = OrderedDict({old_data[-1]: [data]})
+    elif isinstance(old_data,OrderedDict):
+        last_key = [x for x in old_data.keys()][-1]
+        old_data[last_key].append(OrderedDict({data: []}))
+    else:
+        raise ValueError("Unimplemented")
+    return st
+        
+def add_at_nth_column_list(cc,st,n_index,data):
+    """
+    find the n_index and then call add_node
+    """
+    print("data=",data,",n_index=",n_index)
+    if not st:
+        st = add_node(st,data)
         return st
+    
+    old_data = get_index(st,n_index)
+    
+    if isinstance(old_data,list):
+        
+        if cc.get_col() is not None:
+            if n_index > cc.get_col():
+                new_root = [deepcopy(old_data[-1]), [data]]
+                new_data = old_data[0:-1]+ [new_root]
+                set_index(st,n_index,new_data )
+            else:
+                append_index(st,n_index,data)
+        else:
+            append_index(st,n_index+1,data)
+    else:    
+        set_index(st,n_index,[old_data ,[data] ])
+    cc.set_col(n_index)
+    return st
+       
+
+
+    
+def add_node(st,data):
+    """
+    adds a node at the DFS       
+    """    
+    if not st:
+        # initialising
+        return ['root',[deepcopy(data)]]
 
     if isinstance(st,list):
-        
-        if st :
-            if isinstance(st[-1],list):   
-                st [-1] = add_at_nth_column(st[-1], n_index,data)
-            else:
-                #create a new tree form the last node
-                old_data_to_be_nested=st[-1]
-                st[-1]=[old_data_to_be_nested,[data]]
+    
+        if isinstance(st[-1],list):   
+            st [-1] = add_node(st[-1],data)
         else:
-            # initialising
-            st=['root',[data]]
-    else:
-        raise ValueError("Invalid Type")
+            #create a new tree form the last node
+            st[-1]=[deepcopy(st[-1]),[data]]
+            
+        return st
         
-    return st
-    #    raise ValueError("Invalid insert")
+    else:        
+        return [deepcopy(st),[data]]
 
 def parse_list(st):
     res= []
@@ -153,47 +336,6 @@ def parse_struct(st):
     else:
         return st
     
-def parse_struct_old(st):
-    """
-    Build a structure of form {key:[value1,value2]} where value1 could be
-     another structure of the same form.
-    """
-    if st:
-        if isinstance(st,list):
-            if len(st)>1:
-                # before treating every element as potential root
-                # treat as the list of sub-trees
-                
-                # first node in the list is the root of the sub-tree to be followed
-                if not isinstance(st[0],list):
-                    new_root = OrderedDict({st[0]:[]})
-                    for x in st[1:]:
-                        
-                        if all(not isinstance(y,list) for y in x):
-                            # the following step treates scalars as nodes
-                            # rather than subtrees
-                            new_root[st[0]].append(x)
-                        else:
-                            result=parse_struct(st=x)
-                            #print("Adding (%s,%s)"% (st[0],result))
-                            new_root[st[0]].append(result)
-                  
-                    return new_root
-                else:
-                    #raise ValueError("Can't be a root")
-                    # treat them as list of sub-trees
-                    return [parse_struct(x) for x in st]
-            else:#st==1              
-                result=parse_struct(st[0])
-                return result
-        else:
-            #nodes
-            #print("node=%s"%st)
-            return st
-    else:        
-        return None
-
-
 def color_for_index(ci):
     general_dict = {0:'Black',1:'DarkRed',2:'Crimson',3:'Chocolate',
             4:'DarkOliveGreen',5:'Green',6:'DeekSkyBlue',
@@ -266,6 +408,7 @@ N=b.shape[1]
 if N>10:
     raise ValueError("Number of columns higher than what is supported")
 
+cc = ColumnCache()
 struct=[]
 results =[]
 for i in range(nrows):
@@ -275,11 +418,11 @@ for i in range(nrows):
             data_to_add=row["L"+str(j+1)]
             results = results + [(j+1,d) for d in str(data_to_add).split(',')]
             for d in str(data_to_add).split(','):
-                struct=add_at_nth_column(struct,j,d)
-print(struct)
+                struct=add_at_nth_column(cc ,struct,j,d)
+pprint(struct)
 
-dict_struct =parse_struct(struct)
-pprint(dict(dict_struct))
-text=colored_html(dict_struct)
+
+
+dict_struct =parse_struct(struct); text=colored_html(dict_struct);  write_into_file(', '.join(text))
 #print(text)
-write_into_file(', '.join(text))
+
