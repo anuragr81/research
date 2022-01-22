@@ -10,27 +10,38 @@ Further insertion of Ln is recursive so the insert only happens after L(n+1)...L
     of columns, fail the insertion if nothing is found at n-1 (n=N, N-1,... 2) and stop when empty is found.
 """
 def find_first_non_na(dat):
-	if "L1" in dat and not pd.isnull(dat.L1):
-		return 1
-	if "L2" in dat and not pd.isnull(dat.L2):
-		return 2
-	if "L3" in dat and not pd.isnull(dat.L3):
-		return 3
-	if "L4" in dat and not pd.isnull(dat.L4):
-		return 4
-	if "L5" in dat and not pd.isnull(dat.L5):
-		return 5
-	if "L6" in dat and not pd.isnull(dat.L6):
-		return 6
-	if "L7" in dat and not pd.isnull(dat.L7):
-		return 7
-	if "L8" in dat and not pd.isnull(dat.L8):
-		return 8
-	if "L9" in dat and not pd.isnull(dat.L9):
-		return 9
-	if "L10" in dat and not pd.isnull(dat.L10):
-		return 10
-	return None
+    if "L1" in dat and not pd.isnull(dat.L1):
+        return 1
+    if "L2" in dat and not pd.isnull(dat.L2):
+        return 2
+    if "L3" in dat and not pd.isnull(dat.L3):
+        return 3
+    if "L4" in dat and not pd.isnull(dat.L4):
+        return 4
+    if "L5" in dat and not pd.isnull(dat.L5):
+        return 5
+    if "L6" in dat and not pd.isnull(dat.L6):
+        return 6
+    if "L7" in dat and not pd.isnull(dat.L7):
+        return 7
+    if "L8" in dat and not pd.isnull(dat.L8):
+        return 8
+    if "L9" in dat and not pd.isnull(dat.L9):
+        return 9
+    if "L10" in dat and not pd.isnull(dat.L10):
+        return 10
+    if "L11" in dat and not pd.isnull(dat.L11):
+        return 11
+    if "L12" in dat and not pd.isnull(dat.L12):
+        return 12
+    if "L13" in dat and not pd.isnull(dat.L13):
+        return 13
+    if "L14" in dat and not pd.isnull(dat.L14):
+        return 14
+    if "L15" in dat and not pd.isnull(dat.L15):
+        return 15
+    return None
+
 
 def find_first_non_na_backwards(dat):
     if "L10" in dat and not pd.isnull(dat.L10):
@@ -78,6 +89,18 @@ def is_null_col(dat,col):
         return pd.isnull(dat.L9)
     if col==9:        
         return pd.isnull(dat.L10)
+    if col==10:        
+        return pd.isnull(dat.L11)
+    if col==11:        
+        return pd.isnull(dat.L12)
+    if col==12:        
+        return pd.isnull(dat.L13)
+    if col==13:        
+        return pd.isnull(dat.L14)
+    if col==14:        
+        return pd.isnull(dat.L15)
+    if col==15:        
+        return pd.isnull(dat.L16)
     
     raise ValueError("Number of columns higher than what is supported")
 
@@ -234,7 +257,7 @@ def add_at_nth_column(cc,st,n_index,data):
     """
     find the n_index and then call add_node
     """
-    print("data=",data,",n_index=",n_index)
+    #print("data=",data,",n_index=",n_index)
     if not st:
         return OrderedDict({'root':[data]})
     
@@ -337,22 +360,25 @@ def parse_struct(st):
         return st
     
 def color_for_index(ci):
-    general_dict = {0:'Black',1:'DarkRed',2:'Crimson',3:'Chocolate',
-            4:'DarkOliveGreen',5:'Green',6:'DeekSkyBlue',
-            7:'DodgerBlue',8:'MediumBlue',9:'Navy',10:'Violet',11:'Purple',
-            12:'Magenta'}
-    narrow_dict = {0:'Black',1:'Black',2:'Crimson',3:'Chocolate',
-            4:'Green',5:'DeekSkyBlue',
-            6:'DodgerBlue',7:'Navy',8:'Violet',9:'Purple',
-            10:'Magenta'}
-    return narrow_dict[ci]
+    general_dict = {14:'Black',13:'DarkRed',12:'Crimson',11:'Chocolate',
+            10:'DarkOliveGreen',9:'Green', 8:'LimeGreen',7:'DeekSkyBlue',
+            6:'DarkTurquoise',5:'DodgerBlue',4:'MediumBlue',3:'Navy',2:'Violet',1:'Purple',
+            0:'Magenta',}
+    #narrow_dict = {0:'Black',1:'Black',2:'Crimson',3:'Chocolate',
+    #        4:'Green',5:'DeekSkyBlue',
+    #        6:'DodgerBlue',7:'Navy',8:'Violet',9:'Purple',
+    #        10:'Magenta'}
+    return general_dict [ci]
     
     
     
 
 def text_in_colours(text,colorIndex,prefix=''):
-    if colorIndex <= 1:
-        prefix = "<br>"#"&nbsp;&nbsp;"
+    if colorIndex <=1 :
+        prefix = "&#9679;"#"<br>"
+    if colorIndex <= 3:
+        #prefix = ''.join(["&nbsp"]*(max(1,15-colorIndex)))
+        prefix = prefix + ''.join(["&nbsp"]*(max(1,5-colorIndex)))
     return prefix+'<span style="color:'+color_for_index(colorIndex)+'">'+text+'</span>'
 
 def colored_html(st,colorIndex=0,paths=[]):
@@ -398,14 +424,15 @@ def write_into_file(text):
 
 #test_add_at_nth_columns()
 #sys.exit(0)
-b = pd.read_excel('c:/temp/test.xlsx')
+#b = pd.read_excel('c:/temp/test.xlsx')
 #b = pd.read_excel('c:/temp/test3.xlsx')
-#b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/ashtadhyayi_chapter1_2.xlsx')
+b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/ashtadhyayi_chapter1_2.xlsx')
+#b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/anuvritti_chapter4.xlsx')
 nrows = b.shape[0]
 N=b.shape[1]
 
 
-if N>10:
+if N>15:
     raise ValueError("Number of columns higher than what is supported")
 
 cc = ColumnCache()
@@ -419,10 +446,12 @@ for i in range(nrows):
             results = results + [(j+1,d) for d in str(data_to_add).split(',')]
             for d in str(data_to_add).split(','):
                 struct=add_at_nth_column(cc ,struct,j,d)
-pprint(struct)
+#pprint(struct)
 
 
 
-dict_struct =parse_struct(struct); text=colored_html(dict_struct);  write_into_file(', '.join(text))
+#dict_struct =parse_struct(struct); 
+#text=colored_html(dict_struct);  write_into_file(', '.join(text))
+text=colored_html(struct);  write_into_file(', '.join(text))
 #print(text)
 
