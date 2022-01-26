@@ -257,7 +257,7 @@ def add_at_nth_column(cc,st,n_index,data):
     """
     find the n_index and then call add_node
     """
-    #print("data=",data,",n_index=",n_index)
+    print("data=",data,",n_index=",n_index)
     if not st:
         return OrderedDict({'root':[data]})
     
@@ -360,10 +360,10 @@ def parse_struct(st):
         return st
     
 def color_for_index(ci):
-    general_dict = {14:'Black',13:'DarkRed',12:'Crimson',11:'Chocolate',
-            10:'DarkOliveGreen',9:'Green', 8:'LimeGreen',7:'DeekSkyBlue',
-            6:'DarkTurquoise',5:'DodgerBlue',4:'MediumBlue',3:'Navy',2:'Violet',1:'Purple',
-            0:'Magenta',}
+    general_dict = {14:'DarkRed',13:'Crimson',12:'Chocolate',
+            11:'DarkOliveGreen',10:'Green', 9:'LimeGreen',8:'DeekSkyBlue',
+            7:'DarkTurquoise',6:'DodgerBlue',5:'MediumBlue',4:'Navy',3:'Violet',
+            2:'Magenta',1:'Purple', 0:'Black'}
     #narrow_dict = {0:'Black',1:'Black',2:'Crimson',3:'Chocolate',
     #        4:'Green',5:'DeekSkyBlue',
     #        6:'DodgerBlue',7:'Navy',8:'Violet',9:'Purple',
@@ -374,11 +374,14 @@ def color_for_index(ci):
     
 
 def text_in_colours(text,colorIndex,prefix=''):
-    if colorIndex <=1 :
-        prefix = "&#9679;"#"<br>"
+    prefix = ""
+    if colorIndex ==1:
+        prefix = prefix +"<br><br>"
+    if colorIndex == 2:
+        prefix = prefix + "&#9679;"#"<br>"
     if colorIndex <= 3:
         #prefix = ''.join(["&nbsp"]*(max(1,15-colorIndex)))
-        prefix = prefix + ''.join(["&nbsp"]*(max(1,5-colorIndex)))
+        prefix = prefix + ''.join(["&nbsp"]*(max(1,3-colorIndex)))
     return prefix+'<span style="color:'+color_for_index(colorIndex)+'">'+text+'</span>'
 
 def colored_html(st,colorIndex=0,paths=[]):
@@ -428,6 +431,7 @@ def write_into_file(text):
 #b = pd.read_excel('c:/temp/test3.xlsx')
 b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/ashtadhyayi_chapter1_2.xlsx')
 #b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/anuvritti_chapter4.xlsx')
+#b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/anuvritti_chapter6.xlsx')
 nrows = b.shape[0]
 N=b.shape[1]
 
