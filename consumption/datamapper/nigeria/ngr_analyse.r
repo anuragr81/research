@@ -213,6 +213,8 @@ mapping_hhids_2012_2015 <- function(o2015){
 }
 
 compute_yearly_pay<- function(pay,pay_units, hours_per_week,weeks_worked) { 
+  # For debugging: # print(paste("pay_units=",pay_units))
+  
   if (pay_units == 1 ) { 
     return(hours_per_week * pay * weeks_worked)
   }
@@ -256,6 +258,61 @@ infer_education_ranks <- function(o2010){
   educ[is.na(educ$highest_educ),]$highest_educ <- 0
   educ$education_rank <- as.integer(educ$highest_educ<=0)*0 + as.integer(educ$highest_educ>0 & educ$highest_educ<=11)*1 + as.integer(educ$highest_educ>11 & educ$highest_educ<=23)*2 +as.integer(educ$highest_educ>23)*3
   return(educ)
+}
+
+load_first_ypay<- function(o2010, o2012,o2015){
+
+  res=list()  
+  
+  #2010
+  get_weeks=function(m,w){ if (is.na(w)) { return (m*4.3)} else {return(w)} }
+  ow2010 <- o2010
+  ow2010$weeks_worked_primary <- mapply(get_weeks,ow2010$yearmonths_worked_primary, ow2010$yearweeks_worked_primary)
+  
+  i2010_primary <- plyr::rename(subset(ow2010,!is.na(occupation_primary) & !is.na(last_payment_primary)  & !is.na(last_payment_primary_units) )[,c("hhid","personid","occupation_primary","last_payment_primary","last_payment_primary_units","weeks_worked_primary","hours_worked_week_primary")],c("occupation_primary"="occupation","last_payment_primary"="pay","last_payment_primary_units"="pay_units","weeks_worked_primary"="weeks_worked",'hours_worked_week_primary'='hours_per_week'))
+  
+  i2010 <- (subset(i2010_primary,!is.na(hours_per_week) & !is.na(pay_units)))
+  i2010_primary$ypay <- mapply(compute_yearly_pay,i2010_primary$pay,i2010_primary$pay_units,i2010_primary$hours_per_week,i2010_primary$weeks_worked)
+  res[["ypay2010"]]<-i2010_primary[,c("hhid","personid","ypay")]
+  i2010_primary <- NULL
+  
+  
+  #2012
+  o2012dat <- subset(o2012,!is.na(last_payment_primary) & !is.na(worked_ext_pastweek) & !is.na(last_payment_primary_units))
+  o2012dat$ypaymulfactor <- with(o2012dat, as.integer(last_payment_primary_units==1)*40*250 + as.integer(last_payment_primary_units==2)*250 + 
+                                   as.integer(last_payment_primary_units==3)*50 + as.integer(last_payment_primary_units==4)*25 
+                                 + as.integer(last_payment_primary_units==5)*12 + as.integer(last_payment_primary_units==6)*4 
+                                 + as.integer(last_payment_primary_units==7)*2 + as.integer(last_payment_primary_units==8) )
+  o2012dat$ypay <- with(o2012dat, last_payment_primary*ypaymulfactor)
+  o2012dat_by_hhid_personid <- ddply(o2012dat,.(hhid,personid,ypay),summarise,n=length(ypay),ypay=max(ypay)) # max only to dummy-select when there is a duplicate
+  
+  if (nrow(subset(o2012dat_by_hhid_personid,n>1))>0){
+    stop("Duplicate income data")
+  }
+  o2012dat_by_hhid_personid$n <- NULL
+  res[["ypay2012"]]<-o2012dat_by_hhid_personid
+  o2012dat <- NULL
+  o2012dat_by_hhid_personid <- NULL
+  
+  #2015
+  o2015dat <- subset(o2015,!is.na(last_paymentwoallowance_primary) & !is.na(worked_ext_pastweek) & !is.na(last_paymentwoallowance_primary_units))
+  o2015dat$ypaymulfactor <- with(o2015dat, as.integer(last_paymentwoallowance_primary_units==1)*40*250 + as.integer(last_paymentwoallowance_primary_units==2)*250 + 
+         as.integer(last_paymentwoallowance_primary_units==3)*50 + as.integer(last_paymentwoallowance_primary_units==4)*25 
+       + as.integer(last_paymentwoallowance_primary_units==5)*12 + as.integer(last_paymentwoallowance_primary_units==6)*4 
+       + as.integer(last_paymentwoallowance_primary_units==7)*2 + as.integer(last_paymentwoallowance_primary_units==8) )
+  o2015dat$ypay <- with(o2015dat, last_paymentwoallowance_primary*ypaymulfactor)
+  o2015dat$ypaymulfactor <- NULL
+  o2015dat_by_hhid_personid <- ddply(o2015dat,.(hhid,personid,ypay),summarise,n=length(ypay),ypay=max(ypay)) # max only to dummy-select when there is a duplicate
+  
+  if (nrow(subset(o2015dat_by_hhid_personid,n>1))>0){
+    stop("Duplicate income data")
+  }
+  o2015dat_by_hhid_personid$n <- NULL
+  res[["ypay2015"]]<-o2015dat_by_hhid_personid
+  o2015dat_by_hhid_personid <- NULL
+  o2015dat <- NULL
+  
+  return(res)
 }
 
 infer_occupation_ranks <- function(o2010 , ignore_top) {

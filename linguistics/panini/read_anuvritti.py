@@ -118,7 +118,7 @@ def is_list_a_tree(x):
     
     
 def add_at_nth_column_failed(st,n_index,data):
-    print("data=",data,",n_index=",n_index)
+    #print("data=",data,",n_index=",n_index)
     if not st:
         # initialising
         return ['root',[data]]    
@@ -257,7 +257,7 @@ def add_at_nth_column(cc,st,n_index,data):
     """
     find the n_index and then call add_node
     """
-    print("data=",data,",n_index=",n_index)
+    #print("data=",data,",n_index=",n_index)
     if not st:
         return OrderedDict({'root':[data]})
     
@@ -282,7 +282,7 @@ def add_at_nth_column_list(cc,st,n_index,data):
     """
     find the n_index and then call add_node
     """
-    print("data=",data,",n_index=",n_index)
+    #print("data=",data,",n_index=",n_index)
     if not st:
         st = add_node(st,data)
         return st
@@ -360,10 +360,10 @@ def parse_struct(st):
         return st
     
 def color_for_index(ci):
-    general_dict = {14:'DarkRed',13:'Crimson',12:'Chocolate',
-            11:'DarkOliveGreen',10:'Green', 9:'LimeGreen',8:'DeekSkyBlue',
-            7:'DarkTurquoise',6:'DodgerBlue',5:'MediumBlue',4:'Navy',3:'Violet',
-            2:'Magenta',1:'Purple', 0:'Black'}
+    general_dict = {15:'DarkRed',14:'Crimson',13:'Chocolate',
+            12:'DarkOliveGreen',11:'Green', 10:'LimeGreen',9:'DeekSkyBlue',
+            8:'DarkTurquoise',7:'DodgerBlue',6:'MediumBlue',5:'SlateBlue',4:'Navy',
+            3:'Violet',2:'Purple', 1:'Black', 0:'Black'}
     #narrow_dict = {0:'Black',1:'Black',2:'Crimson',3:'Chocolate',
     #        4:'Green',5:'DeekSkyBlue',
     #        6:'DodgerBlue',7:'Navy',8:'Violet',9:'Purple',
@@ -430,6 +430,8 @@ def write_into_file(text):
 #b = pd.read_excel('c:/temp/test.xlsx')
 #b = pd.read_excel('c:/temp/test3.xlsx')
 b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/ashtadhyayi_chapter1_2.xlsx')
+#b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/anuvritti_chapter3_4.xlsx')
+
 #b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/anuvritti_chapter4.xlsx')
 #b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/anuvritti_chapter6.xlsx')
 nrows = b.shape[0]
