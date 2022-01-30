@@ -260,7 +260,7 @@ infer_education_ranks <- function(o2010){
   return(educ)
 }
 
-load_first_ypay<- function(o2010, o2012,o2015){
+load_income_data_per_hh <- function(o2010, o2012,o2015){
 
   res=list()  
   
@@ -273,7 +273,8 @@ load_first_ypay<- function(o2010, o2012,o2015){
   
   i2010 <- (subset(i2010_primary,!is.na(hours_per_week) & !is.na(pay_units)))
   i2010_primary$ypay <- mapply(compute_yearly_pay,i2010_primary$pay,i2010_primary$pay_units,i2010_primary$hours_per_week,i2010_primary$weeks_worked)
-  res[["ypay2010"]]<-i2010_primary[,c("hhid","personid","ypay")]
+  i2010_primary_per_person <- i2010_primary[,c("hhid","personid","ypay")] 
+  res[["ypay2010"]]<-ddply(i2010_primary_per_person,.(hhid),summarise,ypay=sum(ypay)) %>% mutate ( lnY = log(ypay))
   i2010_primary <- NULL
   
   
@@ -290,7 +291,7 @@ load_first_ypay<- function(o2010, o2012,o2015){
     stop("Duplicate income data")
   }
   o2012dat_by_hhid_personid$n <- NULL
-  res[["ypay2012"]]<-o2012dat_by_hhid_personid
+  res[["ypay2012"]]<-ddply(o2012dat_by_hhid_personid,.(hhid),summarise,ypay=sum(ypay)) %>% mutate ( lnY = log(ypay))
   o2012dat <- NULL
   o2012dat_by_hhid_personid <- NULL
   
@@ -308,7 +309,7 @@ load_first_ypay<- function(o2010, o2012,o2015){
     stop("Duplicate income data")
   }
   o2015dat_by_hhid_personid$n <- NULL
-  res[["ypay2015"]]<-o2015dat_by_hhid_personid
+  res[["ypay2015"]]<-ddply(o2015dat_by_hhid_personid,.(hhid),summarise,ypay=sum(ypay)) %>% mutate ( lnY = log(ypay))
   o2015dat_by_hhid_personid <- NULL
   o2015dat <- NULL
   
@@ -800,10 +801,14 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
     
   }
   
+  incomedat <- load_income_data_per_hh(o2010 = o2010, o2012 = o2012, o2015 = o2015)
+  
   #total consumption
-  relevant_fields <-c("hhid","region","district","ea","is_urban","S","E")
+  relevant_fields <-c("hhid","region","district","ea","is_urban","S","E","ypay","lnY")
   # 2010
-  ohs2010 <- subset(o2010,!is.na(region))
+  ohs2010_wi <- subset(o2010,!is.na(region))
+  
+  ohs2010 <- merge(ohs2010_wi, incomedat[["ypay2010"]],by=c("hhid"),all.x=T)
   hsizes2010 <- ddply(ohs2010[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
   hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), hsizes2010, by = c("hhid")))
   
@@ -817,7 +822,9 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   
   
   # 2012
-  ohs2012 <- subset(o2012,!is.na(region))
+  o2012_wi <- subset(o2012,!is.na(region))
+  ohs2012 <- merge(o2012_wi, incomedat[["ypay2012"]],by=c("hhid"),all.x=T)
+  
   hsizes2012 <- ddply(ohs2012[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
   ohs2012_wranks<- merge(plyr::rename(ohs2012,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
@@ -827,7 +834,9 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   
   #2015
-  ohs2015 <- subset(o2015,!is.na(region))
+  o2015_wi <- subset(o2015,!is.na(region))
+  ohs2015 <- merge(o2015_wi, incomedat[["ypay2015"]],by=c("hhid"),all.x=T)
+  
   hsizes2015 <- ddply(ohs2015[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
   hs2015 <- unique(merge(unique(ohs2015[,relevant_fields]), hsizes2015, by = c("hhid")))
   
@@ -835,7 +844,10 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   rank_from_past_years <- ddply(rbind(chosenchars2010,chosenchars2012),.(hhid),summarise, max_education_rank=max(max_education_rank), max_occupation_rank=max(max_occupation_rank))
   chosenchars2015 <- merge(rank_from_past_years,chosenchars2015_woranks,by=c("hhid"))
   hswithchars2015 <- merge(hs2015,chosenchars2015,all.x = T)
+  #
+  
 
+  
   
   #a<-merge(plyr::rename(i2010,c("hhid"="hhid2010")),assetslog2010 ,by=c("hhid2010"))
   res=list()

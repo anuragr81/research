@@ -470,10 +470,11 @@ income_process <-function(){
   write.csv(i2014,'c:/temp/i2014.csv',row.names = FALSE)
   return(0)
 }
-income_data <- function(ll,yr,dirprefix,fu,ln){
+
+hh_income_data <- function(ll,yr,dirprefix,fu,ln){
   idat            <- ll@load_income_file(year = yr, dirprefix = "../",fu = fu, ln = ln)
-  idat            <- ddply(idat, .(hhid), summarise, totinc = sum(yearly_pay))
-  idat            <- subset(idat,!is.na(totinc))
+  idat            <- ddply(idat, .(hhid), summarise, ypay = sum(yearly_pay))
+  idat            <- subset(idat,!is.na(ypay)) %>% mutate ( lnY = log(ypay))
   return(idat)
 }
 
@@ -1275,15 +1276,21 @@ get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, 
     
   }
   
+  incomedat2010 <- hh_income_data(ll = ll,yr = 2010,dirprefix =dirprefix,fu = fu,ln = ln)
+  incomedat2012 <- hh_income_data(ll = ll,yr = 2012,dirprefix =dirprefix,fu = fu,ln = ln)
+  incomedat2014 <- hh_income_data(ll = ll,yr = 2014,dirprefix =dirprefix,fu = fu,ln = ln)
   
   
   perception_columns <- c("life_perception"="hh_life_perception" , "finance_perception"="hh_finance_perception", "richness_perception"="hh_richness_perception","housing_perception"="hh_housing_perception","health_perception"="hh_health_perception")
   hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang")
 
   #total consumption
-  relevant_fields <-c("hhid","region","district","ward","ea","isrural","expensiveregion","S","E","population")
+  relevant_fields <-c("hhid","region","district","ward","ea","isrural","expensiveregion","S","E","population","ypay","lnY")
   # 2010
-  ohs2010 <- subset(o2010,!is.na(region))
+  ohs2010_wi <- subset(o2010,!is.na(region))
+  
+  ohs2010 <- merge(ohs2010_wi, incomedat2010,by=c("hhid"),all.x=T)
+  
   hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), ll@get_hsize(ohs2010), by = c("hhid")))
   chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang","age","outoffood")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang) , age = choose_max_non_na(age), outoffood=max(outoffood))
   #  perception_columns
@@ -1294,7 +1301,8 @@ get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, 
   
   
   # 2012
-  ohs2012 <- subset(o2012,!is.na(region))
+  ohs2012_wi <- subset(o2012,!is.na(region))
+  ohs2012 <- merge(ohs2012_wi, incomedat2012,by=c("hhid"),all.x=T)
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), ll@get_hsize(ohs2012), by = c("hhid")))
   chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age","litlang","outoffood")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang) , age = choose_max_non_na(age), outoffood=max(outoffood) )
   
@@ -1308,7 +1316,8 @@ get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, 
   hswithchars2012 <- merge(hs2012,chosencharshead2012,all.x = T)
   
   #2014
-  ohs2014 <- subset(o2014,!is.na(region))
+  ohs2014_wi <- subset(o2014,!is.na(region))
+  ohs2014 <- merge(ohs2014_wi, incomedat2014,by=c("hhid"),all.x=T)
   hs2014 <- unique(merge(unique(ohs2014[,relevant_fields]), ll@get_hsize(ohs2014), by = c("hhid")))
   chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age","litlang","outoffood")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = max(occupation_rank) , litlang = choose_max_litlang(litlang), age = choose_max_non_na(age), outoffood=max(outoffood))
   
