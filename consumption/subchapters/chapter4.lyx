@@ -4,14 +4,23 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass article
+\textclass extarticle
+\begin_preamble
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{xparse}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
+\font_roman "ae" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -28,10 +37,11 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
+\paperfontsize 11
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -56,6 +66,11 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 3cm
+\rightmargin 3cm
+\headheight 3cm
+\headsep 3cm
+\footskip 2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -77,7 +92,378 @@
 \begin_body
 
 \begin_layout Standard
-This chapter develops a model based on hierarchy of needs
+\noindent
+This chapter develops a model based on hierarchy of needs.
+\end_layout
+
+\begin_layout Section
+\noindent
+Research Question
+\end_layout
+
+\begin_layout Standard
+\noindent
+Does polarisation increase status consumption?
+\end_layout
+
+\begin_layout Section
+\noindent
+When needs are fixed for all
+\end_layout
+
+\begin_layout Standard
+\noindent
+If needs are fixed and known then the choices are between excess consumption
+ - that provides status, the assets relative to the reference and the reference
+ itself.
+ We assume that incomes vary with a known distribution which does not change
+ in the consumer's lifetime.
+ Thus, there is no uncertainty with the future income and the consumer with
+ the income 
+\begin_inset Formula $x$
+\end_inset
+
+ stays the same in every period 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Further, all consumers start with no assets and end their finite life at
+ time 
+\begin_inset Formula $T$
+\end_inset
+
+ with no assets.
+ The only utility from assets they get is meeting the needs imposed by the
+ community with richness 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% There are no costs-associated with maintaining assets.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+[Consumer choice and the function 
+\begin_inset Formula $\psi(r)$
+\end_inset
+
+] The variation in income - the changes to which we're interested in - is
+ unrelated with the reference.
+ With a given fixed distribution of income in the population, the choice
+ which the consumer faces is to be in a poor reference or a higher reference
+ varying in the richness 
+\begin_inset Formula $r$
+\end_inset
+
+ - which also determines the cost of living and the utility.
+ Let the cost of living in the neighborhood of richness 
+\begin_inset Formula $r$
+\end_inset
+
+ be the the increasing function 
+\begin_inset Formula $\psi(r)$
+\end_inset
+
+.
+ The consumer saves towards 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ towards 
+\begin_inset Formula $a_{t}$
+\end_inset
+
+ when it is not spent towards excess relative the reference.
+ Since we assume no bequest, the consumer would only maximise the total
+ wealth excess relative to the reference level richness 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ Any status is implied only through the accumulation above reference 
+\begin_inset Formula $r$
+\end_inset
+
+ and excess above costs 
+\begin_inset Formula $\psi(r)$
+\end_inset
+
+ imposed by the reference with richness 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+a_{t}=a_{t-1}+\Delta_{t}\label{eq:assets_accumulation}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+[Utility function] The total status-rank a consumer obtains in period 
+\begin_inset Formula $t$
+\end_inset
+
+ is based on the richness 
+\begin_inset Formula $r$
+\end_inset
+
+, the income 
+\begin_inset Formula $x$
+\end_inset
+
+ and the asset accumulation 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ by the period 
+\begin_inset Formula $t$
+\end_inset
+
+ the consumer.
+ Assuming an additive utility, we can write utility 
+\begin_inset Formula $U_{t}(a_{t},r,x)$
+\end_inset
+
+ in the period 
+\begin_inset Formula $t$
+\end_inset
+
+ as follows:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{gather*}
+U_{t}(a_{t-1},\Delta_{t},r,x)=\upsilon(a_{t}-r,r,x-\psi(r)-\Delta_{t})\\
+=u_{A}(a_{t}-r)+u_{R}(r)+u_{X}(x-\psi(r)-\Delta_{t})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+The urban consumer in a posh-neighborhood has a higher 
+\begin_inset Formula $x$
+\end_inset
+
+ corresponding to a higher 
+\begin_inset Formula $r$
+\end_inset
+
+ but would continue to save 
+\begin_inset Formula $A$
+\end_inset
+
+ as there is nowhere else she may go.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+Instead of the direct utility from 
+\begin_inset Formula $A$
+\end_inset
+
+ or 
+\begin_inset Formula $x$
+\end_inset
+
+, the consumer gets utility relative to a reference in both cases.
+ Given an income 
+\begin_inset Formula $x$
+\end_inset
+
+, the consumer faces two choices.
+ First is to be in a rich neighborhood with higher 
+\begin_inset Formula $\psi(r)$
+\end_inset
+
+ i.e.
+ facing a higher 
+\begin_inset Formula $\psi(r)$
+\end_inset
+
+ and needing to save more 
+\begin_inset Formula $A$
+\end_inset
+
+ relative to 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ The second is to be in a poor neighborhood with a lower 
+\begin_inset Formula $r$
+\end_inset
+
+ (which also matters for her long-term status) and face a much lower 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ A society that is more polarised on richness 
+\begin_inset Formula $r$
+\end_inset
+
+ would penalise being in the poor neighborhood more - so 
+\begin_inset Formula $u_{r}$
+\end_inset
+
+would increase faster with 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ The utility from being in a city or a village is different than the the
+ utility form expenditure.
+ Big cities (higher references) would only have higher living costs so they
+ offer a higher 
+\begin_inset Formula $r$
+\end_inset
+
+ but not a higher relative advantage.
+\end_layout
+
+\begin_layout Standard
+\noindent
+[Retirement] The dissolution of assets at end-of-time 
+\begin_inset Formula $T$
+\end_inset
+
+ - effectively implying that the consumers retire at age the 
+\begin_inset Formula $T$
+\end_inset
+
+ - means that the role of assets is lower at the end of life and the consumer
+ would move to a reference 
+\begin_inset Formula $r$
+\end_inset
+
+ where assets-references are low and excess is more affordable.
+ However, this does not mean that the lowest reference would be the most
+ appealing one since the consumers also get a utility from 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Any money that is not spent on status goes to asset accumulation.
+ Every year, the consumer
+\end_layout
+
+\begin_layout Standard
+One question that's worth exploring is what happens when there is a sudden
+ change in distribution i.e.
+ the income of certain consumers goes up.
+ This means that the function 
+\begin_inset Formula $u_{r}(r)$
+\end_inset
+
+ stays the same - because the long-term utility from richness responds slower
+ than the income changes.
+ This is the particular context we're interested in.
+\end_layout
+
+\begin_layout Subsection
+Questions
+\end_layout
+
+\begin_layout Enumerate
+Does it pay of being poor and moving to the city or does it make more sense
+ to stay?
+\end_layout
+
+\begin_layout Enumerate
+Does it make sense to increase nu if it's possible?
+\end_layout
+
+\begin_layout Section
+\noindent
+Needs Fixed Path
+\end_layout
+
+\begin_layout Standard
+\noindent
+If needs are on a fixed pay all consumers, then we know that all consumers
+ have a fixed 
+\end_layout
+
+\begin_layout Standard
+\noindent
+Let's ignore the life-cycle effects so that the needs are known and all
+ consumers have a certain fixed needs over the long-term.
+ If the total expenditure is 
+\begin_inset Formula $y$
+\end_inset
+
+ and needs costs are 
+\begin_inset Formula $P_{\psi}$
+\end_inset
+
+ then then the total disposable income is 
+\begin_inset Formula $x-P_{\psi}\psi$
+\end_inset
+
+ where 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is the same for every consumer.
+\end_layout
+
+\begin_layout Standard
+\noindent
+The status is achieved with the following
+\end_layout
+
+\begin_layout Enumerate
+\noindent
+The relative quality is 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\noindent
+The assets are 
+\begin_inset Formula $A$
+\end_inset
+
+.
 \end_layout
 
 \end_body
