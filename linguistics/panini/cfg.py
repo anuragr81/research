@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from sutras.common_definitions import *
 from sutras.adhyaaya1 import *
 from sutras.adhyaaya2 import *
@@ -5,6 +7,7 @@ from sutras.adhyaaya4 import *
 from sutras.adhyaaya6 import *
 from sutras.adhyaaya7 import *
 from sutras.adhyaaya8 import *
+
 
 
 """
@@ -110,7 +113,57 @@ def reduce_to_it_lopa(expr,index):
         
     return expr
     
+def pick_last_child(nodes, parent):
+    if nodes[0].parent != parent:
+        raise ValueError("Invalid Start")
+    cur_index = 0
+    for i,x in enumerate(nodes):
+        if x.parent == parent:
+            cur_index = i
+        else:
+            return cur_index
+    return cur_index
 
+
+def join_non_its(nodes):
+    strout=""
+    for x in nodes:
+        if not isinstance(x._data,It):
+            if any (not isinstance(j,str) for j in x._data):               
+                raise RuntimeError("Invalid input for Joining")
+            else:
+                strout=strout+''.join(x._data)
+                
+    return strout
+
+def combine_dhaatu_suffix(dhaatu,suffix):
+    #TODO: instead of string - apply transformations that apply to dhaatu + suffix combination e.g. upadhaayaaH etc.
+    
+    return ''.join(dhaatu._data._data) + join_non_its(suffix)
+
+def reduce_dhaatu_combination(new_expr):
+    for i in range(0,len(new_expr)):
+        if new_expr[i].parent:
+            # handle a pratyaya
+            # only adjacent 
+            if isinstance(new_expr[i].parent,Suffix):
+                dhaatu_index = pick_last_dhaatu(new_expr[0:i])
+                parent_boundary_end=pick_last_child(new_expr[i:],new_expr[i].parent)
+                # reducing expression with combination
+                # this involves appending plain-strings (that cannot be reduced further)
+                return new_expr[0:dhaatu_index] + [combine_dhaatu_suffix(new_expr[dhaatu_index],new_expr[i:i+parent_boundary_end+1])] + new_expr[i+parent_boundary_end+1:]
+    return new_expr
+            
+            
+def pick_last_dhaatu(nodes):
+    for i,x in enumerate(nodes):        
+        if isinstance(x._data,Dhaatu):
+            return i
+        elif not isinstance(x._data,It):
+            raise RuntimeError("Must be either It or Dhaatu")
+            
+    raise RuntimeError("Dangling Dhaatu")
+    
 def process_list(expr):
     if any(not isinstance(entry,Node) for entry in expr):
         raise ValueError("Only nodes are to be present")
@@ -127,9 +180,11 @@ def process_list(expr):
             new_expr = reduce_to_it_lopa(expr=new_expr,index=suffix_indices[0])
         else:
             break
-    #TODO: reduce the list by considering parents etc.
-    # list of unique seniormost parents
-    print(OrderedDict([(x.parent,None) for x in new_expr]))
+    
+    
+    # list could be further reduced before dhaatu-suffix combination is invoked
+    new_expr = reduce_dhaatu_combination(new_expr)                               
+            
     # join all immediate neighours - 2-neighborhoods
     
     return new_expr
