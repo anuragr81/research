@@ -1,13 +1,25 @@
 from collections import OrderedDict
 
 from sutras.common_definitions import *
+from functools import reduce
+
+from sutras import adhyaaya1 as a1
+from sutras import adhyaaya2 as a2
+from sutras import adhyaaya3 as a3
+from sutras import adhyaaya4 as a4
+from sutras import adhyaaya5 as a5
+from sutras import adhyaaya6 as a6
+from sutras import adhyaaya7 as a7
+from sutras import adhyaaya8 as a8
+
 from sutras.adhyaaya1 import *
 from sutras.adhyaaya2 import *
+from sutras.adhyaaya3 import *
 from sutras.adhyaaya4 import *
+from sutras.adhyaaya5 import *
 from sutras.adhyaaya6 import *
 from sutras.adhyaaya7 import *
 from sutras.adhyaaya8 import *
-
 
 
 """
@@ -15,8 +27,15 @@ Currently the naayaka is broken because aardhadhaatukasyavalaadeH has been enabl
 to default aardhadhaatukaH
 """
 
+def get_sutras_for_module (j):
+    return [ (int(re.search('([0-9]+)$',x).group(1)),getattr(j,x)) for x in dir(j) if not x.startswith('_')  and re.search('.*[0-9]+',x)]
 
-#assert(''.join(declense(Anga(parse_string("bhaja")),0,0,sense="bhaava",is_dhaatu=True))=="bhaagaH")
+def get_sutras_ordered ():    
+    all_sutras = reduce(lambda x , y : x + get_sutras_for_module (y) , [a1,a2,a3,a4,a5,a6,a7,a8],[]) 
+    return OrderedDict(sorted(all_sutras))
+
+def transformation_sutras():
+    return [701001, 701002, 702115, 702116, 703052, 704114, 801015, 802066]
 
 class Application:
     def __init__(self,entry):
@@ -141,6 +160,20 @@ def combine_dhaatu_suffix(dhaatu,suffix):
     
     return ''.join(dhaatu._data._data) + join_non_its(suffix)
 
+def apply_transformation(transformation_rule,new_expr):
+    for i in range(0,len(new_expr)):
+        if new_expr[i].parent:
+            # handle a pratyaya
+            # only adjacent 
+            if isinstance(new_expr[i].parent,Suffix):
+                dhaatu_index = pick_last_dhaatu(new_expr[0:i])
+                parent_boundary_end=pick_last_child(new_expr[i:],new_expr[i].parent)
+                # reducing expression with combination
+                # this involves appending plain-strings (that cannot be reduced further)
+                return new_expr[0:dhaatu_index] + transformation_rule (new_expr[dhaatu_index],new_expr[i:i+parent_boundary_end+1]) + new_expr[i+parent_boundary_end+1:]
+    return new_expr
+
+
 def reduce_dhaatu_combination(new_expr):
     for i in range(0,len(new_expr)):
         if new_expr[i].parent:
@@ -165,6 +198,7 @@ def pick_last_dhaatu(nodes):
     raise RuntimeError("Dangling Dhaatu")
     
 def process_list(expr):
+    all_sutras= get_sutras_ordered()
     if any(not isinstance(entry,Node) for entry in expr):
         raise ValueError("Only nodes are to be present")
     new_expr = expr.copy()
@@ -182,15 +216,24 @@ def process_list(expr):
             break
     
     
+    # apply transformations until there is no change in the expression
+    for transformation_ruleid in transformation_sutras():
+        new_expr = apply_transformation(all_sutras[transformation_ruleid],new_expr)
+        
     # list could be further reduced before dhaatu-suffix combination is invoked
+    # other reduction may apply before or after
     new_expr = reduce_dhaatu_combination(new_expr)                               
             
     # join all immediate neighours - 2-neighborhoods
     
     return new_expr
 
+
+a = get_sutras_ordered()
+
 expression=[Node(Dhaatu(parse_string("bhaj")),parent=None),Node(Suffix("ghaNc"),parent=None)]
 
 
 processed_expr=(process_list(expression))
+
 print([e._data for e in processed_expr])

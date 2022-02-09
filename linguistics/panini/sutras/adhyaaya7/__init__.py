@@ -1,7 +1,7 @@
 from ..common_definitions import vriddhi,upadhaa, ach
 
 
-def yuvoranaakau_701001(suffix_string):
+def yuvoranaakau_701001(anga,suffix_string):
     if not isinstance(suffix_string,list):
         raise ValueError("suffix_string must of type list")
         
@@ -10,12 +10,12 @@ def yuvoranaakau_701001(suffix_string):
     if suffix_string[-2:] == ["v","u"]:
         return suffix_string[0:-2] + ["a","k","a"]
 
-    return suffix_string
+    return anga + suffix_string
 
 
 
 
-def aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(pratyaya):
+def aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(x,pratyaya):
     letter = pratyaya[0]
     if letter== "ph":
         return ["aa","y","a","n"] + pratyaya[1:]
@@ -32,7 +32,7 @@ def aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(pratyaya):
     
 
         
-def ataupadhaayaaH_702116(anga,it_chars,suffix):
+def ataupadhaayaaH_702116(anga,suffix):
     """
     the it characters are used  to decide if upadha is implied in the anga or not
     """
@@ -65,7 +65,7 @@ def chajoHkughiNnNnyatoH_703052(x,suffix):
     return x
 
 
-def aardhadhaatukasyeXdvalaadeH_704114(x,is_aardhadhaatuka,suffix):
+def aardhadhaatukasyeXdvalaadeH_704114(x,suffix):
     
     if is_aardhadhaatuka:
         return x + ["i","Xt"]
