@@ -3477,7 +3477,7 @@ lsms_normalizer<-function() {
   }
  
   get_lsms_seci_info_columns <-function( year ){
-    return(c("hhid","outoffood"))
+    return(c("hhid","outoffood","outoffood_reason1","outoffood_reason2","outoffood_reason3"))
   }
   
   get_lsms_seci_fields_mapping<-function( year ){
@@ -3485,6 +3485,10 @@ lsms_normalizer<-function() {
       s = data.frame(iesname=NULL,name=NULL)
       s= rbind(s,data.frame(iesname="y2_hhid",name="hhid"))
       s= rbind(s,data.frame(iesname="hh_i08",name="outoffood")) 
+      s= rbind(s,data.frame(iesname="hh_i10_1",name="outoffood_reason1")) 
+      s= rbind(s,data.frame(iesname="hh_i10_2",name="outoffood_reason2")) 
+      s= rbind(s,data.frame(iesname="hh_i10_3",name="outoffood_reason3")) 
+      
       return(s)
     }
     if (year == 2012){

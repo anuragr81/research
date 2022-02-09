@@ -549,7 +549,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
       secFqdat    <- read.dta(secFqname,convert.factors = FALSE)
       
       secFqdat    <- fu()@get_translated_frame(dat=secFqdat,
-                                                names=c("hhid","same_diet","less_quality_1","less_quality_2","outoffood"),
+                                                names=c("hhid","same_diet","less_quality_1","less_quality_2","outoffood","outoffood_reason1","outoffood_reason2","outoffood_reason3"),
                                                 m=ngrn()@ohs_food_quality_columns_mapping_lsms(year))
       secFqdat$outoffood <- as.integer(as.integer(secFqdat$outoffood)==1) + as.integer(as.integer(secFqdat$outoffood)==2)*0
       

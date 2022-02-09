@@ -23,6 +23,67 @@ get_ngr_categories <- function(){
   return (c("densefoods","nonfresh","fruitsveg","protein","alcohol","complements","energy","household","transport"))
 }
 
+pick_non_na_outoffood_reason <- function(reason1,reason2,reason3){
+  reasons <- c()
+  if (!is.na(reason1)){
+    reasons <- c(reasons,reason1)
+  }
+  if (!is.na(reason2)){
+    reasons <- c(reasons,reason2)
+  }
+  if (!is.na(reason3)){
+    reasons <- c(reasons,reason3)
+  }
+  
+  return(jsonlite::toJSON(reasons))
+}
+
+
+outoffood_due_to_costs <- function(reasons_string){
+  reasons <- jsonlite::fromJSON(reasons_string)
+  if (length(intersect(c("5","6","9"),reasons))>0){
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+outoffood_due_to_agri <- function(reasons_string){
+  reasons <- jsonlite::fromJSON(reasons_string)
+  if (length(intersect(c("1","2","3","4"),reasons))>0){
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+plot_out_of_food<-function(o2010,reason){
+  world_map <- map_data("world")
+  tnz_map = subset(world_map ,region=="Nigeria")
+  idat <- subset(o2010,personid==1)
+  idat[is.na(idat$outoffood),]$outoffood <- 0
+  o2010_woutoffoodreasons <- idat
+  o2010_woutoffoodreasons$outoffood_reasons <- mapply(pick_non_na_outoffood_reason,o2010_woutoffoodreasons$outoffood_reason1, o2010_woutoffoodreasons$outoffood_reason2,o2010_woutoffoodreasons$outoffood_reason3)
+
+  if (reason=="costs"){
+    o2010_woutoffoodreasons$outoffood_costs <- mapply(outoffood_due_to_costs,o2010_woutoffoodreasons$outoffood_reasons)
+    dat <- ddply(o2010_woutoffoodreasons,.(region,district,S,E),summarise,n=length(hhid),n_outoffood_costs=sum(outoffood_costs)) %>% mutate(fraction_outoffood_costs=n_outoffood_costs/n)
+    p <- ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+                               colour="light yellow", fill="light yellow") + geom_point(data=dat,aes(x=E, y=S, size = fraction_outoffood_costs))+ scale_size(range = c(.5, 8), name="out-of-food") + ggtitle("Out of Food HH - High Costs (2010)")  
+    print (p)
+  } else if (reason == "agri"){
+    o2010_woutoffoodreasons$outoffood_agri <- mapply(outoffood_due_to_agri,o2010_woutoffoodreasons$outoffood_reasons)
+    dat <- ddply(o2010_woutoffoodreasons,.(region,district,S,E),summarise,n=length(hhid),n_outoffood_agri=sum(outoffood_agri)) %>% mutate(fraction_outoffood_agri=n_outoffood_agri/n)
+    p <- ggplot()+geom_polygon(data=tnz_map, aes(x=long, y=lat, group=group), 
+                        colour="light yellow", fill="light yellow") + geom_point(data=dat,aes(x=E, y=S, size = fraction_outoffood_agri))+ scale_size(range = c(.5, 8), name="out-of-food") + ggtitle("Out of Food HH - Agricultural Shortage (2010)")
+  #  + geom_label_repel(data=dat, aes(x=E,y=S, label=ifelse(district==1,as.character(region_name),'')),box.padding = .3, point.padding = .5, segment.color ='grey50')
+    print (p)
+  } else {
+    stop(paste("Unknown Reason :",reason))
+  }
+  
+}
+
 
 plot_region_map <- function(plot_type,a2012,o2010,o2012,ignored_assets_top){
   

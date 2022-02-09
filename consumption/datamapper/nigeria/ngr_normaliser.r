@@ -1569,6 +1569,9 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s9q1b",name="less_quality_2"))
       s= rbind(s,data.frame(iesname="s9q3",name="same_diet"))
       s= rbind(s,data.frame(iesname="s9q5",name="outoffood"))
+      s= rbind(s,data.frame(iesname="s9q7a",name="outoffood_reason1"))
+      s= rbind(s,data.frame(iesname="s9q7b",name="outoffood_reason2"))
+      s= rbind(s,data.frame(iesname="s9q7c",name="outoffood_reason3"))
       return(s)
     }
     if (year == 2015)  {
