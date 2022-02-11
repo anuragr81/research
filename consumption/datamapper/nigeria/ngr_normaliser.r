@@ -273,7 +273,7 @@ ngr_normaliser<-function() {
     if (year == 2010){
       return(c("hhid","personid", "highest_educ","is_schooled","school_start_age",
                "qualification","is_inschool","reason_not_inschool","school_body","school_conveyance","school_distance",
-               "educ_costa","educ_costb","educ_costc","educ_costd","educ_coste","educ_costf","educ_costg","educ_costh","educ_cost"))
+               "educexpensea","educexpenseb","educexpensec","educexpensed","educexpensee","educexpensef","educexpenseg","educexpenseh","educexpense"))
     }
     
     stop(paste("Year:",year,"not supported"))
@@ -342,15 +342,15 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s2q11",name="school_body"))
       s= rbind(s,data.frame(iesname="s2q12",name="school_conveyance"))
       s= rbind(s,data.frame(iesname="s2q13",name="school_distance"))
-      s= rbind(s,data.frame(iesname="s2q18a",name="educ_costa"))
-      s= rbind(s,data.frame(iesname="s2q18b",name="educ_costb"))
-      s= rbind(s,data.frame(iesname="s2q18c",name="educ_costc"))
-      s= rbind(s,data.frame(iesname="s2q18d",name="educ_costd"))
-      s= rbind(s,data.frame(iesname="s2q18e",name="educ_coste"))
-      s= rbind(s,data.frame(iesname="s2q18f",name="educ_costf"))
-      s= rbind(s,data.frame(iesname="s2q18g",name="educ_costg"))
-      s= rbind(s,data.frame(iesname="s2q18h",name="educ_costh"))
-      s= rbind(s,data.frame(iesname="s2q18i",name="educ_cost"))
+      s= rbind(s,data.frame(iesname="s2q18a",name="educexpensea"))
+      s= rbind(s,data.frame(iesname="s2q18b",name="educexpenseb"))
+      s= rbind(s,data.frame(iesname="s2q18c",name="educexpensec"))
+      s= rbind(s,data.frame(iesname="s2q18d",name="educexpensed"))
+      s= rbind(s,data.frame(iesname="s2q18e",name="educexpensee"))
+      s= rbind(s,data.frame(iesname="s2q18f",name="educexpensef"))
+      s= rbind(s,data.frame(iesname="s2q18g",name="educexpenseg"))
+      s= rbind(s,data.frame(iesname="s2q18h",name="educexpenseh"))
+      s= rbind(s,data.frame(iesname="s2q18i",name="educexpense"))
       return(s)
     }
     if (year == 2012){
@@ -369,15 +369,15 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s2q13",name="school_conveyance"))
       s= rbind(s,data.frame(iesname="s2q14",name="school_distance"))
       
-      s= rbind(s,data.frame(iesname="s2q19a",name="educ_costa"))
-      s= rbind(s,data.frame(iesname="s2q19b",name="educ_costb"))
-      s= rbind(s,data.frame(iesname="s2q19c",name="educ_costc"))
-      s= rbind(s,data.frame(iesname="s2q19d",name="educ_costd"))
-      s= rbind(s,data.frame(iesname="s2q19e",name="educ_coste"))
-      s= rbind(s,data.frame(iesname="s2q19f",name="educ_costf"))
-      s= rbind(s,data.frame(iesname="s2q19g",name="educ_costg"))
-      s= rbind(s,data.frame(iesname="s2q19h",name="educ_costh"))
-      s= rbind(s,data.frame(iesname="s2q19i",name="educ_cost"))
+      s= rbind(s,data.frame(iesname="s2q19a",name="educexpensea"))
+      s= rbind(s,data.frame(iesname="s2q19b",name="educexpenseb"))
+      s= rbind(s,data.frame(iesname="s2q19c",name="educexpensec"))
+      s= rbind(s,data.frame(iesname="s2q19d",name="educexpensed"))
+      s= rbind(s,data.frame(iesname="s2q19e",name="educexpensee"))
+      s= rbind(s,data.frame(iesname="s2q19f",name="educexpensef"))
+      s= rbind(s,data.frame(iesname="s2q19g",name="educexpenseg"))
+      s= rbind(s,data.frame(iesname="s2q19h",name="educexpenseh"))
+      s= rbind(s,data.frame(iesname="s2q19i",name="educexpense"))
       return(s)
     }
     
@@ -397,15 +397,15 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s2aq17",name="school_conveyance"))
       s= rbind(s,data.frame(iesname="s2aq18",name="school_distance"))
       
-      s= rbind(s,data.frame(iesname="s2aq23a",name="educ_costa"))
-      s= rbind(s,data.frame(iesname="s2aq23b",name="educ_costb"))
-      s= rbind(s,data.frame(iesname="s2aq23c",name="educ_costc"))
-      s= rbind(s,data.frame(iesname="s2aq23d",name="educ_costd"))
-      s= rbind(s,data.frame(iesname="s2aq23e",name="educ_coste"))
-      s= rbind(s,data.frame(iesname="s2aq23f",name="educ_costf"))
-      s= rbind(s,data.frame(iesname="s2aq23g",name="educ_costg"))
-      s= rbind(s,data.frame(iesname="s2aq23h",name="educ_costh"))
-      s= rbind(s,data.frame(iesname="s2aq23i",name="educ_cost"))
+      s= rbind(s,data.frame(iesname="s2aq23a",name="educexpensea"))
+      s= rbind(s,data.frame(iesname="s2aq23b",name="educexpenseb"))
+      s= rbind(s,data.frame(iesname="s2aq23c",name="educexpensec"))
+      s= rbind(s,data.frame(iesname="s2aq23d",name="educexpensed"))
+      s= rbind(s,data.frame(iesname="s2aq23e",name="educexpensee"))
+      s= rbind(s,data.frame(iesname="s2aq23f",name="educexpensef"))
+      s= rbind(s,data.frame(iesname="s2aq23g",name="educexpenseg"))
+      s= rbind(s,data.frame(iesname="s2aq23h",name="educexpenseh"))
+      s= rbind(s,data.frame(iesname="s2aq23i",name="educexpense"))
       return(s)
     }
     
