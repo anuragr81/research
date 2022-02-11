@@ -360,12 +360,44 @@ status open
 
 \begin_layout Plain Layout
 
-% Lorenz curve plot
+% Lorenz curve plots
 \end_layout
 
 \begin_layout Plain Layout
 
 %plot(Lc(exp(ng$df2015$logx)))
+\end_layout
+
+\begin_layout Plain Layout
+
+%lorenz_curve(dat_a = exp(tn2012$logx),dat_b = exp(ng$df2012$logx),dat_a_name
+ = "Tanzania",dat_b_name = "Nigeria",xlab = "Households",ylab = "Total Expenditu
+re",use_cex = 1.)
+\end_layout
+
+\begin_layout Plain Layout
+
+% for district level assets
+\end_layout
+
+\begin_layout Plain Layout
+
+%lorenz_curve(dat_a = exp(district_means(dat=tn2012,hhid_col = "hhid2012",field_
+type = "lnA0")$mean_lnA0),dat_b = exp(district_means(dat=ng$df2012,hhid_col
+ = "hhid",field_type = "lnA0")$mean_lnA0),dat_a_name = "Tanzania",dat_b_name
+ = "Nigeria",xlab = "Districts",ylab = "Total Assets",use_cex = 1.)
+\end_layout
+
+\begin_layout Plain Layout
+
+% For individual assets
+\end_layout
+
+\begin_layout Plain Layout
+
+%lorenz_curve(dat_a = exp(tn2012$lnA0),dat_b = exp(ng$df2012$lnA0),dat_a_name
+ = "Tanzania",dat_b_name = "Nigeria",xlab = "Household",ylab = "Total Assets",us
+e_cex = 1.)
 \end_layout
 
 \end_inset

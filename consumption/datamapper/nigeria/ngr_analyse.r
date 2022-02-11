@@ -19,6 +19,31 @@ test <- function(){
   return(ohs)
 }
 
+district_means<-function(dat,hhid_col,field_type){
+  if (field_type=="logx"){
+    dd <-ddply(dat[,c("region","district",hhid_col,"logx")],.(region,district),summarise,mean_logx= log(mean(exp(logx))))
+    return(dd)
+  } 
+  if (field_type=="lnA0"){
+    dd <-ddply(dat[,c("region","district",hhid_col,"lnA0")],.(region,district),summarise,mean_lnA0= log(mean(exp(lnA0))))
+    return(dd)
+  }
+  stop("Unknown field_type")
+}
+
+
+lorenz_curve <- function(dat_a,dat_b,dat_a_name,dat_b_name,xlab,ylab, use_cex){
+  a_lty <- 1
+  b_lty <- 2
+  plot(0,0,type='l',xlim = c(0,1), ylim=c(0,1) , xlab = xlab, ylab=ylab , main= paste("Lorenz curve -",dat_a_name,"vs",dat_b_name))
+  lines(Lc(dat_a),lty=a_lty)
+  lines(Lc(dat_b),lty=b_lty)
+  if (missing(use_cex)){
+    use_cex <- .8
+  }
+  legend(0.1, .85, legend=c(dat_a_name,dat_b_name), lty=c(a_lty,b_lty), cex=use_cex)
+}
+
 get_ngr_categories <- function(){
   return (c("densefoods","nonfresh","fruitsveg","protein","alcohol","complements","energy","household","transport"))
 }
