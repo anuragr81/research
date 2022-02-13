@@ -91,10 +91,21 @@ class Node:
 def desuffix(x):
     return x.get_suffix() if isinstance(x,Suffix) else x
 
-def reduce_to_it_lopa(expr,index):
+def reduce_as_it_objects(expr,index):
     """
     Applied recursively until no it saMNcjyA is implied
     The decompostion of suffix into it-s retains the collective property of being a Suffix
+    
+    When called this should be called as:
+    
+        while True:
+        suffix_indices= [ index for index,node in enumerate(new_expr) if isinstance(node._data,Suffix)]
+        if suffix_indices:
+            new_expr = apply_lopa(expr=new_expr,index=suffix_indices[0])
+        else:
+            break
+    
+    
     """
     #TODO: remove recursive node formation
     
@@ -197,6 +208,11 @@ def pick_last_dhaatu(nodes):
             
     raise RuntimeError("Dangling Dhaatu")
     
+def apply_lopa(suffix):
+    #adjust suffix as needed
+    it_pos = lashakvataddhite_103008(suffix)
+    
+    if it_pos is not None:
 def process_list(expr):
     all_sutras= get_sutras_ordered()
     if any(not isinstance(entry,Node) for entry in expr):
@@ -205,16 +221,15 @@ def process_list(expr):
     
     # the logic for applying it-lopa is that 
     # all suffixes are searched and then lopa-application is applied
-    # this is the application phase - and it ensued only because we invoked it at first
-    # there may be other things that are needed before application occurs
-
+    # the lopa changes the suffix's state
+    
     while True:
         suffix_indices= [ index for index,node in enumerate(new_expr) if isinstance(node._data,Suffix)]
         if suffix_indices:
-            new_expr = reduce_to_it_lopa(expr=new_expr,index=suffix_indices[0])
+            new_expr = new_expr[0:suffix_indices[0]]  + [apply_lopa(new_expr[suffix_indices[0]])]+new_expr[suffix_indices[0]:]
         else:
             break
-    
+        
     
     # apply transformations until there is no change in the expression
     for transformation_ruleid in transformation_sutras():
