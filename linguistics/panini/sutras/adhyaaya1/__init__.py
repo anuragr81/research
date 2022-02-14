@@ -1,4 +1,4 @@
-from ..common_definitions import anunaasika, Suffix, ach, hal, chu, Xtu
+from ..common_definitions import anunaasika, Suffix, ach, hal, chu, Xtu, Node
 
 def uraNnraparaH_101050(a, b):
     if a[-1] == "Ri" :
@@ -11,55 +11,53 @@ def uraNnraparaH_101050(a, b):
 
 def halantyam_103003(upadesha):
     
-    antyam = upadesha[len(upadesha)-1]
+    antyam = upadesha.get_output()[-1]
     if antyam in hal():
-        return len(upadesha)-1
+        return upadesha.get_output()[:-1]
     else:
-        return None
+        return upadesha.get_output()
 
-def aadirNciXtuXdavaH_103005(upadesha):
-    if upadesha[0:2] in  (["Nc","i"],["Xt","u"],["Xd","u"]):
-        return [0,1]
+def aadirNciXtuXdavaH_103005(upadesha_node):
+    if not isinstance(upadesha_node,Node):
+        raise ValueError("Must be Node")
+    if not isinstance(upadesha_node._data,Suffix):
+        raise ValueError("Must be Suffix")
+    if upadesha_node.get_output()[0:2] in  (["Nc","i"],["Xt","u"],["Xd","u"]):
+        return upadesha_node.get_output()[2:]
     else:
-        return []
+        return upadesha_node.get_output()
 
-def chuXtuu_10307(suffix):
-    
-    suffix_str = suffix.get_suffix() if isinstance   (suffix,Suffix) else suffix
+def chuXtuu_10307(suffix_node):    
+    if not isinstance(suffix_node,Node):
+        raise ValueError("Must be Node")
+    suffix=suffix_node._data
+    if not isinstance(suffix,Suffix):
+        raise ValueError("Must be Suffix")
      
-    if suffix_str [0] in  chu() or suffix_str [0] in Xtu():
-        return 0
+    if suffix_node.get_output() [0] in  chu() or suffix_node.get_output()[0] in Xtu():
+        return suffix_node.get_output()[1:]
     
-    return None
+    return suffix_node.get_output()
 
     
-def lashakvataddhite_103008(suffix):
-    """ 
-    returns the position of it
-    """
-    if isinstance(suffix,Suffix):
-        if not suffix.is_taddhita and suffix.get_suffix()[0] in ("l","sh","k","kh","g","gh","Nc"):
-            return 0
+def lashakvataddhite_103008(suffix_node):
     
-    return None
+    if not isinstance(suffix_node,Node):
+        raise ValueError("Must be of Node type")
+    suffix = suffix_node._data
+    if not isinstance(suffix,Suffix):
+        raise ValueError("Must be of Suffix type")
+    if not suffix.is_taddhita and suffix_node.get_output()[0] in ("l","sh","k","kh","g","gh","Nc"):
+        return suffix_node.get_output()[1:]
 
+    return suffix_node.get_output()
 
 
 def upadesheajanunaasikait_103002(aadesha):
     
-    apply_rule = lambda x: x[0:-1] if x[-1] in anunaasika() or x[-1] in ach()  else x
-    prev_iter = aadesha
-    print("aadesha="+str(aadesha))
-    next_iter = apply_rule(aadesha)
+    apply_rule = lambda x: x[0:-1] if x[-1] in anunaasika() or x[-1] in ach()  else x   
 
-    #for l in aadesha:
-    #    if next_iter == prev_iter:
-    #        return prev_iter
-    #    else:
-    #        prev_iter = next_iter
-    #        next_iter = apply_rule(next_iter)
-
-    return next_iter
+    return apply_rule(aadesha)
 
 
 

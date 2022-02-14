@@ -41,51 +41,11 @@ class Application:
     def __init__(self,entry):
         self._entry = entry
 
-class It:
-    def __init__(self,data):
-        self._data= data
-
-class Dhaatu:
-    def __init__(self,data):
-        self._data= data
-
-def get_supported_types ():
-    return (Suffix,It,Dhaatu)
-
-def is_known_type(nd):
-    return any ( isinstance(nd,x) for x in get_supported_types())
-
-def find_known_parent(nd):
-    # return parent of Node that is not of a known type
-    if nd is None:
-        return None
-    
-    if is_known_type(nd):
-        return nd
-    else:
-        return find_known_parent(nd.parent)
 
 """
 We are going to a model where known parents are always provided
 """
 
-class Node:
-    def __init__(self,data,parent):
-        if all ( not isinstance(data,x) for x in list(get_supported_types()) + [list] ):
-            raise ValueError("Unsupported type %s" % type(data))
-        if parent is not None:
-            if isinstance(parent,list):
-                # temporary type (list etc.) so go to the first typed parent
-                self.parent = find_known_parent(parent)
-            elif all ( not isinstance(parent,x) for x in get_supported_types() ):
-                raise ValueError("Unsupported parent type %s" % type(parent))
-            else:
-                self.parent = parent
-        else:
-            self.parent = None
-        
-        self._data =data
-        
 
 
 def desuffix(x):
@@ -173,15 +133,13 @@ def combine_dhaatu_suffix(dhaatu,suffix):
 
 def apply_transformation(transformation_rule,new_expr):
     for i in range(0,len(new_expr)):
-        if new_expr[i].parent:
-            # handle a pratyaya
-            # only adjacent 
-            if isinstance(new_expr[i].parent,Suffix):
-                dhaatu_index = pick_last_dhaatu(new_expr[0:i])
-                parent_boundary_end=pick_last_child(new_expr[i:],new_expr[i].parent)
-                # reducing expression with combination
-                # this involves appending plain-strings (that cannot be reduced further)
-                return new_expr[0:dhaatu_index] + transformation_rule (new_expr[dhaatu_index],new_expr[i:i+parent_boundary_end+1]) + new_expr[i+parent_boundary_end+1:]
+        if isinstance(new_expr[i]._data,Suffix):
+            dhaatu_index = pick_last_dhaatu(new_expr[0:i])
+            # reducing expression with combination
+            # this involves appending plain-strings (that cannot be reduced further)
+            anga, suffix_output = transformation_rule (new_expr[dhaatu_index],new_expr[i]._data)
+            
+            return new_expr[0:dhaatu_index] + + new_expr[i+1:]
     return new_expr
 
 
@@ -208,11 +166,33 @@ def pick_last_dhaatu(nodes):
             
     raise RuntimeError("Dangling Dhaatu")
     
-def apply_lopa(suffix):
-    #adjust suffix as needed
-    it_pos = lashakvataddhite_103008(suffix)
+def apply_lopa(suffix_node):
+    """
+    Only tripaadii sutras need to be re-applied
+    others can potentially be applied
+    """
     
-    if it_pos is not None:
+    if not isinstance(suffix_node,Node):
+        raise ValueError("Need Node")
+
+    if not isinstance(suffix_node._data,Suffix):
+        raise ValueError("Need Suffix")
+    MAX_TIMES=10000
+    lopa_functions = [lashakvataddhite_103008, aadirNciXtuXdavaH_103005, halantyam_103003, chuXtuu_10307]
+    
+    for lopafunc in  lopa_functions :
+        print(lopafunc.__name__)
+        not_done=True
+        while not_done:
+            prev_output=suffix_node.get_output()
+            suffix_node.set_output(lopafunc)
+            if suffix_node.get_output() == prev_output:
+                not_done=False
+                
+    return suffix_node
+                    
+    
+        
 def process_list(expr):
     all_sutras= get_sutras_ordered()
     if any(not isinstance(entry,Node) for entry in expr):
@@ -223,12 +203,12 @@ def process_list(expr):
     # all suffixes are searched and then lopa-application is applied
     # the lopa changes the suffix's state
     
-    while True:
-        suffix_indices= [ index for index,node in enumerate(new_expr) if isinstance(node._data,Suffix)]
-        if suffix_indices:
-            new_expr = new_expr[0:suffix_indices[0]]  + [apply_lopa(new_expr[suffix_indices[0]])]+new_expr[suffix_indices[0]:]
-        else:
-            break
+    
+    suffix_indices= [ index for index,node in enumerate(new_expr) if isinstance(node._data,Suffix)]
+        
+    for suffix_index in suffix_indices:
+       suffix_node  = new_expr[suffix_index]
+       new_expr[suffix_index ] = apply_lopa(suffix_node)
         
     
     # apply transformations until there is no change in the expression

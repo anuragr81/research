@@ -29,7 +29,9 @@ class Group:
     
     def data(self):
         return self._data
-    
+
+
+
 class Anga(Group):
     def __init__(self,anga,is_dhaatu=False):
         self._anga = Group(anga)
@@ -47,7 +49,7 @@ class Anga(Group):
     def __repr__(self):
         return str(self._anga )
 
-    
+
 class Suffix:
     def __init__(self,suffix):
         
@@ -64,20 +66,88 @@ class Suffix:
             raise ValueError("Unknown suffix %s" % ''.join(self._suffix))            
         
         self.is_taddhita = ''.join(self._suffix) in taddhita_prayayaaH()
-        self.reduced= None
         
+    def get_data(self):
+        return self._suffix
+    
     def get_suffix(self):
         return self._suffix
+    
+    def get_itchars(self):
+        return (self._suffix[0],self._suffix[-1])
     
     def apply_reduction(self,functor, **kwargs):
         self.reduced = functor(**kwargs)
         
-    
+
     def __str__(self):
-        return str(self._suffix)
+        return ''.join(self._suffix)
 
     def __repr__(self):
         return str(self._suffix)
+
+
+class It:
+    def __init__(self,data):
+        self._data= data
+
+class Dhaatu:
+    def __init__(self,data):
+        self._data= data
+        
+    def get_data(self):
+        return self._data
+    
+
+
+
+class Node:
+    def __init__(self,data,parent):
+        if all ( not isinstance(data,x) for x in list(get_supported_types()) + [list] ):
+            raise ValueError("Unsupported type %s" % type(data))
+        if parent is not None:
+            if isinstance(parent,list):
+                # temporary type (list etc.) so go to the first typed parent
+                self.parent = find_known_parent(parent)
+            elif all ( not isinstance(parent,x) for x in get_supported_types() ):
+                raise ValueError("Unsupported parent type %s" % type(parent))
+            else:
+                self.parent = parent
+        else:
+            self.parent = None
+        
+        self._data =data
+        self._output = [{'output':self._data.get_data()}]
+        
+    def set_output(self,rule,**kwargs):
+        old_output = self.get_output()
+        new_output = rule(self,**kwargs)
+        if new_output != old_output:
+            self._output.append({'rule':rule,'inputs':{**{'state':old_output} , **kwargs},'output':new_output })
+        
+    def get_output(self):
+        return self._output[-1]['output']
+    
+
+def is_known_type(nd):
+    return any ( isinstance(nd,x) for x in get_supported_types())
+
+
+def get_supported_types ():
+    return (Suffix,It,Dhaatu)
+
+def find_known_parent(nd):
+    # return parent of Node that is not of a known type
+    if nd is None:
+        return None
+    
+    if is_known_type(nd):
+        return nd
+    else:
+        return find_known_parent(nd.parent)
+
+
+
 
 def ach():
     return ("aa","ii","uu","Rii") + pratyaahaara('a','ch')
