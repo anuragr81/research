@@ -1,27 +1,30 @@
-from ..common_definitions import Suffix,Node, Dhaatu
+from ..common_definitions import Suffix,Node, Dhaatu, ach
 
 def NnonaH_601063(node,suffix_node):
     if not isinstance   (node,Node):
         raise    ValueError ("node must be of type Node")
     if not isinstance   (node._data,Dhaatu):
         raise    ValueError ("node-data must be of type Dhaatu")
-    dhaatu=node._data._data
-    if dhaatu[0] == "Nn":
-        return ['n']+dhaatu[1:]
+    dhaatu_string=node.get_output()
+    if dhaatu_string[0] == "Nn":
+        return ['n']+dhaatu_string[1:]
     else:
-        return dhaatu
+        return dhaatu_string
 
-def echoayavaayaavaH_601075(node):
-    node_output=node.get_output()
+def echoayavaayaavaH_601075(node, suffix_node):
+    if suffix_node.get_output()[0] not in ach():
+        return node.get_output()
+
     
-    if node_output[0] == "e":
-        return "ay" + node_output[1:]
-    if node_output[0] == "o":
-        return "av"+ node_output[1:]
-    if node_output[0] == "ai":
-        return "aay"+ node_output[1:]
-    if node_output[0] == "au":
-        return "aav"+ node_output[1:]
+    node_output=node.get_output()
+    if node_output[-1] == "e":
+        return node_output[0:-1]+["ay" ]
+    if node_output[-1] == "o":
+        return node_output[0:-1]+["av"]
+    if node_output[-1] == "ai":
+        return node_output[0:-1]+["aay"]
+    if node_output[-1] == "au":
+        return node_output[0:-1]+["aav"]
         
     return node_output
 

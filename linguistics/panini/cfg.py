@@ -172,6 +172,26 @@ def pick_last_dhaatu(nodes):
             
     raise RuntimeError("Dangling Dhaatu")
     
+def apply_dhaatu_lopa(dhaatu_node):
+    if not isinstance(dhaatu_node,Node):
+        raise ValueError("Need Node")
+
+    if not isinstance(dhaatu_node._data,Dhaatu):
+        raise ValueError("Need Dhaatu")
+        
+    MAX_TIMES=10000
+    lopa_functions = [halantyam_103003]
+    
+    for lopafunc in  lopa_functions :
+        not_done=True
+        while not_done:
+            prev_output=dhaatu_node.get_output()
+            dhaatu_node.set_output(lopafunc)
+            if dhaatu_node.get_output() == prev_output:
+                not_done=False
+                
+    return dhaatu_node
+        
 def apply_lopa(suffix_node):
     """
     Only tripaadii sutras need to be re-applied
@@ -211,14 +231,20 @@ def process_list(expr):
     
     
     suffix_indices= [ index for index,node in enumerate(new_expr) if isinstance(node._data,Suffix)]
+    dhaatu_indices= [ index for index,node in enumerate(new_expr) if isinstance(node._data,Dhaatu)]
         
+    # apply lopa to suffixes
     for suffix_index in suffix_indices:
        suffix_node  = new_expr[suffix_index]
        new_expr[suffix_index ] = apply_lopa(suffix_node)
-        
     
+    # apply lopa to dhaatus
+    for dhaatu_index in dhaatu_indices:
+       dhaatu_node  = new_expr[dhaatu_index ]
+       new_expr[dhaatu_index ] = apply_dhaatu_lopa(dhaatu_node  )
+       
     # apply transformations until there is no change in the expression
-    for transformation_ruleid in transformation_sutras():
+    for transformation_ruleid in transformation_sutras():        
         new_expr = apply_transformation(all_sutras[transformation_ruleid],new_expr)
     
     return new_expr
@@ -227,13 +253,11 @@ def test_siddhis ():
     output_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  process_list(expr), []))
     
 #    assert output_string ([Node(Dhaatu(parse_string("bhaj")),parent=None),Node(Suffix("ghaNc"),parent=None)]) == "bhaaga"
-#    assert output_string ([Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]) == "bhaaga"
+    assert output_string ([Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]) == "naayaka"
 
 
-expression=[Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]
-
-
-processed_expr=(process_list(expression))
-
+#expression=[Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]
+#processed_expr=(process_list(expression))
+#processed_expr=(process_list(expression))
 
 test_siddhis ()

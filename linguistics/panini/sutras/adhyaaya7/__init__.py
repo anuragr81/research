@@ -13,9 +13,9 @@ def yuvoranaakau_701001(anga_node,node):
     suffix_string= node.get_output()
     
     if suffix_string[-2:] == ["y","u"]:
-        return anga_node, suffix_string[0:-2] + ["a","n","a"]
+        return suffix_string[0:-2] + ["a","n","a"]
     if suffix_string[-2:] == ["v","u"]:
-        return anga_node, suffix_string[0:-2] + ["a","k","a"]
+        return suffix_string[0:-2] + ["a","k","a"]
 
     return suffix_string
 
@@ -86,7 +86,7 @@ def acho_NcNniti_702115(node,suffix_node):
         raise ValueError("suffix must of type Suffix")
     suffix=suffix_node._data
     anga_string= node.get_output()
-    if anga_string[-1] in ach() and (suffix._data[-1] in ('Nc','Nn') or suffix._data[0] in ('Nc','Nn')):
+    if anga_string[-1] in ach() and (suffix.get_suffix()[-1] in ('Nc','Nn') or suffix.get_suffix()[0] in ('Nc','Nn')):
         return anga_string[0:-1] + [vriddhi(anga_string[-1])]
     return node.get_output() 
 
