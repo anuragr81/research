@@ -1,58 +1,58 @@
 from ..common_definitions import vriddhi,upadhaa, ach, Suffix, Node
 
 
-def yuvoranaakau_701001(anga,suffix_node):
-    if not isinstance(suffix_node,Node):
+def yuvoranaakau_701001(anga_node,node):
+    if not isinstance(node,Node):
         raise ValueError("suffix must of type Node")
     
-    if not isinstance(suffix_node._data,Suffix):
+    if not isinstance(node._data,Suffix):
         raise ValueError("suffix must of type Suffix")
         
-    if not isinstance(anga,Node):
-        raise ValueError("anga must of type Node")
-    suffix_string= suffix_node.get_output()
+    if not isinstance(anga_node,Node):
+        raise ValueError("anga_node must of type Node")
+    suffix_string= node.get_output()
     
     if suffix_string[-2:] == ["y","u"]:
-        return anga, suffix_string[0:-2] + ["a","n","a"]
+        return anga_node, suffix_string[0:-2] + ["a","n","a"]
     if suffix_string[-2:] == ["v","u"]:
-        return anga, suffix_string[0:-2] + ["a","k","a"]
+        return anga_node, suffix_string[0:-2] + ["a","k","a"]
 
-    return anga , suffix_string
-
-
+    return suffix_string
 
 
-def aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(anga ,suffix_node):
+
+
+def aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_701002(anga_node ,node):
     
-    if not isinstance(suffix_node,Node):
+    if not isinstance(node,Node):
         raise ValueError("suffix must of type Node")
     
-    if not isinstance(suffix_node._data,Suffix):
+    if not isinstance(node._data,Suffix):
         raise ValueError("suffix must of type Suffix")
     
     
-    if not isinstance(anga,Node):
-        raise ValueError("anga must of type Node")
-    pratyaya=suffix_node.get_output()
+    if not isinstance(anga_node,Node):
+        raise ValueError("anga_node must of type Node")
+    pratyaya=node.get_output()
     letter = [0]
     if letter== "ph":
-        return anga , ["aa","y","a","n"] + pratyaya[1:]
+        return ["aa","y","a","n"] + pratyaya[1:]
     elif letter == "Xdh":
-        return anga , ["e","y"]+ pratyaya[1:]
+        return ["e","y"]+ pratyaya[1:]
     elif letter == "kh":
-        return anga , ["ii","n"]+ pratyaya[1:]
+        return ["ii","n"]+ pratyaya[1:]
     elif letter == "chh":
-        return anga , ["ii","y"]+ pratyaya[1:]
+        return  ["ii","y"]+ pratyaya[1:]
     elif letter == "gh":
-        return anga , ["i","y"]+ pratyaya[1:]
+        return ["i","y"]+ pratyaya[1:]
     else:
-        return anga , pratyaya
+        return pratyaya
     
 
         
-def ataupadhaayaaH_702116(anga,suffix_node):
+def ataupadhaayaaH_702116(node,suffix_node):
     """
-    the it characters are used  to decide if upadha is implied in the anga or not
+    the it characters are used  to decide if upadha is implied in the anga_node or not
     """
     if not isinstance(suffix_node,Node):
         raise ValueError("suffix must of type Node")
@@ -60,38 +60,40 @@ def ataupadhaayaaH_702116(anga,suffix_node):
     if not isinstance(suffix_node._data,Suffix):
         raise ValueError("suffix must of type Suffix")
     
-    if not isinstance(anga,Node):
-        raise ValueError("anga must of type Node")
+    if not isinstance(node,Node):
+        raise ValueError("anga_node must of type Node")
         
     suffix=suffix_node._data
 
     it_chars = suffix.get_itchars()
     if 'Nc' in it_chars or 'Nn' in it_chars:
         #Ncit or Nnit
-        upadhaa_pos = upadhaa(anga)
-        return (anga[0:upadhaa_pos ]+[{'op':vriddhi, 'input' : anga[upadhaa_pos]}] + anga[upadhaa_pos+1:]), suffix
+
+        anga_string = node.get_output()
+        upadhaa_pos = upadhaa(anga_string )
+        return anga_string [0:upadhaa_pos ]+[vriddhi(anga_string[upadhaa_pos])] + anga_string [upadhaa_pos+1:]
         
     else:
-        return anga, suffix
+        return node.get_output()
 
-def acho_NcNniti_702115(anga,suffix_node):
-    if not isinstance(anga,Node):
-        raise ValueError("anga must of type Node")
+def acho_NcNniti_702115(node,suffix_node):
+    if not isinstance(node,Node):
+        raise ValueError("anga_node must of type Node")
     if not isinstance(suffix_node,Node):
         raise ValueError("suffix must of type Node")
     
     if not isinstance(suffix_node._data,Suffix):
         raise ValueError("suffix must of type Suffix")
     suffix=suffix_node._data
-    
-    if anga[-1] in ach() and (suffix._data[-1] in ('Nc','Nn') or suffix._data[0] in ('Nc','Nn')):
-        return anga[0:-1] + [vriddhi(anga[-1])], suffix
-    return anga, suffix
+    anga_string= node.get_output()
+    if anga_string[-1] in ach() and (suffix._data[-1] in ('Nc','Nn') or suffix._data[0] in ('Nc','Nn')):
+        return anga_string[0:-1] + [vriddhi(anga_string[-1])]
+    return node.get_output() 
 
 
-def chajoHkughiNnNnyatoH_703052(anga,suffix_node):
-    if not isinstance(anga,Node):
-        raise ValueError("anga must of type Node")
+def chajoHkughiNnNnyatoH_703052(node,suffix_node):
+    if not isinstance(node,Node):
+        raise ValueError("anga_node must of type Node")
     if not isinstance(suffix_node,Node):
         raise ValueError("suffix must of type Node")
     
@@ -100,20 +102,20 @@ def chajoHkughiNnNnyatoH_703052(anga,suffix_node):
     suffix=suffix_node._data
     chakaar_to_ku = lambda y : 'k' if y=='ch' else y
     jakaar_to_ku = lambda y : 'g' if y=='j' else y
-    if suffix._data[0] in ('gh',) or suffix._data[-1] in ('gh',) or str(suffix) == "Nyat":
+    if suffix.get_suffix()[0] in ('gh',) or suffix.get_suffix()[-1] in ('gh',) or str(suffix) == "Nyat":
         #return ''.join(jakaar_to_ku(chakaar_to_ku(j)) for j in x)
-        return anga, [jakaar_to_ku(chakaar_to_ku(j)) for j in anga]
+        return [jakaar_to_ku(chakaar_to_ku(j)) for j in node.get_output()]
     
-    return anga, suffix
+    return node.get_output()
 
 
-def aardhadhaatukasyeXdvalaadeH_704114(anga,suffix,is_aardhadhaatuka=False):    
-    if not isinstance(anga,Node):
-        raise ValueError("anga must of type Node")
+def aardhadhaatukasyeXdvalaadeH_704114(node,suffix_node,is_aardhadhaatuka=False):    
+    if not isinstance(node,Node):
+        raise ValueError("node must of type Node")
     if is_aardhadhaatuka:
-        return anga + ["i","Xt"], suffix
+        return node+ ["i","Xt"]
     else:
-        return anga, suffix
+        return node.get_output()
     
     
     

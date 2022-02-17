@@ -2,6 +2,7 @@ from collections import OrderedDict
 
 from sutras.common_definitions import *
 from functools import reduce
+import inspect
 
 from sutras import adhyaaya1 as a1
 from sutras import adhyaaya2 as a2
@@ -137,9 +138,10 @@ def apply_transformation(transformation_rule,new_expr):
             dhaatu_index = pick_last_dhaatu(new_expr[0:i])
             # reducing expression with combination
             # this involves appending plain-strings (that cannot be reduced further)
-            anga, suffix_output = transformation_rule (new_expr[dhaatu_index],new_expr[i]._data)
-            
-            return new_expr[0:dhaatu_index] + + new_expr[i+1:]
+            if 'anga_node' in inspect.signature(transformation_rule).parameters:
+                new_expr[i].set_output(transformation_rule,anga_node=new_expr[dhaatu_index])
+            if 'suffix_node' in inspect.signature(transformation_rule).parameters:
+                new_expr[dhaatu_index].set_output(transformation_rule,suffix_node=new_expr[i])
     return new_expr
 
 
@@ -214,12 +216,6 @@ def process_list(expr):
     # apply transformations until there is no change in the expression
     for transformation_ruleid in transformation_sutras():
         new_expr = apply_transformation(all_sutras[transformation_ruleid],new_expr)
-        
-    # list could be further reduced before dhaatu-suffix combination is invoked
-    # other reduction may apply before or after
-    new_expr = reduce_dhaatu_combination(new_expr)                               
-            
-    # join all immediate neighours - 2-neighborhoods
     
     return new_expr
 

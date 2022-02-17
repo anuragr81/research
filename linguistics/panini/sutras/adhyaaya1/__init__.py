@@ -9,48 +9,48 @@ def uraNnraparaH_101050(a, b):
     return a + b
 
 
-def halantyam_103003(upadesha):
+def halantyam_103003(node):
     
-    antyam = upadesha.get_output()[-1]
+    antyam = node.get_output()[-1]
     if antyam in hal():
-        return upadesha.get_output()[:-1]
+        return node.get_output()[:-1]
     else:
-        return upadesha.get_output()
+        return node.get_output()
 
-def aadirNciXtuXdavaH_103005(upadesha_node):
-    if not isinstance(upadesha_node,Node):
+def aadirNciXtuXdavaH_103005(node):
+    if not isinstance(node,Node):
         raise ValueError("Must be Node")
-    if not isinstance(upadesha_node._data,Suffix):
+    if not isinstance(node._data,Suffix):
         raise ValueError("Must be Suffix")
-    if upadesha_node.get_output()[0:2] in  (["Nc","i"],["Xt","u"],["Xd","u"]):
-        return upadesha_node.get_output()[2:]
+    if node.get_output()[0:2] in  (["Nc","i"],["Xt","u"],["Xd","u"]):
+        return node.get_output()[2:]
     else:
-        return upadesha_node.get_output()
+        return node.get_output()
 
-def chuXtuu_10307(suffix_node):    
-    if not isinstance(suffix_node,Node):
+def chuXtuu_10307(node):    
+    if not isinstance(node,Node):
         raise ValueError("Must be Node")
-    suffix=suffix_node._data
+    suffix=node._data
     if not isinstance(suffix,Suffix):
         raise ValueError("Must be Suffix")
      
-    if suffix_node.get_output() [0] in  chu() or suffix_node.get_output()[0] in Xtu():
-        return suffix_node.get_output()[1:]
+    if node.get_output() [0] in  chu() or node.get_output()[0] in Xtu():
+        return node.get_output()[1:]
     
-    return suffix_node.get_output()
+    return node.get_output()
 
     
-def lashakvataddhite_103008(suffix_node):
+def lashakvataddhite_103008(node):
     
-    if not isinstance(suffix_node,Node):
+    if not isinstance(node,Node):
         raise ValueError("Must be of Node type")
-    suffix = suffix_node._data
+    suffix = node._data
     if not isinstance(suffix,Suffix):
         raise ValueError("Must be of Suffix type")
-    if not suffix.is_taddhita and suffix_node.get_output()[0] in ("l","sh","k","kh","g","gh","Nc"):
-        return suffix_node.get_output()[1:]
+    if not suffix.is_taddhita and node.get_output()[0] in ("l","sh","k","kh","g","gh","Nc"):
+        return node.get_output()[1:]
 
-    return suffix_node.get_output()
+    return node.get_output()
 
 
 def upadesheajanunaasikait_103002(aadesha):

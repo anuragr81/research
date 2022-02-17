@@ -121,7 +121,7 @@ class Node:
         
     def set_output(self,rule,**kwargs):
         old_output = self.get_output()
-        new_output = rule(self,**kwargs)
+        new_output = rule(node=self,**kwargs)
         if new_output != old_output:
             self._output.append({'rule':rule,'inputs':{**{'state':old_output} , **kwargs},'output':new_output })
         
