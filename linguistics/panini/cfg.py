@@ -36,7 +36,7 @@ def get_sutras_ordered ():
     return OrderedDict(sorted(all_sutras))
 
 def transformation_sutras():
-    return [701001, 701002, 702115, 702116, 703052, 704114, 801015, 802066]
+    return sorted([601063, 601075, 604148, 701001, 701002, 702115, 702116, 703052, 704114, 801015, 802066])
 
 class Application:
     def __init__(self,entry):
@@ -133,15 +133,19 @@ def combine_dhaatu_suffix(dhaatu,suffix):
     return ''.join(dhaatu._data._data) + join_non_its(suffix)
 
 def apply_transformation(transformation_rule,new_expr):
+    print(transformation_rule.__name__)
     for i in range(0,len(new_expr)):
         if isinstance(new_expr[i]._data,Suffix):
             dhaatu_index = pick_last_dhaatu(new_expr[0:i])
             # reducing expression with combination
             # this involves appending plain-strings (that cannot be reduced further)
-            if 'anga_node' in inspect.signature(transformation_rule).parameters:
+            sig_params = inspect.signature(transformation_rule).parameters
+            if 'anga_node' in sig_params :
                 new_expr[i].set_output(transformation_rule,anga_node=new_expr[dhaatu_index])
-            if 'suffix_node' in inspect.signature(transformation_rule).parameters:
+            if 'suffix_node' in sig_params :
                 new_expr[dhaatu_index].set_output(transformation_rule,suffix_node=new_expr[i])
+            if 'anga_node' not in sig_params  and 'suffix_node' not in sig_params :
+                new_expr[i].set_output(transformation_rule)
     return new_expr
 
 
@@ -219,12 +223,17 @@ def process_list(expr):
     
     return new_expr
 
+def test_siddhis ():
+    output_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  process_list(expr), []))
+    
+#    assert output_string ([Node(Dhaatu(parse_string("bhaj")),parent=None),Node(Suffix("ghaNc"),parent=None)]) == "bhaaga"
+#    assert output_string ([Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]) == "bhaaga"
 
-a = get_sutras_ordered()
 
-expression=[Node(Dhaatu(parse_string("bhaj")),parent=None),Node(Suffix("ghaNc"),parent=None)]
+expression=[Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]
 
 
 processed_expr=(process_list(expression))
 
-print([e._data for e in processed_expr])
+
+test_siddhis ()
