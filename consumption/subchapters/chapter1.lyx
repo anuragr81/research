@@ -2606,31 +2606,20 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-==
-\end_layout
-
-\begin_layout Standard
-As described in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:ClassificationGoods"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the commodity aggregates are considered separate both in i) the 
-\shape italic
-functional
-\shape default
- sense and ii) the 
+The commodity aggregates are classified both in the i) the 
 \shape italic
 price-movement
 \shape default
- sense i.e.
- every commodity aggregate has goods that have the same functional significance
- 
+ sense (based on the Hick's commodity theorem) and the ii) the 
+\shape italic
+functional
+\shape default
+ sense.
+ Thus every commodity aggregate 
+\begin_inset Formula $G$
+\end_inset
+
+ has goods that have the same functional significance 
 \shape italic
 and 
 \shape default
@@ -2639,8 +2628,27 @@ have a similar price-movement.
  possible amongst its members.
  As an example, goat and beef are put under the same group - but not with
  tea - as there is little sense in substitution between tea and meat.
- The price movements over years used for the price-movement sense are shown
- in Figure 
+ The
+\shape italic
+ functional
+\shape default
+ sense is secondary to our analysis - and is guided by literature on demand
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MhurchuDemandDifferences2013,edgertoneconometricsfooddemand1996,DeatonEconConsumer"
+literal "false"
+
+\end_inset
+
+ to provide an appropriate high-level interpretation for food-demand.
+ The 
+\shape italic
+price-movement
+\shape default
+ sense is implied by the constant relative-price structure requirement of
+ the Hick's commodity theorem and relies on the available market-price over
+ they years from 2008, 2014 shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:LSMSMarketPrices"
@@ -2659,29 +2667,16 @@ literal "true"
 \end_inset
 
  for a similar analysis of rice varieties).
- Here, the sub-groups within food are created based on the correlated changes
- in price from 2008 until 2014.
+ The sub-groups within food are primarily based on the correlated changes
+ in price from 2008 until 2014 and are then split into functional groups.
  For example, the price changes for sugar and tea are more similar to each
- other they are to the changes in prices for rice or cooking-oil.
- We therefore put sugar and tea within a group complements and rice-cooking_oil
- within a group nonfresh (to indicate the comovement of prices).
- Similarly, within the food commodity we observe protein, fruitsveg, densefoods
- and nonfresh groups as the rest of the food-subgroups.
- One of the advantages of using commodity aggregates in this manner is also
- that they avoid the measurement errors arising out of combining recall
- and diary goods
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonPaxsonParadox"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-==
+ other as as the rice and cooking-oil.
+ We put sugar and tea within a group of complements but avoid splitting
+ rich and cooking-oil into starch and fat and instead put rice and cooking_oil
+ within the group nonfresh (to indicate the comovement of prices).
+ The categories protein, fruitsveg, densefoods and nonfresh groups are all
+ based foremost on price-movement correlations before being considered for
+ functional interpretations.
 \end_layout
 
 \begin_layout Standard
@@ -3049,6 +3044,9 @@ The demographic variables from survey that we use in our a cross-sectional
  education and occupational levels.
  While the income data is available in the survey, we use it only indirectly
  with a mapping of incomes on to the list of occupational (ordered) ranks.
+ More specifically, we sort the occupations based on the average income
+ received before categorising them in broader ranks ranging form 1 to 3
+ (non-paying occupations are unemployed status is set to 0).
  The assignment of occupation ranks from occupation field is shown in Table
  
 \begin_inset ERT
@@ -3064,14 +3062,11 @@ ref{occupation_rank_tn}
 \end_inset
 
 .
- There are two reasons why the income data is used indirectly in this manner.
- First, the income data is available for only around 30% of the households
- which we have diary data for.
- Second, due to the large informal sector in the country, having two jobs
- and owning multiple self-owned (small) businesses is not uncommon and would
- lead to biases in the use of household income.
- The assignment of education rank - an order variable corresponding to different
- education levels - is shown in Table 
+ The reason why we avoid using the income data more directly is that it
+ is available for only around 30% of the households (which we have diary
+ data for).
+ The assignment of education rank - another ordered variable corresponding
+ to different education levels - is shown in Table 
 \begin_inset ERT
 status open
 
@@ -3115,15 +3110,19 @@ label{occupation_rank_tn}}
 \backslash
  & 
 \backslash
-multicolumn{1}{c}{code} & 
+multicolumn{1}{c}{occupation code} & 
 \backslash
-multicolumn{1}{c}{occupation area} & 
+multicolumn{1}{c}{occupation} & 
 \backslash
-multicolumn{1}{c}{occupation rank}
+multicolumn{1}{c}{rank} 
 \backslash
 
 \backslash
- & 14 & Student & 0
+  
+\backslash
+hline 
+\backslash
+endhead & 14 & Student & 0
 \backslash
 
 \backslash
@@ -3194,15 +3193,15 @@ end{longtable}
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage
-\end_layout
 
 \begin_layout Plain Layout
 
@@ -3222,21 +3221,29 @@ label{education_rank_tnz}}
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 
 \backslash
 
 \backslash
  & 
 \backslash
-multicolumn{1}{c}{} & 
+multicolumn{1}{c}{education level} & 
 \backslash
-multicolumn{1}{c}{education code} & 
+multicolumn{1}{c}{code} & 
 \backslash
-multicolumn{1}{c}{education rank}
+multicolumn{1}{c}{rank}
 \backslash
 
 \backslash
- & PP & 1 & 1
+ 
+\backslash
+hline 
+\backslash
+endhead & PP & 1 & 1
 \backslash
 
 \backslash
@@ -3349,7 +3356,15 @@ end{longtable}
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -3829,22 +3844,11 @@ name "sec:Results"
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% Restate the research question
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The aggregation (subject to restrictions) to the commodity allows us to
- interpret the consumer choice for quality in broader categories across
+The goal of our empirical analysis has been to test whether having more
+ assets in Tanzania influences the degree to which the consumer may spend
+ on high-quality.
+ The aggregation (subject to restrictions) to the commodity allows us to
+ interpret the consumer choice for quality in commodity group across the
  long-term characteristics of the consumer household.
  The results obtained from the AIDS formulation specified in Equations 
 \begin_inset CommandInset ref
@@ -3873,9 +3877,8 @@ ref{resultsAllassets}
 
 \end_inset
 
- .
- The results for slightly adjusted formulations for robustness checks described
- in Section 
+.
+ The results with adjusted formulations as robustness checks (Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:RobustnessChecks"
@@ -3885,7 +3888,7 @@ noprefix "false"
 
 \end_inset
 
- are presented in Tables 
+) are presented in Tables 
 \begin_inset ERT
 status open
 
@@ -3915,7 +3918,7 @@ ref{resultsFoodCPIAllAssets}
 \end_layout
 
 \begin_layout Standard
-The market prices - shown in Figure 
+The market prices shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:LSMSMarketPrices"
@@ -3925,24 +3928,21 @@ noprefix "false"
 
 \end_inset
 
- - not only have a key role in the classification of commodities (see Assumption
- 
+ that are used in the classification of commodities (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "assu:Hicks"
+reference "subsec:ClassificationGoods"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
-) but also provide an overview of the contrasts in the consumer market by
- themselves.
- The locally available prices show for example how consumers in rural districts
- are not exposed to prices of expensive urban items.
- Further, the variation in prices for certain items such as meat, seafood,
- energy sources or processed foods are higher than for the rest of the food
- items (see Figure 
+) also provide an overview of the disparities in the consumer market.
+ For example, the rural districts do not appear to be be exposed to the
+ prices of expensive urban items and the variation in prices for items such
+ as meat, seafood, energy sources or processed foods is higher than for
+ the other foods (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:mean_prices"
@@ -3960,8 +3960,6 @@ reference "fig:Recorded-prices"
 \end_inset
 
 ).
- These variations suggest a demand pressure for quality as well as a disparity
- in regions within the economy.
 \end_layout
 
 \begin_layout Standard
@@ -4010,7 +4008,8 @@ Variables
 \end_layout
 
 \begin_layout Standard
-In the results for the LA-AIDS system specified in Section 
+The control variables used in the results for the LA-AIDS system specified
+ in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Model"
@@ -4020,7 +4019,18 @@ noprefix "false"
 
 \end_inset
 
- that we present in Tables 
+ are listed in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Control-Variables"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The results themselves are presented in Tables 
 \begin_inset ERT
 status open
 
@@ -4059,19 +4069,9 @@ ref{resultsFoodCPIAllAssets}
 
 \end_inset
 
-, we have used the control variables listed in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Control-Variables"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
 .
- Here, the significance of income is indicated with the coefficients for
- logarithm of total expenditure 
+ The control for permanent income is the logarithm of the sum of total expenditu
+re 
 \family typewriter
 \size footnotesize
 ln_tot_exp
@@ -4086,7 +4086,7 @@ lp
 \family default
 \size default
 -.
- Every commodity in the AIDS regression (see Equations 
+ Therefore, every commodity in the AIDS regression (see Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:AIDS_quality_w"
@@ -4100,7 +4100,7 @@ reference "eq:AIDS_quality_lnV"
 
 \end_inset
 
-) thus corresponds to an 
+) corresponds to an 
 \family typewriter
 \size footnotesize
 lp
@@ -4161,10 +4161,7 @@ educ_rank
 expensiveregion
 \family default
  ( indicator variable for densely populated urban areas).
-\end_layout
-
-\begin_layout Standard
-To explore the differences in quality relative long term asset ownership,
+ To explore the differences in quality relative long term asset ownership,
  the assets in the commodity groups household and transport are also used
  as control variables in the AIDS SUR equations.
  For the results discussed in Table 
@@ -4197,7 +4194,76 @@ has_electric
 \family default
 (indicating whether the household has access to electricity or not) in the
  regressions.
- Some formulations for robustness checks discussed in Section 
+ 
+\end_layout
+
+\begin_layout Standard
+Since the variable 
+\family typewriter
+consu 
+\family default
+is used to assess the needs-unit of the household, we incorporate the equivalenc
+e scales 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GormanTricksEssays1976,HouthakkerFamilySurvey"
+literal "false"
+
+\end_inset
+
+ for household preferences by considering the age of household members.
+ Instead of using the total number of households 
+\begin_inset Formula $hsize$
+\end_inset
+
+ as the control, therefore we use the 
+\begin_inset Formula $\sum_{i=1}^{hsize}a_{consu}(age_{i})$
+\end_inset
+
+ where 
+\begin_inset Formula $a_{consu}(age)$
+\end_inset
+
+ is defined as below.
+ The weights used in the variation are based on the variation in food-consumptio
+n over age.
+ This variable is referred to as 
+\family typewriter
+consu 
+\family default
+in the list of control variables (discussed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Results"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+a_{consu}(age) & =\begin{cases}
+0.2 & age\le5\\
+0.3 & 5<age\le10\\
+0.4 & 10<age<15\\
+1 & 15<age\le45\\
+0.7 & 45<age\le65\\
+0.6 & age>65
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The formulations for robustness checks discussed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:RobustnessChecks"
@@ -4225,9 +4291,125 @@ transport_assets_mtm
 \end_layout
 
 \begin_layout Standard
+The dependent variables of the AIDS regressions in the columns of Tables
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsAllassets}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsSubAssets}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{resultsFoodCPIAllAssets}
+\end_layout
+
+\end_inset
+
+ - starting either with 
+\family typewriter
+\size footnotesize
+q
+\family default
+\size default
+- or with 
+\family typewriter
+\size footnotesize
+qV
+\family default
+\size default
+ - indicate the quantity and quality measurements respectively.
+ More specifically, the columns starting with 
+\family typewriter
+\size footnotesize
+q-
+\family default
+\size default
+ indicate the quantity-budget shares that are used as the dependent variables
+ in AIDS regressions (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
+
+\end_inset
+
+ ) and the columns starting with 
+\family typewriter
+\size footnotesize
+qV- 
+\family default
+\size default
+indicate the logarithm of the quality metric as the dependent variable (i.e.
+ 
+\begin_inset Formula $ln\ V$
+\end_inset
+
+ in the Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_lnV"
+
+\end_inset
+
+).
+ Using the classification based on prices and functionality (as described
+ in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), the commodities chosen within the food group are - densefoods, non-fresh,
+ fruits-veg, protein and complements (see Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Groups"
+
+\end_inset
+
+ for all the goods that belong to these commodity groups).
+ Since quality measure is not used for energy, household and transport no
+ quality equations are needed for these commodity.
+ The total number of equations to estimate with the SUR is therefore 
+\begin_inset Formula $2\times5+3\times1=13$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 \align center
 \begin_inset Float table
-placement h
+placement H
 wide false
 sideways false
 status open
@@ -4519,122 +4701,6 @@ Control Variables
 
 \end_layout
 
-\begin_layout Standard
-The dependent variables of the AIDS regressions list in the columns of Tables
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{resultsAllassets}
-\end_layout
-
-\end_inset
-
-, 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{resultsSubAssets}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{resultsFoodCPIAllAssets}
-\end_layout
-
-\end_inset
-
- - starting either with 
-\family typewriter
-\size footnotesize
-q
-\family default
-\size default
-- or with 
-\family typewriter
-\size footnotesize
-qV
-\family default
-\size default
-- indicate quantity and quality measurements respectively.
- The columns starting with 
-\family typewriter
-\size footnotesize
-q-
-\family default
-\size default
- indicate the quantity-budget shares that are used as the dependent variables
- in AIDS regressions (see Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:AIDS_quality_w"
-
-\end_inset
-
- ) and the columns starting with 
-\family typewriter
-\size footnotesize
-qV- 
-\family default
-\size default
-indicate the logarithm of the quality metric as the dependent variable (i.e.
- 
-\begin_inset Formula $ln\ V$
-\end_inset
-
- in the Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:AIDS_quality_lnV"
-
-\end_inset
-
-).
- Using the classification based on prices and functionality (as described
- in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Model"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-), the commodities chosen within the food group are - densefoods, non-fresh,
- fruits-veg, protein and complements (see Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Groups"
-
-\end_inset
-
- for all the goods that belong to these commodity groups).
- Since quality measure is not used for energy, household and transport no
- quality equations are needed for these commodity.
- The total number of equations to estimate with the SUR is therefore 
-\begin_inset Formula $2\times5+3\times1=13$
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Subsection*
 Discussion
 \end_layout
@@ -4653,26 +4719,22 @@ ref{resultsAllassets}
 
 \end_inset
 
- suggest the relevance of asset ownership in the demand for non-durable
- goods - their quality in particular.
- The consumer habits do seem to be influenced by the financial standing
- of the consumer indicated with both occupation rank and assets owned by
- the consumers.
- Compared to assets, the higher expenditure (
+ suggest the relevance of asset ownership in the demand for quality in non-durab
+le goods.
+ Apart from the higher expenditure (
 \family typewriter
 ln_tot_exp
 \family default
-) is not as strongly associated with higher quality.
- That the consumers do not increase the price-based quality with rise in
- their total expenditure, seems to suggest some separation in quality habits
- through levels of asset ownership.
+) i.e.
+ the permanent income measure, the consumer habits also seem to be influenced
+ by the occupation rank .
+ More specifically, the higher occupation ranks tend to have both higher
+ quantity and higher quality across all commodities.
+ 
 \end_layout
 
 \begin_layout Standard
-The occupation-ranks also have a role in this separation of quality - since
- higher occupation ranks tend to have both higher quantity and higher quality
- across all commodities.
- Since higher occupation-ranks are concentrated in the eastern coast and
+Since higher occupation-ranks are concentrated in the eastern coast and
  centre of Tanzania, we also look at the effect of 
 \family typewriter
 expensiveregion
@@ -4683,34 +4745,50 @@ expensiveregion
 \family typewriter
 expensiveregion
 \family default
- do suggest a higher quality for non-fresh and protein goods as well as
- a higher expenditure on transport and energy albeit a lower expenditure
- on household non-durable consumption in certain regions.
+ suggest a higher quality for non-fresh and protein goods in particular.
+ The expensive-regions also show a higher expenditure on transport and energy
+ (albeit a lower expenditure on household non-durable consumption in certain
+ regions).
 \end_layout
 
 \begin_layout Standard
-The higher expenditure on energy, transport and higher quality seems often
+The effect of overall assets owned on quality (see the results for the dependent
+ variable 
+\family typewriter
+qV-
+\family default
+ ) after accounting for urban-rural effects ( see significance of 
+\family typewriter
+expensiveregion
+\family default
+) and total expenditure ( 
+\family typewriter
+ln_tot_exp
+\family default
+ ) is not significant, but the consideration of the owned electric assets
+ shows significant differences in quality (particularly for protein and
+ non-fresh categories).
+ It's not just the access to higher food quality that differentiates the
+ urban asset-rich consumer, but the quality in energy, transport is also
  associated with the use (availability) of electricity.
- Having access to electricity is in particular associated to a higher quality
- of protein consumed.
- This could be both due to the relative affluence of regions where electricity
- is available or due to possible improvements to quality brought about by
- ownership of electric assets (appliances).
+ This seems both due to the relative affluence of regions where electricity
+ is available and more directly through possible improvements to quality
+ brought about by ownership of electric assets (appliances).
 \end_layout
 
 \begin_layout Standard
-The former possibility (affluence limited to specific districts) seems more
- likely as the food prices seem high overall in the areas where more quality
- is availed.
- This is indicated with the effect of (base-)prices on quality and quantity.
- With 
+Since food prices seem high overall in the areas where more quality is availed,
+ the affluence being limited to specific districts seems to the more likely
+ cause for higher consumption quality in urban areas.
+ Looking at the effect of (base-)prices on quality and quantity, we see
+ for example with 
 \family typewriter
 lpprotein
 \family default
- for example, we see that high base-price of protein (cheapest protein available
- in the district) corresponds to higher quality - meaning that consumers
- in districts where base-price of protein (price of cheapest protein) is
- high also avail higher quality of protein.
+ that high base-price of protein (cheapest protein available in the district)
+ corresponds to higher quality - meaning that consumers in districts where
+ base-price of protein (price of cheapest protein) is high also avail higher
+ quality of protein.
  This seems to be the case with 
 \family typewriter
 lpfruitsveg
@@ -4734,8 +4812,9 @@ consu
 \end_layout
 
 \begin_layout Standard
-Running another SUR with assets split into electrical, household and transport
- assets confirms the relevance of electric assets (see Table 
+The results from the SUR with assets split into electrical, household and
+ transport assets - that show the relevance of electric assets in quality
+ - are presented in the Table 
 \begin_inset ERT
 status open
 
@@ -4748,28 +4827,48 @@ ref{resultsSubAssets}
 
 \end_inset
 
-).
- As one would expect, the consumption on energy is higher for electricity
- users due to the high prices of electricity in Tanzania.
- However, the owners of electrical assets also consume more fruits-veg quality
- and have more expenditure on household products.
- This does not just mean that the prices of quality are higher for electricity
- users but that they don't choose the cheapest options for quality in their
- areas of residence.
+) As one would expect, the consumption on energy is higher for electricity
+ users due to the high prices of electricity.
+ That said, the owners of electrical assets also consume more fruits-veg
+ quality and have more expenditure on household products.
  For general household-assets (that are not transport-related and are not
  electric) on the other hand, we do not see a significant association with
  quality (only slightly higher non-fresh and fruits-veg quantities).
+ This suggests that some evidence of deprivation in the urban areas.
+ To inspect this further, we also present the fraction of households that
+ are reported to have run out of food (either due to lack of agricultural
+ inputs) ...
+ 
 \end_layout
 
 \begin_layout Standard
-The above observations suggest the life-style differences in the densely
- populated urban areas brought about by availability of industrial goods.
- Here, the urban consumers may have less overall assets compared to their
- counterparts in rural areas but they spend more on quality on protein and
- fruits-veg compared to dense-foods and household asset.
- The pressure on demand within the urban areas i.e.
- differences in lifestyles among the poor and rich residents in the urban
- areas also seems evident from the above results.
+The above observations suggest that the role of assets-ownership is significant
+ in the quality of consumption for food as well as energy.
+ That said, the life-style differences in the densely populated urban areas
+ brought about by availability of industrial goods is an key underlying
+ theme to the effect of asset differences.
+ Even through the urban consumers may have less overall assets compared
+ to their counterparts in rural areas, they spend more on quality - particularly
+ on protein and fruits-veg (compared to dense-foods and household asset).
+ 
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+The effect of assets is strong after taking expensiveregion into account.
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+So even though there may be some positive externality with being in the
+ urban areas, the differences in quality of consumption brought about by
+ asset-differences are significant.
 \end_layout
 
 \begin_layout Standard
@@ -5040,7 +5139,8 @@ ref{resultsFoodCPISubAssets}
 
 \begin_layout Standard
 As a further test of the robustness of results, we calculate the food-quality
- using the market-provided prices.
+ using the market-provided prices and instead of the expenditure reported
+ by the consumer.
  More specifically, the results shown in Tables 
 \begin_inset ERT
 status open
@@ -7031,94 +7131,67 @@ The availability of market-prices and the details on household characteristics
  the differences in the consumer baskets and influence consumption of quality
  - whose role in status consumption we had set ourselves to explore in the
  current chapter.
- 
-\end_layout
-
-\begin_layout Standard
-Given the differences in consumer baskets for the urban and rural consumer,
+ Given the differences in consumer baskets for the urban and rural consumer,
  it is not surprising that those in the urban areas spend differently on
  certain non-durable goods.
  Nevertheless, the sustained quality differences for meat and fresh goods
  for urban consumers indicate a peculiar environmental difference in urban
  areas with availability of electricity and industrial goods.
- More particularly, it is not just that those with higher asset worth tend
- to buy more - but that the quality purchased for a few categories are always
- higher (lower) for the consumers who own medium-cost assets (considering
- also that the consumers do not forgo food necessities over non-food quality).
+ It is not that those with higher asset worth consistently tend to buy a
+ higher quality - but that the quality purchased for a few categories are
+ always higher (lower) for the consumers who own medium-cost electricity-related
+ assets.
+ 
 \end_layout
 
 \begin_layout Standard
-The role of status consumption (when not exhibited by the richest of the
- consumer) is to offset the long-established hierarchies in markets.
- Therefore the consumer in urban area who does not own a lot of assets would
- benefit from spending more on industrial non-durable consumption relative
- to others in his environment than an equivalent consumer in the rural area
- who does not face the same choice of industrial goods.
- The scope for such status consumption is extremely limited unless there
- is a substitution in quality offered for not being in urban areas i.e.
- the consumers with lower assets should exhibit a comparable or higher quality
- than those with higher assets.
- A status competition between the rich and poor consumers in the urban area
- or between the urban and rural consumer would thus mean association of
- lower-assets with a higher or comparable quality.
+The significant role that having assets may play towards the quality has
+ implications for status consumption.
+ If status can be changed by consumption, then it can be either with long-term
+ assets one owns or with the quality in consumption.
+ The fulfillment of needs - which are the same for every consumer - does
+ not add to one's status.
+ Since only long-term assets and quality in consumption can influence status,
+ the scope for status through consumption gets limited when the poorer consumer
+ lags extremely behind both in term of the quality in consumption and long-term
+ assets.
+ If status consumption is relevant in the developed economies, it is foremost
+ because the basic needs of the consumers are largely fulfilled and the
+ differences in long-term asset ownership are less extreme.
+ When both of these conditions are unmet, the role of status consumption
+ is ought to be minimised.
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% The only reference we have considered is price related.
- More reference points should be considered.
- This may serve as key anchor to the next chapter.
-\end_layout
-
-\begin_layout Plain Layout
-
-% The relevance of reference points can be motivated with data on subjective
- well-being
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The demand analysis models help us verify if the consumer in the urban area
- (or a richer consumer) sacrifices quality in one group to avail it in another
- (a choice that the rural or poorer consumer does not have).
- If status consumption exists, then we would expect either i) that the quality
- in some commodity (e.g.
- pricier meats or electrical goods available to the urban consumer) makes
- the richer consumer compromise on quality and long-terms assets in other
- commodities or ii) that the consumers with lower assets spend relatively
- higher on overall non-durable quality.
- Our observations do not provide a strong evidence for either of these.
- Instead, we find that the habits of urban and rural consumers as well as
- those of poor and rich within the urban areas are far apart from each other.
- That the quality in food and household move together with electricity and
- owned-assets - further suggests that there is little status consumption
- - in the above compensation sense - available to the rural or poorer consumers.
- In other words, the observed separation of quality based on the long-term
- economic standing means that the poorer consumer - rural or urban - who
+Since status consumption is relevant only with respect to a local reference
+ i.e.
+ the consumers in rural areas may not be concerned with the lifestyle choices
+ in the urban areas, the differences in assets relevant for status competition
+ must also be observed at the local level.
+ That there is a positive externality with being in the urban area may tempt
+ one to think that status consumption is significant in the Tanzanian economy,
+ but if the average rural consumer does not face the choice to purchase
+ status-carrying goods and the average urban consumer faces both poorer
+ quality in consumption and lower asset-possessions overall, then the scope
+ of status consumption is limited.
+ Since the quality in food and household seem to move together with electricity
+ and owned-assets in the data, the poorer consumer - rural or urban - who
  has both a lower asset ownership and a poorer non-durable consumption quality
- (i.e.
- has a distant reference point) would not be in a status competition with
- the urban or richer consumer and see no benefit from status consumption.
+ would not be in a status competition with the richer or urban consumer
+ and the role of status-driven consumption would be less significant.
+ Notice however that these implications are only the interpretation of extreme
+ inequality rather than a statement on consumer the consumer response to
+ status perceptions.
 \end_layout
 
 \begin_layout Standard
-In summary, if status consumption is meant to permit the consumers with
- lower position in long-established hierarchy to compensate for not having
- higher assets or social position, then a strong separation in quality prevents
- such a compensatory behaviour and rules out the Veblen sense of pecuniary
- emulation.
- In Tanzania, we see more evidence for segmentation than compensation.
- We thus suggest that the possibility of such a separation of quality choices
- must be considered before one attempts to measure the extent of status
- consumption in a developing economy.
+The more general observation that we find from our analysis is the differences
+ in lifestyles between urban and rural lifestyles - due in particular to
+ the sparse availability of electricity - dominate the consumption of quality
+ more than the effect that long-term asset-differences may play in the demand
+ for quality.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -9675,10 +9748,6 @@ Asset types (excluding housing and land)
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
