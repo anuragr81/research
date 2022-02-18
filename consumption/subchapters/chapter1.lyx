@@ -1230,9 +1230,9 @@ w_{i} & =\alpha_{i}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{j})+\beta_{i}ln(\frac{x}{P})\
 The advantage of comparing quality of commodity groups rather than individual
  items is that the aggregated approach does not pose the issue of non-consumptio
 n of high-quality goods.
- More particularly, if one were to calculate the price elasticities for
- high-quality and low-quality goods separately, the obvious issue that arises
- is that high-quality goods might not be consumed at all for a significant
+ More specifically, if one were to calculate the price elasticities for
+ individual goods, the obvious issue that arises is that certain items (particul
+arly those with high-quality) might not be consumed at all for a significant
  part of the consumer population.
  
 \begin_inset CommandInset citation
@@ -2606,6 +2606,85 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+As described in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:ClassificationGoods"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the commodity aggregates are considered separate both in i) the 
+\shape italic
+functional
+\shape default
+ sense and ii) the 
+\shape italic
+price-movement
+\shape default
+ sense i.e.
+ every commodity aggregate has goods that have the same functional significance
+ 
+\shape italic
+and 
+\shape default
+have a similar price-movement.
+ A functional category is one where there is a sufficient degree of substitution
+ possible amongst its members.
+ As an example, goat and beef are put under the same group - but not with
+ tea - as there is little sense in substitution between tea and meat.
+ The price movements over years used for the price-movement sense are shown
+ in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LSMSMarketPrices"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+(see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+literal "true"
+
+\end_inset
+
+ for a similar analysis of rice varieties).
+ Here, the sub-groups within food are created based on the correlated changes
+ in price from 2008 until 2014.
+ For example, the price changes for sugar and tea are more similar to each
+ other they are to the changes in prices for rice or cooking-oil.
+ We therefore put sugar and tea within a group complements and rice-cooking_oil
+ within a group nonfresh (to indicate the comovement of prices).
+ Similarly, within the food commodity we observe protein, fruitsveg, densefoods
+ and nonfresh groups as the rest of the food-subgroups.
+ One of the advantages of using commodity aggregates in this manner is also
+ that they avoid the measurement errors arising out of combining recall
+ and diary goods
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonPaxsonParadox"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
 The identification the commodities over which the quality measure is to
  be aggregated over also makes use of a simplification that not all variation
  in quality is considered of importance to the consumer.
@@ -2645,7 +2724,7 @@ Econometric Method
 \end_layout
 
 \begin_layout Standard
-The quality metric across commodity groups defined in Section 
+We use the quality metric across commodity groups defined in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:QualityMeasure"
@@ -2655,18 +2734,19 @@ noprefix "false"
 
 \end_inset
 
- allows us to both how the demand for quality is distributed across the
- population and how it varies in response to change in prices, consumer
- needs and other household characteristics in the cross-section.
- Since the consumers cannot sacrifice needs in order to purchase quality
- (due to the very definition of needs), a rise in quality (for prices fixed)
- must come either from an increase in income or from change in circumstances.
- Likewise, a drop in quality must be due to change in circumstances (socio-econo
-mic standing which we assess with a vector of occupation, education, region/loca
-lity/neighborhood/assets) or addressing of more urgent needs.
- Thus in the cross-section, a consumer having undergone changes in her long-term
- circumstances is treated the same as a consumer with different needs and/or
- long-term assets.
+ to measure how the demand for quality is distributed across the population
+ and varies in response to prices, consumer needs and other household characteri
+stics in the cross-section (a vector of occupation, education, region/locality/n
+eighborhood/assets).
+ As the consumers are not expected to sacrifice needs in order to purchase
+ quality (due to the very definition of needs), a rise in quality (for prices
+ fixed) must come either from an increase in income or from change in circumstan
+ces.
+ Similarly, a drop in quality must be due to change in circumstances or
+ addressing of more urgent needs.
+ As a result, a consumer having undergone changes in her long-term circumstances
+ is treated the same as a consumer with different needs and/or long-term
+ assets in the cross-section.
 \end_layout
 
 \begin_layout Standard
@@ -2715,7 +2795,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-In this 
+In the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2741,21 +2821,56 @@ literal "true"
 
 ), each composite commodity corresponds to one quantity/budget equation
  and one quality metric equation.
- The following are the system of equations corresponding to commodity aggregate
- (group) 
+ With intercepts 
+\begin_inset Formula $\rho_{1,G}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{2,G}$
+\end_inset
+
+ for quantity and quality dependent variables equations (respectively) for
+ given commodity group 
 \begin_inset Formula $G$
 \end_inset
 
- where the aggregate price 
-\begin_inset Formula $P_{G}$
+ and coefficients 
+\begin_inset Formula $\rho_{1,Gk},\rho_{2,Gk}$
 \end_inset
 
- is the price used in the control variables (i.e.
- 
-\begin_inset Formula $ln(P_{j})$
+ for 
+\begin_inset Formula $s$
 \end_inset
 
-)
+ demographic characteristics 
+\begin_inset Formula $\{d_{k}\}_{k\in[1,s]}$
+\end_inset
+
+ , 
+\begin_inset Formula $\beta_{G,1},\beta_{G,2}$
+\end_inset
+
+ for 
+\begin_inset Formula $ln(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{1,Gj}$
+\end_inset
+
+, 
+\begin_inset Formula $\gamma_{2,Gj}$
+\end_inset
+
+ for the base-prices corresponding to 
+\begin_inset Formula $M$
+\end_inset
+
+ commodity groups 
+\begin_inset Formula $\{P_{j}\}_{j\in[1,n]}$
+\end_inset
+
+, we use following system of equations
 \end_layout
 
 \begin_layout Standard
@@ -2781,7 +2896,11 @@ ln\ V_{G} & =\rho_{2,G}+\sum_{k=1}^{s}\rho_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{2,G
 \end_layout
 
 \begin_layout Standard
-In the above Equation 
+The 
+\begin_inset Formula $s$
+\end_inset
+
+ demographic variables in Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:AIDS_quality_w"
@@ -2801,11 +2920,7 @@ noprefix "false"
 
 \end_inset
 
-, there are 
-\begin_inset Formula $s$
-\end_inset
-
- demographic variables (including the asset ownership related dummy variables).
+ include the asset ownership and related dummy variables.
  Since the price for quality is not required, the price-coefficients in
  the 
 \begin_inset Quotes eld
@@ -2821,11 +2936,11 @@ additional
 
  equations are not subject to any additional symmetry restrictions - while
  the usual constraints of adding up, symmetry and non-negativity of Slutsky
- matrix apply to the equations.
+ matrix apply to the estimation.
 \end_layout
 
 \begin_layout Standard
-The base-price 
+Recall that the base-price 
 \begin_inset Formula $P_{G}$
 \end_inset
 
@@ -2865,7 +2980,7 @@ In the sections that follow, we view how our measures of quality habits
  characteristics.
  The composite commodity groups for quality are: food, energy while the
  elementary commodity groups are household and transport.
- The quality of protein, densefoods etc.
+ It is worth emphasising again that the quality of protein, densefoods etc.
  - treated as a composite good - are measured with the metric presented
  in Section 
 \begin_inset CommandInset ref
@@ -2905,8 +3020,8 @@ With the recent economic growth and a history of nationalization, Tanzania
  are evident in the consumption data.
  The data we use for our analysis is from the Living Standard Measurement
  Study (LSMS) - conducted by the World Bank - for years 2010, 2012 and 2014.
- To understand where Tanzania fits in with respect to other republics in
- the region, we provide a brief historical overview of Tanzania, Nigeria,
+ To understand the political economy of Tanzania with respect to other republics
+ in the region, we provide a brief historical overview of Tanzania, Nigeria,
  Angola and Kenya in Appendix I.
 \end_layout
 
@@ -3280,28 +3395,7 @@ Before it may be used for measurement for quality, the consumption microdata
  in the year.
  The details of this process are described in Appendix II.
  Once normalised, the matching of market prices for the goods consumed by
- a household is done for quality in food and energy subgroups (see Assumption
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "assu:AssetDomination"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Model"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-)
+ a household is done for food and energy subgroups
 \begin_inset Foot
 status open
 
@@ -3322,86 +3416,15 @@ main lighting fuel
 
 \end_inset
 
-.
+ - so that the prices relevant for a consumer are marked as those that are
+ available as market prices in the district where the consumer resides.
  
 \end_layout
 
 \begin_layout Standard
-As described in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Model"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the commodity aggregates are considered separate both in i) the 
-\shape italic
-functional
-\shape default
- sense and ii) the 
-\shape italic
-price-movement
-\shape default
- sense i.e.
- every commodity aggregate has goods that have the same functional significance
- 
-\shape italic
-and 
-\shape default
-have a similar price-movement.
- A functional category is one where there is a sufficient degree of substitution
- possible amongst its members.
- As an example, goat and beef are put under the same group - but not with
- tea - as there is little sense in substitution between tea and meat.
- The price movements over years used for the price-movement sense are shown
- in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:LSMSMarketPrices"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-(see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "McKelveyQuality2011"
-literal "true"
-
-\end_inset
-
- for a similar analysis of rice varieties).
- Here, the sub-groups within food are created based on the correlated changes
- in price from 2008 until 2014.
- For example, the price changes for sugar and tea are more similar to each
- other they are to the changes in prices for rice or cooking-oil.
- We therefore put sugar and tea within a group complements and rice-cooking_oil
- within a group nonfresh (to indicate the comovement of prices).
- Similarly, within the food commodity we observe protein, fruitsveg, densefoods
- and nonfresh groups as the rest of the food-subgroups.
- One of the advantages of using commodity aggregates in this manner is also
- that they avoid the measurement errors arising out of combining recall
- and diary goods
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonPaxsonParadox"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The market-observed prices used in the above aggregation are recorded at
- every district level or at finer levels.
- We match these prices with every household in the survey based on the district
- the household is located in.
+Since the market-observed prices in the survey are recorded at every district
+ level or at finer levels, we match these prices with every household in
+ the survey based on the district the household is located in.
  For goods such as electricity and gas that are limited to a few urban areas,
  we simply use the price at a national level
 \begin_inset Foot
@@ -3423,9 +3446,9 @@ literal "true"
 
 .
  When there are multiple price observations at the district level (through
- price capture at in more than one constituent wards or villages), then
- we arrive a district-level price using a regression over price records
- for the good in the district.
+ price capture in more than one constituent wards or villages), then we
+ arrive a district-level price using a regression over price records for
+ the good in the district.
  The use of the regression for obtaining the market-prices at the district
  level also makes sense because prices are recorded in several units.
  By assimilating all the price data from across the quantities and regions
