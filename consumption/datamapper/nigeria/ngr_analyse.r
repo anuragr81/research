@@ -124,7 +124,7 @@ plot_region_map <- function(plot_type,a2012,o2010,o2012,ignored_assets_top){
   if (plot_type=="occupation"){
     occupation_mapping <- infer_occupation_ranks(o2010 = o2010,ignore_top = .05)
     ohs2012_wrank<- merge(plyr::rename(subset(o2012,!is.na(region)),c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
-    chosenchars2012 <- ddply(ohs2012_wrank[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank),max_age=max(age))
+    chosenchars2012 <- ddply(ohs2012_wrank[,c("hhid","education_rank","occupation_rank","age")],.(hhid),summarise,max_education_rank = choose_max_non_na_rank(education_rank) , max_occupation_rank = choose_max_non_na_rank(occupation_rank),max_age=max(age))
     
     plot_data_wo_assets <- subset(merge(chosenchars2012,o2012,by=c("hhid")), !is.na(max_occupation_rank))
     plot_data <- merge(plot_data_wo_assets,hhid_mtms_2012 ,by="hhid")
@@ -612,7 +612,7 @@ init_data <- function(use_ea){
 }
 
 
-choose_max_education_rank <- function (x) { arr = x[!is.na(x)] ; if (length(arr)>1) {return (max(arr))} else {return(0)}}
+choose_max_non_na_rank <- function (x) { arr = x[!is.na(x)] ; if (length(arr)>1) {return (max(arr))} else {return(0)}}
 
 
 add_rural_mapping_for_districts <- function(ngr,year)
@@ -895,12 +895,12 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   ohs2010_wi <- subset(o2010,!is.na(region))
   
   ohs2010 <- merge(ohs2010_wi, incomedat[["ypay2010"]],by=c("hhid"),all.x=T)
-  hsizes2010 <- ddply(ohs2010[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
+  hsizes2010 <- ddply(ohs2010[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), hsizes2010, by = c("hhid")))
   
-  ohs2010_wrank<- merge(plyr::rename(ohs2010,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
+  ohs2010_wrank<- merge(plyr::rename(ohs2010,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"),all.x=T)
   
-  chosenchars2010 <- ddply(ohs2010_wrank[,c("hhid","education_rank","occupation_rank","age","outoffood")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank),age=max(age), outoffood=max(outoffood) )
+  chosenchars2010 <- ddply(ohs2010_wrank[,c("hhid","education_rank","occupation_rank","age","outoffood","educexpense")],.(hhid),summarise,max_education_rank = choose_max_non_na_rank(education_rank) , max_occupation_rank = choose_max_non_na_rank(occupation_rank),age=max(age), outoffood=max(outoffood) )
   #  perception_columns
   
   hswithchars2010 <- merge(hs2010,chosenchars2010,all.x = T)
@@ -911,11 +911,11 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   o2012_wi <- subset(o2012,!is.na(region))
   ohs2012 <- merge(o2012_wi, incomedat[["ypay2012"]],by=c("hhid"),all.x=T)
   
-  hsizes2012 <- ddply(ohs2012[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
+  hsizes2012 <- ddply(ohs2012[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
-  ohs2012_wranks<- merge(plyr::rename(ohs2012,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"))
+  ohs2012_wranks<- merge(plyr::rename(ohs2012,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"),all.x=T)
   
-  chosenchars2012 <- ddply(ohs2012_wranks[,c("hhid","education_rank","occupation_rank","age","outoffood")],.(hhid),summarise,max_education_rank = choose_max_education_rank(education_rank) , max_occupation_rank = max(occupation_rank),age=max(age), outoffood=max(outoffood))
+  chosenchars2012 <- ddply(ohs2012_wranks[,c("hhid","education_rank","occupation_rank","age","outoffood")],.(hhid),summarise,max_education_rank = choose_max_non_na_rank(education_rank) , max_occupation_rank = choose_max_non_na_rank(occupation_rank),age=max(age), outoffood=max(outoffood))
   
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   
@@ -923,17 +923,15 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   o2015_wi <- subset(o2015,!is.na(region))
   ohs2015 <- merge(o2015_wi, incomedat[["ypay2015"]],by=c("hhid"),all.x=T)
   
-  hsizes2015 <- ddply(ohs2015[,c("hhid","personid")],.(hhid),summarise,hsize=length(personid))
+  hsizes2015 <- ddply(ohs2015[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hs2015 <- unique(merge(unique(ohs2015[,relevant_fields]), hsizes2015, by = c("hhid")))
   
   chosenchars2015_woranks <- ddply(ohs2015[,c("hhid","age","outoffood")],.(hhid),summarise,age=max(age), outoffood=max(outoffood))
-  rank_from_past_years <- ddply(rbind(chosenchars2010,chosenchars2012),.(hhid),summarise, max_education_rank=max(max_education_rank), max_occupation_rank=max(max_occupation_rank))
+  rank_from_past_years <- ddply(rbind(chosenchars2010,chosenchars2012),.(hhid),summarise, max_education_rank=choose_max_non_na_rank(max_education_rank), max_occupation_rank=choose_max_non_na_rank(max_occupation_rank))
   chosenchars2015 <- merge(rank_from_past_years,chosenchars2015_woranks,by=c("hhid"))
   hswithchars2015 <- merge(hs2015,chosenchars2015,all.x = T)
   #
-  
 
-  
   
   #a<-merge(plyr::rename(i2010,c("hhid"="hhid2010")),assetslog2010 ,by=c("hhid2010"))
   res=list()
