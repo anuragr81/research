@@ -1624,16 +1624,22 @@ add_fields_to_data<-function(use_ea,tndf2010,tndf2012,tndf2014){
   
   res[['df2010']] <- tndf2010 %>% mutate ( has_nu = as.integer(cost_ne_food+cost_ne_nonfood> min_ne_food_x*hsize), log_q_ne = sapply(cost_ne_nonfood + cost_ne_food - min_ne_food_x*hsize,log_zeroed) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
   res[['df2010']] <- res[['df2010']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
+  
+  res[['df2010']] <- res[['df2010']] %>% mutate (w_ne = (cost_ne_food+cost_ne_nonfood)/(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)), w_A = (exp(lnA0))/(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)), w_educ = (toteducexpense)/(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)), lnX = log(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)))
+  
   # adding quantiles
   res[['df2010']] <- res[['df2010']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
   res[['df2012']] <- tndf2012 %>% mutate ( has_nu = as.integer(cost_ne_food+cost_ne_nonfood> min_ne_food_x*hsize), log_q_ne = sapply(cost_ne_nonfood + cost_ne_food - min_ne_food_x*hsize,log_zeroed) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
   res[['df2012']] <- res[['df2012']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
+  
+  res[['df2012']] <- res[['df2012']] %>% mutate (w_ne = (cost_ne_food+cost_ne_nonfood)/(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)), w_A = (exp(lnA0))/(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)), w_educ = (toteducexpense)/(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)), lnX = log(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)))
   # adding quantiles
   res[['df2012']] <- res[['df2012']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
   res[['df2014']] <- tndf2014 %>% mutate ( has_nu = as.integer(cost_ne_food+cost_ne_nonfood> min_ne_food_x*hsize), log_q_ne = sapply(cost_ne_nonfood + cost_ne_food - min_ne_food_x*hsize,log_zeroed) , logx =log(cost_ne_food + cost_asset_costs  +cost_ne_nonfood) , mean_cost_ne = log(mean_cost_ne_food_x + mean_cost_ne_nonfood_x) , log_mean_A0 = log(mean_A0) , log_mean_cost_ne = log(mean_cost_ne+1e-7))
   res[['df2014']] <- res[['df2014']] %>% mutate ( log_q_ne_nonfood = log(1e-7 + cost_ne_nonfood), log_q_ne_food = log(1e-7 + cost_ne_food), log_mean_cost_ne_food = log(mean_cost_ne_food_x+1e-7), log_mean_cost_ne_nonfood = log(mean_cost_ne_nonfood_x+1e-7), w_food_ne = cost_ne_food/(cost_ne_food+cost_ne_nonfood) , w_nonfood_ne = cost_ne_nonfood/(cost_ne_food+cost_ne_nonfood))
+  res[['df2014']] <- res[['df2014']] %>% mutate (w_ne = (cost_ne_food+cost_ne_nonfood)/(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)), w_A = (exp(lnA0))/(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)), w_educ = (toteducexpense)/(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)), lnX = log(cost_ne_food+cost_ne_nonfood + toteducexpense + exp(lnA0)))
   # adding quantiles
   res[['df2014']] <- res[['df2014']] %>% mutate ( log_q30_cost_ne_food = log(q30_cost_ne_food_x+1e-7), log_q30_cost_ne_nonfood = log(q30_cost_ne_nonfood_x+1e-7) , log_q70_cost_ne_food = log(q70_cost_ne_food_x+1e-7), log_q70_cost_ne_nonfood = log(q70_cost_ne_nonfood_x+1e-7) )
   
@@ -1856,7 +1862,7 @@ build_xt_df <- function(dflist)
   df2010_2012 <- plyr::rename(df2010_2012,c("hhid2010"="hhid"))
   df2010_2012 <- rbind(df2010_2012,dat2010[,common_cols_2010_2012_2014] %>% mutate(year =2010))
   df2010_2012$hhid <- as.factor(df2010_2012$hhid)
-  split_hhids2010_2012 <- unique(subset(ddply(df2010_2012,.(hhid,year),summarise,n=length(consu)),n>1)$hhid)
+  split_hhids2010_2012 <- unique(subset(ddply(df2010_2012,.(hhid,year),summarise,n=length(hsize)),n>1)$hhid)
   
   print(paste("Ignoring split",length(split_hhids2010_2012),"/",length(unique(df2010_2012$hhid)),"households"))
   df2010_2012 <- subset(df2010_2012,!is.element(hhid,split_hhids2010_2012))
@@ -1867,7 +1873,7 @@ build_xt_df <- function(dflist)
   df2012_2014 <- plyr::rename(df2012_2014,c("hhid2012"="hhid"))
   df2012_2014 <- rbind(df2012_2014,dat2012[,common_cols_2010_2012_2014] %>% mutate(year =2012))
   df2012_2014$hhid <- as.factor(df2012_2014$hhid)
-  split_hhids2012_2014 <- unique(subset(ddply(df2012_2014,.(hhid,year),summarise,n=length(consu)),n>1)$hhid)
+  split_hhids2012_2014 <- unique(subset(ddply(df2012_2014,.(hhid,year),summarise,n=length(hsize)),n>1)$hhid)
   warning("The year 3 hhids are missing in a lot of records for 2014 but a significant number of households in the extension file do have this field") 
   print(paste("Ignoring split",length(split_hhids2012_2014),"/",length(unique(df2012_2014$hhid)),"households"))
   df2012_2014 <- subset(df2012_2014,!is.element(hhid,split_hhids2012_2014))

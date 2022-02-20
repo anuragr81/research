@@ -2048,6 +2048,36 @@ Parametric Analysis
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% We don't have panel information for 2012-2014 (for Tanzania).
+ So we won't be using panel data.
+ If it comes to panel data, then we would be using a pseudo-panel formulation.
+\end_layout
+
+\begin_layout Plain Layout
+
+% In the cross-sectional analysis, we look the asset-themselves are on the
+ left hand-side, as are educational as well as occupational expenditures
+ (the latter we have none).
+\end_layout
+
+\begin_layout Plain Layout
+
+% We can mitigate objections to occupation rank by consider particular occupatio
+ns (agrarian/non-agrarian occupations, further sub-divided by higher than
+ or lower than median income)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \align center
 \begin_inset Float table
 placement H
@@ -2335,6 +2365,778 @@ Control Variables
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% do "C:
+\backslash
+local_files
+\backslash
+research
+\backslash
+consumption
+\backslash
+tnz_ngr_comparison
+\backslash
+run_educ_cons_sureg.do"
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Tanzania(D) 
+\backslash
+label{tabTNZ_district}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox{3in}{!}{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+{ 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2014}
+\backslash
+
+\backslash
+ 
+\backslash
+hline w
+\backslash
+_ne      &                  &                  
+\backslash
+
+\backslash
+ lnX       &   -0.136
+\backslash
+sym{***}&   -0.149
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ r         &  -0.0265
+\backslash
+sym{***}& -0.00903
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.019)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&   0.0636
+\backslash
+sym{***}&   0.0582
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&  0.00590         &   0.0167
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.208)         &  (0.000)         
+\backslash
+
+\backslash
+ age       &-0.000709
+\backslash
+sym{***}&-0.000449
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.030)         
+\backslash
+
+\backslash
+ rural
+\backslash
+_wards&   -0.119
+\backslash
+sym{***}&  -0.0629
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ hsize     & -0.00221         &-0.000196         
+\backslash
+
+\backslash
+           &  (0.149)         &  (0.899)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    3.041
+\backslash
+sym{***}&    2.947
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline w
+\backslash
+_educ    &                  &                  
+\backslash
+
+\backslash
+ lnX       & -0.00231         &  0.00283
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.050)         &  (0.038)         
+\backslash
+
+\backslash
+ r         & -0.00157         &-0.000882         
+\backslash
+
+\backslash
+           &  (0.218)         &  (0.524)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&  0.00184         &-0.000242         
+\backslash
+
+\backslash
+           &  (0.247)         &  (0.889)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&-0.000874         & -0.00386
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.581)         &  (0.016)         
+\backslash
+
+\backslash
+ age       & 0.000344
+\backslash
+sym{***}& 0.000250
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.001)         
+\backslash
+
+\backslash
+ rural
+\backslash
+_wards&  -0.0271
+\backslash
+sym{***}&  -0.0112
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.029)         
+\backslash
+
+\backslash
+ hsize     &  0.00409
+\backslash
+sym{***}&  0.00590
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   0.0757
+\backslash
+sym{**} &  -0.0177         
+\backslash
+
+\backslash
+           &  (0.001)         &  (0.489)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     4068         &     3613         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[H]
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Nigeria(D) 
+\backslash
+label{tabNGR_district}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox{3in}{!}{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{ 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2015}
+\backslash
+
+\backslash
+ 
+\backslash
+hline w
+\backslash
+_ne      &                  &                  
+\backslash
+
+\backslash
+ lnX       &  -0.0375
+\backslash
+sym{***}&  -0.0466
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ r         &  -0.0626
+\backslash
+sym{***}&  -0.0575
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&  -0.0196
+\backslash
+sym{***}&  -0.0292
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&  -0.0181
+\backslash
+sym{***}&  -0.0112
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ age       &-0.000702
+\backslash
+sym{***}&-0.000118         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.534)         
+\backslash
+
+\backslash
+ rural
+\backslash
+_wards&  -0.0419
+\backslash
+sym{***}&  -0.0252
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.001)         
+\backslash
+
+\backslash
+ hsize     & -0.00344
+\backslash
+sym{**} &-0.000354         
+\backslash
+
+\backslash
+           &  (0.003)         &  (0.727)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &    2.024
+\backslash
+sym{***}&    2.051
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline w
+\backslash
+_educ    &                  &                  
+\backslash
+
+\backslash
+ lnX       &  0.00498
+\backslash
+sym{*}  &  0.00544
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.014)         &  (0.006)         
+\backslash
+
+\backslash
+ r         &  0.00367         &   0.0111
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.098)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank& -0.00304         &  0.00565
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.138)         &  (0.004)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&   0.0160
+\backslash
+sym{***}&  0.00591
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ age       & 0.000338
+\backslash
+sym{***}&-0.000126         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.183)         
+\backslash
+
+\backslash
+ rural
+\backslash
+_wards&-0.000373         &  0.00625         
+\backslash
+
+\backslash
+           &  (0.920)         &  (0.099)         
+\backslash
+
+\backslash
+ hsize     &  0.00106
+\backslash
+sym{*}  &  0.00265
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.047)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -0.124
+\backslash
+sym{***}&   -0.192
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     4142         &     4169         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}
 \end_layout
 
 \end_inset
