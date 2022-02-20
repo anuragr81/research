@@ -17,3 +17,5 @@ global logeduc2015 (w_educ lnX r log_mean_cost_ne max_occupation_rank max_educat
 eststo, title (2015): quietly sureg $logqne2015 $logeduc2015
 
 esttab using c:/temp/resnu.tex, mtitle no p numbers nogaps compress title() 
+
+

@@ -1258,17 +1258,117 @@ The prosperity of an areas of reference is measured as the average local
  assets possession in the area.
  We provide a comparison of two approaches for determining the boundaries
  of the area of reference – first is based on a uniform distance throughout
- Nigeria and Tanzania and the second is based how similar the costs 
-\begin_inset Formula $\pi(r,t),\psi(r,t)$
-\end_inset
-
- implied by assets are in the area (i.e.
- the costs of preparedness and maintenance respectively).
+ Nigeria and Tanzania and ...
  This allows us to contrast the consideration of uniform reference areas
  based on geographical distance and/or the size of the population with that
+ of immediate neighborhoods ...
  long-term measures of prosperity.
- The comparison with the non-uniform size of reference may also detect the
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%The comparison with the non-uniform size of reference may also detect the
  relevance of social identities that we have briefly discussed.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Alternative definition of reference groups
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Another definition could be based on the reference groups consisting of
+ consumers with the same level within the area - i.e.
+ with the same level of occupations.
+ There are two ways to factor in the role of references - one is to consider
+ the averages of only those with the same level of occupation.
+ In econometric terms, this may explain us whether fine-tuned 
+\begin_inset Formula $r$
+\end_inset
+
+ i.e.
+ the one that varies by the consumer's occupation-rank ...
+ ().
+ The other is to use a four-way dummy for agrarian/non-agrarian occupations,
+ further sub-divided by whether they are higher or lower than the median
+ income in the wider region (agrarian and non-agrarian occupations respectively).
+ We therefore provide results from four regression with three different
+ references.
+ Notice that occupation-rank variable is needed in all of them since the
+ variations in 
+\begin_inset Formula $r$
+\end_inset
+
+ are only that of differences in our measurement of prosperity - that are
+ independent of the control for occupation.
+ It's only that occupation-rank is not relevant when we consider 
+\begin_inset Formula $r_{ag}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $r$
+\end_inset
+
+ with occupation-rank 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $r$
+\end_inset
+
+ with agri-non-agri control 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $r_{oc}$
+\end_inset
+
+ wit occupation-rank control 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $r_{ag}$
+\end_inset
+
+ with agri-non-agri control (instead of the occupation-rank control)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% we could in fact remove the occupation-rank completely to provide a fair
+ comparison of r_occup and 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2088,11 +2188,12 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="12" columns="3">
+<lyxtabular version="3" rows="9" columns="4">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0.7in">
 <column alignment="center" valignment="top" width="2in">
 <column alignment="left" valignment="top" width="3.5in">
+<column alignment="left" valignment="top" width="1in">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
@@ -2121,6 +2222,15 @@ Description
 
 \end_inset
 </cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ind/Ref Level
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" bottomline="true" usebox="none">
@@ -2142,7 +2252,7 @@ Description
 
 \family typewriter
 \size small
-logx
+lnX
 \end_layout
 
 \end_inset
@@ -2151,12 +2261,16 @@ logx
 \begin_inset Text
 
 \begin_layout Plain Layout
-logarithm of per-head total expenditure 
-\begin_inset Formula $x_{t}$
-\end_inset
+logarithm of the sum of total expenditure and assets owned by the consumer
+\end_layout
 
- per household - inclusive of asset-maintenance costs and the food as well
- as non-food non-durable expenditure.
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Individual
 \end_layout
 
 \end_inset
@@ -2182,7 +2296,7 @@ logarithm of per-head total expenditure
 
 \family typewriter
 \size small
-r_t
+r
 \family default
 \size default
  
@@ -2200,37 +2314,11 @@ logarithm of mean asset-ownership level in the 4-km radius area around the
 
 \end_inset
 </cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $log(A_{t})$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-lnA0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+Reference
 \end_layout
 
 \end_inset
@@ -2241,7 +2329,7 @@ lnA0
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $p_{food}$
+\begin_inset Formula $p_{ne}$
 \end_inset
 
  
@@ -2256,7 +2344,7 @@ lnA0
 
 \family typewriter
 \size small
-log_mean_cost_ne_food
+log_mean_cost_ne
 \end_layout
 
 \end_inset
@@ -2265,34 +2353,8 @@ log_mean_cost_ne_food
 \begin_inset Text
 
 \begin_layout Plain Layout
-logarithm of the mean non-durable expenditure on food (excluding asset costs
- in the area surrounding the consumer)
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $p_{nonfood}$
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-log_mean_cost_ne_nonfood
+logarithm of the mean non-durable expenditure - excluding asset costs in
+ the area surrounding the consumer
 \end_layout
 
 \end_inset
@@ -2301,47 +2363,7 @@ log_mean_cost_ne_nonfood
 \begin_inset Text
 
 \begin_layout Plain Layout
-logarithm of the mean non-durable expenditure on non-food items (excluding
- asset costs in the area surrounding the consumer)
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $has\_excess$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-has_excess
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-factor variable indicating if there is a non-zero 
-\begin_inset Formula $\nu_{t}$
-\end_inset
-
- 
+Reference
 \end_layout
 
 \end_inset
@@ -2392,6 +2414,15 @@ highest education rank among the family members of the household used as
 
 \end_inset
 </cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Individual
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" usebox="none">
@@ -2424,6 +2455,15 @@ max_education_rank
 \begin_layout Plain Layout
 highest education rank among the family members of the household used as
  a factor variable
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Individual
 \end_layout
 
 \end_inset
@@ -2466,6 +2506,15 @@ age of the head of the household (household-heads are reported in the survey)
 
 \end_inset
 </cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Individual
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" usebox="none">
@@ -2501,6 +2550,15 @@ number of members in the household
 
 \end_inset
 </cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Individual
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" usebox="none">
@@ -2522,14 +2580,7 @@ number of members in the household
 
 \family typewriter
 \size small
-rural_wards, is_rural,
-\end_layout
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-is_urban
+rural_wards
 \end_layout
 
 \end_inset
@@ -2539,6 +2590,15 @@ is_urban
 
 \begin_layout Plain Layout
 the percentage of rural wards/eas in a district of consumer's residence
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reference
 \end_layout
 
 \end_inset
@@ -2572,6 +2632,58 @@ Control Variables
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+We use the variable for prosperity as well as the prices in the region as
+ unit-value (the average consumption excluding the asset costs).
+ The price 
+\begin_inset Formula $p_{ne}$
+\end_inset
+
+ determines proxies the costs 
+\begin_inset Formula $\pi(r,t),\psi(r,t)$
+\end_inset
+
+ in the reference (i.e.
+ the costs of preparedness and maintenance respectively) - roughly interpreted
+ as the cost of living in the reference.
+ 
+\end_layout
+
+\begin_layout Standard
+The dependent variable is defined at the individual level as are 
+\family typewriter
+age
+\family default
+, 
+\family typewriter
+hsize 
+\family default
+and 
+\family typewriter
+lnX
+\family default
+.
+ The variables indicating the properties of the reference-level - 
+\family typewriter
+\size small
+rural_wards
+\family default
+\size default
+, 
+\family typewriter
+\size small
+log_mean_cost_ne
+\family default
+\size default
+ ,
+\family typewriter
+\size small
+ r
+\family default
+\size default
+ are defined at the reference level.
 \end_layout
 
 \begin_layout Standard
@@ -2638,10 +2750,6 @@ status open
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
 { 
 \backslash
 def
@@ -2686,9 +2794,9 @@ _ne      &                  &
 \backslash
 
 \backslash
- lnX       &   -0.136
+ lnX       &   -0.145
 \backslash
-sym{***}&   -0.149
+sym{***}&   -0.159
 \backslash
 sym{***}
 \backslash
@@ -2698,15 +2806,33 @@ sym{***}
 \backslash
 
 \backslash
- r         &  -0.0265
+ r         &  -0.0279
 \backslash
-sym{***}& -0.00903
+sym{***}&  -0.0275
 \backslash
-sym{*}  
+sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.019)         
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&    2.032
+\backslash
+sym{***}&    1.797
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -2714,9 +2840,9 @@ sym{*}
 \backslash
 _occupation
 \backslash
-_rank&   0.0636
+_rank&   0.0574
 \backslash
-sym{***}&   0.0582
+sym{***}&   0.0484
 \backslash
 sym{***}
 \backslash
@@ -2730,55 +2856,53 @@ sym{***}
 \backslash
 _education
 \backslash
-_rank&  0.00590         &   0.0167
+_rank&  0.00501         &   0.0150
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.208)         &  (0.000)         
+           &  (0.273)         &  (0.001)         
 \backslash
 
 \backslash
- age       &-0.000709
+ age       &-0.000727
 \backslash
-sym{***}&-0.000449
-\backslash
-sym{*}  
+sym{***}&-0.000376         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.030)         
+           &  (0.000)         &  (0.062)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards&   -0.119
+_wards&   0.0418
 \backslash
-sym{***}&  -0.0629
-\backslash
-sym{***}
+sym{*}  &   0.0137         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.018)         &  (0.367)         
 \backslash
 
 \backslash
- hsize     & -0.00221         &-0.000196         
+ hsize     &  0.00118         &  0.00490
+\backslash
+sym{**} 
 \backslash
 
 \backslash
-           &  (0.149)         &  (0.899)         
+           &  (0.436)         &  (0.002)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &    3.041
+_cons    &   -2.101
 \backslash
-sym{***}&    2.947
+sym{***}&   -1.302
 \backslash
 sym{***}
 \backslash
@@ -2796,21 +2920,37 @@ _educ    &                  &
 \backslash
 
 \backslash
- lnX       & -0.00231         &  0.00283
+ lnX       & -0.00292
 \backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.050)         &  (0.038)         
+sym{*}  &  0.00231         
 \backslash
 
 \backslash
- r         & -0.00157         &-0.000882         
+           &  (0.015)         &  (0.096)         
 \backslash
 
 \backslash
-           &  (0.218)         &  (0.524)         
+ r         & -0.00167         & -0.00185         
+\backslash
+
+\backslash
+           &  (0.189)         &  (0.209)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&    0.147
+\backslash
+sym{**} &   0.0945         
+\backslash
+
+\backslash
+           &  (0.004)         &  (0.059)         
 \backslash
 
 \backslash
@@ -2818,11 +2958,11 @@ sym{*}
 \backslash
 _occupation
 \backslash
-_rank&  0.00184         &-0.000242         
+_rank&  0.00139         &-0.000756         
 \backslash
 
 \backslash
-           &  (0.247)         &  (0.889)         
+           &  (0.383)         &  (0.667)         
 \backslash
 
 \backslash
@@ -2830,19 +2970,19 @@ _rank&  0.00184         &-0.000242
 \backslash
 _education
 \backslash
-_rank&-0.000874         & -0.00386
+_rank&-0.000938         & -0.00395
 \backslash
 sym{*}  
 \backslash
 
 \backslash
-           &  (0.581)         &  (0.016)         
+           &  (0.553)         &  (0.013)         
 \backslash
 
 \backslash
- age       & 0.000344
+ age       & 0.000343
 \backslash
-sym{***}& 0.000250
+sym{***}& 0.000254
 \backslash
 sym{***}
 \backslash
@@ -2854,21 +2994,19 @@ sym{***}
 \backslash
  rural
 \backslash
-_wards&  -0.0271
+_wards&  -0.0155
 \backslash
-sym{***}&  -0.0112
-\backslash
-sym{*}  
+sym{*}  & -0.00719         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.029)         
+           &  (0.012)         &  (0.196)         
 \backslash
 
 \backslash
- hsize     &  0.00409
+ hsize     &  0.00434
 \backslash
-sym{***}&  0.00590
+sym{***}&  0.00617
 \backslash
 sym{***}
 \backslash
@@ -2880,13 +3018,15 @@ sym{***}
 \backslash
  
 \backslash
-_cons    &   0.0757
+_cons    &   -0.296
 \backslash
-sym{**} &  -0.0177         
+sym{*}  &   -0.241
+\backslash
+sym{*}  
 \backslash
 
 \backslash
-           &  (0.001)         &  (0.489)         
+           &  (0.025)         &  (0.047)         
 \backslash
 
 \backslash
@@ -3055,9 +3195,9 @@ _ne      &                  &
 \backslash
 
 \backslash
- lnX       &  -0.0375
+ lnX       &  -0.0599
 \backslash
-sym{***}&  -0.0466
+sym{***}&  -0.0660
 \backslash
 sym{***}
 \backslash
@@ -3067,9 +3207,27 @@ sym{***}
 \backslash
 
 \backslash
- r         &  -0.0626
+ r         &  -0.0770
 \backslash
-sym{***}&  -0.0575
+sym{***}&  -0.0826
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&    1.154
+\backslash
+sym{***}&    1.192
 \backslash
 sym{***}
 \backslash
@@ -3083,9 +3241,9 @@ sym{***}
 \backslash
 _occupation
 \backslash
-_rank&  -0.0196
+_rank&  -0.0153
 \backslash
-sym{***}&  -0.0292
+sym{***}&  -0.0247
 \backslash
 sym{***}
 \backslash
@@ -3099,9 +3257,9 @@ sym{***}
 \backslash
 _education
 \backslash
-_rank&  -0.0181
+_rank&  -0.0165
 \backslash
-sym{***}&  -0.0112
+sym{***}&  -0.0117
 \backslash
 sym{***}
 \backslash
@@ -3111,51 +3269,45 @@ sym{***}
 \backslash
 
 \backslash
- age       &-0.000702
+ age       &-0.000886
 \backslash
-sym{***}&-0.000118         
+sym{***}&-0.000420
+\backslash
+sym{*}  
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.534)         
+           &  (0.000)         &  (0.024)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards&  -0.0419
+_wards& -0.00167         &  0.00138         
 \backslash
-sym{***}&  -0.0252
+
+\backslash
+           &  (0.841)         &  (0.856)         
+\backslash
+
+\backslash
+ hsize     &  0.00228         &  0.00598
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.001)         
-\backslash
-
-\backslash
- hsize     & -0.00344
-\backslash
-sym{**} &-0.000354         
-\backslash
-
-\backslash
-           &  (0.003)         &  (0.727)         
+           &  (0.057)         &  (0.000)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &    2.024
-\backslash
-sym{***}&    2.051
-\backslash
-sym{***}
+_cons    &   -0.321         &   -0.306         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.081)         &  (0.061)         
 \backslash
 
 \backslash
@@ -3167,25 +3319,43 @@ _educ    &                  &
 \backslash
 
 \backslash
- lnX       &  0.00498
+ lnX       &  0.00639
 \backslash
-sym{*}  &  0.00544
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.014)         &  (0.006)         
-\backslash
-
-\backslash
- r         &  0.00367         &   0.0111
+sym{**} &  0.00703
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.098)         &  (0.000)         
+           &  (0.003)         &  (0.001)         
+\backslash
+
+\backslash
+ r         &  0.00457
+\backslash
+sym{*}  &   0.0131
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.044)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&  -0.0723         &  -0.0975
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.073)         &  (0.014)         
 \backslash
 
 \backslash
@@ -3193,13 +3363,13 @@ sym{***}
 \backslash
 _occupation
 \backslash
-_rank& -0.00304         &  0.00565
+_rank& -0.00331         &  0.00528
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &  (0.138)         &  (0.004)         
+           &  (0.107)         &  (0.007)         
 \backslash
 
 \backslash
@@ -3207,9 +3377,9 @@ sym{**}
 \backslash
 _education
 \backslash
-_rank&   0.0160
+_rank&   0.0159
 \backslash
-sym{***}&  0.00591
+sym{***}&  0.00595
 \backslash
 sym{***}
 \backslash
@@ -3219,49 +3389,43 @@ sym{***}
 \backslash
 
 \backslash
- age       & 0.000338
+ age       & 0.000349
 \backslash
-sym{***}&-0.000126         
+sym{***}&-0.000101         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.183)         
+           &  (0.000)         &  (0.287)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards&-0.000373         &  0.00625         
+_wards& -0.00289         &  0.00407         
 \backslash
 
 \backslash
-           &  (0.920)         &  (0.099)         
+           &  (0.467)         &  (0.295)         
 \backslash
 
 \backslash
- hsize     &  0.00106
-\backslash
-sym{*}  &  0.00265
+ hsize     & 0.000700         &  0.00213
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.047)         &  (0.000)         
+           &  (0.219)         &  (0.000)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   -0.124
-\backslash
-sym{***}&   -0.192
-\backslash
-sym{***}
+_cons    &   0.0227         & 0.000580         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.795)         &  (0.994)         
 \backslash
 
 \backslash
@@ -3337,6 +3501,840 @@ status open
 \begin_layout Plain Layout
 
 
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+begin{table}[H]
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+caption{Tanzania(E) 
+\backslash
+label{tabTNZ_ea}}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+resizebox{3.4in}{!}{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% { 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2014}
+\backslash
+
+\backslash
+ 
+\backslash
+hline w
+\backslash
+_ne      &                  &                  
+\backslash
+
+\backslash
+ lnX       &   -0.146
+\backslash
+sym{***}&   -0.159
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ r         &  -0.0320
+\backslash
+sym{***}&  -0.0286
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&    1.654
+\backslash
+sym{***}&    1.750
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&   0.0537
+\backslash
+sym{***}&   0.0482
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&  0.00451         &   0.0150
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.324)         &  (0.001)         
+\backslash
+
+\backslash
+ age       &-0.000639
+\backslash
+sym{**} &-0.000363         
+\backslash
+
+\backslash
+           &  (0.001)         &  (0.071)         
+\backslash
+
+\backslash
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural &  -0.0306
+\backslash
+sym{**} &                  
+\backslash
+
+\backslash
+           &  (0.001)         &                  
+\backslash
+
+\backslash
+ hsize     &  0.00227         &  0.00493
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.137)         &  (0.002)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -1.022
+\backslash
+sym{***}&   -1.155
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.001)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline w
+\backslash
+_educ    &                  &                  
+\backslash
+
+\backslash
+ lnX       & -0.00366
+\backslash
+sym{**} &  0.00235         
+\backslash
+
+\backslash
+           &  (0.002)         &  (0.091)         
+\backslash
+
+\backslash
+ r         & -0.00197         & -0.00126         
+\backslash
+
+\backslash
+           &  (0.109)         &  (0.369)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&    0.123
+\backslash
+sym{**} &    0.119
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.003)         &  (0.010)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&0.00000941         &-0.000624         
+\backslash
+
+\backslash
+           &  (0.995)         &  (0.722)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank& -0.00120         & -0.00397
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.447)         &  (0.013)         
+\backslash
+
+\backslash
+ age       & 0.000376
+\backslash
+sym{***}& 0.000247
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.001)         
+\backslash
+
+\backslash
+ 0.isrural &        0         &                  
+\backslash
+
+\backslash
+           &      (.)         &                  
+\backslash
+
+\backslash
+ 1.isrural &  -0.0225
+\backslash
+sym{***}&                  
+\backslash
+
+\backslash
+           &  (0.000)         &                  
+\backslash
+
+\backslash
+ hsize     &  0.00480
+\backslash
+sym{***}&  0.00615
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -0.218
+\backslash
+sym{*}  &   -0.318
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.033)         &  (0.003)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     4068         &     3613         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+begin{table}[H]
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+caption{Nigeria(E) 
+\backslash
+label{tabNGR_ea}}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+resizebox{3.4in}{!}{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% { 
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi} 
+\backslash
+begin{tabular}{l*{2}{c}} 
+\backslash
+hline
+\backslash
+hline           &
+\backslash
+multicolumn{1}{c}{(1)}&
+\backslash
+multicolumn{1}{c}{(2)}
+\backslash
+
+\backslash
+           &
+\backslash
+multicolumn{1}{c}{2012}&
+\backslash
+multicolumn{1}{c}{2015}
+\backslash
+
+\backslash
+ 
+\backslash
+hline w
+\backslash
+_ne      &                  &                  
+\backslash
+
+\backslash
+ lnX       &  -0.0599
+\backslash
+sym{***}&  -0.0661
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ r         &  -0.0771
+\backslash
+sym{***}&  -0.0831
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&    1.148
+\backslash
+sym{***}&    1.184
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank&  -0.0153
+\backslash
+sym{***}&  -0.0247
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&  -0.0166
+\backslash
+sym{***}&  -0.0117
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ age       &-0.000884
+\backslash
+sym{***}&-0.000415
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.026)         
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_urban&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.is
+\backslash
+_urban& -0.00349         & -0.00232         
+\backslash
+
+\backslash
+           &  (0.641)         &  (0.726)         
+\backslash
+
+\backslash
+ hsize     &  0.00232         &  0.00603
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.054)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   -0.304         &   -0.278         
+\backslash
+
+\backslash
+           &  (0.089)         &  (0.082)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline w
+\backslash
+_educ    &                  &                  
+\backslash
+
+\backslash
+ lnX       &  0.00632
+\backslash
+sym{**} &  0.00712
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.004)         &  (0.001)         
+\backslash
+
+\backslash
+ r         &  0.00455
+\backslash
+sym{*}  &   0.0130
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.044)         &  (0.000)         
+\backslash
+
+\backslash
+ log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&  -0.0731         &   -0.100
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.065)         &  (0.011)         
+\backslash
+
+\backslash
+ max
+\backslash
+_occupation
+\backslash
+_rank& -0.00333         &  0.00528
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &  (0.105)         &  (0.007)         
+\backslash
+
+\backslash
+ max
+\backslash
+_education
+\backslash
+_rank&   0.0159
+\backslash
+sym{***}&  0.00596
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ age       & 0.000350
+\backslash
+sym{***}&-0.0001000         
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.292)         
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_urban&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.is
+\backslash
+_urban& -0.00334         &  0.00333         
+\backslash
+
+\backslash
+           &  (0.348)         &  (0.326)         
+\backslash
+
+\backslash
+ hsize     & 0.000727         &  0.00212
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.203)         &  (0.000)         
+\backslash
+
+\backslash
+ 
+\backslash
+_cons    &   0.0259         &  0.00786         
+\backslash
+
+\backslash
+           &  (0.761)         &  (0.923)         
+\backslash
+
+\backslash
+ 
+\backslash
+hline 
+\backslash
+(N
+\backslash
+)     &     4142         &     4169         
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+textit{p}-values in parentheses}
+\backslash
+
+\backslash
+ 
+\backslash
+multicolumn{3}{l}{
+\backslash
+footnotesize 
+\backslash
+sym{*} 
+\backslash
+(p<0.05
+\backslash
+), 
+\backslash
+sym{**} 
+\backslash
+(p<0.01
+\backslash
+), 
+\backslash
+sym{***} 
+\backslash
+(p<0.001
+\backslash
+)}
+\backslash
+
+\backslash
+ 
+\backslash
+end{tabular} } 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
 \backslash
 end{table}
 \end_layout

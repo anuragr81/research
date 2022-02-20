@@ -983,7 +983,7 @@ init_data <- function(use_ea){
   #p <- prepare_pseudo_panels_2010_2012_2014(o2010 = o2010, o2012 = o2012, o2014 = o2014, ll =ll , dirprefix = "../", fu=fu, ln=lsms_normalizer,ncdifftol = 2, yobtol = 3, i2010 = i2010, i2012 = i2012, i2014 = i2014,calibrate_needs=FALSE) 
   #pres <- estimation_df(e = e, a2010=a2010,a2012= a2012, a2014 = a2014, o2010 = o2010, o2012 = o2012, o2014 = o2014, c2010=c2010, c2012=c2012, c2014=c2014)
   #hist(sapply(res[["x"]]$expenditure,logx),breaks=100)
-  tn <- get_nonparametric_df(ll = ll,food_analysis = F, use_ea=use_ea, o2010=o2010, o2012=o2012, o2014=o2014, a2010=a2010, a2012=a2012, a2014=a2014, c2010=c2010, c2012=c2012, c2014=c2014 )
+  tn <- get_nonparametric_df(ll = ll,ln=lsms_normalizer,food_analysis = F, use_ea=use_ea, o2010=o2010, o2012=o2012, o2014=o2014, a2010=a2010, a2012=a2012, a2014=a2014, c2010=c2010, c2012=c2012, c2014=c2014 )
   return(tn)
   }
 
@@ -1240,7 +1240,7 @@ zero_nas <- function(dat){
   return(dat)
 }
 
-get_nonparametric_df <- function(ll,food_analysis, use_ea, o2010, o2012, o2014, a2010, a2012, a2014, c2010, c2012, c2014 ){
+get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o2014, a2010, a2012, a2014, c2010, c2012, c2014 ){
   # Don't include education or housing expenses - because they're part of needs anyways
   inc_houserent = F
   inc_educexpense = F
