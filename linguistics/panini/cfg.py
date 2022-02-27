@@ -217,7 +217,16 @@ def apply_lopa(suffix_node):
                 
     return suffix_node
                     
-    
+
+
+def process_until_finish(expr):
+    output_processed_string = lambda e: ''.join(reduce(lambda x ,y : x + y.get_output(),  e, []))
+    old_string = output_processed_string (expr)
+    new_expr = process_list(expr)
+    if output_processed_string (new_expr)==old_string:
+        return expr
+    else:
+        return process_until_finish(new_expr)
         
 def process_list(expr):
     all_sutras= get_sutras_ordered()
@@ -250,14 +259,18 @@ def process_list(expr):
     return new_expr
 
 def test_siddhis ():
-    output_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  process_list(expr), []))
+    output_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  process_until_finish(expr), []))
     
-#    assert output_string ([Node(Dhaatu(parse_string("bhaj")),parent=None),Node(Suffix("ghaNc"),parent=None)]) == "bhaaga"
+    assert output_string ([Node(Dhaatu(parse_string("bhajNc")),parent=None),Node(Suffix("ghaNc"),parent=None)]) == "bhaaga"
     assert output_string ([Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]) == "naayaka"
 
 
 #expression=[Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]
-#processed_expr=(process_list(expression))
-#processed_expr=(process_list(expression))
+expression=[Node(Dhaatu(parse_string("bhajNc")),parent=None),Node(Suffix("ghaNc"),parent=None)]
+#
+processed_expr=(process_until_finish(expression))
 
 test_siddhis ()
+
+#output_processed_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  expr, []))
+#print(output_processed_string (processed_expr))

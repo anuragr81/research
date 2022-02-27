@@ -1,4 +1,4 @@
-from ..common_definitions import anunaasika, Suffix, ach, hal, chu, Xtu, Node
+from ..common_definitions import anunaasika, Suffix, ach, hal, chu, Xtu, Node, Dhaatu
 
 def uraNnraparaH_101050(a, b):
     if a[-1] == "Ri" :
@@ -10,9 +10,10 @@ def uraNnraparaH_101050(a, b):
 
 
 def halantyam_103003(node):
-    
+    #Check isinstance(node._data,Dhaatu) if necessary
     antyam = node.get_output()[-1]
-    if antyam in hal():
+    #works only once - not after the output has been modified with the call
+    if antyam in hal() and node._data.get_data()[-1] == antyam:
         return node.get_output()[:-1]
     else:
         return node.get_output()
