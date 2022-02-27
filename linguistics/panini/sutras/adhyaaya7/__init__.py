@@ -1,4 +1,4 @@
-from ..common_definitions import vriddhi,upadhaa, ach, Suffix, Node
+from ..common_definitions import vriddhi,upadhaa, ach, Suffix, Node ,pratyaahaara, guNna
 
 
 def yuvoranaakau_701001(anga_node,node):
@@ -102,17 +102,33 @@ def chajoHkughiNnNnyatoH_703052(node,suffix_node):
     suffix=suffix_node._data
     chakaar_to_ku = lambda y : 'k' if y=='ch' else y
     jakaar_to_ku = lambda y : 'g' if y=='j' else y
-    if suffix.get_suffix()[0] in ('gh',) or suffix.get_suffix()[-1] in ('gh',) or str(suffix) == "Nyat":
+    if suffix.get_suffix()[0] in ('gh',) or suffix.get_suffix()[-1] in ('gh',) or str(suffix) == "Nnyat":
         #return ''.join(jakaar_to_ku(chakaar_to_ku(j)) for j in x)
         return [jakaar_to_ku(chakaar_to_ku(j)) for j in node.get_output()]
     
     return node.get_output()
 
 
-def aardhadhaatukasyeXdvalaadeH_704114(node,suffix_node,is_aardhadhaatuka=False):    
+def saarvadhaatukaardhadhaatukayoH_703084(node,suffix_node):
+    if not isinstance(node,Node):
+        raise ValueError("anga_node must of type Node")
+    if not isinstance(suffix_node,Node):
+        raise ValueError("suffix must of type Node")    
+    if not isinstance(suffix_node._data,Suffix):
+        raise ValueError("suffix must of type Suffix")
+        
+    
+    if node._data._data[-1] == node.get_output()[-1]:
+        anga_string= node.get_output()
+        if node._data._data[-1] in pratyaahaara('i','k'):
+            return anga_string[0:-1]+[guNna(anga_string[-1])]
+    
+    return node.get_output()
+    
+def aardhadhaatukasyeXdvalaadeH_704114(node,suffix_node):    
     if not isinstance(node,Node):
         raise ValueError("node must of type Node")
-    if is_aardhadhaatuka:
+    if not suffix_node._data.is_saarvadhaatuka():
         return node+ ["i","Xt"]
     else:
         return node.get_output()

@@ -79,6 +79,11 @@ class Suffix:
     def apply_reduction(self,functor, **kwargs):
         self.reduced = functor(**kwargs)
         
+    def is_saarvadhaatuka(self):
+        if ''.join(self._suffix) in tiNg_pratyayaaH() or self._suffix[0]=='sh':
+            return True
+        else:
+            return False
 
     def __str__(self):
         return ''.join(self._suffix)
@@ -92,8 +97,12 @@ class It:
         self._data= data
 
 class Dhaatu:
-    def __init__(self,data):
+    def __init__(self,data,lakaara=None):
         self._data= data
+        if lakaara is not None:
+            if lakaara not in ('laXt','loXt','lRiXt','laNg','luNg','lRiNg','liNg1','liNg2'):
+                raise ValueError("Unknown lakaara")            
+        self._lakaara=lakaara
         
     def get_data(self):
         return self._data
@@ -173,7 +182,7 @@ def pratyaahaara(start,end):
 
     """
     
-    plist= ({'letters':("a","i","u",),'marker':'Nn'},{'letters':('Ri','lRi'),'marker':'k'},
+    plist= ({'letters':("a","i",'ii',"u",'uu',),'marker':'Nn'},{'letters':('Ri','Rii','lRi'),'marker':'k'},
         {'letters':('e','o',),'marker':'Ng'},{'letters':('ai','au'),'marker':'ch'},{'letters':('h','y','v','r',),'marker':'Xt'},{'letters':('l',),'marker':'N'},
         {'letters':('Nc','m','Ng','Nn','n'),'marker':'m'},{'letters':('jh','bh'),'marker':'Nc'},{'letters':('gh','Xdh','dh'),'marker':'Xsh'},
         {'letters':('j','b','g','Xd','d',),'marker':'sh'},{'letters':('kh','ph','chh','Xth','th','ch','Xt','t',),'marker':'v'},
@@ -216,7 +225,7 @@ def Xtu():
 
 
 def unclassified_pratyayaaH():
-    return ('sich','chli')
+    return ('sich','chli','shap')
 def san_pratyayaaH():
     return ("san","kyach","kaamyach","kyaNg","kyaXsh",
             "kvip","Nnich","yaNg","yak","aaya",
@@ -274,5 +283,12 @@ def vriddhi(x):
         return x
     
 
-
+def guNna(x):
+    if x =="i" or x=="i":
+        return "e"
+    elif x == "u" or x=="uu":
+        return "o"
+    else:
+        return x
+        
 

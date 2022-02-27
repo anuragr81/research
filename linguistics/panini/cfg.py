@@ -36,104 +36,13 @@ def get_sutras_ordered ():
     return OrderedDict(sorted(all_sutras))
 
 def transformation_sutras():
-    return sorted([601063, 601075, 604148, 701001, 701002, 702115, 702116, 703052, 704114, 801015, 802066])
+    return sorted([601063, 601075, 604148, 701001, 701002, 702115, 702116, 703052, 703084, 704114, 801015, 802066])
 
-class Application:
-    def __init__(self,entry):
-        self._entry = entry
-
-
-"""
-We are going to a model where known parents are always provided
-"""
-
-
-
-def desuffix(x):
-    return x.get_suffix() if isinstance(x,Suffix) else x
-
-def reduce_as_it_objects(expr,index):
-    """
-    Applied recursively until no it saMNcjyA is implied
-    The decompostion of suffix into it-s retains the collective property of being a Suffix
-    
-    When called this should be called as:
-    
-        while True:
-        suffix_indices= [ index for index,node in enumerate(new_expr) if isinstance(node._data,Suffix)]
-        if suffix_indices:
-            new_expr = apply_lopa(expr=new_expr,index=suffix_indices[0])
-        else:
-            break
-    
-    
-    """
-    #TODO: remove recursive node formation
-    
-    # parts of expr other than suffix can be used if needed
-    suffix= expr[index]._data
-    # don't make the suffix a parent if it's not proper
-    to_be_parent = suffix if is_known_type(suffix) else find_known_parent(expr[index])
-    
-    it_pos = lashakvataddhite_103008(suffix)
-    
-    if it_pos is not None:
-        # splitting the suffix and asking for next phase with the index + 1
-        return reduce_to_it_lopa(expr=expr[0:index] + [Node(It(desuffix(suffix)[0:it_pos+1]),parent=to_be_parent) , Node(desuffix(suffix) [it_pos+1:],parent=to_be_parent)] + expr[index+1:] ,index=index+1)
-
-    it_pos_list = aadirNciXtuXdavaH_103005(suffix.get_suffix() if isinstance(suffix,Suffix) else suffix)
-    pos_order = [it_pos_list[i+1]-it_pos_list [i]for i in range(len(it_pos_list)-1)]
-    
-    if any(x <0 for x in pos_order ):
-        raise RuntimeError("Cannot process list of it-s")
-        
-    if it_pos_list :
-        return reduce_to_it_lopa(expr=expr[0:index] + [ Node(It(''.join(desuffix(suffix)[i] for i in it_pos_list ))), 
-                                       Node(desuffix(suffix)[it_pos_list[-1]+1:])] + expr[index+1:],index=index+1)
-    
-    it_pos = halantyam_103003(desuffix(suffix))
-    #only ends are removed not the start
-    if it_pos is not None:
-        return reduce_to_it_lopa(expr=expr[0:index] + [Node(desuffix(suffix)[0:it_pos],parent=to_be_parent) , 
-                                                       Node(It(desuffix(suffix) [it_pos:]),parent=to_be_parent)] + expr[index+1:] ,
-                                 index=index)
-    
-    it_pos = chuXtuu_10307(desuffix(suffix))
-    if it_pos is not None:
-        return reduce_to_it_lopa(expr=expr[0:index] + [Node(It(desuffix(suffix)[0:it_pos+1]),parent=to_be_parent) , Node(desuffix(suffix) [it_pos+1:],parent=to_be_parent)] + expr[index+1:] ,index=index+1)
-        
-    return expr
-    
-def pick_last_child(nodes, parent):
-    if nodes[0].parent != parent:
-        raise ValueError("Invalid Start")
-    cur_index = 0
-    for i,x in enumerate(nodes):
-        if x.parent == parent:
-            cur_index = i
-        else:
-            return cur_index
-    return cur_index
-
-
-def join_non_its(nodes):
-    strout=""
-    for x in nodes:
-        if not isinstance(x._data,It):
-            if any (not isinstance(j,str) for j in x._data):               
-                raise RuntimeError("Invalid input for Joining")
-            else:
-                strout=strout+''.join(x._data)
-                
-    return strout
-
-def combine_dhaatu_suffix(dhaatu,suffix):
-    #TODO: instead of string - apply transformations that apply to dhaatu + suffix combination e.g. upadhaayaaH etc.
-    
-    return ''.join(dhaatu._data._data) + join_non_its(suffix)
+def insertion_sutras():
+    return sorted([301068])
 
 def apply_transformation(transformation_rule,new_expr):
-    print(transformation_rule.__name__)
+    #print(transformation_rule.__name__)
     for i in range(0,len(new_expr)):
         if isinstance(new_expr[i]._data,Suffix):
             dhaatu_index = pick_last_dhaatu(new_expr[0:i])
@@ -148,19 +57,6 @@ def apply_transformation(transformation_rule,new_expr):
                 new_expr[i].set_output(transformation_rule)
     return new_expr
 
-
-def reduce_dhaatu_combination(new_expr):
-    for i in range(0,len(new_expr)):
-        if new_expr[i].parent:
-            # handle a pratyaya
-            # only adjacent 
-            if isinstance(new_expr[i].parent,Suffix):
-                dhaatu_index = pick_last_dhaatu(new_expr[0:i])
-                parent_boundary_end=pick_last_child(new_expr[i:],new_expr[i].parent)
-                # reducing expression with combination
-                # this involves appending plain-strings (that cannot be reduced further)
-                return new_expr[0:dhaatu_index] + [combine_dhaatu_suffix(new_expr[dhaatu_index],new_expr[i:i+parent_boundary_end+1])] + new_expr[i+parent_boundary_end+1:]
-    return new_expr
             
             
 def pick_last_dhaatu(nodes):
@@ -217,7 +113,24 @@ def apply_lopa(suffix_node):
                 
     return suffix_node
                     
-
+def apply_insertion(insertion_rule, new_expr):
+    new_inserts=OrderedDict()
+    for i in range(0,len(new_expr)):
+        if isinstance(new_expr[i]._data,Suffix):
+            dhaatu_index = pick_last_dhaatu(new_expr[0:i])
+            # reducing expression with combination
+            # this involves appending plain-strings (that cannot be reduced further)
+            sig_params = inspect.signature(insertion_rule).parameters
+            if 'dhaatu_node' in sig_params :
+                # insertion only happens for "pare"
+                if i-dhaatu_index==1:
+                    to_insert = insertion_rule(dhaatu_node=new_expr[dhaatu_index],suffix_node=new_expr[i])
+                    if to_insert :
+                        new_inserts[i]=to_insert 
+                
+    for pos in reversed(new_inserts):
+        new_expr.insert(pos,Node(new_inserts[pos],parent=None))
+    return new_expr
 
 def process_until_finish(expr):
     output_processed_string = lambda e: ''.join(reduce(lambda x ,y : x + y.get_output(),  e, []))
@@ -251,6 +164,10 @@ def process_list(expr):
     for dhaatu_index in dhaatu_indices:
        dhaatu_node  = new_expr[dhaatu_index ]
        new_expr[dhaatu_index ] = apply_dhaatu_lopa(dhaatu_node  )
+      
+    # apply insertions and lopa
+    for insertion_sutra_id in insertion_sutras():
+        new_expr = apply_insertion(all_sutras[insertion_sutra_id],new_expr)
        
     # apply transformations until there is no change in the expression
     for transformation_ruleid in transformation_sutras():        
@@ -264,13 +181,14 @@ def test_siddhis ():
     assert output_string ([Node(Dhaatu(parse_string("bhajNc")),parent=None),Node(Suffix("ghaNc"),parent=None)]) == "bhaaga"
     assert output_string ([Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]) == "naayaka"
 
+#test_siddhis ()
+    
+expression=[Node(Dhaatu(parse_string("bhuu"),lakaara='laXt'),parent=None),Node(Suffix("tip"),parent=None)]
 
-#expression=[Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]
-expression=[Node(Dhaatu(parse_string("bhajNc")),parent=None),Node(Suffix("ghaNc"),parent=None)]
+
 #
 processed_expr=(process_until_finish(expression))
 
-test_siddhis ()
 
-#output_processed_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  expr, []))
-#print(output_processed_string (processed_expr))
+output_processed_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  expr, []))
+print(output_processed_string (processed_expr))
