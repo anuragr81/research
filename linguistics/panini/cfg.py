@@ -36,9 +36,10 @@ def get_sutras_ordered ():
     return OrderedDict(sorted(all_sutras))
 
 def transformation_sutras():
-    return sorted([601063, 601075, 604148, 701001, 701002, 702115, 702116, 703052, 703084,703101, 704114, 801015, 802066])
+    return sorted([601008,601063, 601075, 604088, 604148, 701001, 701002, 702115, 702116, 703052, 703084,703101, 704114, 801015, 802066])
 
 def insertion_sutras():
+#    return sorted([301068,601008])
     return sorted([301068])
 
 def apply_transformation(transformation_rule,new_expr):
@@ -113,7 +114,6 @@ def apply_lopa(suffix_node):
     lopa_functions = [lashakvataddhite_103008, aadirNciXtuXdavaH_103005, halantyam_103003, chuXtuu_10307]
     
     for lopafunc in  lopa_functions :
-        print(lopafunc.__name__)
         not_done=True
         while not_done:
             prev_output=suffix_node.get_output()
@@ -123,25 +123,28 @@ def apply_lopa(suffix_node):
                 
     return suffix_node
                     
+                
+    for pos in reversed(new_inserts):
+        new_expr.insert(pos,Node(new_inserts[pos],parent=None))
+    return new_expr
+
 def apply_insertion(insertion_rule, new_expr):
     #TODO: trace history of insertion by modifying the output of both sides of the insertion
     new_inserts=OrderedDict()
     for i in range(0,len(new_expr)):
         if isinstance(new_expr[i]._data,Suffix):
-            dhaatu_index = pick_last_dhaatu(new_expr[0:i])
             # reducing expression with combination
             # this involves appending plain-strings (that cannot be reduced further)
             sig_params = inspect.signature(insertion_rule).parameters
-            if 'dhaatu_node' in sig_params :
-                # insertion only happens for "pare" (avoiding double insertion)
-                if i-dhaatu_index==1:
-                    to_insert = insertion_rule(dhaatu_node=new_expr[dhaatu_index],suffix_node=new_expr[i])
-                    if to_insert :
-                        new_inserts[i]=to_insert 
+            if 'dhaatu_node' in sig_params :         
+                to_insert = insertion_rule(dhaatu_node=new_expr[i-1],suffix_node=new_expr[i])
+                if to_insert :
+                    new_inserts[i]=to_insert 
                 
     for pos in reversed(new_inserts):
         new_expr.insert(pos,Node(new_inserts[pos],parent=None))
     return new_expr
+
 
 def process_until_finish(expr):
     output_processed_string = lambda e: ''.join(reduce(lambda x ,y : x + y.get_output(),  e, []))

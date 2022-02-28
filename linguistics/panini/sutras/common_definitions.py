@@ -49,6 +49,8 @@ class Anga(Group):
     def __repr__(self):
         return str(self._anga )
 
+def insertion_rule(x):
+    return x
 
 class Suffix:
     def __init__(self,suffix,lakaara=None):
