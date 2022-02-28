@@ -117,21 +117,39 @@ def saarvadhaatukaardhadhaatukayoH_703084(node,suffix_node):
     if not isinstance(suffix_node._data,Suffix):
         raise ValueError("suffix must of type Suffix")
         
-    
-    if node._data._data[-1] == node.get_output()[-1]:
-        anga_string= node.get_output()
-        if node._data._data[-1] in pratyaahaara('i','k'):
-            return anga_string[0:-1]+[guNna(anga_string[-1])]
+    if isinstance(node._data,Suffix):
+        if node._data._suffix[-1] == node.get_output()[-1]:
+            anga_string= node.get_output()
+            if node._data._suffix[-1] in pratyaahaara('i','k'):
+                return anga_string[0:-1]+[guNna(anga_string[-1])]
+    else:
+        if node._data._data[-1] == node.get_output()[-1]:
+            anga_string= node.get_output()
+            if node._data._data[-1] in pratyaahaara('i','k'):
+                return anga_string[0:-1]+[guNna(anga_string[-1])]
     
     return node.get_output()
     
 def aardhadhaatukasyeXdvalaadeH_704114(node,suffix_node):    
     if not isinstance(node,Node):
         raise ValueError("node must of type Node")
-    if not suffix_node._data.is_saarvadhaatuka():
-        return node+ ["i","Xt"]
+    if not isinstance(suffix_node,Node):
+        raise ValueError("suffix_node must of type Node")
+        
+    if not suffix_node._data.is_saarvadhaatuka() and suffix_node._data._suffix[0] in pratyaahaara('v','l') and False:
+        return node.get_output() + ["i","Xt"]
     else:
         return node.get_output()
     
     
     
+def atodiirghoyaNci_703101(node,suffix_node):
+    if not isinstance(node,Node):
+        raise ValueError("node must of type Node")
+    if not isinstance(suffix_node,Node):
+        raise ValueError("suffix_node must of type Node")
+
+    if node.get_output()[-1] == 'a':
+        if suffix_node._data.is_saarvadhaatuka() and suffix_node._data._suffix[0] in pratyaahaara('y','Nc') :
+            return node.get_output()[0:-1]+['aa']
+    return node.get_output()

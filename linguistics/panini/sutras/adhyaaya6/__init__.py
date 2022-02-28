@@ -4,7 +4,7 @@ def NnonaH_601063(node,suffix_node):
     if not isinstance   (node,Node):
         raise    ValueError ("node must be of type Node")
     if not isinstance   (node._data,Dhaatu):
-        raise    ValueError ("node-data must be of type Dhaatu")
+        return node.get_output()
     dhaatu_string=node.get_output()
     if dhaatu_string[0] == "Nn":
         return ['n']+dhaatu_string[1:]
@@ -18,13 +18,13 @@ def echoayavaayaavaH_601075(node, suffix_node):
     
     node_output=node.get_output()
     if node_output[-1] == "e":
-        return node_output[0:-1]+["ay" ]
+        return node_output[0:-1]+["a" ,"y"]
     if node_output[-1] == "o":
-        return node_output[0:-1]+["av"]
+        return node_output[0:-1]+["a","v"]
     if node_output[-1] == "ai":
-        return node_output[0:-1]+["aay"]
+        return node_output[0:-1]+["aa","y"]
     if node_output[-1] == "au":
-        return node_output[0:-1]+["aav"]
+        return node_output[0:-1]+["aa","v"]
         
     return node_output
 

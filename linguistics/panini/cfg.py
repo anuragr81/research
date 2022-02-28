@@ -36,25 +36,35 @@ def get_sutras_ordered ():
     return OrderedDict(sorted(all_sutras))
 
 def transformation_sutras():
-    return sorted([601063, 601075, 604148, 701001, 701002, 702115, 702116, 703052, 703084, 704114, 801015, 802066])
+    return sorted([601063, 601075, 604148, 701001, 701002, 702115, 702116, 703052, 703084,703101, 704114, 801015, 802066])
 
 def insertion_sutras():
     return sorted([301068])
 
 def apply_transformation(transformation_rule,new_expr):
     #print(transformation_rule.__name__)
+    sig_params = inspect.signature(transformation_rule).parameters
     for i in range(0,len(new_expr)):
         if isinstance(new_expr[i]._data,Suffix):
-            dhaatu_index = pick_last_dhaatu(new_expr[0:i])
-            # reducing expression with combination
-            # this involves appending plain-strings (that cannot be reduced further)
-            sig_params = inspect.signature(transformation_rule).parameters
-            if 'anga_node' in sig_params :
-                new_expr[i].set_output(transformation_rule,anga_node=new_expr[dhaatu_index])
-            if 'suffix_node' in sig_params :
-                new_expr[dhaatu_index].set_output(transformation_rule,suffix_node=new_expr[i])
+            if i>0 :
+                if isinstance(new_expr[i-1]._data,Dhaatu):
+                    dhaatu_index=i-1
+                    if 'anga_node' in sig_params :
+                        new_expr[i].set_output(transformation_rule,anga_node=new_expr[dhaatu_index])           
+                    if 'suffix_node' in sig_params :
+                        new_expr[dhaatu_index].set_output(transformation_rule,suffix_node=new_expr[i])
+                else:
+                    if 'suffix_node' in sig_params :
+#                        if (transformation_rule.__name__=="saarvadhaatukaardhadhaatukayoH_703084"):
+#                            j = 1
+                        new_expr[i-1].set_output(transformation_rule,suffix_node=new_expr[i])
+
+                    
             if 'anga_node' not in sig_params  and 'suffix_node' not in sig_params :
                 new_expr[i].set_output(transformation_rule)
+                
+            
+                    
     return new_expr
 
             
@@ -66,7 +76,7 @@ def pick_last_dhaatu(nodes):
         elif not isinstance(x._data,It):
             raise RuntimeError("Must be either It or Dhaatu")
             
-    raise RuntimeError("Dangling Dhaatu")
+    raise RuntimeError("Dangling Daatu")
     
 def apply_dhaatu_lopa(dhaatu_node):
     if not isinstance(dhaatu_node,Node):
@@ -114,6 +124,7 @@ def apply_lopa(suffix_node):
     return suffix_node
                     
 def apply_insertion(insertion_rule, new_expr):
+    #TODO: trace history of insertion by modifying the output of both sides of the insertion
     new_inserts=OrderedDict()
     for i in range(0,len(new_expr)):
         if isinstance(new_expr[i]._data,Suffix):
@@ -122,7 +133,7 @@ def apply_insertion(insertion_rule, new_expr):
             # this involves appending plain-strings (that cannot be reduced further)
             sig_params = inspect.signature(insertion_rule).parameters
             if 'dhaatu_node' in sig_params :
-                # insertion only happens for "pare"
+                # insertion only happens for "pare" (avoiding double insertion)
                 if i-dhaatu_index==1:
                     to_insert = insertion_rule(dhaatu_node=new_expr[dhaatu_index],suffix_node=new_expr[i])
                     if to_insert :
@@ -180,15 +191,18 @@ def test_siddhis ():
     
     assert output_string ([Node(Dhaatu(parse_string("bhajNc")),parent=None),Node(Suffix("ghaNc"),parent=None)]) == "bhaaga"
     assert output_string ([Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]) == "naayaka"
-
-#test_siddhis ()
+    assert output_string ([Node(Dhaatu(parse_string("bhuu"),lakaara='laXt'),parent=None),Node(Suffix("tip"),parent=None)]) == "bhavati"
+    assert output_string ([Node(Dhaatu(parse_string("bhuu"),lakaara='laXt'),parent=None),Node(Suffix("tas"),parent=None)]) == "bhavata"
+    assert output_string ([Node(Dhaatu(parse_string("bhuu"),lakaara='laXt'),parent=None),Node(Suffix("mip"),parent=None)]) == "bhavaami"
     
-expression=[Node(Dhaatu(parse_string("bhuu"),lakaara='laXt'),parent=None),Node(Suffix("tip"),parent=None)]
 
 
-#
-processed_expr=(process_until_finish(expression))
+if False:
+    test_siddhis ()
+else:   
+    
+    expression=[Node(Dhaatu(parse_string("bhuu"),lakaara='laXt'),parent=None),Node(Suffix("mas"),parent=None)]
+    processed_expr=(process_until_finish(expression))
 
-
-output_processed_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  expr, []))
-print(output_processed_string (processed_expr))
+    output_processed_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  expr, []))
+    print(output_processed_string (processed_expr))

@@ -199,8 +199,8 @@ def pratyaahaara(start,end):
             if start in entry['letters']:
                 not_found = False
                 results = plist[i:(entries[0][0]+1)]
-                output = []
-                for res_entry in results:
+                output = list(results[0]['letters'][results[0]['letters'].index(start):])
+                for res_entry in results[1:]:
                     output = output+list(res_entry['letters'])
                 return tuple(output)
                 
@@ -270,6 +270,16 @@ def upadhaa(x):
         raise ValueError("Insufficient length for upadhaa")
 
 
+def diirgha(x):
+    if x =="a":
+        return "aa"
+    elif x == "i":
+        return "ii"
+    elif x == "u":
+        return "uu"
+    else:
+        return x
+    
 def vriddhi(x):
     if x =="a":
         return "aa"
