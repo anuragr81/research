@@ -51,8 +51,13 @@ class Anga(Group):
 
 
 class Suffix:
-    def __init__(self,suffix):
+    def __init__(self,suffix,lakaara=None):
         
+        if lakaara is not None:
+            if lakaara not in ('laXt','loXt','lRiXt','laNg','luNg','lRiNg','liNg1','liNg2','liXt'):
+                raise ValueError("Unknown lakaara")            
+        self._lakaara=lakaara
+
         
         if isinstance(suffix,str):
             self._suffix = parse_string(suffix)
@@ -97,12 +102,8 @@ class It:
         self._data= data
 
 class Dhaatu:
-    def __init__(self,data,lakaara=None):
+    def __init__(self,data):
         self._data= data
-        if lakaara is not None:
-            if lakaara not in ('laXt','loXt','lRiXt','laNg','luNg','lRiNg','liNg1','liNg2'):
-                raise ValueError("Unknown lakaara")            
-        self._lakaara=lakaara
         
     def get_data(self):
         return self._data

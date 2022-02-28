@@ -191,17 +191,16 @@ def test_siddhis ():
     
     assert output_string ([Node(Dhaatu(parse_string("bhajNc")),parent=None),Node(Suffix("ghaNc"),parent=None)]) == "bhaaga"
     assert output_string ([Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]) == "naayaka"
-    assert output_string ([Node(Dhaatu(parse_string("bhuu"),lakaara='laXt'),parent=None),Node(Suffix("tip"),parent=None)]) == "bhavati"
-    assert output_string ([Node(Dhaatu(parse_string("bhuu"),lakaara='laXt'),parent=None),Node(Suffix("tas"),parent=None)]) == "bhavata"
-    assert output_string ([Node(Dhaatu(parse_string("bhuu"),lakaara='laXt'),parent=None),Node(Suffix("mip"),parent=None)]) == "bhavaami"
+    assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tip",lakaara='laXt'),parent=None)]) == "bhavati"
+    assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tas",lakaara='laXt'),parent=None)]) == "bhavata"
+    assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("mip",lakaara='laXt'),parent=None)]) == "bhavaami"
     
-
 
 if False:
     test_siddhis ()
 else:   
     
-    expression=[Node(Dhaatu(parse_string("bhuu"),lakaara='laXt'),parent=None),Node(Suffix("mas"),parent=None)]
+    expression=[Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tip",lakaara='liXt'),parent=None)]
     processed_expr=(process_until_finish(expression))
 
     output_processed_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  expr, []))
