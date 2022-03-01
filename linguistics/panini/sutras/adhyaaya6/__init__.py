@@ -9,8 +9,10 @@ def liXtidhaatoranabhyaasasya_601008(node,suffix_node):
         if suffix_node._data._lakaara == 'liXt':
             applied_rules= [int(x['rule'].__name__.split('_')[-1]) for x in node._output if 'rule' in x]
             if 601008 not in applied_rules :
-                hals = [x for x in node.get_output()[1:] if x in hal()]
-                return node.get_output()
+                hals = [i for i,x in enumerate(node.get_output()) if x in hal() and i>0]
+                if hals:
+                    # ignore later hals after second
+                    return node.get_output()[:hals[0]]+node.get_output()
     return node.get_output()
 
 def NnonaH_601063(node,suffix_node):

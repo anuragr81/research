@@ -1,4 +1,4 @@
-from ..common_definitions import Suffix, Node, Dhaatu
+from ..common_definitions import Suffix, Node, Dhaatu,tiNg_pratyayaaH
 
 
 def kartarishap_301068(dhaatu_node,suffix_node):
@@ -10,12 +10,17 @@ def kartarishap_301068(dhaatu_node,suffix_node):
              return Suffix("shap")
     return []
         
-def parasmaipadaanaaMNnalatususXthalaXthusaNnalvamaaH_304072(node,anga_node):
+def parasmaipadaanaaMNnalatususXthalaXthusaNnalvamaaH_304082(node,anga_node):
     if not isinstance(node,Node):
         raise ValueError("node must be of Node type")
     if not isinstance(anga_node,Node):
         raise ValueError("anga_node must be of Node type")
-    if not isinstance(suffix_node,Node):
-        raise ValueError("anga_node must be of Node type")
+    if isinstance(node._data,Suffix) :
+        suffix_name =''.join(node._data._suffix)
+        if suffix_name in tiNg_pratyayaaH():
+            mapping= {'tip':['Nn','a','l'], 'tas':['a','t','u','s'], 'jhi':['u','s'], 
+                      'sip':['Xth','a','l'], 'Xthas':['a','Xth','u','s'],'Xtha':['a'], 
+                      'mip':['Nn','a','l'], 'vas':['v','a'], 'mas':['m','a']}
         
-    {'tip':'Nnal', 'tas':'atus', 'jhi':'us', 'sip':'Xthal', 'Xthas':'aXthus','Xtha':'a', 'mip':'Nnal', 'vas':'va', 'mas':'ma'}
+            return mapping[suffix_name], _data
+    return node.get_output()

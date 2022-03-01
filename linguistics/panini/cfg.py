@@ -36,7 +36,7 @@ def get_sutras_ordered ():
     return OrderedDict(sorted(all_sutras))
 
 def transformation_sutras():
-    return sorted([601008,601063, 601075, 604088, 604148, 701001, 701002, 702115, 702116, 703052, 703084,703101, 704114, 801015, 802066])
+    return sorted([304082,601008,601063, 601075, 604088, 604148, 701001, 701002, 702115, 702116, 703052, 703084,703101, 704114, 801015, 802066])
 
 def insertion_sutras():
 #    return sorted([301068,601008])
