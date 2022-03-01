@@ -63,9 +63,9 @@ def ataupadhaayaaH_702116(node,suffix_node):
     if not isinstance(node,Node):
         raise ValueError("anga_node must of type Node")
         
-    suffix=suffix_node._data
-
-    it_chars = suffix.get_itchars()
+    suffix_data=[x['output'] for x in suffix_node._output if 'new' in x and x['new']][-1]
+    
+    it_chars = (suffix_data[0],suffix_data[-1])
     if 'Nc' in it_chars or 'Nn' in it_chars:
         #Ncit or Nnit
 
@@ -84,9 +84,9 @@ def acho_NcNniti_702115(node,suffix_node):
     
     if not isinstance(suffix_node._data,Suffix):
         raise ValueError("suffix must of type Suffix")
-    suffix=suffix_node._data
+    suffix_data=[x['output'] for x in suffix_node._output if 'new' in x and x['new']][-1]
     anga_string= node.get_output()
-    if anga_string[-1] in ach() and (suffix.get_suffix()[-1] in ('Nc','Nn') or suffix.get_suffix()[0] in ('Nc','Nn')):
+    if anga_string[-1] in ach() and (suffix_data[-1] in ('Nc','Nn') or suffix_data[0] in ('Nc','Nn')):
         return anga_string[0:-1] + [vriddhi(anga_string[-1])]
     return node.get_output() 
 
@@ -99,10 +99,11 @@ def chajoHkughiNnNnyatoH_703052(node,suffix_node):
     
     if not isinstance(suffix_node._data,Suffix):
         raise ValueError("suffix must of type Suffix")
-    suffix=suffix_node._data
+    
+    suffix_data=[x['output'] for x in suffix_node._output if 'new' in x and x['new']][-1]
     chakaar_to_ku = lambda y : 'k' if y=='ch' else y
     jakaar_to_ku = lambda y : 'g' if y=='j' else y
-    if suffix.get_suffix()[0] in ('gh',) or suffix.get_suffix()[-1] in ('gh',) or str(suffix) == "Nnyat":
+    if suffix_data[0] in ('gh',) or suffix_data[-1] in ('gh',) or ''.join(suffix_data) == "Nnyat":
         #return ''.join(jakaar_to_ku(chakaar_to_ku(j)) for j in x)
         return [jakaar_to_ku(chakaar_to_ku(j)) for j in node.get_output()]
     

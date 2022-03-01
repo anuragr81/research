@@ -16,7 +16,10 @@ def halantyam_103003(node):
     #if isinstance(node._data,Suffix):
     #    if ''.join(node._data._suffix) in tiNg_pratyayaaH() or ''.join(node._data._suffix) in sup_pratyayaaH():
     #        return node.get_output()
-    if antyam in hal() and node._data.get_data()[-1] == antyam:
+    
+    
+    node_data=[x['output'] for x in node._output if 'new' in x and x['new']][-1]
+    if antyam in hal() and node_data[-1] == antyam:
         return node.get_output()[:-1]
     else:
         return node.get_output()

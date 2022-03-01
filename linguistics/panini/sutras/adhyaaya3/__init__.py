@@ -16,11 +16,13 @@ def parasmaipadaanaaMNnalatususXthalaXthusaNnalvamaaH_304082(node,anga_node):
     if not isinstance(anga_node,Node):
         raise ValueError("anga_node must be of Node type")
     if isinstance(node._data,Suffix) :
-        suffix_name =''.join(node._data._suffix)
+        
+        suffix_data=[x['output'] for x in node._output if 'new' in x and x['new']][-1]
+        suffix_name =''.join(suffix_data)
         if suffix_name in tiNg_pratyayaaH():
             mapping= {'tip':['Nn','a','l'], 'tas':['a','t','u','s'], 'jhi':['u','s'], 
                       'sip':['Xth','a','l'], 'Xthas':['a','Xth','u','s'],'Xtha':['a'], 
                       'mip':['Nn','a','l'], 'vas':['v','a'], 'mas':['m','a']}
         
-            return mapping[suffix_name], _data
+            return {'output':mapping[suffix_name],'mutate':True}
     return node.get_output()

@@ -76,12 +76,7 @@ class Suffix:
         
     def get_data(self):
         return self._suffix
-    
-    def get_suffix(self):
-        return self._suffix
-    
-    def get_itchars(self):
-        return (self._suffix[0],self._suffix[-1])
+        
     
     def apply_reduction(self,functor, **kwargs):
         self.reduced = functor(**kwargs)
@@ -129,13 +124,23 @@ class Node:
             self.parent = None
         
         self._data =data
-        self._output = [{'output':self._data.get_data()}]
+        self._output = [{'output':self._data.get_data(),'new':True}]
         
     def set_output(self,rule,**kwargs):
         old_output = self.get_output()
         new_output = rule(node=self,**kwargs)
-        if new_output != old_output:
-            self._output.append({'rule':rule,'inputs':{**{'state':old_output} , **kwargs},'output':new_output })
+        if isinstance(new_output,dict):
+            if 'mutate' in new_output :
+                if new_output['output'] != old_output :
+                    if new_output ['mutate']:
+                        self._output.append({'rule':rule,'inputs':{**{'state':old_output} , **kwargs},'output':new_output['output'] ,'new' :True})
+                    else:
+                        self._output.append({'rule':rule,'inputs':{**{'state':old_output} , **kwargs},'output':new_output['output']})
+                
+            
+        else:
+           if new_output != old_output:
+              self._output.append({'rule':rule,'inputs':{**{'state':old_output} , **kwargs},'output':new_output })
         
     def get_output(self):
         return self._output[-1]['output']

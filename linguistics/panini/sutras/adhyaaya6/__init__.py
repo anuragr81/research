@@ -62,7 +62,10 @@ def yasyeticha_604148(node,suffix_node):
     anga_str=node.get_output()
     if not isinstance(suffix ,Suffix):
         raise ValueError("suffix must be of Suffix type")
-    if suffix.is_taddhita or suffix.get_suffix()[0] in ('i','ii'):
+    
+    #pick last value
+    suffix_data=[x['output'] for x in suffix_node._output if 'new' in x and x['new']][-1]
+    if suffix.is_taddhita or suffix_data[0] in ('i','ii'):
         return anga_str[0:-1]
     return anga_str
 
