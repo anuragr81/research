@@ -10,3 +10,12 @@ def kartarishap_301068(dhaatu_node,suffix_node):
              return Suffix("shap")
     return []
         
+def parasmaipadaanaaMNnalatususXthalaXthusaNnalvamaaH_304072(node,anga_node):
+    if not isinstance(node,Node):
+        raise ValueError("node must be of Node type")
+    if not isinstance(anga_node,Node):
+        raise ValueError("anga_node must be of Node type")
+    if not isinstance(suffix_node,Node):
+        raise ValueError("anga_node must be of Node type")
+        
+    {'tip':'Nnal', 'tas':'atus', 'jhi':'us', 'sip':'Xthal', 'Xthas':'aXthus','Xtha':'a', 'mip':'Nnal', 'vas':'va', 'mas':'ma'}

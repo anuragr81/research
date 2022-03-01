@@ -203,7 +203,7 @@ if False:
     test_siddhis ()
 else:   
     
-    expression=[Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tip",lakaara='liXt'),parent=None)]
+    expression=[Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='liXt'),parent=None)]
     processed_expr=(process_until_finish(expression))
 
     output_processed_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  expr, []))

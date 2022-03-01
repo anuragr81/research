@@ -1,4 +1,4 @@
-from ..common_definitions import Suffix,Node, Dhaatu, ach
+from ..common_definitions import Suffix,Node, Dhaatu, ach, hal
 
 def liXtidhaatoranabhyaasasya_601008(node,suffix_node):
     if not isinstance(suffix_node,Node):
@@ -9,6 +9,7 @@ def liXtidhaatoranabhyaasasya_601008(node,suffix_node):
         if suffix_node._data._lakaara == 'liXt':
             applied_rules= [int(x['rule'].__name__.split('_')[-1]) for x in node._output if 'rule' in x]
             if 601008 not in applied_rules :
+                hals = [x for x in node.get_output()[1:] if x in hal()]
                 return node.get_output()
     return node.get_output()
 
@@ -45,8 +46,14 @@ def bhuvovugluNgliXtoH_604088(node,suffix_node):
         raise    ValueError ("suffix_node must be of type Node")
     if not isinstance(node,Node):
         raise    ValueError ("node must be of type Node")
+
+    if isinstance(node._data,Dhaatu) and node.get_output()==["bh","uu"] \
+        and ( suffix_node._data._lakaara in ('luNg','liXt') or suffix_node._data._suffix[0] in ach()):
+        return ['bh','uu','v']
         
-    raise ValueError("Unimplemented")
+
+        
+    return  node.get_output()
         
 def yasyeticha_604148(node,suffix_node):
     suffix = suffix_node._data
