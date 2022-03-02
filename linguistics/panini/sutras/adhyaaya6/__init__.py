@@ -1,5 +1,7 @@
 from ..common_definitions import Suffix,Node, Dhaatu, ach, hal
 
+def _604120():
+    
 def liXtidhaatoranabhyaasasya_601008(node,suffix_node):
     if not isinstance(suffix_node,Node):
         raise    ValueError ("suffix_node must be of type Node")
@@ -11,7 +13,12 @@ def liXtidhaatoranabhyaasasya_601008(node,suffix_node):
             if 601008 not in applied_rules :
                 hals = [i for i,x in enumerate(node.get_output()) if x in hal() and i>0]
                 if hals:
-                    # ignore later hals after second
+                    # ignore hals after second
+                    # 6.4.120 if there is asaMyoga (and liXt) then it's treated as kit and if anga does 
+                    # not have any adesha in the aadi (history to be checked) then there would no dvitva and 
+                    # the akaar between the aadi hal and the one after aadi would become e
+                    # 
+                    _604120()
                     return node.get_output()[:hals[0]]+node.get_output()
     return node.get_output()
 
