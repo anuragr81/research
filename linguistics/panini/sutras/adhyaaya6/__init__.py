@@ -1,8 +1,22 @@
 from ..common_definitions import Suffix,Node, Dhaatu, ach, hal
 
-def _604120():
+def ataekahalmadhyeanaadeshaaderliXti_6041200(node,suffix_node):
+    if not isinstance(suffix_node,Node):
+        raise    ValueError ("suffix_node must be of type Node")
+    if not isinstance(node,Node):
+        raise    ValueError ("node must be of type Node")
+    if suffix_node._data._lakaara == 'liXt':
+        applied_rules= [int(x['rule'].__name__.split('_')[-1]) for x in node._output if 'rule' in x]
+        if 601008 in applied_rules :
+            convert_e = lambda x : x if x not in ('a','aa',) else 'e'        
+            if len([x['output'] for x in node._output if 'new' in x and x['new']]) == 1: # there has been no adesha to anga
+                if node.get_output()[-1] not in ach() and node.get_output()[-2] in ach() : # asaMyoga => kit
+                    return node.get_output()[:-2] + [convert_e(node.get_output()[-2])] + node.get_output()[-1:]   
+        
+    return node.get_output()
+
     
-def liXtidhaatoranabhyaasasya_601008(node,suffix_node):
+def liXtidhaatoranabhyaasasya_6010080(node,suffix_node):
     if not isinstance(suffix_node,Node):
         raise    ValueError ("suffix_node must be of type Node")
     if not isinstance(node,Node):
@@ -12,17 +26,20 @@ def liXtidhaatoranabhyaasasya_601008(node,suffix_node):
             applied_rules= [int(x['rule'].__name__.split('_')[-1]) for x in node._output if 'rule' in x]
             if 601008 not in applied_rules :
                 hals = [i for i,x in enumerate(node.get_output()) if x in hal() and i>0]
-                if hals:
+                if hals:                    
+
+#                    if len([x['output'] for x in node._output if 'new' in x and x['new']]) == 1: # there has been no adesha to anga
+#                        if node.get_output()[-1] not in ach() and node.get_output()[-2] in ach() : # asaMyoga => kit
+                            # 6.4.120 if there is asaMyoga (and liXt) then it's treated as kit and further, if anga does 
+                            # not have any adesha in the aadi then there would no dvitva and 
+                            # the akaar between the aadi hal and the one after aadi would become e
+#                            return node.get_output()
+                        
                     # ignore hals after second
-                    # 6.4.120 if there is asaMyoga (and liXt) then it's treated as kit and if anga does 
-                    # not have any adesha in the aadi (history to be checked) then there would no dvitva and 
-                    # the akaar between the aadi hal and the one after aadi would become e
-                    # 
-                    _604120()
                     return node.get_output()[:hals[0]]+node.get_output()
     return node.get_output()
 
-def NnonaH_601063(node,suffix_node):
+def NnonaH_6010630(node,suffix_node):
     if not isinstance   (node,Node):
         raise    ValueError ("node must be of type Node")
     if not isinstance   (node._data,Dhaatu):
@@ -33,7 +50,7 @@ def NnonaH_601063(node,suffix_node):
     else:
         return dhaatu_string
 
-def echoayavaayaavaH_601075(node, suffix_node):
+def echoayavaayaavaH_6010750(node, suffix_node):
     if suffix_node.get_output()[0] not in ach():
         return node.get_output()
 
@@ -50,7 +67,7 @@ def echoayavaayaavaH_601075(node, suffix_node):
         
     return node_output
 
-def bhuvovugluNgliXtoH_604088(node,suffix_node):
+def bhuvovugluNgliXtoH_6040880(node,suffix_node):
     if not isinstance(suffix_node,Node):
         raise    ValueError ("suffix_node must be of type Node")
     if not isinstance(node,Node):
@@ -64,7 +81,7 @@ def bhuvovugluNgliXtoH_604088(node,suffix_node):
         
     return  node.get_output()
         
-def yasyeticha_604148(node,suffix_node):
+def yasyeticha_6041480(node,suffix_node):
     suffix = suffix_node._data
     anga_str=node.get_output()
     if not isinstance(suffix ,Suffix):

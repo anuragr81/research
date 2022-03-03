@@ -2,6 +2,7 @@ from collections import OrderedDict
 
 from sutras.common_definitions import *
 from functools import reduce
+from pprint import pprint
 import inspect
 
 from sutras import adhyaaya1 as a1
@@ -29,18 +30,23 @@ to default aardhadhaatukaH
 """
 
 def get_sutras_for_module (j):
-    return [ (int(re.search('([0-9]+)$',x).group(1)),getattr(j,x)) for x in dir(j) if not x.startswith('_')  and re.search('.*[0-9]+',x)]
+    return [ (float(re.search('([0-9]+_*[0-9]*)$',x).group(1)),getattr(j,x)) for x in dir(j) if not x.startswith('_')  and re.search('[A-Za-z]*[0-9]+',x)]
+    
 
 def get_sutras_ordered ():    
     all_sutras = reduce(lambda x , y : x + get_sutras_for_module (y) , [a1,a2,a3,a4,a5,a6,a7,a8],[]) 
     return OrderedDict(sorted(all_sutras))
 
 def transformation_sutras():
-    return sorted([304082,601008,601063, 601075, 604088, 604148, 701001, 701002, 702115, 702116, 703052, 703084,703101, 704114, 801015, 802066])
+    ll = [2040850,3010331,3040820,6010080,6010630, 6010750, 6040880, 6041200, 6041480, 
+          7010010, 7010020, 7021150, 7021160, 7030520, 7030840,7031010, 
+          8010150, 8020660]
+    return sorted(float(x) for x in ll)
 
 def insertion_sutras():
-#    return sorted([301068,601008])
-    return sorted([301068])
+#   to be considered: 601008
+    ll=[3010680,3010330,7041140]
+    return sorted(float(x) for x in ll)
 
 def apply_transformation(transformation_rule,new_expr):
     #print(transformation_rule.__name__)
@@ -87,7 +93,7 @@ def apply_dhaatu_lopa(dhaatu_node):
         raise ValueError("Need Dhaatu")
         
     MAX_TIMES=10000
-    lopa_functions = [halantyam_103003]
+    lopa_functions = [halantyam_1030030]
     
     for lopafunc in  lopa_functions :
         not_done=True
@@ -111,7 +117,7 @@ def apply_lopa(suffix_node):
     if not isinstance(suffix_node._data,Suffix):
         raise ValueError("Need Suffix")
     MAX_TIMES=10000
-    lopa_functions = [lashakvataddhite_103008, aadirNciXtuXdavaH_103005, halantyam_103003, chuXtuu_10307]
+    lopa_functions = [lashakvataddhite_1030080, aadirNciXtuXdavaH_1030050, halantyam_1030030, chuXtuu_103070]
     
     for lopafunc in  lopa_functions :
         not_done=True
@@ -197,15 +203,22 @@ def test_siddhis ():
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tip",lakaara='laXt'),parent=None)]) == "bhavati"
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tas",lakaara='laXt'),parent=None)]) == "bhavata"
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("mip",lakaara='laXt'),parent=None)]) == "bhavaami"
-    assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='liXt'),parent=None)]) == "papaaXtha"
-    
-
-if False:
+    #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='liXt'),parent=None)]) == "papaaXtha"
+    #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tas",lakaara='liXt'),parent=None)]) == "peXthatuH"
+F=False
+T=True
+if T:
     test_siddhis ()
 else:   
     
-    expression=[Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tas",lakaara='liXt'),parent=None)]
+    #expression=[Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='luXt'),parent=None)]
+    expression=[Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]
+    
     processed_expr=(process_until_finish(expression))
 
     output_processed_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  expr, []))
     print(output_processed_string (processed_expr))
+    #pprint(processed_expr[0]._output)
+    #pprint(processed_expr[1]._output)
+    
+    

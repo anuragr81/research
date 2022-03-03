@@ -1,6 +1,6 @@
 from ..common_definitions import anunaasika, Suffix, ach, hal, chu, Xtu, Node, Dhaatu,tiNg_pratyayaaH,sup_pratyayaaH
 
-def uraNnraparaH_101050(a, b):
+def uraNnraparaH_1010500(a, b):
     if a[-1] == "Ri" :
         if b[0] == "a":
             return a[0:-1] + ["aa","r"]+ b
@@ -9,7 +9,7 @@ def uraNnraparaH_101050(a, b):
     return a + b
 
 
-def halantyam_103003(node):
+def halantyam_1030030(node):
     #Check isinstance(node._data,Dhaatu) if necessary
     antyam = node.get_output()[-1]
     #works only once - not after the output has been modified with the call
@@ -24,7 +24,7 @@ def halantyam_103003(node):
     else:
         return node.get_output()
 
-def aadirNciXtuXdavaH_103005(node):
+def aadirNciXtuXdavaH_1030050(node):
     if not isinstance(node,Node):
         raise ValueError("Must be Node")
     if not isinstance(node._data,Suffix):
@@ -34,7 +34,7 @@ def aadirNciXtuXdavaH_103005(node):
     else:
         return node.get_output()
 
-def chuXtuu_10307(node):    
+def chuXtuu_103070(node):    
     if not isinstance(node,Node):
         raise ValueError("Must be Node")
     suffix=node._data
@@ -47,7 +47,7 @@ def chuXtuu_10307(node):
     return node.get_output()
 
     
-def lashakvataddhite_103008(node):
+def lashakvataddhite_1030080(node):
     
     if not isinstance(node,Node):
         raise ValueError("Must be of Node type")
@@ -60,7 +60,7 @@ def lashakvataddhite_103008(node):
     return node.get_output()
 
 
-def upadesheajanunaasikait_103002(aadesha):
+def upadesheajanunaasikait_1030020(aadesha):
     
     apply_rule = lambda x: x[0:-1] if x[-1] in anunaasika() or x[-1] in ach()  else x   
 
@@ -69,7 +69,7 @@ def upadesheajanunaasikait_103002(aadesha):
 
 
 
-def yachibham_104018(suffix_str):
+def yachibham_1040180(suffix_str):
     return suffix_str[0] in ach() or suffix_str[0] == 'y' 
     
     

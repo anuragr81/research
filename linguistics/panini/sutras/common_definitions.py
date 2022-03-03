@@ -56,7 +56,7 @@ class Suffix:
     def __init__(self,suffix,lakaara=None):
         
         if lakaara is not None:
-            if lakaara not in ('laXt','loXt','lRiXt','laNg','luNg','lRiNg','liNg1','liNg2','liXt'):
+            if lakaara not in ('laXt','loXt','lRiXt','laNg','luNg','lRiNg','liNg1','liNg2','liXt','luXt'):
                 raise ValueError("Unknown lakaara")            
         self._lakaara=lakaara
 
@@ -233,7 +233,7 @@ def Xtu():
 
 
 def unclassified_pratyayaaH():
-    return ('sich','chli','shap')
+    return ('sich','chli','shap','taas','sya')
 def san_pratyayaaH():
     return ("san","kyach","kaamyach","kyaNg","kyaXsh",
             "kvip","Nnich","yaNg","yak","aaya",
