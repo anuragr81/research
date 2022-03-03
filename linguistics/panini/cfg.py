@@ -203,22 +203,29 @@ def test_siddhis ():
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tip",lakaara='laXt'),parent=None)]) == "bhavati"
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tas",lakaara='laXt'),parent=None)]) == "bhavata"
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("mip",lakaara='laXt'),parent=None)]) == "bhavaami"
+    assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='luXt'),parent=None)]) == "paXthitaa"
     #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='liXt'),parent=None)]) == "papaaXtha"
     #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tas",lakaara='liXt'),parent=None)]) == "peXthatuH"
+    
+    
 F=False
 T=True
-if T:
+if F:
     test_siddhis ()
 else:   
     
-    #expression=[Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='luXt'),parent=None)]
-    expression=[Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]
+    expression=[Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='lRiXt'),parent=None)]
+    print("NEXT: 6040710- luNglaNglRiNgkXshvaXdudaataH")
+    print("PENDING : murdhanyaadesha in pXthishyati and eruH")
+    
+    
     
     processed_expr=(process_until_finish(expression))
 
     output_processed_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  expr, []))
     print(output_processed_string (processed_expr))
-    #pprint(processed_expr[0]._output)
+    print("DONE")
+    
     #pprint(processed_expr[1]._output)
     
     

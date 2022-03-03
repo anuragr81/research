@@ -89,8 +89,9 @@ def yasyeticha_6041480(node,suffix_node):
     
     #pick last value
     suffix_data=[x['output'] for x in suffix_node._output if 'new' in x and x['new']][-1]
-    if suffix.is_taddhita or suffix_data[0] in ('i','ii'):
-        return anga_str[0:-1]
+    if False: # TODO: re-enable
+        if suffix.is_taddhita or suffix_data[0] in ('i','ii'):
+             return anga_str[0:-1]
     return anga_str
 
 
