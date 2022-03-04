@@ -4,7 +4,7 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass extarticle
+\textclass article
 \begin_preamble
 \usepackage{mathtools}
 \usepackage{amsmath}
@@ -14,6 +14,7 @@
 \usepackage{bbm}
 \usepackage{natbib}
 \usepackage{longtable}
+\usepackage{sectsty}
 \tolerance=1
 \emergencystretch=\maxdimen
 \hyphenpenalty=10000
@@ -110,11 +111,28 @@ status open
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+partfont{
+\backslash
+fontsize{16}{18}
+\backslash
+selectfont
+\backslash
+centering} 
+\end_layout
+
+\begin_layout Plain Layout
+
 
 \backslash
 part*{
 \backslash
-centering{Assets and consumption in sub-Saharan Africa}}
+centering{Prosperity and consumption in sub-Saharan Africa}}
 \end_layout
 
 \begin_layout Plain Layout
@@ -125,7 +143,7 @@ subsubsection*{
 \backslash
 centering{
 \backslash
-textit{Implications of prosperity and urbanisation on mobility }}}
+textit{Implications of assets-inequalities and urbanisation on mobility}}}
 \end_layout
 
 \end_inset
@@ -1491,7 +1509,7 @@ status open
 
 \begin_layout Plain Layout
 
-%[Sureg]
+%[Sureg] - prosperity measure and two reference area rules
 \end_layout
 
 \end_inset
@@ -1500,8 +1518,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-The econometric method uses the seemingly unrelated regression (SUR - see
- 
+We use the seemingly unrelated regression (SUR - see 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ZellnerSureg1962"
@@ -1511,25 +1528,9 @@ literal "false"
 
 ) for educational expenses, asset expenditures and non-asset related expenditure
 s for the year 2012-2014 for Tanzania and 2012-2015 for Nigeria.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%[prosperity measure and two reference area rules]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The current educational and occupational level of the consumer household
- are some controls in the regression (see Table 
+ The current educational and occupational level of the consumer household
+ and that of parents are some of the controls in the regression (see Table
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Control-Variables"
@@ -1550,17 +1551,27 @@ noprefix "false"
 \end_inset
 
  for details).
- A key variable in the regression is the prosperity of the area of reference
- chosen by the representative consumer - measured as the average local assets
- possession in the area.
- The market-value of assets and the constraints on resources such as land
- and housing are directly observable in the data while the levels of consumers'
- preparedness are tracked with education level and occupation types that
- vary through the innovation and skill-levels in the two economies.
+ A key control is the prosperity of the area of reference chosen by the
+ representative consumer - measured as the average local assets possession
+ in the area.
+ The prosperity level rely on the market-value of assets (including land,
+ housing) - which is directly observable in the data - while the levels
+ of consumers' preparedness are tracked with education level and occupation
+ types that vary through the innovation and skill-levels in the economies.
 \end_layout
 
 \begin_layout Standard
-We provide the results using three interpretations of the reference.
+The results provided in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Results"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ use three interpretations of the normative reference.
  The first uses a simple average of the total assets owned by the households
  in the consumer's district (combining the districts within the 6-km-radius
  area from the consumer's district).
@@ -1580,12 +1591,11 @@ We provide the results using three interpretations of the reference.
 
  (a high-paying occupation is one that provides higher than the median income
  on average).
- This use of agrarian/non-agrarian factor variable 
+ The use of manual/non-manual factor variable 
 \begin_inset Formula $\Gamma$
 \end_inset
 
- is on the lines of manual/non-manual occupational distinctions used by
- 
+ is based on occupation-distinctions used 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "RuncimanRelativeDeprivationSocialJustice1966"
@@ -1593,7 +1603,7 @@ literal "false"
 
 \end_inset
 
-.
+ and distinguishes occupations requiring more than the primary education.
  The second interpretation considers the average prosperity at the same
  occupation level as that of the consumer.
  The higher or lower occupation levels used in the reference prosperity
@@ -1603,13 +1613,15 @@ literal "false"
 \begin_inset Formula $\Gamma$
 \end_inset
 
- for agrarian/non-agrarian occupations is used again with the reference.
- Lastly, the reference prosperity is calculated for the agrarian and non-agraria
-n occupations separately while using the occupational factor variable 
+ for agrarian/non-agrarian occupations is used with the second interpretation
+ of reference.
+ Lastly, the third interpretation of the reference treats identity into
+ the manual and non-agrarian occupation in the locality separately.
+ The the occupational factor variable 
 \begin_inset Formula $\Omega$
 \end_inset
 
- as the control.
+ is then used as the additional control.
  The following table summarises these types:
 \end_layout
 
@@ -1708,7 +1720,7 @@ Average over occupation level (
 \begin_inset Text
 
 \begin_layout Plain Layout
-Average over agrarian/non-agrarian types (
+Average over manual/non-manual occupation types (
 \begin_inset Formula $\Gamma$
 \end_inset
 
@@ -1721,9 +1733,6 @@ Average over agrarian/non-agrarian types (
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\family typewriter
-\size small
 \begin_inset Formula $\Omega$
 \end_inset
 
@@ -1813,8 +1822,10 @@ noprefix "false"
 ) tied to a reference, the consumer household - despite having a higher
  (liquid) assets- may not consider the higher relative richness in a reference
  area of lower richness.
- The effects of inequalities in assets within the reference as well as those
- with respect to neighbouring references are discussed in Section 
+ The effects on consumption of age, social identity and the inequalities
+ in assets within the reference as well as those with respect to neighbouring
+ reference areas (corresponding to the above interpretations) are discussed
+ in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Results"
@@ -1825,7 +1836,7 @@ noprefix "false"
 \end_inset
 
 .
- We use the results to assess the extent to which an increase in income
+ These results are used to assess the extent to which an increase in income
  (or assets) within and across areas of reference could increase the preparednes
 s to move into urban areas as well as the consumption in the two economies.
 \end_layout
@@ -1845,17 +1856,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-As we've argued in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Model"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the dependence of 
+Note that the dependence of 
 \begin_inset Formula $x(r,\rho)$
 \end_inset
 
@@ -1867,7 +1868,7 @@ noprefix "false"
 \begin_inset Formula $x(r,\rho)$
 \end_inset
 
- with 
+ due to 
 \begin_inset Formula $r$
 \end_inset
 
@@ -1877,13 +1878,12 @@ noprefix "false"
  areas in this manner, the substitution between being in a high relative
  position in the poorer reference and being in a richer reference with relative
  poverty is immaterial for the consumer.
- More specifically, the costs 
+ In terms of the model this implies that the costs 
 \begin_inset Formula $\pi(r,t)$
 \end_inset
 
- could be too high for the consumer to allow her to have avail a utility
- from being a certain reference of higher prosperity.
- 
+ could be too high for the consumer to allow her to avail a utility from
+ being a certain reference of higher prosperity.
 \end_layout
 
 \begin_layout Standard
@@ -2043,8 +2043,8 @@ noprefix "false"
 
 \end_inset
 
-).
- In Nigeria (see Figure 
+) whereas the income-disparities in occupations and asset-differences appear
+ less extreme in Nigeria (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:occupations_r_ngr"
@@ -2054,9 +2054,62 @@ noprefix "false"
 
 \end_inset
 
-) , on the other hand, the income-disparities in occupations and asset-differenc
-es are less extreme.
- 
+).
+ However, the inequality in expenditure on non-durable consumption is not
+ as different for the two economies.
+ This can be verified with the Lorenz curves for total non-durable expenditure
+ and total assets in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LorenzCurves"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/tnz_ngr_lorenz_curves_assets_logx_district_individual.png
+	width 3.5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LorenzCurves"
+
+\end_inset
+
+Inequality in assets and non-durable expenditure across households and districts
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2148,25 +2201,61 @@ ref{education_rank_ngr}
 \end_layout
 
 \begin_layout Standard
-The regional disparities in economic conditions and population density provide
- a particular context to status differences in the economy - as the disparity
- in services as well as amenities across the country have strong implications
- for any consumption deemed status-related.
- Indeed the status concerns are necessarily localised so that the consumers
- that are far apart in distance are unlikely to be in a status competition.
- But the status competitions within a locality could also be inhibited due
- to extreme differences in assets.
- We test for this using the non-durable consumption at local levels (finer
- that of the a region).
- More particularly, a separation would be implied when the consumers with
- asset-richness also have significantly higher excess consumption - so that
- a consumer cannot be in a status competition with a richer consumer within
- the surrounding area.
+We also note that the average consumer in the urban areas - with better
+ options for lifestyle and consumption - seems to struggle with basic needs
+ as well.
+ To compare the fulfillment of basic needs in urban vs rural areas, we look
+ at the fraction of consumers that have run out of food in the last 12 months
+ in every district across both economies (either due to lack of agricultural
+ inputs or high prices) in Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:TanzaniaFoodShortageAgrInp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:TanzaniaFoodShortageCosts"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:NigeriaFoodShortageAgInp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:NigeriaFoodShortageCosts"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ This does suggest a significant number of households running out of food
+ in urban areas (due to high costs) - even though the overall hunger instances
+ remain proportionately lower in the urban areas (when compared to the household
+s having run out of food due to agricultural reasons).
 \end_layout
 
 \begin_layout Standard
-While we undertake a more detailed view at the separation in status consumption
- in the Section 
+While we undertake a more detailed view on consumption in the Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Parametric-Analysis"
@@ -2192,16 +2281,8 @@ noprefix "false"
 
 ), the disparity in asset ownership across regions is not nearly as extreme
  as in Tanzania.
- We discuss the implications of this non-uniformity on non-durable consumption
- in the next section.
-\end_layout
-
-\begin_layout Standard
-[Hunger comparison] It is not too much of a stretch to say that the consumer
- going to the urban areas - while better lifestyle options and the risk
- - might not be free from hunger.
- To see what prosperity the consumer may be getting we plot the hunger fraction
- too.
+ We discuss the implications of this non-uniformity on consumption in the
+ subsequent sections.
 \end_layout
 
 \begin_layout Standard
@@ -2263,7 +2344,7 @@ Occupations and consumer-owned assets in Tanzania (2012)
 
 \begin_layout Standard
 \begin_inset Float figure
-placement h
+placement H
 wide false
 sideways false
 status open
@@ -2304,6 +2385,7 @@ Occupations and consumer-owned assets in Nigeria (2012)
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -2323,8 +2405,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-TNZ: Fraction of households having run of food due to agricultural inputs
- in the past year (2010)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:TanzaniaFoodShortageAgrInp"
+
+\end_inset
+
+Tanzania: Fraction of households having run of food due to agricultural
+ inputs in the past year (2010)
 \end_layout
 
 \end_inset
@@ -2339,6 +2427,7 @@ TNZ: Fraction of households having run of food due to agricultural inputs
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -2358,8 +2447,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-TNZ: Fraction of households having run of food due to costs in the past
- year (2010)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:TanzaniaFoodShortageCosts"
+
+\end_inset
+
+Tanzania: Fraction of households having run of food due to costs in the
+ past year (2010)
 \end_layout
 
 \end_inset
@@ -2374,6 +2469,7 @@ TNZ: Fraction of households having run of food due to costs in the past
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -2393,7 +2489,13 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-NGR: Fraction of households having run of food due to agricultural shortages
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:NigeriaFoodShortageAgInp"
+
+\end_inset
+
+Nigeria: Fraction of households having run of food due to agricultural shortages
  in the past year (2010)
 \end_layout
 
@@ -2409,6 +2511,7 @@ NGR: Fraction of households having run of food due to agricultural shortages
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -2428,7 +2531,13 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-NGR: Fraction of households having run of food due to costs in the past
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:NigeriaFoodShortageCosts"
+
+\end_inset
+
+Nigeria: Fraction of households having run of food due to costs in the past
  year (2010)
 \end_layout
 
@@ -2515,41 +2624,6 @@ e_cex = 1.)
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename figures/tnz_ngr_lorenz_curves_assets_logx_district_individual.png
-	width 3.5in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Inequality in assets vs inequality in expenditure across households and
- district averages
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
@@ -2601,7 +2675,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="9" columns="4">
+<lyxtabular version="3" rows="11" columns="4">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0.7in">
 <column alignment="center" valignment="top" width="2in">
@@ -2902,6 +2976,94 @@ Individual
 
 \family typewriter
 \size small
+father_educ_rank 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+education rank of the father household head's biological father
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Individual
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $hh\ vars$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+mother_educ_rank 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+education rank of the father household head's biological mother
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Individual
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $hh\ vars$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
 age
 \family default
 \size default
@@ -3121,8 +3283,14 @@ In the cross-sectional study, we only look at changes in prosperity across
 \end_layout
 
 \begin_layout Enumerate
-In the time-series question, we can look at how increase in prosperity is
+In the time-series question, we may look at how increase in prosperity is
  responded to by the consumers.
+ But this is not available due to measurement errors with assets owned.
+\end_layout
+
+\begin_layout Standard
+A comparison of the expenses in the two economies is faulty - because of
+ the effect of urbanisation brings in a lot about educational institutions.
 \end_layout
 
 \begin_layout Standard

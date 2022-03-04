@@ -5,6 +5,7 @@ if (isClass("LSMSNormalizer")){
 
 ## all exported functions are declared here
 setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
+                                          parents_educ_mapping="function",
                                           get_lsms_secl_info_columns_2008="function",
                                           get_lsms_secl_fields_mapping_2008="function",
                                           ohs_seca_mapping_lsms_2008="function",
@@ -2551,6 +2552,19 @@ lsms_normalizer<-function() {
     return(s)
   }
   
+  parents_educ_mapping <- function()
+  {
+    r <- data.frame()
+    r <- rbind(r,data.frame(parent_educ_level_name="no_school",parent_educ_level=1,parent_educ_rank=0))
+    r <- rbind(r,data.frame(parent_educ_level_name="semi_primary",parent_educ_level=2,parent_educ_rank=1))
+    r <- rbind(r,data.frame(parent_educ_level_name="primary",parent_educ_level=3,parent_educ_rank=1))
+    r <- rbind(r,data.frame(parent_educ_level_name="semi_secondary",parent_educ_level=4,parent_educ_rank=2))
+    r <- rbind(r,data.frame(parent_educ_level_name="secondary",parent_educ_level=5,parent_educ_rank=3))
+    r <- rbind(r,data.frame(parent_educ_level_name="secondary_higher",parent_educ_level=6,parent_educ_rank=4))
+    r <- rbind(r,data.frame(parent_educ_level_name="NA",parent_educ_level=7,parent_educ_rank=0))
+    return(r)
+  }
+  
   ohs_seca_mapping_lsms_2012<-function(){
     s = data.frame(iesname=NULL,name=NULL)
     s= rbind(s,data.frame(iesname="y3_hhid",name="hhid"))
@@ -3758,5 +3772,6 @@ lsms_normalizer<-function() {
              computeLsmsSelfemployedValues=computeLsmsSelfemployedValues, 
              infer_lsms_sece_total_income=infer_lsms_sece_total_income,
              categories_needs_based=categories_needs_based,
-             categories_non_basic_wassets=categories_non_basic_wassets))
+             categories_non_basic_wassets=categories_non_basic_wassets,
+             parents_educ_mapping=parents_educ_mapping))
 }

@@ -1429,6 +1429,19 @@ lsms_loader<-function(fu,ln,lgc) {
   
   occupation_mapping<-function(){
     
+    res<-"
+    occupation        mpay      sdpay    n
+    1           1  1187965.72  7055046.0 1141 (4)
+    4           5  2906734.21  4783352.2  148 (8)
+    6           7  1614594.39  5137868.2  385 (6)
+    8           9 11107091.89 32746264.8   37 (10)
+    9          10  4872580.65 13506098.7  309 (9)
+    10         11  1820317.04  6415290.0   90 (7)
+    11         12   456890.91  1220102.0   66 (3)
+    12         13   450215.87   899453.6   21 (2)
+    13         14    64989.34   214007.3   96 (1)
+    15         16  1217024.62  2625432.6   65 (5)
+    "
     occupation<-"AGRICULTURE/LIVESTOCK.......1
     FISHING.............2
     MINING..............3
@@ -1451,19 +1464,6 @@ lsms_loader<-function(fu,ln,lgc) {
     NO JOB.............16
     TOO YOUNG .........17"
     
-    res<-"
-    occupation        mpay      sdpay    n
-    1           1  1187965.72  7055046.0 1141 (4)
-    4           5  2906734.21  4783352.2  148 (8)
-    6           7  1614594.39  5137868.2  385 (6)
-    8           9 11107091.89 32746264.8   37 (10)
-    9          10  4872580.65 13506098.7  309 (9)
-    10         11  1820317.04  6415290.0   90 (7)
-    11         12   456890.91  1220102.0   66 (3)
-    12         13   450215.87   899453.6   21 (2)
-    13         14    64989.34   214007.3   96 (1)
-    15         16  1217024.62  2625432.6   65 (5)
-    "
     occupations<-"STUDENT,14
     JOB_SEEKERS,13
     PAID_FAMILY_WORK,12
@@ -1484,24 +1484,24 @@ lsms_loader<-function(fu,ln,lgc) {
     # the following doesn't work well for the mean pay
     # rank doesn't have a predictive power for total expenditure
     r=NULL;
-    r=rbind(r,data.frame(occupation=14,occupation_rank=0))
-    r=rbind(r,data.frame(occupation=13,occupation_rank=0))
-    r=rbind(r,data.frame(occupation=12,occupation_rank=0))
-    r=rbind(r,data.frame(occupation=16,occupation_rank=0))
-    r=rbind(r,data.frame(occupation=11,occupation_rank=0))
-    r=rbind(r,data.frame(occupation=1,occupation_rank=0))
-    r=rbind(r,data.frame(occupation=17,occupation_rank=1))
-    r=rbind(r,data.frame(occupation=2,occupation_rank=1))
-    r=rbind(r,data.frame(occupation=3,occupation_rank=1))
-    r=rbind(r,data.frame(occupation=4,occupation_rank=1))
-    r=rbind(r,data.frame(occupation=7,occupation_rank=2))
-    r=rbind(r,data.frame(occupation=9,occupation_rank=2))
-    r=rbind(r,data.frame(occupation=10,occupation_rank=2))
-    r=rbind(r,data.frame(occupation=15,occupation_rank=2))
+    r=rbind(r,data.frame(occupation=14,occupation_rank=0,manual=F))
+    r=rbind(r,data.frame(occupation=13,occupation_rank=0,manual=F))
+    r=rbind(r,data.frame(occupation=12,occupation_rank=0,manual=NA))
+    r=rbind(r,data.frame(occupation=16,occupation_rank=0,manual=NA))
+    r=rbind(r,data.frame(occupation=11,occupation_rank=0,manual=NA))
+    r=rbind(r,data.frame(occupation=1,occupation_rank=0,manual=T))
+    r=rbind(r,data.frame(occupation=17,occupation_rank=0,manual=NA))
+    r=rbind(r,data.frame(occupation=2,occupation_rank=1,manual=T))
+    r=rbind(r,data.frame(occupation=3,occupation_rank=1,manual=T))
+    r=rbind(r,data.frame(occupation=4,occupation_rank=1,manual=F))
+    r=rbind(r,data.frame(occupation=7,occupation_rank=2,manual=F))
+    r=rbind(r,data.frame(occupation=9,occupation_rank=2,manual=F))
+    r=rbind(r,data.frame(occupation=10,occupation_rank=2,manual=F))
+    r=rbind(r,data.frame(occupation=15,occupation_rank=2,manual=NA))
     
-    r=rbind(r,data.frame(occupation=8,occupation_rank=3))
-    r=rbind(r,data.frame(occupation=5,occupation_rank=3))
-    r=rbind(r,data.frame(occupation=6,occupation_rank=3))
+    r=rbind(r,data.frame(occupation=8,occupation_rank=3,manual=F))
+    r=rbind(r,data.frame(occupation=5,occupation_rank=3,manual=F))
+    r=rbind(r,data.frame(occupation=6,occupation_rank=3,manual=F))
     
     return(r)
     

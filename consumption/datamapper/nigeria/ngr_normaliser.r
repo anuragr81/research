@@ -13,6 +13,7 @@ setClass("NigeriaNormaliser", representation(diary_columns_mapping="function", d
                                              item_codes_2010="function", item_codes_2012="function", item_codes_2015="function", ohs_info_columns_lsms="function",ohs_mapping_lsms="function",
                                              ohs_educ_info_columns_lsms="function",ohs_educ_columns_mapping_lsms="function",
                                              ohs_income_info_columns_lsms="function",ohs_income_columns_mapping_lsms="function",
+                                             parents_occupation_sector="function",
                                              market_data_columns_mapping="function",market_data_info="function",ohs_geodata_columns_mapping_lsms="function",
                                              unit_codes_2010="function", get_diary_assets_fields_mapping_lsms="function",items_codes="function",
                                              ohs_food_quality_columns_mapping_lsms="function",expenditure_categories="function",time_units_mapping="function",
@@ -169,6 +170,52 @@ ngr_normaliser<-function() {
     
     stop(paste("Year:",year,"not supported"))
   }
+  
+  parents_occupation_sector <- function(occupation_mapping){
+    # uses occupation_mapping from infer_occupation_ranks(o2010 = o2010,ignore_top = .05)
+    
+    #merge(plyr::rename(occupation_mapping[,c("occupation_rank","occupation")],
+    #                          c("occupation"="father_occup","occupation_rank"="father_occup_rank")),
+    #             o2010,by=c("father_occup"),all.y=T)
+    
+    #merge(plyr::rename(occupation_mapping[,c("occupation_rank","occupation")],
+    #                          c("occupation"="mother_occup","occupation_rank"="mother_occup_rank")),
+    #             o2010,by=c("mother_occup"),all.y=T)
+    r <- data.frame()
+    r <- rbind(r,data.frame(sector="agri",sector_code=1,manual=T))
+    r <- rbind(r,data.frame(sector="mining",sector_code=2,manual=T))
+    r <- rbind(r,data.frame(sector="manuf",sector_code=3,manual=T))
+    r <- rbind(r,data.frame(sector="tech",sector_code=4,manual=F))
+    
+    r <- rbind(r,data.frame(sector="elec", sector_code=5,manual=T))
+    r <- rbind(r,data.frame(sector="constr",sector_code=6,manual=T))
+    r <- rbind(r,data.frame(sector="trans",sector_code=7,manual=T))
+    r <- rbind(r,data.frame(sector="trade",sector_code=8,manual=T))
+    r <- rbind(r,data.frame(sector="fin",sector_code=9,manual=F))
+    r <- rbind(r,data.frame(sector="pers",sector_code=10,manual=T))
+    r <- rbind(r,data.frame(sector="educ",sector_code=11,manual=f))
+    r <- rbind(r,data.frame(sector="health",sector_code=12,manual=T))
+    r <- rbind(r,data.frame(sector="pubadmin",sector_code=13,manual=F))
+    r <- rbind(r,data.frame(sector="other",sector_code=14,manual=NA))
+    
+    #AGRICULTURE.................1
+    #MINING......................2
+    #MANUFACTURING...............3
+    #PROFFESIONAL,SCIENTIFIC,
+    #TECHNICAL ACTIVITIES........4
+    #ELECTRICITY.................5
+    #CONSTRUCTION................6
+    #TRANSPORTATION..............7
+    #BUYING AND SELLING….........8
+    #FINANCIAL SERVICES..........9
+    #PERSONAL SERVICES..........10
+    #EDUCATION..................11
+    #HEALTH.....................12
+    #PUBLIC ADMINISTRATION......13
+    #OTHER, SPECIFY.............14
+    return(r)
+  }
+  
   
   get_lsms_yearrecall_info_columns <- function(year){
     return(get_lsms_weekrecall_info_columns(year)) 
@@ -1885,8 +1932,11 @@ ngr_normaliser<-function() {
     
   }
   
+ 
+  
   return(new("NigeriaNormaliser",diary_columns_mapping=diary_columns_mapping, 
              diary_info_columns_2010=diary_info_columns_2010,get_lsms_weekrecall_info_columns=get_lsms_weekrecall_info_columns,
+             parents_occupation_sector=parents_occupation_sector,
              get_lsms_weekrecall_fields_mapping=get_lsms_weekrecall_fields_mapping,item_codes_2010=item_codes_2010,item_codes_2012=item_codes_2012,item_codes_2015=item_codes_2015,
              get_lsms_monthrecall_info_columns=get_lsms_monthrecall_info_columns,get_lsms_monthrecall_fields_mapping=get_lsms_monthrecall_fields_mapping,
              get_lsms_sixmonthrecall_info_columns=get_lsms_sixmonthrecall_info_columns,get_lsms_sixmonthrecall_fields_mapping=get_lsms_sixmonthrecall_fields_mapping,

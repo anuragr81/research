@@ -512,6 +512,33 @@ ngr_loader<-function(fu,ngrn,lgc) {
     
   }
   
+  add_father_educ <- function(ohs,education_rank_mapping){
+    ohs$father_educ_temp <- ohs$father_educ
+    ohs[is.na(ohs$father_educ_temp),]$father_educ_temp <- 0
+    #ignored_educ_types <- c(4,19,20,98) # Invalid entries in the data
+    ignored_educ_types <- c(98)
+    ohs <- subset(ohs,!is.element(father_educ_temp,ignored_educ_types))
+    if (length(setdiff(unique(ohs$father_educ_temp),education_rank_mapping$highest_educ))>0 ){
+      stop("Missing education codes")
+    }
+    ohs <- merge(ohs,plyr::rename(education_rank_mapping,c("highest_educ"="father_educ_temp","education_rank"="father_educ_rank"))[,c("father_educ_temp","father_educ_rank")],by=c("father_educ_temp"))
+    ohs$father_educ_temp <- NULL
+    return (ohs) 
+  }
+  
+  add_mother_educ <- function(ohs,education_rank_mapping){
+    ohs$mother_educ_temp <- ohs$mother_educ
+    ohs[is.na(ohs$mother_educ_temp),]$mother_educ_temp <- 0
+    ignored_educ_types <- c(4,19,20) # Invalid entries in the data
+    ohs <- subset(ohs,!is.element(mother_educ_temp,ignored_educ_types))
+    if (length(setdiff(unique(ohs$mother_educ_temp),education_rank_mapping$highest_educ))>0 ){
+      stop("Missing education codes")
+    }
+    ohs <- merge(ohs,plyr::rename(education_rank_mapping,c("highest_educ"="mother_educ_temp","education_rank"="mother_educ_rank"))[,c("mother_educ_temp","mother_educ_rank")],by=c("mother_educ_temp"))
+    ohs$mother_educ_temp <- NULL
+    return (ohs) 
+  }
+  
   load_ohs_file <-function(year,dirprefix,fu,ngrn){
     #
     if (year ==2010){
@@ -571,8 +598,9 @@ ngr_loader<-function(fu,ngrn,lgc) {
     
       #household_status must be determined by 1. rank based on occupation_rank 2. occupation_primary 3. highest_educ 4. qualification 5. age (pay is not available for the most)
       #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
-      
-      return(ohs)
+      ohsf <- add_father_educ(ohs,education_rank_mapping)
+      ohsfm <- add_mother_educ(ohsf,education_rank_mapping)
+      return(ohsfm)
     }
     
     
@@ -639,7 +667,9 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohs <- merge(ohs,plyr::rename(education_rank_mapping,c("highest_educ"="highest_educ_temp"))[,c("highest_educ_temp","education_rank")],by=c("highest_educ_temp"))
       ohs$highest_educ_temp <- NULL
       
-      return(ohs)
+      ohsf <- add_father_educ(ohs,education_rank_mapping)
+      ohsfm <- add_mother_educ(ohsf,education_rank_mapping)
+      return(ohsfm)
     }
     
     if ( year == 2015) {
@@ -703,7 +733,9 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohs <- merge(ohs,plyr::rename(education_rank_mapping,c("highest_educ"="highest_educ_temp"))[,c("highest_educ_temp","education_rank")],by=c("highest_educ_temp"))
       ohs$highest_educ_temp <- NULL
       
-      return(ohs)
+      ohsf <- add_father_educ(ohs,education_rank_mapping)
+      ohsfm <- add_mother_educ(ohsf,education_rank_mapping)
+      return(ohsfm)
     }
     stop(paste("Year:",year,"not supported"))
   }
