@@ -124,7 +124,7 @@ subsection*{
 \backslash
 centering{
 \backslash
-textit{An outlook towards status consumption}}}
+textit{An view of consumption for status}}}
 \end_layout
 
 \end_inset
@@ -4428,23 +4428,24 @@ ref{resultsFoodCPIAllAssets}
 \end_inset
 
 .
- The control for permanent income is the logarithm of the sum of total expenditu
-re 
+ Here, the control for permanent income is the logarithm of the sum of total
+ expenditure 
 \family typewriter
 \size footnotesize
 ln_tot_exp
 \family default
 \size default
 .
- The logarithm of base-price derived from market-price are represented with
- the variable starting with the prefix 
+ The logarithm of base-price - which also serve as control variables - are
+ the respective minima of local price in the commodity group and are represented
+ with the variable starting with the prefix 
 \family typewriter
 \size footnotesize
 lp
 \family default
 \size default
 -.
- Therefore, every commodity in the AIDS regression (see Equations 
+ Every commodity in the AIDS regression (see Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:AIDS_quality_w"
@@ -4458,10 +4459,10 @@ reference "eq:AIDS_quality_lnV"
 
 \end_inset
 
-) corresponds to an 
+) thus corresponds to an 
 \family typewriter
 \size footnotesize
-lp
+lp-
 \family default
 \size default
  variable.
@@ -4556,12 +4557,7 @@ has_electric
 \end_layout
 
 \begin_layout Standard
-Since the variable 
-\family typewriter
-consu 
-\family default
-is used to assess the needs-unit of the household, we incorporate the equivalenc
-e scales for household preferences (see 
+We incorporate the equivalence scales for household preferences (see 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "GormanTricksEssays1976,HouthakkerFamilySurvey"
@@ -4569,16 +4565,21 @@ literal "false"
 
 \end_inset
 
-) by considering the age of household members.
+) for the variable 
+\family typewriter
+consu 
+\family default
+- which is used to assess the needs-unit of the household - by considering
+ the age of household members.
  Instead of using the total number of households 
 \begin_inset Formula $hsize$
 \end_inset
 
- as the control, therefore we use the 
+ as the control, we use the 
 \begin_inset Formula $\sum_{i=1}^{hsize}a_{consu}(age_{i})$
 \end_inset
 
- where 
+ as control where 
 \begin_inset Formula $a_{consu}(age)$
 \end_inset
 
