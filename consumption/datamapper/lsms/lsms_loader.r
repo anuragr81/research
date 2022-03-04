@@ -1009,6 +1009,7 @@ lsms_loader<-function(fu,ln,lgc) {
       
       c$education_rank <-as.integer(c$highest_educ>=33)*4 + as.integer(c$highest_educ<33 & c$highest_educ>=25) *3 + as.integer(c$highest_educ>=19 & c$highest_educ<25)*2 + as.integer(c$highest_educ>=1 & c$highest_educ<19)
       
+      
       c$hhid<-as.character(c$hhid)
       ab <- merge(a,b,all.x=TRUE)
       ohs<-merge(ab,c,all.x=TRUE)
@@ -1052,8 +1053,10 @@ lsms_loader<-function(fu,ln,lgc) {
       ### merging ###
       ohsjf <- merge(ohsj,foodsec,by=c("hhid"),all.x=T)
       
+      ohsjfp1 <- add_father_euc(ohsjf)
+      ohsjfp2 <- add_father_euc(ohsjfp1)
       
-      return(ohsjf)
+      return(ohsjfp2)
       
     }
     #

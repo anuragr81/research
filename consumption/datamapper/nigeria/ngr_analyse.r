@@ -600,7 +600,6 @@ save_data <- function(dfslist,use_ea)
 }
 
 init_data <- function(use_ea){
-  o2015 <- nl@load_ohs_file(year = 2015, dirprefix = "../",fu=fu, ngrn=ngr_normaliser) ;
   o2010 <- nl@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ngrn=ngr_normaliser) ; 
   o2012 <- nl@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ngrn=ngr_normaliser) ; 
   o2015 <- nl@load_ohs_file(year = 2015, dirprefix = "../",fu=fu, ngrn=ngr_normaliser) ;
@@ -906,7 +905,12 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   
   ohs2010_wrank<- merge(plyr::rename(ohs2010,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"),all.x=T)
   
-  chosenchars2010 <- ddply(ohs2010_wrank[,c("hhid","education_rank","occupation_rank","age","outoffood","educexpense")],.(hhid),summarise,max_education_rank = choose_max_non_na_rank(education_rank) , max_occupation_rank = choose_max_non_na_rank(occupation_rank),age=max(age), outoffood=max(outoffood) )
+  chosenchars2010 <- ddply(ohs2010_wrank[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","outoffood")],.(hhid),summarise,
+                           max_education_rank = choose_max_non_na_rank(education_rank) , 
+                           max_occupation_rank = choose_max_non_na_rank(occupation_rank),
+                           father_educ_rank=choose_max_non_na_rank(father_educ_rank),
+                           mother_educ_rank=choose_max_non_na_rank(mother_educ_rank),
+                           age=max(age), outoffood=max(outoffood) )
   #  perception_columns
   
   hswithchars2010 <- merge(hs2010,chosenchars2010,all.x = T)
@@ -921,7 +925,13 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
   ohs2012_wranks<- merge(plyr::rename(ohs2012,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"),all.x=T)
   
-  chosenchars2012 <- ddply(ohs2012_wranks[,c("hhid","education_rank","occupation_rank","age","outoffood")],.(hhid),summarise,max_education_rank = choose_max_non_na_rank(education_rank) , max_occupation_rank = choose_max_non_na_rank(occupation_rank),age=max(age), outoffood=max(outoffood))
+  chosenchars2012 <- ddply(ohs2012_wranks[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","outoffood")],.(hhid),summarise,
+                           max_education_rank = choose_max_non_na_rank(education_rank) , 
+                           max_occupation_rank = choose_max_non_na_rank(occupation_rank),
+                           father_educ_rank=choose_max_non_na_rank(father_educ_rank),
+                           mother_educ_rank=choose_max_non_na_rank(mother_educ_rank),
+                           
+                           age=max(age), outoffood=max(outoffood))
   
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   
@@ -933,7 +943,12 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   hs2015 <- unique(merge(unique(ohs2015[,relevant_fields]), hsizes2015, by = c("hhid")))
   
   chosenchars2015_woranks <- ddply(ohs2015[,c("hhid","age","outoffood")],.(hhid),summarise,age=max(age), outoffood=max(outoffood))
-  rank_from_past_years <- ddply(rbind(chosenchars2010,chosenchars2012),.(hhid),summarise, max_education_rank=choose_max_non_na_rank(max_education_rank), max_occupation_rank=choose_max_non_na_rank(max_occupation_rank))
+  rank_from_past_years <- ddply(rbind(chosenchars2010,chosenchars2012),.(hhid),summarise, 
+                                max_education_rank=choose_max_non_na_rank(max_education_rank), 
+                                max_occupation_rank=choose_max_non_na_rank(max_occupation_rank),
+                                father_educ_rank=choose_max_non_na_rank(father_educ_rank),
+                                mother_educ_rank=choose_max_non_na_rank(mother_educ_rank)
+                                )
   chosenchars2015 <- merge(rank_from_past_years,chosenchars2015_woranks,by=c("hhid"))
   hswithchars2015 <- merge(hs2015,chosenchars2015,all.x = T)
   #
