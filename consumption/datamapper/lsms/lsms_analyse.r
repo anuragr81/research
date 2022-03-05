@@ -45,6 +45,7 @@ parents_educ_rank <- function(x){
   
 }
 choose_max_non_na <- function (x) { arr = x[!is.na(x)] ; if (length(arr)>1) {return (max(arr))} else {return(0)}}
+
 mean_of_nonzeros <- function (x) { arr = x[x!=0] ; if (length(arr)>0) {return (mean(arr))} else {return(0)}}
 choose_max_litlang <- function (x) { 
   arr = x[!is.na(x)];
@@ -1358,7 +1359,13 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   hsizes2010 <- ddply(ohs2010[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   # to use consu: call hsizes2010=ll@get_hsize(ohs2010)
   hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]),hsizes2010 , by = c("hhid")))
-  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang","age","outoffood")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = choose_max_non_na(occupation_rank) , litlang = choose_max_litlang(litlang) , age = choose_max_non_na(age), outoffood=max(outoffood))
+  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang","father_educ_rank","mother_educ_rank","age","outoffood")],.(hhid),summarise,
+                           max_education_rank = choose_max_non_na(education_rank) , 
+                           max_occupation_rank = choose_max_non_na(occupation_rank) , 
+                           father_educ_rank=choose_max_non_na(father_educ_rank),
+                           mother_educ_rank=choose_max_non_na(mother_educ_rank),
+                           litlang = choose_max_litlang(litlang) , 
+                           age = choose_max_non_na(age), outoffood=max(outoffood))
   #  perception_columns
   hhead2010 <- plyr::rename(subset(o2010,household_status==1)[,names(hhead_columns)],hhead_columns )
   chosencharshead2010 <- merge(chosenchars2010,hhead2010, all.x=T)
@@ -1371,7 +1378,13 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   ohs2012 <- merge(ohs2012_wi, incomedat2012,by=c("hhid"),all.x=T)
   hsizes2012 <- ddply(ohs2012[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
-  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age","litlang","outoffood")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = choose_max_non_na(occupation_rank) , litlang = choose_max_litlang(litlang) , age = choose_max_non_na(age), outoffood=max(outoffood) )
+  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","litlang","outoffood")],.(hhid),summarise,
+                           max_education_rank = choose_max_non_na(education_rank) , 
+                           max_occupation_rank = choose_max_non_na(occupation_rank) , 
+                           father_educ_rank=choose_max_non_na(father_educ_rank),
+                           mother_educ_rank=choose_max_non_na(mother_educ_rank),
+                           litlang = choose_max_litlang(litlang) , 
+                           age = choose_max_non_na(age), outoffood=max(outoffood) )
   
   if (length(setdiff(names(perception_columns),colnames(o2012)))==0){
     hhead_columns_w_percept <- c(hhead_columns,perception_columns)
@@ -1387,7 +1400,14 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   ohs2014 <- merge(ohs2014_wi, incomedat2014,by=c("hhid"),all.x=T)
   hsizes2014 <- ddply(ohs2014[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hs2014 <- unique(merge(unique(ohs2014[,relevant_fields]), hsizes2014, by = c("hhid")))
-  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age","litlang","outoffood")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = choose_max_non_na(occupation_rank) , litlang = choose_max_litlang(litlang), age = choose_max_non_na(age), outoffood=max(outoffood))
+  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","litlang","outoffood")],.(hhid),summarise,
+                           max_education_rank = choose_max_non_na(education_rank) , 
+                           max_occupation_rank = choose_max_non_na(occupation_rank) ,
+                           father_educ_rank=choose_max_non_na(father_educ_rank),
+                           mother_educ_rank=choose_max_non_na(mother_educ_rank),
+                           litlang = choose_max_litlang(litlang), 
+                           age = choose_max_non_na(age), 
+                           outoffood=max(outoffood))
   
   hhead2014 <- plyr::rename(subset(o2014,household_status==1)[,names(hhead_columns)],hhead_columns )
   
