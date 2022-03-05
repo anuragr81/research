@@ -206,7 +206,7 @@ def test_siddhis ():
     assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='luXt'),parent=None)]) == "paXthitaa"
     #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='liXt'),parent=None)]) == "papaaXtha"
     #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tas",lakaara='liXt'),parent=None)]) == "peXthatuH"
-    
+    # liNg is aardhadhaatuk in aashir-liNg
     
 F=False
 T=True
@@ -216,6 +216,7 @@ else:
     
     expression=[Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='lRiXt'),parent=None)]
     print("NEXT: 6040710- luNglaNglRiNgkXshvaXdudaataH")
+    # for paXtheta - we need to have for liNg : yaasuXtparasmaipadeXshuudaatto Ngichcha 3.4.103 and then ato yeyaH (because of a-ending paXtha after shap)
     print("PENDING : murdhanyaadesha in pXthishyati and eruH")
     
     
