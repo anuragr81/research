@@ -907,6 +907,24 @@ lsms_loader<-function(fu,ln,lgc) {
     return(adys)
   }
   
+  add_father_educ <- function(ohs,parentedmap){
+    map_modif = plyr::rename(parentedmap,c("parent_educ_level"="fathers_educ","parent_educ_rank"="father_educ_rank"))
+    if (length(setdiff(unique(ohs$fathers_educ),unique(map_modif$fathers_educ)))>0){
+      stop("Missing educ-levels for father-educ")
+    }
+    return (merge(ohs,map_modif,by=c("fathers_educ"),all.x=T))
+  }
+  
+  
+  add_mother_educ <- function(ohs,parentedmap){
+    map_modif = plyr::rename(parentedmap,c("parent_educ_level"="mothers_educ","parent_educ_rank"="mother_educ_rank"))
+    if (length(setdiff(unique(ohs$mothers_educ),unique(map_modif$mothers_educ)))>0){
+      stop("Missing educ-levels for mother-educ")
+    }
+    return (merge(ohs,map_modif,by=c("mothers_educ"),all.x=T))
+  }
+  
+  
   load_ohs_file <-function(year,dirprefix,fu,ln){
     #
     if (year ==2014){
@@ -1052,10 +1070,10 @@ lsms_loader<-function(fu,ln,lgc) {
       
       ### merging ###
       ohsjf <- merge(ohsj,foodsec,by=c("hhid"),all.x=T)
-      
-      ohsjfp1 <- add_father_euc(ohsjf)
-      ohsjfp2 <- add_father_euc(ohsjfp1)
-      
+      parentedmap <- ln()@parents_educ_mapping()
+      ohsjfp1 <- add_father_educ(ohsjf,parentedmap)
+      ohsjfp2 <- add_mother_educ(ohsjfp1,parentedmap)
+
       return(ohsjfp2)
       
     }
@@ -1173,8 +1191,12 @@ lsms_loader<-function(fu,ln,lgc) {
       ### merging ###
       ohsjpf <- merge(ohsjp,foodsec,by=c("hhid"),all.x=T)
       
+      parentedmap <- ln()@parents_educ_mapping()
+      ohsjpfp1 <- add_father_educ(ohsjpf,parentedmap)
+      ohsjpfp2 <- add_mother_educ(ohsjpfp1,parentedmap)
       
-      return(ohsjpf)
+      return(ohsjpfp2)
+      
     }
     
     if (year == 2010){
@@ -1279,7 +1301,12 @@ lsms_loader<-function(fu,ln,lgc) {
       
       ### merging ###
       ohsjf <- merge(ohsj,foodsec,by=c("hhid"),all.x=T)
-      return(ohsjf)
+      parentedmap <- ln()@parents_educ_mapping()
+      ohsjfp1 <- add_father_educ(ohsjf,parentedmap)
+      ohsjfp2 <- add_mother_educ(ohsjfp1,parentedmap)
+      
+      return(ohsjfp2)
+      
       
     }
     ##########################2008#########################

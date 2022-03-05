@@ -2562,6 +2562,8 @@ lsms_normalizer<-function() {
     r <- rbind(r,data.frame(parent_educ_level_name="secondary",parent_educ_level=5,parent_educ_rank=3))
     r <- rbind(r,data.frame(parent_educ_level_name="secondary_higher",parent_educ_level=6,parent_educ_rank=4))
     r <- rbind(r,data.frame(parent_educ_level_name="NA",parent_educ_level=7,parent_educ_rank=0))
+    r <- rbind(r,data.frame(parent_educ_level_name="NA",parent_educ_level=NA,parent_educ_rank=NA))
+    r <- rbind(r,data.frame(parent_educ_level_name="NA",parent_educ_level=8,parent_educ_rank=NA))
     return(r)
   }
   
