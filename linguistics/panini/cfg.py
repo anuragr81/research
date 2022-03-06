@@ -215,10 +215,15 @@ if F:
 else:   
     
     expression=[Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='lRiXt'),parent=None)]
+    
+    # sorting order is increasing in general but can be superseded by nitya condition (if nitya occurs in a later sutra then that later sutra takes advantage) 
+    # which in turn would be superseded by the minimal condition criteria (antaraNga) 
+    # The only exception is when there is a an exception that prevents application
+    
     print("NEXT: 6040710- luNglaNglRiNgkXshvaXdudaataH")
     # for paXtheta - we need to have for liNg : yaasuXtparasmaipadeXshuudaatto Ngichcha 3.4.103 and then ato yeyaH (because of a-ending paXtha after shap)
     print("PENDING : murdhanyaadesha in pXthishyati and eruH")
-    
+    print("PENDING : Whether a rule if applicable or not is different from whether it would have effect or not. Physical equality and logical equality are different. Applicability should be handled as preconditions - or a context matching.")
     
     
     processed_expr=(process_until_finish(expression))
