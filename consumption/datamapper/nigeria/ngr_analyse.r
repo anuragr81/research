@@ -402,6 +402,31 @@ load_income_data_per_hh <- function(o2010, o2012,o2015){
   return(res)
 }
 
+infer_religion_for_hhid <-function(o2010,o2012,o2015){
+  
+  religion_df = ddply(subset(o2010[,c("hhid","personid","religion")],!is.na(religion)),.(hhid,religion),summarise,nmem=length(personid)) %>% dplyr::group_by(hhid) %>% dplyr::filter(nmem==max(nmem)) 
+  if (length(setdiff(o2010$hhid,religion_df$hhid))>0){
+    print(paste("Could not find religion for ",length(setdiff(o2010$hhid,religion_df$hhid)),"hhids in year 2010"))
+  }
+  
+  new_in_2012 <- subset(o2012,!is.element(hhid,religion_df$hhid) & !is.na(religion))
+  religion_df = rbind(religion_df,ddply(subset(new_in_2012[,c("hhid","personid","religion")],!is.na(religion)),.(hhid,religion),summarise,nmem=length(personid)) %>% dplyr::group_by(hhid) %>% dplyr::filter(nmem==max(nmem)) )
+  
+  if (length(setdiff(o2012$hhid,religion_df$hhid))>0){
+    print(paste("Could not find religion for ",length(setdiff(o2012$hhid,religion_df$hhid)),"hhids in year 2012"))
+  }
+  
+  new_in_2015 <- subset(o2015,!is.element(hhid,religion_df$hhid) & !is.na(religion))
+  religion_df = rbind(religion_df,ddply(subset(new_in_2015[,c("hhid","personid","religion")],!is.na(religion)),.(hhid,religion),summarise,nmem=length(personid)) %>% dplyr::group_by(hhid) %>% dplyr::filter(nmem==max(nmem)) )
+  if (length(setdiff(o2015$hhid,religion_df$hhid))>0){
+    print(paste("Could not find religion for ",length(setdiff(o2015$hhid,religion_df$hhid)),"hhids in year 2015"))
+  }
+  
+  religion_df$nmem <- NULL
+  return(religion_df)
+}
+
+
 infer_occupation_ranks <- function(o2010 , ignore_top) {
   warning("Using only 2010 data - ignoring the worked-for-outside-hh field")
   get_weeks=function(m,w){ if (is.na(w)) { return (m*4.3)} else {return(w)} }
@@ -894,6 +919,8 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   
   incomedat <- load_income_data_per_hh(o2010 = o2010, o2012 = o2012, o2015 = o2015)
   
+  religionhhids <- infer_religion_for_hhid(o2010 = o2010, o2012 = o2012, o2015 = o2015)
+  
   #total consumption
   relevant_fields <-c("hhid","region","district","ea","is_urban","S","E","ypay","lnY")
   # 2010
@@ -901,6 +928,8 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   
   ohs2010 <- merge(ohs2010_wi, incomedat[["ypay2010"]],by=c("hhid"),all.x=T)
   hsizes2010 <- ddply(ohs2010[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
+  hsizes2010 <- merge(hsizes2010,religionhhids,by=c("hhid"),all.x=T)
+  
   hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), hsizes2010, by = c("hhid")))
   
   ohs2010_wrank<- merge(plyr::rename(ohs2010,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"),all.x=T)
@@ -922,6 +951,8 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   ohs2012 <- merge(o2012_wi, incomedat[["ypay2012"]],by=c("hhid"),all.x=T)
   
   hsizes2012 <- ddply(ohs2012[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
+  hsizes2012 <- merge(hsizes2012,religionhhids,by=c("hhid"),all.x=T)
+  
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
   ohs2012_wranks<- merge(plyr::rename(ohs2012,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank")],by=c("occupation"),all.x=T)
   
@@ -940,6 +971,7 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   ohs2015 <- merge(o2015_wi, incomedat[["ypay2015"]],by=c("hhid"),all.x=T)
   
   hsizes2015 <- ddply(ohs2015[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
+  hsizes2015 <- merge(hsizes2015,religionhhids,by=c("hhid"),all.x=T)
   hs2015 <- unique(merge(unique(ohs2015[,relevant_fields]), hsizes2015, by = c("hhid")))
   
   chosenchars2015_woranks <- ddply(ohs2015[,c("hhid","age","outoffood")],.(hhid),summarise,age=max(age), outoffood=max(outoffood))
