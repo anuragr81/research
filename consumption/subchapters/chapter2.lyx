@@ -31,12 +31,12 @@ theorems-ams-extended-chap-bytype
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "ae" "Caslon OS"
+\font_roman "times" "Caslon OS"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts true
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -159,19 +159,16 @@ textit{Implications of assets-inequalities and urbanisation}}}
 \end_layout
 
 \begin_layout Abstract
-The economic inequalities in a developing economy exist both across the
- wider geographical areas and within the densely populated urban areas one
- 
-\end_layout
-
-\begin_layout Abstract
-Under economic growth the consumers are forced to move across the geographies
- and within the economy - depending on the growth.
- 
-\end_layout
-
-\begin_layout Abstract
-The consumption oppportunities vary as do the opportunities of mobility.
+The economic inequalities in the developing economies are often significant
+ both across wider geographical areas and within the densely populated cross-sec
+tion of the urban areas.
+ The migration pressures in an economy under an uneven economic growth correspon
+d to the varied opportunities for both mobility and consumption.- which the
+ consumer responds to by either increasing the skills to be in a richer
+ area or accumulating relative wealth.
+ Considering education mobility and consumption with respect to total assets
+ owned by the household, we compare how the environments differ across two
+ representive countries in the sub-Saharan Africa.
 \end_layout
 
 \begin_layout Abstract
@@ -3873,7 +3870,34 @@ Control Variables
 \end_layout
 
 \begin_layout Standard
-We use the measure of prosperity as described in Table 
+The results for surege shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district}
+\end_layout
+
+\end_inset
+
+ respectively, use the first reference interpretation as described in Table
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:ReferenceDefinitions"
@@ -3883,15 +3907,40 @@ noprefix "false"
 
 \end_inset
 
- to compare how reference level prosperity stand against the household's
- occupational and educational statuses.
- The prices 
+ .
+ The level of prosperity is represented with the variable 
+\family typewriter
+r
+\family default
+ while the dependent variables 
+\family typewriter
+w_ne
+\family default
+ and 
+\family typewriter
+w_educ
+\family default
+ represent the budget shares of non-durable consumption excluding asset
+ costs and educational expenses respectively.
+ Other controls for the household's occupational and educational statuses
+ are listed in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Control-Variables"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Here, the prices 
 \begin_inset Formula $p_{ne}$
 \end_inset
 
  in the reference area - interpreted as the cost of living in the reference
  - are measured as the the average consumption excluding the asset costs.
- This measurement of 
+ The measurement of 
 \begin_inset Formula $p_{ne}$
 \end_inset
 
@@ -3908,7 +3957,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-As shown in Table 
+Some of the variables shown in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Control-Variables"
@@ -3918,12 +3967,12 @@ noprefix "false"
 
 \end_inset
 
-, the variables that are specific to the individual household are the consumers
- age (
+ are specific to the individual household - such as the age (
 \family typewriter
 age
 \family default
-), the size of the household (
+ - corresponding to the age of the household head), the size of the household
+ (
 \family typewriter
 hsize
 \family default
@@ -3937,26 +3986,30 @@ lnX
 education_rank
 \family default
 \size default
-), the education rank of the father (
+), the education rank of the household head's father (
 \family typewriter
 \size small
 father_educ_rank
 \family default
 \size default
-) and mother (
+) as well as that of the household head's mother (
 \family typewriter
 \size small
 mother_educ_rank
 \family default
 \size default
-) of the household head and the occupation-rank of the household head (
+) and the occupation-rank of the household head (
 \family typewriter
 \size small
 occupation_rank
 \family default
 \size default
-).
- The ranks are defined as described in Section 
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The ranks are defined in the same way as described in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Non-Parametric-Analysis"
@@ -3966,15 +4019,20 @@ noprefix "false"
 
 \end_inset
 
-.
- The variables observed at the level of the reference area are the number
- of rural wards (divisions marked in the survey within a district) 
+
+\end_layout
+
+\end_inset
+
+).
+ The other variables in the table are observed at the level of the reference
+ area - such as the number of rural wards ( 
 \family typewriter
 \size small
 rural_wards
 \family default
 \size default
-, 
+- divisions within a district marked as rural in the survey), 
 \begin_inset Formula $p_{ne}$
 \end_inset
 
@@ -4003,13 +4061,28 @@ noprefix "false"
 ).
 \end_layout
 
-\begin_layout Section
-Discussion
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Discussion]
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The two countries have different levels of urbanisation but may be on a
- similar trajectory.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% The two countries have different levels of urbanisation but may be on
+ a similar trajectory.
  Policy tell us that the pressure on education may be natural and could
  be seen as urbanisation needs.
  We explore a linear causality with the question: do people spend more education
@@ -4019,14 +4092,18 @@ The two countries have different levels of urbanisation but may be on a
  seen as readiness for mobility.
 \end_layout
 
-\begin_layout Enumerate
-In the cross-sectional study, we only look at changes in prosperity across
+\begin_layout Plain Layout
+
+% 1.
+ In the cross-sectional study, we only look at changes in prosperity across
  the economy.
 \end_layout
 
-\begin_layout Enumerate
-In the time-series question, we may look at how increase in prosperity is
- responded to by the consumers.
+\begin_layout Plain Layout
+
+% 2.
+ In the time-series question, we may look at how increase in prosperity
+ is responded to by the consumers.
  But this is not available due to measurement errors with assets owned as
  well as missing past hhid information for a significant number of households
  in 2014 for Tanzania.
@@ -4034,9 +4111,15 @@ In the time-series question, we may look at how increase in prosperity is
  sync with 2012-2015 analysis.
 \end_layout
 
-\begin_layout Standard
-A comparison of the expenses in the two economies is faulty - because of
- the effect of urbanisation brings in a lot about educational institutions.
+\begin_layout Plain Layout
+
+% A comparison of the expenses in the two economies is faulty - because
+ of the effect of urbanisation brings in a lot about educational institutions.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4048,15 +4131,16 @@ status open
 %[Life-cyle]
 \end_layout
 
+\begin_layout Plain Layout
+
+% The effect of age is significant.
+ Older households spend less on ne and more on education.
+ 
+\end_layout
+
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-The effect of age is significant.
- Older households spend less on ne and more on education.
- 
 \end_layout
 
 \begin_layout Standard
@@ -4068,13 +4152,15 @@ status open
 %[Rural-urban]
 \end_layout
 
+\begin_layout Plain Layout
+
+% Rural wards also spend less on education in Tanzania - not so much in
+ Nigeria.
+\end_layout
+
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Rural wards also spend less on education in Tanzania - not so much in Nigeria.
 \end_layout
 
 \begin_layout Standard
@@ -4083,7 +4169,8 @@ status open
 
 \begin_layout Plain Layout
 
-% do "C:
+%-----------------------------------------------------GENERATED USING do
+ "C:
 \backslash
 local_files
 \backslash
@@ -4093,7 +4180,7 @@ consumption
 \backslash
 tnz_ngr_comparison
 \backslash
-run_educ_cons_sureg.do"
+run_educ_cons_sureg.do"------------------------
 \end_layout
 
 \end_inset
@@ -4127,7 +4214,7 @@ label{tabTNZ_district}}
 
 
 \backslash
-resizebox{3.4in}{!}{
+resizebox{3.2in}{!}{
 \end_layout
 
 \end_inset
@@ -4185,9 +4272,9 @@ _ne      &                  &
 \backslash
 
 \backslash
- lnX       &   -0.147
+ lnX       &   -0.146
 \backslash
-sym{***}&   -0.160
+sym{***}&   -0.158
 \backslash
 sym{***}
 \backslash
@@ -4197,9 +4284,9 @@ sym{***}
 \backslash
 
 \backslash
- r         &  -0.0273
+ r         &  -0.0280
 \backslash
-sym{***}&  -0.0280
+sym{***}&  -0.0277
 \backslash
 sym{***}
 \backslash
@@ -4215,9 +4302,9 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&    1.956
+_ne&    1.993
 \backslash
-sym{***}&    1.774
+sym{***}&    1.817
 \backslash
 sym{***}
 \backslash
@@ -4229,9 +4316,9 @@ sym{***}
 \backslash
  occupation
 \backslash
-_rank&   0.0422
+_rank&   0.0441
 \backslash
-sym{***}&   0.0347
+sym{***}&   0.0369
 \backslash
 sym{***}
 \backslash
@@ -4243,13 +4330,13 @@ sym{***}
 \backslash
  education
 \backslash
-_rank&-0.000364         &   0.0135
+_rank&  0.00345         &   0.0190
 \backslash
-sym{**} 
+sym{***}
 \backslash
 
 \backslash
-           &  (0.940)         &  (0.003)         
+           &  (0.487)         &  (0.000)         
 \backslash
 
 \backslash
@@ -4257,15 +4344,15 @@ sym{**}
 \backslash
 _educ
 \backslash
-_rank&   0.0163
+_rank&   0.0174
 \backslash
-sym{***}&   0.0124
+sym{***}&   0.0136
 \backslash
-sym{**} 
+sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.001)         
+           &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -4273,41 +4360,53 @@ sym{**}
 \backslash
 _educ
 \backslash
-_rank&  0.00666         &-0.0000592         
+_rank&  0.00737         &  0.00112         
 \backslash
 
 \backslash
-           &  (0.214)         &  (0.990)         
+           &  (0.169)         &  (0.821)         
 \backslash
 
 \backslash
- age       &-0.000893
+ age       &-0.000857
 \backslash
-sym{***}&-0.000514
+sym{***}&-0.000452
 \backslash
 sym{*}  
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.012)         
+           &  (0.000)         &  (0.026)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards&   0.0463
+_wards&   0.0501
 \backslash
-sym{**} &   0.0157         
-\backslash
-
-\backslash
-           &  (0.009)         &  (0.304)         
+sym{**} &   0.0217         
 \backslash
 
 \backslash
- hsize     &  0.00452
+           &  (0.005)         &  (0.154)         
 \backslash
-sym{**} &  0.00754
+
+\backslash
+ 0.has
+\backslash
+_english&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 1.has
+\backslash
+_english&  -0.0268
+\backslash
+sym{**} &  -0.0361
 \backslash
 sym{***}
 \backslash
@@ -4317,11 +4416,23 @@ sym{***}
 \backslash
 
 \backslash
+ hsize     &  0.00461
+\backslash
+sym{**} &  0.00755
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.002)         &  (0.000)         
+\backslash
+
+\backslash
  
 \backslash
-_cons    &   -1.881
+_cons    &   -1.987
 \backslash
-sym{***}&   -1.202
+sym{***}&   -1.353
 \backslash
 sym{***}
 \backslash
@@ -4339,21 +4450,23 @@ _educ    &                  &
 \backslash
 
 \backslash
- lnX       & -0.00423
+ lnX       & -0.00726
 \backslash
-sym{***}& 0.000915         
+sym{***}& -0.00271
 \backslash
-
-\backslash
-           &  (0.000)         &  (0.513)         
+sym{*}  
 \backslash
 
 \backslash
- r         & -0.00161         & -0.00195         
+           &  (0.000)         &  (0.046)         
 \backslash
 
 \backslash
-           &  (0.204)         &  (0.186)         
+ r         &0.0000521         & -0.00234         
+\backslash
+
+\backslash
+           &  (0.965)         &  (0.097)         
 \backslash
 
 \backslash
@@ -4363,49 +4476,29 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&    0.127
-\backslash
-sym{*}  &   0.0751         
+_ne&   0.0325         &  0.00834         
 \backslash
 
 \backslash
-           &  (0.013)         &  (0.136)         
+           &  (0.502)         &  (0.864)         
 \backslash
 
 \backslash
  occupation
 \backslash
-_rank&  0.00362
-\backslash
-sym{**} &  0.00116         
+_rank& -0.00105         & -0.00234         
 \backslash
 
 \backslash
-           &  (0.009)         &  (0.437)         
+           &  (0.425)         &  (0.107)         
 \backslash
 
 \backslash
  education
 \backslash
-_rank& -0.00527
+_rank&  -0.0149
 \backslash
-sym{**} & -0.00735
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.000)         
-\backslash
-
-\backslash
- father
-\backslash
-_educ
-\backslash
-_rank&  0.00759
-\backslash
-sym{***}&  0.00507
+sym{***}&  -0.0160
 \backslash
 sym{***}
 \backslash
@@ -4415,45 +4508,85 @@ sym{***}
 \backslash
 
 \backslash
+ father
+\backslash
+_educ
+\backslash
+_rank&  0.00480
+\backslash
+sym{***}&  0.00320
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.016)         
+\backslash
+
+\backslash
  mother
 \backslash
 _educ
 \backslash
-_rank&  0.00319         &  0.00506
-\backslash
-sym{**} 
+_rank&  0.00141         &  0.00321         
 \backslash
 
 \backslash
-           &  (0.083)         &  (0.005)         
+           &  (0.417)         &  (0.065)         
 \backslash
 
 \backslash
- age       & 0.000285
+ age       & 0.000193
 \backslash
-sym{***}& 0.000219
-\backslash
-sym{**} 
+sym{**} & 0.000123         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.003)         
+           &  (0.003)         &  (0.086)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards&  -0.0118         & -0.00597         
+_wards&  -0.0213
+\backslash
+sym{***}&  -0.0155
+\backslash
+sym{**} 
 \backslash
 
 \backslash
-           &  (0.052)         &  (0.282)         
+           &  (0.000)         &  (0.004)         
 \backslash
 
 \backslash
- hsize     &  0.00458
+ 0.has
 \backslash
-sym{***}&  0.00616
+_english&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 1.has
+\backslash
+_english&   0.0678
+\backslash
+sym{***}&   0.0567
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ hsize     &  0.00436
+\backslash
+sym{***}&  0.00613
 \backslash
 sym{***}
 \backslash
@@ -4465,11 +4598,11 @@ sym{***}
 \backslash
  
 \backslash
-_cons    &   -0.236         &   -0.177         
+_cons    &   0.0326         &   0.0602         
 \backslash
 
 \backslash
-           &  (0.073)         &  (0.148)         
+           &  (0.794)         &  (0.611)         
 \backslash
 
 \backslash
@@ -4580,7 +4713,7 @@ label{tabNGR_district}}
 
 
 \backslash
-resizebox{3.4in}{!}{
+resizebox{2.9in}{!}{
 \end_layout
 
 \end_inset
@@ -4638,9 +4771,9 @@ _ne      &                  &
 \backslash
 
 \backslash
- lnX       &  -0.0600
+ lnX       &  -0.0618
 \backslash
-sym{***}&  -0.0680
+sym{***}&  -0.0692
 \backslash
 sym{***}
 \backslash
@@ -4650,9 +4783,9 @@ sym{***}
 \backslash
 
 \backslash
- r         &  -0.0771
+ r         &  -0.0746
 \backslash
-sym{***}&  -0.0814
+sym{***}&  -0.0800
 \backslash
 sym{***}
 \backslash
@@ -4668,9 +4801,9 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&    1.159
+_ne&    1.207
 \backslash
-sym{***}&    1.183
+sym{***}&    1.323
 \backslash
 sym{***}
 \backslash
@@ -4682,23 +4815,23 @@ sym{***}
 \backslash
  occupation
 \backslash
-_rank&  -0.0142
+_rank&  -0.0110
 \backslash
-sym{**} &  -0.0238
+sym{*}  &  -0.0224
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.001)         &  (0.000)         
+           &  (0.012)         &  (0.000)         
 \backslash
 
 \backslash
  education
 \backslash
-_rank&  -0.0165
+_rank&  -0.0113
 \backslash
-sym{***}&  -0.0154
+sym{***}&  -0.0121
 \backslash
 sym{***}
 \backslash
@@ -4712,13 +4845,13 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank& -0.00178         &  0.00796
+_rank&-0.000205         &  0.00628
 \backslash
-sym{**} 
+sym{*}  
 \backslash
 
 \backslash
-           &  (0.770)         &  (0.002)         
+           &  (0.973)         &  (0.015)         
 \backslash
 
 \backslash
@@ -4726,53 +4859,93 @@ sym{**}
 \backslash
 _educ
 \backslash
-_rank& -0.00515         &  0.00568
-\backslash
-sym{*}  
+_rank& -0.00516         &  0.00359         
 \backslash
 
 \backslash
-           &  (0.500)         &  (0.037)         
+           &  (0.496)         &  (0.187)         
 \backslash
 
 \backslash
- age       &-0.000884
+ age       &-0.000750
 \backslash
-sym{***}&-0.000337         
+sym{***}&-0.000303         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.069)         
+           &  (0.000)         &  (0.100)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards& -0.00208         &  0.00507         
+_wards&  0.00478         &   0.0116         
 \backslash
 
 \backslash
-           &  (0.804)         &  (0.504)         
+           &  (0.567)         &  (0.128)         
 \backslash
 
 \backslash
- hsize     &  0.00225         &  0.00531
+ 1.religion&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.religion&   0.0514
+\backslash
+sym{***}&   0.0437
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.060)         &  (0.000)         
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 3.religion&   0.0753
+\backslash
+sym{*}  &   0.0200         
+\backslash
+
+\backslash
+           &  (0.012)         &  (0.468)         
+\backslash
+
+\backslash
+ 4.religion&   0.0694         &   -0.152         
+\backslash
+
+\backslash
+           &  (0.608)         &  (0.218)         
+\backslash
+
+\backslash
+ hsize     &-0.000280         &  0.00417
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.820)         &  (0.000)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   -0.330         &   -0.285         
+_cons    &   -0.486
+\backslash
+sym{**} &   -0.646
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.073)         &  (0.079)         
+           &  (0.008)         &  (0.000)         
 \backslash
 
 \backslash
@@ -4784,27 +4957,25 @@ _educ    &                  &
 \backslash
 
 \backslash
- lnX       &  0.00642
+ lnX       &  0.00772
 \backslash
-sym{**} &  0.00786
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.003)         &  (0.000)         
-\backslash
-
-\backslash
- r         &  0.00452
-\backslash
-sym{*}  &   0.0124
+sym{***}&  0.00857
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.047)         &  (0.000)         
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ r         &  0.00291         &   0.0116
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.194)         &  (0.000)         
 \backslash
 
 \backslash
@@ -4814,33 +4985,37 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&  -0.0750         &  -0.0942
+_ne&   -0.108
 \backslash
-sym{*}  
+sym{**} &   -0.188
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.063)         &  (0.017)         
+           &  (0.007)         &  (0.000)         
 \backslash
 
 \backslash
  occupation
 \backslash
-_rank& -0.00337         &  0.00521
+_rank& -0.00538
 \backslash
-sym{**} 
+sym{**} &  0.00406
+\backslash
+sym{*}  
 \backslash
 
 \backslash
-           &  (0.104)         &  (0.009)         
+           &  (0.009)         &  (0.038)         
 \backslash
 
 \backslash
  education
 \backslash
-_rank&   0.0158
+_rank&   0.0128
 \backslash
-sym{***}&  0.00741
+sym{***}&  0.00519
 \backslash
 sym{***}
 \backslash
@@ -4854,11 +5029,11 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&  0.00375         & -0.00165         
+_rank&  0.00279         &-0.000596         
 \backslash
 
 \backslash
-           &  (0.195)         &  (0.212)         
+           &  (0.330)         &  (0.649)         
 \backslash
 
 \backslash
@@ -4866,53 +5041,95 @@ _rank&  0.00375         & -0.00165
 \backslash
 _educ
 \backslash
-_rank& -0.00197         & -0.00490
+_rank& -0.00179         & -0.00358
 \backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.586)         &  (0.000)         
+sym{**} 
 \backslash
 
 \backslash
- age       & 0.000348
-\backslash
-sym{***}&-0.000134         
+           &  (0.617)         &  (0.010)         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.157)         
+ age       & 0.000261
+\backslash
+sym{**} &-0.000154         
+\backslash
+
+\backslash
+           &  (0.005)         &  (0.100)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards& -0.00290         &  0.00228         
+_wards& -0.00724         & -0.00244         
 \backslash
 
 \backslash
-           &  (0.467)         &  (0.557)         
+           &  (0.067)         &  (0.527)         
 \backslash
 
 \backslash
- hsize     & 0.000694         &  0.00247
+ 1.religion&        0         &        0         
+\backslash
+
+\backslash
+           &      (.)         &      (.)         
+\backslash
+
+\backslash
+ 2.religion&  -0.0300
+\backslash
+sym{***}&  -0.0275
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.223)         &  (0.000)         
+           &  (0.000)         &  (0.000)         
+\backslash
+
+\backslash
+ 3.religion&  -0.0227         & -0.00318         
+\backslash
+
+\backslash
+           &  (0.109)         &  (0.820)         
+\backslash
+
+\backslash
+ 4.religion&   0.0491         &    0.265
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.443)         &  (0.000)         
+\backslash
+
+\backslash
+ hsize     &  0.00217
+\backslash
+sym{***}&  0.00328
+\backslash
+sym{***}
+\backslash
+
+\backslash
+           &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   0.0293         & -0.00393         
+_cons    &    0.131         &    0.236
+\backslash
+sym{**} 
 \backslash
 
 \backslash
-           &  (0.738)         &  (0.962)         
+           &  (0.130)         &  (0.006)         
 \backslash
 
 \backslash
@@ -4922,7 +5139,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     4142         &     4169         
+)     &     4154         &     4183         
 \backslash
 
 \backslash
