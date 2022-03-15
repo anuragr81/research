@@ -8,8 +8,10 @@ library(acid) # for polarisation
 
 #library(moments) # for kurtosis
 setwd('c:/local_files/research/consumption/datamapper/')
-source('translation/frameutils.R');source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');ll=lsms_loader(fu=fu,ln=lsms_normalizer,lgc=lgc)
-source('lsms/lsms_group_collect.r'); source('lsms/lsms_datastorage.R')
+
+
+source('translation/frameutils.R');source('lsms/lsms_datastorage.R');source('lsms/lsms_normalizer.r');source('lsms/lsms_loader.r');source('lsms/lsms_group_collect.r');ll=lsms_loader(fu=fu,ln=lsms_normalizer,lgc=lgc)
+
 #assign("last.warning", NULL, envir = baseenv())
 #showing plots of 2010
 #dat <- unique(subset(m2010,abs(price)<10*median_price)[,c("shortname","price")])
@@ -761,28 +763,10 @@ all_asset_scores <- function(years,dirprefix,fu,ln,ll){
 }
 
 
-run_test <- function(p.df,use_nu) {
-  agedf <- data.frame(start=c(20,30,40,50,60), end=c(30,40,50,60,200))
-  r <- data.frame(stringsAsFactors = FALSE)
-  for ( i in seq(nrow(agedf))){
-    if (use_nu){
-      res <- lm(data=subset(p.df, age >=agedf[i,]$start & age <agedf[i,]$end), nut1~At+lt1)
-    } else {
-      res <- lm(data=subset(p.df, age >=agedf[i,]$start & age <agedf[i,]$end), dAt~At+lt1)
-    }
-    
-    r <- rbind(r, data.frame ( start=agedf[i,]$start, end= agedf[i,]$end, coef.At = res$coefficients[["At"]], 
-                               coef.lt1 = res$coefficients[["lt1"]],
-                               intercept = res$coefficients[["(Intercept)"]] ) )
-  }
-  return(r)
-  
-}
-
 run_test <- function() {
-  
+  g <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "densefoods",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
+                        ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F)
 }
-
 analyse_estimation_df <- function(res,use_nu) {
   
   # The age-wise decomposition of regression results is only to demonstrate that 

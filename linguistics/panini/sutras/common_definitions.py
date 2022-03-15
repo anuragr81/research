@@ -1,5 +1,18 @@
 import re
 
+
+if False:    
+    # Usage : Add @sutra_precondition(a,b,c) before the function
+    def sutra_precondition(**kwargs):
+        def wrap(func):
+            def wrapped_sutra(*args):
+                print("wrapped_f: kwargs="+str(kwargs))
+                if 't' in kwargs and kwargs['t']=="literal":
+                    print("Using literal invocatoin")
+                func(*args)
+            return wrapped_sutra
+        return wrap
+
 def parse_string(input_str):
     """
     build a list of aksharas from the string - unknown letters are ignored

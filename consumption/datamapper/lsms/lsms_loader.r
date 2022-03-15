@@ -2094,9 +2094,12 @@ lsms_loader<-function(fu,ln,lgc) {
         relevant_names <- setdiff(relevant_names,unique(hhp$shortname))
         miscdiarydata  <- subset(hh,is.element(shortname,relevant_names))
         print(paste("group_collect - using interpolation/other-price sources for :",toString(relevant_names)))
-        
+        if (nrow(miscdiarydata)>0){
         hhpm <- add_market_price_to_misc_diary (curyear = year, dirprefix =dirprefix, fu=fu, ln=ln, groups = groups, lgc=lgc,
                                                 ld = ld, marketpricesdata=mktprices,ohsdata=ohs,ddata=miscdiarydata)
+        } else {
+          hhpm <- NULL
+        }
         #print("RETURNING PREMATURELY: hhpm")
         #return(hhpm)
         

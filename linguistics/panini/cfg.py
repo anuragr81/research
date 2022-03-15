@@ -208,10 +208,20 @@ def test_siddhis ():
     #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tas",lakaara='liXt'),parent=None)]) == "peXthatuH"
     # liNg is aardhadhaatuk in aashir-liNg
     
+class Functor:
+    def __init__(self):
+        self._types={'a':['literal']}
+    def __call__(self,a):
+        return 0
+
 F=False
 T=True
-if F:
+if T:
     test_siddhis ()
+    #print("Test")
+    #f=Functor()
+    #f(2)
+    
 else:   
     
     expression=[Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='lRiXt'),parent=None)]
@@ -233,5 +243,6 @@ else:
     print("DONE")
     
     #pprint(processed_expr[1]._output)
+    
     
     
