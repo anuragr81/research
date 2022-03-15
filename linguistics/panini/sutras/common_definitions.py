@@ -141,7 +141,9 @@ class Node:
         
     def set_output(self,rule,**kwargs):
         old_output = self.get_output()
-        new_output = rule(node=self,**kwargs)
+
+        new_output = rule()(node=self,**kwargs)
+        
         if isinstance(new_output,dict):
             if 'mutate' in new_output :
                 if new_output['output'] != old_output :

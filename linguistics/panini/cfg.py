@@ -50,7 +50,7 @@ def insertion_sutras():
 
 def apply_transformation(transformation_rule,new_expr):
     #print(transformation_rule.__name__)
-    sig_params = inspect.signature(transformation_rule).parameters
+    sig_params = inspect.signature(transformation_rule.__call__).parameters
     for i in range(0,len(new_expr)):
         if isinstance(new_expr[i]._data,Suffix):
             if i>0 :
@@ -141,9 +141,9 @@ def apply_insertion(insertion_rule, new_expr):
         if isinstance(new_expr[i]._data,Suffix):
             # reducing expression with combination
             # this involves appending plain-strings (that cannot be reduced further)
-            sig_params = inspect.signature(insertion_rule).parameters
+            sig_params = inspect.signature(insertion_rule.__call__).parameters
             if 'dhaatu_node' in sig_params :         
-                to_insert = insertion_rule(dhaatu_node=new_expr[i-1],suffix_node=new_expr[i])
+                to_insert = insertion_rule()(dhaatu_node=new_expr[i-1],suffix_node=new_expr[i])
                 if to_insert :
                     new_inserts[i]=to_insert 
                 
@@ -208,14 +208,9 @@ def test_siddhis ():
     #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tas",lakaara='liXt'),parent=None)]) == "peXthatuH"
     # liNg is aardhadhaatuk in aashir-liNg
     
-class Functor:
-    def __init__(self):
-        self._types={'a':['literal']}
-    def __call__(self,a):
-        return 0
-
 F=False
 T=True
+
 if T:
     test_siddhis ()
     #print("Test")
@@ -224,7 +219,8 @@ if T:
     
 else:   
     
-    expression=[Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='lRiXt'),parent=None)]
+    expression=[Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tip",lakaara='laXt'),parent=None)]
+    #expression=[Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='lRiXt'),parent=None)]
     
     # sorting order is increasing in general but can be superseded by nitya condition (if nitya occurs in a later sutra then that later sutra takes advantage) 
     # which in turn would be superseded by the minimal condition criteria (antaraNga) 
@@ -242,7 +238,7 @@ else:
     print(output_processed_string (processed_expr))
     print("DONE")
     
-    #pprint(processed_expr[1]._output)
+    pprint(processed_expr[1]._output)
     
     
     
