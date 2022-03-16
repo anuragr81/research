@@ -1,4 +1,5 @@
-from ..common_definitions import vriddhi,upadhaa, ach, Suffix, Node ,pratyaahaara, guNna, Dhaatu
+from ..common_definitions import vriddhi,upadhaa, ach, Suffix, Node 
+from ..common_definitions import get_dhaatu_properties,pratyaahaara, guNna, Dhaatu
 
 class yuvoranaakau_7010010:
     def __init__(self):
@@ -160,7 +161,7 @@ def iXt_not_allowed(suffix_node_data):
 
 class aardhadhaatukasyeXdvalaadeH_7041140:
     def __init__(self):
-        self._types={'dhaatu_node':[Dhaatu],'suffix_node':[Suffix,'literal']}
+        self._types={'dhaatu_node':[Dhaatu,'literal'],'suffix_node':[Suffix,'literal']}
         self._ruletype = ['insertion']
         
     def __call__(self,dhaatu_node,suffix_node):
@@ -177,7 +178,9 @@ class aardhadhaatukasyeXdvalaadeH_7041140:
             isinstance(suffix_node._data,Suffix) :
                 #dhaatu_node_data=[x['output'] for x in dhaatu_node._output if 'new' in x and x['new']][-1]
                 suffix_node_data=[x['output'] for x in suffix_node._output if 'new' in x and x['new']][-1]            
-                if not iXt_not_allowed(suffix_node_data) and not suffix_node._data.is_saarvadhaatuka() and suffix_node_data[0] in pratyaahaara('v','l')  and ''.join(suffix_node_data) != 'iXt':
+                if not iXt_not_allowed(suffix_node_data) and not suffix_node._data.is_saarvadhaatuka() \
+                    and not get_dhaatu_properties(''.join(dhaatu_node._data._data))['aniXt'] \
+                    and suffix_node_data[0] in pratyaahaara('v','l')  and ''.join(suffix_node_data) != 'iXt':
                     return Suffix("iXt")
     
         return []

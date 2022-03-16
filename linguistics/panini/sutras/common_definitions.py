@@ -117,31 +117,60 @@ class Dhaatu:
         
     def get_data(self):
         return self._data
+
+
+def get_dhaatu_properties(dhaatu_string):
+    dhaatu_store = {'chiNc':{'aniXt':True}, 
+                    'paXthNc':{'aniXt':False} 
+                    }
+    return dhaatu_store [dhaatu_string]
+
+
+def find_eldest_parent1_of_condition(node,cond):
     
+    if node and node.get_parent1():
+        if cond(node):
+            return node.get_parent1()
+        else:
+            return find_eldest_parent1_of_condition(node.get_parent1(),cond)
+    
+    if cond(node):
+        return node 
+    else:
+        return None
 
-
-
+def find_eldest_parent2_of_condition(node,cond):
+    
+    if node and node.get_parent2():
+        if cond(node):
+            return node.get_parent2()
+        else:
+            return find_eldest_parent2_of_condition(node.get_parent2(),cond)
+    if cond(node):
+        return node 
+    else:
+        return None
+    
+    
 class Node:
-    def __init__(self,data,parent):
+    def __init__(self,data,parent1,parent2=None):
         if all ( not isinstance(data,x) for x in list(get_supported_types()) + [list] ):
             raise ValueError("Unsupported type %s" % type(data))
-        if parent is not None:
-            if isinstance(parent,list):
-                # temporary type (list etc.) so go to the first typed parent
-                self.parent = find_known_parent(parent)
-            elif all ( not isinstance(parent,x) for x in get_supported_types() ):
-                raise ValueError("Unsupported parent type %s" % type(parent))
-            else:
-                self.parent = parent
-        else:
-            self.parent = None
+        
+        self._parent1 = parent1
+        self._parent2 = parent2
         
         self._data =data
         self._output = [{'output':self._data.get_data(),'new':True}]
-        
+    
+    def assign_output_properties(self,rule,**inputs):                
+        # output is not changed
+        self._output[-1]['rule']=rule
+        self._output[-1]['inputs']={**{'state':self.get_output()} , **inputs}
+            
     def set_output(self,rule,**kwargs):
         old_output = self.get_output()
-
+        print(rule.__name__)
         new_output = rule()(node=self,**kwargs)
         
         if isinstance(new_output,dict):
@@ -160,25 +189,16 @@ class Node:
     def get_output(self):
         return self._output[-1]['output']
     
+    def get_parent1 (self):
+        return self._parent1
+  
+    def get_parent2 (self):
+        return self._parent2
 
-def is_known_type(nd):
-    return any ( isinstance(nd,x) for x in get_supported_types())
 
 
 def get_supported_types ():
     return (Suffix,It,Dhaatu)
-
-def find_known_parent(nd):
-    # return parent of Node that is not of a known type
-    if nd is None:
-        return None
-    
-    if is_known_type(nd):
-        return nd
-    else:
-        return find_known_parent(nd.parent)
-
-
 
 
 def ach():
@@ -248,7 +268,7 @@ def Xtu():
 
 
 def unclassified_pratyayaaH():
-    return ('sich','chli','shap','taas','sya')
+    return ('sNcch','chlNc','shap','taas','sya','aXt')
 def san_pratyayaaH():
     return ("san","kyach","kaamyach","kyaNg","kyaXsh",
             "kvip","Nnich","yaNg","yak","aaya",

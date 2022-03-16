@@ -1,4 +1,5 @@
-from ..common_definitions import Suffix,Node, Dhaatu, ach, hal
+from ..common_definitions import Suffix,Node, Dhaatu, ach, hal, find_eldest_parent1_of_condition, find_eldest_parent2_of_condition
+
 class ataekahalmadhyeanaadeshaaderliXti_6041200:
     def __init__(self):
         self._types={'node':['stateupdate'],'suffix_node':[Suffix,'literal','lakaara']}
@@ -10,7 +11,7 @@ class ataekahalmadhyeanaadeshaaderliXti_6041200:
         if suffix_node._data._lakaara == 'liXt':
             applied_rules= [int(x['rule'].__name__.split('_')[-1]) for x in node._output if 'rule' in x]
             if 601008 in applied_rules :
-                convert_e = lambda x : x if x not in ('a','aa',) else 'e'        
+                convert_e = lambda x : x if x not in ('a','aa',) else 'e'
                 if len([x['output'] for x in node._output if 'new' in x and x['new']]) == 1: # there has been no adesha to anga
                     if node.get_output()[-1] not in ach() and node.get_output()[-2] in ach() : # asaMyoga => kit
                         return node.get_output()[:-2] + [convert_e(node.get_output()[-2])] + node.get_output()[-1:]   
@@ -79,6 +80,33 @@ class echoayavaayaavaH_6010750:
             
         return node_output
 
+
+
+class luNglaNglRiNgkShvaXdudaattaH_6040710:
+    def __init__(self):
+        self._types={'dhaatu_node':[Dhaatu],'suffix_node':[Suffix,'literal','lakaara']}
+        self._ruletype=['prepend']
+        
+    def __call__(self,dhaatu_node,suffix_node):
+        e1=find_eldest_parent1_of_condition(suffix_node,lambda x : isinstance(x ,Node) and isinstance(x._data,Suffix) and x._data._lakaara in ('luNg','laNg','lRiNg') )
+        e2=find_eldest_parent2_of_condition(suffix_node,lambda x : isinstance(x ,Node) and isinstance(x._data,Suffix) and x._data._lakaara in ('luNg','laNg','lRiNg') )
+
+        if e1 is None:
+            if e2 is None :
+                return []
+            else :
+                effective_suffix_node = e2
+        else:
+            effective_suffix_node = e1
+            
+        if isinstance(dhaatu_node ._data,Dhaatu) and \
+            isinstance(effective_suffix_node._data,Suffix) :
+                if effective_suffix_node._data._lakaara in ('luNg','laNg','lRiNg') and \
+                    int(dhaatu_node._output[-1]['rule'].__name__.split("_")[-1]) !=6040710 :
+                        #raise ValueError("aXt needs to be checked in dhaatu-nodes modification (while prepending)")
+                        return Suffix("aXt")
+        return []
+  
 class bhuvovugluNgliXtoH_6040880:
     def __init__(self):
         self._types={'node':[Dhaatu],'suffix_node':[Suffix,'literal','lakaara']}
@@ -91,8 +119,7 @@ class bhuvovugluNgliXtoH_6040880:
     
         if isinstance(node._data,Dhaatu) and node.get_output()==["bh","uu"] \
             and ( suffix_node._data._lakaara in ('luNg','liXt') or suffix_node._data._suffix[0] in ach()):
-            return ['bh','uu','v']
-            
+            return ['bh','uu','v']            
     
             
         return  node.get_output()

@@ -81,10 +81,16 @@ class lashakvataddhite_1030080:
     
 class upadesheajanunaasikait_1030020:
     def __init__(self):
-        self._types={'aadesha':['literal']}
-    def __call__(self,aadesha):
-        apply_rule = lambda x: x[0:-1] if x[-1] in anunaasika() or x[-1] in ach()  else x   
-        return apply_rule(aadesha)
+        self._types={'node':['literal']}
+    def __call__(self,node):
+        if not isinstance(node,Node):
+            raise ValueError("Must be of Node type")
+        suffix = node._data
+        if not isinstance(suffix,Suffix):
+            raise ValueError("Must be of Suffix type")
+        #ommitted condition x[-1] in ach()  since it is too general
+        apply_rule = lambda x: x[0:-1] if x and (x[-1] in anunaasika() ) else x   
+        return apply_rule(node.get_output())
 
     
 class yachibham_1040180:

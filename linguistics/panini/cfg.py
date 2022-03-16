@@ -1,6 +1,7 @@
 from collections import OrderedDict
 
 from sutras.common_definitions import *
+import re
 from functools import reduce
 from pprint import pprint
 import inspect
@@ -30,8 +31,12 @@ to default aardhadhaatukaH
 """
 
 def get_sutras_for_module (j):
-    return [ (float(re.search('([0-9]+_*[0-9]*)$',x).group(1)),getattr(j,x)) for x in dir(j) if not x.startswith('_')  and re.search('[A-Za-z]*[0-9]+',x)]
-    
+    res=[]
+    for x in dir(j) :        
+         if not x.startswith('_')  and re.search('[0-9]+$',x):
+             print(x)
+             res.append((float(re.search('([0-9]+_*[0-9]*)$',x).group(1)),getattr(j,x)))
+    return res
 
 def get_sutras_ordered ():    
     all_sutras = reduce(lambda x , y : x + get_sutras_for_module (y) , [a1,a2,a3,a4,a5,a6,a7,a8],[]) 
@@ -43,9 +48,13 @@ def transformation_sutras():
           8010150, 8020660]
     return sorted(float(x) for x in ll)
 
+
+def prepend_sutras():
+    return [6040710]
+
 def insertion_sutras():
 #   to be considered: 601008
-    ll=[3010680,3010330,7041140]
+    ll=[3010460,3010680,3010330,7041140]
     return sorted(float(x) for x in ll)
 
 def apply_transformation(transformation_rule,new_expr):
@@ -73,17 +82,8 @@ def apply_transformation(transformation_rule,new_expr):
             
                     
     return new_expr
-
             
             
-def pick_last_dhaatu(nodes):
-    for i,x in enumerate(nodes):        
-        if isinstance(x._data,Dhaatu):
-            return i
-        elif not isinstance(x._data,It):
-            raise RuntimeError("Must be either It or Dhaatu")
-            
-    raise RuntimeError("Dangling Daatu")
     
 def apply_dhaatu_lopa(dhaatu_node):
     if not isinstance(dhaatu_node,Node):
@@ -117,7 +117,7 @@ def apply_lopa(suffix_node):
     if not isinstance(suffix_node._data,Suffix):
         raise ValueError("Need Suffix")
     MAX_TIMES=10000
-    lopa_functions = [lashakvataddhite_1030080, aadirNciXtuXdavaH_1030050, halantyam_1030030, chuXtuu_103070]
+    lopa_functions = [lashakvataddhite_1030080, aadirNciXtuXdavaH_1030050, halantyam_1030030, chuXtuu_103070,upadesheajanunaasikait_1030020]
     
     for lopafunc in  lopa_functions :
         not_done=True
@@ -131,13 +131,35 @@ def apply_lopa(suffix_node):
                     
                 
     for pos in reversed(new_inserts):
-        new_expr.insert(pos,Node(new_inserts[pos],parent=None))
+        new_expr.insert(pos,Node(new_inserts[pos],parent1=None))
+    return new_expr
+
+
+def apply_prepend(prepend_rule,new_expr):
+    #TODO: trace history of insertion by modifying the output of both sides of the insertion
+    new_inserts=OrderedDict()
+    for i in range(1,len(new_expr)):
+        if isinstance(new_expr[i]._data,Suffix):
+            # reducing expression with combination
+            # this involves appending plain-strings (that cannot be reduced further)
+            sig_params = inspect.signature(prepend_rule.__call__).parameters
+            if 'dhaatu_node' in sig_params :         
+                to_prepend = prepend_rule()(dhaatu_node=new_expr[i-1],suffix_node=new_expr[i])
+                if to_prepend :
+                    new_inserts[i-1]={'node_data':to_prepend ,'input_indices':(i-1,i),'rule':prepend_rule}
+                
+    for pos in reversed(new_inserts):
+        dat=new_inserts[pos]
+        new_node = Node(dat['node_data'],parent1=new_expr[dat['input_indices'][0]],parent2=new_expr[dat['input_indices'][1]])
+        new_node.assign_output_properties(rule=dat['rule'], dhaatu_node=new_node.get_parent1(),suffix_node=new_node.get_parent2())
+        new_expr[pos].assign_output_properties(rule=dat['rule'], dhaatu_node=new_node.get_parent1(),suffix_node=new_node.get_parent2())
+        new_expr.insert(pos,new_node)
     return new_expr
 
 def apply_insertion(insertion_rule, new_expr):
     #TODO: trace history of insertion by modifying the output of both sides of the insertion
     new_inserts=OrderedDict()
-    for i in range(0,len(new_expr)):
+    for i in range(1,len(new_expr)):
         if isinstance(new_expr[i]._data,Suffix):
             # reducing expression with combination
             # this involves appending plain-strings (that cannot be reduced further)
@@ -148,7 +170,9 @@ def apply_insertion(insertion_rule, new_expr):
                     new_inserts[i]=to_insert 
                 
     for pos in reversed(new_inserts):
-        new_expr.insert(pos,Node(new_inserts[pos],parent=None))
+        parent1 = new_expr[pos-1]
+        parent2 = new_expr[pos]
+        new_expr.insert(pos,Node(new_inserts[pos],parent1=parent1,parent2=parent2))
     return new_expr
 
 
@@ -185,10 +209,14 @@ def process_list(expr):
        dhaatu_node  = new_expr[dhaatu_index ]
        new_expr[dhaatu_index ] = apply_dhaatu_lopa(dhaatu_node  )
       
-    # apply insertions and lopa
+    # apply insertions
     for insertion_sutra_id in insertion_sutras():
         new_expr = apply_insertion(all_sutras[insertion_sutra_id],new_expr)
-       
+      
+        
+    # apply insertions
+    for prepend_sutra_id in prepend_sutras():
+        new_expr = apply_prepend(all_sutras[prepend_sutra_id],new_expr)
     # apply transformations until there is no change in the expression
     for transformation_ruleid in transformation_sutras():        
         new_expr = apply_transformation(all_sutras[transformation_ruleid],new_expr)
@@ -198,20 +226,20 @@ def process_list(expr):
 def test_siddhis ():
     output_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  process_until_finish(expr), []))
     
-    assert output_string ([Node(Dhaatu(parse_string("bhajNc")),parent=None),Node(Suffix("ghaNc"),parent=None)]) == "bhaaga"
-    assert output_string ([Node(Dhaatu(parse_string("NniiNc")),parent=None),Node(Suffix("Nnvul"),parent=None)]) == "naayaka"
-    assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tip",lakaara='laXt'),parent=None)]) == "bhavati"
-    assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tas",lakaara='laXt'),parent=None)]) == "bhavata"
-    assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("mip",lakaara='laXt'),parent=None)]) == "bhavaami"
-    assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='luXt'),parent=None)]) == "paXthitaa"
-    #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='liXt'),parent=None)]) == "papaaXtha"
-    #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tas",lakaara='liXt'),parent=None)]) == "peXthatuH"
+    assert output_string ([Node(Dhaatu(parse_string("bhajNc")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]) == "bhaaga"
+    assert output_string ([Node(Dhaatu(parse_string("NniiNc")),parent1=None),Node(Suffix("Nnvul"),parent1=None)]) == "naayaka"
+    assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tip",lakaara='laXt'),parent1=None)]) == "bhavati"
+    assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tas",lakaara='laXt'),parent1=None)]) == "bhavata"
+    assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("mip",lakaara='laXt'),parent1=None)]) == "bhavaami"
+    assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='luXt'),parent1=None)]) == "paXthitaa"
+    #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='liXt'),parent1=None)]) == "papaaXtha"
+    #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]) == "peXthatuH"
     # liNg is aardhadhaatuk in aashir-liNg
     
 F=False
 T=True
 
-if T:
+if F:
     test_siddhis ()
     #print("Test")
     #f=Functor()
@@ -219,17 +247,17 @@ if T:
     
 else:   
     
-    expression=[Node(Dhaatu(parse_string("bhuu")),parent=None),Node(Suffix("tip",lakaara='laXt'),parent=None)]
-    #expression=[Node(Dhaatu(parse_string("paXthNc")),parent=None),Node(Suffix("tip",lakaara='lRiXt'),parent=None)]
+    expression=[Node(Dhaatu(parse_string("chiNc")),parent1=None),Node(Suffix("tip",lakaara='luNg'),parent1=None)]
+    #expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='lRiXt'),parent1=None)]
     
     # sorting order is increasing in general but can be superseded by nitya condition (if nitya occurs in a later sutra then that later sutra takes advantage) 
     # which in turn would be superseded by the minimal condition criteria (antaraNga) 
     # The only exception is when there is a an exception that prevents application
     
-    print("NEXT: 6040710- luNglaNglRiNgkXshvaXdudaataH")
+    print("NEXT: luNglaNglRiNgkXshvaXdudaataH has prepending issue because we don't trace insertion/prepending of vikaraNna histories. This should allow the immediate dhaatu in context.")
     # for paXtheta - we need to have for liNg : yaasuXtparasmaipadeXshuudaatto Ngichcha 3.4.103 and then ato yeyaH (because of a-ending paXtha after shap)
-    print("PENDING : murdhanyaadesha in pXthishyati and eruH")
-    print("PENDING : Whether a rule if applicable or not is different from whether it would have effect or not. Physical equality and logical equality are different. Applicability should be handled as preconditions - or a context matching.")
+    print("PENDING : murdhanyaadesha in paXthiXshyati and eruH")
+    
     
     
     processed_expr=(process_until_finish(expression))
@@ -237,8 +265,11 @@ else:
     output_processed_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  expr, []))
     print(output_processed_string (processed_expr))
     print("DONE")
-    
+    print("===")
+    pprint(processed_expr[0]._output)
+    print("===")
     pprint(processed_expr[1]._output)
     
     
-    
+    print("===")
+    pprint(processed_expr[2]._output)
