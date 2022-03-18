@@ -871,7 +871,7 @@ combine_group_collect_into_quality_df<-function(groupcollectinput_df)
 {
   categories <- unique(groupcollectinput_df$category)
 
-  rename_quality_columns <- c("protein"="lnVprotein","household"="lnVhousehold","densefoods"="lnVdensefoods","transport"="lnVtransport",'nonfresh'='lnVnonfresh','complements'='lnVcomplements','fruitsveg'='lnVfruitsveg','energy'='lnVenergy')
+  rename_quality_columns <- c("protein"="lnV_protein","household"="lnV_household","densefoods"="lnV_densefoods","transport"="lnV_transport",'nonfresh'='lnV_nonfresh','complements'='lnV_complements','fruitsveg'='lnV_fruitsveg','energy'='lnV_energy')
   rename_minprice_columns <- c("protein"="lpprotein","household"="lphousehold","densefoods"="lpdensefoods","transport"="lptransport",'nonfresh'='lpnonfresh','complements'='lpcomplements','fruitsveg'='lpfruitsveg','energy'='lpenergy')
   rename_weight_columns <- c("protein"="w_protein","household"="w_household","densefoods"="w_densefoods","transport"="w_transport",'nonfresh'='w_nonfresh','complements'='w_complements','fruitsveg'='w_fruitsveg','energy'='w_energy')
   
