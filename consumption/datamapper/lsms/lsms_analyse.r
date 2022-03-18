@@ -762,64 +762,128 @@ all_asset_scores <- function(years,dirprefix,fu,ln,ll){
   return(out)
 }
 
+get_group_collect_for_year<- function(year,odat,cdat) {
+  if (!is.element(year,c(2010,2012,2014))){
+    stop("Unsupported year")
+  }
+  
+  if (missing(odat)){
+    odat <- ll@load_ohs_file(year = year, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
+  }
+  
+  
+  if (missing(cdat)){
+    cdat <- ll@load_diary_file(dirprefix = "../",year = year, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  }
+  
+  g_densefood <- ll@group_collect(year = year, dirprefix = "../",categoryName = "densefoods",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = odat, hh = cdat, basis = "quality", use_market_prices = T, 
+                                  ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  g_transport <- ll@group_collect(year = year, dirprefix = "../",categoryName = "transport",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = odat, hh = cdat, basis = "quality", use_market_prices = T, 
+                                  ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  g_household <- ll@group_collect(year = year, dirprefix = "../",categoryName = "household",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = odat, hh = cdat, basis = "quality", use_market_prices = T, 
+                                  ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  g_nonfresh <- ll@group_collect(year = year, dirprefix = "../",categoryName = "nonfresh",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = odat, hh = cdat, basis = "quality", use_market_prices = T, 
+                                 ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  g_complements <- ll@group_collect(year = year, dirprefix = "../",categoryName = "complements",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = odat, hh = cdat, basis = "quality", use_market_prices = T, 
+                                    ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  g_fruitsveg <- ll@group_collect(year = year, dirprefix = "../",categoryName = "fruitsveg",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = odat, hh = cdat, basis = "quality", use_market_prices = T, 
+                                  ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  g_protein <- ll@group_collect(year = year, dirprefix = "../",categoryName = "protein",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = odat, hh = cdat, basis = "quality", use_market_prices = T, 
+                                ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  g_energy <- ll@group_collect(year = year, dirprefix = "../",categoryName = "energy",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = odat, hh = cdat, basis = "quality", use_market_prices = T, 
+                               ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  r <- data.frame()
+  r <- rbind(r,g_densefood)
+  r <- rbind(r,g_transport)
+  r <- rbind(r,g_household)
+  r <- rbind(r,g_nonfresh)
+  r <- rbind(r,g_complements)
+  r <- rbind(r,g_fruitsveg)
+  r <- rbind(r,g_protein)
+  r <- rbind(r,g_energy)
+  
+ 
+  
+  return(r)
+  
+}
+
+pick_household_head_columns <- function(odat){
+  general_columns <- c( "lightingfuel","expensiveregion")
+  
+  hsizesdf <- ddply(subset(unique(odat[,c("hhid","personid","region")]),!is.na(region)),.(hhid),summarise,hsize=length(personid))
+  hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age",
+                     "education_rank"="hh_education_rank","occupation_rank"="hh_occupation_rank",
+                     "litlang"="hh_litlang")
+  hheaddat <- plyr::rename(subset(odat,household_status==1)[,c(general_columns,names(hhead_columns))],hhead_columns )
+  hdat <- merge(hheaddat,hsizesdf ,all.x=T,by=c("hhid"))
+  return(hdat)
+}
+
+get_quality_agg_df <- function(){
+  
+  o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer)
+  g2010 <- get_group_collect_for_year(year = 2010,odat = o2010)
+  agg2010 <- combine_group_collect_into_quality_df(g2010)
+  h2010<- pick_household_head_columns(o2010)
+  aggh2010 <- merge(agg2010,h2010,by=c("hhid"),all.x=T)
+  #############
+  
+  o2012 <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ln=lsms_normalizer)
+  g2012 <- get_group_collect_for_year(year = 2012,odat=o2012)
+  agg2012 <- combine_group_collect_into_quality_df(g2012)
+  h2012<- pick_household_head_columns(o2012)
+  aggh2012 <- merge(agg2012,h2012,by=c("hhid"),all.x=T)
+  #############
+  
+  o2014 <- ll@load_ohs_file(year = 2014, dirprefix = "../",fu=fu, ln=lsms_normalizer)
+  g2014 <- get_group_collect_for_year(year = 2014,odat=o2014)
+  agg2014 <- combine_group_collect_into_quality_df(g2014)
+  h2014<- pick_household_head_columns(o2014)
+  aggh2014 <- merge(agg2014,h2014,by=c("hhid"),all.x=T)
+  #############
+  
+  allg <- data.frame()
+  allg<- rbind(allg,aggh2010%>% mutate(year=2010))
+  allg<- rbind(allg,aggh2012%>% mutate(year=2012))
+  allg<- rbind(allg,aggh2014%>% mutate(year=2014))
+  
+  asset_mapping <- all_asset_mtms(T)
+  ma <- merge_asset_mtms_with_prepared_quality_data(allg = allg,m = asset_mapping)
+  return(ma)
+}
 
 run_test <- function() {
-  
-  print(unique(ln@lsms_groups_qualitybased_2010_2012()$category))
-  if (F){
-    g_densefood <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "densefoods",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
-                                    ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
-    
-    g_transport <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "transport",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
-                                    ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
-    
-    g_household <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "household",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
-                                    ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
-    
-    g_nonfresh <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "nonfresh",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
-                                   ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
-    
-    g_complements <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "complements",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
-                                   ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
-  
-    g_fruitsveg <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "fruitsveg",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
-                                      ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
-    
-    g_protein <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "protein",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
-                                    ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
-    
-    r <- data.frame()
-    r <- rbind(r,g_densefood)
-    r <- rbind(r,g_transport)
-    r <- rbind(r,g_household)
-    r <- rbind(r,g_nonfresh)
-    r <- rbind(r,g_complements)
-    r <- rbind(r,g_fruitsveg)
-    r <- rbind(r,g_protein)
-    
-  }
-  
-  
-  example_df = data.frame(hhid=c('B','C'),category=c('protein','household'),quality=c(.2,NA),min_price=c(1,2),tot_categ_exp=c(10,20))
+  ma <- get_quality_agg_df()
+  #example_df = data.frame(hhid=c('B','C'),category=c('protein','household'),quality=c(.2,NA),min_price=c(1,2),tot_categ_exp=c(10,20))
 
-  
-  }
+}
 
 combine_group_collect_into_quality_df<-function(groupcollectinput_df)
 {
-  categories <- unique(r$category)
+  categories <- unique(groupcollectinput_df$category)
 
-  rename_quality_columns <- c("protein"="lnVprotein","household"="lnVhousehold")
-  rename_minprice_columns <- c("protein"="lpprotein","household"="lphousehold")
-  rename_weight_columns <- c("protein"="lpprotein","household"="lphousehold")
+  rename_quality_columns <- c("protein"="lnVprotein","household"="lnVhousehold","densefoods"="lnVdensefoods","transport"="lnVtransport",'nonfresh'='lnVnonfresh','complements'='lnVcomplements','fruitsveg'='lnVfruitsveg','energy'='lnVenergy')
+  rename_minprice_columns <- c("protein"="lpprotein","household"="lphousehold","densefoods"="lpdensefoods","transport"="lptransport",'nonfresh'='lpnonfresh','complements'='lpcomplements','fruitsveg'='lpfruitsveg','energy'='lpenergy')
+  rename_weight_columns <- c("protein"="w_protein","household"="w_household","densefoods"="w_densefoods","transport"="w_transport",'nonfresh'='w_nonfresh','complements'='w_complements','fruitsveg'='w_fruitsveg','energy'='w_energy')
+  
+  
   if (length(setdiff(categories,names(rename_quality_columns)))>0){
-    stop("Unsupported categories")
+    stop(paste("Unsupported categories:",toString(setdiff(categories,names(rename_quality_columns)))))
   }
-  if (length(setdiff(categories,names(rename_quality_columns)))>0){
-    stop("Unsupported categories")
+  if (length(setdiff(categories,names(rename_minprice_columns)))>0){
+    stop(paste("Unsupported categories:",toString(setdiff(categories,names(rename_minprice_columns)))))
   }
-  if (length(setdiff(categories,names(rename_quality_columns)))>0){
-    stop("Unsupported categories")
+  if (length(setdiff(categories,names(rename_weight_columns)))>0){
+    stop(paste("Unsupported categories:",toString(setdiff(categories,names(rename_weight_columns)))))
   }
   
   groupcollect_df <- groupcollectinput_df %>%  mutate (lp_min_price=log(min_price))
@@ -834,6 +898,8 @@ combine_group_collect_into_quality_df<-function(groupcollectinput_df)
   
   results_df <- merge(totexp_df,lnV_df,all.x=T)
   results_df <- merge(results_df,weights_df,by=c('hhid'))
+  results_df <- merge(results_df,min_prices_df,by=c('hhid'))
+  results_df <- results_df %>% mutate(ln_tot_exp = log(total_expenditure+1e-7))
   return(results_df)
   
 }
