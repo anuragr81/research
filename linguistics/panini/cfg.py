@@ -265,11 +265,12 @@ else:
     output_processed_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  expr, []))
     print(output_processed_string (processed_expr))
     print("DONE")
-    print("===")
-    pprint(processed_expr[0]._output)
-    print("===")
-    pprint(processed_expr[1]._output)
-    
-    
-    print("===")
-    pprint(processed_expr[2]._output)
+    if F:
+        print("===")
+        pprint(processed_expr[0]._output)
+        print("===")
+        pprint(processed_expr[1]._output)
+        
+        
+        print("===")
+        pprint(processed_expr[2]._output)

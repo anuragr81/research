@@ -764,9 +764,42 @@ all_asset_scores <- function(years,dirprefix,fu,ln,ll){
 
 
 run_test <- function() {
-  g <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "densefoods",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
-                        ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F)
+  
+  print(unique(ln@lsms_groups_qualitybased_2010_2012()$category))
+  if (F){
+    g_densefood <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "densefoods",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
+                                    ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+    
+    g_transport <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "transport",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
+                                    ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+    
+    g_household <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "household",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
+                                    ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+    
+    g_nonfresh <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "nonfresh",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
+                                   ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+    
+    g_complements <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "complements",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
+                                   ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+    g_fruitsveg <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "fruitsveg",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
+                                      ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+    
+    g_protein <- ll@group_collect(year = 2010, dirprefix = "../",categoryName = "protein",fu = fu, ln =lsms_normalizer, lgc = lgc, ohs = o2010, hh = c2010, basis = "quality", use_market_prices = T, 
+                                    ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+    
+    r <- data.frame()
+    r <- rbind(r,g_densefood)
+    r <- rbind(r,g_transport)
+    r <- rbind(r,g_household)
+    r <- rbind(r,g_nonfresh)
+    r <- rbind(r,g_complements)
+    r <- rbind(r,g_fruitsveg)
+    r <- rbind(r,g_protein)
+    
+    }
 }
+
 analyse_estimation_df <- function(res,use_nu) {
   
   # The age-wise decomposition of regression results is only to demonstrate that 
