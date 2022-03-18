@@ -22,6 +22,11 @@ constraint define 61 [qfruitsveg]lpenergy=[qenergy]lpfruitsveg
 
 constraint define 70 [qprotein]lpenergy=[qenergy]lpprotein
 
+constraint define 79 [qnonfresh]lpnonfresh  +[qnonfresh]lpdensefoods +[qnonfresh]lpcomplements +[qnonfresh]lpfruitsveg +[qnonfresh]lpprotein +[qnonfresh]lpenergy = 0
+
+* Adding up won't be applied (because of singularity problems) as it is indirectly implied. Only homogeneity and symmetry are applied and mentioned.
+
+
 global demand1 "(qnonfresh: w_nonfresh  ln_tot_exp hh_education_rank hh_age hh_occupation_rank hsize transport_assets_mtm household_assets_mtm electric_assets_mtm expensiveregion lpnonfresh lpdensefoods  lpcomplements  lpfruitsveg  lpprotein lpenergy )"
 global demand2 "(qVnonfresh: lnV_nonfresh  ln_tot_exp hh_education_rank hh_age hh_occupation_rank hsize transport_assets_mtm household_assets_mtm electric_assets_mtm expensiveregion lpnonfresh lpdensefoods  lpcomplements  lpfruitsveg  lpprotein lpenergy )"
 global demand3 "(qdensefoods: w_densefoods  ln_tot_exp hh_education_rank hh_age hh_occupation_rank hsize transport_assets_mtm household_assets_mtm electric_assets_mtm expensiveregion lpnonfresh lpdensefoods  lpcomplements  lpfruitsveg  lpprotein lpenergy )"
@@ -36,5 +41,5 @@ global demand11 "(qenergy: w_energy  ln_tot_exp hh_education_rank hh_age hh_occu
 global demand12 "(qhousehold: w_household  ln_tot_exp hh_education_rank hh_age hh_occupation_rank hsize transport_assets_mtm household_assets_mtm electric_assets_mtm expensiveregion lpnonfresh lpdensefoods  lpcomplements  lpfruitsveg  lpprotein lpenergy )"
 
 
-sureg $demand1 $demand2 $demand3 $demand4 $demand5 $demand6 $demand7 $demand8 $demand9 $demand10 $demand11 $demand12, const(2 4 6 8 10 25 27 29 31 44 46 48 59 61 ) isure corr
+sureg $demand1 $demand2 $demand3 $demand4 $demand5 $demand6 $demand7 $demand8 $demand9 $demand10 $demand11 $demand12, const(2 4 6 8 10 25 27 29 31 44 46 48 59 61 70 79 ) isure corr
 
