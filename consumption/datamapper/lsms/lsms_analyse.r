@@ -797,9 +797,46 @@ run_test <- function() {
     r <- rbind(r,g_fruitsveg)
     r <- rbind(r,g_protein)
     
-    }
-}
+  }
+  
+  
+  example_df = data.frame(hhid=c('B','C'),category=c('protein','household'),quality=c(.2,NA),min_price=c(1,2),tot_categ_exp=c(10,20))
 
+  
+  }
+
+combine_group_collect_into_quality_df<-function(groupcollectinput_df)
+{
+  categories <- unique(r$category)
+
+  rename_quality_columns <- c("protein"="lnVprotein","household"="lnVhousehold")
+  rename_minprice_columns <- c("protein"="lpprotein","household"="lphousehold")
+  rename_weight_columns <- c("protein"="lpprotein","household"="lphousehold")
+  if (length(setdiff(categories,names(rename_quality_columns)))>0){
+    stop("Unsupported categories")
+  }
+  if (length(setdiff(categories,names(rename_quality_columns)))>0){
+    stop("Unsupported categories")
+  }
+  if (length(setdiff(categories,names(rename_quality_columns)))>0){
+    stop("Unsupported categories")
+  }
+  
+  groupcollect_df <- groupcollectinput_df %>%  mutate (lp_min_price=log(min_price))
+  
+  min_prices_df <- groupcollect_df[,c('hhid','category','lp_min_price')] %>% pivot_wider(names_from='category',values_from='lp_min_price') %>% plyr::rename(rename_minprice_columns)  
+  totexp_df <- ddply(groupcollect_df[,c('hhid','category','tot_categ_exp')],.(hhid),summarise,total_expenditure=sum(tot_categ_exp))
+  
+  lnV_df <- groupcollect_df[,c('hhid','category','quality')] %>% pivot_wider(names_from='category',values_from='quality') %>% plyr::rename(rename_quality_columns)
+  
+  weights_df <- (merge(groupcollect_df,totexp_df,all.y=T) %>% mutate(w_categ=tot_categ_exp/total_expenditure))[,c("hhid",'category',"w_categ")]
+  weights_df <- weights_df %>% pivot_wider(names_from='category',values_from='w_categ') %>% plyr::rename(rename_weight_columns)
+  
+  results_df <- merge(totexp_df,lnV_df,all.x=T)
+  results_df <- merge(results_df,weights_df,by=c('hhid'))
+  return(results_df)
+  
+}
 analyse_estimation_df <- function(res,use_nu) {
   
   # The age-wise decomposition of regression results is only to demonstrate that 
