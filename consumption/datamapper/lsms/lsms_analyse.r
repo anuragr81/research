@@ -810,9 +810,12 @@ get_group_collect_for_year<- function(year,odat,cdat) {
   r <- rbind(r,g_protein)
   r <- rbind(r,g_energy)
   
- 
+  pricedat = unique(subset(merge(r,subset(odat,household_status==1)[,c("hhid","region","district")]),by=c("hhid")))[,c("hhid","region","district","category","min_price","tot_categ_exp","quality")] 
+  # collect min-price from other households in the same region-district
+  lppricedat = unique(ddply(unique(pricedat[,c("region","district","category","min_price")])%>% mutate(lp_min_price=log(min_price)),.(region,district,category),lp_min_price=unique(lp_min_price)))[,c("region","district","category","lp_min_price")]
   
-  return(r)
+  k <- (merge(pricedat,lppricedat,by=c("region","district","category"),all.y=T)) %>% mutate(min_price=NULL)
+  return(k)
   
 }
 
@@ -864,12 +867,16 @@ get_quality_agg_df <- function(){
 run_test <- function() {
   ma <- get_quality_agg_df()
   #example_df = data.frame(hhid=c('B','C'),category=c('protein','household'),quality=c(.2,NA),min_price=c(1,2),tot_categ_exp=c(10,20))
-
+  k <- merge(g2012,unique(subset(o2012[,c("hhid","region","district","household_status"),],household_status==1)),by=c("hhid"))
+  
+  subset(merge(groupcollect_df,subset(o2010,household_status==1)[,c("hhid","region","district")],by=c("hhid")))
+  
+  
 }
 
-combine_group_collect_into_quality_df<-function(groupcollectinput_df)
+combine_group_collect_into_quality_df<-function(groupcollect_df)
 {
-  categories <- unique(groupcollectinput_df$category)
+  categories <- unique(groupcollect_df$category)
 
   rename_quality_columns <- c("protein"="lnV_protein","household"="lnV_household","densefoods"="lnV_densefoods","transport"="lnV_transport",'nonfresh'='lnV_nonfresh','complements'='lnV_complements','fruitsveg'='lnV_fruitsveg','energy'='lnV_energy')
   rename_minprice_columns <- c("protein"="lpprotein","household"="lphousehold","densefoods"="lpdensefoods","transport"="lptransport",'nonfresh'='lpnonfresh','complements'='lpcomplements','fruitsveg'='lpfruitsveg','energy'='lpenergy')
@@ -886,9 +893,9 @@ combine_group_collect_into_quality_df<-function(groupcollectinput_df)
     stop(paste("Unsupported categories:",toString(setdiff(categories,names(rename_weight_columns)))))
   }
   
-  groupcollect_df <- groupcollectinput_df %>%  mutate (lp_min_price=log(min_price))
   
-  min_prices_df <- groupcollect_df[,c('hhid','category','lp_min_price')] %>% pivot_wider(names_from='category',values_from='lp_min_price') %>% plyr::rename(rename_minprice_columns)  
+  
+  min_prices_df <- unique(groupcollect_df[,c('region',"district",'category','lp_min_price')]) %>% pivot_wider(names_from='category',values_from='lp_min_price') %>% plyr::rename(rename_minprice_columns)  
   totexp_df <- ddply(groupcollect_df[,c('hhid','category','tot_categ_exp')],.(hhid),summarise,total_expenditure=sum(tot_categ_exp))
   
   lnV_df <- groupcollect_df[,c('hhid','category','quality')] %>% pivot_wider(names_from='category',values_from='quality') %>% plyr::rename(rename_quality_columns)
@@ -898,7 +905,9 @@ combine_group_collect_into_quality_df<-function(groupcollectinput_df)
   
   results_df <- merge(totexp_df,lnV_df,all.x=T)
   results_df <- merge(results_df,weights_df,by=c('hhid'))
-  results_df <- merge(results_df,min_prices_df,by=c('hhid'))
+  hhid_loc <- (unique(groupcollect_df[,c("hhid","region","district")]))
+  results_df <- (merge(merge(hhid_loc,results_df,by=("hhid"),all.x=T),min_prices_df, by=c('region','district'), all.x=T))
+  
   results_df <- results_df %>% mutate(ln_tot_exp = log(total_expenditure+1e-7))
   return(results_df)
   
