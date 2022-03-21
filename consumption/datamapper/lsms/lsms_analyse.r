@@ -570,11 +570,20 @@ num_stars <- function(pgtz) {
   return ((as.numeric(pgtz)<.001)*3 + (as.numeric(pgtz)>=.001 & as.numeric(pgtz) < .01)*2 + (as.numeric(pgtz)>=.01 & as.numeric(pgtz) < .05)*1)
 }
 
-read_stata_aids_results_files <- function(f,skip_first,precision,split_size){
+read_stata_aids_results_files <- function(f,a,skip_first,precision,split_size){
   
   
   #a <- read.csv('c:/local_files/research/consumption/aidsresults9.csv')
-  a <- read.csv(f,header=TRUE)
+  if (missing(a)){
+    if (missing(f)){
+      print("Either a or f must be defined.")
+    } else{
+      a <- read.csv(f,header=TRUE)  
+    }
+    
+    
+  }
+  
   b <- a[,c("comm","var","coef","Pgtz")]
   bcoef <-t( b[,c("comm","var","coef")] %>% spread(var,coef))
   #write.csv(bcoef,'c:/temp/bcoef.csv')
@@ -867,9 +876,6 @@ get_quality_agg_df <- function(){
 run_test <- function() {
   ma <- get_quality_agg_df()
   #example_df = data.frame(hhid=c('B','C'),category=c('protein','household'),quality=c(.2,NA),min_price=c(1,2),tot_categ_exp=c(10,20))
-  k <- merge(g2012,unique(subset(o2012[,c("hhid","region","district","household_status"),],household_status==1)),by=c("hhid"))
-  
-  subset(merge(groupcollect_df,subset(o2010,household_status==1)[,c("hhid","region","district")],by=c("hhid")))
   
   
 }
@@ -1476,7 +1482,7 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   
   
   perception_columns <- c("life_perception"="hh_life_perception" , "finance_perception"="hh_finance_perception", "richness_perception"="hh_richness_perception","housing_perception"="hh_housing_perception","health_perception"="hh_health_perception")
-  hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang")
+  hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang","occupation"="hh_occupation")
 
   #total consumption
   relevant_fields <-c("hhid","region","district","ward","ea","isrural","expensiveregion","S","E","population","ypay","lnY")

@@ -3929,19 +3929,6 @@ ref{resultsSubAssets}
 
 \end_inset
 
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{resultsFoodCPIAllAssets}
-\end_layout
-
-\end_inset
-
 .
 \end_layout
 
@@ -4042,7 +4029,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="11" columns="2">
+<lyxtabular version="3" rows="10" columns="2">
 <features tabularvalignment="middle">
 <column alignment="left" valignment="top" width="2in">
 <column alignment="left" valignment="top" width="3.5in">
@@ -4189,7 +4176,7 @@ logarithm of sum of reported market-price of assets owned by the consumer
 \begin_layout Plain Layout
 
 \family typewriter
-educ_rank
+hh_education_rank
 \end_layout
 
 \end_inset
@@ -4222,29 +4209,6 @@ expensiveregion
 \begin_layout Plain Layout
 indicator variable specifying if the region is Dar-es-Salaam, Mbeya, Mwanza
  or Magharibi Unguja(Zanzibar)
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-transport_assets_mtm
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-logarithm of sum of reported market-price of transport-related assets owned
- by the consumer household
 \end_layout
 
 \end_inset
@@ -4389,24 +4353,95 @@ ref{resultsFoodCPIAllAssets}
 \end_inset
 
 .
- Here, the control for permanent income is the logarithm of the sum of total
- expenditure 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Systematic introduction of control variables]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The key control variable in AIDS regression is the permanent income measure.
+ As is suggested by the standard consumption theory
+\begin_inset CommandInset citation
+LatexCommand cite
+key "modiglianiutility1954,FriedmanConsumption1957"
+literal "false"
+
+\end_inset
+
+, the total household expenditures are meant to be related with the household’s
+ permanent income.
+ The logarithm of the total expenditure 
 \family typewriter
 \size footnotesize
 ln_tot_exp
 \family default
 \size default
-.
- The logarithm of base-price - which also serve as control variables - are
- the respective minima of local price in the commodity group and are represented
- with the variable starting with the prefix 
+ is thus used as the permanent income control in the analyses.
+ The standard AIDS formulation considers all the logarithm of all prices
+ as controls (see Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_lnV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), therefore the logarithm of base-prices - inferred as the respective minima
+ of local price in the commodity group - also serve as control variables.
+ These are represented as the variables starting with the prefix 
 \family typewriter
 \size footnotesize
 lp
 \family default
 \size default
--.
- Every commodity in the AIDS regression (see Equations 
+- (e.g.
+ 
+\family typewriter
+lpdensefoods, lpnonfresh, lpprotein 
+\family default
+etc.).
+ Recall that the base-price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ for every aggregate in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:base_price_structure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is simply the minimum price of the goods within the commodity group and
+ that the base-price depends on the locally observed market prices (at the
+ district level) rather than the unit-values (estimated by averaging expenditure
+ over a locality) for goods within a composite commodity aggregate.
+ Every composite commodity in the AIDS regression (see Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:AIDS_quality_w"
@@ -4420,58 +4455,104 @@ reference "eq:AIDS_quality_lnV"
 
 \end_inset
 
-) thus corresponds to an 
+) corresponds to an 
 \family typewriter
 \size footnotesize
 lp-
 \family default
 \size default
  variable.
- As the quality differences are ignored for the expenditure on transport
- and household commodities, the AIDS SUR equations use household-CPI and
- transport-CPI as prices for these commodity groups i.e.
+ Notice that the prices of other items in the commodity are incorporated
+ in the price-structure considered in the evaluation of quality.
+ For the elementary commodities of household and transport, we find that
+ the observed household-CPI and transport-CPI are collinear with the energy
+ prices and are thus not considered.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%(variable electric_assets_mtm representing the logarithm of total reported
+ costs of electrical assets based on the price they would sell for if they
+ were to be sold at the time of the interview by the consumer), 
+\end_layout
+
+\begin_layout Plain Layout
+
+% For the results discussed in Table 
+\backslash
+ref{resultsAllassets}, the variable all_assets_mtm represents the logarithm
+ of total cost that the asset would sell for if it were to be sold at the
+ time of the interview (price P_{t} reported by the consumer).
  
-\family typewriter
-\size footnotesize
-lphousehold
-\family default
-\size default
- and 
-\family typewriter
-\size footnotesize
-lptransport 
-\family default
-\size default
-(respectively).
- Other control variables that are used in the intercept of the AIDS SUR
- equations (see Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:AIDS_quality_w"
+\end_layout
 
 \end_inset
 
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:AIDS_quality_lnV"
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Systematic introduction of control variables - Demographic variables]
+ 
+\end_layout
 
 \end_inset
 
-) are 
+
+\end_layout
+
+\begin_layout Standard
+To consider if the quality consumed is significantly different across urban-asse
+t-ownership levels, we use the logarithm of electrical assets as one of
+ the control variables.
+ Since this variable is endogenous with the 
 \family typewriter
-consu
+ln_tot_exp
 \family default
- (number of members adjusted by age), 
-\family typewriter
-age
-\family default
- (age of the household-head), 
+, we use the occupation and education as instruments.
+ More specifically, the educational rank of the consumer is an ordered variable
+ inferred from the highest education level of the head of the household
+ (see Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{education_rank_tnz}
+\end_layout
+
+\end_inset
+
+) and the 
 \family typewriter
 occupation_rank
 \family default
- (an ordered variable inferred from the occupation of the head-household
- - see Table
+ is an ordered variable indicating an income-based rank inferred from the
+ occupation of the head-household (using the income
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The reason why income-data is not directly used to infer an income-rank
+ is that the data on income is a bit more sparse than that on occupation.
+ More specifically, only about a quarter of households surveyed have income
+ data available for them.
+\end_layout
+
+\end_inset
+
+ associated with occupations in the data see Table
 \series bold
  
 \series default
@@ -4488,100 +4569,57 @@ ref{occupation_rank_tn}
 
 \end_inset
 
-), 
-\family typewriter
-educ_rank
-\family default
- (an ordered variable inferred from the highest education level of the head
- of the household - see Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{education_rank_tnz}
+).
+ The argument for using these instrument is simply that higher food quality
+ in food is unlikely to be favoured by differences in occupations or education
+ levels.
+ While quality - in general - could be constrained due to occupational structure
+s in the economy, there are few reasons to think that purchases of food
+ could be influenced by one's occupation except through permanent income
+ measure.
+ 
 \end_layout
+
+\begin_layout Standard
+The two demographic variables (corresponding to the intercept of the AIDS
+ SUR equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
 
 \end_inset
 
-) and 
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_lnV"
+
+\end_inset
+
+) are 
+\family typewriter
+hsize
+\family default
+ (number of household members ) and 
+\family typewriter
+age
+\family default
+ (age of the household-head).
+ Whether the consumers reside in urban areas or not are considered with
+ a factor variable 
 \family typewriter
 expensiveregion
 \family default
  ( indicator variable for densely populated urban areas).
- 
-\end_layout
-
-\begin_layout Standard
-To explore the differences in quality relative long term asset ownership,
- the assets in the commodity groups household and transport are also used
- as control variables in the AIDS SUR equations.
- For the results discussed in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{resultsAllassets}
-\end_layout
-
-\end_inset
-
-, the variable 
-\family typewriter
-all_assets_mtm
-\family default
- represents the logarithm of total cost that the asset would sell for if
- it were to be sold at the time of the interview (price 
-\begin_inset Formula $P_{t}$
-\end_inset
-
- reported by the consumer).
- Inferring the energy quality with the indicator variable specifying electricity
- usage, we also use the variable 
+ Notice, the inference of higher quality in energy is not through as a dependent
+ variable but only through the indicator variable specifying electricity
+ usage - which we use the variable 
 \family typewriter
 has_electric 
 \family default
-(indicating whether the household has access to electricity or not) in the
- regressions.
- To assess the needs-unit of the household we use the total number of households
+for (indicating whether the household has access to electricity or not)
+ in the regressions.
  
-\begin_inset Formula $hsize$
-\end_inset
-
- as the control.
-\end_layout
-
-\begin_layout Standard
-The formulations for robustness checks discussed in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:RobustnessChecks"
-
-\end_inset
-
- also use variables based on the ownership of certain types of assets i.e.
- the electric assets (variable 
-\family typewriter
-electric_assets_mtm
-\family default
- representing the logarithm of total reported costs of electrical assets
- based on the price they would sell for if they were to be sold at the time
- of the interview by the consumer), the household-assets (variable 
-\family typewriter
-household_assets_mtm
-\family default
- representing the logarithm of total reported cost of the land or house
- owned by the consumer) and the transport assets ( 
-\family typewriter
-transport_assets_mtm
-\family default
- representing the logarithm of total cost of the car, motorcycle, bicycle
- and other means of conveyance).
 \end_layout
 
 \begin_layout Standard
@@ -4599,33 +4637,7 @@ ref{resultsAllassets}
 
 \end_inset
 
-, 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{resultsSubAssets}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{resultsFoodCPIAllAssets}
-\end_layout
-
-\end_inset
-
- - starting either with 
+- starting either with 
 \family typewriter
 \size footnotesize
 q
@@ -4701,38 +4713,7 @@ reference "tab:Groups"
 \end_layout
 
 \begin_layout Standard
-Recall that the base-price 
-\begin_inset Formula $P_{G}$
-\end_inset
-
- for every aggregate in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:base_price_structure"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- is simply the minimum price of the goods within the commodity group.
- Here, only the locally observed market prices (at the district level) rather
- than the unit-values (estimated by averaging expenditure over a locality)
- for goods within a composite commodity aggregate are used for the base-price
- computation.
- The expenditure on household and transportation commodity groups - on the
- other hand - are treated as if they were (each) just one commodity i.e.
- elementary commodities with no quality differences observed in the non-durable
- consumption within the commodity group.
- The sum of expenditure on clothing, soaps, cosmetics and other household
- goods appear as part of budget shares 
-\begin_inset Formula $w_{G}$
-\end_inset
-
- in the AIDS system of equation.
- As market -prices are not recorded for these goods in the survey, the CPI
- (base year 2010) for household goods and transportation as prices in the
- respective budget share regressions for household and transportation.
+We present these results for years 2012 and 2014.
 \end_layout
 
 \begin_layout Standard
@@ -6315,6 +6296,26 @@ name "subsec:RobustnessChecks"
 \end_inset
 
 Robustness Checks
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Breush-Pagan Test]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Breush-Pagan statistic indicates a signifcant heteroskedasticity in
+ the data for all-assets regression.
+ 
 \end_layout
 
 \begin_layout Standard

@@ -82,10 +82,10 @@ if __name__ == "__main__":
 	df  = pd.read_csv(sys.argv[1],keep_default_na=False)
 
 	if any (has_invalidchars(colname) for colname in df.columns):
-		raise ValueError("")
+		raise ValueError("Invalid chars")
 
 	selected_columns = df.columns
 
 	#print(df)
 	#print(print_table(dfinput=df,idcolumnIndex=0,longtable=False,landscape=False,selected_columns=selected_columns))
-	print(print_table(dfinput=df,idcolumnIndex=0,longtable=True,landscape=False,selected_columns=selected_columns))
+	print(print_table(dfinput=df,idcolumnIndex=0,longtable=False,landscape=True,selected_columns=selected_columns))
