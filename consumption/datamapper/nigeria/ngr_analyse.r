@@ -953,17 +953,24 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   
   hsizes2012 <- ddply(ohs2012[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hsizes2012 <- merge(hsizes2012,religionhhids,by=c("hhid"),all.x=T)
-  
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
-  ohs2012_wranks<- merge(plyr::rename(ohs2012,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank","agri")],by=c("occupation"),all.x=T)
   
-  chosenchars2012 <- ddply(ohs2012_wranks[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","agri","outoffood")],.(hhid),summarise,
-                           max_education_rank = choose_max_non_na_rank(education_rank) , 
-                           max_occupation_rank = choose_max_non_na_rank(occupation_rank),
-                           father_educ_rank=choose_max_non_na_rank(father_educ_rank),
-                           mother_educ_rank=choose_max_non_na_rank(mother_educ_rank),
-                           agri=choose_max_non_na_rank(agri),
-                           age=max(age), outoffood=max(outoffood))
+  # creating chosenchars by merging with 2010 data
+  chosenchars2012_woranks <- ddply(ohs2012[,c("hhid","age","outoffood")],.(hhid),summarise,age=max(age),outoffood=max(outoffood))
+  newhhids2012 <- setdiff(unique(chosenchars2012_woranks$hhid),unique(chosenchars2010$hhid))
+  if (length(newhhids2012)>0){
+    ohs2012_wranks<- merge(plyr::rename(ohs2012,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank","agri")],by=c("occupation"),all.x=T)
+    newhh2012 <- ddply( subset(ohs2012_wranks,is.element(hhid,newhhids2012))[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","agri","outoffood")],.(hhid),summarise,
+                       max_education_rank = choose_max_non_na_rank(education_rank) ,
+                       max_occupation_rank = choose_max_non_na_rank(occupation_rank),
+                       father_educ_rank=choose_max_non_na_rank(father_educ_rank),
+                       mother_educ_rank=choose_max_non_na_rank(mother_educ_rank),
+                       agri=choose_max_non_na_rank(agri))
+    oldrankswithnew2012 <- rbind(newhh2012,chosenchars2010%>% mutate(age=NULL, outoffood=NULL))
+  } else {
+    oldrankswithnew2012 <- chosenchars2010%>% mutate(age=NULL, outoffood=NULL)
+  }
+  chosenchars2012 <- merge(oldrankswithnew2012,chosenchars2012_woranks,by=c("hhid"),all.y=T)
   
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   
@@ -974,21 +981,27 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   hsizes2015 <- ddply(ohs2015[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hsizes2015 <- merge(hsizes2015,religionhhids,by=c("hhid"),all.x=T)
   hs2015 <- unique(merge(unique(ohs2015[,relevant_fields]), hsizes2015, by = c("hhid")))
-
-  chosenchars2015_woranks <- ddply(ohs2015[,c("hhid","age","outoffood")],.(hhid),summarise,age=max(age),outoffood=max(outoffood))
-  #work-around due to missing occupation from 2015 data
-  rank_from_past_years <- ddply(rbind(chosenchars2010,chosenchars2012),.(hhid),summarise, 
-                                max_education_rank=choose_max_non_na_rank(max_education_rank), 
-                                max_occupation_rank=choose_max_non_na_rank(max_occupation_rank),
-                                father_educ_rank=choose_max_non_na_rank(father_educ_rank),
-                                mother_educ_rank=choose_max_non_na_rank(mother_educ_rank),
-                                agri=choose_max_non_na_rank(agri)
-                                )
-  if (length(setdiff(unique(chosenchars2015_woranks$hhid),unique(rank_from_past_years$hhid)))>0){
-    stop("Could not find some hhids in past data for ranks")
-  }
   
-  chosenchars2015 <- merge(rank_from_past_years,chosenchars2015_woranks,by=c("hhid"))
+  #work-around due to missing occupation from 2015 data
+  
+  # creating chosenchars by merging with 2012 data
+  chosenchars2015_woranks <- ddply(ohs2015[,c("hhid","age","outoffood")],.(hhid),summarise,age=max(age),outoffood=max(outoffood))
+  newhhids2015 <- setdiff(unique(chosenchars2015_woranks$hhid),unique(chosenchars2012$hhid))
+  if (length(newhhids2015)>0){
+    ohs2015_wranks<- merge(plyr::rename(ohs2015,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank","agri")],by=c("occupation"),all.x=T)
+    newhh2015 <- ddply( subset(ohs2015_wranks,is.element(hhid,newhhids2015))[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","agri","outoffood")],.(hhid),summarise,
+                        max_education_rank = choose_max_non_na_rank(education_rank) ,
+                        max_occupation_rank = choose_max_non_na_rank(occupation_rank),
+                        father_educ_rank=choose_max_non_na_rank(father_educ_rank),
+                        mother_educ_rank=choose_max_non_na_rank(mother_educ_rank),
+                        agri=choose_max_non_na_rank(agri))
+    oldrankswithnew2015 <- rbind(newhh2015,chosenchars2012%>% mutate(age=NULL, outoffood=NULL))
+  } else {
+    oldrankswithnew2015 <- chosenchars2012%>% mutate(age=NULL, outoffood=NULL)
+  }
+  chosenchars2015 <- merge(oldrankswithnew2015,chosenchars2015_woranks,by=c("hhid"),all.y=T)
+  ##
+  
   hswithchars2015 <- merge(hs2015,chosenchars2015,all.x = T)
 
 
@@ -1090,10 +1103,11 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
         rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1",all.y=T)
         rd_bubble_primeduc <- merge(rd_bubble,bubble_primeduc, by = c("B","high_educ"),all.x=T)
         rd_bubble_weducoccup <- merge(rd_bubble_primeduc,bubble_agri, by = c("B","agri"),all.x=T)
-        
+
         rd <- rd_bubble_weducoccup %>% mutate (r = log(mean_A0)) %>% mutate (Ar=lnA0-r)
         rd <- rd %>% mutate (r_agri = log(mean_agri_A0)) %>%  mutate (Ar_occup=lnA0-r_agri)
         rd <- rd %>% mutate (r_educ = log(mean_primeduc_A0)) %>% mutate (Ar_educ=lnA0-r_educ)
+        
         rd <-subset(rd,!is.na(r))
         rd$loc <- NULL
         res[[paste0("df",year)]] <- rd
