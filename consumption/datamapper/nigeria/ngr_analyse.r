@@ -1090,10 +1090,10 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
         rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1",all.y=T)
         rd_bubble_primeduc <- merge(rd_bubble,bubble_primeduc, by = c("B","high_educ"),all.x=T)
         rd_bubble_weducoccup <- merge(rd_bubble_primeduc,bubble_agri, by = c("B","agri"),all.x=T)
-        rd <- rd_bubble %>% mutate(x_ne_food = cost_ne_food/hsize) %>% mutate(x_ne_nonfood = cost_ne_nonfood/hsize) %>% mutate(logx_ne_food=log(x_ne_food+1e-7),logx_ne_nonfood=log(x_ne_nonfood+1e-7)) %>% mutate( x_ac = cost_asset_costs/hsize)
-        rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate (Ar=lnA0-r)
-        #rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>%  mutate (Ar_occup=lnA0-r_occup)
-        #rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate (Ar_educ=lnA0-r_educ)
+        
+        rd <- rd_bubble_weducoccup %>% mutate (r = log(mean_A0)) %>% mutate (Ar=lnA0-r)
+        rd <- rd %>% mutate (r_agri = log(mean_agri_A0)) %>%  mutate (Ar_occup=lnA0-r_agri)
+        rd <- rd %>% mutate (r_educ = log(mean_primeduc_A0)) %>% mutate (Ar_educ=lnA0-r_educ)
         rd <-subset(rd,!is.na(r))
         rd$loc <- NULL
         res[[paste0("df",year)]] <- rd
