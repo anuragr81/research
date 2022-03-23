@@ -1025,7 +1025,7 @@ lsms_loader<-function(fu,ln,lgc) {
                                      names=ln()@get_ohs_secc_columns_lsms_2014(),
                                      m=ln()@get_ohs_secc_fields_mapping_lsms_2014())
       
-      c$education_rank <-as.integer(c$highest_educ>=33)*4 + as.integer(c$highest_educ<33 & c$highest_educ>=25) *3 + as.integer(c$highest_educ>=18 & c$highest_educ<25)*2 + as.integer(c$highest_educ>=1 & c$highest_educ<18)
+      c$education_rank <- as.integer(c$highest_educ>=25) *4 + as.integer(c$highest_educ>=18 & c$highest_educ<25)*3 + 2*as.integer(c$highest_educ>2 &c$highest_educ!=2 & c$highest_educ<18)+as.integer(c$highest_educ==1)+2*as.integer(c$highest_educ==2)
       
       
       c$hhid<-as.character(c$hhid)
