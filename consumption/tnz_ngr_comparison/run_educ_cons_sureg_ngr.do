@@ -36,3 +36,32 @@ eststo, title (2015): quietly sureg $aglogqne2015 $aglogeduc2015
 esttab using c:/temp/resnu.tex, mtitle no p numbers nogaps compress title() 
 
 
+************************************* q_educ ****************************************
+eststo clear
+
+use "C:\local_files\research\consumption\lsms\data\ngr_df2012.dta", clear
+
+
+gen log_educ= log(toteducexpense+1e-7)
+
+
+eststo, title (2012): quietly ivregress 2sls log_educ (lnX = max_occupation_rank) r log_mean_cost_ne i.agri max_education_rank father_educ_rank age rural_wards i.religion hsize, robust
+eststo, title (Educ 2012): quietly ivregress 2sls log_educ (lnX = max_occupation_rank) r_educ log_mean_cost_ne i.agri max_education_rank father_educ_rank age rural_wards i.religion hsize, robust
+eststo, title (Agri 2012): quietly ivregress 2sls log_educ (lnX = max_occupation_rank) r_agri log_mean_cost_ne i.agri max_education_rank father_educ_rank age rural_wards i.religion hsize
+
+
+use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
+
+
+gen log_educ= log(toteducexpense+1e-7)
+
+eststo, title (2015): quietly ivregress 2sls log_educ (lnX = max_occupation_rank) r log_mean_cost_ne i.agri max_education_rank father_educ_rank age rural_wards i.religion hsize, robust
+eststo, title (Educ 2015): quietly ivregress 2sls log_educ (lnX = max_occupation_rank) r_educ log_mean_cost_ne i.agri max_education_rank father_educ_rank age rural_wards i.religion hsize, robust
+eststo, title (Agri 2015): quietly ivregress 2sls log_educ (lnX = max_occupation_rank) r_agri log_mean_cost_ne i.agri max_education_rank father_educ_rank age rural_wards i.religion hsize
+
+
+*occupation-rank statistic
+*estat firststage, all forcenonrobust
+
+esttab using c:/temp/resnu2.tex, mtitle no p numbers nogaps compress title() 
+

@@ -930,9 +930,12 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   hsizes2010 <- ddply(ohs2010[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hsizes2010 <- merge(hsizes2010,religionhhids,by=c("hhid"),all.x=T)
   
-  hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]), hsizes2010, by = c("hhid")))
+  hs2010_wooccup <- unique(merge(unique(ohs2010[,relevant_fields]), hsizes2010, by = c("hhid")))
   
   ohs2010_wrank<- merge(plyr::rename(ohs2010,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank","agri")],by=c("occupation"),all.x=T)
+  
+  hh_occupations2010 <- plyr::rename(subset(ohs2010,personid==1),c("occupation_primary"="occupation"))[,c("hhid","occupation")]
+  hs2010 <- merge(hs2010_wooccup,hh_occupations2010,all.x=T)
   
   chosenchars2010 <- ddply(ohs2010_wrank[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","agri","outoffood")],.(hhid),summarise,
                            max_education_rank = choose_max_non_na_rank(education_rank) , 
@@ -953,7 +956,7 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   
   hsizes2012 <- ddply(ohs2012[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hsizes2012 <- merge(hsizes2012,religionhhids,by=c("hhid"),all.x=T)
-  hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
+  hs2012_wooccup <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
   
   # creating chosenchars by merging with 2010 data
   chosenchars2012_woranks <- ddply(ohs2012[,c("hhid","age","outoffood")],.(hhid),summarise,age=max(age),outoffood=max(outoffood))
@@ -972,6 +975,16 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   }
   chosenchars2012 <- merge(oldrankswithnew2012,chosenchars2012_woranks,by=c("hhid"),all.y=T)
   
+  hh_occupations2012 <- plyr::rename(subset(ohs2012,personid==1 & !is.element(hhid,hswithchars2010$hhid)),c("occupation_primary"="occupation"))[,c("hhid","occupation")]
+  newoccupationhids2012 <- setdiff(unique(hh_occupations2012$hhid),unique(hswithchars2010$hhid))
+  if (length(newoccupationhids2012)>0){
+    hh_occupations2012backfilled <- rbind(unique(hswithchars2010[,c("hhid","occupation")]), subset(hh_occupations2012, is.element(hhid,newoccupationhids2012)) )
+    hs2012 <- merge(hs2012_wooccup,hh_occupations2012backfilled,by=c("hhid"),all.x=T)
+  } else {
+    hs2012 <- hs2012_wooccup
+  }
+  
+  
   hswithchars2012 <- merge(hs2012,chosenchars2012,all.x = T)
   
   #2015
@@ -980,7 +993,7 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   
   hsizes2015 <- ddply(ohs2015[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hsizes2015 <- merge(hsizes2015,religionhhids,by=c("hhid"),all.x=T)
-  hs2015 <- unique(merge(unique(ohs2015[,relevant_fields]), hsizes2015, by = c("hhid")))
+  hs2015_wooccup <- unique(merge(unique(ohs2015[,relevant_fields]), hsizes2015, by = c("hhid")))
   
   #work-around due to missing occupation from 2015 data
   
@@ -1001,6 +1014,18 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   }
   chosenchars2015 <- merge(oldrankswithnew2015,chosenchars2015_woranks,by=c("hhid"),all.y=T)
   ##
+  
+  hh_occupations2015 <- plyr::rename(subset(ohs2015,personid==1 & !is.element(hhid,hswithchars2012$hhid)),c("occupation_primary"="occupation"))[,c("hhid","occupation")]
+  newoccupationhids2015 <- setdiff(unique(hh_occupations2015$hhid),unique(hswithchars2012$hhid))
+  
+  
+  if (length(newoccupationhids2015)>0){
+    hh_occupations2015backfilled <- rbind(unique(hswithchars2012[,c("hhid","occupation")]), subset(hh_occupations2015, is.element(hhid,newoccupationhids2015)) )
+    hs2015 <- merge(hs2015_wooccup,hh_occupations2015backfilled,by=c("hhid"),all.x=T)
+  } else {
+    hs2015 <- hs2015_wooccup
+  }
+  
   
   hswithchars2015 <- merge(hs2015,chosenchars2015,all.x = T)
 
