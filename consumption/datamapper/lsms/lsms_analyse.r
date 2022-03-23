@@ -1382,7 +1382,7 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   inc_educexpense = F
   #food_analysis = F
   
-  educ_pivot <- 3
+  educ_pivot <- 1
   occup_pivot <- 2
   
   
@@ -1494,12 +1494,13 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   hsizes2010 <- ddply(ohs2010[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   # to use consu: call hsizes2010=ll@get_hsize(ohs2010)
   hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]),hsizes2010 , by = c("hhid")))
-  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang","father_educ_rank","mother_educ_rank","age","outoffood")],.(hhid),summarise,
+  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang","father_educ_rank","mother_educ_rank","age","outoffood","agri")],.(hhid),summarise,
                            max_education_rank = choose_max_non_na(education_rank) , 
                            max_occupation_rank = choose_max_non_na(occupation_rank) , 
                            father_educ_rank=choose_max_non_na(father_educ_rank),
                            mother_educ_rank=choose_max_non_na(mother_educ_rank),
                            litlang = choose_max_litlang(litlang) , 
+                           agri=choose_max_non_na(agri),
                            age = choose_max_non_na(age), outoffood=max(outoffood))
   #  perception_columns
   hhead2010 <- plyr::rename(subset(o2010,household_status==1)[,names(hhead_columns)],hhead_columns )
@@ -1513,12 +1514,13 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   ohs2012 <- merge(ohs2012_wi, incomedat2012,by=c("hhid"),all.x=T)
   hsizes2012 <- ddply(ohs2012[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
-  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","litlang","outoffood")],.(hhid),summarise,
+  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","litlang","outoffood","agri")],.(hhid),summarise,
                            max_education_rank = choose_max_non_na(education_rank) , 
                            max_occupation_rank = choose_max_non_na(occupation_rank) , 
                            father_educ_rank=choose_max_non_na(father_educ_rank),
                            mother_educ_rank=choose_max_non_na(mother_educ_rank),
                            litlang = choose_max_litlang(litlang) , 
+                           agri=choose_max_non_na(agri),
                            age = choose_max_non_na(age), outoffood=max(outoffood) )
   
   if (length(setdiff(names(perception_columns),colnames(o2012)))==0){
@@ -1535,12 +1537,13 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   ohs2014 <- merge(ohs2014_wi, incomedat2014,by=c("hhid"),all.x=T)
   hsizes2014 <- ddply(ohs2014[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
   hs2014 <- unique(merge(unique(ohs2014[,relevant_fields]), hsizes2014, by = c("hhid")))
-  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","litlang","outoffood")],.(hhid),summarise,
+  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","litlang","outoffood","agri")],.(hhid),summarise,
                            max_education_rank = choose_max_non_na(education_rank) , 
                            max_occupation_rank = choose_max_non_na(occupation_rank) ,
                            father_educ_rank=choose_max_non_na(father_educ_rank),
                            mother_educ_rank=choose_max_non_na(mother_educ_rank),
                            litlang = choose_max_litlang(litlang), 
+                           agri=choose_max_non_na(agri),
                            age = choose_max_non_na(age), 
                            outoffood=max(outoffood))
   
@@ -1651,20 +1654,20 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
         dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
         
         bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0)) 
-        #bubble_occup <- ddply(dat_over_bubbles,.(B,high_occup),summarise,mean_occup_cost_ne_food_x=mean(cost_ne_food/hsize), mean_occup_cost_ne_nonfood_x = mean(cost_ne_nonfood/hsize), mean_occup_A0=mean(A0))
-        #bubble_educ <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_educ_cost_ne_food_x=mean(cost_ne_food/hsize),mean_educ_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),mean_educ_A0=mean(A0))
+        bubble_agri <- ddply(dat_over_bubbles,.(B,agri),summarise,mean_agri_cost_ne_food_x=mean(cost_ne_food/hsize), mean_agri_cost_ne_nonfood_x = mean(cost_ne_nonfood/hsize), mean_agri_A0=mean(A0))
+        bubble_primeduc <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_primeduc_cost_ne_food_x=mean(cost_ne_food/hsize),mean_primeduc_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),mean_primeduc_A0=mean(A0))
+        
         
         bubble_fields_w_P1 <- merge(bubble_distances,bubble_fields,by=c('B'))
         
-        rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1")
-        #rd_bubble_weduc <- merge(rd_bubble,bubble_educ, by = c("B","high_educ"))
-        #rd_bubble_weducoccup <- merge(rd_bubble_weduc,bubble_occup, by = c("B","high_occup"))
+        rd_bubble <- merge(bubble_fields_w_P1, dfdat, by="P1",all.y=T)
+        rd_bubble_primeduc <- merge(rd_bubble,bubble_primeduc, by = c("B","high_educ"),all.x=T)
+        rd_bubble_weducoccup <- merge(rd_bubble_primeduc,bubble_agri, by = c("B","agri"),all.x=T)
         
+        rd <- rd_bubble_weducoccup %>% mutate (r = log(mean_A0)) %>% mutate (Ar=lnA0-r)
+        rd <- rd %>% mutate (r_agri = log(mean_agri_A0)) %>%  mutate (Ar_occup=lnA0-r_agri)
+        rd <- rd %>% mutate (r_educ = log(mean_primeduc_A0)) %>% mutate (Ar_educ=lnA0-r_educ)
         
-        rd <- rd_bubble %>% mutate(x_ne_food = cost_ne_food/hsize) %>% mutate(x_ne_nonfood = cost_ne_nonfood/hsize) %>% mutate(logx_ne_food=log(x_ne_food+1e-7),logx_ne_nonfood=log(x_ne_nonfood+1e-7)) %>% mutate(   x_ac = cost_asset_costs/hsize)
-        rd <- rd %>% mutate (r = log(mean_A0)) %>% mutate (Ar=lnA0-r)
-        #rd <- rd %>% mutate (r_occup = log(mean_occup_A0)) %>%  mutate (Ar_occup=lnA0-r_occup)
-        #rd <- rd %>% mutate (r_educ = log(mean_educ_A0)) %>% mutate (Ar_educ=lnA0-r_educ)
         rd <-subset(rd,!is.na(r))
         print(paste("Number of households ignored because of missing r:",length(unique(subset(rd,is.na(r))[,paste0("hhid",year)]))))
         res[[paste0("df",year)]] <- rd
@@ -2306,7 +2309,7 @@ estimation_df_budget_quantile<- function(ll,e)
   # 2010
   ohs2010 <- subset(o2010,!is.na(region))
   hs2010 <- unique(merge(unique(ohs2010[,c("hhid","region","district","ward","isrural","expensiveregion")]), ll@get_hsize(ohs2010), by = c("hhid")))
-  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang","age")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = choose_max_non_na(occupation_rank) , litlang = choose_max_litlang(litlang), age=choose_max_non_na(age))
+  chosenchars2010 <- ddply(ohs2010[,c("hhid","education_rank","occupation_rank","litlang","age","agri")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = choose_max_non_na(occupation_rank) , litlang = choose_max_litlang(litlang), age=choose_max_non_na(age),agri=choose_max_non_na(agri))
   
   #  perception_columns
   
@@ -2324,7 +2327,7 @@ estimation_df_budget_quantile<- function(ll,e)
   
   ohs2012 <- subset(o2012,!is.na(region))
   hs2012 <- unique(merge(unique(ohs2012[,c("hhid","region","district","ward","isrural","expensiveregion")]), ll@get_hsize(ohs2012), by = c("hhid")))
-  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = choose_max_non_na(occupation_rank) , litlang = choose_max_litlang(litlang), age = choose_max_non_na(age))
+  chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","age","litlang","agri")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = choose_max_non_na(occupation_rank) , litlang = choose_max_litlang(litlang), age = choose_max_non_na(age),agri=choose_max_non_na(agri))
   
   if (length(setdiff(names(perception_columns),colnames(o2012)))==0){
     hhead_columns_w_percept <- c(hhead_columns,perception_columns)
@@ -2343,7 +2346,7 @@ estimation_df_budget_quantile<- function(ll,e)
   
   ohs2014 <- subset(o2014,!is.na(region))
   hs2014 <- unique(merge(unique(ohs2014[,c("hhid","region","district","ward","isrural","expensiveregion")]), ll@get_hsize(ohs2014), by = c("hhid")))
-  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age","litlang")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = choose_max_non_na(occupation_rank) , litlang = choose_max_litlang(litlang), age=choose_max_non_na(age))
+  chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","age","litlang","agri")],.(hhid),summarise,max_education_rank = choose_max_non_na(education_rank) , max_occupation_rank = choose_max_non_na(occupation_rank) , litlang = choose_max_litlang(litlang), age=choose_max_non_na(age),agri=choose_max_non_na(agri))
   
   hhead2014 <- plyr::rename(subset(o2014,household_status==1)[,names(hhead_columns)],hhead_columns )
   
