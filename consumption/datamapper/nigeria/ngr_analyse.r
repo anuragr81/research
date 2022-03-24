@@ -934,8 +934,8 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   
   ohs2010_wrank<- merge(plyr::rename(ohs2010,c("occupation_primary"="occupation")),occupation_mapping[,c("occupation","occupation_rank","agri")],by=c("occupation"),all.x=T)
   
-  hh_occupations2010 <- plyr::rename(subset(ohs2010,personid==1),c("occupation_primary"="occupation"))[,c("hhid","occupation")]
-  hs2010 <- merge(hs2010_wooccup,hh_occupations2010,all.x=T)
+  hh_occupeduc2010 <- plyr::rename(subset(ohs2010,personid==1),c("occupation_primary"="occupation","education_rank"="hh_education_rank"))[,c("hhid","occupation","hh_education_rank")]
+  hs2010 <- merge(hs2010_wooccup,hh_occupeduc2010,all.x=T)
   
   chosenchars2010 <- ddply(ohs2010_wrank[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","agri","outoffood")],.(hhid),summarise,
                            max_education_rank = choose_max_non_na_rank(education_rank) , 
@@ -974,14 +974,29 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
     oldrankswithnew2012 <- chosenchars2010%>% mutate(age=NULL, outoffood=NULL)
   }
   chosenchars2012 <- merge(oldrankswithnew2012,chosenchars2012_woranks,by=c("hhid"),all.y=T)
+  #performing the merge from new data for entries specific to households
   
   hh_occupations2012 <- plyr::rename(subset(ohs2012,personid==1 & !is.element(hhid,hswithchars2010$hhid)),c("occupation_primary"="occupation"))[,c("hhid","occupation")]
   newoccupationhids2012 <- setdiff(unique(hh_occupations2012$hhid),unique(hswithchars2010$hhid))
   if (length(newoccupationhids2012)>0){
     hh_occupations2012backfilled <- rbind(unique(hswithchars2010[,c("hhid","occupation")]), subset(hh_occupations2012, is.element(hhid,newoccupationhids2012)) )
-    hs2012 <- merge(hs2012_wooccup,hh_occupations2012backfilled,by=c("hhid"),all.x=T)
+    hs2012_wohheduc <- merge(hs2012_wooccup,hh_occupations2012backfilled,by=c("hhid"),all.x=T)
   } else {
-    hs2012 <- hs2012_wooccup
+    hs2012_wohheduc <- hs2012_wooccup
+  }
+  
+  hh_educ_2012 <- plyr::rename(subset(ohs2012,personid==1 & !is.element(hhid,hswithchars2010$hhid)),c("education_rank"="hh_education_rank"))[,c("hhid","hh_education_rank")]
+  neweduchids2012 <- setdiff(unique(hh_educ_2012$hhid),unique(hswithchars2010$hhid))
+  if (length(neweduchids2012)>0){
+    # getting new education ranks only for new households - otherwise using old education ranks
+    hh_educ2012backfilled <- rbind(unique(hswithchars2010[,c("hhid","hh_education_rank")]), subset(hh_educ_2012, is.element(hhid,neweduchids2012)) )
+    # now merging with data without hh_education_rank
+    if (is.element("hh_education_rank",colnames(hs2012_wohheduc))){
+      stop("Cannot overwrite hh_education_rank")
+    }
+    hs2012 <- merge(hs2012_wohheduc,hh_educ2012backfilled,by=c("hhid"),all.x=T)
+  } else {
+    hs2012 <- hs2012_wohheduc
   }
   
   
@@ -1021,9 +1036,24 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   
   if (length(newoccupationhids2015)>0){
     hh_occupations2015backfilled <- rbind(unique(hswithchars2012[,c("hhid","occupation")]), subset(hh_occupations2015, is.element(hhid,newoccupationhids2015)) )
-    hs2015 <- merge(hs2015_wooccup,hh_occupations2015backfilled,by=c("hhid"),all.x=T)
+    hs2015_wohheduc <- merge(hs2015_wooccup,hh_occupations2015backfilled,by=c("hhid"),all.x=T)
   } else {
-    hs2015 <- hs2015_wooccup
+    hs2015_wohheduc <- hs2015_wooccup
+  }
+  
+  
+  hh_educ_2015 <- plyr::rename(subset(ohs2015,personid==1 & !is.element(hhid,hswithchars2012$hhid)),c("education_rank"="hh_education_rank"))[,c("hhid","hh_education_rank")]
+  neweduchids2015 <- setdiff(unique(hh_educ_2015$hhid),unique(hswithchars2012$hhid))
+  if (length(neweduchids2015)>0){
+    # getting new education ranks only for new households - otherwise using old education ranks
+    hh_educ2015backfilled <- rbind(unique(hswithchars2012[,c("hhid","hh_education_rank")]), subset(hh_educ_2015, is.element(hhid,neweduchids2015)) )
+    # now merging with data without hh_education_rank
+    if (is.element("hh_education_rank",colnames(hs2015_wohheduc))){
+      stop("Cannot overwrite hh_education_rank")
+    }
+    hs2015 <- merge(hs2015_wohheduc,hh_educ2015backfilled,by=c("hhid"),all.x=T)
+  } else {
+    hs2015 <- hs2015_wohheduc
   }
   
   

@@ -1482,7 +1482,7 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   
   
   perception_columns <- c("life_perception"="hh_life_perception" , "finance_perception"="hh_finance_perception", "richness_perception"="hh_richness_perception","housing_perception"="hh_housing_perception","health_perception"="hh_health_perception")
-  hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang","occupation"="hh_occupation")
+  hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","education_rank"="hh_education_rank","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang","occupation"="hh_occupation")
 
   #total consumption
   relevant_fields <-c("hhid","region","district","ward","ea","isrural","expensiveregion","S","E","population","ypay","lnY")
@@ -2303,7 +2303,7 @@ estimation_df_budget_quantile<- function(ll,e)
   
   
   perception_columns <- c("life_perception"="hh_life_perception" , "finance_perception"="hh_finance_perception", "richness_perception"="hh_richness_perception","housing_perception"="hh_housing_perception","health_perception"="hh_health_perception")
-  hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang")
+  hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","education_rank"="hh_education_rank","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang")
   #total consumption
   
   # 2010
