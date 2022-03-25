@@ -1934,7 +1934,7 @@ add_rural_mapping_for_districts <- function(tn,year)
     B2012_2014_mapping <- get_missing_bubble_mapping_for_2014(tn)
     B2012_2014_rural_wards <- merge(rural_wards_df_2012,B2012_2014_mapping,by=c("B2012"))
     
-    result = plyr::rename(merge( plyr::rename(tn[["df2014"]],c("B"="B2014")), B2012_2014_rural_wards,by=c("B2014"),all.x=T),c("B2014"="B"))
+    result = plyr::rename(merge( plyr::rename(tn[["df2014"]],c("B"="B2014")), B2012_2014_rural_wards%>% mutate(B2012=NULL),by=c("B2014"),all.x=T),c("B2014"="B"))
     result$B2012 <- NULL
     if (nrow(subset(result,is.na(rural_wards))) >0){
       stop(paste("Missing rural_wards data for year:",year))
