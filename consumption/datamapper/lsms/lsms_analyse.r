@@ -1679,6 +1679,8 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
       dat2012 <- unique(plyr::rename(res[["df2012"]][,c("agri","high_educ","r","r_agri","r_educ","B")],c("B"="B2012")))
       info2012 <- plyr::rename(merge(dat2012,maptoB2012,by=c("B2012")),c("r"="r2012","r_educ"="r_educ2012","r_agri"="r_agri2012"))
       res[["df2014"]] <- plyr::rename(merge(plyr::rename(res[["df2014"]],c("B"="B2014")),info2012,by=c("B2014","high_educ","agri")),c("B2014"="B"))      
+      
+      res[["df2012"]] <- res[["df2012"]] %>% mutate(r2012=r, r_educ2012 = r_educ, r_agri2012 = r_agri)
       #test
       #print(summary(lm(data=dat2010, nu~ r + max_occupation_rank + max_education_rank)))
       

@@ -4775,6 +4775,23 @@ Considering a logit formulation - we can see how father's education affects
 \end_layout
 
 \begin_layout Standard
+Instead of the sureg, one could observe the panel with a random effects
+ estimation- which assume that fixed 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ is uncorrelated with any of the control variables 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ - and allows us to see the effect of 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ and other fixed characteristics.
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -4906,11 +4923,11 @@ sym{***}&   0.0600
 \backslash
 sym{***}&   0.0574
 \backslash
-sym{***}&   0.0439
+sym{***}&   0.0441
 \backslash
-sym{***}&   0.0522
+sym{***}&   0.0440
 \backslash
-sym{***}&   0.0470
+sym{***}&   0.0441
 \backslash
 sym{***}
 \backslash
@@ -4921,9 +4938,9 @@ sym{***}
 \backslash
 
 \backslash
- r         &  -0.0622
+ r2012     &  -0.0622
 \backslash
-sym{***}&                  &                  &  -0.0554
+sym{***}&                  &                  &  -0.0180
 \backslash
 sym{***}&                  &                  
 \backslash
@@ -4946,18 +4963,12 @@ sym{**} &    0.515
 \backslash
 sym{**} &    0.665
 \backslash
-sym{***}&    0.528
-\backslash
-sym{**} &    0.428
-\backslash
-sym{**} &    0.642
-\backslash
-sym{***}
+sym{***}&   -0.213         &   -0.204         &   -0.170         
 \backslash
 
 \backslash
-           &  (0.003)         &  (0.005)         &  (0.000)         &  (0.002)
-         &  (0.010)         &  (0.000)         
+           &  (0.003)         &  (0.005)         &  (0.000)         &  (0.215)
+         &  (0.236)         &  (0.311)         
 \backslash
 
 \backslash
@@ -4975,13 +4986,13 @@ sym{***}
 \backslash
 sym{**} &  -0.0336
 \backslash
-sym{**} &                  &  -0.0195         &  -0.0142         &       
+sym{**} &                  &  -0.0125         &  -0.0106         &       
            
 \backslash
 
 \backslash
-           &  (0.004)         &  (0.003)         &                  &  (0.085)
-         &  (0.206)         &                  
+           &  (0.004)         &  (0.003)         &                  &  (0.303)
+         &  (0.384)         &                  
 \backslash
 
 \backslash
@@ -4989,13 +5000,13 @@ sym{**} &                  &  -0.0195         &  -0.0142         &
 \backslash
 _educ
 \backslash
-_rank& -0.00109         & 0.000994         &-0.000467         & -0.00357   
-      & -0.00239         & -0.00214         
+_rank& -0.00109         & 0.000994         &-0.000467         & -0.00704   
+      & -0.00651         & -0.00680         
 \backslash
 
 \backslash
-           &  (0.806)         &  (0.822)         &  (0.916)         &  (0.407)
-         &  (0.576)         &  (0.616)         
+           &  (0.806)         &  (0.822)         &  (0.916)         &  (0.117)
+         &  (0.148)         &  (0.130)         
 \backslash
 
 \backslash
@@ -5003,16 +5014,18 @@ _rank& -0.00109         & 0.000994         &-0.000467         & -0.00357
 \backslash
 sym{*}  &-0.000622
 \backslash
-sym{*}  &-0.000394         &-0.000569
+sym{*}  &-0.000394         &-0.000643
 \backslash
-sym{*}  &-0.000555
+sym{*}  &-0.000599
 \backslash
-sym{*}  &-0.000421         
+sym{*}  &-0.000601
+\backslash
+sym{*}  
 \backslash
 
 \backslash
-           &  (0.026)         &  (0.011)         &  (0.092)         &  (0.024)
-         &  (0.026)         &  (0.081)         
+           &  (0.026)         &  (0.011)         &  (0.092)         &  (0.014)
+         &  (0.023)         &  (0.018)         
 \backslash
 
 \backslash
@@ -5024,18 +5037,18 @@ sym{*}  &   0.0513
 \backslash
 sym{*}  &   0.0445
 \backslash
-sym{*}  &   0.0503
+sym{*}  &   0.0890
 \backslash
-sym{**} &   0.0384
+sym{***}&   0.0953
 \backslash
-sym{*}  &   0.0425
+sym{***}&   0.0917
 \backslash
-sym{*}  
+sym{***}
 \backslash
 
 \backslash
-           &  (0.012)         &  (0.015)         &  (0.031)         &  (0.007)
-         &  (0.038)         &  (0.017)         
+           &  (0.012)         &  (0.015)         &  (0.031)         &  (0.000)
+         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -5059,11 +5072,11 @@ sym{***}&  -0.0816
 \backslash
 sym{***}&  -0.0904
 \backslash
-sym{***}&   -0.107
+sym{***}&   -0.109
 \backslash
-sym{***}&   -0.101
+sym{***}&   -0.109
 \backslash
-sym{***}&   -0.105
+sym{***}&   -0.109
 \backslash
 sym{***}
 \backslash
@@ -5082,9 +5095,9 @@ sym{***}&  -0.0175
 \backslash
 sym{***}&  -0.0105
 \backslash
-sym{***}& -0.00872
+sym{***}&  -0.0107
 \backslash
-sym{***}& -0.00973
+sym{***}&  -0.0105
 \backslash
 sym{***}
 \backslash
@@ -5097,31 +5110,31 @@ sym{***}
 \backslash
  r
 \backslash
-_educ    &                  &  -0.0631
+_educ2012&                  &  -0.0631
 \backslash
-sym{***}&                  &                  &  -0.0545
+sym{***}&                  &                  &  -0.0111
 \backslash
-sym{***}&                  
+sym{**} &                  
 \backslash
 
 \backslash
            &                  &  (0.000)         &                  &   
-               &  (0.000)         &                  
+               &  (0.003)         &                  
 \backslash
 
 \backslash
  r
 \backslash
-_agri    &                  &                  &  -0.0589
+_agri2012&                  &                  &  -0.0589
 \backslash
-sym{***}&                  &                  &  -0.0593
+sym{***}&                  &                  &  -0.0131
 \backslash
-sym{***}
+sym{**} 
 \backslash
 
 \backslash
            &                  &                  &  (0.000)         &   
-               &                  &  (0.000)         
+               &                  &  (0.001)         
 \backslash
 
 \backslash
@@ -5129,12 +5142,14 @@ sym{***}
 \backslash
 _cons    &   -0.521         &   -0.481         &   -0.909
 \backslash
-sym{*}  &   -0.413         &   -0.307         &   -0.718         
+sym{*}  &    0.925
+\backslash
+sym{*}  &    0.792         &    0.729         
 \backslash
 
 \backslash
-           &  (0.257)         &  (0.292)         &  (0.044)         &  (0.311)
-         &  (0.444)         &  (0.067)         
+           &  (0.257)         &  (0.292)         &  (0.044)         &  (0.033)
+         &  (0.067)         &  (0.083)         
 \backslash
 
 \backslash
@@ -5153,11 +5168,11 @@ sym{***}&  -0.0119
 \backslash
 sym{***}&  -0.0124
 \backslash
-sym{***}&  -0.0100
+sym{***}&  -0.0108
 \backslash
-sym{***}& -0.00904
+sym{***}&  -0.0107
 \backslash
-sym{***}&  -0.0101
+sym{***}&  -0.0108
 \backslash
 sym{***}
 \backslash
@@ -5168,13 +5183,12 @@ sym{***}
 \backslash
 
 \backslash
- r         & -0.00137         &                  &                  & -0.00284
-\backslash
-sym{*}  &                  &                  
+ r2012     & -0.00137         &                  &                  &  0.00166
+         &                  &                  
 \backslash
 
 \backslash
-           &  (0.248)         &                  &                  &  (0.045)
+           &  (0.248)         &                  &                  &  (0.224)
          &                  &                  
 \backslash
 
@@ -5185,13 +5199,13 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&   0.0866         &   0.0897         &   0.0811         &   0.0542     
-    &   0.0779         &   0.0231         
+_ne&   0.0866         &   0.0897         &   0.0811         &   0.0166     
+    &  0.00878         & -0.00820         
 \backslash
 
 \backslash
-           &  (0.087)         &  (0.075)         &  (0.106)         &  (0.286)
-         &  (0.113)         &  (0.639)         
+           &  (0.087)         &  (0.075)         &  (0.106)         &  (0.742)
+         &  (0.862)         &  (0.868)         
 \backslash
 
 \backslash
@@ -5205,13 +5219,13 @@ _ne&   0.0866         &   0.0897         &   0.0811         &   0.0542
 \backslash
 
 \backslash
- 1.agri    &  0.00346         &  0.00305         &                  &  0.00567
-         &  0.00566         &                  
+ 1.agri    &  0.00346         &  0.00305         &                  &  0.00694
+         &  0.00654         &                  
 \backslash
 
 \backslash
-           &  (0.278)         &  (0.338)         &                  &  (0.090)
-         &  (0.089)         &                  
+           &  (0.278)         &  (0.338)         &                  &  (0.051)
+         &  (0.066)         &                  
 \backslash
 
 \backslash
@@ -5225,23 +5239,23 @@ sym{**} &  0.00348
 \backslash
 sym{**} &  0.00328
 \backslash
-sym{**} &  0.00200         &  0.00220         &  0.00204         
+sym{**} &  0.00206         &  0.00206         &  0.00209         
 \backslash
 
 \backslash
-           &  (0.008)         &  (0.005)         &  (0.008)         &  (0.117)
-         &  (0.083)         &  (0.109)         
+           &  (0.008)         &  (0.005)         &  (0.008)         &  (0.118)
+         &  (0.118)         &  (0.112)         
 \backslash
 
 \backslash
  age       & 0.000104         &0.0000955         & 0.000135
 \backslash
-sym{*}  &0.0000466         &0.0000509         &0.0000864         
+sym{*}  &0.0000473         &0.0000455         &0.0000814         
 \backslash
 
 \backslash
-           &  (0.125)         &  (0.159)         &  (0.038)         &  (0.530)
-         &  (0.492)         &  (0.230)         
+           &  (0.125)         &  (0.159)         &  (0.038)         &  (0.539)
+         &  (0.555)         &  (0.276)         
 \backslash
 
 \backslash
@@ -5253,18 +5267,16 @@ sym{***}&  -0.0248
 \backslash
 sym{***}&  -0.0202
 \backslash
-sym{***}&  -0.0157
+sym{***}&  -0.0112         &  -0.0170
 \backslash
-sym{**} &  -0.0201
-\backslash
-sym{***}&  -0.0123
+sym{**} &  -0.0115
 \backslash
 sym{*}  
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.004)
-         &  (0.000)         &  (0.021)         
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.062)
+         &  (0.005)         &  (0.049)         
 \backslash
 
 \backslash
@@ -5288,11 +5300,11 @@ sym{***}&   0.0595
 \backslash
 sym{***}&   0.0590
 \backslash
+sym{***}&   0.0468
+\backslash
+sym{***}&   0.0472
+\backslash
 sym{***}&   0.0466
-\backslash
-sym{***}&   0.0475
-\backslash
-sym{***}&   0.0461
 \backslash
 sym{***}
 \backslash
@@ -5309,11 +5321,11 @@ sym{***}&  0.00370
 \backslash
 sym{***}&  0.00367
 \backslash
-sym{***}&  0.00564
+sym{***}&  0.00573
 \backslash
-sym{***}&  0.00582
+sym{***}&  0.00584
 \backslash
-sym{***}&  0.00585
+sym{***}&  0.00597
 \backslash
 sym{***}
 \backslash
@@ -5326,40 +5338,39 @@ sym{***}
 \backslash
  r
 \backslash
-_educ    &                  & -0.00395
+_educ2012&                  & -0.00395
 \backslash
-sym{***}&                  &                  & -0.00551
-\backslash
-sym{***}&                  
+sym{***}&                  &                  & -0.00126         &      
+            
 \backslash
 
 \backslash
            &                  &  (0.000)         &                  &   
-               &  (0.000)         &                  
+               &  (0.245)         &                  
 \backslash
 
 \backslash
  r
 \backslash
-_agri    &                  &                  & -0.00147         &     
-             &                  & -0.00174         
+_agri2012&                  &                  & -0.00147         &     
+             &                  &0.0000147         
 \backslash
 
 \backslash
            &                  &                  &  (0.157)         &   
-               &                  &  (0.147)         
+               &                  &  (0.990)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &  -0.0211         &  0.00571         & -0.00461         &   0.0442
-         &  0.00849         &    0.108         
+_cons    &  -0.0211         &  0.00571         & -0.00461         &   0.0820
+         &    0.147         &    0.172         
 \backslash
 
 \backslash
-           &  (0.868)         &  (0.964)         &  (0.971)         &  (0.713)
-         &  (0.943)         &  (0.358)         
+           &  (0.868)         &  (0.964)         &  (0.971)         &  (0.520)
+         &  (0.247)         &  (0.163)         
 \backslash
 
 \backslash
@@ -5369,8 +5380,8 @@ hline
 \backslash
 (N
 \backslash
-)     &     4068         &     4068         &     4068         &     3613
-         &     3613         &     3613         
+)     &     4068         &     4068         &     4068         &     3427
+         &     3427         &     3427         
 \backslash
 
 \backslash
@@ -5552,11 +5563,11 @@ sym{***}&   0.0756
 \backslash
 sym{***}&   0.0742
 \backslash
-sym{***}&   0.0345
+sym{***}&   0.0347
 \backslash
-sym{***}&   0.0457
+sym{***}&   0.0396
 \backslash
-sym{***}&   0.0461
+sym{***}&   0.0365
 \backslash
 sym{***}
 \backslash
@@ -5567,9 +5578,9 @@ sym{***}
 \backslash
 
 \backslash
- r         &   -0.103
+ r2012     &   -0.103
 \backslash
-sym{***}&                  &                  &   -0.105
+sym{***}&                  &                  &  -0.0714
 \backslash
 sym{***}&                  &                  
 \backslash
@@ -5592,18 +5603,12 @@ sym{**} &    0.224
 \backslash
 sym{**} &    0.181
 \backslash
-sym{*}  &    0.701
-\backslash
-sym{***}&    0.556
-\backslash
-sym{***}&    0.524
-\backslash
-sym{***}
+sym{*}  &    0.124         &   0.0719         &   0.0801         
 \backslash
 
 \backslash
-           &  (0.002)         &  (0.009)         &  (0.030)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.002)         &  (0.009)         &  (0.030)         &  (0.141)
+         &  (0.390)         &  (0.335)         
 \backslash
 
 \backslash
@@ -5621,14 +5626,14 @@ sym{***}
 \backslash
 sym{**} &   0.0330
 \backslash
-sym{***}&                  &  0.00827         &   0.0211
+sym{***}&                  &   0.0105         &   0.0212
 \backslash
-sym{***}&                  
+sym{**} &                  
 \backslash
 
 \backslash
-           &  (0.009)         &  (0.000)         &                  &  (0.199)
-         &  (0.001)         &                  
+           &  (0.009)         &  (0.000)         &                  &  (0.122)
+         &  (0.002)         &                  
 \backslash
 
 \backslash
@@ -5636,36 +5641,40 @@ sym{***}&
 \backslash
 _educ
 \backslash
-_rank& -0.00389         &  0.00198         & -0.00407         & -0.00248   
-      &  0.00137         & -0.00266         
+_rank& -0.00389         &  0.00198         & -0.00407         & -0.00191   
+      &  0.00156         & -0.00217         
 \backslash
 
 \backslash
-           &  (0.071)         &  (0.354)         &  (0.052)         &  (0.225)
-         &  (0.498)         &  (0.182)         
+           &  (0.071)         &  (0.354)         &  (0.052)         &  (0.373)
+         &  (0.468)         &  (0.308)         
 \backslash
 
 \backslash
- age       &0.0000880         &-0.0000379         & 0.000128         & 0.000111
-         & 0.000107         & 0.000209         
+ age       &0.0000880         &-0.0000379         & 0.000128         & 0.000182
+         & 0.000200         & 0.000271         
 \backslash
 
 \backslash
-           &  (0.655)         &  (0.844)         &  (0.503)         &  (0.565)
-         &  (0.573)         &  (0.267)         
+           &  (0.655)         &  (0.844)         &  (0.503)         &  (0.371)
+         &  (0.325)         &  (0.177)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards&  0.00582         &  0.00625         &  0.00454         &   0.0162
+_wards&  0.00582         &  0.00625         &  0.00454         &   0.0318
 \backslash
-sym{*}  &   0.0155         &   0.0102         
+sym{***}&   0.0331
+\backslash
+sym{***}&   0.0327
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.494)         &  (0.453)         &  (0.576)         &  (0.047)
-         &  (0.053)         &  (0.189)         
+           &  (0.494)         &  (0.453)         &  (0.576)         &  (0.000)
+         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -5685,11 +5694,11 @@ sym{***}&   0.0519
 \backslash
 sym{***}&   0.0599
 \backslash
-sym{***}&   0.0577
+sym{***}&   0.0613
 \backslash
-sym{***}&   0.0509
+sym{***}&   0.0555
 \backslash
-sym{***}&   0.0569
+sym{***}&   0.0607
 \backslash
 sym{***}
 \backslash
@@ -5706,22 +5715,22 @@ sym{***}&    0.110
 \backslash
 sym{***}&    0.121
 \backslash
-sym{***}&   0.0267         &   0.0230         &   0.0337         
+sym{***}&   0.0222         &   0.0256         &   0.0305         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.353)
-         &  (0.417)         &  (0.231)         
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.457)
+         &  (0.390)         &  (0.303)         
 \backslash
 
 \backslash
- 4.religion&   0.0997         &    0.123         &    0.101         &  -0.0348
-         &-0.000510         & -0.00560         
+ 4.religion&   0.0997         &    0.123         &    0.101         &  -0.0261
+         & -0.00634         &  -0.0214         
 \backslash
 
 \backslash
-           &  (0.464)         &  (0.358)         &  (0.446)         &  (0.787)
-         &  (0.997)         &  (0.965)         
+           &  (0.464)         &  (0.358)         &  (0.446)         &  (0.845)
+         &  (0.962)         &  (0.872)         
 \backslash
 
 \backslash
@@ -5731,11 +5740,11 @@ sym{***}&  -0.0156
 \backslash
 sym{***}&  -0.0173
 \backslash
-sym{***}&  -0.0101
+sym{***}&  -0.0110
 \backslash
-sym{***}& -0.00832
+sym{***}& -0.00963
 \backslash
-sym{***}&  -0.0106
+sym{***}&  -0.0103
 \backslash
 sym{***}
 \backslash
@@ -5748,9 +5757,9 @@ sym{***}
 \backslash
  r
 \backslash
-_educ    &                  &  -0.0967
+_educ2012&                  &  -0.0967
 \backslash
-sym{***}&                  &                  &  -0.0958
+sym{***}&                  &                  &  -0.0619
 \backslash
 sym{***}&                  
 \backslash
@@ -5763,9 +5772,9 @@ sym{***}&
 \backslash
  r
 \backslash
-_agri    &                  &                  &   -0.105
+_agri2012&                  &                  &   -0.105
 \backslash
-sym{***}&                  &                  &   -0.105
+sym{***}&                  &                  &  -0.0687
 \backslash
 sym{***}
 \backslash
@@ -5784,12 +5793,18 @@ sym{*}  &    0.393
 \backslash
 sym{*}  &    0.624
 \backslash
-sym{***}&   -0.159         &  -0.0854         &    0.112         
+sym{***}&    0.809
+\backslash
+sym{***}&    0.744
+\backslash
+sym{***}&    0.852
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.013)         &  (0.034)         &  (0.001)         &  (0.378)
-         &  (0.628)         &  (0.517)         
+           &  (0.013)         &  (0.034)         &  (0.001)         &  (0.000)
+         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -5810,9 +5825,9 @@ sym{***}&  -0.0119
 \backslash
 sym{***}&  -0.0122
 \backslash
-sym{***}&  -0.0135
+sym{***}&  -0.0128
 \backslash
-sym{***}&  -0.0133
+sym{***}&  -0.0125
 \backslash
 sym{***}
 \backslash
@@ -5823,9 +5838,9 @@ sym{***}
 \backslash
 
 \backslash
- r         &  0.00943
+ r2012     &  0.00943
 \backslash
-sym{***}&                  &                  &   0.0169
+sym{***}&                  &                  &   0.0105
 \backslash
 sym{***}&                  &                  
 \backslash
@@ -5842,13 +5857,13 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&   0.0414         &   0.0451         &   0.0604         &  -0.0553     
-    &  -0.0176         & -0.00802         
+_ne&   0.0414         &   0.0451         &   0.0604         &   0.0377     
+    &   0.0459         &   0.0410         
 \backslash
 
 \backslash
-           &  (0.323)         &  (0.276)         &  (0.138)         &  (0.185)
-         &  (0.664)         &  (0.841)         
+           &  (0.323)         &  (0.276)         &  (0.138)         &  (0.344)
+         &  (0.247)         &  (0.298)         
 \backslash
 
 \backslash
@@ -5864,13 +5879,13 @@ _ne&   0.0414         &   0.0451         &   0.0604         &  -0.0553
 \backslash
  1.agri    & -0.00562         & -0.00699
 \backslash
-sym{*}  &                  & 0.000556         & -0.00144         &       
+sym{*}  &                  & 0.000670         &-0.000896         &       
            
 \backslash
 
 \backslash
-           &  (0.090)         &  (0.034)         &                  &  (0.859)
-         &  (0.645)         &                  
+           &  (0.090)         &  (0.034)         &                  &  (0.835)
+         &  (0.780)         &                  
 \backslash
 
 \backslash
@@ -5878,28 +5893,28 @@ sym{*}  &                  & 0.000556         & -0.00144         &
 \backslash
 _educ
 \backslash
-_rank& 0.000228         &-0.000323         & 0.000382         & 0.000324   
-      &-0.000163         & 0.000376         
+_rank& 0.000228         &-0.000323         & 0.000382         & 0.000378   
+      &-0.000117         & 0.000361         
 \backslash
 
 \backslash
-           &  (0.825)         &  (0.755)         &  (0.709)         &  (0.744)
-         &  (0.870)         &  (0.705)         
+           &  (0.825)         &  (0.755)         &  (0.709)         &  (0.709)
+         &  (0.909)         &  (0.721)         
 \backslash
 
 \backslash
- age       & 0.000127         & 0.000139         & 0.000113         &-0.000235
+ age       & 0.000127         & 0.000139         & 0.000113         &-0.000244
 \backslash
-sym{*}  &-0.000235
+sym{*}  &-0.000246
 \backslash
-sym{*}  &-0.000244
+sym{*}  &-0.000249
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &  (0.176)         &  (0.139)         &  (0.228)         &  (0.013)
-         &  (0.013)         &  (0.009)         
+           &  (0.176)         &  (0.139)         &  (0.228)         &  (0.011)
+         &  (0.010)         &  (0.009)         
 \backslash
 
 \backslash
@@ -5911,12 +5926,16 @@ sym{*}  & -0.00992
 \backslash
 sym{*}  &  -0.0111
 \backslash
-sym{**} & -0.00402         & -0.00499         & -0.00449         
+sym{**} & -0.00809
+\backslash
+sym{*}  & -0.00836
+\backslash
+sym{*}  & -0.00750         
 \backslash
 
 \backslash
-           &  (0.015)         &  (0.014)         &  (0.005)         &  (0.312)
-         &  (0.208)         &  (0.248)         
+           &  (0.015)         &  (0.014)         &  (0.005)         &  (0.044)
+         &  (0.037)         &  (0.054)         
 \backslash
 
 \backslash
@@ -5936,11 +5955,11 @@ sym{***}&  -0.0358
 \backslash
 sym{***}&  -0.0365
 \backslash
-sym{***}&  -0.0317
-\backslash
-sym{***}&  -0.0312
+sym{***}&  -0.0331
 \backslash
 sym{***}&  -0.0323
+\backslash
+sym{***}&  -0.0332
 \backslash
 sym{***}
 \backslash
@@ -5957,20 +5976,20 @@ sym{*}  &  -0.0360
 \backslash
 sym{*}  &  -0.0372
 \backslash
-sym{**} & -0.00636         & -0.00588         & -0.00713         
+sym{**} & -0.00580         & -0.00630         & -0.00678         
 \backslash
 
 \backslash
-           &  (0.012)         &  (0.012)         &  (0.009)         &  (0.650)
-         &  (0.675)         &  (0.611)         
+           &  (0.012)         &  (0.012)         &  (0.009)         &  (0.681)
+         &  (0.656)         &  (0.631)         
 \backslash
 
 \backslash
- 4.religion&   0.0541         &   0.0520         &   0.0557         &    0.241
+ 4.religion&   0.0541         &   0.0520         &   0.0557         &    0.240
 \backslash
 sym{***}&    0.237
 \backslash
-sym{***}&    0.237
+sym{***}&    0.239
 \backslash
 sym{***}
 \backslash
@@ -5987,11 +6006,11 @@ sym{***}&  0.00590
 \backslash
 sym{***}&  0.00593
 \backslash
+sym{***}&  0.00630
+\backslash
 sym{***}&  0.00611
 \backslash
-sym{***}&  0.00593
-\backslash
-sym{***}&  0.00631
+sym{***}&  0.00628
 \backslash
 sym{***}
 \backslash
@@ -6004,9 +6023,9 @@ sym{***}
 \backslash
  r
 \backslash
-_educ    &                  &  0.00902
+_educ2012&                  &  0.00902
 \backslash
-sym{***}&                  &                  &   0.0130
+sym{***}&                  &                  &  0.00891
 \backslash
 sym{***}&                  
 \backslash
@@ -6019,9 +6038,9 @@ sym{***}&
 \backslash
  r
 \backslash
-_agri    &                  &                  &  0.00910
+_agri2012&                  &                  &  0.00910
 \backslash
-sym{***}&                  &                  &   0.0130
+sym{***}&                  &                  &   0.0101
 \backslash
 sym{***}
 \backslash
@@ -6034,13 +6053,13 @@ sym{***}
 \backslash
  
 \backslash
-_cons    &  -0.0446         &  -0.0377         &  -0.0797         &    0.120
-         &   0.0941         &   0.0671         
+_cons    &  -0.0446         &  -0.0377         &  -0.0797         &  -0.0256
+         &  -0.0154         &  -0.0231         
 \backslash
 
 \backslash
-           &  (0.621)         &  (0.675)         &  (0.368)         &  (0.170)
-         &  (0.281)         &  (0.436)         
+           &  (0.621)         &  (0.675)         &  (0.368)         &  (0.772)
+         &  (0.861)         &  (0.791)         
 \backslash
 
 \backslash
@@ -6050,8 +6069,8 @@ hline
 \backslash
 (N
 \backslash
-)     &     4154         &     4154         &     4154         &     4183
-         &     4183         &     4183         
+)     &     4154         &     4154         &     4154         &     4094
+         &     4094         &     4094         
 \backslash
 
 \backslash
@@ -6222,23 +6241,24 @@ multicolumn{1}{c}{Agri 2014}
 \backslash
 hline logx      &    0.650         &    0.636         &   -5.239
 \backslash
-sym{**} &    1.016         &    1.151         &   -3.956         
+sym{**} &    1.114         &    1.047         &   -4.525         
 \backslash
 
 \backslash
-           &  (0.724)         &  (0.729)         &  (0.003)         &  (0.642)
-         &  (0.614)         &  (0.103)         
+           &  (0.724)         &  (0.729)         &  (0.003)         &  (0.594)
+         &  (0.614)         &  (0.066)         
 \backslash
 
 \backslash
- r         &   -0.382
+ r2012     &   -0.382
 \backslash
-sym{*}  &                  &                  &    0.170         &      
-            &                  
+sym{*}  &                  &                  &   -0.596
+\backslash
+sym{**} &                  &                  
 \backslash
 
 \backslash
-           &  (0.035)         &                  &                  &  (0.450)
+           &  (0.035)         &                  &                  &  (0.006)
          &                  &                  
 \backslash
 
@@ -6251,14 +6271,14 @@ _cost
 \backslash
 _ne&    22.46         &    22.68         &    72.26
 \backslash
-sym{***}&    12.35         &    16.11         &    46.88
+sym{***}&    11.48         &    11.85         &    59.21
 \backslash
 sym{*}  
 \backslash
 
 \backslash
-           &  (0.231)         &  (0.224)         &  (0.000)         &  (0.563)
-         &  (0.435)         &  (0.043)         
+           &  (0.231)         &  (0.224)         &  (0.000)         &  (0.594)
+         &  (0.579)         &  (0.018)         
 \backslash
 
 \backslash
@@ -6276,9 +6296,9 @@ sym{*}
 \backslash
 sym{***}&    2.803
 \backslash
-sym{***}&                  &    2.131
+sym{***}&                  &    2.121
 \backslash
-sym{***}&    2.080
+sym{***}&    2.159
 \backslash
 sym{***}&                  
 \backslash
@@ -6295,18 +6315,18 @@ _educ
 \backslash
 _rank&    0.372         &    0.394         &    1.267
 \backslash
-sym{***}&    0.663
+sym{***}&    0.747
 \backslash
-sym{*}  &    0.672
+sym{*}  &    0.780
 \backslash
-sym{*}  &    1.230
+sym{*}  &    1.460
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.273)         &  (0.240)         &  (0.000)         &  (0.033)
-         &  (0.031)         &  (0.000)         
+           &  (0.273)         &  (0.240)         &  (0.000)         &  (0.019)
+         &  (0.013)         &  (0.000)         
 \backslash
 
 \backslash
@@ -6316,11 +6336,11 @@ sym{***}&   0.0727
 \backslash
 sym{***}&   0.0729
 \backslash
-sym{***}&   0.0736
+sym{***}&   0.0712
 \backslash
-sym{***}&   0.0741
+sym{***}&   0.0728
 \backslash
-sym{***}&   0.0762
+sym{***}&   0.0804
 \backslash
 sym{***}
 \backslash
@@ -6337,13 +6357,18 @@ _wards&   -1.980
 \backslash
 sym{*}  &   -2.053
 \backslash
-sym{*}  &   -1.644         &   -1.119         &   -1.619         &   -0.948
-         
+sym{*}  &   -1.644         &   -2.412
+\backslash
+sym{*}  &   -2.754
+\backslash
+sym{**} &   -2.396
+\backslash
+sym{*}  
 \backslash
 
 \backslash
-           &  (0.028)         &  (0.020)         &  (0.097)         &  (0.214)
-         &  (0.056)         &  (0.306)         
+           &  (0.028)         &  (0.020)         &  (0.097)         &  (0.014)
+         &  (0.005)         &  (0.023)         
 \backslash
 
 \backslash
@@ -6367,18 +6392,18 @@ sym{***}&    4.920
 \backslash
 sym{***}&    6.946
 \backslash
-sym{***}&    2.890
+sym{***}&    2.948
 \backslash
-sym{**} &    2.922
+sym{**} &    3.003
 \backslash
-sym{**} &    4.603
+sym{**} &    4.932
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.003)
-         &  (0.003)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.002)
+         &  (0.001)         &  (0.000)         
 \backslash
 
 \backslash
@@ -6388,11 +6413,11 @@ sym{***}&    1.971
 \backslash
 sym{***}&    2.532
 \backslash
-sym{***}&    2.056
+sym{***}&    2.066
 \backslash
-sym{***}&    2.056
+sym{***}&    2.078
 \backslash
-sym{***}&    2.550
+sym{***}&    2.633
 \backslash
 sym{***}
 \backslash
@@ -6405,29 +6430,28 @@ sym{***}
 \backslash
  r
 \backslash
-_educ    &                  &   -0.426
+_educ2012&                  &   -0.426
 \backslash
-sym{*}  &                  &                  &   -0.229         &      
-            
+sym{*}  &                  &                  &   -0.602
+\backslash
+sym{***}&                  
 \backslash
 
 \backslash
            &                  &  (0.015)         &                  &   
-               &  (0.389)         &                  
+               &  (0.001)         &                  
 \backslash
 
 \backslash
  r
 \backslash
-_agri    &                  &                  &   0.0530         &     
-             &                  &    0.602
-\backslash
-sym{**} 
+_agri2012&                  &                  &   0.0530         &     
+             &                  &   -0.284         
 \backslash
 
 \backslash
            &                  &                  &  (0.758)         &   
-               &                  &  (0.006)         
+               &                  &  (0.177)         
 \backslash
 
 \backslash
@@ -6439,18 +6463,14 @@ sym{**} &   -75.86
 \backslash
 sym{**} &   -128.9
 \backslash
-sym{***}&   -64.11
-\backslash
-sym{*}  &   -69.62
-\backslash
-sym{*}  &   -90.00
+sym{***}&   -51.09         &   -50.99         &   -100.6
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &  (0.005)         &  (0.005)         &  (0.000)         &  (0.024)
-         &  (0.011)         &  (0.003)         
+           &  (0.005)         &  (0.005)         &  (0.000)         &  (0.094)
+         &  (0.091)         &  (0.003)         
 \backslash
 
 \backslash
@@ -6460,8 +6480,8 @@ hline
 \backslash
 (N
 \backslash
-)     &     4053         &     4053         &     4053         &     3606
-         &     3606         &     3606         
+)     &     4053         &     4053         &     4053         &     3420
+         &     3420         &     3420         
 \backslash
 
 \backslash
@@ -6636,18 +6656,18 @@ sym{**} &    1.997
 \backslash
 sym{*}  &    2.495
 \backslash
-sym{**} &    0.762         &    0.162         &    0.634         
+sym{**} &    0.128         &   -0.259         &    0.235         
 \backslash
 
 \backslash
-           &  (0.001)         &  (0.023)         &  (0.004)         &  (0.253)
-         &  (0.822)         &  (0.373)         
+           &  (0.001)         &  (0.023)         &  (0.004)         &  (0.855)
+         &  (0.737)         &  (0.759)         
 \backslash
 
 \backslash
- r         &    1.100
+ r2012     &    1.100
 \backslash
-sym{***}&                  &                  &    1.615
+sym{***}&                  &                  &    1.284
 \backslash
 sym{***}&                  &                  
 \backslash
@@ -6664,13 +6684,13 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&   -9.039         &   -4.663         &   -5.483         &   -9.634     
-    &   -4.317         &   -4.467         
+_ne&   -9.039         &   -4.663         &   -5.483         &    3.858     
+    &    6.398         &    3.524         
 \backslash
 
 \backslash
-           &  (0.274)         &  (0.580)         &  (0.506)         &  (0.180)
-         &  (0.544)         &  (0.530)         
+           &  (0.274)         &  (0.580)         &  (0.506)         &  (0.596)
+         &  (0.400)         &  (0.643)         
 \backslash
 
 \backslash
@@ -6684,13 +6704,13 @@ _ne&   -9.039         &   -4.663         &   -5.483         &   -9.634
 \backslash
 
 \backslash
- 1.agri    &   -0.486         &   -0.652         &                  &   0.0635
-         &   -0.185         &                  
+ 1.agri    &   -0.486         &   -0.652         &                  &   0.0954
+         &   -0.122         &                  
 \backslash
 
 \backslash
-           &  (0.268)         &  (0.136)         &                  &  (0.884)
-         &  (0.671)         &                  
+           &  (0.268)         &  (0.136)         &                  &  (0.829)
+         &  (0.783)         &                  
 \backslash
 
 \backslash
@@ -6698,13 +6718,13 @@ _ne&   -9.039         &   -4.663         &   -5.483         &   -9.634
 \backslash
 _educ
 \backslash
-_rank&   0.0154         &  -0.0240         &   0.0423         &    0.175   
-      &    0.137         &    0.177         
+_rank&   0.0154         &  -0.0240         &   0.0423         &    0.204   
+      &    0.144         &    0.198         
 \backslash
 
 \backslash
-           &  (0.917)         &  (0.870)         &  (0.770)         &  (0.231)
-         &  (0.347)         &  (0.218)         
+           &  (0.917)         &  (0.870)         &  (0.770)         &  (0.169)
+         &  (0.335)         &  (0.175)         
 \backslash
 
 \backslash
@@ -6714,30 +6734,30 @@ sym{*}  &   0.0321
 \backslash
 sym{*}  &   0.0309
 \backslash
-sym{*}  &  -0.0292
+sym{*}  &  -0.0330
 \backslash
-sym{*}  &  -0.0311
+sym{*}  &  -0.0348
 \backslash
-sym{*}  &  -0.0306
+sym{*}  &  -0.0327
 \backslash
 sym{*}  
 \backslash
 
 \backslash
-           &  (0.011)         &  (0.016)         &  (0.025)         &  (0.028)
-         &  (0.020)         &  (0.027)         
+           &  (0.011)         &  (0.016)         &  (0.025)         &  (0.014)
+         &  (0.010)         &  (0.020)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards&    0.606         &    0.634         &    0.450         &    0.864  
-       &    0.855         &    0.795         
+_wards&    0.606         &    0.634         &    0.450         &    0.656  
+       &    0.683         &    0.698         
 \backslash
 
 \backslash
-           &  (0.281)         &  (0.254)         &  (0.405)         &  (0.123)
-         &  (0.124)         &  (0.149)         
+           &  (0.281)         &  (0.254)         &  (0.405)         &  (0.241)
+         &  (0.221)         &  (0.204)         
 \backslash
 
 \backslash
@@ -6757,11 +6777,11 @@ sym{***}&   -2.552
 \backslash
 sym{***}&   -2.727
 \backslash
-sym{***}&   -3.038
+sym{***}&   -2.999
 \backslash
-sym{***}&   -2.886
+sym{***}&   -2.827
 \backslash
-sym{***}&   -3.084
+sym{***}&   -3.027
 \backslash
 sym{***}
 \backslash
@@ -6772,23 +6792,23 @@ sym{***}
 \backslash
 
 \backslash
- 3.religion&   -1.466         &   -1.594         &   -1.604         &   -1.483
-         &   -1.461         &   -1.505         
+ 3.religion&   -1.466         &   -1.594         &   -1.604         &   -1.320
+         &   -1.401         &   -1.380         
 \backslash
 
 \backslash
-           &  (0.426)         &  (0.383)         &  (0.415)         &  (0.423)
-         &  (0.432)         &  (0.443)         
+           &  (0.426)         &  (0.383)         &  (0.415)         &  (0.476)
+         &  (0.452)         &  (0.482)         
 \backslash
 
 \backslash
- 4.religion&    3.571         &    3.231         &    3.709         &    5.482
-         &    4.359         &    5.041         
+ 4.religion&    3.571         &    3.231         &    3.709         &    4.546
+         &    3.764         &    4.550         
 \backslash
 
 \backslash
-           &  (0.516)         &  (0.580)         &  (0.657)         &  (0.413)
-         &  (0.528)         &  (0.548)         
+           &  (0.516)         &  (0.580)         &  (0.657)         &  (0.457)
+         &  (0.548)         &  (0.588)         
 \backslash
 
 \backslash
@@ -6798,11 +6818,11 @@ sym{***}&    0.884
 \backslash
 sym{***}&    0.870
 \backslash
-sym{***}&    0.973
+sym{***}&    1.040
 \backslash
-sym{***}&    0.990
+sym{***}&    1.035
 \backslash
-sym{***}&    0.996
+sym{***}&    1.026
 \backslash
 sym{***}
 \backslash
@@ -6815,9 +6835,9 @@ sym{***}
 \backslash
  r
 \backslash
-_educ    &                  &    1.265
+_educ2012&                  &    1.265
 \backslash
-sym{***}&                  &                  &    1.502
+sym{***}&                  &                  &    1.313
 \backslash
 sym{***}&                  
 \backslash
@@ -6830,9 +6850,9 @@ sym{***}&
 \backslash
  r
 \backslash
-_agri    &                  &                  &    0.965
+_agri2012&                  &                  &    0.965
 \backslash
-sym{***}&                  &                  &    1.196
+sym{***}&                  &                  &    1.138
 \backslash
 sym{***}
 \backslash
@@ -6851,12 +6871,18 @@ sym{**} &   -40.43
 \backslash
 sym{**} &   -41.20
 \backslash
-sym{**} &   -15.70         &   -19.46         &   -21.50         
+sym{**} &   -36.32
+\backslash
+sym{**} &   -37.62
+\backslash
+sym{**} &   -34.98
+\backslash
+sym{**} 
 \backslash
 
 \backslash
-           &  (0.006)         &  (0.003)         &  (0.002)         &  (0.216)
-         &  (0.125)         &  (0.088)         
+           &  (0.006)         &  (0.003)         &  (0.002)         &  (0.005)
+         &  (0.004)         &  (0.007)         
 \backslash
 
 \backslash
@@ -6866,8 +6892,8 @@ hline
 \backslash
 (N
 \backslash
-)     &     3812         &     3812         &     3812         &     3778
-         &     3778         &     3778         
+)     &     3812         &     3812         &     3812         &     3722
+         &     3722         &     3722         
 \backslash
 
 \backslash
