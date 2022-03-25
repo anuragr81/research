@@ -759,6 +759,46 @@ zero_nas <- function(dat){
   return(dat)
 }
 
+
+get_smallest_bubble <- function(x){
+  return (x[order(sapply(x,function(y){length(jsonlite::fromJSON(as.character(y) ))}))][1])
+}
+get_missing_bubble_mapping_for_2015 <- function(ng){
+  
+  a<-unique(ng[["df2012"]][,c("region","district","B","S","E")])
+  b<-unique(ng[["df2015"]][,c("region","district","B","S","E")])
+  a$B2012 <- a$B
+  b$B2015 <- b$B
+  a$B <- NULL
+  b$B <- NULL
+  k <- expand.grid(a$B2012,b$B2015)
+  colnames(k) <- c("B2012","B2015")
+  k <- plyr::rename(merge(k,a,all=T,by=c("B2012")),c("S"="S2012","E"="E2012"))
+  k <- plyr::rename(merge(k,b,all=T,by=c("B2015")),c("S"="S2015","E"="E2015"))
+  k$distance <- mapply(function(s1,e1,s2,e2) { sqrt((s1-s2)**2 + (e1-e2)**2) } , k$S2012,k$E2012,k$S2015,k$E2015)
+  
+  # start with a small distance and eliminate B2015 values
+  
+  
+  mapping_zerod <- unique(subset(k,distance==0)[,c("B2012","B2015")])
+  # taking care of multiple mappings at distance 0
+  mapping <- ddply(mapping_zerod,.(B2015),summarise,B2012=get_smallest_bubble(B2012))
+  
+  missing_mapping_items <- unique(as.character(subset(k,is.element(B2015,setdiff(b$B2015,mapping$B2015)) & !is.element(B2015,mapping$B2015))$B2015))
+  for (missing_item in missing_mapping_items){
+    m<- subset(k,B2015==missing_item)
+    mapping <- rbind(mapping,m[order(m$distance),][1,][,c("B2012","B2015")])
+  }
+  missing_mapping_items <- unique(as.character(subset(k,is.element(B2015,setdiff(b$B2015,mapping$B2015)) & !is.element(B2015,mapping$B2015))$B2015))
+  
+  if (length(missing_mapping_items)>0){
+    stop("Could not map missing elements")
+  }
+  
+  return(unique(mapping))
+}
+
+
 build_xt_df <- function(dflist)
 {
   dat2010 <- dflist[["df2010"]]
@@ -1167,6 +1207,13 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
         rd$loc <- NULL
         res[[paste0("df",year)]] <- rd
       }
+      
+      # backfill r2012 etc. from 2012 into 2015
+      mappingB2015toB2012<- get_missing_bubble_mapping_for_2015(res)
+      maptoB2012 <- unique(merge(plyr::rename(res[["df2015"]][,c("B","region")],c("B"="B2015")),mappingB2015toB2012,by=c("B2015"),all.x=T) %>% mutate(region=NULL))
+      dat2012 <- unique(plyr::rename(res[["df2012"]][,c("agri","high_educ","r","r_agri","r_educ","B")],c("B"="B2012")))
+      info2012 <- plyr::rename(merge(dat2012,maptoB2012,by=c("B2012")),c("r"="r2012","r_educ"="r_educ2012","r_agri"="r_agri2012"))
+      res[["df2015"]] <- plyr::rename(merge(plyr::rename(res[["df2015"]],c("B"="B2015")),info2012,by=c("B2015","high_educ","agri")),c("B2015"="B"))
       
     } # endif use_ea
     

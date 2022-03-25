@@ -1673,6 +1673,12 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
         res[[paste0("df",year)]] <- rd
       }
       
+      # backfill r2012 etc. from 2012 into 2014
+      mappingB2014toB2012<- get_missing_bubble_mapping_for_2014(res)
+      maptoB2012 <- unique(merge(plyr::rename(res[["df2014"]][,c("B","region")],c("B"="B2014")),mappingB2014toB2012,by=c("B2014"),all.x=T) %>% mutate(region=NULL))
+      dat2012 <- unique(plyr::rename(res[["df2012"]][,c("agri","high_educ","r","r_agri","r_educ","B")],c("B"="B2012")))
+      info2012 <- plyr::rename(merge(dat2012,maptoB2012,by=c("B2012")),c("r"="r2012","r_educ"="r_educ2012","r_agri"="r_agri2012"))
+      res[["df2014"]] <- plyr::rename(merge(plyr::rename(res[["df2014"]],c("B"="B2014")),info2012,by=c("B2014","high_educ","agri")),c("B2014"="B"))      
       #test
       #print(summary(lm(data=dat2010, nu~ r + max_occupation_rank + max_education_rank)))
       
@@ -1865,11 +1871,14 @@ calculate_mean_over_bubbles <- function(input_dat,bubble_distances, field){
   return(resdf)
 }
 
-get_missing_isrural_mapping_for_2014 <- function(tn){
+get_smallest_bubble <- function(x){
+  return (x[order(sapply(x,function(y){length(jsonlite::fromJSON(as.character(y) ))}))][1])
+}
+
+get_missing_bubble_mapping_for_2014 <- function(tn){
   
-  
-  a<-unique(tn$df2012[,c("region","district","B","S","E")])
-  b<-unique(tn$df2014[,c("region","district","B","S","E")])
+  a<-unique(tn[["df2012"]][,c("region","district","B","S","E")])
+  b<-unique(tn[["df2014"]][,c("region","district","B","S","E")])
   a$B2012 <- a$B
   b$B2014 <- b$B
   a$B <- NULL
@@ -1882,15 +1891,10 @@ get_missing_isrural_mapping_for_2014 <- function(tn){
   
   # start with a small distance and eliminate B2014 values
   
-  mapping <- subset(k,distance==0)[,c("B2012","B2014")]
-  #res = list()
-  #res[["remaining"]] = subset(k,is.element(B2014,setdiff(b$B2014,mapping$B2014)) & !is.element(B2014,mapping$B2014))
   
-  #for (distance in c(.3,.1,.05,.01,.005,.0005,.0001,.00005,.00001)){
-  #  res = get_mapping_to_add( remaining_k=res[["remaining"]], distance_threshold=distance)
-  #  mapping <- rbind(mapping,res[["mapping_to_add"]])
-  #  
-  #}
+  mapping_zerod <- unique(subset(k,distance==0)[,c("B2012","B2014")])
+  # taking care of multiple mappings at distance 0
+  mapping <- ddply(mapping_zerod,.(B2014),summarise,B2012=get_smallest_bubble(B2012))
   
   missing_mapping_items <- unique(as.character(subset(k,is.element(B2014,setdiff(b$B2014,mapping$B2014)) & !is.element(B2014,mapping$B2014))$B2014))
   for (missing_item in missing_mapping_items){
@@ -1927,7 +1931,7 @@ add_rural_mapping_for_districts <- function(tn,year)
   
   if (year == 2014){
     rural_wards_df_2012 = plyr::rename(ddply(unique(tn[["df2012"]][c("B","region","district","ward","isrural")]),.(B),summarise,rural_wards=sum(isrural)/length(isrural)), c("B"="B2012"))
-    B2012_2014_mapping <- get_missing_isrural_mapping_for_2014(tn)
+    B2012_2014_mapping <- get_missing_bubble_mapping_for_2014(tn)
     B2012_2014_rural_wards <- merge(rural_wards_df_2012,B2012_2014_mapping,by=c("B2012"))
     
     result = plyr::rename(merge( plyr::rename(tn[["df2014"]],c("B"="B2014")), B2012_2014_rural_wards,by=c("B2014"),all.x=T),c("B2014"="B"))
