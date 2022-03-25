@@ -4772,11 +4772,12 @@ Considering a logit formulation - we can see how father's education affects
  This may combined with the fathers_educ_rank - so that in the OLS, we observe
  how current-education depends on fathers-educ and then look at the transition
  from father's educ to current educ through a different equation.
+ The father_educ_rank is not to be used in the control variables for the
+ regression with educational expenses as dependent variable.
 \end_layout
 
 \begin_layout Standard
-Instead of the sureg, one could observe the panel with a random effects
- estimation- which assume that fixed 
+The panel with a random effects estimation (which assumes that fixed 
 \begin_inset Formula $c_{t}$
 \end_inset
 
@@ -4788,7 +4789,9 @@ Instead of the sureg, one could observe the panel with a random effects
 \begin_inset Formula $r_{t}$
 \end_inset
 
- and other fixed characteristics.
+ and other fixed characteristics) is more useful to understand the effect
+ of prices rather than the fixed effects that don't change.
+ For this reasons, we have focussed on the cross-sectional approach.
 \end_layout
 
 \begin_layout Standard
