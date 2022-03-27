@@ -71,11 +71,14 @@ eststo clear
 use "C:\local_files\research\consumption\lsms\data\ngr_df2012.dta", clear
 gen edchange = hh_education_rank > father_educ_rank
 eststo, title (2012): quietly logit edchange father_educ_rank age i.religion rural_wards i.agri r2012
-
+eststo, title (Educ 2012): quietly logit edchange father_educ_rank age i.religion rural_wards i.agri r_educ2012
+eststo, title (Agri 2012): quietly logit edchange father_educ_rank age i.religion rural_wards r_agri2012
 
 use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
 gen edchange = hh_education_rank > father_educ_rank
 eststo, title (2015): quietly logit edchange father_educ_rank age i.religion rural_wards i.agri r2012
+eststo, title (Educ 2015): quietly logit edchange father_educ_rank age i.religion rural_wards i.agri r_educ2012
+eststo, title (Agri 2015): quietly logit edchange father_educ_rank age i.religion rural_wards r_agri2012
 
 esttab using c:/temp/resnu3.tex, mtitle no p numbers nogaps compress title() 
 

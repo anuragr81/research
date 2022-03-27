@@ -4889,46 +4889,17 @@ Results
 \end_layout
 
 \begin_layout Standard
-The two countries have different levels of urbanisation but may be on a
- similar trajectory.
- Policy tell us that the pressure on education may be natural and could
- be seen as urbanisation needs.
- We explore a linear causality with the question: do people spend more education
- as the prosperity increases ? How does this vary against other variables
- such as the mothers/fathers/educ.
- Urbanisation - is measured as prosperity and expenditure on education is
- seen as readiness for mobility.
-\end_layout
-
-\begin_layout Standard
-1.
- In the cross-sectional study, we only look at changes in prosperity across
- the economy.
-\end_layout
-
-\begin_layout Standard
-2.
- In the time-series question, we may look at how increase in prosperity
- is responded to by the consumers.
- But this is not available due to measurement errors with assets owned as
- well as missing past hhid information for a significant number of households
- in 2014 for Tanzania.
- This could be done however for 2010-2012 - although it would be out of
- sync with 2012-2015 analysis.
-\end_layout
-
-\begin_layout Standard
-A comparison of the expenses in the two economies is faulty - because of
- the effect of urbanisation brings in a lot about educational institutions.
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-%[Parent's educ]
+%The panel with a random effects estimation (which assumes that fixed c_{t}
+ is uncorrelated with any of the control variables x_{t} - and allows us
+ to see the effect of r_{t} and other fixed characteristics) is more useful
+ to understand the effect of prices rather than the fixed effects that don't
+ change.
+ For this reasons, we have focused on the cross-sectional approach.
 \end_layout
 
 \end_inset
@@ -4937,15 +4908,22 @@ status open
 \end_layout
 
 \begin_layout Standard
-The father's educ is collinear with education.
- It needs to be explained better how father's education influences the choice.
- One way is to contrast role of education-rank vs father's education rank.
- Since regressions would give us the results for one variable while keeping
- the other constant, father's education coefficient does not tell us the
- how much it matters together with the education rank itself.
- Since education rank is collinear with the occupation rank, one option
- is to use education-rank (and possibly its cube) as instrument(s), while
- studying the role of father's education and the occupation-rank of expenditure.
+The goal of the analysis is to find out if a higher prosperity in the cross-sect
+ion increases invariable means higher educational expenses.
+ Since education is a clear means for mobility (i.e.
+ the expenditure on education is treated as one's readiness for mobility),
+ the disparity in education means limitation on mobility in the economy.
+ We thus comment on the implications of the urbanisation trends in the two
+ countries on education and mobility.
+ 
+\end_layout
+
+\begin_layout Standard
+The levels of urbanisation are proxied with the asset-prosperity of the
+ region - whose local variation based on education level and occupation
+ are also considered.
+ This is contrasted with the current educational mobility in the two economies
+ measured as the differences in education ranks.
 \end_layout
 
 \begin_layout Standard
@@ -4954,7 +4932,7 @@ status open
 
 \begin_layout Plain Layout
 
-%[Life-cyle]
+%[logx effect]
 \end_layout
 
 \end_inset
@@ -4963,8 +4941,76 @@ status open
 \end_layout
 
 \begin_layout Standard
-The effect of age is significant.
- Older households spend less on ne and more on education.
+An increase in logx - causes a decrease in the the budget share on education
+ 
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ for both Tanzania and Nigeria (see Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district}
+\end_layout
+
+\end_inset
+
+).
+ This is largely due to the educational expenses being relatively higher
+ for poorer households.
+ Looking the 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ regressions in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district_ivreg}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district_ivreg}
+\end_layout
+
+\end_inset
+
+, we don't find a significant rise in education expenditures with the rise
+ in 
+\begin_inset Formula $log(x)$
+\end_inset
+
+.
  
 \end_layout
 
@@ -4974,7 +5020,7 @@ status open
 
 \begin_layout Plain Layout
 
-%[Rural-urban]
+%[r vs price effect]
 \end_layout
 
 \end_inset
@@ -4983,11 +5029,176 @@ status open
 \end_layout
 
 \begin_layout Standard
-Rural wards also spend less on education in Tanzania - not so much in Nigeria.
+However, the effect of the local prosperity is relatively significant in
+ the both economies and slightly stronger for Nigeria.
+ It would seem therefore, that higher prosperity of districts (or urbanisation)
+ does increase educational expenses - and even more significantly for Nigeria.
+ That said, one cannot put down higher budget share of education on urbanisation
+ itself since urbanisation must also raise the prices of non-durable expenditure
+ excluding asset-costs 
+\begin_inset Formula $p_{ne}$
+\end_inset
+
+ and since the effect of 
+\begin_inset Formula $p_{ne}$
+\end_inset
+
+ is weak on 
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ (stronger on 
+\begin_inset Formula $w_{ne}$
+\end_inset
+
+) for both the economies.
+ 
 \end_layout
 
-\begin_layout Enumerate
-logX coeff is positive for Nigeria
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[occupation - agri]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The effect of non-agrarian occupations is stronger for Tanzania - suggesting
+ must lower expenditure on education for consumers employed in agriculture
+ (see coefficients of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ / 
+\family typewriter
+1.agri
+\family default
+ in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district_ivreg}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district_ivreg}
+\end_layout
+
+\end_inset
+
+ ).
+ The separation among rural and urban area as noted in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Non-Parametric-Analysis"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is also evident from the negative coefficients of 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ (
+\family typewriter
+rural_wards
+\family default
+) in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district}
+\end_layout
+
+\end_inset
+
+ as well as in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district_ivreg}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district_ivreg}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+The role of demographic variables cannot be understated in the two economies.
+ In Tanzania, the English-speakers spend consistently higher on education.
+ In Nigeria, ...
+ .
+ 
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+The age and hsize seem to increase the expenditure on education (and decrease
+ on 
+\begin_inset Formula $w_{ne}$
+\end_inset
+
+)- which is not surprising given the increase in needs of the family.
 \end_layout
 
 \begin_layout Enumerate
@@ -4995,39 +5206,11 @@ father-educ is more significant for Tanzania
 \end_layout
 
 \begin_layout Enumerate
-r_agri is more significant for Tanzania - less for Nigeria
-\end_layout
-
-\begin_layout Enumerate
 religion is more significant for Nigeria
 \end_layout
 
 \begin_layout Standard
-Considering a logit formulation - we can see how father's education affects
- current education.
- This may combined with the fathers_educ_rank - so that in the OLS, we observe
- how current-education depends on fathers-educ and then look at the transition
- from father's educ to current educ through a different equation.
- The father_educ_rank is not to be used in the control variables for the
- regression with educational expenses as dependent variable.
-\end_layout
-
-\begin_layout Standard
-The panel with a random effects estimation (which assumes that fixed 
-\begin_inset Formula $c_{t}$
-\end_inset
-
- is uncorrelated with any of the control variables 
-\begin_inset Formula $x_{t}$
-\end_inset
-
- - and allows us to see the effect of 
-\begin_inset Formula $r_{t}$
-\end_inset
-
- and other fixed characteristics) is more useful to understand the effect
- of prices rather than the fixed effects that don't change.
- For this reasons, we have focused on the cross-sectional approach.
+Comparing this with the overall mobility in education, we note that 
 \end_layout
 
 \begin_layout Standard
@@ -7192,7 +7375,7 @@ label{tabTNZ_district_logit}}
 
 
 \backslash
-resizebox{3in}{!}{
+resizebox{5in}{!}{
 \end_layout
 
 \end_inset
@@ -7222,7 +7405,7 @@ else
 \backslash
 fi} 
 \backslash
-begin{tabular}{l*{2}{c}} 
+begin{tabular}{l*{6}{c}} 
 \backslash
 hline
 \backslash
@@ -7230,7 +7413,15 @@ hline           &
 \backslash
 multicolumn{1}{c}{(1)}&
 \backslash
-multicolumn{1}{c}{(2)}
+multicolumn{1}{c}{(2)}&
+\backslash
+multicolumn{1}{c}{(3)}&
+\backslash
+multicolumn{1}{c}{(4)}&
+\backslash
+multicolumn{1}{c}{(5)}&
+\backslash
+multicolumn{1}{c}{(6)}
 \backslash
 
 \backslash
@@ -7238,13 +7429,22 @@ multicolumn{1}{c}{(2)}
 \backslash
 multicolumn{1}{c}{2012}&
 \backslash
-multicolumn{1}{c}{2014}
+multicolumn{1}{c}{Educ 2012}&
+\backslash
+multicolumn{1}{c}{Agri 2012}&
+\backslash
+multicolumn{1}{c}{2014}&
+\backslash
+multicolumn{1}{c}{Educ 2014}&
+\backslash
+multicolumn{1}{c}{Agri 2014}
 \backslash
 
 \backslash
  
 \backslash
-hline edchange  &                  &                  
+hline edchange  &                  &                  &                
+  &                  &                  &                  
 \backslash
 
 \backslash
@@ -7254,25 +7454,41 @@ _educ
 \backslash
 _rank&   -1.811
 \backslash
+sym{***}&   -1.812
+\backslash
+sym{***}&   -1.813
+\backslash
 sym{***}&   -2.944
+\backslash
+sym{***}&   -2.967
+\backslash
+sym{***}&   -2.934
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  age       &  0.00484
 \backslash
-sym{*}  &   0.0141
+sym{*}  &  0.00479
 \backslash
-sym{*}  
+sym{*}  &  0.00361         &   0.0141
+\backslash
+sym{*}  &   0.0146
+\backslash
+sym{*}  &   0.0187
+\backslash
+sym{**} 
 \backslash
 
 \backslash
-           &  (0.018)         &  (0.033)         
+           &  (0.018)         &  (0.019)         &  (0.060)         &  (0.033)
+         &  (0.028)         &  (0.004)         
 \backslash
 
 \backslash
@@ -7280,41 +7496,84 @@ sym{*}
 \backslash
 _english&    0.717
 \backslash
-sym{***}&    0.380         
+sym{***}&    0.720
+\backslash
+sym{***}&    0.732
+\backslash
+sym{***}&    0.380         &    0.440         &    0.305         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.089)         
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.089)
+         &  (0.051)         &  (0.170)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards&    0.203         &   -0.631         
+_wards&    0.203         &    0.252         &  0.00454         &   -0.631  
+       &   -0.912
+\backslash
+sym{*}  &  -0.0188         
 \backslash
 
 \backslash
-           &  (0.162)         &  (0.111)         
+           &  (0.162)         &  (0.079)         &  (0.972)         &  (0.111)
+         &  (0.022)         &  (0.956)         
 \backslash
 
 \backslash
  1.agri    &   -0.239
 \backslash
-sym{*}  &    0.690
+sym{*}  &   -0.234
 \backslash
-sym{**} 
+sym{*}  &                  &    0.690
 \backslash
-
+sym{**} &    0.704
 \backslash
-           &  (0.019)         &  (0.004)         
-\backslash
-
-\backslash
- r2012     &  -0.0424         &   -0.121         
+sym{**} &                  
 \backslash
 
 \backslash
-           &  (0.250)         &  (0.281)         
+           &  (0.019)         &  (0.021)         &                  &  (0.004)
+         &  (0.003)         &                  
+\backslash
+
+\backslash
+ r2012     &  -0.0424         &                  &                  &   -0.121
+         &                  &                  
+\backslash
+
+\backslash
+           &  (0.250)         &                  &                  &  (0.281)
+         &                  &                  
+\backslash
+
+\backslash
+ r
+\backslash
+_educ2012&                  & -0.00705         &                  &     
+             &   -0.214
+\backslash
+sym{*}  &                  
+\backslash
+
+\backslash
+           &                  &  (0.832)         &                  &   
+               &  (0.016)         &                  
+\backslash
+
+\backslash
+ r
+\backslash
+_agri2012&                  &                  &  -0.0689
+\backslash
+sym{*}  &                  &                  &  -0.0462         
+\backslash
+
+\backslash
+           &                  &                  &  (0.033)         &   
+               &                  &  (0.636)         
 \backslash
 
 \backslash
@@ -7322,13 +7581,22 @@ sym{**}
 \backslash
 _cons    &    1.875
 \backslash
-sym{**} &    8.484
+sym{**} &    1.318
+\backslash
+sym{*}  &    2.276
+\backslash
+sym{***}&    8.484
+\backslash
+sym{***}&    10.06
+\backslash
+sym{***}&    7.182
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.001)         &  (0.000)         
+           &  (0.001)         &  (0.012)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -7338,7 +7606,8 @@ hline
 \backslash
 (N
 \backslash
-)     &     4068         &     3427         
+)     &     4068         &     4068         &     4068         &     3427
+         &     3427         &     3427         
 \backslash
 
 \backslash
@@ -7348,7 +7617,7 @@ hline
 \backslash
 hline 
 \backslash
-multicolumn{3}{l}{
+multicolumn{7}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -7358,7 +7627,7 @@ textit{p}-values in parentheses}
 \backslash
  
 \backslash
-multicolumn{3}{l}{
+multicolumn{7}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -7439,7 +7708,7 @@ label{tabNGR_district_logit}}
 
 
 \backslash
-resizebox{2.5in}{!}{
+resizebox{5in}{!}{
 \end_layout
 
 \end_inset
@@ -7469,7 +7738,7 @@ else
 \backslash
 fi} 
 \backslash
-begin{tabular}{l*{2}{c}} 
+begin{tabular}{l*{6}{c}} 
 \backslash
 hline
 \backslash
@@ -7477,7 +7746,15 @@ hline           &
 \backslash
 multicolumn{1}{c}{(1)}&
 \backslash
-multicolumn{1}{c}{(2)}
+multicolumn{1}{c}{(2)}&
+\backslash
+multicolumn{1}{c}{(3)}&
+\backslash
+multicolumn{1}{c}{(4)}&
+\backslash
+multicolumn{1}{c}{(5)}&
+\backslash
+multicolumn{1}{c}{(6)}
 \backslash
 
 \backslash
@@ -7485,13 +7762,22 @@ multicolumn{1}{c}{(2)}
 \backslash
 multicolumn{1}{c}{2012}&
 \backslash
-multicolumn{1}{c}{2015}
+multicolumn{1}{c}{Educ 2012}&
+\backslash
+multicolumn{1}{c}{Agri 2012}&
+\backslash
+multicolumn{1}{c}{2015}&
+\backslash
+multicolumn{1}{c}{Educ 2015}&
+\backslash
+multicolumn{1}{c}{Agri 2015}
 \backslash
 
 \backslash
  
 \backslash
-hline edchange  &                  &                  
+hline edchange  &                  &                  &                
+  &                  &                  &                  
 \backslash
 
 \backslash
@@ -7501,57 +7787,95 @@ _educ
 \backslash
 _rank&   -1.038
 \backslash
+sym{***}&   -1.111
+\backslash
+sym{***}&   -1.025
+\backslash
 sym{***}&   -1.009
+\backslash
+sym{***}&   -1.075
+\backslash
+sym{***}&   -0.992
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  age       &  -0.0393
 \backslash
+sym{***}&  -0.0382
+\backslash
+sym{***}&  -0.0399
+\backslash
 sym{***}&  -0.0331
+\backslash
+sym{***}&  -0.0329
+\backslash
+sym{***}&  -0.0347
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  2.religion&   -1.335
 \backslash
+sym{***}&   -1.325
+\backslash
+sym{***}&   -1.340
+\backslash
 sym{***}&   -1.147
+\backslash
+sym{***}&   -1.133
+\backslash
+sym{***}&   -1.136
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  3.religion&   -1.132
 \backslash
-sym{**} &   -0.934
+sym{**} &   -1.132
+\backslash
+sym{**} &   -1.214
+\backslash
+sym{***}&   -0.934
+\backslash
+sym{**} &   -0.943
+\backslash
+sym{**} &   -1.060
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &  (0.001)         &  (0.009)         
+           &  (0.001)         &  (0.002)         &  (0.001)         &  (0.009)
+         &  (0.008)         &  (0.003)         
 \backslash
 
 \backslash
- 4.religion&   -1.326         &   -1.462         
+ 4.religion&   -1.326         &   -1.564         &   -1.197         &   -1.462
+         &   -1.667         &   -1.291         
 \backslash
 
 \backslash
-           &  (0.398)         &  (0.324)         
+           &  (0.398)         &  (0.322)         &  (0.446)         &  (0.324)
+         &  (0.262)         &  (0.383)         
 \backslash
 
 \backslash
@@ -7559,37 +7883,87 @@ sym{**}
 \backslash
 _wards&   -0.627
 \backslash
+sym{***}&   -0.607
+\backslash
+sym{***}&   -0.795
+\backslash
 sym{***}&   -0.488
+\backslash
+sym{***}&   -0.473
+\backslash
+sym{***}&   -0.693
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
+         &  (0.000)         &  (0.000)         
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 
 \backslash
  1.agri    &   -0.408
 \backslash
-sym{***}&   -0.466
+sym{***}&   -0.580
 \backslash
-sym{***}
+sym{***}&                  &   -0.466
+\backslash
+sym{***}&   -0.626
+\backslash
+sym{***}&                  
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &                  &  (0.000)
+         &  (0.000)         &                  
 \backslash
 
 \backslash
  r2012     &    0.501
 \backslash
-sym{***}&    0.552
+sym{***}&                  &                  &    0.552
+\backslash
+sym{***}&                  &                  
+\backslash
+
+\backslash
+           &  (0.000)         &                  &                  &  (0.000)
+         &                  &                  
+\backslash
+
+\backslash
+ r
+\backslash
+_educ2012&                  &    0.559
+\backslash
+sym{***}&                  &                  &    0.575
+\backslash
+sym{***}&                  
+\backslash
+
+\backslash
+           &                  &  (0.000)         &                  &   
+               &  (0.000)         &                  
+\backslash
+
+\backslash
+ r
+\backslash
+_agri2012&                  &                  &    0.490
+\backslash
+sym{***}&                  &                  &    0.528
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &                  &                  &  (0.000)         &   
+               &                  &  (0.000)         
 \backslash
 
 \backslash
@@ -7597,13 +7971,22 @@ sym{***}
 \backslash
 _cons    &   -1.884
 \backslash
+sym{**} &   -2.425
+\backslash
+sym{***}&   -1.784
+\backslash
 sym{**} &   -2.869
+\backslash
+sym{***}&   -2.970
+\backslash
+sym{***}&   -2.569
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.009)         &  (0.000)         
+           &  (0.009)         &  (0.000)         &  (0.004)         &  (0.000)
+         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -7613,7 +7996,8 @@ hline
 \backslash
 (N
 \backslash
-)     &     4154         &     4094         
+)     &     4154         &     4154         &     4154         &     4094
+         &     4094         &     4094         
 \backslash
 
 \backslash
@@ -7623,7 +8007,7 @@ hline
 \backslash
 hline 
 \backslash
-multicolumn{3}{l}{
+multicolumn{7}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -7633,7 +8017,7 @@ textit{p}-values in parentheses}
 \backslash
  
 \backslash
-multicolumn{3}{l}{
+multicolumn{7}{l}{
 \backslash
 footnotesize 
 \backslash

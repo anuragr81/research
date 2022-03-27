@@ -76,12 +76,16 @@ generate has_english =  litlang == 2 | litlang == 3
 gen edchange = hh_education_rank > father_educ_rank
 
 eststo, title (2012): quietly logit edchange father_educ_rank age i.has_english rural_wards i.agri r2012
-
+eststo, title (Educ 2012): quietly logit edchange father_educ_rank age i.has_english rural_wards i.agri r_educ2012
+eststo, title (Agri 2012): quietly logit edchange father_educ_rank age i.has_english rural_wards  r_agri2012
 
 use "C:\local_files\research\consumption\lsms\data\tn_df2014.dta", clear
 generate has_english =  litlang == 2 | litlang == 3
 gen edchange = hh_education_rank > father_educ_rank
 eststo, title (2014): quietly logit edchange father_educ_rank age i.has_english rural_wards i.agri r2012
+eststo, title (Educ 2014): quietly logit edchange father_educ_rank age i.has_english rural_wards i.agri r_educ2012
+eststo, title (Agri 2014): quietly logit edchange father_educ_rank age i.has_english rural_wards r_agri2012
+
 
 esttab using c:/temp/resnu3.tex, mtitle no p numbers nogaps compress title() 
 
