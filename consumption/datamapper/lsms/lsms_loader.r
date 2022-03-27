@@ -1028,6 +1028,8 @@ lsms_loader<-function(fu,ln,lgc) {
       c$education_rank <- as.integer(c$highest_educ>=25) *4 + as.integer(c$highest_educ>=18 & c$highest_educ<25)*3 + 2*as.integer(c$highest_educ>2 &c$highest_educ!=2 & c$highest_educ<18)+as.integer(c$highest_educ==1)+2*as.integer(c$highest_educ==2)
       
       
+      
+      
       c$hhid<-as.character(c$hhid)
       ab <- merge(a,b,all.x=TRUE)
       ohs<-merge(ab,c,all.x=TRUE)
@@ -1150,7 +1152,10 @@ lsms_loader<-function(fu,ln,lgc) {
                                      names=ln()@get_ohs_secc_columns_lsms_2012(),
                                      m=ln()@get_ohs_secc_fields_mapping_lsms_2012())
       
-      c$education_rank <-as.integer(c$highest_educ>=33)*4 + as.integer(c$highest_educ<33 & c$highest_educ>=25) *3 + as.integer(c$highest_educ>=19 & c$highest_educ<25)*2 + as.integer(c$highest_educ>=1 & c$highest_educ<19)
+      
+      c$education_rank <- as.integer(c$highest_educ>=25) *4 + as.integer(c$highest_educ>=18 & c$highest_educ<25)*3 + 2*as.integer(c$highest_educ>2 &c$highest_educ!=2 & c$highest_educ<18)+as.integer(c$highest_educ==1)+2*as.integer(c$highest_educ==2)
+      
+      
       
       c$hhid<-as.character(c$hhid)
       ab <- merge(a,b)
@@ -1265,7 +1270,9 @@ lsms_loader<-function(fu,ln,lgc) {
       c <- fu()@get_translated_frame(dat=cdat,
                                      names=ln()@get_ohs_secc_columns_lsms_2010(),
                                      m=ln()@get_ohs_secc_fields_mapping_lsms_2010())
-      c$education_rank <-as.integer(c$highest_educ>=33)*4 + as.integer(c$highest_educ<33 & c$highest_educ>=25) *3 + as.integer(c$highest_educ>=19 & c$highest_educ<25)*2 + as.integer(c$highest_educ>=1 & c$highest_educ<19)
+      
+      c$education_rank <- as.integer(c$highest_educ>=25) *4 + as.integer(c$highest_educ>=18 & c$highest_educ<25)*3 + 2*as.integer(c$highest_educ>2 &c$highest_educ!=2 & c$highest_educ<18)+as.integer(c$highest_educ==1)+2*as.integer(c$highest_educ==2)
+      
       
       c$hhid<-as.character(c$hhid)
       ab <- merge(a,b)
@@ -1378,7 +1385,9 @@ lsms_loader<-function(fu,ln,lgc) {
                                      names=ln()@get_ohs_secc_columns_lsms_2008(),
                                      m=ln()@get_ohs_secc_fields_mapping_lsms_2008())
       
-      c$education_rank <-as.integer(c$highest_educ>=33)*4 + as.integer(c$highest_educ<33 & c$highest_educ>=25) *3 + as.integer(c$highest_educ>=19 & c$highest_educ<25)*2 + as.integer(c$highest_educ>=1 & c$highest_educ<19)
+      
+      c$education_rank <- as.integer(c$highest_educ>=25) *4 + as.integer(c$highest_educ>=18 & c$highest_educ<25)*3 + 2*as.integer(c$highest_educ>2 &c$highest_educ!=2 & c$highest_educ<18)+as.integer(c$highest_educ==1)+2*as.integer(c$highest_educ==2)
+      
       
       c$hhid<-as.character(c$hhid)
       ab <- merge(a,b)
