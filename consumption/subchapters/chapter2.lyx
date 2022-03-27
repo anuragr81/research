@@ -2100,6 +2100,12 @@ status open
 \end_layout
 
 \begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Econometric-Method"
+
+\end_inset
+
 Econometric Method
 \end_layout
 
@@ -2617,10 +2623,10 @@ In summary, there are two set of regressions that we use in our analysis
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{gather*}
-w_{ne,i}=\rho_{i}+\alpha_{ne}\cdot r+\gamma_{ne}\cdot ln(P)+\beta_{ne}\cdot ln(x_{i})+\epsilon_{i,ne}\\
-w_{educ,i}=\rho_{i}+\alpha_{educ}\cdot r+\gamma_{educ}\cdot ln(P)+\beta_{educ}\cdot ln(x_{i})+\epsilon_{i,ne}
-\end{gather*}
+\begin{gather}
+w_{ne,i}=\rho_{i}+\alpha_{ne}\cdot r+\gamma_{ne}\cdot ln(P)+\beta_{ne}\cdot ln(x_{i})+\epsilon_{i,ne}\label{eq:sureg_estimation}\\
+w_{educ,i}=\rho_{i}+\alpha_{educ}\cdot r+\gamma_{educ}\cdot ln(P)+\beta_{educ}\cdot ln(x_{i})+\epsilon_{i,ne}\nonumber 
+\end{gather}
 
 \end_inset
 
@@ -2680,6 +2686,33 @@ plural "false"
 caps "false"
 noprefix "false"
 
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+The second set of regressions correspond to the logit formulation using
+ the dependent variable 
+\begin_inset Formula $\delta_{e}$
+\end_inset
+
+ indicating whether the household head's education rank has increased from
+ the father's education rank.
+ The control variables used in this formulation are 
+\begin_inset Formula $\rho_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $r$
+\end_inset
+
+ (as well as 
+\begin_inset Formula $r_{\Gamma}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{\Omega}$
 \end_inset
 
 ).
@@ -3097,8 +3130,8 @@ The range of occupations available to the consumer populations in the surveys
  To compare the role of occupations in the two economies, we standardise
  all the different occupations in the survey for Tanzania and Nigeria into
  occupation ranks ranging from 0 to 3.
- The occupation ranks are essentially based on sorting the varied occupations
- in the two economies by the income of consumers in the respective countries.
+ These occupation ranks are based on sorting the varied occupations in the
+ two economies by the income of consumers in the respective countries.
  The occupation-ranks mapped from the occupation levels in Tanzania and
  Nigeria are presented in Table 
 \begin_inset ERT
@@ -3131,9 +3164,8 @@ ref{occupation_rank_ngr}
 status open
 
 \begin_layout Plain Layout
-In the context of sub-Saharan Africa, empirical studies often use the data
- on occupation or education to proxy the income differences (see Alesina
- et al.
+It is not uncommon for the empirical studies to use the data on occupation
+ or education to proxy the income differences (see Alesina et al.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AlesinaMobilityAfrica2019"
@@ -3141,16 +3173,26 @@ literal "false"
 
 \end_inset
 
-).
- The primary reason for this the sparsity of income data - a problem aggravated
- because of informal sectors of a significant size in the economies.
+) in the context of sub-Saharan Africa.
+ The primary reason for this is the sparsity of income data - a problem
+ that may be aggravated further because of informal sectors of a significant
+ size in the economies.
 \end_layout
 
 \end_inset
 
 .
- The education levels are similarly mapped to education ranks (see Table
- 
+ As described in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the education levels are mapped to education ranks (see Table 
 \begin_inset ERT
 status open
 
@@ -3231,6 +3273,8 @@ noprefix "false"
  in urban areas (due to high costs) - even though the overall hunger instances
  remain proportionately lower in the urban areas (when compared to the household
 s having run out of food due to agricultural reasons).
+ This is only to suggest that the expenditure on education may very much
+ a luxury for a significant part of the population.
 \end_layout
 
 \begin_layout Standard
@@ -3261,7 +3305,17 @@ noprefix "false"
 ), the disparity in asset ownership across regions is not nearly as extreme
  as in Tanzania.
  We discuss the implications of this non-uniformity on consumption in the
- subsequent sections.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Parametric-Analysis"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -3644,6 +3698,294 @@ ns (agrarian/non-agrarian occupations, further sub-divided by higher than
 \end_layout
 
 \begin_layout Standard
+The dependent variables used in the estimation described in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Econometric-Method"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ are listed in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Dependent Variables"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The budget shares for educational expenses (
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+) and non-durable expenditure excluding asset-costs (
+\begin_inset Formula $w_{ne}$
+\end_inset
+
+ ) are used as dependent variables in the sureg estimation with price of
+ non-durable expenditure in the consumer's vicinity (see Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sureg_estimation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The results from the estimation are shown in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district}
+\end_layout
+
+\end_inset
+
+ for Tanzania and Nigeria respectively.
+ The interpretation of references used in these results are as described
+ in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:ReferenceDefinitions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ .
+ Other controls for the household's occupational and educational statuses
+ are listed in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Control-Variables"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ As described in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Econometric-Method"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the prices 
+\begin_inset Formula $p_{ne}$
+\end_inset
+
+ in the reference area - interpreted as the cost of living in the reference
+ - are measured as the the average consumption excluding the asset costs
+ in the consumer's vicinity.
+ As is suggested by the standard consumption theory
+\begin_inset CommandInset citation
+LatexCommand cite
+key "modiglianiutility1954,FriedmanConsumption1957"
+literal "false"
+
+\end_inset
+
+, the total household expenditures are meant to be related with the household’s
+ permanent income.
+ The logarithm of the total expenditure 
+\begin_inset Formula $log(x)$
+\end_inset
+
+ is thus used as the permanent income control.
+\end_layout
+
+\begin_layout Standard
+Of the other control variables listed in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Control-Variables"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, some are specific to the individual household.
+ More specifically, the age of the household age 
+\begin_inset Formula $\tau$
+\end_inset
+
+ (
+\family typewriter
+age
+\family default
+), the factor variable 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ (indicating whether the household head is employed in agriculture related
+ occupation or not), the size 
+\begin_inset Formula $h$
+\end_inset
+
+ of the household (
+\family typewriter
+hsize
+\family default
+), the total expenditure 
+\begin_inset Formula $log(x_{t})$
+\end_inset
+
+ (
+\family typewriter
+l
+\family default
+ogx), the education rank 
+\begin_inset Formula $\Gamma^{*}$
+\end_inset
+
+ of the head of the household (
+\family typewriter
+\size small
+education_rank
+\family default
+\size default
+), the ability to speak English 
+\begin_inset Formula $\xi$
+\end_inset
+
+ (
+\family typewriter
+has_english
+\family default
+ - used only for Tanzania) and religion 
+\begin_inset Formula $\chi$
+\end_inset
+
+ (
+\family typewriter
+religion
+\family default
+ - used only for Nigeria and indicated by 1 for Christianity, 2 for Islam,
+ 3 for Traditional and 4 for other) vary for every household.
+ The variables observed at the level of the reference area - are the number
+ of rural wards 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ ( 
+\family typewriter
+\size small
+rural_wards
+\family default
+\size default
+- divisions within a district marked as rural in the survey), 
+\begin_inset Formula $p_{ne}$
+\end_inset
+
+ ( 
+\family typewriter
+\size small
+log_mean_cost_ne
+\family default
+\size default
+ ) and the respective measures of the prosperity
+\family typewriter
+\size small
+ r
+\family default
+\size default
+ (as defined in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:ReferenceDefinitions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+In addition to 
+\begin_inset Formula $\gamma,\tau,\Omega,r,\xi$
+\end_inset
+
+ and 
+\begin_inset Formula $\chi$
+\end_inset
+
+, the logit formulation also uses the education rank of the household head's
+ father 
+\begin_inset Formula $\Gamma_{f}^{*}$
+\end_inset
+
+(
+\family typewriter
+\size small
+father_educ_rank
+\family default
+\size default
+) as one of the control variables.
+ Further, in an alternate formulation for educational expenses, we regress
+ the logarithm of total expenditure on education against the same control
+ variables as for 
+\begin_inset Formula $w_{ne},w_{educ}$
+\end_inset
+
+.
+ The educational expense used both as the dependent variable and in the
+ logarithm of the total expenditure 
+\begin_inset Formula $log(x)$
+\end_inset
+
+ as the control variable causes a well-known endogeneity problem (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CharlesHurstRace,ChaiKaus2019"
+literal "false"
+
+\end_inset
+
+) that is resolved by instrumenting the variable 
+\begin_inset Formula $log(x)$
+\end_inset
+
+ with the occupation data in the survey.
+ Accepting at most a rejection rate of 10% of a nominal 5% Wald test, the
+ eigenvalue test statistic are higher than 20 (with the critical value of
+ 16.38) for all the regressions - and allow us to reject the null hypothesis
+ that the instrument is a weak one.
+\end_layout
+
+\begin_layout Standard
 \align center
 \begin_inset Float table
 placement H
@@ -3654,7 +3996,225 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="15" columns="4">
+<lyxtabular version="3" rows="5" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="center" valignment="top" width="1.5in">
+<column alignment="left" valignment="top" width="3in">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Control
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variable Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $w_{ne}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+w_ne
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+budget share of the non-durable expenditure excluding costs associated with
+ assets
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+w_educ
+\family default
+\size default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+budget share of the educational expenses
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+q_ne
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+the educational expenses by the household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\delta_{ne}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+edchange
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+variable indicating whether the household head's education rank is higher
+ than the father's
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Dependent Variables"
+
+\end_inset
+
+Dependent Variables
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="14" columns="4">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0.7in">
 <column alignment="center" valignment="top" width="1.5in">
@@ -3718,7 +4278,7 @@ Ind/Ref Level
 
 \family typewriter
 \size small
-lnX
+logx
 \end_layout
 
 \end_inset
@@ -3984,51 +4544,6 @@ Reference
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\Gamma$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-primeduc
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-factor variable indicating whether the household head's highest education
- level achieved is higher than the primary level of education or not
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Individual
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
@@ -4078,7 +4593,7 @@ Individual
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $hh\ vars$
+\begin_inset Formula $\Gamma^{*}$
 \end_inset
 
 
@@ -4123,7 +4638,7 @@ Individual
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $hh\ vars$
+\begin_inset Formula $\Gamma_{f}^{*}$
 \end_inset
 
 
@@ -4167,7 +4682,7 @@ Individual
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $hh\ vars$
+\begin_inset Formula $\tau$
 \end_inset
 
 
@@ -4214,7 +4729,7 @@ Individual
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $hh\ vars$
+\begin_inset Formula $h$
 \end_inset
 
 
@@ -4258,7 +4773,7 @@ Individual
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $hh\ vars$
+\begin_inset Formula $\chi$
 \end_inset
 
 
@@ -4301,7 +4816,7 @@ Individual
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $hh\ vars$
+\begin_inset Formula $\xi$
 \end_inset
 
 
@@ -4369,407 +4884,8 @@ Control Variables
 
 \end_layout
 
-\begin_layout Standard
-\align center
-\begin_inset Float table
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0.7in">
-<column alignment="center" valignment="top" width="1.5in">
-<column alignment="left" valignment="top" width="3in">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Control
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Variable Name
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Description
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $w_{ne}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-w_ne
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-budget share of the non-durable expenditure excluding costs associated with
- assets
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $w_{educ}$
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-w_educ
-\family default
-\size default
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-budget share of the educational expenses
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $w_{A}$
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-w_A
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-budget share of the assets owned by the household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:Dependent Variables"
-
-\end_inset
-
-Dependent Variables
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The results for sureg shown in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_district}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district}
-\end_layout
-
-\end_inset
-
- respectively, use the first reference interpretation as described in Table
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:ReferenceDefinitions"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- .
- The level of prosperity is represented with the variable 
-\family typewriter
-r
-\family default
- while the dependent variables 
-\family typewriter
-w_ne
-\family default
- and 
-\family typewriter
-w_educ
-\family default
- represent the budget shares of non-durable consumption excluding asset
- costs and educational expenses respectively.
- Other controls for the household's occupational and educational statuses
- are listed in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Control-Variables"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- Here, the prices 
-\begin_inset Formula $p_{ne}$
-\end_inset
-
- in the reference area - interpreted as the cost of living in the reference
- - are measured as the the average consumption excluding the asset costs.
- The measurement of 
-\begin_inset Formula $p_{ne}$
-\end_inset
-
- is akin to the price-deflator (unit-value) method used for prices in the
- demand literature (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonQualityQuantityVariation,TafereTaffesseEthiopia2010"
-literal "false"
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-As detail in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Control-Variables"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, some of the control variables are specific to the individual household
- - such as the age (
-\family typewriter
-age
-\family default
- - corresponding to the age of the household head), the size of the household
- (
-\family typewriter
-hsize
-\family default
-), the total of assets and expenditure (
-\family typewriter
-lnX
-\family default
-), the education rank of the head of the household (
-\family typewriter
-\size small
-education_rank
-\family default
-\size default
-), the education rank of the household head's father (
-\family typewriter
-\size small
-father_educ_rank
-\family default
-\size default
-) as well as that of the household head's mother (
-\family typewriter
-\size small
-mother_educ_rank
-\family default
-\size default
-), the ability to speak English (
-\family typewriter
-has_english
-\family default
- for Tanzania), religion (
-\family typewriter
-religion
-\family default
- for Nigeria indicated by 1 for Christianity, 2 for Islam, 3 for Traditional
- and 4 for other).
- Other variables are observed at the level of the reference area - such
- as the number of rural wards ( 
-\family typewriter
-\size small
-rural_wards
-\family default
-\size default
-- divisions within a district marked as rural in the survey), 
-\begin_inset Formula $p_{ne}$
-\end_inset
-
- ( 
-\family typewriter
-\size small
-log_mean_cost_ne
-\family default
-\size default
- ) and the respective measures of the prosperity
-\family typewriter
-\size small
- r
-\family default
-\size default
- (as defined in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:ReferenceDefinitions"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-The dependent variables used in the estimation are shown in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Dependent Variables"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-In an alternate formulation, we regress the educational expenses against
- the same control variables.
- Since having the logarithm of the total expenditure 
-\begin_inset Formula $log(x)$
-\end_inset
-
- as the control variable causes a well-known endogeneity problem (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CharlesHurstRace,ChaiKaus2019"
-literal "false"
-
-\end_inset
-
-), we instrument the 
-\begin_inset Formula $log(x)$
-\end_inset
-
- with the occupation data in the survey.
- Accepting at most a rejection rate of 10% of a nominal 5% Wald test, the
- eigenvalue test statistic are higher than 20 (with the critical value of
- 16.38) for all the regressions - allowing us to reject the null hypothesis
- that the instrument is weak.
-\end_layout
-
 \begin_layout Subsection
-Discussion
+Results
 \end_layout
 
 \begin_layout Standard
@@ -4870,10 +4986,6 @@ status open
 Rural wards also spend less on education in Tanzania - not so much in Nigeria.
 \end_layout
 
-\begin_layout Subsubsection
-Results
-\end_layout
-
 \begin_layout Enumerate
 logX coeff is positive for Nigeria
 \end_layout
@@ -4915,7 +5027,7 @@ The panel with a random effects estimation (which assumes that fixed
 
  and other fixed characteristics) is more useful to understand the effect
  of prices rather than the fixed effects that don't change.
- For this reasons, we have focussed on the cross-sectional approach.
+ For this reasons, we have focused on the cross-sectional approach.
 \end_layout
 
 \begin_layout Standard
@@ -7926,6 +8038,1344 @@ hline
  
 \backslash
 end{longtable} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+tabcolsep}{2pt} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}[!p]{r l l r} 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+caption{Occupations as ranks in Nigeria 
+\backslash
+label{occupation_rank_ngr}}  
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+& 
+\backslash
+multicolumn{1}{c}{code} & 
+\backslash
+multicolumn{1}{c}{occupation name} & 
+\backslash
+multicolumn{1}{c}{occupation rank}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+endhead
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ & 3461 & decorators and commercial designers & 1
+\backslash
+
+\backslash
+ & 7321 & potters and related clay and abrasive formers & 1
+\backslash
+
+\backslash
+ & 8251 & printing machine operators & 1
+\backslash
+
+\backslash
+ & 2144 & electronic and telecommunications engineers & 1
+\backslash
+
+\backslash
+ & 3139 & other optical and electronics equipment controllers not elsewh
+ & 1
+\backslash
+
+\backslash
+ & 6122 & poultry products & 1
+\backslash
+
+\backslash
+ & 7432 & weavers, knitters and other hand textile products makers & 1
+\backslash
+
+\backslash
+ & 9111 & street foods vendors & 1
+\backslash
+
+\backslash
+ & 7424 & basketry weavers, brush markers and related workers & 1
+\backslash
+
+\backslash
+ & 3114 & mechanical engineering technicians & 1
+\backslash
+
+\backslash
+ & 3441 & custom and border professionals & 1
+\backslash
+
+\backslash
+ & 7331 & handicraft workers in wood and related materials & 1
+\backslash
+
+\backslash
+ & 7313 & jewelry and precious metal trade workers & 1
+\backslash
+
+\backslash
+ & 7413 & food beverage testers and graders & 1
+\backslash
+
+\backslash
+ & 8277 & tea coffee cocoa and chocolate preparing and producing machine
+ o & 1
+\backslash
+
+\backslash
+ & 8152 & cooking, roosting and related heat - treating plant operators
+ & 1
+\backslash
+
+\backslash
+ & 7224 & metal grinder, polishers and tool sharpeners & 1
+\backslash
+
+\backslash
+ & 8279 & brewers, wine and other beverage machine operators & 1
+\backslash
+
+\backslash
+ & 7412 & bakers, pastry cooks and confectionery makers & 1
+\backslash
+
+\backslash
+ & 8221 & pharmaceutical and toiletry products machine operators & 1
+\backslash
+
+\backslash
+ & 8263 & sewing and knitting machine operators & 1
+\backslash
+
+\backslash
+ & 7121 & builders traditional materials & 1
+\backslash
+
+\backslash
+ & 313 & building construction labourers & 1
+\backslash
+
+\backslash
+ & 2429 & other legal professionals & 1
+\backslash
+
+\backslash
+ & 1312 & general managers in manufacturing & 1
+\backslash
+
+\backslash
+ & 7332 & handicraft workers in textile, leather and related materials &
+ 1
+\backslash
+
+\backslash
+ & 5149 & other personal services workers not elsewhere classified & 1
+\backslash
+
+\backslash
+ & 7442 & shoe makers and related good workers & 1
+\backslash
+
+\backslash
+ & 8151 & crushing mixing and grinding equipment operators & 1
+\backslash
+
+\backslash
+ & 7211 & metal moulds and core makers & 1
+\backslash
+
+\backslash
+ & 8284 & metal, rubber and plastic products assemblers & 1
+\backslash
+
+\backslash
+ & 7129 & other building frames and related workers & 1
+\backslash
+
+\backslash
+ & 9332 & hand and pedal vehicle drivers & 1
+\backslash
+
+\backslash
+ & 3340 & other teaching associate professionals & 1
+\backslash
+
+\backslash
+ & 5141 & hairdressers, barbers, beauticians and related workers & 1
+\backslash
+
+\backslash
+ & 9162 & sweepers and related labourers & 1
+\backslash
+
+\backslash
+ & 6114 & mixed crop growers & 1
+\backslash
+
+\backslash
+ & 5133 & home-based personal care workers & 1
+\backslash
+
+\backslash
+ & 6151 & aquatic liege cultivation workers & 1
+\backslash
+
+\backslash
+ & 9321 & assembling labourers & 1
+\backslash
+
+\backslash
+ & 3116 & chemical engineering technicians & 1
+\backslash
+
+\backslash
+ & 3421 & trade brokers & 1
+\backslash
+
+\backslash
+ & 8275 & baked goods producing and cereals processing machine operators
+ & 1
+\backslash
+
+\backslash
+ & 8113 & well drillers and borers and related workers & 1
+\backslash
+
+\backslash
+ & 3213 & farming and forestry advisers & 1
+\backslash
+
+\backslash
+ & 7433 & tailors, dress makers and hatters & 1
+\backslash
+
+\backslash
+ & 3416 & buyers & 1
+\backslash
+
+\backslash
+ & 5230 & stall and market salespersons & 1
+\backslash
+
+\backslash
+ & 2332 & pre-primary education teaching professionals & 1
+\backslash
+
+\backslash
+ & 3131 & photographers and image and sound-recording equipment controller
+ & 1
+\backslash
+
+\backslash
+ & 6141 & forestry worker and loggers & 1
+\backslash
+
+\backslash
+ & 7411 & meat and fish butchers and preparers & 1
+\backslash
+
+\backslash
+ & 8229 & other chemical products machine operators & 1
+\backslash
+
+\backslash
+ & 7123 & concrete placers, concrete finishers and terrazzo-workers & 1
+\backslash
+
+\backslash
+ & 8321 & motorcycle drivers & 1
+\backslash
+
+\backslash
+ & 1313 & general managers in construction & 1
+\backslash
+
+\backslash
+ & 7136 & building and related electricians & 1
+\backslash
+
+\backslash
+ & 3417 & appraisers and values & 1
+\backslash
+
+\backslash
+ & 5112 & transport conductors & 1
+\backslash
+
+\backslash
+ & 8123 & metal heat - treating plant operators & 1
+\backslash
+
+\backslash
+ & 8264 & textile bleaching, dyeing and cleaning machine operators & 1
+\backslash
+
+\backslash
+ & 2455 & film, stage and related actors and directors & 1
+\backslash
+
+\backslash
+ & 5121 & house stewards and house keepers & 1
+\backslash
+
+\backslash
+ & 5220 & shop sales persons and demonstrators & 1
+\backslash
+
+\backslash
+ & 6111 & field crops and vegetable growers & 1
+\backslash
+
+\backslash
+ & 6210 & subsistence agricultural and fishery workers & 1
+\backslash
+
+\backslash
+ & 1228 & research and development managers & 1
+\backslash
+
+\backslash
+ & 3444 & government licensing officials & 1
+\backslash
+
+\backslash
+ & 6152 & inland and coastal waters fishery workers & 1
+\backslash
+
+\backslash
+ & 7131 & roofers & 1
+\backslash
+
+\backslash
+ & 6121 & dairy and  livestock producers & 1
+\backslash
+
+\backslash
+ & 6154 & hunters and trappers & 1
+\backslash
+
+\backslash
+ & 7222 & tool maker, metal patter makers and metal makers & 1
+\backslash
+
+\backslash
+ & 1130 & traditional chiefs and head of villages & 1
+\backslash
+
+\backslash
+ & 3229 & other health associate professionals (except nursing) & 1
+\backslash
+
+\backslash
+ & 1316 & general managers in transportation & 1
+\backslash
+
+\backslash
+ & 7213 & sheet-metal workers & 1
+\backslash
+
+\backslash
+ & 7422 & cabinet makers and related workers & 1
+\backslash
+
+\backslash
+ & 9213 & fishery, hunting and tapping labourers & 1
+\backslash
+
+\backslash
+ & 1229 & other specialized managers & 1
+\backslash
+
+\backslash
+ & 7214 & structural metal prepares and erector & 1
+\backslash
+
+\backslash
+ & 6130 & market oriented crop and animal producers & 1
+\backslash
+
+\backslash
+ & 8224 & photographic products machine operators & 1
+\backslash
+
+\backslash
+ & 7135 & plumbers and pipe fitters & 1
+\backslash
+
+\backslash
+ & 5210 & fashion and other models & 1
+\backslash
+
+\backslash
+ & 9322 & hand packers and other manufacturing labourers & 1
+\backslash
+
+\backslash
+ & 7122 & bricklayers, stonemason and tile setters & 1
+\backslash
+
+\backslash
+ & 2143 & electrical engineers & 1
+\backslash
+
+\backslash
+ & 9133 & hand launderers and pressers & 1
+\backslash
+
+\backslash
+ & 9131 & domestice helpers and cleaners & 1
+\backslash
+
+\backslash
+ & 7124 & carpenter and jointers & 1
+\backslash
+
+\backslash
+ & 8240 & wood products machine operators & 1
+\backslash
+
+\backslash
+ & 5139 & other personal care workers & 1
+\backslash
+
+\backslash
+ & 2359 & other teaching professionals not elsewhere classified & 1
+\backslash
+
+\backslash
+ & 8285 & wood related materials products assemblers & 1
+\backslash
+
+\backslash
+ & 9211 & farmland and labourers & 1
+\backslash
+
+\backslash
+ & 9212 & forestry labourers & 1
+\backslash
+
+\backslash
+ & 3442 & government tax and excise officials & 1
+\backslash
+
+\backslash
+ & 4133 & transport clerks & 1
+\backslash
+
+\backslash
+ & 7423 & wood working machine setter operators & 1
+\backslash
+
+\backslash
+ & 1315 & general managers in resturants and hotels & 1
+\backslash
+
+\backslash
+ & 3222 & sanitarian & 1
+\backslash
+
+\backslash
+ & 7322 & glass formers, cutters grinder and finishers & 1
+\backslash
+
+\backslash
+ & 9112 & street vendors, other products & 1
+\backslash
+
+\backslash
+ & 2146 & chemical engineers & 1
+\backslash
+
+\backslash
+ & 7221 & blacksmiths, hammersmith's, forging-press workers & 1
+\backslash
+
+\backslash
+ & 3227 & veterinary assistants & 1
+\backslash
+
+\backslash
+ & 8332 & earth-moving and related machinery operators & 1
+\backslash
+
+\backslash
+ & 9132 & helpers and cleaners in offices and hotels and related workers
+ & 1
+\backslash
+
+\backslash
+ & 7435 & textile patternmakers and cutters & 1
+\backslash
+
+\backslash
+ & 9152 & watchers and doorkeepers & 1
+\backslash
+
+\backslash
+ & 1210 & directors and chief executives & 1
+\backslash
+
+\backslash
+ & 8239 & other rubber and plastics machine operators & 1
+\backslash
+
+\backslash
+ & 2113 & chemists & 1
+\backslash
+
+\backslash
+ & 5113 & travel guides and ground hosts & 1
+\backslash
+
+\backslash
+ & 9153 & private security guards & 1
+\backslash
+
+\backslash
+ & 2460 & religion professionals & 1
+\backslash
+
+\backslash
+ & 3212 & agronomy and forestry technicians & 1
+\backslash
+
+\backslash
+ & 6123 & mixed animal producers & 1
+\backslash
+
+\backslash
+ & 3449 & other government associate professionals & 1
+\backslash
+
+\backslash
+ & 9333 & drivers and operators of animal-drawn vehicles and machinery &
+ 1
+\backslash
+
+\backslash
+ & 9141 & building caretakers & 1
+\backslash
+
+\backslash
+ & 1223 & personel and industrial relations managers & 1
+\backslash
+
+\backslash
+ & 6113 & gardeners,  horticultural; nursery growers & 1
+\backslash
+
+\backslash
+ & 7243 & radio and television service & 1
+\backslash
+
+\backslash
+ & 7231 & motor vehicle mechanics and filters & 1
+\backslash
+
+\backslash
+ & 7437 & upholsterers and related workers & 1
+\backslash
+
+\backslash
+ & 7133 & insulators & 1
+\backslash
+
+\backslash
+ & 7241 & electrical mechanics & 1
+\backslash
+
+\backslash
+ & 7311 & precision instrument makers & 1
+\backslash
+
+\backslash
+ & 5122 & waiters & 1
+\backslash
+
+\backslash
+ & 2453 & musicians & 1
+\backslash
+
+\backslash
+ & 8269 & textile machine operators & 1
+\backslash
+
+\backslash
+ & 7312 & musicians (acoustic) & 1
+\backslash
+
+\backslash
+ & 8223 & metal finishers & 1
+\backslash
+
+\backslash
+ & 7324 & ceramic painters & 1
+\backslash
+
+\backslash
+ & 4144 & scribes & 1
+\backslash
+
+\backslash
+ & 3320 & education specialists(1) & 1
+\backslash
+
+\backslash
+ & 7341 & type setters & 1
+\backslash
+
+\backslash
+ & 3418 & auctioneers & 1
+\backslash
+
+\backslash
+ & 3122 & computer equipment operators & 1
+\backslash
+
+\backslash
+ & 7216 & under-water workers & 1
+\backslash
+
+\backslash
+ & 3223 & dieticians and nutritionists & 1
+\backslash
+
+\backslash
+ & 7345 & textile printers & 1
+\backslash
+
+\backslash
+ & 3224 & optometrists & 1
+\backslash
+
+\backslash
+ & 8312 & railway workers & 1
+\backslash
+
+\backslash
+ & 7436 & embroiderers & 1
+\backslash
+
+\backslash
+ & 8122 & metal melters & 1
+\backslash
+
+\backslash
+ & 3141 & ship engineers & 1
+\backslash
+
+\backslash
+ & 7344 & bookbinders & 1
+\backslash
+
+\backslash
+ & 3226 & physiotherapists & 1
+\backslash
+
+\backslash
+ & 7111 & miners & 1
+\backslash
+
+\backslash
+ & 8132 & ceramic plant operators & 1
+\backslash
+
+\backslash
+ & 8334 & lift-truck operators & 1
+\backslash
+
+\backslash
+ & 9120 & shoe-cleaners & 1
+\backslash
+
+\backslash
+ & 8159 & chemical-plant operators & 1
+\backslash
+
+\backslash
+ & 3228 & pharma assistants & 1
+\backslash
+
+\backslash
+ & 8282 & elec and machinery assemblers & 1
+\backslash
+
+\backslash
+ & 3151 & building and fire inspectors & 1
+\backslash
+
+\backslash
+ & 812 & cement and materials processing machine operators & 1
+\backslash
+
+\backslash
+ & 9161 & garbage collectors & 1
+\backslash
+
+\backslash
+ & 8143 & paper plant operators & 1
+\backslash
+
+\backslash
+ & 2133 & computer programmers & 2
+\backslash
+
+\backslash
+ & 6112 & tree shrub crop growers & 2
+\backslash
+
+\backslash
+ & 3221 & medical assistants & 2
+\backslash
+
+\backslash
+ & 4143 & coding, proof-reading and related clerks & 2
+\backslash
+
+\backslash
+ & 1314 & general managers in retail and wholesale trade & 2
+\backslash
+
+\backslash
+ & 3422 & clearing and fowarding agents & 2
+\backslash
+
+\backslash
+ & 7113 & stone-splitters, cutters and carvers & 2
+\backslash
+
+\backslash
+ & 2412 & personnel and careers professionals & 2
+\backslash
+
+\backslash
+ & 3465 & athletes and related workers & 2
+\backslash
+
+\backslash
+ & 4122 & statistical and finance clerks & 2
+\backslash
+
+\backslash
+ & 8262 & weaving  and knitting machine operators & 2
+\backslash
+
+\backslash
+ & 3310 & primary education teaching associate professionals & 2
+\backslash
+
+\backslash
+ & 3415 & technical and commercials sales representatives & 2
+\backslash
+
+\backslash
+ & 2340 & special education teaching professionals & 2
+\backslash
+
+\backslash
+ & 8141 & sawmill, wood panel and related wood-processing plant operat &
+ 2
+\backslash
+
+\backslash
+ & 7212 & welders and flame-cutters & 2
+\backslash
+
+\backslash
+ & 8322 & cart, taxi and light van drivers & 2
+\backslash
+
+\backslash
+ & 8323 & bus and train drivers & 2
+\backslash
+
+\backslash
+ & 9151 & messengers package and luggage & 2
+\backslash
+
+\backslash
+ & 4142 & mail carriers and sorting clerks & 2
+\backslash
+
+\backslash
+ & 8169 & other power generating and related operators & 2
+\backslash
+
+\backslash
+ & 1224 & sales and marketing managers & 2
+\backslash
+
+\backslash
+ & 8290 & other stationery machine operators and assemblers & 2
+\backslash
+
+\backslash
+ & 9142 & windows cleaners & 2
+\backslash
+
+\backslash
+ & 3411 & securities, finance dealers and brokers & 2
+\backslash
+
+\backslash
+ & 4141 & library and filling clerks & 2
+\backslash
+
+\backslash
+ & 7141 & painters and paperhangers & 2
+\backslash
+
+\backslash
+ & 8272 & dairy products machine operators & 2
+\backslash
+
+\backslash
+ & 7421 & wood treaters & 2
+\backslash
+
+\backslash
+ & 2145 & mechanical engineers & 2
+\backslash
+
+\backslash
+ & 2331 & primary education teaching professionals & 2
+\backslash
+
+\backslash
+ & 3118 & other physical science and engineering technicians & 2
+\backslash
+
+\backslash
+ & 8324 & heavy truck drivrs & 2
+\backslash
+
+\backslash
+ & 2229 & other health professionals (except nursing) & 2
+\backslash
+
+\backslash
+ & 3429 & other business services agent and trade brokers & 2
+\backslash
+
+\backslash
+ & 3330 & special education teaching associate professionals & 2
+\backslash
+
+\backslash
+ & 3113 & electrical engineering technicians & 2
+\backslash
+
+\backslash
+ & 3439 & other administrative associate professionals & 2
+\backslash
+
+\backslash
+ & 8231 & type making and vulcanizing machine operators & 2
+\backslash
+
+\backslash
+ & 2446 & social work professionals & 2
+\backslash
+
+\backslash
+ & 3121 & computer assistants & 2
+\backslash
+
+\backslash
+ & 7112 & short fires and blasters & 2
+\backslash
+
+\backslash
+ & 4132 & production clerks & 2
+\backslash
+
+\backslash
+ & 8161 & power-generating plant operators & 2
+\backslash
+
+\backslash
+ & 7242 & electronic fitters and services & 2
+\backslash
+
+\backslash
+ & 3152 & safety, health and quality inspectors (vehicles, processes & 2
+\backslash
+
+\backslash
+ & 7434 & fur tailor and related workers & 2
+\backslash
+
+\backslash
+ & 1222 & finance and administration managers & 2
+\backslash
+
+\backslash
+ & 2230 & nursing and midwifery professionals & 2
+\backslash
+
+\backslash
+ & 3423 & labour contractors and equipment agents & 2
+\backslash
+
+\backslash
+ & 5143 & undertakers and embalmers & 2
+\backslash
+
+\backslash
+ & 6142 & charcoal burners and related workers & 2
+\backslash
+
+\backslash
+ & 7223 & machine tool setter operators & 2
+\backslash
+
+\backslash
+ & 9311 & mining and related labourers & 2
+\backslash
+
+\backslash
+ & 9312 & construction and maintenance labourers road, dams and similar
+ co & 2
+\backslash
+
+\backslash
+ & 3414 & travel consultants organisers & 2
+\backslash
+
+\backslash
+ & 5131 & institution-based personal care workers & 2
+\backslash
+
+\backslash
+ & 3431 & administrative and related associate professionals & 2
+\backslash
+
+\backslash
+ & 4131 & stock clerks & 2
+\backslash
+
+\backslash
+ & 2139 & other computing professionals & 2
+\backslash
+
+\backslash
+ & 2452 & sculptors, painters and related artists & 2
+\backslash
+
+\backslash
+ & 3463 & street, nightclub and related musicians, singers and dancers &
+ 2
+\backslash
+
+\backslash
+ & 2141 & architects, town and traffic planners & 2
+\backslash
+
+\backslash
+ & 1120 & senior government officials & 2
+\backslash
+
+\backslash
+ & 1226 & supply and distribution managers & 2
+\backslash
+
+\backslash
+ & 2211 & biologists & 2
+\backslash
+
+\backslash
+ & 3470 & religion associate & 2
+\backslash
+
+\backslash
+ & 2351 & education specialists(2) & 2
+\backslash
+
+\backslash
+ & 2441 & economists & 2
+\backslash
+
+\backslash
+ & 3132 & broadcasting equipment controllers & 2
+\backslash
+
+\backslash
+ & 3412 & insurance representatives & 2
+\backslash
+
+\backslash
+ & 1317 & business managers & 2
+\backslash
+
+\backslash
+ & 3145 & air-traffic safety technicians & 2
+\backslash
+
+\backslash
+ & 2422 & judges & 2
+\backslash
+
+\backslash
+ & 2147 & mining engineers & 2
+\backslash
+
+\backslash
+ & 2213 & agronomists and related professionals & 3
+\backslash
+
+\backslash
+ & 8153 & filtering and separating equipment operators & 3
+\backslash
+
+\backslash
+ & 3413 & estate agents & 3
+\backslash
+
+\backslash
+ & 1311 & general managers in agriculture & 3
+\backslash
+
+\backslash
+ & 2142 & civil engineers & 3
+\backslash
+
+\backslash
+ & 2320 & secondary education teaching professionals & 3
+\backslash
+
+\backslash
+ & 6153 & deep-sea fishery workers & 3
+\backslash
+
+\backslash
+ & 1141 & senior officials of political party organisation & 3
+\backslash
+
+\backslash
+ & 3445 & commissioned police officers and detectives & 3
+\backslash
+
+\backslash
+ & 2223 & veterinarians & 3
+\backslash
+
+\backslash
+ & 2421 & lawyers & 3
+\backslash
+
+\backslash
+ & 3143 & aircraft pilot and related workers & 3
+\backslash
+
+\backslash
+ & 1227 & computing services managers & 3
+\backslash
+
+\backslash
+ & 3419 & other finance and sales associate professionals & 3
+\backslash
+
+\backslash
+ & 3450 & social work associate professionals & 3
+\backslash
+
+\backslash
+ & 2149 & other architects, engineers and related professionals & 3
+\backslash
+
+\backslash
+ & 3443 & government welfare and pension officials & 3
+\backslash
+
+\backslash
+ & 2352 & school inspectors & 3
+\backslash
+
+\backslash
+ & 3462 & radio, television and other announcers & 3
+\backslash
+
+\backslash
+ & 2411 & accountants & 3
+\backslash
+
+\backslash
+ & 2419 & other business professionals & 3
+\backslash
+
+\backslash
+ & 2451 & authors, journalist and other writers & 3
+\backslash
+
+\backslash
+ & 2122 & statisticians & 3
+\backslash
+
+\backslash
+ & 1318 & general managers in personnel care, cleaning repairs and rel &
+ 3
+\backslash
+
+\backslash
+ & 2310 & colleges, university and higher education teaching professiona
+ & 3
+\backslash
+
+\backslash
+ & 8155 & petroleum refining plant operators & 3
+\backslash
+
+\backslash
+ & 1221 & production and operations managers & 3
+\backslash
+
+\backslash
+ & 2224 & pharmacists & 3
+\backslash
+
+\backslash
+ & 2148 & cartographers and surveyors & 3
+\backslash
+
+\backslash
+ & 2221 & medical doctors & 3
+\backslash
+
+\backslash
+ & 3112 & civil engineering technicians & 3
+\backslash
+
+\backslash
+ & 5111 & flight attendants and travel stewards & 3
+\backslash
+
+\backslash
+ & 1110 & legislators & 3
+\backslash
+
+\backslash
+ & 1142 & senior business officers & 3
+\backslash
+
+\backslash
+ & 3432 & legal professionals & 3
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline
+\backslash
+hline  
+\backslash
+
+\backslash
+ 
+\backslash
+end{longtable}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}[!p]{l r l r}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline
+\backslash
+hline 
+\backslash
+caption{Occupations as ranks in Tanzania 
+\backslash
+label{occupation_rank_tn}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ & 
+\backslash
+multicolumn{1}{c}{code} & 
+\backslash
+multicolumn{1}{c}{occupation area} & 
+\backslash
+multicolumn{1}{c}{occupation rank}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ & 14 & Student & 0
+\backslash
+
+\backslash
+ & 13 & Job Seeker & 0
+\backslash
+
+\backslash
+ & 12 & Paid Family Work & 0
+\backslash
+
+\backslash
+ & 16 & Unemployed & 0
+\backslash
+
+\backslash
+ & 11 & Unpaid Family Work & 0
+\backslash
+
+\backslash
+ & 17 & Unemployed (too young) & 0  
+\backslash
+
+\backslash
+ & 1 & Livestock/Agriculture & 1
+\backslash
+
+\backslash
+ & 2 & Fishing & 1
+\backslash
+
+\backslash
+ & 3 & Mining & 1
+\backslash
+
+\backslash
+ & 4 & Tourism & 1
+\backslash
+
+\backslash
+ & 7 & Private Sector & 2
+\backslash
+
+\backslash
+ & 9 & Non-Agricultural (w Employer) & 2
+\backslash
+
+\backslash
+ & 10 & Non-Agricultural (w/o Employer) & 2
+\backslash
+
+\backslash
+ & 8 & Non-Government/Religious Org & 3
+\backslash
+
+\backslash
+ & 5 & Government & 3
+\backslash
+
+\backslash
+ & 6 & Parastatal & 3
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+
+\backslash
+ 
+\backslash
+end{longtable}
 \end_layout
 
 \end_inset
