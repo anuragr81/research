@@ -31,12 +31,12 @@ theorems-ams-extended-chap-bytype
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "times" "Caslon OS"
+\font_roman "tgschola" "Spectral"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts false
+\use_non_tex_fonts true
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -162,13 +162,9 @@ textit{Implications of assets-inequalities and urbanisation}}}
 The economic inequalities in developing economies often persist both across
  wider geographical areas and within densely populated cross-section of
  urban areas.
- The urban migration pressures are often implied due to the uneven growth
- - in particular due to the sparse opportunities for both intergenerational
- mobility and improvements in consumption.
- Considering how consumer demand for education and non-durable commodities
- responds to local and wider disparities in prosperity relative to a reference
- area, the current study explains the implications of differences in contexts
- across two representative countries in the sub-Saharan Africa.
+ In the current chapter, we explore how the expenses on education respond
+ to local and wider disparities in prosperity and urbanisation levels explain
+ the implications uneven mobility on migration pressures and consumption.
 \end_layout
 
 \begin_layout Standard
@@ -1205,16 +1201,6 @@ status open
 \begin_layout Section
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Model"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-\begin_inset CommandInset label
-LatexCommand label
 name "sec:Econometric-Method"
 
 \end_inset
@@ -1490,9 +1476,19 @@ noprefix "false"
 
 ) and the parametric formulations for the comparison of expenditure on education
  against the non-durable expenditure excluding asset costs and educational
- mobility.
- More particularly, the parametric analysis uses a seemingly unrelated regressio
-n (SUR - see 
+ mobility (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Parametric-Analysis"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ More particularly, the parametric analyses use a seemingly unrelated regression
+ (SUR - see 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ZellnerSureg1962"
@@ -1502,19 +1498,25 @@ literal "false"
 
 ) for the educational expenses and a logistic regression to inspect the
  changes in education levels over a generation.
-\end_layout
+ The logistic regression considers the effect of the education rank of the
+ father of the household head as a control variable on the improvement of
+ household head's educational level.
+ The dependent variable for the logistic regression is an indicator variable
+ that is set to true when the education rank of the household head is higher
+ than that of the father's.
+ The educational rank - also used as a control variable in sureg for educational
+ expenses - is determined using the educational levels available in the
+ data for Tanzania and Nigeria (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Data"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Standard
+\end_inset
 
-\bar under
-The role of current educational rank of the households's head is considered
- for the former while the concerns for educational mobility are addressed
- with a logit formulation using a dependent variable indicating whether
- the educational rank of household-head is higher than that of the father.
- The determinaton of education rank depends on level 
-\bar default
-..
- 
+ for details).
 \end_layout
 
 \begin_layout Standard
@@ -1532,9 +1534,9 @@ status open
 \end_layout
 
 \begin_layout Standard
-A key control in both the regression is the prosperity of the area of reference
- chosen by the representative consumer - measured as the average local assets
- possession in the area.
+The other control of a key importance in both the regressions is the prosperity
+ of the consumer's normative (geographical) area of reference - measured
+ simply as the average local assets possession in the area.
  The measurement of the prosperity levels relies on the market-value of
  assets (including land, housing) that is observed directly (see Section
  
@@ -1547,7 +1549,7 @@ noprefix "false"
 
 \end_inset
 
-).
+ for details).
  
 \end_layout
 
@@ -1568,13 +1570,13 @@ status open
 \begin_layout Standard
 Given the recent industrialisation in the sub-Saharan Africa, the dichotomy
  of agrarian and non-agrarian occupations is also considered of importance
- in the analysis.
- We factor in the role of agrarian-occupation in two way.
- First, we consider the role of being in an agrarian occupation against
- the local prosperity in terms of assets.
- Second, we also consider the role of the prosperity among agrarian and
- non-agrarian populations in the same vicinity (geographical area of the
- reference
+ in our analyses.
+ We factor in the role of agrarian-occupation in two ways.
+ First, we compare the effects of being in an agrarian occupation with that
+ of the local prosperity.
+ Second, we also consider the role of the prosperity split among agrarian
+ and non-agrarian populations in the same vicinity (geographical area of
+ the reference
 \begin_inset Foot
 status open
 
@@ -1586,6 +1588,7 @@ This reference area combines any districts that may exist within the 6-km-radius
 \end_inset
 
 ).
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1603,7 +1606,10 @@ status open
 \end_layout
 
 \begin_layout Standard
-The results provided in Section 
+The effects of prosperity across primary and higher-than-primary education
+ levels are also considered by comparing the prosperity of sub-populations
+ with primary and higher-than primary education.
+ The results provided in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Results"
@@ -1613,7 +1619,7 @@ noprefix "false"
 
 \end_inset
 
- thus use three interpretations of the normative reference.
+ thus use three interpretations of a normative reference.
  The first interpretation is one where a simple average of the total assets
  owned by the households in the consumer's district.
  Both education rank and a factor variable 
@@ -1788,7 +1794,7 @@ Average over geographical vicinity (district)
 \begin_inset Text
 
 \begin_layout Plain Layout
-Average over 
+Separate averages over 
 \begin_inset Formula $\Gamma$
 \end_inset
 
@@ -1827,7 +1833,7 @@ Average over
 \begin_inset Text
 
 \begin_layout Plain Layout
-Average over 
+Separate averages over 
 \begin_inset Formula $\Omega$
 \end_inset
 
@@ -1907,12 +1913,10 @@ The the age
  richness in a reference area of less prosperity despite the promise of
  higher relative prosperity in a poorer reference (due to liquid assets
  of the household).
- The effects of age and social identity are thus of importance to our interpreta
-tion of mobility and related expenditures.
- We then use these results to assess the extent to which an increase in
- income (or assets) within and across areas of reference could increase
- the preparedness to move into urban areas as well as the consumption in
- the two economies.
+ We use the effects of age and social identity to assess the extent to which
+ an increase in income (or assets) within and across areas of reference
+ could increase the preparedness to move into urban areas as well as the
+ consumption in the two economies.
 \end_layout
 
 \begin_layout Standard
@@ -1930,10 +1934,10 @@ status open
 \end_layout
 
 \begin_layout Standard
-In summary, there are two set of regressions that we use in our analysis
- of educational expenses and distribution of assets.
- In the first set of regressions which are for educational expenses, we
- use the follow equations with 
+To recap, there are two set of regressions that we use in our analysis of
+ educational expenses and distribution of assets.
+ In the first set of regressions for educational expenses, we use the follow
+ equations with 
 \begin_inset Formula $P$
 \end_inset
 
@@ -1972,7 +1976,7 @@ w_{educ,i}=\rho_{i}+\alpha_{educ}\cdot r+\gamma_{educ}\cdot ln(P)+\beta_{educ}\c
 \end_layout
 
 \begin_layout Standard
-The second and third interpretations - as listed in Table 
+Here, the second and third interpretations - as listed in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:ReferenceDefinitions"
