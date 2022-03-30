@@ -31,12 +31,12 @@ theorems-ams-extended-chap-bytype
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "tgschola" "Spectral"
+\font_roman "libertine" "Spectral"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts true
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -48,7 +48,7 @@ theorems-ams-extended-chap-bytype
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 11
+\paperfontsize 12
 \spacing single
 \use_hyperref false
 \papersize default
@@ -162,10 +162,11 @@ textit{Implications of assets-inequalities and urbanisation}}}
 The economic inequalities in developing economies often persist both across
  wider geographical areas and within densely populated cross-section of
  urban areas.
- The current chapters uses the data on ownership of long-term assets as
- well as that on geographic locations for the districts where consumers
- reside - to explain the role which differences in prosperity levels in
- a normative reference area may play in consumption and educational mobility.
+ The current chapter uses the data on ownership of long-term assets as well
+ as that on geographic locations for the districts where consumers reside
+ - to explain the role which differences in prosperity levels observed at
+ a normative reference area may play in educational expenses, consumption
+ and mobility.
 \end_layout
 
 \begin_layout Standard
@@ -3075,7 +3076,7 @@ noprefix "false"
 \end_inset
 
 .
- The budget shares for educational expenses (
+ The two dependent variables - budget shares for educational expenses (
 \begin_inset Formula $w_{educ}$
 \end_inset
 
@@ -3083,8 +3084,8 @@ noprefix "false"
 \begin_inset Formula $w_{ne}$
 \end_inset
 
- ) are used as dependent variables in the sureg estimation with price of
- non-durable expenditure in the consumer's vicinity (see Equations 
+ ) - are used in the sureg estimation with price of non-durable expenditure
+ in the consumer's vicinity as a control (see Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:sureg_estimation"
@@ -3095,7 +3096,39 @@ noprefix "false"
 \end_inset
 
 ).
- The results from the estimation are shown in Tables 
+ As described in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Econometric-Method"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the prices 
+\begin_inset Formula $p_{ne}$
+\end_inset
+
+ in the reference area - interpreted as the cost of living in the reference
+ - are measured as the the average consumption excluding the asset costs
+ in the consumer's vicinity.
+ Based on the standard consumption theory (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "modiglianiutility1954,FriedmanConsumption1957"
+literal "false"
+
+\end_inset
+
+), the total household expenditures are meant to be related with the household’s
+ permanent income - thus permitting the use of the logarithm of total expenditur
+e 
+\begin_inset Formula $log(x)$
+\end_inset
+
+ as the control for permanent income in the sureg estimation.
+ The results from the sureg estimation are shown in Tables 
 \begin_inset ERT
 status open
 
@@ -3133,8 +3166,12 @@ noprefix "false"
 
 \end_inset
 
- .
- Other controls for the household's occupational and educational statuses
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Other controls for the household's occupational and educational statuses
  are listed in the Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3146,52 +3183,7 @@ noprefix "false"
 \end_inset
 
 .
- As described in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Econometric-Method"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the prices 
-\begin_inset Formula $p_{ne}$
-\end_inset
-
- in the reference area - interpreted as the cost of living in the reference
- - are measured as the the average consumption excluding the asset costs
- in the consumer's vicinity.
- As is suggested by the standard consumption theory
-\begin_inset CommandInset citation
-LatexCommand cite
-key "modiglianiutility1954,FriedmanConsumption1957"
-literal "false"
-
-\end_inset
-
-, the total household expenditures are meant to be related with the household’s
- permanent income.
- The logarithm of the total expenditure 
-\begin_inset Formula $log(x)$
-\end_inset
-
- is thus used as the permanent income control.
-\end_layout
-
-\begin_layout Standard
-Of the other control variables listed in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Control-Variables"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, some are specific to the individual household.
+ Of these control variables, some are specific to the individual household.
  More specifically, the age of the household age 
 \begin_inset Formula $\tau$
 \end_inset
@@ -3260,7 +3252,8 @@ religion
 rural_wards
 \family default
 \size default
-- divisions within a district marked as rural in the survey), 
+- divisions within a district marked as rural in the survey), the logarithm
+ of the per-head cost of non-durable consumption excluding assets costs
 \begin_inset Formula $p_{ne}$
 \end_inset
 
@@ -3355,8 +3348,8 @@ status open
 <lyxtabular version="3" rows="5" columns="3">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0.7in">
-<column alignment="center" valignment="top" width="1.5in">
-<column alignment="left" valignment="top" width="3in">
+<column alignment="center" valignment="top" width="1in">
+<column alignment="left" valignment="top" width="4in">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
@@ -3484,11 +3477,11 @@ q_ne
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-the educational expenses by the household
+the logarithm of educational expenses by the household
 \end_layout
 
 \end_inset
@@ -3518,7 +3511,7 @@ edchange
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3572,10 +3565,10 @@ status open
 \begin_inset Tabular
 <lyxtabular version="3" rows="14" columns="4">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0.7in">
-<column alignment="center" valignment="top" width="1.5in">
-<column alignment="left" valignment="top" width="3in">
-<column alignment="left" valignment="top" width="1in">
+<column alignment="center" valignment="top" width="0.5in">
+<column alignment="center" valignment="top" width="1.2in">
+<column alignment="left" valignment="top" width="3.5in">
+<column alignment="left" valignment="top" width="0.7in">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
@@ -3734,7 +3727,7 @@ r_educ
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3748,7 +3741,7 @@ logarithm of mean asset-ownership level among the consumers of having the
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3786,7 +3779,7 @@ r_agri
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3800,7 +3793,7 @@ logarithm of mean asset-ownership level among the consumers of having the
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3924,7 +3917,7 @@ agri
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3934,7 +3927,7 @@ factor variable indicating whether the household head's occupation is agrarian
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4023,7 +4016,7 @@ education rank of the household head's biological father
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4148,7 +4141,7 @@ religion
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4157,7 +4150,7 @@ the religion which most members in the household subscribe to
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4191,7 +4184,7 @@ has_english
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4200,7 +4193,7 @@ ability to speak or write English
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4264,22 +4257,24 @@ status open
 \end_layout
 
 \begin_layout Standard
-The goal of the analysis is to find out if a higher prosperity in the cross-sect
-ion increases invariable means higher educational expenses.
+A key goal of the empirical analysis is to find out if the educational expenses
+ in the two economies rise more sharply as a result higher prosperity in
+ the local cross-section of incomes or due to disparities in prosperity
+ across wider geographical areas.
  Since education is a clear means for mobility (i.e.
  the expenditure on education is treated as one's readiness for mobility),
  the disparity in education means limitation on mobility in the economy.
- We thus comment on the implications of the urbanisation trends in the two
- countries on education and mobility.
+ The framework discussed sections thus allows us to comment on the implications
+ of the urbanisation trends in the two countries on education and mobility.
  
 \end_layout
 
 \begin_layout Standard
-The levels of urbanisation are proxied with the asset-prosperity of the
- region - whose local variation based on education level and occupation
- are also considered.
- This is contrasted with the current educational mobility in the two economies
- measured as the differences in education ranks.
+As discussed in previous sections, we proxy the levels of urbanisation using
+ the the asset-prosperity of the consumer's vicinity while accounting for
+ local income differences using the control for permanent income.
+ This is then contrasted with the current educational mobility in the two
+ economies by comparing the intergenerational differences in education ranks.
 \end_layout
 
 \begin_layout Standard
@@ -4297,12 +4292,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-An increase in logx - causes a decrease in the the budget share on education
- 
-\begin_inset Formula $w_{educ}$
-\end_inset
-
- for both Tanzania and Nigeria (see Tables 
+The tables 
 \begin_inset ERT
 status open
 
@@ -4328,10 +4318,18 @@ ref{tabNGR_district}
 
 \end_inset
 
-).
+ suggest that an increase in 
+\family typewriter
+logx 
+\family default
+- causes a decrease in the the budget share on education 
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ for both Tanzania and Nigeria.
  This is largely due to the educational expenses being relatively higher
  for poorer households.
- Looking the 
+ Looking at the 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
@@ -4386,20 +4384,21 @@ status open
 
 \begin_layout Standard
 However, the effect of the local prosperity is relatively significant in
- the both economies and slightly stronger for Nigeria.
- It would seem therefore, that higher prosperity of districts (or urbanisation)
- does increase educational expenses - and even more significantly for Nigeria.
+ both the economies and is slightly stronger for Nigeria.
+ It would seem that higher prosperity of districts (or urbanisation) does
+ increase educational expenses in both the countries but more significantly
+ for Nigeria.
  That said, one cannot put down higher budget share of education on urbanisation
  itself since urbanisation must also raise the prices of non-durable expenditure
  excluding asset-costs 
 \begin_inset Formula $p_{ne}$
 \end_inset
 
- and since the effect of 
+ and the effect of 
 \begin_inset Formula $p_{ne}$
 \end_inset
 
- is weak on 
+ remains weak on 
 \begin_inset Formula $w_{educ}$
 \end_inset
 
@@ -4426,9 +4425,9 @@ status open
 \end_layout
 
 \begin_layout Standard
-The effect of non-agrarian occupations is stronger for Tanzania - suggesting
- must lower expenditure on education for consumers employed in agriculture
- (see coefficients of 
+We also note that the effect of non-agrarian occupations is stronger for
+ Tanzania - suggesting much lower expenditure on education for consumers
+ employed in agriculture (see coefficients of 
 \begin_inset Formula $\Omega$
 \end_inset
 
@@ -4537,11 +4536,11 @@ ref{tabNGR_district_ivreg}
 \end_layout
 
 \begin_layout Standard
-The demographic variables have a strong significance implication for educational
- expenses in both the economies.
- In Tanzania, the English-speakers spend consistently higher on education
- while in Nigeria the educational expenses are higher among households identifyi
-ng as Christian.
+The demographic variables have a strong significance for educational expenses
+ in both the economies.
+ More particularly, we see that in Tanzania, the English-speakers spend
+ consistently higher on education while in Nigeria, the educational expenses
+ are higher among households identifying as Christian.
  The effects of age 
 \begin_inset Formula $\tau$
 \end_inset
@@ -4550,12 +4549,13 @@ ng as Christian.
 \begin_inset Formula $h$
 \end_inset
 
- indicate that older householders with higher family units consistently
- spend higher on education.
+ point to the less surprising observation that the older householders with
+ higher family units consistently spend higher on education.
 \end_layout
 
 \begin_layout Standard
-Comparing this with the overall mobility in education in Tables 
+Comparing the results from the analysis of expenditure on education with
+ the overall educational mobility in Tables 
 \begin_inset ERT
 status open
 
@@ -4583,8 +4583,8 @@ ref{tabNGR_district_logit}
 
 , we note that the role of father's education rank reverses between Tanzania
  and Nigeria.
- While a significant number of households seem to have gain education ranks
- in Nigeria, the changes 
+ While a significant number of households seem to have gained education
+ ranks in Nigeria, the changes 
 \begin_inset Formula $\delta_{e}$
 \end_inset
 
@@ -4594,8 +4594,8 @@ edchange
 \family default
 ) are much lower in Tanzania.
  The differences in educational mobility across agrarian and non-agrarian
- occupations is also higher in Tanzania where the gain educational mobility
- have remained to non-agrarian professions.
+ occupations is also higher in Tanzania where the gains in educational mobility
+ have remained limited to non-agrarian professions.
  In Nigeria, on the other hand, we observe that the educational mobility
  is generally higher for agrarian occupations as well.
  This can be confirmed with the reversal in the signs of 
@@ -4607,12 +4607,13 @@ edchange
 r_agri
 \family default
 ) for Tanzania and Nigeria.
- The differences in mobility across rural and urban areas seems higher in
+ The differences in mobility across rural and urban areas seem higher in
  Nigeria - suggesting that while educational levels are generally higher
- in Nigeria, the changes since last generation are more focused on urban
- areas.
- The households identifying as Christian or English-speaking in Nigeria
- and Tanzania, respectively, demonstrate a higher 
+ in Nigeria, the changes since last generation are more often limited to
+ the urban areas.
+ Once again, the households identifying as Christian or English-speaking
+ in Nigeria and Tanzania, respectively, demonstrate a higher attainment
+ of educational mobility.
 \end_layout
 
 \begin_layout Section
@@ -4628,10 +4629,12 @@ Conclusions
 \begin_layout Standard
 \noindent
 We had set ourselves to understand how disparities in urbanisation and improveme
-nts of income - the educational expenses.
+nts of income at local levels may affect the differences in educational
+ expenses and mobility in the context of sub-Saharan Africa.
  Treating the educational expenses as investments in mobility, we find significa
-nt effect of prosperity and instuttional differencs in education.
- These repeat many of the observatios from 
+nt effect of regional prosperity and institutional differences on both education
+ expenses and mobility.
+ We thus share many of the wider observations made by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AlesinaMobilityAfrica2019"
@@ -4639,8 +4642,21 @@ literal "false"
 
 \end_inset
 
- - who highlight the role of religious and colonial institutions in educational
- mobility.
+ - who highlight the role of religious and colonial institutions in the
+ educational mobility across sub-Saharan Africa.
+\end_layout
+
+\begin_layout Standard
+More specifically, the separation of opportunities for education and mobility
+ is stronger in Tanzania where agrarian occupations and areas lag far behind
+ the urban areas.
+ In Nigeria, on the other hand, the level of urbanisation and access to
+ education are higher but the differences brought about due to religious
+ identity and higher wealth are significant.
+ In summary, while overall educational level seems higher in Nigeria, the
+ access to education as a means for mobility in both the economies - despite
+ their own unique prevalent social conditions - is rather limited.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5983,7 +5999,7 @@ centering
 
 
 \backslash
-caption{Tanzania - $q_{educ}$ 
+caption{Tanzania - $log(x_{educ})$ 
 \backslash
 label{tabTNZ_district_ivreg}}
 \end_layout
@@ -6369,7 +6385,7 @@ centering
 
 
 \backslash
-caption{Nigeria - $q_{educ}$ 
+caption{Nigeria - $log(x_{educ})$ 
 \backslash
 label{tabNGR_district_ivreg}}
 \end_layout
@@ -6773,7 +6789,9 @@ centering
 
 
 \backslash
-caption{Tanzania - education-level 
+caption{Tanzania - $
+\backslash
+delta_{e}$ 
 \backslash
 label{tabTNZ_district_logit}}
 \end_layout
@@ -7106,7 +7124,9 @@ centering
 
 
 \backslash
-caption{Nigeria - education-level 
+caption{Nigeria - $
+\backslash
+delta_{e}$ 
 \backslash
 label{tabNGR_district_logit}}
 \end_layout
