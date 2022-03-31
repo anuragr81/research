@@ -88,4 +88,4 @@ if __name__ == "__main__":
 
 	#print(df)
 	#print(print_table(dfinput=df,idcolumnIndex=0,longtable=False,landscape=False,selected_columns=selected_columns))
-	print(print_table(dfinput=df,idcolumnIndex=0,longtable=False,landscape=True,selected_columns=selected_columns))
+	print(print_table(dfinput=df,idcolumnIndex=0,longtable=False,landscape=False,selected_columns=selected_columns))
