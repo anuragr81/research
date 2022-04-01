@@ -165,12 +165,13 @@ class Node:
     
     def assign_output_properties(self,rule,**inputs):                
         # output is not changed
-        self._output[-1]['rule']=rule
-        self._output[-1]['inputs']={**{'state':self.get_output()} , **inputs}
+        old_output  = self.get_output()
+        # no change in output -just rule and input update
+        self._output.append({'rule':rule, 'inputs':{**{'state':self.get_output()} , **inputs}, 'output':old_output })
             
     def set_output(self,rule,**kwargs):
         old_output = self.get_output()
-        print(rule.__name__)
+        #print(rule.__name__)
         new_output = rule()(node=self,**kwargs)
         
         if isinstance(new_output,dict):
@@ -181,7 +182,6 @@ class Node:
                     else:
                         self._output.append({'rule':rule,'inputs':{**{'state':old_output} , **kwargs},'output':new_output['output']})
                 
-            
         else:
            if new_output != old_output:
               self._output.append({'rule':rule,'inputs':{**{'state':old_output} , **kwargs},'output':new_output })
@@ -268,7 +268,7 @@ def Xtu():
 
 
 def unclassified_pratyayaaH():
-    return ('sNcch','chlNc','shap','taas','sya','aXt')
+    return ('sNcch','chlNc','shap','taas','sya','aXt','iiXt')
 def san_pratyayaaH():
     return ("san","kyach","kaamyach","kyaNg","kyaXsh",
             "kvip","Nnich","yaNg","yak","aaya",

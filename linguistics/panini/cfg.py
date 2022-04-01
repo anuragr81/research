@@ -54,7 +54,7 @@ def prepend_sutras():
 
 def insertion_sutras():
 #   to be considered: 601008
-    ll=[3010460,3010680,3010330,7041140]
+    ll=[3010460,3010680,3010330,7041140,7030960,7030961]
     return sorted(float(x) for x in ll)
 
 def apply_transformation(transformation_rule,new_expr):
@@ -167,12 +167,28 @@ def apply_insertion(insertion_rule, new_expr):
             if 'dhaatu_node' in sig_params :         
                 to_insert = insertion_rule()(dhaatu_node=new_expr[i-1],suffix_node=new_expr[i])
                 if to_insert :
-                    new_inserts[i]=to_insert 
-                
+                    new_inserts[i]={'node_data':to_insert ,'input_indices':(i-1,i),'rule':insertion_rule}
+                    #new_inserts[i]=to_insert 
+            if 'presuffix_node' in sig_params and isinstance(new_expr[i-1]._data,Suffix):         
+                to_insert = insertion_rule()(presuffix_node=new_expr[i-1],suffix_node=new_expr[i])
+                if to_insert :
+                    new_inserts[i]={'node_data':to_insert ,'input_indices':(i-1,i),'rule':insertion_rule}
+                    #new_inserts[i]=to_insert     
     for pos in reversed(new_inserts):
-        parent1 = new_expr[pos-1]
-        parent2 = new_expr[pos]
-        new_expr.insert(pos,Node(new_inserts[pos],parent1=parent1,parent2=parent2))
+        #parent1 = new_expr[pos-1]
+        #parent2 = new_expr[pos]
+        
+        #new_expr.insert(pos,Node(new_inserts[pos],parent1=parent1,parent2=parent2))
+        
+        
+        dat=new_inserts[pos]
+        new_node = Node(dat['node_data'],parent1=new_expr[dat['input_indices'][0]],parent2=new_expr[dat['input_indices'][1]])
+        #assigning properties to both sides of the insertion
+        new_node.assign_output_properties(rule=dat['rule'], node1=new_node.get_parent1(),node2=new_node.get_parent2())
+        new_expr[pos].assign_output_properties(rule=dat['rule'], node1=new_node.get_parent1(),node2=new_node.get_parent2())
+        new_expr.insert(pos,new_node)
+
+
     return new_expr
 
 

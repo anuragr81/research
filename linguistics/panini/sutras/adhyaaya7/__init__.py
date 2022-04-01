@@ -1,4 +1,4 @@
-from ..common_definitions import vriddhi,upadhaa, ach, Suffix, Node 
+from ..common_definitions import vriddhi,upadhaa, ach, Suffix, Node , hal
 from ..common_definitions import get_dhaatu_properties,pratyaahaara, guNna, Dhaatu
 
 class yuvoranaakau_7010010:
@@ -204,3 +204,42 @@ class atodiirghoyaNci_7031010:
             if suffix_node._data.is_saarvadhaatuka() and suffix_node._data._suffix[0] in pratyaahaara('y','Nc') :
                 return node.get_output()[0:-1]+['aa']
         return node.get_output()
+    
+    
+    
+class astisichoapRikte_7030960:
+    def __init__(self):
+        self._types={'dhaatu_node':[Dhaatu],'suffix_node':[Suffix,'literal','lakaara']}
+    def __call__(self,dhaatu_node,suffix_node):
+        if not isinstance(suffix_node._data, Suffix):
+            raise ValueError("Must be suffix")
+        suffix_data = suffix_node._data
+        numachs = len([x for x in suffix_data._suffix if x in ach()])
+        # ekaala saarvadhaatuaka
+        if suffix_data.is_saarvadhaatuka() and suffix_data._suffix[0] in hal() and numachs ==1:
+            if ''.join(suffix_data ._suffix) != 'iiXt':
+                if (isinstance(dhaatu_node._data,Dhaatu) and ''.join(dhaatu_node._data._data)=='asNc') :
+                    return Suffix("iiXt")
+        return []
+
+class astisichoapRikte_7030961:
+    def __init__(self):
+        self._types={'presuffix_node':[Suffix,'literal','lakaara'],'suffix_node':[Suffix,'literal','lakaara']}
+        
+    def __call__(self,presuffix_node,suffix_node):
+        if not isinstance(presuffix_node._data, Suffix):
+            raise ValueError("Must be suffix")
+        if not isinstance(suffix_node._data, Suffix):
+            raise ValueError("Must be suffix")
+        presuffix_data= presuffix_node._data
+        suffix_data= suffix_node._data
+        
+        numachs = len([x for x in suffix_data._suffix if x in ach()])
+        # ekaala saarvadhaatuaka
+        if suffix_data.is_saarvadhaatuka() and suffix_data._suffix[0] in hal() and numachs ==1:
+            if ''.join(suffix_data._suffix) != 'iiXt':
+                if ''.join(presuffix_node._data._suffix)=='sNcch' :
+                    return Suffix("iiXt")
+                
+                    
+        return []
