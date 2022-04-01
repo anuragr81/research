@@ -272,8 +272,7 @@ else:
     
     print("NEXT: luNglaNglRiNgkXshvaXdudaataH has prepending issue because we don't trace insertion/prepending of vikaraNna histories. This should allow the immediate dhaatu in context.")
     # for paXtheta - we need to have for liNg : yaasuXtparasmaipadeXshuudaatto Ngichcha 3.4.103 and then ato yeyaH (because of a-ending paXtha after shap)
-    print("PENDING : murdhanyaadesha in paXthiXshyati and eruH")
-    
+    print("PENDING : murdhanyaadesha in paXthiXshyati and eruH")   
     
     
     processed_expr=(process_until_finish(expression))
