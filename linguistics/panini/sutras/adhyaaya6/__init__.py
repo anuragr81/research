@@ -101,8 +101,9 @@ class luNglaNglRiNgkShvaXdudaattaH_6040710:
             
         if isinstance(dhaatu_node ._data,Dhaatu) and \
             isinstance(effective_suffix_node._data,Suffix) :
-                if effective_suffix_node._data._lakaara in ('luNg','laNg','lRiNg') and \
-                    int(dhaatu_node._output[-1]['rule'].__name__.split("_")[-1]) !=6040710 :
+                if effective_suffix_node._data._lakaara in ('luNg','laNg','lRiNg') :
+                    past_rules_applied = [int(x['rule'].__name__.split("_")[-1]) for x in dhaatu_node._output if 'rule' in x]
+                    if 6040710 not in past_rules_applied  :
                         #raise ValueError("aXt needs to be checked in dhaatu-nodes modification (while prepending)")
                         return Suffix("aXt")
         return []

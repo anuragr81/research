@@ -1,5 +1,6 @@
 from ..common_definitions import vriddhi,upadhaa, ach, Suffix, Node , hal
 from ..common_definitions import get_dhaatu_properties,pratyaahaara, guNna, Dhaatu
+from ..common_definitions import parasmaidpada_pratyayaaH
 
 class yuvoranaakau_7010010:
     def __init__(self):
@@ -53,6 +54,31 @@ class aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_7010020:
             return ["i","y"]+ pratyaya[1:]
         else:
             return pratyaya
+
+
+class sichivRiddhiHparasmaipadeXshu_7020021:
+    def __init__(self):
+        self._types={'presuffix_node':['literal'],'suffix_node':[Suffix,'literal']}
+        
+    def __call__(self,node,suffix_node):
+        
+        if not isinstance(node,Node):
+            raise ValueError("anga_node must of type Node")
+        if not isinstance(suffix_node,Node):
+            raise ValueError("suffix must of type Node")
+            
+        
+        if not isinstance(suffix_node._data,Suffix):
+            raise ValueError("suffix must of type Suffix")
+            
+        anga_string= node.get_output()
+        if anga_string[-1] in ach() and ''.join(suffix_node._data._suffix)=='sNcch': 
+            #if :# sNcch is followed by parasmaipad
+            input_nodes=[v for k,v in suffix_node._output[-1]['inputs'].items() if isinstance(v,Node)]            
+            
+            if  input_nodes and ''.join(input_nodes[-1]._data._suffix) in parasmaidpada_pratyayaaH():
+                return anga_string[0:-1] + [vriddhi(anga_string[-1])]
+        return node.get_output() 
     
 class ataupadhaayaaH_7021160:
     def __init__(self):
@@ -155,6 +181,7 @@ class Functor:
         self._types={'a':['literal']}
     def __call__(self,a):
         return 0
+    
 def iXt_not_allowed(suffix_node_data):
     # TODO : Remove hack
     return ''.join(suffix_node_data) in ('ghaNc','Nnvul')

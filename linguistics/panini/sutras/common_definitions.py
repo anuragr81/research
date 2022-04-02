@@ -275,10 +275,15 @@ def san_pratyayaaH():
             "iiyaNg","NniNg")
 
 def tiNg_pratyayaaH():
-    return ("tip","tas","jhi","sip","thas","tha","mip",
-            "vas","mas","ta","aataam","jha","thaas",
-            "aathaam","dhvam","iXt","vahi","mahiNg")
+    return aatmanepada_pratyayaaH()+parasmaidpada_pratyayaaH()
 
+def parasmaidpada_pratyayaaH():
+    return ("tip","tas","jhi","sip","thas","tha","mip",
+            "vas","mas")
+
+def aatmanepada_pratyayaaH():
+    return ("ta","aataam","jha","thaas",
+            "aathaam","dhvam","iXt","vahi","mahiNg")
 def kRit_pratyayaaH():
     return ("Nnvul","lyuXt","aniiyar","kta","ktavatu",
             "tavyat","tumun","tRich","ktvaa","Nnmul",
@@ -327,7 +332,7 @@ def vriddhi(x):
     if x =="a":
         return "aa"
     elif x == "i":
-        return "ii"
+        return "ai"
     elif x == "e":
         return "ay"
     elif x == 'ii':
