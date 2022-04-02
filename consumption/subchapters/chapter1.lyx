@@ -2800,6 +2800,12 @@ Quality Measurement in Illus.
 \end_layout
 
 \begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Econometric-Method"
+
+\end_inset
+
 Econometric Method
 \end_layout
 
@@ -2919,7 +2925,11 @@ literal "true"
 \begin_inset Formula $G$
 \end_inset
 
- and coefficients 
+ among 
+\begin_inset Formula $n$
+\end_inset
+
+ commodity groups and coefficients 
 \begin_inset Formula $\rho_{1,Gk},\rho_{2,Gk}$
 \end_inset
 
@@ -2948,7 +2958,7 @@ literal "true"
 \end_inset
 
  for the base-prices corresponding to 
-\begin_inset Formula $M$
+\begin_inset Formula $n$
 \end_inset
 
  commodity groups 
@@ -3020,8 +3030,47 @@ additional
 \end_inset
 
  equations are not subject to any additional symmetry restrictions - while
- the usual constraints of adding up, symmetry and non-negativity of Slutsky
- matrix apply to the estimation.
+ the usual constraints of adding up, homogeneity and symmetry apply to the
+ estimation.
+ More specifically, the homogeneity conditions are imposed by setting the
+ constraint for all 
+\begin_inset Formula $G$
+\end_inset
+
+: 
+\begin_inset Formula $\sum_{j=1}^{n}\gamma_{1,Gj}=0$
+\end_inset
+
+ as well as 
+\begin_inset Formula $\sum_{j=1}^{n}\gamma_{2,Gj}=0$
+\end_inset
+
+ and the symmetry conditions are imposed with 
+\begin_inset Formula $\gamma_{1,Gj}=\gamma_{1,jG}$
+\end_inset
+
+ as well as 
+\begin_inset Formula $\gamma_{2,Gj}=\gamma_{2,jG}$
+\end_inset
+
+ for all 
+\begin_inset Formula $j,G$
+\end_inset
+
+.
+ As is common in the AIDS estimation, the adding-up constraints are ensured
+ by skipping the estimation of one of the commodities (in our case - the
+ transport commodity) and setting its intercept to a the difference between
+ unity and the sum of the rest of the intercepts i.e.
+ to 
+\begin_inset Formula $1-\sum_{G}^{n}\rho_{1,G}$
+\end_inset
+
+ and 
+\begin_inset Formula $1-\sum_{G}^{n}\rho_{2,G}$
+\end_inset
+
+ respectively.
 \end_layout
 
 \begin_layout Standard
@@ -3628,6 +3677,67 @@ hh_occupation
 ,"hh_occupation_rank")])%>% mutate(year=2014),!is.na(ypay)))
 \end_layout
 
+\begin_layout Plain Layout
+
+%j <- ddply(idat,.(hh_occupation,hh_occupation_rank),summarise,m=median(ypay))
+\end_layout
+
+\begin_layout Plain Layout
+
+%j[order(j$m),]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%idat2014=(subset(unique(tn$df2014[,c("hhid2014","ypay","hh_occupation","hh_occu
+pation_rank")])%>% mutate(year=2014),!is.na(ypay)))
+\end_layout
+
+\begin_layout Plain Layout
+
+%idat2012=(subset(unique(tn$df2012[,c("hhid2012","ypay","hh_occupation","hh_occu
+pation_rank")])%>% mutate(year=2012),!is.na(ypay))) 
+\end_layout
+
+\begin_layout Plain Layout
+
+%idat2010=(subset(unique(tn$df2010[,c("hhid2010","ypay","hh_occupation","hh_occu
+pation_rank")])%>% mutate(year=2010),!is.na(ypay)))
+\end_layout
+
+\begin_layout Plain Layout
+
+%j2010 <- ddply(idat2010,.(hh_occupation,hh_occupation_rank),summarise,m=median(y
+pay), n=length(hhid2010))
+\end_layout
+
+\begin_layout Plain Layout
+
+%j2012 <- ddply(idat2012,.(hh_occupation,hh_occupation_rank),summarise,m=median(y
+pay), n=length(hhid2012))
+\end_layout
+
+\begin_layout Plain Layout
+
+%j2014 <- ddply(idat2014,.(hh_occupation,hh_occupation_rank),summarise,m=median(y
+pay), n=length(hhid2014))
+\end_layout
+
+\begin_layout Plain Layout
+
+%j <- rbind(j2014 %>% mutate(year=2014), rbind(j2010 %>% mutate(year=2010),j2012
+ %>% mutate(year=2012)))
+\end_layout
+
+\begin_layout Plain Layout
+
+%j1 <- ddply(j,.(hh_occupation,hh_occupation_rank),summarise,m=mean(m),n=sum(n))
+\end_layout
+
 \end_inset
 
 
@@ -3648,7 +3758,7 @@ newpage
 
 
 \backslash
-begin{longtable}[!p]{l r l r r}
+begin{longtable}[!p]{l r l r r r}
 \end_layout
 
 \begin_layout Plain Layout
@@ -3678,7 +3788,9 @@ multicolumn{1}{c}{occupation area} &
 \backslash
 multicolumn{1}{c}{occupation rank} & 
 \backslash
-multicolumn{1}{c}{median income} 
+multicolumn{1}{c}{median income} & 
+\backslash
+multicolumn{1}{c}{number of entries} 
 \backslash
 
 \backslash
@@ -3693,7 +3805,7 @@ hline
 \backslash
 
 \backslash
- & 14 & Student & 0 & NA 
+ & 14 & Student & 0 & NA & 43
 \end_layout
 
 \begin_layout Plain Layout
@@ -3702,7 +3814,7 @@ hline
 \backslash
 
 \backslash
- & 13 & Job Seeker & 0 &  NA 
+ & 13 & Job Seeker & 0 &  NA & 7
 \end_layout
 
 \begin_layout Plain Layout
@@ -3711,7 +3823,7 @@ hline
 \backslash
 
 \backslash
- & 12 & Paid Family Work & 0 & NA 
+ & 12 & Paid Family Work & 0 & NA & 7
 \end_layout
 
 \begin_layout Plain Layout
@@ -3720,7 +3832,7 @@ hline
 \backslash
 
 \backslash
- & 16 & Unemployed & 0 & NA 
+ & 16 & Unemployed & 0 & NA & 40
 \end_layout
 
 \begin_layout Plain Layout
@@ -3729,7 +3841,7 @@ hline
 \backslash
 
 \backslash
- & 11 & Unpaid Family Work & 0 & NA
+ & 11 & Unpaid Family Work & 0 & NA & 23
 \end_layout
 
 \begin_layout Plain Layout
@@ -3738,7 +3850,7 @@ hline
 \backslash
 
 \backslash
- & 17 & Unemployed (too young) & 0 & NA  
+ & 17 & Unemployed (too young) & 0 & NA  & 0
 \end_layout
 
 \begin_layout Plain Layout
@@ -3747,7 +3859,7 @@ hline
 \backslash
 
 \backslash
- & 1 & Livestock/Agriculture & 1 & 400000.00
+ & 1 & Livestock/Agriculture & 1 & 400000.00 & 1097
 \end_layout
 
 \begin_layout Plain Layout
@@ -3756,7 +3868,7 @@ hline
 \backslash
 
 \backslash
- & 2 & Fishing & 1 & 1660800.00
+ & 2 & Fishing & 1 & 1660800.00 & 19
 \end_layout
 
 \begin_layout Plain Layout
@@ -3765,7 +3877,7 @@ hline
 \backslash
 
 \backslash
- & 3 & Mining & 1 &   666666.67
+ & 3 & Mining & 1 &   666666.67 & 8
 \end_layout
 
 \begin_layout Plain Layout
@@ -3774,7 +3886,7 @@ hline
 \backslash
 
 \backslash
- & 4 & Tourism & 1  & 46666.67
+ & 4 & Tourism & 1  & 46666.67 & 1
 \end_layout
 
 \begin_layout Plain Layout
@@ -3783,7 +3895,7 @@ hline
 \backslash
 
 \backslash
- & 7 & Private Sector & 2 & 3000000.00 
+ & 7 & Private Sector & 2 & 3000000.00 & 873
 \end_layout
 
 \begin_layout Plain Layout
@@ -3792,7 +3904,7 @@ hline
 \backslash
 
 \backslash
- & 9 & Non-Agricultural (w Employer) & 2 & 2662400.00
+ & 9 & Non-Agricultural (w Employer) & 2 & 2662400.00 & 2
 \end_layout
 
 \begin_layout Plain Layout
@@ -3801,7 +3913,7 @@ hline
 \backslash
 
 \backslash
- & 10 & Non-Agricultural (w/o Employer) & 2 & 2116800.00
+ & 10 & Non-Agricultural (w/o Employer) & 2 & 2116800.00 & 2
 \end_layout
 
 \begin_layout Plain Layout
@@ -3810,7 +3922,7 @@ hline
 \backslash
 
 \backslash
- & 8 & Non-Government/Religious Org & 3  & 2440000.00
+ & 8 & Non-Government/Religious Org & 3  & 2440000.00 & 36
 \end_layout
 
 \begin_layout Plain Layout
@@ -3819,7 +3931,7 @@ hline
 \backslash
 
 \backslash
- & 5 & Government & 3 &   7168000.00
+ & 5 & Government & 3 &   7168000.00 & 329
 \end_layout
 
 \begin_layout Plain Layout
@@ -3828,7 +3940,7 @@ hline
 \backslash
 
 \backslash
- & 6 & Parastatal & 3 & 10736000.00
+ & 6 & Parastatal & 3 & 10736000.00 & 18
 \end_layout
 
 \begin_layout Plain Layout
@@ -5015,8 +5127,82 @@ reference "tab:Groups"
  for all the goods that belong to these commodity groups).
  Since quality measure is not used for energy and household, no quality
  equations are needed for these commodity.
- The total number of equations to estimate with the SUR is therefore 
+ The total number of equations (the Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_lnV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ specified in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Econometric-Method"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) to estimate with the SUR is therefore 
 \begin_inset Formula $2\times5+3\times1=13$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The estimation uses a three-stage least-squares method for systems of simultaneo
+us equations (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zellner3SLS1992"
+literal "false"
+
+\end_inset
+
+) for the Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_lnV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and with the homogeneity and symmetry constraints specified in Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Econometric-Method"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
 .
