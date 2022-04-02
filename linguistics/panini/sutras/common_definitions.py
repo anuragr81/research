@@ -65,11 +65,14 @@ class Anga(Group):
 def insertion_rule(x):
     return x
 
+def lakaaras():
+    return ('laXt','loXt','lRiXt','laNg','luNg','lRiNg','liNg1','liNg2','liXt','luXt')
+
 class Suffix:
     def __init__(self,suffix,lakaara=None):
         
         if lakaara is not None:
-            if lakaara not in ('laXt','loXt','lRiXt','laNg','luNg','lRiNg','liNg1','liNg2','liXt','luXt'):
+            if lakaara not in lakaaras():
                 raise ValueError("Unknown lakaara")            
         self._lakaara=lakaara
 

@@ -61,6 +61,21 @@ class XdityabhasyaapianubandhakaraNnasaamarthyaat_3010331:
         return node.get_output()
     
 
+class itashcha_3041000:
+    
+    def __init__(self):
+        self._types={'node':[Suffix,'literal']}
+    def __call__(self,node):
+        if not isinstance(node,Node):
+            raise ValueError("Must be Node")
+        suffix=node._data
+        if not isinstance(suffix,Suffix):
+            raise ValueError("Must be Suffix")
+        if suffix._lakaara and suffix._lakaara in ('laNg','luNg','lRiNg','liNg1','liNg2','liNg') and node.get_output()[-1]=='i':
+            return node.get_output()[:-1]
+        
+        return node.get_output()
+
 class parasmaipadaanaaMNnalatususXthalaXthusaNnalvamaaH_3040820:
     def __init__(self):
         self._types={'node':[Suffix,'literal']}

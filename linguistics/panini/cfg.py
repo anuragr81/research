@@ -117,7 +117,9 @@ def apply_lopa(suffix_node):
     if not isinstance(suffix_node._data,Suffix):
         raise ValueError("Need Suffix")
     MAX_TIMES=10000
-    lopa_functions = [lashakvataddhite_1030080, aadirNciXtuXdavaH_1030050, halantyam_1030030, chuXtuu_103070,upadesheajanunaasikait_1030020]
+    lopa_functions = [lashakvataddhite_1030080, aadirNciXtuXdavaH_1030050, \
+                      halantyam_1030030, chuXtuu_103070,upadesheajanunaasikait_1030020, \
+                      itashcha_3041000]
     
     for lopafunc in  lopa_functions :
         not_done=True
