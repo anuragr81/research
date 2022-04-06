@@ -26,12 +26,12 @@ eststo, title (2015): quietly sureg $logqne2015 $logeduc2015
 
 global edlogqne2015 (w_ne logx r_educ2012 log_mean_cost_ne i.agri hh_education_rank age rural_wards i.religion hsize)
 global edlogeduc2015 (w_educ logx r_educ2012 log_mean_cost_ne i.agri hh_education_rank age rural_wards i.religion hsize)
-eststo, title (2015): quietly sureg $edlogqne2015 $edlogeduc2015
+eststo, title (Educ 2015): quietly sureg $edlogqne2015 $edlogeduc2015
 
 
 global aglogqne2015 (w_ne logx r_agri2012 log_mean_cost_ne  hh_education_rank age rural_wards i.religion hsize)
 global aglogeduc2015 (w_educ logx r_agri2012 log_mean_cost_ne  hh_education_rank age rural_wards i.religion hsize)
-eststo, title (2015): quietly sureg $aglogqne2015 $aglogeduc2015
+eststo, title (Agri 2015): quietly sureg $aglogqne2015 $aglogeduc2015
 
 esttab using c:/temp/resnu.tex, mtitle no p numbers nogaps compress title() 
 
