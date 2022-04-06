@@ -3399,6 +3399,63 @@ The details of the records of asset-ownership in the LSMS data include the
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% with(subset(o2012, !is.na(age)  & household_status==1 & isrural==T),mean(age))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%with(subset(o2012 , household_status==1 & !is.na(roomsnum)),mean(roomsnum))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% dat <- subset(o2012,household_status==1); sum(subset(ddply(dat,.(education_rank
+),summarise,n=length(hhid)),education_rank>2)$n)/nrow(dat)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% with(subset(ng$df2012, isrural==T), mean(exp(logx)))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float table
 placement H
 wide false
@@ -3408,25 +3465,95 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="2">
+<lyxtabular version="3" rows="8" columns="4">
 <features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="4cm">
-<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="5cm">
+<column alignment="right" valignment="top" width="1.5cm">
+<column alignment="right" valignment="top" width="1.5cm">
+<column alignment="right" valignment="top" width="1.5cm">
+<row>
+<cell alignment="left" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+All
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rural
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Urban
+\end_layout
+
+\end_inset
+</cell>
+</row>
 <row>
 <cell alignment="left" valignment="top" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Mean Household size
+Mean (SD) Household size
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" usebox="none">
+<cell alignment="right" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-5.27
+4.97
+\end_layout
+
+\begin_layout Plain Layout
+(2.91)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.39
+\end_layout
+
+\begin_layout Plain Layout
+(3.06)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.12
+\end_layout
+
+\begin_layout Plain Layout
+(2.39)
 \end_layout
 
 \end_inset
@@ -3437,16 +3564,46 @@ Mean Household size
 \begin_inset Text
 
 \begin_layout Plain Layout
-Mean age of household head
+Mean (SD) age of household head
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
+<cell alignment="right" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-46.36
+44.87
+\end_layout
+
+\begin_layout Plain Layout
+(16.05)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+46.46
+\end_layout
+
+\begin_layout Plain Layout
+(16.56)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+42.01
+\end_layout
+
+\begin_layout Plain Layout
+(14.69)
 \end_layout
 
 \end_inset
@@ -3457,16 +3614,96 @@ Mean age of household head
 \begin_inset Text
 
 \begin_layout Plain Layout
-Average number of rooms per household
+Mean (SD) number of rooms per household
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
+<cell alignment="right" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.33
+3.28
+\end_layout
+
+\begin_layout Plain Layout
+(2.06)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.56
+\end_layout
+
+\begin_layout Plain Layout
+(2.14)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.79
+\end_layout
+
+\begin_layout Plain Layout
+(1.81)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mean (SD) Total Expenditure (Tanzanian Shillings)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2004450
+\end_layout
+
+\begin_layout Plain Layout
+(2004450)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1495100
+\end_layout
+
+\begin_layout Plain Layout
+(1236870)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3017537
+\end_layout
+
+\begin_layout Plain Layout
+(2102633)
 \end_layout
 
 \end_inset
@@ -3482,11 +3719,29 @@ Percentage with household head educated secondary or higher
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
+<cell alignment="right" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-16.14
+21.31
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+33.30
 \end_layout
 
 \end_inset
@@ -3497,36 +3752,34 @@ Percentage with household head educated secondary or higher
 \begin_inset Text
 
 \begin_layout Plain Layout
-Mean Total Expenditure (Tanzanian Shillings)
+Percentage of household heads employed in Agriculture
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
+<cell alignment="right" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-2471122
+66.37
 \end_layout
 
 \end_inset
 </cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Percentage Employed in Agriculture
+55.63
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-47.76
+10.74
 \end_layout
 
 \end_inset
@@ -3542,11 +3795,29 @@ Total Number of Households
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
+<cell alignment="right" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-2979
+4068
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2707
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1361
 \end_layout
 
 \end_inset
@@ -3569,7 +3840,7 @@ name "fig:Descriptive-statistics-LSMS-2010"
 
 \end_inset
 
-Descriptive statistics for LSMS Tanzania 2010
+Descriptive statistics for LSMS Tanzania 2012
 \end_layout
 
 \end_inset
