@@ -874,8 +874,9 @@ get_quality_agg_df <- function(){
 }
 
 run_test <- function() {
-  ma <- get_quality_agg_df()
+  #ma <- get_quality_agg_df()
   #example_df = data.frame(hhid=c('B','C'),category=c('protein','household'),quality=c(.2,NA),min_price=c(1,2),tot_categ_exp=c(10,20))
+  #ddply(subset(o2012,age<18 & !is.na(schoolowner)) %>% mutate(schooltype = sapply(schoolowner, school_type)),.(schooltype),summarise,n=length(hhid))
   
   
 }

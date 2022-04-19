@@ -539,6 +539,31 @@ ngr_loader<-function(fu,ngrn,lgc) {
     return (ohs) 
   }
   
+  school_type <-function(schoolownertype)
+  {
+    #ddply(subset(o2012,age<18 & !is.na(schoolowner)) %>% mutate(schooltype = sapply(schoolowner, school_type)),.(schooltype),summarise,n=length(hhid))
+    if (length(schoolownertype)>1){
+      stop("schoolownertype must be of single length")
+    }
+    if (is.na(schoolownertype)){
+      return(schoolownertype)
+    }
+    schtype <- as.integer(schoolownertype)
+    if (schtype==1 || schtype==2 || schtype==3){
+      return("govt")
+    }
+    if (schtype==4){
+      return("community")
+    }
+    if (schtype==5 || schtype==7){
+      return("relig_or_charity")
+    }
+    if (schtype==6){
+      return("private")
+    }
+    return(NA)
+  }
+  
   load_ohs_file <-function(year,dirprefix,fu,ngrn){
     #
     if (year ==2010){
@@ -600,7 +625,10 @@ ngr_loader<-function(fu,ngrn,lgc) {
       #ohsi <- subset(ohs,is.na(last_payment_primary)) # income units need to be standardised
       ohsf <- add_father_educ(ohs,education_rank_mapping)
       ohsfm <- add_mother_educ(ohsf,education_rank_mapping)
-      return(ohsfm)
+      
+      ohsfm2 <- ohsfm %>% mutate(schooltype = sapply(schoolowner, school_type))
+      
+      return(ohsfm2)
     }
     
     
@@ -669,7 +697,9 @@ ngr_loader<-function(fu,ngrn,lgc) {
       
       ohsf <- add_father_educ(ohs,education_rank_mapping)
       ohsfm <- add_mother_educ(ohsf,education_rank_mapping)
-      return(ohsfm)
+      
+      ohsfm2 <- ohsfm %>% mutate(schooltype = sapply(schoolowner, school_type))
+      return(ohsfm2)
     }
     
     if ( year == 2015) {
@@ -735,7 +765,10 @@ ngr_loader<-function(fu,ngrn,lgc) {
       
       ohsf <- add_father_educ(ohs,education_rank_mapping)
       ohsfm <- add_mother_educ(ohsf,education_rank_mapping)
-      return(ohsfm)
+      
+      ohsfm2 <- ohsfm %>% mutate(schooltype = sapply(schoolowner, school_type))
+      
+      return(ohsfm2)
     }
     stop(paste("Year:",year,"not supported"))
   }

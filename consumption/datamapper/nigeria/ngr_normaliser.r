@@ -319,7 +319,7 @@ ngr_normaliser<-function() {
   ohs_educ_info_columns_lsms <- function(year){
     if (year == 2010){
       return(c("hhid","personid", "highest_educ","is_schooled","school_start_age",
-               "qualification","is_inschool","reason_not_inschool","school_body","school_conveyance","school_distance",
+               "qualification","is_inschool","reason_not_inschool","schoolowner","school_conveyance","school_distance",
                "educexpensea","educexpenseb","educexpensec","educexpensed","educexpensee","educexpensef","educexpenseg","educexpenseh","educexpense"))
     }
     
@@ -386,7 +386,7 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s2q8",name="qualification"))
       s= rbind(s,data.frame(iesname="s2q9",name="is_inschool"))
       s= rbind(s,data.frame(iesname="s2q10",name="reason_not_inschool"))
-      s= rbind(s,data.frame(iesname="s2q11",name="school_body"))
+      s= rbind(s,data.frame(iesname="s2q11",name="schoolowner"))
       s= rbind(s,data.frame(iesname="s2q12",name="school_conveyance"))
       s= rbind(s,data.frame(iesname="s2q13",name="school_distance"))
       s= rbind(s,data.frame(iesname="s2q18a",name="educexpensea"))
@@ -412,7 +412,7 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s2q9",name="qualification"))
       s= rbind(s,data.frame(iesname="s2q10",name="is_inschool"))
       s= rbind(s,data.frame(iesname="s2q11",name="reason_not_inschool"))
-      s= rbind(s,data.frame(iesname="s2q12",name="school_body"))
+      s= rbind(s,data.frame(iesname="s2q12",name="schoolowner"))
       s= rbind(s,data.frame(iesname="s2q13",name="school_conveyance"))
       s= rbind(s,data.frame(iesname="s2q14",name="school_distance"))
       
@@ -440,7 +440,7 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="s2aq10",name="qualification"))
       s= rbind(s,data.frame(iesname="s2aq13",name="is_inschool"))
       s= rbind(s,data.frame(iesname="s2aq14",name="reason_not_inschool"))
-      s= rbind(s,data.frame(iesname="s2aq16",name="school_body"))
+      s= rbind(s,data.frame(iesname="s2aq16",name="schoolowner"))
       s= rbind(s,data.frame(iesname="s2aq17",name="school_conveyance"))
       s= rbind(s,data.frame(iesname="s2aq18",name="school_distance"))
       

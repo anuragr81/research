@@ -572,7 +572,6 @@ literal "false"
 \end_inset
 
 ).
- 
 \end_layout
 
 \begin_layout Standard
@@ -1011,7 +1010,6 @@ literal "false"
 \end_inset
 
 ).
- 
 \end_layout
 
 \begin_layout Standard
@@ -1556,21 +1554,6 @@ TODO:
 \end_layout
 
 \begin_layout Enumerate
-Descriptive Statistics
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-HE average expenditure vs primary average expenditure barplots
-\end_layout
-
-\begin_layout Enumerate
-The barplot for rich vs poor (less than median and higher than median) expenditu
-re, on levels of education and urban vs rural to be plotted for the countries.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
 Explain that endogeneity is not a major issue for 
 \begin_inset Formula $log(q_{educ})$
 \end_inset
@@ -1585,14 +1568,20 @@ A quantile approach for total expenditure to be used - remarking how lowest
 
 \begin_deeper
 \begin_layout Enumerate
-Use numchildren/hsize and then average_educlevel_of_children/hh_age as control
- (hh_age does not give anything new other than the average educ-level)
+Compare numchildren and hsize as control
 \end_layout
 
 \begin_layout Enumerate
-The private vs public education for the highest expenditure individual in
- the family needs to be used as a control - that tells us whether the poor
- or the rich use public/private education more
+Use hh_age (one could use average_educlevel_of_children as a control but
+ highest_educ is recorded only for about 600 of the households in TNZ- so
+ it does not give anything new other than hh_age)
+\end_layout
+
+\begin_layout Enumerate
+private education if used at all for any members in the household must come
+ as private school expenditure for the household.
+ This tells us whether the poor or the rich use public/private education
+ more.
 \end_layout
 
 \end_deeper
@@ -2825,6 +2814,231 @@ Non-Parametric Analysis
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%o2012ed <- o2012[,c("hhid","personid","schoolowner","age","education_rank")]
+\end_layout
+
+\begin_layout Plain Layout
+
+%o2012ed$education_rank[is.na(o2012ed$education_rank)] <-0
+\end_layout
+
+\begin_layout Plain Layout
+
+%hist(o2012ed$education_rank,main='',xlab="Education Rank",ylab='Number
+ of Households')
+\end_layout
+
+\begin_layout Plain Layout
+
+%k<- subset(ddply(subset(o2012ed,age<18 & !is.na(schoolowner)) %>% mutate(schoolt
+ype = sapply(schoolowner, school_type)),.(schooltype),summarise,n=length(hhid)),!
+is.na(schooltype))
+\end_layout
+
+\begin_layout Plain Layout
+
+%barplot(k$n,names.arg=k$schooltype,las=1,xlab='school type',ylab='num households
+')
+\end_layout
+
+\begin_layout Plain Layout
+
+%o2012ed <- o2012[,c("hhid","personid","schoolowner","age","")]
+\end_layout
+
+\begin_layout Plain Layout
+
+%mm <- tn$df2012 %>% mutate( lnA0q = sapply(tn$df2012$lnA0,function(x) {
+ as.numeric(j[j>=x][1])}))
+\end_layout
+
+\begin_layout Plain Layout
+
+% ========= DECILE PLOT ============
+\end_layout
+
+\begin_layout Plain Layout
+
+%j <- quantile(tn$df2012$lnA0,seq(10)/10)
+\end_layout
+
+\begin_layout Plain Layout
+
+%m <- mm[,c("lnA0","lnA0q","hhid2012","toteducexpense")]
+\end_layout
+
+\begin_layout Plain Layout
+
+%mb <- ddply(m,.(lnA0q),summarise,toteducexpense=mean(toteducexpense))
+\end_layout
+
+\begin_layout Plain Layout
+
+%barplot(mb$toteducexpense*1e-6,names.arg=seq(10)/10,las=1,xlab='asset worth
+ decile',ylab='mean educ expense (m)')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/tnz_ngr_educranks2012.png
+	width 6in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Education ranks for populations in Tanzania and Nigeria (2012)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/tnz_ngr_schooltype2012.png
+	width 6in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+School types for non-adult population in Tanzania and Nigeria (2012)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/tnz_ngr_toteducexpense2012.png
+	width 6in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Educational expenses averages over deciles of asset worth in in Tanzania
+ and Nigeria (2012)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Getting rural vs urban average expenditures 
+\end_layout
+
+\begin_layout Plain Layout
+
+% ddply(tn$df2012 [,c("hhid2012","toteducexpense","isrural")],.(isrural),summaris
+e,toteducexpense=mean(toteducexpense))
+\end_layout
+
+\begin_layout Plain Layout
+
+% Getting children's education-rank averages
+\end_layout
+
+\begin_layout Plain Layout
+
+% ced <- merge(unique(subset(o2012,age<18  & !is.na(highest_educ))[c("hhid","educ
+ation_rank")]),unique(plyr::rename(tn$df2012,c("hhid2012"="hhid"))[,c("hhid","to
+teducexpense")]))
+\end_layout
+
+\begin_layout Plain Layout
+
+% ddply(ced,.(education_rank),summarise,toteducexpense2=mean(toteducexpense),
+ n=length(toteducexpense))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Urban residents spend 2.34 times more than rural residents in Nigeria whereas
+ they spend 2.8 times more in Tanzania.
+ The secondary education appears get much costlier in Tanzania since the
+ mean education expenditure for education rank 3 is almost double that of
+ the expenditure on education rank 2 in Tanzania.
+ In Nigeria, these costs rise by about 54%.
+\end_layout
+
+\begin_layout Standard
 While the overall poverty levels appear similar in Nigeria and Tanzania
  , the disparity in owned assets is observed to be more extreme in Tanzania
  (particularly between the south of the country and the east - see Figure
@@ -2900,7 +3114,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/tnz_ngr_lorenz_curves_assets_logx_district_individual.png
-	width 3.5in
+	width 4in
 
 \end_inset
 

@@ -925,6 +925,32 @@ lsms_loader<-function(fu,ln,lgc) {
   }
   
   
+  school_type <-function(schoolownertype)
+  {
+    #ddply(subset(o2012,age<18 & !is.na(schoolowner)) %>% mutate(schooltype = sapply(schoolowner, school_type)),.(schooltype),summarise,n=length(hhid))
+    if (length(schoolownertype)>1){
+      stop("schoolownertype must be of single length")
+    }
+    if (is.na(schoolownertype)){
+      return(schoolownertype)
+    }
+    schtype <- as.integer(schoolownertype)
+    if (schtype==1 || schtype==2){
+      return("govt")
+    }
+    if (schtype==3 || schtype==4){
+      return("community")
+    }
+    if (schtype==5 || schtype==6){
+      return("relig_or_charity")
+    }
+    if (schtype==7){
+      return("private")
+    }
+    return(NA)
+  }
+  
+  
   load_ohs_file <-function(year,dirprefix,fu,ln){
     #
     if (year ==2014){
@@ -1076,7 +1102,9 @@ lsms_loader<-function(fu,ln,lgc) {
       ohsjfp1 <- add_father_educ(ohsjf,parentedmap)
       ohsjfp2 <- add_mother_educ(ohsjfp1,parentedmap)
 
-      return(ohsjfp2)
+      ohsjfp3 <- ohsjfp2 %>% mutate(schooltype = sapply(schoolowner, school_type))
+      
+      return(ohsjfp3)
       
     }
     #
@@ -1200,7 +1228,8 @@ lsms_loader<-function(fu,ln,lgc) {
       ohsjpfp1 <- add_father_educ(ohsjpf,parentedmap)
       ohsjpfp2 <- add_mother_educ(ohsjpfp1,parentedmap)
       
-      return(ohsjpfp2)
+      ohsjpfp3 <- ohsjpfp2 %>% mutate(schooltype = sapply(schoolowner, school_type))
+      return(ohsjpfp3)
       
     }
     
@@ -1311,8 +1340,8 @@ lsms_loader<-function(fu,ln,lgc) {
       parentedmap <- ln()@parents_educ_mapping()
       ohsjfp1 <- add_father_educ(ohsjf,parentedmap)
       ohsjfp2 <- add_mother_educ(ohsjfp1,parentedmap)
-      
-      return(ohsjfp2)
+      ohsjfp3 <- ohsjfp2 %>% mutate(schooltype = sapply(schoolowner, school_type))
+      return(ohsjfp3)
       
       
     }
