@@ -967,7 +967,9 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   ohs2010_wi <- subset(o2010,!is.na(region))
   
   ohs2010 <- merge(ohs2010_wi, incomedat[["ypay2010"]],by=c("hhid"),all.x=T)
-  hsizes2010 <- ddply(ohs2010[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
+  
+  hsizes2010 <- ddply((ohs2010 %>% mutate(educprivate= schooltype=="private") )[,c("hhid","personid","educexpense","educprivate")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]),educpriv=choose_max_non_na_rank(educprivate))
+  
   hsizes2010 <- merge(hsizes2010,religionhhids,by=c("hhid"),all.x=T)
   
   hs2010_wooccup <- unique(merge(unique(ohs2010[,relevant_fields]), hsizes2010, by = c("hhid")))
@@ -994,7 +996,8 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   o2012_wi <- subset(o2012,!is.na(region))
   ohs2012 <- merge(o2012_wi, incomedat[["ypay2012"]],by=c("hhid"),all.x=T)
   
-  hsizes2012 <- ddply(ohs2012[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
+  
+  hsizes2012 <- ddply((ohs2012 %>% mutate(educprivate= schooltype=="private") )[,c("hhid","personid","educexpense","educprivate")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]),educpriv=choose_max_non_na_rank(educprivate))
   hsizes2012 <- merge(hsizes2012,religionhhids,by=c("hhid"),all.x=T)
   hs2012_wooccup <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
   
@@ -1046,7 +1049,8 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   o2015_wi <- subset(o2015,!is.na(region))
   ohs2015 <- merge(o2015_wi, incomedat[["ypay2015"]],by=c("hhid"),all.x=T)
   
-  hsizes2015 <- ddply(ohs2015[,c("hhid","personid","educexpense")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]))
+  hsizes2015 <- ddply((ohs2015 %>% mutate(educprivate= schooltype=="private") )[,c("hhid","personid","educexpense","educprivate")],.(hhid),summarise,hsize=length(personid), toteducexpense=sum(educexpense[!is.na(educexpense)]),educpriv=choose_max_non_na_rank(educprivate))
+  
   hsizes2015 <- merge(hsizes2015,religionhhids,by=c("hhid"),all.x=T)
   hs2015_wooccup <- unique(merge(unique(ohs2015[,relevant_fields]), hsizes2015, by = c("hhid")))
   
