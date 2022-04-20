@@ -40,33 +40,6 @@ eststo, title (Agri 2014): quietly sureg $aglogqne2014 $aglogeduc2014
 
 esttab using c:/temp/resnu.tex, mtitle no p numbers nogaps compress title() 
 
-************************************* q_educ ****************************************
-
-eststo clear
-
-use "C:\local_files\research\consumption\lsms\data\tn_df2012.dta", clear
-
-generate has_english =  litlang == 2 | litlang == 3
-gen log_educ= log(toteducexpense+1e-7)
-eststo, title (2012): quietly ivregress 2sls log_educ (logx = hh_occupation ) r2012 log_mean_cost_ne i.agri   hh_education_rank age rural_wards i.has_english hsize, robust
-eststo, title (Educ 2012): quietly ivregress 2sls log_educ (logx = hh_occupation ) r_educ2012 log_mean_cost_ne i.agri hh_education_rank age rural_wards i.has_english hsize, robust
-eststo, title (Agri 2012): quietly ivregress 2sls log_educ (logx = hh_occupation ) r_agri2012 log_mean_cost_ne   hh_education_rank age rural_wards i.has_english hsize, robust
-
-
-use "C:\local_files\research\consumption\lsms\data\tn_df2014.dta", clear
-
-generate has_english =  litlang == 2 | litlang == 3
-gen log_educ= log(toteducexpense+1e-7)
-
-eststo, title (2014): quietly ivregress 2sls log_educ (logx = hh_occupation ) r2012 log_mean_cost_ne i.agri   hh_education_rank age rural_wards i.has_english hsize, robust
-eststo, title (Educ 2014): quietly ivregress 2sls log_educ (logx = hh_occupation ) r_educ2012 log_mean_cost_ne i.agri hh_education_rank age rural_wards i.has_english hsize, robust
-eststo, title (Agri 2014): quietly ivregress 2sls log_educ (logx = hh_occupation ) r_agri2012 log_mean_cost_ne   hh_education_rank age rural_wards i.has_english hsize, robust
-
-*occupation-rank statistic
-*estat firststage, all forcenonrobust
-
-esttab using c:/temp/resnu2.tex, mtitle no p numbers nogaps compress title() 
-
 
 *************************************** logit for education ******************************
 eststo clear

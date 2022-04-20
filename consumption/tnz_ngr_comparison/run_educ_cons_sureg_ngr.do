@@ -36,34 +36,6 @@ eststo, title (Agri 2015): quietly sureg $aglogqne2015 $aglogeduc2015
 esttab using c:/temp/resnu.tex, mtitle no p numbers nogaps compress title() 
 
 
-************************************* q_educ ****************************************
-eststo clear
-
-use "C:\local_files\research\consumption\lsms\data\ngr_df2012.dta", clear
-
-
-gen log_educ= log(toteducexpense+1e-7)
-
-
-eststo, title (2012): quietly ivregress 2sls log_educ (logx = occupation Ar) r2012 log_mean_cost_ne i.agri  hh_education_rank age rural_wards i.religion hsize, robust
-eststo, title (Educ 2012): quietly ivregress 2sls log_educ (logx = occupation Ar_educ) r_educ2012 log_mean_cost_ne i.agri hh_education_rank age rural_wards i.religion hsize, robust
-eststo, title (Agri 2012): quietly ivregress 2sls log_educ (logx = occupation Ar_occup) r_agri2012 log_mean_cost_ne  hh_education_rank age rural_wards i.religion hsize
-
-
-use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
-
-
-gen log_educ= log(toteducexpense+1e-7)
-
-eststo, title (2015): quietly ivregress 2sls log_educ (logx = occupation Ar) r2012 log_mean_cost_ne i.agri  hh_education_rank age rural_wards i.religion hsize, robust
-eststo, title (Educ 2015): quietly ivregress 2sls log_educ (logx = occupation Ar_educ) r_educ2012 log_mean_cost_ne i.agri hh_education_rank age rural_wards i.religion hsize, robust
-eststo, title (Agri 2015): quietly ivregress 2sls log_educ (logx = occupation Ar_occup) r_agri2012 log_mean_cost_ne  hh_education_rank age rural_wards i.religion hsize
-
-
-*occupation-rank statistic
-*estat firststage, all forcenonrobust
-
-esttab using c:/temp/resnu2.tex, mtitle no p numbers nogaps compress title() 
 
 *************************************** logit for education ******************************
 eststo clear
@@ -75,6 +47,7 @@ eststo, title (Educ 2012): quietly logit edchange father_educ_rank age i.religio
 eststo, title (Agri 2012): quietly logit edchange father_educ_rank age i.religion rural_wards r_agri2012
 
 use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
+
 gen edchange = hh_education_rank > father_educ_rank
 eststo, title (2015): quietly logit edchange father_educ_rank age i.religion rural_wards i.agri r2012
 eststo, title (Educ 2015): quietly logit edchange father_educ_rank age i.religion rural_wards i.agri r_educ2012
