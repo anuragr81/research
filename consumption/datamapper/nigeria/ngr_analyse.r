@@ -556,14 +556,18 @@ add_fields_to_data <- function(use_ea,ngrdf2010,ngrdf2012,ngrdf2015)
     res[["df2010"]]$ER <- NULL
     pol2010<- ddply(unique(res[["df2010"]][,c("hhid","region","district","ea","lnA0")]),.(region,district,ea),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
     res[["df2010"]] <- merge(res[["df2010"]],pol2010,by=c("region","district","ea"),all.x=T)
+    print("Ignoring religion=other")
+    res[["df2010"]] <- subset(res[["df2010"]],religion!=4)
     
     res[["df2012"]]$ER <- NULL
     pol2012<- ddply(unique(res[["df2012"]][,c("hhid","region","district","ea","lnA0")]),.(region,district,ea),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
     res[["df2012"]] <- merge(res[["df2012"]],pol2012,by=c("region","district","ea"),all.x=T)
+    res[["df2012"]] <- subset(res[["df2012"]],religion!=4)
     
     res[["df2015"]]$ER <- NULL
     pol2015<- ddply(unique(res[["df2015"]][,c("hhid","region","district","ea","lnA0")]),.(region,district,ea),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
     res[["df2015"]] <- merge(res[["df2015"]],pol2015,by=c("region","district","ea"),all.x=T)
+    res[["df2015"]] <- subset(res[["df2015"]],religion!=4)
     
     return(res)
   }  
@@ -576,15 +580,19 @@ add_fields_to_data <- function(use_ea,ngrdf2010,ngrdf2012,ngrdf2015)
     res[["df2010"]]$ER <- NULL
     pol2010<- ddply(unique(res[["df2010"]][,c("hhid","region","district","lnA0")]),.(region,district),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
     res[["df2010"]]<- merge(res[["df2010"]],pol2010,by=c("region","district"),all.x=T)
+    print("Ignoring religion=other")
+    res[["df2010"]] <- subset(res[["df2010"]],religion!=4)
+    
     
     res[["df2012"]]$ER <- NULL
     pol2012<- ddply(unique(res[["df2012"]][,c("hhid","region","district","lnA0")]),.(region,district),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
     res[["df2012"]]<- merge(res[["df2012"]],pol2012,by=c("region","district"),all.x=T)
+    res[["df2012"]] <- subset(res[["df2012"]],religion!=4)
     
     res[["df2015"]]$ER <- NULL
     pol2015<- ddply(unique(res[["df2015"]][,c("hhid","region","district","lnA0")]),.(region,district),summarise,ER=polarisation(lnA0,rep(1,length(hhid))))
     res[["df2015"]]<- merge(res[["df2015"]],pol2015,by=c("region","district"),all.x=T)
-    
+    res[["df2015"]] <- subset(res[["df2015"]],religion!=4)
     
     return(res)
   }
