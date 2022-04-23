@@ -31,12 +31,12 @@ theorems-ams-extended-chap-bytype
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "tgtermes" "Caslon OS"
+\font_roman "ae" "Sitka Small"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts true
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -48,7 +48,7 @@ theorems-ams-extended-chap-bytype
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 10
+\paperfontsize 12
 \spacing single
 \use_hyperref false
 \papersize default
@@ -162,9 +162,9 @@ textit{A case-study in Tanzania and Nigeria}}}
 Many have argued that the severe high unemployment and limited access to
  higher education have allowed education to act as a status commodity in
  sub-Saharan African economies.
- While higher education has remained pro-rich, the chances for social mobility
- through education are low - preventing education from contributing to industria
-l productivity while letting it remain a rite of passage for the urban rich.
+ With little improvements to productivity, higher education in many sub-Saharan
+ Africa has faltered in providing adequate social mobility and may serve
+ only as a rite of passage for the urban rich.
  The current chapter investigates the differential access to education in
  two representative countries in sub-Saharan Africa by comparing the education
  expenses from the consumption surveys against the regional long-term assets
@@ -2895,19 +2895,59 @@ teducexpense")]))
 \end_layout
 
 \begin_layout Standard
-Urban residents spend 2.34 times more than rural residents in Nigeria whereas
- they spend 2.8 times more in Tanzania.
- The secondary education appears get much costlier in Tanzania since the
- mean education expenditure for education rank 3 is almost double that of
- the expenditure on education rank 2 in Tanzania.
+Of the two economies, Tanzania is more agrarian and the average education
+ levels seem higher in the more industrialised Nigeria (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:HistEducationRanks"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The role of private education is also much higher in Nigeria (see Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BarChartSchoolTypes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The urban residents spend much higher on education than the rural residents
+ in both the economies.
+ More specifically, urban residents spend 2.34 times more than rural residents
+ in Nigeria whereas they spend 2.8 times more in Tanzania.
+ The secondary education appears to get much costlier in Tanzania since
+ the mean education expenditure for education rank 3 is almost double that
+ of the expenditure on education rank 2 in Tanzania.
  In Nigeria, these costs rise by about 54%.
+ The educational expenses do not seem to rise much with asset disparities
+ in Nigeria - where they seem be more unequally distributed in Tanzania
+ (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BarChartEducationbyAssetDeciles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
-While the overall poverty levels appear similar in Nigeria and Tanzania
- , the disparity in owned assets is observed to be more extreme in Tanzania
- (particularly between the south of the country and the east - see Figure
- 
+A non-parametric view of the distribution of assets helps us compare the
+ role of the prosperity on education expenses in more details.
+ Here, while the overall poverty levels appear similar in Nigeria and Tanzania
+ , the disparity in owned assets is far more extreme in Tanzania (particularly
+ between the south of the country and the east - see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:occupations_r_ngr"
@@ -3012,9 +3052,9 @@ Inequality in assets and non-durable expenditure across households and districts
 \begin_layout Standard
 The range of occupations available to the consumer populations in the surveys
  from Tanzania and Nigeria are varied.
- To compare the role of occupations in the two economies, we standardise
- all the different occupations in the survey for Tanzania and Nigeria into
- occupation ranks ranging from 0 to 3.
+ To compare the role of occupations in the two economies for this non-parametric
+ view alone, we standardise all the different occupations in the survey
+ for Tanzania and Nigeria into occupation ranks ranging from 0 to 3.
  These occupation ranks are based on sorting the varied occupations in the
  two economies by the income of consumers in the respective countries.
  The occupation-ranks mapped from the occupation levels in Tanzania and
@@ -3188,9 +3228,9 @@ noprefix "false"
 
 \end_inset
 
-), the disparity in asset ownership across regions is not nearly as extreme
- as in Tanzania.
- The implications of this non-uniformity on consumption are further elaborated
+), the disparity in asset ownership across regions is not as extreme as
+ in Tanzania.
+ The implications of this non-uniformity on consumption are further discussed
  in the Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3584,7 +3624,8 @@ ns (agrarian/non-agrarian occupations, further sub-divided by higher than
 \end_layout
 
 \begin_layout Standard
-The dependent variables used in the estimation described in Section 
+The two dependent variables we use in the estimation described in Section
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Econometric-Method"
@@ -3594,7 +3635,26 @@ noprefix "false"
 
 \end_inset
 
- are listed in Table 
+ (see Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:main_estimation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) are the budget shares for educational expenses (
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+) and total expenditures 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ .
+ These dependent variables are listed in the Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Dependent Variables"
@@ -3605,107 +3665,7 @@ noprefix "false"
 \end_inset
 
 .
- The two dependent variables - budget shares for educational expenses (
-\begin_inset Formula $w_{educ}$
-\end_inset
-
-) and total expenditure 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- are used in the estimation with price of non-durable expenditure in the
- consumer's vicinity as a control (see Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:main_estimation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- As described in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Econometric-Method"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the prices 
-\begin_inset Formula $p_{ne}$
-\end_inset
-
- in the reference area - interpreted as the cost of living in the reference
- - are measured as the the average consumption excluding the asset costs
- in the consumer's vicinity.
- Based on the standard consumption theory (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "modiglianiutility1954,FriedmanConsumption1957"
-literal "false"
-
-\end_inset
-
-), the total household expenditures are meant to be related with the household’s
- permanent income - thus permitting the use of the logarithm of total expenditur
-e 
-\begin_inset Formula $log(x)$
-\end_inset
-
- as the control for permanent income in the estimation.
- The results from the OLS estimation for 
-\begin_inset Formula $w_{educ}$
-\end_inset
-
- are shown in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_district_weduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_weduc}
-\end_layout
-
-\end_inset
-
- for Tanzania and Nigeria respectively.
- The interpretation of references used in these results are as described
- in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:ReferenceDefinitions"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Other controls for the household's occupational and educational statuses
- are listed in the Table 
+ The controls used in this estimation are listed in the Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Control-Variables"
@@ -3716,8 +3676,27 @@ noprefix "false"
 \end_inset
 
 .
- Of these control variables, some are specific to the individual household.
- More specifically, the age of the household age 
+ Some of these controls are observed at the individual household's level.
+ For example, the logarithm of total expenditure 
+\begin_inset Formula $log(x)$
+\end_inset
+
+ is observed for the individual household and is used as the control for
+ permanent income in the estimation.
+ The relationship between total household expenditures and the household’s
+ permanent income has been argued for in the standard consumption theory
+ (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "modiglianiutility1954,FriedmanConsumption1957"
+literal "false"
+
+\end_inset
+
+).
+ Other controls for the household's occupational and educational statuses
+ are also observed for every household.
+ The age of the household age 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -3737,6 +3716,18 @@ age
  of the household (
 \family typewriter
 hsize
+\family default
+), the mean age of the children in the household 
+\begin_inset Formula $\mu$
+\end_inset
+
+ (
+\family typewriter
+meanchildage
+\family default
+), factor variable for access to private education (
+\family typewriter
+educpriv
 \family default
 ), the total expenditure 
 \begin_inset Formula $log(x_{t})$
@@ -3785,18 +3776,8 @@ religion
 rural_wards
 \family default
 \size default
-- divisions within a district marked as rural in the survey), the logarithm
- of the per-head cost of non-durable consumption excluding assets costs
-\begin_inset Formula $p_{ne}$
-\end_inset
-
- ( 
-\family typewriter
-\size small
-log_mean_cost_ne
-\family default
-\size default
- ) and the respective measures of the prosperity
+- divisions within a district marked as rural in the survey), the respective
+ measures of the prosperity
 \family typewriter
 \size small
  r
@@ -3812,59 +3793,98 @@ noprefix "false"
 
 \end_inset
 
-).
+) and the logarithm of the per-head cost of non-durable consumption excluding
+ assets costs
+\begin_inset Formula $p_{ne}$
+\end_inset
+
+ ( 
+\family typewriter
+\size small
+log_mean_cost_ne
+\family default
+\size default
+ ) - which is interpreted as the cost of living in the reference.
+ are measured as the the average consumption excluding the asset costs in
+ the consumer's vicinity.
+ 
 \end_layout
 
 \begin_layout Standard
-In addition to 
-\begin_inset Formula $\gamma,\tau,\Omega,r,\xi$
+The results from the OLS estimation for 
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ are shown in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district_weduc}
+\end_layout
+
 \end_inset
 
  and 
-\begin_inset Formula $\chi$
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district_weduc}
+\end_layout
+
 \end_inset
 
-, the logit formulation also uses the education rank of the household head's
- father 
-\begin_inset Formula $\Gamma_{f}^{*}$
+ for Tanzania and Nigeria respectively.
+ The results for 
+\begin_inset Formula $log(q_{educ})$
 \end_inset
 
-(
-\family typewriter
-\size small
-father_educ_rank
-\family default
-\size default
-) as one of the control variables.
- Further, in an alternate formulation for educational expenses, we regress
- the logarithm of total expenditure on education against the same control
- variables as for 
-\begin_inset Formula $w_{ne},w_{educ}$
+ are shown in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district_logeduc}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district_logeduc}
+\end_layout
+
 \end_inset
 
 .
- The educational expense used both as the dependent variable and in the
- logarithm of the total expenditure 
-\begin_inset Formula $log(x)$
-\end_inset
-
- as the control variable causes a well-known endogeneity problem (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CharlesHurstRace,ChaiKaus2019"
-literal "false"
+ The interpretation of references used in these results are as described
+ in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:ReferenceDefinitions"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-) that is resolved by instrumenting the variable 
-\begin_inset Formula $log(x)$
-\end_inset
-
- with the occupation data in the survey.
- Accepting at most a rejection rate of 10% of a nominal 5% Wald test, the
- eigenvalue test statistic are higher than 20 (with the critical value of
- 16.38) for all the regressions - and allow us to reject the null hypothesis
- that the instrument is a weak one.
+.
 \end_layout
 
 \begin_layout Standard
@@ -3878,7 +3898,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="3">
+<lyxtabular version="3" rows="3" columns="3">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0.7in">
 <column alignment="center" valignment="top" width="1in">
@@ -3949,7 +3969,7 @@ budget share of the non-durable expenditure excluding costs associated with
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3961,7 +3981,7 @@ budget share of the non-durable expenditure excluding costs associated with
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3981,75 +4001,6 @@ w_educ
 
 \begin_layout Plain Layout
 budget share of the educational expenses
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-q_ne
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-the logarithm of educational expenses by the household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\delta_{ne}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-edchange
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-variable indicating whether the household head's education rank is higher
- than the father's
 \end_layout
 
 \end_inset
@@ -4470,6 +4421,49 @@ Individual
 </cell>
 </row>
 <row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mu$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+meanchildage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+the mean age of the children in the househld
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Individual
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
@@ -4545,50 +4539,6 @@ education_rank
 \begin_layout Plain Layout
 highest education rank among the family members of the household used as
  a factor variable
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Individual
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\Gamma_{f}^{*}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-father_educ_rank 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-education rank of the household head's biological father
 \end_layout
 
 \end_inset
@@ -4850,17 +4800,16 @@ noindent
 \end_layout
 
 \begin_layout Standard
-The key goal of empirical analysis is to find out if the educational expenses
- in the two economies rise more sharply as a result higher prosperity in
- the local cross-section of incomes or due to disparities in prosperity
- across wider geographical areas.
- As education is a clear means for mobility, the disparity in education
- would imply a limited mobility in the economy.
- As described earlier, the levels of urbanisation are proxied using the
- the asset-prosperity of the consumer's vicinity while the local income
- differences are accounted for using the control for permanent income.
- The analysis contrasts educational expenses and mobility in the two economies
- by looking at the relative effects of wider and local income differences.
+A key goal of the empirical analysis is to find out if the educational expenses
+ in the two economies rise more sharply as a result of higher prosperity
+ of the local reference than due to higher permanent income.
+ Since education is a clear means for mobility, the disparity in education
+ further implies a limited mobility in the economy.
+ To recap, the asset-prosperity of the consumer's vicinity proxies the level
+ of urbanisation in the two economies while the local income differences
+ are accounted for using the control for permanent income.
+ The results thus contrast the relative effects of wider and local income
+ differences educational expenses in the two economies.
 \end_layout
 
 \begin_layout Standard
@@ -5042,10 +4991,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The access to private education is limited to the wealthier population in
- both the economies.
- Since private education only accounts for a minority of the population
- (see Figure 
+Despite private education being more important in Nigeria (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:BarChartSchoolTypes"
@@ -5055,17 +5001,40 @@ noprefix "false"
 
 \end_inset
 
-), this only confirms the findings in the literature that higher education
- has not been addressed by private - we also look at the average age of
- the children to check if see how the costs of secondary and tertiary education
- rise for families in the two economies.
- 
+), the access to private education is limited to the wealthier population
+ in both the economies.
+ As private education only accounts for a minority of the population (see
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BarChartSchoolTypes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), this only confirms the literature's findings that higher education has
+ not been addressed by private institution.
+ The results also show a higher rise in secondary and tertiary education
+ - if one looks at the effect of 
+\begin_inset Formula $\mu$
+\end_inset
+
+ i.e.
+
+\family typewriter
+ meanchildage
+\family default
+ (average age of the children) on education expenses in the two economies.
+ The less surprising observation that more children increase the total expenditu
+re is supported for both the economies.
 \end_layout
 
 \begin_layout Standard
-In Tanzania, with higher disparity in asset-ownership and less urbanisation,
- the agrarian households seem to be spending higher on education (compare
- the coefficients of 
+We note also that in Tanzania - with a higher disparity in asset-ownership
+ and less urbanisation - the agrarian households seem to be spending higher
+ on education (compare the coefficients of 
 \family typewriter
 r_agri
 \family default
@@ -5095,14 +5064,14 @@ ref{tabNGR_district_logeduc}
 
 \end_inset
 
-) - particularly if one considers the prosperity of households with the
- same educational-status (
+) - esp considering the prosperity of households with the same educational-statu
+s (
 \begin_inset Formula $\Gamma$
 \end_inset
 
  i.e.
  having higher than primary education or not).
- The education expenditure is higher for agrarian households in Tanzania
+ The education expenditure is thus higher for agrarian households in Tanzania
  after taking into account their poor educational status measured through
  
 \begin_inset Formula $\Gamma$
@@ -5224,10 +5193,7 @@ The role of English language seems significant in Tanzania - where the English-s
 peakers spend significantly higher on education.
  In Nigeria, on the other hand, the educational expenses are higher among
  households identifying as Christian.
- The effects of average age and the number of children points ..
- less surprising observation that the more children ...
- and ...
- consistently spend higher on education.
+ 
 \end_layout
 
 \begin_layout Section
@@ -5241,14 +5207,40 @@ Conclusions
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \noindent
 We had set ourselves to understand how wider disparities in urbanisation
  and improvements of income at local levels may affect the differences in
  educational expenses and mobility in the context of sub-Saharan Africa.
  Treating the educational expenses as investments in mobility, we find significa
-nt effects of regional prosperity and institutional differences on both
- education expenses and mobility.
- Our results share many of the wider observations made by 
+nt effects of regional prosperity on education expenses in both the economies.
+ The role of wealth does seem weaker in Nigeria - where prosperity differences
+ are more likely to causes difference in education expense.
+ In Tanzania, on the other hand, the role of permanent income is stronger.
+ While private education seems more common in Nigeria, the state-provided
+ education plays the dominant role in both the economies.
+ It can be argued that urbanisation and the expansion of education sector
+ could result in private institutions playing a larger role in secondary
+ education.
+\end_layout
+
+\begin_layout Standard
+These results also share many of the wider observations made by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AlesinaMobilityAfrica2019"
@@ -5256,14 +5248,14 @@ literal "false"
 
 \end_inset
 
- - who also highlight the role of religious and colonial institutions in
- the educational mobility across sub-Saharan Africa.
+ - who highlight the role of religious and colonial institutions in the
+ educational mobility across sub-Saharan Africa.
  Since the agrarian consumers maintain a higher budget share on education
  expenses in the poorer economy (Tanzania) and higher education ranks correspond
  to higher education expenses in the developed economy (Nigeria), it would
  appear that the educational expenses remain higher after attainment of
  education by the consumers and increase in regional prosperity.
- This latter observation is aligned with the cohort-study from 
+ This latter observation is aligned with the cohort-study 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "porzio2021human"
@@ -5271,8 +5263,8 @@ literal "false"
 
 \end_inset
 
- who suggest that the labour with skills added through education is less
- willing to stay in agricultural activities.
+ from who suggest that the labour with skills added through education is
+ less willing to stay in agricultural activities.
 \end_layout
 
 \begin_layout Standard
@@ -5284,9 +5276,8 @@ Considering the special cases for the two economies, we see that the separation
  education are generally higher but the differences brought about prosperity
  differences and religious institutions are significant.
  Thus while overall educational levels and expenses do rise with prosperity
- (as in Nigeria), the access to education as a means for mobility remains
- extremely segmented due to social factors and assets-prosperity in both
- the economies.
+ (as in Nigeria), the access to education as a means for mobility are extremely
+ susceptible to social factors and assets-prosperity in both the economies.
 \end_layout
 
 \begin_layout Standard
