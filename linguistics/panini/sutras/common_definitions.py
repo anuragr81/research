@@ -198,7 +198,11 @@ class Node:
     def get_parent2 (self):
         return self._parent2
 
+def get_aadesha_sutras():
+    return (3010460,)
 
+def get_vriddhi_sutras():
+    return (7020021,)
 
 def get_supported_types ():
     return (Suffix,It,Dhaatu)
