@@ -56,7 +56,8 @@ class aadeshapratyayoH_8030059:
         
         past_rules = [(x['rule']) for x in node._output if 'rule' in x]
         past_rule_ids = [ float(re.search('([0-9]+_*[0-9]*)$',x.__name__).group(1)) for x in past_rules ]
-        if set([float(j) for j in get_aadesha_sutras()]).intersection(set(past_rule_ids)):
+        aadesha_instances = set([float(j) for j in get_aadesha_sutras()]).intersection(set(past_rule_ids))
+        if aadesha_instances:
             ##it is an aadesha sutra
             if node.get_output()[0] == 's':
                 if anga_node.get_output()[-1] in ('i','ii','u','uu') :

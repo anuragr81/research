@@ -92,6 +92,6 @@ class parasmaipadaanaaMNnalatususXthalaXthusaNnalvamaaH_3040820:
             mapping= {'tip':['Nn','a','l'], 'tas':['a','t','u','s'], 'jhi':['u','s'], 
                           'sip':['Xth','a','l'], 'Xthas':['a','Xth','u','s'],'Xtha':['a'], 
                           'mip':['Nn','a','l'], 'vas':['v','a'], 'mas':['m','a']}
-            if suffix_name in tiNg_pratyayaaH() and suffix_name in tiNg_pratyayaaH() in mapping: 
+            if suffix_name in tiNg_pratyayaaH() and suffix_name in mapping: 
                 return {'output':mapping[suffix_name],'mutate':True}
         return node.get_output()

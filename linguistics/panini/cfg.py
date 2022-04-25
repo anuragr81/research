@@ -74,6 +74,8 @@ def apply_transformation(transformation_rule,new_expr):
 #                        if (transformation_rule.__name__=="saarvadhaatukaardhadhaatukayoH_703084"):
 #                            j = 1
                         new_expr[i-1].set_output(transformation_rule,suffix_node=new_expr[i])
+                    if 'anga_node' in sig_params :
+                        new_expr[i-1].set_output(transformation_rule,anga_node=new_expr[i])
 
                     
             if 'anga_node' not in sig_params  and 'suffix_node' not in sig_params :
@@ -250,14 +252,16 @@ def test_siddhis ():
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tas",lakaara='laXt'),parent1=None)]) == "bhavata"
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("mip",lakaara='laXt'),parent1=None)]) == "bhavaami"
     assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='luXt'),parent1=None)]) == "paXthitaa"
-    #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='liXt'),parent1=None)]) == "papaaXtha"
+    assert output_string ([Node(Dhaatu(parse_string("chiNc")),parent1=None),Node(Suffix("tip",lakaara='luNg'),parent1=None)] ) == "achaiXshiit"
+    assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='lRiXt'),parent1=None)]) == "paXthiXshyati"
+    assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='liXt'),parent1=None)]) == "papaaXtha"
     #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]) == "peXthatuH"
     # liNg is aardhadhaatuk in aashir-liNg
     
 F=False
 T=True
 
-if T:
+if F:
     test_siddhis ()
     #print("Test")
     #f=Functor()
@@ -265,8 +269,8 @@ if T:
     
 else:   
     
-    expression=[Node(Dhaatu(parse_string("chiNc")),parent1=None),Node(Suffix("tip",lakaara='luNg'),parent1=None)]
-    #expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='lRiXt'),parent1=None)]
+    
+    expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]
     
     # sorting order is increasing in general but can be superseded by nitya condition (if nitya occurs in a later sutra then that later sutra takes advantage) 
     # which in turn would be superseded by the minimal condition criteria (antaraNga) 
@@ -274,7 +278,7 @@ else:
     
     print("NEXT: luNglaNglRiNgkXshvaXdudaataH has prepending issue because we don't trace insertion/prepending of vikaraNna histories. This should allow the immediate dhaatu in context.")
     # for paXtheta - we need to have for liNg : yaasuXtparasmaipadeXshuudaatto Ngichcha 3.4.103 and then ato yeyaH (because of a-ending paXtha after shap)
-    print("PENDING : murdhanyaadesha in paXthiXshyati and eruH - murdhanyaadesha through aadeshapratyayoH of s that comes through aadesha aur through a pratyaya happens only if there is iNn afterwards")
+    print("PENDING : eruH ")
     
     
     processed_expr=(process_until_finish(expression))

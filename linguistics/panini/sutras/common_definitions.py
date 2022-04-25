@@ -199,7 +199,7 @@ class Node:
         return self._parent2
 
 def get_aadesha_sutras():
-    return (3010460,)
+    return (3010460,7041140)
 
 def get_vriddhi_sutras():
     return (7020021,)

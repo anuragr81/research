@@ -30,7 +30,7 @@ class liXtidhaatoranabhyaasasya_6010080:
         if isinstance   (node._data,Dhaatu):
             if suffix_node._data._lakaara == 'liXt':
                 applied_rules= [int(x['rule'].__name__.split('_')[-1]) for x in node._output if 'rule' in x]
-                if 601008 not in applied_rules :
+                if 6010080 not in applied_rules :
                     hals = [i for i,x in enumerate(node.get_output()) if x in hal() and i>0]
                     if hals:                    
     
