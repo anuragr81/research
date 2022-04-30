@@ -144,4 +144,6 @@ class yasyeticha_6041480:
                  return anga_str[0:-1]
         return anga_str
     
+class ekahalmadhyeanaadeshaaderliXti_6041200:
+    
     

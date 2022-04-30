@@ -23,7 +23,20 @@ class yuvoranaakau_7010010:
     
         return suffix_string
 
-#raise ValueError("taas from syataasiilRiluXtoH_301033 would be modified with XdityabhasyaapianubandhakaraNnasaamarthyaat_m604146")
+class jhoantaH_7010030:
+    def __init__(self):
+        self._types={'node':[Suffix,'literal']}
+    def __call__(self,node):
+        if not isinstance(node,Node):
+            raise ValueError("suffix must of type Node")
+        
+        if not isinstance(node._data,Suffix):
+            raise ValueError("suffix must of type Suffix")
+        suffix_string= node.get_output()
+        if 'jh' in suffix_string:
+            jhpos=suffix_string.index('jh')
+            return suffix_string[:jhpos]+['a','n','t'] +suffix_string[jhpos+1:]
+        return node.get_output()
 
 
 class aayaneyiiniiyiyaH_phaXdhakhachchhaghaaM_pratyayaadiinaaM_7010020:
@@ -176,12 +189,7 @@ class saarvadhaatukaardhadhaatukayoH_7030840:
         
         return node.get_output()
     
-class Functor:
-    def __init__(self):
-        self._types={'a':['literal']}
-    def __call__(self,a):
-        return 0
-    
+   
 def iXt_not_allowed(suffix_node_data):
     # TODO : Remove hack
     return ''.join(suffix_node_data) in ('ghaNc','Nnvul')

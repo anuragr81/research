@@ -44,7 +44,7 @@ def get_sutras_ordered ():
 
 def transformation_sutras():
     ll = [2040850,3010331,3040820,6010080,6010630, 6010750, 6040880, 6041200, 6041480, 
-          7010010, 7010020, 7020021, 7021150, 7021160, 7030520, 7030840,7031010, 
+          7010030,7010010, 7010020, 7020021, 7021150, 7021160, 7030520, 7030840,7031010, 
           8010150, 8020660, 8030059]
     return sorted(float(x) for x in ll)
 
@@ -270,7 +270,7 @@ def generate_tibaadi(dhaatu_node):
     res = {}
     las = ('tip','tas','jhi','sip','thas','tha','mip','vas','mas')
     
-    lakaaras = ('laXt','liXt','luXt','luNg','lRiXt')
+    lakaaras = ('laXt','lRiXt','liXt','luXt','luNg')
     for lakaara_string in lakaaras :
         print(lakaara_string )
         res[lakaara_string ] = []
@@ -282,7 +282,7 @@ def generate_tibaadi(dhaatu_node):
 F=False
 T=True
 
-if T:
+if F:
     test_siddhis ()
     #print("Test")
     #f=Functor()
@@ -292,7 +292,7 @@ else:
     
     pprint(generate_tibaadi(Node(Dhaatu(parse_string("paXthNc")),parent1=None)))    
     sys.exit(0)
-    expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='laXt'),parent1=None)]
+    expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("jhi",lakaara='laXt'),parent1=None)]
     
     # sorting order is increasing in general but can be superseded by nitya condition (if nitya occurs in a later sutra then that later sutra takes advantage) 
     # which in turn would be superseded by the minimal condition criteria (antaraNga) 
