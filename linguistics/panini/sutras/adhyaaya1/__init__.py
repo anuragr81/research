@@ -20,9 +20,10 @@ class halantyam_1030030:
         #Check isinstance(node._data,Dhaatu) if necessary
         antyam = node.get_output()[-1]
         #works only once - not after the output has been modified with the call
-        #if isinstance(node._data,Suffix):
-        #    if ''.join(node._data._suffix) in tiNg_pratyayaaH() or ''.join(node._data._suffix) in sup_pratyayaaH():
-        #        return node.get_output()
+        if isinstance(node._data,Suffix):
+            if antyam in ('t','s',):
+                if ''.join(node._data._suffix) in tiNg_pratyayaaH() or ''.join(node._data._suffix) in sup_pratyayaaH():
+                    return node.get_output()
         
         
         node_data=[x['output'] for x in node._output if 'new' in x and x['new']][-1]

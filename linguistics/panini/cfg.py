@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
-from sutras.common_definitions import *
-import re
+from sutras.common_definitions import Dhaatu,Node,Suffix, parse_string
+import re, sys
 from functools import reduce
 from pprint import pprint
 import inspect
@@ -243,13 +243,16 @@ def process_list(expr):
     
     return new_expr
 
+def output_string (expr):
+    return ''.join(reduce(lambda x ,y : x + y.get_output(),  process_until_finish(expr), []))
+
 def test_siddhis ():
-    output_string = lambda expr: ''.join(reduce(lambda x ,y : x + y.get_output(),  process_until_finish(expr), []))
+    
     
     assert output_string ([Node(Dhaatu(parse_string("bhajNc")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]) == "bhaaga"
     assert output_string ([Node(Dhaatu(parse_string("NniiNc")),parent1=None),Node(Suffix("Nnvul"),parent1=None)]) == "naayaka"
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tip",lakaara='laXt'),parent1=None)]) == "bhavati"
-    assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tas",lakaara='laXt'),parent1=None)]) == "bhavata"
+    assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tas",lakaara='laXt'),parent1=None)]) == "bhavatas"
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("mip",lakaara='laXt'),parent1=None)]) == "bhavaami"
     assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='luXt'),parent1=None)]) == "paXthitaa"
     assert output_string ([Node(Dhaatu(parse_string("chiNc")),parent1=None),Node(Suffix("tip",lakaara='luNg'),parent1=None)] ) == "achaiXshiit"
@@ -257,11 +260,29 @@ def test_siddhis ():
     assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='liXt'),parent1=None)]) == "papaaXtha"
     #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]) == "peXthatuH"
     # liNg is aardhadhaatuk in aashir-liNg
+
+
+def generate_tibaadi(dhaatu_node):
+    if not isinstance(dhaatu_node,Node):
+        raise ValueError("dhaatu_node must be a Node")
+    if not isinstance(dhaatu_node._data,Dhaatu):
+        raise ValueError("dhaatu_node must encapsulate a Dhaatu")
+    res = {}
+    las = ('tip','tas','jhi','sip','thas','tha','mip','vas','mas')
+    
+    lakaaras = ('laXt','liXt','luXt','luNg','lRiXt')
+    for lakaara_string in lakaaras :
+        print(lakaara_string )
+        res[lakaara_string ] = []
+        for la in las:
+            res[lakaara_string ].append(output_string ([dhaatu_node, Node(Suffix(la,lakaara=lakaara_string),parent1=None)]))
+    return res
+    
     
 F=False
 T=True
 
-if F:
+if T:
     test_siddhis ()
     #print("Test")
     #f=Functor()
@@ -269,8 +290,9 @@ if F:
     
 else:   
     
-    
-    expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]
+    pprint(generate_tibaadi(Node(Dhaatu(parse_string("paXthNc")),parent1=None)))    
+    sys.exit(0)
+    expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='laXt'),parent1=None)]
     
     # sorting order is increasing in general but can be superseded by nitya condition (if nitya occurs in a later sutra then that later sutra takes advantage) 
     # which in turn would be superseded by the minimal condition criteria (antaraNga) 
