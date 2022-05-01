@@ -170,24 +170,24 @@ class Node:
         # output is not changed
         old_output  = self.get_output()
         # no change in output -just rule and input update
-        self._output.append({'rule':rule, 'inputs':{**{'state':self.get_output()} , **inputs}, 'output':old_output })
+        self._output.append({'rule':rule, 'inputs':{**{'state_output':self.get_output(),'state':self} , **inputs}, 'output':old_output })
             
     def set_output(self,rule,**kwargs):
         old_output = self.get_output()
-        #print(rule.__name__)
+        #print("set_output:"+ rule.__name__)
         new_output = rule()(node=self,**kwargs)
         
         if isinstance(new_output,dict):
             if 'mutate' in new_output :
                 if new_output['output'] != old_output :
                     if new_output ['mutate']:
-                        self._output.append({'rule':rule,'inputs':{**{'state':old_output} , **kwargs},'output':new_output['output'] ,'new' :True})
+                        self._output.append({'rule':rule,'inputs':{**{'state_output':old_output,'state':self } , **kwargs},'output':new_output['output'] ,'new' :True})
                     else:
-                        self._output.append({'rule':rule,'inputs':{**{'state':old_output} , **kwargs},'output':new_output['output']})
+                        self._output.append({'rule':rule,'inputs':{**{'state_output':old_output,'state':self } , **kwargs},'output':new_output['output']})
                 
         else:
            if new_output != old_output:
-              self._output.append({'rule':rule,'inputs':{**{'state':old_output} , **kwargs},'output':new_output })
+              self._output.append({'rule':rule,'inputs':{**{'state_output':old_output,'state':self} , **kwargs},'output':new_output })
         
     def get_output(self):
         return self._output[-1]['output']

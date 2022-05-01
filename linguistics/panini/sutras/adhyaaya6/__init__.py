@@ -32,14 +32,12 @@ class liXtidhaatoranabhyaasasya_6010080:
                 applied_rules= [int(x['rule'].__name__.split('_')[-1]) for x in node._output if 'rule' in x]
                 if 6010080 not in applied_rules :
                     hals = [i for i,x in enumerate(node.get_output()) if x in hal() and i>0]
-                    if hals:                    
-    
-    #                    if len([x['output'] for x in node._output if 'new' in x and x['new']]) == 1: # there has been no adesha to anga
-    #                        if node.get_output()[-1] not in ach() and node.get_output()[-2] in ach() : # asaMyoga => kit
-                                # 6.4.120 if there is asaMyoga (and liXt) then it's treated as kit and further, if anga does 
-                                # not have any adesha in the aadi then there would no dvitva and 
-                                # the akaar between the aadi hal and the one after aadi would become e
-    #                            return node.get_output()
+                    
+                    if hals:
+                        if len(hals)==1 and hals[0] >1 and node.get_output()[hals[0]-1] in ('a',): # ekahalmadhye achaH, asaMyoga 
+                            if len([x for x in node._output if 'new' in x])==1: # no adesha
+                                if suffix_node._output[1]['inputs']['state']._data._lakaara  == 'liXt': # check on suffix
+                                    return  node.get_output()[:hals[0]-1] + ['e'] + node.get_output()[hals[0]:]
                             
                         # ignore hals after second
                         return node.get_output()[:hals[0]]+node.get_output()
@@ -143,7 +141,3 @@ class yasyeticha_6041480:
             if suffix.is_taddhita or suffix_data[0] in ('i','ii'):
                  return anga_str[0:-1]
         return anga_str
-    
-class ekahalmadhyeanaadeshaaderliXti_6041200:
-    
-    

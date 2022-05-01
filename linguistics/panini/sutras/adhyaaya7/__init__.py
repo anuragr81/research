@@ -115,10 +115,11 @@ class ataupadhaayaaH_7021160:
             #Ncit or Nnit
             anga_string = node.get_output()
             upadhaa_pos = upadhaa(anga_string )
-            return anga_string [0:upadhaa_pos ]+[vriddhi(anga_string[upadhaa_pos])] + anga_string [upadhaa_pos+1:]
+            if anga_string [upadhaa_pos] == 'a':
+                return anga_string [0:upadhaa_pos ]+[vriddhi(anga_string[upadhaa_pos])] + anga_string [upadhaa_pos+1:]
             
-        else:
-            return node.get_output()
+        
+        return node.get_output()
 
 class acho_NcNniti_7021150:
     def __init__(self):

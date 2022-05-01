@@ -270,7 +270,7 @@ def generate_tibaadi(dhaatu_node):
     res = {}
     las = ('tip','tas','jhi','sip','thas','tha','mip','vas','mas')
     
-    lakaaras = ('laXt','lRiXt','liXt','luXt','luNg')
+    lakaaras = ('liXt','lRiXt','laXt','luXt','luNg')
     for lakaara_string in lakaaras :
         print(lakaara_string )
         res[lakaara_string ] = []
@@ -300,7 +300,7 @@ else:
     
     print("NEXT: luNglaNglRiNgkXshvaXdudaataH has prepending issue because we don't trace insertion/prepending of vikaraNna histories. This should allow the immediate dhaatu in context.")
     # for paXtheta - we need to have for liNg : yaasuXtparasmaipadeXshuudaatto Ngichcha 3.4.103 and then ato yeyaH (because of a-ending paXtha after shap)
-    print("PENDING : eruH ")
+    print("PENDING : https://ashtadhyayi.com/sutraani/6/4/120, eruH ")
     
     
     processed_expr=(process_until_finish(expression))
