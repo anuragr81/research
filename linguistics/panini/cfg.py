@@ -2,6 +2,7 @@ from collections import OrderedDict
 
 from sutras.common_definitions import Dhaatu,Node,Suffix, parse_string
 import re, sys
+from copy import deepcopy
 from functools import reduce
 from pprint import pprint
 import inspect
@@ -262,11 +263,8 @@ def test_siddhis ():
     # liNg is aardhadhaatuk in aashir-liNg
 
 
-def generate_tibaadi(dhaatu_node):
-    if not isinstance(dhaatu_node,Node):
-        raise ValueError("dhaatu_node must be a Node")
-    if not isinstance(dhaatu_node._data,Dhaatu):
-        raise ValueError("dhaatu_node must encapsulate a Dhaatu")
+def generate_tibaadi(dhaatu_string):
+    
     res = {}
     las = ('tip','tas','jhi','sip','thas','tha','mip','vas','mas')
     
@@ -275,9 +273,34 @@ def generate_tibaadi(dhaatu_node):
         print(lakaara_string )
         res[lakaara_string ] = []
         for la in las:
-            res[lakaara_string ].append(output_string ([dhaatu_node, Node(Suffix(la,lakaara=lakaara_string),parent1=None)]))
+            dhaatu_node = Node(Dhaatu(parse_string(dhaatu_string)),parent1=None)
+            result = output_string ([dhaatu_node, Node(Suffix(la,lakaara=lakaara_string),parent1=None)])
+            res[lakaara_string ].append(result)
     return res
     
+
+def generate_subaadi(sup_expression):
+    if not isinstance(sup_expression,list):
+        raise ValueError("sup_expression must be a list of Nodes")
+    if any (not isinstance(x,Node) for x in sup_expression):
+        raise ValueError("sup_expression must be a list of Nodes")
+    res = []
+    sups = ('sNc','au','jas','am','auXt','shas', 'Xtaa','bhyaam','bhis',
+            'Nge','bhyaam','bhyas','Ngasi','bhyaam','bhyas',
+            'Ngas','os','am','Ngi','os','sup')
+    
+
+    for sup_string in sups :
+        cur_sup_expression=deepcopy(sup_expression)
+        cur_sup_expression.append(Node(Suffix(sup_string),parent1=None))
+        
+        print(sup_string )
+        result = output_string (cur_sup_expression)
+        print(sup_string + " gives " +result )
+        print(result)
+        res.append(result)
+    return res
+
     
 F=False
 T=True
@@ -290,9 +313,13 @@ if F:
     
 else:   
     
-    pprint(generate_tibaadi(Node(Dhaatu(parse_string("paXthNc")),parent1=None)))    
-    sys.exit(0)
-    expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("jhi",lakaara='laXt'),parent1=None)]
+    #pprint(generate_tibaadi("paXthNc"))   ;sys.exit(0)
+    sup_expr = [Node(Dhaatu(parse_string("rajNc")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]
+    pprint(generate_subaadi(sup_expr ))   ;sys.exit(0)
+    
+    
+    #expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]
+    
     
     # sorting order is increasing in general but can be superseded by nitya condition (if nitya occurs in a later sutra then that later sutra takes advantage) 
     # which in turn would be superseded by the minimal condition criteria (antaraNga) 

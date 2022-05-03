@@ -37,7 +37,8 @@ class liXtidhaatoranabhyaasasya_6010080:
                         if len(hals)==1 and hals[0] >1 and node.get_output()[hals[0]-1] in ('a',): # ekahalmadhye achaH, asaMyoga 
                             if len([x for x in node._output if 'new' in x])==1: # no adesha
                                 if suffix_node._output[1]['inputs']['state']._data._lakaara  == 'liXt': # check on suffix
-                                    return  node.get_output()[:hals[0]-1] + ['e'] + node.get_output()[hals[0]:]
+                                    if suffix_node._output[1]['inputs']['state']._data._suffix[-1]!='p':# cannot be p-it
+                                        return  node.get_output()[:hals[0]-1] + ['e'] + node.get_output()[hals[0]:]
                             
                         # ignore hals after second
                         return node.get_output()[:hals[0]]+node.get_output()

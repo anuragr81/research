@@ -309,7 +309,7 @@ def strii_pratyayaaH():
             "Nniin","uuNg","ti","XshyaNg","Xshpha")
 
 def sup_pratyayaaH():
-    return ('su', 'au','jas','am','auT','shas','Taa','bhyaam','bhis','Nge','bhyaam',
+    return ('sNc', 'au','jas','am','auT','shas','Taa','bhyaam','bhis','Nge','bhyaam',
         'bhyas','Ngasi','bhyaam','bhyas','Ngas','os','aam','Ngi','os','sup')
 
 
