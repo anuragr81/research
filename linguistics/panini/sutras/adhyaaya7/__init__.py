@@ -114,9 +114,11 @@ class ataupadhaayaaH_7021160:
         if 'Nc' in it_chars or 'Nn' in it_chars:
             #Ncit or Nnit
             anga_string = node.get_output()
-            upadhaa_pos = upadhaa(anga_string )
-            if anga_string [upadhaa_pos] == 'a':
-                return anga_string [0:upadhaa_pos ]+[vriddhi(anga_string[upadhaa_pos])] + anga_string [upadhaa_pos+1:]
+            #print("ataupadhaayaaH_7021160="+str(anga_string))
+            if len(anga_string )>1 :    
+                upadhaa_pos = upadhaa(anga_string )
+                if anga_string [upadhaa_pos] == 'a':
+                    return anga_string [0:upadhaa_pos ]+[vriddhi(anga_string[upadhaa_pos])] + anga_string [upadhaa_pos+1:]
             
         
         return node.get_output()

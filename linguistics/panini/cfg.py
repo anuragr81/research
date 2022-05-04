@@ -35,7 +35,6 @@ def get_sutras_for_module (j):
     res=[]
     for x in dir(j) :        
          if not x.startswith('_')  and re.search('[0-9]+$',x):
-             print(x)
              res.append((float(re.search('([0-9]+_*[0-9]*)$',x).group(1)),getattr(j,x)))
     return res
 
@@ -240,6 +239,7 @@ def process_list(expr):
         new_expr = apply_prepend(all_sutras[prepend_sutra_id],new_expr)
     # apply transformations until there is no change in the expression
     for transformation_ruleid in transformation_sutras():        
+        #print("transformation_ruleid="+str(transformation_ruleid))
         new_expr = apply_transformation(all_sutras[transformation_ruleid],new_expr)
     
     return new_expr
@@ -327,7 +327,8 @@ else:
     
     print("NEXT: luNglaNglRiNgkXshvaXdudaataH has prepending issue because we don't trace insertion/prepending of vikaraNna histories. This should allow the immediate dhaatu in context.")
     # for paXtheta - we need to have for liNg : yaasuXtparasmaipadeXshuudaatto Ngichcha 3.4.103 and then ato yeyaH (because of a-ending paXtha after shap)
-    print("PENDING : https://ashtadhyayi.com/sutraani/6/4/120, eruH ")
+    print("PENDING : https://ashtadhyayi.com/sutraani/6/4/120, pararuupa for subaadi,eruH ")
+    
     
     
     processed_expr=(process_until_finish(expression))
