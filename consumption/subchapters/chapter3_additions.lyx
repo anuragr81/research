@@ -1540,7 +1540,7 @@ u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\
 \end_layout
 
 \begin_layout Subsubsection
-Utility Formulation
+Combined Utility Formulation without sum constraint
 \end_layout
 
 \begin_layout Standard
@@ -1566,8 +1566,358 @@ One way is to combine utilities using a parameter of relative importance
 \begin_inset Formula $\alpha$
 \end_inset
 
- allows us to view the multi-objective optimisation problem ...
+ allows us to view the multi-objective optimisation problem as a single-objectiv
+e problem subject to the conditions 
+\begin_inset Formula $\bar{\nu}_{1}\le y_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{2}\le y_{2}$
+\end_inset
+
+ (i.e.
  
+\begin_inset Formula $y_{1}-\bar{\nu}_{1}\ge0$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{2}-\bar{\nu}_{2}\ge0$
+\end_inset
+
+) that lead to the Lagrangian 
+\begin_inset Formula $L=\mathscr{U}+\lambda_{1}(y_{1}-\bar{\nu}_{1})+\lambda_{2}(y_{2}-\bar{\nu}_{2})$
+\end_inset
+
+ and the first-order conditions for an interior solution (FOC is necessary
+ for LM since constraints are all linear).
+\end_layout
+
+\begin_layout Standard
+following .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial L}{\partial\bar{\nu}_{1}}=\frac{\partial L}{\partial\bar{\nu}_{2}}=0
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{1}}=\lambda_{1}\bar{\nu}_{1}\label{eq:combined_util_deriv1}\\
+\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{2}}=\lambda_{2}\bar{\nu}_{2}\label{eq:combined_util_deriv2}
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+\lambda_{1}(y_{1}-\bar{\nu}_{1})=0\Rightarrow\lambda_{1}y_{1}=\lambda_{1}\bar{\nu}_{1}\label{eq:combined_util_lambda1}\\
+\lambda_{2}(y_{2}-\bar{\nu}_{2})=0\Rightarrow\lambda_{2}y_{2}=\lambda_{2}\bar{\nu}_{2}\label{eq:combined_util_lambda2}
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:combined_util_lambda1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:combined_util_lambda2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:combined_util_deriv1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:combined_util_deriv2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we have 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{1}}-\lambda_{1}y_{1}=\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{2}}-\lambda_{2}y_{2}=0
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The four equations and four unknowns should allow us to solve the optimum
+ 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+.
+ Notice that,
+\begin_inset Formula 
+\begin{gather*}
+\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{1}}=\alpha(\frac{\partial u_{1}(\bar{\nu}_{1},\bar{\nu}_{2})}{\partial\bar{\nu}_{1}}-\frac{\partial u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})}{\partial\bar{\nu}_{1}})+\frac{\partial u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})}{\partial\bar{\nu}_{1}}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{2}} & =\alpha(\frac{\partial u_{1}(\bar{\nu}_{1},\bar{\nu}_{2})}{\partial\bar{\nu}_{2}}-\frac{\partial u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})}{\partial\bar{\nu}_{2}})+\frac{\partial u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})}{\partial\bar{\nu}_{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Representing 
+\begin_inset Formula $u_{1}\equiv u_{1}(\bar{\nu}_{1},\bar{\nu}_{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{2}\equiv u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{1}} & =\alpha(\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}\label{eq:combined_util_deriv1-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{2}} & =\alpha(\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}\label{eq:combined_util_deriv2-2}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Combined Utility Formulation with sum constraint
+\end_layout
+
+\begin_layout Standard
+To simply the constraints we may think of a limit 
+\begin_inset Formula $0<\xi<y_{1}<y_{2}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\bar{\nu}_{1}+\bar{\nu}_{2}<\xi$
+\end_inset
+
+.
+ The utilities can be combined using a parameter of relative importance
+ of status for society so that the objective for society to be optimised
+ is 
+\begin_inset Formula 
+\begin{align*}
+\mathscr{U}(\bar{\nu}_{1},\bar{\nu}_{2}) & =\alpha u_{1}(\bar{\nu}_{1},\bar{\nu}_{2})+(1-\alpha)u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})
+\end{align*}
+
+\end_inset
+
+ A low 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ society is one where social norms are more accepting of the rich consumer's
+ economic status.
+ Notice that parameter 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ represents the combined utilities from income bands and has no role to
+ play in the individual consumer's decisions.
+ The parameter 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ allows us to view the multi-objective optimisation problem as a single-objectiv
+e problem subject to the conditions 
+\begin_inset Formula $\bar{\nu}_{1}+\bar{\nu}_{2}\le\xi$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $\xi-\bar{\nu}_{1}-\bar{\nu}_{2}\ge0$
+\end_inset
+
+) so that the Lagrangian 
+\begin_inset Formula $L=\mathscr{U}+\lambda(\xi-\bar{\nu}_{1}-\bar{\nu}_{2})$
+\end_inset
+
+ and the first-order conditions for the interior solution (all constraints
+ being linear ensures that FOC is a necessary condition for LM) are
+\begin_inset Formula $\frac{\partial L}{\partial\bar{\nu}_{1}}=\frac{\partial L}{\partial\bar{\nu}_{2}}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda(\xi-\bar{\nu}_{1}-\bar{\nu}_{2})=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{1}}=\lambda\bar{\nu}_{1}\\
+\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{2}}=\lambda\bar{\nu}_{2}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\lambda(\xi-\bar{\nu}_{1}-\bar{\nu}_{2})=0\\
+\Rightarrow\lambda\xi=\lambda\bar{\nu}_{1}+\lambda\bar{\nu}_{2}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Given 
+\begin_inset Formula $\xi>0,$
+\end_inset
+
+ 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ can be solved as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\lambda=\frac{1}{\xi}(\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{1}}+\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{2}})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have thus two equations,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{1}}(1-\frac{\bar{\nu}_{1}}{\xi})=\frac{\bar{\nu}_{1}}{\xi} & \frac{\partial\mathscr{U}}{\partial\bar{\nu}_{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{2}}(1-\frac{\bar{\nu}_{2}}{\xi}) & =\frac{\bar{\nu}_{2}}{\xi}\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These can be simplified with by using Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:combined_util_deriv1-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:combined_util_deriv2-2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
