@@ -2012,21 +2012,9 @@ It is important that the optimisation does not depend on setting
  
 \end_layout
 
-\begin_layout Standard
-\begin_inset CommandInset bibtex
-LatexCommand bibtex
-btprint "btPrintCited"
-bibfiles "../../africa_attitudes"
-options "authordate3"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsubsection
 Combined Utility Formulation without sum constraint and population constraint
- included
+ mapping function
 \end_layout
 
 \begin_layout Standard
@@ -2411,9 +2399,30 @@ W'(\bar{\nu}_{1})\{u(k_{1}(\bar{\nu}_{1}))+u(m_{1}(\bar{\nu}_{1}))\}\\
 
 \end_layout
 
+\begin_layout Plain Layout
+or,
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{multline*}
+W'(\bar{\nu}_{1})\{u(k_{1}(\bar{\nu}_{1}))+u(m_{1}(\bar{\nu}_{1}))\}\\
++W(\bar{\nu}_{1})((y_{2}-y_{1})-2)u'(k_{1}(\bar{\nu}_{1})-(1+\phi'(\bar{\nu}_{1}))u'(m_{1}(\bar{\nu}_{1}))\\
+-W(\bar{\nu}_{1})W'(\bar{\nu}_{1})\{(y_{2}-y_{1})u'(k_{1}(\bar{\nu}_{1}))+(y_{2}-y_{1}-2)u'(m_{1}(\bar{\nu}_{1}))\}=0
+\end{multline*}
+
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Specific Function solution
 \end_layout
 
 \begin_layout Standard
@@ -2429,6 +2438,17 @@ As the differential equation for
 \begin_inset Formula 
 \begin{align*}
 W(\nu) & =\frac{1}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+1-W(\nu) & =\frac{1}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}
 \end{align*}
 
 \end_inset
@@ -2485,9 +2505,26 @@ L^{-1}(x) & =\underbar{\ensuremath{\lambda}}-\frac{1}{\lambda}log(\frac{x}{1-x})
 \end_layout
 
 \begin_layout Standard
+Now setting 
+\begin_inset Formula $x=W(\nu)$
+\end_inset
+
+ we have 
 \begin_inset Formula 
 \begin{align*}
-1-W(\nu) & =\frac{1}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}
+log(\frac{x}{1-x}) & =log(\frac{W(\nu)}{1-W(\nu)})=log(\frac{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus, 
+\begin_inset Formula 
+\begin{align*}
+\phi(\nu) & =L^{-1}(W(\nu))=\underbar{\ensuremath{\lambda}}-\frac{1}{\lambda}log(\frac{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}})
 \end{align*}
 
 \end_inset
@@ -2503,8 +2540,8 @@ Thus,
 \begin_inset Formula 
 \begin{multline*}
 W'(\bar{\nu}_{1})\{u(2y_{1}-2\bar{\nu}_{1}+\frac{y_{2}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+\frac{y_{1}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{2}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})\}\\
-+W(\bar{\nu}_{1})\{((y_{2}-y_{1})-2)u'(2y_{1}-2\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})-(1+\phi'(\bar{\nu}_{1}))u'(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})\}\\
--W(\bar{\nu}_{1})W'(\bar{\nu}_{1})\{(y_{2}-y_{1})u'(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})+(y_{2}-y_{1}-2)u'(2y_{1}-2\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})\}
++W(\bar{\nu}_{1})\{((y_{2}-y_{1})-2)u'(2y_{1}-2\bar{\nu}_{1}+\frac{y_{2}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})-(1+\phi'(\bar{\nu}_{1}))u'(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+\frac{y_{1}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{2}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})\}\\
+-W(\bar{\nu}_{1})W'(\bar{\nu}_{1})\{(y_{2}-y_{1})u'(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+\frac{y_{1}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{2}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})+(y_{2}-y_{1}-2)u'(2y_{1}-2\bar{\nu}_{1}+\frac{y_{2}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})\}=0
 \end{multline*}
 
 \end_inset
@@ -2513,7 +2550,113 @@ W'(\bar{\nu}_{1})\{u(2y_{1}-2\bar{\nu}_{1}+\frac{y_{2}}{1+e^{-\omega(\bar{\nu}_{
 \end_layout
 
 \begin_layout Standard
-...
+The solution for 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ would be similar and depend on all four parameters - 
+\begin_inset Formula $\lambda,\underline{\lambda},\omega,\underline{\omega}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Pareto concerns with Specific Function
+\end_layout
+
+\begin_layout Standard
+Both 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ depend on the parameters 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $\lambda,\underline{\lambda},\omega,\underline{\omega}$
+\end_inset
+
+.
+ If these four parameters were fixed then the consumers would choose two
+ different values of 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ - but our goal is to consider what these four parameters would correspond
+ to.
+ The population stability, does constrain the four parameters - but another
+ condition might arrive with Pareto optimality.
+ The Pareto optimality may be the rather strong condition that consumers
+ have taken the optimal solution - we have not justified yet that such a
+ Pareto optimal solution is strived for by the consumers or that it should
+ be a property of the equilibrium.
+ As such we have only assumed the four parameters as given.
+ What we have done with the specific function is to chalk out the dependence
+ of the Nash equilibrium (still) on some known properties.
+ There are two things that need to be considered.
+\end_layout
+
+\begin_layout Standard
+1.
+ Is Nash equilibrium the only one that is relevant? 
+\end_layout
+
+\begin_layout Standard
+2.
+ What if the parameters themselves are subject to the Pareto optimality
+ condition - i.e.
+ the consumers are forced to make choice that are better for the whole society
+ - how would that be different?
+\end_layout
+
+\begin_layout Subsubsection
+General Function 
 \end_layout
 
 \begin_layout Standard
@@ -2712,6 +2855,18 @@ When
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "../../africa_attitudes"
+options "authordate3"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
