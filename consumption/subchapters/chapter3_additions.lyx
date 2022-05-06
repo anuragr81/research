@@ -16,10 +16,14 @@
 
 \usepackage{natbib}
 \usepackage{color, colortbl}
+\usepackage{xcolor,cancel}
 \usepackage[first=0,last=9]{lcg}
 \definecolor{Gray}{gray}{0.9}
 \definecolor{LightCyan}{rgb}{0.88,1,1}
 \newcommand{\ra}{\rand0.\arabic{rand}}
+
+\newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2} 
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -2659,7 +2663,8 @@ This is because
 \begin_inset Formula 
 \begin{multline*}
 W(\nu_{1})=L(\nu_{2})\Rightarrow\frac{1}{1+e^{-\omega(\nu_{1}-\text{\underbar{\ensuremath{\omega}}})}}=1-\frac{1}{1+e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})}}\\
-\Rightarrow\frac{1}{1+e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})}}+\frac{1}{1+e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})}}=1
+\Rightarrow\frac{1}{1+e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})}}+\frac{1}{1+e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})}}=1\\
+\Rightarrow1+e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})}+1+e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})}=(1+e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})})(1+e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})})=1+e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})}+e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})}+e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})}e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})}
 \end{multline*}
 
 \end_inset
@@ -2667,9 +2672,48 @@ W(\nu_{1})=L(\nu_{2})\Rightarrow\frac{1}{1+e^{-\omega(\nu_{1}-\text{\underbar{\e
  or,
 \begin_inset Formula 
 \begin{multline*}
-(1+e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})})(1+e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})})=1+e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})}+1+e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})}
+\hcancel{1+e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})}}+1+\hcancel{e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})}}=\hcancel{1+e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})}}+\hcancel{e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})}}+e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})}e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})}
 \end{multline*}
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or,
+\begin_inset Formula 
+\begin{align*}
+1 & =e^{-\omega(\nu_{1}-\underbar{\ensuremath{\omega}})}e^{-\lambda(\nu_{2}-\underbar{\ensuremath{\lambda}})}\Rightarrow(\omega\nu_{1}-\omega\underbar{\ensuremath{\omega}})=-(\lambda\nu_{2}-\lambda\underbar{\ensuremath{\lambda}})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above condition simplifies the 
+\begin_inset Formula $\phi(x),\psi(x)$
+\end_inset
+
+ functions immediately,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\nu_{1}=\underbar{\ensuremath{\omega}}-(\lambda/\omega)\nu_{2}+(\lambda/\omega)\underbar{\ensuremath{\lambda}\ensuremath{\Rightarrow\frac{\partial\nu_{1}}{\partial\nu_{2}}=-\frac{\lambda}{\omega}}}\\
+\nu_{2}=\underbar{\ensuremath{\lambda}}-(\omega/\lambda)\nu_{1}+(\omega/\lambda)\underbar{\ensuremath{\omega}}\Rightarrow\frac{\partial\nu_{2}}{\partial\nu_{1}}=-\frac{\omega}{\lambda}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $ $
 \end_inset
 
 
@@ -2699,17 +2743,12 @@ and
 \end_inset
 
  - but our goal is to consider what these four parameters would correspond
- to.
+ to in the equilibrium.
  The population stability, does constrain the four parameters - but another
  condition might arrive with Pareto optimality.
- The Pareto optimality may be the rather strong condition that consumers
- have taken the optimal solution - we have not justified yet that such a
- Pareto optimal solution is strived for by the consumers or that it should
- be a property of the equilibrium.
- As such we have only assumed the four parameters as given.
- What we have done with the specific function is to chalk out the dependence
- of the Nash equilibrium (still) on some known properties.
- There are two things that need to be considered.
+ The Pareto optimality is a rather strong condition that consumers are forced
+ to the best Pareto solution - a condition that may not be always met.
+ 
 \end_layout
 
 \begin_layout Standard
