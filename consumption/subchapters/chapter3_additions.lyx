@@ -2711,8 +2711,8 @@ The above condition simplifies the
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-\nu_{1}=\underbar{\ensuremath{\omega}}-(\lambda/\omega)\nu_{2}+(\lambda/\omega)\underbar{\ensuremath{\lambda}\ensuremath{\Rightarrow\frac{\partial\nu_{1}}{\partial\nu_{2}}=-\frac{\lambda}{\omega}}}\\
-\nu_{2}=\underbar{\ensuremath{\lambda}}-(\omega/\lambda)\nu_{1}+(\omega/\lambda)\underbar{\ensuremath{\omega}}\Rightarrow\frac{\partial\nu_{2}}{\partial\nu_{1}}=-\frac{\omega}{\lambda}
+\nu_{1}=\psi(\nu_{2})=\underbar{\ensuremath{\omega}}-(\lambda/\omega)\nu_{2}+(\lambda/\omega)\underbar{\ensuremath{\lambda}\ensuremath{\Rightarrow\frac{\partial\nu_{1}}{\partial\nu_{2}}=-\frac{\lambda}{\omega}}}\\
+\nu_{2}=\phi(\nu_{1})=\underbar{\ensuremath{\lambda}}-(\omega/\lambda)\nu_{1}+(\omega/\lambda)\underbar{\ensuremath{\omega}}\Rightarrow\frac{\partial\nu_{2}}{\partial\nu_{1}}=-\frac{\omega}{\lambda}
 \end{multline*}
 
 \end_inset
@@ -3488,7 +3488,8 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-u_{1}=W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1}))+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})+(1-W(\bar{\nu}_{1}))u(2(y_{1}-\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})
+u_{1}=W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1}))+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})+(1-W(\bar{\nu}_{1}))u(2(y_{1}-\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})\\
+\Rightarrow u_{1}=W(\bar{\nu}_{1})\Gamma(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1}))+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})^{\alpha}+(1-W(\bar{\nu}_{1}))\Gamma(2(y_{1}-\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})^{\alpha}
 \end{multline*}
 
 \end_inset
@@ -3497,7 +3498,15 @@ u_{1}=W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1}))+W(\bar{\n
 \end_layout
 
 \begin_layout Standard
-Using, 
+Using the specific instances of 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ i.e.
 \end_layout
 
 \begin_layout Standard
@@ -3512,7 +3521,22 @@ W(\nu) & =\frac{1}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}
 \end_layout
 
 \begin_layout Standard
+or,
+\end_layout
 
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+1-W(\nu) & =\frac{1}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and
 \end_layout
 
 \begin_layout Standard
@@ -3520,6 +3544,101 @@ W(\nu) & =\frac{1}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}
 \begin{align*}
 L(\nu) & =1-\frac{1}{1+e^{-\lambda(\nu-\underbar{\ensuremath{\lambda}})}}
 \end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+1-L(\nu) & =\frac{1}{1+e^{-\lambda(\nu-\underbar{\ensuremath{\lambda}})}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+u_{1}=\frac{\Gamma(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1}))+\frac{y_{1}}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{2}}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}\\
++\frac{\Gamma(2(y_{1}-\bar{\nu}_{1})+\frac{y_{2}}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The similar expression for 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+ can be stated.
+\end_layout
+
+\begin_layout Standard
+Substituting 
+\begin_inset Formula $\phi(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi(\nu)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\nu_{1}=\psi(\nu_{2})=\underbar{\omega}-(\lambda/\omega)\nu_{2}+(\lambda/\omega)\underbar{\lambda}\\
+\nu_{2}=\phi(\nu_{1})=\underbar{\lambda}-(\omega/\lambda)\nu_{1}+(\omega/\lambda)\underbar{\omega}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+u_{1}=\frac{\Gamma(y_{1}-\bar{\nu}_{1}+y_{2}-\underbar{\lambda}-(\omega/\lambda)\nu_{1}+(\omega/\lambda)\underbar{\omega})+\frac{y_{1}}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{2}}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}\\
++\frac{\Gamma(2(y_{1}-\bar{\nu}_{1})+\frac{y_{2}}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since we're interested in particular in the income-difference, we use 
+\begin_inset Formula $y_{2}-y_{1}=\Delta\Rightarrow y_{2}=y_{1}+\Delta$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+u_{1}=\frac{\Gamma(2y_{1}-\bar{\nu}_{1}+\Delta-\underbar{\lambda}-(\omega/\lambda)\nu_{1}+(\omega/\lambda)\underbar{\omega})+\frac{y_{1}}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}+\Delta}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}\\
++\frac{\Gamma(2(y_{1}-\bar{\nu}_{1})+\frac{y_{1}+\Delta}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}
+\end{multline*}
 
 \end_inset
 
