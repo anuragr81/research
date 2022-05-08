@@ -2920,7 +2920,7 @@ Considering a combined utility
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\mathscr{U}(\bar{\nu}_{1},\bar{\nu}_{2}) & =\alpha u_{1}(\bar{\nu}_{1},\bar{\nu}_{2})+(1-\alpha)u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})
+\mathscr{U}(\bar{\nu}_{1},\bar{\nu}_{2}) & =\beta u_{1}(\bar{\nu}_{1},\bar{\nu}_{2})+(1-\beta)u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})
 \end{align*}
 
 \end_inset
@@ -2947,7 +2947,7 @@ For simplcity, we define
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\mathscr{U} & =\alpha u_{1}+(1-\alpha)u_{2}
+\mathscr{U} & =\beta u_{1}+(1-\beta)u_{2}
 \end{align*}
 
 \end_inset
@@ -2958,7 +2958,7 @@ For simplcity, we define
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{1}} & =\alpha(\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}
+\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{1}} & =\beta(\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}
 \end{align*}
 
 \end_inset
@@ -2969,20 +2969,8 @@ For simplcity, we define
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{2}} & =\alpha(\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}
+\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{2}} & =\beta(\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}
 \end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We have that 
-\begin_inset Formula 
-\begin{multline*}
-u_{1}=
-\end{multline*}
 
 \end_inset
 
@@ -3180,13 +3168,33 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-(\alpha(\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})(1-\frac{\bar{\nu}_{1}}{\xi})=\frac{\bar{\nu}_{1}}{\xi}(\alpha(\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})\\
-\Rightarrow(\alpha(\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})(\xi-\bar{\nu}_{1})=\bar{\nu}_{1}(\alpha(\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})
+(\beta(\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})(1-\frac{\bar{\nu}_{1}}{\xi})=\frac{\bar{\nu}_{1}}{\xi}(\beta(\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})\\
+\Rightarrow(\beta(\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})(\xi-\bar{\nu}_{1})=\bar{\nu}_{1}(\beta(\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})
 \end{gather*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Similarly, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{2}}(1-\frac{\bar{\nu}_{2}}{\xi})=\frac{\bar{\nu}_{2}}{\xi}\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{1}}\\
+\Rightarrow(\beta(\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{2}})(\xi-\bar{\nu}_{2})=\bar{\nu}_{2}(\beta(\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}-\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})+\frac{\partial u_{2}}{\partial\bar{\nu}_{1}})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+..
 \end_layout
 
 \begin_layout Standard
@@ -3338,10 +3346,10 @@ Let
 \noun off
 \color none
 \begin_inset Formula 
-\begin{multline*}
+\begin{multline}
 u_{1}=W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))+(1-W(\bar{\nu}_{1}))u(y_{1}-\bar{\nu}_{1}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))\\
-=W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1}))+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})+(1-W(\bar{\nu}_{1}))u(y_{1}-\bar{\nu}_{1}+y_{1}-\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})
-\end{multline*}
+\Rightarrow u_{1}=W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1}))+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})+(1-W(\bar{\nu}_{1}))u(2(y_{1}-\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})\label{eq:u1_general_as_nu1}
+\end{multline}
 
 \end_inset
 
@@ -3357,7 +3365,11 @@ Rewriting
 \begin_inset Formula $\bar{\nu}_{2}$
 \end_inset
 
-, we have 
+ (for 
+\begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}$
+\end_inset
+
+), we have 
 \end_layout
 
 \begin_layout Standard
@@ -3375,9 +3387,9 @@ Rewriting
 \noun off
 \color none
 \begin_inset Formula 
-\begin{multline*}
-u_{1}=L(\bar{\nu}_{2})u(y_{1}-\psi(\bar{\nu}_{2})+y_{2}-\bar{\nu}_{2})+L(\bar{\nu}_{2})y_{1}+(1-L(\bar{\nu}_{2}))y_{2})+(1-L(\bar{\nu}_{2}))u(2(y_{1}-\psi(\bar{\nu}_{2}))+L(\bar{\nu}_{2})y_{2}+(1-L(\bar{\nu}_{2}))y_{1})
-\end{multline*}
+\begin{multline}
+u_{1}=L(\bar{\nu}_{2})u(y_{1}-\psi(\bar{\nu}_{2})+y_{2}-\bar{\nu}_{2})+L(\bar{\nu}_{2})y_{1}+(1-L(\bar{\nu}_{2}))y_{2})+(1-L(\bar{\nu}_{2}))u(2(y_{1}-\psi(\bar{\nu}_{2}))+L(\bar{\nu}_{2})y_{2}+(1-L(\bar{\nu}_{2}))y_{1})\label{eq:u1_general_as_nu2}
+\end{multline}
 
 \end_inset
 
@@ -3390,10 +3402,124 @@ Similarly, with the equivalent problem solved by the consumer 2 is the following
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{multline*}
+\begin{multline}
 u_{2}=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))+(1-L(\bar{\nu}_{2}))u(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))\\
-=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\psi(\bar{\nu}_{2})+(1-L(\bar{\nu}_{2}))y_{1}+L(\bar{\nu}_{2})y_{2})+(1-L(\bar{\nu}_{2}))u(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+(1-L(\bar{\nu}_{2}))y_{2}+L(\bar{\nu}_{2})y_{1})
+\Rightarrow u_{2}=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\psi(\bar{\nu}_{2})+(1-L(\bar{\nu}_{2}))y_{1}+L(\bar{\nu}_{2})y_{2})+(1-L(\bar{\nu}_{2}))u(2(y_{2}-\bar{\nu}_{2})+(1-L(\bar{\nu}_{2}))y_{2}+L(\bar{\nu}_{2})y_{1})\label{eq:u2_general_as_nu2}
+\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rewriting 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ (for ), we have 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline}
+u_{2}=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))+(1-L(\bar{\nu}_{2}))u(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))\\
+\Rightarrow u_{2}=W(\bar{\nu}_{1})u(y_{2}-\phi(\bar{\nu}_{1})+y_{1}-\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})+(1-W(\bar{\nu}_{1}))u(2(y_{2}-\phi(\bar{\nu}_{1}))+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})\label{eq:u2_general_as_nu1}
+\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the same utility function as before i.e.
+ 
+\begin_inset Formula $u(A)=\Gamma A^{\alpha}$
+\end_inset
+
+ Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:u1_general_as_nu1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:u1_general_as_nu2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:u2_general_as_nu1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:u2_general_as_nu2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be written as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+u_{1}=W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1}))+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})+(1-W(\bar{\nu}_{1}))u(2(y_{1}-\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})
 \end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+W(\nu) & =\frac{1}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+L(\nu) & =1-\frac{1}{1+e^{-\lambda(\nu-\underbar{\ensuremath{\lambda}})}}
+\end{align*}
 
 \end_inset
 
