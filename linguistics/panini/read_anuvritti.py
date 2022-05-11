@@ -376,9 +376,9 @@ def color_for_index(ci):
 def text_in_colours(text,colorIndex,prefix=''):
     prefix = ""
     if colorIndex ==1:
-        prefix = prefix +"<br><br>"
+        prefix = prefix + "&#9679&#9679<br>" # +"<br><br>"
     if colorIndex == 2:
-        prefix = prefix + "&#9679;"#"<br>"
+        prefix = prefix + "&#9679<br>"
     if colorIndex <= 3:
         #prefix = ''.join(["&nbsp"]*(max(1,15-colorIndex)))
         prefix = prefix + ''.join(["&nbsp"]*(max(1,3-colorIndex)))
@@ -429,11 +429,11 @@ def write_into_file(text):
 #sys.exit(0)
 #b = pd.read_excel('c:/temp/test.xlsx')
 #b = pd.read_excel('c:/temp/test3.xlsx')
-b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/ashtadhyayi_chapter1_2.xlsx')
+#b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/ashtadhyayi_chapter1_2.xlsx')
 #b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/anuvritti_chapter3_4.xlsx')
 
 #b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/anuvritti_chapter4.xlsx')
-#b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/anuvritti_chapter6.xlsx')
+b = pd.read_excel('C:/Users/anura/OneDrive/Documents/sanskrit/anuvritti_chapter6.xlsx')
 nrows = b.shape[0]
 N=b.shape[1]
 

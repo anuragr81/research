@@ -2824,8 +2824,76 @@ Solution with Pareto Optimality
 \end_layout
 
 \begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Subsubsection*
+Motivation
+\end_layout
+
+\begin_layout Plain Layout
+After eliminating the dependence between 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ with the population stability condition, we define functions 
+\begin_inset Formula $G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})$
+\end_inset
+
+ that correspond to the respective optimal selection of 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ , 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ by consumers 1 and 2
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{gather*}
+\bar{\nu}_{1}=G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})\\
+\bar{\nu}_{2}=G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 To facilitate the interpretation of non-linear differential equations implied
- by the two-period equilibrium, we view the equilbrium for specific functions
+ by the two-period equilibrium, we view the equilibrium for specific functions
  
 \begin_inset Formula $W(\nu)$
 \end_inset
@@ -2860,64 +2928,66 @@ L(\nu) & =1-\frac{1}{1+e^{-\lambda(\nu-\underbar{\ensuremath{\lambda}})}}
 \end_layout
 
 \begin_layout Standard
-After eliminating the dependence between 
+As we won't expect the consumers to spend all their income on status consumption
+, we consider the equilibrium with an upper bound on the total status consumptio
+n in the economy i.e.
+ 
+\begin_inset Formula $\bar{\nu}_{1}+\bar{\nu}_{2}\le\xi$
+\end_inset
+
+ .
+ Given that the consumers 1 and 2 optimise by adjusting 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
 \begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
  and 
 \begin_inset Formula $\bar{\nu}_{2}$
 \end_inset
 
- with the population stability condition, we define functions 
-\begin_inset Formula $G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})$
-\end_inset
-
- and 
-\begin_inset Formula $G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})$
-\end_inset
-
- that correspond to the respective optimal selection of 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
- , 
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
- by consumers 1 and 2
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\bar{\nu}_{1}=G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})\\
-\bar{\nu}_{2}=G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-These are implied by the conditions 
-\begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}=\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}=0$
-\end_inset
-
-.
- However, the caveat is to use the constraint 
+ respectively, we have 
 \begin_inset Formula $\bar{\nu}_{1}\le\xi$
 \end_inset
 
  and 
-\begin_inset Formula $\bar{\nu}_{2}<\xi$
+\begin_inset Formula $\bar{\nu}_{2}\le\xi$
 \end_inset
 
- in the optimisation for consumers 1 and 2 respectively.
-\end_layout
+.
+ The first-order (Kuhn-Tucker) conditions 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "takayamaanalyticalmethods1993"
+literal "false"
 
-\begin_layout Standard
-For consumer 1,
+\end_inset
+
+ imply for consumer 1,
 \end_layout
 
 \begin_layout Standard
@@ -2932,10 +3002,6 @@ For consumer 1,
 \end_layout
 
 \begin_layout Standard
-and,
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 k_{1}(\xi-\bar{\nu}_{1}) & =0
@@ -2947,7 +3013,16 @@ k_{1}(\xi-\bar{\nu}_{1}) & =0
 \end_layout
 
 \begin_layout Standard
-For consumer 2,
+Here, where 
+\begin_inset Formula $k_{1}$
+\end_inset
+
+ is the Lagrangian multiplier.
+ With 
+\begin_inset Formula $k_{2}$
+\end_inset
+
+ as the Lagrangian multiplier for consumer 2, we have 
 \end_layout
 
 \begin_layout Standard
@@ -2977,15 +3052,13 @@ k_{2}(\xi-\bar{\nu}_{2}) & =0
 \end_layout
 
 \begin_layout Standard
-There are three possibilities arising out of the above optimisation.
- First possibility is that either one of the consumers ends up taking the
- maximium position possible i.e.
- 
+There are two possibilities that arise from the above optimisation.
+ First is that either one of the consumers ends up taking the maximium status
+ consumption 
 \begin_inset Formula $\xi$
 \end_inset
 
-.
- So that 
+ so that either 
 \begin_inset Formula $\{\bar{\nu}_{1},\bar{\nu}_{2}\}=\{0,\xi\}$
 \end_inset
 
@@ -2994,29 +3067,66 @@ There are three possibilities arising out of the above optimisation.
 \end_inset
 
 .
- The other possibility is that 
+ The solution different from this boundary case is that 
 \begin_inset Formula $\partial u_{1}/\partial\bar{\nu}_{1}=\partial u_{2}/\partial\bar{\nu}_{2}=0$
 \end_inset
 
-.
-\end_layout
-
-\begin_layout Standard
-Considering a combined utility 
-\begin_inset Formula $\mathscr{U}(\bar{\nu}_{1},\bar{\nu}_{2})$
-\end_inset
-
- that is optimised for the society comprising of two bands, we obtain another
- condition on 
-\begin_inset Formula $\bar{\nu}_{1}$
+ where 
+\begin_inset Formula $\bar{\nu}_{1}\le\xi$
 \end_inset
 
  and 
-\begin_inset Formula $\bar{\nu}_{2}$
+\begin_inset Formula $\bar{\nu}_{2}\le\xi$
 \end_inset
 
 .
- This utility is defined as follows
+ If we define functions 
+\begin_inset Formula $G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})$
+\end_inset
+
+ corresponding to the respective optimal selection of 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ , 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ by consumers 1 and 2, we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\bar{\nu}_{1}=G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2},\xi)\\
+\bar{\nu}_{2}=G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2},\xi)
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clearly, multiple solutions may exists for a given 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+.
+ To find a Pareto (multi-objective) solution to the problem, we consider
+ a combined utility 
+\begin_inset Formula $\mathscr{U}(\bar{\nu}_{1},\bar{\nu}_{2})$
+\end_inset
+
+ that is optimised by the society of two bands
 \end_layout
 
 \begin_layout Standard
@@ -3031,7 +3141,7 @@ Considering a combined utility
 \end_layout
 
 \begin_layout Standard
-For simplcity, we define 
+For simplicity, we write 
 \begin_inset Formula $\mathscr{U}\equiv\mathscr{U}(\bar{\nu}_{1},\bar{\nu}_{2})$
 \end_inset
 
@@ -3043,7 +3153,7 @@ For simplcity, we define
 \begin_inset Formula $u_{2}\equiv u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})$
 \end_inset
 
- so that 
+ for further treatment of the expressions so that
 \end_layout
 
 \begin_layout Standard
@@ -3081,16 +3191,16 @@ For simplcity, we define
 
 \begin_layout Standard
 The parameter 
-\begin_inset Formula $\alpha$
+\begin_inset Formula $\beta$
 \end_inset
 
  can be interpreted as the relative favour for the richer consumer in a
  society.
- In other words, a low 
+ A low 
 \begin_inset Formula $\alpha$
 \end_inset
 
- society is one where - social institutions which result in functions 
+ society - in other words - is one where social institutions provide 
 \begin_inset Formula $W(\nu)$
 \end_inset
 
@@ -3098,28 +3208,13 @@ The parameter
 \begin_inset Formula $L(\nu)$
 \end_inset
 
- - are more supportive of the rich consumer's economic status.
+ that are more supportive of the rich consumer's economic status.
  The parameter 
-\begin_inset Formula $\alpha$
+\begin_inset Formula $\beta$
 \end_inset
 
  allows us to view the multi-objective optimisation problem as a single-objectiv
-e problem.
- Since we don't expect the consumers to spend all their income on status
- consumption, we fix a constraint 
-\begin_inset Formula $\xi$
-\end_inset
-
- so that 
-\begin_inset Formula $0<\xi<y_{1}<y_{2}$
-\end_inset
-
- and 
-\begin_inset Formula $\bar{\nu}_{1}+\bar{\nu}_{2}<\xi$
-\end_inset
-
-.
- Thus the optimisation is subject to the conditions 
+e problem that is subject to the conditions 
 \begin_inset Formula $\bar{\nu}_{1}+\bar{\nu}_{2}\le\xi$
 \end_inset
 
@@ -3128,19 +3223,23 @@ e problem.
 \begin_inset Formula $\xi-\bar{\nu}_{1}-\bar{\nu}_{2}\ge0$
 \end_inset
 
-) and the Lagrangian 
+).
+ The Lagrangian 
 \begin_inset Formula $L=\mathscr{U}+\lambda(\xi-\bar{\nu}_{1}-\bar{\nu}_{2})$
 \end_inset
 
- leads the following first-order conditions for the interior solution (all
- constraints being linear ensures that FOC is a necessary condition for
- LM).
- Notice that the parameter 
-\begin_inset Formula $\alpha$
+ leads to the following first-order conditions for the interior solution
+ (all constraints being linear ensures that FOC is a necessary condition
+ for LM
+\begin_inset CommandInset citation
+LatexCommand cite
+key "takayamaanalyticalmethods1993"
+literal "false"
+
 \end_inset
 
- represents the combined utilities from income bands and has no role to
- play in the individual consumer's decisions.
+).
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3296,11 +3395,11 @@ Similarly,
 \end_layout
 
 \begin_layout Standard
-If we use 
+Since we have considered 
 \begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}=\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}=0$
 \end_inset
 
-, then the above implies 
+, the above implies 
 \end_layout
 
 \begin_layout Standard
@@ -3360,24 +3459,7 @@ and,
 \end_layout
 
 \begin_layout Standard
-The condition 
-\begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}=\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}=0$
-\end_inset
-
- implies 
-\begin_inset Formula $\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{1}}=\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{2}}=0$
-\end_inset
-
- and hence 
-\begin_inset Formula $\lambda=0$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-The other possibility is the boundary solution yielding 
+Once again, the boundary solution yields 
 \begin_inset Formula $\bar{\nu}_{1}+\bar{\nu}_{2}=\xi$
 \end_inset
 
@@ -3389,31 +3471,45 @@ The other possibility is the boundary solution yielding
 \begin_inset Formula $\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}$
 \end_inset
 
- need not be zero.
+ may be non-zero and a Nash-equilibrium is identified for 
+\begin_inset Formula $\xi$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{multline*}
+\begin{gather*}
 1-\frac{\bar{\nu}_{1}}{(\xi-\bar{\nu}_{1})}\frac{\bar{\nu}_{2}}{(\xi-\bar{\nu}_{2})}=0\Rightarrow(\xi-\bar{\nu}_{1})(\xi-\bar{\nu}_{2})=\bar{\nu}_{1}\bar{\nu}_{2}\\
 \Rightarrow\bar{\nu}_{1}+\bar{\nu}_{2}=\xi
-\end{multline*}
+\end{gather*}
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Itemize
-Case I 
-\begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}=\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}=\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}=\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}=0$
+\begin_layout Standard
+The other possibility is that 
+\begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}=\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}=0$
 \end_inset
 
+ so that 
+\begin_inset Formula $\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{1}}=\frac{\mathscr{\partial U}}{\partial\bar{\nu}_{2}}=0$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+.
+ To summarise,
+\end_layout
+
+\begin_layout Standard
+Case I.
  
-\end_layout
-
-\begin_layout Itemize
-Case II 
 \begin_inset Formula $\bar{\nu}_{1}+\bar{\nu}_{2}=\xi$
 \end_inset
 
@@ -3421,90 +3517,84 @@ Case II
 \end_layout
 
 \begin_layout Standard
-We know have another condition on 
-\begin_inset Formula $\bar{\nu}_{1}$
+Case II.
+ 
+\begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}=\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}=\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}=\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}=0$
 \end_inset
 
-, 
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
-so that altogether we have 5 equations (population stability), 
-\begin_inset Formula $G_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $G_{2}$
-\end_inset
-
-, 
-\begin_inset Formula $H_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $H_{2}$
-\end_inset
-
-.
- Out of the properties we have outlined, we can try to see which one of
- them could be fixed (as we have already fixed 
-\begin_inset Formula $\xi$
-\end_inset
-
-, 
-\begin_inset Formula $\alpha$
-\end_inset
-
- ).
- In one sense, 
-\begin_inset Formula $\frac{\omega}{\lambda}$
-\end_inset
-
- (which is also the 
-\begin_inset Formula $\frac{\partial\bar{\nu}_{2}}{\partial\bar{\nu}_{1}}$
-\end_inset
-
- ) may be the constraint of economic growth, as mobility is constrained
- due to economic growth.
- In another sense, 
-\begin_inset Formula $\bar{\omega}$
-\end_inset
-
- and 
-\begin_inset Formula $\bar{\lambda}$
-\end_inset
-
- might be fixed so that 
-\begin_inset Formula $\xi$
-\end_inset
-
- makes status competitions impossible.
- If we can use all 5 equations, however, then the best way might be to just
- fix one of 
-\begin_inset Formula $\omega,\underline{\omega},\lambda,\underline{\lambda}$
-\end_inset
-
-.
- We have been talking about 
-\begin_inset Formula $\underline{\omega},\underline{\lambda}$
-\end_inset
-
- being the critical value of status consumption which make the promotion
- meaningful, so it makes less sense to consider those as base-values.
- Given that we have talked about growth and the parameter 
-\begin_inset Formula $\kappa=\frac{\omega}{\lambda}$
-\end_inset
-
- , it makes sense to assume an admissible 
-\begin_inset Formula $\lambda_{0}$
-\end_inset
-
- - a fixed level a certain security that is guaranteed by institutions.
  
 \end_layout
 
 \begin_layout Standard
-We have that
+In Case I, the optimisation leads to the symmetrical selections 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ so that only one of them need to be solved.
+ For a given 
+\begin_inset Formula $\xi$
+\end_inset
+
+, the parameters 
+\begin_inset Formula $\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}}$
+\end_inset
+
+ must satisfy 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2},\xi)+G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2},\xi) & =\xi
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The selections 
+\begin_inset Formula $\bar{\nu}_{1}=G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2},\xi)$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{2}=G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2},\xi)$
+\end_inset
+
+ are implied by 
+\begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}=\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We visit the comparative statics (i.e.
+ sensitivity with respect to 
+\begin_inset Formula $\Delta$
+\end_inset
+
+) implied by solutions where either consumer 1 or consumers 2 withdraws
+ from status competitions (i.e.
+ 
+\begin_inset Formula $\bar{\nu}_{1}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $\bar{\nu}_{2}=0$
+\end_inset
+
+ ).
+ 
+\end_layout
+
+\begin_layout Standard
+Recall that 
 \end_layout
 
 \begin_layout Standard
@@ -3543,7 +3633,7 @@ E_{2}(\bar{\nu}_{2}) & =W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2}=(1-L(\ba
 \end_layout
 
 \begin_layout Standard
-Let
+Letting
 \begin_inset Formula $\bar{\nu}_{2}=\phi(\bar{\nu}_{1})$
 \end_inset
 
@@ -3551,7 +3641,7 @@ Let
 \begin_inset Formula $\bar{\nu}_{1}=\psi(\bar{\nu}_{2})$
 \end_inset
 
- so that 
+, we can write
 \end_layout
 
 \begin_layout Standard
@@ -3580,47 +3670,7 @@ u_{1}=W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_
 \end_layout
 
 \begin_layout Standard
-Rewriting 
-\begin_inset Formula $u_{1}$
-\end_inset
-
- in terms of 
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
- (for 
-\begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}$
-\end_inset
-
-), we have 
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula 
-\begin{multline}
-u_{1}=L(\bar{\nu}_{2})u(y_{1}-\psi(\bar{\nu}_{2})+y_{2}-\bar{\nu}_{2}+L(\bar{\nu}_{2})y_{1}+(1-L(\bar{\nu}_{2}))y_{2})+(1-L(\bar{\nu}_{2}))u(2(y_{1}-\psi(\bar{\nu}_{2}))+L(\bar{\nu}_{2})y_{2}+(1-L(\bar{\nu}_{2}))y_{1})\label{eq:u1_general_as_nu2}
-\end{multline}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Similarly, with the equivalent problem solved by the consumer 2 is the following
+Similarly, with the equivalent problem solved by the consumer 2, we have
 \end_layout
 
 \begin_layout Standard
@@ -3628,34 +3678,6 @@ Similarly, with the equivalent problem solved by the consumer 2 is the following
 \begin{multline}
 u_{2}=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))+(1-L(\bar{\nu}_{2}))u(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))\\
 \Rightarrow u_{2}=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\psi(\bar{\nu}_{2})+(1-L(\bar{\nu}_{2}))y_{1}+L(\bar{\nu}_{2})y_{2})+(1-L(\bar{\nu}_{2}))u(2(y_{2}-\bar{\nu}_{2})+(1-L(\bar{\nu}_{2}))y_{2}+L(\bar{\nu}_{2})y_{1})\label{eq:u2_general_as_nu2}
-\end{multline}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Rewriting 
-\begin_inset Formula $u_{2}$
-\end_inset
-
- in terms of 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
- (for 
-\begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}$
-\end_inset
-
-), we have 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline}
-u_{2}=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))+(1-L(\bar{\nu}_{2}))u(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))\\
-\Rightarrow u_{2}=W(\bar{\nu}_{1})u(y_{2}-\phi(\bar{\nu}_{1})+y_{1}-\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})+(1-W(\bar{\nu}_{1}))u(2(y_{2}-\phi(\bar{\nu}_{1}))+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})\label{eq:u2_general_as_nu1}
 \end{multline}
 
 \end_inset
@@ -3805,15 +3827,53 @@ u_{1}=\frac{\Gamma(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1}))+\frac{y_{1}}{1
 
 \end_inset
 
+and,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+L=\frac{1}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}
+\end{align*}
+
+\end_inset
+
 
 \end_layout
 
 \begin_layout Standard
-The similar expression for 
-\begin_inset Formula $u_{2}$
+\begin_inset Formula 
+\begin{align*}
+1-L=\frac{1}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}
+\end{align*}
+
 \end_inset
 
- can be stated.
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+u_{2}=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\psi(\bar{\nu}_{2})+(1-L(\bar{\nu}_{2}))y_{1}+L(\bar{\nu}_{2})y_{2})\\
++(1-L(\bar{\nu}_{2}))u(2(y_{2}-\bar{\nu}_{2})+(1-L(\bar{\nu}_{2}))y_{2}+L(\bar{\nu}_{2})y_{1})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+u_{2}=\frac{\Gamma(y_{2}-\bar{\nu}_{2}+y_{1}-\psi(\bar{\nu}_{2})+\frac{y_{1}}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}+\frac{y_{2}}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}})^{\alpha}}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}\\
++\frac{\Gamma(2(y_{2}-\bar{\nu}_{2})+\frac{y_{2}}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}+\frac{y_{1}}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}})^{\alpha}}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}
+\end{multline*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3854,6 +3914,95 @@ Since we're interested in particular in the income-difference, we use
 u_{1}=\frac{\Gamma(2y_{1}-\bar{\nu}_{1}+\Delta-\underbar{\lambda}+(\omega/\lambda)\bar{\nu}_{1}-(\omega/\lambda)\underbar{\omega})+\frac{y_{1}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}+\Delta}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\nu-\text{\underbar{\ensuremath{\omega}}})}}\\
 +\frac{\Gamma(2(y_{1}-\bar{\nu}_{1})+\frac{y_{1}+\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}
 \end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+===
+\end_layout
+
+\begin_layout Standard
+Case II suggests the Pareto solution where a consumer maximises both 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+===
+\end_layout
+
+\begin_layout Standard
+Rewriting 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ (for 
+\begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{2}}$
+\end_inset
+
+), we have 
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{multline}
+u_{1}=L(\bar{\nu}_{2})u(y_{1}-\psi(\bar{\nu}_{2})+y_{2}-\bar{\nu}_{2}+L(\bar{\nu}_{2})y_{1}+(1-L(\bar{\nu}_{2}))y_{2})+(1-L(\bar{\nu}_{2}))u(2(y_{1}-\psi(\bar{\nu}_{2}))+L(\bar{\nu}_{2})y_{2}+(1-L(\bar{\nu}_{2}))y_{1})\label{eq:u1_general_as_nu2}
+\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rewriting 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ (for 
+\begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}$
+\end_inset
+
+), we have 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline}
+u_{2}=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))+(1-L(\bar{\nu}_{2}))u(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))\\
+\Rightarrow u_{2}=W(\bar{\nu}_{1})u(y_{2}-\phi(\bar{\nu}_{1})+y_{1}-\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})+(1-W(\bar{\nu}_{1}))u(2(y_{2}-\phi(\bar{\nu}_{1}))+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})\label{eq:u2_general_as_nu1}
+\end{multline}
 
 \end_inset
 
@@ -3960,6 +4109,117 @@ and,
 u_{2}=L(\bar{\nu}_{2})u(y_{1}+\Delta-\bar{\nu}_{2}+y_{1}-\psi(\bar{\nu}_{2})+(1-L(\bar{\nu}_{2}))y_{1}+L(\bar{\nu}_{2})(y_{1}+\Delta))+(1-L(\bar{\nu}_{2}))u(2(y_{1}+\Delta-\bar{\nu}_{2})+(1-L(\bar{\nu}_{2}))(y_{1}+\Delta)+L(\bar{\nu}_{2})y_{1})\\
 \Rightarrow u_{2}=\frac{\Gamma(y_{1}+\Delta-\bar{\nu}_{2}+y_{1}-\underbar{\omega}+(\lambda/\omega)\nu_{2}-(\lambda/\omega)\underbar{\lambda}+\frac{y_{1}}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}+\frac{y_{1}+\Delta}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}})^{\alpha}}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}+\frac{\Gamma(2y_{1}+2\Delta-2\bar{\nu}_{2}+\frac{y_{1}+\Delta}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}+\frac{y_{1}}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}})^{\alpha}}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}
 \end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Subsection*
+Summary
+\end_layout
+
+\begin_layout Plain Layout
+We know have another condition on 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+so that altogether we have 5 equations (population stability), 
+\begin_inset Formula $G_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $G_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $H_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $H_{2}$
+\end_inset
+
+.
+ Out of the properties we have outlined, we can try to see which one of
+ them could be fixed (as we have already fixed 
+\begin_inset Formula $\xi$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ ).
+ In one sense, 
+\begin_inset Formula $\frac{\omega}{\lambda}$
+\end_inset
+
+ (which is also the 
+\begin_inset Formula $\frac{\partial\bar{\nu}_{2}}{\partial\bar{\nu}_{1}}$
+\end_inset
+
+ ) may be the constraint of economic growth, as mobility is constrained
+ due to economic growth.
+ In another sense, 
+\begin_inset Formula $\bar{\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\lambda}$
+\end_inset
+
+ might be fixed so that 
+\begin_inset Formula $\xi$
+\end_inset
+
+ makes status competitions impossible.
+ If we can use all 5 equations, however, then the best way might be to just
+ fix one of 
+\begin_inset Formula $\omega,\underline{\omega},\lambda,\underline{\lambda}$
+\end_inset
+
+.
+ We have been talking about 
+\begin_inset Formula $\underline{\omega},\underline{\lambda}$
+\end_inset
+
+ being the critical value of status consumption which make the promotion
+ meaningful, so it makes less sense to consider those as base-values.
+ Given that we have talked about growth and the parameter 
+\begin_inset Formula $\kappa=\frac{\omega}{\lambda}$
+\end_inset
+
+ , it makes sense to assume an admissible 
+\begin_inset Formula $\lambda_{0}$
+\end_inset
+
+ - a fixed level a certain security that is guaranteed by institutions.
+ 
+\end_layout
 
 \end_inset
 
