@@ -500,7 +500,7 @@ The population constraint gives
 \end_layout
 
 \begin_layout Subsection
-The cardinal valueof status in bands
+The cardinal value of status in bands
 \end_layout
 
 \begin_layout Standard
@@ -2820,22 +2820,6 @@ It is important that the optimisation does not depend on setting
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Box Boxed
 position "t"
 hor_pos "c"
@@ -2930,6 +2914,22 @@ In form of
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
 \end_layout
 
 \end_inset
@@ -3232,7 +3232,7 @@ There are two possibilities that arise from the above optimisation.
  bands.
  To this purpose, we assume a Pareto (multi-objective) solution for a combined
  utility 
-\begin_inset Formula $\mathscr{U}(\bar{\nu}_{1},\bar{\nu}_{2})$
+\begin_inset Formula $\mathscr{U}(\nu_{1},\nu_{2})$
 \end_inset
 
  that is optimised in the society of two bands
@@ -3241,7 +3241,7 @@ There are two possibilities that arise from the above optimisation.
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\mathscr{U}(\bar{\nu}_{1},\bar{\nu}_{2}) & =\beta u_{1}(\bar{\nu}_{1},\bar{\nu}_{2})+(1-\beta)u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})
+\mathscr{U}(\nu_{1},\nu_{2}) & =\beta u_{1}(\nu_{1},\nu_{2})+(1-\beta)u_{2}(\nu_{1},\nu_{2})
 \end{align*}
 
 \end_inset
@@ -3250,25 +3250,54 @@ There are two possibilities that arise from the above optimisation.
 \end_layout
 
 \begin_layout Standard
-For simplicity of notation, we write 
-\begin_inset Formula $\mathscr{U}\equiv\mathscr{U}(\bar{\nu}_{1},\bar{\nu}_{2})$
-\end_inset
-
-, 
-\begin_inset Formula $u_{1}\equiv u_{1}(\bar{\nu}_{1},\bar{\nu}_{2})$
+In equilibrium, the consumers would select 
+\begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
  and 
-\begin_inset Formula $u_{2}\equiv u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})$
+\begin_inset Formula $\bar{\nu}_{2}$
 \end_inset
 
- from here on.
+ to optimise 
+\begin_inset Formula $u_{1}(\bar{\nu}_{1},\bar{\nu}_{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})$
+\end_inset
+
+ respectively.
+ Let these selections be represented with the functions 
+\begin_inset Formula $G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\bar{\nu}_{1}=G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})\\
+\bar{\nu}_{2}=G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\mathscr{U} & =\beta u_{1}+(1-\beta)u_{2}
+\mathscr{U}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2}) & =\beta u_{1}(G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2}),G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2}))+(1-\beta)u_{2}(G_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2}),G_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2}))
 \end{align*}
 
 \end_inset
@@ -3312,7 +3341,7 @@ e problem that is subject to the conditions
 
 ).
  The Lagrangian 
-\begin_inset Formula $L=\mathscr{U}+\lambda(\xi-\bar{\nu}_{1}-\bar{\nu}_{2})$
+\begin_inset Formula $L=\mathscr{U}+\mu(\xi-\bar{\nu}_{1}-\bar{\nu}_{2})$
 \end_inset
 
  leads to the following first-order conditions for the interior solution
@@ -3326,7 +3355,11 @@ literal "false"
 \end_inset
 
 ).
- 
+ Notice that 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is the Lagrangian multiplier.
 \end_layout
 
 \begin_layout Standard
@@ -3347,7 +3380,7 @@ and,
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\lambda(\xi-\bar{\nu}_{1}-\bar{\nu}_{2}) & =0
+\mu(\xi-\bar{\nu}_{1}-\bar{\nu}_{2}) & =0
 \end{align*}
 
 \end_inset
@@ -3363,8 +3396,8 @@ and,
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{1}}=\lambda\bar{\nu}_{1}\\
-\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{2}}=\lambda\bar{\nu}_{2}
+\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{1}}=\mu\bar{\nu}_{1}\\
+\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{2}}=\mu\bar{\nu}_{2}
 \end{gather*}
 
 \end_inset
@@ -3375,8 +3408,8 @@ and,
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-\lambda(\xi-\bar{\nu}_{1}-\bar{\nu}_{2})=0\\
-\Rightarrow\lambda\xi=\lambda\bar{\nu}_{1}+\lambda\bar{\nu}_{2}
+\mu(\xi-\bar{\nu}_{1}-\bar{\nu}_{2})=0\\
+\Rightarrow\mu\xi=\mu\bar{\nu}_{1}+\mu\bar{\nu}_{2}
 \end{gather*}
 
 \end_inset
@@ -3390,7 +3423,7 @@ Given
 \end_inset
 
  
-\begin_inset Formula $\lambda$
+\begin_inset Formula $\mu$
 \end_inset
 
  can be solved as 
@@ -3399,7 +3432,7 @@ Given
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\lambda & =\frac{1}{\xi}(\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{1}}+\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{2}})
+\mu & =\frac{1}{\xi}(\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{1}}+\frac{\partial\mathscr{U}}{\partial\bar{\nu}_{2}})
 \end{align*}
 
 \end_inset
@@ -3634,7 +3667,7 @@ The other possibility is that
 \end_inset
 
  and hence 
-\begin_inset Formula $\lambda=0$
+\begin_inset Formula $\mu=0$
 \end_inset
 
 .
@@ -4233,10 +4266,133 @@ Notice that
 \end_inset
 
  would be zero.
+ Given the concavity of 
+\begin_inset Formula $u(A)$
+\end_inset
+
+, an interior solution (i.e.
+ when 
+\begin_inset Formula $0<\bar{\nu}_{1}<\xi$
+\end_inset
+
+ and 
+\begin_inset Formula $0<\bar{\nu}_{2}<\xi$
+\end_inset
+
+ ) is indeed possible.
+ What the above conditions already imply is that that decreasing 
+\begin_inset Formula $\omega/\lambda$
+\end_inset
+
+ and increasing 
+\begin_inset Formula $\underline{\omega}-\underline{\lambda}$
+\end_inset
+
+ directly raises 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ (
+\begin_inset Formula $\because\bar{\nu}_{1}=\underbar{\ensuremath{\omega}}+\frac{\underbar{\ensuremath{\omega}}+\underbar{\ensuremath{\lambda}}-\xi}{\omega/\lambda-1}$
+\end_inset
+
+) .
+ The next step wold be to see what the constraint 
+\begin_inset Formula $\bar{\nu}_{1}+\bar{\nu}_{2}=\xi$
+\end_inset
+
+ implies for the consumer optimisation.
+ More specifically, the first-order conditions further indicate how 
+\begin_inset Formula $\frac{\omega}{\lambda}$
+\end_inset
+
+and 
+\begin_inset Formula $\underline{\omega}-\underline{\lambda}$
+\end_inset
+
+ may change with 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
+Since we're interested in particular on the effect of income-differences
+ 
+\begin_inset Formula $y_{2}-y_{1}$
+\end_inset
+
+ , we write 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+ in terms 
+\begin_inset Formula $\Delta\equiv y_{2}-y_{1}$
+\end_inset
+
+ i.e.
+ 
+\begin_inset Formula $y_{2}=y_{1}+\Delta$
+\end_inset
+
+ so that 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+u_{1}=\frac{\Gamma(2y_{1}+\Delta-\xi+\frac{y_{1}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}+\Delta}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}\\
++\frac{\Gamma(2y_{1}-2\bar{\nu}_{1}+\frac{y_{1}+\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+u_{2}=\frac{\Gamma(2y_{1}+\Delta-\xi+\frac{y_{1}}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}+\frac{y_{1}+\Delta}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}})^{\alpha}}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}\\
++\frac{\Gamma(2y_{1}+2\Delta-2\bar{\nu}_{2}+\frac{y_{1}+\Delta}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}+\frac{y_{1}}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}})^{\alpha}}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The expression for
+\begin_inset Formula $u_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial\left(\frac{\Gamma\left(\frac{\Delta+y_{1}}{\exp(\omega(\bar{\nu}_{1}-\underline{\omega}))+1}+\Delta+\frac{y_{1}}{\exp(-(\omega(\bar{\nu}_{1}-\underline{\omega})))+1}+2y_{1}-e\right)^{\alpha}}{\exp(-(\omega(\bar{\nu}_{1}-\underline{\omega})))+1}+\frac{\Gamma\left(\frac{\Delta+y_{1}}{\exp(-(\omega(\bar{\nu}_{1}-\underline{\omega})))+1}+2\Delta+\frac{y_{1}}{\exp(\omega(\bar{\nu}_{1}-\underline{\omega}))+1}-2x+2y_{1}\right)^{\alpha}}{\exp(\omega(\bar{\nu}_{1}-\underline{\omega}))+1}\right)}{\partial\bar{\nu}_{1}}=0\\
+\Rightarrow\frac{\alpha\Gamma\left(\frac{\omega(\Delta+y_{1})e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}}{\left(e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1\right)^{2}}-\frac{\omega y_{1}e^{\omega(\bar{\nu}_{1}-\underline{\omega})}}{\left(e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1\right)^{2}}-2\right)\left(\frac{\Delta+y_{1}}{e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+2\Delta+\frac{y_{1}}{e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1}-2\bar{\nu}_{1}+2y_{1}\right)^{\alpha-1}}{e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1}\\
+-\frac{\Gamma\omega e^{\omega(\bar{\nu}_{1}-\underline{\omega})}\left(\frac{\Delta+y_{1}}{e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+2\Delta+\frac{y_{1}}{e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1}-2\bar{\nu}_{1}+2y_{1}\right)^{\alpha}}{\left(e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1\right)^{2}}\\
++\frac{\Gamma\omega e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}\left(\frac{\Delta+y_{1}}{e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+\Delta+\frac{y_{1}}{e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+2y_{1}-\xi\right)^{\alpha}}{\left(e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1\right)^{2}}\\
++\frac{\alpha\Gamma\left(\frac{\omega y_{1}e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}}{\left(e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1\right)^{2}}-\frac{\omega(\Delta+y_{1})e^{\omega(\bar{\nu}_{1}-\underline{\omega})}}{\left(e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1\right)^{2}}\right)\left(\frac{\Delta+y_{1}}{e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+\Delta+\frac{y_{1}}{e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+2y_{1}-\xi\right)^{\alpha-1}}{e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1}=0
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Substituting 
+\begin_inset Formula $\bar{\nu}_{1}=\frac{\underbar{\omega\ensuremath{\omega}}+\lambda\underbar{\ensuremath{\lambda}}}{\omega-\lambda}-\frac{\lambda\xi}{\omega-\lambda}$
+\end_inset
+
+, one obtains
 \begin_inset Foot
 status open
 
@@ -4268,133 +4424,12 @@ Notice that,
 
 \end_inset
 
-to write
-\end_layout
-
-\begin_layout Standard
-What we intend to see is whether increase in 
-\begin_inset Formula $y_{2}-y_{1}$
+ the condition imposed on the parameters 
+\begin_inset Formula $\omega,\underline{\omega},\lambda$
 \end_inset
 
- would increase 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
- , 
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Since we're interested in particular on the effect of income-differences,
- we write 
-\begin_inset Formula $y_{2}$
-\end_inset
-
- in terms 
-\begin_inset Formula $\Delta\equiv y_{2}-y_{1}$
-\end_inset
-
- i.e.
- 
-\begin_inset Formula $y_{2}=y_{1}+\Delta$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-u_{1}=\frac{\Gamma(2y_{1}+\Delta-\xi+\frac{y_{1}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}+\Delta}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}\\
-+\frac{\Gamma(2y_{1}-2\bar{\nu}_{1}+\frac{y_{1}+\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-u_{2}=\frac{\Gamma(2y_{1}+\Delta-\xi+\frac{y_{1}}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}+\frac{y_{1}+\Delta}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}})^{\alpha}}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}\\
-+\frac{\Gamma(2y_{1}+2\Delta-2\bar{\nu}_{2}+\frac{y_{1}+\Delta}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}+\frac{y_{1}}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}})^{\alpha}}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The solutions for
-\begin_inset Formula $u_{1}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\frac{\partial\left(\frac{\Gamma\left(\frac{\Delta+y_{1}}{\exp(\omega(\bar{\nu}_{1}-\underline{\omega}))+1}+\Delta+\frac{y_{1}}{\exp(-(\omega(\bar{\nu}_{1}-\underline{\omega})))+1}+2y_{1}-e\right)^{\alpha}}{\exp(-(\omega(\bar{\nu}_{1}-\underline{\omega})))+1}+\frac{\Gamma\left(\frac{\Delta+y_{1}}{\exp(-(\omega(\bar{\nu}_{1}-\underline{\omega})))+1}+2\Delta+\frac{y_{1}}{\exp(\omega(\bar{\nu}_{1}-\underline{\omega}))+1}-2x+2y_{1}\right)^{\alpha}}{\exp(\omega(\bar{\nu}_{1}-\underline{\omega}))+1}\right)}{\partial\bar{\nu}_{1}}=0\\
-\Rightarrow\frac{\alpha\Gamma\left(\frac{\omega(\Delta+y_{1})e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}}{\left(e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1\right)^{2}}-\frac{\omega y_{1}e^{\omega(\bar{\nu}_{1}-\underline{\omega})}}{\left(e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1\right)^{2}}-2\right)\left(\frac{\Delta+y_{1}}{e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+2\Delta+\frac{y_{1}}{e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1}-2\bar{\nu}_{1}+2y_{1}\right)^{\alpha-1}}{e^{\omega(x-\underline{\omega})}+1}\\
--\frac{\Gamma\omega e^{\omega(\bar{\nu}_{1}-\underline{\omega})}\left(\frac{\Delta+y_{1}}{e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+2\Delta+\frac{y_{1}}{e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1}-2\bar{\nu}_{1}+2y_{1}\right)^{\alpha}}{\left(e^{\omega(x-\underline{\omega})}+1\right)^{2}}\\
-+\frac{\Gamma\omega e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}\left(\frac{\Delta+y_{1}}{e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+\Delta+\frac{y_{1}}{e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+2y_{1}-\xi\right)^{\alpha}}{\left(e^{-\omega(x-\underline{\omega})}+1\right)^{2}}\\
-+\frac{\alpha\Gamma\left(\frac{\omega y_{1}e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}}{\left(e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1\right)^{2}}-\frac{\omega(\Delta+y_{1})e^{\omega(\bar{\nu}_{1}-\underline{\omega})}}{\left(e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1\right)^{2}}\right)\left(\frac{\Delta+y_{1}}{e^{\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+\Delta+\frac{y_{1}}{e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1}+2y_{1}-\xi\right)^{\alpha-1}}{e^{-\omega(\bar{\nu}_{1}-\underline{\omega})}+1}=0
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Substituting 
-\begin_inset Formula $\bar{\nu}_{1}=\frac{\underbar{\omega\ensuremath{\omega}}+\lambda\underbar{\ensuremath{\lambda}}}{\omega-\lambda}-\frac{\lambda\xi}{\omega-\lambda}$
-\end_inset
-
-, we would get an expression with 
-\begin_inset Formula $y_{1},\Delta$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-But more importantly, we need to see that decreasing 
-\begin_inset Formula $\omega/\lambda$
-\end_inset
-
- and increasing 
-\begin_inset Formula $\underline{\omega}-\underline{\lambda}$
-\end_inset
-
- directly raises 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
- (
-\begin_inset Formula $\because\bar{\nu}_{1}=\underbar{\ensuremath{\omega}}+\frac{\underbar{\ensuremath{\omega}}+\underbar{\ensuremath{\lambda}}-\xi}{\omega/\lambda-1}$
-\end_inset
-
-) .
- The indirect relationship we're interested in with the above equation is
- is how 
-\begin_inset Formula $\frac{\omega}{\lambda}$
-\end_inset
-
-and 
-\begin_inset Formula $\underline{\omega}-\underline{\lambda}$
-\end_inset
-
-change with 
-\begin_inset Formula $\Delta$
+ and 
+\begin_inset Formula $\underline{\lambda}$
 \end_inset
 
 .
