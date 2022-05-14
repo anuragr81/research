@@ -393,13 +393,55 @@ There are two possibilities that arise from the above optimisation.
  are optimised for some goal in the society comprising of the two income
  bands.
  To this purpose, we assume a Pareto (multi-objective) solution for a combined
- utility that is optimised in the society of two bands
+ utility that is optimised in the society of two bands where 
+\begin_inset Formula $U_{1},U_{2}$
+\end_inset
+
+ are the indirect utilities (utilities for the optimal selections 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+,
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+for a given set of 
+\begin_inset Formula $\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2}$
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\mathscr{U} & =\beta u_{1}+(1-\beta)u_{2}
+\mathscr{U} & =\beta U_{1}+(1-\beta)U_{2}
 \end{align*}
 
 \end_inset
@@ -568,24 +610,19 @@ The utility
 \end_inset
 
 .
- Let the functions 
-\begin_inset Formula $u_{11}(\nu_{1})$
+ The indirect utility functions are thus 
+\begin_inset Formula $U_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2},\xi)\equiv u_{1}(G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2},\xi))$
 \end_inset
 
  and 
-\begin_inset Formula $u_{21}(\nu_{1})$
+\begin_inset Formula $U_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2},\xi)=u_{2}(\phi(G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2},\xi))$
 \end_inset
 
- represent the utilities of the consumers 1 and 2 for the consumer 1's selection
- 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
-.
+ respectively for the consumers 1 and 2 .
 \end_layout
 
 \begin_layout Standard
-Therefore, 
+Therefore, DOUBLE CHECK THE FOLLOWING
 \end_layout
 
 \begin_layout Standard
@@ -745,7 +782,7 @@ and
 \end_layout
 
 \begin_layout Standard
-Notice that 
+Thus,
 \end_layout
 
 \begin_layout Standard
@@ -764,7 +801,31 @@ Notice that
 \color none
 \begin_inset Formula 
 \begin{gather*}
-\frac{\partial L}{\partial\lambda}=\frac{\partial\mathscr{U}}{\partial\lambda}+\mu(\frac{\omega(\lambda+\underline{\omega}-\xi)}{(\omega-\lambda)^{2}}-\frac{\ensuremath{\partial G}}{\ensuremath{\partial\lambda}})
+\frac{\partial L}{\partial\lambda}=\frac{\partial\mathscr{U}}{\partial\lambda}+\mu(\frac{\omega(\lambda+\underline{\omega}-\xi)}{(\omega-\lambda)^{2}}-\frac{\ensuremath{\partial G}}{\ensuremath{\partial\lambda}})=0
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial L}{\partial\underline{\lambda}}=\frac{\partial\mathscr{U}}{\partial\underline{\lambda}}+\mu(\frac{\lambda}{\omega-\lambda}-\frac{\ensuremath{\partial G}}{\ensuremath{\partial\lambda}})
 \end{gather*}
 
 \end_inset
@@ -792,7 +853,11 @@ backgroundcolor "none"
 status open
 
 \begin_layout Plain Layout
-d((x*m-omega2*omega1-lambda1*x)/(x-omega2))/dx
+dCbydl2=d((x*m-omega2*omega1-lambda1*x)/(x-omega2))/dx
+\end_layout
+
+\begin_layout Plain Layout
+dCbydλ1=d((λ_2*ξ-ω_2*ω_1-x*λ_2)/(λ_2-ω_2))/dx
 \end_layout
 
 \end_inset
