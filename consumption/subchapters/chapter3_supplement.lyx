@@ -647,14 +647,10 @@ U_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underli
 \end_layout
 
 \begin_layout Standard
-Therefore,
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-\mathscr{U}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta)=\beta U_{1}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta)\\
-+(1-\beta)U_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta)
+\mathscr{U}=\beta u_{1}(G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta))\\
++(1-\beta)u_{2}(\phi(G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta)))
 \end{gather*}
 
 \end_inset
@@ -665,56 +661,7 @@ Therefore,
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-\frac{\partial\mathscr{U}}{\partial\lambda}=\beta\frac{\text{\ensuremath{\partial U_{1}}}}{\partial\lambda}+(1-\beta)\frac{\text{\ensuremath{\partial U_{2}}}}{\partial\lambda}\\
-=\beta\frac{\text{\ensuremath{\partial u_{1}}}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\lambda}+(1-\beta)\frac{\text{\ensuremath{\partial u_{2}}}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\lambda}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\frac{\partial\mathscr{U}}{\partial\underline{\lambda}}=\beta\frac{\text{\ensuremath{\partial U_{1}}}}{\partial\underline{\lambda}}+(1-\beta)\frac{\text{\ensuremath{\partial U_{2}}}}{\partial\underline{\lambda}}\\
-=\beta\frac{\text{\ensuremath{\partial u_{1}}}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\underline{\lambda}}+(1-\beta)\frac{\text{\ensuremath{\partial u_{2}}}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\underline{\lambda}}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\frac{\partial\mathscr{U}}{\partial\omega}=\beta\frac{\text{\ensuremath{\partial U_{1}}}}{\partial\omega}+(1-\beta)\frac{\text{\ensuremath{\partial U_{2}}}}{\partial\omega}\\
-=\beta\frac{\text{\ensuremath{\partial u_{1}}}}{\partial\bar{\nu}_{1}}\frac{\text{\ensuremath{\partial G}}}{\partial\omega}+(1-\beta)\frac{\text{\ensuremath{\partial u_{2}}}}{\partial\bar{\nu}_{1}}\frac{\text{\ensuremath{\partial G}}}{\partial\omega}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\frac{\partial\mathscr{U}}{\partial\underline{\omega}}=\beta\frac{\text{\ensuremath{\partial U_{1}}}}{\partial\underline{\omega}}+(1-\beta)\frac{\text{\ensuremath{\partial U_{2}}}}{\partial\underline{\omega}}\\
-=\beta\frac{\text{\ensuremath{\partial u_{1}}}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\underline{\omega}}+(1-\beta)\frac{\text{\ensuremath{\partial u_{2}}}}{\partial\bar{\nu}_{1}}\frac{\text{\ensuremath{\partial G}}}{\partial\underline{\omega}}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\frac{\partial\mathscr{U}}{\partial\Delta}=\beta\frac{\text{\ensuremath{\partial U_{1}}}}{\partial\Delta}+(1-\beta)\frac{\text{\ensuremath{\partial U_{2}}}}{\partial\Delta}\\
-=\beta\frac{\text{\ensuremath{\partial u_{1}}}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\Delta}+(1-\beta)\frac{\text{\ensuremath{\partial u_{2}}}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\Delta}
+\frac{\partial\mathscr{U}}{\partial\Delta}=\beta\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\Delta}+(1-\beta)\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}\frac{\partial\phi(\bar{\nu}_{1})}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\Delta}
 \end{gather*}
 
 \end_inset
@@ -992,7 +939,7 @@ Case II:
 \color none
 \begin_inset Formula 
 \begin{gather*}
-\frac{\partial L}{\partial\underline{\lambda}}=\frac{\partial\mathscr{U}}{\partial\underline{\lambda}}+\mu(\frac{\lambda}{\omega-\lambda}-\frac{\ensuremath{\partial G}}{\ensuremath{\partial\lambda}})
+\frac{\partial L}{\partial\underline{\lambda}}=\frac{\partial\mathscr{U}}{\partial\underline{\lambda}}+\mu(\frac{\lambda}{\omega-\lambda}-\frac{\ensuremath{\partial G}}{\ensuremath{\partial\underline{\lambda}}})
 \end{gather*}
 
 \end_inset
@@ -1622,6 +1569,222 @@ du1/dG=d(Γ*(3*y1-2*x+δ /(1+exp(-ω_2*(x-ω_1))))** α + ( Γ*(3*y1-x+2*δ - λ
  + (ω_2/λ_2)*x - (ω_2/λ_2)*ω_1 -δ /(1+exp(-ω_2*(x-ω_1))))** α -Γ*(3*y1-2*x+δ/(1+
 exp(-ω_2*(x-ω_1))))**α ) / (1+exp(-ω_2*(x-ω_1))))/dx
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Envelope Theorem
+\end_layout
+
+\begin_layout Standard
+The problem with envelope theorem is that we have already made indirect
+ utility the objective function to be optimised.
+ There is an indirect utility from indirect utility that must make sense
+ i.e.
+ the combined utility of the optimal solutions.
+ Envelope theorem is tricky because we have eliminated 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and we're dealing with paramters as the variable being optimised.
+ This does not seem to what Envelope theorem is intended for.
+ It needs to be asserted if it's the derivative with respect to indirect
+ utility that is needed.
+\end_layout
+
+\begin_layout Standard
+A better way is to either just consider the individual optimisations 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ (
+\begin_inset Formula $u_{2}$
+\end_inset
+
+) or a combination of 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ without considering the optimised selections 
+\begin_inset Formula $\bar{\nu}_{1}^{*}$
+\end_inset
+
+.
+ We have to motivate the combined utility problem better.
+ If we decide that the functions 
+\begin_inset Formula $G$
+\end_inset
+
+ are already known to the consumer- then envelop theorem doesn't offer much.
+ Consider what Envelope theorem does offer in lieu of non-linear ODEs.
+\end_layout
+
+\begin_layout Subsubsection*
+Individual Utility 
+\end_layout
+
+\begin_layout Standard
+Consider if 
+\begin_inset Formula $\xi$
+\end_inset
+
+ is a function of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
+ Higher the income differences higher more is the constraint 
+\begin_inset Formula $\xi$
+\end_inset
+
+ lifted.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $L(\bar{\nu}_{1})=u_{1}(\bar{\nu}_{1})+\mu(\xi-\bar{\nu}_{1})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The indirect utility is based on 
+\begin_inset Formula $\xi$
+\end_inset
+
+ (rather than 
+\begin_inset Formula $\Delta$
+\end_inset
+
+) - so we can bring 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $U(\Delta)=u_{1}(\bar{\nu}_{1}^{*})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The set of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ (the parameters) does not include 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ but 
+\begin_inset Formula $\lambda,\underline{\lambda},\omega,\underline{\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The Envelope's theorem suggests 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L}{\partial\Delta} & =\frac{\partial U}{\partial\Delta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial L}{\partial\Delta}=\frac{\partial u_{1}}{\partial\Delta}+\mu\frac{\partial\xi}{\partial\Delta}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Above suggests that 
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial U}{\partial\Delta}=\frac{\partial u_{1}}{\partial\Delta}+\mu\frac{\partial\xi}{\partial\Delta}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since, 
+\begin_inset Formula $\lambda,\underline{\lambda},\omega,\underline{\omega}$
+\end_inset
+
+ must change with 
+\begin_inset Formula $\xi$
+\end_inset
+
+, we might have to introduce more derivatives if we attempt using similar
+ parameters.
+\end_layout
+
+\begin_layout Subsubsection*
+Combined Utility 
+\end_layout
+
+\begin_layout Standard
+====
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial\mathscr{U}}{\partial\Delta}=\beta\frac{\text{\ensuremath{\partial U_{1}}}}{\partial\Delta}+(1-\beta)\frac{\text{\ensuremath{\partial U_{2}}}}{\partial\Delta}\\
+=\beta\frac{\text{\ensuremath{\partial u_{1}}}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\Delta}+(1-\beta)\frac{\text{\ensuremath{\partial u_{2}}}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\Delta}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+L=\mathscr{\beta}u_{1}(G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta))+(1-\beta)u_{2}(\phi(G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta)))+\mu(\frac{\lambda\xi-\omega\underbar{\ensuremath{\omega}}-\underbar{\ensuremath{\lambda}\lambda}}{\lambda-\omega}-G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta))
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial L}{\partial\Delta}=\beta\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\Delta}+(1-\beta)\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\Delta}-\mu\frac{\partial G}{\partial\Delta}=\frac{\partial\mathscr{U}}{\partial\Delta}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{\lambda\xi-\omega\underbar{\ensuremath{\omega}}-\underbar{\ensuremath{\lambda}\lambda}}{\lambda-\omega}-G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})\ge0
+\end{gather*}
 
 \end_inset
 
