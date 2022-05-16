@@ -99,6 +99,38 @@
 
 \begin_body
 
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+dCbydl2=d((x*m-omega2*omega1-lambda1*x)/(x-omega2))/dx
+\end_layout
+
+\begin_layout Plain Layout
+dCbydλ1=d((λ_2*ξ-ω_2*ω_1-x*λ_2)/(λ_2-ω_2))/dx
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Solution with Pareto Optimality
 \end_layout
@@ -436,13 +468,14 @@ for a given set of
 \begin_inset Formula $\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2}$
 \end_inset
 
-)
+).
+ 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\mathscr{U} & =\beta U_{1}+(1-\beta)U_{2}
+\mathscr{U} & =f(\beta,\bar{\nu}_{1}^{*},\bar{\nu}_{2}^{*})
 \end{align*}
 
 \end_inset
@@ -649,8 +682,7 @@ U_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underli
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-\mathscr{U}=\beta u_{1}(G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta))\\
-+(1-\beta)u_{2}(\phi(G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta)))
+\mathscr{U}=f(\beta,G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta),\phi(G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta))
 \end{gather*}
 
 \end_inset
@@ -659,18 +691,7 @@ U_{2}(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underli
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{gather*}
-\frac{\partial\mathscr{U}}{\partial\Delta}=\beta\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\Delta}+(1-\beta)\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}\frac{\partial\phi(\bar{\nu}_{1})}{\partial\bar{\nu}_{1}}\frac{\partial G}{\partial\Delta}
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-One way to interprete the parameter 
+One way to interpret the parameter 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -846,11 +867,6 @@ Case I:
 \end_inset
 
 ).
- We may use the Envelope theorem but we know that 
-\begin_inset Formula $\frac{\partial G}{\partial\Delta}=0$
-\end_inset
-
- - so this does not give us anything new.
  Notice that 
 \begin_inset Formula $\mu$
 \end_inset
@@ -888,95 +904,7 @@ Case II:
 \end_inset
 
 .
- We need a particular solution of 
-\begin_inset Formula $\bar{\nu}_{1}=G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},y_{2})$
-\end_inset
-
- for 
-\begin_inset Formula $\frac{\partial G}{\partial\Delta}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula 
-\begin{gather*}
-\frac{\partial L}{\partial\lambda}=\frac{\partial\mathscr{U}}{\partial\lambda}+\mu(\frac{\omega(\lambda+\underline{\omega}-\xi)}{(\omega-\lambda)^{2}}-\frac{\ensuremath{\partial G}}{\ensuremath{\partial\lambda}})=0
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\begin_inset Formula 
-\begin{gather*}
-\frac{\partial L}{\partial\underline{\lambda}}=\frac{\partial\mathscr{U}}{\partial\underline{\lambda}}+\mu(\frac{\lambda}{\omega-\lambda}-\frac{\ensuremath{\partial G}}{\ensuremath{\partial\underline{\lambda}}})
-\end{gather*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Box Boxed
-position "t"
-hor_pos "c"
-has_inner_box 1
-inner_pos "t"
-use_parbox 0
-use_makebox 0
-width "100col%"
-special "none"
-height "1in"
-height_special "totalheight"
-thickness "0.4pt"
-separation "3pt"
-shadowsize "4pt"
-framecolor "black"
-backgroundcolor "none"
-status open
-
-\begin_layout Plain Layout
-dCbydl2=d((x*m-omega2*omega1-lambda1*x)/(x-omega2))/dx
-\end_layout
-
-\begin_layout Plain Layout
-dCbydλ1=d((λ_2*ξ-ω_2*ω_1-x*λ_2)/(λ_2-ω_2))/dx
-\end_layout
-
-\end_inset
-
-
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1302,7 +1230,184 @@ The solution of
 .
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
+Simpler cases
+\end_layout
+
+\begin_layout Subsubsection
+Fixed 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\omega$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The justification for 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is that society cannot change the growth and structure competitions is
+ fixed by culture in the long-term.
+ 
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\lambda,\omega$
+\end_inset
+
+ are fixed, then there are three unknowns 
+\begin_inset Formula $\underline{\omega},\underline{\lambda}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+.
+ The first should give 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ in form of unknowns 
+\begin_inset Formula $\underline{\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $\underline{\lambda}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}=0
+\end{gather*}
+
+\end_inset
+
+The second equation helps eliminate 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and gives us a relationship between 
+\begin_inset Formula $\underline{\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $\underline{\lambda}$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial u_{2}}{\partial\bar{\nu}_{1}} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If we able to write 
+\begin_inset Formula $\underline{\omega}$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $\underline{\lambda}$
+\end_inset
+
+, then we're left with optimisation of combined utility with respect to
+ 
+\begin_inset Formula $\underline{\lambda}$
+\end_inset
+
+ for the society.
+ The essential question is that of the value of 
+\begin_inset Formula $\underline{\lambda}$
+\end_inset
+
+ which optimises the utility for society with a given constant 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Even if we can't always write 
+\begin_inset Formula $\underline{\omega}$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $\underline{\lambda}$
+\end_inset
+
+, every 
+\begin_inset Formula $\underline{\lambda}$
+\end_inset
+
+corresponds to a different value of 
+\begin_inset Formula $\underline{\omega}$
+\end_inset
+
+ - which corresponds to an optimal value of 
+\begin_inset Formula $\underline{\lambda}$
+\end_inset
+
+.
+ However, we must have a concave constraint on 
+\begin_inset Formula $\underline{\lambda}$
+\end_inset
+
+ and the objective function must be a quasi-concave function of 
+\begin_inset Formula $\underline{\lambda}$
+\end_inset
+
+ for there to be a global maximum of this function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+du1dx=d(Γ*(3*y1-2*x+δ /(1+exp(-ω_2*(x-ω_1))))** α + ( Γ*(3*y1-x+2*δ - λ_1
+ + (ω_2/λ_2)*x - (ω_2/λ_2)*ω_1 -δ /(1+exp(-ω_2*(x-ω_1))))** α -Γ*(3*y1-2*x+δ/(1+
+exp(-ω_2*(x-ω_1))))**α ) / (1+exp(-ω_2*(x-ω_1))))/dx
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 Case I
 \end_layout
 
@@ -1391,7 +1496,7 @@ As long
 
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
 Case II
 \end_layout
 
@@ -1522,9 +1627,29 @@ u_{1}=\frac{\Gamma(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+\frac{y_{1}}{1+
 +\frac{1}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}\Gamma(2y_{1}-2\bar{\nu}_{1}+\frac{y_{2}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}\\
 \Rightarrow u_{1}=\frac{1}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}\Gamma(y_{1}-\bar{\nu}_{1}+2y_{2}-\phi(\bar{\nu}_{1})-\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}\\
 (1-\frac{1}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})\Gamma(3y_{1}-2\bar{\nu}_{1}+\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}\\
-\Rightarrow u_{1}=\Gamma(3y_{1}-2\bar{\nu}_{1}+\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}+\frac{\Gamma(3y_{1}-\bar{\nu}_{1}+2\Delta-\phi(\bar{\nu}_{1})-\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}-\Gamma(3y_{1}-2\bar{\nu}_{1}+\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}
+\Rightarrow u_{1}=\Gamma(3y_{1}-2\bar{\nu}_{1}+\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}+\frac{\Gamma(3y_{1}-\bar{\nu}_{1}+2\Delta-\phi(\bar{\nu}_{1})-\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}-\Gamma(3y_{1}-2\bar{\nu}_{1}+\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}\\
+\Rightarrow u_{1}=\Gamma(3y_{1}-2\bar{\nu}_{1}+\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}\\
++\frac{\Gamma(3y_{1}-\bar{\nu}_{1}+2\Delta-\underbar{\ensuremath{\lambda}}+(\omega/\lambda)\bar{\nu}_{1}-(\omega/\lambda)\underbar{\ensuremath{\omega}}-\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}-\Gamma(3y_{1}-2\bar{\nu}_{1}+\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}
 \end{gather*}
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+===
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $-\underbar{\ensuremath{\lambda}}+(\omega/\lambda)\bar{\nu}_{1}-(\omega/\lambda)\underbar{\ensuremath{\omega}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $-2\underbar{\ensuremath{\lambda}}+(2\omega/\lambda)\bar{\nu}_{1}-(2\omega/\lambda)\underbar{\ensuremath{\omega}}$
 \end_inset
 
 
@@ -1537,7 +1662,30 @@ u_{2}=\frac{\Gamma(y_{2}-\phi(\bar{\nu}_{1})+y_{1}-\bar{\nu}_{1}+\frac{y_{2}}{1+
 +\frac{\Gamma(2y_{2}-2\phi(\bar{\nu}_{1})+\frac{y_{1}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{2}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}\\
 \Rightarrow u_{2}=\frac{\Gamma(y_{2}-\phi(\bar{\nu}_{1})+y_{1}-\bar{\nu}_{1}+\frac{y_{2}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{1}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}-\Gamma(2y_{2}-2\phi(\bar{\nu}_{1})+\frac{y_{1}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{2}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}\\
 +\Gamma(2y_{2}-2\phi(\bar{\nu}_{1})+\frac{y_{1}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{y_{2}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}\\
-\Rightarrow u_{2}=\frac{\Gamma(3y_{1}+\Delta-\phi(\bar{\nu}_{1})-\bar{\nu}_{1}+\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}-\Gamma(3y_{1}+3\Delta-2\phi(\bar{\nu}_{1})-\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\Gamma(3y_{1}+3\Delta-2\phi(\bar{\nu}_{1})-\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}
+\Rightarrow u_{2}=\frac{\Gamma(3y_{1}+\Delta-\phi(\bar{\nu}_{1})-\bar{\nu}_{1}+\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}-\Gamma(3y_{1}+3\Delta-2\phi(\bar{\nu}_{1})-\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\Gamma(3y_{1}+3\Delta-2\phi(\bar{\nu}_{1})-\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}\\
+\Rightarrow u_{2}=\frac{\Gamma(3y_{1}+\Delta-\underbar{\ensuremath{\lambda}}+(\omega/\lambda)\bar{\nu}_{1}-(\omega/\lambda)\underbar{\ensuremath{\omega}}-\bar{\nu}_{1}+\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}-\Gamma(3y_{1}+3\Delta-2\underbar{\ensuremath{\lambda}}+(2\omega/\lambda)\bar{\nu}_{1}-(2\omega/\lambda)\underbar{\ensuremath{\omega}}-\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}\\
++\Gamma(3y_{1}+3\Delta-2\underbar{\ensuremath{\lambda}}+(2\omega/\lambda)\bar{\nu}_{1}-(2\omega/\lambda)\underbar{\ensuremath{\omega}}-\frac{\Delta}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}})^{\alpha}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $F\equiv1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}=\frac{1}{F}\{\alpha\Gamma\times(\frac{\Delta\omega(F-1)}{F^{2}}+\frac{\omega}{\lambda}-1)(\Delta-\underline{\lambda}+\frac{\Delta}{F}+\frac{\omega(x-\underline{\omega})}{\lambda}-\bar{\nu}_{1}+3y_{1})^{\alpha-1}\\
++\alpha\Gamma\times(-\frac{\Delta\omega(F-1)}{F^{2}}+\frac{2\omega}{\lambda}-1)(3\Delta-2\underline{\lambda}-\frac{\Delta}{F}+\frac{2(\bar{\nu}_{1}-\omega)}{\lambda}-\bar{\nu}_{1}+3y_{1})^{\alpha-1}\}\\
++\frac{\omega(F-1)}{F^{2}}\{\Gamma\times(\Delta-\underline{\lambda}+\frac{\Delta}{F}+\frac{\omega(\bar{\nu}_{1}-\underline{\omega})}{\lambda}-\bar{\nu}_{1}+3y_{1})^{\alpha}+\Gamma\times(3\Delta-2\underline{\lambda}-\frac{\Delta}{F}+\frac{2\omega(\bar{\nu}_{1}-\underline{\omega})}{\lambda}-\bar{\nu}_{1}+3y_{1})^{\alpha}\}
 \end{gather*}
 
 \end_inset
@@ -1568,6 +1716,13 @@ status open
 du1/dG=d(Γ*(3*y1-2*x+δ /(1+exp(-ω_2*(x-ω_1))))** α + ( Γ*(3*y1-x+2*δ - λ_1
  + (ω_2/λ_2)*x - (ω_2/λ_2)*ω_1 -δ /(1+exp(-ω_2*(x-ω_1))))** α -Γ*(3*y1-2*x+δ/(1+
 exp(-ω_2*(x-ω_1))))**α ) / (1+exp(-ω_2*(x-ω_1))))/dx
+\end_layout
+
+\begin_layout Plain Layout
+du2/dG = d((G*(3*y1+δ-λ1+(ω2/λ2)*(x -ω1)-x+δ /(1+exp(-ω2*(x-ω1))))** α+
+ G*(3*y1-x+3*δ - 2*λ1 + (2*ω2/λ2)*(x -ω1) -δ /(1+exp(-ω2*(x-ω1))))** α )/
+ (1+exp(-ω2*(x-ω1))) )/dx+ d(G*(3*y1+3*δ-2*λ1+2*ω2/λ2*x-2*ω2/λ2*ω1-δ/(1+exp(-ω2*
+(x-ω1))))**α )/dx
 \end_layout
 
 \end_inset
