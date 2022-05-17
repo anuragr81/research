@@ -13,7 +13,7 @@
 \emergencystretch=\maxdimen
 \hyphenpenalty=10000
 \hbadness=10000
-
+\usepackage{soul}
 \usepackage{natbib}
 \usepackage{color, colortbl}
 \usepackage[first=0,last=9]{lcg}
@@ -2782,9 +2782,9 @@ noprefix "false"
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-W_{k}(\nu) & =L_{k+1}(\nu)
-\end{align*}
+\begin{align}
+W_{k}(\nu) & =L_{k+1}(\nu)\label{eq:population_stability}
+\end{align}
 
 \end_inset
 
@@ -3692,20 +3692,215 @@ evaluate if setting up fairer status competitions could be more desirable
 \end_layout
 
 \begin_layout Standard
-To see how the risks may be shared between the bands more specifically through
- the long-term equilibrium conditions for a given utility, we now look at
- particular instances of utility and the functions 
-\begin_inset Formula $W(\nu)$
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subsubsection{
+\backslash
+hl{Implications of population stability}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The condition of population stability in two bands (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:population_stability"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) implies that 
+\begin_inset Formula $W_{1}(\bar{\nu}_{1})=L_{2}(\bar{\nu}_{2})$
+\end_inset
+
+.
+ As the long-term values 
+\begin_inset Formula $\bar{\nu}_{1},\bar{\nu}_{2}$
+\end_inset
+
+ selected by the consumers in the two-band economy are related, we can define
+ functions 
+\begin_inset Formula $\phi(\cdot),\psi(\cdot)$
+\end_inset
+
+ so that 
+\begin_inset Formula $\bar{\nu}_{1}=\psi(\bar{\nu}_{2})=W^{-1}(L(\bar{\nu}_{2}))$
 \end_inset
 
  and 
-\begin_inset Formula $1-L(\nu)$
+\begin_inset Formula $\bar{\nu}_{2}=\phi(\bar{\nu}_{1})=L^{-1}(W(\bar{\nu}_{1}))$
 \end_inset
 
- in Section 
+.
+ The utilities 
+\begin_inset Formula $u_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{2}$
+\end_inset
+
+ optimised by the consumer can thus be written in term of either 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+or 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{gather*}
+u_{1}\equiv u_{1}(\bar{\nu}_{1},\bar{\nu}_{2})=W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))\\
++(1-W(\bar{\nu}_{1}))u(y_{1}-\bar{\nu}_{1}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))\\
+\Rightarrow u_{1}=W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})\\
++(1-W(\bar{\nu}_{1}))u(y_{1}-\bar{\nu}_{1}+y_{1}-\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With
+\begin_inset Formula $\bar{\nu}_{1}=\psi(\bar{\nu}_{2})$
+\end_inset
+
+ the consumer 2 solves the equivalent problem,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+u_{2}\equiv u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))\\
++(1-L(\bar{\nu}_{2}))u(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))\\
+\Rightarrow u_{2}=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}_{2}+y_{1}-\psi(\bar{\nu}_{2})+(1-L(\bar{\nu}_{2}))y_{1}+L(\bar{\nu}_{2})y_{2})\\
++(1-L(\bar{\nu}_{2}))u(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+(1-L(\bar{\nu}_{2}))y_{2}+L(\bar{\nu}_{2})y_{1})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The functions 
+\begin_inset Formula $W(\nu),L(\nu)$
+\end_inset
+
+ (which in turn define 
+\begin_inset Formula $\phi(\nu),\psi(\nu)$
+\end_inset
+
+) would thus correspond to the equilibria for consumers 1 and 2.
+ For consumer 1, the first-order condition is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}=\frac{\partial F_{1}}{\partial\bar{\nu}_{1}}+\frac{\text{\ensuremath{\partial F_{2}}}}{\partial\bar{\nu}_{1}}=0
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula 
+\begin{align*}
+F_{1} & =W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{align*}
+F_{2} & =(1-W(\bar{\nu}_{1}))u(2y_{1}-2\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\frac{\partial F_{1}}{\partial\bar{\nu}_{1}}=W'(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})-W(\bar{\nu}_{1})(1+\phi'(\bar{\nu}_{1})+W'(\bar{\nu}_{1})y_{2}\\
+-W'(\bar{\nu}_{1})y_{1})u'(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\frac{\text{\ensuremath{\partial F_{2}}}}{\partial\bar{\nu}_{1}}=(-W'(\bar{\nu}_{1}))u(2y_{1}-2\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})\\
++(1-W(\bar{\nu}_{1}))(-2+y_{2}W'(\bar{\nu}_{1})-y_{1}W'(\bar{\nu}_{1}))u'(2y_{1}-2\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The population condition thus provides another 
+\begin_inset Formula $\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}=0$
+\end_inset
+
+ condition that the functions 
+\begin_inset Formula $W(\nu),L(\nu)$
+\end_inset
+
+ must fulfill.
+ A solution with a particular form of 
+\begin_inset Formula $\phi(.)$
+\end_inset
+
+ can be arrived at using the techniques used in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Equilibria-particular"
+reference "subsec:short-term-equilibrium"
 plural "false"
 caps "false"
 noprefix "false"
@@ -3713,6 +3908,18 @@ noprefix "false"
 \end_inset
 
 .
+ To use an approach that we believe is more intuitive to understand the
+ effect of income difference, we choose to explore the effect of population
+ stability with particular forms of 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ and with the same utility as before.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3781,9 +3988,9 @@ The particular functions
 \begin_inset Formula $L(\nu)$
 \end_inset
 
- provide us more details of how income differences may increase or decrease
- status consumption in the long-term.
- For selecting 
+ allow us to examine the risks shared between the bands more directly when
+ the income difference increases or decreases in the long-term equilibritum.
+ The selection of 
 \begin_inset Formula $W(\nu)$
 \end_inset
 
@@ -3791,7 +3998,7 @@ The particular functions
 \begin_inset Formula $L(\nu)$
 \end_inset
 
-, we consider two fundamental requirements that we have briefly discussed
+ rests upon two fundamental requirements - which we have briefly discussed
  before.
  First, that the status competitions can never guarantee a reward to the
  next band i.e.
