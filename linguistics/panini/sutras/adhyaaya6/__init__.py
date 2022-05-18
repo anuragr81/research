@@ -1,22 +1,9 @@
-from ..common_definitions import Suffix,Node, Dhaatu, ach, hal, find_eldest_parent1_of_condition, find_eldest_parent2_of_condition
+from ..common_definitions import Suffix,Node, Dhaatu, ach, hal, sup_pratyayaaH
+from ..common_definitions import pratyaahaara
 
-class ataekahalmadhyeanaadeshaaderliXti_6041200:
-    def __init__(self):
-        self._types={'node':['stateupdate'],'suffix_node':[Suffix,'literal','lakaara']}
-    def __call__(self,node,suffix_node):
-        if not isinstance(suffix_node,Node):
-            raise    ValueError ("suffix_node must be of type Node")
-        if not isinstance(node,Node):
-            raise    ValueError ("node must be of type Node")
-        if suffix_node._data._lakaara == 'liXt':
-            applied_rules= [int(x['rule'].__name__.split('_')[-1]) for x in node._output if 'rule' in x]
-            if 601008 in applied_rules :
-                convert_e = lambda x : x if x not in ('a','aa',) else 'e'
-                if len([x['output'] for x in node._output if 'new' in x and x['new']]) == 1: # there has been no adesha to anga
-                    if node.get_output()[-1] not in ach() and node.get_output()[-2] in ach() : # asaMyoga => kit
-                        return node.get_output()[:-2] + [convert_e(node.get_output()[-2])] + node.get_output()[-1:]   
-            
-        return node.get_output()
+from ..common_definitions import find_eldest_parent1_of_condition 
+from ..common_definitions import find_eldest_parent2_of_condition
+
 
 class liXtidhaatoranabhyaasasya_6010080:
     def __init__(self):
@@ -63,6 +50,10 @@ class echoayavaayaavaH_6010750:
     def __init__(self):
         self._types={'node':['literal'],'suffix_node':['literal']}
     def __call__(self,node, suffix_node):
+        if not node.get_output():
+            return node.get_output()
+        if not suffix_node.get_output():
+            return node.get_output()
         if suffix_node.get_output()[0] not in ach():
             return node.get_output()
     
@@ -76,6 +67,23 @@ class echoayavaayaavaH_6010750:
             return node_output[0:-1]+["aa","y"]
         if node_output[-1] == "au":
             return node_output[0:-1]+["aa","v"]
+            
+        return node_output
+
+
+class amipuurvaH_6011030:
+    def __init__(self):
+        self._types={'node':['literal'],'suffix_node':['literal']}
+    def __call__(self,node, anga_node):
+        node_output= node.get_output()
+        if not node.get_output():
+            return node.get_output()
+        
+        if isinstance(anga_node._data,Suffix):
+            if ''.join(anga_node._data._suffix) in sup_pratyayaaH():
+                # suffix is sup
+                if node.get_output()[-1] in pratyaahaara('a','k'):
+                    return node_output[1:]
             
         return node_output
 
@@ -123,6 +131,24 @@ class bhuvovugluNgliXtoH_6040880:
     
             
         return  node.get_output()
+
+class ataekahalmadhyeanaadeshaaderliXti_6041200:
+    def __init__(self):
+        self._types={'node':['stateupdate'],'suffix_node':[Suffix,'literal','lakaara']}
+    def __call__(self,node,suffix_node):
+        if not isinstance(suffix_node,Node):
+            raise    ValueError ("suffix_node must be of type Node")
+        if not isinstance(node,Node):
+            raise    ValueError ("node must be of type Node")
+        if suffix_node._data._lakaara == 'liXt':
+            applied_rules= [int(x['rule'].__name__.split('_')[-1]) for x in node._output if 'rule' in x]
+            if 601008 in applied_rules :
+                convert_e = lambda x : x if x not in ('a','aa',) else 'e'
+                if len([x['output'] for x in node._output if 'new' in x and x['new']]) == 1: # there has been no adesha to anga
+                    if node.get_output()[-1] not in ach() and node.get_output()[-2] in ach() : # asaMyoga => kit
+                        return node.get_output()[:-2] + [convert_e(node.get_output()[-2])] + node.get_output()[-1:]   
+            
+        return node.get_output()
 
 
 class yasyeticha_6041480:

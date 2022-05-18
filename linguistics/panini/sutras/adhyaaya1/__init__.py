@@ -20,6 +20,8 @@ class halantyam_1030030:
         self._types={'node':['literal']}
     def __call__(self,node):
         #Check isinstance(node._data,Dhaatu) if necessary
+        if not node.get_output():
+            return node.get_output()
         antyam = node.get_output()[-1]
         #works only once - not after the output has been modified with the call
         if isinstance(node._data,Suffix):
@@ -64,7 +66,8 @@ class chuXtuu_103070:
         suffix=node._data
         if not isinstance(suffix,Suffix):
             raise ValueError("Must be Suffix")
-         
+        if not node.get_output():
+            return node.get_output()
         if node.get_output() [0] in  chu() or node.get_output()[0] in Xtu():
             return node.get_output()[1:]
         
@@ -82,6 +85,8 @@ class lashakvataddhite_1030080:
         suffix = node._data
         if not isinstance(suffix,Suffix):
             raise ValueError("Must be of Suffix type")
+        if not node.get_output():
+            return node.get_output()
         if not suffix.is_taddhita and node.get_output()[0] in ("l","sh","k","kh","g","gh","Nc"):
             return node.get_output()[1:]
     

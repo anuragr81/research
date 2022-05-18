@@ -85,6 +85,8 @@ class sichivRiddhiHparasmaipadeXshu_7020021:
             raise ValueError("suffix must of type Suffix")
             
         anga_string= node.get_output()
+        if not anga_string : 
+            return anga_string 
         if anga_string[-1] in ach() and ''.join(suffix_node._data._suffix)=='sNcch': 
             #if :# sNcch is followed by parasmaipad
             input_nodes=[v for k,v in suffix_node._output[-1]['inputs'].items() if isinstance(v,Node)]            
@@ -179,7 +181,8 @@ class saarvadhaatukaardhadhaatukayoH_7030840:
         if isinstance(node._data,Suffix):
     
             if not node.get_output():
-                raise ValueError("Unexpected sarvaahaarii")
+                print("Returned due to sarvaahaari lopa")
+                return node.get_output()
             if node._data._suffix[-1] == node.get_output()[-1]:
                 anga_string= node.get_output()
                 if node._data._suffix[-1] in pratyaahaara('i','k'):
@@ -237,7 +240,10 @@ class atodiirghoyaNci_7031010:
             
         if not isinstance(suffix_node._data, Suffix):
             raise ValueError("Must be suffix")
-    
+            
+        if not node.get_output():
+            print("Returning due to sarvaahaari lopa")
+            return node.get_output()
         if node.get_output()[-1] == 'a':
             if suffix_node._data.is_saarvadhaatuka() and suffix_node._data._suffix[0] in pratyaahaara('y','Nc') :
                 return node.get_output()[0:-1]+['aa']

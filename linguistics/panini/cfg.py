@@ -43,7 +43,7 @@ def get_sutras_ordered ():
     return OrderedDict(sorted(all_sutras))
 
 def transformation_sutras():
-    ll = [2040850,3010331,3040820,6010080,6010630, 6010750, 6040880, 6041200, 6041480, 
+    ll = [2040850,3010331,3040820,6010080,6010630, 6010750, 6040880,6011030, 6041200, 6041480, 
           7010030,7010010, 7010020, 7020021, 7021150, 7021160, 7030520, 7030840,7031010, 
           8010150, 8020660, 8030059]
     return sorted(float(x) for x in ll)
@@ -76,6 +76,8 @@ def apply_transformation(transformation_rule,new_expr):
 #                            j = 1
                         new_expr[i-1].set_output(transformation_rule,suffix_node=new_expr[i])
                     if 'anga_node' in sig_params :
+                        
+                        #print(transformation_rule.__name__)
                         new_expr[i-1].set_output(transformation_rule,anga_node=new_expr[i])
 
                     
@@ -306,7 +308,7 @@ def generate_subaadi(sup_expression):
 F=False
 T=True
 
-if F:
+if T:
     test_siddhis ()
     #print("Test")
     #f=Functor()
