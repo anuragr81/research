@@ -1,5 +1,7 @@
-from ..common_definitions import anunaasika, Suffix, ach, hal, chu, Xtu, Node, Dhaatu,tiNg_pratyayaaH,sup_pratyayaaH
-    
+from ..common_definitions import anunaasika, Suffix, ach, hal, chu, Xtu, Node
+from ..common_definitions import Dhaatu,tiNg_pratyayaaH,sup_pratyayaaH
+from ..common_definitions import halantyam_ignored_sutras
+
 class uraNnraparaH_1010500:
     def __init__(self):
         self._types={'a':['literal'],'b':['literal']}
@@ -21,16 +23,22 @@ class halantyam_1030030:
         antyam = node.get_output()[-1]
         #works only once - not after the output has been modified with the call
         if isinstance(node._data,Suffix):
-            if antyam in ('t','s',):
+            #navibhaktautusmaaH_1030040
+            if antyam in ('t','s','m'):
                 if ''.join(node._data._suffix) in tiNg_pratyayaaH() or ''.join(node._data._suffix) in sup_pratyayaaH():
                     return node.get_output()
+        rules_applied = [int(x['rule'].__name__.split('_')[-1]) for x in node._output if 'rule' in x]
         
+        last_rule_applied  = rules_applied[-1] if rules_applied else None
         
         node_data=[x['output'] for x in node._output if 'new' in x and x['new']][-1]
-        if antyam in hal() and node_data[-1] == antyam:
-            return node.get_output()[:-1]
+        if antyam in hal() and node_data[-1] == antyam \
+            and last_rule_applied not in halantyam_ignored_sutras():
+                return node.get_output()[:-1]
         else:
             return node.get_output()
+
+    
 
     
 class aadirNciXtuXdavaH_1030050:
@@ -89,9 +97,17 @@ class upadesheajanunaasikait_1030020:
         suffix = node._data
         if not isinstance(suffix,Suffix):
             raise ValueError("Must be of Suffix type")
-        #ommitted condition x[-1] in ach()  since it is too general
-        apply_rule = lambda x: x[0:-1] if x and (x[-1] in anunaasika() ) else x   
-        return apply_rule(node.get_output())
+        current_state = node.get_output()
+        
+        if current_state  and current_state [-1] in anunaasika()  :
+            #navibhaktautusmaaH_1030040
+            if current_state [-1] in ('t','s','m'):
+                if ''.join(node._data._suffix) in tiNg_pratyayaaH() or ''.join(node._data._suffix) in sup_pratyayaaH():
+                    return current_state
+            return current_state [0:-1] 
+             
+        
+        return current_state  
 
     
 class yachibham_1040180:

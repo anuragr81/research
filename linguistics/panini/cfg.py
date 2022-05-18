@@ -49,6 +49,7 @@ def transformation_sutras():
     return sorted(float(x) for x in ll)
 
 
+
 def prepend_sutras():
     return [6040710]
 
@@ -314,11 +315,14 @@ if F:
 else:   
     
     #pprint(generate_tibaadi("paXthNc"))   ;sys.exit(0)
-    sup_expr = [Node(Dhaatu(parse_string("rajNc")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]
-    pprint(generate_subaadi(sup_expr ))   ;sys.exit(0)
+    if F:
+        sup_expr = [Node(Dhaatu(parse_string("rajNc")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]
+        pprint(generate_subaadi(sup_expr ))   ;
+        sys.exit(0)
     
-    
-    #expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]
+    else:
+        expression=[Node(Dhaatu(parse_string("rajNc")),parent1=None),Node(Suffix("ghaNc"),parent1=None),Node(Suffix("am"),parent1=None)]
+        #expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]
     
     
     # sorting order is increasing in general but can be superseded by nitya condition (if nitya occurs in a later sutra then that later sutra takes advantage) 
