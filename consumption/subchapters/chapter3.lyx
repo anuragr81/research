@@ -3710,7 +3710,7 @@ hl{Population stability condition}}
 \end_layout
 
 \begin_layout Standard
-The condition of population stability in two bands (see Equation 
+The condition of population stability (see Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:population_stability"
@@ -3720,17 +3720,40 @@ noprefix "false"
 
 \end_inset
 
-) implies that 
-\begin_inset Formula $W_{1}(\bar{\nu}_{1})=L_{2}(\bar{\nu}_{2})$
+) constraints the selection of 
+\begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
-.
- As the long-term values 
-\begin_inset Formula $\bar{\nu}_{1},\bar{\nu}_{2}$
+ and 
+\begin_inset Formula $\bar{\nu}_{2}$
 \end_inset
 
- selected by the consumers in the two-band economy are related, we can define
- functions 
+ immensely.
+ In the two-band economy, the conditions implies 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+W_{1}(\bar{\nu}_{1})=L_{2}(\bar{\nu}_{2})
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above relation between the selection 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ made by the consumer in the long-term (for the two-band economy) helps
+ us define the functions 
 \begin_inset Formula $\phi(\cdot),\psi(\cdot)$
 \end_inset
 
@@ -3743,7 +3766,7 @@ noprefix "false"
 \end_inset
 
 .
- The utilities 
+ This also means that the utilities 
 \begin_inset Formula $u_{1}$
 \end_inset
 
@@ -3751,7 +3774,7 @@ noprefix "false"
 \begin_inset Formula $u_{2}$
 \end_inset
 
- optimised by the consumer can thus be written in term of either 
+ optimised by the consumer can be written in term of either 
 \begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
@@ -3812,15 +3835,23 @@ u_{2}\equiv u_{2}(\bar{\nu}_{1},\bar{\nu}_{2})=L(\bar{\nu}_{2})u(y_{2}-\bar{\nu}
 \end_layout
 
 \begin_layout Standard
-The functions 
-\begin_inset Formula $W(\nu),L(\nu)$
+Notice that as long as 
+\begin_inset Formula $\phi(\nu)$
 \end_inset
 
- (which in turn define 
-\begin_inset Formula $\phi(\nu),\psi(\nu)$
+ and 
+\begin_inset Formula $\psi(\nu)$
 \end_inset
 
-) would thus correspond to the equilibria for consumers 1 and 2.
+ are differentiable, the population condition ensures that 
+\begin_inset Formula $\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}=\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}=0$
+\end_inset
+
+ (
+\begin_inset Formula $\because\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}=0\Rightarrow\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}=\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}\frac{\partial\phi}{\partial\bar{\nu}_{1}}=0$
+\end_inset
+
+).
  For consumer 1, the first-order condition is 
 \end_layout
 
@@ -3838,25 +3869,14 @@ The functions
 \begin_layout Standard
 where 
 \begin_inset Formula 
-\begin{align*}
-F_{1} & =W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})
-\end{align*}
-
-\end_inset
-
-and 
-\begin_inset Formula 
-\begin{align*}
-F_{2} & =(1-W(\bar{\nu}_{1}))u(2y_{1}-2\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})
-\end{align*}
+\begin{gather*}
+F_{1}=W(\bar{\nu}_{1})u(y_{1}-\bar{\nu}_{1}+y_{2}-\phi(\bar{\nu}_{1})+W(\bar{\nu}_{1})y_{1}+(1-W(\bar{\nu}_{1}))y_{2})\\
+F_{2}=(1-W(\bar{\nu}_{1}))u(2y_{1}-2\bar{\nu}_{1}+W(\bar{\nu}_{1})y_{2}+(1-W(\bar{\nu}_{1}))y_{1})
+\end{gather*}
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-so that
 \end_layout
 
 \begin_layout Standard
@@ -3884,32 +3904,7 @@ so that
 \end_layout
 
 \begin_layout Standard
-As long as 
-\begin_inset Formula $\phi(\nu)$
-\end_inset
-
- and 
-\begin_inset Formula $\psi(\nu)$
-\end_inset
-
- are differentiable, the population condition ensures that 
-\begin_inset Formula $\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}=0$
-\end_inset
-
- (
-\begin_inset Formula $\because\frac{\partial u_{2}}{\partial\bar{\nu}_{2}}\frac{\partial\phi}{\partial\bar{\nu}_{1}}=0$
-\end_inset
-
-) - another condition which the functions 
-\begin_inset Formula $W(\nu),L(\nu)$
-\end_inset
-
- must fulfill.
- While a solution with a particular form of 
-\begin_inset Formula $\phi(.)$
-\end_inset
-
- can be arrived at using the techniques used in Section 
+While it is possible to proceed with the techniques used in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:short-term-equilibrium"
@@ -3919,12 +3914,51 @@ noprefix "false"
 
 \end_inset
 
-, such a form depends necessarily on the particular form of 
+ using a particular form of 
+\begin_inset Formula $\phi(.)$
+\end_inset
+
+, we use a particular form of 
 \begin_inset Formula $W(\nu),L(\nu)$
 \end_inset
 
-.
- We therefore proceed with assuming a particular forms of 
+ for further discussion.
+ Instead of arguing for a form of 
+\begin_inset Formula $\phi(\nu)$
+\end_inset
+
+ (or 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\psi(\nu)$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+), we inspect properties of status competitions that a particular form of
+ 
 \begin_inset Formula $W(\nu)$
 \end_inset
 
@@ -3932,17 +3966,13 @@ noprefix "false"
 \begin_inset Formula $L(\nu)$
 \end_inset
 
- while using the same utility as before.
- The particular functions 
-\begin_inset Formula $u(A),W(\nu)$
+ may be associate.
+ These particular forms - while using the same utility as before 
+\begin_inset Formula $u(A)=\Gamma\times A^{\alpha}$
 \end_inset
 
- and 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
- allow us to examine the risks shared between the bands as the income difference
- increases or decreases in the long-term equilibritum.
+- are used to examine the risks shared between the bands as the income differenc
+e increases or decreases in the long-term equilibrium.
  
 \end_layout
 
@@ -4012,10 +4042,9 @@ The selection of
 \begin_inset Formula $L(\nu)$
 \end_inset
 
- rests upon two fundamental requirements - which we have briefly discussed
- before.
- First, that the status competitions can never guarantee a reward to the
- next band i.e.
+ rests upon two properties that we have briefly discussed.
+ First, the status competitions can never guarantee a reward to the next
+ band i.e.
 \begin_inset Formula $\nexists\nu$
 \end_inset
 
@@ -4984,7 +5013,7 @@ hl{Optimisation for fixed }
 \end_layout
 
 \begin_layout Standard
-Given the 
+With 
 \begin_inset Formula $\omega$
 \end_inset
 
@@ -4992,12 +5021,20 @@ Given the
 \begin_inset Formula $\lambda$
 \end_inset
 
- are fixed and treated as a consequence of the long-term growth, we examine
+ fixed in the particular form of 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ - properties that correspond to conditions of a long-term growth - we examine
  the effect of income difference 
 \begin_inset Formula $\Delta\equiv y_{2}-y_{1}$
 \end_inset
 
-, while for varying 
+ after specifying 
 \begin_inset Formula $\underline{\omega}$
 \end_inset
 
@@ -5005,8 +5042,20 @@ Given the
 \begin_inset Formula $\underline{\lambda}$
 \end_inset
 
- .
- In other words, a society where 
+ using the population stability condition and a Pareto criterion for the
+ two consumer utilities.
+ In other words, we eliminate the parameters 
+\begin_inset Formula $\underline{\omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $\underline{\lambda}$
+\end_inset
+
+ - which define the level of status consumption at which promotion or demotion
+ in bands is of material significance - using the population stability condition
+ and a combined utility for the two consumers.
+ A society where 
 \begin_inset Formula $\omega$
 \end_inset
 
@@ -5014,7 +5063,7 @@ Given the
 \begin_inset Formula $\lambda$
 \end_inset
 
- are fixed must optimise 
+ are fixed must optimise - is thus meant to select 
 \begin_inset Formula $\underline{\omega}$
 \end_inset
 
@@ -5024,8 +5073,8 @@ Given the
 
  for a goal in the long-term equilibrium comprising of consumer utilities
  in the two income bands.
- Let's assume a particular Pareto (multi-objective) solution for a combined
- utility from two bands as follows
+ We assume a particular for of this combined utility from the two bands
+ as follows
 \end_layout
 
 \begin_layout Standard
@@ -5037,6 +5086,36 @@ Given the
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+One way to interpret the parameter 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is to view it as a measure of how the richer consumer is favoured in a
+ society.
+ A low 
+\begin_inset Formula $\beta$
+\end_inset
+
+ society - in other words - could be one where social institutions provide
+ 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+, 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ that are more supportive of the rich consumer's economic status.
+ The parameter 
+\begin_inset Formula $\beta$
+\end_inset
+
+ allows us to view the multi-objective optimisation problem for consumers
+ 1 and 2 as a single-objective problem.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5214,34 +5293,8 @@ The utility
 \end_layout
 
 \begin_layout Standard
-One way to interpret the parameter 
-\begin_inset Formula $\beta$
-\end_inset
-
- is to view it as a measure of how the richer consumer is favoured in a
- society.
- A low 
-\begin_inset Formula $\beta$
-\end_inset
-
- society - in other words - could be one where social institutions provide
- 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
-, 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
- that are more supportive of the rich consumer's economic status.
- The parameter 
-\begin_inset Formula $\beta$
-\end_inset
-
- allows us to view the multi-objective optimisation problem for consumers
- 1 and 2 as a single-objective problem.
- Further, as neither of the consumers are expected to spend all their incomes
- on status consumption, we can consider an upper bound 
+As neither of the consumers are expected to spend all their incomes on status
+ consumption, we consider the optimisation under an upper bound 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -5255,7 +5308,7 @@ One way to interpret the parameter
 \end_inset
 
 ).
- Using 
+ Using the above definition of 
 \begin_inset Formula $\bar{\nu}_{2}=\phi(\bar{\nu}_{1})$
 \end_inset
 
@@ -5278,7 +5331,20 @@ The condition
 \begin_inset Formula $\bar{\nu}_{1}^{*}+\bar{\nu}_{2}^{*}\le\xi$
 \end_inset
 
- thus translates into the following upper bound for 
+ translates into the following upper bound for 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+.
+ With 
+\begin_inset Formula $\omega>\lambda$
+\end_inset
+
+ (in a growing economy), it is an evident that an increase in 
+\begin_inset Formula $\xi$
+\end_inset
+
+ decreases this bound on 
 \begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
@@ -5297,26 +5363,14 @@ The condition
 \end_layout
 
 \begin_layout Standard
-With 
-\begin_inset Formula $\omega>\lambda$
-\end_inset
-
- (in a growing economy), it is an evident that an increase in 
-\begin_inset Formula $\xi$
-\end_inset
-
- decreases this bound on 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
-.
- The Lagrangian 
+Proceeding with first-order conditions under this constraint, the Lagrangian
+ 
 \begin_inset Formula $L=\mathscr{U}+\mu(\frac{\lambda\xi-\omega\underbar{\ensuremath{\omega}}-\underbar{\ensuremath{\lambda}\lambda}}{\lambda-\omega}-G(\lambda,\underline{\lambda},\text{\ensuremath{\omega},\ensuremath{\underline{\omega}}},y_{1},\Delta))$
 \end_inset
 
- in turns leads to the following first-order conditions for an interior
- solution (notice that all constraints being linear ensures that FOC is
- a necessary condition for LM
+ leads to the following (Kuhn-Tucker) conditions for an interior solution
+ (notice that all constraints being linear ensures that the following first-orde
+r-conditions is a necessary condition for local-minima 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "takayamaanalyticalmethods1993"
@@ -5362,7 +5416,7 @@ and
 \end_layout
 
 \begin_layout Standard
-This leads to two possibilities:
+We now consider the two cases implied:
 \end_layout
 
 \begin_layout Itemize
@@ -5380,7 +5434,7 @@ Case I:
 \end_inset
 
 .
- Since, 
+ As 
 \begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
@@ -5388,7 +5442,7 @@ Case I:
 \begin_inset Formula $\xi$
 \end_inset
 
-, we may only view 
+, we view 
 \begin_inset Formula $\frac{\partial G}{\partial\xi}$
 \end_inset
 
@@ -5396,12 +5450,16 @@ Case I:
 \begin_inset Formula $\frac{\partial G}{\partial\Delta}$
 \end_inset
 
-).
- This equilibrium considers what happens when 
+) i.e.
+ the changing in 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ when 
 \begin_inset Formula $\xi$
 \end_inset
 
- is raised while the consumers maintain the same total status consumption.
+ is raised while holding the total status consumption in a society constant.
 \end_layout
 
 \begin_layout Itemize
@@ -5418,16 +5476,19 @@ Case II:
 \begin_inset Formula $\frac{\partial\mathscr{U}}{\partial\underline{\lambda}}=0$
 \end_inset
 
- i.e.
- the unconstrained maximum for 
-\begin_inset Formula $\mathscr{U}.$
+ corresponds to the unconstrained maximum for 
+\begin_inset Formula $\mathscr{U}$
 \end_inset
 
+ after 
+\begin_inset Formula $\bar{\omega}$
+\end_inset
 
+ is eliminated using the population stability condition (see below for details).
 \end_layout
 
 \begin_layout Standard
-In Cases I, the condition 
+In Case I, the condition 
 \begin_inset Formula $\bar{\nu}_{1}+\bar{\nu}_{2}=\xi$
 \end_inset
 
@@ -5483,7 +5544,7 @@ As long as
 \end_inset
 
 .
- Notice that if 
+ In fact as long as 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -5509,8 +5570,12 @@ As long as
 \end_layout
 
 \begin_layout Standard
-We now summarise the approach used for a numerical evaluation of Case II.
- To describe utilities 
+To proceed with Case II i.e.
+ when 
+\begin_inset Formula $\xi$
+\end_inset
+
+ is high enough for their to an optimal 
 \begin_inset Formula $u_{1}$
 \end_inset
 
@@ -5518,7 +5583,8 @@ We now summarise the approach used for a numerical evaluation of Case II.
 \begin_inset Formula $u_{2}$
 \end_inset
 
- in terms of the specific probability functions 
+ , we rewrite the consumer utilities in terms of the specific probability
+ functions 
 \begin_inset Formula $W(\nu),L(\nu)$
 \end_inset
 
@@ -5527,7 +5593,7 @@ We now summarise the approach used for a numerical evaluation of Case II.
 \end_inset
 
 .
- Recall that,
+ Recall first that,
 \end_layout
 
 \begin_layout Standard
@@ -5570,11 +5636,11 @@ With
 \begin_inset Formula $\bar{\nu}_{2}=\phi(\bar{\nu}_{1})$
 \end_inset
 
- , we can write 
+ , 
 \begin_inset Formula $u_{1}$
 \end_inset
 
- in term of 
+ can be written in terms of 
 \begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
@@ -5675,7 +5741,7 @@ With
 \begin_inset Formula $F\equiv1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}$
 \end_inset
 
- we have
+ the derivatives become
 \end_layout
 
 \begin_layout Standard
@@ -5716,7 +5782,7 @@ With
 \begin_inset Formula $\lambda,\omega$
 \end_inset
 
- fixed, we have three unknowns 
+ fixed, we thus have three unknowns 
 \begin_inset Formula $\underline{\omega},\underline{\lambda}$
 \end_inset
 
@@ -5725,32 +5791,19 @@ With
 \end_inset
 
 .
- The condition 
+ The two conditions
 \begin_inset Formula $\frac{\partial u_{1}}{\partial\bar{\nu}_{1}}=0$
 \end_inset
 
- relates 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
- with 
-\begin_inset Formula $\underline{\omega}$
-\end_inset
-
  and 
-\begin_inset Formula $\underline{\lambda}$
-\end_inset
-
- as does 
 \begin_inset Formula $\frac{\partial u_{2}}{\partial\bar{\nu}_{1}}=0$
 \end_inset
 
-.
- With
+ allow us to eliminate 
 \begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
- eliminated between the two, we have a relationship between 
+ , we have a relationship between 
 \begin_inset Formula $\underline{\omega}$
 \end_inset
 
