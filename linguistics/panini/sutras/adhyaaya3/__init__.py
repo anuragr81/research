@@ -21,10 +21,10 @@ class chliLuNgi_3010460:
         if isinstance(dhaatu_node._data,Dhaatu) and \
             isinstance(suffix_node._data,Suffix) and \
             suffix_node._data._lakaara in ('luNg',) and \
-                ''.join(suffix_node._data._suffix) != 'sNcch' and \
+                ''.join(suffix_node._data._suffix) != 'sNNch' and \
                     ''.join(suffix_node._data._suffix) != 'chlNc':
                     # kartari shap is applied only in certain lakaaras
-                 return Suffix("sNcch")
+                 return Suffix("sNNch")
         return []
   
 
@@ -86,12 +86,12 @@ class parasmaipadaanaaMNnalatususXthalaXthusaNnalvamaaH_3040820:
         if not isinstance(anga_node,Node):
             raise ValueError("anga_node must be of Node type")
         if isinstance(node._data,Suffix) :
-            
-            suffix_data=[x['output'] for x in node._output if 'new' in x and x['new']][-1]
-            suffix_name =''.join(suffix_data)
-            mapping= {'tip':['Nn','a','l'], 'tas':['a','t','u','s'], 'jhi':['u','s'], 
-                          'sip':['Xth','a','l'], 'Xthas':['a','Xth','u','s'],'Xtha':['a'], 
-                          'mip':['Nn','a','l'], 'vas':['v','a'], 'mas':['m','a']}
-            if suffix_name in tiNg_pratyayaaH() and suffix_name in mapping: 
-                return {'output':mapping[suffix_name],'mutate':True}
+            if node._data._lakaara == "liXt":
+                suffix_data=[x['output'] for x in node._output if 'new' in x and x['new']][-1]
+                suffix_name =''.join(suffix_data)
+                mapping= {'tip':['Nn','a','l'], 'tas':['a','t','u','s'], 'jhi':['u','s'], 
+                              'sip':['Xth','a','l'], 'Xthas':['a','Xth','u','s'],'Xtha':['a'], 
+                              'mip':['Nn','a','l'], 'vas':['v','a'], 'mas':['m','a']}
+                if suffix_name in tiNg_pratyayaaH() and suffix_name in mapping: 
+                    return {'output':mapping[suffix_name],'mutate':True}
         return node.get_output()

@@ -114,8 +114,8 @@ class sichivRiddhiHparasmaipadeXshu_7020021:
         anga_string= node.get_output()
         if not anga_string : 
             return anga_string 
-        if anga_string[-1] in ach() and ''.join(suffix_node._data._suffix)=='sNcch': 
-            #if :# sNcch is followed by parasmaipad
+        if anga_string[-1] in ach() and ''.join(suffix_node._data._suffix)=='sNNch': 
+            #if :# sNNch is followed by parasmaipad
             input_nodes=[v for k,v in suffix_node._output[-1]['inputs'].items() if isinstance(v,Node)]            
             
             if  input_nodes and ''.join(input_nodes[-1]._data._suffix) in parasmaidpada_pratyayaaH():
@@ -189,6 +189,7 @@ class chajoHkughiNnNnyatoH_7030520:
         jakaar_to_ku = lambda y : 'g' if y=='j' else y
         if suffix_data[0] in ('gh',) or suffix_data[-1] in ('gh',) or ''.join(suffix_data) == "Nnyat":
             #return ''.join(jakaar_to_ku(chakaar_to_ku(j)) for j in x)
+            # print ("chajoHkughiNnNnyatoH_7030520= %s"%[jakaar_to_ku(chakaar_to_ku(j)) for j in node.get_output()])
             return [jakaar_to_ku(chakaar_to_ku(j)) for j in node.get_output()]
         
         return node.get_output()
@@ -289,7 +290,7 @@ class astisichoapRikte_7030960:
         # ekaala saarvadhaatuaka
         if suffix_data.is_saarvadhaatuka() and suffix_data._suffix[0] in hal() and numachs ==1:
             if ''.join(suffix_data ._suffix) != 'iiXt':
-                if (isinstance(dhaatu_node._data,Dhaatu) and ''.join(dhaatu_node._data._data)=='asNc') :
+                if (isinstance(dhaatu_node._data,Dhaatu) and ''.join(dhaatu_node._data._data)=='asNN') :
                     return Suffix("iiXt")
         return []
 
@@ -309,7 +310,7 @@ class astisichoapRikte_7030961:
         # ekaala saarvadhaatuaka
         if suffix_data.is_saarvadhaatuka() and suffix_data._suffix[0] in hal() and numachs ==1:
             if ''.join(suffix_data._suffix) != 'iiXt':
-                if ''.join(presuffix_node._data._suffix)=='sNcch' :
+                if ''.join(presuffix_node._data._suffix)=='sNNch' :
                     return Suffix("iiXt")
                 
                     

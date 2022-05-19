@@ -63,6 +63,7 @@ def apply_transformation(transformation_rule,new_expr):
     #print(transformation_rule.__name__)
     sig_params = inspect.signature(transformation_rule.__call__).parameters
     for i in range(0,len(new_expr)):
+        #print(transformation_rule.__name__ + ": " + ''.join(new_expr[i-1].get_output()) + "+" + ''.join(new_expr[i].get_output()))
         if isinstance(new_expr[i]._data,Suffix):
             if i>0 :
                 if isinstance(new_expr[i-1]._data,Dhaatu):
@@ -78,8 +79,10 @@ def apply_transformation(transformation_rule,new_expr):
                         new_expr[i-1].set_output(transformation_rule,suffix_node=new_expr[i])
                     if 'anga_node' in sig_params :
                         
-                        print(transformation_rule.__name__ + ": " + ''.join(new_expr[i-1].get_output()) + "+" + ''.join(new_expr[i].get_output()))
-                        new_expr[i-1].set_output(transformation_rule,anga_node=new_expr[i])
+                        
+                        
+                        ## WORKS: new_expr[i-1].set_output(transformation_rule,anga_node=new_expr[i])
+                        new_expr[i].set_output(transformation_rule,anga_node=new_expr[i-1])
 
                     
             if 'anga_node' not in sig_params  and 'suffix_node' not in sig_params :
@@ -317,7 +320,7 @@ if F:
 else:   
     
     #pprint(generate_tibaadi("paXthNN"))   ;sys.exit(0)
-    if F:
+    if T:
         sup_expr = [Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]
         pprint(generate_subaadi(sup_expr ,linga=1))   ;
         sys.exit(0)
