@@ -44,8 +44,8 @@ def get_sutras_ordered ():
 
 def transformation_sutras():
     ll = [2040850,3010331,3040820,6010080,6010630, 6010750, 6040880,6010980, 
-          6010990,6011030, 6041200, 6041480, 7010030,7010010, 7010020, 7020021, 
-          7021150, 7021160, 7030520, 7030840,7031010, 
+          6010990,6011030, 6041200, 6041480, 7010030,7010010, 7010020, 7010120,
+          7020021, 7021150, 7021160, 7030520, 7030840,7031010,
           8010150, 8020660, 8030059]
     return sorted(float(x) for x in ll)
 
@@ -78,7 +78,7 @@ def apply_transformation(transformation_rule,new_expr):
                         new_expr[i-1].set_output(transformation_rule,suffix_node=new_expr[i])
                     if 'anga_node' in sig_params :
                         
-                        #print(transformation_rule.__name__)
+                        print(transformation_rule.__name__ + ": " + ''.join(new_expr[i-1].get_output()) + "+" + ''.join(new_expr[i].get_output()))
                         new_expr[i-1].set_output(transformation_rule,anga_node=new_expr[i])
 
                     
@@ -283,7 +283,7 @@ def generate_tibaadi(dhaatu_string):
     return res
     
 
-def generate_subaadi(sup_expression):
+def generate_subaadi(sup_expression,linga):
     if not isinstance(sup_expression,list):
         raise ValueError("sup_expression must be a list of Nodes")
     if any (not isinstance(x,Node) for x in sup_expression):
@@ -296,7 +296,7 @@ def generate_subaadi(sup_expression):
 
     for sup_string in sups :
         cur_sup_expression=deepcopy(sup_expression)
-        cur_sup_expression.append(Node(Suffix(sup_string),parent1=None))        
+        cur_sup_expression.append(Node(Suffix(sup_string,linga=linga),parent1=None))        
         #print(sup_string )
         result = output_string (cur_sup_expression)
         #print(sup_string + " gives " +result )
@@ -319,12 +319,14 @@ else:
     #pprint(generate_tibaadi("paXthNN"))   ;sys.exit(0)
     if F:
         sup_expr = [Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]
-        pprint(generate_subaadi(sup_expr ))   ;
+        pprint(generate_subaadi(sup_expr ,linga=1))   ;
         sys.exit(0)
     
     else:
         #Xtaa
-        expression=[Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None),Node(Suffix("shas"),parent1=None)]
+        #
+        expression=[Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tip",lakaara='laXt'),parent1=None)]
+        #expression=[Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None),Node(Suffix("Xtaa",linga=1),parent1=None)]
         #expression=[Node(Dhaatu(parse_string("paXthNN")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]
     
     

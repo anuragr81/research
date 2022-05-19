@@ -90,7 +90,7 @@ class eNGipararuupam_6010910:
 
 """
 
-class parthamayoHpuurvasavarNnaH_6010980:
+class prathamayoHpuurvasavarNnaH_6010980:
     def __init__(self):
         self._types={'node':['literal'],'suffix_node':['literal']}
     def __call__(self,node, anga_node):
@@ -116,10 +116,13 @@ class tasmaatchhasonaHpuMsi_6010990:
         if not node.get_output():
             return node.get_output()
         
+        
         if isinstance(node._data,Suffix):
             pratyaya =''.join(node._data._suffix)
             if pratyaya in sup_pratyayaaH()[0:6] and pratyaya=='shas' : # only shas considered
-                if node._data._linga == 1 and last_rule_applied(node._prev)==6010980:
+                #last_rule_applied = list_past_rules_applied(node._prev)[-1]
+                # TODO: ensure that this happens only just after 6010980 (prathamayoHpuurvasavarNnaH) is applied
+                if node._data._linga == 1 :
                     return node.get_output()[0:-1] + ['n']
         
         

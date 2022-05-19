@@ -69,7 +69,7 @@ def lakaaras():
     return ('laXt','loXt','lRiXt','laNg','luNg','lRiNg','liNg1','liNg2','liXt','luXt')
 
 class Suffix:
-    def __init__(self,suffix,lakaara=None):
+    def __init__(self,suffix,lakaara=None,linga=None):
         
         if lakaara is not None:
             if lakaara not in lakaaras():
@@ -77,6 +77,12 @@ class Suffix:
         self._lakaara=lakaara
 
         
+        if linga is not None:
+            if linga not in (0,1,2):
+                raise ValueError("Invalid linga")            
+        self._linga=linga
+
+
         if isinstance(suffix,str):
             self._suffix = parse_string(suffix)
         elif isinstance(suffix,list) and all(isinstance(j,str) for j in suffix):
@@ -154,6 +160,12 @@ def find_eldest_parent2_of_condition(node,cond):
     else:
         return None
     
+    
+def list_past_rules_applied (nd):
+    """
+    Returns list of rules applied so far for the node:nd
+    """
+    return [int(x['rule'].__name__.split("_")[-1]) for x in nd._output if 'rule' in x]
     
 class Node:
     def __init__(self,data,parent1,parent2=None):

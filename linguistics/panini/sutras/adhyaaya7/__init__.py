@@ -1,19 +1,17 @@
 from ..common_definitions import vriddhi,upadhaa, ach, Suffix, Node , hal
 from ..common_definitions import get_dhaatu_properties,pratyaahaara, guNna, Dhaatu
-from ..common_definitions import parasmaidpada_pratyayaaH
+from ..common_definitions import parasmaidpada_pratyayaaH, sup_pratyayaaH
 
 class yuvoranaakau_7010010:
     def __init__(self):
         self._types={'anga_node':[],'node':[Suffix,'literal']}
-    def __call__(self,anga_node,node):
+    def __call__(self,node):
         if not isinstance(node,Node):
             raise ValueError("suffix must of type Node")
         
         if not isinstance(node._data,Suffix):
             raise ValueError("suffix must of type Suffix")
             
-        if not isinstance(anga_node,Node):
-            raise ValueError("anga_node must of type Node")
         suffix_string= node.get_output()
         
         if suffix_string[-2:] == ["y","u"]:
@@ -22,6 +20,35 @@ class yuvoranaakau_7010010:
             return suffix_string[0:-2] + ["a","k","a"]
     
         return suffix_string
+
+
+class XtaaNgasiNgasaaminaatsyaaH_7010120:
+    def __init__(self):
+        self._types={'anga_node':[],'node':[Suffix,'literal']}
+    def __call__(self,node, anga_node):
+        if not isinstance(node,Node):
+            raise ValueError("suffix must of type Node")
+        
+        if not isinstance(node._data,Suffix):
+            raise ValueError("suffix must of type Suffix")
+            
+        if not isinstance(anga_node,Node):
+            raise ValueError("anga_node must of type Node")
+            
+        sutra_mapping = {6:['i','n','a'],12:['aa','t'],15:['s','y','a']}
+        taaNgasiNgas = dict((x,sutra_mapping [i]) for i,x in enumerate(sup_pratyayaaH()) if i in (6,12,15))
+        suffix_string= node.get_output()
+        suffix_data = ''.join(node._data._suffix)
+        #if suffix_data in taaNgasiNgas:
+        #    if suffix_string[-2:] == ["y","u"]:
+        #        return suffix_string[0:-2] + ["a","n","a"]
+        #    if suffix_string[-2:] == ["v","u"]:
+        #        return suffix_string[0:-2] + ["a","k","a"]
+    
+        return suffix_string
+
+
+
 
 class jhoantaH_7010030:
     def __init__(self):
