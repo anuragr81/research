@@ -39,7 +39,8 @@ class XtaaNgasiNgasaaminaatsyaaH_7010120:
         taaNgasiNgas = dict((x,sutra_mapping [i]) for i,x in enumerate(sup_pratyayaaH()) if i in (6,12,15))
         suffix_string= node.get_output()
         suffix_data = ''.join(node._data._suffix)
-        #if suffix_data in taaNgasiNgas:
+        if suffix_data in taaNgasiNgas:
+            return taaNgasiNgas[suffix_data]
         #    if suffix_string[-2:] == ["y","u"]:
         #        return suffix_string[0:-2] + ["a","n","a"]
         #    if suffix_string[-2:] == ["v","u"]:

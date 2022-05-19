@@ -44,6 +44,7 @@ def get_sutras_ordered ():
 
 def transformation_sutras():
     ll = [2040850,3010331,3040820,6010080,6010630, 6010750, 6040880,6010980, 
+          6010840,6010841,
           6010990,6011030, 6041200, 6041480, 7010030,7010010, 7010020, 7010120,
           7020021, 7021150, 7021160, 7030520, 7030840,7031010,
           8010150, 8020660, 8030059]
@@ -320,7 +321,7 @@ if F:
 else:   
     
     #pprint(generate_tibaadi("paXthNN"))   ;sys.exit(0)
-    if T:
+    if F:
         sup_expr = [Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]
         pprint(generate_subaadi(sup_expr ,linga=1))   ;
         sys.exit(0)
@@ -328,8 +329,8 @@ else:
     else:
         #Xtaa
         #
-        expression=[Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tip",lakaara='laXt'),parent1=None)]
-        #expression=[Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None),Node(Suffix("Xtaa",linga=1),parent1=None)]
+        #expression=[Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tip",lakaara='laXt'),parent1=None)]
+        expression=[Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None),Node(Suffix("Xtaa",linga=1),parent1=None)]
         #expression=[Node(Dhaatu(parse_string("paXthNN")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]
     
     

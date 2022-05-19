@@ -1,5 +1,5 @@
 from ..common_definitions import Suffix,Node, Dhaatu, ach, hal, sup_pratyayaaH
-from ..common_definitions import pratyaahaara
+from ..common_definitions import pratyaahaara, make_diirgha
 
 from ..common_definitions import find_eldest_parent1_of_condition 
 from ..common_definitions import find_eldest_parent2_of_condition
@@ -70,6 +70,36 @@ class echoayavaayaavaH_6010750:
             
         return node_output
 
+
+class aadguNnaH_6010840:
+    def __init__(self):
+        self._types={'node':['literal'],'suffix_node':['literal']}
+    def __call__(self,node, anga_node):
+        node_output= node.get_output()
+        if not node.get_output():
+            return node.get_output()                
+        
+        if anga_node.get_output()[-1] in pratyaahaara('a','ch') and node.get_output()[0] in pratyaahaara('a','ch'):
+            
+            raise ValueError("Pending Gunna")
+            
+            
+        return node_output
+
+
+class aadguNnaH_6010841:
+    def __init__(self):
+        self._types={'node':['literal'],'suffix_node':['literal']}
+    def __call__(self,node, suffix_node):
+        node_output= node.get_output()
+        if not node.get_output():
+            return node.get_output()
+        if isinstance(suffix_node._data,Suffix):                  
+            if node_output[-1]  in pratyaahaara('a','ch') and suffix_node.get_output()[0] in pratyaahaara('a','ch'):
+                return node_output[:-1] #skip because the other instance of the rule uses the diirgha
+        return node_output
+
+
 """
 class eNGipararuupam_6010910:
     def __init__(self):
@@ -89,6 +119,40 @@ class eNGipararuupam_6010910:
         return node_output
 
 """
+
+
+class akaHsavarNnediirghaH_6010970:
+    def __init__(self):
+        self._types={'node':['literal'],'suffix_node':['literal']}
+    def __call__(self,node, anga_node):
+        node_output= node.get_output()
+        if not node.get_output():
+            return node.get_output()
+        
+        if isinstance(anga_node._data,Suffix):
+            anga_string =''.join(anga_node._data._suffix)
+            if anga_string [-1] in pratyaahaara('a','k') :
+                puurva_varNna=anga_string [-1]
+                if node.get_output()[0] == puurva_varNna:
+                        return node_output[:-1] #skip because the other instance of the rule uses the diirgha
+            
+        return node_output
+
+class akaHsavarNnediirghaH_6010971:
+    def __init__(self):
+        self._types={'node':['literal'],'suffix_node':['literal']}
+    def __call__(self,node, suffix_node):
+        node_output= node.get_output()
+        if not node.get_output():
+            return node.get_output()
+        
+        if isinstance(suffix_node._data,Suffix):            
+            if node_output[-1] in pratyaahaara('a','k') :
+                puurva_varNna=node_output[-1]
+                if suffix_node.get_output()[0] == puurva_varNna:
+                    return [make_diirgha(node_output[0])] + node_output[1:]
+            
+        return node_output
 
 class prathamayoHpuurvasavarNnaH_6010980:
     def __init__(self):

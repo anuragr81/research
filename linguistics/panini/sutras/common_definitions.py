@@ -68,6 +68,24 @@ def insertion_rule(x):
 def lakaaras():
     return ('laXt','loXt','lRiXt','laNg','luNg','lRiNg','liNg1','liNg2','liXt','luXt')
 
+
+def make_diirgha(x):
+    
+    if x not in ach():
+        raise ValueError("must be an ach")
+    
+    if x in ('a','aa',):
+        return "aa"
+    if x in ("ii",'i',):
+        return 'ii'
+    if x in ('u','uu',):
+        return 'uu'
+    if x in ("Ri","Rii",):
+        return 'Rii'
+    if x in ('lRii','lRi',):
+        return 'lRii'
+    
+
 class Suffix:
     def __init__(self,suffix,lakaara=None,linga=None):
         
@@ -221,7 +239,7 @@ def get_supported_types ():
 
 
 def ach():
-    return ("aa","ii","uu","Rii") + pratyaahaara('a','ch')
+    return ("aa","ii","uu","Rii",'lRii') + pratyaahaara('a','ch')
 
 def pratyaahaara(start,end):
     """   
@@ -244,7 +262,7 @@ def pratyaahaara(start,end):
 
     """
     
-    plist= ({'letters':("a","i",'ii',"u",'uu',),'marker':'Nn'},{'letters':('Ri','Rii','lRi'),'marker':'k'},
+    plist= ({'letters':("a","i",'ii',"u",'uu',),'marker':'Nn'},{'letters':('Ri','Rii','lRi','lRii'),'marker':'k'},
         {'letters':('e','o',),'marker':'Ng'},{'letters':('ai','au'),'marker':'ch'},{'letters':('h','y','v','r',),'marker':'Xt'},{'letters':('l',),'marker':'N'},
         {'letters':('Nc','m','Ng','Nn','n'),'marker':'m'},{'letters':('jh','bh'),'marker':'Nc'},{'letters':('gh','Xdh','dh'),'marker':'Xsh'},
         {'letters':('j','b','g','Xd','d',),'marker':'sh'},{'letters':('kh','ph','chh','Xth','th','ch','Xt','t',),'marker':'v'},
