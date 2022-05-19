@@ -43,8 +43,9 @@ def get_sutras_ordered ():
     return OrderedDict(sorted(all_sutras))
 
 def transformation_sutras():
-    ll = [2040850,3010331,3040820,6010080,6010630, 6010750, 6040880,6011030, 6041200, 6041480, 
-          7010030,7010010, 7010020, 7020021, 7021150, 7021160, 7030520, 7030840,7031010, 
+    ll = [2040850,3010331,3040820,6010080,6010630, 6010750, 6040880,6010980, 
+          6010990,6011030, 6041200, 6041480, 7010030,7010010, 7010020, 7020021, 
+          7021150, 7021160, 7030520, 7030840,7031010, 
           8010150, 8020660, 8030059]
     return sorted(float(x) for x in ll)
 
@@ -253,16 +254,16 @@ def output_string (expr):
 def test_siddhis ():
     
     
-    assert output_string ([Node(Dhaatu(parse_string("bhajNc")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]) == "bhaaga"
-    assert output_string ([Node(Dhaatu(parse_string("NniiNc")),parent1=None),Node(Suffix("Nnvul"),parent1=None)]) == "naayaka"
+    assert output_string ([Node(Dhaatu(parse_string("bhajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]) == "bhaaga"
+    assert output_string ([Node(Dhaatu(parse_string("NniiNN")),parent1=None),Node(Suffix("Nnvul"),parent1=None)]) == "naayaka"
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tip",lakaara='laXt'),parent1=None)]) == "bhavati"
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tas",lakaara='laXt'),parent1=None)]) == "bhavatas"
     assert output_string ([Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("mip",lakaara='laXt'),parent1=None)]) == "bhavaami"
-    assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='luXt'),parent1=None)]) == "paXthitaa"
-    assert output_string ([Node(Dhaatu(parse_string("chiNc")),parent1=None),Node(Suffix("tip",lakaara='luNg'),parent1=None)] ) == "achaiXshiit"
-    assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='lRiXt'),parent1=None)]) == "paXthiXshyati"
-    assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tip",lakaara='liXt'),parent1=None)]) == "papaaXtha"
-    #assert output_string ([Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]) == "peXthatuH"
+    assert output_string ([Node(Dhaatu(parse_string("paXthNN")),parent1=None),Node(Suffix("tip",lakaara='luXt'),parent1=None)]) == "paXthitaa"
+    assert output_string ([Node(Dhaatu(parse_string("chiNN")),parent1=None),Node(Suffix("tip",lakaara='luNg'),parent1=None)] ) == "achaiXshiit"
+    assert output_string ([Node(Dhaatu(parse_string("paXthNN")),parent1=None),Node(Suffix("tip",lakaara='lRiXt'),parent1=None)]) == "paXthiXshyati"
+    assert output_string ([Node(Dhaatu(parse_string("paXthNN")),parent1=None),Node(Suffix("tip",lakaara='liXt'),parent1=None)]) == "papaaXtha"
+    #assert output_string ([Node(Dhaatu(parse_string("paXthNN")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]) == "peXthatuH"
     # liNg is aardhadhaatuk in aashir-liNg
 
 
@@ -288,19 +289,18 @@ def generate_subaadi(sup_expression):
     if any (not isinstance(x,Node) for x in sup_expression):
         raise ValueError("sup_expression must be a list of Nodes")
     res = []
-    sups = ('sNc','au','jas','am','auXt','shas', 'Xtaa','bhyaam','bhis',
+    sups = ('sNN','au','jas','am','auXt','shas', 'Xtaa','bhyaam','bhis',
             'Nge','bhyaam','bhyas','Ngasi','bhyaam','bhyas',
             'Ngas','os','am','Ngi','os','sup')
     
 
     for sup_string in sups :
         cur_sup_expression=deepcopy(sup_expression)
-        cur_sup_expression.append(Node(Suffix(sup_string),parent1=None))
-        
-        print(sup_string )
+        cur_sup_expression.append(Node(Suffix(sup_string),parent1=None))        
+        #print(sup_string )
         result = output_string (cur_sup_expression)
-        print(sup_string + " gives " +result )
-        print(result)
+        #print(sup_string + " gives " +result )
+        #print(result)
         res.append(result)
     return res
 
@@ -308,7 +308,7 @@ def generate_subaadi(sup_expression):
 F=False
 T=True
 
-if T:
+if F:
     test_siddhis ()
     #print("Test")
     #f=Functor()
@@ -316,15 +316,16 @@ if T:
     
 else:   
     
-    #pprint(generate_tibaadi("paXthNc"))   ;sys.exit(0)
+    #pprint(generate_tibaadi("paXthNN"))   ;sys.exit(0)
     if F:
-        sup_expr = [Node(Dhaatu(parse_string("rajNc")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]
+        sup_expr = [Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]
         pprint(generate_subaadi(sup_expr ))   ;
         sys.exit(0)
     
     else:
-        expression=[Node(Dhaatu(parse_string("rajNc")),parent1=None),Node(Suffix("ghaNc"),parent1=None),Node(Suffix("am"),parent1=None)]
-        #expression=[Node(Dhaatu(parse_string("paXthNc")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]
+        #Xtaa
+        expression=[Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None),Node(Suffix("shas"),parent1=None)]
+        #expression=[Node(Dhaatu(parse_string("paXthNN")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]
     
     
     # sorting order is increasing in general but can be superseded by nitya condition (if nitya occurs in a later sutra then that later sutra takes advantage) 
@@ -333,7 +334,7 @@ else:
     
     print("NEXT: luNglaNglRiNgkXshvaXdudaataH has prepending issue because we don't trace insertion/prepending of vikaraNna histories. This should allow the immediate dhaatu in context.")
     # for paXtheta - we need to have for liNg : yaasuXtparasmaipadeXshuudaatto Ngichcha 3.4.103 and then ato yeyaH (because of a-ending paXtha after shap)
-    print("PENDING : https://ashtadhyayi.com/sutraani/6/4/120, pararuupa for subaadi,eruH ")
+    print("PENDING :rename of anga_node to nonsuffix_node, https://ashtadhyayi.com/sutraani/6/4/120, ,eruH ")
     
     
     

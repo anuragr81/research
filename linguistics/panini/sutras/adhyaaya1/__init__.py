@@ -87,7 +87,7 @@ class lashakvataddhite_1030080:
             raise ValueError("Must be of Suffix type")
         if not node.get_output():
             return node.get_output()
-        if not suffix.is_taddhita and node.get_output()[0] in ("l","sh","k","kh","g","gh","Nc"):
+        if not suffix.is_taddhita and node.get_output()[0] in ("l","sh","k","kh","g","gh","NN"):
             return node.get_output()[1:]
     
         return node.get_output()

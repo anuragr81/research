@@ -70,6 +70,61 @@ class echoayavaayaavaH_6010750:
             
         return node_output
 
+"""
+class eNGipararuupam_6010910:
+    def __init__(self):
+        self._types={'node':['literal'],'suffix_node':['literal']}
+    def __call__(self,node, anga_node):
+        node_output= node.get_output()
+        if not node.get_output():
+            return node.get_output()
+        
+        if isinstance(anga_node._data,Suffix):
+            pratyaya =''.join(anga_node._data._suffix)
+            if pratyaya in sup_pratyayaaH() :
+                # suffix is sup
+                    if node.get_output()[-1] in pratyaahaara('e','Ng'):
+                        return node_output[1:]
+            
+        return node_output
+
+"""
+
+class parthamayoHpuurvasavarNnaH_6010980:
+    def __init__(self):
+        self._types={'node':['literal'],'suffix_node':['literal']}
+    def __call__(self,node, anga_node):
+        node_output= node.get_output()
+        if not node.get_output():
+            return node.get_output()
+        
+        if isinstance(anga_node._data,Suffix):
+            pratyaya =''.join(anga_node._data._suffix)
+            if pratyaya in sup_pratyayaaH()[0:6] : # only prathhama and dvitiiyaa considered
+                # suffix is sup
+                    if node.get_output()[-1] in ach() and pratyaya[0] in ach():
+                        return node_output[1:]
+            
+        return node_output
+
+class tasmaatchhasonaHpuMsi_6010990:
+    def __init__(self):
+        self._types={'node':['literal'],'suffix_node':['literal']}
+        
+    def __call__(self,node):
+        node_output= node.get_output()
+        if not node.get_output():
+            return node.get_output()
+        
+        if isinstance(node._data,Suffix):
+            pratyaya =''.join(node._data._suffix)
+            if pratyaya in sup_pratyayaaH()[0:6] and pratyaya=='shas' : # only shas considered
+                if node._data._linga == 1 and last_rule_applied(node._prev)==6010980:
+                    return node.get_output()[0:-1] + ['n']
+        
+        
+        return node_output
+
 
 class amipuurvaH_6011030:
     def __init__(self):
@@ -80,10 +135,12 @@ class amipuurvaH_6011030:
             return node.get_output()
         
         if isinstance(anga_node._data,Suffix):
-            if ''.join(anga_node._data._suffix) in sup_pratyayaaH():
+            pratyaya =''.join(anga_node._data._suffix)
+            if pratyaya in sup_pratyayaaH() :
+                if pratyaya == 'am':
                 # suffix is sup
-                if node.get_output()[-1] in pratyaahaara('a','k'):
-                    return node_output[1:]
+                    if node.get_output()[-1] in pratyaahaara('a','k'):
+                        return node_output[1:]
             
         return node_output
 

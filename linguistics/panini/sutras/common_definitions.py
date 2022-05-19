@@ -123,8 +123,8 @@ class Dhaatu:
 
 
 def get_dhaatu_properties(dhaatu_string):
-    dhaatu_store = {'chiNc':{'aniXt':True}, 
-                    'paXthNc':{'aniXt':False} 
+    dhaatu_store = {'chiNN':{'aniXt':True}, 
+                    'paXthNN':{'aniXt':False} 
                     }
     return dhaatu_store [dhaatu_string]
 
@@ -261,12 +261,12 @@ def halantyam_ignored_sutras():
     return []
 
 def hal():
-    return ("kh","k","gh","g","Ng","Nc","Nn","chh","ch","jh","j",
+    return ("kh","k","gh","g","Ng","Nc","NN","Nn","chh","ch","jh","j",
             "Xth","Xt","Xdh","Xd","Xsh","th","t","dh","d","n",
             "ph","p","bh","b","m","y","r","l","v","sh",
             "s","h")
 def anunaasika():
-    return ("Ng","Nc","Nn","M","m")
+    return ("Ng","Nc","Nn","M","m","NN")
 
 def chu():
     return ("ch","chh","j","jh","Nc")
@@ -277,7 +277,7 @@ def Xtu():
 
 
 def unclassified_pratyayaaH():
-    return ('sNcch','chlNc','shap','taas','sya','aXt','iiXt')
+    return ('sNNch','chlNN','shap','taas','sya','aXt','iiXt')
 def san_pratyayaaH():
     return ("san","kyach","kaamyach","kyaNg","kyaXsh",
             "kvip","Nnich","yaNg","yak","aaya",
@@ -311,7 +311,7 @@ def strii_pratyayaaH():
             "Nniin","uuNg","ti","XshyaNg","Xshpha")
 
 def sup_pratyayaaH():
-    return ('sNc', 'au','jas','am','auXt','shas','Xtaa','bhyaam','bhis','Nge','bhyaam',
+    return ('sNN', 'au','jas','am','auXt','shas','Xtaa','bhyaam','bhis','Nge','bhyaam',
         'bhyas','Ngasi','bhyaam','bhyas','Ngas','os','aam','Ngi','os','sup')
 
 
