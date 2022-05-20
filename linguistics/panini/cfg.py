@@ -44,7 +44,7 @@ def get_sutras_ordered ():
 
 def transformation_sutras():
     ll = [2040850,3010331,3040820,6010080,6010630, 6010750, 6040880,6010980, 
-          6010840,6010841,
+          6010840,6010841,6010850,6010851,
           6010990,6011030, 6041200, 6041480, 7010030,7010010, 7010020, 7010120,
           
           7020021, 7021150, 7021160, 7030520, 7030840,7031010,7031020,
@@ -331,7 +331,7 @@ else:
         #Xtaa
         #
         #expression=[Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tip",lakaara='laXt'),parent1=None)]
-        expression=[Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None),Node(Suffix("bhyaam",linga=1),parent1=None)]
+        expression=[Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None),Node(Suffix("au",linga=1),parent1=None)]
         #expression=[Node(Dhaatu(parse_string("paXthNN")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]
     
     

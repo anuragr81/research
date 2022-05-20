@@ -1,6 +1,6 @@
 from ..common_definitions import Suffix,Node, Dhaatu, ach, hal, sup_pratyayaaH
 from ..common_definitions import pratyaahaara, make_diirgha, guna_letters_for_aat
-
+from ..common_definitions import vriddhi
 from ..common_definitions import find_eldest_parent1_of_condition 
 from ..common_definitions import find_eldest_parent2_of_condition
 
@@ -95,8 +95,38 @@ class aadguNnaH_6010841:
         node_output= node.get_output()
         if not node.get_output():
             return node.get_output()
-        if isinstance(suffix_node._data,Suffix):                  
+        if isinstance(suffix_node._data,Suffix) and suffix_node.get_output():                  
             if node_output[-1]  in ('a','aa') and suffix_node.get_output()[0] in pratyaahaara('i','k'):
+                return node_output[:-1] #skip because the other instance of the rule uses the diirgha
+        return node_output
+
+
+class vRiddhirechi_6010850:
+    def __init__(self):
+        self._types={'node':['literal'],'suffix_node':['literal']}
+    def __call__(self,node, anga_node):
+        node_output= node.get_output()
+        if not node.get_output():
+            return node.get_output()                
+        if anga_node.get_output():
+            suffix_first_letter = node.get_output()[0]
+            if anga_node.get_output()[-1] in ('a','aa') and suffix_first_letter  in pratyaahaara('e','ch'):
+                
+                return [vriddhi(node.get_output()[0])]+node.get_output()[1:]
+            
+            
+        return node_output
+
+
+class vRiddhirechi_6010851:
+    def __init__(self):
+        self._types={'node':['literal'],'suffix_node':['literal']}
+    def __call__(self,node, suffix_node):
+        node_output= node.get_output()
+        if not node.get_output():
+            return node.get_output()
+        if isinstance(suffix_node._data,Suffix) and suffix_node.get_output():                  
+            if node_output[-1]  in ('a','aa') and suffix_node.get_output()[0] in pratyaahaara('e','ch'):
                 return node_output[:-1] #skip because the other instance of the rule uses the diirgha
         return node_output
 
@@ -167,8 +197,9 @@ class prathamayoHpuurvasavarNnaH_6010980:
             pratyaya =''.join(node._data._suffix)
             if pratyaya in sup_pratyayaaH()[0:6] : # only prathhama and dvitiiyaa considered
                 # suffix is sup
-                    if anga_node.get_output()[-1] in ach() and node.get_output()[0] in ach():
-                        return node_output[1:]
+                    if anga_node.get_output() and anga_node.get_output()[-1] in ach() and node.get_output()[0] in ach():
+                       if node.get_output()[0] not in pratyaahaara('i', 'ch'): ## naadichi
+                           return node_output[1:]
             
         return node_output
 

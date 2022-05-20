@@ -17,7 +17,10 @@ def parse_string(input_str):
     """
     build a list of aksharas from the string - unknown letters are ignored
     """
-    match_re = "("+'|'.join(hal() + ach())+")" + "(.*)"
+    sorted_achs= ('lRii','Rii', 'lRi', 'Ri','ai', "ii","uu",'au',"aa",'a', 'i', 'u', 'e', 'o',)
+    match_re = "("+'|'.join(hal() + sorted_achs)+")" + "(.*)"
+    
+    
     matches = True
     x_str = input_str
     output=[]
