@@ -80,7 +80,7 @@ class aadguNnaH_6010840:
             return node.get_output()                
         if anga_node.get_output():
             suffix_first_letter = node.get_output()[0]
-            if anga_node.get_output()[-1] in ('a','aa') and suffix_first_letter  in pratyaahaara('a','k'):
+            if anga_node.get_output()[-1] in ('a','aa') and suffix_first_letter  in pratyaahaara('i','k'):
                 
                 return guna_letters_for_aat(node.get_output()[0])+node.get_output()[1:]
             
@@ -96,7 +96,7 @@ class aadguNnaH_6010841:
         if not node.get_output():
             return node.get_output()
         if isinstance(suffix_node._data,Suffix):                  
-            if node_output[-1]  in pratyaahaara('a','ch') and suffix_node.get_output()[0] in pratyaahaara('a','ch'):
+            if node_output[-1]  in ('a','aa') and suffix_node.get_output()[0] in pratyaahaara('i','k'):
                 return node_output[:-1] #skip because the other instance of the rule uses the diirgha
         return node_output
 
@@ -163,11 +163,11 @@ class prathamayoHpuurvasavarNnaH_6010980:
         if not node.get_output():
             return node.get_output()
         
-        if isinstance(anga_node._data,Suffix):
-            pratyaya =''.join(anga_node._data._suffix)
+        if isinstance(node._data,Suffix):
+            pratyaya =''.join(node._data._suffix)
             if pratyaya in sup_pratyayaaH()[0:6] : # only prathhama and dvitiiyaa considered
                 # suffix is sup
-                    if node.get_output()[-1] in ach() and pratyaya[0] in ach():
+                    if anga_node.get_output()[-1] in ach() and node.get_output()[0] in ach():
                         return node_output[1:]
             
         return node_output

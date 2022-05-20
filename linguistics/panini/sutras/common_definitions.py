@@ -69,34 +69,6 @@ def lakaaras():
     return ('laXt','loXt','lRiXt','laNg','luNg','lRiNg','liNg1','liNg2','liXt','luXt')
 
 
-def make_diirgha(x):
-    
-    if x not in ach():
-        raise ValueError("must be an ach")
-    
-    if x in ('a','aa',):
-        return "aa"
-    if x in ("ii",'i',):
-        return 'ii'
-    if x in ('u','uu',):
-        return 'uu'
-    if x in ("Ri","Rii",):
-        return 'Rii'
-    if x in ('lRii','lRi',):
-        return 'lRii'
-
-def guna_letters_for_aat(x):
-    
-    if x in ( 'i', 'ii',):
-        return ['e']
-    if x in ('u', 'uu',):
-        return ['o']
-    if x in ('Ri', 'Rii', ):
-        return ['a','r']
-    if x in ('lRi', 'lRii',):
-        return ['a','l']
-    
-    raise ValueError("No guNna support")
 
 class Suffix:
     def __init__(self,suffix,lakaara=None,linga=None):
@@ -378,7 +350,16 @@ def diirgha(x):
         return "uu"
     else:
         return x
-    
+
+
+def guNna(x):
+    if x =="i" or x=="i":
+        return "e"
+    elif x == "u" or x=="uu":
+        return "o"
+    else:
+        return x
+            
 def vriddhi(x):
     if x =="a":
         return "aa"
@@ -392,12 +373,32 @@ def vriddhi(x):
         return x
     
 
-def guNna(x):
-    if x =="i" or x=="i":
-        return "e"
-    elif x == "u" or x=="uu":
-        return "o"
-    else:
-        return x
-        
+def make_diirgha(x):
+    
+    if x not in ach():
+        raise ValueError("must be an ach")
+    
+    if x in ('a','aa',):
+        return "aa"
+    if x in ("ii",'i',):
+        return 'ii'
+    if x in ('u','uu',):
+        return 'uu'
+    if x in ("Ri","Rii",):
+        return 'Rii'
+    if x in ('lRii','lRi',):
+        return 'lRii'
+
+def guna_letters_for_aat(x):
+    
+    if x in ( 'i', 'ii',):
+        return ['e']
+    if x in ('u', 'uu',):
+        return ['o']
+    if x in ('Ri', 'Rii', ):
+        return ['a','r']
+    if x in ('lRi', 'lRii',):
+        return ['a','l']
+    
+    raise ValueError("No guNna support")
 

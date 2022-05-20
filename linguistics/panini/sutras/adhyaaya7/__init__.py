@@ -224,6 +224,31 @@ class saarvadhaatukaardhadhaatukayoH_7030840:
         
         return node.get_output()
     
+
+class supicha_7031020:
+    def __init__(self):
+        self._types={'node':[Suffix,'literal'],'suffix_node':[Suffix]}
+    def __call__(self,node,suffix_node):
+    
+        if not isinstance(node,Node):
+            raise ValueError("anga_node must of type Node")
+        if not isinstance(suffix_node,Node):
+            raise ValueError("suffix must of type Node")    
+        if not isinstance(suffix_node._data,Suffix):
+            raise ValueError("suffix must of type Suffix")
+            
+        if not node.get_output():
+                print("Returned due to sarvaahaari lopa")
+                return node.get_output()            
+        
+        suffix_data = suffix_node._data._suffix
+        suffix_string = ''.join(suffix_data )
+        if node.get_output()[-1] =='a' and list_past_rules_applied (node)[-1]!=7031020: # a-ending
+            #yaNc sup
+            if suffix_data[0]  in pratyaahaara('y','Nc') and suffix_string  in sup_pratyayaaH():
+                return node.get_output()[0:-1] + ['aa']
+        return node.get_output()
+
    
 def iXt_not_allowed(suffix_node_data):
     # TODO : Remove hack
