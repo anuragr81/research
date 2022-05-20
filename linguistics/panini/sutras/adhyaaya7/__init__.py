@@ -261,7 +261,7 @@ class supicha_7031020:
                 print("Returned due to sarvaahaari lopa")
                 return node.get_output()            
         
-        suffix_data = suffix_node._data._suffix
+        suffix_data = suffix_node.get_output()
         suffix_string = ''.join(suffix_data )
         if node.get_output()[-1] =='a' and list_past_rules_applied (node)[-1]!=7031020: # a-ending
             #yaNc sup

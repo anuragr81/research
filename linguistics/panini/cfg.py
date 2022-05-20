@@ -324,7 +324,7 @@ if F:
 else:   
     
     #pprint(generate_tibaadi("paXthNN"))   ;sys.exit(0)
-    if T:
+    if F:
         sup_expr = [Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None)]
         pprint(generate_subaadi(sup_expr ,linga=1))   ;
         sys.exit(0)
@@ -333,7 +333,7 @@ else:
         #Xtaa
         #
         #expression=[Node(Dhaatu(parse_string("bhuu")),parent1=None),Node(Suffix("tip",lakaara='laXt'),parent1=None)]
-        expression=[Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None),Node(Suffix("Nge",linga=1),parent1=None)]
+        expression=[Node(Dhaatu(parse_string("rajNN")),parent1=None),Node(Suffix("ghaNc"),parent1=None),Node(Suffix("shas",linga=1),parent1=None)]
         #expression=[Node(Dhaatu(parse_string("paXthNN")),parent1=None),Node(Suffix("tas",lakaara='liXt'),parent1=None)]
     
     

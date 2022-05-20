@@ -164,15 +164,15 @@ class akaHsavarNnediirghaH_6010970:
         
         if isinstance(node._data,Suffix):
             
-            pratyaya  = ''.join(node._data._suffix)
-            if node.get_output() [-1] in pratyaahaara('a','k') and anga_node.get_output():
+            pratyaya  = ''.join(node.get_output())
+            if node.get_output() [0] in pratyaahaara('a','k') and anga_node.get_output():
                 puurva_varNna=anga_node.get_output()[-1]
                 if node.get_output()[0] == puurva_varNna:
                     # ami puurvaH
                     if pratyaya in sup_pratyayaaH() and pratyaya == 'am':
                         return node_output
                     else:
-                        return node_output[:-1] #skip because the other instance of the rule uses the diirgha
+                        return node_output[1:] #skip because the other instance of the rule uses the diirgha
             
         return node_output
 
@@ -184,11 +184,15 @@ class akaHsavarNnediirghaH_6010971:
         if not node.get_output():
             return node.get_output()
         
-        if isinstance(suffix_node._data,Suffix):            
+        if isinstance(suffix_node._data,Suffix):                        
+            # rule last applied was the other half of the rule where suffix's first
+            # letter has been erased
+            suffix_state = suffix_node._output[-1]['inputs']['state_output'] if list_past_rules_applied(suffix_node) and list_past_rules_applied(suffix_node)[-1] == 6010970 else suffix_node.get_output()
+            #suffix_node._output[-1]['inputs']['state_output']
             if node_output[-1] in pratyaahaara('a','k') :
                 suffix_string = ''.join(suffix_node._data._suffix)
                 puurva_varNna=node_output[-1]
-                if suffix_node.get_output()[0] == puurva_varNna:
+                if suffix_state[0] == puurva_varNna:
                     if suffix_string in sup_pratyayaaH() and suffix_string == 'am':
                         return node_output
                     else:
