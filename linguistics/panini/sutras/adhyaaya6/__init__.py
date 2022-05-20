@@ -164,7 +164,7 @@ class akaHsavarNnediirghaH_6010970:
         
         if isinstance(node._data,Suffix):
             
-            pratyaya  = ''.join(node.get_output())
+            pratyaya  = ''.join(node._data._suffix)
             if node.get_output() [0] in pratyaahaara('a','k') and anga_node.get_output():
                 puurva_varNna=anga_node.get_output()[-1]
                 if node.get_output()[0] == puurva_varNna:
