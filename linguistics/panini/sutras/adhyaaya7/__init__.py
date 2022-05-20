@@ -1,6 +1,6 @@
 from ..common_definitions import vriddhi,upadhaa, ach, Suffix, Node , hal
 from ..common_definitions import get_dhaatu_properties,pratyaahaara, guNna, Dhaatu
-from ..common_definitions import parasmaidpada_pratyayaaH, sup_pratyayaaH
+from ..common_definitions import parasmaidpada_pratyayaaH, sup_pratyayaaH,list_past_rules_applied 
 
 class yuvoranaakau_7010010:
     def __init__(self):
@@ -39,7 +39,7 @@ class XtaaNgasiNgasaaminaatsyaaH_7010120:
         taaNgasiNgas = dict((x,sutra_mapping [i]) for i,x in enumerate(sup_pratyayaaH()) if i in (6,12,15))
         suffix_string= node.get_output()
         suffix_data = ''.join(node._data._suffix)
-        if suffix_data in taaNgasiNgas:
+        if suffix_data in taaNgasiNgas and 7010120 not in list_past_rules_applied(node):
             return taaNgasiNgas[suffix_data]
         #    if suffix_string[-2:] == ["y","u"]:
         #        return suffix_string[0:-2] + ["a","n","a"]

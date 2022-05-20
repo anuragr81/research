@@ -1,5 +1,5 @@
 from ..common_definitions import Suffix,Node, Dhaatu, ach, hal, sup_pratyayaaH
-from ..common_definitions import pratyaahaara, make_diirgha
+from ..common_definitions import pratyaahaara, make_diirgha, guna_letters_for_aat
 
 from ..common_definitions import find_eldest_parent1_of_condition 
 from ..common_definitions import find_eldest_parent2_of_condition
@@ -78,10 +78,11 @@ class aadguNnaH_6010840:
         node_output= node.get_output()
         if not node.get_output():
             return node.get_output()                
-        
-        if anga_node.get_output()[-1] in pratyaahaara('a','ch') and node.get_output()[0] in pratyaahaara('a','ch'):
-            
-            raise ValueError("Pending Gunna")
+        if anga_node.get_output():
+            suffix_first_letter = node.get_output()[0]
+            if anga_node.get_output()[-1] in ('a','aa') and suffix_first_letter  in pratyaahaara('a','k'):
+                
+                return guna_letters_for_aat(node.get_output()[0])+node.get_output()[1:]
             
             
         return node_output

@@ -84,7 +84,19 @@ def make_diirgha(x):
         return 'Rii'
     if x in ('lRii','lRi',):
         return 'lRii'
+
+def guna_letters_for_aat(x):
     
+    if x in ( 'i', 'ii',):
+        return ['e']
+    if x in ('u', 'uu',):
+        return ['o']
+    if x in ('Ri', 'Rii', ):
+        return ['a','r']
+    if x in ('lRi', 'lRii',):
+        return ['a','l']
+    
+    raise ValueError("No guNna support")
 
 class Suffix:
     def __init__(self,suffix,lakaara=None,linga=None):
