@@ -41,13 +41,33 @@ class XtaaNgasiNgasaaminaatsyaaH_7010120:
         suffix_data = ''.join(node._data._suffix)
         if suffix_data in taaNgasiNgas and 7010120 not in list_past_rules_applied(node):
             return taaNgasiNgas[suffix_data]
-        #    if suffix_string[-2:] == ["y","u"]:
-        #        return suffix_string[0:-2] + ["a","n","a"]
-        #    if suffix_string[-2:] == ["v","u"]:
-        #        return suffix_string[0:-2] + ["a","k","a"]
+
     
         return suffix_string
 
+class NgeryaH_7010130:
+    def __init__(self):
+        self._types={'anga_node':[],'node':[Suffix,'literal']}
+        
+    def __call__(self,node, anga_node):
+        if not isinstance(node,Node):
+            raise ValueError("suffix must of type Node")
+        
+        if not isinstance(node._data,Suffix):
+            raise ValueError("suffix must of type Suffix")
+            
+        if not isinstance(anga_node,Node):
+            raise ValueError("anga_node must of type Node")
+            
+
+        suffix_string= ''.join(node.get_output())
+        #suffix_data = ''.join(node._data._suffix)
+        if anga_node.get_output():
+            if anga_node.get_output()[-1] in ('a','aa',) and 7010130 not in list_past_rules_applied(node):
+                if suffix_string == "Nge" :
+                    return ['y','a']
+    
+        return node.get_output()
 
 
 

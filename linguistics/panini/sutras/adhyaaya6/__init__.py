@@ -1,6 +1,6 @@
 from ..common_definitions import Suffix,Node, Dhaatu, ach, hal, sup_pratyayaaH
 from ..common_definitions import pratyaahaara, make_diirgha, guna_letters_for_aat
-from ..common_definitions import vriddhi
+from ..common_definitions import vriddhi, list_past_rules_applied
 from ..common_definitions import find_eldest_parent1_of_condition 
 from ..common_definitions import find_eldest_parent2_of_condition
 
@@ -92,11 +92,13 @@ class aadguNnaH_6010841:
     def __init__(self):
         self._types={'node':['literal'],'suffix_node':['literal']}
     def __call__(self,node, suffix_node):
+        
         node_output= node.get_output()
         if not node.get_output():
             return node.get_output()
-        if isinstance(suffix_node._data,Suffix) and suffix_node.get_output():                  
-            if node_output[-1]  in ('a','aa') and suffix_node.get_output()[0] in pratyaahaara('i','k'):
+        if isinstance(suffix_node._data,Suffix) and suffix_node.get_output():         
+            # no check on suffix_node because that is expected to have changed after the call
+            if node_output[-1]  in ('a','aa') and list_past_rules_applied(suffix_node) and list_past_rules_applied(suffix_node)[-1]==6010840:
                 return node_output[:-1] #skip because the other instance of the rule uses the diirgha
         return node_output
 
@@ -160,11 +162,16 @@ class akaHsavarNnediirghaH_6010970:
         if not node.get_output():
             return node.get_output()
         
-        if isinstance(anga_node._data,Suffix):
-            anga_string =''.join(anga_node._data._suffix)
-            if anga_string [-1] in pratyaahaara('a','k') :
-                puurva_varNna=anga_string [-1]
+        if isinstance(node._data,Suffix):
+            
+            pratyaya  = ''.join(node._data._suffix)
+            if node.get_output() [-1] in pratyaahaara('a','k') and anga_node.get_output():
+                puurva_varNna=anga_node.get_output()[-1]
                 if node.get_output()[0] == puurva_varNna:
+                    # ami puurvaH
+                    if pratyaya in sup_pratyayaaH() and pratyaya == 'am':
+                        return node_output
+                    else:
                         return node_output[:-1] #skip because the other instance of the rule uses the diirgha
             
         return node_output
@@ -179,9 +186,13 @@ class akaHsavarNnediirghaH_6010971:
         
         if isinstance(suffix_node._data,Suffix):            
             if node_output[-1] in pratyaahaara('a','k') :
+                suffix_string = ''.join(suffix_node._data._suffix)
                 puurva_varNna=node_output[-1]
                 if suffix_node.get_output()[0] == puurva_varNna:
-                    return [make_diirgha(node_output[0])] + node_output[1:]
+                    if suffix_string in sup_pratyayaaH() and suffix_string == 'am':
+                        return node_output
+                    else:
+                        return [make_diirgha(node_output[0])] + node_output[1:]
             
         return node_output
 
@@ -224,7 +235,7 @@ class tasmaatchhasonaHpuMsi_6010990:
         
         return node_output
 
-
+"""
 class amipuurvaH_6011030:
     def __init__(self):
         self._types={'node':['literal'],'suffix_node':['literal']}
@@ -235,15 +246,14 @@ class amipuurvaH_6011030:
         
         if isinstance(anga_node._data,Suffix):
             pratyaya =''.join(anga_node._data._suffix)
-            if pratyaya in sup_pratyayaaH() :
-                if pratyaya == 'am':
+            if pratyaya in sup_pratyayaaH() and pratyaya == 'am':
                 # suffix is sup
                     if node.get_output()[-1] in pratyaahaara('a','k'):
                         return node_output[1:]
             
         return node_output
 
-
+"""
 
 class luNglaNglRiNgkShvaXdudaattaH_6040710:
     def __init__(self):
