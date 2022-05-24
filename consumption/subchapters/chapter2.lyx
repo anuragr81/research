@@ -188,10 +188,40 @@ status open
 
 \begin_layout Plain Layout
 
-% 1.
+%DONE
+\end_layout
+
+\begin_layout Plain Layout
+
+% 1 (X).
  No talk about neighbors or reference.
  There is no plan to discuss the tendencies of keeping up with the neighbours.
 \end_layout
+
+\begin_layout Plain Layout
+
+% 3(X).
+ Remove all talk about status consumption and of mobility.
+\end_layout
+
+\begin_layout Plain Layout
+
+% 8(X).
+ Don't talk about deterministic path of needs.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
@@ -199,12 +229,6 @@ status open
  Discuss how many children are in the household and whether the analysis
  has a bias due to joint and nuclear families (how many nuclear families
  etc.).
-\end_layout
-
-\begin_layout Plain Layout
-
-% 3.
- Remove all talk about status consumption and of mobility.
 \end_layout
 
 \begin_layout Plain Layout
@@ -235,12 +259,6 @@ status open
 
 % 7.
  Address that savings on assets is not part of the analysis.
-\end_layout
-
-\begin_layout Plain Layout
-
-% 8.
- Don't talk about deterministic path of needs.
 \end_layout
 
 \begin_layout Plain Layout
@@ -483,11 +501,13 @@ Urbanisation is measured with ...
  While it may be more appropriate to call it concentration of assets - our
  understand of urbanisation is only a way to understand another mechanism
  through which urban prosperity matters.
- The interpretation of prosperity in consumer's normative reference group
- in terms of assets including land ownership banks upon the emphasis that
- sociological literature places on the network of occupations and social
- networks attached with assets ownership in sub-Saharan African societies
- (
+ The urbanisation level of the area which the consumer belongs to is measured
+ as the average of long-term assets in the consumer's vicinity.
+ The interpretation of urbanisation of the consumer's locality as the concentrat
+ion of long-term durable (i.e.
+ assets including land ownership) banks upon the emphasis that sociological
+ literature places on the network of occupations and social networks attached
+ with assets ownership in sub-Saharan African societies (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "KoseGhebruLandEthiopia2018"
@@ -496,9 +516,6 @@ literal "false"
 \end_inset
 
 ).
- The prosperity of the area which the consumer belongs to is measured as
- the average of long-term assets in the consumer's vicinity.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1152,6 +1169,31 @@ status open
 
 \begin_layout Plain Layout
 
+%[Urbanisation Measurement]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+This is where measuring urbanisation is critical.
+ The measure of urbanisatioin is seldom used using .
+ In measures, the population density is used but that has had problems-
+ since large number of rural populations are.
+ Our measurement is derived largely from SES indicators that rely on stock
+ of long-term durable goods (land based - cite Ethiopia paper).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 %[Resolving debate - with performance data - School vs Home effects - english-du
 mmy and religion dummy 
 \end_layout
@@ -1744,6 +1786,26 @@ status open
 
 \begin_layout Plain Layout
 
+%[access to education]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since educational expenses must also depend on whether the accessibility
+ of of schools in the district or ward which the consumer belongs, we also
+ use the local school accessibility as a control for both the economies.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 %[Equations]
 \end_layout
 
@@ -1763,8 +1825,12 @@ In summary, the controls used in empirical analysis are the prosperity level
 \end_inset
 
  (e.g.
- age of the children, the family size etc.) , the permanent-income measure
- (the logarithm of the total annual expenditure 
+ age of the children, the family size etc.) , the access to education 
+\begin_inset Formula $k_{i}$
+\end_inset
+
+, the permanent-income measure (the logarithm of the total annual expenditure
+ 
 \begin_inset Formula $log(x_{i})$
 \end_inset
 
@@ -1792,7 +1858,7 @@ In summary, the controls used in empirical analysis are the prosperity level
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-w_{educ,i}=\rho_{i}+\alpha_{educ}\cdot r+\gamma_{educ}\cdot log(p_{ne})+\beta_{educ}\cdot log(x_{i})+\epsilon_{i,ne}\label{eq:main_estimation}
+w_{educ,i}=\rho_{i}+\alpha_{educ}\cdot r+\gamma_{educ}\cdot log(p_{ne})+\beta_{educ}\cdot log(x_{i})+\delta_{educ}\cdot k_{i}+\epsilon_{i,ne}\label{eq:main_estimation}
 \end{gather}
 
 \end_inset
@@ -1850,7 +1916,6 @@ noprefix "false"
 \end_inset
 
  (respectively).
- 
 \end_layout
 
 \begin_layout Standard
@@ -1961,7 +2026,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-As described earlier, we understand urbanisation as the asset concentration
+As described earlier, we interpret urbanisation as the asset concentration
  - and measure it simple as the log-averages of the values of durable goods
  (calculated as per the specifications in Table 
 \begin_inset CommandInset ref
@@ -1989,11 +2054,8 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-The details of the records of asset-ownership in 
-\bar default
-the LSMS data include the number 
+The details of the records of durable goods in the LSMS data include the
+ number 
 \begin_inset Formula $n_{t}$
 \end_inset
 
@@ -2011,7 +2073,7 @@ the LSMS data include the number
 \begin_inset Formula $P_{t}$
 \end_inset
 
- of the durable goods to infer the asset-values in the area surrounding
+ of the durable goods to infer the goods-values in the area surrounding
  the consumer - partly because 
 \begin_inset Formula $P_{t}$
 \end_inset
@@ -2030,8 +2092,8 @@ the LSMS data include the number
 \end_inset
 
 .
- The total cost of the assets of a household is thus obtained simply as
- a product of the number of assets 
+ The total cost of the durable goods owned by the household is thus obtained
+ simply as a product of the number of assets 
 \begin_inset Formula $n_{t}$
 \end_inset
 
@@ -2454,9 +2516,10 @@ noindent
 \end_layout
 
 \begin_layout Standard
-Of the two economies, Tanzania is more agrarian and the average education
- levels seem higher in Nigeria - which is more industrialised (see Figure
- 
+Of the two economies, a higher percent of the GDP comes from agricultural
+ production in Tanzania.
+ With more reliance on non-agrarian exports, the average education levels
+ seem higher in Nigeria (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:HistEducationRanks"
@@ -2827,13 +2890,11 @@ ref{education_rank_ngr}
 \end_layout
 
 \begin_layout Standard
-We also note that the average consumer in the urban areas for both the economies
- - despite better options for lifestyle and consumption - seems to struggle
- with basic needs.
- To compare the fulfillment of basic needs in urban vs rural areas, we look
- at the fraction of consumers that have run out of food in the last 12 months
- in every district across both economies (either due to lack of agricultural
- inputs or high prices) in Figures 
+To understand the urban-rural differences, we compare the fulfillment of
+ basic needs in urban vs rural areas using the fraction of consumers that
+ have run out of food in the last 12 months in every district across both
+ economies (either due to lack of agricultural inputs or high prices) in
+ Figures 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:TanzaniaFoodShortageAgrInp"
@@ -2878,8 +2939,23 @@ noprefix "false"
  urban areas (due to high costs) - even though the overall hunger instances
  remain proportionately lower in the urban areas (when compared to the household
 s having run out of food due to agricultural reasons).
- This suggests that the expenditure on education may very much be a luxury
- for a significant part of the population in both the economies.
+ The average consumer in the urban areas for both the economies - despite
+ better options for lifestyle and consumption - seems to struggle with basic
+ needs.
+ The estimation in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Parametric-Analysis"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ further explores if education expenses are significantly impacted by permanent
+ income while quantifying the degree of urbanisation as concentration of
+ long-term durable goods rather depending on the rural-urban indicator variable
+ alone.
 \end_layout
 
 \begin_layout Standard
@@ -2895,8 +2971,8 @@ noprefix "false"
 \end_inset
 
 , the key observation from the non-parametric view of the data is that the
- disparities in income and assets are more localised in Nigeria while they
- are more extreme across wider geographical regions in Tanzania.
+ disparities in income and durable goods are more localised in Nigeria while
+ they are more extreme across wider geographical regions in Tanzania.
  More specifically, despite the southern areas of Nigeria having more higher-pai
 d occupations and a higher expenditure on non-durable expenditure overall
  (see Figure 
@@ -2909,10 +2985,11 @@ noprefix "false"
 
 \end_inset
 
-), the disparity in asset ownership across regions is not as extreme as
- in Tanzania.
- We discuss the implications of this non-uniformity on consumption and education
-al expenses in further detail in Section 
+), the disparity in durable-goods ownership across regions is not as extreme
+ as in Tanzania.
+ The particular interpretation of urbanisation is used to explain the implicatio
+ns of this non-uniformity on consumption and educational expenses in Section
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Parametric-Analysis"
@@ -3299,7 +3376,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-Control
+Dependent Variable
 \end_layout
 
 \end_inset
@@ -3328,42 +3405,6 @@ Description
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $w_{ne}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-w_ne
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-budget share of the non-durable expenditure excluding costs associated with
- assets
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 \begin_inset Formula $w_{educ}$
 \end_inset
 
@@ -3372,7 +3413,7 @@ budget share of the non-durable expenditure excluding costs associated with
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3392,6 +3433,44 @@ w_educ
 
 \begin_layout Plain Layout
 budget share of the educational expenses
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+log_educ
+\family default
+\size default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+logarithm of the educational expenses
 \end_layout
 
 \end_inset
@@ -4362,18 +4441,13 @@ noindent
 \end_layout
 
 \begin_layout Standard
-A key goal of the empirical analysis is to find out if the educational expenses
+A goal of the empirical analysis is to find out if the educational expenses
  in the two economies rise more sharply as a result of higher prosperity
- of the local reference (urbanisation) than due to higher permanent income
- and education rank of the household.
- Since education is a clear means for mobility, the disparity in education
- through either of these means characterises the limitation to mobility
- in the economy.
- To recap, the asset-prosperity of the consumer's vicinity proxies the level
- of urbanisation in the two economies while the local income differences
- are accounted for using the control for permanent income.
- The results thus contrast the relative effects of wider and local income
- differences educational expenses in the two economies.
+ consumer's locality (urbanisation level measured as concentration of long-term
+ durable goods) rather the higher permanent income (measured as logairthm
+ of total expenditure) and the education rank of the household.
+ The empirical results also contrast the relative effects of wider and local
+ income differences educational expenses in the two economies.
 \end_layout
 
 \begin_layout Standard
@@ -4803,14 +4877,13 @@ noindent
 \end_layout
 
 \begin_layout Standard
-We had set ourselves to understand how wider disparities in urbanisation
- and improvements of income at local levels may affect the differences in
- educational expenses and mobility in the context of sub-Saharan Africa.
- Treating the educational expenses as investments in mobility, we find significa
-nt effects of regional prosperity on education expenses in both the economies.
- The role of private wealth (permanent income) does seem weaker in Nigeria
- - where prosperity differences are more likely to cause difference in education
- expense.
+We had set ourselves to understand how urbanisation levels may segregate
+ education expenses (and thus future mobility) in two economies in the sub-Sahar
+an Africa that differ in the level of urbanisation and income disparities.
+ The results find significant effects of urbanisation levels - intepreted
+ as concentration of durable goods - on education expenses in both the economies.
+ The role of permanent income does seem weaker in Nigeria - where urbanisation
+ is more likely to cause difference in education expense.
  In Tanzania, on the other hand, the role of permanent income is stronger.
  While private education seems more common in Nigeria, the state-provided
  education plays the dominant role in both the economies.
