@@ -2286,7 +2286,7 @@ lsms_normalizer<-function() {
     #NO .. 5
     return(c("hhid","personid","is_ge5y","litlang","is_literate","highest_educ","schoolowner",
              "schoolconveyance","has_missedschool","educexpense","has_adulteduc","adulteducmonths",
-             "attended_school","school_start_age","school_leaving_year","schoolconveyance","schooltransporttime"));
+             "attended_school","current_educ_level","school_start_age","school_leaving_year","schoolconveyance","schooltransporttime"));
   }
   
   hh_secg_columns_lsms<-function(){
@@ -2354,7 +2354,7 @@ lsms_normalizer<-function() {
     #NO .. 5
     return(c("hhid","personid","is_ge5y","litlang","is_literate","highest_educ","schoolowner",
              "schoolconveyance","has_missedschool","educexpense","has_adulteduc","adulteducmonths",
-             "attended_school","school_start_age","school_leaving_year","schoolconveyance","schooltransporttime"));
+             "attended_school","current_educ_level","school_start_age","school_leaving_year","schoolconveyance","schooltransporttime"));
   }
   
   get_ohs_secc_fields_mapping_lsms_2014<-function(){
