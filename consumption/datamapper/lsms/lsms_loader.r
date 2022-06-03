@@ -1130,6 +1130,19 @@ lsms_loader<-function(fu,ln,lgc) {
         fu()@removeall_cols_except(l,c("region","district","ward","accessiblemarket","travelcost"))
         
       }
+      
+      ########## BEGIN school distance ##################
+      
+      cbFileName <- paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/COM_SEC_CB.dta',sep="")
+      
+      cbdat      <- read.dta(cbFileName,convert.factors = FALSE)
+      
+      cb <- fu()@get_translated_frame(dat=cbdat,
+                                      names=ln()@ohs_seccb_columns_lsms(2012),
+                                      m=ln()@ohs_seccb_mapping_lsms(2012))
+      
+      ######### END SCHOOL DISTANCE    ##################
+      
       #* Also considered urban/rural based on population density 
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
       pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked.csv',sep=""))
