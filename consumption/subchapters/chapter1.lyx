@@ -5343,12 +5343,60 @@ status open
 
 \begin_layout Plain Layout
 
-% hdds2010 <- get_hhds_for_consumption_data(ln = lsms_normalizer,cdat =
- c2010)
+%hdds2014 <- get_hhds_for_consumption_data(ln = lsms_normalizer,cdat = c2014)
 \end_layout
 
 \begin_layout Plain Layout
 
+%asset_mtms_2014 = asset_mtms(a2014,"bed","2014")      
+\end_layout
+
+\begin_layout Plain Layout
+
+%assetslog2014 <- ddply(asset_mtms_2014,.(hhid2014),summarise,lnA0=log(sum(number.
+2014*mtm.2014)+1e-7),A0=sum(number.2014*mtm.2014))
+\end_layout
+
+\begin_layout Plain Layout
+
+%hddsassets2014<- merge(plyr::rename(assetslog2014,c("hhid2014"="hhid")),hdds201
+4,by=c("hhid"))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% DECILE PLOT
+\end_layout
+
+\begin_layout Plain Layout
+
+% j <- quantile(hddsassets2014$lnA0,seq(10)/10)
+\end_layout
+
+\begin_layout Plain Layout
+
+% mm <- hddsassets2014%>% mutate( lnA0q = sapply(hddsassets2014$lnA0,function(x)
+ { as.numeric(j[j>=x][1])}))
+\end_layout
+
+\begin_layout Plain Layout
+
+% m <- mm[,c("lnA0","lnA0q","hhid","hdds")]
+\end_layout
+
+\begin_layout Plain Layout
+
+% mb <- ddply(m,.(lnA0q),summarise,mean_hdds=mean(hdds))
+\end_layout
+
+\begin_layout Plain Layout
+
+% barplot(mb$mean_hdds*1e-6,names.arg=seq(10)/10,las=1,xlab='asset worth
+ decile',ylab='mean HDDS')
 \end_layout
 
 \end_inset
@@ -5371,6 +5419,44 @@ literal "false"
 
  , for example, set this threshold to 3.
   
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/hdds_by_lnA0.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diversity Score changes by log asset deciles
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
