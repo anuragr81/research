@@ -103,6 +103,7 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           get_diary_secn_fields_mapping_lsms_2010="function",
                                           get_diary_secn_fields_mapping_lsms_2012="function",
                                           get_diary_secn_fields_mapping_lsms_2014="function",
+                                          fao_food_diversity_score_HDDS="function",
                                           computeYearValues="function",
                                           decode_clusterid="function",
                                           computeLsmsSelfemployedValues="function",
@@ -1581,6 +1582,66 @@ lsms_normalizer<-function() {
     
     return(x)
     
+  }
+  
+  fao_food_diversity_score_HDDS<- function(){
+    x<-NULL
+    x<-rbind(x,data.frame(category='fat', group='quality', shortname='cooking_oil'))
+    
+    x<-rbind(x,data.frame(category='cereals', group='quality', shortname='rice_husked'))
+    x<-rbind(x,data.frame(category='cereals', group='quality', shortname='rice_paddy'))
+    x<-rbind(x,data.frame(category='cereals', group='quality', shortname='maize_green'))
+    x<-rbind(x,data.frame(category='cereals', group='quality', shortname='maize_grain'))
+    x<-rbind(x,data.frame(category='cereals', group='quality', shortname='maize_flour'))
+    x<-rbind(x,data.frame(category='cereals', group='quality', shortname='millet_grain'))
+    x<-rbind(x,data.frame(category='cereals', group='quality', shortname='millet_flour'))
+    x<-rbind(x,data.frame(category='cereals', group='quality', shortname='wheat'))
+    x<-rbind(x,data.frame(category='cereals', group='quality', shortname='bread'))
+    
+    x<-rbind(x,data.frame(category='legumesnuts', group='quality', shortname='pulses'))
+    x<-rbind(x,data.frame(category='sweets', group='quality', shortname='sugar'))
+    x<-rbind(x,data.frame(category='sweets', group='quality', shortname='sweet'))
+    x<-rbind(x,data.frame(category='sweets', group='quality', shortname='honey'))
+    x<-rbind(x,data.frame(category='legumesnuts', group='quality', shortname='peanuts'))
+    x<-rbind(x,data.frame(category='legumesnuts', group='quality', shortname='coconut'))
+    x<-rbind(x,data.frame(category='legumesnuts', group='quality', shortname='cashew_almonds'))
+    x<-rbind(x,data.frame(category='legumesnuts', group='quality', shortname='nut_products'))
+    x<-rbind(x,data.frame(category='milk', group='quality', shortname='milk_products'))
+    x<-rbind(x,data.frame(category='milk', group='quality', shortname='fresh_milk'))
+    x<-rbind(x,data.frame(category='milk', group='quality', shortname='canned_milk'))
+    x<-rbind(x,data.frame(category='meat', group='quality', shortname='goat'))
+    x<-rbind(x,data.frame(category='meat', group='quality', shortname='beef'))
+    x<-rbind(x,data.frame(category='meat', group='quality', shortname='pork'))
+    x<-rbind(x,data.frame(category='meat', group='quality', shortname='chicken'))
+    x<-rbind(x,data.frame(category='meat', group='quality', shortname='wild_birds'))
+    x<-rbind(x,data.frame(category='meat', group='quality', shortname='wild_meat'))
+    x<-rbind(x,data.frame(category='fish', group='quality', shortname='fish_seafood'))
+    x<-rbind(x,data.frame(category='fish', group='quality', shortname='dried_canned_fish'))
+    x<-rbind(x,data.frame(category='fish', group='quality', shortname='packaged_fish'))
+    x<-rbind(x,data.frame(category='eggs', group='quality', shortname='eggs'))
+    x<-rbind(x,data.frame(category='complements', group='quality', shortname='spices'))
+    x<-rbind(x,data.frame(category='complements', group='quality', shortname='salt'))
+    x<-rbind(x,data.frame(category='veg', group='quality', shortname='onion'))
+    x<-rbind(x,data.frame(category='veg', group='quality', shortname='greens'))
+    x<-rbind(x,data.frame(category='veg', group='quality', shortname='dried_canned_veg'))
+    x<-rbind(x,data.frame(category='veg', group='quality', shortname='cassava_fresh'))
+    x<-rbind(x,data.frame(category='tubers', group='quality', shortname='cassava_flour'))
+    x<-rbind(x,data.frame(category='tubers', group='quality', shortname='sweet_potato'))
+    x<-rbind(x,data.frame(category='tubers', group='quality', shortname='yam'))
+    x<-rbind(x,data.frame(category='tubers', group='quality', shortname='potatoes'))
+    x<-rbind(x,data.frame(category='veg', group='quality', shortname='banana_green'))
+    x<-rbind(x,data.frame(category='tubers', group='quality', shortname='othervegstarch'))
+    x<-rbind(x,data.frame(category='complements', group='quality', shortname='tea'))
+    x<-rbind(x,data.frame(category='complements', group='quality', shortname='coffee'))
+    x<-rbind(x,data.frame(category='complements', group='quality', shortname='miscdrinkpowder'))
+    x<-rbind(x,data.frame(category='complements', group='quality', shortname='canned_drink'))
+    x<-rbind(x,data.frame(category='complements', group='quality', shortname='readymade_tea_coffee'))
+    x<-rbind(x,data.frame(category='fruits', group='quality', shortname='banana_ripe'))
+    x<-rbind(x,data.frame(category='fruits', group='quality', shortname='citrus'))
+    x<-rbind(x,data.frame(category='fruits', group='quality', shortname='mangoes'))
+    x<-rbind(x,data.frame(category='fruits', group='quality', shortname='sugarcane'))
+    
+    return(x) 
   }
   
   categories_needs_based <- function()  {
@@ -3769,6 +3830,7 @@ lsms_normalizer<-function() {
              get_lsms_secj_info_columns_2014=get_lsms_secj_info_columns_2014,
              get_lsms_secj_fields_mapping_2012=get_lsms_secj_fields_mapping_2012,
              get_lsms_secj_fields_mapping_2014=get_lsms_secj_fields_mapping_2014,
+             fao_food_diversity_score_HDDS=fao_food_diversity_score_HDDS,
              decode_clusterid=decode_clusterid,
              computeYearValues=computeYearValues, 
              computeLsmsSelfemployedValues=computeLsmsSelfemployedValues, 

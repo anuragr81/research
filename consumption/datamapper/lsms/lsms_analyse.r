@@ -1103,7 +1103,28 @@ plot_population_heat_map <- function(odat){
   
 } 
 
+get_hhds_for_consumption_data<-function(ln,cdat){
+  
+ hdds2010alltypes <- merge(ln()@fao_food_diversity_score_HDDS(), subset(cdat,lwp>0) %>% mutate ( had_item  = lwp>0 ) , by = c("shortname"))
+ 
+ hdds2010Reduced <- ddply(hdds2010alltypes[,c("category","had_item","shortname","hhid")],.(category,hhid),summarise,had_item=Reduce(f = "|", x =had_item, accumulate = F))
+ # Get expanded form to set non-consumed dat as FALSE (since hdds2010alltypes excludes non-consumed items )
+ 
+ hdds2010Init<- merge(hdds2010Reduced[c("hhid","category","had_item")],hdds2010Reduced%>% expand(category,hhid) %>% mutate(init_item=F),by=c("hhid","category"),all = T)
+ hdds2010Init[is.na(hdds2010Init)] <- F
+ 
+ # summing up the score
+ hdds2010 <- hdds2010Init%>% mutate ( had_item  = had_item | init_item ) %>% mutate (init_item = NULL) %>% ddply(.(hhid),summarise,hdds=sum(as.integer(had_item)))
+ 
+ return (hdds2010)
+ 
+# TEST: a <- data.frame(hhid=c("A","A","A","B","B"),shortname=c("bananna","mango","beef","banana","mango"),category=c("fruits","fruits","meat","fruits","fruits"), had_item=c(T,T,T,T,T))
+# TEST: b <- ddply(a[,c("category","had_item","shortname","hhid")],.(category,hhid),summarise,had_item=Reduce(f = "|", x =had_item, accumulate = F))
+# TEST: bb <- merge(b[c("hhid","category","had_item")],b%>% expand(category,hhid) %>% mutate(init_item=F),by=c("hhid","category"),all = T)
+# TEST: bb[is.na(bb)] <- F
+# TEST: bfinal <- bb %>% mutate ( had_item  = had_item | init_item ) %>% mutate (init_item = NULL) %>% ddply(.(hhid),summarise,hdds=sum(as.integer(had_item)))
 
+}
 init_data <- function(use_ea){
   
   o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
