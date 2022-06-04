@@ -225,6 +225,12 @@ status open
  Explain how wealth indexes are prepared.
 \end_layout
 
+\begin_layout Plain Layout
+
+% 20(X).
+ clarify that it's a cross sectional regression.
+\end_layout
+
 \end_inset
 
 
@@ -247,7 +253,11 @@ status open
 % 4.
  Zero expenditure on education, families with no children and household
  with no assets need to be accounted for  (told how many they are etc.).
- The fields current_educ_level and  attended_school are fine for TNZ.
+ The fields attended_school is fine for TNZ - although current_educ_level
+  is not much better than highest_educ (in terms of NAs).
+ attended_school is also available for NGR (which can consider withdrawal)
+ while current_educ_level is not.
+ 
 \end_layout
 
 \begin_layout Plain Layout
@@ -260,6 +270,13 @@ ia/2015/NGA_2015_GHSP-W3_v02_M_Stata/sectc2_harvestw3.dta').
 
 \begin_layout Plain Layout
 
+% 4.2.
+ The heckman solution is based on a binary variable - hence this binary
+ variable must merge the presence of government secondary and government
+ primary schools.
+ One way to merge is to consider primary-school indicator only if current_educ_l
+evel points to primary and use second-school indicator if any of the current_edu
+c_level's point to secondary.
 \end_layout
 
 \begin_layout Plain Layout
@@ -308,7 +325,7 @@ ia/2015/NGA_2015_GHSP-W3_v02_M_Stata/sectc2_harvestw3.dta').
 \begin_layout Plain Layout
 
 % 6.6.
- (N) BehrmanVietnamEduc1999 - 
+ (N) BehrmanVietnamEduc1999 - .
 \end_layout
 
 \begin_layout Plain Layout
@@ -388,13 +405,14 @@ ia/2015/NGA_2015_GHSP-W3_v02_M_Stata/sectc2_harvestw3.dta').
 \begin_layout Plain Layout
 
 % 9.
- Discuss equations earlier and clarify that it's a cross sectional regression.
+ Discuss equations earlier and write them out.
 \end_layout
 
 \begin_layout Plain Layout
 
 % 11.
- In addition of meanchildage - use dummies indicating age groups of children
+ In addition of or instead of meanchildage - use dummies indicating age
+ groups of children
 \end_layout
 
 \begin_layout Plain Layout
@@ -617,9 +635,10 @@ status open
 
 \begin_layout Plain Layout
 
-%[Our Motivation - wealth segregation affecting education - based on the
- suggestion that education is rite of passage -  the distribution of educational
- institutitions needs to be accounted]
+%[DEBATES SEEM IRRELEVANT - needs to be cut short - Our Motivation is wealth
+ segregation affecting education - based on the suggestion that education
+ is rite of passage -  the distribution of educational institutitions needs
+ to be accounted]
 \end_layout
 
 \end_inset
