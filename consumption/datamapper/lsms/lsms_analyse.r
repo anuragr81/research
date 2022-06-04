@@ -4245,6 +4245,7 @@ plot_price_tseries <-function(row_pair,ignore_items,fu,switch_off,market_prices_
   f2=fu()@rbind_xy(x = f1,y = market_prices_national2012, tagy=2012)
   f3=fu()@rbind_xy(x = f2,y = market_prices_national2014, tagy=2014)
   res = f3
+  
   if (!missing(switch_off) && switch_off==TRUE){
     dev.off(); 
   }
@@ -4254,7 +4255,8 @@ plot_price_tseries <-function(row_pair,ignore_items,fu,switch_off,market_prices_
     if (! is.element(x,ignorelist)) {
       g = subset(res,shortname==x) ; 
       if(dim(g)[1] == 0 ) {print(paste("bad data:",x))} else { 
-        plot(g$tag,g$reg_price,main=x,xlab="year",ylab="price",xlim=c(2008,2014),type='o') 
+        #plot(g$tag,g$reg_price,main=x,xlab="year",ylab="price",xlim=c(2008,2014),type='o')
+        plot(g$tag,g$price,main=x,xlab="year",ylab="price",xlim=c(2008,2014),type='o') 
         #print(head(g))
       }
       

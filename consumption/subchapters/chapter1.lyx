@@ -674,7 +674,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-A variety in food diets is oftne recommended by policies to improve nutritional
+A variety in food diets is often recommended by policies to improve nutritional
  health of a population.
  A more diverse diet - particularly during the early stages of life - indicates
  nutritional adequacy and has implications for the long-term health of an
@@ -1007,7 +1007,6 @@ literal "true"
 
 , both budget-shares and quality-metrics appear as dependent variables for
  the system of equations.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1027,7 +1026,6 @@ literal "false"
  With electricity available in sparse urban areas, the effect of electricity
  usage together with urban residence is explored in more detail in the subsequen
 t sections.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1295,7 +1293,6 @@ literal "false"
  Since the quantities consumed are less often available for non-food commodities
  in household surveys, these methods have been limited to the analysis for
  food quality.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1823,7 +1820,7 @@ literal "true"
 
 .
  While HW approach may be well-suited for comparison of elasticities for
- particular goods (see Appendix III for empirical results using the approach),
+ specific goods (see Appendix III for empirical results using the approach),
  the comparison of quality across multiple commodities is a more appropriate
  interpretation for the overview of quality we seek in the current chapter.
  Since it is much less likely for no goods to be consumed within a broader
@@ -1846,7 +1843,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Section
-Model
+Econometric Model
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Model"
@@ -1870,20 +1867,6 @@ noindent
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-In the empirical studies on demand, the separability of demand for commodities
- that are grouped on the basis of their functional utility is often assumed.
- Even though the separability of household demand is not always verified
- empirically, the assumption of separability is nearly ubiquitous in the
- literature as it is one of the least intrusive assumptions one could make
- on the structure of demand.
- The high-level interpretations of consumption across separable groups facilitat
-e a comparison of current demand with the past consumption as well as from
- across the cross-section - as it is often easier to talk about quality
- of a more generally observed commodity than of individual items that may
- vary across contexts.
 \end_layout
 
 \begin_layout Standard
@@ -2079,6 +2062,80 @@ name "subsec:ClassificationGoods"
 \end_inset
 
 Classification in commodity groups 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% market_prices_2008 <- ll@load_market_prices(year = 2008, dirprefix = "../",fu
+ = fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+% market_prices_2010 <- ll@load_market_prices(year = 2010, dirprefix = "../",fu
+ = fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+% market_prices_2012 <- ll@load_market_prices(year = 2012, dirprefix = "../",fu
+ = fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+% market_prices_2014 <- ll@load_market_prices(year = 2014, dirprefix = "../",fu
+ = fu, ln=lsms_normalizer)
+\end_layout
+
+\begin_layout Plain Layout
+
+% market_prices_national2008 <- ddply(market_prices_2008,.(shortname),summarise,p
+rice=median(median_price))
+\end_layout
+
+\begin_layout Plain Layout
+
+% market_prices_national2010 <- ddply(market_prices_2010,.(shortname),summarise,p
+rice=median(median_price))
+\end_layout
+
+\begin_layout Plain Layout
+
+% market_prices_national2012 <- ddply(market_prices_2012,.(shortname),summarise,p
+rice=median(median_price))
+\end_layout
+
+\begin_layout Plain Layout
+
+% market_prices_national2014 <- ddply(market_prices_2014,.(shortname),summarise,p
+rice=median(median_price))
+\end_layout
+
+\begin_layout Plain Layout
+
+%f1=fu()@rbind_xy(x = market_prices_national2008,y = market_prices_national2010,
+ tagx=2008, tagy=2010)   
+\end_layout
+
+\begin_layout Plain Layout
+
+% f2=fu()@rbind_xy(x = f1,y = market_prices_national2012, tagy=2012)   
+\end_layout
+
+\begin_layout Plain Layout
+
+%f3=fu()@rbind_xy(x = f2,y = market_prices_national2014, tagy=2014)   res
+ = f3   
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5395,8 +5452,8 @@ status open
 
 \begin_layout Plain Layout
 
-% barplot(mb$mean_hdds*1e-6,names.arg=seq(10)/10,las=1,xlab='asset worth
- decile',ylab='mean HDDS')
+% barplot(mb$mean_hdds,names.arg=seq(10)/10,las=1,xlab='log-asset worth decile',y
+lab='mean HDDS')
 \end_layout
 
 \end_inset
