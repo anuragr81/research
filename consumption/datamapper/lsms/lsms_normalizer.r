@@ -3647,7 +3647,7 @@ lsms_normalizer<-function() {
       
       # secondary job must have employertype invalidated (set to -1 in the current convention)
       
-      #* Only primary job is used to identify the employer type of the individual 
+      #* Only primary job is used to identify the employer type of the individual
       print (paste("Setting employertype as -1 (for ",dim(i1_secjob_y)[1],") wage-workers with secondary jobs"))
       ydata<-rbind(ydata,
                    data.frame(hhid=i1_secjob_y$hhid,
