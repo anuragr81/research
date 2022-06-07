@@ -239,13 +239,13 @@ ngr_normaliser<-function() {
   
   ohs_info_columns_lsms <- function(year){
     if (year == 2010){
-      return(c("hhid","region","district","ea","personid","is_urban", "zone","YOB",'is_hh_member','hh_relation', 'marital_status', 'marriage_year', 
+      return(c("hhid","region","district","ea","personid","is_urban", "zone","YOB",'is_hh_member','household_status', 'marital_status', 'marriage_year', 
                'spouse_personid', 'religion', 'is_father_hh', 'father_personid', 'is_father_alive', 'father_educ', 'father_occup',
                'is_mother_hh', 'mother_personid', 'is_mother_alive', 'mother_educ', 'mother_occup'))
     }
     if (year == 2012 || year == 2015){
       return(c("hhid","region","district","ea","personid","is_urban", "zone","YOB",'is_hh_member', 'marital_status', 
-               'marriage_year_1','marriage_year_2', 'marriage_year_3', 'marriage_year_4','hh_relation',  
+               'marriage_year_1','marriage_year_2', 'marriage_year_3', 'marriage_year_4','household_status',  
                'spouse_personid', 'religion', 'is_father_hh', 'father_personid', 'is_father_alive', 'father_educ', 'father_occup',
                'is_mother_hh', 'mother_personid', 'is_mother_alive', 'mother_educ', 'mother_occup'))
     }
@@ -262,7 +262,7 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="lga",name="district"))
       s= rbind(s,data.frame(iesname="sector",name="is_urban"))
       s= rbind(s,data.frame(iesname="ea",name="ea"))
-      s= rbind(s,data.frame(iesname='s1q3', name='hh_relation'))
+      s= rbind(s,data.frame(iesname='s1q3', name='household_status'))
       s= rbind(s,data.frame(iesname="s1q5_year",name="YOB"))
       s= rbind(s,data.frame(iesname="s1q7",name="is_hh_member"))
       s= rbind(s,data.frame(iesname="s1q8",name="marital_status"))
@@ -289,7 +289,7 @@ ngr_normaliser<-function() {
       s= rbind(s,data.frame(iesname="lga",name="district"))
       s= rbind(s,data.frame(iesname="sector",name="is_urban"))
       s= rbind(s,data.frame(iesname="ea",name="ea"))
-      s= rbind(s,data.frame(iesname='s1q3', name='hh_relation'))
+      s= rbind(s,data.frame(iesname='s1q3', name='household_status'))
       s= rbind(s,data.frame(iesname="s1q7_year",name="YOB"))
       s= rbind(s,data.frame(iesname="s1q8",name="marital_status"))
       
