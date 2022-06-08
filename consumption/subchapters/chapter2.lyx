@@ -262,10 +262,19 @@ _level  is not much better than highest_educ (in terms of NAs).
 
 \begin_layout Plain Layout
 
-% 4.1.
+% 4.1.1.
  For NGR: cc <- read_dta('../lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post
  Harvest Wave 2/Community/sectc2_harvestw2.dta') and cc2 <- read_dta('../lsms/niger
 ia/2015/NGA_2015_GHSP-W3_v02_M_Stata/sectc2_harvestw3.dta').
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% 4.1.2.
+ For TNZ: We don't accessibility data for all the wards so we have to simply
+ just take the wards-score.
+ If more wards has accessibile schools then that district is more accessible.
 \end_layout
 
 \begin_layout Plain Layout
@@ -3978,7 +3987,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="16" columns="4">
+<lyxtabular version="3" rows="18" columns="4">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0.5in">
 <column alignment="center" valignment="top" width="1.2in">
@@ -4359,6 +4368,9 @@ Area
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\kappa$
+\end_inset
+
 
 \end_layout
 
@@ -4379,7 +4391,8 @@ educaccess
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+indicating whether there is a government secondary school in the ward or
+ not
 \end_layout
 
 \end_inset
@@ -4388,7 +4401,7 @@ educaccess
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Area
 \end_layout
 
 \end_inset
@@ -4443,7 +4456,7 @@ Individual
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\mu$
+\begin_inset Formula $\mu_{1}$
 \end_inset
 
 
@@ -4457,7 +4470,7 @@ Individual
 \begin_layout Plain Layout
 
 \family typewriter
-meanchildage
+is_primaryage
 \end_layout
 
 \end_inset
@@ -4466,7 +4479,9 @@ meanchildage
 \begin_inset Text
 
 \begin_layout Plain Layout
-if there is a member of age to be in primary school(
+factor variable indicating if there is a family member in the household
+ of age between the mean primary school attendance ages ( i.e.
+ between 7 and 13 inclusive ) 
 \end_layout
 
 \end_inset
@@ -4476,6 +4491,96 @@ if there is a member of age to be in primary school(
 
 \begin_layout Plain Layout
 Individual
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mu_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+is_secondaryage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+factor variable indicating if there is a family member in the household
+ of age between the mean secondary school attendance ages ( i.e.
+ between 15 and 23 inclusive ) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mu_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+is_tertiaryage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+factor variable indicating if there is a family member in the household
+ of age between the mean secondary school attendance ages ( i.e.
+ between 23 and 31 inclusive )
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -4931,6 +5036,32 @@ noprefix "false"
 , the households with no children are ignored in the analysis.
  Nearly 22% of households in the Nigeria and 15 % of households in Tanzania
  are thus excluded from our comparison.
+\end_layout
+
+\begin_layout Standard
+The current grade being attended by the household member is not available
+ for the survey in
+\begin_inset space ~
+\end_inset
+
+Nigeria.
+ To get around this issue, we use a combination of the indicator variable
+ whether a household member is in school or not (available in surveys for
+ both Tanzania and Nigeria) and the mean school attendance ages in the two
+ countries to define the variables 
+\family typewriter
+is_primaryage
+\family default
+, 
+\family typewriter
+is_secondaryage
+\family default
+ and 
+\family typewriter
+is_tertiaryage
+\family default
+ that indicate whether there is a household member of age appropriate for
+ attending primary, secondary and tertiary education levels (respectively).
 \end_layout
 
 \begin_layout Standard

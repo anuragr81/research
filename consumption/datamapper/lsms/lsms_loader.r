@@ -1140,7 +1140,11 @@ lsms_loader<-function(fu,ln,lgc) {
       cb <- fu()@get_translated_frame(dat=cbdat,
                                       names=ln()@ohs_seccb_columns_lsms(2012),
                                       m=ln()@ohs_seccb_mapping_lsms(2012))
-      
+      cbgsecschool <- subset(cb,facilitycode=="F")
+      cbgsecschool$has_govtsecschool <- (cbgsecschool$accessibility==1) | (cbgsecschool$accessibility==2 & cbgsecschool$distance<=6)
+      # check completion
+      # o2012 %>% mutate( rdw = with(o2012,paste0(as.character(region),"-",as.character(district),"-",as.character(ward))))
+      # cbgsecschool %>% mutate( rdw = with(cbgsecschool,paste0(as.character(region),"-",as.character(district),"-",as.character(ward))))
       ######### END SCHOOL DISTANCE    ##################
       
       #* Also considered urban/rural based on population density 
