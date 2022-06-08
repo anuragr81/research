@@ -13,6 +13,7 @@ setClass("NigeriaNormaliser", representation(diary_columns_mapping="function", d
                                              item_codes_2010="function", item_codes_2012="function", item_codes_2015="function", ohs_info_columns_lsms="function",ohs_mapping_lsms="function",
                                              ohs_educ_info_columns_lsms="function",ohs_educ_columns_mapping_lsms="function",
                                              ohs_income_info_columns_lsms="function",ohs_income_columns_mapping_lsms="function",
+                                             get_lsms_community_facilities_mapping="function",get_lsms_community_facilities_columns="function",
                                              parents_occupation_sector="function",
                                              market_data_columns_mapping="function",market_data_info="function",ohs_geodata_columns_mapping_lsms="function",
                                              unit_codes_2010="function", get_diary_assets_fields_mapping_lsms="function",items_codes="function",
@@ -170,6 +171,43 @@ ngr_normaliser<-function() {
     
     stop(paste("Year:",year,"not supported"))
   }
+  
+  
+  get_lsms_community_facilities_mapping <- function(year){
+    if (year == 2010){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="state",name="region"))
+      s= rbind(s,data.frame(iesname="lga",name="district"))
+      s= rbind(s,data.frame(iesname="sector",name="is_urban"))
+      s= rbind(s,data.frame(iesname="ea",name="ea"))
+      s= rbind(s,data.frame(iesname="is_cd",name="facilitycode"))
+      s= rbind(s,data.frame(iesname="sc2q1",name="accessibility"))
+      s= rbind(s,data.frame(iesname="sc2q3",name="distance"))
+      s= rbind(s,data.frame(iesname="sc2q5",name="travelcost"))
+      
+      return(s)
+    }
+    if (year == 2012 || year == 2015){
+      s = data.frame(iesname=NULL,name=NULL)
+      s= rbind(s,data.frame(iesname="state",name="region"))
+      s= rbind(s,data.frame(iesname="lga",name="district"))
+      s= rbind(s,data.frame(iesname="sector",name="is_urban"))
+      s= rbind(s,data.frame(iesname="ea",name="ea"))
+      s= rbind(s,data.frame(iesname="is_cd",name="facilitycode"))
+      s= rbind(s,data.frame(iesname="c2q1",name="accessibility"))
+      s= rbind(s,data.frame(iesname="c2q3",name="distance"))
+      s= rbind(s,data.frame(iesname="c2q5",name="travelcost"))
+      
+      return(s)
+    }
+    stop(paste("Year:",year,"not supported"))
+  }
+  
+  get_lsms_community_facilities_columns<-function(year){
+      return(c("facilitycode","accessibility","distance","region","district","ea","is_urban","travelcost"))
+  }
+  
+  
   
   parents_occupation_sector <- function(occupation_mapping){
     # uses occupation_mapping from infer_occupation_ranks(o2010 = o2010,ignore_top = .05)
@@ -1949,6 +1987,7 @@ ngr_normaliser<-function() {
              market_data_info=market_data_info, unit_codes_2010=unit_codes_2010,ohs_geodata_columns_mapping_lsms=ohs_geodata_columns_mapping_lsms,
              get_diary_assets_fields_mapping_lsms=get_diary_assets_fields_mapping_lsms,items_codes=items_codes,
              ohs_food_quality_columns_mapping_lsms=ohs_food_quality_columns_mapping_lsms,expenditure_categories=expenditure_categories,
+             get_lsms_community_facilities_mapping=get_lsms_community_facilities_mapping,get_lsms_community_facilities_columns=get_lsms_community_facilities_columns,
              time_units_mapping=time_units_mapping, occupation_ranks=occupation_ranks) )
   
 }
