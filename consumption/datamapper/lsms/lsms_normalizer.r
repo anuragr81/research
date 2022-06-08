@@ -2345,7 +2345,7 @@ lsms_normalizer<-function() {
     #ENGLISH...3
     #ANY OTHER LANGUAGE..4
     #NO .. 5
-    return(c("hhid","personid","is_ge5y","litlang","is_literate","highest_educ","schoolowner",
+    return(c("hhid","personid","is_ge5y","litlang","is_literate","highest_educ","is_inschool","schoolowner",
              "schoolconveyance","has_missedschool","educexpense","has_adulteduc","adulteducmonths",
              "attended_school","current_educ_level","school_start_age","school_leaving_year","schoolconveyance","schooltransporttime"));
   }
@@ -2384,7 +2384,7 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_c02",name="litlang"))
     s= rbind(s,data.frame(iesname="hh_c03",name="attended_school"))
     s= rbind(s,data.frame(iesname="hh_c04",name="school_start_age"))
-    s= rbind(s,data.frame(iesname="hh_c05",name="in_school"))
+    s= rbind(s,data.frame(iesname="hh_c05",name="is_inschool"))
     s= rbind(s,data.frame(iesname="hh_c07",name="highest_educ"))
     s= rbind(s,data.frame(iesname="hh_c08",name="school_leaving_year"))
     s= rbind(s,data.frame(iesname="hh_c09",name="current_educ_level"))
@@ -2413,7 +2413,7 @@ lsms_normalizer<-function() {
     #ENGLISH...3
     #ANY OTHER LANGUAGE..4
     #NO .. 5
-    return(c("hhid","personid","is_ge5y","litlang","is_literate","highest_educ","schoolowner",
+    return(c("hhid","personid","is_ge5y","litlang","is_literate","highest_educ","schoolowner","is_inschool",
              "schoolconveyance","has_missedschool","educexpense","has_adulteduc","adulteducmonths",
              "attended_school","current_educ_level","school_start_age","school_leaving_year","schoolconveyance","schooltransporttime"));
   }
@@ -2426,7 +2426,7 @@ lsms_normalizer<-function() {
     s= rbind(s,data.frame(iesname="hh_c02",name="litlang"))
     s= rbind(s,data.frame(iesname="hh_c03",name="attended_school"))
     s= rbind(s,data.frame(iesname="hh_c04",name="school_start_age"))
-    s= rbind(s,data.frame(iesname="hh_c05",name="in_school"))
+    s= rbind(s,data.frame(iesname="hh_c05",name="is_inschool"))
     s= rbind(s,data.frame(iesname="hh_c07",name="highest_educ"))
     s= rbind(s,data.frame(iesname="hh_c08",name="school_leaving_year"))
     s= rbind(s,data.frame(iesname="hh_c09",name="current_educ_level"))

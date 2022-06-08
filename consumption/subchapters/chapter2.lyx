@@ -253,8 +253,8 @@ status open
 % 4.
  Zero expenditure on education, families with no children and household
  with no assets need to be accounted for  (told how many they are etc.).
- The fields attended_school is fine for TNZ - although current_educ_level
-  is not much better than highest_educ (in terms of NAs).
+ The fields attended_school is_inschool are fine for TNZ - although current_educ
+_level  is not much better than highest_educ (in terms of NAs).
  attended_school is also available for NGR (which can consider withdrawal)
  while current_educ_level is not.
  
@@ -4917,16 +4917,24 @@ First we do logx + r,r2012 etc.
 \begin_layout Standard
 
 \bar under
-It is worth emphasising that in both economies, a small portion of household
- units are made of joint families where the reported educational expenses
- are correspond to the grandchildren of the household head.
- Since we investigate the allocation expenditure budget among children,
- this detail matters only as a caveat to the effect of household head's
- education level that point to the penultimate generation for older households
- heads and the previous generation for younger households.
- While this occurs for less than 10% of the households (most household heads
- report education expenses on their own children), we also use the father's
- educ rank of the child whose educational expense is recorded.
+It is worth noting that in both economies, a significant number of household
+ units a made up of joint families where the reported educational expenses
+ are correspond to the grandchildren of the household head (HH).
+ 
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+The education level of the HH would thus point to the penultimate generation
+ for households where HH has grandchildren and the previous generation for
+ younger households where HH has young children.
+ To resolve this disparity, we use the highest education rank among those
+ of the generation before the children whose education expense is reported
+ for the household.
+ This suffices for the parental educational level measure because our interest
+ is in the expenditure budget spent over all the children in the household
+ rather than how education budget is distributed among the children, 
 \end_layout
 
 \begin_layout Standard
