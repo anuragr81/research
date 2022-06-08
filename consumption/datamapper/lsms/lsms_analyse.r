@@ -1513,7 +1513,14 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   
   ohs2010 <- merge(ohs2010_wi, incomedat2010,by=c("hhid"),all.x=T)
   
-  hsizes2010 <- ddply((ohs2010 %>% mutate(educprivate= schooltype=="private") )[,c("hhid","personid","age","educexpense","educprivate")],.(hhid),summarise,hsize=length(personid),numchild = length(age[age<=18]),meanchildage = mean(age[age<=18]), toteducexpense=sum(educexpense[!is.na(educexpense)]),educpriv=choose_max_non_na(educprivate))
+  hsizes2010 <- ddply((ohs2010 %>% mutate(educprivate= schooltype=="private") )[,c("hhid","personid","age","educexpense","educprivate")],.(hhid),summarise,
+                      hsize=length(personid),numchild = length(age[age<=18]),
+                      meanchildage = mean(age[age<=18]), 
+                      is_primaryage =  length(age[(age<14) & ( age>6) ])> 0,
+                      is_secondaryage =  length(age[(age>14) & ( age<24) ])> 0, 
+                      is_tertiaryage =  length(age[(age>=24) & ( age<32) ])> 0,
+                      toteducexpense=sum(educexpense[!is.na(educexpense)]),
+                      educpriv=choose_max_non_na(educprivate))
   
   # to use consu: call hsizes2010=ll@get_hsize(ohs2010)
   hs2010 <- unique(merge(unique(ohs2010[,relevant_fields]),hsizes2010 , by = c("hhid")))
@@ -1536,7 +1543,15 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   ohs2012_wi <- subset(o2012,!is.na(region))
   ohs2012 <- merge(ohs2012_wi, incomedat2012,by=c("hhid"),all.x=T)
 
-  hsizes2012 <- ddply((ohs2012 %>% mutate(educprivate= schooltype=="private") )[,c("hhid","personid","age","educexpense","educprivate")],.(hhid),summarise,hsize=length(personid), numchild = length(age[age<=18]),meanchildage = mean(age[age<=18]), toteducexpense=sum(educexpense[!is.na(educexpense)]),educpriv=choose_max_non_na(educprivate))
+  hsizes2012 <- ddply((ohs2012 %>% mutate(educprivate= schooltype=="private") )[,c("hhid","personid","age","educexpense","educprivate")],.(hhid),summarise,hsize=length(personid), 
+                      numchild = length(age[age<=18]),
+                      meanchildage = mean(age[age<=18]), 
+                      is_primaryage =  length(age[(age<14) & ( age>6) ])> 0,
+                      is_secondaryage =  length(age[(age>14) & ( age<24) ])> 0, 
+                      is_tertiaryage =  length(age[(age>=24) & ( age<32) ])> 0,
+                      toteducexpense=sum(educexpense[!is.na(educexpense)]),
+                      educpriv=choose_max_non_na(educprivate))
+  
   hs2012 <- unique(merge(unique(ohs2012[,relevant_fields]), hsizes2012, by = c("hhid")))
   chosenchars2012 <- ddply(ohs2012[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","litlang","outoffood","agri")],.(hhid),summarise,
                            max_education_rank = choose_max_non_na(education_rank) , 
@@ -1560,7 +1575,15 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   ohs2014_wi <- subset(o2014,!is.na(region))
   ohs2014 <- merge(ohs2014_wi, incomedat2014,by=c("hhid"),all.x=T)
   
-  hsizes2014 <- ddply((ohs2014 %>% mutate(educprivate= schooltype=="private") )[,c("hhid","personid","age","educexpense","educprivate")],.(hhid),summarise,hsize=length(personid),numchild = length(age[age<=18]), meanchildage = mean(age[age<=18]),toteducexpense=sum(educexpense[!is.na(educexpense)]),educpriv=choose_max_non_na(educprivate))
+  hsizes2014 <- ddply((ohs2014 %>% mutate(educprivate= schooltype=="private") )[,c("hhid","personid","age","educexpense","educprivate")],.(hhid),summarise,
+                      hsize=length(personid),
+                      numchild = length(age[age<=18]), 
+                      meanchildage = mean(age[age<=18]),
+                      is_primaryage =  length(age[(age<14) & ( age>6) ])> 0,
+                      is_secondaryage =  length(age[(age>14) & ( age<24) ])> 0, 
+                      is_tertiaryage =  length(age[(age>=24) & ( age<32) ])> 0,
+                      toteducexpense=sum(educexpense[!is.na(educexpense)]),
+                      educpriv=choose_max_non_na(educprivate))
   
   hs2014 <- unique(merge(unique(ohs2014[,relevant_fields]), hsizes2014, by = c("hhid")))
   chosenchars2014 <- ddply(ohs2014[,c("hhid","education_rank","occupation_rank","father_educ_rank","mother_educ_rank","age","litlang","outoffood","agri")],.(hhid),summarise,

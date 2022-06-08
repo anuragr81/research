@@ -1825,29 +1825,8 @@ In a simple econometric model considered in the chapter, the representative
  expenses on maintenance of owned assets.
  The educational expenses and non-durable consumption excluding assets-related-c
 osts thus form the budget constraint for the model.
- Further, the cross-sectional comparison of expense does not consider the
+ Further, the cross-sectional comparison of expenses does not consider the
  substitution with savings towards durable goods.
- 
-\end_layout
-
-\begin_layout Standard
-We control for the age of the household head in this comparison since the
- households with lower working age are likely to have less accumulations
- as well as needs.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%[Life-Cycle Effects]
-\end_layout
-
-\end_inset
-
  
 \end_layout
 
@@ -1894,14 +1873,19 @@ status open
 \end_layout
 
 \begin_layout Standard
-As explained earlier, the age of the children, the number of children (household
--size), the educational level of the parents, the accessibility of schools
+Further, only households with children i.e.
+ household members less than the age of 18 are considered in the analysis.
+ Since the households with lower working age are likely to have less accumulatio
+ns as well as needs, the average parental age in the household is also used
+ as a control in the comparison.
+ As explained earlier, the age of the children, the number of children (househol
+d-size), the educational level of the parents, the accessibility of schools
  in the district/ward and the social characteristics of the household such
- as religion and language spoken are important controls in our empirical
+ as religion and language spoken are other important controls in our empirical
  analyses.
- Notice that the educational rank of all individuals are standardised using
- the educational levels recorded in the data for Tanzania and Nigeria by
- differentiating between primary, secondary and higher educational levels
+ Notice also that the educational rank of all individuals are standardised
+ using the educational levels recorded in the data for Tanzania and Nigeria
+ by differentiating between primary, secondary and higher educational levels
  (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2276,7 +2260,7 @@ In summary, the controls used in empirical analysis are the household prosperity
  (or the urban-rural indicators) in the consumer's vicinity (calculated
  based on the stock of durable goods), the demographic and social identity
  variables 
-\begin_inset Formula $\rho_{i}$
+\begin_inset Formula $\rho$
 \end_inset
 
  (e.g.
@@ -2295,7 +2279,7 @@ In summary, the controls used in empirical analysis are the household prosperity
  These are used for two regressions in our analysis of educational expenses
  and variation in prosperity and income.
  The first regression uses the budget share 
-\begin_inset Formula $w_{educ,j}$
+\begin_inset Formula $w_{educ}$
 \end_inset
 
  as the dependent variable
@@ -2304,7 +2288,7 @@ In summary, the controls used in empirical analysis are the household prosperity
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-w_{educ,j}=\rho+\alpha_{educ}\cdot r+\gamma_{educ}\cdot log(p_{ne})+\beta_{educ}\cdot log(x_{i})+\delta_{educ}\cdot k+\epsilon_{j,ne}\label{eq:main_estimation}
+w_{educ}=\rho+\alpha_{educ}\cdot r+\gamma_{educ}\cdot log(p_{ne})+\beta_{educ}\cdot log(x_{i})+\delta_{educ}\cdot k+\epsilon_{ne}\label{eq:main_estimation}
 \end{gather}
 
 \end_inset
@@ -2334,11 +2318,6 @@ The second regression uses the logarithm of educational expenses
 \end_inset
 
  in the model.
- For convenience, the subscript 
-\begin_inset Formula $i$
-\end_inset
-
- has been dropped in further usage of control variables and dependent variables.
  Notice that the second and third interpretations - as listed in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4487,7 +4466,7 @@ meanchildage
 \begin_inset Text
 
 \begin_layout Plain Layout
-the mean age of the children in the household
+if there is a member of age to be in primary school(
 \end_layout
 
 \end_inset
@@ -4915,26 +4894,43 @@ First we do logx + r,r2012 etc.
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-It is worth noting that in both economies, a significant number of household
- units a made up of joint families where the reported educational expenses
- are correspond to the grandchildren of the household head (HH).
- 
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-The education level of the HH would thus point to the penultimate generation
+It is worth highlighting that in both the economies, a significant number
+ of household units are made up of joint families where the reported educational
+ expenses are correspond to the grandchildren of the household head (HH).
+ The education level of the HH would thus point to the penultimate generation
  for households where HH has grandchildren and the previous generation for
  younger households where HH has young children.
- To resolve this disparity, we use the highest education rank among those
- of the generation before the children whose education expense is reported
- for the household.
- This suffices for the parental educational level measure because our interest
- is in the expenditure budget spent over all the children in the household
- rather than how education budget is distributed among the children, 
+ To resolve this disparity, we avoid using the education rank of the HH
+ and use the highest education rank in the generation the children's parents
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Only relations with the household head are reported in the survey.
+ Thus, there is no direct way of locating the parent of a child except through
+ the relation with the household-head.
+\end_layout
+
+\end_inset
+
+.
+ This parental educational level suffices for the analysis of expenditure
+ spent over all the children in the household (rather than how education
+ budget is distributed among the children).
+ As mentioned in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Econometric-Method"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the households with no children are ignored in the analysis.
+ Nearly 22% of households in the Nigeria and 15 % of households in Tanzania
+ are thus excluded from our comparison.
 \end_layout
 
 \begin_layout Standard
@@ -5288,17 +5284,6 @@ noprefix "false"
 
 ), this seems to confirm the findings that higher education is not provided
  by private institutions in the region.
- The results also indicate a higher rise in secondary and tertiary education
- - if one looks at the effect of 
-\begin_inset Formula $\mu$
-\end_inset
-
- i.e.
-
-\family typewriter
- meanchildage
-\family default
- (average age of the children) on education expenses in the two economies.
  The less surprising observation that more children increase the total expenditu
 re is supported for both the economies.
 \end_layout
