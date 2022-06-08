@@ -1076,7 +1076,7 @@ noprefix "false"
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Results"
+reference "sec:AnalysisAndResults"
 plural "false"
 caps "false"
 noprefix "false"
@@ -1819,8 +1819,8 @@ noprefix "false"
 
 \begin_layout Standard
 In a simple econometric model considered in the chapter, the representative
- consumer balances i) her consumption with ii) increasing expenditure on
- education.
+ household balances i) her consumption with ii) increasing expenditure on
+ education for the children.
  The non-durable consumption that the consumer may spend on excludes the
  expenses on maintenance of owned assets.
  The educational expenses and non-durable consumption excluding assets-related-c
@@ -1894,10 +1894,11 @@ status open
 \end_layout
 
 \begin_layout Standard
-As explained earlier, the household-age, the number of children (household-size)
-, household-head's educational level , the accessibility of schools in the
- district/ward and social characteristics such as religion and language
- spoken are important controls in our empirical analyses.
+As explained earlier, the age of the children, the number of children (household
+-size), the educational level of the parents, the accessibility of schools
+ in the district/ward and the social characteristics of the household such
+ as religion and language spoken are important controls in our empirical
+ analyses.
  Notice that the educational rank of all individuals are standardised using
  the educational levels recorded in the data for Tanzania and Nigeria by
  differentiating between primary, secondary and higher educational levels
@@ -2003,7 +2004,7 @@ The wealth concentration is also recalculated for those in the household's
  The results provided in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Results"
+reference "sec:AnalysisAndResults"
 plural "false"
 caps "false"
 noprefix "false"
@@ -2260,15 +2261,12 @@ status open
 \begin_layout Standard
 In summary, the controls used in empirical analysis are the household prosperity
  level (either the logarithm of the total annual expenditure 
-\begin_inset Formula $log(x_{i})$
+\begin_inset Formula $log(x)$
 \end_inset
 
- for household 
-\begin_inset Formula $i$
-\end_inset
-
- in a given year or the logarithm of total assets owned 
-\begin_inset Formula $log(A_{i})$
+ for a household in a given year or the logarithm of total assets owned
+ 
+\begin_inset Formula $log(A)$
 \end_inset
 
  ), the wealth concentration 
@@ -2283,7 +2281,7 @@ In summary, the controls used in empirical analysis are the household prosperity
 
  (e.g.
  age of the children, the family size etc.) , the access to education 
-\begin_inset Formula $k_{i}$
+\begin_inset Formula $k$
 \end_inset
 
 , and the prices 
@@ -2297,7 +2295,7 @@ In summary, the controls used in empirical analysis are the household prosperity
  These are used for two regressions in our analysis of educational expenses
  and variation in prosperity and income.
  The first regression uses the budget share 
-\begin_inset Formula $w_{educ,i}$
+\begin_inset Formula $w_{educ,j}$
 \end_inset
 
  as the dependent variable
@@ -2306,7 +2304,7 @@ In summary, the controls used in empirical analysis are the household prosperity
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-w_{educ,i}=\rho_{i}+\alpha_{educ}\cdot r+\gamma_{educ}\cdot log(p_{ne})+\beta_{educ}\cdot log(x_{i})+\delta_{educ}\cdot k_{i}+\epsilon_{i,ne}\label{eq:main_estimation}
+w_{educ,j}=\rho+\alpha_{educ}\cdot r+\gamma_{educ}\cdot log(p_{ne})+\beta_{educ}\cdot log(x_{i})+\delta_{educ}\cdot k+\epsilon_{j,ne}\label{eq:main_estimation}
 \end{gather}
 
 \end_inset
@@ -2375,7 +2373,7 @@ r_occup
  in the results (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Results"
+reference "sec:AnalysisAndResults"
 plural "false"
 caps "false"
 noprefix "false"
@@ -2716,11 +2714,11 @@ literal "false"
 \begin_layout Section
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Results"
+name "sec:AnalysisAndResults"
 
 \end_inset
 
-Empirical Analysis
+Empirical Analysis and Results
 \end_layout
 
 \begin_layout Subsection
@@ -4927,22 +4925,29 @@ It is worth emphasising that in both economies, a small portion of household
  education level that point to the penultimate generation for older households
  heads and the previous generation for younger households.
  While this occurs for less than 10% of the households (most household heads
- report education expenses on their own children), we also use the maximum
- education level at the parental level in the household
-\begin_inset Foot
+ report education expenses on their own children), we also use the father's
+ educ rank of the child whose educational expense is recorded.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-\bar under
-The use of the maximal head is necessitate by relationships being available
- only in relation to household head.
+% relationships relevant only for those less than 18 years old (we're not
+ concerned with adult education).
+\end_layout
+
+\begin_layout Plain Layout
+
+% ddply(subset(o2010,!is.na(educexpense) & age <=18) ,.(household_status),summaris
+e,n=length(hhid))
 \end_layout
 
 \end_inset
 
- to check the robustness of our results.
- 
+
 \end_layout
 
 \begin_layout Standard
