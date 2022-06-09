@@ -105,7 +105,7 @@ setClass("LSMSNormalizer", representation(hh_mapping_lsms_2008= "function",
                                           get_diary_secn_fields_mapping_lsms_2014="function",
                                           fao_food_diversity_score_HDDS="function",
                                           computeYearValues="function",
-                                          decode_clusterid="function",
+                                          decode_region="function",decode_district="function",decode_ward="function",decode_ea="function",decode_village="function",
                                           computeLsmsSelfemployedValues="function",
                                           infer_lsms_sece_total_income="function",
                                           categories_needs_based="function",
@@ -2580,13 +2580,44 @@ lsms_normalizer<-function() {
     return(s)
   }
   
-  decode_clusterid <- function (x){
-    x$region <- as.integer(sapply(x$clusterid,function(x) { strsplit(x,"-")[[1]][1] }))
-    x$district <- as.integer(sapply(x$clusterid,function(x) { strsplit(x,"-")[[1]][2] }))
-    x$ward <- as.integer(sapply(x$clusterid,function(x) { strsplit(x,"-")[[1]][3] }))
-    x$village <- as.integer(sapply(x$clusterid,function(x) { strsplit(x,"-")[[1]][4] }))
-    x$ea <- as.integer(sapply(x$clusterid,function(x) { strsplit(x,"-")[[1]][5] }))
-    return(x)
+  decode_region  <- function (x){
+    if (grepl("-",x)){
+      return (strsplit(x,"-")[[1]][1])
+    } else {
+      return(substring(x,1,2))
+    }
+  }
+  
+  decode_district <- function(x){
+    if (grepl("-",x)){
+    return (strsplit(x,"-")[[1]][2])
+    } else {
+      return(substring(x,3,4))
+    }
+  }
+  
+  decode_ward <- function(x){
+    if (grepl("-",x)){
+    return (strsplit(x,"-")[[1]][3])
+    } else {
+      return(substring(x,5,6))
+    }
+  }
+  
+  decode_village <- function(x){
+    if (grepl("-",x)){
+    return (strsplit(x,"-")[[1]][4])
+    } else {
+      return(substring(x,7,8))
+    }
+  }
+  
+  decode_ea  <- function(x){
+    if (grepl("-",x)){
+    return (strsplit(x,"-")[[1]][5])
+    } else {
+      return(substring(x,9,11))
+    }
   }
   
   ohs_seca_columns_lsms<-function(year){
@@ -3831,7 +3862,7 @@ lsms_normalizer<-function() {
              get_lsms_secj_fields_mapping_2012=get_lsms_secj_fields_mapping_2012,
              get_lsms_secj_fields_mapping_2014=get_lsms_secj_fields_mapping_2014,
              fao_food_diversity_score_HDDS=fao_food_diversity_score_HDDS,
-             decode_clusterid=decode_clusterid,
+             decode_region=decode_region, decode_district=decode_district,decode_ward=decode_ward,decode_ea=decode_ea,decode_village=decode_village,
              computeYearValues=computeYearValues, 
              computeLsmsSelfemployedValues=computeLsmsSelfemployedValues, 
              infer_lsms_sece_total_income=infer_lsms_sece_total_income,

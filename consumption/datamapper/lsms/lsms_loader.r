@@ -954,6 +954,9 @@ lsms_loader<-function(fu,ln,lgc) {
   load_ohs_file <-function(year,dirprefix,fu,ln){
     #
     if (year ==2014){
+      
+      
+      
       if (F){
         cbFileName1 <- paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_STATA11/com_sec_cb.DTA',sep="")
         cbFileName2 <- paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/com_sec_cb.DTA',sep="")
@@ -1104,7 +1107,51 @@ lsms_loader<-function(fu,ln,lgc) {
       
       ohsjfp3 <- ohsjfp2 %>% mutate(schooltype = sapply(schoolowner, school_type))
       
-      return(ohsjfp3)
+      
+      ########## BEGIN SCHOOL DISTANCE ##################
+      
+      cbFileName1 <- paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_STATA11/com_sec_cb.DTA',sep="")
+      cbFileName2 <- paste(dirprefix,'./lsms/tnz2014/TZA_2014_NPS-R4_v03_M_v01_A_EXT_STATA11/com_sec_cb.DTA',sep="")
+      print(paste("Reading file:",cbFileName1))
+      cbdat1<-read.dta(cbFileName1,convert.factors = FALSE)
+      
+      print(paste("Reading file:",cbFileName2))
+      cbdat2<-read.dta(cbFileName2,convert.factors = FALSE)
+      
+      cbdat <- rbind(cbdat1,cbdat2)
+      
+      
+      cb <- fu()@get_translated_frame(dat=cbdat,
+                                      names=ln()@ohs_seccb_columns_lsms(year),
+                                      m=ln()@ohs_seccb_mapping_lsms(year))
+      cb$region <- as.integer(sapply(cb$clusterid, ln()@decode_region))
+      cb$district <- as.integer(sapply(cb$clusterid, ln()@decode_district))
+      cb$ward <- as.integer(sapply(cb$clusterid, ln()@decode_ward))
+      cb$village <- as.integer(sapply(cb$clusterid, ln()@decode_village))
+      cb$ea <- as.integer(sapply(cb$clusterid, ln()@decode_ea))
+      
+      cb$clusterid <- NULL
+      
+      cbggovtsecschool <- subset(cb,facilitycode=="F")
+      cbggovtsecschool$has_govtsecschool <- (cbggovtsecschool$accessibility==1) | (cbggovtsecschool$accessibility==2 & cbggovtsecschool$distance<=6)
+      
+      cbgprivsecschool <- subset(cb,facilitycode=="G")
+      cbgprivsecschool$has_privsecschool <- (cbgprivsecschool$accessibility==1) | (cbgprivsecschool$accessibility==2 & cbgprivsecschool$distance<=6)
+      
+      schoolcols_govt <- c("region","district","ward","village","ea","has_govtsecschool")
+      schoolcols_priv <- c("region","district","ward","village","ea","has_privsecschool")
+      
+      secschooldat <- subset(merge(cbggovtsecschool[,schoolcols_govt],cbgprivsecschool[,schoolcols_priv],by=c("region","district","ward","village","ea"),all=T),
+                             !(is.na(has_govtsecschool) & is.na(has_privsecschool)))
+      secschooldat[is.na(secschooldat)] <- F
+      secschooldat$has_secschool <- with ( secschooldat, has_govtsecschool  | has_privsecschool)
+      secschools <- ddply(subset(secschooldat,!is.na(has_secschool)),.(region,district),summarise, secondary_schools= length(has_secschool[has_secschool==T]))
+      
+      
+      ######### END SCHOOL DISTANCE    ##################
+      ohsjfp4 <- merge(ohsjfp3,secschools,by=c("region","district"),all.x=T)
+      
+      return(ohsjfp4)
       
     }
     #
@@ -1131,21 +1178,6 @@ lsms_loader<-function(fu,ln,lgc) {
         
       }
       
-      ########## BEGIN school distance ##################
-      
-      cbFileName <- paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/COM_SEC_CB.dta',sep="")
-      
-      cbdat      <- read.dta(cbFileName,convert.factors = FALSE)
-      
-      cb <- fu()@get_translated_frame(dat=cbdat,
-                                      names=ln()@ohs_seccb_columns_lsms(2012),
-                                      m=ln()@ohs_seccb_mapping_lsms(2012))
-      cbgsecschool <- subset(cb,facilitycode=="F")
-      cbgsecschool$has_govtsecschool <- (cbgsecschool$accessibility==1) | (cbgsecschool$accessibility==2 & cbgsecschool$distance<=6)
-      # check completion
-      # o2012 %>% mutate( rdw = with(o2012,paste0(as.character(region),"-",as.character(district),"-",as.character(ward))))
-      # cbgsecschool %>% mutate( rdw = with(cbgsecschool,paste0(as.character(region),"-",as.character(district),"-",as.character(ward))))
-      ######### END SCHOOL DISTANCE    ##################
       
       #* Also considered urban/rural based on population density 
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
@@ -1246,7 +1278,42 @@ lsms_loader<-function(fu,ln,lgc) {
       ohsjpfp2 <- add_mother_educ(ohsjpfp1,parentedmap)
       
       ohsjpfp3 <- ohsjpfp2 %>% mutate(schooltype = sapply(schoolowner, school_type))
-      return(ohsjpfp3)
+      
+      
+      
+      ########## BEGIN SCHOOL DISTANCE ##################
+      
+      cbFileName <- paste(dirprefix,'./lsms/tnz2012/TZA_2012_LSMS_v01_M_STATA_English_labels/COM_SEC_CB.dta',sep="")
+      
+      cbdat      <- read.dta(cbFileName,convert.factors = FALSE)
+      
+      cb <- fu()@get_translated_frame(dat=cbdat,
+                                      names=ln()@ohs_seccb_columns_lsms(2012),
+                                      m=ln()@ohs_seccb_mapping_lsms(2012))
+      cbggovtsecschool <- subset(cb,facilitycode=="F")
+      cbggovtsecschool$has_govtsecschool <- (cbggovtsecschool$accessibility==1) | (cbggovtsecschool$accessibility==2 & cbggovtsecschool$distance<=6)
+      
+      cbgprivsecschool <- subset(cb,facilitycode=="G")
+      cbgprivsecschool$has_privsecschool <- (cbgprivsecschool$accessibility==1) | (cbgprivsecschool$accessibility==2 & cbgprivsecschool$distance<=6)
+      
+      schoolcols_govt <- c("region","district","ward","has_govtsecschool")
+      schoolcols_priv <- c("region","district","ward","has_privsecschool")
+      
+      secschooldat <- subset(merge(cbggovtsecschool[,schoolcols_govt],cbgprivsecschool[,schoolcols_priv],by=c("region","district","ward"),all=T),
+                             !(is.na(has_govtsecschool) & is.na(has_privsecschool)))
+      secschooldat[is.na(secschooldat)] <- F
+      secschooldat$has_secschool <- with ( secschooldat, has_govtsecschool  | has_privsecschool)
+      secschools <- ddply(subset(secschooldat,!is.na(has_secschool)),.(region,district),summarise, secondary_schools= length(has_secschool[has_secschool==T]))
+      
+      
+      # check completion
+      # o2012 %>% mutate( rdw = with(o2012,paste0(as.character(region),"-",as.character(district),"-",as.character(ward))))
+      # cbgsecschool %>% mutate( rdw = with(cbgsecschool,paste0(as.character(region),"-",as.character(district),"-",as.character(ward))))
+      
+      ######### END SCHOOL DISTANCE    ##################
+      ohsjpfp4 <- merge(ohsjpfp3,secschools,by=c("region","district"),all.x=T)
+      
+      return(ohsjpfp4)
       
     }
     

@@ -1130,6 +1130,7 @@ init_data <- function(use_ea){
   o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
   o2012 <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
   o2014 <- ll@load_ohs_file(year = 2014, dirprefix = "../",fu=fu, ln=lsms_normalizer) ;
+  stop("Find out why schools availability for areas 1-5 are missing")
   a2010 <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
   a2012 <- ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
   a2014 <- ll@read_assets_file(year = 2014, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
