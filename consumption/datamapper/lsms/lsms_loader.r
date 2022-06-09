@@ -1345,6 +1345,8 @@ lsms_loader<-function(fu,ln,lgc) {
       }
       ##
       #* Also considered urban/rural based on population density 
+
+      
       u <-read.csv(paste(dirprefix,'./lsms/district_code.csv',sep=""))
       pop <- read.csv(paste(dirprefix,'./lsms/census_codes_linked.csv',sep=""))
       u <- merge(plyr::rename(pop,c("region"="region_name","district"="district_name","total"="total_population")), u, by = c("region_name","district_name"),all.y=T)
@@ -1425,7 +1427,35 @@ lsms_loader<-function(fu,ln,lgc) {
       ohsjfp1 <- add_father_educ(ohsjf,parentedmap)
       ohsjfp2 <- add_mother_educ(ohsjfp1,parentedmap)
       ohsjfp3 <- ohsjfp2 %>% mutate(schooltype = sapply(schoolowner, school_type))
-      return(ohsjfp3)
+      
+      
+      ########## BEGIN SCHOOL DISTANCE ##################
+      
+      cbFileName <- paste(dirprefix,'./lsms/TZNPS2COMDTA/COMSEC_CB.dta',sep="")
+      
+      cbdat      <- read.dta(cbFileName,convert.factors = FALSE)
+      
+      cb <- fu()@get_translated_frame(dat=cbdat,
+                                      names=ln()@ohs_seccb_columns_lsms(2010),
+                                      m=ln()@ohs_seccb_mapping_lsms(2010))
+      cbggovtsecschool <- subset(cb,facilitycode=="F")
+      cbggovtsecschool$has_govtsecschool <- (cbggovtsecschool$accessibility==1) | (cbggovtsecschool$accessibility==2 & cbggovtsecschool$distance<=6)
+      
+      cbgprivsecschool <- subset(cb,facilitycode=="G")
+      cbgprivsecschool$has_privsecschool <- (cbgprivsecschool$accessibility==1) | (cbgprivsecschool$accessibility==2 & cbgprivsecschool$distance<=6)
+      
+      schoolcols_govt <- c("region","district","ward","has_govtsecschool")
+      schoolcols_priv <- c("region","district","ward","has_privsecschool")
+      
+      secschooldat <- subset(merge(cbggovtsecschool[,schoolcols_govt],cbgprivsecschool[,schoolcols_priv],by=c("region","district","ward"),all=T),
+                             !(is.na(has_govtsecschool) & is.na(has_privsecschool)))
+      secschooldat[is.na(secschooldat)] <- F
+      secschooldat$has_secschool <- with ( secschooldat, has_govtsecschool  | has_privsecschool)
+      secschools <- ddply(subset(secschooldat,!is.na(has_secschool)),.(region,district),summarise, secondary_schools= length(has_secschool[has_secschool==T]))
+      
+      ######### END SCHOOL DISTANCE    ##################
+      ohsjfp4<- merge(ohsjfp3,secschools,by=c("region","district"),all.x=T)
+      return(ohsjfp4)
       
       
     }

@@ -970,7 +970,7 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
   religionhhids <- infer_religion_for_hhid(o2010 = o2010, o2012 = o2012, o2015 = o2015)
   
   #total consumption
-  relevant_fields <-c("hhid","region","district","ea","is_urban","S","E","ypay","lnY")
+  relevant_fields <-c("hhid","region","district","ea","is_urban","S","E","ypay","lnY","secondary_schools")
   # 2010
   ohs2010_wi <- subset(o2010,!is.na(region))
   

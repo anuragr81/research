@@ -1130,7 +1130,7 @@ init_data <- function(use_ea){
   o2010 <- ll@load_ohs_file(year = 2010, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
   o2012 <- ll@load_ohs_file(year = 2012, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
   o2014 <- ll@load_ohs_file(year = 2014, dirprefix = "../",fu=fu, ln=lsms_normalizer) ;
-  stop("Find out why schools availability for areas 1-5 are missing")
+  
   a2010 <- ll@read_assets_file(year = 2010, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
   a2012 <- ll@read_assets_file(year = 2012, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
   a2014 <- ll@read_assets_file(year = 2014, dirprefix = "../",fu = fu, ln = lsms_normalizer) ; 
@@ -1508,7 +1508,7 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
   hhead_columns <- c("hhid"="hhid","years_community"="hh_years_community","age"="hh_age","education_rank"="hh_education_rank","highest_educ"="hh_highest_educ","occupation_rank"="hh_occupation_rank","litlang"="hh_litlang","occupation"="hh_occupation")
 
   #total consumption
-  relevant_fields <-c("hhid","region","district","ward","ea","isrural","expensiveregion","S","E","population","ypay","lnY")
+  relevant_fields <-c("hhid","region","district","ward","ea","isrural","expensiveregion","S","E","population","ypay","lnY","secondary_schools")
   # 2010
   ohs2010_wi <- subset(o2010,!is.na(region))
   
