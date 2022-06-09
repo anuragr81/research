@@ -640,10 +640,10 @@ ngr_loader<-function(fu,ngrn,lgc) {
       
       secschools <- ddply(subset(secschooldat,!is.na(has_secschool)),.(region,district),summarise, secondary_schools= length(has_secschool[has_secschool==T]))
       
-      
+      ohsfm3 <- merge(ohsfm2,secschools, by = c("region","district"),all.x=T)
       ###END SCHOOL DISTANCE ###
       
-      return(ohsfm2)
+      return(ohsfm3)
     }
     
     
@@ -734,32 +734,14 @@ ngr_loader<-function(fu,ngrn,lgc) {
       
       ###END SCHOOL DISTANCE ###
       
-      return(ohsfm2)
+      ohsfm3 <- merge(ohsfm2,secschools, by = c("region","district"),all.x=T)
+      return(ohsfm3)
     }
     
     if ( year == 2015) {
       
       
-      ###BEGIN SCHOOL DISTANCE ###
-      communitydatraw <- read_dta(paste0(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sectc2_harvestw3.dta'))
       
-      communitydat    <- fu()@get_translated_frame(dat=communitydatraw,
-                                                   names=ngrn()@get_lsms_community_facilities_columns(year),
-                                                   m=ngrn()@get_lsms_community_facilities_mapping(year))
-      
-      govtsecschooldat <- subset(communitydat,facilitycode==203)
-      govtsecschooldat$has_govtsecschool <- with (govtsecschooldat, (accessibility==1) | (accessibility==2 & distance<=6))
-      
-      commsecschooldat <- subset(communitydat,facilitycode==204)
-      commsecschooldat$has_govtsecschool <- with (commsecschooldat, (accessibility==1) | (accessibility==2 & distance<=6))
-      schoolcols <- c("region","district","accessibility")
-      a<-merge(ply::rename(govtsecschooldat[,schoolcols],c("accessibility"="govt_accessibility")),
-               ply::rename(commsecschooldat[,schoolcols],by=c("region","district"),c("accessibility"="comm_accessibility") ),all=T)
-      
-      #secschools <- ddply(subset(secschooldat,!is.na(has_secschool)),.(region,district),summarise, secondary_schools= length(has_secschool[has_secschool==T]))
-      
-      
-      ###END SCHOOL DISTANCE ###
       
       sec1fname  <-paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect1_plantingw3.dta',sep="")
       print(paste("Opening file:",sec1fname))
@@ -825,7 +807,30 @@ ngr_loader<-function(fu,ngrn,lgc) {
       
       ohsfm2 <- ohsfm %>% mutate(schooltype = sapply(schoolowner, school_type))
       
-      return(ohsfm2)
+      ###BEGIN SCHOOL DISTANCE ###
+      communitydatraw <- read_dta(paste0(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sectc2_harvestw3.dta'))
+      
+      communitydat    <- fu()@get_translated_frame(dat=communitydatraw,
+                                                   names=ngrn()@get_lsms_community_facilities_columns(year),
+                                                   m=ngrn()@get_lsms_community_facilities_mapping(year))
+      
+      govtsecschooldat <- subset(communitydat,facilitycode==204)
+      govtsecschooldat$has_govtsecschool <- with (govtsecschooldat, (accessibility==1) | (accessibility==2 & distance<=6))
+      
+      commsecschooldat <- subset(communitydat,facilitycode==205)
+      commsecschooldat$has_commsecschool <- with (commsecschooldat, (accessibility==1) | (accessibility==2 & distance<=6))
+      schoolcols_govt <- c("region","district","ea","has_govtsecschool")
+      schoolcols_comm <- c("region","district","ea","has_commsecschool")
+      
+      secschooldat <- subset(merge(govtsecschooldat[,schoolcols_govt],commsecschooldat[,schoolcols_comm],by=c("region","district","ea"),all=T),
+                             !(is.na(has_govtsecschool) & is.na(has_commsecschool)))
+      secschooldat[is.na(secschooldat)] <- F
+      secschooldat$has_secschool <- with ( secschooldat, has_govtsecschool  | has_commsecschool)
+      secschools <- ddply(subset(secschooldat,!is.na(has_secschool)),.(region,district),summarise, secondary_schools= length(has_secschool[has_secschool==T]))
+      
+      ohsfm3 <- merge(ohsfm2,secschools, by = c("region","district"),all.x=T)
+      ###END SCHOOL DISTANCE ###
+      return(ohsfm3)
     }
     stop(paste("Year:",year,"not supported"))
   }
