@@ -635,10 +635,10 @@ ngr_loader<-function(fu,ngrn,lgc) {
                                                    names=ngrn()@get_lsms_community_facilities_columns(year),
                                                    m=ngrn()@get_lsms_community_facilities_mapping(year))
       
-      govtsecdat <- subset(communitydat,facilitycode==203)
-      govtsecdat$has_govtsecschool <- with (govtsecdat, (accessibility==1) | (accessibility==2 & distance<=6))
+      secschooldat <- subset(communitydat,facilitycode==203)
+      secschooldat$has_secschool <- with (secschooldat, (accessibility==1) | (accessibility==2 & distance<=6))
       
-      govtsecschools <- ddply(subset(govtsecdat,!is.na(has_govtsecschool)),.(region,district),summarise, govtsecschools= length(has_govtsecschool[has_govtsecschool==T]))
+      secschools <- ddply(subset(secschooldat,!is.na(has_secschool)),.(region,district),summarise, secondary_schools= length(has_secschool[has_secschool==T]))
       
       
       ###END SCHOOL DISTANCE ###
@@ -649,20 +649,7 @@ ngr_loader<-function(fu,ngrn,lgc) {
     
     if (year ==2012){
       
-      ###BEING SCHOOL DISTANCE ###
-      communitydatraw <- read_dta(paste0(dirprefix,'./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post Harvest Wave 2/Community/sectc2_harvestw2.dta'))
-
-      communitydat    <- fu()@get_translated_frame(dat=communitydatraw,
-                                                   names=ngrn()@get_lsms_community_facilities_columns(year),
-                                                   m=ngrn()@get_lsms_community_facilities_mapping(year))
       
-      govtsecdat <- subset(communitydat,facilitycode==203)
-      govtsecdat$has_govtsecschool <- with (govtsecdat, (accessibility==1) | (accessibility==2 & distance<=6))
-      
-      govtsecschools <- ddply(subset(govtsecdat,!is.na(has_govtsecschool)),.(region,district),summarise, govtsecschools= length(has_govtsecschool[has_govtsecschool==T]))
-      
-      
-      ###END SCHOOL DISTANCE ###
       
       ####
       
@@ -730,10 +717,49 @@ ngr_loader<-function(fu,ngrn,lgc) {
       ohsfm <- add_mother_educ(ohsf,education_rank_mapping)
       
       ohsfm2 <- ohsfm %>% mutate(schooltype = sapply(schoolowner, school_type))
+      
+      
+      ###BEGIN SCHOOL DISTANCE ###
+      communitydatraw <- read_dta(paste0(dirprefix,'./lsms/nigeria/2012/NGA_2012_GHSP-W2_v02_M_STATA/Post Harvest Wave 2/Community/sectc2_harvestw2.dta'))
+      
+      communitydat    <- fu()@get_translated_frame(dat=communitydatraw,
+                                                   names=ngrn()@get_lsms_community_facilities_columns(year),
+                                                   m=ngrn()@get_lsms_community_facilities_mapping(year))
+      
+      secschooldat <- subset(communitydat,facilitycode==203)
+      secschooldat$has_secschool <- with (secschooldat, (accessibility==1) | (accessibility==2 & distance<=6))
+      
+      secschools <- ddply(subset(secschooldat,!is.na(has_secschool)),.(region,district),summarise, secondary_schools= length(has_secschool[has_secschool==T]))
+      
+      
+      ###END SCHOOL DISTANCE ###
+      
       return(ohsfm2)
     }
     
     if ( year == 2015) {
+      
+      
+      ###BEGIN SCHOOL DISTANCE ###
+      communitydatraw <- read_dta(paste0(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sectc2_harvestw3.dta'))
+      
+      communitydat    <- fu()@get_translated_frame(dat=communitydatraw,
+                                                   names=ngrn()@get_lsms_community_facilities_columns(year),
+                                                   m=ngrn()@get_lsms_community_facilities_mapping(year))
+      
+      govtsecschooldat <- subset(communitydat,facilitycode==203)
+      govtsecschooldat$has_govtsecschool <- with (govtsecschooldat, (accessibility==1) | (accessibility==2 & distance<=6))
+      
+      commsecschooldat <- subset(communitydat,facilitycode==204)
+      commsecschooldat$has_govtsecschool <- with (commsecschooldat, (accessibility==1) | (accessibility==2 & distance<=6))
+      schoolcols <- c("region","district","accessibility")
+      a<-merge(ply::rename(govtsecschooldat[,schoolcols],c("accessibility"="govt_accessibility")),
+               ply::rename(commsecschooldat[,schoolcols],by=c("region","district"),c("accessibility"="comm_accessibility") ),all=T)
+      
+      #secschools <- ddply(subset(secschooldat,!is.na(has_secschool)),.(region,district),summarise, secondary_schools= length(has_secschool[has_secschool==T]))
+      
+      
+      ###END SCHOOL DISTANCE ###
       
       sec1fname  <-paste(dirprefix,'./lsms/nigeria/2015/NGA_2015_GHSP-W3_v02_M_Stata/sect1_plantingw3.dta',sep="")
       print(paste("Opening file:",sec1fname))
