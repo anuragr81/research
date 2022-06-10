@@ -1828,8 +1828,8 @@ status open
 
 \begin_layout Plain Layout
 
-%m<- ddply(unique(k[,c("region","hhid2010","district","lnA0")]),.(region,district
-),summarise,lnA0_mean=mean(lnA0),n=length(hhid2010))
+%m<- ddply(unique(k[,c("region","hhid2010","district","logA")]),.(region,district
+),summarise,logA_mean=mean(logA),n=length(hhid2010))
 \end_layout
 
 \begin_layout Plain Layout
@@ -2382,15 +2382,15 @@ status open
 
 \begin_layout Plain Layout
 
-%ma<-ddply(unique(k[,c("region","hhid2010","district","lnA0","mage","logx","log_
-q_ne","hsize")]),.(region,district,mage),summarise,lnA0_mean=mean(lnA0),n=length(
+%ma<-ddply(unique(k[,c("region","hhid2010","district","logA","mage","logx","log_
+q_ne","hsize")]),.(region,district,mage),summarise,logA_mean=mean(logA),n=length(
 hhid2010),logx_mean=mean(logx),mean_log_q_ne=mean(log_q_ne), mean_hsize=mean(hsi
 ze))
 \end_layout
 
 \begin_layout Plain Layout
 
-%ddply(ma,.(mage),summarise,lnA0_mean=mean(lnA0_mean),logx_mean=mean(logx_mean),l
+%ddply(ma,.(mage),summarise,logA_mean=mean(logA_mean),logx_mean=mean(logx_mean),l
 og_q_ne_mean=mean(mean_log_q_ne), mean_hsize=mean(mean_hsize))
 \end_layout
 
@@ -2742,7 +2742,7 @@ is.na(schooltype))
 
 \begin_layout Plain Layout
 
-%mm <- tn$df2012 %>% mutate( lnA0q = sapply(tn$df2012$lnA0,function(x) {
+%mm <- tn$df2012 %>% mutate( logAq = sapply(tn$df2012$logA,function(x) {
  as.numeric(j[j>=x][1])}))
 \end_layout
 
@@ -2753,17 +2753,17 @@ is.na(schooltype))
 
 \begin_layout Plain Layout
 
-%j <- quantile(tn$df2012$lnA0,seq(10)/10)
+%j <- quantile(tn$df2012$logA,seq(10)/10)
 \end_layout
 
 \begin_layout Plain Layout
 
-%m <- mm[,c("lnA0","lnA0q","hhid2012","toteducexpense")]
+%m <- mm[,c("logA","logAq","hhid2012","toteducexpense")]
 \end_layout
 
 \begin_layout Plain Layout
 
-%mb <- ddply(m,.(lnA0q),summarise,toteducexpense=mean(toteducexpense))
+%mb <- ddply(m,.(logAq),summarise,toteducexpense=mean(toteducexpense))
 \end_layout
 
 \begin_layout Plain Layout
@@ -3685,8 +3685,8 @@ type = "logx")$mean_logx),dat_b = exp(district_means(dat=ng$df2012,hhid_col
 \begin_layout Plain Layout
 
 %lorenz_curve(dat_a = exp(district_means(dat=tn2012,hhid_col = "hhid2012",field_
-type = "lnA0")$mean_lnA0),dat_b = exp(district_means(dat=ng$df2012,hhid_col
- = "hhid",field_type = "lnA0")$mean_lnA0),dat_a_name = "Tanzania",dat_b_name
+type = "logA")$mean_logA),dat_b = exp(district_means(dat=ng$df2012,hhid_col
+ = "hhid",field_type = "logA")$mean_logA),dat_a_name = "Tanzania",dat_b_name
  = "Nigeria",xlab = "Districts",ylab = "Total Assets",use_cex = 1.)
 \end_layout
 
@@ -3697,7 +3697,7 @@ type = "lnA0")$mean_lnA0),dat_b = exp(district_means(dat=ng$df2012,hhid_col
 
 \begin_layout Plain Layout
 
-%lorenz_curve(dat_a = exp(tn2012$lnA0),dat_b = exp(ng$df2012$lnA0),dat_a_name
+%lorenz_curve(dat_a = exp(tn2012$logA),dat_b = exp(ng$df2012$logA),dat_a_name
  = "Tanzania",dat_b_name = "Nigeria",xlab = "Household",ylab = "Total Assets",us
 e_cex = 1.)
 \end_layout
@@ -5361,12 +5361,23 @@ logx
 \end_inset
 
  for both Tanzania and Nigeria.
- This may be largely due to the educational expenses forming a higher proportion
- of the total expenditure for poorer households - so we evaluate the 
+ This seems largely due to the educational expenses forming a higher proportion
+ of the total expenditure for poorer households.
+ Comparing 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- regressions (see Tables 
+ regressions with 
+\begin_inset Formula $log(x)$
+\end_inset
+
+ (
+\family typewriter
+\size small
+logx
+\family default
+\size default
+) and wealth-concentration controls in Tables 
 \begin_inset ERT
 status open
 
@@ -5392,14 +5403,32 @@ ref{tabNGR_district_logeduc}
 
 \end_inset
 
- ) which suggest that the education expenditures rise with the increase
- in 
+ , we see that the education expenditures rise with the increase in 
 \begin_inset Formula $log(x)$
 \end_inset
 
-.
- The higher budget share of education is not solely due to higher urban
- prices in general - since the effect of 
+ for Tanzzania but the effect of permanent income (total expenditure) measure
+ 
+\begin_inset Formula $log(x)$
+\end_inset
+
+ (
+\family typewriter
+\size small
+logx
+\family default
+\size default
+) is not significant for Nigeria.
+ While the higher expenditure on education 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ is rises with prices of non-durable consumption 
+\begin_inset Formula $p_{ne}$
+\end_inset
+
+ in Tanzania, the higher budget share of education cannot be attributed
+ to higher consumption-prices - since the effect of 
 \begin_inset Formula $p_{ne}$
 \end_inset
 
@@ -5431,14 +5460,23 @@ status open
 \end_layout
 
 \begin_layout Standard
-The higher prosperity of districts (or urbanisation) increases educational
+The wealth concentration in districts (or urbanisation) increases educational
  budget shares in both the countries - but the increases in educational
  expenditure 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- drop with rising prosperity for Tanzania whereas they rise for Nigeria
- (see Tables 
+ drop with rising urbanisation (either with declne in ruralness score 
+\family typewriter
+rural_wards
+\family default
+ or with the concentration levels 
+\family typewriter
+\size small
+r
+\family default
+\size default
+) for Tanzania whereas they rise for Nigeria (compare Tables 
 \begin_inset ERT
 status open
 
@@ -5464,7 +5502,33 @@ ref{tabNGR_district_logeduc}
 
 \end_inset
 
-).
+ as well as Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_ur_district_logeduc}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_ur_district_logeduc}
+\end_layout
+
+\end_inset
+
+ ).
  This is true for other interpretations of the vicinity i.e.
  
 \family typewriter
@@ -5487,6 +5551,8 @@ noprefix "false"
  for definitions).
  The more prosperous regions thus maintain higher expenditures on education
  in Nigeria.
+ This effect seems aligned with the southern Nigeria being relatively more
+ industrialised than the northern.
 \end_layout
 
 \begin_layout Standard
@@ -5502,6 +5568,13 @@ noprefix "false"
 
 ), the access to private education is limited to the wealthier population
  in both the economies.
+ However, differences in education expenditures between private and government
+ education seems less for Nigeria due to insignificant private-education
+ factor vari1able 
+\family typewriter
+educpriv
+\family default
+.
  As private education only accounts for a minority of the population (see
  Figure 
 \begin_inset CommandInset ref
@@ -5513,10 +5586,8 @@ noprefix "false"
 
 \end_inset
 
-), this seems to confirm the findings that higher education is not provided
- by private institutions in the region.
- The less surprising observation that more children increase the total expenditu
-re is supported for both the economies.
+), the role of access either or private or government secondary government
+ schools is more relevant for our comparison of education expenses.
 \end_layout
 
 \begin_layout Standard
@@ -5526,6 +5597,15 @@ status open
 \begin_layout Plain Layout
 
 %[secondary_schools effect]
+\end_layout
+
+\begin_layout Plain Layout
+
+%For Nigeria, the secondary-schools were split into community and government
+ schools - whose sum turns out to be less than the schools recorded in the
+ previous year.
+ This seems to the cause of some disparity in the two years - even though
+ the effect of this variable does not appear as significant as wealth.
 \end_layout
 
 \begin_layout Plain Layout
@@ -5562,17 +5642,185 @@ a(secondary_schools))),.(region),summarise,n=sum(secondary_schools)), by
 \end_layout
 
 \begin_layout Standard
-For Nigeria, the secondary-schools were split into community and government
- schools - whose sum turns out to be less than the schools recorded in the
- previous year.
- This seems to the cause of some disparity in the two years - even though
- the effect of this variable does not appear as significant as wealth.
+The effect of access to secondary-schools is far stronger for Tanzania where
+ the consumers are more likely to spend on primary education (compare the
+ coefficients for 
+\begin_inset Formula $s$
+\end_inset
+
+ - 
+\family typewriter
+secondaryschools 
+\family default
+in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district_weduc}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district_weduc}
+\end_layout
+
+\end_inset
+
+ ) since the attendance for secondary and tertiary-education is much lower
+ in Tanzania.
+ With the regression for 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ we see that the role of secondaryschools is stronger for Nigeria when taking
+ wealth 
+\begin_inset Formula $log(A)$
+\end_inset
+
+ 
+\family typewriter
+logA 
+\family default
+into account (see Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_ur_district_logeduc}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_ur_district_logeduc}
+\end_layout
+
+\end_inset
+
+.
+ The wealth effect is thus stronger than access in both the economies but
+ is weaker for Nigeria where more household members enroll into secondary
+ and tertiary education - regardless of the differences in long-term intergenrat
+ional wealth (measured with logarithm of assets 
+\begin_inset Formula $log(A)$
+\end_inset
+
+ 
+\family typewriter
+logA
+\family default
+).
+ This also needs to be seen in combination with the variables for secondary
+ and primary education.
+ It can be verified that the secondary education is far lower in Tanzania.
+ That the role of the number of children 
+\begin_inset Formula $h$
+\end_inset
+
+ (
+\family typewriter
+numchild
+\family default
+) is stronger in Tanzania than in Nigeria also because the expenses are
+ more driven by primary education in the Tanzania.
 \end_layout
 
 \begin_layout Standard
-We note also that in Tanzania - with a higher disparity in asset-ownership
- and less urbanisation - the agrarian households seem to be spending higher
- on education (compare the coefficients of 
+The wealth effects in Tanzania need to be considered together with the fact
+ that has lower levels of enrollment in secondary (and higher) education
+ and has higher disparity in asset-ownership even after taking into account
+ the lower urbanisation levels.
+ The significance of logarithm of assets 
+\begin_inset Formula $log(A)$
+\end_inset
+
+ ( 
+\family typewriter
+logA 
+\family default
+) in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_ur_district_weduc}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_ur_district_weduc}
+\end_layout
+
+\end_inset
+
+ (as well as in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_ur_district_logeduc}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_ur_district_logeduc}
+\end_layout
+
+\end_inset
+
+) indicates that those with higher inter-generational wealth and in urban
+ areas are far more likely to avail the education facilities.
+ Given these conditions, the the role of father's education level is also
+ much stronger in Tanzania.
+\end_layout
+
+\begin_layout Standard
+We also see that the agrarian households seem to be spending higher on education
+ (compare the coefficients of 
 \family typewriter
 r_agri
 \family default
@@ -5602,16 +5850,16 @@ ref{tabNGR_district_logeduc}
 
 \end_inset
 
-) - esp considering the prosperity of households with the same educational-statu
-s (
+) - esp considering the wealth-concentration among households with the same
+ educational-status (
 \begin_inset Formula $\Gamma$
 \end_inset
 
  i.e.
  having higher than primary education or not).
- The education expenditure is thus higher for agrarian households in Tanzania
- after taking into account their poor educational status measured through
- 
+ In other words, the education expenditure should be considered higher for
+ agrarian households in Tanzania after taking into account their poor educationa
+l status measured through 
 \begin_inset Formula $\Gamma$
 \end_inset
 
@@ -5621,7 +5869,7 @@ s (
 
  / 
 \family typewriter
-1.agri
+1.is_agri
 \family default
  in Tables 
 \begin_inset ERT
@@ -5650,20 +5898,13 @@ ref{tabNGR_district_logeduc}
 \end_inset
 
  ).
+ Relatively speaking, average education levels and access seem higher in
+ Nigeria.
 \end_layout
 
 \begin_layout Standard
-The separation among rural and urban area as noted in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:DescriptiveStatistics"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- is also evident from the negative coefficients of 
+The role of rural and urban areas is less straightforward in the two economies.
+ The coefficents of 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -5671,7 +5912,7 @@ noprefix "false"
 \family typewriter
 rural_wards
 \family default
-) for both the economies in Tables 
+) are negative and significant for Tanzania in Tables 
 \begin_inset ERT
 status open
 
@@ -5679,7 +5920,7 @@ status open
 
 
 \backslash
-ref{tabTNZ_district_weduc}
+ref{tabTNZ_ur_district_weduc}
 \end_layout
 
 \end_inset
@@ -5692,12 +5933,18 @@ status open
 
 
 \backslash
-ref{tabNGR_district_weduc}
+ref{tabTNZ_ur_district_logeduc}
 \end_layout
 
 \end_inset
 
- as well as in Tables 
+ .
+ Thus urban-rural indicators may suggest higher expenditure on education
+ by the rural residents (see significance of 
+\family typewriter
+rural_wards 
+\family default
+in Table 
 \begin_inset ERT
 status open
 
@@ -5705,12 +5952,41 @@ status open
 
 
 \backslash
-ref{tabTNZ_district_logeduc}
+ref{tabNGR_ur_district_logeduc}
 \end_layout
 
 \end_inset
 
- and 
+ ) but the weaker role of the wealth 
+\begin_inset Formula $log(A)$
+\end_inset
+
+ (
+\family typewriter
+logA
+\family default
+) ( see 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_ur_district_logeduc}
+\end_layout
+
+\end_inset
+
+ ) and a strong role for 
+\begin_inset Formula $r$
+\end_inset
+
+ (
+\family typewriter
+r
+\family default
+) in Table 
 \begin_inset ERT
 status open
 
@@ -5723,13 +5999,16 @@ ref{tabNGR_district_logeduc}
 
 \end_inset
 
-.
- It does seem however, that the urban-rural divide is more significant for
- Tanzania.
+ suggest that this could be because the rural areas recorded in the survey
+ are not as poor as those recorded as rural areas in Tanzania.
 \end_layout
 
 \begin_layout Standard
-The role of social environment is strong in both the economies.
+
+\bar under
+The role of social 
+\bar default
+environment is strong in both the economies.
  The role of English language seems significant in Tanzania - where the
  English-speakers spend significantly higher on education.
  In Nigeria, on the other hand, the educational expenses are higher among
@@ -5777,6 +6056,34 @@ an Africa that differ in the level of urbanisation and income disparities.
  as well as education expenses with an expansion of education sector could
  allow private institutions to play a larger role in secondary education
  in either of the economies.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Different levels]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+The countries are at different levels.
+ The education has not been as widespread in Tanzania - hence the father's
+ education rank matters a lot more.
+ The privatisation has increased attendance of universities in ways that
+ are not common for Tanzania.
+ Except for social and demographic factors - such as religion or expanse
+ of English language - we can think that the urban developments in Tanzania
+ would face the same challenges that Nigeria faces.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5830,31 +6137,6 @@ status open
 
 \begin_layout Plain Layout
 
-%-----------------------------------------------------GENERATED USING do
- "C:
-\backslash
-local_files
-\backslash
-research
-\backslash
-consumption
-\backslash
-tnz_ngr_comparison
-\backslash
-run_educ_cons_sureg.do"------------------------
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
 
 \backslash
 begin{table}[H]
@@ -5875,7 +6157,7 @@ label{tabTNZ_district_weduc}}
 
 
 \backslash
-resizebox{4in}{!}{
+resizebox{2.5in}{!}{
 \end_layout
 
 \end_inset
@@ -5905,7 +6187,7 @@ else
 \backslash
 fi} 
 \backslash
-begin{tabular}{l*{6}{c}} 
+begin{tabular}{l*{3}{c}} 
 \backslash
 hline
 \backslash
@@ -5915,23 +6197,11 @@ multicolumn{1}{c}{(1)}&
 \backslash
 multicolumn{1}{c}{(2)}&
 \backslash
-multicolumn{1}{c}{(3)}&
-\backslash
-multicolumn{1}{c}{(4)}&
-\backslash
-multicolumn{1}{c}{(5)}&
-\backslash
-multicolumn{1}{c}{(6)}
+multicolumn{1}{c}{(3)}
 \backslash
 
 \backslash
            &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{Educ 2012}&
-\backslash
-multicolumn{1}{c}{Agri 2012}&
 \backslash
 multicolumn{1}{c}{2014}&
 \backslash
@@ -5943,13 +6213,7 @@ multicolumn{1}{c}{Agri 2014}
 \backslash
  
 \backslash
-hline logx      &  -0.0160
-\backslash
-sym{***}&  -0.0156
-\backslash
-sym{***}&  -0.0159
-\backslash
-sym{***}&  -0.0120
+hline logx      &  -0.0120
 \backslash
 sym{***}&  -0.0122
 \backslash
@@ -5959,49 +6223,41 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
- r2012     & -0.00114         &                  &                  &  0.00513
+ r     &  0.00513
 \backslash
 sym{***}&                  &                  
 \backslash
 
 \backslash
-           &  (0.340)         &                  &                  &  (0.000)
-         &                  &                  
+           &  (0.000)         &                  &                  
 \backslash
 
 \backslash
  r
 \backslash
-_educ2012&                  & -0.00305
-\backslash
-sym{**} &                  &                  &  0.00289
+_educ&                  &  0.00289
 \backslash
 sym{**} &                  
 \backslash
 
 \backslash
-           &                  &  (0.005)         &                  &   
-               &  (0.010)         &                  
+           &                  &  (0.010)         &                  
 \backslash
 
 \backslash
  r
 \backslash
-_agri2012&                  &                  & -0.00230
-\backslash
-sym{*}  &                  &                  &  0.00330
+_agri&                  &                  &  0.00330
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &                  &                  &  (0.047)         &   
-               &                  &  (0.004)         
+           &                  &                  &  (0.004)         
 \backslash
 
 \backslash
@@ -6011,38 +6267,27 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&    0.161
-\backslash
-sym{***}&    0.167
-\backslash
-sym{***}&    0.167
-\backslash
-sym{***}&  0.00966         &   0.0135         &   0.0166         
+_ne&  0.00966         &   0.0135         &   0.0166         
 \backslash
 
 \backslash
-           &  (0.001)         &  (0.000)         &  (0.000)         &  (0.860)
-         &  (0.807)         &  (0.744)         
+           &  (0.860)         &  (0.807)         &  (0.744)         
 \backslash
 
 \backslash
- 1.agri    & -0.00110         & -0.00130         &                  &  0.00113
-         &-0.000229         &                  
+ 1.is
+\backslash
+_agri    &  0.00113         &-0.000229         &                  
 \backslash
 
 \backslash
-           &  (0.764)         &  (0.722)         &                  &  (0.753)
-         &  (0.949)         &                  
+           &  (0.753)         &  (0.949)         &                  
 \backslash
 
 \backslash
- 1.educpriv&   0.0914
+ 1.is
 \backslash
-sym{***}&   0.0910
-\backslash
-sym{***}&   0.0916
-\backslash
-sym{***}&   0.0687
+_educpriv&   0.0687
 \backslash
 sym{***}&   0.0695
 \backslash
@@ -6052,8 +6297,7 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -6061,19 +6305,17 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&  0.00261         &  0.00274         &  0.00266         &  0.00173   
-      &  0.00169         &  0.00179         
+_rank&  0.00173         &  0.00169         &  0.00179         
 \backslash
 
 \backslash
-           &  (0.116)         &  (0.099)         &  (0.109)         &  (0.255)
-         &  (0.269)         &  (0.241)         
+           &  (0.255)         &  (0.269)         &  (0.241)         
 \backslash
 
 \backslash
  secondary
 \backslash
-_schools&-0.00000692         &0.0000484         &0.0000339         & -0.00142
+_schools& -0.00142
 \backslash
 sym{***}& -0.00137
 \backslash
@@ -6083,20 +6325,13 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.945)         &  (0.625)         &  (0.735)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_primaryage&   0.0260
-\backslash
-sym{***}&   0.0259
-\backslash
-sym{***}&   0.0260
-\backslash
-sym{***}&   0.0235
+_primaryage&   0.0235
 \backslash
 sym{***}&   0.0232
 \backslash
@@ -6106,20 +6341,13 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_secondaryage&   0.0111
-\backslash
-sym{***}&   0.0118
-\backslash
-sym{***}&   0.0112
-\backslash
-sym{***}&   0.0115
+_secondaryage&   0.0115
 \backslash
 sym{***}&   0.0110
 \backslash
@@ -6129,34 +6357,25 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_tertiaryage& -0.00317         & -0.00260         & -0.00305         & -0.00589
-         & -0.00614
+_tertiaryage& -0.00589         & -0.00614
 \backslash
 sym{*}  & -0.00578         
 \backslash
 
 \backslash
-           &  (0.228)         &  (0.323)         &  (0.248)         &  (0.054)
-         &  (0.045)         &  (0.059)         
+           &  (0.054)         &  (0.045)         &  (0.059)         
 \backslash
 
 \backslash
  1.has
 \backslash
-_english&   0.0538
-\backslash
-sym{***}&   0.0537
-\backslash
-sym{***}&   0.0538
-\backslash
-sym{***}&   0.0427
+_english&   0.0427
 \backslash
 sym{***}&   0.0421
 \backslash
@@ -6166,12 +6385,11 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
- numchild  &-0.000616         &-0.000432         &-0.000516         &  0.00301
+ numchild  &  0.00301
 \backslash
 sym{***}&  0.00301
 \backslash
@@ -6181,20 +6399,17 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.387)         &  (0.541)         &  (0.466)         &  (0.001)
-         &  (0.001)         &  (0.001)         
+           &  (0.001)         &  (0.001)         &  (0.001)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   -0.167         &   -0.162         &   -0.169         &   0.0685
-         &   0.0976         &   0.0746         
+_cons    &   0.0685         &   0.0976         &   0.0746         
 \backslash
 
 \backslash
-           &  (0.134)         &  (0.143)         &  (0.101)         &  (0.590)
-         &  (0.447)         &  (0.504)         
+           &  (0.590)         &  (0.447)         &  (0.504)         
 \backslash
 
 \backslash
@@ -6204,8 +6419,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     3346         &     3346         &     3346         &     2410
-         &     2410         &     2410         
+)     &     2410         &     2410         &     2410         
 \backslash
 
 \backslash
@@ -6215,7 +6429,7 @@ hline
 \backslash
 hline 
 \backslash
-multicolumn{7}{l}{
+multicolumn{4}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -6225,7 +6439,7 @@ textit{p}-values in parentheses}
 \backslash
  
 \backslash
-multicolumn{7}{l}{
+multicolumn{4}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -6306,7 +6520,7 @@ label{tabNGR_district_weduc}}
 
 
 \backslash
-resizebox{4in}{!}{
+resizebox{2.5in}{!}{
 \end_layout
 
 \end_inset
@@ -6336,7 +6550,7 @@ else
 \backslash
 fi} 
 \backslash
-begin{tabular}{l*{6}{c}} 
+begin{tabular}{l*{3}{c}} 
 \backslash
 hline
 \backslash
@@ -6346,41 +6560,23 @@ multicolumn{1}{c}{(1)}&
 \backslash
 multicolumn{1}{c}{(2)}&
 \backslash
-multicolumn{1}{c}{(3)}&
-\backslash
-multicolumn{1}{c}{(4)}&
-\backslash
-multicolumn{1}{c}{(5)}&
-\backslash
-multicolumn{1}{c}{(6)}
+multicolumn{1}{c}{(3)}
 \backslash
 
 \backslash
            &
 \backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{Educ 2012}&
-\backslash
-multicolumn{1}{c}{Agri 2012}&
-\backslash
 multicolumn{1}{c}{2015}&
 \backslash
-multicolumn{1}{c}{2015}&
+multicolumn{1}{c}{Educ 2015}&
 \backslash
-multicolumn{1}{c}{2015}
+multicolumn{1}{c}{Agri 2015}
 \backslash
 
 \backslash
  
 \backslash
-hline logx      &  -0.0192
-\backslash
-sym{***}&  -0.0192
-\backslash
-sym{***}&  -0.0196
-\backslash
-sym{***}&  -0.0203
+hline logx      &  -0.0203
 \backslash
 sym{***}&  -0.0207
 \backslash
@@ -6390,51 +6586,41 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
- r2012     &   0.0106
-\backslash
-sym{***}&                  &                  &   0.0139
+ r     &   0.0139
 \backslash
 sym{***}&                  &                  
 \backslash
 
 \backslash
-           &  (0.000)         &                  &                  &  (0.000)
-         &                  &                  
+           &  (0.000)         &                  &                  
 \backslash
 
 \backslash
  r
 \backslash
-_educ2012&                  &  0.00884
-\backslash
-sym{***}&                  &                  &   0.0120
+_educ&                  &   0.0120
 \backslash
 sym{***}&                  
 \backslash
 
 \backslash
-           &                  &  (0.000)         &                  &   
-               &  (0.000)         &                  
+           &                  &  (0.000)         &                  
 \backslash
 
 \backslash
  r
 \backslash
-_agri2012&                  &                  &  0.00967
-\backslash
-sym{***}&                  &                  &   0.0129
+_agri&                  &                  &   0.0129
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &                  &                  &  (0.000)         &   
-               &                  &  (0.000)         
+           &                  &                  &  (0.000)         
 \backslash
 
 \backslash
@@ -6444,34 +6630,27 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&   0.0706         &   0.0763         &   0.0950
-\backslash
-sym{*}  &   0.0405         &   0.0457         &   0.0407         
+_ne&   0.0405         &   0.0457         &   0.0407         
 \backslash
 
 \backslash
-           &  (0.147)         &  (0.116)         &  (0.043)         &  (0.462)
-         &  (0.407)         &  (0.451)         
+           &  (0.462)         &  (0.407)         &  (0.451)         
 \backslash
 
 \backslash
- 1.agri    & -0.00472         & -0.00547         &                  &  0.00433
-         &  0.00317         &                  
+ 1.is
+\backslash
+_agri    &  0.00433         &  0.00317         &                  
 \backslash
 
 \backslash
-           &  (0.213)         &  (0.148)         &                  &  (0.358)
-         &  (0.499)         &                  
+           &  (0.358)         &  (0.499)         &                  
 \backslash
 
 \backslash
- 1.educpriv&   0.0262
+ 1.is
 \backslash
-sym{***}&   0.0262
-\backslash
-sym{***}&   0.0267
-\backslash
-sym{***}&   0.0358
+_educpriv&   0.0358
 \backslash
 sym{***}&   0.0357
 \backslash
@@ -6481,8 +6660,7 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -6490,37 +6668,27 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank& 0.000127         &-0.0000700         & 0.000387         & 0.000820  
-       & 0.000513         & 0.000664         
+_rank& 0.000820         & 0.000513         & 0.000664         
 \backslash
 
 \backslash
-           &  (0.917)         &  (0.954)         &  (0.747)         &  (0.581)
-         &  (0.731)         &  (0.652)         
+           &  (0.581)         &  (0.731)         &  (0.652)         
 \backslash
 
 \backslash
  secondary
 \backslash
-_schools& 0.000341         & 0.000345         & 0.000853         &  0.00358
-         &  0.00374         &  0.00348         
+_schools&  0.00358         &  0.00374         &  0.00348         
 \backslash
 
 \backslash
-           &  (0.898)         &  (0.897)         &  (0.747)         &  (0.384)
-         &  (0.364)         &  (0.397)         
+           &  (0.384)         &  (0.364)         &  (0.397)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_primaryage&   0.0184
-\backslash
-sym{***}&   0.0177
-\backslash
-sym{***}&   0.0181
-\backslash
-sym{***}&   0.0173
+_primaryage&   0.0173
 \backslash
 sym{**} &   0.0168
 \backslash
@@ -6530,20 +6698,13 @@ sym{**}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.002)
-         &  (0.003)         &  (0.002)         
+           &  (0.002)         &  (0.003)         &  (0.002)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_secondaryage&   0.0263
-\backslash
-sym{***}&   0.0261
-\backslash
-sym{***}&   0.0260
-\backslash
-sym{***}&   0.0324
+_secondaryage&   0.0324
 \backslash
 sym{***}&   0.0319
 \backslash
@@ -6553,45 +6714,21 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_tertiaryage&   0.0105
-\backslash
-sym{**} &   0.0104
-\backslash
-sym{**} &   0.0103
-\backslash
-sym{**} &  0.00617         &  0.00633         &  0.00643         
+_tertiaryage&  0.00617         &  0.00633         &  0.00643         
 \backslash
 
 \backslash
-           &  (0.003)         &  (0.003)         &  (0.003)         &  (0.162)
-         &  (0.151)         &  (0.143)         
+           &  (0.162)         &  (0.151)         &  (0.143)         
 \backslash
 
 \backslash
- 1.religion&        0         &        0         &        0         &   
-     0         &        0         &        0         
-\backslash
-
-\backslash
-           &      (.)         &      (.)         &      (.)         &     
- (.)         &      (.)         &      (.)         
-\backslash
-
-\backslash
- 2.religion&  -0.0330
-\backslash
-sym{***}&  -0.0328
-\backslash
-sym{***}&  -0.0327
-\backslash
-sym{***}&  -0.0234
+ 2.religion&  -0.0234
 \backslash
 sym{***}&  -0.0226
 \backslash
@@ -6601,45 +6738,33 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
- 3.religion&  -0.0387
-\backslash
-sym{*}  &  -0.0388
-\backslash
-sym{*}  &  -0.0398
-\backslash
-sym{*}  &  -0.0317         &  -0.0314         &  -0.0324         
+ 3.religion&  -0.0317         &  -0.0314         &  -0.0324         
 \backslash
 
 \backslash
-           &  (0.030)         &  (0.030)         &  (0.026)         &  (0.130)
-         &  (0.134)         &  (0.121)         
+           &  (0.130)         &  (0.134)         &  (0.121)         
 \backslash
 
 \backslash
- numchild  &-0.000798         &-0.000802         &-0.000922         & -0.00165
-         & -0.00169         & -0.00145         
+ numchild  & -0.00165         & -0.00169         & -0.00145         
 \backslash
 
 \backslash
-           &  (0.412)         &  (0.411)         &  (0.341)         &  (0.157)
-         &  (0.148)         &  (0.212)         
+           &  (0.157)         &  (0.148)         &  (0.212)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &  -0.0289         &  -0.0224         &  -0.0748         &  0.00992
-         &   0.0241         &   0.0361         
+_cons    &  0.00992         &   0.0241         &   0.0361         
 \backslash
 
 \backslash
-           &  (0.779)         &  (0.828)         &  (0.445)         &  (0.934)
-         &  (0.841)         &  (0.754)         
+           &  (0.934)         &  (0.841)         &  (0.754)         
 \backslash
 
 \backslash
@@ -6649,8 +6774,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     3113         &     3113         &     3113         &     2192
-         &     2192         &     2192         
+)     &     2192         &     2192         &     2192         
 \backslash
 
 \backslash
@@ -6660,7 +6784,7 @@ hline
 \backslash
 hline 
 \backslash
-multicolumn{7}{l}{
+multicolumn{4}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -6670,7 +6794,7 @@ textit{p}-values in parentheses}
 \backslash
  
 \backslash
-multicolumn{7}{l}{
+multicolumn{4}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -6751,7 +6875,7 @@ label{tabTNZ_district_logeduc}}
 
 
 \backslash
-resizebox{3.5in}{!}{
+resizebox{2.5in}{!}{
 \end_layout
 
 \end_inset
@@ -6781,7 +6905,7 @@ else
 \backslash
 fi} 
 \backslash
-begin{tabular}{l*{6}{c}} 
+begin{tabular}{l*{3}{c}} 
 \backslash
 hline
 \backslash
@@ -6791,23 +6915,11 @@ multicolumn{1}{c}{(1)}&
 \backslash
 multicolumn{1}{c}{(2)}&
 \backslash
-multicolumn{1}{c}{(3)}&
-\backslash
-multicolumn{1}{c}{(4)}&
-\backslash
-multicolumn{1}{c}{(5)}&
-\backslash
-multicolumn{1}{c}{(6)}
+multicolumn{1}{c}{(3)}
 \backslash
 
 \backslash
            &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{Educ 2012}&
-\backslash
-multicolumn{1}{c}{Agri 2012}&
 \backslash
 multicolumn{1}{c}{2014}&
 \backslash
@@ -6819,13 +6931,7 @@ multicolumn{1}{c}{Agri 2014}
 \backslash
  
 \backslash
-hline logx      &    1.345
-\backslash
-sym{***}&    1.367
-\backslash
-sym{***}&    1.230
-\backslash
-sym{***}&    1.773
+hline logx      &    1.773
 \backslash
 sym{***}&    1.786
 \backslash
@@ -6835,42 +6941,35 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
- r2012     &  -0.0714         &                  &                  &   -0.193
-         &                  &                  
+ r     &   -0.193         &                  &                  
 \backslash
 
 \backslash
-           &  (0.678)         &                  &                  &  (0.339)
-         &                  &                  
+           &  (0.339)         &                  &                  
 \backslash
 
 \backslash
  r
 \backslash
-_educ2012&                  &   -0.179         &                  &     
-             &   -0.124         &                  
+_educ&                  &   -0.124         &                  
 \backslash
 
 \backslash
-           &                  &  (0.227)         &                  &   
-               &  (0.452)         &                  
+           &                  &  (0.452)         &                  
 \backslash
 
 \backslash
  r
 \backslash
-_agri2012&                  &                  &   0.0542         &     
-             &                  &   -0.110         
+_agri&                  &                  &   -0.110         
 \backslash
 
 \backslash
-           &                  &                  &  (0.731)         &   
-               &                  &  (0.538)         
+           &                  &                  &  (0.538)         
 \backslash
 
 \backslash
@@ -6880,7 +6979,7 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&    10.75         &    11.11         &    5.086         &    13.17
+_ne&    13.17
 \backslash
 sym{*}  &    13.11
 \backslash
@@ -6888,16 +6987,13 @@ sym{*}  &    4.532
 \backslash
 
 \backslash
-           &  (0.064)         &  (0.056)         &  (0.371)         &  (0.047)
-         &  (0.048)         &  (0.445)         
+           &  (0.047)         &  (0.048)         &  (0.445)         
 \backslash
 
 \backslash
- 1.agri    &    1.710
+ 1.is
 \backslash
-sym{***}&    1.699
-\backslash
-sym{***}&                  &    1.515
+_agri    &    1.515
 \backslash
 sym{**} &    1.560
 \backslash
@@ -6905,18 +7001,13 @@ sym{**} &
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &                  &  (0.005)
-         &  (0.004)         &                  
+           &  (0.005)         &  (0.004)         &                  
 \backslash
 
 \backslash
- 1.educpriv&    3.297
+ 1.is
 \backslash
-sym{***}&    3.275
-\backslash
-sym{***}&    3.262
-\backslash
-sym{***}&    4.504
+_educpriv&    4.504
 \backslash
 sym{***}&    4.475
 \backslash
@@ -6926,8 +7017,7 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
@@ -6935,41 +7025,27 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&    0.196         &    0.204         &    0.136         &    0.348   
-      &    0.350         &    0.319         
+_rank&    0.348         &    0.350         &    0.319         
 \backslash
 
 \backslash
-           &  (0.266)         &  (0.248)         &  (0.442)         &  (0.064)
-         &  (0.062)         &  (0.091)         
+           &  (0.064)         &  (0.062)         &  (0.091)         
 \backslash
 
 \backslash
  secondary
 \backslash
-_schools&   0.0317
-\backslash
-sym{*}  &   0.0349
-\backslash
-sym{**} &   0.0200         &-0.000759         & -0.00234         & -0.00984
-         
+_schools&-0.000759         & -0.00234         & -0.00984         
 \backslash
 
 \backslash
-           &  (0.016)         &  (0.007)         &  (0.123)         &  (0.977)
-         &  (0.928)         &  (0.709)         
+           &  (0.977)         &  (0.928)         &  (0.709)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_primaryage&    14.03
-\backslash
-sym{***}&    14.02
-\backslash
-sym{***}&    14.26
-\backslash
-sym{***}&    15.28
+_primaryage&    15.28
 \backslash
 sym{***}&    15.29
 \backslash
@@ -6979,34 +7055,23 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_secondaryage&   -0.771
-\backslash
-sym{*}  &   -0.727         &   -0.724         &    0.188         &    0.209
-         &    0.251         
+_secondaryage&    0.188         &    0.209         &    0.251         
 \backslash
 
 \backslash
-           &  (0.039)         &  (0.052)         &  (0.053)         &  (0.652)
-         &  (0.616)         &  (0.548)         
+           &  (0.652)         &  (0.616)         &  (0.548)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_tertiaryage&   -1.562
-\backslash
-sym{***}&   -1.529
-\backslash
-sym{***}&   -1.581
-\backslash
-sym{***}&   -2.020
+_tertiaryage&   -2.020
 \backslash
 sym{***}&   -2.007
 \backslash
@@ -7016,20 +7081,13 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  1.has
 \backslash
-_english&    5.407
-\backslash
-sym{***}&    5.401
-\backslash
-sym{***}&    5.429
-\backslash
-sym{***}&    3.164
+_english&    3.164
 \backslash
 sym{***}&    3.186
 \backslash
@@ -7039,18 +7097,11 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
- numchild  &    0.499
-\backslash
-sym{***}&    0.510
-\backslash
-sym{***}&    0.513
-\backslash
-sym{***}&    0.396
+ numchild  &    0.396
 \backslash
 sym{***}&    0.397
 \backslash
@@ -7060,20 +7111,13 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   -54.96
-\backslash
-sym{***}&   -54.73
-\backslash
-sym{***}&   -39.54
-\backslash
-sym{**} &   -66.47
+_cons    &   -66.47
 \backslash
 sym{***}&   -67.60
 \backslash
@@ -7083,8 +7127,7 @@ sym{**}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.003)         &  (0.000)
-         &  (0.000)         &  (0.001)         
+           &  (0.000)         &  (0.000)         &  (0.001)         
 \backslash
 
 \backslash
@@ -7094,8 +7137,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     3346         &     3346         &     3346         &     2410
-         &     2410         &     2410         
+)     &     2410         &     2410         &     2410         
 \backslash
 
 \backslash
@@ -7105,7 +7147,7 @@ hline
 \backslash
 hline 
 \backslash
-multicolumn{7}{l}{
+multicolumn{4}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -7115,7 +7157,7 @@ textit{p}-values in parentheses}
 \backslash
  
 \backslash
-multicolumn{7}{l}{
+multicolumn{4}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -7196,7 +7238,7 @@ label{tabNGR_district_logeduc}}
 
 
 \backslash
-resizebox{3.5in}{!}{
+resizebox{2.5in}{!}{
 \end_layout
 
 \end_inset
@@ -7226,7 +7268,7 @@ else
 \backslash
 fi} 
 \backslash
-begin{tabular}{l*{6}{c}} 
+begin{tabular}{l*{3}{c}} 
 \backslash
 hline
 \backslash
@@ -7236,23 +7278,11 @@ multicolumn{1}{c}{(1)}&
 \backslash
 multicolumn{1}{c}{(2)}&
 \backslash
-multicolumn{1}{c}{(3)}&
-\backslash
-multicolumn{1}{c}{(4)}&
-\backslash
-multicolumn{1}{c}{(5)}&
-\backslash
-multicolumn{1}{c}{(6)}
+multicolumn{1}{c}{(3)}
 \backslash
 
 \backslash
            &
-\backslash
-multicolumn{1}{c}{2012}&
-\backslash
-multicolumn{1}{c}{Educ 2012}&
-\backslash
-multicolumn{1}{c}{Agri 2012}&
 \backslash
 multicolumn{1}{c}{2015}&
 \backslash
@@ -7264,56 +7294,45 @@ multicolumn{1}{c}{Agri 2015}
 \backslash
  
 \backslash
-hline logx      &    0.586         &    0.563         &    0.570         &
-   0.0737         &   0.0344         &  -0.0457         
+hline logx      &   0.0737         &   0.0344         &  -0.0457         
 \backslash
 
 \backslash
-           &  (0.083)         &  (0.095)         &  (0.103)         &  (0.873)
-         &  (0.941)         &  (0.921)         
+           &  (0.873)         &  (0.941)         &  (0.921)         
 \backslash
 
 \backslash
- r2012     &    1.567
-\backslash
-sym{***}&                  &                  &    1.715
+ r     &    1.715
 \backslash
 sym{***}&                  &                  
 \backslash
 
 \backslash
-           &  (0.000)         &                  &                  &  (0.000)
-         &                  &                  
+           &  (0.000)         &                  &                  
 \backslash
 
 \backslash
  r
 \backslash
-_educ2012&                  &    1.533
-\backslash
-sym{***}&                  &                  &    1.464
+_educ&                  &    1.464
 \backslash
 sym{***}&                  
 \backslash
 
 \backslash
-           &                  &  (0.000)         &                  &   
-               &  (0.000)         &                  
+           &                  &  (0.000)         &                  
 \backslash
 
 \backslash
  r
 \backslash
-_agri2012&                  &                  &    1.217
-\backslash
-sym{***}&                  &                  &    1.500
+_agri&                  &                  &    1.500
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &                  &                  &  (0.000)         &   
-               &                  &  (0.000)         
+           &                  &                  &  (0.000)         
 \backslash
 
 \backslash
@@ -7323,33 +7342,31 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&    4.411         &    4.383         &    6.908         &  -0.0545     
-    &    0.646         &   -0.195         
+_ne&  -0.0545         &    0.646         &   -0.195         
 \backslash
 
 \backslash
-           &  (0.493)         &  (0.494)         &  (0.267)         &  (0.994)
-         &  (0.930)         &  (0.978)         
+           &  (0.994)         &  (0.930)         &  (0.978)         
 \backslash
 
 \backslash
- 1.agri    &  -0.0861         &   -0.176         &                  &    0.695
-         &    0.548         &                  
+ 1.is
+\backslash
+_agri    &    0.695         &    0.548         &                  
 \backslash
 
 \backslash
-           &  (0.864)         &  (0.726)         &                  &  (0.263)
-         &  (0.374)         &                  
+           &  (0.263)         &  (0.374)         &                  
 \backslash
 
 \backslash
- 1.educpriv&    0.759         &    0.708         &    0.788         &    0.802
-         &    0.795         &    0.641         
+ 1.is
+\backslash
+_educpriv&    0.802         &    0.795         &    0.641         
 \backslash
 
 \backslash
-           &  (0.252)         &  (0.286)         &  (0.202)         &  (0.295)
-         &  (0.300)         &  (0.377)         
+           &  (0.295)         &  (0.300)         &  (0.377)         
 \backslash
 
 \backslash
@@ -7357,37 +7374,27 @@ _ne&    4.411         &    4.383         &    6.908         &  -0.0545
 \backslash
 _educ
 \backslash
-_rank&   -0.113         &   -0.152         &  -0.0980         &  -0.0969   
-      &   -0.134         &   -0.120         
+_rank&  -0.0969         &   -0.134         &   -0.120         
 \backslash
 
 \backslash
-           &  (0.482)         &  (0.344)         &  (0.539)         &  (0.623)
-         &  (0.500)         &  (0.535)         
+           &  (0.623)         &  (0.500)         &  (0.535)         
 \backslash
 
 \backslash
  secondary
 \backslash
-_schools&   -0.344         &   -0.377         &   -0.278         &    0.430
-         &    0.454         &    0.428         
+_schools&    0.430         &    0.454         &    0.428         
 \backslash
 
 \backslash
-           &  (0.318)         &  (0.274)         &  (0.428)         &  (0.438)
-         &  (0.412)         &  (0.430)         
+           &  (0.438)         &  (0.412)         &  (0.430)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_primaryage&    4.601
-\backslash
-sym{***}&    4.499
-\backslash
-sym{***}&    4.574
-\backslash
-sym{***}&    3.635
+_primaryage&    3.635
 \backslash
 sym{***}&    3.576
 \backslash
@@ -7397,20 +7404,13 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_secondaryage&    1.906
-\backslash
-sym{***}&    1.855
-\backslash
-sym{***}&    1.929
-\backslash
-sym{***}&    2.355
+_secondaryage&    2.355
 \backslash
 sym{***}&    2.300
 \backslash
@@ -7420,40 +7420,21 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_tertiaryage&    0.386         &    0.341         &    0.377         &    0.981
-         &    1.002         &    1.029         
+_tertiaryage&    0.981         &    1.002         &    1.029         
 \backslash
 
 \backslash
-           &  (0.407)         &  (0.464)         &  (0.418)         &  (0.091)
-         &  (0.085)         &  (0.076)         
+           &  (0.091)         &  (0.085)         &  (0.076)         
 \backslash
 
 \backslash
- 1.religion&        0         &        0         &        0         &   
-     0         &        0         &        0         
-\backslash
-
-\backslash
-           &      (.)         &      (.)         &      (.)         &     
- (.)         &      (.)         &      (.)         
-\backslash
-
-\backslash
- 2.religion&   -2.414
-\backslash
-sym{***}&   -2.334
-\backslash
-sym{***}&   -2.426
-\backslash
-sym{***}&   -2.397
+ 2.religion&   -2.397
 \backslash
 sym{***}&   -2.298
 \backslash
@@ -7463,45 +7444,33 @@ sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         
+           &  (0.000)         &  (0.000)         &  (0.000)         
 \backslash
 
 \backslash
- 3.religion&   -0.711         &   -0.682         &   -0.853         &   -2.313
-         &   -2.284         &   -2.415         
+ 3.religion&   -2.313         &   -2.284         &   -2.415         
 \backslash
 
 \backslash
-           &  (0.765)         &  (0.774)         &  (0.719)         &  (0.358)
-         &  (0.369)         &  (0.381)         
+           &  (0.358)         &  (0.369)         &  (0.381)         
 \backslash
 
 \backslash
- numchild  &   0.0456         &   0.0377         &   0.0481         &  -0.0882
-         &  -0.0929         &  -0.0589         
+ numchild  &  -0.0882         &  -0.0929         &  -0.0589         
 \backslash
 
 \backslash
-           &  (0.729)         &  (0.774)         &  (0.709)         &  (0.568)
-         &  (0.547)         &  (0.700)         
+           &  (0.568)         &  (0.547)         &  (0.700)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   -44.44
-\backslash
-sym{**} &   -43.44
-\backslash
-sym{**} &   -46.22
-\backslash
-sym{***}&   -29.53         &   -27.68         &   -24.88         
+_cons    &   -29.53         &   -27.68         &   -24.88         
 \backslash
 
 \backslash
-           &  (0.001)         &  (0.001)         &  (0.000)         &  (0.064)
-         &  (0.082)         &  (0.102)         
+           &  (0.064)         &  (0.082)         &  (0.102)         
 \backslash
 
 \backslash
@@ -7511,8 +7480,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     3113         &     3113         &     3113         &     2192
-         &     2192         &     2192         
+)     &     2192         &     2192         &     2192         
 \backslash
 
 \backslash
@@ -7522,7 +7490,7 @@ hline
 \backslash
 hline 
 \backslash
-multicolumn{7}{l}{
+multicolumn{4}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -7532,7 +7500,7 @@ textit{p}-values in parentheses}
 \backslash
  
 \backslash
-multicolumn{7}{l}{
+multicolumn{4}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -7613,7 +7581,7 @@ label{tabTNZ_ur_district_weduc}}
 
 
 \backslash
-resizebox{2.2in}{!}{
+resizebox{1.5in}{!}{
 \end_layout
 
 \end_inset
@@ -7643,21 +7611,17 @@ else
 \backslash
 fi} 
 \backslash
-begin{tabular}{l*{2}{c}} 
+begin{tabular}{l*{1}{c}} 
 \backslash
 hline
 \backslash
 hline           &
 \backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
+multicolumn{1}{c}{(1)}
 \backslash
 
 \backslash
            &
-\backslash
-multicolumn{1}{c}{2012}&
 \backslash
 multicolumn{1}{c}{2014}
 \backslash
@@ -7665,15 +7629,13 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline lnA0      & -0.00726
-\backslash
-sym{***}& -0.00636
+hline logA      & -0.00636
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
@@ -7683,31 +7645,33 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&  -0.0318         &  -0.0853         
+_ne&  -0.0853         
 \backslash
 
 \backslash
-           &  (0.505)         &  (0.198)         
+           &  (0.198)         
 \backslash
 
 \backslash
- 1.agri    &  0.00621         &  0.00392         
+ 1.is
+\backslash
+_agri    &  0.00392         
 \backslash
 
 \backslash
-           &  (0.085)         &  (0.296)         
+           &  (0.296)         
 \backslash
 
 \backslash
- 1.educpriv&   0.0908
+ 1.is
 \backslash
-sym{***}&   0.0733
+_educpriv&   0.0733
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
@@ -7715,109 +7679,101 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&  0.00189         &  0.00169         
+_rank&  0.00169         
 \backslash
 
 \backslash
-           &  (0.248)         &  (0.265)         
+           &  (0.265)         
 \backslash
 
 \backslash
  secondary
 \backslash
-_schools&-0.000138         & -0.00119
+_schools& -0.00119
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.211)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_primaryage&   0.0261
-\backslash
-sym{***}&   0.0244
+_primaryage&   0.0244
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_secondaryage&   0.0116
-\backslash
-sym{***}&   0.0120
+_secondaryage&   0.0120
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_tertiaryage& -0.00352         & -0.00501         
+_tertiaryage& -0.00501         
 \backslash
 
 \backslash
-           &  (0.182)         &  (0.097)         
+           &  (0.097)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards&  -0.0217
-\backslash
-sym{**} &  -0.0170
+_wards&  -0.0170
 \backslash
 sym{*}  
 \backslash
 
 \backslash
-           &  (0.003)         &  (0.017)         
+           &  (0.017)         
 \backslash
 
 \backslash
  1.has
 \backslash
-_english&   0.0532
-\backslash
-sym{***}&   0.0432
+_english&   0.0432
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
- numchild  &-0.000361         &  0.00282
+ numchild  &  0.00282
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &  (0.598)         &  (0.001)         
+           &  (0.001)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &    0.185         &    0.305         
+_cons    &    0.305         
 \backslash
 
 \backslash
-           &  (0.139)         &  (0.076)         
+           &  (0.076)         
 \backslash
 
 \backslash
@@ -7827,7 +7783,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     3346         &     2410         
+)     &     2410         
 \backslash
 
 \backslash
@@ -7837,7 +7793,7 @@ hline
 \backslash
 hline 
 \backslash
-multicolumn{3}{l}{
+multicolumn{2}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -7847,7 +7803,7 @@ textit{p}-values in parentheses}
 \backslash
  
 \backslash
-multicolumn{3}{l}{
+multicolumn{2}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -7928,7 +7884,7 @@ label{tabNGR_ur_district_weduc}}
 
 
 \backslash
-resizebox{2.2in}{!}{
+resizebox{1.5in}{!}{
 \end_layout
 
 \end_inset
@@ -7958,21 +7914,17 @@ else
 \backslash
 fi} 
 \backslash
-begin{tabular}{l*{2}{c}} 
+begin{tabular}{l*{1}{c}} 
 \backslash
 hline
 \backslash
 hline           &
 \backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
+multicolumn{1}{c}{(1)}
 \backslash
 
 \backslash
            &
-\backslash
-multicolumn{1}{c}{2012}&
 \backslash
 multicolumn{1}{c}{2015}
 \backslash
@@ -7980,13 +7932,11 @@ multicolumn{1}{c}{2015}
 \backslash
  
 \backslash
-hline lnA0      & -0.00292
-\backslash
-sym{*}  & -0.00274         
+hline logA      & -0.00274         
 \backslash
 
 \backslash
-           &  (0.026)         &  (0.108)         
+           &  (0.108)         
 \backslash
 
 \backslash
@@ -7996,31 +7946,33 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&  -0.0407         &  -0.0474         
+_ne&  -0.0474         
 \backslash
 
 \backslash
-           &  (0.378)         &  (0.374)         
+           &  (0.374)         
 \backslash
 
 \backslash
- 1.agri    & -0.00504         &  0.00500         
+ 1.is
+\backslash
+_agri    &  0.00500         
 \backslash
 
 \backslash
-           &  (0.197)         &  (0.308)         
+           &  (0.308)         
 \backslash
 
 \backslash
- 1.educpriv&   0.0253
+ 1.is
 \backslash
-sym{***}&   0.0368
+_educpriv&   0.0368
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
@@ -8028,121 +7980,103 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&-0.000274         & 0.000365         
+_rank& 0.000365         
 \backslash
 
 \backslash
-           &  (0.823)         &  (0.807)         
+           &  (0.807)         
 \backslash
 
 \backslash
  secondary
 \backslash
-_schools& 0.000927         &  0.00555         
+_schools&  0.00555         
 \backslash
 
 \backslash
-           &  (0.733)         &  (0.187)         
+           &  (0.187)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_primaryage&   0.0174
-\backslash
-sym{***}&   0.0177
+_primaryage&   0.0177
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.002)         
+           &  (0.002)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_secondaryage&   0.0257
-\backslash
-sym{***}&   0.0314
+_secondaryage&   0.0314
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_tertiaryage&  0.00959
-\backslash
-sym{**} &  0.00405         
+_tertiaryage&  0.00405         
 \backslash
 
 \backslash
-           &  (0.007)         &  (0.362)         
+           &  (0.362)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards& -0.00730         & -0.00367         
+_wards& -0.00367         
 \backslash
 
 \backslash
-           &  (0.144)         &  (0.545)         
+           &  (0.545)         
 \backslash
 
 \backslash
- 1.religion&        0         &        0         
-\backslash
-
-\backslash
-           &      (.)         &      (.)         
-\backslash
-
-\backslash
- 2.religion&  -0.0373
-\backslash
-sym{***}&  -0.0249
+ 2.religion&  -0.0249
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
- 3.religion&  -0.0379
-\backslash
-sym{*}  &  -0.0365         
+ 3.religion&  -0.0365         
 \backslash
 
 \backslash
-           &  (0.036)         &  (0.085)         
+           &  (0.085)         
 \backslash
 
 \backslash
- numchild  & -0.00138         & -0.00253
+ numchild  & -0.00253
 \backslash
 sym{*}  
 \backslash
 
 \backslash
-           &  (0.156)         &  (0.030)         
+           &  (0.030)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &    0.163         &    0.162         
+_cons    &    0.162         
 \backslash
 
 \backslash
-           &  (0.138)         &  (0.206)         
+           &  (0.206)         
 \backslash
 
 \backslash
@@ -8152,7 +8086,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     3113         &     2192         
+)     &     2192         
 \backslash
 
 \backslash
@@ -8162,7 +8096,7 @@ hline
 \backslash
 hline 
 \backslash
-multicolumn{3}{l}{
+multicolumn{2}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -8172,7 +8106,7 @@ textit{p}-values in parentheses}
 \backslash
  
 \backslash
-multicolumn{3}{l}{
+multicolumn{2}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -8244,7 +8178,7 @@ centering
 
 
 \backslash
-caption{Tanzania - $log(q_{educ})$ 
+caption{Tanzania - $log(x_{educ})$ 
 \backslash
 label{tabTNZ_ur_district_logeduc}}
 \end_layout
@@ -8253,7 +8187,7 @@ label{tabTNZ_ur_district_logeduc}}
 
 
 \backslash
-resizebox{1.8in}{!}{
+resizebox{1.5in}{!}{
 \end_layout
 
 \end_inset
@@ -8283,21 +8217,17 @@ else
 \backslash
 fi} 
 \backslash
-begin{tabular}{l*{2}{c}} 
+begin{tabular}{l*{1}{c}} 
 \backslash
 hline
 \backslash
 hline           &
 \backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
+multicolumn{1}{c}{(1)}
 \backslash
 
 \backslash
            &
-\backslash
-multicolumn{1}{c}{2012}&
 \backslash
 multicolumn{1}{c}{2014}
 \backslash
@@ -8305,15 +8235,13 @@ multicolumn{1}{c}{2014}
 \backslash
  
 \backslash
-hline lnA0      &    0.617
-\backslash
-sym{***}&    0.556
+hline logA      &    0.556
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
@@ -8323,37 +8251,35 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&    20.01
-\backslash
-sym{***}&    13.10         
+_ne&    13.10         
 \backslash
 
 \backslash
-           &  (0.001)         &  (0.062)         
+           &  (0.062)         
 \backslash
 
 \backslash
- 1.agri    &    1.287
+ 1.is
 \backslash
-sym{**} &    1.550
+_agri    &    1.550
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &  (0.005)         &  (0.005)         
+           &  (0.005)         
 \backslash
 
 \backslash
- 1.educpriv&    3.244
+ 1.is
 \backslash
-sym{***}&    4.248
+_educpriv&    4.248
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
@@ -8361,115 +8287,103 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&    0.228         &    0.375
+_rank&    0.375
 \backslash
 sym{*}  
 \backslash
 
 \backslash
-           &  (0.190)         &  (0.047)         
+           &  (0.047)         
 \backslash
 
 \backslash
  secondary
 \backslash
-_schools&   0.0260         &  0.00937         
+_schools&  0.00937         
 \backslash
 
 \backslash
-           &  (0.068)         &  (0.721)         
+           &  (0.721)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_primaryage&    14.03
-\backslash
-sym{***}&    15.25
+_primaryage&    15.25
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_secondaryage&   -0.822
-\backslash
-sym{*}  &    0.170         
+_secondaryage&    0.170         
 \backslash
 
 \backslash
-           &  (0.027)         &  (0.681)         
+           &  (0.681)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_tertiaryage&   -1.564
-\backslash
-sym{***}&   -1.985
+_tertiaryage&   -1.985
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards&    0.126         &   -1.723
+_wards&   -1.723
 \backslash
 sym{*}  
 \backslash
 
 \backslash
-           &  (0.886)         &  (0.037)         
+           &  (0.037)         
 \backslash
 
 \backslash
  1.has
 \backslash
-_english&    5.517
-\backslash
-sym{***}&    3.480
+_english&    3.480
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
- numchild  &    0.473
-\backslash
-sym{***}&    0.457
+ numchild  &    0.457
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   -68.23
-\backslash
-sym{***}&   -50.13
+_cons    &   -50.13
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.006)         
+           &  (0.006)         
 \backslash
 
 \backslash
@@ -8479,7 +8393,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     3346         &     2410         
+)     &     2410         
 \backslash
 
 \backslash
@@ -8489,7 +8403,7 @@ hline
 \backslash
 hline 
 \backslash
-multicolumn{3}{l}{
+multicolumn{2}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -8499,7 +8413,7 @@ textit{p}-values in parentheses}
 \backslash
  
 \backslash
-multicolumn{3}{l}{
+multicolumn{2}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -8571,7 +8485,7 @@ centering
 
 
 \backslash
-caption{Nigeria - $log(q_{educ})$ 
+caption{Nigeria - $log(x_{educ})$ 
 \backslash
 label{tabNGR_ur_district_logeduc}}
 \end_layout
@@ -8580,7 +8494,7 @@ label{tabNGR_ur_district_logeduc}}
 
 
 \backslash
-resizebox{1.8in}{!}{
+resizebox{1.5in}{!}{
 \end_layout
 
 \end_inset
@@ -8610,21 +8524,17 @@ else
 \backslash
 fi} 
 \backslash
-begin{tabular}{l*{2}{c}} 
+begin{tabular}{l*{1}{c}} 
 \backslash
 hline
 \backslash
 hline           &
 \backslash
-multicolumn{1}{c}{(1)}&
-\backslash
-multicolumn{1}{c}{(2)}
+multicolumn{1}{c}{(1)}
 \backslash
 
 \backslash
            &
-\backslash
-multicolumn{1}{c}{2012}&
 \backslash
 multicolumn{1}{c}{2015}
 \backslash
@@ -8632,13 +8542,11 @@ multicolumn{1}{c}{2015}
 \backslash
  
 \backslash
-hline lnA0      &    0.666
-\backslash
-sym{***}&    0.345         
+hline logA      &    0.345         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.121)         
+           &  (0.121)         
 \backslash
 
 \backslash
@@ -8648,29 +8556,31 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&    16.13
-\backslash
-sym{**} &    9.824         
+_ne&    9.824         
 \backslash
 
 \backslash
-           &  (0.008)         &  (0.160)         
+           &  (0.160)         
 \backslash
 
 \backslash
- 1.agri    &   -0.401         &  -0.0481         
+ 1.is
+\backslash
+_agri    &  -0.0481         
 \backslash
 
 \backslash
-           &  (0.435)         &  (0.940)         
+           &  (0.940)         
 \backslash
 
 \backslash
- 1.educpriv&    0.895         &    1.089         
+ 1.is
+\backslash
+_educpriv&    1.089         
 \backslash
 
 \backslash
-           &  (0.178)         &  (0.159)         
+           &  (0.159)         
 \backslash
 
 \backslash
@@ -8678,121 +8588,105 @@ sym{**} &    9.824
 \backslash
 _educ
 \backslash
-_rank&  -0.0815         &  -0.0695         
+_rank&  -0.0695         
 \backslash
 
 \backslash
-           &  (0.611)         &  (0.722)         
+           &  (0.722)         
 \backslash
 
 \backslash
  secondary
 \backslash
-_schools&  -0.0395         &    1.024         
+_schools&    1.024         
 \backslash
 
 \backslash
-           &  (0.910)         &  (0.067)         
+           &  (0.067)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_primaryage&    4.560
-\backslash
-sym{***}&    3.740
+_primaryage&    3.740
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_secondaryage&    1.875
-\backslash
-sym{***}&    2.364
+_secondaryage&    2.364
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         
+           &  (0.000)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_tertiaryage&    0.273         &    0.929         
+_tertiaryage&    0.929         
 \backslash
 
 \backslash
-           &  (0.561)         &  (0.109)         
+           &  (0.109)         
 \backslash
 
 \backslash
  rural
 \backslash
-_wards&    0.951         &    2.093
+_wards&    2.093
 \backslash
 sym{**} 
 \backslash
 
 \backslash
-           &  (0.157)         &  (0.008)         
+           &  (0.008)         
 \backslash
 
 \backslash
- 1.religion&        0         &        0         
-\backslash
-
-\backslash
-           &      (.)         &      (.)         
-\backslash
-
-\backslash
- 2.religion&   -2.402
-\backslash
-sym{***}&   -2.081
+ 2.religion&   -2.081
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.001)         
+           &  (0.001)         
 \backslash
 
 \backslash
- 3.religion&   -0.795         &   -2.725         
+ 3.religion&   -2.725         
 \backslash
 
 \backslash
-           &  (0.740)         &  (0.282)         
+           &  (0.282)         
 \backslash
 
 \backslash
- numchild  &   0.0617         &  -0.0963         
+ numchild  &  -0.0963         
 \backslash
 
 \backslash
-           &  (0.639)         &  (0.529)         
+           &  (0.529)         
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   -55.21
-\backslash
-sym{***}&   -38.25
+_cons    &   -38.25
 \backslash
 sym{*}  
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.023)         
+           &  (0.023)         
 \backslash
 
 \backslash
@@ -8802,7 +8696,7 @@ hline
 \backslash
 (N
 \backslash
-)     &     3113         &     2192         
+)     &     2192         
 \backslash
 
 \backslash
@@ -8812,7 +8706,7 @@ hline
 \backslash
 hline 
 \backslash
-multicolumn{3}{l}{
+multicolumn{2}{l}{
 \backslash
 footnotesize 
 \backslash
@@ -8822,7 +8716,7 @@ textit{p}-values in parentheses}
 \backslash
  
 \backslash
-multicolumn{3}{l}{
+multicolumn{2}{l}{
 \backslash
 footnotesize 
 \backslash
