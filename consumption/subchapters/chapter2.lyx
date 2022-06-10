@@ -4824,9 +4824,9 @@ Control Variables
 \end_layout
 
 \begin_layout Standard
-Note that some of these controls are observed at the individual household
- level.
- One such variable is the logarithm of total expenditure 
+Some of the controls are observed at the household level while others are
+ observed at the level of the consumer's district.
+ The logarithm of total expenditure 
 \begin_inset Formula $log(x)$
 \end_inset
 
@@ -4834,19 +4834,15 @@ Note that some of these controls are observed at the individual household
 \family typewriter
 logx
 \family default
-) - which is used as the control for permanent income in the estimation.
- The relationship between total household expenditures and the household’s
- permanent income is comes from standard consumption theory (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "modiglianiutility1954,FriedmanConsumption1957"
-literal "false"
-
+) and of the total assets- owned 
+\begin_inset Formula $log(A)$
 \end_inset
 
-).
- The controls such as the household's occupational and educational statuses
- are evidently observed at the household level.
+ (
+\family typewriter
+logA
+\family default
+) are observed at the level of the household.
  Similarly, the factor variable 
 \begin_inset Formula $\Omega$
 \end_inset
@@ -4876,21 +4872,20 @@ is_secondaryage
 \family typewriter
 is_tertiaryage
 \family default
-) indicating the members in the household eligible (due to age) for primary,
- secondary or tertiary education, the number of wards with an accessible
- (within 6-km distance) secondary-school, the factor variable for access
+) indicating the members in the household that are eligible (due to age)
+ for primary, secondary or tertiary education, the factor variable for access
  to private education (
 \family typewriter
 educpriv
 \family default
-), the education rank 
+), the highest education rank 
 \begin_inset Formula $\Gamma^{*}$
 \end_inset
 
- of the head of the household (
+ among the parental generations (father-relationship) in a household (
 \family typewriter
 \size small
-education_rank
+father_educ_rank
 \family default
 \size default
 ), the ability to speak English 
@@ -4901,7 +4896,7 @@ education_rank
 \family typewriter
 has_english
 \family default
- - used only for Tanzania) and religion 
+ - used only for Tanzania) and the factor variable indicating religion 
 \begin_inset Formula $\chi$
 \end_inset
 
@@ -4910,8 +4905,17 @@ has_english
 religion
 \family default
  - used only for Nigeria and indicated by 1 for Christianity, 2 for Islam,
- 3 for Traditional and 4 for other) are all observed for the individual
- household.
+ 3 for Traditional and 4 for other) are all observed for a household.
+ The variables observed at the district (or 6-
+\begin_inset Formula $km^{2}$
+\end_inset
+
+ vicinity) are the number of wards with an accessible (within 6-km distance)
+ secondary-school, 
+\end_layout
+
+\begin_layout Standard
+.
  The variables observed at the level of the consumer's area of vicinity
  - the number of rural wards 
 \begin_inset Formula $\gamma$
