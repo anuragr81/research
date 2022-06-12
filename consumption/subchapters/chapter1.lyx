@@ -605,6 +605,8 @@ y).
 
 \begin_layout Plain Layout
 
+% 19.
+ change descriptive statistics to show 2014 data
 \end_layout
 
 \end_inset
@@ -706,7 +708,7 @@ literal "false"
 
 .
  To understand the relationship between diversity and socioeconomic status
- in more detail, the chapter seekss measures of quality across categories
+ in more detail, the chapter seeks measures of quality across categories
  of food that may best correspond to the measure of diversity in diet that
  are recommended by FAO (
 \begin_inset CommandInset citation
@@ -771,7 +773,7 @@ literal "false"
  that considers lesser consumption of certain food-commodities and can be
  used to test substitution in quality across multiple commodity groups.
  This is relevant for example for the reports of a higher quantity (and
- thus lower price-based quality) of starch or fatty foods in some SAA regions
+ thus lower price-based quality) of starch or fatty foods in some SSA regions
  (e.g.
  in Nigeria 
 \begin_inset CommandInset citation
@@ -954,8 +956,19 @@ literal "false"
 
 ) neither factor in the quantities consumed nor satisfy the conditions for
  aggregation that are required for a discussion of substitution in quality.
- On the other hand, it is a common approach in consumption problems to combine
- the quantities consumed (for example by 
+ The counter-based methods are often adjusted to adjust granularity (for
+ example, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ModjadjiDDSA2020"
+literal "false"
+
+\end_inset
+
+ consider half a point when one of the items in a group are consumed and
+ a full point when two are consumed ).
+ On the other extreme, is a common approach used in consumption problems
+ where quantities consumed are combined (for example by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonQualityQuantityVariation"
@@ -964,9 +977,9 @@ literal "false"
 \end_inset
 
 ) from across items (or goods) within commodity.
- The less restrictive forms of the approach are those that consider an aggregate
- of high-quality items across multiple commodities (food, household, transport
- etc.) 
+ The further restrictive forms of this approach are those that consider
+ an aggregate of high-quality items across multiple commodities (food, household
+, transport etc.) 
 \end_layout
 
 \begin_layout Standard
@@ -999,10 +1012,11 @@ literal "false"
 
 \end_inset
 
-) that is unsuitable for measurement of quality in food.
- We use an approach where quality is considered across commodities within
- food that are based on the FAO categories but are also subject to the price-cor
-relation requirement from the Hicks commodity theorem (
+) that is evidently unsuitable for measurement of quality in food.
+ To pursue a middle path, we use an approach where quality is considered
+ across commodities within food that are based on the FAO categories but
+ are also subject to the price-correlation requirement from the Hicks commodity
+ theorem (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hicksvaluecapital1946,NelsonQualityQuantity,DeatonEconConsumer"
@@ -1016,7 +1030,7 @@ literal "false"
  constituent items move together in terms of their annual prices from 2008
  to 2014.
  The method thus allows us to talk about substitution between the commodities
- wuthin food in the context of long-term differences in wealth and SES while
+ within food in the context of long-term differences in wealth and SES while
  still drawing conclusions related to diversity that are relevant from a
  nutrition and health perspective.
  The approach also permits to us derive robust implication on the effect
@@ -2003,7 +2017,7 @@ literal "true"
 
 .
  While HW approach may be well-suited for comparison of elasticities for
- specific goods (see Appendix III for empirical results using the approach),
+ specific goods (see Appendix II for empirical results using the approach),
  the comparison of quality across multiple commodities is a more appropriate
  interpretation for the overview of quality we seek in the current chapter.
  Since it is much less likely for no goods to be consumed within a broader
@@ -2501,7 +2515,7 @@ name "tab:PriceBasedGroups"
 
 \end_inset
 
-Food items classified into commodities
+Food items classified into commodity groups based on price-movements
 \end_layout
 
 \end_inset
@@ -2832,7 +2846,7 @@ name "tab:GroupsModified"
 
 \end_inset
 
-Food items classified into commodities
+Food items classified into commodity groups after considering FAO categories
 \end_layout
 
 \end_inset
@@ -4133,22 +4147,9 @@ noprefix "false"
 \end_inset
 
 .
- The ownership of assets for household which appears as the control variable
- in the AIDS regression is measured with the logarithm of the costs of the
- assets owned.
- As explained in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:ClassificationGoods"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the quality variation is ignored for household expenditure categories
- and thus only the total expenditure is considered in the AIDS system of
- equations.
+ The ownership of assets of the household which appears as the control variable
+ in lieu of the total expenditure in the AIDS regression is measured with
+ the logarithm of the costs of the assets owned.
 \end_layout
 
 \begin_layout Standard
@@ -4176,8 +4177,9 @@ literal "true"
 
 \end_inset
 
-), each composite commodity corresponds to one quantity/budget equation
- and one quality metric equation.
+), each composite commodity group - unless it consists of just one good/item
+ - corresponds to both a budget equation and a quality metric dependent
+ variable.
  With intercepts 
 \begin_inset Formula $\rho_{1,G}$
 \end_inset
@@ -4281,7 +4283,7 @@ noprefix "false"
 
 \end_inset
 
- include the asset ownership and related dummy variables.
+ include the factor variables related to access to electricity as well.
  Since the price for quality is not required, the price-coefficients in
  the 
 \begin_inset Quotes eld
@@ -4325,9 +4327,9 @@ additional
 
 .
  As is common in the AIDS estimation, the adding-up constraints are ensured
- by skipping the estimation of one of the commodities (in our case - the
- transport commodity) and setting its intercept to a the difference between
- unity and the sum of the rest of the intercepts i.e.
+ by skipping the estimation of one of the commodity group (in our case -
+ chicken) and setting its intercept to a the difference between unity and
+ the sum of the rest of the intercepts i.e.
  to 
 \begin_inset Formula $1-\sum_{G}^{n}\rho_{1,G}$
 \end_inset
@@ -4337,27 +4339,9 @@ additional
 \end_inset
 
  respectively.
-\end_layout
-
-\begin_layout Standard
-In the sections that follow, we view how our measures of quality habits
+ In the sections that follow, we view how our measures of quality habits
  vary with the permanent income and household characteristics.
- The composite commodity groups for quality are: food, energy while the
- elementary commodity group is the household commodity group.
- It is worth emphasising again that the quality of protein, densefoods etc.
- - treated as a composite good - are measured with the metric presented
- in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:QualityMeasure"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- while no quality variation is assumed for the household commodity where
- only the cost of the goods consumed is considered.
+ 
 \end_layout
 
 \begin_layout Section
@@ -4392,14 +4376,27 @@ noindent
 
 \begin_layout Standard
 \paragraph_spacing single
-With the recent economic growth and a history of nationalization, Tanzania
+With the recent economic growth and a history of centralised control, Tanzania
  serves as a case-study of consumer markets in the developing sub-Saharan
  Africa.
  In more recent times, the investments from South Africa and Western countries
  have significantly expanded in the country and the trends of urbanisation
  are evident in the consumption data.
  The data we use for our analysis is from the Living Standard Measurement
- Study (LSMS) - conducted by the World Bank - for years 2010, 2012 and 2014.
+ Study (LSMS) - conducted by the World Bank - for the year 2014 - which
+ is last wave in the survey.
+ The price-data which we used in the classification described in Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:ClassificationGoods"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is based on prices for years 2008, 2010, 2012 and 2014.
  
 \end_layout
 
@@ -4409,8 +4406,8 @@ The LSMS survey records past expenditure with diary and recall methods.
  as weekly, monthly and yearly recalls.
  The expenditures on food are recorded with a greater level of detail than
  other expenditures.
- The summary statistics from the LSMS microdata for 2010 (base year) are
- presented in the Table 
+ The summary statistics from the LSMS microdata for 2014 are presented in
+ the Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Descriptive-statistics-LSMS-2010"
@@ -4418,6 +4415,17 @@ reference "fig:Descriptive-statistics-LSMS-2010"
 \end_inset
 
 .
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%TODO: change descriptive statistics to show 2014 data
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4470,7 +4478,7 @@ The consumption microdata from the survey years is combined from across
  the recall and weekly diaries - merging the weekly data with yearly data
  by multiplying the past week's consumption into the number of weeks in
  the year.
- The details of this process are described in Appendix II.
+ The details of this process are described in Appendix I.
  Once combined, the matching of market prices for the goods consumed by
  a household is done for food and energy subgroups
 \begin_inset Foot
@@ -4526,19 +4534,23 @@ literal "true"
 s (grams, kilograms for weight and liters, mls for fluids etc.), we infer
  the price at the district level using a regression over price records for
  the good in the district.
- By assimilating all the price data from across the quantities and regions
- in the regression, we use the coefficients to obtain the price for a unit-quant
-ity of an good (kg,litres etc.).
- Here, as the unit-prices grow at a less than linear rate with quantity,
- we use a quadratic expression 
-\begin_inset Formula $\frac{mp}{q}=\beta\frac{1}{q^{2}}+c$
+ This is only a means to standardise the prices in a standard unit such
+ as a kilogram or a litre from the prices that are observed numerous units.
+ Since the prices per unit of items is hardly constant and decline with
+ the increase in quantity purchase, the price data from across the quantities
+ are assimilated using a regression to obtain the price for a unit-quantity
+ of an good (kg,litres etc.).
+ A simple quadratic expression 
+\begin_inset Formula $\frac{m}{q}=\beta\frac{1}{q^{2}}+c$
 \end_inset
 
- to regress the observed marked-prices 
-\begin_inset Formula $mp$
+ to used to approximate the inverse proportionality of price-per-unit with
+ quantities purchase.
+ Thus, observed marked-prices 
+\begin_inset Formula $m$
 \end_inset
 
- against the quantities 
+ are regressed against the quantities 
 \begin_inset Formula $q$
 \end_inset
 
@@ -4579,11 +4591,14 @@ The values of assets owned by the household that we use as control variable(s)
  or housing.
  Of these, we are interested only in the transferable long-term owned assets
  that undergo changes in the survey years 2010, 2012 and 2014.
- We verify the assets transferred over a generation by inspecting households
- in the data that are split when a young member of the unsplit family starts
- a new household - treating the assets except land and house that are more
- expensive than the bed (furniture) as those that contribute to the long-term
- asset-values.
+ The exclusion of short-term assets or the items that are not transferred
+ over a generation is based on our intent to consider the role of intergeneratio
+nal wealth.
+ The assets transferred over a generation can be readily verified by inspecting
+ households in the data that are split when a young member of the unsplit
+ family starts a new household - treating the assets except land and house
+ that are more expensive than the bed (furniture) as those that contribute
+ to the long-term asset-values.
 \end_layout
 
 \begin_layout Standard
@@ -5079,7 +5094,7 @@ name "fig:Descriptive-statistics-LSMS-2010"
 
 \end_inset
 
-Descriptive statistics for LSMS Tanzania 2012
+Descriptive statistics for LSMS Tanzania 2014
 \end_layout
 
 \end_inset
@@ -5666,239 +5681,18 @@ name "sec:Results"
 \end_layout
 
 \begin_layout Subsection
-An overview of Food Diversity
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Descriptive-Statistics"
+
+\end_inset
+
+Descriptive Statistics
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% No need to run any regression - just plots of quantiles of DD is enough
- as is enough for ModjadjiDDSA2020, McDonaldMcLeanDDFoodInsecurityCambodia2015
- and others.
- ModjadjiDDSA2020 consider half a point for eating one item.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%hdds2014 <- get_hhds_for_consumption_data(ln = lsms_normalizer,cdat = c2014)
-\end_layout
-
-\begin_layout Plain Layout
-
-%asset_mtms_2014 = asset_mtms(a2014,"bed","2014")      
-\end_layout
-
-\begin_layout Plain Layout
-
-%assetslog2014 <- ddply(asset_mtms_2014,.(hhid2014),summarise,lnA0=log(sum(number.
-2014*mtm.2014)+1e-7),A0=sum(number.2014*mtm.2014))
-\end_layout
-
-\begin_layout Plain Layout
-
-%hddsassets2014<- merge(plyr::rename(assetslog2014,c("hhid2014"="hhid")),hdds201
-4,by=c("hhid"))
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-% DECILE PLOT
-\end_layout
-
-\begin_layout Plain Layout
-
-% j <- quantile(hddsassets2014$lnA0,seq(10)/10)
-\end_layout
-
-\begin_layout Plain Layout
-
-% mm <- hddsassets2014%>% mutate( lnA0q = sapply(hddsassets2014$lnA0,function(x)
- { as.numeric(j[j>=x][1])}))
-\end_layout
-
-\begin_layout Plain Layout
-
-% m <- mm[,c("lnA0","lnA0q","hhid","hdds")]
-\end_layout
-
-\begin_layout Plain Layout
-
-% mb <- ddply(m,.(lnA0q),summarise,mean_hdds=mean(hdds))
-\end_layout
-
-\begin_layout Plain Layout
-
-% barplot(mb$mean_hdds,names.arg=seq(10)/10,las=1,xlab='log-asset worth decile',y
-lab='mean HDDS')
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The food diversity itself varies across Tanzania.
- FAO does not prescribe what's considered a low dietary diversity status
- and it's common for studies to consider empirical thresholds for the anlaysis
- of diversity.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "McDonaldMcLeanDDFoodInsecurityCambodia2015"
-literal "false"
-
-\end_inset
-
- , for example, set this threshold to 3.
-  
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename figures/hdds_by_lnA0.png
-	width 4in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Diversity Score changes by log asset deciles
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% Call: combine_group_collect_into_quality_df which seems to depend on get_group
-_collect_for_year.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Results
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The goal of our empirical analysis has been to test whether asset-ownership
- differences influence the degree to which the household may spend on high-quali
-ty in Tanzania.
- The aggregation (subject to restrictions) to the commodity allows us to
- survey the choice for quality in high-level commodity groups (food, energy
- etc.) that vary with permanent income and other long-term household characterist
-ics.
- We present the results from the AIDS formulation specified in Equations
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:AIDS_quality_w"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:AIDS_quality_lnV"
-
-\end_inset
-
- in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{results_has_electric_2014}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{results_elecassets_2014}
-\end_layout
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Before discussing the results from estimation, we look at the market prices
- in Figure 
+The variation market prices of food items across the districts in Tanzania
+ are shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:LSMSMarketPrices"
@@ -5931,8 +5725,8 @@ reference "fig:Recorded-prices"
 ).
  Some of the items - particularly the beverages and meat products - vary
  a lot in prices compared to items such as fresh vegetables and dense foods.
- The market-prices suggest that the rural districts are not exposed to the
- prices of expensive urban items.
+ The market-prices also suggest that the rural districts - despite less
+ diversity - are not exposed to the prices of expensive urban items.
 \end_layout
 
 \begin_layout Standard
@@ -6090,6 +5884,280 @@ Fraction of households having run of food due to costs in the past year
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%hdds2014 <- get_hhds_for_consumption_data(ln = lsms_normalizer,cdat = c2014)
+\end_layout
+
+\begin_layout Plain Layout
+
+%asset_mtms_2014 = asset_mtms(a2014,"bed","2014")      
+\end_layout
+
+\begin_layout Plain Layout
+
+%assetslog2014 <- ddply(asset_mtms_2014,.(hhid2014),summarise,lnA0=log(sum(number.
+2014*mtm.2014)+1e-7),A0=sum(number.2014*mtm.2014))
+\end_layout
+
+\begin_layout Plain Layout
+
+%hddsassets2014<- merge(plyr::rename(assetslog2014,c("hhid2014"="hhid")),hdds201
+4,by=c("hhid"))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% DECILE PLOT
+\end_layout
+
+\begin_layout Plain Layout
+
+% j <- quantile(hddsassets2014$lnA0,seq(10)/10)
+\end_layout
+
+\begin_layout Plain Layout
+
+% mm <- hddsassets2014%>% mutate( lnA0q = sapply(hddsassets2014$lnA0,function(x)
+ { as.numeric(j[j>=x][1])}))
+\end_layout
+
+\begin_layout Plain Layout
+
+% m <- mm[,c("lnA0","lnA0q","hhid","hdds")]
+\end_layout
+
+\begin_layout Plain Layout
+
+% mb <- ddply(m,.(lnA0q),summarise,mean_hdds=mean(hdds))
+\end_layout
+
+\begin_layout Plain Layout
+
+% barplot(mb$mean_hdds,names.arg=seq(10)/10,las=1,xlab='log-asset worth decile',y
+lab='mean HDDS')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The food diversity scores do vary significantly across Tanzania but they
+ do not indicate an extreme segmentation based on assets as is reported
+ for many economies in the region (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DDNutrtiionaGhana2011,HailuDDPregnantEthiopia2019"
+literal "false"
+
+\end_inset
+
+).
+ Notice that FAO standards do not prescribe what's considered a low dietary
+ diversity status and it's common for studies to consider empirical thresholds
+ for the analysis of diversity.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McDonaldMcLeanDDFoodInsecurityCambodia2015"
+literal "false"
+
+\end_inset
+
+ , for example, set this threshold to 3.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/hdds_by_lnA0.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diversity Score changes by log asset deciles
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Call: combine_group_collect_into_quality_df which seems to depend on get_group
+_collect_for_year.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+The extremity of urban-rural and regional differences can be shown with
+ a non-parametric plot.
+\end_layout
+
+\begin_layout Standard
+The variable 
+\family typewriter
+occupation_rank
+\family default
+ is defined an ordered variable indicating an income-based rank inferred
+ from the occupation of the head-household using the available income data
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+It is common for the empirical studies in sub-Saharan Africa to use the
+ income data only indirectly.
+ There are two mains reasons for this.
+ First, the income-data is much more sparse than for occupation or education
+ (only about a quarter of households, for example, have income data available
+ in the LSMS survey for Tanzania).
+ Second, the predominance of informal sectors further subjects the income
+ data to significant measurement errors.
+\end_layout
+
+\end_inset
+
+.
+ The occupation-rank mapping is shown in the Table
+\series bold
+ 
+\series default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{occupation_rank_tn}
+\end_layout
+
+\end_inset
+
+.
+ The argument for using the occupation and education ranks as instruments
+ is simply that a higher food quality in food is unlikely to be favoured
+ by differences in occupations or education levels.
+ In other words, while quality - in general - could be constrained due to
+ occupational structures in the economy, there are few reasons to think
+ that purchases of food could be influenced by one's occupation except through
+ the permanent income measure.
+\end_layout
+
+\begin_layout Subsection
+Results
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The goal of our empirical analysis has been to test whether asset-ownership
+ or permanent income differences significantly influence the degree to which
+ the household may spend on high-quality across food-categories in Tanzania.
+ The aggregation (subject to restrictions) to the commodity allows us to
+ relate the choice for quality in high-level commodity groups with wealth
+ effects using a more robust framework for demand.
+ We present the results from the AIDS formulation specified in Equations
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_w"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AIDS_quality_lnV"
+
+\end_inset
+
+ in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{results_has_electric_2014}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{results_elecassets_2014}
+\end_layout
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -6557,8 +6625,8 @@ In both the set of results, the variable controlling for electricity usage
 ln_tot_exp
 \family default
 .
- We thus use the occupation and education ranks as instruments to resolve
- the endogeneity problem.
+ We thus use the education ranks as an instruments to resolve the endogeneity
+ problem.
  Here, the educational rank of the household is an ordered variable inferred
  from the highest education level of the head of the household (see Table
  
@@ -6596,57 +6664,12 @@ ref{education_rank_tnz}
 \end_inset
 
 .
- Similarly, the variable 
-\family typewriter
-occupation_rank
-\family default
- is defined an ordered variable indicating an income-based rank inferred
- from the occupation of the head-household using the available income data
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-It is common for the empirical studies in sub-Saharan Africa to use the
- income data only indirectly.
- There are two mains reasons for this.
- First, the income-data is much more sparse than for occupation or education
- (only about a quarter of households, for example, have income data available
- in the LSMS survey for Tanzania).
- Second, the predominance of informal sectors further subjects the income
- data to significant measurement errors.
-\end_layout
-
-\end_inset
-
-.
- The occupation-rank mapping is shown in the Table
-\series bold
  
-\series default
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{occupation_rank_tn}
-\end_layout
-
-\end_inset
-
-.
- The argument for using the occupation and education ranks as instruments
- is simply that a higher food quality in food is unlikely to be favoured
- by differences in occupations or education levels.
- In other words, while quality - in general - could be constrained due to
- occupational structures in the economy, there are few reasons to think
- that purchases of food could be influenced by one's occupation except through
- the permanent income measure.
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 Other control variables used in the results for the LA-AIDS system specified
  in Section 
 \begin_inset CommandInset ref
@@ -8655,7 +8678,7 @@ status open
 \backslash
 section*{
 \backslash
-centering{APPENDIX II}} 
+centering{APPENDIX I}} 
 \end_layout
 
 \end_inset
@@ -9136,7 +9159,7 @@ status open
 \backslash
 section*{
 \backslash
-centering{APPENDIX III}} 
+centering{APPENDIX II}} 
 \end_layout
 
 \end_inset
