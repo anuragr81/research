@@ -2053,14 +2053,10 @@ noindent
 \end_layout
 
 \begin_layout Standard
-In examining the overall high-quality without using the futility assumption,
- one cannot make the equivalent assumption and sum up overall quality from
- across high quality goods in all commodity groups.
- More specifically, the absence of the futility assumption prevents the
- homogeneity restriction across all high-quality items.
- Thus, our measurement of quality treats higher-quality within each commodity
- group separate from each other - where the commodity groups are demarcated
- using the homogeneity restrictions discussed in Section 
+The measure of quality we use in the current chapter treats higher-quality
+ within each commodity group separate from each other - where the commodity
+ groups are demarcated based on the FAO group and are subject to the homogeneity
+ restrictions that we detail in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:ClassificationGoods"
@@ -2140,21 +2136,13 @@ literal "true"
 
 \end_inset
 
- that is aggregated over all commodities, we therefore inspect how quality
- in different commodity groups satisfying homogeneity restrictions varies
- across the population.
- 
-\end_layout
-
-\begin_layout Standard
-In simpler words, while having expensive dinners may be substituted with
- luxury travel for some (high-flying) consumers, our interpretation of high-qual
-ity consumption is not so that a demand for higher quality of life can be
- aggregated across food commodities.
- Instead, the quality is treated as a vector associated with the set of
- commodities.
- Therefore, the econometric methods do not attempt to measure how households
- may be allocating money for a desired amount of overall quality.
+ that is aggregated over all commodities, we inspect how quality in different
+ commodity groups satisfying homogeneity restrictions varies across the
+ population.
+ The quality is thus treated as a vector associated with the set of commodities
+ within food.
+ Notice that we do not attempt to measure how households may be allocating
+ money for a desired amount of overall quality.
  Instead, only a comparison in the variation over the vector of consumption
  quality metrics
 \begin_inset Foot
@@ -2212,22 +2200,11 @@ It is evident that no quality-related inferences can be drawn without an
 
 \end_inset
 
- for each commodity is sought against the assets ownership and income levels.
- We describe this quality metric is further detail in Section 
+ for each commodity is sought against the assets ownership levels.
+ This quality metric is further detail in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:QualityMeasure"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- after detailing the classification of goods into the commodity groups in
- Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:ClassificationGoods"
 plural "false"
 caps "false"
 noprefix "false"
@@ -2326,16 +2303,15 @@ rice=median(median_price))
 \end_layout
 
 \begin_layout Standard
-i) cereals ii) vegetables-fruits iii) protein iv) legumes-nuts-seeds v)
- milk vi) oils-fats vii) complements viii) tubers by combining fruitsveg.
+...
 \end_layout
 
 \begin_layout Standard
 We use an unsupervised k-means clustering to group the items based on price
  changes - so that items with similar relative price-changes are grouped
  together.
- To perform this clustering, we thus convert the absolute prices into relative
- price-changes.
+ More specifically, the clustering is performed by first obtaining relative
+ price-changes from the absolute prices.
  For example, the prices for in years 2008, 2010, 2012, 2014 
 \begin_inset Formula $p_{beef}=\{3500.0,4000.0,5000.0,6000.0\}$
 \end_inset
@@ -2345,8 +2321,9 @@ We use an unsupervised k-means clustering to group the items based on price
 \end_inset
 
 .
- The relative price-vectors for all items are then clustered together.
- As commonly used in k-means applications
+ The relative price-vectors for all items are then clustered using k-means
+ - where the number of selected clusters is guided by the within-cluster
+ sum of squared errors (an approach commonly used in k-means applications
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Pollard1982CLTKmeans"
@@ -2354,9 +2331,9 @@ literal "false"
 
 \end_inset
 
-, the number of selected clusters are guided by the within-cluster sum of
- squared errors - which is less than unity for 5 clusters.
- The output of this is listed in Table 
+).
+ With the within-cluster sum of squared errors which less than unity for
+ 5 clusters, the classification results are as described in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:PriceBasedGroups"
@@ -2538,9 +2515,10 @@ Food items classified into commodities
 \end_layout
 
 \begin_layout Standard
-The prices of the constituent items of a sub-group that is within a larger
- group of commodities having correlated prices are indeed also correlated.
- Therefore, we may split the groups identified in Table 
+Being unsupervised, k-means clustering itself is not guided by the the FAO
+ categories in any way.
+ Since the price-changes of the constituent items of any sub-group within
+ any of the Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:PriceBasedGroups"
@@ -2550,14 +2528,35 @@ noprefix "false"
 
 \end_inset
 
- into further sub-groups that are aligned with FAO-provided for a comparative
- assessment.
+ food groups - whose constituent items are correlated in price changes -
+ would also be correlated, we split the groups identified in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:PriceBasedGroups"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ into further sub-groups aligned with FAO groups.
  Recall that the FAO categories are (i) cereals, (ii) vegetables, (iii)
  fruits, (iv) meat, (v) eggs, (vi) fish and other sea foods, (vii) legumes,
  nuts and seeds, (viii) milk and milk products, (ix) oil and fats, (x) sweets,
  (xi) spices, condiments and beverages, and (xii) tubers and roots.
  With these, we split cereals-milk into milk and cereals, fruits-fish into
  fruits and fish while retaining the categories tuber and meat.
+ The final categories 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KennedyBallardFantaFAO2011"
+literal "false"
+
+\end_inset
+
+ we choose are i) cereals ii) vegetables iii) fruits iv) meats-proteins
+ v) fish vi) milk vii)fat viii) complements ix) tubers x) chicken and xi)
+ starches.
 \end_layout
 
 \begin_layout Standard
@@ -3023,15 +3022,16 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The commodity aggregates are classified both in a i) 
+In summary, the commodity aggregates used in the study are based both on
+ a i) 
 \shape italic
 price-movement
 \shape default
- sense (based on the Hick's commodity theorem) and a ii) 
+ sense (based on the Hick's commodity theorem) and the ii) 
 \shape italic
 functional
 \shape default
- sense.
+ sense inherited from FAO categories relevant for food diversity concerns.
  The 
 \shape italic
 price-movement
@@ -3075,44 +3075,34 @@ literal "true"
 \end_inset
 
  for a similar analysis of rice varieties).
- The sub-groups within food are primarily based on the correlated changes
- in price (from 2008 until 2014) and are then split into functional groups.
+ As described earlier, the sub-groups within food are based on the correlated
+ changes in price (from 2008 until 2014) and are then split into functional
+ groups.
  For example, the price changes for sugar and tea are similar to each other.
  The price changes for rice and cooking-oil are also similar to each other.
- We put sugar and tea within a group of complements because they have similar
- price changes as well as a similar functional sense.
- Despite rice being a starch item and cooking-oil being a fat item, we don't
- put them under starch or fat - categories for a functional sense.
- Instead we put rice and cooking_oil within the group nonfresh - driven
- by the comovement of prices.
- Other categories protein, fruitsveg and densefoods are similarly based
- foremost on price-movement correlations before considering a functional
- sense.
- 
-\end_layout
-
-\begin_layout Standard
-The
-\shape italic
- functional
-\shape default
- sense is therefore secondary to the classification - and is guided by the
- literature on food-demand (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "MhurchuDemandDifferences2013,edgertoneconometricsfooddemand1996,DeatonEconConsumer"
-literal "false"
-
-\end_inset
-
- ) for an appropriate high-level interpretation.
- A functional category is essentially one where there is a plausible substitutio
-n.
+ But sugar and tea are put within a group of complements primarily because
+ they have similar price changes.
+ That they have a similar functional sense due to FAO's categories leads
+ us to their grouping into 'complements' category.
+ Other categories meats-protein, fruits and vegetables are similarly based
+ foremost on price-movement correlations before considering the functional
+ sense impied by FAO categories.
+ Notice that the functional category implied by FAO is also one where there
+ is a plausible substitution.
  As an example, goat and beef may be put under the same group - but not
  with tea - as there is little sense in substitution between tea and meat.
- Using both the price-movement and functional sense, every commodity aggregate
- 
+ Therefore, finally, every commodity aggregate 
 \begin_inset Formula $G$
+\end_inset
+
+ on the left side of Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:PriceBasedGroups"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
  has goods that have the same functional significance 
@@ -3120,57 +3110,6 @@ n.
 and 
 \shape default
 have a similar price-movement.
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-The identification the commodities over which the quality measure is to
- be aggregated over also makes use of a simplification that not all variation
- in quality is considered of importance to the household.
- In other words, both quantity and quality in a commodity aggregate matter
- to the household only if there are no long-term assets associated with
- the aggregate.
- Due to this simplification, the variation in quality is ignored for a particula
-r commodity category if there are long-term assets that dominate the utility
- from consumption.
- For example, having a swimming pool in the house and purchasing pool membership
- may both provide similar utility to the household
-\bar default
- - the above simplification implies that only one of the i) non-durable
- consumption and ii) long-term assets in the commodity group dominate the
-  utility.
- Therefore, in the household commodity group, the quality improvement brought
- about by self-ownership of the pool is meant to be a lot higher than brought
- about by a swimming club membership.
- The implications of this assumption are far less serious in the consumption
- data from Tanzania where the non-durable expenditure on household commodity
- is dominated by the role of assets.
- Thus, out of the commodity aggregates - energy, household and those associated
- with food (fruits-vegetables, non-fresh goods etc.), quality is only considered
- for food aggregates (composite commodities) and energy (although only as
- a control indicating whether electricity is consumed or not) due the non-durabl
-e nature of their consumption.
- Instead, only total expenditure is considered of importance for the non-durable
- consumption in household category (the elementary commodity).
- As long as one may classify every commodity group as either dominated by
- long-term asset or not, there are only two ways a household can spend on
- quality - either by switching between the variants of a composite commodity
- (choosing higher or lower quality of a composite commodity where long-term
- assets do not matter) or spending more on an elementary commodity (where
- long-term assets dominate and quality variation doesn't matter).
-\end_layout
-
-\begin_layout Standard
-Recall that an elementary commodity is one where no quality variation is
- supposed to exist and higher quality can be achieved only through more
- purchases of the commodity.
- A composite commodity - on the other hand - is a commodity where a sufficient
- quality variation exists and a household can use a mix of higher quality
- and lower-quality goods within the commodity.
- The quality metric to be calculated thus applies only to the composite
- commodities.
- 
 \end_layout
 
 \begin_layout Subsection
@@ -4143,11 +4082,10 @@ noprefix "false"
 
 \end_inset
 
- to measure how the demand for quality is distributed across the population
- and varies in response to prices, household needs and other household character
-istics in the cross-section (a vector of occupation, education, region/locality/
-neighborhood/assets).
- 
+ to measure how the demand for the diversity-based quality is distributed
+ across the population and varies in response to prices, household needs
+ and other household characteristics in the cross-section (a vector of occupatio
+n, education, region/locality/neighborhood/assets).
 \end_layout
 
 \begin_layout Standard
@@ -4160,12 +4098,19 @@ The income and price elasticities are calculated with the total-expenditure
 \begin_inset Formula $P_{G}$
 \end_inset
 
- using an AIDS implementation for food sub-categories - protein (meat, fish),
- fruits-vegetables, non-fresh food items (dry carbohydrates such as rice,
- wheat), complements (tea, coffee etc.) and densefoods (dense energy providing
- food as buns, pasta, flours).
- An indicator variable is used for energy - specifying whether the household
- uses electricity or not.
+ using an AIDS implementation for food categories defined in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:GroupsModified"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ An indicator variable is also used for energy - specifying whether the
+ household uses electricity or not.
  The prices shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
