@@ -828,6 +828,40 @@ get_group_collect_for_year<- function(year,odat,cdat) {
   
 }
 
+get_fao_group_collect_for_year<- function(year,odat,cdat) {
+  if (!is.element(year,c(2014))){
+    stop("Unsupported year")
+  }
+  
+  if (missing(odat)){
+    odat <- ll@load_ohs_file(year = year, dirprefix = "../",fu=fu, ln=lsms_normalizer) ; 
+  }
+  
+  
+  if (missing(cdat)){
+    cdat <- ll@load_diary_file(dirprefix = "../",year = year, fu = fu, ln =lsms_normalizer, load_cost = TRUE)
+  }
+
+  # fat, meats-proteins, cereals, veg, milk, starches, chicken, complements, tubers, fruits, fish
+  
+  g_fat  <- ll@group_collect(year = year, dirprefix = "../",categoryName = "fat",fu = fu, ln =lsms_normalizer, 
+                                  lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
+                                  ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+
+  r <- data.frame()
+  r <- rbind(r,g_fat)
+
+  pricedat = unique(subset(merge(r,subset(odat,household_status==1)[,c("hhid","region","district")]),by=c("hhid")))[,c("hhid","region","district","category","min_price","tot_categ_exp","quality")] 
+  # collect min-price from other households in the same region-district
+  lppricedat = unique(ddply(unique(pricedat[,c("region","district","category","min_price")])%>% mutate(lp_min_price=log(min_price)),.(region,district,category),lp_min_price=unique(lp_min_price)))[,c("region","district","category","lp_min_price")]
+  
+  k <- (merge(pricedat,lppricedat,by=c("region","district","category"),all.y=T)) %>% mutate(min_price=NULL)
+  return(k)
+  
+}
+
+
 pick_household_head_columns <- function(odat){
   general_columns <- c( "lightingfuel","expensiveregion")
   
@@ -838,6 +872,25 @@ pick_household_head_columns <- function(odat){
   hheaddat <- plyr::rename(subset(odat,household_status==1)[,c(general_columns,names(hhead_columns))],hhead_columns )
   hdat <- merge(hheaddat,hsizesdf ,all.x=T,by=c("hhid"))
   return(hdat)
+}
+
+get_fao_quality_agg_df <- function(){
+ 
+  o2014 <- ll@load_ohs_file(year = 2014, dirprefix = "../",fu=fu, ln=lsms_normalizer)
+  g2014 <- get_fao_group_collect_for_year(year = 2014,odat=o2014)
+  agg2014 <- combine_group_collect_into_quality_df(g2014)
+  h2014<- pick_household_head_columns(o2014)
+  aggh2014 <- merge(agg2014,h2014,by=c("hhid"),all.x=T)
+  #############
+  
+  allg <- data.frame()
+  allg<- rbind(allg,aggh2010%>% mutate(year=2010))
+  allg<- rbind(allg,aggh2012%>% mutate(year=2012))
+  allg<- rbind(allg,aggh2014%>% mutate(year=2014))
+  
+  asset_mapping <- all_asset_mtms(T)
+  ma <- merge_asset_mtms_with_prepared_quality_data(allg = allg,m = asset_mapping)
+  return(ma)
 }
 
 get_quality_agg_df <- function(){
@@ -873,11 +926,13 @@ get_quality_agg_df <- function(){
   return(ma)
 }
 
+
 run_test <- function() {
   #ma <- get_quality_agg_df()
   #example_df = data.frame(hhid=c('B','C'),category=c('protein','household'),quality=c(.2,NA),min_price=c(1,2),tot_categ_exp=c(10,20))
   #ddply(subset(o2012,age<18 & !is.na(schoolowner)) %>% mutate(schooltype = sapply(schoolowner, school_type)),.(schooltype),summarise,n=length(hhid))
-  
+  tt <- get_fao_group_collect_for_year(year = 2014, odat = o2014, cdat = c2014)
+  return(tt)
   
 }
 

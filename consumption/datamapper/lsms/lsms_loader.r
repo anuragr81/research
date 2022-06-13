@@ -687,7 +687,14 @@ lsms_loader<-function(fu,ln,lgc) {
       
       a<-(a[!(is.na(a$cm_f062) & is.na(a$cm_f065)) ,])
       cj <- fu()@get_translated_frame(dat=a, names=ln()@ohs_seccf_columns_lsms_2014(), m=ln()@ohs_seccf_mapping_lsms_2014())
-      cj <- ln()@decode_clusterid(cj)
+      #cj <- ln()@decode_clusterid(cj)
+      
+      cj$region <- as.integer(sapply(cj$clusterid, ln()@decode_region))
+      cj$district <- as.integer(sapply(cj$clusterid, ln()@decode_district))
+      cj$ward <- as.integer(sapply(cj$clusterid, ln()@decode_ward))
+      cj$village <- as.integer(sapply(cj$clusterid, ln()@decode_village))
+      cj$ea <- as.integer(sapply(cj$clusterid, ln()@decode_ea))
+      cj$clusterid <- NULL
       
       k1<-subset(cj,!is.na(price1) & is.na(price2))
       k2<-subset(cj,is.na(price1) & !is.na(price2))
@@ -2181,6 +2188,7 @@ lsms_loader<-function(fu,ln,lgc) {
     return(itemcodes)
     
   }
+  
   group_collect <- function(year,dirprefix,categoryName,fu,ln,lgc,ld, ohs, hh,basis, use_market_prices, return_before_agg,use_diary_costs,ignore_non_price_for_quality) {
     
     if (length(categoryName)>1){
@@ -2198,7 +2206,12 @@ lsms_loader<-function(fu,ln,lgc) {
       } else if (basis == "quality"){
         print("quality based groups")
         groups      <- subset( ln()@lsms_groups_qualitybased_2010_2012(), category == categoryName )
-      } else {
+      }  else if (basis == "fao"){
+      print("fao based groups")
+      groups      <- subset( ln()@fao_food_quality_groups(), category == categoryName )
+    } 
+    
+      else {
         stop("Invalid basis")
       }
       
