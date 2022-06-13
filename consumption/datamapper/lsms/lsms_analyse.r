@@ -848,10 +848,55 @@ get_fao_group_collect_for_year<- function(year,odat,cdat) {
                                   lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
                                   ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
   
-
+  g_meatsproteins  <- ll@group_collect(year = year, dirprefix = "../",categoryName = "meatsproteins",fu = fu, ln =lsms_normalizer, 
+                             lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
+                             ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  g_cereals  <- ll@group_collect(year = year, dirprefix = "../",categoryName = "cereals",fu = fu, ln =lsms_normalizer, 
+                                       lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
+                                       ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  g_veg  <- ll@group_collect(year = year, dirprefix = "../",categoryName = "veg",fu = fu, ln =lsms_normalizer, 
+                                 lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
+                                 ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  g_milk  <- ll@group_collect(year = year, dirprefix = "../",categoryName = "milk",fu = fu, ln =lsms_normalizer, 
+                             lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
+                             ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  g_starches  <- ll@group_collect(year = year, dirprefix = "../",categoryName = "starches",fu = fu, ln =lsms_normalizer, 
+                              lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
+                              ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  g_chicken  <- ll@group_collect(year = year, dirprefix = "../",categoryName = "chicken",fu = fu, ln =lsms_normalizer, 
+                                  lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
+                                  ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  g_complements  <- ll@group_collect(year = year, dirprefix = "../",categoryName = "complements",fu = fu, ln =lsms_normalizer, 
+                                 lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
+                                 ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  g_tubers  <- ll@group_collect(year = year, dirprefix = "../",categoryName = "tubers",fu = fu, ln =lsms_normalizer, 
+                                     lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
+                                     ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  g_fruits  <- ll@group_collect(year = year, dirprefix = "../",categoryName = "fruits",fu = fu, ln =lsms_normalizer, 
+                                lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
+                                ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  g_fish  <- ll@group_collect(year = year, dirprefix = "../",categoryName = "fish",fu = fu, ln =lsms_normalizer, 
+                                lgc = lgc, ohs = odat, hh = cdat, basis = "fao", use_market_prices = T, 
+                                ignore_non_price_for_quality=T,use_diary_costs=T,return_before_agg=F,ld = ldat)
+  
+  
   r <- data.frame()
   r <- rbind(r,g_fat)
-
+  r <- rbind(r,g_meatsproteins)
+  r <- rbind(r,g_cereals)
+  r <- rbind(r,g_veg)
+  r <- rbind(r,g_milk)
+  r <- rbind(r,g_starches)
+  r <- rbind(r,g_chicken)
+  r <- rbind(r,g_complements)
+  r <- rbind(r,g_tubers)
+  r <- rbind(r,g_fruits)
+  r <- rbind(r,g_fish)
+  
   pricedat = unique(subset(merge(r,subset(odat,household_status==1)[,c("hhid","region","district")]),by=c("hhid")))[,c("hhid","region","district","category","min_price","tot_categ_exp","quality")] 
   # collect min-price from other households in the same region-district
   lppricedat = unique(ddply(unique(pricedat[,c("region","district","category","min_price")])%>% mutate(lp_min_price=log(min_price)),.(region,district,category),lp_min_price=unique(lp_min_price)))[,c("region","district","category","lp_min_price")]
@@ -878,7 +923,7 @@ get_fao_quality_agg_df <- function(){
  
   o2014 <- ll@load_ohs_file(year = 2014, dirprefix = "../",fu=fu, ln=lsms_normalizer)
   g2014 <- get_fao_group_collect_for_year(year = 2014,odat=o2014)
-  agg2014 <- combine_group_collect_into_quality_df(g2014)
+  agg2014 <- combine_group_collect_into_faoquality_df(g2014)
   h2014<- pick_household_head_columns(o2014)
   aggh2014 <- merge(agg2014,h2014,by=c("hhid"),all.x=T)
   #############
@@ -936,6 +981,72 @@ run_test <- function() {
   
 }
 
+combine_group_collect_into_faoquality_df <-function(groupcollect_df)
+{
+  categories <- unique(groupcollect_df$category)
+  
+  rename_quality_columns <- c("cereals"= "lnV_cereals",
+  "chicken"="lnV_chicken",
+  "complements"="lnV_complements", 
+  "fat"="lnV_fat",
+  "fish"="lnV_fish", 
+  "fruits"="lnV_fruits", 
+  "meatsproteins"="lnV_meatsproteins", 
+  "milk"="lnV_milk", 
+  "starches"="lnV_starches", "tubers"="lnV_tubers", 
+  "veg"="lnV_veg")
+  
+  rename_minprice_columns <- c("cereals"= "lpcereals",
+                              "chicken"="lpchicken",
+                              "complements"="lpcomplements", 
+                              "fat"="lpfat",
+                              "fish"="lpfish", 
+                              "fruits"="lpfruits", 
+                              "meatsproteins"="lpmeatsproteins", 
+                              "milk"="lpmilk", 
+                              "starches"="lpstarches", "tubers"="lptubers", 
+                              "veg"="lpveg")
+  
+  rename_weight_columns <- c("cereals"= "w_cereals",
+                              "chicken"="w_chicken",
+                              "complements"="w_complements", 
+                              "fat"="w_fat",
+                              "fish"="w_fish", 
+                              "fruits"="w_fruits", 
+                              "meatsproteins"="w_meatsproteins", 
+                              "milk"="w_milk", 
+                              "starches"="w_starches", "tubers"="w_tubers", 
+                              "veg"="w_veg")
+  
+  
+  if (length(setdiff(categories,names(rename_quality_columns)))>0){
+    stop(paste("Unsupported categories:",toString(setdiff(categories,names(rename_quality_columns)))))
+  }
+  if (length(setdiff(categories,names(rename_minprice_columns)))>0){
+    stop(paste("Unsupported categories:",toString(setdiff(categories,names(rename_minprice_columns)))))
+  }
+  if (length(setdiff(categories,names(rename_weight_columns)))>0){
+    stop(paste("Unsupported categories:",toString(setdiff(categories,names(rename_weight_columns)))))
+  }
+  
+  
+  min_prices_df <- unique(groupcollect_df[,c('region',"district",'category','lp_min_price')]) %>% pivot_wider(names_from='category',values_from='lp_min_price') %>% plyr::rename(rename_minprice_columns)  
+  totexp_df <- ddply(groupcollect_df[,c('hhid','category','tot_categ_exp')],.(hhid),summarise,total_expenditure=sum(tot_categ_exp))
+  
+  lnV_df <- groupcollect_df[,c('hhid','category','quality')] %>% pivot_wider(names_from='category',values_from='quality') %>% plyr::rename(rename_quality_columns)
+  
+  weights_df <- (merge(groupcollect_df,totexp_df,all.y=T) %>% mutate(w_categ=tot_categ_exp/total_expenditure))[,c("hhid",'category',"w_categ")]
+  weights_df <- weights_df %>% pivot_wider(names_from='category',values_from='w_categ') %>% plyr::rename(rename_weight_columns)
+  
+  results_df <- merge(totexp_df,lnV_df,all.x=T)
+  results_df <- merge(results_df,weights_df,by=c('hhid'))
+  hhid_loc <- (unique(groupcollect_df[,c("hhid","region","district")]))
+  results_df <- (merge(merge(hhid_loc,results_df,by=("hhid"),all.x=T),min_prices_df, by=c('region','district'), all.x=T))
+  
+  results_df <- results_df %>% mutate(ln_tot_exp = log(total_expenditure+1e-7))
+  return(results_df)
+  
+}
 combine_group_collect_into_quality_df<-function(groupcollect_df)
 {
   categories <- unique(groupcollect_df$category)
