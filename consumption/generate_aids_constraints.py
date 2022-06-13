@@ -78,9 +78,13 @@ def generate_equations(categslist, varlist):
 #categ = [ "nonfresh"    "densefoods"  "complements" "fruitsveg"   "protein"   ]
 #categ = [ "nonfresh" , "Vnonfresh",  "densefoods", "Vdensefoods" , "complements", "Vcomplements", "fruitsveg", "Vfruitsveg",  "protein",  "Vprotein", "household", "transport"   ]
 #deleted with regexp: \+\[[^\[\]]*\]lpvprotein etc. \+\[[^\[\]]*\]lpvprotein
-categ = [ "nonfresh" , "Vnonfresh",  "densefoods", "Vdensefoods" , "complements", "Vcomplements", "fruitsveg", "Vfruitsveg",  "protein",  "Vprotein", "energy", "household", "transport"   ]
-varlist = ["educ_rank", "age", "occupation_rank", "consu", "has_electricity"]
 
+if False:
+    categ = [ "nonfresh" , "Vnonfresh",  "densefoods", "Vdensefoods" , "complements", "Vcomplements", "fruitsveg", "Vfruitsveg",  "protein",  "Vprotein", "energy", "household", "transport"   ]
+    varlist = ["educ_rank", "age", "occupation_rank", "consu", "has_electricity"]
+else:
+    categ =["fat", "Vfat", "meatsproteins", "Vmeatsproteins", "cereals", "Vcereals", "veg", "Vveg", "milk", "Vmilk", "starches", "Vstarches", "complements", "Vcomplements", "tubers", "Vtubers", "fruits", "Vfruits", "fish", "Vfish"]     
+    varlist = ["hsize", "hh_age", "expensiveregion"]
 
 
 constraints = generate_constraints(categ,varlist)

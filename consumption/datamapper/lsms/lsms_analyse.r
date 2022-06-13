@@ -929,8 +929,6 @@ get_fao_quality_agg_df <- function(){
   #############
   
   allg <- data.frame()
-  allg<- rbind(allg,aggh2010%>% mutate(year=2010))
-  allg<- rbind(allg,aggh2012%>% mutate(year=2012))
   allg<- rbind(allg,aggh2014%>% mutate(year=2014))
   
   asset_mapping <- all_asset_mtms(T)
