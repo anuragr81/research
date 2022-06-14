@@ -1,3 +1,6 @@
+ use "C:\local_files\research\consumption\lsms\data\faodf2014.dta", clear
+
+
 constraint define 2 [qfat]lpmeatsproteins=[qmeatsproteins]lpfat
 constraint define 4 [qfat]lpcereals=[qcereals]lpfat
 constraint define 6 [qfat]lpveg=[qveg]lpfat
@@ -65,7 +68,9 @@ constraint define 208 [qVfruits]lpfat  +[qVfruits]lpmeatsproteins  +[qVfruits]lp
 constraint define 209 [qfish]lpfat  +[qfish]lpmeatsproteins  +[qfish]lpcereals  +[qfish]lpveg  +[qfish]lpmilk  +[qfish]lpstarches  +[qfish]lpcomplements  +[qfish]lptubers  +[qfish]lpfruits  +[qfish]lpfish  = 0
 constraint define 210 [qVfish]lpfat  +[qVfish]lpmeatsproteins  +[qVfish]lpcereals  +[qVfish]lpveg  +[qVfish]lpmilk  +[qVfish]lpstarches  +[qVfish]lpcomplements  +[qVfish]lptubers  +[qVfish]lpfruits  +[qVfish]lpfish  = 0
 
-constraint define 212 [qfat]ln_tot_exp +[qVfat]ln_tot_exp +[qmeatsproteins]ln_tot_exp +[qVmeatsproteins]ln_tot_exp +[qcereals]ln_tot_exp +[qVcereals]ln_tot_exp +[qveg]ln_tot_exp +[qVveg]ln_tot_exp +[qmilk]ln_tot_exp +[qVmilk]ln_tot_exp +[qstarches]ln_tot_exp +[qVstarches]ln_tot_exp +[qcomplements]ln_tot_exp +[qVcomplements]ln_tot_exp +[qtubers]ln_tot_exp +[qVtubers]ln_tot_exp +[qfruits]ln_tot_exp +[qVfruits]ln_tot_exp +[qfish]ln_tot_exp +[qVfish]ln_tot_exp  =0
+* Only homogeneity and symmetry are applied and mentioned.
+
+* constraint define 212 [qfat]ln_tot_exp +[qVfat]ln_tot_exp +[qmeatsproteins]ln_tot_exp +[qVmeatsproteins]ln_tot_exp +[qcereals]ln_tot_exp +[qVcereals]ln_tot_exp +[qveg]ln_tot_exp +[qVveg]ln_tot_exp +[qmilk]ln_tot_exp +[qVmilk]ln_tot_exp +[qstarches]ln_tot_exp +[qVstarches]ln_tot_exp +[qcomplements]ln_tot_exp +[qVcomplements]ln_tot_exp +[qtubers]ln_tot_exp +[qVtubers]ln_tot_exp +[qfruits]ln_tot_exp +[qVfruits]ln_tot_exp +[qfish]ln_tot_exp +[qVfish]ln_tot_exp  =0
 
 global demand1 "(qfat: w_fat  ln_tot_exp hsize hh_age expensiveregion has_electric lpfat lpmeatsproteins  lpcereals lpveg lpmilk lpstarches lpcomplements lptubers lpfruits lpfish )"
 global demand2 "(qVfat: lnV_fat  ln_tot_exp hsize hh_age expensiveregion has_electric lpfat lpmeatsproteins  lpcereals lpveg lpmilk lpstarches lpcomplements lptubers lpfruits lpfish )"
@@ -95,7 +100,7 @@ global demand20 "(qVfish: lnV_fish  ln_tot_exp hsize hh_age expensiveregion has_
 * WORKED
 * reg3 $demand1 $demand2 $demand3 $demand4 $demand5 $demand6 $demand7 $demand8 $demand9 $demand10 $demand11 $demand12 $demand13 $demand14 $demand15 $demand16 $demand17 $demand18 $demand19 $demand20, const(2 4 6 8 10 12 14 16 18 39 41 43 45 47 49 51 53 72 74 76 78 80 82 84 101 103 105 107 109 111 126 128 130 132 134 147 149 151 153 164 166 168 177 179 186 212) ireg3
 
-reg3 $demand1 $demand2 $demand3 $demand4 $demand5 $demand6 $demand7 $demand8 $demand9 $demand10 $demand11 $demand12 $demand13 $demand14 $demand15 $demand16 $demand17 $demand18 $demand19 $demand20, const(2 4 6 8 10 12 14 16 18 39 41 43 45 47 49 51 53 72 74 76 78 80 82 84 101 103 105 107 109 111 126 128 130 132 134 147 149 151 153 164 166 168 177 179 186 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 212) ireg3
+reg3 $demand1 $demand2 $demand3 $demand4 $demand5 $demand6 $demand7 $demand8 $demand9 $demand10 $demand11 $demand12 $demand13 $demand14 $demand15 $demand16 $demand17 $demand18 $demand19 $demand20, const(2 4 6 8 10 12 14 16 18 39 41 43 45 47 49 51 53 72 74 76 78 80 82 84 101 103 105 107 109 111 126 128 130 132 134 147 149 151 153 164 166 168 177 179 186 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210) ireg3
 
 
 

@@ -570,7 +570,7 @@ num_stars <- function(pgtz) {
   return ((as.numeric(pgtz)<.001)*3 + (as.numeric(pgtz)>=.001 & as.numeric(pgtz) < .01)*2 + (as.numeric(pgtz)>=.01 & as.numeric(pgtz) < .05)*1)
 }
 
-read_stata_aids_results_files <- function(f,a,skip_first,precision,split_size){
+read_stata_aids_results_files <- function(f,a,skip_first,split_size){
   
   
   #a <- read.csv('c:/local_files/research/consumption/aidsresults9.csv')
@@ -600,15 +600,20 @@ read_stata_aids_results_files <- function(f,a,skip_first,precision,split_size){
   for ( i in seq(dim(bPgtz)[2])){
     #numstars_suffix  <- sapply(num_stars(bPgtz[,i]), function(x) { if (x>0) paste("^{",rep("*",x),"}",sep="") else ""} )
     numstars_suffix = array()
-    nstars_array <- num_stars(bPgtz[,i])
-    for ( j in seq(length(nstars_array))) {
-      if (nstars_array[j]>0){
-        numstars_suffix[j] <- paste("$^{",strrep("*",nstars_array[j]),"}$",sep="")
-      } else {
-        numstars_suffix[j] <- ""
-      }
+    #nstars_array <- num_stars(bPgtz[,i])
+    nstars_array <- num_stars(as.double(bPgtz[,i][2:length(bPgtz[,i])])) 
+    
+    for ( j in seq(1,length(nstars_array)-1)) { # one less because the first one is comm name and is skipped [2:len]
+      
+        if (nstars_array[j]>0){
+          numstars_suffix[j] <- paste("$^{",strrep("*",nstars_array[j]),"}$",sep="")
+        } else {
+          numstars_suffix[j] <- ""
+        }
+      
     }
-    bPgtz[,i]        <- paste("( ",bPgtz[,i],numstars_suffix," )",sep="")
+    bcoef[,i][2:length(bcoef[,i])]        <- paste(sapply( bcoef[,i][2:length(bcoef[,i])] , function(x){ sprintf("%.4f", as.double(x)) }) ,numstars_suffix,sep="")
+    bPgtz[,i][2:length(bPgtz[,i])]        <- paste("(",bPgtz[,i][2:length(bcoef[,i])],")",sep="")
   }
   
   idnames <- rownames(as.data.frame(bcoef))
@@ -971,11 +976,12 @@ get_quality_agg_df <- function(){
 
 
 run_test <- function() {
-  #ma <- get_quality_agg_df()
-  #example_df = data.frame(hhid=c('B','C'),category=c('protein','household'),quality=c(.2,NA),min_price=c(1,2),tot_categ_exp=c(10,20))
-  #ddply(subset(o2012,age<18 & !is.na(schoolowner)) %>% mutate(schooltype = sapply(schoolowner, school_type)),.(schooltype),summarise,n=length(hhid))
-  tt <- get_fao_group_collect_for_year(year = 2014, odat = o2014, cdat = c2014)
-  return(tt)
+  
+  a <- read.csv('../subchapters/aids_fao_reg3_results.csv')
+  #tt <- get_fao_group_collect_for_year(year = 2014, odat = o2014, cdat = c2014)
+  colnames(a) <-  c("comm","var"    ,"coef",    "se","t",       "Pgtz","l","r"  )
+  b <- read_stata_aids_results_files(a=a,skip_first = F)
+  return(b)
   
 }
 
