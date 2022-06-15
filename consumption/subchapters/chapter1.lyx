@@ -8024,26 +8024,52 @@ The effect of
 \family typewriter
 ln_tot_exp
 \family default
- a clear rise in quality across all food commodities.
- While higher 
+ a rise in quality across all food commodities i.e.
+ the income-elasticities are positive for quality within food categories
+ (commodities).
+ With a higher expenditure being spent on the more expensive variants (goods)
+ within a food category (commodity), the income-elasticities for quality
+ are expected to be positive.
+ What's less predictable are the negative elasticities for quantity (after
+ adjusting for quality) consumed of some food categories.
+ The commodities 
 \family typewriter
-ln_tot_exp
+fat 
 \family default
- also corresponds to higher quantities, the commodities fat and meatsproteins
- seems to decline in quantity with higher expenditure.
+and 
+\family typewriter
+meatsproteins 
+\family default
+for example decline in quantity with higher expenditure.
  The increase in food expenditure - in other words - is associated with
- less quantity (and higher quality) of fats and meatsproteins.
- Considering the affect of 
+ less quantity (at the cost of higher quality) of 
+\family typewriter
+fats 
+\family default
+and 
+\family typewriter
+meatsproteins
+\family default
+.
+ Using 
 \family typewriter
 logA
 \family default
-, the quantity for meatsproteins switches sign - indicating that those with
- lower assets do consume less quantity of meatsproteins overall (compares
- signs under 
+ instead of 
+\family typewriter
+ln_tot_exp
+\family default
+ further clarifies the demand of 
+\family typewriter
+meatsproteins 
+\family default
+in the consumer diet.
+ More particularly, the coefficients for quantity consumed for meatsproteins
+ (
 \family typewriter
 qmeatsproteins
 \family default
- of the coefficients corresponding to 
+) switches signs between the tables for 
 \family typewriter
 ln_tot_exp
 \family default
@@ -8051,7 +8077,8 @@ ln_tot_exp
 \family typewriter
 logA 
 \family default
-in Tables 
+(i.e.
+ between Tables 
 \begin_inset ERT
 status open
 
@@ -8077,8 +8104,21 @@ ref{results_elecassets_2014}
 
 \end_inset
 
-).
- The same applies for cereals (see the reversal in signs of 
+) - suggesting that those with lower assets do consume less quantity of
+ 
+\family typewriter
+meatsproteins 
+\family default
+overall even after considering the lower quality (compare signs under 
+\family typewriter
+qmeatsproteins
+\family default
+ of the coefficients corresponding to).
+ The same applies for 
+\family typewriter
+cereals 
+\family default
+(see the reversal in signs of 
 \family typewriter
 ln_tot_exp
 \family default
@@ -8121,7 +8161,8 @@ status open
 
 \begin_layout Plain Layout
 
-%[Does quality rise with electricity despite dropping with rise in income]
+%[has_electric  - Does quality rise with electricity despite dropping with
+ rise in income]
 \end_layout
 
 \end_inset
@@ -8130,19 +8171,21 @@ status open
 \end_layout
 
 \begin_layout Standard
-The quality in food appears to fall (?) for households as their incomes
- rise (in the cross-section) but it moves together with ownership of electrical
- items (or access to electricity).
- It's not just that the access to higher food quality differentiates the
- urban asset-rich household from the poor and rural households, but the
- quality in energy seems to be associated specifically with the use (availabilit
-y) of electricity.
- This is both due to the relative affluence of regions where electricity
- is available (see significance of 
+Much like 
+\family typewriter
+ln_tot_exp 
+\family default
+and 
+\family typewriter
+logA
+\family default
+, the access to electricity ( 
 \family typewriter
 has_electric
 \family default
- in Table 
+ ) seems to indicate a higher quality across food categories except for
+ fats where quality is lower for consumers with access to electricity (see
+ Tables 
 \begin_inset ERT
 status open
 
@@ -8155,7 +8198,7 @@ ref{results_has_electric_2014}
 
 \end_inset
 
-) and more directly (see Table 
+ and 
 \begin_inset ERT
 status open
 
@@ -8168,8 +8211,57 @@ ref{results_elecassets_2014}
 
 \end_inset
 
-) through possible improvements to quality brought about by ownership of
- electric assets (appliances).
+).
+ For fruits and milk, both the quality and quantity consumed are higher
+ for consumers with access to electricity.
+ Unlike fruits and milk, the quantities for fat (
+\family typewriter
+qfat
+\family default
+) and meatsproteins (
+\family typewriter
+qmeatsproteins
+\family default
+) fall for consumers of electricity - possibly due to refrigeration storage
+ facilities available in the consumer localities.
+ The consumption of fish - on the other hand - is not affected by the 
+\family typewriter
+has_electric 
+\family default
+variable in way similar to that of meatsproteins.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[has_electric endogeneity]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It could be argued that having access to electricity is endogenous with
+ higher prosperity.
+ Thus it may simply be that the relative affluence of regions where electricity
+ is available is the more likely cause for higher quality consumed than
+ the possible improvements to quality brought about by ownership of electric
+ assets (appliances).
+ However, the correlation of having access to electricity with prosperity
+ is more likely through being in the urban area rather through income.
+ This is because the indicator variable used is based only on the usage
+ of electricity as the primary source of light at home.
+ The basic usage of electricity hardly reflects the income of the household
+ - and is correlated with being in an urban area where electricity is available.
+ Since availability of refrigeration facilities in a market may improve
+ the availability of fruits and meats in a wider area, we argue that a positive
+ externality through being in richer areas - one that includes access to
+ electricity - is likely to have an effect on higher quality in food categories.
 \end_layout
 
 \begin_layout Standard
@@ -8187,6 +8279,8 @@ status open
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 As higher occupation-ranks (higher income) are concentrated in the eastern
  coast and centre of Tanzania, we also look at the effect of 
 \family typewriter
@@ -8286,42 +8380,6 @@ hsize
 ) consuming higher quality (particularly in protein and fruits-veg) but
  showing lower quantity for food overall.
  The larger families have higher non-durable household consumption as well.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%[has_electric endogeneity]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-It could be argued that having access to electricity endogenous with higher
- prosperity.
- The correlation of having access to electricity with prosperity is only
- through being in the urban area rather through income.
- This is because the indicator variable used is based only on the usage
- of electricity as the primary source of light at home.
- This basic usage of electricity hardly reflects the income of the household
- - and is more likely to be correlated with being in an urban area.
- As the relevance of 
-\family typewriter
-has_electric
-\family default
- stays valid with or without 
-\family typewriter
-isurban 
-\family default
-indicator, we argue that a positive externality through being in richer
- areas - including having access to electricity - is likely to have an effect
- on higher quality in food categories.
 \end_layout
 
 \begin_layout Standard
