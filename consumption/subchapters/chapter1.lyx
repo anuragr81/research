@@ -4496,26 +4496,6 @@ main lighting fuel
 Since the market-observed prices in the survey are recorded at every district
  level or at finer levels, we match these prices with every household in
  the survey based on the district the household is located in.
- The only exception are goods such as electricity and gas that are limited
- to a few urban areas - the national price level is used 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Prices for electricity were obtained from 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "PengElectricityTNZ2016"
-literal "true"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-.
  As price observations at the district level are recorded in different quantitie
 s (grams, kilograms for weight and liters, mls for fluids etc.), we infer
  the price at the district level using a regression over price records for
@@ -5107,77 +5087,6 @@ Descriptive statistics for LSMS Tanzania 2014
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%When the regression can't be used a simple median is used as the price
- for such cases.
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%What we need from the regression however, is merely the price of the unit-quant
-ity (e.g.
- the price per kg for rice in the current example) rather than matching
- the appropriate marked price with the quantity purchased by the household.
- If we were to really look for a perfect match for prices, then we should
- not only match the quantities consumed by the household with the prices
- recorded in the market but also the time of the household interview with
- that of the price recorded.
- This fine matching is both impractical (survey prices being hardly available
- at such fine levels of granularity) and unnecessary since our view of price
- is that of a value that is faced by a sufficiently large number of households
- in the survey.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%One may argue that a selection bias is introduced when we use the national-aver
-ages for some goods and region averages for other.
- This could be a problem if the unavailability of regional averages occurred
- for a significant portion of price entries.
- However, since only about  of the total price observations have no regional
- averages (only a few goods suffer with the issue), the bias thus introduced
- would be rather insignificant.
- Another issue could be taken with our grouping of commodities - as it relies
- on the annual time-series data.
- It is indeed possible that the price of some goods may be more volatile
- than the others - and thus the volatility being ignored in the annual time
- series data would bring some bias.
- But since we combine the household log diary with the recall diary (which
- is recorded on a monthly or yearly basis), a finer time-series for prices
- is not enough to address this issue.
- Such a bias could be alleviated only through finer price data and a uniformly
- collected household consumption microdata.
 \end_layout
 
 \end_inset
@@ -8048,10 +7957,6 @@ noindent
 \end_layout
 
 \begin_layout Standard
-TODO: REVISE results with food costs.
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -8106,6 +8011,116 @@ status open
 
 \begin_layout Plain Layout
 
+%[Effect of ln_tot_exp]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The effect of 
+\family typewriter
+ln_tot_exp
+\family default
+ a clear rise in quality across all food commodities.
+ While higher 
+\family typewriter
+ln_tot_exp
+\family default
+ also corresponds to higher quantities, the commodities fat and meatsproteins
+ seems to decline in quantity with higher expenditure.
+ The increase in food expenditure - in other words - is associated with
+ less quantity (and higher quality) of fats and meatsproteins.
+ Considering the affect of 
+\family typewriter
+logA
+\family default
+, the quantity for meatsproteins switches sign - indicating that those with
+ lower assets do consume less quantity of meatsproteins overall (compares
+ signs under 
+\family typewriter
+qmeatsproteins
+\family default
+ of the coefficients corresponding to 
+\family typewriter
+ln_tot_exp
+\family default
+ and 
+\family typewriter
+logA 
+\family default
+in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{results_has_electric_2014}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{results_elecassets_2014}
+\end_layout
+
+\end_inset
+
+).
+ The same applies for cereals (see the reversal in signs of 
+\family typewriter
+ln_tot_exp
+\family default
+ coefficients under 
+\family typewriter
+qcereals 
+\family default
+between Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{results_has_electric_2014}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{results_elecassets_2014}
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 %[Does quality rise with electricity despite dropping with rise in income]
 \end_layout
 
@@ -8115,7 +8130,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-The quality in food thus appears to fall for households as their incomes
+The quality in food appears to fall (?) for households as their incomes
  rise (in the cross-section) but it moves together with ownership of electrical
  items (or access to electricity).
  It's not just that the access to higher food quality differentiates the
@@ -8188,38 +8203,82 @@ isurban
 isurban
 \family default
  suggest a higher quality for nearly all fruits, veg and fishfood categories
- - while the quality of meats-proteins does not seem significantly higher.
+ - while the quality of meats-proteins does not seem significantly higher
+ in urban areas.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[price coeff]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A key advantage of using a robust framework of quality is that it allows
+ us to examine the effect of prices of commodities on quality.
+ Looking at the effect of (base-)prices (variables 
+\family typewriter
+lp-
+\family default
+), we see with 
+\family typewriter
+lpprotein
+\family default
+ that the high base-price of protein (the cheapest protein available in
+ the district) corresponds to higher quality in fruits-veg- meaning that
+ households in districts where base-price of protein (price of cheapest
+ protein) is high also avail higher quality of fruits-veg.
+ Similarly, with rise in prices of cereals (
+\family typewriter
+lpcereals
+\family default
+), the quality in meatsproteins increases but that in starches and veg declines
+ - indicating high quality in meat-consumption being substituted with quality
+ starches and veg.
+ The consumption of quality in tubers and starches - on the other hand -
+ seem to move together and have little substitution between them.
+ We also note that the quality in 
+\family typewriter
+fruits
+\family default
+ drops with a rise in the base-price of starches ( 
+\family typewriter
+lpstarches
+\family default
+ ) while the quality in starches drops with rise in prices of fruits (
+\family typewriter
+lpfruits
+\family default
+).
+ Except for price-based quality in fat, having access to electricity seems
+ to increase quality in consumption for nearly all food categories (commodities).
  
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
 
-\bar under
-Looking at the effect of (base-)prices (variables 
-\family typewriter
-lp-
-\family default
-) on quality and quantity, we see with 
-\family typewriter
-lpprotein
-\family default
- for example that the high base-price of protein (cheapest protein available
- in the district) corresponds to higher quality in fruits-veg- meaning that
- households in districts where base-price of protein (price of cheapest
- protein) is high also avail higher quality of fruits-veg.
- 
-\bar default
-The quality in 
-\family typewriter
-fruitsveg
-\family default
- drops - on the other hand - with rise in base-price of non-fresh goods
- 
-\family typewriter
-lpnonfresh
-\family default
-.
- A pressure on household basket quality is evident - as we see larger families
+\begin_layout Plain Layout
+
+%[hsize effects]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The pressure on household basket quality is evident - as we see larger families
  (
 \family typewriter
 hsize
@@ -8230,15 +8289,47 @@ hsize
 \end_layout
 
 \begin_layout Standard
-The above observations suggest that the role of assets-ownership is significant
- in the quality of consumption for food as well as energy.
- With energy, the access to electricity creates clear differences in lifestyle
- choices and consumption but this effect remains significant for access
- to quality in nutrition as well.
- Even through the urban households may have less overall assets compared
- to their counterparts in rural areas, they seem to spend more on quality
- - particularly on protein and fruits-veg (compared to dense-foods and household
- asset).
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[has_electric endogeneity]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It could be argued that having access to electricity endogenous with higher
+ prosperity.
+ The correlation of having access to electricity with prosperity is only
+ through being in the urban area rather through income.
+ This is because the indicator variable used is based only on the usage
+ of electricity as the primary source of light at home.
+ This basic usage of electricity hardly reflects the income of the household
+ - and is more likely to be correlated with being in an urban area.
+ As the relevance of 
+\family typewriter
+has_electric
+\family default
+ stays valid with or without 
+\family typewriter
+isurban 
+\family default
+indicator, we argue that a positive externality through being in richer
+ areas - including having access to electricity - is likely to have an effect
+ on higher quality in food categories.
+\end_layout
+
+\begin_layout Standard
+The above observations suggest that the role of permanent income or assets-owner
+ship is significant in the quality of consumption for food.
+ The access to electricity creates clear differences in lifestyle choices
+ and consumption but this effect remains significant for access to quality
+ in nutrition.
  The effect of assets seems strong even after taking 
 \family typewriter
 isurban 
@@ -8246,7 +8337,7 @@ isurban
 into account.
  Thus, even though there may be some positive externality with being in
  the urban areas, the differences in quality of consumption associated with
- high assets possession is significant.
+ high assets possession is still significant.
 \end_layout
 
 \begin_layout Standard
@@ -8306,7 +8397,7 @@ ces from the quantities consumed in the past week (which is reported for
  last week or not).
  Recalculating quality and budget shares still shows us the same economic
  and statistical significance (results available on request) of electricity
- and household assets in quality of fruitsveg, proteins and other subcategories.
+ and household assets in quality of food categories (commodities).
 \end_layout
 
 \begin_layout Section
