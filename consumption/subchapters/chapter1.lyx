@@ -2313,13 +2313,25 @@ rice=median(median_price))
 \end_layout
 
 \begin_layout Standard
-...
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-We use an unsupervised k-means clustering to group the items based on price
- changes - so that items with similar relative price-changes are grouped
- together.
+An unsupervised k-means clustering approach is used to group the items based
+ on price changes - so that items with similar relative price-changes are
+ grouped together.
  More specifically, the clustering is performed by first obtaining relative
  price-changes from the absolute prices.
  For example, the prices for in years 2008, 2010, 2012, 2014 
@@ -2331,9 +2343,22 @@ We use an unsupervised k-means clustering to group the items based on price
 \end_inset
 
 .
+ The observed market prices of the items in years 2008, 2010, 2012 and 2014
+ for Tanzania are shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LSMSMarketPrices"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
  The relative price-vectors for all items are then clustered using k-means
  - where the number of selected clusters is guided by the within-cluster
- sum of squared errors (an approach commonly used in k-means applications
+ sum of squared errors - an approach commonly used in k-means applications
+ (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Pollard1982CLTKmeans"
@@ -2342,8 +2367,11 @@ literal "false"
 \end_inset
 
 ).
- With the within-cluster sum of squared errors which less than unity for
- 5 clusters, the classification results are as described in Table 
+ The classification we use as the basis for commodity groups are arrived
+ at by setting the number of clusters to 5 which is when within-cluster
+ sum of squared errors drops to than unity.
+ The cluster constituents provided by the classification are listed in Table
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:PriceBasedGroups"
@@ -2354,7 +2382,6 @@ noprefix "false"
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
@@ -2525,21 +2552,12 @@ Food items classified into commodity groups based on price-movements
 \end_layout
 
 \begin_layout Standard
-Being unsupervised, k-means clustering itself is not guided by the the FAO
+So far the unsupervised k-means clustering is not guided by the the FAO
  categories in any way.
- Since the price-changes of the constituent items of any sub-group within
- any of the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:PriceBasedGroups"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- food groups - whose constituent items are correlated in price changes -
- would also be correlated, we split the groups identified in Table 
+ Now, since the price-changes of the constituent items selected from any
+ of the five food groups - whose constituent items are correlated in price
+ changes - would also be correlated, we split the groups identified in Table
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:PriceBasedGroups"
@@ -2551,12 +2569,14 @@ noprefix "false"
 
  into further sub-groups aligned with FAO groups.
  Recall that the FAO categories are (i) cereals, (ii) vegetables, (iii)
- fruits, (iv) meat, (v) eggs, (vi) fish and other sea foods, (vii) legumes,
- nuts and seeds, (viii) milk and milk products, (ix) oil and fats, (x) sweets,
- (xi) spices, condiments and beverages, and (xii) tubers and roots.
- With these, we split cereals-milk into milk and cereals, fruits-fish into
- fruits and fish while retaining the categories tuber and meat.
- The final categories 
+ fruits, (iv) meat, (v) eggs (vi) fish and other sea foods (vii) legumes,
+ nuts and seeds, (viii) milk and milk products (ix) oil and fats, (x) sweets
+ (xi) spices, condiments and beverages and (xii) tubers and roots.
+ With these, the cateogry cereals-milk-greens is split into milk, veg and
+ cereals, fruits-fish is split into fruits and fish, startches-fats-complements
+ is split into startches, fats and complements while the categories tubers
+ and meatsproteins are retains.
+ The results categories 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "KennedyBallardFantaFAO2011"
@@ -2564,9 +2584,8 @@ literal "false"
 
 \end_inset
 
- we choose are i) cereals ii) vegetables iii) fruits iv) meats-proteins
- v) fish vi) milk vii)fat viii) complements ix) tubers x) chicken and xi)
- starches.
+ are therefore i) cereals ii) veg iii) fruits iv) meats-proteins v) fish
+ vi) milk vii)fat viii) complements ix) tubers x) chicken and xi) starches.
 \end_layout
 
 \begin_layout Standard
@@ -2860,7 +2879,17 @@ The basis for the quality metric associated for every commodity
 \begin_inset Formula $G$
 \end_inset
 
- is the Hick's commodity theorem (see 
+ in list (corresponding to the left side of the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:GroupsModified"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ ) is the Hick's commodity theorem (see 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hicksvaluecapital1946"
@@ -2987,13 +3016,14 @@ literal "true"
 \end_inset
 
 .
- Instead of viewing demands for {wheat, rice, corn, eggs, beef, chicken,
- fish, charcoal, kerosene, electricity} individually with a list of 10 functions
- for example, the above formulation allows us to view demands for commodities
- {carb, protein and energy} that encompass the 10 goods with just 3 respective
- functions corresponding to the 3 commodity groups.
- Other than the high-level categories of the commodities (protein, fat etc.),
- the key requirement for the validity of such a quality metric is that the
+ Consider an example, where the demands for items {wheat, rice, corn, eggs,
+ beef, chicken, fish, charcoal, kerosene, electricity} were to be considered.
+ As such these items would each correspond a function so that 10 functions
+ describe the demand for the items.
+ Instead, we choose to view demands for commodities {carb, protein and energy}
+ - where the 10 goods are encompassed in just 3 respective functions correspondi
+ng to the 3 commodity groups.
+ A key requirement for the validity of such a quality metric is that the
  prices of goods within the commodity group have a constant relative price-struc
 ture i.e.
  a relative prices ratio that can be factored out of the observed prices
@@ -3006,29 +3036,7 @@ literal "false"
 \end_inset
 
 ).
- We perform this classification of groups based on the observed market prices
- of the items in years 2008, 2010, 2012 and 2014 for Tanzania (see Figure
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:LSMSMarketPrices"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Data"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
+ This is the condition that drives the k-means grouping of items.
 \end_layout
 
 \begin_layout Standard
@@ -3085,23 +3093,23 @@ literal "true"
 \end_inset
 
  for a similar analysis of rice varieties).
- As described earlier, the sub-groups within food are based on the correlated
- changes in price (from 2008 until 2014) and are then split into functional
- groups.
+ The sub-groups within food are based on the correlated changes in price
+ (from 2008 until 2014) as well as the diversity-based FAO groups.
  For example, the price changes for sugar and tea are similar to each other.
  The price changes for rice and cooking-oil are also similar to each other.
- But sugar and tea are put within a group of complements primarily because
- they have similar price changes.
- That they have a similar functional sense due to FAO's categories leads
- us to their grouping into 'complements' category.
- Other categories meats-protein, fruits and vegetables are similarly based
- foremost on price-movement correlations before considering the functional
- sense impied by FAO categories.
+ Not only do sugar and tea have similar price changes, they also have a
+ similar functional sense implied by FAO categories.
+ Thus they are put within a group of complements.
+ Rice and cooking-oil on the other hand are split into two categories based
+ on FAO-categories.
+ Other categories sichs meatsproteins, fruits etc.
+ are similarly based foremost on price-movement correlations before considering
+ the functional sense implied by FAO categories.
  Notice that the functional category implied by FAO is also one where there
  is a plausible substitution.
  As an example, goat and beef may be put under the same group - but not
  with tea - as there is little sense in substitution between tea and meat.
- Therefore, finally, every commodity aggregate 
+ In the end, every commodity aggregate 
 \begin_inset Formula $G$
 \end_inset
 
@@ -4082,7 +4090,24 @@ Econometric Method
 \end_layout
 
 \begin_layout Standard
-We use the quality metric across commodity groups defined in Section 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The goal of the comparison of quality metrics across commodity groups defined
+ in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:QualityMeasure"
@@ -4092,60 +4117,10 @@ noprefix "false"
 
 \end_inset
 
- to measure how the demand for the diversity-based quality is distributed
+ is to measure how the demand for the diversity-based quality is distributed
  across the population and varies in response to prices, household needs
  and other household characteristics in the cross-section (a vector of occupatio
 n, education, region/locality/neighborhood/assets).
-\end_layout
-
-\begin_layout Standard
-The income and price elasticities are calculated with the total-expenditure
- 
-\begin_inset Formula $x$
-\end_inset
-
- and base-price 
-\begin_inset Formula $P_{G}$
-\end_inset
-
- using an AIDS implementation for food categories defined in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:GroupsModified"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- An indicator variable is also used for energy - specifying whether the
- household uses electricity or not.
- The prices shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:LSMSMarketPrices"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- represent the stable relative price structures for the classification defined
- in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:PriceBasedGroups"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The ownership of assets of the household which appears as the control variable
- in lieu of the total expenditure in the AIDS regression is measured with
- the logarithm of the costs of the assets owned.
 \end_layout
 
 \begin_layout Standard
@@ -4176,7 +4151,58 @@ literal "true"
 ), each composite commodity group - unless it consists of just one good/item
  - corresponds to both a budget equation and a quality metric dependent
  variable.
- With intercepts 
+ The income and price elasticities are calculated with the total-expenditure
+ 
+\begin_inset Formula $x$
+\end_inset
+
+ and base-price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ using the AIDS implementation for food categories defined in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:GroupsModified"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ As described earlier, the base-prices correspond to every category in the
+ classification defined in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:GroupsModified"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (based on prices shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LSMSMarketPrices"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The ownership of assets of the household also appears as the control variable
+ (in place of total expenditure) in the AIDS regression and is measured
+ with the logarithm of the costs of the assets owned.
+ An indicator variable is also used for energy - specifying whether the
+ household uses electricity or not.
+ 
+\end_layout
+
+\begin_layout Standard
+With intercepts 
 \begin_inset Formula $\rho_{1,G}$
 \end_inset
 
@@ -4229,7 +4255,7 @@ literal "true"
 \begin_inset Formula $\{P_{j}\}_{j\in[1,n]}$
 \end_inset
 
-, we use following system of equations
+, we thus have following system of equations
 \end_layout
 
 \begin_layout Standard
@@ -4294,8 +4320,7 @@ additional
 \end_inset
 
  equations are not subject to any additional symmetry restrictions - while
- the usual constraints of adding up, homogeneity and symmetry apply to the
- estimation.
+ the constraints of homogeneity and symmetry are applied to the estimation.
  More specifically, the homogeneity conditions are imposed by setting the
  constraint for all 
 \begin_inset Formula $G$
@@ -4335,9 +4360,155 @@ additional
 \end_inset
 
  respectively.
- In the sections that follow, we view how our measures of quality habits
+ 
+\end_layout
+
+\begin_layout Standard
+For example, considering 
+\begin_inset Formula $G=meatsproteins$
+\end_inset
+
+, and demographic variables 
+\begin_inset Formula $h$
+\end_inset
+
+ (number of household members), 
+\begin_inset Formula $\tau$
+\end_inset
+
+ (age of the household-head), 
+\begin_inset Formula $\chi$
+\end_inset
+
+ (urban residence) and 
+\begin_inset Formula $\xi$
+\end_inset
+
+ (electricity-access), we have two equations (which we name 
+\family typewriter
+qmeatsproteins
+\family default
+ and 
+\family typewriter
+qVmeatsproteins
+\family default
+ for reference)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+qmeatsproteins:\ w_{meatsproteins} & =\rho_{1,meatsproteins}+\sum_{k=1}^{s}\rho_{1,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{1,Gj}ln(P_{j})+\beta_{G,1}ln(x)+\epsilon_{G,1}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+ln\ V_{G} & =\rho_{2,G}+\sum_{k=1}^{s}\rho_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{2,Gj}ln(P_{j})+\beta_{G,2}ln(x)+\epsilon_{G,2}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+constraint define 191 [qfat]lpfat +[qfat]lpmeatsproteins +[qfat]lpcereals
+ +[qfat]lpveg +[qfat]lpmilk +[qfat]lpstarches +[qfat]lpcomplements +[qfat]lptube
+rs +[qfat]lpfruits +[qfat]lpfish = 0 constraint define 192 [qVfat]lpfat
+ +[qVfat]lpmeatsproteins +[qVfat]lpcereals +[qVfat]lpveg +[qVfat]lpmilk
+ +[qVfat]lpstarches +[qVfat]lpcomplements +[qVfat]lptubers +[qVfat]lpfruits
+ +[qVfat]lpfish = 0
+\end_layout
+
+\begin_layout Standard
+constraint define 2 [qfat]lpmeatsproteins=[qmeatsproteins]lpfat
+\end_layout
+
+\begin_layout Standard
+constraint define 39 [qmeatsproteins]lpcereals=[qcereals]lpmeatsproteins
+\end_layout
+
+\begin_layout Standard
+constraint define 41 [qmeatsproteins]lpveg=[qveg]lpmeatsproteins constraint
+ define 43 [qmeatsproteins]lpmilk=[qmilk]lpmeatsproteins constraint define
+ 45 [qmeatsproteins]lpstarches=[qstarches]lpmeatsproteins constraint define
+ 47 [qmeatsproteins]lpcomplements=[qcomplements]lpmeatsproteins constraint
+ define 49 [qmeatsproteins]lptubers=[qtubers]lpmeatsproteins constraint
+ define 51 [qmeatsproteins]lpfruits=[qfruits]lpmeatsproteins constraint
+ define 53 [qmeatsproteins]lpfish=[qfish]lpmeatsproteins 
+\end_layout
+
+\begin_layout Standard
+In the sections that follow, we view how our measures of quality habits
  vary with the permanent income and household characteristics.
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/local_files/research/consumption/lsms/allnatprices.png
+	width 6.6in
+	height 7in
+	rotateAngle 90
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LSMSMarketPrices"
+
+\end_inset
+
+Market Prices recorded in 2008, 2010, 2012 and 2014 surveys
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -4533,6 +4704,588 @@ s (grams, kilograms for weight and liters, mls for fluids etc.), we infer
 \end_inset
 
  ).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="27" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+asset
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\shape italic
+type
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bike
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+transport
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+motorbike
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+transport
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+car
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+transport
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sewingmachine
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+bed
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+watch
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+chair
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+table
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cupboard
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sofa
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sports_hobby
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mobile
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+waterheater
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+camera
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+phone
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+musicplayer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+videoplayer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+musicsystem
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ac_fan
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+waterpump
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+tv
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dishtv
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+computer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+refrigerator
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+electric
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+land
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+housing
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+household
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Asset Types 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6798,7 +7551,7 @@ noprefix "false"
 ) for the estimation is therefore 
 \series bold
 \bar under
-TOOD: ADD NUMBER and CALCULATION
+TODO: ADD NUMBER and CALCULATION
 \series default
 \bar default
 .
@@ -8509,686 +9262,11 @@ newpage
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement h
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="27" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<row>
-<cell alignment="left" valignment="top" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\shape italic
-asset
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\shape italic
-type
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-bike
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-transport
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-motorbike
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-transport
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-car
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-transport
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-sewingmachine
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-bed
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-watch
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-chair
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-table
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-cupboard
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-sofa
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-sports_hobby
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-mobile
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-waterheater
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-camera
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-phone
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-musicplayer
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-videoplayer
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-musicsystem
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-ac_fan
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-waterpump
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-tv
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-dishtv
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-computer
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-refrigerator
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-electric
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-land
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-housing
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-household
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Asset Types 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 btprint "btPrintCited"
 bibfiles "C:/local_files/research/africa_attitudes"
 options "authordate4"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename C:/local_files/research/consumption/lsms/allnatprices.png
-	width 5in
-	height 5.5in
-	rotateAngle 90
-	rotateOrigin center
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:LSMSMarketPrices"
-
-\end_inset
-
-Market Prices recorded in 2008, 2010, 2012 and 2014 surveys
-\end_layout
-
-\end_inset
-
-
-\end_layout
 
 \end_inset
 
