@@ -4369,19 +4369,19 @@ For example, considering
 \end_inset
 
 , and demographic variables 
-\begin_inset Formula $h$
+\begin_inset Formula $d_{h}$
 \end_inset
 
  (number of household members), 
-\begin_inset Formula $\tau$
+\begin_inset Formula $d_{\tau}$
 \end_inset
 
  (age of the household-head), 
-\begin_inset Formula $\chi$
+\begin_inset Formula $d_{\chi}$
 \end_inset
 
  (urban residence) and 
-\begin_inset Formula $\xi$
+\begin_inset Formula $d_{\xi}$
 \end_inset
 
  (electricity-access), we have two equations (which we name 
@@ -4397,9 +4397,16 @@ qVmeatsproteins
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{alignat*}{1}
-qmeatsproteins:\ w_{meatsproteins} & =\rho_{1,meatsproteins}+\sum_{k=1}^{s}\rho_{1,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{1,Gj}ln(P_{j})+\beta_{G,1}ln(x)+\epsilon_{G,1}
-\end{alignat*}
+\begin{multline*}
+qmeatsproteins:\\
+w_{meatsproteins}=\rho_{1,meatsproteins}+\rho_{1,meatsproteins,h}d_{h}+\rho_{1,meatsproteins,\tau}d_{\tau}\\
++\rho_{1,meatsproteins,\chi}d_{\chi}+\rho_{1,meatsproteins,\xi}d_{\xi}+\gamma_{1,meatsproteins,fat}ln(P_{fat})\\
++\gamma_{1,meatsproteins,meatsproteins}ln(P_{meatsproteins})+\gamma_{1,meatsproteins,cereals}ln(P_{cereals})\\
++\gamma_{1,meatsproteins,veg}ln(P_{veg})+\gamma_{1,meatsproteins,milk}ln(P_{milk})\\
++\gamma_{1,meatsproteins,starches}ln(P_{starches})+\gamma_{1,meatsproteins,complements}ln(P_{complements})\\
++\gamma_{1,meatsproteins,tubers}ln(P_{tubers})+\gamma_{1,meatsproteins,fruits}ln(P_{fruits})\\
++\gamma_{1,meatsproteins,fish}ln(P_{fish})+\beta_{meatsproteins,1}ln(x)+\epsilon_{meatsproteins,1}
+\end{multline*}
 
 \end_inset
 
@@ -4408,9 +4415,16 @@ qmeatsproteins:\ w_{meatsproteins} & =\rho_{1,meatsproteins}+\sum_{k=1}^{s}\rho_
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{alignat*}{1}
-ln\ V_{G} & =\rho_{2,G}+\sum_{k=1}^{s}\rho_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{2,Gj}ln(P_{j})+\beta_{G,2}ln(x)+\epsilon_{G,2}
-\end{alignat*}
+\begin{multline*}
+qVmeatsproteins:\\
+\ ln\ V_{meatsproteins}=\rho_{2,meatsproteins}+\rho_{2,meatsproteins,h}d_{h}+\rho_{2,meatsproteins,\tau}d_{\tau}\\
++\rho_{2,meatsproteins,\chi}d_{\chi}+\rho_{2,meatsproteins,\xi}d_{\xi}+\gamma_{2,meatsproteins,fat}ln(P_{fat})\\
++\gamma_{2,meatsproteins,meatsproteins}ln(P_{meatsproteins})+\gamma_{2,meatsproteins,cereals}ln(P_{cereals})\\
++\gamma_{2,meatsproteins,veg}ln(P_{veg})+\gamma_{2,meatsproteins,milk}ln(P_{milk})\\
++\gamma_{2,meatsproteins,starches}ln(P_{starches})+\gamma_{2,meatsproteins,complements}ln(P_{complements})\\
++\gamma_{2,meatsproteins,tubers}ln(P_{tubers})+\gamma_{2,meatsproteins,fruits}ln(P_{fruits})\\
++\gamma_{2,meatsproteins,fish}ln(P_{fish})+\beta_{meatsproteins,2}ln(x)+\epsilon_{meatsproteins,2}
+\end{multline*}
 
 \end_inset
 
