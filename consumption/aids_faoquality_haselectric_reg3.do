@@ -47,6 +47,7 @@ constraint define 177 [qtubers]lpfruits=[qfruits]lptubers
 constraint define 179 [qtubers]lpfish=[qfish]lptubers
 constraint define 186 [qfruits]lpfish=[qfish]lpfruits
 
+
 constraint define 191 [qfat]lpfat +[qfat]lpmeatsproteins  +[qfat]lpcereals  +[qfat]lpveg  +[qfat]lpmilk  +[qfat]lpstarches  +[qfat]lpcomplements  +[qfat]lptubers  +[qfat]lpfruits  +[qfat]lpfish  = 0
 constraint define 192 [qVfat]lpfat  +[qVfat]lpmeatsproteins  +[qVfat]lpcereals  +[qVfat]lpveg  +[qVfat]lpmilk  +[qVfat]lpstarches  +[qVfat]lpcomplements  +[qVfat]lptubers  +[qVfat]lpfruits  +[qVfat]lpfish  = 0
 constraint define 193 [qmeatsproteins]lpfat  +[qmeatsproteins]lpmeatsproteins  +[qmeatsproteins]lpcereals  +[qmeatsproteins]lpveg  +[qmeatsproteins]lpmilk  +[qmeatsproteins]lpstarches  +[qmeatsproteins]lpcomplements  +[qmeatsproteins]lptubers  +[qmeatsproteins]lpfruits  +[qmeatsproteins]lpfish  = 0
@@ -71,6 +72,11 @@ constraint define 210 [qVfish]lpfat  +[qVfish]lpmeatsproteins  +[qVfish]lpcereal
 * Only homogeneity and symmetry are applied and mentioned.
 
 * constraint define 212 [qfat]ln_tot_exp +[qVfat]ln_tot_exp +[qmeatsproteins]ln_tot_exp +[qVmeatsproteins]ln_tot_exp +[qcereals]ln_tot_exp +[qVcereals]ln_tot_exp +[qveg]ln_tot_exp +[qVveg]ln_tot_exp +[qmilk]ln_tot_exp +[qVmilk]ln_tot_exp +[qstarches]ln_tot_exp +[qVstarches]ln_tot_exp +[qcomplements]ln_tot_exp +[qVcomplements]ln_tot_exp +[qtubers]ln_tot_exp +[qVtubers]ln_tot_exp +[qfruits]ln_tot_exp +[qVfruits]ln_tot_exp +[qfish]ln_tot_exp +[qVfish]ln_tot_exp  =0
+
+
+
+
+
 
 global demand1 "(qfat: w_fat  ln_tot_exp hsize hh_age i.expensiveregion i.has_electric lpfat lpmeatsproteins  lpcereals lpveg lpmilk lpstarches lpcomplements lptubers lpfruits lpfish )"
 global demand2 "(qVfat: lnV_fat  ln_tot_exp hsize hh_age i.expensiveregion i.has_electric lpfat lpmeatsproteins  lpcereals lpveg lpmilk lpstarches lpcomplements lptubers lpfruits lpfish )"
