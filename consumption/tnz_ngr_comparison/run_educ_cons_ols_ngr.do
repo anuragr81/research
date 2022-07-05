@@ -14,12 +14,15 @@ use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
 drop if numchild == 0
 gen log_educ= log(toteducexpense+1e-7)
 
-
 eststo, title (2015): quietly reg  w_educ logx r2012  log_mean_cost_ne i.agri i.educpriv  father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild
+esttab using c:/temp/resnu1_1.tex, mtitle no p numbers nogaps compress title() 
+
+eststo clear
+
 eststo, title (Educ 2015): quietly reg  w_educ logx r_educ2012  log_mean_cost_ne i.agri i.educpriv father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild
 eststo, title (Agri 2015): quietly reg  w_educ logx r_agri2012 log_mean_cost_ne i.educpriv father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild
 
-esttab using c:/temp/resnu1.tex, mtitle no p numbers nogaps compress title() 
+esttab using c:/temp/resnu1_2.tex, mtitle no p numbers nogaps compress title() 
 
 
 ************************************* q_educ ****************************************
@@ -41,10 +44,13 @@ drop if numchild == 0
 gen log_educ= log(toteducexpense+1e-7)
 
 eststo, title (2015): quietly reg log_educ logx r2012  log_mean_cost_ne i.agri i.educpriv  father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild, robust
+esttab using c:/temp/resnu2_1.tex, mtitle no p numbers nogaps compress title() 
+
+eststo clear
 eststo, title (Educ 2015): quietly reg log_educ logx r_educ2012  log_mean_cost_ne i.agri i.educpriv father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild, robust
 eststo, title (Agri 2015): quietly reg log_educ logx r_agri2012 log_mean_cost_ne i.educpriv father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild
 
-esttab using c:/temp/resnu2.tex, mtitle no p numbers nogaps compress title() 
+esttab using c:/temp/resnu2_2.tex, mtitle no p numbers nogaps compress title() 
 
 ******************************************************************************************
 

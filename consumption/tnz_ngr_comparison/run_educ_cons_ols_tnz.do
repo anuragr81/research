@@ -20,11 +20,13 @@ generate has_english =  litlang == 2 | litlang == 3
 gen log_educ= log(toteducexpense+1e-7)
 
 eststo, title (2014): quietly reg w_educ logx r2012 log_mean_cost_ne i.agri i.educpriv   father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, robust
+esttab using c:/temp/resnu1_1.tex, mtitle no p numbers nogaps compress title() 
+
+eststo clear
 eststo, title (Educ 2014): quietly reg w_educ logx r_educ2012 log_mean_cost_ne i.agri i.educpriv father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, robust
 eststo, title (Agri 2014): quietly reg w_educ logx r_agri2012 log_mean_cost_ne i.educpriv  father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, robust
 
-
-esttab using c:/temp/resnu1.tex, mtitle no p numbers nogaps compress title() 
+esttab using c:/temp/resnu1_2.tex, mtitle no p numbers nogaps compress title() 
 
 ************************************* q_educ ****************************************
 
@@ -46,13 +48,16 @@ generate has_english =  litlang == 2 | litlang == 3
 gen log_educ= log(toteducexpense+1e-7)
 
 eststo, title (2014): quietly reg log_educ logx r2012 log_mean_cost_ne i.agri i.educpriv    father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, robust
+esttab using c:/temp/resnu2_1.tex, mtitle no p numbers nogaps compress title() 
+eststo clear
+
 eststo, title (Educ 2014): quietly reg log_educ logx r_educ2012  log_mean_cost_ne i.agri i.educpriv  father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, robust
 eststo, title (Agri 2014): quietly reg log_educ logx r_agri2012 log_mean_cost_ne i.educpriv  father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, robust
 
 *occupation-rank statistic
 *estat firststi.is_primaryage i.is_secondaryage i.is_tertiaryage, all forcenonrobust
 
-esttab using c:/temp/resnu2.tex, mtitle no p numbers nogaps compress title() 
+esttab using c:/temp/resnu2_2.tex, mtitle no p numbers nogaps compress title() 
 
 
 ***********************************************************************************************
