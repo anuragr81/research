@@ -1104,20 +1104,6 @@ status open
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-THE QUESTION : HOW DOES URBANISATION EFFECT EDUCATION PARTICIPATION
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 The participation rates for secondary and higher education remain one of
  the lowest for the economies of sub-Saharan Africa (SSA).
  Education seems inaccessible to a vast population and inadequate in providing
@@ -1809,7 +1795,8 @@ status open
 
 \begin_layout Plain Layout
 
-%[Measurements]
+%[Measurements] - Variables : {wealth,wealth-conc/ruralwards,secondary_schools,o
+ccupation, parental education, language-religion, age, numchild, educpriv}
 \end_layout
 
 \end_inset
@@ -1932,7 +1919,7 @@ literal "false"
 \begin_inset Quotes eld
 \end_inset
 
-seconary_schools
+secondary_schools
 \begin_inset Quotes erd
 \end_inset
 
@@ -2156,7 +2143,56 @@ status open
 
 \begin_layout Plain Layout
 
-%[Education Needs]
+
+\backslash
+let
+\backslash
+oldquote
+\backslash
+quote 
+\backslash
+let
+\backslash
+endoldquote
+\backslash
+endquote
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+RenewDocumentEnvironment{quote}{om}   {
+\backslash
+oldquote}   {
+\backslash
+par
+\backslash
+nobreak
+\backslash
+smallskip    
+\backslash
+hfill{#1}
+\backslash
+endoldquote     
+\backslash
+addvspace{
+\backslash
+bigskipamount}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{quote}[
+\backslash
+textit{Beyond contentment}, John Kenneth Galbraith, (1994)]{} There is no
+ well educated literate population that is poor, [and] there is no illiterate
+ population that is other than poor.
+  
+\backslash
+end{quote}
 \end_layout
 
 \end_inset
@@ -2170,30 +2206,18 @@ status open
 
 \begin_layout Plain Layout
 
-% TilakEducationPoverty2002  notes high levels of family expenditure on
- education- when the state does not spend enough on education
+%[Education Needs]
 \end_layout
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard
 While education may not be considered a basic necessity in all poverty-measureme
 nt surveys, it is seldom disputed that a lack of education contributes to
  poverty.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "GalbraithBeyondContentment1994"
-literal "false"
-
-\end_inset
-
- summarises this significance of education well by pointing out that - there
- is ‘‘no well educated literate population that is poor, [and] there is
- no illiterate population that is other than poor’’.
  Even in the developing economies, the poorest individuals might have a
  strong demand for education (
 \begin_inset CommandInset citation
@@ -2204,9 +2228,9 @@ literal "false"
 \end_inset
 
 ).
- In fact, there might be a compulsion - rather than just willingness to
- pay - to pay for education among the poor if education is not state-funded
- (
+ The literature suggests that when education is not state-funded in the
+ developing economies, there might be a compulsion - rather than a mere
+ willingness - to pay for education among the poor (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "TilakEducationPoverty2002,TilakDeterminantsHouseholdexpenditureinRuralIndia2002"
@@ -2215,10 +2239,9 @@ literal "false"
 \end_inset
 
 ).
- Given the evident demand for higher-education in industrialising economies,
- it is not surprising that despite several policy disagreements on how public
- expenditure should be spent on education, most assessments - be it from
- a human capital perspective (
+ With a high demand for educated workforce in an industrialising economy,
+ there seems little disagreement in policy- either from a human capital
+ perspective (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BarroEconomicGrowthEduc,BarroHumanCapitalGrowth1999"
@@ -2234,90 +2257,42 @@ literal "false"
 
 \end_inset
 
-) - concur on a strong relationship between growth and educational attainment.
+) - that a strong relationship exists between growth and educational attainment.
 \end_layout
 
 \begin_layout Standard
-An important consideration for the participation in education is that while
- higher education may provide skills for higher incomes, the access to education
- is often limited by the wealth one posses.
- The wealth effects on education have been reported to be significant in
- economies of SSA (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "GlewweJacobyEconGrowthEducDemandWealthEffects2004"
-literal "false"
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[WE exists]
+\end_layout
 
 \end_inset
 
-).
- 
+
 \end_layout
 
 \begin_layout Standard
-The literature has offered differing views on failures in education policy
- that have resulted in a high unemployment among graduates and a relatively
- low participation of higher education.
- On one hand, the institutional issues and mismanagement in public education
- (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "languilleeducbudgetpolitics2019"
-literal "false"
-
-\end_inset
-
-) are held liable for insufficient gains in economic growth from education
- - but on the other, an excessive focus on formal education in an informal
- economy is also criticised for being misguided (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "MinnisNonformalEducation2006"
-literal "false"
-
-\end_inset
-
-).
- Such concern for returns-to-education cannot be understood without the
- context of wealth effects and controlling for availability of schools.
- More specifically, it is possible that the demand for education is suppressed
- due to inadequate income (relatively high prices of education) in the economy
- and not due to lower returns from the post-education opportunities that
- are at offer to the population (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "GlewweJacobyEconGrowthEducDemandWealthEffects2004"
-literal "false"
-
-\end_inset
-
- ).
- If education expenditures are better explained with physical access on
- the other hand, then the returns-to-education is less likely to be an issue
- and policy may need to focus on building more accessible schools instead.
- 
-\end_layout
-
-\begin_layout Standard
-Empirical studies in the SSA have often found physical access to be less
- significant than the wealth effects (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "FilmerPritchettWealthEffectonEduc1999,KambonBusbyEducationPoverty2000,ObasuyiEducationInequality2019"
-literal "false"
-
-\end_inset
-
- ).
- 
-\bar under
-The differences in education elasticities based on income have marked early
- in the literature 
-\bar default
-(
+An important consideration for education attainment is that while higher
+ education does provide skills for higher incomes, the access to education
+ tends to be often limited by the wealth one possesses.
+ The differences in education elasticities based on income have been highlighted
+ in the early literature from mid-last century (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BensonEconomicsofPublicEduc1961,HashimotoHeathIncomeElasticityEduc1995"
+literal "false"
+
+\end_inset
+
+).
+ The empirical studies from the SSA have also reported significant wealth
+ effects on education (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GlewweJacobyEconGrowthEducDemandWealthEffects2004"
 literal "false"
 
 \end_inset
@@ -2334,36 +2309,7 @@ literal "false"
  note that the children from households that have large cattle stocks face
  less reductions in enrollment, because higher wealth may allow the households
  to take care of the cattle and prevent the childrens' withdrawals from
- schools.
- Using a benefit incidence analysis to test if the education is pro-rich,
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "IliePaulineWhobenefitsfromHE2018"
-literal "false"
-
-\end_inset
-
- show that the poor young people receive only 5% of funds allocated to tertiary
- education compared with 54% for the rich.
- The effects of physical access - however - evidently become stronger at
- higher (secondary and tertiary) levels of education (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "NgwareOnsomuKenyaSecEd2006"
-literal "false"
-
-\end_inset
-
-) and are also reflected in urban-rural differences in an economy (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "IliePaulineWhobenefitsfromHE2018,castrolealPoorBenefitAfricaEducation1999,GlewweJacobyEconGrowthEducDemandWealthEffects2004"
-literal "false"
-
-\end_inset
-
-)
+ schools
 \begin_inset Foot
 status open
 
@@ -2400,6 +2346,93 @@ literal "false"
 \end_inset
 
 .
+ Using a benefit incidence analysis to test if the education is pro-rich,
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IliePaulineWhobenefitsfromHE2018"
+literal "false"
+
+\end_inset
+
+ show that the poor young people receive only 5% of funds allocated to tertiary
+ education compared with 54% for the rich.
+ 
+\end_layout
+
+\begin_layout Standard
+While the wealth-effects remain significant in SSA, the there are other
+ reasons offered for the high unemployment among graduates and a relatively
+ low participation of higher education in SSA.
+ On one hand, the institutional issues and mismanagement in public education
+ (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "languilleeducbudgetpolitics2019"
+literal "false"
+
+\end_inset
+
+) have been held responsible for insufficient gains in economic growth from
+ education - but on the other, an excessive focus on formal education in
+ an informal economy is also criticised for being misguided (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MinnisNonformalEducation2006"
+literal "false"
+
+\end_inset
+
+).
+ The concerns for returns-to-education - however - need to be viewed in
+ the context of wealth effects and the issue of availability of schools
+ in the economies of SSA.
+ More specifically, it is possible that the demand for education is suppressed
+ due to inadequate income (relatively high prices of education) in the economy
+ or a sparse distribution of education opportunities rather than due to
+ lower returns from post-education employment opportunities alone (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GlewweJacobyEconGrowthEducDemandWealthEffects2004"
+literal "false"
+
+\end_inset
+
+ ).
+ If education expenditures are better explained with physical access, then
+ the policy may need to focus on building more accessible schools whereas
+ if wealth-effects are more significant, then there is a need to make education
+ more affordable for the lower-income households.
+ In the context of SSA, the empirical studies more often find the physical
+ access to be less significant than the wealth effects (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FilmerPritchettWealthEffectonEduc1999,KambonBusbyEducationPoverty2000,ObasuyiEducationInequality2019"
+literal "false"
+
+\end_inset
+
+ ).
+ That said, the effects of physical access evidently become stronger at
+ higher (secondary and tertiary) levels of education (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NgwareOnsomuKenyaSecEd2006"
+literal "false"
+
+\end_inset
+
+).
+ The effect of urban-rural differences on education participation are also
+ widely reported to be significant in SSA (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IliePaulineWhobenefitsfromHE2018,castrolealPoorBenefitAfricaEducation1999,GlewweJacobyEconGrowthEducDemandWealthEffects2004,BossuroyCogneauMobilityAfrica2013"
+literal "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -2408,8 +2441,7 @@ status open
 
 \begin_layout Plain Layout
 
-%[Returns to education is important but is conditioned on wealth effetct
- and physical access]
+%[Social factors are needed]
 \end_layout
 
 \end_inset
@@ -2418,10 +2450,10 @@ status open
 \end_layout
 
 \begin_layout Standard
-The policy discussions on the choice between provision of free basic education
- to all (at the point of use) and investments in higher education have -
- however - entailed some of the most heated debates on education in developing
- economies (
+The policy discussions on public expenditure have often veered into evaluating
+ what education is meant to achieve in an economy - leading to some heated
+ debates such as on the choice between provision of free basic education
+ to all (at the point of use) and investments in higher education (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HeynemanHistoryProblemsWorldBank2003,heynemanLDCOECDSchoolAchievements1980"
@@ -2430,7 +2462,7 @@ literal "false"
 \end_inset
 
 ).
- The returns-to-education approach used by 
+ More particularly, the returns-to-education approach used by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "PsacharopoulosReturnsToEducation2004"
@@ -2460,6 +2492,7 @@ literal "false"
 status open
 
 \begin_layout Plain Layout
+In particular, 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "heynemanInvestmentIndianEducUneconomic1980"
@@ -2467,11 +2500,10 @@ literal "false"
 
 \end_inset
 
- argues in particular that the individuals benefit culturally and physically
- from education - changes that are ignored when using a returns-of-education
- approach.
- It has been argued that not only does formal education help workers pick
- up more skills on their own (
+ argues that the individuals benefit culturally and physically from education
+ and that such changes are ignored when using a returns-of-education approach.
+ Not only does formal education help workers pick up more skills on their
+ own (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "FullerVocationalTraining1976"
@@ -2479,8 +2511,8 @@ literal "false"
 
 \end_inset
 
-), but the skills provided by secondary or higher education are often necessary
- in the labour market (
+), but the skills provided by secondary or higher education can be often
+ considered necessary in the labour market (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "TilakPostelemEducIndia2007"
@@ -2494,9 +2526,9 @@ literal "false"
 \end_inset
 
 .
- Nevertheless, the question of returns-to-education does often matter for
- policy concerns in a developing country - where a case can be made for
- 
+ Nevertheless, the question of returns-to-education remains an important
+ one policy concerns in a developing economy - where a case can be made
+ for 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2504,9 +2536,9 @@ overeducation
 \begin_inset Quotes erd
 \end_inset
 
- in the economy.
+.
  In contrast with the view that overeducation is merely an issue of a longer
- search time in developing economies (
+ search time(
 \begin_inset CommandInset citation
 LatexCommand cite
 key "heynemanInvestmentIndianEducUneconomic1980"
@@ -2514,8 +2546,8 @@ literal "false"
 
 \end_inset
 
-), empirical studies do find a significant waste in post-graduation rent-seeking
- activities in the economies of SSA (
+), the empirical studies have often reported a significant waste in post-graduat
+ion rent-seeking activities in SSA (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "oketchAfricaHE2016,MinnisNonformalEducation2006,dabalenNigeriaUnemployment2001"
@@ -2528,15 +2560,7 @@ literal "false"
  for the urban rich in these economies (
 \begin_inset CommandInset citation
 LatexCommand cite
-key "oketchAfricaHE2016"
-literal "false"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "MinnisNonformalEducation2006"
+key "oketchAfricaHE2016,MinnisNonformalEducation2006"
 literal "false"
 
 \end_inset
@@ -2550,7 +2574,7 @@ status open
 
 \begin_layout Plain Layout
 
-%[Role of Social Capital]
+%[Social Capital is trikcy]
 \end_layout
 
 \end_inset
@@ -2559,11 +2583,19 @@ status open
 \end_layout
 
 \begin_layout Standard
-The role that social factors play towards participation cannot be discounted.
- Early literature has stressed upon the role of cultural capital.
- The empirical literature does seem to have struggled with interpret social
- capital.
- As 
+Such judgments on the role of education require us to investigate the role
+ of social factors towards participation in education.
+ The role of cultural capital has also been stressed upon in the early literatur
+e in the post-war period (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BourdieuCulturalRepr2018"
+literal "false"
+
+\end_inset
+
+) - a notion that has been since refined through empirical assessments.
+ As pointed out by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Manski2000"
@@ -2571,10 +2603,9 @@ literal "false"
 
 \end_inset
 
- points, the measures for social capital have been hardly as universal as
- measures for acquired wealth.
- capital.
- A useful refinement is offered by 
+, the measures for social capital cannot be as universal as measures for
+ acquired wealth in an empirical study.
+ A relevant refinement for social capital is offered by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "MouwCausalEffectsofSocialCapital2006"
@@ -2582,51 +2613,36 @@ literal "false"
 
 \end_inset
 
- who interpreted as the network social capital and focus on the role of
- social networks.
- In the context of education, the empirical works have worked with specific
- support that social networks may provide.
- Certain household characteristics may also instrument such a mechanism
- in a given social context.
- More specifically, the characteristics such as religious identity, language
- spoken, the education-level, occupation or the individual in the network
- surrounding the individual can be used a controls that act as social capital
- of a particular household or individual.
- These have also been highlighted in wider studies on intergenerational
- mobility - 
+ who interpret it as 
+\begin_inset Quotes eld
+\end_inset
+
+network social capital
+\begin_inset Quotes erd
+\end_inset
+
+ and recommend focusing on the role of social networks in consume decisions.
+ In the context of education, the empirical studies have identified specific
+ mechanisms of support that social networks may provide (
 \begin_inset CommandInset citation
 LatexCommand cite
-key "AlesinaMobilityAfrica2019"
+key "ByunTheseisCulturalCapitalSouthKorea2007,YamamotoCulturalCapitalJapan2010,DeGraafParentalCulturalCapital2000,YanPengHHEducChinaSocialClass2021"
 literal "false"
 
 \end_inset
 
- ,
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%[Low participation and Urbanisation]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
+) - often tracking the mechanisms with specific household characteristics
+ under varying social contexts - such as as religious identity, language
+ spoken, the education-level, occupation or characteristics of individuals
+ in the consumer's observed network (
 \begin_inset CommandInset citation
 LatexCommand cite
-key "BossuroyCogneauMobilityAfrica2013"
+key "AlesinaMobilityAfrica2019,BossuroyCogneauMobilityAfrica2013"
 literal "false"
 
 \end_inset
 
- 
+).
 \end_layout
 
 \begin_layout Standard
@@ -2645,10 +2661,11 @@ status open
 
 \begin_layout Standard
 The attributions to various causes for inadequacies of education policy
- are hardly contrasting in the context of SSA - since both the pro-rich
+ do not appear contrasting in the context of SSA - since both the pro-rich
  nature of education and an insufficient focus on industrial productivity
- can together contribute to the limited gains in productivity from education.
- While the dual-model (
+ can together contribute to lower participation rates and limited gains
+ in productivity from education.
+ In many economies of SSA, a dual-model (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "oketchAfricaHE2016,CourtFinancingEducMakerere2001"
@@ -2656,9 +2673,8 @@ literal "false"
 
 \end_inset
 
-) commonly used in the universities - where attendees are a mix of privately
- funded and state-funded students - may have helped address the strong demands
- for 
+) for universities - where attendees are a mix of privately funded and state-fun
+ded students - may have helped address the strong demands for 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2666,13 +2682,31 @@ free-education
 \begin_inset Quotes erd
 \end_inset
 
- in the late last century, it has had limited success in improving access
- to higher education for the poor and providing useful skills in the informal
- economy.
- It would be an understatement to say that the structural problems which
- the region faces cannot be addressed by a sound education policy alone.
- Considering the overall consumption pressures, for example, the region
- stands out in its susceptibility to commodity price volatilities (
+ in the late last century - but it has had limited success in improving
+ the access to higher education for the poor or providing useful skills
+ in the informal economy.
+ The structural problems which the region faces have important implications
+ for economic growth that cannot be addressed by a sound education policy
+ alone.
+ More specifically, the high-land labour ratios could strain growth in the
+ region (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AndersoninequalityandvariableSAA2004"
+literal "false"
+
+\end_inset
+
+) and contribute to migration-pressures (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KoseGhebruLandEthiopia2018"
+literal "false"
+
+\end_inset
+
+).
+ Similarly, the susceptibility to commodity price volatilities (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "deatoncommoditypricesAfrica1999"
@@ -2680,9 +2714,8 @@ literal "false"
 
 \end_inset
 
-).
- The presence of a large informal sector severely constrains the funding
- through taxation or public finance for 
+) and the presence of a large informal sector could constrain the funding
+ for education through taxation or public finance for 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2690,11 +2723,9 @@ non-necessities
 \begin_inset Quotes erd
 \end_inset
 
- such as education.
- As the economies in the region increasingly rely on commodity trading,
- the lower-income workforce continues to await its political empowerment.
- The recent alignment of sub-Saharan African economies with the Chinese
- economy (
+.
+ Further, the political powers bestowed upon the lower-income workforce
+ - which an underdeveloped and commodity reliant industrial sector (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "kaplinskychinesefdiinAfrica2016"
@@ -2702,10 +2733,7 @@ literal "false"
 
 \end_inset
 
-) may have made significant improvements to infrastructure in the region,
- but the immense competition with China's producers has also meant that
- an underdeveloped local industrial sector fails to absorb the lower-income
- workforce (
+) has struggled to be absorb (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "gedahistoricaloriginsafricancrisis2019,SabJohnFragileGrowthAfrica2009,FabioFabianiMoliniPovertyReductionAfrica2019,MinnisNonformalEducation2006"
@@ -2713,7 +2741,10 @@ literal "false"
 
 \end_inset
 
-).
+) - also seems relatively little in the region.
+ The necessary impact of such factors on employment opportunities could
+ justify prioritising basic education needs in preference to higher education
+ opportunities for a selective minority.
 \end_layout
 
 \begin_layout Standard
@@ -2746,36 +2777,8 @@ literal "false"
 \end_inset
 
  ).
- 
-\end_layout
-
-\begin_layout Standard
-The effects of urban-rural differences and wealth on social exclusion and
- access to education opportunities have also been noted by the macroeconomic
- literature (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "AgrawalEducIneqRuralUrbanIndia2014"
-literal "false"
-
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "KoseGhebruLandEthiopia2018"
-literal "false"
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-The effects of permanent income on access to education at different stages
- in the two economies are thus subject to these developments in the two
- economies.
- 
+ These differences are reflected in the levels of educational attainment
+ in the two economies that we details in the subsequent sections.
 \end_layout
 
 \begin_layout Section
@@ -3290,6 +3293,11 @@ The details of the records of durable goods in the LSMS data include the
 \end_inset
 
 .
+ These costs are used both for the wealth-concentration measures and the
+ assets-measure.
+ As explained earlier, the permanent-income measure uses the logarithm of
+ total expenditure at the household level.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3307,6 +3315,25 @@ At the time of writing this chapter, the precise geographic-location of
 \end_inset
 
  vicinity (or the district boundary).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%Variables : {wealth,wealth-conc/ruralwards,secondary_schools,occupation,
+ parental education, language-religion, age, numchild, educpriv}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+TODO: ALL OTHER VARIABLES TO BE LISTED HERE.
 \end_layout
 
 \begin_layout Standard
@@ -3390,10 +3417,6 @@ ref{education_rank_ngr}
 
  for consumers implies an education level above the rank 2 (corresponding
  to P6) in Nigeria.
-\end_layout
-
-\begin_layout Standard
-TODO: ALL OTHER VARIABLES TO BE LISTED HERE.
 \end_layout
 
 \begin_layout Standard
