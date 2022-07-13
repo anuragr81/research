@@ -2574,7 +2574,7 @@ status open
 
 \begin_layout Plain Layout
 
-%[Social Capital is trikcy]
+%[Social Capital is tricky]
 \end_layout
 
 \end_inset
@@ -3015,6 +3015,15 @@ The second regression uses the logarithm of educational expenses
 \end_inset
 
  as the dependent variable against the same set of control variables.
+ The two formulations are similar to those used by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AcarHHEducTurkey2016"
+literal "false"
+
+\end_inset
+
+.
  While the appearance of educational expenses both in the dependent variable
  and in the logarithm of the total expenditure 
 \begin_inset Formula $log(x)$
@@ -3333,7 +3342,19 @@ status open
 \end_layout
 
 \begin_layout Standard
-TODO: ALL OTHER VARIABLES TO BE LISTED HERE.
+The physical access to education is measured using the distance to the nearest
+ secondary school.
+ More specifically, a score secondary_schools for each district represents
+ number of wards that have a secondary school within the 6-
+\begin_inset Formula $km$
+\end_inset
+
+ distance.
+ A district with a higher score has more wards that have a secondary school
+ in close vicinity (within 6-km distance).
+ The score evidently factors in the high-population density in urban areas
+ since densely populated districts would have more wards within the same
+ geographical distance as a less populated district.
 \end_layout
 
 \begin_layout Standard
@@ -3351,10 +3372,34 @@ status open
 \end_layout
 
 \begin_layout Standard
-Whether an occupational sector is agriculture related or not is available
- in the data on occupation for every household member.
- For both Tanzania and Nigeria, we use the primary-occupation of the household
- member for our analyses.
+The next important control is the occupation of the households which is
+ directly available for every individual in the survey.
+ Whether an occupational sector is agriculture related or determined is
+ based on the main occupation of household head.
+ The number of children in the household, the ages of the children (and
+ other members) are directly observed in the data.
+ The parental educational levels which are also an important control in
+ the study are not based on education level of the household head.
+ This is because a significant number of household units in both Tanzania
+ and Nigeria are made up of joint families where the reported educational
+ expenses correspond to the grandchildren of the household head (HH).
+ To avoid letting the education levels point to the penultimate generation
+ for households where HH has grandchildren and to the last generation where
+ HH has younger children, we rely on the highest education rank in the parental
+ generation of the children recorded in the survey 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Only relations with the household head are reported in the survey.
+ Thus, there is no direct way of locating the parent of a child except through
+ the relation with the household-head.
+\end_layout
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3372,7 +3417,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-To provide a uniform treatment to educational level across both Tanzania
+To provide a uniform treatment to educational levels across both Tanzania
  and Nigeria, we set the education rank to 1 for all pre-primary levels,
  to rank 2 for until the completion of primary education, to rank 3 for
  up to the secondary education level and to 4 for all higher education levels
@@ -3406,17 +3451,11 @@ ref{education_rank_ngr}
 .
  For instance, the primary school leaving exam is taken at D7 in Tanzania
  and corresponds to the education rank 2 ; all standards above D7 correspond
- to the education rank 3 (
-\begin_inset Formula $\Gamma=1$
-\end_inset
-
-) for Tanzania.
- Similar, P6 is the highest primary education level in Nigeria and 
-\begin_inset Formula $\Gamma=1$
-\end_inset
-
- for consumers implies an education level above the rank 2 (corresponding
- to P6) in Nigeria.
+ to the education rank 3 for Tanzania.
+ Similar, P6 is the highest primary education level in Nigeria for consumers
+ implies an education level above the rank 2 (corresponding to P6) in Nigeria.
+ As access to private education may be significant in the urban-areas, we
+ also use a control for private-education available in the survey.
 \end_layout
 
 \begin_layout Standard
@@ -3425,7 +3464,7 @@ status open
 
 \begin_layout Plain Layout
 
-%[Prices]
+%[Social factors and Prices]
 \end_layout
 
 \end_inset
@@ -3434,14 +3473,15 @@ status open
 \end_layout
 
 \begin_layout Standard
-Lastly, the non-durable consumption averages excluding the costs associated
- ownership of assets are used as the price of consumption in the region.
- The measurement of 
-\begin_inset Formula $p_{ne}$
-\end_inset
-
- is akin to the price-deflator (unit-value) method used for prices in the
- demand literature (
+The languages spoken (in Tanzania) and the religious-identity for household
+ members - used as controls - are recorded at the individual's level in
+ the survey data for the countries and are directly used as controls in
+ the survey.
+ To control for the price of consumption in the household's district, we
+ also use the non-durable consumption averages excluding the costs associated
+ with ownership of assets in the survey.
+ This measurement of price is akin to the price-deflator (unit-value) methods
+ used in the demand literature (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonQualityQuantityVariation,TafereTaffesseEthiopia2010"
@@ -3450,14 +3490,10 @@ literal "false"
 \end_inset
 
 ).
- Since the costs of maintaining assets (fees, repair costs, usage costs
- etc.) are not levied on those who don't own the related assets, we exclude
- the such asset-related costs from the calculation of non-durable expenditure
- average 
-\begin_inset Formula $p_{ne}$
-\end_inset
-
-.
+ The rationale for excluding costs associated with assets is that the costs
+ of maintaining assets (fees, repair costs, usage costs etc.) are not levied
+ on those who don't own the related assets and should not be included in
+ the general price of non-durable consumption.
 \end_layout
 
 \begin_layout Section
@@ -5377,9 +5413,103 @@ TODO: RE-INTRODUCE ALL VARIABLES IN A SYSTEMATIC MANNER (based on intro)
 \end_layout
 
 \begin_layout Standard
-It is worth highlighting that some of the control variables are observed
- at the household level while others are observed at the level of the consumer's
- district.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%Variables : {wealth,wealth-conc/ruralwards,secondary_schools,occupation,
+ parental education, language-religion, age, numchild, educpriv}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As described in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Introduction"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the main explanatory variables used in the study are the urbanisation
+ levels (measured as urban/rural indicators 
+\family typewriter
+rural_wards 
+\family default
+or wealth-concentration 
+\family typewriter
+r
+\family default
+) and the wealth (measured as total assets value 
+\family typewriter
+logA 
+\family default
+or permanent income 
+\family typewriter
+logx
+\family default
+).
+ The physical access to education 
+\family typewriter
+secondary_schools
+\family default
+ is a key control used in the comparison followed by indicator for an agrarian
+ occupation 
+\family typewriter
+agri
+\family default
+, the parental education level 
+\family typewriter
+education_rank
+\family default
+, the religion and language indicators ( 
+\family typewriter
+religion
+\family default
+ and 
+\family typewriter
+has_english 
+\family default
+respectively), access to private education (
+\family typewriter
+educpriv
+\family default
+), the number of children 
+\family typewriter
+numchild
+\family default
+ and the ages of children (
+\family typewriter
+is_primaryage
+\family default
+,
+\family typewriter
+ is_secondaryage
+\family default
+ and
+\family typewriter
+ is_tertiaryage
+\family default
+).
+ Additionally, a control for non-durable consumption prices 
+\family typewriter
+\size small
+log_mean_cost_ne
+\family default
+\size default
+ in the comparison.
+\end_layout
+
+\begin_layout Standard
+Of these control variables, some are observed at the household level while
+ others are observed at the level of the consumer's district.
  The logarithm of total expenditure 
 \begin_inset Formula $log(x)$
 \end_inset
@@ -5439,7 +5569,7 @@ educpriv
  among the parental generations (father-relationship) in a household (
 \family typewriter
 \size small
-father_educ_rank
+education_rank
 \family default
 \size default
 ), the ability to speak English 
