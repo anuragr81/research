@@ -1873,9 +1873,9 @@ get_nonparametric_df <- function(ll,ln, food_analysis, use_ea, o2010, o2012, o20
         bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06)
         dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
         
-        bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0)) 
-        bubble_agri <- ddply(dat_over_bubbles,.(B,agri),summarise,mean_agri_cost_ne_food_x=mean(cost_ne_food/hsize), mean_agri_cost_ne_nonfood_x = mean(cost_ne_nonfood/hsize), mean_agri_A0=mean(A0))
-        bubble_primeduc <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_primeduc_cost_ne_food_x=mean(cost_ne_food/hsize),mean_primeduc_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),mean_primeduc_A0=mean(A0))
+        bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0),median_A0=median(A0)) 
+        bubble_agri <- ddply(dat_over_bubbles,.(B,agri),summarise,mean_agri_cost_ne_food_x=mean(cost_ne_food/hsize), mean_agri_cost_ne_nonfood_x = mean(cost_ne_nonfood/hsize), mean_agri_A0=mean(A0),median_agri_A0=median(A0))
+        bubble_primeduc <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_primeduc_cost_ne_food_x=mean(cost_ne_food/hsize),mean_primeduc_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),mean_primeduc_A0=mean(A0),median_primeduc_A0=median(A0))
         
         
         bubble_fields_w_P1 <- merge(bubble_distances,bubble_fields,by=c('B'))

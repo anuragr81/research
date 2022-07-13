@@ -1172,7 +1172,7 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
       for (year in c(2010,2012,2015)){
         dfdat <- dflist[[paste0("indivdat",year)]]
 
-        datfields_wo_outoffood <- ddply(dfdat,.(region,district,ea),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0), n_ea= length(unique(hhid))) 
+        datfields_wo_outoffood <- ddply(dfdat,.(region,district,ea),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0), median_A0=median(A0), n_ea= length(unique(hhid))) 
         out_of_food_at_district_level <- get_outoffood_at_district_level(dfdata=dfdat)
         
         print("Using merge based on closest district with consumer having run out of food")
@@ -1225,9 +1225,9 @@ ngr_get_nonparametric_df <- function(use_ea,nl,food_analysis,o2010, o2012,o2015,
         bubble_distances <- get_bubble_distances(dat=dfdat, distance_threshold = .06)
         dat_over_bubbles <- get_bubble_aggregated_df(input_dat = dfdat,bubble_distances = bubble_distances)
         
-        bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0)) 
-        bubble_agri <- ddply(dat_over_bubbles,.(B,agri),summarise,mean_agri_cost_ne_food_x=mean(cost_ne_food/hsize), mean_agri_cost_ne_nonfood_x = mean(cost_ne_nonfood/hsize), mean_agri_A0=mean(A0))
-        bubble_primeduc <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_primeduc_cost_ne_food_x=mean(cost_ne_food/hsize),mean_primeduc_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),mean_primeduc_A0=mean(A0))
+        bubble_fields <- ddply(dat_over_bubbles,.(B),summarise,mean_cost_ne_food_x=mean(cost_ne_food/hsize), q30_cost_ne_food_x = quantile(cost_ne_food/hsize,.3), q70_cost_ne_food_x = quantile(cost_ne_food/hsize,.7) ,  mean_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),q30_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.3) ,q70_cost_ne_nonfood_x=quantile(cost_ne_nonfood/hsize,.7) ,  mean_A0=mean(A0),median_A0=median(A0)) 
+        bubble_agri <- ddply(dat_over_bubbles,.(B,agri),summarise,mean_agri_cost_ne_food_x=mean(cost_ne_food/hsize), mean_agri_cost_ne_nonfood_x = mean(cost_ne_nonfood/hsize), mean_agri_A0=mean(A0), median_agri_A0=median(A0))
+        bubble_primeduc <- ddply(dat_over_bubbles,.(B,high_educ),summarise,mean_primeduc_cost_ne_food_x=mean(cost_ne_food/hsize),mean_primeduc_cost_ne_nonfood_x=mean(cost_ne_nonfood/hsize),mean_primeduc_A0=mean(A0),median_primeduc_A0=median(A0))
         
         bubble_fields_w_P1 <- merge(bubble_distances,bubble_fields,by=c('B'))
         
