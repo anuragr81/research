@@ -2984,7 +2984,8 @@ literal "false"
 
 \end_inset
 
-) and compare the educational expenses across wealth concentration levels.
+) and include the comparison of the educational expenses across wealth concentra
+tion levels in our analysis.
 \end_layout
 
 \begin_layout Standard
@@ -3002,8 +3003,13 @@ status open
 \end_layout
 
 \begin_layout Standard
-In summary, the controls used in empirical analysis are the household prosperity
- level (either the logarithm of the total annual expenditure 
+In summary, the main explanatory variables used in the empirical analysis
+ are the urbanisation level (either the wealth concentration 
+\begin_inset Formula $r$
+\end_inset
+
+ or the urban-rural indicator from the survey) and the wealth-measure (either
+ the logarithm of the total annual expenditure 
 \begin_inset Formula $log(x)$
 \end_inset
 
@@ -3012,12 +3018,8 @@ In summary, the controls used in empirical analysis are the household prosperity
 \begin_inset Formula $log(A)$
 \end_inset
 
- ), the wealth concentration 
-\begin_inset Formula $r$
-\end_inset
-
- (or alternatively, the urban-rural indicator from the survey) in the consumer's
- vicinity, the demographic and social identity variables 
+ ).
+ The demographic and social identity variables 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -3035,7 +3037,7 @@ In summary, the controls used in empirical analysis are the household prosperity
  associated with non-durable expenditure in the region (calculated as unit-value
  i.e.
  the average non-durable expenditure excluding asset-related costs in the
- district).
+ district) are important controls in the analysis.
  These controls are used in two regressions with educational expenses as
  dependent variables(s).
  The first regression uses the budget share 
@@ -3062,7 +3064,7 @@ The second regression uses the logarithm of educational expenses
 \end_inset
 
  as the dependent variable against the same set of control variables.
- The two formulations are similar to those used by 
+ Notice that these two formulations are similar to those used by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AcarHHEducTurkey2016"
@@ -3086,69 +3088,8 @@ literal "false"
 \end_inset
 
  in the model.
- Notice that the second and third interpretations - as listed in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:ReferenceDefinitions"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- - use 
-\begin_inset Formula $r_{\Gamma}$
-\end_inset
-
- and 
-\begin_inset Formula $r_{\Omega}$
-\end_inset
-
- in place of 
-\begin_inset Formula $r$
-\end_inset
-
- (respectively).
- These are referred to as 
-\family typewriter
-r_educ
-\family default
- and 
-\family typewriter
-r_occup
-\family default
- in the results and are presented under separate columns with names 
-\family typewriter
-Educ
-\family default
- and 
-\family typewriter
-Agri 
-\family default
-in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:AnalysisAndResults"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:DescriptiveStatistics"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- provides some descriptive statistics for Tanzania and Nigeria while the
- estimation results from the comparison of education expenditure are provided
- in Section 
+ The estimation results from the comparison of education expenditure for
+ Tanzania and Nigeria are presented in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Results"
@@ -3158,8 +3099,17 @@ noprefix "false"
 
 \end_inset
 
+ after a discussion of the descriptive statistics in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:DescriptiveStatistics"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
 .
- 
 \end_layout
 
 \begin_layout Standard
@@ -3248,7 +3198,7 @@ noindent
 The educational expenses and the non-asset related expenditures are obtained
  from the Living Standard Measurement Study (LSMS) which is conducted by
  the World Bank.
- The survey has been designed to assist understanding the links between
+ The survey has been designed to assist in the understanding of links between
  asset ownership, community access (to market, schools), food prices and
  agriculture activities.
  The data in the surveys from multiple countries is largely uniform in its
@@ -3367,7 +3317,7 @@ At the time of writing this chapter, the precise geographic-location of
  at the wider-district level aggregation and use a variable indicating how
  rural the consumer's vicinity is by counting the number of rural wards
  in the 6 
-\begin_inset Formula $km$
+\begin_inset Formula $km^{2}$
 \end_inset
 
  vicinity (or the district boundary).
@@ -3393,12 +3343,16 @@ The physical access to education is measured using the distance to the nearest
  secondary school.
  More specifically, a score secondary_schools for each district represents
  number of wards that have a secondary school within the 6-
-\begin_inset Formula $km$
+\begin_inset Formula $km^{2}$
 \end_inset
 
- distance.
+ vicinity.
  A district with a higher score has more wards that have a secondary school
- in close vicinity (within 6-km distance).
+ in close vicinity (within 6-
+\begin_inset Formula $km^{2}$
+\end_inset
+
+ vicinity).
  The score evidently factors in the high-population density in urban areas
  since densely populated districts would have more wards within the same
  geographical distance as a less populated district.
@@ -4138,8 +4092,8 @@ noprefix "false"
 status open
 
 \begin_layout Plain Layout
-It is not uncommon for the empirical studies to use the data on occupation
- or education to proxy the income differences (Alesina et al.
+It is not uncommon for the empirical studies in SSA to have the data on
+ occupation or education proxy the income differences (Alesina et al.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AlesinaMobilityAfrica2019"
@@ -4147,9 +4101,9 @@ literal "false"
 
 \end_inset
 
-) in the context of sub-Saharan Africa.
+).
  The primary reason for this is the sparsity of income data - a problem
- that may be aggravated further because of large informal sectors in the
+ that may be further aggravated because of a large informal sectors in the
  economies.
 \end_layout
 
@@ -13984,6 +13938,184 @@ options "authordate3"
 \end_layout
 
 \begin_layout Standard
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{longtable}{l l r c} 
+\backslash
+hline
+\backslash
+hline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Education levels as ranks in Tanzania 
+\backslash
+label{education_rank_tnz}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ & 
+\backslash
+multicolumn{1}{c}{} & 
+\backslash
+multicolumn{1}{c}{education code} & 
+\backslash
+multicolumn{1}{c}{education rank}
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+
+\backslash
+ & PP & 1 & 1
+\backslash
+
+\backslash
+ & ADULT & 2 & 2
+\backslash
+
+\backslash
+ & D1 & 11 & 2
+\backslash
+
+\backslash
+ & D2 & 12 & 2
+\backslash
+
+\backslash
+ & D3 & 13 & 2
+\backslash
+
+\backslash
+ & D4 & 14 & 2
+\backslash
+
+\backslash
+ & D5 & 15 & 2
+\backslash
+
+\backslash
+ & D6 & 16 & 2
+\backslash
+
+\backslash
+ & D7 & 17 & 2
+\backslash
+
+\backslash
+ & D8 & 18 & 3
+\backslash
+
+\backslash
+ & OSC & 19 & 3
+\backslash
+
+\backslash
+ & MS COURSE & 20 & 3
+\backslash
+
+\backslash
+ & F1 & 21 & 3
+\backslash
+
+\backslash
+ & F2 & 22 & 3
+\backslash
+
+\backslash
+ & F3 & 23 & 3
+\backslash
+
+\backslash
+ & F4 & 24 & 3
+\backslash
+
+\backslash
+ & O COURSE & 25 & 4
+\backslash
+
+\backslash
+ & F5 & 31 & 4
+\backslash
+
+\backslash
+ & F6 & 32 & 4
+\backslash
+
+\backslash
+ & A COURSE & 33 & 4
+\backslash
+
+\backslash
+ & DIPLOMA & 34 & 4
+\backslash
+
+\backslash
+ & U1 & 41 & 4
+\backslash
+
+\backslash
+ & U2 & 42 & 4
+\backslash
+
+\backslash
+ & U3 & 43 & 4
+\backslash
+
+\backslash
+ & U4 & 44 & 4
+\backslash
+
+\backslash
+ & U5
+\backslash
+& & 45 & 4
+\backslash
+
+\backslash
+ 
+\backslash
+hline
+\backslash
+hline  
+\backslash
+
+\backslash
+ 
+\backslash
+end{longtable} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -14163,7 +14295,6 @@ end{longtable}
 \end_layout
 
 \begin_layout Standard
-\align center
 \begin_inset ERT
 status open
 
@@ -14178,20 +14309,20 @@ newpage
 
 
 \backslash
-begin{longtable}{l l r c} 
-\backslash
-hline
-\backslash
-hline 
+begin{longtable}[!p]{l r l r}
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-caption{Education levels as ranks in Tanzania 
+hline
 \backslash
-label{education_rank_tnz}}
+hline 
+\backslash
+caption{Occupations as ranks in Tanzania 
+\backslash
+label{occupation_rank_tn}}
 \end_layout
 
 \begin_layout Plain Layout
@@ -14202,11 +14333,11 @@ label{education_rank_tnz}}
 \backslash
  & 
 \backslash
-multicolumn{1}{c}{} & 
+multicolumn{1}{c}{code} & 
 \backslash
-multicolumn{1}{c}{education code} & 
+multicolumn{1}{c}{occupation area} & 
 \backslash
-multicolumn{1}{c}{education rank}
+multicolumn{1}{c}{occupation rank}
 \backslash
 
 \backslash
@@ -14216,109 +14347,67 @@ hline
 \backslash
 
 \backslash
- & PP & 1 & 1
+ & 14 & Student & 0
 \backslash
 
 \backslash
- & ADULT & 2 & 2
+ & 13 & Job Seeker & 0
 \backslash
 
 \backslash
- & D1 & 11 & 2
+ & 12 & Paid Family Work & 0
 \backslash
 
 \backslash
- & D2 & 12 & 2
+ & 16 & Unemployed & 0
 \backslash
 
 \backslash
- & D3 & 13 & 2
+ & 11 & Unpaid Family Work & 0
 \backslash
 
 \backslash
- & D4 & 14 & 2
+ & 17 & Unemployed (too young) & 0  
 \backslash
 
 \backslash
- & D5 & 15 & 2
+ & 1 & Livestock/Agriculture & 1
 \backslash
 
 \backslash
- & D6 & 16 & 2
+ & 2 & Fishing & 1
 \backslash
 
 \backslash
- & D7 & 17 & 2
+ & 3 & Mining & 1
 \backslash
 
 \backslash
- & D8 & 18 & 3
+ & 4 & Tourism & 1
 \backslash
 
 \backslash
- & OSC & 19 & 3
+ & 7 & Private Sector & 2
 \backslash
 
 \backslash
- & MS COURSE & 20 & 3
+ & 9 & Non-Agricultural (w Employer) & 2
 \backslash
 
 \backslash
- & F1 & 21 & 3
+ & 10 & Non-Agricultural (w/o Employer) & 2
 \backslash
 
 \backslash
- & F2 & 22 & 3
+ & 8 & Non-Government/Religious Org & 3
 \backslash
 
 \backslash
- & F3 & 23 & 3
+ & 5 & Government & 3
 \backslash
 
 \backslash
- & F4 & 24 & 3
-\backslash
-
-\backslash
- & O COURSE & 25 & 4
-\backslash
-
-\backslash
- & F5 & 31 & 4
-\backslash
-
-\backslash
- & F6 & 32 & 4
-\backslash
-
-\backslash
- & A COURSE & 33 & 4
-\backslash
-
-\backslash
- & DIPLOMA & 34 & 4
-\backslash
-
-\backslash
- & U1 & 41 & 4
-\backslash
-
-\backslash
- & U2 & 42 & 4
-\backslash
-
-\backslash
- & U3 & 43 & 4
-\backslash
-
-\backslash
- & U4 & 44 & 4
-\backslash
-
-\backslash
- & U5
-\backslash
-& & 45 & 4
+ & 6 & Parastatal & 3
 \backslash
 
 \backslash
@@ -14332,7 +14421,7 @@ hline
 \backslash
  
 \backslash
-end{longtable} 
+end{longtable}
 \end_layout
 
 \end_inset
@@ -15526,141 +15615,6 @@ endhead
 \begin_layout Plain Layout
 
 
-\backslash
-hline
-\backslash
-hline  
-\backslash
-
-\backslash
- 
-\backslash
-end{longtable}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{longtable}[!p]{l r l r}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline 
-\backslash
-caption{Occupations as ranks in Tanzania 
-\backslash
-label{occupation_rank_tn}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
- & 
-\backslash
-multicolumn{1}{c}{code} & 
-\backslash
-multicolumn{1}{c}{occupation area} & 
-\backslash
-multicolumn{1}{c}{occupation rank}
-\backslash
-
-\backslash
- 
-\backslash
-hline
-\backslash
-
-\backslash
- & 14 & Student & 0
-\backslash
-
-\backslash
- & 13 & Job Seeker & 0
-\backslash
-
-\backslash
- & 12 & Paid Family Work & 0
-\backslash
-
-\backslash
- & 16 & Unemployed & 0
-\backslash
-
-\backslash
- & 11 & Unpaid Family Work & 0
-\backslash
-
-\backslash
- & 17 & Unemployed (too young) & 0  
-\backslash
-
-\backslash
- & 1 & Livestock/Agriculture & 1
-\backslash
-
-\backslash
- & 2 & Fishing & 1
-\backslash
-
-\backslash
- & 3 & Mining & 1
-\backslash
-
-\backslash
- & 4 & Tourism & 1
-\backslash
-
-\backslash
- & 7 & Private Sector & 2
-\backslash
-
-\backslash
- & 9 & Non-Agricultural (w Employer) & 2
-\backslash
-
-\backslash
- & 10 & Non-Agricultural (w/o Employer) & 2
-\backslash
-
-\backslash
- & 8 & Non-Government/Religious Org & 3
-\backslash
-
-\backslash
- & 5 & Government & 3
-\backslash
-
-\backslash
- & 6 & Parastatal & 3
-\backslash
-
-\backslash
- 
 \backslash
 hline
 \backslash
