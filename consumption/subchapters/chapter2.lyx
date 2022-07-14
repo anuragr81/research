@@ -2903,13 +2903,13 @@ The econometric analysis is limited for households having one or more children.
  In other words, only households with at least one member with their age
  less than 18 are considered in the analysis.
  Since the households with lower working age are likely to have less accumulatio
-ns as well as needs, the average parental age in the household is also used
+ns as well as needs, the average paternal age in the household is also used
  as a control in the comparison.
  The number of children (household-size), the educational level of the parents,
  the accessibility of schools in the district and the social characteristics
  of the household such as religion and language spoken are other important
  controls used in the analyses.
- Notice that for the parental educational levels, we use an educational
+ Notice that for the paternal educational levels, we use an educational
  rank that is standardised by differentiating between primary, secondary
  and higher educational levels (see Section 
 \begin_inset CommandInset ref
@@ -3378,14 +3378,14 @@ The next important control is the occupation of the households which is
  based on the main occupation of household head.
  The number of children in the household, the ages of the children (and
  other members) are directly observed in the data.
- The parental educational levels which are also an important control in
+ The paternal educational levels which are also an important control in
  the study are not based on education level of the household head.
  This is because a significant number of household units in both Tanzania
  and Nigeria are made up of joint families where the reported educational
  expenses correspond to the grandchildren of the household head (HH).
  To avoid letting the education levels point to the penultimate generation
  for households where HH has grandchildren and to the last generation where
- HH has younger children, we rely on the highest education rank in the parental
+ HH has younger children, we rely on the highest education rank in the paternal
  generation of the children recorded in the survey 
 \begin_inset Foot
 status open
@@ -5219,7 +5219,7 @@ Individual
 
 \family typewriter
 \size small
-education_rank 
+fathers_educ_rank 
 \end_layout
 
 \end_inset
@@ -5228,8 +5228,8 @@ education_rank
 \begin_inset Text
 
 \begin_layout Plain Layout
-highest education rank among the family members of the household used as
- a factor variable
+highest education rank in the paternal generation of the children considered
+ in the household
 \end_layout
 
 \end_inset
@@ -5456,51 +5456,94 @@ logx
 \family typewriter
 secondary_schools
 \family default
- is a key control used in the comparison followed by indicator for an agrarian
+ is a key control used in the comparison.
+ Other controls used in the comparison are the indicator for an agrarian
  occupation 
 \family typewriter
 agri
 \family default
-, the parental education level 
+ (
+\begin_inset Formula $\Omega$
+\end_inset
+
+), the paternal education level 
 \family typewriter
-education_rank
+father_educ_rank
 \family default
-, the religion and language indicators ( 
+ (
+\begin_inset Formula $\Gamma^{*}$
+\end_inset
+
+), the religion and language indicators ( 
 \family typewriter
 religion
 \family default
- and 
+ 
+\begin_inset Formula $\chi$
+\end_inset
+
+ used only for Nigeria indicated by 1 for Christianity, 2 for Islam, 3 for
+ Traditional, 4 for other - and 
 \family typewriter
 has_english 
+\begin_inset Formula $\xi$
+\end_inset
+
+ 
 \family default
 respectively), access to private education (
 \family typewriter
 educpriv
 \family default
+ 
+\begin_inset Formula $\pi$
+\end_inset
+
 ), the number of children 
 \family typewriter
 numchild
 \family default
- and the ages of children (
+ (
+\begin_inset Formula $h$
+\end_inset
+
+) , the ages of the 
 \family typewriter
 is_primaryage
 \family default
-,
+ (
+\begin_inset Formula $\mu_{1}$
+\end_inset
+
+),
 \family typewriter
  is_secondaryage
 \family default
- and
+ (
+\begin_inset Formula $\mu_{2}$
+\end_inset
+
+) and 
 \family typewriter
- is_tertiaryage
+is_tertiaryage
 \family default
-).
- Additionally, a control for non-durable consumption prices 
+ (
+\begin_inset Formula $\mu_{3})$
+\end_inset
+
+ indicating the members in the household that are eligible (due to age)
+ for primary, secondary or tertiary education and the non-durable consumption
+ prices 
 \family typewriter
 \size small
-log_mean_cost_ne
+(log_mean_cost_ne
 \family default
 \size default
- in the comparison.
+ 
+\begin_inset Formula $p_{ne}$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -5536,25 +5579,31 @@ logA
 \family typewriter
 numchild
 \family default
-), the factor variables 
-\begin_inset Formula $\mu_{1},\mu_{2},\mu_{3}$
+), the factor variables for childrens' ages 
+\family typewriter
+(is_primaryage
+\family default
+ 
+\begin_inset Formula $\mu_{1}$
 \end_inset
 
-( 
+,
 \family typewriter
-is_primaryage
+ is_secondaryage
 \family default
-, 
-\family typewriter
-is_secondaryage
-\family default
-, 
+ 
+\begin_inset Formula $\mu_{2}$
+\end_inset
+
+ and 
 \family typewriter
 is_tertiaryage
 \family default
-) indicating the members in the household that are eligible (due to age)
- for primary, secondary or tertiary education, the factor variable for access
- to private education (
+ 
+\begin_inset Formula $\mu_{3}$
+\end_inset
+
+ ), the factor variable for access to private education (
 \family typewriter
 educpriv
 \family default
@@ -5562,13 +5611,12 @@ educpriv
 \begin_inset Formula $\Gamma^{*}$
 \end_inset
 
- among the parental generations (father-relationship) in a household (
+ 
 \family typewriter
-\size small
-education_rank
+father_educ_rank
 \family default
-\size default
-), the ability to speak English 
+ corresponding to the paternal generations (father-relationship) in a household,
+ the ability to speak English 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -5576,7 +5624,7 @@ education_rank
 \family typewriter
 has_english
 \family default
- - used only for Tanzania) and the factor variable indicating religion 
+ - used only for Tanzania) and the household religion 
 \begin_inset Formula $\chi$
 \end_inset
 
@@ -5584,14 +5632,17 @@ has_english
 \family typewriter
 religion
 \family default
- - used only for Nigeria and indicated by 1 for Christianity, 2 for Islam,
- 3 for Traditional and 4 for other) are all observed for a household.
+ ) are all observed for a household.
  The variables observed at the district (or 6-
 \begin_inset Formula $km^{2}$
 \end_inset
 
  vicinity) are the number of wards with an accessible (within 6-km distance)
- secondary-school, the rural wards 
+ secondary-schools (
+\family typewriter
+secondary_schools
+\family default
+), the rural wards 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -5601,35 +5652,13 @@ religion
 rural_wards
 \family default
 \size default
-) in a district, the respective measures of the wealth-contration 
+) in a district, the respective measures of the wealth-concentration 
 \family typewriter
 \size small
 r
 \family default
 \size default
- ( 
-\family typewriter
-\size small
-r_occup
-\family default
-\size default
-, 
-\family typewriter
-\size small
-r_educ
-\family default
-\size default
- defined in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:ReferenceDefinitions"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-) and the logarithm of the per-head cost non-durable consumption 
+ and the logarithm of the per-head cost non-durable consumption 
 \begin_inset Formula $p_{ne}$
 \end_inset
 
@@ -5660,7 +5689,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-Note that a significant number of household units in both the economies
+To reiterate, a significant number of household units in both the economies
  are made up of joint families where the reported educational expenses correspon
 d to the grandchildren of the household head (HH).
  The education level of the HH would thus point to the penultimate generation
@@ -5687,7 +5716,7 @@ father_educ_rank
 \family default
 \size default
  instead.
- The parental educational level 
+ The paternal educational level 
 \family typewriter
 \size small
 father_educ_rank
@@ -5970,6 +5999,26 @@ status open
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 %[logx effect]
 \end_layout
 
@@ -5979,7 +6028,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-The Tables 
+The results in Tables 
 \begin_inset ERT
 status open
 
@@ -6116,13 +6165,13 @@ logx
 \end_inset
 
  for both the economies.
- Since, urbanisation must also raise the prices of non-durable expenditure
- excluding asset-costs 
+ As urbanisation must also raise the prices of non-durable expenditure excluding
+ asset-costs 
 \begin_inset Formula $p_{ne}$
 \end_inset
 
-, the disparity in budget shares is not due to higher cost of living (non-durabl
-e consumption) alone.
+, the disparity in budget shares does not appear to be due to higher cost
+ of living (non-durable consumption) alone.
  
 \end_layout
 
@@ -6223,78 +6272,6 @@ ref{tabNGR_ur_district_logeduc}
 \end_layout
 
 \begin_layout Standard
-Despite private education being more important in Nigeria (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:BarChartSchoolTypes"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-), the access to private education is limited to the wealthier households
- in both the economies.
- Given the insignificant private-education indicator vari1able 
-\family typewriter
-educpriv
-\family default
- observed for 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- i.e.
- the education expenditure (see Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_logeduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_ur_district_logeduc}
-\end_layout
-
-\end_inset
-
- ) , the differences in education expenditures between private and government
- education appear far less than one would expect for Nigeria (even though
- the privately-educated households in Nigeria do have higher budget shares
- 
-\begin_inset Formula $w_{educ}$
-\end_inset
-
- for education).
- As private education only accounts for a minority of the population in
- both the economies (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:BarChartSchoolTypes"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-), the role of access to either or private or government secondary school
- seems more important for our comparison of education expenses in the two
- countries.
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -6343,6 +6320,85 @@ a(secondary_schools))),.(region),summarise,n=sum(secondary_schools)), by
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+We find that despite private education being more important in Nigeria (see
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BarChartSchoolTypes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), the access to private education is limited to the wealthier households
+ in both the economies.
+ Given the insignificant private-education indicator vari1able 
+\family typewriter
+educpriv
+\family default
+ observed with 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ i.e.
+ the education expenditure as dependent variable for Nigeria (see Tables
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district_logeduc}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_ur_district_logeduc}
+\end_layout
+
+\end_inset
+
+ ) , the differences in education expenditures between private and government
+ education appear far less than one would expect for the county (even though
+ the privately-educated households in Nigeria do have higher budget shares
+ 
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ for education).
+ As private education only accounts for a minority of the population in
+ both the economies (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BarChartSchoolTypes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), the role of access to either or private or government secondary school
+ i.e.
+ the variable 
+\family typewriter
+secondary_schools
+\family default
+ seems more important for our comparison of education expenses in the two
+ countries.
 \end_layout
 
 \begin_layout Standard
@@ -6558,8 +6614,8 @@ ref{tabNGR_district_logeduc}
  i.e.
  having higher than primary education or not).
  In other words, the education expenditure can be considered higher for
- agrarian households in Tanzania after one takes into account their poor
- educational status measured through 
+ agrarian households in Tanzania after taking into account their poor educationa
+l status measured through 
 \begin_inset Formula $\Gamma$
 \end_inset
 
@@ -6600,12 +6656,11 @@ ref{tabNGR_district_logeduc}
  ).
  Again, this in part due to a significant portion of education expenses
  being spent on primary education in Tanzania.
- Relatively speaking, average education levels and access are higher in
- Nigeria.
 \end_layout
 
 \begin_layout Standard
-The role of rural and urban areas is less straightforward in the two economies.
+Without using the wealth-concentration, the role of rural and urban areas
+ is less straightforward in the two economies.
  The coefficents of 
 \begin_inset Formula $\gamma$
 \end_inset
@@ -6716,13 +6771,15 @@ ref{tabNGR_district_logeduc}
 \end_inset
 
  for Nigeria.
+ The wealth-concentration measure relies on a more clear-cut notion of urbanisat
+ion in the two economies.
 \end_layout
 
 \begin_layout Standard
-We argue that the wealth effects in Tanzania need to be considered in light
- of the fact that the country has far lower levels of enrollment in secondary
- (and higher) education and has higher disparity in asset-ownership even
- after taking into account the lower urbanisation levels.
+While the wealth effects in Tanzania are stronger, they must be considered
+ in light of the observation that the country has far lower levels of enrollment
+ in secondary (and higher) education and has higher disparity in asset-ownership
+ (even after taking into account the lower urbanisation levels).
  The significance of logarithm of assets 
 \begin_inset Formula $log(A)$
 \end_inset
@@ -6788,16 +6845,15 @@ ref{tabNGR_ur_district_logeduc}
 , but a higher dependence on industrial output in Nigeria also seems to
  have contributed to a higher demand for secondary and tertiary education
  in the economy.
- The role of father's education level is also much stronger under such condition
-s in Tanzania.
- It is not an overstatement therefore to suggest that considering of the
- educational attainment itself, the two countries may be at different stages
- in urbanisation and economic development.
+ The stronger role of father's education level in Tanzania is also related
+ to these conditions.
+ As such, the two countries do appear at different stages of urbanisation
+ and economic development.
  
 \end_layout
 
 \begin_layout Standard
-Lastly, we also find that the role of social environment is strong in both
+Finally, the role of social environment is significantly strong in both
  the economies.
  The role of English language seems significant in Tanzania - where the
  English-speakers spend significantly higher on education.
@@ -6985,8 +7041,8 @@ status open
 \end_layout
 
 \begin_layout Standard
-The role of social effects seems to be validated in these as it is unaffected
- by whether the consumers having above or below the median asset ownership
+The role of social effects is validated in these results as it is unaffected
+ by whether the consumers have above or below the median asset ownership
  level.
  More specifically, the factors 
 \family typewriter
