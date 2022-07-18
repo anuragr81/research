@@ -2203,9 +2203,14 @@ noprefix "false"
  Instead of measuring an overall food quality that is aggregated over all
  food items, we inspect how quality in different commodity groups satisfying
  homogeneity restrictions varies across the population.
- The quality is thus treated as a vector associated with the set of commodities
- within food - with the vector having categories relevant for diversity.
- As we details in the Section 
+ The quality across food is treated as a vector associated with the set
+ of commodities within food where the vector elements correspond to the
+ commodity group relevant for diversity.
+ 
+\end_layout
+
+\begin_layout Standard
+As we detail in the Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:ClassificationGoods"
@@ -2215,14 +2220,50 @@ noprefix "false"
 
 \end_inset
 
-, this vector is set to 
-\begin_inset Formula $\{V_{fat},V_{meats-proteins},V_{cereals},V_{vegetables},V_{milk},V_{starches},V_{complements},V_{tubers},V_{fruits},V_{fish}\}$
+, the quality vector 
+\begin_inset Formula $\{V_{fat},$
 \end_inset
 
- based on the FAO categories and the price-correlation requirement imposed
- by Hicks Commodity Theorem.
- This also implies that we do not attempt to measure how households may
- be allocating money for a desired amount of overall quality.
+ 
+\begin_inset Formula $V_{meats-proteins}$
+\end_inset
+
+, 
+\begin_inset Formula $V_{cereals}$
+\end_inset
+
+ , 
+\begin_inset Formula $V_{vegetables}$
+\end_inset
+
+,
+\begin_inset Formula $V_{milk}$
+\end_inset
+
+,
+\begin_inset Formula $V_{starches}$
+\end_inset
+
+, 
+\begin_inset Formula $V_{complements}$
+\end_inset
+
+,
+\begin_inset Formula $V_{tubers}$
+\end_inset
+
+,
+\begin_inset Formula $V_{fruits}$
+\end_inset
+
+,
+\begin_inset Formula $V_{fish}\}$
+\end_inset
+
+ is based on the FAO categories while fulfilling the price-correlation requireme
+nt from the Hicks Commodity Theorem.
+ This also means that we do not attempt to measure how households may be
+ allocating money for a desired amount of overall quality.
  Instead, only a comparison in the variation over the vector of consumption
  quality metrics
 \begin_inset Foot
@@ -2389,24 +2430,10 @@ noindent
 
 \begin_layout Standard
 The grouping of food items into commodity groups is based foremost on the
- correlated prices changes.
- An unsupervised k-means clustering is thus used to group the items based
- on price changes - so that items with similar relative price-changes are
- grouped together.
- More specifically, the clustering is performed by first obtaining relative
- price-changes from the absolute prices.
- For example, the prices for beef in the years 2008, 2010, 2012, 2014 i.e.
- 
-\begin_inset Formula $p_{beef}=\{3500.0,4000.0,5000.0,6000.0\}$
-\end_inset
-
- correspond to relative price-change vector 
-\begin_inset Formula $r_{beef}=\{1.14,1.25,1.2\}$
-\end_inset
-
-.
+ correlated changes in prices - which are observed in every wave of the
+ survey.
  The observed market prices of the food items in years 2008, 2010, 2012
- and 2014 are shown in Figure 
+ and 2014 that we use for the grouping are shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:LSMSMarketPrices"
@@ -2416,11 +2443,44 @@ noprefix "false"
 
 \end_inset
 
+ .
+ An unsupervised k-means clustering is then used to group the items into
+ commodities based on price changes - so that the items within every commodity
+ have 
+\begin_inset Quotes eld
+\end_inset
+
+similar
+\begin_inset Quotes erd
+\end_inset
+
+ relative price-changes.
+ After this first step, the commodity groups are split into categories that
+ are aligned with the FAO recommended categories i.e.
+ (i) cereals, (ii) vegetables, (iii) fruits, (iv) meat, (v) eggs (vi) fish
+ and other sea foods (vii) legumes, nuts and seeds, (viii) milk and milk
+ products (ix) oil and fats, (x) sweets (xi) spices, condiments and beverages
+ and (xii) tubers and roots.
+\end_layout
+
+\begin_layout Standard
+The first-step uses a k-means clustering by first obtaining relative price-chang
+es from the absolute prices.
+ Considering an example with an item, note that the prices for beef in the
+ years 2008, 2010, 2012, 2014 i.e.
+ 
+\begin_inset Formula $p_{beef}=\{3500.0,4000.0,5000.0,6000.0\}$
+\end_inset
+
+ - which correspond to a relative price-change vector 
+\begin_inset Formula $r_{beef}=\{1.14,1.25,1.2\}$
+\end_inset
+
 .
- The relative price-vectors for all the items thus obtained are clustered
- using the k-means method - where the number of selected clusters is guided
- by the within-cluster sum of squared errors - an approach commonly used
- in k-means applications (
+ The relative price-vectors for all the items (beef, goat, frersh_milk etc.)
+ thus obtained are clustered using the k-means method - where the number
+ of selected clusters is guided by the within-cluster sum of squared errors
+ - an approach commonly used in k-means applications (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Pollard1982CLTKmeans"
@@ -2432,190 +2492,12 @@ literal "false"
  The classification we use as the basis for commodity groups are arrived
  at by setting the number of clusters to 5 which is when the within-cluster
  sum of squared errors drops to less than unity.
- The cluster constituents provided by the classification are listed in Table
  
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:PriceBasedGroups"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="2">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="2cm">
-<column alignment="left" valignment="top" width="7cm">
-<row>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-food group
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-food items
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-meats-proteins
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-beef, goat, pork, pulses, onion, salt canned_milk, wild_birds, wild_meat
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-cereals-milk-greens
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-rice_husked, greens      , othervegstarch, maize_green, maize_grain    ,
- wheat, maize_flour      , fresh_milk, milk_products
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-starches-fats-complements
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-cooking_oil, eggs, sugar, tea, sweet, sugarcane, coffee, chicken, bread,
- potatoes, sweet_potato, canned_drink, miscdrinkpowder, readymade_tea_coffee,
- honey, spices, millet_grain, rice_paddy
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-tubers
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-cassava_flour, yam, millet_flour, banana_green, 
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-fruits-fish
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-banana_ripe, cassava_fresh, peanuts, citrus, coconut, mangoes, dried_canned_veg,
- dried_canned_fish, cashew_almonds, nut_products, fish_seafood
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:PriceBasedGroups"
-
-\end_inset
-
-Food items classified into commodity groups based on price-movements
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
 The next step for the classification after the unsupervised k-means clustering
- is to use the FAO categories.
+ is to align the clusters with the FAO categories.
  Since the price-changes of the constituent items selected from any of the
  five food groups - whose constituent items are correlated in price changes
  - would also be correlated with each other, we split the groups identified
@@ -2652,6 +2534,18 @@ literal "false"
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:GroupsModified"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The cluster constituents provided by the first-step before above-described
+ splitting based on FAO categories are listed in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:PriceBasedGroups"
 plural "false"
 caps "false"
 noprefix "false"
@@ -2948,7 +2842,175 @@ Food items classified into commodity groups after considering FAO categories
 \end_layout
 
 \begin_layout Standard
-The basis for the quality metric associated for every commodity 
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="7cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+food group
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+food items
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+meats-proteins
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+beef, goat, pork, pulses, onion, salt canned_milk, wild_birds, wild_meat
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cereals-milk-greens
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rice_husked, greens , othervegstarch, maize_green, maize_grain , wheat,
+ maize_flour , fresh_milk, milk_products
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+starches-fats-complements
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cooking_oil, eggs, sugar, tea, sweet, sugarcane, coffee, chicken, bread,
+ potatoes, sweet_potato, canned_drink, miscdrinkpowder, readymade_tea_coffee,
+ honey, spices, millet_grain, rice_paddy
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+tubers
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cassava_flour, yam, millet_flour, banana_green,
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+fruits-fish
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+banana_ripe, cassava_fresh, peanuts, citrus, coconut, mangoes, dried_canned_veg,
+ dried_canned_fish, cashew_almonds, nut_products, fish_seafood
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:PriceBasedGroups"
+
+\end_inset
+
+Food items classified into commodity groups based on price-movements
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As mentioned earlier, the basis for the quality metric associated for every
+ commodity 
 \begin_inset Formula $G$
 \end_inset
 
@@ -3089,16 +3151,17 @@ literal "true"
 \end_inset
 
 .
- Consider an example, where the demands for items {wheat, rice, corn, eggs,
- beef, chicken, fish, charcoal, kerosene, electricity} were to be considered.
- As such these items would each correspond to a function so that 10 functions
- describe the demand for the items.
- Instead, we choose to view demands for commodities {carb, protein and energy}
- - where the 10 goods are encompassed in just 3 respective functions correspondi
-ng to the 3 commodity groups.
- A key requirement for the validity of such a quality metric is that the
- prices of goods within the commodity group have a constant relative price-struc
-ture i.e.
+ The appeal of aggregation is the simplified view of demand across all items.
+ Consider for example, if we were to represent demands for items {wheat,
+ rice, yam,coconut, eggs, beef, chicken, fish, goat, honey}.
+ As such these items would each correspond to a demand function so that
+ 10 functions describe the demand for all the 10 items.
+ The aggregated view allows us to view demands for commodities {carb, protein
+ and complements} - where the 10 goods are encompassed in just 3 respective
+ functions for the 3 commodity groups.
+ A key requirement for the validity of such a quality metric - however -
+ is that the prices of goods within the commodity group have a constant
+ relative price-structure i.e.
  a relative prices ratio that can be factored out of the observed prices
  (see 
 \begin_inset CommandInset citation
@@ -3109,7 +3172,8 @@ literal "false"
 \end_inset
 
 ).
- This is the condition that drives the k-means grouping of items.
+ This condition - due to the Hicks commodity theorem - drives the k-means
+ grouping of items described above.
 \end_layout
 
 \begin_layout Standard
@@ -3122,7 +3186,26 @@ price-movement
 \shape italic
 functional
 \shape default
- sense implied FAO categories relevant for food diversity concerns.
+ sense implied by FAO categories relevant for food diversity concerns.
+ Every commodity aggregate 
+\begin_inset Formula $G$
+\end_inset
+
+ on the left side of Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:PriceBasedGroups"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ has items that have the same functional significance 
+\shape italic
+and 
+\shape default
+have a similar price-movement.
  The 
 \shape italic
 price-movement
@@ -3166,31 +3249,9 @@ literal "true"
 \end_inset
 
  for a similar analysis of rice varieties).
- The commodities (categories) within food are based both on the correlated
- changes in price (from 2008 until 2014) as well as the 
-\shape italic
-functional
-\shape default
- sense implied by the diversity-based FAO groups.
- For example, the price changes for sugar and tea are similar to each other.
- The price changes for rice and cooking-oil are also similar to each other.
- But not only do sugar and tea have similar price changes, they also have
- a similar functional sense implied by FAO categories.
- Thus they are put within a group of complements.
- Rice and cooking-oil on the other hand are split into two categories based
- on the different functional sense implied by FAO-categories.
- Other categories such as meatsproteins, fruits etc.
- are similarly based foremost on price-movement correlations before considering
- the functional sense implied by FAO categories.
- Notice that the functional category implied by FAO is also one where there
- is a plausible substitution.
- As an example, goat and beef may be put under the same group - but not
- with tea - as there is little sense in substitution between tea and meat.
- In the end, every commodity aggregate 
-\begin_inset Formula $G$
-\end_inset
-
- on the left side of Table 
+ Consider for example the two pairs of items with similar price-movements
+ - with sugar and tea being first pair that have similar price changes (see
+ Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:PriceBasedGroups"
@@ -3200,11 +3261,52 @@ noprefix "false"
 
 \end_inset
 
- has goods that have the same functional significance 
-\shape italic
-and 
-\shape default
-have a similar price-movement.
+).
+ Rice and cooking-oil are the second pair that also have price changes similar
+ to each other (see Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:PriceBasedGroups"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ However, not only do sugar and tea have similar price changes, they also
+ have a similar functional sense implied by FAO categories.
+ Therefore, they are classified in a group complements in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:GroupsModified"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Rice and cooking-oil on the other hand are split into two categories based
+ on the different functional sense implied by FAO-categories (see Table
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:GroupsModified"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Other categories such as meatsproteins, fruits etc.
+ are similarly based foremost on price-movement correlations before considering
+ the functional sense implied by FAO categories.
+ Notice a plausible substitution is implicit in the FAO-recommended categories.
+ As an example, goat and beef may be put under the same group - but not
+ with tea - as there is little sense in substitution between tea and meat.
+ 
 \end_layout
 
 \begin_layout Subsection
