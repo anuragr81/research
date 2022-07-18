@@ -3348,21 +3348,69 @@ The vector of quality for every household comprises of the quality
 \begin_inset Formula $\mathscr{G}$
 \end_inset
 
- is the set of all commodities relevant for the household (i.e.
- i) cereals ii) veg iii) fruits iv) meats-proteins v) fish vi) milk vii)fat
- viii) complements ix) tubers x) chicken and xi) starches).
- Based on the local market-observed prices of the goods within the commodity
- group 
-\begin_inset Formula $G$
+ is the set of all commodities relevant for the household 
+\begin_inset Formula $\mathscr{G}$
 \end_inset
 
-, the quality metric for the household ensures that a household who buys
- more of the high-priced good within a commodity group is viewed as one
- consuming higher quality of the commodity 
+
+\begin_inset Formula $=$
+\end_inset
+
+
+\begin_inset Formula $\{cereals$
+\end_inset
+
+, 
+\begin_inset Formula $veg$
+\end_inset
+
+, 
+\begin_inset Formula $fruits$
+\end_inset
+
+ , 
+\begin_inset Formula $meats\_proteins$
+\end_inset
+
+, 
+\begin_inset Formula $fish$
+\end_inset
+
+ , 
+\begin_inset Formula $milk$
+\end_inset
+
+, 
+\begin_inset Formula $fat$
+\end_inset
+
+, 
+\begin_inset Formula $complements$
+\end_inset
+
+, 
+\begin_inset Formula $tubers$
+\end_inset
+
+, 
+\begin_inset Formula $starches$
+\end_inset
+
+}.
+ Based on the local market-observed prices of the goods within the commodity
+ group 
+\begin_inset Formula $G\in\mathscr{G}$
+\end_inset
+
+ (such as cereals, fat etc.), the quality metric for the household ensures
+ that a household who buys more of the high-priced good within a commodity
+ group is viewed as one consuming higher quality of the commodity 
 \begin_inset Formula $G$
 \end_inset
 
 .
+ This is why no quality is considered for chicken, the only item within
+ its own commodity group.
  As we've explained in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3373,37 +3421,18 @@ noprefix "false"
 
 \end_inset
 
-, the use of the aggregate 
-\begin_inset Formula $G$
-\end_inset
-
- imposes the restriction of a constant relative price structure on the constitue
-nt items of commodity group - i.e.
- the Hicks aggregation condition that we use to demarcate the groups 
-\begin_inset Formula $G\in\mathscr{G}$
-\end_inset
-
- as described in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:ClassificationGoods"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
+, the k-means clustering interprets the restriction that there is a constant
+ relative price structure on the constituent items of commodity group (the
+ Hicks aggregation condition).
 \end_layout
 
 \begin_layout Standard
-For a group 
+To calculate the quality associated with a group 
 \begin_inset Formula $G\in\mathscr{G}$
 \end_inset
 
- with a constant within-group relative price-structure (e.g.
- tea and carbonated drinks under beverages that can be interchanged by the
- household), a base-price 
+ (such as the items : eggs and cooking in commodity fat) that have a constant
+ within-group relative price-structure, a base-price 
 \begin_inset Formula $P_{G}$
 \end_inset
 
@@ -3411,9 +3440,10 @@ For a group
 \begin_inset Formula $G$
 \end_inset
 
- is selected as the minimum price of the item among the commodity aggregate
- constituents.
- This is in accordance with the approach suggested by 
+ (fat) is selected as the minimum price of the items among the commodity
+ aggregate constituents (e.g.
+ among cooking-oil and eggs).
+ This is based on the approach suggested by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity"
@@ -3426,47 +3456,47 @@ literal "false"
 \begin_inset Formula $P_{G}$
 \end_inset
 
- is then used to assign i) an aggregate-quantity of a composite good (e.g.
- beverages) comprising of quantities consumed of the items constituted in
- 
+ is then used to assign i) an aggregate-quantity of a composite good (for
+ fat) comprising of quantities consumed of the items constituted in 
 \begin_inset Formula $G$
 \end_inset
 
- and ii) a quality metric corresponding to 
+ (cooking-oil eggs) and ii) a quality metric corresponding to 
 \begin_inset Formula $G$
 \end_inset
 
- ( e.g.
- with the proportion of tea and carbonated drinks).
- With the quantities consumed for tea and carbonated drinks, for example,
- a quantity of 
+ ( based on the proportion of cooking-oil and eggs consumed).
+ In other words, with the quantities consumed for cooking-oil and eggs under
+ fat commodity available to us, a quantity of 
 \begin_inset Quotes eld
 \end_inset
 
-beverages
+fat
 \begin_inset Quotes erd
 \end_inset
 
- is associated with the particular set of quantities consumed for tea and
- carbonated drinks consumed.
+ is associated with the particular set of quantities consumed for eggs and
+ cooking-oil consumed.
  The aggregate-quantity of 
 \begin_inset Quotes eld
 \end_inset
 
-beverages
+fat
 \begin_inset Quotes erd
 \end_inset
 
- calculated by relative-prices-weighed averages of tea and carbonated drinks
- consumed (see details below) would be lower when more tea is consumed for
- the same expenditure.
- Notice that the notion of higher-quality is based on price alone so that
- the more expensive item within the commodity group is treated as of higher
- quality.
+ is then calculated by relative-prices-weighed averages of cooking-oil and
+ eggs consumed (see details below).
+ If cooking-oil per unit-weight is cheaper than eggs-per-unit-weight, then
+ this quality metric would evidently be lower when more cooking-oil is consumed
+ for the same expenditure.
+ It is worth emphasising that the notion of higher-quality is based solely
+ on price alone so that a more expensive item within the commodity group
+ is treated as being of higher quality.
 \end_layout
 
 \begin_layout Standard
-The quantity-price tuples 
+In more formal terms, quantity-price tuples 
 \begin_inset Formula $(q_{1},p_{1}),(q_{2},p_{2}),(q_{3},p_{3})...$
 \end_inset
 
@@ -3479,11 +3509,134 @@ The quantity-price tuples
 \end_inset
 
 .
- Here, the use of sum of physical quantities 
-\begin_inset Formula $q_{G}=\sum_{i\in G}q_{i}$
+ We define the total physical sum of quantities consumed 
+\begin_inset Formula $q_{G}$
+\end_inset
+
+ as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+q_{G} & =\sum_{j\in G}q_{j,G}
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Further, with 
+\begin_inset Formula $p_{i,G}$
+\end_inset
+
+ as the prices for good 
+\begin_inset Formula $i$
+\end_inset
+
+ in commodity group 
+\begin_inset Formula $G$
+\end_inset
+
+ observed in the market, we represent the price-structure ratios for the
+ the good 
+\begin_inset Formula $i$
+\end_inset
+
+ in a group 
+\begin_inset Formula $G$
 \end_inset
 
  as 
+\begin_inset Formula $p_{i,G}^{*}$
+\end_inset
+
+ .
+ The ratio 
+\begin_inset Formula $p_{i,G}^{*}$
+\end_inset
+
+ is effectively a price-multiple with respect to the base-price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ (the price of the base-commodity in the group 
+\begin_inset Formula $G$
+\end_inset
+
+ with respect to which the quality in 
+\begin_inset Formula $G$
+\end_inset
+
+ is being considered) so that the observed prices 
+\begin_inset Formula $p_{i,G}$
+\end_inset
+
+ of the items within the group 
+\begin_inset Formula $G$
+\end_inset
+
+ bear the following relationship:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+p_{i,G} & =(P_{G}\times p_{i,G}^{*})\forall i\in G\label{eq:base_price_structure}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The quality metric 
+\begin_inset Formula $V_{G}$
+\end_inset
+
+ then corresponds to the a sum of quantities consumed 
+\begin_inset Formula $q_{i,G}$
+\end_inset
+
+ weighted by the price-structure (
+\begin_inset Formula $p_{i,G}^{*})$
+\end_inset
+
+ for the commodity aggregate 
+\begin_inset Formula $G$
+\end_inset
+
+ as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+V_{G} & =\sum_{i\in G}(\frac{q_{i,G}p_{i,G}^{*}}{q_{G}})\label{eq:quality_def}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Following 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+literal "false"
+
+\end_inset
+
+, we reject the use of sum of physical quantities 
+\begin_inset Formula $q_{G}=\sum_{i\in G}q_{i}$
+\end_inset
+
+ itself as 
 \begin_inset Formula $Q_{G}$
 \end_inset
 
@@ -3495,8 +3648,28 @@ literal "false"
 
 \end_inset
 
-) is rejected in favour of the relative-price-weighted sum of expenditure
- per physical unit (within the commodity 
+ - see Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:quality_groups_problem"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:demand_function_quality"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) in favour of the above relative-price-weighted sum of expenditure per
+ physical unit (within the commodity 
 \begin_inset Formula $G$
 \end_inset
 
@@ -3541,110 +3714,7 @@ literal "false"
 \end_inset
 
 .
- For the commodity aggregate 
-\begin_inset Formula $G$
-\end_inset
-
- where quantities consumed are 
-\begin_inset Formula $q_{i}$
-\end_inset
-
-, the quality metric 
-\begin_inset Formula $V_{G}$
-\end_inset
-
- is the a sum of quantity 
-\begin_inset Formula $q_{i,G}$
-\end_inset
-
- weighted by price-structure (
-\begin_inset Formula $p_{i,G}^{*})$
-\end_inset
-
- as follows
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-V_{G} & =\sum_{i\in G}(\frac{q_{i,G}p_{i,G}^{*}}{q_{G}})\label{eq:quality_def}
-\end{alignat}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Here, 
-\begin_inset Formula $q_{G}$
-\end_inset
-
  
-\begin_inset Formula $(=\sum_{j\in G}q_{j,G})$
-\end_inset
-
- is the physical sum of quantities consumed and 
-\begin_inset Formula $p_{i,G}^{*}$
-\end_inset
-
- represents the price-structure ratio corresponding to the good 
-\begin_inset Formula $i$
-\end_inset
-
- in a group 
-\begin_inset Formula $G$
-\end_inset
-
- where 
-\begin_inset Formula $p_{i,G}$
-\end_inset
-
- are the prices for good 
-\begin_inset Formula $i$
-\end_inset
-
- in commodity group 
-\begin_inset Formula $G$
-\end_inset
-
- observed in the market.
- The ratio 
-\begin_inset Formula $p_{i,G}^{*}$
-\end_inset
-
- above is effectively a price-multiple with respect to the base-price 
-\begin_inset Formula $P_{G}$
-\end_inset
-
- (the price of the base-commodity in the group 
-\begin_inset Formula $G$
-\end_inset
-
- with respect to which the quality in 
-\begin_inset Formula $G$
-\end_inset
-
- is being considered) so that the observed prices 
-\begin_inset Formula $p_{i,G}$
-\end_inset
-
- of the items within the group 
-\begin_inset Formula $G$
-\end_inset
-
- bear the following relationship:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{alignat}{1}
-p_{i,G} & =(P_{G}\times p_{i,G}^{*})\forall i\in G\label{eq:base_price_structure}
-\end{alignat}
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -3670,7 +3740,7 @@ literal "true"
 \end_inset
 
  for a more detailed theoretical discussion).
- Let's say we observe the consumption on lamb and chicken within a protein
+ Let's say we observe the consumption on eggs and cooking-oil within a fat
  commodity with prices observed as 20£, 10£ (resp.) and the quantities consumed
  by the household are 1.5 kg and 2 kg (resp.).
  One approach is to the treat the physical sum of quantities i.e.
@@ -3678,13 +3748,13 @@ literal "true"
 \begin_inset Quotes eld
 \end_inset
 
-protein
+fat
 \begin_inset Quotes erd
 \end_inset
 
 .
- However, it is difficult to argue that the households optimise the weight
- of the composite good - rather than comparing the disparate quantities
+ However, it is more difficult to argue that the households optimise the
+ weight of the composite good - rather than comparing the disparate quantities
  of goods (see 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -3693,11 +3763,12 @@ literal "true"
 
 \end_inset
 
- for the technical details of this argument).
+ for details of this argument).
  Since quality is to be priced in the market, a quality-adjusted quantity
- is a more appropriate formulation for the purpose where we consider a price-str
-uctured weighted quantity as the quality-adjusted quantity and express the
- pair
+ is the more appropriate formulation where we consider a price-structured
+ weighted quantity as the quality-adjusted quantity and express the pair
+ i.e.
+ 
 \begin_inset Formula $\{(20,1.5).(10,2)\}$
 \end_inset
 
@@ -3709,7 +3780,11 @@ uctured weighted quantity as the quality-adjusted quantity and express the
 \begin_inset Formula $(0,1.43=\frac{5}{1.5+2})$
 \end_inset
 
- .
+ or 
+\begin_inset Formula $\{(10,5),(0,1.43)\}$
+\end_inset
+
+.
  Here, 
 \begin_inset Formula $P_{G}$
 \end_inset
