@@ -3740,7 +3740,7 @@ literal "true"
 \end_inset
 
  for a more detailed theoretical discussion).
- Let's say we observe the consumption on eggs and cooking-oil within a fat
+ Let's say we observe the consumption on cooking-oil and eggs within a fat
  commodity with prices observed as 20£, 10£ (resp.) and the quantities consumed
  by the household are 1.5 kg and 2 kg (resp.).
  One approach is to the treat the physical sum of quantities i.e.
@@ -3769,7 +3769,7 @@ literal "true"
  weighted quantity as the quality-adjusted quantity and express the pair
  i.e.
  
-\begin_inset Formula $\{(20,1.5).(10,2)\}$
+\begin_inset Formula $\{(p_{cooking\_oil},q_{cooking\_oil}),(p_{eggs},q_{eggs})\}=\{(20,1.5),(10,2)\}$
 \end_inset
 
  as 
@@ -3781,7 +3781,7 @@ literal "true"
 \end_inset
 
  or 
-\begin_inset Formula $\{(10,5),(0,1.43)\}$
+\begin_inset Formula $\{(P_{fat},Q_{fat}),(0,V_{fat})\}=\{(10,5),(0,1.43)\}$
 \end_inset
 
 .
@@ -3789,20 +3789,21 @@ literal "true"
 \begin_inset Formula $P_{G}$
 \end_inset
 
- is simply the minimum of 
+ (or 
+\begin_inset Formula $P_{fat}$
+\end_inset
+
+) is simply the minimum of 
 \begin_inset Formula $20,10$
 \end_inset
 
  i.e.
- 
-\begin_inset Formula $10$
-\end_inset
-
- and the price-structure 
+ the prices of cooking-oil and eggs respective - corresponding to the price-stru
+cture 
 \begin_inset Formula $p_{G}^{*}$
 \end_inset
 
- is (2,1) for {lamb,chicken}.
+ is (2,1) for {cooking-oil,eggs}.
 \end_layout
 
 \begin_layout Standard
@@ -3861,19 +3862,23 @@ Quantity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Lamb 
+Cooking-oil
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell multirow="3" alignment="left" valignment="middle" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $p_{1}=$
+\begin_inset Formula $p_{cooking\_oil}$
 \end_inset
 
-20£
+
+\begin_inset Newline newline
+\end_inset
+
+=20£
 \end_layout
 
 \end_inset
@@ -3893,7 +3898,7 @@ Lamb
 \begin_inset Text
 
 \begin_layout Plain Layout
-Chicken 
+Eggs
 \end_layout
 
 \end_inset
@@ -3902,7 +3907,7 @@ Chicken
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $p_{2}$
+\begin_inset Formula $p_{eggs}$
 \end_inset
 
 =10£
@@ -3930,9 +3935,8 @@ Chicken
 
 
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="3">
+<lyxtabular version="3" rows="3" columns="2">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0.7in">
 <column alignment="center" valignment="top" width="0.5in">
 <column alignment="center" valignment="top" width="1.5in">
 <row>
@@ -3942,18 +3946,7 @@ Chicken
 \begin_layout Plain Layout
 
 \shape italic
-Aggregate
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\shape italic
-\begin_inset Formula $P_{protein}$
+\begin_inset Formula $P_{fat}$
 \end_inset
 
 
@@ -3965,9 +3958,14 @@ Aggregate
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $Q_{fat}$
+\end_inset
 
-\shape italic
-Measure
+ and 
+\begin_inset Formula $V_{fat}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3975,15 +3973,6 @@ Measure
 </row>
 <row>
 <cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Quantity
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3996,7 +3985,15 @@ Quantity
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $5(=2\cdot1.5+1\cdot2)$
+\begin_inset Formula $Q_{fat}=5$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $(=2\cdot1.5+1\cdot2)$
 \end_inset
 
 
@@ -4010,15 +4007,6 @@ Quantity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Quality
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -4028,7 +4016,19 @@ Quality
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $1.43(=\frac{5}{1.5+2})$
+\begin_inset Formula $V_{fat}=$
+\end_inset
+
+
+\begin_inset Formula $1.43$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $(=\frac{5}{1.5+2})$
 \end_inset
 
 
@@ -4049,7 +4049,7 @@ Quality
 
 \begin_layout Plain Layout
 Quality Measurement in Illus.
- 1
+ 1 (prices not representative of observed prices)
 \end_layout
 
 \end_inset
@@ -4064,20 +4064,33 @@ Quality Measurement in Illus.
 
 \begin_layout Standard
 Comparing the 
-\begin_inset Formula $V_{protein}=1.43$
+\begin_inset Formula $V_{fat}=1.43$
 \end_inset
 
- with the quality for another household as whose prices and quantities are
+ above with another case where household consumes 0
+\begin_inset Formula $.5$
+\end_inset
+
+ kg of cooking-oil and 3 kg of eggs so that the prices and quantities are
  
 \begin_inset Formula $\{(20,0.5),(10,3)\}$
 \end_inset
 
- respectively for lamb and chicken, we have 
+ respectively for cooking-oil and eggs, we have the same expenditure as
+ before since 
 \begin_inset Formula $E_{G}=P_{G}Q_{G}=\sum_{G}p_{i}q_{i}=40$
 \end_inset
 
 .
- As shown in the table below, the quantity and quality are 
+ However, as shown in the table below, the quantity 
+\begin_inset Formula $Q_{G}$
+\end_inset
+
+ and quality 
+\begin_inset Formula $V_{G}$
+\end_inset
+
+ now corresponds to 
 \begin_inset Formula $(10,4(=2\times0.5+1\times3))$
 \end_inset
 
@@ -4150,7 +4163,7 @@ Quantity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Lamb
+Cooking-oil
 \end_layout
 
 \end_inset
@@ -4159,10 +4172,14 @@ Lamb
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $p_{1}=$
+\begin_inset Formula $p_{cooking\_oil}$
 \end_inset
 
-20£
+
+\begin_inset Newline newline
+\end_inset
+
+=20£
 \end_layout
 
 \end_inset
@@ -4182,7 +4199,7 @@ Lamb
 \begin_inset Text
 
 \begin_layout Plain Layout
-Chicken
+Eggs
 \end_layout
 
 \end_inset
@@ -4219,9 +4236,8 @@ Chicken
 
 
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="3">
+<lyxtabular version="3" rows="3" columns="2">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0.7in">
 <column alignment="center" valignment="top" width="0.5in">
 <column alignment="center" valignment="top" width="1.5in">
 <row>
@@ -4231,18 +4247,7 @@ Chicken
 \begin_layout Plain Layout
 
 \shape italic
-Aggregate
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\shape italic
-\begin_inset Formula $P_{protein}$
+\begin_inset Formula $P_{fat}$
 \end_inset
 
 
@@ -4254,9 +4259,14 @@ Aggregate
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $Q_{fat}$
+\end_inset
 
-\shape italic
-Measure
+ and 
+\begin_inset Formula $V_{fat}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4264,15 +4274,6 @@ Measure
 </row>
 <row>
 <cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Quantity
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4285,7 +4286,15 @@ Quantity
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $4(=2\cdot0.5+1\cdot3)$
+\begin_inset Formula $Q_{fat}=4$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $(=2\cdot0.5+1\cdot3)$
 \end_inset
 
 
@@ -4299,15 +4308,6 @@ Quantity
 \begin_inset Text
 
 \begin_layout Plain Layout
-Quality
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -4317,7 +4317,19 @@ Quality
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $1.14(=\frac{4}{3.5})$
+\begin_inset Formula $V_{fat}=$
+\end_inset
+
+
+\begin_inset Formula $1.14$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $(=\frac{4}{3.5})$
 \end_inset
 
 
@@ -4338,7 +4350,7 @@ Quality
 
 \begin_layout Plain Layout
 Quality Measurement in Illus.
- 2
+ 2 (prices not representative of observed prices)
 \end_layout
 
 \end_inset
@@ -4390,8 +4402,8 @@ noprefix "false"
 \end_inset
 
  is to measure how the demand for the diversity-based quality is distributed
- across the population and varies across prices, household needs and other
- household characteristics in the cross-section.
+ across the population and varies across prices, household needs, wealth
+ and other household characteristics in the cross-section.
 \end_layout
 
 \begin_layout Standard
@@ -4464,11 +4476,12 @@ noprefix "false"
 \end_inset
 
 ).
- The ownership of assets of the household also appears as the control variable
- (in place of total expenditure) in the AIDS regression and is measured
- with the logarithm of the costs of the assets owned.
- An indicator variable is also used for energy - specifying whether the
- household uses electricity or not.
+ We use two formulations with the permanent-income of the household (calculated
+ as the logarithm of total household expenditure) used as the main explanatory
+ in the first formulation and the logarithm of the household assets value
+ as the explanatory vairable in the second formulation.
+ An indicator variable is also used as control for energy - specifying whether
+ the household uses electricity or not.
  
 \end_layout
 
@@ -4583,18 +4596,8 @@ noprefix "false"
 \end_inset
 
  equations are not subject to any restrictions - while the constraints of
- homogeneity and symmetry are applied to the quantity-related estimation
- equations.
- Thus, the homogeneity conditions are imposed by setting the constraint
- for all 
-\begin_inset Formula $G$
-\end_inset
-
-: 
-\begin_inset Formula $\sum_{j=1}^{n}\gamma_{1,Gj}=0$
-\end_inset
-
- and the symmetry conditions are imposed with 
+ symmetry are applied to the quantity-related estimation equations.
+ More specifically, the symmetry conditions are imposed with 
 \begin_inset Formula $\gamma_{1,Gj}=\gamma_{1,jG}$
 \end_inset
 
@@ -4602,11 +4605,14 @@ noprefix "false"
 \begin_inset Formula $j,G$
 \end_inset
 
-.
- As is common in the AIDS estimation, the adding-up constraints are ensured
- by skipping the estimation of one of the commodity group (in our case -
- chicken) and setting its intercept to a the difference between unity and
- the sum of the rest of the intercepts i.e.
+ in the above equations.
+\end_layout
+
+\begin_layout Standard
+As is common for AIDS estimation in the literature, the adding-up constraints
+ and homogeneity are ensured by skipping the estimation of one of the commodity
+ group (in our case - chicken) and setting its intercept to a the difference
+ between unity and the sum of the rest of the intercepts i.e.
  to 
 \begin_inset Formula $1-\sum_{G}^{n}\rho_{1,G}$
 \end_inset
@@ -4620,7 +4626,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-For example, considering 
+Considering 
 \begin_inset Formula $G=meatsproteins$
 \end_inset
 
@@ -4640,7 +4646,8 @@ For example, considering
 \begin_inset Formula $d_{\xi}$
 \end_inset
 
- (electricity-access), we have two equations (which we name 
+ (electricity-access) as an example, we have two equations (which we name
+ 
 \family typewriter
 qmeatsproteins
 \family default
@@ -4648,7 +4655,7 @@ qmeatsproteins
 \family typewriter
 qVmeatsproteins
 \family default
- for reference)
+ for reference) corresponding to meats-proteins comomdity:
 \end_layout
 
 \begin_layout Standard
@@ -4688,6 +4695,8 @@ qVmeatsproteins:\\
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 The homogeneity and symmetry restrictions are imposed only on the quantity
  equations.
  For homogeneity, we ensure that 
@@ -4704,6 +4713,8 @@ The homogeneity and symmetry restrictions are imposed only on the quantity
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 Similar restrictions apply for other equations (qfat, qcereals etc.).
  For symmetry, the following restrictions are applied.
  Notice that 
@@ -4719,6 +4730,8 @@ qfat
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 \begin_inset Formula 
 \begin{gather*}
 \gamma_{1,meatsproteins,fat}=\gamma_{1,fat,meatsproteins}\\
@@ -4738,6 +4751,8 @@ qfat
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 These conditions are repeated for every other 
 \begin_inset Formula $G\in\{fat,cereals,veg,milk,meatsproteins,starches,complements,tubers,fruits,fish\}$
 \end_inset
@@ -4745,7 +4760,9 @@ These conditions are repeated for every other
 .
  The system of equation is thus used to observe the variation of measures
  of quality across the permanent income and household characteristics in
- Tanzania.
+ Tanzania
+\bar default
+.
 \end_layout
 
 \begin_layout Standard
@@ -4837,6 +4854,12 @@ noindent
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+TODO: Add more details about the LSMS.
 \end_layout
 
 \begin_layout Standard
