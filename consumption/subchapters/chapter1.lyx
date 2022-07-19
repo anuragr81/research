@@ -5648,7 +5648,9 @@ literal "false"
 \end_inset
 
 ).
- 
+ Another reason why the income data has not been used directly in the current
+ study is that it is available only for around 30% of the households that
+ we have the diary data for.
 \end_layout
 
 \begin_layout Standard
@@ -5666,29 +5668,15 @@ status open
 \end_layout
 
 \begin_layout Standard
-While the income data available in the survey is not used directly, it has
- been used for an overview of occupational differences in Tanzania.
- Since occupation-data for every household is more widely available than
- the data on income (available only for around 30% of the households that
- we have diary data for), a mapping of incomes on to the list of occupational
- (ordered) ranks is used to sort occupations by income.
- More specifically, we sort the occupations based on the average income
- received before categorising them in broader ranks ranging form 1 to 3
- (non-paying occupations are unemployed status is set to 0).
- The variation of occupation-ranks across Tanzania thus calculated are described
- in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Descriptive-Statistics"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The assignment of occupation ranks from the occupation field in the survey
- is shown in Table 
+While the income data may not be of direct utility to its sparsity, it is
+ useful in providing an overview of occupational differences in Tanzania.
+ As the household occupation-data is more widely available than the income
+ data, we use a mapping of incomes on to the list of occupational (ordered)
+ ranks by sorting the occupations based on income.
+ More specifically, the occupations are sorted based on the average income
+ received and categorised in broad ranks ranging form 1 to 3 (non-paying
+ occupations are unemployed status is set to 0).
+ The occupation ranks thus assigned are shown in Table 
 \begin_inset ERT
 status open
 
@@ -5702,9 +5690,26 @@ ref{occupation_rank_tn}
 \end_inset
 
 .
- The assignment of education rank - another ordered variable corresponding
- to different education levels that we've used for descriptive statistics
- and for the alternative formulations in Appendix II - is shown in Table
+ The variation of occupation-ranks across Tanzania are described in Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Descriptive-Statistics"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The variation in education levels is also given a similar treatment and
+ used as education ranks for comparison.
+ In other words, an ordered variable corresponding to the varied education
+ levels is inferred as occupation-rank based on income received by the highest-e
+ducation level recorded for individuals in the data.
+ These are used for descriptive statistics as well as for the alternative
+ formulations in Appendix II .
+ The mappings from education-levels to education ranks are listed in Table
  
 \begin_inset ERT
 status open
@@ -6628,12 +6633,9 @@ literal "false"
 \end_inset
 
 ).
- 
-\bar under
-It is worth highlighting 
-\bar default
-that FAO standards do not prescribe what's considered a low dietary diversity
- status and it's common for studies to consider empirical thresholds for
+ It is worth highlighting that FAO standards do not prescribe what's considered
+ a low dietary diversity status.
+ It is common for studies to consider empirically validated thresholds for
  the analysis of diversity.
  
 \begin_inset CommandInset citation
@@ -6645,7 +6647,17 @@ literal "false"
 
  , for example, set this threshold to 3.
  Consider the threshold of 3, the diversity scores in Tanzania might not
- appear too low.
+ appear too low (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Diversity-Scores"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -6669,6 +6681,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Diversity-Scores"
+
+\end_inset
+
 Diversity Score changes by log asset deciles
 \end_layout
 
@@ -6698,10 +6716,11 @@ _collect_for_year.
 \end_layout
 
 \begin_layout Standard
-To view the records of food deprivation directly observed in the survey,
- we perform a comparison of the fraction of households having run out of
- food (either due to lack of agricultural inputs or high prices) in the
- past year across urban and rural areas in Tanzania (see Figures 
+To gauge the food security - rather than diversity - in the economy, we
+ use the directly observed food deprivation in the survey and perform a
+ comparison of the fraction of households having run out of food (either
+ due to lack of agricultural inputs or high prices) in the past year across
+ urban and rural areas in Tanzania (see Figures 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:FractionAgInp"
@@ -6729,9 +6748,9 @@ s having run out of food due to agricultural reasons).
 \end_layout
 
 \begin_layout Standard
-The extremity of urban-rural and regional differences is evident from the
- non-parametric plot of occupations and value of assets-owned that are shown
- in Figure 
+The extremity of urban-rural and regional differences is also evident from
+ the non-parametric plot of occupations and value of assets-owned that are
+ shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:occupations_r_tn"
@@ -6765,8 +6784,7 @@ It is common for the empirical studies in sub-Saharan Africa to use the
 
 \end_inset
 
-.
- This mapping of occupations to occupation-ranks is shown in the Table
+ (see Table
 \series bold
  
 \series default
@@ -6783,7 +6801,7 @@ ref{occupation_rank_tn}
 
 \end_inset
 
-.
+ for mapping of occupations to occupation-ranks).
  
 \end_layout
 
@@ -7547,7 +7565,10 @@ status open
 \end_layout
 
 \begin_layout Standard
-The permanent income control uses the logarithm of the total expenditure
+The wealth of the households - which is the primary explanatory variables
+ in the empirical analysis - is interpreted as permanent income or the total
+ assets value for the household.
+ The permanent income is measured as the logarithm of the total expenditure
  
 \family typewriter
 \size footnotesize
@@ -7555,6 +7576,18 @@ ln_tot_exp
 \family default
 \size default
  by the household.
+ An important list of controls are the prices of food commodities identified
+ in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:GroupsModified"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
  As described in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7585,8 +7618,11 @@ noprefix "false"
 
 \end_inset
 
- also uses the logarithm of base-prices of food categories (commodities)
- as controls.
+ uses the logarithm of base-prices of food categories (commodities) as 
+\bar under
+price-controls
+\bar default
+.
  These are represented as the variables starting with the prefix 
 \family typewriter
 \size footnotesize
