@@ -4605,7 +4605,7 @@ noprefix "false"
 \begin_inset Formula $j,G$
 \end_inset
 
- in the above equations.
+ in the equations for quantity.
 \end_layout
 
 \begin_layout Standard
@@ -4614,7 +4614,7 @@ The homogeneity and adding-up restrictions mean that the sum of all expenditure
 riance matrix becoming singular (
 \begin_inset CommandInset citation
 LatexCommand cite
-key "LiGangTourismdemand2004,AndersonBlundellDynEqn1982"
+key "BartenMLESystemEq1969,AndersonBlundellDynEqn1982,FujiiHotelTourism1985,AscheSalmonDemandAIDS1996,LiGangTourismdemand2004"
 literal "false"
 
 \end_inset
@@ -4623,53 +4623,60 @@ literal "false"
  As a solution to the estimation problem, it is common to delete one of
  the equations to estimate and recover its coefficients through the adding-up
  restrictions (
-\begin_inset Formula $\sum_{G}^{n}\{\rho_{1,G}+\sum_{k=1}^{s}\rho_{1,Gk}d_{k}\}=0$
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ParisCaraccioloTestingAIDSAddingUp2014,LiGangTourismdemand2004"
+literal "false"
+
 \end_inset
 
-) and the homogeneity restrictions (
-\begin_inset Formula $\sum_{G}^{n}\beta_{G,1}=1$
+).
+ Notice that the adding-up restrictions require that 
+\begin_inset Formula $\sum_{G}^{n}\rho_{1,G}=1$
+\end_inset
+
+ , 
+\begin_inset Formula $\sum_{G}^{n}\beta_{G,1}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{G}^{n}\gamma_{1,Gj}=1$
+\end_inset
+
+ (for all 
+\begin_inset Formula $j$
+\end_inset
+
+) while the homogeneity restrictions require that and 
+\begin_inset Formula $\sum_{j}^{n}\gamma_{1,Gj}=0$
+\end_inset
+
+ (for all 
+\begin_inset Formula $G$
 \end_inset
 
 ).
  Thus one of the commodity group (chicken) - which does not correspond to
- a quality is ignored from the estimation and only a symmetry condition
- is imposed on the equations corresponding to quantity.
+ a quality is ignored from the estimation.
+ The coefficients in the quantity equation for chicken can be recovered
  
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-More details in ParisCaraccioloTestingAIDSAddingUp2014 and the thesis.
- Further examples:PapatheodorouTourismdemand1999, AscheSalmonDemandAIDS1996,
- FujiiHotelTourism1985.
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-setting its intercept to a the difference between unity and the sum of the
- rest of the intercepts i.e.
- to 
-\begin_inset Formula $1-\sum_{G}^{n}\rho_{1,G}$
+\begin_inset Formula $\rho_{chicken}=1-\sum_{G\ne chicken}^{n}\rho_{1,G}$
 \end_inset
 
  and 
-\begin_inset Formula $1-\sum_{G}^{n}\rho_{2,G}$
+\begin_inset Formula $\gamma_{1,chicken,j}=-\sum_{G\ne chicken}^{n}\gamma_{1,Gj}$
 \end_inset
 
- respectively
-\bar default
-.
+ respectively.
  
 \end_layout
 
 \begin_layout Standard
-Considering 
+To state the exact equation to be estimated, consider the commodity 
 \begin_inset Formula $G=meatsproteins$
 \end_inset
 
-, and demographic variables 
+ along with the demographic variables 
 \begin_inset Formula $d_{h}$
 \end_inset
 
@@ -4685,8 +4692,9 @@ Considering
 \begin_inset Formula $d_{\xi}$
 \end_inset
 
- (electricity-access) as an example, we have two equations (which we name
- 
+ (electricity-access).
+ There are two equations for quantity and quality of the meats-proteins
+ commodity (which we name 
 \family typewriter
 qmeatsproteins
 \family default
@@ -4694,7 +4702,7 @@ qmeatsproteins
 \family typewriter
 qVmeatsproteins
 \family default
- for reference) corresponding to meats-proteins comomdity:
+ respectively - for reference purposes) :
 \end_layout
 
 \begin_layout Standard
@@ -4734,28 +4742,7 @@ qVmeatsproteins:\\
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-The homogeneity and symmetry restrictions are imposed only on the quantity
- equations.
- For homogeneity, we ensure that 
-\begin_inset Formula 
-\begin{multline*}
-\gamma_{1,meatsproteins,fat}+\gamma_{1,meatsproteins,meatsproteins}+\gamma_{1,meatsproteins,cereals}+\gamma_{1,meatsproteins,veg}\\
-+\gamma_{1,meatsproteins,milk}+\gamma_{1,meatsproteins,starches}+\gamma_{1,meatsproteins,complements}\\
-+\gamma_{1,meatsproteins,tubers}+\gamma_{1,meatsproteins,fruits}+\gamma_{1,meatsproteins,fish}=0
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-Similar restrictions apply for other equations (qfat, qcereals etc.).
- For symmetry, the following restrictions are applied.
+For symmetry, the following restrictions are applied.
  Notice that 
 \begin_inset Formula $\gamma_{1,fat,meatsproteins}$
 \end_inset
@@ -4769,8 +4756,6 @@ qfat
 \end_layout
 
 \begin_layout Standard
-
-\bar under
 \begin_inset Formula 
 \begin{gather*}
 \gamma_{1,meatsproteins,fat}=\gamma_{1,fat,meatsproteins}\\
@@ -4790,18 +4775,14 @@ qfat
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-These conditions are repeated for every other 
+These conditions are repeated in the estimation for every other 
 \begin_inset Formula $G\in\{fat,cereals,veg,milk,meatsproteins,starches,complements,tubers,fruits,fish\}$
 \end_inset
 
 .
  The system of equation is thus used to observe the variation of measures
  of quality across the permanent income and household characteristics in
- Tanzania
-\bar default
-.
+ Tanzania.
 \end_layout
 
 \begin_layout Standard
