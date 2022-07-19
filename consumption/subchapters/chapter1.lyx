@@ -4609,10 +4609,47 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-As is common for AIDS estimation in the literature, the adding-up constraints
- and homogeneity are ensured by skipping the estimation of one of the commodity
- group (in our case - chicken) and setting its intercept to a the difference
- between unity and the sum of the rest of the intercepts i.e.
+The homogeneity and adding-up restrictions mean that the sum of all expenditure
+ shares in the AIDS model is unity - thus leading to the residuals variance-cova
+riance matrix becoming singular (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LiGangTourismdemand2004,AndersonBlundellDynEqn1982"
+literal "false"
+
+\end_inset
+
+).
+ As a solution to the estimation problem, it is common to delete one of
+ the equations to estimate and recover its coefficients through the adding-up
+ restrictions (
+\begin_inset Formula $\sum_{G}^{n}\{\rho_{1,G}+\sum_{k=1}^{s}\rho_{1,Gk}d_{k}\}=0$
+\end_inset
+
+) and the homogeneity restrictions (
+\begin_inset Formula $\sum_{G}^{n}\beta_{G,1}=1$
+\end_inset
+
+).
+ Thus one of the commodity group (chicken) - which does not correspond to
+ a quality is ignored from the estimation and only a symmetry condition
+ is imposed on the equations corresponding to quantity.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+More details in ParisCaraccioloTestingAIDSAddingUp2014 and the thesis.
+ Further examples:PapatheodorouTourismdemand1999, AscheSalmonDemandAIDS1996,
+ FujiiHotelTourism1985.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+setting its intercept to a the difference between unity and the sum of the
+ rest of the intercepts i.e.
  to 
 \begin_inset Formula $1-\sum_{G}^{n}\rho_{1,G}$
 \end_inset
@@ -4621,7 +4658,9 @@ As is common for AIDS estimation in the literature, the adding-up constraints
 \begin_inset Formula $1-\sum_{G}^{n}\rho_{2,G}$
 \end_inset
 
- respectively.
+ respectively
+\bar default
+.
  
 \end_layout
 
