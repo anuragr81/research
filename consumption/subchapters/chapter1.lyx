@@ -4877,16 +4877,19 @@ noindent
 \end_layout
 
 \begin_layout Standard
-
-\series bold
-TODO: Add more details about the LSMS.
-\end_layout
-
-\begin_layout Standard
 \paragraph_spacing single
 The data used for our analysis has been obtained from the Living Standard
  Measurement Study (LSMS) - conducted by the World Bank - for the year 2014
  - which is the last wave in the survey.
+ The survey has been designed to assist in the understanding of links between
+ asset ownership, community access (to market, schools), food prices and
+ agriculture activities.
+ The data in the surveys from multiple countries is largely uniform in its
+ data-model (fields) and is often georeferenced with a sufficiently wide-coverag
+e in the country to allow a study of spatial variation in the observed variables.
+ The years used for the analyses are the most recent years in the survey
+ for Tanzania (2014) i.e.
+ the last wave available in the survey at the time of writing this chapter.
  The price-data which we used in the classification described in Section
  
 \begin_inset CommandInset ref
@@ -4898,8 +4901,22 @@ noprefix "false"
 
 \end_inset
 
- is based on prices for years 2008, 2010, 2012 and 2014.
+ is based on prices for waves (years) 2008, 2010, 2012 and 2014.
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Food-data]
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4911,52 +4928,14 @@ The LSMS survey records past expenditure with diary and recall methods.
  The demographic variables from survey that we use in our a cross-sectional
  analysis are based on the current locality and the number of members in
  the family.
- While the income data is available in the survey, we use it only indirectly
- with a mapping of incomes on to the list of occupational (ordered) ranks.
- More specifically, we sort the occupations based on the average income
- received before categorising them in broader ranks ranging form 1 to 3
- (non-paying occupations are unemployed status is set to 0).
- The assignment of occupation ranks from occupation field is shown in Table
  
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{occupation_rank_tn}
-\end_layout
-
-\end_inset
-
-.
- A direct use of income data is avoided since primarily since it is available
- for only around 30% of the households (which we have diary data for).
- The assignment of education rank - another ordered variable corresponding
- to different education levels that we've used for descriptive statistics
- and for the alternative formulations in Appendix II - is shown in Table
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{education_rank_tnz}
-\end_layout
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
-The consumption microdata from the survey years is combined from across
- the recall and weekly diaries - merging the weekly data with yearly data
- by multiplying the past week's consumption into the number of weeks in
- the year.
+The consumption microdata for the year (2014) is combined from across the
+ recall and weekly diaries - merging the weekly data with yearly data by
+ multiplying the past week's consumption into the number of weeks in the
+ year.
  The details of this process are described in Appendix I.
  Once combined, the matching of market prices for the goods consumed by
  a household is done for food items 
@@ -5630,14 +5609,13 @@ Long-term assets in the LSMS
 \end_layout
 
 \begin_layout Standard
-The values of assets owned by the household that we use as control variable(s)
- are obtained from the record of durable goods in the survey.
+The values of assets owned by the household that we use as a measure for
+ wealth are obtained from the record of durable goods in the survey.
  The durable goods in the LSMS data range from short-term durable items
  such as mobile phones to the expensive and long-term assets such as land
  or housing.
  Of these, we are interested only in the transferable long-term owned assets
- that undergo changes in the survey years 2010, 2012 and 2014.
- These are shown in Table 
+ (see Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Long-term-assets"
@@ -5647,20 +5625,110 @@ noprefix "false"
 
 \end_inset
 
-.
+).
  The exclusion of short-term assets or the items that are not transferred
- over a generation is based on our intent to consider the role of intergeneratio
-nal wealth.
- The assets transferred over a generation can be readily verified by inspecting
- households in the data that are split when a young member of the unsplit
- family starts a new household - treating the assets except land and house
- that are more expensive than the bed (furniture) as those that contribute
- to the long-term asset-values.
+ over a generation is based on consideration of intergenerational wealth
+ whose relevance is sought as an SES measure.
+ The empirical studies often prefer the data on ownership of assets (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FilmerPritchettWealthEffectonEduc1999,FilmerPritchettWealthEffectonEduc2001"
+literal "false"
+
+\end_inset
+
+) for SES effects since the inter-generational transfers of wealth are what
+ make a break in the inequality gap (i.e.
+ mobility through reduction of wealth differences) difficult (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ObasuyiEducationInequality2019"
+literal "false"
+
+\end_inset
+
+).
+ 
 \end_layout
 
 \begin_layout Standard
-The details of the records of asset-ownership in the LSMS data include the
- number 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Occupation-ranks]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While the income data available in the survey is not used directly, it has
+ been used for an overview of occupational differences in Tanzania.
+ Since occupation-data for every household is more widely available than
+ the data on income (available only for around 30% of the households that
+ we have diary data for), a mapping of incomes on to the list of occupational
+ (ordered) ranks is used to sort occupations by income.
+ More specifically, we sort the occupations based on the average income
+ received before categorising them in broader ranks ranging form 1 to 3
+ (non-paying occupations are unemployed status is set to 0).
+ The variation of occupation-ranks across Tanzania thus calculated are described
+ in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Descriptive-Statistics"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The assignment of occupation ranks from the occupation field in the survey
+ is shown in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{occupation_rank_tn}
+\end_layout
+
+\end_inset
+
+.
+ The assignment of education rank - another ordered variable corresponding
+ to different education levels that we've used for descriptive statistics
+ and for the alternative formulations in Appendix II - is shown in Table
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{education_rank_tnz}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The assets transferred over a generation that we use for SES measures can
+ be readily verified by inspecting households in the data that are split
+ when a young member of the unsplit family starts a new household - treating
+ the assets except land and house that are more expensive than the bed (furnitur
+e) as those that contribute to the long-term asset-values.
+ The details of the records of asset-ownership in the LSMS data include
+ the number 
 \begin_inset Formula $n_{t}$
 \end_inset
 
@@ -5678,21 +5746,25 @@ The details of the records of asset-ownership in the LSMS data include the
 \begin_inset Formula $\Pi_{t}$
 \end_inset
 
- of the durable goods to infer the asset-values in the area surrounding
- the household - partly because 
+ of the durable goods - rather than reported cost 
+\begin_inset Formula $C_{t}$
+\end_inset
+
+ - to infer the asset-values in the area surrounding the household for two
+ reasons.
+ First, 
 \begin_inset Formula $\Pi_{t}$
 \end_inset
 
- is not susceptible to errors associated with recall of the purchase value
- (which often varies for the same item over years in the panel data for
- a household).
- Further, 
+ is not susceptible to the errors associated with the recall of the purchase
+ value which varies over years in the panel data for the household and item.
+ Second, 
 \begin_inset Formula $\Pi_{t}$
 \end_inset
 
- encapsulates the perceived depreciation of the durable good over time -
- a feature that makes it more appropriate for a comparison against non-durable
- consumption at a given time 
+ also encapsulates the perceived depreciation of the durable good over time
+ - making it more appropriate for a comparison against non-durable consumption
+ at a given time 
 \begin_inset Formula $t$
 \end_inset
 
@@ -5707,6 +5779,10 @@ The details of the records of asset-ownership in the LSMS data include the
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6541,7 +6617,7 @@ reference "fig:Recorded-prices"
 \end_layout
 
 \begin_layout Standard
-The food diversity scores do vary significantly across Tanzania but they
+While the food diversity scores do vary significantly across Tanzania, they
  do not indicate an extreme segmentation based on assets as is reported
  for many economies in the region (
 \begin_inset CommandInset citation
@@ -6552,9 +6628,13 @@ literal "false"
 \end_inset
 
 ).
- Notice that FAO standards do not prescribe what's considered a low dietary
- diversity status and it's common for studies to consider empirical thresholds
- for the analysis of diversity.
+ 
+\bar under
+It is worth highlighting 
+\bar default
+that FAO standards do not prescribe what's considered a low dietary diversity
+ status and it's common for studies to consider empirical thresholds for
+ the analysis of diversity.
  
 \begin_inset CommandInset citation
 LatexCommand cite
