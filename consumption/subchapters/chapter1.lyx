@@ -8025,10 +8025,6 @@ status open
 \end_layout
 
 \begin_layout Standard
-TODO: Explain The QUALITY-QUANTITY SUBSTITUTION MORE CLEARLY.
-\end_layout
-
-\begin_layout Standard
 The effect of 
 \family typewriter
 ln_tot_exp
@@ -8361,14 +8357,47 @@ status open
 
 \begin_layout Plain Layout
 
-% g <- merge((subset(o2014,household_status==1))[,c("hhid","isurbanp")],g2014,by
-=c("hhid"))
+% g <- merge((subset(o2014,household_status==1))[,c("hhid","isurbanp",
+\begin_inset Quotes erd
+\end_inset
+
+lightingfuel
+\begin_inset Quotes erd
+\end_inset
+
+)],g2014,by=c("hhid"))
+\end_layout
+
+\begin_layout Plain Layout
+
+% g$has_electric  <- with(g,as.integer(is.element(lightingfuel,c(1,8))))
 \end_layout
 
 \begin_layout Plain Layout
 
 % ddply(subset(g,category=="meatsproteins"),.(isurbanp),summarise,n=median(tot_ca
 teg_exp/lp_min_price))
+\end_layout
+
+\begin_layout Plain Layout
+
+% fdf <- get_fao_quality_agg_df()
+\end_layout
+
+\begin_layout Plain Layout
+
+% fdf$logA <- log(fdf$all_assets_mtm+1e-7)
+\end_layout
+
+\begin_layout Plain Layout
+
+% gf <- (subset(merge(fdf[,c("hhid","logA")],g,by=c("hhid"))))
+\end_layout
+
+\begin_layout Plain Layout
+
+% k <- subset(gf,isurbanp==T & category=="meatsproteins") ; plot(k$logA,
+ with(k,tot_categ_exp/lp_min_price),xlim=c(2,3.2))
 \end_layout
 
 \end_inset
@@ -8394,43 +8423,102 @@ lp-
 lpmeatsproteins
 \family default
  that the high base-price of meatsproteins (the cheapest meat-protein available
- in the district) corresponds to higher quality in fruits and veg- meaning
- that the households in districts where base-price of meatsprotein (price
- of cheapest meat-protein) is high also avail higher quality of fruits and
- veg.
- 
-\bar under
-Estimating the quantity of 
+ in the district) corresponds to higher quality in 
+\family typewriter
+fruits
+\family default
+ and 
+\family typewriter
+veg
+\family default
+- meaning that the households in districts where base-price of 
+\family typewriter
+meatsprotein 
+\family default
+(price of cheapest meat-protein) is high also avail higher quality of fruits
+ and veg.
+ Both expenditure on 
 \family typewriter
 meatsproteins
 \family default
- consumed as 
+ and 
+\family typewriter
+fruits
+\family default
+ are higher in urban - areas.
+ Estimating the effective quantity of 
 \family typewriter
 meatsproteins
 \family default
- expenditure divided by its base-price, the urban areas spend consumer 1.61
+ consumed as the 
+\family typewriter
+meatsproteins
+\family default
+ expenditure divided by its base-price, the urban areas consume about 1.61
  times more 
 \family typewriter
 meatsproteins
 \family default
- ( and spend 1.63 times more on 
+ and spend 1.63 times more.
+ This is not the case for expenditure on 
 \family typewriter
-meatsproteins
+chicken
 \family default
-\bar default
-).
+ or 
+\family typewriter
+fish
+\family default
+.
 \end_layout
 
 \begin_layout Standard
-Similarly, with rise in prices of cereals (
+There is a noticeable substitution in quality between some food commodites.
+ With a rise in prices of cereals (
 \family typewriter
 lpcereals
 \family default
-), the quality in meatsproteins increases but that in starches and veg declines
- - indicating high quality in meat-consumption being substituted with quality
- in starches and veg.
- The consumption of quality in tubers and starches - on the other hand -
- seem to move together and have little substitution between them.
+), for example, the quality in 
+\family typewriter
+meatsproteins
+\family default
+ increases but the quality in 
+\family typewriter
+starches
+\family default
+ and 
+\family typewriter
+veg 
+\family default
+declines - indicating the high quality in meat-consumption may be substituted
+ with quality in starches and veg in some areas.
+ It is worth pointing out that unlike for 
+\family typewriter
+fruits
+\family default
+ and 
+\family typewriter
+meatsproteins
+\family default
+, the differences in expenditure (or in effective quantity) across urban
+ and rural areas for 
+\family typewriter
+cereals
+\family default
+ and 
+\family typewriter
+veg
+\family default
+ and are not wide.
+ F
+\bar under
+urther, unlike with meatsproteins ...
+  the consumption of veg and fruits rise with income in urban areas as well
+ but not as much as meatsproteins - whereas it does not change significantly
+ across rural areas
+\bar default
+.
+ The substitution in quality is far little between tubers and starches whose
+ consumption seem to move together.
  We also note that the quality in 
 \family typewriter
 fruits
@@ -8444,9 +8532,12 @@ lpstarches
 lpfruits
 \family default
 ).
- Except for price-based quality in fat, having access to electricity - through
- residence in urban areas - seems to increase quality in consumption for
- nearly all food categories (commodities).
+ Except for price-based quality in 
+\family typewriter
+fat
+\family default
+, having access to electricity - through residence in urban areas - seems
+ to increase quality in consumption for nearly all food categories (commodities).
  
 \end_layout
 
@@ -8467,8 +8558,8 @@ status open
 \begin_layout Standard
 The above observations suggest that the role of permanent income or assets-owner
 ship is significant in the quality of consumption for food.
- The pressure on household basket quality is evident - as we see larger
- families (
+ The pressure on household basket quality also seems evident - as we see
+ larger families (
 \family typewriter
 hsize
 \family default
