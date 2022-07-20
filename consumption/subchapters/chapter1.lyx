@@ -8025,8 +8025,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-TODO: Explain The QUALITY-QUANTITY SUBSTITUTION MORE CLEARLY - PARTICULARLY
- THE DIFFERENCE BETWEEN logA/logx.
+TODO: Explain The QUALITY-QUANTITY SUBSTITUTION MORE CLEARLY.
 \end_layout
 
 \begin_layout Standard
@@ -8127,12 +8126,28 @@ ref{results_elecassets_2014}
 \family typewriter
 meatsproteins 
 \family default
-overall even after considering the lower quality consumed by those with
- lower assets (compare signs under 
+overall.
+ In other words, the lower quantity of 
+\family typewriter
+meatsproteins 
+\family default
+for those with low-assets-ownership does not mean a higher quality in 
+\family typewriter
+meatsproteins 
+\family default
+(compare signs under 
 \family typewriter
 qmeatsproteins
 \family default
- of the coefficients corresponding to).
+ of the coefficients corresponding to 
+\family typewriter
+logA
+\family default
+ and 
+\family typewriter
+ln_tot_exp
+\family default
+ ).
  The same applies for consumption of cereals (see the reversal in signs
  of 
 \family typewriter
@@ -8244,7 +8259,11 @@ qmeatsproteins
 \family typewriter
 has_electric 
 \family default
-variable in a way similar to that of meatsproteins.
+variable in a way similar to that of 
+\family typewriter
+meatsproteins
+\family default
+.
 \end_layout
 
 \begin_layout Standard
@@ -8337,6 +8356,27 @@ status open
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% g <- merge((subset(o2014,household_status==1))[,c("hhid","isurbanp")],g2014,by
+=c("hhid"))
+\end_layout
+
+\begin_layout Plain Layout
+
+% ddply(subset(g,category=="meatsproteins"),.(isurbanp),summarise,n=median(tot_ca
+teg_exp/lp_min_price))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 TODO: PRESENT MEAN/MEDIAN MEAT CONSUMPTION EXPENDITURE OVER PRICE in urban
  and rural areas.
  ALSO PRESENT the VEG and MEAT DECLINES in the entire population.
@@ -8358,7 +8398,31 @@ lpmeatsproteins
  that the households in districts where base-price of meatsprotein (price
  of cheapest meat-protein) is high also avail higher quality of fruits and
  veg.
- Similarly, with rise in prices of cereals (
+ 
+\bar under
+Estimating the quantity of 
+\family typewriter
+meatsproteins
+\family default
+ consumed as 
+\family typewriter
+meatsproteins
+\family default
+ expenditure divided by its base-price, the urban areas spend consumer 1.61
+ times more 
+\family typewriter
+meatsproteins
+\family default
+ ( and spend 1.63 times more on 
+\family typewriter
+meatsproteins
+\family default
+\bar default
+).
+\end_layout
+
+\begin_layout Standard
+Similarly, with rise in prices of cereals (
 \family typewriter
 lpcereals
 \family default
