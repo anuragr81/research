@@ -34,8 +34,8 @@ gen log_educ= log(toteducexpense+1e-7)
 
 eststo ngr_logeduc_r, title (2015): quietly reg log_educ logx r2012  log_mean_cost_ne i.agri i.educpriv  father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild, robust
 
-esttab tnz_weduc_r ngr_weduc_r tnz_logeduc_r ngr_logeduc_r using "c:/temp/t.tex", replace f booktabs nomtitles mgroups("budget-share" "education-expenditure", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span})) 
 
+esttab tnz_weduc_r ngr_weduc_r tnz_logeduc_r ngr_logeduc_r using "c:/temp/t.tex", replace f booktabs nomtitles mgroups("\$w_{educ}\$" "\$log(x_{educ})\$", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))
 
 ************************************* w_educ URBAN-RURAL ****************************************
 
