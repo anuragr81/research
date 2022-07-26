@@ -149,3 +149,74 @@ eststo ngr_logeduc_roccup, title (Agri 2015): quietly reg log_educ logx r_agri20
 esttab tnz_weduc_roccup ngr_weduc_roccup tnz_logeduc_roccup ngr_logeduc_roccup using "c:/temp/ngrtnz_roccup.tex", replace f booktabs nomtitles mgroups("\$w_{educ}\$" "\$log(x_{educ})\$", pattern(1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))
 
 
+*********************** above median ****************************************************************
+
+eststo clear
+
+use "C:\local_files\research\consumption\lsms\data\tn_df2014.dta", clear
+drop if numchild == 0
+generate has_english =  litlang == 2 | litlang == 3
+
+drop if lnA0 < 12.75996   
+
+eststo tnz_weduc_abovemed: quietly reg w_educ logx r2012 log_mean_cost_ne i.agri i.educpriv   father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, robust
+
+use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
+drop if numchild == 0
+drop if lnA0 <  11.0021     
+
+eststo ngr_weduc_abovemed: quietly reg  w_educ logx r2012  log_mean_cost_ne i.agri i.educpriv  father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild
+
+use "C:\local_files\research\consumption\lsms\data\tn_df2014.dta", clear
+drop if numchild == 0
+generate has_english =  litlang == 2 | litlang == 3
+drop if lnA0 < 12.75996   
+gen log_educ= log(toteducexpense+1e-7)
+
+
+eststo tnz_logeduc_abovemed: quietly reg log_educ logx r2012 log_mean_cost_ne i.agri i.educpriv    father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, robust
+
+use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
+drop if numchild == 0
+drop if lnA0 <  11.0021     
+gen log_educ= log(toteducexpense+1e-7)
+
+eststo ngr_logeduc_abovemed: quietly reg log_educ logx r2012  log_mean_cost_ne i.agri i.educpriv  father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild, robust
+
+
+***********************below median ****************************************************************
+
+use "C:\local_files\research\consumption\lsms\data\tn_df2014.dta", clear
+drop if numchild == 0
+generate has_english =  litlang == 2 | litlang == 3
+
+drop if lnA0 >= 12.75996   
+
+eststo tnz_weduc_belowmed: quietly reg w_educ logx r2012 log_mean_cost_ne i.agri i.educpriv   father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, robust
+
+use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
+drop if numchild == 0
+
+drop if lnA0 >=  11.0021     
+
+eststo ngr_weduc_belowmed: quietly reg  w_educ logx r2012  log_mean_cost_ne i.agri i.educpriv  father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild
+
+
+use "C:\local_files\research\consumption\lsms\data\tn_df2014.dta", clear
+drop if numchild == 0
+generate has_english =  litlang == 2 | litlang == 3
+drop if lnA0 >= 12.75996   
+gen log_educ= log(toteducexpense+1e-7)
+
+
+eststo tnz_logeduc_belowmed: quietly reg log_educ logx r2012 log_mean_cost_ne i.agri i.educpriv    father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, robust
+
+use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
+drop if numchild == 0
+drop if lnA0 >=  11.0021     
+gen log_educ= log(toteducexpense+1e-7)
+
+eststo ngr_logeduc_belowmed: quietly reg log_educ logx r2012  log_mean_cost_ne i.agri i.educpriv  father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild, robust
+
+
+esttab tnz_weduc_abovemed ngr_weduc_abovemed tnz_logeduc_abovemed ngr_logeduc_abovemed tnz_weduc_belowmed ngr_weduc_belowmed tnz_logeduc_belowmed ngr_logeduc_belowmed using "c:/temp/ngrtnz_abovebelowmedian.tex", replace f booktabs nomtitles mgroups("Above Median \$w_{educ}\$" "Above Median \$log(x_{educ})\$" "Below Median \$w_{educ}\$" "Below Median \$log(x_{educ})\$", pattern(1 0 1 0 1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))
