@@ -3532,1052 +3532,6 @@ literal "false"
  the general price of non-durable consumption.
 \end_layout
 
-\begin_layout Section
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:AnalysisAndResults"
-
-\end_inset
-
-Empirical Analysis and Results
-\end_layout
-
-\begin_layout Subsection
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:DescriptiveStatistics"
-
-\end_inset
-
-Descriptive Statistics
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%o2012ed <- o2012[,c("hhid","personid","schoolowner","age","education_rank")]
-\end_layout
-
-\begin_layout Plain Layout
-
-%o2012ed$education_rank[is.na(o2012ed$education_rank)] <-0
-\end_layout
-
-\begin_layout Plain Layout
-
-%hist(o2012ed$education_rank,main='',xlab="Education Rank",ylab='Number
- of Households')
-\end_layout
-
-\begin_layout Plain Layout
-
-%k<- subset(ddply(subset(o2012ed,age<18 & !is.na(schoolowner)) %>% mutate(schoolt
-ype = sapply(schoolowner, school_type)),.(schooltype),summarise,n=length(hhid)),!
-is.na(schooltype))
-\end_layout
-
-\begin_layout Plain Layout
-
-%barplot(k$n,names.arg=k$schooltype,las=1,xlab='school type',ylab='num households
-')
-\end_layout
-
-\begin_layout Plain Layout
-
-%o2012ed <- o2012[,c("hhid","personid","schoolowner","age","")]
-\end_layout
-
-\begin_layout Plain Layout
-
-%mm <- tn$df2012 %>% mutate( logAq = sapply(tn$df2012$logA,function(x) {
- as.numeric(j[j>=x][1])}))
-\end_layout
-
-\begin_layout Plain Layout
-
-% ========= DECILE PLOT ============
-\end_layout
-
-\begin_layout Plain Layout
-
-%j <- quantile(tn$df2012$logA,seq(10)/10)
-\end_layout
-
-\begin_layout Plain Layout
-
-%m <- mm[,c("logA","logAq","hhid2012","toteducexpense")]
-\end_layout
-
-\begin_layout Plain Layout
-
-%mb <- ddply(m,.(logAq),summarise,toteducexpense=mean(toteducexpense))
-\end_layout
-
-\begin_layout Plain Layout
-
-%barplot(mb$toteducexpense*1e-6,names.arg=seq(10)/10,las=1,xlab='asset worth
- decile',ylab='mean educ expense (m)')
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename figures/tnz_ngr_educranks2012.png
-	width 6in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:HistEducationRanks"
-
-\end_inset
-
-Education ranks for populations in Tanzania and Nigeria (2012)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename figures/tnz_ngr_schooltype2012.png
-	width 6in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:BarChartSchoolTypes"
-
-\end_inset
-
-School types for non-adult population in Tanzania and Nigeria (2012)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename figures/tnz_ngr_toteducexpense2012.png
-	width 6in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:BarChartEducationbyAssetDeciles"
-
-\end_inset
-
-Educational expenses averages over deciles of asset worth in in Tanzania
- and Nigeria (2012)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% Getting rural vs urban average expenditures 
-\end_layout
-
-\begin_layout Plain Layout
-
-% ddply(tn$df2012 [,c("hhid2012","toteducexpense","isrural")],.(isrural),summaris
-e,toteducexpense=mean(toteducexpense))
-\end_layout
-
-\begin_layout Plain Layout
-
-% Getting children's education-rank averages
-\end_layout
-
-\begin_layout Plain Layout
-
-% ced <- merge(unique(subset(o2012,age<18  & !is.na(highest_educ))[c("hhid","educ
-ation_rank")]),unique(plyr::rename(tn$df2012,c("hhid2012"="hhid"))[,c("hhid","to
-teducexpense")]))
-\end_layout
-
-\begin_layout Plain Layout
-
-% ddply(ced,.(education_rank),summarise,toteducexpense2=mean(toteducexpense),
- n=length(toteducexpense))
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%exports: source OEC
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Of the two economies, a higher percent of the GDP comes from agricultural
- production in Tanzania.
- The per-capita GDP 2020 for Nigeria (2396.04 USD) is much higher than that
- of Tanzania (976.16 USD) (source World Bank).
- As of 2020, Nigeria had a population of 206.1 million and Tanzania's population
- was 59.7 million (source: World Bank).
- The GDP from manufacturing, mining and construction is nearly double for
- Nigeria (8749.61 million USD in 2022) compared to Tanzania (4221.41 million
- USD in 2021).
- Nigeria's GDP from agriculture is 9311.36 million USD and Tanzania's is
- 4313.47 million USD.
- Some structural differences and the differences in infrastructure in the
- two economies arise due to higher reliance on energy exports for Nigeria
- - which, as of 2020, exports $35.9 billion crude-gas and imports $7.75 billion
- of refined Petroleum apart from cars ($3.03 billion) and wheat ($2 billion).
- On the other hand, Tanzania's major exports are Gold and other minerals
- ($3 billion) followed by agricultural products (0.594$ billion).
- The major imports of Tanzania are refined copper and petroleum ($2.2B).
- Among the two economies, Nigeria relies less on the agrarian exports and
- more on the energy-related infrastructure - likely accounting for higher
- average education levels in Nigeria (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:HistEducationRanks"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- The role of private education is also much higher in Nigeria (see Figure
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:BarChartSchoolTypes"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Standard
-The urban residents spend much higher on education than the rural residents
- in both the economies.
- More specifically, urban residents spend 2.34 times more than rural residents
- in Nigeria whereas they spend 2.8 times more in Tanzania.
- The secondary education appears to get much costlier in Tanzania since
- the mean education expenditure for education rank 3 is almost double that
- of the expenditure on education rank 2 in Tanzania.
- In Nigeria, these expenditures rise by about 54%.
- The educational expenses do not seem to rise much with asset disparities
- in Nigeria - whereas they seem to be more unequally distributed in Tanzania
- (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:BarChartEducationbyAssetDeciles"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-Comparing the overall distribution of assets (durable goods stocks), we
- see that while the overall poverty may appear similar in Nigeria and Tanzania,
- the disparity in owned assets is far more extreme in Tanzania (particularly
- between the south of the country and the east - see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:occupations_r_ngr"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- for Nigeria and Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:occupations_r_tn"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- for Tanzania).
- More specifically, the occupations associated with higher income seem far
- fewer in the hinterland than in the east coast of Tanzania (see Figure
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:occupations_r_tn"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-) whereas the income-disparities in occupations and asset-differences appear
- less extreme in Nigeria (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:occupations_r_ngr"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- The inequality in expenditure on non-durable consumption - on the other
- hand - is not as different for the two economies.
- This can be verified with the Lorenz curves for total non-durable expenditure
- and total assets in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:LorenzCurves"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement h
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename figures/tnz_ngr_lorenz_curves_assets_logx_district_individual.png
-	width 3.75in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:LorenzCurves"
-
-\end_inset
-
-Inequality in assets and non-durable expenditure across households and districts
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-onecolumn
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement h
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename tnz_assets_occuprank_distribution_2012.png
-	width 3in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:occupations_r_tn"
-
-\end_inset
-
-Occupations and consumer-owned assets in Tanzania
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement h
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ngr_occup_2012.png
-	width 4in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:occupations_r_ngr"
-
-\end_inset
-
-Occupations and consumer-owned assets in Nigeria
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The occupation ranks shown in Figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:occupations_r_tn"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- (Tanzania) and Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:occupations_r_ngr"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- (Nigeria) are based on the standardisation of various occupations in Tanzania
- and Nigeria.
- Since the range of occupations in the surveys from Tanzania and Nigeria
- is varied, the different occupations in the survey for Tanzania and Nigeria
- have been standardised into occupation ranks (ranging from 0 to 3) based
- on the data on income derived from the occupations in the survey so that
- a higher occupation rank represents an occupation that provides higher
- income.
- The reason why the income itself is not shown in the plots is that the
- data on income is far sparser than the recall of assets and reporting of
- occupations in the surveys from both the countries
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-It is not uncommon for the empirical studies in SSA to have the data on
- occupation or education proxy the income differences (Alesina et al.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "AlesinaMobilityAfrica2019"
-literal "false"
-
-\end_inset
-
-).
- The primary reason for this is the sparsity of income data - a problem
- that may be further aggravated because of a large informal sectors in the
- economies.
-\end_layout
-
-\end_inset
-
-.
- The mapping from specific occupations to the occupation-ranks for Tanzania
- and Nigeria is shown in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{occupation_rank_tn}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{occupation_rank_ngr}
-\end_layout
-
-\end_inset
-
- (respectively).
- As described in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Data"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the education levels are also mapped to education ranks denoting primary,
- secondary and higher education (see Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{education_rank_tnz}
-\end_layout
-
-\end_inset
-
- for Tanzania and Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{education_rank_ngr}
-\end_layout
-
-\end_inset
-
- for Nigeria).
-\end_layout
-
-\begin_layout Standard
-While we undertake a more detailed view on education expenses in the Section
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Results"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the key observation from the data is that the disparities in income and
- durable goods are more localised in Nigeria while they are more extreme
- across wider geographical regions in Tanzania.
- More specifically, despite the southern areas of Nigeria having more higher-pai
-d occupations and a higher expenditure on non-durable expenditure overall
- (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:occupations_r_ngr"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-), the disparity in durable-goods ownership across regions is not as extreme
- as in Tanzania.
- The particular interpretation of urbanisation is used to explain the implicatio
-ns of this non-uniformity on consumption and educational expenses in Section
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Results"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% Lorenz curve plots
-\end_layout
-
-\begin_layout Plain Layout
-
-%plot(Lc(exp(ng$df2015$logx)))
-\end_layout
-
-\begin_layout Plain Layout
-
-% for individual totexp
-\end_layout
-
-\begin_layout Plain Layout
-
-%lorenz_curve(dat_a = exp(tn2012$logx),dat_b = exp(ng$df2012$logx),dat_a_name
- = "Tanzania",dat_b_name = "Nigeria",xlab = "Households",ylab = "Total Expenditu
-re",use_cex = 1.)
-\end_layout
-
-\begin_layout Plain Layout
-
-% for district level totexp
-\end_layout
-
-\begin_layout Plain Layout
-
-%lorenz_curve(dat_a = exp(district_means(dat=tn2012,hhid_col = "hhid2012",field_
-type = "logx")$mean_logx),dat_b = exp(district_means(dat=ng$df2012,hhid_col
- = "hhid",field_type = "logx")$mean_logx),dat_a_name = "Tanzania",dat_b_name
- = "Nigeria",xlab = "Districts",ylab = "Total Expenditure",use_cex = 1.)
-\end_layout
-
-\begin_layout Plain Layout
-
-% for district level assets
-\end_layout
-
-\begin_layout Plain Layout
-
-%lorenz_curve(dat_a = exp(district_means(dat=tn2012,hhid_col = "hhid2012",field_
-type = "logA")$mean_logA),dat_b = exp(district_means(dat=ng$df2012,hhid_col
- = "hhid",field_type = "logA")$mean_logA),dat_a_name = "Tanzania",dat_b_name
- = "Nigeria",xlab = "Districts",ylab = "Total Assets",use_cex = 1.)
-\end_layout
-
-\begin_layout Plain Layout
-
-% For individual assets
-\end_layout
-
-\begin_layout Plain Layout
-
-%lorenz_curve(dat_a = exp(tn2012$logA),dat_b = exp(ng$df2012$logA),dat_a_name
- = "Tanzania",dat_b_name = "Nigeria",xlab = "Household",ylab = "Total Assets",us
-e_cex = 1.)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Results"
-
-\end_inset
-
-Results
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% We don't have panel information for 2012-2014 (for Tanzania).
- So we won't be using panel data.
- Pseudo-panel is a possibility but not considered.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The two dependent variables we use in the estimation described in Section
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Econometric-Method"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- (see Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:main_estimation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-) are the budget shares for educational expenses (
-\begin_inset Formula $w_{educ}$
-\end_inset
-
-) and total expenditures 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- .
- These dependent variables are listed in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Dependent Variables"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The controls used in this estimation are listed in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Control-Variables"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Float table
-placement h
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0.7in">
-<column alignment="center" valignment="top" width="1in">
-<column alignment="left" valignment="top" width="4in">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Dependent Variable
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Variable Name
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Description
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $w_{educ}$
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-w_educ
-\family default
-\size default
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-budget share of the educational expenses
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size small
-log_educ
-\family default
-\size default
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-logarithm of the educational expenses
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:Dependent Variables"
-
-\end_inset
-
-Dependent Variables
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
 \align center
 \begin_inset Float table
@@ -5444,6 +4398,1052 @@ Control Variables
 
 \end_layout
 
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:AnalysisAndResults"
+
+\end_inset
+
+Empirical Analysis and Results
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:DescriptiveStatistics"
+
+\end_inset
+
+Descriptive Statistics
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%o2012ed <- o2012[,c("hhid","personid","schoolowner","age","education_rank")]
+\end_layout
+
+\begin_layout Plain Layout
+
+%o2012ed$education_rank[is.na(o2012ed$education_rank)] <-0
+\end_layout
+
+\begin_layout Plain Layout
+
+%hist(o2012ed$education_rank,main='',xlab="Education Rank",ylab='Number
+ of Households')
+\end_layout
+
+\begin_layout Plain Layout
+
+%k<- subset(ddply(subset(o2012ed,age<18 & !is.na(schoolowner)) %>% mutate(schoolt
+ype = sapply(schoolowner, school_type)),.(schooltype),summarise,n=length(hhid)),!
+is.na(schooltype))
+\end_layout
+
+\begin_layout Plain Layout
+
+%barplot(k$n,names.arg=k$schooltype,las=1,xlab='school type',ylab='num households
+')
+\end_layout
+
+\begin_layout Plain Layout
+
+%o2012ed <- o2012[,c("hhid","personid","schoolowner","age","")]
+\end_layout
+
+\begin_layout Plain Layout
+
+%mm <- tn$df2012 %>% mutate( logAq = sapply(tn$df2012$logA,function(x) {
+ as.numeric(j[j>=x][1])}))
+\end_layout
+
+\begin_layout Plain Layout
+
+% ========= DECILE PLOT ============
+\end_layout
+
+\begin_layout Plain Layout
+
+%j <- quantile(tn$df2012$logA,seq(10)/10)
+\end_layout
+
+\begin_layout Plain Layout
+
+%m <- mm[,c("logA","logAq","hhid2012","toteducexpense")]
+\end_layout
+
+\begin_layout Plain Layout
+
+%mb <- ddply(m,.(logAq),summarise,toteducexpense=mean(toteducexpense))
+\end_layout
+
+\begin_layout Plain Layout
+
+%barplot(mb$toteducexpense*1e-6,names.arg=seq(10)/10,las=1,xlab='asset worth
+ decile',ylab='mean educ expense (m)')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/tnz_ngr_educranks2012.png
+	width 6in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:HistEducationRanks"
+
+\end_inset
+
+Education ranks for populations in Tanzania and Nigeria (2012)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/tnz_ngr_schooltype2012.png
+	width 6in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:BarChartSchoolTypes"
+
+\end_inset
+
+School types for non-adult population in Tanzania and Nigeria (2012)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/tnz_ngr_toteducexpense2012.png
+	width 6in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:BarChartEducationbyAssetDeciles"
+
+\end_inset
+
+Educational expenses averages over deciles of asset worth in in Tanzania
+ and Nigeria (2012)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Getting rural vs urban average expenditures 
+\end_layout
+
+\begin_layout Plain Layout
+
+% ddply(tn$df2012 [,c("hhid2012","toteducexpense","isrural")],.(isrural),summaris
+e,toteducexpense=mean(toteducexpense))
+\end_layout
+
+\begin_layout Plain Layout
+
+% Getting children's education-rank averages
+\end_layout
+
+\begin_layout Plain Layout
+
+% ced <- merge(unique(subset(o2012,age<18  & !is.na(highest_educ))[c("hhid","educ
+ation_rank")]),unique(plyr::rename(tn$df2012,c("hhid2012"="hhid"))[,c("hhid","to
+teducexpense")]))
+\end_layout
+
+\begin_layout Plain Layout
+
+% ddply(ced,.(education_rank),summarise,toteducexpense2=mean(toteducexpense),
+ n=length(toteducexpense))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%exports: source OEC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Of the two economies, a higher percent of the GDP comes from agricultural
+ production in Tanzania.
+ The per-capita GDP 2020 for Nigeria (2396.04 USD) is much higher than that
+ of Tanzania (976.16 USD) (source World Bank).
+ As of 2020, Nigeria had a population of 206.1 million and Tanzania's population
+ was 59.7 million (source: World Bank).
+ The GDP from manufacturing, mining and construction is nearly double for
+ Nigeria (8749.61 million USD in 2022) compared to Tanzania (4221.41 million
+ USD in 2021).
+ Nigeria's GDP from agriculture is 9311.36 million USD and Tanzania's is
+ 4313.47 million USD.
+ Some structural differences and the differences in infrastructure in the
+ two economies arise due to higher reliance on energy exports for Nigeria
+ - which, as of 2020, exports $35.9 billion crude-gas and imports $7.75 billion
+ of refined Petroleum apart from cars ($3.03 billion) and wheat ($2 billion).
+ On the other hand, Tanzania's major exports are Gold and other minerals
+ ($3 billion) followed by agricultural products (0.594$ billion).
+ The major imports of Tanzania are refined copper and petroleum ($2.2B).
+ Among the two economies, Nigeria relies less on the agrarian exports and
+ more on the energy-related infrastructure - likely accounting for higher
+ average education levels in Nigeria (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:HistEducationRanks"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The role of private education is also much higher in Nigeria (see Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BarChartSchoolTypes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+The urban residents spend much higher on education than the rural residents
+ in both the economies.
+ More specifically, urban residents spend 2.34 times more than rural residents
+ in Nigeria whereas they spend 2.8 times more in Tanzania.
+ The secondary education appears to get much costlier in Tanzania since
+ the mean education expenditure for education rank 3 is almost double that
+ of the expenditure on education rank 2 in Tanzania.
+ In Nigeria, these expenditures rise by about 54%.
+ The educational expenses do not seem to rise much with asset disparities
+ in Nigeria - whereas they seem to be more unequally distributed in Tanzania
+ (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BarChartEducationbyAssetDeciles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Comparing the overall distribution of assets (durable goods stocks), we
+ see that while the overall poverty may appear similar in Nigeria and Tanzania,
+ the disparity in owned assets is far more extreme in Tanzania (particularly
+ between the south of the country and the east - see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:occupations_r_ngr"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for Nigeria and Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:occupations_r_tn"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for Tanzania).
+ More specifically, the occupations associated with higher income seem far
+ fewer in the hinterland than in the east coast of Tanzania (see Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:occupations_r_tn"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) whereas the income-disparities in occupations and asset-differences appear
+ less extreme in Nigeria (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:occupations_r_ngr"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The inequality in expenditure on non-durable consumption - on the other
+ hand - is not as different for the two economies.
+ This can be verified with the Lorenz curves for total non-durable expenditure
+ and total assets in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LorenzCurves"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/tnz_ngr_lorenz_curves_assets_logx_district_individual.png
+	width 3.75in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LorenzCurves"
+
+\end_inset
+
+Inequality in assets and non-durable expenditure across households and districts
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+onecolumn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename tnz_assets_occuprank_distribution_2012.png
+	width 3in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:occupations_r_tn"
+
+\end_inset
+
+Occupations and consumer-owned assets in Tanzania
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ngr_occup_2012.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:occupations_r_ngr"
+
+\end_inset
+
+Occupations and consumer-owned assets in Nigeria
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The occupation ranks shown in Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:occupations_r_tn"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (Tanzania) and Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:occupations_r_ngr"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (Nigeria) are based on the standardisation of various occupations in Tanzania
+ and Nigeria.
+ Since the range of occupations in the surveys from Tanzania and Nigeria
+ is varied, the different occupations in the survey for Tanzania and Nigeria
+ have been standardised into occupation ranks (ranging from 0 to 3) based
+ on the data on income derived from the occupations in the survey so that
+ a higher occupation rank represents an occupation that provides higher
+ income.
+ The reason why the income itself is not shown in the plots is that the
+ data on income is far sparser than the recall of assets and reporting of
+ occupations in the surveys from both the countries
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+It is not uncommon for the empirical studies in SSA to have the data on
+ occupation or education proxy the income differences (Alesina et al.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AlesinaMobilityAfrica2019"
+literal "false"
+
+\end_inset
+
+).
+ The primary reason for this is the sparsity of income data - a problem
+ that may be further aggravated because of a large informal sectors in the
+ economies.
+\end_layout
+
+\end_inset
+
+.
+ The mapping from specific occupations to the occupation-ranks for Tanzania
+ and Nigeria is shown in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{occupation_rank_tn}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{occupation_rank_ngr}
+\end_layout
+
+\end_inset
+
+ (respectively).
+ As described in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the education levels are also mapped to education ranks denoting primary,
+ secondary and higher education (see Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{education_rank_tnz}
+\end_layout
+
+\end_inset
+
+ for Tanzania and Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{education_rank_ngr}
+\end_layout
+
+\end_inset
+
+ for Nigeria).
+\end_layout
+
+\begin_layout Standard
+While we undertake a more detailed view on education expenses in the Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Results"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the key observation from the data is that the disparities in income and
+ durable goods are more localised in Nigeria while they are more extreme
+ across wider geographical regions in Tanzania.
+ More specifically, despite the southern areas of Nigeria having more higher-pai
+d occupations and a higher expenditure on non-durable expenditure overall
+ (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:occupations_r_ngr"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), the disparity in durable-goods ownership across regions is not as extreme
+ as in Tanzania.
+ The particular interpretation of urbanisation is used to explain the implicatio
+ns of this non-uniformity on consumption and educational expenses in Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Results"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Lorenz curve plots
+\end_layout
+
+\begin_layout Plain Layout
+
+%plot(Lc(exp(ng$df2015$logx)))
+\end_layout
+
+\begin_layout Plain Layout
+
+% for individual totexp
+\end_layout
+
+\begin_layout Plain Layout
+
+%lorenz_curve(dat_a = exp(tn2012$logx),dat_b = exp(ng$df2012$logx),dat_a_name
+ = "Tanzania",dat_b_name = "Nigeria",xlab = "Households",ylab = "Total Expenditu
+re",use_cex = 1.)
+\end_layout
+
+\begin_layout Plain Layout
+
+% for district level totexp
+\end_layout
+
+\begin_layout Plain Layout
+
+%lorenz_curve(dat_a = exp(district_means(dat=tn2012,hhid_col = "hhid2012",field_
+type = "logx")$mean_logx),dat_b = exp(district_means(dat=ng$df2012,hhid_col
+ = "hhid",field_type = "logx")$mean_logx),dat_a_name = "Tanzania",dat_b_name
+ = "Nigeria",xlab = "Districts",ylab = "Total Expenditure",use_cex = 1.)
+\end_layout
+
+\begin_layout Plain Layout
+
+% for district level assets
+\end_layout
+
+\begin_layout Plain Layout
+
+%lorenz_curve(dat_a = exp(district_means(dat=tn2012,hhid_col = "hhid2012",field_
+type = "logA")$mean_logA),dat_b = exp(district_means(dat=ng$df2012,hhid_col
+ = "hhid",field_type = "logA")$mean_logA),dat_a_name = "Tanzania",dat_b_name
+ = "Nigeria",xlab = "Districts",ylab = "Total Assets",use_cex = 1.)
+\end_layout
+
+\begin_layout Plain Layout
+
+% For individual assets
+\end_layout
+
+\begin_layout Plain Layout
+
+%lorenz_curve(dat_a = exp(tn2012$logA),dat_b = exp(ng$df2012$logA),dat_a_name
+ = "Tanzania",dat_b_name = "Nigeria",xlab = "Household",ylab = "Total Assets",us
+e_cex = 1.)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="center" valignment="top" width="1in">
+<column alignment="left" valignment="top" width="4in">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dependent Variable
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variable Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+w_educ
+\family default
+\size default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+budget share of the educational expenses
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size small
+log_educ
+\family default
+\size default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+logarithm of the educational expenses
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Dependent Variables"
+
+\end_inset
+
+Dependent Variables
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Results"
+
+\end_inset
+
+Results
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% We don't have panel information for 2012-2014 (for Tanzania).
+ So we won't be using panel data.
+ Pseudo-panel is a possibility but not considered.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The two dependent variables we use in the estimation described in Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Econometric-Method"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:main_estimation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) are the budget shares for educational expenses (
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+) and total expenditures 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ .
+ These dependent variables are listed in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Dependent Variables"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The controls used in this estimation are listed in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Control-Variables"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -5820,209 +5820,84 @@ The results from the OLS estimation for
 \begin_inset Formula $w_{educ}$
 \end_inset
 
- are shown in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_district_weduc}
-\end_layout
-
-\end_inset
-
  and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_weduc}
-\end_layout
-
-\end_inset
-
- for Tanzania and Nigeria respectively.
- The cross-section results are presented for the latest available year 2014
- in Tanzania and the year 2015 in Nigeria.
- The results in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_district_weduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_weduc}
-\end_layout
-
-\end_inset
-
- use the permanent income measure 
-\begin_inset Formula $log(x)$
-\end_inset
-
- (
-\family typewriter
-\size small
-logx
-\family default
-\size default
-) with the wealth-concentration (
-\family typewriter
-\size small
-r
-\family default
-\size default
-) in the consumer's district while the results in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_ur_district_weduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_ur_district_weduc}
-\end_layout
-
-\end_inset
-
- use the logarithm of total assets value 
-\begin_inset Formula $log(A)$
-\end_inset
-
- (
-\family typewriter
-\size small
-logA
-\family default
-\size default
-) and the ruralness-score 
-\family typewriter
-\size small
-rural_wards
-\family default
-\size default
-.
- Similarly, the results for 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- with permanent income measure 
-\begin_inset Formula $log(x)$
+ with wealth-concentration as one of the controls are shown in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZNGR_r}
+\end_layout
+
 \end_inset
 
- (
+ for both Tanzania and Nigeria.
+ A discussion on the cross-section results from the latest available years
+ 2014 for Tanzania and 2015 for Nigeria follows in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Discussion"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZNGR_urbanrural}
+\end_layout
+
+\end_inset
+
+ shows the results with the ruralness-score 
 \family typewriter
 \size small
-logx
+rural_wards 
 \family default
 \size default
-) and wealth-concentration (
+(based on the survey's classificaiton of rural and urban areas) as one of
+ the explanatory variables - used in place of wealth concentration 
 \family typewriter
 \size small
 r
 \family default
 \size default
-) are shown in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_district_logeduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_logeduc}
-\end_layout
-
-\end_inset
-
- while those using 
+ - along with the logarithm of total assets value 
 \begin_inset Formula $log(A)$
 \end_inset
 
- (
+ 
 \family typewriter
 \size small
 logA
 \family default
 \size default
-) and the ruralness-score 
+ used as the measure of household wealth (used in place of the permanent
+ income measure 
+\begin_inset Formula $log(x)$
+\end_inset
+
+ 
 \family typewriter
 \size small
-rural_wards
+logx
 \family default
 \size default
- are shown in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_ur_district_logeduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_ur_district_logeduc}
-\end_layout
-
-\end_inset
-
-.
+) .
 \end_layout
 
 \begin_layout Subsection
@@ -6078,20 +5953,7 @@ status open
 
 
 \backslash
-ref{tabTNZ_district_weduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_weduc}
+ref{tabTNZNGR_r}
 \end_layout
 
 \end_inset
@@ -6121,7 +5983,7 @@ logx
 logx
 \family default
 \size default
-) and wealth-concentration (urban-rural) controls in Tables 
+) and wealth-concentration controls in Tables 
 \begin_inset ERT
 status open
 
@@ -6129,12 +5991,12 @@ status open
 
 
 \backslash
-ref{tabTNZ_district_logeduc}
+ref{tabTNZNGR_r}
 \end_layout
 
 \end_inset
 
- and 
+ (as well as those against the ruralness-score in Table 
 \begin_inset ERT
 status open
 
@@ -6142,33 +6004,7 @@ status open
 
 
 \backslash
-ref{tabNGR_district_logeduc}
-\end_layout
-
-\end_inset
-
- (and in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_ur_district_logeduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_ur_district_logeduc}
+ref{tabTNZNGR_urbanrural}
 \end_layout
 
 \end_inset
@@ -6243,7 +6079,8 @@ It is in fact the wealth concentration in districts (or urbanisation) that
 \family typewriter
 r
 \family default
- remains insignificant for Tanzania (compare Tables 
+ remains insignificant for Tanzania (compare coefficients for r against
+ both the countries in Table 
 \begin_inset ERT
 status open
 
@@ -6251,25 +6088,12 @@ status open
 
 
 \backslash
-ref{tabTNZ_district_logeduc}
+ref{tabTNZNGR_r}
 \end_layout
 
 \end_inset
 
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_logeduc}
-\end_layout
-
-\end_inset
-
- ).
+).
  Using the urbanisation measured with the ruralness score 
 \family typewriter
 rural_wards
@@ -6283,7 +6107,7 @@ rural_wards
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- for Tanzania (see Tables 
+ for Tanzania (see Table 
 \begin_inset ERT
 status open
 
@@ -6291,25 +6115,12 @@ status open
 
 
 \backslash
-ref{tabTNZ_ur_district_logeduc}
+ref{tabTNZNGR_urbanrural}
 \end_layout
 
 \end_inset
 
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_ur_district_logeduc}
-\end_layout
-
-\end_inset
-
- ).
+).
  
 \end_layout
 
@@ -6387,7 +6198,7 @@ educpriv
 \end_inset
 
  i.e.
- the education expenditure as dependent variable for Nigeria (see Tables
+ the education expenditure as dependent variable for Nigeria (see Table
  
 \begin_inset ERT
 status open
@@ -6396,20 +6207,7 @@ status open
 
 
 \backslash
-ref{tabNGR_district_logeduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_ur_district_logeduc}
+ref{tabTNZNGR_r}
 \end_layout
 
 \end_inset
@@ -6466,26 +6264,13 @@ status open
 
 
 \backslash
-ref{tabTNZ_district_weduc}
+ref{tabTNZNGR_r}
 \end_layout
 
 \end_inset
 
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_weduc}
-\end_layout
-
-\end_inset
-
- ) and the attendance for secondary and tertiary-education remains much
- lower (see coefficients of
+) and the attendance for secondary and tertiary-education remains much lower
+ (see coefficients of
 \family typewriter
  is_secondaryage
 \family default
@@ -6493,7 +6278,11 @@ ref{tabNGR_district_weduc}
 \family typewriter
 is_tertiaryage
 \family default
- in Tables 
+ for 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ dependent variable in Table 
 \begin_inset ERT
 status open
 
@@ -6501,12 +6290,12 @@ status open
 
 
 \backslash
-ref{tabTNZ_district_logeduc}
+ref{tabTNZNGR_r}
 \end_layout
 
 \end_inset
 
- and 
+ as well as in Table 
 \begin_inset ERT
 status open
 
@@ -6514,38 +6303,12 @@ status open
 
 
 \backslash
-ref{tabNGR_district_logeduc}
+ref{tabTNZNGR_urbanrural}
 \end_layout
 
 \end_inset
 
- as well as in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_ur_district_weduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_ur_district_weduc}
-\end_layout
-
-\end_inset
-
- ).
+).
  With the results for 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
@@ -6558,25 +6321,12 @@ status open
 
 
 \backslash
-ref{tabTNZ_ur_district_logeduc}
+ref{tabTNZNGR_urbanrural}
 \end_layout
 
 \end_inset
 
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_ur_district_logeduc}
-\end_layout
-
-\end_inset
-
-, we see that the role of 
+ in particular, we see that the role of 
 \family typewriter
 secondary_schools
 \family default
@@ -6617,39 +6367,9 @@ numchild
 \end_layout
 
 \begin_layout Standard
-We also see that the agrarian households spend higher on education (compare
- the coefficients of 
-\family typewriter
-r_agri
-\family default
- in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_district_logeduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_logeduc}
-\end_layout
-
-\end_inset
-
-) - after considering the wealth-concentration among households with the
- same educational-status (
+We also see that the agrarian households spend higher on education after
+ considering the wealth-concentration among households with the same educational
+-status (
 \begin_inset Formula $\Gamma$
 \end_inset
 
@@ -6669,7 +6389,7 @@ l status measured through
 \family typewriter
 1.is_agri
 \family default
- in Tables 
+ in Table 
 \begin_inset ERT
 status open
 
@@ -6677,32 +6397,24 @@ status open
 
 
 \backslash
-ref{tabTNZ_district_logeduc}
+ref{tabTNZNGR_r}
 \end_layout
 
 \end_inset
 
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_logeduc}
-\end_layout
-
+ for 
+\begin_inset Formula $log(x_{educ})$
 \end_inset
 
- ).
+ as the dependent variable).
  Again, this in part due to a significant portion of education expenses
  being spent on primary education in Tanzania.
 \end_layout
 
 \begin_layout Standard
-Without using the wealth-concentration, the role of rural and urban areas
- is less straightforward in the two economies.
+It is worth pointing out that the comparison of rural and urban areas is
+ less straightforward with the use of urban-rural indicators alone - rather
+ than wealth-concentration - in the two economies.
  The coefficents of 
 \begin_inset Formula $\gamma$
 \end_inset
@@ -6715,7 +6427,7 @@ rural_wards
 \begin_inset Formula $w_{educ}$
 \end_inset
 
- are negative and significant for Tanzania in Tables 
+ are negative and significant for Tanzania in Table 
 \begin_inset ERT
 status open
 
@@ -6723,25 +6435,12 @@ status open
 
 
 \backslash
-ref{tabTNZ_ur_district_weduc}
+ref{tabTNZNGR_urbanrural}
 \end_layout
 
 \end_inset
 
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_ur_district_logeduc}
-\end_layout
-
-\end_inset
-
- .
+.
  While the urban-rural indicators seem to indicate higher expenditure on
  education by the rural residents in Nigeria (see significance of 
 \family typewriter
@@ -6755,14 +6454,14 @@ status open
 
 
 \backslash
-ref{tabNGR_ur_district_logeduc}
+ref{tabTNZNGR_urbanrural}
 \end_layout
 
 \end_inset
 
- ), this may be likely due that the wards identified as rural in Nigeria
- not being as rural as those identified as rural in Tanzania.
- This is indicated by the weaker role of wealth 
+ ), this is likely due that the wards identified as rural in Nigeria not
+ being as rural as those identified as rural in Tanzania.
+ This is confirm with the weaker role of wealth 
 \begin_inset Formula $log(A)$
 \end_inset
 
@@ -6778,7 +6477,7 @@ status open
 
 
 \backslash
-ref{tabNGR_ur_district_logeduc}
+ref{tabTNZNGR_urbanrural}
 \end_layout
 
 \end_inset
@@ -6799,15 +6498,15 @@ status open
 
 
 \backslash
-ref{tabNGR_district_logeduc}
+ref{tabTNZNGR_r}
 \end_layout
 
 \end_inset
 
  for Nigeria.
- In the particular instance, wealth-concentration seems to provide a more
- clear-cut and standardised interpretation of urbanisation in the two economies
- than the survey's urban / rural classification.
+ The wealth-concentration thus seems to provide a more clear-cut and standardise
+d interpretation of urbanisation in the two economies than what may be provided
+ using the survey's urban / rural classification.
 \end_layout
 
 \begin_layout Standard
@@ -6823,7 +6522,7 @@ While the wealth effects in Tanzania are stronger, they must be considered
 \family typewriter
 logA 
 \family default
-) in Tables 
+) in Table 
 \begin_inset ERT
 status open
 
@@ -6831,51 +6530,12 @@ status open
 
 
 \backslash
-ref{tabTNZ_ur_district_weduc}
+ref{tabTNZNGR_urbanrural}
 \end_layout
 
 \end_inset
 
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_ur_district_weduc}
-\end_layout
-
-\end_inset
-
- (as well as in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_ur_district_logeduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_ur_district_logeduc}
-\end_layout
-
-\end_inset
-
-) does indicate a general trend where those with higher inter-generational
+ does indicate a general trend where those with higher inter-generational
  wealth and in urban areas are far more likely to avail the education facilities
 , but a higher dependence on industrial output in Nigeria also seems to
  have contributed to a higher demand for secondary and tertiary education
@@ -6900,905 +6560,6 @@ Finally, the role of social environment is significantly strong in both
  educational institutions while in Nigeria, the role played by Christian
  missionaries in establishment of educational may be reflected in the disparity
  of access to educational facilities.
-\end_layout
-
-\begin_layout Subsection
-Robustness Checks
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-As the first robustness check, we the reestimate the results with wealth
- concentration 
-\family typewriter
-r
-\family default
- as the explanatory variable for those with less than the local median wealth
- (
-\begin_inset Formula $log(A)$
-\end_inset
-
- 
-\family typewriter
-logA
-\family default
-) and for those above it.
- The results demonstrate how the education expenditures (weights 
-\begin_inset Formula $w_{educ}$
-\end_inset
-
- and 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- ) differ between the poorer and richer households in a given locality.
- The results for above and below local median-assets possession using 
-\begin_inset Formula $w_{educ}$
-\end_inset
-
- as the dependent variable are shown in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_abovemedian_district_weduc}
-\end_layout
-
-\end_inset
-
-, 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_belowmedian_district_weduc}
-\end_layout
-
-\end_inset
-
- for Tanzania and in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_abovemedian_district_weduc}
-\end_layout
-
-\end_inset
-
-, 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_belowmedian_district_weduc}
-\end_layout
-
-\end_inset
-
- for Nigeria.
- The results for above and below local median-assets possession with 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- as the dependent variable are shown in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_abovemedian_district_logeduc}
-\end_layout
-
-\end_inset
-
-, 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_belowmedian_district_logeduc}
-\end_layout
-
-\end_inset
-
- for Tanzania and in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_abovemedian_district_logeduc}
-\end_layout
-
-\end_inset
-
-, 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_belowmedian_district_logeduc}
-\end_layout
-
-\end_inset
-
- for Nigeria.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%[Results from first robustness check ] social factors and secondary_schools
- .
- educpriv expected.
- tertiary_school level lower.
- num_child more nuanced - as is r.
- father_educ_rank also different.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The role of social effects seems validated with these results as the significanc
-e of social factors remains unaffected by whether the consumers have above
- or below the median asset ownership level.
- More specifically, the factors 
-\family typewriter
-has_english
-\family default
- and 
-\family typewriter
-religion 
-\family default
-are significant in results from Tanzania and Nigeria (respectively) for
- both richer and poorer households.
- The variable 
-\family typewriter
-has_english
-\family default
- is significant in both Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_abovemedian_district_weduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_belowmedian_district_weduc}
-\end_layout
-
-\end_inset
-
- for Tanzania while the variable 
-\family typewriter
-religion 
-\family default
-is significant in both Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_abovemedian_district_weduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_belowmedian_district_weduc}
-\end_layout
-
-\end_inset
-
- for Nigeria.
- It is worth pointing out that the economic significance for 
-\family typewriter
-religion 
-\family default
-in Nigeria is higher with 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- as dependent variable (see Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_abovemedian_district_logeduc}
-\end_layout
-
-\end_inset
-
- and Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_belowmedian_district_logeduc}
-\end_layout
-
-\end_inset
-
-) .
- 
-\end_layout
-
-\begin_layout Standard
-As one would expect, the effect of 
-\family typewriter
-secondary_schools
-\family default
- is also the same for both richer and poorer halves of a given locality.
- While the role that the wealth-concentration 
-\family typewriter
-r
-\family default
- plays towards access to education appears to be the same for the rich and
- poor halves in a locality as well, we do see a higher economic significance
- of 
-\family typewriter
-r
-\family default
- for the below-median-assets household in Nigeria - possibly because of
- high education costs in urban areas where asset-possession may be lower.
- The access to private education and to higher education favour the richer
- households in both economies - as the economic significance of 
-\family typewriter
-educpriv 
-\family default
-is consistently higher for richer households as is the expenditure on tertiary
- level education in both the economies.
-\end_layout
-
-\begin_layout Standard
-The number of children have a more significant effect for richer households
- in Tanzania.
- Given a lower participation in higher education in the country, this effect
- seems likely due to the primary-education needs scaling up with the number
- of children in the household.
- As in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Discussion"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the lower levels of average educational attainment in Tanzania seem to
- accentuate the effect of paternal education rank 
-\family typewriter
-fathers_educ_rank 
-\family default
-which has a higher statistical significance for poorer households in Tanzania
- (compare Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_abovemedian_district_logeduc}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_belowmedian_district_logeduc}
-\end_layout
-
-\end_inset
-
-) whereas the significance is not much different for richer and poorer household
-s in Nigeria (see Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_abovemedian_district_logeduc}
-\end_layout
-
-\end_inset
-
-and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_belowmedian_district_logeduc}
-\end_layout
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-The other robustness check we use is the recomputation of wealth concentration
- by considering only those in the household's vicinity with the same value
- of the indicator for primary/higher-than-primary education-level of the
- household-head (and similar for the agrarian/non-agrarian occupation).
- The results provided in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:AnalysisAndResults"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- thus use three types of vicinities.
- The first interpretation is one where a simple average of the total assets
- owned by the households in the consumer's district.
- Both education rank and a factor variable 
-\begin_inset Formula $\Omega$
-\end_inset
-
- indicating whether the household head's occupation is agrarian or not are
- used as controls in this interpretation .
- The second interpretation is based on a factor variable 
-\begin_inset Formula $\Gamma$
-\end_inset
-
- indicating whether the education level of the household-head is higher
- than primary school or not.
- More specifically, the second interpretation uses the prosperity within
- the educational levels implied by 
-\begin_inset Formula $\Gamma$
-\end_inset
-
- (i.e.
- primary and higher-than primary educational levels).
- The agrarian/non-agrarian factor variable 
-\begin_inset Formula $\Omega$
-\end_inset
-
- is also used as the additional control in this second interpretation.
- Finally, the third interpretation is based on the average prosperity in
- the agrarian vs non-agrarian occupations (i.e.
- 
-\begin_inset Formula $\Omega$
-\end_inset
-
-) and uses educational rank as the additional control variable.
- The three interpretations are described in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:ReferenceDefinitions"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Float table
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="3">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="0.7in">
-<column alignment="left" valignment="top" width="2in">
-<column alignment="center" valignment="top" width="1in">
-<row>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Concentration of Wealth
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Description
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Additional Controls 
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $r$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Average over geographical vicinity (district)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\Omega$
-\end_inset
-
- , education-rank
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $r_{\Gamma}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Separate averages over 
-\begin_inset Formula $\Gamma$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\Omega$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $r_{\Omega}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Separate averages over 
-\begin_inset Formula $\Omega$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-education-rank
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:ReferenceDefinitions"
-
-\end_inset
-
-Prosperity levels and control variables used
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The coefficients for 
-\family typewriter
-r_agri
-\family default
-, 
-\family typewriter
-r_educ 
-\family default
-are provided in the columns 
-\family typewriter
-Educ 2014/2015
-\family default
- and 
-\family typewriter
-Agri 2014/2015
-\family default
- in the Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_district_weduc_occed}
-\end_layout
-
-\end_inset
-
-, 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_district_logeduc_occed}
-\end_layout
-
-\end_inset
-
- for Tanzania and Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_weduc_occed}
-\end_layout
-
-\end_inset
-
- , 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_logeduc_occed}
-\end_layout
-
-\end_inset
-
- for Nigeria.
- Here too, we see that the wealth concentration corresponds to a rise in
- educational expenditure 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- for Nigeria but its effect - using either 
-\family typewriter
-r_educ 
-\family default
-and 
-\family typewriter
-r_agri
-\family default
- - is insignificant for Tanzania (compare Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_district_logeduc_occed}
-\end_layout
-
-\end_inset
-
- and 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabNGR_district_logeduc_occed}
-\end_layout
-
-\end_inset
-
- ).
- Further, since the coefficients for secondary-age indicator 
-\family typewriter
-is_secondaryage
-\family default
- seem higher for the occupation cluster (i.e.
- the coefficient 
-\family typewriter
-r_agri
-\family default
-) than for the education-cluster (
-\family typewriter
-r_educ
-\family default
-), it can be argued that education expenses are more often clustered by
- agrarian or non-agrarian occupations than by education levels the populations
- have attained.
-\end_layout
-
-\begin_layout Section
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:Conclusions"
-
-\end_inset
-
-Conclusions
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We had set ourselves to test if wealth effects are stronger than urbanisation
- levels towards education expenses in two economies of the SSA where the
- dependence of one on its industrial output is higher than that of the other.
- While there are idiosyncratic differences between the two countries we've
- used for our comparison, there are some implications for the education
- policy in the region as the countries undergo higher economic development.
-\end_layout
-
-\begin_layout Standard
-Since the agrarian consumers maintain a higher budget share on education
- expenses in the poorer economy (Tanzania) and higher education ranks consistent
-ly correspond to higher education expenses in the more developed economy
- (Nigeria), the educational expenses are likely to remain higher after attainmen
-t of education in the population with increase in regional prosperity.
- This also seems aligned with the recent finding from a cohort-study by
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "porzio2021human"
-literal "false"
-
-\end_inset
-
- that the labour with skills added through education is less willing to
- stay in agricultural activities.
- 
-\end_layout
-
-\begin_layout Standard
-The key finding from the study is that the effects of urbanisation levels
- - whether interpreted as wealth concentration or as urban-rural indicators
- from the survey - are significant on education expenses in both the economies.
- While the rises in education expenses as the employment opportunities increase
- in an economy are inevitable, it is also true that lower wealth continues
- to prevent access to education and mobility.
- However, as the results presented in the chapter indicate, the wealth effects
- are less extreme in the higher developed economy (i.e.
- Nigeria) than in the less developed economy (i.e.
- Tanzania).
- In other words, the wealth effects - after accounting for urbanisation
- - appear to be weaker with rise in urbanisation.
- A rise urbanisation could be associated with weaker wealth effects and
- indicate a pathway to equity in both income and equality.
-\end_layout
-
-\begin_layout Standard
-The importance of urbanisation should not discount the need for policy to
- improve access to education for the lower and middle-income populations
- in the region.
- This is of crucial importance also because the private educational institutions
- - which are more common in Nigeria - do not yet play a major role in the
- provision of education in the region and a more significant role continues
- to be played by the state-institutions in both the economies.
- The improvement of access to education is also relevant due to the issues
- of social exclusion that are indicated by the relevance of social characteristi
-cs in education expenses for both the economies.
- As 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "AlesinaMobilityAfrica2019"
-literal "false"
-
-\end_inset
-
- also demonstrate, the role of religious and colonial institutions in the
- educational mobility across sub-Saharan Africa has been significant.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%[Different levels]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In summary, the development of the education sectors seems to be at different
- stages of development in the Tanzania and Nigeria.
- The privatisation of education in Nigeria seems to have coincided with
- higher attendance of universities in a way that is yet to be seen for Tanzania
- - where education has not been as widespread just yet.
- The wealth effects seem strong in both the economies, but the relevance
- of wealth-concentration in the population having higher education levels
- and higher prosperity points to a promising direction where wealth becomes
- less important for access to education and despite it being limited to
- urban or semi-urban areas, the economic development may improve the access
- employment opportunities for a larger cross-section of the economy.
 \end_layout
 
 \begin_layout Standard
@@ -7919,7 +6680,7 @@ sym{***}&      0.0737
 \backslash
  
 \backslash
-addlinespace r2012       &     0.00513
+addlinespace r       &     0.00513
 \backslash
 sym{***}&      0.0139
 \backslash
@@ -8585,6 +7346,888 @@ end{table}
 
 \end_layout
 
+\begin_layout Subsection
+Robustness Checks
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Tanzania-Nigeria - around median assets-value 
+\backslash
+label{tabTNZNGR_abovebelow_median}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox{6in}{!}{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+sym#1{
+\backslash
+ifmmode^{#1}
+\backslash
+else
+\backslash
+(^{#1}
+\backslash
+)
+\backslash
+fi}     
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular} { c c c  c c c c c c }
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline
+\backslash
+hline       
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+            &
+\backslash
+multicolumn{2}{c}{Above Median $w
+\backslash
+_{educ}$}&
+\backslash
+multicolumn{2}{c}{Above Median $log(x
+\backslash
+_{educ})$}&
+\backslash
+multicolumn{2}{c}{Below Median $w
+\backslash
+_{educ}$}&
+\backslash
+multicolumn{2}{c}{Below Median $log(x
+\backslash
+_{educ})$}
+\backslash
+
+\backslash
+
+\backslash
+cmidrule(lr){2-3}
+\backslash
+cmidrule(lr){4-5}
+\backslash
+cmidrule(lr){6-7}
+\backslash
+cmidrule(lr){8-9}             &
+\backslash
+multicolumn{1}{c}{(1)}         &
+\backslash
+multicolumn{1}{c}{(2)}         &
+\backslash
+multicolumn{1}{c}{(3)}         &
+\backslash
+multicolumn{1}{c}{(4)}         &
+\backslash
+multicolumn{1}{c}{(5)}         &
+\backslash
+multicolumn{1}{c}{(6)}         &
+\backslash
+multicolumn{1}{c}{(7)}         &
+\backslash
+multicolumn{1}{c}{(8)}         
+\backslash
+
+\backslash
+ 
+\backslash
+midrule logx        &    -0.00542         &     -0.0135
+\backslash
+sym{*}  &       1.118
+\backslash
+sym{*}  &       0.439         &     -0.0145
+\backslash
+sym{***}&     -0.0288
+\backslash
+sym{***}&       1.766
+\backslash
+sym{***}&      -0.695         
+\backslash
+
+\backslash
+             &     (-1.35)         &     (-2.50)         &      (2.18)    
+     &      (0.59)         &     (-3.96)         &     (-5.63)         &  
+    (4.13)         &     (-1.05)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace r       &     0.00629
+\backslash
+sym{**} &      0.0135
+\backslash
+sym{**} &      -0.403         &       2.076
+\backslash
+sym{***}&     0.00534
+\backslash
+sym{***}&      0.0127
+\backslash
+sym{**} &      -0.164         &       1.019         
+\backslash
+
+\backslash
+             &      (2.93)         &      (3.11)         &     (-1.42)    
+     &      (3.70)         &      (3.33)         &      (2.71)         &  
+   (-0.58)         &      (1.70)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne&      -0.126         &      0.0422         &       17.56         &    
+  -8.355         &       0.109         &      0.0404         &       8.698 
+        &       7.001         
+\backslash
+
+\backslash
+             &     (-1.34)         &      (0.53)         &      (1.76)    
+     &     (-0.78)         &      (1.66)         &      (0.52)         &  
+    (0.98)         &      (0.69)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace 1.agri      &    -0.00171         &     0.00204         &    
+   1.292         &       0.368         &     0.00430         &     0.00764 
+        &       1.692
+\backslash
+sym{*}  &       1.085         
+\backslash
+
+\backslash
+             &     (-0.32)         &      (0.31)         &      (1.81)    
+     &      (0.42)         &      (0.85)         &      (1.10)         &  
+    (2.01)         &      (1.22)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace 1.educpriv  &      0.0763
+\backslash
+sym{***}&      0.0261
+\backslash
+sym{***}&       4.983
+\backslash
+sym{***}&       0.711         &      0.0469         &      0.0535
+\backslash
+sym{***}&       3.764
+\backslash
+sym{**} &       0.856         
+\backslash
+
+\backslash
+             &      (6.55)         &      (3.77)         &      (7.57)    
+     &      (0.74)         &      (1.72)         &      (5.52)         &  
+    (2.71)         &      (0.64)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace father
+\backslash
+_educ
+\backslash
+_rank&     0.00139         &    0.000748         &      0.0713         &  
+    -0.168         &     0.00219         &     0.00127         &       0.712
+\backslash
+sym{*}  &      0.0595         
+\backslash
+
+\backslash
+             &      (0.67)         &      (0.38)         &      (0.29)    
+     &     (-0.64)         &      (1.01)         &      (0.55)         &  
+    (2.39)         &      (0.20)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace secondary
+\backslash
+_schools&    -0.00135
+\backslash
+sym{***}&     0.00184         &    0.000569         &      -0.623         &
+    -0.00156
+\backslash
+sym{***}&     0.00600         &      0.0189         &       1.989
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+             &     (-5.81)         &      (0.34)         &      (0.02)    
+     &     (-0.84)         &     (-5.18)         &      (0.94)         &  
+    (0.41)         &      (2.39)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace 1.is
+\backslash
+_primaryage&      0.0192
+\backslash
+sym{***}&      0.0166
+\backslash
+sym{*}  &       13.38
+\backslash
+sym{***}&       3.099
+\backslash
+sym{**} &      0.0284
+\backslash
+sym{***}&      0.0204
+\backslash
+sym{*}  &       16.95
+\backslash
+sym{***}&       4.304
+\backslash
+sym{***}
+\backslash
+
+\backslash
+             &      (3.61)         &      (2.15)         &     (17.48)    
+     &      (3.01)         &      (6.31)         &      (2.47)         &  
+   (21.94)         &      (4.20)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace 1.is
+\backslash
+_secondaryage&     0.00973
+\backslash
+sym{*}  &      0.0366
+\backslash
+sym{***}&     -0.0689         &       2.768
+\backslash
+sym{***}&      0.0135
+\backslash
+sym{***}&      0.0277
+\backslash
+sym{***}&       0.442         &       1.846
+\backslash
+sym{*}  
+\backslash
+
+\backslash
+             &      (2.58)         &      (5.87)         &     (-0.11)    
+     &      (3.34)         &      (4.18)         &      (4.35)         &  
+    (0.77)         &      (2.25)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace 1.is
+\backslash
+_tertiaryage&    -0.00461         &     0.00553         &      -2.361
+\backslash
+sym{***}&       0.714         &    -0.00631         &     0.00692         &
+      -1.871
+\backslash
+sym{**} &       1.318         
+\backslash
+
+\backslash
+             &     (-1.03)         &      (0.94)         &     (-4.25)    
+     &      (0.91)         &     (-1.52)         &      (1.03)         &  
+   (-3.15)         &      (1.51)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace 1.has
+\backslash
+_english&      0.0392
+\backslash
+sym{***}&                     &       2.533
+\backslash
+sym{***}&                     &      0.0481
+\backslash
+sym{***}&                     &       3.494
+\backslash
+sym{***}&                     
+\backslash
+
+\backslash
+             &      (7.04)         &                     &      (4.14)   
+      &                     &      (5.78)         &                     &
+      (4.71)         &                     
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace numchild    &    0.000858         &    -0.00182         &   
+    0.454
+\backslash
+sym{***}&      -0.143         &     0.00521
+\backslash
+sym{***}&    -0.00185         &       0.314         &     -0.0304         
+\backslash
+
+\backslash
+             &      (0.70)         &     (-1.19)         &      (3.57)    
+     &     (-0.70)         &      (4.04)         &     (-1.00)         &  
+    (1.63)         &     (-0.13)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace 2.religion  &                     &     -0.0245
+\backslash
+sym{***}&                     &      -2.190
+\backslash
+sym{**} &                     &     -0.0219
+\backslash
+sym{**} &                     &      -2.646
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+             &                     &     (-3.84)         &              
+       &     (-2.59)         &                     &     (-3.24)         &
+                     &     (-3.08)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace 3.religion  &                     &     -0.0425         &   
+                  &      -5.785         &                     &     -0.0226
+         &                     &      -0.551         
+\backslash
+
+\backslash
+             &                     &     (-1.21)         &              
+       &     (-1.59)         &                     &     (-0.86)         &
+                     &     (-0.17)         
+\backslash
+
+\backslash
+ 
+\backslash
+addlinespace 
+\backslash
+_cons      &       0.312         &     -0.0709         &      -62.07
+\backslash
+sym{**} &      -16.35         &      -0.163         &       0.117         &
+      -57.66
+\backslash
+sym{**} &      -32.15         
+\backslash
+
+\backslash
+             &      (1.44)         &     (-0.40)         &     (-2.68)    
+     &     (-0.70)         &     (-1.05)         &      (0.69)         &  
+   (-2.63)         &     (-1.43)         
+\backslash
+
+\backslash
+ 
+\backslash
+midrule 
+\backslash
+(N
+\backslash
+)       &        1233         &        1192         &        1233      
+   &        1192         &        1177         &        1000         & 
+       1177         &        1000         
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabular}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+As the first robustness check
+\bar default
+, we reestimate the results with wealth concentration 
+\family typewriter
+r
+\family default
+ as the explanatory variable for those with less than the local median wealth
+ (
+\begin_inset Formula $log(A)$
+\end_inset
+
+ 
+\family typewriter
+logA
+\family default
+) and for those above it.
+ The results demonstrate how the education expenditures (weights 
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ and 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ ) differ between the poorer and richer households in a given locality.
+ The results for above and below local median-assets possession using 
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ as the dependent variable are shown in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_abovemedian_district_weduc}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_belowmedian_district_weduc}
+\end_layout
+
+\end_inset
+
+ for Tanzania and in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_abovemedian_district_weduc}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_belowmedian_district_weduc}
+\end_layout
+
+\end_inset
+
+ for Nigeria.
+ The results for above and below local median-assets possession with 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ as the dependent variable are shown in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_abovemedian_district_logeduc}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_belowmedian_district_logeduc}
+\end_layout
+
+\end_inset
+
+ for Tanzania and in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_abovemedian_district_logeduc}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_belowmedian_district_logeduc}
+\end_layout
+
+\end_inset
+
+ for Nigeria.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Results from first robustness check ] social factors and secondary_schools
+ .
+ educpriv expected.
+ tertiary_school level lower.
+ num_child more nuanced - as is r.
+ father_educ_rank also different.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The role of social effects seems validated with these results as the significanc
+e of social factors remains unaffected by whether the consumers have above
+ or below the median asset ownership level.
+ More specifically, the factors 
+\family typewriter
+has_english
+\family default
+ and 
+\family typewriter
+religion 
+\family default
+are significant in results from Tanzania and Nigeria (respectively) for
+ both richer and poorer households.
+ The variable 
+\family typewriter
+has_english
+\family default
+ is significant in both Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_abovemedian_district_weduc}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_belowmedian_district_weduc}
+\end_layout
+
+\end_inset
+
+ for Tanzania while the variable 
+\family typewriter
+religion 
+\family default
+is significant in both Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_abovemedian_district_weduc}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_belowmedian_district_weduc}
+\end_layout
+
+\end_inset
+
+ for Nigeria.
+ It is worth pointing out that the economic significance for 
+\family typewriter
+religion 
+\family default
+in Nigeria is higher with 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ as dependent variable (see Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_abovemedian_district_logeduc}
+\end_layout
+
+\end_inset
+
+ and Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_belowmedian_district_logeduc}
+\end_layout
+
+\end_inset
+
+) .
+ 
+\end_layout
+
+\begin_layout Standard
+As one would expect, the effect of 
+\family typewriter
+secondary_schools
+\family default
+ is also the same for both richer and poorer halves of a given locality.
+ While the role that the wealth-concentration 
+\family typewriter
+r
+\family default
+ plays towards access to education appears to be the same for the rich and
+ poor halves in a locality as well, we do see a higher economic significance
+ of 
+\family typewriter
+r
+\family default
+ for the below-median-assets household in Nigeria - possibly because of
+ high education costs in urban areas where asset-possession may be lower.
+ The access to private education and to higher education favour the richer
+ households in both economies - as the economic significance of 
+\family typewriter
+educpriv 
+\family default
+is consistently higher for richer households as is the expenditure on tertiary
+ level education in both the economies.
+\end_layout
+
+\begin_layout Standard
+The number of children have a more significant effect for richer households
+ in Tanzania.
+ Given a lower participation in higher education in the country, this effect
+ seems likely due to the primary-education needs scaling up with the number
+ of children in the household.
+ As in the Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Discussion"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the lower levels of average educational attainment in Tanzania seem to
+ accentuate the effect of paternal education rank 
+\family typewriter
+fathers_educ_rank 
+\family default
+which has a higher statistical significance for poorer households in Tanzania
+ (compare Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_abovemedian_district_logeduc}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_belowmedian_district_logeduc}
+\end_layout
+
+\end_inset
+
+) whereas the significance is not much different for richer and poorer household
+s in Nigeria (see Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_abovemedian_district_logeduc}
+\end_layout
+
+\end_inset
+
+and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_belowmedian_district_logeduc}
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -8705,7 +8348,7 @@ sym{***}&      0.0344
 \backslash
 addlinespace r
 \backslash
-_educ2012  &     0.00289
+_educ  &     0.00289
 \backslash
 sym{**} &      0.0120
 \backslash
@@ -9103,7 +8746,7 @@ sym{***}&     -0.0457
 \backslash
 addlinespace r
 \backslash
-_agri2012  &     0.00330
+_agri  &     0.00330
 \backslash
 sym{**} &      0.0129
 \backslash
@@ -9361,67 +9004,246 @@ end{table}
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
+The other robustness check we use is the recomputation of wealth concentration
+ by considering only those in the household's vicinity with the same value
+ of the indicator for primary/higher-than-primary education-level of the
+ household-head (and similar for the agrarian/non-agrarian occupation).
+ The results provided in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:AnalysisAndResults"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ thus use three types of vicinities.
+ The first interpretation is one where a simple average of the total assets
+ owned by the households in the consumer's district.
+ Both education rank and a factor variable 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ indicating whether the household head's occupation is agrarian or not are
+ used as controls in this interpretation .
+ The second interpretation is based on a factor variable 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ indicating whether the education level of the household-head is higher
+ than primary school or not.
+ More specifically, the second interpretation uses the prosperity within
+ the educational levels implied by 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ (i.e.
+ primary and higher-than primary educational levels).
+ The agrarian/non-agrarian factor variable 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is also used as the additional control in this second interpretation.
+ Finally, the third interpretation is based on the average prosperity in
+ the agrarian vs non-agrarian occupations (i.e.
+ 
+\begin_inset Formula $\Omega$
+\end_inset
+
+) and uses educational rank as the additional control variable.
+ The three interpretations are described in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:ReferenceDefinitions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float table
+placement H
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0.7in">
+<column alignment="left" valignment="top" width="2in">
+<column alignment="center" valignment="top" width="1in">
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Concentration of Wealth
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Additional Controls 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $r$
+\end_inset
 
 
-\backslash
-begin{table}
-\backslash
-centering
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Average over geographical vicinity (district)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Omega$
+\end_inset
+
+ , education-rank
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $r_{\Gamma}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Separate averages over 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $r_{\Omega}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Separate averages over 
+\begin_inset Formula $\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+education-rank
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
-
-
-\backslash
-caption{Tanzania-Nigeria - around median assets-value 
-\backslash
-label{tabTNZNGR_abovebelow_median}}
-\end_layout
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:ReferenceDefinitions"
 
+\end_inset
 
-\backslash
-resizebox{6in}{!}{
+Prosperity levels and control variables used
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
 
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi}     
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tabular} { c c c  c c c c c c }
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline       
 \end_layout
 
 \end_inset
@@ -9430,386 +9252,141 @@ hline
 \end_layout
 
 \begin_layout Standard
+The coefficients for 
+\family typewriter
+r_agri
+\family default
+, 
+\family typewriter
+r_educ 
+\family default
+are provided in the columns 
+\family typewriter
+Educ 2014/2015
+\family default
+ and 
+\family typewriter
+Agri 2014/2015
+\family default
+ in the Tables 
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-            &
-\backslash
-multicolumn{2}{c}{Above Median $w
-\backslash
-_{educ}$}&
-\backslash
-multicolumn{2}{c}{Above Median $log(x
-\backslash
-_{educ})$}&
-\backslash
-multicolumn{2}{c}{Below Median $w
-\backslash
-_{educ}$}&
-\backslash
-multicolumn{2}{c}{Below Median $log(x
-\backslash
-_{educ})$}
-\backslash
 
 \backslash
-
-\backslash
-cmidrule(lr){2-3}
-\backslash
-cmidrule(lr){4-5}
-\backslash
-cmidrule(lr){6-7}
-\backslash
-cmidrule(lr){8-9}             &
-\backslash
-multicolumn{1}{c}{(1)}         &
-\backslash
-multicolumn{1}{c}{(2)}         &
-\backslash
-multicolumn{1}{c}{(3)}         &
-\backslash
-multicolumn{1}{c}{(4)}         &
-\backslash
-multicolumn{1}{c}{(5)}         &
-\backslash
-multicolumn{1}{c}{(6)}         &
-\backslash
-multicolumn{1}{c}{(7)}         &
-\backslash
-multicolumn{1}{c}{(8)}         
-\backslash
-
-\backslash
- 
-\backslash
-midrule logx        &    -0.00542         &     -0.0135
-\backslash
-sym{*}  &       1.118
-\backslash
-sym{*}  &       0.439         &     -0.0145
-\backslash
-sym{***}&     -0.0288
-\backslash
-sym{***}&       1.766
-\backslash
-sym{***}&      -0.695         
-\backslash
-
-\backslash
-             &     (-1.35)         &     (-2.50)         &      (2.18)    
-     &      (0.59)         &     (-3.96)         &     (-5.63)         &  
-    (4.13)         &     (-1.05)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace r2012       &     0.00629
-\backslash
-sym{**} &      0.0135
-\backslash
-sym{**} &      -0.403         &       2.076
-\backslash
-sym{***}&     0.00534
-\backslash
-sym{***}&      0.0127
-\backslash
-sym{**} &      -0.164         &       1.019         
-\backslash
-
-\backslash
-             &      (2.93)         &      (3.11)         &     (-1.42)    
-     &      (3.70)         &      (3.33)         &      (2.71)         &  
-   (-0.58)         &      (1.70)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&      -0.126         &      0.0422         &       17.56         &    
-  -8.355         &       0.109         &      0.0404         &       8.698 
-        &       7.001         
-\backslash
-
-\backslash
-             &     (-1.34)         &      (0.53)         &      (1.76)    
-     &     (-0.78)         &      (1.66)         &      (0.52)         &  
-    (0.98)         &      (0.69)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace 1.agri      &    -0.00171         &     0.00204         &    
-   1.292         &       0.368         &     0.00430         &     0.00764 
-        &       1.692
-\backslash
-sym{*}  &       1.085         
-\backslash
-
-\backslash
-             &     (-0.32)         &      (0.31)         &      (1.81)    
-     &      (0.42)         &      (0.85)         &      (1.10)         &  
-    (2.01)         &      (1.22)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace 1.educpriv  &      0.0763
-\backslash
-sym{***}&      0.0261
-\backslash
-sym{***}&       4.983
-\backslash
-sym{***}&       0.711         &      0.0469         &      0.0535
-\backslash
-sym{***}&       3.764
-\backslash
-sym{**} &       0.856         
-\backslash
-
-\backslash
-             &      (6.55)         &      (3.77)         &      (7.57)    
-     &      (0.74)         &      (1.72)         &      (5.52)         &  
-    (2.71)         &      (0.64)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace father
-\backslash
-_educ
-\backslash
-_rank&     0.00139         &    0.000748         &      0.0713         &  
-    -0.168         &     0.00219         &     0.00127         &       0.712
-\backslash
-sym{*}  &      0.0595         
-\backslash
-
-\backslash
-             &      (0.67)         &      (0.38)         &      (0.29)    
-     &     (-0.64)         &      (1.01)         &      (0.55)         &  
-    (2.39)         &      (0.20)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace secondary
-\backslash
-_schools&    -0.00135
-\backslash
-sym{***}&     0.00184         &    0.000569         &      -0.623         &
-    -0.00156
-\backslash
-sym{***}&     0.00600         &      0.0189         &       1.989
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-             &     (-5.81)         &      (0.34)         &      (0.02)    
-     &     (-0.84)         &     (-5.18)         &      (0.94)         &  
-    (0.41)         &      (2.39)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace 1.is
-\backslash
-_primaryage&      0.0192
-\backslash
-sym{***}&      0.0166
-\backslash
-sym{*}  &       13.38
-\backslash
-sym{***}&       3.099
-\backslash
-sym{**} &      0.0284
-\backslash
-sym{***}&      0.0204
-\backslash
-sym{*}  &       16.95
-\backslash
-sym{***}&       4.304
-\backslash
-sym{***}
-\backslash
-
-\backslash
-             &      (3.61)         &      (2.15)         &     (17.48)    
-     &      (3.01)         &      (6.31)         &      (2.47)         &  
-   (21.94)         &      (4.20)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace 1.is
-\backslash
-_secondaryage&     0.00973
-\backslash
-sym{*}  &      0.0366
-\backslash
-sym{***}&     -0.0689         &       2.768
-\backslash
-sym{***}&      0.0135
-\backslash
-sym{***}&      0.0277
-\backslash
-sym{***}&       0.442         &       1.846
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-             &      (2.58)         &      (5.87)         &     (-0.11)    
-     &      (3.34)         &      (4.18)         &      (4.35)         &  
-    (0.77)         &      (2.25)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace 1.is
-\backslash
-_tertiaryage&    -0.00461         &     0.00553         &      -2.361
-\backslash
-sym{***}&       0.714         &    -0.00631         &     0.00692         &
-      -1.871
-\backslash
-sym{**} &       1.318         
-\backslash
-
-\backslash
-             &     (-1.03)         &      (0.94)         &     (-4.25)    
-     &      (0.91)         &     (-1.52)         &      (1.03)         &  
-   (-3.15)         &      (1.51)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace 1.has
-\backslash
-_english&      0.0392
-\backslash
-sym{***}&                     &       2.533
-\backslash
-sym{***}&                     &      0.0481
-\backslash
-sym{***}&                     &       3.494
-\backslash
-sym{***}&                     
-\backslash
-
-\backslash
-             &      (7.04)         &                     &      (4.14)   
-      &                     &      (5.78)         &                     &
-      (4.71)         &                     
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace numchild    &    0.000858         &    -0.00182         &   
-    0.454
-\backslash
-sym{***}&      -0.143         &     0.00521
-\backslash
-sym{***}&    -0.00185         &       0.314         &     -0.0304         
-\backslash
-
-\backslash
-             &      (0.70)         &     (-1.19)         &      (3.57)    
-     &     (-0.70)         &      (4.04)         &     (-1.00)         &  
-    (1.63)         &     (-0.13)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace 2.religion  &                     &     -0.0245
-\backslash
-sym{***}&                     &      -2.190
-\backslash
-sym{**} &                     &     -0.0219
-\backslash
-sym{**} &                     &      -2.646
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-             &                     &     (-3.84)         &              
-       &     (-2.59)         &                     &     (-3.24)         &
-                     &     (-3.08)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace 3.religion  &                     &     -0.0425         &   
-                  &      -5.785         &                     &     -0.0226
-         &                     &      -0.551         
-\backslash
-
-\backslash
-             &                     &     (-1.21)         &              
-       &     (-1.59)         &                     &     (-0.86)         &
-                     &     (-0.17)         
-\backslash
-
-\backslash
- 
-\backslash
-addlinespace 
-\backslash
-_cons      &       0.312         &     -0.0709         &      -62.07
-\backslash
-sym{**} &      -16.35         &      -0.163         &       0.117         &
-      -57.66
-\backslash
-sym{**} &      -32.15         
-\backslash
-
-\backslash
-             &      (1.44)         &     (-0.40)         &     (-2.68)    
-     &     (-0.70)         &     (-1.05)         &      (0.69)         &  
-   (-2.63)         &     (-1.43)         
-\backslash
-
-\backslash
- 
-\backslash
-midrule 
-\backslash
-(N
-\backslash
-)       &        1233         &        1192         &        1233      
-   &        1192         &        1177         &        1000         & 
-       1177         &        1000         
-\backslash
-
-\backslash
- 
+ref{tabTNZ_district_weduc_occed}
 \end_layout
 
 \end_inset
 
+, 
+\begin_inset ERT
+status open
 
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district_logeduc_occed}
+\end_layout
+
+\end_inset
+
+ for Tanzania and Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district_weduc_occed}
+\end_layout
+
+\end_inset
+
+ , 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district_logeduc_occed}
+\end_layout
+
+\end_inset
+
+ for Nigeria.
+ Here too, we see that the wealth concentration corresponds to a rise in
+ educational expenditure 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ for Nigeria but its effect - using either 
+\family typewriter
+r_educ 
+\family default
+and 
+\family typewriter
+r_agri
+\family default
+ - is insignificant for Tanzania (compare Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_district_logeduc_occed}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabNGR_district_logeduc_occed}
+\end_layout
+
+\end_inset
+
+ ).
+ Further, since the coefficients for secondary-age indicator 
+\family typewriter
+is_secondaryage
+\family default
+ seem higher for the occupation cluster (i.e.
+ the coefficient 
+\family typewriter
+r_agri
+\family default
+) than for the education-cluster (
+\family typewriter
+r_educ
+\family default
+), it can be argued that education expenses are more often clustered by
+ agrarian or non-agrarian occupations than by education levels the populations
+ have attained.
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Conclusions"
+
+\end_inset
+
+Conclusions
 \end_layout
 
 \begin_layout Standard
@@ -9820,24 +9397,110 @@ status open
 
 
 \backslash
-end{tabular}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{table}
+noindent
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+We had set ourselves to test if wealth effects are stronger than urbanisation
+ levels towards education expenses in two economies of the SSA where the
+ dependence of one on its industrial output is higher than that of the other.
+ While there are idiosyncratic differences between the two countries we've
+ used for our comparison, there are some implications for the education
+ policy in the region as the countries undergo higher economic development.
+\end_layout
+
+\begin_layout Standard
+Since the agrarian consumers maintain a higher budget share on education
+ expenses in the poorer economy (Tanzania) and higher education ranks consistent
+ly correspond to higher education expenses in the more developed economy
+ (Nigeria), the educational expenses are likely to remain higher after attainmen
+t of education in the population with increase in regional prosperity.
+ This also seems aligned with the recent finding from a cohort-study by
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "porzio2021human"
+literal "false"
+
+\end_inset
+
+ that the labour with skills added through education is less willing to
+ stay in agricultural activities.
+ 
+\end_layout
+
+\begin_layout Standard
+The key finding from the study is that the effects of urbanisation levels
+ - whether interpreted as wealth concentration or as urban-rural indicators
+ from the survey - are significant on education expenses in both the economies.
+ While the rises in education expenses as the employment opportunities increase
+ in an economy are inevitable, it is also true that lower wealth continues
+ to prevent access to education and mobility.
+ However, as the results presented in the chapter indicate, the wealth effects
+ are less extreme in the higher developed economy (i.e.
+ Nigeria) than in the less developed economy (i.e.
+ Tanzania).
+ In other words, the wealth effects - after accounting for urbanisation
+ - appear to be weaker with rise in urbanisation.
+ A rise urbanisation could be associated with weaker wealth effects and
+ indicate a pathway to equity in both income and equality.
+\end_layout
+
+\begin_layout Standard
+The importance of urbanisation should not discount the need for policy to
+ improve access to education for the lower and middle-income populations
+ in the region.
+ This is of crucial importance also because the private educational institutions
+ - which are more common in Nigeria - do not yet play a major role in the
+ provision of education in the region and a more significant role continues
+ to be played by the state-institutions in both the economies.
+ The improvement of access to education is also relevant due to the issues
+ of social exclusion that are indicated by the relevance of social characteristi
+cs in education expenses for both the economies.
+ As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AlesinaMobilityAfrica2019"
+literal "false"
+
+\end_inset
+
+ also demonstrate, the role of religious and colonial institutions in the
+ educational mobility across sub-Saharan Africa has been significant.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Different levels]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In summary, the development of the education sectors seems to be at different
+ stages of development in the Tanzania and Nigeria.
+ The privatisation of education in Nigeria seems to have coincided with
+ higher attendance of universities in a way that is yet to be seen for Tanzania
+ - where education has not been as widespread just yet.
+ The wealth effects seem strong in both the economies, but the relevance
+ of wealth-concentration in the population having higher education levels
+ and higher prosperity points to a promising direction where wealth becomes
+ less important for access to education and despite it being limited to
+ urban or semi-urban areas, the economic development may improve the access
+ employment opportunities for a larger cross-section of the economy.
 \end_layout
 
 \begin_layout Standard
