@@ -2060,8 +2060,8 @@ plain_util <- function(A){
   }
 }
 
-no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha,plot){
-  
+no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha,plot,return_choices,return_utils){
+
   w <-  function(nu) { W_p_logis(omega=omega,omega_bar=omega_bar, nu=nu) }
   l <-  function(nu) { L_p_logis(lambda=lambda,lambda_bar=lambda_bar, nu=nu) }
   
@@ -2082,6 +2082,7 @@ no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha
   
   ea_uw = function(x) {  return(w(x)*plain_util(Aw_band1(x))  + (1-w(x))*plain_util(Al_band1(x)))}
   ea_ul = function(x) {  return(l(x)*plain_util(Al_band2(x))  + (1-l(x))*plain_util(Aw_band2(x)))}
+  
   
   nu1 <- seq(0,y1,y1/100)
   nu2 <- seq(0,y2,y2/100)
@@ -2104,8 +2105,19 @@ no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha
     plot(nu1,sapply(nu1,ea_suw),type='l',main=paste('ST A(nu_1=',round(nu_1_st_chosen,3),")=",round(ea_w(nu_1_st_chosen),3)))
     plot(nu2,sapply(nu2,ea_sul),type='l',main=paste('ST A(nu_2=',round(nu_2_st_chosen,3),")=",round(ea_l(nu_2_st_chosen),3)))
   }
-  
+  if (missing(return_choices) || return_choices==F){
   return(abs(nu_1_chosen  + kappa* (nu_2_chosen - lambda_bar) - omega_bar))
+  } else if(return_choices==T) {
+    res = list()
+    res[["nu_1_chosen"]]=nu_1_chosen
+    res[["nu_2_chosen"]]=nu_2_chosen
+    res[["u1"]]=ea_uw(nu_1_chosen)
+    res[["u2"]]=ea_ul(nu_2_chosen)
+    return (res)
+  }
+  else {
+    stop("Invalid return_choices value")
+  }
   
 }
 
@@ -2228,6 +2240,53 @@ plot_l_params<-function(speed){
     lines(x,1-1/(1+exp(-lambda*(x-bar_lambda+20))),type='l',lty=3)
     legend(85, .4, legend=latex2exp::TeX(paste("$ \\bar{\\lambda}=",c(50,70,30),"$")) , lty=c(1,2,3), cex=1.1)
   }
+}
+societal_optimal <- function(beta){
+  
+  
+}
+
+find_societal_optimal <- function(beta){
+  societal_optimal_for_omega_bar <- function(omega_bar){
+    lbar = get_pareto_lambda_bar(omega_bar_fixed=omega_bar)
+    if (lbar==-1) { # Error: could not find lbar
+      return(-1)
+    }
+    result <- no_greed_two_stage_sol(omega_bar=omega_bar, omega=fixed_kappa*fixed_lambda,lambda_bar=lbar,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F,
+                                     return_choices = T)
+    
+    return (beta*result[["u1"]] +(1-beta)*result[["u2"]])
+    
+  }
+  
+  omega_bar_optimised <- (optimise(function(x){societal_optimal_for_omega_bar(x)},c(0,max(100)),maximum = T))$maximum
+  
+}
+
+get_pareto_lambda_bar <-function(omega_bar_fixed)
+{
+    fixed_y1 = 1 
+    fixed_y2 = 5
+    fixed_alpha = .3
+    
+    fixed_lambda=1
+    fixed_kappa =3
+ 
+    #lambda_bar
+    find_lambda_bar <- function(lbar){
+      no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lbar,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+    }
+    
+    lambda_bar_optimised <- (optimise(function(x){abs(find_lambda_bar(x))},c(0,max(fixed_y1,fixed_y2))))$minimum
+    
+    error <- no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=fixed_kappa*fixed_lambda,lambda_bar=lambda_bar_optimised,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+    
+    if (error >1e-3){
+      return(-1)
+    } else {
+      
+      return(lambda_bar_optimised)
+    }
 }
 
 
