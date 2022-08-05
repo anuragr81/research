@@ -1,5 +1,6 @@
 require(latex2exp)
-require(dplyr)
+#require(dplyr)
+require(plyr)
 tol = 1e-7
 
 # constraint is applied only at reset times
@@ -1853,12 +1854,12 @@ d_expected_nolog_util_1 <-function(y,y1,y2,G1,G2,alpha,omega,A_0){
 calculate_df_1 <-function(alpha,G1,G2,y1,y2,x,A,x0,W0){
   dWx<- W_deriv_expr(alpha = alpha,G1 = G1,G2 = G2,y1 = y1,y2 = y2,A = A,x = x,x0 = x0,W0 = W0)
   Wx <- W_expr(alpha = alpha,G1 = G1,G2 = G2,y1 = y1,y2 = y2,A = A,x = x,x0 = x0,W0 = W0)
-
+  
   D = G2*((M2-x)**alpha)- G1*((M1-x)**alpha)
   df = D*dWx - alpha * G1 * ((M1-x)**(alpha-1)) + alpha * Wx* (G1*((M1-x)**(alpha-1)) - G2 * ((M2-x)**(alpha-1)))
   
   wpexpr <- (Wx * alpha * (G2*((M2-x)**(alpha-1))-G1*((M1-x)**(alpha-1)))
-                 + (alpha*G1*((M1-x)**(alpha-1))))/D
+             + (alpha*G1*((M1-x)**(alpha-1))))/D
   #plot(y,sapply(y,function(x){W_expr(alpha = alpha,G1 = G1,G2 = G2,y1 = y1,y2 = y2,A = A,x = x,x0 = x0,W0 = W0)})/100,type='l')
   return(df)
 }
@@ -1867,7 +1868,7 @@ evolve_long_term_w <- function(omega,A,G2_1,n){
   # increasing A has a parallel shift
   
   y1 = 300; y2=420;
-
+  
   if (F){
     x <- seq(0,100,1); 
     plot(0,0,xlim = c(0,y1),ylim=c(-5,5));
@@ -1932,14 +1933,14 @@ evolve_long_term_l <- function(lambda,A,G2_1,n){
 }
 
 W_p_logis <- function(omega,omega_bar,nu){
-#  return(plogis(q = nu,location = omega_bar, scale = omega))
-#  print(paste("W_p_logis=",nu))
+  #  return(plogis(q = nu,location = omega_bar, scale = omega))
+  #  print(paste("W_p_logis=",nu))
   return (1/(1+exp(-omega * (nu-omega_bar))))
 }
 
 L_p_logis <- function(lambda,lambda_bar,nu){
   #return(plogis(q = nu,location = lambda_bar, scale = lambda))
-#  print(paste("L_p_logis=",nu))
+  #  print(paste("L_p_logis=",nu))
   return (1-1/(1+exp(-lambda* (nu-lambda_bar))))
 }
 
@@ -2003,7 +2004,7 @@ evolve_plogis <- function(A1,A2,omega_bar,omega,lambda_bar,lambda,psi,beta,y1,y2
 polyn_util <- function(A,G,alpha) { 
   #print(paste("polyn_util:,","G=",toString(G),"A=",toString(A),"u=",G* A**alpha)) ; 
   return (G* A**alpha)
-  }
+}
 inv_util <- function(u,G,alpha) { return (u/G)**(1/alpha) }
 
 
@@ -2028,7 +2029,7 @@ two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,G1,G2,y1,y2,alpha,pl
   
   ea_uw = function(x) {  return(w(x)*polyn_util(G=G2,A=Aw_band1(x),alpha=alpha)  + (1-w(x))*polyn_util(G=G1,A=Al_band1(x),alpha=alpha))}
   ea_ul = function(x) {  return(l(x)*polyn_util(G=G1,A=Al_band2(x),alpha=alpha)  + (1-l(x))*polyn_util(G=G2,A=Aw_band2(x),alpha=alpha))}
-
+  
   nu1 <- seq(0,y1,.1)
   nu2 <- seq(0,y2,.1)
   
@@ -2060,8 +2061,20 @@ plain_util <- function(A){
   }
 }
 
-no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha,plot,return_choices,return_utils){
 
+onedimensional_bisection <- function(f,a,b,N = 1000){
+  
+  if (a >=b ){
+    stop("Invalid limits")
+  }
+  x <- seq(a,b+(b-a)/N,(b-a)/N)
+  y <- sapply(x,f)
+  return(x[which.max(y)])
+  
+}
+
+no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha,plot,return_choices,return_utils){
+  
   w <-  function(nu) { W_p_logis(omega=omega,omega_bar=omega_bar, nu=nu) }
   l <-  function(nu) { L_p_logis(lambda=lambda,lambda_bar=lambda_bar, nu=nu) }
   
@@ -2102,11 +2115,11 @@ no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha
   if (plot){
     plot(nu1,sapply(nu1,ea_uw),type='l',main=paste('LT A(nu_1=',round(nu_1_chosen,3),")=",round(ea_w(nu_1_chosen),3)))
     plot(nu2,sapply(nu2,ea_ul),type='l',main=paste('LT A(nu_2=',round(nu_2_chosen,3),")=",round(ea_l(nu_2_chosen),3)))
-    plot(nu1,sapply(nu1,ea_suw),type='l',main=paste('ST A(nu_1=',round(nu_1_st_chosen,3),")=",round(ea_w(nu_1_st_chosen),3)))
-    plot(nu2,sapply(nu2,ea_sul),type='l',main=paste('ST A(nu_2=',round(nu_2_st_chosen,3),")=",round(ea_l(nu_2_st_chosen),3)))
+    #plot(nu1,sapply(nu1,ea_suw),type='l',main=paste('ST A(nu_1=',round(nu_1_st_chosen,3),")=",round(ea_w(nu_1_st_chosen),3)))
+    #plot(nu2,sapply(nu2,ea_sul),type='l',main=paste('ST A(nu_2=',round(nu_2_st_chosen,3),")=",round(ea_l(nu_2_st_chosen),3)))
   }
   if (missing(return_choices) || return_choices==F){
-  return(abs(nu_1_chosen  + kappa* (nu_2_chosen - lambda_bar) - omega_bar))
+    return(abs(nu_1_chosen  + kappa* (nu_2_chosen - lambda_bar) - omega_bar))
   } else if(return_choices==T) {
     res = list()
     res[["nu_1_chosen"]]=nu_1_chosen
@@ -2241,13 +2254,9 @@ plot_l_params<-function(speed){
     legend(85, .4, legend=latex2exp::TeX(paste("$ \\bar{\\lambda}=",c(50,70,30),"$")) , lty=c(1,2,3), cex=1.1)
   }
 }
-societal_optimal <- function(beta){
-  
-  
-}
 
 plot_societal_optimal <- function(beta,y1,y2, alpha,lambda, kappa,use_xlim){
-#    fixed_y1 = 1 
+  #    fixed_y1 = 1 
   #    fixed_y2 = 10
   #  fixed_alpha = .3
   #  fixed_lambda = 1
@@ -2268,52 +2277,73 @@ plot_societal_optimal <- function(beta,y1,y2, alpha,lambda, kappa,use_xlim){
                                      lambda=lambda,y1=y1,y2=y2,alpha=alpha,plot=F,
                                      return_choices = T)
     
-    return (beta*result[["u1"]] +(1-beta)*result[["u2"]])
+    return (beta*result[["u1"]]**.5 +(1-beta)*result[["u2"]]**.5)
     
   }
-
-#  omega_bar_optimised <- (optimise(function(x){societal_optimal_for_omega_bar(x)},c(0,max(fixed_y1,fixed_y2)),maximum = T))$maximum
+  
+  #  omega_bar_optimised <- (optimise(function(x){societal_optimal_for_omega_bar(x)},c(0,max(fixed_y1,fixed_y2)),maximum = T))$maximum
   rr <- seq(0,max(y1,y2),.1)
   ss <- sapply(rr, societal_optimal_for_omega_bar)
   par(mfrow=c(1,1))
   if (missing(use_xlim)){
     use_xlim<- max(rr)
   }
-  plot (rr,ss,type='l',xlab="Omega-bar",xlim=c(0,use_xlim))
+  plot (rr,ss,type='l',xlab="Omega-bar",xlim=c(0,use_xlim),panel.first=grid())
+  # Plot nu_1 nu_2 
+  
+  #xx <- seq(0,use_xlim,.05)
+  #yy <- sapply(xx,function(x){ print_results_for_chosen_omega_bar(beta=beta,
+  #                                                                y1=y1,y2=y2, alpha=alpha,lambda=lambda, kappa=kappa,
+  #                                                                omega_bar = x)})
+  
+  zz=data.frame(x=xx,y=yy)
+  #return(ddply(zz,.(y),summarise, xx=toString(range(x))))
+  return(onedimensional_bisection(f=societal_optimal_for_omega_bar,a=0,b=max(y1,y2)))
   
   
 }
 
-print_results_for_chosen_omega_bar <- function(omega_bar,beta,y1,y2,alpha, lambda,kappa){
+print_results_for_chosen_omega_bar <- function(omega_bar,beta,y1,y2,alpha, lambda,kappa,print_all,plot=F){
   lbar = get_pareto_lambda_bar(omega_bar_fixed=omega_bar, fixed_alpha=alpha, omega=kappa*lambda,fixed_lambda=lambda,
                                fixed_y1=y1,fixed_y2=y2)
   if (lbar==-1){
-    stop("Not a valid omega_bar")
+    return(-1)
   }
   result <- no_greed_two_stage_sol(omega_bar=omega_bar, omega=kappa*lambda,lambda_bar=lbar,
-                                   lambda=lambda,y1=y1,y2=y2,alpha=alpha,plot=F,
+                                   lambda=lambda,y1=y1,y2=y2,alpha=alpha,plot=plot,
                                    return_choices = T)
-  print(result)
-  print(paste("Total U=",(beta*result[["u1"]] +(1-beta)*result[["u2"]])))
+  #print(result)
+  if (missing(print_all) || print_all == F){
+    
+    return(result[["nu_1_chosen"]])
+  } else if (print_all == T){
+    print(paste("result[[nu_1_chosen]]=",result[["nu_1_chosen"]],"result[[nu_2_chosen]]=",result[["nu_2_chosen"]],
+                "Total U=",(beta*result[["u1"]]**.5 +(1-beta)*result[["u2"]]**.5)))
+    
+    return(result[["nu_1_chosen"]])
+    
+  } else {
+    stop("Invalid Condition")
+  }
 }
 get_pareto_lambda_bar <-function(omega_bar_fixed,omega,fixed_lambda,fixed_alpha,fixed_y1=fixed_y1,fixed_y2=fixed_y2)
 {
-    #lambda_bar
-    find_lambda_bar <- function(lbar){
-      no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=omega, lambda_bar=lbar,lambda=fixed_lambda,
-                             y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
-    }
+  #lambda_bar
+  find_lambda_bar <- function(lbar){
+    no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=omega, lambda_bar=lbar,lambda=fixed_lambda,
+                           y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+  }
+  
+  lambda_bar_optimised <- (optimise(function(x){abs(find_lambda_bar(x))},c(0,max(fixed_y1,fixed_y2))))$minimum
+  
+  error <- no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=omega,lambda_bar=lambda_bar_optimised,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
+  
+  if (error >1e-3){
+    return(-1)
+  } else {
     
-    lambda_bar_optimised <- (optimise(function(x){abs(find_lambda_bar(x))},c(0,max(fixed_y1,fixed_y2))))$minimum
-    
-    error <- no_greed_two_stage_sol(omega_bar=omega_bar_fixed,omega=omega,lambda_bar=lambda_bar_optimised,lambda=fixed_lambda,y1=fixed_y1,y2=fixed_y2,alpha=fixed_alpha,plot=F)
-    
-    if (error >1e-3){
-      return(-1)
-    } else {
-      
-      return(lambda_bar_optimised)
-    }
+    return(lambda_bar_optimised)
+  }
 }
 
 
