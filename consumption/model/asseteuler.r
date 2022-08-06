@@ -2100,7 +2100,7 @@ no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha
   nu1 <- seq(0,y1,y1/100)
   nu2 <- seq(0,y2,y2/100)
   
-  par(mfrow=c(2,2))
+  par(mfrow=c(1,2))
   nu_1_chosen = optimise(function(x) { -ea_uw(x) },c(0,y1))$minimum
   nu_2_chosen = optimise(function(x) { -ea_ul(x) },c(0,y2))$minimum
   
@@ -2113,8 +2113,10 @@ no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha
   
   kappa = omega/lambda
   if (plot){
-    plot(nu1,sapply(nu1,ea_uw),type='l',main=paste('LT A(nu_1=',round(nu_1_chosen,3),")=",round(ea_w(nu_1_chosen),3)))
-    plot(nu2,sapply(nu2,ea_ul),type='l',main=paste('LT A(nu_2=',round(nu_2_chosen,3),")=",round(ea_l(nu_2_chosen),3)))
+    plot(nu1,sapply(nu1,ea_uw),type='l',main=latex2exp::TeX(paste("$A_1(\\bar{\\nu}_1$=",round(nu_1_chosen,2),")=",round(ea_w(nu_1_chosen),2))),xlab=latex2exp::TeX("$\\bar{\\nu}_1$"),ylab=latex2exp::TeX("$u_1$"))
+    plot(nu2,sapply(nu2,ea_ul),type='l',main=latex2exp::TeX(paste("$A_2(\\bar{\\nu}_2$=",round(nu_2_chosen,2),")=",round(ea_l(nu_2_chosen),2))),xlab=latex2exp::TeX("$\\bar{\\nu}_2$"),ylab=latex2exp::TeX("$u_2$"))
+    mtext(latex2exp::TeX(paste("$y_1$=",round(y1,2),"$y_2$=",round(y2,2))),side=1,line=-1,outer=T)
+  
     #plot(nu1,sapply(nu1,ea_suw),type='l',main=paste('ST A(nu_1=',round(nu_1_st_chosen,3),")=",round(ea_w(nu_1_st_chosen),3)))
     #plot(nu2,sapply(nu2,ea_sul),type='l',main=paste('ST A(nu_2=',round(nu_2_st_chosen,3),")=",round(ea_l(nu_2_st_chosen),3)))
   }
