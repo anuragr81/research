@@ -2115,8 +2115,15 @@ no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha
   if (plot){
     plot(nu1,sapply(nu1,ea_uw),type='l',main=latex2exp::TeX(paste("$A_1(\\bar{\\nu}_1$=",round(nu_1_chosen,2),")=",round(ea_w(nu_1_chosen),2))),xlab=latex2exp::TeX("$\\bar{\\nu}_1$"),ylab=latex2exp::TeX("$u_1$"))
     plot(nu2,sapply(nu2,ea_ul),type='l',main=latex2exp::TeX(paste("$A_2(\\bar{\\nu}_2$=",round(nu_2_chosen,2),")=",round(ea_l(nu_2_chosen),2))),xlab=latex2exp::TeX("$\\bar{\\nu}_2$"),ylab=latex2exp::TeX("$u_2$"))
-    mtext(latex2exp::TeX(paste("$y_1$=",round(y1,2),"$y_2$=",round(y2,2))),side=1,line=-1,outer=T)
+    plot_title=paste("$y_1$=",round(y1,2),
+          "$y_2$=",round(y2,2),
+          "$\\omega$=",round(omega,2),
+          "$\\underline{\\omega}$=",round(omega_bar,2),
+          "$\\lambda$=",round(lambda,2),
+          "$\\underline{\\lambda}$=",round(lambda_bar,2))
+    mtext(latex2exp::TeX(plot_title),side=1,line=-1,outer=T)
   
+    
     #plot(nu1,sapply(nu1,ea_suw),type='l',main=paste('ST A(nu_1=',round(nu_1_st_chosen,3),")=",round(ea_w(nu_1_st_chosen),3)))
     #plot(nu2,sapply(nu2,ea_sul),type='l',main=paste('ST A(nu_2=',round(nu_2_st_chosen,3),")=",round(ea_l(nu_2_st_chosen),3)))
   }
