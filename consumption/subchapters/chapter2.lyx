@@ -3089,9 +3089,9 @@ noprefix "false"
  i.e.
  the average non-durable expenditure excluding asset-related costs in the
  district) are important controls in the analysis.
- These controls are used in two regressions with educational expenses as
- dependent variables(s).
- The first regression uses the budget share 
+ These controls are used in two formulations with the budget-share of education
+ expenses and logarithm of education expenditure as dependent variables.
+ The first regression uses the budget share of education expenses 
 \begin_inset Formula $w_{educ}$
 \end_inset
 
@@ -3101,7 +3101,7 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-w_{educ}=\rho+\alpha_{educ}\cdot r+\beta_{educ}\cdot log(x_{i})+\gamma_{educ}\cdot log(p_{ne})+\delta_{educ}\cdot s+\epsilon_{ne}\label{eq:main_estimation}
+w_{educ}=\rho+\alpha_{educ}\cdot r+\beta_{educ}\cdot log(x_{i})+\gamma_{educ}\cdot log(p_{ne})+\delta_{educ}\cdot s+\epsilon_{ne}\label{eq:budgetshr_estimation}
 \end{gather}
 
 \end_inset
@@ -3114,8 +3114,38 @@ The second regression uses the logarithm of educational expenses
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- as the dependent variable against the same set of control variables.
- Notice that these two formulations are similar to those used by 
+ as the dependent variable against the same set of control variables (instead
+ of 
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:budgetshr_estimation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+log(x_{educ})=\rho+\alpha_{educ}\cdot r+\beta_{educ}\cdot log(x_{i})+\gamma_{educ}\cdot log(p_{ne})+\delta_{educ}\cdot s+\epsilon_{ne}\label{eq:logeduc_estimation}
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The two formulations with the budget-share and logarithm of education expenditur
+e as dependent variables are similar to those used by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AcarHHEducTurkey2016"
@@ -3471,10 +3501,10 @@ status open
 
 \begin_layout Standard
 To provide a uniform treatment to educational levels across both Tanzania
- and Nigeria, we set the education rank to 1 for all pre-primary levels,
- to rank 2 for until the completion of primary education, to rank 3 for
- up to the secondary education level and to 4 for all higher education levels
- (higher-secondary, university etc.).
+ and Nigeria, we use 4 education categories - setting the education rank
+ to 1 for all pre-primary levels, to rank 2 for until the completion of
+ primary education, to rank 3 for up to the secondary education level and
+ to 4 for all higher education levels (higher-secondary, university etc.).
  These mappings are provided in Tables 
 \begin_inset ERT
 status open
@@ -3501,14 +3531,18 @@ ref{education_rank_ngr}
 
 \end_inset
 
-.
+ (see Appendix).
  For instance, the primary school leaving exam is taken at D7 in Tanzania
- and corresponds to the education rank 2 ; all standards above D7 correspond
- to the education rank 3 for Tanzania.
- Similar, P6 is the highest primary education level in Nigeria for consumers
- implies an education level above the rank 2 (corresponding to P6) in Nigeria.
+ and corresponds to the education rank 2 ; all standards above D7 and before
+ O course (Diploma) correspond to the education rank 3 and all education
+ levels at or above O course correspond to education rank 4 for Tanzania.
+ Similarly, the levels above P6 - which is the highest primary education
+ level in Nigeria - implies an education rank 3 (corresponding to P6 in
+ Tanzania) and all education levels at or above the technical training level
+ (treated equivalent to Diploma level in Tanzania) are correspond to education
+ rank 4.
  As access to private education may be significant in the urban-areas, we
- also use a control for private-education available in the survey.
+ also use a control for private-education that is available in the survey.
 \end_layout
 
 \begin_layout Standard
@@ -5422,7 +5456,7 @@ noprefix "false"
  (see Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:main_estimation"
+reference "eq:budgetshr_estimation"
 plural "false"
 caps "false"
 noprefix "false"
@@ -5506,11 +5540,12 @@ or permanent income
 logx
 \family default
 ).
- The physical access to education 
+ The physical access to education (i.e.
+ 
 \family typewriter
 secondary_schools
 \family default
- is a key control used in the comparison.
+) is a key control used in the comparison.
  Other controls used in the comparison are the indicator for an agrarian
  occupation 
 \family typewriter
@@ -5537,7 +5572,8 @@ religion
 \end_inset
 
  used only for Nigeria indicated by 1 for Christianity, 2 for Islam, 3 for
- Traditional, 4 for other - and 
+ Traditional, 4 for other - and english-speaking ability (i.e.
+ the variable 
 \family typewriter
 has_english 
 \begin_inset Formula $\xi$
@@ -5545,8 +5581,8 @@ has_english
 
  
 \family default
-indicating the ability to speak English respectively), access to private
- education (
+indicating the ability to speak English) used for Tanzania, the access to
+ private education (
 \family typewriter
 educpriv
 \family default
@@ -5578,16 +5614,17 @@ is_primaryage
 \begin_inset Formula $\mu_{2}$
 \end_inset
 
-) and 
+)
 \family typewriter
-is_tertiaryage
+, is_tertiaryage
 \family default
  (
 \begin_inset Formula $\mu_{3})$
 \end_inset
 
- indicating they are eligible (due to age) for primary, secondary or tertiary
- education (respectively) and the non-durable consumption prices 
+ indicating if they are eligible (due to age) for primary, secondary or
+ tertiary education (respectively) and the non-durable consumption prices
+ 
 \family typewriter
 \size small
 (log_mean_cost_ne
@@ -5598,7 +5635,7 @@ is_tertiaryage
 \end_inset
 
 ).
- Recall that 
+ Recall that the non-durable consumption prices
 \begin_inset Formula $p_{ne}$
 \end_inset
 
@@ -5612,8 +5649,8 @@ noprefix "false"
 
 \end_inset
 
-) - is interpreted as the cost of living in the vicinity - measured as the
- the average consumption excluding the asset-related costs in the consumer's
+) - interpreted as the cost of living in the vicinity - is measured as the
+ average consumption excluding the asset-related costs in the consumer's
  vicinity.
  Notice that the factor variables are prefixed with respective values 
 \family typewriter
@@ -5626,12 +5663,13 @@ noprefix "false"
 
 \family default
  etc.
- in the result.
+ in the results.
 \end_layout
 
 \begin_layout Standard
-Of these control variables, some are observed at the household level while
- others are observed at the level of the consumer's district.
+Of the control variables and explanatory variables, some are observed at
+ the household level while others are observed at the level of the consumer's
+ district.
  The logarithm of total expenditure 
 \begin_inset Formula $log(x)$
 \end_inset
@@ -5649,7 +5687,7 @@ logx
 logA
 \family default
 ) are observed at the level of the household.
- Similarly, the factor variable 
+ Similarly, the agricultural-occupation factor variable 
 \begin_inset Formula $\Omega$
 \end_inset
 
@@ -5662,7 +5700,7 @@ logA
 \family typewriter
 numchild
 \family default
-), the factor variables for childrens' ages 
+), the childrens' ages factor variables 
 \family typewriter
 (is_primaryage
 \family default
@@ -5686,20 +5724,20 @@ is_tertiaryage
 \begin_inset Formula $\mu_{3}$
 \end_inset
 
- ), the factor variable for access to private education (
+ ), the private education factor variable (
 \family typewriter
 educpriv
 \family default
 ), the highest education rank 
-\begin_inset Formula $\Gamma^{*}$
-\end_inset
-
- 
 \family typewriter
 father_educ_rank
 \family default
- corresponding to the paternal generations (father-relationship) in a household,
- the ability to speak English 
+ (
+\begin_inset Formula $\Gamma^{*}$
+\end_inset
+
+ ) corresponding to the paternal generations (father-relationship) in a
+ household, the ability to speak English 
 \begin_inset Formula $\xi$
 \end_inset
 
@@ -5912,13 +5950,14 @@ r
 \begin_inset Formula $log(A)$
 \end_inset
 
+ (i.e.
  
 \family typewriter
 \size small
 logA
 \family default
 \size default
- used as the measure of household wealth (used in place of the permanent
+ ) used as the measure of household wealth (used in place of the permanent
  income measure 
 \begin_inset Formula $log(x)$
 \end_inset
@@ -5926,7 +5965,7 @@ logA
  
 \family typewriter
 \size small
-logx
+- logx
 \family default
 \size default
 ) .
@@ -5990,22 +6029,22 @@ ref{tabTNZNGR_r}
 
 \end_inset
 
- suggest that an increase in 
+ suggest that an increase in the total expenditure logarithm ( 
 \family typewriter
-logx 
+logx )
 \family default
-- causes a decrease in the the budget share on education 
+ causes a decrease in the the budget share on education 
 \begin_inset Formula $w_{educ}$
 \end_inset
 
  for both Tanzania and Nigeria.
  This seems largely due to the educational expenses forming a higher proportion
  of the total expenditure for poorer households.
- Comparing 
+ Comparing regressions with education-expenditure logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- regressions with 
+ using total expenditure logarithm 
 \begin_inset Formula $log(x)$
 \end_inset
 
@@ -6015,7 +6054,13 @@ logx
 logx
 \family default
 \size default
-) and wealth-concentration controls in Tables 
+) and wealth-concentration (
+\family typewriter
+\size small
+r
+\family default
+\size default
+) as explanatory variables in Tables 
 \begin_inset ERT
 status open
 
@@ -6041,12 +6086,13 @@ ref{tabTNZNGR_urbanrural}
 
 \end_inset
 
-), we see that the education expenditures rise with the increase in 
+), we see that the education expenditures rise with the increase in total
+ expenditure logarithm  
 \begin_inset Formula $log(x)$
 \end_inset
 
- for Tanzania but the effect of permanent income (total expenditure) measure
- 
+ for Tanzania but the effect of permanent income measure (total expenditure
+ logarithm) 
 \begin_inset Formula $log(x)$
 \end_inset
 
@@ -6057,7 +6103,8 @@ logx
 \family default
 \size default
 ) is not significant for Nigeria.
- The higher expenditure on education 
+ The higher expenditure on education measured through total education expenditur
+e logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
@@ -6066,11 +6113,12 @@ logx
 \end_inset
 
  in Tanzania, the higher budget share of education cannot be attributed
- to higher consumption-prices - since the effect of 
+ to higher consumption-prices - since the effect of non-durable consumption
+ prices 
 \begin_inset Formula $p_{ne}$
 \end_inset
 
- remains weak on 
+ remains weak on education-budget share 
 \begin_inset Formula $w_{educ}$
 \end_inset
 
@@ -6100,10 +6148,17 @@ status open
 \end_layout
 
 \begin_layout Standard
-It is in fact the wealth concentration in districts (or urbanisation) that
- corresponds to higher educational budget shares in both the countries.
- The wealth concentration also corresponds to a rise in educational expenditure
- 
+It is in fact the wealth concentration 
+\family typewriter
+r
+\family default
+ in districts (or urbanisation) that corresponds to higher educational budget
+ shares in both the countries.
+ The wealth concentration 
+\family typewriter
+r
+\family default
+ also corresponds to a rise in educational expenditure logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
@@ -6130,12 +6185,15 @@ ref{tabTNZNGR_r}
 \family typewriter
 rural_wards
 \family default
- , the wealth concentration corresponds to a rise in educational expenditure
- 
+ , the wealth concentration 
+\family typewriter
+r
+\family default
+ corresponds to a rise in educational expenditure logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- for Nigeria and a drop in educational expenditure 
+ for Nigeria and a drop in educational expenditure logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
@@ -6280,11 +6338,12 @@ Here, we see that the effect of access to secondary-schools on education
 \end_inset
 
  is far stronger for Tanzania where the consumers are more likely to spend
- on primary education (compare the coefficients for 
+ on primary education (compare the coefficients for secondary-school 
 \begin_inset Formula $s$
 \end_inset
 
- - 
+ i.e.
+ 
 \family typewriter
 secondary_schools 
 \family default
@@ -6302,19 +6361,19 @@ ref{tabTNZNGR_r}
 \end_inset
 
 ) and the attendance for secondary and tertiary-education remains much lower
- (see coefficients of
+ (see coefficients of secondary-school-age
 \family typewriter
  is_secondaryage
 \family default
- and 
+ and tertiary-school-age 
 \family typewriter
 is_tertiaryage
 \family default
- for 
+ in regression results with education expenditure logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- dependent variable in Table 
+ as the dependent variable in Table 
 \begin_inset ERT
 status open
 
@@ -6341,11 +6400,11 @@ ref{tabTNZNGR_urbanrural}
 \end_inset
 
 ).
- With the results for 
+ With the results for education expenditure logairthm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- in Tables 
+ as dependent variables in Tables 
 \begin_inset ERT
 status open
 
@@ -6358,11 +6417,12 @@ ref{tabTNZNGR_urbanrural}
 
 \end_inset
 
- in particular, we see that the role of 
+ in particular, we see that the role of secondary-school 
 \family typewriter
 secondary_schools
 \family default
- is stronger for Nigeria when taking wealth 
+ is stronger for Nigeria when taking wealth i.e.
+ total assets-worth logarithm 
 \begin_inset Formula $log(A)$
 \end_inset
 
@@ -6374,7 +6434,7 @@ into account.
  The wealth effect is thus stronger than access in both the economies but
  is weaker for Nigeria where more household members enroll into secondary
  and tertiary education - regardless of the differences in long-term intergenera
-tional wealth (measured with logarithm of assets 
+tional wealth (measured with logarithm of assets-worth 
 \begin_inset Formula $log(A)$
 \end_inset
 
@@ -6401,19 +6461,14 @@ numchild
 \begin_layout Standard
 We also see that the agrarian households spend higher on education after
  considering the wealth-concentration among households with the same educational
--status (
-\begin_inset Formula $\Gamma$
-\end_inset
-
- i.e.
- having higher than primary education or not).
+-status.
  In other words, the education expenditure can be considered higher for
  agrarian households in Tanzania after taking into account their poor educationa
 l status measured through 
 \begin_inset Formula $\Gamma$
 \end_inset
 
- (see coefficients of 
+ (see coefficients of agrarian-occupation-indicator 
 \begin_inset Formula $\Omega$
 \end_inset
 
@@ -6434,7 +6489,7 @@ ref{tabTNZNGR_r}
 
 \end_inset
 
- for 
+ for education-expenditure-logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
@@ -6447,7 +6502,7 @@ ref{tabTNZNGR_r}
 It is worth pointing out that the comparison of rural and urban areas is
  less straightforward with the use of urban-rural indicators alone - rather
  than wealth-concentration - in the two economies.
- The coefficents of 
+ The coefficients of rural-wards 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -6455,7 +6510,7 @@ It is worth pointing out that the comparison of rural and urban areas is
 \family typewriter
 rural_wards
 \family default
-) for budget shares 
+) for education budget shares 
 \begin_inset Formula $w_{educ}$
 \end_inset
 
@@ -6474,7 +6529,8 @@ ref{tabTNZNGR_urbanrural}
 
 .
  While the urban-rural indicators seem to indicate higher expenditure on
- education by the rural residents in Nigeria (see significance of 
+ education by the rural residents in Nigeria (see significance of rural-wards
+ 
 \family typewriter
 rural_wards 
 \family default
@@ -6493,15 +6549,16 @@ ref{tabTNZNGR_urbanrural}
 
  ), this is likely due that the wards identified as rural in Nigeria not
  being as rural as those identified as rural in Tanzania.
- This is confirm with the weaker role of wealth 
+ This is confirmed with the weaker role of wealth i.e.
+ assets-worth-logarithm 
 \begin_inset Formula $log(A)$
 \end_inset
 
- (
+ or 
 \family typewriter
 logA
 \family default
-) ( see Table 
+ in Table 
 \begin_inset ERT
 status open
 
@@ -6514,7 +6571,7 @@ ref{tabTNZNGR_urbanrural}
 
 \end_inset
 
- ) and a strong role for 
+ and a strong role for 
 \begin_inset Formula $r$
 \end_inset
 
@@ -6536,9 +6593,13 @@ ref{tabTNZNGR_r}
 \end_inset
 
  for Nigeria.
- The wealth-concentration thus seems to provide a more clear-cut and standardise
-d interpretation of urbanisation in the two economies than what may be provided
- using the survey's urban / rural classification.
+ The wealth-concentration 
+\family typewriter
+r
+\family default
+ thus seems to provide a more clear-cut and standardised interpretation
+ of urbanisation in the two economies than what may be provided using the
+ survey's urban / rural classification.
 \end_layout
 
 \begin_layout Standard
@@ -6546,7 +6607,7 @@ While the wealth effects in Tanzania are stronger, they must be considered
  in light of the observation that the country has far lower levels of enrollment
  in secondary (and higher) education and has higher disparity in asset-ownership
  (even after taking into account the lower urbanisation levels).
- The significance of logarithm of assets 
+ The significance of logarithm of assets-worth 
 \begin_inset Formula $log(A)$
 \end_inset
 
@@ -7945,36 +8006,38 @@ noindent
 \end_layout
 
 \begin_layout Standard
-As the first robustness check, we reestimate the results with wealth concentrati
-on 
+As the first robustness check, we re-estimate the results with wealth concentrat
+ion 
 \family typewriter
 r
 \family default
  as the explanatory variable for those with less than the local median wealth
- (
+ i.e.
+ assets-worth logarithm 
 \begin_inset Formula $log(A)$
 \end_inset
 
- 
+ (
 \family typewriter
 logA
 \family default
 ) and for those above it.
  The results demonstrate how the education expenditures (coefficients for
- 
+ education budget-shares 
 \begin_inset Formula $w_{educ}$
 \end_inset
 
- and 
+ and education-expenditure logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
  ) differ between the poorer and richer households in a given locality.
- The results for above and below local median-assets possession using 
+ The results for above and below local median-assets possession using education
+ budget-shares 
 \begin_inset Formula $w_{educ}$
 \end_inset
 
- and 
+ and education-expenditure-logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
@@ -8020,17 +8083,18 @@ status open
 The role of social effects seems validated with these results as the significanc
 e of social factors remains unaffected by whether the consumers have above
  or below the median asset ownership level.
- More specifically, the factors 
+ More specifically, the factor variables for english-speaking ability 
 \family typewriter
 has_english
 \family default
- and 
+ and (i.e.
+ 
 \family typewriter
 religion 
 \family default
-are significant in results from Tanzania and Nigeria (respectively) for
+) are significant in results from Tanzania and Nigeria (respectively) for
  both richer and poorer households.
- The variable 
+ The factor variable for english-speaking ability 
 \family typewriter
 has_english
 \family default
@@ -8054,11 +8118,12 @@ ref{tabTNZNGR_abovebelow_median}
 \end_inset
 
 ).
- It is worth pointing out that the economic significance for 
+ It is worth pointing out that the economic significance for religion (
+ 
 \family typewriter
 religion 
 \family default
-in Nigeria is higher with 
+) in Nigeria is higher with 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
@@ -8080,7 +8145,7 @@ ref{tabTNZNGR_abovebelow_median}
 \end_layout
 
 \begin_layout Standard
-As one would expect, the effect of 
+As one would expect, the effect of secondar-schools 
 \family typewriter
 secondary_schools
 \family default
@@ -8091,14 +8156,15 @@ r
 \family default
  plays towards access to education appears to be the same for the rich and
  poor halves in a locality as well, we do see a higher economic significance
- of 
+ of wealth-concentration 
 \family typewriter
 r
 \family default
  for the below-median-assets household in Nigeria - possibly because of
  high education costs in urban areas where asset-possession may be lower.
  The access to private education and to higher education favour the richer
- households in both economies - as the economic significance of 
+ households in both economies - as the economic significance of private-educatio
+n factor variable 
 \family typewriter
 educpriv 
 \family default
@@ -8128,15 +8194,16 @@ noprefix "false"
 fathers_educ_rank 
 \family default
 which has a higher statistical significance for poorer households in Tanzania
- (compare the coefficient of 
+ (compare the coefficient of paternal education rank 
 \family typewriter
 fathers_educ_rank 
 \family default
-in Tanzania with dependent variable 
+in Tanzania with educational-expenditure logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- for both above and below median assets possession level in Table 
+ as dependent variable for both above and below median assets possession
+ level in Table 
 \begin_inset ERT
 status open
 
@@ -8985,20 +9052,20 @@ Another robustness check we use is the recomputation of wealth concentration
  These results thus use three types of vicinities.
  The first interpretation is one where a simple average of the total assets
  owned by the households in the consumer's district.
- Both education rank and a factor variable 
+ Both education rank and an agrarian-occupation factor variable 
 \begin_inset Formula $\Omega$
 \end_inset
 
  indicating whether the household head's occupation is agrarian or not are
- used as controls in this interpretation .
- The second interpretation is based on a factor variable 
+ used as controls in this interpretation.
+ The second interpretation is based on a supra-primary factor variable 
 \begin_inset Formula $\Gamma$
 \end_inset
 
  indicating whether the education level of the household-head is higher
  than primary school or not.
  More specifically, the second interpretation uses the prosperity within
- the educational levels implied by 
+ the educational levels implied by supra-primary factor variable 
 \begin_inset Formula $\Gamma$
 \end_inset
 
@@ -9215,15 +9282,15 @@ Prosperity levels and control variables used
 \end_layout
 
 \begin_layout Standard
-The coefficients for 
+The coefficients for wealth-concentration among agrarian-neighbours ( 
 \family typewriter
 r_agri
 \family default
-, 
+ ) and that among those supra-primary education ( 
 \family typewriter
 r_educ 
 \family default
-are provided in Tables 
+) are provided in Tables 
 \begin_inset ERT
 status open
 
@@ -9251,19 +9318,21 @@ ref{tabTNZNGR_roccup}
 
  respectively for both Tanzania and Nigeria.
  Here too, we see that the wealth concentration corresponds to a rise in
- educational expenditure 
+ educational expenditure logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- for Nigeria but its effect - using either 
+ for Nigeria but its effect - using either wealth-concentration in the supra-pri
+mary-educated neighbourhood 
 \family typewriter
 r_educ 
 \family default
-and 
+and wealth-concentration in the agrarian-neighbourhood 
 \family typewriter
 r_agri
 \family default
- - is insignificant for Tanzania (compare results for 
+ - is insignificant for Tanzania (compare results for education expenditure
+ logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
@@ -9273,13 +9342,19 @@ r_agri
 is_secondaryage
 \family default
  seem higher for the occupation cluster (i.e.
- the coefficient 
+ the coefficient for wealth-concentration in the agrarian-neighbourhood
+ 
 \family typewriter
 r_agri
 \family default
-) than for the education-cluster (
+) than for the education-cluster ( i.e.
+
 \family typewriter
-r_educ
+ 
+\family default
+wealth-concentration in the supra-primary-educated neighbourhood 
+\family typewriter
+r_educ r_educ
 \family default
 ), it can be argued that education expenses are more often clustered by
  agrarian or non-agrarian occupations than by education levels the populations
