@@ -4988,13 +4988,13 @@ The LSMS survey records past expenditure with diary and recall methods.
 \end_layout
 
 \begin_layout Standard
-The consumption microdata for the year (2014) is combined from across the
- recall and weekly diaries - merging the weekly data with yearly data by
- multiplying the past week's consumption into the number of weeks in the
- year.
+The consumption microdata for the year (2014) - used for budget shares and
+ quality measures - is combined from across the recall and weekly diaries
+ - merging the weekly data with yearly data by multiplying the past week's
+ consumption into the number of weeks in the year.
  The details of this process are described in Appendix I.
- Once combined, the matching of market prices for the goods consumed by
- a household is done for food items 
+ Once combined, the market prices for the goods consumed by a household
+ are matched with the reported consumed quantities of the food items 
 \begin_inset Foot
 status open
 
@@ -5015,18 +5015,23 @@ main lighting fuel
 
 \end_inset
 
- - so that the prices relevant for a household are marked as those that
- are available as market prices in the district where the household is located.
+.
+ 
 \end_layout
 
 \begin_layout Standard
-Since the market-observed prices in the survey are recorded at every district
+The prices relevant for a household are marked as those that are available
+ as market prices in the district where the household is located.
+ Since the market-observed prices in the survey are recorded at every district
  level or at finer levels, we match these prices with every household in
  the survey based on the district the household is located in.
- As price observations at the district level are recorded in different quantitie
-s (grams, kilograms for weight and liters, mls for fluids etc.), we infer
- the price at the district level using a regression over price records for
- the good in the district.
+ This is necessitated also because not all wards and enumerated-areas(EAs)
+ within every district in the survey have prices recorded for all relevant
+ food items.
+ Further, as price observations at the district level are recorded in different
+ quantities (grams, kilograms for weight and liters, mls for fluids etc.),
+ we infer the price at the district level using a regression over price
+ records for the good in the district.
  This is only a means to standardise the prices in a standard unit such
  as a kilogram or a litre from the prices that are recorded in several units.
  The price per unit of any item declines with the increase in quantity purchase.
@@ -5070,7 +5075,7 @@ s (grams, kilograms for weight and liters, mls for fluids etc.), we infer
 \end_inset
 
  (for 
-\begin_inset Formula $q=1$
+\begin_inset Formula $\underline{q}=1$
 \end_inset
 
  ).
@@ -5730,8 +5735,9 @@ While the income data may not be of direct utility to its sparsity, it is
  data, we use a mapping of incomes on to the list of occupational (ordered)
  ranks by sorting the occupations based on income.
  More specifically, the occupations are sorted based on the average income
- received and categorised in broad ranks ranging form 1 to 3 (non-paying
- occupations are unemployed status is set to 0).
+ received and categorised in broad ranks ranging form 0 to 3 (non-paying
+ occupations are unemployed status is set to 0 and a higher-rank corresponds
+ to a higher-income occupation).
  The occupation ranks thus assigned are shown in Table 
 \begin_inset ERT
 status open
@@ -5746,6 +5752,9 @@ ref{occupation_rank_tn}
 \end_inset
 
 .
+ Notice that these variables have only been used for a descriptive view
+ of the data (and the alternative formulation based on HW method presented
+ in Appendix II).
  The variation of occupation-ranks across Tanzania are described in Section
  
 \begin_inset CommandInset ref
@@ -5763,8 +5772,6 @@ noprefix "false"
  In other words, an ordered variable corresponding to the varied education
  levels is inferred as occupation-rank based on income received by the highest-e
 ducation level recorded for individuals in the data.
- These are used for descriptive statistics as well as for the alternative
- formulations in Appendix II .
  The mappings from education-levels to education ranks are listed in Table
  
 \begin_inset ERT
