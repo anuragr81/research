@@ -1487,9 +1487,21 @@ literal "false"
 \end_inset
 
  ) .
- Both wealth measures - including total value of land owned - and the degree
- of urbanisation therefore have influence food diversity and quality in
- the country.
+ As such, a significant number of household dependent on self-farming in
+ reportedly rural settings may obfuscate the relationship between urban
+ and rural food demand that may be apparent from the conventional models
+ for urban-rural migration (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HarrisTodaro1970"
+literal "false"
+
+\end_inset
+
+).
+ The use of permanent income and a specific sense of urbanisation as key
+ explanatory variables are therefore central to our survey of food diversity
+ in the economy.
 \end_layout
 
 \begin_layout Standard
@@ -1507,8 +1519,9 @@ status open
 \end_layout
 
 \begin_layout Standard
-The measure for food diversity pertaining to health and nutrition have been
- often based on simple counter-based methods (
+The measure for food diversity pertaining to health and nutrition in the
+ developing economies have been often based on simple counter-based methods
+ (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "RuelDDMethods2003,KennedyBallardFantaFAO2011"
@@ -1519,10 +1532,8 @@ literal "false"
 ).
  In the current chapter, we use methods of quality that consider the quantities
  consumed of commodities and are relevant from a food diversity perspective.
- The framework for quality used in the chapter relies on a long tradition
- in consumer demand.
- Among the early approaches that have considered both quality and quantity
- in consumer utility, is the method from 
+ The framework for quality which we use in the chapter has been in use at
+ least since 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HouthakkerQuality1952"
@@ -1530,9 +1541,20 @@ literal "true"
 
 \end_inset
 
- where the quality price elasticity of demand (quantity purchased) is decomposed
- into a quantity price elasticity of expenditure on quality and an income
- elasticity of quality measure - while treating quality as a separate good.
+.
+ As one of the early approaches to consider both quality and quantity in
+ the consumer utility, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerQuality1952"
+literal "true"
+
+\end_inset
+
+'s approach is to treat quality as a separate good - while viewing the quality
+ price elasticity of demand (quantity purchased) decomposed into a quantity
+ price elasticity of expenditure on quality and an income elasticity of
+ quality measure.
  The treatment of quality as a separate good has since been widely used
  in the literature.
  Another such example is the simple repackaging method - which treats a
@@ -1735,7 +1757,7 @@ status open
 For situations where market-prices are not available to such detail, there
  have been a few techniques to address the measurement errors arising from
  the use of price-deflators.
- Deaton 
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonQualityQuantityVariation"
@@ -1753,7 +1775,7 @@ literal "true"
 
 \end_inset
 
- for panel data analyses (also see McKelvey's assessment of the Deaton method).
+ for panel data analyses.
  
 \end_layout
 
@@ -1764,7 +1786,7 @@ literal "true"
 
 \begin_layout Standard
 A quality-metric associated with a certain commodity (e.g.
- for protein or fat) depends on a grouping of items into commodities subject
+ for cereals, fat etc.) depends on a grouping of items into commodities subject
  to a certain homegeneity restrictions.
  Given the quantity consumed 
 \begin_inset Formula $\{q_{i}\}_{i\in[1,n]}=\{q_{1},q_{2},...,q_{n}\}$
@@ -1779,7 +1801,15 @@ A quality-metric associated with a certain commodity (e.g.
 \end_inset
 
  goods, the quality-metric solves a problem equivalent to the following
- disaggregated optimisation problem for a direct utility 
+ disaggregated optimisation problem (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+literal "false"
+
+\end_inset
+
+) for a direct utility 
 \begin_inset Formula $U(q_{1},q_{2},...)$
 \end_inset
 
@@ -1812,15 +1842,7 @@ More specifically, the quality metric problem is that of grouping the item
 \begin_inset Formula $P_{G}$
 \end_inset
 
- (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "NelsonQualityQuantity"
-literal "false"
-
-\end_inset
-
-) so that the solution of the problem in Equation 
+ so that the solution of the problem in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:disaggregated_problem"
@@ -1861,7 +1883,7 @@ Such an aggregation requires that the
 \end_inset
 
  groups (commodities) are separable and that the demand for items within
- each group is a homogenous function of the goods it contains (see 
+ each group is a homogenous function of the goods it contains (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NelsonQualityQuantity"
@@ -1946,19 +1968,11 @@ Unrestricted Method
 \begin_inset Quotes erd
 \end_inset
 
- for the AIDS model (see 
+ for the AIDS model (
 \begin_inset CommandInset citation
 LatexCommand cite
-key "GibsonKimQualityBog2019"
+key "GibsonKimQualityBog2019,DeatonMuellbauerAIDS"
 literal "false"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonMuellbauerAIDS"
-literal "true"
 
 \end_inset
 
@@ -2007,7 +2021,7 @@ demographic translation
 \begin_inset Quotes erd
 \end_inset
 
- approach (see 
+ approach (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "PollockWalesDemand"
@@ -2508,46 +2522,20 @@ literal "false"
 ).
  The classification we use as the basis for commodity groups are arrived
  at by setting the number of clusters to 5 which is when the within-cluster
- sum of squared errors drops to less than unity.
- 
+ sum of squared errors drops to less than unity
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A higher number of clusters does not significantly reduce the within-cluster
+ sum of squared error.
 \end_layout
 
-\begin_layout Standard
-The next step for the classification after the unsupervised k-means clustering
- is to align the clusters with the FAO categories.
- Since the price-changes of the constituent items selected from any of the
- five food groups - whose constituent items are correlated in price changes
- - would also be correlated with each other, we split the groups identified
- in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:PriceBasedGroups"
-plural "false"
-caps "false"
-noprefix "false"
-
 \end_inset
 
- into further sub-groups aligned with the FAO groups.
- Recall that the FAO categories are (i) cereals, (ii) vegetables, (iii)
- fruits, (iv) meat, (v) eggs (vi) fish and other sea foods (vii) legumes,
- nuts and seeds, (viii) milk and milk products (ix) oil and fats, (x) sweets
- (xi) spices, condiments and beverages and (xii) tubers and roots.
- With these, the cateogry cereals-milk-greens is split into milk, veg and
- cereals, fruits-fish is split into fruits and fish, startches-fats-complements
- is split into startches, fats and complements while the categories tubers
- and meatsproteins are retained.
- The resulting categories 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "KennedyBallardFantaFAO2011"
-literal "false"
-
-\end_inset
-
- are therefore i) cereals ii) veg iii) fruits iv) meats-proteins v) fish
- vi) milk vii)fat viii) complements ix) tubers x) chicken and xi) starches
- whose constituents are shown in Table 
+.
+ The classification of items based on these FAO-categories and the correlated-pr
+ice-movement is presented in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:GroupsModified"
@@ -2558,8 +2546,15 @@ noprefix "false"
 \end_inset
 
 .
- The cluster constituents provided by the first-step before above-described
- splitting based on FAO categories are listed in Table 
+\end_layout
+
+\begin_layout Standard
+The next step for the classification after the unsupervised k-means clustering
+ is to align the clusters with the FAO categories.
+ Since the price-changes of the constituent items selected from any of the
+ five food groups - whose constituent items are correlated in price changes
+ - would also be correlated with each other, the groups obtained by the
+ classification based on correlation prices (shown in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:PriceBasedGroups"
@@ -2569,7 +2564,40 @@ noprefix "false"
 
 \end_inset
 
+) are split into further sub-groups aligned with the FAO groups in Table
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:GroupsModified"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
 .
+ Recall that the FAO categories are (i) cereals, (ii) vegetables, (iii)
+ fruits, (iv) meat, (v) eggs (vi) fish and other sea foods (vii) legumes,
+ nuts and seeds, (viii) milk and milk products (ix) oil and fats, (x) sweets
+ (xi) spices, condiments and beverages and (xii) tubers and roots.
+ With these, the commodity cereals-milk-greens is split into milk, veg and
+ cereals, fruits-fish is split into fruits and fish, startches-fats-complements
+ is split into startches, fats and complements while the categories tubers
+ and meatsproteins are retained.
+ The resulting categories are therefore i) cereals ii) veg iii) fruits iv)
+ meats-proteins v) fish vi) milk vii)fat viii) complements ix) tubers x)
+ chicken and xi) starches whose constituents are shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:GroupsModified"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2869,7 +2897,7 @@ status open
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="2">
 <features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="2cm">
+<column alignment="left" valignment="top" width="2.2cm">
 <column alignment="left" valignment="top" width="7cm">
 <row>
 <cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
@@ -3026,8 +3054,7 @@ Food items classified into commodity groups based on price-movements
 \end_layout
 
 \begin_layout Standard
-As mentioned earlier, the basis for the quality metric associated for every
- commodity 
+The basis for the quality metric associated for every commodity 
 \begin_inset Formula $G$
 \end_inset
 
@@ -3041,7 +3068,7 @@ noprefix "false"
 
 \end_inset
 
- ) is the Hick's commodity theorem (see 
+) is the Hick's commodity theorem (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hicksvaluecapital1946"
@@ -3049,7 +3076,7 @@ literal "false"
 
 \end_inset
 
- ) which states that a group of goods behave as if they were a single commodity
+) which states that a group of goods behave as if they were a single commodity
  so long as the the prices of the group of goods changes in the same proportion.
  Simply put, a constant relative price structure allows us to factor out
  the quantity of the composite commodity consumed from the demand function
@@ -3143,7 +3170,7 @@ The income elasticity of composite quantity
 \end_inset
 
 .
- This becomes evident in Section 
+ This is further explained in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:QualityMeasure"
@@ -3246,8 +3273,25 @@ literal "false"
 
 \end_inset
 
-) and relies on the available market-price (over the years from 2008 to
- 2014 - see Figure 
+) and relies on the available market-price
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A similar analysis of rice varieties is conducted by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKelveyQuality2011"
+literal "true"
+
+\end_inset
+
+ .
+\end_layout
+
+\end_inset
+
+ (over the years from 2008 to 2014 - see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:LSMSMarketPrices"
@@ -3257,15 +3301,7 @@ noprefix "false"
 
 \end_inset
 
-; also see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "McKelveyQuality2011"
-literal "true"
-
-\end_inset
-
- for a similar analysis of rice varieties).
+).
  Consider for example the two pairs of items with similar price-movements
  - with sugar and tea being first pair that have similar price changes (see
  Table 
@@ -3448,8 +3484,8 @@ To calculate the quality associated with a group
 \begin_inset Formula $G\in\mathscr{G}$
 \end_inset
 
- (such as the items : eggs and cooking in commodity fat) that have a constant
- within-group relative price-structure, a base-price 
+ (such as the items : eggs and cooking in the commodity: fat) that have
+ a constant within-group relative price-structure, a base-price 
 \begin_inset Formula $P_{G}$
 \end_inset
 
@@ -3952,7 +3988,7 @@ Eggs
 
 
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="2" columns="2">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0.5in">
 <column alignment="center" valignment="top" width="1.5in">
@@ -3989,7 +4025,7 @@ Eggs
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4014,25 +4050,10 @@ Eggs
 \end_inset
 
 
-\end_layout
-
+\begin_inset Newline newline
 \end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 \begin_inset Formula $V_{fat}=$
 \end_inset
 
@@ -4253,7 +4274,7 @@ Eggs
 
 
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="2" columns="2">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0.5in">
 <column alignment="center" valignment="top" width="1.5in">
@@ -4290,7 +4311,7 @@ Eggs
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4315,25 +4336,10 @@ Eggs
 \end_inset
 
 
-\end_layout
-
+\begin_inset Newline newline
 \end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 \begin_inset Formula $V_{fat}=$
 \end_inset
 
@@ -4499,11 +4505,12 @@ noprefix "false"
  as the explanatory vairable in the second formulation.
  An indicator variable is also used as control for energy - specifying whether
  the household uses electricity or not.
- 
 \end_layout
 
 \begin_layout Standard
-With intercepts 
+With each of the two explanatory variables, we use both the quality-metric
+ and the budget share as dependent variables in the AIDS system of equations.
+ Thus with intercepts 
 \begin_inset Formula $\rho_{1,G}$
 \end_inset
 
@@ -4536,11 +4543,11 @@ With intercepts
 \begin_inset Formula $\beta_{G,1},\beta_{G,2}$
 \end_inset
 
- for 
+ , 
 \begin_inset Formula $ln(x)$
 \end_inset
 
- and 
+ as logarithm of total expenditure and coefficient 
 \begin_inset Formula $\gamma_{1,Gj}$
 \end_inset
 
@@ -4556,7 +4563,7 @@ With intercepts
 \begin_inset Formula $\{P_{j}\}_{j\in[1,n]}$
 \end_inset
 
-, we thus have following system of equations
+, we have the following system of equations
 \end_layout
 
 \begin_layout Standard
@@ -4582,7 +4589,38 @@ ln\ V_{G} & =\rho_{2,G}+\sum_{k=1}^{s}\rho_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma_{2,G
 \end_layout
 
 \begin_layout Standard
-The 
+Equivalently, with 
+\begin_inset Formula $ln(A)$
+\end_inset
+
+ as the explanatory variable, we have the following system of equations
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+w_{G} & =\rho'_{1,G}+\sum_{k=1}^{s}\rho'_{1,Gk}d_{k}+\sum_{j=1}^{n}\gamma'_{1,Gj}ln(P_{j})+\beta'_{G,1}ln(A)+\epsilon'_{G,1}\label{eq:AIDS_quality_w-1}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+ln\ V_{G} & =\rho'_{2,G}+\sum_{k=1}^{s}\rho'_{2,Gk}d_{k}+\sum_{j=1}^{n}\gamma'_{2,Gj}ln(P_{j})+\beta'_{G,2}ln(A)+\epsilon'_{G,2}\label{eq:AIDS_quality_lnV-1}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that the 
 \begin_inset Formula $s$
 \end_inset
 
@@ -4607,13 +4645,13 @@ noprefix "false"
 \end_inset
 
  include the indicator variables related to access to electricity as well.
- Since the price for quality is not required, the price-coefficients in
- the 
+ Further, since the price for quality is not required, the price-coefficients
+ in the 
 \begin_inset Formula $ln\ V$
 \end_inset
 
- equations are not subject to any restrictions - while the constraints of
- symmetry are applied to the quantity-related estimation equations.
+ equations are not subject to any restrictions - unlike the budget-share
+ estimation equations where the constraints of symmetry are applied.
  More specifically, the symmetry conditions are imposed with 
 \begin_inset Formula $\gamma_{1,Gj}=\gamma_{1,jG}$
 \end_inset
@@ -4622,7 +4660,7 @@ noprefix "false"
 \begin_inset Formula $j,G$
 \end_inset
 
- in the equations for quantity.
+ in the equations for budget-share equations.
 \end_layout
 
 \begin_layout Standard
@@ -4637,9 +4675,9 @@ literal "false"
 \end_inset
 
 ).
- As a solution to the estimation problem, it is common to delete one of
- the equations to estimate and recover its coefficients through the adding-up
- restrictions (
+ As a solution to this well-known estimation problem, it is common to delete
+ one of the equations to estimate and recover its coefficients through the
+ adding-up restrictions (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ParisCaraccioloTestingAIDSAddingUp2014,LiGangTourismdemand2004"
@@ -4676,7 +4714,7 @@ literal "false"
  Thus one of the commodity group (chicken) - which does not correspond to
  a quality is ignored from the estimation.
  The coefficients in the quantity equation for chicken can be recovered
- 
+ as 
 \begin_inset Formula $\rho_{chicken}=1-\sum_{G\ne chicken}^{n}\rho_{1,G}$
 \end_inset
 
@@ -4689,7 +4727,8 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-To state the exact equation to be estimated, consider the commodity 
+In order to describe an exact equation set to be estimated, we consider
+ the commodity 
 \begin_inset Formula $G=meatsproteins$
 \end_inset
 
@@ -4710,7 +4749,7 @@ To state the exact equation to be estimated, consider the commodity
 \end_inset
 
  (electricity-access).
- There are two equations for quantity and quality of the meats-proteins
+ There are two equations for budget-share and quality of the meats-proteins
  commodity (which we name 
 \family typewriter
 qmeatsproteins
