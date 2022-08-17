@@ -1,3 +1,14 @@
+W_p_logis <- function(omega,omega_bar,nu){
+  #  return(plogis(q = nu,location = omega_bar, scale = omega))
+  #  print(paste("W_p_logis=",nu))
+  return (1/(1+exp(-omega * (nu-omega_bar))))
+}
+
+L_p_logis <- function(lambda,lambda_bar,nu){
+  #return(plogis(q = nu,location = lambda_bar, scale = lambda))
+  #  print(paste("L_p_logis=",nu))
+  return (1-1/(1+exp(-lambda* (nu-lambda_bar))))
+}
 
 
 plain_util <- function(A){
@@ -27,12 +38,14 @@ plot_selections <- function(){
   k <- 3
   
   y_start = 1
-  y_max = 7
-  dy = 1
-  y_end <- y_start + dy
+  y_max = 11
+  dy = .01
+  y_end <- 2
   omega_bar_selections <-array()
   nu1_chosen <-array()
   nu2_chosen <-array()
+  y1_array <- array()
+  y2_array <- array()
   i <- 1
   while (y_end <y_max){
     omega_bar_found = plot_societal_optimal(beta = b, y1=y_start,y2=y_end,alpha = a,lambda=1,kappa=k)
@@ -40,11 +53,13 @@ plot_selections <- function(){
     res <- print_results_for_chosen_omega_bar(beta = b, y1 = y_start, y2 = y_end, alpha = a,lambda = 1,kappa = k,omega_bar = omega_bar_found,print_all = F,plot = F)
     nu1_chosen [i] <- res[["nu_1_chosen"]]
     nu2_chosen [i] <- res[["nu_2_chosen"]]
-    
-    y_end <- y_start + dy
+    y1_array[i] <- y_start
+    y2_array[i] <- y_end
+    y_end <- y_end + dy
+    print(paste("(y_start,y_end)=(",y_start,",",y_end,")"))
     i <- i + 1
   }
-  return (data.frame(omega_bar=omega_bar_selections,nu1=nu1_chosen,nu2=nu2_chosen))
+  return (data.frame(omega_bar=omega_bar_selections,nu1=nu1_chosen,nu2=nu2_chosen,y1=y1_arr,y2=y2_arr))
   
   
 }
