@@ -38,12 +38,14 @@ plot_selections <- function(){
   k <- 3
   
   y_start = 1
-  y_max = 11
+  y_max = 9
   dy = .01
   y_end <- 2
   omega_bar_selections <-array()
   nu1_chosen <-array()
   nu2_chosen <-array()
+  A1_array <-array()
+  A2_array <-array()
   y1_array <- array()
   y2_array <- array()
   i <- 1
@@ -53,13 +55,16 @@ plot_selections <- function(){
     res <- print_results_for_chosen_omega_bar(beta = b, y1 = y_start, y2 = y_end, alpha = a,lambda = 1,kappa = k,omega_bar = omega_bar_found,print_all = F,plot = F)
     nu1_chosen [i] <- res[["nu_1_chosen"]]
     nu2_chosen [i] <- res[["nu_2_chosen"]]
+    A1_array [i] <- res[["LTA1"]]
+    A2_array [i] <- res[["LTA2"]]
     y1_array[i] <- y_start
     y2_array[i] <- y_end
     y_end <- y_end + dy
     print(paste("(y_start,y_end)=(",y_start,",",y_end,")"))
+    
     i <- i + 1
   }
-  return (data.frame(omega_bar=omega_bar_selections,nu1=nu1_chosen,nu2=nu2_chosen,y1=y1_arr,y2=y2_arr))
+  return (data.frame(omega_bar=omega_bar_selections,nu1=nu1_chosen,nu2=nu2_chosen,y1=y1_array,y2=y2_array,A1=A1_array,A2=A2_array))
   
   
 }
@@ -223,6 +228,8 @@ no_greed_two_stage_sol <- function(omega_bar,omega,lambda_bar,lambda,y1,y2,alpha
     res = list()
     res[["nu_1_chosen"]]=nu_1_chosen
     res[["nu_2_chosen"]]=nu_2_chosen
+    res[["LTA1"]]=ea_w(nu_1_chosen)
+    res[["LTA2"]]=ea_l(nu_2_chosen)
     res[["u1"]]=ea_uw(nu_1_chosen)
     res[["u2"]]=ea_ul(nu_2_chosen)
     return (res)
