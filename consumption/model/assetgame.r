@@ -20,6 +20,10 @@ plain_util <- function(A){
   }
 }
 
+combined_util <- function (beta, u1,u2){
+ U <- beta*u1**.5 +(1-beta)*u2**.5  
+ return (U)  
+}
 
 onedimensional_bisection <- function(f,a,b,N = 1000){
   
@@ -34,12 +38,12 @@ onedimensional_bisection <- function(f,a,b,N = 1000){
 
 plot_selections <- function(){
   a <- .3
-  b <- .2
+  b <- .8
   k <- 3
   
   y_start = 1
   y_max = 9
-  dy = .01
+  dy = 2
   y_end <- 2
   omega_bar_selections <-array()
   nu1_chosen <-array()
@@ -78,19 +82,17 @@ print_results_for_chosen_omega_bar <- function(omega_bar,beta,y1,y2,alpha, lambd
                                    lambda=lambda,y1=y1,y2=y2,alpha=alpha,plot=plot,
                                    return_choices = T)
   #print(result)
+  res = list()
+  res <- result
+  res[['U']] <- combined_util(beta=beta, u1 = res[["u1"]], u2 = res[["u2"]])
+  
   if (missing(print_all) || print_all == F){
     
-    res = list()
-    res <- result
-    res[['U']] <- beta*res[["u1"]]**.5 +(1-beta)*res[["u2"]]**.5
+    
     return(res)
   } else if (print_all == T){
     print(paste("result[[nu_1_chosen]]=",result[["nu_1_chosen"]],"result[[nu_2_chosen]]=",result[["nu_2_chosen"]],
-                "Total U=",(beta*result[["u1"]]**.5 +(1-beta)*result[["u2"]]**.5)))
-    
-    res = list()
-    res <- result
-    res[['U']] <- beta*res[["u1"]]**.5 +(1-beta)*res[["u2"]]**.5
+                "Total U=",res[['U']]))
     
     return(res)
     
@@ -141,7 +143,7 @@ plot_societal_optimal <- function(beta,y1,y2, alpha,lambda, kappa,use_xlim){
                                      lambda=lambda,y1=y1,y2=y2,alpha=alpha,plot=F,
                                      return_choices = T)
     
-    return (beta*result[["u1"]]**.5 +(1-beta)*result[["u2"]]**.5)
+    return(combined_util(beta = beta,u1 = result[["u1"]] , u2 = result[["u2"]]))
     
   }
   
