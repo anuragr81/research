@@ -39,12 +39,13 @@ onedimensional_bisection <- function(f,a,b,N = 1000){
 plot_selections <- function(){
   a <- .3
   b <- .8
-  k <- 3
+  #k <- 3
+  k <- 1.5
   
   y_start = 1
-  y_max = 9
-  dy = 2
-  y_end <- 2
+  y_max = 12
+  dy = 1
+  y_end <- 4
   omega_bar_selections <-array()
   nu1_chosen <-array()
   nu2_chosen <-array()
@@ -64,7 +65,7 @@ plot_selections <- function(){
     y1_array[i] <- y_start
     y2_array[i] <- y_end
     y_end <- y_end + dy
-    print(paste("(y_start,y_end)=(",y_start,",",y_end,")"))
+    print(paste("(y_start,y_end)=(",y_start,",",y_end,") omega_bar=",omega_bar_found))
     
     i <- i + 1
   }
