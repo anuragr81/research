@@ -43,8 +43,8 @@ plot_selections <- function(){
   k <- 1.5
   
   y_start = 1
-  y_max = 12
-  dy = 1
+  y_max = 10
+  dy = .02
   y_end <- 4
   omega_bar_selections <-array()
   nu1_chosen <-array()
