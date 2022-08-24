@@ -76,8 +76,7 @@ plot_selections <- function(){
 
 test_plot <- function(rr){
   g <- subset(rr, (delta <3.5 & delta > 3) | (delta > 4.2 & delta < 5) | ( delta > 6 & delta < 6.5) | (delta > 7 & delta < 7.5)|  (delta > 8 & delta < 8.09 ))  ; 
-  par(mfrow=c(2,3));
-  plot(g$y2-g$y1,g$omega_bar,type='l',xlab=latex2exp::TeX(paste("$\\Delta")),ylab=latex2exp::TeX(paste("$\\underline{\\omega}$")))
+  par(mfrow=c(3,2));
   
   plot(g$y2-g$y1,g$nu1,type='l',xlab = latex2exp::TeX(paste("$\\Delta$")),ylab=latex2exp::TeX(paste("$\\bar{\\nu}_{1}$")));
   plot(g$y2-g$y1,g$nu2,type='l',xlab=latex2exp::TeX(paste("$\\Delta")),ylab=latex2exp::TeX(paste("$\\bar{\\nu}_{2}$"))); 
@@ -85,6 +84,8 @@ test_plot <- function(rr){
   plot(g$y2-g$y1,g$A1,type='l',xlab=latex2exp::TeX(paste("$\\Delta")),ylab=latex2exp::TeX(paste("$A_{1}$")))
   plot(g$y2-g$y1,g$A2,type='l',xlab=latex2exp::TeX(paste("$\\Delta")),ylab=latex2exp::TeX(paste("$A_{2}$")))
   
+  plot(g$y2-g$y1,g$omega_bar,type='l',xlab=latex2exp::TeX(paste("$\\Delta")),ylab=latex2exp::TeX(paste("$\\underline{\\omega}$")))
+  plot(g$y2-g$y1,g$A1+g$A2,type='l',xlab=latex2exp::TeX(paste("$\\Delta")),ylab=latex2exp::TeX(paste("$A_{1}+A_{2}$")))
   
 }
 print_results_for_chosen_omega_bar <- function(omega_bar,beta,y1,y2,alpha, lambda,kappa,print_all,plot=F){
