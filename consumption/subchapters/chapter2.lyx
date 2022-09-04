@@ -49,7 +49,7 @@ theorems-ams-extended-chap-bytype
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 12
+\paperfontsize 11
 \spacing single
 \use_hyperref false
 \papersize default
@@ -78,9 +78,9 @@ theorems-ams-extended-chap-bytype
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 3cm
+\leftmargin 3.5cm
 \topmargin 1cm
-\rightmargin 3cm
+\rightmargin 3.5cm
 \bottommargin 2cm
 \headheight 2cm
 \headsep 2cm
@@ -120,7 +120,7 @@ status open
 \backslash
 partfont{
 \backslash
-fontsize{14}{16}
+fontsize{12}{14}
 \backslash
 selectfont
 \backslash
@@ -2960,15 +2960,27 @@ n for the household rather than as assets contributing to the intergenerational
 
 \begin_layout Standard
 In a simple econometric model, the representative household balances i)
- her consumption with ii) increasing expenditure on education for the children.
- The non-durable consumption that the consumer may spend on excludes the
+ her non-durable consumption (excluding education) with ii) increasing expenditu
+re on education for the children.
+ The non-durable consumption that the household may spend on excludes the
  expenses on maintenance of owned assets.
  The educational expenses and non-durable consumption excluding assets-related-c
 osts thus form the budget constraint for the econometric model.
- Note that the cross-sectional comparison of expenses from the last survey
- records does not consider the substitution with savings towards durable
- goods.
- 
+ In this model for cross-sectional comparison of education expenses, we
+ do not consider the substitution with savings towards durable goods.
+ Other than our focus on cross-sectional effects, another reason why we
+ avoid panel methods in the current study is a severe measurement error
+ with time-varying household asset values in the survey (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for details of asset values recorded in the consumption microdata).
 \end_layout
 
 \begin_layout Standard
@@ -3014,7 +3026,8 @@ status open
 \end_layout
 
 \begin_layout Standard
-The econometric analysis is limited for households having one or more children.
+It is worth highlighting that the econometric analysis is limited for households
+ having one or more children.
  In other words, only households with at least one member with their age
  less than 18 are considered in the analysis.
  Since the households with lower working age are likely to have less accumulatio
@@ -3052,8 +3065,8 @@ literal "false"
 
 \end_inset
 
-) and include the comparison of the educational expenses across wealth concentra
-tion levels in our analysis.
+) and thus focus on the comparison of the educational expenses across wealth
+ concentration levels in our analysis.
 \end_layout
 
 \begin_layout Standard
@@ -3072,21 +3085,23 @@ status open
 
 \begin_layout Standard
 In summary, the main explanatory variables used in the empirical analysis
- are the urbanisation level (either the wealth concentration 
-\begin_inset Formula $r$
-\end_inset
-
- or the urban-rural indicator from the survey) and the wealth-measure (either
- the logarithm of the total annual expenditure 
+ are the wealth-measure (the logarithm of the total annual expenditure 
 \begin_inset Formula $log(x)$
 \end_inset
 
- for a household in a given year or the logarithm of total assets owned
- 
+ for a household in a given year) and the urbanisation level (the wealth
+ concentration 
+\begin_inset Formula $r$
+\end_inset
+
+).
+ In the alternative formulation provided for a comparison with the analysis
+ based on urban-rural indicators, we use the the logarithm of total assets
+ owned 
 \begin_inset Formula $log(A)$
 \end_inset
 
- ).
+ ) and urban-rural indicators as the explanatory variables.
  The demographic and social identity variables 
 \begin_inset Formula $\rho$
 \end_inset
@@ -3119,7 +3134,23 @@ noprefix "false"
  district) are important controls in the analysis.
  These controls are used in two formulations with the budget-share of education
  expenses and logarithm of education expenditure as dependent variables.
- The first regression uses the budget share of education expenses 
+ Such an approach - using both budget-share and logarithm of education expenditu
+re as dependent variables - is similar to the empirical method used by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AcarHHEducTurkey2016"
+literal "false"
+
+\end_inset
+
+ .
+ The budget shares offer a better view of the household-level demand while
+ the logarithm of expenditure facilitate an appropriate comparison of wide-diffe
+rences in educational expenses across the economy.
+\end_layout
+
+\begin_layout Standard
+The first regression uses the budget share of education expenses 
 \begin_inset Formula $w_{educ}$
 \end_inset
 
@@ -3172,26 +3203,13 @@ log(x_{educ})=\rho+\alpha_{educ}\cdot r+\beta_{educ}\cdot log(x_{i})+\gamma_{edu
 \end_layout
 
 \begin_layout Standard
-The two formulations with the budget-share and logarithm of education expenditur
-e as dependent variables are similar to those used by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "AcarHHEducTurkey2016"
-literal "false"
-
-\end_inset
-
-.
- The budget shares offer a better view of the household-level demand while
- the logarithm of expenditure facilitate the comparison of wide-differences
- in educational expenses across the economy.
- While the appearance of educational expenses both in the dependent variable
+While the appearance of educational expenses both in the dependent variable
  and in the logarithm of the total expenditure 
 \begin_inset Formula $log(x)$
 \end_inset
 
- (used as the control variable) may cause some endogeneity, it does not
- interfere with the comparison of relative effects of 
+ (used as the explanatory variable) may cause some endogeneity, it does
+ not interfere with the comparison of relative effects of 
 \begin_inset Formula $r$
 \end_inset
 
@@ -3274,6 +3292,13 @@ ngth(hhid),n_outoffood=sum(outoffood)) %>% mutate(fraction_outoffood=n_outoffood
 /n)
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
 \end_inset
 
 
