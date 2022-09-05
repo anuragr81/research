@@ -21,6 +21,10 @@
 \hyphenpenalty=10000
 \hbadness=10000
 \usepackage[left,modulo]{lineno}
+\usepackage{soul}
+\usepackage{color}
+
+\newcommand{\hly}[1]{{\sethlcolor{yellow}\hl{#1}}}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -5145,7 +5149,7 @@ ref{occupation_rank_ngr}
 \end_inset
 
  (respectively).
- A higher occupation rank implies higher income.
+ A higher occupation rank represents occupations that bring higher income.
  As described in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5184,7 +5188,7 @@ ref{education_rank_ngr}
 \end_inset
 
  for Nigeria in the Appendix).
- A higher education implies a higher education level.
+ A higher education rank corresponds to a higher education level.
 \end_layout
 
 \begin_layout Standard
@@ -5539,7 +5543,7 @@ noprefix "false"
 \end_inset
 
 .
- The controls used in this estimation are listed in the Table 
+ The controls used in this estimation have been listed in the Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Control-Variables"
@@ -5568,32 +5572,24 @@ status open
 \end_layout
 
 \begin_layout Standard
-As described in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Introduction"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the main explanatory variables used in the study are the urbanisation
- levels (measured as urban/rural indicators 
+The two main explanatory variables used in the study are the private household
+ income (measured as the logarithm of total expenditure 
 \family typewriter
-rural_wards 
+logx
 \family default
-or wealth-concentration 
+) and the urbanisation levels (measured as wealth-concentration 
 \family typewriter
 r
 \family default
-) and the wealth (measured as total assets value 
+).
+ In the alternative formulation, the two variables are the logarithm of
+ total assets value (
 \family typewriter
-logA 
+logA
 \family default
-or permanent income 
+) and the urban/rural indicators (
 \family typewriter
-logx
+rural_wards
 \family default
 ).
  The physical access to education (i.e.
@@ -5601,7 +5597,7 @@ logx
 \family typewriter
 secondary_schools
 \family default
-) is a key control used in the comparison.
+) is the main control used in the estimation.
  Other controls used in the comparison are the indicator for an agrarian
  occupation 
 \family typewriter
@@ -5628,7 +5624,7 @@ religion
 \end_inset
 
  used only for Nigeria indicated by 1 for Christianity, 2 for Islam, 3 for
- Traditional, 4 for other - and english-speaking ability (i.e.
+ Traditional, 4 for other - and english-speaking ability i.e.
  the variable 
 \family typewriter
 has_english 
@@ -5637,20 +5633,20 @@ has_english
 
  
 \family default
-indicating the ability to speak English) used for Tanzania, the access to
- private education (
+indicating the ability to speak English used only for Tanzania), the access
+ to private education (
 \family typewriter
 educpriv
 \family default
- 
+ or 
 \begin_inset Formula $\pi$
 \end_inset
 
-), the number of children 
+), the number of children ( 
 \family typewriter
 numchild
 \family default
- (
+ or 
 \begin_inset Formula $h$
 \end_inset
 
@@ -5691,7 +5687,7 @@ is_primaryage
 \end_inset
 
 ).
- Recall that the non-durable consumption prices
+ Recall that the non-durable consumption prices 
 \begin_inset Formula $p_{ne}$
 \end_inset
 
@@ -5723,14 +5719,14 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-Of the control variables and explanatory variables, some are observed at
- the household level while others are observed at the level of the consumer's
- district.
+Of the control variables and explanatory variables discussed above, some
+ are observed at the household level while others are observed at the level
+ of the consumer's district.
  The logarithm of total expenditure 
 \begin_inset Formula $log(x)$
 \end_inset
 
- (
+ (or 
 \family typewriter
 logx
 \family default
@@ -5738,7 +5734,7 @@ logx
 \begin_inset Formula $log(A)$
 \end_inset
 
- (
+ (or 
 \family typewriter
 logA
 \family default
@@ -5962,8 +5958,32 @@ ref{tabTNZNGR_r}
 \end_inset
 
  for both Tanzania and Nigeria.
- The tobit uses a lower limit of zero given a number of houses having no
- expenditure on education.
+ The tobit uses a lower limit of zero given a number of houses have no expenditu
+re on education 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hly{
+\end_layout
+
+\end_inset
+
+(TODO: Add what percentage have zero expenditure)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+.
  A discussion on the cross-section results from the latest available years
  2014 for Tanzania and 2015 for Nigeria follows in Section 
 \begin_inset CommandInset ref
@@ -5976,7 +5996,32 @@ noprefix "false"
 \end_inset
 
 .
- Table 
+ The results from the alternative formulation - where the main explanatory
+ variables are the logarithm of total assets value 
+\begin_inset Formula $log(A)$
+\end_inset
+
+ (or 
+\family typewriter
+\size small
+logA
+\family default
+\size default
+ used in place of household total expenditure ) and the ruralness-score
+ 
+\family typewriter
+\size small
+rural_wards 
+\family default
+\size default
+derived from the survey's classificaiton of rural and urban areas (used
+ in place of wealth concentration 
+\family typewriter
+\size small
+r
+\family default
+\size default
+ ) - are presented in Table 
 \begin_inset ERT
 status open
 
@@ -5989,42 +6034,7 @@ ref{tabTNZNGR_urbanrural}
 
 \end_inset
 
- shows the results with the ruralness-score 
-\family typewriter
-\size small
-rural_wards 
-\family default
-\size default
-(based on the survey's classificaiton of rural and urban areas) as one of
- the explanatory variables - used in place of wealth concentration 
-\family typewriter
-\size small
-r
-\family default
-\size default
- - along with the logarithm of total assets value 
-\begin_inset Formula $log(A)$
-\end_inset
-
- (i.e.
- 
-\family typewriter
-\size small
-logA
-\family default
-\size default
- ) used as the measure of household wealth (used in place of the permanent
- income measure 
-\begin_inset Formula $log(x)$
-\end_inset
-
- 
-\family typewriter
-\size small
-- logx
-\family default
-\size default
-) .
+.
 \end_layout
 
 \begin_layout Subsection
