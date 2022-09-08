@@ -1139,6 +1139,11 @@ lsms_loader<-function(fu,ln,lgc) {
       
       cb$clusterid <- NULL
       
+      #cbggovtprmschool <- subset(cb,facilitycode=="D")
+      #cbggovtprmschool$has_govtprmschool <- (cbggovtprmschool$accessibility==1) | (cbggovtprmschool$accessibility==2 & cbggovtprmschool$distance<=6)
+      #cbgprivprmschool <- subset(cb,facilitycode=="E")
+      #cbgprivprmschool$has_privprmschool <- (cbgprivprmschool$accessibility==1) | (cbgprivprmschool$accessibility==2 & cbgprivprmschool$distance<=6)
+      
       cbggovtsecschool <- subset(cb,facilitycode=="F")
       cbggovtsecschool$has_govtsecschool <- (cbggovtsecschool$accessibility==1) | (cbggovtsecschool$accessibility==2 & cbggovtsecschool$distance<=6)
       
