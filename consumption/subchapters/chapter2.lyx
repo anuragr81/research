@@ -3364,9 +3364,9 @@ noindent
 The educational expenses and the non-asset related expenditures are obtained
  from the Living Standard Measurement Study (LSMS) which is conducted by
  the World Bank.
- The survey has been designed to assist in the understanding of links between
- asset ownership, community access (to market, schools), food prices and
- agriculture activities.
+ The survey is unique in its and aims to improves the understanding of links
+ between asset ownership, community access (to market, schools), food prices
+ and agriculture activities.
  The data in the surveys from multiple countries is largely uniform in its
  data-model (fields) and is often geo-referenced with a sufficiently wide-covera
 ge in the country to allow a study of spatial variation in the observed
@@ -3520,9 +3520,15 @@ The physical access to education is measured using the distance to the nearest
 \end_inset
 
  vicinity).
- The score evidently factors in the high-population density in urban areas
- since densely populated districts would have more wards within the same
- geographical distance as a less populated district.
+ This measure takes care of the issue that there are many wards (and enumerated-
+areas within) having consumer entries for assets and consumption that the
+ school-availability (primary as well as secondary ) is not recorded for.
+ The aggregation over districts takes care of this issues there are no district
+ with consumer entries for assets and consumption that we don't have the
+ total number (score) of secondary-schools for.
+ This score evidently also factors in the high-population density in urban
+ areas since densely populated districts would have more wards within the
+ same geographical distance as a less populated district.
 \end_layout
 
 \begin_layout Standard
@@ -4563,32 +4569,9 @@ noindent
 \end_layout
 
 \begin_layout Standard
-We present a brief comparison of the two economies based on data from OECD
- (Organisation for Economic Cooperation and Development) and World Bank
- before the empirical analysis using methods and data described in Sections
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Econometric-Method"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Data"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- Of the two economies, a higher percent of the GDP comes from agricultural
- production in Tanzania.
+A brief overview of the two economies using data from OECD (Organisation
+ for Economic Cooperation and Development) suggests that of the two economies,
+ a higher percent of the GDP comes from agricultural production in Tanzania.
  The per-capita GDP 2020 for Nigeria (2396.04 USD) is much higher than that
  of Tanzania (976.16 USD) (source World Bank).
  As of 2020, Nigeria had a population of 206.1 million and Tanzania's population
@@ -4892,24 +4875,8 @@ noindent
 \end_layout
 
 \begin_layout Standard
-...
- The role of private education is also much higher in Nigeria (see Figure
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:BarChartSchoolTypes"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Standard
-The urban residents spend much higher on education than the rural residents
+Considering the overall distribution of education expenses, we see that
+ the urban residents spend much higher on education than the rural residents
  in both the economies.
  More specifically, urban residents spend 2.34 times more than rural residents
  in Nigeria whereas they spend 2.8 times more in Tanzania.
@@ -4934,6 +4901,18 @@ noprefix "false"
  Comparing education levels of the household heads, we see that the average-educ
 ation rank of the household heads in Tanzania (1.8) is lower than that in
  Nigeria(1.9).
+ We also see that the role of private education is much higher in Nigeria
+ (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BarChartSchoolTypes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -4953,7 +4932,6 @@ noprefix "false"
  for in Nigeria and Tanzania, we note that distribution of assets is more
  sparse in Tanzania even though the overall expenditure appears similarly
  distributed in the two countries.
- 
 \end_layout
 
 \begin_layout Standard
@@ -5587,7 +5565,17 @@ noprefix "false"
 \end_inset
 
  .
- These dependent variables are listed in the Table 
+ The controls for the estimation are listed in the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Control-Variables"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ while the dependent variables are listed in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Dependent Variables"
@@ -5598,17 +5586,7 @@ noprefix "false"
 \end_inset
 
 .
- The controls used in this estimation have been listed in the Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Control-Variables"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5637,8 +5615,9 @@ logx
 r
 \family default
 ).
- In the alternative formulation, the two variables are the logarithm of
- total assets value (
+ As discussed before, an alternative formulation is also specified for compariso
+n - where the two explanatory variables are the logarithm of total assets
+ value (
 \family typewriter
 logA
 \family default
@@ -5652,7 +5631,7 @@ rural_wards
 \family typewriter
 secondary_schools
 \family default
-) is the main control used in the estimation.
+) is an important control in both the formulations.
  Other controls used in the comparison are the indicator for an agrarian
  occupation 
 \family typewriter
@@ -5742,6 +5721,8 @@ is_primaryage
 \end_inset
 
 ).
+ All of the controls remain the same for the main as well as alternative
+ formulation.
  Recall that the non-durable consumption prices 
 \begin_inset Formula $p_{ne}$
 \end_inset
@@ -6552,11 +6533,12 @@ ref{tabTNZNGR_urbanrural}
 \end_inset
 
 ).
- With the results for education expenditure logarithm 
+ In the alternative formulation, the results with education expenditure
+ logarithm 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- as dependent variables in Tables 
+ as dependent variable in Tables 
 \begin_inset ERT
 status open
 
@@ -6569,11 +6551,11 @@ ref{tabTNZNGR_urbanrural}
 
 \end_inset
 
- in particular, we see that the role of secondary-school 
+ show the role of secondary-school access 
 \family typewriter
 secondary_schools
 \family default
- is stronger for Nigeria when taking wealth i.e.
+ to be stronger for Nigeria when taking wealth i.e.
  total assets-worth logarithm 
 \begin_inset Formula $log(A)$
 \end_inset
@@ -6583,7 +6565,7 @@ secondary_schools
 logA 
 \family default
 into account.
- The wealth effect is thus stronger than access in both the economies but
+ The wealth effect seems stronger than access in both the economies but
  is weaker for Nigeria where more household members enroll into secondary
  and tertiary education - regardless of the differences in long-term intergenera
 tional wealth (measured with logarithm of assets-worth 
@@ -6596,9 +6578,15 @@ logA
 \family default
 ).
  The decomposed view of expenses on education in terms of secondary and
- primary education level is important for this observation and reflects
+ primary education level further clarifies this observation - reflecting
  the far lower attendance of secondary education in Tanzania.
- The role of the number of children 
+ 
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+The role of the number of children 
 \begin_inset Formula $h$
 \end_inset
 
@@ -6606,14 +6594,11 @@ logA
 \family typewriter
 numchild
 \family default
-) seems stronger in Tanzania than in Nigeria - but that effect also seems
- likely due the education expenses driven by primary education in Tanzania
+) also seems stronger in Tanzania than in Nigeria - but the effect is likely
+ due the education expenses primarily driven by primary education in Tanzania
  (as well as a higher percentage of households reporting no education expenditur
 e in the survey from Nigeria).
-\end_layout
-
-\begin_layout Standard
-Another consequence of most households spending on primary education alone
+ Another consequence of most households spending on primary education alone
  is that the agrarian households appear as spending higher on education
  after considering the wealth-concentration among households with the same
  educational-status.
