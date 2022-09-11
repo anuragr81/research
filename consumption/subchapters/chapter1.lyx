@@ -1036,6 +1036,16 @@ Unlike the aggregate quality approaches, thereefore, we do not infer an
  overall quality of food in the current study.
  Instead quality is assessed in food sub-categories whose constituent items
  move together in terms of their annual prices from 2008 to 2014.
+ This approach is also different from the other extreme where compeltely
+ disaggrergated price elasticities could be used (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HeienWessellsAIDSCensored1990"
+literal "false"
+
+\end_inset
+
+).
  The method - which has been used to estimate quality elasticities used
  for several policy concerns (
 \begin_inset CommandInset citation
@@ -1045,8 +1055,9 @@ literal "false"
 
 \end_inset
 
-) - avoids the need for adjustments to granularity in counting-based diversity
- score approaches that focus on the span of food items consumed 
+).
+ Unlike the diversity score approaches that focus on the span of food items
+ consumed 
 \begin_inset Foot
 status open
 
@@ -1066,7 +1077,20 @@ literal "false"
 
 \end_inset
 
-.
+, we are interested in the quality of food sub-categories instead.
+ The theoretical conditions required for such an aggregation (i.e.
+ the Hicks Commodity Theorem 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hicksvaluecapital1946"
+literal "false"
+
+\end_inset
+
+) are ensured using a clustering of market-price changes.
+ The quality groups thus evaluated - - are met in quality measurement for
+ food commodities - namely fat, meats-proteins, cereals, vegetables, milk,
+ starches, complements, tubers, fruits, fish and chicken.
  In addition, the proposed approach benefits from the use of locally observed
  market-prices - that are often ignored for empirical quality assessments
  (
@@ -1077,18 +1101,7 @@ literal "false"
 
 \end_inset
 
-) while also ensuring that the conditions for quality-aggregation - arising
- from the Hicks Commodity Theorem (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hicksvaluecapital1946"
-literal "false"
-
-\end_inset
-
-) - are met in quality measurement for food commodities - namely fat, meats-prot
-eins, cereals, vegetables, milk, starches, complements, tubers, fruits,
- fish and chicken.
+) .
  
 \end_layout
 
@@ -1354,6 +1367,282 @@ noindent
 \end_layout
 
 \begin_layout Standard
+
+\bar under
+The framework for quality has been used in 
+\bar default
+the demand literature at least since 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerQuality1952"
+literal "true"
+
+\end_inset
+
+.
+ As one of the early approaches to consider both quality and quantity in
+ the consumer utility, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HouthakkerQuality1952"
+literal "true"
+
+\end_inset
+
+'s approach was to treat quality as a separate good - while viewing the
+ quality price elasticity of demand (quantity purchased) decomposed into
+ a quantity price elasticity of expenditure on quality and an income elasticity
+ of quality measure.
+ The treatment of quality as a separate good has since been widely used.
+ A common example of this approach is the simple repackaging method (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FisherShell1968"
+literal "true"
+
+\end_inset
+
+) - which treats a high-quality good as multiples of the lower quality goods.
+ The demand for goods with a certain price using the repackaging approach
+ is viewed in terms of a base-price and a quality parameter - with the implicit
+ assumption being that the variants in every category are perfect substitutes.
+ For most empirical studies where the variation in quality among the items
+ within a commodity may be extreme, this turns out to be a stringent requirement.
+ Even though quality consumed of electricity under energy commodity may
+ be higher than that of kerosene, the substitution between electricity and
+ kerosene could in fact be little so that a view of a demand for electricity
+ in terms of the units of kerosene becomes less justifiable 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+While one may address the issue with the use of an energy-budget (calories),
+ the task is made difficult due to unavailability of quantities consumed
+ or prices in the consumption data.
+\end_layout
+
+\end_inset
+
+.
+ A simple-repackaging model may still be appropriate in the context of the
+ cost-of-living index problem where a substitution is always implied (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FisherShell1968"
+literal "true"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Quality-Quantity metric details]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+The recent approaches in food quality have incorporated quantities consumed
+ directly by either considering the homothetic preferences or price-structure
+ 
+\bar default
+(
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+literal "false"
+
+\end_inset
+
+).
+ The current chapter relies on the latter by using groups that have a price-stru
+cture.
+ To consider the differences between the first and second approaches in
+ more detail, consider that in a generic sense, quality-metric associated
+ with a certain commodity (e.g.
+ for cereals, fat etc.) depends on a grouping of items into commodities subject
+ to a certain homegeneity restrictions.
+ Given the quantity consumed 
+\begin_inset Formula $\{q_{i}\}_{i\in[1,n]}=\{q_{1},q_{2},...,q_{n}\}$
+\end_inset
+
+ and respective prices 
+\begin_inset Formula $\{p_{i}\}_{i\in[1,n]}=\{p_{1},p_{2},...,p_{n}\}$
+\end_inset
+
+ food 
+\begin_inset Formula $i\in[1,n]$
+\end_inset
+
+ goods, the quality-metric solves a problem equivalent to the following
+ disaggregated optimisation problem (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+literal "false"
+
+\end_inset
+
+) for a direct utility 
+\begin_inset Formula $U(q_{1},q_{2},...)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+\max U(q_{1},q_{2},...q_{n})\nonumber \\
+\sum_{i=1}^{n}p_{i}q_{i}=x\label{eq:disaggregated_problem}
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+More specifically, the quality metric problem is that of grouping the item
+ 
+\begin_inset Formula $i\in[1,n]$
+\end_inset
+
+ into groups 
+\begin_inset Formula $G\in[1,M]$
+\end_inset
+
+ and assigning group-commodity price 
+\begin_inset Formula $P_{G}$
+\end_inset
+
+ so that the solution of the problem in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:disaggregated_problem"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is equivalent to that of the problem in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:quality_groups_problem"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+\max U(Q_{1},Q_{2},...Q_{M})\nonumber \\
+\sum_{G=1}^{M}P_{G}Q_{G}=x\label{eq:quality_groups_problem}
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Such an aggregation requires that the 
+\begin_inset Formula $M$
+\end_inset
+
+ groups (commodities) are separable and that the demand for items within
+ each group is a homogenous function of the goods it contains (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+literal "false"
+
+\end_inset
+
+).
+ The approach followed by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation"
+literal "false"
+
+\end_inset
+
+ - using the sum of physical quantities as measure of demand - puts the
+ homogeneity restriction on the household preferences and assumes that the
+ within-group preferences are homothetic.
+ While this approach may be preferable in the absence of market-prices,
+ the Hick's commodity theorem-based approach - which we adopt with the observed
+ market-prices - does not require such an assumption on preferences and
+ is subject only to a constant relative price-structure (observed in the
+ market prices).
+\end_layout
+
+\begin_layout Standard
+As argued by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NelsonQualityQuantity"
+literal "false"
+
+\end_inset
+
+, the approaches from both 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DeatonQualityQuantityVariation"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CoxWohlgenant1986"
+literal "false"
+
+\end_inset
+
+ do not use the homogenous commodities assumption and in fact permit heterogenei
+ty in their use of sums of physical quantities as the measure of demand.
+ Simply put, the current approach would not consider chicken and eggs into
+ one commodity unless the relative price structure for the two items (chicken
+ and eggs) does not change.
+ Our notion of quality thus relies on a price-weighted quantity (made possible
+ due the availability of market prices) so that given the same expenditure,
+ a lower quantity corresponds to a higher quality and vice versa (see Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for further details).
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -1368,8 +1657,12 @@ status open
 \end_layout
 
 \begin_layout Standard
-Many empirical studies have remarked the effect of SES on food diversity
- (
+The income elasticities for quality are then used to examine the demand
+ for quality across multiple food sub-categories that are guided by the
+ categories in FAO - apart from being calculated over groups derived using
+ a constant price-structure.
+ This is relevant for the problem of SES effect on food diverity - whch
+ has been remarked by many empirical studies (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "RuelDDMethods2003,HatloyFoodVarietySESMali2000"
@@ -1511,10 +1804,14 @@ status open
 The framework for quality may be better suited for the link with permanent
  income - particularly if the theoretical conditions for quality aggregation
  are followed.
-\end_layout
+\series bold
+\bar under
+The conditions for price-structure were first mentioned by Hicks and have
+ been clarified by a necessary condition for quality aggregation Nelson.
 
-\begin_layout Standard
-Unlike with the counter-based methods to quantiy overall food diversity
+\series default
+\bar default
+ Unlike with the counter-based methods to quantiy overall food diversity
  (
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1534,93 +1831,10 @@ literal "false"
 
 ).
  
-\series bold
-\bar under
-The conditions for price-structure were first mentioned by Hicks and have
- been clarified by a necessary condition for quality aggregation Nelson.
-
-\series default
-\bar default
- 
 \bar under
 In this framework, higher quantities associated with the same expenditure
  should amount to a lower quality (and vice versa).
  
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-The framework for quality has been used in 
-\bar default
-the literature at least since 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HouthakkerQuality1952"
-literal "true"
-
-\end_inset
-
-.
- As one of the early approaches to consider both quality and quantity in
- the consumer utility, 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HouthakkerQuality1952"
-literal "true"
-
-\end_inset
-
-'s approach is to treat quality as a separate good - while viewing the quality
- price elasticity of demand (quantity purchased) decomposed into a quantity
- price elasticity of expenditure on quality and an income elasticity of
- quality measure.
- The treatment of quality as a separate good has since been widely used
- in the literature.
- Another such example is the simple repackaging method - which treats a
- high-quality good as multiples of the lower quality good(s) (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonEconConsumer"
-literal "false"
-
-\end_inset
-
-).
- More specifically, the demand for goods with a certain price using a repackagin
-g approach is viewed in terms of a base-price and a quality parameter.
- The implicit assumption in the approach is that the variants in every category
- are perfect substitutes.
- For most empirical studies where the variation in quality among the items
- within a commodity may be extreme, this is often a rather stringent requirement
- .
- Even though the quality consumed of electricity for energy consumption
- is higher than that of kerosene, the substitution between electricity and
- kerosene may be little - making it difficult to justify the view of a demand
- for electricity in terms of the units of kerosene consumed
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-While one may address the issue with the use of an energy-budget (calories),
- the task is made difficult due to unavailability of quantities consumed
- or prices in the consumption data.
-\end_layout
-
-\end_inset
-
-.
- The simple-repackaging model is - however - often appropriate in the context
- of the cost-of-living index problem where a substitution is implied (see
- the classical application in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "FisherShell1968"
-literal "true"
-
-\end_inset
-
-).
 \end_layout
 
 \begin_layout Standard
@@ -1733,180 +1947,6 @@ literal "true"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-A quality-metric associated with a certain commodity (e.g.
- for cereals, fat etc.) depends on a grouping of items into commodities subject
- to a certain homegeneity restrictions.
- Given the quantity consumed 
-\begin_inset Formula $\{q_{i}\}_{i\in[1,n]}=\{q_{1},q_{2},...,q_{n}\}$
-\end_inset
-
- and respective prices 
-\begin_inset Formula $\{p_{i}\}_{i\in[1,n]}=\{p_{1},p_{2},...,p_{n}\}$
-\end_inset
-
- food 
-\begin_inset Formula $i\in[1,n]$
-\end_inset
-
- goods, the quality-metric solves a problem equivalent to the following
- disaggregated optimisation problem (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "NelsonQualityQuantity"
-literal "false"
-
-\end_inset
-
-) for a direct utility 
-\begin_inset Formula $U(q_{1},q_{2},...)$
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather}
-\max U(q_{1},q_{2},...q_{n})\nonumber \\
-\sum_{i=1}^{n}p_{i}q_{i}=x\label{eq:disaggregated_problem}
-\end{gather}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-More specifically, the quality metric problem is that of grouping the item
- 
-\begin_inset Formula $i\in[1,n]$
-\end_inset
-
- into groups 
-\begin_inset Formula $G\in[1,M]$
-\end_inset
-
- and assigning group-commodity price 
-\begin_inset Formula $P_{G}$
-\end_inset
-
- so that the solution of the problem in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:disaggregated_problem"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- is equivalent to that of the problem in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:quality_groups_problem"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{gather}
-\max U(Q_{1},Q_{2},...Q_{M})\nonumber \\
-\sum_{G=1}^{M}P_{G}Q_{G}=x\label{eq:quality_groups_problem}
-\end{gather}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Such an aggregation requires that the 
-\begin_inset Formula $M$
-\end_inset
-
- groups (commodities) are separable and that the demand for items within
- each group is a homogenous function of the goods it contains (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "NelsonQualityQuantity"
-literal "false"
-
-\end_inset
-
-).
- The approach followed by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonQualityQuantityVariation"
-literal "false"
-
-\end_inset
-
- - using the sum of physical quantities as measure of demand - puts the
- homogeneity restriction on the household preferences and assumes that the
- within-group preferences are homothetic.
- While this approach may be preferable in the absence of market-prices,
- the Hick's commodity theorem-based approach - which we adopt with the observed
- market-prices - does not require such an assumption on preferences and
- is subject only to a constant relative price-structure (observed in the
- market prices).
- 
-\end_layout
-
-\begin_layout Standard
-As argued by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "NelsonQualityQuantity"
-literal "false"
-
-\end_inset
-
-, the approaches from both 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "DeatonQualityQuantityVariation"
-literal "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "CoxWohlgenant1986"
-literal "false"
-
-\end_inset
-
- do not use the homogenous commodities assumption and in fact permit heterogenei
-ty in their use of sums of physical quantities as the measure of demand.
- Simply put, the current approach would not consider chicken and eggs into
- one commodity unless the relative price structure for the two items (chicken
- and eggs) does not change.
- Our notion of quality thus relies on a price-weighted quantity (made possible
- due the availability of market prices) so that given the same expenditure,
- a lower quantity corresponds to a higher quality and vice versa (see Section
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Model"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- for further details).
- 
 \end_layout
 
 \begin_layout Standard
