@@ -1451,11 +1451,27 @@ status open
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-The recent approaches in food quality have incorporated quantities consumed
- directly by either considering the homothetic preferences or price-structure
+The problem of measuring quality of a commodity comprising of multiple goods
+ is that of assigning a quality metric to entire group while relying on
+ a combination of quantities consumed of the goods within the commodity
+ group.
  
+\bar under
+The approaches in food quality have incorporated quantities consumed by
+ either assuming 
+\bar default
+weakly separable 
+\bar under
+preferences with homothetic within-group preferences (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CoxWohlgenant1986,DeatonQualityQuantityVariation"
+literal "false"
+
+\end_inset
+
+) or a stable price-structure in a commodity group with a base-price associated
+ with the commodity 
 \bar default
 (
 \begin_inset CommandInset citation
@@ -1466,10 +1482,21 @@ literal "false"
 \end_inset
 
 ).
- The current chapter relies on the latter by using groups that have a price-stru
-cture.
- To consider the differences between the first and second approaches in
- more detail, consider that in a generic sense, quality-metric associated
+ We find the latter approach more appealing as it both makes use of the
+ available prices in the survey and imposes fewer restrictions on the consumer
+ preference.
+ More specifically, the homotheticity of within-group preferences means
+ that either the within-group income expansion path would be a straight
+ line through the origin or the group composition would remain independent
+ of income - conditions that are unlikely to be fulfilled in empirical data.
+ For example, such a restriction on preference would mean that the ration
+ of electricity consumed to kerosene consumed is the same for both rich
+ and poor consumers.
+ 
+\end_layout
+
+\begin_layout Standard
+More formally, consider that in a generic sense, quality-metric associated
  with a certain commodity (e.g.
  for cereals, fat etc.) depends on a grouping of items into commodities subject
  to a certain homegeneity restrictions.
@@ -1514,8 +1541,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-More specifically, the quality metric problem is that of grouping the item
- 
+The quality metric problem is that of grouping the item 
 \begin_inset Formula $i\in[1,n]$
 \end_inset
 
@@ -1625,7 +1651,7 @@ ty in their use of sums of physical quantities as the measure of demand.
  Simply put, the current approach would not consider chicken and eggs into
  one commodity unless the relative price structure for the two items (chicken
  and eggs) does not change.
- Our notion of quality thus relies on a price-weighted quantity (made possible
+ Our notion of quality relies on a price-weighted quantity (made possible
  due the availability of market prices) so that given the same expenditure,
  a lower quantity corresponds to a higher quality and vice versa (see Section
  
@@ -1639,7 +1665,6 @@ noprefix "false"
 \end_inset
 
  for further details).
- 
 \end_layout
 
 \begin_layout Standard
@@ -1657,10 +1682,13 @@ status open
 \end_layout
 
 \begin_layout Standard
-The income elasticities for quality are then used to examine the demand
- for quality across multiple food sub-categories that are guided by the
- categories in FAO - apart from being calculated over groups derived using
- a constant price-structure.
+
+\bar under
+The income elasticities for quality are then
+\bar default
+ used to examine the demand for quality across multiple food sub-categories
+ that are guided by the categories in FAO - apart from being calculated
+ over groups derived using a constant price-structure.
  This is relevant for the problem of SES effect on food diverity - whch
  has been remarked by many empirical studies (
 \begin_inset CommandInset citation
@@ -2541,7 +2569,7 @@ noprefix "false"
 
 \begin_layout Standard
 The next step for the classification after the unsupervised k-means clustering
- is to align the clusters with the FAO categories.
+ is to subdivide these commodity groups based on FAO categories.
  Since the price-changes of the constituent items selected from any of the
  five food groups - whose constituent items are correlated in price changes
  - would also be correlated with each other, the groups obtained by the
