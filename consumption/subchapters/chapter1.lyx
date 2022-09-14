@@ -7,11 +7,23 @@
 \textclass article
 \begin_preamble
 \usepackage{lscape}
+\usepackage{xparse}
+\usepackage{lscape}
 \usepackage{longtable}
+\usepackage{bbm}
+
 \usepackage{natbib}
 \usepackage{color, colortbl}
 \usepackage[first=0,last=9]{lcg}
+\usepackage[left,modulo]{lineno}
+
 \usepackage{soul}
+
+\usepackage[section]{placeins}
+
+\usepackage{booktabs}
+\usepackage{sectsty}
+
 
 \tolerance=1
 \emergencystretch=\maxdimen
@@ -21,6 +33,8 @@
 \definecolor{Gray}{gray}{0.9}
 \definecolor{LightCyan}{rgb}{0.88,1,1}
 \newcommand{\ra}{\rand0.\arabic{rand}}
+
+\newcommand{\hly}[1]{{\sethlcolor{yellow}\hl{#1}}}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -113,9 +127,23 @@ status open
 
 
 \backslash
-section*{
+partfont{
 \backslash
-centering{Food Diversity and Demand for Quality in sub-Saharan Africa}}
+fontsize{14}{16}
+\backslash
+selectfont
+\backslash
+centering} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+part*{
+\backslash
+centering{Demand for Food Quality and Nutritional diversity in sub-Saharan
+ Africa}}
 \end_layout
 
 \begin_layout Plain Layout
@@ -1687,154 +1715,8 @@ The FAO provided categories are (i) cereals, (ii) vegetables, (iii) fruits,
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%[Nutrition and SES]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The estimated income elasticities for quality are then used to examine the
- variation in quality across multiple food sub-categories(
-\begin_inset CommandInset citation
-LatexCommand cite
-key "KennedyBallardFantaFAO2011"
-literal "false"
-
-\end_inset
-
-).
- The empirical analysis addresses the concerns related with SES effects
- on food diversity that have been remarked by many empirical studies (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "RuelDDMethods2003,HatloyFoodVarietySESMali2000"
-literal "false"
-
-\end_inset
-
-).
- In particular, a lower within-country SES measure - whether it be in developed
- or developing economies - often corresponds to less healthy diets (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ManyangaTremblaySESDiets2017"
-literal "false"
-
-\end_inset
-
-).
- In a broad survey across low and middle-income econmies, 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "MayenSESDDlowmidIncomeCountries2014"
-literal "false"
-
-\end_inset
-
- also find that with the exception of fruits in diet, the residents of urban
- areas - particularly with higher SES - have more calorie intakes as well
- as consumption of protein, fats and vitamins relative to starchy items.
- Some empirical studies have also found the relevance of availability of
- amenities such as clean water on dietary diversity (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "MekuriaWubnehDDFactorsEthiopia2017"
-literal "false"
-
-\end_inset
-
-).
- Other than using permanent income as a key explanatory variable, we also
- use urban amenities as a control in the empirical analysis.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%[Tanzania - selected]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-In the particular context of Tanzania
-\bar default
-, rapid urbanisation seems to have brought challenges to food security for
- the lower-income households in of the towns and cities - even though the
- country has managed to maintain a broad self-sufficiency in basic food
- items (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "WenbanTNZFoodSecurityUrbanisation2016"
-literal "false"
-
-\end_inset
-
- ).
- To meet the rises in demand for food, the policy has focused on improving
- production in rural areas rather than price-control measures for provision
- of food to urban populations.
- With urban farming being common in the country, the intent of the policy
- has been to transition from the subsistence farming to more efficient large-sca
-le rural farming (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "WenbanTNZFoodSecurityUrbanisation2016"
-literal "false"
-
-\end_inset
-
- ) .
- As such, a significant number of households dependent on self-farming in
- reportedly rural settings may obfuscate the relationship between urban
- and rural food demand that may be apparent from the conventional models
- for urban-rural migration (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HarrisTodaro1970"
-literal "false"
-
-\end_inset
-
-).
- The variables for household permanent income and urban-rural disparities
- are thus key our our survey of food quality in the Tanzanian economy.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%[History of Quality literature]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-An issue with measurement to food quality has been the unavailability of
- market prices - a concern that has only recently gathered attention (see
- 
+The issue of unavailability of market prices - which is sidelined in many
+ empirical studies - has recently gathered attention (see 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "McKelveyQuality2011,GibsonKimQualityBog2019"
@@ -1843,13 +1725,13 @@ literal "true"
 \end_inset
 
 ).
- The approaches for measurement of quality is often performed without the
- available market prices by simply averaging over the expenditures (recorded
- costs) of a particular item in a given region (or over the entire population
- of households).
- The so-called implicit unit-value (or price-deflator) method uses the average
- expenditure divided by quantity consumer for all the consumers as prices
- in the empirical analyses (see 
+ As such the measurement of quality is often performed without available
+ market prices - by simply averaging over the expenditures (recorded costs)
+ of a particular item in a given region (or over the entire population of
+ households).
+ This so-called unit-value (or price-deflator) method uses the average expenditu
+re divided by quantity consumer for all the consumers as prices in the empirical
+ analyses (see 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "LazaridisMeatDemand2003,TafereTaffesseEthiopia2010"
@@ -1858,9 +1740,10 @@ literal "true"
 \end_inset
 
  for a recent implementation).
- While using such unit-values are prices as may be appropriate for certain
- empirical concerns, the measurement errors introduced by their are difficult
- to ignore for finer conclusions related to price and income elasticities.
+ While using unit-values as prices may be appropriate for certain empirical
+ concerns, the measurement errors introduced by their can be severe and
+ difficult to ignore for finer conclusions relating to price and income
+ elasticities.
  More specifically, the quantity consumed appearing both in the dependent
  variable (as budget share's numerator) and in the control variable (as
  the denominator for unit-value used as price) cannot be always mitigated
@@ -1889,8 +1772,8 @@ literal "true"
 
 \end_inset
 
- that do not depend on the locally observed market prices have thus been
- avoided in the current chapter 
+ that are implemented without using locally observed market prices also
+ suffer with the same issue
 \begin_inset Foot
 status open
 
@@ -1917,46 +1800,19 @@ literal "true"
 \end_inset
 
  for panel data analyses.
- 
 \end_layout
 
 \end_inset
 
 .
- As the market prices available in the survey prevent such measurements
- errors (see the discussion by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "McKelveyQuality2011"
-literal "true"
-
-\end_inset
-
- and 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "GibsonKimQualityBog2019"
-literal "true"
-
-\end_inset
-
-), the clustering of commodity groups based on market price movements and
- the direct use of market-observed prices in the current study not only
- mitigate measurement errors but also meet the theoretical requirements
- for quality measurement that are implied due to Hicks Commodity Theorem
- (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hicksvaluecapital1946,NelsonQualityQuantity"
-literal "false"
-
-\end_inset
-
-).
+ The availability of detailed market-observed prices in the survey - therefore
+ not only helps with the fulfillment of Hick's Commodity theorem through
+ stable relative structure of prices - but also mitigates the measurement
+ errors that would be implied with the use of unit-values.
 \end_layout
 
 \begin_layout Standard
-The econometric based on the price-based quality metric uses the 
+The econometric for the price-based quality metric uses the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2109,10 +1965,9 @@ w_{i} & =\alpha_{i}+\sum_{j=1}^{n}\gamma_{ij}ln(p_{j})+\beta_{i}ln(\frac{x}{P})\
 \end_layout
 
 \begin_layout Standard
-An advantage with the above approach - aggregating the quality over commodity
- groups - over the method that measures elasticities for individual items
- is that the former does not pose the issue of non-consumption of high-quality
- goods.
+Compared with the measurement of elasticities for every individual good,
+ the advantage with the aggregation over commodity groups is that the latter
+ does not present the issue of non-consumption of high-quality goods.
  More specifically, if one were to calculate the price elasticities for
  individual goods, an obvious issue that arises is that certain items (particula
 rly those with high-quality) might not be consumed at all for a significant
@@ -2179,6 +2034,137 @@ noprefix "false"
 ).
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Nutrition and SES]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The variation in quality across multiple food sub-categories is examined
+ using the estimated income elasticities for quality using permanent income
+ as the main explanatory variable and urban-amenities as key controls.
+ (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KennedyBallardFantaFAO2011"
+literal "false"
+
+\end_inset
+
+).
+ The empirical analysis we pursue in the chapter thus addresses the concerns
+ related with SES effects on food diversity that have been remarked by many
+ empirical studies (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RuelDDMethods2003,HatloyFoodVarietySESMali2000"
+literal "false"
+
+\end_inset
+
+).
+ In particular, a lower within-country SES measure - whether it be in developed
+ or developing economies - often corresponds to less healthy diets (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ManyangaTremblaySESDiets2017"
+literal "false"
+
+\end_inset
+
+).
+ In a broad survey across low and middle-income econmies, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MayenSESDDlowmidIncomeCountries2014"
+literal "false"
+
+\end_inset
+
+ also find that with the exception of fruits in diet, the residents of urban
+ areas - particularly with higher SES - have more calorie intakes as well
+ as consumption of protein, fats and vitamins relative to starchy items.
+ Some empirical studies have also found the relevance of availability of
+ amenities such as clean water on dietary diversity (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MekuriaWubnehDDFactorsEthiopia2017"
+literal "false"
+
+\end_inset
+
+).
+ Other than using permanent income as our main explanatory variable, we
+ also use the control for amenities such as electricity to examine the variation
+ in food quality across Tanzania.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Tanzania - and electiricty ]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the particular context of Tanzania, rapid urbanisation has brought challenges
+ to food security for the lower-income households in of the towns and cities
+ - even though the country has managed to maintain a broad self-sufficiency
+ in basic food items (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WenbanTNZFoodSecurityUrbanisation2016"
+literal "false"
+
+\end_inset
+
+ ).
+ To meet the rises in demand for food, the policy has focused on improving
+ production in rural areas rather than price-control measures for provision
+ of food to urban populations.
+ With urban farming being common in the country, the intent of the policy
+ has been to transition from the subsistence farming to more efficient large-sca
+le rural farming (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "WenbanTNZFoodSecurityUrbanisation2016"
+literal "false"
+
+\end_inset
+
+ ) .
+ As such, a significant number of households dependent on self-farming in
+ reportedly rural settings may obfuscate the relationship between urban
+ and rural food demand that may be apparent from the conventional models
+ for urban-rural migration (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HarrisTodaro1970"
+literal "false"
+
+\end_inset
+
+).
+ A control for urban-rural disparities thus becomes important for our survey
+ of food quality in the Tanzanian economy.
+\end_layout
+
 \begin_layout Section
 Econometric Model
 \begin_inset CommandInset label
@@ -2228,11 +2214,11 @@ noprefix "false"
 
 ).
  Instead of measuring an overall food quality that is aggregated over all
- food items, we inspect how quality in different commodity groups satisfying
- homogeneity restrictions varies across the population.
- The quality across food is treated as a vector associated with the set
- of commodities within food where the vector elements correspond to the
- commodity group relevant for diversity.
+ of the food items consumed, we inspect quality only in different commodity
+ groups whose constituents satisfy the Hick's commodity theorem.
+ The quality across food is thus a vector associated with the set of commodities
+ within food where the vector elements correspond to the commodity group
+ relevant for diversity.
  
 \end_layout
 
@@ -2287,8 +2273,9 @@ noprefix "false"
 \begin_inset Formula $V_{fish}\}$
 \end_inset
 
- is based on the FAO categories while fulfilling the price-correlation requireme
-nt from the Hicks Commodity Theorem.
+ is based on price-correlation requirement from the Hicks Commodity Theorem
+ - while the groups based on movements are further subdivided based on FAO
+ categories to assist interpretations from a DD perspective.
  This also means that we do not attempt to measure how households may be
  allocating money for a desired amount of overall quality.
  Instead, only a comparison in the variation over the vector of consumption
@@ -2456,9 +2443,8 @@ noindent
 \end_layout
 
 \begin_layout Standard
-The grouping of food items into commodity groups is based foremost on the
- correlated changes in prices - which are observed in every wave of the
- survey.
+The main criterion of grouping of food items into commodity groups the co-moveme
+nt of prices - which are observed in every wave of the survey.
  The observed market prices of the food items in years 2008, 2010, 2012
  and 2014 that we use for the grouping are shown in Figure 
 \begin_inset CommandInset ref
@@ -2482,8 +2468,9 @@ similar
 \end_inset
 
  relative price-changes.
- After this first step, the commodity groups are split into categories that
- are aligned with the FAO recommended categories i.e.
+ The groups based strictly on price-movements thus obtained are further
+ are split into categories that are aligned with the FAO recommended categories
+ i.e.
  (i) cereals, (ii) vegetables, (iii) fruits, (iv) meat, (v) eggs (vi) fish
  and other sea foods (vii) legumes, nuts and seeds, (viii) milk and milk
  products (ix) oil and fats, (x) sweets (xi) spices, condiments and beverages
@@ -2491,21 +2478,21 @@ similar
 \end_layout
 
 \begin_layout Standard
-The first-step uses a k-means clustering by first obtaining relative price-chang
-es from the absolute prices.
- Considering an example with an item, note that the prices for beef in the
- years 2008, 2010, 2012, 2014 i.e.
+The k-means clustering is performed on the relative price-changes from the
+ absolute prices.
+ Considering beef as an example good, note the prices for beef in the years
+ 2008, 2010, 2012, 2014 i.e.
  
 \begin_inset Formula $p_{beef}=\{3500.0,4000.0,5000.0,6000.0\}$
 \end_inset
 
  - which correspond to a relative price-change vector 
-\begin_inset Formula $r_{beef}=\{1.14,1.25,1.2\}$
+\begin_inset Formula $r_{beef}=\{\frac{4000}{3500},\frac{5000}{4000},\frac{6000}{5000}\}=\{1.14,1.25,1.2\}$
 \end_inset
 
 .
- The relative price-vectors for all the items (beef, goat, frersh_milk etc.)
- thus obtained are clustered using the k-means method - where the number
+ The relative price-change vectors for all the items (beef, goat, frersh_milk
+ etc.) thus obtained are clustered using the k-means method - where the number
  of selected clusters is guided by the within-cluster sum of squared errors
  - an approach commonly used in k-means applications (
 \begin_inset CommandInset citation
@@ -2545,8 +2532,9 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The next step for the classification after the unsupervised k-means clustering
- is to subdivide these commodity groups based on FAO categories.
+The further division of commodity group after the unsupervised k-means clusterin
+g into groups based on FAO categories does not merge goods from disparate
+ clusters.
  Since the price-changes of the constituent items selected from any of the
  five food groups - whose constituent items are correlated in price changes
  - would also be correlated with each other, the groups obtained by the
@@ -3050,7 +3038,8 @@ Food items classified into commodity groups based on price-movements
 \end_layout
 
 \begin_layout Standard
-The basis for the quality metric associated for every commodity 
+As explained before, the basis for the quality metric associated for every
+ commodity 
 \begin_inset Formula $G$
 \end_inset
 
@@ -3217,16 +3206,16 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-In summary, the commodity aggregates used in the study are based both on
- a i) 
+In summary, the commodity aggregates used in the study are based on a 
 \shape italic
 price-movement
 \shape default
- sense (based on the Hick's commodity theorem) and the ii) 
+ sense (based on the Hick's commodity theorem) - while a further splitting
+ of groups is guided by a 
 \shape italic
 functional
 \shape default
- sense implied by FAO categories relevant for food diversity concerns.
+ sense implied by FAO categories.
  Every commodity aggregate 
 \begin_inset Formula $G$
 \end_inset
@@ -3261,7 +3250,7 @@ noprefix "false"
 
 \end_inset
 
-) of the Hick's commodity theorem (see 
+) of the Hick's commodity theorem (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hicksvaluecapital1946"
@@ -3287,7 +3276,9 @@ literal "true"
 
 \end_inset
 
- (over the years from 2008 to 2014 - see Figure 
+.
+ The prices of goods relevant for the classification over the years from
+ 2008 to 2014 are presented in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:LSMSMarketPrices"
@@ -3297,10 +3288,15 @@ noprefix "false"
 
 \end_inset
 
-).
- Consider for example the two pairs of items with similar price-movements
- - with sugar and tea being first pair that have similar price changes (see
- Table 
+.
+ 
+\end_layout
+
+\begin_layout Standard
+To explain with particular example goods, consider two pairs of items with
+ similar price-movements - with sugar and tea being the first pair that
+ has its constituents tea and sugar - with similar price changes (see Table
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:PriceBasedGroups"
@@ -3311,8 +3307,8 @@ noprefix "false"
 \end_inset
 
 ).
- Rice and cooking-oil are the second pair that also have price changes similar
- to each other (see Table 
+ Let the second pair be rice and cooking-oil - who also have price changes
+ similar to each other (see Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:PriceBasedGroups"
@@ -3323,8 +3319,8 @@ noprefix "false"
 \end_inset
 
 ).
- However, not only do sugar and tea have similar price changes, they also
- have a similar functional sense implied by FAO categories.
+ Notice however that not only do sugar and tea have similar price changes,
+ they also have a similar functional sense implied by FAO categories.
  Therefore, they are classified in a group complements in the Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3351,11 +3347,8 @@ noprefix "false"
 ).
  Other categories such as meatsproteins, fruits etc.
  are similarly based foremost on price-movement correlations before considering
- the functional sense implied by FAO categories.
- Notice a plausible substitution is implicit in the FAO-recommended categories.
- As an example, goat and beef may be put under the same group - but not
- with tea - as there is little sense in substitution between tea and meat.
- 
+ the functional sense implied by FAO categories for interpretation from
+ a DD perspective.
 \end_layout
 
 \begin_layout Subsection
