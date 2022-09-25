@@ -2368,9 +2368,8 @@ noindent
 
 \begin_layout Standard
 The main criterion of grouping of food items into commodity groups the co-moveme
-nt of prices - which are observed in every wave of the survey.
- The observed market prices of the food items in years 2008, 2010, 2012
- and 2014 that we use for the grouping are shown in Figure 
+nt of prices.
+ The prices - shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:LSMSMarketPrices"
@@ -2380,10 +2379,11 @@ noprefix "false"
 
 \end_inset
 
- .
+ - are taken from the wave corresponding to years 2008, 2010, 2012 and 2014
+ in the survey.
  An unsupervised k-means clustering is then used to group the items into
  commodities based on price changes - so that the items within every commodity
- have 
+ group identified have 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2392,21 +2392,26 @@ similar
 \end_inset
 
  relative price-changes.
- The groups based strictly on price-movements thus obtained are further
- are split into categories that are aligned with the FAO recommended categories
- i.e.
+ The groups based strictly on price-movements thus obtained are then split
+ into further categories aligned with the FAO recommended categories i.e.
  (i) cereals, (ii) vegetables, (iii) fruits, (iv) meat, (v) eggs (vi) fish
  and other sea foods (vii) legumes, nuts and seeds, (viii) milk and milk
  products (ix) oil and fats, (x) sweets (xi) spices, condiments and beverages
  and (xii) tubers and roots.
-\end_layout
+ More specifically, the k-means clustering is performed on the relative
+ price-changes from available prices.
+ Considering beef as an example good, the prices for beef in the years 2008,
+ 2010, 2012, 2014 (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LSMSMarketPrices"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Standard
-The k-means clustering is performed on the relative price-changes from the
- absolute prices.
- Considering beef as an example good, note the prices for beef in the years
- 2008, 2010, 2012, 2014 i.e.
- 
+\end_inset
+
+) are 
 \begin_inset Formula $p_{beef}=\{3500.0,4000.0,5000.0,6000.0\}$
 \end_inset
 
@@ -2415,7 +2420,7 @@ The k-means clustering is performed on the relative price-changes from the
 \end_inset
 
 .
- The relative price-change vectors for all the items (beef, goat, frersh_milk
+ The relative price-change vectors for all the items (beef, goat, fresh_milk
  etc.) thus obtained are clustered using the k-means method - where the number
  of selected clusters is guided by the within-cluster sum of squared errors
  - an approach commonly used in k-means applications (
@@ -2456,13 +2461,16 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The further division of commodity group after the unsupervised k-means clusterin
-g into groups based on FAO categories does not merge goods from disparate
- clusters.
- Since the price-changes of the constituent items selected from any of the
- five food groups - whose constituent items are correlated in price changes
- - would also be correlated with each other, the groups obtained by the
- classification based on correlation prices (shown in Table 
+It is worth emphasising that the partition of commodity groups identified
+ from the unsupervised k-means clustering into further sub-groups based
+ on FAO categories does not pick goods from disparate clusters into a new
+ sub-group.
+ Instead, the further partition into sub-groups based on FAO categories
+ is based on the observation that that the price-changes of goods within
+ sub-groups formed by splitting a particular group identified by clustering
+ would also be correlated with each other.
+ The groups obtained by the classification based on correlation prices (shown
+ in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:PriceBasedGroups"
@@ -2472,8 +2480,8 @@ noprefix "false"
 
 \end_inset
 
-) are split into further sub-groups aligned with the FAO groups in Table
- 
+) are thus split into further sub-groups aligned with the FAO groups in
+ Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:GroupsModified"
@@ -2484,14 +2492,10 @@ noprefix "false"
 \end_inset
 
 .
- Recall that the FAO categories are (i) cereals, (ii) vegetables, (iii)
- fruits, (iv) meat, (v) eggs (vi) fish and other sea foods (vii) legumes,
- nuts and seeds, (viii) milk and milk products (ix) oil and fats, (x) sweets
- (xi) spices, condiments and beverages and (xii) tubers and roots.
- With these, the commodity cereals-milk-greens is split into milk, veg and
- cereals, fruits-fish is split into fruits and fish, startches-fats-complements
- is split into startches, fats and complements while the categories tubers
- and meatsproteins are retained.
+ More specifically, the commodity cereals-milk-greens is split into milk,
+ veg and cereals, fruits-fish is split into fruits and fish, startches-fats-comp
+lements is split into startches, fats and complements while the categories
+ tubers and meatsproteins are retained.
  The resulting categories are therefore i) cereals ii) veg iii) fruits iv)
  meats-proteins v) fish vi) milk vii)fat viii) complements ix) tubers x)
  chicken and xi) starches whose constituents are shown in Table 
@@ -2967,7 +2971,7 @@ As explained before, the basis for the quality metric associated for every
 \begin_inset Formula $G$
 \end_inset
 
- in list (corresponding to the left side of the Table 
+ (corresponding to the left side of the Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:GroupsModified"
@@ -3104,7 +3108,8 @@ literal "true"
 \end_inset
 
 .
- The appeal of aggregation is the simplified view of demand across all items.
+ The essential appeal of aggregation is the simplified view of demand across
+ all items.
  Consider for example, if we were to represent demands for items {wheat,
  rice, yam,coconut, eggs, beef, chicken, fish, goat, honey}.
  As such these items would each correspond to a demand function so that
@@ -3154,35 +3159,7 @@ noprefix "false"
 
 \end_inset
 
- has items that have the same functional significance 
-\shape italic
-and 
-\shape default
-have a similar price-movement.
- The 
-\shape italic
-price-movement
-\shape default
- sense is imposed due the constant relative-price structure requirement
- (see Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:demand_function_quality"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-) of the Hick's commodity theorem (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hicksvaluecapital1946"
-literal "false"
-
-\end_inset
-
-) and relies on the available market-price
+ has items that have the a similar price-movement
 \begin_inset Foot
 status open
 
@@ -3200,24 +3177,22 @@ literal "true"
 
 \end_inset
 
-.
- The prices of goods relevant for the classification over the years from
- 2008 to 2014 are presented in Figure 
+ whereas every commodity aggregate on the left side of Table 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:LSMSMarketPrices"
+reference "tab:GroupsModified"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
-.
- 
-\end_layout
-
-\begin_layout Standard
-To explain with particular example goods, consider two pairs of items with
+ has goods with a similar price-movement 
+\shape italic
+and 
+\shape default
+the same functional significance.
+ To explain with particular example goods, consider two pairs of items with
  similar price-movements - with sugar and tea being the first pair that
  has its constituents tea and sugar - with similar price changes (see Table
  
@@ -3375,7 +3350,7 @@ The vector of quality for every household comprises of the quality
 \end_inset
 
 .
- This is why no quality is considered for chicken, the only item within
+ This is why no quality is considered for chicken, the only good within
  its own commodity group.
  As we've explained in Section 
 \begin_inset CommandInset ref
@@ -3456,9 +3431,9 @@ fat
  If cooking-oil per unit-weight is cheaper than eggs-per-unit-weight, then
  this quality metric would evidently be lower when more cooking-oil is consumed
  for the same expenditure.
- It is worth emphasising that the notion of higher-quality is based solely
- on price alone so that a more expensive item within the commodity group
- is treated as being of higher quality.
+ This notion of higher-quality is thus based solely on price alone so that
+ a more expensive item within the commodity group is contribute to higher
+ quality of the commodity.
 \end_layout
 
 \begin_layout Standard
