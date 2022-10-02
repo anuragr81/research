@@ -74,6 +74,14 @@ plot_selections <- function(){
   
 }
 
+calculate_E1 <- function(){
+  
+}
+nash_u1 <- function(y1, y2, nu1, k2){
+  p1=plain_util(y1+y2-nu1 + k2)*(1/(1+exp(-omega*(nu1-underbar_omega)) )) 
+  p2=plain_util(2*y1-2*nu1+calculate_E1(nu1))*(1/(1+exp(omega*(nu1-underbar_omega))))
+  return(p1+p2)
+}
 test_plot <- function(rr){
   g <- subset(rr, (delta <3.5 & delta > 3) | (delta > 4.2 & delta < 5) | ( delta > 6 & delta < 6.5) | (delta > 7 & delta < 7.5)|  (delta > 8 & delta < 8.09 ))  ; 
   par(mfrow=c(3,2));
