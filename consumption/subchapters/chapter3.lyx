@@ -5814,7 +5814,7 @@ Similarly, the consumer 2 chooses
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather*}
-u_{2}(\bar{\nu}_{1}^{*},\bar{\nu}_{2})=\frac{\Gamma(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}^{*}+E_{1}(\bar{\nu}_{1}^{*}))^{\alpha}}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}+\frac{\Gamma(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))^{\alpha}}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}
+u_{2}(\bar{\nu}_{1}',\bar{\nu}_{2})=\frac{\Gamma(y_{2}-\bar{\nu}_{2}+y_{1}-\bar{\nu}_{1}'+E_{1}(\bar{\nu}_{1}'))^{\alpha}}{1+e^{\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}+\frac{\Gamma(y_{2}-\bar{\nu}_{2}+y_{2}-\bar{\nu}_{2}+E_{2}(\bar{\nu}_{2}))^{\alpha}}{1+e^{-\lambda(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})}}
 \end{gather*}
 
 \end_inset
@@ -5831,12 +5831,60 @@ We now define
 \begin_inset Formula $k_{2}\equiv E_{2}(\bar{\nu}_{2}^{*})-\bar{\nu}_{2}^{*}$
 \end_inset
 
- .
- These can be seen as the deviation from the expectation of income from
- band-promotion (or demotion).
-\end_layout
+ - which are the deviation from the expected of income from band-promotion
+ (or demotion).
+ The selection of 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
 
-\begin_layout Standard
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+by the consumer 1 based on 
+\begin_inset Formula $\omega$
+\end_inset
+
+, 
+\begin_inset Formula $\text{\underbar{\ensuremath{\omega}}}$
+\end_inset
+
+ is symmetric to the selection of 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ based on 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, 
+\begin_inset Formula $\text{\underbar{\ensuremath{\lambda}}}$
+\end_inset
+
+ by the consumer 2.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
 \begin_inset Formula 
 \begin{gather*}
 u_{1}(\bar{\nu}_{1})=\frac{\Gamma(y_{1}+y_{2}-\bar{\nu}_{1}+k_{2})^{\alpha}}{1+e^{-\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}+\frac{\Gamma(2y_{1}-2\bar{\nu}_{1}+E_{1}(\bar{\nu}_{1}))^{\alpha}}{1+e^{\omega(\bar{\nu}_{1}-\text{\underbar{\ensuremath{\omega}}})}}
@@ -5859,7 +5907,7 @@ u_{2}(\bar{\nu}_{2})=\frac{\Gamma(y_{1}+y_{2}-\bar{\nu}_{2}+k_{1})^{\alpha}}{1+e
 \end_layout
 
 \begin_layout Standard
-The functions 
+Notice that the functions 
 \family roman
 \series medium
 \shape up
@@ -5880,11 +5928,7 @@ The functions
 \begin_inset Formula $E_{2}(\bar{\nu}_{2})$
 \end_inset
 
- are defined using 
-\begin_inset Formula $\Delta$
-\end_inset
-
- and specific forms of 
+ are set as follows using the specific forms of 
 \begin_inset Formula $u(\Lambda)$
 \end_inset
 
@@ -5896,7 +5940,7 @@ The functions
 \begin_inset Formula $L(\nu)$
 \end_inset
 
- as follows
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5937,65 +5981,27 @@ E_{2}(\bar{\nu}_{2})=(1-L(\bar{\nu}_{2}))y_{2}+L(\bar{\nu}_{2})y_{1}\\
 \end_layout
 
 \begin_layout Standard
-Without the population stability condition (which constrains selection of
- 
+While an explicit solution of the first-order conditions for the above is
+ less trivial, the numerical investigations show that the higher income
+ differences 
+\begin_inset Formula $y_{2}-y_{1}$
+\end_inset
+
+ increase both 
 \begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
  and 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
 \begin_inset Formula $\bar{\nu}_{2}$
 \end_inset
 
-), the above results in plots shown in 
-\family default
-\series bold
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-Figure .
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
- This is a symmetrical equilibrium like the short-term equilibrium.
- 
-\end_layout
-
-\begin_layout Standard
-Increasing 
+ .
+ Further, increasing 
 \begin_inset Formula $k_{1}$
 \end_inset
 
- ( less 
+ ( i.e.
+ less 
 \begin_inset Formula $E_{1}(\bar{\nu}_{1}^{*})-\bar{\nu}_{1}^{*}$
 \end_inset
 
@@ -6007,7 +6013,8 @@ Increasing
 \begin_inset Formula $k_{2}$
 \end_inset
 
- ( less 
+ ( i.e.
+ less
 \begin_inset Formula $E_{2}(\bar{\nu}_{2}^{*})-\bar{\nu}_{2}^{*}$
 \end_inset
 
@@ -6015,29 +6022,58 @@ Increasing
 \begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
- .
- Higher income differences 
-\begin_inset Formula $y_{2}-y_{1}$
-\end_inset
-
- continue to increase 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
 .
+ The results - which are are similar to those from the solution in Section
  
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:short-term-equilibrium"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ - appear too general if we rely on the assumption of 
+\begin_inset Formula $\omega$
+\end_inset
+
+, 
+\begin_inset Formula $\text{\underbar{\ensuremath{\omega}}}$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, 
+\begin_inset Formula $\text{\underbar{\ensuremath{\lambda}}}$
+\end_inset
+
+ being exogenous.
 \end_layout
 
 \begin_layout Standard
-==THE BASIS FOR COOPERATIVE SOLUTION
-\end_layout
+The population stability condition and a combined maximal utility for both
+ the consumers provide us the opportunity to explore specific solutions
+ by constraining 
+\begin_inset Formula $\omega$
+\end_inset
 
-\begin_layout Standard
-The above definitions of 
+, 
+\begin_inset Formula $\text{\underbar{\ensuremath{\omega}}}$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, 
+\begin_inset Formula $\text{\underbar{\ensuremath{\lambda}}}$
+\end_inset
+
+ .
+ More specifically, the above definitions of 
 \begin_inset Formula $W(\nu)$
 \end_inset
 
@@ -6090,128 +6126,6 @@ status open
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Setting 
-\begin_inset Formula $\kappa\equiv\frac{\omega}{\lambda}$
-\end_inset
-
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-we would thus have 
-\begin_inset Formula $(\bar{\nu}_{1}-\underbar{\ensuremath{\omega}})=-\kappa(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})$
-\end_inset
-
- so that consumers must balance 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
- on either side of 
-\begin_inset Formula $\text{\underbar{\ensuremath{\omega}}}$
-\end_inset
-
- and 
-\begin_inset Formula $\underbar{\ensuremath{\lambda}}$
-\end_inset
-
-.
- 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-Another way to interpret 
-\begin_inset Formula $\nu_{1}^{*}=\underbar{\ensuremath{\omega}}-\kappa(\nu_{2}^{*}-\underbar{\ensuremath{\lambda}})$
-\end_inset
-
- is that the poorer consumer's long-term expenditure towards status rises
- with the level at which upward transition becomes significant and falls
- with richer consumer's excessive spending.
- That the level at which upward transition becomes significant raises poor
- consumer's expenditure towards status is not surprising - but the more
- interesting implication from the population constraint is the withdrawal
- of the poorer consumer from the status competition due to a higher status
- investment (consumption) by the richer consumer.
- 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-The above implications are independent of the consumer utilities the consumer
- uses to make choices for 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-Since we focus on growing economies where one would see status competitions
- determining promotion more sharply than demotion - we assume 
-\begin_inset Formula $\omega>\lambda$
-\end_inset
-
- or 
-\begin_inset Formula $\kappa>1$
-\end_inset
-
- for the rest of our discussion.
- In other words, the assumption of 
-\begin_inset Formula $\omega>\lambda$
-\end_inset
-
- only underpins a relatively more significant make-or-break situation for
- the poorer consumers.
 \end_layout
 
 \begin_layout Standard
@@ -6279,9 +6193,171 @@ nu_{1}>0 does not mean no status consumption).
 \end_layout
 
 \begin_layout Standard
-Within such an environment, the population constraint readily provides the
- condition of withdrawal from status competitions for either of the consumers
- in the economy.
+Setting 
+\begin_inset Formula $\kappa\equiv\frac{\omega}{\lambda}$
+\end_inset
+
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+we would thus have 
+\begin_inset Formula $(\bar{\nu}_{1}-\underbar{\ensuremath{\omega}})=-\kappa(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})$
+\end_inset
+
+ so that consumers must balance 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ on either side of 
+\begin_inset Formula $\text{\underbar{\ensuremath{\omega}}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\underbar{\ensuremath{\lambda}}$
+\end_inset
+
+.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Another way to interpret 
+\begin_inset Formula $\nu_{1}^{*}=\underbar{\ensuremath{\omega}}-\kappa(\nu_{2}^{*}-\underbar{\ensuremath{\lambda}})$
+\end_inset
+
+ is that the poorer consumer's long-term expenditure towards status rises
+ with the level at which upward transition becomes significant and falls
+ with richer consumer's excessive spending.
+ Another constraint comes from the combined maximal utility which we explore
+ in the next section.
+\end_layout
+
+\begin_layout Standard
+It is worth emphasising that the population stability condition in Equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:param_constraint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+independent of any consumer utilities that the consumers uses to make choices
+ for 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+In the above result, it seems less surprising that the level at which upward
+ transition becomes significant raises poor consumer's expenditure towards
+ status.
+ The more interesting implication from the population constraint is the
+ withdrawal of the poorer consumer from the status competition due to a
+ higher status investment (consumption) by the richer consumer.
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Since we limit attention to the growing economies where one would see status
+ competitions determining promotion more sharply than demotion - we focus
+ on cases where 
+\begin_inset Formula $\omega>\lambda$
+\end_inset
+
+ or 
+\begin_inset Formula $\kappa>1$
+\end_inset
+
+ for the rest of our discussion.
+ Another way to view the assumption 
+\begin_inset Formula $\omega>\lambda$
+\end_inset
+
+, is that it underpins a relatively more significant make-or-break situation
+ for the poorer consumers - as is more often the case in growing economies.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Within this environment of growth, the population constraint readily provides
+ the condition of withdrawal from status competitions for either of the
+ consumers in the economy.
  More particularly, there would be no benefits to the consumer from expenditure
  towards status when either 
 \begin_inset Formula $\overline{\nu}_{1}\rightarrow0$
@@ -6364,45 +6440,12 @@ Within such an environment, the population constraint readily provides the
  to the security offered to the consumer 2 through status competition that
  there would be no reason for any expenditure towards status for the richer
  consumer.
-\end_layout
-
-\begin_layout Standard
-These dynamics however only serve as long-term constraints for the consumers
- who select 
-\begin_inset Formula $\bar{\nu}_{1}$
+ Further details of a cooperative solution follow as we use a combined utility
+ to solve for an optimal level of 
+\begin_inset Formula $\text{\underbar{\ensuremath{\omega}}}$
 \end_inset
 
-,
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
- to maximise the expected utilities from assets accumulations.
- To explore the effect of income difference 
-\begin_inset Formula $\Delta\equiv y_{2}-y_{1}$
-\end_inset
-
- on the selections of 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
-, we therefore take into account the consumer's expected utility maximised
- under the above specific forms of 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- and 
-\begin_inset Formula $L(\nu)$
-\end_inset
-
- with the 
-\begin_inset Formula $\kappa>1$
-\end_inset
-
- setting.
+.
 \end_layout
 
 \begin_layout Subsubsection
