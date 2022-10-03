@@ -74,14 +74,40 @@ plot_selections <- function(){
   
 }
 
-calculate_E1 <- function(){
-  
+calculate_E <- function(y1,y2,ol,underbar_ol,nu){
+  e1 <- y2/( 1 + exp(-ol*(nu-underbar_ol)))
+  e2 <- y1/( 1 + exp(ol*(nu-underbar_ol)))
+  return(e1+e2)
 }
-nash_u1 <- function(y1, y2, nu1, k2){
+
+
+nash_u1 <- function(y1, y2, omega, underbar_omega, nu1, k2){
+  e1 <- calculate_E(y1=y1,y2=y2,ol=omega,underbar_ol=underbar_omega,nu=nu1)
   p1=plain_util(y1+y2-nu1 + k2)*(1/(1+exp(-omega*(nu1-underbar_omega)) )) 
-  p2=plain_util(2*y1-2*nu1+calculate_E1(nu1))*(1/(1+exp(omega*(nu1-underbar_omega))))
+  p2=plain_util(2*y1-2*nu1+e1)*(1/(1+exp(omega*(nu1-underbar_omega))))
   return(p1+p2)
 }
+
+nash_u2 <- function(y1, y2, lambda, underbar_lambda, nu2, k1){
+  e2 <- calculate_E(y1=y1,y2=y2,ol=lambda,underbar_ol=underbar_lambda,nu=nu2)
+  p1=plain_util(y1+y2-nu2 + k1)*(1/(1+exp(lambda*(nu2-underbar_lambda)) )) 
+  p2=plain_util(2*y2-2*nu2+e2)*(1/(1+exp(-lambda*(nu2-underbar_lambda))))
+  return(p1+p2)
+}
+
+
+test_nash_plots<-function(){
+  y1max = 1
+  y2max = 6
+  nu1s <- seq(0,y1max,.01)
+  nu2s <- seq(0,y2max,.01)
+  par(mfrow=c(1,2))
+  nashu1 <- sapply(nu1s,function(x) { nash_u1(y1 = y1max,y2 = y2max,omega = 1,underbar_omega =.01,nu1 = x,k2=2.5)})
+  nashu2 <- sapply(nu2s,function(x) { nash_u2(y1 = y1max,y2 = y2max,lambda = 1,underbar_lambda =.01,nu2 = x,k1=4)})
+  plot(nu1s,nashu1,type='l')
+  plot(nu2s,nashu2,type='l')
+}
+test_nash_plots()
 test_plot <- function(rr){
   g <- subset(rr, (delta <3.5 & delta > 3) | (delta > 4.2 & delta < 5) | ( delta > 6 & delta < 6.5) | (delta > 7 & delta < 7.5)|  (delta > 8 & delta < 8.09 ))  ; 
   par(mfrow=c(3,2));
