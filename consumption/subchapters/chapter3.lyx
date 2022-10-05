@@ -4,7 +4,7 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass extarticle
+\textclass article
 \begin_preamble
 \usepackage{mathtools}
 \usepackage{amsmath}
@@ -20,6 +20,11 @@
 \definecolor{Gray}{gray}{0.9}
 \definecolor{LightCyan}{rgb}{0.88,1,1}
 \newcommand{\ra}{\rand0.\arabic{rand}}
+\usepackage[section]{placeins}
+\usepackage[left,modulo]{lineno}
+\usepackage{sectsty}
+
+\usepackage{bbm}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -32,7 +37,7 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "libertine" "IBM Plex Serif"
+\font_roman "tgtermes" "IBM Plex Serif"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -110,22 +115,43 @@ status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-part*{
-\backslash
-centering{Status consumption as Investments under Income Inequality}}
 \end_layout
 
 \begin_layout Plain Layout
 
-% 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+partfont{
+\backslash
+fontsize{14}{16}
+\backslash
+selectfont
+\backslash
+centering} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+part*{
+\backslash
+centering{Status competitions and Persistent Income Inequality}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 subsubsection*{
 \backslash
 centering{
 \backslash
-textit{Long-term and short-term equilibria in status competitions}}}
+textit{Status consumption as investments under persistent income inequality}}}
 \end_layout
 
 \end_inset
@@ -808,45 +834,15 @@ literal "false"
  Second, we clarify if income inequality contributes to consumer accumulations
  in the long-term through status competitions.
  In addressing these questions, we focus on status games that provide direct
- gains or a positive externality to the consumer - while treating the uncertaint
-y in intergenerational or spatial mobility explicitly as probabilistic rewards
- from investments towards status.
+ gains to the consumer - while treating the uncertainty in intergenerational
+ or spatial mobility explicitly as probabilistic rewards from investments
+ towards status.
  
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-hl{
-\end_layout
-
-\end_inset
-
- NO TALK OF GROWTH 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-The stylised model of a status game where gains
-\bar default
- are driven by one's investments follows a contest-theory approach (
+The stylised model of a status game where gains are driven by one's investments
+ follows a contest-theory approach (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "TullockEfficientRentSeeking2001"
@@ -1293,6 +1289,9 @@ The solution of the dynamic equilibrium implied by the above model relies
  - to be too little and the poorer consumer must not find that there is
  nothing on offer for mobility through status competitions to the richer
  position.
+ The zero-consumption from either of the consumer thus does not constitute
+ the equilibrium where both poor and rich consumers participate in the status
+ competition.
 \end_layout
 
 \begin_layout Standard
@@ -1542,8 +1541,8 @@ ional or spatial mobility that in turn correspond to material gain from
  status competitions.
  Second, the model addresses status-related investments in education or
  professional club memberships that are often ignored in the discussion
- of status consumption due to positive externalities associated with the
- investments.
+ of status consumption due to possible contribution to consumer wealth from
+ such investments.
  Third, it establishes that the steady state conditions for composition
  of populations in income-bands are enough to reverse the appeal for investment
  towards status.
@@ -1741,8 +1740,8 @@ literal "false"
 
 \end_inset
 
-) seems to follow the much earlier approaches from the first half of 20th
- century that had explored economic implications of a consumer's pursuit
+) seems to have followed a much earlier exploration in the first half of
+ 20th century that had detailed economic implications of a consumer's pursuit
  of status.
  In particular, the present-day considerations of reference points in consumer
  decision problems (
@@ -1763,9 +1762,9 @@ literal "false"
 
 ).
  The more recent behavioural economics approaches - both theoretical and
- empirical - have attempted to explain the influence of status competitions
- on consumer decisions with formation of self-esteem and self-identification
- on similar lines (
+ empirical - have also explained the influence of status competitions on
+ consumer decisions using ideas of self-esteem and self-identification on
+ similar lines (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "FrankPond,corneo_snobbism"
@@ -1807,13 +1806,12 @@ literal "false"
  The current chapter focuses on how the uncertainty in a transition to bands
  of disparate income - encapsulating the effects of social structures -
  could influence the investments towards status.
- More specifically, the notion of uncertainty in the model encompasses the
- indeterminate processes of promotion to social positions that directly
- influence the income towards accumulations.
+ The notion of uncertainty in the model encompasses the indeterminate processes
+ of promotion to social positions that directly influence the income towards
+ accumulations.
  The formulation of status competitions as a game for long-term asset accumulati
-ons under uncertain transitions within finite income bands - constitutes
- a contest theory approach similar to that in the sequential game explored
- by 
+ons under uncertain income band transitions - constitutes a contest theory
+ approach first provided in a sequential game by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "TullockEfficientRentSeeking2001"
@@ -1823,9 +1821,9 @@ literal "false"
 
  - who delineate a competition towards positions under uncertainty in rent-seeki
 ng problems.
- The stylised model in the current chapter then addresses the specific question
- of how the increases in income inequality could influence the status investment
-s and future accumulations of assets.
+ The stylised model in the chapter is then used to address the specific
+ question of how the increases in income inequality could influence the
+ status investments and future asset accumulations.
 \end_layout
 
 \begin_layout Standard
@@ -1843,8 +1841,8 @@ status open
 \end_layout
 
 \begin_layout Standard
-They are however a few key differences between our contest-theory approach
- and the Tullock competition.
+Despite the similarity in formulation, they are some key differences between
+ our contest-theory approach and the Tullock competition.
  While the status game - much like a Tullock competition - is a full information
  game, the approach in the current chapter is more concerned with the implicatio
 ns of a long-term equilibrium than the sequential setting that is at the
@@ -1878,9 +1876,7 @@ literal "false"
 \end_inset
 
 ), our focus is on the feasibility of transition probability functions under
- an equilibrium where no participating consumers see any net benefit in
- the long-term from changing her effort i.e.
- the level of expenditure towards status acquisition.
+ a long-term equilibrium.
 \end_layout
 
 \begin_layout Standard
@@ -1979,8 +1975,9 @@ literal "false"
 \end_inset
 
 .
- Therefore the exposition of the effect of income inequality on growth and
- status consumption in the current chapter differs significantly from 
+ As a result, the exposition of the effect of income inequality on assets
+ accumulations and status investments in the current chapter differs significant
+ly from 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "KnellInequalityStatusGrowth1999,falkchoosingjonesses2004"
@@ -1991,7 +1988,7 @@ literal "false"
  who explain the effect of inequality on growth using a signaling-utility
  from status consumption for upward comparisons (i.e.
  comparison with those with higher or same income as one's own reference
- income.
+ income).
  
 \end_layout
 
@@ -2034,11 +2031,11 @@ As we detail in the next section, the optimal status consumption in the
  who are favoured in the game due to higher income and ii) the poorer consumers
  who participate in the game only as long as there is some probability to
  improve their future wealth.
- To investigate the effect of inequality, we attempt to determine how higher
- income differences may increase the investment towards status when there
- are two particular constraints for the game in the long term - namely the
- population constraint and a particular ordering of utilities from assets
- for the richer and poorer consumers.
+ To investigate the effect of inequality, we focus on how higher income
+ differences may increase the investment towards status when there are two
+ particular constraints for the game in the long term - namely the population
+ constraint and a particular ordering of utilities from assets for the richer
+ and poorer consumers.
 \end_layout
 
 \begin_layout Section
@@ -3016,7 +3013,7 @@ The singularity is avoided in the above solution as long as the condition
 \noun default
 \color inherit
 promote a poorer consumer to the richer band.
- As a CDF, 
+ As a probability function, 
 \begin_inset Formula $W(\nu)$
 \end_inset
 
@@ -3513,7 +3510,7 @@ noprefix "false"
 
 \end_inset
 
- - can be easily extended to higher bands (see Figure 
+ - could be extended to higher bands (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:FullChain"
@@ -3523,14 +3520,14 @@ noprefix "false"
 
 \end_inset
 
-) for empirical assessments and does not change the core of our arguments.
+) for empirical assessments but does not change the core of our arguments.
  The fundamental condition for long-term stability that we impose is that
  of the stability of income band populations.
  More specifically, the number of consumers who leave an income band in
  the long-run must be balanced by those entering the income band in the
  long-term.
  The essential claim that is inherent is that the consumers expectations
- are not detached from the population constraint.
+ are rational and are not detached from the population constraint.
  An equilibrium with long-term income inequalities thus cannot exist if
  not for such a population preserving status competition.
  
@@ -4558,29 +4555,6 @@ To recap, since
 \end_inset
 
 ) can always be selected.
- The comparison of 
-\begin_inset Formula $E(A_{1})$
-\end_inset
-
- and 
-\begin_inset Formula $E(A_{2})$
-\end_inset
-
- could allow us to 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-evaluate if setting up fairer status competitions could be more desirable
- for redistributing income.
 \end_layout
 
 \begin_layout Subsubsection
@@ -5679,6 +5653,7 @@ nu_{2} for security incentivises the consumer 1 as well
 \end_layout
 
 \begin_layout Standard
+The 
 \begin_inset ERT
 status open
 
@@ -5702,7 +5677,7 @@ status open
 
 \end_inset
 
- follow for the two consumers with the given particular forms of 
+ that follow for the two consumers using the given particular forms of 
 \begin_inset Formula $W(\nu)$
 \end_inset
 
@@ -5738,9 +5713,8 @@ noprefix "false"
 \begin_inset Formula $\Lambda$
 \end_inset
 
- (in a particular time period).
- These are not much different from the solution for short-term equilibrium
- in Section 
+ (in a particular time period) are not much different from the solution
+ for short-term equilibrium discussed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:short-term-equilibrium"
@@ -6046,7 +6020,7 @@ While an explicit solution of the first-order conditions for the above may
 \end_inset
 
  ( i.e.
- less
+ less 
 \begin_inset Formula $E_{2}(\bar{\nu}_{2}^{*})-\bar{\nu}_{2}^{*}$
 \end_inset
 
@@ -6085,8 +6059,11 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-Both the population stability condition and a combined maximal utility for
- both the consumers help explore solutions with constrained 
+The solution we use to explain the effect of income differences 
+\begin_inset Formula $\Delta=y_{2}-y_{1}$
+\end_inset
+
+ imposes two constraints on the set of parameters 
 \begin_inset Formula $\omega$
 \end_inset
 
@@ -6102,8 +6079,9 @@ Both the population stability condition and a combined maximal utility for
 \begin_inset Formula $\text{\underbar{\ensuremath{\lambda}}}$
 \end_inset
 
- .
- More specifically, the above definitions of 
+.
+ First is the population stability condition with the specific forms of
+ 
 \begin_inset Formula $W(\nu)$
 \end_inset
 
@@ -6111,11 +6089,12 @@ Both the population stability condition and a combined maximal utility for
 \begin_inset Formula $L(\nu)$
 \end_inset
 
- accommodate the population constraint 
+.
+ More specifically, the population constraint 
 \begin_inset Formula $W(\nu_{1}^{*})=L(\nu_{2}^{*})$
 \end_inset
 
- with a relationship between 
+ implies a relationship between 
 \begin_inset Formula $\text{\ensuremath{\bar{\nu}_{1}}}$
 \end_inset
 
@@ -6156,6 +6135,132 @@ status open
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The second constraint is through a combined utility for the rich and poor
+ consumers in the economy that we detail in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CombinedUtilOptimisation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Since we have limited our attention to the growing economies where status
+ competitions determine promotion more sharply than demotion, we focus only
+ on cases where 
+\begin_inset Formula $\omega>\lambda$
+\end_inset
+
+ (
+\begin_inset Formula $\kappa>1$
+\end_inset
+
+ ) and assume that 
+\begin_inset Formula $\omega$
+\end_inset
+
+ as well as 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ are fixed for the rest of our discussion.
+ With fixed 
+\begin_inset Formula $\omega$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, the 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+cooperative solution with the 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+population stability 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+constraint
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ and the maximal combined utility is used to eliminate 
+\begin_inset Formula $\text{\underbar{\ensuremath{\omega}}}$
+\end_inset
+
+and 
+\begin_inset Formula $\text{\underbar{\ensuremath{\lambda}}}$
+\end_inset
+
+.
+ Before we detail this cooperative equilibrium, consider however the relationshi
+p between 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ which the population stability alone indicates.
 \end_layout
 
 \begin_layout Standard
@@ -6223,92 +6328,6 @@ nu_{1}>0 does not mean no status consumption).
 \end_layout
 
 \begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-As we have limited our attention to the growing economies where status competiti
-ons determine promotion more sharply than demotion, we focus on cases where
- 
-\begin_inset Formula $\omega>\lambda$
-\end_inset
-
- (
-\begin_inset Formula $\kappa>1$
-\end_inset
-
- ) for the rest of our discussion.
- Another way to view the assumption 
-\begin_inset Formula $\omega>\lambda$
-\end_inset
-
- is that of a relatively more significant 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar under
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-make-or-break situation for the poorer consumers
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
- - as is often observed in growing economies.
- With fixed 
-\begin_inset Formula $\omega$
-\end_inset
-
-, 
-\begin_inset Formula $\lambda$
-\end_inset
-
-, we use the population stability condition and the maximal combined utility
- for the two consumers to eliminate 
-\begin_inset Formula $\text{\underbar{\ensuremath{\omega}}}$
-\end_inset
-
-and 
-\begin_inset Formula $\text{\underbar{\ensuremath{\lambda}}}$
-\end_inset
-
-.
- Before we detail the cooperative equilibrium implied by a maximal combined
- utility, consider the relationship between 
-\begin_inset Formula $\bar{\nu}_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\bar{\nu}_{2}$
-\end_inset
-
- which the population stability indicates.
-\end_layout
-
-\begin_layout Standard
 Setting 
 \begin_inset Formula $\kappa\equiv\frac{\omega}{\lambda}$
 \end_inset
@@ -6326,7 +6345,7 @@ Setting
 \uwave off
 \noun off
 \color none
-we have 
+, we have 
 \begin_inset Formula $(\bar{\nu}_{1}-\underbar{\ensuremath{\omega}})=-\kappa(\bar{\nu}_{2}-\underbar{\ensuremath{\lambda}})$
 \end_inset
 
@@ -6389,22 +6408,13 @@ independent of any consumer utilities that the consumers uses to make choices
 \begin_inset Formula $\bar{\nu}_{2}$
 \end_inset
 
-.
+ or whether one views the cooperative or Nash equilibrium as solutions.
  
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-Here, the level at which upward transition becomes significant raises poor
- consumer's expenditure towards status is less surprising.
+\end_layout
+
+\begin_layout Standard
+The level at which upward transition becomes significant raises poor consumer's
+ expenditure towards status is less surprising.
  What's more interesting is the withdrawal of the poorer consumer from the
  status competition due to a higher status investment  by the richer consumer.
  The population constraint - under the assumption 
@@ -6495,23 +6505,26 @@ Here, the level at which upward transition becomes significant raises poor
  to the security offered to the consumer 2 through status competition that
  there would be no reason for any expenditure towards status for the richer
  consumer.
- These constraints uphold for any utility maximised by the consumer.
- The specifics of a cooperative solution for a given 
+ These constraints indeed uphold for any utility maximised by the consumer.
+ To explore the effect of income differences 
+\begin_inset Formula $\Delta=y_{2}-y_{1}$
+\end_inset
+
+ on the selection of 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+ by the poor and rich consumers, we now explore a cooperative solution for
+ a given 
 \begin_inset Formula $\kappa$
 \end_inset
 
- using a combined utility for the two consumers are now shown in the Section
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:CombinedUtilOptimisation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
+ that incorporates both the population stability condition and a combined
+ utility for the two consumers.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6594,7 +6607,7 @@ noprefix "false"
 
  are implied by the population stability condition and the criterion for
  maximal consumer utilities.
- In other words, the parameters 
+ Thus, the parameters 
 \begin_inset Formula $\underline{\omega}$
 \end_inset
 
@@ -6618,41 +6631,38 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-To explain the sensitivity of status investments with respect to income
- difference 
-\begin_inset Formula $\Delta=y_{2}-y_{1}$
-\end_inset
-
-, we eliminate 
+Without a loss of generality, 
 \begin_inset Formula $\underline{\lambda}$
 \end_inset
 
- - without a loss of generality - with the population stability condition.
- Thus, 
+ is eliminated with the population stability condition in order for us to
+ explain the sensitivity of status investments with respect to income difference
+ 
+\begin_inset Formula $\Delta=y_{2}-y_{1}$
+\end_inset
+
+.
+ 
 \begin_inset Formula $\underline{\omega}$
 \end_inset
 
- corresponds to the maximal combined utility for the two consumers.
+ then corresponds to the maximal combined utility for the two consumers.
  This combined utility for the two consumers can be viewed as the Pareto-goal
  for the society comprising of rich and the poor consumers.
- 
-\end_layout
-
-\begin_layout Standard
-We now introduce a parameter 
+ A parameter 
 \begin_inset Formula $\beta$
 \end_inset
 
- which controls whether the Pareto goal relies more on the richer consumer
- than the poorer consumer.
+ is used in this combined utility to controls for whether the Pareto goal
+ relies more on the richer consumer than the poorer consumer.
  The parameter 
 \begin_inset Formula $\beta$
 \end_inset
 
- thus represents on how labour-intensive an economy may be or how segregated
+ could indicate how labour-intensive an economy may be or how segregated
  (in terms of the population) the rich and the poor are in the economy.
- What matters for our discussion is that any given long-term income difference
- 
+ For the purposes of our discussion, it suffices that a given long-term
+ income difference 
 \begin_inset Formula $\Delta=y_{2}-y_{1}$
 \end_inset
 
@@ -6879,7 +6889,7 @@ noprefix "false"
 
 \end_inset
 
-, we consider the total expenditure on status 
+, we consider a solution with the total expenditure on status 
 \begin_inset Formula $\bar{\nu}_{1}^{*}+\bar{\nu}_{2}^{*}$
 \end_inset
 
@@ -7178,7 +7188,7 @@ The results for Case II i.e.
 \begin_inset Formula $\phi(\nu),\psi(\nu)$
 \end_inset
 
- - whose specific forms have not been yet assumed.
+ - whose specific forms have not been yet assumed in the solution.
  Considering a specific form for 
 \begin_inset Formula $u(A)=\Gamma\cdot A^{\alpha-1}$
 \end_inset
@@ -7240,17 +7250,56 @@ noprefix "false"
 \end_inset
 
 .
+ Such solution depends however on the particular form of combined utility
  
+\begin_inset Formula $\mathscr{U}$
+\end_inset
+
+.
+ The form of a particular 
+\begin_inset Formula $\mathscr{U}$
+\end_inset
+
+ i.e.
+ the Pareto concern of how the asset utilities from poor and richer consumer
+ are combined in a society thus form an important caveat for the effect
+ of income differences on consumer selections 
+\begin_inset Formula $\bar{\nu}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\nu}_{2}$
+\end_inset
+
+.
+ A simple setting of 
+\begin_inset Formula $\mathscr{U}(u_{1},u_{2})=\beta u_{1}+(1-\beta)u_{2}$
+\end_inset
+
+ where both consumers are better off with more assets (higher utilities
+ from assets) - that we explore numerically in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Numerical-Optimisation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ - does not guarantee that the consumers would decrease status investments
+ with lowering of income differences.
 \end_layout
 
 \begin_layout Standard
-The effects of income difference 
+In summary, the goal of using the two conditions is to explore the effects
+ of income difference 
 \begin_inset Formula $y_{2}-y_{1}$
 \end_inset
 
- on status competitions can thus be explored while incorporating the changes
- in competitions that are caused by income-differences in the long-term.
- With 
+ on status competitions while incorporating the changes in competitions
+ that occur to rise or fall in income-differences in the long-term.
+ With the parameters controlling a specific form of 
 \begin_inset Formula $W(\nu),L(\nu)$
 \end_inset
 
@@ -7283,7 +7332,8 @@ The effects of income difference
 \end_inset
 
 .
- This relationship does not necessarily result in consumers increasing 
+ As we show with numerical methods, this relationship does not necessarily
+ result in consumers always increasing 
 \begin_inset Formula $\bar{\nu}_{1}$
 \end_inset
 
@@ -7291,58 +7341,7 @@ The effects of income difference
 \begin_inset Formula $\bar{\nu}_{2}$
 \end_inset
 
- in response to income differences.
- 
-\end_layout
-
-\begin_layout Standard
-A caveat to these results is the form of a particular 
-\begin_inset Formula $\mathscr{U}$
-\end_inset
-
- i.e.
- the Pareto concern of how the asset utilities from poor and richer consumer
- are combined in a society.
- A simple setting is one where both consumers being better off (with higher
- utilities from assets) aligns with the maximisation of the combined utility.
- We explore this particular setting numerically in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Numerical-Optimisation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The implications for the effect of income differences may be a lot different
- if 
-\begin_inset Formula $\mathscr{U}$
-\end_inset
-
- were to favour the richer or poorer consumer.
- While we don't concern ourselves with the effect of different regimes 
-\begin_inset Formula $\mathscr{U}$
-\end_inset
-
- in the current chapter, a simple setting 
-\begin_inset Formula $\mathscr{U}(u_{1},u_{2})=\beta u_{1}+(1-\beta)u_{2}$
-\end_inset
-
- is used in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Numerical-Optimisation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- to show that even in a setting where both consumers are better off with
- higher assets does not guarantee that the consumers would decrease status
- investments with lowering of income differences.
+ in response to rise in income differences.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8569,7 +8568,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-In applications where a positive externality from status games - e.g.
+In applications where consumer welfare can follow from status games - e.g.
  from education - cannot be ignored, the model explains how the constraints
  on resources in an economy with income segregation could limit the participatio
 n of poorer consumers despite an increase in opportunities for income mobility.
