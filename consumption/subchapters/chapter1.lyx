@@ -1170,8 +1170,8 @@ Other that the stable relative price-structure associated with a commodity
  the quantities consumed of wheat, rice, maize for quality in cereals commodity).
  Considering a commodity-group of cereals comprising of rice, maize and
  wheat, for example, maize would contribute to lower quality of cereals-commodit
-y than wheat and rice if the prices of wheat and rice are higher than that
- of maize.
+y than wheat and rice if the prices (per-kg) of wheat and rice are higher
+ than that of maize.
  Other than the quality metric thus calculated for every food commodity
  (such as cereals), the budget shares for each of these commodities are
  used as dependent variables in the system of equations used for an AIDS
@@ -1972,7 +1972,15 @@ Specifically, the above intercept
 \begin_inset Formula $\rho_{ik}$
 \end_inset
 
- are used in the following AIDS regression
+ are used in the following AIDS regression where 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ is the budget-share for the item 
+\begin_inset Formula $i$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2283,6 +2291,21 @@ noprefix "false"
  - while the groups based on movements are further subdivided based on FAO
  categories to assist interpretations from a DD perspective.
  
+\end_layout
+
+\begin_layout Standard
+The data used for the classification as well as the inputs towards estimation
+ are described in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -3769,6 +3792,19 @@ cture
 \end_inset
 
  is (2,1) for {cooking-oil,eggs}.
+ In other words, consuming 1.5 kg of cooking oil (
+\begin_inset Formula $q_{cooking\_oil}=1.5$
+\end_inset
+
+ ) is equivalent to consuming 3 units of commodity: fat (
+\begin_inset Formula $Q_{fat}=2\times1.5$
+\end_inset
+
+ ) with quality of 2 (
+\begin_inset Formula $Q_{G}=\frac{2\times1.5}{1.5}=2$
+\end_inset
+
+) since the price of cooking-oil is twice that of base good: eggs.
 \end_layout
 
 \begin_layout Standard
@@ -4421,7 +4457,19 @@ noprefix "false"
 
 \begin_layout Standard
 With each of the two explanatory variables, we use both the quality-metric
- and the budget share as dependent variables in the AIDS system of equations.
+ 
+\begin_inset Formula $ln\ V_{G}$
+\end_inset
+
+ and the budget share 
+\begin_inset Formula $w_{G}$
+\end_inset
+
+ as dependent variables (for a food commodity 
+\begin_inset Formula $G$
+\end_inset
+
+) in the AIDS system of equations.
  Thus with intercepts 
 \begin_inset Formula $\rho_{1,G}$
 \end_inset
@@ -4475,7 +4523,11 @@ With each of the two explanatory variables, we use both the quality-metric
 \begin_inset Formula $\{P_{j}\}_{j\in[1,n]}$
 \end_inset
 
-, we have the following system of equations
+, we have the following system of equations (for each commodity group 
+\begin_inset Formula $G$
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
@@ -8006,8 +8058,8 @@ noprefix "false"
 \end_inset
 
  (see Appendix IV for the entire list of estimation equations).
- The estimation uses a three-stage least-squares method for systems of simultane
-ous equations (see 
+ The estimation uses a three-stage least-squares method for systems of equations
+ (see 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Zellner3SLS1992"
@@ -8158,8 +8210,8 @@ ln_tot_exp
 \family default
  is spent on the more expensive variants (goods) within a food category
  (commodity).
- What's less expected are the negative elasticities for budget-share of
- some food commodities.
+ What's less expected are the negative income elasticities for budget-share
+ of some food commodities.
  More particularly, the budget shares show a decline with total expenditure
  logarithm for commodities 
 \family typewriter
