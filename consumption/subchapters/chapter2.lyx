@@ -3636,10 +3636,15 @@ The next important control is the occupation of the households which is
  This is because a significant number of household units in both Tanzania
  and Nigeria are made up of joint families where the reported educational
  expenses correspond to the grandchildren of the household head (HH).
- To avoid letting the education levels point to the penultimate generation
- for households where HH has grandchildren and to the last generation where
- HH has younger children, we rely on the highest education rank in the paternal
- generation of the children recorded in the survey 
+ To avoid letting the household education level point to the generation
+ before previous for households where HH has grandchildren in school while
+ letting the education level point to the previous generation where HH has
+ children in school, we rely on a more uniform measure for the highest education
+ rank 
+\family typewriter
+highesteduc
+\family default
+ in the paternal generation of the children recorded in the survey 
 \begin_inset Foot
 status open
 
@@ -4205,12 +4210,8 @@ Gamma^{*}$ &
 \backslash
 texttt{
 \backslash
-small{}fathers
-\backslash
-_educ
-\backslash
-_rank } & highest education rank in the paternal generation of the children
- considered in the household & Individual
+small{}highesteduc } & highest education rank in the paternal generation
+ of the children considered in the household & Individual
 \backslash
 tabularnewline 
 \end_layout
@@ -5259,7 +5260,7 @@ agri
 
 ), the paternal education level 
 \family typewriter
-father_educ_rank
+highesteduc
 \family default
  (
 \begin_inset Formula $\Gamma^{*}$
@@ -5434,7 +5435,7 @@ educpriv
 \family default
 ), the highest education rank 
 \family typewriter
-father_educ_rank
+highesteduc
 \family default
  (
 \begin_inset Formula $\Gamma^{*}$
@@ -5520,14 +5521,14 @@ Only relations with the household head are reported in the survey.
  
 \family typewriter
 \size small
-father_educ_rank
+highesteduc
 \family default
 \size default
  instead.
  The paternal educational level 
 \family typewriter
 \size small
-father_educ_rank
+highesteduc
 \family default
 \size default
  suffices for the analysis of expenditure spent over all the children in
@@ -6618,11 +6619,7 @@ sym{***}&    0.815
 \backslash
 
 \backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank&   0.0109
+ 1.highesteduc&   0.0109
 \backslash
 sym{*}  &   0.0829         &    0.694
 \backslash
@@ -6635,12 +6632,8 @@ sym{*}  &    5.899
 \backslash
 
 \backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank&  0.00432         &  0.00679         &    0.366         &    0.363   
-      
+ 2.highesteduc&  0.00432         &  0.00679         &    0.366         &   
+ 0.363         
 \backslash
 
 \backslash
@@ -6649,12 +6642,8 @@ _rank&  0.00432         &  0.00679         &    0.366         &    0.363
 \backslash
 
 \backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank&  0.00457         & -0.00520         &    0.473         &   -0.528   
-      
+ 3.highesteduc&  0.00457         & -0.00520         &    0.473         &   -0.528
+         
 \backslash
 
 \backslash
@@ -6663,11 +6652,7 @@ _rank&  0.00457         & -0.00520         &    0.473         &   -0.528
 \backslash
 
 \backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0250
+ 4.highesteduc&   0.0250
 \backslash
 sym{*}  &   0.0120         &    1.465
 \backslash
@@ -7064,11 +7049,7 @@ sym{***}&    1.016
 \backslash
 
 \backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank&   0.0107
+ 1.highesteduc&   0.0107
 \backslash
 sym{*}  &   0.0948         &    0.679
 \backslash
@@ -7081,12 +7062,8 @@ sym{*}  &    7.172
 \backslash
 
 \backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank&  0.00199         &  0.00689         &    0.512         &    0.481   
-      
+ 2.highesteduc&  0.00199         &  0.00689         &    0.512         &   
+ 0.481         
 \backslash
 
 \backslash
@@ -7095,12 +7072,8 @@ _rank&  0.00199         &  0.00689         &    0.512         &    0.481
 \backslash
 
 \backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank&  0.00359         & -0.00767         &    0.607         &   -0.551   
-      
+ 3.highesteduc&  0.00359         & -0.00767         &    0.607         &   -0.551
+         
 \backslash
 
 \backslash
@@ -7109,11 +7082,7 @@ _rank&  0.00359         & -0.00767         &    0.607         &   -0.551
 \backslash
 
 \backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0273
+ 4.highesteduc&   0.0273
 \backslash
 sym{**} &   0.0129         &    1.320
 \backslash
@@ -7612,12 +7581,8 @@ sym{***}&    2.083         &    0.896
 \backslash
 
 \backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank&   0.0102         &   0.0847         &    0.443         &    8.091   
-      &   0.0118         &    0.107         &    0.850
+ 1.highesteduc&   0.0102         &   0.0847         &    0.443         &   
+ 8.091         &   0.0118         &    0.107         &    0.850
 \backslash
 sym{*}  &    5.336         
 \backslash
@@ -7629,13 +7594,9 @@ sym{*}  &    5.336
 \backslash
 
 \backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank&   0.0208         &  0.00761         &    0.759         &    0.178   
-      &  -0.0235         &  0.00660         &   -0.380         &    0.618  
-       
+ 2.highesteduc&   0.0208         &  0.00761         &    0.759         &   
+ 0.178         &  -0.0235         &  0.00660         &   -0.380         &  
+  0.618         
 \backslash
 
 \backslash
@@ -7645,13 +7606,9 @@ _rank&   0.0208         &  0.00761         &    0.759         &    0.178
 \backslash
 
 \backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank&-0.000380         & -0.00517         &  -0.0789         &   -0.359   
-      &   0.0114         & -0.00197         &    1.171         &   -0.594  
-       
+ 3.highesteduc&-0.000380         & -0.00517         &  -0.0789         &   -0.359
+         &   0.0114         & -0.00197         &    1.171         &   -0.594
+         
 \backslash
 
 \backslash
@@ -7661,12 +7618,8 @@ _rank&-0.000380         & -0.00517         &  -0.0789         &   -0.359
 \backslash
 
 \backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0204         &  0.00328         &    0.796         &   -0.695   
-      &   0.0368         &   0.0426         &    2.572
+ 4.highesteduc&   0.0204         &  0.00328         &    0.796         &   -0.695
+         &   0.0368         &   0.0426         &    2.572
 \backslash
 sym{*}  &    2.785         
 \backslash
@@ -8039,7 +7992,7 @@ status open
  educpriv expected.
  tertiary_school level lower.
  num_child more nuanced - as is r.
- father_educ_rank also different.
+ highesteduc also different.
 \end_layout
 
 \end_inset
@@ -8159,12 +8112,12 @@ noprefix "false"
 , the lower levels of average educational attainment in Tanzania seem to
  accentuate the effect of paternal education rank 
 \family typewriter
-fathers_educ_rank 
+highesteduc 
 \family default
 which has a higher statistical significance for poorer households in Tanzania
  (compare the coefficient of paternal education rank 
 \family typewriter
-fathers_educ_rank 
+highesteduc 
 \family default
 in Tanzania with educational-expenditure logarithm 
 \begin_inset Formula $log(x_{educ})$
@@ -8397,11 +8350,7 @@ sym{***}&    0.799
 \backslash
 
 \backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank&   0.0109
+ 1.highesteduc&   0.0109
 \backslash
 sym{*}  &   0.0819         &    0.697
 \backslash
@@ -8414,12 +8363,8 @@ sym{*}  &    5.867
 \backslash
 
 \backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank&  0.00402         &  0.00520         &    0.369         &    0.285   
-      
+ 2.highesteduc&  0.00402         &  0.00520         &    0.369         &   
+ 0.285         
 \backslash
 
 \backslash
@@ -8428,12 +8373,8 @@ _rank&  0.00402         &  0.00520         &    0.369         &    0.285
 \backslash
 
 \backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank&  0.00452         & -0.00734         &    0.475         &   -0.635   
-      
+ 3.highesteduc&  0.00452         & -0.00734         &    0.475         &   -0.635
+         
 \backslash
 
 \backslash
@@ -8442,11 +8383,7 @@ _rank&  0.00452         & -0.00734         &    0.475         &   -0.635
 \backslash
 
 \backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0250
+ 4.highesteduc&   0.0250
 \backslash
 sym{*}  &   0.0105         &    1.469
 \backslash
@@ -8834,11 +8771,7 @@ sym{***}&    0.677
 \backslash
 
 \backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank&   0.0109
+ 1.highesteduc&   0.0109
 \backslash
 sym{*}  &   0.0882         &    0.670
 \backslash
@@ -8851,12 +8784,8 @@ sym{*}  &    6.186
 \backslash
 
 \backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank&  0.00401         &  0.00573         &    0.320         &    0.310   
-      
+ 2.highesteduc&  0.00401         &  0.00573         &    0.320         &   
+ 0.310         
 \backslash
 
 \backslash
@@ -8865,12 +8794,8 @@ _rank&  0.00401         &  0.00573         &    0.320         &    0.310
 \backslash
 
 \backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank&  0.00444         & -0.00658         &    0.433         &   -0.603   
-      
+ 3.highesteduc&  0.00444         & -0.00658         &    0.433         &   -0.603
+         
 \backslash
 
 \backslash
@@ -8879,11 +8804,7 @@ _rank&  0.00444         & -0.00658         &    0.433         &   -0.603
 \backslash
 
 \backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0250
+ 4.highesteduc&   0.0250
 \backslash
 sym{*}  &   0.0104         &    1.382
 \backslash
