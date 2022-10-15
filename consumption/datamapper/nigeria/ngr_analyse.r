@@ -19,6 +19,43 @@ test <- function(){
   return(ohs)
 }
 
+log_positive <- function(x){
+  if (x==0){
+    return(0)
+  } else if (x<0){
+    stop("Negative x")
+  } else {
+    return(log(x))
+  }
+}
+
+ngr_summary_df <- function(dat){
+  funcs <- c(mean,median,sd)
+  func_names<-c ("ngr_mean",'ngr_median','ngr_stdev')
+  if( length(funcs)!=length(func_names)){
+    stop("names list unmatched with funcs list")
+  }
+  resultsdf <- NULL
+  for (func_i in seq(length(funcs))){
+    func <- funcs[[func_i]]
+    
+    ngrsummary <- t(data.frame(r=func(dat$r2012),ragri=func(dat$r_agri2012), reduc=func(dat$r_educ2012),
+                              lnA0=func(dat$lnA0), logx=func(dat$logx),logfunccostne=func(dat$mean_cost_ne),
+                              ruralwards=func(dat$rural_wards),secschools=func(dat[!is.na(dat$secondary_schools),]$secondary_schools),
+                              educpriv=func(dat$educpriv),isprimaryage=func(dat$is_primaryage),
+                              issecondaryage=func(dat$is_secondaryage),istertiaryage=func(dat$is_tertiaryage),
+                              agri=func(dat$agri),highest_educ=func(dat$father_educ_rank),
+                              numchild=func(dat$numchild),religion=func(as.integer(dat$religion)),
+                              weduc=func(dat$w_educ),log_educ=func(sapply(dat$toteducexpense,log_positive))))
+    colnames(ngrsummary) <- c(func_names[[func_i]])
+    resultsdf <- cbind(resultsdf,ngrsummary)
+    
+  }
+  resultsdf<-as.data.frame(resultsdf)
+  resultsdf$varname <-rownames(resultsdf)
+  return(resultsdf)
+}
+
 district_means<-function(dat,hhid_col,field_type){
   if (field_type=="logx"){
     dd <-ddply(dat[,c("region","district",hhid_col,"logx")],.(region,district),summarise,mean_logx= log(mean(exp(logx))))

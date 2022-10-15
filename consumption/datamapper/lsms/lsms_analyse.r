@@ -28,9 +28,9 @@ log_positive <- function(x){
   }
 }
 
-summary_df <- function(dat){
+tn_summary_df <- function(dat){
   funcs <- c(mean,median,sd)
-  func_names<-c ("mean",'median','stdev')
+  func_names<-c ("tnz_mean",'tnz_median','tnz_stdev')
   if( length(funcs)!=length(func_names)){
     stop("names list unmatched with funcs list")
   }
@@ -49,6 +49,8 @@ summary_df <- function(dat){
     colnames(tnsummary) <- c(func_names[[func_i]])
     resultsdf <- cbind(resultsdf,tnsummary)
   }
+  resultsdf<-as.data.frame(resultsdf)
+  resultsdf$varname <-rownames(resultsdf)
   return(resultsdf)
 }
 
