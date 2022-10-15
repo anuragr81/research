@@ -26,7 +26,32 @@ log_positive <- function(x){
     } else {
     return(log(x))
   }
-} 
+}
+
+summary_df <- function(dat){
+  funcs <- c(mean,median,sd)
+  func_names<-c ("mean",'median','stdev')
+  if( length(funcs)!=length(func_names)){
+    stop("names list unmatched with funcs list")
+  }
+  resultsdf <- NULL
+  for (func_i in seq(length(funcs))){
+    func <- funcs[[func_i]]
+    
+    tnsummary <- t(data.frame(r=func(dat$r2012),ragri=func(dat$r_agri2012), reduc=func(dat$r_educ2012),
+                              lnA0=func(dat$lnA0), logx=func(dat$logx),logfunccostne=func(dat$mean_cost_ne),
+                              ruralwards=func(dat$rural_wards),secschools=func(dat[!is.na(dat$secondary_schools),]$secondary_schools),
+                              educpriv=func(dat$educpriv),isprimaryage=func(dat$is_primaryage),
+                              issecondaryage=func(dat$is_secondaryage),istertiaryage=func(dat$is_tertiaryage),
+                              agri=func(dat$agri),highest_educ=func(dat$father_educ_rank),
+                              numchild=func(dat$numchild),hasenglish=func(as.integer(is.element(dat$litlang,c(2,3)))),
+                              weduc=func(dat$w_educ),log_educ=func(sapply(dat$toteducexpense,log_positive))))
+    colnames(tnsummary) <- c(func_names[[func_i]])
+    resultsdf <- cbind(resultsdf,tnsummary)
+  }
+  return(resultsdf)
+}
+
 h <- taskCallbackManager()
 h$add(function(expr, value, ok, visible) { options("prompt"=format(Sys.time(), "%H:%M:%S> ")); return(TRUE) }, name = "simpleHandler")
 
