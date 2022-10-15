@@ -30,6 +30,7 @@ log_positive <- function(x){
 }
 
 ngr_summary_df <- function(dat){
+  dat <- subset(dat,numchild>0)
   funcs <- c(mean,median,sd)
   func_names<-c ("ngr_mean",'ngr_median','ngr_stdev')
   if( length(funcs)!=length(func_names)){

@@ -3930,7 +3930,7 @@ centering
 
 
 \backslash
-resizebox{5in}{!}{
+resizebox{6in}{!}{
 \end_layout
 
 \begin_layout Plain Layout
@@ -4316,15 +4316,24 @@ status open
 
 \begin_layout Plain Layout
 
-% tnsummary <- t(data.frame(r=mean(dat$r2012),ragri=mean(dat$r_agri2012),
- reduc=mean(dat$r_educ2012),lnA0=mean(dat$lnA0), logx=mean(dat$logx),logmeancost
-ne=mean(dat$mean_cost_ne),ruralwards=mean(dat$rural_wards),secschools=mean(dat[!
-is.na(dat$secondary_schools),]$secondary_schools),educpriv=mean(dat$educpriv),isp
-rimaryage=mean(dat$is_primaryage),issecondaryage=mean(dat$is_secondaryage),ister
-tiaryage=mean(dat$is_tertiaryage),agri=mean(dat$agri),highest_educ=mean(dat$fath
-er_educ_rank),numchild=mean(dat$numchild),hasenglish=mean(as.integer(is.element(da
-t$litlang,c(2,3)))),weduc=mean(dat$w_educ),log_educ=mean(sapply(dat$toteducexpen
-se,log_positive))))
+% tndf<-tn_summary_df(dat = tn$df2014)
+\end_layout
+
+\begin_layout Plain Layout
+
+% ngrdf<-ngr_summary_df(dat = ng$df2015)
+\end_layout
+
+\begin_layout Plain Layout
+
+% a <- merge(tndf,ngrdf,all=T)
+\end_layout
+
+\begin_layout Plain Layout
+
+% write.table(paste(a$varname , "&",round(a$tnz_mean,2)  ,"&",round(a$tnz_median,
+2) ,"&",round(a$tnz_stdev,2) ,"&",round(a$ngr_mean,2) ,"&",round(a$ngr_median,2)
+ ,"&",round(a$ngr_stdev,2)),'c:/temp/t.txt')
 \end_layout
 
 \end_inset
@@ -4353,7 +4362,7 @@ centering
 
 
 \backslash
-resizebox{5in}{!}{
+resizebox{6in}{!}{
 \end_layout
 
 \begin_layout Plain Layout
@@ -4362,19 +4371,19 @@ resizebox{5in}{!}{
 \backslash
 begin{tabular}{>{
 \backslash
-centering}p{1.2in}|>{
+raggedright}p{1.4in}|>{
 \backslash
-raggedright}p{0.7in}|>{
+raggedleft}p{0.6in}|>{
 \backslash
-raggedright}p{.7in}|>{
+raggedleft}p{.6in}|>{
 \backslash
-raggedright}p{.7in}|>{
+raggedleft}p{.6in}|>{
 \backslash
-raggedright}p{0.7in}|>{
+raggedleft}p{0.6in}|>{
 \backslash
-raggedright}p{0.7in}|>{
+raggedleft}p{0.6in}|>{
 \backslash
-raggedright}p{0.7in}   } 
+raggedleft}p{0.6in}   } 
 \backslash
 hline  
 \end_layout
@@ -4400,6 +4409,44 @@ hline
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{w
+\backslash
+_educ}  & 0.04 & 0.01 & 0.08 & 0.04 & 0 & 0.1 
+\backslash
+tabularnewline 
+\backslash
+hline   
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{log
+\backslash
+_educ}   & 7.77 & 10.49 & 5.46 & 3.97 & 0 & 4.94 
+\backslash
+tabularnewline 
+\backslash
+hline   
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
 
 \backslash
 texttt{
@@ -4408,7 +4455,7 @@ small{}ln
 \backslash
 _tot
 \backslash
-_exp} & 14.32 & 14.44& 0.90 & 12.32& 12.38 & 0.79
+_exp} & 14.39 & 14.48 & 0.83 & 12.42 & 12.45 & 0.72
 \backslash
 tabularnewline 
 \backslash
@@ -4429,7 +4476,7 @@ small{}ln
 \backslash
 _tot
 \backslash
-_assets} & 12.90 & 12.71 & 1.95 & 10.81 & 10.88 & 1.43 
+_assets} & 12.96 & 12.76 & 1.93 & 10.93 & 11 & 1.35 
 \backslash
 tabularnewline 
 \backslash
@@ -4442,26 +4489,7 @@ hline
 \backslash
 texttt{
 \backslash
-small{}assetdensity}     & 14.93 & 14.85&1.14 & 11.44 & 11.45 & 0.75 
-\backslash
-tabularnewline 
-\backslash
-hline  
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-texttt{
-\backslash
-small{}assetdensity
-\backslash
-_educ} & 14.70 & 14.59 & 1.43 & 11.36 & 11.45 & 0.92 
+small{}assetdensity}     & 14.9 & 14.8 & 1.13 & 11.43 & 11.42 & 0.74 
 \backslash
 tabularnewline 
 \backslash
@@ -4480,7 +4508,7 @@ texttt{
 \backslash
 small{}assetdensity
 \backslash
-_agri} & 14.75 &14.71 & 1.28& 11.36 & 11.40 & 0.85 
+_educ} & 14.71 & 14.62 & 1.4 & 11.42 & 11.49 & 0.83 
 \backslash
 tabularnewline 
 \backslash
@@ -4493,9 +4521,22 @@ hline
 
 \begin_layout Plain Layout
 
-%
+
 \backslash
-hline  $p_{ne}$  & 
+texttt{
+\backslash
+small{}assetdensity
+\backslash
+_agri} & 14.79 & 14.82 & 1.23 & 11.36 & 11.39 & 0.84 
+\backslash
+tabularnewline 
+\backslash
+hline  
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 texttt{
 \backslash
@@ -4505,176 +4546,164 @@ _mean
 \backslash
 _cost
 \backslash
-_ne} & & Area
+_ne} & 12.9 & 12.97 & 0.53 & 10.85 & 10.86 & 0.53 
 \backslash
 tabularnewline 
+\backslash
+hline   
 \end_layout
 
 \begin_layout Plain Layout
 
-%
-\backslash
-hline  $
-\backslash
-gamma$ & 
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 texttt{
 \backslash
 small{}rural
 \backslash
-_wards} & & Area
+_wards} & 0.66 & 0.78 & 0.33 & 0.71 & 1 & 0.41 
 \backslash
 tabularnewline 
+\backslash
+hline   
 \end_layout
 
 \begin_layout Plain Layout
 
-%
-\backslash
-hline  $s$ & 
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 texttt{secondary
 \backslash
-_schools} & & Area
+_schools} & 4.56 & 2 & 7.59 & 1.22 & 1 & 0.52 
 \backslash
 tabularnewline 
+\backslash
+hline   
 \end_layout
 
 \begin_layout Plain Layout
 
-%
+
 \backslash
-hline  $
-\backslash
-pi$ & 
-\backslash
-texttt{educpriv} & & Individual
+texttt{educpriv} & 0.06 & 0 & 0.23 & 0.19 & 0 & 0.39 
 \backslash
 tabularnewline 
+\backslash
+hline   
 \end_layout
 
 \begin_layout Plain Layout
 
-%
-\backslash
-hline  $
-\backslash
-mu_{1}$ & 
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 texttt{is
 \backslash
-_primaryage} & & Individual
+_primaryage} & 0.63 & 1 & 0.48 & 0.76 & 1 & 0.43 
 \backslash
 tabularnewline 
+\backslash
+hline   
 \end_layout
 
 \begin_layout Plain Layout
 
-%
-\backslash
-hline  $
-\backslash
-mu_{2}$ & 
+
 \backslash
 texttt{is
 \backslash
-_secondaryage} &   & Individual
+_secondaryage}  & 0.58 & 1 & 0.49 & 0.61 & 1 & 0.49 
 \backslash
 tabularnewline 
+\backslash
+hline   
 \end_layout
 
 \begin_layout Plain Layout
 
-%
-\backslash
-hline  $
-\backslash
-mu_{3}$ & 
+
 \backslash
 texttt{is
 \backslash
-_tertiaryage} &  & Individual
+_tertiaryage} & 0.45 & 0 & 0.5 & 0.4 & 0 & 0.49  
 \backslash
 tabularnewline 
+\backslash
+hline   
 \end_layout
 
 \begin_layout Plain Layout
 
-%
-\backslash
-hline  $
-\backslash
-Omega$ & 
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
 texttt{
 \backslash
-small{}agri} & & Individual
+small{}agri} & 0.66 & 1 & 0.47 & 0.51 & 1 & 0.5 
 \backslash
 tabularnewline 
+\backslash
+hline   
 \end_layout
 
 \begin_layout Plain Layout
 
-%
-\backslash
-hline  $
-\backslash
-Gamma^{*}$ & 
+
 \backslash
 texttt{
 \backslash
-small{}highesteduc } & & Individual
+small{}highesteduc } &1.21 & 1 & 1.06 & 1.53 & 2 & 1.47 
 \backslash
 tabularnewline 
+\backslash
+hline   
 \end_layout
 
 \begin_layout Plain Layout
 
-%
-\backslash
-hline  $h$ & 
+
 \backslash
 texttt{
 \backslash
-small{}numchild} & & Individual
+small{}numchild} &3.05 & 3 & 2.03 & 3.55 & 3 & 2.16 
 \backslash
 tabularnewline 
+\backslash
+hline   
 \end_layout
 
 \begin_layout Plain Layout
 
-%
+
 \backslash
-hline  $
-\backslash
-chi$ & 
-\backslash
-texttt{religion} & & Individual
+texttt{religion}  &  &  &  & 1.5 & 1 & 0.52 
 \backslash
 tabularnewline 
+\backslash
+hline   
 \end_layout
 
 \begin_layout Plain Layout
 
-%
-\backslash
-hline  $
-\backslash
-xi$ & 
+
 \backslash
 texttt{has
 \backslash
-_english} & & Individual
-\backslash
-tabularnewline 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
+_english}  & 0.36 & 0 & 0.48 &  &  & 
 \end_layout
 
 \begin_layout Plain Layout
@@ -5078,7 +5107,35 @@ noprefix "false"
 
 \end_inset
 
+)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Despite the uniformity in LSMS data fields corresponding to education expenses,
+ the collection methodology may not be the same across all the countries.
+ This is evident from the much lower educational expenses in Nigeria than
+ in Tanzania (see Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tab:Summary-Stats}
+\end_layout
+
+\end_inset
+
 ).
+ Our comparison of the two economies (Tanzania and Nigeria) therefore does
+ not rely on the measurement of educational expenses relative to one another.
+\end_layout
+
+\end_inset
+
+.
  Comparing education levels of the household heads, we see that the average-educ
 ation rank of the household heads in Tanzania (1.8) is lower than that in
  Nigeria(1.9).
