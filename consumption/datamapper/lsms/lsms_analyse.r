@@ -18,6 +18,15 @@ source('translation/frameutils.R');source('lsms/lsms_datastorage.R');source('lsm
 #datt <- subset(dat,is.element(shortname,subset(ddply(dat,.(shortname),summarise,n=length(price)),!is.na(shortname) & n>20)$shortname)) %>% mutate(shortname = as.character(shortname))
 #par(mar=c(5,7,1,1)); boxplot(price~shortname,data=datt,horizontal=TRUE,las=2)
 
+log_positive <- function(x){
+  if (x==0){
+    return(0)
+  } else if (x<0){
+    stop("Negative x")
+    } else {
+    return(log(x))
+  }
+} 
 h <- taskCallbackManager()
 h$add(function(expr, value, ok, visible) { options("prompt"=format(Sys.time(), "%H:%M:%S> ")); return(TRUE) }, name = "simpleHandler")
 

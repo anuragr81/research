@@ -44,7 +44,7 @@
 \usepackage{babel}
 \begin{document}
 
-\partfont{\fontsize{12}{14}\selectfont\centering} 
+\partfont{\fontsize{12}{15}\selectfont\centering} 
 \part*{\centering{Urbanisation Levels and Wealth Effects for Education in sub-Saharan Africa}}
 % \subsubsection*{\centering{\textit{A case-study in Tanzania and Nigeria}}}
 
@@ -1005,11 +1005,13 @@ an important control in the study are not based on education level
 of the household head. This is because a significant number of household
 units in both Tanzania and Nigeria are made up of joint families where
 the reported educational expenses correspond to the grandchildren
-of the household head (HH). To avoid letting the education levels
-point to the penultimate generation for households where HH has grandchildren
-and to the last generation where HH has younger children, we rely
-on the highest education rank in the paternal generation of the children
-recorded in the survey \footnote{Only relations with the household head are reported in the survey.
+of the household head (HH). To avoid letting the household education
+level point to the generation before previous for households where
+HH has grandchildren in school while letting the education level point
+to the previous generation where HH has children in school, we rely
+on a more uniform measure for the highest education rank \texttt{highesteduc}
+in the paternal generation of the children recorded in the survey
+\footnote{Only relations with the household head are reported in the survey.
 Thus, there is no direct way of locating the parent of a child except
 through the relation with the household-head.}. 
 
@@ -1064,69 +1066,35 @@ $log(x_{educ})$  & \texttt{\small{}log\_educ}  & logarithm of the educational ex
 \end{table}
 \par\end{center}
 
-\begin{center}
-\begin{table}[h]
-\begin{centering}
-\begin{tabular}{>{\centering}p{0.7in}|>{\centering}p{1.4in}|>{\raggedright}p{3.2in}|>{\raggedright}p{0.7in}}
-\hline 
-Controls / Explanatory Variables & Variable Name & Description & Ind/Ref Level\tabularnewline
-\hline 
-$log(x_{t})$ & \texttt{\small{}ln\_tot\_exp} & logarithm of the sum of total expenditure by the household & Individual\tabularnewline
-\hline 
-$log(A_{t})$ & \texttt{\small{}ln\_tot\_assets}  & logarithm of the sum of total durable goods owned by the household & Individual\tabularnewline
-\hline 
-$r$  & \texttt{\small{}assetdensity}  & logarithm of mean asset-ownership level in the 6-km radius area around
-the household district & Area\tabularnewline
-\hline 
-$r_{\Gamma}$  & \texttt{\small{}assetdensity\_educ}  & logarithm of mean asset-ownership level among the consumers of having
-the same value of the indicator variable denoting primary / more-than-primary
-education level (i.e. the variable $\Gamma$) in the 6-km radius area
-around the household district & Area\tabularnewline
-\hline 
-$r_{\Omega}$  & \texttt{\small{}assetdensity\_agri}  & logarithm of mean asset-ownership level among the consumers of having
-the same value of the indicator variable denoting agrarian /non-agrarian
-occupation (i.e. the variable $\Omega$ ) in the 6-km radius area
-around the household district & Area\tabularnewline
-\hline 
-$p_{ne}$  & \texttt{\small{}log\_mean\_cost\_ne} & logarithm of the mean non-durable expenditure - excluding asset costs
-in the area surrounding the consumer & Area\tabularnewline
-\hline 
-$\gamma$ & \texttt{\small{}rural\_wards} & the percentage of rural wards/eas in the district of consumer's residence & Area\tabularnewline
-\hline 
-$s$ & \texttt{secondary\_schools} & the number of wards in a district with an accessible secondary school
-(within 6-km) & Area\tabularnewline
-\hline 
-$\pi$ & \texttt{educpriv} & factor variable indicating if any of the child attends a privately
-owned educational institution & Individual\tabularnewline
-\hline 
-$\mu_{1}$ & \texttt{is\_primaryage} & factor variable indicating if there is a family member in the household
-of age between the mean primary school attendance ages ( i.e. between
-7 and 13 inclusive )  & Individual\tabularnewline
-\hline 
-$\mu_{2}$ & \texttt{is\_secondaryage} & factor variable indicating if there is a family member in the household
-of age between the mean secondary school attendance ages ( i.e. between
-15 and 23 inclusive )  & Individual\tabularnewline
-\hline 
-$\mu_{3}$ & \texttt{is\_tertiaryage} & factor variable indicating if there is a family member in the household
-of age between the mean secondary school attendance ages ( i.e. between
-23 and 31 inclusive ) & Individual\tabularnewline
-\hline 
-$\Omega$ & \texttt{\small{}agri} & factor variable indicating whether the household head's occupation
-is agrarian or not & Individual\tabularnewline
-\hline 
-$\Gamma^{*}$ & \texttt{\small{}fathers\_educ\_rank } & highest education rank in the paternal generation of the children
-considered in the household & Individual\tabularnewline
-\hline 
-$h$ & \texttt{\small{}numchild} & number of children ($\le18$ years age) in the household & Individual\tabularnewline
-\hline 
-$\chi$ & \texttt{religion} & the religion which most members in the household subscribe to & Individual\tabularnewline
-\hline 
-$\xi$ & \texttt{has\_english} & ability to speak or write English & Individual\tabularnewline
-\end{tabular}
-\par\end{centering}
+\begin{table}[h] \centering
+
+\resizebox{5in}{!}{
+\begin{tabular}{>{\centering}p{0.7in}|>{\centering}p{1.4in}|>{\raggedright}p{3.2in}|>{\raggedright}p{0.7in}} \hline  
+
+
+Controls / Explanatory Variables & Variable Name & Description & Ind/Ref Level\tabularnewline \hline  
+$log(x_{t})$ & \texttt{\small{}ln\_tot\_exp} & logarithm of the sum of total expenditure by the household & Individual\tabularnewline 
+\hline  $log(A_{t})$ & \texttt{\small{}ln\_tot\_assets}  & logarithm of the sum of total durable goods owned by the household & Individual\tabularnewline 
+\hline  $r$  & \texttt{\small{}assetdensity}  & logarithm of mean asset-ownership level in the 6-km radius area around the household district & Area\tabularnewline 
+\hline  $r_{\Gamma}$  & \texttt{\small{}assetdensity\_educ}  & logarithm of mean asset-ownership level among the consumers of having the same value of the indicator variable denoting primary / more-than-primary education level (i.e. the variable $\Gamma$) in the 6-km radius area around the household district & Area\tabularnewline 
+\hline  $r_{\Omega}$  & \texttt{\small{}assetdensity\_agri}  & logarithm of mean asset-ownership level among the consumers of having the same value of the indicator variable denoting agrarian /non-agrarian occupation (i.e. the variable $\Omega$ ) in the 6-km radius area around the household district & Area\tabularnewline 
+\hline  $p_{ne}$  & \texttt{\small{}log\_mean\_cost\_ne} & logarithm of the mean non-durable expenditure - excluding asset costs in the area surrounding the consumer & Area\tabularnewline 
+\hline  $\gamma$ & \texttt{\small{}rural\_wards} & the percentage of rural wards/eas in the district of consumer's residence & Area\tabularnewline 
+\hline  $s$ & \texttt{secondary\_schools} & the number of wards in a district with an accessible secondary school (within 6-km) & Area\tabularnewline 
+\hline  $\pi$ & \texttt{educpriv} & factor variable indicating if any of the child attends a privately owned educational institution & Individual\tabularnewline 
+\hline  $\mu_{1}$ & \texttt{is\_primaryage} & factor variable indicating if there is a family member in the household of age between the mean primary school attendance ages ( i.e. between 7 and 13 inclusive )  & Individual\tabularnewline 
+\hline  $\mu_{2}$ & \texttt{is\_secondaryage} & factor variable indicating if there is a family member in the household of age between the mean secondary school attendance ages ( i.e. between 15 and 23 inclusive )  & Individual\tabularnewline 
+\hline  $\mu_{3}$ & \texttt{is\_tertiaryage} & factor variable indicating if there is a family member in the household of age between the mean secondary school attendance ages ( i.e. between 23 and 31 inclusive ) & Individual\tabularnewline 
+\hline  $\Omega$ & \texttt{\small{}agri} & factor variable indicating whether the household head's occupation is agrarian or not & Individual\tabularnewline 
+\hline  $\Gamma^{*}$ & \texttt{\small{}highesteduc } & highest education rank in the paternal generation of the children considered in the household & Individual\tabularnewline 
+\hline  $h$ & \texttt{\small{}numchild} & number of children ($\le18$ years age) in the household & Individual\tabularnewline 
+\hline  $\chi$ & \texttt{religion} & the religion which most members in the household subscribe to & Individual\tabularnewline 
+\hline  $\xi$ & \texttt{has\_english} & ability to speak or write English & Individual\tabularnewline 
+
+\end{tabular} 
+}
 \caption{\label{tab:Control-Variables}Control Variables}
 \end{table}
-\par\end{center}
 
 \section{\label{sec:AnalysisAndResults}Empirical Analysis and Results}
 
@@ -1317,10 +1285,11 @@ and educational expenses in Section \ref{subsec:Results}.
 
 The two dependent variables we use in the estimation described in
 Section \ref{sec:Econometric-Method} (see Equation \ref{eq:budgetshr_estimation})
-are the budget shares for educational expenses ($w_{educ}$) and total
-expenditures $log(x_{educ})$ . The controls for the estimation are
-listed in the Table \ref{tab:Control-Variables} while the dependent
-variables are listed in Table \ref{tab:Dependent Variables}. 
+are the budget shares for educational expenses (\texttt{$w_{educ}$})
+and total expenditures (\texttt{$log(x_{educ})$}) . These dependent
+variables are listed in Table \ref{tab:Dependent Variables} while
+controls used for the estimation are listed in Table \ref{tab:Control-Variables}
+.
 
 %Variables : {wealth,wealth-conc/ruralwards,secondary_schools,occupation, parental education, language-religion, age, numchild, educpriv}
 
@@ -1334,7 +1303,7 @@ indicators (\texttt{rural\_wards}). The physical access to education
 (i.e. \texttt{secondary\_schools}) is an important control in both
 the formulations. Other controls used in the comparison are the indicator
 for an agrarian occupation \texttt{agri} ($\Omega$), the paternal
-education level \texttt{father\_educ\_rank} ($\Gamma^{*}$), the religion
+education level \texttt{highesteduc} ($\Gamma^{*}$), the religion
 and language indicators ( \texttt{religion} $\chi$ used only for
 Nigeria indicated by 1 for Christianity, 2 for Islam, 3 for Traditional,
 4 for other - and english-speaking ability i.e. the variable \texttt{has\_english
@@ -1356,25 +1325,24 @@ factor variables are prefixed with respective values \texttt{1.} ,
 Of the control variables and explanatory variables discussed above,
 some are observed at the household level while others are observed
 at the level of the consumer's district. The logarithm of total expenditure
-$log(x)$ (or \texttt{ln\_tot\_exp}) and of the total assets- owned
-$log(A)$ (or \texttt{ln\_tot\_assets}) are observed at the level
-of the household. Similarly, the agricultural-occupation factor variable
-$\Omega$ (indicating whether the household head is employed in agriculture
-related occupation or not), the number of children in the household
-$h$ (\texttt{numchild}), the childrens' ages factor variables \texttt{(is\_primaryage}
-$\mu_{1}$,\texttt{ is\_secondaryage} $\mu_{2}$ and \texttt{is\_tertiaryage}
-$\mu_{3}$ ), the private education factor variable (\texttt{educpriv}),
-the highest education rank \texttt{father\_educ\_rank} ($\Gamma^{*}$
-) corresponding to the paternal generations (father-relationship)
-in a household, the ability to speak English $\xi$ (\texttt{has\_english}
-- used only for Tanzania) and the household religion $\chi$ (\texttt{religion}
-) are all observed for a household. The variables observed at the
-district (or 6-$km$ vicinity) are the number of wards with an accessible
-(within 6-km distance) secondary-schools (\texttt{secondary\_schools}),
-the rural wards $\gamma$ (\texttt{\small{}rural\_wards}) in a district,
-the respective measures of the wealth-concentration \texttt{\small{}assetdensity}
-and the logarithm of the per-head cost non-durable consumption $p_{ne}$
-( \texttt{\small{}log\_mean\_cost\_ne} ).
+\texttt{ln\_tot\_exp} and of the total assets-owned \texttt{ln\_tot\_assets}
+are observed at the level of the household. Similarly, the agricultural-occupation
+factor variable \texttt{agri} (indicating whether the household head
+is employed in agriculture related occupation or not), the number
+of children in the household \texttt{numchild}, the childrens' ages
+factor variables \texttt{is\_primaryage} ,\texttt{ is\_secondaryage}
+and \texttt{is\_tertiaryage} ), the private education factor variable
+\texttt{educpriv}, the highest education rank \texttt{highesteduc}
+corresponding to the paternal generations (father-relationship) in
+a household, the ability to speak English \texttt{has\_english} (used
+only for Tanzania) and the household religion \texttt{religion} (used
+only for Nigeria) are all observed for a household. The variables
+observed at the district (or 6-$km$ vicinity) are the number of wards
+with an accessible (within 6-km distance) secondary-schools (\texttt{secondary\_schools}),
+the rural wards (\texttt{\small{}rural\_wards}) in a district, the
+respective measures of the wealth-concentration \texttt{\small{}assetdensity}
+and the logarithm of the per-head cost non-durable consumption \texttt{\small{}log\_mean\_cost\_ne}
+.
 
 To reiterate, a significant number of household units in both the
 economies are made up of joint families where the reported educational
@@ -1386,44 +1354,44 @@ resolve this disparity, we avoid using the education rank of the HH
 and instead use the highest education rank in the generation of the
 students' parents \footnote{Only relations with the household head are reported in the survey.
 Thus, there is no direct way of locating the parent of a child except
-through the relation with the household-head.} \texttt{\small{}father\_educ\_rank} instead. The paternal educational
-level \texttt{\small{}father\_educ\_rank} suffices for the analysis
-of expenditure spent over all the children in the household (rather
-than how education budget is distributed among the children). As mentioned
-in the Section \ref{sec:Econometric-Method}, the households with
-no children are ignored in the analysis. Nearly 22\% of households
-in the Nigeria and 15 \% of households in Tanzania are thus excluded
-from our comparison.
+through the relation with the household-head.} \texttt{\small{}highesteduc} instead. The paternal educational level
+\texttt{\small{}highesteduc} suffices for the analysis of expenditure
+spent over all the children in the household (rather than how education
+budget is distributed among the children). As mentioned in the Section
+\ref{sec:Econometric-Method}, the households with no children are
+ignored in the analysis. Nearly 22\% of households in the Nigeria
+and 15 \% of households in Tanzania are thus excluded from our comparison.
 
-Notice also that the age-variables $\mu_{1},\mu_{2},\mu_{3}$( \texttt{is\_primaryage},
-\texttt{is\_secondaryage}, \texttt{is\_tertiaryage}) for attendance
-of primary, secondary and tertiary education have been used in the
-analysis to get around the unavailability of the current-education
-level of the household member in the Nigerian LSMS survey data. Instead,
-we use a combination of the indicator variable telling whether a household
-member is in school or not (available in the surveys for both Tanzania
-and Nigeria) and the mean school attendance ages to define variables
-\texttt{is\_primaryage}, \texttt{is\_secondaryage} and \texttt{is\_tertiaryage}
-that indicate whether there is a household member of an age appropriate
-for attending primary, secondary and tertiary education levels (respectively).
+Notice also that the age-variables \texttt{is\_primaryage}, \texttt{is\_secondaryage},
+\texttt{is\_tertiaryage} for attendance of primary, secondary and
+tertiary education have been used in the analysis to get around the
+unavailability of the current-education level of the household member
+in the Nigerian LSMS survey data. Instead, we use a combination of
+the indicator variable telling whether a household member is in school
+or not (available in the surveys for both Tanzania and Nigeria) and
+the mean school attendance ages to define variables \texttt{is\_primaryage},
+\texttt{is\_secondaryage} and \texttt{is\_tertiaryage} that indicate
+whether there is a household member of an age appropriate for attending
+primary, secondary and tertiary education levels (respectively).
 
 % For Nigeria: length(unique(subset(ng$df2015,toteducexpense==0)$hhid))/length(unique(ng$df2015$hhid)) = .67493
 % For Tanzania: length(unique(subset(tn$df2014,toteducexpense==0)$hhid))/length(unique(tn$df2014$hhid)) = .4215
 
-The results from the a tobit estimation for $w_{educ}$ and $log(x_{educ})$
-with wealth-concentration as one of the controls are shown in Table
-\ref{tabTNZNGR_r} for both Tanzania and Nigeria. The tobit uses a
-lower limit of zero given a number of houses have no expenditure on
-education. More particularly, a zero expenditure is reported for nearly
-65\% households in the survey from Nigeria (2015) and 43\% households
-in the survey from Tanzania (2014). A discussion on the cross-section
-results from the latest available years 2014 for Tanzania and 2015
-for Nigeria follows in Section \ref{subsec:Discussion}. The results
-from the alternative formulation - where the main explanatory variables
-are the logarithm of total assets value $log(A)$ (or \texttt{\small{}ln\_tot\_assets}
-used in place of household total expenditure ) and the ruralness-score
-\texttt{\small{}rural\_wards }derived from the survey's classificaiton
-of rural and urban areas (used in place of wealth concentration \texttt{\small{}assetdensity}
+The results from the a tobit estimation for educational expenses (\texttt{$w_{educ}$})
+and total expenditures (\texttt{$log(x_{educ})$}) with wealth-concentration
+\texttt{assetdensity} as one of the controls are shown in Table \ref{tabTNZNGR_r}
+for both Tanzania and Nigeria. The tobit uses a lower limit of zero
+given a number of houses have no expenditure on education. More particularly,
+a zero expenditure is reported for nearly 65\% households in the survey
+from Nigeria (2015) and 43\% households in the survey from Tanzania
+(2014). A discussion on the cross-section results from the latest
+available years 2014 for Tanzania and 2015 for Nigeria follows in
+Section \ref{subsec:Discussion}. The results from the alternative
+formulation - where the main explanatory variables are the logarithm
+of total assets value \texttt{\small{}ln\_tot\_assets} (used in place
+of household total expenditure ) and the ruralness-score \texttt{\small{}rural\_wards
+}derived from the survey's classificaiton of rural and urban areas
+(used in place of wealth concentration \texttt{\small{}assetdensity}
 ) - are presented in Table \ref{tabTNZNGR_urbanrural}.
 
 \subsection{\label{subsec:Discussion}Discussion}
@@ -1441,91 +1409,92 @@ of rural and urban areas (used in place of wealth concentration \texttt{\small{}
 %[ln_tot_exp effect on budget share]
 
 The results in Tables \ref{tabTNZNGR_r} suggest that an increase
-in the total expenditure ( \texttt{ln\_tot\_exp )} causes a decrease
-in the budget share on education $w_{educ}$ for both Tanzania and
-Nigeria. This seems largely due to the educational expenses forming
+in the total expenditure ( \texttt{ln\_tot\_exp)} causes a decrease
+in the budget share on education \texttt{$w_{educ}$} for both Tanzania
+and Nigeria. This seems largely due to the educational expenses forming
 a higher proportion of the total expenditure for poorer households
 - since the education expenditures do seem to rise with the increase
 in total expenditure in Tanzania if one views the results with education-expenditure
-logarithm $log(x_{educ})$ as the dependent variable (see further
-discussion of the results from estimation with education-expenditure
+logarithm \texttt{$log(x_{educ})$ }as the dependent variable (see
+further discussion of the results from estimation with education-expenditure
 as dependent variable). The effect of non-durable consumption prices
-(\texttt{log\_mean\_cost\_ne} or $p_{ne}$ ) is weak on education-budget
-share $w_{educ}$ for both the economies. Thus while urbanisation
+(\texttt{log\_mean\_cost\_ne} ) is weak on education-budget share
+\texttt{$w_{educ}$} for both the economies. Thus while urbanisation
 must raise the prices of non-durable expenditure excluding asset-costs
-($p_{ne}$), the disparity in budget shares does not appear to be
-due to higher cost of living (non-durable consumption) alone.
+\texttt{log\_mean\_cost\_ne}, the disparity in budget shares does
+not appear to be due to higher cost of living (non-durable consumption)
+alone.
 
 %[r - w_educ]
 
 Instead, we see a strong and positive effect of wealth concentration
-( \texttt{assetdensity} ) towards educational budget shares ($w_{educ}$
-) in both the countries in Table \ref{tabTNZNGR_r}. The effects of
+( \texttt{assetdensity} ) towards educational budget shares (\texttt{$w_{educ}$})
+in both the countries in Table \ref{tabTNZNGR_r}. The effects of
 household income are relevant - however - for private education -
 which is limited to the wealthier households in both the economies
 regardless of wealth-concentration ( \texttt{assetdensity} ). Private
 education is slightly more important in Nigeria (see Figure \ref{fig:BarChartSchoolTypes})
 as the privately-educated households in Nigeria show higher budget
-shares $w_{educ}$ for education (see Table \ref{tabTNZNGR_r} ).
-Since private education only accounts for a minority of the population
+shares \texttt{$w_{educ}$ }for education (see Table \ref{tabTNZNGR_r}
+). Since private education only accounts for a minority of the population
 in both the economies (see Figure \ref{fig:BarChartSchoolTypes}),
 the role of access to either or private or government secondary school
 i.e. the variable \texttt{secondary\_schools} turns out to be more
 important for our comparison of education expenses in the two countries.
 
 Viewing the effect of the variable \texttt{secondary\_schools} on
-education budget shares $w_{educ}$ , we see a far stronger effect
-of \texttt{secondary\_schools} for Tanzania (compare the coefficients
+education budget shares \texttt{$w_{educ}$}, we see a far stronger
+effect of \texttt{secondary\_schools} for Tanzania (compare the coefficients
 for secondary-school $s$ i.e. \texttt{secondary\_schools }in Tables
 \ref{tabTNZNGR_r}) . It also seems that the consumers are more likely
 to spend on primary education in Tanzania - as the attendance for
 secondary and tertiary-education remains much lower (this is further
 elaborated in discussion below of the results using education expenditure
-$log(x_{educ})$ as dependent variable).
+\texttt{$log(x_{educ})$} as dependent variable).
 
 Notice that results from the alternative formulation using urban-rural
 indicators suggest a particular limitation of the use of urban-rural
-indicators from the survey. The coefficients of rural-wards $\gamma$
-(\texttt{rural\_wards}) for education budget shares $w_{educ}$ are
-negative and significant for Tanzania in Table \ref{tabTNZNGR_urbanrural}.
-But the inference of a higher expenditure on education - when using
-urban-rural indicators - by the rural residents in Nigeria (see significance
-of rural-wards \texttt{rural\_wards }in Table \ref{tabTNZNGR_urbanrural}
+indicators from the survey. The coefficients of rural-wards \texttt{(rural\_wards})
+for education budget shares \texttt{$w_{educ}$} are negative and
+significant for Tanzania in Table \ref{tabTNZNGR_urbanrural}. But
+the inference of a higher expenditure on education - when using urban-rural
+indicators - by the rural residents in Nigeria (see significance of
+rural-wards \texttt{rural\_wards }in Table \ref{tabTNZNGR_urbanrural}
 ) ignores the fact that the wards identified as rural in Nigeria may
 not be as rural as those identified as rural in Tanzania. This is
 confirmed with the weaker role of wealth i.e. assets-worth-logarithm
-$log(A)$ (or \texttt{ln\_tot\_assets} in Table \ref{tabTNZNGR_urbanrural})
-and a strong role for $r$ (\texttt{assetdensity} in Table \ref{tabTNZNGR_r})
-for Nigeria in the alternative formulation. The wealth-concentration
-\texttt{assetdensity} thus provides a more clear-cut and standardised
-interpretation of urbanisation in the two economies than what may
-be possible with the survey's urban-rural classifications.
+( \texttt{ln\_tot\_assets} in Table \ref{tabTNZNGR_urbanrural}) and
+a strong role for wealth-concentration (\texttt{assetdensity} in Table
+\ref{tabTNZNGR_r}) for Nigeria in the alternative formulation. The
+wealth-concentration \texttt{assetdensity} thus provides a more clear-cut
+and standardised interpretation of urbanisation in the two economies
+than what may be possible with the survey's urban-rural classifications.
 
 %[log(x_educ)]
 
-Comparing the results with education-expenditure logarithm $log(x_{educ})$
-as the dependent variable, we see that the education expenditures
-rise with the increase in total expenditure logarithm $log(x)$ for
-Tanzania but the effect of income (the logarithm of total expenditure
-$log(x)$ i.e. \texttt{\small{}ln\_tot\_exp} in Table \ref{tabTNZNGR_r})
-is not significant for Nigeria. While the higher expenditure on education
-measured through total education expenditure logarithm $log(x_{educ})$
-does seem to correspond to the prices of non-durable consumption $p_{ne}$
+Comparing the results with education-expenditure logarithm \texttt{$log(x_{educ})$
+}as the dependent variable, we see that the education expenditures
+rise with the increase in total expenditure logarithm (\texttt{ln\_tot\_exp})
+for Tanzania but the effect of income (the logarithm of total expenditure
+\texttt{\small{}ln\_tot\_exp} in Table \ref{tabTNZNGR_r}) is not
+significant for Nigeria. While the higher expenditure on education
+measured through total education expenditure logarithm \texttt{$log(x_{educ})$}
+does seem to correspond to the prices of non-durable consumption \texttt{log\_mean\_cost\_ne}
 in Tanzania, the higher budget share of education cannot be attributed
 to higher consumption-prices - since the effect of non-durable consumption
-prices $p_{ne}$ remains weak on education-budget share $w_{educ}$
-for both the economies (see above discussion using budget share $w_{educ}$
-as the dependent variable). Considering the effect of the second explanatory
-variable - the wealth concentration ( \texttt{assetdensity} ) - we
-see a rise in educational expenditure $log(x_{educ})$ for Nigeria
-while the effect of wealth concentration \texttt{assetdensity} is
-insignificant for Tanzania (compare coefficients for \texttt{assetdensity}
-against both the countries in Table \ref{tabTNZNGR_r}). In the alternative
-formulation where urbanisation is measured with the ruralness score
-( \texttt{rural\_wards} ), the ruralness score corresponds to a rise
-in educational expenditure $log(x_{educ})$ for Nigeria and a drop
-in educational expenditure $log(x_{educ})$ for Tanzania (see Table
-\ref{tabTNZNGR_urbanrural}). 
+prices \texttt{log\_mean\_cost\_ne} remains weak on education-budget
+share \texttt{$w_{educ}$} for both the economies (see above discussion
+using budget share \texttt{$w_{educ}$} as the dependent variable).
+Considering the effect of the second explanatory variable - the wealth
+concentration ( \texttt{assetdensity} ) - we see a rise in educational
+expenditure \texttt{$log(x_{educ})$} for Nigeria while the effect
+of wealth concentration \texttt{assetdensity} is insignificant for
+Tanzania (compare coefficients for \texttt{assetdensity} against both
+the countries in Table \ref{tabTNZNGR_r}). In the alternative formulation
+where urbanisation is measured with the ruralness score ( \texttt{rural\_wards}
+), the ruralness score corresponds to a rise in educational expenditure
+\texttt{$log(x_{educ})$} for Nigeria and a drop in educational expenditure
+\texttt{$log(x_{educ})$ }for Tanzania (see Table \ref{tabTNZNGR_urbanrural}). 
 
 Continuing with the comparison of results with education-expenditure
 as the dependent variable, we see that private-education indicator
@@ -1536,20 +1505,20 @@ coefficients of secondary-school-age\texttt{ is\_secondaryage} and
 tertiary-school-age \texttt{is\_tertiaryage} in regression results
 with education expenditure logarithm $log(x_{educ})$ as the dependent
 variable in Table \ref{tabTNZNGR_r}). In the alternative formulation,
-the results with education expenditure logarithm $log(x_{educ})$
-as dependent variable in Tables \ref{tabTNZNGR_urbanrural} show the
-role of secondary-school access \texttt{secondary\_schools} to be
-stronger for Nigeria when taking wealth i.e. total assets-worth logarithm
-$log(A)$ \texttt{ln\_tot\_assets }into account. The wealth effect
+the results with education expenditure logarithm \texttt{$log(x_{educ})$
+}as dependent variable in Tables \ref{tabTNZNGR_urbanrural} show
+the role of secondary-school access \texttt{secondary\_schools} to
+be stronger for Nigeria when taking wealth i.e. total assets-worth
+logarithm \texttt{ln\_tot\_assets }into account. The wealth effect
 thus seems stronger than access in both the economies but is weaker
 for Nigeria where more household members enroll into secondary and
 tertiary education - regardless of the differences in long-term intergenerational
-wealth (measured with logarithm of assets-worth $log(A)$ \texttt{ln\_tot\_assets}).
+wealth (measured with logarithm of assets-worth \texttt{ln\_tot\_assets}).
 The decomposed view of expenses on education in terms of secondary
 and primary education level further clarifies this observation - reflecting
 the far lower attendance of secondary education in Tanzania. 
 
-The role of the number of children $h$ (\texttt{numchild}) also seems
+The role of the number of children (\texttt{numchild}) also seems
 stronger in Tanzania than in Nigeria - but the effect is likely due
 the education expenses primarily driven by the primary education levels
 in Tanzania (as well as a higher percentage of households reporting
@@ -1559,15 +1528,15 @@ agrarian households appear as spending higher on education after considering
 the wealth-concentration among households with the same educational-status.
 The education expenditure is higher for agrarian households in Tanzania
 after taking into account their poor educational status measured through
-$\Gamma$ (see coefficients of agrarian-occupation-indicator $\Omega$
-/ \texttt{1.is\_agri} in Table \ref{tabTNZNGR_r} for education-expenditure-logarithm
-$log(x_{educ})$ as the dependent variable).
+$\Gamma$ (see coefficients of agrarian-occupation-indicator \texttt{1.is\_agri}
+in Table \ref{tabTNZNGR_r} for education-expenditure-logarithm \texttt{$log(x_{educ})$}
+as the dependent variable).
 
 The wealth effects in Tanzania overall seem stronger, but they ought
 to be considered in light of the much lower enrollment levels in secondary
 (and higher) education and higher disparity in asset-ownership (even
 after taking into account the lower urbanisation levels) in Tanzania.
-The significance of logarithm of assets-worth $log(A)$ ( \texttt{ln\_tot\_assets
+The significance of logarithm of assets-worth ( \texttt{ln\_tot\_assets
 }in Table \ref{tabTNZNGR_urbanrural}) does indicate a general trend
 where those with higher inter-generational wealth and in urban areas
 are far more likely to avail the education facilities, but a higher
@@ -1598,7 +1567,7 @@ of access to educational facilities.
 \begin{tabular} { l c c  c c }
 \hline\hline       
 
-          &\multicolumn{2}{c}{$w_{educ}$}       &\multicolumn{2}{c}{$log(x_{educ})$}  \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}           &\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\           &\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}&\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}\\ \midrule ln\_tot\_exp      & -0.00908\sym{**} &  -0.0283\sym{***}&    1.224\sym{***}&    0.133         \\           &  (0.004)         &  (0.000)         &  (0.000)         &  (0.744)         \\ assetdensity     &  0.00488\sym{*}  &   0.0299\sym{***}&  -0.0368         &    1.497\sym{***}\\           &  (0.015)         &  (0.000)         &  (0.758)         &  (0.000)         \\ log\_mean\_cost\_ne&   0.0490         &   0.0479         &    9.165\sym{*}  &   -0.155         \\           &  (0.467)         &  (0.672)         &  (0.023)         &  (0.981)         \\ 1.agri    &  0.00735         &  0.00990         &    0.953\sym{**} &    0.574         \\           &  (0.167)         &  (0.308)         &  (0.003)         &  (0.297)         \\ 1.educpriv&   0.0756\sym{***}&   0.0475\sym{***}&    2.890\sym{***}&    0.815         \\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.197)         \\ 1.father\_educ\_rank&   0.0109\sym{*}  &   0.0829         &    0.694\sym{*}  &    5.899         \\           &  (0.030)         &  (0.301)         &  (0.021)         &  (0.202)         \\ 2.father\_educ\_rank&  0.00432         &  0.00679         &    0.366         &    0.363         \\           &  (0.711)         &  (0.585)         &  (0.598)         &  (0.607)         \\ 3.father\_educ\_rank&  0.00457         & -0.00520         &    0.473         &   -0.528         \\           &  (0.519)         &  (0.627)         &  (0.263)         &  (0.381)         \\ 4.father\_educ\_rank&   0.0250\sym{*}  &   0.0120         &    1.465\sym{*}  &    0.183         \\           &  (0.011)         &  (0.506)         &  (0.013)         &  (0.859)         \\ secondary\_schools& -0.00138\sym{***}&  0.00738         & -0.00569         &    0.384         \\           &  (0.000)         &  (0.373)         &  (0.734)         &  (0.414)         \\ 1.is\_primaryage&   0.0793\sym{***}&   0.0538\sym{***}&    8.842\sym{***}&    3.301\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ 1.is\_secondaryage&   0.0123\sym{**} &   0.0605\sym{***}&    0.143         &    2.230\sym{***}\\           &  (0.005)         &  (0.000)         &  (0.580)         &  (0.000)         \\ 1.is\_tertiaryage&  -0.0131\sym{**} &   0.0174         &   -1.281\sym{***}&    0.931         \\           &  (0.001)         &  (0.056)         &  (0.000)         &  (0.071)         \\ 1.has\_english&   0.0584\sym{***}&                  &    2.249\sym{***}&                  \\           &  (0.000)         &                  &  (0.000)         &                  \\ numchild  &  0.00433\sym{***}& -0.00221         &    0.259\sym{***}&  -0.0499         \\           &  (0.000)         &  (0.360)         &  (0.000)         &  (0.714)         \\ 2.religion&                  &  -0.0455\sym{***}&                  &   -2.043\sym{***}\\           &                  &  (0.000)         &                  &  (0.000)         \\ 3.religion&                  &  -0.0632         &                  &   -2.160         \\           &                  &  (0.170)         &                  &  (0.396)         \\ \_cons    &   -0.151         &   -0.231         &   -41.97\sym{***}&   -22.99         \\           &  (0.346)         &  (0.352)         &  (0.000)         &  (0.103)         \\ \midrule sigma     &                  &                  &                  &                  \\ \_cons    &   0.0876\sym{***}&    0.173\sym{***}&    5.361\sym{***}&    9.969\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ \midrule \(N\)     &     2410         &     2192         &     2410         &     2192         \\ 
+          &\multicolumn{2}{c}{$w_{educ}$}       &\multicolumn{2}{c}{$log(x_{educ})$}  \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}           &\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\           &\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}&\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}\\ \midrule ln\_tot\_exp      & -0.00908\sym{**} &  -0.0283\sym{***}&    1.224\sym{***}&    0.133         \\           &  (0.004)         &  (0.000)         &  (0.000)         &  (0.744)         \\ assetdensity     &  0.00488\sym{*}  &   0.0299\sym{***}&  -0.0368         &    1.497\sym{***}\\           &  (0.015)         &  (0.000)         &  (0.758)         &  (0.000)         \\ log\_mean\_cost\_ne&   0.0490         &   0.0479         &    9.165\sym{*}  &   -0.155         \\           &  (0.467)         &  (0.672)         &  (0.023)         &  (0.981)         \\ 1.agri    &  0.00735         &  0.00990         &    0.953\sym{**} &    0.574         \\           &  (0.167)         &  (0.308)         &  (0.003)         &  (0.297)         \\ 1.educpriv&   0.0756\sym{***}&   0.0475\sym{***}&    2.890\sym{***}&    0.815         \\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.197)         \\ 1.highesteduc&   0.0109\sym{*}  &   0.0829         &    0.694\sym{*}  &    5.899         \\           &  (0.030)         &  (0.301)         &  (0.021)         &  (0.202)         \\ 2.highesteduc&  0.00432         &  0.00679         &    0.366         &    0.363         \\           &  (0.711)         &  (0.585)         &  (0.598)         &  (0.607)         \\ 3.highesteduc&  0.00457         & -0.00520         &    0.473         &   -0.528         \\           &  (0.519)         &  (0.627)         &  (0.263)         &  (0.381)         \\ 4.highesteduc&   0.0250\sym{*}  &   0.0120         &    1.465\sym{*}  &    0.183         \\           &  (0.011)         &  (0.506)         &  (0.013)         &  (0.859)         \\ secondary\_schools& -0.00138\sym{***}&  0.00738         & -0.00569         &    0.384         \\           &  (0.000)         &  (0.373)         &  (0.734)         &  (0.414)         \\ 1.is\_primaryage&   0.0793\sym{***}&   0.0538\sym{***}&    8.842\sym{***}&    3.301\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ 1.is\_secondaryage&   0.0123\sym{**} &   0.0605\sym{***}&    0.143         &    2.230\sym{***}\\           &  (0.005)         &  (0.000)         &  (0.580)         &  (0.000)         \\ 1.is\_tertiaryage&  -0.0131\sym{**} &   0.0174         &   -1.281\sym{***}&    0.931         \\           &  (0.001)         &  (0.056)         &  (0.000)         &  (0.071)         \\ 1.has\_english&   0.0584\sym{***}&                  &    2.249\sym{***}&                  \\           &  (0.000)         &                  &  (0.000)         &                  \\ numchild  &  0.00433\sym{***}& -0.00221         &    0.259\sym{***}&  -0.0499         \\           &  (0.000)         &  (0.360)         &  (0.000)         &  (0.714)         \\ 2.religion&                  &  -0.0455\sym{***}&                  &   -2.043\sym{***}\\           &                  &  (0.000)         &                  &  (0.000)         \\ 3.religion&                  &  -0.0632         &                  &   -2.160         \\           &                  &  (0.170)         &                  &  (0.396)         \\ \_cons    &   -0.151         &   -0.231         &   -41.97\sym{***}&   -22.99         \\           &  (0.346)         &  (0.352)         &  (0.000)         &  (0.103)         \\ \midrule sigma     &                  &                  &                  &                  \\ \_cons    &   0.0876\sym{***}&    0.173\sym{***}&    5.361\sym{***}&    9.969\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ \midrule \(N\)     &     2410         &     2192         &     2410         &     2192         \\ 
 
 \end{tabular}
 }
@@ -1611,7 +1580,7 @@ of access to educational facilities.
 \begin{tabular} { l c c  c c }
 \hline\hline       
 
-          &\multicolumn{2}{c}{$w_{educ}$}       &\multicolumn{2}{c}{$log(x_{educ})$}  \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}           &\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\           &\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}&\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}\\ \midrule ln\_tot\_assets      & -0.00590\sym{***}& -0.00196         &    0.392\sym{***}&    0.363         \\           &  (0.000)         &  (0.576)         &  (0.000)         &  (0.065)         \\ log\_mean\_cost\_ne&  -0.0548         & -0.00483         &    9.559\sym{*}  &    8.263         \\           &  (0.455)         &  (0.965)         &  (0.031)         &  (0.182)         \\ 1.agri    &   0.0106\sym{*}  &  0.00507         &    0.925\sym{**} &  -0.0768         \\           &  (0.048)         &  (0.617)         &  (0.004)         &  (0.892)         \\ 1.educpriv&   0.0800\sym{***}&   0.0506\sym{***}&    2.730\sym{***}&    1.016         \\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.113)         \\ 1.father\_educ\_rank&   0.0107\sym{*}  &   0.0948         &    0.679\sym{*}  &    7.172         \\           &  (0.032)         &  (0.244)         &  (0.023)         &  (0.121)         \\ 2.father\_educ\_rank&  0.00199         &  0.00689         &    0.512         &    0.481         \\           &  (0.864)         &  (0.583)         &  (0.462)         &  (0.495)         \\ 3.father\_educ\_rank&  0.00359         & -0.00767         &    0.607         &   -0.551         \\           &  (0.608)         &  (0.478)         &  (0.149)         &  (0.361)         \\ 4.father\_educ\_rank&   0.0273\sym{**} &   0.0129         &    1.320\sym{*}  &    0.486         \\           &  (0.005)         &  (0.480)         &  (0.025)         &  (0.636)         \\ secondary\_schools& -0.00111\sym{***}&   0.0147         &  0.00265         &    0.906         \\           &  (0.000)         &  (0.085)         &  (0.875)         &  (0.058)         \\ 1.is\_primaryage&   0.0797\sym{***}&   0.0562\sym{***}&    8.812\sym{***}&    3.408\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ 1.is\_secondaryage&   0.0129\sym{**} &   0.0593\sym{***}&    0.145         &    2.259\sym{***}\\           &  (0.003)         &  (0.000)         &  (0.572)         &  (0.000)         \\ 1.is\_tertiaryage&  -0.0121\sym{**} &   0.0139         &   -1.240\sym{***}&    0.878         \\           &  (0.003)         &  (0.132)         &  (0.000)         &  (0.088)         \\ rural\_wards&  -0.0229\sym{**} &   0.0133         &   -1.184\sym{*}  &    1.848\sym{**} \\           &  (0.007)         &  (0.291)         &  (0.021)         &  (0.009)         \\ 1.has\_english&   0.0599\sym{***}&                  &    2.436\sym{***}&                  \\           &  (0.000)         &                  &  (0.000)         &                  \\ numchild  &  0.00426\sym{***}& -0.00354         &    0.304\sym{***}&  -0.0588         \\           &  (0.000)         &  (0.143)         &  (0.000)         &  (0.662)         \\ 2.religion&                  &  -0.0445\sym{***}&                  &   -1.716\sym{**} \\           &                  &  (0.000)         &                  &  (0.003)         \\ 3.religion&                  &  -0.0725         &                  &   -2.411         \\           &                  &  (0.120)         &                  &  (0.343)         \\ \_cons    &    0.143         &   -0.103         &   -30.47\sym{**} &   -29.99\sym{*}  \\           &  (0.452)         &  (0.698)         &  (0.008)         &  (0.044)         \\ \midrule sigma     &                  &                  &                  &                  \\ \_cons    &   0.0870\sym{***}&    0.175\sym{***}&    5.357\sym{***}&    9.994\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ \midrule \(N\)     &     2410         &     2192         &     2410         &     2192         \\ 
+          &\multicolumn{2}{c}{$w_{educ}$}       &\multicolumn{2}{c}{$log(x_{educ})$}  \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}           &\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}&\multicolumn{1}{c}{}\\           &\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}&\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}\\ \midrule ln\_tot\_assets      & -0.00590\sym{***}& -0.00196         &    0.392\sym{***}&    0.363         \\           &  (0.000)         &  (0.576)         &  (0.000)         &  (0.065)         \\ log\_mean\_cost\_ne&  -0.0548         & -0.00483         &    9.559\sym{*}  &    8.263         \\           &  (0.455)         &  (0.965)         &  (0.031)         &  (0.182)         \\ 1.agri    &   0.0106\sym{*}  &  0.00507         &    0.925\sym{**} &  -0.0768         \\           &  (0.048)         &  (0.617)         &  (0.004)         &  (0.892)         \\ 1.educpriv&   0.0800\sym{***}&   0.0506\sym{***}&    2.730\sym{***}&    1.016         \\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.113)         \\ 1.highesteduc&   0.0107\sym{*}  &   0.0948         &    0.679\sym{*}  &    7.172         \\           &  (0.032)         &  (0.244)         &  (0.023)         &  (0.121)         \\ 2.highesteduc&  0.00199         &  0.00689         &    0.512         &    0.481         \\           &  (0.864)         &  (0.583)         &  (0.462)         &  (0.495)         \\ 3.highesteduc&  0.00359         & -0.00767         &    0.607         &   -0.551         \\           &  (0.608)         &  (0.478)         &  (0.149)         &  (0.361)         \\ 4.highesteduc&   0.0273\sym{**} &   0.0129         &    1.320\sym{*}  &    0.486         \\           &  (0.005)         &  (0.480)         &  (0.025)         &  (0.636)         \\ secondary\_schools& -0.00111\sym{***}&   0.0147         &  0.00265         &    0.906         \\           &  (0.000)         &  (0.085)         &  (0.875)         &  (0.058)         \\ 1.is\_primaryage&   0.0797\sym{***}&   0.0562\sym{***}&    8.812\sym{***}&    3.408\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ 1.is\_secondaryage&   0.0129\sym{**} &   0.0593\sym{***}&    0.145         &    2.259\sym{***}\\           &  (0.003)         &  (0.000)         &  (0.572)         &  (0.000)         \\ 1.is\_tertiaryage&  -0.0121\sym{**} &   0.0139         &   -1.240\sym{***}&    0.878         \\           &  (0.003)         &  (0.132)         &  (0.000)         &  (0.088)         \\ rural\_wards&  -0.0229\sym{**} &   0.0133         &   -1.184\sym{*}  &    1.848\sym{**} \\           &  (0.007)         &  (0.291)         &  (0.021)         &  (0.009)         \\ 1.has\_english&   0.0599\sym{***}&                  &    2.436\sym{***}&                  \\           &  (0.000)         &                  &  (0.000)         &                  \\ numchild  &  0.00426\sym{***}& -0.00354         &    0.304\sym{***}&  -0.0588         \\           &  (0.000)         &  (0.143)         &  (0.000)         &  (0.662)         \\ 2.religion&                  &  -0.0445\sym{***}&                  &   -1.716\sym{**} \\           &                  &  (0.000)         &                  &  (0.003)         \\ 3.religion&                  &  -0.0725         &                  &   -2.411         \\           &                  &  (0.120)         &                  &  (0.343)         \\ \_cons    &    0.143         &   -0.103         &   -30.47\sym{**} &   -29.99\sym{*}  \\           &  (0.452)         &  (0.698)         &  (0.008)         &  (0.044)         \\ \midrule sigma     &                  &                  &                  &                  \\ \_cons    &   0.0870\sym{***}&    0.175\sym{***}&    5.357\sym{***}&    9.994\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ \midrule \(N\)     &     2410         &     2192         &     2410         &     2192         \\ 
 
 \end{tabular}
 }
@@ -1629,7 +1598,7 @@ of access to educational facilities.
 
           &\multicolumn{2}{c}{$w_{educ}$}&\multicolumn{2}{c}{$log(x_{educ})$}&\multicolumn{2}{c}{$w_{educ}$}&\multicolumn{2}{c}{$log(x_{educ})$}\\\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}           &\multicolumn{1}{c}{Above Median }&\multicolumn{1}{c}{Above Median }&\multicolumn{1}{c}{Above Median }&\multicolumn{1}{c}{Above Median }&\multicolumn{1}{c}{Below Median }&\multicolumn{1}{c}{Below Median }&\multicolumn{1}{c}{Below Median }&\multicolumn{1}{c}{Below Median }
 \\           &\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}&\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}&\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}&\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}
-\\ \midrule ln\_tot\_exp      & -0.00338         &  -0.0168         &    0.783\sym{**} &    0.411         &  -0.0121\sym{**} &  -0.0458\sym{***}&    1.272\sym{***}&   -0.582         \\           &  (0.483)         &  (0.113)         &  (0.005)         &  (0.511)         &  (0.006)         &  (0.000)         &  (0.000)         &  (0.321)         \\ assetdensity     &  0.00512         &   0.0321\sym{***}&   -0.160         &    1.818\sym{***}&  0.00592         &   0.0227\sym{*}  &  -0.0190         &    0.819         \\           &  (0.061)         &  (0.000)         &  (0.311)         &  (0.000)         &  (0.052)         &  (0.024)         &  (0.919)         &  (0.131)         \\ log\_mean\_cost\_ne&  -0.0900         & -0.00476         &    11.02         &   -6.579         &    0.165         &    0.100         &    7.127         &    5.568         \\           &  (0.363)         &  (0.976)         &  (0.056)         &  (0.479)         &  (0.080)         &  (0.539)         &  (0.219)         &  (0.528)         \\ 1.agri    &  0.00286         &  0.00554         &    0.758         &    0.341         &   0.0129         &   0.0157         &    1.151\sym{*}  &    0.809         \\           &  (0.671)         &  (0.665)         &  (0.052)         &  (0.650)         &  (0.139)         &  (0.294)         &  (0.031)         &  (0.314)         \\ 1.educpriv&   0.0850\sym{***}&   0.0348\sym{*}  &    3.219\sym{***}&    0.726         &   0.0527\sym{**} &   0.0711\sym{***}&    2.083         &    0.896         \\           &  (0.000)         &  (0.010)         &  (0.000)         &  (0.364)         &  (0.004)         &  (0.000)         &  (0.074)         &  (0.406)         \\ 1.father\_educ\_rank&   0.0102         &   0.0847         &    0.443         &    8.091         &   0.0118         &    0.107         &    0.850\sym{*}  &    5.336         \\           &  (0.156)         &  (0.482)         &  (0.292)         &  (0.263)         &  (0.089)         &  (0.323)         &  (0.047)         &  (0.368)         \\ 2.father\_educ\_rank&   0.0208         &  0.00761         &    0.759         &    0.178         &  -0.0235         &  0.00660         &   -0.380         &    0.618         \\           &  (0.170)         &  (0.645)         &  (0.390)         &  (0.855)         &  (0.207)         &  (0.727)         &  (0.735)         &  (0.543)         \\ 3.father\_educ\_rank&-0.000380         & -0.00517         &  -0.0789         &   -0.359         &   0.0114         & -0.00197         &    1.171         &   -0.594         \\           &  (0.967)         &  (0.711)         &  (0.882)         &  (0.661)         &  (0.310)         &  (0.906)         &  (0.092)         &  (0.508)         \\ 4.father\_educ\_rank&   0.0204         &  0.00328         &    0.796         &   -0.695         &   0.0368         &   0.0426         &    2.572\sym{*}  &    2.785         \\           &  (0.079)         &  (0.877)         &  (0.240)         &  (0.577)         &  (0.062)         &  (0.222)         &  (0.036)         &  (0.139)         \\ secondary\_schools& -0.00128\sym{***}& -0.00325         & -0.00576         &   -0.524         & -0.00161\sym{**} &   0.0230         &  0.00286         &    1.669\sym{*}  \\           &  (0.000)         &  (0.764)         &  (0.770)         &  (0.413)         &  (0.001)         &  (0.077)         &  (0.926)         &  (0.018)         \\ 1.is\_primaryage&   0.0610\sym{***}&   0.0465\sym{**} &    7.280\sym{***}&    2.766\sym{**} &    0.101\sym{***}&   0.0664\sym{***}&    10.53\sym{***}&    3.983\sym{***}\\           &  (0.000)         &  (0.003)         &  (0.000)         &  (0.003)         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ 1.is\_secondaryage&  0.00978         &   0.0692\sym{***}&   0.0488         &    2.637\sym{***}&   0.0161\sym{*}  &   0.0502\sym{***}&    0.243         &    1.706\sym{*}  \\           &  (0.100)         &  (0.000)         &  (0.887)         &  (0.000)         &  (0.011)         &  (0.000)         &  (0.533)         &  (0.020)         \\ 1.is\_tertiaryage&  -0.0109\sym{*}  &   0.0152         &   -1.381\sym{***}&    0.727         &  -0.0151\sym{*}  &   0.0193         &   -1.311\sym{***}&    1.108         \\           &  (0.043)         &  (0.197)         &  (0.000)         &  (0.292)         &  (0.015)         &  (0.181)         &  (0.001)         &  (0.152)         \\ 1.has\_english&   0.0496\sym{***}&                  &    1.789\sym{***}&                  &   0.0704\sym{***}&                  &    2.575\sym{***}&                  \\           &  (0.000)         &                  &  (0.000)         &                  &  (0.000)         &                  &  (0.000)         &                  \\ numchild  &  0.00204         & -0.00315         &    0.267\sym{**} &   -0.115         &  0.00657\sym{***}& -0.00143         &    0.231\sym{*}  &   0.0342         \\           &  (0.167)         &  (0.307)         &  (0.002)         &  (0.523)         &  (0.000)         &  (0.713)         &  (0.027)         &  (0.870)         \\ 2.religion&                  &  -0.0439\sym{***}&                  &   -1.963\sym{*}  &                  &  -0.0466\sym{**} &                  &   -2.037\sym{*}  \\           &                  &  (0.001)         &                  &  (0.011)         &                  &  (0.003)         &                  &  (0.015)         \\ 3.religion&                  &   -0.121         &                  &   -6.104         &                  &  -0.0373         &                  &   -0.447         \\           &                  &  (0.144)         &                  &  (0.192)         &                  &  (0.516)         &                  &  (0.882)         \\ \_cons    &    0.145         &   -0.250         &   -36.11\sym{**} &   -13.01         &   -0.447         &   -0.103         &   -39.80\sym{**} &   -22.74         \\           &  (0.521)         &  (0.475)         &  (0.006)         &  (0.527)         &  (0.061)         &  (0.777)         &  (0.007)         &  (0.246)         \\ \midrule sigma     &                  &                  &                  &                  &                  &                  &                  &                  \\ \_cons    &   0.0861\sym{***}&    0.169\sym{***}&    5.114\sym{***}&    10.13\sym{***}&   0.0877\sym{***}&    0.176\sym{***}&    5.545\sym{***}&    9.644\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ \midrule \(N\)     &     1233         &     1192         &     1233         &     1192         &     1177         &     1000         &     1177         &     1000         \\ 
+\\ \midrule ln\_tot\_exp      & -0.00338         &  -0.0168         &    0.783\sym{**} &    0.411         &  -0.0121\sym{**} &  -0.0458\sym{***}&    1.272\sym{***}&   -0.582         \\           &  (0.483)         &  (0.113)         &  (0.005)         &  (0.511)         &  (0.006)         &  (0.000)         &  (0.000)         &  (0.321)         \\ assetdensity     &  0.00512         &   0.0321\sym{***}&   -0.160         &    1.818\sym{***}&  0.00592         &   0.0227\sym{*}  &  -0.0190         &    0.819         \\           &  (0.061)         &  (0.000)         &  (0.311)         &  (0.000)         &  (0.052)         &  (0.024)         &  (0.919)         &  (0.131)         \\ log\_mean\_cost\_ne&  -0.0900         & -0.00476         &    11.02         &   -6.579         &    0.165         &    0.100         &    7.127         &    5.568         \\           &  (0.363)         &  (0.976)         &  (0.056)         &  (0.479)         &  (0.080)         &  (0.539)         &  (0.219)         &  (0.528)         \\ 1.agri    &  0.00286         &  0.00554         &    0.758         &    0.341         &   0.0129         &   0.0157         &    1.151\sym{*}  &    0.809         \\           &  (0.671)         &  (0.665)         &  (0.052)         &  (0.650)         &  (0.139)         &  (0.294)         &  (0.031)         &  (0.314)         \\ 1.educpriv&   0.0850\sym{***}&   0.0348\sym{*}  &    3.219\sym{***}&    0.726         &   0.0527\sym{**} &   0.0711\sym{***}&    2.083         &    0.896         \\           &  (0.000)         &  (0.010)         &  (0.000)         &  (0.364)         &  (0.004)         &  (0.000)         &  (0.074)         &  (0.406)         \\ 1.highesteduc&   0.0102         &   0.0847         &    0.443         &    8.091         &   0.0118         &    0.107         &    0.850\sym{*}  &    5.336         \\           &  (0.156)         &  (0.482)         &  (0.292)         &  (0.263)         &  (0.089)         &  (0.323)         &  (0.047)         &  (0.368)         \\ 2.highesteduc&   0.0208         &  0.00761         &    0.759         &    0.178         &  -0.0235         &  0.00660         &   -0.380         &    0.618         \\           &  (0.170)         &  (0.645)         &  (0.390)         &  (0.855)         &  (0.207)         &  (0.727)         &  (0.735)         &  (0.543)         \\ 3.highesteduc&-0.000380         & -0.00517         &  -0.0789         &   -0.359         &   0.0114         & -0.00197         &    1.171         &   -0.594         \\           &  (0.967)         &  (0.711)         &  (0.882)         &  (0.661)         &  (0.310)         &  (0.906)         &  (0.092)         &  (0.508)         \\ 4.highesteduc&   0.0204         &  0.00328         &    0.796         &   -0.695         &   0.0368         &   0.0426         &    2.572\sym{*}  &    2.785         \\           &  (0.079)         &  (0.877)         &  (0.240)         &  (0.577)         &  (0.062)         &  (0.222)         &  (0.036)         &  (0.139)         \\ secondary\_schools& -0.00128\sym{***}& -0.00325         & -0.00576         &   -0.524         & -0.00161\sym{**} &   0.0230         &  0.00286         &    1.669\sym{*}  \\           &  (0.000)         &  (0.764)         &  (0.770)         &  (0.413)         &  (0.001)         &  (0.077)         &  (0.926)         &  (0.018)         \\ 1.is\_primaryage&   0.0610\sym{***}&   0.0465\sym{**} &    7.280\sym{***}&    2.766\sym{**} &    0.101\sym{***}&   0.0664\sym{***}&    10.53\sym{***}&    3.983\sym{***}\\           &  (0.000)         &  (0.003)         &  (0.000)         &  (0.003)         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ 1.is\_secondaryage&  0.00978         &   0.0692\sym{***}&   0.0488         &    2.637\sym{***}&   0.0161\sym{*}  &   0.0502\sym{***}&    0.243         &    1.706\sym{*}  \\           &  (0.100)         &  (0.000)         &  (0.887)         &  (0.000)         &  (0.011)         &  (0.000)         &  (0.533)         &  (0.020)         \\ 1.is\_tertiaryage&  -0.0109\sym{*}  &   0.0152         &   -1.381\sym{***}&    0.727         &  -0.0151\sym{*}  &   0.0193         &   -1.311\sym{***}&    1.108         \\           &  (0.043)         &  (0.197)         &  (0.000)         &  (0.292)         &  (0.015)         &  (0.181)         &  (0.001)         &  (0.152)         \\ 1.has\_english&   0.0496\sym{***}&                  &    1.789\sym{***}&                  &   0.0704\sym{***}&                  &    2.575\sym{***}&                  \\           &  (0.000)         &                  &  (0.000)         &                  &  (0.000)         &                  &  (0.000)         &                  \\ numchild  &  0.00204         & -0.00315         &    0.267\sym{**} &   -0.115         &  0.00657\sym{***}& -0.00143         &    0.231\sym{*}  &   0.0342         \\           &  (0.167)         &  (0.307)         &  (0.002)         &  (0.523)         &  (0.000)         &  (0.713)         &  (0.027)         &  (0.870)         \\ 2.religion&                  &  -0.0439\sym{***}&                  &   -1.963\sym{*}  &                  &  -0.0466\sym{**} &                  &   -2.037\sym{*}  \\           &                  &  (0.001)         &                  &  (0.011)         &                  &  (0.003)         &                  &  (0.015)         \\ 3.religion&                  &   -0.121         &                  &   -6.104         &                  &  -0.0373         &                  &   -0.447         \\           &                  &  (0.144)         &                  &  (0.192)         &                  &  (0.516)         &                  &  (0.882)         \\ \_cons    &    0.145         &   -0.250         &   -36.11\sym{**} &   -13.01         &   -0.447         &   -0.103         &   -39.80\sym{**} &   -22.74         \\           &  (0.521)         &  (0.475)         &  (0.006)         &  (0.527)         &  (0.061)         &  (0.777)         &  (0.007)         &  (0.246)         \\ \midrule sigma     &                  &                  &                  &                  &                  &                  &                  &                  \\ \_cons    &   0.0861\sym{***}&    0.169\sym{***}&    5.114\sym{***}&    10.13\sym{***}&   0.0877\sym{***}&    0.176\sym{***}&    5.545\sym{***}&    9.644\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ \midrule \(N\)     &     1233         &     1192         &     1233         &     1192         &     1177         &     1000         &     1177         &     1000         \\ 
 
 \end{tabular}
 }
@@ -1645,17 +1614,17 @@ of access to educational facilities.
 As a first robustness check, we re-estimate the results with wealth
 concentration \texttt{assetdensity} as the explanatory variable for
 those with less than the local median wealth i.e. assets-worth logarithm
-$log(A)$ (\texttt{ln\_tot\_assets}) and for those above it. The results
-demonstrate how the education expenditures (coefficients for education
-budget-shares $w_{educ}$ and education-expenditure logarithm $log(x_{educ})$
-) differ between the poorer and richer households in a given locality.
+\texttt{ln\_tot\_assets} and for those above it. The results demonstrate
+how the education expenditures (coefficients for education budget-shares
+\texttt{$w_{educ}$ }and education-expenditure logarithm \texttt{$log(x_{educ})$})
+differ between the poorer and richer households in a given locality.
 The results for above and below local median-assets possession using
-education budget-shares $w_{educ}$ and education-expenditure-logarithm
-$log(x_{educ})$ as the dependent variables are shown in Table \ref{tabTNZNGR_abovebelow_median}
-for both above and below median assets-possession levels in the two
-countries. 
+education budget-shares \texttt{$w_{educ}$ }and education-expenditure-logarithm
+\texttt{$log(x_{educ})$ }as the dependent variables are shown in
+Table \ref{tabTNZNGR_abovebelow_median} for both above and below
+median assets-possession levels in the two countries. 
 
-%[Results from first robustness check ] social factors and secondary_schools . educpriv expected. tertiary_school level lower. num_child more nuanced - as is r. father_educ_rank also different.
+%[Results from first robustness check ] social factors and secondary_schools . educpriv expected. tertiary_school level lower. num_child more nuanced - as is r. highesteduc also different.
 
 The role of social effects seems validated with these results as the
 significance of social factors remains unaffected by whether the consumers
@@ -1669,7 +1638,8 @@ level (the coefficient for variable \texttt{religion }is significant
 for Nigeria for above and below median asset possession level in Table
 \ref{tabTNZNGR_abovebelow_median}). It is worth pointing out that
 the economic significance for religion ( \texttt{religion }) in Nigeria
-is higher with $log(x_{educ})$ as dependent variable in Table \ref{tabTNZNGR_abovebelow_median}. 
+is higher with \texttt{$log(x_{educ})$} as dependent variable in
+Table \ref{tabTNZNGR_abovebelow_median}. 
 
 As one would expect, the effect of secondar-schools \texttt{secondary\_schools}
 is also the same for both richer and poorer halves of a given locality.
@@ -1691,11 +1661,11 @@ country, this effect seems likely due to the primary-education needs
 scaling up with the number of children in the household. As in the
 Section \ref{subsec:Discussion}, the lower levels of average educational
 attainment in Tanzania seem to accentuate the effect of paternal education
-rank \texttt{fathers\_educ\_rank }which has a higher statistical significance
+rank \texttt{highesteduc }which has a higher statistical significance
 for poorer households in Tanzania (compare the coefficient of paternal
-education rank \texttt{fathers\_educ\_rank }in Tanzania with educational-expenditure
-logarithm $log(x_{educ})$ as dependent variable for both above and
-below median assets possession level in Table \ref{tabTNZNGR_abovebelow_median})
+education rank \texttt{highesteduc }in Tanzania with educational-expenditure
+logarithm \texttt{$log(x_{educ})$} as dependent variable for both
+above and below median assets possession level in Table \ref{tabTNZNGR_abovebelow_median})
 whereas the significance is not much different for richer and poorer
 households in Nigeria (see Table \ref{tabTNZNGR_abovebelow_median}).
 
@@ -1708,7 +1678,7 @@ households in Nigeria (see Table \ref{tabTNZNGR_abovebelow_median}).
  
 
           &\multicolumn{2}{c}{$w_{educ}$}       &\multicolumn{2}{c}{$log(x_{educ})$}  \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}           &\multicolumn{1}{c}{  \emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}&\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}\\
-\midrule ln\_tot\_exp      & -0.00927\sym{**} &  -0.0291\sym{***}&    1.229\sym{***}&   0.0988         \\           &  (0.004)         &  (0.000)         &  (0.000)         &  (0.809)         \\ assetdensity\_educ &  0.00262         &   0.0272\sym{***}&  -0.0349         &    1.323\sym{***}\\           &  (0.102)         &  (0.000)         &  (0.714)         &  (0.000)         \\ log\_mean\_cost\_ne&   0.0535         &   0.0570         &    9.210\sym{*}  &    0.361         \\           &  (0.428)         &  (0.614)         &  (0.022)         &  (0.955)         \\ 1.agri    &  0.00598         &  0.00747         &    0.957\sym{**} &    0.449         \\           &  (0.256)         &  (0.440)         &  (0.002)         &  (0.412)         \\ 1.educpriv&   0.0763\sym{***}&   0.0471\sym{***}&    2.887\sym{***}&    0.799         \\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.207)         \\ 1.father\_educ\_rank&   0.0109\sym{*}  &   0.0819         &    0.697\sym{*}  &    5.867         \\           &  (0.031)         &  (0.307)         &  (0.020)         &  (0.204)         \\ 2.father\_educ\_rank&  0.00402         &  0.00520         &    0.369         &    0.285         \\           &  (0.731)         &  (0.676)         &  (0.595)         &  (0.687)         \\ 3.father\_educ\_rank&  0.00452         & -0.00734         &    0.475         &   -0.635         \\           &  (0.524)         &  (0.492)         &  (0.261)         &  (0.293)         \\ 4.father\_educ\_rank&   0.0250\sym{*}  &   0.0105         &    1.469\sym{*}  &    0.111         \\           &  (0.011)         &  (0.563)         &  (0.013)         &  (0.914)         \\ secondary\_schools& -0.00133\sym{***}&  0.00756         & -0.00571         &    0.400         \\           &  (0.000)         &  (0.361)         &  (0.732)         &  (0.395)         \\ 1.is\_primaryage&   0.0791\sym{***}&   0.0529\sym{***}&    8.844\sym{***}&    3.258\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ 1.is\_secondaryage&   0.0119\sym{**} &   0.0599\sym{***}&    0.148         &    2.199\sym{***}\\           &  (0.006)         &  (0.000)         &  (0.566)         &  (0.000)         \\ 1.is\_tertiaryage&  -0.0133\sym{**} &   0.0177         &   -1.276\sym{***}&    0.950         \\           &  (0.001)         &  (0.051)         &  (0.000)         &  (0.065)         \\ 1.has\_english&   0.0579\sym{***}&                  &    2.253\sym{***}&                  \\           &  (0.000)         &                  &  (0.000)         &                  \\ numchild  &  0.00432\sym{***}& -0.00231         &    0.260\sym{***}&  -0.0547         \\           &  (0.000)         &  (0.337)         &  (0.000)         &  (0.687)         \\ 2.religion&                  &  -0.0441\sym{***}&                  &   -1.971\sym{***}\\           &                  &  (0.000)         &                  &  (0.001)         \\ 3.religion&                  &  -0.0609         &                  &   -2.074         \\           &                  &  (0.185)         &                  &  (0.414)         \\ \_cons    &   -0.124         &   -0.208         &   -42.21\sym{***}&   -21.67         \\           &  (0.438)         &  (0.401)         &  (0.000)         &  (0.124)         \\ \midrule sigma     &                  &                  &                  &                  \\ \_cons    &   0.0877\sym{***}&    0.173\sym{***}&    5.361\sym{***}&    9.974\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ \midrule \(N\)     &     2410         &     2192         &     2410         &     2192         \\ 
+\midrule ln\_tot\_exp      & -0.00927\sym{**} &  -0.0291\sym{***}&    1.229\sym{***}&   0.0988         \\           &  (0.004)         &  (0.000)         &  (0.000)         &  (0.809)         \\ assetdensity\_educ &  0.00262         &   0.0272\sym{***}&  -0.0349         &    1.323\sym{***}\\           &  (0.102)         &  (0.000)         &  (0.714)         &  (0.000)         \\ log\_mean\_cost\_ne&   0.0535         &   0.0570         &    9.210\sym{*}  &    0.361         \\           &  (0.428)         &  (0.614)         &  (0.022)         &  (0.955)         \\ 1.agri    &  0.00598         &  0.00747         &    0.957\sym{**} &    0.449         \\           &  (0.256)         &  (0.440)         &  (0.002)         &  (0.412)         \\ 1.educpriv&   0.0763\sym{***}&   0.0471\sym{***}&    2.887\sym{***}&    0.799         \\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.207)         \\ 1.highesteduc&   0.0109\sym{*}  &   0.0819         &    0.697\sym{*}  &    5.867         \\           &  (0.031)         &  (0.307)         &  (0.020)         &  (0.204)         \\ 2.highesteduc&  0.00402         &  0.00520         &    0.369         &    0.285         \\           &  (0.731)         &  (0.676)         &  (0.595)         &  (0.687)         \\ 3.highesteduc&  0.00452         & -0.00734         &    0.475         &   -0.635         \\           &  (0.524)         &  (0.492)         &  (0.261)         &  (0.293)         \\ 4.highesteduc&   0.0250\sym{*}  &   0.0105         &    1.469\sym{*}  &    0.111         \\           &  (0.011)         &  (0.563)         &  (0.013)         &  (0.914)         \\ secondary\_schools& -0.00133\sym{***}&  0.00756         & -0.00571         &    0.400         \\           &  (0.000)         &  (0.361)         &  (0.732)         &  (0.395)         \\ 1.is\_primaryage&   0.0791\sym{***}&   0.0529\sym{***}&    8.844\sym{***}&    3.258\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ 1.is\_secondaryage&   0.0119\sym{**} &   0.0599\sym{***}&    0.148         &    2.199\sym{***}\\           &  (0.006)         &  (0.000)         &  (0.566)         &  (0.000)         \\ 1.is\_tertiaryage&  -0.0133\sym{**} &   0.0177         &   -1.276\sym{***}&    0.950         \\           &  (0.001)         &  (0.051)         &  (0.000)         &  (0.065)         \\ 1.has\_english&   0.0579\sym{***}&                  &    2.253\sym{***}&                  \\           &  (0.000)         &                  &  (0.000)         &                  \\ numchild  &  0.00432\sym{***}& -0.00231         &    0.260\sym{***}&  -0.0547         \\           &  (0.000)         &  (0.337)         &  (0.000)         &  (0.687)         \\ 2.religion&                  &  -0.0441\sym{***}&                  &   -1.971\sym{***}\\           &                  &  (0.000)         &                  &  (0.001)         \\ 3.religion&                  &  -0.0609         &                  &   -2.074         \\           &                  &  (0.185)         &                  &  (0.414)         \\ \_cons    &   -0.124         &   -0.208         &   -42.21\sym{***}&   -21.67         \\           &  (0.438)         &  (0.401)         &  (0.000)         &  (0.124)         \\ \midrule sigma     &                  &                  &                  &                  \\ \_cons    &   0.0877\sym{***}&    0.173\sym{***}&    5.361\sym{***}&    9.974\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ \midrule \(N\)     &     2410         &     2192         &     2410         &     2192         \\ 
 
 \end{tabular}
 }
@@ -1721,7 +1691,7 @@ households in Nigeria (see Table \ref{tabTNZNGR_abovebelow_median}).
 \begin{tabular} { l c c  c c }
 \hline\hline       
 
-          &\multicolumn{2}{c}{$w_{educ}$}       &\multicolumn{2}{c}{$log(x_{educ})$}  \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}           &\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}&\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}\\ \midrule ln\_tot\_exp      & -0.00924\sym{**} &  -0.0308\sym{***}&    1.147\sym{***}&  0.00661         \\           &  (0.003)         &  (0.000)         &  (0.000)         &  (0.987)         \\ assetdensity\_agri&  0.00322         &   0.0276\sym{***}& -0.00759         &    1.352\sym{***}\\           &  (0.066)         &  (0.000)         &  (0.942)         &  (0.000)         \\ log\_mean\_cost\_ne&   0.0225         &   0.0496         &    3.952         &   -0.206         \\           &  (0.718)         &  (0.654)         &  (0.287)         &  (0.974)         \\ 1.educpriv&   0.0761\sym{***}&   0.0449\sym{***}&    2.930\sym{***}&    0.677         \\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.281)         \\ 1.father\_educ\_rank&   0.0109\sym{*}  &   0.0882         &    0.670\sym{*}  &    6.186         \\           &  (0.029)         &  (0.273)         &  (0.025)         &  (0.182)         \\ 2.father\_educ\_rank&  0.00401         &  0.00573         &    0.320         &    0.310         \\           &  (0.732)         &  (0.644)         &  (0.646)         &  (0.660)         \\ 3.father\_educ\_rank&  0.00444         & -0.00658         &    0.433         &   -0.603         \\           &  (0.531)         &  (0.535)         &  (0.306)         &  (0.314)         \\ 4.father\_educ\_rank&   0.0250\sym{*}  &   0.0104         &    1.382\sym{*}  &   0.0953         \\           &  (0.011)         &  (0.563)         &  (0.019)         &  (0.926)         \\ secondary\_schools& -0.00138\sym{***}&  0.00712         &  -0.0110         &    0.374         \\           &  (0.000)         &  (0.389)         &  (0.514)         &  (0.425)         \\ 1.is\_primaryage&   0.0794\sym{***}&   0.0542\sym{***}&    8.922\sym{***}&    3.328\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ 1.is\_secondaryage&   0.0124\sym{**} &   0.0621\sym{***}&    0.168         &    2.314\sym{***}\\           &  (0.004)         &  (0.000)         &  (0.516)         &  (0.000)         \\ 1.is\_tertiaryage&  -0.0130\sym{**} &   0.0179\sym{*}  &   -1.287\sym{***}&    0.968         \\           &  (0.001)         &  (0.048)         &  (0.000)         &  (0.059)         \\ 1.has\_english&   0.0585\sym{***}&                  &    2.294\sym{***}&                  \\           &  (0.000)         &                  &  (0.000)         &                  \\ numchild  &  0.00444\sym{***}& -0.00169         &    0.279\sym{***}&  -0.0231         \\           &  (0.000)         &  (0.479)         &  (0.000)         &  (0.864)         \\ 2.religion&                  &  -0.0456\sym{***}&                  &   -2.063\sym{***}\\           &                  &  (0.000)         &                  &  (0.000)         \\ 3.religion&                  &  -0.0641         &                  &   -2.216         \\           &                  &  (0.163)         &                  &  (0.383)         \\ \_cons    &  -0.0517         &   -0.172         &   -27.46\sym{***}&   -19.34         \\           &  (0.711)         &  (0.469)         &  (0.001)         &  (0.153)         \\ \midrule sigma     &                  &                  &                  &                  \\ \_cons    &   0.0877\sym{***}&    0.173\sym{***}&    5.372\sym{***}&    9.965\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ \midrule \(N\)     &     2410         &     2192         &     2410         &     2192         \\ 
+          &\multicolumn{2}{c}{$w_{educ}$}       &\multicolumn{2}{c}{$log(x_{educ})$}  \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}           &\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}&\multicolumn{1}{c}{\emph{Tanzania}}&\multicolumn{1}{c}{\emph{Nigeria}}\\ \midrule ln\_tot\_exp      & -0.00924\sym{**} &  -0.0308\sym{***}&    1.147\sym{***}&  0.00661         \\           &  (0.003)         &  (0.000)         &  (0.000)         &  (0.987)         \\ assetdensity\_agri&  0.00322         &   0.0276\sym{***}& -0.00759         &    1.352\sym{***}\\           &  (0.066)         &  (0.000)         &  (0.942)         &  (0.000)         \\ log\_mean\_cost\_ne&   0.0225         &   0.0496         &    3.952         &   -0.206         \\           &  (0.718)         &  (0.654)         &  (0.287)         &  (0.974)         \\ 1.educpriv&   0.0761\sym{***}&   0.0449\sym{***}&    2.930\sym{***}&    0.677         \\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.281)         \\ 1.highesteduc&   0.0109\sym{*}  &   0.0882         &    0.670\sym{*}  &    6.186         \\           &  (0.029)         &  (0.273)         &  (0.025)         &  (0.182)         \\ 2.highesteduc&  0.00401         &  0.00573         &    0.320         &    0.310         \\           &  (0.732)         &  (0.644)         &  (0.646)         &  (0.660)         \\ 3.highesteduc&  0.00444         & -0.00658         &    0.433         &   -0.603         \\           &  (0.531)         &  (0.535)         &  (0.306)         &  (0.314)         \\ 4.highesteduc&   0.0250\sym{*}  &   0.0104         &    1.382\sym{*}  &   0.0953         \\           &  (0.011)         &  (0.563)         &  (0.019)         &  (0.926)         \\ secondary\_schools& -0.00138\sym{***}&  0.00712         &  -0.0110         &    0.374         \\           &  (0.000)         &  (0.389)         &  (0.514)         &  (0.425)         \\ 1.is\_primaryage&   0.0794\sym{***}&   0.0542\sym{***}&    8.922\sym{***}&    3.328\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ 1.is\_secondaryage&   0.0124\sym{**} &   0.0621\sym{***}&    0.168         &    2.314\sym{***}\\           &  (0.004)         &  (0.000)         &  (0.516)         &  (0.000)         \\ 1.is\_tertiaryage&  -0.0130\sym{**} &   0.0179\sym{*}  &   -1.287\sym{***}&    0.968         \\           &  (0.001)         &  (0.048)         &  (0.000)         &  (0.059)         \\ 1.has\_english&   0.0585\sym{***}&                  &    2.294\sym{***}&                  \\           &  (0.000)         &                  &  (0.000)         &                  \\ numchild  &  0.00444\sym{***}& -0.00169         &    0.279\sym{***}&  -0.0231         \\           &  (0.000)         &  (0.479)         &  (0.000)         &  (0.864)         \\ 2.religion&                  &  -0.0456\sym{***}&                  &   -2.063\sym{***}\\           &                  &  (0.000)         &                  &  (0.000)         \\ 3.religion&                  &  -0.0641         &                  &   -2.216         \\           &                  &  (0.163)         &                  &  (0.383)         \\ \_cons    &  -0.0517         &   -0.172         &   -27.46\sym{***}&   -19.34         \\           &  (0.711)         &  (0.469)         &  (0.001)         &  (0.153)         \\ \midrule sigma     &                  &                  &                  &                  \\ \_cons    &   0.0877\sym{***}&    0.173\sym{***}&    5.372\sym{***}&    9.965\sym{***}\\           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)         \\ \midrule \(N\)     &     2410         &     2192         &     2410         &     2192         \\ 
 
 \end{tabular}
 }
@@ -1754,15 +1724,15 @@ are presented in Table \ref{tabTNZNGR_roccup}.
 \begin{center}
 \begin{table}[H]
 \begin{centering}
-\begin{tabular}{>{\raggedright}p{1in}|>{\raggedright}p{2in}|>{\centering}p{2in}}
+\begin{tabular}{>{\raggedright}p{1in}|>{\raggedright}p{2in}|>{\centering}p{2in}|>{\centering}p{2in}}
 \hline 
-Wealth Concentration  & Description & Additional Controls\tabularnewline
+Wealth Concentration  & Variable Name & Description & Additional Controls\tabularnewline
 \hline 
-$r$ & Average over geographical vicinity (district) & $\Omega$ , education-rank\tabularnewline
+$r$ & \texttt{assetdensity} & Average over geographical vicinity (district) & $\Omega$ , education-rank\tabularnewline
 \hline 
-$r_{\Gamma}$ & Separate averages over $\Gamma$ & $\Omega$\tabularnewline
+$r_{\Gamma}$ & \texttt{assetdensity\_educ} & Separate averages over $\Gamma$ & $\Omega$\tabularnewline
 \hline 
-$r_{\Omega}$ & Separate averages over $\Omega$ & education-rank\tabularnewline
+$r_{\Omega}$ & \texttt{assetdensity\_agri} & Separate averages over $\Omega$ & education-rank\tabularnewline
 \end{tabular}
 \par\end{centering}
 \caption{\label{tab:ReferenceDefinitions}Prosperity levels and control variables

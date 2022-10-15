@@ -4310,6 +4310,398 @@ end{table}
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% tnsummary <- t(data.frame(r=mean(dat$r2012),ragri=mean(dat$r_agri2012),
+ reduc=mean(dat$r_educ2012),lnA0=mean(dat$lnA0), logx=mean(dat$logx),logmeancost
+ne=mean(dat$mean_cost_ne),ruralwards=mean(dat$rural_wards),secschools=mean(dat[!
+is.na(dat$secondary_schools),]$secondary_schools),educpriv=mean(dat$educpriv),isp
+rimaryage=mean(dat$is_primaryage),issecondaryage=mean(dat$is_secondaryage),ister
+tiaryage=mean(dat$is_tertiaryage),agri=mean(dat$agri),highest_educ=mean(dat$fath
+er_educ_rank),numchild=mean(dat$numchild),hasenglish=mean(as.integer(is.element(da
+t$litlang,c(2,3)))),weduc=mean(dat$w_educ),log_educ=mean(sapply(dat$toteducexpen
+se,log_positive))))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[h] 
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+resizebox{5in}{!}{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tabular}{>{
+\backslash
+centering}p{0.7in}|>{
+\backslash
+centering}p{1.4in}|>{
+\backslash
+raggedright}p{3.2in}|>{
+\backslash
+raggedright}p{0.7in}} 
+\backslash
+hline  
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Variable & Variable Name & Mean & Median 
+\backslash
+tabularnewline 
+\backslash
+hline  
+\end_layout
+
+\begin_layout Plain Layout
+
+$log(x_{t})$ & 
+\backslash
+texttt{
+\backslash
+small{}ln
+\backslash
+_tot
+\backslash
+_exp} & & Individual
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $log(A_{t})$ & 
+\backslash
+texttt{
+\backslash
+small{}ln
+\backslash
+_tot
+\backslash
+_assets}  & & Individual
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $r$  & 
+\backslash
+texttt{
+\backslash
+small{}assetdensity}  &  & Area
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $r_{
+\backslash
+Gamma}$  & 
+\backslash
+texttt{
+\backslash
+small{}assetdensity
+\backslash
+_educ}  & & Area
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $r_{
+\backslash
+Omega}$  & 
+\backslash
+texttt{
+\backslash
+small{}assetdensity
+\backslash
+_agri}  & & Area
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $p_{ne}$  & 
+\backslash
+texttt{
+\backslash
+small{}log
+\backslash
+_mean
+\backslash
+_cost
+\backslash
+_ne} & & Area
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $
+\backslash
+gamma$ & 
+\backslash
+texttt{
+\backslash
+small{}rural
+\backslash
+_wards} & & Area
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $s$ & 
+\backslash
+texttt{secondary
+\backslash
+_schools} & & Area
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $
+\backslash
+pi$ & 
+\backslash
+texttt{educpriv} & & Individual
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $
+\backslash
+mu_{1}$ & 
+\backslash
+texttt{is
+\backslash
+_primaryage} & & Individual
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $
+\backslash
+mu_{2}$ & 
+\backslash
+texttt{is
+\backslash
+_secondaryage} &   & Individual
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $
+\backslash
+mu_{3}$ & 
+\backslash
+texttt{is
+\backslash
+_tertiaryage} &  & Individual
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $
+\backslash
+Omega$ & 
+\backslash
+texttt{
+\backslash
+small{}agri} & & Individual
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $
+\backslash
+Gamma^{*}$ & 
+\backslash
+texttt{
+\backslash
+small{}highesteduc } & & Individual
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $h$ & 
+\backslash
+texttt{
+\backslash
+small{}numchild} & & Individual
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $
+\backslash
+chi$ & 
+\backslash
+texttt{religion} & & Individual
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $
+\backslash
+xi$ & 
+\backslash
+texttt{has
+\backslash
+_english} & & Individual
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabular} 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{
+\backslash
+label{tab:Summary-Stats}Summary Statistics for Variables}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 \begin_inset CommandInset label
 LatexCommand label
@@ -9044,12 +9436,15 @@ The second robustness check we use is the recomputation of wealth concentration
  household-head (and similar for the agrarian/non-agrarian occupation).
  Three types of vicinities are thus implied - that we summarise in the Table
  
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:ReferenceDefinitions"
-plural "false"
-caps "false"
-noprefix "false"
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tab:ReferenceDefinitions}
+\end_layout
 
 \end_inset
 
@@ -9133,226 +9528,160 @@ ref{tabTNZNGR_roccup}
 \end_layout
 
 \begin_layout Standard
-\align center
-\begin_inset Float table
-placement H
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="4">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="1in">
-<column alignment="left" valignment="top" width="2in">
-<column alignment="center" valignment="top" width="2in">
-<column alignment="center" valignment="top" width="2in">
-<row>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Wealth Concentration 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Variable Name
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Description
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Additional Controls
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $r$
-\end_inset
-
 
 \end_layout
 
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
+\begin_layout Plain Layout
+
+
+\backslash
+begin{table}[h] 
+\backslash
+centering
+\end_layout
 
 \begin_layout Plain Layout
 
-\family typewriter
-assetdensity
 \end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Average over geographical vicinity (district)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\Omega$
-\end_inset
-
- , education-rank
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $r_{\Gamma}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
 
-\family typewriter
-assetdensity_educ
+
+\backslash
+resizebox{5.8in}{!}{
 \end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Separate averages over 
-\begin_inset Formula $\Gamma$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\Omega$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $r_{\Omega}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
 
 \begin_layout Plain Layout
 
-\family typewriter
-assetdensity_agri
 \end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Separate averages over 
-\begin_inset Formula $\Omega$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-education-rank
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:ReferenceDefinitions"
 
-\end_inset
 
-Prosperity levels and control variables used
+\backslash
+begin{tabular}{>{
+\backslash
+raggedright}p{1in}|>{
+\backslash
+raggedright}p{1.35in}|>{
+\backslash
+centering}p{2in}|>{
+\backslash
+centering}p{1.2in}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  Wealth Concentration  & Variable Name & Description & Additional
+ Controls
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $r$ & 
+\backslash
+texttt{assetdensity} & Average over geographical vicinity (district) & $
+\backslash
+Omega$ , education-rank
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $r_{
+\backslash
+Gamma}$ & 
+\backslash
+texttt{assetdensity
+\backslash
+_educ} & Separate averages over $
+\backslash
+Gamma$ & $
+\backslash
+Omega$
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $r_{
+\backslash
+Omega}$ & 
+\backslash
+texttt{assetdensity
+\backslash
+_agri} & Separate averages over $
+\backslash
+Omega$ & education-rank
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tabular} 
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{
+\backslash
+label{tab:ReferenceDefinitions}Prosperity levels and control variables used}
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{table}
 \end_layout
 
 \end_inset
