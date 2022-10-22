@@ -1371,16 +1371,19 @@ status open
 \begin_layout Standard
 The urban-rural disparities influence participation in education through
  various mechanisms.
- Setting aside the physical access to education - the higher availability
- of education opportunities in urban areas which we consider as a separate
- control - the fundamental mechanisms we intend to focus on through a measure
- of urbanisation are the relative abundance of opportunities for higher
- income employment and the social environment of the urban areas.
+ Setting aside the physical access to education - i.e.
+ the higher availability of education opportunities in urban areas which
+ we consider as a separate control - the fundamental mechanisms we intend
+ to focus on through a measure of urbanisation are the relative abundance
+ of opportunities for higher income employment and the social environment
+ of the urban areas.
  The better opportunities of employment and wealth overall make education
- more affordable so that the rural households - where incomes are invariably
- lower and education somewhat of a luxury- end up underinvesting in education.
- The social environment of urban areas is often different - leading to a
- stronger need for finding education-dependent employment in urban areas.
+ more affordable so that the households in rural areas - where incomes are
+ invariably lower and education somewhat of a luxury- end up underinvesting
+ in education.
+ The social environment of urban areas is also often different - leading
+ to a stronger need for finding education-dependent employment in urban
+ areas.
  Both of the factors constitute the positive externalities from being in
  a rich locality (district) that are encompassed in the measure of urbanisation
  - a measure driven by the concentration of richness in terms of assets.
@@ -3627,24 +3630,27 @@ status open
 \begin_layout Standard
 The next important control is the occupation of the households which is
  directly available for every individual in the survey.
- Whether an occupational sector is agriculture related or determined is
- based on the main occupation of household head.
+ Whether an occupational sector is agriculture-related or not determined
+ is based on the main occupation of household head (HH).
  The number of children in the household, the ages of the children (and
  other members) are directly observed in the data.
- The paternal educational levels which are also an important control in
- the study are not based on education level of the household head.
- This is because a significant number of household units in both Tanzania
- and Nigeria are made up of joint families where the reported educational
- expenses correspond to the grandchildren of the household head (HH).
- To avoid letting the household education level point to the generation
- before previous for households where HH has grandchildren in school while
- letting the education level point to the previous generation where HH has
- children in school, we rely on a more uniform measure for the highest education
- rank 
+ Since the typical household unit in Tanzania and Nigeria may not be a nuclear
+ family, the paternal educational level - which is another important control
+ in the study - cannot simply be the education level of the household head(HH).
+ This is because unlike for nuclear families, the individuals on whom the
+ household's reported  education expenses are spent, could also be the grandchil
+dren (rather than children) of the joint-family household-head.
+ To avoid letting the household's paternal education level point to the
+ generation before the parents of children for certain joint-family households
+ - where the HH has his/her grandchildren attending school - while letting
+ the same variable point to the parents of children in school for nuclear-famili
+es (where HH has her children attending school), we rely on a more uniform
+ measure for a household's highest education rank 
 \family typewriter
 highesteduc
 \family default
- in the paternal generation of the children recorded in the survey 
+ as the highest education in the generation of the parents of the children
+ in household in the survey 
 \begin_inset Foot
 status open
 
@@ -3735,15 +3741,29 @@ status open
 \end_layout
 
 \begin_layout Standard
-The languages spoken (in Tanzania) and the religious-identity for household
- members - used as controls - are recorded at the individual's level in
- the survey data for the countries and are directly used as controls in
- the survey.
+The languages spoken (
+\family typewriter
+has_english
+\family default
+ in Tanzania) and the religious-identity for household members (
+\family typewriter
+religion
+\family default
+ in Nigeria) - used as controls - are recorded at the individual's level
+ in the survey data for the countries and are directly used as controls
+ in the survey.
  To control for the price of consumption in the household's district, we
- also use the non-durable consumption averages excluding the costs associated
- with ownership of assets in the survey.
- This measurement of price is akin to the price-deflator (unit-value) methods
- used in the demand literature (
+ also use the non-durable consumption averages 
+\family typewriter
+log_mean_cost_ne
+\family default
+ (excluding the costs associated with ownership of assets in the survey).
+ The measurement 
+\family typewriter
+log_mean_cost_ne
+\family default
+ of price is akin to the price-deflator (unit-value) methods used in the
+ demand literature (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "DeatonQualityQuantityVariation,TafereTaffesseEthiopia2010"
@@ -7060,7 +7080,7 @@ ref{tabTNZNGR_r}
 
 \end_inset
 
- for education-expenditure-logarithm 
+ under column for the education-expenditure-logarithm 
 \family typewriter
 
 \begin_inset Formula $log(x_{educ})$
@@ -7068,7 +7088,7 @@ ref{tabTNZNGR_r}
 
 
 \family default
- as the dependent variable).
+ dependent variable).
 \end_layout
 
 \begin_layout Standard
@@ -7109,9 +7129,19 @@ ref{tabTNZNGR_urbanrural}
 It is worth highlighting that the role of social environment is significant
  in both the economies.
  The role of English language seems significant in Tanzania - where the
- English-speakers spend significantly higher on education.
+ English-speakers spend significantly higher on education 
+\series bold
+(see coefficients of ...
+ ) 
+\series default
+.
  In Nigeria, on the other hand, the educational expenses are higher among
- households identifying as Christian.
+ households identifying as Christian 
+\series bold
+(see coefficients of ...
+ ) 
+\series default
+.
  In both cases, the role of social characteristics seems rather inseparable
  from the institutional differences towards education.
  In case of Tanzania, the ability to speak English is aligned with attending
@@ -8611,6 +8641,10 @@ noindent
 Robustness Checks
 \end_layout
 
+\begin_layout Subsubsection*
+Assets ownership in poorer and richer sub-samples
+\end_layout
+
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -8628,8 +8662,10 @@ noindent
 \end_layout
 
 \begin_layout Standard
-As a first robustness check, we re-estimate the results with wealth concentratio
-n 
+To confirm that the assets-ownership does influence the access to education,
+ we inspect the role of assets in lower and higher sub-samples of the surveyed
+ population.
+ Thus, we re-estimate the results with wealth concentration 
 \family typewriter
 assetdensity
 \family default
@@ -8712,9 +8748,29 @@ status open
 \end_layout
 
 \begin_layout Standard
-The role of social effects seems validated with these results as the significanc
-e of social factors remains unaffected by whether the consumers have above
- or below the median asset ownership level.
+While the role that the wealth-concentration 
+\family typewriter
+assetdensity
+\family default
+ plays towards access to education appears to be the same for the rich and
+ poor halves in a locality as well, we do see a higher economic significance
+ of wealth-concentration 
+\family typewriter
+assetdensity
+\family default
+ for the below-median-assets household in Nigeria - possibly because of
+ high education costs in urban areas where asset-possession may be lower.
+ The access to private education and to higher education favour the richer
+ households in both economies - as the economic significance of private-educatio
+n factor variable 
+\family typewriter
+educpriv 
+\family default
+is consistently higher for richer households as is the expenditure on tertiary
+ level education in both the economies.
+ The significance of social factors - on the other hand - remains unaffected
+ by whether the consumers have above or below the median asset ownership
+ level.
  More specifically, the factor variables for english-speaking ability 
 \family typewriter
 has_english
@@ -8777,100 +8833,12 @@ ref{tabTNZNGR_abovebelow_median}
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-As one would expect, the effect of secondar-schools 
+ The effect of secondary-schools 
 \family typewriter
 secondary_schools
 \family default
  is also the same for both richer and poorer halves of a given locality.
- While the role that the wealth-concentration 
-\family typewriter
-assetdensity
-\family default
- plays towards access to education appears to be the same for the rich and
- poor halves in a locality as well, we do see a higher economic significance
- of wealth-concentration 
-\family typewriter
-assetdensity
-\family default
- for the below-median-assets household in Nigeria - possibly because of
- high education costs in urban areas where asset-possession may be lower.
- The access to private education and to higher education favour the richer
- households in both economies - as the economic significance of private-educatio
-n factor variable 
-\family typewriter
-educpriv 
-\family default
-is consistently higher for richer households as is the expenditure on tertiary
- level education in both the economies.
-\end_layout
-
-\begin_layout Standard
-The number of children have a more significant effect for richer households
- in Tanzania.
- Given a lower participation in higher education in the country, this effect
- seems likely due to the primary-education needs scaling up with the number
- of children in the household.
- As in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Discussion"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the lower levels of average educational attainment in Tanzania seem to
- accentuate the effect of paternal education rank 
-\family typewriter
-highesteduc 
-\family default
-which has a higher statistical significance for poorer households in Tanzania
- (compare the coefficient of paternal education rank 
-\family typewriter
-highesteduc 
-\family default
-in Tanzania with educational-expenditure logarithm 
-\family typewriter
-
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
-
-\family default
- as dependent variable for both above and below median assets possession
- level in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZNGR_abovebelow_median}
-\end_layout
-
-\end_inset
-
-) whereas the significance is not much different for richer and poorer household
-s in Nigeria (see Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZNGR_abovebelow_median}
-\end_layout
-
-\end_inset
-
-).
+ 
 \end_layout
 
 \begin_layout Standard
@@ -9900,9 +9868,30 @@ end{table}
 
 \end_layout
 
+\begin_layout Subsubsection*
+Other Asset-density intepretations
+\end_layout
+
 \begin_layout Standard
-The second robustness check we use is the recomputation of wealth concentration
- by considering only those in the household's vicinity with the same value
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To ensure that the effect of assets remains strong after accounting for
+ occupation or education level, we recompute the wealth concentration by
+ considering only those in the household's vicinity with the same value
  of the indicator for primary/higher-than-primary education-level of the
  household-head (and similar for the agrarian/non-agrarian occupation).
  Three types of vicinities are thus implied - that we summarise in the Table
