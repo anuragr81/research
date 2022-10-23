@@ -4052,12 +4052,10 @@ texttt{
 \backslash
 small{}assetdensity
 \backslash
-_educ}  & logarithm of mean asset-ownership level among the consumers of
- having the same value of the indicator variable denoting primary / more-than-pr
-imary education level (i.e.
- the variable $
-\backslash
-Gamma$) in the 6-km radius area around the household district & Area
+_educ}  & logarithm of mean asset-ownership level of consumers in the 6-km
+ radius area having primary education level (or higher than primary) if
+ the household has a primary (or higher than primary) education level  
+ & Area
 \backslash
 tabularnewline 
 \end_layout
@@ -6223,9 +6221,13 @@ ref{tabTNZNGR_r}
  for both Tanzania and Nigeria.
  The tobit uses a lower limit of zero given a number of houses have no expenditu
 re on education.
- More particularly, a zero expenditure is reported for nearly 65% households
- in the survey from Nigeria (2015) and 43% households in the survey from
- Tanzania (2014).
+ A zero expenditure is reported for nearly 65% households in the survey
+ from Nigeria (2015) and 43% households in the survey from Tanzania (2014).
+ This suggests that either the education expenses are recorded in more detail
+ in Tanzania or that a certain basic level of expenses is not considered
+ in the survey for Nigeria.
+ The disparity limits our ability to draw conclusions from educational expenses
+ relative to one another in the two countries.
  A discussion on the cross-section results from the latest available years
  2014 for Tanzania and 2015 for Nigeria follows in Section 
 \begin_inset CommandInset ref
@@ -6363,6 +6365,34 @@ status open
 \begin_layout Plain Layout
 
 %[ln_tot_exp effect on budget share]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Results with 
+\family typewriter
+
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ 
+\family default
+as the dependent variable
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
 \end_layout
 
 \end_inset
@@ -6772,6 +6802,34 @@ status open
 
 \end_layout
 
+\begin_layout Subsubsection*
+Results with 
+\family typewriter
+
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ 
+\family default
+as the dependent variable
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 Comparing the results with education-expenditure logarithm 
 \family typewriter
@@ -6862,11 +6920,11 @@ log_mean_cost_ne
 
 \family default
  as the dependent variable).
- - The educational expenditure 
+ We also see that the educational expenditure 
 \begin_inset Formula $log(x_{educ})$
 \end_inset
 
- rise with the second explanatory variable i.e.
+ rises with the second explanatory variable i.e.
  the wealth concentration ( 
 \family typewriter
 assetdensity
@@ -6945,7 +7003,6 @@ ref{tabTNZNGR_urbanrural}
 \end_inset
 
 ).
- 
 \end_layout
 
 \begin_layout Standard
@@ -7044,6 +7101,26 @@ ln_tot_assets
  the far lower attendance of secondary education in Tanzania.
 \end_layout
 
+\begin_layout Subsubsection*
+Results with other controls
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 The role of the number of children (
 \family typewriter
@@ -7129,19 +7206,56 @@ ref{tabTNZNGR_urbanrural}
 It is worth highlighting that the role of social environment is significant
  in both the economies.
  The role of English language seems significant in Tanzania - where the
- English-speakers spend significantly higher on education 
+ English-speakers spend significantly higher on education (see coefficients
+ of 
+\family typewriter
+has_english
+\family default
+ in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZNGR_r}
+\end_layout
+
+\end_inset
+
+ under  
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ )
 \series bold
-(see coefficients of ...
- ) 
+ 
 \series default
 .
  In Nigeria, on the other hand, the educational expenses are higher among
- households identifying as Christian 
-\series bold
-(see coefficients of ...
- ) 
-\series default
-.
+ households identifying as Christian (see coefficients of
+\family typewriter
+ religion
+\family default
+ in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZNGR_r}
+\end_layout
+
+\end_inset
+
+ under 
+\begin_inset Formula $log(x_{educ})$
+\end_inset
+
+ ) .
  In both cases, the role of social characteristics seems rather inseparable
  from the institutional differences towards education.
  In case of Tanzania, the ability to speak English is aligned with attending
@@ -8866,7 +8980,7 @@ centering
 
 
 \backslash
-resizebox{5.5in}{!}{
+resizebox{5in}{!}{
 \end_layout
 
 \begin_layout Plain Layout
@@ -9869,7 +9983,7 @@ end{table}
 \end_layout
 
 \begin_layout Subsubsection*
-Other Asset-density intepretations
+Asset-density interpretations based on similar neighbours
 \end_layout
 
 \begin_layout Standard
@@ -10062,6 +10176,22 @@ assetdensity_educ
  have attained.
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 \begin_inset CommandInset label
 LatexCommand label
@@ -10075,6 +10205,10 @@ Conclusions
 \begin_layout Standard
 \begin_inset ERT
 status open
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \begin_layout Plain Layout
 
