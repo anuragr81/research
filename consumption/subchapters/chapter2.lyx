@@ -3927,7 +3927,7 @@ logarithm of the educational expenses
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:Dependent Variables"
+name "tab:Dependent-Variables"
 
 \end_inset
 
@@ -5342,7 +5342,34 @@ end{table}
 \begin_layout Standard
 
 \bar under
-As seen in Table 
+Using the average, median and standard deviation values variables listed
+ in Tables 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tab:Dependent-Variables}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tab:Control-Variables}
+\end_layout
+
+\end_inset
+
+) that are shown in Table 
 \begin_inset ERT
 status open
 
@@ -5355,23 +5382,30 @@ ref{tab:Summary-Stats}
 
 \end_inset
 
-, the average budget shares are nearly the same for the consumers in both
- the economies.
+, we note that the measures for average budget shares (
+\family typewriter
+w_educ
+\family default
+) as well as educational expenses (
+\family typewriter
+ln_tot_exp
+\family default
+) are nearly the same for the consumers in both the economies.
  The average number of children in households that are of an age appropriate
- for primary, secondary or tertiary education are nearly the same.
- The standard deviations in education expenses (ln_tot_exp) as well as budget
- shares are much the same in both the economies.
- The standard-deviation in asset density is much higher in Tanzania - as
- is the predominance of agricultural occupations (agri).
- It is worth highlighting that any cross country comparisons are limited
- due to two primary reasons.
- First, because the expenses (ln_tot_exp) or assets-value (ln_tot_assets)
- are reported in different currencies for the two countries.
- Second, the granularities of district-levels in the two economies.
- In other words, the sizes of districts in Tanzania seem much wider in rural
- parts than in Nigeria.
- This is evident from much less secondary education facilities in Nigeria
- (see secondary_schools in Table 
+ for primary, secondary or tertiary education are also similar (see values
+ for 
+\family typewriter
+is_primaryage
+\family default
+ , 
+\family typewriter
+is_secondaryage
+\family default
+ and 
+\family typewriter
+is_tertiaryage
+\family default
+ in Table 
 \begin_inset ERT
 status open
 
@@ -5384,7 +5418,67 @@ ref{tab:Summary-Stats}
 
 \end_inset
 
-) - even though the education levels of the consumer populations is higher
+).
+ A clear difference between Tanzania and Nigeria is that of standard-deviation
+ in asset density (
+\family typewriter
+assetdensity
+\family default
+) - which is higher for Tanzania.
+ The predominance of agricultural occupations (see stdev values for 
+\family typewriter
+agri
+\family default
+) is similarly higher for Tanzania.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+It is worth remarking that other than such broad observations, the LSMS
+ data used in our analyses does not permit a cross country comparison for
+ education expenses in the two economies.
+ The first reason is simply that the distribution of savings and income
+ is quite different in the two economies.
+ Thus, even if one were to convert the expenses (
+\family typewriter
+ln_tot_exp
+\family default
+) or asset-values (
+\family typewriter
+ln_tot_assets
+\family default
+) in a common currency (e.g.
+ as dollar values), the effects of distribution of occupations with varied
+ earning potential in the respective economies introduce a bias that prevents
+ an appropriate cross-country comparison.
+ The second reason is that there is also a difference in sizes or granularity
+ of district classifications in the two economies.
+ More specifically, the sizes of districts in Tanzania seem much larger
+ (particularly in the rural parts) than in Nigeria.
+ This is why the per-district density of secondary education facilities
+ - which we measure with the variable 
+\family typewriter
+secondary_schools
+\family default
+ - is reported lower in Nigeria (see values corresponding to 
+\family typewriter
+secondary_schools
+\family default
+ in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tab:Summary-Stats}
+\end_layout
+
+\end_inset
+
+) - while the education levels of the consumer populations remains higher
  in Nigeria (see highest_educ in Table 
 \begin_inset ERT
 status open
@@ -5399,14 +5493,33 @@ ref{tab:Summary-Stats}
 \end_inset
 
 ).
- The ruralness of districts - determined by the number of wards declared
- as rural in a district - are not much different at the respective district
- area.
+ The ruralness of districts - which is determined by the number of wards
+ declared as rural in a district - on the other hand do not seem affected
+ by this difference as much (compare the values for 
+\family typewriter
+rural_wards
+\family default
+ in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tab:Summary-Stats}
+\end_layout
+
+\end_inset
+
+).
+ This is likely that the rural-urban classification itself brings a uniformity
+ in the number of rural wards surrounding an urban (or semi-urban) centre.
 \end_layout
 
 \begin_layout Standard
 The overall distribution of assets (durable goods stocks) in the two countries
- is disparate.
+ also seems disparate with a direct comparison of asset values.
  Contrasting the Lorenz curves for total non-durable expenditure and total
  assets in the Figure 
 \begin_inset CommandInset ref
@@ -5914,7 +6027,7 @@ noprefix "false"
  These dependent variables are listed in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:Dependent Variables"
+reference "tab:Dependent-Variables"
 plural "false"
 caps "false"
 noprefix "false"
