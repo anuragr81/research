@@ -174,9 +174,9 @@ The economies in sub-Saharan Africa show significant wealth effects that
  in Tanzania and Nigeria across differing levels of urbanisation and access
  to secondary education in the two economies.
  We find that despite varied contexts of education in the two economies,
- the availability of secondary-education can have a stronger effect than
- wealth effects on education expenses in the region and that the role of
- wealth effects may be weakened as urbanisation rises in sub-Saharan Africa.
+ the role of wealth effects is weakened as urbanisation rises in sub-Saharan
+ Africa and that the availability of secondary-education can have a stronger
+ effect than wealth effects on education expenses in the region.
 \end_layout
 
 \begin_layout Standard
@@ -3794,6 +3794,13 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace 1cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \align center
 \begin_inset Float table
 placement h
@@ -3806,11 +3813,11 @@ status open
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="3">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0.7in">
-<column alignment="center" valignment="top" width="1in">
-<column alignment="left" valignment="top" width="4in">
+<column alignment="left" valignment="top" width="1in">
+<column alignment="left" valignment="top" width="1in">
+<column alignment="left" valignment="top" width="2in">
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3819,7 +3826,7 @@ Dependent Variable
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3828,7 +3835,7 @@ Variable Name
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3839,7 +3846,7 @@ Description
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3851,7 +3858,7 @@ Description
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3877,7 +3884,7 @@ budget share of the educational expenses
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" usebox="none">
+<cell alignment="left" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3889,7 +3896,7 @@ budget share of the educational expenses
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3952,7 +3959,7 @@ status open
 
 
 \backslash
-begin{table}[h] 
+begin{table}[!htpb] 
 \backslash
 centering
 \end_layout
@@ -5322,7 +5329,7 @@ caption{
 \backslash
 label{tab:Summary-Stats}Summary Statistics for Variables in Tables 
 \backslash
-ref{tab:Dependent Variables} and 
+ref{tab:Dependent-Variables} and 
 \backslash
 ref{tab:Control-Variables}}
 \end_layout
@@ -5340,8 +5347,6 @@ end{table}
 \end_layout
 
 \begin_layout Standard
-
-\bar under
 Using the average, median and standard deviation values variables listed
  in Tables 
 \begin_inset ERT
@@ -5429,17 +5434,15 @@ assetdensity
 \family typewriter
 agri
 \family default
-) is similarly higher for Tanzania.
+) is higher for Tanzania as well.
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-It is worth remarking that other than such broad observations, the LSMS
- data used in our analyses does not permit a cross country comparison for
- education expenses in the two economies.
- The first reason is simply that the distribution of savings and income
- is quite different in the two economies.
+Other than such broad observations, the LSMS data used in our analyses may
+ not permit a detailed cross country comparison for education expenses in
+ the two economies.
+ One reason is simply that the distribution of savings and income is disparate
+ in the two economies.
  Thus, even if one were to convert the expenses (
 \family typewriter
 ln_tot_exp
@@ -5449,10 +5452,10 @@ ln_tot_exp
 ln_tot_assets
 \family default
 ) in a common currency (e.g.
- as dollar values), the effects of distribution of occupations with varied
- earning potential in the respective economies introduce a bias that prevents
- an appropriate cross-country comparison.
- The second reason is that there is also a difference in sizes or granularity
+ as dollar values), the relation between distribution of occupations with
+ varied earning potential in the respective economies introduce a bias on
+ expenses that prevent a thorough cross-country comparison.
+ The other reason is that there is also a difference in sizes or granularity
  of district classifications in the two economies.
  More specifically, the sizes of districts in Tanzania seem much larger
  (particularly in the rural parts) than in Nigeria.
@@ -5493,9 +5496,14 @@ ref{tab:Summary-Stats}
 \end_inset
 
 ).
- The ruralness of districts - which is determined by the number of wards
- declared as rural in a district - on the other hand do not seem affected
- by this difference as much (compare the values for 
+ The ruralness of districts - measured as number of wards declared as rural
+ in a district (i.e.
+ the variable 
+\family typewriter
+rural_wards
+\family default
+) - on the other hand does not seem affected by this disparity in sizes
+ as much (compare the values for 
 \family typewriter
 rural_wards
 \family default
@@ -5512,9 +5520,9 @@ ref{tab:Summary-Stats}
 
 \end_inset
 
-).
- This is likely that the rural-urban classification itself brings a uniformity
- in the number of rural wards surrounding an urban (or semi-urban) centre.
+) since a rural-urban classification that declares boundaries of a district
+ based on areas surrounding an urban (or semi-urban) centre tends to bring
+ a uniformity to the number of rural wards in a district.
 \end_layout
 
 \begin_layout Standard
@@ -8512,7 +8520,7 @@ begin{landscape}
 
 
 \backslash
-begin{table}
+begin{table}[!htpb]
 \backslash
 centering
 \end_layout
@@ -9291,7 +9299,7 @@ status open
 
 
 \backslash
-begin{table} 
+begin{table}[!htpb] 
 \backslash
 centering
 \end_layout
@@ -9448,7 +9456,7 @@ status open
 
 
 \backslash
-begin{table}
+begin{table}[!htbp]
 \backslash
 centering
 \end_layout
