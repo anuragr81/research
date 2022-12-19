@@ -1,0 +1,170 @@
+<html>
+
+
+  <head>
+
+    <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: sans-serif;
+    }
+
+    textarea {
+  z-index: 4;
+    }
+
+    input {
+  z-index: 0;
+  }
+
+
+  </style>
+
+    <script type="text/javascript">
+
+      function submitData(){
+
+      }
+      function showInput() {
+        var input1 = document.getElementById("input1").value; 
+      }      
+    
+
+window.onload = function() {
+  // Function to be called before window is loaded
+  // Get references to the text box
+
+  //// const textBox = document.getElementById('input1');  
+  //// textBox.addEventListener('keypress', (e) => {
+  //// var keyPressed= `${e.key}`;
+  //// document.getElementById("console").innerHTML = keyPressed;
+  //// });
+
+
+  // set total count to 0
+  
+  document.getElementById('divBoxes').setAttribute('count',0);
+
+  fs1=createSet(1,100,200);
+  
+}
+
+
+function createSet (i,x,y){
+
+  var starter = document.getElementById("starter");
+  
+  var count = document.getElementById('divBoxes').getAttribute('count');
+  
+
+  // ARRAY CHECK
+  //if (boxArr.includes(i)){}
+  if (i - count <=0 ){
+    alert ("already exists");
+    return null;
+  }
+  
+  var fs = document.createElement("fieldset");  
+  var W = 100;
+  var H = 60;
+  var d = 10;
+  var s = 20;
+
+  fs.style.position ="absolute";
+  fs.style.top = y;
+  fs.style.left= x ;
+  fs.style.width= W;
+  fs.style.height = H+d;
+
+
+  var txta = document.createElement("textarea");    
+  txta.id="console"
+  txta.style.position ="absolute";
+  txta.readOnly = true;
+  txta.style.top = y;
+  txta.style.left= x+d ;
+  txta.style.width= W;
+  txta.style.height = H-s;
+
+  var inp = document.createElement("input");    
+  inp.id="input:"+i;
+  inp.type="text";
+  inp.style.position ="absolute";
+  inp.style.top = y+W*.5;
+  inp.style.left= x+d ;
+  inp.style.width= W;
+  inp.style.height =H-s*2;
+
+
+  var button = document.createElement("button");    
+  button.id="buttonPlus";
+  button.innerHTML ="+";
+  button.type="button";
+  button.style.position ="absolute";
+  button.style.top = y+W-5*d;
+  button.style.left= x+d+W ;
+  button.style.width= d;
+  button.style.height =s;
+
+  // Add an event listener to the button
+
+  /**
+   * the event listener would add another UI unit
+   * and update the record of boxes
+   */   
+  button.addEventListener('click', (e) => {
+    // Get the value of the input-text field
+    // var user_input = inp.value;
+    createSet(i+1,x+W+3*d,y);
+    
+
+    // Make a GET request to the server using the value
+    //// fetch(`http://example.com/data?value=${value}`)
+    ////   .then((response) => {
+    ////   // Do something with the response
+    //// });
+
+
+      
+
+
+  });
+
+  starter.appendChild(fs);
+  starter.appendChild(txta);
+  starter.appendChild(inp);
+  starter.appendChild(button);
+  //starter.appendChild(fs);
+  
+  document.getElementById('divBoxes').setAttribute('count',i);
+  var count = document.getElementById('divBoxes').getAttribute('count');
+  
+
+  return starter;
+}
+
+
+// One way to get a mandatory input is using prompt.
+// let input = prompt("Please enter your name:");
+// if(input !== null) {
+//  console.log("Your name is " + input);
+// }
+
+    </script>
+
+
+
+  </head>
+  <body>
+
+<div id="starter" />
+
+<div id="divBoxes" />
+
+    <!--input  style="position:absolute; top:40; left:0;width:100px; height:30px;" type="text" id="input1" /-->
+    
+    <!--button type="button" onclick="submitData()">Show Inputs</button-->
+    <!--button style="position:absolute;top:40;left:100;width:20px; height:20px;" type="button" onclick="showInput()">+</button-->
+    
+  </body>
+</html>
