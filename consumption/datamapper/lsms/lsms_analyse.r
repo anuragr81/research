@@ -735,6 +735,20 @@ get_asset_average_prices <- function(yr,use_ward){
   return (assetpricesdf)
 }
 
+tnz_lorenz_curve <- function(expdata,assetsdat,plottitle, xlab,ylab, use_cex){
+  exp_lty <- 1
+  assets_lty <- 2
+  plot(0,0,type='l',xlim = c(0,1), ylim=c(0,1) , xlab = xlab, ylab=ylab , main= paste("Lorenz curve -",plottitle))
+  lines(Lc(expdata),lty=exp_lty)
+  lines(Lc(assetsdat),lty=assets_lty)
+  if (missing(use_cex)){
+    use_cex <- .8
+  }
+  legend(0.1, .85, legend=c("Total Expenditure" ,"Assets"), lty=c(exp_lty,assets_lty), cex=use_cex)
+}
+
+
+
 merge_asset_mtms_with_prepared_quality_data <- function(allg,m){
   aggdat                                                           <- merge(allg,m,all.x=TRUE,by=c("hhid","year"))
   aggdat[is.na(aggdat$electric_assets_mtm),]$electric_assets_mtm   <- 0
