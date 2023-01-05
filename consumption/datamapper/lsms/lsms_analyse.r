@@ -5,7 +5,7 @@ library(maps)
 library(ggplot2)
 library(ggrepel)
 library(acid) # for polarisation
-
+library(ineq)
 #library(moments) # for kurtosis
 setwd('c:/local_files/research/consumption/datamapper/')
 
