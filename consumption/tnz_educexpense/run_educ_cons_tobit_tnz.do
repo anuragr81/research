@@ -155,13 +155,13 @@ generate has_english =  litlang == 2 | litlang == 3
 
 drop if lnA0 < 12.75996   
 
-eststo tnz_weduc_abovemed, title (Above Median TNZ): quietly tobit w_educ logx r2012 log_mean_cost_ne i.agri i.educpriv   i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, ll(0)
+eststo tnz_weduc_abovemed, title (Above Median HH): quietly tobit w_educ logx r2012 log_mean_cost_ne i.agri i.educpriv   i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, ll(0)
 
-use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
+use "C:\local_files\research\consumption\lsms\data\tn_i_df2014.dta", clear
 drop if numchild == 0
 drop if lnA0 <  11.0021     
 
-eststo ngr_weduc_abovemed, title (Above Median NGR): quietly tobit  w_educ logx r2012  log_mean_cost_ne i.agri i.educpriv  i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild, ll(0)
+eststo tnz_weduc_abovemed_i, title (Above Median INDIV): quietly tobit w_educ logx r2012 log_mean_cost_ne i.agri i.educpriv   i.father_educ_rank secondary_schools i.current_educ_rank  i.has_english numchild, ll(0)
 
 use "C:\local_files\research\consumption\lsms\data\tn_df2014.dta", clear
 drop if numchild == 0
@@ -170,14 +170,14 @@ drop if lnA0 < 12.75996
 gen log_educ= log(toteducexpense+1e-7)
 
 
-eststo tnz_logeduc_abovemed, title (Above Median TNZ): quietly tobit log_educ logx r2012 log_mean_cost_ne i.agri i.educpriv    i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, ll(0)
+eststo tnz_logeduc_abovemed, title (Above Median HH): quietly tobit log_educ logx r2012 log_mean_cost_ne i.agri i.educpriv    i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, ll(0)
 
-use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
+use "C:\local_files\research\consumption\lsms\data\tn_i_df2014.dta", clear
 drop if numchild == 0
 drop if lnA0 <  11.0021     
 gen log_educ= log(toteducexpense+1e-7)
 
-eststo ngr_logeduc_abovemed, title (Above Median NGR): quietly tobit log_educ logx r2012  log_mean_cost_ne i.agri i.educpriv  i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild, ll(0)
+eststo tnz_logeduc_abovemed_i, title (Above Median INDIV): quietly tobit log_educ logx r2012 log_mean_cost_ne i.agri i.educpriv    i.father_educ_rank secondary_schools i.current_educ_rank  i.has_english numchild, ll(0)
 
 
 ***********************below median ****************************************************************
@@ -188,14 +188,14 @@ generate has_english =  litlang == 2 | litlang == 3
 
 drop if lnA0 >= 12.75996   
 
-eststo tnz_weduc_belowmed, title (Below Median TNZ): quietly tobit w_educ logx r2012 log_mean_cost_ne i.agri i.educpriv   i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, ll(0)
+eststo tnz_weduc_belowmed, title (Below Median HH): quietly tobit w_educ logx r2012 log_mean_cost_ne i.agri i.educpriv   i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, ll(0)
 
-use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
+use "C:\local_files\research\consumption\lsms\data\tn_i_df2014.dta", clear
 drop if numchild == 0
 
 drop if lnA0 >=  11.0021     
 
-eststo ngr_weduc_belowmed, title (Below Median NGR): quietly tobit  w_educ logx r2012  log_mean_cost_ne i.agri i.educpriv  i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild, ll(0)
+eststo tnz_weduc_belowmed_i, title (Below Median INDIV): quietly tobit w_educ logx r2012 log_mean_cost_ne i.agri i.educpriv   i.father_educ_rank secondary_schools i.current_educ_rank  i.has_english numchild, ll(0)
 
 
 use "C:\local_files\research\consumption\lsms\data\tn_df2014.dta", clear
@@ -205,14 +205,14 @@ drop if lnA0 >= 12.75996
 gen log_educ= log(toteducexpense+1e-7)
 
 
-eststo tnz_logeduc_belowmed, title (Below Median TNZ): quietly tobit log_educ logx r2012 log_mean_cost_ne i.agri i.educpriv    i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, ll(0)
+eststo tnz_logeduc_belowmed, title (Below Median HH): quietly tobit log_educ logx r2012 log_mean_cost_ne i.agri i.educpriv    i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.has_english numchild, ll(0)
 
-use "C:\local_files\research\consumption\lsms\data\ngr_df2015.dta", clear
+use "C:\local_files\research\consumption\lsms\data\tn_i_df2014.dta", clear
 drop if numchild == 0
 drop if lnA0 >=  11.0021     
 gen log_educ= log(toteducexpense+1e-7)
 
-eststo ngr_logeduc_belowmed, title (Below Median NGR): quietly tobit log_educ logx r2012  log_mean_cost_ne i.agri i.educpriv  i.father_educ_rank secondary_schools i.is_primaryage i.is_secondaryage i.is_tertiaryage  i.religion numchild, ll(0)
+eststo tnz_logeduc_belowmed_i, title (Below Median INDIV): quietly tobit log_educ logx r2012 log_mean_cost_ne i.agri i.educpriv    i.father_educ_rank secondary_schools i.current_educ_rank  i.has_english numchild, ll(0)
 
 
-esttab tnz_weduc_abovemed ngr_weduc_abovemed tnz_logeduc_abovemed ngr_logeduc_abovemed tnz_weduc_belowmed ngr_weduc_belowmed tnz_logeduc_belowmed ngr_logeduc_belowmed using "c:/temp/ngrtnz_abovebelowmedian.tex", replace f booktabs no p nogaps compress mtitle mgroups("Above Median \$w_{educ}\$" "Above Median \$log(x_{educ})\$" "Below Median \$w_{educ}\$" "Below Median \$log(x_{educ})\$", pattern(1 0 1 0 1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))
+esttab tnz_weduc_abovemed tnz_weduc_abovemed_i tnz_logeduc_abovemed tnz_logeduc_abovemed_i tnz_weduc_belowmed tnz_weduc_belowmed_i tnz_logeduc_belowmed tnz_logeduc_belowmed_i using "c:/temp/ngrtnz_abovebelowmedian.tex", replace f booktabs no p nogaps compress mtitle mgroups("Above Median \$w_{educ}\$" "Above Median \$log(x_{educ})\$" "Below Median \$w_{educ}\$" "Below Median \$log(x_{educ})\$", pattern(1 0 1 0 1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}))
