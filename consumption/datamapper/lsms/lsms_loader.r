@@ -1062,7 +1062,7 @@ lsms_loader<-function(fu,ln,lgc) {
                                      m=ln()@get_ohs_secc_fields_mapping_lsms_2014())
       
       c$education_rank <- as.integer(c$highest_educ>=25) *4 + as.integer(c$highest_educ>=18 & c$highest_educ<25)*3 + 2*as.integer(c$highest_educ>2 &c$highest_educ!=2 & c$highest_educ<18)+as.integer(c$highest_educ==1)+2*as.integer(c$highest_educ==2)
-      
+      c$current_educ_rank <- as.integer(c$current_educ_level>=25) *4 + as.integer(c$current_educ_level>=18 & c$current_educ_level<25)*3 + 2*as.integer(c$current_educ_level>2 &c$current_educ_level!=2 & c$current_educ_level<18)+as.integer(c$current_educ_level==1)+2*as.integer(c$current_educ_level==2)    
       
       
       
@@ -1243,6 +1243,7 @@ lsms_loader<-function(fu,ln,lgc) {
       
       
       c$education_rank <- as.integer(c$highest_educ>=25) *4 + as.integer(c$highest_educ>=18 & c$highest_educ<25)*3 + 2*as.integer(c$highest_educ>2 &c$highest_educ!=2 & c$highest_educ<18)+as.integer(c$highest_educ==1)+2*as.integer(c$highest_educ==2)
+      c$current_educ_rank <- as.integer(c$current_educ_level>=25) *4 + as.integer(c$current_educ_level>=18 & c$current_educ_level<25)*3 + 2*as.integer(c$current_educ_level>2 &c$current_educ_level!=2 & c$current_educ_level<18)+as.integer(c$current_educ_level==1)+2*as.integer(c$current_educ_level==2)
       
       
       
@@ -1399,6 +1400,7 @@ lsms_loader<-function(fu,ln,lgc) {
                                      m=ln()@get_ohs_secc_fields_mapping_lsms_2010())
       
       c$education_rank <- as.integer(c$highest_educ>=25) *4 + as.integer(c$highest_educ>=18 & c$highest_educ<25)*3 + 2*as.integer(c$highest_educ>2 &c$highest_educ!=2 & c$highest_educ<18)+as.integer(c$highest_educ==1)+2*as.integer(c$highest_educ==2)
+      
       
       
       c$hhid<-as.character(c$hhid)
