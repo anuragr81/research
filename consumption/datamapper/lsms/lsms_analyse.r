@@ -2032,6 +2032,35 @@ save_data <- function(dfslist,use_ea)
     write_dta(dfslist[['df2014']],'../lsms/data/tn_df2014.dta')
   }
 }
+merge_relevant_indiv_educ_relevant_fields <- function (odat,tndat,year)
+{
+  selected_data = unique(odat[,c("hhid","personid","current_educ_rank","educexpense","age","attended_school","gender")]);
+  selected_data$has_attended_school = as.integer(selected_data$attended_school==1);
+  selected_data$is_female=as.integer(selected_data$gender==2)
+  selected_data<- selected_data[,c("hhid","personid","current_educ_rank","educexpense","age","has_attended_school","is_female")]
+  hhidcolname <- paste0("hhid",year)
+  tndat_i <- merge(plyr::rename(selected_data,c("hhid"=hhidcolname,"age"="indivage")), tndat,by=c(hhidcolname))
+  tndat_i <- subset(tndat_i,indivage>6 & indivage<=18);
+  tndat_i$w_educ_i <- with(tndat_i, educexpense/ exp(logx))
+  tndat_i$log_educ_i <- log(tndat_i$educexpense+1e-7)
+  return (tndat_i);
+  
+}
+
+save_individual_educexpense<-function(o2012,o2014){
+  tn <- load_data(use_ea=F);
+  tni=list();
+  
+  tni[["idf2012"]] <- merge_relevant_indiv_educ_relevant_fields(odat=o2012,tndat=tn$df2012,year=2012);
+  tni[["idf2014"]] <- merge_relevant_indiv_educ_relevant_fields(odat=o2014,tndat=tn$df2014,year=2014);
+  
+  #View((subset(tn2012_i,indivage<=18 & is.na(educexpense)))[,c("hhid2012","personid","age","indivage","current_educ_rank","numchild","is_primaryage","is_secondaryage","is_tertiaryage","attended_school")])
+  
+  write_dta(tni[['idf2012']],'../lsms/data/tn_i_df2012.dta');
+  write_dta(tni[['idf2014']],'../lsms/data/tn_i_df2014.dta');
+  
+  return(tni);
+}
 
 load_data <- function(use_ea)
 {
