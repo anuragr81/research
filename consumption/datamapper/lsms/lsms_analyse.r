@@ -2035,6 +2035,8 @@ save_data <- function(dfslist,use_ea)
 merge_relevant_indiv_educ_relevant_fields <- function (odat,tndat,year)
 {
   selected_data = unique(odat[,c("hhid","personid","current_educ_rank","educexpense","age","attended_school","gender")]);
+  
+  selected_data$current_educ_rank <- sapply(selected_data$current_educ_rank,function(x){ if (is.na(x)) { return (0);} else {return(x);}});
   selected_data$has_attended_school = as.integer(selected_data$attended_school==1);
   selected_data$is_female=as.integer(selected_data$gender==2)
   selected_data<- selected_data[,c("hhid","personid","current_educ_rank","educexpense","age","has_attended_school","is_female")]
