@@ -4339,22 +4339,6 @@ ref{tabTNZ_urbanrural}
 ).
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
@@ -4419,10 +4403,6 @@ a(secondary_schools))),.(region),summarise,n=sum(secondary_schools)), by
 \begin_layout Standard
 \begin_inset ERT
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 
@@ -4514,38 +4494,8 @@ ln_tot_exp)
 
 \family default
  ) for Tanzania.
- This seems largely due to the educational expenses forming a higher proportion
- of the total expenditure for poorer households - since the education expenditur
-es 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- do seem to rise with the increase in total expenditure 
-\family typewriter
-ln_tot_exp
-\family default
- (see coefficient of 
-\family typewriter
-ln_tot_exp
-\family default
- under columns for 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_r}
-\end_layout
-
-\end_inset
-
- ).
+ This is largely due to educational expenses forming a higher proportion
+ of the total expenditure for poorer households.
  The effect of non-durable consumption prices (
 \family typewriter
 log_mean_cost_ne
@@ -4558,14 +4508,14 @@ log_mean_cost_ne
 
 
 \family default
- for both the economies (see coefficient of 
+ (see coefficient of 
 \family typewriter
 log_mean_cost_ne
 \family default
  under 
-\begin_inset Formula $w_{educ}$
-\end_inset
-
+\family typewriter
+assetdensity
+\family default
  in Table 
 \begin_inset ERT
 status open
@@ -4580,15 +4530,24 @@ ref{tabTNZ_r}
 \end_inset
 
 ) .
- Thus while urbanisation must raise the prices of non-durable expenditure
- 
+ Since urbanisation raise the prices of non-durable expenditure 
 \family typewriter
 log_mean_cost_ne
 \family default
-, the disparity in budget shares does not appear to be due to higher cost
- of living (non-durable consumption) alone.
- In other words, the expenditure on education is necessitated despite the
- lower or higher cost of living across the regions in Tanzania.
+ as well as 
+\family typewriter
+assetdensity
+\family default
+, we expect budget shares to be higher either with higher 
+\family typewriter
+log_mean_cost_ne
+\family default
+ or 
+\family typewriter
+assetdensity
+\family default
+ (or both).
+ 
 \end_layout
 
 \begin_layout Standard
@@ -4606,7 +4565,7 @@ status open
 \end_layout
 
 \begin_layout Standard
-Instead, we see a strong and positive effect of wealth concentration ( 
+A strong and positive effect of wealth concentration ( 
 \family typewriter
 assetdensity
 \family default
@@ -4618,7 +4577,7 @@ assetdensity
 
 
 \family default
-) in Table 
+) seems evident in Table 
 \begin_inset ERT
 status open
 
@@ -4635,10 +4594,6 @@ ref{tabTNZ_r}
 \family typewriter
 assetdensity
 \family default
- under 
-\begin_inset Formula $w_{educ}$
-\end_inset
-
  in Table 
 \begin_inset ERT
 status open
@@ -4653,11 +4608,19 @@ ref{tabTNZ_r}
 \end_inset
 
  ).
- This is an indication of the regional disparities.
- More particularly, the differences in density of assets indicate the level
- of urbanisation that have a strong effect on education expenses - despite
- controlling for the effect of availability of secondary-school education.
- While absence of educational facilities must clearly suppress education
+ Indicating regional disparities in urbanisation level, the differences
+ in density of assets imply a strong positive effect on education expenses
+ - despite controlling for the effect of availability of secondary-school
+ education.
+ Since richer areas should generally have more secondary schools (even though
+ the observed correlation between secondary_schools and is nearly .2), it
+ makes sense to interpret the effect of secondary-schools together with
+ asset density.
+ 
+\end_layout
+
+\begin_layout Standard
+While absence of educational facilities must clearly suppress education
  expenses in a region, the positive effect of assets-density after controlling
  for availability of education facilities also suggests relevance of certain
  environmental factors that contribute to education - such as a competition
@@ -4734,7 +4697,6 @@ ref{tabTNZ_r}
 \end_inset
 
 ) .
- 
 \end_layout
 
 \begin_layout Standard
@@ -4861,7 +4823,6 @@ ref{tabTNZ_urbanrural}
  for as dependent variable) are far more likely to avail the education facilitie
 s.
  There seems a strong role of father's education level as well.
- 
 \end_layout
 
 \begin_layout Standard
@@ -4924,13 +4885,9 @@ label{tabTNZ_r}}
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
 
 \backslash
-resizebox{4.2in}{!}{
+resizebox{4.5in}{!}{
 \end_layout
 
 \begin_layout Plain Layout
@@ -4974,11 +4931,7 @@ begin{tabular} { l c c  c c }
 \backslash
 hline
 \backslash
-hline       
-\end_layout
-
-\begin_layout Plain Layout
-
+hline
 \end_layout
 
 \end_inset
@@ -5481,7 +5434,7 @@ label{tabTNZ_abovebelow_median}}
 
 
 \backslash
-resizebox{4.2in}{!}{
+resizebox{4.5in}{!}{
 \end_layout
 
 \begin_layout Plain Layout
@@ -6331,7 +6284,7 @@ label{tabTNZ_reducoccup}}
 
 
 \backslash
-resizebox{4.2in}{!}{
+resizebox{4.5in}{!}{
 \end_layout
 
 \begin_layout Plain Layout
@@ -7572,10 +7525,6 @@ end{longtable}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Section*
 
 \end_layout
 
