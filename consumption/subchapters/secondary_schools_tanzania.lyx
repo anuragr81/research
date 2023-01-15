@@ -4737,27 +4737,13 @@ ref{tabTNZ_r}
  
 \end_layout
 
-\begin_layout Subsubsection*
-Results with 
-\family typewriter
-
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- 
-\family default
-as the dependent variable
-\end_layout
-
 \begin_layout Standard
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-noindent
+%[Regional differences]
 \end_layout
 
 \end_inset
@@ -4766,214 +4752,14 @@ noindent
 \end_layout
 
 \begin_layout Standard
-Comparing the results with education-expenditure logarithm 
-\family typewriter
 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- 
-\family default
-as the dependent variable, we see that the education expenditures rise with
- the increase in total expenditure logarithm (
-\family typewriter
-ln_tot_exp
-\family default
-).
- While the higher expenditure on education measured through total education
- expenditure logarithm 
-\family typewriter
-
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
-
-\family default
- does seem to respond to the prices of non-durable consumption 
-\family typewriter
-log_mean_cost_ne
-\family default
- (see coefficient of 
-\family typewriter
-log_mean_cost_ne
-\family default
- under column 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_r}
-\end_layout
-
-\end_inset
-
-), the effect of non-durable consumption prices 
-\family typewriter
-log_mean_cost_ne
-\family default
- remains weak on education-budget share 
-\family typewriter
-
-\begin_inset Formula $w_{educ}$
-\end_inset
-
-
-\family default
- (see above discussion using budget share 
-\family typewriter
-
-\begin_inset Formula $w_{educ}$
-\end_inset
-
-
-\family default
- as the dependent variable).
- We also see that the educational expenditure 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- is insignificant for the second explanatory variable i.e.
- the wealth concentration 
-\family typewriter
-assetdensity
-\family default
- (compare coefficients for 
-\family typewriter
-assetdensity
-\family default
- in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_r}
-\end_layout
-
-\end_inset
-
- under column for 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- ).
- In the alternative formulation where urbanisation is measured with the
- ruralness score ( 
-\family typewriter
-rural_wards
-\family default
- ), the ruralness score corresponds to a drop in educational expenditure
- 
-\family typewriter
-
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- 
-\family default
-(see coefficients for 
-\family typewriter
-rural_wards
-\family default
- under columns for 
-\family typewriter
-
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
-
-\family default
- in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_urbanrural}
-\end_layout
-
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Standard
-Continuing with the comparison of results with education-expenditure 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- as the dependent variable, the poor access to secondary and tertiary-education
- in Tanzania seems evident (see coefficients of secondary-school-age
-\family typewriter
- 
 \series bold
-is_secondaryage
-\family default
- and tertiary-school-age 
-\family typewriter
-is_tertiaryage
-\family default
- 
+\bar under
+The regional differences
 \series default
-in regression results with education expenditure logarithm 
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- as the dependent variable in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_r}
-\end_layout
-
-\end_inset
-
-).
- In the alternative formulation, the results with education expenditure
- logarithm 
-\family typewriter
-
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- 
-\family default
-as dependent variable in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_urbanrural}
-\end_layout
-
-\end_inset
-
- show the role of secondary-school access 
-\family typewriter
-secondary_schools
-\family default
- to be .....
- .
- 
+\bar default
+ can also be picked up by log_mean_cost_ne as well.
+ Both assetsdensity and secondary_schools pick up the same effect.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -5131,7 +4917,7 @@ centering
 
 
 \backslash
-caption{Differences in Wealth Concentration  
+caption{Educational expenditure across assetdensity and urban-rural areas
 \backslash
 label{tabTNZ_r}}
 \end_layout
@@ -5144,7 +4930,7 @@ label{tabTNZ_r}}
 
 
 \backslash
-resizebox{4in}{!}{
+resizebox{4.2in}{!}{
 \end_layout
 
 \begin_layout Plain Layout
@@ -5208,9 +4994,9 @@ status open
 
           &
 \backslash
-multicolumn{2}{c}{$w_{educ}$}       &
+multicolumn{2}{c}{assetdensity}     &
 \backslash
-multicolumn{2}{c}{$log(x_{educ})$}  
+multicolumn{2}{c}{urban-rural}      
 \backslash
 
 \backslash
@@ -5218,11 +5004,7 @@ multicolumn{2}{c}{$log(x_{educ})$}
 \backslash
 cmidrule(lr){2-3}
 \backslash
-cmidrule(lr){4-5}           
-\backslash
-
-\backslash
-           &
+cmidrule(lr){4-5}           &
 \backslash
 multicolumn{1}{c}{HH}&
 \backslash
@@ -5244,15 +5026,26 @@ _exp      &  -0.0120
 \backslash
 sym{***}&  -0.0254
 \backslash
-sym{***}&    1.767
-\backslash
-sym{***}&    0.410
-\backslash
-sym{**} 
+sym{***}&                  &                  
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.003)
+           &  (0.000)         &  (0.000)         &                  &    
+              
+\backslash
+
+\backslash
+ ln
+\backslash
+_tot
+\backslash
+_assets      &                  &                  & -0.00647
+\backslash
+sym{***}&-0.000385         
+\backslash
+
+\backslash
+           &                  &                  &  (0.000)         &  (0.641)
          
 \backslash
 
@@ -5261,12 +5054,12 @@ sym{**}
 \backslash
 sym{***}&  0.00481
 \backslash
-sym{**} &   -0.166         & -0.00922         
+sym{**} &                  &                  
 \backslash
 
 \backslash
-           &  (0.001)         &  (0.002)         &  (0.384)         &  (0.917)
-         
+           &  (0.001)         &  (0.002)         &                  &    
+              
 \backslash
 
 \backslash
@@ -5276,26 +5069,24 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&   0.0113         &   0.0483         &    13.27
+_ne&   0.0113         &   0.0483         &  -0.0785         &   -0.174
 \backslash
-sym{*}  &   -0.355         
+sym{**} 
 \backslash
 
 \backslash
-           &  (0.816)         &  (0.326)         &  (0.039)         &  (0.900)
+           &  (0.816)         &  (0.326)         &  (0.144)         &  (0.001)
          
 \backslash
 
 \backslash
  1.agri    &  0.00108         & -0.00869
 \backslash
-sym{*}  &    1.507
-\backslash
-sym{**} &   -0.255         
+sym{*}  &  0.00380         & -0.00423         
 \backslash
 
 \backslash
-           &  (0.779)         &  (0.041)         &  (0.003)         &  (0.291)
+           &  (0.779)         &  (0.041)         &  (0.327)         &  (0.330)
          
 \backslash
 
@@ -5304,13 +5095,15 @@ sym{**} &   -0.255
 \backslash
 sym{***}&   0.0337
 \backslash
-sym{***}&    3.861
+sym{***}&   0.0731
 \backslash
-sym{***}&    0.439         
+sym{***}&   0.0310
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.135)
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
          
 \backslash
 
@@ -5319,13 +5112,12 @@ sym{***}&    0.439
 \backslash
 _educ
 \backslash
-_rank&  0.00667         &-0.000496         &    1.077
-\backslash
-sym{*}  &   0.0762         
+_rank&  0.00667         &-0.000496         &  0.00654         & -0.00285   
+      
 \backslash
 
 \backslash
-           &  (0.068)         &  (0.893)         &  (0.024)         &  (0.717)
+           &  (0.068)         &  (0.893)         &  (0.072)         &  (0.446)
          
 \backslash
 
@@ -5334,12 +5126,12 @@ sym{*}  &   0.0762
 \backslash
 _educ
 \backslash
-_rank&  0.00313         &   0.0139         &    0.579         &    0.510   
+_rank&  0.00313         &   0.0139         & 0.000269         &   0.0100   
       
 \backslash
 
 \backslash
-           &  (0.713)         &  (0.105)         &  (0.603)         &  (0.294)
+           &  (0.713)         &  (0.105)         &  (0.975)         &  (0.248)
          
 \backslash
 
@@ -5348,12 +5140,12 @@ _rank&  0.00313         &   0.0139         &    0.579         &    0.510
 \backslash
 _educ
 \backslash
-_rank&  0.00235         & -0.00270         &    0.773         &    0.141   
+_rank&  0.00235         & -0.00270         &  0.00103         & -0.00968   
       
 \backslash
 
 \backslash
-           &  (0.650)         &  (0.610)         &  (0.253)         &  (0.640)
+           &  (0.650)         &  (0.610)         &  (0.842)         &  (0.071)
          
 \backslash
 
@@ -5366,13 +5158,13 @@ _rank&   0.0157
 \backslash
 sym{*}  &   0.0154
 \backslash
-sym{*}  &    2.212
+sym{*}  &   0.0180
 \backslash
-sym{*}  &   -0.237         
+sym{*}  &  0.00824         
 \backslash
 
 \backslash
-           &  (0.032)         &  (0.037)         &  (0.019)         &  (0.573)
+           &  (0.032)         &  (0.037)         &  (0.013)         &  (0.274)
          
 \backslash
 
@@ -5383,13 +5175,15 @@ _schools& -0.00133
 \backslash
 sym{***}& -0.00117
 \backslash
-sym{***}&  0.00472         &  -0.0252
+sym{***}& -0.00109
 \backslash
-sym{*}  
+sym{***}& -0.00104
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.860)         &  (0.030)
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
          
 \backslash
 
@@ -5398,7 +5192,7 @@ sym{*}
 \backslash
 _primaryage&   0.0238
 \backslash
-sym{***}&                  &    14.36
+sym{***}&                  &   0.0247
 \backslash
 sym{***}&                  
 \backslash
@@ -5413,11 +5207,13 @@ sym{***}&
 \backslash
 _secondaryage&   0.0114
 \backslash
-sym{***}&                  &   0.0827         &                  
+sym{***}&                  &   0.0120
+\backslash
+sym{***}&                  
 \backslash
 
 \backslash
-           &  (0.000)         &                  &  (0.841)         &    
+           &  (0.000)         &                  &  (0.000)         &    
               
 \backslash
 
@@ -5426,13 +5222,11 @@ sym{***}&                  &   0.0827         &
 \backslash
 _tertiaryage& -0.00583
 \backslash
-sym{*}  &                  &   -1.997
-\backslash
-sym{***}&                  
+sym{*}  &                  & -0.00490         &                  
 \backslash
 
 \backslash
-           &  (0.049)         &                  &  (0.000)         &    
+           &  (0.049)         &                  &  (0.096)         &    
               
 \backslash
 
@@ -5443,30 +5237,28 @@ _english&   0.0432
 \backslash
 sym{***}&   0.0144
 \backslash
-sym{***}&    3.232
+sym{***}&   0.0437
 \backslash
-sym{***}&    0.410
-\backslash
-sym{*}  
+sym{***}&  0.00545         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.038)
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.115)
          
 \backslash
 
 \backslash
  numchild  &  0.00301
 \backslash
-sym{***}&-0.000888         &    0.385
+sym{***}&-0.000888         &  0.00283
 \backslash
-sym{***}&  -0.0801
+sym{***}& -0.00207
 \backslash
-sym{*}  
+sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.140)         &  (0.000)         &  (0.021)
+           &  (0.000)         &  (0.140)         &  (0.001)         &  (0.001)
          
 \backslash
 
@@ -5475,13 +5267,12 @@ sym{*}
 \backslash
 _educ
 \backslash
-_rank&                  &  0.00578         &                  &    15.29
-\backslash
-sym{***}
+_rank&                  &  0.00578         &                  &  0.00888 
+        
 \backslash
 
 \backslash
-           &                  &  (0.471)         &                  &  (0.000)
+           &                  &  (0.471)         &                  &  (0.276)
          
 \backslash
 
@@ -5492,7 +5283,7 @@ _educ
 \backslash
 _rank&                  &   0.0174
 \backslash
-sym{***}&                  &    15.66
+sym{***}&                  &   0.0163
 \backslash
 sym{***}
 \backslash
@@ -5509,7 +5300,7 @@ _educ
 \backslash
 _rank&                  &   0.0938
 \backslash
-sym{***}&                  &    16.39
+sym{***}&                  &   0.0916
 \backslash
 sym{***}
 \backslash
@@ -5526,38 +5317,53 @@ _educ
 \backslash
 _rank&                  &    0.103
 \backslash
-sym{***}&                  &    11.70
+sym{***}&                  &   0.0948
 \backslash
-sym{***}
+sym{**} 
 \backslash
 
 \backslash
-           &                  &  (0.000)         &                  &  (0.000)
+           &                  &  (0.000)         &                  &  (0.001)
          
 \backslash
 
 \backslash
  1.is
 \backslash
-_female&                  &-0.000563         &                  &  -0.0397
+_female&                  &-0.000563         &                  &-0.000115
          
 \backslash
 
 \backslash
-           &                  &  (0.845)         &                  &  (0.810)
+           &                  &  (0.845)         &                  &  (0.969)
+         
+\backslash
+
+\backslash
+ rural
+\backslash
+_wards&                  &                  &  -0.0160
+\backslash
+sym{*}  & -0.00879         
+\backslash
+
+\backslash
+           &                  &                  &  (0.010)         &  (0.175)
          
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   0.0631         &    0.189         &   -65.95
+_cons    &   0.0631         &    0.189         &    0.285
 \backslash
-sym{***}&   -10.17         
+sym{*}  &    0.479
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.585)         &  (0.111)         &  (0.000)         &  (0.135)
+           &  (0.585)         &  (0.111)         &  (0.042)         &  (0.000)
          
 \backslash
 
@@ -5575,526 +5381,9 @@ _cons    &   0.0691
 \backslash
 sym{***}&   0.0888
 \backslash
-sym{***}&    8.577
-\backslash
-sym{***}&    4.940
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule 
-\backslash
-(N
-\backslash
-)     &     2410         &     3805         &     2410         &     3805
-         
-\backslash
-
-\backslash
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tabular}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{table}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}
-\backslash
-centering
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-caption{Urban-Rural Differences 
-\backslash
-label{tabTNZ_urbanrural}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-resizebox{4in}{!}{
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi}     
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tabular} { l c c  c c }
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline       
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-          &
-\backslash
-multicolumn{2}{c}{$w_{educ}$}       &
-\backslash
-multicolumn{2}{c}{$log(x_{educ})$}  
-\backslash
-
-\backslash
-
-\backslash
-cmidrule(lr){2-3}
-\backslash
-cmidrule(lr){4-5}           
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}&
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}
-\backslash
-
-\backslash
- 
-\backslash
-midrule ln
-\backslash
-_tot
-\backslash
-_assets      & -0.00647
-\backslash
-sym{***}&-0.000385         &    0.554
-\backslash
-sym{***}&   0.0375         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.641)         &  (0.000)         &  (0.420)
-         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&  -0.0785         &   -0.174
-\backslash
-sym{**} &    13.82         &    4.582         
-\backslash
-
-\backslash
-           &  (0.144)         &  (0.001)         &  (0.051)         &  (0.124)
-         
-\backslash
-
-\backslash
- 1.agri    &  0.00380         & -0.00423         &    1.516
-\backslash
-sym{**} &   -0.431         
-\backslash
-
-\backslash
-           &  (0.327)         &  (0.330)         &  (0.003)         &  (0.076)
-         
-\backslash
-
-\backslash
- 1.educpriv&   0.0731
-\backslash
-sym{***}&   0.0310
-\backslash
-sym{***}&    3.614
-\backslash
-sym{***}&    0.477         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.106)
-         
-\backslash
-
-\backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank&  0.00654         & -0.00285         &    1.047
-\backslash
-sym{*}  &    0.124         
-\backslash
-
-\backslash
-           &  (0.072)         &  (0.446)         &  (0.029)         &  (0.555)
-         
-\backslash
-
-\backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank& 0.000269         &   0.0100         &    0.798         &    0.589   
-      
-\backslash
-
-\backslash
-           &  (0.975)         &  (0.248)         &  (0.474)         &  (0.226)
-         
-\backslash
-
-\backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank&  0.00103         & -0.00968         &    0.966         &    0.253   
-      
-\backslash
-
-\backslash
-           &  (0.842)         &  (0.071)         &  (0.151)         &  (0.400)
-         
-\backslash
-
-\backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0180
-\backslash
-sym{*}  &  0.00824         &    2.000
-\backslash
-sym{*}  &   -0.102         
-\backslash
-
-\backslash
-           &  (0.013)         &  (0.274)         &  (0.034)         &  (0.809)
-         
-\backslash
-
-\backslash
- secondary
-\backslash
-_schools& -0.00109
-\backslash
-sym{***}& -0.00104
-\backslash
-sym{***}&   0.0135         &  -0.0276
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.616)         &  (0.018)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_primaryage&   0.0247
-\backslash
-sym{***}&                  &    14.33
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_secondaryage&   0.0120
-\backslash
-sym{***}&                  &   0.0887         &                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.830)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_tertiaryage& -0.00490         &                  &   -1.946
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.096)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&  -0.0160
-\backslash
-sym{*}  & -0.00879         &   -1.644
-\backslash
-sym{*}  &    0.512         
-\backslash
-
-\backslash
-           &  (0.010)         &  (0.175)         &  (0.045)         &  (0.159)
-         
-\backslash
-
-\backslash
- 1.has
-\backslash
-_english&   0.0437
-\backslash
-sym{***}&  0.00545         &    3.519
-\backslash
-sym{***}&    0.515
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.115)         &  (0.000)         &  (0.008)
-         
-\backslash
-
-\backslash
- numchild  &  0.00283
-\backslash
-sym{***}& -0.00207
-\backslash
-sym{***}&    0.447
-\backslash
-sym{***}&  -0.0630         
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.001)         &  (0.000)         &  (0.065)
-         
-\backslash
-
-\backslash
- 1.current
-\backslash
-_educ
-\backslash
-_rank&                  &  0.00888         &                  &    15.24
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.276)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 2.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0163
-\backslash
-sym{***}&                  &    15.67
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 3.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0916
-\backslash
-sym{***}&                  &    16.42
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 4.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0948
-\backslash
-sym{**} &                  &    11.82
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.001)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_female&                  &-0.000115         &                  &  -0.0454
-         
-\backslash
-
-\backslash
-           &                  &  (0.969)         &                  &  (0.783)
-         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    0.285
-\backslash
-sym{*}  &    0.479
-\backslash
-sym{***}&   -50.87
-\backslash
-sym{**} &   -17.84
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.042)         &  (0.000)         &  (0.006)         &  (0.021)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule sigma     &                  &                  &              
-    &                  
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   0.0688
+sym{***}&   0.0688
 \backslash
 sym{***}&   0.0902
-\backslash
-sym{***}&    8.576
-\backslash
-sym{***}&    4.946
 \backslash
 sym{***}
 \backslash
@@ -6192,7 +5481,7 @@ label{tabTNZ_abovebelow_median}}
 
 
 \backslash
-resizebox{6.2in}{!}{
+resizebox{4.2in}{!}{
 \end_layout
 
 \begin_layout Plain Layout
@@ -6252,13 +5541,9 @@ status open
 
           &
 \backslash
-multicolumn{2}{c}{Above Median $w_{educ}$}&
+multicolumn{2}{c}{Above Median}     &
 \backslash
-multicolumn{2}{c}{Above Median $log(x_{educ})$}&
-\backslash
-multicolumn{2}{c}{Below Median $w_{educ}$}&
-\backslash
-multicolumn{2}{c}{Below Median $log(x_{educ})$}
+multicolumn{2}{c}{Below Median}     
 \backslash
 
 \backslash
@@ -6266,23 +5551,7 @@ multicolumn{2}{c}{Below Median $log(x_{educ})$}
 \backslash
 cmidrule(lr){2-3}
 \backslash
-cmidrule(lr){4-5}
-\backslash
-cmidrule(lr){6-7}
-\backslash
-cmidrule(lr){8-9}           
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}&
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}&
+cmidrule(lr){4-5}           &
 \backslash
 multicolumn{1}{c}{HH}&
 \backslash
@@ -6302,22 +5571,15 @@ _tot
 \backslash
 _exp      & -0.00546         &  -0.0269
 \backslash
-sym{***}&    1.043
-\backslash
-sym{*}  &    0.242         &  -0.0142
+sym{***}&  -0.0142
 \backslash
 sym{***}&  -0.0230
 \backslash
-sym{***}&    1.934
-\backslash
-sym{***}&    1.110
-\backslash
-sym{*}  
+sym{***}
 \backslash
 
 \backslash
-           &  (0.152)         &  (0.000)         &  (0.018)         &  (0.099)
-         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.013)
+           &  (0.152)         &  (0.000)         &  (0.000)         &  (0.000)
          
 \backslash
 
@@ -6326,14 +5588,13 @@ sym{*}
 \backslash
 sym{**} &  0.00404
 \backslash
-sym{*}  &   -0.350         &   -0.100         &  0.00526
+sym{*}  &  0.00526
 \backslash
-sym{**} &  0.00669         &   -0.136         &    0.580         
+sym{**} &  0.00669         
 \backslash
 
 \backslash
-           &  (0.005)         &  (0.016)         &  (0.158)         &  (0.276)
-         &  (0.007)         &  (0.060)         &  (0.655)         &  (0.112)
+           &  (0.005)         &  (0.016)         &  (0.007)         &  (0.060)
          
 \backslash
 
@@ -6344,29 +5605,23 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&   -0.122         &   0.0548         &    16.38         &    0.971     
-    &    0.116         &    0.184         &    9.951         &    5.698    
-     
+_ne&   -0.122         &   0.0548         &    0.116         &    0.184     
+    
 \backslash
 
 \backslash
-           &  (0.119)         &  (0.312)         &  (0.070)         &  (0.743)
-         &  (0.060)         &  (0.068)         &  (0.294)         &  (0.575)
+           &  (0.119)         &  (0.312)         &  (0.060)         &  (0.068)
          
 \backslash
 
 \backslash
- 1.agri    & -0.00158         & -0.00754         &    1.191         &   -0.290
-         &  0.00408         &  -0.0346
+ 1.agri    & -0.00158         & -0.00754         &  0.00408         &  -0.0346
 \backslash
-sym{**} &    1.869
-\backslash
-sym{*}  &   -0.243         
+sym{**} 
 \backslash
 
 \backslash
-           &  (0.767)         &  (0.097)         &  (0.052)         &  (0.239)
-         &  (0.465)         &  (0.002)         &  (0.032)         &  (0.827)
+           &  (0.767)         &  (0.097)         &  (0.465)         &  (0.002)
          
 \backslash
 
@@ -6375,16 +5630,13 @@ sym{*}  &   -0.243
 \backslash
 sym{***}&   0.0348
 \backslash
-sym{***}&    4.324
+sym{***}&   0.0471
 \backslash
-sym{***}&    0.522         &   0.0471
-\backslash
-sym{***}&  0.00290         &    3.063         &   -2.776         
+sym{***}&  0.00290         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.075)
-         &  (0.001)         &  (0.909)         &  (0.108)         &  (0.264)
+           &  (0.000)         &  (0.000)         &  (0.001)         &  (0.909)
          
 \backslash
 
@@ -6393,14 +5645,12 @@ sym{***}&  0.00290         &    3.063         &   -2.776
 \backslash
 _educ
 \backslash
-_rank&  0.00814         & -0.00202         &    0.660         &   0.0335   
-      &  0.00610         &   0.0110         &    1.345         &    0.610  
-       
+_rank&  0.00814         & -0.00202         &  0.00610         &   0.0110   
+      
 \backslash
 
 \backslash
-           &  (0.158)         &  (0.621)         &  (0.316)         &  (0.880)
-         &  (0.184)         &  (0.099)         &  (0.054)         &  (0.360)
+           &  (0.158)         &  (0.621)         &  (0.184)         &  (0.099)
          
 \backslash
 
@@ -6409,14 +5659,12 @@ _rank&  0.00814         & -0.00202         &    0.660         &   0.0335
 \backslash
 _educ
 \backslash
-_rank&   0.0164         &   0.0161         &    1.107         &    0.411   
-      &  -0.0136         &  0.00517         &   -0.544         &    2.754  
-       
+_rank&   0.0164         &   0.0161         &  -0.0136         &  0.00517   
+      
 \backslash
 
 \backslash
-           &  (0.174)         &  (0.083)         &  (0.424)         &  (0.416)
-         &  (0.249)         &  (0.780)         &  (0.767)         &  (0.138)
+           &  (0.174)         &  (0.083)         &  (0.249)         &  (0.780)
          
 \backslash
 
@@ -6425,14 +5673,12 @@ _rank&   0.0164         &   0.0161         &    1.107         &    0.411
 \backslash
 _educ
 \backslash
-_rank& 0.000690         & -0.00341         &  -0.0891         &   0.0946   
-      &  0.00545         &  -0.0113         &    1.865         &    0.266  
-       
+_rank& 0.000690         & -0.00341         &  0.00545         &  -0.0113   
+      
 \backslash
 
 \backslash
-           &  (0.924)         &  (0.549)         &  (0.915)         &  (0.759)
-         &  (0.470)         &  (0.423)         &  (0.100)         &  (0.852)
+           &  (0.924)         &  (0.549)         &  (0.470)         &  (0.423)
          
 \backslash
 
@@ -6441,15 +5687,12 @@ _rank& 0.000690         & -0.00341         &  -0.0891         &   0.0946
 \backslash
 _educ
 \backslash
-_rank&   0.0157         &   0.0149         &    1.138         &   -0.240   
-      &   0.0190         &  0.00727         &    4.136
-\backslash
-sym{*}  &   -0.921         
+_rank&   0.0157         &   0.0149         &   0.0190         &  0.00727   
+      
 \backslash
 
 \backslash
-           &  (0.092)         &  (0.056)         &  (0.284)         &  (0.571)
-         &  (0.158)         &  (0.779)         &  (0.039)         &  (0.739)
+           &  (0.092)         &  (0.056)         &  (0.158)         &  (0.779)
          
 \backslash
 
@@ -6460,16 +5703,15 @@ _schools& -0.00126
 \backslash
 sym{***}& -0.00115
 \backslash
-sym{***}&  0.00425         &  -0.0227         & -0.00153
+sym{***}& -0.00153
 \backslash
 sym{***}& -0.00203
 \backslash
-sym{**} &   0.0189         &  -0.0585         
+sym{**} 
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.891)         &  (0.052)
-         &  (0.000)         &  (0.010)         &  (0.707)         &  (0.459)
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.010)
          
 \backslash
 
@@ -6478,19 +5720,14 @@ sym{**} &   0.0189         &  -0.0585
 \backslash
 _primaryage&   0.0196
 \backslash
-sym{***}&                  &    11.67
-\backslash
 sym{***}&                  &   0.0287
-\backslash
-sym{***}&                  &    17.36
 \backslash
 sym{***}&                  
 \backslash
 
 \backslash
            &  (0.000)         &                  &  (0.000)         &    
-              &  (0.000)         &                  &  (0.000)         & 
-                 
+              
 \backslash
 
 \backslash
@@ -6498,31 +5735,26 @@ sym{***}&
 \backslash
 _secondaryage&  0.00954
 \backslash
-sym{*}  &                  &  -0.0453         &                  &   0.0137
-\backslash
-sym{***}&                  &    0.244         &                  
-\backslash
-
-\backslash
-           &  (0.041)         &                  &  (0.933)         &    
-              &  (0.001)         &                  &  (0.701)         & 
-                 
-\backslash
-
-\backslash
- 1.is
-\backslash
-_tertiaryage& -0.00462         &                  &   -2.103
-\backslash
-sym{***}&                  & -0.00607         &                  &   -2.095
+sym{*}  &                  &   0.0137
 \backslash
 sym{***}&                  
 \backslash
 
 \backslash
-           &  (0.282)         &                  &  (0.000)         &    
-              &  (0.134)         &                  &  (0.001)         & 
-                 
+           &  (0.041)         &                  &  (0.001)         &    
+              
+\backslash
+
+\backslash
+ 1.is
+\backslash
+_tertiaryage& -0.00462         &                  & -0.00607         &   
+               
+\backslash
+
+\backslash
+           &  (0.282)         &                  &  (0.134)         &    
+              
 \backslash
 
 \backslash
@@ -6532,34 +5764,24 @@ _english&   0.0399
 \backslash
 sym{***}&   0.0143
 \backslash
-sym{***}&    2.425
+sym{***}&   0.0487
 \backslash
-sym{***}&    0.432
-\backslash
-sym{*}  &   0.0487
-\backslash
-sym{***}&   0.0118         &    3.929
-\backslash
-sym{***}&   -0.291         
+sym{***}&   0.0118         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.034)
-         &  (0.000)         &  (0.130)         &  (0.000)         &  (0.714)
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.130)
          
 \backslash
 
 \backslash
- numchild  & 0.000857         &-0.000910         &    0.405
+ numchild  & 0.000857         &-0.000910         &  0.00525
 \backslash
-sym{**} &  -0.0593         &  0.00525
-\backslash
-sym{***}&-0.000743         &    0.324         &   -0.253         
+sym{***}&-0.000743         
 \backslash
 
 \backslash
-           &  (0.478)         &  (0.163)         &  (0.003)         &  (0.099)
-         &  (0.000)         &  (0.577)         &  (0.058)         &  (0.062)
+           &  (0.478)         &  (0.163)         &  (0.000)         &  (0.577)
          
 \backslash
 
@@ -6568,16 +5790,12 @@ sym{***}&-0.000743         &    0.324         &   -0.253
 \backslash
 _educ
 \backslash
-_rank&                  &  0.00449         &                  &    15.15
-\backslash
-sym{***}&                  &   0.0131         &                  &    16.20
-\backslash
-sym{***}
+_rank&                  &  0.00449         &                  &   0.0131 
+        
 \backslash
 
 \backslash
-           &                  &  (0.614)         &                  &  (0.000)
-         &                  &  (0.355)         &                  &  (0.000)
+           &                  &  (0.614)         &                  &  (0.355)
          
 \backslash
 
@@ -6588,18 +5806,13 @@ _educ
 \backslash
 _rank&                  &   0.0162
 \backslash
-sym{***}&                  &    15.52
-\backslash
 sym{***}&                  &   0.0228
-\backslash
-sym{***}&                  &    16.62
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         &                  &  (0.001)         &                  &  (0.000)
+           &                  &  (0.000)         &                  &  (0.001)
          
 \backslash
 
@@ -6610,18 +5823,13 @@ _educ
 \backslash
 _rank&                  &   0.0917
 \backslash
-sym{***}&                  &    16.21
-\backslash
 sym{***}&                  &    0.114
-\backslash
-sym{***}&                  &    18.28
 \backslash
 sym{***}
 \backslash
 
 \backslash
            &                  &  (0.000)         &                  &  (0.000)
-         &                  &  (0.000)         &                  &  (0.000)
          
 \backslash
 
@@ -6632,45 +5840,47 @@ _educ
 \backslash
 _rank&                  &    0.101
 \backslash
-sym{***}&                  &    11.60
-\backslash
-sym{***}&                  &                  &                  &     
-             
+sym{***}&                  &                  
 \backslash
 
 \backslash
-           &                  &  (0.001)         &                  &  (0.000)
-         &                  &                  &                  &    
-              
+           &                  &  (0.001)         &                  &   
+               
+\backslash
+
+\backslash
+ 0.is
+\backslash
+_female&                  &        0         &                  &      
+  0         
+\backslash
+
+\backslash
+           &                  &      (.)         &                  &   
+   (.)         
 \backslash
 
 \backslash
  1.is
 \backslash
-_female&                  & 0.000273         &                  &   0.0233
-         &                  & -0.00748         &                  &   -0.498
+_female&                  & 0.000273         &                  & -0.00748
          
 \backslash
 
 \backslash
-           &                  &  (0.931)         &                  &  (0.892)
-         &                  &  (0.193)         &                  &  (0.392)
+           &                  &  (0.931)         &                  &  (0.193)
          
 \backslash
 
 \backslash
  
 \backslash
-_cons    &    0.300         &    0.208         &   -56.78
-\backslash
-sym{**} &   -9.639         &   -0.187         &   -0.204         &   -63.85
-\backslash
-sym{**} &   -44.19         
+_cons    &    0.300         &    0.208         &   -0.187         &   -0.204
+         
 \backslash
 
 \backslash
-           &  (0.093)         &  (0.106)         &  (0.006)         &  (0.171)
-         &  (0.227)         &  (0.436)         &  (0.008)         &  (0.099)
+           &  (0.093)         &  (0.106)         &  (0.227)         &  (0.436)
          
 \backslash
 
@@ -6678,8 +5888,7 @@ sym{**} &   -44.19
  
 \backslash
 midrule sigma     &                  &                  &              
-    &                  &                  &                  &         
-         &                  
+    &                  
 \backslash
 
 \backslash
@@ -6689,24 +5898,15 @@ _cons    &   0.0720
 \backslash
 sym{***}&   0.0917
 \backslash
-sym{***}&    8.021
-\backslash
-sym{***}&    4.869
-\backslash
 sym{***}&   0.0650
 \backslash
 sym{***}&   0.0561
-\backslash
-sym{***}&    9.066
-\backslash
-sym{***}&    5.426
 \backslash
 sym{***}
 \backslash
 
 \backslash
            &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
          
 \backslash
 
@@ -6717,9 +5917,8 @@ midrule
 \backslash
 (N
 \backslash
-)     &     1233         &     3406         &     1233         &     3406
-         &     1177         &      399         &     1177         &    
-  399         
+)     &     1233         &     3406         &     1177         &      399
+         
 \backslash
 
 \backslash
@@ -7123,16 +6322,16 @@ centering
 
 
 \backslash
-caption{ $assetdensity_{educ}$ 
+caption{ assetdensity based on education and occupation 
 \backslash
-label{tabTNZ_reduc}}
+label{tabTNZ_reducoccup}}
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-resizebox{4.5in}{!}{
+resizebox{4.2in}{!}{
 \end_layout
 
 \begin_layout Plain Layout
@@ -7188,9 +6387,9 @@ status open
 
           &
 \backslash
-multicolumn{2}{c}{$w_{educ}$}       &
+multicolumn{2}{c}{Educ}             &
 \backslash
-multicolumn{2}{c}{$log(x_{educ})$}  
+multicolumn{2}{c}{Occup}           
 \backslash
 
 \backslash
@@ -7198,11 +6397,7 @@ multicolumn{2}{c}{$log(x_{educ})$}
 \backslash
 cmidrule(lr){2-3}
 \backslash
-cmidrule(lr){4-5}           
-\backslash
-
-\backslash
-           &
+cmidrule(lr){4-5}           &
 \backslash
 multicolumn{1}{c}{HH}&
 \backslash
@@ -7216,7 +6411,12 @@ multicolumn{1}{c}{INDIV}
 \backslash
  
 \backslash
-midrule ln
+midrule
+\end_layout
+
+\begin_layout Plain Layout
+
+ln
 \backslash
 _tot
 \backslash
@@ -7224,32 +6424,45 @@ _exp      &  -0.0122
 \backslash
 sym{***}&  -0.0259
 \backslash
-sym{***}&    1.779
+sym{***}&  -0.0117
 \backslash
-sym{***}&    0.460
+sym{***}&  -0.0244
 \backslash
 sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.001)
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
          
 \backslash
 
 \backslash
  assetdensity
 \backslash
-_educ&  0.00271
+_educ &  0.00271
 \backslash
 sym{*}  &  0.00366
 \backslash
-sym{**} &   -0.115         &   -0.231
-\backslash
-sym{***}
+sym{**} &                  &                  
 \backslash
 
 \backslash
-           &  (0.018)         &  (0.002)         &  (0.450)         &  (0.001)
+           &  (0.018)         &  (0.002)         &                  &    
+              
+\backslash
+
+\backslash
+ assetdensity
+\backslash
+_occup &                  &                  &  0.00317
+\backslash
+sym{*}  &  0.00382
+\backslash
+sym{**} 
+\backslash
+
+\backslash
+           &                  &                  &  (0.011)         &  (0.005)
          
 \backslash
 
@@ -7260,27 +6473,25 @@ _mean
 \backslash
 _cost
 \backslash
-_ne&   0.0155         &   0.0512         &    13.25
+_ne&   0.0155         &   0.0512         &   0.0182         &   0.0950
 \backslash
-sym{*}  &    0.145         
+sym{*}  
 \backslash
 
 \backslash
-           &  (0.751)         &  (0.298)         &  (0.040)         &  (0.959)
+           &  (0.751)         &  (0.298)         &  (0.684)         &  (0.038)
          
 \backslash
 
 \backslash
  1.agri    &-0.000270         & -0.00951
 \backslash
-sym{*}  &    1.542
-\backslash
-sym{**} &   -0.386         
+sym{*}  &                  &                  
 \backslash
 
 \backslash
-           &  (0.944)         &  (0.024)         &  (0.002)         &  (0.105)
-         
+           &  (0.944)         &  (0.024)         &                  &    
+              
 \backslash
 
 \backslash
@@ -7288,13 +6499,15 @@ sym{**} &   -0.386
 \backslash
 sym{***}&   0.0342
 \backslash
-sym{***}&    3.839
+sym{***}&   0.0688
 \backslash
-sym{***}&    0.490         
+sym{***}&   0.0335
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.094)
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
          
 \backslash
 
@@ -7303,13 +6516,12 @@ sym{***}&    0.490
 \backslash
 _educ
 \backslash
-_rank&  0.00660         &-0.000561         &    1.083
-\backslash
-sym{*}  &   0.0970         
+_rank&  0.00660         &-0.000561         &  0.00688         &-0.000140   
+      
 \backslash
 
 \backslash
-           &  (0.072)         &  (0.879)         &  (0.024)         &  (0.644)
+           &  (0.072)         &  (0.879)         &  (0.060)         &  (0.970)
          
 \backslash
 
@@ -7318,12 +6530,12 @@ sym{*}  &   0.0970
 \backslash
 _educ
 \backslash
-_rank&  0.00272         &   0.0135         &    0.592         &    0.538   
+_rank&  0.00272         &   0.0135         &  0.00315         &   0.0143   
       
 \backslash
 
 \backslash
-           &  (0.749)         &  (0.115)         &  (0.595)         &  (0.268)
+           &  (0.749)         &  (0.115)         &  (0.710)         &  (0.094)
          
 \backslash
 
@@ -7332,12 +6544,12 @@ _rank&  0.00272         &   0.0135         &    0.592         &    0.538
 \backslash
 _educ
 \backslash
-_rank&  0.00216         & -0.00290         &    0.779         &    0.158   
+_rank&  0.00216         & -0.00290         &  0.00241         & -0.00178   
       
 \backslash
 
 \backslash
-           &  (0.678)         &  (0.585)         &  (0.249)         &  (0.601)
+           &  (0.678)         &  (0.585)         &  (0.642)         &  (0.737)
          
 \backslash
 
@@ -7350,13 +6562,15 @@ _rank&   0.0157
 \backslash
 sym{*}  &   0.0151
 \backslash
-sym{*}  &    2.219
+sym{*}  &   0.0162
 \backslash
-sym{*}  &   -0.175         
+sym{*}  &   0.0170
+\backslash
+sym{*}  
 \backslash
 
 \backslash
-           &  (0.032)         &  (0.041)         &  (0.018)         &  (0.676)
+           &  (0.032)         &  (0.041)         &  (0.026)         &  (0.021)
          
 \backslash
 
@@ -7367,11 +6581,15 @@ _schools& -0.00128
 \backslash
 sym{***}& -0.00114
 \backslash
-sym{***}&  0.00356         &  -0.0195         
+sym{***}& -0.00130
+\backslash
+sym{***}& -0.00110
+\backslash
+sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.894)         &  (0.091)
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
          
 \backslash
 
@@ -7380,7 +6598,7 @@ sym{***}&  0.00356         &  -0.0195
 \backslash
 _primaryage&   0.0235
 \backslash
-sym{***}&                  &    14.37
+sym{***}&                  &   0.0233
 \backslash
 sym{***}&                  
 \backslash
@@ -7395,11 +6613,13 @@ sym{***}&
 \backslash
 _secondaryage&   0.0110
 \backslash
-sym{***}&                  &    0.101         &                  
+sym{***}&                  &   0.0112
+\backslash
+sym{***}&                  
 \backslash
 
 \backslash
-           &  (0.000)         &                  &  (0.806)         &    
+           &  (0.000)         &                  &  (0.000)         &    
               
 \backslash
 
@@ -7408,13 +6628,11 @@ sym{***}&                  &    0.101         &
 \backslash
 _tertiaryage& -0.00605
 \backslash
-sym{*}  &                  &   -1.985
-\backslash
-sym{***}&                  
+sym{*}  &                  & -0.00572         &                  
 \backslash
 
 \backslash
-           &  (0.042)         &                  &  (0.000)         &    
+           &  (0.042)         &                  &  (0.054)         &    
               
 \backslash
 
@@ -7425,28 +6643,28 @@ _english&   0.0426
 \backslash
 sym{***}&   0.0140
 \backslash
-sym{***}&    3.250
+sym{***}&   0.0430
 \backslash
-sym{***}&    0.402
+sym{***}&   0.0142
 \backslash
-sym{*}  
+sym{***}
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.041)
+           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
          
 \backslash
 
 \backslash
  numchild  &  0.00302
 \backslash
-sym{***}&-0.000964         &    0.386
+sym{***}&-0.000964         &  0.00301
 \backslash
-sym{***}&  -0.0673         
+sym{***}& -0.00112         
 \backslash
 
 \backslash
-           &  (0.000)         &  (0.111)         &  (0.000)         &  (0.054)
+           &  (0.000)         &  (0.111)         &  (0.000)         &  (0.060)
          
 \backslash
 
@@ -7455,13 +6673,12 @@ sym{***}&  -0.0673
 \backslash
 _educ
 \backslash
-_rank&                  &  0.00611         &                  &    15.23
-\backslash
-sym{***}
+_rank&                  &  0.00611         &                  &  0.00506 
+        
 \backslash
 
 \backslash
-           &                  &  (0.447)         &                  &  (0.000)
+           &                  &  (0.447)         &                  &  (0.529)
          
 \backslash
 
@@ -7472,7 +6689,7 @@ _educ
 \backslash
 _rank&                  &   0.0175
 \backslash
-sym{***}&                  &    15.62
+sym{***}&                  &   0.0171
 \backslash
 sym{***}
 \backslash
@@ -7489,7 +6706,7 @@ _educ
 \backslash
 _rank&                  &   0.0941
 \backslash
-sym{***}&                  &    16.37
+sym{***}&                  &   0.0939
 \backslash
 sym{***}
 \backslash
@@ -7506,7 +6723,7 @@ _educ
 \backslash
 _rank&                  &    0.103
 \backslash
-sym{***}&                  &    11.70
+sym{***}&                  &    0.101
 \backslash
 sym{***}
 \backslash
@@ -7519,25 +6736,24 @@ sym{***}
 \backslash
  1.is
 \backslash
-_female&                  &-0.000443         &                  &  -0.0423
+_female&                  &-0.000443         &                  &-0.000627
          
 \backslash
 
 \backslash
-           &                  &  (0.878)         &                  &  (0.797)
+           &                  &  (0.878)         &                  &  (0.828)
          
 \backslash
 
 \backslash
  
 \backslash
-_cons    &   0.0911         &    0.208         &   -66.92
-\backslash
-sym{***}&   -8.858         
+_cons    &   0.0911         &    0.208         &   0.0687         &   0.0644
+         
 \backslash
 
 \backslash
-           &  (0.431)         &  (0.078)         &  (0.000)         &  (0.190)
+           &  (0.431)         &  (0.078)         &  (0.494)         &  (0.537)
          
 \backslash
 
@@ -7555,496 +6771,9 @@ _cons    &   0.0692
 \backslash
 sym{***}&   0.0888
 \backslash
-sym{***}&    8.577
-\backslash
-sym{***}&    4.934
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule 
-\backslash
-(N
-\backslash
-)     &     2410         &     3805         &     2410         &     3805
-         
-\backslash
-
-\backslash
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tabular}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{table}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}
-\backslash
-centering
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-caption{ $assetdensity_{occup}$ 
-\backslash
-label{tabTNZ_roccup}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-resizebox{4.5in}{!}{
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi}     
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tabular} { l c c  c c }
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline       
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-          &
-\backslash
-multicolumn{2}{c}{$w_{educ}$}       &
-\backslash
-multicolumn{2}{c}{$log(x_{educ})$}  
-\backslash
-
-\backslash
-
-\backslash
-cmidrule(lr){2-3}
-\backslash
-cmidrule(lr){4-5}           
-\backslash
-
-\backslash
-           &
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}&
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}
-\backslash
-
-\backslash
- 
-\backslash
-midrule logx      &  -0.0117
-\backslash
-sym{***}&  -0.0244
-\backslash
-sym{***}&    1.637
-\backslash
-sym{***}&    0.431
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.001)
-         
-\backslash
-
-\backslash
- assetdensity
-\backslash
-_occup&  0.00317
-\backslash
-sym{*}  &  0.00382
-\backslash
-sym{**} &  -0.0902         &  -0.0673         
-\backslash
-
-\backslash
-           &  (0.011)         &  (0.005)         &  (0.588)         &  (0.392)
-         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&   0.0182         &   0.0950
-\backslash
-sym{*}  &    4.812         &    1.062         
-\backslash
-
-\backslash
-           &  (0.684)         &  (0.038)         &  (0.418)         &  (0.685)
-         
-\backslash
-
-\backslash
- 1.educpriv&   0.0688
-\backslash
-sym{***}&   0.0335
-\backslash
-sym{***}&    3.921
-\backslash
-sym{***}&    0.456         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.121)
-         
-\backslash
-
-\backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank&  0.00688         &-0.000140         &    1.035
-\backslash
-sym{*}  &   0.0854         
-\backslash
-
-\backslash
-           &  (0.060)         &  (0.970)         &  (0.031)         &  (0.684)
-         
-\backslash
-
-\backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank&  0.00315         &   0.0143         &    0.505         &    0.533   
-      
-\backslash
-
-\backslash
-           &  (0.710)         &  (0.094)         &  (0.651)         &  (0.273)
-         
-\backslash
-
-\backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank&  0.00241         & -0.00178         &    0.706         &    0.159   
-      
-\backslash
-
-\backslash
-           &  (0.642)         &  (0.737)         &  (0.296)         &  (0.597)
-         
-\backslash
-
-\backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0162
-\backslash
-sym{*}  &   0.0170
-\backslash
-sym{*}  &    2.068
-\backslash
-sym{*}  &   -0.200         
-\backslash
-
-\backslash
-           &  (0.026)         &  (0.021)         &  (0.028)         &  (0.633)
-         
-\backslash
-
-\backslash
- secondary
-\backslash
-_schools& -0.00130
-\backslash
-sym{***}& -0.00110
-\backslash
-sym{***}& -0.00413         &  -0.0220         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.878)         &  (0.058)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_primaryage&   0.0233
-\backslash
-sym{***}&                  &    14.50
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_secondaryage&   0.0112
-\backslash
-sym{***}&                  &    0.127         &                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.759)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_tertiaryage& -0.00572         &                  &   -2.009
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.054)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- 1.has
-\backslash
-_english&   0.0430
-\backslash
-sym{***}&   0.0142
-\backslash
-sym{***}&    3.307
-\backslash
-sym{***}&    0.392
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.047)
-         
-\backslash
-
-\backslash
- numchild  &  0.00301
-\backslash
-sym{***}& -0.00112         &    0.417
-\backslash
-sym{***}&  -0.0836
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.060)         &  (0.000)         &  (0.015)
-         
-\backslash
-
-\backslash
- 1.current
-\backslash
-_educ
-\backslash
-_rank&                  &  0.00506         &                  &    15.26
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.529)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 2.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0171
-\backslash
-sym{***}&                  &    15.65
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 3.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0939
-\backslash
-sym{***}&                  &    16.39
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 4.current
-\backslash
-_educ
-\backslash
-_rank&                  &    0.101
-\backslash
-sym{***}&                  &    11.62
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_female&                  &-0.000627         &                  &  -0.0413
-         
-\backslash
-
-\backslash
-           &                  &  (0.828)         &                  &  (0.802)
-         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   0.0687         &   0.0644         &   -42.79
-\backslash
-sym{**} &   -13.40
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.494)         &  (0.537)         &  (0.001)         &  (0.025)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule sigma     &                  &                  &              
-    &                  
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   0.0692
+sym{***}&   0.0692
 \backslash
 sym{***}&   0.0890
-\backslash
-sym{***}&    8.597
-\backslash
-sym{***}&    4.941
 \backslash
 sym{***}
 \backslash
@@ -8847,2655 +7576,6 @@ end{longtable}
 \end_layout
 
 \begin_layout Section*
-2012 Data
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}
-\backslash
-centering
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-caption{Differences in Wealth Concentration  
-\backslash
-label{tabTNZ_r}}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-resizebox{4in}{!}{
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi}     
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tabular} { l c c  c c }
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline       
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-          &
-\backslash
-multicolumn{2}{c}{$w_{educ}$}       &
-\backslash
-multicolumn{2}{c}{$log(x_{educ})$}  
-\backslash
-
-\backslash
-
-\backslash
-cmidrule(lr){2-3}
-\backslash
-cmidrule(lr){4-5}           &
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}&
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}
-\backslash
-
-\backslash
- 
-\backslash
-midrule logx      &  -0.0160
-\backslash
-sym{***}&  -0.0371
-\backslash
-sym{***}&    1.332
-\backslash
-sym{***}&    0.333
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.003)
-         
-\backslash
-
-\backslash
- r2012     & -0.00126         &0.0000211         &  -0.0340         &    0.163
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.323)         &  (0.992)         &  (0.833)         &  (0.046)
-         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&    0.164
-\backslash
-sym{***}&    0.180
-\backslash
-sym{*}  &    10.05         &    7.188
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.010)         &  (0.077)         &  (0.011)
-         
-\backslash
-
-\backslash
- 1.agri    & -0.00140         &  -0.0113         &    1.666
-\backslash
-sym{***}&   -0.124         
-\backslash
-
-\backslash
-           &  (0.670)         &  (0.050)         &  (0.000)         &  (0.593)
-         
-\backslash
-
-\backslash
- 1.educpriv&   0.0905
-\backslash
-sym{***}&   0.0303
-\backslash
-sym{***}&    2.786
-\backslash
-sym{***}&  -0.0945         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.756)
-         
-\backslash
-
-\backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank&  0.00261         &  0.00859         &   -0.430         &    0.151   
-      
-\backslash
-
-\backslash
-           &  (0.398)         &  (0.070)         &  (0.269)         &  (0.430)
-         
-\backslash
-
-\backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank& -0.00977         & -0.00634         &   -0.604         &   -0.147   
-      
-\backslash
-
-\backslash
-           &  (0.200)         &  (0.603)         &  (0.529)         &  (0.764)
-         
-\backslash
-
-\backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank&  0.00283         &   0.0124         &    0.583         &   0.0106   
-      
-\backslash
-
-\backslash
-           &  (0.534)         &  (0.089)         &  (0.307)         &  (0.971)
-         
-\backslash
-
-\backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0235
-\backslash
-sym{***}&   0.0263
-\backslash
-sym{*}  &    0.556         &    0.211         
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.014)         &  (0.522)         &  (0.621)
-         
-\backslash
-
-\backslash
- secondary
-\backslash
-_schools&-0.00000922         &0.0000378         &   0.0299
-\backslash
-sym{*}  &  -0.0128
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.923)         &  (0.816)         &  (0.013)         &  (0.049)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_primaryage&   0.0263
-\backslash
-sym{***}&                  &    12.77
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_secondaryage&   0.0110
-\backslash
-sym{***}&                  &   -0.794
-\backslash
-sym{*}  &                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.024)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_tertiaryage& -0.00320         &                  &   -1.517
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.209)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- 1.has
-\backslash
-_english&   0.0543
-\backslash
-sym{***}&   0.0174
-\backslash
-sym{***}&    5.071
-\backslash
-sym{***}&    1.364
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- numchild  &-0.000661         & -0.00214
-\backslash
-sym{*}  &    0.461
-\backslash
-sym{***}&  -0.0771
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.366)         &  (0.012)         &  (0.000)         &  (0.026)
-         
-\backslash
-
-\backslash
- 1.current
-\backslash
-_educ
-\backslash
-_rank&                  &  0.00172         &                  &    12.23
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.903)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 2.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0126
-\backslash
-sym{**} &                  &    15.03
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.006)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 3.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0958
-\backslash
-sym{***}&                  &    15.71
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 4.current
-\backslash
-_educ
-\backslash
-_rank&                  &    0.170
-\backslash
-sym{***}&                  &    17.32
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_female&                  &  0.00197         &                  &   -0.137
-         
-\backslash
-
-\backslash
-           &                  &  (0.606)         &                  &  (0.371)
-         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -0.173         &   0.0826         &   -51.14
-\backslash
-sym{***}&   -30.80
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.110)         &  (0.628)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule sigma     &                  &                  &              
-    &                  
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   0.0694
-\backslash
-sym{***}&    0.140
-\backslash
-sym{***}&    8.364
-\backslash
-sym{***}&    5.450
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule 
-\backslash
-(N
-\backslash
-)     &     3346         &     5418         &     3346         &     5418
-         
-\backslash
-
-\backslash
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tabular}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{table}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}
-\backslash
-centering
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-caption{Urban-Rural Differences 
-\backslash
-label{tabTNZ_urbanrural}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-resizebox{4in}{!}{
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi}     
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tabular} { l c c  c c }
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline       
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-          &
-\backslash
-multicolumn{2}{c}{$w
-\backslash
-_{educ}$}       &
-\backslash
-multicolumn{2}{c}{$log(x
-\backslash
-_{educ})$}  
-\backslash
-
-\backslash
-
-\backslash
-cmidrule(lr){2-3}
-\backslash
-cmidrule(lr){4-5}           &
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}&
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}
-\backslash
-
-\backslash
- 
-\backslash
-midrule lnA0      & -0.00731
-\backslash
-sym{***}& -0.00110         &    0.600
-\backslash
-sym{***}&    0.130
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.269)         &  (0.000)         &  (0.001)
-         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&  -0.0254         &   -0.214
-\backslash
-sym{**} &    18.88
-\backslash
-sym{**} &    9.518
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.601)         &  (0.005)         &  (0.002)         &  (0.002)
-         
-\backslash
-
-\backslash
- 1.agri    &  0.00585         &-0.000440         &    1.261
-\backslash
-sym{**} &   -0.206         
-\backslash
-
-\backslash
-           &  (0.076)         &  (0.941)         &  (0.003)         &  (0.379)
-         
-\backslash
-
-\backslash
- 1.educpriv&   0.0899
-\backslash
-sym{***}&   0.0205
-\backslash
-sym{**} &    2.750
-\backslash
-sym{***}&  -0.0615         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.009)         &  (0.000)         &  (0.839)
-         
-\backslash
-
-\backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank& 0.000985         &  0.00328         &   -0.381         &    0.188   
-      
-\backslash
-
-\backslash
-           &  (0.748)         &  (0.496)         &  (0.327)         &  (0.327)
-         
-\backslash
-
-\backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank&  -0.0107         &  -0.0114         &   -0.507         &   -0.123   
-      
-\backslash
-
-\backslash
-           &  (0.157)         &  (0.359)         &  (0.595)         &  (0.801)
-         
-\backslash
-
-\backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank& 0.000129         &-0.000654         &    0.727         &   0.0888   
-      
-\backslash
-
-\backslash
-           &  (0.977)         &  (0.929)         &  (0.199)         &  (0.759)
-         
-\backslash
-
-\backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0209
-\backslash
-sym{**} &  0.00982         &    0.597         &    0.268         
-\backslash
-
-\backslash
-           &  (0.002)         &  (0.365)         &  (0.490)         &  (0.529)
-         
-\backslash
-
-\backslash
- secondary
-\backslash
-_schools&-0.000136         &-0.000171         &   0.0243         &  -0.0108
-         
-\backslash
-
-\backslash
-           &  (0.174)         &  (0.328)         &  (0.055)         &  (0.117)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_primaryage&   0.0264
-\backslash
-sym{***}&                  &    12.76
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_secondaryage&   0.0116
-\backslash
-sym{***}&                  &   -0.866
-\backslash
-sym{*}  &                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.013)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_tertiaryage& -0.00355         &                  &   -1.513
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.159)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- rural
-\backslash
-_wards&  -0.0207
-\backslash
-sym{**} &  -0.0180         &  -0.0119         &   -0.195         
-\backslash
-
-\backslash
-           &  (0.002)         &  (0.106)         &  (0.989)         &  (0.655)
-         
-\backslash
-
-\backslash
- 1.has
-\backslash
-_english&   0.0536
-\backslash
-sym{***}&  0.00461         &    5.197
-\backslash
-sym{***}&    1.418
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.293)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- numchild  &-0.000417         & -0.00436
-\backslash
-sym{***}&    0.443
-\backslash
-sym{***}&  -0.0649         
-\backslash
-
-\backslash
-           &  (0.564)         &  (0.000)         &  (0.000)         &  (0.057)
-         
-\backslash
-
-\backslash
- 1.current
-\backslash
-_educ
-\backslash
-_rank&                  &  0.00454         &                  &    12.20
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.751)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 2.current
-\backslash
-_educ
-\backslash
-_rank&                  &  0.00994
-\backslash
-sym{*}  &                  &    15.05
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.032)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 3.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0910
-\backslash
-sym{***}&                  &    15.70
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 4.current
-\backslash
-_educ
-\backslash
-_rank&                  &    0.157
-\backslash
-sym{***}&                  &    17.42
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_female&                  &  0.00113         &                  &   -0.125
-         
-\backslash
-
-\backslash
-           &                  &  (0.771)         &                  &  (0.415)
-         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &    0.170         &    0.599
-\backslash
-sym{**} &   -62.69
-\backslash
-sym{***}&   -31.23
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.180)         &  (0.003)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule sigma     &                  &                  &              
-    &                  
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   0.0688
-\backslash
-sym{***}&    0.142
-\backslash
-sym{***}&    8.337
-\backslash
-sym{***}&    5.452
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule 
-\backslash
-(N
-\backslash
-)     &     3346         &     5418         &     3346         &     5418
-         
-\backslash
-
-\backslash
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tabular}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{table}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace bigskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%
-\backslash
-begin{landscape}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[!htpb]
-\backslash
-centering
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-caption{Around median assets-value 
-\backslash
-label{tabTNZ_abovebelow_median}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-resizebox{6.2in}{!}{
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi}     
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tabular} { l c c  c c c c c c }
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline       
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-          &
-\backslash
-multicolumn{2}{c}{Above Median $w_{educ}$}&
-\backslash
-multicolumn{2}{c}{Above Median $log(x_{educ})$}&
-\backslash
-multicolumn{2}{c}{Below Median $w_{educ}$}&
-\backslash
-multicolumn{2}{c}{Below Median $log(x_{educ})$}
-\backslash
-
-\backslash
-
-\backslash
-cmidrule(lr){2-3}
-\backslash
-cmidrule(lr){4-5}
-\backslash
-cmidrule(lr){6-7}
-\backslash
-cmidrule(lr){8-9}           &
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}&
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}&
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}&
-\backslash
-multicolumn{1}{c}{HH}&
-\backslash
-multicolumn{1}{c}{INDIV}
-\backslash
-
-\backslash
- 
-\backslash
-midrule logx      & -0.00183         &  -0.0343
-\backslash
-sym{***}&    1.140
-\backslash
-sym{***}&    0.383
-\backslash
-sym{**} &  -0.0267
-\backslash
-sym{***}&  -0.0511
-\backslash
-sym{***}&    1.034
-\backslash
-sym{**} &   -0.118         
-\backslash
-
-\backslash
-           &  (0.466)         &  (0.000)         &  (0.000)         &  (0.002)
-         &  (0.000)         &  (0.000)         &  (0.004)         &  (0.708)
-         
-\backslash
-
-\backslash
- r2012     & 0.000313         & 0.000679         &   -0.172         &    0.182
-\backslash
-sym{*}  &-0.000915         & -0.00478         &   -0.101         &    0.192
-         
-\backslash
-
-\backslash
-           &  (0.859)         &  (0.752)         &  (0.400)         &  (0.036)
-         &  (0.618)         &  (0.453)         &  (0.706)         &  (0.475)
-         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&   0.0861         &    0.133         &    6.091         &    3.386     
-    &    0.216
-\backslash
-sym{***}&    0.590
-\backslash
-sym{**} &    15.72         &    39.97
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.155)         &  (0.073)         &  (0.386)         &  (0.257)
-         &  (0.001)         &  (0.006)         &  (0.095)         &  (0.000)
-         
-\backslash
-
-\backslash
- 1.agri    &  0.00112         &  -0.0106         &    1.485
-\backslash
-sym{**} &   -0.276         & -0.00307         &  -0.0183         &    1.587
-\backslash
-sym{*}  &    1.564         
-\backslash
-
-\backslash
-           &  (0.796)         &  (0.078)         &  (0.003)         &  (0.253)
-         &  (0.528)         &  (0.327)         &  (0.032)         &  (0.052)
-         
-\backslash
-
-\backslash
- 1.educpriv&   0.0772
-\backslash
-sym{***}&   0.0301
-\backslash
-sym{***}&    2.697
-\backslash
-sym{***}&  -0.0977         &    0.158
-\backslash
-sym{***}&   0.0810         &    4.601
-\backslash
-sym{*}  &    1.283         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.751)
-         &  (0.000)         &  (0.073)         &  (0.020)         &  (0.502)
-         
-\backslash
-
-\backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank&  0.00387         &  0.00954         &   -0.767         &   0.0825   
-      &  0.00111         &  0.00306         &   -0.112         &    0.771  
-       
-\backslash
-
-\backslash
-           &  (0.379)         &  (0.062)         &  (0.129)         &  (0.688)
-         &  (0.791)         &  (0.807)         &  (0.854)         &  (0.146)
-         
-\backslash
-
-\backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank& -0.00670         & -0.00771         &   -1.060         &   -0.387   
-      &  -0.0156         & 0.000342         &   -0.762         &    1.799  
-       
-\backslash
-
-\backslash
-           &  (0.497)         &  (0.550)         &  (0.354)         &  (0.454)
-         &  (0.181)         &  (0.992)         &  (0.645)         &  (0.231)
-         
-\backslash
-
-\backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank&  0.00331         &  0.00886         &  -0.0793         &  -0.0588   
-      & -0.00215         &   0.0768
-\backslash
-sym{**} &    1.098         &    1.039         
-\backslash
-
-\backslash
-           &  (0.573)         &  (0.243)         &  (0.907)         &  (0.846)
-         &  (0.767)         &  (0.004)         &  (0.290)         &  (0.364)
-         
-\backslash
-
-\backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0237
-\backslash
-sym{**} &   0.0218
-\backslash
-sym{*}  &   -0.353         &    0.196         &   0.0261         &   0.0986
-\backslash
-sym{*}  &    2.227         &    0.845         
-\backslash
-
-\backslash
-           &  (0.003)         &  (0.050)         &  (0.706)         &  (0.657)
-         &  (0.070)         &  (0.010)         &  (0.281)         &  (0.611)
-         
-\backslash
-
-\backslash
- secondary
-\backslash
-_schools&-0.000105         &0.0000704         &   0.0356
-\backslash
-sym{**} &  -0.0116         &0.0000595         & -0.00176         &   0.0150
-         &  -0.0236         
-\backslash
-
-\backslash
-           &  (0.362)         &  (0.670)         &  (0.008)         &  (0.079)
-         &  (0.725)         &  (0.094)         &  (0.542)         &  (0.606)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_primaryage&   0.0197
-\backslash
-sym{***}&                  &    10.39
-\backslash
-sym{***}&                  &   0.0318
-\backslash
-sym{***}&                  &    15.31
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.000)         &    
-              &  (0.000)         &                  &  (0.000)         & 
-                 
-\backslash
-
-\backslash
- 1.is
-\backslash
-_secondaryage&   0.0175
-\backslash
-sym{***}&                  &    0.564         &                  &  0.00617
-         &                  &   -2.344
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.199)         &    
-              &  (0.115)         &                  &  (0.000)         & 
-                 
-\backslash
-
-\backslash
- 1.is
-\backslash
-_tertiaryage& -0.00121         &                  &   -1.040
-\backslash
-sym{**} &                  & -0.00458         &                  &   -2.427
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.722)         &                  &  (0.008)         &    
-              &  (0.221)         &                  &  (0.000)         & 
-                 
-\backslash
-
-\backslash
- 1.has
-\backslash
-_english&   0.0468
-\backslash
-sym{***}&   0.0188
-\backslash
-sym{***}&    4.148
-\backslash
-sym{***}&    1.362
-\backslash
-sym{***}&   0.0634
-\backslash
-sym{***}&  -0.0149         &    5.840
-\backslash
-sym{***}&    1.333
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.289)         &  (0.000)         &  (0.024)
-         
-\backslash
-
-\backslash
- numchild  & -0.00186
-\backslash
-sym{*}  & -0.00219
-\backslash
-sym{*}  &    0.296
-\backslash
-sym{**} &   -0.104
-\backslash
-sym{**} &  0.00236         & -0.00226         &    0.713
-\backslash
-sym{***}&    0.147         
-\backslash
-
-\backslash
-           &  (0.038)         &  (0.014)         &  (0.004)         &  (0.004)
-         &  (0.060)         &  (0.442)         &  (0.000)         &  (0.236)
-         
-\backslash
-
-\backslash
- 1.current
-\backslash
-_educ
-\backslash
-_rank&                  & -0.00174         &                  &    11.82
-\backslash
-sym{***}&                  &   0.0336         &                  &    14.76
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.906)         &                  &  (0.000)
-         &                  &  (0.437)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 2.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0111
-\backslash
-sym{*}  &                  &    14.95
-\backslash
-sym{***}&                  &   0.0213         &                  &    15.29
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.023)         &                  &  (0.000)
-         &                  &  (0.081)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 3.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0852
-\backslash
-sym{***}&                  &    15.64
-\backslash
-sym{***}&                  &    0.271
-\backslash
-sym{***}&                  &    16.05
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 4.current
-\backslash
-_educ
-\backslash
-_rank&                  &    0.175
-\backslash
-sym{***}&                  &    17.38
-\backslash
-sym{***}&                  &   0.0955         &                  &    15.67
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         &                  &  (0.490)         &                  &  (0.005)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_female&                  &  0.00163         &                  &  -0.0969
-         &                  & -0.00154         &                  &   -0.642
-         
-\backslash
-
-\backslash
-           &                  &  (0.687)         &                  &  (0.550)
-         &                  &  (0.890)         &                  &  (0.174)
-         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -0.201         &    0.157         &   -33.62
-\backslash
-sym{*}  &   -21.78
-\backslash
-sym{**} &   -0.165         &   -0.692         &   -62.78
-\backslash
-sym{**} &   -110.8
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.166)         &  (0.384)         &  (0.046)         &  (0.003)
-         &  (0.294)         &  (0.194)         &  (0.007)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule sigma     &                  &                  &              
-    &                  &                  &                  &         
-         &                  
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   0.0688
-\backslash
-sym{***}&    0.139
-\backslash
-sym{***}&    7.740
-\backslash
-sym{***}&    5.428
-\backslash
-sym{***}&   0.0674
-\backslash
-sym{***}&    0.136
-\backslash
-sym{***}&    8.989
-\backslash
-sym{***}&    5.493
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule 
-\backslash
-(N
-\backslash
-)     &     1821         &     4789         &     1821         &     4789
-         &     1525         &      629         &     1525         &    
-  629         
-\backslash
-
-\backslash
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tabular}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{table}
-\end_layout
-
-\begin_layout Plain Layout
-
-%
-\backslash
-end{landscape} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-ROBUSTNESS
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[!htbp]
-\backslash
-centering
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-caption{ $assetdensity_{educ}$ 
-\backslash
-label{tabTNZ_reduc}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-resizebox{4.5in}{!}{
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi}     
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tabular} { l c c  c c }
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline
-\end_layout
-
-\begin_layout Plain Layout
-
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-          &
-\backslash
-multicolumn{2}{c}{$w_{educ}$}       &
-\backslash
-multicolumn{2}{c}{$log(x_{educ})$}  
-\backslash
-
-\backslash
-
-\backslash
-cmidrule(lr){2-3}
-\backslash
-cmidrule(lr){4-5}           &
-\backslash
-multicolumn{1}{c}{Educ HH}&
-\backslash
-multicolumn{1}{c}{Educ INDIV}&
-\backslash
-multicolumn{1}{c}{Educ HH}&
-\backslash
-multicolumn{1}{c}{Educ INDIV}
-\backslash
-
-\backslash
- 
-\backslash
-midrule logx      &  -0.0156
-\backslash
-sym{***}&  -0.0371
-\backslash
-sym{***}&    1.349
-\backslash
-sym{***}&    0.338
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.003)
-         
-\backslash
-
-\backslash
- r
-\backslash
-_educ2012& -0.00312
-\backslash
-sym{**} & 0.000132         &   -0.139         &   0.0152         
-\backslash
-
-\backslash
-           &  (0.004)         &  (0.941)         &  (0.318)         &  (0.833)
-         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&    0.171
-\backslash
-sym{***}&    0.180
-\backslash
-sym{*}  &    10.40         &    7.428
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.010)         &  (0.068)         &  (0.009)
-         
-\backslash
-
-\backslash
- 1.agri    & -0.00160         &  -0.0112         &    1.651
-\backslash
-sym{***}&   -0.144         
-\backslash
-
-\backslash
-           &  (0.625)         &  (0.051)         &  (0.000)         &  (0.534)
-         
-\backslash
-
-\backslash
- 1.educpriv&   0.0901
-\backslash
-sym{***}&   0.0303
-\backslash
-sym{***}&    2.773
-\backslash
-sym{***}&  -0.0685         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.821)
-         
-\backslash
-
-\backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank&  0.00291         &  0.00857         &   -0.414         &    0.184   
-      
-\backslash
-
-\backslash
-           &  (0.345)         &  (0.070)         &  (0.287)         &  (0.337)
-         
-\backslash
-
-\backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank& -0.00974         & -0.00635         &   -0.602         &   -0.129   
-      
-\backslash
-
-\backslash
-           &  (0.201)         &  (0.602)         &  (0.530)         &  (0.792)
-         
-\backslash
-
-\backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank&  0.00330         &   0.0124         &    0.608         &   0.0505   
-      
-\backslash
-
-\backslash
-           &  (0.468)         &  (0.089)         &  (0.287)         &  (0.862)
-         
-\backslash
-
-\backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0240
-\backslash
-sym{***}&   0.0263
-\backslash
-sym{*}  &    0.583         &    0.239         
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.014)         &  (0.502)         &  (0.575)
-         
-\backslash
-
-\backslash
- secondary
-\backslash
-_schools&0.0000446         &0.0000347         &   0.0328
-\backslash
-sym{**} & -0.00862         
-\backslash
-
-\backslash
-           &  (0.635)         &  (0.828)         &  (0.006)         &  (0.177)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_primaryage&   0.0262
-\backslash
-sym{***}&                  &    12.76
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_secondaryage&   0.0118
-\backslash
-sym{***}&                  &   -0.757
-\backslash
-sym{*}  &                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.032)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_tertiaryage& -0.00263         &                  &   -1.488
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.304)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- 1.has
-\backslash
-_english&   0.0542
-\backslash
-sym{***}&   0.0174
-\backslash
-sym{***}&    5.063
-\backslash
-sym{***}&    1.341
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- numchild  &-0.000480         & -0.00215
-\backslash
-sym{*}  &    0.470
-\backslash
-sym{***}&  -0.0689
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.512)         &  (0.013)         &  (0.000)         &  (0.048)
-         
-\backslash
-
-\backslash
- 1.current
-\backslash
-_educ
-\backslash
-_rank&                  &  0.00175         &                  &    12.21
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.901)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 2.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0127
-\backslash
-sym{**} &                  &    15.03
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.006)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 3.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0958
-\backslash
-sym{***}&                  &    15.71
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 4.current
-\backslash
-_educ
-\backslash
-_rank&                  &    0.170
-\backslash
-sym{***}&                  &    17.35
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_female&                  &  0.00197         &                  &   -0.136
-         
-\backslash
-
-\backslash
-           &                  &  (0.606)         &                  &  (0.376)
-         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -0.169         &   0.0819         &   -50.81
-\backslash
-sym{***}&   -29.36
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.116)         &  (0.630)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule sigma     &                  &                  &              
-    &                  
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   0.0693
-\backslash
-sym{***}&    0.140
-\backslash
-sym{***}&    8.363
-\backslash
-sym{***}&    5.452
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule 
-\backslash
-(N
-\backslash
-)     &     3346         &     5418         &     3346         &     5418
-         
-\backslash
-
-\backslash
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tabular}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{table}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}
-\backslash
-centering
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-caption{ $assetdensity_{occup}$ 
-\backslash
-label{tabTNZ_roccup}}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-resizebox{4.5in}{!}{
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-def
-\backslash
-sym#1{
-\backslash
-ifmmode^{#1}
-\backslash
-else
-\backslash
-(^{#1}
-\backslash
-)
-\backslash
-fi}     
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tabular} { l c c  c c }
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-hline
-\backslash
-hline       
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-          &
-\backslash
-multicolumn{2}{c}{$w_{educ}$}       &
-\backslash
-multicolumn{2}{c}{$log(x_{educ})$}  
-\backslash
-
-\backslash
-
-\backslash
-cmidrule(lr){2-3}
-\backslash
-cmidrule(lr){4-5}           &
-\backslash
-multicolumn{1}{c}{Agri HH}&
-\backslash
-multicolumn{1}{c}{Agri INDIV}&
-\backslash
-multicolumn{1}{c}{Agri HH}&
-\backslash
-multicolumn{1}{c}{Agri INDIV}
-\backslash
-
-\backslash
- 
-\backslash
-midrule logx      &  -0.0159
-\backslash
-sym{***}&  -0.0364
-\backslash
-sym{***}&    1.224
-\backslash
-sym{***}&    0.345
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.002)
-         
-\backslash
-
-\backslash
- r
-\backslash
-_agri2012& -0.00241
-\backslash
-sym{*}  & -0.00101         &   0.0843         &    0.112         
-\backslash
-
-\backslash
-           &  (0.034)         &  (0.589)         &  (0.563)         &  (0.139)
-         
-\backslash
-
-\backslash
- log
-\backslash
-_mean
-\backslash
-_cost
-\backslash
-_ne&    0.172
-\backslash
-sym{***}&    0.213
-\backslash
-sym{**} &    4.570         &    7.673
-\backslash
-sym{**} 
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.002)         &  (0.410)         &  (0.005)
-         
-\backslash
-
-\backslash
- 1.educpriv&   0.0907
-\backslash
-sym{***}&   0.0310
-\backslash
-sym{***}&    2.740
-\backslash
-sym{***}&  -0.0793         
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.794)
-         
-\backslash
-
-\backslash
- 1.father
-\backslash
-_educ
-\backslash
-_rank&  0.00281         &  0.00922         &   -0.515         &    0.168   
-      
-\backslash
-
-\backslash
-           &  (0.361)         &  (0.052)         &  (0.187)         &  (0.381)
-         
-\backslash
-
-\backslash
- 2.father
-\backslash
-_educ
-\backslash
-_rank& -0.00975         & -0.00450         &   -0.884         &   -0.106   
-      
-\backslash
-
-\backslash
-           &  (0.200)         &  (0.711)         &  (0.356)         &  (0.828)
-         
-\backslash
-
-\backslash
- 3.father
-\backslash
-_educ
-\backslash
-_rank&  0.00306         &   0.0136         &    0.418         &   0.0420   
-      
-\backslash
-
-\backslash
-           &  (0.500)         &  (0.061)         &  (0.464)         &  (0.885)
-         
-\backslash
-
-\backslash
- 4.father
-\backslash
-_educ
-\backslash
-_rank&   0.0238
-\backslash
-sym{***}&   0.0273
-\backslash
-sym{*}  &    0.325         &    0.224         
-\backslash
-
-\backslash
-           &  (0.001)         &  (0.011)         &  (0.708)         &  (0.599)
-         
-\backslash
-
-\backslash
- secondary
-\backslash
-_schools&0.0000326         & 0.000135         &   0.0185         &  -0.0107
-         
-\backslash
-
-\backslash
-           &  (0.727)         &  (0.394)         &  (0.117)         &  (0.092)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_primaryage&   0.0262
-\backslash
-sym{***}&                  &    12.98
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_secondaryage&   0.0111
-\backslash
-sym{***}&                  &   -0.752
-\backslash
-sym{*}  &                  
-\backslash
-
-\backslash
-           &  (0.000)         &                  &  (0.032)         &    
-              
-\backslash
-
-\backslash
- 1.is
-\backslash
-_tertiaryage& -0.00308         &                  &   -1.539
-\backslash
-sym{***}&                  
-\backslash
-
-\backslash
-           &  (0.226)         &                  &  (0.000)         &    
-              
-\backslash
-
-\backslash
- 1.has
-\backslash
-_english&   0.0543
-\backslash
-sym{***}&   0.0174
-\backslash
-sym{***}&    5.092
-\backslash
-sym{***}&    1.354
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- numchild  &-0.000565         & -0.00224
-\backslash
-sym{**} &    0.473
-\backslash
-sym{***}&  -0.0775
-\backslash
-sym{*}  
-\backslash
-
-\backslash
-           &  (0.440)         &  (0.008)         &  (0.000)         &  (0.024)
-         
-\backslash
-
-\backslash
- 1.current
-\backslash
-_educ
-\backslash
-_rank&                  & 0.000769         &                  &    12.21
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.956)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 2.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0121
-\backslash
-sym{**} &                  &    15.02
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.008)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 3.current
-\backslash
-_educ
-\backslash
-_rank&                  &   0.0955
-\backslash
-sym{***}&                  &    15.71
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 4.current
-\backslash
-_educ
-\backslash
-_rank&                  &    0.170
-\backslash
-sym{***}&                  &    17.34
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &                  &  (0.000)         &                  &  (0.000)
-         
-\backslash
-
-\backslash
- 1.is
-\backslash
-_female&                  &  0.00222         &                  &   -0.131
-         
-\backslash
-
-\backslash
-           &                  &  (0.560)         &                  &  (0.394)
-         
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   -0.178         & -0.00364         &   -36.17
-\backslash
-sym{**} &   -31.56
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.085)         &  (0.982)         &  (0.006)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule sigma     &                  &                  &              
-    &                  
-\backslash
-
-\backslash
- 
-\backslash
-_cons    &   0.0693
-\backslash
-sym{***}&    0.140
-\backslash
-sym{***}&    8.384
-\backslash
-sym{***}&    5.452
-\backslash
-sym{***}
-\backslash
-
-\backslash
-           &  (0.000)         &  (0.000)         &  (0.000)         &  (0.000)
-         
-\backslash
-
-\backslash
- 
-\backslash
-midrule 
-\backslash
-(N
-\backslash
-)     &     3346         &     5418         &     3346         &     5418
-         
-\backslash
-
-\backslash
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tabular}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{table}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
 
 \end_layout
 
