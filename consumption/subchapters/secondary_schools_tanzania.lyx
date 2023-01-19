@@ -1518,7 +1518,8 @@ w_{educ}=\rho+\alpha_{educ}\cdot r+\beta_{educ}\cdot log(x_{i})+\gamma_{educ}\cd
 \end_layout
 
 \begin_layout Standard
-Using the budget share from the reported expenditure for a child 
+Since the survey provides the education expenses for every child, we also
+ use the budget share from the reported expenditure for a child 
 \begin_inset Formula $j$
 \end_inset
 
@@ -1526,7 +1527,7 @@ Using the budget share from the reported expenditure for a child
 \begin_inset Formula $i$
 \end_inset
 
- as the dependent variables leads to the following equation
+ as the dependent variable 
 \end_layout
 
 \begin_layout Standard
@@ -2677,7 +2678,24 @@ small{}current
 \backslash
 _educ
 \backslash
-_rannk} & current education rank reported for the child & INDIV
+_rank} & current education rank reported for the child & INDIV
+\backslash
+tabularnewline 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+hline  $
+\backslash
+phi$ & 
+\backslash
+texttt{
+\backslash
+small{}is
+\backslash
+_female} & gender of the child & INDIV
 \backslash
 tabularnewline 
 \end_layout
@@ -3108,7 +3126,7 @@ Tanzania is a country on the east coast of sub-Saharan Africa - spreading
  Nigeria with nearly 78% agricultural land).
  The country's population was 59.7 million in 2020 (source: World Bank) the
  growth rate remains under 3%.
- While there are wide disparities in wealth and a relatively higher gini-coeffic
+ While there are wide disparities in wealth and a relatively higher Gini-coeffic
 ient for household income (40.5 based on a 2017 estimate), the youth unemployment
  at 3.9% is relatively lower compared to other economies in the region.
  About 26.4% of the population is recorded to live below the poverty line
@@ -3947,6 +3965,7 @@ noprefix "false"
 \end_inset
 
 ).
+ These are represented as HH and INDIV columsn respective in the results.
  The controls and explanatory variables used for the estimation are listed
  in Table 
 \begin_inset ERT
@@ -4041,7 +4060,15 @@ educpriv
 \begin_inset Formula $\pi$
 \end_inset
 
-), the number of children ( 
+), the gender of the child (
+\family typewriter
+is_female
+\family default
+ or 
+\begin_inset Formula $\phi$
+\end_inset
+
+) the number of children ( 
 \family typewriter
 numchild
 \family default
@@ -4077,7 +4104,8 @@ is_primaryage
 \end_inset
 
  indicating if they are eligible (due to age) for primary, secondary or
- tertiary education (respectively) , the current education rank 
+ tertiary education (respectively) , the current education rank for every
+ child 
 \family typewriter
 current_educ_rank
 \family default
@@ -4085,7 +4113,20 @@ current_educ_rank
 \begin_inset Formula $\Gamma$
 \end_inset
 
-), the non-durable consumption prices 
+) 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+It is verified that the current-education level of the household member
+ is not-available (NA) only when the reported education expense is zero.
+ This allows us to education rank to zero for all individual entries where
+ current education level is not available.
+\end_layout
+
+\end_inset
+
+ and the non-durable consumption prices 
 \family typewriter
 \size small
 (log_mean_cost_ne
@@ -4097,7 +4138,11 @@ current_educ_rank
 
 ).
  All of the controls remain the same for the main as well as alternative
- formulation.
+ formulation (with 
+\family typewriter
+ln_tot_assets
+\family default
+ as the explanatory variable).
  Recall that the non-durable consumption prices 
 \begin_inset Formula $p_{ne}$
 \end_inset
@@ -4120,7 +4165,8 @@ log_mean_cost_ne
 \size default
  - the logarithm of average consumption excluding the asset-related costs
  in the consumer's vicinity.
- Notice that the factor variables are prefixed with respective values 
+ Notice also that the factor variables are prefixed with respective values
+ 
 \family typewriter
 1.
 
@@ -4137,16 +4183,35 @@ log_mean_cost_ne
 \begin_layout Standard
 Of the control variables and explanatory variables discussed above, some
  are observed at the household level while others are observed at the level
- of the consumer's district - the only exception being
+ of the consumer's district - except for 
 \family typewriter
- current_educ_rank 
+current_educ_rank
 \family default
-and 
+, 
+\family typewriter
+is_female
+\family default
+ and 
 \family typewriter
 w_educ_indiv
 \family default
- which is observed for every individual child.
- The logarithm of total expenditure 
+ which are observed for every child.
+ The levels at which the variables are observed are also indicated in Table
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tab:Control-Variables}
+\end_layout
+
+\end_inset
+
+.
+ As shown in the table, the logarithm of total expenditure 
 \family typewriter
 ln_tot_exp
 \family default
@@ -4272,25 +4337,6 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-
-\series bold
-\bar under
-The current-education level of the household member is used as well.
- When current education rank is NA, then we treat the educexpense to zero.
- We also see that the
-\end_layout
-
-\begin_layout Standard
-The goal of the individual analysis is to see how overall regional effects
- exert their influence on .
- - we do include 
-\bar under
-gender of the member too
-\bar default
-.
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -4314,10 +4360,10 @@ The results from the a tobit estimation for educational expenses (
 
 
 \family default
-) and total expenditures (
+ and 
 \family typewriter
 
-\begin_inset Formula $log(x_{educ})$
+\begin_inset Formula $w_{j,educ}$
 \end_inset
 
 
@@ -4508,15 +4554,7 @@ status open
 \end_layout
 
 \begin_layout Subsubsection*
-Results with 
-\family typewriter
-
-\begin_inset Formula $w_{educ}$
-\end_inset
-
- 
-\family default
-as the dependent variable
+Result with main explanatory variables
 \end_layout
 
 \begin_layout Standard
