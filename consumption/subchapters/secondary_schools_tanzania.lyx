@@ -1386,32 +1386,6 @@ status open
 
 \begin_layout Plain Layout
 
-%m<- ddply(unique(k[,c("region","hhid2010","district","logA")]),.(region,district
-),summarise,logA_mean=mean(logA),n=length(hhid2010))
-\end_layout
-
-\begin_layout Plain Layout
-
-%j<- ddply(unique(k[,c("region","hhid2010","district","logx")]),.(region,district
-),summarise,logx_mean=mean(logx),n=length(hhid2010))
-\end_layout
-
-\begin_layout Plain Layout
-
-%mj<-merge(j,m,by=c("region","district"))
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
 %Corresponding to the consumption problem, the question that can be answered
  is the degree to which movement to urban or rural areas is an inferior
  good or superior good
@@ -1533,7 +1507,7 @@ Since the survey provides the education expenses for every child, we also
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-w_{educ,j}=\rho+\alpha_{jeduc}\cdot r+\beta_{jeduc}\cdot log(x_{i})+\gamma_{jeduc}\cdot log(p_{ne})+\delta_{jeduc}\cdot s+\epsilon_{jne}\label{eq:budgetshr_child_estimation}
+w_{j,educ}=\rho+\alpha_{jeduc}\cdot r+\beta_{jeduc}\cdot log(x_{i})+\gamma_{jeduc}\cdot log(p_{ne})+\delta_{jeduc}\cdot s+\epsilon_{jne}\label{eq:budgetshr_child_estimation}
 \end{gather}
 
 \end_inset
@@ -1791,61 +1765,6 @@ noprefix "false"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% ============================== PLOT ================================%
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%k$mage<- with(k,20*(age>=20 & age<40) + 40*(age>=40 & age<60) + 60*(age>=60
- ))
-\end_layout
-
-\begin_layout Plain Layout
-
-%ma<-ddply(unique(k[,c("region","hhid2010","district","logA","mage","logx","log_
-q_ne","hsize")]),.(region,district,mage),summarise,logA_mean=mean(logA),n=length(
-hhid2010),logx_mean=mean(logx),mean_log_q_ne=mean(log_q_ne), mean_hsize=mean(hsi
-ze))
-\end_layout
-
-\begin_layout Plain Layout
-
-%ddply(ma,.(mage),summarise,logA_mean=mean(logA_mean),logx_mean=mean(logx_mean),l
-og_q_ne_mean=mean(mean_log_q_ne), mean_hsize=mean(mean_hsize))
-\end_layout
-
-\begin_layout Plain Layout
-
-%hunger analysis
-\end_layout
-
-\begin_layout Plain Layout
-
-%mab <- ddply(subset(o2010,household_status==1),.(region,district),summarise,n=le
-ngth(hhid),n_outoffood=sum(outoffood)) %>% mutate(fraction_outoffood=n_outoffood
-/n)
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -2822,37 +2741,6 @@ end{table}
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% tndf<-tn_summary_df(dat = tn$df2014)
-\end_layout
-
-\begin_layout Plain Layout
-
-% ngrdf<-ngr_summary_df(dat = ng$df2015)
-\end_layout
-
-\begin_layout Plain Layout
-
-% a <- merge(tndf,ngrdf,all=T)
-\end_layout
-
-\begin_layout Plain Layout
-
-% write.table(paste(a$varname , "&",round(a$tnz_mean,2)  ,"&",round(a$tnz_median,
-2) ,"&",round(a$tnz_stdev,2) ,"&",round(a$ngr_mean,2) ,"&",round(a$ngr_median,2)
- ,"&",round(a$ngr_stdev,2)),'c:/temp/t.txt')
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 \begin_inset CommandInset label
 LatexCommand label
@@ -2871,92 +2759,6 @@ name "subsec:DescriptiveStatistics"
 \end_inset
 
 Descriptive Statistics
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%o2014ed <- o2014[,c("hhid","personid","schoolowner","age","education_rank")]
-\end_layout
-
-\begin_layout Plain Layout
-
-%o2014ed$education_rank[is.na(o2014ed$education_rank)] <-0
-\end_layout
-
-\begin_layout Plain Layout
-
-%hist(o2014ed$education_rank,main='',xlab="Education Rank",ylab='Number
- of Households')
-\end_layout
-
-\begin_layout Plain Layout
-
-%rpop <- ddply(o2014ed,.(education_rank),summarise,n=length(hhid)/20946*100)
-\end_layout
-
-\begin_layout Plain Layout
-
-%barplot(rpop$n,names.arg=c(0,1,2,3,4),las=1,xlab='Education Rank',ylab='Individu
-als %')
-\end_layout
-
-\begin_layout Plain Layout
-
-%k<- subset(ddply(subset(o2012ed,age<18 & !is.na(schoolowner)) %>% mutate(schoolt
-ype = sapply(schoolowner, school_type)),.(schooltype),summarise,n=length(hhid)),!
-is.na(schooltype))
-\end_layout
-
-\begin_layout Plain Layout
-
-%barplot(k$n,names.arg=k$schooltype,las=1,xlab='school type',ylab='num households
-')
-\end_layout
-
-\begin_layout Plain Layout
-
-%o2012ed <- o2012[,c("hhid","personid","schoolowner","age","")]
-\end_layout
-
-\begin_layout Plain Layout
-
-%mm <- tn$df2012 %>% mutate( logAq = sapply(tn$df2012$logA,function(x) {
- as.numeric(j[j>=x][1])}))
-\end_layout
-
-\begin_layout Plain Layout
-
-% ========= DECILE PLOT ============
-\end_layout
-
-\begin_layout Plain Layout
-
-%j <- quantile(tn$df2012$logA,seq(10)/10)
-\end_layout
-
-\begin_layout Plain Layout
-
-%m <- mm[,c("logA","logAq","hhid2012","toteducexpense")]
-\end_layout
-
-\begin_layout Plain Layout
-
-%mb <- ddply(m,.(logAq),summarise,toteducexpense=mean(toteducexpense))
-\end_layout
-
-\begin_layout Plain Layout
-
-%barplot(mb$toteducexpense*1e-6,names.arg=seq(10)/10,las=1,xlab='asset worth
- decile',ylab='mean educ expense (m)')
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -4582,7 +4384,7 @@ status open
 \end_layout
 
 \begin_layout Subsubsection*
-Result with main explanatory variables
+Explanatory variables
 \end_layout
 
 \begin_layout Standard
@@ -4639,14 +4441,82 @@ ln_tot_exp)
  ) for Tanzania.
  This is largely due to educational expenses forming a higher proportion
  of the total expenditure for poorer households.
- The effect of non-durable consumption prices (
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[r - w_educ]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since richer areas should generally have more secondary schools (even though
+ the observed correlation between secondary_schools and is nearly 0.2), we
+ interpret the effect of secondary-schools together with that of asset density.
+ As such the wealth concentration measure ( 
 \family typewriter
-log_mean_cost_ne
+assetdensity
 \family default
- ) is weak on education-budget share 
+ ) has a strong and positive influence on educational budget shares 
 \family typewriter
 
 \begin_inset Formula $w_{educ}$
+\end_inset
+
+
+\family default
+ (see coefficients of 
+\family typewriter
+assetdensity
+\family default
+ in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_r}
+\end_layout
+
+\end_inset
+
+ ).
+ This primarily indicates regional disparities - which could also be implied
+ by the second-schools variable ( 
+\family typewriter
+secondary_schools
+\family default
+ ) or the non-durable consumption prices (
+\family typewriter
+log_mean_cost_ne
+\family default
+ ).
+ While the non-durable consumption prices (
+\family typewriter
+log_mean_cost_ne
+\family default
+ ) have a weak effect on education-budget share 
+\family typewriter
+
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+
+\family default
+ and 
+\family typewriter
+
+\begin_inset Formula $w_{j,educ}$
 \end_inset
 
 
@@ -4672,161 +4542,22 @@ ref{tabTNZ_r}
 
 \end_inset
 
-) .
- Since urbanisation raise the prices of non-durable expenditure 
-\family typewriter
-log_mean_cost_ne
-\family default
- as well as 
-\family typewriter
-assetdensity
-\family default
-, we expect budget shares to be higher either with higher 
-\family typewriter
-log_mean_cost_ne
-\family default
- or 
-\family typewriter
-assetdensity
-\family default
- (or both).
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%[r - w_educ]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-A strong and positive effect of wealth concentration ( 
-\family typewriter
-assetdensity
-\family default
- ) towards educational budget shares (
-\family typewriter
-
-\begin_inset Formula $w_{educ}$
-\end_inset
-
-
-\family default
-) seems evident in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_r}
-\end_layout
-
-\end_inset
-
- (see coefficients of 
-\family typewriter
-assetdensity
-\family default
- in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_r}
-\end_layout
-
-\end_inset
-
- ).
- Indicating regional disparities in urbanisation level, the differences
- in density of assets imply a strong positive effect on education expenses
- - despite controlling for the effect of availability of secondary-school
- education.
- Since richer areas should generally have more secondary schools (even though
- the observed correlation between secondary_schools and is nearly .2), it
- makes sense to interpret the effect of secondary-schools together with
- asset density.
- 
-\end_layout
-
-\begin_layout Standard
-While absence of educational facilities must clearly suppress education
- expenses in a region, the positive effect of assets-density after controlling
- for availability of education facilities also suggests relevance of certain
- environmental factors that contribute to education - such as a competition
- towards higher income social positions or presence of occupations requiring
- higher levels of education - factors with an important role after the availabil
-ity of educational facilities has been considered.
-\end_layout
-
-\begin_layout Standard
-The effects of household total expenditure are - however - relevant for
- private education - which is limited to the wealthier households in both
- the economies regardless of wealth-concentration ( 
-\family typewriter
-assetdensity
-\family default
- ).
- However, since private education only accounts for a minority of the population
- in both the economies (see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:BarChartSchoolTypes"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-), the role of access to either or private or government secondary school
- i.e.
- we focus on the variable 
+), the effect of the second-schools variable ( 
 \family typewriter
 secondary_schools
 \family default
- for our comparison of education expenses in the two countries.
-\end_layout
-
-\begin_layout Standard
-Viewing the effect of the variable 
+ ) seems strong and negative .
+ This suggests that having more secondary schools in a region decreases
+ the budget share for both individuals and households much the way total
+ expenditure ( 
 \family typewriter
-secondary_schools
+ln_tot_exp)
 \family default
- on education budget shares 
-\family typewriter
-
-\begin_inset Formula $w_{educ}$
-\end_inset
-
-
-\family default
-, we see a strong effect of 
-\family typewriter
-secondary_schools
-\family default
- for Tanzania (compare the coefficients for secondary-school 
-\begin_inset Formula $s$
-\end_inset
-
- i.e.
- 
+ does (see coefficients for secondary-school 
 \family typewriter
 secondary_schools 
 \family default
-in Tables 
+under INDIV and HH in Table 
 \begin_inset ERT
 status open
 
@@ -4839,36 +4570,23 @@ ref{tabTNZ_r}
 
 \end_inset
 
-) .
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%[Regional differences]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-\bar under
-The regional differences
-\series default
-\bar default
- can also be picked up by log_mean_cost_ne as well.
- Both assetsdensity and secondary_schools pick up the same effect.
+), but the overall effect of asset-richness is positive on budget shares.
+ In other words, richer neighborhoods have a higher budget-share for education
+ even after accounting for physical access to education (availability of
+ secondary education measured with 
+\family typewriter
+secondary_schools
+\family default
+).
+ This could be due to various environmental factors associated with richer
+ areas - such as a competition towards higher income social positions or
+ presence of occupations requiring higher levels of education - factors
+ with an important role after the availability of educational facilities
+ has been considered.
 \end_layout
 
 \begin_layout Subsubsection*
-Other controls
+Control Variables
 \end_layout
 
 \begin_layout Standard
@@ -4888,16 +4606,63 @@ noindent
 \end_layout
 
 \begin_layout Standard
+Even though private education only accounts for education expenses of a
+ small minority of the population (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BarChartSchoolTypes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), the strong and positive effect of being privately educated on education
+ budget-shares for households as well as individuals - seems worth highlighting.
+\end_layout
+
+\begin_layout Standard
 The role of the number of children (
 \family typewriter
 numchild
 \family default
 ) also seems strong in Tanzania.
- The agrarian households appear as spending higher on education after considerin
-g the wealth-concentration among households with the same educational-status
- (see coefficients of agrarian-occupation-indicator 
+ The switching of signs between household (column HH in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_r}
+\end_layout
+
+\end_inset
+
+) and individuals (column INDIV in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_r}
+\end_layout
+
+\end_inset
+
+) suggest that household expenditure on education rises but the average
+ expenditure on child declines when there are more children added to the
+ household.
+\end_layout
+
+\begin_layout Standard
+The role of parental education levels - particularly that of education rank
+ 4 - seems strong in the results (see coefficient of 
 \family typewriter
-1.is_agri
+father_educ_rank
 \family default
  in Table 
 \begin_inset ERT
@@ -4912,19 +4677,104 @@ ref{tabTNZ_r}
 
 \end_inset
 
- under column for the education-expenditure-logarithm 
-\family typewriter
-
-\begin_inset Formula $log(x_{educ})$
+).
+ Those beyond level the education level 
+\begin_inset Formula $F4$
 \end_inset
 
-
-\family default
- dependent variable).
+ in Tanzania thus have a higher propensity to be spending on education -
+ despite accounting for regional factors.
+ 
 \end_layout
 
 \begin_layout Standard
-The significance of logarithm of assets-worth ( 
+
+\series bold
+// age and current_educ_rank
+\end_layout
+
+\begin_layout Standard
+It also appears that among among households with the same educational-status
+ that reside in areas of similar wealth-concentration, the education budget-shar
+es for children in agrarian households is slightly lower (see coefficients
+ of agrarian-occupation-indicator 
+\family typewriter
+1.is_agri
+\family default
+ under INDIV in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_r}
+\end_layout
+
+\end_inset
+
+).
+ This effect is however not strong at the household level.
+ We note also that the effect of female indicator variable (
+\family typewriter
+1.is_female
+\family default
+) is not strong for households or individuals.
+ However, there is some evidence that poor households may spend less on
+ education for female children (see the later discussion under robustness
+ measures).
+\end_layout
+
+\begin_layout Standard
+Much of the above observations are verified with the alternative formulation
+ using the logarithm of assets-worth ( 
+\family typewriter
+ln_tot_assets 
+\family default
+) as the main explanatory variable.
+ For example, the effects of agrarian-occupation-indicator 
+\family typewriter
+1.is_agri
+\family default
+ seem on individual children of some significance in this formulation as
+ well (see coefficient of agrarian-occupation-indicator 
+\family typewriter
+1.is_agri
+\family default
+ under column INDIV and column-group 
+\begin_inset Quotes eld
+\end_inset
+
+urban-rural
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_r}
+\end_layout
+
+\end_inset
+
+).
+ The role of paternal education levels, number of children and private education
+ is observed to be similar in the results under the column-group 
+\begin_inset Quotes eld
+\end_inset
+
+urban-rural
+\begin_inset Quotes erd
+\end_inset
+
+ as well.
+ The effect of logarithm of assets-worth ( 
 \family typewriter
 ln_tot_assets 
 \family default
@@ -4936,40 +4786,30 @@ status open
 
 
 \backslash
-ref{tabTNZ_urbanrural}
+ref{tabTNZ_r}
 \end_layout
 
 \end_inset
 
-) indicates a general trend where those with higher inter-generational wealth
- and in urban areas (see significance of 
-\family typewriter
-ln_tot_assets 
-\family default
-and 
-\family typewriter
-rural_wards
-\family default
- in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_urbanrural}
-\end_layout
-
+ under column-group 
+\begin_inset Quotes eld
 \end_inset
 
- for as dependent variable) are far more likely to avail the education facilitie
-s.
- There seems a strong role of father's education level as well.
+urban-rural
+\begin_inset Quotes erd
+\end_inset
+
+ ) is also similar to that of total expenditure 
+\family typewriter
+ln_tot_exp
+\family default
+.
+ The rural consumers seem have much lower budget shares on education as
+ well.
 \end_layout
 
 \begin_layout Standard
-Finally, the role of social environment is found significant.
+Finally, the role of social environment is significant.
  The role of English language seems significant in Tanzania - where the
  English-speakers spend significantly higher on education (see coefficients
  of 
@@ -6218,7 +6058,6 @@ has_english
 secondary_schools
 \family default
  is also the same for both richer and poorer halves of a given locality.
- 
 \end_layout
 
 \begin_layout Standard
