@@ -4684,7 +4684,20 @@ ref{tabTNZ_r}
 
  in Tanzania thus have a higher propensity to be spending on education -
  despite accounting for regional factors.
- 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%The issue of withdrawing from school not relevant.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4714,10 +4727,7 @@ ref{tabTNZ_r}
 ) .
  The results for the household show that households that have children of
  an age suitable for secondary school do have higher budget share on education
- over all
-\series bold
-.
- WHY IS THE ISSUE OF WITHDRAWING FROM SCHOOL NOT RELEVANT?
+ over all.
 \end_layout
 
 \begin_layout Standard
@@ -5969,9 +5979,10 @@ noindent
 \end_layout
 
 \begin_layout Standard
-To confirm that the assets-ownership does influence the access to education,
- we inspect the role of assets in lower and higher sub-samples of the surveyed
- population.
+To confirm that wealth affects does affect access to education despite the
+ regional disparities and investigate factors that influence poorer populations
+ more than richer populations within a locality, we inspect the role of
+ assets in lower and higher sub-samples of the surveyed population.
  We thus re-estimate the results with wealth concentration 
 \family typewriter
 assetdensity
@@ -5983,25 +5994,9 @@ assetdensity
 ln_tot_assets
 \family default
  and for those above it.
- The results demonstrate how the education expenditures (coefficients for
- education budget-shares 
-\family typewriter
-
-\begin_inset Formula $w_{educ}$
-\end_inset
-
- 
-\family default
-and education-expenditure logarithm 
-\family typewriter
-
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
-
-\family default
-) differ between the poorer and richer households in a given locality.
- The results for above and below local median-assets possession using education
+ The results show that social and regional factors do influence both richer
+ and poorer halves of the populations whereas private or tertiary-level
+ education and favour the richer sub-populations (see coefficients for education
  budget-shares 
 \family typewriter
 
@@ -6010,15 +6005,7 @@ and education-expenditure logarithm
 
  
 \family default
-and education-expenditure-logarithm 
-\family typewriter
-
-\begin_inset Formula $log(x_{educ})$
-\end_inset
-
- 
-\family default
-as the dependent variables are shown in Table 
+in 
 \begin_inset ERT
 status open
 
@@ -6031,79 +6018,234 @@ ref{tabTNZ_abovebelow_median}
 
 \end_inset
 
- for both above and below median assets-possession levels in the two countries.
- 
+).
 \end_layout
 
 \begin_layout Standard
+The results for above and below local median-assets possession using education
+ budget-shares 
+\family typewriter
+
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ 
+\family default
+(HH) and 
+\family typewriter
+
+\begin_inset Formula $w_{j,educ}$
+\end_inset
+
+ 
+\family default
+(INDIV) as dependent variables are shown in Table 
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-%[Results from first robustness check ] social factors and secondary_schools
- .
- educpriv expected.
- tertiary_school level lower.
- num_child more nuanced - as is r.
- highesteduc also different.
+
+\backslash
+ref{tabTNZ_abovebelow_median}
 \end_layout
 
 \end_inset
 
-
+ for both above and below median assets-possession levels.
+ 
 \end_layout
 
 \begin_layout Standard
-The wealth-concentration 
+We can see that the effects of both wealth-concentration 
 \family typewriter
 assetdensity
 \family default
- plays towards access to education appears similar for the rich and poor
- halves in a locality.
- The access to private education and to higher education favour the richer
- households - as the economic significance of private-education factor variable
- 
+ and total expenditure 
+\family typewriter
+ln_tot_exp
+\family default
+ on education budget shares for rich and poor halves in a locality are largely
+ similar (see coefficients of 
+\family typewriter
+assetdensity
+\family default
+ and 
+\family typewriter
+ln_tot_exp
+\family default
+ under HH and INDIV in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_abovebelow_median}
+\end_layout
+
+\end_inset
+
+ for both above and below median assets-possession levels).
+ The access to private education and higher parental education level seem
+ to matter only to the richer households (the economic significance of private-e
+ducation factor variable 
 \family typewriter
 educpriv 
 \family default
-is consistently higher for richer households as is the expenditure 
-\series bold
-on tertiary level education 
-\series default
-(considering the budget shares).
- The significance of social factors - on the other hand - remains unaffected
- by whether the consumers have above or below the median asset ownership
- level.
+is consistently higher for richer households under both HH and INDIV in
+ Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_abovebelow_median}
+\end_layout
+
+\end_inset
+
+ ).
+ Similarly, the effect of agricultural-occupation of the household head
+ seems is stronger in the poorer half of the population (compare coefficients
+ of 
+\family typewriter
+1.agri 
+\family default
+between those with above and below median assets-possession levels under
+ HH and INDIV in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_abovebelow_median}
+\end_layout
+
+\end_inset
+
+ ) .
+ The stronger effect of number of children 
+\family typewriter
+numchild 
+\family default
+for poorer households (see coefficients of 
+\family typewriter
+numchild
+\family default
+ below median assets-possession levels under HH and INDIV in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_abovebelow_median}
+\end_layout
+
+\end_inset
+
+) suggests higher sensitivity of budget-shares to 
+\family typewriter
+numchild
+\family default
+ for lower incomes.
+ The local prices 
+\family typewriter
+log_mean_cost_ne
+\family default
+ has a similar effect on education budget shares for poorer households (see
+ coefficients of 
+\family typewriter
+log_mean_cost_ne
+\family default
+ for below median assets-possession under HH and INDIV in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_abovebelow_median}
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+The significance of other social factors remains unaffected by whether the
+ consumers have above or below the median asset ownership level.
  More specifically, the factor variable for English-speaking ability 
 \family typewriter
 has_english
 \family default
  is significant for both richer and poorer households.
- Similarly, the effect of secondary-schools 
+ Similarly, the effects of secondary-schools 
 \family typewriter
 secondary_schools
 \family default
- is also the same for both richer and poorer halves of a given locality.
-\end_layout
-
-\begin_layout Standard
+ or ages (see coefficients of 
+\family typewriter
+secondary_schools
+\family default
+, 
+\family typewriter
+1.is_primaryage
+\family default
+, 
+\family typewriter
+1.is_secondaryage
+\family default
+ and 
+\family typewriter
+1.is_tertiaryage
+\family default
+ under HH and INDIV in Table 
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-% It is worth pointing out that the economic significance for religion (
- religion ) in Nigeria is higher with log(x_{educ}) as dependent variable
- in Table 
+
 \backslash
-ref{tabTNZ_abovebelow_median}.
- 
+ref{tabTNZ_abovebelow_median}
 \end_layout
 
 \end_inset
 
+ for both above and below median assets-possession levels) are also the
+ same for both richer and poorer halves of a given locality.
+ We see again that the female-child variable 
+\family typewriter
+1.is_female 
+\family default
+is not significant for education budget shares (see coefficient of 
+\family typewriter
+1.is_female 
+\family default
+under HH and INDIV in Table 
+\begin_inset ERT
+status open
 
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_abovebelow_median}
+\end_layout
+
+\end_inset
+
+ for both above and below median assets-possession levels).
 \end_layout
 
 \begin_layout Standard
