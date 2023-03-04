@@ -36,12 +36,12 @@ theorems-ams-extended-chap-bytype
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "tgschola" "Spectral"
+\font_roman "palatino" "Spectral"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts true
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -158,14 +158,14 @@ centering{Wealth Effects on Education against urbanisation differences in
 
 \begin_layout Abstract
 The economies in sub-Saharan Africa often exhibit significant wealth effects
- that limit education expenditure and wider access to education in the region.
+ which limit education expenditure in the region.
  Examining the severity of wealth effects across differing levels of urbanisatio
 n in Tanzania, we find that availability of secondary education and parental
- educational levels continue to be of significance apart from household
- wealth - particularly in semi-urban areas.
+ educational levels continue to be significant apart from household wealth
+ - particularly in semi-urban areas.
  Comparing with other countries in sub-Saharan Africa with higher levels
- of urbanisation, we suggest that the role of wealth effects may however
- weaken with the rise in urbanisation.
+ of urbanisation, we suggest that wealth effects may weaken with urbanisation
+ in the region.
 \end_layout
 
 \begin_layout Standard
@@ -372,7 +372,7 @@ finer
 
  spatial variation of wealth in the SSA.
  Observed at the district-level and based only on the market value of assets
- held by households, the measure addresses concerns with spatial inferences
+ held by households, this measure addresses concerns with spatial inferences
  using broad or implicit urban-classifications that have been recently highlight
 ed in the literature (
 \begin_inset CommandInset citation
@@ -420,8 +420,8 @@ As such, the urbanisation levels influence participation in education through
  Apart from the physical access to education i.e.
  the higher availability of education opportunities in urban areas (which
  we consider a separate control), the two fundamental mechanisms for urbanisatio
-n that are of relevance are the relative abundance of opportunities for
- higher income employment and the social environment in the urban areas.
+n that are relevant to the study are the relative abundance of opportunities
+ for higher income employment and the social environment in the urban areas.
  The better opportunities of employment and wealth overall make education
  more affordable so that the households in rural areas - where incomes are
  invariably lower and education somewhat of a luxury- end up underinvesting
@@ -545,35 +545,8 @@ literal "false"
 \end_inset
 
 ).
- The early attempts to explain the role of such social factors have advanced
- a notion of social capital (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "BourdieuCulturalRepr2018"
-literal "false"
-
-\end_inset
-
-) - whereas empirical studies more often focus on the specific role social
- networks (instead of testing the impact of 
-\begin_inset Quotes eld
-\end_inset
-
-higher-culture
-\begin_inset Quotes erd
-\end_inset
-
- - see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Manski2000"
-literal "false"
-
-\end_inset
-
-).
- In the particular context of Tanzania, we find two factors to be of particular
- significance.
+ In the context of Tanzania, we find two factors to be of particular significanc
+e.
  First is the parental educational level which indicates the acquisition
  of skills (from transferred from parents) that are valued in employment
  markets (
@@ -1027,9 +1000,8 @@ literal "false"
  then the policy may need to focus on building more accessible schools.
  On the other hand, if wealth-effects are more significant, then there is
  a need to make education more affordable for the lower-income households.
- The choice between the two is hardly one that is mutual exclusive - but
- merely indicates the relative significance of the options which the policy
- faces.
+ The choice between the two is hardly mutual exclusive - but indicates merely
+ the relative significance of the options which the policy faces.
 \end_layout
 
 \begin_layout Standard
@@ -1306,7 +1278,7 @@ noindent
 
 \begin_layout Standard
 The goal of our empirical analysis is to compare wealth effects with that
- of physical access and parental education levels in Tanzania.
+ of physical access in Tanzania.
  The regional differences are represented primarily with a wealth-concentration
  measure of urbanisation levels.
  In the main formulation, the logarithm of total expenditure is used as
@@ -1729,7 +1701,7 @@ status open
 \begin_layout Standard
 While the appearance of educational expenses both in the dependent variable
  and in the logarithm of the total expenditure 
-\begin_inset Formula $log(x)$
+\begin_inset Formula $log(x_{i})$
 \end_inset
 
  (used as the explanatory variable) may cause some endogeneity, it does
@@ -1738,7 +1710,7 @@ While the appearance of educational expenses both in the dependent variable
 \end_inset
 
  and 
-\begin_inset Formula $log(x)$
+\begin_inset Formula $log(x_{i})$
 \end_inset
 
  in the model.
@@ -1801,10 +1773,8 @@ The educational expenses and the non-asset related expenditures are obtained
  The survey is unique in its aims to improve the understanding of links
  between asset ownership, community access (to market, schools), food prices
  and agriculture activities.
- The data in the surveys from multiple countries is largely uniform in its
- data-model (fields) and is often geo-referenced with a sufficiently wide-covera
-ge in the country to allow a study of spatial variation in the observed
- variables.
+ The data in the surveys is often geo-referenced with a sufficiently wide-span
+ to allow for a study of spatial variation in the observed variables.
  The years used for the cross-section analyses are the most recent years
  in the survey for Tanzania (2014) - i.e.
  the last wave available in the survey.
@@ -2113,13 +2083,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace 1cm
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \align center
 \begin_inset Float table
 placement h
@@ -2368,7 +2331,7 @@ hline
 
 \begin_layout Plain Layout
 
-$log(x_{t})$ & 
+$log(x)$ & 
 \backslash
 texttt{
 \backslash
@@ -2385,7 +2348,7 @@ tabularnewline
 
 
 \backslash
-hline  $log(A_{t})$ & 
+hline  $log(A)$ & 
 \backslash
 texttt{
 \backslash
@@ -3831,10 +3794,18 @@ status open
 \begin_layout Standard
 The two main explanatory variables used in the study are the the logarithm
  of total expenditure 
+\begin_inset Formula $log(x)$
+\end_inset
+
+ 
 \family typewriter
 ln_tot_exp
 \family default
  and the urbanisation levels (measured as wealth-concentration 
+\begin_inset Formula $r$
+\end_inset
+
+ 
 \family typewriter
 assetdensity
 \family default
@@ -3842,18 +3813,30 @@ assetdensity
  As discussed before, an alternative formulation is also specified for compariso
 n - where the two explanatory variables are the logarithm of total assets
  value (
+\begin_inset Formula $log(A)$
+\end_inset
+
+
 \family typewriter
-ln_tot_assets
+ ln_tot_assets
 \family default
 ) and the urban/rural indicators (
 \family typewriter
-rural_wards
+
+\begin_inset Formula $\gamma$
+\end_inset
+
+ rural_wards
 \family default
 ).
  The physical access to education (i.e.
  
 \family typewriter
-secondary_schools
+
+\begin_inset Formula $s$
+\end_inset
+
+ secondary_schools
 \family default
 ) is an important control in both the formulations.
  Other controls used in the comparison are the indicator for an agrarian
@@ -4495,7 +4478,7 @@ ref{tabTNZ_r}
 \family typewriter
 assetdensity
 \family default
- could also be implied by the second-schools variable ( 
+ could also be implied by the secondary-schools variable ( 
 \family typewriter
 secondary_schools
 \family default
@@ -4610,8 +4593,8 @@ ref{tabTNZ_r}
 \family typewriter
 secondary_schools
 \family default
-) - an effect that suggests relevance of various environmental factors associate
-d with richer areas - such as a competition towards higher income social
+) - an effect that incorporates various environmental factors associated
+ with richer areas - such as a competition towards higher income social
  positions or presence of occupations requiring higher levels of education.
 \end_layout
 
@@ -4716,8 +4699,8 @@ ref{tabTNZ_r}
 \begin_inset Formula $F4$
 \end_inset
 
- in Tanzania thus have a higher propensity to be spending on education -
- despite accounting for regional factors.
+ in Tanzania thus have a higher propensity to be spending more on education
+ - despite accounting for regional factors.
 \end_layout
 
 \begin_layout Standard
@@ -7304,10 +7287,8 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\bar under
 On other hand, we also find quite high education budget-shares for agrarian
- households in Tanzania - thus confirming a finding also made by other empirical
+ households in Tanzania - confirming similar findings from other empirical
  investigations in the region (
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -7317,10 +7298,10 @@ literal "false"
 \end_inset
 
 ).
- Since the resulting higher future educational levels offer an optimism
- towards future income equity, there are reasons to argue that wealth effects
- would weaken with rise in urbanisation - as is often suggested by conventional
- pathways to urban development in the literature (
+ Given the optimism towards future income equity offered by the resulting
+ higher educational levels, there are reasons to argue that wealth effects
+ would weaken with rise in urbanisation (often suggested by conventional
+ pathways to urban development in the literature - 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "KuznetsEconomicGrowthIneq2019"
