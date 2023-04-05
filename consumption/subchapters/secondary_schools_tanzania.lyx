@@ -1493,6 +1493,39 @@ w_{j,educ}=\mu+\kappa_{\rho}\rho+\alpha_{jeduc}\cdot r+\beta_{jeduc}\cdot log(x_
 \end_layout
 
 \begin_layout Standard
+The two dependent variables - the per-household education budget-share (
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+) and the per-child budget share (
+\begin_inset Formula $w_{j,educ}$
+\end_inset
+
+) - are listed in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Dependent-Variables"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and correspond to household-level and per-child-level estimations - who
+ results are presented in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:AnalysisAndResults"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 The main explanatory variables in the above equations used are the logarithm
  of the total annual expenditure 
 \begin_inset Formula $log(x_{i})$
@@ -1903,8 +1936,10 @@ status open
 \end_layout
 
 \begin_layout Standard
-The geo-coding of districts is used for the averaging of assets at the consumer'
-s district.
+The regional-wealth measure by averaging the ownership of assets over district-l
+evels.
+ The calculation of the measure uses the geo-coding of districts in the
+ survey.
  Partly to avoid the absence of rural-urban fields corresponding to the
  wards in year 2014, we do not use the rural field for analysis at the wider-dis
 trict level aggregation and use a variable indicating how rural the consumer's
@@ -1963,18 +1998,37 @@ status open
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%Since the typical household unit in Tanzania may not be a nuclear family,
+ the paternal educational level - which is another important control in
+ the study - cannot simply be the education level of the household head(HH).
+ This is because unlike for nuclear families, the individuals on whom the
+ household's reported  education expenses are spent, could be the grandchildren
+ (rather than children) of the joint-family household-head.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The next important control is the occupation of the households which is
  directly available for every individual in the survey.
  Whether an occupational sector is agriculture-related or not determined
  is based on the main occupation of household head (HH).
  The number of children in the household, the ages of the children (and
  other members) are directly observed in the data.
- Since the typical household unit in Tanzania and Nigeria may not be a nuclear
- family, the paternal educational level - which is another important control
- in the study - cannot simply be the education level of the household head(HH).
- This is because unlike for nuclear families, the individuals on whom the
- household's reported  education expenses are spent, could be the grandchildren
- (rather than children) of the joint-family household-head.
+ The education levels in the survey are grouped into four education categories
+ - setting the education rank to 1 for all pre-primary levels, to rank 2
+ for until the completion of primary education, to rank 3 for up to the
+ secondary education level and to 4 for all higher education levels (higher-seco
+ndary, university etc.).
  To avoid letting the household's paternal education level point to the
  generation before the parents of children for certain joint-family households
  - where the HH has his/her grandchildren attending school - while letting
@@ -1998,7 +2052,11 @@ Notice that only relations with the household head are reported in the survey.
 \end_inset
 
 .
- 
+ Instead of using the education rank of the household-head, we use 
+\family typewriter
+father_educ_rank
+\family default
+ as the control in the study.
 \end_layout
 
 \begin_layout Standard
@@ -2007,41 +2065,20 @@ status open
 
 \begin_layout Plain Layout
 
-%[Education]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-To assist viewing coarser effects of educational levels across Tanzania,
- we group the available education levels into four education categories
- - setting the education rank to 1 for all pre-primary levels, to rank 2
- for until the completion of primary education, to rank 3 for up to the
- secondary education level and to 4 for all higher education levels (higher-seco
-ndary, university etc.).
- These mappings are provided in Tables 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
+%These mappings are provided in Tables 
 \backslash
-ref{education_rank_tnz}
-\end_layout
-
-\end_inset
-
- (see Appendix).
+ref{education_rank_tnz} (see Appendix).
  For instance, the primary school leaving exam is taken at D7 in Tanzania
  and corresponds to the education rank 2 ; all standards above D7 and before
  O course (Diploma) correspond to the education rank 3 and all education
  levels at or above O course correspond to education rank 4.
  As access to private education may be significant in the urban-areas, we
  also use a control for private-education that is available in the survey.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2063,8 +2100,19 @@ The languages spoken (
 \family typewriter
 has_english
 \family default
- in Tanzania) used as controls are recorded at the individual's level in
+ ) - are viewed as a social factor towards education in Tanzania.
+ The record of languages spoken in available at the individual's level in
  the survey.
+ The variable 
+\family typewriter
+has_english
+\family default
+ relies on the language spoken in the paternal generation (i.e.
+ the language by the individual whose 
+\family typewriter
+father_educ_rank
+\family default
+ is considered).
  To control for the price of consumption in the household's district, we
  also use the non-durable consumption averages 
 \family typewriter
@@ -3603,32 +3651,6 @@ ref{occupation_rank_tn}
 
 .
  A higher occupation rank represents occupations that bring higher income.
- As described in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Data"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the education levels are also mapped to education ranks denoting primary,
- secondary and higher education (see Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{education_rank_tnz}
-\end_layout
-
-\end_inset
-
- in the Appendix).
- A higher education rank corresponds to a higher education level.
 \end_layout
 
 \begin_layout Standard
@@ -3768,7 +3790,9 @@ noprefix "false"
 
 ).
  These are represented as HH and INDIV columns respectively in the results.
- The controls and explanatory variables used for the estimation are listed
+ Thus, the models are estimated at the household level and at at per-child
+ level in the results.
+ The controls and explanatory variables used for the estimations are listed
  in Table 
 \begin_inset ERT
 status open
@@ -3783,6 +3807,7 @@ ref{tab:Control-Variables}
 \end_inset
 
 .
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3817,25 +3842,6 @@ ln_tot_exp
  (
 \family typewriter
 regionalwealth 
-\family default
-).
- As discussed before, an alternative formulation is also specified for compariso
-n - where the two explanatory variables are the logarithm of total assets
- value (
-\begin_inset Formula $log(A)$
-\end_inset
-
-
-\family typewriter
- ln_tot_assets
-\family default
-) and the urban/rural indicators (
-\family typewriter
-
-\begin_inset Formula $\gamma$
-\end_inset
-
- rural_wards
 \family default
 ).
  The physical access to education (i.e.
@@ -4033,82 +4039,45 @@ ref{tab:Control-Variables}
 \end_inset
 
 .
- As shown in the table, the logarithm of total expenditure 
-\family typewriter
-ln_tot_exp
-\family default
- and of the total assets-owned 
-\family typewriter
-ln_tot_assets
-\family default
- are observed at the level of the household.
- Similarly, the agricultural-occupation factor variable 
-\family typewriter
-agri
-\family default
- (indicating whether the household head is employed in agriculture related
- occupation or not), the number of children in the household 
-\family typewriter
-numchild
-\family default
-, the childrens' ages factor variables 
-\family typewriter
-is_primaryage
-\family default
- ,
-\family typewriter
- is_secondaryage
-\family default
- and 
-\family typewriter
-is_tertiaryage
-\family default
- ), the private education factor variable 
-\family typewriter
-educpriv
-\family default
-, the highest education rank 
-\family typewriter
-father_educ_rank
-\family default
- corresponding to the paternal generations (father-relationship) in a household
- and the ability to speak English 
-\family typewriter
-has_english
-\family default
- are all observed for a household.
- The variables observed at the district (or 6-
-\begin_inset Formula $km$
-\end_inset
-
- vicinity) are the number of wards with an accessible (within 6-km distance)
- secondary-schools (
-\family typewriter
-secondary_schools
-\family default
-), the rural wards (
-\family typewriter
-\size small
-rural_wards
-\family default
-\size default
-) in a district, the respective measures of the regional-wealth 
-\family typewriter
-\size small
-regionalwealth 
-\family default
-\size default
- and the logarithm of the per-head cost non-durable consumption 
-\family typewriter
-\size small
-log_mean_cost_ne
-\family default
-\size default
- .
+ 
 \end_layout
 
 \begin_layout Standard
-To reiterate, a significant number of household units in both the economies
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% As shown in the table, the logarithm of total expenditure ln_tot_exp and
+ of the total assets-owned ln_tot_assets are observed at the level of the
+ household.
+ Similarly, the agricultural-occupation factor variable agri (indicating
+ whether the household head is employed in agriculture related occupation
+ or not), the number of children in the household numchild, the childrens'
+ ages factor variables is_primaryage , is_secondaryage and is_tertiaryage
+ ), the private education factor variable educpriv, the highest education
+ rank father_educ_rank corresponding to the paternal generations (father-relatio
+nship) in a household and the ability to speak English has_english are all
+ observed for a household.
+ The variables observed at the district (or 6-km vicinity) are the number
+ of wards with an accessible (within 6-km distance) secondary-schools (secondary
+_schools), the rural wards (rural_wards) in a district, the respective measures
+ of the regional-wealth regionalwealth  and the logarithm of the per-head
+ cost non-durable consumption log_mean_cost_ne .
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% To reiterate, a significant number of household units in both the economies
  are made up of joint families where the reported educational expenses correspon
 d to the grandchildren of the household head (HH).
  The education level of the HH would thus point to the penultimate generation
@@ -4116,46 +4085,21 @@ d to the grandchildren of the household head (HH).
  younger households where HH has young children.
  To resolve this disparity, we avoid using the education rank of the HH
  and instead use the highest education rank in the generation of the students'
- parents 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Only relations with the household head are reported in the survey.
+ parents Only relations with the household head are reported in the survey.
  Thus, there is no direct way of locating the parent of a child except through
  the relation with the household-head.
+ father_educ_rank instead.
+ The paternal educational level highesteduc suffices for our analysis of
+ expenditure spent over all the children in the household (rather than how
+ education budget is distributed among the male/female children).
+ As mentioned in the Section [sec:Econometric-Method], the households with
+ no children are ignored in the analysis.
+ Nearly 15 % of households in Tanzania are thus excluded.
 \end_layout
 
 \end_inset
 
- 
-\family typewriter
-\size small
-father_educ_rank
-\family default
-\size default
- instead.
- The paternal educational level 
-\family typewriter
-\size small
-highesteduc
-\family default
-\size default
- suffices for our analysis of expenditure spent over all the children in
- the household (rather than how education budget is distributed among the
- male/female children).
- As mentioned in the Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Econometric-Method"
-plural "false"
-caps "false"
-noprefix "false"
 
-\end_inset
-
-, the households with no children are ignored in the analysis.
- Nearly 15 % of households in Tanzania are thus excluded.
 \end_layout
 
 \begin_layout Standard
@@ -4282,6 +4226,33 @@ ref{tabTNZ_r}
 \end_inset
 
 ).
+\end_layout
+
+\begin_layout Subsubsection*
+Alternative Formulation
+\end_layout
+
+\begin_layout Standard
+<WHY IS THE ALTERNATIVE FORMULATION NEEDED - WHAT DOES IT PROVIDE> As discussed
+ before, an alternative formulation is also specified for comparison - where
+ the two explanatory variables are the logarithm of total assets value (
+\begin_inset Formula $log(A)$
+\end_inset
+
+
+\family typewriter
+ ln_tot_assets
+\family default
+) and the urban/rural indicators (
+\family typewriter
+
+\begin_inset Formula $\gamma$
+\end_inset
+
+ rural_wards
+\family default
+).
+ 
 \end_layout
 
 \begin_layout Subsection
