@@ -5,13 +5,39 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{xparse}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+\usepackage{soul}
+\usepackage{natbib}
+\usepackage{color, colortbl}
+\usepackage[first=0,last=9]{lcg}
+\definecolor{Gray}{gray}{0.9}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\newcommand{\ra}{\rand0.\arabic{rand}}
+\usepackage[section]{placeins}
+\usepackage[left,modulo]{lineno}
+\usepackage{sectsty}
+
+\usepackage{bbm}
+\end_preamble
 \use_default_options true
+\begin_modules
+theorems-ams
+theorems-ams-extended
+theorems-sec
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "libertine" "default"
+\font_roman "tgtermes" "IBM Plex Serif"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -29,7 +55,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize 12
-\spacing single
+\spacing onehalf
 \use_hyperref false
 \papersize default
 \use_geometry true
@@ -57,13 +83,14 @@
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 2.5cm
+\leftmargin 3cm
 \topmargin 2cm
-\rightmargin 2.5cm
+\rightmargin 3cm
 \bottommargin 2cm
-\headheight 2cm
-\headsep 2cm
-\footskip 2cm
+\headheight 3cm
+\headsep 3cm
+\footskip 1.2cm
+\columnsep 1.2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -109,10 +136,6 @@ placement H
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \align center
@@ -263,10 +286,6 @@ Proposed Resolution
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -453,6 +472,56 @@ Single Period Maximisation
 \end_layout
 
 \begin_layout Standard
+A more general solution To consider the strategy a consumer would use for
+ 
+\begin_inset Formula $\nu_{1,t}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{1,t}$
+\end_inset
+
+ for optimisation of total assets over multiple (finite) horizons, we can
+ consider the total assets she must maximise in the future time periods.
+ The additivity of 
+\end_layout
+
+\begin_layout Standard
+we must 
+\end_layout
+
+\begin_layout Standard
+the additivity of assets from each period 
+\begin_inset Formula $t$
+\end_inset
+
+ requires 
+\end_layout
+
+\begin_layout Standard
+consider a general time period 
+\begin_inset Formula $t\in[1,\tau]$
+\end_inset
+
+ where 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is the number of period until the end of life, 
+\end_layout
+
+\begin_layout Standard
+A single-period horizon means that the players(consumers) are not concerned
+ with a time-horizon over multiple time-periods.
+ While the consideration of total assets accumulation over multiple-horizons
+ may require us to consider the risk-neutrality of the players'(consumers')
+ preferences (allowing the expected assets to be a martingale over a risk-neutra
+l probability measure through the Harrison-Pliska theorem), consumer's time-hori
+zon being of single-period prevents the need to impose risk-neutrality by
+ construction.
+\end_layout
+
+\begin_layout Standard
 Unless the time-horizon considered by players (consumers) to set $
 \backslash
 nu_{1,t
@@ -475,17 +544,6 @@ tau]}$ extends to only the immediate next period, we cannot argue that the
 \end_layout
 
 \begin_layout Standard
-A single-period horizon means that the players(consumers) are not concerned
- with a time-horizon over multiple time-periods.
- While the consideration of total assets accumulation over multiple-horizons
- may require us to consider the risk-neutrality of the players'(consumers')
- preferences (allowing the expected assets to be a martingale over a risk-neutra
-l probability measure through the Harrison-Pliska theorem), consumer's time-hori
-zon being of single-period prevents the need to impose risk-neutrality by
- construction.
-\end_layout
-
-\begin_layout Standard
 Recall that at the end-of-life i.e.
  the period $
 \backslash
@@ -504,93 +562,69 @@ Balance of long-term expectations
 \end_layout
 
 \begin_layout Standard
-A necessary implication of the long-term equilibrium is that at the start
- of the reset period, the long-term values of social positions are known
- to the consumer.
- Let these values be $
-\backslash
-mathscr{A}_1$ and $
-\backslash
-mathscr{A}_2$ for the poor and rich players (consumers).
+It is easy to show that ...
+ A necessary implication of the long-term equilibrium is that the long-term
+ values of social positions are known to the consumer in every period .
+ Let these values be 
+\begin_inset Formula $\mathscr{A}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathscr{A}_{2}$
+\end_inset
+
+ for the poor and rich consumers.
+ Now, consider the last period when
+\begin_inset Formula $\mathscr{A}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathscr{A}_{2}$
+\end_inset
+
+ are all what the consumer is concerned.
+ Here, the only long-term equilibrium where the risk-neutral consumers participa
+te in the social game is one when where the consumers are indifferent between
  
+\begin_inset Formula $\mathscr{A}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathscr{A}_{2}$
+\end_inset
+
+.
+ In the simplest of these instances where we have the total number of periods
+ 
+\begin_inset Formula $\tau=2$
+\end_inset
+
+ and the consumer is concerned with only one period before last, then the
+ balance implies 
 \end_layout
 
 \begin_layout Standard
-Indeed, if $
-\backslash
-mathscr{A}_1$ and $
-\backslash
-mathscr{A}_2$ are known to the consumers in the last period, then a long-term
- equilibrium is one where the risk-neutral consumers are indifferent between
- the two social positions.
- In the simplest of these instances where we have $
-\backslash
-tau=2$ and the consumer is concerned with only one period before last, then
- this balance implies 
+\begin_inset Formula 
+\begin{align*}
+\frac{e_{2}}{\delta}W(\nu_{1})+(1-W(\nu_{1}))\frac{e_{1}}{\delta}+y_{1}-\nu_{1} & =\frac{e_{1}}{\delta}L(\nu_{2})+(1-L(\nu_{2}))\frac{e_{2}}{\delta}-+y_{2}-\nu_{2}
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-$ 
-\backslash
-frac{e_2}{
-\backslash
-delta} W(
-\backslash
-nu_1)+ (1-W(
-\backslash
-nu_1))
-\backslash
-frac{e_1}{
-\backslash
-delta}+ y_1 - 
-\backslash
-nu_1 = 
-\backslash
-frac{e_1}{
-\backslash
-delta} L(
-\backslash
-nu_2)+ (1-L(
-\backslash
-nu_2))
-\backslash
-frac{e_2}{
-\backslash
-delta}- +y_2 - 
-\backslash
-nu_2$
-\end_layout
+where, 
+\begin_inset Formula $e_{1}=\frac{W(y_{1})\mathscr{A}_{2}+(1-W(y_{1}))\mathscr{A}_{1}}{\delta}$
+\end_inset
 
-\begin_layout Standard
-where,
-\end_layout
+ and 
+\begin_inset Formula $e_{2}=\frac{L(y_{2})\mathscr{A}_{1}+(1-L(y_{2}))\mathscr{A}_{2}}{\delta}$
+\end_inset
 
-\begin_layout Standard
-$e_1=
-\backslash
-frac{W(y_1)
-\backslash
-mathscr{A}_2+(1-W(y_1))
-\backslash
-mathscr{A}_1}{
-\backslash
-delta}$
-\end_layout
-
-\begin_layout Standard
-$e_2=
-\backslash
-frac{L(y_2)
-\backslash
-mathscr{A}_1+(1-L(y_2))
-\backslash
-mathscr{A}_2}{
-\backslash
-delta}$
-\end_layout
-
-\begin_layout Standard
-Loosely speaking, if the consumers are fully aware of the long-term worth
+.
+ Loosely speaking, if the consumers are fully aware of the long-term worth
  of their social positions, then a long-term behaviour reflects an indifference
  between social positions.
 \end_layout
