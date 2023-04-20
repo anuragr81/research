@@ -488,18 +488,22 @@ literal "false"
 
 ), none of our conclusions about effects of income differences are affected
  due to a simpler formulation of single-period maximisation.
- The single-period assumption also allows us to relieve the risk-neutrality
- condition if needed (currently not being used).
+ Another advantage of the single-period assumption is that it lets us to
+ relieve the risk-neutrality condition (currently not being used).
 \end_layout
 
 \begin_layout Standard
-A single-period horizon means that the consumer is not concerned with a
- time-horizon involving multiple time-periods.
- Therefore the assets optimised by the consumer in period 
+A single-period horizon for the consumer implies that the assets optimised
+ by the consumer in period 
 \begin_inset Formula $t$
 \end_inset
 
- do not included the effort or consumption 
+ do not included the effort or consumption in the next period the expression
+ for 
+\begin_inset Formula $\nu_{t}$
+\end_inset
+
+ need not include 
 \begin_inset Formula $\nu_{1,t+1}$
 \end_inset
 
@@ -508,41 +512,83 @@ A single-period horizon means that the consumer is not concerned with a
 \end_inset
 
 ).
- 
+ Therefore the strategy for 
+\begin_inset Formula $\nu_{1,t\in[1,\tau]}$
+\end_inset
+
+ can solved by iterations starting with period 
+\begin_inset Formula $t=1$
+\end_inset
+
+ until 
+\begin_inset Formula $t=\tau$
+\end_inset
+
+.
+ This poorer consumer in a period 
+\begin_inset Formula $t$
+\end_inset
+
+ would need to optimise the following function 
+\begin_inset Formula 
+\begin{alignat*}{1}
+y_{1,t}-\nu_{1,t}+\frac{W(\nu_{1,t})y_{1,t+1}+(1-W(\nu_{1,t})y_{2,t+1}}{\delta}
+\end{alignat*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
+Here, 
+\begin_inset Formula $y_{1,t}$
+\end_inset
 
-\series bold
-Unless the time-horizon considered 
-\series default
-by players (consumers) to set $
-\backslash
-nu_{1,t
-\backslash
-in[1,
-\backslash
-tau]}$ or $
-\backslash
-nu_{2,t
-\backslash
-in[1,
-\backslash
-tau]}$ extends to only the immediate next period, we cannot argue that the
- expected value assets for the players (consumers) after the reset would
- be $y_1$ and $y_2$ respectively.
- The assumption of single-period horizon for consumers addresses this objection
- - by letting consumers be concerned with the total assets only over the
- immediate next period.
- 
+ and 
+\begin_inset Formula $y_{2,t}$
+\end_inset
+
+ are the incomes in a period 
+\begin_inset Formula $t$
+\end_inset
+
+, 
+\begin_inset Formula $\nu_{1,t}$
+\end_inset
+
+ is the effort in period 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $W(\nu_{1,t})$
+\end_inset
+
+ is the promotion probability in period 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Notice that at the end-of-life i.e.
+ in the period 
+\begin_inset Formula $t=\tau$
+\end_inset
+
+, the consumer (the dynast) cannot carry over the accumulated assets and
+ must spend everything on the position game, letting the assets in the last
+ period become
 \end_layout
 
 \begin_layout Standard
-Recall that at the end-of-life i.e.
- the period $
-\backslash
-tau$, the consumer cannot pass on the accumulated assets and must spend
- everything on the position.
+\begin_inset Formula 
+\begin{align*}
+\frac{W(y_{1,t})y_{1,t+1}+(1-W(y_{2,t1})y_{2,t+1}}{\delta}
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
