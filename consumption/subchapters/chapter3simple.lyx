@@ -37,7 +37,7 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "tgtermes" "IBM Plex Serif"
+\font_roman "libertine" "IBM Plex Serif"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -468,61 +468,55 @@ name "sec:SinglePeriodMaximisation"
 
 \end_inset
 
-Single Period Maximisation
+Single Period Maximisation 
 \end_layout
 
 \begin_layout Standard
-A more general solution To consider the strategy a consumer would use for
- 
-\begin_inset Formula $\nu_{1,t}$
+The current approach uses only optimisation in a single period i.e.
+ the consumers optimise assets are concerned with assets acquired in the
+ immediate next period alone.
+ While the martingale conditions - which ascertain additivity of assets
+ accumulated over multiple time periods in a more general formulation of
+ maximisation over multiple periods - can be ensured using a risk-neutral
+ probability measure (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "harrison1981martingales"
+literal "false"
+
 \end_inset
 
- and 
-\begin_inset Formula $\nu_{1,t}$
-\end_inset
-
- for optimisation of total assets over multiple (finite) horizons, we can
- consider the total assets she must maximise in the future time periods.
- The additivity of 
+), none of our conclusions about effects of income differences are affected
+ due to a simpler formulation of single-period maximisation.
+ The single-period assumption also allows us to relieve the risk-neutrality
+ condition if needed (currently not being used).
 \end_layout
 
 \begin_layout Standard
-we must 
-\end_layout
-
-\begin_layout Standard
-the additivity of assets from each period 
+A single-period horizon means that the consumer is not concerned with a
+ time-horizon involving multiple time-periods.
+ Therefore the assets optimised by the consumer in period 
 \begin_inset Formula $t$
 \end_inset
 
- requires 
-\end_layout
-
-\begin_layout Standard
-consider a general time period 
-\begin_inset Formula $t\in[1,\tau]$
+ do not included the effort or consumption 
+\begin_inset Formula $\nu_{1,t+1}$
 \end_inset
 
- where 
-\begin_inset Formula $\tau$
+ (or 
+\begin_inset Formula $\nu_{2,t+1}$
 \end_inset
 
- is the number of period until the end of life, 
+).
+ 
 \end_layout
 
 \begin_layout Standard
-A single-period horizon means that the players(consumers) are not concerned
- with a time-horizon over multiple time-periods.
- While the consideration of total assets accumulation over multiple-horizons
- may require us to consider the risk-neutrality of the players'(consumers')
- preferences (allowing the expected assets to be a martingale over a risk-neutra
-l probability measure through the Harrison-Pliska theorem), consumer's time-hori
-zon being of single-period prevents the need to impose risk-neutrality by
- construction.
-\end_layout
 
-\begin_layout Standard
-Unless the time-horizon considered by players (consumers) to set $
+\series bold
+Unless the time-horizon considered 
+\series default
+by players (consumers) to set $
 \backslash
 nu_{1,t
 \backslash
@@ -778,6 +772,18 @@ name "sec:Nash-Equilibrium"
 \end_inset
 
 Nash Equilibrium
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "../../africa_attitudes"
+options "authordate3"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
