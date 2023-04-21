@@ -331,7 +331,7 @@ We proceed by first discussing the trivial case when players (consumers)
  (consumers) provide the equilibrium conditions (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:LongTermExpectationsDegenerate"
+reference "sec:SinglePeriodMaximisation"
 plural "false"
 caps "false"
 noprefix "false"
@@ -343,17 +343,6 @@ noprefix "false"
  St.
  Petersburg paradox) as well - where maximisation of terminal assets hardly
  represent consumer behaviour well.
- The important assumptions are discussed in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:MainAssumptionsForOptimisation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
  The Nash Equilibrium solution and the implications of income differences
  are discussed in Section 
 \begin_inset CommandInset ref
@@ -427,7 +416,7 @@ noprefix "false"
  detailed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:ProportionsRichPoor"
+reference "sec:PopulationConstraint"
 plural "false"
 caps "false"
 noprefix "false"
@@ -468,7 +457,7 @@ name "sec:SinglePeriodMaximisation"
 
 \end_inset
 
-Single Period Maximisation 
+Single-Period Assets Maximisation 
 \end_layout
 
 \begin_layout Standard
@@ -493,7 +482,74 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-A single-period horizon for the consumer implies that the assets optimised
+It can be easily shown that if the poor and rich consumers optimised an
+ infinite-horizon value, then positional game would be inconsequential.
+ In other words, if they already know the long-term values of their assets,
+ then they won't engage in any short-term gains.
+ Consider the long-term evaluations 
+\begin_inset Formula $\mathscr{A}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathscr{A}_{2}$
+\end_inset
+
+ of future assets values for the poor and rich consumers respectively.
+ In the long-term equilibrium, the net addition to the assets through the
+ positional game would be zero.
+ In this equilibrium, the poor and rich consumers would choose 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+and 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ (respectively) such that 
+\begin_inset Formula $y_{1,t}-\nu_{1,t}+\frac{W(\nu_{1,t})\mathscr{A}_{2}+(1-W(\nu_{1,t}))\mathscr{A}_{1}}{\delta}=\mathscr{A}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{2,t}-\nu_{2,t}+\frac{L(\nu_{2,t})\mathscr{A}_{1}+(1-L(\nu_{2,t}))\mathscr{A}_{2}}{\delta}=\mathscr{A}_{2}$
+\end_inset
+
+ .
+ This can be achieved when 
+\begin_inset Formula $y_{1,t}=\nu_{1,t}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{2,t}=\nu_{2,t}$
+\end_inset
+
+ i.e.
+ when consumer spends all of their income in the effort (investment) and
+ their economic position remains stable (due to promotion and demotion probabili
+ties implied by 
+\begin_inset Formula $W(\nu_{1,t})$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu_{2,t})$
+\end_inset
+
+ respectively).
+ As such, all possible solutions must maintain that no net value is added
+ to the long-term values 
+\begin_inset Formula $\mathscr{A}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathscr{A}_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Our focus in the current chapter is to consider myopic consumers with a
+ single-period horizon.
+ The single-period horizon for the consumer implies that the assets optimised
  by the consumer in period 
 \begin_inset Formula $t$
 \end_inset
@@ -532,7 +588,7 @@ A single-period horizon for the consumer implies that the assets optimised
  would need to optimise the following function 
 \begin_inset Formula 
 \begin{alignat*}{1}
-y_{1,t}-\nu_{1,t}+\frac{W(\nu_{1,t})y_{1,t+1}+(1-W(\nu_{1,t})y_{2,t+1}}{\delta}
+y_{1,t}-\nu_{1,t}+\frac{W(\nu_{1,t})y_{1,t+1}+(1-W(\nu_{1,t}))y_{2,t+1}}{\delta}
 \end{alignat*}
 
 \end_inset
@@ -583,7 +639,7 @@ Here,
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\frac{W(y_{1,t})y_{1,t+1}+(1-W(y_{2,t1})y_{2,t+1}}{\delta}
+\frac{W(y_{1,t})y_{1,t+1}+(1-W(y_{2,t1}))y_{2,t+1}}{\delta}
 \end{align*}
 
 \end_inset
@@ -591,237 +647,90 @@ Here,
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
+There are two special conditions that we impose in the model so far
+\end_layout
+
+\begin_layout Enumerate
+The income in every period to the consumers remains the same so that 
+\begin_inset Formula $y_{1,t}=y_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{2,t}=y_{1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+A set of concave promotion and demotion functions are chosen as 
+\begin_inset Formula $W(\nu_{1})=1-\frac{1}{\sqrt{a\nu_{1}+1}}$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu_{2})=\frac{1}{\sqrt{a\nu_{2}+1}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With same income assumed in every period and with the maximisation of assets
+ (rather than a utility that may consider satiation with assets), the asset
+ increments at every period except the last period 
+\begin_inset Formula $t=\tau$
+\end_inset
+
+ are the same.
+ Therefore, the consumer behaviour in every period 
+\begin_inset Formula $t\ne\tau$
+\end_inset
+
+ is one where she adds 
+\begin_inset Formula $W(\nu_{1,t})y_{2}+(1-W(\nu_{1,t}))y_{1}$
+\end_inset
+
+ in any time period 
+\begin_inset Formula $t\ne\tau$
+\end_inset
+
+.
+ In the last period, the consumers would set 
+\begin_inset Formula $\nu_{1,\tau}=y_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{2,\tau}=y_{2}$
+\end_inset
+
+ so that they hope to have 
+\begin_inset Formula $W(y_{1})y_{2}+(1-W(y_{1}))y_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $L(y_{2})y_{1}+(1-L(y_{2}))y_{2}$
+\end_inset
+
+ in the first period (without considering the effort 
+\begin_inset Formula $\nu_{1,1},\nu_{2,1}$
+\end_inset
+
+ in the first period.
+\end_layout
+
+\begin_layout Standard
+The concave promotion and demotion functions
+\end_layout
+
+\begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:LongTermExpectationsDegenerate"
+name "sec:Nash-Equilibrium"
 
 \end_inset
 
-Long-term Horizon
-\end_layout
-
-\begin_layout Standard
-If can be trivially stated that if the poor and rich consumers already know
- the long-term values 
-\begin_inset Formula $\mathscr{A}_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathscr{A}_{2}$
-\end_inset
-
- of their assets, then they won't engage in any short-term gains and therefore,
- the only equilibrium that is possible when consumer optimise their assets
- at the infinite horizon is when the net gain from effort (or consumption
- 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- or 
-\begin_inset Formula $\nu_{2}$
-\end_inset
-
-) are none.
- In the asset maximisation setting, there is no differences between known
- values 
-\begin_inset Formula $\mathscr{A}_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathscr{A}_{2}$
-\end_inset
-
- and the actual values believed by the consumer.
- The only assumption is that the discounted value of 
-\begin_inset Formula $\mathscr{A}_{1}$
-\end_inset
-
- for the poorer consumer would be balanced by the loss she makes in a given
- period.
- 
-\bar under
-The only way this is possible is when consumer spend all their income on
- 
-\begin_inset Formula $\nu$
-\end_inset
-
- and the gains are balanced by loss
-\bar default
-.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-SUBJECT TO REVIEW: 
-\series default
-In other words, if the consumer 1 (poorer consumer) chooses 
-\begin_inset Formula $\nu_{1,t}$
-\end_inset
-
- in the period 
-\begin_inset Formula $t$
-\end_inset
-
- then the expected assets in the next period must be the same as the current
- i.e.
- 
-\begin_inset Formula $\mathscr{A}_{1}$
-\end_inset
-
-.
- Therefore, 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\mathscr{A}_{1}+y_{1,t}-\nu_{1,t}+\frac{W(\nu_{1,t})\mathscr{A}_{2}+(1-W(\nu_{1,t})\mathscr{A}_{1}}{\delta} & =\mathscr{A}_{1}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $y_{1,t}-\nu_{1,t}+\frac{\mathscr{A}_{1}}{\delta}+$
-\end_inset
-
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\backslash
-mathscr{A}_{1}
-\end_layout
-
-\begin_layout Standard
-It is easy to show that if the consumers known a certain long-term value
- of their social positions, then their behaviour in all periods except the
- last would remain the same.
- Let these long-term values be 
-\begin_inset Formula $\mathscr{A}_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathscr{A}_{2}$
-\end_inset
-
- for the poor and rich consumers (respectively).
- We can define the following values that the consumer evaluates in the period
- before last
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-e_{1} & =\frac{W(y_{1})\mathscr{A}_{2}+(1-W(y_{1}))\mathscr{A}_{1}}{\delta}
-\end{align*}
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-e_{2} & =\frac{L(y_{2})\mathscr{A}_{1}+(1-L(y_{2}))\mathscr{A}_{2}}{\delta}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-known ...
- A necessary implication of the long-term equilibrium is that the long-term
- values of social positions are known to the consumer in every period .
- 
-\end_layout
-
-\begin_layout Standard
-Now, consider the last period when
-\begin_inset Formula $\mathscr{A}_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathscr{A}_{2}$
-\end_inset
-
- are all what the consumer is concerned.
- Here, the only long-term equilibrium where the risk-neutral consumers participa
-te in the social game is one when where the consumers are indifferent between
- 
-\begin_inset Formula $\mathscr{A}_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathscr{A}_{2}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-In the simplest of these instances where we have the total number of periods
- 
-\begin_inset Formula $\tau=2$
-\end_inset
-
- and the consumer is concerned with only one period before last, then the
- balance implies 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\frac{e_{2}}{\delta}W(\nu_{1})+(1-W(\nu_{1}))\frac{e_{1}}{\delta}+y_{1}-\nu_{1} & =\frac{e_{1}}{\delta}L(\nu_{2})+(1-L(\nu_{2}))\frac{e_{2}}{\delta}+y_{2}-\nu_{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-where,.
- Loosely speaking, if the consumers are fully aware of the long-term worth
- of their social positions, then a long-term behaviour reflects an indifference
- between social positions.
-\end_layout
-
-\begin_layout Standard
-Extending the above to $
-\backslash
-tau>2$ while maintaining the assumption that the short-term horizon is that
- of a single-period, we can argue that the balance condition would be maintained
- in every period.
- 
-\end_layout
-
-\begin_layout Section
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:MainAssumptionsForOptimisation"
-
-\end_inset
-
-Consumer behaviour in the last period
+Nash Equilibrium
 \end_layout
 
 \begin_layout Section
@@ -831,10 +740,218 @@ name "sec:PopulationConstraint"
 
 \end_inset
 
-Population Constraint
+Population Constraints
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
+The population constraint in the current model kicks in at every single
+ period rather than only in the longer $
+\backslash
+tau$.
+ The population constraint is enforced on the players through $W(
+\backslash
+nu)$ and $L(
+\backslash
+nu)$ so that they are constrained to choose $
+\backslash
+nu_1$ and $
+\backslash
+nu_2$ while satisfying the population-constraint $W(
+\backslash
+nu_1)=L(
+\backslash
+nu_2)$ in their short-term horizon (single period by construction).
+ The logistic function translates into the simple constraint $
+\backslash
+nu_1+
+\backslash
+nu_2=
+\backslash
+underline{
+\backslash
+omega}+
+\backslash
+underline{
+\backslash
+lambda} 
+\backslash
+equiv 
+\backslash
+xi$ when imposing this constraint.
+ 
+\end_layout
+
+\begin_layout Standard
+The underlying basis for the assumption is that choices of $
+\backslash
+nu$ are independent of the life-time for the representative (average) consumer.
+ In other words, regardless of which point in time the player (consumer)
+ exercises her choice of $
+\backslash
+nu$, the choice is subjected to the population constraint in the same way.
+\end_layout
+
+\begin_layout Standard
+A logistic function used in the model provides a threshold function which
+ increases (decreases) consumer's probability of promotion (demotion) with
+ higher effort $
+\backslash
+nu$.
+ It is worth emphasising that the promotion and demotions functions ($W(
+\backslash
+nu)$ and $L(
+\backslash
+nu)$ respectively) do not represent distributions of $
+\backslash
+nu$ - but are binary distributions with a mean modified by $
+\backslash
+nu$.
+ The expectation of promotions is therefore defined for a particular $
+\backslash
+nu$ simply as $W(
+\backslash
+nu)(1)+(1-W(
+\backslash
+nu))(0)$.
+ The maximisation of assets in a single-period by the consumer responds
+ to a threshold level consumption represented by $
+\backslash
+underline{
+\backslash
+omega}$ (or equivalently, $
+\backslash
+underline{
+\backslash
+lambda}$).
+ Since we assume $
+\backslash
+omega=
+\backslash
+lambda$, we have that $
+\backslash
+nu_1+
+\backslash
+nu_2=
+\backslash
+underline{
+\backslash
+omega}+
+\backslash
+underline{
+\backslash
+lambda} 
+\backslash
+equiv 
+\backslash
+xi$.
+ Simply put, the population constraint means that the pool of promotional-consum
+ption is limited.
+ 
+\end_layout
+
+\begin_layout Standard
+One objection to this view may be that status competitions swapping the
+ positions of rich and poor so frequently is unrealistic.
+ Instead the condition $W(
+\backslash
+nu_1)>>L(
+\backslash
+nu_2)$ may seem more realistic i.e.
+ the demotion probability is much lower (often negligible) compared to promotion
+ probabilities.
+ There are two issues with this objection.
+ First, the rich and poor only represent the proportional populations in
+ a closed economy.
+ Therefore, the demotion of a rich player(consumer) of the representative
+ consumer implied by the proportions of rich and poor in an economy.
+ We explain this further in Section **Proportions of rich and poor**.
+ Second, the existence of status competitions implies that a position-less
+ economy does not arise in the long-term.
+ 
+\end_layout
+
+\begin_layout Standard
+The population constraint is interpreted simply as 
+\end_layout
+
+\begin_layout Standard
+$W(
+\backslash
+nu_{1,t})=L(
+\backslash
+nu_{2,t})
+\backslash
+forall t
+\backslash
+in [1,
+\backslash
+tau]$
+\end_layout
+
+\begin_layout Standard
+In othe words, the consumers choose $
+\backslash
+nu_{1,t}$ and $
+\backslash
+nu_{2,t}$ so that the above condition holds true in the every period $t
+\backslash
+in[1,
+\backslash
+tau]$.
+\end_layout
+
+\begin_layout Standard
+As a side-note, contrast this with a more general formulation where the
+ population constraint is imposed with $W(
+\backslash
+nu,
+\backslash
+Lambda)$ and $L(
+\backslash
+nu,
+\backslash
+Lambda)$ so that the total number of promotions and demotions are balanced
+ out in the very long-term ( $
+\backslash
+Lambda$ (need not be the same as $
+\backslash
+tau$).
+ Given that $E(
+\backslash
+sum_k^
+\backslash
+Lambda{ W(
+\backslash
+nu_{1,k})})=
+\backslash
+sum_k^
+\backslash
+Lambda{ E(W(
+\backslash
+nu_{1,k}))}$, the more population constraint would mean that 
+\end_layout
+
+\begin_layout Standard
+$
+\backslash
+sum_t^
+\backslash
+Lambda{ W(
+\backslash
+nu_{1,t})}=
+\backslash
+sum_t^
+\backslash
+Lambda{ L(
+\backslash
+nu_{2,t})}
+\backslash
+equiv 
+\backslash
+eta$
+\end_layout
+
+\begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:ProportionsRichPoor"
@@ -844,14 +961,43 @@ name "sec:ProportionsRichPoor"
 Proportions of rich and poor
 \end_layout
 
-\begin_layout Section
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:Nash-Equilibrium"
+\begin_layout Standard
+The population constraint need not be interpreted as the total number of
+ people making the jump from poor to rich balanced by the those that become
+ poor from being rich.
+ Instead, the population constraint ensures only that there would always
+ be some rich and poor consumers in the long-term.
+ As long as there is a limit on the number of rich and poor, a constraint
+ on $W(
+\backslash
+nu)$ and $L(
+\backslash
+nu)$ is necessary.
+ In a population of fixed number of players (consumers) in a closed economy,
+ a demotion does not need to imply loss of wealth (which is rare), but only
+ a movement in the reference-point that makes one richer or poorer.
+\end_layout
 
-\end_inset
+\begin_layout Standard
+The effects that increase in population of poor relative to rich - has on
+ the promotions or demotions are exogenous in the model.
+ If the per-capita rise in incomes does not keep up with growth of the poorer
+ populations (relative to rich), then the demotions balancing out promotions
+ at a lower level represents the situation where more consumers are considered
+ poor while the becoming rich becomes harder (promotions decline as well).
+ Likewise, if the per-capita rises rapidly for the poor, then more people
+ may be considered rich and more (formerly) rich may be considered poor
+ or demoted (because of rise in living-standards).
+ The population constraint is only a constraint enforced by feasibility
+ of status competitions rather.
+\end_layout
 
-Nash Equilibrium
+\begin_layout Standard
+Another instance that may have an effect of promotion, is when rich escape
+ to different venues in order to achieve a higher return to investment -
+ a scenario when the poor become more numerous proportionally.
+ The promotions may rise as a net result but would be quickly balanced by
+ fall in demotions as the rich become more concentrated.
 \end_layout
 
 \begin_layout Standard
