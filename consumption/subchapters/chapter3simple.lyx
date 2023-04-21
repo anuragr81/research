@@ -8,6 +8,7 @@
 \begin_preamble
 \usepackage{mathtools}
 \usepackage{amsmath}
+
 \usepackage{xparse}
 \tolerance=1
 \emergencystretch=\maxdimen
@@ -648,11 +649,15 @@ Here,
 \end_layout
 
 \begin_layout Standard
-There are two special conditions that we impose in the model so far
+There are two particular conditions that we now impose on the model 
 \end_layout
 
 \begin_layout Enumerate
-The income in every period to the consumers remains the same so that 
+The 
+\bar under
+income in every period
+\bar default
+ to the consumers remains the same so that 
 \begin_inset Formula $y_{1,t}=y_{1}$
 \end_inset
 
@@ -661,29 +666,14 @@ The income in every period to the consumers remains the same so that
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Enumerate
-A set of concave promotion and demotion functions are chosen as 
-\begin_inset Formula $W(\nu_{1})=1-\frac{1}{\sqrt{a\nu_{1}+1}}$
-\end_inset
-
- and 
-\begin_inset Formula $L(\nu_{2})=\frac{1}{\sqrt{a\nu_{2}+1}}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-With same income assumed in every period and with the maximisation of assets
+ With same income assumed in every period and with the maximisation of assets
  (rather than a utility that may consider satiation with assets), the asset
  increments at every period except the last period 
 \begin_inset Formula $t=\tau$
 \end_inset
 
  are the same.
- Therefore, the consumer behaviour in every period 
+ More specifically, the consumer behaviour in every period 
 \begin_inset Formula $t\ne\tau$
 \end_inset
 
@@ -695,8 +685,7 @@ With same income assumed in every period and with the maximisation of assets
 \begin_inset Formula $t\ne\tau$
 \end_inset
 
-.
- In the last period, the consumers would set 
+ - while in the last period, the consumers would set 
 \begin_inset Formula $\nu_{1,\tau}=y_{1}$
 \end_inset
 
@@ -717,10 +706,50 @@ With same income assumed in every period and with the maximisation of assets
 \end_inset
 
  in the first period.
+ The solution in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Nash-Equilibrium"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ therefore only considers two periods i.e.
+ 
+\begin_inset Formula $\tau=2$
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Standard
-The concave promotion and demotion functions
+\begin_layout Enumerate
+A specific set of (concave) 
+\bar under
+promotion and demotion functions
+\bar default
+ are chosen as 
+\begin_inset Formula $W(\nu_{1})=1-\frac{1}{\sqrt{a\nu_{1}+1}}$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu_{2})=\frac{1}{\sqrt{a\nu_{2}+1}}$
+\end_inset
+
+.
+ These functions are used to arrive at closed-form solutions for a Nash
+ equilibrium (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Nash-Equilibrium"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Subsection
@@ -731,6 +760,498 @@ name "sec:Nash-Equilibrium"
 \end_inset
 
 Nash Equilibrium
+\end_layout
+
+\begin_layout Standard
+The following functions for promotion and demotion of the poor and rich
+ consumers (respectively) satisfy the two conditions of being i) increasing
+ in 
+\begin_inset Formula $\nu$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ increases while 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ decreases with higher 
+\begin_inset Formula $\nu$
+\end_inset
+
+) ii) being asymptotic i.e.
+ 
+\begin_inset Formula $\lim_{\nu\rightarrow\infty}W(\nu)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\lim_{\nu\rightarrow\infty}L(\nu)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+W(\nu) & =1-\frac{1}{\sqrt{a\nu+1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+L(\nu) & =\frac{1}{\sqrt{b\nu+1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The above functions allow the optimisation functions for the two consumers
+ to be concave.
+ More specifically, the poorer consumer optimises (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:optimfunc_consumer1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for 
+\begin_inset Formula $y_{1}=2,$
+\end_inset
+
+
+\begin_inset Formula $a=2$
+\end_inset
+
+and 
+\begin_inset Formula $y_{2}=10$
+\end_inset
+
+) the following function
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+It can be verified that the second derivative 
+\begin_inset Formula $\frac{\partial^{2}\left(\frac{\frac{y_{1}}{\sqrt{a\nu+1}}+y_{2}\left(1-\frac{1}{\sqrt{a\nu+1}}\right)}{\delta}-\nu+y_{1}\right)}{\partial\nu^{2}}=\frac{3a^{2}\left(y_{1}-y_{2}\right)}{4\delta(a\nu+1)^{5/2}}$
+\end_inset
+
+is less than zero since 
+\begin_inset Formula $y_{1}<y_{2}$
+\end_inset
+
+ .
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% plot 10-x + (10 * (1-1/(sqrt(2 * x+1)))+2 * (1/(sqrt(2 * x+1))))/1.1 for
+ x from -1 to 5
+\end_layout
+
+\begin_layout Plain Layout
+
+% second derivative of y_1-x + (A_2 * (1-1/(sqrt(a * x+1)))+A_1 * (1/(sqrt(a
+ * x+1))))/delta with respect to x
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+y_{1}-\nu_{1}+\frac{1}{\delta}(y_{2}\times(1-\frac{1}{\sqrt{a\nu_{1}+1}})+y_{1}\times\frac{1}{\sqrt{a\nu_{1}+1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/consumer1optimfunc.png
+	width 5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:optimfunc_consumer1"
+
+\end_inset
+
+Optimisation function for (poorer) consumer 1 with 
+\begin_inset Formula $y_{1}=2$
+\end_inset
+
+, 
+\begin_inset Formula $y_{2}=10$
+\end_inset
+
+ and 
+\begin_inset Formula $a=2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly, the richer consumer optimises the following function 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% plot 10-x + (2 * (1/(sqrt(2 * x+1)))+10 * (1-1/(sqrt(2 * x+1))))/1.1 for
+ from -1 to 30
+\end_layout
+
+\begin_layout Plain Layout
+
+% y_2-x + (A_1 * (1/(sqrt(b * x+1)))+A_2 * (1-1/(sqrt(b * x+1))))/delta
+\end_layout
+
+\begin_layout Plain Layout
+
+% second derivative of y_2-x + (A_1 * (1/(sqrt(b * x+1)))+A_2 * (1-1/(sqrt(b
+ * x+1))))/delta with respect to x
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+".
+ The second derivative is also negative - making the optimisation function
+ concave.:
+\end_layout
+
+\begin_layout Standard
+$
+\backslash
+frac{
+\backslash
+partial ^2
+\backslash
+left(
+\backslash
+frac{
+\backslash
+frac{A_1}{
+\backslash
+sqrt{b x+1}}+A_2 
+\backslash
+left(1-
+\backslash
+frac{1}{
+\backslash
+sqrt{b x+1}}
+\backslash
+right)}{
+\backslash
+delta }-x+y_2
+\backslash
+right)}{
+\backslash
+partial x^2}=
+\backslash
+frac{3 
+\backslash
+left(A_1-A_2
+\backslash
+right) b^2}{4 
+\backslash
+delta (b x+1)^{5/2}}$
+\end_layout
+
+\begin_layout Standard
+### First order condition
+\end_layout
+
+\begin_layout Standard
+The first conditions for consumer 1 are arrived at by setting the following
+ first derivtive to 0.
+ $
+\backslash
+frac{
+\backslash
+partial 
+\backslash
+left(
+\backslash
+frac{
+\backslash
+frac{A_1}{
+\backslash
+sqrt{a x+1}}+A_2 
+\backslash
+left(1-
+\backslash
+frac{1}{
+\backslash
+sqrt{a x+1}}
+\backslash
+right)}{
+\backslash
+delta }-x+y_1
+\backslash
+right)}{
+\backslash
+partial x}=
+\backslash
+frac{
+\backslash
+frac{a A_2}{2 (a x+1)^{3/2}}-
+\backslash
+frac{a A_1}{2 (a x+1)^{3/2}}}{
+\backslash
+delta }-1$
+\end_layout
+
+\begin_layout Standard
+The solution for consumer 1 can be written as the following:
+\end_layout
+
+\begin_layout Standard
+$
+\backslash
+nu_1=
+\backslash
+frac{1}{a}((
+\backslash
+frac{(A_2-A_1)}{2
+\backslash
+delta })^{2/3}-1)$
+\end_layout
+
+\begin_layout Standard
+We can now talk about effect of $A_2-A_1$ vs that of $a$.
+ Higher $A_2-A_1$ increases $
+\backslash
+nu_1$.
+ When $a$ increases, promotions happen a lot sooner and the optimal $
+\backslash
+nu_1$ decreases.
+\end_layout
+
+\begin_layout Standard
+The first conditions for consumer 2 are arrived at by setting the following
+ first derivative to 0:
+\end_layout
+
+\begin_layout Standard
+$
+\backslash
+frac{
+\backslash
+partial 
+\backslash
+left(
+\backslash
+frac{
+\backslash
+frac{A_1}{
+\backslash
+sqrt{b x+1}}+A_2 
+\backslash
+left(1-
+\backslash
+frac{1}{
+\backslash
+sqrt{b x+1}}
+\backslash
+right)}{
+\backslash
+delta }-x+y_2
+\backslash
+right)}{
+\backslash
+partial x}=
+\backslash
+frac{
+\backslash
+frac{A_2 b}{2 (b x+1)^{3/2}}-
+\backslash
+frac{A_1 b}{2 (b x+1)^{3/2}}}{
+\backslash
+delta }-1$
+\end_layout
+
+\begin_layout Standard
+The solution for consumer 2 can be written as the following: $
+\backslash
+nu_2=
+\backslash
+frac{1}{b}((
+\backslash
+frac{(A_2-A_1)}{2
+\backslash
+delta })^{2/3}-1)$
+\end_layout
+
+\begin_layout Standard
+When $b$ increases, then the consumer is more secure as does not need to
+ spend a lot to avoid losing status.
+ Therefore $
+\backslash
+nu_2$ declines with rising $b$.
+ Notice that promotions must be balanced by demotions as well.
+ To understand how this relates with optimal choices, consider the ratio
+ of promotions to demotions in every period $
+\backslash
+rho(t)=
+\backslash
+frac{W(
+\backslash
+nu_{1,t})}{L(
+\backslash
+nu_{2,t})}$ - representing a comparison between two consumers with synchronised
+ long-term and short-term horizons.
+ At any point, every period would have a certain number of consumers in
+ every period.
+ 
+\end_layout
+
+\begin_layout Standard
+$W(
+\backslash
+nu_1)=1-
+\backslash
+frac{1}{
+\backslash
+sqrt{a
+\backslash
+nu_1+1}}=1-(
+\backslash
+frac{2
+\backslash
+delta}{A_2-A_1})^{1/3}$
+\end_layout
+
+\begin_layout Standard
+$L(
+\backslash
+nu_2)=
+\backslash
+frac{1}{
+\backslash
+sqrt{b
+\backslash
+nu_2+1}}=(
+\backslash
+frac{2
+\backslash
+delta}{A_2-A_1})^{1/3}$
+\end_layout
+
+\begin_layout Standard
+Therefore $
+\backslash
+rho(t)=(
+\backslash
+frac{A_2-A_1}{2
+\backslash
+delta})^{1/3}-1$
+\end_layout
+
+\begin_layout Standard
+The ratio of promotions vs demotions depends only on income differences
+ and discount factors.
+ Higher income differences must increase promotions in the equilibrium.
+ In the long-term however, promotions must be balanced by demotions because
+ of population stability i.e.
+ $
+\backslash
+lim_{t
+\backslash
+rightarrow 
+\backslash
+infty}{
+\backslash
+rho(t)}=1$ .Therefore, income differences must be balanced by periods of
+ lower income differences so that $
+\backslash
+frac{A_2-A_1}{2}$ is balanced by $
+\backslash
+delta$.
+ 
+\end_layout
+
+\begin_layout Standard
+Since the discount factor $
+\backslash
+delta$ represents the time value of money in the above setting (i.e.
+ a higher $
+\backslash
+delta$ implies a higher normative impatience of the consumers/players),
+ we can argue that higher income differences must be balanced by higher
+ impatience for the promotion to demotion ratio to be maintained.
+\end_layout
+
+\begin_layout Standard
+Notice also that the optimality conditions also imply the withdrawal from
+ competitions.
+ 
 \end_layout
 
 \begin_layout Section
