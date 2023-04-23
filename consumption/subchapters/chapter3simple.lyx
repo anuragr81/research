@@ -796,9 +796,9 @@ The following functions for promotion and demotion of the poor and rich
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-W(\nu) & =1-\frac{1}{\sqrt{a\nu+1}}
-\end{align*}
+\begin{align}
+W(\nu) & =1-\frac{1}{\sqrt{a\nu+1}}\label{eq:wnu_concave}
+\end{align}
 
 \end_inset
 
@@ -807,9 +807,9 @@ W(\nu) & =1-\frac{1}{\sqrt{a\nu+1}}
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-L(\nu) & =\frac{1}{\sqrt{b\nu+1}}
-\end{align*}
+\begin{align}
+L(\nu) & =\frac{1}{\sqrt{b\nu+1}}\label{eq:lnu_concave}
+\end{align}
 
 \end_inset
 
@@ -1152,7 +1152,7 @@ Population Constraints
 \end_layout
 
 \begin_layout Standard
-We have treated 
+The parameters 
 \begin_inset Formula $a$
 \end_inset
 
@@ -1160,7 +1160,9 @@ We have treated
 \begin_inset Formula $b$
 \end_inset
 
- as exogenous in the model, but typical constraints in population (i.e.
+ have been treated as exogenous so far.
+ One condition that constraints the parameters is that of population of
+ the poor and rich (i.e.
  the very claim of limits to social growth from 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1169,17 +1171,89 @@ literal "false"
 
 \end_inset
 
- ) would imply that promotions are balanced in long-term by demotions.
- To consider the implicatios in the terms of the above model, we consider
- the ratio of promotions to demotions in every period i.e.
- 
+ ).
+ A relative difference between the poor and rich would always be maintained
+ even though there is one poor or one rich person in the limiting case.
+ The promotions are therefore balanced by demotions in the long-term.
+ In any long-term equilibrium, the consumers moving from poor to the rich
+ band would be balanced by those moving from rich to the poor band.
+ Since, the two consumers are representative consumers, this does not need
+ to be interpreted as consumer literally being promoted or demoted.
+ Their proportions in population or the changing levels of separation between
+ poor and rich could also amount to a demotion (see details in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:ProportionsRichPoor"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ It is worth emphasising also that the promotion and demotions functions
+ (
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ respectively) do not represent distributions of 
+\begin_inset Formula $\nu$
+\end_inset
+
+ - but are binary distributions with a mean modified by 
+\begin_inset Formula $\nu$
+\end_inset
+
+ (see Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wnu_concave"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:lnu_concave"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The expectation of promotions is therefore defined for a particular 
+\begin_inset Formula $\nu$
+\end_inset
+
+ simply as 
+\begin_inset Formula $W(\nu)(1)+(1-W(\nu))(0)$
+\end_inset
+
+ and similarly, the expected demotions are 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To consider what the constraint means in terms of the above model, we define
+ the ratio of promotions to demotions in every period as follows
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-\rho(t) & =\frac{W(\nu_{1,t})}{L(\nu_{2,t})}
-\end{align*}
+\begin{align}
+\rho(t) & =\frac{W(\nu_{1,t})}{L(\nu_{2,t})}\label{eq:rho_ratio}
+\end{align}
 
 \end_inset
 
@@ -1187,15 +1261,23 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-As such, the ratio represents a comparison between two consumers with synchronis
-ed long-term and short-term horizons.
- Since the periods represent the life-time in our mode, it is assumed that
- at any point in time, there would be a certain number of consumers that
- are in a given period of their life-cycle (time horizon 
+The periods in the model represent the life-time of consumers and an implicit
+ with the above definition (Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rho_ratio"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) is that at any point in time, there are a certain number of consumers
+ in a given period of their life-cycle (time horizon 
 \begin_inset Formula $\tau$
 \end_inset
 
-) with the respective probabilities 
+) with 
 \begin_inset Formula $W(\nu_{1,t})$
 \end_inset
 
@@ -1203,8 +1285,14 @@ ed long-term and short-term horizons.
 \begin_inset Formula $L(\nu_{1,t})$
 \end_inset
 
-.
- Notice that 
+ (as respective probabilities of promotion and demotion).
+ In other words, the ratio 
+\begin_inset Formula $\rho(t)$
+\end_inset
+
+ represents a comparison between two consumers with synchronised long-term
+ and short-term horizons.
+ Therefore,
 \end_layout
 
 \begin_layout Standard
@@ -1230,7 +1318,7 @@ L(\nu_{2}^{*}) & =\frac{1}{\sqrt{b\nu_{2}^{*}+1}}=(\frac{2\delta}{y_{2}-y_{1}})^
 \end_layout
 
 \begin_layout Standard
-Therefore, 
+and, 
 \end_layout
 
 \begin_layout Standard
@@ -1245,42 +1333,106 @@ Therefore,
 \end_layout
 
 \begin_layout Standard
-The ratio of promotions vs demotions depends only on income differences
- and discount factors.
- Higher income differences must increase promotions in the equilibrium.
- In the long-term however, promotions must be balanced by demotions because
- of population stability i.e.
- $
-\backslash
-lim_{t
-\backslash
-rightarrow 
-\backslash
-infty}{
-\backslash
-rho(t)}=1$ .Therefore, income differences must be balanced by periods of
- lower income differences so that $
-\backslash
-frac{A_2-A_1}{2}$ is balanced by $
-\backslash
-delta$.
+In the simple formulation of 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ (defined in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wnu_concave"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:lnu_concave"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), the ratio of promotions vs demotions depends only on income differences
+ 
+\begin_inset Formula $y_{2}-y_{1}$
+\end_inset
+
+ and the discount factor 
+\begin_inset Formula $\delta$
+\end_inset
+
+.
+ As we have argued before, higher income differences 
+\begin_inset Formula $y_{2}-y_{1}$
+\end_inset
+
+ must increase promotions in the equilibrium.
+ However, promotions in the long-term must also be balanced by demotions
+ because of population stability 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\lim_{t\rightarrow\infty}{\rho(t)} & =1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the simple formulation, there are two possibilities for the constraint
+ to be met.
  
 \end_layout
 
-\begin_layout Standard
-Since the discount factor $
-\backslash
-delta$ represents the time value of money in the above setting (i.e.
- a higher $
-\backslash
-delta$ implies a higher normative impatience of the consumers/players),
- we can argue that higher income differences must be balanced by higher
- impatience for the promotion to demotion ratio to be maintained.
+\begin_layout Enumerate
+The high income differences are balanced by periods of low income differences
+ letting the term 
+\begin_inset Formula $(\frac{y_{2}-y_{1}}{2\delta})^{1/3}$
+\end_inset
+
+ fluctuates above and below 1
+\end_layout
+
+\begin_layout Enumerate
+The discount 
+\begin_inset Formula $\delta$
+\end_inset
+
+ - which represents the time value of money in the above formulation (i.e.
+ a higher 
+\begin_inset Formula $\delta$
+\end_inset
+
+ implies a higher normative impatience of the consumers - would rise to
+ lower the term 
+\begin_inset Formula $(\frac{y_{2}-y_{1}}{2\delta})^{1/3}$
+\end_inset
+
+.
+ In other words, a impatience to consumer in the current period (rather
+ than the next) would rise due to population constraint.
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 Notice also that the optimality conditions also imply the withdrawal from
- competitions.
+ competitions
+\bar default
+.
  
 \end_layout
 
@@ -1289,109 +1441,31 @@ Notice also that the optimality conditions also imply the withdrawal from
 \end_layout
 
 \begin_layout Standard
-The population constraint in the current model kicks in at every single
- period rather than only in the longer $
-\backslash
-tau$.
- The population constraint is enforced on the players through $W(
-\backslash
-nu)$ and $L(
-\backslash
-nu)$ so that they are constrained to choose $
-\backslash
-nu_1$ and $
-\backslash
-nu_2$ while satisfying the population-constraint $W(
-\backslash
-nu_1)=L(
-\backslash
-nu_2)$ in their short-term horizon (single period by construction).
- The logistic function translates into the simple constraint $
-\backslash
-nu_1+
-\backslash
-nu_2=
-\backslash
-underline{
-\backslash
-omega}+
-\backslash
-underline{
-\backslash
-lambda} 
-\backslash
-equiv 
-\backslash
-xi$ when imposing this constraint.
+We argue the parameters 
+\begin_inset Formula $a,b$
+\end_inset
+
+ - which decide the consumer's choice in the short-term could change in
  
+\begin_inset Formula $t$
+\end_inset
+
+ .
+ However, the parameter are likely to depend on the long-term horizon 
+\begin_inset Formula $\tau$
+\end_inset
+
+ - a relationship that we have so far assumed to be exogenous.
 \end_layout
 
-\begin_layout Standard
-The underlying basis for the assumption is that choices of $
-\backslash
-nu$ are independent of the life-time for the representative (average) consumer.
- In other words, regardless of which point in time the player (consumer)
- exercises her choice of $
-\backslash
-nu$, the choice is subjected to the population constraint in the same way.
-\end_layout
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:ProportionsRichPoor"
 
-\begin_layout Standard
-A logistic function used in the model provides a threshold function which
- increases (decreases) consumer's probability of promotion (demotion) with
- higher effort $
-\backslash
-nu$.
- It is worth emphasising that the promotion and demotions functions ($W(
-\backslash
-nu)$ and $L(
-\backslash
-nu)$ respectively) do not represent distributions of $
-\backslash
-nu$ - but are binary distributions with a mean modified by $
-\backslash
-nu$.
- The expectation of promotions is therefore defined for a particular $
-\backslash
-nu$ simply as $W(
-\backslash
-nu)(1)+(1-W(
-\backslash
-nu))(0)$.
- The maximisation of assets in a single-period by the consumer responds
- to a threshold level consumption represented by $
-\backslash
-underline{
-\backslash
-omega}$ (or equivalently, $
-\backslash
-underline{
-\backslash
-lambda}$).
- Since we assume $
-\backslash
-omega=
-\backslash
-lambda$, we have that $
-\backslash
-nu_1+
-\backslash
-nu_2=
-\backslash
-underline{
-\backslash
-omega}+
-\backslash
-underline{
-\backslash
-lambda} 
-\backslash
-equiv 
-\backslash
-xi$.
- Simply put, the population constraint means that the pool of promotional-consum
-ption is limited.
- 
+\end_inset
+
+Proportions of rich and poor
 \end_layout
 
 \begin_layout Standard
@@ -1409,101 +1483,8 @@ nu_2)$ may seem more realistic i.e.
  a closed economy.
  Therefore, the demotion of a rich player(consumer) of the representative
  consumer implied by the proportions of rich and poor in an economy.
- We explain this further in Section **Proportions of rich and poor**.
  Second, the existence of status competitions implies that a position-less
  economy does not arise in the long-term.
- 
-\end_layout
-
-\begin_layout Standard
-The population constraint is interpreted simply as 
-\end_layout
-
-\begin_layout Standard
-$W(
-\backslash
-nu_{1,t})=L(
-\backslash
-nu_{2,t})
-\backslash
-forall t
-\backslash
-in [1,
-\backslash
-tau]$
-\end_layout
-
-\begin_layout Standard
-In othe words, the consumers choose $
-\backslash
-nu_{1,t}$ and $
-\backslash
-nu_{2,t}$ so that the above condition holds true in the every period $t
-\backslash
-in[1,
-\backslash
-tau]$.
-\end_layout
-
-\begin_layout Standard
-As a side-note, contrast this with a more general formulation where the
- population constraint is imposed with $W(
-\backslash
-nu,
-\backslash
-Lambda)$ and $L(
-\backslash
-nu,
-\backslash
-Lambda)$ so that the total number of promotions and demotions are balanced
- out in the very long-term ( $
-\backslash
-Lambda$ (need not be the same as $
-\backslash
-tau$).
- Given that $E(
-\backslash
-sum_k^
-\backslash
-Lambda{ W(
-\backslash
-nu_{1,k})})=
-\backslash
-sum_k^
-\backslash
-Lambda{ E(W(
-\backslash
-nu_{1,k}))}$, the more population constraint would mean that 
-\end_layout
-
-\begin_layout Standard
-$
-\backslash
-sum_t^
-\backslash
-Lambda{ W(
-\backslash
-nu_{1,t})}=
-\backslash
-sum_t^
-\backslash
-Lambda{ L(
-\backslash
-nu_{2,t})}
-\backslash
-equiv 
-\backslash
-eta$
-\end_layout
-
-\begin_layout Subsection
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:ProportionsRichPoor"
-
-\end_inset
-
-Proportions of rich and poor
 \end_layout
 
 \begin_layout Standard
