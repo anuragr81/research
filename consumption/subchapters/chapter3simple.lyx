@@ -38,7 +38,7 @@ theorems-sec
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "palatino" "IBM Plex Serif"
+\font_roman "tgschola" "IBM Plex Serif"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -193,7 +193,7 @@ Current Approach
 \begin_inset Text
 
 \begin_layout Plain Layout
-The model did not consider non-pecuniary role of status in competitions.
+The model does not consider non-pecuniary role of status in competitions.
 \end_layout
 
 \end_inset
@@ -234,8 +234,8 @@ Promotions are hardly symmetrical to demotions (i.e.
 \begin_inset Text
 
 \begin_layout Plain Layout
-This is no longer assumed in the model and the ratio of promotions to demotions
- 
+This is no longer assumed in the model and the discussion considers the
+ evolution of the ratio of promotions to demotions 
 \begin_inset Formula $\frac{{W(\nu_{1})}}{L(\nu_{2})}$
 \end_inset
 
@@ -279,7 +279,7 @@ There is no discount factor being considered in the multi time-period solution.
 
 \begin_layout Plain Layout
 Discount factors are introduced in a simpler model where risk-neutral consumer
- optimise the assets.
+ optimise the assets (rather than utility).
 \end_layout
 
 \end_inset
@@ -366,13 +366,18 @@ noindent
 \end_layout
 
 \begin_layout Standard
-The main goal of our model is to see how consumer behaviour changes with
- respect to income differences 
+The main goal of our model is to explain how consumer behaviour with respect
+ to effort or investment towards their own status changes in response to
+ income differences 
 \begin_inset Formula $\Delta\equiv y_{2}-y_{1}$
 \end_inset
 
- .
- The fundamental assumption is that 
+ where 
+\begin_inset Formula $y_{1},y_{2}$
+\end_inset
+
+ are disposable incomes for the poor and rich consumers (respectively).
+ A fundamental assumption for the model is that 
 \begin_inset Formula $y_{1}$
 \end_inset
 
@@ -380,22 +385,20 @@ The main goal of our model is to see how consumer behaviour changes with
 \begin_inset Formula $y_{2}$
 \end_inset
 
- are fixed in the short-term horizon considered for the consumer.
+ are fixed in the short-term horizon considered by the consumer.
+ The resetting of wealth at a certain period 
+\begin_inset Formula $t=\tau$
+\end_inset
+
+ is also an intrinsic feature of the model.
 \end_layout
 
 \begin_layout Standard
-We proceed by first discussing the trivial case when players (consumers)
- maximise accumulated assets in the terminal state.
- In this trivial case, any values of 
-\begin_inset Formula $\nu_{1,t\in[1,\tau]}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{2,t\in[1,\tau]}$
-\end_inset
-
- that keep the long-term expected value of assets the same for both players
- (consumers) provide the equilibrium conditions (see Section 
+We proceed by first discussing the degenerate case when players (consumers)
+ maximise accumulated assets at an infinite horizon.
+ After discussing the futility of positional competition in such a game,
+ we consider the case when myopic consumers that are concerned with the
+ next immediate single-period (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:SinglePeriodMaximisation"
@@ -406,12 +409,8 @@ noprefix "false"
 \end_inset
 
 ).
- This seems aligned with the literature (e.g.
- St.
- Petersburg paradox) as well - where maximisation of terminal assets hardly
- represent consumer behaviour well.
- The Nash Equilibrium solution and the implications of income differences
- are discussed in Section 
+ The Nash Equilibrium solution for this problem and its implications for
+ effects of income differences are discussed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Nash-Equilibrium"
@@ -425,7 +424,8 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The main changes since the previous model are listed below
+The main changes that have been made to model since its previous version
+ are as follows
 \end_layout
 
 \begin_layout Enumerate
@@ -440,10 +440,28 @@ While the previous model didn't allow the time-horizons to change, the current
 \end_inset
 
 .
- This allows more general considerations of consumer behaviour (including
- stochastic time-horizons).
- The assumptions pertaining to the short-term horizon considered by the
- consumers are detailed in Section 
+ While the solution in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Nash-Equilibrium"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ does deal 
+\begin_inset Formula $\tau=2$
+\end_inset
+
+, a higher 
+\begin_inset Formula $\tau$
+\end_inset
+
+ can be understood as more myopia (i.e.
+ shorter time-horizon) for gains from positional gains in the model.
+ The assumptions pertaining to the short-term horizon are detailed in Section
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:SinglePeriodMaximisation"
@@ -457,17 +475,38 @@ noprefix "false"
 \end_layout
 
 \begin_layout Enumerate
-Unlike the previous model which relied on calamitous risk to accumulated
- assets, the current model banks upon consumption theory to interpret the
- long-term horizon only as the end-of-life for the consumer - where an additiona
-l assumption is that the consumer is unable to transfer her accumulated
- assets to the progeny.
- In this no-bequest model, the consumer must therefore bank upon the game
+Instead of assuming a particular shape of utility function, the closed-form
+ solution for the case of maximisation of assets under assumption of risk-neutra
+l preferences is considered foremost.
+ Utility functions with risk-aversion are to be introduced later along with
+ relevant assumptions for consumer preferences.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The martingale requirement for expected asset maximisation (simplest case)
+ is discussed and the relevant assumptions are made for optimisation of
+ total assets over the short-term horizon.
+ Any efforts in the next period are ignored in the short-term horizon for
+ the consumer.
+\end_layout
+
+\begin_layout Enumerate
+Unlike the previous model which assumed presence of calamitous risk to accumulat
+ed assets, the current model interprets the long-term horizon 
+\begin_inset Formula $\tau$
+\end_inset
+
+ only as the end-of-life for the consumer.
+ The key feature of the model is that the consumer is unable to transfer
+ her accumulated assets to the progeny.
+ With this no-bequest model, the consumer banks upon entirely on the game
  of social positions at the end of her life-cycle.
  The feature accommodates the objection made by dissimilarity between social
- and economic positions - since a significant number of players (consumers)
- may achieve a higher socio-economic position but fail to transfer their
- social status towards end-of-life (see Section 
+ and economic positions - since the feature accommodates the possibility
+ of a significant number of players (consumers) achieving a higher socio-economi
+c position while failing to transfer their social status towards end-of-life
+ (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:PopulationConstraint"
@@ -479,8 +518,8 @@ noprefix "false"
 
  for details).
  A further clarification about how the schemes of promotion and demotion
- for two players in the game reflect the proportion of rich and poor is
- detailed in Section 
+ for two players may reflect changing of proportions of rich and poor in
+ the society is provided in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:PopulationConstraint"
@@ -495,26 +534,25 @@ noprefix "false"
 \end_layout
 
 \begin_layout Enumerate
-Unlike the previous model, a particular shape of utility function is not
- assumed for the consumer.
- Instead, the simplest case of maximising of assets under assumption of
- risk-neutral preferences is considered first.
- Utility functions with risk-aversion are to be introduced later along with
- relevant assumptions for consumer preferences.
+The population constraint is not imposed in the short-term for the consumers.
+ Instead, we track the ratio of promotions to demotions to explain how consumer
+ choices to maximise assets are driven by long-term constraints on parameters
+ that control 
+\begin_inset Formula $W(\nu)$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu)$
+\end_inset
+
+ - which are the promotion of demotion functions for poor and rich consumers
+ (respectively) in the model.
  
 \end_layout
 
 \begin_layout Enumerate
-The promotion and demotion functions are assumed have a simper concave form
- and assists as a closed-form solution for a simple case.
-\end_layout
-
-\begin_layout Enumerate
-The martingale requirement for expected asset maximisation (simplest case)
- is specified and relevant assumptions are made for optimisation of total
- assets over the short-term horizon.
- The short-term consumer horizon for the consumer does not consider any
- efforts in the next period.
+The promotion and demotion functions are assumed have a concave form - rather
+ than the logistic form used in the previous version of the model.
 \end_layout
 
 \begin_layout Section
@@ -544,13 +582,13 @@ noindent
 \end_layout
 
 \begin_layout Standard
-The current approach uses only optimisation in a single period i.e.
- the consumers optimise assets are concerned with assets acquired in the
- immediate next period alone.
- While the martingale conditions - which ascertain additivity of assets
- accumulated over multiple time periods in a more general formulation of
- maximisation over multiple periods - can be ensured using a risk-neutral
- probability measure (
+The current model uses maximisation of assets in a single period i.e.
+ the consumers maximise assets acquired in the immediate next period alone
+ by exercising the choice in the current period.
+ The multiple-period maximisation is avoided for two reasons.
+ First, the alternative to ascertain martingale conditions using a risk-neutral
+ probability measure (which ensure additivity of assets accumulated over
+ multiple time periods - see 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "harrison1981martingales"
@@ -558,18 +596,21 @@ literal "false"
 
 \end_inset
 
-), none of our conclusions about effects of income differences are affected
- due to a simpler formulation of single-period maximisation.
- Another advantage of the single-period assumption is that it lets us to
- relieve the risk-neutrality condition (currently not being used).
+) in the multiple period setting does not influence the results we arrive
+ at for the effects of income differences in a single-period maximisation.
+ Second, the single-period assumption may allow us to relieve the risk-neutralit
+y condition for the consumer's utility.
+ 
 \end_layout
 
 \begin_layout Standard
-It can be easily shown that if the poor and rich consumers optimised an
- infinite-horizon value, then positional game would be inconsequential.
- In other words, if they already know the long-term values of their assets,
- then they won't engage in any short-term gains.
- Consider the long-term evaluations 
+That the consumer horizon must be finite (if not single) for a feasible
+ positional game follows from the argument that the positional game would
+ be inconsequential if the poor and rich consumers optimised an infinite-horizon
+ value.
+ Intuitively, it is easy to see that the consumer won't engage in any short-term
+ gains if they already know the long-term values of their assets.
+ More formally, we can consider the long-term evaluations 
 \begin_inset Formula $\mathscr{A}_{1}$
 \end_inset
 
@@ -577,9 +618,9 @@ It can be easily shown that if the poor and rich consumers optimised an
 \begin_inset Formula $\mathscr{A}_{2}$
 \end_inset
 
- of future assets values for the poor and rich consumers respectively.
- In the long-term equilibrium, the net addition to the assets through the
- positional game would be zero.
+ of future assets values for the poor and rich consumers (respectively)
+ so that in the long-term equilibrium, the net addition to the assets through
+ the positional game would be zero.
  In this equilibrium, the poor and rich consumers would choose 
 \begin_inset Formula $\nu_{1}$
 \end_inset
@@ -596,8 +637,27 @@ and
 \begin_inset Formula $y_{2,t}-\nu_{2,t}+\frac{L(\nu_{2,t})\mathscr{A}_{1}+(1-L(\nu_{2,t}))\mathscr{A}_{2}}{\delta}=\mathscr{A}_{2}$
 \end_inset
 
- .
- This can be achieved when 
+- where 
+\begin_inset Formula $y_{1},y_{2}$
+\end_inset
+
+ are incomes for poorer consumer 1 and richer consumer 2 (respectively),
+ 
+\begin_inset Formula $\delta$
+\end_inset
+
+ represents the time-value of money i.e.
+ a discount factor and 
+\begin_inset Formula $W(\nu_{1,t})$
+\end_inset
+
+, 
+\begin_inset Formula $L(\nu_{2,t})$
+\end_inset
+
+ are functions for promotion and demotion functions for two respective positions
+ (poor and rich) in the game.
+ One way this can be achieved is be having 
 \begin_inset Formula $y_{1,t}=\nu_{1,t}$
 \end_inset
 
@@ -626,23 +686,44 @@ ties implied by
 \begin_inset Formula $\mathscr{A}_{2}$
 \end_inset
 
-.
+ and thus positional game is inconsequential for either of the consumers.
+ 
 \end_layout
 
 \begin_layout Standard
-Our focus in the current chapter is to consider myopic consumers with a
- single-period horizon.
+Such a result seems at odds for what we observe about status competitions.
+ The maximisation of terminal assets are hardly reported to represent consumer
+ behaviour well (see St.
+ Petersburg paradox
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SanjitDhamiBehavioural2016"
+literal "false"
+
+\end_inset
+
+).
+ In fact, the instances of economic history suggest that income differences
+ that are perceived as perpetual often increase the possibilities of social
+ unrest rather than assisting stable equilibria.
+ 
+\end_layout
+
+\begin_layout Standard
+With consumer myopia being a better representation of the real-world conditions,
+ we our attention on maximisation of assets for until the immediately next
+ period.
  The single-period horizon for the consumer implies that the assets optimised
  by the consumer in period 
 \begin_inset Formula $t$
 \end_inset
 
- do not included the effort or consumption in the next period the expression
- for 
+ do not include the effort or investment in the next period i.e.
+ the expression for 
 \begin_inset Formula $\nu_{t}$
 \end_inset
 
- need not include 
+ should not include 
 \begin_inset Formula $\nu_{1,t+1}$
 \end_inset
 
@@ -651,15 +732,16 @@ Our focus in the current chapter is to consider myopic consumers with a
 \end_inset
 
 ).
- Therefore the strategy for 
+ This allows us to solve for consumer 1's strategy i.e.
+ 
 \begin_inset Formula $\nu_{1,t\in[1,\tau]}$
 \end_inset
 
- can solved by iterations starting with period 
+ by iterations starting with period 
 \begin_inset Formula $t=1$
 \end_inset
 
- until 
+ and finishing at 
 \begin_inset Formula $t=\tau$
 \end_inset
 
@@ -668,11 +750,11 @@ Our focus in the current chapter is to consider myopic consumers with a
 \begin_inset Formula $t$
 \end_inset
 
- would need to optimise the following function 
+ would thus need to optimise the following function 
 \begin_inset Formula 
-\begin{alignat*}{1}
-y_{1,t}-\nu_{1,t}+\frac{W(\nu_{1,t})y_{1,t+1}+(1-W(\nu_{1,t}))y_{2,t+1}}{\delta}
-\end{alignat*}
+\begin{alignat}{1}
+y_{1,t}-\nu_{1,t}+\frac{W(\nu_{1,t})y_{1,t+1}+(1-W(\nu_{1,t}))y_{2,t+1}}{\delta}\label{eq:consumer1genoptimfunc}
+\end{alignat}
 
 \end_inset
 
@@ -715,15 +797,15 @@ Here,
 \end_inset
 
 , the consumer (a risk-neutral dynast) cannot carry over the accumulated
- assets and must spend everything on the position game -, letting the assets
- to be augmented in the last period by 
+ assets and must spend everything on the position game - thus letting the
+ assets to be augmented in the last period by 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-\frac{W(y_{1,t})y_{1,t+1}+(1-W(y_{2,t1}))y_{2,t+1}}{\delta}
-\end{align*}
+\begin{align}
+\frac{W(y_{1,t})y_{1,t+1}+(1-W(y_{2,t1}))y_{2,t+1}}{\delta}\label{eq:consumer1genlastperiod}
+\end{align}
 
 \end_inset
 
@@ -731,15 +813,62 @@ Here,
 \end_layout
 
 \begin_layout Standard
-There are two particular conditions that we now impose on the model 
+Similarly, the consumer 2 i.e.
+ the richer consumer maximises the following function in every period 
+\begin_inset Formula $t$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+y_{2,t}-\nu_{2,t}+\frac{L(\nu_{2,t})y_{1,t+1}+(1-L(\nu_{2,t}))y_{1,t+1}}{\delta}\label{eq:consumer2genoptimfunc}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The consumer 2 i.e.
+ the richer consumer would add the following value to her assets in the
+ last period
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\frac{W(y_{1,t})y_{1,t+1}+(1-W(y_{2,t1}))y_{2,t+1}}{\delta}\label{eq:consumer2genlastperiod}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To discuss the solution of the equilibrium, we consider a special case with
+ two conditions
 \end_layout
 
 \begin_layout Enumerate
-The 
-\bar under
-income in every period
-\bar default
- to the consumers remains the same so that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Stable Incomes}
+\end_layout
+
+\end_inset
+
+ - The income in every period to the consumers remains the same so that
+ 
 \begin_inset Formula $y_{1,t}=y_{1}$
 \end_inset
 
@@ -759,35 +888,39 @@ income in every period
 \begin_inset Formula $t\ne\tau$
 \end_inset
 
- is one where she adds 
+ is one where the poorer (or richer) consumer adds 
 \begin_inset Formula $W(\nu_{1,t})y_{2}+(1-W(\nu_{1,t}))y_{1}$
 \end_inset
 
- in any time period 
+ (or 
+\begin_inset Formula $L(\nu_{2,t})y_{1}+(1-L(\nu_{2,t}))y_{2}$
+\end_inset
+
+) in any time period 
 \begin_inset Formula $t\ne\tau$
 \end_inset
 
- - while in the last period, the consumers would set 
+ - while in the last period, the consumer sets 
 \begin_inset Formula $\nu_{1,\tau}=y_{1}$
 \end_inset
 
- and 
+ (or 
 \begin_inset Formula $\nu_{2,\tau}=y_{2}$
 \end_inset
 
- so that they hope to have 
+ ) hoping to have 
 \begin_inset Formula $W(y_{1})y_{2}+(1-W(y_{1}))y_{1}$
 \end_inset
 
- and 
+ (or 
 \begin_inset Formula $L(y_{2})y_{1}+(1-L(y_{2}))y_{2}$
 \end_inset
 
- in the first period (without considering the effort 
+ ) in the first period (without considering the effort or investment 
 \begin_inset Formula $\nu_{1,1},\nu_{2,1}$
 \end_inset
 
- in the first period.
+ in the first period after the reset).
  The solution in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -807,11 +940,20 @@ noprefix "false"
 \end_layout
 
 \begin_layout Enumerate
-A specific set of (concave) 
-\bar under
-promotion and demotion functions
-\bar default
- are chosen as 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Concave promotion and demotion functions}
+\end_layout
+
+\end_inset
+
+ - A specific set of (concave) promotion and demotion functions are chosen
+ as 
 \begin_inset Formula $W(\nu_{1})=1-\frac{1}{\sqrt{a\nu_{1}+1}}$
 \end_inset
 
@@ -820,18 +962,6 @@ promotion and demotion functions
 \end_inset
 
 .
- These functions are used to arrive at closed-form solutions for a Nash
- equilibrium (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Nash-Equilibrium"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
 \end_layout
 
 \begin_layout Subsection
@@ -863,7 +993,7 @@ noindent
 \begin_layout Standard
 The following functions for promotion and demotion of the poor and rich
  consumers (respectively) satisfy the two conditions of being i) increasing
- in 
+ (decreasing) in 
 \begin_inset Formula $\nu$
 \end_inset
 
@@ -880,8 +1010,7 @@ The following functions for promotion and demotion of the poor and rich
 \begin_inset Formula $\nu$
 \end_inset
 
-) ii) being asymptotic i.e.
- 
+) and ii) asymptotic to unity (zero) so that 
 \begin_inset Formula $\lim_{\nu\rightarrow\infty}W(\nu)=1$
 \end_inset
 
@@ -1006,7 +1135,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/consumer1optimfunc.png
-	width 4.5in
+	width 4in
 
 \end_inset
 
@@ -1124,7 +1253,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/consumer2optimfunc.png
-	width 4.5in
+	width 4in
 
 \end_inset
 
@@ -1308,10 +1437,7 @@ Once again, the the rise in income differences would increase chosen
 \end_layout
 
 \begin_layout Standard
-
-\bar under
-Notice that we have not assumed any credit for the consumer.
- Therefore, the constraints 
+So far we have not considered the constraints 
 \begin_inset Formula $0<\nu_{1}<y_{1}$
 \end_inset
 
@@ -1319,11 +1445,8 @@ Notice that we have not assumed any credit for the consumer.
 \begin_inset Formula $0<\nu_{2}<y_{2}$
 \end_inset
 
- must also be imposed on the maximisation (
-\bar default
-for functions 
-\bar under
-specified in Equations 
+ - which are necessary to impose on the maximisation functions (see Equations
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:consumer1optimfunc"
@@ -1343,12 +1466,13 @@ noprefix "false"
 
 \end_inset
 
-).
- 
-\bar default
-These constraints allow us to consider the conditions for withdrawal from
- positional game.
- Since maximisation of 
+) particularly since not credit line has been asssumed for the consumer.
+ The constraints present us with conditions that lead to either of the consumers
+ withdrawing from the positional game.
+\end_layout
+
+\begin_layout Standard
+Since maximisation of 
 \begin_inset Formula $f(\nu)$
 \end_inset
 
