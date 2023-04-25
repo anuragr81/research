@@ -991,9 +991,12 @@ noindent
 \end_layout
 
 \begin_layout Standard
-The following functions for promotion and demotion of the poor and rich
- consumers (respectively) satisfy the two conditions of being i) increasing
- (decreasing) in 
+The functions for promotion and demotion of the poor and rich consumers
+ (respectively) must satisfy both of the following conditions 
+\end_layout
+
+\begin_layout Enumerate
+increasing (decreasing) in 
 \begin_inset Formula $\nu$
 \end_inset
 
@@ -1010,7 +1013,11 @@ The following functions for promotion and demotion of the poor and rich
 \begin_inset Formula $\nu$
 \end_inset
 
-) and ii) asymptotic to unity (zero) so that 
+) and 
+\end_layout
+
+\begin_layout Enumerate
+asymptotic to unity (zero) so that 
 \begin_inset Formula $\lim_{\nu\rightarrow\infty}W(\nu)=1$
 \end_inset
 
@@ -1018,7 +1025,12 @@ The following functions for promotion and demotion of the poor and rich
 \begin_inset Formula $\lim_{\nu\rightarrow\infty}L(\nu)=0$
 \end_inset
 
-.
+
+\end_layout
+
+\begin_layout Standard
+We choose the following single-parameter concave functions that meet the
+ above criteria
 \end_layout
 
 \begin_layout Standard
@@ -1044,31 +1056,50 @@ L(\nu) & =\frac{1}{\sqrt{b\nu+1}}\label{eq:lnu_concave}
 \end_layout
 
 \begin_layout Standard
-The above functions allow the optimisation functions for the two consumers
- to be concave.
- More specifically, the poorer consumer optimises (see Figure 
+The functions in Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:optimfunc_consumer1"
+reference "eq:wnu_concave"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- for 
-\begin_inset Formula $y_{1}=2,$
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:lnu_concave"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
+ also permit the maximisation functions for the two consumers (see Equations
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:consumer1genoptimfunc"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_inset Formula $a=2$
 \end_inset
 
-and 
-\begin_inset Formula $y_{2}=10$
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:consumer2genoptimfunc"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
-) the following function
+) to be concave.
+ More specifically, the poorer consumer maximises the following function
+ which is concave 
 \begin_inset Foot
 status open
 
@@ -1090,7 +1121,29 @@ For
 
 \end_inset
 
+(see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:optimfunc_consumer1"
+plural "false"
+caps "false"
+noprefix "false"
 
+\end_inset
+
+ for a plot of the function with 
+\begin_inset Formula $y_{1}=2,$
+\end_inset
+
+
+\begin_inset Formula $a=2$
+\end_inset
+
+and 
+\begin_inset Formula $y_{2}=10$
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
@@ -1117,7 +1170,7 @@ status open
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-y_{1}-\nu_{1}+\frac{1}{\delta}(y_{2}\times(1-\frac{1}{\sqrt{a\nu_{1}+1}})+y_{1}\times\frac{1}{\sqrt{a\nu_{1}+1}}\label{eq:consumer1optimfunc}
+y_{1}-\nu_{1}+\frac{1}{\delta}(y_{2}\times(1-\frac{1}{\sqrt{a\nu_{1}+1}})+y_{1}\times\frac{1}{\sqrt{a\nu_{1}+1}}\label{eq:consumer1optimfuncspecial}
 \end{align}
 
 \end_inset
@@ -1178,7 +1231,8 @@ Optimisation function for (poorer) consumer 1 with
 \end_layout
 
 \begin_layout Standard
-Similarly, the richer consumer optimises the following function 
+Similarly, the richer consumer optimises the following function that is
+ also concave
 \begin_inset Foot
 status open
 
@@ -1213,7 +1267,7 @@ For
 
 \end_inset
 
-(see Figure for 
+(see Figure for a plot of the function with 
 \begin_inset Formula $y_{1}=2$
 \end_inset
 
@@ -1231,7 +1285,7 @@ For
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-y_{2}-\nu_{2}+\frac{1}{\delta}(A_{1}\times\frac{1}{\sqrt{b\nu_{2}+1}}+A_{2}\times(1-\frac{1}{\sqrt{b\nu_{2}+1}}))\label{eq:consumer2optimfunc}
+y_{2}-\nu_{2}+\frac{1}{\delta}(A_{1}\times\frac{1}{\sqrt{b\nu_{2}+1}}+A_{2}\times(1-\frac{1}{\sqrt{b\nu_{2}+1}}))\label{eq:consumer2optimfuncspecial}
 \end{align}
 
 \end_inset
@@ -1341,11 +1395,21 @@ The first conditions for consumer 1 imply that
 \end_layout
 
 \begin_layout Standard
-The optimal 
+Therefore, the local maxima for consumer 1 (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:consumer1optimfuncspecial"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) occurs at 
 \begin_inset Formula $\nu_{1}^{*}$
 \end_inset
 
- for consumer 1 is 
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1360,15 +1424,15 @@ The optimal
 \end_layout
 
 \begin_layout Standard
-It can be verified that higher income difference 
+It can be easily verified that higher income difference 
 \begin_inset Formula $y_{2}-y_{1}$
 \end_inset
 
- would increase the chosen 
+ would increase the 
 \begin_inset Formula $\nu_{1}^{*}$
 \end_inset
 
-.
+ chosen by the (poorer) consumer 1.
  On the other hand,
 \begin_inset Formula $\nu_{1}^{*}$
 \end_inset
@@ -1385,7 +1449,7 @@ It can be verified that higher income difference
 \end_layout
 
 \begin_layout Standard
-The first conditions for consumer 2 imply that
+On similar lines, the first conditions for the richer consumer 2 imply that
 \end_layout
 
 \begin_layout Standard
@@ -1400,11 +1464,21 @@ The first conditions for consumer 2 imply that
 \end_layout
 
 \begin_layout Standard
-The optimal 
+The local maxima for consumer 2 (see Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:consumer2optimfuncspecial"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) would be 
 \begin_inset Formula $\nu_{2}^{*}$
 \end_inset
 
- for consumer 2 are 
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1419,25 +1493,25 @@ The optimal
 \end_layout
 
 \begin_layout Standard
-Once again, the the rise in income differences would increase chosen 
+Once again, the rise in income differences would increase chosen 
 \begin_inset Formula $\nu_{2}^{*}$
 \end_inset
 
- where 
+ for the myopic consumer whereas 
 \begin_inset Formula $\nu_{2}^{*}$
 \end_inset
 
- decreases upon in increase in 
+ decreases upon increase in 
 \begin_inset Formula $b$
 \end_inset
 
- increases as the consumer is more secure when she does not need to spend
- a lot to avoid losing her higher position.
+ as the consumer is more secure when she does not need to spend a lot to
+ avoid losing her richer position.
  
 \end_layout
 
 \begin_layout Standard
-So far we have not considered the constraints 
+Notice that we have not so far considered the boundary constraints 
 \begin_inset Formula $0<\nu_{1}<y_{1}$
 \end_inset
 
@@ -1445,11 +1519,11 @@ So far we have not considered the constraints
 \begin_inset Formula $0<\nu_{2}<y_{2}$
 \end_inset
 
- - which are necessary to impose on the maximisation functions (see Equations
- 
+ - constraints that are necessary to impose on the maximisation functions
+ (see Equations 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:consumer1optimfunc"
+reference "eq:consumer1optimfuncspecial"
 plural "false"
 caps "false"
 noprefix "false"
@@ -1459,20 +1533,30 @@ noprefix "false"
  and 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:consumer2optimfunc"
+reference "eq:consumer2optimfuncspecial"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
-) particularly since not credit line has been asssumed for the consumer.
- The constraints present us with conditions that lead to either of the consumers
- withdrawing from the positional game.
+) since no credit line has been assumed for the consumers.
+ These constraints play an important role in the interpretation of the equilibri
+um as they present us with conditions that lead to either of the consumers
+ withdrawing from the positional game (by setting 
+\begin_inset Formula $\nu_{1}^{*}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $\nu_{2}^{*}=0$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
-Since maximisation of 
+To arrive at solutions under boundary constraints, we use the fact that
+ maximisation of 
 \begin_inset Formula $f(\nu)$
 \end_inset
 
@@ -1488,7 +1572,15 @@ Since maximisation of
 \begin_inset Formula $g_{2}(\nu)\ge0$
 \end_inset
 
- means that 
+ (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "takayamaanalyticalmethods1993"
+literal "false"
+
+\end_inset
+
+) leads to 
 \begin_inset Formula $\frac{\partial(f(\nu)+\lambda_{1}g_{1}(\nu)+\lambda_{2}g_{2}(\nu))}{\partial\nu}\le0$
 \end_inset
 
@@ -1508,7 +1600,8 @@ Since maximisation of
 \begin_inset Formula $\lambda_{1},\lambda_{2}$
 \end_inset
 
-), we set 
+).
+ Setting 
 \begin_inset Formula $g_{1}(\nu)=\nu\ge0$
 \end_inset
 
@@ -1516,7 +1609,7 @@ Since maximisation of
 \begin_inset Formula $g_{2}(\nu)=y_{1}-\nu\ge0$
 \end_inset
 
- to have
+ , we have
 \end_layout
 
 \begin_layout Standard
@@ -1534,8 +1627,8 @@ Since maximisation of
 \end_layout
 
 \begin_layout Standard
-Above leads to the following possibilities for the equilibrium for consumer
- 1
+Above leads to the following possibilities for consumer 1 under the global
+ maximum conditions
 \end_layout
 
 \begin_layout Standard
@@ -1669,7 +1762,7 @@ Equivalently, the following three conditions arise for consumer 2
 \begin_inset Formula $\nu_{2}=0$
 \end_inset
 
- represents the situation when consumer 1 has withdrawn from the game.
+ represents the situation when consumer 2 has withdrawn from the game.
 \end_layout
 
 \begin_layout Enumerate
@@ -1689,7 +1782,7 @@ Equivalently, the following three conditions arise for consumer 2
 \begin_inset Formula $\nu_{2}=y_{2}$
 \end_inset
 
- represents the situation when consumer 1 has increased 
+ represents the situation when consumer 2 has increased 
 \begin_inset Formula $\nu$
 \end_inset
 
@@ -1719,20 +1812,21 @@ Equivalently, the following three conditions arise for consumer 2
 
 \begin_layout Standard
 It is possible therefore that an equilibrium is achieved where only one
- of the consumers achieve a local maximum whereas the other consumer has
- either withdrawn from game or set effort to the maximum possible.
+ of the consumers achieves a local maximum whereas the other consumer has
+ either withdrawn from game or set effort to the maximum possible values
+ (
+\begin_inset Formula $y_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+).
  It is also also that both of the consumers have withdrawn from the game
  or have been unable to achieve a local maximum by setting their efforts
  to maximum possible values.
- These conditions are driven by the parameters 
-\begin_inset Formula $a$
-\end_inset
-
- and 
-\begin_inset Formula $b$
-\end_inset
-
- apart from the incomes 
+ Apart from the incomes 
 \begin_inset Formula $y_{1}$
 \end_inset
 
@@ -1740,7 +1834,29 @@ It is possible therefore that an equilibrium is achieved where only one
 \begin_inset Formula $y_{2}$
 \end_inset
 
- in the model.
+ in the model, these conditions are driven by the parameters 
+\begin_inset Formula $a$
+\end_inset
+
+, 
+\begin_inset Formula $b$
+\end_inset
+
+ and the discount factors 
+\begin_inset Formula $\delta$
+\end_inset
+
+ - whose effects we now discussion in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:PopulationConstraint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
