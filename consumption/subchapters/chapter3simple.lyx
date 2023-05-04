@@ -113,7 +113,7 @@ theorems-sec
 \begin_body
 
 \begin_layout Section
-Resolution for past objections 
+Proposed Resolution for past objections 
 \end_layout
 
 \begin_layout Standard
@@ -2116,10 +2116,10 @@ The above solution treats the parameters
 \end_inset
 
  as exogenous.
- A necessary constraint on the parameters follows however from the observation
- that for social positions to be maintained - the promotions and demotions
+ However, a necessary constraint on the parameters follows from the observation
+ that for social positions to be maintained, the promotions and demotions
  must balance each other in the long-term.
- This is the same made on constraints to social growth by 
+ This is the argument for constraints on social growth made by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HarrodGrowth1958"
@@ -2127,7 +2127,7 @@ literal "false"
 
 \end_inset
 
- that has been further discussed by 
+ (see further discussion by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HirschSocialLimits,scitovskyjoyless1992"
@@ -2135,15 +2135,15 @@ literal "false"
 
 \end_inset
 
- .
- 
-\bar under
-In the above model
-\bar default
-, the life-standards that determine the rich or poor status of the consumer
- - categories which exist so long as there is one poor or one rich person
- in the long-term - are assumed to be exogenous and to evolve with the income
- differences 
+ ).
+ In the model with the said population constraint, the life-standards that
+ determine the rich or poor status of the consumer - categories which exist
+ so long as there is at least one poor or one rich person in the population
+ - determine the parameters 
+\begin_inset Formula $a,b$
+\end_inset
+
+ (for a given set of 
 \begin_inset Formula $y_{1}$
 \end_inset
 
@@ -2155,26 +2155,6 @@ and
 \begin_inset Formula $\delta$
 \end_inset
 
-.
- The balance of demotions and promotions is also subject to the proportions
- of poor and rich in the population and influences the parameters 
-\begin_inset Formula $a,b,y_{1},y_{2}$
-\end_inset
-
- and 
-\begin_inset Formula $\delta$
-\end_inset
-
- through the life-standards in the economy (see discussion in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:ProportionsRichPoor"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
 ).
  
 \end_layout
@@ -2184,7 +2164,7 @@ For a life-cycle
 \begin_inset Formula $\tau$
 \end_inset
 
- and the single-periods within them (each which are represented by 
+ and the short-term periods within them (each which are represented by 
 \begin_inset Formula $t\in[1,\tau]$
 \end_inset
 
@@ -2192,21 +2172,15 @@ For a life-cycle
  and demotions means that the net demotions over a few life-cycles would
  balance out the promotions.
  To consider what the constraint means in terms of the above model, we define
- the ratio of promotions to demotions in every period as follows
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align}
-\rho(t) & =\frac{W(\nu_{1,t})}{L(\nu_{2,t})}\label{eq:rho_ratio}
-\end{align}
-
+ the ratio of promotions to demotions in every long-term period 
+\begin_inset Formula $\tau$
 \end_inset
 
 
-\end_layout
+\begin_inset Foot
+status open
 
-\begin_layout Standard
+\begin_layout Plain Layout
 An implicit assumption with the above definition (Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2241,7 +2215,27 @@ noprefix "false"
 \end_inset
 
 ).
- Therefore, using the forms of 
+ 
+\end_layout
+
+\end_inset
+
+as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\rho_{\tau}(T) & =\frac{W(\nu_{1,1})+W(\nu_{1,2})}{L(\nu_{2,1})+L(\nu_{2,2})}\label{eq:rho_ratio}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the forms of 
 \begin_inset Formula $W(\nu)$
 \end_inset
 
@@ -2300,9 +2294,10 @@ or,
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align}
-\rho(t) & =(\frac{y_{2}-y_{1}}{2\delta})^{1/3}-1\label{eq:rho_t_solution}
-\end{align}
+\begin{gather}
+\rho_{\tau}(T)=\frac{W(\nu_{1}^{*})+W(y_{1})}{L(\nu_{2}^{*})+L(y_{2})}\nonumber \\
+=\frac{(1-(\frac{2\delta}{y_{2}-y_{1}})^{1/3})+(1-\frac{1}{\sqrt{ay_{1}+1}})}{(\frac{2\delta}{y_{2}-y_{1}})^{1/3}+\frac{1}{\sqrt{by_{2}+1}}}\label{eq:rho_t_solution}
+\end{gather}
 
 \end_inset
 
@@ -2310,29 +2305,38 @@ or,
 \end_layout
 
 \begin_layout Standard
-The ratio of promotions vs demotions thus depends only on income differences
- 
-\begin_inset Formula $y_{2}-y_{1}$
+For two consecutive lifetimes 
+\begin_inset Formula $T_{1},T_{2}$
 \end_inset
 
- and the discount factor 
-\begin_inset Formula $\delta$
+ , the above sum must get closer to 1 i.e.
+ if 
+\begin_inset Formula $y_{1,T_{1}}$
 \end_inset
 
-.
- As we have argued before, higher income differences 
-\begin_inset Formula $y_{2}-y_{1}$
+, 
+\begin_inset Formula $y_{2,T_{2}}$
 \end_inset
 
- must increase promotions in the equilibrium.
- However, promotions in the long-term must also be balanced by demotions
- because of population stability so that
+represent the incomes and 
+\begin_inset Formula $\delta_{T_{1}}$
+\end_inset
+
+,
+\begin_inset Formula $\delta_{T_{2}}$
+\end_inset
+
+ the discount factors in lifetimes 
+\begin_inset Formula $T_{1},T_{2}$
+\end_inset
+
+ , then 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\lim_{t\rightarrow\infty}{\rho(t)} & =1
+\frac{(1-(\frac{2\delta}{y_{2}-y_{1}})^{1/3})+(1-\frac{1}{\sqrt{ay_{1}+1}})}{(\frac{2\delta}{y_{2}-y_{1}})^{1/3}+\frac{1}{\sqrt{by_{2}+1}}}
 \end{align*}
 
 \end_inset
@@ -2341,6 +2345,38 @@ The ratio of promotions vs demotions thus depends only on income differences
 \end_layout
 
 \begin_layout Standard
+As we have argued before, higher income differences 
+\begin_inset Formula $y_{2}-y_{1}$
+\end_inset
+
+ must increase promotions in the equilibrium.
+ However, promotions in the long-term must also be balanced by demotions
+ because of population stability so that the ratio of promotions of overall
+ promotions to demotions approaches one.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\rho_{\tau}(T)=\frac{W(\nu_{1}^{*})+W(y_{1})}{L(\nu_{2}^{*})+L(y_{2})}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since the population constraint is a long-term concern, it is useful to
+ consider conditions for when promotions dominate in the economy i.e.
+ when 
+\begin_inset Formula $\rho(\tau)>1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\strikeout on
 With the forms of 
 \begin_inset Formula $W(\nu)$
 \end_inset
@@ -2369,10 +2405,12 @@ noprefix "false"
 
 \end_inset
 
-, there are two possibilities for the constraint to be met
+, there are two possibilities for the population constraint to be met
 \end_layout
 
 \begin_layout Standard
+
+\strikeout on
 \begin_inset ERT
 status open
 
@@ -2389,15 +2427,24 @@ noindent
 \end_layout
 
 \begin_layout Enumerate
+
+\strikeout on
 The high income differences are balanced by periods of low income differences
  letting the term 
 \begin_inset Formula $(\frac{y_{2}-y_{1}}{2\delta})^{1/3}$
 \end_inset
 
- fluctuate above and below 1 in the long-term
+ fluctuate above and below 1 over multiple long-term periods 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Enumerate
+
+\strikeout on
 The discount factor 
 \begin_inset Formula $\delta$
 \end_inset
@@ -2407,14 +2454,14 @@ The discount factor
 \begin_inset Formula $\delta$
 \end_inset
 
- implying a higher normative impatience of the consumers) would rise to
- lower the term 
+ implying a higher normative impatience of the consumers) rises to lower
+ the term 
 \begin_inset Formula $(\frac{y_{2}-y_{1}}{2\delta})^{1/3}$
 \end_inset
 
 .
- In other words, the impatience for investment (or consumption) in the current
- period (rather than the next) may rise to satisfy the population constraint.
+ In other words, the impatience for consumption(investment) in the current
+ period rather than next may rise to satisfy the population constraint.
 \end_layout
 
 \begin_layout Standard
@@ -2422,8 +2469,8 @@ A special case for the population constraint is one where
 \begin_inset Formula $\rho(t)=1$
 \end_inset
 
- in the short-time horizon for the consumer as well .
- - therefore ensuring that 
+ for consumer's short-time horizon as well i.e.
+ 
 \begin_inset Formula $\delta$
 \end_inset
 
@@ -2432,16 +2479,17 @@ A special case for the population constraint is one where
 \end_inset
 
  balance each other out in the consumer's short-term horizon.
- In the above model - where consumer maximise expected assets in a finite-horizo
-n -the constraint being met in the short-term horizon means that consumers
- adjust their expectation for future assets as the income differences rise.
- The applicability of the model with the constraint is thus limited to the
- cases when consumers alter their expectations as soon as promotions balance
- out demotions.
+ When maximise expected assets in the short-term, this requires consumers
+ to adjust their expectation for future assets immediately as the income
+ differences rise.
+ The applicability of this special case is limited to cases when balancing
+ of promotions with demotions and adjustment of consumers future expectations
+ both occur simultaneously in the short-term.
 \end_layout
 
 \begin_layout Standard
-We now discuss the effect of income differences on consumer choices of 
+We consider a more general interpretation of the effect of income differences
+ on consumer choices of 
 \begin_inset Formula $\nu_{1}^{*}$
 \end_inset
 
@@ -2449,7 +2497,7 @@ We now discuss the effect of income differences on consumer choices of
 \begin_inset Formula $\nu_{2}^{*}$
 \end_inset
 
-in presence of the population constraint on parameters 
+ - where the parameters 
 \begin_inset Formula $a,b$
 \end_inset
 
@@ -2457,22 +2505,16 @@ in presence of the population constraint on parameters
 \begin_inset Formula $\delta$
 \end_inset
 
-.
+ may change over multiple long-term periods 
+\begin_inset Formula $\tau$
+\end_inset
+
+ so long as population constraint is met.
  Recall that 
 \begin_inset Formula $y_{1},y_{2}$
 \end_inset
 
- represent long-term income differences (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:SinglePeriodMaximisation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-) and thus 
+ represent long-term income differences and thus 
 \begin_inset Formula $y_{1},y_{2}$
 \end_inset
 
@@ -2481,68 +2523,31 @@ noprefix "false"
 \end_inset
 
 .
- The parameters 
+ It is helpful to consider differentiate between cases when 
+\begin_inset Formula $\rho(t)>1$
+\end_inset
+
+ when promotions are more numerous than demotions and those where 
+\begin_inset Formula $\rho(t)<1$
+\end_inset
+
+ i.e.
+ those where demotions are more frequent than promotions.
+ We refer to the former and a promotion regime and the latter as demotion
+ regime.
+ It is easy to higher income gap raise promotions 
+\end_layout
+
+\begin_layout Standard
+CAVEAT: 
 \begin_inset Formula $a,b$
 \end_inset
 
- and 
-\begin_inset Formula $\delta$
+ cancel out for 
+\begin_inset Formula $\rho$
 \end_inset
 
- - on the other hand - may change only so long as population constraint
- is met in the long-term.
- 
-\end_layout
-
-\begin_layout Standard
-MAIN - CONCLUSIONS - 
-\end_layout
-
-\begin_layout Standard
-1.
- In promotion regime - when that happens to age of a particular consumer
-\end_layout
-
-\begin_layout Standard
-2.
- 
-\end_layout
-
-\begin_layout Standard
-time-dependence of 
-\begin_inset Formula $W(\nu)$
-\end_inset
-
- varies for every society and the forms used in Equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:wnu_concave"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:lnu_concave"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- are simplifications of a complex process of changes.
- Our purpose has been to consider the , if a certain form of promotion and
- demotion - which are at least of an epistemic or some cognitive signifiance
- to the consumers are known to us.
- 
-\end_layout
-
-\begin_layout Standard
-...
- promotion regime does not apply to a particular time - ...
+ (this is not always possible).
  
 \end_layout
 
@@ -2562,6 +2567,224 @@ tau .
 \backslash
 tau with respect to consumer horizon is likely to 
 \end_layout
+
+\begin_layout Plain Layout
+
+% ...
+ promotion regime does not apply to a particular time - ...
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+DISCUSSION
+\end_layout
+
+\begin_layout Standard
+What we're saying now is that 
+\begin_inset Formula $a,b,\delta$
+\end_inset
+
+ must change only in the long-term - so the game remains the same in every
+ period - but over many lifetimes the population constraint needs to be
+ met.
+ 
+\begin_inset Formula $\rho$
+\end_inset
+
+ matters only at every life-time and 
+\begin_inset Formula $a,b$
+\end_inset
+
+ only matter in the short-term - since 
+\begin_inset Formula $a,b$
+\end_inset
+
+ cancel out of 
+\begin_inset Formula $W(\nu_{1}^{*})$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\nu_{2}^{*})$
+\end_inset
+
+, they matter only in the last period when the entire income is spent towards
+ positional game.
+ Since it is only once in the lifetime (end-of-life) in the solution when
+ social positioning really matters, the issue that 
+\begin_inset Formula $a,b$
+\end_inset
+
+ change in short-term does not matter.
+ In reality, it's only a long-term value.
+ We have already defined short-term period as one where consumers consider
+ the income to be stable, so the incomes might as well change in every short-ter
+m.
+ What this changes in the solution is that every short-term period would
+ matter and we can no longer consider only two periods.
+ Let's tabulate all parameters now.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="1.5cm">
+<column alignment="center" valignment="top" width="5cm">
+<column alignment="center" valignment="top" width="7cm">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+parameters
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+short-term/long-term
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dependence of long-term/short-term on time-periods
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a,b$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+These matter only once in 
+\bar under
+long-term
+\bar default
+ when expected assets are maximised 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+If multiple periods are assumed then too we have that 
+\begin_inset Formula $a,b$
+\end_inset
+
+ matter once because they don't appear in the any short-term period except
+ last.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{1},y_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+These matter in the short-term.
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+If multiple periods are considered, then incomes may change in every short-term
+ period and affect 
+\begin_inset Formula $\rho$
+\end_inset
+
+ too.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\delta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+These matter in the short-term.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+If multiple periods are considered, then 
+\begin_inset Formula $\delta$
+\end_inset
+
+ may change in every short-term period and affect 
+\begin_inset Formula $\rho$
+\end_inset
+
+ too.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
 
 \end_inset
 
@@ -2656,7 +2879,7 @@ status open
 
 
 \backslash
-emph{ceteries paribus}
+emph{ceteris paribus}
 \end_layout
 
 \end_inset
