@@ -36,7 +36,7 @@ theorems-ams-extended-chap-bytype
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "palatino" "Spectral"
+\font_roman "NotoSerif-TLF" "Spectral"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -2056,6 +2056,13 @@ Notice that only relations with the household head are reported in the survey.
 father_educ_rank
 \family default
  as the control in the study.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+We don't use mother's education because other fields attach with household
+ heads - who are usually male.
 \end_layout
 
 \begin_layout Standard
@@ -4404,9 +4411,25 @@ ln_tot_exp)
 
 
 \family default
- ) for Tanzania.
- This is largely due to educational expenses forming a higher proportion
- of the total expenditure for poorer households.
+ ) for Tanzania - an effect that seems largely due to educational expenses
+ forming a higher proportion of the total expenditure for poorer households.
+ As the household budget ( 
+\family typewriter
+ln_tot_exp)
+\family default
+ rises, the significance of local wealth (
+\family typewriter
+regionalwealth
+\family default
+ ) remains positive but that of total expenditure (
+\family typewriter
+ln_tot_exp)
+\family default
+ declines.
+ This suggests that while richer districts have a higher education budget
+ share overall, the education budget share does not rise with total expenditure
+ significantly.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -4415,7 +4438,7 @@ status open
 
 \begin_layout Plain Layout
 
-%[r - w_educ]
+%[NEED to VIEW regionalwealth and secondary_schools together] 
 \end_layout
 
 \end_inset
@@ -4424,16 +4447,37 @@ status open
 \end_layout
 
 \begin_layout Standard
-[IT NEEDS TO MORE ELEGANTLY STATED THAT THE EFFECT OF REGIONAL WEALTH AND
- SECONDARY_SCHOOLS is SIMILAR and that they are representing the same things]
- Since richer areas should generally have more secondary schools (even though
- the observed correlation between secondary_schools and is nearly 0.2), we
- interpret the effect of secondary-schools together with that of asset density.
- As such the regional-wealth measure ( 
+While it may seen likely that the localities that are richer are also more
+ likely to have a higher number of secondary schools, we do not find this
+ correlation to be strong ( the correlation between 
 \family typewriter
-regionalwealth 
+regionalwealth
 \family default
- ) has a strong and positive influence on educational budget shares 
+ and 
+\family typewriter
+secondary_schools
+\family default
+ is nearly 0.2).
+ Still, there seems good reason to consider the effects of a positive externalit
+y through both local wealth measure (
+\family typewriter
+regionalwealth
+\family default
+) and prices (
+\family typewriter
+log_mean_cost_ne
+\family default
+ ) together with the number of secondary schools ( 
+\family typewriter
+secondary_schools
+\family default
+ ) together- since the factors responsible for the poverty of a district
+ often also deny secondary-school facilities to the district.
+ We see that the effects of regional-wealth measure ( 
+\family typewriter
+regionalwealth
+\family default
+ ) on educational budget shares 
 \family typewriter
 
 \begin_inset Formula $w_{educ}$
@@ -4443,7 +4487,7 @@ regionalwealth
 \family default
  (see coefficients of 
 \family typewriter
-regionalwealth 
+regionalwealth
 \family default
  under columns HH and INDIV in Table 
 \begin_inset ERT
@@ -4458,26 +4502,12 @@ ref{tabTNZ_r}
 
 \end_inset
 
- ).
- Notice however that the regional disparities indicated by 
-\family typewriter
-regionalwealth 
-\family default
- could also be implied by the secondary-schools variable ( 
-\family typewriter
-secondary_schools
-\family default
- ) or the non-durable consumption prices 
+ ) are strong and positive.
+ The effect of non-durable consumption prices (
 \family typewriter
 log_mean_cost_ne
 \family default
- (since richer areas are more likely to have more secondary schools and
- higher prices).
- While the non-durable consumption prices (
-\family typewriter
-log_mean_cost_ne
-\family default
- ) have a weak effect on education-budget share 
+ ) is weak on education-budget share 
 \family typewriter
 
 \begin_inset Formula $w_{educ}$
@@ -4499,7 +4529,7 @@ log_mean_cost_ne
 \family default
  under 
 \family typewriter
-regionalwealth 
+regionalwealth
 \family default
  in Table 
 \begin_inset ERT
@@ -4514,13 +4544,16 @@ ref{tabTNZ_r}
 
 \end_inset
 
-), the effect of the second-schools variable ( 
+) - whereas the effect of the second-schools variable ( 
 \family typewriter
 secondary_schools
 \family default
- ) seems strong and negative.
- This suggests that having more secondary schools in a region decreases
- the budget share 
+ ) is strong and negative.
+ Just like total expenditure (
+\family typewriter
+ln_tot_exp)
+\family default
+, having more secondary schools in a region decreases the budget share 
 \shape italic
 ceteris paribus 
 \shape default
@@ -4543,44 +4576,33 @@ ref{tabTNZ_r}
 \end_inset
 
 ).
- This effect of 
+ The areas with more secondary education opportunities may have relatively
+ higher total expenditure but education budget shares do not rise.
+ The positive effect of local wealth (
+\family typewriter
+regionalwealth
+\family default
+ ) on education budget share is economically stronger (in the opposite direction
+) than that of ( 
 \family typewriter
 secondary_schools
 \family default
- in fact is similar to that of total expenditure ( 
-\family typewriter
-ln_tot_exp)
-\family default
- in that the areas with more secondary education opportunities tend to have
- proportionality higher total expenditure and lower budget shares.
- Still, the overall effect of asset-richness is positive on budget shares
- (see coefficients of 
-\family typewriter
-regionalwealth 
-\family default
- under columns HH and INDIV in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_r}
-\end_layout
-
-\end_inset
-
-) .
- In other words, richer neighborhoods have a higher budget-share for education
+ ).
+ 
+\bar under
+Regional wealth therefore seems to play a rather segregating role for education
+ expenses in the economy
+\bar default
+ - as the richer neighborhoods seem to have a higher budget-share for education
  even after accounting for physical access to education (availability of
  secondary education measured with 
 \family typewriter
 secondary_schools
 \family default
-) - an effect that incorporates various environmental factors associated
- with richer areas - such as a competition towards higher income social
- positions or presence of occupations requiring higher levels of education.
+).
+ The effect may incorporate various environmental factors associated with
+ richer areas - such as a competition towards higher income social positions
+ or presence of occupations requiring higher levels of education.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -4761,8 +4783,15 @@ ref{tabTNZ_r}
 \family default
 ) is not strong for households or individuals.
  However, there is some evidence that poor households may spend less on
- education for female children (see the later results under robustness measures
- in Section 
+ education for
+\bar under
+ female children 
+\bar default
+(
+\bar under
+see the later results under robustness measures 
+\bar default
+in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Robustness-Checks"
@@ -4859,7 +4888,7 @@ ln_tot_exp
 .
  While effect of 
 \family typewriter
-regionalwealth 
+regionalwealth
 \family default
  are not possible to obtain in this formulation, we do see that rural consumers
  overall have lower budget shares on education.
@@ -6084,9 +6113,11 @@ ref{tabTNZ_abovebelow_median}
 \end_inset
 
  for both above and below median assets-possession levels).
- The access to private education and higher parental education level seem
- to matter only to the richer households (the economic significance of private-e
-ducation factor variable 
+ The access to private education and 
+\bar under
+higher parental education level seem to matter only to the richer households
+\bar default
+ (the economic significance of private-education factor variable 
 \family typewriter
 educpriv 
 \family default
@@ -7231,7 +7262,7 @@ The goal of our analysis has been to compare the relative importance of
  secondary level education availability and parental educational effects
  against effects of household permanent income in Tanzania.
  We find overall that the availability of secondary education and parental
- education levels remain a strong factor when considering the variation
+ education levels remain a strong factor when considering the extreme variation
  in urbanisation levels in the economy.
 \end_layout
 
@@ -7254,10 +7285,9 @@ The varying levels of regional wealth allow us to explore the challenges
 \end_layout
 
 \begin_layout Standard
-[IT NEEDS TO REPHRASED - whether how the comparison with NIGERIA is actually
- being done ] A focus on availability of education facilities and of parental
- education levels is critical also because private educational institutions
- do not yet play a major role in the provision of education in the economy.
+A focus on availability of education facilities and of parental education
+ levels is critical also because private educational institutions do not
+ yet play a major role in the provision of education in the economy.
  The strong role of social differences indicated by the significance of
  social characteristics in education expenses - further emphasises the need
  to improve wider access to secondary education.
@@ -7275,6 +7305,17 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[IT NEEDS TO REPHRASED - whether how the comparison with NIGERIA is actually
+ being done ] 
+\end_layout
+
+\end_inset
+
 On other hand, we also find quite high education budget-shares for agrarian
  households in Tanzania - confirming similar findings from other empirical
  investigations in the region (
@@ -7298,10 +7339,9 @@ literal "false"
 \end_inset
 
 ).
- A comparison of Tanzania with the economies from SSA that have experienced
- a more widespread urbanisation and a higher dependence on industrial production
- also suggests that the overall effect of urbanisation may be positive towards
- weakening of permanent income effects on education.
+ This is because countries with more widespread urbanisation and a higher
+ dependence on industrial production in the region (such as Nigeria) exhibit
+ weaker permanent income effects on education in urban areas.
 \end_layout
 
 \begin_layout Standard
