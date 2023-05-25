@@ -140,7 +140,8 @@ centering}
 \backslash
 part*{
 \backslash
-centering{Role of permanent income amidst urbanisation differences in Tanzania}}
+centering{Urbanisation and Effects of permanent income on education in Tanzania}
+}
 \end_layout
 
 \end_inset
@@ -159,12 +160,13 @@ centering{Role of permanent income amidst urbanisation differences in Tanzania}}
 The economies in sub-Saharan Africa often exhibit significant wealth effects
  which limit education expenditure in the region.
  Examining the severity of effect of permanent income across differing levels
- of urbanisation in Tanzania, we find that availability of secondary education
- and parental educational levels continue to be significant apart from permanent
- income measures - particularly in semi-urban areas.
- Contrasting Tanzania with other economies in sub-Saharan Africa that have
- higher urbanisation levels, the papers argues that the effects of permanent
- income may eventually weaken as the urbanisation rises in the region.
+ of urbanisation in Tanzania, we find that apart from household permanent
+ income, the effects of secondary education availability and parental educationa
+l levels on education expenses continue to be significant - particularly
+ in semi-urban areas.
+ Considering Tanzania in contrast with other economies in sub-Saharan Africa
+ with higher urbanisation levels, we argue that the effects of permanent
+ income may eventually weaken in the region with the rise in urbanisation.
 \end_layout
 
 \begin_layout Standard
@@ -2056,13 +2058,14 @@ Notice that only relations with the household head are reported in the survey.
 father_educ_rank
 \family default
  as the control in the study.
-\end_layout
-
-\begin_layout Standard
-
-\bar under
-We don't use mother's education because other fields attach with household
- heads - who are usually male.
+ While it is often more appropriate to use maternal education level as the
+ control for effects of parental education on individual education expenses
+ for a child, our preference to the father's education rank is solely due
+ to other characteristics of the household such as age and occupation being
+ linked with reported household heads who are invariably male in the survey.
+ The normalisation of household characteristics at the household-head level
+ thus constrains to use father's education level as the paternal education
+ control.
 \end_layout
 
 \begin_layout Standard
@@ -3512,7 +3515,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/tnz_lorenz_curves_assets_logx_district_individual.png
-	width 5.4in
+	width 3.8in
 
 \end_inset
 
@@ -3569,7 +3572,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename tnz_assets_occuprank_distribution_2012.png
-	width 5in
+	width 3.8in
 
 \end_inset
 
@@ -3735,7 +3738,11 @@ name "subsec:Results"
 
 \end_inset
 
-Results
+Empirical Results
+\end_layout
+
+\begin_layout Subsubsection*
+Main Formulation
 \end_layout
 
 \begin_layout Standard
@@ -3747,22 +3754,6 @@ status open
 % We don't have panel information for 2012-2014 (for Tanzania).
  So we won't be using panel data.
  Pseudo-panel is a possibility but not considered.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
 \end_layout
 
 \end_inset
@@ -4163,17 +4154,7 @@ re on education.
  A zero expenditure is reported for nearly 43% households in the survey
  from Tanzania (2014).
  A discussion on the cross-section results from the latest available years
- 2014 for Tanzania follows in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Discussion"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- (see Table 
+ 2014 for Tanzania follows in subsequent section (see Table 
 \begin_inset ERT
 status open
 
@@ -4195,84 +4176,41 @@ Alternative Formulation
 \end_layout
 
 \begin_layout Standard
-
-\bar under
 As mentioned earlier, an alternative formulation is specified for a comparison
  with the more conventional approach that uses urban-rural indicators -
  where the two explanatory variables are the logarithm of total assets value
- (
+ 
 \begin_inset Formula $log(A)$
 \end_inset
 
-
+ or
 \family typewriter
  ln_tot_assets
 \family default
-) and the urban/rural indicators (
+ which is used in place of household total expenditure) and the urban/rural
+ indicators 
 \family typewriter
 
 \begin_inset Formula $\gamma$
 \end_inset
 
- rural_wards
+
 \family default
-).
- The results from the alternative formulation - where the main explanatory
- variables are the logarithm of total assets value 
-\family typewriter
-\size small
-ln_tot_assets
-\family default
-\size default
- (used in place of household total expenditure) and the ruralness-score
- 
+ i.e.
+ the ruralness-score 
 \family typewriter
 \size small
 rural_wards 
 \family default
 \size default
-derived from the survey's classification of rural and urban areas (used
- in place of regional-wealth 
+which is derived from the survey's classification of rural-urban areas and
+ is used in place of regional-wealth 
 \family typewriter
 \size small
-regionalwealth 
+regionalwealth
 \family default
 \size default
-) - are also discussed in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Discussion"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- (see Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_r}
-\end_layout
-
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Subsection
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Discussion"
-
-\end_inset
-
-Discussion
+.
 \end_layout
 
 \begin_layout Standard
@@ -4357,7 +4295,7 @@ status open
 \end_layout
 
 \begin_layout Subsubsection*
-Main Explanatory variables
+Role of main Explanatory variables
 \end_layout
 
 \begin_layout Standard
@@ -4411,24 +4349,33 @@ ln_tot_exp)
 
 
 \family default
- ) for Tanzania - an effect that seems largely due to educational expenses
+ ) for Tanzania.
+ The decrease in education budget share 
+\begin_inset Formula $w_{educ}$
+\end_inset
+
+ with high total expenditure is largely due to the educational expenses
  forming a higher proportion of the total expenditure for poorer households.
- As the household budget ( 
+ In other words, the households with a higher total expenditure ( 
 \family typewriter
 ln_tot_exp)
 \family default
- rises, the significance of local wealth (
+ have less budget share on for education.
+ On the other hand, the significance of local wealth (
 \family typewriter
 regionalwealth
 \family default
- ) remains positive but that of total expenditure (
+ ) is positive.
+ As household budget ( 
 \family typewriter
 ln_tot_exp)
 \family default
- declines.
- This suggests that while richer districts have a higher education budget
- share overall, the education budget share does not rise with total expenditure
- significantly.
+ rises, the budget shares decline but richer areas (higher 
+\family typewriter
+regionalwealth
+\family default
+ ) invariably have a higher budget share overall.
+ Education expenses seem rather segregated by asset richness of districts.
  
 \end_layout
 
@@ -4447,8 +4394,8 @@ status open
 \end_layout
 
 \begin_layout Standard
-While it may seen likely that the localities that are richer are also more
- likely to have a higher number of secondary schools, we do not find this
+While it seems likely that the localities that are richer are also more
+ likely to have a higher number of secondary schools, we do not find the
  correlation to be strong ( the correlation between 
 \family typewriter
 regionalwealth
@@ -4458,8 +4405,8 @@ regionalwealth
 secondary_schools
 \family default
  is nearly 0.2).
- Still, there seems good reason to consider the effects of a positive externalit
-y through both local wealth measure (
+ Nevertheless, there seems good reason to consider the effects of a positive
+ externality through both local wealth measure (
 \family typewriter
 regionalwealth
 \family default
@@ -4472,8 +4419,9 @@ log_mean_cost_ne
 secondary_schools
 \family default
  ) together- since the factors responsible for the poverty of a district
- often also deny secondary-school facilities to the district.
- We see that the effects of regional-wealth measure ( 
+ often also deny secondary-school facilities to the district (or influence
+ access to the schools through feasibility of transportation etc.).
+ The strong and positive effects of regional-wealth measure ( 
 \family typewriter
 regionalwealth
 \family default
@@ -4502,8 +4450,21 @@ ref{tabTNZ_r}
 
 \end_inset
 
- ) are strong and positive.
- The effect of non-durable consumption prices (
+ ) therefore are not to be viewed separately from the effects of secondary-schoo
+ls variable ( 
+\family typewriter
+secondary_schools
+\family default
+ ) and non-durable consumption prices (
+\family typewriter
+log_mean_cost_ne
+\family default
+ ) .
+ 
+\end_layout
+
+\begin_layout Standard
+While the effect of non-durable consumption prices (
 \family typewriter
 log_mean_cost_ne
 \family default
@@ -4544,12 +4505,12 @@ ref{tabTNZ_r}
 
 \end_inset
 
-) - whereas the effect of the second-schools variable ( 
+), the secondary-schools variable ( 
 \family typewriter
 secondary_schools
 \family default
- ) is strong and negative.
- Just like total expenditure (
+ ) has a strong but negative effect on education budget shares.
+ Much like total expenditure (
 \family typewriter
 ln_tot_exp)
 \family default
@@ -4577,36 +4538,34 @@ ref{tabTNZ_r}
 
 ).
  The areas with more secondary education opportunities may have relatively
- higher total expenditure but education budget shares do not rise.
+ higher total expenditure but more secondary education facilities do not
+ seems associated with higher education budget share overall.
  The positive effect of local wealth (
 \family typewriter
 regionalwealth
 \family default
- ) on education budget share is economically stronger (in the opposite direction
-) than that of ( 
+ ) on education budget share is economically stronger and in the opposite
+ direction of ( 
 \family typewriter
 secondary_schools
 \family default
  ).
+ Once again, regional wealth seems to play a rather segregating role for
+ education expenses in the economy - as the richer neighborhoods have more
+ often a higher budget-share for education even after accounting for physical
+ access to education (availability of secondary education measured with
  
-\bar under
-Regional wealth therefore seems to play a rather segregating role for education
- expenses in the economy
-\bar default
- - as the richer neighborhoods seem to have a higher budget-share for education
- even after accounting for physical access to education (availability of
- secondary education measured with 
 \family typewriter
 secondary_schools
 \family default
 ).
- The effect may incorporate various environmental factors associated with
- richer areas - such as a competition towards higher income social positions
- or presence of occupations requiring higher levels of education.
+ These effects may incorporate various environmental factors associated
+ with richer areas - such as a competition towards higher income social
+ positions or presence of occupations requiring higher levels of education.
 \end_layout
 
 \begin_layout Subsubsection*
-Control Variables
+Role of Control Variables
 \end_layout
 
 \begin_layout Standard
@@ -4783,15 +4742,8 @@ ref{tabTNZ_r}
 \family default
 ) is not strong for households or individuals.
  However, there is some evidence that poor households may spend less on
- education for
-\bar under
- female children 
-\bar default
-(
-\bar under
-see the later results under robustness measures 
-\bar default
-in Section 
+ education for female children (see the later results under robustness measures
+ in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Robustness-Checks"
@@ -4802,6 +4754,44 @@ noprefix "false"
 \end_inset
 
 ).
+\end_layout
+
+\begin_layout Standard
+Finally, the role of English language seems significant in Tanzania.
+ The English-speakers spend significantly higher on education (see coefficients
+ of 
+\family typewriter
+has_english
+\family default
+ in Table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabTNZ_r}
+\end_layout
+
+\end_inset
+
+ )
+\series bold
+ 
+\series default
+.
+ That said, it is worth stating that the role of social characteristics
+ may be rather inseparable from differences in educational institutions.
+ In other words, the role of an English-speaking parent may only be a reflection
+ of the disparity of access to educational facilities in the economy.
+ There may be few reasons thus to consider the English-speaking status of
+ the household separately from the parental education level for the interpretati
+on of above results.
+\end_layout
+
+\begin_layout Subsubsection*
+Results from Alternative Formulation
 \end_layout
 
 \begin_layout Standard
@@ -4892,37 +4882,6 @@ regionalwealth
 \family default
  are not possible to obtain in this formulation, we do see that rural consumers
  overall have lower budget shares on education.
-\end_layout
-
-\begin_layout Standard
-Finally, the role of English language seems significant in Tanzania.
- The English-speakers spend significantly higher on education (see coefficients
- of 
-\family typewriter
-has_english
-\family default
- in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_r}
-\end_layout
-
-\end_inset
-
- )
-\series bold
- 
-\series default
-.
- That said, it needs to be clarified that the role of social characteristics
- may be rather inseparable from differences in educational institutions.
- In other words, the role of an English-speaking parent may only be a reflection
- of the disparity of access to educational facilities in the economy.
 \end_layout
 
 \begin_layout Standard
@@ -6029,13 +5988,28 @@ noindent
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% First talk about results from regional-wealth and permanent-income as
+ main variables
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 To confirm that household permanent income does affect access to education
  despite the regional disparities and investigate factors that influence
  poorer populations more than richer populations within a locality, we inspect
  the role of assets in lower and higher sub-samples of the surveyed population.
- We thus re-estimate the results with regiona-wealth 
+ We thus re-estimate the results with regional-wealth 
 \family typewriter
-regionalwealth 
+regionalwealth
 \family default
  as the explanatory variable for those with less than the local median wealth
  i.e.
@@ -6044,11 +6018,8 @@ regionalwealth
 ln_tot_assets
 \family default
  and for those above it.
- The results show that certain social and regional influence both richer
- and poorer halves of the populations whereas factors such as the private
- or tertiary-level education favour the richer sub-populations.
- The results for above and below local median-assets possession using education
- budget-shares 
+ Using the results for above and below local median-assets possession using
+ education budget-shares 
 \family typewriter
 
 \begin_inset Formula $w_{educ}$
@@ -6064,7 +6035,7 @@ ln_tot_assets
 
  
 \family default
-(INDIV) as dependent variables are shown in Table 
+(INDIV) as dependent variables that are shown in Table 
 \begin_inset ERT
 status open
 
@@ -6077,23 +6048,18 @@ ref{tabTNZ_abovebelow_median}
 
 \end_inset
 
- for both above and below median assets-possession levels.
- 
-\end_layout
-
-\begin_layout Standard
-We see that the effects of both regional-wealth 
+ , we find that the role of regional wealth 
 \family typewriter
-regionalwealth 
+regionalwealth
 \family default
- and total expenditure 
+ and permanent-income 
 \family typewriter
 ln_tot_exp
 \family default
- on education budget shares for rich and poor halves in a locality are largely
- similar (see coefficients of 
+ are largely similar for both above and below-median household asset ownership
+ levels (see coefficients of 
 \family typewriter
-regionalwealth 
+regionalwealth
 \family default
  and 
 \family typewriter
@@ -6113,11 +6079,15 @@ ref{tabTNZ_abovebelow_median}
 \end_inset
 
  for both above and below median assets-possession levels).
- The access to private education and 
-\bar under
-higher parental education level seem to matter only to the richer households
-\bar default
- (the economic significance of private-education factor variable 
+ 
+\end_layout
+
+\begin_layout Standard
+On the other hand, factors such as the private or tertiary-level education
+ favour the richer sub-populations.
+ More specifically, the access to private education and higher parental
+ education level seem more relevant to the richer households (the economic
+ significance of private-education factor variable 
 \family typewriter
 educpriv 
 \family default
@@ -6157,61 +6127,43 @@ ref{tabTNZ_abovebelow_median}
 \end_inset
 
  ) .
- The higher statistical significance of the number of children 
-\family typewriter
-numchild 
-\family default
-for poorer households (see coefficients of 
-\family typewriter
-numchild
-\family default
- below median assets-possession levels under HH and INDIV in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_abovebelow_median}
-\end_layout
-
-\end_inset
-
-) suggests a higher sensitivity of budget-shares to 
-\family typewriter
-numchild
-\family default
- for lower income households.
- The local prices 
-\family typewriter
-log_mean_cost_ne
-\family default
- has a similar effect on education budget shares for poorer households (see
- coefficients of 
-\family typewriter
-log_mean_cost_ne
-\family default
- for below median assets-possession under HH in Table 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{tabTNZ_abovebelow_median}
-\end_layout
-
-\end_inset
-
-).
+ 
 \end_layout
 
 \begin_layout Standard
-The significance of other social factors remains unaffected by whether the
- consumers have above or below the median asset ownership level.
- More specifically, the factor variable for English-speaking ability 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% [Ignored for robustness-test context purposes ] The higher statistical
+ significance of the number of children numchild for poorer households (see
+ coefficients of numchild below median assets-possession levels under HH
+ and INDIV in Table 
+\backslash
+ref{tabTNZ_abovebelow_median}) suggests a higher sensitivity of budget-shares
+ to numchild for lower income households.
+ The local prices log_mean_cost_ne has a similar effect on education budget
+ shares for poorer households (see coefficients of log_mean_cost_ne for
+ below median assets-possession under HH in Table 
+\backslash
+ref{tabTNZ_abovebelow_median}).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general, the significance of other social factors remains unaffected
+ by whether the consumers have above or below the median asset ownership
+ level
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The factor variable for English-speaking ability 
 \family typewriter
 has_english
 \family default
@@ -6269,7 +6221,13 @@ ref{tabTNZ_abovebelow_median}
 
  for both above and below median assets-possession levels) are also similar
  for both richer and poorer halves of population in a given locality.
- We see again that while budget-shares for a female-child education remain
+ 
+\end_layout
+
+\end_inset
+
+.
+ We also see that while budget-shares for a female-child education remain
  slightly lower (see coefficient of 
 \family typewriter
 1.is_female 
@@ -7022,30 +6980,23 @@ noindent
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 To check whether the wealth effect may weaken significantly relative to
  regional and social effects after accounting for occupation or education
  levels or not, we recompute the regional-wealth measure by considering
  only two types of vicinity.
  The first type being one where the asset-possessions of households in the
- same district (within 6-km boundary) having the same value of an indicator
- for primary/higher-than-primary education-level of the household-head are
- considered for asset-density.
+ same district (within 6-km boundary) 
+\bar default
+having the same value of an indicator for primary/higher-than-primary education-
+level of the household-head are considered for asset-density.
  The second type being one where the asset-possession of households with
  the same value for the agrarian/non-agrarian occupation indicator are considere
 d for asset-density.
- Notice that results discussed in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Discussion"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- use 
+ Notice that results use 
 \family typewriter
-regionalwealth 
+regionalwealth
 \family default
  
 \begin_inset Formula $r$
@@ -7053,17 +7004,8 @@ regionalwealth
 
 - simply as the average of the total assets owned by the households in the
  consumer's district.
- The three types of vicinities altogether (including one used in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Discussion"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-) are summarised in Table 
+ The three types of vicinities altogether (including one used in the discussion
+ of results) are summarised in Table 
 \begin_inset ERT
 status open
 
@@ -7094,17 +7036,7 @@ While both education rank and an agrarian-occupation factor variable
 \family typewriter
 regionalwealth )
 \family default
-used in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Discussion"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the education-based vicinity 
+used in discussion of results, the education-based vicinity 
 \begin_inset Formula $r_{educ}$
 \end_inset
 
