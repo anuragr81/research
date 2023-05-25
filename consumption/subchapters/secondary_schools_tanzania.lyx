@@ -663,7 +663,7 @@ noprefix "false"
  Further robustness checks are conducted by redefining the regional-wealth
  measures which vary the boundaries of households vicinity and examine the
  significance of regional-wealth in the household's neighborhood of similar
- occupations (agrarian/non-agrarian) and education ranks (primary,secondary).
+ occupations (agrarian/non-agrarian) and education levels (primary,secondary).
  In the alternative formulation - which we provide for a comparison with
  a more conventional approach using urban-rural demarcations from the survey
  - the total value of long-term assets owned by the household i.e.
@@ -1383,9 +1383,9 @@ It is worth highlighting that the sample selected for our analysis is limited
  The number of children (household-size), the educational level of the parents,
  the accessibility of schools in the district and the language spoken are
  the important controls used in the analyses.
- For the paternal educational levels, we use an educational rank that is
- standardised by differentiating between primary, secondary and higher education
-al levels (see Section 
+ For the paternal educational levels, we use a standardised educational
+ level variable that obtained by differentiating between primary, secondary
+ and higher educational levels (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Data"
@@ -2026,8 +2026,8 @@ The next important control is the occupation of the households which is
  The number of children in the household, the ages of the children (and
  other members) are directly observed in the data.
  The education levels in the survey are grouped into four education categories
- - setting the education rank to 1 for all pre-primary levels, to rank 2
- for until the completion of primary education, to rank 3 for up to the
+ - setting the education level to 1 for all pre-primary levels, to level
+ 2 for until the completion of primary education, to level 3 for up to the
  secondary education level and to 4 for all higher education levels (higher-seco
 ndary, university etc.).
  To avoid letting the household's paternal education level point to the
@@ -2035,9 +2035,9 @@ ndary, university etc.).
  - where the HH has his/her grandchildren attending school - while letting
  the same variable point to the parents of children in school for nuclear-famili
 es (where HH has his/her children attending school), we rely on a more uniform
- measure for a household's highest paternal education rank 
+ measure for a household's highest paternal education 
 \family typewriter
-father_educ_rank
+level father_educ_level
 \family default
  as the highest education in the generation of the parents of the children
  in household in the survey 
@@ -2053,16 +2053,17 @@ Notice that only relations with the household head are reported in the survey.
 \end_inset
 
 .
- Instead of using the education rank of the household-head, we use 
+ Instead of using the education level of the household-head, we use 
 \family typewriter
-father_educ_rank
+father_educ_level
 \family default
  as the control in the study.
  While it is often more appropriate to use maternal education level as the
  control for effects of parental education on individual education expenses
- for a child, our preference to the father's education rank is solely due
- to other characteristics of the household such as age and occupation being
- linked with reported household heads who are invariably male in the survey.
+ for a child, our preference to the father's education level  is solely
+ due to other characteristics of the household such as age and occupation
+ being linked with reported household heads who are invariably male in the
+ survey.
  The normalisation of household characteristics at the household-head level
  thus constrains to use father's education level as the paternal education
  control.
@@ -2119,7 +2120,7 @@ has_english
  relies on the language spoken in the paternal generation (i.e.
  the language by the individual whose 
 \family typewriter
-father_educ_rank
+father_educ_level
 \family default
  is considered).
  To control for the price of consumption in the household's district, we
@@ -2634,7 +2635,7 @@ small{}father
 \backslash
 _educ
 \backslash
-_rank} & highest education rank in the paternal generation of the children
+_level} & highest education level in the paternal generation of the children
  considered in the household & HH
 \backslash
 tabularnewline 
@@ -2654,7 +2655,7 @@ small{}current
 \backslash
 _educ
 \backslash
-_rank} & current education rank reported for the child & INDIV
+_level} & current education level reported for the child & INDIV
 \backslash
 tabularnewline 
 \end_layout
@@ -2817,7 +2818,7 @@ name "fig:HistEducationRanks"
 
 \end_inset
 
-Education ranks for populations in Tanzania (see Tables 
+Education ranks (levels) for populations in Tanzania (see Tables 
 \begin_inset ERT
 status open
 
@@ -2830,7 +2831,7 @@ ref{education_rank_tnz}
 
 \end_inset
 
- for rank classification)
+ for levels classification)
 \end_layout
 
 \end_inset
@@ -3000,8 +3001,8 @@ Considering the overall distribution of education expenses in the data from
  About 20% (25% in rural areas) of those with age between 6 and 18 have
  never attended school.
  The secondary education appears to get much costlier in Tanzania since
- the mean education expenditure for tertiary education (rank 3) is almost
- double that of the expenditure on secondary education (rank 2) in Tanzania.
+ the mean education expenditure for tertiary education (level 3) is almost
+ double that of the expenditure on secondary education (level 2) in Tanzania.
  The educational expenses seem to rather unequally distributed in Tanzania
  (see Figure 
 \begin_inset CommandInset ref
@@ -3860,9 +3861,9 @@ agri
 \begin_inset Formula $\Omega$
 \end_inset
 
-), the paternal education rank 
+), the paternal education level 
 \family typewriter
-father_educ_rank
+father_educ_level
 \family default
  (
 \begin_inset Formula $\Gamma^{*}$
@@ -3929,10 +3930,10 @@ is_primaryage
 \end_inset
 
  indicating if they are eligible (due to age) for primary, secondary or
- tertiary education (respectively) , the current education rank for every
+ tertiary education (respectively) , the current education level for every
  child 
 \family typewriter
-current_educ_rank
+current_educ_level
 \family default
  (
 \begin_inset Formula $\Gamma$
@@ -3945,7 +3946,7 @@ status open
 \begin_layout Plain Layout
 It is verified that the current-education level of the household member
  is not-available (NA) only when the reported education expense is zero.
- This allows us to education rank to zero for all individual entries where
+ This allows us to education level to zero for all individual entries where
  current education level is not available.
 \end_layout
 
@@ -4010,7 +4011,7 @@ Of the control variables and explanatory variables discussed above, some
  are observed at the household level while others are observed at the level
  of the consumer's district - except for 
 \family typewriter
-current_educ_rank
+current_educ_level
 \family default
 , 
 \family typewriter
@@ -4053,9 +4054,9 @@ status open
  or not), the number of children in the household numchild, the childrens'
  ages factor variables is_primaryage , is_secondaryage and is_tertiaryage
  ), the private education factor variable educpriv, the highest education
- rank father_educ_rank corresponding to the paternal generations (father-relatio
-nship) in a household and the ability to speak English has_english are all
- observed for a household.
+ level father_educ_level corresponding to the paternal generations (father-relat
+ionship) in a household and the ability to speak English has_english are
+ all observed for a household.
  The variables observed at the district (or 6-km vicinity) are the number
  of wards with an accessible (within 6-km distance) secondary-schools (secondary
 _schools), the rural wards (rural_wards) in a district, the respective measures
@@ -4080,12 +4081,12 @@ d to the grandchildren of the household head (HH).
  The education level of the HH would thus point to the penultimate generation
  for households where HH has grandchildren and the previous generation for
  younger households where HH has young children.
- To resolve this disparity, we avoid using the education rank of the HH
- and instead use the highest education rank in the generation of the students'
+ To resolve this disparity, we avoid using the education level of the HH
+ and instead use the highest education level in the generation of the students'
  parents Only relations with the household head are reported in the survey.
  Thus, there is no direct way of locating the parent of a child except through
  the relation with the household-head.
- father_educ_rank instead.
+ father_educ_level instead.
  The paternal educational level highesteduc suffices for our analysis of
  expenditure spent over all the children in the household (rather than how
  education budget is distributed among the male/female children).
@@ -4133,7 +4134,7 @@ The results from the a tobit estimation for educational expenses (
 \family default
 ) with regional-wealth 
 \family typewriter
-regionalwealth 
+regionalwealth
 \family default
  as one of the controls are shown in Table 
 \begin_inset ERT
@@ -4149,6 +4150,9 @@ ref{tabTNZ_r}
 \end_inset
 
  .
+ As mentioned earlier, a tobit estimation for education budget shares is
+ used to account for the zero expenditure on education for a significant
+ number of households.
  The tobit uses a lower limit of zero given a number of houses have no expenditu
 re on education.
  A zero expenditure is reported for nearly 43% households in the survey
@@ -4640,12 +4644,12 @@ ref{tabTNZ_r}
 \begin_layout Standard
 The role of parental education levels 
 \family typewriter
-father_educ_rank
+father_educ_level
 \family default
- - particularly that of education rank 4 - seems strong in the results (see
- coefficient of 
+ - particularly that of education level 4 - seems strong in the results
+ (see coefficient of 
 \family typewriter
-father_educ_rank
+father_educ_level
 \family default
  in Table 
 \begin_inset ERT
@@ -4684,15 +4688,15 @@ status open
 \end_layout
 
 \begin_layout Standard
-The effects of the current educational rank ( 
+The effects of the current educational level ( 
 \family typewriter
-current_educ_rank
+current_educ_level
 \family default
  ) is significant and positive indicating simply that education expenses
- do rise significantly as the children move to higher education ranks (see
+ do rise significantly as the children move to higher education levels (see
  the coefficient of 
 \family typewriter
-current_educ_rank
+current_educ_level
 \family default
  under INDIV in Table 
 \begin_inset ERT
@@ -5088,8 +5092,8 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&  0.00667         &-0.000496         &  0.00654         & -0.00285   
-      
+_level&  0.00667         &-0.000496         &  0.00654         & -0.00285  
+       
 \backslash
 
 \backslash
@@ -5102,8 +5106,8 @@ _rank&  0.00667         &-0.000496         &  0.00654         & -0.00285
 \backslash
 _educ
 \backslash
-_rank&  0.00313         &   0.0139         & 0.000269         &   0.0100   
-      
+_level&  0.00313         &   0.0139         & 0.000269         &   0.0100  
+       
 \backslash
 
 \backslash
@@ -5116,8 +5120,8 @@ _rank&  0.00313         &   0.0139         & 0.000269         &   0.0100
 \backslash
 _educ
 \backslash
-_rank&  0.00235         & -0.00270         &  0.00103         & -0.00968   
-      
+_level&  0.00235         & -0.00270         &  0.00103         & -0.00968  
+       
 \backslash
 
 \backslash
@@ -5130,7 +5134,7 @@ _rank&  0.00235         & -0.00270         &  0.00103         & -0.00968
 \backslash
 _educ
 \backslash
-_rank&   0.0157
+_level&   0.0157
 \backslash
 sym{*}  &   0.0154
 \backslash
@@ -5243,8 +5247,8 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&                  &  0.00578         &                  &  0.00888 
-        
+_level&                  &  0.00578         &                  &  0.00888
+         
 \backslash
 
 \backslash
@@ -5257,7 +5261,7 @@ _rank&                  &  0.00578         &                  &  0.00888
 \backslash
 _educ
 \backslash
-_rank&                  &   0.0174
+_level&                  &   0.0174
 \backslash
 sym{***}&                  &   0.0163
 \backslash
@@ -5274,7 +5278,7 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&                  &   0.0938
+_level&                  &   0.0938
 \backslash
 sym{***}&                  &   0.0916
 \backslash
@@ -5291,7 +5295,7 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&                  &    0.103
+_level&                  &    0.103
 \backslash
 sym{***}&                  &   0.0948
 \backslash
@@ -5621,8 +5625,8 @@ sym{***}&  0.00290
 \backslash
 _educ
 \backslash
-_rank&  0.00814         & -0.00202         &  0.00610         &   0.0110   
-      
+_level&  0.00814         & -0.00202         &  0.00610         &   0.0110  
+       
 \backslash
 
 \backslash
@@ -5635,8 +5639,8 @@ _rank&  0.00814         & -0.00202         &  0.00610         &   0.0110
 \backslash
 _educ
 \backslash
-_rank&   0.0164         &   0.0161         &  -0.0136         &  0.00517   
-      
+_level&   0.0164         &   0.0161         &  -0.0136         &  0.00517  
+       
 \backslash
 
 \backslash
@@ -5649,8 +5653,8 @@ _rank&   0.0164         &   0.0161         &  -0.0136         &  0.00517
 \backslash
 _educ
 \backslash
-_rank& 0.000690         & -0.00341         &  0.00545         &  -0.0113   
-      
+_level& 0.000690         & -0.00341         &  0.00545         &  -0.0113  
+       
 \backslash
 
 \backslash
@@ -5663,8 +5667,8 @@ _rank& 0.000690         & -0.00341         &  0.00545         &  -0.0113
 \backslash
 _educ
 \backslash
-_rank&   0.0157         &   0.0149         &   0.0190         &  0.00727   
-      
+_level&   0.0157         &   0.0149         &   0.0190         &  0.00727  
+       
 \backslash
 
 \backslash
@@ -5766,8 +5770,8 @@ sym{***}&-0.000743
 \backslash
 _educ
 \backslash
-_rank&                  &  0.00449         &                  &   0.0131 
-        
+_level&                  &  0.00449         &                  &   0.0131
+         
 \backslash
 
 \backslash
@@ -5780,7 +5784,7 @@ _rank&                  &  0.00449         &                  &   0.0131
 \backslash
 _educ
 \backslash
-_rank&                  &   0.0162
+_level&                  &   0.0162
 \backslash
 sym{***}&                  &   0.0228
 \backslash
@@ -5797,7 +5801,7 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&                  &   0.0917
+_level&                  &   0.0917
 \backslash
 sym{***}&                  &    0.114
 \backslash
@@ -5814,7 +5818,7 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&                  &    0.101
+_level&                  &    0.101
 \backslash
 sym{***}&                  &                  
 \backslash
@@ -6345,7 +6349,7 @@ hline  $r$ &
 texttt{regionalwealth } & Average over geographical vicinity (district)
  & $
 \backslash
-Omega$ , education-rank
+Omega$ , education-level
 \backslash
 tabularnewline 
 \end_layout
@@ -6381,7 +6385,7 @@ texttt{regionalwealth
 \backslash
 _agri} & Separate averages over $
 \backslash
-Omega$ & education-rank
+Omega$ & education-level
 \backslash
 tabularnewline 
 \end_layout
@@ -6644,8 +6648,8 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&  0.00660         &-0.000561         &  0.00688         &-0.000140   
-      
+_level&  0.00660         &-0.000561         &  0.00688         &-0.000140  
+       
 \backslash
 
 \backslash
@@ -6658,8 +6662,8 @@ _rank&  0.00660         &-0.000561         &  0.00688         &-0.000140
 \backslash
 _educ
 \backslash
-_rank&  0.00272         &   0.0135         &  0.00315         &   0.0143   
-      
+_level&  0.00272         &   0.0135         &  0.00315         &   0.0143  
+       
 \backslash
 
 \backslash
@@ -6672,8 +6676,8 @@ _rank&  0.00272         &   0.0135         &  0.00315         &   0.0143
 \backslash
 _educ
 \backslash
-_rank&  0.00216         & -0.00290         &  0.00241         & -0.00178   
-      
+_level&  0.00216         & -0.00290         &  0.00241         & -0.00178  
+       
 \backslash
 
 \backslash
@@ -6686,7 +6690,7 @@ _rank&  0.00216         & -0.00290         &  0.00241         & -0.00178
 \backslash
 _educ
 \backslash
-_rank&   0.0157
+_level&   0.0157
 \backslash
 sym{*}  &   0.0151
 \backslash
@@ -6801,8 +6805,8 @@ sym{***}& -0.00112
 \backslash
 _educ
 \backslash
-_rank&                  &  0.00611         &                  &  0.00506 
-        
+_level&                  &  0.00611         &                  &  0.00506
+         
 \backslash
 
 \backslash
@@ -6815,7 +6819,7 @@ _rank&                  &  0.00611         &                  &  0.00506
 \backslash
 _educ
 \backslash
-_rank&                  &   0.0175
+_level&                  &   0.0175
 \backslash
 sym{***}&                  &   0.0171
 \backslash
@@ -6832,7 +6836,7 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&                  &   0.0941
+_level&                  &   0.0941
 \backslash
 sym{***}&                  &   0.0939
 \backslash
@@ -6849,7 +6853,7 @@ sym{***}
 \backslash
 _educ
 \backslash
-_rank&                  &    0.103
+_level&                  &    0.103
 \backslash
 sym{***}&                  &    0.101
 \backslash
@@ -6980,17 +6984,14 @@ noindent
 \end_layout
 
 \begin_layout Standard
-
-\bar under
 To check whether the permanent income effects weaken significantly relative
  to regional and social effects after accounting for occupation or education
  levels or not, we recompute the regional-wealth measure by considering
  only two types of vicinity.
  The first type being one where the asset-possessions of households in the
- same district (within 6-km boundary) 
-\bar default
-having the same value of an indicator for primary/higher-than-primary education-
-level of the household-head are considered for asset-density.
+ same district (within 6-km boundary) having the same value of an indicator
+ for primary/higher-than-primary education-level of the household-head are
+ considered for asset-density.
  The second type being one where the asset-possession of households with
  the same value for the agrarian/non-agrarian occupation indicator are considere
 d for asset-density.
@@ -7041,7 +7042,7 @@ The goal of this exercise to consider whether effects of regional wealth
  indicate whether the education level of the household-head is higher than
  primary school or not and is derived the education level variable (
 \family typewriter
-father_educ_rank
+father_educ_level
 \family default
 ).
  The education-based vicinity 
@@ -7055,7 +7056,7 @@ regionalwealth_educ
 - is defined based on this variable - so that the relevant regional-wealth
  corresponding to a household depends on whether the 
 \family typewriter
-father_educ_rank
+father_educ_level
 \family default
  is above primary-education level or not.
  Similarly, an agrarian-occupation factor variable 
@@ -7086,7 +7087,7 @@ d vicinity is based on the average prosperity in the agrarian vs non-agrarian
 \end_inset
 
 ).
- Notice that education rank is excluded as control when considering vicinity
+ Notice that education level is excluded as control when considering vicinity
  
 \begin_inset Formula $r_{\Gamma}$
 \end_inset
@@ -7387,7 +7388,7 @@ hline
 
 
 \backslash
-caption{Education levels as ranks in Tanzania 
+caption{Education levels as levels in Tanzania 
 \backslash
 label{education_rank_tnz}}
 \end_layout
@@ -7404,7 +7405,7 @@ multicolumn{1}{c}{} &
 \backslash
 multicolumn{1}{c}{education code} & 
 \backslash
-multicolumn{1}{c}{education rank}
+multicolumn{1}{c}{education level}
 \backslash
 
 \backslash
