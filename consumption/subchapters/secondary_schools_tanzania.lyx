@@ -6960,7 +6960,7 @@ end{table}
 \end_layout
 
 \begin_layout Subsubsection*
-Asset-density interpretations based on similar neighbours
+Local wealth interpretations limited to similar neighbours
 \end_layout
 
 \begin_layout Standard
@@ -6982,8 +6982,8 @@ noindent
 \begin_layout Standard
 
 \bar under
-To check whether the wealth effect may weaken significantly relative to
- regional and social effects after accounting for occupation or education
+To check whether the permanent income effects weaken significantly relative
+ to regional and social effects after accounting for occupation or education
  levels or not, we recompute the regional-wealth measure by considering
  only two types of vicinity.
  The first type being one where the asset-possessions of households in the
@@ -7023,53 +7023,91 @@ ref{tab:ReferenceDefinitions}
 \end_layout
 
 \begin_layout Standard
-While both education rank and an agrarian-occupation factor variable 
+The goal of this exercise to consider whether effects of regional wealth
+ are significant among educated and agrarian individuals as well.
+ These vicinities are defined based on binary variables 
 \begin_inset Formula $\Omega$
 \end_inset
 
- indicating whether the household head's occupation is agrarian or not are
- used as controls in the vicinity 
-\begin_inset Formula $r$
+ and 
+\begin_inset Formula $\Gamma$
 \end_inset
 
- (
+ derived form education levels and occupation levels respectively.
+ The supra-primary factor variable 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ indicate whether the education level of the household-head is higher than
+ primary school or not and is derived the education level variable (
 \family typewriter
-regionalwealth )
+father_educ_rank
 \family default
-used in discussion of results, the education-based vicinity 
-\begin_inset Formula $r_{educ}$
+).
+ The education-based vicinity 
+\begin_inset Formula $r_{\Gamma}$
 \end_inset
 
  
 \family typewriter
-assetdensit_educ 
+regionalwealth_educ 
 \family default
-- which is based on a supra-primary factor variable 
-\begin_inset Formula $\Gamma$
-\end_inset
-
- indicating whether the education level of the household-head is higher
- than primary school or not - considers the agrarian/non-agrarian factor
- variable 
+- is defined based on this variable - so that the relevant regional-wealth
+ corresponding to a household depends on whether the 
+\family typewriter
+father_educ_rank
+\family default
+ is above primary-education level or not.
+ Similarly, an agrarian-occupation factor variable 
 \begin_inset Formula $\Omega$
 \end_inset
 
- as a control and excludes the education rank whose effect is already considered
- in the vicinity.
- The type of vicinity thus considers the prosperity within the educational
- levels implied by supra-primary factor variable 
+ indicates whether the household head's occupation is agrarian or not and
+ is used define the 
+\begin_inset Formula $r_{\Omega}$
+\end_inset
+
+ 
+\family typewriter
+regionalwealth_occup
+\family default
+.
+ The types of vicinity thus consider the assets within the educational levels
+ implied by supra-primary factor variable 
 \begin_inset Formula $\Gamma$
 \end_inset
 
  alone (i.e.
- primary and higher-than primary educational levels).
- The occupation-based vicinity is based on the average prosperity in the
- agrarian vs non-agrarian occupations (i.e.
+ primary and higher-than primary educational levels) whereas the occupation-base
+d vicinity is based on the average prosperity in the agrarian vs non-agrarian
+ occupations (i.e.
  
 \begin_inset Formula $\Omega$
 \end_inset
 
-) and uses educational rank as the additional control variable.
+).
+ Notice that education rank is excluded as control when considering vicinity
+ 
+\begin_inset Formula $r_{\Gamma}$
+\end_inset
+
+ 
+\family typewriter
+regionalwealth_educ 
+\family default
+and 
+\family typewriter
+1.agri
+\family default
+ is excluded as control when considering the vicinity 
+\begin_inset Formula $r_{\Omega}$
+\end_inset
+
+ 
+\family typewriter
+regionalwealth_occup
+\family default
+.
  The results from the two types of vicinities are presented in Table 
 \begin_inset ERT
 status open
@@ -7087,7 +7125,7 @@ ref{tabTNZ_reducoccup}
 \end_layout
 
 \begin_layout Standard
-The results suggest that the effects of total expenditure ( 
+The results confirm that the effects of total expenditure ( 
 \family typewriter
 ln_tot_exp
 \family default
@@ -7223,7 +7261,7 @@ A focus on availability of education facilities and of parental education
  The strong role of social differences indicated by the significance of
  social characteristics in education expenses - further emphasises the need
  to improve wider access to secondary education.
- These findings seems aligned with the wider observations for the region
+ These findings seem aligned with the wider observations for the region
  made by 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -7248,21 +7286,17 @@ status open
 
 \end_inset
 
-On other hand, we also find quite high education budget-shares for agrarian
- households in Tanzania - confirming similar findings from other empirical
- investigations in the region (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "MinnisNonformalEducation2006,porzio2021human"
-literal "false"
 
-\end_inset
+\end_layout
 
-).
- Given the optimism towards future income equity offered by the resulting
- higher educational levels, there are reasons to argue that permanent income
- effects would weaken with rise in urbanisation (often suggested by conventional
- pathways to urban development in the literature - 
+\begin_layout Standard
+We find there are plenty of reasons to be optimistic about the future rise
+ in educational levels and the development of economic institutions.
+ Comparing with other economies in the SSA where urbanisation is higher
+ (such as Nigeria), the strong effect of local wealth on educational expenses
+ also means that permanent income effects may weaken with rise in urbanisation.
+ This aligns with the conventional pathways to urban development that are
+ discussed in the literature 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "KuznetsEconomicGrowthIneq2019"
@@ -7270,10 +7304,8 @@ literal "false"
 
 \end_inset
 
-).
- This is because countries with more widespread urbanisation and a higher
- dependence on industrial production in the region (such as Nigeria) exhibit
- weaker permanent income effects on education in urban areas.
+.
+ 
 \end_layout
 
 \begin_layout Standard
