@@ -1,0 +1,1105 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+### Probability Function Let's consider the likelihood of a participant
+ $i 
+\backslash
+in [1,N]$ winning in a competition that rewards only a privately known raw
+ talent $r_i$.
+ hopkinsWhichInequality2010 discuss about a similar competition (all-pay
+ auction).
+ We assume that the set $
+\backslash
+{r_i
+\backslash
+}_{i
+\backslash
+in[ 1,N]}$ is a total order so that the maximum $r_i$ would win the raw-talent
+ competition.
+ In other words, the winner would be a player $j$ such that $
+\backslash
+{ r_i < r_j 
+\backslash
+forall i
+\backslash
+in [1,N]
+\backslash
+} $.
+\end_layout
+
+\begin_layout Standard
+Based only on raw-talent, the probability that a given participant $i$ of
+ raw-skill $r_i$ is the winner is essentially that of all other players
+ $j
+\backslash
+ne i$ having ability $r_{j 
+\backslash
+ne i}$ less than $r_i$.
+ This is the probability that
+\end_layout
+
+\begin_layout Standard
+$
+\backslash
+int_{0}^{1}{P(r_i>r_1)
+\backslash
+times P(r_i>r_2)
+\backslash
+times...
+ P(r_i>r_{i-1})
+\backslash
+times P(r_i>r_{i+1}) ...
+ P(r>r_N)} dr_i$
+\end_layout
+
+\begin_layout Standard
+With a uniform distribution of skills $r 
+\backslash
+in [0,1]$, we have $P(r_i 
+\backslash
+ge r)=r_i$ for all $i
+\backslash
+in [1,N]$ and therefore, the above integral becomes $
+\backslash
+int_{0}^{1}{(r_i)^{N-1}} dr_i = 
+\backslash
+frac{1}{N}$.
+ With more players, the chances of a particular participant winning declines.
+\end_layout
+
+\begin_layout Standard
+After a swordfighter passes away, a new elite member is to be selected based
+ on the random pick of both raw talent and acquired skills.
+ We consider a parameter $ 
+\backslash
+mu 
+\backslash
+in (0,1) $ that combines skills $s$ and raw-talent $r$ so that the maximum
+ score $
+\backslash
+mu r + (1-
+\backslash
+mu)s $ wins the competion.
+ Notice that the skills $s$ are rewarded only for a cost.
+ Unlike hopkinsWhichInequality2010, we also the institutional bias in the
+ model.
+ The discrimination exists for a poor consumer only because skills acquired
+ for every competition cost something to the consumer who is bounded by
+ a finite budget.
+\end_layout
+
+\begin_layout Standard
+#### Discrete model without choice
+\end_layout
+
+\begin_layout Standard
+In a discrete formulation, the the poor are priced out of accessing any
+ skills $s$ in their score so that the skills $s>0$ can only be true for
+ those that are rich.
+ The number of poor and rich are meant to be stable in the long-run and
+ the competition ensues only when a rich participant passes away.
+ For a poor participant to win, she must be ahead of all of the poor participant
+s and ahead of rich participants as well.
+ A participant $i$ can win if $r_i$ is higher than than raw-talent in all
+ poor participants and also exceeds the score involving $s$.
+ If the number of poor are $P$.
+ Then, we have the integral
+\end_layout
+
+\begin_layout Standard
+$ 
+\backslash
+int_{s_k=0}^{s_k=1} ( 
+\backslash
+int_{r_i=0}^{1}{
+\backslash
+prod_{j=1}^{i-1}{P(r_i>r_j)} 
+\backslash
+times 
+\backslash
+prod_{j=i+1}^{P}{P(r_i>r_j)} 
+\backslash
+times 
+\backslash
+prod_{j=P+1}^{N}{P(r_i>
+\backslash
+mu r_j+ (1-
+\backslash
+mu) s_k)} } ) $
+\end_layout
+
+\begin_layout Standard
+or
+\end_layout
+
+\begin_layout Standard
+$ 
+\backslash
+int_{s_k=0}^{s_k=1} ( 
+\backslash
+int_{r_i=0}^{1}{ r_i^{P-1} 
+\backslash
+times 
+\backslash
+prod_{j=P+1}^{N}{P(
+\backslash
+frac{r_i - (1-
+\backslash
+mu) s_k}{
+\backslash
+mu} > r_j )} } ) $ or
+\end_layout
+
+\begin_layout Standard
+$ 
+\backslash
+int_{s_k=0}^{s_k=1} 
+\backslash
+int_{r_i=0}^{1}{ r_i^{P-1} (
+\backslash
+frac{r_i - (1-
+\backslash
+mu) s_k}{
+\backslash
+mu}) }^{N-P} $
+\end_layout
+
+\begin_layout Standard
+The solution can be found in wolfram with "integrate(r**(p-1)*((r-(1-m)*s)/(m))*
+*(n-p),r,0,1)".
+\end_layout
+
+\begin_layout Standard
+On the other hand, the poor person can win so long as the poor consumers
+ ($P$ in number) have their score $r$ less than a particular score $s_i$
+ and those among the rich have their total score $
+\backslash
+mu r_k+ (1-
+\backslash
+mu) s_k < s_i$.
+ Therefore, the integral is
+\end_layout
+
+\begin_layout Standard
+$
+\backslash
+int_{s_k=0}^{s_k=1} 
+\backslash
+int_{r_i=0}^{r_i=1}{
+\backslash
+prod_{j=1}^{j=P}{P(r_j< 
+\backslash
+mu r_i + (1-
+\backslash
+mu)s_i)} 
+\backslash
+prod_{j=P+1}^{j=N}{P(
+\backslash
+mu r_j+(1-
+\backslash
+mu) s_j < 
+\backslash
+mu r_i+(1-
+\backslash
+mu) s_i) }}$
+\end_layout
+
+\begin_layout Standard
+Here, we use the result of PDF being the convolution of uniform variables
+ and the assumption that $
+\backslash
+mu<
+\backslash
+frac{1}{2}$ (and therefore $ 
+\backslash
+mu<1-
+\backslash
+mu$).
+\end_layout
+
+\begin_layout Standard
+$
+\end_layout
+
+\begin_layout Standard
+f(z) = 
+\backslash
+begin{cases} 
+\backslash
+frac{z}{
+\backslash
+mu(1-
+\backslash
+mu)} 
+\backslash
+quad 0<z<
+\backslash
+mu 
+\backslash
+
+\backslash
+ 
+\backslash
+frac{1}{1-
+\backslash
+mu} 
+\backslash
+quad 
+\backslash
+mu<z<1-
+\backslash
+mu 
+\backslash
+
+\backslash
+ 
+\backslash
+frac{1-z}{
+\backslash
+mu(1-
+\backslash
+mu)} 
+\backslash
+quad 1-
+\backslash
+mu<z<1 
+\backslash
+
+\backslash
+ 
+\backslash
+end{cases}
+\end_layout
+
+\begin_layout Standard
+$
+\end_layout
+
+\begin_layout Standard
+This is based on the result that
+\end_layout
+
+\begin_layout Standard
+$
+\end_layout
+
+\begin_layout Standard
+f(z) = 
+\backslash
+begin{cases} 
+\backslash
+frac{z}{ab} 
+\backslash
+quad 0<z<a 
+\backslash
+
+\backslash
+ 
+\backslash
+frac{1}{b} 
+\backslash
+quad a<z<b 
+\backslash
+
+\backslash
+ 
+\backslash
+frac{a+b-z}{ab} 
+\backslash
+quad b<z<a+b 
+\backslash
+
+\backslash
+ 
+\backslash
+end{cases}
+\end_layout
+
+\begin_layout Standard
+$
+\end_layout
+
+\begin_layout Standard
+The CDF of the above density is $
+\end_layout
+
+\begin_layout Standard
+F(z) = 
+\backslash
+begin{cases} 
+\backslash
+frac{z^2}{2ab} 
+\backslash
+quad 0<z<a 
+\backslash
+
+\backslash
+ 
+\backslash
+frac{z-a/2}{b} 
+\backslash
+quad a<z<b 
+\backslash
+
+\backslash
+ 
+\backslash
+frac{b-a/2}{b} + 
+\backslash
+frac{(a+b)z-z^2/2 - ( ab+b^2/2 )}{ab} 
+\backslash
+quad b<z<a+b 
+\backslash
+
+\backslash
+ 
+\backslash
+end{cases}
+\end_layout
+
+\begin_layout Standard
+$
+\end_layout
+
+\begin_layout Standard
+The probability written in terms of $r_i$ and $s_i$ is to be then integrated
+ to find probability of winning for the richer consumers.
+ That would be the bias.
+\end_layout
+
+\begin_layout Standard
+The CDF above can be verified with $CDF(
+\backslash
+infty)
+\backslash
+rightarrow 1$ by setting $z=a+b$ in the general equation (verified with
+ "evaluate (b-a/2)/(b)+((a+b)*z-z^2/2-(a*b+(b^2)/2))/(a*b) at z = a+b").
+ 
+\end_layout
+
+\begin_layout Standard
+## Continuous model with choice
+\end_layout
+
+\begin_layout Standard
+Hopkins do talk about a similar model.
+ Our model differs primarily due to consideration of budget constraints
+ for choice.
+ Consider distribution of raw-talent $r
+\backslash
+in (0,1)$ as before.
+ But consider also the price of skills $
+\backslash
+pi$ so that a budget $y$ can be used to obtain $s=c(y,
+\backslash
+pi)$ units of skills where $c(y,
+\backslash
+pi)$ is a cost function that may represent higher costs for more skills.
+ Regardless of the form of the question, it's certain that no skills are
+ obtained when $y<
+\backslash
+pi$ i.e.
+ $s=0$ when $y<
+\backslash
+pi$.
+ The participants face the choice to save towards assets $A$ or expend on
+ skills to improve their chances.
+\end_layout
+
+\begin_layout Standard
+Now consider $N$ participants in the game, out of which $P$ are poor and
+ obtained disposable income $y_1$ in two periods.
+ No income is saved towards end of life and thus the poor and rich participants
+ spend $y_1$ and $y_2$ towards the skills.
+ The first-period is when the participants choose between saving and enhancing
+ their skills.
+ In the first-period, the poor participant realises that she may be ahead
+ of others in the competitions with a certain probability.
+ To win, she must ensure that her raw-talent $r_i$ is ahead of all others
+ - both rich and poor.
+ Similarly, the rich consumer also participates while realising a probability
+ of being ahead of both rich and poor.
+\end_layout
+
+\begin_layout Standard
+We may consider a simplification where skills provide a deterministic advantage
+ to the participants.
+ In reality, skills also only provide a probabilitic advantage as not everybody
+ having gone to a skills-training achieves full-results.
+ The difference with skills - despite considering their probabilistic advantage
+ - is that they can be enhanced with money.
+ Raw-talent does not change with institutional advantages.
+\end_layout
+
+\begin_layout Standard
+When considering the poor participant, the conditional probability that
+ she wins the competitions for a given $
+\backslash
+{r_i,s_i
+\backslash
+}$ is
+\end_layout
+
+\begin_layout Standard
+$
+\backslash
+prod_{k=1}^{k=P-1}{P( r_i 
+\backslash
+mu + s_i (1-
+\backslash
+mu) c(
+\backslash
+nu_1,
+\backslash
+pi) > r_k 
+\backslash
+mu + s_k (1-
+\backslash
+mu) c(
+\backslash
+nu_1,
+\backslash
+pi) )} 
+\backslash
+prod_{k=P+1}^{k=N}{P(r_i 
+\backslash
+mu + s_i (1-
+\backslash
+mu) c(
+\backslash
+nu_1,
+\backslash
+pi) > r_k 
+\backslash
+mu + s_k (1-
+\backslash
+mu) c(
+\backslash
+nu_2,
+\backslash
+pi))} $
+\end_layout
+
+\begin_layout Standard
+An integral over $r_i$ and $s_i$ would give us the total probability.
+\end_layout
+
+\begin_layout Standard
+Similarly, when considering the rich consumer, the conditional probability
+ that she wins the competitions for a given $
+\backslash
+{r_i,s_i
+\backslash
+}$ is
+\end_layout
+
+\begin_layout Standard
+$
+\backslash
+prod_{k=1}^{k=P-1}{P( r_i 
+\backslash
+mu + s_i (1-
+\backslash
+mu) c(
+\backslash
+nu_2,
+\backslash
+pi) > r_k 
+\backslash
+mu + s_k (1-
+\backslash
+mu) c(
+\backslash
+nu_1,
+\backslash
+pi) )} 
+\backslash
+prod_{k=P+1}^{k=N}{P(r_i 
+\backslash
+mu + s_i (1-
+\backslash
+mu) c(
+\backslash
+nu_2,
+\backslash
+pi) > r_k 
+\backslash
+mu + s_k (1-
+\backslash
+mu) c(
+\backslash
+nu_2,
+\backslash
+pi))} $
+\end_layout
+
+\begin_layout Standard
+We assume that the participant do not use the skill level $s_i$ or the raw-talen
+t $r_i$ to make any consumption decision.
+ This is because the skill and raw-talent are both revealed to the participants
+ upon participation in the competition.
+ Therefore, all poor consumers and all rich consumers behave the same way
+ regardless of $r_i$ or $s_i$.
+ Further, $r_i$ and $s_i$ are independent by definition since raw-talents
+ are not enhanced by skills-granting institutions.
+ The total probability of a win either for poor or rich participants is
+ simply $
+\backslash
+int_{s_i} P(
+\backslash
+text{win}|s_i) P(s_i) $ where $P(
+\backslash
+text{win}|s_i)=
+\backslash
+int_{r_i}P(win|(s_i,r_i))P(r_i)$.
+ If we represent densities of conditional probability of winning , with
+ given $r_i$ and $s_i$ as $f(
+\backslash
+text{win}|r_i,s_i)$ then the above probability of winning (i.e.
+ $
+\backslash
+int_{s_i} { (
+\backslash
+int_{r_i} { {P(
+\backslash
+text{win}|s_i,r_i) P(r_i)} }) P(s_i) }$ ) for a participant can be written
+ as
+\end_layout
+
+\begin_layout Standard
+$W=
+\backslash
+int_{s_i} { (
+\backslash
+int_{r_i} { {f(
+\backslash
+text{win}|s_i,r_i) dr_i} }) ds_i }$
+\end_layout
+
+\begin_layout Standard
+Notice that the above integral relies on $r_i$ and $s_i$ being independent
+ - an assumption that is hardly stringent given the existence of certain
+ raw-talents not enhanced by institutions.
+\end_layout
+
+\begin_layout Standard
+### Uniform distribution
+\end_layout
+
+\begin_layout Standard
+The combination of uniform-variables provides a triangular distribution.
+ Thus high combined scores - including both skills and raw-talent - are
+ not uniformly distributed in the population even though raw-talent and
+ skills may be distributed uniformly.
+\end_layout
+
+\begin_layout Standard
+Using the general-solution above, we can intepret the probability and sensitivit
+ies while considering the discontinuities in the consumer utility (owing
+ to convolution properties).
+\end_layout
+
+\begin_layout Standard
+Instead of a discountinous cost-function one may consider the function $c(
+\backslash
+nu,
+\backslash
+pi)$ that is more sensitive to the investment (as opposed to a simple function
+ $
+\backslash
+nu/
+\backslash
+pi$).
+ Out of the two options of having diminishing returns or exponential returns,
+ we find the diminishing returns more realistic for costs of expenses such
+ as education.
+ In other words, spending more does not enhance one's skills as it does
+ in the beginning.
+ The function ensures however that $ 
+\backslash
+nu_2>
+\backslash
+nu_1 
+\backslash
+Rightarrow c(
+\backslash
+nu_1,
+\backslash
+pi)<c( 
+\backslash
+nu_2, 
+\backslash
+pi ) $ i.e.
+ more money always enhances your skills (albeit by not as much with increasingly
+ more money).
+ At this point, however, we consider the simple function $
+\backslash
+nu/
+\backslash
+pi$ with no discontinuity (of zero skills being granted when $
+\backslash
+nu<
+\backslash
+pi$).
+\end_layout
+
+\begin_layout Standard
+Let's define
+\end_layout
+
+\begin_layout Standard
+$x_j
+\backslash
+equiv r_j 
+\backslash
+mu + s_j (1-
+\backslash
+mu) 
+\backslash
+nu_1/ 
+\backslash
+pi$
+\end_layout
+
+\begin_layout Standard
+$z_j
+\backslash
+equiv r_j 
+\backslash
+mu + s_j (1-
+\backslash
+mu) 
+\backslash
+nu_2 / 
+\backslash
+pi$
+\end_layout
+
+\begin_layout Standard
+The CDF $F_X(z) 
+\backslash
+equiv P(r_i 
+\backslash
+mu + s_i (1-
+\backslash
+mu)c_1<z)$ can be written as
+\end_layout
+
+\begin_layout Standard
+The probability of a poor participant winning is
+\end_layout
+
+\begin_layout Standard
+$
+\backslash
+prod_{k=1}^{k=P-1}{P( r_i 
+\backslash
+mu + s_i (1-
+\backslash
+mu) c(
+\backslash
+nu_1,
+\backslash
+pi) > r_k 
+\backslash
+mu + s_k (1-
+\backslash
+mu) c(
+\backslash
+nu_1,
+\backslash
+pi) )} 
+\backslash
+prod_{k=P+1}^{k=N}{P(r_i 
+\backslash
+mu + s_i (1-
+\backslash
+mu) c(
+\backslash
+nu_1,
+\backslash
+pi) > r_k 
+\backslash
+mu + s_k (1-
+\backslash
+mu) c(
+\backslash
+nu_2,
+\backslash
+pi))} $
+\end_layout
+
+\begin_layout Standard
+or,
+\end_layout
+
+\begin_layout Standard
+$
+\backslash
+prod_{k=1}^{k=P-1}{F_X( r_i 
+\backslash
+mu + s_i (1-
+\backslash
+mu) c(
+\backslash
+nu_1,
+\backslash
+pi) )} 
+\backslash
+prod_{k=P+1}^{k=N}{F_Z(r_i 
+\backslash
+mu + s_i (1-
+\backslash
+mu) c(
+\backslash
+nu_1,
+\backslash
+pi) )} $
+\end_layout
+
+\begin_layout Standard
+It's worth re-iterating that $s_i$ is exogenous in the model and is revealed
+ to the consumer only with investments.
+ The only way in which $s_i$ is different from $r_i$ is that the $s_i$ can
+ be enhanced or cultivated by the institutions whereas $r_i$ cannot.
+\end_layout
+
+\begin_layout Standard
+### CDF functions The CDFs $F_X$ and $F_Z$ can be written using the following
+ solution.
+\end_layout
+
+\begin_layout Standard
+$
+\end_layout
+
+\begin_layout Standard
+F(z) = 
+\backslash
+begin{cases} 
+\backslash
+frac{z^2}{2ab} 
+\backslash
+quad 0<z<a 
+\backslash
+
+\backslash
+ 
+\backslash
+frac{z-a/2}{b} 
+\backslash
+quad a<z<b 
+\backslash
+
+\backslash
+ 
+\backslash
+frac{b-a/2}{b} + 
+\backslash
+frac{(a+b)z-z^2/2 - ( ab+b^2/2 )}{ab} 
+\backslash
+quad b<z<a+b 
+\backslash
+
+\backslash
+ 
+\backslash
+end{cases}
+\end_layout
+
+\begin_layout Standard
+$
+\end_layout
+
+\begin_layout Standard
+The second important assumption we have is that $
+\backslash
+mu<
+\backslash
+frac{1}{2}$.
+ This is tatamount to assuming that even if skills-enhancements were the
+ same for all participants (with an equal-opportunity training-scheme),
+ raw-talent would still be less valued than the skills developed by institutions.
+ Notice that $
+\backslash
+mu<
+\backslash
+frac{1}{2}
+\backslash
+Rightarrow 2
+\backslash
+mu <1 
+\backslash
+Rightarrow 
+\backslash
+mu < 1-
+\backslash
+mu $.
+ The assumption requires us to consider $c(
+\backslash
+pi,
+\backslash
+nu)>1$ such that as the multiplier so that $
+\backslash
+mu < (1-
+\backslash
+nu)c(
+\backslash
+pi,
+\backslash
+nu)$ can be acertained for all $
+\backslash
+nu$ and $
+\backslash
+pi$.
+\end_layout
+
+\begin_layout Standard
+With $
+\backslash
+mu<1/2$, $F_X(x)$ can be obtained by setting $a=
+\backslash
+mu$ and $b=c_1(1-
+\backslash
+mu)$.
+\end_layout
+
+\begin_layout Standard
+$F_X(x) $
+\end_layout
+
+\begin_layout Standard
+= 
+\backslash
+begin{cases} 
+\backslash
+frac{x^2}{2c_1 
+\backslash
+mu(1-
+\backslash
+mu)} 
+\backslash
+quad 0<x<
+\backslash
+mu 
+\backslash
+
+\backslash
+ 
+\backslash
+frac{x-
+\backslash
+mu/2}{c_1(1-
+\backslash
+mu)} 
+\backslash
+quad 
+\backslash
+mu<x< c_1(1-
+\backslash
+mu) 
+\backslash
+
+\backslash
+ 1-
+\backslash
+frac{
+\backslash
+mu/2}{c_1(1-
+\backslash
+mu)} + 
+\backslash
+frac{(
+\backslash
+mu+c_1(1-
+\backslash
+mu))x-x^2/2 - ( 
+\backslash
+mu c_1 (1-
+\backslash
+mu)+(c_1(1-
+\backslash
+mu))^2/2 )}{
+\backslash
+mu c_1 (1-
+\backslash
+mu)} 
+\backslash
+quad c_1(1-
+\backslash
+mu)<x<
+\backslash
+mu+c_1(1-
+\backslash
+mu) 
+\backslash
+
+\backslash
+ 
+\backslash
+end{cases}
+\end_layout
+
+\begin_layout Standard
+Similarly, $
+\backslash
+mu<1/2$ also leads to the following form $F_Z(z)$ by setting $a=
+\backslash
+mu$ and $b=c_2(1-
+\backslash
+mu)$.
+\end_layout
+
+\begin_layout Standard
+$F_Z(z) $
+\end_layout
+
+\begin_layout Standard
+= 
+\backslash
+begin{cases} 
+\backslash
+frac{z^2}{2c_2 
+\backslash
+mu(1-
+\backslash
+mu)} 
+\backslash
+quad 0<z<
+\backslash
+mu 
+\backslash
+
+\backslash
+ 
+\backslash
+frac{z-
+\backslash
+mu/2}{c_2(1-
+\backslash
+mu)} 
+\backslash
+quad 
+\backslash
+mu<z< c_2(1-
+\backslash
+mu) 
+\backslash
+
+\backslash
+ 1-
+\backslash
+frac{
+\backslash
+mu/2}{c_2(1-
+\backslash
+mu)} + 
+\backslash
+frac{(
+\backslash
+mu+c_2(1-
+\backslash
+mu))z-z^2/2 - ( 
+\backslash
+mu c_2 (1-
+\backslash
+mu)+(c_2(1-
+\backslash
+mu))^2/2 )}{
+\backslash
+mu c_2 (1-
+\backslash
+mu)} 
+\backslash
+quad c_2(1-
+\backslash
+mu)<z<
+\backslash
+mu+c_2(1-
+\backslash
+mu) 
+\backslash
+
+\backslash
+ 
+\backslash
+end{cases}
+\end_layout
+
+\end_body
+\end_document
