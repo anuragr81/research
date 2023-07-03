@@ -5,7 +5,33 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage{mathtools}
+\usepackage{amsmath}
+
+\usepackage{xparse}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+\usepackage{soul}
+\usepackage{natbib}
+\usepackage{color, colortbl}
+\usepackage[first=0,last=9]{lcg}
+\definecolor{Gray}{gray}{0.9}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\newcommand{\ra}{\rand0.\arabic{rand}}
+\usepackage[section]{placeins}
+\usepackage[left,modulo]{lineno}
+\usepackage{sectsty}
+
+\usepackage{bbm}
+\end_preamble
 \use_default_options true
+\begin_modules
+theorems-ams-chap-bytype
+theorems-ams-extended-chap-bytype
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -29,9 +55,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -44,6 +71,7 @@
 \use_package undertilde 1
 \cite_engine basic
 \cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -55,6 +83,11 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 1.2cm
+\topmargin 1cm
+\rightmargin 1.2cm
+\bottommargin 1cm
+\footskip 1cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -472,12 +505,93 @@ The CDF corresponding to the above density is
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
+\begin{align}
 F(z) & =\begin{cases}
 \frac{z^{2}}{2ab} & 0<z<a\\
 \frac{z-a/2}{b} & a<z<b\\
 \frac{b-a/2}{b}+\frac{(a+b)z-z^{2}/2-(ab+b^{2}/2)}{ab} & b<z<a+b
-\end{cases}
+\end{cases}\label{eq:triangular_pdf}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An imporant assumption in the analysis that follows is that raw-talent would
+ still be less valued than skills cultivated by institutions even if skills-enha
+ncements multiplier 
+\begin_inset Formula $(1-\mu)$
+\end_inset
+
+ were the same for all participants.
+ Therefore 
+\begin_inset Formula $1-\mu>\mu\Rightarrow\mu<1/2$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Assumption
+\begin_inset CommandInset label
+LatexCommand label
+name "assu:mu_less_than_half"
+
+\end_inset
+
+
+\begin_inset Formula $\mu<\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice further that the above assumption and the condition that 
+\begin_inset Formula $c(\nu,\pi)>1$
+\end_inset
+
+ ensures that 
+\begin_inset Formula $\mu<(1-\nu)c(\nu,\pi)$
+\end_inset
+
+ for all 
+\begin_inset Formula $\nu$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Using the above result, the probability of a poor participant winning is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P_{1}(\text{win}|r_{i},s_{i})=\prod_{k=1,k\ne i}^{k=P-1}{P(r_{i}\mu+s_{i}(1-\mu)c(\nu_{1},\pi)>r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi))}\\
+\prod_{k=P+1}^{k=N}{P(r_{i}\mu+s_{i}(1-\mu)c(\nu_{1},\pi)>r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi))}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For ease of notation we define 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+c_{1} & \equiv c(\nu_{1},\pi)
 \end{align*}
 
 \end_inset
@@ -486,372 +600,157 @@ F(z) & =\begin{cases}
 \end_layout
 
 \begin_layout Standard
-Let's define
+\begin_inset Formula 
+\begin{align*}
+c_{2} & \equiv c(\nu_{2},\pi)
+\end{align*}
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $x_{j}\equiv r_{j}\mu+s_{j}(1-\mu)\nu_{1}/\pi$
+Notice that 
+\begin_inset Formula $c_{1}<c_{2}\iff\nu_{1}<\nu_{2}$
+\end_inset
+
+.
+ Further, we define
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{align*}
+x_{1} & \equiv r_{i}\mu+s_{i}(1-\mu)c_{1}
+\end{align*}
+
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $z_{j}\equiv r_{j}\mu+s_{j}(1-\mu)\nu_{2}/\pi$
+and
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+x_{2} & \equiv r_{i}\mu+s_{i}(1-\mu)c_{2}
+\end{align*}
+
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-The CDF $F_X(z) 
-\backslash
-equiv P(r_i 
-\backslash
-mu + s_i (1-
-\backslash
-mu)c_1<z)$ can be written as
+With the assumption 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "assu:mu_less_than_half"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we set 
+\begin_inset Formula $a=\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $b=c_{1}(1-\mu)$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:triangular_pdf"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to obtain
 \end_layout
 
 \begin_layout Standard
-The probability of a poor participant winning is
+\begin_inset Formula 
+\begin{multline*}
+P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x)=\begin{cases}
+\frac{x^{2}}{2c_{1}\mu(1-\mu)} & 0<x<\mu\\
+\frac{x-\mu/2}{c_{1}(1-\mu)} & \mu<x<c_{1}(1-\mu)\\
+1-\frac{\mu/2}{c_{1}(1-\mu)}\\
++\frac{(\mu+c_{1}(1-\mu))x-x^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{1}(1-\mu)<x<\mu+c_{1}(1-\mu)
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-$
-\backslash
-prod_{k=1}^{k=P-1}{P( r_i 
-\backslash
-mu + s_i (1-
-\backslash
-mu) c(
-\backslash
-nu_1,
-\backslash
-pi) > r_k 
-\backslash
-mu + s_k (1-
-\backslash
-mu) c(
-\backslash
-nu_1,
-\backslash
-pi) )} 
-\backslash
-prod_{k=P+1}^{k=N}{P(r_i 
-\backslash
-mu + s_i (1-
-\backslash
-mu) c(
-\backslash
-nu_1,
-\backslash
-pi) > r_k 
-\backslash
-mu + s_k (1-
-\backslash
-mu) c(
-\backslash
-nu_2,
-\backslash
-pi))} $
+Similarly, the assumption 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "assu:mu_less_than_half"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ also leads to the following (by setting 
+\begin_inset Formula $a=\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $b=c_{2}(1-\mu)$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:triangular_pdf"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ ).
 \end_layout
 
 \begin_layout Standard
-or,
-\end_layout
+\begin_inset Formula 
+\begin{align*}
+P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi) & <x)=\begin{cases}
+\frac{x^{2}}{2c_{2}\mu(1-\mu)} & 0<x<\mu\\
+\frac{x-\mu/2}{c_{2}(1-\mu)} & \mu<x<c_{2}(1-\mu)\\
+1-\frac{\mu/2}{c_{2}(1-\mu)}+\frac{(\mu+c_{2}(1-\mu))x-x^{2}/2-(\mu c_{2}(1-\mu)+(c_{2}(1-\mu))^{2}/2)}{\mu c_{2}(1-\mu)} & c_{2}(1-\mu)<z<\mu+c_{2}(1-\mu)
+\end{cases}
+\end{align*}
 
-\begin_layout Standard
-$
-\backslash
-prod_{k=1}^{k=P-1}{F_X( r_i 
-\backslash
-mu + s_i (1-
-\backslash
-mu) c(
-\backslash
-nu_1,
-\backslash
-pi) )} 
-\backslash
-prod_{k=P+1}^{k=N}{F_Z(r_i 
-\backslash
-mu + s_i (1-
-\backslash
-mu) c(
-\backslash
-nu_1,
-\backslash
-pi) )} $
-\end_layout
+\end_inset
 
-\begin_layout Standard
-It's worth re-iterating that $s_i$ is exogenous in the model and is revealed
- to the consumer only with investments.
- The only way in which $s_i$ is different from $r_i$ is that the $s_i$ can
- be enhanced or cultivated by the institutions whereas $r_i$ cannot.
-\end_layout
 
-\begin_layout Standard
-### CDF functions The CDFs $F_X$ and $F_Z$ can be written using the following
- solution.
-\end_layout
-
-\begin_layout Standard
-$
-\end_layout
-
-\begin_layout Standard
-F(z) = 
-\backslash
-begin{cases} 
-\backslash
-frac{z^2}{2ab} 
-\backslash
-quad 0<z<a 
-\backslash
-
-\backslash
- 
-\backslash
-frac{z-a/2}{b} 
-\backslash
-quad a<z<b 
-\backslash
-
-\backslash
- 
-\backslash
-frac{b-a/2}{b} + 
-\backslash
-frac{(a+b)z-z^2/2 - ( ab+b^2/2 )}{ab} 
-\backslash
-quad b<z<a+b 
-\backslash
-
-\backslash
- 
-\backslash
-end{cases}
-\end_layout
-
-\begin_layout Standard
-$
-\end_layout
-
-\begin_layout Standard
-The second important assumption we have is that $
-\backslash
-mu<
-\backslash
-frac{1}{2}$.
- This is tatamount to assuming that even if skills-enhancements were the
- same for all participants (with an equal-opportunity training-scheme),
- raw-talent would still be less valued than the skills developed by institutions.
- Notice that $
-\backslash
-mu<
-\backslash
-frac{1}{2}
-\backslash
-Rightarrow 2
-\backslash
-mu <1 
-\backslash
-Rightarrow 
-\backslash
-mu < 1-
-\backslash
-mu $.
- The assumption requires us to consider $c(
-\backslash
-pi,
-\backslash
-nu)>1$ such that as the multiplier so that $
-\backslash
-mu < (1-
-\backslash
-nu)c(
-\backslash
-pi,
-\backslash
-nu)$ can be acertained for all $
-\backslash
-nu$ and $
-\backslash
-pi$.
-\end_layout
-
-\begin_layout Standard
-With $
-\backslash
-mu<1/2$, $F_X(x)$ can be obtained by setting $a=
-\backslash
-mu$ and $b=c_1(1-
-\backslash
-mu)$.
-\end_layout
-
-\begin_layout Standard
-$F_X(x) $
-\end_layout
-
-\begin_layout Standard
-= 
-\backslash
-begin{cases} 
-\backslash
-frac{x^2}{2c_1 
-\backslash
-mu(1-
-\backslash
-mu)} 
-\backslash
-quad 0<x<
-\backslash
-mu 
-\backslash
-
-\backslash
- 
-\backslash
-frac{x-
-\backslash
-mu/2}{c_1(1-
-\backslash
-mu)} 
-\backslash
-quad 
-\backslash
-mu<x< c_1(1-
-\backslash
-mu) 
-\backslash
-
-\backslash
- 1-
-\backslash
-frac{
-\backslash
-mu/2}{c_1(1-
-\backslash
-mu)} + 
-\backslash
-frac{(
-\backslash
-mu+c_1(1-
-\backslash
-mu))x-x^2/2 - ( 
-\backslash
-mu c_1 (1-
-\backslash
-mu)+(c_1(1-
-\backslash
-mu))^2/2 )}{
-\backslash
-mu c_1 (1-
-\backslash
-mu)} 
-\backslash
-quad c_1(1-
-\backslash
-mu)<x<
-\backslash
-mu+c_1(1-
-\backslash
-mu) 
-\backslash
-
-\backslash
- 
-\backslash
-end{cases}
-\end_layout
-
-\begin_layout Standard
-Similarly, $
-\backslash
-mu<1/2$ also leads to the following form $F_Z(z)$ by setting $a=
-\backslash
-mu$ and $b=c_2(1-
-\backslash
-mu)$.
-\end_layout
-
-\begin_layout Standard
-$F_Z(z) $
-\end_layout
-
-\begin_layout Standard
-= 
-\backslash
-begin{cases} 
-\backslash
-frac{z^2}{2c_2 
-\backslash
-mu(1-
-\backslash
-mu)} 
-\backslash
-quad 0<z<
-\backslash
-mu 
-\backslash
-
-\backslash
- 
-\backslash
-frac{z-
-\backslash
-mu/2}{c_2(1-
-\backslash
-mu)} 
-\backslash
-quad 
-\backslash
-mu<z< c_2(1-
-\backslash
-mu) 
-\backslash
-
-\backslash
- 1-
-\backslash
-frac{
-\backslash
-mu/2}{c_2(1-
-\backslash
-mu)} + 
-\backslash
-frac{(
-\backslash
-mu+c_2(1-
-\backslash
-mu))z-z^2/2 - ( 
-\backslash
-mu c_2 (1-
-\backslash
-mu)+(c_2(1-
-\backslash
-mu))^2/2 )}{
-\backslash
-mu c_2 (1-
-\backslash
-mu)} 
-\backslash
-quad c_2(1-
-\backslash
-mu)<z<
-\backslash
-mu+c_2(1-
-\backslash
-mu) 
-\backslash
-
-\backslash
- 
-\backslash
-end{cases}
 \end_layout
 
 \end_body
