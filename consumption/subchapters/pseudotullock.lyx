@@ -611,6 +611,17 @@ c_{2} & \equiv c(\nu_{2},\pi)
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Delta & \equiv c(\nu_{2},\pi)-c_{1}(\nu_{1},\pi)
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
 Notice that 
 \begin_inset Formula $c_{1}<c_{2}\iff\nu_{1}<\nu_{2}$
 \end_inset
@@ -693,11 +704,11 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x)=\begin{cases}
-\frac{x^{2}}{2c_{1}\mu(1-\mu)} & 0<x<\mu\\
-\frac{x-\mu/2}{c_{1}(1-\mu)} & \mu<x<c_{1}(1-\mu)\\
+P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})=\begin{cases}
+\frac{x_{1}^{2}}{2c_{1}\mu(1-\mu)} & 0<x_{1}<\mu\\
+\frac{x_{1}-\mu/2}{c_{1}(1-\mu)} & \mu<x_{1}<c_{1}(1-\mu)\\
 1-\frac{\mu/2}{c_{1}(1-\mu)}\\
-+\frac{(\mu+c_{1}(1-\mu))x-x^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{1}(1-\mu)<x<\mu+c_{1}(1-\mu)
++\frac{(\mu+c_{1}(1-\mu))x_{1}-x_{1}^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{1}(1-\mu)<x_{1}<\mu+c_{1}(1-\mu)
 \end{cases}
 \end{multline*}
 
@@ -741,11 +752,11 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x)=\begin{cases}
-\frac{x^{2}}{2c_{2}\mu(1-\mu)} & 0<x<\mu\\
-\frac{x-\mu/2}{c_{2}(1-\mu)} & \mu<x<c_{2}(1-\mu)\\
+P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x_{2})=\begin{cases}
+\frac{x_{2}^{2}}{2c_{2}\mu(1-\mu)} & 0<x_{2}<\mu\\
+\frac{x_{2}-\mu/2}{c_{2}(1-\mu)} & \mu<x_{2}<c_{2}(1-\mu)\\
 1-\frac{\mu/2}{c_{2}(1-\mu)}\\
-+\frac{(\mu+c_{2}(1-\mu))x-x^{2}/2-(\mu c_{2}(1-\mu)+(c_{2}(1-\mu))^{2}/2)}{\mu c_{2}(1-\mu)} & c_{2}(1-\mu)<x<\mu+c_{2}(1-\mu)
++\frac{(\mu+c_{2}(1-\mu))x_{2}-x_{2}^{2}/2-(\mu c_{2}(1-\mu)+(c_{2}(1-\mu))^{2}/2)}{\mu c_{2}(1-\mu)} & c_{2}(1-\mu)<x_{2}<\mu+c_{2}(1-\mu)
 \end{cases}
 \end{multline*}
 
@@ -767,24 +778,81 @@ i.e.
 \begin_inset Formula $\mu+c_{1}(1-\mu)>c_{2}(1-\mu)>c_{1}(1-\mu)$
 \end_inset
 
-, we can rewrite 
+.
+ Using 
+\begin_inset Formula $x_{2}=x_{1}+\Delta s_{i}(1-\mu)$
+\end_inset
+
+ , we could rewrite 
 \begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})$
 \end_inset
 
- as
+ but at this point, the number of cases that arise seem too many.
+ 
+\end_layout
+
+\begin_layout Standard
+Notice that 
+\begin_inset Formula $\mu<1-\mu$
+\end_inset
+
+ does not necessarily imply 
+\begin_inset Formula $\mu<\Delta s_{i}(1-\mu)$
+\end_inset
+
+ since 
+\begin_inset Formula $s_{i}<1$
+\end_inset
+
+.
+ It might be better to assume that 
+\begin_inset Formula $\Delta<\frac{\mu}{1-\mu}$
+\end_inset
+
+ so that 
+\begin_inset Formula $s_{i}\Delta(1-\mu)<\mu$
+\end_inset
+
+.
+ However, why would we assume that 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ is within reasonable bounds.
+ Compare 
+\begin_inset Formula $\mu=.2$
+\end_inset
+
+ which means 
+\begin_inset Formula $\Delta<.25$
+\end_inset
+
+ .
+ With lower value to raw-talent i.e.
+ small 
+\begin_inset Formula $\mu$
+\end_inset
+
+leads to small 
+\begin_inset Formula $\mu/(1-\mu)$
+\end_inset
+
+ as well.
+ For the first probability 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})$
+\end_inset
+
+, we have
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
 P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})=\begin{cases}
-\frac{x_{1}^{2}}{2c_{1}\mu(1-\mu)} & 0<x_{1}<\mu\\
-\frac{x_{1}-\mu/2}{c_{1}(1-\mu)} & \mu<x_{1}<c_{1}(1-\mu)\\
+\frac{x_{1}^{2}}{2c_{1}\mu(1-\mu)} & \Delta s_{i}(1-\mu)<x_{2}<\mu+\Delta s_{i}(1-\mu)\\
+\frac{x_{1}-\mu/2}{c_{1}(1-\mu)} & \mu+\Delta s_{i}(1-\mu)<x_{2}<c_{1}(1-\mu)+\Delta s_{i}(1-\mu)\\
 1-\frac{\mu/2}{c_{1}(1-\mu)}\\
-+\frac{(\mu+c_{1}(1-\mu))x_{1}-x_{1}^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{1}(1-\mu)<x_{1}<c_{2}(1-\mu)\\
-1-\frac{\mu/2}{c_{1}(1-\mu)}\\
-+\frac{(\mu+c_{1}(1-\mu))x_{1}-x_{1}^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{2}(1-\mu)<x_{1}<\mu+c_{1}(1-\mu)\\
-0 & \mu+c_{1}(1-\mu)<x_{1}<\mu+c_{2}(1-\mu)
++\frac{(\mu+c_{1}(1-\mu))x_{1}-x_{1}^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{1}(1-\mu)+\Delta s_{i}(1-\mu)<x_{2}<\mu+c_{1}(1-\mu)+\Delta s_{i}(1-\mu)
 \end{cases}
 \end{multline*}
 
@@ -794,20 +862,23 @@ P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})=\begin{cases}
 \end_layout
 
 \begin_layout Standard
-or, 
+\begin_inset Formula $\Delta<\frac{\mu}{1-\mu}\Rightarrow s_{i}\Delta(1-\mu)<\mu$
+\end_inset
+
+.
+ Therefore, 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
 P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})=\begin{cases}
-\frac{x_{1}^{2}}{2c_{1}\mu(1-\mu)} & 0<\mu r_{i}+(1-\mu)c_{1}s_{i}<\mu\\
-\frac{x_{1}-\mu/2}{c_{1}(1-\mu)} & \mu<\mu r_{i}+(1-\mu)c_{1}s_{i}<c_{1}(1-\mu)\\
+0 & 0<x_{2}<\Delta s_{i}(1-\mu)\\
+\frac{x_{1}^{2}}{2c_{1}\mu(1-\mu)} & \Delta s_{i}(1-\mu)<x_{2}<\mu\\
+\frac{x_{1}^{2}}{2c_{1}\mu(1-\mu)} & \mu<x_{2}<\mu+\Delta s_{i}(1-\mu)\\
+\frac{x_{1}-\mu/2}{c_{1}(1-\mu)} & \mu+\Delta s_{i}(1-\mu)<x_{2}<c_{1}(1-\mu)+\Delta s_{i}(1-\mu)\\
 1-\frac{\mu/2}{c_{1}(1-\mu)}\\
-+\frac{(\mu+c_{1}(1-\mu))x_{1}-x_{1}^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{1}(1-\mu)<\mu r_{i}+(1-\mu)c_{1}s_{i}<c_{2}(1-\mu)\\
-1-\frac{\mu/2}{c_{1}(1-\mu)}\\
-+\frac{(\mu+c_{1}(1-\mu))x_{1}-x_{1}^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{2}(1-\mu)<\mu r_{i}+(1-\mu)c_{1}s_{i}<\mu+c_{1}(1-\mu)\\
-0 & \mu+c_{1}(1-\mu)<\mu r_{i}+(1-\mu)c_{1}s_{i}<\mu+c_{2}(1-\mu)
++\frac{(\mu+c_{1}(1-\mu))x_{1}-x_{1}^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{1}(1-\mu)+\Delta s_{i}(1-\mu)<x_{2}<\mu+c_{1}(1-\mu)+\Delta s_{i}(1-\mu)
 \end{cases}
 \end{multline*}
 
@@ -817,78 +888,57 @@ P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})=\begin{cases}
 \end_layout
 
 \begin_layout Standard
-Similarly, we can rewrite 
+We now need to see whether 
+\begin_inset Formula $\mu+\Delta s_{i}(1-\mu)$
+\end_inset
+
+ is less than 
+\begin_inset Formula $c_{2}(1-\mu)$
+\end_inset
+
+ or not.
+ We know that 
+\begin_inset Formula $c_{2}(1-\mu)=c_{1}(1-\mu)+\Delta(1-\mu)<c_{1}(1-\mu)+\Delta s_{i}(1-\mu)$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\Delta(1-\mu)<\mu$
+\end_inset
+
+, then it's not necessary that 
+\begin_inset Formula $c_{1}(1-\mu)<\mu$
+\end_inset
+
+.
+ Unless we assume that 
+\begin_inset Formula $c_{1}(1-\mu)>\mu$
+\end_inset
+
+ we might end up with an 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ dependent condition.
+\end_layout
+
+\begin_layout Standard
+Harmonising this with 
 \begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x_{2})$
 \end_inset
 
- as 
+, we have 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x)=\begin{cases}
-\frac{x_{2}^{2}}{2c_{2}\mu(1-\mu)} & 0<x_{2}<\mu\\
-\frac{x_{2}-\mu/2}{c_{2}(1-\mu)} & \mu<x_{2}<c_{1}(1-\mu)\\
-\frac{x_{2}-\mu/2}{c_{2}(1-\mu)} & c_{1}(1-\mu)<x_{2}<c_{2}(1-\mu)\\
+P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x_{2})=\begin{cases}
+\frac{x_{2}^{2}}{2c_{2}\mu(1-\mu)} & 0<x_{2}<\Delta s_{i}(1-\mu)\\
+\frac{x_{2}^{2}}{2c_{2}\mu(1-\mu)} & \Delta s_{i}(1-\mu)<x_{2}<\mu\\
+\frac{x_{2}-\mu/2}{c_{2}(1-\mu)} & \mu<x_{2}<c_{2}(1-\mu)\\
 1-\frac{\mu/2}{c_{2}(1-\mu)}\\
-+\frac{(\mu+c_{2}(1-\mu))x_{2}-x_{2}^{2}/2-(\mu c_{2}(1-\mu)+(c_{2}(1-\mu))^{2}/2)}{\mu c_{2}(1-\mu)} & c_{2}(1-\mu)<x_{2}<\mu+c_{1}(1-\mu)\\
-1-\frac{\mu/2}{c_{2}(1-\mu)}\\
-+\frac{(\mu+c_{2}(1-\mu))x_{2}-x_{2}^{2}/2-(\mu c_{2}(1-\mu)+(c_{2}(1-\mu))^{2}/2)}{\mu c_{2}(1-\mu)} & \mu+c_{1}(1-\mu)<x_{2}<\mu+c_{2}(1-\mu)
-\end{cases}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-or, 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x)=\begin{cases}
-\frac{x_{2}^{2}}{2c_{2}\mu(1-\mu)} & 0<\mu r_{i}+(1-\mu)c_{2}s_{i}<\mu\\
-\frac{x_{2}-\mu/2}{c_{2}(1-\mu)} & \mu<\mu r_{i}+(1-\mu)c_{2}s_{i}<c_{1}(1-\mu)\\
-\frac{x_{2}-\mu/2}{c_{2}(1-\mu)} & c_{1}(1-\mu)<\mu r_{i}+(1-\mu)c_{2}s_{i}<c_{2}(1-\mu)\\
-1-\frac{\mu/2}{c_{2}(1-\mu)}\\
-+\frac{(\mu+c_{2}(1-\mu))x_{2}-x_{2}^{2}/2-(\mu c_{2}(1-\mu)+(c_{2}(1-\mu))^{2}/2)}{\mu c_{2}(1-\mu)} & c_{2}(1-\mu)<\mu r_{i}+(1-\mu)c_{2}s_{i}<\mu+c_{1}(1-\mu)\\
-1-\frac{\mu/2}{c_{2}(1-\mu)}\\
-+\frac{(\mu+c_{2}(1-\mu))x_{2}-x_{2}^{2}/2-(\mu c_{2}(1-\mu)+(c_{2}(1-\mu))^{2}/2)}{\mu c_{2}(1-\mu)} & \mu+c_{1}(1-\mu)<\mu r_{i}+(1-\mu)c_{2}s_{i}<\mu+c_{2}(1-\mu)
-\end{cases}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Multiplying 
-\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x)^{P-1}$
-\end_inset
-
- and 
-\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x)^{N-P}$
-\end_inset
-
- , we can write
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-P_{1}(\text{win}|s_{i},r_{i})=\begin{cases}
-(\frac{x^{2}}{2\mu(1-\mu)})^{N-1}\frac{1}{c_{1}^{P-1}c_{2}^{N-P}} & 0<x<\mu\\
-(\frac{x-\mu/2}{1-\mu})^{N-1}\frac{1}{c_{1}^{P-1}c_{2}^{N-P}} & \mu<x<c_{1}(1-\mu)\\
-1-\frac{\mu/2}{c_{1}(1-\mu)}\\
-+\frac{(\mu+c_{1}(1-\mu))x-x^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{1}(1-\mu)<x<c_{2}(1-\mu)\\
-1-\frac{\mu/2}{c_{1}(1-\mu)}\\
-+\frac{(\mu+c_{1}(1-\mu))x-x^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{2}(1-\mu)<x<\mu+c_{1}(1-\mu)\\
-0 & \mu+c_{1}(1-\mu)<x<\mu+c_{2}(1-\mu)
++\frac{(\mu+c_{2}(1-\mu))x_{2}-x_{2}^{2}/2-(\mu c_{2}(1-\mu)+(c_{2}(1-\mu))^{2}/2)}{\mu c_{2}(1-\mu)} & c_{2}(1-\mu)<x_{2}<\mu+c_{2}(1-\mu)
 \end{cases}
 \end{multline*}
 
@@ -901,6 +951,307 @@ P_{1}(\text{win}|s_{i},r_{i})=\begin{cases}
 \begin_inset Formula $\frac{\mu}{1-\mu}<c_{2}-c_{1}$
 \end_inset
 
+ 
+\end_layout
+
+\begin_layout Subsection
+Normal Distribution
+\end_layout
+
+\begin_layout Standard
+With normal distribution we know that the combined distribution would 
+\begin_inset Formula $N(m_{1}+m_{2},\sigma_{1}^{2}+\sigma_{2}^{2})$
+\end_inset
+
+.
+ This assumes that 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ are distributed around means 
+\begin_inset Formula $m_{1},m_{2}$
+\end_inset
+
+ with variances 
+\begin_inset Formula $\sigma_{1}^{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\sigma_{2}^{2}$
+\end_inset
+
+ respectively.
+ For the probability of winning poorer participanet we need 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x_{1})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The distribution for 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})$
+\end_inset
+
+ is 
+\begin_inset Formula $N(\mu m_{1}+(1-\mu)c_{1}m_{2},\mu^{2}\sigma_{1}^{2}+c_{1}^{2}(1-\mu)^{2}\sigma_{2}^{2})$
+\end_inset
+
+ while for 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x_{1})$
+\end_inset
+
+ it is 
+\begin_inset Formula $N(\mu m_{1}+(1-\mu)c_{2}m_{2},\mu^{2}\sigma_{1}^{2}+(1-\mu)^{2}c_{2}^{2}\sigma_{2}^{2})$
+\end_inset
+
+.
+ We could simplify further but a closed-form solution escapes us because
+ of the multiplication of CDF (power).
+\end_layout
+
+\begin_layout Subsection
+Poission distribution
+\end_layout
+
+\begin_layout Standard
+Another option is to view tournament winners as poisson distributed.
+ The sum of Possion variables is Binomial distributed so multiplying them
+ may still provide deterministic results.
+ 
+\end_layout
+
+\begin_layout Standard
+The possion pmf is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+P(X & =x)=\frac{e^{-\lambda}\lambda^{x}}{x!}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The CDF would be a simple sum and multiplying them does take d Itoes not
+ have an obvious way to a closed-form solution either.
+\end_layout
+
+\begin_layout Section
+Discrete Model with Choice
+\end_layout
+
+\begin_layout Standard
+Given the issues with too many conditions on cost-functions, we consider
+ a discrete approach where the cost-function has a binary output depending
+ on the investment.
+ This function is known.
+ The participant would therefore face different probabilities if her investment
+ is above or below a threshold.
+ When above the threshold, the participant would take advantage of the skills.
+ When not above the threshold, the participant would avoid the investment
+ and save the investment value instead.
+ 
+\end_layout
+
+\begin_layout Standard
+It is important to clarify that the poor consumer is not fully removed from
+ the game if she competes on the basis of raw-talent alone.
+\end_layout
+
+\begin_layout Standard
+For a poor participant to win when she does not particpate due to insufficient
+ investment, the probability is.
+\end_layout
+
+\begin_layout Standard
+For a poor participant to win she participates, the probability is
+\end_layout
+
+\begin_layout Standard
+For the rich participant to win when she does not participate due to , the
+ probability 
+\end_layout
+
+\begin_layout Standard
+===
+\end_layout
+
+\begin_layout Standard
+In a discrete formulation, the the poor are priced out of accessing any
+ skills 
+\begin_inset Formula $s$
+\end_inset
+
+ in their score so that the skills 
+\begin_inset Formula $s>0$
+\end_inset
+
+ can only be true for those that have their investment higher than the threshold.
+ The number of poor and rich are meant to be stable in the long-run and
+ the competition ensues only when a rich participant passes away.
+ For a poor participant to win, she must be ahead of all of the poor participant
+s and ahead of rich participants as well.
+ A participant 
+\begin_inset Formula $i$
+\end_inset
+
+ can win if 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ is higher than than raw-talent in all poor participants and also exceeds
+ the score involving skills.
+ If the number of poor are 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ Then, we have the integral
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\int_{s_{k}=0}^{s_{k}=1}(\int_{r_{i}=0}^{1}{\prod_{j=1}^{i-1}{P(r_{i}>r_{j})}\times\prod_{j=i+1}^{P}{P(r_{i}>r_{j})}\times\prod_{j=P+1}^{N}{P(r_{i}>\mu r_{j}+(1-\mu)s_{k})}})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or
+\end_layout
+
+\begin_layout Standard
+$ 
+\backslash
+int_{s_k=0}^{s_k=1} ( 
+\backslash
+int_{r_i=0}^{1}{ r_i^{P-1} 
+\backslash
+times 
+\backslash
+prod_{j=P+1}^{N}{P(
+\backslash
+frac{r_i - (1-
+\backslash
+mu) s_k}{
+\backslash
+mu} > r_j )} } ) $ or
+\end_layout
+
+\begin_layout Standard
+$ 
+\backslash
+int_{s_k=0}^{s_k=1} 
+\backslash
+int_{r_i=0}^{1}{ r_i^{P-1} (
+\backslash
+frac{r_i - (1-
+\backslash
+mu) s_k}{
+\backslash
+mu}) }^{N-P} $
+\end_layout
+
+\begin_layout Standard
+The solution can be found in wolfram with "integrate(r**(p-1)*((r-(1-m)*s)/(m))*
+*(n-p),r,0,1)".
+\end_layout
+
+\begin_layout Standard
+On the other hand, the poor person can win so long as the poor consumers
+ ($P$ in number) have their score $r$ less than a particular score $s_i$
+ and those among the rich have their total score $
+\backslash
+mu r_k+ (1-
+\backslash
+mu) s_k < s_i$.
+ Therefore, the integral is
+\end_layout
+
+\begin_layout Standard
+$
+\backslash
+int_{s_k=0}^{s_k=1} 
+\backslash
+int_{r_i=0}^{r_i=1}{
+\backslash
+prod_{j=1}^{j=P}{P(r_j< 
+\backslash
+mu r_i + (1-
+\backslash
+mu)s_i)} 
+\backslash
+prod_{j=P+1}^{j=N}{P(
+\backslash
+mu r_j+(1-
+\backslash
+mu) s_j < 
+\backslash
+mu r_i+(1-
+\backslash
+mu) s_i) }}$ 
+\end_layout
+
+\begin_layout Standard
+====
+\end_layout
+
+\begin_layout Section
+Choice with Utility 
+\end_layout
+
+\begin_layout Standard
+The participants don't however live for position itself.
+ They might obtain a certain reference based utility from assets so that
+ they're more content with all else being the same.
+ For demonstration, we consider a diminishing utility from assets that the
+ participant optimises instead of the .
+ In an alternate behavioural model, the participant might value lower probabilit
+ies.
+ When considering the utility the consumer does not save until infinity.
+ Instead, she only considers the immediate time horizon and expected utility.
+ The utility could be linear as well.
+\end_layout
+
+\begin_layout Standard
+The main idea is that of two economies.
+ The other economy is by the threshold that allows participation.
+ If that threshold is higher, then the consumer would fall back to saving.
+ The discrete model only considers whether the budget is binding or not.
+ The benefit from the skills-investment increases but it does not matter
+ to the poor if threshold is too high.
+\end_layout
+
+\begin_layout Standard
+The goal of the model is to help us answer how investments would change
+ as income differences rise.
+ The income differences are a threshold in the discrete model.
+ One can consider a certain income above which the participate can compete
+ with acquired skills.
+ The threshold represents the cost of skills.
+ Income differences can be interpreted as differences in budgets.
+ Given the threshold treatment, lower budget only means withdrawal from
+ the game.
+ In the discrete model, we can only talk about how withdrawal depends on
+ budgets.
  
 \end_layout
 
