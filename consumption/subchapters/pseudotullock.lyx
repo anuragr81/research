@@ -509,7 +509,69 @@ The CDF corresponding to the above density is
 F(z) & =\begin{cases}
 \frac{z^{2}}{2ab} & 0<z<a\\
 \frac{z-a/2}{b} & a<z<b\\
-\frac{b-a/2}{b}+\frac{(a+b)z-z^{2}/2-(ab+b^{2}/2)}{ab} & b<z<a+b
+-\frac{a}{2b}+\frac{(a+b)z-z^{2}/2}{ab}-\frac{b}{2a} & b<z<a+b
+\end{cases}\label{eq:triangular_pdf_plain}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% with wolfram integrate ((a+b-z)/(a*b),z,b,xi) gives 
+\end_layout
+
+\begin_layout Plain Layout
+
+% -(b-xi)*(2*a+b-xi)/(2*a*b)
+\end_layout
+
+\begin_layout Plain Layout
+
+% the indefinite integral is (a*z+b*z-z^2/2)/(a*b)
+\end_layout
+
+\begin_layout Plain Layout
+
+% evaluating the indefinite integral at z=b give b/(2*a)+1
+\end_layout
+
+\begin_layout Plain Layout
+
+% we can verify that -a/(2*b)+((a+b)*z-z^2/2)/(a*b)-b/(2*a) -1 + ((z-(a+b))^2)/(
+2*a*b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since, 
+\begin_inset Formula $\int_{0}^{a}\frac{z}{ab}dz=\frac{a}{2b}$
+\end_inset
+
+ and 
+\begin_inset Formula $\int_{a}^{b}\frac{1}{b}dz=1-\frac{a}{b}$
+\end_inset
+
+, we can write above as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+F(z) & =\begin{cases}
+\frac{z^{2}}{2ab} & 0<z<a\\
+\frac{z-a/2}{b} & a<z<b\\
+1-\frac{(z-(a+b))^{2}}{2ab} & b<z<a+b
 \end{cases}\label{eq:triangular_pdf}
 \end{align}
 
@@ -691,7 +753,7 @@ noprefix "false"
  in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:triangular_pdf"
+reference "eq:triangular_pdf_plain"
 plural "false"
 caps "false"
 noprefix "false"
@@ -739,7 +801,7 @@ noprefix "false"
  in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:triangular_pdf"
+reference "eq:triangular_pdf_plain"
 plural "false"
 caps "false"
 noprefix "false"
@@ -1051,7 +1113,21 @@ The CDF would be a simple sum and multiplying them does take d Itoes not
 \end_layout
 
 \begin_layout Section
-Discrete Model with Choice
+Discrete Model with Choice under Uniform Distribution
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%Worth highlighting that this is needed 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1075,30 +1151,136 @@ Given the issues with too many conditions on cost-functions, we consider
  Therefore, all rich and poor participants have the same respective behaviour.
  Notice that one cannot consider a two-player simplification of the game
  - since the number of participants matters for the probability of winning.
+ 
+\end_layout
+
+\begin_layout Standard
+The result we use depends on the distribution of 
+\begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
+\end_inset
+
+ under the assumption that 
+\begin_inset Formula $\mu<1-\mu$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+F_{X}(x)=P(r_{k}\mu+s_{k}(1-\mu)<x)=\begin{cases}
+\frac{x^{2}}{2\mu(1-\mu)} & 0<x<\mu\\
+\frac{x-\mu/2}{1-\mu} & \mu<x<1-\mu\\
+1-\frac{(x-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 It is also worth clarifying that the poor consumer is not fully removed
  from the game if she competes on the basis of raw-talent alone.
- There are four differenct cases that arise.
+ There are four differenct cases that may arise.
+ 
 \end_layout
 
 \begin_layout Standard
-Case I - poor participant does not particpate due to insufficient investment
- while the rich consumer does, 
+Case I - The poor participant does not particpate due to insufficient investment
+ 
+\begin_inset Formula $\nu_{1}<\overline{\nu}$
+\end_inset
+
+ while the rich participant does with 
+\begin_inset Formula $\nu_{2}>\overline{\nu}$
+\end_inset
+
+ .
 \end_layout
 
 \begin_layout Standard
-Case II both poor and rich participant do not participate, 
+Case II - The rich participant does not participate 
+\begin_inset Formula $\nu_{2}<\overline{\nu}$
+\end_inset
+
+ but the poor participant does i.e.
+ 
+\begin_inset Formula $\nu_{1}<\overline{\nu}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Case III rich participant does not participate but the poor participant
- does
+Case III - Both poor and rich participants do not participate and 
+\begin_inset Formula $\nu_{1}<\overline{\nu},\nu_{2}<\overline{\nu}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-Case IV rich participant participates but poor participant does not.
+Case IV - Both poor rich and participant participate i.e.
+ 
+\begin_inset Formula $\nu_{1}>\overline{\nu}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu_{2}>\overline{\nu}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+With Case I, the poor participant can win when her raw-talent is higher
+ than that of all other poor participants as well as that of the rich participan
+ts (who compete with acquired skills).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(r_{k}<r_{i})\prod_{k=P+1}^{N}P(\mu r_{k}+(1-\mu)s_{k}<r_{i})\\
+=r_{i}^{P-1}F_{X}(r_{i})^{N-P}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{i})=\begin{cases}
+\frac{r_{i}^{2N-P-1}}{2\mu(1-\mu)} & 0<r_{i}<\mu\\
+r_{i}^{P-1}(\frac{r_{i}-\mu/2}{1-\mu})^{N-P} & \mu<r_{i}<1-\mu\\
+r_{i}^{P-1}(1-\frac{(r_{i}-1)^{2}}{2\mu(1-\mu)})^{N-P} & 1-\mu<r_{i}<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The total probability to win is therefore, 
+\begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
