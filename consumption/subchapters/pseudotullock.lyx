@@ -1136,9 +1136,17 @@ Given the issues with too many conditions on cost-functions, we consider
  on the investment.
  The participant would therefore face different probabilities if her investment
  is above or below a threshold.
- When above the threshold, the participant would take advantage of the skills.
- When not above the threshold, the participant would avoid the investment
- and save the investment value instead.
+ When the participant spends an amount 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+, she takes advantage of the skills with weight 
+\begin_inset Formula $1-\mu$
+\end_inset
+
+.
+ In this all-or-nothing payment scheme, the participant might avoid the
+ investment altogether and keep the investment towards savings instead.
  The behaviour of all participants depends only on 
 \begin_inset Formula $\nu_{1},\nu_{2}$
 \end_inset
@@ -1149,8 +1157,8 @@ Given the issues with too many conditions on cost-functions, we consider
 
  before they participate.
  Therefore, all rich and poor participants have the same respective behaviour.
- Notice that one cannot consider a two-player simplification of the game
- - since the number of participants matters for the probability of winning.
+ A two-player simplification of the game is thus avoided since the number
+ of participants matter for the probability of winning.
  
 \end_layout
 
@@ -1169,7 +1177,7 @@ The result we use depends on the distribution of
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-F_{X}(x)=P(r_{k}\mu+s_{k}(1-\mu)<x)=\begin{cases}
+F_{X}(x)=P(x_{k}<x)=P(r_{k}\mu+s_{k}(1-\mu)<x)=\begin{cases}
 \frac{x^{2}}{2\mu(1-\mu)} & 0<x<\mu\\
 \frac{x-\mu/2}{1-\mu} & \mu<x<1-\mu\\
 1-\frac{(x-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x<1\\
@@ -1185,18 +1193,18 @@ F_{X}(x)=P(r_{k}\mu+s_{k}(1-\mu)<x)=\begin{cases}
 \begin_layout Standard
 It is also worth clarifying that the poor consumer is not fully removed
  from the game if she competes on the basis of raw-talent alone.
- There are four differenct cases that may arise.
+ There are four differenct cases that arise.
  
 \end_layout
 
 \begin_layout Standard
 Case I - The poor participant does not particpate due to insufficient investment
  
-\begin_inset Formula $\nu_{1}<\overline{\nu}$
+\begin_inset Formula $\nu_{1}=0$
 \end_inset
 
  while the rich participant does with 
-\begin_inset Formula $\nu_{2}>\overline{\nu}$
+\begin_inset Formula $\nu_{2}=\overline{\nu}$
 \end_inset
 
  .
@@ -1204,12 +1212,12 @@ Case I - The poor participant does not particpate due to insufficient investment
 
 \begin_layout Standard
 Case II - The rich participant does not participate 
-\begin_inset Formula $\nu_{2}<\overline{\nu}$
+\begin_inset Formula $\nu_{2}=0$
 \end_inset
 
  but the poor participant does i.e.
  
-\begin_inset Formula $\nu_{1}<\overline{\nu}$
+\begin_inset Formula $\nu_{1}=\overline{\nu}$
 \end_inset
 
 .
@@ -1217,7 +1225,7 @@ Case II - The rich participant does not participate
 
 \begin_layout Standard
 Case III - Both poor and rich participants do not participate and 
-\begin_inset Formula $\nu_{1}<\overline{\nu},\nu_{2}<\overline{\nu}$
+\begin_inset Formula $\nu_{1}=\nu_{2}=0$
 \end_inset
 
 .
@@ -1227,11 +1235,7 @@ Case III - Both poor and rich participants do not participate and
 \begin_layout Standard
 Case IV - Both poor rich and participant participate i.e.
  
-\begin_inset Formula $\nu_{1}>\overline{\nu}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu_{2}>\overline{\nu}$
+\begin_inset Formula $\nu_{1}=\nu_{2}=\overline{\nu}$
 \end_inset
 
 .
@@ -1241,6 +1245,36 @@ Case IV - Both poor rich and participant participate i.e.
 With Case I, the poor participant can win when her raw-talent is higher
  than that of all other poor participants as well as that of the rich participan
 ts (who compete with acquired skills).
+ In this sceanrio, the poor are priced out of accessing any skills 
+\begin_inset Formula $s$
+\end_inset
+
+ in their score so that the skills 
+\begin_inset Formula $s>0$
+\end_inset
+
+ can only be true for those that have their investment 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ higher than the threshold 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+.
+ For a poor participant to win, she must be ahead of all of the poor participant
+s and ahead of rich participants as well.
+ In other words, a participant 
+\begin_inset Formula $i$
+\end_inset
+
+ can win if 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ is higher than than raw-talent in all poor participants and also exceeds
+ the score involving skills among the rich participants who can afford to
+ have skills.
 \end_layout
 
 \begin_layout Standard
@@ -1276,11 +1310,118 @@ r_{i}^{P-1}(1-\frac{(r_{i}-1)^{2}}{2\mu(1-\mu)})^{N-P} & 1-\mu<r_{i}<1\\
 \end_layout
 
 \begin_layout Standard
-The total probability to win is therefore, 
+With the uniform density for 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $f(r_{i})=1$
+\end_inset
+
+ ), total probability to win is 
 \begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}$
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%integrate (x^(2*N-P-1),x,0,m)
+\end_layout
+
+\begin_layout Plain Layout
+
+%integrate (x^(P-1)*(x-m/2)^(N-P),x,m,1-m)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can't obtain definite integrals readily with general 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $N$
+\end_inset
+
+, so we consider the two-player approach instead.
+ 
+\end_layout
+
+\begin_layout Standard
+In Case II, when the rich person does not participate (i.e.
+ all rich participants have 
+\begin_inset Formula $\nu_{2}<\overline{\nu}$
+\end_inset
+
+), the poor participant has the skills-advantage in the game.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{i}<\mu r_{i}+(1-\mu)s_{i})\prod_{k=P+1}^{N}P(r_{k}<\mu r_{i}+(1-\mu)s_{i})\\
+=F_{X}(x_{i})^{P-1}x_{i}^{N-P}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Case III, when neither the rich nor the poor participate in the game,
+ then the game depends only on raw-talents and all participants have the
+ same probabilty 
+\begin_inset Formula $\frac{1}{N}$
+\end_inset
+
+ to win the game.
+ This is because 
+\begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}=\frac{r_{i}^{N}}{N}|_{0}^{1}=\frac{1}{N}$
+\end_inset
+
+ where 
+\begin_inset Formula $P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(r_{k}<r_{i})\prod_{k=P+1}^{N}P(r_{k}<r_{i})=r_{i}{}^{N-1}$
+\end_inset
+
 .
+\end_layout
+
+\begin_layout Standard
+In Case IV, when both rich and poor participants set 
+\begin_inset Formula $\nu_{1}=\nu_{2}=\overline{\nu}$
+\end_inset
+
+, then the poor participant can win only if her score 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is above all other participants - rich or poor.
+ Therefore, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\prod_{k=P+1}^{N}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\\
+=F_{X}(x_{i})^{N-1}
+\end{multline*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1294,45 +1435,262 @@ An important assumption we have is that the number of poor and rich are
 \end_layout
 
 \begin_layout Standard
-In this formulation, the poor are priced out of accessing any skills 
-\begin_inset Formula $s$
+====
+\end_layout
+
+\begin_layout Subsection
+Cooperative and Non-cooperative Equilibria
+\end_layout
+
+\begin_layout Standard
+The cooperative equilibrium depends on whether utility is higher by playing
+ or not playing.
+ The non-cooperative strategy is to take a position regardless of what position
+ the other player takes.
+\end_layout
+
+\begin_layout Section
+Two and three-player Discrete Model with Choice under Uniform Distribution
+\end_layout
+
+\begin_layout Standard
+The participant faces different probabilities if her investment is above
+ or below a threshold.
+ When the participant spends an amount 
+\begin_inset Formula $\overline{\nu}$
 \end_inset
 
- in their score so that the skills 
-\begin_inset Formula $s>0$
+, she takes advantage of the skills with weight 
+\begin_inset Formula $1-\mu$
 \end_inset
 
- can only be true for those that have their investment higher than the threshold.
- For a poor participant to win, she must be ahead of all of the poor participant
-s and ahead of rich participants as well.
- In other words, a participant 
-\begin_inset Formula $i$
+.
+ In this all-or-nothing payment scheme, the participant might avoid the
+ investment altogether and keep the investment towards savings instead.
+ The behaviour of both participants depends only on 
+\begin_inset Formula $\nu_{1},\nu_{2}$
 \end_inset
 
- can win if 
-\begin_inset Formula $r_{i}$
+ - as they are unaware of 
+\begin_inset Formula $r_{i},s_{i}$
 \end_inset
 
- is higher than than raw-talent in all poor participants and also exceeds
- the score involving skills among the rich participants who can afford to
- have skills.
+ before they participate.
  
 \end_layout
 
 \begin_layout Standard
-.
- If the number of poor are 
-\begin_inset Formula $P$
+The result we use depends on the distribution of 
+\begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
+\end_inset
+
+ under the assumption that 
+\begin_inset Formula $\mu<1-\mu$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+F_{X}(x)=P(x_{k}<x)=P(r_{k}\mu+s_{k}(1-\mu)<x)=\begin{cases}
+\frac{x^{2}}{2\mu(1-\mu)} & 0<x<\mu\\
+\frac{x-\mu/2}{1-\mu} & \mu<x<1-\mu\\
+1-\frac{(x-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is also worth clarifying that the poor consumer is not fully removed
+ from the game if she competes on the basis of raw-talent alone.
+ There are four differenct cases that arise.
+ 
+\end_layout
+
+\begin_layout Standard
+Case I - The poor participant does not particpate due to insufficient investment
+ 
+\begin_inset Formula $\nu_{1}=0$
+\end_inset
+
+ while the rich participant does with 
+\begin_inset Formula $\nu_{2}=\overline{\nu}$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+Case II - The rich participant does not participate 
+\begin_inset Formula $\nu_{2}=0$
+\end_inset
+
+ but the poor participant does i.e.
+ 
+\begin_inset Formula $\nu_{1}=\overline{\nu}$
 \end_inset
 
 .
- Then, we have the integral
+\end_layout
+
+\begin_layout Standard
+Case III - Both poor and rich participants do not participate and 
+\begin_inset Formula $\nu_{1}=\nu_{2}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Case IV - Both poor rich and participant participate i.e.
+ 
+\begin_inset Formula $\nu_{1}=\nu_{2}=\overline{\nu}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+With Case I, the poor participant can win when her raw-talent is higher
+ than of the rich participant (who competes with acquired skills).
+ In this sceanrio, the poor is priced out of accessing any skills 
+\begin_inset Formula $s$
+\end_inset
+
+ in her score so that the skills 
+\begin_inset Formula $s>0$
+\end_inset
+
+ can only be true for the rich participant with an investment 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ higher than the threshold 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+.
+ The poor participant can win if 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ is higher than the score involving skills of the rich participants.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1})=P(\mu r_{2}+(1-\mu)s_{2}<r_{1})\\
+=F_{X}(r_{1})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1})=\begin{cases}
+\frac{r_{1}^{2}}{2\mu(1-\mu)} & 0<r_{1}<\mu\\
+\frac{r_{1}-\mu/2}{1-\mu} & \mu<r_{1}<1-\mu\\
+1-\frac{(r_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<r_{1}<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With the uniform density for 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $f(r_{1})=1$
+\end_inset
+
+ ), total probability to win is 
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+ (since 
+\begin_inset Formula $\int_{0}^{1}P(\text{win}|r_{1})dr_{1}=\frac{\mu^{2}}{6(1-\mu)}+\frac{1}{2}-\mu+\mu-\frac{\mu^{2}}{6(1-\mu)}=\frac{1}{2}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%integrate (x^2,x,0,m)/(2*m*(1-m))
+\end_layout
+
+\begin_layout Plain Layout
+
+%integrate ((x-m/2)/(1-m),x,m,1-m)
+\end_layout
+
+\begin_layout Plain Layout
+
+%integrate (1-(x-1)^2/(2*m*(1-m)),x,1-m,1)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Case II, when the rich person does not participate (
+\begin_inset Formula $\nu_{2}=0$
+\end_inset
+
+), the poor participant has the skills-advantage in the game.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1},s_{1})=P(r_{2}<\mu r_{1}+(1-\mu)s_{1})\\
+=F_{X}(\mu r_{1}+(1-\mu)s_{1})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The total probability to win is
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\int_{s_{k}=0}^{s_{k}=1}(\int_{r_{i}=0}^{1}{\prod_{j=1}^{i-1}{P(r_{i}>r_{j})}\times\prod_{j=i+1}^{P}{P(r_{i}>r_{j})}\times\prod_{j=P+1}^{N}{P(r_{i}>\mu r_{j}+(1-\mu)s_{k})}})
+\int_{0}^{1}{\int_{0}^{1}{(P(\text{win}|r_{1},s_{1})dr_{1})}ds_{1}}
 \end{align*}
 
 \end_inset
@@ -1341,83 +1699,105 @@ s and ahead of rich participants as well.
 \end_layout
 
 \begin_layout Standard
-or
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1},s_{1})=\begin{cases}
+\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)} & 0<\mu r_{1}+(1-\mu)s_{1}<\mu\\
+\frac{r_{1}-\mu/2}{1-\mu} & \mu<\mu r_{1}+(1-\mu)s_{1}<1-\mu\\
+1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<\mu r_{1}+(1-\mu)s_{1}<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1},s_{1})=\begin{cases}
+\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)} & -\frac{(1-\mu)s_{1}}{\mu}<r_{1}<1-\frac{(1-\mu)s_{1}}{\mu}\\
+\frac{r_{1}-\mu/2}{1-\mu} & 1-(1-\mu)s_{1}<r_{1}<\frac{(1-\mu)(1-s_{1})}{\mu}\\
+1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)} & \frac{(1-\mu)(1-s_{1})}{\mu}<r_{1}<\frac{1-(1-\mu)s_{1}}{\mu}\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-$ 
-\backslash
-int_{s_k=0}^{s_k=1} ( 
-\backslash
-int_{r_i=0}^{1}{ r_i^{P-1} 
-\backslash
-times 
-\backslash
-prod_{j=P+1}^{N}{P(
-\backslash
-frac{r_i - (1-
-\backslash
-mu) s_k}{
-\backslash
-mu} > r_j )} } ) $ or
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{1}{(P(\text{win}|r_{1},s_{1})dr_{1})} & =
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-$ 
-\backslash
-int_{s_k=0}^{s_k=1} 
-\backslash
-int_{r_i=0}^{1}{ r_i^{P-1} (
-\backslash
-frac{r_i - (1-
-\backslash
-mu) s_k}{
-\backslash
-mu}) }^{N-P} $
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%integrate(
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The solution can be found in wolfram with "integrate(r**(p-1)*((r-(1-m)*s)/(m))*
-*(n-p),r,0,1)".
+In Case III, when neither the rich nor the poor participate in the game,
+ then the game depends only on raw-talents and all participants have the
+ same probabilty 
+\begin_inset Formula $\frac{1}{N}$
+\end_inset
+
+ to win the game.
+ This is because 
+\begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}=\frac{r_{i}^{N}}{N}|_{0}^{1}=\frac{1}{N}$
+\end_inset
+
+ where 
+\begin_inset Formula $P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(r_{k}<r_{i})\prod_{k=P+1}^{N}P(r_{k}<r_{i})=r_{i}{}^{N-1}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-On the other hand, the poor person can win so long as the poor consumers
- ($P$ in number) have their score $r$ less than a particular score $s_i$
- and those among the rich have their total score $
-\backslash
-mu r_k+ (1-
-\backslash
-mu) s_k < s_i$.
- Therefore, the integral is
+In Case IV, when both rich and poor participants set 
+\begin_inset Formula $\nu_{1}=\nu_{2}=\overline{\nu}$
+\end_inset
+
+, then the poor participant can win only if her score 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is above all other participants - rich or poor.
+ Therefore, 
 \end_layout
 
 \begin_layout Standard
-$
-\backslash
-int_{s_k=0}^{s_k=1} 
-\backslash
-int_{r_i=0}^{r_i=1}{
-\backslash
-prod_{j=1}^{j=P}{P(r_j< 
-\backslash
-mu r_i + (1-
-\backslash
-mu)s_i)} 
-\backslash
-prod_{j=P+1}^{j=N}{P(
-\backslash
-mu r_j+(1-
-\backslash
-mu) s_j < 
-\backslash
-mu r_i+(1-
-\backslash
-mu) s_i) }}$ 
-\end_layout
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\prod_{k=P+1}^{N}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\\
+=F_{X}(x_{i})^{N-1}
+\end{multline*}
 
-\begin_layout Standard
-====
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
