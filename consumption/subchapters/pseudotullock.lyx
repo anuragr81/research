@@ -362,18 +362,106 @@ f(w) & =\begin{cases}
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:convex_combo_plot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+shows this trapezoidal density for 
+\begin_inset Formula $\mu=\frac{1}{5}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The main idea is to calculate the total probability over 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+.
+ One objection that can be raised is that the total probability must be
+ calculated in one big integration rather than first calculating probability
+ for given 
+\begin_inset Formula $r_{i},s_{i}$
+\end_inset
+
+ and then letting 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ vary independently.
+ But this objection can be addressed by considering the sample space of
+ 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+.
+ It seems valid to consider the conditional probability of winning by considerin
+g all the possibilities for other player(s).
+ As long as 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ , 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ are being varied for one participant alone, the integration seems the right
+ thing to do.
+ 
+\end_layout
+
+\begin_layout Standard
+What's not obvious are the powers of 
+\begin_inset Formula $F_{Z}(z)$
+\end_inset
+
+ or 
+\begin_inset Formula $F_{W}(w)$
+\end_inset
+
+.
+ These complicate the terms to evaluate and favour a Monte Carlo approach.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%Plot[Piecewise[{{0, x <0 },{x/(.2*(1-.2)), 0 < x <.2}, {1/(1-.2),  0.2 < x <
+ .8}, {(1-x)/(.2*(1-.2)),  0.8 < x < 1}}], {x, -.02, 1.02}]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
 	filename figures/combined_density.png
-	width 5in
+	width 4in
 
 \end_inset
 
@@ -390,12 +478,38 @@ name "fig:convex_combo"
 
 \end_inset
 
-Combined density of 
+Ranges of 
 \begin_inset Formula $w$
 \end_inset
 
- as the convex combination of two random variables 
+ and 
+\begin_inset Formula $w-x$
+\end_inset
+
+ for convolution of two scaled random variables 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/combined_density_plot.png
+	width 4in
 
 \end_inset
 
@@ -403,6 +517,28 @@ Combined density of
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:convex_combo_plot"
+
+\end_inset
+
+Combined density of 
+\begin_inset Formula $w$
+\end_inset
+
+ as the convex combination of two random variables with 
+\begin_inset Formula $\mu=\frac{1}{5}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -418,7 +554,7 @@ Possible Applications
 \begin_layout Standard
 The opportunities for education may vary.
  The model attempts to represent this situation.
- Souther Nigeria may have a higher degree of competition and 
+ Southern Nigeria may have a higher degree of competition and 
 \end_layout
 
 \begin_layout Section
@@ -1978,7 +2114,7 @@ In Case II, when the rich person does not participate (
 \begin_inset Formula 
 \begin{multline*}
 P(\text{win}|r_{1},s_{1})=P(r_{2}<\mu r_{1}+(1-\mu)s_{1})\\
-=F_{X}(\mu r_{1}+(1-\mu)s_{1})
+=\mu r_{1}+(1-\mu)s_{1}
 \end{multline*}
 
 \end_inset
@@ -1987,47 +2123,34 @@ P(\text{win}|r_{1},s_{1})=P(r_{2}<\mu r_{1}+(1-\mu)s_{1})\\
 \end_layout
 
 \begin_layout Standard
-The total probability to win is
-\end_layout
+\begin_inset Formula $\int_{0}^{1}P(\text{win}|r_{1})dr_{1}=\frac{\mu r_{1}^{2}}{2}+(1-\mu)s_{1}r_{1}|_{r_{1}=0}^{r_{1}=1}=\mu(\frac{1}{2}-s_{1})+s_{1}$
+\end_inset
 
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\int_{0}^{1}{\int_{0}^{1}{(P(\text{win}|r_{1},s_{1})dr_{1})}ds_{1}}
-\end{align*}
-
+ and 
+\begin_inset Formula $\int_{0}^{1}(\int_{0}^{1}P(\text{win}|r_{1})dr_{1})ds_{1}=\frac{1}{2}$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-P(\text{win}|r_{1},s_{1})=\begin{cases}
-\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)} & 0<\mu r_{1}+(1-\mu)s_{1}<\mu\\
-\frac{r_{1}-\mu/2}{1-\mu} & \mu<\mu r_{1}+(1-\mu)s_{1}<1-\mu\\
-1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<\mu r_{1}+(1-\mu)s_{1}<1\\
-0 & \text{otherwise}
-\end{cases}
-\end{multline*}
+\begin_inset ERT
+status open
 
-\end_inset
+\begin_layout Plain Layout
 
+% verified with integrate(m*x+(1-m)*s,x,0,1) 
+\end_layout
 
-\begin_inset Newline newline
-\end_inset
+\begin_layout Plain Layout
 
+% and then
+\end_layout
 
-\begin_inset Formula 
-\begin{multline*}
-P(\text{win}|r_{1},s_{1})=\begin{cases}
-\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)} & -\frac{(1-\mu)s_{1}}{\mu}<r_{1}<1-\frac{(1-\mu)s_{1}}{\mu}\\
-\frac{r_{1}-\mu/2}{1-\mu} & 1-\frac{(1-\mu)s_{1}}{\mu}<r_{1}<\frac{(1-\mu)(1-s_{1})}{\mu}\\
-1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)} & \frac{(1-\mu)(1-s_{1})}{\mu}<r_{1}<\frac{1-(1-\mu)s_{1}}{\mu}\\
-0 & \text{otherwise}
-\end{cases}
-\end{multline*}
+\begin_layout Plain Layout
+
+% integrate(m*(1/2-s)+s,s,0,1)
+\end_layout
 
 \end_inset
 
@@ -2035,16 +2158,7 @@ P(\text{win}|r_{1},s_{1})=\begin{cases}
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-\int_{0}^{1}{(P(\text{win}|r_{1},s_{1})dr_{1})}=\int_{0}^{1-\frac{(1-\mu)s_{1}}{\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)}dr_{1}\\
-+\int_{1-\frac{(1-\mu)s_{1}}{\mu}}^{\frac{(1-\mu)(1-s_{1})}{\mu}}\frac{r_{1}-\mu/2}{1-\mu}dr_{1}\\
-+\int_{\frac{(1-\mu)(1-s_{1})}{\mu}}^{\frac{1-(1-\mu)s_{1}}{\mu}}(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})
-\end{multline*}
-
-\end_inset
-
-
+The total probability to win is 
 \end_layout
 
 \begin_layout Standard
@@ -2078,6 +2192,11 @@ In Case III, when neither the rich nor the poor participate in the game,
 \end_inset
 
 .
+ For two players, the poor participant still has the total probability 
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2089,20 +2208,56 @@ In Case IV, when both rich and poor participants set
 \begin_inset Formula $x_{i}$
 \end_inset
 
- is above all other participants - rich or poor.
+ is above that of the rich participant.
  Therefore, 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\prod_{k=P+1}^{N}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\\
-=F_{X}(x_{i})^{N-1}
+P(\text{win}|r_{i})=P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1}+(1-\mu)s_{1})\\
+=F_{X}(x_{1})
 \end{multline*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\int_{0}^{1}P(\text{win}|r_{1})dr_{1}=\begin{cases}
+\frac{x_{1}^{2}}{2\mu(1-\mu)} & 0<x_{1}<\mu\\
+\frac{x_{1}-\mu/2}{1-\mu} & \mu<x_{1}<1-\mu\\
+1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x_{1}<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using 
+\begin_inset Formula $dr_{1}=dx_{1}$
+\end_inset
+
+ (for integrating with a given 
+\begin_inset Formula $s_{1}$
+\end_inset
+
+), and that
+\begin_inset Formula $r_{1}=0\Rightarrow x_{1}=(1-\mu)s_{1}$
+\end_inset
+
+ as well as 
+\begin_inset Formula $r_{1}=1\Rightarrow x_{1}=\mu+(1-\mu)s_{1}$
+\end_inset
+
+, we can write
 \end_layout
 
 \begin_layout Section
