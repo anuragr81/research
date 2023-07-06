@@ -109,6 +109,182 @@ theorems-ams-extended-chap-bytype
 \begin_body
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Notes
+\end_layout
+
+\begin_layout Plain Layout
+
+% https://mathstat.slu.edu/~speegle/_book_spring_2020/transformationsofrandomvaria
+bles.html
+\end_layout
+
+\begin_layout Plain Layout
+
+% https://pages.cs.wisc.edu/~shao/stat609/stat609-12.pdf
+\end_layout
+
+\begin_layout Plain Layout
+
+% 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Distribution for a convex combinations
+\end_layout
+
+\begin_layout Standard
+The distribution of a convex combination 
+\begin_inset Formula $w=\mu r+(1-\mu)s$
+\end_inset
+
+ of two random variables 
+\begin_inset Formula $r,s$
+\end_inset
+
+ - which are distributed according to densities 
+\begin_inset Formula $f_{R}(r)$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{S}(s)$
+\end_inset
+
+ - can be derived using the convolution of two derived variables 
+\begin_inset Formula $x=\mu r$
+\end_inset
+
+ and 
+\begin_inset Formula $y=(1-\mu)s$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $s$
+\end_inset
+
+ are uniformly distributed variables ranging from 0 to 1, then 
+\begin_inset Formula $x$
+\end_inset
+
+ ranges from 0 to 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ ranges from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $(1-\mu)$
+\end_inset
+
+.
+ The CDF for 
+\begin_inset Formula $F_{X}(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $F_{Y}(y)$
+\end_inset
+
+ are simply 
+\begin_inset Formula $F_{X}(x)=\frac{x}{\mu}$
+\end_inset
+
+ , 
+\begin_inset Formula $F_{Y}(y)=\frac{y}{1-\mu}$
+\end_inset
+
+ (respectively).
+ Therefore, the densities for 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ are 
+\begin_inset Formula $f_{X}(x)=\frac{1}{\mu}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{Y}(y)=\frac{1}{1-\mu}$
+\end_inset
+
+.
+ The density of 
+\begin_inset Formula $w$
+\end_inset
+
+ is simple 
+\begin_inset Formula $f(w)=\int_{-\infty}^{\infty}f_{Y}(w-x)f_{X}(x)dx$
+\end_inset
+
+.
+ Since , 
+\begin_inset Formula $f_{X}(x)$
+\end_inset
+
+ is 1 only between 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ We have the following integral to evaluate for the convolution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+f(w)=\int_{0}^{\mu}f_{Y}(w-x)dx
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $f_{Y}(y)$
+\end_inset
+
+ is 1 only between 0 and 
+\begin_inset Formula $1-\mu$
+\end_inset
+
+, we have the condition 
+\begin_inset Formula $0<w-x<1-\mu\Rightarrow w-(1-\mu)<x<w$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
 Possible Applications
 \end_layout
 
