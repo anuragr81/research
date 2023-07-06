@@ -244,7 +244,11 @@ The distribution of a convex combination
 \begin_inset Formula $f_{X}(x)$
 \end_inset
 
- is 1 only between 
+ is 
+\begin_inset Formula $1/\mu$
+\end_inset
+
+ only between 
 \begin_inset Formula $0$
 \end_inset
 
@@ -259,7 +263,7 @@ The distribution of a convex combination
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-f(w)=\int_{0}^{\mu}f_{Y}(w-x)dx
+f(w)=\frac{1}{\mu}\int_{0}^{\mu}f_{Y}(w-x)dx
 \end{multline*}
 
 \end_inset
@@ -281,7 +285,130 @@ Since
 \end_inset
 
 .
- 
+ Further, 
+\begin_inset Formula $x$
+\end_inset
+
+ is distributed only between 0 and 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ As shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:convex_combo"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the integral would evaluate to the following
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice that as a convex combination, 
+\begin_inset Formula $w$
+\end_inset
+
+ is distributed only between 0 and 1.
+\end_layout
+
+\end_inset
+
+ under the assumption 
+\begin_inset Formula $\mu<\frac{1}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f(w)=\frac{1}{\mu}\int_{0}^{\mu}f_{Y}(w-x)dx & =\begin{cases}
+\frac{1}{\mu}\int_{0}^{w}\frac{1}{1-\mu}dx & 0<w<\mu\\
+\frac{1}{\mu}\int_{0}^{\mu}\frac{1}{1-\mu}dx & \mu<w<1-\mu\\
+\frac{1}{\mu}\int_{w-(1-\mu)}^{\mu}\frac{1}{1-\mu}dx & 1-\mu<w<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This can be simplified as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f(w) & =\begin{cases}
+\frac{w}{\mu(1-\mu)} & 0<w<\mu\\
+\frac{1}{1-\mu} & \mu<w<1-\mu\\
+\frac{1-w}{\mu(1-\mu)} & 1-\mu<w<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/combined_density.png
+	width 5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:convex_combo"
+
+\end_inset
+
+Combined density of 
+\begin_inset Formula $w$
+\end_inset
+
+ as the convex combination of two random variables 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1896,7 +2023,7 @@ P(\text{win}|r_{1},s_{1})=\begin{cases}
 \begin{multline*}
 P(\text{win}|r_{1},s_{1})=\begin{cases}
 \frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)} & -\frac{(1-\mu)s_{1}}{\mu}<r_{1}<1-\frac{(1-\mu)s_{1}}{\mu}\\
-\frac{r_{1}-\mu/2}{1-\mu} & 1-(1-\mu)s_{1}<r_{1}<\frac{(1-\mu)(1-s_{1})}{\mu}\\
+\frac{r_{1}-\mu/2}{1-\mu} & 1-\frac{(1-\mu)s_{1}}{\mu}<r_{1}<\frac{(1-\mu)(1-s_{1})}{\mu}\\
 1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)} & \frac{(1-\mu)(1-s_{1})}{\mu}<r_{1}<\frac{1-(1-\mu)s_{1}}{\mu}\\
 0 & \text{otherwise}
 \end{cases}
@@ -1909,9 +2036,11 @@ P(\text{win}|r_{1},s_{1})=\begin{cases}
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-\int_{0}^{1}{(P(\text{win}|r_{1},s_{1})dr_{1})} & =
-\end{align*}
+\begin{multline*}
+\int_{0}^{1}{(P(\text{win}|r_{1},s_{1})dr_{1})}=\int_{0}^{1-\frac{(1-\mu)s_{1}}{\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)}dr_{1}\\
++\int_{1-\frac{(1-\mu)s_{1}}{\mu}}^{\frac{(1-\mu)(1-s_{1})}{\mu}}\frac{r_{1}-\mu/2}{1-\mu}dr_{1}\\
++\int_{\frac{(1-\mu)(1-s_{1})}{\mu}}^{\frac{1-(1-\mu)s_{1}}{\mu}}(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})
+\end{multline*}
 
 \end_inset
 
