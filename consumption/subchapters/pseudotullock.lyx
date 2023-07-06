@@ -2227,7 +2227,7 @@ P(\text{win}|r_{i})=P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1}+(1-\mu)s_{1})\\
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-\int_{0}^{1}P(\text{win}|r_{1})dr_{1}=\begin{cases}
+P(\text{win}|r_{1})=\begin{cases}
 \frac{x_{1}^{2}}{2\mu(1-\mu)} & 0<x_{1}<\mu\\
 \frac{x_{1}-\mu/2}{1-\mu} & \mu<x_{1}<1-\mu\\
 1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x_{1}<1\\
@@ -2241,7 +2241,11 @@ P(\text{win}|r_{i})=P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1}+(1-\mu)s_{1})\\
 \end_layout
 
 \begin_layout Standard
-Using 
+We evaluate the integral 
+\begin_inset Formula $\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dr_{1}$
+\end_inset
+
+using 
 \begin_inset Formula $dr_{1}=dx_{1}$
 \end_inset
 
@@ -2249,15 +2253,114 @@ Using
 \begin_inset Formula $s_{1}$
 \end_inset
 
-), and that
+).
+ Notice that 
 \begin_inset Formula $r_{1}=0\Rightarrow x_{1}=(1-\mu)s_{1}$
 \end_inset
 
- as well as 
+ and 
 \begin_inset Formula $r_{1}=1\Rightarrow x_{1}=\mu+(1-\mu)s_{1}$
 \end_inset
 
-, we can write
+.
+ The integration of the piecewise function above depends on whether 
+\begin_inset Formula $(1-\mu)s_{1}<\mu$
+\end_inset
+
+ or not.
+ Consider first when 
+\begin_inset Formula $s_{1}<\frac{\mu}{1-\mu}$
+\end_inset
+
+.
+ We have 
+\begin_inset Formula $(1-\mu)s_{1}<\mu$
+\end_inset
+
+ .
+ Also, 
+\begin_inset Formula $(1-\mu)s_{1}<(1-\mu)$
+\end_inset
+
+ since 
+\begin_inset Formula $s_{1}\in(0,1)$
+\end_inset
+
+.
+ Notice also that 
+\begin_inset Formula $s_{1}<1\Rightarrow$
+\end_inset
+
+
+\begin_inset Formula $s_{1}(1-\mu)<(1-\mu)$
+\end_inset
+
+ (since 
+\begin_inset Formula $1-\mu>0$
+\end_inset
+
+) and therefore, 
+\begin_inset Formula $\mu+s_{1}(1-\mu)<1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+With 
+\begin_inset Formula $(1-\mu)s_{1}<\mu$
+\end_inset
+
+, we have 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dr_{1}=\int_{x_{1}=(1-\mu)s_{1}}^{x_{1}=\mu+(1-\mu)s_{1}}P(\text{win}|r_{1})dx_{1}=\begin{cases}
+\int_{(1-\mu)s_{1}}^{\mu}\frac{x_{1}^{2}}{2\mu(1-\mu)} & \text{only until }\mu\\
+\int_{\mu}^{1-\mu}\frac{x_{1}-\mu/2}{1-\mu}dx_{1}\\
+\int_{1-\mu}^{\mu+(1-\mu)s_{1}}(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)})dx_{1}\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We also need to check if 
+\begin_inset Formula $1-\mu<\mu+(1-\mu)s_{1}$
+\end_inset
+
+ otherwise the integral would be zero.
+\begin_inset Formula $\frac{1-2\mu+\mu^{2}-\mu^{2}}{(1-\mu)^{2}}=1-\frac{\mu^{2}}{(1-\mu)^{2}}<s_{1}$
+\end_inset
+
+.
+ Thus the other condition is that 
+\begin_inset Formula $s_{1}>1-\frac{^{\mu^{2}}}{(1-\mu)^{2}}$
+\end_inset
+
+ or 
+\begin_inset Formula $(1-\mu)s_{1}>(1-\mu)-\frac{^{\mu^{2}}}{(1-\mu)}$
+\end_inset
+
+.
+ This part is non-zero only when 
+\begin_inset Formula $s_{1}$
+\end_inset
+
+meets this condition.
+ This is to be considered for integration over 
+\begin_inset Formula $s_{1}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Section
