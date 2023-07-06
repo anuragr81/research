@@ -316,6 +316,134 @@ K_{VAR}^{2} & =\frac{2e^{rT}}{T}(\int_{0}^{F_{0}}\frac{P_{0}(K)}{K^{2}}dK+\int_{
 
 \end_layout
 
+\begin_layout Subsubsection
+Algorithm to replicate Log-contract
+\end_layout
+
+\begin_layout Standard
+With these let's consider calls with strikes 
+\begin_inset Formula $K_{1c,}K_{2c}$
+\end_inset
+
+ etc.
+ such that 
+\begin_inset Formula $S_{*}<K_{1c}<K_{2c}<...$
+\end_inset
+
+ and puts 
+\begin_inset Formula $K_{1p},K_{2p}$
+\end_inset
+
+etc.
+ such that 
+\begin_inset Formula $S_{*}>K_{1c}>K_{2c}...$
+\end_inset
+
+ - where 
+\begin_inset Formula $S^{*}$
+\end_inset
+
+ is the boundary between calls and puts.
+ We can set this to initial value of the stock i.e.
+ 
+\begin_inset Formula $S_{*}=S_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let's consider the strike 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+ at the boundary (reference) stock-price 
+\begin_inset Formula $S_{*}$
+\end_inset
+
+.
+ The weight associated with the option struck at 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+ would be set to 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+w_{c}(K_{0}) & =\frac{f(K_{1c})-f(K_{0})}{K_{1c}-K_{0}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $f(S_{T})$
+\end_inset
+
+ is defined as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f(S_{T}) & =\frac{2}{T}(\frac{S_{T}-S_{*}}{S_{*}}-log(\frac{S_{T}}{S_{*}}))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The (units) weights for calls in the portfolio are given by 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+w_{c}(K_{n,c}) & =\frac{f(K_{n+1,c})-f(K_{n,c})}{K_{n,c}-K_{n+1,c}}-\sum_{i=0}^{n-1}w_{c}(K_{i,c})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly, we can obtain the weights associated with puts by first setting
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+w_{p}(K_{0}) & =\frac{f(K_{1p})-f(K_{0})}{K_{1p}-K_{0}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and then holding other weights of puts determined by
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+w_{p}(K_{n,p}) & =\frac{f(K_{n+1,p})-f(K_{n,p})}{K_{n,p}-K_{n+1,p}}-\sum_{i=0}^{n-1}w_{p}(K_{i,p})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Greeks
 \end_layout
