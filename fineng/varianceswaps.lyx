@@ -302,13 +302,67 @@ In simple words, the Black-Scholes assumptions allow us to replicate a variance
 \end_inset
 
 .
- The forward cost of this portfolio is simply
+ The forward cost of this portfolio is obtained as follows (
+\begin_inset Formula $K_{VAR}=E(\int_{0}^{T}\sigma_{t}^{2}dt)$
+\end_inset
+
+ is the strike of the variance swap).
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 K_{VAR}^{2} & =\frac{2e^{rT}}{T}(\int_{0}^{F_{0}}\frac{P_{0}(K)}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{C_{0}(K)}{K^{2}}dK
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The more general value of 
+\begin_inset Formula $K_{var}$
+\end_inset
+
+ (still to be reconciled with JPInv28) is (see Derman)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+K_{var} & =\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}e^{rT}-1)-log(\frac{S_{*}}{S_{0}})+e^{rT}\int_{0}^{S*}\frac{1}{K^{2}}P(K)dK+e^{rT}\int_{S_{*}}^{\infty}\frac{1}{K^{2}}C(K)dK
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This can be simplified (see Derman) to 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $K_{var}=\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}-1)-log(\frac{S_{*}}{S_{0}}))+e^{rT}\Pi_{CP}$
+\end_inset
+
+ where 
+\begin_inset Formula $CP$
+\end_inset
+
+ is the value of portfolio of options.
+ 
+\begin_inset Formula $\Pi_{CP}$
+\end_inset
+
+ is simply 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Pi_{CP} & =\sum_{i}w(K_{ip})P(S,K_{ip})+\sum_{i}w(K_{ic})C(S,K_{ic})
 \end{align*}
 
 \end_inset
