@@ -2263,22 +2263,93 @@ using
 \end_inset
 
 .
- The integration of the piecewise function above depends on whether 
-\begin_inset Formula $(1-\mu)s_{1}<\mu$
+ Varying 
+\begin_inset Formula $r_{1}$
 \end_inset
 
- or not.
- Consider first when 
-\begin_inset Formula $s_{1}<\frac{\mu}{1-\mu}$
+ from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $1$
+\end_inset
+
+ does bring 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ in the interval 
+\begin_inset Formula $(\mu,1-\mu)$
+\end_inset
+
+ and 
+\begin_inset Formula $(1-\mu,\mu+(1-\mu)s_{1})$
 \end_inset
 
 .
- We have 
+ Notice that for 
+\begin_inset Formula $s_{1}<\frac{\mu}{1-\mu}$
+\end_inset
+
+, we have 
 \begin_inset Formula $(1-\mu)s_{1}<\mu$
 \end_inset
 
  .
- Also, 
+ When 
+\begin_inset Formula $(1-\mu)s_{1}>\mu$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $s_{1}>\frac{\mu}{1-\mu}$
+\end_inset
+
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This is possible only when 
+\begin_inset Formula $s_{1}>\mu$
+\end_inset
+
+ (
+\begin_inset Formula $\because(1-\mu)<1$
+\end_inset
+
+, 
+\begin_inset Formula $\therefore(1-\mu)s_{1}>\mu\Rightarrow s_{1}>\mu$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+).
+ For 
+\begin_inset Formula $s_{1}>\frac{\mu}{1-\mu}$
+\end_inset
+
+ (possible only when 
+\begin_inset Formula $s_{1}>\mu$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $s_{1}<1-\mu$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+.
+  Also, 
 \begin_inset Formula $(1-\mu)s_{1}<(1-\mu)$
 \end_inset
 
@@ -2304,31 +2375,144 @@ using
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-With 
-\begin_inset Formula $(1-\mu)s_{1}<\mu$
+ One therefore does not need to worry about 
+\begin_inset Formula $\mu+(1-\mu)s_{1}$
 \end_inset
 
-, we have 
+ being more than 1.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dr_{1}=\int_{x_{1}=(1-\mu)s_{1}}^{x_{1}=\mu+(1-\mu)s_{1}}P(\text{win}|r_{1})dx_{1}=\begin{cases}
-\int_{(1-\mu)s_{1}}^{\mu}\frac{x_{1}^{2}}{2\mu(1-\mu)} & \text{only until }\mu\\
-\int_{\mu}^{1-\mu}\frac{x_{1}-\mu/2}{1-\mu}dx_{1}\\
-\int_{1-\mu}^{\mu+(1-\mu)s_{1}}(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)})dx_{1}\\
-0 & \text{otherwise}
-\end{cases}
+\int_{s_{1}=0}^{s_{1}=1}(\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dr_{1})ds_{1}=\int_{s_{1}=0}^{s_{1}=1}(\int_{x_{1}=(1-\mu)s_{1}}^{x_{1}=\mu+(1-\mu)s_{1}}P(\text{win}|r_{1})dx_{1})ds_{1}\\
+=\int_{0}^{1}{(\int_{(1-\mu)s_{1}}^{\mu}\frac{x_{1}^{2}}{2\mu(1-\mu)}dx_{1})}ds_{1}\\
++\int_{0}^{1}(\int_{\mu}^{1-\mu}\frac{x_{1}-\mu/2}{1-\mu}dx_{1})ds_{1}\\
++\int_{0}^{1}\int_{1-\mu}^{\mu+(1-\mu)s_{1}}(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)})dx_{1}ds_{1}
 \end{multline*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\int_{s_{1}=0}^{s_{1}=1}(\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dr_{1})ds_{1}=\int_{s_{1}=0}^{s_{1}=1}(\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dx_{1})ds_{1}\\
+=\int_{0}^{1}{(\int_{r_{1}=0}^{r_{1}=1}\frac{x_{1}^{2}}{2\mu(1-\mu)}dx_{1})}ds_{1}\\
++\int_{0}^{1}(\int_{r_{1}=0}^{r_{1}=1}\frac{x_{1}-\mu/2}{1-\mu}dx_{1})ds_{1}\\
++\int_{0}^{1}\int_{r_{1}=0}^{r_{1}=1}(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)})dx_{1}ds_{1}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the first-integral, we are interested in all 
+\begin_inset Formula $r_{1},s_{1}$
+\end_inset
+
+ that would keep the value 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ in the interval 
+\begin_inset Formula $(0,\mu)$
+\end_inset
+
+.
+ Similarly, in the second-integral we're interested in 
+\begin_inset Formula $r_{1},s_{1}$
+\end_inset
+
+ that keep the value between 
+\begin_inset Formula $(\mu,1-\mu)$
+\end_inset
+
+.
+ In the last integral, we're interested in 
+\begin_inset Formula $r_{1},s_{1}$
+\end_inset
+
+ that keep 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ in 
+\begin_inset Formula $(1-\mu,1)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Consider the first-interval.
+ 
+\begin_inset Formula $0<\mu r_{1}+(1-\mu)s_{1}<\mu$
+\end_inset
+
+.
+ If we have vary 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ in 
+\begin_inset Formula $(0,1)$
+\end_inset
+
+, then we vary 
+\begin_inset Formula $\mu r_{1}+(1-\mu)s_{1}$
+\end_inset
+
+ in 
+\begin_inset Formula $((1-\mu)s_{1},\mu+(1-\mu)s_{1})$
+\end_inset
+
+).
+ Not all values of 
+\begin_inset Formula $s_{1}\in(0,1)$
+\end_inset
+
+ would lead to 
+\begin_inset Formula $0<\mu r_{1}+(1-\mu)s_{1}<\mu$
+\end_inset
+
+.
+ While any 
+\begin_inset Formula $s_{1}>0$
+\end_inset
+
+ would lead to 
+\begin_inset Formula $\mu r_{1}+(1-\mu)s_{1}>0$
+\end_inset
+
+, the sum easily exceed 
+\begin_inset Formula $\mu$
+\end_inset
+
+ 
+\begin_inset Formula $\mu r_{1}+(1-\mu)s_{1}<\mu\Rightarrow(1-\mu)s_{1}<\mu(1-r_{1})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+let's look at 
+\begin_inset Formula $dr_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $ds_{1}$
+\end_inset
+
+ integrals separately.
+ 
 \end_layout
 
 \begin_layout Standard
