@@ -1484,10 +1484,6 @@ Two-player Discrete Model with Choice under Uniform Distribution
 \end_layout
 
 \begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
 The participant faces different probabilities if her investment is above
  or below a threshold.
  When the participant spends an amount 
@@ -2101,7 +2097,7 @@ With the uniform density for
 \begin_inset Formula $\int_{0}^{1}P(\text{win}|r_{1})dr_{1}=\frac{3\mu^{3}}{24(1-\mu)}+\frac{36\mu^{2}-16\mu^{3}-30\mu+8}{24(1-\mu)}+\frac{15\mu^{3}-40\mu^{2}+24\mu}{24(1-\mu)}=\frac{\mu^{3}-2\mu^{2}-3\mu+4}{12(1-\mu)}=\frac{\mu(\mu^{2}-2\mu-3)+4}{12(1-\mu)}$
 \end_inset
 
-).
+.
  Since, only one of the participants can win, the probability for the rich
  participant to win is simply 
 \begin_inset Formula $1-2P(\text{win}|r_{1})$
@@ -2382,7 +2378,11 @@ The integral
 \begin_inset Formula $\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})dr_{1}ds_{1}$
 \end_inset
 
- evaluates to the following (see Appendix B)
+ evaluates to 
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+ (see Appendix B)
 \end_layout
 
 \begin_layout Standard
@@ -2391,7 +2391,7 @@ The integral
 \int_{s=0}^{s=1}\int_{r=0}^{r=1}F_{X}(x_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r)}{1-\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})^{4}}{4\mu^{2}(1-\mu)^{2}}\ ds_{1}dr_{1}}\\
 +\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r)}{1-\mu}}^{s_{1}=1-\frac{\mu r}{1-\mu}}(\frac{\mu r_{1}+(1-\mu)s_{1}-\mu/2}{1-\mu})^{2}\ ds_{1}dr_{1}}\\
 +\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r}{1-\mu}}^{s_{1}=1}(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})^{2}\ ds_{1}dr_{1}}\\
-=\frac{\mu^{3}}{24(1-\mu)^{3}}+\frac{2(2\mu-1)(\mu(10-7\mu)+4)}{24(1-\mu)^{3}}+\frac{\mu(19\mu^{2}-30\mu+12)}{24(1-\mu)^{3}}=\frac{3\mu^{2}-\mu^{3}+\mu-1}{3(1-\mu)^{3}}
+=\frac{\mu^{3}}{24(1-\mu)^{3}}+\frac{2(1-2\mu)(\mu(7\mu-10)+4)}{24(1-\mu)^{3}}+\frac{\mu(19\mu^{2}-30\mu+12)}{24(1-\mu)^{3}}=\frac{1-\mu^{3}+3\mu^{2}-3\mu}{3(1-\mu)^{3}}=\frac{1}{3}
 \end{multline*}
 
 \end_inset
@@ -2458,6 +2458,319 @@ mu^{3}+
 mu-1)/(3*(1-
 \backslash
 mu)^3) from 0 to 1 shows that the probability rises with mu
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/winprob_with_mu.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Probability of winning 
+\begin_inset Formula $\int_{0}^{1}\int_{0}^{1}P(\text{win}|r_{1},s_{1})dr_{1}ds_{1}$
+\end_inset
+
+ for the poor participant
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Case
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Probability of poor participant to win
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Summary
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Only rich invest in skills
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\mu(\mu^{2}-2\mu-3)+4}{12(1-\mu)}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Only poor invest in skills
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{64\mu^{3}-115\mu^{2}-20\mu+(10-20\mu)\mu(4\mu-7)+40}{120(1-\mu)^{2}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Neither or Both invest in skills
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The probability of winning in a 3-player model
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% for only rich investing, (x*(x^2-2*x-3)+4)/(12*(1-x)), and plot (
+\backslash
+mu(
+\backslash
+mu^{2}-2
+\backslash
+mu-3)+4)/(12(1-
+\backslash
+mu)) for 
+\backslash
+mu from 0 to 0.5, 
+\end_layout
+
+\begin_layout Plain Layout
+
+% for only poor investing, 64*x**3-115*x*x-20*x+(10-20*x)*x*(4*x-7)+40)/(120*(1-
+x*x))
+\end_layout
+
+\begin_layout Plain Layout
+
+% for both investing, 
+\backslash
+frac{3
+\backslash
+mu^{2}-
+\backslash
+mu^{3}+
+\backslash
+mu-1}{3(1-
+\backslash
+mu)^{3}} or (3*x**2-x**3+x-1) /(3*(1-x)**3)
+\end_layout
+
+\begin_layout Plain Layout
+
+% require(latex2exp)
+\end_layout
+
+\begin_layout Plain Layout
+
+% x = seq(0,.499,.01); plot(0,0,type='l',xlim=c(0,.5),ylim=c(0,1),xlab=TeX("$
+\backslash
+
+\backslash
+mu$"),ylab=TeX("P(win)")); 
+\end_layout
+
+\begin_layout Plain Layout
+
+% lines(x,(x*(x^2-2*x-3)+4)/(12*(1-x)),type='l',lty=1) # only rich
+\end_layout
+
+\begin_layout Plain Layout
+
+% lines(x,(64*x**3-115*x*x-20*x+(10-20*x)*x*(4*x-7)+40)/(120*(1-x*x)),lty=2)
+ # only poor
+\end_layout
+
+\begin_layout Plain Layout
+
+% lines(x,rep(1/3,length(x)),lty=3) # neither or both
+\end_layout
+
+\begin_layout Plain Layout
+
+% legend(0.3, .7,legend=TeX(paste("Case",c(
+\begin_inset Quotes eld
+\end_inset
+
+I
+\begin_inset Quotes erd
+\end_inset
+
+,
+\begin_inset Quotes erd
+\end_inset
+
+II
+\begin_inset Quotes erd
+\end_inset
+
+,
+\begin_inset Quotes erd
+\end_inset
+
+III,IV
+\begin_inset Quotes erd
+\end_inset
+
+))),lty=c(1,2,3),cex=.7) 
 \end_layout
 
 \end_inset
