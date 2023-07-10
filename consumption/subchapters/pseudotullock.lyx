@@ -139,415 +139,6 @@ bles.html
 \end_layout
 
 \begin_layout Section
-Distribution for a convex combinations
-\end_layout
-
-\begin_layout Standard
-The distribution of a convex combination 
-\begin_inset Formula $w=\mu r+(1-\mu)s$
-\end_inset
-
- of two random variables 
-\begin_inset Formula $r,s$
-\end_inset
-
- - which are distributed according to densities 
-\begin_inset Formula $f_{R}(r)$
-\end_inset
-
- and 
-\begin_inset Formula $f_{S}(s)$
-\end_inset
-
- - can be derived using the convolution of two derived variables 
-\begin_inset Formula $x=\mu r$
-\end_inset
-
- and 
-\begin_inset Formula $y=(1-\mu)s$
-\end_inset
-
-.
- If 
-\begin_inset Formula $r$
-\end_inset
-
- and 
-\begin_inset Formula $s$
-\end_inset
-
- are uniformly distributed variables ranging from 0 to 1, then 
-\begin_inset Formula $x$
-\end_inset
-
- ranges from 0 to 
-\begin_inset Formula $\mu$
-\end_inset
-
- and 
-\begin_inset Formula $y$
-\end_inset
-
- ranges from 
-\begin_inset Formula $0$
-\end_inset
-
- to 
-\begin_inset Formula $(1-\mu)$
-\end_inset
-
-.
- The CDF for 
-\begin_inset Formula $F_{X}(x)$
-\end_inset
-
- and 
-\begin_inset Formula $F_{Y}(y)$
-\end_inset
-
- are simply 
-\begin_inset Formula $F_{X}(x)=\frac{x}{\mu}$
-\end_inset
-
- , 
-\begin_inset Formula $F_{Y}(y)=\frac{y}{1-\mu}$
-\end_inset
-
- (respectively).
- Therefore, the densities for 
-\begin_inset Formula $x$
-\end_inset
-
- and 
-\begin_inset Formula $y$
-\end_inset
-
- are 
-\begin_inset Formula $f_{X}(x)=\frac{1}{\mu}$
-\end_inset
-
- and 
-\begin_inset Formula $f_{Y}(y)=\frac{1}{1-\mu}$
-\end_inset
-
-.
- The density of 
-\begin_inset Formula $w$
-\end_inset
-
- is simple 
-\begin_inset Formula $f(w)=\int_{-\infty}^{\infty}f_{Y}(w-x)f_{X}(x)dx$
-\end_inset
-
-.
- Since , 
-\begin_inset Formula $f_{X}(x)$
-\end_inset
-
- is 
-\begin_inset Formula $1/\mu$
-\end_inset
-
- only between 
-\begin_inset Formula $0$
-\end_inset
-
- and 
-\begin_inset Formula $\mu$
-\end_inset
-
-.
- We have the following integral to evaluate for the convolution
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-f(w)=\frac{1}{\mu}\int_{0}^{\mu}f_{Y}(w-x)dx
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Since 
-\begin_inset Formula $f_{Y}(y)$
-\end_inset
-
- is 1 only between 0 and 
-\begin_inset Formula $1-\mu$
-\end_inset
-
-, we have the condition 
-\begin_inset Formula $0<w-x<1-\mu\Rightarrow w-(1-\mu)<x<w$
-\end_inset
-
-.
- Further, 
-\begin_inset Formula $x$
-\end_inset
-
- is distributed only between 0 and 
-\begin_inset Formula $\mu$
-\end_inset
-
-.
- As shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:convex_combo"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the integral would evaluate to the following
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Notice that as a convex combination, 
-\begin_inset Formula $w$
-\end_inset
-
- is distributed only between 0 and 1.
-\end_layout
-
-\end_inset
-
- under the assumption 
-\begin_inset Formula $\mu<\frac{1}{2}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-f(w)=\frac{1}{\mu}\int_{0}^{\mu}f_{Y}(w-x)dx & =\begin{cases}
-\frac{1}{\mu}\int_{0}^{w}\frac{1}{1-\mu}dx & 0<w<\mu\\
-\frac{1}{\mu}\int_{0}^{\mu}\frac{1}{1-\mu}dx & \mu<w<1-\mu\\
-\frac{1}{\mu}\int_{w-(1-\mu)}^{\mu}\frac{1}{1-\mu}dx & 1-\mu<w<1\\
-0 & \text{otherwise}
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This can be simplified as 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-f(w) & =\begin{cases}
-\frac{w}{\mu(1-\mu)} & 0<w<\mu\\
-\frac{1}{1-\mu} & \mu<w<1-\mu\\
-\frac{1-w}{\mu(1-\mu)} & 1-\mu<w<1\\
-0 & \text{otherwise}
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:convex_combo_plot"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-shows this trapezoidal density for 
-\begin_inset Formula $\mu=\frac{1}{5}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-The main idea is to calculate the total probability over 
-\begin_inset Formula $r_{i}$
-\end_inset
-
-.
- One objection that can be raised is that the total probability must be
- calculated in one big integration rather than first calculating probability
- for given 
-\begin_inset Formula $r_{i},s_{i}$
-\end_inset
-
- and then letting 
-\begin_inset Formula $r_{i}$
-\end_inset
-
- and 
-\begin_inset Formula $s_{i}$
-\end_inset
-
- vary independently.
- But this objection can be addressed by considering the sample space of
- 
-\begin_inset Formula $r_{i}$
-\end_inset
-
-.
- It seems valid to consider the conditional probability of winning by considerin
-g all the possibilities for other player(s).
- As long as 
-\begin_inset Formula $r_{i}$
-\end_inset
-
- , 
-\begin_inset Formula $s_{i}$
-\end_inset
-
- are being varied for one participant alone, the integration seems the right
- thing to do.
- 
-\end_layout
-
-\begin_layout Standard
-What's not obvious are the powers of 
-\begin_inset Formula $F_{Z}(z)$
-\end_inset
-
- or 
-\begin_inset Formula $F_{W}(w)$
-\end_inset
-
-.
- These complicate the terms to evaluate and favour a Monte Carlo approach.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%Plot[Piecewise[{{0, x <0 },{x/(.2*(1-.2)), 0 < x <.2}, {1/(1-.2),  0.2 < x <
- .8}, {(1-x)/(.2*(1-.2)),  0.8 < x < 1}}], {x, -.02, 1.02}]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename figures/combined_density.png
-	width 4in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:convex_combo"
-
-\end_inset
-
-Ranges of 
-\begin_inset Formula $w$
-\end_inset
-
- and 
-\begin_inset Formula $w-x$
-\end_inset
-
- for convolution of two scaled random variables 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename figures/combined_density_plot.png
-	width 4in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:convex_combo_plot"
-
-\end_inset
-
-Combined density of 
-\begin_inset Formula $w$
-\end_inset
-
- as the convex combination of two random variables with 
-\begin_inset Formula $\mu=\frac{1}{5}$
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
 Possible Applications
 \end_layout
 
@@ -1927,7 +1518,7 @@ The result we use depends on the distribution of
 \begin_inset Formula $\mu<1-\mu$
 \end_inset
 
-
+ (see Appendix A)
 \end_layout
 
 \begin_layout Standard
@@ -2241,310 +1832,11 @@ P(\text{win}|r_{1})=\begin{cases}
 \end_layout
 
 \begin_layout Standard
-We evaluate the integral 
-\begin_inset Formula $\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dr_{1}$
+The integral 
+\begin_inset Formula $\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})dr_{1}ds_{1}$
 \end_inset
 
-using 
-\begin_inset Formula $dr_{1}=dx_{1}$
-\end_inset
-
- (for integrating with a given 
-\begin_inset Formula $s_{1}$
-\end_inset
-
-).
- Notice that 
-\begin_inset Formula $r_{1}=0\Rightarrow x_{1}=(1-\mu)s_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $r_{1}=1\Rightarrow x_{1}=\mu+(1-\mu)s_{1}$
-\end_inset
-
-.
- Varying 
-\begin_inset Formula $r_{1}$
-\end_inset
-
- from 
-\begin_inset Formula $0$
-\end_inset
-
- to 
-\begin_inset Formula $1$
-\end_inset
-
- does bring 
-\begin_inset Formula $x_{1}$
-\end_inset
-
- in the interval 
-\begin_inset Formula $(\mu,1-\mu)$
-\end_inset
-
- and 
-\begin_inset Formula $(1-\mu,\mu+(1-\mu)s_{1})$
-\end_inset
-
-.
- Notice that for 
-\begin_inset Formula $s_{1}<\frac{\mu}{1-\mu}$
-\end_inset
-
-, we have 
-\begin_inset Formula $(1-\mu)s_{1}<\mu$
-\end_inset
-
- .
- When 
-\begin_inset Formula $(1-\mu)s_{1}>\mu$
-\end_inset
-
- (i.e.
- 
-\begin_inset Formula $s_{1}>\frac{\mu}{1-\mu}$
-\end_inset
-
- 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-This is possible only when 
-\begin_inset Formula $s_{1}>\mu$
-\end_inset
-
- (
-\begin_inset Formula $\because(1-\mu)<1$
-\end_inset
-
-, 
-\begin_inset Formula $\therefore(1-\mu)s_{1}>\mu\Rightarrow s_{1}>\mu$
-\end_inset
-
-)
-\end_layout
-
-\end_inset
-
-).
- For 
-\begin_inset Formula $s_{1}>\frac{\mu}{1-\mu}$
-\end_inset
-
- (possible only when 
-\begin_inset Formula $s_{1}>\mu$
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $s_{1}<1-\mu$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-.
-  Also, 
-\begin_inset Formula $(1-\mu)s_{1}<(1-\mu)$
-\end_inset
-
- since 
-\begin_inset Formula $s_{1}\in(0,1)$
-\end_inset
-
-.
- Notice also that 
-\begin_inset Formula $s_{1}<1\Rightarrow$
-\end_inset
-
-
-\begin_inset Formula $s_{1}(1-\mu)<(1-\mu)$
-\end_inset
-
- (since 
-\begin_inset Formula $1-\mu>0$
-\end_inset
-
-) and therefore, 
-\begin_inset Formula $\mu+s_{1}(1-\mu)<1$
-\end_inset
-
-.
- One therefore does not need to worry about 
-\begin_inset Formula $\mu+(1-\mu)s_{1}$
-\end_inset
-
- being more than 1.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-\int_{s_{1}=0}^{s_{1}=1}(\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dr_{1})ds_{1}=\int_{s_{1}=0}^{s_{1}=1}(\int_{x_{1}=(1-\mu)s_{1}}^{x_{1}=\mu+(1-\mu)s_{1}}P(\text{win}|r_{1})dx_{1})ds_{1}\\
-=\int_{0}^{1}{(\int_{(1-\mu)s_{1}}^{\mu}\frac{x_{1}^{2}}{2\mu(1-\mu)}dx_{1})}ds_{1}\\
-+\int_{0}^{1}(\int_{\mu}^{1-\mu}\frac{x_{1}-\mu/2}{1-\mu}dx_{1})ds_{1}\\
-+\int_{0}^{1}\int_{1-\mu}^{\mu+(1-\mu)s_{1}}(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)})dx_{1}ds_{1}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-\int_{s_{1}=0}^{s_{1}=1}(\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dr_{1})ds_{1}=\int_{s_{1}=0}^{s_{1}=1}(\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dx_{1})ds_{1}\\
-=\int_{0}^{1}{(\int_{r_{1}=0}^{r_{1}=1}\frac{x_{1}^{2}}{2\mu(1-\mu)}dx_{1})}ds_{1}\\
-+\int_{0}^{1}(\int_{r_{1}=0}^{r_{1}=1}\frac{x_{1}-\mu/2}{1-\mu}dx_{1})ds_{1}\\
-+\int_{0}^{1}\int_{r_{1}=0}^{r_{1}=1}(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)})dx_{1}ds_{1}
-\end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In the first-integral, we are interested in all 
-\begin_inset Formula $r_{1},s_{1}$
-\end_inset
-
- that would keep the value 
-\begin_inset Formula $x_{1}$
-\end_inset
-
- in the interval 
-\begin_inset Formula $(0,\mu)$
-\end_inset
-
-.
- Similarly, in the second-integral we're interested in 
-\begin_inset Formula $r_{1},s_{1}$
-\end_inset
-
- that keep the value between 
-\begin_inset Formula $(\mu,1-\mu)$
-\end_inset
-
-.
- In the last integral, we're interested in 
-\begin_inset Formula $r_{1},s_{1}$
-\end_inset
-
- that keep 
-\begin_inset Formula $x_{1}$
-\end_inset
-
- in 
-\begin_inset Formula $(1-\mu,1)$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Consider the first-interval.
- 
-\begin_inset Formula $0<\mu r_{1}+(1-\mu)s_{1}<\mu$
-\end_inset
-
-.
- If we have vary 
-\begin_inset Formula $r_{1}$
-\end_inset
-
- in 
-\begin_inset Formula $(0,1)$
-\end_inset
-
-, then we vary 
-\begin_inset Formula $\mu r_{1}+(1-\mu)s_{1}$
-\end_inset
-
- in 
-\begin_inset Formula $((1-\mu)s_{1},\mu+(1-\mu)s_{1})$
-\end_inset
-
-).
- Not all values of 
-\begin_inset Formula $s_{1}\in(0,1)$
-\end_inset
-
- would lead to 
-\begin_inset Formula $0<\mu r_{1}+(1-\mu)s_{1}<\mu$
-\end_inset
-
-.
- While any 
-\begin_inset Formula $s_{1}>0$
-\end_inset
-
- would lead to 
-\begin_inset Formula $\mu r_{1}+(1-\mu)s_{1}>0$
-\end_inset
-
-, the sum easily exceed 
-\begin_inset Formula $\mu$
-\end_inset
-
- 
-\begin_inset Formula $\mu r_{1}+(1-\mu)s_{1}<\mu\Rightarrow(1-\mu)s_{1}<\mu(1-r_{1})$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-let's look at 
-\begin_inset Formula $dr_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $ds_{1}$
-\end_inset
-
- integrals separately.
- 
-\end_layout
-
-\begin_layout Standard
-We also need to check if 
-\begin_inset Formula $1-\mu<\mu+(1-\mu)s_{1}$
-\end_inset
-
- otherwise the integral would be zero.
-\begin_inset Formula $\frac{1-2\mu+\mu^{2}-\mu^{2}}{(1-\mu)^{2}}=1-\frac{\mu^{2}}{(1-\mu)^{2}}<s_{1}$
-\end_inset
-
-.
- Thus the other condition is that 
-\begin_inset Formula $s_{1}>1-\frac{^{\mu^{2}}}{(1-\mu)^{2}}$
-\end_inset
-
- or 
-\begin_inset Formula $(1-\mu)s_{1}>(1-\mu)-\frac{^{\mu^{2}}}{(1-\mu)}$
-\end_inset
-
-.
- This part is non-zero only when 
-\begin_inset Formula $s_{1}$
-\end_inset
-
-meets this condition.
- This is to be considered for integration over 
-\begin_inset Formula $s_{1}$
-\end_inset
-
-.
- 
+ is calculated to be the following (see Appendix B).
 \end_layout
 
 \begin_layout Section
@@ -2586,6 +1878,548 @@ The goal of the model is to help us answer how investments would change
  In the discrete model, we can only talk about how withdrawal depends on
  budgets.
  
+\end_layout
+
+\begin_layout Section*
+Appendix A
+\end_layout
+
+\begin_layout Standard
+The distribution of a convex combination 
+\begin_inset Formula $w=\mu r+(1-\mu)s$
+\end_inset
+
+ of two random variables 
+\begin_inset Formula $r,s$
+\end_inset
+
+ - which are distributed according to densities 
+\begin_inset Formula $f_{R}(r)$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{S}(s)$
+\end_inset
+
+ - can be derived using the convolution of two derived variables 
+\begin_inset Formula $x=\mu r$
+\end_inset
+
+ and 
+\begin_inset Formula $y=(1-\mu)s$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $s$
+\end_inset
+
+ are uniformly distributed variables ranging from 0 to 1, then 
+\begin_inset Formula $x$
+\end_inset
+
+ ranges from 0 to 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ ranges from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $(1-\mu)$
+\end_inset
+
+.
+ The CDF for 
+\begin_inset Formula $F_{X}(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $F_{Y}(y)$
+\end_inset
+
+ are simply 
+\begin_inset Formula $F_{X}(x)=\frac{x}{\mu}$
+\end_inset
+
+ , 
+\begin_inset Formula $F_{Y}(y)=\frac{y}{1-\mu}$
+\end_inset
+
+ (respectively).
+ Therefore, the densities for 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ are 
+\begin_inset Formula $f_{X}(x)=\frac{1}{\mu}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{Y}(y)=\frac{1}{1-\mu}$
+\end_inset
+
+.
+ The density of 
+\begin_inset Formula $w$
+\end_inset
+
+ is simple 
+\begin_inset Formula $f(w)=\int_{-\infty}^{\infty}f_{Y}(w-x)f_{X}(x)dx$
+\end_inset
+
+.
+ Since , 
+\begin_inset Formula $f_{X}(x)$
+\end_inset
+
+ is 
+\begin_inset Formula $1/\mu$
+\end_inset
+
+ only between 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ We have the following integral to evaluate for the convolution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+f(w)=\frac{1}{\mu}\int_{0}^{\mu}f_{Y}(w-x)dx
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $f_{Y}(y)$
+\end_inset
+
+ is 1 only between 0 and 
+\begin_inset Formula $1-\mu$
+\end_inset
+
+, we have the condition 
+\begin_inset Formula $0<w-x<1-\mu\Rightarrow w-(1-\mu)<x<w$
+\end_inset
+
+.
+ Further, 
+\begin_inset Formula $x$
+\end_inset
+
+ is distributed only between 0 and 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ As shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:convex_combo"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the integral would evaluate to the following
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice that as a convex combination, 
+\begin_inset Formula $w$
+\end_inset
+
+ is distributed only between 0 and 1.
+\end_layout
+
+\end_inset
+
+ under the assumption 
+\begin_inset Formula $\mu<\frac{1}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f(w)=\frac{1}{\mu}\int_{0}^{\mu}f_{Y}(w-x)dx & =\begin{cases}
+\frac{1}{\mu}\int_{0}^{w}\frac{1}{1-\mu}dx & 0<w<\mu\\
+\frac{1}{\mu}\int_{0}^{\mu}\frac{1}{1-\mu}dx & \mu<w<1-\mu\\
+\frac{1}{\mu}\int_{w-(1-\mu)}^{\mu}\frac{1}{1-\mu}dx & 1-\mu<w<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This can be simplified as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f(w) & =\begin{cases}
+\frac{w}{\mu(1-\mu)} & 0<w<\mu\\
+\frac{1}{1-\mu} & \mu<w<1-\mu\\
+\frac{1-w}{\mu(1-\mu)} & 1-\mu<w<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:convex_combo_plot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+shows this trapezoidal density for 
+\begin_inset Formula $\mu=\frac{1}{5}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The main idea is to calculate the total probability over 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+.
+ One objection that can be raised is that the total probability must be
+ calculated in one big integration rather than first calculating probability
+ for given 
+\begin_inset Formula $r_{i},s_{i}$
+\end_inset
+
+ and then letting 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ vary independently.
+ But this objection can be addressed by considering the sample space of
+ 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+.
+ It seems valid to consider the conditional probability of winning by considerin
+g all the possibilities for other player(s).
+ As long as 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ , 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ are being varied for one participant alone, the integration seems the right
+ thing to do.
+ 
+\end_layout
+
+\begin_layout Standard
+What's not obvious are the powers of 
+\begin_inset Formula $F_{Z}(z)$
+\end_inset
+
+ or 
+\begin_inset Formula $F_{W}(w)$
+\end_inset
+
+.
+ These complicate the terms to evaluate and favour a Monte Carlo approach.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%Plot[Piecewise[{{0, x <0 },{x/(.2*(1-.2)), 0 < x <.2}, {1/(1-.2),  0.2 < x <
+ .8}, {(1-x)/(.2*(1-.2)),  0.8 < x < 1}}], {x, -.02, 1.02}]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/combined_density.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:convex_combo"
+
+\end_inset
+
+Ranges of 
+\begin_inset Formula $w$
+\end_inset
+
+ and 
+\begin_inset Formula $w-x$
+\end_inset
+
+ for convolution of two scaled random variables
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/combined_density_plot.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:convex_combo_plot"
+
+\end_inset
+
+Combined density of 
+\begin_inset Formula $w$
+\end_inset
+
+ as the convex combination of two random variables with 
+\begin_inset Formula $\mu=\frac{1}{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix B
+\end_layout
+
+\begin_layout Standard
+To calculate 
+\begin_inset Formula $\int_{s=0}^{s=1}\int_{r=0}^{r=1}P(\text{win}|r,s)drds$
+\end_inset
+
+ over the variable 
+\begin_inset Formula $x$
+\end_inset
+
+, we evaluate the sum of three parts split by the boundaries of the piecewise
+ function.
+ The three parts are shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:integral_boundaries"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ If 
+\begin_inset Formula $x=\mu r+(1-\mu)s$
+\end_inset
+
+ and 
+\begin_inset Formula $F(x)$
+\end_inset
+
+ is of the piece-form
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+F(x) & =\begin{cases}
+A & 0<x<\mu\\
+B & \mu<x<1-\mu\\
+C & 1-\mu<x<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then, the integral 
+\begin_inset Formula $\int_{s=0}^{s=1}\int_{r=0}^{r=1}F(x)drds$
+\end_inset
+
+ can be written as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\int_{s=0}^{s=1}\int_{r=0}^{r=1}F(x)dsdr & =\int_{r=0}^{r=1}{\int_{s=0}^{s=\frac{\mu(1-r)}{1-\mu}}A\ dsdr}+\int_{r=0}^{r=1}{\int_{s=\frac{\mu(1-r)}{1-\mu}}^{s=1-\frac{\mu r}{1-\mu}}B\ dsdr}+\int_{r=0}^{r=1}{\int_{s=1-\frac{\mu r}{1-\mu}}^{s=1}C\ dsdr}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/integral_calculation.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:integral_boundaries"
+
+\end_inset
+
+Integrating over boundaries split by the line 
+\begin_inset Formula $\mu r+(1-\mu)s=c$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
