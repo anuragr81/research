@@ -1484,6 +1484,10 @@ Two and three-player Discrete Model with Choice under Uniform Distribution
 \end_layout
 
 \begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
 The participant faces different probabilities if her investment is above
  or below a threshold.
  When the participant spends an amount 
@@ -1836,7 +1840,77 @@ The integral
 \begin_inset Formula $\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})dr_{1}ds_{1}$
 \end_inset
 
- is calculated to be the following (see Appendix B).
+ also evaluates to 
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+(see Appendix B).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\int_{s=0}^{s=1}\int_{r=0}^{r=1}F_{X}(x_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r)}{1-\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r)}{1-\mu}}^{s_{1}=1-\frac{\mu r}{1-\mu}}\frac{\mu r_{1}+(1-\mu)s_{1}-\mu/2}{1-\mu}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r}{1-\mu}}^{s_{1}=1}(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})\ ds_{1}dr_{1}}\\
+=\frac{\mu^{2}}{8(1-\mu)^{2}}+\frac{1-2\mu}{2(1-\mu)}+\frac{(4-5\mu)\mu)}{8(1-\mu)^{2}}=\frac{1}{2}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% For part A,  integrate( integrate((mu *r + (1-mu)*s)^2/(2*mu*(1-mu)),s,0,mu*(1
+-r)/(1-mu)) , r, 0,1)gives 
+\backslash
+frac{
+\backslash
+mu^2}{8*(1-
+\backslash
+mu)^2}
+\end_layout
+
+\begin_layout Plain Layout
+
+% For part B, integrate (integrate( (mu * r + (1-mu) *s - mu /2 )/(1-mu),s,mu*(1
+-r)/(1-mu),1-mu*r/( 1-mu)) , r, 0, 1) gives 
+\backslash
+frac{1-2
+\backslash
+mu}{2(1-
+\backslash
+mu)}
+\end_layout
+
+\begin_layout Plain Layout
+
+% For part C, integrate(integrate( 1- ((mu *r  + (1-mu) * s)-1)^2/(2*mu*(1-mu)),
+ s, 1-mu *r /(1-mu),1),r,0,1) gives 
+\backslash
+frac{(4-5
+\backslash
+mu)
+\backslash
+mu)}{8(1-
+\backslash
+mu)^2}
+\end_layout
+
+\begin_layout Plain Layout
+
+% simplify (mu^2)/(8*(1-mu)) + (1-2*mu)/(2*(1-mu)) + (4-5*mu)*mu/(8*(1-mu)^2)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2114,8 +2188,12 @@ noprefix "false"
 
 \end_inset
 
-shows this trapezoidal density for 
-\begin_inset Formula $\mu=\frac{1}{5}$
+shows this trapezoidal density with 
+\begin_inset Formula $\mu$
+\end_inset
+
+ set to 
+\begin_inset Formula $\frac{1}{5}$
 \end_inset
 
 .
@@ -2410,10 +2488,6 @@ Integrating over boundaries split by the line
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
