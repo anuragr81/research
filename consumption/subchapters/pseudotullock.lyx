@@ -1933,6 +1933,70 @@ Probability to win
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% sum(as.integer(.2*r2 + .8*s2 < .2*r + (1-.2)*s))/length(r)
+\end_layout
+
+\begin_layout Plain Layout
+
+N = 1e+7 
+\end_layout
+
+\begin_layout Plain Layout
+
+mu = .2
+\end_layout
+
+\begin_layout Plain Layout
+
+r1=runif(N)
+\end_layout
+
+\begin_layout Plain Layout
+
+r2=runif(N)
+\end_layout
+
+\begin_layout Plain Layout
+
+r3=runif(N)
+\end_layout
+
+\begin_layout Plain Layout
+
+s1=runif(N)
+\end_layout
+
+\begin_layout Plain Layout
+
+s2=runif(N)
+\end_layout
+
+\begin_layout Plain Layout
+
+s3=runif(N)
+\end_layout
+
+\begin_layout Plain Layout
+
+sum(as.integer(mu*r2 + (1-mu)*s2 < mu*r + (1-mu)*s))/length(r)
+\end_layout
+
+\begin_layout Plain Layout
+
+df=data.frame(r1=r1,r2=r2,r3=r3,s1=s1,s2=s2,s3=s3)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The participant faces different probabilities if her investment is above
  or below a threshold.
  When the participant spends an amount 
@@ -2078,7 +2142,7 @@ With Case I, the poor participant can win when her raw-talent
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-P(\text{win}|r_{1}) & =P(\mu r_{2}+(1-\mu)s_{2}<r_{1})P(r_{1}'<r_{1})=F_{X}(r_{1})r_{1}
+P(\text{win}|r_{1}) & =P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1})P(r_{1}'<r_{1})=F_{X}(\mu r_{1})r_{1}
 \end{align*}
 
 \end_inset
@@ -2094,9 +2158,9 @@ Therefore,
 \begin_inset Formula 
 \begin{align*}
 P(\text{win}|r_{1}) & =\begin{cases}
-\frac{r_{1}^{3}}{2\mu(1-\mu)} & 0<r_{1}<\mu\\
-\frac{r_{1}(r_{1}-\mu/2)}{1-\mu} & \mu<r_{1}<1-\mu\\
-r_{1}(1-\frac{(r_{1}-1)^{2}}{2\mu(1-\mu)}) & 1-\mu<r_{1}<1\\
+\frac{\mu^{2}r_{1}^{3}}{2\mu(1-\mu)} & 0<r_{1}<1\\
+\frac{\mu r_{1}(r_{1}-1/2)}{1-\mu} & 1<r_{1}<1/\mu-1\\
+r_{1}(1-\frac{(\mu r_{1}-1)^{2}}{2\mu(1-\mu)}) & 1/\mu-1<r_{1}<1/\mu\\
 0 & \text{otherwise}
 \end{cases}
 \end{align*}
@@ -2117,11 +2181,14 @@ With the uniform density for
 \end_inset
 
  ), total probability to win for either of the poor participants is 
-\begin_inset Formula $\frac{\mu^{3}-2\mu^{2}-3\mu+4}{12(1-\mu)}$
-\end_inset
+\end_layout
 
- 
-\begin_inset Formula $\int_{0}^{1}P(\text{win}|r_{1})dr_{1}=\frac{3\mu^{3}}{24(1-\mu)}+\frac{36\mu^{2}-16\mu^{3}-30\mu+8}{24(1-\mu)}+\frac{15\mu^{3}-40\mu^{2}+24\mu}{24(1-\mu)}=\frac{\mu^{3}-2\mu^{2}-3\mu+4}{12(1-\mu)}$
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{1}P(\text{win}|r_{1})dr_{1} & =
+\end{align*}
+
 \end_inset
 
 .
@@ -2201,8 +2268,8 @@ In Case II, the rich person does not participate (
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-P(\text{win}|r_{1},s_{1})=P(r_{2}<\mu r_{1}+(1-\mu)s_{1})\cdot P(\mu r_{1}'+(1-\mu)s_{1}'<\mu r_{1}+(1-\mu)s_{1})\\
-=(\mu r_{1}+(1-\mu)s_{1})F_{X}(x_{1})=x_{1}F_{X}(x_{1})
+P(\text{win}|r_{1},s_{1})=P(\mu r_{2}<\mu r_{1}+(1-\mu)s_{1})\cdot P(\mu r_{1}'+(1-\mu)s_{1}'<\mu r_{1}+(1-\mu)s_{1})\\
+=\frac{\mu r_{1}+(1-\mu)s_{1}}{\mu}F_{X}(x_{1})=\frac{x_{1}}{\mu}F_{X}(x_{1})
 \end{multline*}
 
 \end_inset
@@ -2219,9 +2286,9 @@ The probability to win for the poor participant can be written as (see Appendix
 \begin_inset Formula 
 \begin{align*}
 P(\text{win}|r_{1},s_{1}) & =\begin{cases}
-\frac{x_{1}^{3}}{2\mu(1-\mu)} & 0<x_{1}<\mu\\
-\frac{x_{1}(x_{1}-\mu/2)}{1-\mu} & \mu<x_{1}<1-\mu\\
-x_{1}(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)}) & 1-\mu<x_{1}<1\\
+\frac{1}{\mu}\frac{x_{1}^{3}}{2\mu(1-\mu)} & 0<x_{1}<\mu\\
+\frac{1}{\mu}\frac{x_{1}(x_{1}-\mu/2)}{1-\mu} & \mu<x_{1}<1-\mu\\
+\frac{1}{\mu}x_{1}(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)}) & 1-\mu<x_{1}<1\\
 0 & \text{otherwise}
 \end{cases}
 \end{align*}
@@ -2239,11 +2306,11 @@ Using double-integral properties (see Appendix B), the total probability
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r)}{1-\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})^{3}}{2\mu(1-\mu)}\ ds_{1}dr_{1}}\\
-+\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r_{1})}{1-\mu}}^{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})(\mu r_{1}+(1-\mu)s_{1}-\mu/2)}{1-\mu}\ ds_{1}dr_{1}}\\
-+\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}^{s_{1}=1}(\mu r_{1}+(1-\mu)s_{1})(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})\ ds_{1}dr_{1}}\\
-=\frac{12\mu^{3}}{120(1-\mu)^{2}}-\frac{10(2\mu-1)(\mu(4\mu-7)+4)}{120(\mu-1)^{2}}+\frac{\mu\left(52\mu^{2}-115\mu+60\right)}{120(\mu-1)^{2}}\\
-=\frac{65\mu^{2}-16\mu^{3}-90\mu+40}{120(1-\mu)^{2}}
+\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r)}{1-\mu}}\frac{1}{\mu}\frac{(\mu r_{1}+(1-\mu)s_{1})^{3}}{2\mu(1-\mu)}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r_{1})}{1-\mu}}^{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}\frac{1}{\mu}\frac{(\mu r_{1}+(1-\mu)s_{1})(\mu r_{1}+(1-\mu)s_{1}-\mu/2)}{1-\mu}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}^{s_{1}=1}\frac{1}{\mu}(\mu r_{1}+(1-\mu)s_{1})(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})\ ds_{1}dr_{1}}\\
+=\frac{12\mu^{3}}{120\mu(1-\mu)^{2}}-\frac{10(2\mu-1)(\mu(4\mu-7)+4)}{120\mu(\mu-1)^{2}}+\frac{\mu\left(52\mu^{2}-115\mu+60\right)}{120\mu(\mu-1)^{2}}\\
+=\frac{65\mu^{2}-16\mu^{3}-90\mu+40}{120\mu(1-\mu)^{2}}
 \end{multline*}
 
 \end_inset
@@ -2378,6 +2445,22 @@ In Case III, when neither the rich nor the poor participate in the game,
 \end_inset
 
  to win.
+ 
+\end_layout
+
+\begin_layout Standard
+It's worth noting that winning probability for the poor participants - which
+ are more in number - is higher than 
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+ in Case I and lower than 
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+ in Case II.
+ When raw-talent is given more importance, the likelihood of the the poor
+ participants to win rises.
 \end_layout
 
 \begin_layout Subsection*
@@ -3164,7 +3247,7 @@ Whether the participants decide to invest in skills by spending
 
 \begin_layout Standard
 The rich participant may also withdraw from the skills-game in case of a
- diminsihing utility from asset accumulation.
+ diminishing utility from asset accumulation.
  With less marginal utility from more assets, it is possible that the richer
  participant does not see benefit from participating particularly when 
 \begin_inset Formula $\mu$
@@ -3180,7 +3263,7 @@ The rich participant may also withdraw from the skills-game in case of a
 \end_layout
 
 \begin_layout Standard
-We now discuss the equilbrium conditions for both asset optimisation and
+We now discuss the equilibrium conditions for both asset optimisation and
  utility\SpecialChar endofsentence
 
 \end_layout
@@ -3190,7 +3273,142 @@ Asset-Maximising consumers
 \end_layout
 
 \begin_layout Standard
-The only cases to consider when participants optimise assets are when 
+Recall that the assets maximised by the poor participant with a given probabilit
+y 
+\begin_inset Formula $p_{1}$
+\end_inset
+
+ to win the game are given by
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+(y_{1}-\nu)+\frac{(1-p_{1})y_{1}+p_{1}y_{2}}{\delta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is the expenditure towards the game.
+ Similarly, the rich participant optimises the following function for the
+ probability 
+\begin_inset Formula $p_{2}$
+\end_inset
+
+ to win the game
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+(y_{2}-\nu)+\frac{(1-p_{2})y_{1}+p_{2}y_{2}}{\delta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+THIS IS RECURSIVE AND NEEDS TO BE CLARIFIED -because the choice to invest
+ in skills depends on whether other person has invested or not.
+ 
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\overline{\nu}>y_{1}$
+\end_inset
+
+ , then the poor participant would set 
+\begin_inset Formula $\nu=0$
+\end_inset
+
+ and face the probability 
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+ to win if the rich participant also withdraws but face a lower probability
+ if rich participant also participates (and spends 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+The rich participant, on the other hand, faces a probabiliy 
+\begin_inset Formula $1/3$
+\end_inset
+
+ to win while not participating would choose to spend 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ so long as the rich participant gets 
+\begin_inset Formula $(y_{2}-\overline{\nu})+\frac{(1-p_{2})y_{1}+p_{2}y_{2}}{\delta}>y_{2}+\frac{2y_{1}+y_{2}}{3\delta}$
+\end_inset
+
+ or 
+\begin_inset Formula $\overline{\nu}<\frac{((1-p_{2})y_{1}+p_{2}y_{2})-(2/3y_{1}+1/3y_{2})}{\delta}$
+\end_inset
+
+ i.e.
+ if the threshold investment is less than discounted value of difference
+ in expected gain from participating.
+ A threshold above this investment is not interesting for the rich participant.
+ 
+\end_layout
+
+\begin_layout Standard
+.
+ Since the poor participant cannot spend on 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+, the rich consumer assumes that the poor participant does not spend on
+ skills and might choose to forgo skills-game if the probability is less
+ than 
+\begin_inset Formula $1/3$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Since the participants would lose all their savings after the last period,
+ they all respective incomes of the last period in the skills-game.
+ This is simply, 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Before we consider the cases III and IV above where neither or both of the
+ participants expend 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+, let's consider simply, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{1}{\delta}(E()$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
