@@ -2185,9 +2185,12 @@ With the uniform density for
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-\int_{0}^{1}P(\text{win}|r_{1})dr_{1} & =
-\end{align*}
+\begin{multline*}
+\int_{0}^{1}P(\text{win}|r_{1})dr_{1}=\int_{0}^{1}\frac{\mu^{2}r_{1}^{3}}{2\mu(1-\mu)}dr_{1}+\int_{1}^{1/\mu-1}\frac{\mu r_{1}(r_{1}-1/2)}{1-\mu}dr_{1}=\\
+=\frac{\mu}{8(1-\mu)}+\frac{18\mu^{2}-8\mu^{3}-15\mu+4}{12(1-\mu)\mu^{2}}+\frac{15\mu^{2}-40\mu+24}{24\mu(1-\mu)}\\
+=\frac{3\mu^{3}}{24(1-\mu)\mu^{2}}+\frac{36\mu^{2}-16\mu^{3}-30\mu+8}{24(1-\mu)\mu^{2}}+\frac{15\mu^{3}-40\mu^{2}+24\mu}{24\mu^{2}(1-\mu)}\\
+=\frac{\mu+4-\mu^{2}}{12\mu^{2}}
+\end{multline*}
 
 \end_inset
 
@@ -2207,37 +2210,65 @@ status open
 
 \begin_layout Plain Layout
 
-%integrate (r^3,r,0,mu)/(2*mu*(1-mu))
+%integrate (mu^2*r^3,r,0,1)/(2*mu*(1-mu)) gives 
+\backslash
+frac{
+\backslash
+mu}{8(1-
+\backslash
+mu)}
 \end_layout
 
 \begin_layout Plain Layout
 
-%integrate (r*(r-mu/2)/(1-mu),r,mu,1-mu)
+%integrate (mu*r*(r-1/2)/(1-mu),r,1,1/mu-1) gives 
+\backslash
+frac{8
+\backslash
+mu^{3}-18
+\backslash
+mu^{2}+15
+\backslash
+mu-4}{12(
+\backslash
+mu-1)
+\backslash
+mu^{2}}
 \end_layout
 
 \begin_layout Plain Layout
 
-%integrate ( r*(1-((r-1)^2)/(2*mu*(1-mu))),r,1-mu,1)
+%integrate ( r*(1-((mu*r-1)^2)/(2*mu*(1-mu))),r,1/mu-1,1/mu) gives 
+\backslash
+frac{15
+\backslash
+mu^2-40
+\backslash
+mu+24}{24
+\backslash
+mu(1-
+\backslash
+mu)}
 \end_layout
 
 \begin_layout Plain Layout
 
-% sum is (2
-\backslash
-mu(
-\backslash
-mu^{2}-2
-\backslash
-mu-3)+8)/(24*(1-
-\backslash
-mu))
 \end_layout
 
 \begin_layout Plain Layout
 
-% what we get is the concave function in 
+% with denominator set to 24
 \backslash
-mu for the poor participant's probability to win
+mu^2(1-
+\backslash
+mu), we have the denominator simplied with 3x^3+36x^2-16x^3-30x+8+15x^3-40x^2+24
+x as 2(
+\backslash
+mu-1)(
+\backslash
+mu^2-
+\backslash
+mu-4)
 \end_layout
 
 \end_inset
