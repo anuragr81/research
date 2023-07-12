@@ -28,7 +28,7 @@ plot_winning_probabilities <- function(){
 
 simulate_wins <- function(){
    
-  N = 1e+9 
+  N = 1e+8
   mu = .2
   
   r11=runif(N)
@@ -42,7 +42,11 @@ simulate_wins <- function(){
   
   df=data.frame(r11=r11,s11=s11,r12=r12,s12=s12,r2=r2,s2=s2)
   
-  result = nrow(subset(df,mu*r2 + (1-mu)*s2 < mu*r11  & mu*r12 < mu*r11 ))/nrow(df)
-  print(result-(mu/(8*(1-mu))))
-  return(result)
+  result_richonly = nrow(subset(df,mu*r2 + (1-mu)*s2 < mu*r11  & mu*r12 < mu*r11 ))/nrow(df)
+  print(paste("Result when rich-only invest",result_richonly," diff=",result_richonly-(mu/(8*(1-mu)))))
+  
+  
+  result_pooronly = nrow(subset(df,mu*r2 + (1-mu)*s2 < mu*r11  & mu*r12 < mu*r11 ))/nrow(df)
+  print(paste("Result when poor-only invest",result_pooronly," diff=",result_pooronly-(mu/(8*(1-mu)))))
+  
 }

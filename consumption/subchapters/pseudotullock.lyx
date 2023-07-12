@@ -2200,6 +2200,32 @@ In Case II, the rich person does not participate (
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% the simulation can check whether P(
+\backslash
+mur_2<
+\backslash
+mu r_1+(1-
+\backslash
+mu)s_1 is really (
+\backslash
+mu r_1+(1-
+\backslash
+mu)s_1)/
+\backslash
+mu 
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
 P(\text{win}|r_{1},s_{1})=P(\mu r_{2}<\mu r_{1}+(1-\mu)s_{1})\cdot P(\mu r_{1}'+(1-\mu)s_{1}'<\mu r_{1}+(1-\mu)s_{1})\\
@@ -2220,9 +2246,9 @@ The probability to win for the poor participant can be written as (see Appendix
 \begin_inset Formula 
 \begin{align*}
 P(\text{win}|r_{1},s_{1}) & =\begin{cases}
-\frac{1}{\mu}\frac{x_{1}^{3}}{2\mu(1-\mu)} & 0<x_{1}<\mu\\
-\frac{1}{\mu}\frac{x_{1}(x_{1}-\mu/2)}{1-\mu} & \mu<x_{1}<1-\mu\\
-\frac{1}{\mu}x_{1}(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)}) & 1-\mu<x_{1}<1\\
+\frac{x_{1}^{3}}{2\mu^{2}(1-\mu)} & 0<x_{1}<\mu\\
+\frac{x_{1}(x_{1}-\mu/2)}{\mu(1-\mu)} & \mu<x_{1}<1-\mu\\
+\frac{x_{1}}{\mu}(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)}) & 1-\mu<x_{1}<1\\
 0 & \text{otherwise}
 \end{cases}
 \end{align*}
@@ -2240,11 +2266,11 @@ Using double-integral properties (see Appendix B), the total probability
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r)}{1-\mu}}\frac{1}{\mu}\frac{(\mu r_{1}+(1-\mu)s_{1})^{3}}{2\mu(1-\mu)}\ ds_{1}dr_{1}}\\
-+\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r_{1})}{1-\mu}}^{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}\frac{1}{\mu}\frac{(\mu r_{1}+(1-\mu)s_{1})(\mu r_{1}+(1-\mu)s_{1}-\mu/2)}{1-\mu}\ ds_{1}dr_{1}}\\
+\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r_{1})}{1-\mu}}\ \frac{x_{1}^{3}}{2\mu^{2}(1-\mu)}ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r_{1})}{1-\mu}}^{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})(\mu r_{1}+(1-\mu)s_{1}-\mu/2)}{\mu(1-\mu)}\ ds_{1}dr_{1}}\\
 +\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}^{s_{1}=1}\frac{1}{\mu}(\mu r_{1}+(1-\mu)s_{1})(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})\ ds_{1}dr_{1}}\\
-=\frac{12\mu^{3}}{120\mu(1-\mu)^{2}}-\frac{10(2\mu-1)(\mu(4\mu-7)+4)}{120\mu(\mu-1)^{2}}+\frac{\mu\left(52\mu^{2}-115\mu+60\right)}{120\mu(\mu-1)^{2}}\\
-=\frac{65\mu^{2}-16\mu^{3}-90\mu+40}{120\mu(1-\mu)^{2}}
+=\frac{12\mu^{3}}{120\mu(1-\mu)^{2}}+\frac{10(1-2\mu)(\mu(4\mu-7)+4)}{120\mu(1-\mu)^{2}}+\frac{52\mu^{3}-115\mu^{2}+60\mu}{120\mu(1-\mu)^{2}}\\
+=
 \end{multline*}
 
 \end_inset
@@ -2280,71 +2306,114 @@ status open
 
 \begin_layout Plain Layout
 
-%For part A, integrate(integrate(((mu*r+(1-mu)*s)^3)/( 2 *mu*(1-mu)),s,0,mu*(1-r
-)/(1-mu)),r,0,1) gives 
+%For part A, integrate(integrate(((mu*r+(1-mu)*s)^3)/( 2 *mu^2*(1-mu)),s,0,mu*(1
+-r)/(1-mu)),r,0,1) gives 
 \backslash
 frac{
 \backslash
-mu^{3}}{10(1-
+mu^2}{10(1-
+\backslash
+mu)^2}
+\end_layout
+
+\begin_layout Plain Layout
+
+% For part B,  integrate(integrate((mu*r+(1-mu)*s)*((mu*r+(1-mu)*s)-mu/2)/(mu*(1
+-mu)),s,mu*(1-r)/(1-mu),1-mu*(r)/(1-mu)),r,0,1) gives 
+\backslash
+frac{(1-2
+\backslash
+mu)(
+\backslash
+mu(4
+\backslash
+mu-7)+4)}{12
+\backslash
+mu(1-
 \backslash
 mu)^{2}}
 \end_layout
 
 \begin_layout Plain Layout
 
-% For part B,  integrate(integrate((mu*r+(1-mu)*s)*((mu*r+(1-mu)*s)-mu/2)/(1-mu)
-,s,mu*(1-r)/(1-mu),1-mu*(r)/(1-mu)),r,0,1) gives -
+% For part C,  integrate(integrate((mu*r+(1-mu)*s)/(
 \backslash
-frac{(2 
+mu)*(1-((mu*r+(1-mu)*s-1)^2)/(2*mu*(1-mu))),s,1-mu*r/(1-mu),1),r,0,1) gives
+ 
 \backslash
-mu -1) (
+frac{52
 \backslash
-mu  (4 
+mu^2-115
 \backslash
-mu -7)+4)}{12 (
+mu+60}{120(1-
 \backslash
-mu -1)^2}
+mu)^2}
 \end_layout
 
 \begin_layout Plain Layout
 
-% For part C,  integrate(integrate((mu*r+(1-mu)*s)*(1-((mu*r+(1-mu)*s-1)^2)/(2*m
-u*(1-mu))),s,1-mu*r/(1-mu),1),r,0,1) gives 
+% with denomiator 120
 \backslash
-frac{
+mu(1-
 \backslash
-mu  
-\backslash
-left(52 
-\backslash
-mu ^2-115 
-\backslash
-mu +60
-\backslash
-right)}{120 (
-\backslash
-mu -1)^2} - With denom 120(1-
-\backslash
-mu)^2, the numerator is simplified as -16
-\backslash
-mu^3 + 65
-\backslash
-mu^2 - 90
-\backslash
-mu + 40  ( from 12x^3 + 10 *( (1-2*x) ( x * (4*x - 7) + 4) )  + x * (52*x^2
- - 115 * x + 60) ) 
+mu)^2 numerator simplified using 12 x^3 + 10*(1-2*x)(x*(4x-7)+4)+52x^3-115x^2+60
+x as 65x^2-16x^3-90x+40
 \end_layout
 
 \begin_layout Plain Layout
 
-% This probability drops in 
-\backslash
-mu (we view only until 0.5).
+% investigated with plot (12 x^3 + 10*(1-2*x)*(x*(4*x-7)+4)+52*x^3-115*x^2+60*x)
+/(120*x*(1-x)^2) for x from 0 to 1
 \end_layout
 
 \begin_layout Plain Layout
 
-% plot (65 *x^2-16 *x^3-90*x +40)/(120*(1-x)^2) from 0 to .5
+% also investigated which part is shooting the probability above 1 - remember
+ that we cannot use mu > .5
+\end_layout
+
+\begin_layout Plain Layout
+
+% looked at plot 12x^3/(120*x*(1-x)^2) for x from 0 to .5 - which is well
+ below .11
+\end_layout
+
+\begin_layout Plain Layout
+
+% looked at plot 10*(1-2*x)*(x*(4*x-7)+4)/(120*x*(1-x)^2)  for x from 0
+ to .5 - which shoots well above 1 for mu =.2 .
+ We look at the inner s-integral which is independent of r and is (18
+\backslash
+mu^2-15
+\backslash
+mu+4-8
+\backslash
+mu^3)/(12(1-
+\backslash
+mu)^2
+\backslash
+mu).
+ This itself goes from very high for low 
+\backslash
+mu - verified with plot (18
+\backslash
+mu^2-15
+\backslash
+mu+4-8
+\backslash
+mu^3)/(12(1-
+\backslash
+mu)^2
+\backslash
+mu) for 
+\backslash
+mu from 0 to .5 .
+\end_layout
+
+\begin_layout Plain Layout
+
+% looked at plot (52x^2-115x^2+60x)/(120*x*(1-x)^2) for x from 0 to .5 -
+ which is also lower than 1
 \end_layout
 
 \end_inset
