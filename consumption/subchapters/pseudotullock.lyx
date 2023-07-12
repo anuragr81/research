@@ -1933,70 +1933,6 @@ Probability to win
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% sum(as.integer(.2*r2 + .8*s2 < .2*r + (1-.2)*s))/length(r)
-\end_layout
-
-\begin_layout Plain Layout
-
-N = 1e+7 
-\end_layout
-
-\begin_layout Plain Layout
-
-mu = .2
-\end_layout
-
-\begin_layout Plain Layout
-
-r1=runif(N)
-\end_layout
-
-\begin_layout Plain Layout
-
-r2=runif(N)
-\end_layout
-
-\begin_layout Plain Layout
-
-r3=runif(N)
-\end_layout
-
-\begin_layout Plain Layout
-
-s1=runif(N)
-\end_layout
-
-\begin_layout Plain Layout
-
-s2=runif(N)
-\end_layout
-
-\begin_layout Plain Layout
-
-s3=runif(N)
-\end_layout
-
-\begin_layout Plain Layout
-
-sum(as.integer(mu*r2 + (1-mu)*s2 < mu*r + (1-mu)*s))/length(r)
-\end_layout
-
-\begin_layout Plain Layout
-
-df=data.frame(r1=r1,r2=r2,r3=r3,s1=s1,s2=s2,s3=s3)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 The participant faces different probabilities if her investment is above
  or below a threshold.
  When the participant spends an amount 
@@ -2151,56 +2087,44 @@ P(\text{win}|r_{1}) & =P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1})P(r_{1}'<r_{1})=F_{X}(
 \end_layout
 
 \begin_layout Standard
-Therefore, 
-\end_layout
+Notice that 
+\begin_inset Formula $\mu r_{1}<\mu<1-\mu<1$
+\end_inset
 
-\begin_layout Standard
+ is implied due to 
+\begin_inset Formula $\mu<\frac{1}{2}$
+\end_inset
+
+ (and 
+\begin_inset Formula $r_{1}\in(0,1)$
+\end_inset
+
+ ).
+ The probability that the total score 
+\begin_inset Formula $\mu r_{2}+(1-\mu)s_{2}$
+\end_inset
+
+ does not exceed 
+\begin_inset Formula $\mu r_{1}$
+\end_inset
+
+ implies only the first part of the piecewise function for 
+\begin_inset Formula $F_{X}(x)$
+\end_inset
+
+ needs to be considered.
+ Therefore, using 
+\begin_inset Formula $P(\text{win}|r_{1})=\frac{\mu^{2}r_{1}^{3}}{2\mu(1-\mu)}$
+\end_inset
+
+, we evaluate 
 \begin_inset Formula 
 \begin{align*}
-P(\text{win}|r_{1}) & =\begin{cases}
-\frac{\mu^{2}r_{1}^{3}}{2\mu(1-\mu)} & 0<r_{1}<1\\
-\frac{\mu r_{1}(r_{1}-1/2)}{1-\mu} & 1<r_{1}<1/\mu-1\\
-r_{1}(1-\frac{(\mu r_{1}-1)^{2}}{2\mu(1-\mu)}) & 1/\mu-1<r_{1}<1/\mu\\
-0 & \text{otherwise}
-\end{cases}
+\int_{0}^{1}P(\text{win}|r_{1})dr_{1} & =\frac{\mu}{8(1-\mu)}
 \end{align*}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-With the uniform density for 
-\begin_inset Formula $r_{1}$
-\end_inset
-
- (i.e.
- 
-\begin_inset Formula $f(r_{1})=1$
-\end_inset
-
- ), total probability to win for either of the poor participants is 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{multline*}
-\int_{0}^{1}P(\text{win}|r_{1})dr_{1}=\int_{0}^{1}\frac{\mu^{2}r_{1}^{3}}{2\mu(1-\mu)}dr_{1}+\int_{1}^{1/\mu-1}\frac{\mu r_{1}(r_{1}-1/2)}{1-\mu}dr_{1}=\\
-=\frac{\mu}{8(1-\mu)}+\frac{18\mu^{2}-8\mu^{3}-15\mu+4}{12(1-\mu)\mu^{2}}+\frac{15\mu^{2}-40\mu+24}{24\mu(1-\mu)}\\
-=\frac{3\mu^{3}}{24(1-\mu)\mu^{2}}+\frac{36\mu^{2}-16\mu^{3}-30\mu+8}{24(1-\mu)\mu^{2}}+\frac{15\mu^{3}-40\mu^{2}+24\mu}{24\mu^{2}(1-\mu)}\\
-=\frac{\mu+4-\mu^{2}}{12\mu^{2}}
-\end{multline*}
-
-\end_inset
-
-.
- Since, only one of the participants can win, the probability for the rich
- participant to win is simply 
-\begin_inset Formula $1-2P(\text{win}|r_{1})$
-\end_inset
-
-.
  
 \end_layout
 
@@ -2221,59 +2145,38 @@ mu)}
 
 \begin_layout Plain Layout
 
-%integrate (mu*r*(r-1/2)/(1-mu),r,1,1/mu-1) gives 
-\backslash
-frac{8
-\backslash
-mu^{3}-18
-\backslash
-mu^{2}+15
-\backslash
-mu-4}{12(
-\backslash
-mu-1)
-\backslash
-mu^{2}}
-\end_layout
-
-\begin_layout Plain Layout
-
-%integrate ( r*(1-((mu*r-1)^2)/(2*mu*(1-mu))),r,1/mu-1,1/mu) gives 
-\backslash
-frac{15
-\backslash
-mu^2-40
-\backslash
-mu+24}{24
-\backslash
-mu(1-
-\backslash
-mu)}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-% with denominator set to 24
-\backslash
-mu^2(1-
-\backslash
-mu), we have the denominator simplied with 3x^3+36x^2-16x^3-30x+8+15x^3-40x^2+24
-x as 2(
-\backslash
-mu-1)(
-\backslash
-mu^2-
-\backslash
-mu-4)
+% for .2, the probability is .03125.
+ The MC gives .03126 .
+ 
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+With the uniform density for 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $f(r_{1})=1$
+\end_inset
+
+ ), total probability to win for either of the poor participants is 
+\end_layout
+
+\begin_layout Standard
+.
+ Since, only one of the participants can win, the probability for the rich
+ participant to win is simply 
+\begin_inset Formula $1-2P(\text{win}|r_{1})$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Subsection*
