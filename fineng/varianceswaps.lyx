@@ -302,11 +302,7 @@ In simple words, the Black-Scholes assumptions allow us to replicate a variance
 \end_inset
 
 .
- The forward cost of this portfolio is obtained as follows (
-\begin_inset Formula $K_{VAR}=E(\int_{0}^{T}\sigma_{t}^{2}dt)$
-\end_inset
-
- is the strike of the variance swap).
+ The forward cost of this portfolio is can be written as follows
 \end_layout
 
 \begin_layout Standard
@@ -321,17 +317,89 @@ K_{VAR}^{2} & =\frac{2e^{rT}}{T}(\int_{0}^{F_{0}}\frac{P_{0}(K)}{K^{2}}dK+\int_{
 \end_layout
 
 \begin_layout Standard
-The more general value of 
-\begin_inset Formula $K_{var}$
+This hasn't been reconciled with the variance value in Derman.
+\end_layout
+
+\begin_layout Subsubsection
+Black Scholes Variance
+\end_layout
+
+\begin_layout Standard
+Another way to consider 
+\end_layout
+
+\begin_layout Standard
+It is worth reiterating how above follows from Black-Scholes assumptions.
+ First, 
+\begin_inset Formula $d(log\ S_{t})=(\mu-\frac{\sigma^{2}}{2})dt+\sigma dZ_{t}$
 \end_inset
 
- (still to be reconciled with JPInv28) is (see Derman)
+ (for normal variable 
+\begin_inset Formula $Z_{t}$
+\end_inset
+
+) leads to 
+\begin_inset Formula $\frac{1}{2}\sigma^{2}dt=\frac{dS_{t}}{S_{t}}-d(log\ S_{t})$
+\end_inset
+
+.
+ This in turn implies that 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\frac{1}{T}\int_{0}^{T}\sigma^{2}dt & =\frac{2}{T}(\int_{0}^{T}\frac{dS_{t}}{S_{t}}-log(\frac{S_{T}}{S_{0}}))\label{eq:BlackScholesVariance}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using 
+\begin_inset Formula $E(\int_{0}^{T}\frac{dS_{t}}{S_{t}})=rT$
+\end_inset
+
+ and a boundary 
+\begin_inset Formula $S_{*}$
+\end_inset
+
+ between calls and puts, we make use of the following identity (see Derman)
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+log(\frac{S_{T}}{S_{0}})=log(\frac{S_{*}}{S_{0}})+log(\frac{S_{T}}{S_{*}})\\
+=log(\frac{S_{*}}{S_{0}})-(\int_{0}^{S_{*}}\frac{(K-S_{T})^{+}}{K^{2}}+\int_{S_{*}}^{\infty}\frac{(S_{T}-K)^{+}}{K^{2}}-\frac{S_{T}-S_{*}}{S_{*}})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:BlackScholesVariance"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ becomes 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-K_{var} & =\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}e^{rT}-1)-log(\frac{S_{*}}{S_{0}})+e^{rT}\int_{0}^{S*}\frac{1}{K^{2}}P(K)dK+e^{rT}\int_{S_{*}}^{\infty}\frac{1}{K^{2}}C(K)dK
+E(\int_{0}^{T}\sigma_{t}^{2}dt) & =\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}e^{rT}-1)-log(\frac{S_{*}}{S_{0}})+e^{rT}\int_{0}^{S*}\frac{1}{K^{2}}P(K)dK+e^{rT}\int_{S_{*}}^{\infty}\frac{1}{K^{2}}C(K)dK
 \end{align*}
 
 \end_inset
@@ -340,23 +408,46 @@ K_{var} & =\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}e^{rT}-1)-log(\frac{S_{*}}{S_{0}})
 \end_layout
 
 \begin_layout Standard
-This can be simplified (see Derman) to 
+Notice that 
+\begin_inset Formula $K_{Var}\equiv E(\int_{0}^{T}\sigma_{t}^{2}dt)$
+\end_inset
+
+ is called the strike of the variance swap.
+ This value is still to be reconciled with JPInv28).
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $K_{var}=\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}-1)-log(\frac{S_{*}}{S_{0}}))+e^{rT}\Pi_{CP}$
+Using the weights calculated using a recursive algorithm described in Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Algorithm-to-replicate-logcontract"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we can rewrite 
+\begin_inset Formula $K_{var}$
+\end_inset
+
+ as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $K_{var}=\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}e^{rT}-1)-log(\frac{S_{*}}{S_{0}}))+e^{rT}\Pi_{CP}$
 \end_inset
 
  where 
 \begin_inset Formula $CP$
 \end_inset
 
- is the value of portfolio of options.
- 
+ is the value of portfolio of options and 
 \begin_inset Formula $\Pi_{CP}$
 \end_inset
 
- is simply 
+ is value of the portfolio of puts and calls 
 \end_layout
 
 \begin_layout Standard
@@ -371,6 +462,12 @@ This can be simplified (see Derman) to
 \end_layout
 
 \begin_layout Subsubsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Algorithm-to-replicate-logcontract"
+
+\end_inset
+
 Algorithm to replicate Log-contract
 \end_layout
 
