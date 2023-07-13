@@ -2420,7 +2420,9 @@ mu)^2 numerator simplified using 4x^2+20(1-2x)(1-x)+5(4-5x)x
 \begin_layout Plain Layout
 
 % verified shaped with plot (19mu^2 - 40mu + 20)/(40*(1-mu)^2) for mu from
- 0 to .5
+ 0 to .5 - which indicates that probability falls sharply with 
+\backslash
+mu
 \end_layout
 
 \begin_layout Plain Layout
@@ -2636,7 +2638,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename figures/winprob_with_mu.png
-	width 5in
+	width 4in
 
 \end_inset
 
@@ -2648,10 +2650,14 @@ status open
 
 \begin_layout Plain Layout
 Probability of winning 
-\begin_inset Formula $\int_{0}^{1}\int_{0}^{1}P(\text{win}|r_{1},s_{1})dr_{1}ds_{1}$
+\begin_inset Formula $P_{1}(\text{win})$
 \end_inset
 
- for the poor participant
+, 
+\begin_inset Formula $P_{2}(\text{win})$
+\end_inset
+
+ for poor and rich participants 
 \end_layout
 
 \end_inset
@@ -2721,7 +2727,7 @@ Only rich invest in skills
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\frac{\mu(\mu^{2}-2\mu-3)+4}{12(1-\mu)}$
+\begin_inset Formula $\frac{\mu}{8(1-\mu)}$
 \end_inset
 
 
@@ -2762,7 +2768,7 @@ Only poor invest in skills
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\frac{65\mu^{2}-16\mu^{3}-90\mu+40}{120(1-\mu)^{2}}$
+\begin_inset Formula $\frac{19\mu^{2}-40\mu+20}{40(1-\mu)^{2}}$
 \end_inset
 
 
@@ -2920,44 +2926,6 @@ III,IV
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename figures/winprobrich_with_mu.png
-	width 5in
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Probability of winning 
-\begin_inset Formula $\int_{0}^{1}\int_{0}^{1}P(\text{win}|r_{1},s_{1})dr_{1}ds_{1}$
-\end_inset
-
- for the rich participant
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float table
 wide false
 sideways false
@@ -3014,7 +2982,7 @@ Only rich invest in skills
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $1-\frac{\mu(\mu^{2}-2\mu-3)+4}{6(1-\mu)}$
+\begin_inset Formula $1-\frac{\mu}{4(1-\mu)}$
 \end_inset
 
 
@@ -3055,7 +3023,7 @@ Only poor invest in skills
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\frac{65\mu^{2}-16\mu^{3}-90\mu+40}{60(1-\mu)^{2}}$
+\begin_inset Formula $1-\frac{19\mu^{2}-40\mu+20}{20(1-\mu)^{2}}$
 \end_inset
 
 
@@ -3076,7 +3044,7 @@ With higher
 \begin_inset Formula $\mu$
 \end_inset
 
- favours the richer participant.
+ favours the rich participant.
 \end_layout
 
 \end_inset
@@ -3232,54 +3200,45 @@ There are two important assumptions for the parameter
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-Whether the participants decide to invest in skills by spending 
+ It's the effect of changes in threshold investment 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- depends on whether utility from saving is higher than that from betting
- in the skills-game.
- If the participants optimise the asset accumulations themselves and if
- the 
-\begin_inset Formula $\overline{\nu}<y_{1}<y_{2}$
-\end_inset
+ on the equilibrium that we're interested in.
+ It is easy to see the 
+\end_layout
 
-, then Case II above may never arise - since the marginal benefit to utility
- from participating in the skills-game would be the same for both the consumers
- .
- Thus, the option to participate would be as lucrative to the rich participant
- than to the poor participant.
- Indeed, Case II can arise if 
-\begin_inset Formula $y_{1}<\overline{\nu}<y_{2}$
-\end_inset
-
- if poorer participants are priced out of investing in skills.
+\begin_layout Subsection
+Prisoner's dilemma
 \end_layout
 
 \begin_layout Standard
-The rich participant may also withdraw from the skills-game in case of a
- diminishing utility from asset accumulation.
- With less marginal utility from more assets, it is possible that the richer
- participant does not see benefit from participating particularly when 
-\begin_inset Formula $\mu$
+We consider the simple case of a three-player game under the threshold investmen
+t 
+\begin_inset Formula $\overline{\nu}$
 \end_inset
 
- becomes closer to 
-\begin_inset Formula $\frac{1}{2}$
+.
+ The only cases we consider are when the poor participant cannot afford
+ the threshold payment 
+\begin_inset Formula $\overline{\nu}$
 \end_inset
 
- (i.e.
- raw-talent is rewarded more).
- 
-\end_layout
+ and when both participants can afford 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
 
-\begin_layout Standard
-We now discuss the equilibrium conditions for both asset optimisation and
- utility\SpecialChar endofsentence
+.
+ The case when neither can afford 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
 
+ results in withdrawal from skills-game.
+ That the rich participant cannot afford 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ while the poor participant can is evidently ruled out.
 \end_layout
 
 \begin_layout Subsubsection
@@ -3425,37 +3384,8 @@ Before we consider the cases III and IV above where neither or both of the
 
 \end_layout
 
-\begin_layout Subsection
-Prisoner's dilemma
-\end_layout
-
-\begin_layout Standard
-We consider the simple case of a three-player game under the threshold investmen
-t 
-\begin_inset Formula $\overline{\nu}$
-\end_inset
-
-.
- The only cases we consider are when the poor participant cannot afford
- the threshold payment 
-\begin_inset Formula $\overline{\nu}$
-\end_inset
-
- and when both participants can afford 
-\begin_inset Formula $\overline{\nu}$
-\end_inset
-
-.
- The case when neither can afford 
-\begin_inset Formula $\overline{\nu}$
-\end_inset
-
- results in withdrawal from skills-game.
- That the rich participant cannot afford 
-\begin_inset Formula $\overline{\nu}$
-\end_inset
-
- while the poor participant can is evidently ruled out.
+\begin_layout Subsubsection
+Utility-optimising consumers
 \end_layout
 
 \begin_layout Subsubsection

@@ -4,24 +4,25 @@ require(latex2exp)
 
 plot_winning_probabilities <- function(){
   x = seq(0,.499,.01);
-  par (mfrow=c(1,2))
-  
-  
+  par (mfrow=c(2,1))
+  cexval = .5
+  xpos=.3
+  ypos = .74
   plot(0,0,type='l',xlim=c(0,.5),ylim=c(0,1),xlab=TeX("$\\mu$"),ylab=TeX("$P_1$(win)")); 
   
   lines(x,(x)/(8*(1-x)),type='l',lty=1) # only rich
-  lines(x,(-16*x**3 + 65*x**2 - 90*x + 40 )/( 120 * (1-x)**2),lty=2) # only poor
+  lines(x,(19*x**2 - 40 * x + 20)/(40*(1-x)**2) ,lty=2) # only poor
   lines(x,rep(1/3,length(x)),lty=3) # neither or both
   
-  legend(0.3, .7,legend=TeX(paste("Case",c("I","II","III,IV"))),lty=c(1,2,3),cex=.7) 
+  legend(xpos, ypos,legend=TeX(paste("Case",c("I","II","III,IV"))),lty=c(1,2,3),cex=cexval) 
   
   plot(0,0,type='l',xlim=c(0,.5),ylim=c(0,1),xlab=TeX("$\\mu$"),ylab=TeX("$P_2$(win)")); 
   
   lines(x,1-(x)/(4*(1-x)),type='l',lty=1) # only rich
-  lines(x,1-(-16*x**3 + 65*x**2 - 90*x + 40 )/( 60 * (1-x)**2),lty=2) # only poor
+  lines(x,1-(19*x**2 - 40 * x + 20)/(20*(1-x)**2),lty=2) # only poor
   lines(x,rep(1/3,length(x)),lty=3) # neither or both
   
-  legend(0.3, .7,legend=TeX(paste("Case",c("I","II","III,IV"))),lty=c(1,2,3),cex=.7) 
+  legend(xpos, ypos,legend=TeX(paste("Case",c("I","II","III,IV"))),lty=c(1,2,3),cex=cexval) 
   
 }
 
@@ -50,3 +51,5 @@ simulate_wins <- function(){
   print(paste("Result when poor-only invest",result_pooronly," diff=",result_pooronly-(mu/(8*(1-mu)))))
   
 }
+
+plot_winning_probabilities()
