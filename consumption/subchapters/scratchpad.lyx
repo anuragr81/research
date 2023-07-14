@@ -75,6 +75,106 @@
 
 \begin_body
 
+\begin_layout Subsection
+Normal Distribution
+\end_layout
+
+\begin_layout Standard
+With normal distribution we know that the combined distribution would 
+\begin_inset Formula $N(m_{1}+m_{2},\sigma_{1}^{2}+\sigma_{2}^{2})$
+\end_inset
+
+.
+ This assumes that 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ are distributed around means 
+\begin_inset Formula $m_{1},m_{2}$
+\end_inset
+
+ with variances 
+\begin_inset Formula $\sigma_{1}^{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\sigma_{2}^{2}$
+\end_inset
+
+ respectively.
+ For the probability of winning poorer participanet we need 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x_{1})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The distribution for 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})$
+\end_inset
+
+ is 
+\begin_inset Formula $N(\mu m_{1}+(1-\mu)c_{1}m_{2},\mu^{2}\sigma_{1}^{2}+c_{1}^{2}(1-\mu)^{2}\sigma_{2}^{2})$
+\end_inset
+
+ while for 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x_{1})$
+\end_inset
+
+ it is 
+\begin_inset Formula $N(\mu m_{1}+(1-\mu)c_{2}m_{2},\mu^{2}\sigma_{1}^{2}+(1-\mu)^{2}c_{2}^{2}\sigma_{2}^{2})$
+\end_inset
+
+.
+ We could simplify further but a closed-form solution escapes us because
+ of the multiplication of CDF (power).
+\end_layout
+
+\begin_layout Subsection
+Poission distribution
+\end_layout
+
+\begin_layout Standard
+Another option is to view tournament winners as poisson distributed.
+ The sum of Possion variables is Binomial distributed so multiplying them
+ may still provide deterministic results.
+ 
+\end_layout
+
+\begin_layout Standard
+The possion pmf is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+P(X & =x)=\frac{e^{-\lambda}\lambda^{x}}{x!}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The CDF would be a simple sum and multiplying them does take d Itoes not
+ have an obvious way to a closed-form solution either.
+\end_layout
+
+\begin_layout Standard
+===
+\end_layout
+
 \begin_layout Standard
 We evaluate the integral 
 \begin_inset Formula $\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dr_{1}$
