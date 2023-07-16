@@ -29,9 +29,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -44,6 +45,7 @@
 \use_package undertilde 1
 \cite_engine basic
 \cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -55,6 +57,9 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 3cm
+\rightmargin 3cm
+\footskip 2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -74,6 +79,14 @@
 \end_header
 
 \begin_body
+
+\begin_layout Title
+Replication Algorithm for Variance Swap Pricing
+\end_layout
+
+\begin_layout Author
+Anurag Srivastava (anurag.srivastava@riskcare.com)
+\end_layout
 
 \begin_layout Section
 Summary
@@ -96,7 +109,7 @@ The later sections also deal with a stochastic volatility assumption.
 \end_layout
 
 \begin_layout Section
-Black Scholes Method
+Black Scholes Model
 \end_layout
 
 \begin_layout Standard
@@ -189,143 +202,7 @@ at time
 \end_layout
 
 \begin_layout Subsection
-Futures-based replication
-\end_layout
-
-\begin_layout Standard
-We now discuss how the replication summarised with Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:main_replication"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- can be performed using futures prices 
-\begin_inset Formula $F_{t}$
-\end_inset
-
- (at time 
-\begin_inset Formula $t$
-\end_inset
-
-) and 
-\begin_inset Formula $F_{0}$
-\end_inset
-
-.
- As discussed in CarrMadan and JPMInvestmentStrat28, the average variance
- over time 
-\begin_inset Formula $\frac{1}{T}\int_{0}^{T}\sigma_{t}dt$
-\end_inset
-
- can be written as 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align}
-\frac{1}{T}\int_{0}^{T}\sigma_{t}dt & =\frac{2}{T}(log(\frac{F_{0}}{F_{t}})+\frac{F_{t}}{F_{0}}-1)-\frac{2}{T}\int_{0}^{T}(\frac{1}{F_{0}}-\frac{1}{F_{t}})dF_{t}\label{eq:replication_with_futures_main}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The first-term can be replicated by taking a static position in a contract
- that pays 
-\begin_inset Formula $\frac{2}{T}(log(\frac{F_{0}}{F_{t}})+\frac{F_{t}}{F_{0}}-1)$
-\end_inset
-
- and the second-term can be replicated by a continuously rebalanced futures
- position.
- As detailed in CarrMadan, this can be performed using calls and puts with
- a position 
-\begin_inset Formula $\frac{1}{K^{2}}$
-\end_inset
-
- using the following expression
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-log(\frac{F_{0}}{F_{T}})+\frac{F_{T}}{F_{0}}-1) & =\int_{0}^{F_{0}}\frac{(K-F_{T})^{+}}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{(F_{T}-K)^{+}}{K^{2}}dK
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Plugging this in Equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:replication_with_futures_main"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, we have 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\frac{1}{T}\int_{0}^{T}\sigma_{t}dt & =\frac{2}{T}(\int_{0}^{F_{0}}\frac{(K-F_{T})^{+}}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{(F_{T}-K)^{+}}{K^{2}}dK)-\frac{2}{T}\int_{0}^{T}(\frac{1}{F_{0}}-\frac{1}{F_{t}})dF_{t}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In simple words, the Black-Scholes assumptions allow us to replicate a variance
- swap by holding 
-\begin_inset Formula $\frac{1}{F_{t}}-\frac{1}{F_{0}}$
-\end_inset
-
- unites of futures at 
-\begin_inset Formula $t$
-\end_inset
-
- and a set of calls and puts spread across 
-\begin_inset Formula $F_{0}$
-\end_inset
-
-.
- The forward cost of this portfolio is can be written as follows
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-K_{VAR}^{2} & =\frac{2e^{rT}}{T}(\int_{0}^{F_{0}}\frac{P_{0}(K)}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{C_{0}(K)}{K^{2}}dK
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This hasn't been reconciled with the variance value in Derman.
-\end_layout
-
-\begin_layout Subsubsection
-Black Scholes Variance
-\end_layout
-
-\begin_layout Standard
-Another way to consider 
+Stocks-based replication
 \end_layout
 
 \begin_layout Standard
@@ -412,13 +289,36 @@ Notice that
 \begin_inset Formula $K_{Var}\equiv E(\int_{0}^{T}\sigma_{t}^{2}dt)$
 \end_inset
 
- is called the strike of the variance swap.
- This value is still to be reconciled with JPInv28).
+ is called the strike of the variance swap..
 \end_layout
 
 \begin_layout Standard
-Using the weights calculated using a recursive algorithm described in Section
+We can rewrite 
+\begin_inset Formula $K_{var}$
+\end_inset
+
+ as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+K_{var} & =\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}e^{rT}-1)-log(\frac{S_{*}}{S_{0}}))+e^{rT}\Pi_{CP}
+\end{align*}
+
+\end_inset
+
  
+\end_layout
+
+\begin_layout Standard
+The term 
+\begin_inset Formula $\Pi_{CP}$
+\end_inset
+
+ is the following value of the portfolio of puts and calls where the weights
+ of the portfolio are calculated using a recursive algorithm described in
+ Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Algorithm-to-replicate-logcontract"
@@ -428,26 +328,7 @@ noprefix "false"
 
 \end_inset
 
-, we can rewrite 
-\begin_inset Formula $K_{var}$
-\end_inset
 
- as 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $K_{var}=\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}e^{rT}-1)-log(\frac{S_{*}}{S_{0}}))+e^{rT}\Pi_{CP}$
-\end_inset
-
- where 
-\begin_inset Formula $CP$
-\end_inset
-
- is the value of portfolio of options and 
-\begin_inset Formula $\Pi_{CP}$
-\end_inset
-
- is value of the portfolio of puts and calls 
 \end_layout
 
 \begin_layout Standard
@@ -596,6 +477,141 @@ w_{p}(K_{n,p}) & =\frac{f(K_{n+1,p})-f(K_{n,p})}{K_{n,p}-K_{n+1,p}}-\sum_{i=0}^{
 \end_layout
 
 \begin_layout Subsection
+Futures-based replication
+\end_layout
+
+\begin_layout Standard
+We now discuss how the replication summarised with Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:main_replication"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be performed using futures prices 
+\begin_inset Formula $F_{t}$
+\end_inset
+
+ (at time 
+\begin_inset Formula $t$
+\end_inset
+
+) and 
+\begin_inset Formula $F_{0}$
+\end_inset
+
+.
+ As discussed in CarrMadan and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "allenJPMvarianceswaps2006"
+literal "false"
+
+\end_inset
+
+, the average variance over time 
+\begin_inset Formula $\frac{1}{T}\int_{0}^{T}\sigma_{t}dt$
+\end_inset
+
+ can be written as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\frac{1}{T}\int_{0}^{T}\sigma_{t}dt & =\frac{2}{T}(log(\frac{F_{0}}{F_{t}})+\frac{F_{t}}{F_{0}}-1)-\frac{2}{T}\int_{0}^{T}(\frac{1}{F_{0}}-\frac{1}{F_{t}})dF_{t}\label{eq:replication_with_futures_main}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first-term can be replicated by taking a static position in a contract
+ that pays 
+\begin_inset Formula $\frac{2}{T}(log(\frac{F_{0}}{F_{t}})+\frac{F_{t}}{F_{0}}-1)$
+\end_inset
+
+ and the second-term can be replicated by a continuously rebalanced futures
+ position.
+ As detailed in CarrMadan, this can be performed using calls and puts with
+ a position 
+\begin_inset Formula $\frac{1}{K^{2}}$
+\end_inset
+
+ using the following expression
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+log(\frac{F_{0}}{F_{T}})+\frac{F_{T}}{F_{0}}-1) & =\int_{0}^{F_{0}}\frac{(K-F_{T})^{+}}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{(F_{T}-K)^{+}}{K^{2}}dK
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Plugging this in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:replication_with_futures_main"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we have 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{T}\int_{0}^{T}\sigma_{t}dt & =\frac{2}{T}(\int_{0}^{F_{0}}\frac{(K-F_{T})^{+}}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{(F_{T}-K)^{+}}{K^{2}}dK)-\frac{2}{T}\int_{0}^{T}(\frac{1}{F_{0}}-\frac{1}{F_{t}})dF_{t}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In simple words, the Black-Scholes assumptions allow us to replicate a variance
+ swap by holding 
+\begin_inset Formula $\frac{1}{F_{t}}-\frac{1}{F_{0}}$
+\end_inset
+
+ unites of futures at 
+\begin_inset Formula $t$
+\end_inset
+
+ and a set of calls and puts spread across 
+\begin_inset Formula $F_{0}$
+\end_inset
+
+.
+ The forward cost of this portfolio is can be written as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+K_{VAR}^{2} & =\frac{2e^{rT}}{T}(\int_{0}^{F_{0}}\frac{P_{0}(K)}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{C_{0}(K)}{K^{2}}dK
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 Greeks
 \end_layout
 
@@ -612,6 +628,18 @@ noprefix "false"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "fineng"
+options "ieeetr"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
