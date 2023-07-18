@@ -36,12 +36,12 @@ theorems-ams-extended-chap-bytype
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "palatino" "Spectral"
+\font_roman "palatino" "Palatino Linotype"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts false
+\use_non_tex_fonts true
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -1297,7 +1297,7 @@ Other measures such as cost-of-living or secondary-school availability could
 
 .
  In the main formulation, the logarithm of total expenditure is used as
- the main explanatory variable while the local-wealth - the second explanatory
+ the main explanatory variable while local-wealth - the second explanatory
  variable - is calculated as the average assets in the consumer's district
  (for smaller districts, the average over multiple districts within a 6-
 \begin_inset Formula $km$
@@ -1308,10 +1308,12 @@ Other measures such as cost-of-living or secondary-school availability could
  provide for a comparison with a more conventional approach - the two explanator
 y variables are the wealth based on durable goods from the survey and an
  ruralness score based on urban-rural indicators themselves.
- The measures for local-wealth (as well as the first explanatory variable
- in the alternative formulation) rely on the market-value of durable goods
- (including land, housing) that are reported in the survey (see Section
- 
+ The measure for local-wealth (i.e.
+ the second explanatory variable in the main formulation) and household-wealth
+ (i.e.
+ the first explanatory variable in the alternative formulation) both rely
+ on the market-value of durable goods (including land, housing) that are
+ reported in the survey (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Data"
@@ -1408,7 +1410,7 @@ noprefix "false"
 \begin_layout Standard
 Given the recent industrialisation in the sub-Saharan Africa, the dichotomy
  of agrarian and non-agrarian occupations is of particular importance to
- our analyses and is used as a control.
+ our analyses and is used as a key control.
  We are also aware - nevertheless - of not mixing up the peri-urban with
  the rest of the rural settings in the economy (
 \begin_inset CommandInset citation
@@ -1418,8 +1420,9 @@ literal "false"
 
 \end_inset
 
-) - the reason why our comparison of educational expenses considers variation
- in local wealth levels instead.
+) - the reason why our main formulation for the comparison of educational
+ expenses relies on variation in local wealth levels instead of urban-rural
+ indicators.
 \end_layout
 
 \begin_layout Standard
@@ -1452,8 +1455,18 @@ fferent2013, #Chamberlin2020ZambiaRuralinmigration, #AbayYoungRuralEconomy2021])
 \end_layout
 
 \begin_layout Standard
-The analysis uses the budget-share of education expenses as the dependent
- variable.
+The results in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Results"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ are based on a tobit-regression where the budget-share of education expenses
+ is used as the dependent variable.
  Representing the budget share of education expenses 
 \begin_inset Formula $w_{educ}$
 \end_inset
@@ -1462,13 +1475,13 @@ The analysis uses the budget-share of education expenses as the dependent
 \begin_inset Formula $i$
 \end_inset
 
-, the cross-sectional regressions correspond to the following equation
+, this cross-sectional tobit regression corresponds to the following equation
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-w_{educ}=\mu+\kappa_{\rho}\rho+\alpha_{educ}\cdot r+\beta_{educ}\cdot log(x_{i})+\gamma_{educ}\cdot log(p_{ne})+\delta_{educ}\cdot s+\epsilon_{ne}\label{eq:budgetshr_estimation}
+w_{educ}=\mu_{educ}+\kappa_{\rho}\rho+\alpha_{educ}\cdot r+\beta_{educ}\cdot log(x_{i})+\gamma_{educ}\cdot log(p_{ne})+\delta_{educ}\cdot s+\epsilon_{ne}\label{eq:budgetshr_estimation}
 \end{gather}
 
 \end_inset
@@ -1486,13 +1499,13 @@ Since the survey provides the education expenses for every child, we also
 \begin_inset Formula $i$
 \end_inset
 
- as the dependent variable 
+ as the dependent variable for another tobit-regression
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{gather}
-w_{j,educ}=\mu+\kappa_{\rho}\rho+\alpha_{jeduc}\cdot r+\beta_{jeduc}\cdot log(x_{i})+\gamma_{jeduc}\cdot log(p_{ne})+\delta_{jeduc}\cdot s+\epsilon_{jne}\label{eq:budgetshr_child_estimation}
+w_{j,educ}=\mu_{jeduc}+\kappa_{\rho}\rho+\alpha_{jeduc}\cdot r+\beta_{jeduc}\cdot log(x_{i})+\gamma_{jeduc}\cdot log(p_{ne})+\delta_{jeduc}\cdot s+\epsilon_{jne}\label{eq:budgetshr_child_estimation}
 \end{gather}
 
 \end_inset
@@ -1519,11 +1532,34 @@ noprefix "false"
 
 \end_inset
 
- and correspond to household-level and per-child-level estimations - who
- results are presented in Section 
+ and correspond to household-level and per-child-level estimations (see
+ results in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:AnalysisAndResults"
+reference "subsec:Results"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The primary reason for the use of a tobit-regression is the zero expenditure
+ on education for a significant number of households.
+ The results from the tobit regression are presented in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Results"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ after a brief discussion on descriptive statistics in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:DescriptiveStatistics"
 plural "false"
 caps "false"
 noprefix "false"
@@ -1534,8 +1570,8 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The main explanatory variables in the above equations used are the logarithm
- of the total annual expenditure 
+To reiterate, the main explanatory variables in the above equations used
+ are the logarithm of the total annual expenditure 
 \begin_inset Formula $log(x_{i})$
 \end_inset
 
@@ -1578,7 +1614,7 @@ noprefix "false"
  i.e.
  the average non-durable expenditure excluding asset-related costs in the
  district) are all used as control variables in the analysis.
- In above Equation 
+ In the above Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:budgetshr_estimation"
@@ -1588,15 +1624,53 @@ noprefix "false"
 
 \end_inset
 
-, 
-\begin_inset Formula $\mu$
+ (and in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:budgetshr_child_estimation"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- is the intercept, 
-\begin_inset Formula $\kappa_{\rho}$
+), 
+\begin_inset Formula $\mu_{educ}$
 \end_inset
 
- is the coefficient for demographic/social identity variables, 
+ (
+\begin_inset Formula $\mu_{jeduc}$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:budgetshr_child_estimation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) is an intercept, 
+\begin_inset Formula $\kappa_{educ}$
+\end_inset
+
+ (
+\begin_inset Formula $\kappa_{jeduc}$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:budgetshr_child_estimation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ ) is the coefficient for demographic/social identity variables, 
 \begin_inset Formula $\alpha_{educ}$
 \end_inset
 
@@ -1610,7 +1684,7 @@ noprefix "false"
 
 \end_inset
 
-( 
+ ( 
 \begin_inset Formula $\alpha_{jeduc}$
 \end_inset
 
@@ -1624,7 +1698,7 @@ noprefix "false"
 
 \end_inset
 
-) , 
+ ), 
 \begin_inset Formula $\beta_{educ}$
 \end_inset
 
@@ -1642,7 +1716,7 @@ noprefix "false"
 
 \end_inset
 
-( 
+ ( 
 \begin_inset Formula $\beta_{jeduc}$
 \end_inset
 
@@ -1656,7 +1730,7 @@ noprefix "false"
 
 \end_inset
 
-) , 
+ ) , 
 \begin_inset Formula $\gamma_{educ}$
 \end_inset
 
@@ -1674,7 +1748,7 @@ noprefix "false"
 
 \end_inset
 
-( 
+ ( 
 \begin_inset Formula $\gamma_{jeduc}$
 \end_inset
 
@@ -1688,7 +1762,7 @@ noprefix "false"
 
 \end_inset
 
-) and 
+ ) and 
 \begin_inset Formula $\delta_{educ}$
 \end_inset
 
@@ -1706,7 +1780,7 @@ noprefix "false"
 
 \end_inset
 
-( 
+ ( 
 \begin_inset Formula $\delta_{jeduc}$
 \end_inset
 
@@ -1720,7 +1794,7 @@ noprefix "false"
 
 \end_inset
 
-) .
+ ) .
  The variables used in the results are listed in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1765,32 +1839,6 @@ ry variable) may cause some endogeneity, it does not interfere with the
 
 \end_layout
 
-\begin_layout Standard
-The estimation results from the comparison of education expenditure - using
- a tobit regression (due to zero expenditure on education for a significant
- number of households) - are presented in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Results"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- after a discussion of the descriptive statistics in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:DescriptiveStatistics"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Section
 Data
 \begin_inset CommandInset label
@@ -1820,8 +1868,8 @@ noindent
 
 \begin_layout Standard
 The educational expenses and the non-asset related expenditures are obtained
- from the Living Standard Measurement Study (LSMS) which is conducted by
- the World Bank.
+ from the Living Standard Measurement Study (LSMS) - a survey that is conducted
+ by the World Bank.
  The survey is unique in its aims to improve the understanding of links
  between asset ownership, community access (to market, schools), food prices
  and agriculture activities.
@@ -2041,9 +2089,9 @@ ndary, university etc.).
  - where the HH has his/her grandchildren attending school - while letting
  the same variable point to the parents of children in school for nuclear-famili
 es (where HH has his/her children attending school), we rely on a more uniform
- measure for a household's highest paternal education 
+ measure for a household's highest paternal education level
 \family typewriter
-level father_educ_level
+ father_educ_level
 \family default
  as the highest education in the generation of the parents of the children
  in household in the survey 
@@ -2071,7 +2119,7 @@ father_educ_level
  being linked with reported household heads who are invariably male in the
  survey.
  The normalisation of household characteristics at the household-head level
- thus constrains to use father's education level as the paternal education
+ thus constrains us to use father's education level as the paternal education
  control.
 \end_layout
 
@@ -4122,7 +4170,7 @@ unique(tn$df2014$hhid)) = .4215
 \end_layout
 
 \begin_layout Standard
-The results from the a tobit estimation for educational expenses (
+The results from the tobit estimation for educational expenses (
 \family typewriter
 
 \begin_inset Formula $w_{educ}$
@@ -4186,14 +4234,23 @@ Alternative Formulation
 \end_layout
 
 \begin_layout Standard
-As mentioned earlier, an alternative formulation is specified for a comparison
- with the more conventional approach that uses urban-rural indicators -
- where the two explanatory variables are the logarithm of total assets value
- 
+As mentioned in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Econometric-Method"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, an alternative formulation is specified for a comparison with the more
+ conventional approach that uses urban-rural indicators - where the two
+ explanatory variables are the logarithm of total assets value 
 \begin_inset Formula $log(A)$
 \end_inset
 
- or
+ (or
 \family typewriter
  ln_tot_assets
 \family default
@@ -4206,21 +4263,14 @@ As mentioned earlier, an alternative formulation is specified for a comparison
 
 
 \family default
- i.e.
+ (i.e.
  the ruralness-score 
 \family typewriter
 \size small
 rural_wards 
 \family default
 \size default
-which is derived from the survey's classification of rural-urban areas and
- is used in place of local-wealth 
-\family typewriter
-\size small
-localwealth
-\family default
-\size default
-.
+which is derived from the survey's classification of rural-urban areas).
 \end_layout
 
 \begin_layout Standard
@@ -4309,22 +4359,6 @@ Role of main Explanatory variables
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 The coefficient of the total expenditure ( 
 \family typewriter
 ln_tot_exp)
@@ -4385,7 +4419,7 @@ ln_tot_exp)
 localwealth
 \family default
  ) invariably have a higher budget share overall.
- Education expenses seem rather segregated by asset richness of districts.
+ Thus, education expenses seem rather segregated by asset richness of districts.
  
 \end_layout
 
@@ -4428,9 +4462,9 @@ log_mean_cost_ne
 \family typewriter
 secondary_schools
 \family default
- ) together- since the factors responsible for the poverty of a district
- often also deny secondary-school facilities to the district (or influence
- access to the schools through feasibility of transportation etc.).
+ ) - given that the factors responsible for the poverty of a district often
+ also deny secondary-school facilities to the district (or influence access
+ to the schools through feasibility of transportation etc.).
  The strong and positive effects of local-wealth measure ( 
 \family typewriter
 localwealth
@@ -4460,8 +4494,8 @@ ref{tabTNZ_r}
 
 \end_inset
 
- ) therefore are not to be viewed separately from the effects of secondary-schoo
-ls variable ( 
+ ) are therefore to be viewed together with the effects of secondary-schools
+ variable ( 
 \family typewriter
 secondary_schools
 \family default
@@ -4555,11 +4589,11 @@ ref{tabTNZ_r}
 localwealth
 \family default
  ) on education budget share is economically stronger and in the opposite
- direction of ( 
+ direction of secondary-schools variable ( 
 \family typewriter
 secondary_schools
 \family default
- ).
+ - which has a negative effect).
  Once again, local wealth seems to play a rather segregating role for education
  expenses in the economy - as the richer neighborhoods have more often a
  higher budget-share for education even after accounting for physical access
@@ -4578,22 +4612,6 @@ Role of Control Variables
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Even though private education only accounts for education expenses of a
  small minority of the population (see Figure 
 \begin_inset CommandInset ref
@@ -4605,8 +4623,8 @@ noprefix "false"
 
 \end_inset
 
-), the strong and positive effect of being privately educated on education
- budget-shares for households as well as individuals - seems worth highlighting.
+), it is worth highlighting the strong and positive effect of being privately
+ educated on education budget-shares for households as well as individuals.
 \end_layout
 
 \begin_layout Standard
@@ -4641,9 +4659,9 @@ ref{tabTNZ_r}
 
 \end_inset
 
-) suggest that household expenditure on education rises but the average
- expenditure on child declines when there are more children added to the
- household.
+) indicate the common observation of household expenditure on education
+ rising while the average expenditure on child declining with more children
+ added to the household.
 \end_layout
 
 \begin_layout Standard
@@ -5986,22 +6004,6 @@ status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-noindent
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
 % First talk about results from local-wealth and permanent-income as main
  variables
 \end_layout
@@ -6026,7 +6028,7 @@ localwealth
 \family typewriter
 ln_tot_assets
 \family default
- and for those above it.
+ and for those above the median.
  Using the results for above and below local median-assets possession using
  education budget-shares 
 \family typewriter
@@ -6135,7 +6137,7 @@ ref{tabTNZ_abovebelow_median}
 
 \end_inset
 
- ) .
+ ).
  
 \end_layout
 
@@ -6165,14 +6167,14 @@ ref{tabTNZ_abovebelow_median}).
 \end_layout
 
 \begin_layout Standard
-In general, the significance of other social factors remains unaffected
+As one would expect, the significance of other social factors remains unaffected
  by whether the consumers have above or below the median asset ownership
  level
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-The factor variable for English-speaking ability 
+For example, the factor variable for English-speaking ability 
 \family typewriter
 has_english
 \family default
@@ -6972,22 +6974,6 @@ Local wealth interpretations limited to similar neighbours
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-noindent
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 To check whether the permanent income effects weaken significantly relative
  to regional and social effects after accounting for occupation or education
  levels or not, we recompute the local-wealth measure by considering only
@@ -7043,7 +7029,7 @@ The goal of this exercise to consider whether effects of local wealth are
 \begin_inset Formula $\Gamma$
 \end_inset
 
- indicate whether the education level of the household-head is higher than
+ indicates whether the education level of the household-head is higher than
  primary school or not and is derived the education level variable (
 \family typewriter
 father_educ_level
@@ -7068,7 +7054,7 @@ father_educ_level
 \end_inset
 
  indicates whether the household head's occupation is agrarian or not and
- is used define the 
+ is used to define the variable 
 \begin_inset Formula $r_{\Omega}$
 \end_inset
 
@@ -7295,13 +7281,13 @@ status open
 \end_layout
 
 \begin_layout Standard
-We find there are plenty of reasons to be optimistic about the future rise
- in educational levels and the development of economic institutions.
+There are many reasons to be optimistic nevertheless towards the future
+ rise in educational levels and the development of economic institutions.
  Comparing with other economies in the SSA where urbanisation is higher
  (such as Nigeria), the strong effect of local wealth on educational expenses
- also means that permanent income effects may weaken with rise in urbanisation.
- This aligns with the conventional pathways to urban development that are
- discussed in the literature 
+ also means that permanent income effects may weaken with rise in urbanisation
+ - so long as one may bank upon the conventional pathways to urban development
+ that are discussed in the development literature (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "KuznetsEconomicGrowthIneq2019"
@@ -7309,7 +7295,7 @@ literal "false"
 
 \end_inset
 
-.
+).
  
 \end_layout
 
