@@ -110,27 +110,27 @@ def plot_rich_utility (mu,df,y1,y2,a,d,G):
     
     ax.legend((l1, l2, l3,l4), 
               #tuple('poor-expenditure \\nu_1='+str(y) for y in y1arr), 
-              tuple(r'$\sum_{n=1}^\infty$' for _ in y1arr),
+              tuple(r'$\nu_1$=' +str(y)  for y in y1arr),
               loc='lower left', shadow=True)
     
-    ax.set_xlabel('expenditure')
+    ax.set_xlabel(r'Rich Expenditure - $\nu_2$')
     ax.set_ylabel('utility')
     ax.set_title('Utility for rich')
     plt.show()
 
 
 
-def plot_poor_utility(df,y1,y2,a,d,G):
+def plot_poor_utility(df,mu,y1,y2,a,d,G):
     y1s  = np.linspace(0,y1,100)
     fig, ax = plt.subplots()
     y2arr=[t*y2 for t in (.1,.3,.6,.9,)]
-    l1, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t, nu2=y2arr[0],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
-    l2, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t, nu2=y2arr[1],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
-    l3, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t, nu2=y2arr[2],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
-    l4, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t, nu2=y2arr[3],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
+    l1, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t,mu=mu, nu2=y2arr[0],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
+    l2, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t,mu=mu, nu2=y2arr[1],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
+    l3, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t,mu=mu, nu2=y2arr[2],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
+    l4, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t,mu=mu, nu2=y2arr[3],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
     
-    ax.legend((l1, l2, l3,l4), tuple('rich-expenditure='+str(y) for y in y2arr), loc='lower left', shadow=True)
-    ax.set_xlabel('expenditure')
+    ax.legend((l1, l2, l3,l4), tuple(r'$\nu_2$='+str(y) for y in y2arr), loc='lower left', shadow=True)
+    ax.set_xlabel(r'Poor Expenditure - $\nu_1$')
     ax.set_ylabel('poor-utility')
     ax.set_title('Utility for poor')
     plt.show()
@@ -236,8 +236,8 @@ if __name__ == "__main__":
     
     
     df = pd.DataFrame({'r11':r11,'s11':s11,'r12':r12,'s12':s12,'r2':r2,'s2':s2})
-    plot_rich_utility(mu=.2,df=df, y1=y1, y2=y2, a=a, d=d, G=G)
-    #plot_poor_utility(df=df, y1=y1, y2=y2, a=a, d=d, G=G)
+    #plot_rich_utility(mu=.2,df=df, y1=y1, y2=y2, a=a, d=d, G=G)
+    plot_poor_utility(df=df,mu=.2, y1=y1, y2=y2, a=a, d=d, G=G)
     #plot_common_utility_over_nu2(df=df, y1=y1, y2=y2, a=a, d=d, G=G)
     #plot_common_utility_vs_inequality(df=df,G=G,a=a,d=d)
     #plot_common_utility_vs_inequality_over_mus(df=df,G=G,a=a,d=d)
