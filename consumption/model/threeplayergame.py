@@ -23,7 +23,7 @@ def mul(rowa,rowb):
 def c(x):
   return 1 - 1 / (1+x)**.5
 
-def find_poor_probability(df,nu1, nu2):
+def find_poor_probability(df,nu1, nu2,mu):
     if not (isinstance(nu2,float) or isinstance(nu2,int)) or isinstance(nu2,list) or isinstance(nu2,tuple) or isinstance(nu2,np.ndarray):
         raise ValueError("nu2 must be a scalar")
         
@@ -40,7 +40,7 @@ def find_poor_probability(df,nu1, nu2):
         return res.shape[0]/df.shape[0]
 
 
-def find_rich_probability(df,nu1, nu2):
+def find_rich_probability(df,nu1, nu2,mu):
     if not (isinstance(nu1,float) or isinstance(nu1,int)) or isinstance(nu1,list) or isinstance(nu1,tuple) or isinstance(nu1,np.ndarray):
         raise ValueError("nu1 must be a scalar")
     if not (isinstance(nu2,float) or isinstance(nu2,int)) or isinstance(nu2,list) or isinstance(nu2,tuple) or isinstance(nu2,np.ndarray):
@@ -74,8 +74,8 @@ def utility_rich(p,y1,y2,x,a,d,G):
 
 
 
-def optimise_poor_utility_for_nu2 (nu2,df,y1,y2,a,d,G):
-  negative_utility_poor = lambda x : -utility_poor(x=x,p=find_poor_probability(nu1=x, nu2=nu2,df=df),y1=y1,y2=y2,a=a,d=d,G=G)
+def optimise_poor_utility_for_nu2 (nu2,mu,df,y1,y2,a,d,G):
+  negative_utility_poor = lambda x : -utility_poor(x=x,p=find_poor_probability(mu=mu,nu1=x, nu2=nu2,df=df),y1=y1,y2=y2,a=a,d=d,G=G)
   res = minimize_scalar(negative_utility_poor, bounds=(0, y1), method='bounded')
   return res
 
@@ -139,19 +139,79 @@ def plot_poor_utility(df,y1,y2,a,d,G):
 
 
 
-def common_utility(df,nu2,y1,y2,G,a,d):
+def common_utility(df,mu,nu2,y1,y2,G,a,d):
   poor_share=.3
   rich_share=1-poor_share
-  nu1selectedfornu2 = optimise_poor_utility_for_nu2(nu2=nu2,df=df,y1=y1,y2=y2,G=G,a=a,d=d).x
-  poorutil= utility_poor(p=find_poor_probability(nu1=nu1selectedfornu2, nu2=nu2,df=df),y1=y1,y2=y2,x=nu1selectedfornu2,a=a,d=d,G=G)
-  richutil =  utility_rich(p=find_rich_probability(nu1=nu1selectedfornu2, nu2=nu2,df=df),y1=y1,y2=y2,x=nu2,a=a,d=d,G=G)
+  nu1selectedfornu2 = optimise_poor_utility_for_nu2(nu2=nu2,mu=mu,df=df,y1=y1,y2=y2,G=G,a=a,d=d).x
+  poorutil= utility_poor(p=find_poor_probability(nu1=nu1selectedfornu2, nu2=nu2,df=df,mu=mu),y1=y1,y2=y2,x=nu1selectedfornu2,a=a,d=d,G=G)
+  richutil =  utility_rich(p=find_rich_probability(nu1=nu1selectedfornu2, nu2=nu2,df=df,mu=mu),y1=y1,y2=y2,x=nu2,a=a,d=d,G=G)
   return poor_share*poorutil + rich_share* richutil
 
+def maximise_common_utilty_over_nu2 (df,mu,y1,y2,a,d,G):
+  negative_common_utility = lambda x : -common_utility(df=df,mu=mu,nu2=x,y1=y1,y2=y2,a=a,d=d,G=G)
+  res = minimize_scalar(negative_common_utility, bounds=(0, y2), method='bounded')
+  return res
 
 
+def plot_common_utility_vs_inequality(df,mu,G,a,d):
+    inequality_x=np.linspace(.1,.99,20)
+    Y = 100
+    
+    nu2_maxcommonutil_vals = []
+    maxutils=[]
+    
+    for x_ in inequality_x:
+      cury1=Y*x_
+      cury2=Y*(1-x_)
+      maxnu2val = maximise_common_utilty_over_nu2(df=df,mu=mu,y1=cury1,y2=cury2,a=a,d=d,G=G).x
+      nu2_maxcommonutil_vals.append(maxnu2val)
+      maxutil = common_utility( df=df,mu=mu,nu2=maxnu2val,y1=cury1,y2=cury2,G=G,a=a,d=d)
+      maxutils.append(maxutil)
+      
+    plt.plot(inequality_x,maxutils)
+
+    plt.xlabel('inequality')
+    plt.ylabel('common-utility')
+    
+    plt.show()
+
+
+def plot_common_utility_vs_inequality_over_mus(df,G,a,d):
+    inequality_x=np.linspace(.1,.99,20)
+    Y = 100
+    
+    mus = [.2,.3,.4]
+    
+    fig, ax = plt.subplots()
+    plot_handles=[]
+
+    for mu in mus:
+        nu2_maxcommonutil_vals = []
+        maxutils=[]
+        
+        for x_ in inequality_x:
+          cury1=Y*x_
+          cury2=Y*(1-x_)
+          maxnu2val = maximise_common_utilty_over_nu2(mu=mu,df=df,y1=cury1,y2=cury2,a=a,d=d,G=G).x
+          nu2_maxcommonutil_vals.append(maxnu2val)
+          maxutil = common_utility( mu=mu,df=df,nu2=maxnu2val,y1=cury1,y2=cury2,G=G,a=a,d=d)
+          maxutils.append(maxutil)
+      
+        l, = ax.plot(inequality_x,maxutils)
+        plot_handles.append(l)        
+        
+
+
+    ax.legend(tuple(plot_handles), tuple('mu='+str(y) for y in mus), loc='lower right', shadow=True)
+    ax.set_xlabel('inequality')
+    ax.set_ylabel('common-utility')
+    ax.set_title('common-utility vs inequality')
+
+    plt.show()
+    
 if __name__ == "__main__":
     N  = 100000
-    mu = .2
+    #mu = .2
     y1=10
     y2=100
     a = .2
@@ -172,4 +232,6 @@ if __name__ == "__main__":
     df = pd.DataFrame({'r11':r11,'s11':s11,'r12':r12,'s12':s12,'r2':r2,'s2':s2})
     #plot_rich_utility(df=df, y1=y1, y2=y2, a=a, d=d, G=G)
     #plot_poor_utility(df=df, y1=y1, y2=y2, a=a, d=d, G=G)
-    plot_common_utility_over_nu2(df=df, y1=y1, y2=y2, a=a, d=d, G=G)
+    #plot_common_utility_over_nu2(df=df, y1=y1, y2=y2, a=a, d=d, G=G)
+    #plot_common_utility_vs_inequality(df=df,G=G,a=a,d=d)
+    plot_common_utility_vs_inequality_over_mus(df=df,G=G,a=a,d=d)
