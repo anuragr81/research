@@ -9,6 +9,8 @@ import pandas as pd
 from scipy.optimize import minimize_scalar
 
 import matplotlib.pyplot as plt
+plt.rcParams['text.usetex'] = True
+
 import numpy as np
 
 
@@ -97,16 +99,20 @@ def plot_common_utility_over_nu2(df,y1,y2,a,d,G):
     plt.show()
 
 
-def plot_rich_utility (df,y1,y2,a,d,G):
+def plot_rich_utility (mu,df,y1,y2,a,d,G):
     y2s  = np.linspace(0,y2,100)
     fig, ax = plt.subplots()
     y1arr=[t*y1 for t in (.1,.3,.6,.9,)]
-    l1, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(nu1=y1arr[0],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
-    l2, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(nu1=y1arr[1],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
-    l3, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(nu1=y1arr[2],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
-    l4, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(nu1=y1arr[3],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
+    l1, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(mu=mu,nu1=y1arr[0],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
+    l2, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(mu=mu,nu1=y1arr[1],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
+    l3, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(mu=mu,nu1=y1arr[2],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
+    l4, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(mu=mu,nu1=y1arr[3],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
     
-    ax.legend((l1, l2, l3,l4), tuple('poor-expenditure='+str(y) for y in y1arr), loc='lower left', shadow=True)
+    ax.legend((l1, l2, l3,l4), 
+              #tuple('poor-expenditure \\nu_1='+str(y) for y in y1arr), 
+              tuple(r'$\sum_{n=1}^\infty$' for _ in y1arr),
+              loc='lower left', shadow=True)
+    
     ax.set_xlabel('expenditure')
     ax.set_ylabel('utility')
     ax.set_title('Utility for rich')
@@ -180,7 +186,7 @@ def plot_common_utility_vs_inequality_over_mus(df,G,a,d):
     inequality_x=np.linspace(.1,.99,20)
     Y = 100
     
-    mus = [.2,.3,.4]
+    mus = [.2,.49]
     
     fig, ax = plt.subplots()
     plot_handles=[]
@@ -230,8 +236,8 @@ if __name__ == "__main__":
     
     
     df = pd.DataFrame({'r11':r11,'s11':s11,'r12':r12,'s12':s12,'r2':r2,'s2':s2})
-    #plot_rich_utility(df=df, y1=y1, y2=y2, a=a, d=d, G=G)
+    plot_rich_utility(mu=.2,df=df, y1=y1, y2=y2, a=a, d=d, G=G)
     #plot_poor_utility(df=df, y1=y1, y2=y2, a=a, d=d, G=G)
     #plot_common_utility_over_nu2(df=df, y1=y1, y2=y2, a=a, d=d, G=G)
     #plot_common_utility_vs_inequality(df=df,G=G,a=a,d=d)
-    plot_common_utility_vs_inequality_over_mus(df=df,G=G,a=a,d=d)
+    #plot_common_utility_vs_inequality_over_mus(df=df,G=G,a=a,d=d)
