@@ -29,29 +29,37 @@ def c(x):
 """
 Makes expression from pairs of participants
 """
-def make_extraction_expression(pairs_rich_or_poor):
+def make_extraction_expression(base_participant,pairs_rich_or_poor):
+    if base_participant == "poor":
+        base_expenditure = "nu1"
+    elif base_participant == "rich":
+        base_expenditure = "nu2"
+    else:
+        raise ValueError("Unsupported type for rich/poor indicator")
+        
     expression=""
     prefix = ""
-    for poor, other,other_rich_or_poor in pairs_rich_or_poor:
+    for base, other,other_rich_or_poor in pairs_rich_or_poor:
         if other_rich_or_poor  == "poor":
-            expenditure = "nu1"
+            other_expenditure  = "nu1"
         elif other_rich_or_poor   == "rich":
-            expenditure = "nu2"
+            other_expenditure  = "nu2"
         else:
             raise ValueError("Unsupported type for rich/poor indicator")
             
-        r_poor,s_poor  = poor
+
+        r_base,s_base = base
         r_other,s_other = other
-        poor_score = (" ( mu*df.%s" % r_poor + "+c(nu1)*(1-mu)*df.%s ) " %  s_poor )
-        other_score = (" ( mu*df.%s" % r_other + "+c(" + expenditure +")*(1-mu)*df.%s ) " %  s_other)
-        expression = expression + ( prefix  + (" ( " + poor_score   + " > " + other_score + " ) ") )
+        base_score = (" ( mu*df.%s" % r_base + "+c(" + base_expenditure +  ")*(1-mu)*df.%s ) " %  s_base )
+        other_score = (" ( mu*df.%s" % r_other + "+c(" + other_expenditure +")*(1-mu)*df.%s ) " %  s_other)
+        expression = expression + ( prefix  + (" ( " + base_score   + " > " + other_score + " ) ") )
         prefix=" & "
     
     return expression
 
 
 """
-Calculates poor particiapnt's  win probability. The first-poor participant (r11,s11) is the base-particpant relative
+Calculates poor participant's  win probability. The first-poor participant (r11,s11) is the base-particpant relative
  to whom the probability to win is calculated.
 """
 def find_poor_probability_np(df,nu1, nu2,mu,numpoor, numtotal):
@@ -71,13 +79,40 @@ def find_poor_probability_np(df,nu1, nu2,mu,numpoor, numtotal):
     pairs_with_other_poor= [ x + ('poor',) for x in itertools.product([('r11','s11')],other_poor_tuples)]
     
     
-    expression = make_extraction_expression(pairs_with_rich +pairs_with_other_poor)
+    expression = make_extraction_expression("poor",pairs_with_rich +pairs_with_other_poor)
     
     res = df[eval(expression)]
     return res.shape[0]/df.shape[0]
     
+"""
+Calculates rich participant's  win probability. The first-rich participant (r21,s21) is the base-particpant relative
+ to whom the probability to win is calculated.
+"""
+def find_rich_probability_np(df,nu1, nu2,mu,numpoor,numtotal):
+    if not (isinstance(nu1,float) or isinstance(nu1,int)) or isinstance(nu1,list) or isinstance(nu1,tuple) or isinstance(nu1,np.ndarray):
+        raise ValueError("nu1 must be a scalar")
+    if not (isinstance(nu2,float) or isinstance(nu2,int)) or isinstance(nu2,list) or isinstance(nu2,tuple) or isinstance(nu2,np.ndarray):
+        raise ValueError("nu2 must be a scalar")
 
-
+    other_rich_columns_r = ["r2"+str(i+1) for i in range(1,numtotal-numpoor)]
+    other_rich_columns_s = ["s2"+str(i+1) for i in range(1,numtotal-numpoor)]
+    other_rich_tuples = [t for t in zip(other_rich_columns_r ,other_rich_columns_s ) ]
+    
+    
+    poor_columns_r = ["r1"+str(i+1) for i in range(0,numpoor)]
+    poor_columns_s = ["s1"+str(i+1) for i in range(0,numpoor)]
+    poor_tuples = [t for t in zip(poor_columns_r ,poor_columns_s) ]
+    
+    pairs_with_other_rich = [ x + ('rich',) for x in itertools.product([('r21','s21')],other_rich_tuples)]
+    pairs_with_poor= [ x + ('poor',) for x in itertools.product([('r21','s21')],poor_tuples)]
+    
+    
+    expression = make_extraction_expression("rich",pairs_with_poor +pairs_with_other_rich )
+    
+    res = df[eval(expression)]
+    return res.shape[0]/df.shape[0]
+    
+    
 def find_poor_probability(df,nu1, nu2,mu):
     if not (isinstance(nu2,float) or isinstance(nu2,int)) or isinstance(nu2,list) or isinstance(nu2,tuple) or isinstance(nu2,np.ndarray):
         raise ValueError("nu2 must be a scalar")
@@ -177,15 +212,16 @@ def plot_rich_utility (mu,df,y1,y2,a,d,G,rich_prob_func=None):
 
 
 def plot_rich_utility_over_np(N,mu,y1,y2,a,d,G):
-    y1s  = np.linspace(0,y1,100)
+    y2s  = np.linspace(0,y2,100)
     fig, ax = plt.subplots()
     
-    nparr=[(2,3),(4,6),(6,9)]
+    #nparr=[(2,3),(20,30),(40,60)]
+    nparr=[(1,2),(2,3)]
     
     plothandles=[]
     for p,n in nparr:
         df = generate_nplayer_df(N=N,numpoor =p,numtotal=n)
-        l, = ax.plot(y1s, [utility_rich(x=t,p=find_rich_probability_np(numpoor=p, numtotal=n,nu1=t,mu=mu, nu2=y2*.2,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
+        l, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability_np(numpoor=p, numtotal=n,nu1=y1*.2,mu=mu, nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
         plothandles.append(l)
         
     ax.legend(tuple(plothandles), tuple(r'$N$='+str(n)+ " $P$="+str(p) for p,n in nparr), loc='lower left', shadow=True)
@@ -199,7 +235,9 @@ def plot_poor_utility_over_np(N,mu,y1,y2,a,d,G):
     y1s  = np.linspace(0,y1,100)
     fig, ax = plt.subplots()
     
-    nparr=[(2,3),(4,6),(6,9)]
+    
+    #nparr=[(2,3),(4,6),(6,9)]
+    nparr=[(1,2),(2,3)]
     
     plothandles=[]
     for p,n in nparr:
@@ -346,8 +384,13 @@ def run_n_player_sim():
     d=1.1
 
     
-    #find_poor_probability_np(df=df,nu1=11,nu2=20,numtotal=3,numpoor=2,mu=.2)#    
+    
+    df = generate_nplayer_df(N=N,numpoor =2,numtotal=3)
     plot_poor_utility_over_np(mu=.2, y1=y1, y2=y2, a=a, d=d, G=G,N=N)
+    #plot_rich_utility_over_np(mu=.2, y1=y1, y2=y2, a=a, d=d, G=G,N=N)
+    
+    
+    
     
 def run_three_player_sim():
     N  = 100000
