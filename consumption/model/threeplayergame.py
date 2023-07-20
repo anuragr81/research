@@ -6,6 +6,7 @@ Created on Tue Jul 18 11:31:14 2023
 """
 import numpy as np
 import pandas as pd
+import itertools
 from scipy.optimize import minimize_scalar
 
 import matplotlib.pyplot as plt
@@ -17,13 +18,81 @@ import numpy as np
 #Using example from https://docs.scipy.org/doc/scipy/tutorial/optimize.html#constrained-minimization-of-multivariate-scalar-functions-minimize
 
 
-
-
 def mul(rowa,rowb):
   return np.matmul(np.asmatrix(rowa).T ,np.asmatrix(np.array(rowb)))
 
 def c(x):
   return 1 - 1 / (1+x)**.5
+
+
+"""
+Makes expression from pairs of participants
+"""
+def make_extraction_expression(pairs_rich_or_poor):
+    expression=""
+    prefix = ""
+    for poor, other,other_rich_or_poor in pairs_rich_or_poor:
+        if other_rich_or_poor  == "poor":
+            expenditure = "nu1"
+        elif other_rich_or_poor   == "rich":
+            expenditure = "nu2"
+        else:
+            raise ValueError("Unsupported type for rich/poor indicator")
+            
+        r_poor,s_poor  = poor
+        r_other,s_other = other
+        poor_score = (" ( mu*df.%s" % r_poor + "+c(nu1)*(1-mu)*df.%s ) " %  s_poor )
+        other_score = (" ( mu*df.%s" % r_other + "+c(" + expenditure +")*(1-mu)*df.%s ) " %  s_other)
+        expression = expression + ( prefix  + (" ( " + poor_score   + " < " + other_score + " ) ") )
+        prefix=" & "
+    
+    return expression
+
+
+def find_poor_probability_np(df,nu1, nu2,mu,numpoor, numtotal):
+    
+    """
+    scalar_apply = lambda  x: df [  ( ( df.r11* mu + (1-mu)*df.s11 *c(x) )  > (df.r12* mu + (1-mu)*df.s12*c(x)) )   & ( (df.r11*mu + (1-mu)*df.s11 * c(x)) > (df.r2* mu + (1-mu)*df.s2 * c(nu2)) )]
+    
+    
+    if isinstance(nu1,np.ndarray) or isinstance(nu1,tuple) or isinstance(nu1,list):
+        if len(nu1):
+            resarr=[]
+            for nu1_ in nu1:
+              res = scalar_apply(nu1_)
+              resarr.append(res.shape[0]/df.shape[0])
+              return np.array(resarr)
+    else:
+        res = scalar_apply(nu1)
+        return res.shape[0]/df.shape[0]
+    """
+    if not (isinstance(nu2,float) or isinstance(nu2,int)) or isinstance(nu2,list) or isinstance(nu2,tuple) or isinstance(nu2,np.ndarray):
+        raise ValueError("nu2 must be a scalar")
+    """
+    The first-poor participant (r11,s11) is the base-particpant relative
+    to whom the probability to win is calculated
+    """
+    other_poor_columns_r = ["r1"+str(i+1) for i in range(1,numpoor)]
+    other_poor_columns_s = ["s1"+str(i+1) for i in range(1,numpoor)]
+    other_poor_tuples = [t for t in zip(other_poor_columns_r ,other_poor_columns_s) ]
+    
+    
+    rich_columns_r = ["r2"+str(i+1) for i in range(0,numtotal-numpoor)]
+    rich_columns_s = ["s2"+str(i+1) for i in range(0,numtotal-numpoor)]
+    rich_tuples = [t for t in zip(rich_columns_r ,rich_columns_s) ]
+    
+    pairs_with_rich = [ x + ('rich',) for x in itertools.product([('r11','s11')],rich_tuples)]
+    pairs_with_other_poor= [ x + ('poor',) for x in itertools.product([('r11','s11')],other_poor_tuples)]
+    
+    
+    #( ( df.r11* mu + (1-mu)*df.s11 *c(x) )  > (df.r12* mu + (1-mu)*df.s12*c(x)) )   
+    # & ( (df.r11*mu + (1-mu)*df.s11 * c(x)) > (df.r2* mu + (1-mu)*df.s2 * c(nu2)) )
+    expression = make_extraction_expression(pairs_with_rich +pairs_with_other_poor)
+    
+    res = df[eval(expression)]
+    return res.shape[0]/df.shape[0]
+    
+
 
 def find_poor_probability(df,nu1, nu2,mu):
     if not (isinstance(nu2,float) or isinstance(nu2,int)) or isinstance(nu2,list) or isinstance(nu2,tuple) or isinstance(nu2,np.ndarray):
@@ -136,15 +205,6 @@ def plot_poor_utility(df,mu,y1,y2,a,d,G):
     plt.show()
     
 
-
-
-
-
-
-
-
-
-
 def common_utility(df,mu,nu2,y1,y2,G,a,d):
   poor_share=.3
   rich_share=1-poor_share
@@ -215,15 +275,8 @@ def plot_common_utility_vs_inequality_over_mus(df,G,a,d):
 
     plt.show()
     
-if __name__ == "__main__":
-    N  = 100000
-    #mu = .2
-    y1=10
-    y2=100
-    a = .2
-    G=10
-    d=1.1
-    
+
+def generate_threeplayer_df (N):
     
     r11=np.random.uniform(0,1,N)
     s11=np.random.uniform(0,1,N)
@@ -236,8 +289,60 @@ if __name__ == "__main__":
     
     
     df = pd.DataFrame({'r11':r11,'s11':s11,'r12':r12,'s12':s12,'r2':r2,'s2':s2})
+    return df
+
+def generate_nplayer_df (N,numpoor,numtotal):
+    if numtotal <= numpoor:
+        raise ValueError("numpoor must be less than or equal to numtotal")
+        
+    poor_columns_r = ["r1"+str(i+1) for i in range(0,numpoor)]
+    poor_columns_s = ["s1"+str(i+1) for i in range(0,numpoor)]   
+    
+    
+    rich_columns_r = ["r2"+str(i+1) for i in range(0,numtotal-numpoor)]
+    rich_columns_s = ["s2"+str(i+1) for i in range(0,numtotal-numpoor)]
+    
+    all_cols = poor_columns_r + poor_columns_s + rich_columns_r  + rich_columns_s
+   
+    df = pd.DataFrame(dict ( (colname,np.random.uniform(0,1,N)) for colname in all_cols) )
+    return df
+
+
+
+def run_n_player_sim():
+    N  = 100000
+    #mu = .2
+    y1=10
+    y2=100
+    a = .2
+    G=10
+    d=1.1
+    numpoor = 2
+    numtotal =3
+    
+    df = generate_nplayer_df(N=N,numpoor =numpoor ,numtotal=numtotal)
+    print(df)
     #plot_rich_utility(mu=.2,df=df, y1=y1, y2=y2, a=a, d=d, G=G)
-    plot_poor_utility(df=df,mu=.2, y1=y1, y2=y2, a=a, d=d, G=G)
+
+
+def run_three_player_sim():
+    N  = 100000
+    #mu = .2
+    y1=10
+    y2=100
+    a = .2
+    G=10
+    d=1.1
+    
+    df = generate_threeplayer_df(N)
+    plot_rich_utility(mu=.2,df=df, y1=y1, y2=y2, a=a, d=d, G=G)
+    #plot_poor_utility(df=df,mu=.2, y1=y1, y2=y2, a=a, d=d, G=G)
     #plot_common_utility_over_nu2(df=df, y1=y1, y2=y2, a=a, d=d, G=G)
     #plot_common_utility_vs_inequality(df=df,G=G,a=a,d=d)
     #plot_common_utility_vs_inequality_over_mus(df=df,G=G,a=a,d=d)
+    
+    #find_poor_probability_np(df=df,nu1=2,nu2=20,mu=.2, numpoor=2,numtotal=3)
+    
+if __name__ == "__main__":
+    #run_three_player_sim()
+    run_n_player_sim()
