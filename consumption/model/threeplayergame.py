@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import itertools
 from scipy.optimize import minimize_scalar
+import functools
 
 import matplotlib.pyplot as plt
 plt.rcParams['text.usetex'] = True
@@ -43,35 +44,20 @@ def make_extraction_expression(pairs_rich_or_poor):
         r_other,s_other = other
         poor_score = (" ( mu*df.%s" % r_poor + "+c(nu1)*(1-mu)*df.%s ) " %  s_poor )
         other_score = (" ( mu*df.%s" % r_other + "+c(" + expenditure +")*(1-mu)*df.%s ) " %  s_other)
-        expression = expression + ( prefix  + (" ( " + poor_score   + " < " + other_score + " ) ") )
+        expression = expression + ( prefix  + (" ( " + poor_score   + " > " + other_score + " ) ") )
         prefix=" & "
     
     return expression
 
 
+"""
+Calculates poor particiapnt's  win probability. The first-poor participant (r11,s11) is the base-particpant relative
+ to whom the probability to win is calculated.
+"""
 def find_poor_probability_np(df,nu1, nu2,mu,numpoor, numtotal):
     
-    """
-    scalar_apply = lambda  x: df [  ( ( df.r11* mu + (1-mu)*df.s11 *c(x) )  > (df.r12* mu + (1-mu)*df.s12*c(x)) )   & ( (df.r11*mu + (1-mu)*df.s11 * c(x)) > (df.r2* mu + (1-mu)*df.s2 * c(nu2)) )]
-    
-    
-    if isinstance(nu1,np.ndarray) or isinstance(nu1,tuple) or isinstance(nu1,list):
-        if len(nu1):
-            resarr=[]
-            for nu1_ in nu1:
-              res = scalar_apply(nu1_)
-              resarr.append(res.shape[0]/df.shape[0])
-              return np.array(resarr)
-    else:
-        res = scalar_apply(nu1)
-        return res.shape[0]/df.shape[0]
-    """
     if not (isinstance(nu2,float) or isinstance(nu2,int)) or isinstance(nu2,list) or isinstance(nu2,tuple) or isinstance(nu2,np.ndarray):
         raise ValueError("nu2 must be a scalar")
-    """
-    The first-poor participant (r11,s11) is the base-particpant relative
-    to whom the probability to win is calculated
-    """
     other_poor_columns_r = ["r1"+str(i+1) for i in range(1,numpoor)]
     other_poor_columns_s = ["s1"+str(i+1) for i in range(1,numpoor)]
     other_poor_tuples = [t for t in zip(other_poor_columns_r ,other_poor_columns_s) ]
@@ -85,8 +71,6 @@ def find_poor_probability_np(df,nu1, nu2,mu,numpoor, numtotal):
     pairs_with_other_poor= [ x + ('poor',) for x in itertools.product([('r11','s11')],other_poor_tuples)]
     
     
-    #( ( df.r11* mu + (1-mu)*df.s11 *c(x) )  > (df.r12* mu + (1-mu)*df.s12*c(x)) )   
-    # & ( (df.r11*mu + (1-mu)*df.s11 * c(x)) > (df.r2* mu + (1-mu)*df.s2 * c(nu2)) )
     expression = make_extraction_expression(pairs_with_rich +pairs_with_other_poor)
     
     res = df[eval(expression)]
@@ -168,14 +152,16 @@ def plot_common_utility_over_nu2(df,y1,y2,a,d,G):
     plt.show()
 
 
-def plot_rich_utility (mu,df,y1,y2,a,d,G):
+def plot_rich_utility (mu,df,y1,y2,a,d,G,rich_prob_func=None):
+    if not rich_prob_func:
+        rich_prob_func=find_rich_probability
     y2s  = np.linspace(0,y2,100)
     fig, ax = plt.subplots()
     y1arr=[t*y1 for t in (.1,.3,.6,.9,)]
-    l1, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(mu=mu,nu1=y1arr[0],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
-    l2, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(mu=mu,nu1=y1arr[1],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
-    l3, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(mu=mu,nu1=y1arr[2],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
-    l4, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability(mu=mu,nu1=y1arr[3],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
+    l1, = ax.plot(y2s, [utility_rich(x=t,p=rich_prob_func(mu=mu,nu1=y1arr[0],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
+    l2, = ax.plot(y2s, [utility_rich(x=t,p=rich_prob_func(mu=mu,nu1=y1arr[1],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
+    l3, = ax.plot(y2s, [utility_rich(x=t,p=rich_prob_func(mu=mu,nu1=y1arr[2],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
+    l4, = ax.plot(y2s, [utility_rich(x=t,p=rich_prob_func(mu=mu,nu1=y1arr[3],nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
     
     ax.legend((l1, l2, l3,l4), 
               #tuple('poor-expenditure \\nu_1='+str(y) for y in y1arr), 
@@ -189,14 +175,55 @@ def plot_rich_utility (mu,df,y1,y2,a,d,G):
 
 
 
-def plot_poor_utility(df,mu,y1,y2,a,d,G):
+
+def plot_rich_utility_over_np(N,mu,y1,y2,a,d,G):
+    y1s  = np.linspace(0,y1,100)
+    fig, ax = plt.subplots()
+    
+    nparr=[(2,3),(4,6),(6,9)]
+    
+    plothandles=[]
+    for p,n in nparr:
+        df = generate_nplayer_df(N=N,numpoor =p,numtotal=n)
+        l, = ax.plot(y1s, [utility_rich(x=t,p=find_rich_probability_np(numpoor=p, numtotal=n,nu1=t,mu=mu, nu2=y2*.2,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
+        plothandles.append(l)
+        
+    ax.legend(tuple(plothandles), tuple(r'$N$='+str(n)+ " $P$="+str(p) for p,n in nparr), loc='lower left', shadow=True)
+    ax.set_xlabel(r'Rich Expenditure - $\nu_2$')
+    ax.set_ylabel('rich-utility')
+    ax.set_title('Utility for Rich')
+    plt.show()
+    
+
+def plot_poor_utility_over_np(N,mu,y1,y2,a,d,G):
+    y1s  = np.linspace(0,y1,100)
+    fig, ax = plt.subplots()
+    
+    nparr=[(2,3),(4,6),(6,9)]
+    
+    plothandles=[]
+    for p,n in nparr:
+        df = generate_nplayer_df(N=N,numpoor =p,numtotal=n)
+        l, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability_np(numpoor=p, numtotal=n,nu1=t,mu=mu, nu2=y2*.2,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
+        plothandles.append(l)
+        
+    ax.legend(tuple(plothandles), tuple(r'$N$='+str(n)+ " $P$="+str(p) for p,n in nparr), loc='lower left', shadow=True)
+    ax.set_xlabel(r'Poor Expenditure - $\nu_1$')
+    ax.set_ylabel('poor-utility')
+    ax.set_title('Utility for poor')
+    plt.show()
+    
+
+def plot_poor_utility(df,mu,y1,y2,a,d,G,poor_prob_func):
+    if not poor_prob_func:
+        poor_prob_func = find_poor_probability
     y1s  = np.linspace(0,y1,100)
     fig, ax = plt.subplots()
     y2arr=[t*y2 for t in (.1,.3,.6,.9,)]
-    l1, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t,mu=mu, nu2=y2arr[0],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
-    l2, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t,mu=mu, nu2=y2arr[1],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
-    l3, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t,mu=mu, nu2=y2arr[2],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
-    l4, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability(nu1=t,mu=mu, nu2=y2arr[3],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
+    l1, = ax.plot(y1s, [utility_poor(x=t,p=poor_prob_func(nu1=t,mu=mu, nu2=y2arr[0],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
+    l2, = ax.plot(y1s, [utility_poor(x=t,p=poor_prob_func(nu1=t,mu=mu, nu2=y2arr[1],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
+    l3, = ax.plot(y1s, [utility_poor(x=t,p=poor_prob_func(nu1=t,mu=mu, nu2=y2arr[2],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
+    l4, = ax.plot(y1s, [utility_poor(x=t,p=poor_prob_func(nu1=t,mu=mu, nu2=y2arr[3],df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
     
     ax.legend((l1, l2, l3,l4), tuple(r'$\nu_2$='+str(y) for y in y2arr), loc='lower left', shadow=True)
     ax.set_xlabel(r'Poor Expenditure - $\nu_1$')
@@ -317,14 +344,11 @@ def run_n_player_sim():
     a = .2
     G=10
     d=1.1
-    numpoor = 2
-    numtotal =3
+
     
-    df = generate_nplayer_df(N=N,numpoor =numpoor ,numtotal=numtotal)
-    print(df)
-    #plot_rich_utility(mu=.2,df=df, y1=y1, y2=y2, a=a, d=d, G=G)
-
-
+    #find_poor_probability_np(df=df,nu1=11,nu2=20,numtotal=3,numpoor=2,mu=.2)#    
+    plot_poor_utility_over_np(mu=.2, y1=y1, y2=y2, a=a, d=d, G=G,N=N)
+    
 def run_three_player_sim():
     N  = 100000
     #mu = .2
@@ -337,7 +361,7 @@ def run_three_player_sim():
     df = generate_threeplayer_df(N)
     plot_rich_utility(mu=.2,df=df, y1=y1, y2=y2, a=a, d=d, G=G)
     #plot_poor_utility(df=df,mu=.2, y1=y1, y2=y2, a=a, d=d, G=G)
-    #plot_common_utility_over_nu2(df=df, y1=y1, y2=y2, a=a, d=d, G=G)
+    #plot_common_utility_over_nu2(df=df, y1=y1, y2=y2, a=a, d=d, G=G
     #plot_common_utility_vs_inequality(df=df,G=G,a=a,d=d)
     #plot_common_utility_vs_inequality_over_mus(df=df,G=G,a=a,d=d)
     
