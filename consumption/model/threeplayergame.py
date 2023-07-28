@@ -57,6 +57,25 @@ def make_extraction_expression(base_participant,pairs_rich_or_poor):
     
     return expression
 
+"""
+Uniformly distributed normal and uniform variables
+"""
+def generate_nplayer_unif_df (N,numpoor,numtotal):
+    if numtotal <= numpoor:
+        raise ValueError("numpoor must be less than or equal to numtotal")
+        
+    poor_columns_r = ["r1"+str(i+1) for i in range(0,numpoor)]
+    poor_columns_s = ["s1"+str(i+1) for i in range(0,numpoor)]   
+    
+    
+    rich_columns_r = ["r2"+str(i+1) for i in range(0,numtotal-numpoor)]
+    rich_columns_s = ["s2"+str(i+1) for i in range(0,numtotal-numpoor)]
+    
+    all_cols = poor_columns_r + poor_columns_s + rich_columns_r  + rich_columns_s
+   
+    df = pd.DataFrame(dict ( (colname,np.random.uniform(0,1,N)) for colname in all_cols) )
+    return df
+
 
 """
 Calculates poor participant's  win probability. The first-poor participant (r11,s11) is the base-particpant relative
@@ -112,7 +131,7 @@ def find_rich_probability_np(df,nu1, nu2,mu,numpoor,numtotal):
     res = df[eval(expression)]
     return res.shape[0]/df.shape[0]
     
-    
+
 def find_poor_probability(df,nu1, nu2,mu):
     if not (isinstance(nu2,float) or isinstance(nu2,int)) or isinstance(nu2,list) or isinstance(nu2,tuple) or isinstance(nu2,np.ndarray):
         raise ValueError("nu2 must be a scalar")
@@ -211,7 +230,7 @@ def plot_rich_utility (mu,df,y1,y2,a,d,G,rich_prob_func=None):
 
 
 
-def plot_rich_utility_over_np(N,mu,y1,y2,a,d,G):
+def plot_rich_utility_over_np(N,mu,y1,y2,a,d,G,df_generator_func=generate_nplayer_unif_df):
     y2s  = np.linspace(0,y2,100)
     fig, ax = plt.subplots()
     
@@ -220,7 +239,7 @@ def plot_rich_utility_over_np(N,mu,y1,y2,a,d,G):
     
     plothandles=[]
     for p,n in nparr:
-        df = generate_nplayer_df(N=N,numpoor =p,numtotal=n)
+        df = df_generator_func(N=N,numpoor =p,numtotal=n)
         l, = ax.plot(y2s, [utility_rich(x=t,p=find_rich_probability_np(numpoor=p, numtotal=n,nu1=y1*.2,mu=mu, nu2=t,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y2s])
         plothandles.append(l)
         
@@ -231,17 +250,58 @@ def plot_rich_utility_over_np(N,mu,y1,y2,a,d,G):
     plt.show()
     
 
-def plot_poor_utility_over_np(N,mu,y1,y2,a,d,G):
+def plot_rich_probability_over_np(N,mu,y1,y2,df_generator_func = generate_nplayer_unif_df):
+    y2s  = np.linspace(0,y2,100)
+    fig, ax = plt.subplots()
+    
+    
+    #nparr=[(2,3),(4,6),(6,9)]
+    nparr=[(2,3),(4,6),(20,30),(40,60)]
+    
+    plothandles=[]
+    for p,n in nparr:
+        df = df_generator_func(N=N,numpoor =p,numtotal=n)
+        l, = ax.plot(y2s, [find_rich_probability_np(numpoor=p, numtotal=n,nu2=t,mu=mu, nu1=y1*.2,df=df) for t in y2s])
+        plothandles.append(l)
+        
+    ax.legend(tuple(plothandles), tuple(r'$N$='+str(n)+ " $P$="+str(p) for p,n in nparr), loc='upper right', shadow=True)
+    ax.set_xlabel(r'expenditure')
+    ax.set_ylabel('win probability')
+    ax.set_title('Rich Winning Probability')
+    plt.show()
+    
+def plot_poor_probability_over_np(N,mu,y1,y2,df_generator_func=generate_nplayer_unif_df):
     y1s  = np.linspace(0,y1,100)
     fig, ax = plt.subplots()
     
     
     #nparr=[(2,3),(4,6),(6,9)]
-    nparr=[(1,2),(2,3)]
+    nparr=[(2,3),(4,6),(20,30),(40,60)]
     
     plothandles=[]
     for p,n in nparr:
-        df = generate_nplayer_df(N=N,numpoor =p,numtotal=n)
+        df = df_generator_func(N=N,numpoor =p,numtotal=n)
+        l, = ax.plot(y1s, [find_poor_probability_np(numpoor=p, numtotal=n,nu1=t,mu=mu, nu2=y2*.2,df=df) for t in y1s])
+        plothandles.append(l)
+        
+    ax.legend(tuple(plothandles), tuple(r'$N$='+str(n)+ " $P$="+str(p) for p,n in nparr), loc='upper left', shadow=True)
+    ax.set_xlabel(r'expenditure')
+    ax.set_ylabel('win probability')
+    ax.set_title('Poor Winning Probability')
+    plt.show()
+
+
+def plot_poor_utility_over_np(N,mu,y1,y2,a,d,G,df_generator_func=generate_nplayer_unif_df):
+    y1s  = np.linspace(0,y1,100)
+    fig, ax = plt.subplots()
+    
+    
+    #nparr=[(2,3),(4,6),(6,9)]
+    nparr=[(1,2),(2,3),(4,6),(20,30)]
+    
+    plothandles=[]
+    for p,n in nparr:
+        df = df_generator_func(N=N,numpoor =p,numtotal=n)
         l, = ax.plot(y1s, [utility_poor(x=t,p=find_poor_probability_np(numpoor=p, numtotal=n,nu1=t,mu=mu, nu2=y2*.2,df=df),y1=y1,y2=y2,a=a,d=d,G=G) for t in y1s])
         plothandles.append(l)
         
@@ -356,7 +416,9 @@ def generate_threeplayer_df (N):
     df = pd.DataFrame({'r11':r11,'s11':s11,'r12':r12,'s12':s12,'r2':r2,'s2':s2})
     return df
 
-def generate_nplayer_df (N,numpoor,numtotal):
+
+def generate_nplayer_norm_df (N,numpoor,numtotal):
+    print("Using normal random variables with for N=%f , P=%f" % (numtotal,numpoor))
     if numtotal <= numpoor:
         raise ValueError("numpoor must be less than or equal to numtotal")
         
@@ -369,9 +431,8 @@ def generate_nplayer_df (N,numpoor,numtotal):
     
     all_cols = poor_columns_r + poor_columns_s + rich_columns_r  + rich_columns_s
    
-    df = pd.DataFrame(dict ( (colname,np.random.uniform(0,1,N)) for colname in all_cols) )
+    df = pd.DataFrame(dict ( (colname,np.random.normal(0,2,N)) for colname in all_cols) )
     return df
-
 
 
 def run_n_player_sim():
@@ -385,10 +446,13 @@ def run_n_player_sim():
 
     
     
-    df = generate_nplayer_df(N=N,numpoor =2,numtotal=3)
-    plot_poor_utility_over_np(mu=.2, y1=y1, y2=y2, a=a, d=d, G=G,N=N)
+    #df = generate_nplayer_df(N=N,numpoor =2,numtotal=3)
+    #df=generate_nplayer_norm_df(1000,2,3)
+    #plot_poor_utility_over_np(mu=.2, y1=y1, y2=y2, a=a, d=d, G=G,N=N)
+    plot_poor_probability_over_np(N=N,mu=.2,y1=y1,y2=y2,   df_generator_func = generate_nplayer_norm_df)
+    #plot_rich_probability_over_np(N=N,mu=.2,y1=y1,y2=y2)
     #plot_rich_utility_over_np(mu=.2, y1=y1, y2=y2, a=a, d=d, G=G,N=N)
-    
+    #find_poor_probability_np(df=df,nu1=2,nu2=20,mu=.2, numpoor=2,numtotal=3)
     
     
     
@@ -401,14 +465,18 @@ def run_three_player_sim():
     G=10
     d=1.1
     
-    df = generate_threeplayer_df(N)
-    plot_rich_utility(mu=.2,df=df, y1=y1, y2=y2, a=a, d=d, G=G)
+    #df = generate_threeplayer_df(N)
+    
+    #plot_rich_utility(mu=.2,df=df, y1=y1, y2=y2, a=a, d=d, G=G)
     #plot_poor_utility(df=df,mu=.2, y1=y1, y2=y2, a=a, d=d, G=G)
     #plot_common_utility_over_nu2(df=df, y1=y1, y2=y2, a=a, d=d, G=G
     #plot_common_utility_vs_inequality(df=df,G=G,a=a,d=d)
     #plot_common_utility_vs_inequality_over_mus(df=df,G=G,a=a,d=d)
     
     #find_poor_probability_np(df=df,nu1=2,nu2=20,mu=.2, numpoor=2,numtotal=3)
+    print("DONE")
+    
+    
     
 if __name__ == "__main__":
     #run_three_player_sim()
