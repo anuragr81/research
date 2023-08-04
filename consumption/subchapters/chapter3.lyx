@@ -1183,34 +1183,52 @@ noindent
 \end_layout
 
 \begin_layout Standard
-Let's consider the likelihood of a participant 
+With a privately known raw-talent 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and skills (social-capital) 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ - with both distributed uniformly and the latter enhanced with expenditure
+ - we consider the likelihood of any participant 
 \begin_inset Formula $i\in[1,N]$
 \end_inset
 
- winning in a competition that rewards a privately known raw talent 
+ as the probability for their total score 
+\begin_inset Formula $\mu r_{i}+(1-\mu)s_{i}$
+\end_inset
+
+ being higher than any other participant.
+ 
+\begin_inset Formula $\mu\in(0,1)$
+\end_inset
+
+ is a parameter that combines skills 
+\begin_inset Formula $s$
+\end_inset
+
+ and raw-talent 
+\begin_inset Formula $r$
+\end_inset
+
+ so that the participant with maximum score 
+\begin_inset Formula $\mu r+(1-\mu)s$
+\end_inset
+
+ wins the competition.
+ 
+\end_layout
+
+\begin_layout Standard
+Notice that a much simpler competition results when participants compete
+ with raw-talents alone, so that the consumer with maximum 
 \begin_inset Formula $r_{i}$
 \end_inset
 
- and a set of skills that are curated in social institutions.
- A similar all-pay auction approach is discussed by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "hopkinsWhichInequality2010"
-literal "false"
-
-\end_inset
-
-.
- When competing with raw-talents alone, we assume that the set 
-\begin_inset Formula $\{r_{i}\}_{i\in[1,N]}$
-\end_inset
-
- is a total order so that the maximum 
-\begin_inset Formula $r_{i}$
-\end_inset
-
- would win the raw-talent competition.
- In other words, the winner would be a player 
+ wins.
+ In a competition of raw-talents, the winner is a player 
 \begin_inset Formula $j$
 \end_inset
 
@@ -1218,11 +1236,7 @@ literal "false"
 \begin_inset Formula $\{r_{i}<r_{j}\forall i\in[1,N]\}$
 \end_inset
 
- .
-\end_layout
-
-\begin_layout Standard
-Based only on raw-talent, the probability that a given participant 
+ and the probability that a given participant 
 \begin_inset Formula $i$
 \end_inset
 
@@ -1260,84 +1274,45 @@ Based only on raw-talent, the probability that a given participant
 \begin_inset Formula $i\in[1,N]$
 \end_inset
 
- and therefore, the above integral becomes 
+ and therefore, the probability is evaluates to 
 \begin_inset Formula $\int_{0}^{1}{(r_{i})^{N-1}}dr_{i}=\frac{1}{N}$
 \end_inset
 
 .
  With more players, the chances of a particular participant winning declines.
-\end_layout
-
-\begin_layout Standard
-In the fixed-population, the elite are replaced only with a status competition
- that relies both on raw-talent and skills 
-\begin_inset Formula $s_{i}$
-\end_inset
-
- that are curated in social institutions.
- The true rewards from the skills (which too vary according to a uniform
- distribution) are based on the investment 
-\begin_inset Formula $\overline{\nu}$
-\end_inset
-
- - an arrangement that favours a rich participant.
- To consider the score comprising both of raw-talent and skills, we consider
- a parameter 
-\begin_inset Formula $\mu\in(0,1)$
-\end_inset
-
- that combines skills 
-\begin_inset Formula $s$
-\end_inset
-
- and raw-talent 
-\begin_inset Formula $r$
-\end_inset
-
- so that the participant with maximum score 
-\begin_inset Formula $\mu r+(1-\mu)s$
-\end_inset
-
- wins the competition.
- It's worth emphasising that the skills 
-\begin_inset Formula $s$
-\end_inset
-
- are rewarded only for a cost.
- Unlike 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "hopkinsWhichInequality2010"
-literal "false"
-
-\end_inset
-
-, we also the institutional bias in the model - an approach that we base
- on the arguments from 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "goode2022celebrationheroes"
-literal "false"
-
-\end_inset
-
-.
  
 \end_layout
 
 \begin_layout Standard
-An imporant assumption in the analysis that follows is that raw-talent would
- still be less valued than skills cultivated by institutions even if skills-enha
-ncements multiplier 
-\begin_inset Formula $(1-\mu)$
+Introducing the skills 
+\begin_inset Formula $s_{i}$
 \end_inset
 
- were the same for all participants.
- As as result, the condition 
+ which are curated in social institutions, we consider a threshold investment
+ 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ which is necessary to be spent for the social capital to be available to
+ a participant.
+ While this is an arrangement that evidently favours the rich participant,
+ there are also diminsihing returns to investing 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ towards the richer position.
+ 
+\end_layout
+
+\begin_layout Standard
+An imporant assumption in the foregoing analysis is that raw-talent is less
+ valued than skills cultivated by institutions.
+ As as result, we have 
 \begin_inset Formula $1-\mu>\mu$
 \end_inset
 
- is assumed in the rest of the discussion.
+ in the rest of the discussion.
+ This is stated as the following assumption.
 \end_layout
 
 \begin_layout Assumption
@@ -1369,10 +1344,16 @@ status open
 \end_layout
 
 \begin_layout Standard
-We use a discrete response to costs of participation to arrive at a closed-form
- solution of the equilibrium.
- The participants in the model face different probabilities if their investment
- is above or below a threshold.
+With the threshold investment 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ as a discrete response to costs of participation, the participants face
+ different probabilities to win depending on whether they spend 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ or not.
  More specifically, the participant takes advantage of the skills with weight
  
 \begin_inset Formula $1-\mu$
@@ -1398,7 +1379,7 @@ t altogether and keep the investment towards savings instead.
 \end_layout
 
 \begin_layout Standard
-The result we use depends on the distribution of 
+The result we use depends on the following distribution function of 
 \begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
 \end_inset
 
@@ -1410,10 +1391,6 @@ plural "false"
 caps "false"
 noprefix "false"
 
-\end_inset
-
- which leads to 
-\begin_inset Formula $\mu<1-\mu$
 \end_inset
 
  (see Appendix A).
@@ -1450,12 +1427,8 @@ In the game where a participant
 
  so that only the top-scorer gets to occupy the only rich position in every
  competition.
- The solution considers the expected behaviour of the rich and the poor
- participants in the long-term.
-\end_layout
-
-\begin_layout Standard
-As such there are four different cases that arise in the equilibrium.
+ We now consider the expected behaviour of the rich and the poor participants
+ in the long-term and the four different cases that arise in the equilibrium.
 \end_layout
 
 \begin_layout Itemize
@@ -1502,6 +1475,8 @@ Case IV - Both poor rich and participant participate with
 \end_layout
 
 \begin_layout Standard
+
+\bar under
 With Case I, the poor participant can win when her raw-talent (weighted
  with 
 \begin_inset Formula $\mu$
@@ -1509,7 +1484,9 @@ With Case I, the poor participant can win when her raw-talent (weighted
 
 ) is higher than that of all other poor participants as well as the total
  score of the rich participants (who compete with acquired skills).
- In this scenario, the poor are priced out of accessing any skills 
+ 
+\bar default
+In this scenario, the poor are priced out of accessing any skills 
 \begin_inset Formula $s$
 \end_inset
 
@@ -1772,6 +1749,13 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/poor_winning_probability_over_n.png
+	width 5in
+
+\end_inset
+
 
 \end_layout
 
@@ -1787,7 +1771,37 @@ Probability to win for poor with increasing number of participants
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/rich_winning_probability_over_n.png
+	width 5in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Probability to win for rich with increasing number of participants
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
