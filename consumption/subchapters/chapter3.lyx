@@ -148,38 +148,6 @@ Anurag Srivastava (a.srivastava@pgr.reading.ac.uk)
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Abstract
-This is an abstract.
-\end_layout
-
-\begin_layout Abstract
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -1561,10 +1529,10 @@ In the game where a participant
 \begin_inset Formula $N-P$
 \end_inset
 
- so that only the top-scorer gets to occupy the only rich position in every
- competition.
- We now consider the expected behaviour of the rich and the poor participants
- in the long-term and the four different cases that arise in the equilibrium.
+ so that only the top-scorer gets to occupy the only rich position available
+ to be filled in every competition.
+ The expected behaviour of the rich and the poor participants in the long-term
+ can be explained with four different cases of equilibrium.
 \end_layout
 
 \begin_layout Itemize
@@ -1573,7 +1541,7 @@ t
 \begin_inset Formula $\nu_{1}=0$
 \end_inset
 
- while the rich participant does with 
+ while the rich participant does participate by spending 
 \begin_inset Formula $\nu_{2}=\overline{\nu}$
 \end_inset
 
@@ -1585,7 +1553,7 @@ Case II - The rich participant does not participate with
 \begin_inset Formula $\nu_{2}=0$
 \end_inset
 
- but the poor participant does i.e.
+ but the poor participant does participate i.e.
  
 \begin_inset Formula $\nu_{1}=\overline{\nu}$
 \end_inset
@@ -1594,7 +1562,7 @@ Case II - The rich participant does not participate with
 \end_layout
 
 \begin_layout Itemize
-Case III - Both poor and rich participants do not participate and 
+Case III - Both poor and rich participants do not participate so that 
 \begin_inset Formula $\nu_{1}=\nu_{2}=0$
 \end_inset
 
@@ -1611,22 +1579,20 @@ Case IV - Both poor rich and participant participate with
 \end_layout
 
 \begin_layout Standard
-
-\bar under
 With Case I, the poor participant can win when her raw-talent (weighted
  with 
 \begin_inset Formula $\mu$
 \end_inset
 
-) is higher than that of all other poor participants as well as the total
- score of the rich participants (who compete with acquired skills).
- 
-\bar default
-In this scenario, the poor are priced out of accessing any skills 
+) is higher than the total score of all other poor participants as well
+ as the total score of the rich participants (who compete with acquired
+ skills).
+ The poor are priced out of accessing any skills 
 \begin_inset Formula $s$
 \end_inset
 
- in their score so that only the rich participants with investment 
+ in their score in Case I so that only the rich participants with investment
+ 
 \begin_inset Formula $\nu_{2}=$
 \end_inset
 
@@ -1640,12 +1606,11 @@ In this scenario, the poor are priced out of accessing any skills
 
 .
  Thus, a given poor participant must be ahead both of all of the poor participan
-ts and the rich participants.
- In other words, a participant 
+ts and the rich participants so that a participant 
 \begin_inset Formula $i$
 \end_inset
 
- can win if 
+ may win only if 
 \begin_inset Formula $\mu r_{i}$
 \end_inset
 
@@ -1662,9 +1627,9 @@ ts and the rich participants.
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-P_{1}(\text{win}|r_{i}) & =\prod_{k=1,k\ne i}^{P}P(\mu r_{k}<\mu r_{i})\prod_{k=P+1}^{N}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i})=r_{i}^{P-1}F_{X}(\mu r_{i})^{N-P}
-\end{align*}
+\begin{align}
+P_{1}(\text{win}|r_{i}) & =\prod_{k=1,k\ne i}^{P}P(\mu r_{k}<\mu r_{i})\prod_{k=P+1}^{N}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i})=r_{i}^{P-1}F_{X}(\mu r_{i})^{N-P}\label{eq:CaseI_general}
+\end{align}
 
 \end_inset
 
@@ -1706,27 +1671,7 @@ With the uniform density for
 \end_inset
 
 .
- For the purposes of our discussion we discuss the solution with 
-\begin_inset Formula $N=3,P=2$
-\end_inset
-
- in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Three-player-Discrete-Model"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- This three-player model represents a situation where rich participants
- are outnumbered by poor participant in a fixed-population game.
-\end_layout
-
-\begin_layout Standard
-Notice that since only one player can win the skills-game, the probability
+ Notice that since only one participant can win the skills-game, the probability
  
 \begin_inset Formula $\int_{0}^{1}\int_{0}^{1}P_{2}(\text{win}|r_{i},s_{i})ds_{i}dr_{i}$
 \end_inset
@@ -1744,16 +1689,20 @@ In Case II, when the rich person does not participate (i.e.
 \begin_inset Formula $\nu_{2}=0$
 \end_inset
 
-), the poor participant has the skills-advantage in the game.
- and 
+), the poor participant has the skills-advantage in the game so the the
+ probability to win for the poor participant 
+\begin_inset Formula $i$
+\end_inset
+
+ is
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{multline*}
+\begin{multline}
 P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\prod_{k=P+1}^{N}P(\mu r_{k}<\mu r_{i}+(1-\mu)s_{i})\\
-=F_{X}(x_{i})^{P-1}\prod_{k=P+1}^{N}P(\mu r_{k}<\mu r_{i}+(1-\mu)s_{i})
-\end{multline*}
+=F_{X}(x_{i})^{P-1}\prod_{k=P+1}^{N}P(\mu r_{k}<\mu r_{i}+(1-\mu)s_{i})\label{eq:CaseII_general}
+\end{multline}
 
 \end_inset
 
@@ -1768,7 +1717,7 @@ In Case III, when neither the rich nor the poor participate in the game,
 \end_inset
 
  to win the game.
- Notice also that 
+ This is because 
 \begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}=\frac{r_{i}^{N}}{N}|_{0}^{1}=\frac{1}{N}$
 \end_inset
 
@@ -1794,10 +1743,10 @@ In Case IV, when both rich and poor participants set
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{multline*}
+\begin{multline}
 P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\prod_{k=P+1}^{N}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\\
-=F_{X}(x_{i})^{N-1}
-\end{multline*}
+=F_{X}(x_{i})^{N-1}\label{eq:CaseIV_general}
+\end{multline}
 
 \end_inset
 
@@ -1805,73 +1754,96 @@ P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-
 \end_layout
 
 \begin_layout Standard
-Using symmetry arguments, this also turns out to be 
+Using symmetry arguments, this winning probability also turns out to be
+ 
 \begin_inset Formula $1/N$
 \end_inset
 
-.
+ for all the participants.
 \end_layout
 
-\begin_layout Subsection
-Effect of 
+\begin_layout Standard
+It is worth emphasising that the effect of expenditure on the winning probabilit
+y is weakened with higher number of participants in the game where abilities
+ (both skills 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ relevant for social capital and the raw-talent 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+) are uniformly distributed.
+ In other words, if poor and rich participants were to be considered as
+ two separate groups, then the effect of expenditure on their wins declines
+ when more and more participants are sampled with varied raw-talents and
+ skills.
+ The above set up is therefore appropriate only small-scale competitions.
+ Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Probability-to-win-for-poor-with-N"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Probability-to-win-for-rich-with-N"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ demonstrate this effect for probability calculated with Monte Carlo simulation
+ with increasing values of the number of poor participants (
+\begin_inset Formula $P$
+\end_inset
+
+) and the total number of participants (
 \begin_inset Formula $N$
 \end_inset
 
+) while hold the ratio 
+\begin_inset Formula $P/N$
+\end_inset
+
+ constant.
+ Our Monte Carlo simulations suggest that the role of expenditure is insignifica
+nt for 
+\begin_inset Formula $N\ge30$
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-The more 
-\begin_inset Formula $N$
+Since the number of poor is typically higher under real-world conditions,
+ we explore the effect of income-differences using using closed-form solution
+ for 
+\begin_inset Formula $N=3$
 \end_inset
 
- increases the more likely is that the poor participant gets less utility
- from 
-\begin_inset Formula $\nu_{1}$
+ and 
+\begin_inset Formula $P=2$
+\end_inset
+
+ in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Three-player-Discrete-Model"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
 .
- Higher 
-\begin_inset Formula $N$
-\end_inset
-
- for the same 
-\begin_inset Formula $P/N$
-\end_inset
-
- has the effect that utility from 
-\begin_inset Formula $\nu_{1}$
-\end_inset
-
- has no concavity.
- More players thus make the competition uncompetitive - if all characteristics
- are uniformly distributed.
- The rich participant also faces the same effect of high 
-\begin_inset Formula $N$
-\end_inset
-
- .
- Having more players dominates the effect of uniform characteristics and
- makes the effect of skills redundant.
- Having a two-player or a three-player game is hardly of any effect since
- large numbers significantly change the probability.
- It needs to be better explained why the game between two-players is relevant
- when being played among 
-\begin_inset Formula $N$
-\end_inset
-
- consumers.
- One possible way to see is that competitions are not conducted over high
- 
-\begin_inset Formula $N$
-\end_inset
-
- and they're always conducted over few people.
- This could be clarified up-front.
- Instead of the population being replaced - we're concerned with how winners
- get a result and move on to the next-stage (which are infinite for our
- purposes).
- See plots.
 \end_layout
 
 \begin_layout Standard
@@ -1879,10 +1851,6 @@ The more
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \align center
@@ -1899,6 +1867,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Probability-to-win-for-poor-with-N"
+
+\end_inset
+
 Probability to win for poor with increasing number of participants 
 \end_layout
 
@@ -1933,6 +1907,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Probability-to-win-for-rich-with-N"
+
+\end_inset
+
 Probability to win for rich with increasing number of participants
 \end_layout
 
@@ -1946,37 +1926,6 @@ Probability to win for rich with increasing number of participants
 
 \end_layout
 
-\begin_layout Standard
-One needs to see how probability itself changes with respect to higher 
-\begin_inset Formula $N$
-\end_inset
-
- values as a function of expenditure.
- The probability for the same expenditure ought to have a weak effect on
- probability when 
-\begin_inset Formula $N$
-\end_inset
-
- is higher.
- It may make sense therefore to stick to a 2-player model - which explains
- everything without the issues we're having with higher 
-\begin_inset Formula $N$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-To handle high 
-\begin_inset Formula $N$
-\end_inset
-
-, one idea may be have consider the competition between the entire rich
- and entire poor class.
- Again, a two-player model makes more sense here.
-\end_layout
-
 \begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
@@ -1984,7 +1933,15 @@ name "subsec:Three-player-Discrete-Model"
 
 \end_inset
 
-A three-player model
+Equilibrium with 
+\begin_inset Formula $N=3$
+\end_inset
+
+ , 
+\begin_inset Formula $P=2$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2004,8 +1961,7 @@ noindent
 \end_layout
 
 \begin_layout Standard
-We now consider the solution of the above game where the total number of
- participants 
+We proceed with a solution by setting total number of participants 
 \begin_inset Formula $N=3$
 \end_inset
 
@@ -2013,8 +1969,38 @@ We now consider the solution of the above game where the total number of
 \begin_inset Formula $P=2$
 \end_inset
 
-.
- As before, the participant takes advantage of the skills with weight 
+ in Equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CaseI_general"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CaseII_general"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CaseIV_general"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ above.
+ As before, a participant takes advantage of the skills with weight 
 \begin_inset Formula $1-\mu$
 \end_inset
 
@@ -2022,10 +2008,12 @@ We now consider the solution of the above game where the total number of
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
-.
- In the all-or-nothing payment scheme, the participant might avoid the investmen
-t altogether and keep the investment towards savings instead.
- The behaviour of both participants depends only on 
+ and can decide to avoid the expenditure altogether in order to invest it
+ towards the savings instead.
+ We first discuss the different probabilities in Case I, II, III and IV
+ before discussing the role of an additive intertemporal diminishing utility
+ from accumulated wealth.
+ Recall that the behaviour of both participants depends only on 
 \begin_inset Formula $\nu_{1},\nu_{2}$
 \end_inset
 
@@ -2038,7 +2026,8 @@ t altogether and keep the investment towards savings instead.
 \end_layout
 
 \begin_layout Standard
-The following result for the distribution of 
+An important result for the closed-form solution is the probability distribution
+ (CDF) of 
 \begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
 \end_inset
 
@@ -2046,7 +2035,7 @@ The following result for the distribution of
 \begin_inset Formula $\mu<1-\mu$
 \end_inset
 
- that we repeatedly use is detailed in Appendix A.
+ that is detailed in Appendix A.
 \end_layout
 
 \begin_layout Standard
@@ -2075,7 +2064,7 @@ Case I
 \end_layout
 
 \begin_layout Standard
-With Case I, the poor participant can win when her raw-talent 
+In Case I, the poor participant can win when her raw-talent 
 \begin_inset Formula $r_{1}$
 \end_inset
 
@@ -2194,7 +2183,7 @@ mu)}
 \end_layout
 
 \begin_layout Standard
-Since, only one of the participants can win, the probability 
+Since only one of the participants can win, the probability 
 \begin_inset Formula $P_{2}(\text{win})$
 \end_inset
 
@@ -2711,17 +2700,18 @@ noprefix "false"
 \end_inset
 
  falls too much (letting both participants participate) or rises too much
- (letting both both participants withdraw) follows from the properties of
- the winning probability.
+ (letting both both participants withdraw) also follows from the properties
+ of the winning probability.
 \end_layout
 
 \begin_layout Standard
-The rich participant could withdraw and face either 
+Notice that the rich participant could withdraw and face either 
 \begin_inset Formula $1/3$
 \end_inset
 
  or lower probability (when the poor participant participates).
- By participating, the rich participant would either face probability 
+ By participating, therefore, the rich participant would either face probability
+ 
 \begin_inset Formula $1/3$
 \end_inset
 
@@ -2729,9 +2719,9 @@ The rich participant could withdraw and face either
  withdraws).
  Considering the probabilities alone, the rich participant would always
  participate.
- If the rich participant always participates, then with enough money, the
- poor participant is always better off participating as well because not
- participating would bring her probability to win below 
+ If the rich participant always participates, then so long as budget constraints
+ permit, the poor participant is also better off participating since not
+ participating brings her probability to win below 
 \begin_inset Formula $1/3$
 \end_inset
 
@@ -2742,14 +2732,14 @@ The rich participant could withdraw and face either
 \end_inset
 
  probability.
- 
 \end_layout
 
 \begin_layout Standard
-Faced with a finite life-time and utility from accumulated assets, the participa
-nts do not however optimise the probability to win in the game.
- Instead, the participants optimise an intertemporally additive utility
- over the life-time.
+However, since participants are more likely to face a finite life-time and
+ utility from accumulated assets, they hardly optimise the probability to
+ win in the game.
+ We therefore explore the case where the participants optimise an intertemporall
+y additive utility over their life-time.
  The equilibrium based on utility from accumulated assets is discussed in
  Section 
 \begin_inset CommandInset ref
@@ -3438,7 +3428,7 @@ name "subsec:Utility-maximising-participants"
 
 \end_inset
 
-Utility maximising participants
+Utility maximisation
 \end_layout
 
 \begin_layout Standard
@@ -4056,7 +4046,11 @@ noindent
 \end_layout
 
 \begin_layout Standard
-Our discussion of the effect of the threshold 
+We now discuss Nash equilibria conditions for whether the Case I, II, III,
+ IV outlined above and discuss the implications of the results for the effect
+ of income differences on expenditure towards status.
+ It is worth remarking that our discussion of the effect of the threshold
+ 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
@@ -4064,7 +4058,7 @@ Our discussion of the effect of the threshold
 \begin_inset Formula $y_{2}-y_{1}$
 \end_inset
 
- on participation assumes that the exogenous parameter 
+ on participation (expenditure) assumes that the exogenous parameter 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -4081,15 +4075,33 @@ Our discussion of the effect of the threshold
 \end_layout
 
 \begin_layout Standard
-The choices with a general intertemporally additive function 
+For ease of notation we define 
+\begin_inset Formula $p_{1}\equiv\frac{\mu}{8(1-\mu)}$
+\end_inset
+
+ , 
+\begin_inset Formula $p_{2}\equiv1-2p_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $p_{1}'\equiv\frac{19\mu^{2}-40\mu+20}{40(1-\mu)^{2}}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{2}'\equiv1-2p_{1}'$
+\end_inset
+
+ which correspond to the three-player model discussed above.
+ The consumer choices for the poor and rich participants using a general
+ intertemporally additive function 
 \begin_inset Formula $u(A)$
 \end_inset
 
- (with assets 
+ (for assets 
 \begin_inset Formula $A$
 \end_inset
 
-) for the poor and rich participants are shown in Table 
+) are shown in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:prisoners_dilemma"
@@ -4099,24 +4111,8 @@ noprefix "false"
 
 \end_inset
 
- where we define 
-\begin_inset Formula $p_{1}=\frac{\mu}{8(1-\mu)}$
-\end_inset
-
- , 
-\begin_inset Formula $p_{2}=1-2p_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $p_{1}'=\frac{19\mu^{2}-40\mu+20}{40(1-\mu)^{2}}$
-\end_inset
-
- and 
-\begin_inset Formula $p_{2}'=1-2p_{1}'$
-\end_inset
-
- for the three-player model discussed above.
- It's easy to see verify from Figure 
+.
+ As we can verify from Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Probability-of-winning"
@@ -4126,16 +4122,16 @@ noprefix "false"
 
 \end_inset
 
- that for all values of 
-\begin_inset Formula $\mu<1/2$
-\end_inset
-
-, we have 
+ that we have 
 \begin_inset Formula $p_{1}<1/3<p_{2}$
 \end_inset
 
  and 
 \begin_inset Formula $p_{1}'>1/3>p_{2}'$
+\end_inset
+
+ for all values of 
+\begin_inset Formula $\mu<1/2$
 \end_inset
 
 .
@@ -4184,12 +4180,23 @@ noprefix "false"
 
  , then the rich participant knows that the best case probability to win
  for the poor participant is 
-\begin_inset Formula $1/3$
+\begin_inset Formula $\frac{1}{3}$
 \end_inset
 
 .
  The rich participant's decision to participate would depend only on utility
  from savings and the relative advantage from gain in probability.
+ This is elaborated further in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Binding-constraint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -4203,7 +4210,7 @@ Binding constraint
 \end_layout
 
 \begin_layout Standard
-Assuming the EUT participants we first consider the simpler case of binding
+Assuming EUT participants we first consider the simpler case of binding
  constraint 
 \begin_inset Formula $y_{1}<\overline{\nu}<y_{2}$
 \end_inset
@@ -4212,7 +4219,7 @@ Assuming the EUT participants we first consider the simpler case of binding
  Since we assume a stability in long-term participant behaviour (which itself
  is a result of observed probability of success), mixed-strategies are not
  relevant in the current set up.
- Considering pure strategies for partcipation, the rich participant would
+ Considering pure strategies for participation, the rich participant would
  thus participate only when the utility from participating would be higher
  than from not participating i.e.
  
@@ -4252,7 +4259,7 @@ With income differences being the same an increase in participation cost
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
-).
+) and may fail the above condition.
  Similarly, with participation cost 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
@@ -4261,10 +4268,11 @@ With income differences being the same an increase in participation cost
 \begin_inset Formula $y_{2}-y_{1}$
 \end_inset
 
- is in the rich participant's interest to participate whereas a narrowing
- of income differences reduces incentive to participate.
+ is in the rich participant's interest whereas a narrowing of income differences
+ reduces incentive for the participant to participate by possibly failing
+ the above condition.
  All else being the same, higher impatience (lower time-discounted value
- of money or higher 
+ of money or a higher 
 \begin_inset Formula $\delta$
 \end_inset
 
@@ -4274,8 +4282,8 @@ With income differences being the same an increase in participation cost
 \begin_inset Formula $y_{1}<\overline{\nu}$
 \end_inset
 
-, then narrow income differences, higher participation costs and patience
- for savings (common for both rich and poor participants) all encourage
+, then narrower income differences, higher participation costs and higher
+ patience for savings (common for both rich and poor participants) all encourage
  the rich participant to withdraw from the game.
  This also means that wider income differences (
 \begin_inset Formula $y_{2}-y_{1}$
@@ -4296,7 +4304,7 @@ With income differences being the same an increase in participation cost
 
  ) would together maintain the incentive for the rich participant to participate.
  These conclusions very much fit with the sociological observations made
- in the literature (
+ in the literature about status (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HirschSocialLimits,GalbraithEssential"
@@ -4356,8 +4364,8 @@ noprefix "false"
 \end_inset
 
 ) remain the same for the above condition.
- We now consider the conditions for all possible Nash equilibria in the
- current set up.
+ To discuss the more general Nash equilibria, we now consider the conditions
+ for all of the Cases I, II, III and IV to become a Nash equilibrium.
  For ease of notation we define the following for a given 
 \begin_inset Formula $\overline{\nu},y_{1}$
 \end_inset
@@ -4392,6 +4400,7 @@ U_{2} & \equiv u(y_{2})-u(y_{2}-\overline{\nu})
 \end_layout
 
 \begin_layout Standard
+One could view 
 \begin_inset Formula $U_{1}$
 \end_inset
 
@@ -4399,12 +4408,12 @@ U_{2} & \equiv u(y_{2})-u(y_{2}-\overline{\nu})
 \begin_inset Formula $U_{2}$
 \end_inset
 
- could be loosely referred to has the immediate utility gain from withdrawing.
+ as the immediate gain in wealth utility from withdrawing.
  If 
 \begin_inset Formula $u(\cdot)$
 \end_inset
 
- represents a diminishing utliity, then it is necessary for 
+ represents a diminishing utility, then it is also necessary for 
 \begin_inset Formula $y_{1}<y_{2}$
 \end_inset
 
@@ -4414,7 +4423,7 @@ U_{2} & \equiv u(y_{2})-u(y_{2}-\overline{\nu})
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-U_{1} & >U_{2}
+U_{2} & <U_{1}
 \end{align*}
 
 \end_inset
@@ -4423,10 +4432,12 @@ U_{1} & >U_{2}
 \end_layout
 
 \begin_layout Standard
-Consider now if Case I were be a Nash Equilibrium, then for rich's decision
- to participate, the poor participant must get more utility from withdrawing
- than from participating and for poor participant's decision to withdraw,
- the rich must get more utility from participating than from withdrawing.
+Consider now that conditions for Case I to be a Nash Equilibrium.
+ If Case I were to be a Nash equilibrium, then for the rich participant's
+ decision to participate, the poor participant must get more utility from
+ withdrawing than from participating and for poor participant's decision
+ to withdraw, the rich must get more utility from participating than from
+ withdrawing.
  The following conditions 
 \begin_inset Foot
 status open
@@ -4484,39 +4495,12 @@ delta})
 \end_layout
 
 \begin_layout Standard
-A utility that is not diminishing (e.g.
- with a reference-dependent utility) could also fulfil the above conditions
- except for 
-\begin_inset Formula $U_{2}$
+Since 
+\begin_inset Formula $p_{2}-\frac{1}{3}>\frac{1}{3}-p_{1}$
 \end_inset
 
- not necessarily being less than 
-\begin_inset Formula $U_{1}$
-\end_inset
-
-.
- If, 
-\begin_inset Formula $u(\cdot)$
-\end_inset
-
- is indeed a diminishing utility, however, then the condition 
-\begin_inset Formula $1/3-p_{1}<p_{2}-1/3$
-\end_inset
-
- (for a fixed 
-\begin_inset Formula $\mu$
-\end_inset
-
-) along with 
-\begin_inset Formula $U_{2}<U_{1}$
-\end_inset
-
- allows ...
- 
-\end_layout
-
-\begin_layout Standard
-An increase in 
+, this is a fairly general condition for the equilibrium.
+ An increase in 
 \begin_inset Formula $U_{1}$
 \end_inset
 
@@ -4524,7 +4508,8 @@ An increase in
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- does not change the equilbrium so long as the corresponding rise 
+ does not change the equilibrium conditions so long as the corresponding
+ rise 
 \begin_inset Formula $U_{2}$
 \end_inset
 
@@ -4537,14 +4522,14 @@ An increase in
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- favours Case I as the equilibrium so long as there is an incentive for
- the rich to participate.
+ favours the equilibrium (Case I) so long as there is an incentive for the
+ rich to participate.
  Likewise, a decrease in 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- would is favourable for Case I as an equilibrium so long as the poor participan
-ts does not also have an incentive to pariticpate.
+ would is favourable for the equilibrium (Case I) so long as the poor participan
+ts does not also have an incentive to participate.
  
 \end_layout
 
@@ -4613,7 +4598,8 @@ and encourages the rich to participate but it also decreases
 \end_inset
 
  encourages both poor and rich to withdraw.
- As we shall see, this is a relatively easier equilibrium to be achieved.
+ As we shall see, Case II offers equilibrium conditions that are far more
+ limited.
 \end_layout
 
 \begin_layout Standard
@@ -4674,7 +4660,7 @@ Since
 \begin_inset Formula $\frac{(p_{1}'-1/3)(u(y_{2})-u(y_{1}))}{\delta}<\frac{(1/3-p_{2}')(u(y_{2})-u(y_{1}))}{\delta}$
 \end_inset
 
- , the above cannot be satisified so long as we have a diminishing utility
+ , the above cannot be satisfied so long as we have a diminishing utility
  which necessitates
 \begin_inset Formula $U_{2}<U_{1}$
 \end_inset
@@ -4714,8 +4700,9 @@ Notice that despite a reference-dependent utility, a higher
 \begin_inset Formula $\delta$
 \end_inset
 
-) may disincentivise the poor from participation just the same.
- Similarly, higher income differencers (an increase in 
+) may disincentivise the poor from participation just the same (leading
+ to Case III).
+ Similarly, higher income differences (an increase in 
 \begin_inset Formula $y_{2}$
 \end_inset
 
@@ -4723,13 +4710,13 @@ Notice that despite a reference-dependent utility, a higher
 \begin_inset Formula $y_{1}$
 \end_inset
 
-) could enourage the rich to pariticpate by decreasing 
+) could encourage the rich to participate by decreasing 
 \begin_inset Formula $\frac{U_{2}}{u(y_{2})-u(y_{1})}$
 \end_inset
 
- .
- Despite the reference dependent utility, the equilibrium with Case II is
- indeed a fragile one.
+ (leading to Case IV).
+ Despite the reference dependent utility, the equilibrium with Case II seems
+ a fragile one.
 \end_layout
 
 \begin_layout Standard
@@ -4831,7 +4818,7 @@ Higher income differences i.e.
 
  and incentivise the rich participant to participate (leading to Case I).
  Conversely, if the game is not lucrative for the rich it would be automatically
- be not feasible for the poor i.e.
+ be infeasible for the poor i.e.
  if rich withdraws then poor automatically withdraws.
 \end_layout
 
@@ -4900,19 +4887,45 @@ The above results outline how participation costs influence the investments
 \end_inset
 
 , both would withdraw.
- For everything in between, the rich would participate while poor don't.
- The only exception to this is when the utility is a reference-dependent
- one.
- 
+ For everything in between, the only equilibrium with a diminishing utility
+ from wealth is one where rich participate whereas poor don't.
 \end_layout
 
 \begin_layout Standard
-More general cost-functions also confirm this effect of 
+It's worth highlighting that these results are not limited a discrete response
+ cost-function and that more general cost-functions also confirm this effect
+ of 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
 .
- 
+ Unlike the discrete response function where a participant misses out on
+ skills completely if she does not spend a certain threshold payment, we
+ run Monte Carlo simulations with a skills-multiplier 
+\begin_inset Formula $c(x)$
+\end_inset
+
+ for social-capital which lets every participant 
+\begin_inset Formula $i$
+\end_inset
+
+ have the score 
+\begin_inset Formula $\mu r_{i}+(1-\mu)c(x)s_{i}$
+\end_inset
+
+ so that skills 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ are realised fully (
+\begin_inset Formula $c(x)=1$
+\end_inset
+
+) only at limit.
+ As with the discrete response, skills are 0 for no expenditure/effort in
+ this continuous response cost-function.
+ Here too, we find that the poor participant backs out from (reduces) expenditur
+e while the rich increases her expenditure in the Nash equilibrium.
 \end_layout
 
 \begin_layout Standard
@@ -4968,12 +4981,18 @@ mu)^2}
 \end_layout
 
 \begin_layout Standard
-We can also discuss implications of inequality for the same total wealth
- in the economy.
+The above framework also allows us to discuss the implications of inequality
+ for the same total wealth in the economy.
  More particularly, a segregation where the poor never participate in the
  economy is less favourable than one where both participate in the status
  competitions.
- This is possible only if ...
+ The model shows that only a reference-based utility (which may be encouraged
+ with segregation) could permit an equilibrium where the poor completely
+ withdraw from skills-enhancement.
+ One can argue therefore, that apart from offering an environment where
+ only rich are concerned with skills, the a economy could also offer fragile
+ environments of contentment with lower wealth (reference-dependent utility)
+ so that skills-enhancement remains popular among lower-income participants.
  
 \end_layout
 
@@ -4990,17 +5009,15 @@ Conclusion
 \begin_layout Standard
 We have considered a model where status amounts to a position that cements
  the participant's economic position but only temporarily.
+ the goal of the above model has been to derive results while endogenising
+ status so as to use the framework to explain across economies with wide-differe
+nces in cultural notions associated with status.
  The dynamics of promotion and demotion depend on an economy which can only
  be partly influenced with a superior economic position.
  The results indicate that a stable is equilibrium is that of rich .
  The more equitable equilibrium could be one where both equilibrium.
  The differences in reference provide an important caveat to these results
  because diminishing utility rules out cases where ...
- 
-\end_layout
-
-\begin_layout Standard
-The combined utility of the two participants ...
  
 \end_layout
 
