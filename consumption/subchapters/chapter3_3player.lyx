@@ -1458,20 +1458,7 @@ noprefix "false"
 
 \end_inset
 
- where 
-\begin_inset Formula $r_{i}$
-\end_inset
-
- and 
-\begin_inset Formula $s_{i}$
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-are independent random variables uniformly distributed between 0 and 1 (see
- Appendix A) .
+ (see Appendix A).
 \end_layout
 
 \begin_layout Standard
@@ -1802,7 +1789,7 @@ noprefix "false"
 \end_inset
 
  constant (
-\begin_inset Formula $P/N=1/2$
+\begin_inset Formula $P/N=2/3$
 \end_inset
 
 ).
@@ -1812,19 +1799,24 @@ nt for
 \end_inset
 
 .
- We now explore the effect of income-differences using using closed-form
- solution for 
-\begin_inset Formula $N=2$
+ 
+\end_layout
+
+\begin_layout Standard
+Since the number of poor is typically higher under real-world conditions,
+ we explore the effect of income-differences using using closed-form solution
+ for 
+\begin_inset Formula $N=3$
 \end_inset
 
  and 
-\begin_inset Formula $P=1$
+\begin_inset Formula $P=2$
 \end_inset
 
  in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Two-player-Discrete-Model"
+reference "subsec:Three-player-Discrete-Model"
 plural "false"
 caps "false"
 noprefix "false"
@@ -1843,7 +1835,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename figures/poor_winning_probability_over_n_1_to_2.png
+	filename figures/poor_winning_probability_over_n.png
 	width 5in
 
 \end_inset
@@ -1883,7 +1875,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename figures/rich_winning_probability_over_n_1_to_2.png
+	filename figures/rich_winning_probability_over_n.png
 	width 5in
 
 \end_inset
@@ -1917,11 +1909,19 @@ Probability to win for rich with increasing number of participants
 \begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Two-player-Discrete-Model"
+name "subsec:Three-player-Discrete-Model"
 
 \end_inset
 
-Equilibrium Conditions
+Equilibrium with 
+\begin_inset Formula $N=3$
+\end_inset
+
+ , 
+\begin_inset Formula $P=2$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1942,11 +1942,11 @@ noindent
 
 \begin_layout Standard
 We proceed with a solution by setting total number of participants 
-\begin_inset Formula $N=2$
+\begin_inset Formula $N=3$
 \end_inset
 
  and the number of poor participants 
-\begin_inset Formula $P=1$
+\begin_inset Formula $P=2$
 \end_inset
 
  in Equations 
@@ -2015,16 +2015,7 @@ An important result for the closed-form solution is the probability distribution
 \begin_inset Formula $\mu<1-\mu$
 \end_inset
 
- (for independent variables 
-\begin_inset Formula $r_{i}$
-\end_inset
-
- and 
-\begin_inset Formula $s_{i}$
-\end_inset
-
- that are uniformly distributed between 0 and 1) that is detailed in Appendix
- A.
+ that is detailed in Appendix A.
 \end_layout
 
 \begin_layout Standard
@@ -2058,12 +2049,16 @@ In Case I, the poor participant can win when her raw-talent
 \end_inset
 
  is higher than of the total score of rich participant (who competes with
- acquired skills).
- The poor participant is priced out of accessing any skills 
+ acquired skills) as well as the raw-talent (let's say 
+\begin_inset Formula $r_{1}'$
+\end_inset
+
+ ) of the only other poor participant in the three-player game.
+ Both the poor participants are priced out of accessing any skills 
 \begin_inset Formula $s$
 \end_inset
 
- in her score so that the skills 
+ in their score so that the skills 
 \begin_inset Formula $s>0$
 \end_inset
 
@@ -2086,7 +2081,7 @@ In Case I, the poor participant can win when her raw-talent
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-P(\text{win}|r_{1}) & =P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1})=F_{X}(\mu r_{1})
+P(\text{win}|r_{1}) & =P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1})P(r_{1}'<r_{1})=F_{X}(\mu r_{1})r_{1}
 \end{align*}
 
 \end_inset
@@ -2122,7 +2117,7 @@ Notice that
 
  needs to be considered.
  Therefore, using 
-\begin_inset Formula $P(\text{win}|r_{1})=\frac{\mu^{2}r_{1}^{2}}{2\mu(1-\mu)}$
+\begin_inset Formula $P(\text{win}|r_{1})=\frac{\mu^{2}r_{1}^{3}}{2\mu(1-\mu)}$
 \end_inset
 
 , we evaluate 
@@ -2132,7 +2127,7 @@ Notice that
  as 
 \begin_inset Formula 
 \begin{align*}
-P_{1}(\text{win})=\int_{0}^{1}P(\text{win}|r_{1})dr_{1} & =\frac{\mu}{6(1-\mu)}
+P_{1}(\text{win})=\int_{0}^{1}P(\text{win}|r_{1})dr_{1} & =\frac{\mu}{8(1-\mu)}
 \end{align*}
 
 \end_inset
@@ -2146,11 +2141,11 @@ status open
 
 \begin_layout Plain Layout
 
-%integrate (mu^2*r^2,r,0,1)/(2*mu*(1-mu)) gives 
+%integrate (mu^2*r^3,r,0,1)/(2*mu*(1-mu)) gives 
 \backslash
 frac{
 \backslash
-mu}{6(1-
+mu}{8(1-
 \backslash
 mu)}
 \end_layout
@@ -2173,7 +2168,7 @@ Since only one of the participants can win, the probability
 \end_inset
 
  for the rich participant to win is simply 
-\begin_inset Formula $1-P_{1}(\text{win})$
+\begin_inset Formula $1-2P_{1}(\text{win})$
 \end_inset
 
 .
@@ -2197,7 +2192,7 @@ Since only one of the participants can win, the probability
 \color none
 \begin_inset Formula 
 \begin{align}
-P_{2}(\text{win}) & =1-P_{1}(\text{win})\label{eq:two_player_rich_probability}
+P_{2}(\text{win}) & =1-2P_{1}(\text{win})\label{eq:three_player_rich_probability}
 \end{align}
 
 \end_inset
@@ -2215,8 +2210,9 @@ In Case II, the rich person does not participate (
 \end_inset
 
 ) and both the poor participants have the skills-advantage in the game.
- A poor participant wins by having the total score higher than the raw-talent
- of the rich participant (who does not acquire skills with investment).
+ A poor participant wins by having the total score higher than the other
+ poor participant as well as the raw-talent of the rich participant (who
+ does not acquire skills with investment).
  Representing 
 \begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
 \end_inset
@@ -2253,7 +2249,8 @@ mu
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-P(\text{win}|r_{1},s_{1})=P(\mu r_{2}<\mu r_{1}+(1-\mu)s_{1})
+P(\text{win}|r_{1},s_{1})=P(\mu r_{2}<\mu r_{1}+(1-\mu)s_{1})\cdot P(\mu r_{1}'+(1-\mu)s_{1}'<\mu r_{1}+(1-\mu)s_{1})\\
+=P(\mu r_{2}<\mu r_{1}+(1-\mu)s_{1})F_{X}(x_{1})
 \end{multline*}
 
 \end_inset
@@ -2351,9 +2348,9 @@ The probability to win for the poor participant can be written as (see Appendix
 \begin_inset Formula 
 \begin{align*}
 P(\text{win}|r_{1},s_{1}) & =\begin{cases}
-\frac{x_{1}}{\mu} & 0<x<\mu\\
-1 & \mu<x_{1}<1-\mu\\
-1 & 1-\mu<x_{1}<1\\
+\frac{x_{1}^{3}}{2\mu^{2}(1-\mu)} & 0<x<\mu\\
+\frac{x_{1}-\mu/2}{1-\mu} & \mu<x_{1}<1-\mu\\
+1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x_{1}<1\\
 0 & \text{otherwise}
 \end{cases}
 \end{align*}
@@ -2375,11 +2372,11 @@ Using double-integral properties (see Appendix B), the total probability
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-P_{1}(\text{win})=\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r_{1})}{1-\mu}}\ \frac{(\mu r_{1}+(1-\mu)s_{1})}{\mu}ds_{1}dr_{1}}\\
-+\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r_{1})}{1-\mu}}^{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}1\ ds_{1}dr_{1}}\\
-+\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}^{s_{1}=1}1\ ds_{1}dr_{1}}\\
-=\frac{\mu}{3(1-\mu)}+\frac{1-2\mu}{1-\mu}+\frac{\mu}{2(1-\mu)}\\
-=\frac{2\mu}{6(1-\mu)}+\frac{6(1-2\mu)}{6(1-\mu)}+\frac{3\mu}{6(1-\mu)}=\frac{6-7\mu}{6(1-\mu)}
+P_{1}(\text{win})=\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r_{1})}{1-\mu}}\ \frac{(\mu r_{1}+(1-\mu)s_{1})^{3}}{2\mu^{2}(1-\mu)}ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r_{1})}{1-\mu}}^{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1}-\mu/2)}{1-\mu}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}^{s_{1}=1}(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})\ ds_{1}dr_{1}}\\
+=\frac{\mu^{2}}{10(1-\mu)^{2}}+\frac{1-2\mu}{2(1-\mu)}+\frac{(4-5\mu)\mu}{8(1-\mu)^{2}}\\
+=\frac{4\mu^{2}+20(1-2\mu)(1-\mu)+5(4-5\mu)\mu}{40(1-\mu)^{2}}=\frac{19\mu^{2}-40\mu+20}{40(1-\mu)^{2}}
 \end{multline*}
 
 \end_inset
@@ -2395,7 +2392,7 @@ The probability
  for the rich participant to win follows from Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:two_player_rich_probability"
+reference "eq:three_player_rich_probability"
 plural "false"
 caps "false"
 noprefix "false"
@@ -2411,33 +2408,22 @@ status open
 
 \begin_layout Plain Layout
 
-%For part A, integrate(integrate(((mu*r+(1-mu)*s))/(mu),s,0,mu*(1-r)/(1-mu)),r,0
-,1) gives 
+%For part A, integrate(integrate(((mu*r+(1-mu)*s)^3)/( 2 *mu^2*(1-mu)),s,0,mu*(1
+-r)/(1-mu)),r,0,1) gives 
 \backslash
 frac{
 \backslash
-mu}{3(1-
+mu^2}{10(1-
 \backslash
-mu)}
+mu)^2}
 \end_layout
 
 \begin_layout Plain Layout
 
-% For part B,  integrate(integrate(1,s,mu*(1-r)/(1-mu),1-mu*(r)/(1-mu)),r,0,1)
- gives 
+% For part B,  integrate(integrate(((mu*r+(1-mu)*s)-mu/2)/(1-mu),s,mu*(1-r)/(1-m
+u),1-mu*(r)/(1-mu)),r,0,1) gives 
 \backslash
 frac{1-2
-\backslash
-mu}{1-
-\backslash
-mu}
-\end_layout
-
-\begin_layout Plain Layout
-
-% For part C, integrate(integrate(1,s,1-mu*r/(1-mu),1),r,0,1)  gives  
-\backslash
-frac{
 \backslash
 mu}{2(1-
 \backslash
@@ -2446,15 +2432,29 @@ mu)}
 
 \begin_layout Plain Layout
 
-% with denomiator 6(1-
+% For part C, integrate(integrate((1-((mu*r+(1-mu)*s-1)^2)/(2*mu*(1-mu))),s,1-mu
+*r/(1-mu),1),r,0,1)  gives 
 \backslash
-mu) numerator 2*x + 6*(1-2*x)+3*x simplified 
+frac{(4-5
+\backslash
+mu)
+\backslash
+mu}{8(1-
+\backslash
+mu)^2} 
 \end_layout
 
 \begin_layout Plain Layout
 
-% verified shaped with plot (6-7x)/(6*(1-x)) for x from 0 to .5  - which
- indicates that probability falls sharply with 
+% with denomiator 40(1-
+\backslash
+mu)^2 numerator simplified using 4x^2+20(1-2x)(1-x)+5(4-5x)x
+\end_layout
+
+\begin_layout Plain Layout
+
+% verified shaped with plot (19mu^2 - 40mu + 20)/(40*(1-mu)^2) for mu from
+ 0 to .5 - which indicates that probability falls sharply with 
 \backslash
 mu
 \end_layout
@@ -2474,19 +2474,20 @@ Case III
 
 \begin_layout Standard
 In Case III, when neither the rich nor the poor participate in the game,
- then the game depends only on raw-talents and both participants have the
+ then the game depends only on raw-talents and all participants have the
  same probability 
-\begin_inset Formula $\frac{1}{2}$
+\begin_inset Formula $\frac{1}{3}$
 \end_inset
 
  to win the game.
  This is because 
-\begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}=\frac{r_{i}^{2}}{2}|_{0}^{1}=\frac{1}{2}$
+\begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}=\frac{r_{i}^{3}}{3}|_{0}^{1}=\frac{1}{3}$
 \end_inset
 
 .
- Both the poor and rich participant have the same total probability 
-\begin_inset Formula $\frac{1}{2}$
+ For three players, both the poor and rich participants have the same total
+ probability 
+\begin_inset Formula $\frac{1}{3}$
 \end_inset
 
  to win.
@@ -2506,15 +2507,16 @@ In Case IV, when both rich and poor participants set
 \begin_inset Formula $x_{i}$
 \end_inset
 
- is above that of the rich participant.
+ is above that of the rich participant as well as that of the only other
+ poor participant.
  Therefore, 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-P(\text{win}|r_{1},s_{1})=P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1}+(1-\mu)s_{1})\\
-=F_{X}(x_{1})
+P(\text{win}|r_{1},s_{1})=P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1}+(1-\mu)s_{1})P(\mu r_{1}'+(1-\mu)s_{1}'<\mu r_{1}+(1-\mu)s_{1})\\
+=F_{X}(x_{1})^{2}
 \end{multline*}
 
 \end_inset
@@ -2526,9 +2528,9 @@ P(\text{win}|r_{1},s_{1})=P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1}+(1-\mu)s_{1})\\
 \begin_inset Formula 
 \begin{align*}
 P(\text{win}|r_{1}) & =\begin{cases}
-\frac{x_{1}^{2}}{2\mu(1-\mu)} & 0<x_{1}<\mu\\
-\frac{x_{1}-\mu/2}{1-\mu} & \mu<x_{1}<1-\mu\\
-1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x_{1}<1\\
+\frac{x_{1}^{4}}{4\mu^{2}(1-\mu)^{2}} & 0<x_{1}<\mu\\
+(\frac{x_{1}-\mu/2}{1-\mu})^{2} & \mu<x_{1}<1-\mu\\
+(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)})^{2} & 1-\mu<x_{1}<1\\
 0 & \text{otherwise}
 \end{cases}
 \end{align*}
@@ -2549,7 +2551,7 @@ While this integral can be evaluated based on symmetry arguments ( since
 \end_inset
 
  also evaluates to 
-\begin_inset Formula $\frac{1}{2}$
+\begin_inset Formula $\frac{1}{3}$
 \end_inset
 
  (see Appendix B)
@@ -2558,63 +2560,11 @@ While this integral can be evaluated based on symmetry arguments ( since
 \begin_layout Standard
 \begin_inset Formula 
 \begin{multline*}
-\int_{s=0}^{s=1}\int_{r=0}^{r=1}F_{X}(x_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r)}{1-\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)}\ ds_{1}dr_{1}}\\
-+\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r)}{1-\mu}}^{s_{1}=1-\frac{\mu r}{1-\mu}}(\frac{\mu r_{1}+(1-\mu)s_{1}-\mu/2}{1-\mu})\ ds_{1}dr_{1}}\\
-+\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r}{1-\mu}}^{s_{1}=1}(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})\ ds_{1}dr_{1}}\\
-=\frac{\mu^{2}}{8(1-\mu)^{2}}+\frac{1-2\mu}{2(1-\mu)}+\frac{(4-5\mu)\mu}{8(1-\mu)^{2}}=\frac{4(1-\mu)^{2}}{8(1-\mu)^{2}}=\frac{1}{2}
+\int_{s=0}^{s=1}\int_{r=0}^{r=1}F_{X}(x_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r)}{1-\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})^{4}}{4\mu^{2}(1-\mu)^{2}}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r)}{1-\mu}}^{s_{1}=1-\frac{\mu r}{1-\mu}}(\frac{\mu r_{1}+(1-\mu)s_{1}-\mu/2}{1-\mu})^{2}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r}{1-\mu}}^{s_{1}=1}(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})^{2}\ ds_{1}dr_{1}}\\
+=\frac{\mu^{3}}{24(1-\mu)^{3}}+\frac{2(1-2\mu)(\mu(7\mu-10)+4)}{24(1-\mu)^{3}}+\frac{\mu(19\mu^{2}-30\mu+12)}{24(1-\mu)^{3}}=\frac{1-\mu^{3}+3\mu^{2}-3\mu}{3(1-\mu)^{3}}=\frac{1}{3}
 \end{multline*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% For part A,  integrate( integrate((mu *r + (1-mu)*s)^2/(2*mu*(1-mu)),s,0,mu*(1
--r)/(1-mu)) , r, 0,1) gives 
-\backslash
-frac{
-\backslash
-mu^2}{8(1-
-\backslash
-mu)^2}
-\end_layout
-
-\begin_layout Plain Layout
-
-% For part B, integrate (integrate( ((mu * r + (1-mu) *s - mu /2 )/(1-mu)
- ),s,mu*(1-r)/(1-mu),1-mu*r/( 1-mu)) , r, 0, 1)  gives 
-\backslash
-frac{1-2
-\backslash
-mu}{2(1-
-\backslash
-mu)}
-\end_layout
-
-\begin_layout Plain Layout
-
-% For part C, integrate(integrate( (1- ((mu *r  + (1-mu) * s)-1)^2/(2*mu*(1-mu))
-), s, 1-mu *r /(1-mu),1),r,0,1) gives 
-\backslash
-frac{(4-5
-\backslash
-mu)
-\backslash
-mu}{8(1-
-\backslash
-mu)^{2}}
-\end_layout
-
-\begin_layout Plain Layout
-
-% simplified with  x^2 +(1-2*x)*(1-x)*4+(4-5*x)*x which gives 4(1-x)^2
-\end_layout
 
 \end_inset
 
@@ -2630,7 +2580,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename figures/winprob_with_mu_1_to_2.png
+	filename figures/winprob_with_mu.png
 	width 4in
 
 \end_inset
@@ -2711,7 +2661,7 @@ noprefix "false"
  - indicating that curated skills are given more importance that raw-talent
  in the competitions - means that the poor participant is strictly better
  off (than facing probability 
-\begin_inset Formula $1/2$
+\begin_inset Formula $1/3$
 \end_inset
 
 ) if she participates while the rich participant doesn't participate (Case
@@ -2720,9 +2670,9 @@ noprefix "false"
 \begin_inset Formula $\mu<\frac{1}{2}$
 \end_inset
 
- when the rich participant does participate as it raises the probability
+ when the rich participant does participate as it raise the probability
  to 
-\begin_inset Formula $1/2$
+\begin_inset Formula $1/3$
 \end_inset
 
 .
@@ -2737,13 +2687,13 @@ noprefix "false"
 
 \begin_layout Standard
 Notice that the rich participant could withdraw and face either 
-\begin_inset Formula $1/2$
+\begin_inset Formula $1/3$
 \end_inset
 
  or lower probability (when the poor participant participates).
  By participating, therefore, the rich participant would either face probability
  
-\begin_inset Formula $1/2$
+\begin_inset Formula $1/3$
 \end_inset
 
  (when poor participant also participates) or better (if the poor participant
@@ -2753,24 +2703,96 @@ Notice that the rich participant could withdraw and face either
  If the rich participant always participates, then so long as budget constraints
  permit, the poor participant is also better off participating since not
  participating brings her probability to win below 
-\begin_inset Formula $1/2$
+\begin_inset Formula $1/3$
 \end_inset
 
 .
  If the utility was from probability alone, then both participants would
  participate and face 
-\begin_inset Formula $1/2$
+\begin_inset Formula $1/3$
 \end_inset
 
  probability.
 \end_layout
 
 \begin_layout Standard
-However, the participants are more likely to face a finite life-time and
- utility from accumulated assets and they do not optimise the probability
- to win in the game.
+However, since participants are more likely to face a finite life-time and
+ utility from accumulated assets, they hardly optimise the probability to
+ win in the game.
  We therefore explore the case where the participants optimise an intertemporall
 y additive utility over their life-time.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% For part A,  integrate( integrate((mu *r + (1-mu)*s)^4/(2*mu*(1-mu))^2,s,0,mu*
+(1-r)/(1-mu)) , r, 0,1) gives 
+\backslash
+frac{
+\backslash
+mu^3}{24*(1-
+\backslash
+mu)^3}
+\end_layout
+
+\begin_layout Plain Layout
+
+% For part B, integrate (integrate( ((mu * r + (1-mu) *s - mu /2 )/(1-mu)
+ )^2,s,mu*(1-r)/(1-mu),1-mu*r/( 1-mu)) , r, 0, 1)  gives 
+\backslash
+frac{(2 
+\backslash
+mu -1) (
+\backslash
+mu  (7 
+\backslash
+mu -10)+4)}{12 (
+\backslash
+mu -1)^3}
+\end_layout
+
+\begin_layout Plain Layout
+
+% For part C, integrate(integrate( (1- ((mu *r  + (1-mu) * s)-1)^2/(2*mu*(1-mu))
+)^2, s, 1-mu *r /(1-mu),1),r,0,1) gives 
+\backslash
+frac{
+\backslash
+mu(19
+\backslash
+mu^{2}-30
+\backslash
+mu+12)}{24(1-
+\backslash
+mu)^{3}}
+\end_layout
+
+\begin_layout Plain Layout
+
+% simplified with x^3 + 2(1-2x)(x ( 7x-10) + 4) + x ( 19x^2 - 30x + 12)
+ which gives 8(1-x)^3
+\end_layout
+
+\begin_layout Plain Layout
+
+% plot (3
+\backslash
+mu^{2}-
+\backslash
+mu^{3}+
+\backslash
+mu-1)/(3*(1-
+\backslash
+mu)^3) from 0 to 1 shows that the probability rises with mu
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2857,7 +2879,7 @@ Only rich invest in skills
 \begin_layout Plain Layout
 \begin_inset Formula 
 \begin{gather*}
-\frac{\mu}{6(1-\mu)}
+\frac{\mu}{8(1-\mu)}
 \end{gather*}
 
 \end_inset
@@ -2914,7 +2936,7 @@ Only poor invest in skills
 \begin_layout Plain Layout
 \begin_inset Formula 
 \begin{gather*}
-\frac{6-7\mu}{6(1-\mu)}
+\frac{19\mu^{2}-40\mu+20}{40(1-\mu)^{2}}
 \end{gather*}
 
 \end_inset
@@ -2972,7 +2994,7 @@ Neither or Both invest in skills
 \begin_layout Plain Layout
 \begin_inset Formula 
 \begin{gather*}
-\frac{1}{2}
+\frac{1}{3}
 \end{gather*}
 
 \end_inset

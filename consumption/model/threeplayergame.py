@@ -255,8 +255,8 @@ def plot_rich_probability_over_np(N,mu,y1,y2,df_generator_func = generate_nplaye
     fig, ax = plt.subplots()
     
     
-    nparr=[(2,3),(4,6),(6,9)]
-    #nparr=[(2,3),(4,6),(20,30),(40,60)]
+    nparr=[(1,2),(2,4),(6,12)]
+    
     
     plothandles=[]
     for p,n in nparr:
@@ -275,8 +275,8 @@ def plot_poor_probability_over_np(N,mu,y1,y2,df_generator_func=generate_nplayer_
     fig, ax = plt.subplots()
     
     
-    nparr=[(2,3),(4,6),(6,9)]
-    #nparr=[(2,3),(4,6),(20,30),(40,60)]
+    nparr=[(1,2),(2,4),(6,12)]
+
     
     plothandles=[]
     for p,n in nparr:
@@ -449,8 +449,8 @@ def run_n_player_sim():
     #df = generate_nplayer_df(N=N,numpoor =2,numtotal=3)
     #df=generate_nplayer_norm_df(1000,2,3)
     #plot_poor_utility_over_np(mu=.2, y1=y1, y2=y2, a=a, d=d, G=G,N=N)
-    #plot_poor_probability_over_np(N=N,mu=.2,y1=y1,y2=y2)#,   df_generator_func = generate_nplayer_norm_df)
-    plot_rich_probability_over_np(N=N,mu=.2,y1=y1,y2=y2)
+    plot_poor_probability_over_np(N=N,mu=.2,y1=y1,y2=y2)#,   df_generator_func = generate_nplayer_norm_df)
+    #plot_rich_probability_over_np(N=N,mu=.2,y1=y1,y2=y2)
     #plot_rich_utility_over_np(mu=.2, y1=y1, y2=y2, a=a, d=d, G=G,N=N)
     #find_poor_probability_np(df=df,nu1=2,nu2=20,mu=.2, numpoor=2,numtotal=3)
     

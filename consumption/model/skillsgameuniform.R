@@ -10,17 +10,17 @@ plot_winning_probabilities <- function(){
   ypos = .74
   plot(0,0,type='l',xlim=c(0,.5),ylim=c(0,1),xlab=TeX("$\\mu$"),ylab=TeX("$P_1$(win)")); 
   
-  lines(x,(x)/(8*(1-x)),type='l',lty=1) # only rich
-  lines(x,(19*x**2 - 40 * x + 20)/(40*(1-x)**2) ,lty=2) # only poor
-  lines(x,rep(1/3,length(x)),lty=3) # neither or both
+  lines(x,(x)/(6*(1-x)),type='l',lty=1) # only rich
+  lines(x,(6-7*x)/(6*(1-x)) ,lty=2) # only poor
+  lines(x,rep(1/2,length(x)),lty=3) # neither or both
   
   legend(xpos, ypos,legend=TeX(paste("Case",c("I","II","III,IV"))),lty=c(1,2,3),cex=cexval) 
   
   plot(0,0,type='l',xlim=c(0,.5),ylim=c(0,1),xlab=TeX("$\\mu$"),ylab=TeX("$P_2$(win)")); 
   
-  lines(x,1-(x)/(4*(1-x)),type='l',lty=1) # only rich
-  lines(x,1-(19*x**2 - 40 * x + 20)/(20*(1-x)**2),lty=2) # only poor
-  lines(x,rep(1/3,length(x)),lty=3) # neither or both
+  lines(x,1-(x)/(6*(1-x)),type='l',lty=1) # only rich
+  lines(x,1-(6-7*x)/(6*(1-x)),lty=2) # only poor
+  lines(x,rep(1/2,length(x)),lty=3) # neither or both
   
   legend(xpos, ypos,legend=TeX(paste("Case",c("I","II","III,IV"))),lty=c(1,2,3),cex=cexval) 
   
