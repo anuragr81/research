@@ -1203,7 +1203,7 @@ literal "false"
 ) - the game presented in the current chapter only uses second-stage to
  represent the last time-horizon (i.e.
  end of lifetime) of the participant rather than as a stage to eliminate
- players for the second-stage.
+ players for the second stage.
  The distribution of budget across the two-stages of the game is also of
  little concern in the setting explored in the current chapter since it's
  only the first-stage of the game when the expenditure can be less than
@@ -1284,17 +1284,30 @@ noindent
 \end_layout
 
 \begin_layout Standard
-With a privately known raw-talent 
-\begin_inset Formula $r_{i}$
-\end_inset
-
- and skills (social-capital) 
+In the status game that selects the winner to be maintained at the rich
+ position, only two characteristics matter for every individual.
+ The first is the social capital that can be enhanced with expenditure by
+ the individual participant and the second is a raw-talent that cannot be
+ changed with higher expenditure.
+ Both skill 
 \begin_inset Formula $s_{i}$
 \end_inset
 
- - that are both uniformly distributed (the latter i.e.
- social capital enhanced with expenditure) - we consider foremost the likelihood
- of any participant 
+ (enhanced with expenditure) and the raw talent 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ (which cannot be changed with higher expenditure) are assumed to be uniformly
+ distributed in the population.
+ With 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ uniformly distributed, we formulate the likelihood of any participant 
 \begin_inset Formula $i\in[1,N]$
 \end_inset
 
@@ -1302,12 +1315,11 @@ With a privately known raw-talent
 \begin_inset Formula $\mu r_{i}+(1-\mu)s_{i}$
 \end_inset
 
- being higher than any other participant.
- Here, 
+ being higher than any other participant - where 
 \begin_inset Formula $\mu\in(0,1)$
 \end_inset
 
- is a parameter that combines skills 
+ is a parameter that combines social-capital 
 \begin_inset Formula $s$
 \end_inset
 
@@ -1320,12 +1332,22 @@ With a privately known raw-talent
 \end_inset
 
  wins the competition.
+ The winner of the competition acquires a rich position so that she obtains
+ the disposable income 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+ while the loser acquires the poor position receive 
+\begin_inset Formula $y_{1}<y_{2}$
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-Consider that in a much simpler competition with raw-talents alone, the
- winning participant is one who has the maximum 
+To start with a simpler case, consider that in a competition with raw-talents
+ alone, the winning participant is one who has the maximum 
 \begin_inset Formula $r_{i}$
 \end_inset
 
@@ -1414,22 +1436,24 @@ Introducing the skills
  which is necessary to be spent for the social capital to be available to
  a participant.
  While this is an arrangement that evidently favours the rich participant,
- there are also diminsihing returns to investing 
+ there are also diminishing returns to investing 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- towards the richer position.
- 
-\end_layout
+ towards the richer position if naturally occurring raw talent 
+\begin_inset Formula $r_{i}$
+\end_inset
 
-\begin_layout Standard
-An imporant assumption in the foregoing analysis is that raw-talent is less
- valued than skills cultivated by institutions.
- As as result, we use the condition 
+ is also significant in the competition.
+ To direct our focus on conditions when social capital is more important
+ than raw-talent, we assume in the foregoing analysis that raw-talent is
+ less valued than skills cultivated by institutions.
+ As a result, the condition 
 \begin_inset Formula $1-\mu>\mu$
 \end_inset
 
- (which is equivalent to the following assumption) in the rest of the discussion.
+ (which is equivalent to the following assumption) has been used throughout
+ in the rest of the discussion.
 \end_layout
 
 \begin_layout Assumption
@@ -1518,12 +1542,8 @@ noprefix "false"
 \begin_inset Formula $s_{i}$
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Standard
-are independent random variables uniformly distributed between 0 and 1 (see
- Appendix A) .
+ are independent random variables uniformly distributed between 0 and 1
+ (see Appendix A) .
 \end_layout
 
 \begin_layout Standard
@@ -1726,7 +1746,7 @@ With the uniform density for
 \end_layout
 
 \begin_layout Standard
-In Case II, when the rich person does not participate (i.e.
+In Case II, when the rich person has no access to social capital (i.e.
  all rich participants have 
 \begin_inset Formula $\nu_{2}=0$
 \end_inset
@@ -1796,8 +1816,8 @@ P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-
 \end_layout
 
 \begin_layout Standard
-Using symmetry arguments, this winning probability also turns out to be
- 
+Using symmetry arguments, this winning probability - which is the same for
+ all participants - also turns out to be 
 \begin_inset Formula $1/N$
 \end_inset
 
@@ -1864,7 +1884,7 @@ nt for
 \end_inset
 
 .
- We now explore the effect of income-differences using using closed-form
+ We now explore the effect of income differences using using closed-form
  solution for 
 \begin_inset Formula $N=2$
 \end_inset
@@ -2587,7 +2607,7 @@ P(\text{win}|r_{1},s_{1})=P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1}+(1-\mu)s_{1})\\
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-P(\text{win}|r_{1}) & =\begin{cases}
+P(\text{win}|r_{1},s_{1}) & =\begin{cases}
 \frac{x_{1}^{2}}{2\mu(1-\mu)} & 0<x_{1}<\mu\\
 \frac{x_{1}-\mu/2}{1-\mu} & \mu<x_{1}<1-\mu\\
 1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x_{1}<1\\
@@ -2845,7 +2865,11 @@ ed by either participant must disappear.
 \begin_inset Formula $y_{2}$
 \end_inset
 
- (for poor and rich participants respectively) towards the promotion game.
+ (for poor and rich participants respectively so that 
+\begin_inset Formula $y_{1}<y_{2}$
+\end_inset
+
+) towards the promotion game.
  In the first-stage, however, the participants decide the amount to be spent
  towards promotion based upon the utility from wealth they obtain across
  the two time-horizons that span their lifetime.
