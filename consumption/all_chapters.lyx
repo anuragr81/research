@@ -11,7 +11,7 @@
 \usepackage{xparse}
 \usepackage{lscape}
 \usepackage[section]{placeins}
-
+\usepackage{apacite}
 \usepackage{etoolbox}
 \patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
 
@@ -1006,10 +1006,15 @@ status open
 \begin_layout Standard
 The consumer response to relative income has appealed to economists since
  at least as far back as 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "VeblenLeisureClass"
-literal "false"
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+citeA{VeblenLeisureClass}  
+\end_layout
 
 \end_inset
 
@@ -35216,35 +35221,25 @@ status open
 
 \begin_layout Plain Layout
 
-% Uncomment - only if preamble bibliography has been disabled 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-newpage
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-part{References}
-\end_layout
-
-\begin_layout Plain Layout
-
 %%
 \backslash
-addcontentsline{toc}{part}{References} 
+addcontentsline{toc}{part}{References}
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
 
 \backslash
-bibliographystyle{apalike}
+bibliographystyle{apacite}
 \end_layout
 
 \begin_layout Plain Layout
@@ -35254,11 +35249,50 @@ bibliographystyle{apalike}
 bibliography{C:/local_files/research/africa_attitudes} 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Uncomment - only if preamble bibliography has been disabled 
+\end_layout
+
 \begin_layout Plain Layout
 
 %
 \backslash
-printbibliography 
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+part{References}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+bibliographystyle{apalike}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+bibliography{C:/local_files/research/africa_attitudes} 
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
