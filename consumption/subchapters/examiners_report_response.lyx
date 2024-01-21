@@ -5,6 +5,88 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage[T1]{fontenc}
+\usepackage{tgtermes}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{xparse}
+\usepackage{lscape}
+\usepackage[section]{placeins}
+\usepackage{apacite}
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+% \usepackage[nottoc,numbib]{tocbibind} % package to inc ref in TOC
+
+
+%\usepackage[backend=bibtex,style=authoryear-comp]{biblatex}
+%\addbibresource{C:/local_files/research/africa_attitudes}
+
+
+%\usepackage{natbib}
+\usepackage{titlesec}
+\usepackage{bbm}
+
+
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{sectsty}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\usepackage{color, colortbl}
+\usepackage[first=0,last=9]{lcg}
+\usepackage[left,modulo]{lineno}
+
+
+\usepackage{soul}
+\usepackage{color}
+
+\usepackage[absolute]{textpos}
+
+
+\newcommand{\hlc}[1]{{\sethlcolor{LightCyan}\hl{#1}}}
+\newcommand{\hly}[1]{{\sethlcolor{LightYellow}\hl{#1}}}
+\newcommand{\hlw}[1]{{\sethlcolor{White}\hl{#1}}}
+\newcommand{\hlg}[1]{{\sethlcolor{LightGreen}\hl{#1}}}
+
+\definecolor{Gray}{gray}{0.9}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{LightYellow}{RGB}{255,255,200}
+\definecolor{LightGreen}{RGB}{204,255,204}
+\definecolor{White}{RGB}{255,255,255}
+\newcommand{\ra}{\rand0.\arabic{rand}}
+
+%citation style
+%\setcitestyle{authoryear,open={((},close={))}} 
+
+\makeatletter
+\@addtoreset{section}{part}
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >\m@ne
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    {\parindent \z@ \raggedright
+     \interlinepenalty \@M
+     \normalfont\centering
+     \ifnum \c@secnumdepth >\m@ne
+       \large\bfseries \partname\nobreakspace\thepart
+       \par\nobreak
+     \fi
+     \huge \bfseries #2%
+     \markboth{}{}\par}%
+    \nobreak
+    \vskip 3ex
+    \@afterheading}
+\renewcommand\partname{Topic}
+\makeatother
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -29,9 +111,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -44,6 +127,7 @@
 \use_package undertilde 1
 \cite_engine basic
 \cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -55,6 +139,13 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 2.5cm
+\topmargin 2cm
+\rightmargin 2.5cm
+\bottommargin 2cm
+\headheight 2.5cm
+\headsep 2.5cm
+\footskip 2.5cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -85,12 +176,16 @@ Summary
 
 \begin_layout Standard
 The examiner's report on the viva conducted on 2023-03-06 highlighted considerab
-le shortcomings in the presentation and organisation of the three chapters
- on status consumption.
- The report also suggested to cautiously define the scope of the thesis
- as it relied on a view of aspirational consumption that differed significantly
- from the notion of visible consumption more commonly used in the literature.
- 
+le shortcomings in how the thesis contents were organised.
+ The report recommended a cautious definition of the scope of the thesis
+ particularly in relation to how aspirational consumption had been defined
+ in the thesis.
+ The comments asked for a clearer connection with the literature on conventional
+ views of aspirational consumption as visible consumption.
+\end_layout
+
+\begin_layout Section
+Changes made to the Thesis
 \end_layout
 
 \begin_layout Subsection
@@ -98,25 +193,29 @@ Organisation-related Changes
 \end_layout
 
 \begin_layout Standard
-Both preface and epilogue have been added to better motivate the thesis
- and to provide a thread connecting the three chapters.
+A preface and an epilogue have been added to the thesis in order to better
+ motivate the topic and to provide a thread connecting the three chapters.
  The abstract as well as parts of the chapters have been changed to align
  with this thread.
- Most importantly, the third chapter has been rewritten and brought in the
- forefront to discuss some theoretical concerns with the view of status
- consumption.
- Following is the list of the changes made.
+ As suggested in the viva examination, the third chapter has been rewritten
+ substantially.
+ The re-organisation of the chapters has also resulted in making the theoretical
+ chapter as the first chapter - which now discusses the theoretical concerns
+ with the view of status consumption used in the thesis.
+ Following is a summary of changes that are applicable to the thesis overall.
 \end_layout
 
 \begin_layout Enumerate
 A preface has been added to highlight the particular notion of status consumptio
-n, to highlight the key results from the empirical chapter and discuss the
- research question in more concrete terms.
- The problems with definition of status consumption are detailed in the
- preface as well as a theoretical chapter.
- This chapter discusses real-life problems that a model attempts to address
- (PENDING: TENNIS and Interviews).
- The scope of the specific view of status consumption has also been discussed.
+n - highlighting key results from the empirical chapter while discussing
+ the research question in more concrete terms.
+ The problems with definition of status consumption are detailed in both
+ the preface and the theoretical chapter - which now is the first chapter
+ in the thesis.
+ As suggested in the examiners' report, this first theoretical chapter also
+ discusses real-life problems that the model in the chapter attempts to
+ address (PENDING: TENNIS and Interviews).
+ The scope of the specific view of status consumption has also been detailed.
 \end_layout
 
 \begin_layout Enumerate
@@ -189,7 +288,7 @@ Changes in Theoretical Chapter
 \end_layout
 
 \begin_layout Standard
-The chapter has had a substantial rewrite.
+The chapter has undergone a substantial rewrite.
  The model has been changed and solved analytically without resorting to
  any arbitrary probability functions of income mobility.
  Following is a summary of changes made in response to the suggestions made
@@ -224,9 +323,9 @@ ons - has been explained in the introduction of the chapter.
 \end_layout
 
 \begin_layout Enumerate
-The chapter discussions important contributions to the literature - including
+The chapter discusses important contributions to the literature - including
  Dugar, Bhattacharya & Reiley (2012), Moldovanu, Sela & Shi (2007), Truyts
- (2010), Roychowdhury (2016).
+ (2010) and Roychowdhury (2016).
 \end_layout
 
 \begin_layout Subsubsection
@@ -234,7 +333,9 @@ Changes in First Empirical Chapter
 \end_layout
 
 \begin_layout Standard
-Following changes were made based on the suggestions in the report.
+Notice that the first empirical chapter is now the second chapter in the
+ thesis.
+ Following changes were made based on the suggestions in the report.
 \end_layout
 
 \begin_layout Enumerate
@@ -259,24 +360,25 @@ Changes in Second Empirical Chapter
 \end_layout
 
 \begin_layout Standard
-Following changes were made based on the suggestions in the report.
+Notice that the second empirical chapter is now the third chapter in the
+ thesis.
+ Following changes were made based on the suggestions in the report.
 \end_layout
 
 \begin_layout Enumerate
 The chapter introduction explains that the exploration of the role of household
  permanent income (total expenditure) is the main purpose of the empirical
- analysis in the chapter.
+ analysis.
 \end_layout
 
 \begin_layout Enumerate
 The chapter explains that education is not considered aspirational in the
- strictest sense but is only explored as consumption of status value (this
- may suggest changing the title of the thesis).
+ strictest sense but is only explored as consumption of status value.
  
 \end_layout
 
 \begin_layout Enumerate
-The focus on the measure of urbanisation has been dropped.
+The attempts to measure urbanisation have been dropped.
  Instead, the local wealth measure is discussed as one of the main explanatory
  variables - leaving urban-rural distinctions only as a means to compare
  the analysis with a more conventional one.
@@ -284,6 +386,8 @@ The focus on the measure of urbanisation has been dropped.
  as the measure of urbanisation or of concentration of assets.
  Instead, average assets in the district are discussed plainly as a measure
  of local wealth.
+ This approach had been one of the choices that were suggested in the examiners'
+ report.
  
 \end_layout
 
