@@ -61,13 +61,11 @@ def get_calculator_expression():
     return expr
 
 
-def add_staff(toks):
-    print (toks)
-    
 
 def add_unit(toks):
     global taalaqueue
     global notesqueue 
+    global taalasize
     taalaqueue.append(deepcopy(notesqueue ))
     notesqueue = []
     
@@ -75,9 +73,13 @@ def add_unit(toks):
 def add_note(toks):
     if len(toks)>1:
         raise RuntimeError("cannot have more than one note within the same token")
+    
     global notesqueue 
 
     notesqueue.append(toks[0])
+    
+def add_collection(toks):
+    print("add_collection = " + repr(toks))
     
 def grammar():
     gap = Literal("-")
@@ -85,15 +87,18 @@ def grammar():
     lpar, rpar = map(Literal, "()")
     lsqb, rsqb= map(Literal, "[]")
     singlenote = ( gap| Word(alphanums) ) .setParseAction(add_note)
-    singleunit = (lpar + delimitedList(Group(singlenote)) [...] + rpar | gap).setParseAction(add_unit)
+    notecollection = (lpar + delimitedList(Group(singlenote)) [...] + rpar ).setParseAction(add_unit)
+    singleunit = notecollection.setParseAction(add_collection) + (comma [...] + notecollection)[...]
+    
     staff = (lsqb + delimitedList(Group(singleunit)) + rsqb)
     return staff
     
 if __name__ == '__main__':
     #input_string = "((A1,A2,C3),(A2,-,A3))"
-    input_string = "[ (A1,A2),(A2,-)]"
+    input_string = "[ (A1,A2),(A2,-),(A3,-)]"
     notesqueue = []
     taalaqueue =[]
+    taalasize = -1
     pattern = grammar()
     if input_string != "":
             # try parsing the input string
@@ -103,4 +108,4 @@ if __name__ == '__main__':
                 L = ["Parse Failure", input_string, (str(err), err.line, err.column)]
                 print(L)
 
-    print("TEST")
+    print(taalaqueue)
