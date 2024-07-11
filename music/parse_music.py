@@ -100,12 +100,11 @@ def grammar():
     singlenote = ( gap| Word(alphanums) ) .setParseAction(add_note)
     ## notecollection = (lpar + delimitedList(Group(singlenote)) [...] + rpar ).setParseAction(add_unit)
     notecollection = (lpar + OneOrMore(singlenote) + rpar )    
+    notesequence = OneOrMore(singlenote)
     
     singleunit = Forward()
     singleunit <<=  notecollection.setParseAction(add_collection)  \
-        | ( lpar + singleunit[...] + singleunit[...] + rpar ) \
-            | ( lpar + OneOrMore(singlenote.setParseAction(add_note)) + notecollection + rpar ) \
-            | ( lpar + notecollection + OneOrMore(singlenote.setParseAction(add_note)) + rpar ) 
+        | ( lpar + OneOrMore(singleunit) + rpar ) | notesequence
         
     return singleunit
     
@@ -115,7 +114,7 @@ def grammar():
 if __name__ == '__main__':
     #input_string = "((A1,A2,C3),(A2,-,A3))"
     #input_string = "[ (A1,A2),(A2,-),(A3,-)]"
-    input_string = "( (A1 A2 A3) (A3 A4))"
+    input_string = "(A0 (A1 A2) A3 (A4 A5)) "
     notesqueue = []
     taalaqueue =[]
     taalasize = -1
