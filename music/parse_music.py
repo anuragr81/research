@@ -12,7 +12,9 @@ from pyparsing import (
     CaselessKeyword,
     Suppress,
     delimitedList,
-)
+    OneOrMore,
+    ZeroOrMore
+    )
 
 
 def push_first(toks):
@@ -67,35 +69,53 @@ def add_unit(toks):
     global notesqueue 
     global taalasize
     taalaqueue.append(deepcopy(notesqueue ))
+    print("notesqueue =" + repr(notesqueue ))
     notesqueue = []
     
     
 def add_note(toks):
-    if len(toks)>1:
-        raise RuntimeError("cannot have more than one note within the same token")
+    #if len(toks)>1:
+    #    raise RuntimeError("cannot have more than one note within the same token")
     
     global notesqueue 
 
     notesqueue.append(toks[0])
+    print("add_note - %s" % str(notesqueue))
+    return None
+
+def add_single_unit(toks):
+    #print("add_single_unit :: toks=" + str(toks))
+    return None
     
 def add_collection(toks):
-    print("add_collection = " + repr(toks))
-    
+    if toks:
+        print("add_collection = ( " + ' '.join([str(toks[i]) for i,_ in enumerate(toks) if i > 0 and  i < len(toks)-1 ])  + ")")
+
+
 def grammar():
     gap = Literal("-")
-    comma = Literal(",")
+    #comma = Literal(",")
     lpar, rpar = map(Literal, "()")
     lsqb, rsqb= map(Literal, "[]")
     singlenote = ( gap| Word(alphanums) ) .setParseAction(add_note)
-    notecollection = (lpar + delimitedList(Group(singlenote)) [...] + rpar ).setParseAction(add_unit)
-    singleunit = notecollection.setParseAction(add_collection) + (comma [...] + notecollection)[...]
+    ## notecollection = (lpar + delimitedList(Group(singlenote)) [...] + rpar ).setParseAction(add_unit)
+    notecollection = (lpar + OneOrMore(singlenote) + rpar )    
     
-    staff = (lsqb + delimitedList(Group(singleunit)) + rsqb)
-    return staff
+    singleunit = Forward()
+    singleunit <<=  notecollection.setParseAction(add_collection)  \
+        | ( lpar + singleunit[...] + singleunit[...] + rpar ) \
+            | ( lpar + OneOrMore(singlenote.setParseAction(add_note)) + notecollection + rpar ) \
+            | ( lpar + notecollection + OneOrMore(singlenote.setParseAction(add_note)) + rpar ) 
+        
+    return singleunit
+    
+    #staff = (lsqb + delimitedList(Group(singleunit)) + rsqb)
+    #return staff
     
 if __name__ == '__main__':
     #input_string = "((A1,A2,C3),(A2,-,A3))"
-    input_string = "[ (A1,A2),(A2,-),(A3,-)]"
+    #input_string = "[ (A1,A2),(A2,-),(A3,-)]"
+    input_string = "( (A1 A2 A3) (A3 A4))"
     notesqueue = []
     taalaqueue =[]
     taalasize = -1
