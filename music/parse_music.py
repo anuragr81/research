@@ -1,4 +1,5 @@
 from copy import deepcopy
+import numpy as np
 from math import log
 from pyparsing import (
     Literal,
@@ -70,27 +71,50 @@ def add_note(toks):
     #    raise RuntimeError("cannot have more than one note within the same token")
     
     global notesqueue 
+    debug = False
 
-    notesqueue.append(toks[0])
-    print("add_note - %s" % str(notesqueue))
+    notesqueue.append(''.join(toks))
+    if debug:
+        print("add_note - %s" % str(notesqueue))
     return None
 
 def add_single_unit(toks):
     global taalaqueue
     global notesqueue 
     global taalasize
+    debug = False
     taalaqueue.append(deepcopy(notesqueue ))
-    print("notesqueue =" + repr(notesqueue ))
+    if debug:
+        print("notesqueue =" + repr(notesqueue ))
     notesqueue = []
     
     return None
     
-def add_collection(toks):
+
+def add_collection_group(toks):
+    debug = False
     if toks:
         notesarr = [str(toks[i]) for i,_ in enumerate(toks) if i > 0 and  i < len(toks)-1 ]
-        print("add_collection = ( " + ' '.join(notesarr)  + ")")
-        notesqueue.append(notesarr)
-
+        if debug:
+            print("add_collection_group= ( " + ' '.join(notesarr)  + ")")
+        index=0
+        #ensure that first letter is not a single-quote
+        if notesarr[index]=="'":
+            raise ValueError("Cannot have first letter as single-quote")
+        #since the first letter is not a single-quote, it can be treated 
+        #as the first note
+        notestoappend=[]
+        notestoappend.append(notesarr[index])
+        index = index + 1
+        while index < len(notesarr):
+            if notesarr[index] == "'":
+                # change the string of the last element
+                notestoappend[-1]=notestoappend[-1]+"'"
+            else:
+                notestoappend.append(notesarr[index])
+            index = index +1
+            
+        notesqueue.append(notestoappend)
 
 def approx_time_signature(c,u,x):
     """
@@ -107,33 +131,65 @@ def approx_time_signature(c,u,x):
 
 def grammar():
     gap = Literal("-")
-    lpar, rpar = map(Literal, "()")
+    lpar, rpar , squote= map(Literal, "()'")
     lsqb, rsqb= map(Literal, "[]")
-    singlenote = gap| Word(alphanums) 
+    
+    singlenote = gap| (Word(alphanums) + ZeroOrMore(squote))
     
     singleunit = Forward()
-    singleunit <<=  (lpar + OneOrMore(singlenote) + rpar).setParseAction(add_collection)  \
-        | ( lpar + OneOrMore(singleunit).setParseAction(add_single_unit)+ rpar ) | OneOrMore(singlenote).setParseAction(add_note)
-        
-    return singleunit
+    singleunit <<=  (lpar + OneOrMore(singlenote) + rpar).setParseAction(add_collection_group)  \
+        | ( lpar + OneOrMore(singleunit).setParseAction(add_single_unit)+ rpar ) \
+            | OneOrMore(singlenote).setParseAction(add_note)
     
-    #staff = (lsqb + delimitedList(Group(singleunit)) + rsqb)
-    #return staff
+    staff = (lsqb + delimitedList(Group(singleunit)) + rsqb)
+    return staff
     
-if __name__ == '__main__':
-    #input_string = "((A1,A2,C3),(A2,-,A3))"
-    #input_string = "[ (A1,A2),(A2,-),(A3,-)]"
-    input_string = "(A0 (A1 A2) A3 (A4 A5) A6) "
+
+def get_mapping():
+    return {
+        '-':'-',
+        'S':'c',
+        'r':'des',
+        'R':'d',        
+        'g':'ees',
+        'G':'e',
+        'm':'f',
+        'M':'fis',
+        'P':'g',
+        'd':'aes',
+        'D':'a',
+        'n':'bes',
+        'N':'b',
+        }
+def parse_music_sequence(input_string):
+    global notesqueue
+    global taalaqueue
+    pattern = grammar()
+   
     notesqueue = []
     taalaqueue =[]
-    taalasize = -1
-    pattern = grammar()
+   
     if input_string != "":
-            # try parsing the input string
-            try:
-                L = pattern.parseString(input_string, parseAll=True)
-            except ParseException as err:
-                L = ["Parse Failure", input_string, (str(err), err.line, err.column)]
-                print(L)
+        try:
+            L = pattern.parseString(input_string, parseAll=True)
+            if notesqueue:
+                taalaqueue += notesqueue
+                notesqueue=[]
+        except ParseException as err:
+            L = ["Parse Failure", input_string, (str(err), err.line, err.column)]
+            print(L)
+            return []
+        return taalaqueue
+    else:
+        return []
 
-    print(taalaqueue)
+
+def post_process_results(seq):
+    if any(x !=0 for x in np.diff( [len(x) for x in seq])):
+        raise ValueError("Cannot have different lengths")
+        
+if __name__ == '__main__':
+    input_string = "[(S (R' -) M (P G'') - ) , (G - R - S)]"
+    taalaseq = parse_music_sequence(input_string) 
+    #post_process_results(taalaseq )
+    print(taalaseq )
