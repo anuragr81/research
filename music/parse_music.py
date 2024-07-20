@@ -1,5 +1,5 @@
 from copy import deepcopy
-
+from math import log
 from pyparsing import (
     Literal,
     Word,
@@ -63,14 +63,6 @@ def get_calculator_expression():
     return expr
 
 
-
-def add_unit(toks):
-    global taalaqueue
-    global notesqueue 
-    global taalasize
-    taalaqueue.append(deepcopy(notesqueue ))
-    print("notesqueue =" + repr(notesqueue ))
-    notesqueue = []
     
     
 def add_note(toks):
@@ -84,27 +76,44 @@ def add_note(toks):
     return None
 
 def add_single_unit(toks):
-    #print("add_single_unit :: toks=" + str(toks))
+    global taalaqueue
+    global notesqueue 
+    global taalasize
+    taalaqueue.append(deepcopy(notesqueue ))
+    print("notesqueue =" + repr(notesqueue ))
+    notesqueue = []
+    
     return None
     
 def add_collection(toks):
     if toks:
-        print("add_collection = ( " + ' '.join([str(toks[i]) for i,_ in enumerate(toks) if i > 0 and  i < len(toks)-1 ])  + ")")
+        notesarr = [str(toks[i]) for i,_ in enumerate(toks) if i > 0 and  i < len(toks)-1 ]
+        print("add_collection = ( " + ' '.join(notesarr)  + ")")
+        notesqueue.append(notesarr)
 
+
+def approx_time_signature(c,u,x):
+    """
+    The function returns approximate time signature for the x count of beats
+    that are to be played with c-counts of u-unit. For example, if 7 units (x=7) are played in
+    one bar which comprises of 4 counts (c=4) or a quarter-note (u=4), then the time signature 
+    approximates 1/7 ( c/(u*x) = 4 / (4*7)) by using x* (2**y) = c/u => y = log(c/(x*u),2) 
+    if y=3, then 1/(2**3) i.e. 1/8 approximates 1/7.
+    
+    Similarly, if c=3, u=4, x=7, then 3/(4*7) is approximated 3/4 ~ 7/8
+    
+    """
+    return 2**round(log(c/(u*x),1/2),0)
 
 def grammar():
     gap = Literal("-")
-    #comma = Literal(",")
     lpar, rpar = map(Literal, "()")
     lsqb, rsqb= map(Literal, "[]")
-    singlenote = ( gap| Word(alphanums) ) .setParseAction(add_note)
-    ## notecollection = (lpar + delimitedList(Group(singlenote)) [...] + rpar ).setParseAction(add_unit)
-    notecollection = (lpar + OneOrMore(singlenote) + rpar )    
-    notesequence = OneOrMore(singlenote)
+    singlenote = gap| Word(alphanums) 
     
     singleunit = Forward()
-    singleunit <<=  notecollection.setParseAction(add_collection)  \
-        | ( lpar + OneOrMore(singleunit) + rpar ) | notesequence
+    singleunit <<=  (lpar + OneOrMore(singlenote) + rpar).setParseAction(add_collection)  \
+        | ( lpar + OneOrMore(singleunit).setParseAction(add_single_unit)+ rpar ) | OneOrMore(singlenote).setParseAction(add_note)
         
     return singleunit
     
@@ -114,7 +123,7 @@ def grammar():
 if __name__ == '__main__':
     #input_string = "((A1,A2,C3),(A2,-,A3))"
     #input_string = "[ (A1,A2),(A2,-),(A3,-)]"
-    input_string = "(A0 (A1 A2) A3 (A4 A5)) "
+    input_string = "(A0 (A1 A2) A3 (A4 A5) A6) "
     notesqueue = []
     taalaqueue =[]
     taalasize = -1
