@@ -117,18 +117,22 @@ def add_collection_group(toks):
             
         notesqueue.append(notestoappend)
 
-def approx_time_signature(c,u,x):
+def approx_time_signature(notelen, num):
     """
-    The function returns approximate time signature for the x count of beats
-    that are to be played with c-counts of u-unit. For example, if 7 units (x=7) are played in
-    one bar which comprises of 4 counts (c=4) or a quarter-note (u=4), then the time signature 
-    approximates 1/7 ( c/(u*x) = 4 / (4*7)) by using x* (2**y) = c/u => y = log(c/(x*u),2) 
-    if y=3, then 1/(2**3) i.e. 1/8 approximates 1/7.
-    
-    Similarly, if c=3, u=4, x=7, then 3/(4*7) is approximated 3/4 ~ 7/8
-    
+    The notelen is the length of the note the num units of size (1/2**x) for some integer x are approximately 
+    meant to fit into.   (1/2**x)*(num+d) thus approximates notelen where d is an integer. We run the search 
+    until d < num/3 
     """
-    return int(2**ceil(log(c/(u*x),1/2)))
+    solutions = []
+    d = 0 
+    while d <= num/3 :
+        for k in range(8):
+            div = 2**(k+1)
+            solutions.append({'error':notelen - (num+d)/div,'solution':{'div':div,'d':d}})
+        d=d+1
+    minerr = min(abs(x['error']) for x in solutions)
+    sol = [x for x in solutions if x['error']==minerr][0]
+    return sol['solution']
 
 def grammar():
     gap = Literal("-")
@@ -146,12 +150,12 @@ def grammar():
     return staff
     
 
-def get_mapping():
-    return {
-        '-':'-',
+def parse_note(note,octave_shift,unit_denominator):
+    m={
+        '-':'r',
         'S':'c',
         'r':'des',
-        'R':'d',        
+        'R':'d',
         'g':'ees',
         'G':'e',
         'm':'f',
@@ -162,6 +166,15 @@ def get_mapping():
         'n':'bes',
         'N':'b',
         }
+    notetotranslate=note
+    addendum = ""
+    while notetotranslate.endswith("'"):
+        notetotranslate = notetotranslate[0:-1]
+        addendum = addendum  + "'"
+    
+    addendum = addendum + ''.join(["'"]*octave_shift) if notetotranslate!='-' else addendum
+    return m[notetotranslate ]  + addendum + str(unit_denominator)
+
 def parse_music_sequence(input_string):
     global notesqueue
     global taalaqueue
@@ -185,7 +198,7 @@ def parse_music_sequence(input_string):
         return []
 
 
-def create_lilypond_sequence(seq,unit_denominator):
+def create_lilypond_sequence(seq,unit_denominator,octave_shift=0):
     if not seq or not isinstance(seq,list):
         raise ValueError("seq must be a list")
     num_units = len(seq[0])
@@ -194,24 +207,24 @@ def create_lilypond_sequence(seq,unit_denominator):
     
     if any(x !=0 for x in np.diff( [len(x) for x in seq])):
         raise ValueError("Cannot have different lengths")
-    m = get_mapping()   
-    output = []
+    outnotes=[]
     for i,t in enumerate(seq):
-        outnotes=[]
         for note in t:
             if isinstance(note, str):
-                outnotes.append(m.get(note))
+                outnotes.append(parse_note(note,octave_shift,unit_denominator))
             elif isinstance(note,list):
-                ts = approx_time_signature(c=1,u=unit_denominator,x=len(note))
+                sol = approx_time_signature(1/unit_denominator ,len(note))
+                newnote =  note + ['-']*sol['d'] if sol['d'] else note
+                outnotes = outnotes + [parse_note(x,octave_shift,sol['div']) for x in newnote]
             else:
                 raise ValueError("Unsupported note-unit")
-            print("note(type=%s)=%s" % (type(note),str(note)))
-            
-    return("num_units="+str(num_units) + " den_units=" + str(unit_denominator) + " ts=" + str(ts))
+
+    return {'numerator':num_units, 'denominator': unit_denominator, 'notes':' '.join(outnotes)}
+    
     
 if __name__ == '__main__':
-    input_string = "[(S (R' -) M (P G'') - ) , (G - R - S)]"
+    input_string = "[(S (R' -) M (P R G -) - ) , (G - R - S)]"
     taalaseq = parse_music_sequence(input_string) 
     print(taalaseq )
-    print(create_lilypond_sequence(taalaseq ,unit_denominator=4))
+    print(create_lilypond_sequence(taalaseq ,unit_denominator=4,octave_shift=1))
     
