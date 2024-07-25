@@ -1,6 +1,7 @@
 from copy import deepcopy
 import numpy as np
-from math import log
+from math import log,ceil, floor
+
 from pyparsing import (
     Literal,
     Word,
@@ -127,7 +128,7 @@ def approx_time_signature(c,u,x):
     Similarly, if c=3, u=4, x=7, then 3/(4*7) is approximated 3/4 ~ 7/8
     
     """
-    return 2**round(log(c/(u*x),1/2),0)
+    return int(2**ceil(log(c/(u*x),1/2)))
 
 def grammar():
     gap = Literal("-")
@@ -184,12 +185,33 @@ def parse_music_sequence(input_string):
         return []
 
 
-def post_process_results(seq):
+def create_lilypond_sequence(seq,unit_denominator):
+    if not seq or not isinstance(seq,list):
+        raise ValueError("seq must be a list")
+    num_units = len(seq[0])
+    if not isinstance(unit_denominator ,int) or unit_denominator not in (2,4,8,16,32,64):
+        raise ValueError("Unsupported unit_denominator : %s" % str(unit_denominator))
+    
     if any(x !=0 for x in np.diff( [len(x) for x in seq])):
         raise ValueError("Cannot have different lengths")
-        
+    m = get_mapping()   
+    output = []
+    for i,t in enumerate(seq):
+        outnotes=[]
+        for note in t:
+            if isinstance(note, str):
+                outnotes.append(m.get(note))
+            elif isinstance(note,list):
+                ts = approx_time_signature(c=1,u=unit_denominator,x=len(note))
+            else:
+                raise ValueError("Unsupported note-unit")
+            print("note(type=%s)=%s" % (type(note),str(note)))
+            
+    return("num_units="+str(num_units) + " den_units=" + str(unit_denominator) + " ts=" + str(ts))
+    
 if __name__ == '__main__':
     input_string = "[(S (R' -) M (P G'') - ) , (G - R - S)]"
     taalaseq = parse_music_sequence(input_string) 
-    #post_process_results(taalaseq )
     print(taalaseq )
+    print(create_lilypond_sequence(taalaseq ,unit_denominator=4))
+    
