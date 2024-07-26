@@ -72,7 +72,7 @@ def add_note(toks):
     #    raise RuntimeError("cannot have more than one note within the same token")
     
     global notesqueue 
-    debug = False
+    debug = True
 
     notesqueue.append(''.join(toks))
     if debug:
@@ -83,7 +83,7 @@ def add_single_unit(toks):
     global taalaqueue
     global notesqueue 
     global taalasize
-    debug = False
+    debug = True
     taalaqueue.append(deepcopy(notesqueue ))
     if debug:
         print("notesqueue =" + repr(notesqueue ))
@@ -93,7 +93,7 @@ def add_single_unit(toks):
     
 
 def add_collection_group(toks):
-    debug = False
+    debug = True
     if toks:
         notesarr = [str(toks[i]) for i,_ in enumerate(toks) if i > 0 and  i < len(toks)-1 ]
         if debug:
@@ -139,12 +139,12 @@ def grammar():
     lpar, rpar , squote= map(Literal, "()'")
     lsqb, rsqb= map(Literal, "[]")
     
-    singlenote = gap| (Word(alphanums) + ZeroOrMore(squote))
+    singlenote = gap | (Word(alphanums) + ZeroOrMore(squote))
     
     singleunit = Forward()
     singleunit <<=  (lpar + OneOrMore(singlenote) + rpar).setParseAction(add_collection_group)  \
-        | ( lpar + OneOrMore(singleunit).setParseAction(add_single_unit)+ rpar ) \
-            | OneOrMore(singlenote).setParseAction(add_note)
+        | ( lpar + OneOrMore(singleunit).setParseAction(add_single_unit)+ rpar ) # \
+            #| OneOrMore(singlenote).setParseAction(add_note)
     
     staff = (lsqb + delimitedList(Group(singleunit)) + rsqb)
     return staff
@@ -166,6 +166,7 @@ def parse_note(note,octave_shift,unit_denominator):
         'n':'bes',
         'N':'b',
         }
+    
     notetotranslate=note
     addendum = ""
     while notetotranslate.endswith("'"):
@@ -221,9 +222,13 @@ def create_lilypond_sequence(seq,unit_denominator,octave_shift=0):
 
     return {'numerator':num_units, 'denominator': unit_denominator, 'notes':' '.join(outnotes)}
     
-    
+def get_input_string():
+    #return "[(S (r' -) m (P r G -) - ) , (G - r - S)]"
+    return "[( - - - - G m ) , ( d - D (P d) P)]"
+    #return "[( - - - - - - - - G m ) , ( d - d P ( P d ) P m ( m P ) m G m )]"
+
 if __name__ == '__main__':
-    input_string = "[(S (R' -) M (P R G -) - ) , (G - R - S)]"
+    input_string = get_input_string()
     taalaseq = parse_music_sequence(input_string) 
     print(taalaseq )
     print(create_lilypond_sequence(taalaseq ,unit_denominator=4,octave_shift=1))
