@@ -68,8 +68,6 @@ def get_calculator_expression():
     
     
 def add_note(toks):
-    #if len(toks)>1:
-    #    raise RuntimeError("cannot have more than one note within the same token")
     
     global notesqueue 
     debug = True
@@ -82,7 +80,6 @@ def add_note(toks):
 def add_single_unit(toks):
     global taalaqueue
     global notesqueue 
-    global taalasize
     debug = True
     taalaqueue.append(deepcopy(notesqueue ))
     if debug:
@@ -114,7 +111,13 @@ def add_collection_group(toks):
             else:
                 notestoappend.append(notesarr[index])
             index = index +1
-            
+        
+        
+        # remove last notes added in the queue before adding them as 
+        # a group
+        global notesqueue 
+        for _ in range(0,len(notesarr)):
+            notesqueue = notesqueue [0:-1]
         notesqueue.append(notestoappend)
 
 def approx_time_signature(notelen, num):
@@ -136,15 +139,15 @@ def approx_time_signature(notelen, num):
 
 def grammar():
     gap = Literal("-")
-    lpar, rpar , squote= map(Literal, "()'")
+    lpar, rpar , squote, lcurl, rcurl= map(Literal, "()'{}")
     lsqb, rsqb= map(Literal, "[]")
     
     singlenote = gap | (Word(alphanums) + ZeroOrMore(squote))
     
-    singleunit = Forward()
-    singleunit <<=  (lpar + OneOrMore(singlenote) + rpar).setParseAction(add_collection_group)  \
-        | ( lpar + OneOrMore(singleunit).setParseAction(add_single_unit)+ rpar ) # \
-            #| OneOrMore(singlenote).setParseAction(add_note)
+    onebeat = (lpar + OneOrMore(singlenote) + rpar).setParseAction(add_collection_group) \
+        | singlenote.setParseAction(add_note)
+    
+    singleunit =  ( lcurl + OneOrMore(onebeat).setParseAction(add_single_unit)+ rcurl ) 
     
     staff = (lsqb + delimitedList(Group(singleunit)) + rsqb)
     return staff
@@ -193,7 +196,7 @@ def parse_music_sequence(input_string):
         except ParseException as err:
             L = ["Parse Failure", input_string, (str(err), err.line, err.column)]
             print(L)
-            return []
+            raise err
         return taalaqueue
     else:
         return []
@@ -224,12 +227,13 @@ def create_lilypond_sequence(seq,unit_denominator,octave_shift=0):
     
 def get_input_string():
     #return "[(S (r' -) m (P r G -) - ) , (G - r - S)]"
-    return "[( - - - - G m ) , ( d - D (P d) P)]"
-    #return "[( - - - - - - - - G m ) , ( d - d P ( P d ) P m ( m P ) m G m )]"
+    #return "[{ - - - - G m } , { d - D (P d) P -}]"
+    
+    return "[{ - - - - - - - - G m } , { d - d P ( P d ) P m ( m P ) m (G m) }]"
 
 if __name__ == '__main__':
     input_string = get_input_string()
     taalaseq = parse_music_sequence(input_string) 
     print(taalaseq )
-    print(create_lilypond_sequence(taalaseq ,unit_denominator=4,octave_shift=1))
+    print(create_lilypond_sequence(taalaseq ,unit_denominator=8,octave_shift=1))
     
