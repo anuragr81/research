@@ -89,10 +89,11 @@ def add_single_unit(toks):
     return None
     
 
-def add_collection_group(toks):
+def add_collection_group(s,loc,toks):
     debug = True
     if toks:
-        notesarr = [str(toks[i]) for i,_ in enumerate(toks) if i > 0 and  i < len(toks)-1 ]
+        notesarr =toks
+        
         if debug:
             print("add_collection_group= ( " + ' '.join(notesarr)  + ")")
         index=0
@@ -108,6 +109,9 @@ def add_collection_group(toks):
             if notesarr[index] == "'":
                 # change the string of the last element
                 notestoappend[-1]=notestoappend[-1]+"'"
+            elif notesarr[index] == "%":
+                # change the string of the last element
+                notestoappend[-1]=notestoappend[-1]+"%"
             else:
                 notestoappend.append(notesarr[index])
             index = index +1
@@ -139,21 +143,21 @@ def approx_time_signature(notelen, num):
 
 def grammar():
     gap = Literal("-")
-    lpar, rpar , squote, lcurl, rcurl= map(Literal, "()'{}")
+    lpar, rpar , squote, pct, lcurl, rcurl= map(Literal, "()'%{}")
     lsqb, rsqb= map(Literal, "[]")
     
-    singlenote = gap | (Word(alphanums) + ZeroOrMore(squote))
+    singlenote = gap | (Word(alphanums) + ZeroOrMore(squote|pct)) 
     
-    onebeat = (lpar + OneOrMore(singlenote) + rpar).setParseAction(add_collection_group) \
-        | singlenote.setParseAction(add_note)
+    onebeat = (lpar + OneOrMore(singlenote).set_parse_action(add_collection_group) + rpar) \
+        | singlenote.set_parse_action(add_note)
     
-    singleunit =  ( lcurl + OneOrMore(onebeat).setParseAction(add_single_unit)+ rcurl ) 
+    singleunit =  ( lcurl + OneOrMore(onebeat).set_parse_action(add_single_unit)+ rcurl ) 
     
     staff = (lsqb + delimitedList(Group(singleunit)) + rsqb)
     return staff
     
 
-def parse_note(note,octave_shift,unit_denominator):
+def parse_note(note,unit_denominator):
     m={
         '-':'r',
         'S':'c',
@@ -172,13 +176,21 @@ def parse_note(note,octave_shift,unit_denominator):
     
     notetotranslate=note
     addendum = ""
-    while notetotranslate.endswith("'"):
-        notetotranslate = notetotranslate[0:-1]
-        addendum = addendum  + "'"
-    
-    addendum = addendum + ''.join(["'"]*octave_shift) if notetotranslate!='-' else addendum
+    if notetotranslate.endswith("'"):
+        
+        while notetotranslate.endswith("'"):
+            notetotranslate = notetotranslate[0:-1]
+            addendum = addendum  + "'"
+        
+    elif notetotranslate.endswith("%"):
+        while notetotranslate.endswith("%"):
+            notetotranslate = notetotranslate[0:-1]
+            addendum = addendum  + ","
+    else:
+        addendum = ""
+        
     return m[notetotranslate ]  + addendum + str(unit_denominator)
-
+    
 def parse_music_sequence(input_string):
     global notesqueue
     global taalaqueue
@@ -189,7 +201,7 @@ def parse_music_sequence(input_string):
    
     if input_string != "":
         try:
-            L = pattern.parseString(input_string, parseAll=True)
+            L = pattern.parse_string(input_string, parseAll=True)
             if notesqueue:
                 taalaqueue += notesqueue
                 notesqueue=[]
@@ -202,7 +214,7 @@ def parse_music_sequence(input_string):
         return []
 
 
-def create_lilypond_sequence(seq,unit_denominator,octave_shift=0):
+def create_lilypond_sequence(seq,unit_denominator):
     if not seq or not isinstance(seq,list):
         raise ValueError("seq must be a list")
     num_units = len(seq[0])
@@ -215,11 +227,11 @@ def create_lilypond_sequence(seq,unit_denominator,octave_shift=0):
     for i,t in enumerate(seq):
         for note in t:
             if isinstance(note, str):
-                outnotes.append(parse_note(note,octave_shift,unit_denominator))
+                outnotes.append(parse_note(note,unit_denominator))
             elif isinstance(note,list):
                 sol = approx_time_signature(1/unit_denominator ,len(note))
                 newnote =  note + ['-']*sol['d'] if sol['d'] else note
-                outnotes = outnotes + [parse_note(x,octave_shift,sol['div']) for x in newnote]
+                outnotes = outnotes + [parse_note(x,sol['div']) for x in newnote]
             else:
                 raise ValueError("Unsupported note-unit")
 
@@ -229,11 +241,16 @@ def get_input_string():
     #return "[(S (r' -) m (P r G -) - ) , (G - r - S)]"
     #return "[{ - - - - G m } , { d - D (P d) P -}]"
     
-    return "[{ - - - - - - - - G m } , { d - d P ( P d ) P m ( m P ) m (G m) }]"
+    #return "[{ - - - - - - - - G m } , { d - d P ( P d ) P m ( m P ) m (G m) }]"
+    #return "[{r - G m P m (G m) (G r) S -},{ r (S N) S G m P d N S r}]"
+    #return "[{P - P (N d) - N S S S -}, { ( N d) - ( N d) S N r ( S N ) S ( N d ) P } , { P m ( m P) G m P d N S r }, { S N d P N d ( P m ) P - -  }]"
+    #return "[{m P - N d N S' - S' -},{ S' N d P m G r - - S }]"
+    return "[{ S R }, { g - } ]"
+
 
 if __name__ == '__main__':
     input_string = get_input_string()
     taalaseq = parse_music_sequence(input_string) 
     print(taalaseq )
-    print(create_lilypond_sequence(taalaseq ,unit_denominator=8,octave_shift=1))
+    print(create_lilypond_sequence(taalaseq ,unit_denominator=2))
     
