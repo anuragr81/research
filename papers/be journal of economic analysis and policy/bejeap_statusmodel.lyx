@@ -1,5 +1,5 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -86,11 +86,11 @@
 theorems-ams-chap-bytype
 theorems-ams-extended-chap-bytype
 \end_modules
-\maintain_unincluded_children false
+\maintain_unincluded_children no
 \language english
 \language_package default
-\inputencoding auto
-\fontencoding global
+\inputencoding auto-legacy
+\fontencoding auto
 \font_roman "default" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
@@ -98,7 +98,9 @@ theorems-ams-extended-chap-bytype
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
-\font_osf false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
 \use_microtype false
@@ -132,7 +134,9 @@ theorems-ams-extended-chap-bytype
 \suppress_date false
 \justification true
 \use_refstyle 1
+\use_formatted_ref 0
 \use_minted 0
+\use_lineno 0
 \index Index
 \shortcut idx
 \color #008000
@@ -155,11 +159,16 @@ theorems-ams-extended-chap-bytype
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\tablestyle default
 \tracking_changes false
 \output_changes false
+\change_bars false
+\postpone_fragile_content false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
 \end_header
 
 \begin_body
@@ -169,25 +178,13 @@ Status Competitions and Income Inequality
 \end_layout
 
 \begin_layout Abstract
-Status motivations in consumption have generated an immense interest at
- a time when social mobility has been relatively stagnant - but the consequences
- of inequality on consumption are still poorly understood.
+Status motivations in consumption have generated an immense interest at a time when social mobility has been relatively stagnant - but the consequences of inequality on consumption are still poorly understood.
  To explain status motivations under environments of income inequality,
- we treat opportunities for mobility as an explicit link between economic
- and social goals of the individual and focus on instances of status consumption
- where consumption can be viewed as an investment towards future economic
- success.
- The effect of relative incomes on the agents’ consumption and labour decisions
- is then explored in an economy with a dynamic hierarchy of rich and poor
- positions that participants are able to move between.
- Relying on diminishing returns to wealth utility - optimised by participants
- endowed with randomly distributed success-determining attributes - the
- results indicate that a rise in income inequality provides more incentive
- to participate in status competitions.
- As participants bear costs for the mobility, the equilibrium conditions
- suggest only two states in the long-run - one where both rich and poor
- strive for status and the other where only the rich participate in status
- competitions.
+ we treat opportunities for mobility as an explicit link between economic and social goals of the individual and focus on instances of status consumption where consumption can be viewed as an investment towards future economic success.
+ The effect of relative incomes on the agents’ consumption and labour decisions is then explored in an economy with a dynamic hierarchy of rich and poor positions that participants are able to move between.
+ Relying on diminishing returns to wealth utility - optimised by participants endowed with randomly distributed success-determining attributes - the results indicate that a rise in income inequality provides more incentive to participate in status competitions.
+ As participants bear costs for the mobility,
+ the equilibrium conditions suggest only two states in the long-run - one where both rich and poor strive for status and the other where only the rich participate in status competitions.
 \end_layout
 
 \begin_layout Standard
@@ -201,25 +198,14 @@ status open
 
 \begin_layout Plain Layout
 
-% We show how a competition of social capital investments eventually becomes
- infeasible under diminishing returns to wealth (the writing needs to focus
- on this - the current focus on i) inequality effects on status consumption
- and ii) objective-subjective aspects of status needs to be revamped).
- Public discourse often debates whether inequality is a motivator for social
- mobility and whether lack of mobility implies  stagnation or not.
+% We show how a competition of social capital investments eventually becomes infeasible under diminishing returns to wealth (the writing needs to focus on this - the current focus on i) inequality effects on status consumption and ii) objective-subjective aspects of status needs to be revamped).
+ Public discourse often debates whether inequality is a motivator for social mobility and whether lack of mobility implies  stagnation or not.
  A basic model shows many such claims could all be true at the same time.
- A link between economic and social goals shows that inequality does motivate
- consumption of goods and services that provide mobility - but it also shows
- that there are only two long-term status in the long-run where either both
- poor and rich spend towards status or only the rich consume for status.
- This basic model confirms that observations in the post-war literature
- on positional consumption - but also establishes that inequality may motivate
- status consumption in the short-run.
- The result follows from dimishing returns to wealth and differences in
- income alone.
- So long as there exists income stratification, the argument that status
- competitions can favour the poor is made impossible due to declining marginal
- contribution of social capital investments to wealth utility.
+ A link between economic and social goals shows that inequality does motivate consumption of goods and services that provide mobility - but it also shows that there are only two long-term status in the long-run where either both poor and rich spend towards status or only the rich consume for status.
+ This basic model confirms that observations in the post-war literature on positional consumption - but also establishes that inequality may motivate status consumption in the short-run.
+ The result follows from dimishing returns to wealth and differences in income alone.
+ So long as there exists income stratification,
+ the argument that status competitions can favour the poor is made impossible due to declining marginal contribution of social capital investments to wealth utility.
 \end_layout
 
 \end_inset
@@ -262,8 +248,7 @@ noindent
 \end_layout
 
 \begin_layout Standard
-While consumer response to relative income has been of interest to economists
- for at least as far back as Veblen 
+While consumer response to relative income has been of interest to economists for at least as far back as Veblen 
 \begin_inset ERT
 status open
 
@@ -276,17 +261,43 @@ cite{VeblenLeisureClass,Duesenberry1949,HirschSocialLimits,FrankPond}
 
 \end_inset
 
-, the effects of economic inequality on consumption and labour decisions
- remain poorly understood.
- The public debates often take extreme positions on whether inequality acts
- as a motivator for social mobility or is destructive to economy.
- At a time when mobility has stagnated, more attention is paid to status
- goods (Frank's luxury ref).
- Still, there remains a disconnect between how growth is spurred by competitions
- and how status consumption become public waste.
- We believe that a microeconomic model that links motivations for labour
- and consumption to economic growth could explain how both mechanisms -
- of skills-competition and long-held inequalities are maintained in an economy.
+,
+ the effect of economic inequality on consumption and labour decisions remain a topic of intense debates.
+ The extreme positions on whether inequality acts a motivator for social mobility or a disruptor to economy.
+ At a time when mobility has stagnated,
+ more attention is paid to status goods (Frank's luxury ref).
+ Still,
+ there remains a disconnect between how growth is spurred by competitions and how status consumption become public waste.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{BarroEconomicGrowthEduc,BarroInequalityGrowth1999}
+\end_layout
+
+\end_inset
+
+.
+ Empirical analyses have since focused on subjective data to understand the environment in which inequality is experienced within a society
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{heffetz_visibility,MijsInequalityMobility2019,ZahraIndia}
+\end_layout
+
+\end_inset
+
+.
+ The current paper attempts to endogenise status rankings within a framework for labour decisions,
+ skills and income skills to explain how skills-competition may relate with income inequalities in the long-run.
  
 \end_layout
 
@@ -307,9 +318,11 @@ noindent
 \end_layout
 
 \begin_layout Standard
-To better understand the environment in which inequality and status motivations
- are experiend, several studies in economics have also sought to incorporate
- subjective data on perceptions of status and inequality 
+The notions of status vary both across economics and sociology and investments such as club membership,
+ sports can be considered both wasteful indications of status or tools for social-networking (Goode,
+ Weber).
+ The presented paper focuses on investments such as education or club membership that count towards social capital and attempts to answer how such investments may respond to rising inequalities in an economy.
+ Based on the approach taken by 
 \begin_inset ERT
 status open
 
@@ -317,37 +330,20 @@ status open
 
 
 \backslash
-cite{heffetz_visibility,MijsInequalityMobility2019,ZahraIndia}
+citeA{ColeMaliathSocialNorms1992,postlewaite1998socialbasisinterdeppreferences}
 \end_layout
 
 \end_inset
 
-.
- The current paper reconciles the two aspects of status by assuming a specific
- link between economic and social goals and thus by allowing status to have
- an indirect (instrumental) effect on consumer wealth 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ColeMaliathSocialNorms1992,postlewaite1998socialbasisinterdeppreferences"
-literal "false"
-
-\end_inset
-
-.
- The paper views status competitions as games that provide direct gains
- to the participants as probabilistic economic rewards pertaining to status
- wherein social capital investments increase the chances for economic mobility
- (e.g.
- education, club memberships etc.).
-\end_layout
-
-\begin_layout Standard
-In an attempt to explain how inequalities and competitions could both be
- necessary in an economy, the current paper views expenditure towards social
- capital as a necessary investments in a skills- economy and attempts to
- answer how inequality could increase or decrease such consumptions.
- Considering a Weberian framework, model incorporates how social barriers
- (closure or rank) may acts alongside with income differences.
+,
+ status is considered to have only an indirect (instrumental) effect on consumer wealth.
+ Within a Weberian framework for social ranks,
+ the model then interprets Chancen as probablistic rewards to the participants that are enhanced through social capital investments (e.g.
+ education,
+ club memberships etc.).
+ Viewing expenditure towards social capital as necessary investments in a skills- economy,
+ the paper explain how a rise in inequality could increase or decrease such investments.
+ It also attempts to explain how social barriers (closure and rank) may act alongside with income differences to enhance or discourage investments towards social capital.
  
 \end_layout
 
@@ -368,8 +364,7 @@ noindent
 \end_layout
 
 \begin_layout Standard
-THe probability functions are related to Weber's chancen - that determine
- a promotion to a richer economic class.
+The probability functions representing the Chancen - that determine a promotion to a richer economic class.
  Based on observations on status from 
 \begin_inset ERT
 status open
@@ -383,12 +378,10 @@ cite{goode1978celebrationheroes}
 
 \end_inset
 
- and social capital (bordieux), the model allows the probability of promotion
- for the participant to be driven both by a set of fixed individual attributes
- and the investment in social capital (these are opportunities and power
- concerns that are common in literature - Kendall, Weber) .
- The status of the participant comes only from her accumulated wealth and
- is not directly factored into the utility (an approach similar to 
+ and social capital (bordieux),
+ the model allows the probability of promotion for the participant to be driven both by a set of fixed individual attributes and the investment in social capital (these are opportunities and power concerns that are common in literature - Kendall,
+ Weber) .
+ The status of the participant comes only from her accumulated wealth and is not directly factored into the utility (an approach similar to 
 \begin_inset ERT
 status open
 
@@ -402,12 +395,10 @@ citeA{ColeMaliathSocialNorms1992,postlewaite1998socialbasisinterdeppreferences}
 \end_inset
 
  ).
- In the probabilistic game thus defined, the participants compete both with
- raw talent and acquired skills (social capital) to get promoted to (or
- to maintain) a rich position.
- More specifically, the winner of such a game is promoted to a rich position
- (or maintains her rich position) by having the maximum total score comprising
- both of raw-talent 
+ In the probabilistic game thus defined,
+ the participants compete both with raw talent and acquired skills (social capital) to get promoted to (or to maintain) a rich position.
+ More specifically,
+ the winner of such a game is promoted to a rich position (or maintains her rich position) by having the maximum total score comprising both of raw-talent 
 \begin_inset Formula $r_{i}$
 \end_inset
 
@@ -416,8 +407,7 @@ citeA{ColeMaliathSocialNorms1992,postlewaite1998socialbasisinterdeppreferences}
 \end_inset
 
  (enhanced with expenditure).
- The model details the effect of income gaps on status consumption by then
- subjecting the expenditure on social-capital 
+ The model details the effect of income gaps on status consumption by then subjecting the expenditure on social-capital 
 \begin_inset Formula $s_{i}$
 \end_inset
 
@@ -429,45 +419,39 @@ citeA{ColeMaliathSocialNorms1992,postlewaite1998socialbasisinterdeppreferences}
 \end_layout
 
 \begin_layout Standard
-To explore long-term dynamics of a simple model, the game comprises of two
- types of participants - the poor and the rich - so that the investments
- towards status (such as club-membership fees, or higher-education) increase
- the chances to be promoted to the rich status.
- The rich participants in the game or those who benefit with a higher disposable
- income (
+To explore long-term dynamics of a simple model,
+ the game comprises of two types of participants - the poor and the rich - so that the investments towards status (such as club-membership fees,
+ or higher-education) increase the chances to be promoted to the rich status.
+ The rich participants in the game or those who benefit with a higher disposable income (
 \begin_inset Formula $y_{2}$
 \end_inset
 
-) solely on grounds of their rich status while the poor participants are
- those who receive a disposable income 
+) solely on grounds of their rich status while the poor participants are those who receive a disposable income 
 \begin_inset Formula $y_{1}<y_{2}$
 \end_inset
 
 .
- Those who don't participate in the tournament face a loss of status, but
- those who do spend only benefit probabilistically (by grabbing the opportunitie
-s/chancen).
+ Those who don't participate in the tournament face a loss of status,
+ but those who do spend only benefit probabilistically (by grabbing the opportunities/chancen).
  
 \end_layout
 
 \begin_layout Standard
-A useful analogy to explain such a competition is that of tennis leagues
- or golf tournaments - where rewards are risky but are unlike lotteries
- (i.e.
+A useful analogy to explain such a competition is that of tennis leagues or golf tournaments - where rewards are risky but are unlike lotteries (i.e.
  more expenditure does not linearly increase one's chance to win).
- As with tennis or golf, participants with appropriate raw-talent and skills
- may exist naturally in a population but their success also depends on instituti
-onal engagement with other players.
- More specifically, there may exist biological characteristics such as strength,
- dexterity, height or psychological attributes (resilience, conscientiousness
- etc.) that help one's success, but there also exist several characteristics
- such as technique, rankings, knowledge of equipment etc.
+ As with tennis or golf,
+ participants with appropriate raw-talent and skills may exist naturally in a population but their success also depends on institutional engagement with other players.
+ More specifically,
+ there may exist biological characteristics such as strength,
+ dexterity,
+ height or psychological attributes (resilience,
+ conscientiousness etc.) that help one's success,
+ but there also exist several characteristics such as technique,
+ rankings,
+ knowledge of equipment etc.
  that are only available at a significant cost to a participant.
- The enhancement of these latter skills (social capital) are what the expenditur
-e-depending institutional support are meant to represent in the above probabilis
-tic game.
- Several real-life status competitions are similar to such tournaments where
- interaction is small-scale as well as personal 
+ The enhancement of these latter skills (social capital) are what the expenditure-depending institutional support are meant to represent in the above probabilistic game.
+ Several real-life status competitions are similar to such tournaments where interaction is small-scale as well as personal 
 \begin_inset ERT
 status open
 
@@ -481,22 +465,20 @@ cite{goode1978celebrationheroes}
 \end_inset
 
 .
- Such social capital investments have a significant role in real-life settings
- such as interviews, formal introductions or similar business interactions.
+ Such social capital investments have a significant role in real-life settings such as interviews,
+ formal introductions or similar business interactions.
  
 \end_layout
 
 \begin_layout Standard
-Instead of population-wide tournaments, the competitions considered above
- are small-scale and vary their criteria of success across multiple stages.
- The competitions are thus meant to be independent and vary only in the
- threshold participation cost and range of distribution of 
+Instead of population-wide tournaments,
+ the competitions considered above are small-scale and vary their criteria of success across multiple stages.
+ The competitions are thus meant to be independent and vary only in the threshold participation cost and range of distribution of 
 \begin_inset Formula $r_{i},s_{i}$
 \end_inset
 
  of the participants.
- The presented model considers a single instance of a competition with known
- distribution of 
+ The presented model considers a single instance of a competition with known distribution of 
 \begin_inset Formula $r_{i}$
 \end_inset
 
@@ -504,8 +486,7 @@ Instead of population-wide tournaments, the competitions considered above
 \begin_inset Formula $s_{i}$
 \end_inset
 
- among a relatively small number of participants who exercise their choice
- to spend on social capital without an 
+ among a relatively small number of participants who exercise their choice to spend on social capital without an 
 \begin_inset ERT
 status open
 
@@ -527,13 +508,9 @@ emph{a priori}
 \end_inset
 
 .
- In a limited context of social capital investments, the results of such
- a model have implications on how inequality shapes investment decisions
- made with a perception of mobility and how such concerns may aggregate
- into macroeconomic trends.
- Indeed a necessary feature of the above formulation is that the results
- help separate the subjective aspects of status (how expectation of the
- future affects individual decisions) from its objective aspects (i.e.
+ In a limited context of social capital investments,
+ the results of such a model have implications on how inequality shapes investment decisions made with a perception of mobility and how such concerns may aggregate into macroeconomic trends.
+ Indeed a necessary feature of the above formulation is that the results help separate the subjective aspects of status (how expectation of the future affects individual decisions) from its objective aspects (i.e.
  the reality of income differences due to status).
  
 \end_layout
@@ -544,8 +521,8 @@ status open
 
 \begin_layout Plain Layout
 
-% Simply put, such competitions are more like an in-person job-interview
- than a nationwide examination for college-admissions.
+% Simply put,
+ such competitions are more like an in-person job-interview than a nationwide examination for college-admissions.
  
 \end_layout
 
@@ -555,17 +532,14 @@ status open
 \end_layout
 
 \begin_layout Standard
-A closed-form solution with a diminishing utility from wealth and a threshold
- level expenditure required for participants to spend (in order to avail
- social capital) suggests that there are only statues in the long-term equilibri
-um.
- First, where the rich as well as the poor participant participates in the
- status competitions.
- Second, where only the rich participant engages in status competitions.
- In other words, the state where only the poor participate in status consumption
- is ruled out in the above formulation.
- Thus if the social capital investments were to be seen as an exchange between
- rich and the poor 
+A closed-form solution with a diminishing utility from wealth and a threshold level expenditure required for participants to spend (in order to avail social capital) suggests that there are only statues in the long-term equilibrium.
+ First,
+ where the rich as well as the poor participant participates in the status competitions.
+ Second,
+ where only the rich participant engages in status competitions.
+ In other words,
+ the state where only the poor participate in status consumption is ruled out in the above formulation.
+ Thus if the social capital investments were to be seen as an exchange between rich and the poor 
 \begin_inset ERT
 status open
 
@@ -578,13 +552,11 @@ cite{GalbraithAffluent,HirschSocialLimits}
 
 \end_inset
 
-, the competitions where poor strive for status must ultimately become infeasibl
-e (except when relying thinly on a reference-dependent utility) and lead
- to only poor withdrawing from status competitions.
- In other words, while the poor may be incentivised for status, the long-term
- equilibrium is one where both poor and rich must strive for status - a
- result that seems aligned with the observations on positional consumption
- in the post-war era 
+,
+ the competitions where poor strive for status must ultimately become infeasible (except when relying thinly on a reference-dependent utility) and lead to only poor withdrawing from status competitions.
+ In other words,
+ while the poor may be incentivised for status,
+ the long-term equilibrium is one where both poor and rich must strive for status - a result that seems aligned with the observations on positional consumption in the post-war era 
 \begin_inset ERT
 status open
 
@@ -602,27 +574,26 @@ cite{HirschSocialLimits,FrankPond}
 \bar under
 corresponding to closure in the Weberian framework
 \bar default
-) - along with higher income differences - may have a key role to play in
- the rise or decline in social capital investments (e.g.
+) - along with higher income differences - may have a key role to play in the rise or decline in social capital investments (e.g.
  education or network-building activities).
- More particularly, social capital investments are likely to be subject
- to a discouragement through high participation costs while still being
- incentivised in an environment of higher income differences.
+ More particularly,
+ social capital investments are likely to be subject to a discouragement through high participation costs while still being incentivised in an environment of higher income differences.
 \end_layout
 
 \begin_layout Standard
-In what follows, Section 
+In what follows,
+ Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Literature-Survey-1"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
- surveys background literature pertaining to status and discusses the issue
- of reconciling subjective and objective aspects of status.
+ surveys background literature pertaining to status and discusses the issue of reconciling subjective and objective aspects of status.
  Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -630,18 +601,19 @@ reference "sec:Theoretical_chapter_Model"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
  describes the model and results.
- The implications of the model for status competitions circumscribing social
- capital investments are then discussed in Section 
+ The implications of the model for status competitions circumscribing social capital investments are then discussed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Conclusion"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -668,12 +640,10 @@ status open
 
 \begin_layout Plain Layout
 
-%Model can also be used to understand increasing role of expenditure rather
- than natural skill.
- Using the tennis example again, early game would have involved in natural
- distribution of characteristics - but with improvements in techniques,
- athletic and psychological training - means that natural talent is less
- important than it once was.
+%Model can also be used to understand increasing role of expenditure rather than natural skill.
+ Using the tennis example again,
+ early game would have involved in natural distribution of characteristics - but with improvements in techniques,
+ athletic and psychological training - means that natural talent is less important than it once was.
  
 \end_layout
 
@@ -723,9 +693,8 @@ status open
 \end_layout
 
 \begin_layout Standard
-While status is often contrasted as a social goal rather than the economic
- goal of an individual, the difference between social and economic goals
- remains unclear in both sociology and economics 
+While status is often contrasted as a social goal rather than the economic goal of an individual,
+ the difference between social and economic goals remains unclear in both sociology and economics 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "wegener1992prestigeconcepts"
@@ -742,8 +711,7 @@ pure status
 \begin_inset Quotes erd
 \end_inset
 
- view - seldom fits with the real-world where status both contributes to
- income and improves with rises in income 
+ view - seldom fits with the real-world where status both contributes to income and improves with rises in income 
 \begin_inset ERT
 status open
 
@@ -757,9 +725,7 @@ cite{moldovanuselacontestsstatus2007}
 \end_inset
 
 .
- Indeed the other extreme view that the economic goals alone motivate status
- competitions - so that status is derived purely from economic rewards is
- also unrealistic.
+ Indeed the other extreme view that the economic goals alone motivate status competitions - so that status is derived purely from economic rewards is also unrealistic.
  As 
 \begin_inset ERT
 status open
@@ -773,7 +739,8 @@ citeA{moldovanuselacontestsstatus2007}
 
 \end_inset
 
- argue, the reality is often somewhere in between the two extremes.
+ argue,
+ the reality is often somewhere in between the two extremes.
  
 \begin_inset ERT
 status open
@@ -787,14 +754,11 @@ citeA{truytssocialstatuseconomics2010}
 
 \end_inset
 
- go further in saying that status would in fact be of little importance
- if there were no interdependence between status and consumption or labour
- decisions.
+ go further in saying that status would in fact be of little importance if there were no interdependence between status and consumption or labour decisions.
 \end_layout
 
 \begin_layout Standard
-A structural model for the interplay between economic and social goals is
- however yet to specified in either sociology or economics 
+A structural model for the interplay between economic and social goals is however yet to specified in either sociology or economics 
 \begin_inset ERT
 status open
 
@@ -810,26 +774,19 @@ cite{truytssocialstatuseconomics2010}
 .
  
 \bar under
-The general view separate status from class – viewing status as static qualitiat
-ive differences (ref: HurstBook) and economic notions as class.
+The general view separate status from class – viewing status as static qualitiative differences (ref:
+ HurstBook) and economic notions as class.
  
 \bar default
-Weber notes that unification of class is not necessary and social conflits
- may shape social closure in a way that is independent of what Marx's economic
- classes may mean.
- However, Weber does not consider political developments to be independent
- on economics (at one point he does say that political difference comes
- economic).
- How economic differences are absorbed as social differences is an area
- of research.
+Weber notes that unification of class is not necessary and social conflits may shape social closure in a way that is independent of what Marx's economic classes may mean.
+ However,
+ Weber does not consider political developments to be independent on economics (at one point he does say that political difference comes economic).
+ How economic differences are absorbed as social differences is an area of research.
  
 \end_layout
 
 \begin_layout Standard
-If status differences are mentioned only as Static characteristics - then
- there are limits to how low status and high status are treated empirical
- - they end up re-enforcing past economic histories as high or low status
- - while in reality status may be dynamic (
+If status differences are mentioned only as Static characteristics - then there are limits to how low status and high status are treated empirical - they end up re-enforcing past economic histories as high or low status - while in reality status may be dynamic (
 \bar under
 need to 
 \bar default
@@ -838,8 +795,7 @@ refer to literature asking for the need for a dynamic framework).
 \end_layout
 
 \begin_layout Standard
-The empirical view for measurement status in both sociology and economics
- has been based on hierarchy and social deference 
+The empirical view for measurement status in both sociology and economics has been based on hierarchy and social deference 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ColemanSocialTheory1990,goldthorpesociology2000"
@@ -847,8 +803,8 @@ literal "false"
 
 \end_inset
 
- - a view that is inherent in occupational status surveys widely used in
- empirical studies (e.g., the EGP classes or the Goldthorpe class scheme).
+ - a view that is inherent in occupational status surveys widely used in empirical studies (e.g.,
+ the EGP classes or the Goldthorpe class scheme).
  A fundamental problem that the sociology literature has elaborated 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -857,17 +813,14 @@ literal "false"
 
 \end_inset
 
- is the failure to reconcile the difference between objective aspects of
- status (the observed reality of status differences) and its subjective
- aspects (the effect of status differences on individual behaviour).
+ is the failure to reconcile the difference between objective aspects of status (the observed reality of status differences) and its subjective aspects (the effect of status differences on individual behaviour).
  
 \end_layout
 
 \begin_layout Standard
-The issue also makes it difficult to answer whether inequalities can have
- a negative or positive effect on status consumption or not (how).
- When status itself is not measureable - and is fixed, then status consumption
- is meant to achieve 
+The issue also makes it difficult to answer whether inequalities can have a negative or positive effect on status consumption or not (how).
+ When status itself is not measureable - and is fixed,
+ then status consumption is meant to achieve 
 \begin_inset Quotes eld
 \end_inset
 
@@ -877,16 +830,15 @@ futile
 
  emulation.
  This is not the Goode-view - nor Weberian view.
- According to both, the stauts goods achieve a network view.
- Whether inequality increases status consumption or not therefore depends
- very much on the context of consumption.
+ According to both,
+ the stauts goods achieve a network view.
+ Whether inequality increases status consumption or not therefore depends very much on the context of consumption.
  
 \end_layout
 
 \begin_layout Standard
-On one hand, the post-war literature on status competitions argues that
- a fall in income inequalities and improvement in life-standards has resulted
- in a higher focus on status goods 
+On one hand,
+ the post-war literature on status competitions argues that a fall in income inequalities and improvement in life-standards has resulted in a higher focus on status goods 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HirschSocialLimits,GalbraithAffluent,GalbraithBeyondContentment1994,GalbraithEssential"
@@ -895,8 +847,8 @@ literal "false"
 \end_inset
 
 .
- On the other hand, the empirical literature often finds status consumption
- to increase with rising inequality.
+ On the other hand,
+ the empirical literature often finds status consumption to increase with rising inequality.
  In a study focusing on education expenses for status purposes in China,
  
 \begin_inset ERT
@@ -911,9 +863,11 @@ citeA{JinLiInequalityStatusConsumption2011}
 
 \end_inset
 
- find, for example, that higher inequality increases the consumption towards
- status.
- Similarly, 
+ find,
+ for example,
+ that higher inequality increases the consumption towards status.
+ Similarly,
+ 
 \begin_inset ERT
 status open
 
@@ -926,10 +880,8 @@ citeA{JaikumarConspConIneq}
 
 \end_inset
 
- also report that consumers in India have increased conspicuous consumption
- with rise in inequality.
- An appropriate line of research has been to examine the environment where
- inequality is experienced (often relying on social attitudes surveys).
+ also report that consumers in India have increased conspicuous consumption with rise in inequality.
+ An appropriate line of research has been to examine the environment where inequality is experienced (often relying on social attitudes surveys).
  
 \begin_inset ERT
 status open
@@ -943,8 +895,7 @@ citeA{roychowdhuryInequalityStatusConsumption2016}
 
 \end_inset
 
- measure a visible inequality based on reference groups to argue that reduction
- of visible inequalities does increase status consumption.
+ measure a visible inequality based on reference groups to argue that reduction of visible inequalities does increase status consumption.
  
 \begin_inset ERT
 status open
@@ -966,22 +917,16 @@ literal "false"
 
 \end_inset
 
- to detail how a rise in inequality might have cemented a belief in meritocracy
- in the developed economies and coincided with segregation rather than a
- healthy competition.
- Since the environment where inequality is experienced comprises both of
- the objective and subjective notions of status, a link between the two
- provides us a model to better understand the effects of inequality on status
- consumption.
- While a general view on status goods may be inappropriate, specific goods
- that meant to enhance chancen are relevant.
+ to detail how a rise in inequality might have cemented a belief in meritocracy in the developed economies and coincided with segregation rather than a healthy competition.
+ Since the environment where inequality is experienced comprises both of the objective and subjective notions of status,
+ a link between the two provides us a model to better understand the effects of inequality on status consumption.
+ While a general view on status goods may be inappropriate,
+ specific goods that meant to enhance chancen are relevant.
  
 \end_layout
 
 \begin_layout Standard
-The presented approach explores a particular link between social and economic
- goals by considering how certain characteristics are nurtured or discouraged
- by social institutions 
+The presented approach explores a particular link between social and economic goals by considering how certain characteristics are nurtured or discouraged by social institutions 
 \begin_inset ERT
 status open
 
@@ -995,8 +940,7 @@ cite{goode1978celebrationheroes}
 \end_inset
 
 .
- This is contrasted against notions of status based on tradeable-power in
- an economy 
+ This is contrasted against notions of status based on tradeable-power in an economy 
 \begin_inset ERT
 status open
 
@@ -1009,8 +953,7 @@ cite{ColemanSocialTheory1990}
 
 \end_inset
 
- - a view that has also been criticised due to its inherent assumption of
- there being a fixed total amount of status in society 
+ - a view that has also been criticised due to its inherent assumption of there being a fixed total amount of status in society 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "wrongpower1979"
@@ -1019,8 +962,8 @@ literal "false"
 \end_inset
 
 .
- Instead of using status as a wealth-determined goal, the presented approach
- follows 
+ Instead of using status as a wealth-determined goal,
+ the presented approach follows 
 \begin_inset ERT
 status open
 
@@ -1033,19 +976,14 @@ citeA{postlewaite1998socialbasisinterdeppreferences}
 
 \end_inset
 
- in considering status only of an indirect role in maximisation of wealth
- utility.
- More specifically, the rank of the participant (rich or poor status) does
- not directly contribute to utility and but matters only through a higher
- income that contributes to maximisation of the participant's expected wealth
- utility.
+ in considering status only of an indirect role in maximisation of wealth utility.
+ More specifically,
+ the rank of the participant (rich or poor status) does not directly contribute to utility and but matters only through a higher income that contributes to maximisation of the participant's expected wealth utility.
 \end_layout
 
 \begin_layout Standard
-In summary, the view of status as an economic goal that corresponds to a
- possible future monetary benefit to the participant - rather than a non-monetar
-y utility - is unlike the view of status signaling used in many studies
- on conspicuous consumption 
+In summary,
+ the view of status as an economic goal that corresponds to a possible future monetary benefit to the participant - rather than a non-monetary utility - is unlike the view of status signaling used in many studies on conspicuous consumption 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "heffetz_visibility,ireland_signals,OmoriSmithVisRace,CharlesHurstRace,KausSA,ZahraIndia,FrieheGermany,JaikumarConspConIneq,KnellInequalityStatusGrowth1999,falkchoosingjonesses2004"
@@ -1054,12 +992,8 @@ literal "false"
 \end_inset
 
 .
- This is primarily because the utility from status consumption in the empirical
- studies on conspicuous consumption is treated both necessarily futile and
- entirely separable from a private (non-visible) utility.
- Our specific consideration of status - an approach that equates the social
- goals of the participant with her long-term economic goals - bears more
- similarity with the approach followed by 
+ This is primarily because the utility from status consumption in the empirical studies on conspicuous consumption is treated both necessarily futile and entirely separable from a private (non-visible) utility.
+ Our specific consideration of status - an approach that equates the social goals of the participant with her long-term economic goals - bears more similarity with the approach followed by 
 \begin_inset ERT
 status open
 
@@ -1103,11 +1037,9 @@ noindent
 \end_layout
 
 \begin_layout Standard
-In the status game that selects the winner to be maintained at the rich
- position, only two characteristics matter for every individual.
- The first is the social capital that can be enhanced with expenditure by
- the individual participant and the second is a raw-talent that cannot be
- changed with higher expenditure.
+In the status game that selects the winner to be maintained at the rich position,
+ only two characteristics matter for every individual.
+ The first is the social capital that can be enhanced with expenditure by the individual participant and the second is a raw-talent that cannot be changed with higher expenditure.
  Both skill 
 \begin_inset Formula $s_{i}$
 \end_inset
@@ -1116,14 +1048,13 @@ In the status game that selects the winner to be maintained at the rich
 \begin_inset Formula $r_{i}$
 \end_inset
 
- (which cannot be changed with higher expenditure) are assumed to be uniformly
- distributed in the population.
+ (which cannot be changed with higher expenditure) are assumed to be uniformly distributed in the population.
  Assuming the weight 
 \begin_inset Formula $\mu$
 \end_inset
 
- of raw-talent in the maximum total score considered for the win in a competitio
-n, consider the preferences for the probability of 
+ of raw-talent in the maximum total score considered for the win in a competition,
+ consider the preferences for the probability of 
 \begin_inset Formula $\mu r_{i}+(1-\mu)s_{i}$
 \end_inset
 
@@ -1135,33 +1066,25 @@ n, consider the preferences for the probability of
 \begin_inset Formula $s_{i}$
 \end_inset
 
- are skills that are available with higher expenditure) under the assumption
- that the population remains constant over time (there are the same number
- of rich and poor in total) and that the participants are not aware of their
- 
+ are skills that are available with higher expenditure) under the assumption that the population remains constant over time (there are the same number of rich and poor in total) and that the participants are not aware of their 
 \begin_inset Formula $r_{i}$
 \end_inset
 
-, 
+,
+ 
 \begin_inset Formula $s_{i}$
 \end_inset
 
  before participating in the competitions.
- In other words, the rich participants are replaced by either a rich or
- poor participant only through the tournament that selects highest combined
- score regardless of rich or poor background of the participant.
- Since all participants can participate in every such tournament, it is
- possible for a rich participant to lose her rich-position and let another
- participant acquire her position.
+ In other words,
+ the rich participants are replaced by either a rich or poor participant only through the tournament that selects highest combined score regardless of rich or poor background of the participant.
+ Since all participants can participate in every such tournament,
+ it is possible for a rich participant to lose her rich-position and let another participant acquire her position.
 \end_layout
 
 \begin_layout Standard
-It is assumed that the preferences for all poor participants are the same
- as are the preferences of all the rich participants.
- Having a rich or a poor status by itself only has an indirect effect (through
- higher expenditure or budget) on the chance to be promoted (or maintaining
- one's rich position) - a probability that otherwise depends on the individual
- ability 
+It is assumed that the preferences for all poor participants are the same as are the preferences of all the rich participants.
+ Having a rich or a poor status by itself only has an indirect effect (through higher expenditure or budget) on the chance to be promoted (or maintaining one's rich position) - a probability that otherwise depends on the individual ability 
 \begin_inset Formula $r_{i}$
 \end_inset
 
@@ -1170,8 +1093,7 @@ It is assumed that the preferences for all poor participants are the same
 \end_inset
 
 .
- All rich participants and all poor participants having the same behaviour
- also means that the individual attributes 
+ All rich participants and all poor participants having the same behaviour also means that the individual attributes 
 \begin_inset Formula $r_{i}$
 \end_inset
 
@@ -1179,8 +1101,7 @@ It is assumed that the preferences for all poor participants are the same
 \begin_inset Formula $s_{i}$
 \end_inset
 
- - which are not known to the participant - are not used to decide upon
- the expenditure (effort) towards the status game.
+ - which are not known to the participant - are not used to decide upon the expenditure (effort) towards the status game.
 \end_layout
 
 \begin_layout Standard
@@ -1192,7 +1113,8 @@ With
 \begin_inset Formula $s_{i}$
 \end_inset
 
- uniformly distributed, the likelihood of any participant 
+ uniformly distributed,
+ the likelihood of any participant 
 \begin_inset Formula $i\in[1,N]$
 \end_inset
 
@@ -1217,8 +1139,7 @@ With
 \end_inset
 
  wins the competition.
- The winner of the competition acquires a rich position so that she obtains
- the disposable income 
+ The winner of the competition acquires a rich position so that she obtains the disposable income 
 \begin_inset Formula $y_{2}$
 \end_inset
 
@@ -1231,8 +1152,9 @@ With
 \end_layout
 
 \begin_layout Standard
-To start with a simpler case, consider that in a competition with raw-talents
- alone, the winning participant is one who has the maximum 
+To start with a simpler case,
+ consider that in a competition with raw-talents alone,
+ the winning participant is one who has the maximum 
 \begin_inset Formula $r_{i}$
 \end_inset
 
@@ -1241,8 +1163,8 @@ To start with a simpler case, consider that in a competition with raw-talents
 \end_inset
 
 .
- In other words, the winner in a competition of raw-talents is a player
- 
+ In other words,
+ the winner in a competition of raw-talents is a player 
 \begin_inset Formula $j$
 \end_inset
 
@@ -1290,7 +1212,8 @@ With a uniform distribution of skills
 \begin_inset Formula $r\in[0,1]$
 \end_inset
 
-, we have 
+,
+ we have 
 \begin_inset Formula $P(r_{i}\ge r)=r_{i}$
 \end_inset
 
@@ -1298,13 +1221,14 @@ With a uniform distribution of skills
 \begin_inset Formula $i\in[1,N]$
 \end_inset
 
- and therefore, the probability is evaluates to 
+ and therefore,
+ the probability is evaluates to 
 \begin_inset Formula $\int_{0}^{1}{(r_{i})^{N-1}}dr_{i}=\frac{1}{N}$
 \end_inset
 
 .
- With more players, the chances of a particular participant winning evidently
- declines.
+ With more players,
+ the chances of a particular participant winning evidently declines.
  
 \end_layout
 
@@ -1313,13 +1237,12 @@ Introducing the skills
 \begin_inset Formula $s_{i}$
 \end_inset
 
- which are curated in social institutions, we consider a threshold investment
- 
+ which are curated in social institutions,
+ we consider a threshold investment 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- which is necessary to be spent for the social capital to be available to
- a participant.
+ which is necessary to be spent for the social capital to be available to a participant.
  While this is an arrangement that evidently favours the rich participant,
  there are also diminishing returns to investing 
 \begin_inset Formula $\overline{\nu}$
@@ -1330,9 +1253,8 @@ Introducing the skills
 \end_inset
 
  is also significant in the competition.
- To direct our focus on conditions when social capital is more important
- than raw-talent, it assumed in the foregoing analysis that raw-talent is
- less valued than skills cultivated by institutions
+ To direct our focus on conditions when social capital is more important than raw-talent,
+ it assumed in the foregoing analysis that raw-talent is less valued than skills cultivated by institutions
 \begin_inset Foot
 status open
 
@@ -1342,19 +1264,18 @@ While effects of changes in
 \end_inset
 
  over time on the dynamics of the game are of interest in their own right,
- the paper narrows our interest on a situations were social capital is weighted
- higher than raw talent.
+ the paper narrows our interest on a situations were social capital is weighted higher than raw talent.
 \end_layout
 
 \end_inset
 
 .
- As a result, the condition 
+ As a result,
+ the condition 
 \begin_inset Formula $1-\mu>\mu$
 \end_inset
 
- (which is equivalent to the following assumption) has been used throughout
- in the rest of the discussion.
+ (which is equivalent to the following assumption) has been used throughout in the rest of the discussion.
 \end_layout
 
 \begin_layout Assumption
@@ -1390,14 +1311,14 @@ With the threshold investment
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- as a discrete response to costs of participation, the participants face
- different probabilities to win depending on whether they spend 
+ as a discrete response to costs of participation,
+ the participants face different probabilities to win depending on whether they spend 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
  or not.
- More specifically, the participant takes advantage of the skills with weight
- 
+ More specifically,
+ the participant takes advantage of the skills with weight 
 \begin_inset Formula $1-\mu$
 \end_inset
 
@@ -1406,8 +1327,8 @@ With the threshold investment
 \end_inset
 
 .
- In the all-or-nothing payment scheme, the participant might avoid the investmen
-t altogether and keep the investment towards savings instead.
+ In the all-or-nothing payment scheme,
+ the participant might avoid the investment altogether and keep the investment towards savings instead.
  The behaviour of all participants depends only on 
 \begin_inset Formula $\nu_{1},\nu_{2}$
 \end_inset
@@ -1432,6 +1353,7 @@ reference "assu:mu_less_than_half"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -1443,8 +1365,7 @@ noprefix "false"
 \begin_inset Formula $s_{i}$
 \end_inset
 
- are independent random variables uniformly distributed between 0 and 1
- (see Appendix 
+ are independent random variables uniformly distributed between 0 and 1 (see Appendix 
 \begin_inset ERT
 status open
 
@@ -1485,19 +1406,17 @@ In the game where a participant
 \begin_inset Formula $x_{i}$
 \end_inset
 
- is the winner, the number of rich positions is fixed to 
+ is the winner,
+ the number of rich positions is fixed to 
 \begin_inset Formula $N-P$
 \end_inset
 
- so that only the top-scorer gets to occupy the only rich position available
- to be filled in every competition.
- The expected behaviour of the rich and the poor participants in the long-term
- can be explained with four different cases.
+ so that only the top-scorer gets to occupy the only rich position available to be filled in every competition.
+ The expected behaviour of the rich and the poor participants in the long-term can be explained with four different cases.
 \end_layout
 
 \begin_layout Itemize
-Case I - The poor participant does not participate due to insufficient investmen
-t 
+Case I - The poor participant does not participate due to insufficient investment 
 \begin_inset Formula $\nu_{1}=0$
 \end_inset
 
@@ -1555,20 +1474,17 @@ noindent
 \end_layout
 
 \begin_layout Standard
-With Case I, the poor participant can win when her raw-talent (weighted
- with 
+With Case I,
+ the poor participant can win when her raw-talent (weighted with 
 \begin_inset Formula $\mu$
 \end_inset
 
-) is higher than the total score of all other poor participants as well
- as the total score of the rich participants (who compete with acquired
- skills).
+) is higher than the total score of all other poor participants as well as the total score of the rich participants (who compete with acquired skills).
  The poor are priced out of accessing any skills 
 \begin_inset Formula $s$
 \end_inset
 
- in their score in Case I so that only the rich participants with investment
- 
+ in their score in Case I so that only the rich participants with investment 
 \begin_inset Formula $\nu_{2}=$
 \end_inset
 
@@ -1581,8 +1497,8 @@ With Case I, the poor participant can win when her raw-talent (weighted
 \end_inset
 
 .
- Thus, a given poor participant must be ahead both of all of the poor participan
-ts and the rich participants so that a participant 
+ Thus,
+ a given poor participant must be ahead both of all of the poor participants and the rich participants so that a participant 
 \begin_inset Formula $i$
 \end_inset
 
@@ -1613,7 +1529,8 @@ P_{1}(\text{win}|r_{i}) & =\prod_{k=1,k\ne i}^{P}P(\mu r_{k}<\mu r_{i})\prod_{k=
 \end_layout
 
 \begin_layout Standard
-Therefore, 
+Therefore,
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1642,7 +1559,8 @@ With the uniform density for
 \begin_inset Formula $f(r_{i})=1$
 \end_inset
 
- ), total probability to win can be calculated as
+ ),
+ total probability to win can be calculated as
 \begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}$
 \end_inset
 
@@ -1655,8 +1573,8 @@ With the uniform density for
 \begin_inset Formula $s_{i}$
 \end_inset
 
- before they participate in such competitions, the total probability can
- be evaluated with the assumption that both 
+ before they participate in such competitions,
+ the total probability can be evaluated with the assumption that both 
 \begin_inset Formula $r_{i}$
 \end_inset
 
@@ -1665,8 +1583,8 @@ With the uniform density for
 \end_inset
 
  range from 0 to 1.
- Notice also that since only one participant can win the skills-game, the
- probability 
+ Notice also that since only one participant can win the skills-game,
+ the probability 
 \begin_inset Formula $\int_{0}^{1}\int_{0}^{1}P_{2}(\text{win}|r_{i},s_{i})ds_{i}dr_{i}$
 \end_inset
 
@@ -1678,13 +1596,14 @@ With the uniform density for
 \end_layout
 
 \begin_layout Standard
-In Case II, when the rich person has no access to social capital (i.e.
+In Case II,
+ when the rich person has no access to social capital (i.e.
  all rich participants have 
 \begin_inset Formula $\nu_{2}=0$
 \end_inset
 
-), the poor participant has the skills-advantage in the game so the probability
- to win for the poor participant 
+),
+ the poor participant has the skills-advantage in the game so the probability to win for the poor participant 
 \begin_inset Formula $i$
 \end_inset
 
@@ -1704,9 +1623,9 @@ P(\text{win}|r_{i},s_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{
 \end_layout
 
 \begin_layout Standard
-In Case III, when neither the rich nor the poor participate in the game,
- then the game depends only on raw-talents and all participants have the
- same probability 
+In Case III,
+ when neither the rich nor the poor participate in the game,
+ then the game depends only on raw-talents and all participants have the same probability 
 \begin_inset Formula $\frac{1}{N}$
 \end_inset
 
@@ -1723,11 +1642,13 @@ In Case III, when neither the rich nor the poor participate in the game,
 \end_layout
 
 \begin_layout Standard
-In Case IV, when both rich and poor participants set 
+In Case IV,
+ when both rich and poor participants set 
 \begin_inset Formula $\nu_{1}=\nu_{2}=\overline{\nu}$
 \end_inset
 
-, then the poor participant can win only if her score 
+,
+ then the poor participant can win only if her score 
 \begin_inset Formula $x_{i}$
 \end_inset
 
@@ -1748,8 +1669,8 @@ P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-
 \end_layout
 
 \begin_layout Standard
-Using symmetry arguments, this winning probability - which is the same for
- all participants - also turns out to be 
+Using symmetry arguments,
+ this winning probability - which is the same for all participants - also turns out to be 
 \begin_inset Formula $1/N$
 \end_inset
 
@@ -1757,8 +1678,7 @@ Using symmetry arguments, this winning probability - which is the same for
 \end_layout
 
 \begin_layout Standard
-Notice that with the rich and poor participants having disparate incomes
- 
+Notice that with the rich and poor participants having disparate incomes 
 \begin_inset Formula $y_{1}$
 \end_inset
 
@@ -1770,14 +1690,15 @@ Notice that with the rich and poor participants having disparate incomes
 \begin_inset Formula $y_{1}<y_{2}$
 \end_inset
 
-), the above setup evidently puts the poor participants at a disadvantage
- since they may not afford to pay the costs to enhance their skills (i.e.
+),
+ the above setup evidently puts the poor participants at a disadvantage since they may not afford to pay the costs to enhance their skills (i.e.
  realise the true worth of their skills 
 \begin_inset Formula $s_{i}$
 \end_inset
 
  due to high participation costs).
- However, since both raw-talent 
+ However,
+ since both raw-talent 
 \begin_inset Formula $r_{i}$
 \end_inset
 
@@ -1785,18 +1706,14 @@ Notice that with the rich and poor participants having disparate incomes
 \begin_inset Formula $s_{i}$
 \end_inset
 
- (the latter enhanced by costly institutional support) are randomly distributed
- in the population, the competition may never rule out the chance for a
- poor participant to win.
- For the same reason, the returns from investments to enhance one's skills
- may also be diminishing since one cannot beat raw-talent and non-enhanced
- skills after a certain point.
+ (the latter enhanced by costly institutional support) are randomly distributed in the population,
+ the competition may never rule out the chance for a poor participant to win.
+ For the same reason,
+ the returns from investments to enhance one's skills may also be diminishing since one cannot beat raw-talent and non-enhanced skills after a certain point.
 \end_layout
 
 \begin_layout Standard
-It is worth emphasising also that the effect of expenditure on the winning
- probability is weakened with higher number of participants in the game
- where abilities (both skills 
+It is worth emphasising also that the effect of expenditure on the winning probability is weakened with higher number of participants in the game where abilities (both skills 
 \begin_inset Formula $s_{i}$
 \end_inset
 
@@ -1805,10 +1722,9 @@ It is worth emphasising also that the effect of expenditure on the winning
 \end_inset
 
 ) are uniformly distributed.
- In other words, if poor and rich participants were to be considered as
- two separate groups, then the effect of expenditure on their wins declines
- when more and more participants are sampled with varied raw-talents and
- skills.
+ In other words,
+ if poor and rich participants were to be considered as two separate groups,
+ then the effect of expenditure on their wins declines when more and more participants are sampled with varied raw-talents and skills.
  Figures 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1816,6 +1732,7 @@ reference "fig:Probability-to-win-for-poor-with-N"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -1826,11 +1743,11 @@ reference "fig:Probability-to-win-for-rich-with-N"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
- demonstrate this effect for probability calculated with Monte Carlo simulations
- for increasing values of the number of poor participants (
+ demonstrate this effect for probability calculated with Monte Carlo simulations for increasing values of the number of poor participants (
 \begin_inset Formula $P$
 \end_inset
 
@@ -1847,8 +1764,7 @@ noprefix "false"
 \end_inset
 
 ).
- Our Monte Carlo simulations suggest that the role of expenditure is insignifica
-nt for 
+ Our Monte Carlo simulations suggest that the role of expenditure is insignificant for 
 \begin_inset Formula $N\ge30$
 \end_inset
 
@@ -1868,12 +1784,12 @@ reference "subsec:Two-player-Discrete-Model"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
 .
- Equivalent results can be derived using Monte-Carlo simulation for higher
- values of 
+ Equivalent results can be derived using Monte-Carlo simulation for higher values of 
 \begin_inset Formula $N$
 \end_inset
 
@@ -1886,6 +1802,8 @@ noprefix "false"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -1926,6 +1844,8 @@ Probability to win for poor participant with increasing number of participants
 
 \begin_layout Standard
 \begin_inset Float figure
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -2006,16 +1926,19 @@ reference "eq:CaseI_general"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
-, 
+,
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:CaseII_general"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -2026,11 +1949,13 @@ reference "eq:CaseIV_general"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
  above.
- As before, a participant takes advantage of the skills with weight 
+ As before,
+ a participant takes advantage of the skills with weight 
 \begin_inset Formula $1-\mu$
 \end_inset
 
@@ -2038,11 +1963,10 @@ noprefix "false"
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- and can decide to avoid the expenditure altogether in order to invest it
- towards the savings instead.
- The different probabilities in Case I, II, III and IV are discussed before
- presenting the role of an additive intertemporal diminishing utility from
- accumulated wealth.
+ and can decide to avoid the expenditure altogether in order to invest it towards the savings instead.
+ The different probabilities in Case I,
+ II,
+ III and IV are discussed before presenting the role of an additive intertemporal diminishing utility from accumulated wealth.
  Recall that the behaviour of both participants depends only on 
 \begin_inset Formula $\nu_{1},\nu_{2}$
 \end_inset
@@ -2056,8 +1980,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-An important result for the closed-form solution is the probability distribution
- (CDF) of 
+An important result for the closed-form solution is the probability distribution (CDF) of 
 \begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
 \end_inset
 
@@ -2073,8 +1996,7 @@ An important result for the closed-form solution is the probability distribution
 \begin_inset Formula $s_{i}$
 \end_inset
 
- that are uniformly distributed between 0 and 1) that is detailed in Appendix
- 
+ that are uniformly distributed between 0 and 1) that is detailed in Appendix 
 \begin_inset ERT
 status open
 
@@ -2107,7 +2029,9 @@ F_{X}(x) & =P(x_{k}<x)=P(r_{k}\mu+s_{k}(1-\mu)<x)=\begin{cases}
 \end_layout
 
 \begin_layout Standard
-Above probabilities under Case I, II, III and IV are now discussed further.
+Above probabilities under Case I,
+ II,
+ III and IV are now discussed further.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -2115,12 +2039,12 @@ Case I
 \end_layout
 
 \begin_layout Standard
-In Case I, the poor participant can win when her raw-talent 
+In Case I,
+ the poor participant can win when her raw-talent 
 \begin_inset Formula $r_{1}$
 \end_inset
 
- is higher than of the total score of rich participant (who competes with
- acquired skills).
+ is higher than of the total score of rich participant (who competes with acquired skills).
  The poor participant is priced out of accessing any skills 
 \begin_inset Formula $s$
 \end_inset
@@ -2138,7 +2062,8 @@ In Case I, the poor participant can win when her raw-talent
 \end_inset
 
 .
- Thus, the poor participant with raw-talent 
+ Thus,
+ the poor participant with raw-talent 
 \begin_inset Formula $r_{1}$
 \end_inset
 
@@ -2183,11 +2108,13 @@ Notice that
 \end_inset
 
  needs to be considered.
- Therefore, using 
+ Therefore,
+ using 
 \begin_inset Formula $P(\text{win}|r_{1})=\frac{\mu^{2}r_{1}^{2}}{2\mu(1-\mu)}$
 \end_inset
 
-, we evaluate 
+,
+ we evaluate 
 \begin_inset Formula $P_{1}(\text{win})$
 \end_inset
 
@@ -2219,7 +2146,8 @@ mu)}
 
 \begin_layout Plain Layout
 
-% for .2, the probability is .03125.
+% for .2,
+ the probability is .03125.
  The MC gives .03126 .
  
 \end_layout
@@ -2230,7 +2158,8 @@ mu)}
 \end_layout
 
 \begin_layout Standard
-Since only one of the participants can win, the probability 
+Since only one of the participants can win,
+ the probability 
 \begin_inset Formula $P_{2}(\text{win})$
 \end_inset
 
@@ -2240,7 +2169,8 @@ Since only one of the participants can win, the probability
 
 .
  The following thus applies to all other cases (i.e.
- Cases II, III and IV).
+ Cases II,
+ III and IV).
 \end_layout
 
 \begin_layout Standard
@@ -2272,18 +2202,19 @@ Case II
 \end_layout
 
 \begin_layout Standard
-In Case II, the rich person does not participate (
+In Case II,
+ the rich person does not participate (
 \begin_inset Formula $\nu_{2}=0$
 \end_inset
 
 ) and both the poor participants have the skills-advantage in the game.
- A poor participant wins by having the total score higher than the raw-talent
- of the rich participant (who does not acquire skills with investment).
+ A poor participant wins by having the total score higher than the raw-talent of the rich participant (who does not acquire skills with investment).
  Representing 
 \begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
 \end_inset
 
-, we have the following probability for the poor participant to win
+,
+ we have the following probability for the poor participant to win
 \end_layout
 
 \begin_layout Standard
@@ -2332,7 +2263,8 @@ Notice that
 \end_inset
 
  ).
- In other words, 
+ In other words,
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2350,8 +2282,7 @@ P(r_{2}<r_{1}+(1/\mu-1)s_{1}) & =\begin{cases}
 \end_layout
 
 \begin_layout Standard
-The probability to win for the poor participant can be written as (see Appendix
- 
+The probability to win for the poor participant can be written as (see Appendix 
 \begin_inset ERT
 status open
 
@@ -2397,7 +2328,8 @@ ref{sec:appendix_theorertical_2}
 
 \end_inset
 
-), the total probability to win 
+),
+ the total probability to win 
 \begin_inset Formula $P_{1}(\text{win})$
 \end_inset
 
@@ -2431,6 +2363,7 @@ reference "eq:two_player_rich_probability"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -2442,9 +2375,9 @@ Case III
 \end_layout
 
 \begin_layout Standard
-In Case III, when neither the rich nor the poor participate in the game,
- then the game depends only on raw-talents and both participants have the
- same probability 
+In Case III,
+ when neither the rich nor the poor participate in the game,
+ then the game depends only on raw-talents and both participants have the same probability 
 \begin_inset Formula $\frac{1}{2}$
 \end_inset
 
@@ -2467,16 +2400,19 @@ Case IV
 \end_layout
 
 \begin_layout Standard
-In Case IV, when both rich and poor participants set 
+In Case IV,
+ when both rich and poor participants set 
 \begin_inset Formula $\nu_{1}=\nu_{2}=\overline{\nu}$
 \end_inset
 
-, then the poor participant can win only if her score 
+,
+ then the poor participant can win only if her score 
 \begin_inset Formula $x_{i}$
 \end_inset
 
  is above that of the rich participant.
- Therefore, 
+ Therefore,
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2508,12 +2444,12 @@ P(\text{win}|r_{1},s_{1}) & =\begin{cases}
 \end_layout
 
 \begin_layout Standard
-While this integral can be evaluated based on symmetry arguments ( since
- 
+While this integral can be evaluated based on symmetry arguments ( since 
 \begin_inset Formula $x_{i}$
 \end_inset
 
- is also randomly distributed), the integral 
+ is also randomly distributed),
+ the integral 
 \begin_inset Formula $\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})dr_{1}ds_{1}$
 \end_inset
 
@@ -2557,8 +2493,10 @@ status open
 
 \begin_layout Plain Layout
 
-% For part A,  integrate( integrate((mu *r + (1-mu)*s)^2/(2*mu*(1-mu)),s,0,mu*(1
--r)/(1-mu)) , r, 0,1) gives 
+% For part A,
+  integrate( integrate((mu *r + (1-mu)*s)^2/(2*mu*(1-mu)),s,0,mu*(1-r)/(1-mu)) ,
+ r,
+ 0,1) gives 
 \backslash
 frac{
 \backslash
@@ -2569,8 +2507,11 @@ mu)^2}
 
 \begin_layout Plain Layout
 
-% For part B, integrate (integrate( ((mu * r + (1-mu) *s - mu /2 )/(1-mu)
- ),s,mu*(1-r)/(1-mu),1-mu*r/( 1-mu)) , r, 0, 1)  gives 
+% For part B,
+ integrate (integrate( ((mu * r + (1-mu) *s - mu /2 )/(1-mu) ),s,mu*(1-r)/(1-mu),1-mu*r/( 1-mu)) ,
+ r,
+ 0,
+ 1)  gives 
 \backslash
 frac{1-2
 \backslash
@@ -2581,8 +2522,10 @@ mu)}
 
 \begin_layout Plain Layout
 
-% For part C, integrate(integrate( (1- ((mu *r  + (1-mu) * s)-1)^2/(2*mu*(1-mu))
-), s, 1-mu *r /(1-mu),1),r,0,1) gives 
+% For part C,
+ integrate(integrate( (1- ((mu *r  + (1-mu) * s)-1)^2/(2*mu*(1-mu))),
+ s,
+ 1-mu *r /(1-mu),1),r,0,1) gives 
 \backslash
 frac{(4-5
 \backslash
@@ -2605,6 +2548,8 @@ mu)^{2}}
 
 \begin_layout Standard
 \begin_inset Float figure
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -2634,7 +2579,8 @@ Probability of winning
 \begin_inset Formula $P_{1}(\text{win})$
 \end_inset
 
-, 
+,
+ 
 \begin_inset Formula $P_{2}(\text{win})$
 \end_inset
 
@@ -2663,6 +2609,7 @@ reference "fig:Probability-of-winning"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -2673,6 +2620,7 @@ reference "tab:Results_summary_poor"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -2683,27 +2631,26 @@ reference "tab:Results_summary_rich"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
-), the condition 
+),
+ the condition 
 \begin_inset Formula $\mu<1/2$
 \end_inset
 
- - indicating that curated skills are given more importance that raw-talent
- in the competitions - means that the poor participant is strictly better
- off (than facing probability 
+ - indicating that curated skills are given more importance that raw-talent in the competitions - means that the poor participant is strictly better off (than facing probability 
 \begin_inset Formula $1/2$
 \end_inset
 
-) if she participates while the rich participant doesn't participate (Case
- II).
- Also, the poor participant is better off participating for 
+) if she participates while the rich participant doesn't participate (Case II).
+ Also,
+ the poor participant is better off participating for 
 \begin_inset Formula $\mu<\frac{1}{2}$
 \end_inset
 
- when the rich participant does participate as it raises the probability
- to 
+ when the rich participant does participate as it raises the probability to 
 \begin_inset Formula $1/2$
 \end_inset
 
@@ -2712,9 +2659,7 @@ noprefix "false"
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- falls too much (letting both participants participate) or rises too much
- (letting both participants withdraw) also follows from the properties of
- the winning probability.
+ falls too much (letting both participants participate) or rises too much (letting both participants withdraw) also follows from the properties of the winning probability.
 \end_layout
 
 \begin_layout Standard
@@ -2723,24 +2668,24 @@ Notice that the rich participant could withdraw and face either
 \end_inset
 
  or lower probability (when the poor participant participates).
- By participating, therefore, the rich participant would either face probability
- 
+ By participating,
+ therefore,
+ the rich participant would either face probability 
 \begin_inset Formula $1/2$
 \end_inset
 
- (when poor participant also participates) or better (if the poor participant
- withdraws).
- Considering the probabilities alone, the rich participant would always
- participate.
- If the rich participant always participates, then so long as budget constraints
- permit, the poor participant is also better off participating since not
- participating brings her probability to win below 
+ (when poor participant also participates) or better (if the poor participant withdraws).
+ Considering the probabilities alone,
+ the rich participant would always participate.
+ If the rich participant always participates,
+ then so long as budget constraints permit,
+ the poor participant is also better off participating since not participating brings her probability to win below 
 \begin_inset Formula $1/2$
 \end_inset
 
 .
- If the utility was from probability alone, then both participants would
- participate and face 
+ If the utility was from probability alone,
+ then both participants would participate and face 
 \begin_inset Formula $1/2$
 \end_inset
 
@@ -2748,17 +2693,14 @@ Notice that the rich participant could withdraw and face either
 \end_layout
 
 \begin_layout Standard
-However, it's not the probability to win that the participants optimise
- (maximise).
- A more accurate representation of the real-world is a game where participants
- face a finite life-time and utility from accumulated assets instead.
- Thus, what follows is the case where the participants optimise an intertemporal
-ly additive utility over their life-time.
- The life-time in the model is represented with two time-horizons - where
- the second-time horizon is one before the end of life when all wealth accumulat
-ed by either participant must disappear.
- With no accumulations at the end of life, both rich and poor participants
- must decide to spend all their incomes 
+However,
+ it's not the probability to win that the participants optimise (maximise).
+ A more accurate representation of the real-world is a game where participants face a finite life-time and utility from accumulated assets instead.
+ Thus,
+ what follows is the case where the participants optimise an intertemporally additive utility over their life-time.
+ The life-time in the model is represented with two time-horizons - where the second-time horizon is one before the end of life when all wealth accumulated by either participant must disappear.
+ With no accumulations at the end of life,
+ both rich and poor participants must decide to spend all their incomes 
 \begin_inset Formula $y_{1}$
 \end_inset
 
@@ -2771,15 +2713,16 @@ ed by either participant must disappear.
 \end_inset
 
 ) towards the promotion game.
- In the first-stage, however, the participants decide the amount to be spent
- towards promotion based upon the utility from wealth they obtain across
- the two time-horizons that span their lifetime.
- For the poor participant, the total utility to be optimised (assuming EUT)
- under the intertemporally additive utility 
+ In the first-stage,
+ however,
+ the participants decide the amount to be spent towards promotion based upon the utility from wealth they obtain across the two time-horizons that span their lifetime.
+ For the poor participant,
+ the total utility to be optimised (assuming EUT) under the intertemporally additive utility 
 \begin_inset Formula $u(\cdot)$
 \end_inset
 
-, a winning probability function 
+,
+ a winning probability function 
 \begin_inset Formula $W(x)$
 \end_inset
 
@@ -2806,8 +2749,9 @@ u(y_{1}-\nu_{1})+\frac{1}{\delta}((1-W(y_{1}))u(y_{1})+W(y_{1})u(y_{2}))
 \end_layout
 
 \begin_layout Standard
-Similarly, for the rich participant, the total utility to be optimised (assuming
- EUT) is 
+Similarly,
+ for the rich participant,
+ the total utility to be optimised (assuming EUT) is 
 \begin_inset Formula 
 \begin{align*}
 u(y_{2}-\nu_{2})+\frac{1}{\delta}((1-W(y_{2}))u(y_{1})+W(y_{2})u(y_{2}))
@@ -2821,6 +2765,7 @@ u(y_{2}-\nu_{2})+\frac{1}{\delta}((1-W(y_{2}))u(y_{1})+W(y_{2})u(y_{2}))
 \begin_layout Standard
 \begin_inset Float table
 placement H
+alignment document
 wide false
 sideways false
 status open
@@ -3025,7 +2970,9 @@ name "tab:prisoners_dilemma_cases"
 
 \end_inset
 
-Cases I,II, III, IV as participant strategies
+Cases I,II,
+ III,
+ IV as participant strategies
 \end_layout
 
 \end_inset
@@ -3041,6 +2988,7 @@ Cases I,II, III, IV as participant strategies
 \begin_layout Standard
 \begin_inset Float table
 placement H
+alignment document
 wide false
 sideways false
 status open
@@ -3335,8 +3283,7 @@ name "tab:prisoners_dilemma"
 
 \end_inset
 
-Utility from two periods for (rich,poor) participants - at the start of
- the first-period (with 
+Utility from two periods for (rich,poor) participants - at the start of the first-period (with 
 \begin_inset Formula $P$
 \end_inset
 
@@ -3374,22 +3321,24 @@ noindent
 \end_layout
 
 \begin_layout Standard
-With above utilities, the conditions for whether the Case I, II, III, IV
- can become Nash equilibria (see Table 
+With above utilities,
+ the conditions for whether the Case I,
+ II,
+ III,
+ IV can become Nash equilibria (see Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:prisoners_dilemma_cases"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
 ) are now discussed.
- A discussion of the implications for the effect of income differences on
- expenditure towards status then follows.
- It is worth remarking that the discussion of the effect of the threshold
- 
+ A discussion of the implications for the effect of income differences on expenditure towards status then follows.
+ It is worth remarking that the discussion of the effect of the threshold 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
@@ -3444,8 +3393,7 @@ p_{2}'\equiv1-p_{1}'\nonumber
 \end_layout
 
 \begin_layout Standard
-The choices for the poor and rich participants using a general intertemporally
- additive function 
+The choices for the poor and rich participants using a general intertemporally additive function 
 \begin_inset Formula $u(A)$
 \end_inset
 
@@ -3460,6 +3408,7 @@ reference "tab:prisoners_dilemma"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -3471,6 +3420,7 @@ reference "fig:Probability-of-winning"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -3510,6 +3460,7 @@ reference "tab:prisoners_dilemma"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -3530,14 +3481,13 @@ noprefix "false"
 \begin_inset Formula $y_{1}<\overline{\nu}<y_{2}$
 \end_inset
 
- , then the rich participant knows that the best case probability to win
- for the poor participant is 
+ ,
+ then the rich participant knows that the best case probability to win for the poor participant is 
 \begin_inset Formula $\frac{1}{2}$
 \end_inset
 
 .
- The rich participant's decision to participate would depend only on utility
- from savings and the relative advantage from gain in probability.
+ The rich participant's decision to participate would depend only on utility from savings and the relative advantage from gain in probability.
  This is elaborated further in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3545,6 +3495,7 @@ reference "subsec:Binding-constraint"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -3552,9 +3503,8 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-Since the number of poor participants is likely to be higher than that of
- rich participants in a typical competition, the unequal number of poor
- and rich participants seems also worth considering in the model.
+Since the number of poor participants is likely to be higher than that of rich participants in a typical competition,
+ the unequal number of poor and rich participants seems also worth considering in the model.
  Setting 
 \begin_inset Formula $N=3,P=2$
 \end_inset
@@ -3566,16 +3516,19 @@ reference "eq:CaseI_general"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
-, 
+,
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:CaseII_general"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -3586,10 +3539,13 @@ reference "eq:CaseIV_general"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
-, for example, one can interpret the 
+,
+ for example,
+ one can interpret the 
 \series bold
 three-player
 \series default
@@ -3621,6 +3577,7 @@ p_{2}'=1-2p_{1}'\nonumber
 \begin_layout Standard
 \begin_inset Float table
 placement H
+alignment document
 wide false
 sideways false
 status open
@@ -3722,7 +3679,8 @@ With higher
 \begin_inset Formula $\mu$
 \end_inset
 
-, the participants with raw-talent get rewarded.
+,
+ the participants with raw-talent get rewarded.
  The probability to win increases with higher 
 \begin_inset Formula $\mu$
 \end_inset
@@ -3779,8 +3737,10 @@ With higher
 \begin_inset Formula $\mu$
 \end_inset
 
-, the poor participants with access to skills get rewarded.
- Therefore, The probability to win decreases with higher 
+,
+ the poor participants with access to skills get rewarded.
+ Therefore,
+ The probability to win decreases with higher 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -3888,11 +3848,13 @@ status open
 
 \begin_layout Plain Layout
 
-% x = seq(0,.499,.01); plot(0,0,type='l',xlim=c(0,.5),ylim=c(0,1),xlab=TeX("$
+% x = seq(0,.499,.01);
+ plot(0,0,type='l',xlim=c(0,.5),ylim=c(0,1),xlab=TeX("$
 \backslash
 
 \backslash
-mu$"),ylab=TeX("P(win)")); 
+mu$"),ylab=TeX("P(win)"));
+ 
 \end_layout
 
 \begin_layout Plain Layout
@@ -3902,8 +3864,7 @@ mu$"),ylab=TeX("P(win)"));
 
 \begin_layout Plain Layout
 
-% lines(x,(-16*x**3 + 65*x**2 - 90*x + 40 )/( 120 * (1-x)**2),lty=2) # only
- poor
+% lines(x,(-16*x**3 + 65*x**2 - 90*x + 40 )/( 120 * (1-x)**2),lty=2) # only poor
 \end_layout
 
 \begin_layout Plain Layout
@@ -3913,7 +3874,8 @@ mu$"),ylab=TeX("P(win)"));
 
 \begin_layout Plain Layout
 
-% legend(0.3, .7,legend=TeX(paste("Case",c(
+% legend(0.3,
+ .7,legend=TeX(paste("Case",c(
 \begin_inset Quotes eld
 \end_inset
 
@@ -3948,6 +3910,7 @@ III,IV
 \begin_layout Standard
 \begin_inset Float table
 placement H
+alignment document
 wide false
 sideways false
 status open
@@ -4054,8 +4017,10 @@ With higher
 \begin_inset Formula $\mu$
 \end_inset
 
-, the participants with raw-talent get rewarded.
- Therefore, the probability to win decreases with higher 
+,
+ the participants with raw-talent get rewarded.
+ Therefore,
+ the probability to win decreases with higher 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -4112,8 +4077,10 @@ With higher
 \begin_inset Formula $\mu$
 \end_inset
 
-, the poor participants with access to skills get rewarded.
- Therefore, the probability to win increases with higher 
+,
+ the poor participants with access to skills get rewarded.
+ Therefore,
+ the probability to win increases with higher 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -4222,11 +4189,13 @@ status open
 
 \begin_layout Plain Layout
 
-% x = seq(0,.499,.01); plot(0,0,type='l',xlim=c(0,.5),ylim=c(0,1),xlab=TeX("$
+% x = seq(0,.499,.01);
+ plot(0,0,type='l',xlim=c(0,.5),ylim=c(0,1),xlab=TeX("$
 \backslash
 
 \backslash
-mu$"),ylab=TeX("P(win)")); 
+mu$"),ylab=TeX("P(win)"));
+ 
 \end_layout
 
 \begin_layout Plain Layout
@@ -4236,8 +4205,7 @@ mu$"),ylab=TeX("P(win)"));
 
 \begin_layout Plain Layout
 
-% lines(x,1-(-16*x**3 + 65*x**2 - 90*x + 40 )/( 60 * (1-x)**2),lty=2) #
- only poor
+% lines(x,1-(-16*x**3 + 65*x**2 - 90*x + 40 )/( 60 * (1-x)**2),lty=2) # only poor
 \end_layout
 
 \begin_layout Plain Layout
@@ -4247,7 +4215,8 @@ mu$"),ylab=TeX("P(win)"));
 
 \begin_layout Plain Layout
 
-% legend(0.3, .7,legend=TeX(paste("Case",c(
+% legend(0.3,
+ .7,legend=TeX(paste("Case",c(
 \begin_inset Quotes eld
 \end_inset
 
@@ -4280,14 +4249,14 @@ III,IV
 \end_layout
 
 \begin_layout Standard
-Comparing these probabilities with those from the 2-player model in Equation
- 
+Comparing these probabilities with those from the 2-player model in Equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:probabilities_2player"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -4298,6 +4267,7 @@ reference "tab:Results_summary_poor"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -4308,30 +4278,31 @@ reference "tab:Results_summary_rich"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
-), it can be seen that the probability to win for the poor participant in
- the 3-player model is lower with respect to the Case III probability (i.e.
+),
+ it can be seen that the probability to win for the poor participant in the 3-player model is lower with respect to the Case III probability (i.e.
  
 \begin_inset Formula $1/N$
 \end_inset
 
 ).
- Likewise, the probability for the rich participant to win is higher in
- the 3-player model with respect to the Case III probability (
+ Likewise,
+ the probability for the rich participant to win is higher in the 3-player model with respect to the Case III probability (
 \begin_inset Formula $1/N$
 \end_inset
 
 ).
- The implications for the unequal number of poor and rich participants are
- further discussed in Section 
+ The implications for the unequal number of poor and rich participants are further discussed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Non-Binding-constraint"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -4340,6 +4311,8 @@ noprefix "false"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -4369,7 +4342,8 @@ Probability of winning
 \begin_inset Formula $P_{1}(\text{win})$
 \end_inset
 
-, 
+,
+ 
 \begin_inset Formula $P_{2}(\text{win})$
 \end_inset
 
@@ -4417,18 +4391,16 @@ noindent
 \end_layout
 
 \begin_layout Standard
-Assuming EUT participants, consider the simpler case of binding constraint
- 
+Assuming EUT participants,
+ consider the simpler case of binding constraint 
 \begin_inset Formula $y_{1}<\overline{\nu}<y_{2}$
 \end_inset
 
  first .
- With the assumption of a stability in long-term participant behaviour (which
- itself is a result of observed probability of success), mixed-strategies
- are not considered relevant in the current set up.
- Considering pure strategies for participation, the rich participant would
- thus participate only when the utility from participating would be higher
- than from not participating i.e.
+ With the assumption of a stability in long-term participant behaviour (which itself is a result of observed probability of success),
+ mixed-strategies are not considered relevant in the current set up.
+ Considering pure strategies for participation,
+ the rich participant would thus participate only when the utility from participating would be higher than from not participating i.e.
  
 \begin_inset Formula $u(y_{2}-\overline{\nu})+\frac{p_{2}u(y_{2})+(1-p_{2})u(y_{1})}{\delta}>u(y_{2})+\frac{u(y_{2})+u(y_{1})}{2\delta}$
 \end_inset
@@ -4449,8 +4421,7 @@ Assuming EUT participants, consider the simpler case of binding constraint
 \end_layout
 
 \begin_layout Standard
-With income differences being the same an increase in participation cost
- 
+With income differences being the same an increase in participation cost 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
@@ -4467,31 +4438,32 @@ With income differences being the same an increase in participation cost
 \end_inset
 
 ) and may fail the above condition.
- Similarly, with participation cost 
+ Similarly,
+ with participation cost 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- being the same, an increase in income-difference 
+ being the same,
+ an increase in income-difference 
 \begin_inset Formula $y_{2}-y_{1}$
 \end_inset
 
- is in the rich participant's interest whereas a narrowing of income differences
- reduces incentive for the participant to participate by possibly failing
- the above condition.
- All else being the same, higher impatience (lower time-discounted value
- of money or a higher 
+ is in the rich participant's interest whereas a narrowing of income differences reduces incentive for the participant to participate by possibly failing the above condition.
+ All else being the same,
+ higher impatience (lower time-discounted value of money or a higher 
 \begin_inset Formula $\delta$
 \end_inset
 
 ) would also discourage participation.
- Therefore, when budget is binding for the poor participant i.e.
+ Therefore,
+ when budget is binding for the poor participant i.e.
  if the poor participant cannot participate due to 
 \begin_inset Formula $y_{1}<\overline{\nu}$
 \end_inset
 
-, then narrower income differences, higher participation costs and higher
- patience for savings (common for both rich and poor participants) all encourage
- the rich participant to withdraw from the game.
+,
+ then narrower income differences,
+ higher participation costs and higher patience for savings (common for both rich and poor participants) all encourage the rich participant to withdraw from the game.
  This also means that wider income differences (
 \begin_inset Formula $y_{2}-y_{1}$
 \end_inset
@@ -4501,7 +4473,8 @@ With income differences being the same an increase in participation cost
 \end_inset
 
 ) may together help maintain the equilibrium where only the rich participates.
- Similarly, wider income differences ( higher 
+ Similarly,
+ wider income differences ( higher 
 \begin_inset Formula $y_{2}-y_{1}$
 \end_inset
 
@@ -4510,8 +4483,7 @@ With income differences being the same an increase in participation cost
 \end_inset
 
 ) would together maintain the incentive for the rich participant to participate.
- These conclusions very much fit with the sociological observations made
- in the literature about status 
+ These conclusions very much fit with the sociological observations made in the literature about status 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HirschSocialLimits,GalbraithEssential"
@@ -4549,8 +4521,8 @@ noindent
 \end_layout
 
 \begin_layout Standard
-When budget is non-binding, then participation of the rich participant is
- her dominant strategy if the condition is also 
+When budget is non-binding,
+ then participation of the rich participant is her dominant strategy if the condition is also 
 \begin_inset Formula $u(y_{2})+\frac{u(y_{2})p_{2}'+(1-p_{2}')u(y_{1})}{\delta}<u(y_{2}-\overline{\nu})+\frac{u(y_{2})+u(y_{1})}{2\delta})$
 \end_inset
 
@@ -4574,7 +4546,8 @@ The inferences on how
 \begin_inset Formula $y_{2}-y_{1}$
 \end_inset
 
-, 
+,
+ 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
@@ -4589,12 +4562,15 @@ reference "subsec:Binding-constraint"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
 ) remain the same for the above condition.
- To discuss the more general Nash equilibria, consider the conditions for
- all of the Cases I, II, III and IV to become a Nash equilibrium.
+ To discuss the more general Nash equilibria,
+ consider the conditions for all of the Cases I,
+ II,
+ III and IV to become a Nash equilibrium.
  For ease of notation we define the following for a given 
 \begin_inset Formula $\overline{\nu},y_{1}$
 \end_inset
@@ -4642,7 +4618,8 @@ One could view
 \begin_inset Formula $u(\cdot)$
 \end_inset
 
- represents a diminishing utility, then it is also necessary for 
+ represents a diminishing utility,
+ then it is also necessary for 
 \begin_inset Formula $y_{1}<y_{2}$
 \end_inset
 
@@ -4662,11 +4639,10 @@ U_{2} & <U_{1}
 
 \begin_layout Standard
 Consider now that conditions for Case I to be a Nash Equilibrium.
- If Case I were to be a Nash equilibrium, then for the rich participant's
- decision to participate, the poor participant must get more utility from
- withdrawing than from participating and for poor participant's decision
- to withdraw, the rich must get more utility from participating than from
- withdrawing.
+ If Case I were to be a Nash equilibrium,
+ then for the rich participant's decision to participate,
+ the poor participant must get more utility from withdrawing than from participating and for poor participant's decision to withdraw,
+ the rich must get more utility from participating than from withdrawing.
  The following conditions 
 \begin_inset Foot
 status open
@@ -4736,7 +4712,8 @@ Since
 \begin_inset Formula $N-P$
 \end_inset
 
- e.g., with 
+ e.g.,
+ with 
 \begin_inset Formula $N=3$
 \end_inset
 
@@ -4744,7 +4721,8 @@ Since
 \begin_inset Formula $P=2$
 \end_inset
 
-), this is a fairly general condition for the equilibrium.
+),
+ this is a fairly general condition for the equilibrium.
  An increase in 
 \begin_inset Formula $U_{1}$
 \end_inset
@@ -4753,8 +4731,7 @@ Since
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- does not change the equilibrium conditions so long as the corresponding
- rise 
+ does not change the equilibrium conditions so long as the corresponding rise 
 \begin_inset Formula $U_{2}$
 \end_inset
 
@@ -4763,18 +4740,18 @@ Since
 \end_inset
 
  ) does not affect the second inequality.
- In other words, a higher 
+ In other words,
+ a higher 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- favours the equilibrium (Case I) so long as there is an incentive for the
- rich to participate.
- Likewise, a decrease in 
+ favours the equilibrium (Case I) so long as there is an incentive for the rich to participate.
+ Likewise,
+ a decrease in 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- would be favourable for the equilibrium (Case I) so long as the poor participan
-ts do not also have an incentive to participate.
+ would be favourable for the equilibrium (Case I) so long as the poor participants do not also have an incentive to participate.
  
 \end_layout
 
@@ -4798,6 +4775,7 @@ reference "eq:caseI_inequalities"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -4821,7 +4799,8 @@ Limiting our attention to cases when
 \begin_inset Formula $\overline{\nu}<y_{1}$
 \end_inset
 
-, higher 
+,
+ higher 
 \begin_inset Formula $y_{2}$
 \end_inset
 
@@ -4837,22 +4816,21 @@ and makes it more likely for the rich to participate while it also decreases
 \begin_inset Formula $\frac{U_{1}}{u(y_{2})-u(y_{1})}$
 \end_inset
 
- by raising the stakes enough for the poor to participate (making it less
- likely for first inequality to be fulfilled).
+ by raising the stakes enough for the poor to participate (making it less likely for first inequality to be fulfilled).
  It is easy to see that higher impatience 
 \begin_inset Formula $\delta$
 \end_inset
 
  encourages both poor and rich to withdraw.
- As would be evident, the equilibrium conditions corresponding to Case II
- are far more stringent.
+ As would be evident,
+ the equilibrium conditions corresponding to Case II are far more stringent.
 \end_layout
 
 \begin_layout Standard
-If Case II is a Nash Equilibrium, then for rich's decision to withdraw,
- the poor participant should get more utility from participating than from
- withdrawing and for poor participant's decision to participate, the rich
- participant should get more utility from withdrawing than from participating.
+If Case II is a Nash Equilibrium,
+ then for rich's decision to withdraw,
+ the poor participant should get more utility from participating than from withdrawing and for poor participant's decision to participate,
+ the rich participant should get more utility from withdrawing than from participating.
  This means that the following hold 
 \begin_inset Foot
 status open
@@ -4870,7 +4848,8 @@ status open
 
 \end_inset
 
- simultaneously, 
+ simultaneously,
+ 
 \end_layout
 
 \begin_layout Standard
@@ -4890,15 +4869,13 @@ Since
 \begin_inset Formula $\frac{(p_{1}'-1/N)(u(y_{2})-u(y_{1}))}{\delta}<\frac{(1/N-p_{2}')(u(y_{2})-u(y_{1}))}{\delta}$
 \end_inset
 
- , the above cannot be satisfied so long as we have a diminishing utility
- which necessitates 
+ ,
+ the above cannot be satisfied so long as we have a diminishing utility which necessitates 
 \begin_inset Formula $U_{2}<U_{1}$
 \end_inset
 
 .
- Thus an equilibrium with Case II which incentivises the poor to participate
- but not the rich is possible only with a reference dependent utility with
- 
+ Thus an equilibrium with Case II which incentivises the poor to participate but not the rich is possible only with a reference dependent utility with 
 \begin_inset Formula $U_{1}<U_{2}$
 \end_inset
 
@@ -4907,7 +4884,8 @@ Since
 \begin_inset Formula $U_{1}<U_{2}$
 \end_inset
 
-, we can write above as 
+,
+ we can write above as 
 \end_layout
 
 \begin_layout Standard
@@ -4922,7 +4900,8 @@ Since
 \end_layout
 
 \begin_layout Standard
-Notice that despite a reference-dependent utility, a higher 
+Notice that despite a reference-dependent utility,
+ a higher 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
@@ -4930,9 +4909,9 @@ Notice that despite a reference-dependent utility, a higher
 \begin_inset Formula $\delta$
 \end_inset
 
-) may disincentivise the poor from participation just the same (leading
- to Case III).
- Similarly, higher income differences (an increase in 
+) may disincentivise the poor from participation just the same (leading to Case III).
+ Similarly,
+ higher income differences (an increase in 
 \begin_inset Formula $y_{2}$
 \end_inset
 
@@ -4945,15 +4924,15 @@ Notice that despite a reference-dependent utility, a higher
 \end_inset
 
  (leading to Case IV).
- Even with the reference dependent utility, the equilibrium with Case II
- remains a fragile one.
+ Even with the reference dependent utility,
+ the equilibrium with Case II remains a fragile one.
 \end_layout
 
 \begin_layout Standard
-If Case III were to be a Nash-Equilibrium, then for rich participant's decision
- to withdraw, poor should get more utility from withdrawing than from participat
-ing and for poor participant's decision to withdraw, the rich participant
- should get more from withdrawing than from participating.
+If Case III were to be a Nash-Equilibrium,
+ then for rich participant's decision to withdraw,
+ poor should get more utility from withdrawing than from participating and for poor participant's decision to withdraw,
+ the rich participant should get more from withdrawing than from participating.
  The following should thus hold
 \begin_inset Foot
 status open
@@ -4991,8 +4970,8 @@ Since
 \begin_inset Formula $p_{1}'-\frac{1}{N}\le p_{2}-\frac{1}{N}$
 \end_inset
 
- (strict inequality when number of poor participants is higher), we have
- 
+ (strict inequality when number of poor participants is higher),
+ we have 
 \begin_inset Formula $\frac{(p_{1}'-\frac{1}{N})(u(y_{2})-u(y_{1}))}{\delta}<\frac{(p_{2}-\frac{1}{N})(u(y_{2})-u(y_{1}))}{\delta}$
 \end_inset
 
@@ -5017,7 +4996,8 @@ Since
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
-, incentivises the rich participant to participate (leading to Case I).
+,
+ incentivises the rich participant to participate (leading to Case I).
  
 \end_layout
 
@@ -5047,21 +5027,22 @@ Higher income differences i.e.
 \begin_inset Formula $\frac{U_{2}}{u(y_{2})-u(y_{1})}$
 \end_inset
 
- and incentivise the rich participant to participate (leading to an equilibrium
- with Case I).
- Conversely, if the game is not lucrative for the rich it would automatically
- be infeasible for the poor i.e.
+ and incentivise the rich participant to participate (leading to an equilibrium with Case I).
+ Conversely,
+ if the game is not lucrative for the rich it would automatically be infeasible for the poor i.e.
  if rich withdraws then poor automatically withdraws.
- If there is any net utility from playing the game, however, Case IV is
- the likely equilibrium.
+ If there is any net utility from playing the game,
+ however,
+ Case IV is the likely equilibrium.
 \end_layout
 
 \begin_layout Standard
-If Case IV were to be a Nash Equilibrium, then for rich's decision to participat
-e, the poor participant should get more from participating than from withdrawing
- and for poor's decision to participate, the rich participant should get
- more from participating than from withdrawing.
- Therefore, the following
+If Case IV were to be a Nash Equilibrium,
+ then for rich's decision to participate,
+ the poor participant should get more from participating than from withdrawing and for poor's decision to participate,
+ the rich participant should get more from participating than from withdrawing.
+ Therefore,
+ the following
 \begin_inset Foot
 status open
 
@@ -5102,44 +5083,37 @@ With
 \begin_inset Formula $U_{2}<U_{1}$
 \end_inset
 
- , this equilibrium rests upon the incentive for the poor participant to
- participate.
- So long as the poorer participant finds the competition worthwhile, the
- rich would also participate.
+ ,
+ this equilibrium rests upon the incentive for the poor participant to participate.
+ So long as the poorer participant finds the competition worthwhile,
+ the rich would also participate.
  
 \end_layout
 
 \begin_layout Standard
-The above results outline how participation costs influence the investments
- towards status.
+The above results outline how participation costs influence the investments towards status.
  For very low 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
-, rich and poor would both participate and for very high 
+,
+ rich and poor would both participate and for very high 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
-, both would withdraw.
- For everything in between, the only equilibrium with a diminishing utility
- from wealth is one where rich participate whereas poor don't.
+,
+ both would withdraw.
+ For everything in between,
+ the only equilibrium with a diminishing utility from wealth is one where rich participate whereas poor don't.
 \end_layout
 
 \begin_layout Standard
-The above framework also allows us to discuss the implications of inequality
- for the same total wealth in the economy.
- As such, a segregation where the poor never participate in the status economy
- seems less favourable than one where both rich and poor participate in
- the status competitions.
- The current chapter explains that the likely outcome of a failure to maintain
- universal participation in status games (under diminishing utility from
- wealth) is that of a segregation where only the rich participate in skills
- leading to economic success.
- While a reference-based utility (which may be encouraged with segregation)
- does seem to permit an equilibrium where only the poor are concerned with
- status games (with respect to skills-enhancement), the result only suggests
- that a segregation of status games along with that of incomes is another
- possible long-term outcome of limited participation.
+The above framework also allows us to discuss the implications of inequality for the same total wealth in the economy.
+ As such,
+ a segregation where the poor never participate in the status economy seems less favourable than one where both rich and poor participate in the status competitions.
+ The current chapter explains that the likely outcome of a failure to maintain universal participation in status games (under diminishing utility from wealth) is that of a segregation where only the rich participate in skills leading to economic success.
+ While a reference-based utility (which may be encouraged with segregation) does seem to permit an equilibrium where only the poor are concerned with status games (with respect to skills-enhancement),
+ the result only suggests that a segregation of status games along with that of incomes is another possible long-term outcome of limited participation.
 \end_layout
 
 \begin_layout Section
@@ -5169,26 +5143,16 @@ noindent
 \end_layout
 
 \begin_layout Standard
-The paper considers a model where status amounts to a position maintained
- by the participant's social capital investments.
- It uses a decision theory framework for uncertainty inherent in status
- considerations and investigates the role of income gaps on expenditures
- that carry some status while also having an effect on the income mobility
- of the participants.
- The endogenisation of status in this manner allows an understanding of
- the role of income gaps in a generic framework.
+The paper considers a model where status amounts to a position maintained by the participant's social capital investments.
+ It uses a decision theory framework for uncertainty inherent in status considerations and investigates the role of income gaps on expenditures that carry some status while also having an effect on the income mobility of the participants.
+ The endogenisation of status in this manner allows an understanding of the role of income gaps in a generic framework.
 \end_layout
 
 \begin_layout Standard
-The above model provides three important details pertaining to status-expenditur
-es in an environment of income inequalities.
- First, there are only two long-term states of the poor-rich relationship
- that exist for status competitions under a diminishing wealth utility -
- one where both rich and poor participate in status competitions and another
- where only rich stand to benefit from status competitions.
- The particular detail demonstrates how income differences limit the benefit
- from status competitions to the poor - providing a quantitative basis for
- observations on social limits to growth in the literature 
+The above model provides three important details pertaining to status-expenditures in an environment of income inequalities.
+ First,
+ there are only two long-term states of the poor-rich relationship that exist for status competitions under a diminishing wealth utility - one where both rich and poor participate in status competitions and another where only rich stand to benefit from status competitions.
+ The particular detail demonstrates how income differences limit the benefit from status competitions to the poor - providing a quantitative basis for observations on social limits to growth in the literature 
 \begin_inset ERT
 status open
 
@@ -5202,35 +5166,27 @@ cite{HirschSocialLimits,GalbraithBeyondContentment1994,GalbraithAffluent}
 \end_inset
 
 .
- More specifically, while poor may be incentivised with status in a setting
- where status is exclusive to the rich, the other long-term equilibrium
- is one where both rich and poor must strive for status.
+ More specifically,
+ while poor may be incentivised with status in a setting where status is exclusive to the rich,
+ the other long-term equilibrium is one where both rich and poor must strive for status.
  
 \end_layout
 
 \begin_layout Standard
-The second detail highlighted by the model is the interplay of participation
- costs (threshold) and income-differences in status competitions.
- The model explains how a withdrawal from expenditures such as education
- could be the result of a combined effect of both participation costs and
- income-differences.
- More specifically, high participation costs push the equilibrium to one
- where only rich participate in status-related competitions while high income
- differences may continue to incentivise the poor to participate.
- In other words, reducing income-differences without lowering of participation
- costs in status competitions may have an effect of supporting status-games
- under long-established inequalities.
+The second detail highlighted by the model is the interplay of participation costs (threshold) and income-differences in status competitions.
+ The model explains how a withdrawal from expenditures such as education could be the result of a combined effect of both participation costs and income-differences.
+ More specifically,
+ high participation costs push the equilibrium to one where only rich participate in status-related competitions while high income differences may continue to incentivise the poor to participate.
+ In other words,
+ reducing income-differences without lowering of participation costs in status competitions may have an effect of supporting status-games under long-established inequalities.
 \end_layout
 
 \begin_layout Standard
-The third detail is the role of a reference-based utility - which serves
- as a caveat to the effects of income-differences on status expenditures.
- The model shows that contentment at lower levels of wealth could support
- segregation of competitions at different income levels in the economy.
- In other words, status competitions could be feasible despite vast income
- differences so long as the utility depends on local levels of wealth.
- This also seems in line with many of the findings from subjective contentment
- data on belief in meritocracy amdist inequalities 
+The third detail is the role of a reference-based utility - which serves as a caveat to the effects of income-differences on status expenditures.
+ The model shows that contentment at lower levels of wealth could support segregation of competitions at different income levels in the economy.
+ In other words,
+ status competitions could be feasible despite vast income differences so long as the utility depends on local levels of wealth.
+ This also seems in line with many of the findings from subjective contentment data on belief in meritocracy amdist inequalities 
 \begin_inset ERT
 status open
 
@@ -5328,7 +5284,8 @@ The distribution of a convex combination
 \begin_inset Formula $s$
 \end_inset
 
- are uniformly distributed variables ranging from 0 to 1, then 
+ are uniformly distributed variables ranging from 0 to 1,
+ then 
 \begin_inset Formula $x$
 \end_inset
 
@@ -5361,12 +5318,14 @@ The distribution of a convex combination
 \begin_inset Formula $F_{X}(x)=\frac{x}{\mu}$
 \end_inset
 
- , 
+ ,
+ 
 \begin_inset Formula $F_{Y}(y)=\frac{y}{1-\mu}$
 \end_inset
 
  (respectively).
- Therefore, the densities for 
+ Therefore,
+ the densities for 
 \begin_inset Formula $x$
 \end_inset
 
@@ -5392,7 +5351,8 @@ The distribution of a convex combination
 \end_inset
 
 .
- Since , 
+ Since ,
+ 
 \begin_inset Formula $f_{X}(x)$
 \end_inset
 
@@ -5432,12 +5392,14 @@ Since
 \begin_inset Formula $1-\mu$
 \end_inset
 
-, we have the condition 
+,
+ we have the condition 
 \begin_inset Formula $0<w-x<1-\mu\Rightarrow w-(1-\mu)<x<w$
 \end_inset
 
 .
- Further, 
+ Further,
+ 
 \begin_inset Formula $x$
 \end_inset
 
@@ -5453,15 +5415,18 @@ reference "fig:convex_combo"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
-, the integral would evaluate to the following
+,
+ the integral would evaluate to the following
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Notice that as a convex combination, 
+Notice that as a convex combination,
+ 
 \begin_inset Formula $w$
 \end_inset
 
@@ -5521,6 +5486,7 @@ reference "fig:convex_combo_plot"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -5562,7 +5528,8 @@ F_{X}(x) & =\begin{cases}
 \end_layout
 
 \begin_layout Standard
-Simplifying above, we have
+Simplifying above,
+ we have
 \end_layout
 
 \begin_layout Standard
@@ -5584,6 +5551,7 @@ F_{X}(x) & =\begin{cases}
 \begin_layout Standard
 \begin_inset Float figure
 placement H
+alignment document
 wide false
 sideways false
 status open
@@ -5633,6 +5601,7 @@ Ranges of
 \begin_layout Standard
 \begin_inset Float figure
 placement H
+alignment document
 wide false
 sideways false
 status open
@@ -5723,8 +5692,8 @@ To calculate
 \begin_inset Formula $0<s<1$
 \end_inset
 
-), we evaluate the sum of three parts split by the boundaries of the piecewise
- function.
+),
+ we evaluate the sum of three parts split by the boundaries of the piecewise function.
  The three parts are shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5732,6 +5701,7 @@ reference "fig:integral_boundaries"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -5785,6 +5755,7 @@ Then the integral
 \begin_layout Standard
 \begin_inset Float figure
 placement h
+alignment document
 wide false
 sideways false
 status open
