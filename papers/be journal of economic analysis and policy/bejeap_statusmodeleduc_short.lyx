@@ -1071,6 +1071,10 @@ name "sec:Theoretical_chapter_Model"
 Model
 \end_layout
 
+\begin_layout Subsection
+Basic Setup
+\end_layout
+
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -1088,11 +1092,8 @@ noindent
 \end_layout
 
 \begin_layout Standard
-We consider a game of success where the winner strives to maintain a rich position solely to achieve higher economic gains.
- In the competition that can promote a poorer participant to a rich position,
- there are only two characteristics that matter.
- The first is the social capital investment from the participant and the second is a raw-talent that is unaffected by higher expenditures.
- We call the former a skill and the latter a raw talent for brevity.
+We consider a game where the winner strives to maintain a rich position solely to achieve higher economic gains.
+ The two characteristics that matter in the competition where a poorer participant can be promoted to a rich position are i) skill - subject to the social capital investment from the participant and ii) raw-talent - that is unaffected by higher expenditures.
  Without loss of generality,
  both skill 
 \begin_inset Formula $s_{i}$
@@ -1145,12 +1146,11 @@ We consider a game of success where the winner strives to maintain a rich positi
 \end_inset
 
  regardless of the rich or poor background of the participant.
- Since all participants can participate in every such competition,
- it is possible for a rich participant to lose her rich-position in this zero-sum game of maximum score and let another participant acquire her position.
 \end_layout
 
 \begin_layout Standard
-It is worth highlighting that having a rich or a poor status by itself only has an indirect effect (through higher expenditure or budget) on the chance to be promoted (or maintaining one's rich position) - a probability that otherwise depends on the individual ability 
+It is worth highlighting that in the above mechanism,
+ a rich or a poor status by itself only has an indirect effect (through higher expenditure or budget) on the chance to be promoted (or maintaining one's rich position) - a probability that depends on the individual ability 
 \begin_inset Formula $r_{i}$
 \end_inset
 
@@ -1296,11 +1296,11 @@ With a uniform distribution of skills
 \end_layout
 
 \begin_layout Standard
-Introducing skills 
+Introducing the skills 
 \begin_inset Formula $s_{i}$
 \end_inset
 
- which are curated in social institutions and are materialised in competitions only at a certain participation cost,
+ in the above simplification,
  we consider a threshold investment 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
@@ -1376,8 +1376,7 @@ With the threshold investment
 \end_inset
 
 .
- In this all-or-nothing scheme,
- the participant might avoid the investment altogether and keep the investment towards savings instead.
+ The participant might avoid the investment altogether and keep the investment towards savings instead.
  The behaviour of all participants depends only on 
 \begin_inset Formula $\nu_{1},\nu_{2}$
 \end_inset
@@ -1727,7 +1726,7 @@ Using symmetry arguments,
 \end_layout
 
 \begin_layout Standard
-Notice that with the rich and poor participants having disparate incomes 
+With the rich and poor participants having disparate incomes 
 \begin_inset Formula $y_{1}$
 \end_inset
 
@@ -1841,74 +1840,19 @@ nolink "false"
 \end_inset
 
  and can decide to avoid the expenditure altogether in order to invest it towards the savings instead.
- The different probabilities in Case I,
- II,
- III and IV are discussed before presenting the role of an additive intertemporal diminishing utility from accumulated wealth.
- Recall that the behaviour of both participants depends only on 
-\begin_inset Formula $\nu_{1},\nu_{2}$
-\end_inset
-
- - as they are unaware of 
-\begin_inset Formula $r_{i},s_{i}$
-\end_inset
-
- before they participate.
- 
-\end_layout
-
-\begin_layout Standard
-An important result for the closed-form solution is the probability distribution (CDF) of 
-\begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
-\end_inset
-
- under assumption 
-\begin_inset Formula $\mu<1-\mu$
-\end_inset
-
- (for independent variables 
-\begin_inset Formula $r_{i}$
-\end_inset
-
- and 
-\begin_inset Formula $s_{i}$
-\end_inset
-
- that are uniformly distributed between 0 and 1) that is detailed in Appendix 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ref{sec:appendix_theorertical_1}
-\end_layout
-
+ It is easy to show that these results do not change significantly for 
+\begin_inset Formula $P>\frac{N}{2}$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-F_{X}(x) & =P(x_{k}<x)=P(r_{k}\mu+s_{k}(1-\mu)<x)=\begin{cases}
-\frac{x^{2}}{2\mu(1-\mu)} & 0<x<\mu\\
-\frac{x-\mu/2}{1-\mu} & \mu<x<1-\mu\\
-1-\frac{(x-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x<1\\
-0 & \text{otherwise}
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Above probabilities under Case I,
+ We first calculate the probability to win in Cases I,
  II,
- III and IV are now discussed further.
+ III and IV and then discuss the equilibrium conditions using an intertemporal additive utility function.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Winning Probability
 \end_layout
 
 \begin_layout Subsubsection*
@@ -2365,65 +2309,6 @@ ref{sec:appendix_theorertical_2}
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% For part A,
-  integrate( integrate((mu *r + (1-mu)*s)^2/(2*mu*(1-mu)),s,0,mu*(1-r)/(1-mu)) ,
- r,
- 0,1) gives 
-\backslash
-frac{
-\backslash
-mu^2}{8(1-
-\backslash
-mu)^2}
-\end_layout
-
-\begin_layout Plain Layout
-
-% For part B,
- integrate (integrate( ((mu * r + (1-mu) *s - mu /2 )/(1-mu) ),s,mu*(1-r)/(1-mu),1-mu*r/( 1-mu)) ,
- r,
- 0,
- 1)  gives 
-\backslash
-frac{1-2
-\backslash
-mu}{2(1-
-\backslash
-mu)}
-\end_layout
-
-\begin_layout Plain Layout
-
-% For part C,
- integrate(integrate( (1- ((mu *r  + (1-mu) * s)-1)^2/(2*mu*(1-mu))),
- s,
- 1-mu *r /(1-mu),1),r,0,1) gives 
-\backslash
-frac{(4-5
-\backslash
-mu)
-\backslash
-mu}{8(1-
-\backslash
-mu)^{2}}
-\end_layout
-
-\begin_layout Plain Layout
-
-% simplified with  x^2 +(1-2*x)*(1-x)*4+(4-5*x)*x which gives 4(1-x)^2
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 placement document
 alignment document
@@ -2476,6 +2361,10 @@ Probability of winning
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Intertemporal Choice
 \end_layout
 
 \begin_layout Standard
@@ -3065,15 +2954,7 @@ name "tab:prisoners_dilemma"
 
 \end_inset
 
-Utility from two periods for (rich,poor) participants - at the start of the first-period (with 
-\begin_inset Formula $P$
-\end_inset
-
- poor participants among 
-\begin_inset Formula $N$
-\end_inset
-
- total participants)
+Utility for poor and rich participants
 \end_layout
 
 \end_inset
@@ -3235,7 +3116,7 @@ p_{1}'>1/2>p_{2}'\nonumber
 \end_layout
 
 \begin_layout Standard
-Notice the Table 
+Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:prisoners_dilemma"
@@ -3367,14 +3248,23 @@ noindent
 
 \begin_layout Standard
 Assuming EUT participants,
- consider the simpler case of binding constraint 
+ we now consider the simpler case of binding constraint 
 \begin_inset Formula $y_{1}<\overline{\nu}<y_{2}$
 \end_inset
 
- first .
- With the assumption of a stability in long-term participant behaviour (which itself is a result of observed probability of success),
- mixed-strategies are not considered relevant in the current set up.
- Considering pure strategies for participation,
+.
+ Considering pure strategies for participation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+With the assumption of a stability in long-term participant behaviour (which itself is a result of observed probability of success),
+ mixed-strategies are not relevant in the current set up.
+\end_layout
+
+\end_inset
+
+,
  the rich participant would thus participate only when the utility from participating would be higher than from not participating i.e.
  
 \begin_inset Formula $u(y_{2}-\overline{\nu})+\frac{p_{2}u(y_{2})+(1-p_{2})u(y_{1})}{\delta}>u(y_{2})+\frac{u(y_{2})+u(y_{1})}{2\delta}$
@@ -3396,7 +3286,8 @@ Assuming EUT participants,
 \end_layout
 
 \begin_layout Standard
-With income differences being the same an increase in participation cost 
+With income differences held constant,
+ an increase in participation cost 
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
@@ -3418,7 +3309,7 @@ With income differences being the same an increase in participation cost
 \begin_inset Formula $\overline{\nu}$
 \end_inset
 
- being the same,
+ held constant,
  an increase in income-difference 
 \begin_inset Formula $y_{2}-y_{1}$
 \end_inset
@@ -4046,11 +3937,8 @@ The above results outline how participation costs influence the investments towa
 ,
  both would withdraw.
  For everything in between,
- the only equilibrium with a diminishing utility from wealth is one where rich participate whereas poor don't.
- In other words,
- the likely outcome of a failure to maintain universal participation in competitions (under diminishing utility from wealth) is that of a segregation where only the rich participate in skills leading to economic success.
- While a reference-based utility (which may be encouraged with segregation) does seem to permit an equilibrium where only the poor are concerned with status games (with respect to skills-enhancement),
- the result only suggests that a segregation of status games along with that of incomes is another possible long-term outcome of limited participation.
+ the only equilibrium may be the one where only the rich participate.
+ A reference-based utility may permit an equilibrium but at the likely cost of segregation of income classes.
 \end_layout
 
 \begin_layout Section
