@@ -1,0 +1,295 @@
+%% LyX 2.4.4 created this file.  For more info, see https://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[british]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{tgtermes}
+%\usepackage{librebaskerville}
+%\usepackage[sfdefault]{biolinum}  
+%\usepackage[adobe-utopia]{mathdesign}
+%\usepackage{Alegreya}
+\usepackage{mathtools}
+\usepackage{xparse}
+\usepackage{lscape}
+\usepackage[section]{placeins}
+\usepackage{apacite}
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+\usepackage{titlesec}
+\usepackage{bbm}
+
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{sectsty}
+\usepackage[toc,page]{appendix}
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\usepackage{color, colortbl}
+\usepackage[first=0,last=9]{lcg}
+\usepackage[left,modulo]{lineno}
+
+
+\usepackage{soul}
+\usepackage{color}
+
+\usepackage[absolute]{textpos}
+
+
+\newcommand{\hlc}[1]{{\sethlcolor{LightCyan}\hl{#1}}}
+\newcommand{\hly}[1]{{\sethlcolor{LightYellow}\hl{#1}}}
+\newcommand{\hlw}[1]{{\sethlcolor{White}\hl{#1}}}
+\newcommand{\hlg}[1]{{\sethlcolor{LightGreen}\hl{#1}}}
+
+\definecolor{Gray}{gray}{0.9}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{LightYellow}{RGB}{255,255,200}
+\definecolor{LightGreen}{RGB}{204,255,204}
+\definecolor{White}{RGB}{255,255,255}
+\newcommand{\ra}{\rand0.\arabic{rand}}
+
+
+\makeatletter
+\@addtoreset{section}{part}
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >\m@ne
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    {\parindent \z@ \raggedright
+     \interlinepenalty \@M
+     \normalfont\centering
+     \ifnum \c@secnumdepth >\m@ne
+       \large\bfseries \partname\nobreakspace\thepart
+       \par\nobreak
+     \fi
+     \huge \bfseries #2%
+     \markboth{}{}\par}%
+    \nobreak
+    \vskip 3ex
+    \@afterheading}
+\renewcommand\partname{Topic}
+\makeatother
+
+
+\begin{document}
+
+\section{Introduction}
+
+The relationship between income inequality and individual incentives
+has long occupied economic theory. While inequality is often viewed
+as a mechanism that rewards effort and sustains competition, it may
+also discourage participation when pathways to advancement appear
+inaccessible. This tension is particularly salient in environments
+where rewards are positional rather than additive, and where relative
+rank rather than absolute output determines outcomes. Understanding
+how inequality shapes participation in such settings requires an explicit
+treatment of status as an endogenous economic object.
+
+Status differs from wealth in that it is inherently relative and typically
+maintained through competition. Individuals do not obtain status directly
+from consumption or income, but through success in contests that depend
+on both innate characteristics and costly investments. While this
+feature of status is acknwoledged, status is seldom endogenized in
+dynamic economic models with participation decisions and more often
+viewed a fixed social ranking - thus limiting the ability to capture
+how inequality and costs jointly shape incentives to compete.
+
+This paper develops a model in which status emerges from repeated
+probabilistic tournaments for hierarchical positions. Individuals
+differ in income and face a discrete participation cost that enables
+investment in social capital, interpreted broadly as any costly attribute
+that improves contest performance but does not directly increase productivity.
+Contest outcomes depend on a weighted combination of innate ability
+and acquired capital, and individuals choose whether to incur participation
+costs without knowing their own realization of ability. Income inequality
+affects behavior by constraining participation and by altering the
+relative returns to competing for status. This structure captures
+environments in which access to privileged networks, professional
+opportunities, or advancement depends on costly engagement in competitive
+processes rather than deterministic rewards. 
+
+The model yields three main insights. First, inequality has a non-monotonic
+effect on participation: while moderate income differences can sustain
+investment in status contests, sufficiently large inequality undermines
+participation by raising effective entry barriers. Second, participation
+costs play a central role in equilibrium selection. High costs exclude
+low-income individuals from contests even when potential rewards are
+large, whereas sufficiently low costs sustain broad participation.
+Third, the dynamic structure of the contest admits only two stable
+long-run equilibria: one in which all individuals participate in status
+contests, and another in which participation is confined to the rich.
+Intermediate configurations are unstable.An equilibrium in which only
+low-income individuals participate is ruled out under standard preferences.
+
+By endogenizing both status and participation, the model clarifies
+how inequality shapes social investment in competitive environments
+where success depends on relative rank rather than output. The results
+apply to a broad class of status-bearing activities characterized
+by signaling, social capital accumulation, or credential-based competition,
+and contribute to the theory of contests and inequality by identifying
+structural limits to participation and mobility.
+
+\section{Model}
+
+\subsection{Basic Setup}
+
+Consider a population of continuum mass 1, divided equally between high-income agents ($y_2$) and low-income agents ($y_1 < y_2$), in a stationary environment where positions are contested repeatedly. Time is discrete and infinite so that in each period, agents decide whether to participate in a probabilistic tournament for a high-status position, which yields income $y_2$ with probability determined by relative performance. Non-participants default to $y_1$. Participation requires incurring a discrete cost $\nu > 0$, which enables investment in a costly attribute---social capital---that boosts contest performance without directly altering productivity.
+
+Formally, let $N=2$ agents (high- and low-income) compete per tournament, with outcomes symmetric and extendable to larger $N$ under aggregation. Each participating individual $i$ is characterized by two components that determine contest performance:
+\begin{itemize}
+    \item an innate ability $r_i \in [0,1]$,
+    \item acquired social capital $s_i \in [0,1]$, which is available only upon participation.
+\end{itemize}
+
+Ability and social capital are independently and uniformly distributed on $[0,1]$. Individuals do not observe their own realizations of $r_i$ or $s_i$ at the time participation decisions are made. This captures environments in which relative performance is revealed only through contest outcomes. The contest performance is thus summarized by a score
+\[
+x_i = \mu r_i + (1-\mu)s_i,
+\]
+where $\mu \in (0,1)$ governs the relative importance of innate ability. A lower $\mu$ corresponds to environments in which acquired social capital plays a greater role in determining status. As  we focus on environments where social capital is more important, the following assumption ensures that signaling via social capital dominates innate ability -- capturing environments where costly attributes (e.g., networks) outweigh fixed traits in relative rankings.
+
+\textbf{Assumption 1.} $\mu < 1/2$
+
+
+\subsection{Preferences and Participation}
+
+\textbf{TODO}: Ensure the presence of caveat that status is endogenised as economic goal (this para is hinting that).
+
+The contest is modeled as a probabilistic tournament. Among participants, the individual with the highest realized score $x_i$ obtains (or retains) the high-status position in the next period. In each period, the winner (max $x_i$) secures high-status ($y_2$); the loser gets $y_1$. Let $P_i(\text{win})$ denote the probability that individual $i$ wins the contest, given the participation decisions of others. Closed-form expressions for these probabilities follow from the distributional assumptions and are provided in Appendix~A.
+
+Individuals have diminishing utility over income. Expected utility from participation depends on the probability of winning the contest, the resulting income, and the participation cost $\nu$. Let $U(y)$ denote instantaneous utility from income $y$, with $U' > 0$ and $U'' < 0$. An individual participates if and only if the expected utility from participating weakly exceeds the utility from not participating. Participation decisions are made simultaneously each period.
+
+Agents choose participation (invest in $s_i=1$ or abstain $s_i=0$) without knowing $r_i$ or $s_{i}$, but anticipating distributions. Uniform priors yield convolution $F_X(x)$ for score CDF (Appendix A): piecewise quadratic/cubic, ensuring $P(\mathrm{win}|s_i,s_{-i})$ is increasing but concave in $s_i$ due to ability noise.
+
+
+
+
+\subsection{Equilibrium Analysis and Intuition}
+
+An equilibrium is a stationary participation profile in which no individual has an incentive to deviate, given beliefs about contest outcomes and future status transitions. Four pure participation symmetric Nash equilibria strategies follow from four cases based on high-($H$) and low-income ($L$) choices (invest or abstain). The model admits two stable long-run equilibria:
+\begin{enumerate}
+    \item \textbf{Universal participation}, in which both income types participate in the status contest;
+    \item \textbf{Elite-only participation}, in which only high-income individuals participate.
+\end{enumerate}
+
+\textbf{TODO:} Review further. 
+
+An equilibrium in which only low-income individuals participate does not exist under standard preferences. 
+
+Intuition: Under low $\nu$, mutual investment sustains universal participation (Case I), as $\Delta y$ motivates broad engagement despite noise. High $\nu$ or $\Delta y$ tips to elite-only (Case II), where $H$ invests but $L$ abstains, entrenching inequality via endogenous barriers (competition raises effective $\nu$ via opportunity costs). Intermediate cases (III: $L$-only; IV: neither) are unstable, as deviations favor the advantaged.
+
+\textbf{Case I: Universal Participation.} Both invest ($s_H = s_L = 1$). $P(\mathrm{win}|1,1) = 1/2$ by symmetry. Incentive: $\Delta y / 2 > \nu$ for both (feasible under equal access). Stable if $\nu < \Delta y (1 - \mu)/2$, as defection yields $P(\mathrm{win}|0,1) < 1/2 - \epsilon$ (noise disadvantage).
+
+\textbf{Case II: Elite-Only Participation.} $H$ invests ($s_H=1$), $L$ abstains ($s_L=0$). $P(\mathrm{win}_H|1,0) = \int_0^1 [1 - F_X(\mu r + (1-\mu) \cdot 0)] dr > 1/2$. Incentive: $\Delta y \cdot P_H > \nu$ for $H$; $\Delta y \cdot P_L < \nu$ for $L$. Stable for $\nu > \Delta y / 2$, as $L$ deviation fails (low $P_L|1,1 < P_L|0,1$), and $H$ prefers investment.
+
+\textbf{Case III: Low-Only Participation.} $L$ invests, $H$ abstains. Fragile under reference-dependence (e.g., $H$'s local contentment reduces $\Delta y$ incentive), but unstable: $H$ deviates to invest, capturing near-sure win.
+
+\textbf{Case IV: No Participation.} Both abstain; Pareto but unstable, as unilateral deviation yields positive $\Delta y \cdot P > 0$ if $\nu$ low.
+
+Long-run dynamics (Markov chain over states) admit only two absorbents: universal (low $\nu/\Delta y$, broad mobility) or elite-only (high $\nu/\Delta y$, exclusion). Transition probabilities depend on $\mu$: lower $\mu$ (stronger signaling) widens universal basin.
+
+
+
+\subsection{Results}
+
+The model yields the three insights previewed in the introduction.
+
+\textbf{Proposition 1 (Non-Monotonic Effect of Inequality).} There exists $\bar{\Delta y} > 0$ such that the participation rate increases in $\Delta y$ for $\Delta y < \bar{\Delta y}$ (incentivizing investment), but decreases for $\Delta y > \bar{\Delta y}$ (raising barriers and rendering contests unsustainable).  
+\textit{Proof.} Follows from Cases I/II thresholds: Low $\Delta y$ expands universal basin; high $\Delta y$ endogenizes $\nu$ upward via high-income dominance (Appendix C).  
+
+\textbf{Proposition 2 (Central Role of Participation Costs).} For fixed $\Delta y$, high $\nu$ selects elite-only equilibrium; low $\nu$ selects universal. Moreover, $\nu$ rises endogenously with competition intensity, proportional to $1/(1-\mu)$.  
+\textit{Proof.} Incentive compatibilities in 3.2; $\nu^\mathrm{eff} = \nu + \mathrm{opp.cost}(\Delta y, \mu)$ (Figure 1).  
+
+\textbf{Proposition 3 (Stable Equilibria).} The dynamic structure admits only two stable long-run equilibria: universal participation (all compete) and elite-only (high-income only). Low-income-only is unstable under monotonic preferences.  
+\textit{Proof.} Markov convergence: Universal maximizes aggregate welfare $W = \sum U_i$ under low $\nu$, but elite-only is robust to deviations (Appendix D).  
+
+These propositions clarify inequality's dual role in positional contests, where signaling and costs jointly limit mobility.
+
+\begin{figure}[h]
+\centering
+% Placeholder for phase diagram; use TikZ or includegraphics
+\caption{Phase diagram in ($\nu$, $\Delta y$) space, with universal region shaded.}
+\end{figure}
+
+
+\appendix
+
+\section{Convolutions and Score CDF (Appendix A)}
+
+The score $x = \mu r + (1 - \mu) s$, with $r, s \sim U[0,1]$ independent for participants (non-participants have $s = 0$, $x = \mu r \sim U[0,\mu]$). The CDF $F_X(t) = P(x \leq t)$ is the Lebesgue measure of $\{(r,s) \in [0,1]^2 : \mu r + (1 - \mu) s \leq t \}$. With $\mu < 1/2$, $F_X(t) = 0$ for $t < 0$, $F_X(t) = 1$ for $t > 1$, and piecewise for $0 \leq t \leq 1$:
+
+\begin{align}
+F_X(t) &=
+\begin{cases}
+\dfrac{t^2}{2 \mu (1 - \mu)} & 0 \leq t \leq \mu, \\[1em]
+\dfrac{t - \frac{\mu}{2}}{1 - \mu} & \mu \leq t \leq 1 - \mu, \\[1em]
+1 - \dfrac{(1 - t)^2}{2 \mu (1 - \mu)} & 1 - \mu \leq t \leq 1.
+\end{cases}
+\end{align}
+
+\emph{Derivation:} Compute the double integral $\int_0^1 \int_0^1 \mathbbm{1}_{\{\mu r + (1 - \mu) s \leq t\}} \, ds \, dr = \int_0^1 \min\left(1, \max\left(0, \dfrac{t - \mu r}{1 - \mu}\right)\right) dr$.
+
+ \emph{Case $0 \leq t \leq \mu$}: The upper $s$-bound $(t - \mu r)/(1 - \mu) \leq t/(1 - \mu) \leq \mu/(1 - \mu) < 1$, and $=0$ at $r = t/\mu \leq 1$. Thus,
+  \[
+  F_X(t) = \int_0^{t/\mu} \dfrac{t - \mu r}{1 - \mu} \, dr = \dfrac{1}{1 - \mu} \left[ t r - \dfrac{\mu}{2} r^2 \right]_0^{t/\mu} = \dfrac{t^2}{2 \mu (1 - \mu)}.
+  \]
+
+ \emph{Case $\mu \leq t \leq 1 - \mu$}: The bound $(t - \mu r)/(1 - \mu) \in [0,1]$ for all $r \in [0,1]$ (at $r=0$: $t/(1 - \mu) \leq 1$; at $r=1$: $(t - \mu)/(1 - \mu) \geq 0$). Thus,
+  \[
+  F_X(t) = \int_0^1 \dfrac{t - \mu r}{1 - \mu} \, dr = \dfrac{1}{1 - \mu} \left[ t r - \dfrac{\mu}{2} r^2 \right]_0^1 = \dfrac{t - \frac{\mu}{2}}{1 - \mu}.
+  \]
+
+ \emph{Case $1 - \mu \leq t \leq 1$}: The bound $>1$ for $r < r^* = (t - (1 - \mu))/\mu \in [0,1]$, $=0$ at $r = t/\mu >1$. Thus,
+  \[
+  F_X(t) = \int_0^{r^*} 1 \, dr + \int_{r^*}^1 \dfrac{t - \mu r}{1 - \mu} \, dr = r^* + \dfrac{1}{1 - \mu} \left[ \left( t - \dfrac{\mu}{2} \right) - \left( t r^* - \dfrac{\mu}{2} (r^*)^2 \right) \right] = 1 - \dfrac{(1 - t)^2}{2 \mu (1 - \mu)}.
+  \]
+
+The PDF $f_X(t) = \frac{d}{dt} F_X(t)$ is piecewise linear: $f_X(t) = t / [\mu (1 - \mu)]$ for $0 \leq t \leq \mu$, $1/(1 - \mu)$ for $\mu \leq t \leq 1 - \mu$, $(1 - t)/[\mu (1 - \mu)]$ for $1 - \mu \leq t \leq 1$.
+
+\section{Win Probabilities and Utilities (Appendix B)}
+
+For a participant ($s_i = 1$), $x_i \sim F_X$; for abstainer ($s_{-i} = 0$), $x_{-i} \sim G(z) = z/\mu$ for $z \in [0,\mu]$ ($G(z) = 0$ for $z<0$, $1$ for $z>\mu$).
+
+- \emph{Universal ($s_i = s_{-i} = 1$)}: Symmetry implies $P(\mathrm{win}_i) = 1/2$. Utility $U_i = \Delta y / 2 - \nu$.
+
+- \emph{Elite-only ($s_i = 1, s_{-i} = 0$)}: 
+  \[
+  P(\mathrm{win}_i | 1,0) = \int_0^\mu \frac{1}{\mu} [1 - F_X(z)] \, dz.
+  \]
+  For $z \in [0,\mu]$, $F_X(z) = z^2 / [2 \mu (1 - \mu)]$, so $1 - F_X(z) = 1 - z^2 / [2 \mu (1 - \mu)]$. Thus,
+  \[
+  P = \frac{1}{\mu} \int_0^\mu \left(1 - \frac{z^2}{2 \mu (1 - \mu)}\right) dz = \frac{1}{\mu} \left[ z - \frac{z^3}{6 \mu (1 - \mu)} \right]_0^\mu = 1 - \frac{\mu}{6 (1 - \mu)}.
+  \]
+  $P(\mathrm{win}_{-i} | 0,1) = 1 - P = \frac{\mu}{6 (1 - \mu)} < 1/2$. Utility $U_H = \Delta y \left(1 - \frac{\mu}{6 (1 - \mu)}\right) - \nu$, $U_L = \Delta y \cdot \frac{\mu}{6 (1 - \mu)}$.
+
+- \emph{Low-only ($s_i = 1, s_{-i} = 0$ symmetric, but unstable).} $P(\mathrm{win}_i | 1,0) = 1 - \frac{\mu}{6 (1 - \mu)}$ as above.
+
+- \emph{No participation}: $P = 1/2$ (talent only), $U_i = 0$.
+
+Reference-dependence $\mathrm{ref}(y_i) = \rho (y_i - \bar{y})$, $\bar{y}$ local mean, adds fragility to Case III but does not alter stability of I/II.
+
+\section{Proof of Proposition 1 (Appendix C)}
+
+The universal equilibrium (Case I) is stable if $\nu < \Delta y (1 - \mu)/2$ (deviation yield $P(0,1) = \mu / [6 (1 - \mu)] < 1/2 - \epsilon$, $\epsilon = (1 - \mu - \mu/6)/(2(1 - \mu)) > 0$).
+
+However, $\nu$ is endogenous: $\nu = \nu_0 + k \Delta y$, where $\nu_0 > 0$ fixed, $k > 0$ from opportunity cost of competition (higher $\Delta y$ intensifies entry, $k \propto 1/(1 - \mu)$ from noise reduction). Stability: $\nu_0 + k \Delta y < \Delta y (1 - \mu)/2$, or $\nu_0 < \Delta y [(1 - \mu)/2 - k]$.
+
+If $k < (1 - \mu)/2$ (weak endogeneity), low $\Delta y < \nu_0 / [(1 - \mu)/2 - k] = \bar{\Delta y}$ sustains universal (participation rises); high $\Delta y > \bar{\Delta y}$ tips to elite-only (participation falls, unsustainable). Non-monotonic follows.
+
+\section{Proof of Propositions 2 and 3 (Appendix D)}
+
+\emph{Proposition 2:} Elite-only stable if $\nu > \Delta y / 2$ (from $P_L(0,1) < 1/2$, scaled by $\Delta y$). Universal if $\nu < \Delta y (1 - \mu)/2 > \Delta y / 2$. Endogeneity: Intensity $I = 1/(1 - \mu)$ (signaling share), opp. cost $I \cdot \Delta y$ (foregone gains), so $\nu^\mathrm{eff} = \nu + I \Delta y \propto 1/(1 - \mu)$.
+
+\emph{Proposition 3:} Consider 2-state Markov chain: State U (universal), E (elite-only). Transition: From U to E with prob. $\pi_U = P(L \ deviates) = \max(0, \nu / \Delta y - (1 - \mu)/2)$; from E to U with $\pi_E = 0$ (absorbing, $H$ stays). Low-only unstable: Deviation gain for $H$ is $\Delta y [P(1,0) - P(0,1)] > 0$. Universal absorbing if $\pi_U = 0$ (low $\nu$), else converges to E (high $\nu$). Under monotonic prefs ($U$ increasing in $P$), low-only deviates to E.
+
+Welfare: Universal $W_U = 2 (\Delta y / 2 - \nu) = \Delta y - 2\nu$; elite $W_E = \Delta y (1 - \mu/[6(1 - \mu)]) - \nu + 0 < W_U$ if $\nu < \Delta y / 2$ (low costs favor broad engagement).
+\end{document}
