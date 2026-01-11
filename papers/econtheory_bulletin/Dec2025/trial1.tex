@@ -142,16 +142,17 @@ structural limits to participation and mobility.
 \section{Model}
 
 \subsection{Basic Setup}
+\noindent
 
 Consider a population of continuum mass 1, divided equally between high-income agents ($y_2$) and low-income agents ($y_1 < y_2$), in a stationary environment where positions are contested repeatedly. Time is discrete and infinite so that in each period, agents decide whether to participate in a probabilistic tournament for a high-status position, which yields income $y_2$ with probability determined by relative performance. Non-participants default to $y_1$. Participation requires incurring a discrete cost $\nu > 0$, which enables investment in a costly attribute---social capital---that boosts contest performance without directly altering productivity.
 
-Formally, let $N=2$ agents (high- and low-income) compete per tournament, with outcomes symmetric and extendable to larger $N$ under aggregation. Each participating individual $i$ is characterized by two components that determine contest performance:
+The symmetric outcomes from $N=2$ agents (high- and low-income) competing per tournament are extendable to larger $N$ under aggregation. With $N=2$, each participating individual $i$ is characterized by two components that determine contest performance:
 \begin{itemize}
     \item an innate ability $r_i \in [0,1]$,
-    \item acquired social capital $s_i \in [0,1]$, which is available only upon participation.
+    \item acquired social capital $s_i \in [0,1]$, which is available only upon participation (through expenditure $\nu$)
 \end{itemize}
 
-Ability and social capital are independently and uniformly distributed on $[0,1]$. Individuals do not observe their own realizations of $r_i$ or $s_i$ at the time participation decisions are made. This captures environments in which relative performance is revealed only through contest outcomes. The contest performance is thus summarized by a score
+Ability and social capital are independently and uniformly distributed on $[0,1]$. Individuals do not observe their own realizations of $r_i$ or $s_i$ at the time participation decisions are made. This captures environments in which relative performance is revealed only through contest outcomes. The contest performance is summarized by a score
 \[
 x_i = \mu r_i + (1-\mu)s_i,
 \]
@@ -172,30 +173,28 @@ Agents choose participation (invest in $s_i=1$ or abstain $s_i=0$) without knowi
 
 
 
-
 \subsection{Equilibrium Analysis and Intuition}
 
-An equilibrium is a stationary participation profile in which no individual has an incentive to deviate, given beliefs about contest outcomes and future status transitions. Four pure participation symmetric Nash equilibria strategies follow from four cases based on high-($H$) and low-income ($L$) choices (invest or abstain). The model admits two stable long-run equilibria:
-\begin{enumerate}
-    \item \textbf{Universal participation}, in which both income types participate in the status contest;
-    \item \textbf{Elite-only participation}, in which only high-income individuals participate.
-\end{enumerate}
+An equilibrium is a stationary participation profile in which no individual has an incentive to deviate, given beliefs about contest outcomes and future status transitions. Four pure participation symmetric Nash equilibria strategies follow from cases based on choices to (invest or abstain) by high-income ($H$) and low-income ($L$) participants.
 
-\textbf{TODO:} Review further. 
+The model admits two stable long-run equilibria. In other words, an equilibrium in which only low-income individuals participate does not exist under standard preferences. 
 
-An equilibrium in which only low-income individuals participate does not exist under standard preferences. 
+Intuition: Under low $\nu$, mutual investment sustains universal participation. As $\Delta y \equiv y_2 -y_1 $ motivates broad engagement. High $\nu$ or $\Delta y$ tips to elite-only participation, where high-income participant ($H$) invests but low-income participant ($L$) abstains, entrenching inequality via endogenous barriers (competition raises effective $\nu$ via opportunity costs). Intermediate cases are unstable, as deviations favour the advantaged. 
 
-Intuition: Under low $\nu$, mutual investment sustains universal participation (Case I), as $\Delta y$ motivates broad engagement despite noise. High $\nu$ or $\Delta y$ tips to elite-only (Case II), where $H$ invests but $L$ abstains, entrenching inequality via endogenous barriers (competition raises effective $\nu$ via opportunity costs). Intermediate cases (III: $L$-only; IV: neither) are unstable, as deviations favor the advantaged.
+More specifically, the four condition for four equilibria are as follows.
 
-\textbf{Case I: Universal Participation.} Both invest ($s_H = s_L = 1$). $P(\mathrm{win}|1,1) = 1/2$ by symmetry. Incentive: $\Delta y / 2 > \nu$ for both (feasible under equal access). Stable if $\nu < \Delta y (1 - \mu)/2$, as defection yields $P(\mathrm{win}|0,1) < 1/2 - \epsilon$ (noise disadvantage).
+\hly{\textbf{TODO}: Verify conditions. }
 
-\textbf{Case II: Elite-Only Participation.} $H$ invests ($s_H=1$), $L$ abstains ($s_L=0$). $P(\mathrm{win}_H|1,0) = \int_0^1 [1 - F_X(\mu r + (1-\mu) \cdot 0)] dr > 1/2$. Incentive: $\Delta y \cdot P_H > \nu$ for $H$; $\Delta y \cdot P_L < \nu$ for $L$. Stable for $\nu > \Delta y / 2$, as $L$ deviation fails (low $P_L|1,1 < P_L|0,1$), and $H$ prefers investment.
+\textbf{Universal Participation.} Both invest ($s_H = s_L = 1$). $P(\mathrm{win}|1,1) = 1/2$ by symmetry. Incentive: $\Delta y / 2 > \nu$ for both (feasible under equal access). Stable if $\nu < \Delta y (1 - \mu)/2$, as defection yields $P(\mathrm{win}|0,1) < 1/2 - \epsilon$ (noise disadvantage).
 
-\textbf{Case III: Low-Only Participation.} $L$ invests, $H$ abstains. Fragile under reference-dependence (e.g., $H$'s local contentment reduces $\Delta y$ incentive), but unstable: $H$ deviates to invest, capturing near-sure win.
+\textbf{Elite-Only Participation.} $H$ invests ($s_H=1$), $L$ abstains ($s_L=0$). $P(\mathrm{win}_H|1,0) = \int_0^1 [1 - F_X(\mu r + (1-\mu) \cdot 0)] dr > 1/2$. Incentive: $\Delta y \cdot P_H > \nu$ for $H$; $\Delta y \cdot P_L < \nu$ for $L$. Stable for $\nu > \Delta y / 2$, as $L$ deviation fails (low $P_L|1,1 < P_L|0,1$), and $H$ prefers investment.
 
-\textbf{Case IV: No Participation.} Both abstain; Pareto but unstable, as unilateral deviation yields positive $\Delta y \cdot P > 0$ if $\nu$ low.
+\textbf{Low-Only Participation.} $L$ invests, $H$ abstains. Fragile under reference-dependence (e.g., $H$'s local contentment reduces $\Delta y$ incentive), but unstable: $H$ deviates to invest, capturing near-sure win.
 
-Long-run dynamics (Markov chain over states) admit only two absorbents: universal (low $\nu/\Delta y$, broad mobility) or elite-only (high $\nu/\Delta y$, exclusion). Transition probabilities depend on $\mu$: lower $\mu$ (stronger signaling) widens universal basin.
+\textbf{No Participation.} Both abstain; Pareto but unstable, as unilateral deviation yields positive $\Delta y \cdot P > 0$ if $\nu$ low.
+
+Long-run dynamics (Markov chain over states) admit only two absorbents: \textbf{Universal} (low $\nu/\Delta y$, broad mobility) or \textbf{Elite-only} (high $\nu/\Delta y$, exclusion) participation. 
+
 
 
 
