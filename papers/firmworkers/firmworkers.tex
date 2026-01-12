@@ -63,7 +63,7 @@ An essential feature of the model for agent's dual purposes of status rewards th
 
 We discuss a simple microeconomic formulation of above endogenous model and then provide a stylised macroeconomic model based on the model dynamics implied by the microeconomic formulation.
 
-\subsection{The closed $N$-player economy }
+\subsection{The closed $N$-player economy } \label{sec:nplayereconomy}
 
 \noindent
 
@@ -108,17 +108,45 @@ It follows from the dynamics that in the long-term equilibrium, higher costs ($b
 
 \noindent
 
-To analytical soutions, we summarise the dynamics in a two worker scenario where both workers choose a certain mixing criterion $\lambda$ to distribute income between fixed lottery $\Lambda$ and pay costs towards upskilling.
+In a labour queuing model, the income distribution would be set by earning potential that would eventually serve the maximisation of revenue for the firm. In the model for endogenous growth, firms must innovate and maintain assets simultaneously. To explain the relationship between inequality and status motivations, we take a stylised view of the dynamics from the mobility scheme described in Section \ref{sec:nplayereconomy}. More specifically, we consider a worker scenario where both workers choose a certain mixing criterion $\lambda$ to distribute income between fixed lottery $L$ and pay costs towards upskilling imposed by the firm. The lottery cost $L$ is an exogenous cost of social connections and is not managed by the firm. The firm may thus adjust either or both of the pay-distribution ($\alpha$) or the cost of training $b$. 
+
+As in the model first proposed by Spence, the firm pays more to high-risk position as a social constraint that is implied by the need to value its own skills-training through which it receives investments. 
+
+
+Formally, the following variables are set by workers and firm in the dynamic model
+
+\begin{enumerate}
+\item  $\alpha$ - income-sharing - The firm choses an arbitrary $\alpha < 1 $  so that the top-performer is given $1-\alpha$ as wage while the bottom-of-the-queue performer is given $\alpha$ as wage
+\item $\lambda$ - portion of wage spent on adaptability by worker 1
+\item $\eta$ -  portion of wage spent on adaptability by worker 2
+\end{enumerate}
+
+
+
+In the non-stochastic model, revenue increases subject to collection costs with higher adaptability investments. Since we assume a no-consumption model with only disposable incomes transferred (needs are already fulfilled), all gained revenue is canceled by maintenance costs. The notion of labour queue imposes the constraint for $\alpha$ not being set to $\frac{1}{2}$.  
+
+The money towards adaptability is invested back into assets but the money towards societal competitions does not flow immediately into the asset-maintenance. The growth of asset falls due to maintenance costs as well as a constant depreciation. The model considers all efficiency loss in collection of investments from workers as part of asset-maintaining costs. While firm is motivated to collect non-zero income because of depreciation, the asset-maintenance costs mean that income addition don't grow assets linearly either. Therefore, there is no feasible constant rate of income that may result in an infinite growth of assets over time. In a steady-state equilibrium, a firm's income stream balances the decline in assets and costs incurred by maintenance of assets. In other words, firm would choose $\alpha$ so that incoming revenue balances cost of maintenance and the depreciation.
+
+At any point in time $t$, the assets accumulated $A_t$ would decline with a depreciation $\delta$ over time while maintenance costs also apply. The firm distributes a fixed proportion $\kappa$ of  $A_t$ as wage - while the rest of $A_t(1-\kappa)$ contributes to existing assets. From $R_t\equiv \kappa A_t $, the provides $\alpha R_t$ to worker 1 and $(1-\alpha)R_t$ to worker 2.
+
+The low-performer chooses $\lambda_t$ so that $\alpha R_t \lambda_t$ is spent in adaptability and the high-performer chooses $\eta_t$ so that $(1-\alpha)R_t \eta_t$ is spent on adaptability. The total contribution $\psi_t = R_t (\lambda_t \alpha+ (1-\alpha)\eta_t)$ flows back to the firm. The costs from distribution of $\kappa A_t$ i.e. the collection of $\psi_t$ are adjusted bearing a (power) cost-function  $K(\alpha)$ and maintaining assets $(1-\kappa)A_t$ bearing a cost-function $C(A_t)$.
+
+The firm must thus choose $\alpha$ to maximise $A_{t+1}$ for given $A_t$ at every cycle where the dynamics is provided by $A_{t+1}=(1-\kappa-\delta) A_t + \kappa A_t (\lambda_t \alpha + (1-\alpha)\eta_t) - K(\alpha) - C(A_t)$ .
+
+
+An interior solution for $\alpha$ is possible so long as ...
+
+The optimisation for the low-performing worker who spends $\alpha R_t \lambda_t$ on adaptability and $\alpha R_t (1-\lambda_t)$ on categorisation. If the contest advantage is a fixed long-term subjective benefit $\Lambda$ for either workers, then  low-performing worker optimises $u(\lambda_t) \equiv \upsilon(\alpha R_t \lambda_t) +\Lambda \frac{\alpha R_t(1-\lambda_t)}{\alpha R_t(1-\lambda_t) + (1-\alpha) R_t(1-\eta_t)} $ whereas the high-performing worker optimises $U(\eta_t) \equiv \upsilon((1-\alpha) R_t \eta_t)  + \Lambda \frac{(1-\alpha) R_t(1-\eta_t)}{\alpha R_t(1-\lambda_t)+(1-\alpha) R_t(1-\eta_t)}$. The solutions for both can be found explicitly for $\upsilon(x)\equiv x$ and implicitly (numerical solution) using $\upsilon(x)\equiv \sqrt{x}$.
+
+
 
 From the above dynamic,... 
-A higher lottery might reduce the sum of costs from all workers contributed to the firm. By changing stakes ($\alpha$) the firm may choose to decrease contributions or change the costs parameters ($\gamma$)  to raise collection. The exogenous $L$ needs to be managed by the firm. 
-
-In a steady state, promotion has already happened and is permanent. The firm pays more to high-risk position as a social constraint that is implied by the need to value its own skills-training through which it receives investments. This is the sense in which it rewards seniority. In other words, high-adaptability requires senior employees to train lower-skilled employees. Recall that a new-employee in the constant-population  is equivalent to a a randomly chosen employee who has lost the job and is weighing upskilling or swapping. The search costs are the cost of upskiling and the lottery is chance to swap.
-
-If probability transition matrices are held constant, i.e. the value distribution based on stages of career in the economy is fully known, then the firm may adjust either or both of the pay-distribution ($\alpha$) or the cost of training. It doesn't do anything to modify the lottery-cost.  
+A higher lottery might reduce the sum of costs from all workers contributed to the firm. By changing stakes ($\alpha$) the firm may choose to decrease contributions or change the costs parameters ($\gamma$)  to raise collection. The 
 
 
-The labour sorting is a mechanism that allows this difference to prevail - not merely through $\alpha$ but also through reward mechanism which influence mobility and search-time.
+
+
+
 
 
 
