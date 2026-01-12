@@ -4,6 +4,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
+\usepackage{amsmath}
+
 \begin{document}
 \title{Inequality and Social Contests}
 \maketitle
@@ -61,7 +63,7 @@ An essential feature of the model for agent's dual purposes of status rewards th
 
 We discuss a simple microeconomic formulation of above endogenous model and then provide a stylised macroeconomic model based on the model dynamics implied by the microeconomic formulation.
 
-\subsection{Microeconomic formulation}
+\subsection{The closed $N$-player economy }
 
 \noindent
 
@@ -72,23 +74,52 @@ In other words, a displaced worker can return to the previous job by investing i
 
 The model captures these possibilities with the three choices. The worker may  (i) swap her job with a lower-ranked worker who is willing to acquire the skills necessary to move up (therefore paying the price to move up) (ii) pay the skill cost required to claim a higher-ranked position from someone willing to step down, or (iii) pay a fixed cost that provides mobility with some risk (social lottery). Such options reflect different mechanisms of job mobility - training, competition, and luck.
 
-The higher-income jobs involve greater training requirements (factoring in a longer search time and other costs arising out of short-term unemployment) and therefore a higher cost of acquiring such positions. But the preferences for risk also varies across income positions. In the current model, risk of income loss increases with higher income-levels in absolute terms. In other words, the workers in high-skill, high-income positions face greater absolute losses when displaced. All workers have the same preferences, they all exhibit the well-known risk-aversion for small gains and a higher risk-taking at higher loss levels - a behaviour that the model capture with an S-shaped Friedman-Savage utility for the worker.
-
-A worker has income $m_i$ - but she may go into a role that $m_{k}$ so long as she pays a transition-cost $C(m_i,m_{k})$ which is a power-cost-function. For $\forall {k<i}$,  we have $C(m_i,m_{k})=0$ i.e. no cost is paid for moving down from a position of high-skill to low-skill. The income-levels themselves are specified with a single-paramter $a$ in the pareto income list $ x_0  (1 - i)^{-1 / a}$ for $1 \le i \le N$.  Higher $\gamma$ corresponds to higher costs-charged by the firm and a higher $a$ corresponds to higher-stakes through income levels. Higher costs discourage mobility and higher stakes encourage bets. If revenue in every period is fixed then stakes can be raised only by using a lottery. In a full-scale model, there is a fixed number of transititions every period so that a lottery is activated only when cost-based transactions aren't feasible. In a reduced-model, we consider that the worker either pays cost-of-upskill or tries to use the lottery. The latter costs justify social alignment (contest) while the former justifies firm's investments.
-
-
-Lottery matters more to the lower paid worker - esp when it's low-value. The higher risk seeking at low wealth levels through the S-shaped utility function also implies that in the long-term equilibrium, the higher-rank workers would prefer the downgrade while the low-rank workers may prefer the lottery. 
+The set up of the model also entails a variation of risk across incomes. More specifically, the higher-income positions have greater training requirements (factoring in a longer search time and other costs arising out of short-term unemployment) and thus a higher acquisition cost. Since workers in high-skill, high-income positions face greater absolute losses when displaced, the risk of income loss in absolute terms increases with higher income-levels. With all workers having the same preferences, the differences in behaviour across income levels are driven by well-known pattern of risk-aversion for small-gains and higher risk-taking for higher losses. This is captured by the model with an S-shaped Friedman-Savage utility for the worker.
 
 
 
-Another dynamic implied by the above mobility in a closed economy is that the pool for swapping gets limited with higher ranks. In other words, the more a worker upskills oneself, the harder it becomes for the worker to move up (as the swap pool gets limited). The long-term transition-probability is therefore determined by the costs of moving up the ladder.
+Formally, the set up the model includes the following conditions. 
+\begin{enumerate}
+
+\item The choice for the worker is to either pay cost-of-upskilling or use the social lottery to move up the economic ladder. The lottery is of a fixed cost $L$ so that another worker $k$ out of N workers is randomly selected to swap her job with worker $i$. Worker $k$ does not pay any additional cost other than the fixed lottery cost $L$ for such a swap.
+
+\item If not playing the lottery, a worker with income $m_i$  may take up a job that pays $m_{k}$ so long as the worker pays a transition-cost $C(m_i,m_{k})$ -- a power-cost-function defined as follows 
+
+\[
+C(m_i,m_k) =
+\begin{cases}
+(m_k - m_i)^b, & \text{for } m_i > m_k \\
+0,            & \text{for } m_i < m_k
+\end{cases}
+\] Above ensures that $\forall {k\le i}$,  we have $C(m_i,m_{k})=0$ i.e. no cost is paid for moving from a position of high-skill to low (or the same) skill. Higher $b$ corresponds to higher costs (charged by the firm - as discussed in Section \ref{sec:firmbehaviour}).
+
+\item The income-levels are specified with a single-parameter $a$ in the pareto income list $ x_0  (1 - i)^{-1 / a}$ for $1 \le i \le N$.  A higher $a$ corresponds to higher-stakes through income levels.
+
+\end{enumerate}
+
+The more a worker upskills oneself, the harder it becomes for the worker to move up (as the swap pool gets limited). A higher-income employee would also have less likelihood of being replaced (less transferrable-skills due to higher costs). The long-term transition-probability can thus be determined from the costs of moving up the ladder. 
+
+It follows from the dynamics that in the long-term equilibrium, higher costs ($b$) discourage mobility and higher stakes ($a$) encourage bets.  The S-shaped utility means that in the long-term equilbrium, the higher-rank workers would prefer the downgrade while the low-rank workers may prefer the lottery. 
 
 
 
-\subsection{Stylised model for labour and firm}
+
+\subsection{Labour and firm model}\label{sec:firmbehaviour}
+
+\noindent
 
 To analytical soutions, we summarise the dynamics in a two worker scenario where both workers choose a certain mixing criterion $\lambda$ to distribute income between fixed lottery $\Lambda$ and pay costs towards upskilling.
 
 From the above dynamic,... 
 A higher lottery might reduce the sum of costs from all workers contributed to the firm. By changing stakes ($\alpha$) the firm may choose to decrease contributions or change the costs parameters ($\gamma$)  to raise collection. The exogenous $L$ needs to be managed by the firm. 
+
+In a steady state, promotion has already happened and is permanent. The firm pays more to high-risk position as a social constraint that is implied by the need to value its own skills-training through which it receives investments. This is the sense in which it rewards seniority. In other words, high-adaptability requires senior employees to train lower-skilled employees. Recall that a new-employee in the constant-population  is equivalent to a a randomly chosen employee who has lost the job and is weighing upskilling or swapping. The search costs are the cost of upskiling and the lottery is chance to swap.
+
+If probability transition matrices are held constant, i.e. the value distribution based on stages of career in the economy is fully known, then the firm may adjust either or both of the pay-distribution ($\alpha$) or the cost of training. It doesn't do anything to modify the lottery-cost.  
+
+
+The labour sorting is a mechanism that allows this difference to prevail - not merely through $\alpha$ but also through reward mechanism which influence mobility and search-time.
+
+
+
 \end{document}
