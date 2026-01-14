@@ -6,6 +6,85 @@
 \usepackage{babel}
 \usepackage{amsmath}
 
+
+%\usepackage[T1]{fontenc}
+%\usepackage{tgtermes}
+%\usepackage{librebaskerville}
+%\usepackage[sfdefault]{biolinum}  
+%\usepackage[adobe-utopia]{mathdesign}
+%\usepackage{Alegreya}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{xparse}
+\usepackage{lscape}
+\usepackage[section]{placeins}
+\usepackage{apacite}
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+
+\usepackage{titlesec}
+\usepackage{bbm}
+
+
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{sectsty}
+\usepackage[toc,page]{appendix}
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\usepackage{color, colortbl}
+\usepackage[first=0,last=9]{lcg}
+\usepackage[left,modulo]{lineno}
+
+\usepackage{soul}
+\usepackage{color}
+
+\usepackage[absolute]{textpos}
+
+
+\newcommand{\hlc}[1]{{\sethlcolor{LightCyan}\hl{#1}}}
+\newcommand{\hly}[1]{{\sethlcolor{LightYellow}\hl{#1}}}
+\newcommand{\hlw}[1]{{\sethlcolor{White}\hl{#1}}}
+\newcommand{\hlg}[1]{{\sethlcolor{LightGreen}\hl{#1}}}
+
+\definecolor{Gray}{gray}{0.9}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{LightYellow}{RGB}{255,255,200}
+\definecolor{LightGreen}{RGB}{204,255,204}
+\definecolor{White}{RGB}{255,255,255}
+\newcommand{\ra}{\rand0.\arabic{rand}}
+
+
+\makeatletter
+\@addtoreset{section}{part}
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >\m@ne
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    {\parindent \z@ \raggedright
+     \interlinepenalty \@M
+     \normalfont\centering
+     \ifnum \c@secnumdepth >\m@ne
+       \large\bfseries \partname\nobreakspace\thepart
+       \par\nobreak
+     \fi
+     \huge \bfseries #2%
+     \markboth{}{}\par}%
+    \nobreak
+    \vskip 3ex
+    \@afterheading}
+\renewcommand\partname{Topic}
+\makeatother
+
+
 \begin{document}
 \title{Inequality and Social Contests}
 \maketitle
@@ -34,49 +113,50 @@ The model is formalised as a three-player game involving a firm and two workers 
 
 As a preview of the dynamics that follow, consider that when adaptability is irrelevant, promotion is based purely on slow-moving categorisation, and workers must wait their turn in a strict social hierarchy. When only adaptability matters, both firms and workers invest heavily in short-term skills. Lastly, when neither adaptability nor categorisation matter, all uncertainty as well as inequality disappears so that earnings are distributed equally without any labour sorting. 
 
-\subsection{Closed Economy}\label{sec:closed_economy}
+\subsection{Labour and Firm Economy}\label{sec:closed_economy}
 
 \noindent
 
 The model assumes a closed economy in which all income circulates between workers and firm. Drawing on a Schumpeterian view, economic growth arises in the model from continual introductions of new or higher-quality goods. Workers supply labour and receive wages, and these wages constitute the basis of domestic demand. Firms use the revenue generated from this demand - either through investment financed by household savings - to fund innovation. Successful innovation then produces new varieties or improves existing products, generating the next round of income. This circular flow of wages, consumption, and innovation creates an endogenous engine of growth: consumption completes one innovation cycle by returning income to firms, while investment initiates the next by financing the search for new products. In long-run equilibrium, firms are assumed to have already chosen an optimal allocation of resources that sustains a steady stream of innovation and revenues.
 
-The model for endogenous growth economy uses a notion of a socio-economic class by accommodating two mobility mechanisms - one through upskilling and another through a social lottery. While the former reflects the systematic skill-based organisation of labour market, the latter represents connections-driven growth of the employee. It is assumed that the average growth of a participant of the economy involves hedging one's bets in both the mechanisms. 
+The model for endogenous growth economy relies on the notion of socio-economic classes by accommodating two mobility mechanisms - one through upskilling and another through a social lottery. While the former reflects the systematic skill-based organisation of labour market, the latter represents connections-driven growth of the employee. It is assumed that the average growth of a participant of the economy involves hedging one's bets in both the mechanisms. 
 
-The essential feature of the model for worker's dual purposes of status rewards through social competitions and economic success is that the rewards through social networks are outside the firm's direct influence. In other words, not all factors that influence labour sorting criteria are under firm's control. Costs such as job search costs for workers, or influence of social networks are social constraints that the firm is obliged to work around. Since the firm benefits from higher wage income through innovation and revenue , the costs of upskilling do flow back to the firm - unlike the costs of building social connections (encompassing  slow-categorisation) that do not flow back to the firm. 
-
-
+The other key feature of the model is that the rewards through social networks are outside the firm's direct influence. In other words, not all factors that influence labour sorting criteria are under firm's control. Costs such as job search costs for workers, or influence of social networks are social constraints that the firm is obliged to work with. Although firms capture the returns to innovation and skill formation, the costs of building durable social ties—rooted in long-term categorisation processes—are borne by workers and do not feed back into firm revenues.
 
 
-\subsection{Labour and Firm}\label{sec:firmbehaviour}
+\subsection{Model Dynamics}\label{sec:firmbehaviour}
 
 \noindent
 
-In a labour queuing model, the income distribution would be set by earning potential that would eventually serve the maximisation of revenue for the firm - thus maintaining the endogenous growth with innovation and maintenance of assets. To explain the relationship between inequality and status motivations, we take a stylised view of the dynamics from the mobility scheme described in Section \ref{sec:nplayereconomy}. More specifically, we consider a scenario where both workers choose a certain mixing criterion $\lambda$ to distribute income between fixed lottery $L$ and pay costs towards upskilling imposed by the firm. The lottery cost $L$ is an exogenous cost of social connections that is not managed by the firm. The firm thus adjusts either or both of the pay-distribution ($\alpha$) or the cost of training $b$ to maximise its profits.
+In a labour queuing model, the income distribution would be set by earning potential that would eventually serve the maximisation of revenue for the firm - thus maintaining the endogenous growth with innovation and maintenance of assets. With a stylised of the $N$-player dynamics where workers use both social lottery and upskilling (see Appendix), we consider two worker and firm -- where workers choose a certain mixing criterion $\lambda$ to distribute income between fixed-lottery benefit $\Lambda$ and pay costs towards upskilling imposed by the firm. The lottery benefit $\Lambda$ is an exogenous benefit from social connections that is not managed by the firm. The firm thus adjusts either or both of the pay-distribution ($\alpha$) or the cost of training $b$ to maximise its profits.
 
-As in the model first proposed by Spence, the firm pays more to high-risk position. This is a social constraint necessitated by the need to value the firm's own skills-training that invests in. 
+Formally, $\alpha$ is a variable that controls distribution of wage between the higher-ranked and lower-ranked worker
+\begin{enumerate}
 
+\item  $\alpha$ - income-sharing - The firm chooses $0 < \alpha < \frac{1}{2} $  so that the higher-rank (top-performer) worker is given $1-\alpha$ as wage while the lower-rank (bottom-of-the-queue performer) worker is given $\alpha$ as wage
+\end{enumerate}
 
-Formally, the following variables are set by workers and firm in the dynamic model
+The two workers use different mixing variables - their asymmetry driven by an S-shaped utility function (see Appendix).
 
 \begin{enumerate}
-\item  $\alpha$ - income-sharing - The firm choses an arbitrary $0 < \alpha < \frac{1}{2} $  so that the top-performer is given $1-\alpha$ as wage while the bottom-of-the-queue performer is given $\alpha$ as wage
 \item $\lambda$ - portion of wage spent on adaptability by worker 1
 \item $\eta$ -  portion of wage spent on adaptability by worker 2
 \end{enumerate}
 
-The growth of assets in the economy is subject to asset-maintenance costs and a constant depreciation. The money towards adaptability that workers invest in flows back to firm but the money towards societal competitions does not flow immediately into the firm's asset-maintenance. All efficiency loss in collection of investments from workers are considered as part of asset-maintaining costs in the model. The depreciation of assets means that firm must relying on investments from the worker while the asset-maintenance costs imply that income addition doesn't grow assets linearly. In a steady-state equilibrium, a firm's income stream balances the decline in assets and costs incurred by maintenance of assets. The firm chooses $\alpha$ so that incoming revenue balances cost of maintenance and the depreciation. 
 
-Formally, at any point in time $t$, the assets accumulated $A_t$ would decline with a depreciation $\delta$ over time while maintenance costs also apply. The firm distributes a fixed proportion $\kappa$ of  $A_t$ as wage - while the rest of $A_t(1-\kappa)$ contributes to existing assets. From $R_t\equiv \kappa A_t $, the provides $\alpha R_t$ to lower rank worker and $(1-\alpha)R_t$ to higher rank worker.
+The growth of firm's assets is subject to asset-maintenance costs and a constant depreciation. All efficiency loss in collection of investments from workers are considered as part of asset-maintaining costs in the model. The depreciation of assets means that firm must relying on investments from the worker while the asset-maintenance costs imply that income addition doesn't grow assets linearly. In a steady-state equilibrium, a firm's income stream balances the decline in assets and costs incurred by maintenance of assets. Thus, the firm chooses $\alpha$ so that incoming revenue balances cost of maintenance and the depreciation. 
 
-The low-rank worker chooses $\lambda_t$ so that $\alpha R_t \lambda_t$ is spent in adaptability and the higher-rank worker chooses $\eta_t$ so that $(1-\alpha)R_t \eta_t$ is spent on adaptability. The total contribution $\psi_t = R_t (\lambda_t \alpha+ (1-\alpha)\eta_t)$ flows back to the firm. The costs from distribution of $\kappa A_t$ i.e. the collection of $\psi_t$ are adjusted bearing a (power) cost-function  $K(\alpha)$ and maintaining assets $(1-\kappa)A_t$ bearing a cost-function $C(A_t)$.
+More formally, at any point in time $t$, the assets accumulated $A_t$ would decline with a depreciation $\delta$. The firm distributes a fixed proportion $\kappa$ of  $A_t$ as wage - while the rest of $A_t(1-\kappa)$ contributes to maintaining or incrementing existing assets. From $R_t\equiv \kappa A_t $, the provides $\alpha R_t$ to lower rank worker and $(1-\alpha)R_t$ to higher rank worker.
 
-The firm must thus choose $\alpha$ to maximise $A_{t+1}$ for given $A_t$ at every cycle where the dynamics is provided by $A_{t+1}=(1-\kappa-\delta) A_t + \kappa A_t (\lambda_t \alpha + (1-\alpha)\eta_t) - K(\alpha) - C(A_t)$ .
+The low-rank worker chooses $\lambda_t$ so that $\alpha R_t \lambda_t$ is spent in adaptability and the higher-rank worker chooses $\eta_t$ so that $(1-\alpha)R_t \eta_t$ is spent on adaptability. The total contribution $\psi_t = R_t (\lambda_t \alpha+ (1-\alpha)\eta_t)$ flows back to the firm (workers' expenditure). The costs from distribution of $\kappa A_t$ i.e. the collection of $\psi_t$ are adjusted with a (power) cost-function  $K(\alpha)$ and maintaining assets $(1-\kappa)A_t$ bears a cost-function $C(A_t)$.
+
+The firm must thus choose $\alpha$ to maximise $A_{t+1}$ for given $A_t$ at every cycle where the dynamics is provided by $A_{t+1}=(1-\kappa-\delta) A_t + \kappa A_t (\lambda_t \alpha + (1-\alpha)\eta_t) - K(\alpha) - C(A_t)$.
+
+\subsection{Optimal Choice for Firm}
+
+\subsection{Optimal Choice for Workers}
 
 The optimisation for the low-performing worker who spends $\alpha R_t \lambda_t$ on adaptability and $\alpha R_t (1-\lambda_t)$ on categorisation. If the contest advantage is a fixed long-term subjective benefit $\Lambda$ for either workers, then  low-performing worker optimises $u(\lambda_t) \equiv \upsilon(\alpha R_t \lambda_t) +\Lambda \frac{\alpha R_t(1-\lambda_t)}{\alpha R_t(1-\lambda_t) + (1-\alpha) R_t(1-\eta_t)} $ whereas the high-performing worker optimises $U(\eta_t) \equiv \upsilon((1-\alpha) R_t \eta_t)  + \Lambda \frac{(1-\alpha) R_t(1-\eta_t)}{\alpha R_t(1-\lambda_t)+(1-\alpha) R_t(1-\eta_t)}$. The solutions for both can be found explicitly for $\upsilon(x)\equiv x$ and implicitly (numerical solution) using $\upsilon(x)\equiv \sqrt{x}$.
-
-
-
-
 
 
 
