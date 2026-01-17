@@ -144,18 +144,31 @@ The differences in choice of the two workers are solely based on the reference-d
 
 \noindent
 
-The growth of firm's assets is subject to asset-maintenance costs and a constant depreciation. All efficiency loss in collection of investments from workers are considered as part of asset-maintaining costs in the model. The depreciation of assets means that firm must relying on investments from the worker while the asset-maintenance costs imply that income addition doesn't grow assets linearly. In a steady-state equilibrium, a firm's income stream balances the decline in assets and costs incurred by maintenance of assets. Thus, the firm chooses $\alpha$ so that incoming revenue balances cost of maintenance and the depreciation. 
+The growth of firm's assets is subject to asset-maintenance costs $C(A)$ and a constant depreciation $\delta$.  The depreciation of assets means that firm are forced to rely on investments from the worker while asset-maintenance costs pose limits on a steady growth in assets through income addition\footnote{All efficiency loss in collection of investments from workers are considered as part of asset-maintaining costs.}. In a long-term equilibrium, a firm chooses $\alpha$ so that the income stream balances the decline in assets and asset-maintenance costs.
 
-More formally, at any point in time $t$, the assets accumulated $A_t$ would decline with a depreciation $\delta$. The firm distributes a fixed proportion $\kappa$ of  $A_t$ as wage - while the rest of $A_t(1-\kappa)$ contributes to maintaining or incrementing existing assets. From $R_t\equiv \kappa A_t $, the provides $\alpha R_t$ to lower rank worker and $(1-\alpha)R_t$ to higher rank worker.
+More formally, at any point in time $t$, the assets accumulated $A_t$ would decline with a depreciation $\delta$. The firm distributes a fixed proportion $\kappa$ of  $A_t$ as wage - while the rest of $A_t(1-\kappa)$ contributes to maintaining or incrementing existing assets. Out of $R_t\equiv \kappa A_t $ that needs to be distributed as wages, the firm provides $\alpha R_t$ to the lower rank worker and $(1-\alpha)R_t$ to the higher rank worker. 
 
-The firm must thus choose $\alpha$ to maximise $A_{t+1}$ for given $A_t$ at every cycle where the dynamics is provided by $A_{t+1}=(1-\kappa-\delta) A_t + \kappa A_t (\lambda_t \alpha + (1-\alpha)\eta_t) - K(\alpha) - C(A_t)$.
+For the low-rank worker's choice of $\lambda_t$, the amount $\alpha R_t \lambda_t$ is spent in adaptability and for the higher-rank worker's choice of $\eta_t$, $(1-\alpha)R_t \eta_t$ is spent on adaptability. The total contribution $\psi_t = R_t (\lambda_t \alpha+ (1-\alpha)\eta_t)$ thus flows back to the firm as upskilling investments (workers' expenditure). 
+
+
+The two costs to be accounted for are 
+\begin{enumerate}
+\item collection cost associated incurred in distribution of $R_t = \kappa A_t$ as well as collection of total contribution $\psi_t $. This is represented with a (power) cost-function  $K(\alpha)$ 
+\item cost of maintaining assets $(1-\kappa)A_t$ -- represented a cost-function $C(A_t)$.
+\end{enumerate}
+
+The firm chooses $\alpha$ to maximise $A_{t+1}$ for a given $A_t$ at every cycle where the dynamics is provided with
+
+\begin{align*}
+A_{t+1}=(1-\kappa-\delta) A_t + \kappa A_t (\lambda_t \alpha + (1-\alpha)\eta_t) - K(\alpha) - C(A_t)
+\end{align*}
+
 
 
 \subsection{Optimal Choice for Workers}
 
 \noindent
 
-The low-rank worker chooses $\lambda_t$ so that $\alpha R_t \lambda_t$ is spent in adaptability and the higher-rank worker chooses $\eta_t$ so that $(1-\alpha)R_t \eta_t$ is spent on adaptability. The total contribution $\psi_t = R_t (\lambda_t \alpha+ (1-\alpha)\eta_t)$ flows back to the firm (workers' expenditure). The costs from distribution of $\kappa A_t$ i.e. the collection of $\psi_t$ are adjusted with a (power) cost-function  $K(\alpha)$ and maintaining assets $(1-\kappa)A_t$ bears a cost-function $C(A_t)$.
 
 The optimisation for the low-performing worker who spends $\alpha R_t \lambda_t$ on adaptability and $\alpha R_t (1-\lambda_t)$ on categorisation. If the contest advantage is a fixed long-term subjective benefit $\Lambda$ for either workers, then  low-performing worker optimises $u(\lambda_t) \equiv \upsilon(\alpha R_t \lambda_t) +\Lambda \frac{\alpha R_t(1-\lambda_t)}{\alpha R_t(1-\lambda_t) + (1-\alpha) R_t(1-\eta_t)} $ whereas the high-performing worker optimises $U(\eta_t) \equiv \upsilon((1-\alpha) R_t \eta_t)  + \Lambda \frac{(1-\alpha) R_t(1-\eta_t)}{\alpha R_t(1-\lambda_t)+(1-\alpha) R_t(1-\eta_t)}$. The solutions for both can be found explicitly for $\upsilon(x)\equiv x$ and implicitly (numerical solution) using $\upsilon(x)\equiv \sqrt{x}$.
 
