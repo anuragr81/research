@@ -130,17 +130,17 @@ The choice for workers in the economy is represented as a reference-dependent S-
 Formally, the firm controls $\alpha$  to its revenue-share between the two workers. The training costs are assumed to be a part of exogenous maintenance costs so that flow of income from upskilling back to the firm is determined through labour choice. The firm therefore only controls: 
 \begin{enumerate}
 
-\item  $\alpha$ - income-sharing - The firm chooses $0 < \alpha < \frac{1}{2} $  so that the higher-rank (top-performer) worker is given $1-\alpha$ as wage while the lower-rank (bottom-of-the-queue performer) worker is given $\alpha$ as wage
+\item  $\alpha$ --  the firm chooses $0 < \alpha < \frac{1}{2} $  so that the higher-rank (top-performer) worker is given $1-\alpha$ as wage while the lower-rank (bottom-of-the-queue performer) worker is given $\alpha$ as wage
 \end{enumerate}
 
 The differences in choice of the two workers are solely based on the reference-dependent S-shaped utility curve. The different choices for consumption are represented with two difference mixing variables:
 
 \begin{enumerate}
-\item $\lambda$ - portion of wage spent on adaptability by lower-ranked worker
-\item $\eta$ -  portion of wage spent on adaptability by higher-ranked worker
+\item $\lambda$ -- portion of wage spent on adaptability by lower-ranked worker
+\item $\eta$ --  portion of wage spent on adaptability by higher-ranked worker
 \end{enumerate}
 
-\subsection{Optimal Choice for Firm}
+\subsubsection{Choice for Firm}
 
 \noindent
 
@@ -150,28 +150,40 @@ More formally, at any point in time $t$, the assets accumulated $A_t$ would decl
 
 For the low-rank worker's choice of $\lambda_t$, the amount $\alpha R_t \lambda_t$ is spent in adaptability and for the higher-rank worker's choice of $\eta_t$, $(1-\alpha)R_t \eta_t$ is spent on adaptability. The total contribution $\psi_t = R_t (\lambda_t \alpha+ (1-\alpha)\eta_t)$ thus flows back to the firm as upskilling investments (workers' expenditure). 
 
+Other than the depreciation $\delta A_t$, the assets at any given time incur two costs
 
-The two costs to be accounted for are 
 \begin{enumerate}
-\item collection cost associated incurred in distribution of $R_t = \kappa A_t$ as well as collection of total contribution $\psi_t $. This is represented with a (power) cost-function  $K(\alpha)$ 
-\item cost of maintaining assets $(1-\kappa)A_t$ -- represented a cost-function $C(A_t)$.
+\item the operational costs with the distribution of $R_t = \kappa A_t$ to workers as well as the collection costs for workers' contribution $\psi_t $ -- represented as a (power) cost-function  $K(\alpha)$ 
+\item the maintenance cost for assets $(1-\kappa)A_t$ -- represented as a cost-function $C(A_t)$
 \end{enumerate}
 
-The firm chooses $\alpha$ to maximise $A_{t+1}$ for a given $A_t$ at every cycle where the dynamics is provided with
+The firm thus chooses $\alpha$ in order to maximise $A_{t+1}$ for a given $A_t$ at every cycle -- where the dynamics is provided with
 
 \begin{align*}
 A_{t+1}=(1-\kappa-\delta) A_t + \kappa A_t (\lambda_t \alpha + (1-\alpha)\eta_t) - K(\alpha) - C(A_t)
 \end{align*}
 
+For a fixed $\lambda_t$ and $\eta_t$, the firm benefit from lowering $\alpha$ as that would imply a high collection $(1-\alpha)$ despite lower operational costs (less distribution). In other words, the firm benefits from lower pay so long as $\eta_t$ is high and $(1-\alpha)\eta_t$ is significant. The next section explores whether this asymmetry between $\eta_t$ and $\lambda_t$ can persist in equilibrium or not.
 
 
-\subsection{Optimal Choice for Workers}
+\subsubsection{Choice for Workers}
 
 \noindent
 
 
-The optimisation for the low-performing worker who spends $\alpha R_t \lambda_t$ on adaptability and $\alpha R_t (1-\lambda_t)$ on categorisation. If the contest advantage is a fixed long-term subjective benefit $\Lambda$ for either workers, then  low-performing worker optimises $u(\lambda_t) \equiv \upsilon(\alpha R_t \lambda_t) +\Lambda \frac{\alpha R_t(1-\lambda_t)}{\alpha R_t(1-\lambda_t) + (1-\alpha) R_t(1-\eta_t)} $ whereas the high-performing worker optimises $U(\eta_t) \equiv \upsilon((1-\alpha) R_t \eta_t)  + \Lambda \frac{(1-\alpha) R_t(1-\eta_t)}{\alpha R_t(1-\lambda_t)+(1-\alpha) R_t(1-\eta_t)}$. The solutions for both can be found explicitly for $\upsilon(x)\equiv x$ and implicitly (numerical solution) using $\upsilon(x)\equiv \sqrt{x}$.
+With a fixed subjective benefit $\Lambda$ from the lottery for either workers, the lower-rank worker optimises the following utility 
 
+\begin{align*}
+u(\lambda_t) \equiv \upsilon(\alpha R_t \lambda_t) +\Lambda \frac{\alpha R_t(1-\lambda_t)}{\alpha R_t(1-\lambda_t) + (1-\alpha) R_t(1-\eta_t)}
+\end{align*}
+
+Similarly, the higher-rank worker optimises the following utility
+
+\begin{align*}
+U(\eta_t) \equiv \upsilon((1-\alpha) R_t \eta_t)  + \Lambda \frac{(1-\alpha) R_t(1-\eta_t)}{\alpha R_t(1-\lambda_t)+(1-\alpha) R_t(1-\eta_t)}
+\end{align*}
+
+The solutions for both can be found explicitly for $\upsilon(x)\equiv x$ and implicitly (numerical solution) using $\upsilon(x)\equiv \sqrt{x}$.
 
 
 
@@ -179,10 +191,11 @@ The optimisation for the low-performing worker who spends $\alpha R_t \lambda_t$
 A higher lottery might reduce the sum of costs from all workers contributed to the firm. By changing stakes ($\alpha$) the firm may choose to decrease contributions or change the costs parameters ($\gamma$)  to raise collection. The 
 
 
-\section{Appendix}
+\newpage
+\section*{Appendix}
 
 
-\subsection{The closed $N$-player economy } \label{sec:nplayereconomy}
+\subsection*{The closed $N$-player economy } \label{sec:nplayereconomy}
 
 \noindent
 
