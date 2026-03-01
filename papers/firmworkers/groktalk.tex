@@ -1,0 +1,235 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+
+
+\title{Explaining Convexity-Based Approximation \\
+Instead of Explicit Stochastic Risk in the Model}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Core Idea}
+
+In the original N-worker model, the lottery delivers a \textbf{stochastic} prize (drawn from a Pareto distribution with heavy right tail). 
+Low-position workers like this lottery because the utility function is \textbf{convex} below the reference point $r$ ($\gamma_\text{low} > 1$), which means:
+
+\[
+\mathbb{E}[u(y)] > u(\mathbb{E}[y])
+\]
+
+for random $y$ with positive variance. The convexity amplifies the value of rare but large upside outcomes, creating an effective ``risk-loving'' preference even though the lottery is roughly mean-preserving.
+
+In the simplified non-stochastic two-player model, we want to avoid simulating random draws every period (Monte Carlo is computationally expensive and makes closed-form analysis impossible). 
+Instead, we approximate the effect of this stochasticity using a \textbf{deterministic} equivalent return that includes a linearized risk premium. 
+This premium tries to capture -- in a first- or second-order way -- how much extra (or less) utility the player would get from the variance itself, thanks to the curvature of $u(\cdot)$.
+
+\section*{Taylor Expansion Around the Mean}
+
+Consider a random net income coming from the lottery part:
+
+\[
+y = \mu_y + \sigma_y \varepsilon, \quad \mathbb{E}[\varepsilon] = 0, \quad \text{Var}(\varepsilon) = 1
+\]
+
+We expand the utility around the mean $\mu_y$ using a second-order Taylor series:
+
+\[
+u(y) \approx u(\mu_y) + u'(\mu_y) (\sigma_y \varepsilon) + \frac{1}{2} u''(\mu_y) (\sigma_y \varepsilon)^2
+\]
+
+Taking expectation:
+
+\begin{align*}
+\mathbb{E}[u(y)] 
+&\approx u(\mu_y) + u'(\mu_y) \cdot 0 + \frac{1}{2} u''(\mu_y) \sigma_y^2 \\
+&= u(\mu_y) + \underbrace{\frac{1}{2} u''(\mu_y) \sigma_y^2}_{\text{risk premium}}
+\end{align*}
+
+This risk premium term $\frac{1}{2} u''(\mu_y) \sigma_y^2$ is:
+
+\begin{itemize}
+    \item \textbf{positive} when $u'' > 0$ (convex region $\to$ below $r$) $\quad\Rightarrow\quad$ player behaves as if the lottery return is \textbf{higher} than its mean
+    \item \textbf{negative} when $u'' < 0$ (concave region $\to$ above $r$) $\quad\Rightarrow\quad$ player behaves as if the lottery return is \textbf{lower} than its mean
+\end{itemize}
+
+This exactly mimics the direction of the original effect: low workers ``like'' variance (effective bonus), high workers ``dislike'' it (effective penalty).
+
+\section*{Implementation in the Deterministic Model}
+
+We replace the stochastic lottery prize $\tilde{\Lambda}_w$ with a deterministic equivalent:
+
+\[
+\text{Effective lottery benefit for player } w = s_w \cdot \kappa \Pi + \rho_w
+\]
+
+where
+\begin{itemize}
+    \item $s_w \cdot \kappa \Pi$ = share of the mean pool return (roughly fair or slightly adjusted)
+    \item $\rho_w = \dfrac{1}{2} u''(m_w) \cdot \widehat{\sigma}_w^2$ = linearized risk-adjustment term
+\end{itemize}
+
+A simple proxy for the virtual variance is
+
+\[
+\widehat{\sigma}_w^2 \propto (\lambda_w m_w)^2 \cdot \text{Var}_\text{Pareto}(\Lambda) / R^2
+\]
+
+or even more crudely:
+
+\[
+\widehat{\sigma}_w^2 = c \cdot (\lambda_w m_w)^2 \qquad (c \text{ is a calibration constant})
+\]
+
+and
+
+\[
+u''(y) = 
+\begin{cases} 
+\gamma_\text{low} (\gamma_\text{low}-1) y^{\gamma_\text{low}-2} & \text{if } y \leq r \\
+\gamma_\text{high} (\gamma_\text{high}-1) y^{\gamma_\text{high}-2} & \text{if } y > r
+\end{cases}
+\]
+
+Because $\gamma_\text{low} > 1$ and $\gamma_\text{high} < 1$, we have $u'' > 0$ below $r$ and $u'' < 0$ above $r$ (in the relevant regions), which gives exactly the desired sign flip.
+
+\section*{Advantages of This Approximation}
+
+\begin{itemize}
+    \item No Monte Carlo $\to$ deterministic dynamics, faster simulation, possible closed-form FOCs in simple cases
+    \item Still captures the \textbf{qualitative} behavioral asymmetry coming from the S-shape
+    \item Low player receives an effective \textbf{bonus} for allocating more to the lottery ($\rho_\text{low} > 0$)
+    \item High player receives an effective \textbf{penalty} ($\rho_\text{high} < 0$), discouraging high $\lambda$
+    \item Preserves the mechanism that generates persistent inequality and asymmetric mobility
+\end{itemize}
+
+\section*{Limitations}
+
+\begin{itemize}
+    \item Loses higher-order effects and tail risks (Pareto has infinite variance for $a \leq 2$)
+    \item The linearization is only locally accurate $\to$ can be misleading for very large variances
+    \item Requires choosing/ calibrating the scaling constant $c$ in $\widehat{\sigma}^2$
+\end{itemize}
+
+In summary, we are \textbf{not} claiming that convexity replaces probability in a literal sense. Rather, we are using the local curvature of the utility function (via its second derivative) to construct a \textbf{deterministic proxy} that mimics -- to second order -- the welfare effect that the actual variance would have produced under expected utility maximization.
+
+
+\section*{Closed Form Solution}
+
+The Nash equilibrium mixing parameters $\lambda_L^*$ and $\lambda_H^*$ in a highly simplified two-player model consider a linear utility to represent the macro dynamics of the original N-player stochastic job-swap system.   The linear utility $u(y) = y$ implies pure risk neutrality, while preserving the essential behavioral asymmetry through class-specific quadratic risk premiums:
+
+\begin{itemize}
+\item Low-rank player receives a positive premium for lottery allocation (mimicking risk-seeking / convexity effect).  
+\item High-rank player receives a negative premium (mimicking risk-aversion / concavity effect). 
+\end{itemize}
+
+There are two worker with low-rank (L) and high-rank (H) who receive incomes $m_L = R \mu$ and $m_H = R(1-\mu)$ respectively ($\mu \in (0, 0.5)$). Each player chooses a certain mixing parameter - the fraction of current income allocated to a shared lottery pool while the rest of the income is allocated to upskilling.
+
+Net income to be optimised by the low-rank worker is
+
+\begin{align*}
+y_L &= m_L + \epsilon(1 - \lambda_L) m_L - C_L(\lambda_L) - \lambda_L m_L + \kappa \lambda_L m_L + \rho_L(\lambda_L)
+\end{align*}
+
+
+The net income optimise by the higher-rank worker is
+\begin{align*}
+y_H &= m_H + \epsilon(1 - \lambda_H) m_H - C_H(\lambda_H) - \lambda_H m_H  + \kappa \lambda_H m_H + \rho_H(\lambda_H)
+\end{align*}
+
+
+where the components are defined as follows:
+
+\begin{itemize}[leftmargin=*]
+    \item $\Pi = \lambda_L m_L + \lambda_H m_H$ \quad (total size of shared lottery pool)
+    \item $s_w = \dfrac{\lambda_w m_w}{\Pi}$ \quad (player's proportional share of the pool)
+    \item $\kappa \approx 1$ \quad (mean return per unit contributed to the pool; fairness parameter)
+    \item $\eta \in (0,1)$ \quad (efficiency of upskilling investment)
+    \item $C_w(\lambda_w) \approx b \eta (1 - \lambda_w) m_w$ \quad (linearized upskilling cost, $b > 1$ approximates original power-law friction)
+    \item $\rho_w(\lambda_w) = p_w \lambda_w^2$ \quad (quadratic risk-premium approximation)
+          \begin{itemize}
+              \item $p_L > 0$ \quad $\to$ extra deterministic bonus for higher $\lambda_L$ (proxies convexity / risk-seeking)
+              \item $p_H < 0$ \quad $\to$ deterministic penalty for higher $\lambda_H$ (proxies concavity / risk-aversion)
+          \end{itemize}
+\end{itemize}
+
+Because utility is linear, each player simply maximizes $y_w$ with respect to their own $\lambda_w$ (treating the other's choice as fixed).
+
+\section{Derivation of Closed-Form Equilibrium}
+
+\subsection{Low-rank player's first-order condition}
+
+Differentiate $y_L$ with respect to $\lambda_L$ (ignoring small higher-order terms in share derivative for tractability):
+
+\begin{align*}
+\frac{\partial y_L}{\partial \lambda_L} 
+&\approx -\eta m_L + b \eta m_L - m_L + \kappa m_L \cdot (\text{share adjustment term}) 
+  + 2 p_L \lambda_L
+\end{align*}
+
+After simplification (dominant linear terms + quadratic premium, dropping complex share cross-derivative):
+
+\[
+\frac{\partial y_L}{\partial \lambda_L} \approx (- \eta + b \eta - \kappa + 1) m_L + 2 p_L \lambda_L
+\]
+
+Set the derivative to zero:
+
+\[
+(- \eta + b \eta - \kappa + 1) m_L + 2 p_L \lambda_L = 0
+\]
+
+Solve for $\lambda_L^*$:
+
+\[
+\lambda_L^* = \frac{ m_L (\eta - b \eta + \kappa - 1) }{-2 p_L}
+= \frac{ m_L (b \eta - \eta - \kappa + 1) }{2 p_L}
+\]
+
+(since $p_L > 0$ and the numerator is typically positive when upskilling costs dominate).
+
+\subsection{High-rank player's first-order condition}
+
+The derivation is symmetric:
+
+\[
+\lambda_H^* = \frac{ m_H (b \eta - \eta - \kappa + 1) }{2 p_H}
+\]
+
+Because $p_H < 0$, the denominator is negative, which tends to produce small (or negative) values for $\lambda_H^*$, often clipped at the boundary.
+
+\subsection{Bounding the solutions}
+
+Final equilibrium values are bounded to the feasible interval:
+
+\[
+\lambda_w^* = \max\bigl(0, \min\bigl(1, \dfrac{m_w (b \eta - \eta - \kappa + 1)}{2 p_w}\bigr)\bigr)
+\qquad \text{for } w = L, H
+\]
+
+\section{Interpretation of the Closed-Form Expressions}
+
+\begin{itemize}
+    \item The common factor $(b \eta - \eta - \kappa + 1)$ captures the net marginal benefit of moving one unit of income from upskilling to the lottery pool.
+          \begin{itemize}
+              \item Higher $b \eta$ (more expensive/costly upskilling) $\to$ favors lottery.
+              \item Higher $\kappa$ (more generous lottery return) $\to$ favors lottery.
+          \end{itemize}
+    \item Division by $2 p_w$ scales the response to the risk-premium strength:
+          \begin{itemize}
+              \item $p_L > 0$ $\to$ larger premium reduces $\lambda_L^*$ (quadratic saturation effect).
+              \item $p_H < 0$ $\to$ larger $|p_H|$ increases $\lambda_H^*$ toward 1 (but usually still clips at 0).
+          \end{itemize}
+    \item The income term $m_w$ in the numerator means richer players receive proportionally larger absolute responses — but the sign of $p_w$ dominates direction.
+\end{itemize}
+
+
+\end{document}
