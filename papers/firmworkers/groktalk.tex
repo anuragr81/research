@@ -92,7 +92,7 @@ Because $\gamma_\text{low} > 1$ and $\gamma_\text{high} < 1$, we have $u'' > 0$ 
 In summary, we are \textbf{not} claiming that convexity replaces probability in a literal sense. Rather, we are using the local curvature of the utility function (via its second derivative) to construct a \textbf{deterministic proxy} that mimics -- to second order -- the welfare effect that the actual variance would have produced under expected utility maximization.
 
 
-\section*{Closed Form Solution}
+\section{Linear Closed Form}
 
 The Nash equilibrium mixing parameters $\lambda_L^*$ and $\lambda_H^*$ in a highly simplified two-player model consider a linear utility to represent the macro dynamics of the original N-player stochastic job-swap system.   The linear utility $u(y) = y$ implies pure risk neutrality, while preserving the essential behavioral asymmetry through class-specific quadratic risk premiums:
 
@@ -106,99 +106,88 @@ There are two worker with low-rank (L) and high-rank (H) who receive incomes $m_
 Net income to be optimised by the low-rank worker is
 
 \begin{align*}
-y_L &= m_L + \epsilon(1 - \lambda_L) m_L - C_L(\lambda_L) - \lambda_L m_L + \kappa \lambda_L m_L + \rho_L(\lambda_L)
+y_L &= m_L + \eta(1 - \lambda_L) m_L - C_L(\lambda_L) - \lambda_L m_L + \kappa \lambda_L m_L + \rho_L(\lambda_L)
 \end{align*}
 
 
 The net income optimise by the higher-rank worker is
 \begin{align*}
-y_H &= m_H + \epsilon(1 - \lambda_H) m_H - C_H(\lambda_H) - \lambda_H m_H  + \kappa \lambda_H m_H + \rho_H(\lambda_H)
+y_H &= m_H + \eta(1 - \lambda_H) m_H - C_H(\lambda_H) - \lambda_H m_H  + \kappa \lambda_H m_H + \rho_H(\lambda_H)
 \end{align*}
 
 
 where the components are defined as follows:
 
 \begin{itemize}[leftmargin=*]
-    \item $\Pi = \lambda_L m_L + \lambda_H m_H$ \quad (total size of shared lottery pool)
-    \item $s_w = \dfrac{\lambda_w m_w}{\Pi}$ \quad (player's proportional share of the pool)
     \item $\kappa \approx 1$ \quad (mean return per unit contributed to the pool; fairness parameter)
     \item $\eta \in (0,1)$ \quad (efficiency of upskilling investment)
-    \item $C_w(\lambda_w) \approx b \eta (1 - \lambda_w) m_w$ \quad (linearized upskilling cost, $b > 1$ approximates original power-law friction)
-    \item $\rho_w(\lambda_w) = p_w \lambda_w^2$ \quad (quadratic risk-premium approximation)
-          \begin{itemize}
-              \item $p_L > 0$ \quad $\to$ extra deterministic bonus for higher $\lambda_L$ (proxies convexity / risk-seeking)
-              \item $p_H < 0$ \quad $\to$ deterministic penalty for higher $\lambda_H$ (proxies concavity / risk-aversion)
-          \end{itemize}
+    \item $C_L(\lambda_L) \approx b \eta (1 - \lambda_L) m_L$ \quad (linearized upskilling cost for lower-ranked worker, $b > 1$ approximates original power-law friction)
+        \item $C_H(\lambda_H) \approx b \eta (1 - \lambda_H) m_H$ \quad (linearized upskilling cost for higher-ranked worker)
+    \item $\rho_L(\lambda_L) = p_L \lambda_L^2$ \quad (quadratic risk-premium approximation) - $p_L > 0$ \quad $\to$ extra deterministic bonus for higher $\lambda_L$ (proxies convexity / risk-seeking)
+
+\item $\rho_H(\lambda_H) = p_L \lambda_H^2$ \quad (quadratic risk-premium approximation) - $p_ < 0$ \quad $\to$ deterministic penalty for higher $\lambda_H$ (proxies concavity / risk-aversion)
+              
 \end{itemize}
 
-Because utility is linear, each player simply maximizes $y_w$ with respect to their own $\lambda_w$ (treating the other's choice as fixed).
 
-\section{Derivation of Closed-Form Equilibrium}
+With linear utility, the lower and higher ranked workers choose $\lambda_L$ and $\lambda_H$ to maximise $y_L$ and $y_H$ respectively (treating the other's choice as fixed).
 
 \subsection{Low-rank player's first-order condition}
 
-Differentiate $y_L$ with respect to $\lambda_L$ (ignoring small higher-order terms in share derivative for tractability):
-
-\begin{align*}
-\frac{\partial y_L}{\partial \lambda_L} 
-&\approx -\eta m_L + b \eta m_L - m_L + \kappa m_L \cdot (\text{share adjustment term}) 
-  + 2 p_L \lambda_L
+The first order conditions for the linear utility imply that
+\begin{align*}  
+\frac{\partial y_L}{\partial \lambda_L} \approx (- \eta + b \eta + \kappa - 1) m_L + 2 p_L \lambda_L = 0
 \end{align*}
-
-After simplification (dominant linear terms + quadratic premium, dropping complex share cross-derivative):
-
+or,
 \[
-\frac{\partial y_L}{\partial \lambda_L} \approx (- \eta + b \eta - \kappa + 1) m_L + 2 p_L \lambda_L
+(- \eta + b \eta + \kappa - 1) m_L + 2 p_L \lambda_L = 0
 \]
 
-Set the derivative to zero:
+The low-rank worker thus selects  $\lambda_L^*$ as follows 
 
 \[
-(- \eta + b \eta - \kappa + 1) m_L + 2 p_L \lambda_L = 0
-\]
-
-Solve for $\lambda_L^*$:
-
-\[
-\lambda_L^* = \frac{ m_L (\eta - b \eta + \kappa - 1) }{-2 p_L}
-= \frac{ m_L (b \eta - \eta - \kappa + 1) }{2 p_L}
+\lambda_L^* = \frac{ m_L ( \eta - b \eta - \kappa +  1 ) }{2 p_L}
 \]
 
 (since $p_L > 0$ and the numerator is typically positive when upskilling costs dominate).
 
 \subsection{High-rank player's first-order condition}
 
-The derivation is symmetric:
+The symmetric solution for the high-rank worker exist. The first-order conditions imply that 
+\begin{align*}  
+\frac{\partial y_H}{\partial \lambda_H} \approx (- \eta + b \eta + \kappa - 1) m_H + 2 p_H \lambda_H = 0
+\end{align*}
 
+Therefore, the higher-rank worker selects $\lambda_H^*$ as follows
 \[
-\lambda_H^* = \frac{ m_H (b \eta - \eta - \kappa + 1) }{2 p_H}
+\lambda_H^* = \frac{ m_H ( \eta - b \eta - \kappa + 1) }{2 p_H}
 \]
 
-Because $p_H < 0$, the denominator is negative, which tends to produce small (or negative) values for $\lambda_H^*$, often clipped at the boundary.
-
-\subsection{Bounding the solutions}
-
-Final equilibrium values are bounded to the feasible interval:
+Since we have $\lambda_L^* \in (0,1)$ and $ \lambda_H^* \in (0,1)$, we bound the solutions for $\lambda_L^*$ and $\lambda_H^*$ as follows
 
 \[
-\lambda_w^* = \max\bigl(0, \min\bigl(1, \dfrac{m_w (b \eta - \eta - \kappa + 1)}{2 p_w}\bigr)\bigr)
-\qquad \text{for } w = L, H
+\lambda_L^* = \max\bigl(0, \min\bigl(1, \dfrac{m_L (b \eta - \eta - \kappa + 1)}{2 p_L}\bigr)\bigr)
 \]
 
-\section{Interpretation of the Closed-Form Expressions}
+\[
+\lambda_H^* = \max\bigl(0, \min\bigl(1, \dfrac{m_H (b \eta - \eta - \kappa + 1)}{2 p_H}\bigr)\bigr)
+\]
+
+
+\subsection{Comparative Statics}
 
 \begin{itemize}
-    \item The common factor $(b \eta - \eta - \kappa + 1)$ captures the net marginal benefit of moving one unit of income from upskilling to the lottery pool.
+    \item The common factor $(b \eta - \eta - \kappa + 1)$ captures the net marginal benefit of moving one unit of income from upskilling to the social lottery.
           \begin{itemize}
-              \item Higher $b \eta$ (more expensive/costly upskilling) $\to$ favors lottery.
-              \item Higher $\kappa$ (more generous lottery return) $\to$ favors lottery.
+              \item Higher $b \eta$ (more expensive/costly upskilling) $\to$ favours lottery.
+              \item Higher $\kappa$ (more generous lottery return) $\to$ favours lottery.
           \end{itemize}
-    \item Division by $2 p_w$ scales the response to the risk-premium strength:
+    \item Division by $2 p_L$ for lower-rank worker (or $2 p_H$ for higher-rank worker) scales the response to the risk-premium strength:
           \begin{itemize}
-              \item $p_L > 0$ $\to$ larger premium reduces $\lambda_L^*$ (quadratic saturation effect).
-              \item $p_H < 0$ $\to$ larger $|p_H|$ increases $\lambda_H^*$ toward 1 (but usually still clips at 0).
+              \item $p_L > 0$ $\to$ larger premium reduces $\lambda_L^*$ 
+              \item $p_H < 0$ $\to$ larger $|p_H|$ increases $\lambda_H^*$ 
           \end{itemize}
-    \item The income term $m_w$ in the numerator means richer players receive proportionally larger absolute responses — but the sign of $p_w$ dominates direction.
+
 \end{itemize}
 
 
