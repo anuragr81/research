@@ -4,7 +4,9 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
+\usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage[margin=1.5in]{geometry}
 
 
@@ -192,6 +194,8 @@ U(\eta_t) \equiv \upsilon((1-\alpha) R_t \eta_t)  + \Lambda \frac{(1-\alpha) R_t
 The solutions for both can be found explicitly for $\upsilon(x)\equiv x$ and implicitly (numerical solution) using $\upsilon(x)\equiv \sqrt{x}$ \footnote{ The utility function $\upsilon(x)=\sqrt{x}$ can be viewed as a special case of the CRRA utility - a simplification of the S-shaped utility Friedman in the $N$-player case}.
 
 
+It is worth highlighting that a lottery benefit common to both the workers does not represent the random job-swap dynamics in the $N$-player formulation. Instead, the zero-sum dynamics are represented with the lotteries in a shared-pool - as a mean-field approximation. More specifically, the $N$-player formulation has lottery as a zero-sum reshuffle of existing Pareto-distributed positions triggered by uniform displacements: a displaced worker pays a cost to draw a random other position, so gains come directly at others' expense, creating a tight interdependence and rank-dependent externalities that are mirrored in the shared-pool abstraction (much like the Tullock lottery with $r=1$). A fixed common lottery benefit to both workers, on the other hand, introduces exogenous positive-sum value that does not corresponds to a displacement of another's position.
+
 
 \section{Discussion}
 A higher lottery might reduce the sum of costs from all workers contributed to the firm. By changing stakes ($\alpha$) the firm may choose to decrease contributions or change the costs parameters ($\gamma$)  to raise collection. The 
@@ -240,5 +244,36 @@ The more a worker upskills oneself, the harder it becomes for the worker to move
 It follows from the dynamics that in the long-term equilibrium, higher costs ($b$) discourage mobility and higher stakes ($a$) encourage bets.  The S-shaped utility means that in the long-term equilbrium, the higher-rank workers would prefer the downgrade while the low-rank workers may prefer the lottery. 
 
 
+\subsection*{Linear Approximation for Risk-Premium}
+\label{sec:riskpremium}
+
+Consider a random net income coming from the lottery part:
+\begin{align*}
+y = \mu_y + \sigma_y \varepsilon, \mathbb{E}[\varepsilon] = 0, \text{Var}(\varepsilon) = 1
+\end{align*}
+
+
+Expanding the utility around the mean $\mu_y$ using a second-order Taylor series, we have 
+
+\[
+u(y) \approx u(\mu_y) + u'(\mu_y) (\sigma_y \varepsilon) + \frac{1}{2} u''(\mu_y) (\sigma_y \varepsilon)^2
+\]
+
+Taking expectation:
+
+\begin{align*}
+\mathbb{E}[u(y)] 
+&\approx u(\mu_y) + u'(\mu_y) \cdot 0 + \frac{1}{2} u''(\mu_y) \sigma_y^2 \\
+&= u(\mu_y) + \underbrace{\frac{1}{2} u''(\mu_y) \sigma_y^2}_{\text{risk premium}}
+\end{align*}
+
+This risk premium term $\frac{1}{2} u''(\mu_y) \sigma_y^2$ is:
+
+\begin{itemize}
+    \item \textbf{positive} when $u'' > 0$ (convex region $\to$ below $r$) $\quad\Rightarrow\quad$ player behaves as if the lottery return is \textbf{higher} than its mean
+    \item \textbf{negative} when $u'' < 0$ (concave region $\to$ above $r$) $\quad\Rightarrow\quad$ player behaves as if the lottery return is \textbf{lower} than its mean
+\end{itemize}
+
+The approximation mimics the direction of the $N$-player formulations effect: low workers ``like'' variance (effective bonus) whereas high workers ``dislike'' it (effective penalty).
 
 \end{document}

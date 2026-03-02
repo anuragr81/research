@@ -32,36 +32,6 @@ In the simplified non-stochastic two-player model, we want to avoid simulating r
 Instead, we approximate the effect of this stochasticity using a \textbf{deterministic} equivalent return that includes a linearized risk premium. 
 This premium tries to capture -- in a first- or second-order way -- how much extra (or less) utility the player would get from the variance itself, thanks to the curvature of $u(\cdot)$.
 
-\section*{Taylor Expansion Around the Mean}
-
-Consider a random net income coming from the lottery part:
-
-\[
-y = \mu_y + \sigma_y \varepsilon, \quad \mathbb{E}[\varepsilon] = 0, \quad \text{Var}(\varepsilon) = 1
-\]
-
-We expand the utility around the mean $\mu_y$ using a second-order Taylor series:
-
-\[
-u(y) \approx u(\mu_y) + u'(\mu_y) (\sigma_y \varepsilon) + \frac{1}{2} u''(\mu_y) (\sigma_y \varepsilon)^2
-\]
-
-Taking expectation:
-
-\begin{align*}
-\mathbb{E}[u(y)] 
-&\approx u(\mu_y) + u'(\mu_y) \cdot 0 + \frac{1}{2} u''(\mu_y) \sigma_y^2 \\
-&= u(\mu_y) + \underbrace{\frac{1}{2} u''(\mu_y) \sigma_y^2}_{\text{risk premium}}
-\end{align*}
-
-This risk premium term $\frac{1}{2} u''(\mu_y) \sigma_y^2$ is:
-
-\begin{itemize}
-    \item \textbf{positive} when $u'' > 0$ (convex region $\to$ below $r$) $\quad\Rightarrow\quad$ player behaves as if the lottery return is \textbf{higher} than its mean
-    \item \textbf{negative} when $u'' < 0$ (concave region $\to$ above $r$) $\quad\Rightarrow\quad$ player behaves as if the lottery return is \textbf{lower} than its mean
-\end{itemize}
-
-This exactly mimics the direction of the original effect: low workers ``like'' variance (effective bonus), high workers ``dislike'' it (effective penalty).
 
 \section*{Implementation in the Deterministic Model}
 
