@@ -167,69 +167,83 @@ Other than the depreciation $\delta A_t$, the assets at any given time incur two
 The firm thus chooses $\alpha$ in order to maximise $A_{t+1}$ for a given $A_t$ at every cycle. The dynamics is summarised as follows
 
 \begin{align*}
-A_{t+1}=(1-\pi-\delta) A_t + \kappa A_t (W \lambda_{L,t} \alpha + (1-\alpha)\lambda_{H,t}) - K(\alpha) - C(A_t)
+A_{t+1}=(1-\pi-\delta) A_t + \pi A_t (W \lambda_{L,t} \alpha + (1-\alpha)\lambda_{H,t}) - K(\alpha) - C(A_t)
 \end{align*}
 
-For a fixed $\lambda_{L,t}$ and $\lambda_{H,t}$, the firm may seem to benefit from lowering $\alpha$ since that would imply a high collection $(1-\alpha)$ despite lower operational costs (less distribution). In other words, the firm benefits from lower pay so long as $\lambda_{H,t}$ is high and $(1-\alpha)\lambda_{H,t}$ is significant. The next section explores whether how $\alpha$ relates with the selection of $\lambda_{L,t}$ and $\lambda_{H,t}$.
+For a fixed $\lambda_{L,t}$ and $\lambda_{H,t}$, a low $W$ causes the firm to benefit from lowering $\alpha$ since that implies a high collection $(1-\alpha)$ despite lower operational costs (less distribution). In other words, the firm benefits from lower pay so long as $\lambda_{H,t}$ is high and $(1-\alpha)\lambda_{H,t}$ is significant due to low $W$. This changes only when $W$ and $\lambda_L$ result in a higher contribution. The next section explores how $\alpha$ specifically relates with the selection of $\lambda_{L,t}$ and $\lambda_{H,t}$.
 
 
 \subsubsection{Choice for Workers}
 
 \noindent
 
-We consider the mixing parameters $\lambda_L^*$ and $\lambda_H^*$ for Nash equilibria in a highly simplified with a linear utility that underpins the macro dynamics of the $N$-player stochastic formulation.  While the linear utility $u(y) = y$ implies pure risk neutrality, it preserves the essential behavioral asymmetry through quadratic risk premia (see Appendix for details). In other words, the low-rank player receives a positive premium for lottery allocation (mimicking risk-seeking / convexity effect) while the high-rank player receives a negative premium (mimicking risk-aversion / concavity effect). 
+We consider a two-level Nash-equilbirium where the mixing parameters $\lambda_L^*$ and $\lambda_H^*$ are chosen under a linear utility (underpinning the macro dynamics implied by the $N$-player stochastic formulation).  While the linear utility $u(y) = y$ implies pure risk neutrality, it preserves the essential behavioral asymmetry through quadratic risk premia (see Appendix for details). More particularly, the low-rank player receives a positive premium for lottery allocation (mimicking risk-seeking / convexity effect) while the high-rank player receives a negative premium (mimicking risk-aversion / concavity effect). 
 
-As described in Section \ref{sec:firmchoice}, the low-rank (L) and high-rank (H) workers receive incomes $m_L = R \mu$ and $m_H = R(1-\mu)$ respectively ($\mu \in (0, 0.5)$). Thereon, the lower-rank and higher-ranked workers choose mixing parameters $\lambda_L$ and $\lambda_H$ respectively - as their  share of current income allocated to a shared lottery pool while the rest of the income is allocated to upskilling.
-
-\footnote{We discard the approach to use a common lottery benefit to both the workers - as it does not represent the random job-swap dynamics of the $N$-player formulation. More specifically, the lottery in the $N$-player formulation is essentially a zero-sum reshuffle of existing Pareto-distributed positions triggered by uniform displacements -- wherein a displaced worker pays a cost to draw a random other position, so the gains come directly at others' expense, creating a tight interdependence and rank-dependent externalities that are better represented in the shared-pool abstraction (equivalent to a Tullock lottery with $r=1$). A fixed common lottery benefit to both workers, on the other hand, introduces exogenous positive-sum value that does not correspond to a displacement of another's position.}
+As described in Section \ref{sec:firmchoice}, the low-rank (L) and high-rank (H) workers receive incomes $m_L = R \mu$ and $m_H = R(1-\mu)$ respectively ($\mu \in (0, 0.5)$). Thereon, the lower-rank and higher-ranked workers choose mixing parameters $\lambda_L$ and $\lambda_H$ respectively - as their  share of current income allocated to upskilling. The rest of their income is allocated to a shared lottery pool \footnote{We discard the approach to use a common lottery benefit to both the workers - as it does not represent the random job-swap dynamics of the $N$-player formulation. More specifically, the lottery in the $N$-player formulation is essentially a zero-sum reshuffle of existing Pareto-distributed positions triggered by uniform displacements -- wherein a displaced worker pays a cost to draw a random other position, so the gains come directly at others' expense, creating a tight interdependence and rank-dependent externalities that are better represented in the shared-pool abstraction (equivalent to a Tullock lottery with $r=1$). A fixed common lottery benefit to both workers, on the other hand, introduces exogenous positive-sum value that does not correspond to the displacement of another's position that is a necessary feature of the job-swap feature of the $N$-player formulation.}.
 
 With the linear utility, the net income to be optimised by the low-rank worker is
 
 \begin{align*}
-y_L &= m_L + \eta(1 - \lambda_L) m_L - C_L(\lambda_L) - \lambda_L m_L + \kappa \lambda_L m_L + \rho_L(\lambda_L)
+y_L &= m_L + \eta \lambda_L m_L - C_L(\lambda_L) -(1- \lambda_L) m_L + \kappa W (1-\lambda_L ) m_L + \rho_L(1-\lambda_L)
 \end{align*}
 
 
-Similarly, the net income optimise by the higher-rank worker is
+Similarly, the net income optimised by the higher-rank worker is
 \begin{align*}
-y_H &= m_H + \eta(1 - \lambda_H) m_H - C_H(\lambda_H) - \lambda_H m_H  + \kappa \lambda_H m_H + \rho_H(\lambda_H)
+y_H &= m_H + \eta \lambda_H m_H - C_H(\lambda_H) - (1-\lambda_H) m_H  + \kappa(1- \lambda_H) m_H + \rho_H(1-\lambda_H)
 \end{align*}
+
 
 
 The income components above are defined as follows:
 
 \begin{tabular}{p{4cm}  p{9cm}}
     $\kappa \approx 1$ & mean return per unit contributed to the pool; fairness parameter \\
+    $W$  & population-weight assigned to the lower-ranked worker \\
     $\eta \in (0,1)$ &  efficiency of upskilling investment \\
-    $C_L(\lambda_L) \approx b \eta (1 - \lambda_L) m_L$ &  linearized upskilling cost for lower-ranked worker ($b > 1$) \\
-    $C_H(\lambda_H) \approx b \eta (1 - \lambda_H) m_H$ &  linearized upskilling cost for higher-ranked worker ($b > 1$)\\
-    $\rho_L(\lambda_L) =p_L \lambda_L^2$ &  quadratic risk-premium approximation -- $p_L > 0$ proxies convexity / risk-seeking ( extra deterministic bonus for higher $\lambda_L$ ) \\
-$\rho_H(\lambda_H)= p_L \lambda_H^2$ & quadratic risk-premium approximation -- $p_H < 0$ proxies concavity / risk-aversion (deterministic penalty for higher $\lambda_H$)
+    $C_L(\lambda_L) \approx b \eta \lambda_L m_L$ &  linearized upskilling cost for lower-ranked worker ($b > 1$) \\
+    $C_H(\lambda_H) \approx b \eta  \lambda_H m_H$ &  linearized upskilling cost for higher-ranked worker ($b > 1$)\\
+    $\rho_L(\lambda_L) =p_L (1-\lambda_L)^2$ &  quadratic risk-premium approximation -- $p_L > 0$ proxies convexity / risk-seeking ( extra deterministic bonus for higher $\lambda_L$ ) \\
+$\rho_H(\lambda_H)= p_H(1- \lambda_H)^2$ & quadratic risk-premium approximation -- $p_H < 0$ proxies concavity / risk-aversion (deterministic penalty for higher $\lambda_H$)
               
 \end{tabular}
 
+It is worth highlighting that the return from lottery investment are based on the aggregate lottery pool :
+\begin{align*}
+\Pi = W (1 - \lambda_L) m_L + (1 - \lambda_H) m_H
+\end{align*}
+
+Given the efficiency of lottery $\kappa$, the lottery return to lower-ranked worker is therefore
+\begin{align*}
+\kappa \cdot \frac{W (1 - \lambda_L) m_L}{\Pi} \cdot \Pi = \kappa W (1 - \lambda_L) m_L.
+\end{align*}
+
+Similarly, the lottery return to the higher-ranked worker is
+\begin{align*}
+\kappa (1 - \lambda_H) m_H.
+\end{align*}
 
 \subsubsection{Low-rank player's first-order condition}
 
 The first order conditions for the linear utility imply that
 \begin{align*}  
-\frac{\partial y_L}{\partial \lambda_L} \approx (- \eta + b \eta + \kappa - 1) m_L + 2 p_L \lambda_L = 0
+\frac{\partial y_L}{\partial \lambda_L} \approx ( \eta - b \eta - \kappa W + 1) m_L - 2 p_L (1- \lambda_L) = 0
 \end{align*}
 or,
 \[
-(- \eta + b \eta + \kappa - 1) m_L + 2 p_L \lambda_L = 0
+(\eta - b \eta - \kappa W +1 ) m_L = 2 p_L (1-\lambda_L) 
 \]
 
 The low-rank worker thus selects  the following $\lambda_L^*$
 
 \[
-\lambda_L^* = \frac{ m_L ( \eta - b \eta - \kappa +  1 ) }{2 p_L}
+\lambda_L^* = 1- \frac{ m_L (   \eta - b \eta   -\kappa W +  1 ) }{2 p_L}
 \]
 
 (since $p_L > 0$ and the numerator is typically positive when upskilling costs dominate).
 
 \subsubsection{High-rank player's first-order condition}
-
+PENDING VERIFICATION:
 For the high-rank worker, the first-order conditions imply that 
 \begin{align*}  
 \frac{\partial y_H}{\partial \lambda_H} \approx (- \eta + b \eta + \kappa - 1) m_H + 2 p_H \lambda_H = 0
