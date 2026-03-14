@@ -6,10 +6,8 @@
 \usepackage{booktabs}
 \usepackage{enumitem}
 
-
-
-\title{Explaining Convexity-Based Approximation \\
-Instead of Explicit Stochastic Risk in the Model}
+\title{Convexity-Based Approximation and Scaled Reduced-Form Model \\
+with Mass of Lower-Ranked Workers and Firm Wage Allocation}
 \author{}
 \date{}
 
@@ -17,178 +15,175 @@ Instead of Explicit Stochastic Risk in the Model}
 
 \maketitle
 
-\section*{Core Idea}
+\section{Core Idea: Convexity Approximation in the Non-Stochastic Model}
 
-In the original N-worker model, the lottery delivers a \textbf{stochastic} prize (drawn from a Pareto distribution with heavy right tail). 
-Low-position workers like this lottery because the utility function is \textbf{convex} below the reference point $r$ ($\gamma_\text{low} > 1$), which means:
-
+In the original N-worker model, the lottery delivers a stochastic prize drawn from a Pareto distribution with heavy right tail. Low-position workers favor it because the utility function is convex below the reference point $r$ ($\gamma_\text{low} > 1$), implying
 \[
 \mathbb{E}[u(y)] > u(\mathbb{E}[y])
 \]
+for random $y$ with positive variance. Convexity amplifies rare large upside outcomes, creating effective risk-loving behavior despite a roughly mean-preserving lottery.
 
-for random $y$ with positive variance. The convexity amplifies the value of rare but large upside outcomes, creating an effective ``risk-loving'' preference even though the lottery is roughly mean-preserving.
+In the simplified non-stochastic model, we avoid repeated random draws. Instead, we replace stochastic lottery prizes with a deterministic equivalent that includes a linearized risk premium capturing the second-order welfare effect of variance via utility curvature.
 
-In the simplified non-stochastic two-player model, we want to avoid simulating random draws every period (Monte Carlo is computationally expensive and makes closed-form analysis impossible). 
-Instead, we approximate the effect of this stochasticity using a \textbf{deterministic} equivalent return that includes a linearized risk premium. 
-This premium tries to capture -- in a first- or second-order way -- how much extra (or less) utility the player would get from the variance itself, thanks to the curvature of $u(\cdot)$.
-
-
-\section*{Implementation in the Deterministic Model}
-
-We replace the stochastic lottery prize $\tilde{\Lambda}_w$ with a deterministic equivalent:
-
+The effective lottery benefit for a representative agent in class $w$ includes a mean pool return share plus a risk-adjustment term
 \[
-\text{Effective lottery benefit for player } w = s_w \cdot \kappa \Pi + \rho_w
+\rho_w = \frac{1}{2} u''(m_w) \cdot \widehat{\sigma}_w^2,
+\]
+where a simple proxy for virtual variance is
+\[
+\widehat{\sigma}_w^2 = c \cdot ((1 - \lambda_w) m_w)^2 \qquad (c > 0 \text{ calibration constant}).
 \]
 
-where
-\begin{itemize}
-    \item $s_w \cdot \kappa \Pi$ = share of the mean pool return (roughly fair or slightly adjusted)
-    \item $\rho_w = \dfrac{1}{2} u''(m_w) \cdot \widehat{\sigma}_w^2$ = linearized risk-adjustment term
-\end{itemize}
+\section{Scaled Reduced-Form Model with Mass at the Bottom}
 
-A simple proxy for the virtual variance is
-
+We consider a simplified two-class model with unequal population: one representative higher-ranked worker (mass 1) with income $m_H = R (1-\mu)$, and $W \gg 1$ identical lower-ranked workers, each with per-capita income
 \[
-\widehat{\sigma}_w^2 \propto (\lambda_w m_w)^2 \cdot \text{Var}_\text{Pareto}(\Lambda) / R^2
+m_L = \frac{R \mu}{W}.
+\]
+Each representative agent in class $w$ chooses $\lambda_w \in [0,1]$, the **fraction of per-capita income allocated to upskilling** (safe improvement channel). The fraction allocated to the shared lottery pool is therefore $1 - \lambda_w$.
+
+The upskilling cost for a representative agent is linear in the upskilling share:
+\[
+C_L(\lambda_L) = b \eta \lambda_L m_L, \qquad C_H(\lambda_H) = b \eta \lambda_H m_H,
+\]
+where $b > 1$ approximates the original power-law friction, and $\eta \in (0,1)$ is upskilling efficiency.
+
+Aggregate lottery pool:
+\[
+\Pi = W (1 - \lambda_L) m_L + (1 - \lambda_H) m_H.
+\]
+Lottery return to a representative lower-ranked worker:
+\[
+\kappa W (1 - \lambda_L) m_L.
+\]
+Lottery return to the higher-ranked worker:
+\[
+\kappa (1 - \lambda_H) m_H.
 \]
 
-or even more crudely:
-
-\[
-\widehat{\sigma}_w^2 = c \cdot (\lambda_w m_w)^2 \qquad (c \text{ is a calibration constant})
-\]
-
-and
-
-\[
-u''(y) = 
-\begin{cases} 
-\gamma_\text{low} (\gamma_\text{low}-1) y^{\gamma_\text{low}-2} & \text{if } y \leq r \\
-\gamma_\text{high} (\gamma_\text{high}-1) y^{\gamma_\text{high}-2} & \text{if } y > r
-\end{cases}
-\]
-
-Because $\gamma_\text{low} > 1$ and $\gamma_\text{high} < 1$, we have $u'' > 0$ below $r$ and $u'' < 0$ above $r$ (in the relevant regions), which gives exactly the desired sign flip.
-
-\section*{Advantages of This Approximation}
-
-\begin{itemize}
-    \item No Monte Carlo $\to$ deterministic dynamics, faster simulation, possible closed-form FOCs in simple cases
-    \item Still captures the \textbf{qualitative} behavioral asymmetry coming from the S-shape
-    \item Low player receives an effective \textbf{bonus} for allocating more to the lottery ($\rho_\text{low} > 0$)
-    \item High player receives an effective \textbf{penalty} ($\rho_\text{high} < 0$), discouraging high $\lambda$
-    \item Preserves the mechanism that generates persistent inequality and asymmetric mobility
-\end{itemize}
-
-\section*{Limitations}
-
-\begin{itemize}
-    \item Loses higher-order effects and tail risks (Pareto has infinite variance for $a \leq 2$)
-    \item The linearization is only locally accurate $\to$ can be misleading for very large variances
-    \item Requires choosing/ calibrating the scaling constant $c$ in $\widehat{\sigma}^2$
-\end{itemize}
-
-In summary, we are \textbf{not} claiming that convexity replaces probability in a literal sense. Rather, we are using the local curvature of the utility function (via its second derivative) to construct a \textbf{deterministic proxy} that mimics -- to second order -- the welfare effect that the actual variance would have produced under expected utility maximization.
-
-
-\section{Linear Closed Form}
-
-The Nash equilibrium mixing parameters $\lambda_L^*$ and $\lambda_H^*$ in a highly simplified two-player model consider a linear utility to represent the macro dynamics of the original N-player stochastic job-swap system.   The linear utility $u(y) = y$ implies pure risk neutrality, while preserving the essential behavioral asymmetry through class-specific quadratic risk premiums:
-
-\begin{itemize}
-\item Low-rank player receives a positive premium for lottery allocation (mimicking risk-seeking / convexity effect).  
-\item High-rank player receives a negative premium (mimicking risk-aversion / concavity effect). 
-\end{itemize}
-
-There are two worker with low-rank (L) and high-rank (H) who receive incomes $m_L = R \mu$ and $m_H = R(1-\mu)$ respectively ($\mu \in (0, 0.5)$). Each player chooses a certain mixing parameter - the fraction of current income allocated to a shared lottery pool while the rest of the income is allocated to upskilling.
-
-Net income to be optimised by the low-rank worker is
-
+Net income per representative lower-ranked worker:
 \begin{align*}
-y_L &= m_L + \eta(1 - \lambda_L) m_L - C_L(\lambda_L) - \lambda_L m_L + \kappa \lambda_L m_L + \rho_L(\lambda_L)
+y_L &= m_L + \eta \lambda_L m_L - C_L(\lambda_L) - (1 - \lambda_L) m_L \\
+    &\quad + \kappa W (1 - \lambda_L) m_L + \rho_L(1 - \lambda_L),
 \end{align*}
+with $\rho_L(1 - \lambda_L) = p_L (1 - \lambda_L)^2$ ($p_L > 0$).
 
-
-The net income optimise by the higher-rank worker is
+Net income for the higher-ranked worker:
 \begin{align*}
-y_H &= m_H + \eta(1 - \lambda_H) m_H - C_H(\lambda_H) - \lambda_H m_H  + \kappa \lambda_H m_H + \rho_H(\lambda_H)
+y_H &= m_H + \eta \lambda_H m_H - C_H(\lambda_H) - (1 - \lambda_H) m_H \\
+    &\quad + \kappa (1 - \lambda_H) m_H + \rho_H(1 - \lambda_H),
 \end{align*}
+with $\rho_H(1 - \lambda_H) = p_H (1 - \lambda_H)^2$ ($p_H < 0$).
 
+With linear utility $u(y) = y$, each maximizes own net income (Nash, treating other's choice fixed).
 
-where the components are defined as follows:
+\subsection{Low-class first-order condition (per representative low worker)}
+\[
+\frac{\partial y_L}{\partial \lambda_L} = (\eta - b\eta - \kappa W + 1) m_L + 2 p_L (1 - \lambda_L) = 0
+\]
+Solving:
+\[
+\lambda_L^* = 1 - \frac{m_L (\kappa W - \eta + b\eta - 1)}{2 p_L},
+\]
+bounded as $\lambda_L^* = \max\!\bigl(0, \min\!\bigl(1, \text{above}\bigr)\bigr)$.
 
-\begin{itemize}[leftmargin=*]
-    \item $\kappa \approx 1$ \quad (mean return per unit contributed to the pool; fairness parameter)
-    \item $\eta \in (0,1)$ \quad (efficiency of upskilling investment)
-    \item $C_L(\lambda_L) \approx b \eta (1 - \lambda_L) m_L$ \quad (linearized upskilling cost for lower-ranked worker, $b > 1$ approximates original power-law friction)
-        \item $C_H(\lambda_H) \approx b \eta (1 - \lambda_H) m_H$ \quad (linearized upskilling cost for higher-ranked worker)
-    \item $\rho_L(\lambda_L) = p_L \lambda_L^2$ \quad (quadratic risk-premium approximation) - $p_L > 0$ \quad $\to$ extra deterministic bonus for higher $\lambda_L$ (proxies convexity / risk-seeking)
+\subsection{High-class first-order condition}
+\[
+\frac{\partial y_H}{\partial \lambda_H} = (\eta - b\eta - \kappa + 1) m_H + 2 p_H (1 - \lambda_H) = 0
+\]
+Solving:
+\[
+\lambda_H^* = 1 - \frac{m_H (\kappa - \eta + b\eta - 1)}{2 p_H},
+\]
+bounded as $\lambda_H^* = \max\!\bigl(0, \min\!\bigl(1, \text{above}\bigr)\bigr)$.
 
-\item $\rho_H(\lambda_H) = p_L \lambda_H^2$ \quad (quadratic risk-premium approximation) - $p_ < 0$ \quad $\to$ deterministic penalty for higher $\lambda_H$ (proxies concavity / risk-aversion)
-              
-\end{itemize}
+\section{The Firm Layer: Wage Allocation and Asset Optimization}
 
+The firm controls the total wage bill $R_t = \pi A_t$ (portion of current assets paid as wages). The firm chooses $\alpha \in [0,1]$ such that:
+- Aggregate wages to lower-ranked workers (mass $W$) = $\alpha R_t$,
+- Wages to the higher-ranked worker (mass 1) = $(1-\alpha) R_t$.
 
-With linear utility, the lower and higher ranked workers choose $\lambda_L$ and $\lambda_H$ to maximise $y_L$ and $y_H$ respectively (treating the other's choice as fixed).
+Per-capita wages are then $\alpha R_t / W$ for each lower-rank worker and $(1-\alpha) R_t$ for the higher-rank worker.
 
-\subsection{Low-rank player's first-order condition}
+The firm maximizes the \emph{effective upskilling fraction} of the wage bill:
+\[
+\phi(\alpha) = \alpha \lambda_L^*(\alpha) + (1-\alpha) \lambda_H^*(\alpha),
+\]
+where $\lambda_L^*(\alpha)$ and $\lambda_H^*(\alpha)$ are the workers' equilibrium upskilling shares given policy $\alpha$.
 
-The first order conditions for the linear utility imply that
-\begin{align*}  
-\frac{\partial y_L}{\partial \lambda_L} \approx (- \eta + b \eta + \kappa - 1) m_L + 2 p_L \lambda_L = 0
+Asset dynamics:
+\begin{align*}
+A_{t+1} &= (1 - \pi - \delta) A_t + \pi A_t \cdot \phi(\alpha) \\
+        &\quad - C(A_t) - K(\alpha_t - \alpha_{t-1}),
 \end{align*}
-or,
+with $C(A_t)$ (maintenance cost, e.g. $c A_t^\gamma$, $\gamma > 1$) and $K(\Delta\alpha)$ (adjustment cost of changing $\alpha$, e.g. $k |\Delta\alpha|^\beta$, $\beta > 1$).
+
+The firm chooses $\alpha_t$ to maximize $A_{t+1}$ (or long-run asset value), anticipating workers' responses. This creates a two-level Nash equilibrium:
+- Workers optimize $\lambda_L$, $\lambda_H$ given $\alpha$.
+- Firm optimizes $\alpha$ given $\lambda_L^*$, $\lambda_H^*$.
+
+The effective fraction $\phi(\alpha)$ is the share of wages that becomes productive investment. The firm typically sets high $\alpha^*$ (large wage share to lower ranks) when $W$ is large, because the mass amplifies even modest upskilling from the bottom into large aggregate growth.
+
+\subsection{Steady-State Equilibrium Analysis}
+
+A steady-state equilibrium is a fixed point \((\alpha^*, \lambda_L^*, \lambda_H^*, A^*)\) satisfying two conditions simultaneously:
+
+\begin{enumerate}
+\item Given \(\alpha^*\), the workers choose their best-response upskilling shares:
 \[
-(- \eta + b \eta + \kappa - 1) m_L + 2 p_L \lambda_L = 0
+\lambda_L^* = 1 - \frac{m_L (\kappa W - \eta + b\eta - 1)}{2 p_L}, \qquad
+\lambda_H^* = 1 - \frac{m_H (\kappa - \eta + b\eta - 1)}{2 p_H}
 \]
-
-The low-rank worker thus selects  $\lambda_L^*$ as follows 
-
+(bounded to \([0,1]\)).
+\item Given \(\lambda_L^*\) and \(\lambda_H^*\), the firm chooses \(\alpha^*\) to maximise the effective upskilling fraction
 \[
-\lambda_L^* = \frac{ m_L ( \eta - b \eta - \kappa +  1 ) }{2 p_L}
+\phi(\alpha) = \alpha \lambda_L^*(\alpha) + (1-\alpha) \lambda_H^*(\alpha).
 \]
-
-(since $p_L > 0$ and the numerator is typically positive when upskilling costs dominate).
-
-\subsection{High-rank player's first-order condition}
-
-The symmetric solution for the high-rank worker exist. The first-order conditions imply that 
-\begin{align*}  
-\frac{\partial y_H}{\partial \lambda_H} \approx (- \eta + b \eta + \kappa - 1) m_H + 2 p_H \lambda_H = 0
-\end{align*}
-
-Therefore, the higher-rank worker selects $\lambda_H^*$ as follows
+The steady-state asset level \(A^*\) then satisfies
 \[
-\lambda_H^* = \frac{ m_H ( \eta - b \eta - \kappa + 1) }{2 p_H}
+A^* = \frac{\pi \phi(\alpha^*)}{\delta + c (A^*)^{\gamma-1}},
 \]
+where \(C(A) = c A^\gamma\) (\(\gamma > 1\)).
 
-Since we have $\lambda_L^* \in (0,1)$ and $ \lambda_H^* \in (0,1)$, we bound the solutions for $\lambda_L^*$ and $\lambda_H^*$ as follows
+The equilibrium is solved numerically by fixed-point iteration: guess \(\alpha_0\), compute \(\lambda_L^*\) and \(\lambda_H^*\), update \(\alpha\) to maximise \(\phi(\alpha)\), and repeat until convergence. Convergence is fast and stable.
 
-\[
-\lambda_L^* = \max\bigl(0, \min\bigl(1, \dfrac{m_L (b \eta - \eta - \kappa + 1)}{2 p_L}\bigr)\bigr)
-\]
+\subsubsection{Comparative Statics}
 
-\[
-\lambda_H^* = \max\bigl(0, \min\bigl(1, \dfrac{m_H (b \eta - \eta - \kappa + 1)}{2 p_H}\bigr)\bigr)
-\]
+The table below summarises directional effects of key parameters on the equilibrium values (holding others fixed).
 
+\begin{table}[ht]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Parameter & \(\alpha^*\) (firm) & \(\lambda_L^*\) (low-rank) & \(\lambda_H^*\) (high-rank) \\
+\midrule
+\(\uparrow W\) (larger mass of poor) & \(\uparrow\) & \(\downarrow\) & \(\approx 1\) (corner) \\
+\(\uparrow \eta\) (better upskilling) & \(\uparrow\) or \(\downarrow\) (ambiguous) & \(\uparrow\) & \(\uparrow\) \\
+\(\uparrow p_L\) (stronger low-rank lottery premium) & \(\downarrow\) & \(\downarrow\) & little change \\
+\(\uparrow |p_H|\) (stronger high-rank aversion) & \(\uparrow\) & little change & \(\uparrow\) \\
+\(\uparrow \pi\) (higher wage share) & \(\uparrow\) & little direct effect & little direct effect \\
+\(\uparrow \delta\) (higher depreciation) & little direct effect & \(\uparrow\) (indirect) & \(\uparrow\) (indirect) \\
+\bottomrule
+\end{tabular}
+\caption{Directional comparative statics at equilibrium.}
+\end{table}
 
-\subsection{Comparative Statics}
+\subsubsection{Equilibrium Implications}
+
+The model produces several robust implications:
 
 \begin{itemize}
-    \item The common factor $(b \eta - \eta - \kappa + 1)$ captures the net marginal benefit of moving one unit of income from upskilling to the social lottery.
-          \begin{itemize}
-              \item Higher $b \eta$ (more expensive/costly upskilling) $\to$ favours lottery.
-              \item Higher $\kappa$ (more generous lottery return) $\to$ favours lottery.
-          \end{itemize}
-    \item Division by $2 p_L$ for lower-rank worker (or $2 p_H$ for higher-rank worker) scales the response to the risk-premium strength:
-          \begin{itemize}
-              \item $p_L > 0$ $\to$ larger premium reduces $\lambda_L^*$ 
-              \item $p_H < 0$ $\to$ larger $|p_H|$ increases $\lambda_H^*$ 
-          \end{itemize}
-
+\item \textbf{Mass effect dominates}: Large \(W\) pushes the firm toward high \(\alpha^*\) (allocating a large wage share to lower ranks) to leverage the numerous workers. Even modest improvements in \(\lambda_L\) generate large aggregate upskilling.
+\item \textbf{Sticky top, churning bottom}: The high-rank worker typically stays at \(\lambda_H^* \approx 1\) (full upskilling), reinforcing stability at the top. Lower-rank workers allocate substantially to the lottery (\(\lambda_L^* < 1\)), producing persistent churning at the bottom.
+\item \textbf{Endogenous growth channel}: Unlike the classic Solow model (exogenous savings rate \(s\)), here the effective investment rate \(\pi \phi(\alpha^*)\) is chosen strategically by the firm. Growth \(g^* = \pi \phi(\alpha^*) - \delta - C(A^*)/A^*\) therefore depends on policy responsiveness and population structure.
+\item \textbf{Policy relevance}: The firm has a meaningful lever (\(\alpha\)) to counteract baseline inequality (\(\mu\)). When \(W\) is large, optimal policy often favours the bottom, illustrating how institutional wage allocation can influence long-run inequality and growth.
+\item \textbf{Two-level Nash character}: The equilibrium is a mutual best-response fixed point. Small changes in parameters (e.g., stronger risk premium \(p_L\)) can shift the entire system through feedback between workers and firm.
 \end{itemize}
 
+Overall, the model shows that when lower ranks are numerous (\(W \gg 1\)), rational firm behaviour naturally tilts toward high \(\alpha^*\), boosting aggregate growth while preserving the micro-level asymmetry of churning at the bottom and stickiness at the top.
+\item 
+\section{New Model}
 
+
+\end{document}
 \end{document}
