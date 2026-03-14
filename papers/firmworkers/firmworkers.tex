@@ -160,17 +160,19 @@ For the low-rank worker's choice of $\lambda_{L,t}$, the amount $\alpha R_t \lam
 Other than the depreciation $\delta A_t$, the assets at any given time incur two costs
 
 \begin{enumerate}
-\item the operational costs with the distribution of $R_t = \pi A_t$ to workers as well as the collection costs for workers' contribution $\psi_t $ -- represented as a (power) cost-function  $K(\alpha)$ 
+\item the operational costs with the distribution of $R_t = \pi A_t$ to workers as well as the collection costs for workers' contribution $\psi_t $ -- represented as a (power) cost-function  $K(\Delta \alpha)$ 
 \item the maintenance cost for assets $(1-\pi)A_t$ -- represented as a cost-function $C(A_t)$
 \end{enumerate}
 
 The firm thus chooses $\alpha$ in order to maximise $A_{t+1}$ for a given $A_t$ at every cycle. The dynamics is summarised as follows
 
-\begin{align*}
-A_{t+1}=(1-\pi-\delta) A_t + \pi A_t (W \lambda_{L,t} \alpha + (1-\alpha)\lambda_{H,t}) - K(\alpha) - C(A_t)
-\end{align*}
+\begin{equation}
+\label{eq:firms_asset_optimisation}
+A_{t+1}=(1-\pi-\delta) A_t + \pi A_t (W \lambda_{L,t} \alpha + (1-\alpha)\lambda_{H,t}) - K(\Delta \alpha) - C(A_t)
+\end{equation}
 
 For a fixed $\lambda_{L,t}$ and $\lambda_{H,t}$, a low $W$ causes the firm to benefit from lowering $\alpha$ since that implies a high collection $(1-\alpha)$ despite lower operational costs (less distribution). In other words, the firm benefits from lower pay so long as $\lambda_{H,t}$ is high and $(1-\alpha)\lambda_{H,t}$ is significant due to low $W$. This changes only when $W$ and $\lambda_L$ result in a higher contribution. The next section explores how $\alpha$ specifically relates with the selection of $\lambda_{L,t}$ and $\lambda_{H,t}$.
+
 
 
 \subsubsection{Choice for Workers}
@@ -265,41 +267,19 @@ Since we have $\lambda_L^* \in (0,1)$ and $ \lambda_H^* \in (0,1)$, we bound the
 \]
 
 
-\subsection{Firm's Choice discussion}
-The firm treats the weighted upskilling share from workers as its key input for capital accumulation. It chooses policy parameter \(\alpha \in [0,1]\) to maximise the \emph{effective upskilling fraction}
+\subsection{Equlibria and Comparative Statics}
+\noindent 
+
+The firm controls the total wage bill $R_t = \pi A_t$ (portion of current assets paid as wages) and chooses $\alpha \in [0,1]$ such that aggregate wages $\alpha R_t$ are provided to lower-ranked workers (mass $W$) and wages $(1-\alpha) R_t$ are provided to the higher-ranked worker (mass 1). The per-capita wages are then $\alpha R_t / W$ for each lower-rank worker and $(1-\alpha) R_t$ for the higher-rank worker. The firm arrives at $\alpha$ by maximising the following \emph{effective upskilling fraction} 
 \[
-\phi(\alpha) = \frac{W \lambda_L^*(\alpha) \alpha + \lambda_H^*(\alpha) (1-\alpha)}{W \alpha + (1-\alpha)},
+\phi(\alpha) = \alpha \lambda_L^*(\alpha) + (1-\alpha) \lambda_H^*(\alpha),
 \]
-where \(\lambda_L^*(\alpha)\) and \(\lambda_H^*(\alpha)\) are the workers' equilibrium upskilling shares (best responses to \(\alpha\)), and \(W \gg 1\) is the population mass of lower-ranked workers. This fraction directly scales the productive part of the wage bill \(\pi A_t\) in the asset law of motion.
+where $\lambda_L^*(\alpha)$ and $\lambda_H^*(\alpha)$ are the workers' equilibrium upskilling shares given policy $\alpha$. This creates a two-level Nash equilibrium where in workers optimize $\lambda_L$, $\lambda_H$ given $\alpha$ and firm optimizes $\alpha$ given $\lambda_L^*$, $\lambda_H^*$. The effective fraction $\phi(\alpha)$ is the share of wages that becomes productive investment. The firm typically sets high $\alpha^*$ (large wage share to lower ranks) when $W$ is large, because the mass amplifies even modest upskilling from the bottom into large aggregate growth.
 
-Below are the five key aspects of how the firm behaves around \(\phi(\alpha)\).
 
-\subsection{1. What the fraction actually represents}
+Since all the terms except \(\phi(\alpha)\) in Equation \ref{eq:firms_asset_optimisation} are independent of \(\alpha\), maximising \(\phi(\alpha)\) (or its steady-state value) directly maximises \(A_{t+1}\) and long-run growth\footnote{One could view this growth as the endogenous counterpart to the fixed savings rate in a Solow model}. The fraction is effectively the share of total wage spending that ends up as genuine productive investment (upskilling) for the firm (rather than being diverted into the social lottery channel). As commercialisation rises, more emphasis is expected to be given to the upskilling channel by both firms and workers. 
 
-\(\phi(\alpha)\) is the \emph{share of total wage spending that ends up as genuine productive investment} (upskilling) rather than being diverted into the lottery channel. 
-
-- Numerator: total weighted upskilling effort across classes, with \(\alpha\) as the firm's relative favouritism weight toward the low ranks.
-- Denominator: total policy weight the firm applies, scaled by population mass \(W\).
-
-In short, \(\phi(\alpha)\) measures how efficiently the firm's incentive policy converts wages into growth-generating effort.
-
-\subsection{2. Why the firm maximises \(\phi(\alpha)\)}
-
-Next-period assets are
-\[
-A_{t+1} = (1-\pi-\delta)A_t + \pi A_t \cdot \phi(\alpha) - C(A_t) - K(\Delta\alpha).
-\]
-All terms except \(\phi(\alpha)\) are independent of \(\alpha\). Therefore maximising \(\phi(\alpha)\) (or its steady-state value) directly maximises \(A_{t+1}\) and long-run growth. The firm treats \(\phi\) as its \emph{effective investment rate} — the endogenous counterpart to the fixed savings rate \(s\) in the Solow model.
-
-\subsection{3. How \(\alpha\) affects \(\phi(\alpha)\): intuition}
-
-Raising \(\alpha\) (more favouritism toward low ranks) has two opposing effects:
-- Positive: increases the weight on \(\lambda_L\) in the numerator (good if low-rank workers respond strongly).
-- Negative: increases the denominator by \(W\alpha\) (bad because \(W\) is large, diluting the fraction).
-
-Lowering \(\alpha\) does the opposite: it favours the high-rank worker (smaller mass, but potentially higher per-person productivity). Because \(W \gg 1\), the denominator grows quickly with \(\alpha\), creating a sharp trade-off. The firm therefore balances capturing the mass effect of the bottom against avoiding dilution.
-
-\subsection{4. How the firm finds the optimal \(\alpha^*\)}
+\subsubsection{Equilibrium value of $\alpha$}
 
 The firm solves
 \[
@@ -307,31 +287,12 @@ The firm solves
 \]
 anticipating the workers' best-response functions \(\lambda_L^*(\alpha)\) and \(\lambda_H^*(\alpha)\).
 
-Let \(N(\alpha) = W\lambda_L^*(\alpha)\alpha + \lambda_H^*(\alpha)(1-\alpha)\) and \(D(\alpha) = W\alpha + (1-\alpha)\). The interior optimum satisfies the first-order condition
-\[
-N'(\alpha) D(\alpha) - N(\alpha) D'(\alpha) = 0,
-\]
-where
-\[
-N'(\alpha) = W\bigl[\lambda_L^* + \alpha\lambda_L^{*\prime}\bigr] + (1-\alpha)\lambda_H^{*\prime} - \lambda_H^*,
-\]
-\[
-D'(\alpha) = W-1.
-\]
 
-This full chain-rule equation is solved numerically by iterating between workers' FOCs and the firm's objective until convergence to a fixed point \((\alpha^*,\lambda_L^*,\lambda_H^*)\).
+\subsubsection{Comparative Statics}
 
-\subsection{5. Typical outcomes}
+\subsubsection*{Firm choice}
 
-- **High \(\alpha^*\) (close to 1)** is the most common optimum when \(W\) is large. The firm favours lower-ranked workers to leverage the mass effect: even modest gains in \(\lambda_L\) produce large aggregate impact.
-- **Low \(\alpha^*\) (close to 0)** occurs only if high-rank upskilling is dramatically more productive per worker (rare in realistic calibrations).
-- **Interior \(\alpha^*\)** is unusual unless marginal responsiveness of both classes is perfectly balanced.
-
-In steady state the growth rate becomes \(g^* = \pi \phi(\alpha^*) - \delta - C(A^*)/A^*\). Thus the firm usually sets **high \(\alpha\)** to achieve higher growth precisely because the poor are numerous (\(W \gg 1\)).
-
-This structure endogenises the investment rate that the classic Solow model takes as given, while highlighting how policy, mass asymmetry, and worker responsiveness jointly determine long-run growth.
-
-\subsection{Comparative Statics}
+\subsubsection*{Worker choices}
 
 \begin{itemize}
     \item The common factor $(b \eta - \eta - \kappa + 1)$ captures the net marginal benefit of moving one unit of income from upskilling to the social lottery.
