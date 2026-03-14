@@ -223,7 +223,7 @@ Similarly, the lottery return to the higher-ranked worker is
 \kappa (1 - \lambda_H) m_H.
 \end{align*}
 
-\subsubsection{Low-rank player's first-order condition}
+\subsubsection*{Low-rank player's choice}
 
 The first order conditions for the linear utility imply that
 \begin{align*}  
@@ -240,31 +240,96 @@ The low-rank worker thus selects  the following $\lambda_L^*$
 \lambda_L^* = 1- \frac{ m_L (   \eta - b \eta   -\kappa W +  1 ) }{2 p_L}
 \]
 
-(since $p_L > 0$ and the numerator is typically positive when upskilling costs dominate).
 
-\subsubsection{High-rank player's first-order condition}
-PENDING VERIFICATION:
+\subsubsection*{High-rank player's choice}
+
 For the high-rank worker, the first-order conditions imply that 
 \begin{align*}  
-\frac{\partial y_H}{\partial \lambda_H} \approx (- \eta + b \eta + \kappa - 1) m_H + 2 p_H \lambda_H = 0
+\frac{\partial y_H}{\partial \lambda_H} \approx ( \eta - b \eta -\kappa + 1) m_H - 2 p_H (1-\lambda_H) = 0
 \end{align*}
 
 Therefore, the higher-rank worker selects a symmetric $\lambda_H^*$ as follows
 \[
-\lambda_H^* = \frac{ m_H ( \eta - b \eta - \kappa + 1) }{2 p_H}
+\lambda_H^* = 1- \frac{ m_H ( \eta - b \eta - \kappa + 1) }{2 p_H}
 \]
 
 Since we have $\lambda_L^* \in (0,1)$ and $ \lambda_H^* \in (0,1)$, we bound the solutions for $\lambda_L^*$ and $\lambda_H^*$ as follows
 
 
 \[
-\lambda_L^* = \max\bigl(0, \min\bigl(1, \dfrac{m_L (b \eta - \eta - \kappa + 1)}{2 p_L}\bigr)\bigr)
+\lambda_L^* = \max\bigl(0, \min\bigl(1, 1- \frac{ m_L (   \eta - b \eta   -\kappa W +  1 ) }{2 p_L} \bigr)\bigr)
 \]
 
 \[
-\lambda_H^* = \max\bigl(0, \min\bigl(1, \dfrac{m_H (b \eta - \eta - \kappa + 1)}{2 p_H}\bigr)\bigr)
+\lambda_H^* = \max\bigl(0, \min\bigl(1, 1- \frac{ m_H ( \eta - b \eta - \kappa + 1) }{2 p_H} \bigr)\bigr)
 \]
 
+
+\subsection{Firm's Choice discussion}
+The firm treats the weighted upskilling share from workers as its key input for capital accumulation. It chooses policy parameter \(\alpha \in [0,1]\) to maximise the \emph{effective upskilling fraction}
+\[
+\phi(\alpha) = \frac{W \lambda_L^*(\alpha) \alpha + \lambda_H^*(\alpha) (1-\alpha)}{W \alpha + (1-\alpha)},
+\]
+where \(\lambda_L^*(\alpha)\) and \(\lambda_H^*(\alpha)\) are the workers' equilibrium upskilling shares (best responses to \(\alpha\)), and \(W \gg 1\) is the population mass of lower-ranked workers. This fraction directly scales the productive part of the wage bill \(\pi A_t\) in the asset law of motion.
+
+Below are the five key aspects of how the firm behaves around \(\phi(\alpha)\).
+
+\subsection{1. What the fraction actually represents}
+
+\(\phi(\alpha)\) is the \emph{share of total wage spending that ends up as genuine productive investment} (upskilling) rather than being diverted into the lottery channel. 
+
+- Numerator: total weighted upskilling effort across classes, with \(\alpha\) as the firm's relative favouritism weight toward the low ranks.
+- Denominator: total policy weight the firm applies, scaled by population mass \(W\).
+
+In short, \(\phi(\alpha)\) measures how efficiently the firm's incentive policy converts wages into growth-generating effort.
+
+\subsection{2. Why the firm maximises \(\phi(\alpha)\)}
+
+Next-period assets are
+\[
+A_{t+1} = (1-\pi-\delta)A_t + \pi A_t \cdot \phi(\alpha) - C(A_t) - K(\Delta\alpha).
+\]
+All terms except \(\phi(\alpha)\) are independent of \(\alpha\). Therefore maximising \(\phi(\alpha)\) (or its steady-state value) directly maximises \(A_{t+1}\) and long-run growth. The firm treats \(\phi\) as its \emph{effective investment rate} — the endogenous counterpart to the fixed savings rate \(s\) in the Solow model.
+
+\subsection{3. How \(\alpha\) affects \(\phi(\alpha)\): intuition}
+
+Raising \(\alpha\) (more favouritism toward low ranks) has two opposing effects:
+- Positive: increases the weight on \(\lambda_L\) in the numerator (good if low-rank workers respond strongly).
+- Negative: increases the denominator by \(W\alpha\) (bad because \(W\) is large, diluting the fraction).
+
+Lowering \(\alpha\) does the opposite: it favours the high-rank worker (smaller mass, but potentially higher per-person productivity). Because \(W \gg 1\), the denominator grows quickly with \(\alpha\), creating a sharp trade-off. The firm therefore balances capturing the mass effect of the bottom against avoiding dilution.
+
+\subsection{4. How the firm finds the optimal \(\alpha^*\)}
+
+The firm solves
+\[
+\max_{\alpha \in [0,1]} \phi(\alpha),
+\]
+anticipating the workers' best-response functions \(\lambda_L^*(\alpha)\) and \(\lambda_H^*(\alpha)\).
+
+Let \(N(\alpha) = W\lambda_L^*(\alpha)\alpha + \lambda_H^*(\alpha)(1-\alpha)\) and \(D(\alpha) = W\alpha + (1-\alpha)\). The interior optimum satisfies the first-order condition
+\[
+N'(\alpha) D(\alpha) - N(\alpha) D'(\alpha) = 0,
+\]
+where
+\[
+N'(\alpha) = W\bigl[\lambda_L^* + \alpha\lambda_L^{*\prime}\bigr] + (1-\alpha)\lambda_H^{*\prime} - \lambda_H^*,
+\]
+\[
+D'(\alpha) = W-1.
+\]
+
+This full chain-rule equation is solved numerically by iterating between workers' FOCs and the firm's objective until convergence to a fixed point \((\alpha^*,\lambda_L^*,\lambda_H^*)\).
+
+\subsection{5. Typical outcomes}
+
+- **High \(\alpha^*\) (close to 1)** is the most common optimum when \(W\) is large. The firm favours lower-ranked workers to leverage the mass effect: even modest gains in \(\lambda_L\) produce large aggregate impact.
+- **Low \(\alpha^*\) (close to 0)** occurs only if high-rank upskilling is dramatically more productive per worker (rare in realistic calibrations).
+- **Interior \(\alpha^*\)** is unusual unless marginal responsiveness of both classes is perfectly balanced.
+
+In steady state the growth rate becomes \(g^* = \pi \phi(\alpha^*) - \delta - C(A^*)/A^*\). Thus the firm usually sets **high \(\alpha\)** to achieve higher growth precisely because the poor are numerous (\(W \gg 1\)).
+
+This structure endogenises the investment rate that the classic Solow model takes as given, while highlighting how policy, mass asymmetry, and worker responsiveness jointly determine long-run growth.
 
 \subsection{Comparative Statics}
 
