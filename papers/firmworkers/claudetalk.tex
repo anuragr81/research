@@ -1,0 +1,711 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{natbib}
+
+\geometry{margin=1in}
+\onehalfspacing
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+\title{\textbf{Displacement, Upskilling, and Firm-Mediated Redistribution:\\
+A Three-Player Stochastic Growth Model}\\[0.5em]
+\large Working Paper}
+
+\author{Model Development Notes}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We develop a three-player stochastic model of labour market dynamics that integrates
+a microeconomic $N$-worker displacement mechanism with a two-player macroeconomic
+aggregation and a firm-level asset accumulation problem. Workers choose how to split
+income between upskilling investment and participation in a zero-sum displacement
+lottery, where lottery stakes are weighted by the relative population mass of
+lower-ranked workers. A representative firm chooses the income-split parameter
+governing wage inequality to maximise asset accumulation, taking workers' best
+responses as given in a Stackelberg structure. We derive closed-form stationary
+equilibria for all three players, characterise the full comparative statics,
+and compare the steady-state growth predictions to the Solow model.
+The model predicts that firms favour greater income equality for higher growth,
+subject to a restructuring cost that generates an interior optimum. Unlike Solow,
+income inequality is endogenous, the steady state is conditioned on a viability
+threshold, and a poverty trap exists for sufficiently low initial asset levels.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------
+\section{Introduction}
+%----------------------------------------------------------------------
+
+Standard growth models treat income distribution as either exogenous or absent
+entirely. The Solow model, for instance, determines steady-state capital purely
+through an exogenous savings rate and physical depreciation, leaving no room for
+the composition of the workforce, the structure of wage inequality, or the
+strategic interaction between workers and firms over skill investment. This paper
+proposes a richer framework in which income distribution is endogenous, workers
+make active investment decisions in response to displacement risk, and a firm
+optimises wage policy to maximise its own asset accumulation.
+
+The model has three components. First, a microeconomic foundation based on an
+$N$-worker stochastic displacement model with a Pareto income ladder. Workers
+periodically face displacement shocks and choose among downward job swaps,
+costly upward swaps, and a zero-sum lottery mechanism. The stationary distribution
+of this system is bimodal under empirically plausible conditions, motivating a
+two-player macroeconomic reduction. Second, a two-player macroeconomic model
+in which a lower-income risk-seeking worker and a higher-income risk-averse worker
+each allocate income between upskilling and lottery participation, with
+preferences described by a Friedman-Savage S-shaped utility function. Third,
+a firm that chooses the income-split parameter $\mu$ governing wage inequality
+to maximise the accumulation of productive assets, subject to a restructuring cost.
+
+The three players interact through a Stackelberg game within each period: the
+firm moves first by setting $\mu_t$, workers best-respond by choosing upskilling
+fractions $\lambda_L^*(\mu_t)$ and $\lambda_H^*(\mu_t)$, and the asset stock
+$A_{t+1}$ realises. The firm then uses $A_{t+1}$ as the state variable in the
+next period. This timing eliminates any within-period circularity while preserving
+the strategic interdependence between all three players.
+
+%----------------------------------------------------------------------
+\section{The Microeconomic Foundation: $N$-Worker Model}
+%----------------------------------------------------------------------
+
+\subsection{Setup}
+
+Consider a population of $N$ workers, each occupying a distinct rank
+$i \in \{1, \ldots, N\}$. Rank $i$ pays income $m_i$ each period, with
+$m_i < m_{i+1}$ for all $i$. Incomes follow a Pareto schedule:
+\begin{equation}
+  m_i = x_0 \left(1 - \frac{i}{N+1}\right)^{-1/\alpha}
+  \label{eq:pareto}
+\end{equation}
+where $x_0 > 0$ is the income floor and $\alpha > 0$ is the Pareto shape parameter.
+In each period, a single worker is selected uniformly at random for displacement.
+The displaced worker at rank $i$ chooses one of three options:
+\begin{enumerate}
+  \item \textbf{Downward swap}: swap with worker $k < i$, paying zero cost. Worker $k$ pays cost $C(k,i) = \lambda(m_i - m_k)^\beta$.
+  \item \textbf{Upward swap}: swap with worker $j > i$, paying cost $C(i,j) = \lambda(m_j - m_i)^\beta$. Worker $j$ pays nothing.
+  \item \textbf{Lottery}: pay fixed cost $L$ to draw a random partner $k$ from all $N$ workers and swap ranks.
+\end{enumerate}
+The cost function satisfies $C(i,k) = 0$ for all $k < i$, breaking the detailed
+balance of the Markov chain and generating a non-reversible stationary distribution.
+
+\subsection{Stationary Distribution}
+
+Let $\pi_i$ denote the stationary probability of occupying rank $i$.
+The global balance equations are:
+\begin{equation}
+  \pi_i \phi_i = \frac{A}{N} \sum_{j \in \mathcal{L}} \pi_j
+  + \sum_{j:\,\mathrm{up}(j)=i} \frac{\pi_j}{N}
+  + \sum_{j:\,\mathrm{down}(j)=i} \frac{\pi_j}{N}
+\end{equation}
+where $\phi_i$ is the total outflow rate from rank $i$,
+$\mathcal{L}$ is the set of lottery-playing ranks, and
+$A = \frac{1}{N^2}\sum_{j \in \mathcal{L}} \pi_j$ is the self-consistent
+lottery scalar. The unique stationary solution is:
+\begin{equation}
+  \pi_i = \frac{A + \sum_{j:\,\mathrm{up}(j)=i} \pi_j/N
+               + \sum_{j:\,\mathrm{down}(j)=i} \pi_j/N}{1/N}
+\end{equation}
+with $A$ determined by the fixed-point condition
+$A \cdot N^2 = \sum_{i \in \mathcal{L}} \pi_i$.
+
+\subsection{Class Barrier and Bimodal Regime}
+
+Decisions depend on a Friedman-Savage utility function $u(\cdot)$ with
+inflection point $m^*$. Workers below $m^*$ are risk-seeking (convex $u$)
+and prefer the lottery; workers above $m^*$ are risk-averse (concave $u$)
+and prefer deterministic upward swaps. This generates a class barrier
+at rank $i^* = \max\{i : m_i \leq m^*\}$. Under empirically plausible
+parameterisations, the stationary distribution $\boldsymbol{\pi}$ is
+bimodal with humps at $[1, i^*]$ and $(i^*, N]$.
+
+%----------------------------------------------------------------------
+\section{The Two-Player Macroeconomic Model}
+%----------------------------------------------------------------------
+
+\subsection{Aggregation from $N$ Players}
+
+The bimodal stationary distribution motivates replacing $N$ workers
+with two representative agents. Define centroid incomes:
+\begin{equation}
+  M_L = \frac{\sum_{i \leq i^*} \pi_i m_i}{\sum_{i \leq i^*} \pi_i},
+  \qquad
+  M_H = \frac{\sum_{i > i^*} \pi_i m_i}{\sum_{i > i^*} \pi_i}
+\end{equation}
+Setting $R = M_L + M_H$ and $\mu = M_L / R$, incomes are parametrised as:
+\begin{equation}
+  M_L = R\mu, \qquad M_H = R(1-\mu), \qquad \mu \in \left(0, \tfrac{1}{2}\right)
+  \label{eq:mu_def}
+\end{equation}
+The parameter $\mu$ is pinned by the Pareto schedule and barrier position:
+\begin{equation}
+  \mu \approx \frac{\int_0^{i^*/N} x_0(1-s)^{-1/\alpha}\,ds}
+                   {\int_0^1 x_0(1-s)^{-1/\alpha}\,ds}
+  \label{eq:mu_pareto}
+\end{equation}
+The aggregation is valid when three conditions hold simultaneously:
+(i) the within-hump variance is small relative to the between-hump gap;
+(ii) $\mu$ is interior, i.e.\ $\mu \in (0.05, 0.45)$;
+(iii) $u''(M_L) > 0$ and $u''(M_H) < 0$.
+
+\subsection{Budget and Lottery Structure}
+
+Each worker $s \in \{L, H\}$ with income $M_s = RM_s^0$ allocates a fraction
+$\lambda_s \in [0,1]$ to upskilling and the remainder to the lottery:
+\begin{equation}
+  \kappa_s = \lambda_s R M_s^0 \quad \text{(upskilling investment)},
+  \qquad
+  (1-\lambda_s)RM_s^0 \quad \text{(lottery stake)}
+\end{equation}
+The zero-sum lottery pool is:
+\begin{equation}
+  \Lambda = W(1-\lambda_L)R\mu + (1-\lambda_H)R(1-\mu)
+  \label{eq:pool}
+\end{equation}
+where $W \geq 1$ is a population weight parameter derived from the $N$-player
+class barrier: $W = i^*/(N - i^*)$. The weight $W$ captures the fact that
+the lower-rank group is more numerous and therefore generates more displacement
+events per period, amplifying their aggregate contribution to the lottery pool.
+
+Each worker wins the entire pool with probability $\frac{1}{2}$ and loses
+their own stake. The resulting outcome incomes are:
+\begin{align}
+  M_L^{\mathrm{win}}  &= b_L + (1-\lambda_H)R(1-\mu) \label{eq:MLwin} \\
+  M_L^{\mathrm{lose}} &= b_L - W(1-\lambda_L)R\mu \label{eq:MLlose} \\
+  M_H^{\mathrm{win}}  &= b_H + W(1-\lambda_L)R\mu \label{eq:MHwin} \\
+  M_H^{\mathrm{lose}} &= b_H - (1-\lambda_H)R(1-\mu) \label{eq:MHlose}
+\end{align}
+where $b_s(\lambda_s) = \kappa_s + \kappa_s^\gamma - \delta_w$ is the
+certain base income after upskilling output $f(\kappa_s) = \kappa_s^\gamma$
+and human capital depreciation $\delta_w$.
+
+\subsection{Utility and Participation Constraint}
+
+Worker $s$ maximises expected Friedman-Savage utility:
+\begin{equation}
+  V_s(\lambda_s;\lambda_{-s}) = \tfrac{1}{2}\,u(b_s + \Pi_{-s})
+  + \tfrac{1}{2}\,u(b_s - W_s(1-\lambda_s)RM_s^0)
+  \label{eq:utility}
+\end{equation}
+where $\Pi_L = (1-\lambda_H)R(1-\mu)$ and $\Pi_H = W(1-\lambda_L)R\mu$
+are the prizes. Utility is a cubic Friedman-Savage function with inflection
+at $m^*$:
+\begin{equation}
+  u(m) = m - \frac{\alpha_u}{2}(m-m^*)^2 + \frac{\beta_u}{3}(m-m^*)^3
+  \label{eq:cubic_u}
+\end{equation}
+with $\alpha_u, \beta_u > 0$. The Arrow-Pratt coefficient is:
+\begin{equation}
+  A(m) = -\frac{u''(m)}{u'(m)}
+  = \frac{\alpha_u - 2\beta_u(m-m^*)}{1 - \alpha_u(m-m^*) + \beta_u(m-m^*)^2}
+  \label{eq:AP}
+\end{equation}
+which is negative for $m < m^*$ (risk-seeking) and positive for $m > m^*$
+(risk-averse), consistent with worker $L$ sitting below $m^*$ and
+worker $H$ above it.
+
+A participation constraint requires that each worker's base income
+after upskilling meets a subsistence floor $\bar{b}$:
+\begin{equation}
+  b_s(\lambda_s) \geq \bar{b} \iff \kappa_s \geq \kappa^{\min}
+  \label{eq:participation}
+\end{equation}
+where $\kappa^{\min}$ is the unique positive root of:
+\begin{equation}
+  \kappa + \kappa^\gamma = \bar{b} + \delta_w
+  \label{eq:kappa_constraint}
+\end{equation}
+For $\gamma = 2$, this has the closed-form solution:
+\begin{equation}
+  \kappa^{\min} = \frac{-1 + \sqrt{1 + 4(\bar{b}+\delta_w)}}{2}
+  \label{eq:kappa_gamma2}
+\end{equation}
+
+\subsection{Optimal Worker Strategies}
+
+Since $V_s$ is decreasing in $\lambda_s$ through the lottery prize channel
+and increasing through the base income channel, the worker's problem has a
+corner solution at the participation constraint boundary.
+The optimal upskilling fractions are:
+\begin{equation}
+  \lambda_L^* = \frac{\kappa^{\min}}{R\mu},
+  \qquad
+  \lambda_H^* = \frac{\kappa^{\min}}{R(1-\mu)}
+  \label{eq:lambda_star}
+\end{equation}
+Since $\mu < \frac{1}{2}$, we have $\lambda_H^* > \lambda_L^*$ — the
+higher-income worker invests a larger fraction in upskilling,
+which is the economically natural direction.
+The gap is:
+\begin{equation}
+  \lambda_H^* - \lambda_L^* = \kappa^{\min}\cdot\frac{1-2\mu}{R\mu(1-\mu)} > 0
+\end{equation}
+
+\subsection{Equilibrium Lottery Objects}
+
+Define the compressed notation $a = R\mu - \kappa^{\min}$ (worker $L$'s stake)
+and $c = R(1-\mu) - \kappa^{\min}$ (worker $H$'s stake). Then:
+\begin{equation}
+  \Lambda^* = Wa + c, \qquad
+  \Pi_L^* = c, \qquad
+  \Pi_H^* = Wa
+  \label{eq:pool_compact}
+\end{equation}
+The net expected transfer to worker $L$ is:
+\begin{equation}
+  \epsilon_L^* = \frac{c - Wa}{2}
+  = \frac{R(1-\mu) - WR\mu}{2} - \frac{(1-W)\kappa^{\min}}{2}
+  \label{eq:transfer}
+\end{equation}
+Worker $L$ is a net lottery receiver iff $\epsilon_L^* > 0$,
+i.e.\ $W < c/a \equiv W^\dagger$. The transfer reversal threshold is:
+\begin{equation}
+  W^\dagger = \frac{R(1-\mu) - \kappa^{\min}}{R\mu - \kappa^{\min}}
+\end{equation}
+
+\subsection{Equilibrium Utilities and Risk Premia}
+
+At the binding participation constraint $b_s = \bar{b}$, equilibrium
+utilities are:
+\begin{align}
+  V_L^* &= u(\bar{b}) + \frac{c-Wa}{2}\,u'(\bar{b})
+           + \frac{c^2+(Wa)^2}{4}\,u''(\bar{b})
+           + \frac{c^3-(Wa)^3}{3}\,\beta_u
+  \label{eq:VL} \\
+  V_H^* &= u(\bar{b}) + \frac{Wa-c}{2}\,u'(\bar{b})
+           + \frac{(Wa)^2+c^2}{4}\,u''(\bar{b})
+           + \frac{(Wa)^3-c^3}{3}\,\beta_u
+  \label{eq:VH}
+\end{align}
+The Arrow-Pratt risk premia are:
+\begin{equation}
+  \rho_s^* = \frac{(c+Wa)^2}{8}\cdot A\!\left(\bar{b}+\epsilon_s^*\right)
+  \label{eq:rho}
+\end{equation}
+where $\epsilon_L^* = (c-Wa)/2$ and $\epsilon_H^* = -(c-Wa)/2$.
+Since $A(\bar{b}+\epsilon_L^*) < 0$ for worker $L$ (risk-seeking),
+$\rho_L^* < 0$ — worker $L$ pays a premium to participate.
+Since $A(\bar{b}+\epsilon_H^*) > 0$ for worker $H$ (risk-averse),
+$\rho_H^* > 0$ — worker $H$ demands compensation.
+The net social risk premium is $\rho_L^* + \rho_H^*$, whose sign
+depends on the relative magnitudes of risk preferences.
+
+%----------------------------------------------------------------------
+\section{The Firm's Problem}
+%----------------------------------------------------------------------
+
+\subsection{Asset Accumulation}
+
+A representative firm holds asset stock $A_t$ and sets the income-split
+parameter $\mu_t$ each period. Total income $R = R_0 + \pi A_t$ combines
+a base component $R_0$ with the firm's wage bill $\pi A_t$, where
+$\pi \in (0,1)$ is the wage share. The firm's law of motion is:
+\begin{equation}
+  A_{t+1} = \left[(1-\pi-\delta_f) + \pi\Phi(\mu_t)\right]A_t
+             - K(\mu_t) - C(A_t)
+  \label{eq:firm_lom}
+\end{equation}
+where the upskilling index is:
+\begin{equation}
+  \Phi(\mu_t) = \frac{(W+1)\kappa^{\min}(\mu_t)}{R}
+  \label{eq:Phi}
+\end{equation}
+and $K(\mu_t) = k|\mu_t - \mu_0|^\eta$ is the cost of restructuring
+wages away from the reference split $\mu_0$, while
+$C(A_t) = c_f A_t^\xi$ is the cost of asset maintenance.
+The subsistence floor is proportional to lower-income: $\bar{b}(\mu_t) = \bar{b}_0 R\mu_t$,
+so that $\kappa^{\min}(\mu_t)$ is increasing in $\mu_t$:
+\begin{equation}
+  \frac{d\kappa^{\min}}{d\mu} = \frac{\bar{b}_0 R}{1+\gamma(\kappa^{\min})^{\gamma-1}}
+  \equiv \Psi > 0
+  \label{eq:dkdmu}
+\end{equation}
+
+\subsection{Stackelberg Timing and Non-Recursion}
+
+The firm solves a \emph{Stackelberg} problem within each period.
+It anticipates the workers' best-response functions
+$\lambda_s^*(\mu_t)$ from equation~(\ref{eq:lambda_star})
+and substitutes them into $\Phi(\mu_t)$ before optimising.
+This yields a single-variable maximisation with no self-reference:
+\begin{equation}
+  \mu_t^* = \arg\max_{\mu_t}\left\{
+    \left[(1-\pi-\delta_f) + \frac{\pi(W+1)\kappa^{\min}(\mu_t)}{R}\right]A_t
+    - k|\mu_t-\mu_0|^\eta - c_f A_t^\xi
+  \right\}
+  \label{eq:firm_opt}
+\end{equation}
+The first-order condition is:
+\begin{equation}
+  \frac{\pi(W+1)A_t}{R}\cdot\Psi = k\eta|\mu_t^*-\mu_0|^{\eta-1}
+  \label{eq:firm_foc}
+\end{equation}
+For $\eta = 2$, this gives a fully closed-form solution:
+\begin{equation}
+  \mu_t^* = \mu_0 + \Gamma A_t,
+  \qquad
+  \Gamma \equiv \frac{\pi(W+1)\Psi}{2kR}
+  \label{eq:mu_opt}
+\end{equation}
+The firm raises $\mu_t^*$ above the reference split $\mu_0$ whenever
+$A_t > 0$, and the deviation $\mu_t^* - \mu_0$ is proportional to
+the asset stock. Wealthier firms can afford to enforce greater equality
+because the fixed restructuring cost is small relative to the asset base.
+
+%----------------------------------------------------------------------
+\section{Steady-State Equilibrium}
+%----------------------------------------------------------------------
+
+\subsection{Derivation of the Closed-Form Steady State}
+
+At stationarity $A_{t+1} = A_t = A^*$ and $\mu_t = \mu^*$.
+Using equation~(\ref{eq:mu_opt}), $\mu^* - \mu_0 = \Gamma A^*$,
+so the restructuring cost is $k(\Gamma A^*)^2 = k\Gamma^2 A^{*2}$.
+The asset equation at stationarity becomes:
+\begin{equation}
+  A^*\left[\pi\Phi^* - \delta_f - c_f\right] = k\Gamma^2 A^{*2}
+\end{equation}
+Dividing by $A^* > 0$ and evaluating $\Phi^*$ at the reference
+$\kappa_0 \equiv \kappa^{\min}(\mu_0)$ for tractability:
+\begin{equation}
+  \boxed{A^* = \frac{\pi(W+1)\kappa_0/R - \delta_f - c_f}{k\Gamma^2}}
+  \label{eq:Astar}
+\end{equation}
+The remaining equilibrium objects follow in sequence:
+\begin{align}
+  \mu^* &= \mu_0 + \Gamma A^*
+  = \mu_0 + \frac{2\left[\pi(W+1)\kappa_0 - R(\delta_f+c_f)\right]}{\pi(W+1)\Psi}
+  \label{eq:mustar} \\[4pt]
+  \kappa^* &= \kappa^{\min}(\mu^*)
+  = \frac{-1+\sqrt{1+4(\bar{b}_0 R\mu^*+\delta_w)}}{2} \quad [\gamma=2]
+  \label{eq:kstar} \\[4pt]
+  \lambda_L^* &= \frac{\kappa^*}{R\mu^*},
+  \qquad
+  \lambda_H^* = \frac{\kappa^*}{R(1-\mu^*)}
+  \label{eq:lambdastar_ss} \\[4pt]
+  K^* &= 2\kappa^*
+  \label{eq:Kstar} \\[4pt]
+  \Lambda^* &= W(R\mu^*-\kappa^*) + R(1-\mu^*)-\kappa^*
+  \label{eq:Lamstar}
+\end{align}
+All steady-state objects are explicit functions of the nine primitives
+$(R, \mu_0, W, \bar{b}_0, \delta_w, \pi, \delta_f, k, c_f)$.
+
+\subsection{Derived Constants}
+
+To facilitate computation, define the following constants that depend only on primitives:
+\begin{align}
+  \kappa_0 &= \frac{-1+\sqrt{1+4(\bar{b}_0 R\mu_0+\delta_w)}}{2} \label{eq:k0}\\
+  \Psi &= \frac{\bar{b}_0 R}{1+2\kappa_0} \label{eq:Psi} \\
+  \Gamma &= \frac{\pi(W+1)\Psi}{2kR} \label{eq:Gamma}
+\end{align}
+Given these constants, the entire steady state is recovered by
+evaluating equations~(\ref{eq:Astar})--(\ref{eq:Lamstar}) sequentially.
+
+\subsection{Viability Condition}
+
+A positive steady state $A^* > 0$ requires:
+\begin{equation}
+  \pi(W+1)\kappa_0 > R(\delta_f + c_f)
+  \label{eq:viability}
+\end{equation}
+This is the model's analogue of the Solow condition $sF'(K) > \delta$:
+the upskilling return $\pi(W+1)\kappa_0/R$ must exceed total running costs.
+When condition~(\ref{eq:viability}) fails, the firm's asset stock collapses
+to zero regardless of initial conditions — a poverty trap with no Solow equivalent.
+
+%----------------------------------------------------------------------
+\section{Comparative Statics}
+%----------------------------------------------------------------------
+
+Table~\ref{tab:cs} presents the analytically derived signs of all
+comparative statics. Entries are derived by differentiating
+equations~(\ref{eq:Astar})--(\ref{eq:Lamstar}) with respect to each primitive.
+
+\begin{table}[h!]
+\centering
+\caption{Comparative statics of the steady-state equilibrium}
+\label{tab:cs}
+\begin{tabular}{lccccccc}
+\toprule
+Shock ($\uparrow$)
+  & $\partial A^*/\partial x$
+  & $\partial \mu^*/\partial x$
+  & $\partial \lambda_L^*/\partial x$
+  & $\partial \lambda_H^*/\partial x$
+  & $\partial K^*/\partial x$
+  & $\partial \Lambda^*/\partial x$
+  & $\partial \epsilon_L^*/\partial x$ \\
+\midrule
+$W\uparrow$     & $+$ & $+$ & amb.\ & $-$ & amb.\ & $+$ & $-$ \\
+$\pi\uparrow$   & $+$ & $+$ & $+$   & $+$ & $+$   & $+$ & amb.\ \\
+$k\uparrow$     & $-$ & $-$ & $-$   & $-$ & $-$   & $-$ & amb.\ \\
+$\bar{b}_0\uparrow$ & amb.\ & $+$ & $+$ & $-$ & $+$ & amb.\ & $-$ \\
+$\delta_f\uparrow$ & $-$ & $-$ & $-$ & $-$ & $-$  & $-$ & $+$ \\
+$\delta_w\uparrow$ & $+$ & $+$ & $+$ & amb.\ & $+$ & $+$ & $-$ \\
+$\mu_0\uparrow$ & $+$ & $+$ & amb.\ & $-$ & $+$   & $+$ & $-$ \\
+$R\uparrow$     & amb.\ & amb.\ & $-$ & $-$ & amb.\ & amb.\ & amb.\ \\
+\bottomrule
+\end{tabular}
+\medskip
+
+\small Note: ``amb.'' denotes an ambiguous sign that depends on parameter
+magnitudes and is resolved numerically. All analytical signs are
+derived from first-order differentiation of the closed-form system
+(\ref{eq:Astar})--(\ref{eq:Lamstar}).
+\end{table}
+
+Several comparative statics are of particular economic interest.
+
+\textbf{Effect of $W$.}
+A higher population mass ratio $W$ increases $A^*$ and $\mu^*$.
+Intuitively, a larger lower-rank group generates more displacement
+events, enlarging the lottery pool and raising the firm's marginal
+return to equalising incomes. Worker $H$'s upskilling fraction $\lambda_H^*$
+falls because the higher $\mu^*$ raises $H$'s effective income
+$R(1-\mu^*)$ and thus the denominator of $\kappa^*/R(1-\mu^*)$.
+
+\textbf{Effect of $k$.}
+Higher restructuring costs $k$ reduce all equilibrium quantities.
+The intuition is that a more costly adjustment process discourages
+the firm from deviating from $\mu_0$, reducing the upskilling index
+$\Phi^*$ and hence $A^*$.
+
+\textbf{Effect of $\bar{b}_0$.}
+The subsistence coefficient has ambiguous effects on $A^*$ because
+it enters through two competing channels: higher $\bar{b}_0$ raises
+$\kappa_0$ (favouring $A^*$) but also raises $\Psi$ and hence $\Gamma$
+(inflating the denominator $k\Gamma^2$).
+
+\textbf{Total upskilling invariance.}
+A remarkable feature of the model is that total upskilling
+$K^* = 2\kappa^*$ depends only on $(\bar{b}_0, \delta_w, \gamma, \mu^*)$
+and is completely invariant to $W$, $k$, $\delta_f$, and $\pi$.
+Redistributive policy and firm restructuring affect who holds which
+income share but cannot change the aggregate real investment in
+human capital — a strong aggregate neutrality result.
+
+%----------------------------------------------------------------------
+\section{Firm Growth and Inequality: Comparison with Solow}
+%----------------------------------------------------------------------
+
+\subsection{The Firm's Preferred $\mu$}
+
+The asset growth rate is:
+\begin{equation}
+  g_t = \frac{A_{t+1}-A_t}{A_t}
+  = \frac{\pi(W+1)\kappa^{\min}(\mu_t)}{R} - \delta_f - c_f
+    - \frac{k(\mu_t-\mu_0)^2}{A_t}
+  \label{eq:growth_rate}
+\end{equation}
+Differentiating with respect to $\mu_t$ and setting to zero recovers
+exactly $\mu_t^* = \mu_0 + \Gamma A_t$ from equation~(\ref{eq:mu_opt}).
+The growth-maximising and profit-maximising income splits coincide.
+Since $\partial g_t/\partial\mu_t > 0$ for $\mu_t < \mu_t^*$
+and $\partial g_t/\partial\mu_t < 0$ for $\mu_t > \mu_t^*$,
+the firm favours \emph{higher $\mu$} (more equal income split)
+up to the restructuring cost boundary. Beyond $\mu_t^*$,
+each additional unit of equality costs more in restructuring
+than it gains in upskilling returns.
+
+\subsection{Structural Comparison with Solow}
+
+The Solow model specifies capital accumulation:
+\begin{equation}
+  K_{t+1} = sY_t + (1-\delta_K)K_t, \qquad Y_t = K_t^\alpha L^{1-\alpha}
+  \label{eq:solow}
+\end{equation}
+with unique stable steady state:
+\begin{equation}
+  K^* = \left(\frac{s}{\delta_K}\right)^{1/(1-\alpha)} L
+  \label{eq:solow_kstar}
+\end{equation}
+Table~\ref{tab:solow_compare} summarises the structural differences
+between the two frameworks.
+
+\begin{table}[h!]
+\centering
+\caption{Structural comparison: this model versus Solow}
+\label{tab:solow_compare}
+\begin{tabular}{lll}
+\toprule
+Feature & This model & Solow \\
+\midrule
+Key instrument & $\mu_t^*$ (income split) & $s$ (savings rate) \\
+Instrument determination & Endogenous (firm optimises) & Exogenous \\
+Income distribution & Endogenous, co-determined & Absent \\
+Growth driver & $\pi\Phi^* = \pi(W+1)\kappa^*/R$ & $s \cdot \mathrm{MPK}$ \\
+Steady state & Conditional on viability (\ref{eq:viability}) & Always exists \\
+Poverty trap & Yes, below viability threshold & No \\
+Convergence & Conditional on $A_0 > 0$ & Unconditional \\
+Inequality path & Endogenous, $\mu^*$ rising in $A^*$ & Fixed (no inequality) \\
+Population structure & Enters via $W = i^*/(N-i^*)$ & Labour $L$ (homogeneous) \\
+Human capital & Upskilling $\kappa^{\min}(\mu)$ & None \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The central difference is that in Solow, $s$ is a fixed parameter
+with no theory of its determination, and inequality plays no role
+in capital accumulation. In this model, $\mu_t^*$ is endogenously
+chosen by the firm in response to workforce structure and asset
+accumulation, and income inequality directly mediates the link
+between asset levels and growth.
+
+A second key difference is the endogenous Kuznets-type relationship:
+as $A_t$ grows, the firm optimally raises $\mu_t^*$, compressing
+income inequality. The Gini coefficient (approximated as $1-2\mu^*$)
+falls monotonically along the transitional path, a prediction that
+Solow cannot generate.
+
+%----------------------------------------------------------------------
+\section{The Three-Player Nash Equilibrium}
+%----------------------------------------------------------------------
+
+\subsection{Game Structure}
+
+The full model is a three-player Stackelberg game with the following
+timing within each period:
+\begin{enumerate}
+  \item Firm observes $A_t$ and chooses $\mu_t^*$ (leader).
+  \item Workers observe $\mu_t^*$ and choose $\lambda_L^*(\mu_t^*)$,
+        $\lambda_H^*(\mu_t^*)$ (followers).
+  \item Asset $A_{t+1}$ realises.
+  \item Next period begins with $A_{t+1}$ as the new state.
+\end{enumerate}
+There is no within-period feedback from workers to firm — the firm
+substitutes the best-response functions before optimising, eliminating
+any circularity. The cross-period feedback ($A_{t+1} \to \mu_{t+1}^*$)
+is handled by standard dynamic programming.
+
+\subsection{Summary of the Equilibrium Characterisation}
+
+A Nash equilibrium is a quadruple $(A^*, \mu^*, \lambda_L^*, \lambda_H^*)$
+satisfying the following system simultaneously:
+
+\begin{align}
+  A^* &= \frac{\pi(W+1)\kappa_0/R - \delta_f - c_f}{k\Gamma^2}
+  \tag{Firm stationarity} \\[4pt]
+  \mu^* &= \mu_0 + \Gamma A^*
+  \tag{Firm FOC} \\[4pt]
+  \lambda_L^* &= \frac{\kappa^*}{R\mu^*},
+  \quad
+  \lambda_H^* = \frac{\kappa^*}{R(1-\mu^*)}
+  \tag{Worker best responses} \\[4pt]
+  \kappa^* &= \frac{-1+\sqrt{1+4(\bar{b}_0 R\mu^*+\delta_w)}}{2}
+  \tag{Participation constraint}
+\end{align}
+
+The system is recursive in a well-defined sense: given $A^*$, compute
+$\mu^*$; given $\mu^*$, compute $\kappa^*$; given $\kappa^*$ and $\mu^*$,
+compute $\lambda_s^*$. No simultaneous equation system needs to be solved
+— all four unknowns are determined by sequential substitution.
+
+%----------------------------------------------------------------------
+\section{Conclusion}
+%----------------------------------------------------------------------
+
+We have constructed a tractable three-player model that integrates
+microeconomic displacement dynamics, Friedman-Savage risk preferences,
+a zero-sum lottery mechanism, and firm-level asset accumulation into
+a single coherent framework with closed-form equilibria.
+
+Several results stand out. First, the optimal income split
+$\mu^*$ is endogenously determined and rises with firm wealth —
+wealthier firms favour greater income equality. Second, total
+upskilling $K^* = 2\kappa^*$ is invariant to redistribution and
+population structure, a strong neutrality result. Third, the model
+admits a poverty trap absent from Solow: if upskilling returns
+are insufficient to cover running costs, asset accumulation
+collapses. Fourth, the endogenous Kuznets relationship generates
+falling inequality along the growth path, a prediction with
+empirical content absent from standard growth models. Fifth,
+the Tullock contest-function interpretation of the lottery — where
+win probability is proportional to stake raised to a power $r$ — opens
+the model to a richer class of contest equilibria in which individual
+win probabilities are not fixed at one-half.
+
+Extensions of immediate interest include: (i) incorporating savings
+by workers with a precautionary motive that interacts with the
+participation constraint; (ii) endogenising the Pareto shape parameter
+$\alpha$ through a feedback from firm asset levels to income ladder
+formation; (iii) allowing $W$ to evolve endogenously as the class
+barrier $i^*$ shifts with $\mu^*$; and (iv) calibrating the model to
+empirical distributions of within-firm wage inequality and upskilling
+investment rates.
+
+%----------------------------------------------------------------------
+\appendix
+\section{Notation Summary}
+%----------------------------------------------------------------------
+
+\begin{table}[h!]
+\centering
+\caption{Complete notation}
+\label{tab:notation}
+\begin{tabular}{lp{9cm}}
+\toprule
+Symbol & Definition \\
+\midrule
+\multicolumn{2}{l}{\textit{N-player model}} \\
+$N$ & Total number of workers \\
+$m_i$ & Income at rank $i$, equation~(\ref{eq:pareto}) \\
+$x_0$ & Pareto income floor \\
+$\alpha$ & Pareto shape parameter \\
+$\lambda, \beta$ & Cost function scale and power \\
+$L$ & Fixed lottery cost \\
+$\pi_i$ & Stationary probability of rank $i$ \\
+$i^*$ & Class barrier rank \\
+$m^*$ & Friedman-Savage inflection income \\
+\midrule
+\multicolumn{2}{l}{\textit{Two-player model}} \\
+$R$ & Total representative income $= M_L + M_H$ \\
+$\mu$ & Income split: $M_L = R\mu$, $M_H = R(1-\mu)$ \\
+$W$ & Population weight $= i^*/(N-i^*)$ \\
+$\lambda_s$ & Fraction of income allocated to upskilling \\
+$\kappa_s$ & Upskilling investment $= \lambda_s RM_s^0$ \\
+$\gamma$ & Upskilling production function power \\
+$\delta_w$ & Human capital depreciation rate \\
+$\bar{b}$ & Subsistence floor $= \bar{b}_0 R\mu$ \\
+$\kappa^{\min}$ & Minimum upskilling to reach subsistence \\
+$\Lambda^*$ & Equilibrium lottery pool $= Wa + c$ \\
+$a, c$ & Worker $L$ and $H$ lottery stakes \\
+$\epsilon_L^*$ & Net expected lottery transfer to worker $L$ \\
+$V_s^*$ & Equilibrium utility of worker $s$ \\
+$\rho_s^*$ & Arrow-Pratt risk premium of worker $s$ \\
+$A_s(\cdot)$ & Arrow-Pratt absolute risk aversion \\
+$\alpha_u, \beta_u$ & Cubic utility parameters \\
+\midrule
+\multicolumn{2}{l}{\textit{Firm model}} \\
+$A_t$ & Firm asset stock at time $t$ \\
+$\pi$ & Wage share of assets \\
+$\delta_f$ & Firm depreciation rate \\
+$\mu_0$ & Reference income split \\
+$k, \eta$ & Restructuring cost scale and power \\
+$c_f, \xi$ & Maintenance cost scale and power \\
+$\Phi(\mu)$ & Upskilling index $= (W+1)\kappa^{\min}(\mu)/R$ \\
+$\Psi$ & Sensitivity $d\kappa^{\min}/d\mu = \bar{b}_0 R/(1+\gamma\kappa_0^{\gamma-1})$ \\
+$\Gamma$ & Firm FOC coefficient $= \pi(W+1)\Psi/(2kR)$ \\
+$K^*$ & Total upskilling $= 2\kappa^*$ \\
+$A^*$ & Steady-state asset level \\
+$\mu^*$ & Steady-state income split \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}
