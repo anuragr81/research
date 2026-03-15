@@ -44,7 +44,7 @@ Each representative agent in class $w$ chooses $\lambda_w \in [0,1]$, the **frac
 
 The upskilling cost for a representative agent is linear in the upskilling share:
 \[
-C_L(\lambda_L) = b \eta \lambda_L m_L, \qquad C_H(\lambda_H) = b \eta \lambda_H m_H,
+C_w(\lambda_w) = b \eta \lambda_w m_w,
 \]
 where $b > 1$ approximates the original power-law friction, and $\eta \in (0,1)$ is upskilling efficiency.
 
@@ -66,20 +66,20 @@ Net income per representative lower-ranked worker:
 y_L &= m_L + \eta \lambda_L m_L - C_L(\lambda_L) - (1 - \lambda_L) m_L \\
     &\quad + \kappa W (1 - \lambda_L) m_L + \rho_L(1 - \lambda_L),
 \end{align*}
-with $\rho_L(1 - \lambda_L) = p_L (1 - \lambda_L)^2$ ($p_L > 0$).
+with $\rho_L(1 - \lambda_L) = p_L (1 - \lambda_L)^2$ and $p_L > 0$ (positive premium = bonus for lottery participation).
 
 Net income for the higher-ranked worker:
 \begin{align*}
 y_H &= m_H + \eta \lambda_H m_H - C_H(\lambda_H) - (1 - \lambda_H) m_H \\
-    &\quad + \kappa (1 - \lambda_H) m_H + \rho_H(1 - \lambda_H),
+    &\quad + \kappa (1 - \lambda_H) m_H - p_H (1 - \lambda_H)^2,
 \end{align*}
-with $\rho_H(1 - \lambda_H) = p_H (1 - \lambda_H)^2$ ($p_H < 0$).
+with $p_H > 0$ (positive coefficient, but **subtracted** to create a penalty for lottery participation).
 
 With linear utility $u(y) = y$, each maximizes own net income (Nash, treating other's choice fixed).
 
 \subsection{Low-class first-order condition (per representative low worker)}
 \[
-\frac{\partial y_L}{\partial \lambda_L} = (\eta - b\eta - \kappa W + 1) m_L + 2 p_L (1 - \lambda_L) = 0
+\frac{\partial y_L}{\partial \lambda_L} = (\eta - b\eta - \kappa W + 1) m_L - 2 p_L (1 - \lambda_L) = 0
 \]
 Solving:
 \[
@@ -105,7 +105,7 @@ The firm controls the total wage bill $R_t = \pi A_t$ (portion of current assets
 
 Per-capita wages are then $\alpha R_t / W$ for each lower-rank worker and $(1-\alpha) R_t$ for the higher-rank worker.
 
-The firm maximizes the \emph{effective upskilling fraction} of the wage bill:
+The firm maximizes the effective upskilling fraction of the wage bill:
 \[
 \phi(\alpha) = \alpha \lambda_L^*(\alpha) + (1-\alpha) \lambda_H^*(\alpha),
 \]
@@ -124,66 +124,4 @@ The firm chooses $\alpha_t$ to maximize $A_{t+1}$ (or long-run asset value), ant
 
 The effective fraction $\phi(\alpha)$ is the share of wages that becomes productive investment. The firm typically sets high $\alpha^*$ (large wage share to lower ranks) when $W$ is large, because the mass amplifies even modest upskilling from the bottom into large aggregate growth.
 
-\subsection{Steady-State Equilibrium Analysis}
-
-A steady-state equilibrium is a fixed point \((\alpha^*, \lambda_L^*, \lambda_H^*, A^*)\) satisfying two conditions simultaneously:
-
-\begin{enumerate}
-\item Given \(\alpha^*\), the workers choose their best-response upskilling shares:
-\[
-\lambda_L^* = 1 - \frac{m_L (\kappa W - \eta + b\eta - 1)}{2 p_L}, \qquad
-\lambda_H^* = 1 - \frac{m_H (\kappa - \eta + b\eta - 1)}{2 p_H}
-\]
-(bounded to \([0,1]\)).
-\item Given \(\lambda_L^*\) and \(\lambda_H^*\), the firm chooses \(\alpha^*\) to maximise the effective upskilling fraction
-\[
-\phi(\alpha) = \alpha \lambda_L^*(\alpha) + (1-\alpha) \lambda_H^*(\alpha).
-\]
-The steady-state asset level \(A^*\) then satisfies
-\[
-A^* = \frac{\pi \phi(\alpha^*)}{\delta + c (A^*)^{\gamma-1}},
-\]
-where \(C(A) = c A^\gamma\) (\(\gamma > 1\)).
-
-The equilibrium is solved numerically by fixed-point iteration: guess \(\alpha_0\), compute \(\lambda_L^*\) and \(\lambda_H^*\), update \(\alpha\) to maximise \(\phi(\alpha)\), and repeat until convergence. Convergence is fast and stable.
-
-\subsubsection{Comparative Statics}
-
-The table below summarises directional effects of key parameters on the equilibrium values (holding others fixed).
-
-\begin{table}[ht]
-\centering
-\begin{tabular}{lccc}
-\toprule
-Parameter & \(\alpha^*\) (firm) & \(\lambda_L^*\) (low-rank) & \(\lambda_H^*\) (high-rank) \\
-\midrule
-\(\uparrow W\) (larger mass of poor) & \(\uparrow\) & \(\downarrow\) & \(\approx 1\) (corner) \\
-\(\uparrow \eta\) (better upskilling) & \(\uparrow\) or \(\downarrow\) (ambiguous) & \(\uparrow\) & \(\uparrow\) \\
-\(\uparrow p_L\) (stronger low-rank lottery premium) & \(\downarrow\) & \(\downarrow\) & little change \\
-\(\uparrow |p_H|\) (stronger high-rank aversion) & \(\uparrow\) & little change & \(\uparrow\) \\
-\(\uparrow \pi\) (higher wage share) & \(\uparrow\) & little direct effect & little direct effect \\
-\(\uparrow \delta\) (higher depreciation) & little direct effect & \(\uparrow\) (indirect) & \(\uparrow\) (indirect) \\
-\bottomrule
-\end{tabular}
-\caption{Directional comparative statics at equilibrium.}
-\end{table}
-
-\subsubsection{Equilibrium Implications}
-
-The model produces several robust implications:
-
-\begin{itemize}
-\item \textbf{Mass effect dominates}: Large \(W\) pushes the firm toward high \(\alpha^*\) (allocating a large wage share to lower ranks) to leverage the numerous workers. Even modest improvements in \(\lambda_L\) generate large aggregate upskilling.
-\item \textbf{Sticky top, churning bottom}: The high-rank worker typically stays at \(\lambda_H^* \approx 1\) (full upskilling), reinforcing stability at the top. Lower-rank workers allocate substantially to the lottery (\(\lambda_L^* < 1\)), producing persistent churning at the bottom.
-\item \textbf{Endogenous growth channel}: Unlike the classic Solow model (exogenous savings rate \(s\)), here the effective investment rate \(\pi \phi(\alpha^*)\) is chosen strategically by the firm. Growth \(g^* = \pi \phi(\alpha^*) - \delta - C(A^*)/A^*\) therefore depends on policy responsiveness and population structure.
-\item \textbf{Policy relevance}: The firm has a meaningful lever (\(\alpha\)) to counteract baseline inequality (\(\mu\)). When \(W\) is large, optimal policy often favours the bottom, illustrating how institutional wage allocation can influence long-run inequality and growth.
-\item \textbf{Two-level Nash character}: The equilibrium is a mutual best-response fixed point. Small changes in parameters (e.g., stronger risk premium \(p_L\)) can shift the entire system through feedback between workers and firm.
-\end{itemize}
-
-Overall, the model shows that when lower ranks are numerous (\(W \gg 1\)), rational firm behaviour naturally tilts toward high \(\alpha^*\), boosting aggregate growth while preserving the micro-level asymmetry of churning at the bottom and stickiness at the top.
-\item 
-\section{New Model}
-
-
-\end{document}
 \end{document}

@@ -7,7 +7,7 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage[margin=1.5in]{geometry}
+\usepackage[margin=1.4in]{geometry}
 
 
 %\usepackage[T1]{fontenc}
@@ -106,8 +106,6 @@ The endogenisation of status in economic models is limited by competing interpre
 
 More specifically, the participants in the closed economy invest in market-relevant adaptability -- such as skills, behavioural conformity, and professional signalling -- while a long-term social categorisation based on language, nationality, religion, or political identity evolves far more slowly and continues to shape trust, loyalty, also shape the perceived legitimacy of participants within the economy (Tilly, 1998; Bourdieu, 1986). The framework is then used to investigate the extent to which inequality may encourage positional competition and yet present indirect costs through lack of economic growth. The two questions we're concerned with are i) how adaptability related expenditures (or social capital investments) respond to rise in inequality and ii) how inequality imposes limits of growth through constraints of social hierarchy. 
 
-\newpage
-
 \section{Model}
 \noindent
 
@@ -171,7 +169,14 @@ The firm thus chooses $\alpha$ in order to maximise $A_{t+1}$ for a given $A_t$ 
 A_{t+1}=(1-\pi-\delta) A_t + \pi A_t (W \lambda_{L,t} \alpha + (1-\alpha)\lambda_{H,t}) - K(\Delta \alpha) - C(A_t)
 \end{equation}
 
-For a fixed $\lambda_{L,t}$ and $\lambda_{H,t}$, a low $W$ causes the firm to benefit from lowering $\alpha$ since that implies a high collection $(1-\alpha)$ despite lower operational costs (less distribution). In other words, the firm benefits from lower pay so long as $\lambda_{H,t}$ is high and $(1-\alpha)\lambda_{H,t}$ is significant due to low $W$. This changes only when $W$ and $\lambda_L$ result in a higher contribution. The next section explores how $\alpha$ specifically relates with the selection of $\lambda_{L,t}$ and $\lambda_{H,t}$.
+For a fixed $\lambda_{L,t}$ and $\lambda_{H,t}$, a low $W$ causes the firm to benefit from lowering $\alpha$ since that implies a high collection $(1-\alpha)$ despite lower operational costs (less distribution). In other words, the firm benefits from lower pay so long as $\lambda_{H,t}$ is high and $(1-\alpha)\lambda_{H,t}$ is significant due to low $W$. This changes only when $W$ and $\lambda_L$ result in a higher contribution. 
+
+
+The firm controls the total wage bill $R_t = \pi A_t$ (portion of current assets paid as wages) and chooses $\alpha \in [0,1]$ such that aggregate wages $\alpha R_t$ are provided to lower-ranked workers (mass $W$) and wages $(1-\alpha) R_t$ are provided to the higher-ranked worker (mass 1). The per-capita wages are then $\alpha R_t / W$ for each lower-rank worker and $(1-\alpha) R_t$ for the higher-rank worker. The firm arrives at $\alpha$ by maximising the following \emph{effective upskilling fraction} 
+\[
+\phi(\alpha) = \alpha \lambda_L^*(\alpha) + (1-\alpha) \lambda_H^*(\alpha),
+\]
+where $\lambda_L^*(\alpha)$ and $\lambda_H^*(\alpha)$ are the workers' equilibrium upskilling shares given policy $\alpha$. The next section explores how $\alpha$ specifically relates with the selection of $\lambda_{L,t}$ and $\lambda_{H,t}$.
 
 
 
@@ -183,30 +188,30 @@ We consider a two-level Nash-equilbirium where the mixing parameters $\lambda_L^
 
 As described in Section \ref{sec:firmchoice}, the low-rank (L) and high-rank (H) workers receive incomes $m_L = R \mu$ and $m_H = R(1-\mu)$ respectively ($\mu \in (0, 0.5)$). Thereon, the lower-rank and higher-ranked workers choose mixing parameters $\lambda_L$ and $\lambda_H$ respectively - as their  share of current income allocated to upskilling. The rest of their income is allocated to a shared lottery pool \footnote{We discard the approach to use a common lottery benefit to both the workers - as it does not represent the random job-swap dynamics of the $N$-player formulation. More specifically, the lottery in the $N$-player formulation is essentially a zero-sum reshuffle of existing Pareto-distributed positions triggered by uniform displacements -- wherein a displaced worker pays a cost to draw a random other position, so the gains come directly at others' expense, creating a tight interdependence and rank-dependent externalities that are better represented in the shared-pool abstraction (equivalent to a Tullock lottery with $r=1$). A fixed common lottery benefit to both workers, on the other hand, introduces exogenous positive-sum value that does not correspond to the displacement of another's position that is a necessary feature of the job-swap feature of the $N$-player formulation.}.
 
-With the linear utility, the net income to be optimised by the low-rank worker is
+With the linear utility and a linear-approximation for risk-premium, the net income to be optimised by the low-rank worker is
 
 \begin{align*}
-y_L &= m_L + \eta \lambda_L m_L - C_L(\lambda_L) -(1- \lambda_L) m_L + \kappa W (1-\lambda_L ) m_L + \rho_L(1-\lambda_L)
+y_L &= m_L + \eta \lambda_L m_L - C_L(\lambda_L) -(1- \lambda_L) m_L + \kappa W (1-\lambda_L ) m_L + \rho_L
 \end{align*}
 
 
 Similarly, the net income optimised by the higher-rank worker is
 \begin{align*}
-y_H &= m_H + \eta \lambda_H m_H - C_H(\lambda_H) - (1-\lambda_H) m_H  + \kappa(1- \lambda_H) m_H + \rho_H(1-\lambda_H)
+y_H &= m_H + \eta \lambda_H m_H - C_H(\lambda_H) - (1-\lambda_H) m_H  + \kappa(1- \lambda_H) m_H - \rho_H
 \end{align*}
 
 
 
 The income components above are defined as follows:
 
-\begin{tabular}{p{4cm}  p{9cm}}
+\begin{tabular}{p{3.5cm}  p{9.5cm}}
     $\kappa \approx 1$ & mean return per unit contributed to the pool; fairness parameter \\
     $W$  & population-weight assigned to the lower-ranked worker \\
     $\eta \in (0,1)$ &  efficiency of upskilling investment \\
     $C_L(\lambda_L) \approx b \eta \lambda_L m_L$ &  linearized upskilling cost for lower-ranked worker ($b > 1$) \\
     $C_H(\lambda_H) \approx b \eta  \lambda_H m_H$ &  linearized upskilling cost for higher-ranked worker ($b > 1$)\\
-    $\rho_L(\lambda_L) =p_L (1-\lambda_L)^2$ &  quadratic risk-premium approximation -- $p_L > 0$ proxies convexity / risk-seeking ( extra deterministic bonus for higher $\lambda_L$ ) \\
-$\rho_H(\lambda_H)= p_H(1- \lambda_H)^2$ & quadratic risk-premium approximation -- $p_H < 0$ proxies concavity / risk-aversion (deterministic penalty for higher $\lambda_H$)
+    $\rho_L(\lambda_L) =p_L (1-\lambda_L)^2$ &  quadratic risk-premium approximation --  ($p_L>0)$ proxies convexity / risk-seeking ( extra deterministic bonus for higher $\lambda_L$ ) \\
+$\rho_H(\lambda_H)= p_H(1- \lambda_H)^2$ & quadratic risk-premium approximation -- ($p_H>0)$ proxies concavity / risk-aversion (deterministic penalty for higher $\lambda_H$)
               
 \end{tabular}
 
@@ -266,34 +271,39 @@ Since we have $\lambda_L^* \in (0,1)$ and $ \lambda_H^* \in (0,1)$, we bound the
 \lambda_H^* = \max\bigl(0, \min\bigl(1, 1- \frac{ m_H ( \eta - b \eta - \kappa + 1) }{2 p_H} \bigr)\bigr)
 \]
 
-
-\subsection{Equlibria and Comparative Statics}
+\section{Results}
 \noindent 
 
-The firm controls the total wage bill $R_t = \pi A_t$ (portion of current assets paid as wages) and chooses $\alpha \in [0,1]$ such that aggregate wages $\alpha R_t$ are provided to lower-ranked workers (mass $W$) and wages $(1-\alpha) R_t$ are provided to the higher-ranked worker (mass 1). The per-capita wages are then $\alpha R_t / W$ for each lower-rank worker and $(1-\alpha) R_t$ for the higher-rank worker. The firm arrives at $\alpha$ by maximising the following \emph{effective upskilling fraction} 
-\[
-\phi(\alpha) = \alpha \lambda_L^*(\alpha) + (1-\alpha) \lambda_H^*(\alpha),
-\]
-where $\lambda_L^*(\alpha)$ and $\lambda_H^*(\alpha)$ are the workers' equilibrium upskilling shares given policy $\alpha$. This creates a two-level Nash equilibrium where in workers optimize $\lambda_L$, $\lambda_H$ given $\alpha$ and firm optimizes $\alpha$ given $\lambda_L^*$, $\lambda_H^*$. The effective fraction $\phi(\alpha)$ is the share of wages that becomes productive investment. The firm typically sets high $\alpha^*$ (large wage share to lower ranks) when $W$ is large, because the mass amplifies even modest upskilling from the bottom into large aggregate growth.
-
-
-Since all the terms except \(\phi(\alpha)\) in Equation \ref{eq:firms_asset_optimisation} are independent of \(\alpha\), maximising \(\phi(\alpha)\) (or its steady-state value) directly maximises \(A_{t+1}\) and long-run growth\footnote{One could view this growth as the endogenous counterpart to the fixed savings rate in a Solow model}. The fraction is effectively the share of total wage spending that ends up as genuine productive investment (upskilling) for the firm (rather than being diverted into the social lottery channel). As commercialisation rises, more emphasis is expected to be given to the upskilling channel by both firms and workers. 
+This model creates a two-level Nash equilibrium where in workers optimize $\lambda_L$, $\lambda_H$ given $\alpha$ and firm optimizes $\alpha$ given $\lambda_L^*$, $\lambda_H^*$. The effective fraction $\phi(\alpha)$ is the share of wages that becomes productive investment. The firm typically sets high $\alpha^*$ (large wage share to lower ranks) when $W$ is large, because the mass amplifies even modest upskilling from the bottom into large aggregate growth.
 
 \subsubsection{Equilibrium value of $\alpha$}
+\noindent
+Since all the terms except \(\phi(\alpha)\) in Equation \ref{eq:firms_asset_optimisation} are independent of \(\alpha\), maximising \(\phi(\alpha)\) (or its steady-state value) directly maximises \(A_{t+1}\) and long-run growth\footnote{One could view this growth as the endogenous counterpart to the fixed savings rate in a Solow model}. The fraction is effectively the share of total wage spending that ends up as genuine productive investment (upskilling) for the firm (rather than being diverted into the social lottery channel). As commercialisation rises, more emphasis is expected to be given to the upskilling channel by both firms and workers. 
 
-The firm solves
+The steady-state equilibrium is a fixed point \((\alpha^*, \lambda_L^*, \lambda_H^*, A^*)\) satisfying two conditions simultaneously:
+
+\begin{enumerate}
+\item Given \(\alpha^*\), the workers choose their best-response upskilling shares:
 \[
-\max_{\alpha \in [0,1]} \phi(\alpha),
+\lambda_L^* = 1 - \frac{m_L (\kappa W - \eta + b\eta - 1)}{2 p_L}, \qquad
+\lambda_H^* = 1 - \frac{m_H (\kappa - \eta + b\eta - 1)}{2 p_H}
 \]
-anticipating the workers' best-response functions \(\lambda_L^*(\alpha)\) and \(\lambda_H^*(\alpha)\).
+(bounded to \([0,1]\)).
+\item Given \(\lambda_L^*\) and \(\lambda_H^*\), the firm chooses \(\alpha^*\) to maximise the effective upskilling fraction
+\end{enumerate}
+\[
+\phi(\alpha) = \alpha \lambda_L^*(\alpha) + (1-\alpha) \lambda_H^*(\alpha).
+\]
+The asset level \(A^*\) then satisfies
+\[
+A^* = \frac{\pi \phi(\alpha^*)}{\delta + c (A^*)^{\gamma-1}},
+\]
+where \(C(A) = c A^\gamma\) (\(\gamma > 1\)).
 
 
-\subsubsection{Comparative Statics}
+\subsection{Comparative Statics}
 
-\subsubsection*{Firm choice}
-
-\subsubsection*{Worker choices}
-
+Table \ref{tab:comparative_statics} summarises directional effects of key parameters on the equilibrium values (holding others fixed). 
 \begin{itemize}
     \item The common factor $(b \eta - \eta - \kappa + 1)$ captures the net marginal benefit of moving one unit of income from upskilling to the social lottery.
           \begin{itemize}
@@ -308,10 +318,38 @@ anticipating the workers' best-response functions \(\lambda_L^*(\alpha)\) and \(
 
 \end{itemize}
 
-The income-inequality parameter $\alpha$ is endgonised in the model.
+
+\begin{table}[ht]
+\label{tab:comparative_statics}
+\centering
+\begin{tabular}{lccc}
+\toprule
+Parameter & \(\alpha^*\) (firm) & \(\lambda_L^*\) (low-rank) & \(\lambda_H^*\) (high-rank) \\
+\midrule
+\(\uparrow W\) (larger mass of poor) & \(\uparrow\) & \(\downarrow\) & \(\approx 1\) (corner) \\
+\(\uparrow \eta\) (better upskilling) & \(\uparrow\) or \(\downarrow\) (ambiguous) & \(\uparrow\) & \(\uparrow\) \\
+\(\uparrow p_L\) (stronger low-rank lottery premium) & \(\downarrow\) & \(\downarrow\) & little change \\
+\(\uparrow |p_H|\) (stronger high-rank aversion) & \(\uparrow\) & little change & \(\uparrow\) \\
+\(\uparrow \pi\) (higher wage share) & \(\uparrow\) & little direct effect & little direct effect \\
+\(\uparrow \delta\) (higher depreciation) & little direct effect & \(\uparrow\) (indirect) & \(\uparrow\) (indirect) \\
+\bottomrule
+\end{tabular}
+\caption{Directional comparative statics at equilibrium.}
+\end{table}
+
 
 \section{Discussion}
-A higher lottery might reduce the sum of costs from all workers contributed to the firm. By changing stakes ($\alpha$) the firm may choose to decrease contributions. Such a change could be enforced due to rise in costs (costs of living, inflation etc.). 
+A few implications follow from the model:
+
+\begin{itemize}
+\item \textbf{Mass effect dominates}: Large \(W\) pushes the firm toward high \(\alpha^*\) (allocating a large wage share to lower ranks) to leverage the numerous workers. Even modest improvements in \(\lambda_L\) generate large aggregate upskilling.
+\item \textbf{Sticky top, churning bottom}: The high-rank worker typically stays at \(\lambda_H^* \approx 1\) (full upskilling), reinforcing stability at the top. Lower-rank workers allocate substantially to the lottery (\(\lambda_L^* < 1\)), producing persistent churning at the bottom.
+
+\item \textbf{Policy relevance}: The firm has a meaningful lever (\(\alpha\)) to counteract baseline inequality (\(\mu\)). When \(W\) is large, optimal policy often favours the bottom, illustrating how institutional wage allocation can influence long-run inequality and growth.
+\item \textbf{Two-level Nash character}: The equilibrium is a mutual best-response fixed point. Small changes in parameters (e.g., stronger risk premium \(p_L\)) can shift the entire system through feedback between workers and firm.
+\end{itemize}
+
+Overall, the model shows that when lower ranks are numerous (\(W \gg 1\)), rational firm behaviour naturally tilts toward high \(\alpha^*\), boosting aggregate growth while preserving the micro-level asymmetry of churning at the bottom and stickiness at the top.
 
 
 \newpage
