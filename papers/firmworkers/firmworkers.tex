@@ -275,11 +275,17 @@ Since we have $\lambda_L^* \in (0,1)$ and $ \lambda_H^* \in (0,1)$, we bound the
 \section{Results}
 \noindent 
 
-This model creates a two-level Nash equilibrium where in workers optimize $\lambda_L$, $\lambda_H$ given $\mu$ and firm optimizes $\mu$ given $\lambda_L^*$, $\lambda_H^*$. The effective fraction $\phi(\mu)$ is the share of wages that becomes productive investment. The firm typically sets high $\mu^*$ (large wage share to lower ranks) when $W$ is large, because the mass amplifies even modest upskilling from the bottom into large aggregate growth.
+This model creates a two-level Nash equilibrium where workers optimise $\lambda_L$, $\lambda_H$ given $\mu$ and the firm optimises $\mu$ given $\lambda_L^*$, $\lambda_H^*$. The effective fraction $\phi(\mu)$ is the $W$-weighted share of wages that becomes productive investment. We maintain the following parameter restriction throughout:
+
+\begin{quote}
+\textbf{Assumption A1} (Scale condition): $R\kappa > p_L + p_H$.
+\end{quote}
+
+\noindent Since $p_H < 0$, this requires $R\kappa > p_L + p_H$, which is weaker than $R\kappa > p_L$ alone. Economically, it states that the total wage bill scaled by lottery efficiency is large relative to the net risk premium differential -- ensuring that the mass effect of a larger lower-rank population dominates in the firm's optimisation, as shown below.
 
 \subsubsection{Equilibrium value of $\mu$}
 \noindent
-Since all the terms except \(\phi(\mu)\) in Equation \ref{eq:firms_asset_optimisation} are independent of \(\mu\), maximising \(\phi(\mu)\) (or its steady-state value) directly maximises \(A_{t+1}\) and long-run growth\footnote{One could view this growth as the endogenous counterpart to the fixed savings rate in a Solow model}. The fraction is effectively the share of total wage spending that ends up as genuine productive investment (upskilling) for the firm (rather than being diverted into the social lottery channel). As commercialisation rises, more emphasis is expected to be given to the upskilling channel by both firms and workers. 
+Since all the terms except \(\phi(\mu)\) in Equation \ref{eq:firms_asset_optimisation} are independent of \(\mu\), maximising \(\phi(\mu)\) (or its steady-state value) directly maximises \(A_{t+1}\) and long-run growth\footnote{One could view this growth as the endogenous counterpart to the fixed savings rate in a Solow model}. The fraction is effectively the $W$-weighted share of total wage spending that ends up as genuine productive investment (upskilling) for the firm (rather than being diverted into the social lottery channel).
 
 The steady-state equilibrium is a fixed point \((\mu^*, \lambda_L^*, \lambda_H^*, A^*)\) satisfying two conditions simultaneously:
 
@@ -295,7 +301,18 @@ where $m_L = \mu^* R / W$ and $m_H = (1-\mu^*) R$ (bounded to \([0,1]\)).
 \[
 \phi(\mu) = W\mu \lambda_L^*(\mu) + (1-\mu) \lambda_H^*(\mu).
 \]
-The asset level \(A^*\) then satisfies
+
+To find $\mu^*$ explicitly, define
+\[
+\bar{A} \equiv \frac{R\kappa}{2p_L}, \qquad C \equiv \frac{R(\eta - b\eta + 1)}{2p_L}, \qquad B \equiv \frac{R(\kappa - \eta + b\eta - 1)}{2p_H},
+\]
+so that $\lambda_L^*(\mu) = 1 - (\bar{A} - C/W)\mu$ and $\lambda_H^*(\mu) = 1 - B(1-\mu)$. Substituting into $\phi(\mu)$ and differentiating, the first-order condition $d\phi/d\mu = 0$ yields the closed-form optimum:
+
+\[
+\mu^* = \frac{(W - 1) + 2B}{2(W\bar{A} - C + B)}.
+\]
+
+The second-order condition requires $W\bar{A} - C + B > 0$, which holds under mild parameter conditions. The asset level \(A^*\) then satisfies
 \[
 A^* = \frac{\pi \phi(\mu^*)}{\delta + c (A^*)^{\gamma-1}},
 \]
@@ -313,10 +330,14 @@ Table \ref{tab:comparative_statics} summarises directional effects of key parame
           \end{itemize}
     \item Division by $2 p_L$ for lower-rank worker (or $2 p_H$ for higher-rank worker) scales the response to the risk-premium strength:
           \begin{itemize}
-              \item $p_L > 0$ $\to$ larger premium reduces $\lambda_L^*$ 
-              \item $p_H < 0$ $\to$ larger $|p_H|$ increases $\lambda_H^*$ 
+              \item $p_L > 0$ $\to$ larger premium reduces $\lambda_L^*$
+              \item $p_H < 0$ $\to$ larger $|p_H|$ increases $\lambda_H^*$
           \end{itemize}
-
+    \item \textbf{Effect of $W$ on $\mu^*$}: Differentiating the closed-form $\mu^* = \frac{(W-1)+2B}{2(W\bar{A}-C+B)}$ with respect to $W$ gives
+    \[
+    \frac{d\mu^*}{dW} \propto 2(\bar{A} - C) + 2B(1 - 2\bar{A}) = \frac{R(\kappa - \eta + b\eta - 1)}{p_L}\left(1 - \frac{R\kappa}{p_L}\right) + \frac{R(\kappa - \eta + b\eta - 1)}{p_H}.
+    \]
+    Letting $\Gamma \equiv \kappa - \eta + b\eta - 1 > 0$ and simplifying, this reduces to $\frac{R\Gamma}{p_L p_H}(p_L + p_H - R\kappa)$. Since $p_L > 0$, $p_H < 0$ and $\Gamma > 0$, the sign of $\frac{d\mu^*}{dW}$ equals the sign of $-(p_L + p_H - R\kappa) = R\kappa - p_L - p_H$, which is positive under Assumption A1. Hence $\uparrow W \Rightarrow \uparrow \mu^*$: a larger mass of lower-rank workers leads the firm to tilt the wage distribution toward the bottom.
 \end{itemize}
 
 
@@ -343,14 +364,14 @@ Parameter & \(\mu^*\) (firm) & \(\lambda_L^*\) (low-rank) & \(\lambda_H^*\) (hig
 A few implications follow from the model:
 
 \begin{itemize}
-\item \textbf{Mass effect dominates}: Large \(W\) pushes the firm toward high \(\mu^*\) (allocating a large wage share to lower ranks) to leverage the numerous workers. Even modest improvements in \(\lambda_L\) generate large aggregate upskilling.
+\item \textbf{Mass effect dominates}: Large \(W\) pushes the firm toward high \(\mu^*\) (allocating a large wage share to lower ranks) to leverage the numerous workers. Under Assumption A1, this effect is unambiguous: even modest improvements in \(\lambda_L\) generate large aggregate upskilling when multiplied by the mass $W$.
 \item \textbf{Sticky top, churning bottom}: The high-rank worker typically stays at \(\lambda_H^* \approx 1\) (full upskilling), reinforcing stability at the top. Lower-rank workers allocate substantially to the lottery (\(\lambda_L^* < 1\)), producing persistent churning at the bottom.
 
 \item \textbf{Policy relevance}: The firm has a meaningful lever (\(\mu\)) to counteract baseline inequality. When \(W\) is large, optimal policy often favours the bottom, illustrating how institutional wage allocation can influence long-run inequality and growth.
 \item \textbf{Two-level Nash character}: The equilibrium is a mutual best-response fixed point. Small changes in parameters (e.g., stronger risk premium \(p_L\)) can shift the entire system through feedback between workers and firm.
 \end{itemize}
 
-Overall, the model shows that when lower ranks are numerous (\(W \gg 1\)), rational firm behaviour naturally tilts toward high \(\mu^*\), boosting aggregate growth while preserving the micro-level asymmetry of churning at the bottom and stickiness at the top.
+Overall, the model shows that when lower ranks are numerous (\(W \gg 1\)), rational firm behaviour naturally tilts toward high \(\mu^*\) under Assumption A1, boosting aggregate growth while preserving the micro-level asymmetry of churning at the bottom and stickiness at the top.
 
 
 \newpage
@@ -426,16 +447,16 @@ This risk premium term $\frac{1}{2} u''(\bar{y}) \sigma_y^2$ is:
     \item \textbf{negative} when $u'' < 0$ (concave region $\to$ above $r$) $\quad\Rightarrow\quad$ player behaves as if the lottery return is \textbf{lower} than its mean
 \end{itemize}
 
-The linear approximation mimics the direction of the $N$-player formulations effect by adding an incentive for low-rank workers (effective bonus) while penalising high-risk workers. For the higher-ranked worker, $\sigma_y^2$ can be proxied using a cost-function $c(\cdot)$ as
+The linear approximation mimics the direction of the $N$-player formulations effect by adding an incentive for low-rank workers (effective bonus) while penalising high-risk workers. Since $\sigma_y^2$ is the variance of the lottery income component, it scales with the share of income allocated to the lottery, $(1-\lambda)$, rather than the upskilling share $\lambda$. For the higher-ranked worker, $\sigma_y^2$ can therefore be proxied as
 
 \begin{align*}
-\sigma_y^2 \approx c(\lambda_H m_H)^2 = p_H \lambda_H^2 \quad (p_H <0)
+\sigma_y^2 \approx c((1-\lambda_H) m_H)^2 = p_H (1-\lambda_H)^2 \quad (p_H <0)
 \end{align*}
 
 Similarly, we can approximate $\sigma_y^2$ for the lower-ranked worker as 
 
 \begin{align*}
-\sigma_y^2 \approx c(\lambda_L m_L)^2 = p_L \lambda_L^2 \quad (p_L > 0)
+\sigma_y^2 \approx c((1-\lambda_L) m_L)^2 = p_L (1-\lambda_L)^2 \quad (p_L > 0)
 \end{align*}
 
 \end{document}
