@@ -1,0 +1,903 @@
+\documentclass[12pt,a4paper]{article}
+
+%% ─────────────────────────────────────────────
+%%  PACKAGES
+%% ─────────────────────────────────────────────
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{bm}
+\usepackage{natbib}
+\usepackage{caption}
+\usepackage{float}
+
+\geometry{margin=1.2in}
+\onehalfspacing
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!60!black,
+  urlcolor=blue!60!black
+}
+
+%% ─────────────────────────────────────────────
+%%  THEOREM ENVIRONMENTS
+%% ─────────────────────────────────────────────
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{remark}{Remark}[section]
+
+%% ─────────────────────────────────────────────
+%%  CUSTOM COMMANDS
+%% ─────────────────────────────────────────────
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\hatpij}{\hat{p}_i^{\,j}}
+\newcommand{\alphaeff}{\alpha_i^{**}}
+\newcommand{\betaeff}{\beta_i^{**}}
+
+%% ─────────────────────────────────────────────
+%%  DOCUMENT
+%% ─────────────────────────────────────────────
+\begin{document}
+
+\title{\textbf{Strategic Investment with Asymmetric Information,\\
+Jeffrey Updating, and Endogenous Volatility}\\[0.5em]
+\large A Self-Contained Model for Symbolic Solution}
+
+\author{}
+\date{}
+\maketitle
+\tableofcontents
+\newpage
+
+%% ═══════════════════════════════════════════════════════════
+\section{Overview and Motivation}
+%% ═══════════════════════════════════════════════════════════
+
+This document presents a complete, self-contained model of strategic investment between two asymmetrically informed players. Each player owns a risky stochastic process and may invest in the other's process for a fee. Players market themselves to attract investment, and beliefs about the other's process are updated via Jeffrey conditioning applied to a Beta-Binomial model of returns.
+
+The key outputs of the model are:
+\begin{enumerate}[label=(\roman*)]
+  \item Equilibrium allocations $\alpha_i^*$ and marketing spends $m_i^*$ in closed form.
+  \item An endogenous expression for perceived return volatility as a function of model primitives.
+  \item A structural GARCH(1,1) representation of realised portfolio volatility, with endogenously derived GJR-type asymmetry.
+\end{enumerate}
+
+All objects are defined sufficiently explicitly to permit full symbolic solution in SymPy or Mathematica.
+
+%% ═══════════════════════════════════════════════════════════
+\section{Primitives and Notation}
+%% ═══════════════════════════════════════════════════════════
+
+\subsection{Players and Budgets}
+
+There are two players, indexed $i \in \{1, 2\}$, with $j$ denoting the opponent of $i$, i.e.\ $j = 3 - i$.
+
+\begin{definition}[Budgets]
+Player $i$ begins with initial wealth $W_i > 0$. Players may have asymmetric budgets: $W_1 \neq W_2$ in general. Player $i$ chooses a marketing spend $m_i \geq 0$ with $m_i \leq W_i$, leaving an effective investment budget of
+\[
+  W_i^{\mathrm{eff}} \;=\; W_i - m_i.
+\]
+\end{definition}
+
+\subsection{Return Processes — Binomial Mechanism}
+
+\begin{definition}[Binomial Return Process]
+Each period $t$, player $i$'s process generates a return
+\[
+  r_i^t \;=\;
+  \begin{cases}
+    u_i & \text{with (true) probability } p_i,\\
+    d_i & \text{with (true) probability } 1 - p_i,
+  \end{cases}
+\]
+where $u_i > d_i$ are fixed, publicly known constants (the up and down returns), and $p_i \in (0,1)$ is the \emph{true up-probability}, known only to player $i$.
+
+Draws are i.i.d.\ across periods. The \emph{true} mean and variance of $r_i^t$ are:
+\begin{align}
+  \mu_i &\;=\; p_i u_i + (1 - p_i) d_i, \label{eq:true_mean}\\
+  \sigma_i^2 &\;=\; p_i(1-p_i)(u_i - d_i)^2. \label{eq:true_var}
+\end{align}
+\end{definition}
+
+\begin{remark}
+Both $\mu_i$ and $\sigma_i^2$ are determined entirely by the single parameter $p_i$ given fixed $u_i, d_i$. This is the key parsimony of the binomial mechanism.
+\end{remark}
+
+\subsection{Public History}
+
+\begin{definition}[Observed History]
+Both players observe the same public history of $n$ past discrete periodic returns from each process. Let $k_i$ denote the number of up-moves observed in player $i$'s history:
+\[
+  \mathbf{r}_i \;=\; (r_i^1, \ldots, r_i^n), \qquad k_i \;=\; \#\{t : r_i^t = u_i\}.
+\]
+The sample frequency is $\bar{p}_i = k_i / n$. The history is objective and agreed upon by both players.
+\end{definition}
+
+\subsection{Fee Structure}
+
+\begin{definition}[Performance Fee]
+When player $i$ invests in player $j$'s process, they receive the return net of a proportional performance fee $f \in (0,1)$. Player $j$ retains fraction $f$ of the gross return as fee income. The fee is fixed and exogenous.
+\end{definition}
+
+\subsection{Allocation Decision}
+
+\begin{definition}[Allocation]
+Player $i$ chooses $\alpha_i \in [0,1]$, the fraction of $W_i^{\mathrm{eff}}$ allocated to player $j$'s process. The remaining fraction $(1 - \alpha_i)$ stays in player $i$'s own process. Incoming investment from player $j$ is accepted passively — there is no cost to receiving investment.
+\end{definition}
+
+%% ═══════════════════════════════════════════════════════════
+\section{Belief Structure — Beta-Binomial Model}
+%% ═══════════════════════════════════════════════════════════
+
+\subsection{Prior}
+
+Player $j$ holds a prior belief about player $i$'s up-probability $p_i$. Since $p_i \in [0,1]$ and the return mechanism is Binomial, the natural conjugate prior is:
+
+\begin{definition}[Beta Prior]
+\[
+  p_i \;\sim\; \mathrm{Beta}(\alpha_i^0,\, \beta_i^0),
+\]
+where $\alpha_i^0 > 0$ and $\beta_i^0 > 0$ are prior pseudo-counts representing player $j$'s initial beliefs. The prior mean is $\alpha_i^0 / (\alpha_i^0 + \beta_i^0)$.
+\end{definition}
+
+\subsection{Bayesian Posterior from History}
+
+\begin{proposition}[Bayesian Update]
+After observing $k_i$ up-moves in $n$ periods, the Bayesian posterior is:
+\[
+  p_i \mid \mathbf{r}_i \;\sim\; \mathrm{Beta}(\alpha_i^*,\, \beta_i^*),
+\]
+where
+\[
+  \alpha_i^* \;=\; \alpha_i^0 + k_i, \qquad \beta_i^* \;=\; \beta_i^0 + n - k_i.
+\]
+The posterior mean and variance are:
+\begin{align}
+  \E[p_i \mid \mathbf{r}_i] &\;=\; \frac{\alpha_i^*}{\alpha_i^* + \beta_i^*}, \label{eq:post_mean}\\
+  \Var[p_i \mid \mathbf{r}_i] &\;=\; \frac{\alpha_i^* \beta_i^*}{(\alpha_i^* + \beta_i^*)^2 (\alpha_i^* + \beta_i^* + 1)}. \label{eq:post_var}
+\end{align}
+Since history is public, both players agree on this posterior.
+\end{proposition}
+
+\subsection{Marketing and the Jeffrey Shift}
+
+Player $i$ spends $m_i \geq 0$ on marketing to signal that their drift $\mu_i$ is higher than the history alone suggests. This constitutes \emph{soft evidence} in the sense of Jeffrey (1965): it shifts player $j$'s credence over $p_i$ without being a clean Bayesian observation.
+
+\begin{definition}[Marketing Effectiveness Function]
+The marketing spend $m_i$ generates a pseudo-count shift:
+\[
+  \delta(m_i) \;=\; \frac{m_i}{m_i + \gamma_i}, \qquad \gamma_i > 0,
+\]
+where $\gamma_i$ is a scale parameter governing the rate of diminishing returns. Note $\delta(0) = 0$, $\delta \in (0,1)$, $\delta'(m_i) > 0$, $\delta''(m_i) < 0$, and $\lim_{m_i \to \infty} \delta(m_i) = 1$.
+\end{definition}
+
+\begin{definition}[Jeffrey-Shifted Posterior]
+The Jeffrey update on the Beta posterior adds $\delta(m_i)$ pseudo up-counts:
+\[
+  \alpha_i^{**} \;=\; \alpha_i^* + \delta(m_i), \qquad \beta_i^{**} \;=\; \beta_i^*.
+\]
+Player $j$'s operational (post-Jeffrey) belief about $p_i$ is:
+\[
+  p_i \;\sim\; \mathrm{Beta}(\alpha_i^{**},\, \beta_i^{**}).
+\]
+\end{definition}
+
+\begin{remark}[Rigidity Condition]
+Jeffrey's rule requires that the conditional distribution of returns given $p_i$ is unaffected by the soft evidence (marketing). This holds here: $\Pr(r_i^t = u_i \mid p_i)= p_i$ is determined by the process, not by marketing. Marketing only shifts credence over \emph{which} $p_i$ is the true one.
+\end{remark}
+
+\subsection{Perceived Drift and Volatility}
+
+\begin{definition}[Perceived Drift and Volatility]
+Player $j$'s Jeffrey-updated belief about $p_i$ implies the following perceived drift and volatility for player $i$'s process. Define:
+\[
+  \hatpij \;\equiv\; \E^j[p_i] \;=\; \frac{\alpha_i^{**}}{\alpha_i^{**} + \beta_i^{**}}
+  \;=\; \frac{\alpha_i^* + \delta(m_i)}{\alpha_i^* + \delta(m_i) + \beta_i^*}.
+\]
+Then:
+\begin{align}
+  \mu_i^j &\;=\; \hatpij \cdot u_i \;+\; (1 - \hatpij) \cdot d_i, \label{eq:perceived_drift}\\
+  \sigma_i^{j2} &\;=\; (u_i - d_i)^2 \cdot \hatpij \left(1 - \hatpij\right). \label{eq:perceived_vol}
+\end{align}
+\end{definition}
+
+\begin{remark}
+Both $\mu_i^j$ and $\sigma_i^{j2}$ are functions of $m_i$ through $\delta(m_i)$. Marketing simultaneously shifts the perceived drift and perceived volatility. The volatility is maximised at $\hatpij = 1/2$ and decreasing on both sides.
+\end{remark}
+
+The full expression for perceived volatility in terms of model primitives is:
+\begin{equation}
+  \boxed{
+    \sigma_i^{j2} \;=\; (u_i - d_i)^2 \cdot
+    \frac{\bigl(\alpha_i^* + \delta(m_i)\bigr)\,\beta_i^*}
+         {\bigl(\alpha_i^* + \delta(m_i) + \beta_i^*\bigr)^2}
+  }
+  \label{eq:vol_full}
+\end{equation}
+
+%% ═══════════════════════════════════════════════════════════
+\section{Terminal Wealth and Preferences}
+%% ═══════════════════════════════════════════════════════════
+
+\subsection{Terminal Wealth}
+
+\begin{definition}[Terminal Wealth]
+Player $i$'s terminal wealth at horizon $T$ is:
+\begin{equation}
+  W_i(T) \;=\; R_i \cdot A_i \;+\; R_j \cdot B_i,
+  \label{eq:terminal_wealth}
+\end{equation}
+where $R_i$ is the gross realised return from player $i$'s process (mean $\mu_i$, variance $\sigma_i^2$), and:
+\begin{align}
+  A_i &\;=\; (1-\alpha_i) W_i^{\mathrm{eff}} \;+\; f\,\alpha_j\, W_j^{\mathrm{eff}}, \label{eq:Ai}\\
+  B_i &\;=\; \alpha_i\, W_i^{\mathrm{eff}}\,(1-f). \label{eq:Bi}
+\end{align}
+Here $A_i$ is player $i$'s effective exposure to their own process (own investment plus fee income from player $j$'s investment), and $B_i$ is their net exposure to player $j$'s process after the fee.
+\end{definition}
+
+\subsection{Mean-Variance Objective}
+
+\begin{definition}[Mean-Variance Utility]
+Each player maximises a mean-variance objective:
+\begin{equation}
+  \mathcal{V}_i \;=\; \E[W_i(T)] \;-\; \frac{\rho_i}{2}\,\Var[W_i(T)],
+  \label{eq:mv_utility}
+\end{equation}
+where $\rho_i > 0$ is player $i$'s coefficient of absolute risk aversion.
+\end{definition}
+
+\subsection{Computing Mean and Variance}
+
+Since $R_i$ and $R_j$ are independent:
+
+\begin{align}
+  \E[W_i(T)] &\;=\; \mu_i A_i \;+\; \mu_j^i B_i, \label{eq:mean_wealth}\\
+  \Var[W_i(T)] &\;=\; A_i^2\,\sigma_i^2 \;+\; B_i^2\,\sigma_j^{i2}, \label{eq:var_wealth}
+\end{align}
+
+where $\mu_j^i$ and $\sigma_j^{i2}$ are player $i$'s Jeffrey-updated beliefs about player $j$'s process (symmetric to equations~\eqref{eq:perceived_drift}--\eqref{eq:perceived_vol} with indices swapped).
+
+Note that player $i$ knows their own true $\mu_i$ and $\sigma_i^2$ exactly, but uses Jeffrey-shifted beliefs $\mu_j^i$, $\sigma_j^{i2}$ for player $j$'s process.
+
+Expanding the full objective:
+\begin{align}
+  \mathcal{V}_i \;=\;&\; \mu_i\bigl[(1-\alpha_i)W_i^{\mathrm{eff}} + f\alpha_j W_j^{\mathrm{eff}}\bigr]
+  + \mu_j^i\,\alpha_i W_i^{\mathrm{eff}}(1-f) \notag\\
+  &- \frac{\rho_i}{2}\Bigl[
+    \bigl((1-\alpha_i)W_i^{\mathrm{eff}} + f\alpha_j W_j^{\mathrm{eff}}\bigr)^2\sigma_i^2
+    + \bigl(\alpha_i W_i^{\mathrm{eff}}(1-f)\bigr)^2\sigma_j^{i2}
+  \Bigr]. \label{eq:full_obj}
+\end{align}
+
+%% ═══════════════════════════════════════════════════════════
+\section{Stackelberg Equilibrium}
+%% ═══════════════════════════════════════════════════════════
+
+The two players play a Stackelberg game. Player 1 is the \emph{leader} (justified by $W_1 > W_2$ without loss of generality) and moves first, choosing $(m_1, \alpha_1)$. Player 2 observes $m_1$, applies the Jeffrey update, and then chooses $(m_2, \alpha_2)$. The equilibrium is solved by backward induction.
+
+\subsection{Useful Shorthand}
+
+For each player $i$ with opponent $j$, define:
+\begin{align}
+  \Delta_i &\;=\; \mu_j^i(1-f) - \mu_i \qquad \text{(net return differential)}, \label{eq:Delta}\\
+  \Sigma_i &\;=\; \sigma_i^2 + (1-f)^2\,\sigma_j^{i2} \qquad \text{(total perceived risk)}, \label{eq:Sigma}\\
+  F_i &\;=\; W_i^{\mathrm{eff}} + f\,\alpha_j\, W_j^{\mathrm{eff}} \qquad \text{(fee-augmented budget)}. \label{eq:F}
+\end{align}
+
+\subsection{Step 1 — Follower's Problem (Player 2)}
+
+Player 2 takes $(m_1, \alpha_1)$ as given and solves:
+\[
+  \max_{\alpha_2,\, m_2} \;\mathcal{V}_2.
+\]
+
+\subsubsection{Optimal allocation $\alpha_2^*$}
+
+Taking the first-order condition of $\mathcal{V}_2$ with respect to $\alpha_2$:
+
+\begin{equation}
+  \frac{\partial \mathcal{V}_2}{\partial \alpha_2} \;=\;
+  W_2^{\mathrm{eff}}\Delta_2
+  + \rho_2 A_2 W_2^{\mathrm{eff}}\,\sigma_2^2
+  - \rho_2 B_2 W_2^{\mathrm{eff}}(1-f)^2\sigma_1^{22}
+  \;=\; 0,
+\end{equation}
+
+which yields the interior solution:
+
+\begin{equation}
+  \boxed{
+    \alpha_2^* \;=\;
+    \frac{\Delta_2 + \rho_2\,\sigma_2^2\,F_2}
+         {\rho_2\,W_2^{\mathrm{eff}}\,\Sigma_2}
+  }
+  \label{eq:alpha2_star}
+\end{equation}
+
+where $F_2 = W_2^{\mathrm{eff}} + f\,\alpha_1\,W_1^{\mathrm{eff}}$ and $\Sigma_2 = \sigma_2^2 + (1-f)^2\sigma_1^{22}$.
+
+The solution is interior (i.e.\ $\alpha_2^* \in (0,1)$) provided:
+\[
+  0 \;<\; \Delta_2 + \rho_2\,\sigma_2^2 F_2 \;<\; \rho_2 W_2^{\mathrm{eff}}\,\Sigma_2.
+\]
+
+\subsubsection{Optimal marketing $m_2^*$}
+
+Since player 1's allocation $\alpha_1$ is already fixed, the fee income term $f\mu_2\alpha_1 W_1^{\mathrm{eff}}$ does not depend on $m_2$. Marketing spend by player 2 only reduces $W_2^{\mathrm{eff}}$, which is costly. Therefore:
+\begin{equation}
+  m_2^* \;=\; 0.
+  \label{eq:m2_star}
+\end{equation}
+
+\subsection{Step 2 — Leader's Problem (Player 1)}
+
+Player 1 anticipates the follower's best response $\alpha_2^*(m_1)$ and solves:
+\[
+  \max_{\alpha_1,\, m_1} \;\mathcal{V}_1\bigl(\alpha_1, m_1;\, \alpha_2^*(m_1)\bigr).
+\]
+
+\subsubsection{Optimal allocation $\alpha_1^*$}
+
+Symmetrically to equation~\eqref{eq:alpha2_star}:
+
+\begin{equation}
+  \boxed{
+    \alpha_1^* \;=\;
+    \frac{\Delta_1 + \rho_1\,\sigma_1^2\,F_1}
+         {\rho_1\,W_1^{\mathrm{eff}}\,\Sigma_1}
+  }
+  \label{eq:alpha1_star}
+\end{equation}
+
+where $F_1 = W_1^{\mathrm{eff}} + f\,\alpha_2^*\,W_2^{\mathrm{eff}}$ and $\Sigma_1 = \sigma_1^2 + (1-f)^2\sigma_2^{12}$.
+
+\subsubsection{Derivative of follower's allocation with respect to $m_1$}
+
+The key object for the leader's marketing decision is how player 2's allocation responds to $m_1$. This runs through the chain:
+\[
+  \frac{\partial \alpha_2^*}{\partial m_1}
+  \;=\;
+  \frac{\partial \alpha_2^*}{\partial \mu_1^2}\cdot\frac{\partial \mu_1^2}{\partial m_1}
+  \;+\;
+  \frac{\partial \alpha_2^*}{\partial \sigma_1^{22}}\cdot\frac{\partial \sigma_1^{22}}{\partial m_1}.
+\]
+
+Define the marginal belief shift:
+\begin{equation}
+  \Pi \;\equiv\; \frac{\partial \hatpij}{\partial m_i}
+  \;=\; \frac{\beta_i^{**}}{(\alpha_i^{**}+\beta_i^{**})^2}
+  \cdot \frac{\gamma_i}{(m_i+\gamma_i)^2}.
+  \label{eq:Pi}
+\end{equation}
+
+Then:
+\begin{align}
+  \frac{\partial \mu_1^2}{\partial m_1} &\;=\; (u_1 - d_1)\,\Pi, \label{eq:dmu_dm}\\
+  \frac{\partial \sigma_1^{22}}{\partial m_1} &\;=\; (u_1-d_1)^2(1-2\hat{p}_1^2)\,\Pi. \label{eq:dsig_dm}
+\end{align}
+
+The partial derivatives of $\alpha_2^*$ with respect to $\mu_1^2$ and $\sigma_1^{22}$ are obtained by differentiating \eqref{eq:alpha2_star}:
+\begin{align}
+  \frac{\partial \alpha_2^*}{\partial \mu_1^2}
+  &\;=\; \frac{(1-f)}{\rho_2 W_2^{\mathrm{eff}}\,\Sigma_2}
+  \;\equiv\; \frac{(1-f)}{D_2},
+  \label{eq:dalpha_dmu}\\
+  \frac{\partial \alpha_2^*}{\partial \sigma_1^{22}}
+  &\;=\; -\frac{\alpha_2^*(1-f)^2}{\Sigma_2},
+  \label{eq:dalpha_dsig}
+\end{align}
+where $D_2 \equiv \rho_2 W_2^{\mathrm{eff}}\Sigma_2$.
+
+Combining:
+\begin{equation}
+  \boxed{
+    \frac{\partial \alpha_2^*}{\partial m_1}
+    \;=\;
+    (u_1-d_1)\,\Pi\,
+    \left[
+      \frac{(1-f)}{D_2}
+      \;-\;
+      \frac{\alpha_2^*(1-f)^2(u_1-d_1)(1-2\hat{p}_1^2)}{\Sigma_2}
+    \right]
+  }
+  \label{eq:dalpha2_dm1}
+\end{equation}
+
+\subsubsection{First-order condition for $m_1^*$}
+
+The leader's objective as a function of $m_1$ (with $\alpha_2^*(m_1)$ substituted in) is:
+\begin{align}
+  \mathcal{V}_1(m_1) \;=\;&\;
+  \mu_1(W_1-m_1)
+  + \alpha_1(W_1-m_1)[\mu_2^1(1-f)-\mu_1] \notag\\
+  &+ f\mu_1\,\alpha_2^*(m_1)\,W_2
+  - \frac{\rho_1}{2}\bigl[A_1^2\sigma_1^2 + B_1^2\sigma_2^{12}\bigr].
+  \label{eq:V1_m1}
+\end{align}
+
+The FOC $\partial \mathcal{V}_1 / \partial m_1 = 0$ gives:
+
+\begin{equation}
+  f\mu_1 W_2 \cdot \frac{\partial \alpha_2^*}{\partial m_1}
+  \;=\;
+  \Psi,
+  \label{eq:foc_m1}
+\end{equation}
+
+where the right-hand side is the marginal cost of marketing:
+\begin{equation}
+  \Psi \;\equiv\;
+  \mu_1 + \alpha_1[\mu_2^1(1-f)-\mu_1]
+  - \rho_1 A_1 W_1^{\mathrm{eff}}\sigma_1^2
+  + \rho_1 B_1 W_1^{\mathrm{eff}}(1-f)^2\sigma_2^{12}.
+  \label{eq:Psi}
+\end{equation}
+
+Define:
+\begin{equation}
+  \Phi \;\equiv\;
+  f\mu_1 W_2(u_1-d_1)
+  \left[
+    \frac{(1-f)}{D_2}
+    - \frac{\alpha_2^*(1-f)^2(u_1-d_1)(1-2\hat{p}_1^2)}{\Sigma_2}
+  \right].
+  \label{eq:Phi}
+\end{equation}
+
+The FOC becomes $\Phi \cdot \Pi = \Psi$, i.e.:
+\[
+  \Phi \cdot
+  \frac{\beta_1^{**}}{(\alpha_1^{**}+\beta_1^{**})^2}
+  \cdot
+  \frac{\gamma_1}{(m_1+\gamma_1)^2}
+  \;=\; \Psi.
+\]
+
+Solving explicitly for $m_1^*$:
+
+\begin{equation}
+  \boxed{
+    m_1^* \;=\;
+    \gamma_1 \!\left(
+      \sqrt{\frac{\Phi\,\beta_1^{**}\,\gamma_1}{\Psi\,(\alpha_1^{**}+\beta_1^{**})^2}}
+      \;-\; 1
+    \right)
+  }
+  \label{eq:m1_star}
+\end{equation}
+
+subject to $m_1^* \geq 0$, which requires $\Phi > \Psi$.
+
+\subsection{Equilibrium Summary}
+
+\begin{proposition}[Stackelberg Equilibrium]
+The equilibrium of the game is the quadruple $\{m_1^*, \alpha_1^*, m_2^* = 0, \alpha_2^*(m_1^*)\}$ where:
+\begin{align}
+  m_2^* &\;=\; 0, \tag{\ref{eq:m2_star}}\\
+  m_1^* &\;=\; \gamma_1\!\left(\sqrt{\dfrac{\Phi\,\beta_1^{**}\,\gamma_1}{\Psi\,(\alpha_1^{**}+\beta_1^{**})^2}} - 1\right), \tag{\ref{eq:m1_star}}\\
+  \alpha_2^* &\;=\; \frac{\Delta_2 + \rho_2\,\sigma_2^2\,F_2}{\rho_2\,W_2^{\mathrm{eff}}\,\Sigma_2}, \tag{\ref{eq:alpha2_star}}\\
+  \alpha_1^* &\;=\; \frac{\Delta_1 + \rho_1\,\sigma_1^2\,F_1}{\rho_1\,W_1^{\mathrm{eff}}\,\Sigma_1}. \tag{\ref{eq:alpha1_star}}
+\end{align}
+\end{proposition}
+
+%% ═══════════════════════════════════════════════════════════
+\section{Realised Portfolio Volatility}
+%% ═══════════════════════════════════════════════════════════
+
+\subsection{Equilibrium Variance Expression}
+
+Substituting equilibrium allocations into the variance of terminal wealth:
+
+\begin{equation}
+  \mathcal{R}_i \;\equiv\; \Var[W_i(T)]
+  \;=\; \frac{\sigma_i^2 X_i^2 + \sigma_j^2 Y_i^2}{\Sigma_i^2},
+  \label{eq:realised_var}
+\end{equation}
+
+where $\sigma_i^2$ and $\sigma_j^2$ are \emph{true} process variances (equations~\eqref{eq:true_var}), and:
+
+\begin{align}
+  X_i &\;=\; F_i(1-f)^2\sigma_j^{i2} - \frac{\Delta_i}{\rho_i}
+  \qquad\text{(own process loading)},
+  \label{eq:Xi}\\
+  Y_i &\;=\; \frac{(\Delta_i + \rho_i\sigma_i^2 F_i)(1-f)}{\rho_i}
+  \qquad\text{(cross process loading)}.
+  \label{eq:Yi}
+\end{align}
+
+\subsection{Comparative Statics on Realised Volatility}
+
+The effect of each strategic variable on $\mathcal{R}_i$ is summarised below.
+
+\subsubsection{Effect of marketing $m_i^*$}
+
+Marketing affects $\mathcal{R}_i$ through two competing channels:
+\begin{enumerate}[label=(\alph*)]
+  \item \textbf{Budget depletion:} $\partial F_i/\partial m_i = -1$, shrinking $X_i$ and $Y_i$.
+  \item \textbf{Induced investment:} $m_i$ raises $\alpha_j^*$ via the Jeffrey shift, increasing $F_i$ through $f W_j^{\mathrm{eff}}\,\partial\alpha_j^*/\partial m_i$.
+\end{enumerate}
+The net effect is:
+\[
+  \frac{dF_i}{dm_i^*} \;=\; -1 + fW_j^{\mathrm{eff}}\frac{\partial\alpha_j^*}{\partial m_i^*}.
+\]
+Marketing \emph{increases} $\mathcal{R}_i$ if and only if $fW_j^{\mathrm{eff}}\,\partial\alpha_j^*/\partial m_i^* > 1$.
+
+\subsubsection{Effect of $\alpha_j^*$}
+
+$\frac{\partial \mathcal{R}_i}{\partial \alpha_j^*} > 0$ always: more investment from player $j$ amplifies player $i$'s exposure to their own process through fee income.
+
+\subsubsection{Effect of fee $f$}
+
+The fee enters through $B_i = \alpha_i W_i^{\mathrm{eff}}(1-f)$ and through $\Sigma_i$. Higher $f$ reduces the cross-investment loading $B_i$ but also reduces $\Sigma_i$, creating an ambiguous net effect on $\mathcal{R}_i$.
+
+%% ═══════════════════════════════════════════════════════════
+\section{Structural GARCH Representation}
+%% ═══════════════════════════════════════════════════════════
+
+\subsection{Multi-Period Extension}
+
+Index periods by $t = 1, 2, \ldots$ At each period the history updates: $k_i^t = k_i^{t-1} + \1_{r_i^t = u_i}$, $n_t = n_{t-1} + 1$. The Beta posterior updates accordingly:
+\[
+  \alpha_i^{*,t} = \alpha_i^0 + k_i^t, \qquad \beta_i^{*,t} = \beta_i^0 + n_t - k_i^t.
+\]
+
+\subsection{Period $t$ Surprise}
+
+\begin{definition}[Return Surprise]
+\[
+  \epsilon_i^t \;=\; r_i^t - \mu_i
+  \;=\;
+  \begin{cases}
+    (1-p_i)(u_i-d_i) & \text{up move (prob.\ } p_i\text{)},\\
+    -p_i(u_i-d_i) & \text{down move (prob.\ } 1-p_i\text{)}.
+  \end{cases}
+\]
+Note $\E[\epsilon_i^t] = 0$ and $\E[(\epsilon_i^t)^2] = \sigma_i^2$.
+\end{definition}
+
+\subsection{Belief Dynamics}
+
+The posterior mean $\hat{p}_i^{j,t}$ updates as follows:
+\begin{align}
+  \Delta\hat{p}_i^{j,t}
+  &\;\equiv\; \hat{p}_i^{j,t} - \hat{p}_i^{j,t-1}
+  \;=\;
+  \frac{\1_{up}\,\beta_i^{**,t-1} - \1_{down}\,\alpha_i^{**,t-1}}{S_t(S_t+1)},
+  \label{eq:belief_dynamics}
+\end{align}
+where $S_t = \alpha_i^{**,t-1} + \beta_i^{**,t-1}$ is the total pseudo-count and $\1_{up}, \1_{down}$ are indicators.
+
+Taking the expectation-weighted approximation:
+\begin{equation}
+  \Delta\hat{p}_i^{j,t}
+  \;\approx\;
+  \frac{\bar{C}_t\,\epsilon_i^t}{(u_i-d_i)\,S_t(S_t+1)},
+  \label{eq:belief_approx}
+\end{equation}
+where $\bar{C}_t = p_i\,\dfrac{\beta_i^{**,t-1}}{1-p_i} + (1-p_i)\,\dfrac{\alpha_i^{**,t-1}}{p_i}$ is an expected scaling factor.
+
+\subsection{Propagation to Realised Variance}
+
+Define the sensitivity of realised variance to the belief level:
+\begin{align}
+  \Lambda_t \;\equiv\;&\;
+  (u_i-d_i)\,\frac{2(1-f)}{\rho_i\Sigma_{i,t}^2}
+  \bigl[\sigma_j^2 Y_{i,t} - \sigma_i^2 X_{i,t}\bigr] \notag\\
+  &+\;(u_i-d_i)^2(1-2\hat{p}_t)\,
+  \frac{2(1-f)^2}{\Sigma_{i,t}^3}
+  \bigl[\sigma_i^2 X_{i,t}(F_{i,t}\Sigma_{i,t}-X_{i,t}) - \sigma_j^2 Y_{i,t}^2\bigr] \notag\\
+  &+\;\frac{\partial \mathcal{R}_{i,t+1}}{\partial m_i^*}\cdot\frac{\partial m_i^*}{\partial \hat{p}_t}.
+  \label{eq:Lambda}
+\end{align}
+
+Taking conditional expectations and using $\E[\epsilon_i^t \mid \mathcal{F}_t] = 0$, the linear term vanishes and the second-order expansion gives:
+
+\begin{equation}
+  \E[\mathcal{R}_{i,t+1} \mid \mathcal{F}_t]
+  \;=\;
+  \mathcal{R}_{i,t}\!\left(1 - \frac{\kappa_t}{S_t}\right)
+  \;+\;
+  \theta_t\,(\epsilon_i^t)^2,
+  \label{eq:garch_structure}
+\end{equation}
+
+where:
+\begin{align}
+  \theta_t &\;=\; \frac{\bar{C}_t^2}{2\,S_t^2(S_t+1)^2}\,\frac{\partial \Lambda_t}{\partial \hat{p}_t}
+  \qquad\text{(ARCH coefficient)},
+  \label{eq:theta}\\
+  \kappa_t &\;=\; \frac{\partial m_i^{*,t}}{\partial \hat{p}_i^{j,t}}
+  \cdot\frac{\partial \hat{p}_i^{j,t}}{\partial \mathcal{R}_{i,t}}
+  \qquad\text{(mean-reversion coefficient)}.
+  \label{eq:kappa}
+\end{align}
+
+\subsection{GARCH(1,1) Representation}
+
+\begin{proposition}[Structural GARCH(1,1)]
+Adding a baseline variance term $\omega_i^t = (\kappa_t/S_t)\,\bar{\mathcal{R}}_i$ where $\bar{\mathcal{R}}_i$ is the long-run variance, the conditional variance satisfies:
+\begin{equation}
+  \boxed{
+    \E[\mathcal{R}_{i,t+1}\mid\mathcal{F}_t]
+    \;=\;
+    \underbrace{\omega_i^t}_{\text{baseline}}
+    \;+\;
+    \underbrace{\alpha_i^{\mathrm{GARCH}}\,(\epsilon_i^t)^2}_{\text{ARCH term}}
+    \;+\;
+    \underbrace{\beta_i^{\mathrm{GARCH}}\,\mathcal{R}_{i,t}}_{\text{GARCH term}}
+  }
+  \label{eq:garch11}
+\end{equation}
+with:
+\begin{align}
+  \alpha_i^{\mathrm{GARCH}} &\;=\; \theta_t
+  \;=\; \frac{\bar{C}_t^2(u_i-d_i)^2(1-f)}{\rho_i S_t^2(S_t+1)^2\Sigma_{i,t}^2}
+  \left[
+    \frac{\sigma_j^2\rho_i\sigma_i^2 F_{i,t}}{\Sigma_{i,t}}
+    + \frac{\sigma_j^2(1-f)}{\Sigma_{i,t}}
+    - \frac{\sigma_i^2(1-f)^2\sigma_j^{i2}\,\partial F_{i,t}/\partial\hat{p} - \sigma_i^2\Delta_i/\rho_i}{\Sigma_{i,t}}
+  \right],
+  \label{eq:alpha_garch}\\[6pt]
+  \beta_i^{\mathrm{GARCH}} &\;=\; 1 - \frac{\kappa_t}{S_t}
+  \;=\; 1 - \frac{\partial m_i^{*,t}}{\partial \hat{p}_i^{j,t}}\cdot\frac{\partial \hat{p}_i^{j,t}}{\partial \mathcal{R}_{i,t}}.
+  \label{eq:beta_garch}
+\end{align}
+\end{proposition}
+
+\subsection{Endogenous GJR Asymmetry}
+
+The term $(1-2\hat{p}_t)$ in $\Lambda_t$ (equation~\eqref{eq:Lambda}) introduces a sign asymmetry between positive and negative surprises. This yields a GJR-GARCH type extension:
+
+\begin{equation}
+  \E[\mathcal{R}_{i,t+1}\mid\mathcal{F}_t]
+  \;=\;
+  \omega_i^t
+  + \alpha_i^{\mathrm{GARCH}}\,(\epsilon_i^t)^2
+  + \gamma_i^{\mathrm{GARCH}}\,(\epsilon_i^t)^2\,\1_{\epsilon_i^t < 0}
+  + \beta_i^{\mathrm{GARCH}}\,\mathcal{R}_{i,t},
+  \label{eq:gjr_garch}
+\end{equation}
+
+where:
+\begin{equation}
+  \gamma_i^{\mathrm{GARCH}}
+  \;=\;
+  -\frac{\bar{C}_t^2(u_i-d_i)^2(1-f)^2(1-2\hat{p}_t)}
+        {S_t^2(S_t+1)^2\Sigma_{i,t}^3}
+  \bigl[\sigma_i^2 X_{i,t}(F_{i,t}\Sigma_{i,t}-X_{i,t}) - \sigma_j^2 Y_{i,t}^2\bigr].
+  \label{eq:gamma_garch}
+\end{equation}
+
+The sign of $\gamma_i^{\mathrm{GARCH}}$ depends on $\hat{p}_t \gtrless 1/2$:
+\begin{itemize}
+  \item If $\hat{p}_t > 1/2$: negative surprises have \emph{larger} volatility impact than positive — standard leverage effect.
+  \item If $\hat{p}_t < 1/2$: positive surprises have larger impact — reversed asymmetry.
+\end{itemize}
+This asymmetry is \emph{endogenous}: it emerges from the strategic marketing mechanism and Jeffrey updating rather than being imposed parametrically.
+
+\subsection{Stationarity Condition}
+
+\begin{proposition}[Stationarity]
+The GARCH process \eqref{eq:garch11} is covariance-stationary if and only if:
+\[
+  \alpha_i^{\mathrm{GARCH}} + \beta_i^{\mathrm{GARCH}} < 1
+  \;\iff\;
+  \theta_t \;<\; \frac{\kappa_t}{S_t}.
+\]
+This holds when the ARCH surprise effect is smaller than the mean-reversion force generated by the leader's marketing adjustment — a condition governed by the model's structural parameters.
+\end{proposition}
+
+%% ═══════════════════════════════════════════════════════════
+\section{Complete Parameter List}
+%% ═══════════════════════════════════════════════════════════
+
+Table~\ref{tab:params} lists every parameter and variable in the model.
+
+\begin{table}[H]
+  \centering
+  \caption{Complete parameter and variable list}
+  \label{tab:params}
+  \begin{tabular}{@{} l l l @{}}
+    \toprule
+    Symbol & Description & Domain \\
+    \midrule
+    \multicolumn{3}{l}{\textit{Primitives}} \\
+    $W_i$ & Initial budget of player $i$ & $\R_{>0}$ \\
+    $u_i$ & Up return of player $i$'s process & $\R$ \\
+    $d_i$ & Down return of player $i$'s process & $\R$, $d_i < u_i$ \\
+    $p_i$ & True up-probability (private to player $i$) & $(0,1)$ \\
+    $f$ & Performance fee & $(0,1)$ \\
+    $\rho_i$ & Risk aversion coefficient & $\R_{>0}$ \\
+    $\alpha_i^0, \beta_i^0$ & Prior Beta pseudo-counts & $\R_{>0}$ \\
+    $\gamma_i$ & Marketing diminishing returns scale & $\R_{>0}$ \\
+    \midrule
+    \multicolumn{3}{l}{\textit{Observed history}} \\
+    $n$ & Number of observed periods & $\mathbb{Z}_{>0}$ \\
+    $k_i$ & Number of up-moves in history & $\{0,\ldots,n\}$ \\
+    \midrule
+    \multicolumn{3}{l}{\textit{Derived (Bayesian posterior)}} \\
+    $\alpha_i^* = \alpha_i^0 + k_i$ & Posterior up pseudo-count & $\R_{>0}$ \\
+    $\beta_i^* = \beta_i^0 + n - k_i$ & Posterior down pseudo-count & $\R_{>0}$ \\
+    \midrule
+    \multicolumn{3}{l}{\textit{Decision variables}} \\
+    $m_i$ & Marketing spend & $[0, W_i]$ \\
+    $\alpha_i$ & Fraction allocated to other's process & $[0,1]$ \\
+    \midrule
+    \multicolumn{3}{l}{\textit{Derived (Jeffrey shift)}} \\
+    $\delta(m_i) = m_i/(m_i+\gamma_i)$ & Pseudo-count shift & $(0,1)$ \\
+    $\alpha_i^{**} = \alpha_i^* + \delta(m_i)$ & Jeffrey-shifted up pseudo-count & $\R_{>0}$ \\
+    $\beta_i^{**} = \beta_i^*$ & Jeffrey-shifted down pseudo-count & $\R_{>0}$ \\
+    $\hatpij = \alpha_i^{**}/(\alpha_i^{**}+\beta_i^{**})$ & Perceived up-probability & $(0,1)$ \\
+    $\mu_i^j = \hatpij u_i + (1-\hatpij)d_i$ & Perceived drift & $\R$ \\
+    $\sigma_i^{j2} = (u_i-d_i)^2\hatpij(1-\hatpij)$ & Perceived variance & $\R_{>0}$ \\
+    \midrule
+    \multicolumn{3}{l}{\textit{Equilibrium objects}} \\
+    $W_i^{\mathrm{eff}} = W_i - m_i^*$ & Effective budget & $\R_{>0}$ \\
+    $\Delta_i = \mu_j^i(1-f)-\mu_i$ & Net return differential & $\R$ \\
+    $\Sigma_i = \sigma_i^2+(1-f)^2\sigma_j^{i2}$ & Total perceived risk & $\R_{>0}$ \\
+    $F_i = W_i^{\mathrm{eff}}+f\alpha_j^* W_j^{\mathrm{eff}}$ & Fee-augmented budget & $\R_{>0}$ \\
+    $X_i, Y_i$ & Variance loadings (eqs.~\eqref{eq:Xi}--\eqref{eq:Yi}) & $\R$ \\
+    $\mathcal{R}_i$ & Realised portfolio variance & $\R_{>0}$ \\
+    \midrule
+    \multicolumn{3}{l}{\textit{Structural GARCH}} \\
+    $\epsilon_i^t = r_i^t - \mu_i$ & Return surprise & $\R$ \\
+    $S_t = \alpha_i^{**,t-1}+\beta_i^{**,t-1}$ & Total pseudo-count & $\R_{>0}$ \\
+    $\bar{C}_t$ & Belief scaling factor & $\R_{>0}$ \\
+    $\alpha_i^{\mathrm{GARCH}}$ & ARCH coefficient & $\R_{>0}$ \\
+    $\beta_i^{\mathrm{GARCH}}$ & GARCH persistence & $(0,1)$ \\
+    $\gamma_i^{\mathrm{GARCH}}$ & GJR asymmetry coefficient & $\R$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%% ═══════════════════════════════════════════════════════════
+\section{Guide to Symbolic Solution in SymPy / Mathematica}
+%% ═══════════════════════════════════════════════════════════
+
+This section provides a complete ordered recipe for solving the model symbolically.
+
+\subsection{Step-by-Step Recipe}
+
+\begin{enumerate}[label=\textbf{Step \arabic*.}, leftmargin=*, labelwidth=*, align=left]
+
+  \item \textbf{Declare all primitives as symbols.}\\
+  Parameters: $W_1, W_2, u_1, u_2, d_1, d_2, p_1, p_2, f, \rho_1, \rho_2, \alpha_1^0, \beta_1^0, \alpha_2^0, \beta_2^0, \gamma_1, \gamma_2, n, k_1, k_2$.
+
+  \item \textbf{Compute Bayesian posteriors.}\\
+  $\alpha_i^* \leftarrow \alpha_i^0 + k_i$, $\beta_i^* \leftarrow \beta_i^0 + n - k_i$ for $i=1,2$.
+
+  \item \textbf{Declare $m_1$ as a symbol. Set $m_2 = 0$.}\\
+  Compute $\delta(m_1) = m_1/(m_1+\gamma_1)$, $\delta(m_2) = 0$.
+
+  \item \textbf{Compute Jeffrey-shifted parameters.}\\
+  $\alpha_i^{**} \leftarrow \alpha_i^* + \delta(m_i)$, $\beta_i^{**} \leftarrow \beta_i^*$.\\
+  $\hat{p}_i^j \leftarrow \alpha_i^{**}/(\alpha_i^{**}+\beta_i^{**})$.
+
+  \item \textbf{Compute perceived drifts and variances.}\\
+  $\mu_i^j \leftarrow \hat{p}_i^j u_i + (1-\hat{p}_i^j)d_i$ (equation~\eqref{eq:perceived_drift}).\\
+  $\sigma_i^{j2} \leftarrow (u_i-d_i)^2\hat{p}_i^j(1-\hat{p}_i^j)$ (equation~\eqref{eq:perceived_vol}).
+
+  \item \textbf{Compute true variances.}\\
+  $\sigma_i^2 \leftarrow p_i(1-p_i)(u_i-d_i)^2$ (equation~\eqref{eq:true_var}).
+
+  \item \textbf{Declare $\alpha_1, \alpha_2$ as symbols and form $F_i$, $\Delta_i$, $\Sigma_i$.}\\
+  Equations~\eqref{eq:F}, \eqref{eq:Delta}, \eqref{eq:Sigma}. Note $F_i$ depends on $\alpha_j$.
+
+  \item \textbf{Solve the system $\{\alpha_1^* = \text{eq.}\eqref{eq:alpha1_star},\; \alpha_2^* = \text{eq.}\eqref{eq:alpha2_star}\}$ simultaneously.}\\
+  This is a $2\times2$ linear system in $(\alpha_1, \alpha_2)$ since $F_1$ depends on $\alpha_2$ and $F_2$ depends on $\alpha_1$. Solve for $\alpha_1^*(m_1), \alpha_2^*(m_1)$ as functions of $m_1$.
+
+  \item \textbf{Compute $\Pi$ and $\partial\alpha_2^*/\partial m_1$.}\\
+  Equations~\eqref{eq:Pi} and \eqref{eq:dalpha2_dm1}.
+
+  \item \textbf{Compute $\Phi$ and $\Psi$.}\\
+  Equations~\eqref{eq:Phi} and \eqref{eq:Psi}.
+
+  \item \textbf{Solve the FOC $\Phi \cdot \Pi = \Psi$ for $m_1^*$.}\\
+  Equation~\eqref{eq:m1_star}. Verify $m_1^* \geq 0$.
+
+  \item \textbf{Back-substitute $m_1^*$ to get $\alpha_1^*, \alpha_2^*, W_i^{\mathrm{eff}*}$.}
+
+  \item \textbf{Compute realised variance $\mathcal{R}_i$.}\\
+  Equations~\eqref{eq:Xi}--\eqref{eq:realised_var}.
+
+  \item \textbf{Compute structural GARCH coefficients.}\\
+  Declare $\epsilon_i^t$, $S_t$ as symbols.\\
+  Compute $\bar{C}_t$, $\Lambda_t$, $\theta_t$, $\kappa_t$.\\
+  Equations~\eqref{eq:alpha_garch}--\eqref{eq:gamma_garch}.
+
+  \item \textbf{Verify stationarity condition} $\alpha_i^{\mathrm{GARCH}} + \beta_i^{\mathrm{GARCH}} < 1$.
+
+\end{enumerate}
+
+\subsection{Key Equation Cross-Reference}
+
+\begin{table}[H]
+  \centering
+  \caption{Key equations for symbolic solution}
+  \label{tab:eqs}
+  \begin{tabular}{@{} l l l @{}}
+    \toprule
+    Equation & Description & Number \\
+    \midrule
+    $\mu_i, \sigma_i^2$ from $p_i, u_i, d_i$ & True process moments & \eqref{eq:true_mean}, \eqref{eq:true_var} \\
+    $\alpha_i^*, \beta_i^*$ from history & Bayesian posteriors & \eqref{eq:post_mean} \\
+    $\delta(m_i)$ & Marketing shift & \eqref{eq:Pi} \\
+    $\hat{p}_i^j$, $\mu_i^j$, $\sigma_i^{j2}$ & Jeffrey-updated beliefs & \eqref{eq:perceived_drift}--\eqref{eq:vol_full} \\
+    $\alpha_2^*$ & Follower allocation & \eqref{eq:alpha2_star} \\
+    $\alpha_1^*$ & Leader allocation & \eqref{eq:alpha1_star} \\
+    $m_1^*$ & Leader marketing & \eqref{eq:m1_star} \\
+    $\mathcal{R}_i$ & Realised portfolio variance & \eqref{eq:realised_var} \\
+    GARCH(1,1) & Structural volatility dynamics & \eqref{eq:garch11} \\
+    GJR extension & Asymmetric leverage & \eqref{eq:gjr_garch} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%% ═══════════════════════════════════════════════════════════
+\section{Comparative Statics Summary}
+%% ═══════════════════════════════════════════════════════════
+
+\begin{table}[H]
+  \centering
+  \caption{Comparative statics on perceived volatility $\sigma_i^{j2}$}
+  \begin{tabular}{@{} l l l @{}}
+    \toprule
+    Variable & Effect on $\sigma_i^{j2}$ & Condition \\
+    \midrule
+    $m_i \uparrow$ & $\sigma_i^{j2} \uparrow$ & if $\hat{p}_i^j < 1/2$ \\
+    $m_i \uparrow$ & $\sigma_i^{j2} \downarrow$ & if $\hat{p}_i^j > 1/2$ \\
+    $k_i \uparrow$ & $\sigma_i^{j2} \uparrow$ & if $\hat{p}_i^j < 1/2$ \\
+    $k_i \uparrow$ & $\sigma_i^{j2} \downarrow$ & if $\hat{p}_i^j > 1/2$ \\
+    $n \uparrow$ & $\sigma_i^{j2} \downarrow$ & if $\hat{p}_i^j < 1/2$ \\
+    $n \uparrow$ & $\sigma_i^{j2} \uparrow$ & if $\hat{p}_i^j > 1/2$ \\
+    $u_i - d_i \uparrow$ & $\sigma_i^{j2} \uparrow$ & unconditional \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Comparative statics on realised portfolio variance $\mathcal{R}_i$}
+  \begin{tabular}{@{} l l l @{}}
+    \toprule
+    Variable & Effect on $\mathcal{R}_i$ & Condition \\
+    \midrule
+    $m_i^* \uparrow$ & $\mathcal{R}_i \uparrow$ & if $fW_j^{\mathrm{eff}}\partial\alpha_j^*/\partial m_i^* > 1$ \\
+    $m_i^* \uparrow$ & $\mathcal{R}_i \downarrow$ & if $fW_j^{\mathrm{eff}}\partial\alpha_j^*/\partial m_i^* < 1$ \\
+    $\alpha_j^* \uparrow$ & $\mathcal{R}_i \uparrow$ & unconditional \\
+    $W_j^{\mathrm{eff}} \uparrow$ & $\mathcal{R}_i \uparrow$ & unconditional \\
+    $\rho_i \uparrow$ & $\mathcal{R}_i \downarrow$ & unconditional \\
+    $f \uparrow$ & ambiguous & depends on $X_i, Y_i, \Sigma_i$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Structural GARCH parameter properties}
+  \begin{tabular}{@{} l l l @{}}
+    \toprule
+    Parameter & Economic source & Key driver \\
+    \midrule
+    $\omega_i^t$ & Baseline process variance & True $p_i$, spread $u_i-d_i$ \\
+    $\alpha_i^{\mathrm{GARCH}}$ & Belief sensitivity to surprises & History length $S_t$, risk aversion $\rho_i$ \\
+    $\beta_i^{\mathrm{GARCH}}$ & Marketing persistence & Budget constraints, $\partial m_i^*/\partial\hat{p}$ \\
+    $\gamma_i^{\mathrm{GARCH}}$ & Asymmetric leverage & Position of $\hat{p}_t$ relative to $1/2$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{document}
