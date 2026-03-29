@@ -1,0 +1,645 @@
+\documentclass[12pt,a4paper]{article}
+
+%% ─────────────────────────────────────────────
+%%  NOTE FOR SUBMISSION:
+%%  Economic Theory Bulletin requires the Springer
+%%  svjour3 LaTeX class. Download it from:
+%%  https://www.springernature.com/gp/authors/campaigns/latex-author-support
+%%  Replace \documentclass above with:
+%%  \documentclass[smallextended]{svjour3}
+%%  and adapt author/institute blocks accordingly.
+%%  This file compiles standalone for review purposes.
+%% ─────────────────────────────────────────────
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{natbib}
+\bibliographystyle{spbasic}
+
+\geometry{margin=1.15in}
+\onehalfspacing
+
+
+%% ─────────────────────────────────────────────
+%%  THEOREM ENVIRONMENTS
+%% ─────────────────────────────────────────────
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+%% ─────────────────────────────────────────────
+%%  CUSTOM COMMANDS
+%% ─────────────────────────────────────────────
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\hatpij}{\hat{p}_i^{\,j}}
+\newcommand{\1}{\mathbf{1}}
+
+%% ─────────────────────────────────────────────
+\begin{document}
+%% ─────────────────────────────────────────────
+
+\title{\textbf{Strategic Marketing and GARCH Stationarity\\
+under Jeffrey Updating}}
+
+\author{Anurag Rana\\[4pt]
+\small Riskcare Ltd., 25 Worship Street, London EC2A 2DX, UK\\
+\small \texttt{[corresponding.author@riskcare.com]}
+}
+
+\date{\today}
+
+\maketitle
+
+%% ─────────────────────────────────────────────
+\begin{abstract}
+We study a two-player strategic investment model in which each player
+markets their return process to attract external capital by shifting the
+other's beliefs via Jeffrey conditioning --- without altering the true
+return process. This marketing constitutes a precise form of lying: it
+adds virtual up-counts to a Beta-Binomial posterior, distorting both
+perceived drift and perceived volatility. The central finding concerns
+the structural source of GARCH volatility dynamics. We show that the
+marketing adjustment channel --- absent under pure Bayesian updating ---
+provides the mean-reversion force that converts an integrated GARCH
+process (IGARCH) into a stationary GARCH(1,1). Under pure Bayesian
+updating the persistence coefficient equals unity and the conditional
+variance follows a unit-root process; Jeffrey conditioning introduces
+a finite mean-reversion coefficient driven by optimal marketing spend.
+All GARCH parameters --- the ARCH coefficient, persistence, GJR
+asymmetry, and baseline variance --- are derived as explicit closed-form
+functions of model primitives: the binomial process parameters, the Beta
+prior, the performance fee, and risk aversion. A companion paper
+develops the full Stackelberg equilibrium and comparative statics.
+
+\medskip\noindent
+\textbf{JEL codes:} D82, D83, G14, C11, C58
+
+\medskip\noindent
+\textbf{Keywords:} Jeffrey conditioning, asymmetric information,
+GARCH stationarity, strategic investment, Beta-Binomial beliefs,
+mean reversion
+\end{abstract}
+
+\newpage
+
+%% ─────────────────────────────────────────────
+\section{Introduction}
+\label{sec:intro}
+%% ─────────────────────────────────────────────
+
+GARCH models are among the most widely used tools in empirical finance,
+yet their structural origins remain poorly understood. Persistence and
+mean reversion in conditional variance are typically imposed
+parametrically rather than derived from economic primitives. This paper
+provides a microfoundation: in a two-player strategic investment model
+with asymmetric information, GARCH volatility dynamics emerge from the
+interaction between strategic belief manipulation, optimal capital
+allocation, and a shared public history of returns.
+
+The key finding is that the choice of belief-updating rule has
+structural consequences for the nature of the GARCH process. Under
+standard Bayesian updating, belief revision is driven entirely by
+hard evidence --- observable returns with well-defined likelihoods.
+No mechanism exists for soft evidence such as marketing or persuasion.
+We show that this restriction implies a structural deficiency: the
+conditional variance of the resulting portfolio follows an integrated
+GARCH (IGARCH) process with unit-root persistence, which is both
+empirically counterfactual and theoretically unsatisfying.
+
+Jeffrey conditioning \citep{Jeffrey1965} allows beliefs to shift in
+response to soft evidence --- evidence that changes credence without
+constituting a verifiable observation. In our model, marketing spend
+generates exactly this kind of shift: it adds virtual up-counts to
+the Bayesian posterior without changing the true return process. This
+is a lie in the precise economic sense. However, it introduces an
+endogenous strategic variable whose optimal level responds to the
+state of the world. This response constitutes the mean-reversion force
+that restores GARCH stationarity.
+
+The contribution of this note is to establish this Bayesian versus
+Jeffrey distinction as a structural determinant of volatility dynamics
+--- not a modelling detail. The result is clean: replacing Bayesian
+with Jeffrey updating converts IGARCH into stationary GARCH(1,1),
+with all parameters derived explicitly from economic primitives.
+
+This complements the endogenous uncertainty literature
+\citep{Kurz1994, KurzMotolese2001}, which generates GARCH from the
+aggregate distribution of heterogeneous beliefs in competitive
+equilibrium. Our mechanism is bilateral and strategic rather than
+distributional and competitive. It also complements \citet{Kyle1985},
+where informed trading converges to informational efficiency: in our
+model, belief manipulation via marketing converges to truth as
+accumulated history overwhelms the distortion. Both frameworks
+achieve asymptotic informational efficiency through different channels.
+The difference from Bayesian persuasion \citep{KamenicaGentzkow2011}
+is that communication here is costly, updating is via Jeffrey rather
+than Bayes, and both parties simultaneously act as senders and
+receivers.
+
+A companion paper \citep{Rana2025} develops the full model: the
+Stackelberg equilibrium with closed-form solutions, comparative
+statics, the monopoly limit, and the convergence theorem showing
+truth dominates marketing asymptotically.
+
+%% ─────────────────────────────────────────────
+\section{Model}
+\label{sec:model}
+%% ─────────────────────────────────────────────
+
+\subsection{Return Processes and Shared History}
+
+Two players $i \in \{1,2\}$, with $j = 3-i$, each own a risky process.
+Each period $t$, player $i$'s process generates a return per unit of
+capital:
+\begin{equation}
+  r_i^t =
+  \begin{cases}
+    u_i & \text{with true probability } p_i,\\
+    d_i & \text{with true probability } 1-p_i,
+  \end{cases}
+  \label{eq:returns}
+\end{equation}
+where $u_i > d_i$ are publicly known constants and
+$p_i \in (0,1)$ is the true up-probability, private to player $i$.
+Draws are i.i.d.\ across periods. True mean and variance:
+\begin{equation}
+  \mu_i = p_i u_i + (1-p_i)d_i,
+  \qquad
+  \sigma_i^2 = p_i(1-p_i)(u_i-d_i)^2.
+  \label{eq:true_moments}
+\end{equation}
+Both are determined entirely by $p_i$. Players have different true
+volatilities: $\sigma_1^2 \neq \sigma_2^2$ in general.
+
+Both players observe the same public history of $n$ past discrete
+returns from each process. Let $k_i$ be the number of up-moves in
+player $i$'s history. Player $j$'s prior on $p_i$ is
+$p_i \sim \mathrm{Beta}(\alpha_i^0, \beta_i^0)$. By conjugacy,
+the Bayesian posterior is:
+\begin{equation}
+  p_i \mid \mathbf{r}_i \sim \mathrm{Beta}(\alpha_i^*, \beta_i^*),
+  \qquad
+  \alpha_i^* = \alpha_i^0 + k_i, \quad
+  \beta_i^* = \beta_i^0 + n - k_i.
+  \label{eq:posterior}
+\end{equation}
+Since history is public, both players agree on this posterior. Let
+$S = \alpha_i^* + \beta_i^*$ denote the total pseudo-count;
+$S \sim n$ for large $n$.
+
+\subsection{Marketing as a Jeffrey Shift}
+
+Player $i$ spends $m_i \geq 0$ on marketing. This constitutes soft
+evidence in the sense of \citet{Jeffrey1965}: it shifts player $j$'s
+credence over $p_i$ without being a verifiable observation and without
+altering the true process $(\mu_i, \sigma_i^2)$. The Jeffrey rigidity
+condition holds since $\Pr(r_i^t = u_i \mid p_i) = p_i$ is determined
+by the true process, not by marketing. Formally, marketing generates a
+pseudo-count shift with diminishing returns:
+\begin{equation}
+  \delta(m_i) = \frac{m_i}{m_i + \gamma_i}, \quad \gamma_i > 0,
+  \label{eq:delta}
+\end{equation}
+with $\delta(0)=0$, $\delta \in (0,1)$, $\delta'> 0$,
+$\delta'' < 0$, and $\lim_{m_i\to\infty}\delta(m_i) = 1$.
+The Jeffrey-shifted posterior is
+$\mathrm{Beta}(\alpha_i^{**}, \beta_i^{**})$ where:
+\begin{equation}
+  \alpha_i^{**} = \alpha_i^* + \delta(m_i), \qquad
+  \beta_i^{**} = \beta_i^*.
+  \label{eq:jeffrey_shift}
+\end{equation}
+Player $j$'s Jeffrey-updated perceived moments:
+\begin{align}
+  \hatpij &= \frac{\alpha_i^{**}}{\alpha_i^{**}+\beta_i^{**}}, \qquad
+  \mu_i^j = \hatpij u_i + (1-\hatpij)d_i,
+  \label{eq:perceived_drift}\\
+  \sigma_i^{j2} &= (u_i-d_i)^2\hatpij(1-\hatpij)
+  = (u_i-d_i)^2
+    \frac{(\alpha_i^*+\delta(m_i))\,\beta_i^*}{(\alpha_i^*+\delta(m_i)+\beta_i^*)^2}.
+  \label{eq:perceived_vol}
+\end{align}
+
+\subsection{Investment, Capital Augmentation, and Preferences}
+
+Each player allocates budget $W_i > 0$ across: marketing spend $m_i$,
+own-process investment $(1-\alpha_i)W_i^{\mathrm{eff}}$, and
+cross-investment $\alpha_i W_i^{\mathrm{eff}}$ in the other's process,
+where $W_i^{\mathrm{eff}} = W_i - m_i$ and $\alpha_i \in [0,1]$.
+Incoming cross-investment multiplicatively augments the receiving
+player's capital base (it is genuinely deployed into the process). A
+performance fee $f \in (0,1)$ is retained on the gross return earned by
+the other's capital. Terminal wealth:
+\begin{equation}
+  W_i(T) = r_i^t\underbrace{(W_i^{\mathrm{eff}}
+    + f\alpha_j W_j^{\mathrm{eff}})}_{\tilde{A}_i}
+  + r_j^t\underbrace{\alpha_i W_i^{\mathrm{eff}}(1-f)}_{\tilde{B}_i}.
+  \label{eq:wealth}
+\end{equation}
+Players maximise mean-variance utility
+$\mathcal{V}_i = \E[W_i(T)] - (\rho_i/2)\Var[W_i(T)]$,
+$\rho_i > 0$, using true $(\mu_i, \sigma_i^2)$ for their own process
+and Jeffrey-shifted beliefs $(\mu_j^i, \sigma_j^{i2})$ for
+the other's process.
+
+%% ─────────────────────────────────────────────
+\section{Structural GARCH and the Role of Jeffrey Conditioning}
+\label{sec:garch}
+%% ─────────────────────────────────────────────
+
+\subsection{Belief Dynamics and Variance Propagation}
+
+Index periods $t = 1, 2, \ldots$ The return surprise:
+\begin{equation}
+  \epsilon_i^t = r_i^t - \mu_i
+  = \begin{cases}
+    (1-p_i)(u_i-d_i) & \text{up move, prob.\ }p_i,\\
+    -p_i(u_i-d_i) & \text{down move, prob.\ }1-p_i.
+  \end{cases}
+  \label{eq:surprise}
+\end{equation}
+The posterior mean updates after each observation as:
+\begin{equation}
+  \Delta\hat{p}_i^{j,t}
+  = \frac{\1_{\mathrm{up}}\,\beta_i^{**,t-1}
+         - \1_{\mathrm{down}}\,\alpha_i^{**,t-1}}
+         {S_t(S_t+1)},
+  \label{eq:belief_update}
+\end{equation}
+with expectation-weighted approximation:
+\begin{equation}
+  \Delta\hat{p}_i^{j,t}
+  \approx
+  \frac{\bar{C}_t\,\epsilon_i^t}{(u_i-d_i)\,S_t(S_t+1)},
+  \label{eq:belief_approx}
+\end{equation}
+where
+$\bar{C}_t = p_i\beta_i^{**,t-1}/(1-p_i)
+            + (1-p_i)\alpha_i^{**,t-1}/p_i$.
+
+The belief update propagates into realised portfolio variance
+$\mathcal{R}_i = \Var[W_i(T)]$ through four channels: the drift
+channel, the volatility channel, the marketing adjustment channel,
+and the capital augmentation channel. Let $\Lambda_t$ denote the
+total sensitivity of realised variance to the current belief level.
+Taking the second-order expansion of
+$\E[\mathcal{R}_{i,t+1} \mid \mathcal{F}_t]$ and using
+$\E[\epsilon_i^t \mid \mathcal{F}_t] = 0$ (so the linear term
+vanishes), one obtains:
+
+\begin{theorem}[Structural GARCH(1,1)]
+\label{thm:garch}
+Under Jeffrey conditioning with optimal marketing, the conditional
+variance satisfies:
+\begin{equation}
+  \E[\mathcal{R}_{i,t+1} \mid \mathcal{F}_t]
+  = \underbrace{\omega_i^t}_{\text{baseline}}
+  + \underbrace{\alpha_i^{\mathrm{GARCH}}\,(\epsilon_i^t)^2}_{\text{ARCH}}
+  + \underbrace{\beta_i^{\mathrm{GARCH}}\,\mathcal{R}_{i,t}}_{\text{persistence}},
+  \label{eq:garch11}
+\end{equation}
+with structural coefficients derived from model primitives:
+\begin{align}
+  \omega_i^t &= \frac{\kappa_t}{S_t}\bar{\mathcal{R}}_i
+                + \underline{\sigma}_i^2,
+  \label{eq:omega}\\
+  \alpha_i^{\mathrm{GARCH}}
+    &= \frac{\bar{C}_t^2}{2S_t^2(S_t+1)^2}
+       \frac{\partial\Lambda_t}{\partial\hat{p}_t},
+  \label{eq:alpha_garch}\\
+  \beta_i^{\mathrm{GARCH}}
+    &= 1
+       - \frac{\partial m_i^{*,t}}{\partial\hat{p}_i^{j,t}}
+       \cdot
+       \frac{\partial\hat{p}_i^{j,t}}{\partial\mathcal{R}_{i,t}},
+  \label{eq:beta_garch}
+\end{align}
+where $\underline{\sigma}_i^2 = p_i(1-p_i)(u_i-d_i)^2$ is the
+irreducible process variance floor, $\kappa_t$ is the strength
+of the marketing mean-reversion adjustment, and $\Lambda_t$ is
+derived explicitly in \citet{Rana2025}.
+\end{theorem}
+
+A GJR-GARCH extension adds an endogenous leverage term:
+\begin{equation}
+  \E[\mathcal{R}_{i,t+1} \mid \mathcal{F}_t]
+  = \omega_i^t
+  + \alpha_i^{\mathrm{GARCH}}(\epsilon_i^t)^2
+  + \gamma_i^{\mathrm{GARCH}}(\epsilon_i^t)^2
+    \1_{\epsilon_i^t < 0}
+  + \beta_i^{\mathrm{GARCH}}\mathcal{R}_{i,t},
+  \label{eq:gjr}
+\end{equation}
+where the sign of $\gamma_i^{\mathrm{GARCH}}$ depends on
+$\hat{p}_t \gtrless 1/2$, making the leverage effect endogenous
+and regime-dependent rather than parametrically imposed.
+
+\subsection{The Central Result: Jeffrey Conditioning Restores Stationarity}
+
+\begin{proposition}[Jeffrey vs.\ Bayesian]
+\label{prop:comparison}
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{Under Jeffrey conditioning with optimal marketing:}
+  The persistence coefficient satisfies $\beta_i^{\mathrm{GARCH}} < 1$,
+  so the GARCH process \eqref{eq:garch11} is covariance-stationary
+  whenever $\alpha_i^{\mathrm{GARCH}} + \beta_i^{\mathrm{GARCH}} < 1$.
+  The mean-reversion force is:
+  \begin{equation}
+    1 - \beta_i^{\mathrm{GARCH}}
+    = \frac{\partial m_i^{*,t}}{\partial\hat{p}_i^{j,t}}
+      \cdot
+      \frac{\partial\hat{p}_i^{j,t}}{\partial\mathcal{R}_{i,t}}
+    > 0.
+    \label{eq:mean_reversion}
+  \end{equation}
+
+  \item \textbf{Under pure Bayesian updating ($m_i \equiv 0$):}
+  The marketing adjustment channel vanishes entirely. Therefore:
+  \begin{equation}
+    \beta_i^{\mathrm{GARCH}} = 1,
+    \label{eq:unit_root}
+  \end{equation}
+  and the conditional variance follows an IGARCH process --- a
+  unit-root process with no covariance stationarity.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\textit{Part (i):} Under Jeffrey conditioning, player $i$ has a
+strictly interior optimal marketing spend $m_i^* > 0$ for all
+finite $n$. The derivative $\partial m_i^*/\partial\hat{p}_i^j > 0$
+because higher perceived quality raises the marginal value of
+attracting cross-investment (higher fee income). The derivative
+$\partial\hat{p}_i^j/\partial\mathcal{R}_i \neq 0$ because higher
+realised variance reduces the attractiveness of cross-investment,
+reducing $\alpha_j^*$ and hence the fee income that makes marketing
+profitable. The product is strictly positive, giving
+$1 - \beta_i^{\mathrm{GARCH}} > 0$.
+
+\textit{Part (ii):} Under pure Bayesian updating, soft evidence has
+no mechanism to shift beliefs --- only hard signals with
+well-defined likelihoods can update the posterior. Marketing
+therefore cannot influence beliefs and $m_i \equiv 0$ is the only
+feasible choice. With $m_i^{*,t} \equiv 0$ for all $t$, the partial
+derivative $\partial m_i^{*,t}/\partial\hat{p}_i^{j,t} = 0$
+identically, and equation \eqref{eq:beta_garch} reduces immediately
+to $\beta_i^{\mathrm{GARCH}} = 1$.
+\end{proof}
+
+\begin{remark}
+The result is structural, not parametric. Stationarity in
+\eqref{eq:garch11} does not depend on the values of $\rho_i$, $f$,
+$u_i$, $d_i$, or the prior parameters. It depends only on whether
+the belief-updating rule permits soft evidence --- and hence optimal
+marketing --- to exist as an endogenous strategic variable. Jeffrey
+conditioning permits it; Bayesian updating does not.
+\end{remark}
+
+\subsection{Properties of the Structural Coefficients}
+
+Each coefficient has a precise economic source and a clean
+comparative static in $n$:
+
+\textit{ARCH coefficient $\alpha_i^{\mathrm{GARCH}} \sim 1/n^2$:}
+Longer history anchors beliefs, making individual surprises less
+capable of propagating into future variance. As $n \to \infty$,
+the ARCH effect vanishes.
+
+\textit{Persistence $\beta_i^{\mathrm{GARCH}} \to 1$ as $n \to \infty$:}
+Marketing spend decays at rate $1/\sqrt{n}$ as accumulated history
+weakens the effectiveness of the lie (see Proposition~\ref{prop:convergence}
+below). The marketing adjustment accordingly weakens, and
+$\beta_i^{\mathrm{GARCH}}$ approaches unity --- though the stationarity
+condition is preserved for all finite $n$ since
+$\alpha_i^{\mathrm{GARCH}}$ decays faster ($1/n^2$) than
+$1 - \beta_i^{\mathrm{GARCH}}$ ($1/\sqrt{n}$).
+
+\textit{GJR asymmetry $\gamma_i^{\mathrm{GARCH}} \sim 1/n^2$:}
+The endogenous leverage effect is strongest in short relationships
+and disappears as history accumulates.
+
+\textit{Baseline $\omega_i^t \geq \underline{\sigma}_i^2 > 0$:}
+Bounded below by the irreducible process variance for all $n$,
+preventing variance from collapsing to zero even as all dynamic
+effects vanish.
+
+\begin{corollary}[Stationarity Condition]
+\label{cor:stationarity}
+The process \eqref{eq:garch11} is covariance-stationary if and only if:
+\begin{equation}
+  \frac{\bar{C}_t^2}{2S_t^2(S_t+1)^2}
+  \frac{\partial\Lambda_t}{\partial\hat{p}_t}
+  <
+  \frac{\partial m_i^{*,t}}{\partial\hat{p}_i^{j,t}}
+  \cdot
+  \frac{\partial\hat{p}_i^{j,t}}{\partial\mathcal{R}_{i,t}},
+  \label{eq:stationarity}
+\end{equation}
+i.e., the ARCH surprise effect is dominated by the marketing
+mean-reversion force. This holds whenever fee income
+$f \cdot \mu_i \cdot W_j$ is sufficiently large relative to
+belief sensitivity to surprises.
+\end{corollary}
+
+Table~\ref{tab:garch} summarises the regime dependence.
+
+\begin{table}[h]
+\centering
+\caption{GARCH coefficient behaviour across regimes. All
+parameters derived from model primitives.}
+\label{tab:garch}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Coefficient
+  & Jeffrey, finite $n$
+  & Bayesian ($m_i \equiv 0$)
+  & Jeffrey, $n\to\infty$ \\
+\midrule
+$\omega_i^t$
+  & $>\underline{\sigma}_i^2$, time-varying
+  & $=\underline{\sigma}_i^2$, fixed
+  & $\to\underline{\sigma}_i^2$ \\
+$\alpha_i^{\mathrm{GARCH}}$
+  & $>0$, decays $\sim 1/n^2$
+  & $>0$ (same)
+  & $\to 0$ \\
+$\beta_i^{\mathrm{GARCH}}$
+  & $<1$ \textbf{(stationary)}
+  & $=1$ \textbf{(IGARCH)}
+  & $\to 1$ \\
+$\gamma_i^{\mathrm{GARCH}}$
+  & endogenous sign
+  & endogenous sign
+  & $\to 0$ \\
+Stationarity
+  & \textbf{Yes}
+  & \textbf{No}
+  & Marginal \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The Lie Decays Asymptotically}
+
+\begin{proposition}[Asymptotic Dominance of Truth]
+\label{prop:convergence}
+As $n \to \infty$:
+\begin{equation}
+  m_i^* \to 0,
+  \qquad
+  \hatpij \to p_i,
+  \qquad
+  \sigma_i^{j2} \to \sigma_i^2.
+  \label{eq:convergence}
+\end{equation}
+Optimal marketing spend decays at rate $1/\sqrt{n}$.
+Perceived beliefs and perceived volatility converge to their
+true values at rate $1/n$.
+\end{proposition}
+
+\begin{proof}
+The marginal belief shift satisfies
+$\Pi = \partial\hatpij/\partial m_i \sim \beta_i^{**}/S^2 \sim 1/n$.
+Since the marginal benefit of marketing (fee income shifted by belief
+manipulation) contains $\Pi$ as a factor while marginal cost
+(foregone own-process return) is bounded away from zero, the optimal
+$m_i^*$ decays at rate $1/\sqrt{n}$ and reaches zero at finite
+threshold $n^*$. Thereafter $\delta(m_i^*) \to 0$ and
+$\hatpij \to \alpha_i^*/S \to p_i$ by the law of large numbers.
+\end{proof}
+
+\begin{remark}
+This result holds regardless of the marketing budget or the
+parameters of the model. Truth --- encoded in the public history of
+returns --- inevitably dominates strategic distortion. The lie is
+a short-run phenomenon: most effective when relationships are young
+and history is short, progressively weaker as the relationship
+matures, and ultimately irrelevant in the long run.
+\end{remark}
+
+%% ─────────────────────────────────────────────
+\section{Discussion}
+\label{sec:discussion}
+%% ─────────────────────────────────────────────
+
+\textit{Connection to RBE literature.}
+\citet{Kurz1994} and \citet{KurzMotolese2001} derive GARCH from
+the aggregate distribution of heterogeneous beliefs in competitive
+general equilibrium. Our mechanism is bilateral and strategic rather
+than distributional and competitive. Agents in RBE ignore their
+effect on prices; our players explicitly account for how marketing
+shifts the other's beliefs and hence allocation. The soft evidence
+channel through which marketing operates is absent from RBE, which
+relies on rational but diverse models of a complex economy.
+
+\textit{Connection to Kyle (1985).}
+\citet{Kyle1985} shows that informed trading produces a martingale
+price with constant volatility, converging to full information
+revelation by the terminal date. Our model also achieves asymptotic
+informational efficiency (Proposition~\ref{prop:convergence}),
+but through an opposite mechanism: Kyle's insider conceals
+information and profits from price impact; our player embellishes
+beliefs and profits from fee income. Neither generates stationary
+GARCH --- Kyle produces constant volatility, Bayesian updating
+produces IGARCH. Jeffrey conditioning is the ingredient that
+restores stationarity in our setting.
+
+\textit{Connection to Bayesian persuasion.}
+\citet{KamenicaGentzkow2011} study a sender who designs signals
+to persuade a Bayesian receiver. Three distinctions apply here:
+belief updating is via Jeffrey rather than Bayes; communication
+is costly and funded from the investment budget (making the
+interior optimum for $m_i^*$ depend on economic primitives
+rather than arising from signal design); and both players
+simultaneously act as senders and receivers within a Stackelberg
+game rather than a one-sided persuasion game.
+
+%% ─────────────────────────────────────────────
+\section{Conclusion}
+\label{sec:conclusion}
+%% ─────────────────────────────────────────────
+
+We have shown that the choice between Bayesian and Jeffrey updating
+has structural consequences for volatility dynamics in a strategic
+investment model. Under Bayesian updating, the conditional portfolio
+variance follows IGARCH with unit-root persistence. Under Jeffrey
+conditioning, optimal marketing spend introduces a mean-reversion
+force that converts IGARCH into stationary GARCH(1,1). All GARCH
+parameters are derived as explicit functions of model primitives.
+The GJR leverage asymmetry is endogenous and regime-dependent.
+Truth dominates the lie asymptotically: optimal marketing decays
+at rate $1/\sqrt{n}$ and beliefs converge to truth at rate $1/n$
+as the shared public history accumulates.
+
+The result identifies Jeffrey conditioning --- and the strategic
+marketing it enables --- as the structural source of mean reversion
+in conditional variance. This provides a microfoundation for
+empirically observed GARCH stationarity that does not require
+exogenous shocks to volatility or ad hoc persistence assumptions.
+
+%% ─────────────────────────────────────────────
+%%  DECLARATIONS
+%% ─────────────────────────────────────────────
+\paragraph{Acknowledgements.}
+The author thanks colleagues at Riskcare Ltd.\ for discussions.
+
+\paragraph{Competing Interests.}
+The author has no relevant financial or non-financial interests
+to disclose.
+
+\paragraph{Funding.}
+No funding was received to assist with the preparation of this
+manuscript.
+
+%% ─────────────────────────────────────────────
+%%  REFERENCES
+%%  ETB uses author-year citations (Name Year).
+%%  Reference list: alphabetical, Springer format.
+%% ─────────────────────────────────────────────
+\begin{thebibliography}{10}
+
+\bibitem[Jeffrey(1965)]{Jeffrey1965}
+Jeffrey RC (1965) The logic of decision.
+McGraw-Hill, New York
+
+\bibitem[Kamenica and Gentzkow(2011)]{KamenicaGentzkow2011}
+Kamenica E, Gentzkow M (2011) Bayesian persuasion.
+Am Econ Rev 101(6):2590--2615.
+\url{https://doi.org/10.1257/aer.101.6.2590}
+
+\bibitem[Kurz(1994)]{Kurz1994}
+Kurz M (1994) On the structure and diversity of rational beliefs.
+Econ Theory 4(6):877--900.
+\url{https://doi.org/10.1007/BF01213825}
+
+\bibitem[Kurz and Motolese(2001)]{KurzMotolese2001}
+Kurz M, Motolese M (2001) Endogenous uncertainty and market
+volatility. Econ Theory 17(3):497--544.
+\url{https://doi.org/10.1007/PL00004108}
+
+\bibitem[Kyle(1985)]{Kyle1985}
+Kyle AS (1985) Continuous auctions and insider trading.
+Econometrica 53(6):1315--1335.
+\url{https://doi.org/10.2307/1913210}
+
+\bibitem[Rana(2025)]{Rana2025}
+Rana A (2025) Strategic investment under asymmetric information,
+Jeffrey updating, multiplicative augmentation, and endogenous
+volatility. Working paper, Riskcare Ltd. Available at SSRN:
+[SSRN link to be inserted]
+
+\end{thebibliography}
+
+\end{document}

@@ -112,6 +112,60 @@ Each player has exactly three uses for their capital and no others:
 
 Incoming investment is accepted passively.
 
+\subsection{Why Jeffrey Conditioning?}
+
+Standard Bayesian updating requires \emph{hard evidence} — an observation that becomes certain once received. Jeffrey conditioning, by contrast, is designed for \emph{soft evidence}: the agent revises their degree of belief without any event being assigned probability one. This distinction is essential for modelling marketing in the present framework.
+
+
+\begin{table}[H]
+\centering
+\caption{Why the Model Uses Jeffrey Conditioning}
+\label{tab:jeffrey_motivation}
+\begin{tabular}{@{} l l l @{}}
+\toprule
+Aspect & Standard Bayesian Updating & Jeffrey Conditioning (this model) \\
+\midrule
+Signal type the method can handle & Hard, verifiable observations only & Uncertain / soft signals (marketing) \\
+Update rule & Conditions on an event with probability 1 & Revises credence in an uncertain proposition via \(q \in (0,1)\) \\
+Treatment of marketing & Would require verifiable disclosure or audit & Naturally models marketing as fractional pseudo-count shift \\
+Effect on perceived volatility & Almost always reduces uncertainty & Can raise or lower perceived volatility depending on \(\hat{p}_i^j \lessgtr 1/2\) \\
+Economic interpretation & ``Revealing objective information'' & ``Marketing a lie'' — shifting beliefs at a cost without changing fundamentals \\
+Key rigidity preserved & — & Conditional likelihood \(P(r_i^t = u_i \mid p_i) = p_i\) unchanged \\
+Role in volatility dynamics & Limited strategic feedback & Enables full endogenous GARCH/GJR from belief manipulation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+Jeffrey conditioning therefore provides the precise mechanism needed: it allows marketing to be a \emph{costly, dissipative, soft-evidence signal} that manipulates the opponent's perceived drift and volatility without altering the true stochastic process. This generates the rich endogenous volatility dynamics that are the central contribution of the model.
+
+\begin{definition}[Jeffrey Conditioning — Mathematical Derivation]
+Let \(H\) be the hypothesis of interest (here: ``the true up-probability is \(p_i$'') and let the evidence partition the space into \(\{E, \neg E\}\), where \(E\) represents ``favourable evidence for high \(p_i\)''.
+
+Jeffrey's rule of conditioning (Jeffrey, 1965) states that if the agent revises their credence in the evidence from the prior \(P(E)\) to a new value \(q \in (0,1)\), the updated probability of \(H\) is
+\[
+P'(H) = P(H \mid E) \cdot q + P(H \mid \neg E) \cdot (1-q).
+\]
+No event is treated as certain; only the weight on \(E\) changes.
+
+In the Beta-Binomial setting of this model:
+- The prior/posterior after public history is \(\mathrm{Beta}(\alpha_i^*,\, \beta_i^*)\).
+- The mean is \(\hat{p}_i^j = \frac{\alpha_i^*}{\alpha_i^* + \beta_i^*}\).
+
+Marketing supplies soft evidence equivalent to raising the credence in ``up'' by the amount \(\delta(m_i) \in (0,1)\). This is mathematically identical to adding a fractional pseudo-count \(\delta(m_i)\) **only to the up-count** while leaving the down-count unchanged:
+\[
+\alpha_i^{**} = \alpha_i^* + \delta(m_i), \qquad \beta_i^{**} = \beta_i^*.
+\]
+The new perceived up-probability becomes
+\[
+\hat{p}_i^j = \frac{\alpha_i^{**}}{\alpha_i^{**} + \beta_i^{**}} = \frac{\alpha_i^* + \delta(m_i)}{\alpha_i^* + \delta(m_i) + \beta_i^*}.
+\]
+
+To see that this is exactly Jeffrey's rule, note that the Beta mean is a weighted average of the conditional means under \(E\) and \(\neg E\). Adding \(\delta(m_i)\) to \(\alpha_i^*\) is equivalent to setting \(q = \frac{\alpha_i^* + \delta(m_i)}{\alpha_i^* + \beta_i^* + \delta(m_i)}\) in the Jeffrey formula above, confirming that the update is a convex combination that shifts credence without treating any new observation as certain.
+
+This derivation holds because the conditional likelihood \(P(r^t = u_i \mid p_i) = p_i\) is unaffected by marketing (rigidity condition).
+\end{definition}
+
 \section{Terminal Wealth and Preferences}
 
 \begin{definition}[Exposures]
