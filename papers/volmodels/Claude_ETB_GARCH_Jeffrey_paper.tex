@@ -201,7 +201,10 @@ $S \sim n$ for large $n$.
 
 \subsection{Marketing as a Jeffrey Shift}
 
-Player $i$ spends $m_i \geq 0$ on marketing. This constitutes soft
+The following describes player $i$'s marketing acting on player $j$'s 
+beliefs; the symmetric case --- player $j$'s marketing shifting player 
+$i$'s beliefs about $p_j$ --- follows by exchanging $i$ and $j$ 
+throughout. Player $i$ spends $m_i \geq 0$ on marketing. This constitutes soft
 evidence in the sense of \citet{Jeffrey1965}: it shifts player $j$'s
 credence over $p_i$ without being a verifiable observation and without
 altering the true process $(\mu_i, \sigma_i^2)$. The Jeffrey rigidity
@@ -234,25 +237,64 @@ Player $j$'s Jeffrey-updated perceived moments:
 
 \subsection{Investment, Capital Augmentation, and Preferences}
 
-Each player allocates budget $W_i > 0$ across: marketing spend $m_i$,
-own-process investment $(1-\alpha_i)W_i^{\mathrm{eff}}$, and
-cross-investment $\alpha_i W_i^{\mathrm{eff}}$ in the other's process,
-where $W_i^{\mathrm{eff}} = W_i - m_i$ and $\alpha_i \in [0,1]$.
-Incoming cross-investment multiplicatively augments the receiving
-player's capital base (it is genuinely deployed into the process). A
-performance fee $f \in (0,1)$ is retained on the gross return earned by
-the other's capital. Terminal wealth:
+Each player $i$ divides budget $W_i > 0$ across three uses. First,
+marketing spend $m_i \geq 0$ is paid upfront, leaving an effective
+investable budget $W_i^{\mathrm{eff}} = W_i - m_i$. Second, a
+fraction $(1 - \alpha_i)$ of $W_i^{\mathrm{eff}}$ is deployed into
+player $i$'s own process. Third, the remaining fraction
+$\alpha_i \in [0,1]$ is invested cross into player $j$'s process.
+The budget identity is therefore:
 \begin{equation}
-  W_i(T) = r_i^t\underbrace{(W_i^{\mathrm{eff}}
-    + f\alpha_j W_j^{\mathrm{eff}})}_{\tilde{A}_i}
-  + r_j^t\underbrace{\alpha_i W_i^{\mathrm{eff}}(1-f)}_{\tilde{B}_i}.
+  W_i = m_i
+        + (1-\alpha_i)\,W_i^{\mathrm{eff}}
+        + \alpha_i\,W_i^{\mathrm{eff}},
+  \label{eq:budget}
+\end{equation}
+with $W_i^{\mathrm{eff}} = W_i - m_i$ substituted throughout.
+
+Cross-investment is productive: when player $j$ places
+$\alpha_j W_j^{\mathrm{eff}}$ into player $i$'s process, that
+capital is genuinely deployed and earns the same per-unit return
+$r_i^t$ as player $i$'s own capital. Player $i$ retains a
+performance fee $f \in (0,1)$ on the \emph{gross} return earned
+by this incoming capital. Player $i$'s total effective capital
+base --- own investment plus fee-adjusted incoming capital ---
+is therefore:
+\begin{equation}
+  \tilde{A}_i = (1-\alpha_i)\,W_i^{\mathrm{eff}}
+                + f\,\alpha_j\,W_j^{\mathrm{eff}}.
+  \label{eq:Atilde}
+\end{equation}
+The first term is player $i$'s own deployment; the second is the
+fee income entitlement on the capital placed by player $j$.
+
+Conversely, when player $i$ cross-invests $\alpha_i W_i^{\mathrm{eff}}$
+into player $j$'s process, player $j$ retains the fee $f$ on
+that capital's gross return. Player $i$ therefore receives only
+the net-of-fee fraction:
+\begin{equation}
+  \tilde{B}_i = \alpha_i\,W_i^{\mathrm{eff}}\,(1-f).
+  \label{eq:Btilde}
+\end{equation}
+
+Terminal wealth is the sum of returns on each leg:
+\begin{equation}
+  W_i(T) = r_i^t\,\tilde{A}_i + r_j^t\,\tilde{B}_i
+          = r_i^t\!\underbrace{\bigl((1-\alpha_i)\,W_i^{\mathrm{eff}}
+              + f\,\alpha_j\,W_j^{\mathrm{eff}}\bigr)}_{\tilde{A}_i}
+          + r_j^t\!\underbrace{\alpha_i\,W_i^{\mathrm{eff}}(1-f)}_{\tilde{B}_i}.
   \label{eq:wealth}
 \end{equation}
+The first term is the return on player $i$'s own process, earned
+on both own capital and the fee entitlement from incoming capital.
+The second term is the net-of-fee return on the cross-investment
+in player $j$'s process.
+
 Players maximise mean-variance utility
 $\mathcal{V}_i = \E[W_i(T)] - (\rho_i/2)\Var[W_i(T)]$,
-$\rho_i > 0$, using true $(\mu_i, \sigma_i^2)$ for their own process
-and Jeffrey-shifted beliefs $(\mu_j^i, \sigma_j^{i2})$ for
-the other's process.
+$\rho_i > 0$, using true moments $(\mu_i, \sigma_i^2)$ for their
+own process and Jeffrey-shifted beliefs $(\mu_j^i, \sigma_j^{i2})$
+for the other's process.
 
 %% ─────────────────────────────────────────────
 \section{Structural GARCH and the Role of Jeffrey Conditioning}
