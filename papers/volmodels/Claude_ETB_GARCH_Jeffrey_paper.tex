@@ -297,6 +297,104 @@ own process and Jeffrey-shifted beliefs $(\mu_j^i, \sigma_j^{i2})$
 for the other's process.
 
 %% ─────────────────────────────────────────────
+\subsection{Utility Maximisation and Optimal Decisions}
+\label{sec:optimisation}
+%% ─────────────────────────────────────────────
+
+Each player $i$ chooses marketing spend $m_i \geq 0$ and
+cross-investment share $\alpha_i \in [0,1]$ to maximise
+mean-variance utility:
+\begin{equation}
+  \max_{m_i,\,\alpha_i}\;
+  \mathcal{V}_i
+  = \E[W_i(T)] - \frac{\rho_i}{2}\Var[W_i(T)],
+  \label{eq:utility_max}
+\end{equation}
+where $W_i(T)$ is given by \eqref{eq:wealth}, using true moments
+$(\mu_i, \sigma_i^2)$ for the own process and Jeffrey-shifted
+beliefs $(\mu_j^i, \sigma_j^{i2})$ for the other's process.
+The two choice variables enter differently: $\alpha_i$ governs
+the allocation of the investable budget $W_i^{\mathrm{eff}}$
+between own and cross investment, while $m_i$ reduces
+$W_i^{\mathrm{eff}}$ directly but raises the fee income from
+incoming capital by shifting player $j$'s beliefs.
+
+\textit{Optimal cross-investment share $\alpha_i^*$.}
+Expanding $\E[W_i(T)]$ and $\Var[W_i(T)]$ using \eqref{eq:wealth}
+and the independence of $r_i^t$ and $r_j^t$:
+\begin{align}
+  \E[W_i(T)]
+    &= \mu_i\,\tilde{A}_i + \mu_j^i\,\tilde{B}_i,
+  \label{eq:EW}\\
+  \Var[W_i(T)]
+    &= \sigma_i^2\,\tilde{A}_i^2
+     + \sigma_j^{i2}\,\tilde{B}_i^2.
+  \label{eq:VarW}
+\end{align}
+Taking the first-order condition with respect to $\alpha_i$
+and solving, the optimal cross-investment share is:
+\begin{equation}
+  \alpha_i^*
+  = \frac{1}{W_i^{\mathrm{eff}}}
+    \cdot
+    \frac{\mu_j^i(1-f) - \rho_i\,\sigma_j^{i2}(1-f)^2
+          W_i^{\mathrm{eff}}\,\alpha_i
+          + \rho_i\,\sigma_i^2 f\,\alpha_j W_j^{\mathrm{eff}}
+          \cdot (1-\alpha_i)W_i^{\mathrm{eff}}}
+         {\rho_i\bigl(\sigma_i^2 + \sigma_j^{i2}(1-f)^2\bigr)}.
+  \label{eq:alpha_star_implicit}
+\end{equation}
+In the symmetric case $\sigma_i^{i2} = \sigma_j^{i2}$ this
+simplifies to a standard mean-variance ratio: the cross-investment
+share rises with the perceived Sharpe ratio of player $j$'s process
+(net of fee) and falls with risk aversion $\rho_i$. Crucially,
+$\alpha_i^*$ depends on the Jeffrey-shifted beliefs $(\mu_j^i,
+\sigma_j^{i2})$ and hence on $m_j$ --- player $j$'s marketing
+spend --- through \eqref{eq:perceived_drift}--\eqref{eq:perceived_vol}.
+
+\textit{Optimal marketing spend $m_i^*$.}
+Substituting $\alpha_i^*$ back into $\mathcal{V}_i$ and
+differentiating with respect to $m_i$, the first-order condition
+for interior marketing spend equates marginal benefit to marginal
+cost:
+\begin{equation}
+  \underbrace{f\,\alpha_j^*\,W_j^{\mathrm{eff}}\,\mu_i
+              \cdot
+              \frac{\partial\hatpij}{\partial m_i}
+              (u_i - d_i)}_{\text{marginal fee income from belief shift}}
+  =
+  \underbrace{\mu_i\,(1 - \alpha_i^*)
+              + \mu_j^i\,\alpha_i^*(1-f)}_{\text{marginal cost: foregone return}}.
+  \label{eq:foc_marketing}
+\end{equation}
+The left-hand side is the marginal benefit: an infinitesimal
+increase in $m_i$ shifts $\hatpij$ upward at rate
+$\partial\hatpij/\partial m_i = \delta'(m_i)\,\beta_i^{**}/S^{**2}$
+(from \eqref{eq:jeffrey_shift}), raising the perceived
+attractiveness of player $i$'s process to player $j$, and
+hence increasing the incoming cross-investment that earns
+fee income $f$. The right-hand side is the marginal cost:
+each unit of $m_i$ reduces $W_i^{\mathrm{eff}}$ by one,
+forgoing the return that capital would have earned in the
+own and cross positions.
+
+The solution $m_i^* > 0$ is strictly interior for all finite
+$n$, because $\partial\hatpij/\partial m_i \sim 1/n > 0$
+keeps the marginal benefit positive while the marginal cost
+is bounded away from zero. The key feature of $m_i^*$ for
+what follows is its sensitivity to the state of beliefs:
+\begin{equation}
+  \frac{\partial m_i^*}{\partial \hatpij} > 0,
+  \label{eq:dm_dphat}
+\end{equation}
+since a higher perceived quality $\hatpij$ raises the fee
+income on incoming capital, increasing the return to further
+marketing. It is precisely this responsiveness --- the fact
+that optimal marketing spend tracks the belief state ---
+that generates mean reversion in conditional variance, as
+shown in Section~\ref{sec:garch}.
+
+%% ─────────────────────────────────────────────
 \section{Structural GARCH and the Role of Jeffrey Conditioning}
 \label{sec:garch}
 %% ─────────────────────────────────────────────
@@ -312,7 +410,28 @@ Index periods $t = 1, 2, \ldots$ The return surprise:
   \end{cases}
   \label{eq:surprise}
 \end{equation}
-The posterior mean updates after each observation as:
+
+\textit{Derivation of the posterior mean update.}
+At the start of period $t$, player $j$'s Jeffrey-shifted posterior
+on $p_i$ is $\mathrm{Beta}(\alpha_i^{**,t-1}, \beta_i^{**,t-1})$
+as given by \eqref{eq:jeffrey_shift}, with total pseudo-count
+$S_t = \alpha_i^{**,t-1} + \beta_i^{**,t-1}$ and posterior mean
+$\hat{p}_i^{j,t-1} = \alpha_i^{**,t-1}/S_t$.
+After observing period $t$'s return, the posterior updates by
+conjugacy: an up-move increments $\alpha_i^{**}$ by one, a
+down-move increments $\beta_i^{**}$ by one, and $S_t$ increases
+to $S_t + 1$ in either case. The resulting shift in posterior mean is:
+\begin{align*}
+  \text{up move:}\quad
+  &\frac{\alpha_i^{**,t-1}+1}{S_t+1}
+   - \frac{\alpha_i^{**,t-1}}{S_t}
+   = \frac{\beta_i^{**,t-1}}{S_t(S_t+1)},\\[4pt]
+  \text{down move:}\quad
+  &\frac{\alpha_i^{**,t-1}}{S_t+1}
+   - \frac{\alpha_i^{**,t-1}}{S_t}
+   = \frac{-\alpha_i^{**,t-1}}{S_t(S_t+1)}.
+\end{align*}
+Combining both cases via indicator functions:
 \begin{equation}
   \Delta\hat{p}_i^{j,t}
   = \frac{\1_{\mathrm{up}}\,\beta_i^{**,t-1}
@@ -320,7 +439,16 @@ The posterior mean updates after each observation as:
          {S_t(S_t+1)},
   \label{eq:belief_update}
 \end{equation}
-with expectation-weighted approximation:
+which follows directly from \eqref{eq:posterior} and
+\eqref{eq:jeffrey_shift}.
+
+\textit{Approximation in terms of the return surprise.}
+To connect \eqref{eq:belief_update} to the return surprise
+$\epsilon_i^t$, note that $\1_{\mathrm{up}} = \epsilon_i^t /
+(u_i - d_i)(1-p_i)$ and $\1_{\mathrm{down}} = -\epsilon_i^t /
+(u_i - d_i) p_i$ in expectation. Weighting the numerator of
+\eqref{eq:belief_update} by these expectation factors and
+collecting terms yields:
 \begin{equation}
   \Delta\hat{p}_i^{j,t}
   \approx
@@ -328,8 +456,18 @@ with expectation-weighted approximation:
   \label{eq:belief_approx}
 \end{equation}
 where
-$\bar{C}_t = p_i\beta_i^{**,t-1}/(1-p_i)
-            + (1-p_i)\alpha_i^{**,t-1}/p_i$.
+\begin{equation}
+  \bar{C}_t
+  = \frac{p_i\,\beta_i^{**,t-1}}{1-p_i}
+  + \frac{(1-p_i)\,\alpha_i^{**,t-1}}{p_i}
+  \label{eq:Cbar}
+\end{equation}
+is a positive weighting coefficient that captures the asymmetric
+sensitivity of the posterior mean to up- versus down-moves,
+governed by the current Jeffrey-shifted parameters
+$(\alpha_i^{**,t-1}, \beta_i^{**,t-1})$. Since
+$\E[\epsilon_i^t \mid \mathcal{F}_t] = 0$, the approximation
+\eqref{eq:belief_approx} is exact in expectation.
 
 The belief update propagates into realised portfolio variance
 $\mathcal{R}_i = \Var[W_i(T)]$ through four channels: the drift
