@@ -1,55 +1,30 @@
-%% Submission draft — Income Inequality, Participation Costs
-%% and the Stratification of Status Competition
-\documentclass[12pt,english]{article}
+%% Status Competition under Income Inequality
+%% Submission to Journal of Institutional and Theoretical Economics (JITE)
+%% Files needed: jite_regular.tex, jite_style0.tex, jite2022.bst
+
+\documentclass[
+    oneside,
+    fontsize=10pt,leqno]{article}
+\usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{array}
+\usepackage[english]{babel}
+\usepackage{enumitem}
+\usepackage{amsfonts,amssymb,amsmath,amsthm}
+\usepackage{graphicx}
 \usepackage{float}
 \usepackage{multirow}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{geometry}
-\geometry{margin=2.5cm}
+\usepackage{booktabs}
+\usepackage{mathtools}
+\usepackage{natbib}\bibliographystyle{jite2022}
+
+\input{jite_regular}
+\input{jite_style0}
 
 \graphicspath{{./figures/}}
 
-\makeatletter
-
-\providecommand{\tabularnewline}{\\}
-
-\theoremstyle{plain}
-    \ifx\thechapter\undefined
-      \newtheorem{assumption}{Assumption}
-    \else
-      \newtheorem{assumption}{Assumption}[chapter]
-    \fi
-    \newtheorem{proposition}{Proposition}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-\usepackage{tgtermes}
-%\usepackage{librebaskerville}
-%\usepackage[sfdefault]{biolinum}  
-%\usepackage[adobe-utopia]{mathdesign}
-%\usepackage{Alegreya}
-\usepackage{mathtools}
-\usepackage{apacite}
-\usepackage{titlesec}
-\usepackage{bbm}
-
-
-\usepackage{longtable}
-\usepackage{booktabs}
-\usepackage{sectsty}
-\usepackage[toc,page]{appendix}
-
-\makeatletter
-\providecommand{\tabularnewline}{\\}
-\makeatother
-
-\usepackage{babel}
-\providecommand{\assumptionname}{Assumption}
+%% Theorem environments (JITE JITEth style, defined in jite_style0)
+\newtheorem{assumption}{Assumption}
+\newtheorem{prop}{Proposition}
 
 \begin{document}
 \title{Status Competition under Income Inequality}
@@ -60,13 +35,6 @@
 \date{Submitted: [Month Year]}
 \maketitle
 
-\noindent\textbf{Keywords:} status competition; income inequality;
-social capital; participation threshold; mobility ceiling
-
-\medskip
-\noindent\textbf{JEL Classification:} [e.g. D31, D62, J62, Z13]
-
-\medskip
 \begin{abstract}
 Status-related expenditures rise with income inequality, contrary to
 post-war predictions. We model a single high-income participant
@@ -81,38 +49,41 @@ arises in which only low-income participants invest. Collective
 low-income mobility is permanently capped below one-half, with the
 binding ceiling tightening as the equilibrium converges toward
 elite-only participation.
+\Keywords{status competition; income inequality; social capital; participation threshold; mobility ceiling}
+
+\JEL{[e.g. D31, D62, J62, Z13]\footnote{See \href{https://www.aeaweb.org/econlit/jelCodes.php}{https://www.aeaweb.org/econlit/jelCodes.php}.}}
+
 \end{abstract}
 
 \section{Introduction}
 
 \noindent
 
-The decision to invest in elite professional credentials is rarely
-reducible to expected returns on human capital alone. Research on
+The decision to invest in elite professional credentials is rarely reducible to expected returns on human capital alone. Research on
 elite hiring suggests that such investments also function as bids for
 social position: employers in top-tier professional firms consistently
 privilege the prestige of credentials over their content, and access
 to the most rewarding positions is shaped as much by social capital
-as by demonstrated skill \cite{Rivera2015Pedigree,Bills2003Credentials}.
+as by demonstrated skill \citep{Rivera2015Pedigree,Bills2003Credentials}.
 Yet the relationship between income inequality and the propensity to
 make such investments remains poorly understood. Post-war scholars
-of status competition --- \citeA{HirschSocialLimits},
-\citeA{GalbraithAffluent}, and \citeA{FrankPond} --- argued that
+of status competition --- \citet{HirschSocialLimits},
+\citet{GalbraithAffluent}, and \citet{FrankPond} --- argued that
 rising living standards and narrowing income gaps intensify positional
 rivalry, as more participants can afford to compete for a fixed stock
-of social rank. Empirical research, however, consistently finds the
-opposite: status-related expenditure rises with inequality, not with
-its reduction \cite{JinLiWu2011,JaikumarSarin2015,ChaiKausKiedaisch2019}.
+of social rank. Empirical research, on the other hand, often finds the
+opposite: status-related expenditure has risen with inequality, not with
+its reduction \citep{JinLiWu2011,JaikumarSarin2015,ChaiKausKiedaisch2019}.
 This paper develops a theoretical model that clarifies the conditions
 under which each pattern can arise.
 
 The source of the tension, we argue, lies in the failure to endogenise
 status within an economic framework that takes participation costs
-seriously. When status competitions are treated as fixed social facts
-rather than equilibrium outcomes, the effect of inequality on participation
-is indeterminate. A model that derives participation decisions endogenously
+seriously. Such models treat status competitions as fixed social facts
+rather than equilibrium outcomes, leaving the effect of inequality on participation
+indeterminate. A model that derives participation decisions endogenously
 --- under income heterogeneity and a threshold cost of entry --- can
-recover the empirical result as an equilibrium phenomenon and identify
+recover the empirical result as an equilibrium phenomenon and also identify
 the parametric conditions under which the post-war pattern might also
 hold.
 
@@ -127,14 +98,14 @@ it accessible to the high-income participant by default and contingent on
 budget feasibility for low-income participants. The probability of advancement depends
 on both components, with social capital weighted more heavily than
 raw talent. Following
-\citeA{postlewaite1998socialbasisinterdeppreferences}, status does
+\citet{postlewaite1998socialbasisinterdeppreferences}, status does
 not enter utility directly but operates through its effect on income
 and the intertemporal wealth utility it enables.
 
 Four results emerge. First, under diminishing utility of wealth,
 only two stable Nash equilibria exist: one in which both high-income and
 low-income participants invest in social capital, and one in which only the high-income participant does.
-This binary structure formalizes the intuition behind Hirsch's social limits to growth \cite{HirschSocialLimits} and provides
+This binary structure formalizes the intuition behind Hirsch's social limits to growth \citep{HirschSocialLimits} and provides
 a microfoundation for the empirically observed stratification of status
 investments by income class. Second, the transition between these
 equilibria is governed jointly by the income gap $y_{2}-y_{1}$ and
@@ -150,7 +121,7 @@ window is governed by the probability surplus $\Phi(Q)$, which
 decreases in the weight placed on social capital. This result provides
 a formal account of how meritocratic beliefs and income segregation
 can reinforce one another
-\cite{MijsMeritocracy2020,MijsParadox2019}. Fourth, while individual
+\citep{MijsMeritocracy2020,MijsParadox2019}. Fourth, while individual
 low-income mobility probability vanishes as $Q\to\infty$, collective
 class-level mobility converges to two distinct ceilings depending on
 which equilibrium prevails: $1$ under universal participation and a value depending 
@@ -181,10 +152,10 @@ and compressed income distributions intensify positional rivalry, as
 more participants can afford to compete for a fixed stock of social
 rank. Empirical research, however, consistently finds that status-related
 consumption rises with inequality rather than falling with it. Studies
-of education expenditure in China \cite{JinLiWu2011}, conspicuous
-consumption in India \cite{JaikumarSarin2015}, and broader cross-national
-data \cite{ChaiKausKiedaisch2019} all report this positive association.
-\citeA{MijsParadox2019} further documents how rising inequality has
+of education expenditure in China \citep{JinLiWu2011}, conspicuous
+consumption in India \citep{JaikumarSarin2015}, and broader cross-national
+data \citep{ChaiKausKiedaisch2019} all report this positive association.
+\citet{MijsParadox2019} further documents how rising inequality has
 coincided with stronger meritocratic beliefs and increased segregation
 of status competitions, rather than heightened competition across
 class lines. Our model clarifies this divergence by identifying the
@@ -192,16 +163,16 @@ equilibrium conditions under which the relationship between inequality
 and participation switches direction --- a distinction the post-war
 literature could not make without endogenous participation.
 
-Status considerations complicate this relationship further. Although
+The paper is motivated by the concerns about reconciliation of objective and subjective notions of status in the sociological literature \citep{wegener1992prestigeconcepts}. Status considerations do complicate relationship between inequality and competitions. Although
 status or prestige has long been recognized as a key motivator of
-labor participation \cite{BenabouTiroleIntrinsicExtrinsic2003,FrankPond},
+labor participation \citep{BenabouTiroleIntrinsicExtrinsic2003,FrankPond},
 the conventional view contrasts status as a social goal against the
 economic goals of a consumer --- a dichotomy that complicates the
 endogenisation of status within economic models. Yet status is neither
 independent of nor reducible to economic rewards
-\cite{goode1978celebrationheroes,moldovanuselacontestsstatus2007}.
+\citep{goode1978celebrationheroes,moldovanuselacontestsstatus2007}.
 The sociological literature emphasizes the need to reconcile objective
-and subjective aspects of status \cite{wegener1992prestigeconcepts},
+and subjective aspects of status \citep{wegener1992prestigeconcepts},
 highlighting how both structural position and perceived rank shape
 behavior. The competition-view of status that we adopt allows us
 to define explicitly the scope of income inequality's effects by
@@ -209,41 +180,38 @@ considering the motivations for objective status in a hierarchy of
 social positions. Within this framework, status influences economic
 outcomes indirectly: it does not enter utility directly through wealth,
 but through its effect on participation and relative ranking
-\cite{postlewaite1998socialbasisinterdeppreferences}. This approach
-is also consistent with \citeA{ColeMailaithPostlewaite1992}, where
-status does not directly contribute to utility but affects behavior
-through its link to future economic outcomes.
+\citep{postlewaite1998socialbasisinterdeppreferences}.
 
 The social capital literature provides the investment-theoretic
-foundation for the participation cost structure. \citeA{Jencks1979}
+foundation for the participation cost structure. \citet{Jencks1979}
 highlights the dual economic and social character of social capital,
 which mediates how inequality interacts with long-term investments
 in credentials and networks. Participation costs in elite competitions
 --- tuition fees, membership dues, the opportunity cost of network
 cultivation --- are threshold rather than continuous expenditures:
 they must be paid in full to unlock the social capital they provide
-\cite{HeckmanMosso2014}. This threshold structure is central to
+\citep{HeckmanMosso2014}. This threshold structure is central to
 the model's ability to generate binary equilibrium outcomes and a
 closed-form participation condition.
 
 The present paper constructs a model that combines the indirect
-status utility of \citeA{postlewaite1998socialbasisinterdeppreferences},
+status utility of \citet{postlewaite1998socialbasisinterdeppreferences},
 the tournament structure of the contests literature, and the threshold
 cost structure from social capital theory into a single framework in
 which participation is an endogenous equilibrium outcome. The key architectural choice --- fixing one high-income participant and varying the
 pool of low-income challengers $Q$ --- allows us to derive competition-size comparative statics as well as the divergence between individual and collective mobility with respect to the concentration of higher socio-economic levels.
 
 
-The three closest quantitative predecessors each address the question
+The two closest quantitative predecessors each address the question
 of how inequality shapes status competition, but reach conclusions
-that diverge from those of the present paper. \citeA{FrankAER1984}
+that diverge from those of the present paper. \citet{FrankAER1984}
 treats status as a reciprocal phenomenon: workers accept wage
 penalties to occupy the top of the local rank distribution, so
 wider wage dispersion reduces competition intensity --- narrowing
-inequality intensifies it. \citeA{ColeMailaithPostlewaite1992}
+inequality intensifies it. \citet{ColeMailaithPostlewaite1992}
 derive status concern endogenously from the marriage market and show
 directly that agents from an economy with a more compact income
-distribution save more \cite[p.~1103]{ColeMailaithPostlewaite1992}:
+distribution save more \citep[p.~1103]{ColeMailaithPostlewaite1992}:
 again, narrowing inequality intensifies status competition. In each
 case the mechanism operates through the intensity of behavior within
 a fixed participant pool; whether agents can afford to participate is
@@ -260,8 +228,7 @@ can generate.
 
 \noindent
 
-We consider a status competition in which a single high-income participant
-($R=1$) competes against $Q\geq1$ low-income participants ($N=Q+1$ total).
+We consider a status competition in which a single high-income participant competes against $Q\geq1$ low-income participants ($Q+1$ total).
 The high-income participant occupies the high-income position $y_{2}$ and
 seeks to maintain it; each low-income participant receives income $y_{1}<y_{2}$
 and seeks promotion. Two characteristics determine performance in
@@ -286,7 +253,7 @@ depend only on the income class of the participant.
 
 Status enters utility only indirectly: the winner obtains disposable
 income $y_{2}$ in the following period, the loser retains $y_{1}$.
-This treatment, following \citeA{postlewaite1998socialbasisinterdeppreferences},
+This treatment, following \citet{postlewaite1998socialbasisinterdeppreferences},
 preserves a standard wealth-utility framework while endogenising the
 social dimension of the competition.
 
@@ -299,17 +266,9 @@ throughout that social capital is weighted more heavily than raw talent:
 
 \noindent The distribution of the composite score $x_{i}\equiv\mu
 r_{i}+(1-\mu)s_{i}$ under Assumption~\ref{assu:mu_less_than_half}
-is derived in Appendix~\ref{sec:appendix_theoretical_1}. With $r_{i}$
-and $s_{i}$ independent and uniform on $[0,1]$, the CDF is trapezoidal:
-
-\begin{align*}
-F_{X}(x) & =\begin{cases}
-\dfrac{x^{2}}{2\mu(1-\mu)} & 0<x<\mu\\[6pt]
-\dfrac{x-\mu/2}{1-\mu} & \mu<x<1-\mu\\[6pt]
-1-\dfrac{(x-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x<1\\[4pt]
-0 & \text{otherwise}
-\end{cases}
-\end{align*}
+is trapezoidal (derived in Appendix~\ref{sec:appendix_theoretical_1}),
+with CDF $F_{X}(x)$ that is piecewise quadratic on $[0,\mu]$, linear
+on $[\mu,1-\mu]$, and piecewise quadratic on $[1-\mu,1]$.
 
 The four investment cases are as follows.
 
@@ -328,72 +287,30 @@ does not ($\nu_{2}=0$).
 
 \subsubsection{Winning Probabilities}
 
-We derive the per-low-income-participant winning probability for each case.
-Throughout, $N=Q+1$ and the high-income participant's probability follows
-from $p_{2}=1-Q\,p_{1}$.
-
-\subsubsection*{Case I}
-
-The low-income participant wins only if $\mu r_{i}$ exceeds $\mu r_{k}$
-for all $Q-1$ other low-income participants and exceeds the full score
-$\mu r_{k}+(1-\mu)s_{k}$ of the investing high-income participant. Since
-$\mu r_{i}<\mu$ for all $r_{i}\in(0,1)$ under Assumption~\ref{assu:mu_less_than_half},
-only the first piece of $F_{X}$ is relevant:
+The derivations are in Appendices~\ref{sec:appendix_theoretical_1}
+and~\ref{sec:appendix_theoretical_2}. The per-low-income-participant
+winning probabilities are:
 
 \begin{align}
-P_{1}(\text{win}|r_{i}) & =r_{i}^{Q-1}\cdot F_{X}(\mu r_{i})
-=r_{i}^{Q-1}\cdot\frac{\mu r_{i}^{2}}{2(1-\mu)}
-=\frac{\mu}{2(1-\mu)}\,r_{i}^{Q+1}\label{eq:CaseI_cond}
+p_{1} & =\frac{\mu}{2(1-\mu)(Q+2)} & & \text{(Case I)}\label{eq:p1_caseI}\\[4pt]
+p_{1}' & =\frac{6-7\mu}{6(1-\mu)} & & \text{(Case II, }Q=1\text{)}\label{eq:p1prime_Q1}\\[4pt]
+p_{1} & =\frac{1}{Q+1} & & \text{(Cases III and IV)}\label{eq:p_baseline}
 \end{align}
 
-Integrating over $r_{i}\sim\mathrm{Uniform}[0,1]$:
+In Case~I, the low-income participant competes on raw talent alone
+against the high-income participant's full composite score --- a
+structural disadvantage that drives $p_{1}$ strictly below the
+symmetric baseline $1/(Q+1)$. In Case~II the roles are reversed:
+the investing low-income participant has the full score advantage,
+pushing $p_{1}'$ strictly above the baseline. For Cases~III and IV,
+symmetry gives $1/(Q+1)$ directly. For general $Q\geq2$, $p_{1}'$
+is computable as a rational function of $\mu$ of degree $Q$
+(Appendix~\ref{sec:appendix_theoretical_2}); all equilibrium
+results for Case~II follow from the ordering result alone, without
+requiring a closed form for $p_{1}'$.
 
-\begin{align}
-p_{1} & =\int_{0}^{1}P_{1}(\text{win}|r_{i})\,dr_{i}
-=\frac{\mu}{2(1-\mu)(Q+2)}\label{eq:p1_caseI}
-\end{align}
-
-\subsubsection*{Case II}
-
-When the high-income participant does not invest, a given low-income participant
-wins if her full score $x_{i}=\mu r_{i}+(1-\mu)s_{i}$ exceeds
-$x_{k}$ for all $Q-1$ other low-income participants and exceeds $\mu
-r_{\text{H}}$. The conditional probability is:
-
-\begin{align*}
-P_{1}(\text{win}|r_{i},s_{i}) & =F_{X}(x_{i})^{Q-1}\cdot G(x_{i}),\quad
-G(x)=\begin{cases}\dfrac{x}{\mu} & 0<x<\mu\\1 & x\geq\mu\end{cases}
-\end{align*}
-
-For $Q=1$ --- one low-income participant against one non-investing high-income
---- the double integral over the unit square (Appendix~\ref{sec:appendix_theoretical_2})
-yields a closed form:
-
-\begin{align}
-p_{1}' & =\frac{6-7\mu}{6(1-\mu)}\quad(Q=1)\label{eq:p1prime_Q1}
-\end{align}
-
-For $Q\geq2$, the integrand $F_{X}(x)^{Q-1}\cdot G(x)$ generates
-polynomial interactions across all three CDF regions, so no single
-closed form exists across general $Q$. This asymmetry between Cases
-I and II is economically meaningful: in Case I the low-income participants face each
-other only on raw talent, whereas in Case II they also compete against
-each other on the full score distribution, creating competitive
-externalities that compound with $Q$.
-
-\subsubsection*{Cases III and IV}
-
-When neither participant invests, competition depends solely on raw
-talent. Each of the $Q+1$ participants wins with equal probability:
-
-\begin{align}
-p_{1}=\int_{0}^{1}r^{Q}\,dr=\frac{1}{Q+1}\label{eq:p_baseline}
-\end{align}
-
-When both invest, all scores $x_{i}$ are identically distributed
-via $F_{X}$. By symmetry the winning probability is again
-$1/(Q+1)$, verified by direct double integration for $Q=1,\ldots,5$
-(Appendix~\ref{sec:appendix_theoretical_2}).
+The high-income participant's probability follows from $p_{2}=1-Q\,p_{1}$
+in each case.
 
 \medskip
 
@@ -413,10 +330,10 @@ Panel (d) is discussed in Section~\ref{subsec:Mobility-Ceiling}.
 
 \begin{figure}[H]
 \begin{centering}
-\includegraphics[width=5.5in]{winprob_main}
+\includegraphics[width=\textwidth]{winprob_main}
 \par\end{centering}
 \caption{\label{fig:Probability-of-winning}Winning probabilities and mobility
-ceiling. $R=1$ high-income participant, $Q$ low-income participants. Dotted horizontal
+ceiling. One high-income participant, $Q$ low-income participants. Dotted horizontal
 lines in panels (a)--(b) show baselines $1/(Q+1)$ for each $Q$.}
 \end{figure}
 
@@ -445,8 +362,8 @@ U_{1}\equiv u(y_{1})-u(y_{1}-\overline{\nu}),\qquad U_{2}\equiv u(y_{2})-u(y_{2}
 
 Under diminishing marginal utility with $y_{1}<y_{2}$: $U_{2}<U_{1}$.
 Table~\ref{tab:prisoners_dilemma_cases} summarises the four cases
-as a $2\times2$ game, and Table~\ref{tab:prisoners_dilemma} reports
-the utility payoffs.
+as a $2\times2$ game; full utility payoffs are in
+Table~\ref{tab:prisoners_dilemma} (Appendix~\ref{sec:appendix_payoffs}).
 
 \begin{table}[H]
 \centering
@@ -462,41 +379,10 @@ the utility payoffs.
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
-\centering
-\caption{\label{tab:prisoners_dilemma}Utility payoffs (scale factor $D_{T}/\delta$
-multiplies all second-period terms)}
-\smallskip
-\begin{tabular}{lll}
-\toprule
- & \textit{Low-income withdraws} & \textit{Low-income invests}\\
-\midrule
-\textit{High-income withdraws} &
-  $u(y_{2})+\dfrac{D_{T}}{\delta}\!\left[\tfrac{1}{Q+1}u(y_{2})+\tfrac{Q}{Q+1}u(y_{1})\right]$ \newline
-  $u(y_{1})+\dfrac{D_{T}}{\delta}\!\left[\tfrac{1}{Q+1}u(y_{2})+\tfrac{Q}{Q+1}u(y_{1})\right]$
-  &
-  $u(y_{2})+\dfrac{D_{T}}{\delta}\!\left[(1-Qp_{1}')u(y_{2})+Qp_{1}'u(y_{1})\right]$ \newline
-  $u(y_{1}-\overline{\nu})+\dfrac{D_{T}}{\delta}\!\left[p_{1}'u(y_{2})+(1-p_{1}')u(y_{1})\right]$
-  \\[12pt]
-\textit{High-income invests} &
-  $u(y_{2}-\overline{\nu})+\dfrac{D_{T}}{\delta}\!\left[p_{2}u(y_{2})+(1-p_{2})u(y_{1})\right]$ \newline
-  $u(y_{1})+\dfrac{D_{T}}{\delta}\!\left[p_{1}u(y_{2})+(1-p_{1})u(y_{1})\right]$
-  &
-  $u(y_{2}-\overline{\nu})+\dfrac{D_{T}}{\delta}\!\left[\tfrac{1}{Q+1}u(y_{2})+\tfrac{Q}{Q+1}u(y_{1})\right]$ \newline
-  $u(y_{1}-\overline{\nu})+\dfrac{D_{T}}{\delta}\!\left[\tfrac{1}{Q+1}u(y_{2})+\tfrac{Q}{Q+1}u(y_{1})\right]$
-  \\
-\bottomrule
-\end{tabular}
-\begin{flushleft}
-{\footnotesize In each cell: upper entry is high-income participant's utility;
-lower entry is low-income participant's utility. $p_{1},p_{2}$ are Case~I
-probabilities; $p_{1}'$ is the Case~II low-income-participant probability
-($Q=1$ closed form; general $Q$ computed numerically). The high-income
-participant's Case~II probability $1-Qp_{1}'$ satisfies
-$1/(Q+1)-[1-Qp_{1}']=Q(p_{1}'-1/(Q+1))=Q\cdot\Phi(Q)/\text{scale}$,
-valid for all $Q\geq1$.}
-\end{flushleft}
-\end{table}
+
+The full utility payoffs for each case are reported in
+Table~\ref{tab:prisoners_dilemma} in Appendix~\ref{sec:appendix_payoffs};
+the equilibrium conditions below are derived from those payoffs.
 
 \subsubsection{Nash Equilibrium Conditions}
 
@@ -517,7 +403,7 @@ $Q\geq1$.
 
 \medskip
 \noindent\textbf{Case I} (high-income invests, low-income withdraws) is a Nash
-equilibrium if and only if:\footnote{Derived from: $u(y_{1})+\frac{D_{T}}{\delta}[p_{1}u(y_{2})+(1-p_{1})u(y_{1})]>u(y_{1}-\overline{\nu})+\frac{D_{T}}{\delta}[\frac{1}{Q+1}u(y_{2})+\frac{Q}{Q+1}u(y_{1})]$ for the low-income participant, and the reverse inequality for the high-income participant.}
+equilibrium if and only if:\footnote{Derived from the payoff table (Appendix~\ref{sec:appendix_payoffs}): the low-income participant prefers not to invest, and the high-income participant prefers to invest, given the other\'s strategy.}
 
 \begin{gather}
 \frac{D_{T}}{\delta}\left(\frac{1}{Q+1}-p_{1}\right)(u(y_{2})-u(y_{1}))<U_{1}\label{eq:caseI_poor}\\
@@ -555,17 +441,19 @@ $p_{1}'=(6-7\mu)/[6(1-\mu)]$ yields:
 
 where $(3-4\mu)>0$ for all $\mu<1/2$ under Assumption~\ref{assu:mu_less_than_half},
 so $\Phi(1)$ is strictly positive and decreasing in $\mu$. For
-$Q\geq2$, $p_{1}'$ has no single closed form across general $Q$
-(as noted in Section~\ref{subsec:Two-player-Discrete-Model}), but
-$\Phi(Q)$ is computable numerically for any $(Q,\mu)$ and inherits
-the ordering $\Phi(Q)>0$ for all $\mu<1/2$. The qualitative
+$Q\geq2$, $p_{1}'$ is computable as a rational function of $\mu$
+of degree $Q$ for each specific $Q$, but no uniform closed-form
+expression holds across all $Q$ simultaneously
+(as noted in Section~\ref{subsec:Two-player-Discrete-Model}).
+Nevertheless, $\Phi(Q)$ is computable numerically for any $(Q,\mu)$
+and inherits the ordering $\Phi(Q)>0$ for all $\mu<1/2$. The qualitative
 conclusions of Proposition~\ref{prop:caseII} --- that Case~II
 requires reference-dependent preferences for all $Q\geq1$ and that
 the feasibility window $[U_1, U_2/Q]$ narrows as $\mu$ increases
 --- hold for general $Q$ by the ordering results in
 Equation~\ref{eq:ordering}.
 
-\begin{proposition}[Case II Nash Equilibrium]\label{prop:caseII}
+\begin{prop}[Case II Nash Equilibrium]\label{prop:caseII}
 Case II (low-income invest, high-income withdraws) is a Nash equilibrium if and
 only if:
 \begin{gather}
@@ -582,11 +470,11 @@ standard concavity ordering. For $Q=1$, the condition reduces to:
 U_{1}<\Phi(1)\leq U_{2}\label{eq:caseII_Q1}
 \end{align}
 which is feasible if and only if $U_{1}<U_{2}$.
-\end{proposition}
+\end{prop}
 
 \begin{proof}
 Condition~\eqref{eq:caseII_NSC} is derived directly from the utility
-payoffs in Table~\ref{tab:prisoners_dilemma}. The low-income participant
+payoffs in Table~\ref{tab:prisoners_dilemma} (Appendix~\ref{sec:appendix_payoffs}). The low-income participant
 prefers to invest given the high-income participant withdraws if and only if
 $U_{1}<\Phi(Q)$. The high-income participant prefers to withdraw given the
 low-income participants invest if and only if the gain from deviating to investment,
@@ -611,7 +499,7 @@ $\Phi(1)\to1/3$. Second, the equilibrium remains fragile even when
 it exists: higher $\overline{\nu}$, greater impatience ($\delta$
 rising), or wider income differences ($y_{2}-y_{1}$ larger) can each
 collapse it into Case~III or Case~IV respectively
-\cite{MijsMeritocracy2020,MijsParadox2019}.
+\citep{MijsMeritocracy2020,MijsParadox2019}.
 
 \medskip
 \noindent\textbf{Case III} (neither invests) is a Nash equilibrium if:\footnote{Both participants prefer withdrawal given the other withdraws.}
@@ -667,57 +555,12 @@ Setting Equation~\ref{eq:caseIV_poor} as an equality:
 u(y_{1})-u(y_{1}-\overline{\nu}^{*}) & =\frac{D_{T}}{\delta}\left(\frac{1}{Q+1}-p_{1}\right)(u(y_{2})-u(y_{1}))\label{eq:threshold_general}
 \end{align}
 
-The qualitative properties of $\overline{\nu}^{*}$ --- that it is
-interior, positive, decreasing in $Q$, and decreasing in $\mu$ ---
-follow from the general condition~\eqref{eq:threshold_general} for
-any strictly increasing concave $u(\cdot)$. Log utility provides a
-tractable closed form for illustration:
+Under log utility $u(y)=\log(y)$, this yields
+$\overline{\nu}^{*}=y_{1}(1-(y_{1}/y_{2})^{A})$, showing that the
+threshold depends on the income ratio $y_{1}/y_{2}$ rather than the
+income level alone; the full derivation is in
+Appendix~\ref{sec:appendix_Tperiod}.
 
-Under log utility $u(y)=\log(y)$, this yields:
-
-\begin{align}
-\overline{\nu}^{*} & =y_{1}\left(1-\left(\frac{y_{1}}{y_{2}}\right)^{A}\right),\qquad
-A=\frac{D_{T}}{\delta}\left(\frac{1}{Q+1}-\frac{\mu}{2(1-\mu)(Q+2)}\right)\label{eq:nu_star}
-\end{align}
-
-Since $1/(Q+1)>p_{1}$ for all $\mu<1/2$ (Equation~\ref{eq:ordering}),
-we have $A>0$ and hence $\overline{\nu}^{*}\in(0,y_{1})$: the
-threshold is always interior and affordable by the low-income participant.
-For $T=2$ ($D_{T}=1$), $A$ reduces to $(1/\delta)(1/(Q+1)-p_{1})$.
-The T-period generalisation is detailed in Appendix~\ref{sec:appendix_Tperiod}.
-
-\subsubsection{\label{subsec:Comparative-Statics}Comparative Statics}
-
-The participation window --- the set of $\overline{\nu}$ values
-that sustain Case~IV --- is determined by $A$ in Equation~\ref{eq:nu_star}.
-Two comparative statics follow directly from the closed-form expression
-for $A$:
-
-\medskip
-\noindent\textbf{Credential inflation} ($\mu$ decreasing, social
-capital weighted more heavily):
-
-\begin{align}
-\frac{\partial A}{\partial\mu} & =-\frac{1}{2(Q+2)(1-\mu)^{2}}<0\label{eq:dA_dmu}
-\end{align}
-
-The sign is negative for all admissible $\mu\in(0,1/2)$ and all
-$Q\geq1$: as social capital becomes more decisive relative to raw
-talent, $A$ decreases and $\overline{\nu}^{*}$ falls. The economic
-mechanism is direct. When $\mu$ is low, the informational advantage
-of investing in social capital is large --- a low-income participant who
-pays $\overline{\nu}$ gains substantially more than a non-investor
---- so the participation window is wide. As $\mu\to0$ (pure social
-capital competition), $A\to1/(Q+1)$, the window is at its maximum.
-As $\mu$ rises toward $1/2$ (Assumption~\ref{assu:mu_less_than_half}
-binding), $A\to(Q+3)/[2(Q+1)(Q+2)]$, which is still positive but
-substantially reduced. The implication is that credential inflation
---- institutional credentials becoming more decisive relative to
-innate ability, which is the empirically relevant direction in elite
-labor markets --- closes the range of costs that sustain universal
-participation. Low-income participants are priced out not because costs
-rise but because the informational return to investing falls as
-social capital becomes near-universal among competitors.
 
 \medskip
 \noindent\textbf{Competition size} ($Q$ increasing, more low-income challengers):
@@ -756,7 +599,7 @@ only the low-income participants over-invest in credentials --- consistent with 
 sociological observation that aspiring candidates from lower-income
 backgrounds disproportionately invest in elite signals in highly
 selective, socially-embedded competitions
-\cite{HeckmanMosso2014,MijsParadox2019}.
+\citep{HeckmanMosso2014,MijsParadox2019}.
 
 In large competitions --- national civil service examinations, mass
 graduate recruitment schemes, standardised professional qualifications
@@ -829,7 +672,7 @@ limit. The Case~IV ceiling ($\to1$) is relevant only when $Q$ is
 small and costs are low enough to sustain universal participation ---
 the regime where mobility concerns are least acute. It is the Case~I
 ceiling $\mu/[2(1-\mu)]$ that constitutes the binding social limit
-to growth in the sense of \citeA{HirschSocialLimits}.
+to growth in the sense of \citet{HirschSocialLimits}.
 
 Simultaneously, the \emph{individual} low-income participant's probability
 $p_{1}\to0$ as $Q\to\infty$: each low-income participant's chances vanish
@@ -863,9 +706,9 @@ and elite-only participation, in which only the high-income participant does. Th
 structure formalizes Hirsch's (\citeyear{HirschSocialLimits}) social
 limits to growth as an equilibrium theorem rather than a qualitative
 conjecture. Second, the transition between these equilibria is governed
-by a participation threshold $\overline{\nu}^{*}=y_{1}(1-(y_{1}/y_{2})^{A})$,
-where $A$ decreases in both competition intensity $Q$ and credential
-inflation ($\mu$ falling). Wider inequality sustains high-income investment
+by a participation threshold $\overline{\nu}^{*}$ decreasing in
+both competition intensity $Q$ and credential weight $\mu$.
+Wider inequality sustains high-income investment
 even as it prices out low-income participants, explaining why status expenditure
 and inequality can rise together. Third, reference-dependent utility introduces a
 boundary equilibrium --- characterized by a formal proposition --- in
@@ -881,9 +724,9 @@ not the trivial Case~IV limit --- that constitutes the operative
 social limit to growth in the empirically relevant regime.
 
 The results add nuance to the predictions from models using fixed
-status hierarchies. Higher wage inequality in \citeA{FrankAER1984}
+status hierarchies. Higher wage inequality in \citet{FrankAER1984}
 reduces competition intensity as it lowers the cost of low status.
-In \citeA{ColeMailaithPostlewaite1992}, agents from an economy with
+In \citet{ColeMailaithPostlewaite1992}, agents from an economy with
 a more compact income distribution save more, so narrowing inequality
 must raise status expenditures in both. The present model makes
 participation income-constrained and demonstrates how wider
@@ -908,10 +751,18 @@ $\mu$ --- making raw talent more decisive relative to social capital
 if class-level mobility is to exceed the ceiling.
 
 Several assumptions bound the analysis and point to natural
-extensions. The model fixes $R=1$ throughout; with $R>1$ high-income
-participants the binary equilibrium structure is preserved but the
-mobility ceiling becomes $R\cdot\mu/[2(1-\mu)(R+1)]$, approaching
-the same limit as $R\to\infty$ normalised by population share.
+extensions. The model restricts attention to a single high-income participant;
+relaxing this to multiple high-income participants preserves the
+binary equilibrium structure but changes the mobility ceiling
+formula, and is left to future work.
+The threshold cost $\overline{\nu}$ is treated as a recurrent
+period cost --- consistent with ongoing credential maintenance,
+annual professional fees, and sustained network participation ---
+rather than a one-time investment that low-income participants
+could save toward over multiple periods. A model with lumpy
+one-time investments and a savings margin would allow low-income
+participants to delay entry, potentially widening the feasibility
+window for Case~IV; we leave this extension to future work.
 The threshold cost structure is binary --- pay $\overline{\nu}$ in
 full or not at all --- which generates the clean closed-form results
 but abstracts from continuous investment intensities; a convex cost
@@ -921,15 +772,15 @@ the incomes $y_1$ and $y_2$ are exogenous: the model identifies how
 inequality shapes participation given a distribution of positions,
 but not how status competition feeds back into the income distribution
 over time. Integrating the participation mechanism with an endogenous
-income process --- closer in spirit to \citeA{ColeMailaithPostlewaite1992}
+income process --- closer in spirit to \citet{ColeMailaithPostlewaite1992}
 --- would allow the model to speak to the long-run co-evolution of
 inequality and credential investment, which the empirical literature
-increasingly documents \cite{MijsParadox2019,MijsMeritocracy2020}.
+increasingly documents \citep{MijsParadox2019,MijsMeritocracy2020}.
 
-\bibliographystyle{apacite}
+%\bibliographystyle{apacite} % replaced by jite2022 in preamble
 \bibliography{status_consumption}
 
-\begin{appendices}
+\appendix
 \section{Convolution of Uniform Random Variables} \label{sec:appendix_theoretical_1}
 
 The distribution of a convex combination $w=\mu r+(1-\mu)s$ of two
@@ -1001,7 +852,7 @@ F_{X}(x) & =\begin{cases}
 
 \begin{figure}[H]
 \begin{centering}
-\includegraphics[width=5in]{density_appendix}
+\includegraphics[width=\textwidth]{density_appendix}
 \par\end{centering}
 \caption{\label{fig:convex_combo}Left: ranges of $w$ and $x$ for convolution
 of two scaled random variables. Right: trapezoidal density of $w$
@@ -1009,34 +860,74 @@ as the convex combination with $\mu=\frac{1}{5}$.}
 \end{figure}
 
 \newpage
-\section{$P(\text{win}|r,s)$} \label{sec:appendix_theoretical_2} 
+\section{Winning Probability Derivations} \label{sec:appendix_theoretical_2}
 
-To calculate $\int_{s=0}^{s=1}\int_{r=0}^{r=1}P(\text{win}|r,s)drds$
-over the variable $x$ (where $0<r<1$ and $0<s<1$), we evaluate
-the sum of three parts split by the boundaries of the piecewise function.
-The three parts are shown in Figure \ref{fig:integral_boundaries}.
-If $x=\mu r+(1-\mu)s$ and $F(x)$ is of the following piece-wise
-form
+\subsection*{Case I: High-income invests, low-income do not}
+
+The low-income participant's score is $\mu r_i$ (no social capital).
+She wins if $\mu r_i$ exceeds all $Q-1$ other low-income participants'
+scores and the high-income participant's full composite score
+$x_{\text{H}} = \mu r_{\text{H}} + (1-\mu)s_{\text{H}}$.
+Since $\mu r_i < \mu$ for all $r_i \in (0,1)$ under
+Assumption~\ref{assu:mu_less_than_half}, only the first piece of
+$F_X$ applies:
+\[
+P_1(\text{win}|r_i) = r_i^{Q-1} \cdot F_X(\mu r_i)
+= r_i^{Q-1} \cdot \frac{\mu r_i^2}{2(1-\mu)}
+= \frac{\mu}{2(1-\mu)}\,r_i^{Q+1}
+\]
+Integrating over $r_i \sim \mathrm{Uniform}[0,1]$:
+\[
+p_1 = \int_0^1 \frac{\mu}{2(1-\mu)}\,r^{Q+1}\,dr
+= \frac{\mu}{2(1-\mu)(Q+2)}
+\]
+
+\subsection*{Case II: Low-income invest, high-income does not}
+
+A given low-income participant wins if her full score
+$x_i = \mu r_i + (1-\mu)s_i$ exceeds $x_k$ for all $Q-1$ other
+low-income participants and exceeds $\mu r_{\text{H}}$ for the
+non-investing high-income participant. The conditional probability is:
+\[
+P_1(\text{win}|r_i,s_i) = F_X(x_i)^{Q-1} \cdot G(x_i),
+\quad G(x) = \begin{cases} x/\mu & 0 < x < \mu \\ 1 & x \geq \mu \end{cases}
+\]
+For $Q=1$ the double integral over the unit square yields:
+\[
+p_1' = \frac{6-7\mu}{6(1-\mu)} \quad (Q=1)
+\]
+For $Q \geq 2$, $F_X(x)^{Q-1} \cdot G(x)$ produces a rational
+function of $\mu$ of degree $Q$ within each CDF region; each
+specific $Q$ yields a closed form but no compact general formula
+holds uniformly across all $Q$.
+
+\subsection*{Cases III and IV}
+
+When neither invests, scores are $\mu r_i$; by symmetry each of
+$Q+1$ participants wins with probability $1/(Q+1)$:
+\[
+p_1 = \int_0^1 r^Q\,dr = \frac{1}{Q+1}
+\]
+When both invest, all scores $x_i$ are identically distributed via
+$F_X$; by symmetry $p_1 = 1/(Q+1)$ again.
+
+\subsection*{Integration regions}
+
+To calculate $\int\!\!\int P(\text{win}|r,s)\,dr\,ds$
+over the unit square, we split by the boundaries of the piecewise function.
+The three regions are shown in Figure~\ref{fig:integral_boundaries}.
+If $x=\mu r+(1-\mu)s$ and $F(x)$ is of the piecewise form with pieces $A$, $B$, $C$:
 
 \begin{align*}
-F(x) & =\begin{cases}
-A & 0<x<\mu\\
-B & \mu<x<1-\mu\\
-C & 1-\mu<x<1\\
-0 & \text{otherwise}
-\end{cases}
-\end{align*}
-
-Then the integral $\int_{s=0}^{s=1}\int_{r=0}^{r=1}F(x)drds$ can
-be written as
-
-\begin{align*}
-\int_{s=0}^{s=1}\int_{r=0}^{r=1}F(x)dsdr & =\int_{r=0}^{r=1}{\int_{s=0}^{s=\frac{\mu(1-r)}{1-\mu}}A\ dsdr}+\int_{r=0}^{r=1}{\int_{s=\frac{\mu(1-r)}{1-\mu}}^{s=1-\frac{\mu r}{1-\mu}}B\ dsdr}+\int_{r=0}^{r=1}{\int_{s=1-\frac{\mu r}{1-\mu}}^{s=1}C\ dsdr}
+\int\!\!\int F(x)\,ds\,dr
+ & =\int_{r=0}^{1}\!\int_{0}^{\frac{\mu(1-r)}{1-\mu}}\!\!A\,ds\,dr
+ +\int_{r=0}^{1}\!\int_{\frac{\mu(1-r)}{1-\mu}}^{1-\frac{\mu r}{1-\mu}}\!\!B\,ds\,dr
+ +\int_{r=0}^{1}\!\int_{1-\frac{\mu r}{1-\mu}}^{1}\!\!C\,ds\,dr
 \end{align*}
 
 \begin{figure}[H]
 \begin{centering}
-\includegraphics[width=4in]{integral_regions}
+\includegraphics[width=0.85\textwidth]{integral_regions}
 \par\end{centering}
 \caption{\label{fig:integral_boundaries}Integration over $r,s$ split by boundaries
 $\mu r+(1-\mu)s=\mu$ and $\mu r+(1-\mu)s=1-\mu$}
@@ -1091,5 +982,91 @@ two-period model is therefore a conservative baseline: all comparative
 statics on $\overline{\nu}^{*}$ with respect to $\mu$ and $Q$
 carry over unchanged to the $T$-period case.
 
-\end{appendices}
+
+\subsection*{Log utility closed form}
+
+Under log utility $u(y)=\log(y)$, the participation threshold
+$\overline{\nu}^{*}$ has a tractable closed form. The indifference
+condition $U_{1}=\frac{D_{T}}{\delta}\left(\frac{1}{Q+1}-p_{1}\right)(u(y_{2})-u(y_{1}))$
+becomes:
+\begin{align}
+\log\frac{y_{1}}{y_{1}-\overline{\nu}^{*}} & =A\log\frac{y_{2}}{y_{1}}
+\end{align}
+where $A=\frac{D_{T}}{\delta}\left(\frac{1}{Q+1}-\frac{\mu}{2(1-\mu)(Q+2)}\right)>0$.
+Solving:
+\begin{align}
+\overline{\nu}^{*} & =y_{1}\left(1-\left(\frac{y_{1}}{y_{2}}\right)^{A}\right)\label{eq:nu_star}
+\end{align}
+
+Since $(y_{1}/y_{2})^{A}$ is decreasing in $A$ and $y_{1}<y_{2}$,
+$\overline{\nu}^{*}$ is increasing in $A$, hence decreasing in $\mu$
+and $Q$ (since $\partial A/\partial\mu<0$ and $\partial A/\partial Q<0$).
+The threshold depends on the income ratio $y_{1}/y_{2}$ rather than
+the income level alone.
+
+\section{Utility Payoffs} \label{sec:appendix_payoffs}
+
+Table~\ref{tab:prisoners_dilemma} reports the full utility payoffs
+for each of the four investment cases. In each cell, the upper entry
+is the high-income participant's utility and the lower entry is the
+low-income participant's utility. The scale factor $D_{T}/\delta$
+multiplies all second-period terms.
+
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:prisoners_dilemma}Utility payoffs (scale factor $D_{T}/\delta$
+multiplies all second-period terms)}
+\smallskip
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llcc}
+\toprule
+ & & \textit{Low-income withdraws} & \textit{Low-income invests}\\
+\midrule
+\addlinespace[3pt]
+\multirow{2}{*}{\textit{\shortstack[l]{High-income\\withdraws}}}
+ & High-income
+ & $u(y_{2})+\frac{D_{T}}{\delta}\!\left[\frac{u(y_{2})}{Q+1}+\frac{Qu(y_{1})}{Q+1}\right]$
+ & $u(y_{2})+\frac{D_{T}}{\delta}\!\left[(1-Qp_{1}')u(y_{2})+Qp_{1}'u(y_{1})\right]$
+ \\[10pt]
+ & Low-income
+ & $u(y_{1})+\frac{D_{T}}{\delta}\!\left[\frac{u(y_{2})}{Q+1}+\frac{Qu(y_{1})}{Q+1}\right]$
+ & $u(y_{1}-\overline{\nu})+\frac{D_{T}}{\delta}\!\left[p_{1}'u(y_{2})+(1-p_{1}')u(y_{1})\right]$
+ \\[6pt]
+\addlinespace[3pt]
+\midrule
+\addlinespace[3pt]
+\multirow{2}{*}{\textit{\shortstack[l]{High-income\\invests}}}
+ & High-income
+ & $u(y_{2}-\overline{\nu})+\frac{D_{T}}{\delta}\!\left[p_{2}u(y_{2})+(1-p_{2})u(y_{1})\right]$
+ & $u(y_{2}-\overline{\nu})+\frac{D_{T}}{\delta}\!\left[\frac{u(y_{2})}{Q+1}+\frac{Qu(y_{1})}{Q+1}\right]$
+ \\[10pt]
+ & Low-income
+ & $u(y_{1})+\frac{D_{T}}{\delta}\!\left[p_{1}u(y_{2})+(1-p_{1})u(y_{1})\right]$
+ & $u(y_{1}-\overline{\nu})+\frac{D_{T}}{\delta}\!\left[\frac{u(y_{2})}{Q+1}+\frac{Qu(y_{1})}{Q+1}\right]$
+ \\[6pt]
+\addlinespace[3pt]
+\bottomrule
+\end{tabular}}
+\begin{minipage}{\textwidth}
+\smallskip
+{\footnotesize $p_{1},p_{2}$: Case~I probabilities. $p_{1}'$: Case~II low-income probability
+($Q=1$ closed form; general $Q$ numerical). The high-income participant's Case~II
+probability satisfies $1-Qp_{1}'$, using the identity
+$1/(Q+1)-(1-Qp_{1}')=Q(p_{1}'-1/(Q+1))$, valid for all $Q\geq1$.}
+\end{minipage}
+\end{table}
+
+
+
+\begin{2Addresses}%
+{[Author name]\newline
+[Institution]\newline
+[Address]\newline
+[Email]\newline
+ORCiD: [ORCiD]}
+&
+{}
+\end{2Addresses}
+
 \end{document}
