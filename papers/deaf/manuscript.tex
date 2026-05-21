@@ -34,31 +34,32 @@
 
 \begin{abstract}
 Financial markets exhibit a well-documented asymmetry between expansions and
-contractions: boom periods are volatile, turbulent, and fast; bust periods are
-compressed, slow, and grinding. This pattern is robust across asset classes,
-time periods, and economies, yet lacks a structural explanation rooted in
-individual preferences. This paper derives the asymmetry from first principles
-using the minimal behavioural structure sufficient to deliver it as an
-equilibrium theorem rather than a calibration choice.
+contractions: boom periods are volatile, turbulent, and fast; bust periods
+compressed, slow, and grinding. This paper derives the asymmetry from first
+principles using the minimal behavioural structure sufficient to deliver it as
+an equilibrium theorem rather than a calibration choice.
 
 We retain the single empirically robust element of prospect theory --- the kink
-in the value function at a reference point --- and discard the rest. The
-reference point is the economy-wide Schumpeterian wealth trend, publicly
-observed and growing at a constant rate. These ingredients are embedded in a
-Stackelberg market with a loss-averse market maker and a rational speculator,
-scoped to liquid exchange-traded settings where adverse selection is attenuated
-and dealer risk management is the primary source of price impact asymmetry.
+in the value function at a reference point. The reference point is the
+economy-wide Schumpeterian wealth trend, publicly observed and growing at a
+constant rate, embedded in a Stackelberg market scoped to liquid exchange-traded
+settings where dealer risk management is the primary source of price impact
+asymmetry. The paper explores the preference channel as a complement to the
+belief channel studied in Bayesian and rational belief equilibrium approaches.
 
-Two structural features are jointly necessary. First, the zero-sum trading game
-guarantees as a theorem that the two agents always sit on opposite sides of the
-kink simultaneously, generating asymmetric price impact every period. Second,
-the Schumpeterian trend provides mean-reversion that pins volatility persistence
-to the economy's long-run growth rate. The paper derives a structural recursion
-for the conditional variance of detrended wealth deviations, with persistence
-determined by the growth rate alone and the asymmetry ratio by dealer loss
-aversion alone --- a separation property that is the paper's primary
-identification contribution. All structural mappings are derived analytically
-and verified symbolically.
+Two structural conditions are jointly necessary. First, the zero-sum trading
+game guarantees as a theorem that both agents always sit on opposite sides of
+the kink simultaneously, generating asymmetric price impact. Second, the
+Schumpeterian trend pins persistence to the growth rate through
+$\beta = 1/(1+g)^2$. The paper derives a Threshold-GARCH recursion for the
+conditional variance of detrended wealth deviations with persistence determined
+by the growth rate alone and asymmetry ratio
+$|\gamma|/\alpha = (\lambda^4-1)/\lambda^4$ by loss aversion alone ---
+a separation property orthogonal by construction. Three structural implications
+follow: a structural estimator for market-level loss aversion from dealer data;
+the IGARCH boundary as a forward-looking indicator of stagnant growth; and
+structural independence of macroprudential and growth policy optimisation.
+All mappings are derived analytically and verified symbolically.
 \end{abstract}
 
 
@@ -101,12 +102,33 @@ responding to their own wealth positions --- is higher in expansions than
 contractions, consistent with a structural variance asymmetry that has its
 source in dealer behaviour rather than in the distribution of fundamentals.
 
-The pattern is well described but structurally unexplained. Existing models
-either take it as given --- describing it statistically without deriving it from
-preferences --- or generate it from mechanisms that require strong distributional
-assumptions about probability perception incompatible with rational market
-behaviour. The present paper identifies the minimal structure that delivers the
+The pattern is well described but the specific asymmetry --- that expansion
+variance structurally exceeds contraction variance by a factor tied to a
+preference parameter, with persistence tied to the growth rate through an
+orthogonal mapping --- has not been derived from individual preferences in a
+closed-form market equilibrium. The GARCH structure of volatility dynamics
+has been derived from diverse agent beliefs in rational belief equilibrium
+models \citep{brock1998,follmer2005}, and from endogenous uncertainty
+propagated through belief heterogeneity \citep{kurz2001}. What these
+frameworks do not deliver is the boom-bust asymmetry specifically: the
+structural result that expansion variance exceeds contraction variance by
+a factor tied to a preference parameter, with persistence tied to the
+growth rate through an orthogonal mapping that separately identifies the
+two. The present paper identifies the minimal structure that delivers this
 asymmetry and its persistence as equilibrium theorems.
+
+The distinction between a statistical description and a structural explanation
+matters beyond intellectual precision. Without a structural link between the
+asymmetry and economic primitives, the pattern remains a calibration input ---
+it can be fitted but not traced to its source. Regulators cannot design
+instruments that target the source of the asymmetry, stress tests cannot be
+calibrated to the structural variance ratio rather than to historical averages,
+and cross-country fragility cannot be assessed from economic fundamentals.
+With the structural link derived in this paper, the asymmetry becomes
+actionable: the separation property gives regulatory and monetary policy
+instruments structurally distinct targets, and the economic primitives
+$\lambda$ and $g$ become estimable objects whose cross-country variation
+predicts financial stability outcomes from first principles.
 
 \subsection{Why Cumulative Prospect Theory is over-specified for this purpose}
 \label{sec:cpt}
@@ -158,6 +180,32 @@ rather than characterising equilibrium properties through numerical simulation.
 wealth can explain the equity premium and excess return volatility at the
 aggregate level; this paper establishes what fixed dealer loss aversion
 against a social benchmark delivers in a market microstructure equilibrium.
+
+Bayesian approaches with regime uncertainty \citep{veronesi1999,hamilton1989}
+explore a different channel through which boom-bust asymmetry arises: agents
+learn about regime probabilities and respond differently as posterior beliefs
+shift, generating asymmetric volatility through belief dynamics. This paper
+explores a complementary channel --- the preference channel. Even when agents
+are certain about their positions, as dealers in liquid markets are (both
+agents observe $D_{t-1}$ relative to the Schumpeterian trend in real time),
+loss aversion generates boom-bust asymmetry through the price-setting
+mechanism. The two channels are not mutually exclusive; both are plausibly
+present in real markets. The contribution here is to isolate the preference
+channel cleanly and derive its exact structural consequences.
+
+The structural consequence of isolating the preference channel is the
+separation property. The Schumpeterian growth rate $g$ is publicly known
+from national accounts data and enters the model as a deterministic
+mean-reversion rate --- not inferred from signals, not subject to belief
+updating. This is why $g$ enters only $\beta$ and $\lambda$ enters only
+$|\gamma|/\alpha$, with no belief updating parameters present in either
+channel. A model that also included Bayesian learning about $g$ would
+generate additional volatility through the belief channel, making $\beta$
+depend on both $g$ and agents' belief precision, and the clean separation
+would require additional restrictions to restore. The preference channel
+and the belief channel are therefore complementary objects of study:
+this paper characterises what the preference channel delivers in isolation;
+the interaction of the two channels is a direction for future work.
 
 \subsection{The minimal structure}
 \label{sec:minimal}
@@ -1235,35 +1283,74 @@ reduced-form estimation.
 \subsection{Policy implications}
 \label{sec:policy}
 
-The orthogonality of the two structural identifications generates a
-precise policy implication. Because $\beta = f(g)$ only and
-$|\gamma|/\alpha = f(\lambda)$ only, growth-enhancing structural reforms
-and macroprudential policies that constrain dealer risk-taking are
-\emph{non-redundant instruments}: they target different features of wealth
-volatility dynamics through different structural channels.
+The separation property --- $\partial\beta/\partial\lambda = 0$ and
+$\partial(|\gamma|/\alpha)/\partial g = 0$ --- has three structural
+implications that follow directly from the model's exact mappings,
+independent of empirical calibration. All three are structural inferences
+from the model rather than empirical findings; testing whether $\beta$
+co-varies with trend TFP growth and $|\gamma|/\alpha$ co-varies with
+experimental loss aversion estimates across markets --- with zero
+cross-effects --- is the paper's primary empirical direction.
 
-This connects to the practitioner debate on procyclicality in financial
-markets. \citet{adrian2010,adrian2014} document that
-dealer balance sheets expand rapidly above trend and contract slowly
-below it --- precisely the $\lambda^4$ variance asymmetry the model
-quantifies. The model says that the amplitude of this procyclicality
-is governed by dealer loss aversion $\lambda$, not by the growth rate.
-A macroprudential policy that reduces effective $\lambda$ --- through
-tighter VaR limits, higher capital requirements, or countercyclical
-capital buffers --- reduces $|\gamma|/\alpha$ without affecting $\beta$.
-Conversely, a growth-enhancing reform that raises $g$ reduces $\beta$
---- shortening the half-life of volatility shocks in wealth dynamics ---
-without affecting the boom-bust asymmetry.
+\noindent\textbf{A structural estimator for market-level loss aversion.}
+The separation property provides a structural estimator for dealer loss
+aversion from market data. Once $g$ is measured from trend TFP growth
+and $\beta$ is estimated from the persistence of dealer wealth volatility,
+the asymmetry ratio $|\gamma|/\alpha = (\lambda^4-1)/\lambda^4$ identifies
+$\lambda$ without auxiliary assumptions about the belief structure, signal
+distribution, or market microstructure beyond the model's maintained
+assumptions. Cross-country variation in the estimated $\lambda$ could then
+be compared to experimental estimates from \citet{wang2017} as an
+out-of-sample validation of the experimental findings in a market context
+--- connecting the laboratory evidence on loss aversion to its structural
+consequences in dealer markets.
 
-The structural model therefore provides a micro-founded rationale for
-why both instruments are simultaneously necessary: macroprudential
-policy addresses the cross-sectional asymmetry ($\lambda$ channel) while
-growth policy addresses persistence ($g$ channel). Neither instrument
-substitutes for the other, and the model quantifies the magnitude of
-each effect through the exact structural mappings of Theorem~1 and
-Corollary~\ref{cor:comp_statics}. This is a structural claim about
-the architecture of financial volatility that reduced-form estimation
-cannot deliver.
+\noindent\textbf{The IGARCH boundary as a structural early warning indicator.}
+As $g \to 0$, $\beta \to 1$: the qualitative character of wealth volatility
+dynamics changes from stationary to integrated. This is a mathematical
+consequence of the exact mapping $\beta = 1/(1+g)^2$, not an empirical
+claim. Monitoring $\hat{\beta}$ estimates from dealer balance sheet data
+against trend TFP growth provides a structural early warning indicator:
+when estimated persistence approaches one, the model says the economy's
+trend growth rate is approaching zero --- a qualitative change in the
+character of volatility dynamics, not a temporary shock. This reframes
+financial stability monitoring from a backward-looking exercise (what
+happened) to a forward-looking structural assessment (what the growth
+rate implies for the persistence of future shocks). The IGARCH boundary
+is therefore not a statistical nuisance to be modelled around but a
+structural regime indicator with direct macroeconomic interpretation.
+
+\noindent\textbf{Independent calibration of macroprudential and growth policy.}
+Because $\beta = f(g)$ only and $|\gamma|/\alpha = f(\lambda)$ only,
+the two policy optimisation problems are structurally independent.
+The optimal effective $\lambda$ --- balancing dealer caution against
+boom-bust amplitude, set through VaR limits or capital requirements ---
+can be chosen without affecting the optimal $g$, and vice versa. This
+provides a structural basis for independent calibration of macroprudential
+and growth policies without cross-instrument spillovers: tightening
+macroprudential constraints reduces $|\gamma|/\alpha$ without changing
+$\beta$, and growth-enhancing reforms reduce $\beta$ without changing
+$|\gamma|/\alpha$. Neither instrument substitutes for the other and
+neither contaminates the other's target. This independence is a
+consequence of the model's structure --- it holds exactly given the
+maintained assumptions --- rather than an approximation or a policy
+recommendation. The normative question of what the optimal $\lambda$ and
+$g$ should be requires a welfare function the model does not specify;
+what the model delivers is the structural result that the two choices
+are orthogonal by construction.
+
+Reducing effective $\lambda$ through macroprudential constraints is a
+Pareto improvement within the model: the speculator is unaffected
+(loss aversion cancels in the first-order condition), the market maker
+is protected from excessive loss aversion, and the real economy benefits
+from more stable credit and faster post-crisis recovery. The objective
+is not to eliminate the asymmetry --- some boom-bust asymmetry reflects
+rational intermediary caution and the high-variance expansion that
+enables price discovery --- but to moderate excessive asymmetry. The
+attainable equilibrium within the model combines high $g$ with moderate
+$\lambda$: growth policy reducing persistence and macroprudential policy
+moderating asymmetry, each operating on the structural parameter it
+determines.
 
 \subsection{Limitations and future directions}
 \label{sec:limitations}
